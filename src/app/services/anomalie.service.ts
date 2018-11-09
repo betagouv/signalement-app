@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { Anomalie, TypeAnomalie } from '../model/Anomalie';
+import { AnomalieList } from '../model/Anomalie';
+import { HttpClient } from '@angular/common/http';
+import { deserialize } from 'json-typescript-mapper';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnomalieService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getAnomalies() {
-    return of([
-      new Anomalie(
-        'Café restaurant',
-        [
-          new TypeAnomalie('Hygiène', ['Restaurant sale', 'Présence de rat ou d\'insecte']),
-          new TypeAnomalie('Nourriture', ['Malade suite à un repas', 'Plat de mauvaise qualité, pas frais ou pas bon']),
-          new TypeAnomalie('Paiement', ['Refus de remise d\'une note', 'Refus d\'un moyen de paiement non annoncé'])
-        ]),
-      new Anomalie(
-        'Grande surface et supérette',
-          [
-            new TypeAnomalie('Prix', ['Absence d\'affichage de prix ou absence de carte', 'Prix trop cher']),
-          ])
-      ]);
+
+    return this.http.get('./assets/data/anomalies.json')
+      .pipe(
+        map(result => {
+          return deserialize(AnomalieList, result);
+        })
+      );
   }
+
+
+
+
 }

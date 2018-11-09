@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnomalieService } from '../../services/anomalie.service';
 import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { of } from 'rxjs';
+import { deserialize } from 'json-typescript-mapper';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('SignalementFormComponent', () => {
 
@@ -14,22 +16,26 @@ describe('SignalementFormComponent', () => {
 
   const typeEtablissement1 = 'typeEtablissement1';
   const typeAnomalieListEtablissement1 = [
-    new TypeAnomalie('typeAnomalie11', []),
-    new TypeAnomalie('typeAnomalie12', [])
+    deserialize(TypeAnomalie, {categorie: 'typeAnomalie11'}),
+    deserialize(TypeAnomalie, {categorie: 'typeAnomalie12'})
   ];
   const typeEtablissement2 = 'typeEtablissement2';
-  const precisionList22 = ['precision221', 'precision222', 'precision2223']
-  const typeAnomalie22 = new TypeAnomalie('typeAnomalie22', precisionList22);
+  const precisionList22 = ['precision221', 'precision222', 'precision2223'];
+  const typeAnomalie22 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie22', precisionList: precisionList22});
   const typeAnomalieListEtablissement2 = [
-    new TypeAnomalie('typeAnomalie12', []),
+    deserialize(TypeAnomalie, {categorie: 'typeAnomalie21'}),
     typeAnomalie22,
-    new TypeAnomalie('typeAnomalie23', []),
+    deserialize(TypeAnomalie, {categorie: 'typeAnomalie23'})
   ];
 
   const anomaliesFixture = [
-    new Anomalie(typeEtablissement1, typeAnomalieListEtablissement1),
-    new Anomalie(typeEtablissement2, typeAnomalieListEtablissement2),
+    deserialize(Anomalie, {typeEtablissement: typeEtablissement1, typeAnomalieList: typeAnomalieListEtablissement1}),
+    deserialize(Anomalie, {typeEtablissement: typeEtablissement2, typeAnomalieList: typeAnomalieListEtablissement2}),
   ];
+
+  const anomalieListFixture = {
+    list: anomaliesFixture
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,6 +43,7 @@ describe('SignalementFormComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
       ],
       providers: [
         AnomalieService,
@@ -50,7 +57,7 @@ describe('SignalementFormComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     anomalieService = TestBed.get(AnomalieService);
-    spyOn(anomalieService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
+    spyOn(anomalieService, 'getAnomalies').and.returnValue(of(anomalieListFixture));
   });
 
   it('should create', () => {
@@ -68,7 +75,7 @@ describe('SignalementFormComponent', () => {
     it('should display typeEtablissement of anomalies as options of typeEtablissement select', () => {
       component.anomalies = anomaliesFixture;
 
-      component.ngOnInit();
+      fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelectorAll('select[formcontrolname="typeEtablissement"] option')).not.toBeNull();

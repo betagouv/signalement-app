@@ -17,5 +17,9 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "include": [
+    "src/**/*",
+    "node_modules/json-typescript-mapper/libs/utils.ts"
+  ]
 }
