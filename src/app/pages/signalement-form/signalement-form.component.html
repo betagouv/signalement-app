@@ -21,9 +21,9 @@
             Sélectionnez d'abord le type d'établissement que vous souhaitez signaler <span>*</span>
           </label>
           <select formControlName="typeEtablissement"
-                  class="form-control form-control-lg chosen-single-select-nosearch is_invalid"
-                  data-placeholder="Choisissez ..."
+                  class="form-control"
                   (change)="changeTypeEtablissement()">
+            <option disabled value="">Choisissez ...</option>
             <option *ngFor="let anomalie of anomalies" value="{{anomalie.typeEtablissement}}">{{anomalie.typeEtablissement}}</option>
           </select>
         </div>
@@ -33,9 +33,10 @@
             Puis, indiquez le type d'anomalie que vous avez constaté <span>*</span>
           </label>
           <select formControlName="typeAnomalie"
-                  class="form-control form-control-lg chosen-single-select-nosearch"
+                  class="form-control"
                   data-placeholder="Choisissez ..."
                   (change)="changeTypeAnomalie()">
+            <option disabled value="">Choisissez ...</option>
             <option *ngFor="let typeAnomalie of typeAnomalieList" value="{{typeAnomalie.categorie}}">{{typeAnomalie.categorie}}</option>
           </select>
         </div>
@@ -45,8 +46,9 @@
             Précisez enfin l'anomalie <span>*</span>
           </label>
           <select formControlName="precisionAnomalie"
-                  class="form-control form-control-lg chosen-single-select"
+                  class="form-control"
                   data-placeholder="Choisissez une anomalie ...">
+            <option disabled value="">Choisissez ...</option>
             <option *ngFor="let precisionAnomalie of precisionAnomalieList" value="{{precisionAnomalie}}">{{precisionAnomalie}}</option>
           </select>
         </div>

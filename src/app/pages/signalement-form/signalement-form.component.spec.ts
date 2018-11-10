@@ -80,7 +80,7 @@ describe('SignalementFormComponent', () => {
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelectorAll('select[formcontrolname="typeEtablissement"] option')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="typeEtablissement"] option').length)
-        .toBe(anomaliesFixture.length);
+        .toBe(anomaliesFixture.length + 1);
     });
 
     it('should not display a select input for typeAnomalie on init', () => {
@@ -100,7 +100,7 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="typeAnomalie"]')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="typeAnomalie"] option')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="typeAnomalie"] option').length)
-        .toBe(typeAnomalieListEtablissement1.length);
+        .toBe(typeAnomalieListEtablissement1.length + 1);
     });
 
     it('should not display a select input for precisionAnomalie on init', () => {
@@ -120,7 +120,7 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="precisionAnomalie"]')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="precisionAnomalie"] option')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="precisionAnomalie"] option').length)
-        .toBe(precisionList22.length);
+        .toBe(precisionList22.length + 1);
     });
   });
 
