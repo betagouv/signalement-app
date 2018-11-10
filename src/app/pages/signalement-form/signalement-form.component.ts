@@ -13,6 +13,14 @@ export class SignalementFormComponent implements OnInit {
   typeEtablissementCtrl: FormControl;
   typeAnomalieCtrl: FormControl;
   precisionAnomalieCtrl: FormControl;
+  nomEtablissementCtrl: FormControl;
+  adresseEtablissementCtrl: FormControl;
+  descriptionCtrl: FormControl;
+  photoCtrl: FormControl;
+  prenomCtrl: FormControl;
+  nomCtrl: FormControl;
+  emailCtrl: FormControl;
+
   signalementForm: FormGroup;
   anomalies: Anomalie[];
   typeAnomalieList: TypeAnomalie[];
@@ -26,9 +34,23 @@ export class SignalementFormComponent implements OnInit {
     this.typeEtablissementCtrl = this.formBuilder.control('');
     this.typeAnomalieCtrl = this.formBuilder.control('');
     this.precisionAnomalieCtrl = this.formBuilder.control('');
+    this.nomEtablissementCtrl = this.formBuilder.control('');
+    this.adresseEtablissementCtrl = this.formBuilder.control('');
+    this.descriptionCtrl = this.formBuilder.control('');
+    this.photoCtrl = this.formBuilder.control('');
+    this.prenomCtrl = this.formBuilder.control('');
+    this.nomCtrl = this.formBuilder.control('');
+    this.emailCtrl = this.formBuilder.control('');
 
     this.signalementForm = this.formBuilder.group({
       typeEtablissement: this.typeEtablissementCtrl,
+      nomEtablissement: this.nomEtablissementCtrl,
+      adresseEtablissement: this.adresseEtablissementCtrl,
+      description: this.descriptionCtrl,
+      photo: this.photoCtrl,
+      prenom: this.prenomCtrl,
+      nom: this.nomCtrl,
+      email: this.emailCtrl,
     });
 
     this.loadAnomalies();

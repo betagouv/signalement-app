@@ -133,9 +133,16 @@ describe('SignalementFormComponent', () => {
       expect(component.anomalies).toEqual(anomaliesFixture);
     });
 
-    it('should not set form control for typeAnomalie and precisionAnomalie', () => {
+    it('should set all form controls except for typeAnomalie and precisionAnomalie', () => {
       component.ngOnInit();
 
+      expect(component.signalementForm.controls['nomEtablissement']).toBeDefined();
+      expect(component.signalementForm.controls['adresseEtablissement']).toBeDefined();
+      expect(component.signalementForm.controls['description']).toBeDefined();
+      expect(component.signalementForm.controls['photo']).toBeDefined();
+      expect(component.signalementForm.controls['prenom']).toBeDefined();
+      expect(component.signalementForm.controls['nom']).toBeDefined();
+      expect(component.signalementForm.controls['email']).toBeDefined();
       expect(component.signalementForm.controls['typeAnomalie']).toBeUndefined();
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
     });

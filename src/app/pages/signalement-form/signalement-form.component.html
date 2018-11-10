@@ -52,6 +52,69 @@
             <option *ngFor="let precisionAnomalie of precisionAnomalieList" value="{{precisionAnomalie}}">{{precisionAnomalie}}</option>
           </select>
         </div>
+
+        <div class="form-group mt-5">
+          <label>
+            Nom de l'établissement <span>*</span>
+          </label>
+          <input type="text" formControlName="nomEtablissement" class="form-control">
+        </div>
+
+        <div class="form-group mb-4">
+          <label>
+            Adresse de l'établissement <span>*</span>
+          </label>
+          <input type="text" formControlName="adresseEtablissement" class="form-control">
+        </div>
+
+
+        <div class="form-group mb-4">
+          <label>
+            Vous pouvez ajouter une photo
+          </label>
+          <input type="file" formControlName="photo" class="form-control-file">
+        </div>
+
+        <div class="form-group mb-5">
+          <label>
+            Vous pouvez préciser votre signalement
+          </label>
+          <textarea formControlName="description" class="form-control"
+                    rows="3"
+                    maxlength="200"
+                    placeholder="200 caractères maximum">
+          </textarea>
+        </div>
+
+        <p class="font-weight-bold">Votre identité ne sera pas indiquée au professionnel et vous ne serez pas sollicité.</p>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>
+                Votre prénom <span>*</span>
+              </label>
+              <input type="text" formControlName="prenom" class="form-control">
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="form-group">
+              <label>
+                Votre nom <span>*</span>
+              </label>
+              <input type="text" formControlName="nom" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mb-5">
+          <label>
+            Votre email <span>*</span>
+          </label>
+          <input type="email" formControlName="email" class="form-control">
+        </div>
+
       </form>
 
       <p class="font-italic text-right">
