@@ -13,6 +13,7 @@
   ],
   "include": [
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "../node_modules/json-typescript-mapper/libs/utils.ts"
   ]
 }
