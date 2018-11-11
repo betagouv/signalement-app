@@ -122,6 +122,26 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelectorAll('select[formcontrolname="precisionAnomalie"] option').length)
         .toBe(precisionList22.length + 1);
     });
+
+    it('should not display errors when the form is not submitted', () => {
+      component.typeEtablissementCtrl.setValue('');
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('.invalid')).toBeNull();
+    });
+
+    it('should display errors when the form is submitted', () => {
+      component.typeEtablissementCtrl.setValue('');
+
+      component.createSignalement();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('.invalid')).not.toBeNull();
+    });
+
   });
 
   describe('ngOnInit function', () => {
@@ -145,6 +165,12 @@ describe('SignalementFormComponent', () => {
       expect(component.signalementForm.controls['email']).toBeDefined();
       expect(component.signalementForm.controls['typeAnomalie']).toBeUndefined();
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
+    });
+
+    it('should not display form errors', () => {
+      component.ngOnInit();
+
+      expect(component.showErrors).toBeFalsy();
     });
 
   });
@@ -185,5 +211,17 @@ describe('SignalementFormComponent', () => {
       expect(component.precisionAnomalieList).toEqual(precisionList22);
       expect(component.signalementForm.controls['precisionAnomalie']).not.toBeNull();
     });
+  });
+
+  describe('createSignelement function', () => {
+
+    it('should display errors when form is invalid', () => {
+      component.typeEtablissementCtrl.setValue('');
+
+      component.createSignalement();
+
+      expect(component.showErrors).toBeTruthy();
+    });
+
   });
 });

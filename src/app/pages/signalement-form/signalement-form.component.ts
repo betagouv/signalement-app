@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { AnomalieService } from '../../services/anomalie.service';
 
@@ -10,6 +10,7 @@ import { AnomalieService } from '../../services/anomalie.service';
 })
 export class SignalementFormComponent implements OnInit {
 
+  signalementForm: FormGroup;
   typeEtablissementCtrl: FormControl;
   typeAnomalieCtrl: FormControl;
   precisionAnomalieCtrl: FormControl;
@@ -21,26 +22,27 @@ export class SignalementFormComponent implements OnInit {
   nomCtrl: FormControl;
   emailCtrl: FormControl;
 
-  signalementForm: FormGroup;
   anomalies: Anomalie[];
   typeAnomalieList: TypeAnomalie[];
   precisionAnomalieList: string[];
+
+  showErrors: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService) {
   }
 
   ngOnInit() {
-    this.typeEtablissementCtrl = this.formBuilder.control('');
-    this.typeAnomalieCtrl = this.formBuilder.control('');
-    this.precisionAnomalieCtrl = this.formBuilder.control('');
-    this.nomEtablissementCtrl = this.formBuilder.control('');
-    this.adresseEtablissementCtrl = this.formBuilder.control('');
+    this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
+    this.typeAnomalieCtrl = this.formBuilder.control('', Validators.required);
+    this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
+    this.nomEtablissementCtrl = this.formBuilder.control('', Validators.required);
+    this.adresseEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.descriptionCtrl = this.formBuilder.control('');
     this.photoCtrl = this.formBuilder.control('');
-    this.prenomCtrl = this.formBuilder.control('');
-    this.nomCtrl = this.formBuilder.control('');
-    this.emailCtrl = this.formBuilder.control('');
+    this.prenomCtrl = this.formBuilder.control('', Validators.required);
+    this.nomCtrl = this.formBuilder.control('', Validators.required);
+    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
 
     this.signalementForm = this.formBuilder.group({
       typeEtablissement: this.typeEtablissementCtrl,
@@ -52,6 +54,8 @@ export class SignalementFormComponent implements OnInit {
       nom: this.nomCtrl,
       email: this.emailCtrl,
     });
+
+    this.showErrors = false;
 
     this.loadAnomalies();
   }
@@ -101,5 +105,11 @@ export class SignalementFormComponent implements OnInit {
     return this.getTypeAnomalieList()
       .find(typeAnomalie => typeAnomalie.categorie === this.typeAnomalieCtrl.value)
       .precisionList;
+  }
+
+  createSignalement() {
+    if (!this.signalementForm.valid) {
+      this.showErrors = true;
+    }
   }
 }

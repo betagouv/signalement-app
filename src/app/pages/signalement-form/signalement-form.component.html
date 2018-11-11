@@ -14,7 +14,7 @@
         </span>
       </p>
 
-      <form [formGroup]="signalementForm">
+      <form [formGroup]="signalementForm" (submit)="createSignalement()">
 
         <div class="form-group">
           <label>
@@ -26,6 +26,9 @@
             <option disabled value="">Choisissez ...</option>
             <option *ngFor="let anomalie of anomalies" value="{{anomalie.typeEtablissement}}">{{anomalie.typeEtablissement}}</option>
           </select>
+          <div class="invalid" *ngIf="showErrors && typeEtablissementCtrl.hasError('required')">
+            Veuillez compléter le champ "Type d'établissement".
+          </div>
         </div>
 
         <div class="form-group" *ngIf="signalementForm.controls['typeAnomalie']">
@@ -39,6 +42,9 @@
             <option disabled value="">Choisissez ...</option>
             <option *ngFor="let typeAnomalie of typeAnomalieList" value="{{typeAnomalie.categorie}}">{{typeAnomalie.categorie}}</option>
           </select>
+          <div class="invalid" *ngIf="showErrors && typeAnomalieCtrl.hasError('required')">
+            Veuillez compléter le champ "Type d'anomalie".
+          </div>
         </div>
 
         <div class="form-group" *ngIf="signalementForm.controls['precisionAnomalie']">
@@ -51,6 +57,9 @@
             <option disabled value="">Choisissez ...</option>
             <option *ngFor="let precisionAnomalie of precisionAnomalieList" value="{{precisionAnomalie}}">{{precisionAnomalie}}</option>
           </select>
+          <div class="invalid" *ngIf="showErrors && precisionAnomalieCtrl.hasError('required')">
+            Veuillez compléter le champ "Anomalie".
+          </div>
         </div>
 
         <div class="form-group mt-5">
@@ -58,6 +67,9 @@
             Nom de l'établissement <span>*</span>
           </label>
           <input type="text" formControlName="nomEtablissement" class="form-control">
+          <div class="invalid" *ngIf="showErrors && nomEtablissementCtrl.hasError('required')">
+            Veuillez compléter le champ "Nom de l'établissement".
+          </div>
         </div>
 
         <div class="form-group mb-4">
@@ -65,6 +77,9 @@
             Adresse de l'établissement <span>*</span>
           </label>
           <input type="text" formControlName="adresseEtablissement" class="form-control">
+          <div class="invalid" *ngIf="showErrors && adresseEtablissementCtrl.hasError('required')">
+            Veuillez compléter le champ "Adresse de l'établissement".
+          </div>
         </div>
 
 
@@ -95,6 +110,9 @@
                 Votre prénom <span>*</span>
               </label>
               <input type="text" formControlName="prenom" class="form-control">
+              <div class="invalid" *ngIf="showErrors && prenomCtrl.hasError('required')">
+                Veuillez compléter le champ "Prénom".
+              </div>
             </div>
           </div>
 
@@ -104,6 +122,9 @@
                 Votre nom <span>*</span>
               </label>
               <input type="text" formControlName="nom" class="form-control">
+              <div class="invalid" *ngIf="showErrors && nomCtrl.hasError('required')">
+                Veuillez compléter le champ "Nom".
+              </div>
             </div>
           </div>
         </div>
@@ -113,7 +134,17 @@
             Votre email <span>*</span>
           </label>
           <input type="email" formControlName="email" class="form-control">
+          <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('required')">
+            Veuillez compléter le champ "Email".
+          </div>
+          <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('email')">
+            Veuillez renseigner une adresse email valide pour le champ "E-mail".
+          </div>
         </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">
+          Signaler
+        </button>
 
       </form>
 
