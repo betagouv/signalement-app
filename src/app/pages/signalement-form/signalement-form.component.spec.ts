@@ -33,10 +33,6 @@ describe('SignalementFormComponent', () => {
     deserialize(Anomalie, {typeEtablissement: typeEtablissement2, typeAnomalieList: typeAnomalieListEtablissement2}),
   ];
 
-  const anomalieListFixture = {
-    list: anomaliesFixture
-  };
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SignalementFormComponent ],
@@ -57,7 +53,7 @@ describe('SignalementFormComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     anomalieService = TestBed.get(AnomalieService);
-    spyOn(anomalieService, 'getAnomalies').and.returnValue(of(anomalieListFixture));
+    spyOn(anomalieService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
   });
 
   it('should create', () => {

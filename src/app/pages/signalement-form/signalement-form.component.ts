@@ -62,7 +62,7 @@ export class SignalementFormComponent implements OnInit {
 
   loadAnomalies() {
     this.anomalieService.getAnomalies().subscribe(anomalieList => {
-      this.anomalies = anomalieList.list;
+      this.anomalies = anomalieList;
     });
   }
 

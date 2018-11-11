@@ -16,7 +16,7 @@ export class AnomalieService {
     return this.http.get('./assets/data/anomalies.json')
       .pipe(
         map(result => {
-          return deserialize(AnomalieList, result);
+          return deserialize(AnomalieList, result).list;
         })
       );
   }
