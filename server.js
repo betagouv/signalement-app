@@ -7,8 +7,11 @@ const app = server();
 // Serve only the static files form the dist directory
 app.use(server.static(__dirname + '/dist/signalement-app'));
 
-app.get('/*', function(req,res) {
+app.all('/api/*', (req, res) => {
+  res.redirect(process.env.API_BASE_URL + req.url);
+});
 
+app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname+'/dist/signalement-app/index.html'));
 });
 
