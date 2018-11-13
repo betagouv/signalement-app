@@ -7,12 +7,16 @@ import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { of } from 'rxjs';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
+import { SignalementService } from '../../services/signalement.service';
+import { Signalement } from '../../model/Signalement';
+import { ServiceUtils } from '../../services/service.utils';
 
 describe('SignalementFormComponent', () => {
 
   let component: SignalementFormComponent;
   let fixture: ComponentFixture<SignalementFormComponent>;
   let anomalieService: AnomalieService;
+  let signalementService: SignalementService;
 
   const typeEtablissement1 = 'typeEtablissement1';
   const typeAnomalieListEtablissement1 = [
@@ -43,6 +47,8 @@ describe('SignalementFormComponent', () => {
       ],
       providers: [
         AnomalieService,
+        SignalementService,
+        ServiceUtils,
       ]
     })
     .compileComponents();
@@ -53,6 +59,7 @@ describe('SignalementFormComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     anomalieService = TestBed.get(AnomalieService);
+    signalementService = TestBed.get(SignalementService);
     spyOn(anomalieService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
   });
 
@@ -86,16 +93,16 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="typeAnomalie"]')).toBeNull();
     });
 
-    it('should display a select input for typeAnomalie with typeAnomalie list as options when associated form control is defined', () => {
-      component.signalementForm.addControl('typeAnomalie', component.typeAnomalieCtrl);
+    it('should display a select input for categorieAnomalie with categorieAnomalie list as options when associated form control is defined', () => {
+      component.signalementForm.addControl('categorieAnomalie', component.categoryAnomalieCtrl);
       component.typeAnomalieList = typeAnomalieListEtablissement1;
 
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('select[formcontrolname="typeAnomalie"]')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('select[formcontrolname="typeAnomalie"] option')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('select[formcontrolname="typeAnomalie"] option').length)
+      expect(nativeElement.querySelector('select[formcontrolname="categorieAnomalie"]')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="categorieAnomalie"] option')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="categorieAnomalie"] option').length)
         .toBe(typeAnomalieListEtablissement1.length + 1);
     });
 
@@ -136,6 +143,20 @@ describe('SignalementFormComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('.invalid')).not.toBeNull();
+    });
+
+    it('should initially display the form', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('form')).not.toBeNull();
+    });
+
+    it('should not display the form when succeed', () => {
+      component.showSuccess = true;
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('form')).toBeNull();
     });
 
   });
@@ -184,14 +205,14 @@ describe('SignalementFormComponent', () => {
     });
   });
 
-  describe('changeTypeAnomalie function', () => {
+  describe('changeCategorieAnomalie function', () => {
 
     it('should reset precisionAnomalie list and delete precisionAnomalie form control when no typeAnomaly is selected', () => {
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.typeAnomalieCtrl.setValue('');
+      component.categoryAnomalieCtrl.setValue('');
 
-      component.changeTypeAnomalie();
+      component.changeCategorieAnomalie();
 
       expect(component.precisionAnomalieList).toEqual([]);
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
@@ -200,16 +221,16 @@ describe('SignalementFormComponent', () => {
     it('should load precisionAnomalie list for selected typeEtablissement and typeAnomalie and add a form control for precisionAnomalie', () => {
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.typeAnomalieCtrl.setValue(typeAnomalie22.categorie);
+      component.categoryAnomalieCtrl.setValue(typeAnomalie22.categorie);
 
-      component.changeTypeAnomalie();
+      component.changeCategorieAnomalie();
 
       expect(component.precisionAnomalieList).toEqual(precisionList22);
       expect(component.signalementForm.controls['precisionAnomalie']).not.toBeNull();
     });
   });
 
-  describe('createSignelement function', () => {
+  describe('createSignalement function', () => {
 
     it('should display errors when form is invalid', () => {
       component.typeEtablissementCtrl.setValue('');
@@ -217,6 +238,46 @@ describe('SignalementFormComponent', () => {
       component.createSignalement();
 
       expect(component.showErrors).toBeTruthy();
+    });
+
+    it('should call a creation service with a signalement object', () => {
+      component.typeEtablissementCtrl.setValue('typeEtablissement');
+      component.nomEtablissementCtrl.setValue('nomEtablissement');
+      component.adresseEtablissementCtrl.setValue('adresseEtablissement');
+      component.nomCtrl.setValue('nom');
+      component.prenomCtrl.setValue('prenom');
+      component.emailCtrl.setValue('email@mail.fr');
+      spyOn(signalementService, 'createSignalement').and.returnValue(of());
+
+      component.createSignalement();
+
+      const signalement = new Signalement();
+      signalement.typeEtablissement = 'typeEtablissement';
+      signalement.nomEtablissement = 'nomEtablissement';
+      signalement.adresseEtablissement = 'adresseEtablissement';
+      signalement.description = '';
+      signalement.nom = 'nom';
+      signalement.prenom = 'prenom';
+      signalement.email = 'email@mail.fr';
+      signalement.photo = '';
+      expect(signalementService.createSignalement).toHaveBeenCalledWith(signalement);
+    });
+
+    it('should display a success message when signalement creation succeed', (done) => {
+      component.typeEtablissementCtrl.setValue('typeEtablissement');
+      component.nomEtablissementCtrl.setValue('nomEtablissement');
+      component.adresseEtablissementCtrl.setValue('adresseEtablissement');
+      component.nomCtrl.setValue('nom');
+      component.prenomCtrl.setValue('prenom');
+      component.emailCtrl.setValue('email@mail.fr');
+      const signalementServiceSpy = spyOn(signalementService, 'createSignalement').and.returnValue(of(new Signalement()));
+
+      component.createSignalement();
+      signalementServiceSpy.calls.mostRecent().returnValue.subscribe(() => {
+        expect(component.showSuccess).toBeTruthy();
+        done();
+      });
+
     });
 
   });

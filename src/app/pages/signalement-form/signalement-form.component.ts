@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { AnomalieService } from '../../services/anomalie.service';
+import { SignalementService } from '../../services/signalement.service';
+import { Signalement } from '../../model/Signalement';
 
 @Component({
   selector: 'app-signalement-form',
@@ -12,7 +14,7 @@ export class SignalementFormComponent implements OnInit {
 
   signalementForm: FormGroup;
   typeEtablissementCtrl: FormControl;
-  typeAnomalieCtrl: FormControl;
+  categoryAnomalieCtrl: FormControl;
   precisionAnomalieCtrl: FormControl;
   nomEtablissementCtrl: FormControl;
   adresseEtablissementCtrl: FormControl;
@@ -27,14 +29,16 @@ export class SignalementFormComponent implements OnInit {
   precisionAnomalieList: string[];
 
   showErrors: boolean;
+  showSuccess: boolean;
 
   constructor(public formBuilder: FormBuilder,
-              private anomalieService: AnomalieService) {
+              private anomalieService: AnomalieService,
+              private signalementService: SignalementService) {
   }
 
   ngOnInit() {
     this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
-    this.typeAnomalieCtrl = this.formBuilder.control('', Validators.required);
+    this.categoryAnomalieCtrl = this.formBuilder.control('', Validators.required);
     this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
     this.nomEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.adresseEtablissementCtrl = this.formBuilder.control('', Validators.required);
@@ -67,17 +71,17 @@ export class SignalementFormComponent implements OnInit {
   }
 
   changeTypeEtablissement() {
-    this.resetTypeAnomalie();
+    this.resetCategorieAnomalie();
     if (this.typeEtablissementCtrl.value !== '') {
       this.typeAnomalieList = this.getTypeAnomalieList();
-      this.signalementForm.addControl('typeAnomalie', this.typeAnomalieCtrl);
+      this.signalementForm.addControl('categorieAnomalie', this.categoryAnomalieCtrl);
     }
   }
 
-  private resetTypeAnomalie() {
+  private resetCategorieAnomalie() {
     this.typeAnomalieList = [];
-    this.signalementForm.removeControl('typeAnomalie');
-    this.typeAnomalieCtrl.setValue('');
+    this.signalementForm.removeControl('categorieAnomalie');
+    this.categoryAnomalieCtrl.setValue('');
     this.resetPrecisionAnomalie();
   }
 
@@ -87,9 +91,9 @@ export class SignalementFormComponent implements OnInit {
         .typeAnomalieList;
   }
 
-  changeTypeAnomalie() {
+  changeCategorieAnomalie() {
     this.resetPrecisionAnomalie();
-    if (this.typeAnomalieCtrl.value !== '') {
+    if (this.categoryAnomalieCtrl.value !== '') {
       this.precisionAnomalieList = this.getPrecisionAnomalieList();
       this.signalementForm.addControl('precisionAnomalie', this.precisionAnomalieCtrl);
     }
@@ -103,13 +107,23 @@ export class SignalementFormComponent implements OnInit {
 
   private getPrecisionAnomalieList() {
     return this.getTypeAnomalieList()
-      .find(typeAnomalie => typeAnomalie.categorie === this.typeAnomalieCtrl.value)
+      .find(typeAnomalie => typeAnomalie.categorie === this.categoryAnomalieCtrl.value)
       .precisionList;
   }
 
   createSignalement() {
     if (!this.signalementForm.valid) {
       this.showErrors = true;
+    } else {
+      this.signalementService.createSignalement(Object.assign(new Signalement(), this.signalementForm.value))
+        .subscribe(result => {
+          return this.treatCreationSuccess();
+        });
+        // TODO cas d'erreur
     }
+  }
+
+  private treatCreationSuccess() {
+    this.showSuccess = true;
   }
 }

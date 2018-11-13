@@ -3,6 +3,7 @@
   "version": "0.0.1-SNAPSHOT",
   "scripts": {
     "ng": "ng",
+    "start local": "ng serve",
     "start": "node server.js",
     "build": "ng build",
     "test": "ng test",

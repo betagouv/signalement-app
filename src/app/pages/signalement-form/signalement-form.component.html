@@ -1,6 +1,6 @@
 <div class="container mb-5">
   <div class="row">
-    <div class="offset-lg-2 col-lg-8 col-sm-12 pb-3">
+    <div class="offset-lg-2 col-lg-8 col-sm-12 pb-3" *ngIf="!showSuccess">
       <p class="mb-2 intro">
         <span class="font-weight-bold">
           Vous ne serez pas contacté à la suite de votre signalement.
@@ -31,18 +31,18 @@
           </div>
         </div>
 
-        <div class="form-group" *ngIf="signalementForm.controls['typeAnomalie']">
+        <div class="form-group" *ngIf="signalementForm.controls['categorieAnomalie']">
           <label>
             Puis, indiquez le type d'anomalie que vous avez constaté <span>*</span>
           </label>
-          <select formControlName="typeAnomalie"
+          <select formControlName="categorieAnomalie"
                   class="form-control"
                   data-placeholder="Choisissez ..."
-                  (change)="changeTypeAnomalie()">
+                  (change)="changeCategorieAnomalie()">
             <option disabled value="">Choisissez ...</option>
             <option *ngFor="let typeAnomalie of typeAnomalieList" value="{{typeAnomalie.categorie}}">{{typeAnomalie.categorie}}</option>
           </select>
-          <div class="invalid" *ngIf="showErrors && typeAnomalieCtrl.hasError('required')">
+          <div class="invalid" *ngIf="showErrors && categoryAnomalieCtrl.hasError('required')">
             Veuillez compléter le champ "Type d'anomalie".
           </div>
         </div>
@@ -150,6 +150,13 @@
 
       <p class="font-italic text-right">
         <small>Projet en cours d'expérimentation par la DGCCRF & Beta.Gouv</small>
+      </p>
+    </div>
+
+    <div *ngIf="showSuccess" class="offset-lg-2 col-lg-8 col-sm-12 pb-3">
+      <h2>Merci pour votre signalement</h2>
+      <p class="mt-4">
+        Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé. Il ne déclenchera pas à lui seul un contrôle des autorités.
       </p>
     </div>
   </div>
