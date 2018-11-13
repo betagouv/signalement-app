@@ -1,6 +1,7 @@
 //Install express server
 const server = require('express');
 const path = require('path');
+const request = require('request');
 
 const app = server();
 
@@ -8,7 +9,11 @@ const app = server();
 app.use(server.static(__dirname + '/dist/signalement-app'));
 
 app.all('/api/*', (req, res) => {
-  res.redirect(process.env.API_BASE_URL + req.url);
+  res.redirect(307, process.env.API_BASE_URL + req.url);
+  request({ url: process.env.API_BASE_URL + req.url, headers: req.headers, body: req.body }, function(err, remoteResponse, remoteBody) {
+    if (err) { return res.status(500).end('Error'); }
+    res.end(remoteBody);
+  });
 });
 
 app.get('/*', function(req,res) {
