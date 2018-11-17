@@ -14,6 +14,14 @@ export class SignalementService {
 
   createSignalement(signalement: Signalement) {
 
+    return this.http.post(
+      this.serviceUtils.getUrl(['api', 'signalement']),
+      this.generateSignalementFormData(signalement)
+    );
+  }
+
+  private generateSignalementFormData(signalement: Signalement) {
+
     const signalementFormData: FormData = new FormData();
     Object.keys(signalement)
       .filter(key => !(signalement[key] instanceof File))
@@ -24,10 +32,7 @@ export class SignalementService {
       signalementFormData.append('file', signalement.photo, signalement.photo.name);
     }
 
-    return this.http.post(
-      this.serviceUtils.getUrl(['api', 'signalement']),
-      signalementFormData
-    );
+    return signalementFormData;
   }
 
 
