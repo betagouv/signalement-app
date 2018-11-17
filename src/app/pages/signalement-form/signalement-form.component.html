@@ -142,13 +142,18 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">
+        <button type="submit" class="btn btn-primary btn-lg btn-block mb-3" *ngIf="!isLoading">
           Signaler
         </button>
 
+        <div class="text-center" *ngIf="isLoading">
+          <img src="/assets/images/loader.gif">
+          <br />Enregistrement en cours ...
+        </div>
+
       </form>
 
-      <p class="font-italic text-right">
+      <p class="font-italic text-right pt-5">
         <small>Projet en cours d'expérimentation par la DGCCRF & Beta.Gouv</small>
       </p>
     </div>

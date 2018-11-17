@@ -31,6 +31,7 @@ export class SignalementFormComponent implements OnInit {
 
   showErrors: boolean;
   showSuccess: boolean;
+  isLoading: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService,
@@ -114,11 +115,18 @@ export class SignalementFormComponent implements OnInit {
     if (!this.signalementForm.valid) {
       this.showErrors = true;
     } else {
+      this.isLoading = true;
       this.signalementService.createSignalement(Object.assign(new Signalement(), {'photo': this.getPhoto()}, this.signalementForm.value))
-        .subscribe(result => {
-          return this.treatCreationSuccess();
-        });
-        // TODO cas d'erreur
+        .subscribe(
+          result => {
+            this.isLoading = false;
+            return this.treatCreationSuccess();
+        },
+          error => {
+            this.isLoading = false;
+            // TODO cas d'erreur
+          });
+
     }
   }
 
