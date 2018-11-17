@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { AnomalieService } from '../../services/anomalie.service';
@@ -23,6 +23,7 @@ export class SignalementFormComponent implements OnInit {
   prenomCtrl: FormControl;
   nomCtrl: FormControl;
   emailCtrl: FormControl;
+  @ViewChild('file') file;
 
   anomalies: Anomalie[];
   typeAnomalieList: TypeAnomalie[];
@@ -43,7 +44,6 @@ export class SignalementFormComponent implements OnInit {
     this.nomEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.adresseEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.descriptionCtrl = this.formBuilder.control('');
-    this.photoCtrl = this.formBuilder.control('');
     this.prenomCtrl = this.formBuilder.control('', Validators.required);
     this.nomCtrl = this.formBuilder.control('', Validators.required);
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
@@ -53,7 +53,6 @@ export class SignalementFormComponent implements OnInit {
       nomEtablissement: this.nomEtablissementCtrl,
       adresseEtablissement: this.adresseEtablissementCtrl,
       description: this.descriptionCtrl,
-      photo: this.photoCtrl,
       prenom: this.prenomCtrl,
       nom: this.nomCtrl,
       email: this.emailCtrl,
@@ -115,7 +114,7 @@ export class SignalementFormComponent implements OnInit {
     if (!this.signalementForm.valid) {
       this.showErrors = true;
     } else {
-      this.signalementService.createSignalement(Object.assign(new Signalement(), this.signalementForm.value))
+      this.signalementService.createSignalement(Object.assign(new Signalement(), {'photo': this.getPhoto()}, this.signalementForm.value))
         .subscribe(result => {
           return this.treatCreationSuccess();
         });
@@ -125,5 +124,14 @@ export class SignalementFormComponent implements OnInit {
 
   private treatCreationSuccess() {
     this.showSuccess = true;
+  }
+
+  private getPhoto() {
+    const files: { [key: string]: File } = this.file.nativeElement.files;
+    for (const key in files) {
+      if (!isNaN(parseInt(key))) {
+        return files[key];
+      }
+    }
   }
 }

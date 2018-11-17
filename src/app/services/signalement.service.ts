@@ -14,10 +14,19 @@ export class SignalementService {
 
   createSignalement(signalement: Signalement) {
 
+    const signalementFormData: FormData = new FormData();
+    Object.keys(signalement)
+      .filter(key => !(signalement[key] instanceof File))
+      .forEach(key => {
+        signalementFormData.append(key, signalement[key]);
+      });
+    if (signalement.photo) {
+      signalementFormData.append('file', signalement.photo, signalement.photo.name);
+    }
+
     return this.http.post(
       this.serviceUtils.getUrl(['api', 'signalement']),
-      JSON.stringify(signalement),
-      this.serviceUtils.getHttpHeaders()
+      signalementFormData
     );
   }
 

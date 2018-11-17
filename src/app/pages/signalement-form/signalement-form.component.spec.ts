@@ -176,7 +176,6 @@ describe('SignalementFormComponent', () => {
       expect(component.signalementForm.controls['nomEtablissement']).toBeDefined();
       expect(component.signalementForm.controls['adresseEtablissement']).toBeDefined();
       expect(component.signalementForm.controls['description']).toBeDefined();
-      expect(component.signalementForm.controls['photo']).toBeDefined();
       expect(component.signalementForm.controls['prenom']).toBeDefined();
       expect(component.signalementForm.controls['nom']).toBeDefined();
       expect(component.signalementForm.controls['email']).toBeDefined();
@@ -259,7 +258,7 @@ describe('SignalementFormComponent', () => {
       signalement.nom = 'nom';
       signalement.prenom = 'prenom';
       signalement.email = 'email@mail.fr';
-      signalement.photo = '';
+      signalement.photo = undefined;
       expect(signalementService.createSignalement).toHaveBeenCalledWith(signalement);
     });
 
