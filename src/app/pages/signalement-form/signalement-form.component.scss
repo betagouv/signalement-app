@@ -1,0 +1,30 @@
+.intro {
+  font-size: 1.1em;
+}
+
+.btn {
+  background-color: #0e4391;
+  opacity: 0.8;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background-color: #0e4391 !important;
+  opacity: 1;
+}
+
+.invalid {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+label span {
+  color:#e00917;
+}
+
+.none {
+  display: none;
+}
