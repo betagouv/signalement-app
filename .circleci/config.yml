@@ -8,6 +8,8 @@ jobs:
     docker:
     # specify the version you desire here
     - image: circleci/node:9.8.0
+      environment:
+      - CHROME_BIN=/usr/bin/google-chrome
 
     working_directory: ~/repo
 
