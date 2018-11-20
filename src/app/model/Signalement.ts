@@ -6,6 +6,8 @@ export class Signalement {
   precisionAnomalie: string;
   nomEtablissement: string;
   adresseEtablissement: string;
+  dateConstat: Date;
+  heureConstat: number;
   description: string;
   prenom: string;
   nom: string;

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { ServiceUtils } from '../../services/service.utils';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 describe('SignalementFormComponent', () => {
 
@@ -44,6 +45,7 @@ describe('SignalementFormComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        BsDatepickerModule.forRoot(),
       ],
       providers: [
         AnomalieService,
@@ -175,6 +177,8 @@ describe('SignalementFormComponent', () => {
 
       expect(component.signalementForm.controls['nomEtablissement']).toBeDefined();
       expect(component.signalementForm.controls['adresseEtablissement']).toBeDefined();
+      expect(component.signalementForm.controls['dateConstat']).toBeDefined();
+      expect(component.signalementForm.controls['heureConstat']).toBeDefined();
       expect(component.signalementForm.controls['description']).toBeDefined();
       expect(component.signalementForm.controls['prenom']).toBeDefined();
       expect(component.signalementForm.controls['nom']).toBeDefined();
@@ -187,6 +191,13 @@ describe('SignalementFormComponent', () => {
       component.ngOnInit();
 
       expect(component.showErrors).toBeFalsy();
+    });
+
+    it ('should define the plageHoraireList to display', () => {
+      component.ngOnInit();
+
+      expect(component.plageHoraireList).toBeDefined();
+      expect(component.plageHoraireList.length).toBe(24);
     });
 
   });
@@ -240,21 +251,26 @@ describe('SignalementFormComponent', () => {
     });
 
     it('should call a creation service with a signalement object', () => {
+      const dateConstat = new Date();
       component.typeEtablissementCtrl.setValue('typeEtablissement');
       component.nomEtablissementCtrl.setValue('nomEtablissement');
       component.adresseEtablissementCtrl.setValue('adresseEtablissement');
+      component.dateConstatCtrl.setValue(dateConstat);
+      component.heureConstatCtrl.setValue(5);
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
       component.emailCtrl.setValue('email@mail.fr');
+
       spyOn(signalementService, 'createSignalement').and.returnValue(of());
 
       component.createSignalement();
-
       const signalement = new Signalement();
       signalement.typeEtablissement = 'typeEtablissement';
       signalement.nomEtablissement = 'nomEtablissement';
       signalement.adresseEtablissement = 'adresseEtablissement';
       signalement.description = '';
+      signalement.dateConstat = dateConstat;
+      signalement.heureConstat = 5;
       signalement.nom = 'nom';
       signalement.prenom = 'prenom';
       signalement.email = 'email@mail.fr';
@@ -266,6 +282,7 @@ describe('SignalementFormComponent', () => {
       component.typeEtablissementCtrl.setValue('typeEtablissement');
       component.nomEtablissementCtrl.setValue('nomEtablissement');
       component.adresseEtablissementCtrl.setValue('adresseEtablissement');
+      component.dateConstatCtrl.setValue(new Date());
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
       component.emailCtrl.setValue('email@mail.fr');
