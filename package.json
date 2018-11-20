@@ -7,7 +7,7 @@
     "start": "node server.js",
     "prebuild": "envsub --env API_BASE_URL ./src/environments/environment.prod.ts",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --watch false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "npm run prebuild && ng build --aot --prod"
