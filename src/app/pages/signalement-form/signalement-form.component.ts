@@ -18,8 +18,9 @@ export class SignalementFormComponent implements OnInit {
   precisionAnomalieCtrl: FormControl;
   nomEtablissementCtrl: FormControl;
   adresseEtablissementCtrl: FormControl;
+  dateConstatCtrl: FormControl;
+  heureConstatCtrl: FormControl;
   descriptionCtrl: FormControl;
-  photoCtrl: FormControl;
   prenomCtrl: FormControl;
   nomCtrl: FormControl;
   emailCtrl: FormControl;
@@ -28,6 +29,7 @@ export class SignalementFormComponent implements OnInit {
   anomalies: Anomalie[];
   typeAnomalieList: TypeAnomalie[];
   precisionAnomalieList: string[];
+  plageHoraireList: number[];
 
   showErrors: boolean;
   showSuccess: boolean;
@@ -44,6 +46,8 @@ export class SignalementFormComponent implements OnInit {
     this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
     this.nomEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.adresseEtablissementCtrl = this.formBuilder.control('', Validators.required);
+    this.dateConstatCtrl = this.formBuilder.control('', Validators.required);
+    this.heureConstatCtrl = this.formBuilder.control('');
     this.descriptionCtrl = this.formBuilder.control('');
     this.prenomCtrl = this.formBuilder.control('', Validators.required);
     this.nomCtrl = this.formBuilder.control('', Validators.required);
@@ -53,6 +57,8 @@ export class SignalementFormComponent implements OnInit {
       typeEtablissement: this.typeEtablissementCtrl,
       nomEtablissement: this.nomEtablissementCtrl,
       adresseEtablissement: this.adresseEtablissementCtrl,
+      dateConstat: this.dateConstatCtrl,
+      heureConstat: this.heureConstatCtrl,
       description: this.descriptionCtrl,
       prenom: this.prenomCtrl,
       nom: this.nomCtrl,
@@ -61,7 +67,15 @@ export class SignalementFormComponent implements OnInit {
 
     this.showErrors = false;
 
+    this.constructPlageHoraireList();
     this.loadAnomalies();
+  }
+
+  constructPlageHoraireList() {
+    this.plageHoraireList = [];
+    for (let i = 0; i < 24; i++) {
+      this.plageHoraireList.push(i);
+    }
   }
 
   loadAnomalies() {
