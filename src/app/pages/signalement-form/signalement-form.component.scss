@@ -1,3 +1,5 @@
+@import "../../../theme/variables";
+
 .intro {
   font-size: 1.1em;
 }
@@ -36,4 +38,45 @@ select.ng-pristine {
   font-style: italic;
   font-weight: 200;
   opacity: 1; /* Firefox */
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  height: 22px;
+  width: 22px;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  position: absolute;
+  margin-top: 1px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: $primary;
+  border-color: $primary;
+  opacity: 1;
+  transition: border-color 0.2s ease-in, background-color 0.2s ease-out;
+}
+
+input[type="checkbox"]::before {
+  transform: scale(0);
+  content: '';
+  position: relative;
+  top: 3px;
+  left: 3px;
+  height: 14px;
+  width: 14px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><path d="M14.23 1.304L6.112 9.501 2.767 6.117a1.029 1.029 0 0 0-1.464 0 1.054 1.054 0 0 0 0 1.479l4.055 4.101c.208.21.481.31.754.305.272.005.545-.095.753-.305l8.829-8.915a1.053 1.053 0 0 0 0-1.478 1.027 1.027 0 0 0-1.464 0z" fill="white" /></svg>') center center no-repeat;
+}
+
+input[type="checkbox"]:checked::before {
+  color: #fff;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.2s ease-out;
+}
+
+input[type="checkbox"] + .label-inline {
+  display: block;
+  position: relative;
+  margin-left: 30px;
 }

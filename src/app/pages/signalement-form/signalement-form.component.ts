@@ -25,6 +25,7 @@ export class SignalementFormComponent implements OnInit {
   prenomCtrl: FormControl;
   nomCtrl: FormControl;
   emailCtrl: FormControl;
+  accordContactCtrl: FormControl;
 
   ticketFile: File;
   anomalieFile: File;
@@ -65,6 +66,7 @@ export class SignalementFormComponent implements OnInit {
     this.prenomCtrl = this.formBuilder.control('', Validators.required);
     this.nomCtrl = this.formBuilder.control('', Validators.required);
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
+    this.accordContactCtrl = this.formBuilder.control(false);
 
     this.signalementForm = this.formBuilder.group({
       typeEtablissement: this.typeEtablissementCtrl,
@@ -76,6 +78,7 @@ export class SignalementFormComponent implements OnInit {
       prenom: this.prenomCtrl,
       nom: this.nomCtrl,
       email: this.emailCtrl,
+      accordContact: this.accordContactCtrl,
     });
   }
 
@@ -141,7 +144,10 @@ export class SignalementFormComponent implements OnInit {
       this.signalementService.createSignalement(
         Object.assign(
           new Signalement(),
-          {'ticketFile': this.ticketFile, 'anomalieFile': this.anomalieFile},
+          {
+            'ticketFile': this.ticketFile,
+            'anomalieFile': this.anomalieFile
+          },
           this.signalementForm.value
         )
       ).subscribe(

@@ -189,6 +189,7 @@ describe('SignalementFormComponent', () => {
       expect(component.signalementForm.controls['prenom']).toBeDefined();
       expect(component.signalementForm.controls['nom']).toBeDefined();
       expect(component.signalementForm.controls['email']).toBeDefined();
+      expect(component.signalementForm.controls['accordContact']).toBeDefined();
       expect(component.signalementForm.controls['typeAnomalie']).toBeUndefined();
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
     });
@@ -234,7 +235,9 @@ describe('SignalementFormComponent', () => {
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
     });
 
-    it('should load precisionAnomalie list for selected typeEtablissement and typeAnomalie and add a form control for precisionAnomalie', () => {
+    it('should load precisionAnomalie list ' +
+      'for selected typeEtablissement and typeAnomalie and add a form control for precisionAnomalie', () => {
+
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
       component.categoryAnomalieCtrl.setValue(typeAnomalie22.categorie);
@@ -267,6 +270,7 @@ describe('SignalementFormComponent', () => {
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
       component.emailCtrl.setValue('email@mail.fr');
+      component.accordContactCtrl.setValue(true);
       component.anomalieFile = anomalieFile;
 
       spyOn(signalementService, 'createSignalement').and.returnValue(of());
@@ -282,6 +286,7 @@ describe('SignalementFormComponent', () => {
       signalement.nom = 'nom';
       signalement.prenom = 'prenom';
       signalement.email = 'email@mail.fr';
+      signalement.accordContact = true;
       signalement.ticketFile = undefined;
       signalement.anomalieFile = anomalieFile;
       expect(signalementService.createSignalement).toHaveBeenCalledWith(signalement);
