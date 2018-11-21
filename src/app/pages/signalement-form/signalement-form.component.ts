@@ -25,7 +25,9 @@ export class SignalementFormComponent implements OnInit {
   prenomCtrl: FormControl;
   nomCtrl: FormControl;
   emailCtrl: FormControl;
-  @ViewChild('file') file;
+
+  @ViewChild('fileInput') fileInput;
+  file: File;
 
   anomalies: Anomalie[];
   typeAnomalieList: TypeAnomalie[];
@@ -136,7 +138,7 @@ export class SignalementFormComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.isLoading = true;
-      this.signalementService.createSignalement(Object.assign(new Signalement(), {'photo': this.getPhoto()}, this.signalementForm.value))
+      this.signalementService.createSignalement(Object.assign(new Signalement(), {'photo': this.file}, this.signalementForm.value))
         .subscribe(
           result => {
             this.isLoading = false;
@@ -154,12 +156,12 @@ export class SignalementFormComponent implements OnInit {
     this.showSuccess = true;
   }
 
-  private getPhoto() {
-    const files: { [key: string]: File } = this.file.nativeElement.files;
-    for (const key in files) {
-      if (!isNaN(parseInt(key))) {
-        return files[key];
-      }
-    }
+
+  bringFileSelector() {
+    this.fileInput.nativeElement.click();
+  }
+
+  selectFile() {
+    this.file = this.fileInput.nativeElement.files[0];
   }
 }
