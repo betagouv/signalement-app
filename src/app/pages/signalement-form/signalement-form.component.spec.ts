@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { ServiceUtils } from '../../services/service.utils';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 
 describe('SignalementFormComponent', () => {
 
@@ -39,6 +39,7 @@ describe('SignalementFormComponent', () => {
   ];
 
   beforeEach(async(() => {
+    defineLocale('fr', frLocale);
     TestBed.configureTestingModule({
       declarations: [ SignalementFormComponent ],
       imports: [

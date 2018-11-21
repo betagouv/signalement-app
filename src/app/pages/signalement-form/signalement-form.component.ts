@@ -4,6 +4,7 @@ import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { AnomalieService } from '../../services/anomalie.service';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
+import { BsLocaleService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-signalement-form',
@@ -37,10 +38,20 @@ export class SignalementFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService,
-              private signalementService: SignalementService) {
+              private signalementService: SignalementService,
+              private localeService: BsLocaleService) {
   }
 
   ngOnInit() {
+    this.showErrors = false;
+    this.localeService.use('fr');
+
+    this.initSignalementForm();
+    this.constructPlageHoraireList();
+    this.loadAnomalies();
+  }
+
+  private initSignalementForm() {
     this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.categoryAnomalieCtrl = this.formBuilder.control('', Validators.required);
     this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
@@ -64,11 +75,6 @@ export class SignalementFormComponent implements OnInit {
       nom: this.nomCtrl,
       email: this.emailCtrl,
     });
-
-    this.showErrors = false;
-
-    this.constructPlageHoraireList();
-    this.loadAnomalies();
   }
 
   constructPlageHoraireList() {
