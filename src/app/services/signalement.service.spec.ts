@@ -36,6 +36,7 @@ describe('SignalementService', () => {
     it('should post an http request with data to the signalement creation API', (done) => {
 
       const dateConstat = new Date(2018, 2, 1);
+      const anomalieFile = new File([], 'anomalie.jpg');
       const signalement = new Signalement();
       signalement.typeEtablissement = 'typeEtablissement';
       signalement.nomEtablissement = 'nomEtablissement';
@@ -46,7 +47,7 @@ describe('SignalementService', () => {
       signalement.nom = 'nom';
       signalement.prenom = 'prenom';
       signalement.email = 'email@mail.fr';
-      signalement.photo = undefined;
+      signalement.anomalieFile = anomalieFile;
 
       signalementService.createSignalement(signalement).subscribe( result => {
           done();
@@ -66,7 +67,8 @@ describe('SignalementService', () => {
       expect(signalementRequest.request.body.get('nom')).toBe('nom');
       expect(signalementRequest.request.body.get('nom')).toBe('nom');
       expect(signalementRequest.request.body.get('email')).toBe('email@mail.fr');
-
+      expect(signalementRequest.request.body.get('ticketFile')).toBeNull();
+      expect(signalementRequest.request.body.get('anomalieFile').name).toBe(anomalieFile.name);
     });
 
   });

@@ -5,16 +5,12 @@
 .invalid {
   width: 100%;
   margin-top: .25rem;
-  font-size: 80%;
+  font-size: 90%;
   color: #dc3545;
 }
 
 label span {
   color:#e00917;
-}
-
-.none {
-  display: none;
 }
 
 .panel {
@@ -26,4 +22,18 @@ label span {
   position: relative;
   border: 1px solid #c9d3df;
   margin-bottom: 2em;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #bbb;
+  font-style: italic;
+  font-weight: 200;
+  opacity: 1; /* Firefox */
+}
+
+select.ng-pristine {
+  color: #bbb;
+  font-style: italic;
+  font-weight: 200;
+  opacity: 1; /* Firefox */
 }

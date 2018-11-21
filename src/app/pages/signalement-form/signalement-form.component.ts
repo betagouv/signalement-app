@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { AnomalieService } from '../../services/anomalie.service';
@@ -26,8 +26,8 @@ export class SignalementFormComponent implements OnInit {
   nomCtrl: FormControl;
   emailCtrl: FormControl;
 
-  @ViewChild('fileInput') fileInput;
-  file: File;
+  ticketFile: File;
+  anomalieFile: File;
 
   anomalies: Anomalie[];
   typeAnomalieList: TypeAnomalie[];
@@ -138,16 +138,21 @@ export class SignalementFormComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.isLoading = true;
-      this.signalementService.createSignalement(Object.assign(new Signalement(), {'photo': this.file}, this.signalementForm.value))
-        .subscribe(
-          result => {
-            this.isLoading = false;
-            return this.treatCreationSuccess();
+      this.signalementService.createSignalement(
+        Object.assign(
+          new Signalement(),
+          {'ticketFile': this.ticketFile, 'anomalieFile': this.anomalieFile},
+          this.signalementForm.value
+        )
+      ).subscribe(
+        result => {
+          this.isLoading = false;
+          return this.treatCreationSuccess();
         },
-          error => {
-            this.isLoading = false;
-            // TODO cas d'erreur
-          });
+        error => {
+          this.isLoading = false;
+          // TODO cas d'erreur
+        });
 
     }
   }
@@ -156,12 +161,12 @@ export class SignalementFormComponent implements OnInit {
     this.showSuccess = true;
   }
 
-
-  bringFileSelector() {
-    this.fileInput.nativeElement.click();
+  onTicketFileSelected(file: File) {
+    this.ticketFile = file;
   }
 
-  selectFile() {
-    this.file = this.fileInput.nativeElement.files[0];
+  onAnomalieFileSelected(file: File) {
+    this.anomalieFile = file;
   }
+
 }

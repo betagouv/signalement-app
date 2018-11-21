@@ -91,7 +91,7 @@
             Veuillez préciser la date <span>*</span> et la plage horaire du constat
           </label>
           <div class="row">
-            <div class="col">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <input type="text"
                        formControlName="dateConstat"
@@ -104,7 +104,7 @@
                 </div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <select formControlName="heureConstat"
                         class="form-control">
@@ -115,18 +115,17 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label>
-              Vous pouvez ajouter la photo du ticket de caisse
-            </label>
-            <input type="file" #fileInput class="form-control-file" hidden (change)="selectFile()">
-            <div class="input-group" (click)="bringFileSelector()">
-              <input type="text" class="form-control" [placeholder]="file?file.name:'Photo du ticket de caisse'">
-              <div class="input-group-append">
-                <button class="btn btn-secondary" type="button">Parcourir</button>
-              </div>
-            </div>
-          </div>
+          <label>
+            Vous pouvez également ajouter des photos
+          </label>
+          <app-file-input
+            [placeholder]="'Photo du ticket de caisse'"
+            (fileSelected)="onTicketFileSelected($event)">
+          </app-file-input>
+          <app-file-input
+            [placeholder]="'Photo du problème'"
+            (fileSelected)="onAnomalieFileSelected($event)">
+          </app-file-input>
 
           <div class="form-group">
             <label>
@@ -138,8 +137,8 @@
                       placeholder="200 caractères maximum">
             </textarea>
           </div>
-        </div>
 
+        </div>
 
         <div class="panel">
           <p class="font-weight-bold">
@@ -149,7 +148,7 @@
           </p>
 
           <div class="row">
-            <div class="col">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label>
                   Votre prénom <span>*</span>
@@ -161,7 +160,7 @@
               </div>
             </div>
 
-            <div class="col">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label>
                   Votre nom <span>*</span>

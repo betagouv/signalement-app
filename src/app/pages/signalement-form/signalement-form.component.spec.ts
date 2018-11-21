@@ -11,6 +11,7 @@ import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { ServiceUtils } from '../../services/service.utils';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
+import { FileInputComponent } from '../../components/file-input/file-input.component';
 
 describe('SignalementFormComponent', () => {
 
@@ -41,7 +42,7 @@ describe('SignalementFormComponent', () => {
   beforeEach(async(() => {
     defineLocale('fr', frLocale);
     TestBed.configureTestingModule({
-      declarations: [ SignalementFormComponent ],
+      declarations: [ SignalementFormComponent, FileInputComponent ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -96,7 +97,9 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="typeAnomalie"]')).toBeNull();
     });
 
-    it('should display a select input for categorieAnomalie with categorieAnomalie list as options when associated form control is defined', () => {
+    it('should display a select input for categorieAnomalie with categorieAnomalie list as options ' +
+      'when associated form control is defined', () => {
+
       component.signalementForm.addControl('categorieAnomalie', component.categoryAnomalieCtrl);
       component.typeAnomalieList = typeAnomalieListEtablissement1;
 
@@ -116,7 +119,9 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="precisionAnomalie"]')).toBeNull();
     });
 
-    it('should display a select input for precisionAnomalie with precisionAnomalie list as options when associated form control is defined', () => {
+    it('should display a select input for precisionAnomalie with precisionAnomalie list as options ' +
+      'when associated form control is defined', () => {
+
       component.signalementForm.addControl('precisionAnomalie', component.precisionAnomalieCtrl);
       component.precisionAnomalieList = precisionList22;
 
@@ -253,6 +258,7 @@ describe('SignalementFormComponent', () => {
 
     it('should call a creation service with a signalement object', () => {
       const dateConstat = new Date();
+      const anomalieFile = new File([], 'anomalie.jpg');
       component.typeEtablissementCtrl.setValue('typeEtablissement');
       component.nomEtablissementCtrl.setValue('nomEtablissement');
       component.adresseEtablissementCtrl.setValue('adresseEtablissement');
@@ -261,6 +267,7 @@ describe('SignalementFormComponent', () => {
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
       component.emailCtrl.setValue('email@mail.fr');
+      component.anomalieFile = anomalieFile;
 
       spyOn(signalementService, 'createSignalement').and.returnValue(of());
 
@@ -275,7 +282,8 @@ describe('SignalementFormComponent', () => {
       signalement.nom = 'nom';
       signalement.prenom = 'prenom';
       signalement.email = 'email@mail.fr';
-      signalement.photo = undefined;
+      signalement.ticketFile = undefined;
+      signalement.anomalieFile = anomalieFile;
       expect(signalementService.createSignalement).toHaveBeenCalledWith(signalement);
     });
 
