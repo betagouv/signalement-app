@@ -27,11 +27,13 @@ describe('SignalementFormComponent', () => {
   ];
   const typeEtablissement2 = 'typeEtablissement2';
   const precisionList22 = ['precision221', 'precision222', 'precision2223'];
+  const typeAnomalie21 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie21', precisionList: []});
   const typeAnomalie22 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie22', precisionList: precisionList22});
+  const typeAnomalie23 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie23', precisionList: []});
   const typeAnomalieListEtablissement2 = [
-    deserialize(TypeAnomalie, {categorie: 'typeAnomalie21'}),
+    typeAnomalie21,
     typeAnomalie22,
-    deserialize(TypeAnomalie, {categorie: 'typeAnomalie23'})
+    typeAnomalie23
   ];
 
   const anomaliesFixture = [
@@ -235,8 +237,18 @@ describe('SignalementFormComponent', () => {
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
     });
 
-    it('should load precisionAnomalie list ' +
-      'for selected typeEtablissement and typeAnomalie and add a form control for precisionAnomalie', () => {
+    it('should load precisionAnomalie list for selected typeEtablissement and typeAnomalie', () => {
+
+      component.anomalies = anomaliesFixture;
+      component.typeEtablissementCtrl.setValue(typeEtablissement2);
+      component.categoryAnomalieCtrl.setValue(typeAnomalie22.categorie);
+
+      component.changeCategorieAnomalie();
+
+      expect(component.precisionAnomalieList).toEqual(precisionList22);
+    });
+
+    it('should add a form control for precisionAnomalie if loaded list is not empty', () => {
 
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
@@ -246,6 +258,17 @@ describe('SignalementFormComponent', () => {
 
       expect(component.precisionAnomalieList).toEqual(precisionList22);
       expect(component.signalementForm.controls['precisionAnomalie']).not.toBeNull();
+    });
+
+    it('should not add a form control for precisionAnomalie if loaded list is empty', () => {
+
+      component.anomalies = anomaliesFixture;
+      component.typeEtablissementCtrl.setValue(typeEtablissement2);
+      component.categoryAnomalieCtrl.setValue(typeAnomalie23.categorie);
+
+      component.changeCategorieAnomalie();
+
+      expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
     });
   });
 
