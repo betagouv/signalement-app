@@ -12,5 +12,7 @@ export class Signalement {
   prenom: string;
   nom: string;
   email: string;
-  photo: File;
+  accordContact: boolean;
+  ticketFile: File;
+  anomalieFile: File;
 }

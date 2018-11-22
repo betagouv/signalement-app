@@ -25,18 +25,16 @@ export class SignalementService {
 
     const signalementFormData: FormData = new FormData();
     Object.keys(signalement)
-      .filter(key => !(signalement[key] instanceof File))
       .forEach(key => {
         const data = signalement[key];
         if (data instanceof Date) {
           signalementFormData.append(key, moment(data).format('YYYY-MM-DD'));
+        } else if (data instanceof File) {
+          signalementFormData.append(key, data, data.name);
         } else {
           signalementFormData.append(key, data);
         }
       });
-    if (signalement.photo) {
-      signalementFormData.append('file', signalement.photo, signalement.photo.name);
-    }
 
     return signalementFormData;
   }

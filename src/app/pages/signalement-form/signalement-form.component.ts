@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
 import { AnomalieService } from '../../services/anomalie.service';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
+import { BsLocaleService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-signalement-form',
@@ -24,7 +25,10 @@ export class SignalementFormComponent implements OnInit {
   prenomCtrl: FormControl;
   nomCtrl: FormControl;
   emailCtrl: FormControl;
-  @ViewChild('file') file;
+  accordContactCtrl: FormControl;
+
+  ticketFile: File;
+  anomalieFile: File;
 
   anomalies: Anomalie[];
   typeAnomalieList: TypeAnomalie[];
@@ -37,10 +41,20 @@ export class SignalementFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService,
-              private signalementService: SignalementService) {
+              private signalementService: SignalementService,
+              private localeService: BsLocaleService) {
   }
 
   ngOnInit() {
+    this.showErrors = false;
+    this.localeService.use('fr');
+
+    this.initSignalementForm();
+    this.constructPlageHoraireList();
+    this.loadAnomalies();
+  }
+
+  private initSignalementForm() {
     this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.categoryAnomalieCtrl = this.formBuilder.control('', Validators.required);
     this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
@@ -52,6 +66,7 @@ export class SignalementFormComponent implements OnInit {
     this.prenomCtrl = this.formBuilder.control('', Validators.required);
     this.nomCtrl = this.formBuilder.control('', Validators.required);
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
+    this.accordContactCtrl = this.formBuilder.control(false);
 
     this.signalementForm = this.formBuilder.group({
       typeEtablissement: this.typeEtablissementCtrl,
@@ -63,12 +78,8 @@ export class SignalementFormComponent implements OnInit {
       prenom: this.prenomCtrl,
       nom: this.nomCtrl,
       email: this.emailCtrl,
+      accordContact: this.accordContactCtrl,
     });
-
-    this.showErrors = false;
-
-    this.constructPlageHoraireList();
-    this.loadAnomalies();
   }
 
   constructPlageHoraireList() {
@@ -130,16 +141,24 @@ export class SignalementFormComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.isLoading = true;
-      this.signalementService.createSignalement(Object.assign(new Signalement(), {'photo': this.getPhoto()}, this.signalementForm.value))
-        .subscribe(
-          result => {
-            this.isLoading = false;
-            return this.treatCreationSuccess();
+      this.signalementService.createSignalement(
+        Object.assign(
+          new Signalement(),
+          {
+            'ticketFile': this.ticketFile,
+            'anomalieFile': this.anomalieFile
+          },
+          this.signalementForm.value
+        )
+      ).subscribe(
+        result => {
+          this.isLoading = false;
+          return this.treatCreationSuccess();
         },
-          error => {
-            this.isLoading = false;
-            // TODO cas d'erreur
-          });
+        error => {
+          this.isLoading = false;
+          // TODO cas d'erreur
+        });
 
     }
   }
@@ -148,12 +167,12 @@ export class SignalementFormComponent implements OnInit {
     this.showSuccess = true;
   }
 
-  private getPhoto() {
-    const files: { [key: string]: File } = this.file.nativeElement.files;
-    for (const key in files) {
-      if (!isNaN(parseInt(key))) {
-        return files[key];
-      }
-    }
+  onTicketFileSelected(file: File) {
+    this.ticketFile = file;
   }
+
+  onAnomalieFileSelected(file: File) {
+    this.anomalieFile = file;
+  }
+
 }

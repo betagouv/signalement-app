@@ -7,12 +7,17 @@ import { SignalementFormComponent } from './pages/signalement-form/signalement-f
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale, frLocale } from 'ngx-bootstrap';
+import { FileInputComponent } from './components/file-input/file-input.component';
+
+defineLocale('fr', frLocale);
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SignalementFormComponent
+    SignalementFormComponent,
+    FileInputComponent
   ],
   imports: [
     BrowserModule,
@@ -24,4 +29,5 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
