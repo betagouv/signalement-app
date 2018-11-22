@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { ServiceUtils } from '../../services/service.utils';
+import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
+import { FileInputComponent } from '../../components/file-input/file-input.component';
 
 describe('SignalementFormComponent', () => {
 
@@ -38,12 +40,14 @@ describe('SignalementFormComponent', () => {
   ];
 
   beforeEach(async(() => {
+    defineLocale('fr', frLocale);
     TestBed.configureTestingModule({
-      declarations: [ SignalementFormComponent ],
+      declarations: [ SignalementFormComponent, FileInputComponent ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        BsDatepickerModule.forRoot(),
       ],
       providers: [
         AnomalieService,
@@ -93,7 +97,9 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="typeAnomalie"]')).toBeNull();
     });
 
-    it('should display a select input for categorieAnomalie with categorieAnomalie list as options when associated form control is defined', () => {
+    it('should display a select input for categorieAnomalie with categorieAnomalie list as options ' +
+      'when associated form control is defined', () => {
+
       component.signalementForm.addControl('categorieAnomalie', component.categoryAnomalieCtrl);
       component.typeAnomalieList = typeAnomalieListEtablissement1;
 
@@ -113,7 +119,9 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="precisionAnomalie"]')).toBeNull();
     });
 
-    it('should display a select input for precisionAnomalie with precisionAnomalie list as options when associated form control is defined', () => {
+    it('should display a select input for precisionAnomalie with precisionAnomalie list as options ' +
+      'when associated form control is defined', () => {
+
       component.signalementForm.addControl('precisionAnomalie', component.precisionAnomalieCtrl);
       component.precisionAnomalieList = precisionList22;
 
@@ -175,10 +183,13 @@ describe('SignalementFormComponent', () => {
 
       expect(component.signalementForm.controls['nomEtablissement']).toBeDefined();
       expect(component.signalementForm.controls['adresseEtablissement']).toBeDefined();
+      expect(component.signalementForm.controls['dateConstat']).toBeDefined();
+      expect(component.signalementForm.controls['heureConstat']).toBeDefined();
       expect(component.signalementForm.controls['description']).toBeDefined();
       expect(component.signalementForm.controls['prenom']).toBeDefined();
       expect(component.signalementForm.controls['nom']).toBeDefined();
       expect(component.signalementForm.controls['email']).toBeDefined();
+      expect(component.signalementForm.controls['accordContact']).toBeDefined();
       expect(component.signalementForm.controls['typeAnomalie']).toBeUndefined();
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
     });
@@ -187,6 +198,13 @@ describe('SignalementFormComponent', () => {
       component.ngOnInit();
 
       expect(component.showErrors).toBeFalsy();
+    });
+
+    it ('should define the plageHoraireList to display', () => {
+      component.ngOnInit();
+
+      expect(component.plageHoraireList).toBeDefined();
+      expect(component.plageHoraireList.length).toBe(24);
     });
 
   });
@@ -217,7 +235,9 @@ describe('SignalementFormComponent', () => {
       expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
     });
 
-    it('should load precisionAnomalie list for selected typeEtablissement and typeAnomalie and add a form control for precisionAnomalie', () => {
+    it('should load precisionAnomalie list ' +
+      'for selected typeEtablissement and typeAnomalie and add a form control for precisionAnomalie', () => {
+
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
       component.categoryAnomalieCtrl.setValue(typeAnomalie22.categorie);
@@ -240,25 +260,35 @@ describe('SignalementFormComponent', () => {
     });
 
     it('should call a creation service with a signalement object', () => {
+      const dateConstat = new Date();
+      const anomalieFile = new File([], 'anomalie.jpg');
       component.typeEtablissementCtrl.setValue('typeEtablissement');
       component.nomEtablissementCtrl.setValue('nomEtablissement');
       component.adresseEtablissementCtrl.setValue('adresseEtablissement');
+      component.dateConstatCtrl.setValue(dateConstat);
+      component.heureConstatCtrl.setValue(5);
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
       component.emailCtrl.setValue('email@mail.fr');
+      component.accordContactCtrl.setValue(true);
+      component.anomalieFile = anomalieFile;
+
       spyOn(signalementService, 'createSignalement').and.returnValue(of());
 
       component.createSignalement();
-
       const signalement = new Signalement();
       signalement.typeEtablissement = 'typeEtablissement';
       signalement.nomEtablissement = 'nomEtablissement';
       signalement.adresseEtablissement = 'adresseEtablissement';
       signalement.description = '';
+      signalement.dateConstat = dateConstat;
+      signalement.heureConstat = 5;
       signalement.nom = 'nom';
       signalement.prenom = 'prenom';
       signalement.email = 'email@mail.fr';
-      signalement.photo = undefined;
+      signalement.accordContact = true;
+      signalement.ticketFile = undefined;
+      signalement.anomalieFile = anomalieFile;
       expect(signalementService.createSignalement).toHaveBeenCalledWith(signalement);
     });
 
@@ -266,6 +296,7 @@ describe('SignalementFormComponent', () => {
       component.typeEtablissementCtrl.setValue('typeEtablissement');
       component.nomEtablissementCtrl.setValue('nomEtablissement');
       component.adresseEtablissementCtrl.setValue('adresseEtablissement');
+      component.dateConstatCtrl.setValue(new Date());
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
       component.emailCtrl.setValue('email@mail.fr');

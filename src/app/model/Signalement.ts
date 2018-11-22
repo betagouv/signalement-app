@@ -6,9 +6,13 @@ export class Signalement {
   precisionAnomalie: string;
   nomEtablissement: string;
   adresseEtablissement: string;
+  dateConstat: Date;
+  heureConstat: number;
   description: string;
   prenom: string;
   nom: string;
   email: string;
-  photo: File;
+  accordContact: boolean;
+  ticketFile: File;
+  anomalieFile: File;
 }

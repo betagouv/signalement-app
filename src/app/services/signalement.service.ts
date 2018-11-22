@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ServiceUtils } from './service.utils';
 import { Signalement } from '../model/Signalement';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +25,16 @@ export class SignalementService {
 
     const signalementFormData: FormData = new FormData();
     Object.keys(signalement)
-      .filter(key => !(signalement[key] instanceof File))
       .forEach(key => {
-        signalementFormData.append(key, signalement[key]);
+        const data = signalement[key];
+        if (data instanceof Date) {
+          signalementFormData.append(key, moment(data).format('YYYY-MM-DD'));
+        } else if (data instanceof File) {
+          signalementFormData.append(key, data, data.name);
+        } else {
+          signalementFormData.append(key, data);
+        }
       });
-    if (signalement.photo) {
-      signalementFormData.append('file', signalement.photo, signalement.photo.name);
-    }
 
     return signalementFormData;
   }
