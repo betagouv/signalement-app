@@ -177,4 +177,9 @@ export class SignalementFormComponent implements OnInit {
     this.anomalieFile = file;
   }
 
+  isIntoxicationAlimentaire() {
+    return this.categoryAnomalieCtrl.value === IntoxicationAlimentaire;
+  }
 }
+
+export const IntoxicationAlimentaire = 'Intoxication alimentaire';

@@ -194,9 +194,16 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block" *ngIf="!isLoading">
-          Signaler
-        </button>
+        <ng-container *ngIf="!isLoading">
+          <button type="submit" class="btn btn-primary btn-lg btn-block" *ngIf="isIntoxicationAlimentaire(); else mainButton">
+            Suivant
+          </button>
+          <ng-template #mainButton>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Signaler
+            </button>
+          </ng-template>
+        </ng-container>
 
         <div class="text-center" *ngIf="isLoading">
           <img src="/assets/images/loader.gif">
@@ -211,10 +218,21 @@
     </div>
 
     <div *ngIf="showSuccess" class="offset-lg-2 col-lg-8 col-sm-12 pb-3">
-      <h2>Merci pour votre signalement</h2>
-      <p class="mt-4">
-        Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé. Il ne déclenchera pas à lui seul un contrôle des autorités.
-      </p>
+
+      <ng-container *ngIf="isIntoxicationAlimentaire(); else thanks">
+        Les cas d'intoxication alimentaire nécessitent une analyse individualisée
+        (notamment le nombre de personnes malades, symptômes et aliments suspectés )
+        et peuvent déboucher sur un échange avec les enquêteurs.
+        Veuillez remplir le formulaire "Courrier" de la DGCCRF en cliquant sur le lien ci-contre :
+        <a href="https://www.economie.gouv.fr/courrier/4210">https://www.economie.gouv.fr/courrier/4210</a>
+      </ng-container>
+
+      <ng-template #thanks>
+        <h2>Merci pour votre signalement</h2>
+        <p class="mt-4">
+          Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé. Il ne déclenchera pas à lui seul un contrôle des autorités.
+        </p>
+      </ng-template>
     </div>
   </div>
 </div>

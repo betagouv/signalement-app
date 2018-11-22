@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignalementFormComponent } from './signalement-form.component';
+import { IntoxicationAlimentaire, SignalementFormComponent } from './signalement-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnomalieService } from '../../services/anomalie.service';
 import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
@@ -29,11 +29,11 @@ describe('SignalementFormComponent', () => {
   const precisionList22 = ['precision221', 'precision222', 'precision2223'];
   const typeAnomalie21 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie21', precisionList: []});
   const typeAnomalie22 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie22', precisionList: precisionList22});
-  const typeAnomalie23 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie23', precisionList: []});
+  const typeAnomalieIntoxicationAlimentaire = deserialize(TypeAnomalie, {categorie: IntoxicationAlimentaire, precisionList: []});
   const typeAnomalieListEtablissement2 = [
     typeAnomalie21,
     typeAnomalie22,
-    typeAnomalie23
+    typeAnomalieIntoxicationAlimentaire
   ];
 
   const anomaliesFixture = [
@@ -264,7 +264,7 @@ describe('SignalementFormComponent', () => {
 
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.categoryAnomalieCtrl.setValue(typeAnomalie23.categorie);
+      component.categoryAnomalieCtrl.setValue(typeAnomalie21.categorie);
 
       component.changeCategorieAnomalie();
 
@@ -330,6 +330,23 @@ describe('SignalementFormComponent', () => {
         expect(component.showSuccess).toBeTruthy();
         done();
       });
+
+    });
+
+  });
+
+  describe('case of intoxication alimentaire', () => {
+
+    it('should display a specific label for the submit button', () => {
+
+      component.anomalies = anomaliesFixture;
+      component.typeEtablissementCtrl.setValue(typeEtablissement2);
+      component.categoryAnomalieCtrl.setValue(typeAnomalieIntoxicationAlimentaire.categorie);
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('button[type="submit"]').textContent.trim()).toBe('Suivant');
 
     });
 
