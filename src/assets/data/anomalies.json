@@ -1,97 +1,59 @@
 {
-  "list":
-  [
+  "list": [
     {
       "typeEtablissement": "Café restaurant",
       "typeAnomalieList": [
         {
-          "categorie": "Hygiène",
+          "categorie": "Hygiène du personnel",
           "precisionList": [
-            "Personnel sans coiffe ou gants",
-            "Restaurant sale",
-            "Présence de rat ou d'insecte",
-            "Problème de température (ex: vitrine réfrigérée)"
+            "Pas de gants, pas de coiffe",
+            "Tenue sale",
+            "Autres (merci de le préciser)"
           ]
         },
         {
-          "categorie": "Nourriture",
+          "categorie": "Hygiène des locaux",
           "precisionList": [
-            "Malade suite à un repas",
-            "Plat de mauvaise qualité, pas frais ou pas bon"
+            "Cuisine sale",
+            "Salle du restaurant/café sale",
+            "Présence de rat/insectes/oiseau",
+            "Problème de température (ex: vitrine réfrigérée)",
+            "Autres (merci de préciser)"
           ]
         },
         {
-          "categorie": "Paiement",
+          "categorie": "Intoxication alimentaire",
+          "precisionList": []
+        },
+        {
+          "categorie": "Nourriture et boissons",
           "precisionList": [
-            "Refus de remise d'une note",
-            "Refus d'un moyen de paiement non annoncé"
+            "Plat de mauvaise qualité ou pas bon",
+            "Descriptif trompeur des plats, des offres...",
+            "Produits non-disponibles",
+            "Bouteille de vin non débouchée devant vous",
+            "Bouteille de vin servie au verre non versée devant vous",
+            "Autres (merci de préciser)"
           ]
         },
         {
-          "categorie": "Prix",
+          "categorie": "Prix et paiement",
           "precisionList": [
-            "Absence d'affichage de prix ou absence de carte",
+            "Prix non indiqué",
             "Prix trop cher",
             "Prix payé différent de celui affiché",
             "Eau du robinet payante ou pain payant",
-            "Facturation des couverts (ex: enfant)",
-            "Frais facturés non clairement indiqués avant",
-            "Prix affiché sans TVA ou hors service compris"
+            "Refus d'un moyen de paiement non annoncé",
+            "Frais facturés non clairement indiqués avant"
           ]
         },
         {
           "categorie": "Autres",
           "precisionList": [
-            "Bouteille de vin non débouchée devant vous",
-            "Bouteille de vin servie au verre non versée devant vous",
             "Refus de vous servir",
-            "Personnel peu aimable, comportement inapproprié",
+            "Personnel peu aimable, mal poli",
             "Chien refusé",
-            "Publicité trompeuse, descriptif des plats trompeurs",
-            "Produits non-disponibles"
-          ]
-        }
-      ]
-    },
-    {
-      "typeEtablissement": "Commerçant de proximité (boulangerie, boucherie...)",
-      "typeAnomalieList": [
-        {
-          "categorie": "Hygiène",
-          "precisionList": [
-            "Personnel sans coiffe ou gants",
-            "Magasin sale",
-            "Présence de rat / insecte / oiseau",
-            "Problème de température (ex: vitrine réfrigérée)"
-          ]
-        },
-        {
-          "categorie": "Produit alimentaire",
-          "precisionList": [
-            "Date Limite de Consommation dépassée",
-            "Intoxication, corps étranger",
-            "Etiquetage non-conforme (absence ingrédients, des allergènes, de date limite, pas en langue française..) / absence d’étiquetage",
-            "Qualité sanitaire des produits (moississure)",
-            "Métrologie (respect de poids, volume annoncé)"
-          ]
-        },
-        {
-          "categorie": "Prix",
-          "precisionList": [
-            "Absence de prix",
-            "Affichage des prix non lisible ou non visible",
-            "Prix trop cher",
-            "Prix à la caisse différent de celui affiché",
-            "Frais facturé non annoncé à l'avance",
-            "Prix hors tva ou en monnaie étrangère"
-          ]
-        },
-        {
-          "categorie": "Autres",
-          "precisionList": [
-            "Refus de servir",
-            "Personnable peu aimable, mal poli",
-            "Refus d'un moyen de paiement"
+            "Autres (merci de préciser)"
           ]
         }
       ]
@@ -100,87 +62,179 @@
       "typeEtablissement": "Grande surface et supérette",
       "typeAnomalieList": [
         {
-          "categorie": "Hygiène",
+          "categorie": "Hygiène du personnel",
           "precisionList": [
-            "Personnel sans coiffe ou gants",
-            "Problème de saleté",
-            "Présence de rat / insecte / oiseau",
-            "Problème de température (ex: vitrine réfrigérée)"
+            "Pas de gants, pas de coiffe",
+            "Tenue sale",
+            "Autres (merci de le préciser)"
           ]
         },
         {
-          "categorie": "Prix",
+          "categorie": "Hygiène des locaux",
           "precisionList": [
-            "Absence de prix",
-            "Affichage des prix non lisible ou non visible",
+            "Sol ou rayon sale",
+            "Présence de rat/insectes/oiseau",
+            "Problème de température (ex: vitrine réfrigérée)",
+            "Autres (merci de préciser)"
+          ]
+        },
+        {
+          "categorie": "Intoxication alimentaire",
+          "precisionList": []
+        },
+        {
+          "categorie": "Prix et paiement",
+          "precisionList": [
+            "Absence de prix ou prix illisible",
             "Prix trop cher",
             "Prix à la caisse différent de celui affiché",
-            "Frais facturés non annoncés à l'avance",
-            "Prix affiché sans TVA ou pas en Euro",
-            "Problème de promotion, soldes"
+            "Frais facturés non clairement indiqués avant",
+            "Refus d'un moyen de paiement non annoncé",
+            "Fausse réduction de prix"
+          ]
+        },
+        {
+          "categorie": "Publicité (affiche, catalogue..)",
+          "precisionList": [
+            "Indisponibilité des produits du catalogue",
+            "Publicité trompeuse / mensongère"
           ]
         },
         {
           "categorie": "Produit alimentaire",
           "precisionList": [
             "Date Limite de Consommation dépassée",
-            "Absence de Date Limite de Consomation",
-            "Intoxication, corps étranger",
             "Problème d'étiquetage ou absence d’étiquetage",
-            "Qualité sanitaire des produits (ex: moississure)",
-            "Respect des quantités annoncés",
-            "Vente de produit en retrait-rappel"
+            "Qualité sanitaire des produits (ex: moisissures)",
+            "Quantité annoncée non conforme",
+            "Problème rencontré avec un produit spécifique",
+            "Vente d'un produit en retrait-rappel",
+            "Autres (merci de le préciser)"
           ]
         },
         {
-          "categorie": "Produit non alimentaire",
+          "categorie": "Produit non-alimentaire",
           "precisionList": [
-            "Risque de danger avec un produit",
-            "Absence ou problème d’étiquetage du produit",
-            "Respect des quantités annoncés",
-            "Vente de produit en retrait-rappel"
+            "Problème d'étiquetage ou absence d’étiquetage",
+            "Quantité annoncée non conforme",
+            "Problème rencontré avec un produit spécifique",
+            "Présemption d'obsolescence programmée",
+            "Refus de reprendre un produit encore sous garantie",
+            "Vente d'un produit en retrait-rappel",
+            "Autres (merci de le préciser)"
           ]
         },
         {
           "categorie": "Autres",
           "precisionList": [
-            "Refus de vendre",
-            "Personnel peu aimable, comportement inapproprié",
-            "Refus d'un moyen de paiement non annoncé",
-            "Indisponibilité des produits du catalogue, publicité trompeuse"
+            "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
+            "Refus de vous servir, refus de vendre",
+            "Personnel peu aimable, mal poli",
+            "Autres (merci de le préciser)"
           ]
         }
       ]
     },
     {
-      "typeEtablissement": "Magasin non alimentaire (livres, vêtements...)",
+      "typeEtablissement": "Commerçant de proximité (boulangerie, boucherie…)",
       "typeAnomalieList": [
         {
-          "categorie": "Prix",
+          "categorie": "Hygiène du personnel",
           "precisionList": [
-            "Absence de prix ou d'affichage",
-            "Prix trop cher",
-            "Prix à la caisse différent de celui affiché",
-            "Frais caché facturé",
-            "Prix affiché sans TVA ou pas en euro",
-            "Problème de promotion, soldes"
+            "Pas de gants, pas de coiffe",
+            "Tenue sale",
+            "Autres (merci de le préciser)"
           ]
         },
         {
-          "categorie": "Produit",
+          "categorie": "Hygiène des locaux",
           "precisionList": [
-            "Problème de garantie",
-            "Absence ou problème d’étiquetage (ex: composition vêtement, langue française...)"
+            "Etablisement sale",
+            "Présence de rat/insectes/oiseau",
+            "Problème de température (ex: vitrine réfrigérée)",
+            "Autres (merci de préciser)"
+          ]
+        },
+        {
+          "categorie": "Prix et paiement",
+          "precisionList": [
+            "Absence de prix ou prix illisible",
+            "Prix trop cher",
+            "Prix à la caisse différent de celui affiché",
+            "Frais facturés non clairement indiqués avant",
+            "Refus d'un moyen de paiement non annoncé",
+            "Autres (merci de préciser)"
+          ]
+        },
+        {
+          "categorie": "Produit alimentaire",
+          "precisionList": [
+            "Date Limite de Consommation dépassée",
+            "Problème d'étiquetage ou absence d’étiquetage",
+            "Qualité sanitaire des produits (ex: moisissures)",
+            "Quantité annoncée non conforme"
+          ]
+        },
+        {
+          "categorie": "Intoxication alimentaire",
+          "precisionList": []
+        },
+        {
+          "categorie": "Publicité (affiche, catalogue..)",
+          "precisionList": [
+            "Publicité trompeuse / mensongère"
           ]
         },
         {
           "categorie": "Autres",
           "precisionList": [
-            "Refus de servir",
-            "Personnel peu aimable, mal poli",
+            "Refus de vous servir, refus de vendre",
+            "Autres (merci de le préciser)",
+            "Personnel peu aimable, mal poli"
+          ]
+        }
+      ]
+    },
+    {
+      "typeEtablissement": "Magasin non alimentaire (librairie, vêtements…)",
+      "typeAnomalieList": [
+        {
+          "categorie": "Prix et paiement",
+          "precisionList": [
+            "Absence de prix ou prix illisible",
+            "Prix trop cher",
+            "Prix à la caisse différent de celui affiché",
+            "Frais facturés non clairement indiqués avant",
             "Refus d'un moyen de paiement non annoncé",
-            "Indisponibilité des produits",
-            "Publicité trompeuse"
+            "Autres (merci de le préciser)"
+          ]
+        },
+        {
+          "categorie": "Publicité (affiche, catalogue..)",
+          "precisionList": [
+            "Indisponibilité des produits du catalogue",
+            "Publicité trompeuse / mensongère"
+          ]
+        },
+        {
+          "categorie": "Produit non-alimentaire",
+          "precisionList": [
+            "Problème ou absence d'étiquetage",
+            "Problème rencontré avec un produit (allergie, coupure..)",
+            "Présemption d'obsolescence programmée",
+            "Refus de reprendre un produit encore sous garantie",
+            "Vente d'un produit en retrait-rappel",
+            "Autres (merci de le préciser)"
+          ]
+        },
+        {
+          "categorie": "Autres",
+          "precisionList": [
+            "Absence d'informations sur les garanties",
+            "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
+            "Refus de vous servir, refus de vendre",
+            "Personnel peu aimable, mal poli",
+            "Autres (merci de le préciser)"
           ]
         }
       ]
