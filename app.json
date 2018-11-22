@@ -1,0 +1,23 @@
+{
+  "name": "signalement-app",
+  "scripts": {
+  },
+  "env": {
+    "API_BASE_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
