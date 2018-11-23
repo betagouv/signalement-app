@@ -120,7 +120,9 @@ export class SignalementFormComponent implements OnInit {
     this.resetPrecisionAnomalie();
     if (this.categoryAnomalieCtrl.value !== '') {
       this.precisionAnomalieList = this.getPrecisionAnomalieList();
-      this.signalementForm.addControl('precisionAnomalie', this.precisionAnomalieCtrl);
+      if (this.precisionAnomalieList.length) {
+        this.signalementForm.addControl('precisionAnomalie', this.precisionAnomalieCtrl);
+      }
     }
   }
 
@@ -175,4 +177,9 @@ export class SignalementFormComponent implements OnInit {
     this.anomalieFile = file;
   }
 
+  isIntoxicationAlimentaire() {
+    return this.categoryAnomalieCtrl.value === IntoxicationAlimentaire;
+  }
 }
+
+export const IntoxicationAlimentaire = 'Intoxication alimentaire';
