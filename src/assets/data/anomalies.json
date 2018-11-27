@@ -163,6 +163,7 @@
             "Prix à la caisse différent de celui affiché",
             "Frais facturés non clairement indiqués avant",
             "Refus d'un moyen de paiement non annoncé",
+            "Fausse réduction de prix",
             "Autres (merci de préciser)"
           ]
         },
@@ -204,6 +205,7 @@
             "Absence de prix ou prix illisible",
             "Prix trop cher",
             "Prix à la caisse différent de celui affiché",
+            "Fausse réduction de prix",
             "Frais facturés non clairement indiqués avant",
             "Refus d'un moyen de paiement non annoncé",
             "Autres (merci de le préciser)"
