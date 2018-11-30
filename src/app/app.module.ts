@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from './components/file-input/file-input.component';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 defineLocale('fr', frLocale);
 
@@ -17,7 +18,7 @@ defineLocale('fr', frLocale);
     AppComponent,
     HeaderComponent,
     SignalementFormComponent,
-    FileInputComponent
+    FileInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +26,7 @@ defineLocale('fr', frLocale);
     ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
+    Ng2CompleterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
