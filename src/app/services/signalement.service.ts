@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ServiceUtils } from './service.utils';
+import { Api, ServiceUtils } from './service.utils';
 import { Signalement } from '../model/Signalement';
 import * as moment from 'moment';
 
@@ -16,7 +16,7 @@ export class SignalementService {
   createSignalement(signalement: Signalement) {
 
     return this.http.post(
-      this.serviceUtils.getUrl(['api', 'signalement']),
+      this.serviceUtils.getUrl(Api.Signalement, ['api', 'signalement']),
       this.generateSignalementFormData(signalement)
     );
   }

@@ -54,7 +54,7 @@ describe('SignalementService', () => {
         }
       );
 
-      const signalementRequest = httpMock.expectOne(`${environment.apiBaseUrl}/api/signalement`);
+      const signalementRequest = httpMock.expectOne(`${environment.apiSignalementBaseUrl}/api/signalement`);
       signalementRequest.flush({});
 
       httpMock.verify();

@@ -11,10 +11,6 @@
   color: #dc3545;
 }
 
-label span {
-  color:#e00917;
-}
-
 .panel {
   background: #fff;
   border-radius: 2px;
@@ -79,4 +75,10 @@ input[type="checkbox"] + .label-inline {
   display: block;
   position: relative;
   margin-left: 30px;
+}
+
+.company {
+  padding-bottom: 1em;
+  font-style: italic;
+  text-align: center;
 }

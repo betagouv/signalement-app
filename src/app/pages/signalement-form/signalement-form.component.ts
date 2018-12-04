@@ -5,6 +5,7 @@ import { AnomalieService } from '../../services/anomalie.service';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { BsLocaleService } from 'ngx-bootstrap';
+import { Company } from '../../model/Company';
 
 @Component({
   selector: 'app-signalement-form',
@@ -17,8 +18,6 @@ export class SignalementFormComponent implements OnInit {
   typeEtablissementCtrl: FormControl;
   categoryAnomalieCtrl: FormControl;
   precisionAnomalieCtrl: FormControl;
-  nomEtablissementCtrl: FormControl;
-  adresseEtablissementCtrl: FormControl;
   dateConstatCtrl: FormControl;
   heureConstatCtrl: FormControl;
   descriptionCtrl: FormControl;
@@ -39,6 +38,8 @@ export class SignalementFormComponent implements OnInit {
   showSuccess: boolean;
   isLoading: boolean;
 
+  company: Company;
+
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService,
               private signalementService: SignalementService,
@@ -58,8 +59,6 @@ export class SignalementFormComponent implements OnInit {
     this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.categoryAnomalieCtrl = this.formBuilder.control('', Validators.required);
     this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
-    this.nomEtablissementCtrl = this.formBuilder.control('', Validators.required);
-    this.adresseEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.dateConstatCtrl = this.formBuilder.control('', Validators.required);
     this.heureConstatCtrl = this.formBuilder.control('');
     this.descriptionCtrl = this.formBuilder.control('');
@@ -70,8 +69,6 @@ export class SignalementFormComponent implements OnInit {
 
     this.signalementForm = this.formBuilder.group({
       typeEtablissement: this.typeEtablissementCtrl,
-      nomEtablissement: this.nomEtablissementCtrl,
-      adresseEtablissement: this.adresseEtablissementCtrl,
       dateConstat: this.dateConstatCtrl,
       heureConstat: this.heureConstatCtrl,
       description: this.descriptionCtrl,
@@ -179,6 +176,14 @@ export class SignalementFormComponent implements OnInit {
 
   isIntoxicationAlimentaire() {
     return this.categoryAnomalieCtrl.value === IntoxicationAlimentaire;
+  }
+
+  onCompanySelected(company: Company) {
+    this.company = company;
+  }
+
+  changeCompany() {
+    this.company = null;
   }
 }
 

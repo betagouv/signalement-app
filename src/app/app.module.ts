@@ -10,6 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from './components/file-input/file-input.component';
 import { Ng2CompleterModule } from 'ng2-completer';
+import { CompanyFormComponent } from './pages/company-form/company-form.component';
 
 defineLocale('fr', frLocale);
 
@@ -19,6 +20,7 @@ defineLocale('fr', frLocale);
     HeaderComponent,
     SignalementFormComponent,
     FileInputComponent,
+    CompanyFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,8 +7,8 @@ import { environment } from '../../environments/environment';
 export class ServiceUtils {
 
 
-  getUrl(urlParams) {
-    return urlParams.reduce((acc, param) => `${acc}/${param}`, environment.apiBaseUrl);
+  getUrl(api: Api, urlParams: string[]) {
+    return urlParams.reduce((acc, param) => `${acc}/${param}`, environment[api]);
   }
 
   getHttpHeaders() {
@@ -20,4 +20,11 @@ export class ServiceUtils {
     };
   }
 
+}
+
+
+export enum Api {
+  Signalement = 'apiSignalementBaseUrl',
+  Entreprise = 'apiEntrepriseBaseUrl',
+  Adresse = 'apiAdresseBaseUrl'
 }

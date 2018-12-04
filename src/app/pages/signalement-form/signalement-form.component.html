@@ -63,27 +63,28 @@
         </div>
 
         <div class="panel">
-          <div class="form-group">
-            <label>
-              Nom de l'établissement <span>*</span>
-            </label>
-            <input type="text" formControlName="nomEtablissement" class="form-control">
-            <div class="invalid" *ngIf="showErrors && nomEtablissementCtrl.hasError('required')">
-              Veuillez compléter le champ "Nom de l'établissement".
+
+          <div *ngIf="company; else searchCompany">
+            Etablissement :
+            <div class="company">
+              <span *ngIf="company.line1">{{company.line1}}<br /></span>
+              <span *ngIf="company.line2">{{company.line2}}<br /></span>
+              <span *ngIf="company.line3">{{company.line3}}<br /></span>
+              <span *ngIf="company.line4">{{company.line4}}<br /></span>
+              <span *ngIf="company.line5">{{company.line5}}<br /></span>
+              <span *ngIf="company.line6">{{company.line6}}<br /></span>
+              <span *ngIf="company.line7">{{company.line7}}<br /></span>
+            </div>
+            <div class="text-center">
+              <button (click)="changeCompany()" class="btn btn-secondary" >Modifier</button>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>
-              Adresse de l'établissement <span>*</span>
-            </label>
-            <input type="text" formControlName="adresseEtablissement" class="form-control">
-            <div class="invalid" *ngIf="showErrors && adresseEtablissementCtrl.hasError('required')">
-              Veuillez compléter le champ "Adresse de l'établissement".
-            </div>
-          </div>
+          <ng-template #searchCompany>
+            <app-company-form (companySelected)="onCompanySelected($event)"></app-company-form>
+          </ng-template>
+
         </div>
-
 
         <div class="panel">
 
