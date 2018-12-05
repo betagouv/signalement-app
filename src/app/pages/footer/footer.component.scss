@@ -1,0 +1,58 @@
+@import "../../../theme/variables";
+@import "../../../theme/media-queries";
+
+.footer {
+  background: $almost-black;
+  color: $white;
+  padding: 2em 0;
+}
+
+.footer .container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer__social {
+  margin-top: 1em;
+}
+
+.footer__social li {
+  display: inline;
+  margin-right: 1em;
+}
+
+.footer__social .icon {
+  width: 35px;
+  height: 35px;
+  fill: $white;
+}
+
+.footer__links {
+  margin: 0;
+  margin-top: 1em;
+  line-height: 2em;
+}
+
+.footer__links h2 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.footer__links a {
+  color: $white;
+  text-decoration: none;
+}
+
+.footer__logo {
+  height: auto;
+}
+
+.footer__logo img {
+  max-height: 60px;
+}

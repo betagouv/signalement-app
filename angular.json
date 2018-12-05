@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/theme/bootstrap-custom.scss",
+              "src/theme/main.scss",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
             "scripts": [

@@ -11,6 +11,9 @@ import { defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from './components/file-input/file-input.component';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { CompanyFormComponent } from './pages/company-form/company-form.component';
+import { FooterComponent } from './pages/footer/footer.component';
+import { WhyComponent } from './pages/infos/why/why.component';
+import { RouterModule } from '@angular/router';
 
 defineLocale('fr', frLocale);
 
@@ -21,6 +24,8 @@ defineLocale('fr', frLocale);
     SignalementFormComponent,
     FileInputComponent,
     CompanyFormComponent,
+    FooterComponent,
+    WhyComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +34,10 @@ defineLocale('fr', frLocale);
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     Ng2CompleterModule,
+    RouterModule.forRoot([
+        { path: '', component: SignalementFormComponent },
+        { path: 'infos/why', component: WhyComponent },
+      ]),
   ],
   providers: [],
   bootstrap: [AppComponent]

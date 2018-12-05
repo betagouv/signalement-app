@@ -212,6 +212,10 @@ export class SignalementFormComponent implements OnInit {
     }
     return address.substring(0, address.length - 3);
   }
+
+  newReport() {
+    this.ngOnInit();
+  }
 }
 
 export const IntoxicationAlimentaire = 'Intoxication alimentaire';

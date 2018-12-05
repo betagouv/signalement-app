@@ -1,41 +1,41 @@
 <form [formGroup]="companyForm" (submit)="submitCompanyForm()">
-  <div class="form-group">
+  <div class="form__group">
     <label>
       Nom de l'établissement <span>*</span>
     </label>
-    <input formControlName="name" type="text" class="form-control">
+    <input formControlName="name" type="text">
     <div class="invalid" *ngIf="showErrors && nameCtrl.hasError('required')">
       Veuillez compléter le nom de l'établissement.
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form__group">
     <label>
       Ville de l'établissement <span>*</span>
     </label>
-    <input formControlName="city" type="text" class="form-control">
+    <input formControlName="city" type="text">
     <div class="invalid" *ngIf="showErrors && cityCtrl.hasError('required')">
       Veuillez compléter la ville de l'établissement.
     </div>
   </div>
 
-  <div class="text-center" *ngIf="searchEnabled">
-    <button class="btn btn-secondary" type="submit">Rechercher</button>
+  <div class="text-center mt-3" *ngIf="searchEnabled">
+    <button class="button secondary" type="submit">Rechercher</button>
   </div>
 
   <ng-container *ngIf="companyForm.controls['address']">
-    <div class="form-group">
+    <div class="form__group">
       <label>
         Veuillez préciser le numéro et la rue de l'établissement <span>*</span> ou <span (click)="modifySearch()" class="link">modifier votre recherche</span>
       </label>
-      <input formControlName="address" type="text" class="form-control">
+      <input formControlName="address" type="text">
       <div class="invalid" *ngIf="showErrors && addressCtrl.hasError('required')">
         Veuillez préciser le numéro et la rue de l'établissement.
       </div>
     </div>
 
-    <div class="text-center">
-      <button class="btn btn-secondary" type="submit">Valider</button>
+    <div class="text-center mt-3">
+      <button class="button secondary" type="submit">Valider</button>
     </div>
   </ng-container>
 

@@ -1,5 +1,9 @@
 @import "../../../theme/variables";
 
+form {
+  max-width: 100%;
+}
+
 .company {
   border: 1px solid #c9d3df;
   padding-left: 0.5em;
