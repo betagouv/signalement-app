@@ -13,6 +13,7 @@ import { ServiceUtils } from '../../services/service.utils';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../components/file-input/file-input.component';
 import { CompanyFormComponent } from '../company-form/company-form.component';
+import { Company } from '../../model/Company';
 
 describe('SignalementFormComponent', () => {
 
@@ -289,6 +290,8 @@ describe('SignalementFormComponent', () => {
       const dateConstat = new Date();
       const anomalieFile = new File([], 'anomalie.jpg');
       component.typeEtablissementCtrl.setValue('typeEtablissement');
+      component.categoryAnomalieCtrl.setValue('categorie');
+      component.precisionAnomalieCtrl.setValue('precision');
       component.dateConstatCtrl.setValue(dateConstat);
       component.heureConstatCtrl.setValue(5);
       component.nomCtrl.setValue('nom');
@@ -296,12 +299,27 @@ describe('SignalementFormComponent', () => {
       component.emailCtrl.setValue('email@mail.fr');
       component.accordContactCtrl.setValue(true);
       component.anomalieFile = anomalieFile;
+      component.companyCtrl.setValue(Object.assign(
+        new Company(),
+        {
+          name: 'Mon établissement',
+          line1: 'adresse 1',
+          line3: 'adresse 3',
+          line4: 'adresse 4',
+          siret: '123245678900015'
+        }
+      ));
 
       spyOn(signalementService, 'createSignalement').and.returnValue(of());
 
       component.createSignalement();
       const signalement = new Signalement();
       signalement.typeEtablissement = 'typeEtablissement';
+      signalement.categorieAnomalie = 'categorie';
+      signalement.precisionAnomalie = 'precision';
+      signalement.nomEtablissement = 'Mon établissement';
+      signalement.adresseEtablissement = 'adresse 1 - adresse 3 - adresse 4';
+      signalement.siretEtablissement = '123245678900015';
       signalement.description = '';
       signalement.dateConstat = dateConstat;
       signalement.heureConstat = 5;
@@ -316,6 +334,7 @@ describe('SignalementFormComponent', () => {
 
     it('should display a success message when signalement creation succeed', (done) => {
       component.typeEtablissementCtrl.setValue('typeEtablissement');
+      component.companyCtrl.setValue(new Company());
       component.dateConstatCtrl.setValue(new Date());
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
@@ -343,7 +362,7 @@ describe('SignalementFormComponent', () => {
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('button[type="submit"]').textContent.trim()).toBe('Suivant');
+      expect(nativeElement.querySelector('button[type="submit"].btn-primary').textContent.trim()).toBe('Suivant');
 
     });
 

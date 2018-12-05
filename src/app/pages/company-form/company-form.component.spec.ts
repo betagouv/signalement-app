@@ -52,9 +52,11 @@ describe('CompanyFormComponent', () => {
   describe('search a company by name and city', () => {
 
     beforeEach(() => {
-      const nativeElement = fixture.nativeElement;
+      component.nameCtrl.setValue('Mon entreprise');
+      component.cityCtrl.setValue('Ma ville');
+      /*const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('input[formcontrolname="name"]').textContent = 'Mon entreprise';
-      nativeElement.querySelector('input[formcontrolname="city"]').textContent = 'Ma ville';
+      nativeElement.querySelector('input[formcontrolname="city"]').textContent = 'Ma ville';*/
     });
 
     it('should initialize previous results', () => {
@@ -67,14 +69,14 @@ describe('CompanyFormComponent', () => {
       spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('form button').click();
+      nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
       expect(component.total).toBe(0);
       expect(component.companies).toEqual([]);
     });
 
-    it ('should emit and event with the company details when only one has been found', (done) => {
+    it ('should emit and event with the company details when only one result has been found', (done) => {
 
       const companySearchResult = deserialize(CompanySearchResult, {
         'total_results': 1,
@@ -98,12 +100,12 @@ describe('CompanyFormComponent', () => {
       });
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('form button').click();
+      nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
     });
 
-    it ('should display the company list when many has been found', () => {
+    it ('should display the company list and disable the search when many results have been found', () => {
 
       const companySearchResult = deserialize(CompanySearchResult, {
         'total_results': 2,
@@ -134,10 +136,13 @@ describe('CompanyFormComponent', () => {
       spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('form button').click();
+      nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
       expect(component.companies).toEqual(companySearchResult.companies);
+      expect(nativeElement.querySelector('button[type="submit"]')).toBeNull();
+      expect(nativeElement.querySelector('input[formcontrolname="name"]').getAttribute('disabled')).not.toBeNull();
+      expect(nativeElement.querySelector('input[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
     });
 
     it ('display an alert message when there are too many results', () => {
@@ -149,14 +154,14 @@ describe('CompanyFormComponent', () => {
       spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('form button').click();
+      nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);
       expect(nativeElement.querySelector('.alert')).not.toBeNull();
     });
 
-    it ('display an address input when there are no result', () => {
+    it ('display an address input and disable the search when there are no result', () => {
 
       const companySearchResult = deserialize(CompanySearchResult, {
         'total_results': 0,
@@ -165,11 +170,39 @@ describe('CompanyFormComponent', () => {
       spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('form button').click();
+      nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);
       expect(component.companyForm.controls['address']).toBeDefined();
+      expect(nativeElement.querySelector('button[type="submit"]').textContent).toBe('Valider');
+      expect(nativeElement.querySelector('input[formcontrolname="name"]').getAttribute('disabled')).not.toBeNull();
+      expect(nativeElement.querySelector('input[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
+    });
+
+    it ('should emit and event with a company which contains the form inputs', (done) => {
+
+      component.companyForm.addControl('address', component.addressCtrl);
+      component.addressCtrl.setValue('Mon adresse');
+
+      const companyExpected = Object.assign(
+        new Company(),
+        {
+          name: 'Mon entreprise',
+          line1: 'Mon entreprise',
+          line2: 'Mon adresse',
+          line3: 'Ma ville'
+        }
+      );
+      component.companySelected.subscribe(company => {
+        expect(company).toEqual(companyExpected);
+        done();
+      });
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+
     });
 
   });

@@ -25,6 +25,7 @@ export class SignalementFormComponent implements OnInit {
   nomCtrl: FormControl;
   emailCtrl: FormControl;
   accordContactCtrl: FormControl;
+  companyCtrl: FormControl;
 
   ticketFile: File;
   anomalieFile: File;
@@ -38,7 +39,6 @@ export class SignalementFormComponent implements OnInit {
   showSuccess: boolean;
   isLoading: boolean;
 
-  company: Company;
 
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService,
@@ -66,6 +66,7 @@ export class SignalementFormComponent implements OnInit {
     this.nomCtrl = this.formBuilder.control('', Validators.required);
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
     this.accordContactCtrl = this.formBuilder.control(false);
+    this.companyCtrl = this.formBuilder.control('', Validators.required);
 
     this.signalementForm = this.formBuilder.group({
       typeEtablissement: this.typeEtablissementCtrl,
@@ -76,6 +77,7 @@ export class SignalementFormComponent implements OnInit {
       nom: this.nomCtrl,
       email: this.emailCtrl,
       accordContact: this.accordContactCtrl,
+      company: this.companyCtrl
     });
   }
 
@@ -144,10 +146,22 @@ export class SignalementFormComponent implements OnInit {
         Object.assign(
           new Signalement(),
           {
-            'ticketFile': this.ticketFile,
-            'anomalieFile': this.anomalieFile
-          },
-          this.signalementForm.value
+            typeEtablissement: this.typeEtablissementCtrl.value,
+            categorieAnomalie: this.categoryAnomalieCtrl.value,
+            precisionAnomalie: this.precisionAnomalieCtrl.value,
+            dateConstat: this.dateConstatCtrl.value,
+            heureConstat: this.heureConstatCtrl.value,
+            description: this.descriptionCtrl.value,
+            prenom: this.prenomCtrl.value,
+            nom: this.nomCtrl.value,
+            email: this.emailCtrl.value,
+            accordContact: this.accordContactCtrl.value,
+            ticketFile: this.ticketFile,
+            anomalieFile: this.anomalieFile,
+            nomEtablissement: this.companyCtrl.value.name,
+            adresseEtablissement: this.getCompanyAddress(),
+            siretEtablissement: this.companyCtrl.value.siret ? this.companyCtrl.value.siret : ''
+          }
         )
       ).subscribe(
         result => {
@@ -179,11 +193,24 @@ export class SignalementFormComponent implements OnInit {
   }
 
   onCompanySelected(company: Company) {
-    this.company = company;
+    this.companyCtrl.setValue(company);
   }
 
   changeCompany() {
-    this.company = null;
+    this.companyCtrl.reset();
+  }
+
+  getCompanyAddress() {
+    let address = '';
+    const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
+    if (this.companyCtrl.value) {
+      for (const attribute of addressAttibutes) {
+        if (this.companyCtrl.value[attribute]) {
+          address = address.concat(`${this.companyCtrl.value[attribute]} - `);
+        }
+      }
+    }
+    return address.substring(0, address.length - 3);
   }
 }
 

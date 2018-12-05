@@ -48,6 +48,8 @@ describe('CompanyService', () => {
         'l7_normalisee': 'FRANCE',
         'enseigne': null,
         'nom_raison_sociale': 'CASINO CARBURANTS',
+        'siren': '428267942',
+        'siret': '42826794201192'
       }));
       done();
     });

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Company } from '../../model/Company';
+import { Company, CompanySearchResult } from '../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -17,6 +17,9 @@ export class CompanyFormComponent implements OnInit {
 
   companies: Company[];
   total: number;
+  searchEnabled: boolean;
+  tooManyResult: boolean;
+  showErrors: boolean;
 
   @Output() companySelected = new EventEmitter<Company>();
 
@@ -35,12 +38,27 @@ export class CompanyFormComponent implements OnInit {
       city: this.cityCtrl
     });
 
+    this.showErrors = false;
+    this.searchEnabled = true;
+    this.tooManyResult = false;
+
     this.initSearch();
   }
 
   initSearch() {
     this.companies = [];
     this.total = 0;
+    this.tooManyResult = false;
+  }
+
+  submitCompanyForm() {
+    if (!this.companyForm.valid) {
+      this.showErrors = true;
+    } else if (this.companyForm.contains('address')) {
+      this.saveCompanyFromSearchForm();
+    } else {
+      this.searchCompany();
+    }
   }
 
   searchCompany() {
@@ -49,21 +67,65 @@ export class CompanyFormComponent implements OnInit {
       companySearchResult => {
         this.total = companySearchResult.total;
         if (this.total === 0) {
-          this.companyForm.addControl('address', this.addressCtrl);
+          this.treatCaseNoResult();
         } else if (this.total === 1) {
-          this.selectCompany(companySearchResult.companies[0]);
-        } else if (!this.hasTooManyResults()) {
-          this.companies = companySearchResult.companies;
+          this.treatCaseOneResult(companySearchResult);
+        } else if (this.total > MaxCompanyResult) {
+          this.treatCaseTooManyResults();
+        } else {
+          this.treatCaseManyResults(companySearchResult);
         }
       }
     );
   }
 
-  hasTooManyResults() {
-    return this.total > MaxCompanyResult;
+  treatCaseNoResult() {
+    this.searchEnabled = false;
+    this.showErrors = false;
+    this.companyForm.controls['name'].disable();
+    this.companyForm.controls['city'].disable();
+    this.companyForm.addControl('address', this.addressCtrl);
+  }
+
+  treatCaseOneResult(companySearchResult: CompanySearchResult) {
+    this.searchEnabled = false;
+    this.selectCompany(companySearchResult.companies[0]);
+  }
+
+  treatCaseTooManyResults() {
+    this.tooManyResult = true;
+  }
+
+  treatCaseManyResults(companySearchResult) {
+    this.searchEnabled = false;
+    this.companyForm.controls['name'].disable();
+    this.companyForm.controls['city'].disable();
+    this.companies = companySearchResult.companies;
   }
 
   selectCompany(company: Company) {
     this.companySelected.emit(company);
+  }
+
+  modifySearch() {
+    this.companies = [];
+    this.companyForm.removeControl('address');
+    this.companyForm.controls['name'].enable();
+    this.companyForm.controls['city'].enable();
+    this.searchEnabled = true;
+  }
+
+  saveCompanyFromSearchForm() {
+    this.selectCompany(
+      Object.assign(
+        new Company(),
+        {
+          name: this.nameCtrl.value,
+          line1: this.nameCtrl.value,
+          line2: this.addressCtrl.value,
+          line3: this.cityCtrl.value
+        }
+      )
+    );
   }
 }

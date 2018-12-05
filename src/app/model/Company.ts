@@ -20,6 +20,10 @@ export class Company {
   line6: string;
   @JsonProperty('l7_normalisee')
   line7: string;
+  @JsonProperty('siret')
+  siret: string;
+  @JsonProperty('siren')
+  siren: string;
 
   constructor() {
     this.name = undefined;
@@ -31,6 +35,8 @@ export class Company {
     this.line5 = undefined;
     this.line6 = undefined;
     this.line7 = undefined;
+    this.siret = undefined;
+    this.siren = undefined;
   }
 }
 

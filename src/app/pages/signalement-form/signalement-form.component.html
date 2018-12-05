@@ -64,16 +64,16 @@
 
         <div class="panel">
 
-          <div *ngIf="company; else searchCompany">
+          <div *ngIf="companyCtrl.value; else searchCompany">
             Etablissement :
             <div class="company">
-              <span *ngIf="company.line1">{{company.line1}}<br /></span>
-              <span *ngIf="company.line2">{{company.line2}}<br /></span>
-              <span *ngIf="company.line3">{{company.line3}}<br /></span>
-              <span *ngIf="company.line4">{{company.line4}}<br /></span>
-              <span *ngIf="company.line5">{{company.line5}}<br /></span>
-              <span *ngIf="company.line6">{{company.line6}}<br /></span>
-              <span *ngIf="company.line7">{{company.line7}}<br /></span>
+              <span *ngIf="companyCtrl.value.line1">{{companyCtrl.value.line1}}<br /></span>
+              <span *ngIf="companyCtrl.value.line2">{{companyCtrl.value.line2}}<br /></span>
+              <span *ngIf="companyCtrl.value.line3">{{companyCtrl.value.line3}}<br /></span>
+              <span *ngIf="companyCtrl.value.line4">{{companyCtrl.value.line4}}<br /></span>
+              <span *ngIf="companyCtrl.value.line5">{{companyCtrl.value.line5}}<br /></span>
+              <span *ngIf="companyCtrl.value.line6">{{companyCtrl.value.line6}}<br /></span>
+              <span *ngIf="companyCtrl.value.line7">{{companyCtrl.value.line7}}<br /></span>
             </div>
             <div class="text-center">
               <button (click)="changeCompany()" class="btn btn-secondary" >Modifier</button>
@@ -83,6 +83,10 @@
           <ng-template #searchCompany>
             <app-company-form (companySelected)="onCompanySelected($event)"></app-company-form>
           </ng-template>
+
+          <div class="invalid" *ngIf="showErrors && companyCtrl.hasError('required')">
+            Veuillez identifier l'établissement.
+          </div>
 
         </div>
 

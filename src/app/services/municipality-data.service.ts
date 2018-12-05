@@ -16,7 +16,7 @@ export class MunicipalityDataService extends RemoteData {
 
   public convertToItem(data: any): CompleterItem | null {
     return {
-      title: data ? `${data.properties.city} (${data.properties.postcode})` : '',
+      title: data ? `${data.properties.city} (${data.properties.city})` : '',
     } as CompleterItem;
   }
 }
