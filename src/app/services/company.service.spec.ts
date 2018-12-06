@@ -54,7 +54,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const entrepriseRequest = httpMock.expectOne(`${environment.apiEntrepriseBaseUrl}/full_text/nom ville?per_page=${MaxCompanyResult}`);
+    const entrepriseRequest = httpMock.expectOne(`${environment.apiSignalementBaseUrl}/api/companies/nom/ville/${MaxCompanyResult}`);
     entrepriseRequest.flush(result);
 
   });
@@ -69,7 +69,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const entrepriseRequest = httpMock.expectOne(`${environment.apiEntrepriseBaseUrl}/full_text/nom ville?per_page=${MaxCompanyResult}`);
+    const entrepriseRequest = httpMock.expectOne(`${environment.apiSignalementBaseUrl}/api/companies/nom/ville/${MaxCompanyResult}`);
     entrepriseRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
   });
 
