@@ -1,13 +1,19 @@
 <div class="banner" role="banner">
   <div class="banner_container">
-    <h1 class="text-center">
-      Plateforme citoyenne pour les consommateurs
+    <h2 class="text-center">
+      Absence de prix, produits périmés, garantie non respectée...
       <br />
-      Expérimentation Centre Val de Loire
-    </h1>
-    <h2>
-      En 30 secondes, alerter le professionnel et la répression des fraudes
+      <br class="d-sm-none" />
+      Contribuez à améliorer le droit des consommateurs par vos signalements&#160;!
     </h2>
+    <h3>
+      Expérimentation Centre Val de Loire
+    </h3>
+    <div class="text-center">
+      <a href="#signalementForm" class="button large">
+        <img src="/assets/images/icon_play.png" /> Je signale en 30 secondes
+      </a>
+    </div>
   </div>
 </div>
 
@@ -15,19 +21,12 @@
 
   <section class="section section-white">
     <div class="container">
-      <h2 class="text-center mb-5">
-        <p>
-          Absence de prix, produits périmés, garantie non respectée...
-        </p>
-        <p>
-          Contribuez à améliorer le droit des consommateurs par vos signalements&#160;!
-        </p>
-      </h2>
       <div class="row">
         <div class="col-12 mb-3 col-sm-4">
           <div class="icon">
             <img src="/assets/images/icon_store.png" />
           </div>
+          <p class="text-center"><b>Simple et rapide</b></p>
           <p>
             Cette plateforme permet aux consommateurs de signaler facilement et rapidement les anomalies
             qu'ils rencontrent dans leur vie de tous les jours.
@@ -37,6 +36,7 @@
           <div class="icon">
             <img src="/assets/images/icon_workflow.png" />
           </div>
+          <p class="text-center"><b>Au service des professionnels</b></p>
           <p>
             Les signalements sont centralisés et transmis aux professionnels concernés pour qu'ils puissent
             corriger les problèmes.
@@ -46,6 +46,7 @@
           <div class="icon">
             <img src="/assets/images/icon_alarm.png" />
           </div>
+          <p class="text-center"><b>Collaboratif et citoyen</b></p>
           <p>
             Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ?
             Les enquêteurs de la répression des fraudes seront avertis.
@@ -74,8 +75,8 @@
 
   <section class="section section-grey" id="declarer">
     <div class="container">
-      <form [formGroup]="signalementForm" (submit)="createSignalement()" *ngIf="!showSuccess">
-        <h1 class="text-center">Signaler</h1>
+      <form [formGroup]="signalementForm" (submit)="createSignalement()" *ngIf="!showSuccess" id="signalementForm">
+        <h1 class="text-center">Signaler une anomalie</h1>
         <div class="panel">
           <div class="form__group">
             <label>

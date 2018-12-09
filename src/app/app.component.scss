@@ -57,7 +57,20 @@
     }
 
     h2 {
+      color: #26353f;
+      background-color: white;
+      padding: 0.5em;
+    }
+
+    h3 {
+      font-weight: bold;
       color: white;
+      font-style: italic;
+      padding-bottom: 1em;
+    }
+
+    .button:hover {
+      text-decoration: none;
     }
   }
 
