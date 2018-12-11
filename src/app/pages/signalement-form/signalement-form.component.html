@@ -76,7 +76,7 @@
   <section class="section section-gray" id="declarer">
     <div class="container">
       <form [formGroup]="signalementForm" (submit)="createSignalement()" *ngIf="!showSuccess" id="signalementForm">
-        <h1 class="text-center">Signaler une anomalie</h1>
+        <h1 class="text-center">Signalez une anomalie</h1>
         <div class="panel">
           <div class="form__group">
             <label>
@@ -132,9 +132,9 @@
               <span *ngIf="companyCtrl.value.line5">{{companyCtrl.value.line5}}<br /></span>
               <span *ngIf="companyCtrl.value.line6">{{companyCtrl.value.line6}}<br /></span>
               <span *ngIf="companyCtrl.value.line7">{{companyCtrl.value.line7}}<br /></span>
-            </div>
-            <div class="text-center">
-              <button (click)="changeCompany()" class="btn btn-secondary" >Modifier</button>
+              <div class="text-center text-sm-right">
+                <span (click)="changeCompany()" class="link">Changer d'établissement</span>
+              </div>
             </div>
           </div>
 

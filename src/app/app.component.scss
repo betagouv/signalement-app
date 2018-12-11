@@ -24,6 +24,12 @@
     background-color: $gray;
   }
 
+  .link {
+    color: $primary;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   .banner {
     background: url(/assets/images/banner_gray.png) no-repeat top center fixed;
     -webkit-background-size: cover;
