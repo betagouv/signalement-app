@@ -1,0 +1,60 @@
+<form [formGroup]="companyForm" (submit)="submitCompanyForm()">
+  <div class="form__group">
+    <label>
+      Nom de l'établissement <span>*</span>
+    </label>
+    <input formControlName="name" type="text">
+    <div class="invalid" *ngIf="showErrors && nameCtrl.hasError('required')">
+      Veuillez compléter le nom de l'établissement.
+    </div>
+  </div>
+
+  <div class="form__group">
+    <label>
+      Ville de l'établissement <span>*</span>
+    </label>
+    <input formControlName="city" type="text">
+    <div class="invalid" *ngIf="showErrors && cityCtrl.hasError('required')">
+      Veuillez compléter la ville de l'établissement.
+    </div>
+  </div>
+
+  <div class="text-center mt-3" *ngIf="searchEnabled">
+    <button class="button secondary" type="submit">Rechercher</button>
+  </div>
+
+  <ng-container *ngIf="companyForm.controls['address']">
+    <div class="form__group">
+      <label>
+        Veuillez préciser le numéro et la rue de l'établissement <span>*</span> ou <span (click)="modifySearch()" class="link">modifier votre recherche</span>
+      </label>
+      <input formControlName="address" type="text">
+      <div class="invalid" *ngIf="showErrors && addressCtrl.hasError('required')">
+        Veuillez préciser le numéro et la rue de l'établissement.
+      </div>
+    </div>
+
+    <div class="text-center mt-3">
+      <button class="button secondary" type="submit">Valider</button>
+    </div>
+  </ng-container>
+
+</form>
+
+<div *ngIf="companies && companies.length" class="pt-3">
+  <p>Veuillez sélectionner un établissement dans la liste ci-dessous ou <span (click)="modifySearch()" class="link">modifier votre recherche</span></p>
+  <p *ngFor="let company of companies" class="company" (click)="selectCompany(company)">
+    <span *ngIf="company.line1">{{company.line1}}<br /></span>
+    <span *ngIf="company.line2">{{company.line2}}<br /></span>
+    <span *ngIf="company.line3">{{company.line3}}<br /></span>
+    <span *ngIf="company.line4">{{company.line4}}<br /></span>
+    <span *ngIf="company.line5">{{company.line5}}<br /></span>
+    <span *ngIf="company.line6">{{company.line6}}<br /></span>
+    <span *ngIf="company.line7">{{company.line7}}<br /></span>
+  </p>
+</div>
+
+<div *ngIf="tooManyResult" class="alert">
+  Trop de résultat trouvé, veuillez préciser votre recherche.
+</div>
+

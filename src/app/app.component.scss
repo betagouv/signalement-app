@@ -1,2 +1,77 @@
+@import "../theme/variables";
 
+:host ::ng-deep {
 
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .section {
+    padding: 5em 0;
+  }
+
+  .section-white {
+    background-color: #fff;
+  }
+
+  .section-primary {
+    background-color: $primary;
+    color: #fff;
+  }
+
+  .section-gray {
+    background-color: $gray;
+  }
+
+  .banner {
+    background: url(/assets/images/banner_gray.png) no-repeat top center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .banner_container {
+      min-height: 38vh;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 2em;
+    }
+
+    h1 {
+      color: #26353f;
+      background-color: white;
+      margin-bottom: 1em;
+      padding: 10px 1em;
+    }
+
+    h2 {
+      color: #26353f;
+      background-color: white;
+      padding: 0.5em;
+    }
+
+    h3 {
+      font-weight: bold;
+      color: white;
+      font-style: italic;
+      padding-bottom: 1em;
+    }
+
+    .button:hover {
+      text-decoration: none;
+    }
+  }
+
+}

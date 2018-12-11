@@ -5,6 +5,7 @@ import { AnomalieService } from '../../services/anomalie.service';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { BsLocaleService } from 'ngx-bootstrap';
+import { Company } from '../../model/Company';
 
 @Component({
   selector: 'app-signalement-form',
@@ -17,8 +18,6 @@ export class SignalementFormComponent implements OnInit {
   typeEtablissementCtrl: FormControl;
   categoryAnomalieCtrl: FormControl;
   precisionAnomalieCtrl: FormControl;
-  nomEtablissementCtrl: FormControl;
-  adresseEtablissementCtrl: FormControl;
   dateConstatCtrl: FormControl;
   heureConstatCtrl: FormControl;
   descriptionCtrl: FormControl;
@@ -26,6 +25,7 @@ export class SignalementFormComponent implements OnInit {
   nomCtrl: FormControl;
   emailCtrl: FormControl;
   accordContactCtrl: FormControl;
+  companyCtrl: FormControl;
 
   ticketFile: File;
   anomalieFile: File;
@@ -38,6 +38,7 @@ export class SignalementFormComponent implements OnInit {
   showErrors: boolean;
   showSuccess: boolean;
   isLoading: boolean;
+
 
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService,
@@ -58,8 +59,6 @@ export class SignalementFormComponent implements OnInit {
     this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.categoryAnomalieCtrl = this.formBuilder.control('', Validators.required);
     this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
-    this.nomEtablissementCtrl = this.formBuilder.control('', Validators.required);
-    this.adresseEtablissementCtrl = this.formBuilder.control('', Validators.required);
     this.dateConstatCtrl = this.formBuilder.control('', Validators.required);
     this.heureConstatCtrl = this.formBuilder.control('');
     this.descriptionCtrl = this.formBuilder.control('');
@@ -67,11 +66,10 @@ export class SignalementFormComponent implements OnInit {
     this.nomCtrl = this.formBuilder.control('', Validators.required);
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
     this.accordContactCtrl = this.formBuilder.control(false);
+    this.companyCtrl = this.formBuilder.control('', Validators.required);
 
     this.signalementForm = this.formBuilder.group({
       typeEtablissement: this.typeEtablissementCtrl,
-      nomEtablissement: this.nomEtablissementCtrl,
-      adresseEtablissement: this.adresseEtablissementCtrl,
       dateConstat: this.dateConstatCtrl,
       heureConstat: this.heureConstatCtrl,
       description: this.descriptionCtrl,
@@ -79,6 +77,7 @@ export class SignalementFormComponent implements OnInit {
       nom: this.nomCtrl,
       email: this.emailCtrl,
       accordContact: this.accordContactCtrl,
+      company: this.companyCtrl
     });
   }
 
@@ -147,10 +146,22 @@ export class SignalementFormComponent implements OnInit {
         Object.assign(
           new Signalement(),
           {
-            'ticketFile': this.ticketFile,
-            'anomalieFile': this.anomalieFile
-          },
-          this.signalementForm.value
+            typeEtablissement: this.typeEtablissementCtrl.value,
+            categorieAnomalie: this.categoryAnomalieCtrl.value,
+            precisionAnomalie: this.precisionAnomalieCtrl.value,
+            dateConstat: this.dateConstatCtrl.value,
+            heureConstat: this.heureConstatCtrl.value,
+            description: this.descriptionCtrl.value,
+            prenom: this.prenomCtrl.value,
+            nom: this.nomCtrl.value,
+            email: this.emailCtrl.value,
+            accordContact: this.accordContactCtrl.value,
+            ticketFile: this.ticketFile,
+            anomalieFile: this.anomalieFile,
+            nomEtablissement: this.companyCtrl.value.name,
+            adresseEtablissement: this.getCompanyAddress(),
+            siretEtablissement: this.companyCtrl.value.siret ? this.companyCtrl.value.siret : ''
+          }
         )
       ).subscribe(
         result => {
@@ -179,6 +190,31 @@ export class SignalementFormComponent implements OnInit {
 
   isIntoxicationAlimentaire() {
     return this.categoryAnomalieCtrl.value === IntoxicationAlimentaire;
+  }
+
+  onCompanySelected(company: Company) {
+    this.companyCtrl.setValue(company);
+  }
+
+  changeCompany() {
+    this.companyCtrl.reset();
+  }
+
+  getCompanyAddress() {
+    let address = '';
+    const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
+    if (this.companyCtrl.value) {
+      for (const attribute of addressAttibutes) {
+        if (this.companyCtrl.value[attribute]) {
+          address = address.concat(`${this.companyCtrl.value[attribute]} - `);
+        }
+      }
+    }
+    return address.substring(0, address.length - 3);
+  }
+
+  newReport() {
+    this.ngOnInit();
   }
 }
 

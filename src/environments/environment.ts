@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:9000',
+  apiSignalementBaseUrl: 'http://localhost:9000',
+  apiEntrepriseBaseUrl: 'https://entreprise.data.gouv.fr/api/sirene/v1',
 };
 
 /*

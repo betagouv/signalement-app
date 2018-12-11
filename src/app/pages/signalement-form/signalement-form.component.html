@@ -1,28 +1,88 @@
-<div class="container mb-5">
-  <div class="row">
-    <div class="offset-lg-2 col-lg-8 col-sm-12 pb-3" *ngIf="!showSuccess">
-      <p class="mb-2 intro">
-        <span class="font-weight-bold">
-          Vous ne serez pas contacté à la suite de votre signalement.
-          Il ne déclenchera pas à lui seul un contrôle des autorités.
-        </span>
-      </p>
+<div class="banner" role="banner">
+  <div class="banner_container">
+    <h2 class="text-center">
+      Absence de prix, produits périmés, garantie non respectée...
+      <br />
+      <br class="d-sm-none" />
+      Contribuez à améliorer le droit des consommateurs par vos signalements&#160;!
+    </h2>
+    <h3>
+      Expérimentation Centre Val de Loire
+    </h3>
+    <div class="text-center">
+      <a href="#signalementForm" class="button large">
+        <img src="/assets/images/icon_play.png" /> Je signale en 30 secondes
+      </a>
+    </div>
+  </div>
+</div>
 
-      <p class="mb-5 intro">
-        <span class="font-weight-bold">
-          Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé.
-        </span>
-      </p>
+<main role="main">
 
-      <form [formGroup]="signalementForm" (submit)="createSignalement()">
+  <section class="section section-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mb-3 col-sm-4">
+          <div class="icon">
+            <img src="/assets/images/icon_store.png" />
+          </div>
+          <p class="text-center"><b>Simple et rapide</b></p>
+          <p>
+            Cette plateforme permet aux consommateurs de signaler facilement et rapidement les anomalies
+            qu'ils rencontrent dans leur vie de tous les jours.
+          </p>
+        </div>
+        <div class="col-12 mb-3 col-sm-4">
+          <div class="icon">
+            <img src="/assets/images/icon_workflow.png" />
+          </div>
+          <p class="text-center"><b>Au service des professionnels</b></p>
+          <p>
+            Les signalements sont centralisés et transmis aux professionnels concernés pour qu'ils puissent
+            corriger les problèmes.
+          </p>
+        </div>
+        <div class="col-12 col-sm-4">
+          <div class="icon">
+            <img src="/assets/images/icon_alarm.png" />
+          </div>
+          <p class="text-center"><b>Collaboratif et citoyen</b></p>
+          <p>
+            Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ?
+            Les enquêteurs de la répression des fraudes seront avertis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section class="section section-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-1 icon">
+          <img src="/assets/images/icon_caution.png" />
+        </div>
+        <div class="col-12 col-sm-11">
+          <h5>
+            Attention, un signalement ne constitue pas une saisine formelle de la DGCCRF au sens de
+            l’article L. 112-8 du code des relations entre le public et l’administration.
+            Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
+          </h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-gray" id="declarer">
+    <div class="container">
+      <form [formGroup]="signalementForm" (submit)="createSignalement()" *ngIf="!showSuccess" id="signalementForm">
+        <h1 class="text-center">Signaler une anomalie</h1>
         <div class="panel">
-          <div class="form-group">
+          <div class="form__group">
             <label>
               Sélectionnez d'abord le type d'établissement que vous souhaitez signaler <span>*</span>
             </label>
             <select formControlName="typeEtablissement"
-                    class="form-control"
                     (change)="changeTypeEtablissement()">
               <option disabled value="">Choisissez ...</option>
               <option *ngFor="let anomalie of anomalies" value="{{anomalie.typeEtablissement}}">{{anomalie.typeEtablissement}}</option>
@@ -32,12 +92,11 @@
             </div>
           </div>
 
-          <div class="form-group" *ngIf="signalementForm.controls['categorieAnomalie']">
+          <div class="form__group" *ngIf="signalementForm.controls['categorieAnomalie']">
             <label>
               Puis, indiquez le type d'anomalie que vous avez constaté <span>*</span>
             </label>
             <select formControlName="categorieAnomalie"
-                    class="form-control"
                     (change)="changeCategorieAnomalie()">
               <option disabled value="">Choisissez ...</option>
               <option *ngFor="let typeAnomalie of typeAnomalieList" value="{{typeAnomalie.categorie}}">{{typeAnomalie.categorie}}</option>
@@ -47,12 +106,11 @@
             </div>
           </div>
 
-          <div class="form-group" *ngIf="signalementForm.controls['precisionAnomalie']">
+          <div class="form__group" *ngIf="signalementForm.controls['precisionAnomalie']">
             <label>
               Précisez enfin l'anomalie <span>*</span>
             </label>
-            <select formControlName="precisionAnomalie"
-                    class="form-control">
+            <select formControlName="precisionAnomalie">
               <option disabled value="">Choisissez ...</option>
               <option *ngFor="let precisionAnomalie of precisionAnomalieList" value="{{precisionAnomalie}}">{{precisionAnomalie}}</option>
             </select>
@@ -63,75 +121,80 @@
         </div>
 
         <div class="panel">
-          <div class="form-group">
-            <label>
-              Nom de l'établissement <span>*</span>
-            </label>
-            <input type="text" formControlName="nomEtablissement" class="form-control">
-            <div class="invalid" *ngIf="showErrors && nomEtablissementCtrl.hasError('required')">
-              Veuillez compléter le champ "Nom de l'établissement".
+
+          <div *ngIf="companyCtrl.value; else searchCompany">
+            Etablissement
+            <div class="company panel pt-3 mb-3">
+              <span *ngIf="companyCtrl.value.line1">{{companyCtrl.value.line1}}<br /></span>
+              <span *ngIf="companyCtrl.value.line2">{{companyCtrl.value.line2}}<br /></span>
+              <span *ngIf="companyCtrl.value.line3">{{companyCtrl.value.line3}}<br /></span>
+              <span *ngIf="companyCtrl.value.line4">{{companyCtrl.value.line4}}<br /></span>
+              <span *ngIf="companyCtrl.value.line5">{{companyCtrl.value.line5}}<br /></span>
+              <span *ngIf="companyCtrl.value.line6">{{companyCtrl.value.line6}}<br /></span>
+              <span *ngIf="companyCtrl.value.line7">{{companyCtrl.value.line7}}<br /></span>
+            </div>
+            <div class="text-center">
+              <button (click)="changeCompany()" class="btn btn-secondary" >Modifier</button>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>
-              Adresse de l'établissement <span>*</span>
-            </label>
-            <input type="text" formControlName="adresseEtablissement" class="form-control">
-            <div class="invalid" *ngIf="showErrors && adresseEtablissementCtrl.hasError('required')">
-              Veuillez compléter le champ "Adresse de l'établissement".
-            </div>
+          <ng-template #searchCompany>
+            <app-company-form (companySelected)="onCompanySelected($event)"></app-company-form>
+          </ng-template>
+
+          <div class="invalid" *ngIf="showErrors && companyCtrl.hasError('required')">
+            Veuillez identifier l'établissement.
           </div>
+
         </div>
-
 
         <div class="panel">
 
-          <label>
-            Veuillez préciser la date <span>*</span> et la plage horaire du constat
-          </label>
-          <div class="row">
-            <div class="col-12 col-sm-6">
-              <div class="form-group">
+          <div class="form__group">
+            <label>
+              Veuillez préciser la date <span>*</span> et la plage horaire du constat
+            </label>
+            <div class="row">
+              <div class="col-12 col-sm-6">
                 <input type="text"
                        formControlName="dateConstat"
                        placeholder="Date du constat"
-                       class="form-control"
                        bsDatepicker
                        [bsConfig]="{ containerClass: 'theme-default' }">
                 <div class="invalid" *ngIf="showErrors && dateConstatCtrl.hasError('required')">
                   Veuillez compléter le champ "Date du constat".
                 </div>
               </div>
-            </div>
-            <div class="col-12 col-sm-6">
-              <div class="form-group">
-                <select formControlName="heureConstat"
-                        class="form-control">
-                  <option disabled value="">Plage horaire</option>
-                  <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
-                </select>
+              <div class="col-12 col-sm-6">
+                <div class="form__group">
+                  <select formControlName="heureConstat">
+                    <option disabled value="">Plage horaire</option>
+                    <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
 
-          <label>
-            Vous pouvez également ajouter des photos
-          </label>
-          <app-file-input
-            [placeholder]="'Photo du ticket de caisse'"
-            (fileSelected)="onTicketFileSelected($event)">
-          </app-file-input>
-          <app-file-input
-            [placeholder]="'Photo du problème'"
-            (fileSelected)="onAnomalieFileSelected($event)">
-          </app-file-input>
+          <div class="form__group">
+            <label>
+              Vous pouvez également ajouter des photos
+            </label>
+            <app-file-input
+              [placeholder]="'Photo du ticket de caisse'"
+              (fileSelected)="onTicketFileSelected($event)">
+            </app-file-input>
+            <app-file-input
+              [placeholder]="'Photo du problème'"
+              (fileSelected)="onAnomalieFileSelected($event)">
+            </app-file-input>
+          </div>
 
-          <div class="form-group">
+          <div class="form__group">
             <label>
               Vous pouvez préciser votre signalement
             </label>
-            <textarea formControlName="description" class="form-control"
+            <textarea formControlName="description"
                       rows="3"
                       maxlength="200"
                       placeholder="200 caractères maximum">
@@ -147,25 +210,23 @@
             Votre identité ne sera pas indiquée au professionnel et vous ne serez pas sollicité.
           </p>
 
-          <div class="row">
-            <div class="col-12 col-sm-6">
-              <div class="form-group">
+          <div class="form__group">
+            <div class="row">
+              <div class="col-12 col-sm-6">
                 <label>
                   Votre prénom <span>*</span>
                 </label>
-                <input type="text" formControlName="prenom" class="form-control">
+                <input type="text" formControlName="prenom">
                 <div class="invalid" *ngIf="showErrors && prenomCtrl.hasError('required')">
                   Veuillez compléter le champ "Prénom".
                 </div>
               </div>
-            </div>
 
-            <div class="col-12 col-sm-6">
-              <div class="form-group">
+              <div class="col-12 col-sm-6">
                 <label>
                   Votre nom <span>*</span>
                 </label>
-                <input type="text" formControlName="nom" class="form-control">
+                <input type="text" formControlName="nom">
                 <div class="invalid" *ngIf="showErrors && nomCtrl.hasError('required')">
                   Veuillez compléter le champ "Nom".
                 </div>
@@ -173,11 +234,11 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form__group">
             <label>
               Votre email <span>*</span>
             </label>
-            <input type="email" formControlName="email" class="form-control">
+            <input type="email" formControlName="email">
             <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('required')">
               Veuillez compléter le champ "Email".
             </div>
@@ -186,7 +247,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form__group">
             <input formControlName="accordContact" type="checkbox" value="" id="anonymousCheck">
             <label for="anonymousCheck" class="label-inline">
               Je souhaite que mes coordonnées soient transmises au professionnel afin qu'il puisse me contacter.
@@ -212,27 +273,29 @@
 
       </form>
 
-      <p class="font-italic text-right pt-5">
-        <small>Projet en cours d'expérimentation par la DGCCRF & Beta.Gouv</small>
-      </p>
+      <div *ngIf="showSuccess" class="col-sm-12 offset-lg-2 col-lg-8">
+
+        <ng-container *ngIf="isIntoxicationAlimentaire(); else thanks">
+          <p>
+            Les cas d'intoxication alimentaire nécessitent une analyse individualisée
+            (notamment le nombre de personnes malades, symptômes et aliments suspectés )
+            et peuvent déboucher sur un échange avec les enquêteurs.
+            Veuillez remplir le formulaire "Courrier" de la DGCCRF en cliquant sur le lien ci-contre :
+            <a href="https://www.economie.gouv.fr/courrier/4210">https://www.economie.gouv.fr/courrier/4210</a>
+          </p>
+        </ng-container>
+
+        <ng-template #thanks>
+          <h2>Merci pour votre signalement</h2>
+          <p class="mt-4">
+            Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé.
+            <br />
+            Il ne déclenchera pas à lui seul un contrôle des autorités.
+          </p>
+        </ng-template>
+      </div>
+
     </div>
+  </section>
+</main>
 
-    <div *ngIf="showSuccess" class="offset-lg-2 col-lg-8 col-sm-12 pb-3">
-
-      <ng-container *ngIf="isIntoxicationAlimentaire(); else thanks">
-        Les cas d'intoxication alimentaire nécessitent une analyse individualisée
-        (notamment le nombre de personnes malades, symptômes et aliments suspectés )
-        et peuvent déboucher sur un échange avec les enquêteurs.
-        Veuillez remplir le formulaire "Courrier" de la DGCCRF en cliquant sur le lien ci-contre :
-        <a href="https://www.economie.gouv.fr/courrier/4210">https://www.economie.gouv.fr/courrier/4210</a>
-      </ng-container>
-
-      <ng-template #thanks>
-        <h2>Merci pour votre signalement</h2>
-        <p class="mt-4">
-          Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé. Il ne déclenchera pas à lui seul un contrôle des autorités.
-        </p>
-      </ng-template>
-    </div>
-  </div>
-</div>
