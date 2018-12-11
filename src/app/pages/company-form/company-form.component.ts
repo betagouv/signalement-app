@@ -2,6 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Company, CompanySearchResult } from '../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AddressService } from '../../services/address.service';
+import { CompleterItem, RemoteData } from 'ng2-completer';
+import { City } from '../../model/City';
 
 @Component({
   selector: 'app-company-form',
@@ -21,10 +24,16 @@ export class CompanyFormComponent implements OnInit {
   tooManyResult: boolean;
   showErrors: boolean;
 
+  cityData: RemoteData;
+  addressData: RemoteData;
+  citySelected: City;
+  addressSelected: string;
+
   @Output() companySelected = new EventEmitter<Company>();
 
   constructor(private formBuilder: FormBuilder,
-              private companyService: CompanyService) {
+              private companyService: CompanyService,
+              private addressService: AddressService) {
 
   }
 
@@ -41,6 +50,8 @@ export class CompanyFormComponent implements OnInit {
     this.showErrors = false;
     this.searchEnabled = true;
     this.tooManyResult = false;
+
+    this.cityData = this.addressService.getCityData();
 
     this.initSearch();
   }
@@ -63,7 +74,7 @@ export class CompanyFormComponent implements OnInit {
 
   searchCompany() {
     this.initSearch();
-    this.companyService.searchByNameAndPostCode(this.nameCtrl.value, this.cityCtrl.value).subscribe(
+    this.companyService.searchByNameAndCity(this.nameCtrl.value, this.citySelected ? this.citySelected : this.cityCtrl.value).subscribe(
       companySearchResult => {
         this.total = companySearchResult.total;
         if (this.total === 0) {
@@ -85,6 +96,7 @@ export class CompanyFormComponent implements OnInit {
     this.companyForm.controls['name'].disable();
     this.companyForm.controls['city'].disable();
     this.companyForm.addControl('address', this.addressCtrl);
+    this.addressData = this.addressService.getAddressData(this.citySelected ? this.citySelected : this.cityCtrl.value);
   }
 
   treatCaseOneResult(companySearchResult: CompanySearchResult) {
@@ -110,6 +122,7 @@ export class CompanyFormComponent implements OnInit {
   modifySearch() {
     this.companies = [];
     this.companyForm.removeControl('address');
+    this.addressCtrl.reset();
     this.companyForm.controls['name'].enable();
     this.companyForm.controls['city'].enable();
     this.searchEnabled = true;
@@ -122,10 +135,38 @@ export class CompanyFormComponent implements OnInit {
         {
           name: this.nameCtrl.value,
           line1: this.nameCtrl.value,
-          line2: this.addressCtrl.value,
-          line3: this.cityCtrl.value
+          line2: this.addressSelected ? this.addressSelected : this.addressCtrl.value,
+          line3: this.citySelected ? `${this.citySelected.postcode} ${this.citySelected.name}` : this.cityCtrl.value,
+          postcode: this.citySelected ? this.citySelected.postcode : ''
         }
       )
     );
+  }
+
+  selectCity(selected: CompleterItem) {
+    if (selected && selected.originalObject) {
+      this.citySelected = Object.assign(new City(), {
+        name: selected.originalObject.name,
+        postcode: selected.originalObject.postcode
+      });
+    }
+  }
+
+  unselectCity() {
+    this.citySelected = undefined;
+  }
+
+  selectAddress(selected: CompleterItem) {
+    if (selected && selected.originalObject) {
+      this.addressSelected = selected.originalObject.name;
+      this.citySelected = Object.assign(new City(), {
+        name: selected.originalObject.city,
+        postcode: selected.originalObject.postcode
+      });
+    }
+  }
+
+  unselectAddress() {
+    this.addressSelected = undefined;
   }
 }

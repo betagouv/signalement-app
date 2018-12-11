@@ -10,7 +10,6 @@ export class WhyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('WHYYYY');
   }
 
 }

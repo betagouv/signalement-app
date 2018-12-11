@@ -7,12 +7,15 @@ import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2CompleterModule } from 'ng2-completer';
+import { AddressService } from '../../services/address.service';
 
 describe('CompanyFormComponent', () => {
 
   let component: CompanyFormComponent;
   let fixture: ComponentFixture<CompanyFormComponent>;
   let companyService: CompanyService;
+  let addressService: AddressService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -23,19 +26,25 @@ describe('CompanyFormComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        Ng2CompleterModule,
       ],
       providers: [
         CompanyService,
+        AddressService
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
+    companyService = TestBed.get(CompanyService);
+    addressService = TestBed.get(AddressService);
+    spyOn(addressService, 'getCityData').and.returnValue(of([]));
+    spyOn(addressService, 'getAddressData').and.returnValue(of([]));
+
     fixture = TestBed.createComponent(CompanyFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    companyService = TestBed.get(CompanyService);
   });
 
   it('should create', () => {
@@ -54,9 +63,6 @@ describe('CompanyFormComponent', () => {
     beforeEach(() => {
       component.nameCtrl.setValue('Mon entreprise');
       component.cityCtrl.setValue('Ma ville');
-      /*const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('input[formcontrolname="name"]').textContent = 'Mon entreprise';
-      nativeElement.querySelector('input[formcontrolname="city"]').textContent = 'Ma ville';*/
     });
 
     it('should initialize previous results', () => {
@@ -66,7 +72,7 @@ describe('CompanyFormComponent', () => {
         'total_results': 0,
         'etablissement': []
       });
-      spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -92,7 +98,7 @@ describe('CompanyFormComponent', () => {
           'nom_raison_sociale': 'CASINO CARBURANTS'
         }]
       });
-      spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
 
       component.companySelected.subscribe(company => {
         expect(company).toEqual(companySearchResult.companies[0]);
@@ -133,7 +139,7 @@ describe('CompanyFormComponent', () => {
             'nom_raison_sociale': 'DISTRIBUTION CASINO FRANCE',
           }]
       });
-      spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -142,7 +148,7 @@ describe('CompanyFormComponent', () => {
       expect(component.companies).toEqual(companySearchResult.companies);
       expect(nativeElement.querySelector('button[type="submit"]')).toBeNull();
       expect(nativeElement.querySelector('input[formcontrolname="name"]').getAttribute('disabled')).not.toBeNull();
-      expect(nativeElement.querySelector('input[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
+      //expect(nativeElement.querySelector('ng2-completer[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
     });
 
     it ('display an alert message when there are too many results', () => {
@@ -151,7 +157,7 @@ describe('CompanyFormComponent', () => {
         'total_results': MaxCompanyResult + 1,
         'etablissement': []
       });
-      spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -167,7 +173,7 @@ describe('CompanyFormComponent', () => {
         'total_results': 0,
         'etablissement': []
       });
-      spyOn(companyService, 'searchByNameAndPostCode').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -177,12 +183,14 @@ describe('CompanyFormComponent', () => {
       expect(component.companyForm.controls['address']).toBeDefined();
       expect(nativeElement.querySelector('button[type="submit"]').textContent).toBe('Valider');
       expect(nativeElement.querySelector('input[formcontrolname="name"]').getAttribute('disabled')).not.toBeNull();
-      expect(nativeElement.querySelector('input[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
+      //expect(nativeElement.querySelector('input[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
     });
 
-    it ('should emit and event with a company which contains the form inputs', (done) => {
+    it ('should emit and event with a company which contains the form inputs when no city and no address have been selected', (done) => {
 
       component.companyForm.addControl('address', component.addressCtrl);
+      component.nameCtrl.setValue('Mon entreprise');
+      component.cityCtrl.setValue('Ma ville');
       component.addressCtrl.setValue('Mon adresse');
 
       const companyExpected = Object.assign(
@@ -191,7 +199,8 @@ describe('CompanyFormComponent', () => {
           name: 'Mon entreprise',
           line1: 'Mon entreprise',
           line2: 'Mon adresse',
-          line3: 'Ma ville'
+          line3: 'Ma ville',
+          postcode: ''
         }
       );
       component.companySelected.subscribe(company => {
@@ -199,6 +208,78 @@ describe('CompanyFormComponent', () => {
         done();
       });
 
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+
+    });
+
+    it ('should emit and event with a company which contains the selected city and the address form input ' +
+      'when a city has been selected but no address has been selected', (done) => {
+
+      component.companyForm.addControl('address', component.addressCtrl);
+      component.nameCtrl.setValue('Mon entreprise');
+      component.cityCtrl.setValue('Ma ville');
+      component.addressCtrl.setValue('Mon adresse');
+
+      const companyExpected = Object.assign(
+        new Company(),
+        {
+          name: 'Mon entreprise',
+          line1: 'Mon entreprise',
+          line2: 'Mon adresse',
+          line3: 'XXXXX Ma ville',
+          postcode: 'XXXXX'
+        }
+      );
+      component.companySelected.subscribe(company => {
+        expect(company).toEqual(companyExpected);
+        done();
+      });
+
+      component.selectCity({
+        title: '',
+        originalObject: {
+          name: 'Ma ville',
+          postcode: 'XXXXX'
+        }
+      });
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+
+    });
+
+    it ('should emit and event with a company which contains the city and the address of the selected address when exist', (done) => {
+
+      component.companyForm.addControl('address', component.addressCtrl);
+      component.nameCtrl.setValue('Mon entreprise');
+      component.cityCtrl.setValue('Ma ville');
+      component.addressCtrl.setValue('Mon adresse');
+
+      const companyExpected = Object.assign(
+        new Company(),
+        {
+          name: 'Mon entreprise',
+          line1: 'Mon entreprise',
+          line2: 'Mon adresse sélectionnée',
+          line3: 'XXXXX Ma ville',
+          postcode: 'XXXXX'
+        }
+      );
+      component.companySelected.subscribe(company => {
+        expect(company).toEqual(companyExpected);
+        done();
+      });
+
+      component.selectAddress({
+        title: '',
+        originalObject: {
+          name: 'Mon adresse sélectionnée',
+          city: 'Ma ville',
+          postcode: 'XXXXX'
+        }
+      });
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();

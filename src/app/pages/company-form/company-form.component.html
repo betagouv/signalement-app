@@ -13,7 +13,17 @@
     <label>
       Ville de l'établissement <span>*</span>
     </label>
-    <input formControlName="city" type="text">
+    <ng2-completer
+      [datasource]="cityData"
+      formControlName="city"
+      inputName="city"
+      textSearching=""
+      textNoResults=""
+      minSearchLength="1"
+      openOnClick="true"
+      (selected)="selectCity($event)"
+      (change)="unselectCity()">
+    </ng2-completer>
     <div class="invalid" *ngIf="showErrors && cityCtrl.hasError('required')">
       Veuillez compléter la ville de l'établissement.
     </div>
@@ -26,9 +36,18 @@
   <ng-container *ngIf="companyForm.controls['address']">
     <div class="form__group">
       <label>
-        Veuillez préciser le numéro et la rue de l'établissement <span>*</span> ou <span (click)="modifySearch()" class="link">modifier votre recherche</span>
+        Veuillez préciser l'adresse de l'établissement <span>*</span> ou <span (click)="modifySearch()" class="link">modifier votre recherche</span>
       </label>
-      <input formControlName="address" type="text">
+      <ng2-completer
+        [datasource]="addressData"
+        formControlName="address"
+        inputName="address"
+        textSearching=""
+        textNoResults=""
+        minSearchLength="1"
+        (selected)="selectAddress($event)"
+        (change)="unselectAddress()">
+      </ng2-completer>
       <div class="invalid" *ngIf="showErrors && addressCtrl.hasError('required')">
         Veuillez préciser le numéro et la rue de l'établissement.
       </div>

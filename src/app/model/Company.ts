@@ -24,6 +24,7 @@ export class Company {
   siret: string;
   @JsonProperty('siren')
   siren: string;
+  postcode: string;
 
   constructor() {
     this.name = undefined;
