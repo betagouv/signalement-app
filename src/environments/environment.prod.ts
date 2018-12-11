@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: '${API_BASE_URL}',
+  apiSignalementBaseUrl: '${API_BASE_URL}',
+  apiEntrepriseBaseUrl: 'https://adresse.data.gouv.fr',
 };

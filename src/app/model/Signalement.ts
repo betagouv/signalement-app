@@ -1,11 +1,11 @@
 export class Signalement {
 
   typeEtablissement: string;
-  typeAnomalie: string;
   categorieAnomalie: string;
   precisionAnomalie: string;
   nomEtablissement: string;
   adresseEtablissement: string;
+  siretEtablissement: string;
   dateConstat: Date;
   heureConstat: number;
   description: string;

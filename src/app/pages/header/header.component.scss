@@ -1,9 +1,5 @@
-header {
-  background-color: #e6e6ea;
-
-  .logo {
-    width: 120px;
-  }
+.navbar__container {
+  width: 100%;
 
   .ribbon {
     text-align: center;
@@ -22,5 +18,3 @@ header {
     z-index: 100;
   }
 }
-
-
