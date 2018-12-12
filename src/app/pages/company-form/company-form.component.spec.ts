@@ -9,6 +9,7 @@ import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AddressService } from '../../services/address.service';
+import { NgxLoadingModule } from 'ngx-loading';
 
 describe('CompanyFormComponent', () => {
 
@@ -27,6 +28,7 @@ describe('CompanyFormComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         Ng2CompleterModule,
+        NgxLoadingModule,
       ],
       providers: [
         CompanyService,

@@ -14,6 +14,7 @@ import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../components/file-input/file-input.component';
 import { Company } from '../../model/Company';
 import { Component } from '@angular/core';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 describe('SignalementFormComponent', () => {
@@ -63,6 +64,7 @@ describe('SignalementFormComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         BsDatepickerModule.forRoot(),
+        NgxLoadingModule,
       ],
       providers: [
         AnomalieService,
