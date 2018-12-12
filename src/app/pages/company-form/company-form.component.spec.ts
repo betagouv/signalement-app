@@ -72,7 +72,7 @@ describe('CompanyFormComponent', () => {
         'total_results': 0,
         'etablissement': []
       });
-      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -98,7 +98,7 @@ describe('CompanyFormComponent', () => {
           'nom_raison_sociale': 'CASINO CARBURANTS'
         }]
       });
-      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
 
       component.companySelected.subscribe(company => {
         expect(company).toEqual(companySearchResult.companies[0]);
@@ -139,7 +139,7 @@ describe('CompanyFormComponent', () => {
             'nom_raison_sociale': 'DISTRIBUTION CASINO FRANCE',
           }]
       });
-      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -148,23 +148,24 @@ describe('CompanyFormComponent', () => {
       expect(component.companies).toEqual(companySearchResult.companies);
       expect(nativeElement.querySelector('button[type="submit"]')).toBeNull();
       expect(nativeElement.querySelector('input[formcontrolname="name"]').getAttribute('disabled')).not.toBeNull();
-      //expect(nativeElement.querySelector('ng2-completer[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
+      // expect(nativeElement.querySelector('ng2-completer[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
     });
 
-    it ('display an alert message when there are too many results', () => {
+    it ('display an address input and disable the search when there are too many results', () => {
 
       const companySearchResult = deserialize(CompanySearchResult, {
         'total_results': MaxCompanyResult + 1,
         'etablissement': []
       });
-      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);
-      expect(nativeElement.querySelector('.alert')).not.toBeNull();
+      expect(component.companyForm.controls['address']).toBeDefined();
+      expect(nativeElement.querySelector('input[formcontrolname="name"]').getAttribute('disabled')).not.toBeNull();
     });
 
     it ('display an address input and disable the search when there are no result', () => {
@@ -173,7 +174,7 @@ describe('CompanyFormComponent', () => {
         'total_results': 0,
         'etablissement': []
       });
-      spyOn(companyService, 'searchByNameAndCity').and.returnValue(of(companySearchResult));
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -181,13 +182,18 @@ describe('CompanyFormComponent', () => {
 
       expect(component.companies).toEqual([]);
       expect(component.companyForm.controls['address']).toBeDefined();
-      expect(nativeElement.querySelector('button[type="submit"]').textContent).toBe('Valider');
       expect(nativeElement.querySelector('input[formcontrolname="name"]').getAttribute('disabled')).not.toBeNull();
-      //expect(nativeElement.querySelector('input[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
+      // expect(nativeElement.querySelector('input[formcontrolname="city"]').getAttribute('disabled')).not.toBeNull();
     });
 
-    it ('should emit and event with a company which contains the form inputs when no city and no address have been selected', (done) => {
+    it ('should emit and event with a company which contains the form inputs ' +
+      'when there are no results and no city and no address have been selected', (done) => {
 
+      const companySearchResult = deserialize(CompanySearchResult, {
+        'total_results': 0,
+        'etablissement': []
+      });
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
       component.companyForm.addControl('address', component.addressCtrl);
       component.nameCtrl.setValue('Mon entreprise');
       component.cityCtrl.setValue('Ma ville');
@@ -215,8 +221,13 @@ describe('CompanyFormComponent', () => {
     });
 
     it ('should emit and event with a company which contains the selected city and the address form input ' +
-      'when a city has been selected but no address has been selected', (done) => {
+      'when there are no results and a city has been selected but no address has been selected', (done) => {
 
+      const companySearchResult = deserialize(CompanySearchResult, {
+        'total_results': 0,
+        'etablissement': []
+      });
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
       component.companyForm.addControl('address', component.addressCtrl);
       component.nameCtrl.setValue('Mon entreprise');
       component.cityCtrl.setValue('Ma ville');
@@ -250,8 +261,14 @@ describe('CompanyFormComponent', () => {
 
     });
 
-    it ('should emit and event with a company which contains the city and the address of the selected address when exist', (done) => {
+    it ('should emit and event with a company which contains the city and the address of the selected address ' +
+      'when there are no results and a city and an address have been selected', (done) => {
 
+      const companySearchResult = deserialize(CompanySearchResult, {
+        'total_results': 0,
+        'etablissement': []
+      });
+      spyOn(companyService, 'searchByNameCityAndAddress').and.returnValue(of(companySearchResult));
       component.companyForm.addControl('address', component.addressCtrl);
       component.nameCtrl.setValue('Mon entreprise');
       component.cityCtrl.setValue('Ma ville');

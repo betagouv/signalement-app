@@ -30,11 +30,11 @@ class CityData extends RemoteData {
   }
 
   public convertToItem(data: any): CompleterItem | null {
-    return {
-      title: data.properties.city,
-      description: ` - ${data.properties.postcode}`,
-      originalObject: data.properties,
-    } as CompleterItem;
+    return data ? {
+        title: data.properties.city,
+        description: ` - ${data.properties.postcode}`,
+        originalObject: data.properties,
+      } as CompleterItem : data;
   }
 }
 
@@ -54,11 +54,10 @@ class AddressData extends RemoteData {
   }
 
   public convertToItem(data: any): CompleterItem | null {
-    console.log('name', data.properties.name)
-    return {
+    return data ? {
       title: data.properties.name,
       description: ` - ${data.properties.postcode} ${data.properties.city}`,
       originalObject: data.properties,
-    } as CompleterItem;
+    } as CompleterItem : data;
   }
 }

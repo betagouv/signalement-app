@@ -29,10 +29,6 @@
     </div>
   </div>
 
-  <div class="text-center mt-3" *ngIf="searchEnabled">
-    <button class="button secondary" type="submit">Rechercher</button>
-  </div>
-
   <ng-container *ngIf="companyForm.controls['address']">
     <div class="form__group">
       <label>
@@ -52,11 +48,11 @@
         Veuillez préciser le numéro et la rue de l'établissement.
       </div>
     </div>
-
-    <div class="text-center mt-3">
-      <button class="button secondary" type="submit">Valider</button>
-    </div>
   </ng-container>
+
+  <div class="text-center mt-3" *ngIf="searchEnabled">
+    <button class="button secondary" type="submit">Rechercher</button>
+  </div>
 
 </form>
 
@@ -71,9 +67,5 @@
     <span *ngIf="company.line6">{{company.line6}}<br /></span>
     <span *ngIf="company.line7">{{company.line7}}<br /></span>
   </p>
-</div>
-
-<div *ngIf="tooManyResult" class="alert">
-  Trop de résultat trouvé, veuillez préciser votre recherche.
 </div>
 

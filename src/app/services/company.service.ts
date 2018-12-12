@@ -16,15 +16,15 @@ export class CompanyService {
               private serviceUtils: ServiceUtils) {
   }
 
-  searchByNameAndCity(name: string, city: City | string) {
+  searchByNameCityAndAddress(name: string, city: City | string, address?: string) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     const urlParams = ['api', 'companies', name];
     if (city instanceof City) {
-      urlParams.push(city.name);
+      urlParams.push(`${city.name}${address ? ' ' + address : ''}`);
       httpParams = httpParams.append('postcode', city.postcode);
     } else {
-      urlParams.push(city);
+      urlParams.push(`${city}${address ? ' ' + address : ''}`);
     }
     return this.http.get(
       this.serviceUtils.getUrl(Api.Signalement, urlParams),

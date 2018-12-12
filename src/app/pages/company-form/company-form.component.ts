@@ -21,7 +21,6 @@ export class CompanyFormComponent implements OnInit {
   companies: Company[];
   total: number;
   searchEnabled: boolean;
-  tooManyResult: boolean;
   showErrors: boolean;
 
   cityData: RemoteData;
@@ -49,7 +48,6 @@ export class CompanyFormComponent implements OnInit {
 
     this.showErrors = false;
     this.searchEnabled = true;
-    this.tooManyResult = false;
 
     this.cityData = this.addressService.getCityData();
 
@@ -59,14 +57,11 @@ export class CompanyFormComponent implements OnInit {
   initSearch() {
     this.companies = [];
     this.total = 0;
-    this.tooManyResult = false;
   }
 
   submitCompanyForm() {
     if (!this.companyForm.valid) {
       this.showErrors = true;
-    } else if (this.companyForm.contains('address')) {
-      this.saveCompanyFromSearchForm();
     } else {
       this.searchCompany();
     }
@@ -74,7 +69,7 @@ export class CompanyFormComponent implements OnInit {
 
   searchCompany() {
     this.initSearch();
-    this.companyService.searchByNameAndCity(this.nameCtrl.value, this.citySelected ? this.citySelected : this.cityCtrl.value).subscribe(
+    this.companyService.searchByNameCityAndAddress(this.nameCtrl.value, this.getCity(), this.addressCtrl.value).subscribe(
       companySearchResult => {
         this.total = companySearchResult.total;
         if (this.total === 0) {
@@ -90,13 +85,17 @@ export class CompanyFormComponent implements OnInit {
     );
   }
 
+  getCity() {
+    return this.citySelected ? this.citySelected : this.cityCtrl.value;
+  }
+
   treatCaseNoResult() {
-    this.searchEnabled = false;
-    this.showErrors = false;
-    this.companyForm.controls['name'].disable();
-    this.companyForm.controls['city'].disable();
-    this.companyForm.addControl('address', this.addressCtrl);
-    this.addressData = this.addressService.getAddressData(this.citySelected ? this.citySelected : this.cityCtrl.value);
+    if (this.companyForm.contains('address')) {
+      this.saveCompanyFromSearchForm();
+    } else {
+      this.disableNameAndCityAddress();
+      this.enableAddressEntry();
+    }
   }
 
   treatCaseOneResult(companySearchResult: CompanySearchResult) {
@@ -105,7 +104,12 @@ export class CompanyFormComponent implements OnInit {
   }
 
   treatCaseTooManyResults() {
-    this.tooManyResult = true;
+    if (this.companyForm.contains('address')) {
+      this.saveCompanyFromSearchForm();
+    } else {
+      this.disableNameAndCityAddress();
+      this.enableAddressEntry();
+    }
   }
 
   treatCaseManyResults(companySearchResult) {
@@ -113,6 +117,17 @@ export class CompanyFormComponent implements OnInit {
     this.companyForm.controls['name'].disable();
     this.companyForm.controls['city'].disable();
     this.companies = companySearchResult.companies;
+  }
+
+  disableNameAndCityAddress() {
+    this.companyForm.controls['name'].disable();
+    this.companyForm.controls['city'].disable();
+  }
+
+  enableAddressEntry() {
+    this.showErrors = false;
+    this.companyForm.addControl('address', this.addressCtrl);
+    this.addressData = this.addressService.getAddressData(this.getCity());
   }
 
   selectCompany(company: Company) {

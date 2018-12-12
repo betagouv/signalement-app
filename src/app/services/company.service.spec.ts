@@ -35,7 +35,7 @@ describe('CompanyService', () => {
     const name = 'nom';
     const city = 'ville';
 
-    companyService.searchByNameAndCity(name, city).subscribe(companySearchResult => {
+    companyService.searchByNameCityAndAddress(name, city).subscribe(companySearchResult => {
       expect(companySearchResult.total).toEqual(2);
       expect(companySearchResult.companies.length).toEqual(2);
       expect(companySearchResult.companies[0]).toEqual(deserialize(Company, {
@@ -64,7 +64,7 @@ describe('CompanyService', () => {
     const name = 'nom';
     const city = 'ville';
 
-    companyService.searchByNameAndCity(name, city).subscribe(companySearchResult => {
+    companyService.searchByNameCityAndAddress(name, city).subscribe(companySearchResult => {
       expect(companySearchResult.total).toEqual(0);
       done();
     });
