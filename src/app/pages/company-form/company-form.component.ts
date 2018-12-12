@@ -22,6 +22,7 @@ export class CompanyFormComponent implements OnInit {
   total: number;
   searchEnabled: boolean;
   showErrors: boolean;
+  loading: boolean;
 
   cityData: RemoteData;
   addressData: RemoteData;
@@ -69,8 +70,10 @@ export class CompanyFormComponent implements OnInit {
 
   searchCompany() {
     this.initSearch();
+    this.loading = true;
     this.companyService.searchByNameCityAndAddress(this.nameCtrl.value, this.getCity(), this.addressCtrl.value).subscribe(
       companySearchResult => {
+        this.loading = false;
         this.total = companySearchResult.total;
         if (this.total === 0) {
           this.treatCaseNoResult();

@@ -14,6 +14,7 @@ import { CompanyFormComponent } from './pages/company-form/company-form.componen
 import { FooterComponent } from './pages/footer/footer.component';
 import { WhyComponent } from './pages/infos/why/why.component';
 import { RouterModule } from '@angular/router';
+import { NgxLoadingModule } from 'ngx-loading';
 
 defineLocale('fr', frLocale);
 
@@ -33,6 +34,7 @@ defineLocale('fr', frLocale);
     ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
+    NgxLoadingModule.forRoot({}),
     Ng2CompleterModule,
     RouterModule.forRoot([
         { path: '', component: SignalementFormComponent },

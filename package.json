@@ -35,6 +35,7 @@
     "moment": "^2.22.2",
     "ng2-completer": "^3.0.0-beta.2",
     "ngx-bootstrap": "3.0.1",
+    "ngx-loading": "^3.0.1",
     "path": "^0.12.7",
     "rxjs": "~6.2.0",
     "typescript": "~2.9.2",

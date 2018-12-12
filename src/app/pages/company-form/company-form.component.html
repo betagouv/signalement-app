@@ -54,6 +54,8 @@
     <button class="button secondary" type="submit">Rechercher</button>
   </div>
 
+  <ngx-loading [show]="loading" [config]="{ primaryColour: '#003b80' }"></ngx-loading>
+
 </form>
 
 <div *ngIf="companies && companies.length" class="pt-3">

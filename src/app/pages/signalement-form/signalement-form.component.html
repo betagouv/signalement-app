@@ -73,7 +73,7 @@
     </div>
   </section>
 
-  <section class="section section-gray" id="declarer">
+  <section class="section section-gray position-relative">
     <div class="container">
       <form [formGroup]="signalementForm" (submit)="createSignalement()" *ngIf="!showSuccess" id="signalementForm">
         <h1 class="text-center">Signalez une anomalie</h1>
@@ -255,7 +255,7 @@
           </div>
         </div>
 
-        <ng-container *ngIf="!isLoading">
+        <ng-container>
           <button type="submit" class="btn btn-primary btn-lg btn-block" *ngIf="isIntoxicationAlimentaire(); else mainButton">
             Suivant
           </button>
@@ -266,15 +266,9 @@
           </ng-template>
         </ng-container>
 
-        <div class="text-center" *ngIf="isLoading">
-          <img src="/assets/images/loader.gif" alt="chargement en cours"/>
-          <br />Transmission en cours ...
-        </div>
-
       </form>
 
       <div *ngIf="showSuccess" class="col-sm-12 offset-lg-2 col-lg-8">
-
         <ng-container *ngIf="isIntoxicationAlimentaire(); else thanks">
           <p>
             Les cas d'intoxication alimentaire nécessitent une analyse individualisée
@@ -284,7 +278,6 @@
             <a href="https://www.economie.gouv.fr/courrier/4210">https://www.economie.gouv.fr/courrier/4210</a>
           </p>
         </ng-container>
-
         <ng-template #thanks>
           <h2>Merci pour votre signalement</h2>
           <p class="mt-4">
@@ -294,8 +287,11 @@
           </p>
         </ng-template>
       </div>
-
     </div>
+
+    <ngx-loading [show]="loading" [config]="{ primaryColour: '#003b80' }"></ngx-loading>
+
   </section>
+
 </main>
 
