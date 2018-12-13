@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CompleterItem, RemoteData } from 'ng2-completer';
 import { HttpClient } from '@angular/common/http';
+import { Api, ServiceUtils } from './service.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,9 @@ export class AddressService {
 
   private _addressData: AddressData;
 
-  constructor(private http: HttpClient) {
-    this._addressData = new AddressData(this.http);
+  constructor(private http: HttpClient,
+              private serviceUtils: ServiceUtils) {
+    this._addressData = new AddressData(this.http, this.serviceUtils);
   }
 
   get addressData() {
@@ -20,9 +22,9 @@ export class AddressService {
 
 class AddressData extends RemoteData {
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, serviceUtils: ServiceUtils) {
     super(http);
-    this.remoteUrl(`https://api-adresse.data.gouv.fr/search/?limit=20&q=`);
+    this.remoteUrl(serviceUtils.getUrl(Api.Adresse, ['search', '?limit=20&q=']));
     this.dataField('features');
     this.searchFields('properties.label');
   }
