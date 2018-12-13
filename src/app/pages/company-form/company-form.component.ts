@@ -24,6 +24,7 @@ export class CompanyFormComponent implements OnInit {
   loading: boolean;
   showErrors: boolean;
 
+  suggestionData: RemoteData;
   addressData: RemoteData;
 
   @Output() companySelected = new EventEmitter<Company>();
@@ -44,6 +45,7 @@ export class CompanyFormComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       search: this.searchCtrl,
     });
+    this.suggestionData = this.companyService.suggestionData;
   }
 
   initCompanyForm() {

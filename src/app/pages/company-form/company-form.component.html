@@ -4,7 +4,16 @@
       Veuillez identifier l'établissement concerné <span>*</span>
     </label>
     <div class="search__group">
-      <input formControlName="search" type="text" id="searchInput" placeholder="Nom, adresse, SIRET, ...">
+      <ng2-completer
+        [datasource]="suggestionData"
+        formControlName="search"
+        inputName="search"
+        inputId="searchInput"
+        textSearching=""
+        textNoResults=""
+        minSearchLength="1"
+        placeholder="Nom, adresse, SIRET, ...">
+      </ng2-completer>
       <button type="submit" class="overlay-button" aria-label="Recherche" [disabled]="searchCtrl.disabled">
         <svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg>
       </button>
