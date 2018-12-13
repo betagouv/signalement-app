@@ -1,65 +1,74 @@
-<form [formGroup]="companyForm" (submit)="submitCompanyForm()">
+<form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
   <div class="form__group">
-    <label>
+    <label for="searchInput">
+      Veuillez identifier l'établissement concerné <span>*</span>
+    </label>
+    <div class="search__group">
+      <input formControlName="search" type="text" id="searchInput" placeholder="Nom, adresse, SIRET, ...">
+      <button type="submit" class="overlay-button" aria-label="Recherche" [disabled]="searchCtrl.disabled">
+        <svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg>
+      </button>
+    </div>
+    <div class="invalid" *ngIf="showErrors && searchCtrl.hasError('required')">
+      Veuillez identifier l'établissement.
+    </div>
+  </div>
+</form>
+
+<form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm" *ngIf="companyForm">
+
+  <div class="notification warning mt-4">
+    <span *ngIf="total === 0">
+      Aucun établissement ne correspond à la recherche.
+    </span>
+    <span *ngIf="total > 0">
+      Il y a trop d'établissement correspondant à la recherche.
+    </span>
+    <br/>
+    Veuillez <span class="link" (click)="modifySearch()">modifier votre recherche</span> ou saisir son nom et son adresse ci-dessous.
+  </div>
+
+  <div class="form__group">
+    <label for="companyName">
       Nom de l'établissement <span>*</span>
     </label>
-    <input formControlName="name" type="text">
+    <input formControlName="name" type="text" id="companyName" placeholder="Nom de l'établissement">
     <div class="invalid" *ngIf="showErrors && nameCtrl.hasError('required')">
       Veuillez compléter le nom de l'établissement.
     </div>
   </div>
 
   <div class="form__group">
-    <label>
-      Ville de l'établissement <span>*</span>
+    <label for="companyAddress">
+      Adresse de l'établissement <span>*</span>
     </label>
     <ng2-completer
-      [datasource]="cityData"
-      formControlName="city"
-      inputName="city"
+      [datasource]="addressData"
+      formControlName="address"
+      inputName="address"
+      inputId="companyAddress"
       textSearching=""
       textNoResults=""
       minSearchLength="1"
-      openOnClick="true"
-      (selected)="selectCity($event)"
-      (change)="unselectCity()">
+      placeholder="numéro, voie, code postal, ville, ...">
     </ng2-completer>
-    <div class="invalid" *ngIf="showErrors && cityCtrl.hasError('required')">
-      Veuillez compléter la ville de l'établissement.
+    <div class="invalid" *ngIf="showErrors && addressCtrl.hasError('required')">
+      Veuillez préciser l'adresse de l'établissement.
     </div>
   </div>
 
-  <ng-container *ngIf="companyForm.controls['address']">
-    <div class="form__group">
-      <label>
-        Veuillez préciser l'adresse de l'établissement <span>*</span> ou <span (click)="modifySearch()" class="link">modifier votre recherche</span>
-      </label>
-      <ng2-completer
-        [datasource]="addressData"
-        formControlName="address"
-        inputName="address"
-        textSearching=""
-        textNoResults=""
-        minSearchLength="1"
-        (selected)="selectAddress($event)"
-        (change)="unselectAddress()">
-      </ng2-completer>
-      <div class="invalid" *ngIf="showErrors && addressCtrl.hasError('required')">
-        Veuillez préciser le numéro et la rue de l'établissement.
-      </div>
-    </div>
-  </ng-container>
-
-  <div class="text-center mt-3" *ngIf="searchEnabled">
-    <button class="button secondary" type="submit">Rechercher</button>
+  <div class="text-center mt-3">
+    <button class="button secondary" type="submit" id="submitCompanyForm">Valider</button>
   </div>
-
-  <ngx-loading [show]="loading" [config]="{ primaryColour: '#003b80' }"></ngx-loading>
 
 </form>
 
-<div *ngIf="companies && companies.length" class="pt-3">
-  <p>Veuillez sélectionner un établissement dans la liste ci-dessous ou <span (click)="modifySearch()" class="link">modifier votre recherche</span></p>
+<div *ngIf="companies && companies.length">
+
+  <div class="notification warning mt-4">
+    Veuillez sélectionner un établissement dans la liste ci-dessous ou modifier votre recherche
+  </div>
+
   <p *ngFor="let company of companies" class="company" (click)="selectCompany(company)">
     <span *ngIf="company.line1">{{company.line1}}<br /></span>
     <span *ngIf="company.line2">{{company.line2}}<br /></span>
@@ -71,3 +80,4 @@
   </p>
 </div>
 
+<ngx-loading [show]="loading"></ngx-loading>

@@ -9,6 +9,21 @@ form {
     font-size: 90%;
     color: #dc3545;
   }
+
+  .icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    font-size: 16px;
+  }
+
+  #icon-search {
+    fill: #adb9c9;
+    fill: var(--grey);
+  }
 }
 
 input,
@@ -194,12 +209,13 @@ fieldset {
 
 .overlay-button {
   position: absolute;
-  right: 2em;
-  top: 1.25em;
+  right: 1.5em;
+  top: 0.5em;
   background: 0;
   border: 0;
   width: 15px;
   height: 15px;
+  cursor: pointer;
 }
 
 .search__group {
@@ -244,4 +260,8 @@ select.ng-pristine {
   font-style: italic;
   font-weight: 200;
   opacity: 1; /* Firefox */
+}
+
+#magnifier {
+  fill: #adb9c9;
 }

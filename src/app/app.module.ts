@@ -34,7 +34,7 @@ defineLocale('fr', frLocale);
     ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    NgxLoadingModule.forRoot({}),
+    NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     Ng2CompleterModule,
     RouterModule.forRoot([
         { path: '', component: SignalementFormComponent },
