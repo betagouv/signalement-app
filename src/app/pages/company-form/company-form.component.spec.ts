@@ -164,7 +164,7 @@ describe('CompanyFormComponent', () => {
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);
-      expect(nativeElement.querySelector('input[formcontrolname="search"]').getAttribute('disabled')).not.toBeNull();
+      expect(nativeElement.querySelector('input[name="search"]').getAttribute('ng-reflect-is-disabled')).toBe('true');
       expect(nativeElement.querySelector('form#companyForm')).not.toBeNull();
     });
 
@@ -181,7 +181,7 @@ describe('CompanyFormComponent', () => {
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);
-      expect(nativeElement.querySelector('input[formcontrolname="search"]').getAttribute('disabled')).not.toBeNull();
+      expect(nativeElement.querySelector('input[name="search"]').getAttribute('ng-reflect-is-disabled')).toBe('true');
       expect(nativeElement.querySelector('form#companyForm')).not.toBeNull();
     });
 
@@ -195,7 +195,7 @@ describe('CompanyFormComponent', () => {
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);
-      expect(nativeElement.querySelector('input[formcontrolname="search"]').getAttribute('disabled')).toBeNull();
+      expect(nativeElement.querySelector('input[name="search"]').getAttribute('ng-reflect-is-disabled')).toBe('false');
       expect(nativeElement.querySelector('form#companyForm')).toBeNull();
     });
 
