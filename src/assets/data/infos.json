@@ -1,0 +1,44 @@
+{
+  "list": [
+    {
+      "key": "Pas de gants, pas de coiffe",
+      "info": "Il n'existe pas d'obligation réglementaire imposant le port de la coiffe (charlotte) ou de gants. <br />Le lavage des mains peut être suffisant pour éviter les contaminations."
+    },
+    {
+      "key": "Plat de mauvaise qualité ou pas bon",
+      "info": "Vous pouvez demander que l’on remplace un plat si vous estimez que le plat qui vous a été proposé n’est pas frais ou pas suffisamment chaud par exemple. Vous pouvez exiger la même chose pour le vin, notamment s'il est « bouchonné ». <br />En revanche, si un plat commandé ne vous convient pas pour une question de goût (par exemple vous n’aimez pas les légumes surgelés ou le goût de la sauce), le restaurateur est libre de le reprendre ou non et de vous servir un autre plat.  S'il vous oppose un refus, vous serez tenu néanmoins de payer la note.<br /><br />En savoir plus : <a href='https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/restaurants' target='_blank'>https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/restaurants</a>"
+    },
+    {
+      "key": "Même plat servi plusieurs jours",
+      "info": "Un même plat proposé plusieurs jours d'affilés n'est pas nécessairement synonyme de dangerosité. Les cuisines, notamment collectives, utilisent des systèmes de refroidissement, qui permettent de faire descendre très vite la température d'un plat afin de le conserver plusieurs jours. Les plats sont réchauffés et servis au fur et à mesure."
+    },
+    {
+      "key": "Prix trop cher",
+      "info": "Depuis 1987, les prix sont choisis librement par les professionnels. En contrepartie, l’information du prix est obligatoire.<br />Par exemple, rien n’interdit de vendre un verre de soda à 25 euros si le prix est indiqué (menu, carte des boissons…). C’est au consommateur d’effectuer le choix de consommer ou non, en ayant connaissance du prix."
+    },
+    {
+      "key": "Personnel peu aimable, mal poli",
+      "info": "Il n’existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire ! C’est une question de relation client.<br />Vous pouvez dans ce cas, contacter le service client pour faire part de votre mécontentement.<br /><br />Si vous avez été victime d’injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne via ce lien : <a href='https://www.pre-plainte-en-ligne.gouv.fr' target='_blank'>https://www.pre-plainte-en-ligne.gouv.fr</a>"
+    },
+    {
+      "key": "Chien refusé",
+      "info": "Le professionnel n'est pas tenu d'accepter les animaux. S'il les accepte, il peut vous imposer la tenue en laisse dans la salle.<br /><br />Par contre, les chiens guides d'aveugle ou d'assistance, accompagnant les personnes titulaires de la carte d'invalidité, sont autorisés dans les lieux ouverts au public. La présence du chien aux côtés de la personne handicapée ne doit pas entraîner de facturation supplémentaire dans l'accès aux services et prestations auxquels celle-ci peut prétendre."
+    },
+    {
+      "key": "Facturation des couverts",
+      "info": "Le restaurateur a tout à fait le droit de compter un couvert pour chaque enfant, même si ceux-ci ne consomment pas, à condition que le prix du couvert soit mentionné sur le menu ou la carte.<br />Si ces frais n'étaient pas mentionnés, merci de signaler ici (lien frais facturés non indiqués)"
+    },
+    {
+      "key": "Eau du robinet payante ou pain payant",
+      "info": "Au cours d’un repas : la loi précise que le prix du repas comporte obligatoirement le couvert (le pain, l'eau ordinaire…) qui sont usuellement mis à la disposition du client à l’occasion du repas. En conséquence, le restaurateur ne peut pas facturer la carafe d'eau ordinaire en accompagnement d'un repas.<br /><br />Dans un bistrot ou un café : le professionnel n'est aucunement tenu de délivrer gratuitement un verre d'eau, pour accompagner un café par exemple.<br /><br />S’il souhaite faire payer le verre d’eau, le professionnel doit alors informer le consommateur sur le prix de cette prestation (affichage du prix).<br /><br />En savoir plus : <a href='https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Carafe-d-eau-verre-d-eau' target='_blank'>https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Carafe-d-eau-verre-d-eau</a><br />"
+    },
+    {
+      "key": "Indisponibilité des produits du catalogue",
+      "info": "Information utile : vous pouvez demander la commande d’un produit proposé par le catalogue, lorsque celui-ci n’est pas disponible dans le magasin."
+    },
+    {
+      "key": "Quantité annoncée non conforme",
+      "info": "Il est possible qu’un paquet contienne un peu moins que la quantité affichée car le poids/volume indiqué correspond à une moyenne de l’ensemble du lot (= ensemble des paquets produits en même temps).<br /><br />Par exemples :<br />Paquet de farine 1kg : comme il s’agit d’une moyenne, il est possible qu’il y ait plus ou moins 1 kg selon les paquets. Par contre, dans cet exemple, la limite minimale est fixée à 0,985kg. Il est donc pratiquement impossible d’avoir un paquet de 0,5 kg et un de 1,5 kg.<br />Texte que choisir<br />Il faut savoir que les fabricants bénéficient d’une petite marge de manœuvre, strictement encadrée. Ainsi les produits affichant un poids de 1 kg net ont droit à une erreur de 15 g en moins : seul un paquet de farine ou de sucre pesant moins de 985 g sera donc considéré comme défectueux. Pour les petits conditionnements comme les sachets d’épices, l’erreur tolérée est proportionnellement plus importante que pour les grandes quantités.<br />"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AnomalieList } from '../model/Anomalie';
+import { AnomalyInfoList, AnomalyList } from '../model/Anomaly';
 import { HttpClient } from '@angular/common/http';
 import { deserialize } from 'json-typescript-mapper';
 import { map } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AnomalieService {
+export class AnomalyService {
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,17 @@ export class AnomalieService {
     return this.http.get('./assets/data/anomalies.json')
       .pipe(
         map(result => {
-          return deserialize(AnomalieList, result).list;
+          return deserialize(AnomalyList, result).list;
+        })
+      );
+  }
+
+  getAnomalyInfos() {
+
+    return this.http.get('./assets/data/infos.json')
+      .pipe(
+        map(result => {
+          return deserialize(AnomalyInfoList, result).list;
         })
       );
   }

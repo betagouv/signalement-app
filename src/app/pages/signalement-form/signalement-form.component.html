@@ -85,186 +85,192 @@
             <select formControlName="typeEtablissement"
                     (change)="changeTypeEtablissement()">
               <option disabled value="">Choisissez ...</option>
-              <option *ngFor="let anomalie of anomalies" value="{{anomalie.typeEtablissement}}">{{anomalie.typeEtablissement}}</option>
+              <option *ngFor="let anomaly of anomalies" value="{{anomaly.companyType}}">{{anomaly.companyType}}</option>
             </select>
             <div class="invalid" *ngIf="showErrors && typeEtablissementCtrl.hasError('required')">
               Veuillez compléter le champ "Type d'établissement".
             </div>
           </div>
 
-          <div class="form__group" *ngIf="signalementForm.controls['categorieAnomalie']">
+          <div class="form__group" *ngIf="signalementForm.controls['anomalyCategory']">
             <label>
               Puis, indiquez le type d'anomalie que vous avez constaté <span>*</span>
             </label>
-            <select formControlName="categorieAnomalie"
-                    (change)="changeCategorieAnomalie()">
+            <select formControlName="anomalyCategory"
+                    (change)="changeAnomalyCategory()">
               <option disabled value="">Choisissez ...</option>
-              <option *ngFor="let typeAnomalie of typeAnomalieList" value="{{typeAnomalie.categorie}}">{{typeAnomalie.categorie}}</option>
+              <option *ngFor="let anomalyType of anomalyTypeList" value="{{anomalyType.category}}">{{anomalyType.category}}</option>
             </select>
-            <div class="invalid" *ngIf="showErrors && categoryAnomalieCtrl.hasError('required')">
+            <div class="invalid" *ngIf="showErrors && anomalyCategoryCtrl.hasError('required')">
               Veuillez compléter le champ "Type d'anomalie".
             </div>
           </div>
 
-          <div class="form__group" *ngIf="signalementForm.controls['precisionAnomalie']">
+          <div class="form__group" *ngIf="signalementForm.controls['anomalyPrecision']">
             <label>
               Précisez enfin l'anomalie <span>*</span>
             </label>
-            <select formControlName="precisionAnomalie">
+            <select formControlName="anomalyPrecision"
+                    (change)="changeAnomalyPrecision()">
               <option disabled value="">Choisissez ...</option>
-              <option *ngFor="let precisionAnomalie of precisionAnomalieList" value="{{precisionAnomalie}}">{{precisionAnomalie}}</option>
+              <option *ngFor="let anomalyPrecision of anomalyPrecisionList" value="{{anomalyPrecision}}">{{anomalyPrecision}}</option>
             </select>
-            <div class="invalid" *ngIf="showErrors && precisionAnomalieCtrl.hasError('required')">
+            <div class="invalid" *ngIf="showErrors && anomalyPrecisionCtrl.hasError('required')">
               Veuillez compléter le champ "Anomalie".
             </div>
           </div>
         </div>
 
-        <div class="panel">
-
-          <div *ngIf="companyCtrl.value; else searchCompany">
-            Etablissement
-            <div class="company panel pt-3 mb-3">
-              <span *ngIf="companyCtrl.value.line1">{{companyCtrl.value.line1}}<br /></span>
-              <span *ngIf="companyCtrl.value.line2">{{companyCtrl.value.line2}}<br /></span>
-              <span *ngIf="companyCtrl.value.line3">{{companyCtrl.value.line3}}<br /></span>
-              <span *ngIf="companyCtrl.value.line4">{{companyCtrl.value.line4}}<br /></span>
-              <span *ngIf="companyCtrl.value.line5">{{companyCtrl.value.line5}}<br /></span>
-              <span *ngIf="companyCtrl.value.line6">{{companyCtrl.value.line6}}<br /></span>
-              <span *ngIf="companyCtrl.value.line7">{{companyCtrl.value.line7}}<br /></span>
-              <div class="text-center text-sm-right">
-                <span (click)="changeCompany()" class="link">Changer d'établissement</span>
-              </div>
-            </div>
-          </div>
-
-          <ng-template #searchCompany>
-            <app-company-form (companySelected)="onCompanySelected($event)"></app-company-form>
-          </ng-template>
-
-          <div class="invalid" *ngIf="showErrors && companyCtrl.hasError('required')">
-            Veuillez identifier l'établissement.
-          </div>
-
+        <div class="notification success" *ngIf="anomalyInfo; else realAnomaly" [innerHTML]="anomalyInfo.info">
         </div>
 
-        <div class="panel">
+        <ng-template #realAnomaly>
+          <div class="panel">
 
-          <div class="form__group">
-            <label>
-              Veuillez préciser la date <span>*</span> et la plage horaire du constat
-            </label>
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <input type="text"
-                       formControlName="dateConstat"
-                       placeholder="Date du constat"
-                       bsDatepicker
-                       [bsConfig]="{ containerClass: 'theme-default' }">
-                <div class="invalid" *ngIf="showErrors && dateConstatCtrl.hasError('required')">
-                  Veuillez compléter le champ "Date du constat".
-                </div>
-              </div>
-              <div class="col-12 col-sm-6">
-                <div class="form__group">
-                  <select formControlName="heureConstat">
-                    <option disabled value="">Plage horaire</option>
-                    <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
-                  </select>
+            <div *ngIf="companyCtrl.value; else searchCompany">
+              Etablissement
+              <div class="company panel pt-3 mb-3">
+                <span *ngIf="companyCtrl.value.line1">{{companyCtrl.value.line1}}<br /></span>
+                <span *ngIf="companyCtrl.value.line2">{{companyCtrl.value.line2}}<br /></span>
+                <span *ngIf="companyCtrl.value.line3">{{companyCtrl.value.line3}}<br /></span>
+                <span *ngIf="companyCtrl.value.line4">{{companyCtrl.value.line4}}<br /></span>
+                <span *ngIf="companyCtrl.value.line5">{{companyCtrl.value.line5}}<br /></span>
+                <span *ngIf="companyCtrl.value.line6">{{companyCtrl.value.line6}}<br /></span>
+                <span *ngIf="companyCtrl.value.line7">{{companyCtrl.value.line7}}<br /></span>
+                <div class="text-center text-sm-right">
+                  <span (click)="changeCompany()" class="link">Changer d'établissement</span>
                 </div>
               </div>
             </div>
+
+            <ng-template #searchCompany>
+              <app-company-form (companySelected)="onCompanySelected($event)"></app-company-form>
+            </ng-template>
+
+            <div class="invalid" *ngIf="showErrors && companyCtrl.hasError('required')">
+              Veuillez identifier l'établissement.
+            </div>
+
           </div>
 
-          <div class="form__group">
-            <label>
-              Vous pouvez également ajouter des photos
-            </label>
-            <app-file-input
-              [placeholder]="'Photo du ticket de caisse'"
-              (fileSelected)="onTicketFileSelected($event)">
-            </app-file-input>
-            <app-file-input
-              [placeholder]="'Photo du problème'"
-              (fileSelected)="onAnomalieFileSelected($event)">
-            </app-file-input>
-          </div>
+          <div class="panel">
 
-          <div class="form__group">
-            <label>
-              Vous pouvez préciser votre signalement
-            </label>
-            <textarea formControlName="description"
-                      rows="3"
-                      maxlength="200"
-                      placeholder="200 caractères maximum">
-            </textarea>
-          </div>
-
-        </div>
-
-        <div class="panel">
-          <p class="font-weight-bold">
-            Merci de compléter votre identité afin d'authentifier votre signalement.
-            <br/>
-            Votre identité ne sera pas indiquée au professionnel et vous ne serez pas sollicité.
-          </p>
-
-          <div class="form__group">
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <label>
-                  Votre prénom <span>*</span>
-                </label>
-                <input type="text" formControlName="prenom">
-                <div class="invalid" *ngIf="showErrors && prenomCtrl.hasError('required')">
-                  Veuillez compléter le champ "Prénom".
+            <div class="form__group">
+              <label>
+                Veuillez préciser la date <span>*</span> et la plage horaire du constat
+              </label>
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <input type="text"
+                         formControlName="dateConstat"
+                         placeholder="Date du constat"
+                         bsDatepicker
+                         [bsConfig]="{ containerClass: 'theme-default' }">
+                  <div class="invalid" *ngIf="showErrors && dateConstatCtrl.hasError('required')">
+                    Veuillez compléter le champ "Date du constat".
+                  </div>
                 </div>
-              </div>
-
-              <div class="col-12 col-sm-6">
-                <label>
-                  Votre nom <span>*</span>
-                </label>
-                <input type="text" formControlName="nom">
-                <div class="invalid" *ngIf="showErrors && nomCtrl.hasError('required')">
-                  Veuillez compléter le champ "Nom".
+                <div class="col-12 col-sm-6">
+                  <div class="form__group">
+                    <select formControlName="heureConstat">
+                      <option disabled value="">Plage horaire</option>
+                      <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="form__group">
-            <label>
-              Votre email <span>*</span>
-            </label>
-            <input type="email" formControlName="email">
-            <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('required')">
-              Veuillez compléter le champ "Email".
+            <div class="form__group">
+              <label>
+                Vous pouvez également ajouter des photos
+              </label>
+              <app-file-input
+                [placeholder]="'Photo du ticket de caisse'"
+                (fileSelected)="onTicketFileSelected($event)">
+              </app-file-input>
+              <app-file-input
+                [placeholder]="'Photo du problème'"
+                (fileSelected)="onAnomalyFileSelected($event)">
+              </app-file-input>
             </div>
-            <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('email')">
-              Veuillez renseigner une adresse email valide pour le champ "E-mail".
+
+            <div class="form__group">
+              <label>
+                Vous pouvez préciser votre signalement
+              </label>
+              <textarea formControlName="description"
+                        rows="3"
+                        maxlength="200"
+                        placeholder="200 caractères maximum">
+              </textarea>
+            </div>
+
+          </div>
+
+          <div class="panel">
+            <p class="font-weight-bold">
+              Merci de compléter votre identité afin d'authentifier votre signalement.
+              <br/>
+              Votre identité ne sera pas indiquée au professionnel et vous ne serez pas sollicité.
+            </p>
+
+            <div class="form__group">
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <label>
+                    Votre prénom <span>*</span>
+                  </label>
+                  <input type="text" formControlName="prenom">
+                  <div class="invalid" *ngIf="showErrors && prenomCtrl.hasError('required')">
+                    Veuillez compléter le champ "Prénom".
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label>
+                    Votre nom <span>*</span>
+                  </label>
+                  <input type="text" formControlName="nom">
+                  <div class="invalid" *ngIf="showErrors && nomCtrl.hasError('required')">
+                    Veuillez compléter le champ "Nom".
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label>
+                Votre email <span>*</span>
+              </label>
+              <input type="email" formControlName="email">
+              <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('required')">
+                Veuillez compléter le champ "Email".
+              </div>
+              <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('email')">
+                Veuillez renseigner une adresse email valide pour le champ "E-mail".
+              </div>
+            </div>
+
+            <div class="form__group">
+              <input formControlName="accordContact" type="checkbox" value="" id="anonymousCheck">
+              <label for="anonymousCheck" class="label-inline">
+                Je souhaite que mes coordonnées soient transmises au professionnel afin qu'il puisse me contacter.
+              </label>
             </div>
           </div>
 
-          <div class="form__group">
-            <input formControlName="accordContact" type="checkbox" value="" id="anonymousCheck">
-            <label for="anonymousCheck" class="label-inline">
-              Je souhaite que mes coordonnées soient transmises au professionnel afin qu'il puisse me contacter.
-            </label>
-          </div>
-        </div>
-
-        <ng-container>
-          <button type="submit" class="btn btn-primary btn-lg btn-block" *ngIf="isIntoxicationAlimentaire(); else mainButton">
-            Suivant
-          </button>
-          <ng-template #mainButton>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">
-              Signaler
+          <ng-container>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" *ngIf="isIntoxicationAlimentaire(); else mainButton">
+              Suivant
             </button>
-          </ng-template>
-        </ng-container>
+            <ng-template #mainButton>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">
+                Signaler
+              </button>
+            </ng-template>
+          </ng-container>
+        </ng-template>
 
       </form>
 

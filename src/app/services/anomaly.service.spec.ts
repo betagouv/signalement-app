@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AnomalieService } from './anomalie.service';
+import { AnomalyService } from './anomaly.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Anomalie } from '../model/Anomalie';
+import { Anomaly } from '../model/Anomaly';
 
 describe('AnomalieService', () => {
 
-  let anomalieService: AnomalieService;
+  let anomalieService: AnomalyService;
   let httpMock: HttpTestingController;
 
   const anomaliesJson = {
@@ -55,24 +55,24 @@ describe('AnomalieService', () => {
   });
 
   beforeEach( () => {
-    anomalieService = TestBed.get(AnomalieService);
+    anomalieService = TestBed.get(AnomalyService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
   it('should be created', () => {
-    const service: AnomalieService = TestBed.get(AnomalieService);
+    const service: AnomalyService = TestBed.get(AnomalyService);
     expect(service).toBeTruthy();
   });
   
   describe('getAnomalies function', () => {
 
-    it('should load anomalies from a Json file and return an array of Anomalie', () => {
+    it('should load anomalies from a Json file and return an array of Anomaly', () => {
             anomalieService.getAnomalies().subscribe(
         result => {
           expect(result).not.toBeNull();
           expect(result instanceof Array).toBeTruthy();
           expect(result.length).toBe(2);
-          expect(result[0] instanceof Anomalie).toBeTruthy();
+          expect(result[0] instanceof Anomaly).toBeTruthy();
         }
       );
 
