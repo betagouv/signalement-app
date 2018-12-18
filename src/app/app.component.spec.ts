@@ -1,5 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { Angulartics2Module } from 'angulartics2';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -7,6 +9,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [
+        Angulartics2Module.forRoot(),
+        RouterTestingModule
+      ]
     });
     TestBed.overrideTemplate(AppComponent, '<h1>Signalement</h1>');
   }));
