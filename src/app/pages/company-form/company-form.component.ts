@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Company, CompanySearchResult } from '../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AddressService } from '../../services/address.service';
+import { RemoteData } from 'ng2-completer';
 
 @Component({
   selector: 'app-company-form',
@@ -10,96 +12,97 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class CompanyFormComponent implements OnInit {
 
+  searchForm: FormGroup;
+  searchCtrl: FormControl;
+
   companyForm: FormGroup;
   nameCtrl: FormControl;
-  cityCtrl: FormControl;
   addressCtrl: FormControl;
 
   companies: Company[];
   total: number;
-  searchEnabled: boolean;
-  tooManyResult: boolean;
+  loading: boolean;
   showErrors: boolean;
+
+  suggestionData: RemoteData;
+  addressData: RemoteData;
 
   @Output() companySelected = new EventEmitter<Company>();
 
   constructor(private formBuilder: FormBuilder,
-              private companyService: CompanyService) {
+              private companyService: CompanyService,
+              private addressService: AddressService) {
 
   }
 
   ngOnInit() {
-    this.nameCtrl = this.formBuilder.control('', Validators.required);
-    this.cityCtrl = this.formBuilder.control('', Validators.required);
-    this.addressCtrl = this.formBuilder.control('', Validators.required);
+    this.initSearchForm();
+    this.initSearch();
+  }
 
+  initSearchForm() {
+    this.searchCtrl = this.formBuilder.control('', Validators.required);
+    this.searchForm = this.formBuilder.group({
+      search: this.searchCtrl,
+    });
+    this.suggestionData = this.companyService.suggestionData;
+  }
+
+  initCompanyForm() {
+    this.showErrors = false;
+    this.nameCtrl = this.formBuilder.control('', Validators.required);
+    this.addressCtrl = this.formBuilder.control('', Validators.required);
     this.companyForm = this.formBuilder.group({
       name: this.nameCtrl,
-      city: this.cityCtrl
+      address: this.addressCtrl,
     });
-
-    this.showErrors = false;
-    this.searchEnabled = true;
-    this.tooManyResult = false;
-
-    this.initSearch();
+    this.addressData = this.addressService.addressData;
   }
 
   initSearch() {
     this.companies = [];
     this.total = 0;
-    this.tooManyResult = false;
-  }
-
-  submitCompanyForm() {
-    if (!this.companyForm.valid) {
-      this.showErrors = true;
-    } else if (this.companyForm.contains('address')) {
-      this.saveCompanyFromSearchForm();
-    } else {
-      this.searchCompany();
-    }
   }
 
   searchCompany() {
-    this.initSearch();
-    this.companyService.searchByNameAndPostCode(this.nameCtrl.value, this.cityCtrl.value).subscribe(
-      companySearchResult => {
-        this.total = companySearchResult.total;
-        if (this.total === 0) {
-          this.treatCaseNoResult();
-        } else if (this.total === 1) {
-          this.treatCaseOneResult(companySearchResult);
-        } else if (this.total > MaxCompanyResult) {
-          this.treatCaseTooManyResults();
-        } else {
-          this.treatCaseManyResults(companySearchResult);
+    if (!this.searchForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.initSearch();
+      this.loading = true;
+      this.companyService.searchCompanies(this.searchCtrl.value).subscribe(
+        companySearchResult => {
+          this.loading = false;
+          this.total = companySearchResult.total;
+          if (this.total === 0) {
+            this.treatCaseNoResult();
+          } else if (this.total === 1) {
+            this.treatCaseOneResult(companySearchResult);
+          } else if (this.total > MaxCompanyResult) {
+            this.treatCaseTooManyResults();
+          } else {
+            this.treatCaseManyResults(companySearchResult);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   treatCaseNoResult() {
-    this.searchEnabled = false;
-    this.showErrors = false;
-    this.companyForm.controls['name'].disable();
-    this.companyForm.controls['city'].disable();
-    this.companyForm.addControl('address', this.addressCtrl);
+    this.searchCtrl.disable();
+    this.initCompanyForm();
   }
 
   treatCaseOneResult(companySearchResult: CompanySearchResult) {
-    this.searchEnabled = false;
     this.selectCompany(companySearchResult.companies[0]);
   }
 
   treatCaseTooManyResults() {
-    this.tooManyResult = true;
+    this.searchCtrl.disable();
+    this.initCompanyForm();
   }
 
   treatCaseManyResults(companySearchResult) {
-    this.searchEnabled = false;
-    this.companyForm.controls['name'].disable();
-    this.companyForm.controls['city'].disable();
     this.companies = companySearchResult.companies;
   }
 
@@ -109,23 +112,24 @@ export class CompanyFormComponent implements OnInit {
 
   modifySearch() {
     this.companies = [];
-    this.companyForm.removeControl('address');
-    this.companyForm.controls['name'].enable();
-    this.companyForm.controls['city'].enable();
-    this.searchEnabled = true;
+    this.searchForm.controls['search'].enable();
+    this.companyForm = null;
   }
 
-  saveCompanyFromSearchForm() {
-    this.selectCompany(
-      Object.assign(
-        new Company(),
-        {
-          name: this.nameCtrl.value,
-          line1: this.nameCtrl.value,
-          line2: this.addressCtrl.value,
-          line3: this.cityCtrl.value
-        }
-      )
-    );
+  submitCompanyForm() {
+    if (!this.companyForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.selectCompany(
+        Object.assign(
+          new Company(),
+          {
+            name: this.nameCtrl.value,
+            line1: this.nameCtrl.value,
+            line2: this.addressCtrl.value,
+          }
+        )
+      );
+    }
   }
 }

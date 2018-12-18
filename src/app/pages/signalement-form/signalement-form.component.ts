@@ -37,7 +37,7 @@ export class SignalementFormComponent implements OnInit {
 
   showErrors: boolean;
   showSuccess: boolean;
-  isLoading: boolean;
+  loading: boolean;
 
 
   constructor(public formBuilder: FormBuilder,
@@ -141,7 +141,7 @@ export class SignalementFormComponent implements OnInit {
     if (!this.signalementForm.valid) {
       this.showErrors = true;
     } else {
-      this.isLoading = true;
+      this.loading = true;
       this.signalementService.createSignalement(
         Object.assign(
           new Signalement(),
@@ -165,11 +165,11 @@ export class SignalementFormComponent implements OnInit {
         )
       ).subscribe(
         result => {
-          this.isLoading = false;
+          this.loading = false;
           return this.treatCreationSuccess();
         },
         error => {
-          this.isLoading = false;
+          this.loading = false;
           // TODO cas d'erreur
         });
 
