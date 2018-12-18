@@ -249,17 +249,22 @@ fieldset {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #adb9c9;
+  color: $grey;
   font-style: italic;
   font-weight: 200;
   opacity: 1; /* Firefox */
 }
 
 select.ng-pristine {
-  color: #adb9c9;
+  color: $grey;
   font-style: italic;
   font-weight: 200;
   opacity: 1; /* Firefox */
+
+  option:not(:disabled) {
+    color: $black;
+  }
+
 }
 
 #magnifier {
