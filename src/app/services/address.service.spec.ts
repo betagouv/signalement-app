@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MunicipalityDataService } from './municipality-data.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AddressService } from './address.service';
 
-describe('MunicipalityDataService', () => {
+describe('CityData', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
       HttpClientTestingModule
@@ -11,7 +11,7 @@ describe('MunicipalityDataService', () => {
   }));
 
   it('should be created', () => {
-    const service: MunicipalityDataService = TestBed.get(MunicipalityDataService);
+    const service: AddressService = TestBed.get(AddressService);
     expect(service).toBeTruthy();
   });
 });

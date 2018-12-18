@@ -12,10 +12,18 @@ import { Signalement } from '../../model/Signalement';
 import { ServiceUtils } from '../../services/service.utils';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../components/file-input/file-input.component';
-import { CompanyFormComponent } from '../company-form/company-form.component';
 import { Company } from '../../model/Company';
+import { Component } from '@angular/core';
+import { NgxLoadingModule } from 'ngx-loading';
+
 
 describe('SignalementFormComponent', () => {
+
+  @Component({
+    selector: 'app-company-form',
+    template: ''
+  })
+  class CompanyFormComponent {}
 
   let component: SignalementFormComponent;
   let fixture: ComponentFixture<SignalementFormComponent>;
@@ -56,6 +64,7 @@ describe('SignalementFormComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         BsDatepickerModule.forRoot(),
+        NgxLoadingModule,
       ],
       providers: [
         AnomalieService,

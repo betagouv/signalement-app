@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { CompanySearchResult } from '../model/Company';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { catchError, map } from 'rxjs/operators';
 import { deserialize } from 'json-typescript-mapper';
+import { CompleterItem, RemoteData } from 'ng2-completer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
+  private _suggestionData: SuggestionData;
+
   constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils) {
+    this._suggestionData = new SuggestionData(this.http, this.serviceUtils);
   }
 
-  searchByNameAndPostCode(name: string, city: string) {
+  searchCompanies(search: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
-      this.serviceUtils.getUrl(Api.Signalement, ['api', 'companies', name, city, MaxCompanyResult.toString()])
+      this.serviceUtils.getUrl(Api.Signalement, ['api', 'companies', search]),
+      {
+        params: httpParams
+      }
     ).pipe(
       map(result => deserialize(CompanySearchResult, result)),
       catchError(err => {
@@ -29,6 +38,29 @@ export class CompanyService {
       })
     );
   }
+
+  get suggestionData() {
+    return this._suggestionData;
+  }
+
 }
 
-export const MaxCompanyResult = 10;
+
+class SuggestionData extends RemoteData {
+
+  constructor(http: HttpClient, serviceUtils: ServiceUtils) {
+    super(http);
+    this.remoteUrl(serviceUtils.getUrl(Api.Signalement, ['api', 'companies', 'suggest/']));
+    this.dataField('suggestions');
+  }
+
+  public convertToItem(data: any): CompleterItem | null {
+    return data ? {
+      title: data.replace('*', ' ').replace('/', ' ')
+    } as CompleterItem : data;
+  }
+}
+
+
+export const MaxCompanyResult = 20;
+

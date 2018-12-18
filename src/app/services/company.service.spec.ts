@@ -32,10 +32,9 @@ describe('CompanyService', () => {
 
   it('should map the result into a CompanySearchResult object', (done) => {
 
-    const name = 'nom';
-    const city = 'ville';
+    const search = 'recherche';
 
-    companyService.searchByNameAndPostCode(name, city).subscribe(companySearchResult => {
+    companyService.searchCompanies(search).subscribe(companySearchResult => {
       expect(companySearchResult.total).toEqual(2);
       expect(companySearchResult.companies.length).toEqual(2);
       expect(companySearchResult.companies[0]).toEqual(deserialize(Company, {
@@ -54,22 +53,21 @@ describe('CompanyService', () => {
       done();
     });
 
-    const entrepriseRequest = httpMock.expectOne(`${environment.apiSignalementBaseUrl}/api/companies/nom/ville/${MaxCompanyResult}`);
+    const entrepriseRequest = httpMock.expectOne(`${environment.apiSignalementBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
     entrepriseRequest.flush(result);
 
   });
 
   it('should catch error with status 404 and return a CompanySearchResult object', (done) => {
 
-    const name = 'nom';
-    const city = 'ville';
+    const search = 'recherche';
 
-    companyService.searchByNameAndPostCode(name, city).subscribe(companySearchResult => {
+    companyService.searchCompanies(search).subscribe(companySearchResult => {
       expect(companySearchResult.total).toEqual(0);
       done();
     });
 
-    const entrepriseRequest = httpMock.expectOne(`${environment.apiSignalementBaseUrl}/api/companies/nom/ville/${MaxCompanyResult}`);
+    const entrepriseRequest = httpMock.expectOne(`${environment.apiSignalementBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
     entrepriseRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
   });
 

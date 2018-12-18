@@ -11,8 +11,14 @@ form {
   cursor: pointer;
 }
 
-.link {
-  color: $primary;
-  cursor: pointer;
-  text-decoration: underline;
+:host /deep/ {
+
+  .completer-holder {
+    width: 100%;
+    height: 100%;
+  }
+
+  .completer-dropdown-holder div {
+    width: 100%;
+  }
 }

@@ -11,6 +11,10 @@
     padding: 5em 0;
   }
 
+  .section-small {
+    padding: 2em 0 1em 0;
+  }
+
   .section-white {
     background-color: #fff;
   }
@@ -21,11 +25,17 @@
   }
 
   .section-gray {
-    background-color: $gray;
+    background-color: $lighter-grey;
+  }
+
+  .link {
+    color: $primary;
+    cursor: pointer;
+    text-decoration: underline;
   }
 
   .banner {
-    background: url(/assets/images/banner_gray.png) no-repeat top center fixed;
+    background: url(/assets/images/banner_gray.jpg) no-repeat top center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
