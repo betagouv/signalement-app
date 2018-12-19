@@ -21,7 +21,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/google53212771ade1a062.html"
+              "src/google53212771ade1a062.html",
+              "src/google697017b6a5304017.html"
             ],
             "styles": [
               "src/theme/main.scss",
