@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IntoxicationAlimentaire, SignalementFormComponent } from './signalement-form.component';
+import { IntoxicationAlimentaire, ReportingFormComponent } from './reporting-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnomalyService } from '../../services/anomaly.service';
 import { Anomaly, AnomalyType } from '../../model/Anomaly';
 import { of } from 'rxjs';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
-import { SignalementService } from '../../services/signalement.service';
-import { Signalement } from '../../model/Signalement';
+import { ReportingService } from '../../services/reporting.service';
+import { Reporting } from '../../model/Reporting';
 import { ServiceUtils } from '../../services/service.utils';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../components/file-input/file-input.component';
@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
 import { NgxLoadingModule } from 'ngx-loading';
 
 
-describe('SignalementFormComponent', () => {
+describe('ReportingFormComponent', () => {
 
   @Component({
     selector: 'app-company-form',
@@ -25,42 +25,42 @@ describe('SignalementFormComponent', () => {
   })
   class CompanyFormComponent {}
 
-  let component: SignalementFormComponent;
-  let fixture: ComponentFixture<SignalementFormComponent>;
+  let component: ReportingFormComponent;
+  let fixture: ComponentFixture<ReportingFormComponent>;
   let anomalyService: AnomalyService;
-  let signalementService: SignalementService;
+  let reportingService: ReportingService;
 
-  const typeEtablissement1 = 'typeEtablissement1';
-  const typeAnomalieListEtablissement1 = [
-    deserialize(AnomalyType, {category: 'typeAnomalie11'}),
-    deserialize(AnomalyType, {category: 'typeAnomalie12'})
+  const companyType1 = 'companyType1';
+  const anomalyTypeListForEtablissement1 = [
+    deserialize(AnomalyType, {category: 'anomalyType11'}),
+    deserialize(AnomalyType, {category: 'anomalyType12'})
   ];
-  const typeEtablissement2 = 'typeEtablissement2';
+  const companyType2 = 'companyType2';
   const precisionList22 = ['precision221', 'precision222', 'precision2223'];
-  const typeAnomalie21 = deserialize(AnomalyType, {category: 'typeAnomalie21', precisionList: []});
-  const typeAnomalie22 = deserialize(AnomalyType, {category: 'typeAnomalie22', precisionList: precisionList22});
-  const typeAnomalieIntoxicationAlimentaire = deserialize(AnomalyType, {category: IntoxicationAlimentaire, precisionList: []});
-  const typeAnomalieListEtablissement2 = [
-    typeAnomalie21,
-    typeAnomalie22,
-    typeAnomalieIntoxicationAlimentaire
+  const anomalyType21 = deserialize(AnomalyType, {category: 'anomalyType21', precisionList: []});
+  const anomalyType22 = deserialize(AnomalyType, {category: 'anomalyType22', precisionList: precisionList22});
+  const anomalyTypeIntoxicationAlimentaire = deserialize(AnomalyType, {category: IntoxicationAlimentaire, precisionList: []});
+  const anomalyTypeListForEtablissement2 = [
+    anomalyType21,
+    anomalyType22,
+    anomalyTypeIntoxicationAlimentaire
   ];
 
   const anomaliesFixture = [
-    deserialize(Anomaly, {companyType: typeEtablissement1, anomalyTypeList: typeAnomalieListEtablissement1}),
-    deserialize(Anomaly, {companyType: typeEtablissement2, anomalyTypeList: typeAnomalieListEtablissement2}),
+    deserialize(Anomaly, {companyType: companyType1, anomalyTypeList: anomalyTypeListForEtablissement1}),
+    deserialize(Anomaly, {companyType: companyType2, anomalyTypeList: anomalyTypeListForEtablissement2}),
   ];
 
   const anomalyInfosFixture = [
     { key: precisionList22[0], info: 'info220' },
     { key: precisionList22[2], info: 'info222' },
-  ]
+  ];
 
   beforeEach(async(() => {
     defineLocale('fr', frLocale);
     TestBed.configureTestingModule({
       declarations: [
-        SignalementFormComponent,
+        ReportingFormComponent,
         FileInputComponent,
         CompanyFormComponent
       ],
@@ -73,7 +73,7 @@ describe('SignalementFormComponent', () => {
       ],
       providers: [
         AnomalyService,
-        SignalementService,
+        ReportingService,
         ServiceUtils,
       ]
     })
@@ -81,11 +81,11 @@ describe('SignalementFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignalementFormComponent);
+    fixture = TestBed.createComponent(ReportingFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     anomalyService = TestBed.get(AnomalyService);
-    signalementService = TestBed.get(SignalementService);
+    reportingService = TestBed.get(ReportingService);
     spyOn(anomalyService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
     spyOn(anomalyService, 'getAnomalyInfos').and.returnValue(of(anomalyInfosFixture));
   });
@@ -95,21 +95,21 @@ describe('SignalementFormComponent', () => {
   });
 
   describe('template design', () => {
-    it('should display a select input for typeEtablissement on init', () => {
+    it('should display a select input for companyType on init', () => {
       component.ngOnInit();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('select[formcontrolname="typeEtablissement"]')).not.toBeNull();
+      expect(nativeElement.querySelector('select[formcontrolname="companyType"]')).not.toBeNull();
     });
 
-    it('should display typeEtablissement of anomalies as options of typeEtablissement select', () => {
+    it('should display companyType of anomalies as options of companyType select', () => {
       component.anomalies = anomaliesFixture;
 
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelectorAll('select[formcontrolname="typeEtablissement"] option')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('select[formcontrolname="typeEtablissement"] option').length)
+      expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option').length)
         .toBe(anomaliesFixture.length + 1);
     });
 
@@ -123,8 +123,8 @@ describe('SignalementFormComponent', () => {
     it('should display a select input for anomalyCategory with anomalyCategory list as options ' +
       'when associated form control is defined', () => {
 
-      component.signalementForm.addControl('anomalyCategory', component.anomalyCategoryCtrl);
-      component.anomalyTypeList = typeAnomalieListEtablissement1;
+      component.reportingForm.addControl('anomalyCategory', component.anomalyCategoryCtrl);
+      component.anomalyTypeList = anomalyTypeListForEtablissement1;
 
       fixture.detectChanges();
 
@@ -132,7 +132,7 @@ describe('SignalementFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="anomalyCategory"]')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="anomalyCategory"] option')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="anomalyCategory"] option').length)
-        .toBe(typeAnomalieListEtablissement1.length + 1);
+        .toBe(anomalyTypeListForEtablissement1.length + 1);
     });
 
     it('should not display a select input for anomalyPrecision on init', () => {
@@ -145,7 +145,7 @@ describe('SignalementFormComponent', () => {
     it('should display a select input for anomalyPrecision with anomalyPrecision list as options ' +
       'when associated form control is defined', () => {
 
-      component.signalementForm.addControl('anomalyPrecision', component.anomalyPrecisionCtrl);
+      component.reportingForm.addControl('anomalyPrecision', component.anomalyPrecisionCtrl);
       component.anomalyPrecisionList = precisionList22;
 
       fixture.detectChanges();
@@ -158,7 +158,7 @@ describe('SignalementFormComponent', () => {
     });
 
     it('should not display errors when the form is not submitted', () => {
-      component.typeEtablissementCtrl.setValue('');
+      component.companyTypeCtrl.setValue('');
 
       fixture.detectChanges();
 
@@ -167,9 +167,9 @@ describe('SignalementFormComponent', () => {
     });
 
     it('should display errors when the form is submitted', () => {
-      component.typeEtablissementCtrl.setValue('');
+      component.companyTypeCtrl.setValue('');
 
-      component.createSignalement();
+      component.createReporting();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -205,15 +205,15 @@ describe('SignalementFormComponent', () => {
     it('should set all form controls except for anomalyType and anomalyPrecision', () => {
       component.ngOnInit();
 
-      expect(component.signalementForm.controls['dateConstat']).toBeDefined();
-      expect(component.signalementForm.controls['heureConstat']).toBeDefined();
-      expect(component.signalementForm.controls['description']).toBeDefined();
-      expect(component.signalementForm.controls['prenom']).toBeDefined();
-      expect(component.signalementForm.controls['nom']).toBeDefined();
-      expect(component.signalementForm.controls['email']).toBeDefined();
-      expect(component.signalementForm.controls['accordContact']).toBeDefined();
-      expect(component.signalementForm.controls['anomalyType']).toBeUndefined();
-      expect(component.signalementForm.controls['anomalyPrecision']).toBeUndefined();
+      expect(component.reportingForm.controls['anomalyDate']).toBeDefined();
+      expect(component.reportingForm.controls['anomalyTimeSlot']).toBeDefined();
+      expect(component.reportingForm.controls['description']).toBeDefined();
+      expect(component.reportingForm.controls['firstName']).toBeDefined();
+      expect(component.reportingForm.controls['lastName']).toBeDefined();
+      expect(component.reportingForm.controls['email']).toBeDefined();
+      expect(component.reportingForm.controls['contactAgreement']).toBeDefined();
+      expect(component.reportingForm.controls['anomalyType']).toBeUndefined();
+      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
     it('should not display form errors', () => {
@@ -231,16 +231,16 @@ describe('SignalementFormComponent', () => {
 
   });
 
-  describe('changeTypeEtablissement function', () => {
+  describe('changeCompanyType function', () => {
 
-    it('should load anomalyType list for selected typeEtablissement and add a form control for anomalyType', () => {
+    it('should load anomalyType list for selected companyType and add a form control for anomalyType', () => {
       component.anomalies = anomaliesFixture;
-      component.typeEtablissementCtrl.setValue(typeEtablissement2);
+      component.companyTypeCtrl.setValue(companyType2);
 
-      component.changeTypeEtablissement();
+      component.changeCompanyType();
 
-      expect(component.anomalyTypeList).toEqual(typeAnomalieListEtablissement2);
-      expect(component.signalementForm.controls['anomalyType']).not.toBeNull();
+      expect(component.anomalyTypeList).toEqual(anomalyTypeListForEtablissement2);
+      expect(component.reportingForm.controls['anomalyType']).not.toBeNull();
     });
   });
 
@@ -248,20 +248,20 @@ describe('SignalementFormComponent', () => {
 
     it('should reset anomalyPrecision list and delete anomalyPrecision form control when no typeAnomaly is selected', () => {
       component.anomalies = anomaliesFixture;
-      component.typeEtablissementCtrl.setValue(typeEtablissement2);
+      component.companyTypeCtrl.setValue(companyType2);
       component.anomalyCategoryCtrl.setValue('');
 
       component.changeAnomalyCategory();
 
       expect(component.anomalyPrecisionList).toEqual([]);
-      expect(component.signalementForm.controls['anomalyPrecision']).toBeUndefined();
+      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
-    it('should load anomalyPrecision list for selected typeEtablissement and anomalyType', () => {
+    it('should load anomalyPrecision list for selected companyType and anomalyType', () => {
 
       component.anomalies = anomaliesFixture;
-      component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.anomalyCategoryCtrl.setValue(typeAnomalie22.category);
+      component.companyTypeCtrl.setValue(companyType2);
+      component.anomalyCategoryCtrl.setValue(anomalyType22.category);
 
       component.changeAnomalyCategory();
 
@@ -271,50 +271,50 @@ describe('SignalementFormComponent', () => {
     it('should add a form control for anomalyPrecision if loaded list is not empty', () => {
 
       component.anomalies = anomaliesFixture;
-      component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.anomalyCategoryCtrl.setValue(typeAnomalie22.category);
+      component.companyTypeCtrl.setValue(companyType2);
+      component.anomalyCategoryCtrl.setValue(anomalyType22.category);
 
       component.changeAnomalyCategory();
 
       expect(component.anomalyPrecisionList).toEqual(precisionList22);
-      expect(component.signalementForm.controls['anomalyPrecision']).not.toBeNull();
+      expect(component.reportingForm.controls['anomalyPrecision']).not.toBeNull();
     });
 
     it('should not add a form control for anomalyPrecision if loaded list is empty', () => {
 
       component.anomalies = anomaliesFixture;
-      component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.anomalyCategoryCtrl.setValue(typeAnomalie21.category);
+      component.companyTypeCtrl.setValue(companyType2);
+      component.anomalyCategoryCtrl.setValue(anomalyType21.category);
 
       component.changeAnomalyCategory();
 
-      expect(component.signalementForm.controls['anomalyPrecision']).toBeUndefined();
+      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
     });
   });
 
-  describe('createSignalement function', () => {
+  describe('createReporting function', () => {
 
     it('should display errors when form is invalid', () => {
-      component.typeEtablissementCtrl.setValue('');
+      component.companyTypeCtrl.setValue('');
 
-      component.createSignalement();
+      component.createReporting();
 
       expect(component.showErrors).toBeTruthy();
     });
 
-    it('should call a creation service with a signalement object', () => {
-      const dateConstat = new Date();
-      const anomalieFile = new File([], 'anomalie.jpg');
-      component.typeEtablissementCtrl.setValue('typeEtablissement');
+    it('should call a creation service with a reporting object', () => {
+      const anomalyDate = new Date();
+      const anomalyFile = new File([], 'anomaly.jpg');
+      component.companyTypeCtrl.setValue('companyType');
       component.anomalyCategoryCtrl.setValue('category');
       component.anomalyPrecisionCtrl.setValue('precision');
-      component.dateConstatCtrl.setValue(dateConstat);
-      component.heureConstatCtrl.setValue(5);
-      component.nomCtrl.setValue('nom');
-      component.prenomCtrl.setValue('prenom');
+      component.anomalyDateCtrl.setValue(anomalyDate);
+      component.anomalyTimeSlotCtrl.setValue(5);
+      component.lastNameCtrl.setValue('lastName');
+      component.firstNameCtrl.setValue('firstName');
       component.emailCtrl.setValue('email@mail.fr');
-      component.accordContactCtrl.setValue(true);
-      component.anomalyFile = anomalieFile;
+      component.contactAgreementCtrl.setValue(true);
+      component.anomalyFile = anomalyFile;
       component.companyCtrl.setValue(Object.assign(
         new Company(),
         {
@@ -326,39 +326,39 @@ describe('SignalementFormComponent', () => {
         }
       ));
 
-      spyOn(signalementService, 'createSignalement').and.returnValue(of());
+      spyOn(reportingService, 'createReporting').and.returnValue(of());
 
-      component.createSignalement();
-      const signalement = new Signalement();
-      signalement.typeEtablissement = 'typeEtablissement';
-      signalement.categorieAnomalie = 'category';
-      signalement.precisionAnomalie = 'precision';
-      signalement.nomEtablissement = 'Mon établissement';
-      signalement.adresseEtablissement = 'adresse 1 - adresse 3 - adresse 4';
-      signalement.siretEtablissement = '123245678900015';
-      signalement.description = '';
-      signalement.dateConstat = dateConstat;
-      signalement.heureConstat = 5;
-      signalement.nom = 'nom';
-      signalement.prenom = 'prenom';
-      signalement.email = 'email@mail.fr';
-      signalement.accordContact = true;
-      signalement.ticketFile = undefined;
-      signalement.anomalieFile = anomalieFile;
-      expect(signalementService.createSignalement).toHaveBeenCalledWith(signalement);
+      component.createReporting();
+      const reporting = new Reporting();
+      reporting.companyType = 'companyType';
+      reporting.anomalyCategory = 'category';
+      reporting.anomalyPrecision = 'precision';
+      reporting.companyName = 'Mon établissement';
+      reporting.companyAddress = 'adresse 1 - adresse 3 - adresse 4';
+      reporting.companySiret = '123245678900015';
+      reporting.description = '';
+      reporting.anomalyDate = anomalyDate;
+      reporting.anomalyTimeSlot = 5;
+      reporting.lastName = 'lastName';
+      reporting.firstName = 'firstName';
+      reporting.email = 'email@mail.fr';
+      reporting.contactAgreement = true;
+      reporting.ticketFile = undefined;
+      reporting.anomalyFile = anomalyFile;
+      expect(reportingService.createReporting).toHaveBeenCalledWith(reporting);
     });
 
-    it('should display a success message when signalement creation succeed', (done) => {
-      component.typeEtablissementCtrl.setValue('typeEtablissement');
+    it('should display a success message when reporting creation succeed', (done) => {
+      component.companyTypeCtrl.setValue('companyType');
       component.companyCtrl.setValue(new Company());
-      component.dateConstatCtrl.setValue(new Date());
-      component.nomCtrl.setValue('nom');
-      component.prenomCtrl.setValue('prenom');
+      component.anomalyDateCtrl.setValue(new Date());
+      component.lastNameCtrl.setValue('lastName');
+      component.firstNameCtrl.setValue('firstName');
       component.emailCtrl.setValue('email@mail.fr');
-      const signalementServiceSpy = spyOn(signalementService, 'createSignalement').and.returnValue(of(new Signalement()));
+      const reportingServiceSpy = spyOn(reportingService, 'createReporting').and.returnValue(of(new Reporting()));
 
-      component.createSignalement();
-      signalementServiceSpy.calls.mostRecent().returnValue.subscribe(() => {
+      component.createReporting();
+      reportingServiceSpy.calls.mostRecent().returnValue.subscribe(() => {
         expect(component.showSuccess).toBeTruthy();
         done();
       });
@@ -372,8 +372,8 @@ describe('SignalementFormComponent', () => {
     it('should display a specific label for the submit button', () => {
 
       component.anomalies = anomaliesFixture;
-      component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.anomalyCategoryCtrl.setValue(typeAnomalieIntoxicationAlimentaire.category);
+      component.companyTypeCtrl.setValue(companyType2);
+      component.anomalyCategoryCtrl.setValue(anomalyTypeIntoxicationAlimentaire.category);
 
       fixture.detectChanges();
 
@@ -384,14 +384,14 @@ describe('SignalementFormComponent', () => {
 
   });
 
-  describe('case of anomaly which do not require a report', () => {
+  describe('case of anomaly which do not require a reporting', () => {
 
     it('should display an information message when there is an anomaly info linked to the anomaly', () => {
 
       component.ngOnInit();
       component.anomalies = anomaliesFixture;
-      component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.anomalyCategoryCtrl.setValue(typeAnomalie22.category);
+      component.companyTypeCtrl.setValue(companyType2);
+      component.anomalyCategoryCtrl.setValue(anomalyType22.category);
       component.anomalyPrecisionCtrl.setValue(precisionList22[0]);
 
       component.changeAnomalyPrecision();

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/header/header.component';
-import { SignalementFormComponent } from './pages/signalement-form/signalement-form.component';
+import { ReportingFormComponent } from './pages/reporting-form/reporting-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -23,7 +23,7 @@ defineLocale('fr', frLocale);
   declarations: [
     AppComponent,
     HeaderComponent,
-    SignalementFormComponent,
+    ReportingFormComponent,
     FileInputComponent,
     CompanyFormComponent,
     FooterComponent,
@@ -39,7 +39,7 @@ defineLocale('fr', frLocale);
     Ng2CompleterModule,
     Angulartics2Module.forRoot(),
     RouterModule.forRoot([
-        { path: '', component: SignalementFormComponent },
+        { path: '', component: ReportingFormComponent },
         { path: 'infos/why', component: WhyComponent },
       ]),
   ],

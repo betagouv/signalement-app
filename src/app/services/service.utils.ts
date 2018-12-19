@@ -24,6 +24,6 @@ export class ServiceUtils {
 
 
 export enum Api {
-  Signalement = 'apiSignalementBaseUrl',
-  Adresse = 'apiAdresseBaseUrl'
+  Reporting = 'apiReportingBaseUrl',
+  Address = 'apiAddressBaseUrl'
 }

@@ -2,29 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Anomaly, AnomalyInfo, AnomalyType } from '../../model/Anomaly';
 import { AnomalyService } from '../../services/anomaly.service';
-import { SignalementService } from '../../services/signalement.service';
-import { Signalement } from '../../model/Signalement';
+import { ReportingService } from '../../services/reporting.service';
+import { Reporting } from '../../model/Reporting';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { Company } from '../../model/Company';
 
 @Component({
-  selector: 'app-signalement-form',
-  templateUrl: './signalement-form.component.html',
-  styleUrls: ['./signalement-form.component.scss']
+  selector: 'app-reporting-form',
+  templateUrl: './reporting-form.component.html',
+  styleUrls: ['./reporting-form.component.scss']
 })
-export class SignalementFormComponent implements OnInit {
+export class ReportingFormComponent implements OnInit {
 
-  signalementForm: FormGroup;
-  typeEtablissementCtrl: FormControl;
+  reportingForm: FormGroup;
+  companyTypeCtrl: FormControl;
   anomalyCategoryCtrl: FormControl;
   anomalyPrecisionCtrl: FormControl;
-  dateConstatCtrl: FormControl;
-  heureConstatCtrl: FormControl;
+  anomalyDateCtrl: FormControl;
+  anomalyTimeSlotCtrl: FormControl;
   descriptionCtrl: FormControl;
-  prenomCtrl: FormControl;
-  nomCtrl: FormControl;
+  firstNameCtrl: FormControl;
+  lastNameCtrl: FormControl;
   emailCtrl: FormControl;
-  accordContactCtrl: FormControl;
+  contactAgreementCtrl: FormControl;
   companyCtrl: FormControl;
 
   ticketFile: File;
@@ -44,7 +44,7 @@ export class SignalementFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
-              private signalementService: SignalementService,
+              private reportingService: ReportingService,
               private localeService: BsLocaleService) {
   }
 
@@ -52,34 +52,34 @@ export class SignalementFormComponent implements OnInit {
     this.showErrors = false;
     this.localeService.use('fr');
 
-    this.initSignalementForm();
+    this.initReportingForm();
     this.constructPlageHoraireList();
     this.loadAnomalies();
     this.loadAnomalyInfos();
   }
 
-  private initSignalementForm() {
-    this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
+  private initReportingForm() {
+    this.companyTypeCtrl = this.formBuilder.control('', Validators.required);
     this.anomalyCategoryCtrl = this.formBuilder.control('', Validators.required);
     this.anomalyPrecisionCtrl = this.formBuilder.control('', Validators.required);
-    this.dateConstatCtrl = this.formBuilder.control('', Validators.required);
-    this.heureConstatCtrl = this.formBuilder.control('');
+    this.anomalyDateCtrl = this.formBuilder.control('', Validators.required);
+    this.anomalyTimeSlotCtrl = this.formBuilder.control('');
     this.descriptionCtrl = this.formBuilder.control('');
-    this.prenomCtrl = this.formBuilder.control('', Validators.required);
-    this.nomCtrl = this.formBuilder.control('', Validators.required);
+    this.firstNameCtrl = this.formBuilder.control('', Validators.required);
+    this.lastNameCtrl = this.formBuilder.control('', Validators.required);
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.accordContactCtrl = this.formBuilder.control(false);
+    this.contactAgreementCtrl = this.formBuilder.control(false);
     this.companyCtrl = this.formBuilder.control('', Validators.required);
 
-    this.signalementForm = this.formBuilder.group({
-      typeEtablissement: this.typeEtablissementCtrl,
-      dateConstat: this.dateConstatCtrl,
-      heureConstat: this.heureConstatCtrl,
+    this.reportingForm = this.formBuilder.group({
+      companyType: this.companyTypeCtrl,
+      anomalyDate: this.anomalyDateCtrl,
+      anomalyTimeSlot: this.anomalyTimeSlotCtrl,
       description: this.descriptionCtrl,
-      prenom: this.prenomCtrl,
-      nom: this.nomCtrl,
+      firstName: this.firstNameCtrl,
+      lastName: this.lastNameCtrl,
       email: this.emailCtrl,
-      accordContact: this.accordContactCtrl,
+      contactAgreement: this.contactAgreementCtrl,
       company: this.companyCtrl
     });
   }
@@ -103,24 +103,24 @@ export class SignalementFormComponent implements OnInit {
     });
   }
 
-  changeTypeEtablissement() {
+  changeCompanyType() {
     this.resetAnomalyCategory();
-    if (this.typeEtablissementCtrl.value !== '') {
+    if (this.companyTypeCtrl.value !== '') {
       this.anomalyTypeList = this.getAnomalyTypeList();
-      this.signalementForm.addControl('anomalyCategory', this.anomalyCategoryCtrl);
+      this.reportingForm.addControl('anomalyCategory', this.anomalyCategoryCtrl);
     }
   }
 
   private resetAnomalyCategory() {
     this.anomalyTypeList = [];
-    this.signalementForm.removeControl('anomalyCategory');
+    this.reportingForm.removeControl('anomalyCategory');
     this.anomalyCategoryCtrl.setValue('');
     this.resetAnomalyPrecision();
   }
 
   private getAnomalyTypeList() {
     return this.anomalies
-        .find(anomaly => anomaly.companyType === this.typeEtablissementCtrl.value)
+        .find(anomaly => anomaly.companyType === this.companyTypeCtrl.value)
         .anomalyTypeList;
   }
 
@@ -129,14 +129,14 @@ export class SignalementFormComponent implements OnInit {
     if (this.anomalyCategoryCtrl.value !== '') {
       this.anomalyPrecisionList = this.getAnomalyPrecisionList();
       if (this.anomalyPrecisionList.length) {
-        this.signalementForm.addControl('anomalyPrecision', this.anomalyPrecisionCtrl);
+        this.reportingForm.addControl('anomalyPrecision', this.anomalyPrecisionCtrl);
       }
     }
   }
 
   private resetAnomalyPrecision() {
     this.anomalyPrecisionList = [];
-    this.signalementForm.removeControl('anomalyPrecision');
+    this.reportingForm.removeControl('anomalyPrecision');
     this.anomalyPrecisionCtrl.setValue('');
     this.anomalyInfo = null;
   }
@@ -148,35 +148,33 @@ export class SignalementFormComponent implements OnInit {
   }
 
   changeAnomalyPrecision() {
-    console.log('this.anomalyInfos', this.anomalyInfos)
-    console.log('this.anomalyPrecisionCtrl.value', this.anomalyPrecisionCtrl.value)
     this.anomalyInfo = this.anomalyInfos.find(anomalyInfo => anomalyInfo.key === this.anomalyPrecisionCtrl.value);
   }
 
-  createSignalement() {
-    if (!this.signalementForm.valid) {
+  createReporting() {
+    if (!this.reportingForm.valid) {
       this.showErrors = true;
     } else {
       this.loading = true;
-      this.signalementService.createSignalement(
+      this.reportingService.createReporting(
         Object.assign(
-          new Signalement(),
+          new Reporting(),
           {
-            typeEtablissement: this.typeEtablissementCtrl.value,
-            categorieAnomalie: this.anomalyCategoryCtrl.value,
-            precisionAnomalie: this.anomalyPrecisionCtrl.value,
-            dateConstat: this.dateConstatCtrl.value,
-            heureConstat: this.heureConstatCtrl.value,
+            companyType: this.companyTypeCtrl.value,
+            anomalyCategory: this.anomalyCategoryCtrl.value,
+            anomalyPrecision: this.anomalyPrecisionCtrl.value,
+            anomalyDate: this.anomalyDateCtrl.value,
+            anomalyTimeSlot: this.anomalyTimeSlotCtrl.value,
             description: this.descriptionCtrl.value,
-            prenom: this.prenomCtrl.value,
-            nom: this.nomCtrl.value,
+            firstName: this.firstNameCtrl.value,
+            lastName: this.lastNameCtrl.value,
             email: this.emailCtrl.value,
-            accordContact: this.accordContactCtrl.value,
+            contactAgreement: this.contactAgreementCtrl.value,
             ticketFile: this.ticketFile,
-            anomalieFile: this.anomalyFile,
-            nomEtablissement: this.companyCtrl.value.name,
-            adresseEtablissement: this.getCompanyAddress(),
-            siretEtablissement: this.companyCtrl.value.siret ? this.companyCtrl.value.siret : ''
+            anomalyFile: this.anomalyFile,
+            companyName: this.companyCtrl.value.name,
+            companyAddress: this.getCompanyAddress(),
+            companySiret: this.companyCtrl.value.siret ? this.companyCtrl.value.siret : ''
           }
         )
       ).subscribe(
@@ -229,7 +227,7 @@ export class SignalementFormComponent implements OnInit {
     return address.substring(0, address.length - 3);
   }
 
-  newReport() {
+  newReporting() {
     this.ngOnInit();
   }
 }

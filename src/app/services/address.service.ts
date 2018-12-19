@@ -24,7 +24,7 @@ class AddressData extends RemoteData {
 
   constructor(http: HttpClient, serviceUtils: ServiceUtils) {
     super(http);
-    this.remoteUrl(serviceUtils.getUrl(Api.Adresse, ['search', '?limit=20&q=']));
+    this.remoteUrl(serviceUtils.getUrl(Api.Address, ['search', '?limit=20&q=']));
     this.dataField('features');
     this.searchFields('properties.label');
   }
