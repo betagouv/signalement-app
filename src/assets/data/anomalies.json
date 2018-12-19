@@ -1,10 +1,10 @@
 {
   "list": [
     {
-      "typeEtablissement": "Café restaurant",
-      "typeAnomalieList": [
+      "companyType": "Café restaurant",
+      "anomalyTypeList": [
         {
-          "categorie": "Hygiène du personnel",
+          "category": "Hygiène du personnel",
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
@@ -12,7 +12,7 @@
           ]
         },
         {
-          "categorie": "Hygiène des locaux",
+          "category": "Hygiène des locaux",
           "precisionList": [
             "Cuisine sale",
             "Salle du restaurant/café sale",
@@ -22,11 +22,11 @@
           ]
         },
         {
-          "categorie": "Intoxication alimentaire",
+          "category": "Intoxication alimentaire",
           "precisionList": []
         },
         {
-          "categorie": "Nourriture et boissons",
+          "category": "Nourriture et boissons",
           "precisionList": [
             "Plat de mauvaise qualité ou pas bon",
             "Descriptif trompeur des plats, des offres...",
@@ -37,7 +37,7 @@
           ]
         },
         {
-          "categorie": "Prix et paiement",
+          "category": "Prix et paiement",
           "precisionList": [
             "Prix non indiqué",
             "Prix trop cher",
@@ -48,7 +48,7 @@
           ]
         },
         {
-          "categorie": "Autres",
+          "category": "Autres",
           "precisionList": [
             "Refus de vous servir",
             "Personnel peu aimable, mal poli",
@@ -59,10 +59,10 @@
       ]
     },
     {
-      "typeEtablissement": "Grande surface et supérette",
-      "typeAnomalieList": [
+      "companyType": "Grande surface et supérette",
+      "anomalyTypeList": [
         {
-          "categorie": "Hygiène du personnel",
+          "category": "Hygiène du personnel",
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
@@ -70,7 +70,7 @@
           ]
         },
         {
-          "categorie": "Hygiène des locaux",
+          "category": "Hygiène des locaux",
           "precisionList": [
             "Sol ou rayon sale",
             "Présence de rat/insectes/oiseau",
@@ -79,11 +79,11 @@
           ]
         },
         {
-          "categorie": "Intoxication alimentaire",
+          "category": "Intoxication alimentaire",
           "precisionList": []
         },
         {
-          "categorie": "Prix et paiement",
+          "category": "Prix et paiement",
           "precisionList": [
             "Absence de prix ou prix illisible",
             "Prix trop cher",
@@ -94,14 +94,14 @@
           ]
         },
         {
-          "categorie": "Publicité (affiche, catalogue..)",
+          "category": "Publicité (affiche, catalogue..)",
           "precisionList": [
             "Indisponibilité des produits du catalogue",
             "Publicité trompeuse / mensongère"
           ]
         },
         {
-          "categorie": "Produit alimentaire",
+          "category": "Produit alimentaire",
           "precisionList": [
             "Date Limite de Consommation dépassée",
             "Problème d'étiquetage ou absence d’étiquetage",
@@ -113,7 +113,7 @@
           ]
         },
         {
-          "categorie": "Produit non-alimentaire",
+          "category": "Produit non-alimentaire",
           "precisionList": [
             "Problème d'étiquetage ou absence d’étiquetage",
             "Quantité annoncée non conforme",
@@ -125,7 +125,7 @@
           ]
         },
         {
-          "categorie": "Autres",
+          "category": "Autres",
           "precisionList": [
             "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
             "Refus de vous servir, refus de vendre",
@@ -136,10 +136,10 @@
       ]
     },
     {
-      "typeEtablissement": "Commerçant de proximité (boulangerie, boucherie…)",
-      "typeAnomalieList": [
+      "companyType": "Commerçant de proximité (boulangerie, boucherie…)",
+      "anomalyTypeList": [
         {
-          "categorie": "Hygiène du personnel",
+          "category": "Hygiène du personnel",
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
@@ -147,7 +147,7 @@
           ]
         },
         {
-          "categorie": "Hygiène des locaux",
+          "category": "Hygiène des locaux",
           "precisionList": [
             "Etablisement sale",
             "Présence de rat/insectes/oiseau",
@@ -156,7 +156,7 @@
           ]
         },
         {
-          "categorie": "Prix et paiement",
+          "category": "Prix et paiement",
           "precisionList": [
             "Absence de prix ou prix illisible",
             "Prix trop cher",
@@ -168,7 +168,7 @@
           ]
         },
         {
-          "categorie": "Produit alimentaire",
+          "category": "Produit alimentaire",
           "precisionList": [
             "Date Limite de Consommation dépassée",
             "Problème d'étiquetage ou absence d’étiquetage",
@@ -177,17 +177,17 @@
           ]
         },
         {
-          "categorie": "Intoxication alimentaire",
+          "category": "Intoxication alimentaire",
           "precisionList": []
         },
         {
-          "categorie": "Publicité (affiche, catalogue..)",
+          "category": "Publicité (affiche, catalogue..)",
           "precisionList": [
             "Publicité trompeuse / mensongère"
           ]
         },
         {
-          "categorie": "Autres",
+          "category": "Autres",
           "precisionList": [
             "Refus de vous servir, refus de vendre",
             "Autres (merci de le préciser)",
@@ -197,10 +197,10 @@
       ]
     },
     {
-      "typeEtablissement": "Magasin non alimentaire (librairie, vêtements…)",
-      "typeAnomalieList": [
+      "companyType": "Magasin non alimentaire (librairie, vêtements…)",
+      "anomalyTypeList": [
         {
-          "categorie": "Prix et paiement",
+          "category": "Prix et paiement",
           "precisionList": [
             "Absence de prix ou prix illisible",
             "Prix trop cher",
@@ -212,14 +212,14 @@
           ]
         },
         {
-          "categorie": "Publicité (affiche, catalogue..)",
+          "category": "Publicité (affiche, catalogue..)",
           "precisionList": [
             "Indisponibilité des produits du catalogue",
             "Publicité trompeuse / mensongère"
           ]
         },
         {
-          "categorie": "Produit non-alimentaire",
+          "category": "Produit non-alimentaire",
           "precisionList": [
             "Problème ou absence d'étiquetage",
             "Problème rencontré avec un produit (allergie, coupure..)",
@@ -230,7 +230,7 @@
           ]
         },
         {
-          "categorie": "Autres",
+          "category": "Autres",
           "precisionList": [
             "Absence d'informations sur les garanties",
             "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",

@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IntoxicationAlimentaire, SignalementFormComponent } from './signalement-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AnomalieService } from '../../services/anomalie.service';
-import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
+import { AnomalyService } from '../../services/anomaly.service';
+import { Anomaly, AnomalyType } from '../../model/Anomaly';
 import { of } from 'rxjs';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,19 +27,19 @@ describe('SignalementFormComponent', () => {
 
   let component: SignalementFormComponent;
   let fixture: ComponentFixture<SignalementFormComponent>;
-  let anomalieService: AnomalieService;
+  let anomalyService: AnomalyService;
   let signalementService: SignalementService;
 
   const typeEtablissement1 = 'typeEtablissement1';
   const typeAnomalieListEtablissement1 = [
-    deserialize(TypeAnomalie, {categorie: 'typeAnomalie11'}),
-    deserialize(TypeAnomalie, {categorie: 'typeAnomalie12'})
+    deserialize(AnomalyType, {category: 'typeAnomalie11'}),
+    deserialize(AnomalyType, {category: 'typeAnomalie12'})
   ];
   const typeEtablissement2 = 'typeEtablissement2';
   const precisionList22 = ['precision221', 'precision222', 'precision2223'];
-  const typeAnomalie21 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie21', precisionList: []});
-  const typeAnomalie22 = deserialize(TypeAnomalie, {categorie: 'typeAnomalie22', precisionList: precisionList22});
-  const typeAnomalieIntoxicationAlimentaire = deserialize(TypeAnomalie, {categorie: IntoxicationAlimentaire, precisionList: []});
+  const typeAnomalie21 = deserialize(AnomalyType, {category: 'typeAnomalie21', precisionList: []});
+  const typeAnomalie22 = deserialize(AnomalyType, {category: 'typeAnomalie22', precisionList: precisionList22});
+  const typeAnomalieIntoxicationAlimentaire = deserialize(AnomalyType, {category: IntoxicationAlimentaire, precisionList: []});
   const typeAnomalieListEtablissement2 = [
     typeAnomalie21,
     typeAnomalie22,
@@ -47,9 +47,14 @@ describe('SignalementFormComponent', () => {
   ];
 
   const anomaliesFixture = [
-    deserialize(Anomalie, {typeEtablissement: typeEtablissement1, typeAnomalieList: typeAnomalieListEtablissement1}),
-    deserialize(Anomalie, {typeEtablissement: typeEtablissement2, typeAnomalieList: typeAnomalieListEtablissement2}),
+    deserialize(Anomaly, {companyType: typeEtablissement1, anomalyTypeList: typeAnomalieListEtablissement1}),
+    deserialize(Anomaly, {companyType: typeEtablissement2, anomalyTypeList: typeAnomalieListEtablissement2}),
   ];
+
+  const anomalyInfosFixture = [
+    { key: precisionList22[0], info: 'info220' },
+    { key: precisionList22[2], info: 'info222' },
+  ]
 
   beforeEach(async(() => {
     defineLocale('fr', frLocale);
@@ -67,7 +72,7 @@ describe('SignalementFormComponent', () => {
         NgxLoadingModule,
       ],
       providers: [
-        AnomalieService,
+        AnomalyService,
         SignalementService,
         ServiceUtils,
       ]
@@ -79,9 +84,10 @@ describe('SignalementFormComponent', () => {
     fixture = TestBed.createComponent(SignalementFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    anomalieService = TestBed.get(AnomalieService);
+    anomalyService = TestBed.get(AnomalyService);
     signalementService = TestBed.get(SignalementService);
-    spyOn(anomalieService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
+    spyOn(anomalyService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
+    spyOn(anomalyService, 'getAnomalyInfos').and.returnValue(of(anomalyInfosFixture));
   });
 
   it('should create', () => {
@@ -107,47 +113,47 @@ describe('SignalementFormComponent', () => {
         .toBe(anomaliesFixture.length + 1);
     });
 
-    it('should not display a select input for typeAnomalie on init', () => {
+    it('should not display a select input for anomalyType on init', () => {
       component.ngOnInit();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('select[formcontrolname="typeAnomalie"]')).toBeNull();
+      expect(nativeElement.querySelector('select[formcontrolname="anomalyType"]')).toBeNull();
     });
 
-    it('should display a select input for categorieAnomalie with categorieAnomalie list as options ' +
+    it('should display a select input for anomalyCategory with anomalyCategory list as options ' +
       'when associated form control is defined', () => {
 
-      component.signalementForm.addControl('categorieAnomalie', component.categoryAnomalieCtrl);
-      component.typeAnomalieList = typeAnomalieListEtablissement1;
+      component.signalementForm.addControl('anomalyCategory', component.anomalyCategoryCtrl);
+      component.anomalyTypeList = typeAnomalieListEtablissement1;
 
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('select[formcontrolname="categorieAnomalie"]')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('select[formcontrolname="categorieAnomalie"] option')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('select[formcontrolname="categorieAnomalie"] option').length)
+      expect(nativeElement.querySelector('select[formcontrolname="anomalyCategory"]')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="anomalyCategory"] option')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="anomalyCategory"] option').length)
         .toBe(typeAnomalieListEtablissement1.length + 1);
     });
 
-    it('should not display a select input for precisionAnomalie on init', () => {
+    it('should not display a select input for anomalyPrecision on init', () => {
       component.ngOnInit();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('select[formcontrolname="precisionAnomalie"]')).toBeNull();
+      expect(nativeElement.querySelector('select[formcontrolname="anomalyPrecision"]')).toBeNull();
     });
 
-    it('should display a select input for precisionAnomalie with precisionAnomalie list as options ' +
+    it('should display a select input for anomalyPrecision with anomalyPrecision list as options ' +
       'when associated form control is defined', () => {
 
-      component.signalementForm.addControl('precisionAnomalie', component.precisionAnomalieCtrl);
-      component.precisionAnomalieList = precisionList22;
+      component.signalementForm.addControl('anomalyPrecision', component.anomalyPrecisionCtrl);
+      component.anomalyPrecisionList = precisionList22;
 
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('select[formcontrolname="precisionAnomalie"]')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('select[formcontrolname="precisionAnomalie"] option')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('select[formcontrolname="precisionAnomalie"] option').length)
+      expect(nativeElement.querySelector('select[formcontrolname="anomalyPrecision"]')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="anomalyPrecision"] option')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="anomalyPrecision"] option').length)
         .toBe(precisionList22.length + 1);
     });
 
@@ -188,14 +194,15 @@ describe('SignalementFormComponent', () => {
 
   describe('ngOnInit function', () => {
 
-    it('should load anomalie list', () => {
+    it('should load anomaly list and anomaly info list', () => {
       component.ngOnInit();
 
-      expect(anomalieService.getAnomalies).toHaveBeenCalled();
+      expect(anomalyService.getAnomalies).toHaveBeenCalled();
       expect(component.anomalies).toEqual(anomaliesFixture);
+      expect(component.anomalyInfos).toEqual(anomalyInfosFixture);
     });
 
-    it('should set all form controls except for typeAnomalie and precisionAnomalie', () => {
+    it('should set all form controls except for anomalyType and anomalyPrecision', () => {
       component.ngOnInit();
 
       expect(component.signalementForm.controls['dateConstat']).toBeDefined();
@@ -205,8 +212,8 @@ describe('SignalementFormComponent', () => {
       expect(component.signalementForm.controls['nom']).toBeDefined();
       expect(component.signalementForm.controls['email']).toBeDefined();
       expect(component.signalementForm.controls['accordContact']).toBeDefined();
-      expect(component.signalementForm.controls['typeAnomalie']).toBeUndefined();
-      expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
+      expect(component.signalementForm.controls['anomalyType']).toBeUndefined();
+      expect(component.signalementForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
     it('should not display form errors', () => {
@@ -226,62 +233,62 @@ describe('SignalementFormComponent', () => {
 
   describe('changeTypeEtablissement function', () => {
 
-    it('should load typeAnomalie list for selected typeEtablissement and add a form control for typeAnomalie', () => {
+    it('should load anomalyType list for selected typeEtablissement and add a form control for anomalyType', () => {
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
 
       component.changeTypeEtablissement();
 
-      expect(component.typeAnomalieList).toEqual(typeAnomalieListEtablissement2);
-      expect(component.signalementForm.controls['typeAnomalie']).not.toBeNull();
+      expect(component.anomalyTypeList).toEqual(typeAnomalieListEtablissement2);
+      expect(component.signalementForm.controls['anomalyType']).not.toBeNull();
     });
   });
 
-  describe('changeCategorieAnomalie function', () => {
+  describe('changeAnomalyCategory function', () => {
 
-    it('should reset precisionAnomalie list and delete precisionAnomalie form control when no typeAnomaly is selected', () => {
+    it('should reset anomalyPrecision list and delete anomalyPrecision form control when no typeAnomaly is selected', () => {
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.categoryAnomalieCtrl.setValue('');
+      component.anomalyCategoryCtrl.setValue('');
 
-      component.changeCategorieAnomalie();
+      component.changeAnomalyCategory();
 
-      expect(component.precisionAnomalieList).toEqual([]);
-      expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
+      expect(component.anomalyPrecisionList).toEqual([]);
+      expect(component.signalementForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
-    it('should load precisionAnomalie list for selected typeEtablissement and typeAnomalie', () => {
+    it('should load anomalyPrecision list for selected typeEtablissement and anomalyType', () => {
 
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.categoryAnomalieCtrl.setValue(typeAnomalie22.categorie);
+      component.anomalyCategoryCtrl.setValue(typeAnomalie22.category);
 
-      component.changeCategorieAnomalie();
+      component.changeAnomalyCategory();
 
-      expect(component.precisionAnomalieList).toEqual(precisionList22);
+      expect(component.anomalyPrecisionList).toEqual(precisionList22);
     });
 
-    it('should add a form control for precisionAnomalie if loaded list is not empty', () => {
+    it('should add a form control for anomalyPrecision if loaded list is not empty', () => {
 
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.categoryAnomalieCtrl.setValue(typeAnomalie22.categorie);
+      component.anomalyCategoryCtrl.setValue(typeAnomalie22.category);
 
-      component.changeCategorieAnomalie();
+      component.changeAnomalyCategory();
 
-      expect(component.precisionAnomalieList).toEqual(precisionList22);
-      expect(component.signalementForm.controls['precisionAnomalie']).not.toBeNull();
+      expect(component.anomalyPrecisionList).toEqual(precisionList22);
+      expect(component.signalementForm.controls['anomalyPrecision']).not.toBeNull();
     });
 
-    it('should not add a form control for precisionAnomalie if loaded list is empty', () => {
+    it('should not add a form control for anomalyPrecision if loaded list is empty', () => {
 
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.categoryAnomalieCtrl.setValue(typeAnomalie21.categorie);
+      component.anomalyCategoryCtrl.setValue(typeAnomalie21.category);
 
-      component.changeCategorieAnomalie();
+      component.changeAnomalyCategory();
 
-      expect(component.signalementForm.controls['precisionAnomalie']).toBeUndefined();
+      expect(component.signalementForm.controls['anomalyPrecision']).toBeUndefined();
     });
   });
 
@@ -299,15 +306,15 @@ describe('SignalementFormComponent', () => {
       const dateConstat = new Date();
       const anomalieFile = new File([], 'anomalie.jpg');
       component.typeEtablissementCtrl.setValue('typeEtablissement');
-      component.categoryAnomalieCtrl.setValue('categorie');
-      component.precisionAnomalieCtrl.setValue('precision');
+      component.anomalyCategoryCtrl.setValue('category');
+      component.anomalyPrecisionCtrl.setValue('precision');
       component.dateConstatCtrl.setValue(dateConstat);
       component.heureConstatCtrl.setValue(5);
       component.nomCtrl.setValue('nom');
       component.prenomCtrl.setValue('prenom');
       component.emailCtrl.setValue('email@mail.fr');
       component.accordContactCtrl.setValue(true);
-      component.anomalieFile = anomalieFile;
+      component.anomalyFile = anomalieFile;
       component.companyCtrl.setValue(Object.assign(
         new Company(),
         {
@@ -324,7 +331,7 @@ describe('SignalementFormComponent', () => {
       component.createSignalement();
       const signalement = new Signalement();
       signalement.typeEtablissement = 'typeEtablissement';
-      signalement.categorieAnomalie = 'categorie';
+      signalement.categorieAnomalie = 'category';
       signalement.precisionAnomalie = 'precision';
       signalement.nomEtablissement = 'Mon établissement';
       signalement.adresseEtablissement = 'adresse 1 - adresse 3 - adresse 4';
@@ -366,13 +373,32 @@ describe('SignalementFormComponent', () => {
 
       component.anomalies = anomaliesFixture;
       component.typeEtablissementCtrl.setValue(typeEtablissement2);
-      component.categoryAnomalieCtrl.setValue(typeAnomalieIntoxicationAlimentaire.categorie);
+      component.anomalyCategoryCtrl.setValue(typeAnomalieIntoxicationAlimentaire.category);
 
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('button[type="submit"].btn-primary').textContent.trim()).toBe('Suivant');
 
+    });
+
+  });
+
+  describe('case of anomaly which do not require a report', () => {
+
+    it('should display an information message when there is an anomaly info linked to the anomaly', () => {
+
+      component.ngOnInit();
+      component.anomalies = anomaliesFixture;
+      component.typeEtablissementCtrl.setValue(typeEtablissement2);
+      component.anomalyCategoryCtrl.setValue(typeAnomalie22.category);
+      component.anomalyPrecisionCtrl.setValue(precisionList22[0]);
+
+      component.changeAnomalyPrecision();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('.notification')).not.toBeNull();
     });
 
   });
