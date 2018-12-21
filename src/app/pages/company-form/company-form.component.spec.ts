@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AddressService } from '../../services/address.service';
 import { NgxLoadingModule } from 'ngx-loading';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 describe('CompanyFormComponent', () => {
 
@@ -29,10 +30,11 @@ describe('CompanyFormComponent', () => {
         HttpClientModule,
         Ng2CompleterModule,
         NgxLoadingModule,
+        Angulartics2RouterlessModule.forRoot(),
       ],
       providers: [
         CompanyService,
-        AddressService
+        AddressService,
       ]
     })
     .compileComponents();
