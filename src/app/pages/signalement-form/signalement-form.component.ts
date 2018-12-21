@@ -150,9 +150,10 @@ export class SignalementFormComponent implements OnInit {
   }
 
   changeAnomalyPrecision() {
-    console.log('this.anomalyInfos', this.anomalyInfos)
-    console.log('this.anomalyPrecisionCtrl.value', this.anomalyPrecisionCtrl.value)
     this.anomalyInfo = this.anomalyInfos.find(anomalyInfo => anomalyInfo.key === this.anomalyPrecisionCtrl.value);
+    if (this.anomalyInfo) {
+      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.information, this.anomalyInfo.key);
+    }
   }
 
   createSignalement() {
