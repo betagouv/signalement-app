@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiSignalementBaseUrl: 'http://localhost:9000',
-  apiAdresseBaseUrl: 'https://api-adresse.data.gouv.fr',
+  apiReportingBaseUrl: 'http://localhost:9000',
+  apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
 };
 
 /*

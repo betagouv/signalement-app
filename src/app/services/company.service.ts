@@ -7,6 +7,8 @@ import { catchError, map } from 'rxjs/operators';
 import { deserialize } from 'json-typescript-mapper';
 import { CompleterItem, RemoteData } from 'ng2-completer';
 
+export const MaxCompanyResult = 20;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +25,7 @@ export class CompanyService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
-      this.serviceUtils.getUrl(Api.Signalement, ['api', 'companies', search]),
+      this.serviceUtils.getUrl(Api.Reporting, ['api', 'companies', search]),
       {
         params: httpParams
       }
@@ -45,12 +47,11 @@ export class CompanyService {
 
 }
 
-
 class SuggestionData extends RemoteData {
 
   constructor(http: HttpClient, serviceUtils: ServiceUtils) {
     super(http);
-    this.remoteUrl(serviceUtils.getUrl(Api.Signalement, ['api', 'companies', 'suggest/']));
+    this.remoteUrl(serviceUtils.getUrl(Api.Reporting, ['api', 'companies', 'suggest/']));
     this.dataField('suggestions');
   }
 
@@ -62,5 +63,4 @@ class SuggestionData extends RemoteData {
 }
 
 
-export const MaxCompanyResult = 20;
 

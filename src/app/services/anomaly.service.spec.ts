@@ -4,17 +4,17 @@ import { AnomalyService } from './anomaly.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Anomaly } from '../model/Anomaly';
 
-describe('AnomalieService', () => {
+describe('AnomalyService', () => {
 
-  let anomalieService: AnomalyService;
+  let anomalyService: AnomalyService;
   let httpMock: HttpTestingController;
 
   const anomaliesJson = {
     list:
       [
         {
-          typeEtablissement: 'Café restaurant',
-          typeAnomalieList: [
+          companyType: 'Café restaurant',
+          anomalyTypeList: [
             {
               categorie: 'Hygiène',
               precisionList: [
@@ -25,8 +25,8 @@ describe('AnomalieService', () => {
           ]
         },
         {
-          typeEtablissement: 'Commerçant de proximité (boulangerie, boucherie...)',
-          typeAnomalieList: [
+          companyType: 'Commerçant de proximité (boulangerie, boucherie...)',
+          anomalyTypeList: [
             {
               categorie: 'Hygiène',
               precisionList: [
@@ -55,7 +55,7 @@ describe('AnomalieService', () => {
   });
 
   beforeEach( () => {
-    anomalieService = TestBed.get(AnomalyService);
+    anomalyService = TestBed.get(AnomalyService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -67,7 +67,7 @@ describe('AnomalieService', () => {
   describe('getAnomalies function', () => {
 
     it('should load anomalies from a Json file and return an array of Anomaly', () => {
-            anomalieService.getAnomalies().subscribe(
+            anomalyService.getAnomalies().subscribe(
         result => {
           expect(result).not.toBeNull();
           expect(result instanceof Array).toBeTruthy();
