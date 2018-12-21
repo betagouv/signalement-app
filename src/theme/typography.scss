@@ -1,3 +1,5 @@
+@import "../theme/media-queries";
+
 h1,
 h2,
 h3,
@@ -29,4 +31,21 @@ h5 {
 
 h6 {
   font-size: 1em;
+}
+
+
+@media #{$smaller-than-tablet} {
+
+
+  h1 {
+    font-size: 1.5em !important;
+  }
+
+  h2 {
+    font-size: 1.4em !important;
+  }
+
+  h3 {
+    font-size: 1.3em !important;
+  }
 }
