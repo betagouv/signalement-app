@@ -15,6 +15,7 @@ import { FileInputComponent } from '../../components/file-input/file-input.compo
 import { Company } from '../../model/Company';
 import { Component } from '@angular/core';
 import { NgxLoadingModule } from 'ngx-loading';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 
 describe('ReportingFormComponent', () => {
@@ -70,6 +71,7 @@ describe('ReportingFormComponent', () => {
         HttpClientModule,
         BsDatepickerModule.forRoot(),
         NgxLoadingModule,
+        Angulartics2RouterlessModule.forRoot(),
       ],
       providers: [
         AnomalyService,

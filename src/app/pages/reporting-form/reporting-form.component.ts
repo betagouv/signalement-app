@@ -6,6 +6,7 @@ import { ReportingService } from '../../services/reporting.service';
 import { Reporting } from '../../model/Reporting';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { Company } from '../../model/Company';
+import { AnalyticsService, EventCategories, ReportingEventActions } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-reporting-form',
@@ -45,7 +46,8 @@ export class ReportingFormComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
               private reportingService: ReportingService,
-              private localeService: BsLocaleService) {
+              private localeService: BsLocaleService,
+              private analyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -149,12 +151,17 @@ export class ReportingFormComponent implements OnInit {
 
   changeAnomalyPrecision() {
     this.anomalyInfo = this.anomalyInfos.find(anomalyInfo => anomalyInfo.key === this.anomalyPrecisionCtrl.value);
+    if (this.anomalyInfo) {
+      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.information, this.anomalyInfo.key);
+    }
   }
 
   createReporting() {
     if (!this.reportingForm.valid) {
+      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.invalidForm);
       this.showErrors = true;
     } else {
+      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.formSubmitted);
       this.loading = true;
       this.reportingService.createReporting(
         Object.assign(
