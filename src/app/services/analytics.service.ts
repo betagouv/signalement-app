@@ -10,18 +10,9 @@ export class AnalyticsService {
   }
 
   trackEvent(category, action, name?, value?) {
-    const properties = {
-      category
-    };
-    if (name) {
-      properties[name] = name;
-    }
-    if (value) {
-      properties[value] = value;
-    }
     this.angulartics2.eventTrack.next({
-      action: action,
-      properties: {category, name, value},
+      action,
+      properties: { category, name, value }
     });
   }
 }

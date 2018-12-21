@@ -10,7 +10,7 @@
       Expérimentation Centre Val de Loire
     </h3>
     <div class="text-center">
-      <a href="#signalementForm" class="button large">
+      <a href="#reportingForm" class="button large">
         <img src="/assets/images/icon_play.png" alt="Icône du bouton de signalement"/> Je signale en 30 secondes
       </a>
     </div>
@@ -75,24 +75,24 @@
 
   <section class="section section-gray position-relative">
     <div class="container">
-      <form [formGroup]="signalementForm" (submit)="createSignalement()" *ngIf="!showSuccess" id="signalementForm">
+      <form [formGroup]="reportingForm" (submit)="createReporting()" *ngIf="!showSuccess" id="reportingForm">
         <h1 class="text-center">Signalez une anomalie</h1>
         <div class="panel">
           <div class="form__group">
             <label>
               Sélectionnez d'abord le type d'établissement que vous souhaitez signaler <span>*</span>
             </label>
-            <select formControlName="typeEtablissement"
-                    (change)="changeTypeEtablissement()">
+            <select formControlName="companyType"
+                    (change)="changeCompanyType()">
               <option disabled value="">Choisissez ...</option>
               <option *ngFor="let anomaly of anomalies" value="{{anomaly.companyType}}">{{anomaly.companyType}}</option>
             </select>
-            <div class="invalid" *ngIf="showErrors && typeEtablissementCtrl.hasError('required')">
+            <div class="invalid" *ngIf="showErrors && companyTypeCtrl.hasError('required')">
               Veuillez compléter le champ "Type d'établissement".
             </div>
           </div>
 
-          <div class="form__group" *ngIf="signalementForm.controls['anomalyCategory']">
+          <div class="form__group" *ngIf="reportingForm.controls['anomalyCategory']">
             <label>
               Puis, indiquez le type d'anomalie que vous avez constaté <span>*</span>
             </label>
@@ -106,7 +106,7 @@
             </div>
           </div>
 
-          <div class="form__group" *ngIf="signalementForm.controls['anomalyPrecision']">
+          <div class="form__group" *ngIf="reportingForm.controls['anomalyPrecision']">
             <label>
               Précisez enfin l'anomalie <span>*</span>
             </label>
@@ -165,17 +165,17 @@
               <div class="row">
                 <div class="col-12 col-sm-6">
                   <input type="text"
-                         formControlName="dateConstat"
+                         formControlName="anomalyDate"
                          placeholder="Date du constat"
                          bsDatepicker
                          [bsConfig]="{ containerClass: 'theme-default' }">
-                  <div class="invalid" *ngIf="showErrors && dateConstatCtrl.hasError('required')">
+                  <div class="invalid" *ngIf="showErrors && anomalyDateCtrl.hasError('required')">
                     Veuillez compléter le champ "Date du constat".
                   </div>
                 </div>
                 <div class="col-12 col-sm-6">
                   <div class="form__group">
-                    <select formControlName="heureConstat">
+                    <select formControlName="anomalyTimeSlot">
                       <option disabled value="">Plage horaire</option>
                       <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
                     </select>
@@ -224,8 +224,8 @@
                   <label>
                     Votre prénom <span>*</span>
                   </label>
-                  <input type="text" formControlName="prenom">
-                  <div class="invalid" *ngIf="showErrors && prenomCtrl.hasError('required')">
+                  <input type="text" formControlName="firstName">
+                  <div class="invalid" *ngIf="showErrors && firstNameCtrl.hasError('required')">
                     Veuillez compléter le champ "Prénom".
                   </div>
                 </div>
@@ -234,8 +234,8 @@
                   <label>
                     Votre nom <span>*</span>
                   </label>
-                  <input type="text" formControlName="nom">
-                  <div class="invalid" *ngIf="showErrors && nomCtrl.hasError('required')">
+                  <input type="text" formControlName="lastName">
+                  <div class="invalid" *ngIf="showErrors && lastNameCtrl.hasError('required')">
                     Veuillez compléter le champ "Nom".
                   </div>
                 </div>
@@ -256,7 +256,7 @@
             </div>
 
             <div class="form__group">
-              <input formControlName="accordContact" type="checkbox" value="" id="anonymousCheck">
+              <input formControlName="contactAgreement" type="checkbox" value="" id="anonymousCheck">
               <label for="anonymousCheck" class="label-inline">
                 Je souhaite que mes coordonnées soient transmises au professionnel afin qu'il puisse me contacter.
               </label>

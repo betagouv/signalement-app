@@ -12,7 +12,7 @@
         textSearching=""
         textNoResults=""
         minSearchLength="1"
-        placeholder="Nom, adresse, SIRET, ...">
+        placeholder="boulangerie Sanzot Tours ...">
       </ng2-completer>
       <button type="submit" class="overlay-button" aria-label="Recherche" [disabled]="searchCtrl.disabled">
         <svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg>
@@ -75,7 +75,7 @@
 <div *ngIf="companies && companies.length">
 
   <div class="notification warning mt-4">
-    Veuillez sélectionner un établissement dans la liste ci-dessous ou modifier votre recherche
+    Veuillez sélectionner un établissement dans la liste ci-dessous ou <span class="link" (click)="editSearch()">modifier votre recherche</span>.
   </div>
 
   <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
