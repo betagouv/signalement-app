@@ -4,6 +4,7 @@ import { CompanyService, MaxCompanyResult } from '../../services/company.service
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../services/address.service';
 import { RemoteData } from 'ng2-completer';
+import { AnalyticsService, CompanyEventActions, CompanySearchEventNames, EventCategories } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-company-form',
@@ -31,7 +32,8 @@ export class CompanyFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private companyService: CompanyService,
-              private addressService: AddressService) {
+              private addressService: AddressService,
+              private analyticsService: AnalyticsService) {
 
   }
 
@@ -77,11 +79,11 @@ export class CompanyFormComponent implements OnInit {
           if (this.total === 0) {
             this.treatCaseNoResult();
           } else if (this.total === 1) {
-            this.treatCaseOneResult(companySearchResult);
+            this.treatCaseSingleResult(companySearchResult);
           } else if (this.total > MaxCompanyResult) {
             this.treatCaseTooManyResults();
           } else {
-            this.treatCaseManyResults(companySearchResult);
+            this.treatCaseSeveralResults(companySearchResult);
           }
         }
       );
@@ -89,28 +91,38 @@ export class CompanyFormComponent implements OnInit {
   }
 
   treatCaseNoResult() {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
     this.searchCtrl.disable();
     this.initCompanyForm();
   }
 
-  treatCaseOneResult(companySearchResult: CompanySearchResult) {
+  treatCaseSingleResult(companySearchResult: CompanySearchResult) {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.singleResult);
     this.selectCompany(companySearchResult.companies[0]);
   }
 
   treatCaseTooManyResults() {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.tooManyResults);
     this.searchCtrl.disable();
     this.initCompanyForm();
   }
 
-  treatCaseManyResults(companySearchResult) {
+  treatCaseSeveralResults(companySearchResult) {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.severalResult);
     this.companies = companySearchResult.companies;
+  }
+
+  selectCompanyFromResults(company: Company) {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.select);
+    this.selectCompany(company);
   }
 
   selectCompany(company: Company) {
     this.companySelected.emit(company);
   }
 
-  modifySearch() {
+  editSearch() {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchEdit);
     this.companies = [];
     this.searchForm.controls['search'].enable();
     this.companyForm = null;
@@ -120,6 +132,7 @@ export class CompanyFormComponent implements OnInit {
     if (!this.companyForm.valid) {
       this.showErrors = true;
     } else {
+      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.manualEntry);
       this.selectCompany(
         Object.assign(
           new Company(),
