@@ -34,7 +34,7 @@
       Il y a trop d'établissement correspondant à la recherche.
     </span>
     <br/>
-    Veuillez <span class="link" (click)="modifySearch()">modifier votre recherche</span> ou saisir son nom et son adresse ci-dessous.
+    Veuillez <span class="link" (click)="editSearch()">modifier votre recherche</span> ou saisir son nom et son adresse ci-dessous.
   </div>
 
   <div class="form__group">
@@ -78,7 +78,7 @@
     Veuillez sélectionner un établissement dans la liste ci-dessous ou modifier votre recherche
   </div>
 
-  <p *ngFor="let company of companies" class="company" (click)="selectCompany(company)">
+  <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
     <span *ngIf="company.line1">{{company.line1}}<br /></span>
     <span *ngIf="company.line2">{{company.line2}}<br /></span>
     <span *ngIf="company.line3">{{company.line3}}<br /></span>

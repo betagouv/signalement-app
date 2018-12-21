@@ -191,7 +191,7 @@ describe('CompanyFormComponent', () => {
       component.searchForm.controls['search'].disable();
       component.initCompanyForm();
 
-      component.modifySearch();
+      component.editSearch();
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);

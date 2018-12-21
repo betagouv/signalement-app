@@ -6,6 +6,7 @@ import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { Company } from '../../model/Company';
+import { AnalyticsService, EventCategories, ReportingEventActions } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-signalement-form',
@@ -43,7 +44,8 @@ export class SignalementFormComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               private anomalieService: AnomalieService,
               private signalementService: SignalementService,
-              private localeService: BsLocaleService) {
+              private localeService: BsLocaleService,
+              private analyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -139,8 +141,10 @@ export class SignalementFormComponent implements OnInit {
 
   createSignalement() {
     if (!this.signalementForm.valid) {
+      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.invalidForm);
       this.showErrors = true;
     } else {
+      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.formSubmitted);
       this.loading = true;
       this.signalementService.createSignalement(
         Object.assign(
