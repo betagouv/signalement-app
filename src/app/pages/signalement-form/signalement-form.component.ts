@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Anomalie, TypeAnomalie } from '../../model/Anomalie';
-import { AnomalieService } from '../../services/anomalie.service';
+import { Anomaly, AnomalyInfo, AnomalyType } from '../../model/Anomaly';
+import { AnomalyService } from '../../services/anomaly.service';
 import { SignalementService } from '../../services/signalement.service';
 import { Signalement } from '../../model/Signalement';
 import { BsLocaleService } from 'ngx-bootstrap';
@@ -17,8 +17,8 @@ export class SignalementFormComponent implements OnInit {
 
   signalementForm: FormGroup;
   typeEtablissementCtrl: FormControl;
-  categoryAnomalieCtrl: FormControl;
-  precisionAnomalieCtrl: FormControl;
+  anomalyCategoryCtrl: FormControl;
+  anomalyPrecisionCtrl: FormControl;
   dateConstatCtrl: FormControl;
   heureConstatCtrl: FormControl;
   descriptionCtrl: FormControl;
@@ -29,20 +29,22 @@ export class SignalementFormComponent implements OnInit {
   companyCtrl: FormControl;
 
   ticketFile: File;
-  anomalieFile: File;
+  anomalyFile: File;
 
-  anomalies: Anomalie[];
-  typeAnomalieList: TypeAnomalie[];
-  precisionAnomalieList: string[];
+  anomalies: Anomaly[];
+  anomalyInfos: AnomalyInfo[];
+  anomalyTypeList: AnomalyType[];
+  anomalyPrecisionList: string[];
   plageHoraireList: number[];
 
   showErrors: boolean;
   showSuccess: boolean;
   loading: boolean;
+  anomalyInfo: AnomalyInfo;
 
 
   constructor(public formBuilder: FormBuilder,
-              private anomalieService: AnomalieService,
+              private anomalyService: AnomalyService,
               private signalementService: SignalementService,
               private localeService: BsLocaleService,
               private analyticsService: AnalyticsService) {
@@ -55,12 +57,13 @@ export class SignalementFormComponent implements OnInit {
     this.initSignalementForm();
     this.constructPlageHoraireList();
     this.loadAnomalies();
+    this.loadAnomalyInfos();
   }
 
   private initSignalementForm() {
     this.typeEtablissementCtrl = this.formBuilder.control('', Validators.required);
-    this.categoryAnomalieCtrl = this.formBuilder.control('', Validators.required);
-    this.precisionAnomalieCtrl = this.formBuilder.control('', Validators.required);
+    this.anomalyCategoryCtrl = this.formBuilder.control('', Validators.required);
+    this.anomalyPrecisionCtrl = this.formBuilder.control('', Validators.required);
     this.dateConstatCtrl = this.formBuilder.control('', Validators.required);
     this.heureConstatCtrl = this.formBuilder.control('');
     this.descriptionCtrl = this.formBuilder.control('');
@@ -91,52 +94,65 @@ export class SignalementFormComponent implements OnInit {
   }
 
   loadAnomalies() {
-    this.anomalieService.getAnomalies().subscribe(anomalieList => {
-      this.anomalies = anomalieList;
+    this.anomalyService.getAnomalies().subscribe(anomalyList => {
+      this.anomalies = anomalyList;
+    });
+  }
+
+  loadAnomalyInfos() {
+    this.anomalyService.getAnomalyInfos().subscribe(anomalyInfoList => {
+      this.anomalyInfos = anomalyInfoList;
     });
   }
 
   changeTypeEtablissement() {
-    this.resetCategorieAnomalie();
+    this.resetAnomalyCategory();
     if (this.typeEtablissementCtrl.value !== '') {
-      this.typeAnomalieList = this.getTypeAnomalieList();
-      this.signalementForm.addControl('categorieAnomalie', this.categoryAnomalieCtrl);
+      this.anomalyTypeList = this.getAnomalyTypeList();
+      this.signalementForm.addControl('anomalyCategory', this.anomalyCategoryCtrl);
     }
   }
 
-  private resetCategorieAnomalie() {
-    this.typeAnomalieList = [];
-    this.signalementForm.removeControl('categorieAnomalie');
-    this.categoryAnomalieCtrl.setValue('');
-    this.resetPrecisionAnomalie();
+  private resetAnomalyCategory() {
+    this.anomalyTypeList = [];
+    this.signalementForm.removeControl('anomalyCategory');
+    this.anomalyCategoryCtrl.setValue('');
+    this.resetAnomalyPrecision();
   }
 
-  private getTypeAnomalieList() {
+  private getAnomalyTypeList() {
     return this.anomalies
-        .find(anomalie => anomalie.typeEtablissement === this.typeEtablissementCtrl.value)
-        .typeAnomalieList;
+        .find(anomaly => anomaly.companyType === this.typeEtablissementCtrl.value)
+        .anomalyTypeList;
   }
 
-  changeCategorieAnomalie() {
-    this.resetPrecisionAnomalie();
-    if (this.categoryAnomalieCtrl.value !== '') {
-      this.precisionAnomalieList = this.getPrecisionAnomalieList();
-      if (this.precisionAnomalieList.length) {
-        this.signalementForm.addControl('precisionAnomalie', this.precisionAnomalieCtrl);
+  changeAnomalyCategory() {
+    this.resetAnomalyPrecision();
+    if (this.anomalyCategoryCtrl.value !== '') {
+      this.anomalyPrecisionList = this.getAnomalyPrecisionList();
+      if (this.anomalyPrecisionList.length) {
+        this.signalementForm.addControl('anomalyPrecision', this.anomalyPrecisionCtrl);
       }
     }
   }
 
-  private resetPrecisionAnomalie() {
-    this.precisionAnomalieList = [];
-    this.signalementForm.removeControl('precisionAnomalie');
-    this.precisionAnomalieCtrl.setValue('');
+  private resetAnomalyPrecision() {
+    this.anomalyPrecisionList = [];
+    this.signalementForm.removeControl('anomalyPrecision');
+    this.anomalyPrecisionCtrl.setValue('');
+    this.anomalyInfo = null;
   }
 
-  private getPrecisionAnomalieList() {
-    return this.getTypeAnomalieList()
-      .find(typeAnomalie => typeAnomalie.categorie === this.categoryAnomalieCtrl.value)
+  private getAnomalyPrecisionList() {
+    return this.getAnomalyTypeList()
+      .find(anomalyType => anomalyType.category === this.anomalyCategoryCtrl.value)
       .precisionList;
+  }
+
+  changeAnomalyPrecision() {
+    console.log('this.anomalyInfos', this.anomalyInfos)
+    console.log('this.anomalyPrecisionCtrl.value', this.anomalyPrecisionCtrl.value)
+    this.anomalyInfo = this.anomalyInfos.find(anomalyInfo => anomalyInfo.key === this.anomalyPrecisionCtrl.value);
   }
 
   createSignalement() {
@@ -151,8 +167,8 @@ export class SignalementFormComponent implements OnInit {
           new Signalement(),
           {
             typeEtablissement: this.typeEtablissementCtrl.value,
-            categorieAnomalie: this.categoryAnomalieCtrl.value,
-            precisionAnomalie: this.precisionAnomalieCtrl.value,
+            categorieAnomalie: this.anomalyCategoryCtrl.value,
+            precisionAnomalie: this.anomalyPrecisionCtrl.value,
             dateConstat: this.dateConstatCtrl.value,
             heureConstat: this.heureConstatCtrl.value,
             description: this.descriptionCtrl.value,
@@ -161,7 +177,7 @@ export class SignalementFormComponent implements OnInit {
             email: this.emailCtrl.value,
             accordContact: this.accordContactCtrl.value,
             ticketFile: this.ticketFile,
-            anomalieFile: this.anomalieFile,
+            anomalieFile: this.anomalyFile,
             nomEtablissement: this.companyCtrl.value.name,
             adresseEtablissement: this.getCompanyAddress(),
             siretEtablissement: this.companyCtrl.value.siret ? this.companyCtrl.value.siret : ''
@@ -188,12 +204,12 @@ export class SignalementFormComponent implements OnInit {
     this.ticketFile = file;
   }
 
-  onAnomalieFileSelected(file: File) {
-    this.anomalieFile = file;
+  onAnomalyFileSelected(file: File) {
+    this.anomalyFile = file;
   }
 
   isIntoxicationAlimentaire() {
-    return this.categoryAnomalieCtrl.value === IntoxicationAlimentaire;
+    return this.anomalyCategoryCtrl.value === IntoxicationAlimentaire;
   }
 
   onCompanySelected(company: Company) {

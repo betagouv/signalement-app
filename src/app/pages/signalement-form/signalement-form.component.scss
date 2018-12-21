@@ -28,6 +28,21 @@ form {
   padding-bottom: 1em;
 }
 
+.notification {
+
+  img {
+    width: 24px;
+    vertical-align: top;
+  }
+
+  h5 {
+    display: inline-block;
+    margin: 0 0.5em;
+    padding-bottom: 0.5em;
+  }
+
+}
+
 @media #{$smaller-than-tablet} {
 
   .panel {
