@@ -10,7 +10,7 @@
       Expérimentation Centre Val de Loire
     </h3>
     <div class="text-center">
-      <a href="#reportingForm" class="button large">
+      <a href="#reportingForm" (click)="initReportingForm(true)" class="button large">
         <img src="/assets/images/icon_play.png" alt="Icône du bouton de signalement"/> Je signale en 30 secondes
       </a>
     </div>
@@ -294,6 +294,11 @@
             <br />
             Il ne déclenchera pas à lui seul un contrôle des autorités.
           </p>
+          <div class="text-center pt-4">
+            <a href="#reportingForm" (click)="addNewReporting()" class="btn button large">
+              <img src="/assets/images/icon_play.png" alt="Icône du bouton de signalement"/> Faire un autre signalement
+            </a>
+          </div>
         </ng-template>
       </div>
     </div>

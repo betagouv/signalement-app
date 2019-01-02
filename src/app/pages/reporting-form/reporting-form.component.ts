@@ -51,27 +51,32 @@ export class ReportingFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showErrors = false;
     this.localeService.use('fr');
 
-    this.initReportingForm();
+    this.initReportingForm(true);
     this.constructPlageHoraireList();
     this.loadAnomalies();
     this.loadAnomalyInfos();
   }
 
-  private initReportingForm() {
-    this.companyTypeCtrl = this.formBuilder.control('', Validators.required);
+  initReportingForm(fullInit: boolean) {
+    this.showErrors = false;
+    this.showSuccess = false;
+
     this.anomalyCategoryCtrl = this.formBuilder.control('', Validators.required);
     this.anomalyPrecisionCtrl = this.formBuilder.control('', Validators.required);
-    this.anomalyDateCtrl = this.formBuilder.control('', Validators.required);
-    this.anomalyTimeSlotCtrl = this.formBuilder.control('');
     this.descriptionCtrl = this.formBuilder.control('');
-    this.firstNameCtrl = this.formBuilder.control('', Validators.required);
-    this.lastNameCtrl = this.formBuilder.control('', Validators.required);
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.contactAgreementCtrl = this.formBuilder.control(false);
-    this.companyCtrl = this.formBuilder.control('', Validators.required);
+
+    if (fullInit) {
+      this.companyTypeCtrl = this.formBuilder.control('', Validators.required);
+      this.anomalyDateCtrl = this.formBuilder.control('', Validators.required);
+      this.anomalyTimeSlotCtrl = this.formBuilder.control('');
+      this.firstNameCtrl = this.formBuilder.control('', Validators.required);
+      this.lastNameCtrl = this.formBuilder.control('', Validators.required);
+      this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
+      this.contactAgreementCtrl = this.formBuilder.control(false);
+      this.companyCtrl = this.formBuilder.control('', Validators.required);
+    }
 
     this.reportingForm = this.formBuilder.group({
       companyType: this.companyTypeCtrl,
@@ -84,6 +89,13 @@ export class ReportingFormComponent implements OnInit {
       contactAgreement: this.contactAgreementCtrl,
       company: this.companyCtrl
     });
+
+  }
+
+  addNewReporting() {
+    this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.addAnotherReporting);
+    this.initReportingForm(false);
+    this.reportingForm.addControl('anomalyCategory', this.anomalyCategoryCtrl);
   }
 
   constructPlageHoraireList() {

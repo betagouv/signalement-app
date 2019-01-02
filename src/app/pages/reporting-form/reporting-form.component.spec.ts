@@ -406,4 +406,53 @@ describe('ReportingFormComponent', () => {
     });
 
   });
+
+  describe('case of the user want to make another reporting link to the first one', () => {
+
+    it('should display the reporting form with invariable inputs already filled', () => {
+
+      const anomalyDate = new Date();
+      const anomalyFile = new File([], 'anomaly.jpg');
+      component.companyTypeCtrl.setValue('companyType');
+      component.anomalyCategoryCtrl.setValue('category');
+      component.anomalyPrecisionCtrl.setValue('precision');
+      component.anomalyDateCtrl.setValue(anomalyDate);
+      component.anomalyTimeSlotCtrl.setValue(5);
+      component.lastNameCtrl.setValue('lastName');
+      component.firstNameCtrl.setValue('firstName');
+      component.emailCtrl.setValue('email@mail.fr');
+      component.contactAgreementCtrl.setValue(true);
+      component.anomalyFile = anomalyFile;
+      component.descriptionCtrl.setValue('description');
+      component.companyCtrl.setValue(Object.assign(
+        new Company(),
+        {
+          name: 'Mon établissement',
+          line1: 'adresse 1',
+          line3: 'adresse 3',
+          line4: 'adresse 4',
+          siret: '123245678900015',
+          postalCode: '87270'
+        }
+      ));
+      component.showSuccess = true;
+
+      component.addNewReporting();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('form')).not.toBeNull();
+      expect(component.reportingForm.controls['anomalyDate'].value).toEqual(anomalyDate);
+      expect(component.reportingForm.controls['anomalyTimeSlot'].value).toEqual(5);
+      expect(component.reportingForm.controls['firstName'].value).toEqual('firstName');
+      expect(component.reportingForm.controls['lastName'].value).toEqual('lastName');
+      expect(component.reportingForm.controls['email'].value).toEqual('email@mail.fr');
+      expect(component.reportingForm.controls['contactAgreement'].value).toEqual(true);
+      expect(component.reportingForm.controls['companyType'].value).toEqual('companyType');
+      expect(component.reportingForm.controls['description'].value).toEqual('');
+      expect(component.reportingForm.controls['anomalyCategory'].value).toEqual('');
+      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
+    });
+
+  });
 });
