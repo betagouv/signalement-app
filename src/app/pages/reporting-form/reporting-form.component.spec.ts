@@ -324,7 +324,8 @@ describe('ReportingFormComponent', () => {
           line1: 'adresse 1',
           line3: 'adresse 3',
           line4: 'adresse 4',
-          siret: '123245678900015'
+          siret: '123245678900015',
+          postalCode: '87270'
         }
       ));
 
@@ -338,6 +339,7 @@ describe('ReportingFormComponent', () => {
       reporting.companyName = 'Mon établissement';
       reporting.companyAddress = 'adresse 1 - adresse 3 - adresse 4';
       reporting.companySiret = '123245678900015';
+      reporting.companyPostalCode = '87270';
       reporting.description = '';
       reporting.anomalyDate = anomalyDate;
       reporting.anomalyTimeSlot = 5;

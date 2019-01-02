@@ -188,6 +188,7 @@ export class ReportingFormComponent implements OnInit {
             anomalyFile: this.anomalyFile,
             companyName: this.companyCtrl.value.name,
             companyAddress: this.getCompanyAddress(),
+            companyPostalCode: this.companyCtrl.value.postalCode,
             companySiret: this.companyCtrl.value.siret ? this.companyCtrl.value.siret : ''
           }
         )
