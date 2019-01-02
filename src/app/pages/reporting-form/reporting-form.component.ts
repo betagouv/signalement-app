@@ -107,6 +107,7 @@ export class ReportingFormComponent implements OnInit {
 
   changeCompanyType() {
     this.resetAnomalyCategory();
+    this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.selectCompanyType, this.companyTypeCtrl.value);
     if (this.companyTypeCtrl.value !== '') {
       this.anomalyTypeList = this.getAnomalyTypeList();
       this.reportingForm.addControl('anomalyCategory', this.anomalyCategoryCtrl);
@@ -128,6 +129,9 @@ export class ReportingFormComponent implements OnInit {
 
   changeAnomalyCategory() {
     this.resetAnomalyPrecision();
+    this.analyticsService.trackEvent(
+      EventCategories.reporting, ReportingEventActions.selectAnomalyCategory, this.anomalyCategoryCtrl.value
+    );
     if (this.anomalyCategoryCtrl.value !== '') {
       this.anomalyPrecisionList = this.getAnomalyPrecisionList();
       if (this.anomalyPrecisionList.length) {
@@ -150,6 +154,9 @@ export class ReportingFormComponent implements OnInit {
   }
 
   changeAnomalyPrecision() {
+    this.analyticsService.trackEvent(
+      EventCategories.reporting, ReportingEventActions.selectAnomalyPrecision, this.anomalyPrecisionCtrl.value
+    );
     this.anomalyInfo = this.anomalyInfos.find(anomalyInfo => anomalyInfo.key === this.anomalyPrecisionCtrl.value);
     if (this.anomalyInfo) {
       this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.information, this.anomalyInfo.key);
