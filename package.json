@@ -4,13 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start local": "ng serve",
-    "start": "npm run build:prod && node dist/server.js",
+    "start": "node dist/server.js",
     "prebuild": "envsub --env API_BASE_URL ./src/environments/environment.prod.ts",
     "build": "ng build",
     "test": "ng test --watch false",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "npm run prebuild && ng build --aot --prod",
+    "postinstall": "npm run prebuild && npm run build:prod",
     "build:server:prod": "ng run signalement-app:server && webpack --config webpack.server.config.js --progress --colors",
     "build:browser:prod": "ng build --prod",
     "build:prod": "npm run build:server:prod && npm run build:browser:prod"
