@@ -225,7 +225,7 @@
                   <label>
                     Votre prénom <span>*</span>
                   </label>
-                  <input type="text" formControlName="firstName">
+                  <input type="text" formControlName="firstName" name="fname" autocomplete="given-name">
                   <div class="invalid" *ngIf="showErrors && firstNameCtrl.hasError('required')">
                     Veuillez compléter le champ "Prénom".
                   </div>
@@ -235,7 +235,7 @@
                   <label>
                     Votre nom <span>*</span>
                   </label>
-                  <input type="text" formControlName="lastName">
+                  <input type="text" formControlName="lastName" name="lname" autocomplete="family-name">
                   <div class="invalid" *ngIf="showErrors && lastNameCtrl.hasError('required')">
                     Veuillez compléter le champ "Nom".
                   </div>
@@ -247,7 +247,7 @@
               <label>
                 Votre email <span>*</span>
               </label>
-              <input type="email" formControlName="email">
+              <input type="email" formControlName="email" name="email" autocomplete="email">
               <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('required')">
                 Veuillez compléter le champ "Email".
               </div>
