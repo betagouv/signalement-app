@@ -100,13 +100,15 @@ describe('CompanyFormComponent', () => {
           'l6_normalisee': '87270 COUZEIX',
           'l7_normalisee': 'FRANCE',
           'enseigne': null,
-          'nom_raison_sociale': 'CASINO CARBURANTS'
+          'nom_raison_sociale': 'CASINO CARBURANTS',
+          'code_postal': '87270'
         }]
       });
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
 
       component.companySelected.subscribe(company => {
         expect(company).toEqual(companySearchResult.companies[0]);
+        expect(company.postalCode).toEqual('87270');
         done();
       });
 
@@ -211,6 +213,7 @@ describe('CompanyFormComponent', () => {
       component.initCompanyForm();
       component.nameCtrl.setValue('Mon entreprise');
       component.addressCtrl.setValue('Mon adresse dans ma ville');
+      component.addressCtrlPostalCode = '87270';
       fixture.detectChanges();
 
       const companyExpected = Object.assign(
@@ -218,7 +221,8 @@ describe('CompanyFormComponent', () => {
         {
           name: 'Mon entreprise',
           line1: 'Mon entreprise',
-          line2: 'Mon adresse dans ma ville'
+          line2: 'Mon adresse dans ma ville',
+          postalCode: '87270'
         }
       );
       component.companySelected.subscribe(company => {

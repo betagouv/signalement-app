@@ -36,11 +36,14 @@ export class AnomalyList {
 export class AnomalyInfo {
   @JsonProperty('key')
   key: string;
+  @JsonProperty('title')
+  title: string;
   @JsonProperty('info')
   info: string;
 
   constructor() {
     this.key = undefined;
+    this.title = undefined;
     this.info = undefined;
   }
 }

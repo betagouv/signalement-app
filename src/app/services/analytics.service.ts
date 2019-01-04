@@ -28,7 +28,8 @@ export enum ReportingEventActions {
   formSubmitted = 'Envoi d\'un signalement',
   selectCompanyType = 'Sélection d\'un type d\'établissement',
   selectAnomalyCategory = 'Sélection d\'un type d\'anomalie',
-  selectAnomalyPrecision = 'Sélection d\'une précision d\'anomalie'
+  selectAnomalyPrecision = 'Sélection d\'une précision d\'anomalie',
+  addAnotherReporting = 'Ajout d\'un autre signalement'
 }
 
 export enum CompanyEventActions {

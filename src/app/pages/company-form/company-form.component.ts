@@ -3,7 +3,7 @@ import { Company, CompanySearchResult } from '../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../services/address.service';
-import { RemoteData } from 'ng2-completer';
+import { CompleterItem, RemoteData } from 'ng2-completer';
 import { AnalyticsService, CompanyEventActions, CompanySearchEventNames, EventCategories } from '../../services/analytics.service';
 
 @Component({
@@ -19,15 +19,16 @@ export class CompanyFormComponent implements OnInit {
   companyForm: FormGroup;
   nameCtrl: FormControl;
   addressCtrl: FormControl;
+  addressCtrlPostalCode: string;
 
   companies: Company[];
   total: number;
   loading: boolean;
+
   showErrors: boolean;
-
   suggestionData: RemoteData;
-  addressData: RemoteData;
 
+  addressData: RemoteData;
   @Output() companySelected = new EventEmitter<Company>();
 
   constructor(private formBuilder: FormBuilder,
@@ -54,6 +55,7 @@ export class CompanyFormComponent implements OnInit {
     this.showErrors = false;
     this.nameCtrl = this.formBuilder.control('', Validators.required);
     this.addressCtrl = this.formBuilder.control('', Validators.required);
+    this.addressCtrlPostalCode = '';
     this.companyForm = this.formBuilder.group({
       name: this.nameCtrl,
       address: this.addressCtrl,
@@ -140,9 +142,17 @@ export class CompanyFormComponent implements OnInit {
             name: this.nameCtrl.value,
             line1: this.nameCtrl.value,
             line2: this.addressCtrl.value,
+            postalCode: this.addressCtrlPostalCode
           }
         )
       );
+    }
+  }
+
+  selectAddress(selected: CompleterItem) {
+    this.addressCtrlPostalCode = '';
+    if (selected) {
+      this.addressCtrlPostalCode = selected.originalObject.postcode;
     }
   }
 }

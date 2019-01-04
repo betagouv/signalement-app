@@ -7,10 +7,10 @@
       Contribuez à améliorer le droit des consommateurs par vos signalements&#160;!
     </h2>
     <h3>
-      Expérimentation Centre Val de Loire
+      Magasins, commerces de proximité, cafés et restaurants...
     </h3>
     <div class="text-center">
-      <a href="#reportingForm" class="button large">
+      <a href="#reportingForm" (click)="initReportingForm(true)" class="button large">
         <img src="/assets/images/icon_play.png" alt="Icône du bouton de signalement"/> Je signale en 30 secondes
       </a>
     </div>
@@ -86,6 +86,7 @@
                     (change)="changeCompanyType()">
               <option disabled value="">Choisissez ...</option>
               <option *ngFor="let anomaly of anomalies" value="{{anomaly.companyType}}">{{anomaly.companyType}}</option>
+              <option value="Autres">Autres ...</option>
             </select>
             <div class="invalid" *ngIf="showErrors && companyTypeCtrl.hasError('required')">
               Veuillez compléter le champ "Type d'établissement".
@@ -122,9 +123,9 @@
         </div>
 
         <div class="notification success" *ngIf="anomalyInfo; else realAnomaly">
-          <img src="/assets/images/icon_info.png" class="d-none d-sm-inline-block"/>
-          <h5>Ceci ne constitue pas un motif de signalement</h5>
-          <p [innerHTML]="anomalyInfo.info"></p>
+          <img src="/assets/images/icon_info.png" class="d-none d-sm-inline-block" *ngIf="anomalyInfo.title"/>
+          <h5 [innerHTML]="anomalyInfo.title"></h5>
+          <div [innerHTML]="anomalyInfo.info"></div>
         </div>
 
         <ng-template #realAnomaly>
@@ -224,7 +225,7 @@
                   <label>
                     Votre prénom <span>*</span>
                   </label>
-                  <input type="text" formControlName="firstName">
+                  <input type="text" formControlName="firstName" name="fname" autocomplete="given-name">
                   <div class="invalid" *ngIf="showErrors && firstNameCtrl.hasError('required')">
                     Veuillez compléter le champ "Prénom".
                   </div>
@@ -234,7 +235,7 @@
                   <label>
                     Votre nom <span>*</span>
                   </label>
-                  <input type="text" formControlName="lastName">
+                  <input type="text" formControlName="lastName" name="lname" autocomplete="family-name">
                   <div class="invalid" *ngIf="showErrors && lastNameCtrl.hasError('required')">
                     Veuillez compléter le champ "Nom".
                   </div>
@@ -246,7 +247,7 @@
               <label>
                 Votre email <span>*</span>
               </label>
-              <input type="email" formControlName="email">
+              <input type="email" formControlName="email" name="email" autocomplete="email">
               <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('required')">
                 Veuillez compléter le champ "Email".
               </div>
@@ -294,6 +295,11 @@
             <br />
             Il ne déclenchera pas à lui seul un contrôle des autorités.
           </p>
+          <div class="text-center pt-4">
+            <a href="#reportingForm" (click)="addNewReporting()" class="btn button large">
+              <img src="/assets/images/icon_play.png" alt="Icône du bouton de signalement"/> Faire un autre signalement
+            </a>
+          </div>
         </ng-template>
       </div>
     </div>
