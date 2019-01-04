@@ -53,8 +53,9 @@ describe('ReportingFormComponent', () => {
   ];
 
   const anomalyInfosFixture = [
-    { key: precisionList22[0], info: 'info220' },
-    { key: precisionList22[2], info: 'info222' },
+    { key: 'Etablissement hors périmètre', title: '', info: 'infoHP' },
+    { key: precisionList22[0], title: 'title220', info: 'info220' },
+    { key: precisionList22[2], title: 'title222', info: 'info222' },
   ];
 
   beforeEach(async(() => {
@@ -104,15 +105,16 @@ describe('ReportingFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="companyType"]')).not.toBeNull();
     });
 
-    it('should display companyType of anomalies as options of companyType select', () => {
+    it('should display companyType of anomalies as options of companyType select plus an option "Autres"', () => {
       component.anomalies = anomaliesFixture;
 
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option[value="Autres"')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option').length)
-        .toBe(anomaliesFixture.length + 1);
+        .toBe(anomaliesFixture.length + 2);
     });
 
     it('should not display a select input for anomalyType on init', () => {
@@ -244,6 +246,19 @@ describe('ReportingFormComponent', () => {
       expect(component.anomalyTypeList).toEqual(anomalyTypeListForEtablissement2);
       expect(component.reportingForm.controls['anomalyType']).not.toBeNull();
     });
+
+    it('should display an information message when then option "Autres" is selected', () => {
+      component.anomalies = anomaliesFixture;
+      component.anomalyInfos = anomalyInfosFixture;
+      component.companyTypeCtrl.setValue('Autres');
+
+      component.changeCompanyType();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('div.success')).not.toBeNull();
+    });
+
   });
 
   describe('changeAnomalyCategory function', () => {

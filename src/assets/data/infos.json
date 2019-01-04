@@ -1,23 +1,32 @@
 {
   "list": [
     {
+      "key": "Etablissement hors périmètre",
+      "info": "Pour le moment, ce site concerne uniquement les établissements physiques et de remise directe (c'est-à-dire les magasins, les cafés, restaurants, bars et salons de thé...).<br/><br/>Votre problème concerne : <ul><li class='pt-2'><b>un établissement proposant un service (par exemple : location de voiture, coiffeur, pressing...) ?</b><br/>Utilisez le formulaire DGCCRF : <a href='https://www.economie.gouv.fr/dgccrf/contacter-dgccrf' target='_blank'>https://www.economie.gouv.fr/dgccrf/contacter-dgccrf</a></li><li class='pt-2'><b>un site de vente en ligne ?</b><br/>Utilisez le formulaire DGCCRF : <a href='https://www.economie.gouv.fr/dgccrf/contacter-dgccrf' target='_blank'>https://www.economie.gouv.fr/dgccrf/contacter-dgccrf</a></li><li class='pt-2'><b>un contenu illicite sur un site internet, autre qu'un problème lié à la vente en ligne ?</b><br/>Vous pouvez le signaler ici : <a href='https://www.internet-signalement.gouv.fr' target='_blank'>https://www.internet-signalement.gouv.fr</a></li><li class='pt-2'><b>une fraude à la carte bleue ?</b><br/>Signalez-la sur Perceval : <a href='https://www.service-public.fr/particuliers/vosdroits/R46526' target='_blank'>https://www.service-public.fr/particuliers/vosdroits/R46526</a></li></ul>Enfin si les faits nécessitent une intervention immédiate de services de police ou de secours, composer le 112 sur votre téléphone."
+    },
+    {
       "key": "Pas de gants, pas de coiffe",
+      "title": "Ceci ne constitue pas un motif de signalement",
       "info": "Il n'existe pas d'obligation réglementaire imposant le port de la coiffe (charlotte) ou des gants. <br />Le lavage des mains peut être suffisant pour éviter les contaminations. "
     },
     {
       "key": "Plat de mauvaise qualité ou pas bon",
+      "title": "Ceci ne constitue pas un motif de signalement",
       "info": "Vous pouvez demander que l’on remplace un plat si vous estimez que le plat qui vous a été proposé n’est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\". <br />En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat.  S'il vous oppose un refus, vous serez tenu néanmoins de payer la note.<br /><br />En savoir plus : <a href='https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/restaurants' target='_blank'>https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/restaurants</a>"
     },
     {
       "key": "Prix trop cher",
+      "title": "Ceci ne constitue pas un motif de signalement",
       "info": "Les prix sont fixés librement par les professionnels. En contrepartie, l’affichage du prix est obligatoire afin que le consommateur puisse choisir d'acheter ou non un produit.<br />Par exemple, il est autorisé de vendre un verre de soda à 25 euros dans un bar si le prix est bien indiqué sur la carte."
     },
     {
       "key": "Personnel peu aimable, mal poli",
+      "title": "Ceci ne constitue pas un motif de signalement",
       "info": "Il n’existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C’est une question de relation client ! Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.<br /><br />Par contre, si vous avez été victime d’injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne via ce lien : <a href='https://www.pre-plainte-en-ligne.gouv.fr' target='_blank'>https://www.pre-plainte-en-ligne.gouv.fr</a>"
     },
     {
       "key": "Chien refusé",
+      "title": "Ceci ne constitue pas un motif de signalement",
       "info": "Le professionnel n'est pas tenu d'accepter les animaux. S'il les accepte, il peut vous imposer la tenue en laisse dans la salle.<br /><br />Par contre, les chiens d'assistance, accompagnant les personnes titulaires de la carte d'invalidité, sont autorisés dans les lieux ouverts au public (comme les magasins ou les restaurants). La présence du chien aux côtés de la personne handicapée ne doit pas entraîner de facturation supplémentaire."
     }
   ]
