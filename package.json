@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start local": "ng serve",
-    "start": "node dist/server.js",
+    "start": "npm run build:prod && node dist/server.js",
     "prebuild": "envsub --env API_BASE_URL ./src/environments/environment.prod.ts",
     "build": "ng build",
     "test": "ng test --watch false",
