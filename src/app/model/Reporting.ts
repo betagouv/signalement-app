@@ -5,6 +5,7 @@ export class Reporting {
   anomalyPrecision: string;
   companyName: string;
   companyAddress: string;
+  companyPostalCode: string;
   companySiret: string;
   anomalyDate: Date;
   anomalyTimeSlot: number;

@@ -1,4 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { NgtUniversalModule } from '@ng-toolkit/universal';
+import { CommonModule } from '@angular/common';
+import { TransferHttpCacheModule } from '@nguniversal/common';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -30,7 +32,10 @@ defineLocale('fr', frLocale);
     WhyComponent,
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
+    NgtUniversalModule,
+    TransferHttpCacheModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -39,12 +44,11 @@ defineLocale('fr', frLocale);
     Ng2CompleterModule,
     Angulartics2Module.forRoot(),
     RouterModule.forRoot([
-        { path: '', component: ReportingFormComponent },
-        { path: 'infos/why', component: WhyComponent },
-      ]),
+      { path: '', component: ReportingFormComponent },
+      { path: 'infos/why', component: WhyComponent },
+    ]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

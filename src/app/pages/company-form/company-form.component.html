@@ -12,7 +12,7 @@
         textSearching=""
         textNoResults=""
         minSearchLength="1"
-        placeholder="boulangerie Sanzot Tours ...">
+        placeholder="ex: boulangerie Sanzot Tours ...">
       </ng2-completer>
       <button type="submit" class="overlay-button" aria-label="Recherche" [disabled]="searchCtrl.disabled">
         <svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg>
@@ -59,7 +59,8 @@
       textSearching=""
       textNoResults=""
       minSearchLength="1"
-      placeholder="numéro, voie, code postal, ville, ...">
+      placeholder="numéro, voie, code postal, ville, ..."
+      (selected)="selectAddress($event)">
     </ng2-completer>
     <div class="invalid" *ngIf="showErrors && addressCtrl.hasError('required')">
       Veuillez préciser l'adresse de l'établissement.

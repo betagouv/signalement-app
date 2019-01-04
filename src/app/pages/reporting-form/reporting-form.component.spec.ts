@@ -53,8 +53,9 @@ describe('ReportingFormComponent', () => {
   ];
 
   const anomalyInfosFixture = [
-    { key: precisionList22[0], info: 'info220' },
-    { key: precisionList22[2], info: 'info222' },
+    { key: 'Etablissement hors périmètre', title: '', info: 'infoHP' },
+    { key: precisionList22[0], title: 'title220', info: 'info220' },
+    { key: precisionList22[2], title: 'title222', info: 'info222' },
   ];
 
   beforeEach(async(() => {
@@ -104,15 +105,16 @@ describe('ReportingFormComponent', () => {
       expect(nativeElement.querySelector('select[formcontrolname="companyType"]')).not.toBeNull();
     });
 
-    it('should display companyType of anomalies as options of companyType select', () => {
+    it('should display companyType of anomalies as options of companyType select plus an option "Autres"', () => {
       component.anomalies = anomaliesFixture;
 
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option[value="Autres"')).not.toBeNull();
       expect(nativeElement.querySelectorAll('select[formcontrolname="companyType"] option').length)
-        .toBe(anomaliesFixture.length + 1);
+        .toBe(anomaliesFixture.length + 2);
     });
 
     it('should not display a select input for anomalyType on init', () => {
@@ -244,6 +246,19 @@ describe('ReportingFormComponent', () => {
       expect(component.anomalyTypeList).toEqual(anomalyTypeListForEtablissement2);
       expect(component.reportingForm.controls['anomalyType']).not.toBeNull();
     });
+
+    it('should display an information message when then option "Autres" is selected', () => {
+      component.anomalies = anomaliesFixture;
+      component.anomalyInfos = anomalyInfosFixture;
+      component.companyTypeCtrl.setValue('Autres');
+
+      component.changeCompanyType();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('div.success')).not.toBeNull();
+    });
+
   });
 
   describe('changeAnomalyCategory function', () => {
@@ -324,7 +339,8 @@ describe('ReportingFormComponent', () => {
           line1: 'adresse 1',
           line3: 'adresse 3',
           line4: 'adresse 4',
-          siret: '123245678900015'
+          siret: '123245678900015',
+          postalCode: '87270'
         }
       ));
 
@@ -338,6 +354,7 @@ describe('ReportingFormComponent', () => {
       reporting.companyName = 'Mon établissement';
       reporting.companyAddress = 'adresse 1 - adresse 3 - adresse 4';
       reporting.companySiret = '123245678900015';
+      reporting.companyPostalCode = '87270';
       reporting.description = '';
       reporting.anomalyDate = anomalyDate;
       reporting.anomalyTimeSlot = 5;
@@ -401,6 +418,55 @@ describe('ReportingFormComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('.notification')).not.toBeNull();
+    });
+
+  });
+
+  describe('case of the user want to make another reporting link to the first one', () => {
+
+    it('should display the reporting form with invariable inputs already filled', () => {
+
+      const anomalyDate = new Date();
+      const anomalyFile = new File([], 'anomaly.jpg');
+      component.companyTypeCtrl.setValue('companyType');
+      component.anomalyCategoryCtrl.setValue('category');
+      component.anomalyPrecisionCtrl.setValue('precision');
+      component.anomalyDateCtrl.setValue(anomalyDate);
+      component.anomalyTimeSlotCtrl.setValue(5);
+      component.lastNameCtrl.setValue('lastName');
+      component.firstNameCtrl.setValue('firstName');
+      component.emailCtrl.setValue('email@mail.fr');
+      component.contactAgreementCtrl.setValue(true);
+      component.anomalyFile = anomalyFile;
+      component.descriptionCtrl.setValue('description');
+      component.companyCtrl.setValue(Object.assign(
+        new Company(),
+        {
+          name: 'Mon établissement',
+          line1: 'adresse 1',
+          line3: 'adresse 3',
+          line4: 'adresse 4',
+          siret: '123245678900015',
+          postalCode: '87270'
+        }
+      ));
+      component.showSuccess = true;
+
+      component.addNewReporting();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('form')).not.toBeNull();
+      expect(component.reportingForm.controls['anomalyDate'].value).toEqual(anomalyDate);
+      expect(component.reportingForm.controls['anomalyTimeSlot'].value).toEqual(5);
+      expect(component.reportingForm.controls['firstName'].value).toEqual('firstName');
+      expect(component.reportingForm.controls['lastName'].value).toEqual('lastName');
+      expect(component.reportingForm.controls['email'].value).toEqual('email@mail.fr');
+      expect(component.reportingForm.controls['contactAgreement'].value).toEqual(true);
+      expect(component.reportingForm.controls['companyType'].value).toEqual('companyType');
+      expect(component.reportingForm.controls['description'].value).toEqual('');
+      expect(component.reportingForm.controls['anomalyCategory'].value).toEqual('');
+      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
   });
