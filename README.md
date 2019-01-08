@@ -15,7 +15,7 @@ npm install
 
 Lancement de l'application en local :
 ```bash
-npm run "start local"
+npm run start:local
 ```
 
 L'application est accessible à l'adresse `http://localhost:4200` avec rechargement à chaud des modifications.

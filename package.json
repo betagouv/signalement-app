@@ -3,7 +3,7 @@
   "version": "0.0.1-SNAPSHOT",
   "scripts": {
     "ng": "ng",
-    "start local": "ng serve",
+    "start:local": "ng serve",
     "start": "node dist/server.js",
     "prebuild": "envsub --env API_BASE_URL ./src/environments/environment.prod.ts",
     "build": "ng build",
