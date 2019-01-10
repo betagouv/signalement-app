@@ -4,12 +4,13 @@
   },
   "env": {
     "API_BASE_URL": {
-      "value": "https://signalement-api.herokuapp.com"
+      "value": "https://signalement-api-pr-17.herokuapp.com"
     }
   },
   "formation": {
     "web": {
-      "quantity": 1
+      "quantity": 1,
+      "size": "free"
     }
   },
   "addons": [
