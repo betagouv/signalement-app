@@ -18,6 +18,8 @@ import { WhyComponent } from './pages/infos/why/why.component';
 import { RouterModule } from '@angular/router';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Angulartics2Module } from 'angulartics2';
+import { StatsComponent } from './pages/stats/stats.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 defineLocale('fr', frLocale);
 
@@ -30,6 +32,7 @@ defineLocale('fr', frLocale);
     CompanyFormComponent,
     FooterComponent,
     WhyComponent,
+    StatsComponent,
   ],
   imports: [
     CommonModule,
@@ -43,8 +46,10 @@ defineLocale('fr', frLocale);
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     Ng2CompleterModule,
     Angulartics2Module.forRoot(),
+    NgxEchartsModule,
     RouterModule.forRoot([
       { path: '', component: ReportingFormComponent },
+      { path: 'stats', component: StatsComponent },
       { path: 'infos/why', component: WhyComponent },
     ]),
   ],
