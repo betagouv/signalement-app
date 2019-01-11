@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Anomaly, AnomalyInfo, AnomalyType } from '../../model/Anomaly';
 import { AnomalyService } from '../../services/anomaly.service';
 import { ReportingService } from '../../services/reporting.service';
@@ -183,7 +183,7 @@ export class ReportingFormComponent implements OnInit {
 
   createReporting() {
     if (!this.reportingForm.valid) {
-      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.invalidForm);
+      this.trackFormErrors();
       this.showErrors = true;
     } else {
       this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.formSubmitted);
@@ -221,6 +221,19 @@ export class ReportingFormComponent implements OnInit {
         });
 
     }
+  }
+
+  private trackFormErrors() {
+    const errors = [];
+    Object.keys(this.reportingForm.controls).forEach(key => {
+      const reportingErrors: ValidationErrors = this.reportingForm.get(key).errors;
+      if (reportingErrors != null) {
+        Object.keys(reportingErrors).forEach(keyError => {
+          errors.push(`${key} - ${keyError}`);
+        });
+      }
+    });
+    this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.invalidForm, errors);
   }
 
   private treatCreationSuccess() {
