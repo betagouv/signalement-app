@@ -1,0 +1,75 @@
+import { Component, OnInit } from '@angular/core';
+import { StatsService } from '../../services/stats.service';
+import { EChartOption } from 'echarts';
+import { Statistics } from '../../model/Statistics';
+
+@Component({
+  selector: 'app-stats',
+  templateUrl: './stats.component.html',
+  styleUrls: ['./stats.component.scss']
+})
+export class StatsComponent implements OnInit {
+
+  statistics: Statistics;
+
+  chartOption: EChartOption;
+  loading: boolean;
+
+  constructor(private statsService: StatsService) { }
+
+  ngOnInit() {
+
+    this.loading = true;
+    this.statsService.getStatistics().subscribe(stats => {
+      this.loading = false;
+      this.statistics = stats;
+
+      this.chartOption = {
+        xAxis: {
+          type: 'category',
+          data: this.getXAxisData(),
+          axisLabel: {
+            rotate: 45
+          }
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: this.getSeriesData(),
+          type: 'line',
+          animationDuration: 5000
+        }],
+        title: {
+          text: 'Nombre de signalements par mois',
+          left: 'center',
+          top: '20',
+          textStyle: {
+            color: '#53657d',
+            fontSize: '22',
+          }
+        }
+      };
+    });
+  }
+
+  getXAxisData() {
+    const currentMonth = (new Date()).getMonth();
+    const currentYear = (new Date()).getFullYear() - 2000;
+    const months = ['jan.', 'fév.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+    return [
+      ...months.slice(currentMonth + 1).map(label => `${label} ${currentYear - 1}`),
+      ...months.slice(0, currentMonth + 1).map(label => `${label} ${currentYear}`)
+    ];
+  }
+
+  getSeriesData() {
+    const currentMonth = (new Date()).getMonth();
+    const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.statistics.reportsPerMonthList.forEach(reportsPerMonth => {
+      console.log('reportsPerMonth', reportsPerMonth)
+      data[reportsPerMonth.month] = reportsPerMonth.count;
+    });
+    return [...data.slice(currentMonth + 1), ...data.slice(0, currentMonth + 1)];
+  }
+}
