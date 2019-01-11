@@ -13,7 +13,7 @@
         textNoResults=""
         minSearchLength="1"
         placeholder="ex: boulangerie Sanzot Tours ..."
-        (selected)="$event?searchCompany($event):{}">
+        (selected)="$event?searchCompany():{}">
       </ng2-completer>
       <button type="submit" class="overlay-button" aria-label="Recherche" [disabled]="searchCtrl.disabled">
         <svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg>
