@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Anomaly, AnomalyInfo, AnomalyType } from '../../model/Anomaly';
 import { AnomalyService } from '../../services/anomaly.service';
@@ -7,6 +7,7 @@ import { Reporting } from '../../model/Reporting';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { Company } from '../../model/Company';
 import { AnalyticsService, EventCategories, ReportingEventActions } from '../../services/analytics.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-reporting-form',
@@ -43,7 +44,8 @@ export class ReportingFormComponent implements OnInit {
   anomalyInfo: AnomalyInfo;
 
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
               private reportingService: ReportingService,
               private localeService: BsLocaleService,
@@ -55,8 +57,10 @@ export class ReportingFormComponent implements OnInit {
 
     this.initReportingForm(true);
     this.constructPlageHoraireList();
-    this.loadAnomalies();
-    this.loadAnomalyInfos();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadAnomalies();
+      this.loadAnomalyInfos();
+    }
   }
 
   initReportingForm(fullInit: boolean) {

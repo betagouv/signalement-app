@@ -8,7 +8,7 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="isPlatformBrowser()">
         <div class="col-12 chart stat">
           <div echarts [options]="chartOption"></div>
           <ngx-loading [show]="loading"></ngx-loading>

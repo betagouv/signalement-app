@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Injector, PLATFORM_ID } from '@angular/core';
 import { Angulartics2Piwik } from 'angulartics2/piwik';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,13 @@ import { Angulartics2Piwik } from 'angulartics2/piwik';
 })
 export class AppComponent {
 
-  constructor(private angulartics2Piwik: Angulartics2Piwik) {
-    angulartics2Piwik.startTracking();
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private injector: Injector) {
+
+    if (isPlatformBrowser(this.platformId)) {
+      const angulartics2Piwik: Angulartics2Piwik = injector.get(Angulartics2Piwik);
+      angulartics2Piwik.startTracking();
+    }
   }
 
 }
