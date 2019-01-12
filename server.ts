@@ -9,8 +9,6 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as compression from 'compression';
 import { join } from 'path';
-import { readFileSync } from 'fs';
-import * as domino from 'domino';
 
 enableProdMode();
 
@@ -23,11 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const PORT = process.env.PORT || 8080;
-
-const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toString();
-const win = domino.createWindow(template);
-global['window'] = win;
-global['document'] = win.document;
 
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main');
 

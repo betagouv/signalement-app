@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { Statistics } from '../../model/Statistics';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-stats',
@@ -15,10 +16,14 @@ export class StatsComponent implements OnInit {
   chartOption: EChartOption;
   loading: boolean;
 
-  constructor(private statsService: StatsService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private statsService: StatsService) { }
 
   ngOnInit() {
+    this.loadStatistics();
+  }
 
+  loadStatistics() {
     this.loading = true;
     this.statsService.getStatistics().subscribe(stats => {
       this.loading = false;
@@ -67,9 +72,12 @@ export class StatsComponent implements OnInit {
     const currentMonth = (new Date()).getMonth();
     const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     this.statistics.reportsPerMonthList.forEach(reportsPerMonth => {
-      console.log('reportsPerMonth', reportsPerMonth)
       data[reportsPerMonth.month] = reportsPerMonth.count;
     });
     return [...data.slice(currentMonth + 1), ...data.slice(0, currentMonth + 1)];
+  }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
   }
 }
