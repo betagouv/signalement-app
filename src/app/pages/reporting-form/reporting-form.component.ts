@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Anomaly, AnomalyInfo, AnomalyType } from '../../model/Anomaly';
 import { AnomalyService } from '../../services/anomaly.service';
 import { ReportingService } from '../../services/reporting.service';
@@ -7,6 +7,7 @@ import { Reporting } from '../../model/Reporting';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { Company } from '../../model/Company';
 import { AnalyticsService, EventCategories, ReportingEventActions } from '../../services/analytics.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-reporting-form',
@@ -43,7 +44,8 @@ export class ReportingFormComponent implements OnInit {
   anomalyInfo: AnomalyInfo;
 
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
               private reportingService: ReportingService,
               private localeService: BsLocaleService,
@@ -55,8 +57,10 @@ export class ReportingFormComponent implements OnInit {
 
     this.initReportingForm(true);
     this.constructPlageHoraireList();
-    this.loadAnomalies();
-    this.loadAnomalyInfos();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadAnomalies();
+      this.loadAnomalyInfos();
+    }
   }
 
   initReportingForm(fullInit: boolean) {
@@ -183,7 +187,7 @@ export class ReportingFormComponent implements OnInit {
 
   createReporting() {
     if (!this.reportingForm.valid) {
-      this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.invalidForm);
+      this.trackFormErrors();
       this.showErrors = true;
     } else {
       this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.formSubmitted);
@@ -221,6 +225,19 @@ export class ReportingFormComponent implements OnInit {
         });
 
     }
+  }
+
+  private trackFormErrors() {
+    const errors = [];
+    Object.keys(this.reportingForm.controls).forEach(key => {
+      const reportingErrors: ValidationErrors = this.reportingForm.get(key).errors;
+      if (reportingErrors != null) {
+        Object.keys(reportingErrors).forEach(keyError => {
+          errors.push(`${key} - ${keyError}`);
+        });
+      }
+    });
+    this.analyticsService.trackEvent(EventCategories.reporting, ReportingEventActions.invalidForm, errors);
   }
 
   private treatCreationSuccess() {

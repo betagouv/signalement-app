@@ -1,10 +1,10 @@
 <div class="banner" role="banner">
   <div class="banner_container">
     <h2 class="text-center">
-      Absence de prix, produits périmés, garantie non respectée...
+      Absence de prix, manque d'hygiène, garantie non respectée ou victime d'une fraude&#160;...&#160;?
       <br />
       <br class="d-sm-none" />
-      Contribuez à améliorer le droit des consommateurs par vos signalements&#160;!
+      Signalez votre problème facilement aux services compétents et aux professionnels.
     </h2>
     <h3>
       Magasins, commerces de proximité, cafés et restaurants...
@@ -265,6 +265,12 @@
           </div>
 
           <ng-container>
+            <div class="notification error" *ngIf="showErrors && reportingForm.invalid">
+              Un ou plusieurs champs sont invalides.
+              <br />
+              Merci de corriger les erreurs puis de valider de nouveau le formulaire.
+            </div>
+
             <button type="submit" class="btn btn-primary btn-lg btn-block" *ngIf="isIntoxicationAlimentaire(); else mainButton">
               Suivant
             </button>
@@ -280,6 +286,7 @@
 
       <div *ngIf="showSuccess" class="col-sm-12 offset-lg-2 col-lg-8">
         <ng-container *ngIf="isIntoxicationAlimentaire(); else thanks">
+          <h3>Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil signalement.</h3>
           <p>
             Les cas d'intoxication alimentaire nécessitent une analyse individualisée
             (notamment le nombre de personnes malades, symptômes et aliments suspectés )

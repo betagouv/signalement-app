@@ -1,19 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Angulartics2 } from 'angulartics2';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalyticsService {
 
-  constructor(private angulartics2: Angulartics2) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private angulartics2: Angulartics2) {
   }
 
   trackEvent(category, action, name?, value?) {
-    this.angulartics2.eventTrack.next({
-      action,
-      properties: { category, name, value }
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      this.angulartics2.eventTrack.next({
+        action,
+        properties: { category, name, value }
+      });
+    }
   }
 }
 
