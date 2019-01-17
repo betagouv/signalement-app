@@ -74,6 +74,7 @@ export class CompanyFormComponent implements OnInit {
     } else {
       this.initSearch();
       this.loading = true;
+      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, this.searchCtrl.value);
       this.companyService.searchCompanies(this.searchCtrl.value).subscribe(
         companySearchResult => {
           this.loading = false;
