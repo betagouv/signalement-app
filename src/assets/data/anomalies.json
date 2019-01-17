@@ -8,7 +8,7 @@
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         },
         {
@@ -18,7 +18,7 @@
             "Salle du restaurant/café sale",
             "Présence de rat/insectes/oiseau",
             "Problème de température (ex: vitrine réfrigérée)",
-            "Autres (merci de préciser)"
+            "Autres"
           ]
         },
         {
@@ -33,7 +33,7 @@
             "Produits non-disponibles",
             "Bouteille de vin non débouchée devant vous",
             "Bouteille de vin servie au verre non versée devant vous",
-            "Autres (merci de préciser)"
+            "Autres"
           ]
         },
         {
@@ -53,7 +53,7 @@
             "Refus de vous servir",
             "Personnel peu aimable, mal poli",
             "Chien refusé",
-            "Autres (merci de préciser)"
+            "Autres"
           ]
         }
       ]
@@ -66,7 +66,7 @@
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         },
         {
@@ -75,7 +75,7 @@
             "Sol ou rayon sale",
             "Présence de rat/insectes/oiseau",
             "Problème de température (ex: vitrine réfrigérée)",
-            "Autres (merci de préciser)"
+            "Autres"
           ]
         },
         {
@@ -109,7 +109,7 @@
             "Quantité annoncée non conforme",
             "Problème rencontré avec un produit spécifique",
             "Vente d'un produit en retrait-rappel",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         },
         {
@@ -121,7 +121,7 @@
             "Présemption d'obsolescence programmée",
             "Refus de reprendre un produit encore sous garantie",
             "Vente d'un produit en retrait-rappel",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         },
         {
@@ -130,7 +130,7 @@
             "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
             "Refus de vous servir, refus de vendre",
             "Personnel peu aimable, mal poli",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         }
       ]
@@ -143,7 +143,7 @@
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         },
         {
@@ -152,7 +152,7 @@
             "Etablisement sale",
             "Présence de rat/insectes/oiseau",
             "Problème de température (ex: vitrine réfrigérée)",
-            "Autres (merci de préciser)"
+            "Autres"
           ]
         },
         {
@@ -164,7 +164,7 @@
             "Frais facturés non clairement indiqués avant",
             "Refus d'un moyen de paiement non annoncé",
             "Fausse réduction de prix",
-            "Autres (merci de préciser)"
+            "Autres"
           ]
         },
         {
@@ -190,7 +190,7 @@
           "category": "Autres",
           "precisionList": [
             "Refus de vous servir, refus de vendre",
-            "Autres (merci de le préciser)",
+            "Autres",
             "Personnel peu aimable, mal poli"
           ]
         }
@@ -208,7 +208,7 @@
             "Fausse réduction de prix",
             "Frais facturés non clairement indiqués avant",
             "Refus d'un moyen de paiement non annoncé",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         },
         {
@@ -226,7 +226,7 @@
             "Présemption d'obsolescence programmée",
             "Refus de reprendre un produit encore sous garantie",
             "Vente d'un produit en retrait-rappel",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         },
         {
@@ -236,7 +236,7 @@
             "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
             "Refus de vous servir, refus de vendre",
             "Personnel peu aimable, mal poli",
-            "Autres (merci de le préciser)"
+            "Autres"
           ]
         }
       ]
