@@ -8,7 +8,7 @@
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -18,7 +18,7 @@
             "Salle du restaurant/café sale",
             "Présence de rat/insectes/oiseau",
             "Problème de température (ex: vitrine réfrigérée)",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -33,7 +33,7 @@
             "Produits non-disponibles",
             "Bouteille de vin non débouchée devant vous",
             "Bouteille de vin servie au verre non versée devant vous",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -48,12 +48,12 @@
           ]
         },
         {
-          "category": "Autres",
+          "category": "Autre",
           "precisionList": [
             "Refus de vous servir",
             "Personnel peu aimable, mal poli",
             "Chien refusé",
-            "Autres"
+            "Autre"
           ]
         }
       ]
@@ -66,7 +66,7 @@
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -75,7 +75,7 @@
             "Sol ou rayon sale",
             "Présence de rat/insectes/oiseau",
             "Problème de température (ex: vitrine réfrigérée)",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -109,7 +109,7 @@
             "Quantité annoncée non conforme",
             "Problème rencontré avec un produit spécifique",
             "Vente d'un produit en retrait-rappel",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -121,16 +121,16 @@
             "Présemption d'obsolescence programmée",
             "Refus de reprendre un produit encore sous garantie",
             "Vente d'un produit en retrait-rappel",
-            "Autres"
+            "Autre"
           ]
         },
         {
-          "category": "Autres",
+          "category": "Autre",
           "precisionList": [
             "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
             "Refus de vous servir, refus de vendre",
             "Personnel peu aimable, mal poli",
-            "Autres"
+            "Autre"
           ]
         }
       ]
@@ -143,7 +143,7 @@
           "precisionList": [
             "Pas de gants, pas de coiffe",
             "Tenue sale",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -152,7 +152,7 @@
             "Etablisement sale",
             "Présence de rat/insectes/oiseau",
             "Problème de température (ex: vitrine réfrigérée)",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -164,7 +164,7 @@
             "Frais facturés non clairement indiqués avant",
             "Refus d'un moyen de paiement non annoncé",
             "Fausse réduction de prix",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -187,10 +187,10 @@
           ]
         },
         {
-          "category": "Autres",
+          "category": "Autre",
           "precisionList": [
             "Refus de vous servir, refus de vendre",
-            "Autres",
+            "Autre",
             "Personnel peu aimable, mal poli"
           ]
         }
@@ -208,7 +208,7 @@
             "Fausse réduction de prix",
             "Frais facturés non clairement indiqués avant",
             "Refus d'un moyen de paiement non annoncé",
-            "Autres"
+            "Autre"
           ]
         },
         {
@@ -226,17 +226,17 @@
             "Présemption d'obsolescence programmée",
             "Refus de reprendre un produit encore sous garantie",
             "Vente d'un produit en retrait-rappel",
-            "Autres"
+            "Autre"
           ]
         },
         {
-          "category": "Autres",
+          "category": "Autre",
           "precisionList": [
             "Absence d'informations sur les garanties",
             "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
             "Refus de vous servir, refus de vendre",
             "Personnel peu aimable, mal poli",
-            "Autres"
+            "Autre"
           ]
         }
       ]

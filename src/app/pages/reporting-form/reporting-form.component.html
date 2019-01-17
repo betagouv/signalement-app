@@ -86,7 +86,7 @@
                     (change)="changeCompanyType()">
               <option disabled value="">Choisissez ...</option>
               <option *ngFor="let anomaly of anomalies" value="{{anomaly.companyType}}">{{anomaly.companyType}}</option>
-              <option value="Autres">Autres ...</option>
+              <option value="Autres">Autre</option>
             </select>
             <div class="invalid" *ngIf="showErrors && companyTypeCtrl.hasError('required')">
               Veuillez compléter le champ "Type d'établissement".
