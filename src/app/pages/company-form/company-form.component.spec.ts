@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanyFormComponent } from './company-form.component';
-import { CompanyService, MaxCompanyResult } from '../../services/company.service';
+import { CompanyService } from '../../services/company.service';
 import { Company, CompanySearchResult } from '../../model/Company';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -72,7 +72,6 @@ describe('CompanyFormComponent', () => {
 
     it('should initialize previous results', () => {
       component.companies = [deserialize(Company, { name: 'C1' }), deserialize(Company, { name: 'C2' })];
-      component.total = 2;
       const companySearchResult = deserialize(CompanySearchResult, {
         'total_results': 0,
         'etablissement': []
@@ -83,7 +82,6 @@ describe('CompanyFormComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      expect(component.total).toBe(0);
       expect(component.companies).toEqual([]);
     });
 
@@ -155,52 +153,12 @@ describe('CompanyFormComponent', () => {
       expect(component.companies).toEqual(companySearchResult.companies);
     });
 
-    it('disable search input and display a form to enter manually company information when there are too many results', () => {
-
-      const companySearchResult = deserialize(CompanySearchResult, {
-        'total_results': MaxCompanyResult + 1,
-        'etablissement': []
-      });
-      spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
-
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
+    it('enable to display a form to enter manually company information', () => {
+      component.editCompany();
       fixture.detectChanges();
 
-      expect(component.companies).toEqual([]);
-      expect(nativeElement.querySelector('input[name="search"]').getAttribute('ng-reflect-is-disabled')).toBe('true');
+      const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('form#companyForm')).not.toBeNull();
-    });
-
-    it('disable search input and display a form to enter manually company information when there are no result', () => {
-
-      const companySearchResult = deserialize(CompanySearchResult, {
-        'total_results': 0,
-        'etablissement': []
-      });
-      spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
-
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
-      fixture.detectChanges();
-
-      expect(component.companies).toEqual([]);
-      expect(nativeElement.querySelector('input[name="search"]').getAttribute('ng-reflect-is-disabled')).toBe('true');
-      expect(nativeElement.querySelector('form#companyForm')).not.toBeNull();
-    });
-
-    it('enable search input and remove company form for modify search', () => {
-
-      const nativeElement = fixture.nativeElement;
-      component.searchForm.controls['search'].disable();
-      component.initCompanyForm();
-
-      component.editSearch();
-      fixture.detectChanges();
-
-      expect(component.companies).toEqual([]);
-      expect(nativeElement.querySelector('input[name="search"]').getAttribute('ng-reflect-is-disabled')).toBe('false');
-      expect(nativeElement.querySelector('form#companyForm')).toBeNull();
     });
 
   });
@@ -210,7 +168,7 @@ describe('CompanyFormComponent', () => {
     it ('should emit and event with a company which contains form inputs', (done) => {
 
       const nativeElement = fixture.nativeElement;
-      component.initCompanyForm();
+      component.editCompany();
       component.nameCtrl.setValue('Mon entreprise');
       component.addressCtrl.setValue('Mon adresse dans ma ville');
       component.addressCtrlPostalCode = '87270';

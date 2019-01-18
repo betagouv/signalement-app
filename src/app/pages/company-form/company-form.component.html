@@ -1,42 +1,29 @@
 <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
   <div class="form__group">
     <label for="searchInput">
-      Veuillez identifier l'établissement concerné <span>*</span>
+      Veuillez rechercher l'établissement (nom, type, adresse, ville, ...) <span>*</span>
     </label>
-    <div class="search__group">
-      <ng2-completer
-        [datasource]="suggestionData"
-        formControlName="search"
-        inputName="search"
-        inputId="searchInput"
-        textSearching=""
-        textNoResults=""
-        minSearchLength="1"
-        placeholder="ex: boulangerie Sanzot Tours ..."
-        (selected)="$event?searchCompany():{}">
-      </ng2-completer>
-      <button type="submit" class="overlay-button" aria-label="Recherche" [disabled]="searchCtrl.disabled">
-        <svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg>
-      </button>
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean Orléans ..." />
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-secondary d-sm-none"><svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg></button>
+        <button type="submit" class="btn btn-secondary d-none d-sm-block">Rechercher</button>
+      </div>
     </div>
     <div class="invalid" *ngIf="showErrors && searchCtrl.hasError('required')">
-      Veuillez identifier l'établissement.
+      Veuillez renseigner le champ de recherche.
     </div>
   </div>
 </form>
 
-<form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm" *ngIf="companyForm">
+<div class="notification error mt-4" *ngIf="searchWarning">
+  <p>
+    {{searchWarning}}
+  </p>
+  Veuillez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+</div>
 
-  <div class="notification warning mt-4">
-    <span *ngIf="total === 0">
-      Aucun établissement ne correspond à la recherche.
-    </span>
-    <span *ngIf="total > 0">
-      Il y a trop d'établissement correspondant à la recherche.
-    </span>
-    <br/>
-    Veuillez <span class="link" (click)="editSearch()">modifier votre recherche</span> ou saisir son nom et son adresse ci-dessous.
-  </div>
+<form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm" *ngIf="companyForm">
 
   <div class="form__group">
     <label for="companyName">
@@ -77,7 +64,7 @@
 <div *ngIf="companies && companies.length">
 
   <div class="notification warning mt-4">
-    Veuillez sélectionner un établissement dans la liste ci-dessous ou <span class="link" (click)="editSearch()">modifier votre recherche</span>.
+    Veuillez sélectionner un établissement dans la liste ci-dessous
   </div>
 
   <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
