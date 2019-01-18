@@ -5,14 +5,14 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/header/header.component';
-import { ReportingFormComponent } from './pages/reporting-form/reporting-form.component';
+import { ReportingComponent } from './pages/reporting/reporting.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from './components/file-input/file-input.component';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { CompanyFormComponent } from './pages/company-form/company-form.component';
+import { CompanyComponent } from './pages/reporting/company/company.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { WhyComponent } from './pages/infos/why/why.component';
 import { RouterModule } from '@angular/router';
@@ -27,9 +27,9 @@ defineLocale('fr', frLocale);
   declarations: [
     AppComponent,
     HeaderComponent,
-    ReportingFormComponent,
+    ReportingComponent,
     FileInputComponent,
-    CompanyFormComponent,
+    CompanyComponent,
     FooterComponent,
     WhyComponent,
     StatsComponent,
@@ -48,7 +48,7 @@ defineLocale('fr', frLocale);
     Angulartics2Module.forRoot(),
     NgxEchartsModule,
     RouterModule.forRoot([
-      { path: '', component: ReportingFormComponent },
+      { path: '', component: ReportingComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'infos/why', component: WhyComponent },
     ]),

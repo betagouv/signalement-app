@@ -1,17 +1,17 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Company, CompanySearchResult } from '../../model/Company';
-import { CompanyService, MaxCompanyResult } from '../../services/company.service';
+import { Company, CompanySearchResult } from '../../../model/Company';
+import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AddressService } from '../../services/address.service';
+import { AddressService } from '../../../services/address.service';
 import { CompleterItem, RemoteData } from 'ng2-completer';
-import { AnalyticsService, CompanyEventActions, CompanySearchEventNames, EventCategories } from '../../services/analytics.service';
+import { AnalyticsService, CompanyEventActions, CompanySearchEventNames, EventCategories } from '../../../services/analytics.service';
 
 @Component({
-  selector: 'app-company-form',
-  templateUrl: './company-form.component.html',
-  styleUrls: ['./company-form.component.scss']
+  selector: 'app-company',
+  templateUrl: './company.component.html',
+  styleUrls: ['./company.component.scss']
 })
-export class CompanyFormComponent implements OnInit {
+export class CompanyComponent implements OnInit {
 
   searchForm: FormGroup;
   searchCtrl: FormControl;

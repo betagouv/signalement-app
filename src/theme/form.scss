@@ -1,4 +1,8 @@
 form {
+
+  max-width: 750px;
+  margin: 0 auto;
+
   label span {
     color: #e00917;
   }
@@ -60,7 +64,7 @@ select:disabled {
 input[type=radio],
 input[type=checkbox] {
   margin-right: 6px;
-  margin-top: 0;
+  margin-top: 2px;
 }
 
 input[type=radio] {

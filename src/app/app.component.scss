@@ -24,7 +24,7 @@
     color: #fff;
   }
 
-  .section-gray {
+  .section-grey {
     background-color: $lighter-grey;
   }
 
@@ -32,6 +32,10 @@
     color: $primary;
     cursor: pointer;
     text-decoration: underline;
+  }
+
+  .pointer {
+    cursor: pointer;
   }
 
   .banner {

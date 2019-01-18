@@ -1,26 +1,26 @@
 import { JsonProperty } from 'json-typescript-mapper';
 
-export class AnomalyType {
-  @JsonProperty('category')
-  category: string;
-  @JsonProperty('precisionList')
-  precisionList: string[];
+export class Precision {
+  @JsonProperty('title')
+  title: string;
+  @JsonProperty('description')
+  description: string;
 
   constructor() {
-    this.category = undefined;
-    this.precisionList = undefined;
+    this.title = undefined;
+    this.description = undefined;
   }
 }
 
 export class Anomaly {
-  @JsonProperty('companyType')
-  companyType: string;
-  @JsonProperty({ name: 'anomalyTypeList', clazz: AnomalyType })
-  anomalyTypeList: AnomalyType[];
+  @JsonProperty('category')
+  category: string;
+  @JsonProperty({ name: 'precisionList', clazz: Precision })
+  precisionList: Precision[];
 
   constructor() {
-    this.companyType = undefined;
-    this.anomalyTypeList = undefined;
+    this.category = undefined;
+    this.precisionList = undefined;
   }
 }
 

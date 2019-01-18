@@ -1,28 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompanyFormComponent } from './company-form.component';
-import { CompanyService } from '../../services/company.service';
-import { Company, CompanySearchResult } from '../../model/Company';
+import { CompanyComponent } from './company.component';
+import { CompanyService } from '../../../services/company.service';
+import { Company, CompanySearchResult } from '../../../model/Company';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { AddressService } from '../../services/address.service';
+import { AddressService } from '../../../services/address.service';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 describe('CompanyFormComponent', () => {
 
-  let component: CompanyFormComponent;
-  let fixture: ComponentFixture<CompanyFormComponent>;
+  let component: CompanyComponent;
+  let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
   let addressService: AddressService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CompanyFormComponent,
+        CompanyComponent,
       ],
       imports: [
         FormsModule,
@@ -45,7 +45,7 @@ describe('CompanyFormComponent', () => {
     addressService = TestBed.get(AddressService);
     spyOn(addressService, 'addressData').and.returnValue(of([]));
 
-    fixture = TestBed.createComponent(CompanyFormComponent);
+    fixture = TestBed.createComponent(CompanyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
