@@ -39,7 +39,6 @@ export enum ReportingEventActions {
 export enum CompanyEventActions {
   search = 'Recherche',
   select = 'Sélection dans la liste de résultats',
-  searchEdit = 'Modification de la recherche',
   manualEntry = 'Saisie manuelle',
   change = 'Changement d\'établissement'
 }

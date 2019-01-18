@@ -27,13 +27,15 @@ form {
 }
 
 input,
+input.form-control,
 textarea,
 select {
   width: 100%;
   outline: none;
   padding: 8px 14px;
   font: inherit;
-  line-height: 1.6;
+  line-height: 1.6 !important;
+  height: auto;
   color: #1c1c1c;
   border-radius: 3px;
   border: 1px solid #adb9c9;
@@ -249,7 +251,7 @@ fieldset {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: $grey;
+  color: $grey !important;
   font-style: italic;
   font-weight: 200;
   opacity: 1; /* Firefox */

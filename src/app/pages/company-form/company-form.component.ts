@@ -22,8 +22,8 @@ export class CompanyFormComponent implements OnInit {
   addressCtrlPostalCode: string;
 
   companies: Company[];
-  total: number;
   loading: boolean;
+  searchWarning: string;
 
   showErrors: boolean;
   suggestionData: RemoteData;
@@ -40,7 +40,6 @@ export class CompanyFormComponent implements OnInit {
 
   ngOnInit() {
     this.initSearchForm();
-    this.initSearch();
   }
 
   initSearchForm() {
@@ -51,7 +50,7 @@ export class CompanyFormComponent implements OnInit {
     this.suggestionData = this.companyService.suggestionData;
   }
 
-  initCompanyForm() {
+  editCompany() {
     this.showErrors = false;
     this.nameCtrl = this.formBuilder.control('', Validators.required);
     this.addressCtrl = this.formBuilder.control('', Validators.required);
@@ -64,8 +63,9 @@ export class CompanyFormComponent implements OnInit {
   }
 
   initSearch() {
+    this.companyForm = null;
     this.companies = [];
-    this.total = 0;
+    this.searchWarning = '';
   }
 
   searchCompany() {
@@ -74,15 +74,15 @@ export class CompanyFormComponent implements OnInit {
     } else {
       this.initSearch();
       this.loading = true;
+      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, this.searchCtrl.value);
       this.companyService.searchCompanies(this.searchCtrl.value).subscribe(
         companySearchResult => {
           this.loading = false;
-          this.total = companySearchResult.total;
-          if (this.total === 0) {
+          if (companySearchResult.total === 0) {
             this.treatCaseNoResult();
-          } else if (this.total === 1) {
+          } else if (companySearchResult.total === 1) {
             this.treatCaseSingleResult(companySearchResult);
-          } else if (this.total > MaxCompanyResult) {
+          } else if (companySearchResult.total > MaxCompanyResult) {
             this.treatCaseTooManyResults();
           } else {
             this.treatCaseSeveralResults(companySearchResult);
@@ -94,8 +94,7 @@ export class CompanyFormComponent implements OnInit {
 
   treatCaseNoResult() {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
-    this.searchCtrl.disable();
-    this.initCompanyForm();
+    this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
   }
 
   treatCaseSingleResult(companySearchResult: CompanySearchResult) {
@@ -105,8 +104,7 @@ export class CompanyFormComponent implements OnInit {
 
   treatCaseTooManyResults() {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.tooManyResults);
-    this.searchCtrl.disable();
-    this.initCompanyForm();
+    this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
   }
 
   treatCaseSeveralResults(companySearchResult) {
@@ -121,13 +119,6 @@ export class CompanyFormComponent implements OnInit {
 
   selectCompany(company: Company) {
     this.companySelected.emit(company);
-  }
-
-  editSearch() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchEdit);
-    this.companies = [];
-    this.searchForm.controls['search'].enable();
-    this.companyForm = null;
   }
 
   submitCompanyForm() {

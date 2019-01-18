@@ -1,11 +1,11 @@
 <div class="banner" role="banner">
   <div class="banner_container">
-    <h2 class="text-center">
+    <h1 class="text-center">
       Absence de prix, manque d'hygiène, garantie non respectée ou victime d'une fraude&#160;...&#160;?
       <br />
       <br class="d-sm-none" />
       Signalez votre problème facilement aux services compétents et aux professionnels.
-    </h2>
+    </h1>
     <h3>
       Magasins, commerces de proximité, cafés et restaurants...
     </h3>
@@ -86,7 +86,7 @@
                     (change)="changeCompanyType()">
               <option disabled value="">Choisissez ...</option>
               <option *ngFor="let anomaly of anomalies" value="{{anomaly.companyType}}">{{anomaly.companyType}}</option>
-              <option value="Autres">Autres ...</option>
+              <option value="Autres">Autre</option>
             </select>
             <div class="invalid" *ngIf="showErrors && companyTypeCtrl.hasError('required')">
               Veuillez compléter le champ "Type d'établissement".
