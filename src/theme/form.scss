@@ -3,8 +3,13 @@ form {
   max-width: 750px;
   margin: 0 auto;
 
-  label span {
-    color: #e00917;
+  label {
+
+    font-size: 1.25em;
+
+    span {
+      color: #e00917;
+    }
   }
 
   .invalid {

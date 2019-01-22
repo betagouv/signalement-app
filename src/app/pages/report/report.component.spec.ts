@@ -1,23 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IntoxicationAlimentaire, ReportingComponent, Step } from './reporting.component';
+import { IntoxicationAlimentaire, ReportComponent, Step } from './report.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnomalyService } from '../../services/anomaly.service';
 import { Anomaly } from '../../model/Anomaly';
 import { of } from 'rxjs';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
-import { ReportingService } from '../../services/reporting.service';
-import { Reporting } from '../../model/Reporting';
+import { ReportService } from '../../services/report.service';
+import { Report } from '../../model/Report';
 import { ServiceUtils } from '../../services/service.utils';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../components/file-input/file-input.component';
 import { Component } from '@angular/core';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { DetailsComponent } from './details/details.component';
+import { ConsumerComponent } from './consumer/consumer.component';
 
 
-describe('ReportingFormComponent', () => {
+describe('ReportFormComponent', () => {
 
   @Component({
     selector: 'app-company',
@@ -25,10 +28,10 @@ describe('ReportingFormComponent', () => {
   })
   class CompanyFormComponent {}
 
-  let component: ReportingComponent;
-  let fixture: ComponentFixture<ReportingComponent>;
+  let component: ReportComponent;
+  let fixture: ComponentFixture<ReportComponent>;
   let anomalyService: AnomalyService;
-  let reportingService: ReportingService;
+  let reportService: ReportService;
 
   const precisionList1 = [
     { title: 'title11', description: 'description11' },
@@ -55,9 +58,12 @@ describe('ReportingFormComponent', () => {
     defineLocale('fr', frLocale);
     TestBed.configureTestingModule({
       declarations: [
-        ReportingComponent,
+        ReportComponent,
         FileInputComponent,
-        CompanyFormComponent
+        CompanyFormComponent,
+        BreadcrumbComponent,
+        DetailsComponent,
+        ConsumerComponent,
       ],
       imports: [
         FormsModule,
@@ -69,7 +75,7 @@ describe('ReportingFormComponent', () => {
       ],
       providers: [
         AnomalyService,
-        ReportingService,
+        ReportService,
         ServiceUtils,
       ]
     })
@@ -77,11 +83,11 @@ describe('ReportingFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportingComponent);
+    fixture = TestBed.createComponent(ReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     anomalyService = TestBed.get(AnomalyService);
-    reportingService = TestBed.get(ReportingService);
+    reportService = TestBed.get(ReportService);
     spyOn(anomalyService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
     spyOn(anomalyService, 'getAnomalyInfos').and.returnValue(of(anomalyInfosFixture));
   });
@@ -112,7 +118,7 @@ describe('ReportingFormComponent', () => {
       expect(nativeElement.querySelectorAll('div.category').length).toEqual(anomaliesFixture.length);
     });
 
-    it('should initiate a reporting and route to precision step when a category is clicked', () => {
+    it('should initiate a report and route to precision step when a category is clicked', () => {
       component.step = Step.Category;
       component.anomalies = anomaliesFixture;
       fixture.detectChanges();
@@ -120,8 +126,8 @@ describe('ReportingFormComponent', () => {
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('div.category').click();
 
-      expect(component.reporting).not.toBeNull();
-      expect(component.reporting.anomalyCategory).toEqual(anomaly1.category);
+      expect(component.report).not.toBeNull();
+      expect(component.report.anomalyCategory).toEqual(anomaly1.category);
       expect(component.anomalyPrecisionList).toEqual(anomaly1.precisionList);
       expect(component.step).toEqual(Step.Precision);
     });
@@ -134,7 +140,7 @@ describe('ReportingFormComponent', () => {
     it('should display the precisions as radio buttons list', () => {
       component.step = Step.Precision;
       component.anomalyPrecisionList = anomaly2.precisionList;
-      component.reporting = Object.assign(new Reporting(), { anomalyCategory: anomaly2.category });
+      component.report = Object.assign(new Report(), { anomalyCategory: anomaly2.category });
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -144,14 +150,14 @@ describe('ReportingFormComponent', () => {
     it('should set the precision and route to description step when a precision is selected on submit', () => {
       component.step = Step.Precision;
       component.anomalyPrecisionList = anomaly2.precisionList;
-      component.reporting = Object.assign(new Reporting(), { anomalyCategory: anomaly2.category });
+      component.report = Object.assign(new Report(), { anomalyCategory: anomaly2.category });
       component.anomalyPrecisionCtrl.setValue(anomaly2.precisionList[0].title);
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
 
-      expect(component.reporting.anomalyPrecision).toEqual(anomaly2.precisionList[0].title);
+      expect(component.report.anomalyPrecision).toEqual(anomaly2.precisionList[0].title);
       expect(component.step).toEqual(Step.Description);
     });
 
@@ -187,7 +193,7 @@ describe('ReportingFormComponent', () => {
     it('should display a select input for anomalyCategory with anomalyCategory list as options ' +
       'when associated form control is defined', () => {
 
-      component.reportingForm.addControl('anomalyCategory', component.anomalyCategoryCtrl);
+      component.reportForm.addControl('anomalyCategory', component.anomalyCategoryCtrl);
       component.anomalyTypeList = anomalyList1;
 
       fixture.detectChanges();
@@ -209,7 +215,7 @@ describe('ReportingFormComponent', () => {
     it('should display a select input for anomalyPrecision with anomalyPrecision list as options ' +
       'when associated form control is defined', () => {
 
-      component.reportingForm.addControl('anomalyPrecision', component.anomalyPrecisionCtrl);
+      component.reportForm.addControl('anomalyPrecision', component.anomalyPrecisionCtrl);
       component.anomalyPrecisionList = precisionList22;
 
       fixture.detectChanges();
@@ -233,7 +239,7 @@ describe('ReportingFormComponent', () => {
     it('should display errors when the form is submitted', () => {
       component.companyTypeCtrl.setValue('');
 
-      component.createReporting();
+      component.createReport();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -269,28 +275,18 @@ describe('ReportingFormComponent', () => {
     it('should set all form controls except for anomalyType and anomalyPrecision', () => {
       component.ngOnInit();
 
-      expect(component.reportingForm.controls['anomalyDate']).toBeDefined();
-      expect(component.reportingForm.controls['anomalyTimeSlot']).toBeDefined();
-      expect(component.reportingForm.controls['description']).toBeDefined();
-      expect(component.reportingForm.controls['firstName']).toBeDefined();
-      expect(component.reportingForm.controls['lastName']).toBeDefined();
-      expect(component.reportingForm.controls['email']).toBeDefined();
-      expect(component.reportingForm.controls['contactAgreement']).toBeDefined();
-      expect(component.reportingForm.controls['anomalyType']).toBeUndefined();
-      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
+      expect(component.reportForm.controls['firstName']).toBeDefined();
+      expect(component.reportForm.controls['lastName']).toBeDefined();
+      expect(component.reportForm.controls['email']).toBeDefined();
+      expect(component.reportForm.controls['contactAgreement']).toBeDefined();
+      expect(component.reportForm.controls['anomalyType']).toBeUndefined();
+      expect(component.reportForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
     it('should not display form errors', () => {
       component.ngOnInit();
 
       expect(component.showErrors).toBeFalsy();
-    });
-
-    it ('should define the plageHoraireList to display', () => {
-      component.ngOnInit();
-
-      expect(component.plageHoraireList).toBeDefined();
-      expect(component.plageHoraireList.length).toBe(24);
     });
 
   });
@@ -304,7 +300,7 @@ describe('ReportingFormComponent', () => {
       component.changeCompanyType();
 
       expect(component.anomalyTypeList).toEqual(anomalyTypeListForEtablissement2);
-      expect(component.reportingForm.controls['anomalyType']).not.toBeNull();
+      expect(component.reportForm.controls['anomalyType']).not.toBeNull();
     });
 
     it('should display an information message when then option "Autres" is selected', () => {
@@ -331,7 +327,7 @@ describe('ReportingFormComponent', () => {
       component.selectAnomalyCategory();
 
       expect(component.anomalyPrecisionList).toEqual([]);
-      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
+      expect(component.reportForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
     it('should load anomalyPrecision list for selected companyType and anomalyType', () => {
@@ -354,7 +350,7 @@ describe('ReportingFormComponent', () => {
       component.selectAnomalyCategory();
 
       expect(component.anomalyPrecisionList).toEqual(precisionList22);
-      expect(component.reportingForm.controls['anomalyPrecision']).not.toBeNull();
+      expect(component.reportForm.controls['anomalyPrecision']).not.toBeNull();
     });
 
     it('should not add a form control for anomalyPrecision if loaded list is empty', () => {
@@ -365,21 +361,21 @@ describe('ReportingFormComponent', () => {
 
       component.selectAnomalyCategory();
 
-      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
+      expect(component.reportForm.controls['anomalyPrecision']).toBeUndefined();
     });
   });
 
-  describe('createReporting function', () => {
+  describe('createReport function', () => {
 
     it('should display errors when form is invalid', () => {
       component.companyTypeCtrl.setValue('');
 
-      component.createReporting();
+      component.createReport();
 
       expect(component.showErrors).toBeTruthy();
     });
 
-    it('should call a creation service with a reporting object', () => {
+    it('should call a creation service with a report object', () => {
       const anomalyDate = new Date();
       const anomalyFile = new File([], 'anomaly.jpg');
       component.companyTypeCtrl.setValue('companyType');
@@ -404,40 +400,40 @@ describe('ReportingFormComponent', () => {
         }
       ));
 
-      spyOn(reportingService, 'createReporting').and.returnValue(of());
+      spyOn(reportService, 'createReport').and.returnValue(of());
 
-      component.createReporting();
-      const reporting = new Reporting();
-      reporting.companyType = 'companyType';
-      reporting.anomalyCategory = 'category';
-      reporting.anomalyPrecision = 'precision';
-      reporting.companyName = 'Mon établissement';
-      reporting.companyAddress = 'adresse 1 - adresse 3 - adresse 4';
-      reporting.companySiret = '123245678900015';
-      reporting.companyPostalCode = '87270';
-      reporting.description = '';
-      reporting.anomalyDate = anomalyDate;
-      reporting.anomalyTimeSlot = 5;
-      reporting.lastName = 'lastName';
-      reporting.firstName = 'firstName';
-      reporting.email = 'email@mail.fr';
-      reporting.contactAgreement = true;
-      reporting.ticketFile = undefined;
-      reporting.anomalyFile = anomalyFile;
-      expect(reportingService.createReporting).toHaveBeenCalledWith(reporting);
+      component.createReport();
+      const report = new Report();
+      report.companyType = 'companyType';
+      report.anomalyCategory = 'category';
+      report.anomalyPrecision = 'precision';
+      report.companyName = 'Mon établissement';
+      report.companyAddress = 'adresse 1 - adresse 3 - adresse 4';
+      report.companySiret = '123245678900015';
+      report.companyPostalCode = '87270';
+      report.description = '';
+      report.anomalyDate = anomalyDate;
+      report.anomalyTimeSlot = 5;
+      report.lastName = 'lastName';
+      report.firstName = 'firstName';
+      report.email = 'email@mail.fr';
+      report.contactAgreement = true;
+      report.ticketFile = undefined;
+      report.anomalyFile = anomalyFile;
+      expect(reportService.createReport).toHaveBeenCalledWith(report);
     });
 
-    it('should display a success message when reporting creation succeed', (done) => {
+    it('should display a success message when report creation succeed', (done) => {
       component.companyTypeCtrl.setValue('companyType');
       component.companyCtrl.setValue(new Company());
       component.anomalyDateCtrl.setValue(new Date());
       component.lastNameCtrl.setValue('lastName');
       component.firstNameCtrl.setValue('firstName');
       component.emailCtrl.setValue('email@mail.fr');
-      const reportingServiceSpy = spyOn(reportingService, 'createReporting').and.returnValue(of(new Reporting()));
+      const reportServiceSpy = spyOn(reportService, 'createReport').and.returnValue(of(new Report()));
 
-      component.createReporting();
-      reportingServiceSpy.calls.mostRecent().returnValue.subscribe(() => {
+      component.createReport();
+      reportServiceSpy.calls.mostRecent().returnValue.subscribe(() => {
         expect(component.showSuccess).toBeTruthy();
         done();
       });
@@ -463,7 +459,7 @@ describe('ReportingFormComponent', () => {
 
   });
 
-  describe('case of anomaly which do not require a reporting', () => {
+  describe('case of anomaly which do not require a report', () => {
 
     it('should display an information message when there is an anomaly info linked to the anomaly', () => {
 
@@ -482,9 +478,9 @@ describe('ReportingFormComponent', () => {
 
   });
 
-  describe('case of the user want to make another reporting link to the first one', () => {
+  describe('case of the user want to make another report link to the first one', () => {
 
-    it('should display the reporting form with invariable inputs already filled', () => {
+    it('should display the report form with invariable inputs already filled', () => {
 
       const anomalyDate = new Date();
       const anomalyFile = new File([], 'anomaly.jpg');
@@ -512,21 +508,21 @@ describe('ReportingFormComponent', () => {
       ));
       component.showSuccess = true;
 
-      component.addNewReporting();
+      component.addNewReport();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('form')).not.toBeNull();
-      expect(component.reportingForm.controls['anomalyDate'].value).toEqual(anomalyDate);
-      expect(component.reportingForm.controls['anomalyTimeSlot'].value).toEqual(5);
-      expect(component.reportingForm.controls['firstName'].value).toEqual('firstName');
-      expect(component.reportingForm.controls['lastName'].value).toEqual('lastName');
-      expect(component.reportingForm.controls['email'].value).toEqual('email@mail.fr');
-      expect(component.reportingForm.controls['contactAgreement'].value).toEqual(true);
-      expect(component.reportingForm.controls['companyType'].value).toEqual('companyType');
-      expect(component.reportingForm.controls['description'].value).toEqual('');
-      expect(component.reportingForm.controls['anomalyCategory'].value).toEqual('');
-      expect(component.reportingForm.controls['anomalyPrecision']).toBeUndefined();
+      expect(component.reportForm.controls['anomalyDate'].value).toEqual(anomalyDate);
+      expect(component.reportForm.controls['anomalyTimeSlot'].value).toEqual(5);
+      expect(component.reportForm.controls['firstName'].value).toEqual('firstName');
+      expect(component.reportForm.controls['lastName'].value).toEqual('lastName');
+      expect(component.reportForm.controls['email'].value).toEqual('email@mail.fr');
+      expect(component.reportForm.controls['contactAgreement'].value).toEqual(true);
+      expect(component.reportForm.controls['companyType'].value).toEqual('companyType');
+      expect(component.reportForm.controls['description'].value).toEqual('');
+      expect(component.reportForm.controls['anomalyCategory'].value).toEqual('');
+      expect(component.reportForm.controls['anomalyPrecision']).toBeUndefined();
     });
 
   });*/

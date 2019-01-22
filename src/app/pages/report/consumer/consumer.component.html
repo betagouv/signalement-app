@@ -1,0 +1,62 @@
+<section class="section section-white">
+  <div class="container">
+
+    <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" *ngIf="!showSuccess" id="consumerForm">
+      <div class="panel">
+        <p class="font-weight-bold">
+          Merci de compléter votre identité afin d'authentifier votre signalement.
+          <br/>
+          Votre identité ne sera pas indiquée au professionnel et vous ne serez pas sollicité.
+        </p>
+
+        <div class="form__group">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <label>
+                Votre prénom <span>*</span>
+              </label>
+              <input type="text" formControlName="firstName" name="fname" autocomplete="given-name">
+              <div class="invalid" *ngIf="showErrors && firstNameCtrl.hasError('required')">
+                Veuillez compléter le champ "Prénom".
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <label>
+                Votre nom <span>*</span>
+              </label>
+              <input type="text" formControlName="lastName" name="lname" autocomplete="family-name">
+              <div class="invalid" *ngIf="showErrors && lastNameCtrl.hasError('required')">
+                Veuillez compléter le champ "Nom".
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label>
+            Votre email <span>*</span>
+          </label>
+          <input type="email" formControlName="email" name="email" autocomplete="email">
+          <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('required')">
+            Veuillez compléter le champ "Email".
+          </div>
+          <div class="invalid" *ngIf="showErrors && emailCtrl.hasError('email')">
+            Veuillez renseigner une adresse email valide pour le champ "E-mail".
+          </div>
+        </div>
+      </div>
+
+      <div class="notification error" *ngIf="showErrors && consumerForm.invalid">
+        Un ou plusieurs champs sont invalides.
+        <br />
+        Merci de corriger les erreurs puis de valider de nouveau le formulaire.
+      </div>
+      <hr />
+      <button type="submit" class="btn btn-lg btn-primary" id="submitConsumerForm">
+        Confirmer mon problème
+      </button>
+
+    </form>
+  </div>
+</section>

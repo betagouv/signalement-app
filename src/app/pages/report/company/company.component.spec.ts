@@ -104,7 +104,7 @@ describe('CompanyFormComponent', () => {
       });
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
 
-      component.companySelected.subscribe(company => {
+      component.select.subscribe(company => {
         expect(company).toEqual(companySearchResult.companies[0]);
         expect(company.postalCode).toEqual('87270');
         done();
@@ -183,7 +183,7 @@ describe('CompanyFormComponent', () => {
           postalCode: '87270'
         }
       );
-      component.companySelected.subscribe(company => {
+      component.select.subscribe(company => {
         expect(company).toEqual(companyExpected);
         done();
       });

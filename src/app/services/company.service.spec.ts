@@ -54,7 +54,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportingBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
     companiesRequest.flush(result);
 
   });
@@ -68,7 +68,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportingBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
     companiesRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
   });
 

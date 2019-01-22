@@ -25,7 +25,7 @@ export class CompanyService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
-      this.serviceUtils.getUrl(Api.Reporting, ['api', 'companies', search]),
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', search]),
       {
         params: httpParams
       }
@@ -51,7 +51,7 @@ class SuggestionData extends RemoteData {
 
   constructor(http: HttpClient, serviceUtils: ServiceUtils) {
     super(http);
-    this.remoteUrl(serviceUtils.getUrl(Api.Reporting, ['api', 'companies', 'suggest/']));
+    this.remoteUrl(serviceUtils.getUrl(Api.Report, ['api', 'companies', 'suggest/']));
     this.dataField('suggestions');
   }
 

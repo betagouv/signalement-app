@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiReportingBaseUrl: 'http://localhost:9000',
+  apiReportBaseUrl: 'http://localhost:9000',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
 };
 

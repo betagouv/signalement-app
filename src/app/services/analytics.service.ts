@@ -22,18 +22,18 @@ export class AnalyticsService {
 }
 
 export enum EventCategories {
-  reporting = 'Formulaire de signalement',
+  report = 'Formulaire de signalement',
   company = 'Identification de l\'établissement'
 }
 
-export enum ReportingEventActions {
+export enum ReportEventActions {
   information = 'Affichage d\'un message d\'information',
   invalidForm = 'Formulaire non valide',
   formSubmitted = 'Envoi d\'un signalement',
   selectCompanyType = 'Sélection d\'un type d\'établissement',
   selectAnomalyCategory = 'Sélection d\'un type d\'anomalie',
   selectAnomalyPrecision = 'Sélection d\'une précision d\'anomalie',
-  addAnotherReporting = 'Ajout d\'un autre signalement'
+  addAnotherReport = 'Ajout d\'un autre signalement'
 }
 
 export enum CompanyEventActions {

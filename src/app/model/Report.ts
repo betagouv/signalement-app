@@ -1,4 +1,6 @@
-export class Reporting {
+import { Consumer } from './Consumer';
+
+export class Report {
 
   companyType: string;
   anomalyCategory: string;
@@ -7,13 +9,18 @@ export class Reporting {
   companyAddress: string;
   companyPostalCode: string;
   companySiret: string;
-  anomalyDate: Date;
-  anomalyTimeSlot: number;
-  description: string;
-  firstName: string;
-  lastName: string;
-  email: string;
+  details: ReportDetails;
+  consumer: Consumer;
   contactAgreement: boolean;
   ticketFile: File;
   anomalyFile: File;
+
+}
+
+export class ReportDetails {
+
+  anomalyDate: Date;
+  anomalyTimeSlot: number;
+  description: string;
+
 }

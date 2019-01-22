@@ -1,0 +1,22 @@
+<section class="section-small section-grey">
+  <div class="container">
+    <img src="/assets/images/icon_back.png" class="back pointer" (click)="back.emit()"/>
+    <div>
+      <h4>Vous avez identifié un problème de {{report.anomalyCategory}}</h4>
+      <span class="note" *ngIf="report.anomalyPrecision">
+        {{report.anomalyPrecision}}
+      </span>
+      <p class="steps">
+        <span class="{{getStepClass('Precision')}}">L'incident</span>
+        &nbsp;>&nbsp;
+        <span class="{{getStepClass('Description')}}">La description</span>
+        &nbsp;>&nbsp;
+        <span class="{{getStepClass('Company')}}">Le commerçant</span>
+        &nbsp;>&nbsp;
+        <span class="{{getStepClass('Consumer')}}">Le consommateur</span>
+        &nbsp;>&nbsp;
+        <span class="{{getStepClass('Confimation')}}">Confirmation</span>
+      </p>
+    </div>
+  </div>
+</section>

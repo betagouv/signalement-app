@@ -8,7 +8,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   .section {
-    padding: 5em 0;
+    padding: 3em 0;
   }
 
   .section-small {
@@ -36,6 +36,11 @@
 
   .pointer {
     cursor: pointer;
+  }
+
+  .note {
+    font-style: italic;
+    color: $dark-grey;
   }
 
   .banner {

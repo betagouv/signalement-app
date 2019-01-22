@@ -29,7 +29,7 @@ export class CompanyComponent implements OnInit {
   suggestionData: RemoteData;
 
   addressData: RemoteData;
-  @Output() companySelected = new EventEmitter<Company>();
+  @Output() select = new EventEmitter<Company>();
 
   constructor(private formBuilder: FormBuilder,
               private companyService: CompanyService,
@@ -118,7 +118,7 @@ export class CompanyComponent implements OnInit {
   }
 
   selectCompany(company: Company) {
-    this.companySelected.emit(company);
+    this.select.emit(company);
   }
 
   submitCompanyForm() {

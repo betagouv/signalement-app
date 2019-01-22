@@ -33,16 +33,6 @@
   padding-bottom: 1em;
 }
 
-img.back {
-  vertical-align: top;
-
-  & + div {
-    display: inline-block;
-    margin-left: 1em;
-  }
-
-}
-
 .notification {
 
   img {
@@ -56,11 +46,6 @@ img.back {
     padding-bottom: 0.5em;
   }
 
-}
-
-.note {
-  font-style: italic;
-  color: $dark-grey;
 }
 
 @media #{$smaller-than-tablet} {
