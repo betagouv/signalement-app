@@ -6,6 +6,7 @@ import { ServiceUtils } from './service.utils';
 import { Report, ReportDetails } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
+import { Company } from '../model/Company';
 
 describe('ReportService', () => {
 
@@ -42,17 +43,20 @@ describe('ReportService', () => {
       reportDetails.description = 'desc';
       reportDetails.anomalyDate = anomalyDate;
       reportDetails.anomalyTimeSlot = 5;
+      reportDetails.anomalyFile = anomalyFile;
       const consumer = new Consumer();
       consumer.lastName = 'lastName';
       consumer.firstName = 'firstName';
       consumer.email = 'email@mail.fr';
+      const company = new Company();
+      company.name = 'companyName'
+      company.line1 = 'line 1'
+      company.line2 = 'line 2'
+      company.line4 = 'line 4'
       const report = new Report();
-      report.companyType = 'companyType';
-      report.companyName = 'companyName';
-      report.companyAddress = 'companyAddress';
       report.details = reportDetails;
       report.consumer = consumer;
-      report.anomalyFile = anomalyFile;
+      report.company = company;
 
       reportService.createReport(report).subscribe(result => {
           done();
@@ -63,9 +67,9 @@ describe('ReportService', () => {
       reportRequest.flush({});
 
       httpMock.verify();
-      expect(reportRequest.request.body.get('companyType')).toBe('companyType');
+      expect(reportRequest.request.body.get('companyType')).toBe('Deprecated');
       expect(reportRequest.request.body.get('companyName')).toBe('companyName');
-      expect(reportRequest.request.body.get('companyAddress')).toBe('companyAddress');
+      expect(reportRequest.request.body.get('companyAddress')).toBe('line 1 - line 2 - line 4');
       expect(reportRequest.request.body.get('description')).toBe('desc');
       expect(reportRequest.request.body.get('anomalyDate')).toBe('2018-03-01');
       expect(reportRequest.request.body.get('anomalyTimeSlot')).toBe('5');

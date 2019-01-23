@@ -82,7 +82,7 @@ describe('ConsumerComponent', () => {
       consumerExpected.lastName = 'Nom';
       consumerExpected.email = 'test@gmail.com';
 
-      component.submit.subscribe(consumer => {
+      component.validate.subscribe(consumer => {
         expect(consumer).toEqual(consumerExpected);
         done();
       });

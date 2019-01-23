@@ -21,7 +21,8 @@
         <div class="row">
           <div class="col-6 col-sm-4" *ngFor="let anomaly of anomalies">
             <div class="category pointer" (click)="selectAnomalyCategory(anomaly.category)">
-              <h5 class="text-center">{{anomaly.category}}</h5>
+              <h5>{{anomaly.category}}</h5>
+              <span class="note">{{anomaly.description}}</span>
             </div>
           </div>
         </div>
@@ -70,41 +71,21 @@
 <ng-container *ngIf="isStep('Precision')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-
-    <section class="section section-white">
-      <div class="container">
-        <form [formGroup]="precisionForm" (submit)="selectAnomalyPrecision()" id="precisionForm">
-          <div class="row pb-4" *ngFor="let precision of anomalyPrecisionList">
-            <input type="radio" formControlName="anomalyPrecision" [value]="precision.title" />
-            <div>
-              <h5>{{precision.title}}</h5>
-              <span class="note">{{precision.description}}</span>
-            </div>
-          </div>
-          <hr />
-          <button type="submit" class="btn btn-lg btn-primary">
-            Detailler l'incident
-          </button>
-        </form>
-
-      </div>
-    </section>
+    <app-precision [initialValue]="report.anomalyPrecision" [anomalyPrecisionList]="getAnomalyPrecisionList()" (validate)="onPrecisionSubmit($event)"></app-precision>
   </main>
 </ng-container>
-
-
 
 <ng-container *ngIf="isStep('Description')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-details (submit)="onDetailsSubmit($event)"></app-details>
+    <app-details [initialValue]="report.details" (validate)="onDetailsSubmit($event)"></app-details>
   </main>
 </ng-container>
 
 <ng-container *ngIf="isStep('Company')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-company (select)="onCompanySelect($event)"></app-company>
+    <app-company (validate)="onCompanySelect($event)"></app-company>
   </main>
 </ng-container>
 
@@ -116,3 +97,9 @@
   </main>
 </ng-container>
 
+<ng-container *ngIf="isStep('Confirmation')">
+  <main>
+    <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
+    <app-confirmation [report]="report"></app-confirmation>
+  </main>
+</ng-container>

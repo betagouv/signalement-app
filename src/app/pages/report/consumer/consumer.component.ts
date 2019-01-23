@@ -16,7 +16,7 @@ export class ConsumerComponent implements OnInit {
 
   showErrors: boolean;
 
-  @Output() submit = new EventEmitter();
+  @Output() validate = new EventEmitter();
 
   constructor(public formBuilder: FormBuilder) { }
 
@@ -44,7 +44,7 @@ export class ConsumerComponent implements OnInit {
       consumer.firstName = this.firstNameCtrl.value;
       consumer.lastName = this.lastNameCtrl.value;
       consumer.email = this.emailCtrl.value;
-      this.submit.emit(consumer);
+      this.validate.emit(consumer);
     }
   }
 }

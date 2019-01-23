@@ -23,6 +23,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { DetailsComponent } from './pages/report/details/details.component';
 import { BreadcrumbComponent } from './pages/report/breadcrumb/breadcrumb.component';
 import { ConsumerComponent } from './pages/report/consumer/consumer.component';
+import { ConfirmationComponent } from './pages/report/confirmation/confirmation.component';
+import { PrecisionComponent } from './pages/report/precision/precision.component';
 
 defineLocale('fr', frLocale);
 
@@ -39,6 +41,8 @@ defineLocale('fr', frLocale);
     DetailsComponent,
     BreadcrumbComponent,
     ConsumerComponent,
+    ConfirmationComponent,
+    PrecisionComponent,
   ],
   imports: [
     CommonModule,

@@ -1,18 +1,15 @@
-<section class="section section-white">
+<section class="section section-white position-relative">
   <div class="container">
     <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
       <div class="form__group">
-        <h5>Veuillez rechercher l'établissement (nom, type, adresse, ville, ...)</h5>
-        <div class="input-group">
-          <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean Orléans ..." />
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-primary d-sm-none"><svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg></button>
-            <button type="submit" class="btn btn-primary d-none d-sm-block">Rechercher</button>
-          </div>
-        </div>
-        <div class="invalid" *ngIf="showErrors && searchCtrl.hasError('required')">
-          Veuillez renseigner le champ de recherche.
-        </div>
+        <label for="searchInput">Veuillez rechercher l'établissement (nom, type, adresse, ville, ...)</label>
+        <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean Orléans ..." />
+      </div>
+      <div class="notification error mt-3" *ngIf="showErrors && searchCtrl.hasError('required')">
+        Veuillez renseigner le champs de recherche.
+      </div>
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-lg btn-primary">Rechercher</button>
       </div>
 
 
@@ -79,6 +76,8 @@
 
     </form>
 
-    <ngx-loading [show]="loading"></ngx-loading>
   </div>
+
+  <ngx-loading [show]="loading"></ngx-loading>
+
 </section>

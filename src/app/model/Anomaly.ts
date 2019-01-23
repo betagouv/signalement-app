@@ -15,11 +15,14 @@ export class Precision {
 export class Anomaly {
   @JsonProperty('category')
   category: string;
+  @JsonProperty('description')
+  description: string;
   @JsonProperty({ name: 'precisionList', clazz: Precision })
   precisionList: Precision[];
 
   constructor() {
     this.category = undefined;
+    this.description = undefined;
     this.precisionList = undefined;
   }
 }

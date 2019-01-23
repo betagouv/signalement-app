@@ -1,7 +1,7 @@
 <section class="section section-white">
   <div class="container">
 
-    <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" *ngIf="!showSuccess" id="detailsForm">
+    <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm">
       <div class="panel">
 
         <div class="form__group">
@@ -17,7 +17,7 @@
 
         <div class="form__group">
           <label>
-            Date <span>*</span> et plage horaire du constat
+            Date et plage horaire du constat
           </label>
           <div class="row">
             <div class="col-12 col-sm-6">
@@ -26,9 +26,6 @@
                      placeholder="Date du constat"
                      bsDatepicker
                      [bsConfig]="{ containerClass: 'theme-default' }">
-              <div class="invalid" *ngIf="showErrors && anomalyDateCtrl.hasError('required')">
-                Veuillez compléter le champ "Date du constat".
-              </div>
             </div>
             <div class="col-12 col-sm-6">
               <div class="form__group">
@@ -43,20 +40,29 @@
 
         <div class="form__group">
           <label>
-            Photos
+            Photos du ticket de caisse et/ou du problème
           </label>
-          <app-file-input
-            [placeholder]="'Photo du ticket de caisse'"
-            (fileSelected)="onTicketFileSelected($event)">
-          </app-file-input>
-          <app-file-input
-            [placeholder]="'Photo du problème'"
-            (fileSelected)="onAnomalyFileSelected($event)">
-          </app-file-input>
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <app-file-input
+                [placeholder]="'Photo du ticket de caisse'"
+                (fileSelected)="onTicketFileSelected($event)">
+              </app-file-input>
+            </div>
+            <div class="col-12 col-sm-6">
+              <app-file-input
+                [placeholder]="'Photo du problème'"
+                (fileSelected)="onAnomalyFileSelected($event)">
+              </app-file-input>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="notification error" *ngIf="showErrors && anomalyDateCtrl.hasError('required')">
+        Veuillez renseigner la date du constat.
+      </div>
       <hr />
-      <button type="submit" class="btn btn-lg btn-primary" id="submitDetailsForm">
+      <button type="submit" class="btn btn-lg btn-primary">
         Identifier le commerçant
       </button>
     </form>

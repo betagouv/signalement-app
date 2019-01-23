@@ -1,0 +1,20 @@
+<section class="section section-white">
+  <div class="container">
+    <form [formGroup]="precisionForm" (submit)="submitPrecisionForm()" id="precisionForm">
+      <div class="row pb-4" *ngFor="let precision of anomalyPrecisionList">
+        <input type="radio" formControlName="anomalyPrecision" [value]="precision.title" />
+        <div>
+          <label class="d-block">{{precision.title}}</label>
+          <span class="note">{{precision.description}}</span>
+        </div>
+      </div>
+      <div class="notification error" *ngIf="showErrors && anomalyPrecisionCtrl.hasError('required')">
+        Veuillez sélectionner une des propositions ci-dessus.
+      </div>
+      <hr />
+      <button type="submit" class="btn btn-lg btn-primary">
+        Détailler l'incident
+      </button>
+    </form>
+  </div>
+</section>

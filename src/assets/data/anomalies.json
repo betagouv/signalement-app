@@ -2,51 +2,58 @@
   "list": [
     {
       "category": "Hygiène",
+      "description": "Locaux sales, présence de rat, rupture de la chaîne du froid...",
       "precisionList": [
         {
-          "title": "Locaux sales",
-          "description": "Cuisine, WC, rayon réfrigéré ..."
+          "title": "Locaux / matériel sales",
+          "description": "Cuisine, WC, rayon réfrigéré..."
         },
         {
           "title": "Hygiène du personnel",
-          "description": "Tenue, mauvaise pratique ..."
+          "description": "Tenue, mauvaise pratique d'hygiène..."
         },
         {
           "title": "Présence d'animaux",
-          "description": "Rat, insectes, oiseaux, chien ..."
+          "description": "Rat, insectes, oiseaux, chien..."
         },
         {
           "title": "Problème de température",
-          "description": "Rupture chaine du froid ..."
+          "description": "Rupture de la chaîne du froid, vitrine réfrigérée trop chaude..."
         }
       ]
     },
     {
       "category": "Intoxication alimentaire",
+      "description": "Au moins deux personnes ayant eu des maux de ventre, diarrhées et vomissements suite à l’ingestion d'un aliment",
       "precisionList": []
     },
     {
       "category": "Nourriture / Boissons",
+      "description": "Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...",
       "precisionList": [
       ]
     },
     {
       "category": "Matériel / Objet",
+      "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
       "precisionList": [
       ]
     },
     {
       "category": "Accueil / Services",
+      "description": "Problème de garantie constructeur, hotline injoignable, colis non reçu...",
       "precisionList": [
       ]
     },
     {
       "category": "Publicité",
+      "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse ...",
       "precisionList": [
       ]
     },
     {
       "category": "Prix / Paiement",
+      "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion ...",
       "precisionList": [
       ]
     }

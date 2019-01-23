@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReportDetails } from '../../../model/Report';
+import { BsLocaleService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-details',
@@ -8,6 +9,8 @@ import { ReportDetails } from '../../../model/Report';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+
+  @Input() initialValue: ReportDetails;
 
   detailsForm: FormGroup;
   anomalyDateCtrl: FormControl;
@@ -20,11 +23,13 @@ export class DetailsComponent implements OnInit {
 
   showErrors: boolean;
 
-  @Output() submit = new EventEmitter();
+  @Output() validate = new EventEmitter();
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder,
+    private localeService: BsLocaleService) { }
 
   ngOnInit() {
+    this.localeService.use('fr');
     this.initDetailsForm();
     this.constructPlageHoraireList();
   }
@@ -32,9 +37,9 @@ export class DetailsComponent implements OnInit {
   initDetailsForm() {
     this.showErrors = false;
 
-    this.descriptionCtrl = this.formBuilder.control('');
-    this.anomalyDateCtrl = this.formBuilder.control('', Validators.required);
-    this.anomalyTimeSlotCtrl = this.formBuilder.control('');
+    this.descriptionCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.description : '');
+    this.anomalyDateCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.anomalyDate : new Date(), Validators.required);
+    this.anomalyTimeSlotCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.anomalyTimeSlot : '');
 
     this.detailsForm = this.formBuilder.group({
       anomalyDate: this.anomalyDateCtrl,
@@ -67,7 +72,9 @@ export class DetailsComponent implements OnInit {
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
-      this.submit.emit(reportDetails);
+      reportDetails.ticketFile = this.ticketFile;
+      reportDetails.anomalyFile = this.anomalyFile;
+      this.validate.emit(reportDetails);
     }
   }
 

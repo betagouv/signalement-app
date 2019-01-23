@@ -8,19 +8,20 @@ import { of } from 'rxjs';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportService } from '../../services/report.service';
-import { Report } from '../../model/Report';
 import { ServiceUtils } from '../../services/service.utils';
-import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../components/file-input/file-input.component';
 import { Component } from '@angular/core';
-import { NgxLoadingModule } from 'ngx-loading';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DetailsComponent } from './details/details.component';
 import { ConsumerComponent } from './consumer/consumer.component';
+import { PrecisionComponent } from './precision/precision.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
-describe('ReportFormComponent', () => {
+describe('ReportComponent', () => {
 
   @Component({
     selector: 'app-company',
@@ -55,7 +56,6 @@ describe('ReportFormComponent', () => {
   ];
 
   beforeEach(async(() => {
-    defineLocale('fr', frLocale);
     TestBed.configureTestingModule({
       declarations: [
         ReportComponent,
@@ -64,6 +64,8 @@ describe('ReportFormComponent', () => {
         BreadcrumbComponent,
         DetailsComponent,
         ConsumerComponent,
+        PrecisionComponent,
+        ConfirmationComponent
       ],
       imports: [
         FormsModule,
@@ -128,40 +130,11 @@ describe('ReportFormComponent', () => {
 
       expect(component.report).not.toBeNull();
       expect(component.report.anomalyCategory).toEqual(anomaly1.category);
-      expect(component.anomalyPrecisionList).toEqual(anomaly1.precisionList);
       expect(component.step).toEqual(Step.Precision);
     });
 
   });
 
-
-  describe('second step (precisions)', () => {
-
-    it('should display the precisions as radio buttons list', () => {
-      component.step = Step.Precision;
-      component.anomalyPrecisionList = anomaly2.precisionList;
-      component.report = Object.assign(new Report(), { anomalyCategory: anomaly2.category });
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelectorAll('input[type="radio"]').length).toEqual(anomaly2.precisionList.length);
-    });
-
-    it('should set the precision and route to description step when a precision is selected on submit', () => {
-      component.step = Step.Precision;
-      component.anomalyPrecisionList = anomaly2.precisionList;
-      component.report = Object.assign(new Report(), { anomalyCategory: anomaly2.category });
-      component.anomalyPrecisionCtrl.setValue(anomaly2.precisionList[0].title);
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
-
-      expect(component.report.anomalyPrecision).toEqual(anomaly2.precisionList[0].title);
-      expect(component.step).toEqual(Step.Description);
-    });
-
-  });
 /*
   describe('template design', () => {
     it('should display a select input for companyType on init', () => {

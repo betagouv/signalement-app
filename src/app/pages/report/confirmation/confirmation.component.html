@@ -1,0 +1,51 @@
+<section class="section section-white position-relative">
+  <div class="container">
+    <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm">
+      <h5>Récapitulatif de votre problème d'{{report.anomalyCategory}} ({{report.anomalyPrecision}})</h5>
+      <ul>
+        <li>
+          Etablissement : TODO
+        </li>
+      </ul>
+      <ul>
+        <li>
+          Date du constat : {{report.details.anomalyDate | date:'dd/MM/yyyy'}}
+        </li>
+        <li>
+          Plage horaire : {{report.details.anomalyTimeSlot}}
+        </li>
+        <li>
+          Description : {{report.details.description}}
+        </li>
+      </ul>
+      <ul>
+        <li>
+          Nom : {{report.consumer.lastName}}
+        </li>
+        <li>
+          Prénom : {{report.consumer.firstName}}
+        </li>
+        <li>
+          Email : {{report.consumer.email}}
+        </li>
+      </ul>
+
+      <div class="row pl-1">
+        <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
+        <label for="contactAgreementTrue" class="label-inline">J'accepte de transmettre mes coordonnées au professionnel afin qu'il puisse me contacter</label>
+      </div>
+      <div class="row pl-1">
+        <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
+        <label for="contactAgreementFalse" class="label-inline">Je refuse</label>
+      </div>
+      <hr />
+      <button type="submit" class="btn btn-lg btn-primary">
+        Envoyer
+      </button>
+
+    </form>
+  </div>
+
+  <ngx-loading [show]="loading"></ngx-loading>
+
+</section>

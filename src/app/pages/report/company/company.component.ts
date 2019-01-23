@@ -29,7 +29,7 @@ export class CompanyComponent implements OnInit {
   suggestionData: RemoteData;
 
   addressData: RemoteData;
-  @Output() select = new EventEmitter<Company>();
+  @Output() validate = new EventEmitter<Company>();
 
   constructor(private formBuilder: FormBuilder,
               private companyService: CompanyService,
@@ -99,7 +99,7 @@ export class CompanyComponent implements OnInit {
 
   treatCaseSingleResult(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.singleResult);
-    this.selectCompany(companySearchResult.companies[0]);
+    this.companies = companySearchResult.companies;
   }
 
   treatCaseTooManyResults() {
@@ -118,7 +118,7 @@ export class CompanyComponent implements OnInit {
   }
 
   selectCompany(company: Company) {
-    this.select.emit(company);
+    this.validate.emit(company);
   }
 
   submitCompanyForm() {

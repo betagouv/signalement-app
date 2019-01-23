@@ -9,10 +9,10 @@ import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AddressService } from '../../../services/address.service';
-import { NgxLoadingModule } from 'ngx-loading';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { NgxLoadingModule } from 'ngx-loading';
 
-describe('CompanyFormComponent', () => {
+describe('CompanyComponent', () => {
 
   let component: CompanyComponent;
   let fixture: ComponentFixture<CompanyComponent>;
@@ -85,7 +85,7 @@ describe('CompanyFormComponent', () => {
       expect(component.companies).toEqual([]);
     });
 
-    it('should emit and event with the company details when only one result has been found', (done) => {
+    it('should display the company list when only one result has been found', () => {
 
       const companySearchResult = deserialize(CompanySearchResult, {
         'total_results': 1,
@@ -104,15 +104,11 @@ describe('CompanyFormComponent', () => {
       });
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
 
-      component.select.subscribe(company => {
-        expect(company).toEqual(companySearchResult.companies[0]);
-        expect(company.postalCode).toEqual('87270');
-        done();
-      });
-
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
+
+      expect(component.companies).toEqual(companySearchResult.companies);
 
     });
 
@@ -183,7 +179,7 @@ describe('CompanyFormComponent', () => {
           postalCode: '87270'
         }
       );
-      component.select.subscribe(company => {
+      component.validate.subscribe(company => {
         expect(company).toEqual(companyExpected);
         done();
       });

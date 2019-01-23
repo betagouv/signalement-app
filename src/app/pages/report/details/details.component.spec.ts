@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../../components/file-input/file-input.component';
 import { ReportDetails } from '../../../model/Report';
 
@@ -10,7 +10,17 @@ describe('DetailsComponent', () => {
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
 
+  const anomalyDateFixture = new Date(2018, 1, 2);
+  const anomalyFileFixture = new File([], 'anomaly.jpg');
+  const reportDetailsFixture = new ReportDetails();
+  reportDetailsFixture.description = 'Description';
+  reportDetailsFixture.anomalyDate = anomalyDateFixture;
+  reportDetailsFixture.anomalyTimeSlot = 5;
+  reportDetailsFixture.ticketFile = undefined;
+  reportDetailsFixture.anomalyFile = anomalyFileFixture;
+
   beforeEach(async(() => {
+    defineLocale('fr', frLocale);
     TestBed.configureTestingModule({
       declarations: [
         DetailsComponent,
@@ -37,23 +47,31 @@ describe('DetailsComponent', () => {
 
   describe('ngOnInit function', () => {
 
-    it('should initially display the form', () => {
+    it('should initially display the form and no errors message', () => {
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('form')).not.toBeNull();
+      expect(nativeElement.querySelector('.notification.error')).toBeNull();
     });
 
-    it('should define all form controls', () => {
+    it('should initialize the details inputs with empty values and current date when there is no initial value', () => {
       component.ngOnInit();
+      fixture.detectChanges();
 
-      expect(component.detailsForm.controls['anomalyDate']).toEqual(component.anomalyDateCtrl);
-      expect(component.detailsForm.controls['anomalyTimeSlot']).toEqual(component.anomalyTimeSlotCtrl);
-      expect(component.detailsForm.controls['description']).toEqual(component.descriptionCtrl);
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('textarea[formControlName="description"]').value).toEqual('');
+      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual((new Date()).toLocaleDateString());
+      expect(nativeElement.querySelector('select').value).toEqual('');
     });
 
-    it('should not display form errors', () => {
+    it('should initialize the details inputs with initial value when it exists', () => {
+      component.initialValue = reportDetailsFixture;
       component.ngOnInit();
+      fixture.detectChanges();
 
-      expect(component.showErrors).toBeFalsy();
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('textarea[formControlName="description"]').value).toEqual(reportDetailsFixture.description);
+      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual(reportDetailsFixture.anomalyDate.toLocaleDateString());
+      expect(nativeElement.querySelector('select').value).toEqual(reportDetailsFixture.anomalyTimeSlot.toString());
     });
 
     it ('should define the plageHoraireList to display', () => {
@@ -75,29 +93,30 @@ describe('DetailsComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(component.showErrors).toBeTruthy();
-      expect(nativeElement.querySelectorAll('.invalid').length).toEqual(1);
+      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
     it ('should emit and event with a company which contains form inputs when no errors', (done) => {
 
-      const anomalyDate = new Date();
       component.descriptionCtrl.setValue('Description');
-      component.anomalyDateCtrl.setValue(anomalyDate);
+      component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
-      fixture.detectChanges();
+      component.anomalyFile = anomalyFileFixture;
 
       const detailsExpected = new ReportDetails();
       detailsExpected.description = 'Description';
-      detailsExpected.anomalyDate = anomalyDate;
+      detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
+      detailsExpected.ticketFile = undefined;
+      detailsExpected.anomalyFile = anomalyFileFixture;
 
-      component.submit.subscribe(details => {
+      component.validate.subscribe(details => {
         expect(details).toEqual(detailsExpected);
         done();
       });
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button#submitDetailsForm').click();
+      nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
     });
