@@ -18,6 +18,7 @@ export class ReportComponent implements OnInit {
   step: Step;
   report: Report;
 
+  anomalySelected: Anomaly;
   anomalies: Anomaly[];
 
   showSuccess: boolean;
@@ -33,14 +34,9 @@ export class ReportComponent implements OnInit {
       this.loadAnomalies();
     }
 
+    this.anomalySelected = null;
     this.step = Step.Category;
   }
-
-  /*
-  addNewReport() {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.addAnotherReport);
-    this.initReportForm(false);
-  }*/
 
   loadAnomalies() {
     this.anomalyService.getAnomalies().subscribe(anomalyList => {
@@ -52,31 +48,30 @@ export class ReportComponent implements OnInit {
     this.report.anomalyCategory = '';
   }
 
-  selectAnomalyCategory(category) {
+  selectAnomaly(anomaly: Anomaly) {
     this.analyticsService.trackEvent(
-      EventCategories.report, ReportEventActions.selectAnomalyCategory, category
+      EventCategories.report, ReportEventActions.selectAnomalyCategory, anomaly.category
     );
-    this.report = new Report();
-    this.report.anomalyCategory = category;
-    this.stepForward();
-  }
-
-  private getAnomalyPrecisionList() {
-    return this.anomalies
-      .find(anomaly => anomaly.category === this.report.anomalyCategory)
-      .precisionList;
+    this.anomalySelected = anomaly;
+    if (this.anomalySelected.information) {
+      this.step = Step.Information;
+    } else {
+      this.report = new Report();
+      this.report.anomalyCategory = anomaly.category;
+      this.stepForward();
+    }
   }
 
   isIntoxicationAlimentaire() {
     return this.report.anomalyCategory === IntoxicationAlimentaire;
   }
 
-  onCompanySelect(company: Company) {
+  onCompanyValidate(company: Company) {
     this.report.company = company;
     this.stepForward();
   }
 
-  onPrecisionSubmit(precision: Precision) {
+  onPrecisionValidate(precision: Precision) {
     this.analyticsService.trackEvent(
       EventCategories.report, ReportEventActions.selectAnomalyPrecision, precision.title
     );
@@ -84,18 +79,24 @@ export class ReportComponent implements OnInit {
     this.stepForward();
   }
 
-  onDetailsSubmit(details: ReportDetails) {
+  onDetailsValidate(details: ReportDetails) {
     this.report.details = details;
     this.stepForward();
   }
 
-  onConsumerSubmit(consumer: Consumer) {
+  onConsumerValidate(consumer: Consumer) {
     this.report.consumer = consumer;
     this.stepForward();
   }
 
-  newReport() {
-    this.ngOnInit();
+  onConfimationValidate() {
+    this.stepForward();
+  }
+
+  anomaliesOrderByRank() {
+    if (this.anomalies) {
+      return this.anomalies.sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
+    }
   }
 
   isStep(step: string) {
@@ -118,6 +119,9 @@ export class ReportComponent implements OnInit {
         break;
       case Step.Consumer:
         this.step = Step.Confirmation;
+        break;
+      case Step.Confirmation:
+        this.step = Step.Acknowledgment;
         break;
       default:
         break;
@@ -160,5 +164,7 @@ export enum Step {
   Description = 'Description',
   Company = 'Company',
   Consumer = 'Consumer',
-  Confirmation = 'Confirmation'
+  Confirmation = 'Confirmation',
+  Acknowledgment = 'Acknowledgment',
+  Information = 'Information'
 }

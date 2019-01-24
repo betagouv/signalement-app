@@ -2,9 +2,11 @@
   <div class="container">
     <form [formGroup]="precisionForm" (submit)="submitPrecisionForm()" id="precisionForm">
       <div class="row pb-4" *ngFor="let precision of anomalyPrecisionList">
-        <input type="radio" formControlName="anomalyPrecision" [value]="precision.title" />
-        <div>
-          <label class="d-block">{{precision.title}}</label>
+        <div class="col-1 text-right pr-1">
+          <input type="radio" formControlName="anomalyPrecision" [value]="precision.title" />
+        </div>
+        <div class="col-11 pl-1">
+          <label class="d-block mb-0">{{precision.title}}</label>
           <span class="note">{{precision.description}}</span>
         </div>
       </div>

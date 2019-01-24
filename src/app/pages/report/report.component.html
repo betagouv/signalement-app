@@ -19,10 +19,17 @@
       <div class="container">
         <h4 class="text-center">Précisez votre problème</h4>
         <div class="row">
-          <div class="col-6 col-sm-4" *ngFor="let anomaly of anomalies">
-            <div class="category pointer" (click)="selectAnomalyCategory(anomaly.category)">
-              <h5>{{anomaly.category}}</h5>
-              <span class="note">{{anomaly.description}}</span>
+          <div class="col-12 col-sm-6 col-md-4" *ngFor="let anomaly of anomaliesOrderByRank() ">
+            <div class="category pointer" (click)="selectAnomaly(anomaly)">
+              <div class="row">
+                <div class="col-12 col-md-2 mb-2 text-center">
+                  <img src="/assets/images/{{anomaly.icon}}" alt="Icône catégorie de problème" *ngIf="anomaly.icon"/>
+                </div>
+                <div class="col-12 col-md-10">
+                  <h5 class="mb-0">{{anomaly.category}}</h5>
+                  <span class="note">{{anomaly.description}}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -68,24 +75,50 @@
   </main>
 </ng-container>
 
+<ng-container *ngIf="isStep('Information')">
+  <main role="main">
+    <section class="section-small section-grey">
+      <div class="container">
+        <h1>{{anomalySelected.information.title}}</h1>
+      </div>
+    </section>
+    <section class="section section-white">
+      <div class="container max-width">
+        <p class="mt-4" [innerHTML]="anomalySelected.information.content"></p>
+        <hr />
+        <button class="btn btn-lg btn-primary" (click)="ngOnInit()">
+          Identifier un autre problème
+        </button>
+      </div>
+    </section>
+  </main>
+</ng-container>
+
 <ng-container *ngIf="isStep('Precision')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-precision [initialValue]="report.anomalyPrecision" [anomalyPrecisionList]="getAnomalyPrecisionList()" (validate)="onPrecisionSubmit($event)"></app-precision>
+    <app-precision
+      [initialValue]="report.anomalyPrecision"
+      [anomalyPrecisionList]="this.anomalySelected.precisionList"
+      (validate)="onPrecisionValidate($event)">
+    </app-precision>
   </main>
 </ng-container>
 
 <ng-container *ngIf="isStep('Description')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-details [initialValue]="report.details" (validate)="onDetailsSubmit($event)"></app-details>
+    <app-details
+      [initialValue]="report.details"
+      (validate)="onDetailsValidate($event)">
+    </app-details>
   </main>
 </ng-container>
 
 <ng-container *ngIf="isStep('Company')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-company (validate)="onCompanySelect($event)"></app-company>
+    <app-company (validate)="onCompanyValidate($event)"></app-company>
   </main>
 </ng-container>
 
@@ -93,13 +126,42 @@
 <ng-container *ngIf="isStep('Consumer')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-consumer (submit)="onConsumerSubmit($event)"></app-consumer>
+    <app-consumer
+      [initialValue]="report.consumer"
+      (validate)="onConsumerValidate($event)">
+    </app-consumer>
   </main>
 </ng-container>
 
 <ng-container *ngIf="isStep('Confirmation')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-confirmation [report]="report"></app-confirmation>
+    <app-confirmation
+      [report]="report"
+      (validate)="onConfimationValidate()">
+    </app-confirmation>
+  </main>
+</ng-container>
+
+<ng-container *ngIf="isStep('Acknowledgment')">
+  <main role="main">
+    <section class="section-small section-grey">
+      <div class="container">
+        <h1>Merci pour votre signalement</h1>
+      </div>
+    </section>
+    <section class="section section-white">
+      <div class="container max-width">
+        <p class="mt-4">
+          Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé.
+          <br />
+          Il ne déclenchera pas à lui seul un contrôle des autorités.
+        </p>
+        <hr />
+        <button class="btn btn-lg btn-primary" (click)="ngOnInit()">
+          Identifier un autre problème
+        </button>
+      </div>
+    </section>
   </main>
 </ng-container>

@@ -3,6 +3,8 @@
     {
       "category": "Hygiène",
       "description": "Locaux sales, présence de rat, rupture de la chaîne du froid...",
+      "rank" : 1,
+      "icon": "icon_hygien.png",
       "precisionList": [
         {
           "title": "Locaux / matériel sales",
@@ -23,38 +25,150 @@
       ]
     },
     {
-      "category": "Intoxication alimentaire",
-      "description": "Au moins deux personnes ayant eu des maux de ventre, diarrhées et vomissements suite à l’ingestion d'un aliment",
-      "precisionList": []
-    },
-    {
       "category": "Nourriture / Boissons",
       "description": "Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...",
+      "rank" : 2,
+      "icon": "icon_food.png",
       "precisionList": [
+        {
+          "title": "Qualité sanitaire d'un produit",
+          "description": "Moisissure, bris de verre"
+        },
+        {
+          "title": "Produit périmé"
+        },
+        {
+          "title": "Produit pas bon, de mauvaise qualité"
+        },
+        {
+          "title": "Problème sur l'étiquette / emballage",
+          "description": "Liste des ingrédients non disponible,mention des allergènes non conforme, logo trompeur..."
+        },
+        {
+          "title": "Problème de quantité",
+          "description": "Poids indiqué non conforme, balance non tarée..."
+        },
+        {
+          "title": "Produit en retrait/ rappel"
+        },
+        {
+          "title": "Autre"
+        }
       ]
     },
     {
       "category": "Matériel / Objet",
       "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
+      "rank" : 3,
+      "icon": "icon_material.png",
       "precisionList": [
+        {
+          "title": "Étiquetage et notice",
+          "description": "Etiquette/affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais..."
+        },
+        {
+          "title": "Produit en retrait/ rappel"
+        },
+        {
+          "title": "Effet indésirable sur la santé",
+          "description": "Brûlure, picotement, démangeaison, allergie"
+        },
+        {
+          "title": "Dangereux",
+          "description": "Pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, départ de feu"
+        },
+        {
+          "title": "Durée de vie trop courte",
+          "description": "Je trouve que la durée de vie de mon appareil est trop courte."
+        },
+        {
+          "title": "Volume/poids/nb annoncé non conforme"
+        },
+        {
+          "title": "Autre"
+        }
+      ]
+    },
+    {
+      "category": "Intoxication alimentaire",
+      "description": "Au moins deux personnes ayant eu des maux de ventre, diarrhées et vomissements suite à l’ingestion d'un aliment",
+      "rank" : 4,
+      "icon": "icon_disease.png",
+      "information": {
+        "title": "Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil signalement.",
+        "content": "Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs. <br /><br />Veuillez remplir le formulaire \"Courrier\" de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4210\" target=\"_blank\" />Contact Hygiène et intoxication</a>"
+      }
+
+    },
+    {
+      "category": "Prix / Paiement",
+      "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...",
+      "rank" : 5,
+      "icon": "icon_price.png",
+      "precisionList": [
+        {
+          "title": "Prix trop cher"
+        },
+        {
+          "title": "Prix abusivement bas"
+        },
+        {
+          "title": "Prix différent de celui affiché"
+        },
+        {
+          "title": "Fausse réduction de prix"
+        },
+        {
+          "title": "Refus d'un moyen de paiement"
+        },
+        {
+          "title": "Frais facturés injustifiés",
+          "description": "Le prix annoncé doit correspondre à la somme totale à payer"
+        },
+        {
+          "title": "Autre"
+        }
+      ]
+    },
+    {
+      "category": "Publicité",
+      "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse...",
+      "rank" : 6,
+      "icon": "icon_pub.png",
+      "precisionList": [
+        {
+          "title": "Indisponibilité des produits du catalogue"
+        },
+        {
+          "title": "Information mensongère, publicité trompeuse"
+        }
       ]
     },
     {
       "category": "Accueil / Services",
       "description": "Problème de garantie constructeur, hotline injoignable, colis non reçu...",
+      "rank" : 7,
+      "icon": "icon_service.png",
       "precisionList": [
-      ]
-    },
-    {
-      "category": "Publicité",
-      "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse ...",
-      "precisionList": [
-      ]
-    },
-    {
-      "category": "Prix / Paiement",
-      "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion ...",
-      "precisionList": [
+        {
+          "title": "Problème de SAV, hotline",
+          "description": "Le SAV est inexistant, aucun retour du SAV malgré mes relances..."
+        },
+        {
+          "title": "Problème de livraison",
+          "description": "Colis perdu et non reçu, livraison tardive..."
+        },
+        {
+          "title": "Refus de reprendre un produit sous garantie",
+          "description": "Le commerçant refuse de me prendre mon achat encore sous garantie"
+        },
+        {
+          "title": "Personnel peu aimable",
+          "description": "L’accueil est froid, le personnel est mal poli"
+        },
+        {
+          "title": "Autre"
+        }
       ]
     }
   ]

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
 
@@ -8,6 +8,8 @@ import { Consumer } from '../../../model/Consumer';
   styleUrls: ['./consumer.component.scss']
 })
 export class ConsumerComponent implements OnInit {
+
+  @Input() initialValue: Consumer;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -25,9 +27,9 @@ export class ConsumerComponent implements OnInit {
   }
 
   initConsumerForm() {
-    this.firstNameCtrl = this.formBuilder.control('', Validators.required);
-    this.lastNameCtrl = this.formBuilder.control('', Validators.required);
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
+    this.firstNameCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.firstName : '', Validators.required);
+    this.lastNameCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.lastName : '', Validators.required);
+    this.emailCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.email : '', [Validators.required, Validators.email]);
 
     this.consumerForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,

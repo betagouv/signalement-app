@@ -16,7 +16,7 @@
       <div *ngIf="companies && companies.length">
 
         <div class="notification warning mt-4">
-          Veuillez sélectionner un établissement dans la liste ci-dessous
+          Veuillez sélectionner un établissement dans la liste ci-dessous.
         </div>
 
         <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
@@ -45,9 +45,6 @@
           Nom de l'établissement <span>*</span>
         </label>
         <input formControlName="name" type="text" id="companyName" placeholder="Nom de l'établissement">
-        <div class="invalid" *ngIf="showErrors && nameCtrl.hasError('required')">
-          Veuillez compléter le nom de l'établissement.
-        </div>
       </div>
 
       <div class="form__group">
@@ -65,13 +62,19 @@
           placeholder="numéro, voie, code postal, ville, ..."
           (selected)="selectAddress($event)">
         </ng2-completer>
-        <div class="invalid" *ngIf="showErrors && addressCtrl.hasError('required')">
-          Veuillez préciser l'adresse de l'établissement.
-        </div>
       </div>
 
+      <div class="notification error mt-3" *ngIf="showErrors && companyForm.invalid">
+        <span *ngIf="nameCtrl.hasError('required')">
+          Veuillez renseigner le nom de l'établissement.<br />
+        </span>
+        <span *ngIf="addressCtrl.hasError('required')">
+          Veuillez renseigner l'adresse de l'établissement.
+        </span>
+      </div>
+      <hr />
       <div class="text-center mt-3">
-        <button class="button secondary" type="submit" id="submitCompanyForm">Valider</button>
+        <button type="submit" class="btn btn-lg btn-primary" id="submitCompanyForm">Suite</button>
       </div>
 
     </form>

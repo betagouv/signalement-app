@@ -25,6 +25,7 @@ import { BreadcrumbComponent } from './pages/report/breadcrumb/breadcrumb.compon
 import { ConsumerComponent } from './pages/report/consumer/consumer.component';
 import { ConfirmationComponent } from './pages/report/confirmation/confirmation.component';
 import { PrecisionComponent } from './pages/report/precision/precision.component';
+import { PrecedeByPipe } from './pipes/precede-by.pipe';
 
 defineLocale('fr', frLocale);
 
@@ -43,6 +44,7 @@ defineLocale('fr', frLocale);
     ConsumerComponent,
     ConfirmationComponent,
     PrecisionComponent,
+    PrecedeByPipe,
   ],
   imports: [
     CommonModule,

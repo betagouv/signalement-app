@@ -2,59 +2,56 @@
   <div class="container">
 
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm">
-      <div class="panel">
+      <div class="form__group">
+        <label>
+          Description du problème
+        </label>
+        <textarea formControlName="description"
+                  rows="3"
+                  maxlength="200"
+                  placeholder="200 caractères maximum">
+                </textarea>
+      </div>
 
-        <div class="form__group">
-          <label>
-            Description du problème
-          </label>
-          <textarea formControlName="description"
-                    rows="3"
-                    maxlength="200"
-                    placeholder="200 caractères maximum">
-                  </textarea>
-        </div>
-
-        <div class="form__group">
-          <label>
-            Date et plage horaire du constat
-          </label>
-          <div class="row">
-            <div class="col-12 col-sm-6">
-              <input type="text"
-                     formControlName="anomalyDate"
-                     placeholder="Date du constat"
-                     bsDatepicker
-                     [bsConfig]="{ containerClass: 'theme-default' }">
-            </div>
-            <div class="col-12 col-sm-6">
-              <div class="form__group">
-                <select formControlName="anomalyTimeSlot">
-                  <option disabled value="">Plage horaire</option>
-                  <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
-                </select>
-              </div>
+      <div class="form__group">
+        <label>
+          Date et plage horaire du constat
+        </label>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <input type="text"
+                   formControlName="anomalyDate"
+                   placeholder="Date du constat"
+                   bsDatepicker
+                   [bsConfig]="{ containerClass: 'theme-default' }">
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="form__group">
+              <select formControlName="anomalyTimeSlot">
+                <option disabled value="">Plage horaire</option>
+                <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
+              </select>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="form__group">
-          <label>
-            Photos du ticket de caisse et/ou du problème
-          </label>
-          <div class="row">
-            <div class="col-12 col-sm-6">
-              <app-file-input
-                [placeholder]="'Photo du ticket de caisse'"
-                (fileSelected)="onTicketFileSelected($event)">
-              </app-file-input>
-            </div>
-            <div class="col-12 col-sm-6">
-              <app-file-input
-                [placeholder]="'Photo du problème'"
-                (fileSelected)="onAnomalyFileSelected($event)">
-              </app-file-input>
-            </div>
+      <div class="form__group">
+        <label>
+          Photos du ticket de caisse et/ou du problème
+        </label>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <app-file-input
+              [placeholder]="'Photo du ticket de caisse'"
+              (fileSelected)="onTicketFileSelected($event)">
+            </app-file-input>
+          </div>
+          <div class="col-12 col-sm-6">
+            <app-file-input
+              [placeholder]="'Photo du problème'"
+              (fileSelected)="onAnomalyFileSelected($event)">
+            </app-file-input>
           </div>
         </div>
       </div>

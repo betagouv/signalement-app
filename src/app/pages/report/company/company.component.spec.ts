@@ -161,9 +161,21 @@ describe('CompanyComponent', () => {
 
   describe('submitting company form', () => {
 
-    it ('should emit and event with a company which contains form inputs', (done) => {
+    it('should display errors when occurs', () => {
+      component.editCompany();
+      component.nameCtrl.setValue('');
+      component.addressCtrl.setValue('');
+
+      component.submitCompanyForm();
+      fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
+      expect(component.showErrors).toBeTruthy();
+      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
+    });
+
+    it ('should emit and event with a company which contains form inputs', (done) => {
+
       component.editCompany();
       component.nameCtrl.setValue('Mon entreprise');
       component.addressCtrl.setValue('Mon adresse dans ma ville');
@@ -184,6 +196,7 @@ describe('CompanyComponent', () => {
         done();
       });
 
+      const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button#submitCompanyForm').click();
       fixture.detectChanges();
 

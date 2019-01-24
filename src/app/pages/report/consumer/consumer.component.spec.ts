@@ -8,6 +8,11 @@ describe('ConsumerComponent', () => {
   let component: ConsumerComponent;
   let fixture: ComponentFixture<ConsumerComponent>;
 
+  const consumerFixture = new Consumer();
+  consumerFixture.firstName = 'Prénom';
+  consumerFixture.lastName = 'Nom';
+  consumerFixture.email = 'test@gmail.com';
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -34,9 +39,10 @@ describe('ConsumerComponent', () => {
 
   describe('ngOnInit function', () => {
 
-    it('should initially display the form', () => {
+    it('should initially display the form and no errors message', () => {
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('form')).not.toBeNull();
+      expect(nativeElement.querySelector('.notification.error')).toBeNull();
     });
 
     it('should define all form controls', () => {
@@ -47,10 +53,25 @@ describe('ConsumerComponent', () => {
       expect(component.consumerForm.controls['email']).toEqual(component.emailCtrl);
     });
 
-    it('should not display form errors', () => {
+    it('should initialize the inputs with empty values when there is no initial value', () => {
       component.ngOnInit();
+      fixture.detectChanges();
 
-      expect(component.showErrors).toBeFalsy();
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual('');
+      expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual('');
+      expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual('');
+    });
+
+    it('should initialize the details inputs with initial value when it exists', () => {
+      component.initialValue = consumerFixture;
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual(consumerFixture.firstName);
+      expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual(consumerFixture.lastName);
+      expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual(consumerFixture.email);
     });
   });
 
@@ -66,7 +87,7 @@ describe('ConsumerComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(component.showErrors).toBeTruthy();
-      expect(nativeElement.querySelectorAll('.invalid').length).toEqual(3);
+      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
     it ('should emit and event with a company which contains form inputs when no errors', (done) => {

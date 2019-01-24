@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Report } from '../../../model/Report';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportService } from '../../../services/report.service';
+import { Company } from '../../../model/Company';
 
 @Component({
   selector: 'app-confirmation',
@@ -18,6 +19,8 @@ export class ConfirmationComponent implements OnInit {
 
   showErrors: boolean;
   loading: boolean;
+
+  @Output() validate = new EventEmitter<Company>();
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -48,13 +51,19 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
         result => {
           this.loading = false;
-          //TODO
+          this.validate.emit();
         },
         error => {
           this.loading = false;
           // TODO cas d'erreur
         });
 
+    }
+  }
+
+  getTimeSlotEnd() {
+    if (this.report.details.anomalyTimeSlot) {
+      return Number(this.report.details.anomalyTimeSlot) + 1;
     }
   }
 

@@ -26,7 +26,6 @@ export class CompanyComponent implements OnInit {
   searchWarning: string;
 
   showErrors: boolean;
-  suggestionData: RemoteData;
 
   addressData: RemoteData;
   @Output() validate = new EventEmitter<Company>();
@@ -47,7 +46,6 @@ export class CompanyComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       search: this.searchCtrl,
     });
-    this.suggestionData = this.companyService.suggestionData;
   }
 
   editCompany() {

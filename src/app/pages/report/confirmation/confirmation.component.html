@@ -2,33 +2,36 @@
   <div class="container">
     <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm">
       <h5>Récapitulatif de votre problème d'{{report.anomalyCategory}} ({{report.anomalyPrecision}})</h5>
-      <ul>
-        <li>
-          Etablissement : TODO
-        </li>
-      </ul>
-      <ul>
-        <li>
+      <div class="panel">
+        <div class="row">
+          Etablissement :
+        </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
+            <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
+            <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+            <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+            <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+            <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+            <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          </div>
+        </div>
+        <div class="row mt-2">
           Date du constat : {{report.details.anomalyDate | date:'dd/MM/yyyy'}}
-        </li>
-        <li>
-          Plage horaire : {{report.details.anomalyTimeSlot}}
-        </li>
-        <li>
+          <br />
+          Plage horaire : <span *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </span>
+          <br />
           Description : {{report.details.description}}
-        </li>
-      </ul>
-      <ul>
-        <li>
+        </div>
+        <div class="row mt-2">
           Nom : {{report.consumer.lastName}}
-        </li>
-        <li>
+          <br />
           Prénom : {{report.consumer.firstName}}
-        </li>
-        <li>
+          <br />
           Email : {{report.consumer.email}}
-        </li>
-      </ul>
+        </div>
+      </div>
 
       <div class="row pl-1">
         <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
@@ -38,11 +41,16 @@
         <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
         <label for="contactAgreementFalse" class="label-inline">Je refuse</label>
       </div>
+
+      <div class="notification error mt-3" *ngIf="showErrors && confirmationForm.invalid">
+        <span *ngIf="contactAgreementCtrl.hasError('required')">
+          Veuillez indiquer si vous acceptez de transmettre vos coordonnées au professionnel.<br />
+        </span>
+      </div>
       <hr />
       <button type="submit" class="btn btn-lg btn-primary">
         Envoyer
       </button>
-
     </form>
   </div>
 

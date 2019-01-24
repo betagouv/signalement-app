@@ -2,7 +2,7 @@
   <div class="container">
     <img src="/assets/images/icon_back.png" class="back pointer" (click)="back.emit()"/>
     <div>
-      <h4>Vous avez identifié un problème de {{report.anomalyCategory}}</h4>
+      <h4>Vous avez identifié un problème {{report.anomalyCategory | precedeBy : 'de' : 'd\''}}</h4>
       <span class="note" *ngIf="report.anomalyPrecision">
         {{report.anomalyPrecision}}
       </span>

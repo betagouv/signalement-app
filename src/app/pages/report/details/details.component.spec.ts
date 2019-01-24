@@ -59,7 +59,7 @@ describe('DetailsComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('textarea[formControlName="description"]').value).toEqual('');
-      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual((new Date()).toLocaleDateString());
+      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual((new Date()).toLocaleDateString('fr'));
       expect(nativeElement.querySelector('select').value).toEqual('');
     });
 
@@ -70,7 +70,7 @@ describe('DetailsComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('textarea[formControlName="description"]').value).toEqual(reportDetailsFixture.description);
-      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual(reportDetailsFixture.anomalyDate.toLocaleDateString());
+      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual(reportDetailsFixture.anomalyDate.toLocaleDateString('fr'));
       expect(nativeElement.querySelector('select').value).toEqual(reportDetailsFixture.anomalyTimeSlot.toString());
     });
 
