@@ -13,34 +13,18 @@ describe('AnomalyService', () => {
     list:
       [
         {
-          companyType: 'Café restaurant',
-          anomalyTypeList: [
-            {
-              categorie: 'Hygiène',
-              subcategories: [
-                'Personnel sans coiffe ou gants',
-                'Restaurant sale'
-              ]
-            }
+          category: 'Hygiène',
+          subcategories: [
+            'Personnel sans coiffe ou gants',
+            'Restaurant sale'
           ]
         },
         {
-          companyType: 'Commerçant de proximité (boulangerie, boucherie...)',
-          anomalyTypeList: [
-            {
-              categorie: 'Hygiène',
-              subcategories: [
-                'Personnel sans coiffe ou gants'
-              ]
-            },
-            {
-              categorie: 'Produit alimentaire',
-              subcategories: [
-                'Date Limite de Consommation dépassée',
-                'Intoxication, corps étranger',
-                'Etiquetage non-conforme (absence ingrédients, des allergènes, de date limite, pas en langue française..)'
-              ]
-            }
+          category: 'Produit alimentaire',
+          subcategories: [
+            'Date Limite de Consommation dépassée',
+            'Intoxication, corps étranger',
+            'Etiquetage non-conforme (absence ingrédients, des allergènes, de date limite, pas en langue française..)'
           ]
         }
       ]
@@ -67,7 +51,7 @@ describe('AnomalyService', () => {
   describe('getAnomalies function', () => {
 
     it('should load anomalies from a Json file and return an array of Anomaly', () => {
-            anomalyService.getAnomalies().subscribe(
+      anomalyService.getAnomalies().subscribe(
         result => {
           expect(result).not.toBeNull();
           expect(result instanceof Array).toBeTruthy();
