@@ -48,7 +48,7 @@ export class Anomaly {
   @JsonProperty('description')
   description: string;
   @JsonProperty('rank')
-  rank?: string;
+  rank?: number;
   @JsonProperty('icon')
   icon?: string;
   @JsonProperty({ name: 'information', clazz: Information })

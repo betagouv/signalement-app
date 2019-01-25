@@ -272,6 +272,22 @@
           "title": "Autre"
         }
       ]
+    },
+    {
+      "category": "Refus de servir/ vendre",
+      "rank" : 100
+    },
+    {
+      "category": "Chien refusé SSI handicapé",
+      "rank" : 101
+    },
+    {
+      "category": "Dénomination des menus",
+      "rank" : 102
+    },
+    {
+      "category": "Autre",
+      "rank" : 103
     }
   ]
 }

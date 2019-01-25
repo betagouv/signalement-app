@@ -22,6 +22,7 @@ export class ReportComponent implements OnInit {
 
   informationToDisplay: Information;
   showSuccess: boolean;
+  showSecondaryCategories: boolean;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               public formBuilder: FormBuilder,
@@ -35,6 +36,7 @@ export class ReportComponent implements OnInit {
     }
 
     this.informationToDisplay = null;
+    this.showSecondaryCategories = false;
     this.step = Step.Category;
   }
 
@@ -44,10 +46,24 @@ export class ReportComponent implements OnInit {
     });
   }
 
-  anomaliesOrderByRank() {
+  primaryCategoriesOrderByRank() {
     if (this.anomalies) {
-      return this.anomalies.sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
+      return this.anomalies
+        .filter(a => a.rank < 100)
+        .sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
     }
+  }
+
+  secondaryCategoriesOrderByRank() {
+    if (this.anomalies) {
+      return this.anomalies
+        .filter(a => a.rank >= 100)
+        .sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
+    }
+  }
+
+  displaySecondaryCategories() {
+    this.showSecondaryCategories = true;
   }
 
   selectAnomaly(anomaly: Anomaly) {
@@ -67,9 +83,9 @@ export class ReportComponent implements OnInit {
     this.step = Step.Information;
   }
 
-  getSubcategories(category: string) {
+  getSubcategories() {
     return this.anomalies
-      .find(anomaly => anomaly.category === category)
+      .find(anomaly => anomaly.category === this.report.category)
       .subcategories;
   }
 
@@ -113,12 +129,16 @@ export class ReportComponent implements OnInit {
   stepForward() {
     switch (this.step) {
       case Step.Category:
-        this.step = Step.Subcategory;
+        if (this.getSubcategories() && this.getSubcategories().length) {
+          this.step = Step.Subcategory;
+        } else {
+          this.step = Step.Details;
+        }
         break;
       case Step.Subcategory:
-        this.step = Step.Description;
+        this.step = Step.Details;
         break;
-      case Step.Description:
+      case Step.Details:
         this.step = Step.Company;
         break;
       case Step.Company:
@@ -141,13 +161,13 @@ export class ReportComponent implements OnInit {
         this.report.subcategory = null;
         this.step = Step.Category;
         break;
-      case Step.Description:
+      case Step.Details:
         this.report.details = null;
         this.step = Step.Subcategory;
         break;
       case Step.Company:
         this.report.company = null;
-        this.step = Step.Description;
+        this.step = Step.Details;
         break;
       case Step.Consumer:
         this.report.consumer = null;
@@ -166,7 +186,7 @@ export class ReportComponent implements OnInit {
 export enum Step {
   Category = 'Category',
   Subcategory = 'Subcategory',
-  Description = 'Description',
+  Details = 'Details',
   Company = 'Company',
   Consumer = 'Consumer',
   Confirmation = 'Confirmation',

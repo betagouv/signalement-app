@@ -24,20 +24,29 @@
       <div class="container">
         <h4 class="text-center">Précisez votre problème</h4>
         <div class="row">
-          <div class="col-12 col-sm-6 col-md-4" *ngFor="let anomaly of anomaliesOrderByRank() ">
-            <div class="category pointer" (click)="selectAnomaly(anomaly)">
+          <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
+            <div class="category pointer" (click)="selectAnomaly(category)">
               <div class="row">
                 <div class="col-12 col-md-2 mb-2 text-center">
-                  <img src="/assets/images/{{anomaly.icon}}" alt="Icône catégorie de problème" *ngIf="anomaly.icon"/>
+                  <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
                 </div>
                 <div class="col-12 col-md-10">
-                  <h5 class="mb-0">{{anomaly.category}}</h5>
-                  <span class="note">{{anomaly.description}}</span>
+                  <h5 class="mb-0">{{category.category}}</h5>
+                  <span class="note">{{category.description}}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <h4 class="text-center pointer" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
+          <u>Mon problème n'est pas dans la liste</u>
+        </h4>
+        <ng-template #secondaryCategories>
+          <h4 class="text-center pointer" *ngFor="let category of secondaryCategoriesOrderByRank()" (click)="selectAnomaly(category)">
+            <u>{{category.category}}</u>
+          </h4>
+        </ng-template>
       </div>
     </section>
 
@@ -104,18 +113,18 @@
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
     <app-subcategory
       [initialValue]="report.subcategory"
-      [anomalySubcategories]="getSubcategories(report.category)"
+      [anomalySubcategories]="getSubcategories()"
       (validate)="onSubcategoryValidate($event)">
     </app-subcategory>
   </main>
 </ng-container>
 
-<ng-container *ngIf="isStep('Description')">
+<ng-container *ngIf="isStep('Details')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
     <app-details
       [initialValue]="report.details"
-      [precision]="report.subcategory.precision"
+      [precision]="report.subcategory?.precision"
       (validate)="onDetailsValidate($event)">
     </app-details>
   </main>

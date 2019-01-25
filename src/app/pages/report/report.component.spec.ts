@@ -44,13 +44,13 @@ describe('ReportComponent', () => {
     { title: 'title22', description: 'description22' },
     { title: 'title23', description: 'description23' },
   ];
-  const anomaly1 = deserialize(Anomaly, {category: 'category1', rank: '1', subcategories: subcategories1});
-  const anomaly2 = deserialize(Anomaly, {category: 'category2', rank: '2', subcategories: subcategories2});
+  const anomalyWithSubcategories = deserialize(Anomaly, {category: 'category1', rank: '1', subcategories: subcategories1});
+  const anomalyWithoutSubcategories = deserialize(Anomaly, {category: 'category2', rank: '2'});
   const anomalyIntoxicationAlimentaire = deserialize(
     Anomaly,
     { category: 'intoxication', rank: '3', information: { title: 'Titre intox', content: 'contentIntox' } }
     );
-  const anomaliesFixture = [anomaly1, anomaly2, anomalyIntoxicationAlimentaire];
+  const anomaliesFixture = [anomalyWithSubcategories, anomalyWithoutSubcategories, anomalyIntoxicationAlimentaire];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -117,7 +117,7 @@ describe('ReportComponent', () => {
       expect(nativeElement.querySelectorAll('div.category').length).toEqual(anomaliesFixture.length);
     });
 
-    it('should initiate a report and route to subcategory step when an anomaly without information is clicked', () => {
+    it('should initiate a report and route to subcategory step when an anomaly without information and with subcategories is clicked', () => {
       component.step = Step.Category;
       component.anomalies = anomaliesFixture;
       fixture.detectChanges();
@@ -126,8 +126,21 @@ describe('ReportComponent', () => {
       nativeElement.querySelectorAll('div.category')[0].click();
 
       expect(component.report).not.toBeNull();
-      expect(component.report.category).toEqual(anomaly1.category);
+      expect(component.report.category).toEqual(anomalyWithSubcategories.category);
       expect(component.step).toEqual(Step.Subcategory);
+    });
+
+    it('should initiate a report and route to description step when an anomaly without information nor subcategories is clicked', () => {
+      component.step = Step.Category;
+      component.anomalies = anomaliesFixture;
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelectorAll('div.category')[1].click();
+
+      expect(component.report).not.toBeNull();
+      expect(component.report.category).toEqual(anomalyWithoutSubcategories.category);
+      expect(component.step).toEqual(Step.Details);
     });
 
     it('should display information when an anomaly with information is clicked', () => {
