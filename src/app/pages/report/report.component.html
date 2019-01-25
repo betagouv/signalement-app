@@ -79,12 +79,12 @@
   <main role="main">
     <section class="section-small section-grey">
       <div class="container">
-        <h1>{{anomalySelected.information.title}}</h1>
+        <h1>{{informationToDisplay.title}}</h1>
       </div>
     </section>
     <section class="section section-white">
       <div class="container max-width">
-        <p class="mt-4" [innerHTML]="anomalySelected.information.content"></p>
+        <p class="mt-4" [innerHTML]="informationToDisplay.content"></p>
         <hr />
         <button class="btn btn-lg btn-primary" (click)="ngOnInit()">
           Identifier un autre problème
@@ -94,14 +94,14 @@
   </main>
 </ng-container>
 
-<ng-container *ngIf="isStep('Precision')">
+<ng-container *ngIf="isStep('Subcategory')">
   <main>
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
-    <app-precision
-      [initialValue]="report.anomalyPrecision"
-      [anomalyPrecisionList]="this.anomalySelected.precisionList"
-      (validate)="onPrecisionValidate($event)">
-    </app-precision>
+    <app-subcategory
+      [initialValue]="report.subcategory"
+      [anomalySubcategories]="getSubcategories(report.category)"
+      (validate)="onSubcategoryValidate($event)">
+    </app-subcategory>
   </main>
 </ng-container>
 
@@ -110,6 +110,7 @@
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
     <app-details
       [initialValue]="report.details"
+      [precision]="report.subcategory.precision"
       (validate)="onDetailsValidate($event)">
     </app-details>
   </main>

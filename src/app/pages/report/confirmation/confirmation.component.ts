@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Report } from '../../../model/Report';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportService } from '../../../services/report.service';
-import { Company } from '../../../model/Company';
 
 @Component({
   selector: 'app-confirmation',
@@ -20,11 +18,10 @@ export class ConfirmationComponent implements OnInit {
   showErrors: boolean;
   loading: boolean;
 
-  @Output() validate = new EventEmitter<Company>();
+  @Output() validate = new EventEmitter();
 
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService,
-              private analyticsService: AnalyticsService) { }
+              private reportService: ReportService) { }
 
   ngOnInit() {
     this.initConfirmationForm();
@@ -46,7 +43,6 @@ export class ConfirmationComponent implements OnInit {
     } else {
       this.loading = true;
       this.report.contactAgreement = this.contactAgreementCtrl.value;
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.formSubmitted);
       this.reportService.createReport(this.report)
         .subscribe(
         result => {

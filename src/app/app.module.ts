@@ -24,7 +24,7 @@ import { DetailsComponent } from './pages/report/details/details.component';
 import { BreadcrumbComponent } from './pages/report/breadcrumb/breadcrumb.component';
 import { ConsumerComponent } from './pages/report/consumer/consumer.component';
 import { ConfirmationComponent } from './pages/report/confirmation/confirmation.component';
-import { PrecisionComponent } from './pages/report/precision/precision.component';
+import { SubcategoryComponent } from './pages/report/subcategory/subcategory.component';
 import { PrecedeByPipe } from './pipes/precede-by.pipe';
 
 defineLocale('fr', frLocale);
@@ -43,7 +43,7 @@ defineLocale('fr', frLocale);
     BreadcrumbComponent,
     ConsumerComponent,
     ConfirmationComponent,
-    PrecisionComponent,
+    SubcategoryComponent,
     PrecedeByPipe,
   ],
   imports: [

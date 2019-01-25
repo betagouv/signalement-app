@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
+import { Precision } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-details',
@@ -11,8 +12,10 @@ import { BsLocaleService } from 'ngx-bootstrap';
 export class DetailsComponent implements OnInit {
 
   @Input() initialValue: ReportDetails;
+  @Input() precision: Precision;
 
   detailsForm: FormGroup;
+  precisionCtrl: FormControl;
   anomalyDateCtrl: FormControl;
   anomalyTimeSlotCtrl: FormControl;
   descriptionCtrl: FormControl;
@@ -40,12 +43,17 @@ export class DetailsComponent implements OnInit {
     this.descriptionCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.description : '');
     this.anomalyDateCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.anomalyDate : new Date(), Validators.required);
     this.anomalyTimeSlotCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.anomalyTimeSlot : '');
+    this.precisionCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.precision : '', Validators.required);
 
     this.detailsForm = this.formBuilder.group({
       anomalyDate: this.anomalyDateCtrl,
       anomalyTimeSlot: this.anomalyTimeSlotCtrl,
       description: this.descriptionCtrl
     });
+
+    if (this.precision) {
+      this.detailsForm.addControl('precision', this.precisionCtrl);
+    }
 
   }
 

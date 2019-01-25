@@ -26,8 +26,8 @@ export class ReportService {
 
     const reportFormData: FormData = new FormData();
     reportFormData.append('companyType', 'Deprecated'); //TODO à supprimer
-    reportFormData.append('anomalyCategory', report.anomalyCategory);
-    reportFormData.append('anomalyPrecision', report.anomalyPrecision);
+    reportFormData.append('anomalyCategory', report.category);
+    reportFormData.append('anomalySubcategory', report.subcategory.title);
     reportFormData.append('companyName', report.company.name);
     reportFormData.append('companyAddress', this.getCompanyAddress(report.company));
     reportFormData.append('companyPostalCode', report.company.postalCode);

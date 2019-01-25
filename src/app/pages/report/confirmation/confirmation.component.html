@@ -1,7 +1,7 @@
 <section class="section section-white position-relative">
   <div class="container">
     <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm">
-      <h5>Récapitulatif de votre problème d'{{report.anomalyCategory}} ({{report.anomalyPrecision}})</h5>
+      <h5>Récapitulatif de votre problème {{report.category | precedeBy : 'de' : 'd\''}} ({{report.subcategory.title}})</h5>
       <div class="panel">
         <div class="row">
           Etablissement :

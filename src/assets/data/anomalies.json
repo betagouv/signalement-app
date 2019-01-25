@@ -5,22 +5,68 @@
       "description": "Locaux sales, présence de rat, rupture de la chaîne du froid...",
       "rank" : 1,
       "icon": "icon_hygien.png",
-      "precisionList": [
+      "subcategories": [
         {
           "title": "Locaux / matériel sales",
-          "description": "Cuisine, WC, rayon réfrigéré..."
+          "description": "Cuisine, WC, rayon réfrigéré...",
+          "precision": {
+            "title": "Quelle zone est concernée ? ",
+            "options": [
+              "Cuisine",
+              "Salle",
+              "WC",
+              "Atelier de fabrication",
+              "Magasin (sol)",
+              "Magasin (vitrine /frigo)",
+              "Autre"
+            ]
+          }
+        },
+        {
+          "title": "Personnel sans coiffe ou sans gants",
+          "information": {
+            "title": "Cet incident ne rentre pas dans le périmètre de l'outil signalement.",
+            "content": "Il n'existe pas d'obligation réglementaire imposant le port de la coiffe (charlotte) ou des gants.<br />Le lavage des mains peut être suffisant pour éviter les contaminations."
+          }
         },
         {
           "title": "Hygiène du personnel",
-          "description": "Tenue, mauvaise pratique d'hygiène..."
+          "description": "Tenue sale, mauvaise pratique d'hygiène...",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Tenue sale",
+              "Pas de coiffe ou pas de gants",
+              "Mauvaises pratiques d'hygiène (pas de lavage des mains, personnel qui fume en cuisine...)",
+              "Autre"
+            ]
+          }
         },
         {
           "title": "Présence d'animaux",
-          "description": "Rat, insectes, oiseaux, chien..."
+          "description": "Rat, insectes, oiseaux, chien...",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Insectes",
+              "Rongeurs (rat, souris)",
+              "Oiseau",
+              "Chien",
+              "Autre"
+            ]
+          }
         },
         {
           "title": "Problème de température",
-          "description": "Rupture de la chaîne du froid, vitrine réfrigérée trop chaude..."
+          "description": "Rupture de la chaîne du froid, vitrine réfrigérée trop chaude...",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Meuble réfrigéré en panne ou température insuffisante",
+              "Stockage de produits frais à température ambiante",
+              "Autre"
+            ]
+          }
         }
       ]
     },
@@ -29,24 +75,54 @@
       "description": "Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...",
       "rank" : 2,
       "icon": "icon_food.png",
-      "precisionList": [
+      "subcategories": [
         {
           "title": "Qualité sanitaire d'un produit",
-          "description": "Moisissure, bris de verre"
+          "description": "Moisissure, bris de verre",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Moisissure",
+              "Couleur / odeur anormale",
+              "Corps étranger \"mou\"",
+              "Corps étranger \"dur\" et dangereux (bout de verre, de métal, plastique dur..)"
+            ]
+          }
         },
         {
           "title": "Produit périmé"
         },
         {
-          "title": "Produit pas bon, de mauvaise qualité"
+          "title": "Produit pas bon, de mauvaise qualité",
+          "information": {
+            "title": "Cet incident ne rentre pas dans le périmètre de l'outil signalement.",
+            "content": "<h5>Au restaurant</h5><p>Vous pouvez demander que l'on remplace un plat si vous estimez que le plat qui vous a été proposé n’est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\".<br />En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat. S'il vous oppose un refus, vous serez tenu néanmoins de payer la note.</p><h5>Produit acheté en magasin</h5>Vous pouvez contacter le service client (généralement indiqué sur l'emballage) sinon contactez directement le commerçant afin de lui faire part de votre avis voir mécontentement.</p>"
+          }
         },
         {
           "title": "Problème sur l'étiquette / emballage",
-          "description": "Liste des ingrédients non disponible,mention des allergènes non conforme, logo trompeur..."
+          "description": "Liste des ingrédients non disponible,mention des allergènes non conforme, logo trompeur...",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Pas d’étiquetage ou informations absentes",
+              "Étiquetage uniquement en langue étrangère (aucune information traduite en français)",
+              "Informations/mentions trompeuses",
+              "Autre"
+            ]
+          }
         },
         {
           "title": "Problème de quantité",
-          "description": "Poids indiqué non conforme, balance non tarée..."
+          "description": "Poids indiqué non conforme, balance non tarée...",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Le commerçant n'effectue pas la tare lors de la pesée",
+              "Le volume/poids/nombre annoncé est non conforme.",
+              "Autre"
+            ]
+          }
         },
         {
           "title": "Produit en retrait/ rappel"
@@ -61,10 +137,18 @@
       "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
       "rank" : 3,
       "icon": "icon_material.png",
-      "precisionList": [
+      "subcategories": [
         {
           "title": "Étiquetage et notice",
-          "description": "Etiquette/affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais..."
+          "description": "Etiquette/affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Informations absentes au niveau de l'étiquetage/emballage",
+              "Étiquetage ou notice uniquement en langue étrangère (aucune information traduite en français)",
+              "Informations données sont trompeuses ou fausses (étiqueté \"en or\" alors qu'il s'agit de \"plaqué or\", \"fabriqué en France\" alors que ce n'est pas le cas...)"
+            ]
+          }
         },
         {
           "title": "Produit en retrait/ rappel"
@@ -105,9 +189,17 @@
       "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...",
       "rank" : 5,
       "icon": "icon_price.png",
-      "precisionList": [
+      "subcategories": [
         {
-          "title": "Prix trop cher"
+          "title": "Absence de prix",
+          "description": "pas d'affichage de prix en rayon ou en vitrine, pas de carte des prix dans le bar..."
+        },
+        {
+          "title": "Prix trop cher",
+          "information": {
+            "title": "Cet incident ne rentre pas dans le périmètre de l'outil signalement.",
+            "content": "Les prix sont fixés librement par les professionnels. En contrepartie, les professionnels sont tenus de vous informer sur les prix pratiqués (comme un affichage ou une étiquette).<br />Par exemple, il est autorisé de vendre un verre de soda à 100 euros dans un bar si le prix est bien indiqué sur la carte.<br /><br />Si les prix sont libres, un professionnel ne peut toutefois abuser d’une situation pour pratiquer des prix prohibitifs. Par exemple, un serrurier, qui vous demande une somme exorbitante en situation d'urgence sans vous avoir averti avant."
+          }
         },
         {
           "title": "Prix abusivement bas"
@@ -116,7 +208,17 @@
           "title": "Prix différent de celui affiché"
         },
         {
-          "title": "Fausse réduction de prix"
+          "title": "Fausse réduction de prix",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Soldes",
+              "Promotion",
+              "Liquidation",
+              "Prix exagérément élevés de départ",
+              "Autre"
+            ]
+          }
         },
         {
           "title": "Refus d'un moyen de paiement"
@@ -135,7 +237,7 @@
       "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse...",
       "rank" : 6,
       "icon": "icon_pub.png",
-      "precisionList": [
+      "subcategories": [
         {
           "title": "Indisponibilité des produits du catalogue"
         },
@@ -149,7 +251,7 @@
       "description": "Problème de garantie constructeur, hotline injoignable, colis non reçu...",
       "rank" : 7,
       "icon": "icon_service.png",
-      "precisionList": [
+      "subcategories": [
         {
           "title": "Problème de SAV, hotline",
           "description": "Le SAV est inexistant, aucun retour du SAV malgré mes relances..."

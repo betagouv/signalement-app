@@ -1,10 +1,11 @@
 import { Consumer } from './Consumer';
 import { Company } from './Company';
+import { Subcategory } from './Anomaly';
 
 export class Report {
 
-  anomalyCategory: string;
-  anomalyPrecision: string;
+  category: string;
+  subcategory: Subcategory;
   company: Company;
   details: ReportDetails;
   consumer: Consumer;
@@ -19,5 +20,6 @@ export class ReportDetails {
   description: string;
   ticketFile: File;
   anomalyFile: File;
+  precision?: string;
 
 }

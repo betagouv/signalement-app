@@ -17,7 +17,7 @@ describe('AnomalyService', () => {
           anomalyTypeList: [
             {
               categorie: 'Hygiène',
-              precisionList: [
+              subcategories: [
                 'Personnel sans coiffe ou gants',
                 'Restaurant sale'
               ]
@@ -29,13 +29,13 @@ describe('AnomalyService', () => {
           anomalyTypeList: [
             {
               categorie: 'Hygiène',
-              precisionList: [
+              subcategories: [
                 'Personnel sans coiffe ou gants'
               ]
             },
             {
               categorie: 'Produit alimentaire',
-              precisionList: [
+              subcategories: [
                 'Date Limite de Consommation dépassée',
                 'Intoxication, corps étranger',
                 'Etiquetage non-conforme (absence ingrédients, des allergènes, de date limite, pas en langue française..)'

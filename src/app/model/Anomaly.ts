@@ -3,12 +3,12 @@ import { JsonProperty } from 'json-typescript-mapper';
 export class Precision {
   @JsonProperty('title')
   title: string;
-  @JsonProperty('description')
-  description?: string;
+  @JsonProperty('options')
+  options: string[];
 
   constructor() {
     this.title = undefined;
-    this.description = undefined;
+    this.options = undefined;
   }
 }
 
@@ -24,7 +24,23 @@ export class Information {
   }
 }
 
+export class Subcategory {
+  @JsonProperty('title')
+  title: string;
+  @JsonProperty('description')
+  description?: string;
+  @JsonProperty('information')
+  information?: Information;
+  @JsonProperty({ name: 'precision', clazz: Precision })
+  precision?: Precision;
 
+  constructor() {
+    this.title = undefined;
+    this.description = undefined;
+    this.information = undefined;
+    this.precision = undefined;
+  }
+}
 
 export class Anomaly {
   @JsonProperty('category')
@@ -37,8 +53,8 @@ export class Anomaly {
   icon?: string;
   @JsonProperty({ name: 'information', clazz: Information })
   information?: Information;
-  @JsonProperty({ name: 'precisionList', clazz: Precision })
-  precisionList?: Precision[];
+  @JsonProperty({ name: 'subcategories', clazz: Subcategory })
+  subcategories?: Subcategory[];
 
   constructor() {
     this.category = undefined;
@@ -46,37 +62,13 @@ export class Anomaly {
     this.rank = undefined;
     this.icon = undefined;
     this.information = undefined;
-    this.precisionList = undefined;
+    this.subcategories = undefined;
   }
 }
 
 export class AnomalyList {
   @JsonProperty({ name: 'list', clazz: Anomaly })
   list: Anomaly[];
-
-  constructor() {
-    this.list = undefined;
-  }
-}
-
-export class AnomalyInfo {
-  @JsonProperty('key')
-  key: string;
-  @JsonProperty('title')
-  title: string;
-  @JsonProperty('info')
-  info: string;
-
-  constructor() {
-    this.key = undefined;
-    this.title = undefined;
-    this.info = undefined;
-  }
-}
-
-export class AnomalyInfoList {
-  @JsonProperty({ name: 'list', clazz: AnomalyInfo })
-  list: AnomalyInfo[];
 
   constructor() {
     this.list = undefined;

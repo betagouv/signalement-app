@@ -22,25 +22,24 @@ export class AnalyticsService {
 }
 
 export enum EventCategories {
-  report = 'Formulaire de signalement',
+  report = 'Signalement',
   company = 'Identification de l\'établissement'
 }
 
 export enum ReportEventActions {
   information = 'Affichage d\'un message d\'information',
-  invalidForm = 'Formulaire non valide',
-  formSubmitted = 'Envoi d\'un signalement',
-  selectCompanyType = 'Sélection d\'un type d\'établissement',
-  selectAnomalyCategory = 'Sélection d\'un type d\'anomalie',
-  selectAnomalyPrecision = 'Sélection d\'une précision d\'anomalie',
-  addAnotherReport = 'Ajout d\'un autre signalement'
+  validateCategory = 'Sélection d\'une catégorie',
+  validateSubcategory = 'Sélection d\'une sous catégorie',
+  validateDetails = 'Validation de la description',
+  validateCompany = 'Validation de l\'établissement',
+  validateConsumer = 'Validation du consommateur',
+  validateConfirmation = 'Envoi d\'un signalement',
 }
 
 export enum CompanyEventActions {
   search = 'Recherche',
   select = 'Sélection dans la liste de résultats',
-  manualEntry = 'Saisie manuelle',
-  change = 'Changement d\'établissement'
+  manualEntry = 'Saisie manuelle'
 }
 
 export enum CompanySearchEventNames {

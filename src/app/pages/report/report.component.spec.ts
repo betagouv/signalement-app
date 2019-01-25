@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IntoxicationAlimentaire, ReportComponent, Step } from './report.component';
+import { ReportComponent, Step } from './report.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnomalyService } from '../../services/anomaly.service';
 import { Anomaly } from '../../model/Anomaly';
@@ -15,7 +15,7 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DetailsComponent } from './details/details.component';
 import { ConsumerComponent } from './consumer/consumer.component';
-import { PrecisionComponent } from './precision/precision.component';
+import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -35,26 +35,22 @@ describe('ReportComponent', () => {
   let anomalyService: AnomalyService;
   let reportService: ReportService;
 
-  const precisionList1 = [
+  const subcategories1 = [
     { title: 'title11', description: 'description11' },
     { title: 'title12', description: 'description12' },
   ];
-  const precisionList2 = [
+  const subcategories2 = [
     { title: 'title21', description: 'description21' },
     { title: 'title22', description: 'description22' },
     { title: 'title23', description: 'description23' },
   ];
-  const anomaly1 = deserialize(Anomaly, {category: 'category1', rank: '1', precisionList: precisionList1});
-  const anomaly2 = deserialize(Anomaly, {category: 'category2', rank: '2', precisionList: precisionList2});
-  const anomalyIntoxicationAlimentaire = deserialize(Anomaly, {category: IntoxicationAlimentaire, rank: '3', information: { title: 'Titre intox', content: 'contentIntox'}});
-
+  const anomaly1 = deserialize(Anomaly, {category: 'category1', rank: '1', subcategories: subcategories1});
+  const anomaly2 = deserialize(Anomaly, {category: 'category2', rank: '2', subcategories: subcategories2});
+  const anomalyIntoxicationAlimentaire = deserialize(
+    Anomaly,
+    { category: 'intoxication', rank: '3', information: { title: 'Titre intox', content: 'contentIntox' } }
+    );
   const anomaliesFixture = [anomaly1, anomaly2, anomalyIntoxicationAlimentaire];
-
-  const anomalyInfosFixture = [
-    { key: 'Etablissement hors périmètre', title: '', info: 'infoHP' },
-    { key: precisionList2[0], title: 'title220', info: 'info220' },
-    { key: precisionList2[2], title: 'title222', info: 'info222' },
-  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -65,7 +61,7 @@ describe('ReportComponent', () => {
         BreadcrumbComponent,
         DetailsComponent,
         ConsumerComponent,
-        PrecisionComponent,
+        SubcategoryComponent,
         ConfirmationComponent,
         PrecedeByPipe,
       ],
@@ -93,7 +89,6 @@ describe('ReportComponent', () => {
     anomalyService = TestBed.get(AnomalyService);
     reportService = TestBed.get(ReportService);
     spyOn(anomalyService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
-    spyOn(anomalyService, 'getAnomalyInfos').and.returnValue(of(anomalyInfosFixture));
   });
 
   it('should create', () => {
@@ -122,7 +117,7 @@ describe('ReportComponent', () => {
       expect(nativeElement.querySelectorAll('div.category').length).toEqual(anomaliesFixture.length);
     });
 
-    it('should initiate a report and route to precision step when an anomaly without information is clicked', () => {
+    it('should initiate a report and route to subcategory step when an anomaly without information is clicked', () => {
       component.step = Step.Category;
       component.anomalies = anomaliesFixture;
       fixture.detectChanges();
@@ -131,8 +126,8 @@ describe('ReportComponent', () => {
       nativeElement.querySelectorAll('div.category')[0].click();
 
       expect(component.report).not.toBeNull();
-      expect(component.report.anomalyCategory).toEqual(anomaly1.category);
-      expect(component.step).toEqual(Step.Precision);
+      expect(component.report.category).toEqual(anomaly1.category);
+      expect(component.step).toEqual(Step.Subcategory);
     });
 
     it('should display information when an anomaly with information is clicked', () => {

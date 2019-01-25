@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../../components/file-input/file-input.component';
 import { ReportDetails } from '../../../model/Report';
+import { Precision } from '../../../model/Anomaly';
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
@@ -79,6 +80,19 @@ describe('DetailsComponent', () => {
 
       expect(component.plageHoraireList).toBeDefined();
       expect(component.plageHoraireList.length).toBe(24);
+    });
+
+    it('sould display an input to select precision when a precision list is attached to the subcategory', () => {
+      const precision = new Precision();
+      precision.title = 'titre precision';
+      precision.options = ['option 1', 'option 2'];
+      component.precision = precision;
+
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelectorAll('input[formControlName="precision"]').length).toEqual(precision.options.length);
     });
 
   });

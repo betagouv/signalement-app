@@ -24,7 +24,7 @@ describe('BreadcrumbComponent', () => {
     component = fixture.componentInstance;
     component.step = Step.Category;
     component.report = new Report();
-    component.report.anomalyCategory = 'categorie'
+    component.report.category = 'categorie'
     fixture.detectChanges();
   });
 

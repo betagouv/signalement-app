@@ -7,6 +7,7 @@ import { Report, ReportDetails } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
 import { Company } from '../model/Company';
+import { Subcategory } from '../model/Anomaly';
 
 describe('ReportService', () => {
 
@@ -39,6 +40,8 @@ describe('ReportService', () => {
 
       const anomalyDate = new Date(2018, 2, 1);
       const anomalyFile = new File([], 'anomaly.jpg');
+      const subcategory = new Subcategory();
+      subcategory.title = 'sous catégorie';
       const reportDetails = new ReportDetails();
       reportDetails.description = 'desc';
       reportDetails.anomalyDate = anomalyDate;
@@ -49,11 +52,12 @@ describe('ReportService', () => {
       consumer.firstName = 'firstName';
       consumer.email = 'email@mail.fr';
       const company = new Company();
-      company.name = 'companyName'
-      company.line1 = 'line 1'
-      company.line2 = 'line 2'
-      company.line4 = 'line 4'
+      company.name = 'companyName';
+      company.line1 = 'line 1';
+      company.line2 = 'line 2';
+      company.line4 = 'line 4';
       const report = new Report();
+      report.subcategory = subcategory;
       report.details = reportDetails;
       report.consumer = consumer;
       report.company = company;
@@ -68,6 +72,7 @@ describe('ReportService', () => {
 
       httpMock.verify();
       expect(reportRequest.request.body.get('companyType')).toBe('Deprecated');
+      expect(reportRequest.request.body.get('anomalySubcategory')).toBe('sous catégorie');
       expect(reportRequest.request.body.get('companyName')).toBe('companyName');
       expect(reportRequest.request.body.get('companyAddress')).toBe('line 1 - line 2 - line 4');
       expect(reportRequest.request.body.get('description')).toBe('desc');

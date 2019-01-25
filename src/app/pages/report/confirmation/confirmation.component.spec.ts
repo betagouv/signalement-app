@@ -4,10 +4,11 @@ import { ConfirmationComponent } from './confirmation.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { Report, ReportDetails } from '../../../model/Report';
 import { Consumer } from '../../../model/Consumer';
 import { Company } from '../../../model/Company';
+import { PrecedeByPipe } from '../../../pipes/precede-by.pipe';
+import { Subcategory } from '../../../model/Anomaly';
 
 describe('ConfirmationComponent', () => {
   let component: ConfirmationComponent;
@@ -15,6 +16,8 @@ describe('ConfirmationComponent', () => {
 
   const anomalyDateFixture = new Date(2018, 2, 1);
   const anomalyFileFixture = new File([], 'anomaly.jpg');
+  const subcategory = new Subcategory();
+  subcategory.title = 'sous catégorie';
   const reportDetailsFixture = new ReportDetails();
   reportDetailsFixture.description = 'desc';
   reportDetailsFixture.anomalyDate = anomalyDateFixture;
@@ -30,6 +33,8 @@ describe('ConfirmationComponent', () => {
   companyFixture.line2 = 'line 2'
   companyFixture.line4 = 'line 4'
   const reportFixture = new Report();
+  reportFixture.category = 'categorie'
+  reportFixture.subcategory = subcategory;
   reportFixture.details = reportDetailsFixture;
   reportFixture.consumer = consumerFixture;
   reportFixture.company = companyFixture;
@@ -38,13 +43,13 @@ describe('ConfirmationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ConfirmationComponent,
+        PrecedeByPipe,
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         NgxLoadingModule,
-        Angulartics2RouterlessModule.forRoot(),
       ]
     })
     .compileComponents();

@@ -2,6 +2,21 @@
   <div class="container">
 
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm">
+
+      <div class="form__group" *ngIf="precision">
+        <label>
+          {{precision.title}}
+        </label>
+        <div class="row pb-2 pl-3" *ngFor="let option of precision.options">
+          <div class="col-1 text-right pr-1">
+            <input type="radio" formControlName="precision" [value]="option" />
+          </div>
+          <div class="col-11 pl-1">
+            <label class="d-block mb-0">{{option}}</label>
+          </div>
+        </div>
+      </div>
+
       <div class="form__group">
         <label>
           Description du problème
@@ -55,8 +70,13 @@
           </div>
         </div>
       </div>
-      <div class="notification error" *ngIf="showErrors && anomalyDateCtrl.hasError('required')">
-        Veuillez renseigner la date du constat.
+      <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
+        <span *ngIf="anomalyDateCtrl.hasError('required')">
+          Veuillez renseigner la date du constat.<br />
+        </span>
+        <span *ngIf="precisionCtrl.hasError('required')">
+          Veuillez précisez.
+        </span>
       </div>
       <hr />
       <button type="submit" class="btn btn-lg btn-primary">

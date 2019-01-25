@@ -2,12 +2,12 @@
   <div class="container">
     <img src="/assets/images/icon_back.png" class="back pointer" (click)="back.emit()"/>
     <div>
-      <h4>Vous avez identifié un problème {{report.anomalyCategory | precedeBy : 'de' : 'd\''}}</h4>
-      <span class="note" *ngIf="report.anomalyPrecision">
-        {{report.anomalyPrecision}}
+      <h4>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h4>
+      <span class="note" *ngIf="report.subcategory">
+        {{report.subcategory.title}}
       </span>
       <p class="steps">
-        <span class="{{getStepClass('Precision')}}">L'incident</span>
+        <span class="{{getStepClass('Subcategory')}}">L'incident</span>
         &nbsp;>&nbsp;
         <span class="{{getStepClass('Description')}}">La description</span>
         &nbsp;>&nbsp;
