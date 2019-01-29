@@ -2,10 +2,10 @@
   <div class="container">
     <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm">
       <div class="row pb-4" *ngFor="let subcategory of anomalySubcategories">
-        <div class="col-1 text-right pr-1">
+        <div class="col-2 col-sm-1 text-right pr-1">
           <input type="radio" formControlName="anomalySubcategory" [value]="subcategory.title" id="radio-{{subcategory.title}}"/>
         </div>
-        <div class="col-11 pl-1">
+        <div class="col-10 col-sm-11 pl-1">
           <label class="d-block mb-0" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
           <span class="note">{{subcategory.description}}</span>
         </div>
