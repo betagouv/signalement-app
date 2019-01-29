@@ -1,19 +1,36 @@
 <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
+
   <div class="form__group">
     <label for="searchInput">
-      Veuillez rechercher l'établissement (nom, type, adresse, ville, ...) <span>*</span>
+      Veuillez rechercher l'établissement par son nom ou son enseigne <span>*</span>
     </label>
-    <div class="input-group">
-      <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean Orléans ..." />
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-secondary d-sm-none"><svg class="icon icon-search"><use xlink:href="#magnifier"></use></svg></button>
-        <button type="submit" class="btn btn-secondary d-none d-sm-block">Rechercher</button>
-      </div>
-    </div>
+    <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
     <div class="invalid" *ngIf="showErrors && searchCtrl.hasError('required')">
-      Veuillez renseigner le champ de recherche.
+      Veuillez renseigner le nom de l'établissement.
     </div>
   </div>
+
+  <div class="form__group">
+    <label for="searchPostalCodeInput">
+      Code postal <span>*</span>
+    </label>
+    <div class="row">
+      <div class="col-12 col-sm-6">
+        <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 75001" />
+      </div>
+    </div>
+    <div class="invalid" *ngIf="showErrors && searchPostalCodeCtrl.hasError('required')">
+      Veuillez renseigner le code postal.
+    </div>
+    <div class="invalid" *ngIf="showErrors && searchPostalCodeCtrl.hasError('pattern')">
+      Le code postal doit être composé de 5 chiffres.
+    </div>
+  </div>
+
+  <div class="text-center mt-3">
+    <button class="button secondary" type="submit" id="submitCompanySearch">Rechercher</button>
+  </div>
+
 </form>
 
 <div class="notification error mt-4" *ngIf="searchWarning">
