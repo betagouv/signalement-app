@@ -4,6 +4,7 @@ import { SubcategoryComponent } from './subcategory.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subcategory } from '../../../model/Anomaly';
 import { deserialize } from 'json-typescript-mapper';
+import { TruncatePipe } from '../../../pipes/truncate.pipe';
 
 describe('SubcategoryComponent', () => {
   let component: SubcategoryComponent;
@@ -19,6 +20,7 @@ describe('SubcategoryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SubcategoryComponent,
+        TruncatePipe,
       ],
       imports: [
         FormsModule,

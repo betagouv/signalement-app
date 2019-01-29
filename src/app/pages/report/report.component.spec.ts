@@ -20,6 +20,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 
 describe('ReportComponent', () => {
@@ -64,6 +65,7 @@ describe('ReportComponent', () => {
         SubcategoryComponent,
         ConfirmationComponent,
         PrecedeByPipe,
+        TruncatePipe,
       ],
       imports: [
         FormsModule,
@@ -152,8 +154,9 @@ describe('ReportComponent', () => {
       nativeElement.querySelectorAll('div.category')[2].click();
       fixture.detectChanges();
 
-      expect(component.report).toBeUndefined();
-      expect(nativeElement.querySelector('h1').textContent).toEqual(anomalyIntoxicationAlimentaire.information.title);
+      expect(component.report).not.toBeNull();
+      expect(component.report.category).toEqual(anomalyIntoxicationAlimentaire.category);
+      expect(nativeElement.querySelectorAll('h4')[1].textContent).toEqual(anomalyIntoxicationAlimentaire.information.title);
     });
 
   });

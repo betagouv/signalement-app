@@ -40,7 +40,6 @@ export class Subcategory {
     this.description = undefined;
     this.information = undefined;
     this.precision = undefined;
-    this.fullDescriptionDisplayed = false;
   }
 }
 
