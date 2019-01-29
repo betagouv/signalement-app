@@ -10,7 +10,7 @@
           <span class="note" *ngIf="report.subcategory">
             {{report.subcategory.title}}
           </span>
-          <p class="steps">
+          <p class="steps" *ngIf="step !== 'Information'">
             <span class="d-sm-none">
               &nbsp;>&nbsp;
             </span>

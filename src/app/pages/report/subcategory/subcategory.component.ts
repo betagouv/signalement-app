@@ -45,4 +45,12 @@ export class SubcategoryComponent implements OnInit {
       );
     }
   }
+
+  isTruncable(text: string) {
+    return text && text.length > 100;
+  }
+
+  reverseDescriptionDisplay(subcategory: Subcategory) {
+    subcategory.fullDescriptionDisplayed = !subcategory.fullDescriptionDisplayed;
+  }
 }

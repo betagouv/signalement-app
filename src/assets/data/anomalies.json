@@ -25,7 +25,7 @@
         {
           "title": "Personnel sans coiffe ou sans gants",
           "information": {
-            "title": "Cet incident ne rentre pas dans le périmètre de l'outil signalement.",
+            "title": "Cet incident ne constitue pas un motif de signalement.",
             "content": "Il n'existe pas d'obligation réglementaire imposant le port de la coiffe (charlotte) ou des gants.<br />Le lavage des mains peut être suffisant pour éviter les contaminations."
           }
         },
@@ -95,17 +95,17 @@
         {
           "title": "Produit pas bon, de mauvaise qualité",
           "information": {
-            "title": "Cet incident ne rentre pas dans le périmètre de l'outil signalement.",
-            "content": "<h5>Au restaurant</h5><p>Vous pouvez demander que l'on remplace un plat si vous estimez que le plat qui vous a été proposé n’est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\".<br />En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat. S'il vous oppose un refus, vous serez tenu néanmoins de payer la note.</p><h5>Produit acheté en magasin</h5>Vous pouvez contacter le service client (généralement indiqué sur l'emballage) sinon contactez directement le commerçant afin de lui faire part de votre avis voir mécontentement.</p>"
+            "title": "Cet incident ne constitue pas un motif de signalement.",
+            "content": "<h5>Au restaurant</h5><p>Vous pouvez demander que l'on remplace un plat si vous estimez que le plat qui vous a été proposé n'est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\".<br />En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat. S'il vous oppose un refus, vous serez tenu néanmoins de payer la note.</p><h5>Produit acheté en magasin</h5>Vous pouvez contacter le service client (généralement indiqué sur l'emballage) sinon contactez directement le commerçant afin de lui faire part de votre avis voir mécontentement.</p>"
           }
         },
         {
           "title": "Problème sur l'étiquette / emballage",
-          "description": "Liste des ingrédients non disponible,mention des allergènes non conforme, logo trompeur...",
+          "description": "Liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...",
           "precision": {
             "title": "Veuillez préciser :",
             "options": [
-              "Pas d’étiquetage ou informations absentes",
+              "Pas d'étiquetage ou informations absentes",
               "Étiquetage uniquement en langue étrangère (aucune information traduite en français)",
               "Informations/mentions trompeuses",
               "Autre"
@@ -175,7 +175,7 @@
     },
     {
       "category": "Intoxication alimentaire",
-      "description": "Au moins deux personnes ayant eu des maux de ventre, diarrhées et vomissements suite à l’ingestion d'un aliment",
+      "description": "Au moins deux personnes ayant eu des maux de ventre, diarrhées et vomissements suite à l'ingestion d'un aliment",
       "rank" : 4,
       "icon": "icon_disease.png",
       "information": {
@@ -192,20 +192,18 @@
       "subcategories": [
         {
           "title": "Absence de prix",
-          "description": "pas d'affichage de prix en rayon ou en vitrine, pas de carte des prix dans le bar..."
+          "description": "Pas d'affichage de prix en rayon ou en vitrine, pas de carte des prix dans le bar..."
         },
         {
           "title": "Prix trop cher",
+          "description": "Les prix sont fixés librement par les professionnels. En contrepartie, les professionnels sont tenus de vous informer sur les prix pratiqués (comme un affichage ou une étiquette). Par exemple, il est autorisé de vendre un verre de soda à 100 euros dans un bar si le prix est bien indiqué sur la carte.<br /><br />Si les prix sont libres, un professionnel ne peut toutefois abuser d'une situation pour pratiquer des prix prohibitifs. Par exemple, un serrurier, qui vous demande une somme exorbitante en situation d'urgence sans vous avoir averti avant. Dans ce cas là, vous pouvez porter plainte ici (renvoi SVE)"
+        },
+        {
+          "title": "Prix différent de celui affiché",
           "information": {
-            "title": "Cet incident ne rentre pas dans le périmètre de l'outil signalement.",
-            "content": "Les prix sont fixés librement par les professionnels. En contrepartie, les professionnels sont tenus de vous informer sur les prix pratiqués (comme un affichage ou une étiquette).<br />Par exemple, il est autorisé de vendre un verre de soda à 100 euros dans un bar si le prix est bien indiqué sur la carte.<br /><br />Si les prix sont libres, un professionnel ne peut toutefois abuser d’une situation pour pratiquer des prix prohibitifs. Par exemple, un serrurier, qui vous demande une somme exorbitante en situation d'urgence sans vous avoir averti avant."
+            "title": "Cet incident ne constitue pas un motif de signalement.",
+            "content": "S'il y a une erreur de prix, le vendeur doit vendre le produit au prix le plus avantageux pour le client. Par exemple, le vendeur doit prendre le prix le plus faible lorsque le produit passe en caisse à un prix supérieur que celui en rayon.<br /><br />Par contre, ce principe ne s'applique pas lors d'une erreur de prix manifeste, c'est-à-dire une erreur de prix tellement énorme que le client se doute de l'erreur (ex: une voiture neuve affichée à 500 euros, un meuble affiché à 0 euros...)."
           }
-        },
-        {
-          "title": "Prix abusivement bas"
-        },
-        {
-          "title": "Prix différent de celui affiché"
         },
         {
           "title": "Fausse réduction de prix",
@@ -221,7 +219,12 @@
           }
         },
         {
-          "title": "Refus d'un moyen de paiement"
+          "title": "Refus de payer en espèces",
+          "description": "Il est interdit de refuser un paiement en espèces SAUF si le vendeur ne dispose pas suffisamment de monnaie. C'est à l'acheteur de faire l'appoint SAUF si le montant dépasse 1 000 euros.<br /><br />Le problème concerne un commerçant qui refuse les paiements en espèces malgré l'appoint ? Vous pouvez le signaler."
+        },
+        {
+          "title": "Refus de payer par CB / chèque",
+          "description": "Le commerçant peut refuser d'être payé par chèque ou carte bleue. Par contre il doit l'indiquer préalablement et très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant..). <br /><br />Bon à savoir : le vendeur a le droit de demander une pièce d'identité ou un montant minimum pour ce type de paiement.<br /><br />Le commerçant n'avait pas indiqué qu'il refusait les chèques ou les CB ? Le commerçant a indiqué avec un logo qu'il acceptait la carte bleue mais finalement n'a pas voulu l'accepter ? Vous pouvez faire un signalement."
         },
         {
           "title": "Frais facturés injustifiés",
@@ -247,8 +250,8 @@
       ]
     },
     {
-      "category": "Accueil / Services",
-      "description": "Problème de garantie constructeur, hotline injoignable, colis non reçu...",
+      "category": "Services associés à l'achat",
+      "description": "Colis non reçu, problème de garantie constructeur, hotline injoignable,...",
       "rank" : 7,
       "icon": "icon_service.png",
       "subcategories": [
@@ -257,16 +260,41 @@
           "description": "Le SAV est inexistant, aucun retour du SAV malgré mes relances..."
         },
         {
+          "title": "Colis endommagé",
+          "information": {
+            "title": "Cet incident ne constitue pas un motif de signalement.",
+            "content": "Si, au moment de la vérification, la commande n'est pas conforme ou qu'elle a été endommagée pendant le transport, il faut la refuser et surtout porter ses réserves sur le bon de livraison (\"colis déchiré dans les angles\"..). Il est conseillé de prendre des photos du colis ou du produit endommagé. <br /><br />Il vous faut ensuite prévenir rapidement le vendeur du problème. Vous n'avez pas à régler les frais de retour ni les frais d'envoi d'un autre produit conforme."
+          }
+        },
+        {
           "title": "Problème de livraison",
-          "description": "Colis perdu et non reçu, livraison tardive..."
+          "description": "Colis perdu et non reçu, livraison tardive...",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Colis non reçu",
+              "Livraison tardive"
+            ]
+          }
         },
         {
           "title": "Refus de reprendre un produit sous garantie",
-          "description": "Le commerçant refuse de me prendre mon achat encore sous garantie"
+          "description": "Le commerçant refuse de me prendre mon achat encore sous garantie",
+          "precision": {
+            "title": "Veuillez préciser :",
+            "options": [
+              "Mon achat remonte à plus de 2 ans",
+              "Mon achat a moins de 2 ans"
+            ]
+          }
         },
         {
           "title": "Personnel peu aimable",
-          "description": "L’accueil est froid, le personnel est mal poli"
+          "description": "L'accueil est froid, le personnel est mal poli",
+          "information": {
+            "title": "Ceci ne constitue pas un motif de signalement.",
+            "content": "Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client ! <br />Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.<br /><br />Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne via ce lien : <a href=\"https://www.pre-plainte-en-ligne.gouv.fr\" target=\"_blank\">https://www.pre-plainte-en-ligne.gouv.fr</a>"
+          }
         },
         {
           "title": "Autre"
@@ -282,12 +310,12 @@
       "rank" : 101
     },
     {
-      "category": "Dénomination des menus",
+      "category": "Service du vin",
       "rank" : 102
     },
     {
-      "category": "Autre",
-      "rank" : 103
+      "category": "Dénomination des menus",
+      "rank" : 102
     }
   ]
 }

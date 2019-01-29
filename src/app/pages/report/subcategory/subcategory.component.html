@@ -7,7 +7,17 @@
         </div>
         <div class="col-10 col-sm-11 pl-1">
           <label class="d-block mb-0" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
-          <span class="note">{{subcategory.description}}</span>
+          <span class="note" [innerHTML]="subcategory.description" *ngIf="!isTruncable(subcategory.description); else truncableDescription"></span>
+          <ng-template #truncableDescription>
+            <ng-container *ngIf="subcategory.fullDescriptionDisplayed; else truncatedDescription">
+              <span class="note" [innerHTML]="subcategory.description"></span>
+              <span class="pointer link" (click)="reverseDescriptionDisplay(subcategory)"><br />masquer</span>
+            </ng-container>
+            <ng-template #truncatedDescription>
+              <span class="note" [innerHTML]="subcategory.description | truncate : 100 : true"></span>
+              <span class="pointer link" (click)="reverseDescriptionDisplay(subcategory)"><br />lire la suite</span>
+            </ng-template>
+          </ng-template>
         </div>
       </div>
       <div class="notification error" *ngIf="showErrors && anomalySubcategoryCtrl.hasError('required')">

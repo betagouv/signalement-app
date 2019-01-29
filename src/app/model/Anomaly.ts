@@ -29,6 +29,7 @@ export class Subcategory {
   title: string;
   @JsonProperty('description')
   description?: string;
+  fullDescriptionDisplayed?: boolean;
   @JsonProperty('information')
   information?: Information;
   @JsonProperty({ name: 'precision', clazz: Precision })
@@ -39,6 +40,7 @@ export class Subcategory {
     this.description = undefined;
     this.information = undefined;
     this.precision = undefined;
+    this.fullDescriptionDisplayed = false;
   }
 }
 

@@ -68,11 +68,11 @@ export class ReportComponent implements OnInit {
 
   selectAnomaly(anomaly: Anomaly) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
+    this.report = new Report();
+    this.report.category = anomaly.category;
     if (anomaly.information) {
       this.displayInformation(anomaly.information);
     } else {
-      this.report = new Report();
-      this.report.category = anomaly.category;
       this.stepForward();
     }
   }
@@ -91,10 +91,10 @@ export class ReportComponent implements OnInit {
 
   onSubcategoryValidate(subcategory: Subcategory) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, subcategory.title);
+    this.report.subcategory = subcategory;
     if (subcategory.information) {
       this.displayInformation(subcategory.information);
     } else {
-      this.report.subcategory = subcategory;
       this.stepForward();
     }
   }
@@ -158,6 +158,10 @@ export class ReportComponent implements OnInit {
   stepBackward() {
     switch (this.step) {
       case Step.Subcategory:
+        this.report.subcategory = null;
+        this.step = Step.Category;
+        break;
+      case Step.Information:
         this.report.subcategory = null;
         this.step = Step.Category;
         break;

@@ -26,6 +26,7 @@ import { ConsumerComponent } from './pages/report/consumer/consumer.component';
 import { ConfirmationComponent } from './pages/report/confirmation/confirmation.component';
 import { SubcategoryComponent } from './pages/report/subcategory/subcategory.component';
 import { PrecedeByPipe } from './pipes/precede-by.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 defineLocale('fr', frLocale);
 
@@ -45,6 +46,7 @@ defineLocale('fr', frLocale);
     ConfirmationComponent,
     SubcategoryComponent,
     PrecedeByPipe,
+    TruncatePipe,
   ],
   imports: [
     CommonModule,
