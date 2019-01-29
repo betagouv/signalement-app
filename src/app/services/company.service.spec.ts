@@ -167,7 +167,6 @@ describe('CompanyService', () => {
         'geo_adresse': 'Rue du Docteur Robert Pascaud 87270 Couzeix'
       }
     ],
-    'spellcheck': null,
-    'suggestions': []
+    'spellcheck': null
   };
 });
