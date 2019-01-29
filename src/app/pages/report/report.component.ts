@@ -81,6 +81,7 @@ export class ReportComponent implements OnInit {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.information, information.title);
     this.informationToDisplay = information;
     this.step = Step.Information;
+    this.stepForward();
   }
 
   getSubcategories() {
@@ -127,6 +128,9 @@ export class ReportComponent implements OnInit {
   }
 
   stepForward() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0, 0);
+    }
     switch (this.step) {
       case Step.Category:
         if (this.getSubcategories() && this.getSubcategories().length) {
