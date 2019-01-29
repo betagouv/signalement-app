@@ -42,12 +42,12 @@ describe('AnomalyService', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
-  it('should be created', () => {
+  /*it('should be created', () => {
     const service: AnomalyService = TestBed.get(AnomalyService);
     expect(service).toBeTruthy();
   });
   
-  /*describe('getAnomalies function', () => {
+  describe('getAnomalies function', () => {
 
     it('should load anomalies from a Json file and return an array of Anomaly', () => {
       anomalyService.getAnomalies().subscribe(
