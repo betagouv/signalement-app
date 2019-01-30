@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../../components/file-input/file-input.component';
 import { ReportDetails } from '../../../model/Report';
-import { Precision } from '../../../model/Anomaly';
+import { Precision, SubcategoryDetails } from '../../../model/Anomaly';
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
@@ -71,7 +71,8 @@ describe('DetailsComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('textarea[formControlName="description"]').value).toEqual(reportDetailsFixture.description);
-      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual(reportDetailsFixture.anomalyDate.toLocaleDateString('fr'));
+      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value)
+        .toEqual(reportDetailsFixture.anomalyDate.toLocaleDateString('fr'));
       expect(nativeElement.querySelector('select').value).toEqual(reportDetailsFixture.anomalyTimeSlot.toString());
     });
 
@@ -85,8 +86,10 @@ describe('DetailsComponent', () => {
     it('sould display an input to select precision when a precision list is attached to the subcategory', () => {
       const precision = new Precision();
       precision.title = 'titre precision';
-      precision.options = ['option 1', 'option 2'];
-      component.precision = precision;
+      precision.options = [ {title: 'option 1'}, { title: 'option 2'}];
+      const subcategoryDetails = new SubcategoryDetails();
+      subcategoryDetails.precision = precision;
+      component.subcategoryDetails = subcategoryDetails;
 
       component.ngOnInit();
       fixture.detectChanges();

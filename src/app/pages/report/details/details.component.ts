@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { Precision } from '../../../model/Anomaly';
+import { SubcategoryDetails } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-details',
@@ -12,7 +12,7 @@ import { Precision } from '../../../model/Anomaly';
 export class DetailsComponent implements OnInit {
 
   @Input() initialValue: ReportDetails;
-  @Input() precision: Precision;
+  @Input() subcategoryDetails: SubcategoryDetails;
 
   detailsForm: FormGroup;
   precisionCtrl: FormControl;
@@ -51,7 +51,7 @@ export class DetailsComponent implements OnInit {
       description: this.descriptionCtrl
     });
 
-    if (this.precision) {
+    if (this.subcategoryDetails && this.subcategoryDetails.precision) {
       this.detailsForm.addControl('precision', this.precisionCtrl);
     }
 

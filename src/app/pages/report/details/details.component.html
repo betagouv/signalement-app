@@ -3,16 +3,17 @@
 
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm">
 
-      <div class="form__group" *ngIf="precision">
+      <div class="form__group" *ngIf="subcategoryDetails?.precision">
         <label>
-          {{precision.title}}
+          {{subcategoryDetails.precision.title}}
         </label>
-        <div class="row pb-2 pl-3" *ngFor="let option of precision.options">
+        <div class="row pb-2 pl-3" *ngFor="let option of subcategoryDetails.precision.options">
           <div class="col-2 col-sm-1 text-right pr-1">
-            <input type="radio" formControlName="precision" [value]="option" id="radio-{{option}}"/>
+            <input type="radio" formControlName="precision" [value]="option" id="radio-{{option.title"/>
           </div>
           <div class="col-10 col-sm-11 pl-1">
-            <label class="d-block mb-0" for="radio-{{option}}">{{option}}</label>
+            <label class="d-block mb-0" for="radio-{{option.title">{{option.title}}</label>
+            <span class="note" [innerHTML]="option.content"></span>
           </div>
         </div>
       </div>
@@ -21,10 +22,12 @@
         <label>
           Description du problème
         </label>
+        <br />
+        <span class="note" [innerHTML]="subcategoryDetails?.descriptionTips"></span>
         <textarea formControlName="description"
                   rows="3"
-                  maxlength="200"
-                  placeholder="200 caractères maximum">
+                  maxlength="500"
+                  placeholder="500 caractères maximum">
                 </textarea>
       </div>
 

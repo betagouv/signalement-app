@@ -1,16 +1,5 @@
 import { JsonProperty } from 'json-typescript-mapper';
 
-export class Precision {
-  @JsonProperty('title')
-  title: string;
-  @JsonProperty('options')
-  options: string[];
-
-  constructor() {
-    this.title = undefined;
-    this.options = undefined;
-  }
-}
 
 export class Information {
   @JsonProperty('title')
@@ -24,22 +13,46 @@ export class Information {
   }
 }
 
+export class Precision {
+  @JsonProperty('title')
+  title: string;
+  @JsonProperty({ name: 'options', clazz: Information })
+  options: Information[];
+
+  constructor() {
+    this.title = undefined;
+    this.options = undefined;
+  }
+}
+
+export class SubcategoryDetails {
+  @JsonProperty('descriptionTips')
+  descriptionTips?: string;
+  @JsonProperty({ name: 'precision', clazz: Precision })
+  precision?: Precision;
+
+  constructor() {
+    this.descriptionTips = undefined;
+    this.precision = undefined;
+  }
+}
+
 export class Subcategory {
   @JsonProperty('title')
   title: string;
   @JsonProperty('description')
   description?: string;
+  @JsonProperty({ name: 'details', clazz: SubcategoryDetails })
+  details?: SubcategoryDetails;
   fullDescriptionDisplayed?: boolean;
   @JsonProperty('information')
   information?: Information;
-  @JsonProperty({ name: 'precision', clazz: Precision })
-  precision?: Precision;
 
   constructor() {
     this.title = undefined;
     this.description = undefined;
     this.information = undefined;
-    this.precision = undefined;
+    this.details = undefined;
   }
 }
 

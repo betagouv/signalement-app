@@ -122,7 +122,7 @@
     <app-breadcrumb [step]="step" [report]="report" (back)="stepBackward()"></app-breadcrumb>
     <app-details
       [initialValue]="report.details"
-      [precision]="report.subcategory?.precision"
+      [subcategoryDetails]="report.subcategory?.details"
       (validate)="onDetailsValidate($event)">
     </app-details>
   </main>
