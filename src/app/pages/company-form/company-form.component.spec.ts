@@ -60,6 +60,7 @@ describe('CompanyFormComponent', () => {
     const nativeElement = fixture.nativeElement;
     expect(component.searchForm).toBeDefined();
     expect(component.searchForm.controls['search']).toBeDefined();
+    expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
     expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
     expect(nativeElement.querySelector('form#companyForm')).toBeNull();
   });
@@ -68,6 +69,7 @@ describe('CompanyFormComponent', () => {
 
     beforeEach(() => {
       component.searchCtrl.setValue('Mon entreprise dans ma ville');
+      component.searchPostalCodeCtrl.setValue('87270');
     });
 
     it('should initialize previous results', () => {

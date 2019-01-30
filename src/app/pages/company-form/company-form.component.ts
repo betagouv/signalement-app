@@ -15,6 +15,7 @@ export class CompanyFormComponent implements OnInit {
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
+  searchPostalCodeCtrl: FormControl;
 
   companyForm: FormGroup;
   nameCtrl: FormControl;
@@ -44,8 +45,10 @@ export class CompanyFormComponent implements OnInit {
 
   initSearchForm() {
     this.searchCtrl = this.formBuilder.control('', Validators.required);
+    this.searchPostalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
     this.searchForm = this.formBuilder.group({
       search: this.searchCtrl,
+      searchPostalCode: this.searchPostalCodeCtrl
     });
     this.suggestionData = this.companyService.suggestionData;
   }
@@ -74,8 +77,8 @@ export class CompanyFormComponent implements OnInit {
     } else {
       this.initSearch();
       this.loading = true;
-      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, this.searchCtrl.value);
-      this.companyService.searchCompanies(this.searchCtrl.value).subscribe(
+      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, this.searchCtrl.value + " " + this.searchPostalCodeCtrl.value);
+      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
         companySearchResult => {
           this.loading = false;
           if (companySearchResult.total === 0) {
