@@ -116,12 +116,14 @@ describe('DetailsComponent', () => {
     it ('should emit and event with a company which contains form inputs when no errors', (done) => {
 
       component.descriptionCtrl.setValue('Description');
+      component.precisionCtrl.setValue('precision');
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
       component.anomalyFile = anomalyFileFixture;
 
       const detailsExpected = new ReportDetails();
       detailsExpected.description = 'Description';
+      detailsExpected.precision = 'precision';
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
       detailsExpected.ticketFile = undefined;

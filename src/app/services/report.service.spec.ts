@@ -43,6 +43,7 @@ describe('ReportService', () => {
       const subcategory = new Subcategory();
       subcategory.title = 'sous catégorie';
       const reportDetails = new ReportDetails();
+      reportDetails.precision = 'precision';
       reportDetails.description = 'desc';
       reportDetails.anomalyDate = anomalyDate;
       reportDetails.anomalyTimeSlot = 5;
@@ -57,6 +58,7 @@ describe('ReportService', () => {
       company.line2 = 'line 2';
       company.line4 = 'line 4';
       const report = new Report();
+      report.category = 'category';
       report.subcategory = subcategory;
       report.details = reportDetails;
       report.consumer = consumer;
@@ -71,8 +73,9 @@ describe('ReportService', () => {
       reportRequest.flush({});
 
       httpMock.verify();
-      expect(reportRequest.request.body.get('companyType')).toBe('Deprecated');
-      expect(reportRequest.request.body.get('anomalySubcategory')).toBe('sous catégorie');
+      expect(reportRequest.request.body.get('category')).toBe('category');
+      expect(reportRequest.request.body.get('subcategory')).toBe('sous catégorie');
+      expect(reportRequest.request.body.get('precision')).toBe('precision');
       expect(reportRequest.request.body.get('companyName')).toBe('companyName');
       expect(reportRequest.request.body.get('companyAddress')).toBe('line 1 - line 2 - line 4');
       expect(reportRequest.request.body.get('description')).toBe('desc');
