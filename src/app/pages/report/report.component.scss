@@ -12,11 +12,24 @@
   box-shadow: 0 1px 2px rgba(201, 211, 223, .2);
   padding: 1em;
   border: 1px solid $light-grey;
-  margin: 1em;
+  margin: 1em 0;
   height: calc(100% - 32px);
+  transition: all .2s ease-in-out;
+
+  @media #{$larger-than-tablet} {
+    &:hover {
+      transform: scale(1.1);
+      border-color: $blue;
+    }
+  }
+  @media #{$smaller-than-tablet} {
+    &:active {
+      border-color: $blue;
+    }
+  }
 
   img {
-    height: 32px;
+    height: 40px;
   }
 }
 
