@@ -21,8 +21,9 @@ export class CompanyService {
     this._suggestionData = new SuggestionData(this.http, this.serviceUtils);
   }
 
-  searchCompanies(search: string) {
+  searchCompanies(search: string, searchPostalCode: string) {
     let httpParams = new HttpParams();
+    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
       this.serviceUtils.getUrl(Api.Reporting, ['api', 'companies', search]),
