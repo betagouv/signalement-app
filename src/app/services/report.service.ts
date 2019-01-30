@@ -25,15 +25,19 @@ export class ReportService {
   private generateReportFormData(report: Report) {
 
     const reportFormData: FormData = new FormData();
-    reportFormData.append('companyType', 'Deprecated'); //TODO à supprimer
-    reportFormData.append('anomalyCategory', report.category);
+    reportFormData.append('category', report.category);
     if (report.subcategory) {
-      reportFormData.append('anomalySubcategory', report.subcategory.title);
+      reportFormData.append('subcategory', report.subcategory.title);
+    }
+    if (report.details.precision) {
+      reportFormData.append('precision', report.details.precision);
     }
     reportFormData.append('companyName', report.company.name);
     reportFormData.append('companyAddress', this.getCompanyAddress(report.company));
     reportFormData.append('companyPostalCode', report.company.postalCode);
-    reportFormData.append('companySiret', report.company.siret);
+    if (report.company.siret) {
+      reportFormData.append('companySiret', report.company.siret);
+    }
     reportFormData.append('anomalyDate', moment(report.details.anomalyDate).format('YYYY-MM-DD'));
     if (report.details.anomalyTimeSlot) {
       reportFormData.append('anomalyTimeSlot', report.details.anomalyTimeSlot.toString());

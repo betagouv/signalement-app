@@ -103,6 +103,7 @@ export class ReportComponent implements OnInit {
   onDetailsValidate(details: ReportDetails) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
     this.report.details = details;
+    console.log('this.report.details', this.report.details)
     this.stepForward();
   }
 

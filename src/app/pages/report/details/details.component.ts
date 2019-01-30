@@ -77,6 +77,7 @@ export class DetailsComponent implements OnInit {
       this.showErrors = true;
     } else {
       const reportDetails = new ReportDetails();
+      reportDetails.precision = this.precisionCtrl.value;
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
