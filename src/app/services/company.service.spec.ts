@@ -33,8 +33,9 @@ describe('CompanyService', () => {
   it('should map the result into a CompanySearchResult object', (done) => {
 
     const search = 'recherche';
+    const searchPostalCode = '87270';
 
-    companyService.searchCompanies(search).subscribe(companySearchResult => {
+    companyService.searchCompanies(search, searchPostalCode).subscribe(companySearchResult => {
       expect(companySearchResult.total).toEqual(2);
       expect(companySearchResult.companies.length).toEqual(2);
       expect(companySearchResult.companies[0]).toEqual(deserialize(Company, {
@@ -54,7 +55,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
     companiesRequest.flush(result);
 
   });
@@ -62,13 +63,14 @@ describe('CompanyService', () => {
   it('should catch error with status 404 and return a CompanySearchResult object', (done) => {
 
     const search = 'recherche';
+    const searchPostalCode = '87270';
 
-    companyService.searchCompanies(search).subscribe(companySearchResult => {
+    companyService.searchCompanies(search, searchPostalCode).subscribe(companySearchResult => {
       expect(companySearchResult.total).toEqual(0);
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
     companiesRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
   });
 

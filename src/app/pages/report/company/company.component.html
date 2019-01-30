@@ -2,11 +2,31 @@
   <div class="container">
     <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
       <div class="form__group">
-        <label for="searchInput">Veuillez rechercher l'établissement (nom, type, adresse, ville, ...)</label>
-        <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean Orléans ..." />
+        <label for="searchInput">Nomo ou enseigne de l'établissement <span>*</span>
+        </label>
+        <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
       </div>
-      <div class="notification error mt-3" *ngIf="showErrors && searchCtrl.hasError('required')">
-        Veuillez renseigner le champs de recherche.
+
+      <div class="form__group">
+        <label for="searchPostalCodeInput">
+          Code postal <span>*</span>
+        </label>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 75001" />
+          </div>
+        </div>
+      </div>
+      <div class="notification error mt-3" *ngIf="showErrors && searchForm.invalid">
+        <span *ngIf="searchCtrl.hasError('required')">
+          Veuillez renseigner le nom de l'établissement.<br />
+        </span>
+        <span *ngIf="searchPostalCodeCtrl.hasError('required')">
+          Veuillez renseigner le code postal.
+        </span>
+        <span *ngIf="searchPostalCodeCtrl.hasError('pattern')">
+          Le code postal doit être composé de 5 chiffres.
+        </span>
       </div>
       <div class="text-center mt-3">
         <button type="submit" class="btn btn-lg btn-primary">Rechercher</button>

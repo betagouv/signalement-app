@@ -17,8 +17,9 @@ export class CompanyService {
               private serviceUtils: ServiceUtils) {
   }
 
-  searchCompanies(search: string) {
+  searchCompanies(search: string, searchPostalCode: string) {
     let httpParams = new HttpParams();
+    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
       this.serviceUtils.getUrl(Api.Report, ['api', 'companies', search]),
