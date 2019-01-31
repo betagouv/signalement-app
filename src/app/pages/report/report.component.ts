@@ -63,6 +63,7 @@ export class ReportComponent implements OnInit {
   }
 
   displaySecondaryCategories() {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.secondaryCategories);
     this.showSecondaryCategories = true;
   }
 

@@ -5,6 +5,18 @@
   max-width: 750px;
 }
 
+.banner {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+.banner h1 {
+  color: #26353f;
+  background-color: #fff;
+  padding: .5em;
+  display: inline-block;
+}
+
 .category {
   background: $white;
   border-radius: 2px;
@@ -19,12 +31,12 @@
   @media #{$larger-than-tablet} {
     &:hover {
       transform: scale(1.1);
-      border-color: $blue;
+      border-color: $primary;
     }
   }
   @media #{$smaller-than-tablet} {
     &:active {
-      border-color: $blue;
+      border-color: $primary;
     }
   }
 

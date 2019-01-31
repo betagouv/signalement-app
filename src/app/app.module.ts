@@ -14,7 +14,7 @@ import { FileInputComponent } from './components/file-input/file-input.component
 import { Ng2CompleterModule } from 'ng2-completer';
 import { CompanyComponent } from './pages/report/company/company.component';
 import { FooterComponent } from './pages/footer/footer.component';
-import { WhyComponent } from './pages/infos/why/why.component';
+import { HowComponent } from './pages/infos/how/how.component';
 import { RouterModule } from '@angular/router';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Angulartics2Module } from 'angulartics2';
@@ -38,7 +38,7 @@ defineLocale('fr', frLocale);
     FileInputComponent,
     CompanyComponent,
     FooterComponent,
-    WhyComponent,
+    HowComponent,
     StatsComponent,
     DetailsComponent,
     BreadcrumbComponent,
@@ -64,7 +64,8 @@ defineLocale('fr', frLocale);
     RouterModule.forRoot([
       { path: '', component: ReportComponent },
       { path: 'stats', component: StatsComponent },
-      { path: 'infos/why', component: WhyComponent },
+      { path: 'comment-ça-marche', component: HowComponent },
+      { path: 'comment-ça-marche', component: HowComponent },
     ]),
   ],
   providers: [],

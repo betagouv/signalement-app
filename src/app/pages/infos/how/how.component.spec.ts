@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WhyComponent } from './why.component';
+import { HowComponent } from './how.component';
 
-describe('WhyComponent', () => {
-  let component: WhyComponent;
-  let fixture: ComponentFixture<WhyComponent>;
+describe('HowComponent', () => {
+  let component: HowComponent;
+  let fixture: ComponentFixture<HowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WhyComponent ]
+      declarations: [ HowComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WhyComponent);
+    fixture = TestBed.createComponent(HowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
