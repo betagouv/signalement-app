@@ -27,7 +27,10 @@
   <app-root></app-root>
 
   <script>
-    setTimeout(function(){ window.location='https://signalconso.beta.gouv.fr' }, 3000);
+    setTimeout(function(){
+      _paq.push(['trackEvent', 'Redirection', 'auto']);
+      window.location='https://signalconso.beta.gouv.fr';
+    }, 3000);
   </script>
 </body>
 </html>
