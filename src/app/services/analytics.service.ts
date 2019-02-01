@@ -27,7 +27,8 @@ export enum EventCategories {
 }
 
 export enum ReportEventActions {
-  information = 'Affichage d\'un message d\'information',
+  outOfBounds = 'Affichage d\'un message problème hors périmètre',
+  information = 'Consultation du détail d\'un message d\'information',
   secondaryCategories = 'Affichage des autres problèmes',
   validateCategory = 'Sélection d\'une catégorie',
   validateSubcategory = 'Sélection d\'une sous catégorie',

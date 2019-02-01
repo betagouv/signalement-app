@@ -72,14 +72,14 @@ export class ReportComponent implements OnInit {
     this.report = new Report();
     this.report.category = anomaly.category;
     if (anomaly.information) {
-      this.displayInformation(anomaly.information);
+      this.displayInformation(anomaly.information, anomaly.category);
     } else {
       this.stepForward();
     }
   }
 
-  displayInformation(information: Information) {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.information, information.title);
+  displayInformation(information: Information, title: String) {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, title);
     this.informationToDisplay = information;
     this.step = Step.Information;
     this.stepForward();
@@ -95,7 +95,7 @@ export class ReportComponent implements OnInit {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, subcategory.title);
     this.report.subcategory = subcategory;
     if (subcategory.information) {
-      this.displayInformation(subcategory.information);
+      this.displayInformation(subcategory.information, subcategory.title);
     } else {
       this.stepForward();
     }
@@ -104,7 +104,6 @@ export class ReportComponent implements OnInit {
   onDetailsValidate(details: ReportDetails) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
     this.report.details = details;
-    console.log('this.report.details', this.report.details)
     this.stepForward();
   }
 

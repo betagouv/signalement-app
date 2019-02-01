@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AnalyticsService, EventCategories, ReportEventActions } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-collapsable-text',
@@ -7,10 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CollapsableTextComponent implements OnInit {
 
+  @Input() title: string;
   @Input() content: string;
   isCollapsed: boolean;
 
-  constructor() { }
+  constructor(private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.isCollapsed = true;
@@ -25,6 +27,7 @@ export class CollapsableTextComponent implements OnInit {
   }
 
   uncollapse() {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.information, this.title);
     this.isCollapsed = false;
   }
 
