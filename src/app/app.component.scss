@@ -1,4 +1,5 @@
 @import "../theme/variables";
+@import "../theme/media-queries";
 
 :host ::ng-deep {
 
@@ -8,7 +9,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   .section {
-    padding: 5em 0;
+    padding: 3em 0;
   }
 
   .section-small {
@@ -24,8 +25,23 @@
     color: #fff;
   }
 
-  .section-gray {
+  .section-lighter-grey {
     background-color: $lighter-grey;
+  }
+
+  .section-lightest-grey {
+    background-color: $lightest-grey;
+  }
+
+  .panel {
+    background: #fff;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 1px 2px rgba(201, 211, 223, .2);
+    box-shadow: 0 1px 2px rgba(201, 211, 223, .2);
+    padding: 1.5em;
+    position: relative;
+    border: 1px solid #c9d3df;
+    margin-bottom: 2em;
   }
 
   .link {
@@ -34,54 +50,37 @@
     text-decoration: underline;
   }
 
+  .pointer {
+    cursor: pointer;
+  }
+
+  .note {
+    color: $dark-grey;
+
+    ul {
+      margin-bottom: 0;
+      padding-left: 1em;
+
+      li + li {
+        padding-top: 0.5em;
+      }
+    }
+  }
+
   .banner {
-    background: url(/assets/images/banner_gray.jpg) no-repeat top center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 
-    .banner_container {
-      min-height: 38vh;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-      flex-direction: column;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      padding: 2em;
-    }
+    .container {
 
-    h1 {
-      color: #26353f;
-      background-color: white;
-      padding: 0.5em;
-      font-size: 1.85em;
+      img {
+        margin: 1em 0;
+        max-height: 200px;
+      }
     }
+  }
 
-    h2 {
-      color: #26353f;
-      background-color: white;
-      padding: 0.5em;
-    }
-
-    h3 {
-      font-weight: bold;
-      color: white;
-      font-style: italic;
-      padding-bottom: 1em;
-    }
-
-    .button:hover {
-      text-decoration: none;
-    }
+  .icon {
+    text-align: center;
+    padding-bottom: 1em;
   }
 
 }

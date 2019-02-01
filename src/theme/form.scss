@@ -1,6 +1,15 @@
 form {
-  label span {
-    color: #e00917;
+
+  max-width: 750px;
+  margin: 0 auto;
+
+  label {
+
+    font-size: 1.25em;
+
+    span {
+      color: #e00917;
+    }
   }
 
   .invalid {
@@ -60,7 +69,7 @@ select:disabled {
 input[type=radio],
 input[type=checkbox] {
   margin-right: 6px;
-  margin-top: 0;
+  margin-top: 5px;
 }
 
 input[type=radio] {
@@ -252,14 +261,12 @@ fieldset {
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: $grey !important;
-  font-style: italic;
   font-weight: 200;
   opacity: 1; /* Firefox */
 }
 
 select.ng-pristine {
   color: $grey;
-  font-style: italic;
   font-weight: 200;
   opacity: 1; /* Firefox */
 

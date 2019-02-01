@@ -1,0 +1,13 @@
+<ng-container *ngIf="content">
+  <div class="note" [innerHTML]="content" *ngIf="!isTruncable(); else truncableContent"></div>
+  <ng-template #truncableContent>
+    <ng-container *ngIf="!isCollapsed; else collapsedContent">
+      <div class="note" [innerHTML]="content"></div>
+      <span class="pointer link" (click)="collapse()">masquer</span>
+    </ng-container>
+    <ng-template #collapsedContent>
+      <div class="note" [innerHTML]="content | truncate : 100 : true"></div>
+      <span class="pointer link" (click)="uncollapse()">lire la suite</span>
+    </ng-template>
+  </ng-template>
+</ng-container>

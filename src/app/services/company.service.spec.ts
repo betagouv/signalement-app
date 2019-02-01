@@ -55,7 +55,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportingBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
     companiesRequest.flush(result);
 
   });
@@ -70,7 +70,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportingBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
     companiesRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
   });
 
@@ -169,7 +169,6 @@ describe('CompanyService', () => {
         'geo_adresse': 'Rue du Docteur Robert Pascaud 87270 Couzeix'
       }
     ],
-    'spellcheck': null,
-    'suggestions': []
+    'spellcheck': null
   };
 });

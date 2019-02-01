@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AnomalyInfoList, AnomalyList } from '../model/Anomaly';
+import { AnomalyList } from '../model/Anomaly';
 import { HttpClient } from '@angular/common/http';
 import { deserialize } from 'json-typescript-mapper';
 import { map } from 'rxjs/operators';
@@ -20,18 +20,5 @@ export class AnomalyService {
         })
       );
   }
-
-  getAnomalyInfos() {
-
-    return this.http.get('./assets/data/infos.json')
-      .pipe(
-        map(result => {
-          return deserialize(AnomalyInfoList, result).list;
-        })
-      );
-  }
-
-
-
 
 }
