@@ -27,6 +27,7 @@ import { ConfirmationComponent } from './pages/report/confirmation/confirmation.
 import { SubcategoryComponent } from './pages/report/subcategory/subcategory.component';
 import { PrecedeByPipe } from './pipes/precede-by.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { CollapsableTextComponent } from './components/collapsable-text/collapsable-text.component';
 
 defineLocale('fr', frLocale);
 
@@ -45,6 +46,7 @@ defineLocale('fr', frLocale);
     ConsumerComponent,
     ConfirmationComponent,
     SubcategoryComponent,
+    CollapsableTextComponent,
     PrecedeByPipe,
     TruncatePipe,
   ],

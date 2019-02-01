@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subcategory } from '../../../model/Anomaly';
 import { deserialize } from 'json-typescript-mapper';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
+import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 
 describe('SubcategoryComponent', () => {
   let component: SubcategoryComponent;
@@ -20,6 +21,7 @@ describe('SubcategoryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SubcategoryComponent,
+        CollapsableTextComponent,
         TruncatePipe,
       ],
       imports: [

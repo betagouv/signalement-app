@@ -168,8 +168,11 @@ export class ReportComponent implements OnInit {
         this.step = Step.Category;
         break;
       case Step.Information:
-        this.report.subcategory = null;
-        this.step = Step.Category;
+        if (this.getSubcategories() && this.getSubcategories().length) {
+          this.step = Step.Subcategory;
+        } else {
+          this.step = Step.Category;
+        }
         break;
       case Step.Details:
         this.report.details = null;

@@ -6,6 +6,8 @@ import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../../components/file-input/file-input.component';
 import { ReportDetails } from '../../../model/Report';
 import { Precision, SubcategoryDetails } from '../../../model/Anomaly';
+import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
+import { TruncatePipe } from '../../../pipes/truncate.pipe';
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
@@ -26,6 +28,8 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         FileInputComponent,
+        CollapsableTextComponent,
+        TruncatePipe,
       ],
       imports: [
         FormsModule,

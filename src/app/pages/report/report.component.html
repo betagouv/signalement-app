@@ -50,34 +50,31 @@
     <section class="section section-lighter-grey">
       <div class="container">
         <div class="row">
-          <div class="col-12 mb-3 col-sm-4">
+          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
             <div class="icon">
-              <img src="/assets/images/icon_store.png" alt="Icône magasin"/>
+              <img src="/assets/images/icon_fast.png" alt="Icône magasin"/>
             </div>
-            <p class="text-center"><b>Simple et rapide</b></p>
+            <p class="text-center"><b>Rapide</b></p>
             <p>
-              Cette plateforme permet aux consommateurs de signaler facilement et rapidement les anomalies
-              qu'ils rencontrent dans leur vie de tous les jours.
+              Des questions simples pour vous guider afin de signaler rapidement votre problème et connaître vos droits.
             </p>
           </div>
-          <div class="col-12 mb-3 col-sm-4">
+          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
             <div class="icon">
-              <img src="/assets/images/icon_workflow.png" alt="Icône workflow"/>
+              <img src="/assets/images/icon_approbation.png" alt="Icône workflow"/>
             </div>
-            <p class="text-center"><b>Au service des professionnels</b></p>
+            <p class="text-center"><b>Transparent</b></p>
             <p>
-              Les signalements sont centralisés et transmis aux professionnels concernés pour qu'ils puissent
-              corriger les problèmes.
+              Le commerçant, s’il le souhaite, a accès aux signalements. Cela lui permet de procéder spontanément aux corrections utiles, sans sanction.
             </p>
           </div>
-          <div class="col-12 col-sm-4">
+          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
             <div class="icon">
-              <img src="/assets/images/icon_alarm.png" alt="Icône alarme"/>
+              <img src="/assets/images/icon_collaboration.png" alt="Icône alarme"/>
             </div>
-            <p class="text-center"><b>Collaboratif et citoyen</b></p>
+            <p class="text-center"><b>Participatif</b></p>
             <p>
-              Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ?
-              Les enquêteurs de la répression des fraudes seront avertis.
+              Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ? Les enquêteurs de la répression des fraudes seront avertis afin d’intervenir.
             </p>
           </div>
         </div>
@@ -162,11 +159,32 @@
     </section>
     <section class="section section-white">
       <div class="container max-width">
-        <p class="mt-4">
-          Afin de corriger lui-même l’anomalie, le professionnel pourra aussi consulter votre signalement anonymisé.
-          <br />
-          Il ne déclenchera pas à lui seul un contrôle des autorités.
-        </p>
+        <div class="mt-4" *ngIf="report.contactAgreement">
+          <p>
+            Votre signalement va être communiqué au commerçant.
+            Il pourra corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
+          </p>
+          <p>
+            Votre signalement est aussi transmis à la répression des fraudes (DGCCRF).
+            Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+          </p>
+          <p>
+            En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalement.beta.gouv.fr?subject=incident" target="_blank">contact@signalement.beta.gouv.fr</a>
+          </p>
+        </div>
+        <div class="mt-4" *ngIf="!report.contactAgreement">
+          <p>
+            Votre signalement va être communiqué de façon anonyme au commerçant.
+            Il pourra corriger directement le problème grâce à vos informations.
+          </p>
+          <p>
+            Votre signalement est aussi transmis à la répression des fraudes (DGCCRF).
+            Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+          </p>
+          <p>
+            En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalement.beta.gouv.fr?subject=incident" target="_blank">contact@signalement.beta.gouv.fr</a>
+          </p>
+        </div>
         <hr />
         <button class="btn btn-lg btn-primary" (click)="ngOnInit()">
           Identifier un autre problème

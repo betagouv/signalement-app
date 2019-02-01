@@ -10,6 +10,7 @@ export class Information {
   constructor() {
     this.title = undefined;
     this.content = undefined;
+    this.content = undefined;
   }
 }
 
@@ -44,7 +45,6 @@ export class Subcategory {
   description?: string;
   @JsonProperty({ name: 'details', clazz: SubcategoryDetails })
   details?: SubcategoryDetails;
-  fullDescriptionDisplayed?: boolean;
   @JsonProperty('information')
   information?: Information;
 

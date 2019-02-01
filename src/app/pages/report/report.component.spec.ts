@@ -21,6 +21,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
+import { CollapsableTextComponent } from '../../components/collapsable-text/collapsable-text.component';
 
 
 describe('ReportComponent', () => {
@@ -64,6 +65,7 @@ describe('ReportComponent', () => {
         ConsumerComponent,
         SubcategoryComponent,
         ConfirmationComponent,
+        CollapsableTextComponent,
         PrecedeByPipe,
         TruncatePipe,
       ],
