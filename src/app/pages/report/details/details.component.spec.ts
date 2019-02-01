@@ -8,6 +8,7 @@ import { ReportDetails } from '../../../model/Report';
 import { Precision, SubcategoryDetails } from '../../../model/Anomaly';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
@@ -35,6 +36,7 @@ describe('DetailsComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         BsDatepickerModule.forRoot(),
+        Angulartics2RouterlessModule.forRoot(),
       ]
     })
     .compileComponents();

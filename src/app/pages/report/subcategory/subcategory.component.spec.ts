@@ -6,6 +6,7 @@ import { Subcategory } from '../../../model/Anomaly';
 import { deserialize } from 'json-typescript-mapper';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 describe('SubcategoryComponent', () => {
   let component: SubcategoryComponent;
@@ -27,6 +28,7 @@ describe('SubcategoryComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
+        Angulartics2RouterlessModule.forRoot(),
       ]
     })
     .compileComponents();
