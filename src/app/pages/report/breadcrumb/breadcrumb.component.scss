@@ -1,0 +1,27 @@
+@import "../../../../theme/variables";
+
+img.back {
+
+  vertical-align: top;
+  height: 30px;
+
+  & + div {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
+}
+
+.steps {
+
+  color: $dark-grey;
+  padding-top: 1em;
+  font-size: 1.25em;
+
+  .current {
+    color: $black;
+    font-weight: bold;
+  }
+}
+
+

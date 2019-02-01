@@ -1,0 +1,71 @@
+<section class="section section-white position-relative">
+  <div class="container">
+    <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm">
+      <h5>
+        Récapitulatif de votre problème {{report.category | precedeBy : 'de' : 'd\''}}
+        <ng-container *ngIf="report.subcategory">({{report.subcategory.title}})</ng-container>
+      </h5>
+      <div class="panel">
+        <div class="row">
+          Etablissement :
+        </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
+            <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
+            <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+            <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+            <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+            <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+            <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          </div>
+        </div>
+        <div class="row mt-2">
+          Date du constat : {{report.details.anomalyDate | date:'dd/MM/yyyy'}}
+          <br />
+          Plage horaire : <span *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </span>
+          <br />
+          Description : {{report.details.description}}
+        </div>
+        <div class="row mt-2">
+          Nom : {{report.consumer.lastName}}
+          <br />
+          Prénom : {{report.consumer.firstName}}
+          <br />
+          Email : {{report.consumer.email}}
+        </div>
+      </div>
+
+      <div class="row pl-1">
+        <div class="col-2 col-sm-1 text-right pr-1">
+          <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
+        </div>
+        <div class="col-10 col-sm-11 pl-1">
+          <label for="contactAgreementTrue" class="label-inline pointer">J'accepte de transmettre mes coordonnées au professionnel afin qu'il puisse me contacter</label>
+        </div>
+      </div>
+      <div class="row pl-1">
+        <div class="col-2 col-sm-1 text-right pr-1">
+          <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
+        </div>
+        <div class="col-10 col-sm-11 pl-1">
+          <label for="contactAgreementFalse" class="label-inline pointer">Je refuse</label>
+        </div>
+      </div>
+
+      <div class="notification error mt-3" *ngIf="showErrors && confirmationForm.invalid">
+        <span *ngIf="contactAgreementCtrl.hasError('required')">
+          Veuillez indiquer si vous acceptez de transmettre vos coordonnées au professionnel.<br />
+        </span>
+      </div>
+      <hr />
+      <button type="submit" class="btn btn-lg btn-primary">
+        <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
+        Envoyer
+      </button>
+    </form>
+  </div>
+
+  <ngx-loading [show]="loading"></ngx-loading>
+
+</section>

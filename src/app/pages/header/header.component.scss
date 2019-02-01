@@ -1,20 +1,50 @@
+@import "../../../theme/media-queries";
+
 .navbar__container {
   width: 100%;
 
-  .ribbon {
-    text-align: center;
-    text-transform: uppercase;
-    position: absolute;
-    top: 10px;
-    right: -25px;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    width: 90px;
-    background-color: red;
-    color: #fff;
-    padding: 5px;
-    font-size: 10px;
-    font-weight: 700;
-    z-index: 100;
+  @media #{$larger-than-tablet} {
+    .ribbon {
+      text-align: center;
+      text-transform: uppercase;
+      position: absolute;
+      top: 10px;
+      right: -25px;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      width: 90px;
+      background-color: red;
+      color: #fff;
+      padding: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      z-index: 100;
+    }
+  }
+
+
+  @media #{$smaller-than-tablet} {
+    .ribbon {
+      text-align: center;
+      text-transform: uppercase;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 70px;
+      background-color: red;
+      color: #fff;
+      padding: 2px;
+      font-size: 10px;
+      font-weight: 700;
+      z-index: 100;
+    }
+
+    .navbar__domain {
+      font-size: 12px;
+
+      & + img {
+        height: 28px;
+      }
+    }
   }
 }

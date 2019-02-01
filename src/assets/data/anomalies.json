@@ -1,245 +1,377 @@
 {
   "list": [
     {
-      "companyType": "Café restaurant",
-      "anomalyTypeList": [
+      "category": "Pratique d'hygiène",
+      "description": "Locaux sales, présence de rat, rupture de la chaîne du froid...",
+      "rank" : 1,
+      "icon": "icon_hygien.png",
+      "subcategories": [
         {
-          "category": "Hygiène du personnel",
-          "precisionList": [
-            "Pas de gants, pas de coiffe",
-            "Tenue sale",
-            "Autre"
-          ]
+          "title": "Locaux / matériel sales",
+          "description": "Exemples : cuisine, WC, rayon réfrigéré...",
+          "details": {
+            "descriptionTips": "Afin que le professionnel puisse corriger la situation, vous pouvez préciser le rayon exact, le type de salissure...",
+            "precision": {
+              "title": "Quelle zone est concernée ? ",
+              "options": [
+                { "title": "Cuisine" },
+                { "title": "Salle du restaurant / bar" },
+                { "title": "WC" },
+                { "title": "Atelier de fabrication" },
+                { "title": "Magasin (sol)" },
+                { "title": "Magasin (vitrine /frigo)" },
+                { "title": "Autre" }
+              ]
+            }
+          }
         },
         {
-          "category": "Hygiène des locaux",
-          "precisionList": [
-            "Cuisine sale",
-            "Salle du restaurant/café sale",
-            "Présence de rat/insectes/oiseau",
-            "Problème de température (ex: vitrine réfrigérée)",
-            "Autre"
-          ]
+          "title": "Personnel sans coiffe ou sans gants",
+          "information": {
+            "title": "Cet incident ne constitue pas un motif de signalement.",
+            "content": "Il n'existe pas d'obligation réglementaire imposant le port de la coiffe (charlotte) ou des gants.<br/>Le lavage des mains peut être suffisant pour éviter les contaminations."
+          }
         },
         {
-          "category": "Intoxication alimentaire",
-          "precisionList": []
+          "title": "Hygiène du personnel",
+          "description": "Exemples : tenue sale, mauvaise pratique d'hygiène...",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                {
+                  "title": "Tenue sale"
+                },
+                {
+                  "title": "Pas de coiffe ou pas de gants"
+                },
+                {
+                  "title": "Mauvaises pratiques d'hygiène",
+                  "content": "Exemples : pas de lavage des mains, personnel qui fume en cuisine..."
+                },
+                {
+                  "title": "Autre"
+                }
+              ]
+            }
+          }
         },
         {
-          "category": "Nourriture et boissons",
-          "precisionList": [
-            "Plat de mauvaise qualité ou pas bon",
-            "Descriptif trompeur des plats, des offres...",
-            "Produits non-disponibles",
-            "Bouteille de vin non débouchée devant vous",
-            "Bouteille de vin servie au verre non versée devant vous",
-            "Autre"
-          ]
+          "title": "Présence d'animaux",
+          "description": "Exemples : rat, insectes, oiseaux, chien...",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Insectes" },
+                { "title": "Rongeurs (rat, souris)" },
+                { "title": "Oiseau" },
+                { "title": "Chien" },
+                { "title": "Autre" }
+              ]
+            }
+          }
         },
         {
-          "category": "Prix et paiement",
-          "precisionList": [
-            "Prix non indiqué",
-            "Prix trop cher",
-            "Prix payé différent de celui affiché",
-            "Eau du robinet payante ou pain payant",
-            "Refus d'un moyen de paiement non annoncé",
-            "Frais facturés non clairement indiqués avant"
-          ]
-        },
-        {
-          "category": "Autre",
-          "precisionList": [
-            "Refus de vous servir",
-            "Personnel peu aimable, mal poli",
-            "Chien refusé",
-            "Autre"
-          ]
+          "title": "Problème de température",
+          "description": "Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Meuble réfrigéré en panne ou température insuffisante" },
+                { "title": "Stockage de produits frais à température ambiante" },
+                { "title": "Autre" }
+              ]
+            }
+          }
         }
       ]
     },
     {
-      "companyType": "Grande surface et supérette",
-      "anomalyTypeList": [
+      "category": "Nourriture / Boissons",
+      "description": "Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...",
+      "rank" : 2,
+      "icon": "icon_food.png",
+      "subcategories": [
         {
-          "category": "Hygiène du personnel",
-          "precisionList": [
-            "Pas de gants, pas de coiffe",
-            "Tenue sale",
-            "Autre"
-          ]
+          "title": "Produit présentant un défaut",
+          "description": "Exemples : présence de moisissure, d'un bout de verre",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Moisissure" },
+                { "title": "Couleur / odeur anormale" },
+                {
+                  "title": "Corps étranger \"mou\"",
+                  "content": "Présence de quelque chose de \"mou\" dans le produit. <br/>Exemples : morceau de gant, morceau de tissus.."
+                },
+                {
+                  "title": "Corps étranger \"dur\" ",
+                  "content": "Présence de quelque chose de \"dur\" dans le produit. <br/>Exemples : bout de verre, morceau de métal.."
+                }
+              ]
+            }
+          }
         },
         {
-          "category": "Hygiène des locaux",
-          "precisionList": [
-            "Sol ou rayon sale",
-            "Présence de rat/insectes/oiseau",
-            "Problème de température (ex: vitrine réfrigérée)",
-            "Autre"
-          ]
+          "title": "Produit périmé",
+          "description": "\"À consommer jusqu'au...\" = date limite de consommation (DLC).<br/>Un produit peut-être vendu jusqu'au jour indiqué sur l'étiquette. Il est <b>interdit</b> de le vendre si cette date est dépassée.<br/><br/>\"À consommer de préférence avant le\" = date de durabilité minimale (DDM).<br/><b>Cette date est indicative</b>. Il n'est pas interdit de vendre un produit avec une DDM dépassée. Vous pouvez également consommer le produit après cette date si son emballage n'est pas altéré."
         },
         {
-          "category": "Intoxication alimentaire",
-          "precisionList": []
+          "title": "Produit pas bon",
+          "information": {
+            "title": "Cet incident ne constitue pas un motif de signalement.",
+            "content": "<h5>Au restaurant</h5><p>Vous pouvez demander que l'on remplace un plat si vous estimez que le plat qui vous a été proposé n'est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\".<br/>En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat. S'il vous oppose un refus, vous serez tenu néanmoins de payer la note.</p><h5>Produit acheté en magasin</h5>Vous pouvez contacter le service client (généralement indiqué sur l'emballage) sinon contactez directement le commerçant afin de lui faire part de votre avis voir mécontentement.</p>",
+            "content": "<ul><li class=\"pb-3\">Produit acheté en magasin : <br/>vous pouvez contacter le service client (généralement indiqué sur l'emballage). Si non, contactez directement le commerçant afin de lui faire part de votre avis ou mécontentement.</li><li>Produit commandé dans un bar ou un restaurant :<br/>Vous pouvez demander que l'on remplace un plat si vous estimez que le plat qui vous a été proposé n'est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\".<br/>En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat.</li></ul>"
+          }
         },
         {
-          "category": "Prix et paiement",
-          "precisionList": [
-            "Absence de prix ou prix illisible",
-            "Prix trop cher",
-            "Prix à la caisse différent de celui affiché",
-            "Frais facturés non clairement indiqués avant",
-            "Refus d'un moyen de paiement non annoncé",
-            "Fausse réduction de prix"
-          ]
+          "title": "Problème sur l'étiquette / emballage",
+          "description": "Exemples : liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...",
+          "details": {
+            "descriptionTips": "Précisez également le nom du fabriquant.",
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Pas d'étiquetage ou informations absentes" },
+                { "title": "Étiquetage uniquement en langue étrangère (aucune information traduite en français)" },
+                { "title": "Informations/mentions trompeuses" },
+                { "title": "Autre" }
+              ]
+            }
+          }
         },
         {
-          "category": "Publicité (affiche, catalogue..)",
-          "precisionList": [
-            "Indisponibilité des produits du catalogue",
-            "Publicité trompeuse / mensongère"
-          ]
+          "title": "Problème de quantité",
+          "description": "Exemples : poids indiqué non conforme, balance non tarée...",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Le commerçant n'effectue pas la tare lors de la pesée" },
+                { 
+                  "title": "Le volume / poids / nombre annoncé est non conforme.",
+                  "content": "Pour les produits emballés (comme une paquet de farine, une boîte de conserve), le poids indiqué ne correspond pas au poids réel de votre paquet mais à une moyenne de l'ensemble de paquets qui ont été produits. Il est donc possible d'avoir une petite différence. <br/>Par exemple, un produit annoncé à 1 kg net a le droit à une erreur de 15 g en moins : si votre paquet de farine pèse entre 1 kg et 985 g, il est conforme."
+                },
+                { "title": "Autre" }
+              ]
+            }
+          }
         },
         {
-          "category": "Produit alimentaire",
-          "precisionList": [
-            "Date Limite de Consommation dépassée",
-            "Problème d'étiquetage ou absence d’étiquetage",
-            "Qualité sanitaire des produits (ex: moisissures)",
-            "Quantité annoncée non conforme",
-            "Problème rencontré avec un produit spécifique",
-            "Vente d'un produit en retrait-rappel",
-            "Autre"
-          ]
+          "title": "Produit en retrait/ rappel",
+          "description": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
         },
         {
-          "category": "Produit non-alimentaire",
-          "precisionList": [
-            "Problème d'étiquetage ou absence d’étiquetage",
-            "Quantité annoncée non conforme",
-            "Problème rencontré avec un produit spécifique",
-            "Présemption d'obsolescence programmée",
-            "Refus de reprendre un produit encore sous garantie",
-            "Vente d'un produit en retrait-rappel",
-            "Autre"
-          ]
-        },
-        {
-          "category": "Autre",
-          "precisionList": [
-            "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
-            "Refus de vous servir, refus de vendre",
-            "Personnel peu aimable, mal poli",
-            "Autre"
-          ]
+          "title": "Autre"
         }
       ]
     },
     {
-      "companyType": "Commerçant de proximité (boulangerie, boucherie…)",
-      "anomalyTypeList": [
+      "category": "Matériel / Objet",
+      "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
+      "rank" : 3,
+      "icon": "icon_material.png",
+      "subcategories": [
         {
-          "category": "Hygiène du personnel",
-          "precisionList": [
-            "Pas de gants, pas de coiffe",
-            "Tenue sale",
-            "Autre"
-          ]
+          "title": "Étiquetage et notice",
+          "description": "Exemples : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...",
+          "details": {
+            "descriptionTips": "Précisez également le nom du fabriquant.",
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                {
+                  "title": "Informations absentes au niveau de l'étiquetage / emballage",
+                  "content":"Certaines informations sont obligatoires. <br />Par exemple :<ul><li>Vêtements : la composition des tissus (noms et proportions des matières)...</li><li>Meubles : la composition, la taille, s'il faut le monter soi-même, de quel cuir il s'agit...</li><li>Electroménagers : l'étiquetage énergétique, la disponibilité des pièces de rechange...</li></ul>"
+                },
+                {
+                  "title": "Étiquetage ou notice uniquement en langue étrangère (aucune information traduite en français)",
+                  "content": "Valable uniquement pour les biens achetés en France"
+                },
+                {
+                  "title": "Informations / mentions trompeuses",
+                  "content":  "Etiqueté \"en or\" alors qu'il s'agit de \"plaqué or\", \"fabriqué en France\" alors que ce n'est pas le cas..."
+                }, {
+                  "title": "Autre"
+                }
+              ]
+            }
+          }
         },
         {
-          "category": "Hygiène des locaux",
-          "precisionList": [
-            "Etablisement sale",
-            "Présence de rat/insectes/oiseau",
-            "Problème de température (ex: vitrine réfrigérée)",
-            "Autre"
-          ]
+          "title": "Produit en retrait/ rappel",
+          "description": "Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités"
         },
         {
-          "category": "Prix et paiement",
-          "precisionList": [
-            "Absence de prix ou prix illisible",
-            "Prix trop cher",
-            "Prix à la caisse différent de celui affiché",
-            "Frais facturés non clairement indiqués avant",
-            "Refus d'un moyen de paiement non annoncé",
-            "Fausse réduction de prix",
-            "Autre"
-          ]
+          "title": "Effet indésirable sur la santé",
+          "description": "Exemples : brûlure, picotement, démangeaison, allergie"
         },
         {
-          "category": "Produit alimentaire",
-          "precisionList": [
-            "Date Limite de Consommation dépassée",
-            "Problème d'étiquetage ou absence d’étiquetage",
-            "Qualité sanitaire des produits (ex: moisissures)",
-            "Quantité annoncée non conforme"
-          ]
+          "title": "Produit dangereux",
+          "description": "Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu..."
         },
         {
-          "category": "Intoxication alimentaire",
-          "precisionList": []
+          "title": "Durée de vie trop courte",
+          "description": "Vous trouvez que la durée de vie de votre appareil est trop courte.",
+          "details": {
+            "descriptionTips": "Précisez également la date d'achat."
+          }
         },
         {
-          "category": "Publicité (affiche, catalogue..)",
-          "precisionList": [
-            "Publicité trompeuse / mensongère"
-          ]
+          "title": "Le volume / poids / nombre annoncé est non conforme."
         },
         {
-          "category": "Autre",
-          "precisionList": [
-            "Refus de vous servir, refus de vendre",
-            "Autre",
-            "Personnel peu aimable, mal poli"
-          ]
+          "title": "Autre"
         }
       ]
     },
     {
-      "companyType": "Magasin non alimentaire (librairie, vêtements…)",
-      "anomalyTypeList": [
+      "category": "Intoxication alimentaire",
+      "description": "Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.",
+      "rank" : 4,
+      "icon": "icon_disease.png",
+      "information": {
+        "title": "Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil signalement.",
+        "content": "Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs. <br/><br/>Veuillez remplir le formulaire \"Courrier\" de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4210\" target=\"_blank\" />Contact Hygiène et intoxication</a>"
+      }
+
+    },
+    {
+      "category": "Prix / Paiement",
+      "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...",
+      "rank" : 5,
+      "icon": "icon_price.png",
+      "subcategories": [
         {
-          "category": "Prix et paiement",
-          "precisionList": [
-            "Absence de prix ou prix illisible",
-            "Prix trop cher",
-            "Prix à la caisse différent de celui affiché",
-            "Fausse réduction de prix",
-            "Frais facturés non clairement indiqués avant",
-            "Refus d'un moyen de paiement non annoncé",
-            "Autre"
-          ]
+          "title": "Absence de prix",
+          "description": "Exemples : pas d'affichage de prix en rayon ou en vitrine, pas de carte des prix dans le bar..."
         },
         {
-          "category": "Publicité (affiche, catalogue..)",
-          "precisionList": [
-            "Indisponibilité des produits du catalogue",
-            "Publicité trompeuse / mensongère"
-          ]
+          "title": "Prix trop cher",
+          "description": "C'est autorisé de vendre un produit \"cher\", les commerçants sont libres de choisir leurs prix.<br/><br/>Attention, les prix doivent être clairement indiqués (par un affichage ou une étiquette, écrit sur la carte du restaurant...) pour que vous soyez au courant avant d'acheter ou de commander.<br/>Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte des boissons.<br/><br/>Par contre, un commerçant ne doit pas abuser d'une situation pour pratiquer des prix exagérés. <br/>Par exemple, un serrurier qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.<br/>Si c'est votre cas, vous devez faire une réclamation avec ce formulaire : <a href=\"https://www.economie.gouv.fr/courrier/4191\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4191</a>"
         },
         {
-          "category": "Produit non-alimentaire",
-          "precisionList": [
-            "Problème ou absence d'étiquetage",
-            "Problème rencontré avec un produit (allergie, coupure..)",
-            "Présemption d'obsolescence programmée",
-            "Refus de reprendre un produit encore sous garantie",
-            "Vente d'un produit en retrait-rappel",
-            "Autre"
-          ]
+          "title": "Prix différent de celui affiché",
+          "description": "Exemples : le prix du paquet à la caisse est de 5 euros alors qu'il est affiché à 3 euros en rayon, le pantalon ne passe qu'à -30% alors que tous les pantalons sont étiquetés -50%.<br/><br/>En cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.<br/><br/>Par contre, ce principe ne s'applique pas lorsque l'erreur de prix est tellement énorme que le client se doute de l'erreur (exemple : une voiture neuve affichée à 500 euros, un meuble affiché à 0 euros...). On appelle ça une erreur de prix manifeste."
         },
         {
-          "category": "Autre",
-          "precisionList": [
-            "Absence d'informations sur les garanties",
-            "Problème avec le sav ou à la \"hotline\" (inefficacité, difficulté d'accès..)",
-            "Refus de vous servir, refus de vendre",
-            "Personnel peu aimable, mal poli",
-            "Autre"
-          ]
+          "title": "Fausse réduction de prix",
+          "description": "Exemple : fausse promotion pendant les soldes ou une liquidation totale",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Soldes" },
+                { "title": "Promotion" },
+                { "title": "Liquidation" },
+                { "title": "Autre" }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Refus de payer en espèces",
+          "description": "Le vendeur ne peut pas refuser des espèces sauf s'il n'a pas suffisamment de monnaie. C'est à vous de faire l'appoint.<br/>Par contre, il peut refuser les espèces à partir de 1 000 euros."
+        },
+        {
+          "title": "Refus de payer par CB / chèque",
+          "description": "Le commerçant peut refuser les chèques ou la carte bancaire. Dans ce cas, il doit l'indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant..)<br/><br/>Bon à savoir: le vendeur a le droit de demander une pièce d'identité ou un montant minimum pour ce type de paiement.",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Refus de paiement non indiqué" },
+                { "title": "Paiement refusé alors que marqué comme accepté" }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Frais facturés qui sont injustifiés",
+          "description": "Exemple : on vous facture un surplus \"service en terrasse\" alors que ce prix n'était indiqué nulle part"
+        },
+        {
+          "title": "Autre"
         }
       ]
+    },
+    {
+      "category": "Publicité",
+      "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse...",
+      "rank" : 6,
+      "icon": "icon_pub.png",
+      "subcategories": [
+        {
+          "title": "Indisponibilité des produits du catalogue"
+        },
+        {
+          "title": "Information mensongère, publicité trompeuse"
+        }
+      ]
+    },
+    {
+      "category": "Services associés à l'achat",
+      "description": "Colis non reçu, problème de garantie constructeur, hotline injoignable,...",
+      "rank" : 7,
+      "icon": "icon_service.png",
+      "subcategories": [
+        {
+          "title": "Problème de SAV, hotline",
+          "description": "Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ..."
+        },
+        {
+          "title": "Problème de livraison",
+          "description": "Exemples : colis perdu et non reçu, livraison tardive, colis abimé...",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Colis non reçu" },
+                {
+                  "title": "Colis endommagé",
+                  "content": "<ul><li>Vous êtes présent au moment de la livraison : <br/>Il est conseillé de vérifier la commande lorsque le livreur vous l'apporte, même si celui-ci n'a pas le temps.<br/>Si le colis est endommagé ou qu'il ne correspond pas à votre commande, il faut refuser le colis. Vous devez écrire les problèmes sur le bon de livraison (\"colis déchiré dans les angles\"...). Il est conseillé de prendre des photos du colis ou du produit endommagé. Vous devez ensuite prévenir rapidement le vendeur. Vous n'avez pas à régler les frais de retour ni les frais d'envoi d'un autre produit conforme.<br/></li><li>Vous êtes absent lors de la livraison : <br/>Vérifier votre colis dès que possible. Si vous constatez un problème ou erreur de commande, contactez le transporteur et le vendeur. Vous avez entre 3 et 10 jours suivant les cas, renseignez-vous auprès de votre vendeur.\nSi le colis a été abîmé pendant le transport, c'est au vendeur de se retourner contre le transporteur. En effet, <b>le vendeur est responsable en cas de dommage transport</b>.</li></ul><br/>Si le vendeur refuse votre demande, vous pouvez faire un signalement."
+                },
+                { "title": "Livraison tardive" }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Refus de reprendre un produit sous garantie",
+          "description": "Le commerçant refuse de me prendre mon achat encore sous garantie",
+          "details": {
+            "precision": {
+              "title": "Veuillez préciser :",
+              "options": [
+                { "title": "Mon achat remonte à plus de 2 ans" },
+                { "title": "Mon achat a moins de 2 ans" }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Personnel peu aimable",
+          "description": "Exemples : l'accueil est froid, le personnel est mal poli",
+          "information": {
+            "title": "Ceci ne constitue pas un motif de signalement.",
+            "content": "Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client ! <br/>Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.<br/><br/>Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne via ce lien : <a href=\"https://www.pre-plainte-en-ligne.gouv.fr\" target=\"_blank\">https://www.pre-plainte-en-ligne.gouv.fr</a>"
+          }
+        },
+        {
+          "title": "Autre"
+        }
+      ]
+    },
+    {
+      "category": "Refus de servir/ vendre",
+      "rank" : 100
+    },
+    {
+      "category": "Chien d'assistance refusé",
+      "rank" : 101
     }
   ]
 }
