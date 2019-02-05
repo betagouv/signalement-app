@@ -4,7 +4,6 @@ import { ReportComponent, Step } from './report.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnomalyService } from '../../services/anomaly.service';
 import { Anomaly } from '../../model/Anomaly';
-import { of } from 'rxjs';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportService } from '../../services/report.service';
@@ -92,7 +91,7 @@ describe('ReportComponent', () => {
     fixture.detectChanges();
     anomalyService = TestBed.get(AnomalyService);
     reportService = TestBed.get(ReportService);
-    spyOn(anomalyService, 'getAnomalies').and.returnValue(of(anomaliesFixture));
+    spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
   });
 
   it('should create', () => {

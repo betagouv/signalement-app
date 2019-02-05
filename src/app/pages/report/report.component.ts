@@ -31,9 +31,7 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadAnomalies();
-    }
+    this.loadAnomalies();
 
     this.informationToDisplay = null;
     this.showSecondaryCategories = false;
@@ -41,9 +39,7 @@ export class ReportComponent implements OnInit {
   }
 
   loadAnomalies() {
-    this.anomalyService.getAnomalies().subscribe(anomalyList => {
-      this.anomalies = anomalyList;
-    });
+    this.anomalies = this.anomalyService.getAnomalies();
   }
 
   primaryCategoriesOrderByRank() {
