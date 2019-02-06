@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
 import { Company } from '../model/Company';
 import { Subcategory } from '../model/Anomaly';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ReportService', () => {
 
@@ -16,7 +17,8 @@ describe('ReportService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-      HttpClientTestingModule
+      HttpClientTestingModule,
+      RouterTestingModule,
     ],
     providers: [
       ReportService,

@@ -16,4 +16,9 @@ export class AnomalyService {
     return deserialize(AnomalyList, anomalies).list;
   }
 
+  getAnomalyByCategory(category: String) {
+    return this.getAnomalies()
+      .find(anomaly => anomaly.category === category);
+  }
+
 }

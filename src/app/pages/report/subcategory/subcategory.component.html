@@ -1,7 +1,8 @@
+<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white">
   <div class="container">
-    <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm">
-      <div class="row pb-4" *ngFor="let subcategory of anomalySubcategories">
+    <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+      <div class="row pb-4" *ngFor="let subcategory of subcategories">
         <div class="col-2 col-sm-1 text-right pr-1">
           <input type="radio" formControlName="anomalySubcategory" [value]="subcategory.title" id="radio-{{subcategory.title}}"/>
         </div>

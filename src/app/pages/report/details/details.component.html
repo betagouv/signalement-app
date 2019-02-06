@@ -1,13 +1,14 @@
+<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white">
   <div class="container">
 
-    <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm">
+    <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
 
-      <div class="form__group" *ngIf="subcategoryDetails?.precision">
+      <div class="form__group" *ngIf="report.subcategory?.details?.precision">
         <label>
-          {{subcategoryDetails.precision.title}}
+          {{report.subcategory.details.precision.title}}
         </label>
-        <div class="row pb-2 pl-3" *ngFor="let option of subcategoryDetails.precision.options">
+        <div class="row pb-2 pl-3" *ngFor="let option of report.subcategory.details.precision.options">
           <div class="col-2 col-sm-1 text-right pr-1">
             <input type="radio" formControlName="precision" [value]="option.title" id="radio-{{option.title}}"/>
           </div>
@@ -23,7 +24,7 @@
           Description du problème
         </label>
         <br />
-        <span class="note" [innerHTML]="subcategoryDetails?.descriptionTips"></span>
+        <span class="note" [innerHTML]="report.subcategory?.details?.descriptionTips"></span>
         <textarea formControlName="description"
                   rows="3"
                   maxlength="500"
