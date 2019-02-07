@@ -1,6 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subcategory } from '../../../model/Anomaly';
+import { AnomalyService } from '../../../services/anomaly.service';
+import { ReportService, Step } from '../../../services/report.service';
+import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { Report } from '../../../model/Report';
 
 @Component({
   selector: 'app-subcategory',
@@ -9,26 +13,44 @@ import { Subcategory } from '../../../model/Anomaly';
 })
 export class SubcategoryComponent implements OnInit {
 
-  @Input() initialValue: Subcategory;
-  @Input() anomalySubcategories: Subcategory[];
+  step: Step;
+  report: Report;
+  subcategories: Subcategory[];
 
   subcategoryForm: FormGroup;
   anomalySubcategoryCtrl: FormControl;
 
   showErrors: boolean;
 
-  @Output() validate = new EventEmitter<Subcategory>();
-
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder,
+              private anomalyService: AnomalyService,
+              private reportService: ReportService,
+              private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    this.initSubcategoryForm();
+    this.step = Step.Subcategory;
+    this.reportService.currentReport.subscribe(report => {
+      if (report) {
+        this.report = report;
+        this.initSubcategoryForm();
+        this.initSubcategories();
+      } else {
+        this.reportService.reinit();
+      }
+    });
+  }
+
+  initSubcategories() {
+    const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
+    if (anomaly) {
+      this.subcategories = anomaly.subcategories;
+    }
   }
 
   initSubcategoryForm() {
     this.showErrors = false;
 
-    this.anomalySubcategoryCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.title : '', Validators.required);
+    this.anomalySubcategoryCtrl = this.formBuilder.control(this.report.subcategory ? this.report.subcategory.title : '', Validators.required);
 
     this.subcategoryForm = this.formBuilder.group({
       anomalySubcategory: this.anomalySubcategoryCtrl
@@ -40,9 +62,9 @@ export class SubcategoryComponent implements OnInit {
       this.showErrors = true;
       return false;
     } else {
-      this.validate.emit(
-        this.anomalySubcategories.find(subcategory => subcategory.title === this.anomalySubcategoryCtrl.value)
-      );
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, this.anomalySubcategoryCtrl.value);
+      this.report.subcategory = this.subcategories.find(subcategory => subcategory.title === this.anomalySubcategoryCtrl.value);
+      this.reportService.changeReport(this.report, this.step);
     }
   }
 }

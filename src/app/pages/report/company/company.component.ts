@@ -1,10 +1,18 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Company, CompanySearchResult } from '../../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../../services/address.service';
 import { CompleterItem, RemoteData } from 'ng2-completer';
-import { AnalyticsService, CompanyEventActions, CompanySearchEventNames, EventCategories } from '../../../services/analytics.service';
+import {
+  AnalyticsService,
+  CompanyEventActions,
+  CompanySearchEventNames,
+  EventCategories,
+  ReportEventActions,
+} from '../../../services/analytics.service';
+import { ReportService, Step } from '../../../services/report.service';
+import { Report } from '../../../model/Report';
 
 @Component({
   selector: 'app-company',
@@ -12,6 +20,9 @@ import { AnalyticsService, CompanyEventActions, CompanySearchEventNames, EventCa
   styleUrls: ['./company.component.scss']
 })
 export class CompanyComponent implements OnInit {
+
+  step: Step;
+  report: Report;
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
@@ -29,17 +40,23 @@ export class CompanyComponent implements OnInit {
   showErrors: boolean;
 
   addressData: RemoteData;
-  @Output() validate = new EventEmitter<Company>();
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(public formBuilder: FormBuilder,
+              private reportService: ReportService,
               private companyService: CompanyService,
               private addressService: AddressService,
-              private analyticsService: AnalyticsService) {
-
-  }
+              private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    this.initSearchForm();
+    this.step = Step.Company;
+    this.reportService.currentReport.subscribe(report => {
+      if (report) {
+        this.report = report;
+        this.initSearchForm();
+      } else {
+        this.reportService.reinit();
+      }
+    });
   }
 
   initSearchForm() {
@@ -119,7 +136,9 @@ export class CompanyComponent implements OnInit {
   }
 
   selectCompany(company: Company) {
-    this.validate.emit(company);
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
+    this.report.company = company;
+    this.reportService.changeReport(this.report, this.step);
   }
 
   submitCompanyForm() {

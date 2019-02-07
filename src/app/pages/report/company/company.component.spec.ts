@@ -11,6 +11,10 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { AddressService } from '../../../services/address.service';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
+import { ReportService, Step } from '../../../services/report.service';
+import { Report } from '../../../model/Report';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CompanyComponent', () => {
 
@@ -18,16 +22,19 @@ describe('CompanyComponent', () => {
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
   let addressService: AddressService;
+  let reportService: ReportService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         CompanyComponent,
+        BreadcrumbComponent,
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        RouterTestingModule,
         Ng2CompleterModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
@@ -35,16 +42,20 @@ describe('CompanyComponent', () => {
       providers: [
         CompanyService,
         AddressService,
+        ReportService,
       ]
     })
-    .compileComponents();
+      .overrideTemplate(BreadcrumbComponent, '')
+      .compileComponents();
   }));
 
   beforeEach(() => {
     companyService = TestBed.get(CompanyService);
     addressService = TestBed.get(AddressService);
-    spyOn(addressService, 'addressData').and.returnValue(of([]));
+    reportService = TestBed.get(ReportService);
+    reportService.currentReport = of(new Report());
 
+    spyOn(addressService, 'addressData').and.returnValue(of([]));
     fixture = TestBed.createComponent(CompanyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -55,7 +66,6 @@ describe('CompanyComponent', () => {
   });
 
   it('should initialize and display a form with a search input', () => {
-    component.ngOnInit();
 
     const nativeElement = fixture.nativeElement;
     expect(component.searchForm).toBeDefined();
@@ -176,12 +186,17 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
-    it ('should emit and event with a company which contains form inputs', (done) => {
+    it ('should change the shared report with a report where company contains form inputs', () => {
 
       component.editCompany();
       component.nameCtrl.setValue('Mon entreprise');
       component.addressCtrl.setValue('Mon adresse dans ma ville');
       component.addressCtrlPostalCode = '87270';
+      const changeReportSpy = spyOn(reportService, 'changeReport');
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button#submitCompanyForm').click();
       fixture.detectChanges();
 
       const companyExpected = Object.assign(
@@ -193,14 +208,10 @@ describe('CompanyComponent', () => {
           postalCode: '87270'
         }
       );
-      component.validate.subscribe(company => {
-        expect(company).toEqual(companyExpected);
-        done();
-      });
+      const reportExpected = new Report();
+      reportExpected.company = companyExpected;
 
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button#submitCompanyForm').click();
-      fixture.detectChanges();
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Company);
 
     });
 
