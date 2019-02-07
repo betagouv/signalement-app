@@ -265,10 +265,14 @@ fieldset {
   opacity: 1; /* Firefox */
 }
 
-select.ng-pristine {
+select {
   color: $grey;
   font-weight: 200;
   opacity: 1; /* Firefox */
+
+  &.selected {
+    color: $black;
+  }
 
   option:not(:disabled) {
     color: $black;

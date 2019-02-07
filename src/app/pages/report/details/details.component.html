@@ -46,7 +46,7 @@
           </div>
           <div class="col-12 col-sm-6">
             <div class="form__group">
-              <select formControlName="anomalyTimeSlot">
+              <select formControlName="anomalyTimeSlot" [class]="anomalyTimeSlotCtrl.value ? 'selected' : ''">
                 <option disabled value="">Plage horaire</option>
                 <option *ngFor="let hour of plageHoraireList" value="{{hour}}">de {{hour}}h à {{hour + 1}}h</option>
               </select>
