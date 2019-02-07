@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
-import { Step } from '../report.component';
+import { Location } from '@angular/common';
+import { Step } from '../../../services/report.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -12,9 +13,7 @@ export class BreadcrumbComponent implements OnInit {
   @Input() report: Report;
   @Input() step: Step;
 
-  @Output() back = new EventEmitter();
-
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
   }
@@ -23,4 +22,7 @@ export class BreadcrumbComponent implements OnInit {
     return (this.step.toString() === step) ? 'current' : '';
   }
 
+  back() {
+    this.location.back();
+  }
 }

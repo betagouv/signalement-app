@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ReportService } from '../../../services/report.service';
+import { ReportService, Step } from '../../../services/report.service';
+import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -10,7 +11,8 @@ import { ReportService } from '../../../services/report.service';
 })
 export class ConfirmationComponent implements OnInit {
 
-  @Input() report: Report;
+  step: Step;
+  report: Report;
 
   confirmationForm: FormGroup;
   contactAgreementCtrl: FormControl;
@@ -18,13 +20,21 @@ export class ConfirmationComponent implements OnInit {
   showErrors: boolean;
   loading: boolean;
 
-  @Output() validate = new EventEmitter();
-
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService) { }
+              private reportService: ReportService,
+              private analyticsService: AnalyticsService) {
+  }
 
   ngOnInit() {
-    this.initConfirmationForm();
+    this.step = Step.Confirmation;
+    this.reportService.currentReport.subscribe(report => {
+      if (report) {
+        this.report = report;
+        this.initConfirmationForm();
+      } else {
+        this.reportService.reinit();
+      }
+    });
   }
 
   initConfirmationForm() {
@@ -41,13 +51,14 @@ export class ConfirmationComponent implements OnInit {
     if (!this.confirmationForm.valid) {
       this.showErrors = true;
     } else {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
       this.report.contactAgreement = this.contactAgreementCtrl.value;
       this.reportService.createReport(this.report)
         .subscribe(
         result => {
           this.loading = false;
-          this.validate.emit();
+          this.reportService.changeReport(this.report, this.step);
         },
         error => {
           this.loading = false;

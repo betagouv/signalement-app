@@ -1,18 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReportDetails } from '../../../model/Report';
+import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { SubcategoryDetails } from '../../../model/Anomaly';
+import { ReportService, Step } from '../../../services/report.service';
+import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
 
-  @Input() initialValue: ReportDetails;
-  @Input() subcategoryDetails: SubcategoryDetails;
+  step: Step;
+  report: Report;
 
   detailsForm: FormGroup;
   precisionCtrl: FormControl;
@@ -26,24 +27,35 @@ export class DetailsComponent implements OnInit {
 
   showErrors: boolean;
 
-  @Output() validate = new EventEmitter();
-
   constructor(public formBuilder: FormBuilder,
-    private localeService: BsLocaleService) { }
+              private reportService: ReportService,
+              private analyticsService: AnalyticsService,
+              private localeService: BsLocaleService) {
+  }
 
   ngOnInit() {
+    this.step = Step.Details;
+    this.reportService.currentReport.subscribe(report => {
+      if (report) {
+        this.report = report;
+        this.initDetailsForm();
+        this.constructPlageHoraireList();
+      } else {
+        this.reportService.reinit();
+      }
+    });
     this.localeService.use('fr');
-    this.initDetailsForm();
-    this.constructPlageHoraireList();
   }
 
   initDetailsForm() {
     this.showErrors = false;
 
-    this.descriptionCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.description : '');
-    this.anomalyDateCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.anomalyDate : new Date(), Validators.required);
-    this.anomalyTimeSlotCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.anomalyTimeSlot : '');
-    this.precisionCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.precision : '', Validators.required);
+    this.descriptionCtrl = this.formBuilder.control(this.report.details ? this.report.details.description : '');
+    this.anomalyDateCtrl = this.formBuilder.control(
+      this.report.details ? this.report.details.anomalyDate : new Date(), Validators.required
+    );
+    this.anomalyTimeSlotCtrl = this.formBuilder.control(this.report.details ? this.report.details.anomalyTimeSlot : '');
+    this.precisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.precision : '', Validators.required);
 
     this.detailsForm = this.formBuilder.group({
       anomalyDate: this.anomalyDateCtrl,
@@ -51,7 +63,7 @@ export class DetailsComponent implements OnInit {
       description: this.descriptionCtrl
     });
 
-    if (this.subcategoryDetails && this.subcategoryDetails.precision) {
+    if (this.report.subcategory && this.report.subcategory.details && this.report.subcategory.details.precision) {
       this.detailsForm.addControl('precision', this.precisionCtrl);
     }
 
@@ -76,6 +88,7 @@ export class DetailsComponent implements OnInit {
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
       const reportDetails = new ReportDetails();
       reportDetails.precision = this.precisionCtrl.value;
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
@@ -83,7 +96,8 @@ export class DetailsComponent implements OnInit {
       reportDetails.description = this.descriptionCtrl.value;
       reportDetails.ticketFile = this.ticketFile;
       reportDetails.anomalyFile = this.anomalyFile;
-      this.validate.emit(reportDetails);
+      this.report.details = reportDetails;
+      this.reportService.changeReport(this.report, this.step);
     }
   }
 

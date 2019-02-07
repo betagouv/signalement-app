@@ -1,7 +1,8 @@
+<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white">
   <div class="container">
 
-    <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm">
+    <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
       <h5 class="font-weight-bold">
         Merci de compléter votre identité afin d'authentifier votre signalement.
         <br/>

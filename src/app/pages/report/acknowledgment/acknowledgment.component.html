@@ -1,0 +1,41 @@
+<main role="main">
+  <section class="section-small section-lighter-grey">
+    <div class="container">
+      <h1 class="text-center">Merci pour votre signalement</h1>
+    </div>
+  </section>
+  <section class="section section-white" *ngIf="report">
+    <div class="container max-width">
+      <div class="mt-4" *ngIf="report.contactAgreement">
+        <p>
+          Votre signalement va être communiqué au commerçant.
+          Il pourra corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
+        </p>
+        <p>
+          Votre signalement est aussi transmis à la répression des fraudes (DGCCRF).
+          Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+        </p>
+        <p>
+          En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalement.beta.gouv.fr?subject=incident" target="_blank">contact@signalement.beta.gouv.fr</a>
+        </p>
+      </div>
+      <div class="mt-4" *ngIf="!report.contactAgreement">
+        <p>
+          Votre signalement va être communiqué de façon anonyme au commerçant.
+          Il pourra corriger directement le problème grâce à vos informations.
+        </p>
+        <p>
+          Votre signalement est aussi transmis à la répression des fraudes (DGCCRF).
+          Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+        </p>
+        <p>
+          En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalement.beta.gouv.fr?subject=incident" target="_blank">contact@signalement.beta.gouv.fr</a>
+        </p>
+      </div>
+        <hr />
+      <button class="btn btn-lg btn-primary" (click)="newReport()">
+        Identifier un autre problème
+      </button>
+    </div>
+  </section>
+</main>

@@ -2,15 +2,28 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubcategoryComponent } from './subcategory.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Subcategory } from '../../../model/Anomaly';
+import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { deserialize } from 'json-typescript-mapper';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReportService, Step } from '../../../services/report.service';
+import { of } from 'rxjs';
+import { Report } from '../../../model/Report';
+import { AnomalyService } from '../../../services/anomaly.service';
 
 describe('SubcategoryComponent', () => {
+
   let component: SubcategoryComponent;
   let fixture: ComponentFixture<SubcategoryComponent>;
+  let reportService: ReportService;
+  let anomalyService: AnomalyService;
+
+  const reportFixture = new Report();
+  reportFixture.category = 'catégorie';
 
   const subcategoriesFixture = [
     deserialize(Subcategory, { title: 'title1', description: 'description1' }),
@@ -18,23 +31,39 @@ describe('SubcategoryComponent', () => {
     deserialize(Subcategory, { title: 'title3', description: 'description3' }),
   ];
 
+  const anomalyFixture = new Anomaly();
+  anomalyFixture.category = reportFixture.category;
+  anomalyFixture.subcategories = subcategoriesFixture;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         SubcategoryComponent,
+        BreadcrumbComponent,
         CollapsableTextComponent,
         TruncatePipe,
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
+        RouterTestingModule,
         Angulartics2RouterlessModule.forRoot(),
+      ],
+      providers: [
+        ReportService,
+        AnomalyService,
       ]
     })
-    .compileComponents();
+      .overrideTemplate(BreadcrumbComponent, '')
+      .compileComponents();
   }));
 
   beforeEach(() => {
+    anomalyService = TestBed.get(AnomalyService);
+    reportService = TestBed.get(ReportService);
+    reportService.currentReport = of(reportFixture);
+
     fixture = TestBed.createComponent(SubcategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -47,7 +76,7 @@ describe('SubcategoryComponent', () => {
   describe('ngOnInit function', () => {
 
     it('should initially display the form with subcategories as radio buttons list and no errors message', () => {
-      component.anomalySubcategories = subcategoriesFixture;
+      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
 
       component.ngOnInit();
       fixture.detectChanges();
@@ -59,8 +88,6 @@ describe('SubcategoryComponent', () => {
     });
 
     it('should define all form controls', () => {
-      component.ngOnInit();
-
       expect(component.subcategoryForm.controls['anomalySubcategory']).toEqual(component.anomalySubcategoryCtrl);
     });
 
@@ -79,22 +106,26 @@ describe('SubcategoryComponent', () => {
       expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
-    it('should emit and event with a subcategory when no errors', (done) => {
-      component.anomalySubcategories = subcategoriesFixture;
+    it('should change the shared report with a report which contains a subcategory when no errors', () => {
+      component.subcategories = subcategoriesFixture;
       component.anomalySubcategoryCtrl.setValue('title2');
-
-      const subcategoryExpected = new Subcategory();
-      subcategoryExpected.title = 'title2';
-      subcategoryExpected.description = 'description2';
-
-      component.validate.subscribe(result => {
-        expect(result).toEqual(subcategoryExpected);
-        done();
-      });
+      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+      const changeReportSpy = spyOn(reportService, 'changeReport');
+      fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
+
+      const subcategoryExpected = new Subcategory();
+      subcategoryExpected.title = 'title2';
+      subcategoryExpected.description = 'description2';
+      const reportExpected = new Report();
+      reportExpected.category = reportFixture.category;
+      reportExpected.subcategory = subcategoryExpected;
+
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Subcategory);
+
     });
   });
 });

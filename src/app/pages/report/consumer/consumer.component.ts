@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
+import { ReportService, Step } from '../../../services/report.service';
+import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { Report } from '../../../model/Report';
 
 @Component({
   selector: 'app-consumer',
@@ -9,7 +12,8 @@ import { Consumer } from '../../../model/Consumer';
 })
 export class ConsumerComponent implements OnInit {
 
-  @Input() initialValue: Consumer;
+  step: Step;
+  report: Report;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -18,18 +22,28 @@ export class ConsumerComponent implements OnInit {
 
   showErrors: boolean;
 
-  @Output() validate = new EventEmitter();
-
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder,
+              private reportService: ReportService,
+              private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    this.initConsumerForm();
+    this.step = Step.Consumer;
+    this.reportService.currentReport.subscribe(report => {
+      if (report) {
+        this.report = report;
+        this.initConsumerForm();
+      } else {
+        this.reportService.reinit();
+      }
+    });
   }
 
   initConsumerForm() {
-    this.firstNameCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.firstName : '', Validators.required);
-    this.lastNameCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.lastName : '', Validators.required);
-    this.emailCtrl = this.formBuilder.control(this.initialValue ? this.initialValue.email : '', [Validators.required, Validators.email]);
+    this.firstNameCtrl = this.formBuilder.control(this.report.consumer ? this.report.consumer.firstName : '', Validators.required);
+    this.lastNameCtrl = this.formBuilder.control(this.report.consumer ? this.report.consumer.lastName : '', Validators.required);
+    this.emailCtrl = this.formBuilder.control(
+      this.report.consumer ? this.report.consumer.email : '', [Validators.required, Validators.email]
+    );
 
     this.consumerForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,
@@ -42,11 +56,13 @@ export class ConsumerComponent implements OnInit {
     if (!this.consumerForm.valid) {
       this.showErrors = true;
     } else {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConsumer);
       const consumer = new Consumer();
       consumer.firstName = this.firstNameCtrl.value;
       consumer.lastName = this.lastNameCtrl.value;
       consumer.email = this.emailCtrl.value;
-      this.validate.emit(consumer);
+      this.report.consumer = consumer;
+      this.reportService.changeReport(this.report, this.step);
     }
   }
 }

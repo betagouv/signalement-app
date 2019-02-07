@@ -1,6 +1,7 @@
+<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white position-relative">
   <div class="container">
-    <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
+    <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
       <div class="form__group">
         <label for="searchInput">Nom ou enseigne de l'établissement <span>*</span>
         </label>
