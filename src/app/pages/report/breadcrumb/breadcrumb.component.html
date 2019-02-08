@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-2 col-sm-1 text-right">
-        <img src="/assets/images/icon_back.png" class="back pointer" (click)="back()"/>
+        <img src="/assets/images/icon_back.png" class="back pointer" (click)="back()" alt="page précédente"/>
       </div>
       <div class="col-10 col-sm-11">
         <div *ngIf="report">
@@ -10,24 +10,32 @@
           <span class="note" *ngIf="report.subcategory">
             {{report.subcategory.title}}
           </span>
-          <p class="steps" *ngIf="step !== 'Information'">
-            <span class="d-sm-none">
-              &nbsp;>&nbsp;
-            </span>
-            <span class="{{getStepClass('Subcategory')}}">Le problème</span>
-            <br class="d-sm-none"/>
-            &nbsp;>&nbsp;
-            <span class="{{getStepClass('Details')}}">La description</span>
-            <br class="d-sm-none"/>
-            &nbsp;>&nbsp;
-            <span class="{{getStepClass('Company')}}">Le commerçant</span>
-            <br class="d-sm-none"/>
-            &nbsp;>&nbsp;
-            <span class="{{getStepClass('Consumer')}}">Le consommateur</span>
-            <br class="d-sm-none"/>
-            &nbsp;>&nbsp;
-            <span class="{{getStepClass('Confirmation')}}">Confirmation</span>
-          </p>
+          <div class="steps" *ngIf="step !== 'Information'">
+            <div class="{{getStepClass('Subcategory')}}">
+              <span class="step-number" [innerHTML]="displayedStep('Subcategory')"></span>
+              <span>Le problème</span>
+            </div>
+            <img src="/assets/images/icon_next.png" alt="étape suivante"/>
+            <div class="{{getStepClass('Details')}}">
+              <span class="step-number" [innerHTML]="displayedStep('Details')"></span>
+              <span>La description</span>
+            </div>
+            <img src="/assets/images/icon_next.png" alt="étape suivante"/>
+            <div class="{{getStepClass('Company')}}">
+              <span class="step-number" [innerHTML]="displayedStep('Company')"></span>
+              <span>Le commerçant</span>
+            </div>
+            <img src="/assets/images/icon_next.png" alt="étape suivante"/>
+            <div class="{{getStepClass('Consumer')}}">
+              <span class="step-number" [innerHTML]="displayedStep('Consumer')"></span>
+              <span>Le consommateur</span>
+            </div>
+            <img src="/assets/images/icon_next.png" alt="étape suivante"/>
+            <div class="{{getStepClass('Confirmation')}}">
+              <span class="step-number" [innerHTML]="displayedStep('Confirmation')"></span>
+              <span>Confirmation</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
