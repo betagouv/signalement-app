@@ -372,6 +372,14 @@
     {
       "category": "Chien d'assistance refusé",
       "rank" : 101
+    },
+    {
+      "category": "Achat sur internet",
+      "rank" : 1000,
+      "information": {
+        "title": "La vente sur internet ne fait pas encore partie de notre site.",
+        "content": "Vous pouvez utiliser le formulaire DGCCRF disponible ici : <a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a>"
+      }
     }
   ]
 }

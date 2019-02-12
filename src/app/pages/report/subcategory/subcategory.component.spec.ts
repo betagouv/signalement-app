@@ -38,8 +38,8 @@ describe('SubcategoryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SubcategoryComponent,
-        BreadcrumbComponent,
+          SubcategoryComponent,
+          BreadcrumbComponent,
         CollapsableTextComponent,
         TruncatePipe,
       ],
@@ -73,15 +73,27 @@ describe('SubcategoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit function', () => {
+  describe('on init', () => {
+
+    it('shoud request the user if the problem concerns an internet purchase or not', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('h3').textContent).toEqual('Est-ce que votre problème fait suite à un achat sur internet ?');
+      expect(nativeElement.querySelectorAll('button')[0].textContent).toEqual('Oui');
+      expect(nativeElement.querySelectorAll('button')[1].textContent).toEqual('Non');
+      expect(nativeElement.querySelector('form')).toBeNull();
+    });
+  });
+
+  describe('when problem does not concern an internet purchase', () => {
 
     it('should initially display the form with subcategories as radio buttons list and no errors message', () => {
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
 
+      const nativeElement = fixture.nativeElement;
       component.ngOnInit();
+      nativeElement.querySelectorAll('button')[1].click();
       fixture.detectChanges();
 
-      const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('form')).not.toBeNull();
       expect(nativeElement.querySelectorAll('input[type="radio"]').length).toEqual(subcategoriesFixture.length);
       expect(nativeElement.querySelector('.notification.error')).toBeNull();
@@ -97,6 +109,7 @@ describe('SubcategoryComponent', () => {
 
     it('should display errors when occurs', () => {
       component.anomalySubcategoryCtrl.setValue('');
+      component.internetPurchase = false;
 
       component.submitSubcategoryForm();
       fixture.detectChanges();
@@ -107,6 +120,7 @@ describe('SubcategoryComponent', () => {
     });
 
     it('should change the shared report with a report which contains a subcategory when no errors', () => {
+      component.internetPurchase = false;
       component.subcategories = subcategoriesFixture;
       component.anomalySubcategoryCtrl.setValue('title2');
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);

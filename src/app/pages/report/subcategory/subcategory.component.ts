@@ -21,6 +21,7 @@ export class SubcategoryComponent implements OnInit {
   anomalySubcategoryCtrl: FormControl;
 
   showErrors: boolean;
+  internetPurchase: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
@@ -42,15 +43,19 @@ export class SubcategoryComponent implements OnInit {
 
   initSubcategories() {
     const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
-    if (anomaly) {
+    if (anomaly && anomaly.subcategories) {
       this.subcategories = anomaly.subcategories;
+    } else {
+      this.reportService.reinit();
     }
   }
 
   initSubcategoryForm() {
     this.showErrors = false;
 
-    this.anomalySubcategoryCtrl = this.formBuilder.control(this.report.subcategory ? this.report.subcategory.title : '', Validators.required);
+    this.anomalySubcategoryCtrl = this.formBuilder.control(
+      this.report.subcategory ? this.report.subcategory.title : '', Validators.required
+    );
 
     this.subcategoryForm = this.formBuilder.group({
       anomalySubcategory: this.anomalySubcategoryCtrl
@@ -65,6 +70,14 @@ export class SubcategoryComponent implements OnInit {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, this.anomalySubcategoryCtrl.value);
       this.report.subcategory = this.subcategories.find(subcategory => subcategory.title === this.anomalySubcategoryCtrl.value);
       this.reportService.changeReport(this.report, this.step);
+    }
+  }
+
+  setInternetPurchase(internetPurchase: boolean) {
+    this.internetPurchase = internetPurchase;
+    if (this.internetPurchase) {
+      this.report.category = 'Achat sur internet';
+      this.reportService.changeReport(this.report, Step.Category);
     }
   }
 }
