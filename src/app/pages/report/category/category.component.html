@@ -1,0 +1,82 @@
+<div class="banner text-center section section-primary" role="banner">
+  <div class="container">
+    <h1>
+      Signalez un problème au commerçant et à la répression des fraudes
+    </h1>
+    <h3>
+      Magasins, commerces de proximité, cafés et restaurants...
+    </h3>
+  </div>
+</div>
+
+<main role="main">
+  <section class="section section-lightest-grey position-relative">
+
+    <div class="container">
+      <h3 class="text-center">Quel est le problème ?</h3>
+      <div class="row pb-4">
+        <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
+          <div class="category pointer" (click)="selectAnomaly(category)">
+            <div class="row">
+              <div class="col-12 col-lg-3 mb-2 text-center">
+                <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
+              </div>
+              <div class="col-12 col-lg-9 pl-lg-0">
+                <h5 class="mb-0">{{category.category}}</h5>
+                <span class="note">{{category.description}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="text-center pointer" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
+        <u>Mon problème n'est pas dans la liste</u>
+      </h3>
+      <ng-template #secondaryCategories>
+        <h3 class="text-center">
+          Autres problèmes
+        </h3>
+        <ul>
+          <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)">
+            <h5><u>{{category.category}}</u></h5>
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+  </section>
+
+  <section class="section section-lighter-grey">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
+          <div class="icon">
+            <img src="/assets/images/icon_fast.png" alt="Icône magasin"/>
+          </div>
+          <p class="text-center"><b>Rapide</b></p>
+          <p>
+            Des questions simples pour vous guider afin de signaler rapidement votre problème et connaître vos droits.
+          </p>
+        </div>
+        <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
+          <div class="icon">
+            <img src="/assets/images/icon_approbation.png" alt="Icône workflow"/>
+          </div>
+          <p class="text-center"><b>Transparent</b></p>
+          <p>
+            Le commerçant, s’il le souhaite, a accès aux signalements. Cela lui permet de procéder spontanément aux corrections utiles, sans sanction.
+          </p>
+        </div>
+        <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
+          <div class="icon">
+            <img src="/assets/images/icon_collaboration.png" alt="Icône alarme"/>
+          </div>
+          <p class="text-center"><b>Participatif</b></p>
+          <p>
+            Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ? Les enquêteurs de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>) seront avertis afin d’intervenir.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -9,6 +9,10 @@ import { Consumer } from '../../../model/Consumer';
 import { Company } from '../../../model/Company';
 import { PrecedeByPipe } from '../../../pipes/precede-by.pipe';
 import { Subcategory } from '../../../model/Anomaly';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { ReportService } from '../../../services/report.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ConfirmationComponent', () => {
   let component: ConfirmationComponent;
@@ -43,16 +47,23 @@ describe('ConfirmationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ConfirmationComponent,
+        BreadcrumbComponent,
         PrecedeByPipe,
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        RouterTestingModule,
         NgxLoadingModule,
+        Angulartics2RouterlessModule.forRoot(),
+      ],
+      providers: [
+        ReportService,
       ]
     })
-    .compileComponents();
+      .overrideTemplate(BreadcrumbComponent, '')
+      .compileComponents();
   }));
 
   beforeEach(() => {
