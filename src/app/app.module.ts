@@ -15,6 +15,7 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { CompanyComponent } from './pages/report/company/company.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HowComponent } from './pages/infos/how/how.component';
+import { AboutComponent } from './pages/infos/about/about.component';
 import { RouterModule } from '@angular/router';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Angulartics2Module } from 'angulartics2';
@@ -40,6 +41,7 @@ defineLocale('fr', frLocale);
     CompanyComponent,
     FooterComponent,
     HowComponent,
+    AboutComponent,
     StatsComponent,
     DetailsComponent,
     BreadcrumbComponent,
@@ -67,7 +69,7 @@ defineLocale('fr', frLocale);
       { path: '', component: ReportComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'comment-ça-marche', component: HowComponent },
-      { path: 'comment-ça-marche', component: HowComponent },
+      { path: 'qui-sommes-nous', component: AboutComponent }
     ]),
   ],
   providers: [],
