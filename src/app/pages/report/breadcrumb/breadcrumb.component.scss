@@ -1,4 +1,5 @@
 @import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
 img.back {
 
@@ -16,11 +17,74 @@ img.back {
 
   color: $dark-grey;
   padding-top: 1em;
-  font-size: 1.25em;
+  font-size: 1.1em;
 
-  .current {
-    color: $black;
-    font-weight: bold;
+  img {
+    height: 20px;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  div {
+    display: inline-block;
+    padding-bottom: 0.5em;
+    padding-left: 0.25em;
+    padding-right: 0.5em;
+
+    .step-number {
+      color: $white;
+      background-color: $light-grey;
+      width: 22px;
+      height: 22px;
+      line-height: 20px;
+      vertical-align: text-bottom;
+      border-radius: 50%;
+      display: inline-block;
+      text-align: center;
+      margin-right: 0.5em;
+      font-size: 0.8em;
+    }
+
+    &.achieved {
+      color: $black;
+      font-weight: bold;
+
+      .step-number {
+        background-color: $primary;
+        line-height: 22px;
+      }
+    }
+
+    &.current {
+      color: $black;
+      font-weight: bold;
+
+      border-bottom: $primary 3px solid;
+
+      .step-number {
+        background-color: $primary;
+      }
+    }
+  }
+
+  @media #{$smaller-than-large-desktop} {
+    img {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  @media #{$smaller-than-desktop} {
+    img {
+      display: none;
+    }
+
+    div {
+      display: block;
+      &.current {
+        border-bottom: none;
+      }
+    }
   }
 }
 
