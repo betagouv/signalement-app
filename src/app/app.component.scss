@@ -83,4 +83,19 @@
     padding-bottom: 1em;
   }
 
+  blockquote {
+    background-color: $theme-background-grey;
+    border-left: 8px solid $theme-border-lighter;
+    padding: 4px 25px;
+    margin: 16px 0;
+
+    p {
+      margin: 16px 0;
+    }
+
+    span {
+      font-style: italic;
+    }
+  }
+
 }
