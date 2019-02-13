@@ -5,7 +5,9 @@ import { AnomalyService } from './anomaly.service';
 describe('AnomalyService', () => {
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ });
+    TestBed.configureTestingModule({
+      imports: []
+    });
   });
 
   it('should be created', () => {

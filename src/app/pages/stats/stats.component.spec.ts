@@ -38,10 +38,11 @@ describe('StatsComponent', () => {
   }));
 
   beforeEach(() => {
+    statsService = TestBed.get(StatsService);
+    spyOn(statsService, 'getStatistics').and.returnValue(of(statisticsFixture));
     fixture = TestBed.createComponent(StatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    statsService = TestBed.get(StatsService);
   });
 
   it('should create', () => {
@@ -49,10 +50,6 @@ describe('StatsComponent', () => {
   });
 
   describe('onInit', () => {
-
-    beforeEach(() => {
-      spyOn(statsService, 'getStatistics').and.returnValue(of(statisticsFixture));
-    });
 
     it('should load the stats', () => {
 

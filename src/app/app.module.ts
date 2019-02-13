@@ -8,6 +8,7 @@ import { HeaderComponent } from './pages/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HowComponent } from './pages/infos/how/how.component';
+import { AboutComponent } from './pages/infos/about/about.component';
 import { RouterModule } from '@angular/router';
 import { StatsComponent } from './pages/stats/stats.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -24,6 +25,7 @@ registerLocaleData(localeFr, 'fr');
     HeaderComponent,
     FooterComponent,
     HowComponent,
+    AboutComponent,
     StatsComponent,
   ],
   imports: [
@@ -38,6 +40,7 @@ registerLocaleData(localeFr, 'fr');
       { path: '', component: CategoryComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'comment-ça-marche', component: HowComponent },
+      { path: 'qui-sommes-nous', component: AboutComponent }
     ]),
     ReportModule,
   ],
