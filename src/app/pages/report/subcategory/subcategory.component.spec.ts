@@ -109,7 +109,7 @@ describe('SubcategoryComponent', () => {
 
     it('should display errors when occurs', () => {
       component.anomalySubcategoryCtrl.setValue('');
-      component.internetPurchase = false;
+      reportFixture.internetPurchase = false;
 
       component.submitSubcategoryForm();
       fixture.detectChanges();
@@ -120,7 +120,7 @@ describe('SubcategoryComponent', () => {
     });
 
     it('should change the shared report with a report which contains a subcategory when no errors', () => {
-      component.internetPurchase = false;
+      reportFixture.internetPurchase = false;
       component.anomaly = new Anomaly();
       component.anomaly.subcategories = subcategoriesFixture;
       component.anomalySubcategoryCtrl.setValue('title2');
@@ -136,6 +136,7 @@ describe('SubcategoryComponent', () => {
       subcategoryExpected.title = 'title2';
       subcategoryExpected.description = 'description2';
       const reportExpected = new Report();
+      reportExpected.internetPurchase = false;
       reportExpected.category = reportFixture.category;
       reportExpected.subcategory = subcategoryExpected;
 

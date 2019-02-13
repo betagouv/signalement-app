@@ -21,7 +21,6 @@ export class SubcategoryComponent implements OnInit {
   anomalySubcategoryCtrl: FormControl;
 
   showErrors: boolean;
-  internetPurchase: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
@@ -74,8 +73,8 @@ export class SubcategoryComponent implements OnInit {
   }
 
   setInternetPurchase(internetPurchase: boolean) {
-    this.internetPurchase = internetPurchase;
-    if (this.internetPurchase) {
+    this.report.internetPurchase = internetPurchase;
+    if (this.report.internetPurchase) {
       this.report.category = 'Problème suite à un achat sur internet';
       this.reportService.changeReport(this.report, Step.Category);
     }
