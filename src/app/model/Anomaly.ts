@@ -65,6 +65,8 @@ export class Anomaly {
   description: string;
   @JsonProperty('rank')
   rank?: number;
+  @JsonProperty('withInternetPurchase')
+  withInternetPurchase?: boolean;
   @JsonProperty('icon')
   icon?: string;
   @JsonProperty({ name: 'information', clazz: Information })
@@ -80,6 +82,7 @@ export class Anomaly {
     this.category = undefined;
     this.description = undefined;
     this.rank = undefined;
+    this.withInternetPurchase = undefined;
     this.icon = undefined;
     this.information = undefined;
     this.breadcrumbTitle = undefined;

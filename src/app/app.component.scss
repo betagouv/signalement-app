@@ -60,10 +60,6 @@
     ul {
       margin-bottom: 0;
       padding-left: 1em;
-
-      li + li {
-        padding-top: 0.5em;
-      }
     }
   }
 
@@ -97,5 +93,12 @@
       font-style: italic;
     }
   }
+
+  ul {
+    li + li {
+      padding-top: 0.5em;
+    }
+  }
+
 
 }

@@ -2,7 +2,7 @@
 <section class="section section-white">
   <div class="container">
 
-    <div class="pb-sm-5 pt-sm-5" *ngIf="report.internetPurchase === undefined; else subcategoryFormTemplate">
+    <div class="pb-sm-5 pt-sm-5" *ngIf="anomaly?.withInternetPurchase && report.internetPurchase === undefined; else subcategoryFormTemplate">
       <h4 class="text-center">Est-ce que votre problème fait suite à un achat sur internet ?</h4>
       <div class="text-center pt-2 pt-sm-3 pb-lg-5">
         <button type="submit" class="btn btn-lg btn-outline-primary" (click)="setInternetPurchase(true)">Oui</button>

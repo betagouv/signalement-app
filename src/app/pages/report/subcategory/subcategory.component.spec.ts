@@ -38,8 +38,8 @@ describe('SubcategoryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-          SubcategoryComponent,
-          BreadcrumbComponent,
+        SubcategoryComponent,
+        BreadcrumbComponent,
         CollapsableTextComponent,
         TruncatePipe,
       ],
@@ -76,6 +76,13 @@ describe('SubcategoryComponent', () => {
   describe('on init', () => {
 
     it('shoud request the user if the problem concerns an internet purchase or not', () => {
+      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
+        Object.assign(new Anomaly(), anomalyFixture, { withInternetPurchase: true })
+      );
+
+      component.ngOnInit();
+      fixture.detectChanges();
+
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('h4').textContent).toEqual('Est-ce que votre problème fait suite à un achat sur internet ?');
       expect(nativeElement.querySelectorAll('button')[0].textContent).toEqual('Oui');
@@ -87,10 +94,14 @@ describe('SubcategoryComponent', () => {
   describe('when problem does not concern an internet purchase', () => {
 
     it('should initially display the form with subcategories as radio buttons list and no errors message', () => {
-      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
+        Object.assign(new Anomaly(), anomalyFixture, { withInternetPurchase: true })
+      );
 
       const nativeElement = fixture.nativeElement;
       component.ngOnInit();
+      fixture.detectChanges();
+
       nativeElement.querySelectorAll('button')[1].click();
       fixture.detectChanges();
 

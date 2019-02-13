@@ -173,6 +173,7 @@
       "category": "Matériel / Objet",
       "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
       "rank" : 3,
+      "withInternetPurchase": true,
       "icon": "icon_material.png",
       "subcategories": [
         {
@@ -243,6 +244,7 @@
       "category": "Prix / Paiement",
       "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...",
       "rank" : 5,
+      "withInternetPurchase": true,
       "icon": "icon_price.png",
       "subcategories": [
         {
@@ -302,6 +304,7 @@
       "category": "Publicité",
       "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse...",
       "rank" : 6,
+      "withInternetPurchase": true,
       "icon": "icon_pub.png",
       "subcategories": [
         {
@@ -316,6 +319,7 @@
       "category": "Services associés à l'achat",
       "description": "Colis non reçu, problème de garantie constructeur, hotline injoignable,...",
       "rank" : 7,
+      "withInternetPurchase": true,
       "icon": "icon_service.png",
       "subcategories": [
         {
@@ -366,55 +370,12 @@
       ]
     },
     {
-      "category": "J'ai changé d'avis, je veux me faire rembourser",
-      "rank": 100,
-      "breadcrumbTitle": "Vous avez changé d'avis, vous voulez vous faire rembourser",
-      "subcategoryTitle": "Où avez-vous acheté votre produit ou souscrit votre abonnement/contrat ?",
-      "subcategories": [
-        {
-          "title": "Dans un magasin dans lequel vous vous êtes rendu",
-          "information": {
-            "title": "Ceci ne constitue pas un motif de signalement.",
-            "content": "<p>Vous ne pouvez pas demander à vous faire rembourser parce que vous avez changé d'avis ou parce que le produit ne vous convient pas (exemple : vêtement trop petit).</p><p>Cependant, le commerçant peut prévoir la possibilité d'échanger et de rembourser ses produits. <br />C'est un geste commercial. Il peut choisir les conditions.<br/>Par exemple, sous 5 jours, remboursement avec avoir seulement...<br />Il doit respecter les règles d'échange et de remboursement qui sont affichées dans son magasin.</p><p>Si vous souhaitez vous faire rembourser parce que le produit ne fonctionne pas, vous devez faire jouer la garantie légale de conformité auprès du commerçant.</p>"
-          }
-        },
-        {
-          "title": "Sur internet",
-          "information": {
-            "title": "Ceci ne constitue pas un motif de signalement.",
-            "reference": "retractation"
-          }
-        },
-        {
-          "title": "Auprès d'un démarcheur qui est venu dans votre domicile",
-          "information": {
-            "title": "Ceci ne constitue pas un motif de signalement.",
-            "reference": "retractation"
-          }
-        },
-        {
-          "title": "Sur un stand dans une foire ou un salon",
-          "information": {
-            "title": "Ceci ne constitue pas un motif de signalement.",
-            "content": "<p>Vous ne pouvez pas demander à vous faire rembourser parce que vous avez changé d'avis ou parce que le produit ne vous convient pas (exemple : vêtement trop petit).</p><p>Cependant, le commerçant peut prévoir la possibilité d'échanger et de rembourser ses produits. <br />C'est un geste commercial. Il peut choisir les conditions.<br/>Par exemple, sous 5 jours, remboursement avec avoir seulement...<br />Il doit respecter les règles d'échange et de remboursement qui sont affichées dans son magasin.</p><p>Si vous souhaitez vous faire rembourser parce que le produit ne fonctionne pas, vous devez faire jouer la garantie légale de conformité auprès du commerçant.</p>"
-          }
-        },
-        {
-          "title": "Par téléphone",
-          "information": {
-            "title": "Ceci ne constitue pas un motif de signalement.",
-            "reference": "retractation"
-          }
-        }
-      ]
-    },
-    {
       "category": "Problème suite à un achat sur internet",
       "rank" : 101,
       "breadcrumbTitle": "Vous avez identifié un problème suite à un achat sur internet",
       "information": {
-        "title": "La vente sur internet ne fait pas encore partie de notre site.",
-        "content": "Vous pouvez utiliser le formulaire DGCCRF disponible ici : <a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a>"
+        "title": "Nous sommes désolés, la vente sur internet ne fait pas encore partie de notre site.",
+        "content": "Votre signalement concerne : <p><ul><li>un problème avec un commerçant ? <br/><span class=\"note\">Exemple : colis non reçu, pas de nouvelle de votre commande... </span><br />Vous pouvez saisir la <abbr title=\"Direction Général de la Concurrence, Consommation et Répression des Fraudes\">DGCCRF</abbr> avec le formulaire disponible ici : <a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a></li><li>un spam que vous avez reçu ?<br />Vous pouvez le signaler ici : <a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a></li><li>un contenu qui vous semble inapproprié ? <br/><span class=\"note\">Exemple : trafic illicite, pédopornographie ...</span><br/>Vous pouvez le signaler ici : <a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a></li></ul></p>"
       }
     },
     {
@@ -424,14 +385,6 @@
     {
       "category": "Chien d'assistance refusé",
       "rank" : 103
-    },
-    {
-      "category": "Démarchage à domicile",
-      "rank" : 104
-    },
-    {
-      "category": "Dépannage à domicile",
-      "rank" : 105
     }
   ]
 }
