@@ -1,7 +1,7 @@
 import { NgtUniversalModule } from '@ng-toolkit/universal';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/header/header.component';
@@ -14,6 +14,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { CategoryComponent } from './pages/report/category/category.component';
 import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { NgxLoadingModule } from 'ngx-loading';
     ]),
     ReportModule,
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr' },
+  ]
 })
 export class AppModule {
 }

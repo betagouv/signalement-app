@@ -20,6 +20,7 @@ import { CollapsableTextComponent } from '../../components/collapsable-text/coll
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { ReportPaths } from '../../services/report.service';
+import { RetractationComponent } from './information/retractation/retractation.component';
 
 defineLocale('fr', frLocale);
 
@@ -45,6 +46,7 @@ const routes: Routes = [
     SubcategoryComponent,
     CategoryComponent,
     InformationComponent,
+    RetractationComponent,
     AcknowledgmentComponent,
     CollapsableTextComponent,
     PrecedeByPipe,

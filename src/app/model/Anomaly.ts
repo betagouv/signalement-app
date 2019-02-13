@@ -6,11 +6,13 @@ export class Information {
   title: string;
   @JsonProperty('content')
   content?: string;
+  @JsonProperty('reference')
+  reference?: string;
 
   constructor() {
     this.title = undefined;
     this.content = undefined;
-    this.content = undefined;
+    this.reference = undefined;
   }
 }
 
@@ -67,6 +69,10 @@ export class Anomaly {
   icon?: string;
   @JsonProperty({ name: 'information', clazz: Information })
   information?: Information;
+  @JsonProperty('breadcrumbTitle')
+  breadcrumbTitle?: string;
+  @JsonProperty('subcategoryTitle')
+  subcategoryTitle?: string;
   @JsonProperty({ name: 'subcategories', clazz: Subcategory })
   subcategories?: Subcategory[];
 
@@ -76,6 +82,8 @@ export class Anomaly {
     this.rank = undefined;
     this.icon = undefined;
     this.information = undefined;
+    this.breadcrumbTitle = undefined;
+    this.subcategoryTitle = undefined;
     this.subcategories = undefined;
   }
 }

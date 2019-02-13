@@ -2,8 +2,8 @@
 <section class="section section-white">
   <div class="container">
 
-    <div class="pb-sm-5 pt-sm-5" *ngIf="!internetPurchase === undefined; else subcategoryFormTemplate">
-      <h3 class="text-center">Est-ce que votre problème fait suite à un achat sur internet ?</h3>
+    <div class="pb-sm-5 pt-sm-5" *ngIf="internetPurchase === undefined; else subcategoryFormTemplate">
+      <h4 class="text-center">Est-ce que votre problème fait suite à un achat sur internet ?</h4>
       <div class="text-center pt-2 pt-sm-3 pb-lg-5">
         <button type="submit" class="btn btn-lg btn-outline-primary" (click)="setInternetPurchase(true)">Oui</button>
         <button type="submit" class="btn btn-lg btn-primary ml-4 ml-sm-5" (click)="setInternetPurchase(false)">Non</button>
@@ -11,8 +11,9 @@
     </div>
 
     <ng-template #subcategoryFormTemplate>
+      <h4 class="text-center mb-4" [innerHTML]="anomaly?.subcategoryTitle"></h4>
       <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
-        <div class="row pb-4" *ngFor="let subcategory of subcategories">
+        <div class="row pb-4" *ngFor="let subcategory of anomaly?.subcategories">
           <div class="col-2 col-sm-1 text-right pr-1">
             <input type="radio" formControlName="anomalySubcategory" [value]="subcategory.title" id="radio-{{subcategory.title}}"/>
           </div>
