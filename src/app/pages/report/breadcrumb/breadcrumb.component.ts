@@ -30,7 +30,7 @@ export class BreadcrumbComponent implements OnInit {
 
   displayedStep(step: string) {
     if (this.isStepAchieved(Step[step])) {
-      return '&#10004';
+      return '&#10003';
     } else {
       return this.getStepNumber(Step[step]);
     }
