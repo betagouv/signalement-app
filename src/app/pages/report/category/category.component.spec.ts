@@ -9,6 +9,7 @@ import { Anomaly } from '../../../model/Anomaly';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReportPaths } from '../../../services/report.service';
+import { AlertModule } from 'ngx-bootstrap';
 
 describe('CategoryComponent', () => {
 
@@ -44,6 +45,7 @@ describe('CategoryComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
+        AlertModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
       ],
       providers: [

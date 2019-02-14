@@ -8,6 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
 import { isPlatformBrowser } from '@angular/common';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+
+const ReportStorageKey = 'ReportSignalConso';
 
 @Injectable({
   providedIn: 'root',
@@ -17,23 +20,61 @@ export class ReportService {
   private reportSource = new BehaviorSubject<Report>(undefined);
   currentReport = this.reportSource.asObservable();
 
+  isRetrievedFromStorage: boolean;
+
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private http: HttpClient,
               private serviceUtils: ServiceUtils,
               private anomalyService: AnomalyService,
-              private router: Router) {
+              private router: Router,
+              private localStorage: LocalStorage) {
+
+    this.retrieveReportFromStorage();
+
+  }
+
+  private retrieveReportFromStorage() {
+    if (isPlatformBrowser(this.platformId) && !this.isRetrievedFromStorage) {
+      this.localStorage.getItem(ReportStorageKey).subscribe((report) => {
+        this.isRetrievedFromStorage = true;
+        if (report) {
+          report.fromStorage = true;
+          this.reportSource.next(report);
+        }
+      });
+    }
   }
 
   reinit() {
     this.router.navigate(['/']);
   }
 
+  removeReportFromStorage() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.localStorage.removeItemSubscribe(ReportStorageKey);
+    }
+  }
+
   changeReport(report: Report, step: Step) {
+    report.fromStorage = false;
     this.reportSource.next(report);
     if (isPlatformBrowser(this.platformId)) {
       window.scroll(0, 0);
+      if (report) {
+        this.localStorage.setItemSubscribe(ReportStorageKey, report);
+      } else {
+       this.localStorage.removeItemSubscribe(ReportStorageKey);
+      }
     }
-    this.router.navigate(this.nextRoute(step));
+    this.router.navigate([this.nextRoute(step)]);
+  }
+
+  backward(currentStep: Step) {
+    const previousRoute = this.previousRoute(currentStep);
+    if (previousRoute === ReportPaths.Category) {
+      this.removeReportFromStorage();
+    }
+    this.router.navigate([previousRoute]);
   }
 
   nextRoute(currentStep: Step) {
@@ -41,28 +82,49 @@ export class ReportService {
       case Step.Category:
         const anomaly = this.anomalyService.getAnomalyByCategory(this.reportSource.getValue().category);
         if (anomaly.information) {
-          return [ReportPaths.Information];
+          return ReportPaths.Information;
         } else if (anomaly.subcategories && anomaly.subcategories.length) {
-          return [ReportPaths.Subcategory];
+          return ReportPaths.Subcategory;
         } else {
-          return [ReportPaths.Details];
+          return ReportPaths.Details;
         }
       case Step.Subcategory:
         if (this.reportSource.getValue().subcategory.information) {
-          return [ReportPaths.Information];
+          return ReportPaths.Information;
         } else {
-          return [ReportPaths.Details];
+          return ReportPaths.Details;
         }
       case Step.Details:
-        return [ReportPaths.Company];
+        return ReportPaths.Company;
       case Step.Company:
-        return [ReportPaths.Consumer];
+        return ReportPaths.Consumer;
       case Step.Consumer:
-        return [ReportPaths.Confirmation];
+        return ReportPaths.Confirmation;
       case Step.Confirmation:
-        return [ReportPaths.Acknowledgment];
+        return ReportPaths.Acknowledgment;
       default:
-        return [ReportPaths.Category];
+        return ReportPaths.Category;
+    }
+  }
+
+  previousRoute(currentStep: Step) {
+    switch (currentStep) {
+      case Step.Subcategory:
+        return ReportPaths.Category;
+      case Step.Details:
+        if (this.reportSource.getValue().subcategory) {
+          return ReportPaths.Subcategory;
+        } else {
+          return ReportPaths.Category;
+        }
+      case Step.Company:
+        return ReportPaths.Details;
+      case Step.Consumer:
+        return ReportPaths.Company;
+      case Step.Confirmation:
+        return ReportPaths.Consumer;
+      default:
+        return ReportPaths.Category;
     }
   }
 

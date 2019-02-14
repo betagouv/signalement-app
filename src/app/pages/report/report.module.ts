@@ -12,7 +12,7 @@ import { AcknowledgmentComponent } from './acknowledgment/acknowledgment.compone
 import { FileInputComponent } from '../../components/file-input/file-input.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
+import { AlertModule, BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { Angulartics2Module } from 'angulartics2';
@@ -57,6 +57,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
+    AlertModule.forRoot(),
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     Ng2CompleterModule,
     Angulartics2Module.forRoot(),

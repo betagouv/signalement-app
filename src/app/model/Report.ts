@@ -11,6 +11,7 @@ export class Report {
   consumer: Consumer;
   contactAgreement: boolean;
   internetPurchase: boolean;
+  fromStorage: boolean;
 
 }
 

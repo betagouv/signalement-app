@@ -4,7 +4,8 @@ import { BreadcrumbComponent } from './breadcrumb.component';
 import { Report } from '../../../model/Report';
 import { PrecedeByPipe } from '../../../pipes/precede-by.pipe';
 import { Step } from '../../../services/report.service';
-import { APP_BASE_HREF, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('BreadcrumbComponent', () => {
   let component: BreadcrumbComponent;
@@ -16,10 +17,9 @@ describe('BreadcrumbComponent', () => {
         BreadcrumbComponent,
         PrecedeByPipe,
       ],
-      providers: [
-        Location,
-        { provide: LocationStrategy, useClass: PathLocationStrategy },
-        { provide: APP_BASE_HREF, useValue: '/'}
+      imports: [
+        HttpClientModule,
+        RouterTestingModule,
       ],
     })
     .compileComponents();

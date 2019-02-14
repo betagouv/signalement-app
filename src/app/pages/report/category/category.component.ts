@@ -62,4 +62,8 @@ export class CategoryComponent implements OnInit {
     this.reportService.changeReport(this.report, this.step);
   }
 
+  removeReport() {
+    this.reportService.removeReportFromStorage();
+  }
+
 }

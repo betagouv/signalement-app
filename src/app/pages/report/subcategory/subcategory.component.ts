@@ -30,7 +30,8 @@ export class SubcategoryComponent implements OnInit {
   ngOnInit() {
     this.step = Step.Subcategory;
     this.reportService.currentReport.subscribe(report => {
-      if (report) {
+      console.log('getReport', report)
+      if (report && report.category) {
         this.report = report;
         this.initSubcategoryForm();
         this.initSubcategories();
@@ -44,8 +45,6 @@ export class SubcategoryComponent implements OnInit {
     const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
     if (anomaly && anomaly.subcategories) {
       this.anomaly = anomaly;
-    } else {
-      this.reportService.reinit();
     }
   }
 

@@ -10,6 +10,9 @@
 </div>
 
 <main role="main">
+
+  <alert type="danger" dismissible="true" *ngIf="report && report.fromStorage" (onClosed)="removeReport()">Vous avez commencer à saisir un signalement, souhaitez-vous le poursuivre ?</alert>
+
   <section class="section section-lightest-grey position-relative">
 
     <div class="container">
