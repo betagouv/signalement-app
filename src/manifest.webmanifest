@@ -1,0 +1,23 @@
+{
+  "name": "SignalConso",
+  "short_name": "SignalConso",
+  "description": "Plateforme citoyenne pour signaler facilement et rapidement les anomalies rencontrées par les consommateurs dans leur vie de tous les jours",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0053b3"
+}

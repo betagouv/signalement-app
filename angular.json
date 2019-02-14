@@ -24,7 +24,7 @@
               "src/google53212771ade1a062.html",
               "src/sitemap.xml",
               "src/robots.txt",
-              "src/manifest.webmanifest",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/theme/main.scss",
