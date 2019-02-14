@@ -35,7 +35,7 @@ export class InformationComponent implements OnInit {
 
   initInformation() {
     const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
-    if (anomaly.information) {
+    if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
     } else if (this.report.subcategory && this.report.subcategory.information) {
