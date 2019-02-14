@@ -1,24 +1,36 @@
 <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white">
   <div class="container">
-    <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
-      <div class="row pb-4" *ngFor="let subcategory of subcategories">
-        <div class="col-2 col-sm-1 text-right pr-1">
-          <input type="radio" formControlName="anomalySubcategory" [value]="subcategory.title" id="radio-{{subcategory.title}}"/>
-        </div>
-        <div class="col-10 col-sm-11 pl-1">
-          <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
-          <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
-        </div>
+
+    <div class="pb-sm-5 pt-sm-5" *ngIf="anomaly?.withInternetPurchase && report.internetPurchase === undefined; else subcategoryFormTemplate">
+      <h4 class="text-center">Est-ce que votre problème fait suite à un achat sur internet ?</h4>
+      <div class="text-center pt-2 pt-sm-3 pb-lg-5">
+        <button type="submit" class="btn btn-lg btn-outline-primary" (click)="setInternetPurchase(true)">Oui</button>
+        <button type="submit" class="btn btn-lg btn-primary ml-4 ml-sm-5" (click)="setInternetPurchase(false)">Non</button>
       </div>
-      <div class="notification error" *ngIf="showErrors && anomalySubcategoryCtrl.hasError('required')">
-        Veuillez sélectionner une des propositions ci-dessus.
-      </div>
-      <hr />
-      <button type="submit" class="btn btn-lg btn-primary">
-        <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
-        Détailler le problème
-      </button>
-    </form>
+    </div>
+
+    <ng-template #subcategoryFormTemplate>
+      <h4 class="text-center mb-4" [innerHTML]="anomaly?.subcategoryTitle"></h4>
+      <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+        <div class="row pb-4" *ngFor="let subcategory of anomaly?.subcategories">
+          <div class="col-2 col-sm-1 text-right pr-1">
+            <input type="radio" formControlName="anomalySubcategory" [value]="subcategory.title" id="radio-{{subcategory.title}}"/>
+          </div>
+          <div class="col-10 col-sm-11 pl-1">
+            <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
+            <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
+          </div>
+        </div>
+        <div class="notification error" *ngIf="showErrors && anomalySubcategoryCtrl.hasError('required')">
+          Veuillez sélectionner une des propositions ci-dessus.
+        </div>
+        <hr />
+        <button type="submit" class="btn btn-lg btn-primary">
+          <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
+          Détailler le problème
+        </button>
+      </form>
+    </ng-template>
   </div>
 </section>

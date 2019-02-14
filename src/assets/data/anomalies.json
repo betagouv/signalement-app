@@ -173,6 +173,7 @@
       "category": "Matériel / Objet",
       "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
       "rank" : 3,
+      "withInternetPurchase": true,
       "icon": "icon_material.png",
       "subcategories": [
         {
@@ -243,6 +244,7 @@
       "category": "Prix / Paiement",
       "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...",
       "rank" : 5,
+      "withInternetPurchase": true,
       "icon": "icon_price.png",
       "subcategories": [
         {
@@ -302,6 +304,7 @@
       "category": "Publicité",
       "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse...",
       "rank" : 6,
+      "withInternetPurchase": true,
       "icon": "icon_pub.png",
       "subcategories": [
         {
@@ -316,6 +319,7 @@
       "category": "Services associés à l'achat",
       "description": "Colis non reçu, problème de garantie constructeur, hotline injoignable,...",
       "rank" : 7,
+      "withInternetPurchase": true,
       "icon": "icon_service.png",
       "subcategories": [
         {
@@ -366,12 +370,21 @@
       ]
     },
     {
+      "category": "Problème suite à un achat sur internet",
+      "rank" : 101,
+      "breadcrumbTitle": "Vous avez identifié un problème suite à un achat sur internet",
+      "information": {
+        "title": "Nous sommes désolés, la vente sur internet ne fait pas encore partie de notre site.",
+        "content": "Votre signalement concerne : <p><ul><li>un problème avec un commerçant ? <br/><span class=\"note\">Exemple : colis non reçu, pas de nouvelle de votre commande... </span><br />Vous pouvez saisir la <abbr title=\"Direction Général de la Concurrence, Consommation et Répression des Fraudes\">DGCCRF</abbr> avec le formulaire disponible ici : <a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a></li><li>un spam que vous avez reçu ?<br />Vous pouvez le signaler ici : <a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a></li><li>un contenu qui vous semble inapproprié ? <br/><span class=\"note\">Exemple : trafic illicite, pédopornographie ...</span><br/>Vous pouvez le signaler ici : <a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a></li></ul></p>"
+      }
+    },
+    {
       "category": "Refus de servir/ vendre",
-      "rank" : 100
+      "rank" : 102
     },
     {
       "category": "Chien d'assistance refusé",
-      "rank" : 101
+      "rank" : 103
     }
   ]
 }

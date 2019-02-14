@@ -6,7 +6,10 @@
       </div>
       <div class="col-10 col-sm-11">
         <div *ngIf="report">
-          <h4>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h4>
+          <h4 *ngIf="getAnomalyBreadcrumbTitle(); else defautBreadcrumbTitle">{{getAnomalyBreadcrumbTitle()}}</h4>
+          <ng-template #defautBreadcrumbTitle>
+            <h4>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h4>
+          </ng-template>
           <span class="note">
             &nbsp;{{report.subcategory?.title}}
           </span>

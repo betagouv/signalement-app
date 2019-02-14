@@ -10,6 +10,7 @@ export class Report {
   details: ReportDetails;
   consumer: Consumer;
   contactAgreement: boolean;
+  internetPurchase: boolean;
 
 }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subcategory } from '../../../model/Anomaly';
+import { Anomaly } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportService, Step } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
@@ -15,7 +15,7 @@ export class SubcategoryComponent implements OnInit {
 
   step: Step;
   report: Report;
-  subcategories: Subcategory[];
+  anomaly: Anomaly;
 
   subcategoryForm: FormGroup;
   anomalySubcategoryCtrl: FormControl;
@@ -42,15 +42,19 @@ export class SubcategoryComponent implements OnInit {
 
   initSubcategories() {
     const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
-    if (anomaly) {
-      this.subcategories = anomaly.subcategories;
+    if (anomaly && anomaly.subcategories) {
+      this.anomaly = anomaly;
+    } else {
+      this.reportService.reinit();
     }
   }
 
   initSubcategoryForm() {
     this.showErrors = false;
 
-    this.anomalySubcategoryCtrl = this.formBuilder.control(this.report.subcategory ? this.report.subcategory.title : '', Validators.required);
+    this.anomalySubcategoryCtrl = this.formBuilder.control(
+      this.report.subcategory ? this.report.subcategory.title : '', Validators.required
+    );
 
     this.subcategoryForm = this.formBuilder.group({
       anomalySubcategory: this.anomalySubcategoryCtrl
@@ -63,8 +67,16 @@ export class SubcategoryComponent implements OnInit {
       return false;
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, this.anomalySubcategoryCtrl.value);
-      this.report.subcategory = this.subcategories.find(subcategory => subcategory.title === this.anomalySubcategoryCtrl.value);
+      this.report.subcategory = this.anomaly.subcategories.find(subcategory => subcategory.title === this.anomalySubcategoryCtrl.value);
       this.reportService.changeReport(this.report, this.step);
+    }
+  }
+
+  setInternetPurchase(internetPurchase: boolean) {
+    this.report.internetPurchase = internetPurchase;
+    if (this.report.internetPurchase) {
+      this.report.category = 'Problème suite à un achat sur internet';
+      this.reportService.changeReport(this.report, Step.Category);
     }
   }
 }
