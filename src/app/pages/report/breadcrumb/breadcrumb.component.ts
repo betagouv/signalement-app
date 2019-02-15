@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { AnomalyService } from '../../../services/anomaly.service';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -14,6 +15,7 @@ export class BreadcrumbComponent implements OnInit {
   @Input() step: Step;
 
   constructor(private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private anomalyService: AnomalyService) { }
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   back() {
-    this.reportService.backward(this.step);
+    this.reportRouterService.routeBackward(this.step);
   }
 
   getAnomalyBreadcrumbTitle() {

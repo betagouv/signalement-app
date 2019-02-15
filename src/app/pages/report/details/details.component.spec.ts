@@ -11,9 +11,10 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { of } from 'rxjs';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
+import { ReportPaths, Step } from '../../../services/report-router.service';
 
 describe('DetailsComponent', () => {
 
@@ -44,13 +45,10 @@ describe('DetailsComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: ReportPaths.Company, redirectTo: '' }]),
         BsDatepickerModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
       ],
-      providers: [
-        ReportService,
-      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();
@@ -144,7 +142,7 @@ describe('DetailsComponent', () => {
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
       component.anomalyFile = anomalyFileFixture;
-      const changeReportSpy = spyOn(reportService, 'changeReport');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();

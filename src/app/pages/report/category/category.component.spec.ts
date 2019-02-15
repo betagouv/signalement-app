@@ -8,7 +8,7 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { Anomaly } from '../../../model/Anomaly';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { ReportPaths } from '../../../services/report.service';
+import { ReportPaths } from '../../../services/report-router.service';
 import { AlertModule } from 'ngx-bootstrap';
 
 describe('CategoryComponent', () => {

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly } from '../../../model/Anomaly';
 import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-category',
@@ -20,6 +21,7 @@ export class CategoryComponent implements OnInit {
 
   constructor(private anomalyService: AnomalyService,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
@@ -59,10 +61,16 @@ export class CategoryComponent implements OnInit {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
     this.report = new Report();
     this.report.category = anomaly.category;
-    this.reportService.changeReport(this.report, this.step);
+    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportRouterService.routeForward(this.step);
+  }
+  
+  restoreStoredReport() {
+    this.reportService.changeReportFromStep(this.report, this.report.storedStep);
+    this.reportRouterService.routeForward(this.report.storedStep);
   }
 
-  removeReport() {
+  removeStoredReport() {
     this.reportService.removeReportFromStorage();
   }
 

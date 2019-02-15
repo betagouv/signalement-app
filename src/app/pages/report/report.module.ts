@@ -19,7 +19,7 @@ import { Angulartics2Module } from 'angulartics2';
 import { CollapsableTextComponent } from '../../components/collapsable-text/collapsable-text.component';
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
-import { ReportPaths } from '../../services/report.service';
+import { ReportPaths } from '../../services/report-router.service';
 import { RetractationComponent } from './information/retractation/retractation.component';
 
 defineLocale('fr', frLocale);

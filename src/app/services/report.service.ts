@@ -5,10 +5,9 @@ import { Report } from '../model/Report';
 import moment from 'moment';
 import { Company } from '../model/Company';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
-import { AnomalyService } from './anomaly.service';
 import { isPlatformBrowser } from '@angular/common';
 import { LocalStorage } from '@ngx-pwa/local-storage';
+import { Step } from './report-router.service';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -20,13 +19,9 @@ export class ReportService {
   private reportSource = new BehaviorSubject<Report>(undefined);
   currentReport = this.reportSource.asObservable();
 
-  isRetrievedFromStorage: boolean;
-
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private http: HttpClient,
               private serviceUtils: ServiceUtils,
-              private anomalyService: AnomalyService,
-              private router: Router,
               private localStorage: LocalStorage) {
 
     this.retrieveReportFromStorage();
@@ -34,98 +29,31 @@ export class ReportService {
   }
 
   private retrieveReportFromStorage() {
-    if (isPlatformBrowser(this.platformId) && !this.isRetrievedFromStorage) {
+    if (isPlatformBrowser(this.platformId)) {
       this.localStorage.getItem(ReportStorageKey).subscribe((report) => {
-        this.isRetrievedFromStorage = true;
         if (report) {
-          report.fromStorage = true;
+          report.retrievedFromStorage = true;
           this.reportSource.next(report);
         }
       });
     }
   }
 
-  reinit() {
-    this.router.navigate(['/']);
-  }
-
   removeReportFromStorage() {
+    this.reportSource.getValue().retrievedFromStorage = false;
     if (isPlatformBrowser(this.platformId)) {
       this.localStorage.removeItemSubscribe(ReportStorageKey);
     }
   }
 
-  changeReport(report: Report, step: Step) {
-    report.fromStorage = false;
+  changeReportFromStep(report: Report, step: Step) {
+    report.retrievedFromStorage = false;
+    report.storedStep = step;
     this.reportSource.next(report);
     if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
-      if (report) {
-        this.localStorage.setItemSubscribe(ReportStorageKey, report);
-      } else {
-       this.localStorage.removeItemSubscribe(ReportStorageKey);
-      }
+      this.localStorage.setItemSubscribe(ReportStorageKey, report);
     }
-    this.router.navigate([this.nextRoute(step)]);
-  }
 
-  backward(currentStep: Step) {
-    const previousRoute = this.previousRoute(currentStep);
-    if (previousRoute === ReportPaths.Category) {
-      this.removeReportFromStorage();
-    }
-    this.router.navigate([previousRoute]);
-  }
-
-  nextRoute(currentStep: Step) {
-    switch (currentStep) {
-      case Step.Category:
-        const anomaly = this.anomalyService.getAnomalyByCategory(this.reportSource.getValue().category);
-        if (anomaly.information) {
-          return ReportPaths.Information;
-        } else if (anomaly.subcategories && anomaly.subcategories.length) {
-          return ReportPaths.Subcategory;
-        } else {
-          return ReportPaths.Details;
-        }
-      case Step.Subcategory:
-        if (this.reportSource.getValue().subcategory.information) {
-          return ReportPaths.Information;
-        } else {
-          return ReportPaths.Details;
-        }
-      case Step.Details:
-        return ReportPaths.Company;
-      case Step.Company:
-        return ReportPaths.Consumer;
-      case Step.Consumer:
-        return ReportPaths.Confirmation;
-      case Step.Confirmation:
-        return ReportPaths.Acknowledgment;
-      default:
-        return ReportPaths.Category;
-    }
-  }
-
-  previousRoute(currentStep: Step) {
-    switch (currentStep) {
-      case Step.Subcategory:
-        return ReportPaths.Category;
-      case Step.Details:
-        if (this.reportSource.getValue().subcategory) {
-          return ReportPaths.Subcategory;
-        } else {
-          return ReportPaths.Category;
-        }
-      case Step.Company:
-        return ReportPaths.Details;
-      case Step.Consumer:
-        return ReportPaths.Company;
-      case Step.Confirmation:
-        return ReportPaths.Consumer;
-      default:
-        return ReportPaths.Category;
-    }
   }
 
   createReport(report: Report) {
@@ -187,25 +115,4 @@ export class ReportService {
   }
 }
 
-export enum Step {
-  Category = 'Category',
-  Subcategory = 'Subcategory',
-  Details = 'Details',
-  Company = 'Company',
-  Consumer = 'Consumer',
-  Confirmation = 'Confirmation',
-  Acknowledgment = 'Acknowledgment',
-  Information = 'Information'
-}
 
-
-export enum ReportPaths {
-  Category = '',
-  Subcategory = 'signalement/le-probleme',
-  Details = 'signalement/la-description',
-  Company = 'signalement/le-commerçant',
-  Consumer = 'signalement/le-consommateur',
-  Confirmation = 'signalement/confirmation',
-  Acknowledgment = 'signalement/accuse-de-reception',
-  Information = 'signalement/information'
-}
