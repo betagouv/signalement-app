@@ -32,7 +32,6 @@ export class SubcategoryComponent implements OnInit {
   ngOnInit() {
     this.step = Step.Subcategory;
     this.reportService.currentReport.subscribe(report => {
-      console.log('getReport', report)
       if (report && report.category) {
         this.report = report;
         this.initSubcategoryForm();

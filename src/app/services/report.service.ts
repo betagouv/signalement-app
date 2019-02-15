@@ -1,11 +1,10 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { Report } from '../model/Report';
 import moment from 'moment';
 import { Company } from '../model/Company';
 import { BehaviorSubject } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Step } from './report-router.service';
 
@@ -19,8 +18,7 @@ export class ReportService {
   private reportSource = new BehaviorSubject<Report>(undefined);
   currentReport = this.reportSource.asObservable();
 
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private http: HttpClient,
+  constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils,
               private localStorage: LocalStorage) {
 
@@ -29,31 +27,24 @@ export class ReportService {
   }
 
   private retrieveReportFromStorage() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.localStorage.getItem(ReportStorageKey).subscribe((report) => {
-        if (report) {
-          report.retrievedFromStorage = true;
-          this.reportSource.next(report);
-        }
-      });
-    }
+    this.localStorage.getItem(ReportStorageKey).subscribe((report) => {
+      if (report) {
+        report.retrievedFromStorage = true;
+        this.reportSource.next(report);
+      }
+    });
   }
 
   removeReportFromStorage() {
     this.reportSource.getValue().retrievedFromStorage = false;
-    if (isPlatformBrowser(this.platformId)) {
-      this.localStorage.removeItemSubscribe(ReportStorageKey);
-    }
+    this.localStorage.removeItemSubscribe(ReportStorageKey);
   }
 
   changeReportFromStep(report: Report, step: Step) {
     report.retrievedFromStorage = false;
     report.storedStep = step;
     this.reportSource.next(report);
-    if (isPlatformBrowser(this.platformId)) {
-      this.localStorage.setItemSubscribe(ReportStorageKey, report);
-    }
-
+    this.localStorage.setItemSubscribe(ReportStorageKey, report);
   }
 
   createReport(report: Report) {
