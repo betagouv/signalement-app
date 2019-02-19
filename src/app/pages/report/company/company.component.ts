@@ -169,4 +169,8 @@ export class CompanyComponent implements OnInit {
       this.addressCtrlPostalCode = selected.originalObject.postcode;
     }
   }
+
+  changeCompany() {
+    this.report.company = undefined;
+  }
 }
