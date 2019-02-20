@@ -1,3 +1,4 @@
+@import "../../../theme/variables";
 @import "../../../theme/media-queries";
 
 .navbar__container {
@@ -13,7 +14,7 @@
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
       width: 90px;
-      background-color: red;
+      background-color: $red;
       color: #fff;
       padding: 5px;
       font-size: 10px;
@@ -31,7 +32,7 @@
       top: 0px;
       right: 0px;
       width: 70px;
-      background-color: red;
+      background-color: $red;
       color: #fff;
       padding: 2px;
       font-size: 10px;
