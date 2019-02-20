@@ -105,7 +105,9 @@ export class DetailsComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
       const reportDetails = new ReportDetails();
-      reportDetails.precision = this.singlePrecisionCtrl ? this.singlePrecisionCtrl.value : this.getPrecisionFromCtrl();
+      if (this.getPrecisionFromCtrl()) {
+        reportDetails.precision = this.getPrecisionFromCtrl();
+      }
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
@@ -118,11 +120,15 @@ export class DetailsComponent implements OnInit {
 
 
   getPrecisionFromCtrl() {
-    return this.multiplePrecisionCtrl.controls
-      .map((control, index) => {
-        return control.value ? this.report.subcategory.details.precision.options[index].title : null;
-      })
-      .filter(value => value !== null);
+    if (this.singlePrecisionCtrl) {
+      return this.singlePrecisionCtrl.value;
+    } else if (this.multiplePrecisionCtrl) {
+      return this.multiplePrecisionCtrl.controls
+        .map((control, index) => {
+          return control.value ? this.report.subcategory.details.precision.options[index].title : null;
+        })
+        .filter(value => value !== null);
+    }
   }
 
 
