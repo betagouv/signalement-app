@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { ReportService, Step } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { Information } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-details',
@@ -16,7 +17,8 @@ export class DetailsComponent implements OnInit {
   report: Report;
 
   detailsForm: FormGroup;
-  precisionCtrl: FormControl;
+  singlePrecisionCtrl: FormControl;
+  multiplePrecisionCtrl: FormArray;
   anomalyDateCtrl: FormControl;
   anomalyTimeSlotCtrl: FormControl;
   descriptionCtrl: FormControl;
@@ -55,7 +57,6 @@ export class DetailsComponent implements OnInit {
       this.report.details ? this.report.details.anomalyDate : new Date(), Validators.required
     );
     this.anomalyTimeSlotCtrl = this.formBuilder.control(this.report.details ? this.report.details.anomalyTimeSlot : '');
-    this.precisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.precision : '', Validators.required);
 
     this.detailsForm = this.formBuilder.group({
       anomalyDate: this.anomalyDateCtrl,
@@ -64,9 +65,23 @@ export class DetailsComponent implements OnInit {
     });
 
     if (this.report.subcategory && this.report.subcategory.details && this.report.subcategory.details.precision) {
-      this.detailsForm.addControl('precision', this.precisionCtrl);
+      const precision = this.report.subcategory.details.precision;
+      if (precision.severalOptionsAllowed) {
+        this.multiplePrecisionCtrl = new FormArray(
+          precision.options.map(option =>
+            this.formBuilder.control( this.isOptionChecked(option) ? true : false)
+          )
+        );
+        this.detailsForm.addControl('multiplePrecision', this.multiplePrecisionCtrl);
+      } else {
+        this.singlePrecisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.precision : '', Validators.required);
+        this.detailsForm.addControl('singlePrecision', this.singlePrecisionCtrl);
+      }
     }
+  }
 
+  isOptionChecked(option: Information) {
+    return this.report.details && this.report.details.precision && this.report.details.precision.indexOf(option.title) !== -1;
   }
 
   constructPlageHoraireList() {
@@ -90,7 +105,7 @@ export class DetailsComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
       const reportDetails = new ReportDetails();
-      reportDetails.precision = this.precisionCtrl.value;
+      reportDetails.precision = this.singlePrecisionCtrl ? this.singlePrecisionCtrl.value : this.getPrecisionFromCtrl();
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
@@ -100,5 +115,15 @@ export class DetailsComponent implements OnInit {
       this.reportService.changeReport(this.report, this.step);
     }
   }
+
+
+  getPrecisionFromCtrl() {
+    return this.multiplePrecisionCtrl.controls
+      .map((control, index) => {
+        return control.value ? this.report.subcategory.details.precision.options[index].title : null;
+      })
+      .filter(value => value !== null);
+  }
+
 
 }

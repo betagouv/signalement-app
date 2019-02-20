@@ -1,7 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { Report } from '../model/Report';
+import { Report, ReportDetails } from '../model/Report';
 import moment from 'moment';
 import { Company } from '../model/Company';
 import { BehaviorSubject } from 'rxjs';
@@ -81,7 +81,7 @@ export class ReportService {
       reportFormData.append('subcategory', report.subcategory.title);
     }
     if (report.details.precision) {
-      reportFormData.append('precision', report.details.precision);
+      reportFormData.append('precision', this.getDetailsPrecision(report.details));
     }
     reportFormData.append('companyName', report.company.name);
     reportFormData.append('companyAddress', this.getCompanyAddress(report.company));
@@ -108,6 +108,14 @@ export class ReportService {
     }
 
     return reportFormData;
+  }
+
+  getDetailsPrecision(details: ReportDetails) {
+    if (typeof details.precision  === 'string') {
+      return details.precision;
+    } else {
+      return details.precision.join(', ');
+    }
   }
 
 

@@ -104,7 +104,7 @@ describe('DetailsComponent', () => {
       expect(component.plageHoraireList.length).toBe(24);
     });
 
-    it('sould display an input to select precision when a precision list is attached to the subcategory', () => {
+    it('sould display radio inputs to select precision when a precision list is attached to the subcategory and mutiple selection are not allowed', () => {
       const reportWithSubcategory = new Report();
       reportWithSubcategory.subcategory = new Subcategory();
       const precision = new Precision();
@@ -119,7 +119,30 @@ describe('DetailsComponent', () => {
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelectorAll('input[formControlName="precision"]').length).toEqual(precision.options.length);
+      expect(component.singlePrecisionCtrl).toBeDefined();
+      expect(component.multiplePrecisionCtrl).toBeUndefined();
+      expect(nativeElement.querySelectorAll('input[formControlName="singlePrecision"]').length).toEqual(precision.options.length);
+    });
+
+    it('sould display checkbox inputs to select precisions when a precision list is attached to the subcategory and mutiple selection are allowed', () => {
+      const reportWithSubcategory = new Report();
+      reportWithSubcategory.subcategory = new Subcategory();
+      const precision = new Precision();
+      precision.title = 'titre precision';
+      precision.severalOptionsAllowed = true;
+      precision.options = [ {title: 'option 1'}, { title: 'option 2'}];
+      const subcategoryDetails = new SubcategoryDetails();
+      subcategoryDetails.precision = precision;
+      reportWithSubcategory.subcategory.details = subcategoryDetails;
+      reportService.currentReport = of(reportWithSubcategory);
+
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(component.singlePrecisionCtrl).toBeUndefined();
+      expect(component.multiplePrecisionCtrl).toBeDefined();
+      expect(nativeElement.querySelectorAll('input[type="checkbox"]').length).toEqual(precision.options.length);
     });
 
   });
@@ -138,9 +161,18 @@ describe('DetailsComponent', () => {
     });
 
     it ('should emit and event with a company which contains form inputs when no errors', () => {
-
+      const reportWithSubcategory = new Report();
+      reportWithSubcategory.subcategory = new Subcategory();
+      const precision = new Precision();
+      precision.title = 'titre precision';
+      precision.options = [ {title: 'option 1'}, { title: 'option 2'}];
+      const subcategoryDetails = new SubcategoryDetails();
+      subcategoryDetails.precision = precision;
+      reportWithSubcategory.subcategory.details = subcategoryDetails;
+      reportService.currentReport = of(reportWithSubcategory);
+      component.ngOnInit();
       component.descriptionCtrl.setValue('Description');
-      component.precisionCtrl.setValue('precision');
+      component.singlePrecisionCtrl.setValue('precision');
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
       component.anomalyFile = anomalyFileFixture;
@@ -158,6 +190,8 @@ describe('DetailsComponent', () => {
       detailsExpected.ticketFile = undefined;
       detailsExpected.anomalyFile = anomalyFileFixture;
       const reportExpected = new Report();
+      reportExpected.subcategory = new Subcategory();
+      reportExpected.subcategory.details = subcategoryDetails;
       reportExpected.details = detailsExpected;
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);

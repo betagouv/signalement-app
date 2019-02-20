@@ -4,19 +4,32 @@
 
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
 
-      <div class="form__group" *ngIf="report.subcategory?.details?.precision">
+      <div class="form__group" *ngIf="report.subcategory?.details?.precision; let precision">
         <label>
-          {{report.subcategory.details.precision.title}}
+          {{precision.title}}
         </label>
-        <div class="row pb-2 pl-3" *ngFor="let option of report.subcategory.details.precision.options">
-          <div class="col-2 col-sm-1 text-right pr-1">
-            <input type="radio" formControlName="precision" [value]="option.title" id="radio-{{option.title}}"/>
+        <ng-container *ngIf="detailsForm.controls.multiplePrecision">
+          <div class="row pb-2 pl-3" *ngFor="let precisionControl of detailsForm.controls.multiplePrecision.controls; let i = index">
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="checkbox" [formControl]="precisionControl" id="checkbox-{{precision.options[i].title}}"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label class="d-block mb-0 pointer" for="checkbox-{{precision.options[i].title}}">{{precision.options[i].title}}</label>
+              <app-collapsable-text [content]="precision.options[i].content" [title]="precision.options[i].title"></app-collapsable-text>
+            </div>
           </div>
-          <div class="col-10 col-sm-11 pl-1">
-            <label class="d-block mb-0 pointer" for="radio-{{option.title}}">{{option.title}}</label>
-            <app-collapsable-text [content]="option.content" [title]="option.title"></app-collapsable-text>
+        </ng-container>
+        <ng-container *ngIf="detailsForm.controls.singlePrecision">
+          <div class="row pb-2 pl-3" *ngFor="let option of precision.options">
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="radio" formControlName="singlePrecision" [value]="option.title" id="radio-{{option.title}}"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label class="d-block mb-0 pointer" for="radio-{{option.title}}">{{option.title}}</label>
+              <app-collapsable-text [content]="option.content" [title]="option.title"></app-collapsable-text>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </div>
 
       <div class="form__group">
@@ -80,7 +93,7 @@
         <span *ngIf="anomalyDateCtrl.hasError('required')">
           Veuillez renseigner la date du constat.<br />
         </span>
-        <span *ngIf="precisionCtrl.hasError('required')">
+        <span *ngIf="singlePrecisionCtrl && singlePrecisionCtrl.hasError('required')">
           Veuillez précisez.
         </span>
       </div>

@@ -12,14 +12,15 @@
           "details": {
             "descriptionTips": "Afin que le professionnel puisse corriger la situation, vous pouvez préciser le rayon exact, le type de salissure...",
             "precision": {
-              "title": "Quelle zone est concernée ? ",
+              "title": "Quelle(s) zone(s) est concernée(s) ? ",
+              "severalOptionsAllowed": true,
               "options": [
                 { "title": "Cuisine" },
                 { "title": "Salle du restaurant / bar" },
                 { "title": "WC" },
-                { "title": "Atelier de fabrication" },
                 { "title": "Magasin (sol)" },
                 { "title": "Magasin (vitrine /frigo)" },
+                { "title": "Atelier de fabrication" },
                 { "title": "Autre" }
               ]
             }
@@ -85,6 +86,9 @@
               ]
             }
           }
+        },
+        {
+          "title": "Autre"
         }
       ]
     },
