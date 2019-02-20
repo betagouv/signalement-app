@@ -88,7 +88,7 @@
           }
         },
         {
-          "title": "Autre"
+          "title": "Autre problème d'hygiène"
         }
       ]
     },
@@ -169,7 +169,7 @@
           "description": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de nourriture"
         }
       ]
     },
@@ -229,7 +229,7 @@
           "title": "Le volume / poids / nombre annoncé est non conforme."
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de matériel"
         }
       ]
     },
@@ -300,7 +300,7 @@
           "description": "Exemple : on vous facture un surplus \"service en terrasse\" alors que ce prix n'était indiqué nulle part"
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de prix"
         }
       ]
     },
@@ -369,7 +369,7 @@
           }
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de service"
         }
       ]
     },
