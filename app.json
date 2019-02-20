@@ -5,6 +5,9 @@
   "env": {
     "API_BASE_URL": {
       "value": "http://demo-signalement-api.beta.gouv.fr"
+    },
+    "NODE_MODULES_CACHE": {
+      "value": "false"
     }
   },
   "formation": {
