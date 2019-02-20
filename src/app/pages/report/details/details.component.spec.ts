@@ -114,7 +114,7 @@ describe('DetailsComponent', () => {
     reportWithSubcategory.subcategory = new Subcategory();
     const precision = new Precision();
     precision.title = 'titre precision';
-    precision.options = [ {title: 'option 1'}, { title: 'option 2'}];
+    precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'Autre'}];
     const subcategoryDetails = new SubcategoryDetails();
     subcategoryDetails.precision = precision;
     reportWithSubcategory.subcategory.details = subcategoryDetails;
@@ -135,6 +135,14 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelectorAll('input[formControlName="singlePrecision"]').length).toEqual(precision.options.length);
     });
 
+    it('should display an additionnal text input when precision "Autre" is checked', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('#radio-Autre').click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('input[formControlName="otherPrecision"]')).not.toBeNull();
+    });
+
     it('should display errors on submit', () => {
       component.singlePrecisionCtrl.setValue('');
 
@@ -146,9 +154,11 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
-    it ('should emit and event with a company which contains form inputs when no errors', () => {
+    it ('should emit and event with a details object which contains form inputs when no errors', () => {
       component.descriptionCtrl.setValue('Description');
-      component.singlePrecisionCtrl.setValue('precision');
+      component.singlePrecisionCtrl.setValue('Autre');
+      component.otherPrecisionCtrl = component.formBuilder.control('Autre précision');
+      component.detailsForm.addControl('otherPrecision', component.otherPrecisionCtrl);
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
       component.anomalyFile = anomalyFileFixture;
@@ -160,7 +170,8 @@ describe('DetailsComponent', () => {
 
       const detailsExpected = new ReportDetails();
       detailsExpected.description = 'Description';
-      detailsExpected.precision = 'precision';
+      detailsExpected.precision = 'Autre';
+      detailsExpected.otherPrecision = 'Autre précision';
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
       detailsExpected.ticketFile = undefined;
@@ -172,7 +183,6 @@ describe('DetailsComponent', () => {
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
-
   });
 
   describe('case of report subcategory with a precision list and mutiple selection allowed', () => {
@@ -182,7 +192,7 @@ describe('DetailsComponent', () => {
     const precision = new Precision();
     precision.title = 'titre precision';
     precision.severalOptionsAllowed = true;
-    precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'option 3'}];
+    precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'option 3'}, { title: 'Autre'}];
     const subcategoryDetails = new SubcategoryDetails();
     subcategoryDetails.precision = precision;
     reportWithSubcategory.subcategory.details = subcategoryDetails;
@@ -201,6 +211,14 @@ describe('DetailsComponent', () => {
       expect(component.singlePrecisionCtrl).toBeUndefined();
       expect(component.multiplePrecisionCtrl).toBeDefined();
       expect(nativeElement.querySelectorAll('input[type="checkbox"]').length).toEqual(precision.options.length);
+    });
+
+    it('should display an additionnal text input when precision "Autre" is checked', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('#checkbox-Autre').click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('input[formControlName="otherPrecision"]')).not.toBeNull();
     });
 
     it('should display errors on submit', () => {

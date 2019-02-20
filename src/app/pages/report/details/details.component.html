@@ -11,7 +11,7 @@
         <ng-container *ngIf="detailsForm.controls.multiplePrecision">
           <div class="row pb-2 pl-3" *ngFor="let precisionControl of detailsForm.controls.multiplePrecision.controls; let i = index">
             <div class="col-2 col-sm-1 text-right pr-1">
-              <input type="checkbox" [formControl]="precisionControl" id="checkbox-{{precision.options[i].title}}"/>
+              <input type="checkbox" [formControl]="precisionControl" id="checkbox-{{precision.options[i].title}}" (change)="initOtherPrecision()"/>
             </div>
             <div class="col-10 col-sm-11 pl-1">
               <label class="d-block mb-0 pointer" for="checkbox-{{precision.options[i].title}}">{{precision.options[i].title}}</label>
@@ -22,7 +22,7 @@
         <ng-container *ngIf="detailsForm.controls.singlePrecision">
           <div class="row pb-2 pl-3" *ngFor="let option of precision.options">
             <div class="col-2 col-sm-1 text-right pr-1">
-              <input type="radio" formControlName="singlePrecision" [value]="option.title" id="radio-{{option.title}}"/>
+              <input type="radio" formControlName="singlePrecision" [value]="option.title" id="radio-{{option.title}}" (change)="initOtherPrecision()"/>
             </div>
             <div class="col-10 col-sm-11 pl-1">
               <label class="d-block mb-0 pointer" for="radio-{{option.title}}">{{option.title}}</label>
@@ -30,6 +30,11 @@
             </div>
           </div>
         </ng-container>
+        <div class="row" *ngIf="detailsForm.contains('otherPrecision')">
+          <div class="offset-2 offset-sm-1 col-10 col-sm-11">
+              <input type="text" formControlName="otherPrecision" placeholder="Précisez ...">
+          </div>
+        </div>
       </div>
 
       <div class="form__group">

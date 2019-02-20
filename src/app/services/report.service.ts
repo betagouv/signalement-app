@@ -111,11 +111,19 @@ export class ReportService {
   }
 
   getDetailsPrecision(details: ReportDetails) {
+    let precision = '';
     if (typeof details.precision  === 'string') {
-      return details.precision;
+      precision = details.precision;
+      if (precision === otherPrecisionValue && details.otherPrecision) {
+        precision =  `${precision} (${details.otherPrecision})`;
+      }
     } else {
-      return details.precision.join(', ');
+      precision = details.precision.join(', ');
+      if (precision.indexOf(otherPrecisionValue) !== -1 && details.otherPrecision) {
+        precision = precision.replace(otherPrecisionValue, `${otherPrecisionValue} (${details.otherPrecision})`);
+      }
     }
+    return precision;
   }
 
 
@@ -132,6 +140,8 @@ export class ReportService {
     return address.substring(0, address.length - 3);
   }
 }
+
+export const otherPrecisionValue = 'Autre';
 
 export enum Step {
   Category = 'Category',
