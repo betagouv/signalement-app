@@ -44,14 +44,8 @@
                   "title": "Tenue sale"
                 },
                 {
-                  "title": "Pas de coiffe ou pas de gants"
-                },
-                {
-                  "title": "Mauvaises pratiques d'hygiène",
-                  "content": "Exemples : pas de lavage des mains, personnel qui fume en cuisine..."
-                },
-                {
-                  "title": "Autre"
+                  "title": "Autre",
+                  "content": "Exemples : mauvaise pratique d'hygiène, personnel qui fume en cuisine..."
                 }
               ]
             }
