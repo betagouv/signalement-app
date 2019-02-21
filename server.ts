@@ -35,11 +35,16 @@ app.set('view engine', 'html');
 app.set('views', './dist/browser');
 
 app.all('*', (req, res, next) => {
-  // protocol check, if http, redirect to https
-  if(req.get("X-Forwarded-Proto").indexOf("https") != -1) {
-    return next();
+  const xfp = req.get("X-Forwarded-Proto");
+  if (xfp) {
+    // protocol check, if http, redirect to https
+    if(req.get("X-Forwarded-Proto").indexOf("https") != -1) {
+      return next();
+    } else {
+      res.redirect('https://' + req.hostname + req.url);
+    }
   } else {
-    res.redirect('https://' + req.hostname + req.url);
+    return next();
   }
 });
 
