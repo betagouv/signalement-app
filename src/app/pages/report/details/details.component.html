@@ -42,7 +42,7 @@
           Description du problème
         </label>
         <br />
-        <span class="note" [innerHTML]="report.subcategory?.details?.descriptionTips"></span>
+        <span class="note" [innerHTML]="report.subcategory?.details?.descriptionTips" *ngIf="report.subcategory?.details?.descriptionTips"></span>
         <textarea formControlName="description"
                   rows="3"
                   maxlength="500"
