@@ -19,11 +19,14 @@ export class Information {
 export class Precision {
   @JsonProperty('title')
   title: string;
+  @JsonProperty('severalOptionsAllowed')
+  severalOptionsAllowed: boolean;
   @JsonProperty({ name: 'options', clazz: Information })
   options: Information[];
 
   constructor() {
     this.title = undefined;
+    this.severalOptionsAllowed = false;
     this.options = undefined;
   }
 }
