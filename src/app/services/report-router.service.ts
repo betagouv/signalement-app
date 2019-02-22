@@ -70,7 +70,14 @@ export class ReportRouterService {
     );
   }
 
-  getRouteFromStep(step: Step) {
+  routeToStep(step: Step) {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0, 0);
+    }
+   this.router.navigate(this.getRouteFromStep(step));
+  }
+
+  private getRouteFromStep(step: Step) {
     return [ReportPaths[step]];
   }
 

@@ -6,7 +6,7 @@
       </div>
       <div class="col-10 col-sm-11">
         <div *ngIf="report">
-          <h4 *ngIf="getAnomalyBreadcrumbTitle(); else defautBreadcrumbTitle">{{getAnomalyBreadcrumbTitle()}}</h4>
+          <h4 *ngIf="anomaly?.breadcrumbTitle; else defautBreadcrumbTitle">{{anomaly?.breadcrumbTitle}}</h4>
           <ng-template #defautBreadcrumbTitle>
             <h4>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h4>
           </ng-template>
@@ -14,27 +14,29 @@
             &nbsp;{{report.subcategory?.title}}
           </span>
           <div class="steps" *ngIf="step !== 'Information'">
-            <div class="{{getStepClass('Subcategory')}}">
-              <span class="step-number" [innerHTML]="displayedStep('Subcategory')"></span>
-              <span>Le problème</span>
-            </div>
-            <img src="/assets/images/icon_next.png" alt="étape suivante"/>
-            <div class="{{getStepClass('Details')}}">
+            <ng-container  *ngIf="getStepNumber('Subcategory') > 0">
+              <div class="{{getStepClass('Subcategory')}}" (click)="goToStep('Subcategory')">
+                <span class="step-number" [innerHTML]="displayedStep('Subcategory')"></span>
+                <span>Le problème</span>
+              </div>
+              <img src="/assets/images/icon_next.png" alt="étape suivante"/>
+            </ng-container>
+            <div class="{{getStepClass('Details')}}" (click)="goToStep('Details')">
               <span class="step-number" [innerHTML]="displayedStep('Details')"></span>
               <span>La description</span>
             </div>
             <img src="/assets/images/icon_next.png" alt="étape suivante"/>
-            <div class="{{getStepClass('Company')}}">
+            <div class="{{getStepClass('Company')}}" (click)="goToStep('Company')">
               <span class="step-number" [innerHTML]="displayedStep('Company')"></span>
               <span>Le commerçant</span>
             </div>
             <img src="/assets/images/icon_next.png" alt="étape suivante"/>
-            <div class="{{getStepClass('Consumer')}}">
+            <div class="{{getStepClass('Consumer')}}" (click)="goToStep('Consumer')">
               <span class="step-number" [innerHTML]="displayedStep('Consumer')"></span>
               <span>Le consommateur</span>
             </div>
             <img src="/assets/images/icon_next.png" alt="étape suivante"/>
-            <div class="{{getStepClass('Confirmation')}}">
+            <div class="{{getStepClass('Confirmation')}}" (click)="goToStep('Confirmation')">
               <span class="step-number" [innerHTML]="displayedStep('Confirmation')"></span>
               <span>Confirmation</span>
             </div>
