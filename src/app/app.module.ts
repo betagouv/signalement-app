@@ -12,10 +12,10 @@ import { AboutComponent } from './pages/infos/about/about.component';
 import { RouterModule } from '@angular/router';
 import { StatsComponent } from './pages/stats/stats.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { CategoryComponent } from './pages/report/category/category.component';
 import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
+import { ReportComponent } from './pages/report/report.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -37,7 +37,7 @@ registerLocaleData(localeFr, 'fr');
     NgxEchartsModule,
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     RouterModule.forRoot([
-      { path: '', component: CategoryComponent },
+      { path: '', component: ReportComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'comment-ça-marche', component: HowComponent },
       { path: 'qui-sommes-nous', component: AboutComponent }

@@ -36,6 +36,39 @@ describe('ReportService', () => {
     expect(service).toBeTruthy();
   });
 
+  describe('get precision from report details', () => {
+
+    it('should return the precision title for a single precision different from "Autre"', () => {
+      const reportDetails = new ReportDetails();
+      reportDetails.precision = 'précision';
+
+      const precision = reportService.getDetailsPrecision(reportDetails);
+
+      expect(precision).toEqual('précision');
+    });
+
+    it('should return the precision title for a single precision "Autre" with and other precision', () => {
+      const reportDetails = new ReportDetails();
+      reportDetails.precision = 'Autre';
+      reportDetails.otherPrecision = 'autre précision';
+
+      const precision = reportService.getDetailsPrecision(reportDetails);
+
+      expect(precision).toEqual('Autre (autre précision)');
+    });
+
+
+    it('should return the list of precisions title for a multiple precisions all differents from "Autre"', () => {
+      const reportDetails = new ReportDetails();
+      reportDetails.precision = ['précision1', 'précision2'];
+
+      const precision = reportService.getDetailsPrecision(reportDetails);
+
+      expect(precision).toEqual('précision1, précision2');
+    });
+
+  });
+
   describe('report creation', () => {
 
     it('should post an http request with data to the report creation API', (done) => {
