@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 import { deserialize } from 'json-typescript-mapper';
 
 export const MaxCompanyResult = 20;
+export const Radius = 0.05;
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,32 @@ export class CompanyService {
       }
     ).pipe(
       map(result => deserialize(CompanySearchResult, result)),
+      catchError(err => {
+        if (err.status === 404) {
+          return of(deserialize(CompanySearchResult, {total_results: 0}));
+        } else {
+          return throwError(err);
+        }
+      })
+    );
+  }
+
+  getNearbyCompanies(lat: number, long: number) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('lat', lat.toString());
+    httpParams = httpParams.append('long', long.toString());
+    httpParams = httpParams.append('radius', Radius.toString());
+    httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
+    return this.http.get('https://entreprise.data.gouv.fr/api/sirene/v1/near_point/',
+      {
+        params: httpParams
+      }
+    ).pipe(
+      map(result => {
+        result['etablissement'] = result['etablissements'];
+        delete result['etablissements'];
+        return deserialize(CompanySearchResult, result)
+      }),
       catchError(err => {
         if (err.status === 404) {
           return of(deserialize(CompanySearchResult, {total_results: 0}));
