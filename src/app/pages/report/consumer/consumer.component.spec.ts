@@ -6,10 +6,11 @@ import { Consumer } from '../../../model/Consumer';
 import { Report } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { ReportPaths, Step } from '../../../services/report-router.service';
 
 describe('ConsumerComponent', () => {
 
@@ -26,13 +27,13 @@ describe('ConsumerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ConsumerComponent,
-        BreadcrumbComponent,
+        BreadcrumbComponent
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: ReportPaths.Confirmation, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
       ],
       providers: [
@@ -114,7 +115,7 @@ describe('ConsumerComponent', () => {
       component.firstNameCtrl.setValue('Prénom');
       component.lastNameCtrl.setValue('Nom');
       component.emailCtrl.setValue('test@gmail.com');
-      const changeReportSpy = spyOn(reportService, 'changeReport');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button#submitConsumerForm').click();

@@ -10,10 +10,11 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { of } from 'rxjs';
 import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
+import { ReportPaths, Step } from '../../../services/report-router.service';
 
 describe('SubcategoryComponent', () => {
 
@@ -47,13 +48,9 @@ describe('SubcategoryComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: ReportPaths.Details, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
       ],
-      providers: [
-        ReportService,
-        AnomalyService,
-      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();
@@ -136,7 +133,7 @@ describe('SubcategoryComponent', () => {
       component.anomaly.subcategories = subcategoriesFixture;
       component.anomalySubcategoryCtrl.setValue('title2');
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
-      const changeReportSpy = spyOn(reportService, 'changeReport');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;

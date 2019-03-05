@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { otherPrecisionValue, ReportService, Step } from '../../../services/report.service';
+import { otherPrecisionValue, ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { Information } from '../../../model/Anomaly';
 
 @Component({
@@ -32,6 +33,7 @@ export class DetailsComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService,
               private localeService: BsLocaleService) {
   }
@@ -44,7 +46,7 @@ export class DetailsComponent implements OnInit {
         this.initDetailsForm();
         this.constructPlageHoraireList();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
     this.localeService.use('fr');
@@ -134,7 +136,8 @@ export class DetailsComponent implements OnInit {
       reportDetails.ticketFile = this.ticketFile;
       reportDetails.anomalyFile = this.anomalyFile;
       this.report.details = reportDetails;
-      this.reportService.changeReport(this.report, this.step);
+      this.reportService.changeReportFromStep(this.report, this.step);
+      this.reportRouterService.routeForward(this.step);
     }
   }
 

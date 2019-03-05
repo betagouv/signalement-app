@@ -1,6 +1,19 @@
 @import "../../../../theme/variables";
 @import "../../../../theme/media-queries";
 
+
+:host /deep/ {
+  .alert.alert-danger.alert-dismissible {
+    color: $black;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: $theme-warning-bg;
+    border: none;
+  }
+}
+
 .max-width {
   max-width: 750px;
 }
