@@ -1,7 +1,7 @@
 <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white position-relative">
   <div class="container">
-    <div *ngIf="report?.company; else noCompany">
+    <form (submit)="selectCompany(report?.company)" *ngIf="report?.company; else noCompany">
       <div class="row">
         <div class="col-12 text-center">
           <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
@@ -19,11 +19,11 @@
         </div>
       </div>
       <hr />
-      <button type="submit" class="btn btn-lg btn-primary" (click)="selectCompany(report.company)">
+      <button type="submit" class="btn btn-lg btn-primary">
         <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
         S'identifier
       </button>
-    </div>
+    </form>
 
     <ng-template #noCompany>
       <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
