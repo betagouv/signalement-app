@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-acknowledgment',
@@ -12,7 +13,8 @@ export class AcknowledgmentComponent implements OnInit {
   step: Step;
   report: Report;
 
-  constructor(private reportService: ReportService) { }
+  constructor(private reportService: ReportService,
+              private reportRouterService: ReportRouterService) { }
 
   ngOnInit() {
     this.step = Step.Acknowledgment;
@@ -20,13 +22,14 @@ export class AcknowledgmentComponent implements OnInit {
       if (report) {
         this.report = report;
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
   }
 
   newReport() {
-    this.reportService.changeReport(this.report, this.step);
+    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportRouterService.routeForward(this.step);
   }
 
 }

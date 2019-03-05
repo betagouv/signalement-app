@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Report } from '../../../model/Report';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-consumer',
@@ -24,6 +25,7 @@ export class ConsumerComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class ConsumerComponent implements OnInit {
         this.report = report;
         this.initConsumerForm();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
   }
@@ -62,7 +64,8 @@ export class ConsumerComponent implements OnInit {
       consumer.lastName = this.lastNameCtrl.value;
       consumer.email = this.emailCtrl.value;
       this.report.consumer = consumer;
-      this.reportService.changeReport(this.report, this.step);
+      this.reportService.changeReportFromStep(this.report, this.step);
+      this.reportRouterService.routeForward(this.step);
     }
   }
 }
