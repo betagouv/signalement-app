@@ -160,7 +160,7 @@ describe('DetailsComponent', () => {
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
       component.anomalyFile = anomalyFileFixture;
-      const changeReportSpy = spyOn(reportService, 'changeReport');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -238,7 +238,7 @@ describe('DetailsComponent', () => {
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
       component.anomalyFile = anomalyFileFixture;
-      const changeReportSpy = spyOn(reportService, 'changeReport');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
