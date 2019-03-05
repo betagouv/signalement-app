@@ -24,6 +24,7 @@ export class ReportDetails {
   description: string;
   ticketFile: File;
   anomalyFile: File;
-  precision?: string;
+  precision?: string | string[];
+  otherPrecision?: string;
 
 }

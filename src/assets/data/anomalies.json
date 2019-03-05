@@ -12,14 +12,15 @@
           "details": {
             "descriptionTips": "Afin que le professionnel puisse corriger la situation, vous pouvez préciser le rayon exact, le type de salissure...",
             "precision": {
-              "title": "Quelle zone est concernée ? ",
+              "title": "Quelle(s) zone(s) est concernée(s) ? ",
+              "severalOptionsAllowed": true,
               "options": [
                 { "title": "Cuisine" },
                 { "title": "Salle du restaurant / bar" },
                 { "title": "WC" },
-                { "title": "Atelier de fabrication" },
                 { "title": "Magasin (sol)" },
                 { "title": "Magasin (vitrine /frigo)" },
+                { "title": "Atelier de fabrication" },
                 { "title": "Autre" }
               ]
             }
@@ -43,14 +44,8 @@
                   "title": "Tenue sale"
                 },
                 {
-                  "title": "Pas de coiffe ou pas de gants"
-                },
-                {
-                  "title": "Mauvaises pratiques d'hygiène",
-                  "content": "Exemples : pas de lavage des mains, personnel qui fume en cuisine..."
-                },
-                {
-                  "title": "Autre"
+                  "title": "Autre",
+                  "content": "Exemples : mauvaise pratique d'hygiène, personnel qui fume en cuisine..."
                 }
               ]
             }
@@ -85,6 +80,9 @@
               ]
             }
           }
+        },
+        {
+          "title": "Autre problème d'hygiène"
         }
       ]
     },
@@ -165,7 +163,7 @@
           "description": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de nourriture"
         }
       ]
     },
@@ -225,7 +223,7 @@
           "title": "Le volume / poids / nombre annoncé est non conforme."
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de matériel"
         }
       ]
     },
@@ -296,7 +294,7 @@
           "description": "Exemple : on vous facture un surplus \"service en terrasse\" alors que ce prix n'était indiqué nulle part"
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de prix"
         }
       ]
     },
@@ -365,7 +363,7 @@
           }
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de service"
         }
       ]
     },

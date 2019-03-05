@@ -21,6 +21,7 @@ import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { ReportPaths } from '../../services/report-router.service';
 import { RetractationComponent } from './information/retractation/retractation.component';
+import { ReportComponent } from './report.component';
 
 defineLocale('fr', frLocale);
 
@@ -37,6 +38,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    ReportComponent,
     FileInputComponent,
     CompanyComponent,
     DetailsComponent,

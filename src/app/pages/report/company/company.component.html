@@ -103,13 +103,14 @@
             inputName="address"
             inputId="companyAddress"
             textSearching=""
-            textNoResults=""
+            textNoResults="Adresse non trouvée"
+            clearUnselected="true"
             minSearchLength="1"
             placeholder="numéro, voie, code postal, ville, ..."
             (selected)="selectAddress($event)">
           </ng2-completer>
         </div>
-
+        
         <div class="notification error mt-3" *ngIf="showErrors && companyForm.invalid">
           <span *ngIf="nameCtrl.hasError('required')">
             Veuillez renseigner le nom de l'établissement.<br />
