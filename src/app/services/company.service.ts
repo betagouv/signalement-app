@@ -45,14 +45,15 @@ export class CompanyService {
     httpParams = httpParams.append('long', long.toString());
     httpParams = httpParams.append('radius', Radius.toString());
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
-    return this.http.get('https://entreprise.data.gouv.fr/api/sirene/v1/near_point/',
+    return this.http.get(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'nearby/']),
       {
         params: httpParams
       }
     ).pipe(
       map(result => {
-        result['etablissement'] = result['etablissements'];
-        delete result['etablissements'];
+        //result['etablissement'] = result['etablissements'];
+        //delete result['etablissements'];
         return deserialize(CompanySearchResult, result)
       }),
       catchError(err => {
