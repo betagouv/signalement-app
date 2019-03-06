@@ -78,7 +78,7 @@ export class SubcategoryComponent implements OnInit {
     if (this.report.internetPurchase) {
       this.report.category = 'Problème suite à un achat sur internet';
       this.reportService.changeReportFromStep(this.report, Step.Category);
-      this.reportRouterService.routeForward(this.step);
+      this.reportRouterService.routeForward(Step.Category);
     }
   }
 }
