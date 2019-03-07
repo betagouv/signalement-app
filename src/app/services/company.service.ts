@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 import { deserialize } from 'json-typescript-mapper';
 
 export const MaxCompanyResult = 20;
-export const Radius = 0.05;
+export const Radius = 0.2;
 
 @Injectable({
   providedIn: 'root'
