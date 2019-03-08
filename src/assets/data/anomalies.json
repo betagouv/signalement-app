@@ -90,6 +90,7 @@
       "category": "Nourriture / Boissons",
       "description": "Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...",
       "rank" : 2,
+      "withInternetPurchase": true,
       "icon": "icon_food.png",
       "subcategories": [
         {
