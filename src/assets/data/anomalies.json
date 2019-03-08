@@ -114,7 +114,7 @@
           "title": "Corps étranger \"dur\" ",
           "description": "Présence de quelque chose de \"dur\" dans le produit. <br/>Exemples : bout de verre, morceau de métal..",
           "information": {
-            "title": "Ce cas ne rentre pas dans le périmètre de l'outil SignalConso.",
+            "title": "Vous souhaitez signaler la présence d'un corps étranger \"dur\"",
             "content": "Ce cas représente une alerte et nécessite une analyse individualisée.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4211\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4211</a>"
           }
         },
@@ -213,7 +213,7 @@
           "title": "Effet indésirable sur la santé",
           "description": "Exemples : brûlure, picotement, démangeaison, allergie",
           "information": {
-            "title": "Les effets indésirables sur la santé ne rentrent pas dans le périmètre de l'outil SignalConso.",
+            "title": "Vous souhaitez signaler un effet indésirable sur la santé",
             "content": "Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
           }
         },
@@ -221,7 +221,7 @@
           "title": "Produit dangereux",
           "description": "Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...",
           "information": {
-            "title": "Les produits dangereux ne rentrent pas dans le périmètre de l'outil SignalConso.",
+            "title": "Vous souhaitez signaler un produit dangereux",
             "content": "Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
           }
         },
