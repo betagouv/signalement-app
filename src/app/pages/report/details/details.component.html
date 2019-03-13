@@ -111,6 +111,7 @@
           Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part du professionnel.
         </div>
       </div>
+      <hr />
       <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
         <span *ngIf="anomalyDateCtrl.hasError('required')">
           Veuillez renseigner la date du constat.<br />
@@ -119,7 +120,6 @@
           Veuillez précisez.
         </span>
       </div>
-      <hr />
       <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
         <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
         Identifier le commerçant
