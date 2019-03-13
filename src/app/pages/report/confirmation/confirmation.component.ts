@@ -60,6 +60,7 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
         result => {
           this.loading = false;
+          this.reportService.removeReportFromStorage();
           this.reportService.changeReportFromStep(this.report, this.step);
           this.reportRouterService.routeForward(this.step);
         },
