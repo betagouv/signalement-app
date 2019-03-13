@@ -94,7 +94,7 @@
                 <tr *ngFor="let uploadedFile of uploadedFiles">
                   <td class="text-left" style="position: relative" *ngIf="!uploadedFile.id" colspan="2">
                     {{uploadedFile.filename}}
-                    <ngx-loading [show]="uploadedFile.id" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
+                    <ngx-loading [show]="!uploadedFile.id" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
                   </td>
                   <td class="text-left" *ngIf="uploadedFile.id">
                     {{uploadedFile.filename}}
