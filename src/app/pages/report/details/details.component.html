@@ -73,25 +73,42 @@
         </div>
       </div>
 
+      <hr />
       <div class="form__group">
         <label>
-          Photos du problème / produit / ticket de caisse (facultatif)
+          <img alt="Icône du bouton joindre" src="/assets/images/icon_attachment.png">
+          Pièces jointes
         </label>
-        <div class="row">
-          <div class="col-12">
-              <app-file-input
-                [placeholder]="'Photo du ticket de caisse'"
-                (fileSelected)="onTicketFileSelected($event)">
-              </app-file-input>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <app-file-input
-              [placeholder]="'Photo du problème'"
-              (fileSelected)="onAnomalyFileSelected($event)">
-            </app-file-input>
+        <div class="row pb-3">
+          <div class="col-12 text-center">
+            <input type="file" #fileInput class="form-control-file" hidden (change)="selectFile()">
+            <button type="button" class="btn btn-outline-primary"(click)="bringFileSelector()">
+              Ajouter une pièce jointe
+            </button>
           </div>
+        </div>
+        <div class="row text-center">
+          <div class="offset-1 col-11 offset-md-2 col-md-10">
+            <table class="table table-sm">
+              <tbody>
+                <tr *ngFor="let uploadedFile of uploadedFiles">
+                  <td class="text-left" style="position: relative" *ngIf="!uploadedFile.id" colspan="2">
+                    {{uploadedFile.filename}}
+                    <ngx-loading [show]="uploadedFile.id" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
+                  </td>
+                  <td class="text-left" *ngIf="uploadedFile.id">
+                    {{uploadedFile.filename}}
+                  </td>
+                  <td class="text-right pointer" *ngIf="uploadedFile.id">
+                    <img alt="Icône du bouton suivant" src="/assets/images/icon_remove.png" (click)="removeUploaderFile(uploadedFile)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="note">
+          Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part du professionnel.
         </div>
       </div>
       <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
@@ -103,7 +120,7 @@
         </span>
       </div>
       <hr />
-      <button type="submit" class="btn btn-lg btn-primary">
+      <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
         <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
         Identifier le commerçant
       </button>
