@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly } from '../../../model/Anomaly';
@@ -19,6 +19,9 @@ export class CategoryComponent implements OnInit {
   anomalies: Anomaly[];
   showSecondaryCategories: boolean;
 
+  companyType = CompanyType;
+  selectedCompanyType: CompanyType;
+
   constructor(private anomalyService: AnomalyService,
               private reportService: ReportService,
               private reportRouterService: ReportRouterService,
@@ -27,7 +30,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.step = Step.Category;
     this.reportService.currentReport.subscribe(report => this.report = report);
-
+    this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.loadAnomalies();
   }
@@ -74,4 +77,14 @@ export class CategoryComponent implements OnInit {
     this.reportService.removeReportFromStorage();
   }
 
+  selectCompanyType(type: CompanyType) {
+    this.selectedCompanyType = type;
+  }
+
+}
+
+export enum CompanyType {
+  Physical = 'Physical',
+  Service = 'Service',
+  Online = 'Online'
 }
