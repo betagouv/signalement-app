@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
-import { FileInputComponent } from '../../../components/file-input/file-input.component';
 import { Report, ReportDetails } from '../../../model/Report';
 import { Precision, Subcategory, SubcategoryDetails } from '../../../model/Anomaly';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
@@ -40,7 +39,6 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         BreadcrumbComponent,
-        FileInputComponent,
         CollapsableTextComponent,
         TruncatePipe,
       ],
