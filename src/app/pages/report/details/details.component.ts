@@ -30,6 +30,7 @@ export class DetailsComponent implements OnInit {
   anomalyFile: File;
 
   showErrors: boolean;
+  keywordsDetected: Keyword;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -50,6 +51,7 @@ export class DetailsComponent implements OnInit {
       }
     });
     this.localeService.use('fr');
+
   }
 
   initDetailsForm() {
@@ -119,28 +121,35 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetailsForm() {
+    this.searchForKeywords();
+
     if (!this.detailsForm.valid) {
+      console.log('Pas valide');
       this.showErrors = true;
     } else {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
-      const reportDetails = new ReportDetails();
-      if (this.getPrecisionFromCtrl()) {
-        reportDetails.precision = this.getPrecisionFromCtrl();
+      console.log('Valide');
+      if (this.keywordsDetected && this.keywordsDetected.userWarned === false) {
+        this.keywordsDetected.userWarned = true;
+      } else {
+        this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
+        const reportDetails = new ReportDetails();
+        if (this.getPrecisionFromCtrl()) {
+          reportDetails.precision = this.getPrecisionFromCtrl();
+        }
+        if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
+          reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
+        }
+        reportDetails.anomalyDate = this.anomalyDateCtrl.value;
+        reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
+        reportDetails.description = this.descriptionCtrl.value;
+        reportDetails.ticketFile = this.ticketFile;
+        reportDetails.anomalyFile = this.anomalyFile;
+        this.report.details = reportDetails;
+        this.reportService.changeReportFromStep(this.report, this.step);
+        this.reportRouterService.routeForward(this.step);
       }
-      if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
-        reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
-      }
-      reportDetails.anomalyDate = this.anomalyDateCtrl.value;
-      reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
-      reportDetails.description = this.descriptionCtrl.value;
-      reportDetails.ticketFile = this.ticketFile;
-      reportDetails.anomalyFile = this.anomalyFile;
-      this.report.details = reportDetails;
-      this.reportService.changeReportFromStep(this.report, this.step);
-      this.reportRouterService.routeForward(this.step);
     }
   }
-
 
   getPrecisionFromCtrl() {
     if (this.singlePrecisionCtrl) {
@@ -156,4 +165,37 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  searchForKeywords() {
+    console.log('le textarea perd son focus');
+
+    const KEYWORDS = [
+      'au noir',
+      'au black',
+      'sans papier',
+      'immigré',
+      'immigre',
+      'travail dissimulé',
+      'travail dissimule',
+      'esclave',
+      'esclavage'
+    ];
+
+    if (KEYWORDS.some(elt => new RegExp(elt).test(this.descriptionCtrl.value))) {
+      this.keywordsDetected = {
+        message: `Vous souhaitez signaler un cas de travail au noir ?`,
+        link: 'test.php',
+        userWarned: false
+      };
+    } else {
+      this.keywordsDetected = null;
+    }
+
+    console.log('keywordsDetected', this.keywordsDetected);
+  }
+}
+
+interface Keyword {
+  readonly message: string;
+  readonly link: string;
+  userWarned: boolean;
 }

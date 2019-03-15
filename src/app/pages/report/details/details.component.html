@@ -46,8 +46,14 @@
         <textarea formControlName="description"
                   rows="3"
                   maxlength="500"
-                  placeholder="500 caractères maximum">
-                </textarea>
+                  placeholder="500 caractères maximum"
+                  (blur)="searchForKeywords()">
+        </textarea>
+        <br />
+        <div class="notification error" *ngIf="keywordsDetected">
+            {{ keywordsDetected.message }} <a href="{{ keywordsDetected.link }}">Continuez ici</a>
+        </div>  
+
       </div>
 
       <div class="form__group">
