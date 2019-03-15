@@ -50,7 +50,7 @@
                   (blur)="searchForKeywords()">
         </textarea>
         <br />
-        <div class="notification error" *ngIf="keywordsDetected">
+        <div class="notification warning" *ngIf="keywordsDetected">
             {{ keywordsDetected.message }} <a href="{{ keywordsDetected.link }}">Continuez ici</a>
         </div>  
 

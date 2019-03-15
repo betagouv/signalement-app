@@ -52,6 +52,7 @@ export class DetailsComponent implements OnInit {
     });
     this.localeService.use('fr');
 
+    this.searchForKeywords();
   }
 
   initDetailsForm() {
@@ -121,16 +122,12 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetailsForm() {
-    this.searchForKeywords();
 
     if (!this.detailsForm.valid) {
       console.log('Pas valide');
       this.showErrors = true;
     } else {
       console.log('Valide');
-      if (this.keywordsDetected && this.keywordsDetected.userWarned === false) {
-        this.keywordsDetected.userWarned = true;
-      } else {
         this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
         const reportDetails = new ReportDetails();
         if (this.getPrecisionFromCtrl()) {
@@ -147,7 +144,6 @@ export class DetailsComponent implements OnInit {
         this.report.details = reportDetails;
         this.reportService.changeReportFromStep(this.report, this.step);
         this.reportRouterService.routeForward(this.step);
-      }
     }
   }
 
@@ -183,8 +179,7 @@ export class DetailsComponent implements OnInit {
     if (KEYWORDS.some(elt => new RegExp(elt).test(this.descriptionCtrl.value))) {
       this.keywordsDetected = {
         message: `Vous souhaitez signaler un cas de travail au noir ?`,
-        link: 'test.php',
-        userWarned: false
+        link: 'test.php'
       };
     } else {
       this.keywordsDetected = null;
@@ -197,5 +192,4 @@ export class DetailsComponent implements OnInit {
 interface Keyword {
   readonly message: string;
   readonly link: string;
-  userWarned: boolean;
 }
