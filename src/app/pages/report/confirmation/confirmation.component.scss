@@ -1,3 +1,10 @@
 @import "../../../../theme/variables";
 
+li.filename {
+  list-style-position:inside;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 

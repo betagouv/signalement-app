@@ -35,6 +35,21 @@
           <br />
           Email : {{report.consumer.email}}
         </div>
+        <div class="row mt-2" *ngIf="report.details.uploadedFiles && report.details.uploadedFiles.length; else noUploadedFiles">
+          Pièce(s) jointe(s) :
+          <div class="col-12">
+            <ul>
+              <li *ngFor="let uploadedFile of report.details.uploadedFiles" class="filename">
+                {{uploadedFile.filename}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <ng-template #noUploadedFiles>
+          <div class="row mt-2">
+               Aucune pièce jointe
+          </div>
+        </ng-template>
       </div>
 
       <div class="row pl-1">
