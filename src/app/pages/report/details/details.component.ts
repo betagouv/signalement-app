@@ -33,6 +33,7 @@ export class DetailsComponent implements OnInit {
   uploadedFiles: UploadedFile[];
 
   showErrors: boolean;
+  tooLargeFilename;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -149,7 +150,7 @@ export class DetailsComponent implements OnInit {
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
-      reportDetails.uploadedFiles = this.uploadedFiles;
+      reportDetails.uploadedFiles = this.uploadedFiles.filter(file => file.id);
       this.report.details = reportDetails;
       this.reportService.changeReportFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
@@ -176,16 +177,34 @@ export class DetailsComponent implements OnInit {
   }
 
   selectFile() {
-    const fileToUpload = new UploadedFile();
-    fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
-    this.uploadedFiles.push(fileToUpload);
-    this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
-      fileToUpload.id = uploadedFile.id;
-    });
+    this.tooLargeFilename = undefined;
+    if (this.fileInput.nativeElement.files[0]) {
+      if (this.fileInput.nativeElement.files[0].size > fileSizeMax) {
+        this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
+      } else {
+        const fileToUpload = new UploadedFile();
+        fileToUpload.filename = this.textOverflowMiddleCropping(this.fileInput.nativeElement.files[0].name, 32);
+        fileToUpload.loading = true;
+        this.uploadedFiles.push(fileToUpload);
+        this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
+          fileToUpload.loading = false;
+          fileToUpload.id = uploadedFile.id;
+        }, error => {
+          fileToUpload.loading = false;
+          fileToUpload.filename = `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
+        });
+      }
+    }
   }
 
   isUploadingFile() {
-    return this.uploadedFiles.find(file => !file.id);
+    return this.uploadedFiles.find(file => file.loading);
+  }
+
+  textOverflowMiddleCropping(text: string, limit: number) {
+    return text.length > limit ? `${text.substr(0, limit / 2)}...${text.substr(text.length - (limit / 2), text.length)}` : text;
   }
 
 }
+
+export const fileSizeMax = 5000000;
