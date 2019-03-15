@@ -319,7 +319,18 @@
       "icon": "icon_pub.png",
       "subcategories": [
         {
-          "title": "Indisponibilité des produits du catalogue"
+          "title": "Indisponibilité des produits du catalogue",
+          "subcategories": [
+            {
+              "title": "Produit affiché dans le catalogue non disponible dans le magasin"
+            },
+            {
+              "title": "Produit proposé sur le menu/carte non disponible à la vente"
+            },
+            {
+              "title": "Autres"
+            }
+          ]
         },
         {
           "title": "Information mensongère, publicité trompeuse"

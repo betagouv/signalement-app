@@ -11,18 +11,14 @@
     </div>
 
     <ng-template #subcategoryFormTemplate>
-      <h4 class="text-center mb-4" [innerHTML]="anomaly?.subcategoryTitle" *ngIf="anomaly?.subcategoryTitle"></h4>
       <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
-        <div class="row pb-4" *ngFor="let subcategory of anomaly?.subcategories">
-          <div class="col-2 col-sm-1 text-right pr-1">
-            <input type="radio" formControlName="anomalySubcategory" [value]="subcategory.title" id="radio-{{subcategory.title}}"/>
-          </div>
-          <div class="col-10 col-sm-11 pl-1">
-            <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
-            <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
-          </div>
-        </div>
-        <div class="notification error" *ngIf="showErrors && anomalySubcategoryCtrl.hasError('required')">
+        <app-subcategory
+          [subcategoryTitle]="anomaly?.subcategoryTitle"
+          [subcategoryName]="anomaly?.category"
+          [subcategories]="anomaly?.subcategories"
+          (select)="onSelectSubcategory($event)">
+        </app-subcategory>
+        <div class="notification error" *ngIf="showErrors && subcategoryCtrl.hasError('required')">
           Veuillez sélectionner une des propositions ci-dessus.
         </div>
         <hr />

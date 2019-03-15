@@ -48,6 +48,8 @@ export class Subcategory {
   title: string;
   @JsonProperty('description')
   description?: string;
+  @JsonProperty({ name: 'subcategories', clazz: Subcategory })
+  subcategories?: Subcategory[];
   @JsonProperty({ name: 'details', clazz: SubcategoryDetails })
   details?: SubcategoryDetails;
   @JsonProperty('information')
@@ -58,6 +60,7 @@ export class Subcategory {
     this.description = undefined;
     this.information = undefined;
     this.details = undefined;
+    this.subcategories = undefined;
   }
 }
 

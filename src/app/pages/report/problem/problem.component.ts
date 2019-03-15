@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Anomaly } from '../../../model/Anomaly';
+import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
@@ -8,18 +8,18 @@ import { Report } from '../../../model/Report';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
-  selector: 'app-subcategory',
-  templateUrl: './subcategory.component.html',
-  styleUrls: ['./subcategory.component.scss']
+  selector: 'app-problem',
+  templateUrl: './problem.component.html',
+  styleUrls: ['./problem.component.scss']
 })
-export class SubcategoryComponent implements OnInit {
+export class ProblemComponent implements OnInit {
 
   step: Step;
   report: Report;
   anomaly: Anomaly;
 
   subcategoryForm: FormGroup;
-  anomalySubcategoryCtrl: FormControl;
+  subcategoryCtrl: FormControl;
 
   showErrors: boolean;
 
@@ -52,13 +52,17 @@ export class SubcategoryComponent implements OnInit {
   initSubcategoryForm() {
     this.showErrors = false;
 
-    this.anomalySubcategoryCtrl = this.formBuilder.control(
+    this.subcategoryCtrl = this.formBuilder.control(
       this.report.subcategory ? this.report.subcategory.title : '', Validators.required
     );
 
     this.subcategoryForm = this.formBuilder.group({
-      anomalySubcategory: this.anomalySubcategoryCtrl
+      subcategory: this.subcategoryCtrl
     });
+  }
+
+  onSelectSubcategory(subcategory: Subcategory) {
+    this.subcategoryCtrl.setValue(subcategory);
   }
 
   submitSubcategoryForm() {
@@ -66,8 +70,8 @@ export class SubcategoryComponent implements OnInit {
       this.showErrors = true;
       return false;
     } else {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, this.anomalySubcategoryCtrl.value);
-      this.report.subcategory = this.anomaly.subcategories.find(subcategory => subcategory.title === this.anomalySubcategoryCtrl.value);
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, this.subcategoryCtrl.value);
+      this.report.subcategory = this.subcategoryCtrl.value;
       this.reportService.changeReportFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
     }
