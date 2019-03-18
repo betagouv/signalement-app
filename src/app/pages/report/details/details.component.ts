@@ -162,7 +162,6 @@ export class DetailsComponent implements OnInit {
   }
 
   searchForKeywords() {
-    console.log('le textarea perd son focus');
 
     const KEYWORDS = [
       'au noir',
@@ -178,18 +177,24 @@ export class DetailsComponent implements OnInit {
 
     if (KEYWORDS.some(elt => new RegExp(elt).test(this.descriptionCtrl.value))) {
       this.keywordsDetected = {
-        message: `Vous souhaitez signaler un cas de travail au noir ?`,
-        link: 'test.php'
+        message: `Vous souhaitez signaler un cas de travail au noir ?`
       };
     } else {
       this.keywordsDetected = null;
     }
 
-    console.log('keywordsDetected', this.keywordsDetected);
+  }
+
+  goToInformationPage() {
+    this.step = Step.Category;
+    this.report.category = 'Travail au noir';
+
+    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportRouterService.routeForward(this.step);
+
   }
 }
 
 interface Keyword {
   readonly message: string;
-  readonly link: string;
 }

@@ -51,7 +51,7 @@
         </textarea>
         <br />
         <div class="notification warning" *ngIf="keywordsDetected">
-            {{ keywordsDetected.message }} <a href="{{ keywordsDetected.link }}">Continuez ici</a>
+            {{ keywordsDetected.message }} <button class="btn btn-link" (click)="goToInformationPage()">Continuez ici</button>
         </div>  
 
       </div>
