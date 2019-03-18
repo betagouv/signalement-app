@@ -4,6 +4,8 @@ import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { otherPrecisionValue, ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { KeywordService } from '../../../services/keyword.service';
+import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { Information } from '../../../model/Anomaly';
 
@@ -36,7 +38,9 @@ export class DetailsComponent implements OnInit {
               private reportService: ReportService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService,
-              private localeService: BsLocaleService) {
+              private localeService: BsLocaleService,
+              private keywordService: KeywordService,
+              private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
@@ -52,7 +56,8 @@ export class DetailsComponent implements OnInit {
     });
     this.localeService.use('fr');
 
-    this.searchForKeywords();
+    this.searchKeywords();
+
   }
 
   initDetailsForm() {
@@ -124,10 +129,8 @@ export class DetailsComponent implements OnInit {
   submitDetailsForm() {
 
     if (!this.detailsForm.valid) {
-      console.log('Pas valide');
       this.showErrors = true;
     } else {
-      console.log('Valide');
         this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
         const reportDetails = new ReportDetails();
         if (this.getPrecisionFromCtrl()) {
@@ -161,33 +164,24 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  searchForKeywords() {
+  searchKeywords() {
 
-    const KEYWORDS = [
-      'au noir',
-      'au black',
-      'sans papier',
-      'immigré',
-      'immigre',
-      'travail dissimulé',
-      'travail dissimule',
-      'esclave',
-      'esclavage'
-    ];
+    const anomaly = this.anomalyService.getAnomalyByCategory(this.keywordService.search(this.descriptionCtrl.value));
 
-    if (KEYWORDS.some(elt => new RegExp(elt).test(this.descriptionCtrl.value))) {
+    if (anomaly) {
       this.keywordsDetected = {
-        message: `Vous souhaitez signaler un cas de travail au noir ?`
+        category: anomaly.category,
+        message: anomaly.information ? anomaly.information.title : ''
       };
     } else {
       this.keywordsDetected = null;
     }
-
   }
 
   goToInformationPage() {
+    // modification des éléments du report et du step pour que le router affiche la page d'info avec le contexte
     this.step = Step.Category;
-    this.report.category = 'Travail au noir';
+    this.report.category = this.keywordsDetected.category;
 
     this.reportService.changeReportFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
@@ -196,5 +190,6 @@ export class DetailsComponent implements OnInit {
 }
 
 interface Keyword {
+  readonly category: string;
   readonly message: string;
 }
