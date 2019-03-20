@@ -35,7 +35,9 @@ export class CategoryComponent implements OnInit {
     this.showSecondaryCategories = false;
     this.loadAnomalies();
     const anomaly = this.anomalyService.findAnomalyOfCategory(this.anomalies, "Problème suite à un achat sur internet");
-    this.internetInformation = anomaly.information; 
+    if (anomaly) {
+      this.internetInformation = anomaly.information; 
+    }
   }
 
   loadAnomalies() {
