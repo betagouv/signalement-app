@@ -12,11 +12,11 @@ export class KeywordService {
   keywords: Keyword[];
 
   constructor() {
-    this.keywords = this.getKeywords();
+    this.setKeywords(keywords);
   }
 
-  getKeywords() {
-    return deserialize(KeywordList, keywords).list;
+  setKeywords(words) {
+    this.keywords = deserialize(KeywordList, words).list;
   }
 
   search(text) {
