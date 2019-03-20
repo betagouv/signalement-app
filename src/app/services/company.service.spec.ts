@@ -55,7 +55,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiCompanyBaseUrl}/api/sirene/v1/full_text/${search}?code_postal=${searchPostalCode}&per_page=${MaxCompanyResult}`);
     companiesRequest.flush(result);
 
   });
@@ -70,7 +70,7 @@ describe('CompanyService', () => {
       done();
     });
 
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
+    const companiesRequest = httpMock.expectOne(`${environment.apiCompanyBaseUrl}/api/sirene/v1/full_text/${search}?code_postal=${searchPostalCode}&per_page=${MaxCompanyResult}`);
     companiesRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
   });
 
