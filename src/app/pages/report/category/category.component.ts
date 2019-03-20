@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Anomaly } from '../../../model/Anomaly';
+import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
@@ -21,6 +21,7 @@ export class CategoryComponent implements OnInit {
 
   companyType = CompanyType;
   selectedCompanyType: CompanyType;
+  internetInformation: Information;
 
   constructor(private anomalyService: AnomalyService,
               private reportService: ReportService,
@@ -33,6 +34,8 @@ export class CategoryComponent implements OnInit {
     this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.loadAnomalies();
+    const anomaly = this.anomalyService.findAnomalyOfCategory(this.anomalies, "Problème suite à un achat sur internet");
+    this.internetInformation = anomaly.information; 
   }
 
   loadAnomalies() {
@@ -78,6 +81,7 @@ export class CategoryComponent implements OnInit {
   }
 
   selectCompanyType(type: CompanyType) {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.companyTypeSelection, type);
     this.selectedCompanyType = type;
   }
 
@@ -86,5 +90,5 @@ export class CategoryComponent implements OnInit {
 export enum CompanyType {
   Physical = 'Physical',
   Service = 'Service',
-  Online = 'Online'
+  Internet = 'Internet'
 }

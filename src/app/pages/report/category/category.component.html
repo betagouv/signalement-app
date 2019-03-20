@@ -22,14 +22,14 @@
       <nav class="nav nav-pills nav-justified">
         <a class="nav-item nav-link" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
         <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Service)" [ngClass]="{'active': selectedCompanyType == companyType.Service}">Prestations de service</a>
-        <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Online)" [ngClass]="{'active': selectedCompanyType == companyType.Online}">Commerce électronique</a>
+        <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Internet)" [ngClass]="{'active': selectedCompanyType == companyType.Internet}">Achats sur internet</a>
       </nav>
     </div>
   </section>
 
   <section class="section section-lightest-grey position-relative">
 
-    <div class="container" *ngIf="selectedCompanyType == companyType.Physical" >
+    <div class="container" *ngIf="selectedCompanyType == companyType.Physical">
       <h3 class="text-center">Quel est le problème ?</h3>
       <div class="row pb-4">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
@@ -62,12 +62,26 @@
       </ng-template>
     </div>
 
-    <div class="container" *ngIf="selectedCompanyType == companyType.Service" >
-      <div class="notification" >Le signalement de problèmes rencontrés lors de prestations de service n’est pas encore activé sur ce service, mais nous travaillons activement à ce qu’il vous soit disponible.</div>
+    <div class="container" *ngIf="selectedCompanyType == companyType.Service">
+      <div class="notification">
+        <p>Le signalement de problèmes rencontrés lors de prestations de service n’est pas encore disponible mais nous y travaillons activement.</p>
+        <p>Ceci comprend notamment les activités suivantes :</p>
+        <ul>
+          <li>métiers des soins et de la beauté</li>
+          <li>transports (taxi, train, …)</li>
+          <li>travaux et dépannage</li>
+          <li>aide à la personne</li>
+          <li>soin des vêtements (laverie, pressing, …)</li>
+          <li>hôtellerie</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="container" *ngIf="selectedCompanyType == companyType.Online" >
-      <div class="notification">Le signalement de problèmes rencontrés lors d’achats en ligne n’est pas encore activé sur ce service, mais nous travaillons activement à ce qu’il vous soit disponible.</div>
+    <div class="container" *ngIf="selectedCompanyType == companyType.Internet">
+      <div class="notification">
+        <p>Le signalement de problèmes rencontrés lors d’achats sur internet n’est pas encore disponible mais nous y travaillons activement.</p>
+        <p [innerHTML]="internetInformation?.content"></p>
+      </div>
     </div>
 
   </section>
