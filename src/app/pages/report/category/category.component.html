@@ -4,8 +4,9 @@
       Signalez un problème au commerçant et à la répression des fraudes
     </h1>
     <h3>
-      Magasins, commerces de proximité, cafés et restaurants...<br />en région <strong class="text-uppercase">Centre-Val de Loire</strong>
+      en région <strong class="text-uppercase">Centre-Val de Loire</strong>
     </h3>
+    <img src="/assets/images/centre-val-de-loire.png" alt="Carte du Centre-Val de Loire" />
   </div>
 </div>
 
@@ -17,9 +18,19 @@
     <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
   </alert>
 
+  <section class="section section-lighter-grey py-3">
+    <div class="container">
+      <nav class="nav nav-pills nav-justified">
+        <a class="nav-item nav-link" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
+        <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Service)" [ngClass]="{'active': selectedCompanyType == companyType.Service}">Prestations de service</a>
+        <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Internet)" [ngClass]="{'active': selectedCompanyType == companyType.Internet}">Achats sur internet</a>
+      </nav>
+    </div>
+  </section>
+
   <section class="section section-lightest-grey position-relative">
 
-    <div class="container">
+    <div class="container" *ngIf="selectedCompanyType == companyType.Physical">
       <h3 class="text-center">Quel est le problème ?</h3>
       <div class="row pb-4">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
@@ -51,6 +62,29 @@
         </ul>
       </ng-template>
     </div>
+
+    <div class="container" *ngIf="selectedCompanyType == companyType.Service">
+      <div class="notification">
+        <p>Le signalement de problèmes rencontrés lors de prestations de service n’est pas encore disponible mais nous y travaillons activement.</p>
+        <p>Ceci comprend notamment les activités suivantes :</p>
+        <ul>
+          <li>métiers des soins et de la beauté</li>
+          <li>transports (taxi, train, …)</li>
+          <li>travaux et dépannage</li>
+          <li>aide à la personne</li>
+          <li>soin des vêtements (laverie, pressing, …)</li>
+          <li>hôtellerie</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container" *ngIf="selectedCompanyType == companyType.Internet">
+      <div class="notification">
+        <p>Le signalement de problèmes rencontrés lors d’achats sur internet n’est pas encore disponible mais nous y travaillons activement.</p>
+        <p [innerHTML]="internetInformation?.content"></p>
+      </div>
+    </div>
+
   </section>
 
   <section class="section section-lighter-grey">
