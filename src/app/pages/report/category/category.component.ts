@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Anomaly } from '../../../model/Anomaly';
+import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
@@ -19,6 +19,10 @@ export class CategoryComponent implements OnInit {
   anomalies: Anomaly[];
   showSecondaryCategories: boolean;
 
+  companyType = CompanyType;
+  selectedCompanyType: CompanyType;
+  internetInformation: Information;
+
   constructor(private anomalyService: AnomalyService,
               private reportService: ReportService,
               private reportRouterService: ReportRouterService,
@@ -27,9 +31,13 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.step = Step.Category;
     this.reportService.currentReport.subscribe(report => this.report = report);
-
+    this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.loadAnomalies();
+    const anomaly = this.anomalyService.findAnomalyOfCategory(this.anomalies, "Problème suite à un achat sur internet");
+    if (anomaly) {
+      this.internetInformation = anomaly.information; 
+    }
   }
 
   loadAnomalies() {
@@ -74,4 +82,15 @@ export class CategoryComponent implements OnInit {
     this.reportService.removeReportFromStorage();
   }
 
+  selectCompanyType(type: CompanyType) {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.companyTypeSelection, type);
+    this.selectedCompanyType = type;
+  }
+
+}
+
+export enum CompanyType {
+  Physical = 'Physical',
+  Service = 'Service',
+  Internet = 'Internet'
 }
