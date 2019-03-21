@@ -3,11 +3,14 @@ import { JsonProperty } from 'json-typescript-mapper';
 export class Keyword {
   @JsonProperty('category')
   category: string;
+  @JsonProperty('categoryId')
+  categoryId: string;
   @JsonProperty({ name: 'words'})
   words?: string[];
 
   constructor() {
     this.category = undefined;
+    this.categoryId = undefined;
     this.words = undefined;
   }
 }

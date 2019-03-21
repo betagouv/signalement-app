@@ -8,11 +8,36 @@ import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { Information } from '../../../model/Anomaly';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        display: 'block',
+        opacity: 1,
+      })),
+      state('closed', style({
+        display: 'none',
+        opacity: 0,
+      })),
+      transition('open => closed', [
+        animate('0.5s ease-in-out')
+      ]),
+      transition('closed => open', [
+        animate('0.5s ease-in-out')
+      ]),
+    ]),
+  ],
 })
 export class DetailsComponent implements OnInit {
 
@@ -166,7 +191,7 @@ export class DetailsComponent implements OnInit {
 
   searchKeywords() {
 
-    const anomaly = this.anomalyService.getAnomalyByCategory(this.keywordService.search(this.descriptionCtrl.value));
+    const anomaly = this.anomalyService.getAnomalyByCategoryId(this.keywordService.search(this.descriptionCtrl.value));
 
     if (anomaly) {
       this.keywordsDetected = {

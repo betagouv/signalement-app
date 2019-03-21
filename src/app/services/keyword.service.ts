@@ -25,7 +25,7 @@ export class KeywordService {
       for (let i = 0; i < this.keywords.length; i++) {
         const keyword = this.keywords[i];
         if (keyword.words.some(elt => new RegExp(elt).test(text))) {
-          return keyword.category;
+          return keyword.categoryId;
         }
       }
     }

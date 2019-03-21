@@ -12,7 +12,7 @@
                 "esclave",
                 "esclavage"
             ],
-            "category": "Travail au noir"
+            "categoryId": "TNOIR"
         }
     ]
 }

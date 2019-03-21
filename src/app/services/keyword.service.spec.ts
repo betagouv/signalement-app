@@ -17,7 +17,8 @@ const data = {
         "esclave",
         "esclavage"
       ],
-      "category": "Travail au noir"
+      "category": "Travail au noir",
+      "categoryId": "TNOIR"
     }
   ]
 };
@@ -35,7 +36,7 @@ describe('KeywordServiceService', () => {
 
     const service: KeywordService = TestBed.get(KeywordService);
     service.setKeywords(data);
-    expect(service.search('j\'ai été témoin d\'un travail d\'esclave')).toBe('Travail au noir');
+    expect(service.search('j\'ai été témoin d\'un travail d\'esclave')).toBe('TNOIR');
   });
 
   it('should not found a keyword', () => {
