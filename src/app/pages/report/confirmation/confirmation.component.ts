@@ -20,6 +20,7 @@ export class ConfirmationComponent implements OnInit {
 
   showErrors: boolean;
   loading: boolean;
+  loadingError: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -50,6 +51,7 @@ export class ConfirmationComponent implements OnInit {
   }
 
   submitConfirmationForm() {
+    this.loadingError = false;
     if (!this.confirmationForm.valid) {
       this.showErrors = true;
     } else {
@@ -66,7 +68,7 @@ export class ConfirmationComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          // TODO cas d'erreur
+          this.loadingError = true;
         });
 
     }

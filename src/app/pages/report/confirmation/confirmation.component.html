@@ -59,6 +59,9 @@
           Veuillez indiquer si vous acceptez de transmettre vos coordonnées au professionnel.<br />
         </span>
       </div>
+      <div class="notification error mt-3" *ngIf="loadingError">
+          Une erreur technique s'est produite lors de l'envoi, veuillez réessayer ultérieurement.<br />
+      </div>
       <hr />
       <button type="submit" class="btn btn-lg btn-primary">
         <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
