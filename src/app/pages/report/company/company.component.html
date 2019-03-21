@@ -62,7 +62,12 @@
         <div *ngIf="companies && companies.length">
 
           <div class="notification warning mt-4">
-            Veuillez sélectionner un établissement dans la liste ci-dessous.
+            <p>
+              Veuillez sélectionner un établissement dans la liste ci-dessous.
+            </p>
+            <p>
+              S'il ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+            </p>
           </div>
 
           <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
@@ -81,6 +86,13 @@
             {{searchWarning}}
           </p>
           Veuillez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+        </div>
+
+        <div class="notification error mt-4" *ngIf="searchError">
+          <p>
+            {{searchError}}
+          </p>
+          Veuillez réessayer ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
         </div>
       </form>
 
