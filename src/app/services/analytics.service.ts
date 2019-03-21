@@ -36,6 +36,7 @@ export enum ReportEventActions {
   validateCompany = 'Validation de l\'établissement',
   validateConsumer = 'Validation du consommateur',
   validateConfirmation = 'Envoi d\'un signalement',
+  companyTypeSelection = 'Sélection d\'un type d\'entreprise'
 }
 
 export enum CompanyEventActions {
