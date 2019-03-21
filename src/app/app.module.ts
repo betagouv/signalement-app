@@ -2,8 +2,6 @@ import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/header/header.component';
@@ -45,8 +43,6 @@ registerLocaleData(localeFr, 'fr');
       { path: 'qui-sommes-nous', component: AboutComponent }
     ]),
     ReportModule,
-    BrowserModule,
-    BrowserAnimationsModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
