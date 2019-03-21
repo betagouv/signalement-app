@@ -24,7 +24,7 @@
         <div class="row mt-2">
           Date du constat : {{report.details.anomalyDate | date:'dd/MM/yyyy'}}
           <br />
-          Plage horaire : <span *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </span>
+          Plage horaire : <ng-container *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </ng-container>
           <br />
           Description : {{report.details.description}}
         </div>
