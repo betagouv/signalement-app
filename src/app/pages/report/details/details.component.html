@@ -50,9 +50,10 @@
                   (blur)="searchKeywords()">
         </textarea>
         <br />
-        <div class="notification warning" *ngIf="keywordsDetected">
-            {{ keywordsDetected.message }} <button class="btn btn-link" (click)="goToInformationPage()">Continuez ici</button>
-        </div> 
+        <div class="notification warning" [@openClose]="keywordsDetected ? 'open' : 'closed'">
+            {{ keywordsDetected?.message }} <button class="btn btn-link" (click)="goToInformationPage()">Continuez ici</button>
+        </div>  
+
       </div>
 
       <div class="form__group">
