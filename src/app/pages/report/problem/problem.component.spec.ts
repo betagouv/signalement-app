@@ -92,7 +92,7 @@ describe('ProblemComponent', () => {
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('h4').textContent).toEqual('Est-ce que votre problème fait suite à un achat sur internet ?');
       expect(nativeElement.querySelectorAll('button')[0].textContent).toEqual('Oui');
-      expect(nativeElement.querySelectorAll('button')[1].textContent).toEqual('Non');
+      expect(nativeElement.querySelectorAll('button')[1].textContent).toEqual('Non, pas sur internet');
       expect(nativeElement.querySelector('form')).toBeNull();
     });
   });
