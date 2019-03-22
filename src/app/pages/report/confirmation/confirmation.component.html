@@ -40,7 +40,9 @@
           <div class="col-12">
             <ul>
               <li *ngFor="let uploadedFile of report.details.uploadedFiles" class="filename">
-                {{uploadedFile.filename}}
+                <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                  {{uploadedFile.filename}}
+                </a>
               </li>
             </ul>
           </div>

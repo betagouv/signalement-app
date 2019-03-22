@@ -23,4 +23,14 @@ export class FileUploaderService {
     );
   }
 
+  deleteFile(uploadedFile: UploadedFile) {
+    return this.http.delete(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files', uploadedFile.id, uploadedFile.filename])
+    );
+  }
+
+  getFileDownloadUrl(uploadedFile: UploadedFile) {
+    return this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files', uploadedFile.id, uploadedFile.filename]);
+  }
+
 }

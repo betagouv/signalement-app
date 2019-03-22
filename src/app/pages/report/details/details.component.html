@@ -89,9 +89,11 @@
                     <ngx-loading [show]="uploadedFile.loading" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
                   </td>
                   <td class="text-left" *ngIf="!uploadedFile.loading">
-                    <span [class]="uploadedFile.id ? '' : 'error'">
-                      {{uploadedFile.filename}}
-                    </span>
+                    <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                      <span [class]="uploadedFile.id ? '' : 'error'">
+                        {{uploadedFile.filename}}
+                      </span>
+                    </a>
                   </td>
                   <td class="text-right pointer" *ngIf="!uploadedFile.loading">
                     <img alt="Icône du bouton suivant" src="/assets/images/icon_remove.png" (click)="removeUploaderFile(uploadedFile)">

@@ -91,6 +91,7 @@ export class DetailsComponent implements OnInit {
       this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
       1
     );
+    this.fileUploaderService.deleteFile(uploadedFile).subscribe();
   }
 
   initPrecisionsCtrl() {
@@ -203,6 +204,10 @@ export class DetailsComponent implements OnInit {
 
   textOverflowMiddleCropping(text: string, limit: number) {
     return text.length > limit ? `${text.substr(0, limit / 2)}...${text.substr(text.length - (limit / 2), text.length)}` : text;
+  }
+
+  getFileDownloadUrl(uploadedFile: UploadedFile) {
+    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
 }
