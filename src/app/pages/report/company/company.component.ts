@@ -37,6 +37,7 @@ export class CompanyComponent implements OnInit {
   companies: Company[];
   loading: boolean;
   searchWarning: string;
+  searchError: string;
 
   showErrors: boolean;
 
@@ -86,6 +87,7 @@ export class CompanyComponent implements OnInit {
     this.companyForm = null;
     this.companies = [];
     this.searchWarning = '';
+    this.searchError = '';
   }
 
   searchCompany() {
@@ -107,6 +109,10 @@ export class CompanyComponent implements OnInit {
           } else {
             this.treatCaseSeveralResults(companySearchResult);
           }
+        },
+        error => {
+          this.loading = false;
+          this.treatCaseError();
         }
       );
     }
@@ -130,6 +136,11 @@ export class CompanyComponent implements OnInit {
   treatCaseSeveralResults(companySearchResult) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.severalResult);
     this.companies = companySearchResult.companies;
+  }
+
+  treatCaseError() {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
+    this.searchError = 'Une erreur technique s\'est produite.';
   }
 
   selectCompanyFromResults(company: Company) {

@@ -13,6 +13,8 @@ export class FileInputComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   file: File;
 
+  tooLargeFilename;
+
   constructor() { }
 
   ngOnInit() {
@@ -23,8 +25,16 @@ export class FileInputComponent implements OnInit {
   }
 
   selectFile() {
-    this.file = this.fileInput.nativeElement.files[0];
+    this.tooLargeFilename = undefined;
+    this.file = undefined;
+    if (this.fileInput.nativeElement.files[0].size > fileSizeMax) {
+      this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
+    } else {
+      this.file = this.fileInput.nativeElement.files[0];
+    }
     this.fileSelected.emit(this.file);
   }
 
 }
+
+export const fileSizeMax = 5000000;
