@@ -184,7 +184,8 @@ export class DetailsComponent implements OnInit {
         this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
       } else {
         const fileToUpload = new UploadedFile();
-        fileToUpload.filename = this.textOverflowMiddleCropping(this.fileInput.nativeElement.files[0].name, 32);
+        fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
+        fileToUpload.displayedFilename = this.textOverflowMiddleCropping(fileToUpload.filename, 32);
         fileToUpload.loading = true;
         this.uploadedFiles.push(fileToUpload);
         this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
@@ -192,7 +193,7 @@ export class DetailsComponent implements OnInit {
           fileToUpload.id = uploadedFile.id;
         }, error => {
           fileToUpload.loading = false;
-          fileToUpload.filename = `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
+          fileToUpload.displayedFilename = `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
         });
       }
     }
