@@ -83,7 +83,7 @@ describe('ProblemComponent', () => {
 
     it('shoud request the user if the problem concerns an internet purchase or not', () => {
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
-        Object.assign(new Anomaly(), anomalyFixture, { withInternetPurchase: true })
+        Object.assign(anomalyFixture, { withInternetPurchase: true })
       );
 
       component.ngOnInit();
@@ -99,38 +99,32 @@ describe('ProblemComponent', () => {
 
   describe('when problem does not concern an internet purchase', () => {
 
-    it('should define subcategory form control', () => {
-      expect(component.subcategoryForm.controls['subcategory']).toEqual(component.subcategoryCtrl);
+    it('should display subcategories', () => {
+      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
+        Object.assign(anomalyFixture, { withInternetPurchase: false })
+      );
+
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('h4')).toBeNull();
+      expect(nativeElement.querySelector('app-subcategory')).not.toBeNull();
     });
 
   });
 
-  describe('submitSubcategoryForm function', () => {
+  describe('when receive subcategories', () => {
 
-    it('should display errors when occurs', () => {
-      component.subcategoryCtrl.setValue('');
-      reportFixture.internetPurchase = false;
-
-      component.submitSubcategoryForm();
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(component.showErrors).toBeTruthy();
-      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
-    });
-
-    it('should change the shared report with a report which contains a subcategory when no errors', () => {
+    it('should change the shared report with a report which contains subcategories', () => {
       reportFixture.internetPurchase = false;
       component.anomaly = new Anomaly();
       component.anomaly.subcategories = subcategoriesFixture;
-      component.subcategoryCtrl.setValue(subcategoriesFixture[1]);
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
       fixture.detectChanges();
 
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
-      fixture.detectChanges();
+      component.onSelectSubcategories([subcategoriesFixture[1]]);
 
       const subcategoryExpected = new Subcategory();
       subcategoryExpected.title = 'title2';
@@ -138,7 +132,7 @@ describe('ProblemComponent', () => {
       const reportExpected = new Report();
       reportExpected.internetPurchase = false;
       reportExpected.category = reportFixture.category;
-      reportExpected.subcategory = subcategoryExpected;
+      reportExpected.subcategories = [subcategoryExpected];
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Subcategory);
 

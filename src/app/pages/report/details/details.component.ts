@@ -67,13 +67,13 @@ export class DetailsComponent implements OnInit {
       description: this.descriptionCtrl
     });
 
-    if (this.report.subcategory && this.report.subcategory.details && this.report.subcategory.details.precision) {
+    if (this.report.lastSubcategory && this.report.lastSubcategory.details && this.report.lastSubcategory.details.precision) {
       this.initPrecisionsCtrl();
     }
   }
 
   initPrecisionsCtrl() {
-    const subcategoryDetailsPrecision = this.report.subcategory.details.precision;
+    const subcategoryDetailsPrecision = this.report.lastSubcategory.details.precision;
     if (subcategoryDetailsPrecision.severalOptionsAllowed) {
       this.multiplePrecisionCtrl = new FormArray(
         subcategoryDetailsPrecision.options.map(option =>
@@ -148,7 +148,7 @@ export class DetailsComponent implements OnInit {
     } else if (this.multiplePrecisionCtrl) {
       return this.multiplePrecisionCtrl.controls
         .map((control, index) => {
-          return control.value ? this.report.subcategory.details.precision.options[index].title : null;
+          return control.value ? this.report.lastSubcategory.details.precision.options[index].title : null;
         })
         .filter(value => value !== null);
     } else {

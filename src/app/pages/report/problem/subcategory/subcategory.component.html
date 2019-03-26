@@ -1,18 +1,32 @@
-<h4 class="text-center mb-4" [innerHTML]="subcategoryTitle" *ngIf="subcategoryTitle"></h4>
 <div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''">
-  <div class="row pb-4" *ngFor="let subcategory of subcategories">
-    <div class="col-2 col-sm-1 text-right pr-1">
-      <input type="radio" [name]="subcategoryName" [value]="subcategory.title" id="radio-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
+  <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle" *ngIf="subcategoriesTitle"></h4>
+
+  <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+    <div class="row pb-4" *ngFor="let subcategory of subcategories">
+      <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
+        <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
+      </div>
+      <div class="col-10 col-sm-11 pl-1">
+        <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
+        <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
+      </div>
     </div>
-    <div class="col-10 col-sm-11 pl-1">
-      <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
-      <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
+    <div class="notification error" *ngIf="showErrors && subcategoryForm.invalid">
+      <span *ngIf="subcategoryTitleCtrl.hasError('required')">
+        Veuillez préciser.
+      </span>
     </div>
-  </div>
+    <hr/>
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory()">
+      <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
+      Détailler le problème
+    </button>
+  </form>
 </div>
-<hr *ngIf="hasSubSubcategory()" />
 <app-subcategory *ngIf="hasSubSubcategory()"
-                 [subcategories]="selectedSubcategory.subcategories"
-                 [subcategoryName]="selectedSubcategory.title"
-                 (select)="onSelectSubSubcategory($event)">
+                 [subcategoriesTitle]="subcategorySelected.subcategoriesTitle"
+                 [subcategories]="subcategorySelected.subcategories"
+                 [subcategoryName]="subcategorySelected.title"
+                 [subcategoriesSelected]="subcategoriesSelected"
+                 (select)="onSelectSubSubcategories($event)">
 </app-subcategory>

@@ -367,16 +367,61 @@
         },
         {
           "title": "Refus de reprendre un produit sous garantie",
-          "description": "Le commerçant refuse de me prendre mon achat encore sous garantie",
-          "details": {
-            "precision": {
-              "title": "Veuillez préciser :",
-              "options": [
-                { "title": "Mon achat remonte à plus de 2 ans" },
-                { "title": "Mon achat a moins de 2 ans" }
+          "subcategoriesTitle": "Avez-vous acheté ce produit neuf ou d'occasion ?",
+          "subcategories": [
+            {
+              "title": "Neuf",
+              "subcategoriesTitle": "Quand avez-vous acheté le produit ?",
+              "subcategories": [
+                {
+                  "title": "Il y a moins de 2 ans",
+                  "description": "Le vendeur a l'obligation de garantir 2 ans le fonctionnement normal de tous les objets. Cette garantie ne comprend pas la casse ou un défaut suite à un mauvais usage."
+                },
+                {
+                  "title": "Il y a plus de 2 ans",
+                  "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie ?",
+                  "subcategories": [
+                    {
+                      "title": "Oui"
+                    },
+                    {
+                      "title": "Non",
+                      "information": {
+                        "title": "Votre produit n'est plus couvert par la garantie.",
+                        "content": "Votre produit n'est plus couvert par la garantie. Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Occasion",
+              "subcategoriesTitle": "Quand avez-vous acheté le produit ?",
+              "subcategories": [
+                {
+                  "title": "Il y a moins de 6 mois",
+                  "description": "Le vendeur a l'obligation de garantir 6 mois le fonctionnement normal de tous les objets. Cette garantie ne comprend pas la casse ou un défaut suite à un mauvais usage."
+                },
+                {
+                  "title": "Il y a plus de 6 mois",
+                  "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie ?",
+                  "subcategories": [
+                    {
+                      "title": "Oui"
+                    },
+                    {
+                      "title": "Non",
+                      "information": {
+                        "title": "Votre produit n'est plus couvert par la garantie.",
+                        "content": "Votre produit n'est plus couvert par la garantie. Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
+                      }
+                    }
+                  ]
+                }
               ]
             }
-          }
+          ]
         },
         {
           "title": "Personnel peu aimable",

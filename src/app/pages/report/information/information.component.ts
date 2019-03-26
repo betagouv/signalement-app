@@ -40,9 +40,9 @@ export class InformationComponent implements OnInit {
     if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
-    } else if (this.report.subcategory && this.report.subcategory.information) {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.report.subcategory.title);
-      this.informationToDisplay = this.report.subcategory.information;
+    } else if (this.report.subcategories && this.report.lastSubcategory.information) {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.report.lastSubcategory.title);
+      this.informationToDisplay = this.report.lastSubcategory.information;
     }
   }
 

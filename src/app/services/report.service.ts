@@ -58,8 +58,9 @@ export class ReportService {
 
     const reportFormData: FormData = new FormData();
     reportFormData.append('category', report.category);
-    if (report.subcategory) {
-      reportFormData.append('subcategory', report.subcategory.title);
+    if (report.subcategories) {
+      //TODO
+      reportFormData.append('subcategory', report.subcategories.map(subcategory => subcategory.title).reduce((s1, s2) => s1.concat(s2)));
     }
     if (report.details.precision) {
       reportFormData.append('precision', this.getDetailsPrecision(report.details));

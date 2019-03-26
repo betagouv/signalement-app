@@ -7,6 +7,7 @@ import { CollapsableTextComponent } from '../../../../components/collapsable-tex
 import { TruncatePipe } from '../../../../pipes/truncate.pipe';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('SubcategoryComponent', () => {
 
@@ -34,6 +35,8 @@ describe('SubcategoryComponent', () => {
         TruncatePipe
       ],
       imports: [
+        FormsModule,
+        ReactiveFormsModule,
         RouterTestingModule,
         Angulartics2RouterlessModule.forRoot(),
       ]
@@ -63,22 +66,7 @@ describe('SubcategoryComponent', () => {
 
   });
 
-  describe('on select ubcategory', () => {
-
-    it('should emit an output with the selected subcategory when it contains no subcategories', (done) => {
-      component.subcategories = subcategoriesFixture;
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      component.select.subscribe(subcategory => {
-        expect(subcategory).toEqual(subcategoriesFixture[0]);
-        done();
-      });
-
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelectorAll('input[type="radio"]')[0].click();
-      fixture.detectChanges();
-    });
+  describe('on select subcategory', () => {
 
     it('should display the subcategories of the selected one when there are some', () => {
       component.subcategories = subcategoriesFixture;
@@ -91,6 +79,41 @@ describe('SubcategoryComponent', () => {
 
       expect(nativeElement.querySelectorAll('input[type="radio"]').length)
         .toEqual(subcategoriesFixture.length + subcategoriesFixture[2].subcategories.length);
+    });
+
+  });
+
+  describe('on submit subcategory form', () => {
+
+    it('should emit an array output with the selected subcategory', (done) => {
+      component.subcategories = subcategoriesFixture[2].subcategories;
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      component.select.subscribe(subcategories => {
+        expect(subcategories).toEqual([subcategoriesFixture[2].subcategories[0]]);
+        done();
+      });
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelectorAll('input[type="radio"]')[0].click();
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+    });
+
+  });
+
+  describe('on receive subsubcategories', () => {
+
+    it('should emit an array output with subsubcategories and the selected subcategory', (done) => {
+      component.select.subscribe(subcategories => {
+        expect(subcategories).toEqual([subcategoriesFixture[2], subcategoriesFixture[2][1]]);
+        done();
+      });
+
+      component.subcategories = subcategoriesFixture;
+      component.subcategoryTitleCtrl.setValue(subcategoriesFixture[2].title);
+      component.onSelectSubSubcategories([subcategoriesFixture[2][1]]);
     });
 
   });

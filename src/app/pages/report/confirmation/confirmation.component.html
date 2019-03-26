@@ -4,7 +4,7 @@
     <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm" *ngIf="confirmationForm">
       <h5>
         Récapitulatif de votre problème {{report.category | precedeBy : 'de' : 'd\''}}
-        <ng-container *ngIf="report.subcategory">({{report.subcategory.title}})</ng-container>
+        <ng-container *ngIf="report.subcategories">({{report.subcategories.title}})</ng-container>
       </h5>
       <div class="panel">
         <div class="row">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportService } from '../../../services/report.service';
@@ -18,63 +18,38 @@ export class ProblemComponent implements OnInit {
   report: Report;
   anomaly: Anomaly;
 
-  subcategoryForm: FormGroup;
-  subcategoryCtrl: FormControl;
-
   showErrors: boolean;
 
   constructor(public formBuilder: FormBuilder,
-              private anomalyService: AnomalyService,
-              private reportService: ReportService,
-              private reportRouterService: ReportRouterService,
-              private analyticsService: AnalyticsService) { }
+            private anomalyService: AnomalyService,
+            private reportService: ReportService,
+            private reportRouterService: ReportRouterService,
+            private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.step = Step.Subcategory;
     this.reportService.currentReport.subscribe(report => {
       if (report && report.category) {
         this.report = report;
-        this.initSubcategoryForm();
-        this.initSubcategories();
+        this.initAnomalyFromReport();
       } else {
         this.reportRouterService.routeToFirstStep();
       }
     });
   }
 
-  initSubcategories() {
+  initAnomalyFromReport() {
     const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
     if (anomaly && anomaly.subcategories) {
       this.anomaly = anomaly;
     }
   }
 
-  initSubcategoryForm() {
-    this.showErrors = false;
-
-    this.subcategoryCtrl = this.formBuilder.control(
-      this.report.subcategory ? this.report.subcategory.title : '', Validators.required
-    );
-
-    this.subcategoryForm = this.formBuilder.group({
-      subcategory: this.subcategoryCtrl
-    });
-  }
-
-  onSelectSubcategory(subcategory: Subcategory) {
-    this.subcategoryCtrl.setValue(subcategory);
-  }
-
-  submitSubcategoryForm() {
-    if (!this.subcategoryForm.valid) {
-      this.showErrors = true;
-      return false;
-    } else {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, this.subcategoryCtrl.value);
-      this.report.subcategory = this.subcategoryCtrl.value;
-      this.reportService.changeReportFromStep(this.report, this.step);
-      this.reportRouterService.routeForward(this.step);
-    }
+  onSelectSubcategories(subcategories: Subcategory[]) {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, subcategories);
+    this.report.subcategories = subcategories;
+    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportRouterService.routeForward(this.step);
   }
 
   setInternetPurchase(internetPurchase: boolean) {

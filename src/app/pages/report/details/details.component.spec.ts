@@ -106,16 +106,16 @@ describe('DetailsComponent', () => {
   });
 
 
-  describe('case of report subcategory with a precision list and mutiple selection not allowed', () => {
+  describe('case of report subcategory with a precision list and multiple selection not allowed', () => {
 
     const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategory = new Subcategory();
+    reportWithSubcategory.subcategories = [new Subcategory()];
     const precision = new Precision();
     precision.title = 'titre precision';
     precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'Autre'}];
     const subcategoryDetails = new SubcategoryDetails();
     subcategoryDetails.precision = precision;
-    reportWithSubcategory.subcategory.details = subcategoryDetails;
+    reportWithSubcategory.subcategories[0].details = subcategoryDetails;
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
@@ -126,7 +126,7 @@ describe('DetailsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('sould display radio inputs to select precision', () => {
+    it('should display radio inputs to select precision', () => {
       const nativeElement = fixture.nativeElement;
       expect(component.singlePrecisionCtrl).toBeDefined();
       expect(component.multiplePrecisionCtrl).toBeUndefined();
@@ -175,8 +175,8 @@ describe('DetailsComponent', () => {
       detailsExpected.ticketFile = undefined;
       detailsExpected.anomalyFile = anomalyFileFixture;
       const reportExpected = new Report();
-      reportExpected.subcategory = new Subcategory();
-      reportExpected.subcategory.details = subcategoryDetails;
+      reportExpected.subcategories = [new Subcategory()];
+      reportExpected.subcategories[0].details = subcategoryDetails;
       reportExpected.details = detailsExpected;
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
@@ -186,14 +186,14 @@ describe('DetailsComponent', () => {
   describe('case of report subcategory with a precision list and mutiple selection allowed', () => {
 
     const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategory = new Subcategory();
+    reportWithSubcategory.subcategories = [new Subcategory()];
     const precision = new Precision();
     precision.title = 'titre precision';
     precision.severalOptionsAllowed = true;
     precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'option 3'}, { title: 'Autre'}];
     const subcategoryDetails = new SubcategoryDetails();
     subcategoryDetails.precision = precision;
-    reportWithSubcategory.subcategory.details = subcategoryDetails;
+    reportWithSubcategory.subcategories[0].details = subcategoryDetails;
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
@@ -252,8 +252,8 @@ describe('DetailsComponent', () => {
       detailsExpected.ticketFile = undefined;
       detailsExpected.anomalyFile = anomalyFileFixture;
       const reportExpected = new Report();
-      reportExpected.subcategory = new Subcategory();
-      reportExpected.subcategory.details = subcategoryDetails;
+      reportExpected.subcategories = [new Subcategory()];
+      reportExpected.subcategories[0].details = subcategoryDetails;
       reportExpected.details = detailsExpected;
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
@@ -265,9 +265,9 @@ describe('DetailsComponent', () => {
   describe('case of report subcategory without precision list', () => {
 
     const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategory = new Subcategory();
+    reportWithSubcategory.subcategories = [new Subcategory()];
     const subcategoryDetails = new SubcategoryDetails();
-    reportWithSubcategory.subcategory.details = subcategoryDetails;
+    reportWithSubcategory.subcategories[0].details = subcategoryDetails;
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
@@ -315,8 +315,8 @@ describe('DetailsComponent', () => {
       detailsExpected.ticketFile = undefined;
       detailsExpected.anomalyFile = anomalyFileFixture;
       const reportExpected = new Report();
-      reportExpected.subcategory = new Subcategory();
-      reportExpected.subcategory.details = subcategoryDetails;
+      reportExpected.subcategories = [new Subcategory()];
+      reportExpected.subcategories[0].details = subcategoryDetails;
       reportExpected.details = detailsExpected;
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);

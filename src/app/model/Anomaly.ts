@@ -48,6 +48,8 @@ export class Subcategory {
   title: string;
   @JsonProperty('description')
   description?: string;
+  @JsonProperty('subcategoriesTitle')
+  subcategoriesTitle?: string;
   @JsonProperty({ name: 'subcategories', clazz: Subcategory })
   subcategories?: Subcategory[];
   @JsonProperty({ name: 'details', clazz: SubcategoryDetails })
@@ -60,6 +62,7 @@ export class Subcategory {
     this.description = undefined;
     this.information = undefined;
     this.details = undefined;
+    this.subcategoriesTitle = undefined;
     this.subcategories = undefined;
   }
 }
@@ -79,8 +82,8 @@ export class Anomaly {
   information?: Information;
   @JsonProperty('breadcrumbTitle')
   breadcrumbTitle?: string;
-  @JsonProperty('subcategoryTitle')
-  subcategoryTitle?: string;
+  @JsonProperty('subcategoriesTitle')
+  subcategoriesTitle?: string;
   @JsonProperty({ name: 'subcategories', clazz: Subcategory })
   subcategories?: Subcategory[];
 
@@ -92,7 +95,7 @@ export class Anomaly {
     this.icon = undefined;
     this.information = undefined;
     this.breadcrumbTitle = undefined;
-    this.subcategoryTitle = undefined;
+    this.subcategoriesTitle = undefined;
     this.subcategories = undefined;
   }
 }

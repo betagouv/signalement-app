@@ -6,7 +6,7 @@ import { Step } from '../services/report-router.service';
 export class Report {
 
   category: string;
-  subcategory: Subcategory;
+  subcategories: Subcategory[];
   company: Company;
   details: ReportDetails;
   consumer: Consumer;
@@ -14,6 +14,12 @@ export class Report {
   internetPurchase: boolean;
   retrievedFromStorage: boolean;
   storedStep: Step;
+
+  get lastSubcategory() {
+    if (this.subcategories && this.subcategories.length) {
+      return this.subcategories[this.subcategories.length - 1];
+    }
+  }
 
 }
 

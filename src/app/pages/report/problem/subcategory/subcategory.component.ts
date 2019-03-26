@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subcategory } from '../../../../model/Anomaly';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-subcategory',
@@ -9,29 +10,54 @@ import { Subcategory } from '../../../../model/Anomaly';
 export class SubcategoryComponent implements OnInit {
 
   @Input() subcategories: Subcategory[];
-  @Input() subcategoryTitle: string;
+  @Input() subcategoriesSelected: Subcategory[];
+  @Input() subcategoriesTitle: string;
   @Input() subcategoryName: string;
 
-  selectedSubcategory: Subcategory;
-  @Output() select = new EventEmitter<Subcategory>();
+  subcategoryForm: FormGroup;
+  subcategoryTitleCtrl: FormControl;
+  subcategorySelected: Subcategory;
 
-  constructor() { }
+  @Output() select = new EventEmitter<Subcategory[]>();
 
-  ngOnInit() {}
+  showErrors: boolean;
+
+  constructor(public formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.initSubcategoryForm();
+  }
+
+  initSubcategoryForm() {
+    this.showErrors = false;
+    if (this.subcategoriesSelected && this.subcategoriesSelected.length) {
+      this.subcategorySelected = this.subcategoriesSelected.shift();
+    }
+
+    this.subcategoryTitleCtrl = this.formBuilder.control(this.subcategorySelected ? this.subcategorySelected.title : '', Validators.required);
+    this.subcategoryForm = this.formBuilder.group({});
+    this.subcategoryForm.addControl(this.subcategoryName, this.subcategoryTitleCtrl);
+  }
 
   selectSubcategory(subcategory: Subcategory) {
-    this.selectedSubcategory = subcategory;
-    if (!this.selectedSubcategory.subcategories) {
-      this.select.emit(this.selectedSubcategory);
+    this.subcategorySelected = subcategory;
+  }
+
+  submitSubcategoryForm() {
+    if (!this.subcategoryForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value)]);
     }
   }
 
   hasSubSubcategory() {
-    return this.selectedSubcategory && this.selectedSubcategory.subcategories;
+    return this.subcategorySelected && this.subcategorySelected.subcategories;
   }
 
-  onSelectSubSubcategory(subcategory: Subcategory) {
-    this.select.emit(this.selectedSubcategory);
+  onSelectSubSubcategories(subSubcategories: Subcategory[]) {
+    this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value), ...subSubcategories]);
   }
+
 
 }

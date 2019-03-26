@@ -93,7 +93,7 @@ export class ReportRouterService {
           return Step.Details;
         }
       case Step.Subcategory:
-        if (this.report.subcategory.information) {
+        if (this.report.lastSubcategory.information) {
           return Step.Information;
         } else {
           return Step.Details;
@@ -116,7 +116,7 @@ export class ReportRouterService {
       case Step.Subcategory:
         return Step.Category;
       case Step.Details:
-        if (this.report.subcategory) {
+        if (this.report.subcategories) {
           return Step.Subcategory;
         } else {
           return Step.Category;
