@@ -8,6 +8,7 @@ import { TruncatePipe } from '../../../../pipes/truncate.pipe';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SimpleChange } from '@angular/core';
 
 describe('SubcategoryComponent', () => {
 
@@ -58,6 +59,10 @@ describe('SubcategoryComponent', () => {
 
     it('should display all subcategories as radio buttons list', () => {
       component.subcategories = subcategoriesFixture;
+      component.subcategoryName = '';
+      component.ngOnChanges({
+        subcategoryName: new SimpleChange(null, component.subcategoryName, true)
+      });
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -70,7 +75,10 @@ describe('SubcategoryComponent', () => {
 
     it('should display the subcategories of the selected one when there are some', () => {
       component.subcategories = subcategoriesFixture;
-      component.ngOnInit();
+      component.subcategoryName = '';
+      component.ngOnChanges({
+        subcategoryName: new SimpleChange(null, component.subcategoryName, true)
+      });
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -87,7 +95,10 @@ describe('SubcategoryComponent', () => {
 
     it('should emit an array output with the selected subcategory', (done) => {
       component.subcategories = subcategoriesFixture[2].subcategories;
-      component.ngOnInit();
+      component.subcategoryName = '';
+      component.ngOnChanges({
+        subcategoryName: new SimpleChange(null, component.subcategoryName, true)
+      });
       fixture.detectChanges();
 
       component.select.subscribe(subcategories => {
@@ -112,6 +123,10 @@ describe('SubcategoryComponent', () => {
       });
 
       component.subcategories = subcategoriesFixture;
+      component.subcategoryName = '';
+      component.ngOnChanges({
+        subcategoryName: new SimpleChange(null, component.subcategoryName, true)
+      });
       component.subcategoryTitleCtrl.setValue(subcategoriesFixture[2].title);
       component.onSelectSubSubcategories([subcategoriesFixture[2][1]]);
     });

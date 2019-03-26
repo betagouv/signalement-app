@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subcategory } from '../../../../model/Anomaly';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -7,7 +7,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './subcategory.component.html',
   styleUrls: ['./subcategory.component.scss']
 })
-export class SubcategoryComponent implements OnInit {
+export class SubcategoryComponent implements OnInit, OnChanges {
 
   @Input() subcategories: Subcategory[];
   @Input() subcategoriesSelected: Subcategory[];
@@ -25,11 +25,17 @@ export class SubcategoryComponent implements OnInit {
   constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.initSubcategoryForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['subcategoryName']) {
+      this.initSubcategoryForm();
+    }
   }
 
   initSubcategoryForm() {
     this.showErrors = false;
+    this.subcategorySelected = undefined;
     if (this.subcategoriesSelected && this.subcategoriesSelected.length) {
       this.subcategorySelected = this.subcategoriesSelected.shift();
     }
@@ -41,6 +47,7 @@ export class SubcategoryComponent implements OnInit {
 
   selectSubcategory(subcategory: Subcategory) {
     this.subcategorySelected = subcategory;
+    this.subcategoriesSelected = [];
   }
 
   submitSubcategoryForm() {

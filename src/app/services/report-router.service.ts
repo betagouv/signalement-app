@@ -121,6 +121,12 @@ export class ReportRouterService {
         } else {
           return Step.Category;
         }
+      case Step.Information:
+        if (this.report.subcategories) {
+          return Step.Subcategory;
+        } else {
+          return Step.Category;
+        }
       case Step.Company:
         return Step.Details;
       case Step.Consumer:
