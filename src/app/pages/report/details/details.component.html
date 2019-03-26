@@ -51,7 +51,8 @@
         </textarea>
         <br />
         <div class="notification warning" [@openClose]="keywordsDetected ? 'open' : 'closed'">
-            {{ keywordsDetected?.message }} <button class="btn btn-link" (click)="goToInformationPage()">Continuez ici</button>
+            <span>{{ keywordsDetected?.message }}</span>
+            <span class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
         </div>  
 
       </div>
