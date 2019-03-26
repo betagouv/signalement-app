@@ -207,6 +207,7 @@ export class DetailsComponent implements OnInit {
     // modification des éléments du report et du step pour que le router affiche la page d'info avec le contexte
     this.step = Step.Category;
     this.report.category = this.keywordsDetected.category;
+    this.report.subcategory = null;
 
     this.reportService.changeReportFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
