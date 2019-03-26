@@ -2,6 +2,7 @@
   "list": [
     {
       "category": "Pratique d'hygiène",
+      "categoryId": "HYG",
       "description": "Locaux sales, présence de rat, rupture de la chaîne du froid...",
       "rank" : 1,
       "icon": "icon_hygien.png",
@@ -88,6 +89,7 @@
     },
     {
       "category": "Nourriture / Boissons",
+      "categoryId": "NOURR",
       "description": "Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...",
       "rank" : 2,
       "withInternetPurchase": true,
@@ -174,6 +176,7 @@
     },
     {
       "category": "Matériel / Objet",
+      "categoryId": "MATOS",
       "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
       "rank" : 3,
       "withInternetPurchase": true,
@@ -242,6 +245,7 @@
     },
     {
       "category": "Intoxication alimentaire",
+      "categoryId": "INTOX",
       "description": "Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.",
       "rank" : 4,
       "icon": "icon_disease.png",
@@ -253,6 +257,7 @@
     },
     {
       "category": "Prix / Paiement",
+      "categoryId": "PRIX",
       "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...",
       "rank" : 5,
       "withInternetPurchase": true,
@@ -313,6 +318,7 @@
     },
     {
       "category": "Publicité",
+      "categoryId": "PUB",
       "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse...",
       "rank" : 6,
       "withInternetPurchase": true,
@@ -328,6 +334,7 @@
     },
     {
       "category": "Services associés à l'achat",
+      "categoryId": "SERACH",
       "description": "Colis non reçu, problème de garantie constructeur, hotline injoignable,...",
       "rank" : 7,
       "withInternetPurchase": true,
@@ -382,6 +389,7 @@
     },
     {
       "category": "Problème suite à un achat sur internet",
+      "categoryId": "PBINT",
       "rank" : 101,
       "breadcrumbTitle": "Vous avez identifié un problème suite à un achat sur internet",
       "information": {
@@ -391,11 +399,24 @@
     },
     {
       "category": "Refus de servir/ vendre",
+      "categoryId": "REFSRV",
       "rank" : 102
     },
     {
       "category": "Chien d'assistance refusé",
+      "categoryId": "CHREF",
       "rank" : 103
+    },
+    {
+      "category": "Travail au noir",
+      "categoryId": "TNOIR",
+      "rank" : 104,
+      "breadcrumbTitle": "Vous souhaitez signaler un cas de travail au noir ?",
+      "information": {
+        "title": "Vous souhaitez signaler un cas de travail au noir?",
+        "content": "Pour signaler du travail dissimulé (travail au noir), vous pouvez: <ul><li>envoyer un email à cette adresse:<a href=\"mailto:fraude.npdc@urssaf.fr\">fraude.npdc@urssaf.fr</a></li><li>écrire à l’inspection du travail en contactant la <a href=\"http://direccte.gouv.fr/\">DIRECCTE</a> de la région concernée</li><li>écrire à la Brigades de contrôle et de recherche des impôts</li><li>écrire à la police/gendarmerie</li></ul>La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir."
+      }
     }
+
   ]
 }

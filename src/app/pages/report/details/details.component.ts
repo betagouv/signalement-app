@@ -4,13 +4,40 @@ import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { otherPrecisionValue, ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { KeywordService } from '../../../services/keyword.service';
+import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { Information } from '../../../model/Anomaly';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        display: 'block',
+        opacity: 1,
+      })),
+      state('closed', style({
+        display: 'none',
+        opacity: 0,
+      })),
+      transition('open => closed', [
+        animate('0.5s ease-in-out')
+      ]),
+      transition('closed => open', [
+        animate('0.5s ease-in-out')
+      ]),
+    ]),
+  ],
 })
 export class DetailsComponent implements OnInit {
 
@@ -30,12 +57,15 @@ export class DetailsComponent implements OnInit {
   anomalyFile: File;
 
   showErrors: boolean;
+  keywordsDetected: Keyword;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService,
-              private localeService: BsLocaleService) {
+              private localeService: BsLocaleService,
+              private keywordService: KeywordService,
+              private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
@@ -50,6 +80,9 @@ export class DetailsComponent implements OnInit {
       }
     });
     this.localeService.use('fr');
+
+    this.searchKeywords();
+
   }
 
   initDetailsForm() {
@@ -119,28 +152,28 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetailsForm() {
+
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
-      const reportDetails = new ReportDetails();
-      if (this.getPrecisionFromCtrl()) {
-        reportDetails.precision = this.getPrecisionFromCtrl();
-      }
-      if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
-        reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
-      }
-      reportDetails.anomalyDate = this.anomalyDateCtrl.value;
-      reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
-      reportDetails.description = this.descriptionCtrl.value;
-      reportDetails.ticketFile = this.ticketFile;
-      reportDetails.anomalyFile = this.anomalyFile;
-      this.report.details = reportDetails;
-      this.reportService.changeReportFromStep(this.report, this.step);
-      this.reportRouterService.routeForward(this.step);
+        this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
+        const reportDetails = new ReportDetails();
+        if (this.getPrecisionFromCtrl()) {
+          reportDetails.precision = this.getPrecisionFromCtrl();
+        }
+        if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
+          reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
+        }
+        reportDetails.anomalyDate = this.anomalyDateCtrl.value;
+        reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
+        reportDetails.description = this.descriptionCtrl.value;
+        reportDetails.ticketFile = this.ticketFile;
+        reportDetails.anomalyFile = this.anomalyFile;
+        this.report.details = reportDetails;
+        this.reportService.changeReportFromStep(this.report, this.step);
+        this.reportRouterService.routeForward(this.step);
     }
   }
-
 
   getPrecisionFromCtrl() {
     if (this.singlePrecisionCtrl) {
@@ -156,4 +189,32 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  searchKeywords() {
+
+    const anomaly = this.anomalyService.getAnomalyByCategoryId(this.keywordService.search(this.descriptionCtrl.value));
+
+    if (anomaly) {
+      this.keywordsDetected = {
+        category: anomaly.category,
+        message: anomaly.information ? anomaly.information.title : ''
+      };
+    } else {
+      this.keywordsDetected = null;
+    }
+  }
+
+  goToInformationPage() {
+    // modification des éléments du report et du step pour que le router affiche la page d'info avec le contexte
+    this.step = Step.Category;
+    this.report.category = this.keywordsDetected.category;
+
+    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportRouterService.routeForward(this.step);
+
+  }
+}
+
+interface Keyword {
+  readonly category: string;
+  readonly message: string;
 }
