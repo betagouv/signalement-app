@@ -52,7 +52,7 @@
         <br />
         <div class="notification warning" [@openClose]="keywordsDetected ? 'open' : 'closed'">
             <span>{{ keywordsDetected?.message }}</span>
-            <span class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
+            <span *ngIf="keywordsDetected" class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
         </div>  
 
       </div>
