@@ -191,15 +191,22 @@ export class DetailsComponent implements OnInit {
 
   searchKeywords() {
 
-    const anomaly = this.anomalyService.getAnomalyByCategoryId(this.keywordService.search(this.descriptionCtrl.value));
+    const res = this.keywordService.search(this.descriptionCtrl.value);
+    
+    if (res) {
+      const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
+  
+      if (anomaly) {
+        this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.keywordsDetection, JSON.stringify(res.found.map(elt => elt.expression)));
+        
+        this.keywordsDetected = {
+          category: anomaly.category,
+          message: anomaly.information ? anomaly.information.title : ''
+        };
+      } else {
+        this.keywordsDetected = null;
+      }
 
-    if (anomaly) {
-      this.keywordsDetected = {
-        category: anomaly.category,
-        message: anomaly.information ? anomaly.information.title : ''
-      };
-    } else {
-      this.keywordsDetected = null;
     }
   }
 

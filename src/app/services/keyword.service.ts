@@ -12,9 +12,17 @@ export class KeywordService {
   keywords: Keyword[];
 
   constructor() {
-    this.setKeywords(keywords);
+    this.keywords = this.getKeywords();
   }
 
+  getKeywords() {
+    if (!this.keywords) {
+      this.keywords = deserialize(KeywordList, keywords).list;
+    }
+    return this.keywords;
+  }
+
+  // injection de dépendances (pour les tests uniquement)
   setKeywords(words) {
     this.keywords = deserialize(KeywordList, words).list;
   }
@@ -23,13 +31,34 @@ export class KeywordService {
 
     if (text) {
       for (let i = 0; i < this.keywords.length; i++) {
-        const keyword = this.keywords[i];
-        if (keyword.words.some(elt => new RegExp(elt).test(text))) {
-          return keyword.categoryId;
+        const keywordsCategory = this.keywords[i];
+        const found = keywordsCategory.words.map(word => ({
+          word,
+          result: new RegExp(word).exec(text)
+        })).filter(elt => elt.result && elt.result.length > 0)
+          .map(elt => ({
+            expression: elt.result[0],
+            index: elt.result.index
+          }));
+
+        if (found && found.length > 0) {
+          return {
+            categoryId: keywordsCategory.categoryId,
+            found
+          }
         }
       }
     }
+
     return null;
+
+    //        keywordsCategory.words
+    // .map(word => ({
+    //   found: new RegExp(word).exec(text),
+    //   categoryId: keywordsCategory.categoryId
+    // }))
+    // .filter(found => !! found)
+
   }
 
 }
