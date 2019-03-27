@@ -60,12 +60,12 @@ export class DetailsComponent implements OnInit {
   keywordsDetected: Keyword;
 
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService,
-              private reportRouterService: ReportRouterService,
-              private analyticsService: AnalyticsService,
-              private localeService: BsLocaleService,
-              private keywordService: KeywordService,
-              private anomalyService: AnomalyService) {
+    private reportService: ReportService,
+    private reportRouterService: ReportRouterService,
+    private analyticsService: AnalyticsService,
+    private localeService: BsLocaleService,
+    private keywordService: KeywordService,
+    private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
@@ -110,13 +110,13 @@ export class DetailsComponent implements OnInit {
     if (subcategoryDetailsPrecision.severalOptionsAllowed) {
       this.multiplePrecisionCtrl = new FormArray(
         subcategoryDetailsPrecision.options.map(option =>
-          this.formBuilder.control( this.isOptionChecked(option) ? true : false)
+          this.formBuilder.control(this.isOptionChecked(option) ? true : false)
         )
       );
       this.detailsForm.addControl('multiplePrecision', this.multiplePrecisionCtrl);
     } else {
       this.singlePrecisionCtrl = this.formBuilder.control(
-        this.report.details ? this.report.details.precision : '' , Validators.required
+        this.report.details ? this.report.details.precision : '', Validators.required
       );
       this.detailsForm.addControl('singlePrecision', this.singlePrecisionCtrl);
     }
@@ -156,22 +156,22 @@ export class DetailsComponent implements OnInit {
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {
-        this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
-        const reportDetails = new ReportDetails();
-        if (this.getPrecisionFromCtrl()) {
-          reportDetails.precision = this.getPrecisionFromCtrl();
-        }
-        if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
-          reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
-        }
-        reportDetails.anomalyDate = this.anomalyDateCtrl.value;
-        reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
-        reportDetails.description = this.descriptionCtrl.value;
-        reportDetails.ticketFile = this.ticketFile;
-        reportDetails.anomalyFile = this.anomalyFile;
-        this.report.details = reportDetails;
-        this.reportService.changeReportFromStep(this.report, this.step);
-        this.reportRouterService.routeForward(this.step);
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
+      const reportDetails = new ReportDetails();
+      if (this.getPrecisionFromCtrl()) {
+        reportDetails.precision = this.getPrecisionFromCtrl();
+      }
+      if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
+        reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
+      }
+      reportDetails.anomalyDate = this.anomalyDateCtrl.value;
+      reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
+      reportDetails.description = this.descriptionCtrl.value;
+      reportDetails.ticketFile = this.ticketFile;
+      reportDetails.anomalyFile = this.anomalyFile;
+      this.report.details = reportDetails;
+      this.reportService.changeReportFromStep(this.report, this.step);
+      this.reportRouterService.routeForward(this.step);
     }
   }
 
@@ -190,23 +190,27 @@ export class DetailsComponent implements OnInit {
   }
 
   searchKeywords() {
-
+    
     const res = this.keywordService.search(this.descriptionCtrl.value);
     
-    if (res) {
+    if (!res) {
+      this.keywordsDetected = null;
+
+    } else {
       const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
-  
+
       if (anomaly) {
         this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.keywordsDetection, JSON.stringify(res.found.map(elt => elt.expression)));
-        
+
         this.keywordsDetected = {
           category: anomaly.category,
           message: anomaly.information ? anomaly.information.title : ''
         };
+
       } else {
         this.keywordsDetected = null;
-      }
 
+      }
     }
   }
 

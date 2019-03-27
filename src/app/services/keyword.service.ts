@@ -51,14 +51,7 @@ export class KeywordService {
     }
 
     return null;
-
-    //        keywordsCategory.words
-    // .map(word => ({
-    //   found: new RegExp(word).exec(text),
-    //   categoryId: keywordsCategory.categoryId
-    // }))
-    // .filter(found => !! found)
-
+    
   }
 
 }
