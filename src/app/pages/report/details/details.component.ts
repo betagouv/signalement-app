@@ -31,7 +31,7 @@ import {
         opacity: 0,
       })),
       transition('open => closed', [
-        animate('0.5s ease-in-out')
+        animate('0.2s ease-out')
       ]),
       transition('closed => open', [
         animate('0.5s ease-in-out')
