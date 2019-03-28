@@ -11,9 +11,10 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { of } from 'rxjs';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
+import { ReportPaths, Step } from '../../../services/report-router.service';
 
 describe('DetailsComponent', () => {
 
@@ -44,32 +45,30 @@ describe('DetailsComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: ReportPaths.Company, redirectTo: '' }]),
         BsDatepickerModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
       ],
-      providers: [
-        ReportService,
-      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();
   }));
 
-  beforeEach(() => {
-    reportService = TestBed.get(ReportService);
-    reportService.currentReport = of(new Report());
 
-    fixture = TestBed.createComponent(DetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  describe('commons tests', () => {
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+      reportService = TestBed.get(ReportService);
+      reportService.currentReport = of(new Report());
 
-  describe('ngOnInit function', () => {
+      fixture = TestBed.createComponent(DetailsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
 
     it('should initially display the form and no errors message', () => {
       const nativeElement = fixture.nativeElement;
@@ -104,29 +103,123 @@ describe('DetailsComponent', () => {
       expect(component.plageHoraireList.length).toBe(24);
     });
 
-    it('sould display an input to select precision when a precision list is attached to the subcategory', () => {
-      const reportWithSubcategory = new Report();
-      reportWithSubcategory.subcategory = new Subcategory();
-      const precision = new Precision();
-      precision.title = 'titre precision';
-      precision.options = [ {title: 'option 1'}, { title: 'option 2'}];
-      const subcategoryDetails = new SubcategoryDetails();
-      subcategoryDetails.precision = precision;
-      reportWithSubcategory.subcategory.details = subcategoryDetails;
+  });
+
+
+  describe('case of report subcategory with a precision list and mutiple selection not allowed', () => {
+
+    const reportWithSubcategory = new Report();
+    reportWithSubcategory.subcategory = new Subcategory();
+    const precision = new Precision();
+    precision.title = 'titre precision';
+    precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'Autre'}];
+    const subcategoryDetails = new SubcategoryDetails();
+    subcategoryDetails.precision = precision;
+    reportWithSubcategory.subcategory.details = subcategoryDetails;
+
+    beforeEach(() => {
+      reportService = TestBed.get(ReportService);
       reportService.currentReport = of(reportWithSubcategory);
 
-      component.ngOnInit();
+      fixture = TestBed.createComponent(DetailsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('sould display radio inputs to select precision', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(component.singlePrecisionCtrl).toBeDefined();
+      expect(component.multiplePrecisionCtrl).toBeUndefined();
+      expect(nativeElement.querySelectorAll('input[formControlName="singlePrecision"]').length).toEqual(precision.options.length);
+    });
+
+    it('should display an additionnal text input when precision "Autre" is checked', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('#radio-Autre').click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('input[formControlName="otherPrecision"]')).not.toBeNull();
+    });
+
+    it('should display errors on submit', () => {
+      component.singlePrecisionCtrl.setValue('');
+
+      component.submitDetailsForm();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelectorAll('input[formControlName="precision"]').length).toEqual(precision.options.length);
+      expect(component.showErrors).toBeTruthy();
+      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
+    it ('should emit and event with a details object which contains form inputs when no errors', () => {
+      component.descriptionCtrl.setValue('Description');
+      component.singlePrecisionCtrl.setValue('Autre');
+      component.otherPrecisionCtrl = component.formBuilder.control('Autre précision');
+      component.detailsForm.addControl('otherPrecision', component.otherPrecisionCtrl);
+      component.anomalyDateCtrl.setValue(anomalyDateFixture);
+      component.anomalyTimeSlotCtrl.setValue(5);
+      component.anomalyFile = anomalyFileFixture;
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+
+      const detailsExpected = new ReportDetails();
+      detailsExpected.description = 'Description';
+      detailsExpected.precision = 'Autre';
+      detailsExpected.otherPrecision = 'Autre précision';
+      detailsExpected.anomalyDate = anomalyDateFixture;
+      detailsExpected.anomalyTimeSlot = 5;
+      detailsExpected.ticketFile = undefined;
+      detailsExpected.anomalyFile = anomalyFileFixture;
+      const reportExpected = new Report();
+      reportExpected.subcategory = new Subcategory();
+      reportExpected.subcategory.details = subcategoryDetails;
+      reportExpected.details = detailsExpected;
+
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
+    });
   });
 
-  describe('submitDetailsForm function', () => {
+  describe('case of report subcategory with a precision list and mutiple selection allowed', () => {
 
-    it('should display errors when occurs', () => {
+    const reportWithSubcategory = new Report();
+    reportWithSubcategory.subcategory = new Subcategory();
+    const precision = new Precision();
+    precision.title = 'titre precision';
+    precision.severalOptionsAllowed = true;
+    precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'option 3'}, { title: 'Autre'}];
+    const subcategoryDetails = new SubcategoryDetails();
+    subcategoryDetails.precision = precision;
+    reportWithSubcategory.subcategory.details = subcategoryDetails;
+
+    beforeEach(() => {
+      reportService = TestBed.get(ReportService);
+      reportService.currentReport = of(reportWithSubcategory);
+
+      fixture = TestBed.createComponent(DetailsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('sould display checkbox inputs to select precisions', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(component.singlePrecisionCtrl).toBeUndefined();
+      expect(component.multiplePrecisionCtrl).toBeDefined();
+      expect(nativeElement.querySelectorAll('input[type="checkbox"]').length).toEqual(precision.options.length);
+    });
+
+    it('should display an additionnal text input when precision "Autre" is checked', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('#checkbox-Autre').click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('input[formControlName="otherPrecision"]')).not.toBeNull();
+    });
+
+    it('should display errors on submit', () => {
       component.anomalyDateCtrl.setValue('');
 
       component.submitDetailsForm();
@@ -138,13 +231,14 @@ describe('DetailsComponent', () => {
     });
 
     it ('should emit and event with a company which contains form inputs when no errors', () => {
-
       component.descriptionCtrl.setValue('Description');
-      component.precisionCtrl.setValue('precision');
+      component.multiplePrecisionCtrl.controls[0].setValue(true);
+      component.multiplePrecisionCtrl.controls[1].setValue(false);
+      component.multiplePrecisionCtrl.controls[2].setValue(true);
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
       component.anomalyFile = anomalyFileFixture;
-      const changeReportSpy = spyOn(reportService, 'changeReport');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -152,15 +246,81 @@ describe('DetailsComponent', () => {
 
       const detailsExpected = new ReportDetails();
       detailsExpected.description = 'Description';
-      detailsExpected.precision = 'precision';
+      detailsExpected.precision = ['option 1', 'option 3'];
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
       detailsExpected.ticketFile = undefined;
       detailsExpected.anomalyFile = anomalyFileFixture;
       const reportExpected = new Report();
+      reportExpected.subcategory = new Subcategory();
+      reportExpected.subcategory.details = subcategoryDetails;
       reportExpected.details = detailsExpected;
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
+
+  });
+
+
+  describe('case of report subcategory without precision list', () => {
+
+    const reportWithSubcategory = new Report();
+    reportWithSubcategory.subcategory = new Subcategory();
+    const subcategoryDetails = new SubcategoryDetails();
+    reportWithSubcategory.subcategory.details = subcategoryDetails;
+
+    beforeEach(() => {
+      reportService = TestBed.get(ReportService);
+      reportService.currentReport = of(reportWithSubcategory);
+
+      fixture = TestBed.createComponent(DetailsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('sould not display inputs to select precision', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(component.singlePrecisionCtrl).toBeUndefined();
+      expect(component.multiplePrecisionCtrl).toBeUndefined();
+      expect(nativeElement.querySelectorAll('input[type="radio"]').length).toEqual(0);
+      expect(nativeElement.querySelectorAll('input[type="checkbox"]').length).toEqual(0);
+    });
+
+    it('should display errors on submit', () => {
+      component.anomalyDateCtrl.setValue('');
+
+      component.submitDetailsForm();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(component.showErrors).toBeTruthy();
+      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
+    });
+
+    it ('should emit and event with a company which contains form inputs when no errors', () => {
+      component.descriptionCtrl.setValue('Description');
+      component.anomalyDateCtrl.setValue(anomalyDateFixture);
+      component.anomalyTimeSlotCtrl.setValue(5);
+      component.anomalyFile = anomalyFileFixture;
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+
+      const detailsExpected = new ReportDetails();
+      detailsExpected.description = 'Description';
+      detailsExpected.anomalyDate = anomalyDateFixture;
+      detailsExpected.anomalyTimeSlot = 5;
+      detailsExpected.ticketFile = undefined;
+      detailsExpected.anomalyFile = anomalyFileFixture;
+      const reportExpected = new Report();
+      reportExpected.subcategory = new Subcategory();
+      reportExpected.subcategory.details = subcategoryDetails;
+      reportExpected.details = detailsExpected;
+
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
+    });
+
   });
 });

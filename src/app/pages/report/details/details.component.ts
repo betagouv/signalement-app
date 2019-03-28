@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { ReportService, Step } from '../../../services/report.service';
+import { otherPrecisionValue, ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { Information } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-details',
@@ -16,7 +18,9 @@ export class DetailsComponent implements OnInit {
   report: Report;
 
   detailsForm: FormGroup;
-  precisionCtrl: FormControl;
+  singlePrecisionCtrl: FormControl;
+  multiplePrecisionCtrl: FormArray;
+  otherPrecisionCtrl: FormControl;
   anomalyDateCtrl: FormControl;
   anomalyTimeSlotCtrl: FormControl;
   descriptionCtrl: FormControl;
@@ -29,6 +33,7 @@ export class DetailsComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService,
               private localeService: BsLocaleService) {
   }
@@ -41,7 +46,7 @@ export class DetailsComponent implements OnInit {
         this.initDetailsForm();
         this.constructPlageHoraireList();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
     this.localeService.use('fr');
@@ -55,7 +60,6 @@ export class DetailsComponent implements OnInit {
       this.report.details ? this.report.details.anomalyDate : new Date(), Validators.required
     );
     this.anomalyTimeSlotCtrl = this.formBuilder.control(this.report.details ? this.report.details.anomalyTimeSlot : '');
-    this.precisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.precision : '', Validators.required);
 
     this.detailsForm = this.formBuilder.group({
       anomalyDate: this.anomalyDateCtrl,
@@ -64,9 +68,39 @@ export class DetailsComponent implements OnInit {
     });
 
     if (this.report.subcategory && this.report.subcategory.details && this.report.subcategory.details.precision) {
-      this.detailsForm.addControl('precision', this.precisionCtrl);
+      this.initPrecisionsCtrl();
     }
+  }
 
+  initPrecisionsCtrl() {
+    const subcategoryDetailsPrecision = this.report.subcategory.details.precision;
+    if (subcategoryDetailsPrecision.severalOptionsAllowed) {
+      this.multiplePrecisionCtrl = new FormArray(
+        subcategoryDetailsPrecision.options.map(option =>
+          this.formBuilder.control( this.isOptionChecked(option) ? true : false)
+        )
+      );
+      this.detailsForm.addControl('multiplePrecision', this.multiplePrecisionCtrl);
+    } else {
+      this.singlePrecisionCtrl = this.formBuilder.control(
+        this.report.details ? this.report.details.precision : '' , Validators.required
+      );
+      this.detailsForm.addControl('singlePrecision', this.singlePrecisionCtrl);
+    }
+    this.otherPrecisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.otherPrecision : '');
+    this.initOtherPrecision();
+  }
+
+  isOptionChecked(option: Information) {
+    return this.report.details && this.report.details.precision && this.report.details.precision.indexOf(option.title) !== -1;
+  }
+
+  initOtherPrecision() {
+    if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1) {
+      this.detailsForm.addControl('otherPrecision', this.otherPrecisionCtrl);
+    } else {
+      this.detailsForm.removeControl('otherPrecision');
+    }
   }
 
   constructPlageHoraireList() {
@@ -90,14 +124,35 @@ export class DetailsComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
       const reportDetails = new ReportDetails();
-      reportDetails.precision = this.precisionCtrl.value;
+      if (this.getPrecisionFromCtrl()) {
+        reportDetails.precision = this.getPrecisionFromCtrl();
+      }
+      if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
+        reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
+      }
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
       reportDetails.ticketFile = this.ticketFile;
       reportDetails.anomalyFile = this.anomalyFile;
       this.report.details = reportDetails;
-      this.reportService.changeReport(this.report, this.step);
+      this.reportService.changeReportFromStep(this.report, this.step);
+      this.reportRouterService.routeForward(this.step);
+    }
+  }
+
+
+  getPrecisionFromCtrl() {
+    if (this.singlePrecisionCtrl) {
+      return this.singlePrecisionCtrl.value;
+    } else if (this.multiplePrecisionCtrl) {
+      return this.multiplePrecisionCtrl.controls
+        .map((control, index) => {
+          return control.value ? this.report.subcategory.details.precision.options[index].title : null;
+        })
+        .filter(value => value !== null);
+    } else {
+      return '';
     }
   }
 

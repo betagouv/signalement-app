@@ -1,6 +1,7 @@
 import { Consumer } from './Consumer';
 import { Company } from './Company';
 import { Subcategory } from './Anomaly';
+import { Step } from '../services/report-router.service';
 
 export class Report {
 
@@ -11,6 +12,8 @@ export class Report {
   consumer: Consumer;
   contactAgreement: boolean;
   internetPurchase: boolean;
+  retrievedFromStorage: boolean;
+  storedStep: Step;
 
 }
 
@@ -21,6 +24,7 @@ export class ReportDetails {
   description: string;
   ticketFile: File;
   anomalyFile: File;
-  precision?: string;
+  precision?: string | string[];
+  otherPrecision?: string;
 
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -19,9 +20,11 @@ export class ConfirmationComponent implements OnInit {
 
   showErrors: boolean;
   loading: boolean;
+  loadingError: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) {
   }
 
@@ -32,7 +35,7 @@ export class ConfirmationComponent implements OnInit {
         this.report = report;
         this.initConfirmationForm();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
   }
@@ -48,6 +51,7 @@ export class ConfirmationComponent implements OnInit {
   }
 
   submitConfirmationForm() {
+    this.loadingError = false;
     if (!this.confirmationForm.valid) {
       this.showErrors = true;
     } else {
@@ -58,11 +62,13 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
         result => {
           this.loading = false;
-          this.reportService.changeReport(this.report, this.step);
+          this.reportService.removeReportFromStorage();
+          this.reportService.changeReportFromStep(this.report, this.step);
+          this.reportRouterService.routeForward(this.step);
         },
         error => {
           this.loading = false;
-          // TODO cas d'erreur
+          this.loadingError = true;
         });
 
     }

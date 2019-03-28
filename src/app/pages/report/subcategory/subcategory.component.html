@@ -6,12 +6,12 @@
       <h4 class="text-center">Est-ce que votre problème fait suite à un achat sur internet ?</h4>
       <div class="text-center pt-2 pt-sm-3 pb-lg-5">
         <button type="submit" class="btn btn-lg btn-outline-primary" (click)="setInternetPurchase(true)">Oui</button>
-        <button type="submit" class="btn btn-lg btn-primary ml-4 ml-sm-5" (click)="setInternetPurchase(false)">Non</button>
+        <button type="submit" class="btn btn-lg btn-outline-primary ml-4 ml-sm-5" (click)="setInternetPurchase(false)">Non, pas sur internet</button>
       </div>
     </div>
 
     <ng-template #subcategoryFormTemplate>
-      <h4 class="text-center mb-4" [innerHTML]="anomaly?.subcategoryTitle"></h4>
+      <h4 class="text-center mb-4" [innerHTML]="anomaly?.subcategoryTitle" *ngIf="anomaly?.subcategoryTitle"></h4>
       <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
         <div class="row pb-4" *ngFor="let subcategory of anomaly?.subcategories">
           <div class="col-2 col-sm-1 text-right pr-1">

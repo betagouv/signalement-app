@@ -3,7 +3,7 @@
   "version": "0.0.1-SNAPSHOT",
   "scripts": {
     "ng": "ng",
-    "start:local": "ng serve",
+    "start:local": "ng serve --host 0.0.0.0",
     "start": "node dist/server.js",
     "prebuild": "envsub --env API_BASE_URL ./src/environments/environment.prod.ts",
     "build": "ng build",
@@ -13,7 +13,8 @@
     "postinstall": "npm run prebuild && npm run build:prod",
     "build:server:prod": "ng run signalement-app:server && webpack --config webpack.server.config.js --progress --colors",
     "build:browser:prod": "ng build --prod",
-    "build:prod": "npm run build:server:prod && npm run build:browser:prod"
+    "build:prod": "npm run build:server:prod && npm run build:browser:prod",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "private": true,
   "dependencies": {
@@ -33,8 +34,9 @@
     "@nguniversal/common": "^6.1.0",
     "@nguniversal/express-engine": "^6.1.0",
     "@nguniversal/module-map-ngfactory-loader": "^6.1.0",
+    "@ngx-pwa/local-storage": "^6.2.2",
     "angulartics2": "7.2.3",
-    "bootstrap": "^4.1.3",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "cors": "~2.8.4",
     "echarts": "4.1.0",
@@ -45,7 +47,7 @@
     "json-typescript-mapper": "^1.1.3",
     "moment": "^2.22.2",
     "ng2-completer": "^3.0.0-beta.2",
-    "ngx-bootstrap": "3.0.1",
+    "ngx-bootstrap": "^3.3.0",
     "ngx-echarts": "^4.1.0",
     "ngx-loading": "^3.0.1",
     "path": "^0.12.7",

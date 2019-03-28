@@ -11,10 +11,11 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { AddressService } from '../../../services/address.service';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ReportPaths, Step } from '../../../services/report-router.service';
 
 describe('CompanyComponent', () => {
 
@@ -34,16 +35,12 @@ describe('CompanyComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: ReportPaths.Consumer, redirectTo: '' }]),
         Ng2CompleterModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
       ],
-      providers: [
-        CompanyService,
-        AddressService,
-        ReportService,
-      ]
+      providers: []
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();
@@ -193,7 +190,7 @@ describe('CompanyComponent', () => {
       component.nameCtrl.setValue('Mon entreprise');
       component.addressCtrl.setValue('Mon adresse dans ma ville');
       component.addressCtrlPostalCode = '87270';
-      const changeReportSpy = spyOn(reportService, 'changeReport');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
