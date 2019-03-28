@@ -67,7 +67,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   checkScrollNotification() {
     if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      if (rect.top > 0 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
+      if (rect.top > 1 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
         this.scrollNotificationState = 'show';
       } else {
         this.scrollNotificationState = 'hide';
@@ -77,9 +77,11 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
   scrollToElement() {
     this.elementRef.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'start'});
+    this.scrollNotificationState = 'hide';
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes', changes);
     if (changes['subcategoryName']) {
       this.initSubcategoryForm();
     }
@@ -91,7 +93,6 @@ export class SubcategoryComponent implements OnInit, OnChanges {
     if (this.subcategoriesSelected && this.subcategoriesSelected.length) {
       this.subcategorySelected = this.subcategoriesSelected.shift();
     }
-
     this.subcategoryTitleCtrl = this.formBuilder.control(this.subcategorySelected ? this.subcategorySelected.title : '', Validators.required);
     this.subcategoryForm = this.formBuilder.group({});
     this.subcategoryForm.addControl(this.subcategoryName, this.subcategoryTitleCtrl);
@@ -108,6 +109,10 @@ export class SubcategoryComponent implements OnInit, OnChanges {
     } else {
       this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value)]);
     }
+  }
+
+  isSubcategorySelected(subcategory : Subcategory) {
+    return this.subcategorySelected && this.subcategorySelected.title === subcategory.title;
   }
 
   hasSubSubcategory() {
