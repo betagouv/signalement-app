@@ -20,6 +20,7 @@ export class ConsumerComponent implements OnInit {
   firstNameCtrl: FormControl;
   lastNameCtrl: FormControl;
   emailCtrl: FormControl;
+  contactAgreementCtrl: FormControl;
 
   showErrors: boolean;
 
@@ -46,11 +47,13 @@ export class ConsumerComponent implements OnInit {
     this.emailCtrl = this.formBuilder.control(
       this.report.consumer ? this.report.consumer.email : '', [Validators.required, Validators.email]
     );
+    this.contactAgreementCtrl = this.formBuilder.control(this.report.contactAgreement, Validators.required);
 
     this.consumerForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
       email: this.emailCtrl,
+      contactAgreement: this.contactAgreementCtrl
     });
   }
 
@@ -64,6 +67,7 @@ export class ConsumerComponent implements OnInit {
       consumer.lastName = this.lastNameCtrl.value;
       consumer.email = this.emailCtrl.value;
       this.report.consumer = consumer;
+      this.report.contactAgreement = this.contactAgreementCtrl.value;
       this.reportService.changeReportFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
     }

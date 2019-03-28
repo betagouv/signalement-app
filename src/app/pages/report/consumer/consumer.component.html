@@ -5,11 +5,9 @@
     <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
       <h5 class="font-weight-bold">
         Merci de compléter votre identité afin d'authentifier votre signalement.
-        <br/>
-        Votre identité ne sera pas indiquée au professionnel et vous ne serez pas sollicité.
       </h5>
 
-      <div class="form__group mt-2">
+      <div class="form__group mt-4">
         <div class="row">
           <div class="col-12 col-sm-6">
             <label>
@@ -34,6 +32,25 @@
         <input type="email" formControlName="email" name="email" autocomplete="email" />
       </div>
 
+      <div class="form__group">
+        <div class="row pl-1">
+          <div class="col-2 col-sm-1 text-right pr-1">
+            <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
+          </div>
+          <div class="col-10 col-sm-11 pl-1">
+            <label for="contactAgreementTrue" class="label-inline pointer">J'accepte de transmettre mes coordonnées au professionnel afin qu'il puisse me contacter</label>
+          </div>
+        </div>
+        <div class="row pl-1">
+          <div class="col-2 col-sm-1 text-right pr-1">
+            <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
+          </div>
+          <div class="col-10 col-sm-11 pl-1">
+            <label for="contactAgreementFalse" class="label-inline pointer">Je refuse et je ne serai pas sollicité</label>
+          </div>
+        </div>
+      </div>
+
       <div class="notification error mt-3" *ngIf="showErrors && consumerForm.invalid">
         <span *ngIf="firstNameCtrl.hasError('required')">
           Veuillez renseigner votre prénom.<br />
@@ -42,12 +59,16 @@
           Veuillez renseigner votre nom.<br />
         </span>
         <span *ngIf="emailCtrl.hasError('required')">
-          Veuillez renseigner votre email.
+          Veuillez renseigner votre email.<br />
         </span>
         <span *ngIf="emailCtrl.hasError('email')">
-          Veuillez renseigner une adresse email valide.
+          Veuillez renseigner une adresse email valide.<br />
+        </span>
+        <span *ngIf="contactAgreementCtrl.hasError('required')">
+          Veuillez indiquer si vous acceptez de transmettre vos coordonnées au professionnel.<br />
         </span>
       </div>
+
       <hr />
       <button type="submit" class="btn btn-lg btn-primary" id="submitConsumerForm">
         <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">

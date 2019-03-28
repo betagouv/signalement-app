@@ -46,12 +46,12 @@ export class StatsComponent implements OnInit {
           animationDuration: 5000
         }],
         title: {
-          text: 'Nombre de signalements par mois',
+          text: 'Nombre de signalements / mois',
           left: 'center',
           top: '20',
           textStyle: {
             color: '#53657d',
-            fontSize: '22',
+            fontSize: 18
           }
         }
       };
