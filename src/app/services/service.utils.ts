@@ -25,5 +25,6 @@ export class ServiceUtils {
 
 export enum Api {
   Report = 'apiReportBaseUrl',
+  Company = 'apiCompanyBaseUrl',
   Address = 'apiAddressBaseUrl'
 }

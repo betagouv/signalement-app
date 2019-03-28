@@ -6,4 +6,7 @@
       <button class="btn btn-primary" type="button">Parcourir</button>
     </div>
   </div>
+  <div class="notification error mt-2" *ngIf="tooLargeFilename">
+    Le fichier <i>"{{tooLargeFilename}}"</i> est trop volumineux, veuillez choisir un fichier de moins de 5Mo.
+  </div>
 </div>

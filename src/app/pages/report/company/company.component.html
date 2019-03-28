@@ -74,6 +74,10 @@
             <span *ngIf="company.line6">{{company.line6}}<br /></span>
             <span *ngIf="company.line7">{{company.line7}}<br /></span>
           </p>
+
+          <div class="notification warning mt-4">
+            Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+          </div>
         </div>
 
         <div class="notification error mt-4" *ngIf="searchWarning">
@@ -81,6 +85,13 @@
             {{searchWarning}}
           </p>
           Veuillez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+        </div>
+
+        <div class="notification error mt-4" *ngIf="searchError">
+          <p>
+            {{searchError}}
+          </p>
+          Veuillez réessayer ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
         </div>
       </form>
 
