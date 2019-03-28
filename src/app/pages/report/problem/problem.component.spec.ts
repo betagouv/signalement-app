@@ -135,7 +135,7 @@ describe('ProblemComponent', () => {
       reportExpected.category = reportFixture.category;
       reportExpected.subcategories = [subcategoryExpected];
 
-      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Subcategory);
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Problem);
 
     });
   });

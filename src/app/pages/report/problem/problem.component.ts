@@ -27,7 +27,7 @@ export class ProblemComponent implements OnInit {
             private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    this.step = Step.Subcategory;
+    this.step = Step.Problem;
     this.reportService.currentReport.subscribe(report => {
       if (report && report.category) {
         this.report = report;

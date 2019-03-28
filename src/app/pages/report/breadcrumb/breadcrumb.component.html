@@ -14,9 +14,9 @@
             &nbsp;{{report.subcategories ? report.subcategories[0]?.title : ''}}
           </span>
           <div class="steps" *ngIf="step !== 'Information'">
-            <ng-container  *ngIf="getStepNumber('Subcategory') > 0">
-              <div class="{{getStepClass('Subcategory')}}" (click)="goToStep('Subcategory')">
-                <span class="step-number" [innerHTML]="displayedStep('Subcategory')"></span>
+            <ng-container  *ngIf="getStepNumber('Problem') > 0">
+              <div class="{{getStepClass('Problem')}}" (click)="goToStep('Problem')">
+                <span class="step-number" [innerHTML]="displayedStep('Problem')"></span>
                 <span>Le problème</span>
               </div>
               <img src="/assets/images/icon_next.png" alt="étape suivante"/>

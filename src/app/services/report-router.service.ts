@@ -7,7 +7,7 @@ import { Report } from '../model/Report';
 
 export enum Step {
   Category = 'Category',
-  Subcategory = 'Subcategory',
+  Problem = 'Problem',
   Details = 'Details',
   Company = 'Company',
   Consumer = 'Consumer',
@@ -18,7 +18,7 @@ export enum Step {
 
 export enum ReportPaths {
   Category = '',
-  Subcategory = 'signalement/le-probleme',
+  Problem = 'signalement/le-probleme',
   Details = 'signalement/la-description',
   Company = 'signalement/le-commerçant',
   Consumer = 'signalement/le-consommateur',
@@ -88,11 +88,11 @@ export class ReportRouterService {
         if (anomaly.information) {
           return Step.Information;
         } else if (anomaly.subcategories && anomaly.subcategories.length) {
-          return Step.Subcategory;
+          return Step.Problem;
         } else {
           return Step.Details;
         }
-      case Step.Subcategory:
+      case Step.Problem:
         if (this.report.lastSubcategory.information) {
           return Step.Information;
         } else {
@@ -113,17 +113,17 @@ export class ReportRouterService {
 
   previousStep(currentStep: Step) {
     switch (currentStep) {
-      case Step.Subcategory:
+      case Step.Problem:
         return Step.Category;
       case Step.Details:
         if (this.report.subcategories) {
-          return Step.Subcategory;
+          return Step.Problem;
         } else {
           return Step.Category;
         }
       case Step.Information:
         if (this.report.subcategories) {
-          return Step.Subcategory;
+          return Step.Problem;
         } else {
           return Step.Category;
         }

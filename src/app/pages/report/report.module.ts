@@ -29,7 +29,7 @@ defineLocale('fr', frLocale);
 const routes: Routes = [
   { path: '', component: CategoryComponent },
   { path: ReportPaths.Information, component: InformationComponent },
-  { path: ReportPaths.Subcategory, component: ProblemComponent },
+  { path: ReportPaths.Problem, component: ProblemComponent },
   { path: ReportPaths.Details, component: DetailsComponent },
   { path: ReportPaths.Company, component: CompanyComponent },
   { path: ReportPaths.Consumer, component: ConsumerComponent },
