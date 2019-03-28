@@ -26,7 +26,7 @@
           <br />
           Plage horaire : <ng-container *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </ng-container>
           <br />
-          Description : {{report.details.description}}
+          Description du problème : {{report.details.description}}
         </div>
         <div class="row mt-2">
           Nom : {{report.consumer.lastName}}
@@ -34,6 +34,8 @@
           Prénom : {{report.consumer.firstName}}
           <br />
           Email : {{report.consumer.email}}
+          <br />
+          Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
         </div>
         <div class="row mt-2" *ngIf="report.details.uploadedFiles && report.details.uploadedFiles.length; else noUploadedFiles">
           Pièce(s) jointe(s) :
@@ -54,28 +56,6 @@
         </ng-template>
       </div>
 
-      <div class="row pl-1">
-        <div class="col-2 col-sm-1 text-right pr-1">
-          <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
-        </div>
-        <div class="col-10 col-sm-11 pl-1">
-          <label for="contactAgreementTrue" class="label-inline pointer">J'accepte de transmettre mes coordonnées au professionnel afin qu'il puisse me contacter</label>
-        </div>
-      </div>
-      <div class="row pl-1">
-        <div class="col-2 col-sm-1 text-right pr-1">
-          <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
-        </div>
-        <div class="col-10 col-sm-11 pl-1">
-          <label for="contactAgreementFalse" class="label-inline pointer">Je refuse</label>
-        </div>
-      </div>
-
-      <div class="notification error mt-3" *ngIf="showErrors && confirmationForm.invalid">
-        <span *ngIf="contactAgreementCtrl.hasError('required')">
-          Veuillez indiquer si vous acceptez de transmettre vos coordonnées au professionnel.<br />
-        </span>
-      </div>
       <div class="notification error mt-3" *ngIf="loadingError">
           Une erreur technique s'est produite lors de l'envoi, veuillez réessayer ultérieurement.<br />
       </div>

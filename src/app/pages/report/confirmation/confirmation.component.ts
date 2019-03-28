@@ -18,7 +18,6 @@ export class ConfirmationComponent implements OnInit {
   report: Report;
 
   confirmationForm: FormGroup;
-  contactAgreementCtrl: FormControl;
 
   showErrors: boolean;
   loading: boolean;
@@ -45,12 +44,7 @@ export class ConfirmationComponent implements OnInit {
 
   initConfirmationForm() {
     this.showErrors = false;
-
-    this.contactAgreementCtrl = this.formBuilder.control('');
-
-    this.confirmationForm = this.formBuilder.group({
-      contactAgreement: this.contactAgreementCtrl
-    });
+    this.confirmationForm = this.formBuilder.group({});
   }
 
   submitConfirmationForm() {
@@ -60,7 +54,6 @@ export class ConfirmationComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
-      this.report.contactAgreement = this.contactAgreementCtrl.value;
       this.reportService.createReport(this.report)
         .subscribe(
         result => {
