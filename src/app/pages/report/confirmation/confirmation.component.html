@@ -2,16 +2,36 @@
 <section class="section section-white position-relative">
   <div class="container">
     <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm" *ngIf="confirmationForm">
-      <h5>
-        Récapitulatif de votre problème {{report.category | precedeBy : 'de' : 'd\''}}
-        <ng-container *ngIf="report.subcategories">({{report.subcategories.title}})</ng-container>
-      </h5>
+      <h4 class="text-center">
+        Récapitulatif de votre problème
+      </h4>
       <div class="panel">
+        <h5>Le problème</h5>
         <div class="row">
-          Etablissement :
+          <div class="col-12">
+            {{report.category}}
+            <br />
+            <ng-container *ngFor="let subcategory of report.subcategories">
+              {{subcategory.title}}
+              <br />
+            </ng-container>
+          </div>
         </div>
+        <hr />
+        <h5>La description</h5>
         <div class="row">
-          <div class="col-12 text-center">
+          <div class="col-12">
+            Date du constat : {{report.details.anomalyDate | date:'dd/MM/yyyy'}}
+            <br />
+            Plage horaire : <ng-container *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </ng-container>
+            <br />
+            Description : {{report.details.description}}
+          </div>
+        </div>
+        <hr />
+        <h5>Le commerçant</h5>
+        <div class="row">
+          <div class="col-12">
             <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
             <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
             <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
@@ -21,19 +41,16 @@
             <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
           </div>
         </div>
-        <div class="row mt-2">
-          Date du constat : {{report.details.anomalyDate | date:'dd/MM/yyyy'}}
-          <br />
-          Plage horaire : <ng-container *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </ng-container>
-          <br />
-          Description : {{report.details.description}}
-        </div>
-        <div class="row mt-2">
-          Nom : {{report.consumer.lastName}}
-          <br />
-          Prénom : {{report.consumer.firstName}}
-          <br />
-          Email : {{report.consumer.email}}
+        <hr />
+        <h5>Le consommateur</h5>
+        <div class="row">
+          <div class="col-12">
+            Nom : {{report.consumer.lastName}}
+            <br />
+            Prénom : {{report.consumer.firstName}}
+            <br />
+            Email : {{report.consumer.email}}
+          </div>
         </div>
       </div>
 
