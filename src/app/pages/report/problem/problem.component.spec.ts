@@ -16,6 +16,7 @@ import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportPaths, Step } from '../../../services/report-router.service';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProblemComponent', () => {
 
@@ -59,6 +60,7 @@ describe('ProblemComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: ReportPaths.Details, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
+        NoopAnimationsModule
       ],
     })
       .overrideTemplate(BreadcrumbComponent, '')
@@ -108,7 +110,6 @@ describe('ProblemComponent', () => {
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h4')).toBeNull();
       expect(nativeElement.querySelector('app-subcategory')).not.toBeNull();
     });
 

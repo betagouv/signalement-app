@@ -9,6 +9,7 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SimpleChange } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SubcategoryComponent', () => {
 
@@ -40,6 +41,7 @@ describe('SubcategoryComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule,
         Angulartics2RouterlessModule.forRoot(),
+        NoopAnimationsModule,
       ]
     })
     .compileComponents();
@@ -108,6 +110,7 @@ describe('SubcategoryComponent', () => {
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelectorAll('input[type="radio"]')[0].click();
+      fixture.detectChanges();
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
     });

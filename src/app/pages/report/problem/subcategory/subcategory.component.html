@@ -1,23 +1,20 @@
 <div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''">
-  <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle" *ngIf="subcategoriesTitle"></h4>
+  <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Quel a été votre problème ?'"></h4>
 
   <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
-    <div class="row pb-4" *ngFor="let subcategory of subcategories">
-      <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
-        <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
-      </div>
-      <div class="col-10 col-sm-11 pl-1">
-        <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
-        <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
+    <div [class]="subcategory === subcategorySelected ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
+      <div class="row pb-2 pt-2">
+        <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
+          <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
+        </div>
+        <div class="col-10 col-sm-11 pl-1">
+          <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
+          <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
+        </div>
       </div>
     </div>
-    <div class="notification error" *ngIf="showErrors && subcategoryForm.invalid">
-      <span *ngIf="subcategoryTitleCtrl.hasError('required')">
-        Veuillez préciser.
-      </span>
-    </div>
-    <hr/>
-    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory()">
+    <hr *ngIf="subcategoryForm.valid"/>
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory() && subcategoryForm.valid">
       <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
       Détailler le problème
     </button>
@@ -30,3 +27,7 @@
                  [subcategoriesSelected]="subcategoriesSelected"
                  (select)="onSelectSubSubcategories($event)">
 </app-subcategory>
+<div [@scrollAnimation]="scrollNotificationState" class="scrollNotification pointer" *ngIf="!hasSubSubcategory()" (click)="scrollToElement()">
+  <span class="link ml-2 mr-2">Poursuivre</span>
+  <img alt="Icône du bouton suivant" src="/assets/images/icon_arrow_down.png">
+</div>
