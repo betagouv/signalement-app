@@ -22,6 +22,7 @@ describe('ConsumerComponent', () => {
   consumerFixture.firstName = 'Prénom';
   consumerFixture.lastName = 'Nom';
   consumerFixture.email = 'test@gmail.com';
+  const contactAgreementFixture = true;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -70,6 +71,7 @@ describe('ConsumerComponent', () => {
       expect(component.consumerForm.controls['firstName']).toEqual(component.firstNameCtrl);
       expect(component.consumerForm.controls['lastName']).toEqual(component.lastNameCtrl);
       expect(component.consumerForm.controls['email']).toEqual(component.emailCtrl);
+      expect(component.consumerForm.controls['contactAgreement']).toEqual(component.contactAgreementCtrl);
     });
 
     it('should initialize the inputs with empty values when there is no initial value', () => {
@@ -77,11 +79,14 @@ describe('ConsumerComponent', () => {
       expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual('');
       expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual('');
       expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual('');
+      expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeFalsy();
+      expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeFalsy();
     });
 
     it('should initialize the details inputs with initial value when it exists', () => {
       const reportWithConsumer = new Report();
       reportWithConsumer.consumer = consumerFixture;
+      reportWithConsumer.contactAgreement = contactAgreementFixture;
       reportService.currentReport = of(reportWithConsumer);
 
       component.ngOnInit();
@@ -91,6 +96,13 @@ describe('ConsumerComponent', () => {
       expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual(consumerFixture.firstName);
       expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual(consumerFixture.lastName);
       expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual(consumerFixture.email);
+      if (contactAgreementFixture) {
+        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeTruthy();
+        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeFalsy();
+      } else {
+        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeFalsy();
+        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeTruthy();
+      }
     });
   });
 
@@ -100,6 +112,7 @@ describe('ConsumerComponent', () => {
       component.firstNameCtrl.setValue('');
       component.lastNameCtrl.setValue('');
       component.emailCtrl.setValue('');
+      component.contactAgreementCtrl.setValue(null);
 
       component.submitConsumerForm();
       fixture.detectChanges();
@@ -112,21 +125,19 @@ describe('ConsumerComponent', () => {
     it ('should change the shared report with a report where consumer contains form inputs when no errors', () => {
 
       const anomalyDate = new Date();
-      component.firstNameCtrl.setValue('Prénom');
-      component.lastNameCtrl.setValue('Nom');
-      component.emailCtrl.setValue('test@gmail.com');
+      component.firstNameCtrl.setValue(consumerFixture.firstName);
+      component.lastNameCtrl.setValue(consumerFixture.lastName);
+      component.emailCtrl.setValue(consumerFixture.email);
+      component.contactAgreementCtrl.setValue(contactAgreementFixture);
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button#submitConsumerForm').click();
       fixture.detectChanges();
 
-      const consumerExpected = new Consumer();
-      consumerExpected.firstName = 'Prénom';
-      consumerExpected.lastName = 'Nom';
-      consumerExpected.email = 'test@gmail.com';
       const reportExpected = new Report();
-      reportExpected.consumer = consumerExpected;
+      reportExpected.consumer = consumerFixture;
+      reportExpected.contactAgreement = contactAgreementFixture;
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Consumer);
 
