@@ -51,4 +51,8 @@ export class InformationComponent implements OnInit {
     this.reportRouterService.routeForward(this.step);
   }
 
+  ngOnDestroy() {
+    this.reportRouterService.routeToFirstStep();
+  }
+
 }
