@@ -10,9 +10,6 @@
           <ng-template #defautBreadcrumbTitle>
             <h4>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h4>
           </ng-template>
-          <span class="note">
-            &nbsp;{{report.subcategories ? report.subcategories[0]?.title : ''}}
-          </span>
           <div class="steps" *ngIf="step !== 'Information'">
             <ng-container  *ngIf="getStepNumber('Problem') > 0">
               <div class="{{getStepClass('Problem')}}" (click)="goToStep('Problem')">
