@@ -4,7 +4,7 @@
 
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
 
-      <div class="notification success">
+      <div class="notification success" *ngIf="report.subcategories">
         <h4>{{getSubcategoryTitles()}}</h4>
       </div>
 
