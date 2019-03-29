@@ -81,7 +81,6 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
     if (changes['subcategoryName']) {
       this.initSubcategoryForm();
     }
