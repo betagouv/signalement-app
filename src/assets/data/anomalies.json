@@ -126,7 +126,6 @@
           "title": "Produit pas bon",
           "information": {
             "title": "Cet incident ne constitue pas un motif de signalement.",
-            "content": "<h5>Au restaurant</h5><p>Vous pouvez demander que l'on remplace un plat si vous estimez que le plat qui vous a été proposé n'est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\".<br/>En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat. S'il vous oppose un refus, vous serez tenu néanmoins de payer la note.</p><h5>Produit acheté en magasin</h5>Vous pouvez contacter le service client (généralement indiqué sur l'emballage) sinon contactez directement le commerçant afin de lui faire part de votre avis voir mécontentement.</p>",
             "content": "<ul><li class=\"pb-3\">Produit acheté en magasin : <br/>vous pouvez contacter le service client (généralement indiqué sur l'emballage). Si non, contactez directement le commerçant afin de lui faire part de votre avis ou mécontentement.</li><li>Produit commandé dans un bar ou un restaurant :<br/>Vous pouvez demander que l'on remplace un plat si vous estimez que le plat qui vous a été proposé n'est pas frais ou pas suffisamment chaud. Vous pouvez exiger la même chose pour le vin, notamment s'il est \"bouchonné\".<br/>En revanche, si un plat commandé ne vous convient pas pour une question de goût, le restaurateur est libre de le reprendre ou non et de vous servir un autre plat.</li></ul>"
           }
         },
@@ -389,7 +388,7 @@
                       "title": "Non",
                       "information": {
                         "title": "Votre produit n'est plus couvert par la garantie.",
-                        "content": "Votre produit n'est plus couvert par la garantie. Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
+                        "content": "Votre produit n'est plus couvert par la garantie.<br/>Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
                       }
                     }
                   ]
@@ -415,7 +414,7 @@
                       "title": "Non",
                       "information": {
                         "title": "Votre produit n'est plus couvert par la garantie.",
-                        "content": "Votre produit n'est plus couvert par la garantie. Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
+                        "content": "Votre produit n'est plus couvert par la garantie.<br/>Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
                       }
                     }
                   ]
