@@ -4,6 +4,19 @@
 
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
 
+      <div class="notification success">
+        <h4>{{getSubcategoryTitles()}}</h4>
+      </div>
+
+      <div *ngIf="report.lastSubcategory?.description" class="row notification note">
+        <div class="text-right">
+          <img alt="Icône information" src="/assets/images/icon_info.png">
+        </div>
+        <div class="text-left">
+          {{report.lastSubcategory.description}}
+        </div>
+      </div>
+
       <div class="form__group" *ngIf="report.lastSubcategory?.details?.precision; let precision">
         <label>
           {{precision.title}}

@@ -156,4 +156,8 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  getSubcategoryTitles() {
+    return this.report.subcategories.map(s => s.title).reduce((t1, t2) => `${t1}, ${t2}`);
+  }
+
 }
