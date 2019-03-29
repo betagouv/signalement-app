@@ -64,6 +64,8 @@ export class Subcategory {
 export class Anomaly {
   @JsonProperty('category')
   category: string;
+  @JsonProperty('categoryId')
+  categoryId: string;
   @JsonProperty('description')
   description: string;
   @JsonProperty('rank')
@@ -83,6 +85,7 @@ export class Anomaly {
 
   constructor() {
     this.category = undefined;
+    this.categoryId = undefined;
     this.description = undefined;
     this.rank = undefined;
     this.withInternetPurchase = undefined;
