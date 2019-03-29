@@ -9,7 +9,7 @@
         </div>
         <div class="col-10 col-sm-11 pl-1">
           <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
-          <app-collapsable-text [content]="subcategory.description" [title]="subcategory.title"></app-collapsable-text>
+          <div class="note" [innerHTML]="subcategory.samples" *ngIf="subcategory.samples"></div>
         </div>
       </div>
     </div>

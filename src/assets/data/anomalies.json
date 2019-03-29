@@ -8,7 +8,7 @@
       "subcategories": [
         {
           "title": "Locaux / matériel sales",
-          "description": "Exemples : cuisine, WC, rayon réfrigéré...",
+          "samples": "Exemples : cuisine, WC, rayon réfrigéré...",
           "details": {
             "descriptionTips": "Afin que le professionnel puisse corriger la situation, vous pouvez préciser le rayon exact, le type de salissure...",
             "precision": {
@@ -35,7 +35,7 @@
         },
         {
           "title": "Hygiène du personnel",
-          "description": "Exemples : tenue sale, mauvaise pratique d'hygiène...",
+          "samples": "Exemples : tenue sale, mauvaise pratique d'hygiène...",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -53,7 +53,7 @@
         },
         {
           "title": "Présence d'animaux",
-          "description": "Exemples : rat, insectes, oiseaux, chien...",
+          "samples": "Exemples : rat, insectes, oiseaux, chien...",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -69,7 +69,7 @@
         },
         {
           "title": "Problème de température",
-          "description": "Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...",
+          "samples": "Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -95,7 +95,7 @@
       "subcategories": [
         {
           "title": "Produit présentant un défaut",
-          "description": "Exemples : présence de moisissure, odeur anormale, ...",
+          "samples": "Exemples : présence de moisissure, odeur anormale, ...",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -112,7 +112,7 @@
         },
         {
           "title": "Corps étranger \"dur\" ",
-          "description": "Présence de quelque chose de \"dur\" dans le produit. <br/>Exemples : bout de verre, morceau de métal..",
+          "samples": "Présence de quelque chose de \"dur\" dans le produit. <br/>Exemples : bout de verre, morceau de métal..",
           "information": {
             "title": "Vous souhaitez signaler la présence d'un corps étranger \"dur\"",
             "content": "Ce cas représente une alerte et nécessite une analyse individualisée.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4211\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4211</a>"
@@ -132,7 +132,7 @@
         },
         {
           "title": "Problème sur l'étiquette / emballage",
-          "description": "Exemples : liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...",
+          "samples": "Exemples : liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...",
           "details": {
             "descriptionTips": "Précisez également le nom du fabriquant.",
             "precision": {
@@ -148,7 +148,7 @@
         },
         {
           "title": "Problème de quantité",
-          "description": "Exemples : poids indiqué non conforme, balance non tarée...",
+          "samples": "Exemples : poids indiqué non conforme, balance non tarée...",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -165,7 +165,7 @@
         },
         {
           "title": "Produit en retrait/ rappel",
-          "description": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
+          "report.lastSubcategory": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
         },
         {
           "title": "Autre problème de nourriture"
@@ -181,7 +181,7 @@
       "subcategories": [
         {
           "title": "Étiquetage et notice",
-          "description": "Exemples : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...",
+          "samples": "Exemples : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...",
           "details": {
             "descriptionTips": "Précisez également le nom du fabriquant.",
             "precision": {
@@ -207,11 +207,11 @@
         },
         {
           "title": "Produit en retrait/ rappel",
-          "description": "Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités"
+          "report.lastSubcategory": "Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités"
         },
         {
           "title": "Effet indésirable sur la santé",
-          "description": "Exemples : brûlure, picotement, démangeaison, allergie",
+          "samples": "Exemples : brûlure, picotement, démangeaison, allergie",
           "information": {
             "title": "Vous souhaitez signaler un effet indésirable sur la santé",
             "content": "Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
@@ -219,7 +219,7 @@
         },
         {
           "title": "Produit dangereux",
-          "description": "Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...",
+          "samples": "Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...",
           "information": {
             "title": "Vous souhaitez signaler un produit dangereux",
             "content": "Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
@@ -227,7 +227,7 @@
         },
         {
           "title": "Durée de vie trop courte",
-          "description": "Vous trouvez que la durée de vie de votre appareil est trop courte.",
+          "report.lastSubcategory": "Vous trouvez que la durée de vie de votre appareil est trop courte.",
           "details": {
             "descriptionTips": "Précisez également la date d'achat."
           }
@@ -260,7 +260,7 @@
       "subcategories": [
         {
           "title": "Absence de prix",
-          "description": "Exemples : pas d'affichage de prix en rayon ou en vitrine, pas de carte des prix dans le bar..."
+          "samples": "Exemples : pas d'affichage de prix en rayon ou en vitrine, pas de carte des prix dans le bar..."
         },
         {
           "title": "Prix trop cher",
@@ -268,11 +268,12 @@
         },
         {
           "title": "Prix différent de celui affiché",
-          "description": "Exemples : le prix du paquet à la caisse est de 5 euros alors qu'il est affiché à 3 euros en rayon, le pantalon ne passe qu'à -30% alors que tous les pantalons sont étiquetés -50%.<br/><br/>En cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.<br/><br/>Par contre, ce principe ne s'applique pas lorsque l'erreur de prix est tellement énorme que le client se doute de l'erreur (exemple : une voiture neuve affichée à 500 euros, un meuble affiché à 0 euros...). On appelle ça une erreur de prix manifeste."
+          "samples": "Exemples : le prix du paquet à la caisse est de 5 euros alors qu'il est affiché à 3 euros en rayon, le pantalon ne passe qu'à -30% alors que tous les pantalons sont étiquetés -50%.",
+          "description": "En cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.<br/><br/>Par contre, ce principe ne s'applique pas lorsque l'erreur de prix est tellement énorme que le client se doute de l'erreur (exemple : une voiture neuve affichée à 500 euros, un meuble affiché à 0 euros...). On appelle ça une erreur de prix manifeste."
         },
         {
           "title": "Fausse réduction de prix",
-          "description": "Exemple : fausse promotion pendant les soldes ou une liquidation totale",
+          "samples": "Exemple : fausse promotion pendant les soldes ou une liquidation totale",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -304,7 +305,7 @@
         },
         {
           "title": "Frais facturés qui sont injustifiés",
-          "description": "Exemple : on vous facture un surplus \"service en terrasse\" alors que ce prix n'était indiqué nulle part"
+          "samples": "Exemple : on vous facture un surplus \"service en terrasse\" alors que ce prix n'était indiqué nulle part"
         },
         {
           "title": "Autre problème de prix"
@@ -346,11 +347,11 @@
       "subcategories": [
         {
           "title": "Problème de SAV, hotline",
-          "description": "Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ..."
+          "samples": "Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ..."
         },
         {
           "title": "Problème de livraison",
-          "description": "Exemples : colis perdu et non reçu, livraison tardive, colis abimé...",
+          "samples": "Exemples : colis perdu et non reçu, livraison tardive, colis abimé...",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -425,7 +426,7 @@
         },
         {
           "title": "Personnel peu aimable",
-          "description": "Exemples : l'accueil est froid, le personnel est mal poli",
+          "samples": "Exemples : l'accueil est froid, le personnel est mal poli",
           "information": {
             "title": "Ceci ne constitue pas un motif de signalement.",
             "content": "Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client ! <br/>Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.<br/><br/>Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne via ce lien : <a href=\"https://www.pre-plainte-en-ligne.gouv.fr\" target=\"_blank\">https://www.pre-plainte-en-ligne.gouv.fr</a>"

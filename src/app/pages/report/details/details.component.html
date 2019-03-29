@@ -13,7 +13,7 @@
           <img alt="Icône information" src="/assets/images/icon_info.png">
         </div>
         <div class="text-left">
-          {{report.lastSubcategory.description}}
+          <app-collapsable-text [content]="report.lastSubcategory.description" [title]="report.lastSubcategory.title"></app-collapsable-text>
         </div>
       </div>
 
