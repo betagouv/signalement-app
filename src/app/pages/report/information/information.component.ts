@@ -19,9 +19,9 @@ export class InformationComponent implements OnInit {
   informationToDisplay: Information;
 
   constructor(private reportService: ReportService,
-              private reportRouterService: ReportRouterService,
-              private anomalyService: AnomalyService,
-              private analyticsService: AnalyticsService) { }
+    private reportRouterService: ReportRouterService,
+    private anomalyService: AnomalyService,
+    private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.step = Step.Information;
@@ -52,7 +52,7 @@ export class InformationComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.reportRouterService.routeToFirstStep();
+    this.reportRouterService.routeBackward(this.step);
   }
 
 }
