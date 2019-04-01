@@ -33,15 +33,11 @@ export class CategoryComponent implements OnInit {
     this.reportService.currentReport.subscribe(report => this.report = report);
     this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
-    this.loadAnomalies();
-    const anomaly = this.anomalyService.findAnomalyOfCategory(this.anomalies, "Problème suite à un achat sur internet");
+    this.anomalies = this.anomalyService.getAnomalies();
+    const anomaly = this.anomalyService.getAnomalyByCategoryId("PBINT");
     if (anomaly) {
       this.internetInformation = anomaly.information; 
     }
-  }
-
-  loadAnomalies() {
-    this.anomalies = this.anomalyService.getAnomalies();
   }
 
   primaryCategoriesOrderByRank() {

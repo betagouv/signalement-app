@@ -35,8 +35,4 @@ export class AnomalyService {
     return this.getAnomalyBy(anomaly => anomaly.categoryId === categoryId);
   }
 
-  findAnomalyOfCategory(anomalies: Anomaly[], category: String) {
-    return anomalies.find(anomaly => anomaly.category === category);
-  }
-
 }
