@@ -79,9 +79,16 @@
     </div>
 
     <div class="container" *ngIf="selectedCompanyType == companyType.Internet">
-      <div class="notification">
-        <p>Le signalement de problèmes rencontrés lors d’achats sur internet n’est pas encore disponible mais nous y travaillons activement.</p>
-        <p [innerHTML]="internetInformation?.content"></p>
+      <p class="mx-auto w-75 text-center" [innerHTML]="internetInformation?.title"></p>
+      <hr class="my-4 w-75 text-center mx-auto" />
+      <p class="mb-4 text-center">{{ internetInformation?.subTitle }}</p>
+      <p [innerHTML]="internetInformation?.content"></p>
+      <div class="card mb-4 rounded-lg" *ngFor="let action of internetInformation?.actions">
+        <div class="card-body">
+          <h6 class="card-title">{{ action.question }}</h6>
+          <p class="card-text text-muted" *ngIf="action.example">{{ action.example }}</p>
+        </div>
+        <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
       </div>
     </div>
 

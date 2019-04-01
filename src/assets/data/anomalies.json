@@ -391,10 +391,22 @@
       "category": "Problème suite à un achat sur internet",
       "categoryId": "PBINT",
       "rank" : 101,
-      "breadcrumbTitle": "Vous avez identifié un problème suite à un achat sur internet",
+      "breadcrumbTitle": "",
       "information": {
-        "title": "Nous sommes désolés, la vente sur internet ne fait pas encore partie de notre site.",
-        "content": "Votre signalement concerne : <p><ul><li>un problème avec un commerçant ? <br/><span class=\"note\">Exemple : colis non reçu, pas de nouvelle de votre commande... </span><br />Vous pouvez saisir la <abbr title=\"Direction Général de la Concurrence, Consommation et Répression des Fraudes\">DGCCRF</abbr> avec le formulaire disponible ici : <a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a></li><li>un spam que vous avez reçu ?<br />Vous pouvez le signaler ici : <a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a></li><li>un contenu qui vous semble inapproprié ? <br/><span class=\"note\">Exemple : trafic illicite, pédopornographie ...</span><br/>Vous pouvez le signaler ici : <a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a></li></ul></p>"
+        "title": "Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !!!",
+        "subTitle": "Dans certains cas, d'autres services de signalement existent déjà, et pourraient correspondre au problème que vous souhaitez signaler. Les voici : ",
+        "actions": [{
+          "question" : "Un problème avec un commerçant ?",
+          "example": "Colis non reçu, pas de nouvelle de votre commande, etc.",
+          "answer": "Vous pouvez saisir la DGCCRF avec le formulaire disponible ici : <br><a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a>"
+        }, {
+          "question" : "Un spam que vous avez reçu ?",
+          "answer": "Vous pouvez le signaler ici : <br><a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a>"
+        }, {
+          "question" : "Un contenu qui vous semble inapproprié ?",
+          "example": "Trafic illicite, pédopornographie, etc.",
+          "answer": "Vous pouvez le signaler ici : <br><a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a>"
+        }]
       }
     },
     {
