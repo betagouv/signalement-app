@@ -2,7 +2,7 @@
   <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
   <section class="section section-white">
     <div class="container max-width">
-      <p class="mx-auto w-75 text-center" [innerHTML]="informationToDisplay?.title"></p>
+      <h4 class="mx-auto w-75 text-center" [innerHTML]="informationToDisplay?.title"></h4>
       <hr class="my-4 w-75 text-center mx-auto" />
       <p class="mb-4 text-center">{{ informationToDisplay?.subTitle }}</p>
       <p class="mt-4" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>

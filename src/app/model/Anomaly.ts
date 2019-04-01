@@ -20,7 +20,7 @@ export class Information {
   @JsonProperty('title')
   title: string;
   @JsonProperty('subTitle')
-  subTitle: string;
+  subTitle?: string;
   @JsonProperty('content')
   content?: string;
   @JsonProperty({ name: 'actions', clazz: Action})

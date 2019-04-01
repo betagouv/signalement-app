@@ -79,7 +79,7 @@
     </div>
 
     <div class="container" *ngIf="selectedCompanyType == companyType.Internet">
-      <p class="mx-auto w-75 text-center" [innerHTML]="internetInformation?.title"></p>
+      <h4 class="mx-auto w-75 text-center" [innerHTML]="internetInformation?.title"></h4>
       <hr class="my-4 w-75 text-center mx-auto" />
       <p class="mb-4 text-center">{{ internetInformation?.subTitle }}</p>
       <p [innerHTML]="internetInformation?.content"></p>
