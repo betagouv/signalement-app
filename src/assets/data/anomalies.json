@@ -393,8 +393,8 @@
       "rank" : 101,
       "breadcrumbTitle": "",
       "information": {
-        "title": "Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !!!",
-        "subTitle": "Dans certains cas, d'autres services de signalement existent déjà, et pourraient correspondre au problème que vous souhaitez signaler. Les voici : ",
+        "title": "Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !",
+        "subTitle": "Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.",
         "actions": [{
           "question" : "Un problème avec un commerçant ?",
           "example": "Colis non reçu, pas de nouvelle de votre commande, etc.",
