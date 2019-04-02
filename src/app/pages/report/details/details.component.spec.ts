@@ -1,9 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
-import { FileInputComponent } from '../../../components/file-input/file-input.component';
 import { Report, ReportDetails } from '../../../model/Report';
 import { DetailInput, Precision, Subcategory, SubcategoryDetails } from '../../../model/Anomaly';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
@@ -15,6 +14,8 @@ import { ReportService } from '../../../services/report.service';
 import { of } from 'rxjs';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { ReportPaths, Step } from '../../../services/report-router.service';
+import { UploadedFile } from '../../../model/UploadedFile';
+import { NgxLoadingModule } from 'ngx-loading';
 
 describe('DetailsComponent', () => {
 
@@ -23,13 +24,14 @@ describe('DetailsComponent', () => {
   let reportService: ReportService;
 
   const anomalyDateFixture = new Date(2018, 1, 2);
-  const anomalyFileFixture = new File([], 'anomaly.jpg');
+  const anomalyFileFixture = Object.assign(new UploadedFile(), {
+    id: '856cdf46-a8c2-436d-a34c-bb303ff108a6',
+    filename: 'anomaly.jpg'
+  });
   const reportDetailsFixture = new ReportDetails();
   reportDetailsFixture.description = 'Description';
   reportDetailsFixture.anomalyDate = anomalyDateFixture;
   reportDetailsFixture.anomalyTimeSlot = 5;
-  reportDetailsFixture.ticketFile = undefined;
-  reportDetailsFixture.anomalyFile = anomalyFileFixture;
 
   const textDetailInputFixture = Object.assign(new DetailInput(), {
     label: 'texte label',
@@ -56,7 +58,6 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         BreadcrumbComponent,
-        FileInputComponent,
         CollapsableTextComponent,
         TruncatePipe,
       ],
@@ -67,6 +68,8 @@ describe('DetailsComponent', () => {
         RouterTestingModule.withRoutes([{ path: ReportPaths.Company, redirectTo: '' }]),
         BsDatepickerModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
+        NgxLoadingModule,
+        NoopAnimationsModule
       ],
     })
       .overrideTemplate(BreadcrumbComponent, '')
@@ -229,7 +232,7 @@ describe('DetailsComponent', () => {
       component.detailsForm.addControl('otherPrecision', component.otherPrecisionCtrl);
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
-      component.anomalyFile = anomalyFileFixture;
+      component.uploadedFiles = [anomalyFileFixture];
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
@@ -242,8 +245,7 @@ describe('DetailsComponent', () => {
       detailsExpected.otherPrecision = 'Autre précision';
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.ticketFile = undefined;
-      detailsExpected.anomalyFile = anomalyFileFixture;
+      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
       reportExpected.subcategories = [new Subcategory()];
       reportExpected.subcategories[0].details = subcategoryDetails;
@@ -307,7 +309,7 @@ describe('DetailsComponent', () => {
       component.multiplePrecisionCtrl.controls[2].setValue(true);
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
-      component.anomalyFile = anomalyFileFixture;
+      component.uploadedFiles = [anomalyFileFixture];
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
@@ -319,8 +321,7 @@ describe('DetailsComponent', () => {
       detailsExpected.precision = ['option 1', 'option 3'];
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.ticketFile = undefined;
-      detailsExpected.anomalyFile = anomalyFileFixture;
+      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
       reportExpected.subcategories = [new Subcategory()];
       reportExpected.subcategories[0].details = subcategoryDetails;
@@ -371,7 +372,7 @@ describe('DetailsComponent', () => {
       component.descriptionCtrl.setValue('Description');
       component.anomalyDateCtrl.setValue(anomalyDateFixture);
       component.anomalyTimeSlotCtrl.setValue(5);
-      component.anomalyFile = anomalyFileFixture;
+      component.uploadedFiles = [anomalyFileFixture];
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
@@ -382,8 +383,7 @@ describe('DetailsComponent', () => {
       detailsExpected.description = 'Description';
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.ticketFile = undefined;
-      detailsExpected.anomalyFile = anomalyFileFixture;
+      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
       reportExpected.subcategories = [new Subcategory()];
       reportExpected.subcategories[0].details = subcategoryDetails;

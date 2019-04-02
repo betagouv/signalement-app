@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { FileUploaderService } from '../../../services/file-uploader.service';
+import { UploadedFile } from '../../../model/UploadedFile';
 
 @Component({
   selector: 'app-confirmation',
@@ -24,6 +26,7 @@ export class ConfirmationComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
               private reportRouterService: ReportRouterService,
+              private fileUploaderService: FileUploaderService,
               private analyticsService: AnalyticsService) {
   }
 
@@ -55,8 +58,8 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
         result => {
           this.loading = false;
-          this.reportService.removeReportFromStorage();
           this.reportService.changeReportFromStep(this.report, this.step);
+          this.reportService.removeReportFromStorage();
           this.reportRouterService.routeForward(this.step);
         },
         error => {
@@ -71,6 +74,10 @@ export class ConfirmationComponent implements OnInit {
     if (this.report.details.anomalyTimeSlot) {
       return Number(this.report.details.anomalyTimeSlot) + 1;
     }
+  }
+
+  getFileDownloadUrl(uploadedFile: UploadedFile) {
+    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
 }

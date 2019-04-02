@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
@@ -34,9 +34,9 @@ export class CategoryComponent implements OnInit {
     this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.loadAnomalies();
-    const anomaly = this.anomalyService.findAnomalyOfCategory(this.anomalies, "Problème suite à un achat sur internet");
-    if (anomaly) {
-      this.internetInformation = anomaly.information; 
+    const anomalyInternet = this.anomalyService.getAnomalyByCategoryId('PBINT');
+    if (anomalyInternet) {
+      this.internetInformation = anomalyInternet.information;
     }
   }
 
@@ -56,6 +56,7 @@ export class CategoryComponent implements OnInit {
     if (this.anomalies) {
       return this.anomalies
         .filter(a => a.rank >= 100)
+        .filter(a => !a.hidden)
         .sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
     }
   }

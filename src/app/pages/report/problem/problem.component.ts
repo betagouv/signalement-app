@@ -55,7 +55,7 @@ export class ProblemComponent implements OnInit {
   setInternetPurchase(internetPurchase: boolean) {
     this.report.internetPurchase = internetPurchase;
     if (this.report.internetPurchase) {
-      this.report.category = 'Problème suite à un achat sur internet';
+      this.report.category = this.anomalyService.getAnomalyByCategoryId('PBINT').category;
       this.reportService.changeReportFromStep(this.report, Step.Category);
       this.reportRouterService.routeForward(Step.Category);
     }

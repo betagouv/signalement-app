@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
 import { Company } from '../model/Company';
 import { Subcategory } from '../model/Anomaly';
+import { UploadedFile } from '../model/UploadedFile';
 
 describe('ReportService', () => {
 
@@ -72,7 +73,10 @@ describe('ReportService', () => {
     it('should post an http request with data to the report creation API', (done) => {
 
       const anomalyDate = new Date(2018, 2, 1);
-      const anomalyFile = new File([], 'anomaly.jpg');
+      const anomalyFile = Object.assign(new UploadedFile(), {
+        id: '856cdf46-a8c2-436d-a34c-bb303ff108a6',
+        filename: 'anomaly.jpg'
+      });
       const subcategory = new Subcategory();
       subcategory.title = 'sous catégorie';
       const reportDetails = new ReportDetails();
@@ -80,7 +84,7 @@ describe('ReportService', () => {
       reportDetails.description = 'desc';
       reportDetails.anomalyDate = anomalyDate;
       reportDetails.anomalyTimeSlot = 5;
-      reportDetails.anomalyFile = anomalyFile;
+      reportDetails.uploadedFiles = [anomalyFile];
       const consumer = new Consumer();
       consumer.lastName = 'lastName';
       consumer.firstName = 'firstName';
@@ -106,19 +110,18 @@ describe('ReportService', () => {
       reportRequest.flush({});
 
       httpMock.verify();
-      expect(reportRequest.request.body.get('category')).toBe('category');
-      expect(reportRequest.request.body.get('subcategory')).toBe('sous catégorie');
-      expect(reportRequest.request.body.get('precision')).toBe('precision');
-      expect(reportRequest.request.body.get('companyName')).toBe('companyName');
-      expect(reportRequest.request.body.get('companyAddress')).toBe('line 1 - line 2 - line 4');
-      expect(reportRequest.request.body.get('description')).toBe('desc');
-      expect(reportRequest.request.body.get('anomalyDate')).toBe('2018-03-01');
-      expect(reportRequest.request.body.get('anomalyTimeSlot')).toBe('5');
-      expect(reportRequest.request.body.get('lastName')).toBe('lastName');
-      expect(reportRequest.request.body.get('lastName')).toBe('lastName');
-      expect(reportRequest.request.body.get('email')).toBe('email@mail.fr');
-      expect(reportRequest.request.body.get('ticketFile')).toBeNull();
-      expect(reportRequest.request.body.get('anomalyFile').name).toBe(anomalyFile.name);
+      expect(reportRequest.request.body['category']).toBe('category');
+      expect(reportRequest.request.body['subcategory']).toBe('sous catégorie');
+      expect(reportRequest.request.body['precision']).toBe('precision');
+      expect(reportRequest.request.body['companyName']).toBe('companyName');
+      expect(reportRequest.request.body['companyAddress']).toBe('line 1 - line 2 - line 4');
+      expect(reportRequest.request.body['description']).toBe('desc');
+      expect(reportRequest.request.body['anomalyDate']).toBe('2018-03-01');
+      expect(reportRequest.request.body['anomalyTimeSlot']).toBe(5);
+      expect(reportRequest.request.body['lastName']).toBe('lastName');
+      expect(reportRequest.request.body['lastName']).toBe('lastName');
+      expect(reportRequest.request.body['email']).toBe('email@mail.fr');
+      expect(reportRequest.request.body['fileIds']).toEqual([anomalyFile.id]);
     });
 
   });

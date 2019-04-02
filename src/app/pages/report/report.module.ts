@@ -9,7 +9,6 @@ import { CompanyComponent } from './company/company.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
-import { FileInputComponent } from '../../components/file-input/file-input.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModule, BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
@@ -40,7 +39,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ReportComponent,
-    FileInputComponent,
     CompanyComponent,
     DetailsComponent,
     BreadcrumbComponent,
