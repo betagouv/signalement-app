@@ -35,6 +35,10 @@ export class ReportService {
     });
   }
 
+  removeReport() {
+    this.reportSource.next(undefined);
+  }
+
   removeReportFromStorage() {
     this.reportSource.getValue().retrievedFromStorage = false;
     this.localStorage.removeItemSubscribe(ReportStorageKey);

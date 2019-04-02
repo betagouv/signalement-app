@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
@@ -58,8 +58,8 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
         result => {
           this.loading = false;
-          this.reportService.removeReportFromStorage();
           this.reportService.changeReportFromStep(this.report, this.step);
+          this.reportService.removeReportFromStorage();
           this.reportRouterService.routeForward(this.step);
         },
         error => {
