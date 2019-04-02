@@ -9,19 +9,30 @@ import { Anomaly, AnomalyList } from '../model/Anomaly';
 })
 export class AnomalyService {
 
-  constructor() { }
+  anomalies: Anomaly[];
+
+  constructor() {
+    this.anomalies = this.getAnomalies();
+  }
 
   getAnomalies() {
-    return deserialize(AnomalyList, anomalies).list;
+    if (!this.anomalies) {
+      this.anomalies = deserialize(AnomalyList, anomalies).list;
+    }
+    return this.anomalies;
+  }
+
+  getAnomalyBy(predicate: (anomaly) => boolean) {
+    return this.getAnomalies()
+      .find(predicate);
   }
 
   getAnomalyByCategory(category: String) {
-    return this.getAnomalies()
-      .find(anomaly => anomaly.category === category);
+    return this.getAnomalyBy(anomaly => anomaly.category === category);
   }
 
-  findAnomalyOfCategory(anomalies: Anomaly[], category: String) {
-    return anomalies.find(anomaly => anomaly.category === category);
+  getAnomalyByCategoryId(categoryId: String) {
+    return this.getAnomalyBy(anomaly => anomaly.categoryId === categoryId);
   }
 
 }

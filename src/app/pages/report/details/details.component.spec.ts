@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
@@ -50,6 +50,7 @@ describe('DetailsComponent', () => {
         BsDatepickerModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
         NgxLoadingModule,
+        NoopAnimationsModule
       ],
     })
       .overrideTemplate(BreadcrumbComponent, '')
