@@ -35,6 +35,11 @@ export class ReportService {
     });
   }
 
+  removeReport() {
+    this.removeReportFromStorage();
+    this.reportSource.next(undefined);
+  }
+
   removeReportFromStorage() {
     this.reportSource.getValue().retrievedFromStorage = false;
     this.localStorage.removeItemSubscribe(ReportStorageKey);
@@ -47,48 +52,43 @@ export class ReportService {
     this.localStorage.setItemSubscribe(ReportStorageKey, report);
   }
 
-  createReport(report: Report) {
+  uploadFile(file: File) {
+    const fileFormData: FormData = new FormData();
+    fileFormData.append('reportFile', file, file.name);
     return this.http.post(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-      this.generateReportFormData(report),
+      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files']),
+      fileFormData,
     );
   }
 
-  private generateReportFormData(report: Report) {
+  createReport(report: Report) {
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
+      this.generateReportToPost(report),
+    );
+  }
 
-    const reportFormData: FormData = new FormData();
-    reportFormData.append('category', report.category);
-    if (report.subcategory) {
-      reportFormData.append('subcategory', report.subcategory.title);
-    }
-    if (report.details.precision) {
-      reportFormData.append('precision', this.getDetailsPrecision(report.details));
-    }
-    reportFormData.append('companyName', report.company.name);
-    reportFormData.append('companyAddress', this.getCompanyAddress(report.company));
-    reportFormData.append('companyPostalCode', report.company.postalCode);
-    if (report.company.siret) {
-      reportFormData.append('companySiret', report.company.siret);
-    }
-    reportFormData.append('anomalyDate', moment(report.details.anomalyDate).format('YYYY-MM-DD'));
+  private generateReportToPost(report: Report) {
+    const reportToPost = {
+      'category': report.category,
+      'subcategory': report.subcategory ? report.subcategory.title : '',
+      'precision': report.details.precision ? this.getDetailsPrecision(report.details) : '',
+      'companyName': report.company.name,
+      'companyAddress': this.getCompanyAddress(report.company),
+      'companyPostalCode': report.company.postalCode,
+      'companySiret': report.company.siret,
+      'anomalyDate': moment(report.details.anomalyDate).format('YYYY-MM-DD'),
+      'description': report.details.description,
+      'firstName': report.consumer.firstName,
+      'lastName': report.consumer.lastName,
+      'email': report.consumer.email,
+      'contactAgreement': report.contactAgreement,
+      'fileIds': report.details.uploadedFiles.map(f => f.id)
+    };
     if (report.details.anomalyTimeSlot) {
-      reportFormData.append('anomalyTimeSlot', report.details.anomalyTimeSlot.toString());
+      reportToPost['anomalyTimeSlot'] = Number(report.details.anomalyTimeSlot);
     }
-    if (report.details.ticketFile) {
-      reportFormData.append('ticketFile', report.details.ticketFile, report.details.ticketFile.name);
-    }
-    if (report.details.anomalyFile) {
-      reportFormData.append('anomalyFile', report.details.anomalyFile, report.details.anomalyFile.name);
-    }
-    reportFormData.append('description', report.details.description);
-    reportFormData.append('firstName', report.consumer.firstName);
-    reportFormData.append('lastName', report.consumer.lastName);
-    reportFormData.append('email', report.consumer.email);
-    if (report.contactAgreement) {
-      reportFormData.append('contactAgreement', report.contactAgreement.toString());
-    }
-
-    return reportFormData;
+    return reportToPost;
   }
 
   getDetailsPrecision(details: ReportDetails) {

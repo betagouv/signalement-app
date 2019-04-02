@@ -80,27 +80,52 @@
         </div>
       </div>
 
+      <hr />
       <div class="form__group">
         <label>
-          Photos du problème / produit / ticket de caisse (facultatif)
+          <img alt="Icône du bouton joindre" src="/assets/images/icon_attachment.png">
+          Pièces jointes
         </label>
-        <div class="row">
-          <div class="col-12">
-              <app-file-input
-                [placeholder]="'Photo du ticket de caisse'"
-                (fileSelected)="onTicketFileSelected($event)">
-              </app-file-input>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <app-file-input
-              [placeholder]="'Photo du problème'"
-              (fileSelected)="onAnomalyFileSelected($event)">
-            </app-file-input>
+        <div class="row text-center">
+          <div class="col-12 offset-md-6 col-md-6">
+            <table class="table table-sm">
+              <tbody>
+                <tr *ngFor="let uploadedFile of uploadedFiles">
+                  <td class="text-left" style="position: relative" *ngIf="uploadedFile.loading" colspan="2">
+                    {{uploadedFile.displayedFilename}}
+                    <ngx-loading [show]="uploadedFile.loading" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
+                  </td>
+                  <td class="text-left" *ngIf="!uploadedFile.loading">
+                    <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                      <span [class]="uploadedFile.id ? '' : 'error'">
+                        {{uploadedFile.displayedFilename}}
+                      </span>
+                    </a>
+                  </td>
+                  <td class="text-right pointer" *ngIf="!uploadedFile.loading">
+                    <img alt="Icône du bouton suivant" src="/assets/images/icon_remove.png" (click)="removeUploaderFile(uploadedFile)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+        <div class="notification error" *ngIf="tooLargeFilename">
+          Le fichier <i>"{{tooLargeFilename}}"</i> est trop volumineux, veuillez choisir un fichier de moins de 5Mo.
+        </div>
+        <div class="row pb-3">
+          <div class="col-12 text-center">
+            <input type="file" #fileInput class="form-control-file" hidden (change)="selectFile()">
+            <button type="button" class="btn btn-outline-primary"(click)="bringFileSelector()">
+              Ajouter une pièce jointe
+            </button>
+          </div>
+        </div>
+        <div class="note">
+          Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part du professionnel.
+        </div>
       </div>
+      <hr />
       <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
         <span *ngIf="anomalyDateCtrl.hasError('required')">
           Veuillez renseigner la date du constat.<br />
@@ -109,8 +134,7 @@
           Veuillez préciser.
         </span>
       </div>
-      <hr />
-      <button type="submit" class="btn btn-lg btn-primary">
+      <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
         <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
         Identifier le commerçant
       </button>

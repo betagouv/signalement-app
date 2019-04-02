@@ -8,6 +8,7 @@ export class ServiceUtils {
 
 
   getUrl(api: Api, urlParams: string[]) {
+    urlParams = urlParams.map(p => encodeURIComponent(p));
     return urlParams.reduce((acc, param) => `${acc}/${param}`, environment[api]);
   }
 

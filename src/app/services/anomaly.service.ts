@@ -11,7 +11,7 @@ export class AnomalyService {
 
   anomalies: Anomaly[];
 
-  constructor() { 
+  constructor() {
     this.anomalies = this.getAnomalies();
   }
 
@@ -33,10 +33,6 @@ export class AnomalyService {
 
   getAnomalyByCategoryId(categoryId: String) {
     return this.getAnomalyBy(anomaly => anomaly.categoryId === categoryId);
-  }
-
-  findAnomalyOfCategory(anomalies: Anomaly[], category: String) {
-    return anomalies.find(anomaly => anomaly.category === category);
   }
 
 }
