@@ -322,7 +322,32 @@
           "title": "Indisponibilité des produits du catalogue",
           "subcategories": [
             {
-              "title": "Produit affiché dans le catalogue non disponible dans le magasin"
+              "title": "Produit affiché dans le catalogue non disponible dans le magasin",
+              "detailInputs": [
+                {
+                  "label": "Date du constat",
+                  "rank": 1,
+                  "type": "DATE",
+                  "placeholder": "Date du constat"
+                },
+                {
+                  "label": "Où avez-vous vu la publicité ?",
+                  "rank": 2,
+                  "type": "RADIO",
+                  "options": ["Internet", "Catalogue papier"]
+                },
+                {
+                  "label": "De quel produit s'agissait-il ?",
+                  "rank": 3,
+                  "type": "TEXT",
+                  "placeholder": "Nom du produit"
+                },
+                {
+                  "label": "Photo du catalogue",
+                  "rank": 4,
+                  "type": "FILE"
+                }
+              ]
             },
             {
               "title": "Produit proposé sur le menu/carte non disponible à la vente"

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { FileInputComponent } from '../../../components/file-input/file-input.component';
 import { Report, ReportDetails } from '../../../model/Report';
-import { Precision, Subcategory, SubcategoryDetails } from '../../../model/Anomaly';
+import { DetailInput, Precision, Subcategory, SubcategoryDetails } from '../../../model/Anomaly';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
@@ -30,6 +30,25 @@ describe('DetailsComponent', () => {
   reportDetailsFixture.anomalyTimeSlot = 5;
   reportDetailsFixture.ticketFile = undefined;
   reportDetailsFixture.anomalyFile = anomalyFileFixture;
+
+  const textDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'texte label',
+    rank: 1,
+    type: 'TEXT'
+  });
+
+  const dateDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'date label',
+    rank: 2,
+    type: 'DATE'
+  });
+
+  const radioDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'radio label',
+    rank: 3,
+    type: 'RADIO',
+    options: ['OPTION1', 'OPTION2']
+  });
 
   beforeEach(async(() => {
     defineLocale('fr', frLocale);
@@ -101,6 +120,57 @@ describe('DetailsComponent', () => {
     it ('should define the plageHoraireList to display', () => {
       expect(component.plageHoraireList).toBeDefined();
       expect(component.plageHoraireList.length).toBe(24);
+    });
+
+  });
+
+
+
+  describe('case of report subcategory with only a text detail input', () => {
+
+    const reportWithSubcategory = new Report();
+    reportWithSubcategory.subcategories = [new Subcategory()];
+    reportWithSubcategory.subcategories[0].detailInputs = [textDetailInputFixture];
+
+    beforeEach(() => {
+      reportService = TestBed.get(ReportService);
+      reportService.currentReport = of(reportWithSubcategory);
+
+      fixture = TestBed.createComponent(DetailsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should initialize the form inputs with anomaly details input', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelectorAll('input').length).toEqual(1);
+      expect(nativeElement.querySelector('input[type="text"]#formControl_1')).not.toBeNull();
+    });
+
+  });
+
+  describe('case of report subcategory with several detail inputs', () => {
+
+    const reportWithSubcategory = new Report();
+    reportWithSubcategory.subcategories = [new Subcategory()];
+    reportWithSubcategory.subcategories[0].detailInputs = [dateDetailInputFixture, textDetailInputFixture, radioDetailInputFixture];
+
+    beforeEach(() => {
+      reportService = TestBed.get(ReportService);
+      reportService.currentReport = of(reportWithSubcategory);
+
+      fixture = TestBed.createComponent(DetailsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should initialize the form inputs with anomaly details input', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelectorAll('input').length).toEqual(4);
+      expect(nativeElement.querySelector('input[type="text"]#formControl_1')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="text"]#formControl_2')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_OPTION1')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_OPTION2')).not.toBeNull();
     });
 
   });

@@ -5,7 +5,7 @@ import { BsLocaleService } from 'ngx-bootstrap';
 import { otherPrecisionValue, ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
-import { Information } from '../../../model/Anomaly';
+import { DetailInput, Information } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-details',
@@ -53,22 +53,42 @@ export class DetailsComponent implements OnInit {
   }
 
   initDetailsForm() {
+
     this.showErrors = false;
+    if (this.report.lastSubcategory && this.report.lastSubcategory.detailInputs) {
+      this.detailsForm = this.formBuilder.group({});
+      this.report.lastSubcategory.detailInputs.forEach(detailInput => {
+        this.detailsForm.addControl(this.getFormControlName(detailInput), this.formBuilder.control('', Validators.required));
+      });
+    } else {
 
-    this.descriptionCtrl = this.formBuilder.control(this.report.details ? this.report.details.description : '');
-    this.anomalyDateCtrl = this.formBuilder.control(
-      this.report.details ? this.report.details.anomalyDate : new Date(), Validators.required
-    );
-    this.anomalyTimeSlotCtrl = this.formBuilder.control(this.report.details ? this.report.details.anomalyTimeSlot : '');
+      this.descriptionCtrl = this.formBuilder.control(this.report.details ? this.report.details.description : '');
+      this.anomalyDateCtrl = this.formBuilder.control(
+        this.report.details ? this.report.details.anomalyDate : new Date(), Validators.required
+      );
+      this.anomalyTimeSlotCtrl = this.formBuilder.control(this.report.details ? this.report.details.anomalyTimeSlot : '');
 
-    this.detailsForm = this.formBuilder.group({
-      anomalyDate: this.anomalyDateCtrl,
-      anomalyTimeSlot: this.anomalyTimeSlotCtrl,
-      description: this.descriptionCtrl
-    });
+      this.detailsForm = this.formBuilder.group({
+        anomalyDate: this.anomalyDateCtrl,
+        anomalyTimeSlot: this.anomalyTimeSlotCtrl,
+        description: this.descriptionCtrl
+      });
 
-    if (this.report.lastSubcategory && this.report.lastSubcategory.details && this.report.lastSubcategory.details.precision) {
-      this.initPrecisionsCtrl();
+      if (this.report.lastSubcategory && this.report.lastSubcategory.details && this.report.lastSubcategory.details.precision) {
+        this.initPrecisionsCtrl();
+      }
+    }
+  }
+
+  getFormControlName(detailInput: DetailInput) {
+    return `formControl_${detailInput.rank}`;
+  }
+
+  getFormControlId(detailInput: DetailInput, option?: String) {
+    if (option) {
+      return `formControl_${detailInput.rank}_${option}`;
+    } else {
+      return `formControl_${detailInput.rank}`;
     }
   }
 

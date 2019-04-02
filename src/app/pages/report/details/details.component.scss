@@ -3,8 +3,10 @@
 
 .notification {
 
-  border: none;
-  margin: 0 2em 1em 2em;
+  &.success {
+    border: none;
+    margin: 0 2em 1em 2em;
+  }
 
   h4 {
     text-align: center;
