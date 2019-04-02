@@ -56,6 +56,7 @@ export class CategoryComponent implements OnInit {
     if (this.anomalies) {
       return this.anomalies
         .filter(a => a.rank >= 100)
+        .filter(a => !a.hidden)
         .sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
     }
   }

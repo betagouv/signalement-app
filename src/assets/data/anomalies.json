@@ -410,6 +410,7 @@
     {
       "category": "Travail au noir",
       "categoryId": "TNOIR",
+      "hidden": true,
       "rank" : 104,
       "breadcrumbTitle": "Vous souhaitez signaler un cas de travail au noir ?",
       "information": {
