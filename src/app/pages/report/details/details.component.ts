@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
@@ -8,13 +8,9 @@ import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { Information } from '../../../model/Anomaly';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import { UploadedFile } from '../../../model/UploadedFile';
+import { FileUploaderService } from '../../../services/file-uploader.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-details',
@@ -52,20 +48,23 @@ export class DetailsComponent implements OnInit {
   anomalyTimeSlotCtrl: FormControl;
   descriptionCtrl: FormControl;
 
+  @ViewChild('fileInput') fileInput;
+
   plageHoraireList: number[];
-  ticketFile: File;
-  anomalyFile: File;
+  uploadedFiles: UploadedFile[];
 
   showErrors: boolean;
+  tooLargeFilename: string;
   keywordsDetected: Keyword;
 
   constructor(public formBuilder: FormBuilder,
-    private reportService: ReportService,
-    private reportRouterService: ReportRouterService,
-    private analyticsService: AnalyticsService,
-    private localeService: BsLocaleService,
-    private keywordService: KeywordService,
-    private anomalyService: AnomalyService) {
+              private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
+              private analyticsService: AnalyticsService,
+              private fileUploaderService: FileUploaderService,
+              private localeService: BsLocaleService,
+              private keywordService: KeywordService,
+              private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
@@ -74,6 +73,7 @@ export class DetailsComponent implements OnInit {
       if (report) {
         this.report = report;
         this.initDetailsForm();
+        this.initUploadedFiles();
         this.constructPlageHoraireList();
       } else {
         this.reportRouterService.routeToFirstStep();
@@ -103,6 +103,22 @@ export class DetailsComponent implements OnInit {
     if (this.report.subcategory && this.report.subcategory.details && this.report.subcategory.details.precision) {
       this.initPrecisionsCtrl();
     }
+  }
+
+  initUploadedFiles() {
+    if (this.report.details && this.report.details.uploadedFiles) {
+      this.uploadedFiles = this.report.details.uploadedFiles;
+    } else {
+      this.uploadedFiles = [];
+    }
+  }
+
+  removeUploaderFile(uploadedFile: UploadedFile) {
+    this.uploadedFiles.splice(
+      this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
+      1
+    );
+    this.fileUploaderService.deleteFile(uploadedFile).subscribe();
   }
 
   initPrecisionsCtrl() {
@@ -143,12 +159,8 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  onTicketFileSelected(file: File) {
-    this.ticketFile = file;
-  }
-
-  onAnomalyFileSelected(file: File) {
-    this.anomalyFile = file;
+  onFileUploaded(uploadedFile: UploadedFile) {
+    this.uploadedFiles.push(uploadedFile);
   }
 
   submitDetailsForm() {
@@ -167,8 +179,7 @@ export class DetailsComponent implements OnInit {
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
-      reportDetails.ticketFile = this.ticketFile;
-      reportDetails.anomalyFile = this.anomalyFile;
+      reportDetails.uploadedFiles = this.uploadedFiles.filter(file => file.id);
       this.report.details = reportDetails;
       this.reportService.changeReportFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
@@ -189,27 +200,58 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  bringFileSelector() {
+    this.fileInput.nativeElement.click();
+  }
+
+  selectFile() {
+    this.tooLargeFilename = undefined;
+    if (this.fileInput.nativeElement.files[0]) {
+      if (this.fileInput.nativeElement.files[0].size > fileSizeMax) {
+        this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
+      } else {
+        const fileToUpload = new UploadedFile();
+        fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
+        fileToUpload.displayedFilename = this.textOverflowMiddleCropping(fileToUpload.filename, 32);
+        fileToUpload.loading = true;
+        this.uploadedFiles.push(fileToUpload);
+        this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
+          fileToUpload.loading = false;
+          fileToUpload.id = uploadedFile.id;
+        }, error => {
+          fileToUpload.loading = false;
+          fileToUpload.displayedFilename = `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
+        });
+      }
+    }
+  }
+
+  isUploadingFile() {
+    return this.uploadedFiles.find(file => file.loading);
+  }
+
+  textOverflowMiddleCropping(text: string, limit: number) {
+    return text.length > limit ? `${text.substr(0, limit / 2)}...${text.substr(text.length - (limit / 2), text.length)}` : text;
+  }
+
+  getFileDownloadUrl(uploadedFile: UploadedFile) {
+    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
+  }
+
   searchKeywords() {
-    
     const res = this.keywordService.search(this.descriptionCtrl.value);
-    
     if (!res) {
       this.keywordsDetected = null;
-
     } else {
       const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
-
       if (anomaly) {
         this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.keywordsDetection, JSON.stringify(res.found.map(elt => elt.expression)));
-
         this.keywordsDetected = {
           category: anomaly.category,
           message: anomaly.information ? anomaly.information.title : ''
         };
-
       } else {
         this.keywordsDetected = null;
-
       }
     }
   }
@@ -222,7 +264,6 @@ export class DetailsComponent implements OnInit {
 
     this.reportService.changeReportFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
-
   }
 }
 
@@ -230,3 +271,5 @@ interface Keyword {
   readonly category: string;
   readonly message: string;
 }
+
+export const fileSizeMax = 5000000;

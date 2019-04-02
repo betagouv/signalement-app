@@ -1,3 +1,15 @@
 @import "../../../../theme/variables";
 
+ul.filename {
+
+  padding-left: 1em;
+
+  li {
+    a {
+      word-break: break-all;
+    }
+  }
+}
+
+
 
