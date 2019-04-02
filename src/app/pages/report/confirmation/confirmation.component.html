@@ -37,6 +37,23 @@
           <br />
           Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
         </div>
+        <div class="row mt-2" *ngIf="report.details.uploadedFiles && report.details.uploadedFiles.length; else noUploadedFiles">
+          Pièce(s) jointe(s) :
+          <div class="col-12">
+            <ul class="filename">
+              <li *ngFor="let uploadedFile of report.details.uploadedFiles">
+                <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                  {{uploadedFile.filename}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <ng-template #noUploadedFiles>
+          <div class="row mt-2">
+               Aucune pièce jointe
+          </div>
+        </ng-template>
       </div>
 
       <div class="notification error mt-3" *ngIf="loadingError">

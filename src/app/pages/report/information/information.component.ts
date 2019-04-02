@@ -47,8 +47,8 @@ export class InformationComponent implements OnInit {
   }
 
   newReport() {
-    this.reportService.changeReportFromStep(this.report, this.step);
-    this.reportRouterService.routeForward(this.step);
+    this.reportService.removeReport();
+    this.reportRouterService.routeToFirstStep();
   }
 
   ngOnDestroy() {

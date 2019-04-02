@@ -19,7 +19,7 @@ export class CompanyService {
 
   searchCompanies(search: string, searchPostalCode: string) {
     return this.http.get(
-      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', `${search}?code_postal=${searchPostalCode}&per_page=${MaxCompanyResult}`])
+      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]).concat(`?code_postal=${searchPostalCode}&per_page=${MaxCompanyResult}`)
     ).pipe(
       map(result => deserialize(CompanySearchResult, result)),
       catchError(err => {
