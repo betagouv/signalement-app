@@ -36,6 +36,7 @@ export class ReportService {
   }
 
   removeReport() {
+    this.removeReportFromStorage();
     this.reportSource.next(undefined);
   }
 
