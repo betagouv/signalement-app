@@ -9,7 +9,7 @@
       
       <div class="card mx-auto mb-4 rounded-lg" *ngFor="let action of informationToDisplay?.actions">
         <div class="card-body">
-          <p class="card-title">{{ action.question }}</p>
+          <p class="card-text">{{ action.question }}</p>
           <p class="card-text text-muted" *ngIf="action.example">{{ action.example }}</p>
         </div>
         <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
