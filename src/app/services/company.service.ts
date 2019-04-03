@@ -40,7 +40,7 @@ export class CompanyService {
     httpParams = httpParams.append('radius', Radius.toString());
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'nearby/']),
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'nearby', '']),
       {
         params: httpParams
       }
