@@ -26,6 +26,7 @@ export class CompanyComponent implements OnInit {
   report: Report;
 
   around: boolean;
+
   searchForm: FormGroup;
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
@@ -94,10 +95,15 @@ export class CompanyComponent implements OnInit {
 
   isAround() {
     this.around = true;
+    this.showErrors = false;
+    this.initSearch();
+
   }
 
   isNotAround() {
     this.around = false;
+    this.showErrors = false;
+    this.initSearch();
   }
 
   searchCompany() {
@@ -125,6 +131,10 @@ export class CompanyComponent implements OnInit {
               } else {
                 this.treatCaseSeveralResults(companySearchResult);
               }
+            },
+            error => {
+              this.loading = false;
+              this.treatCaseError();
             }
           );
         }, (error) => {
