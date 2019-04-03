@@ -14,10 +14,6 @@
   }
 }
 
-.max-width {
-  max-width: 750px;
-}
-
 .banner {
   padding-top: 1.5em;
   padding-bottom: 1.5em;
@@ -81,4 +77,8 @@
 
 .action-lighter-grey {
   background-color: $lighter-grey;
+}
+
+.title {
+  font-size: 1.125rem;
 }
