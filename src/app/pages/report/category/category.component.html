@@ -21,7 +21,7 @@
   <section class="section section-lighter-grey py-3">
     <div class="container">
       <nav class="nav nav-pills nav-justified">
-        <a class="nav-item nav-link" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
+        <a class="nav-item nav-link light" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
         <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Service)" [ngClass]="{'active': selectedCompanyType == companyType.Service}">Prestations de service</a>
         <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Internet)" [ngClass]="{'active': selectedCompanyType == companyType.Internet}">Achats sur internet</a>
       </nav>
@@ -78,14 +78,15 @@
       </div>
     </div>
 
-    <div class="container" *ngIf="selectedCompanyType == companyType.Internet">
-      <h4 class="mx-auto w-75 text-center" [innerHTML]="internetInformation?.title"></h4>
-      <hr class="my-4 w-75 text-center mx-auto" />
+    <div class="container max-width" *ngIf="selectedCompanyType == companyType.Internet">
+      <p class="mx-auto mb-4 text-center title" [innerHTML]="internetInformation?.title"></p>
+
       <p class="mb-4 text-center">{{ internetInformation?.subTitle }}</p>
-      <p [innerHTML]="internetInformation?.content"></p>
-      <div class="card mb-4 rounded-lg" *ngFor="let action of internetInformation?.actions">
+      <p class="mb-5" *ngIf="internetInformation?.content" [innerHTML]="internetInformation?.content"></p>
+
+      <div class="card mx-auto mb-4 rounded-lg action" *ngFor="let action of internetInformation?.actions">
         <div class="card-body">
-          <h6 class="card-title">{{ action.question }}</h6>
+          <p class="card-title">{{ action.question }}</p>
           <p class="card-text text-muted" *ngIf="action.example">{{ action.example }}</p>
         </div>
         <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>

@@ -2,20 +2,21 @@
   <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
   <section class="section section-white">
     <div class="container max-width">
-      <h4 class="mx-auto w-75 text-center" [innerHTML]="informationToDisplay?.title"></h4>
-      <hr class="my-4 w-75 text-center mx-auto" />
+      <p class="mx-auto mb-4 text-center title" [innerHTML]="informationToDisplay?.title"></p>
       <p class="mb-4 text-center">{{ informationToDisplay?.subTitle }}</p>
-      <p class="mt-4" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
+      <p class="mb-5" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
       <app-retractation *ngIf="informationToDisplay?.reference === 'retractation'"></app-retractation>
-
-      <div class="card mx-auto mb-4 rounded-lg action" *ngFor="let action of informationToDisplay?.actions">
+      
+      <div class="card mx-auto mb-4 rounded-lg" *ngFor="let action of informationToDisplay?.actions">
         <div class="card-body">
-          <h6 class="card-title">{{ action.question }}</h6>
+          <p class="card-title">{{ action.question }}</p>
           <p class="card-text text-muted" *ngIf="action.example">{{ action.example }}</p>
         </div>
         <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
       </div> 
       
+      <hr class="mb-6" />
+
       <button class="btn btn-lg btn-primary mx-auto" (click)="newReport()">
         Identifier un autre problème
       </button>

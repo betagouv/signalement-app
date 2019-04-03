@@ -117,7 +117,11 @@
           "description": "Présence de quelque chose de \"dur\" dans le produit. <br/>Exemples : bout de verre, morceau de métal..",
           "information": {
             "title": "Vous souhaitez signaler la présence d'un corps étranger \"dur\"",
-            "content": "Ce cas représente une alerte et nécessite une analyse individualisée.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4211\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4211</a>"
+            "subTitle": "Ce cas représente une alerte et nécessite une analyse individualisée.",
+            "actions": [{
+              "question" : "Signaler la présence d'un corps étranger \"dur\"?",
+              "answer": "Signaler à la DGCCRF<br><a href=\"https://www.economie.gouv.fr/courrier/4211\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4211</a>"
+            }]
           }
         },
         {
@@ -217,7 +221,11 @@
           "description": "Exemples : brûlure, picotement, démangeaison, allergie",
           "information": {
             "title": "Vous souhaitez signaler un effet indésirable sur la santé",
-            "content": "Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
+            "subTitle": "Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.",
+            "actions": [{
+              "question" : "Signaler un effet indésirable sur la santé?",
+              "answer": "Signaler à la DGCCRF<br><a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
+            }]
           }
         },
         {
@@ -225,7 +233,12 @@
           "description": "Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...",
           "information": {
             "title": "Vous souhaitez signaler un produit dangereux",
-            "content": "Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
+            "subTitle": "Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.",
+            "actions": [{
+              "question" : "Signaler un produit dangereux?",
+              "answer": "Signaler à la DGCCRF<br><a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
+            }]
+
           }
         },
         {
@@ -251,7 +264,11 @@
       "icon": "icon_disease.png",
       "information": {
         "title": "Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.",
-        "content": "Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs. <br/><br/>Veuillez remplir le formulaire \"Courrier\" de la <abbr title=\"Direction Général de la Concurrence, Consommation et Répression des Fraudes\">DGCCRF</abbr> en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4210\" target=\"_blank\" />Contact Hygiène et intoxication</a>"
+        "subTitle": "Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.",
+        "actions": [{
+          "question" : "Signaler un cas d'intoxication alimentaire?",
+          "answer": "Signaler à la DGCCRF<br><a href=\"https://www.economie.gouv.fr/courrier/4210\" target=\"_blank\" />https://www.economie.gouv.fr/courrier/4210</a>"
+        }]
       }
 
     },
@@ -379,7 +396,11 @@
           "description": "Exemples : l'accueil est froid, le personnel est mal poli",
           "information": {
             "title": "Ceci ne constitue pas un motif de signalement.",
-            "content": "Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client ! <br/>Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.<br/><br/>Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne via ce lien : <a href=\"https://www.pre-plainte-en-ligne.gouv.fr\" target=\"_blank\">https://www.pre-plainte-en-ligne.gouv.fr</a>"
+            "subTitle": "Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client ! Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement. Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne",
+            "actions": [{
+              "question" : "Signaler un cas de harcèlement ou d'injure?",
+              "answer": "Faire une pré-plainte en ligne<br><a href=\"https://www.pre-plainte-en-ligne.gouv.fr\" target=\"_blank\">https://www.pre-plainte-en-ligne.gouv.fr</a>"
+            }]
           }
         },
         {
@@ -398,14 +419,14 @@
         "actions": [{
           "question" : "Un problème avec un commerçant ?",
           "example": "Colis non reçu, pas de nouvelle de votre commande, etc.",
-          "answer": "Vous pouvez saisir la DGCCRF avec le formulaire disponible ici : <br><a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a>"
+          "answer": "Signaler à la DGCCRF<br><a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a>"
         }, {
           "question" : "Un spam que vous avez reçu ?",
-          "answer": "Vous pouvez le signaler ici : <br><a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a>"
+          "answer": "Signaler sur Signal-Spam<br><a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a>"
         }, {
           "question" : "Un contenu qui vous semble inapproprié ?",
           "example": "Trafic illicite, pédopornographie, etc.",
-          "answer": "Vous pouvez le signaler ici : <br><a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a>"
+          "answer": "Signaler sur Internet-Signalement<br><a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a>"
         }]
       }
     },
