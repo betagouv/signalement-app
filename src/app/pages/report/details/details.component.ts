@@ -263,19 +263,21 @@ export class DetailsComponent implements OnInit {
   }
 
   searchKeywords() {
-    const res = this.keywordService.search(this.descriptionCtrl.value);
-    if (!res) {
-      this.keywordsDetected = null;
-    } else {
-      const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
-      if (anomaly) {
-        this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.keywordsDetection, JSON.stringify(res.found.map(elt => elt.expression)));
-        this.keywordsDetected = {
-          category: anomaly.category,
-          message: anomaly.information ? anomaly.information.title : ''
-        };
-      } else {
+    if (this.descriptionCtrl) {
+      const res = this.keywordService.search(this.descriptionCtrl.value);
+      if (!res) {
         this.keywordsDetected = null;
+      } else {
+        const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
+        if (anomaly) {
+          this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.keywordsDetection, JSON.stringify(res.found.map(elt => elt.expression)));
+          this.keywordsDetected = {
+            category: anomaly.category,
+            message: anomaly.information ? anomaly.information.title : ''
+          };
+        } else {
+          this.keywordsDetected = null;
+        }
       }
     }
   }
