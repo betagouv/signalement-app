@@ -71,8 +71,7 @@ export class ReportService {
   private generateReportToPost(report: Report) {
     const reportToPost = {
       'category': report.category,
-      //TODO
-      'subcategory': report.subcategories ? report.subcategories.map(subcategory => subcategory.title).reduce((s1, s2) => s1.concat(s2)) : '',
+      'subcategories': report.subcategories.map(subcategory => subcategory.title),
       'precision': report.details.precision ? this.getDetailsPrecision(report.details) : '',
       'companyName': report.company.name,
       'companyAddress': this.getCompanyAddress(report.company),
