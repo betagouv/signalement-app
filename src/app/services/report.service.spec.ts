@@ -77,8 +77,10 @@ describe('ReportService', () => {
         id: '856cdf46-a8c2-436d-a34c-bb303ff108a6',
         filename: 'anomaly.jpg'
       });
-      const subcategory = new Subcategory();
-      subcategory.title = 'sous catégorie';
+      const subcategory1 = new Subcategory();
+      subcategory1.title = 'sous catégorie 1';
+      const subcategory2 = new Subcategory();
+      subcategory2.title = 'sous catégorie 2';
       const reportDetails = new ReportDetails();
       reportDetails.precision = 'precision';
       reportDetails.description = 'desc';
@@ -96,7 +98,7 @@ describe('ReportService', () => {
       company.line4 = 'line 4';
       const report = new Report();
       report.category = 'category';
-      report.subcategories = [subcategory];
+      report.subcategories = [subcategory1, subcategory2];
       report.details = reportDetails;
       report.consumer = consumer;
       report.company = company;
@@ -111,7 +113,7 @@ describe('ReportService', () => {
 
       httpMock.verify();
       expect(reportRequest.request.body['category']).toBe('category');
-      expect(reportRequest.request.body['subcategory']).toBe('sous catégorie');
+      expect(reportRequest.request.body['subcategories']).toEqual([subcategory1.title, subcategory2.title]);
       expect(reportRequest.request.body['precision']).toBe('precision');
       expect(reportRequest.request.body['companyName']).toBe('companyName');
       expect(reportRequest.request.body['companyAddress']).toBe('line 1 - line 2 - line 4');

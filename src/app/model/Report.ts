@@ -10,17 +10,13 @@ export class Report {
   subcategories: Subcategory[];
   company: Company;
   details: ReportDetails;
+  detailInputValues: {label: string, value: string | Date}[];
+  uploadedFiles: UploadedFile[];
   consumer: Consumer;
   contactAgreement: boolean;
   internetPurchase: boolean;
   retrievedFromStorage: boolean;
   storedStep: Step;
-
-  get lastSubcategory() {
-    if (this.subcategories && this.subcategories.length) {
-      return this.subcategories[this.subcategories.length - 1];
-    }
-  }
 
 }
 

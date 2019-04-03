@@ -93,7 +93,7 @@ export class ReportRouterService {
           return Step.Details;
         }
       case Step.Problem:
-        if (this.report.lastSubcategory && this.report.lastSubcategory.information) {
+        if (this.isReportLastSubcategoryInformation()) {
           return Step.Information;
         } else {
           return Step.Details;
@@ -136,5 +136,11 @@ export class ReportRouterService {
       default:
         return Step.Category;
     }
+  }
+
+  isReportLastSubcategoryInformation() {
+    return this.report
+      && this.report.subcategories && this.report.subcategories.length
+      && this.report.subcategories[this.report.subcategories.length - 1].information;
   }
 }

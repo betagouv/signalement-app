@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { otherPrecisionValue, ReportService } from '../../../services/report.service';
@@ -88,11 +88,22 @@ export class DetailsComponent implements OnInit {
   initDetailsForm() {
 
     this.showErrors = false;
-    if (this.report.lastSubcategory && this.report.lastSubcategory.detailInputs) {
+    if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
       this.detailsForm = this.formBuilder.group({});
-      this.report.lastSubcategory.detailInputs.forEach(detailInput => {
-        this.detailsForm.addControl(this.getFormControlName(detailInput), this.formBuilder.control('', Validators.required));
-      });
+      this.getReportLastSubcategory().detailInputs
+        .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
+        .forEach(detailInput => {
+          this.detailsForm.addControl(
+            this.getFormControlName(detailInput),
+            this.formBuilder.control(this.getFormControlInitialValue(detailInput), Validators.required)
+          );
+          if (detailInput.type === 'TEXTAREA') {
+            this.searchKeywords(this.getFormControl(detailInput));
+          }
+          if (detailInput.type === 'RADIO') {
+            this.initRadioPrecision(detailInput, this.getFormControlInitialValue(detailInput) as string);
+          }
+        });
     } else {
 
       this.descriptionCtrl = this.formBuilder.control(this.report.details ? this.report.details.description : '');
@@ -107,26 +118,58 @@ export class DetailsComponent implements OnInit {
         description: this.descriptionCtrl
       });
 
-      if (this.report.lastSubcategory && this.report.lastSubcategory.details && this.report.lastSubcategory.details.precision) {
+      if (this.getReportLastSubcategory() && this.getReportLastSubcategory().details && this.getReportLastSubcategory().details.precision) {
         this.initPrecisionsCtrl();
       }
     }
   }
 
-  getFormControlName(detailInput: DetailInput) {
-    return `formControl_${detailInput.rank}`;
+  getFormControlInitialValue(detailInput: DetailInput) {
+    let value: string | Date = '';
+    if (this.report.detailInputValues) {
+      const detailInputValue = this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
+      if (detailInputValue) {
+        value = detailInputValue.value;
+      }
+    } else if (detailInput.type === 'DATE' && detailInput.defaultValue === 'SYSDATE') {
+      value = new Date();
+    }
+    return value;
   }
 
-  getFormControlId(detailInput: DetailInput, option?: String) {
-    if (option) {
-      return `formControl_${detailInput.rank}_${option}`;
+  getFormControl(detailInput: DetailInput, option?: string) {
+    return this.detailsForm.controls[this.getFormControlName(detailInput, option)];
+  }
+
+  getFormControlName(detailInput: DetailInput, option?: string) {
+    let formControlName = `formControl_${detailInput.rank}`;
+    if (detailInput.options && option) {
+      formControlName = formControlName.concat(`_${detailInput.options.findIndex(o => o === option)}`);
+    }
+    return formControlName;
+  }
+
+  getFormControlId(detailInput: DetailInput, option?: string, precision = false) {
+    if (precision) {
+      return `${this.getFormControlName(detailInput, option)}_precision`;
     } else {
-      return `formControl_${detailInput.rank}`;
+      return this.getFormControlName(detailInput, option);
     }
   }
 
+  /*getFormControlValue(detailInput: DetailInput) {
+    let detailInputValue = this.getFormControl(detailInput).value;
+    if (this.getFormControl(detailInput, detailInputValue)) {
+      const optionValue = this.getFormControl(detailInput, detailInputValue).value;
+      detailInputValue = detailInputValue + optionValue;
+    }
+    return detailInputValue;
+  }*/
+
   initUploadedFiles() {
-    if (this.report.details && this.report.details.uploadedFiles) {
+    if (this.report.uploadedFiles) {
+      this.uploadedFiles = this.report.uploadedFiles;
+    } else if (this.report.details && this.report.details.uploadedFiles) {
       this.uploadedFiles = this.report.details.uploadedFiles;
     } else {
       this.uploadedFiles = [];
@@ -142,7 +185,7 @@ export class DetailsComponent implements OnInit {
   }
 
   initPrecisionsCtrl() {
-    const subcategoryDetailsPrecision = this.report.lastSubcategory.details.precision;
+    const subcategoryDetailsPrecision = this.getReportLastSubcategory().details.precision;
     if (subcategoryDetailsPrecision.severalOptionsAllowed) {
       this.multiplePrecisionCtrl = new FormArray(
         subcategoryDetailsPrecision.options.map(option =>
@@ -189,18 +232,30 @@ export class DetailsComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
-      const reportDetails = new ReportDetails();
-      if (this.getPrecisionFromCtrl()) {
-        reportDetails.precision = this.getPrecisionFromCtrl();
+      if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
+        this.report.detailInputValues = this.getReportLastSubcategory().detailInputs
+          .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
+          .map(detailInput => {
+            return {
+              label: detailInput.label,
+              value: this.getFormControl(detailInput).value
+            };
+          });
+        this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
+      } else {
+        const reportDetails = new ReportDetails();
+        if (this.getPrecisionFromCtrl()) {
+          reportDetails.precision = this.getPrecisionFromCtrl();
+        }
+        if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
+          reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
+        }
+        reportDetails.anomalyDate = this.anomalyDateCtrl.value;
+        reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
+        reportDetails.description = this.descriptionCtrl.value;
+        reportDetails.uploadedFiles = this.uploadedFiles.filter(file => file.id);
+        this.report.details = reportDetails;
       }
-      if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
-        reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
-      }
-      reportDetails.anomalyDate = this.anomalyDateCtrl.value;
-      reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
-      reportDetails.description = this.descriptionCtrl.value;
-      reportDetails.uploadedFiles = this.uploadedFiles.filter(file => file.id);
-      this.report.details = reportDetails;
       this.reportService.changeReportFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
     }
@@ -212,7 +267,7 @@ export class DetailsComponent implements OnInit {
     } else if (this.multiplePrecisionCtrl) {
       return this.multiplePrecisionCtrl.controls
         .map((control, index) => {
-          return control.value ? this.report.lastSubcategory.details.precision.options[index].title : null;
+          return control.value ? this.getReportLastSubcategory().details.precision.options[index].title : null;
         })
         .filter(value => value !== null);
     } else {
@@ -262,9 +317,9 @@ export class DetailsComponent implements OnInit {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
-  searchKeywords() {
-    if (this.descriptionCtrl) {
-      const res = this.keywordService.search(this.descriptionCtrl.value);
+  searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
+    if (formControl) {
+      const res = this.keywordService.search(formControl.value);
       if (!res) {
         this.keywordsDetected = null;
       } else {
@@ -290,6 +345,30 @@ export class DetailsComponent implements OnInit {
 
     this.reportService.changeReportFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
+  }
+
+  getReportLastSubcategory() {
+    if (this.report && this.report.subcategories && this.report.subcategories.length) {
+      return this.report.subcategories[this.report.subcategories.length - 1];
+    }
+  }
+
+  isRadioPrecisionRequired(detailInput: DetailInput, option: string) {
+    return this.getFormControl(detailInput).value === option && option.indexOf('(à préciser)') !== -1;
+  }
+
+  initRadioPrecision(detailInput: DetailInput, checkedOption: string) {
+    if (this.isRadioPrecisionRequired(detailInput, checkedOption)) {
+      this.detailsForm.addControl(
+        this.getFormControlName(detailInput, checkedOption),
+        this.formBuilder.control('', Validators.required)
+      );
+    }
+    detailInput.options.forEach(o => {
+        if (o !== checkedOption) {
+          this.detailsForm.removeControl(this.getFormControlName(detailInput, o));
+        }
+    });
   }
 }
 

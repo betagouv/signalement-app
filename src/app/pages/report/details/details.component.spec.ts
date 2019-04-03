@@ -16,6 +16,7 @@ import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { ReportPaths, Step } from '../../../services/report-router.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { NgxLoadingModule } from 'ngx-loading';
+import moment from 'moment';
 
 describe('DetailsComponent', () => {
 
@@ -42,14 +43,21 @@ describe('DetailsComponent', () => {
   const dateDetailInputFixture = Object.assign(new DetailInput(), {
     label: 'date label',
     rank: 2,
-    type: 'DATE'
+    type: 'DATE',
+    defaultValue: 'SYSDATE'
   });
 
   const radioDetailInputFixture = Object.assign(new DetailInput(), {
     label: 'radio label',
     rank: 3,
     type: 'RADIO',
-    options: ['OPTION1', 'OPTION2']
+    options: ['OPTION1', 'OPTION2 (à préciser)']
+  });
+
+  const textareaDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'description',
+    rank: 4,
+    type: 'TEXTAREA'
   });
 
   beforeEach(async(() => {
@@ -150,13 +158,44 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelector('input[type="text"]#formControl_1')).not.toBeNull();
     });
 
+    it('should display errors on submit', () => {
+      component.detailsForm.controls.formControl_1.setValue('');
+
+      component.submitDetailsForm();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(component.showErrors).toBeTruthy();
+      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
+    });
+
+    it ('should emit and event with a details object which contains form inputs when no errors', () => {
+      component.detailsForm.controls.formControl_1.setValue('valeur');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+
+      const reportExpected = new Report();
+      reportExpected.subcategories = reportWithSubcategory.subcategories;
+      reportExpected.detailInputValues = [{label: textDetailInputFixture.label, value: 'valeur'}];
+      reportExpected.uploadedFiles = [];
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
+    });
+
   });
 
   describe('case of report subcategory with several detail inputs', () => {
 
     const reportWithSubcategory = new Report();
     reportWithSubcategory.subcategories = [new Subcategory()];
-    reportWithSubcategory.subcategories[0].detailInputs = [dateDetailInputFixture, textDetailInputFixture, radioDetailInputFixture];
+    reportWithSubcategory.subcategories[0].detailInputs = [
+      dateDetailInputFixture,
+      textDetailInputFixture,
+      radioDetailInputFixture,
+      textareaDetailInputFixture
+    ];
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
@@ -172,8 +211,58 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelectorAll('input').length).toEqual(4);
       expect(nativeElement.querySelector('input[type="text"]#formControl_1')).not.toBeNull();
       expect(nativeElement.querySelector('input[type="text"]#formControl_2')).not.toBeNull();
-      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_OPTION1')).not.toBeNull();
-      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_OPTION2')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="text"]#formControl_2').value).toEqual(moment(new Date()).format('DD/MM/YYYY'));
+      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_0')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_1')).not.toBeNull();
+      expect(nativeElement.querySelector('textarea#formControl_4')).not.toBeNull();
+    });
+
+    it('should display errors on submit', () => {
+      component.detailsForm.controls.formControl_3.setValue('');
+
+      component.submitDetailsForm();
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(component.showErrors).toBeTruthy();
+      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
+    });
+
+    it('should display an additionnal text input when precision is required', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('input[type="radio"]#formControl_3_1').click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('input[type="text"]#formControl_3_1_precision')).not.toBeNull();
+    });
+
+    it ('should emit and event with a details object which contains form inputs when no errors', () => {
+      component.detailsForm.controls.formControl_1.setValue('valeur');
+      component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
+      component.detailsForm.controls.formControl_4.setValue('ma description');
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('input[type="radio"]#formControl_3_1').click();
+      fixture.detectChanges();
+      nativeElement.querySelector('input[type="text"]#formControl_3_1_precision').value = 'ma précision';
+      nativeElement.querySelector('input[type="text"]#formControl_3_1_precision').dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      nativeElement.querySelector('button[type="submit"]').click();
+      fixture.detectChanges();
+
+      console.log('valid', component.detailsForm.controls.formControl_3_1.hasError('required'))
+
+      const reportExpected = new Report();
+      reportExpected.subcategories = reportWithSubcategory.subcategories;
+      reportExpected.detailInputValues = [
+        {label: textDetailInputFixture.label, value: 'valeur'},
+        {label: dateDetailInputFixture.label, value: anomalyDateFixture},
+        {label: radioDetailInputFixture.label, value: radioDetailInputFixture.options[1]},
+        {label: textareaDetailInputFixture.label, value: 'ma description'}
+      ];
+      reportExpected.uploadedFiles = [];
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
 
   });

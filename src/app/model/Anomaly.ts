@@ -42,6 +42,8 @@ export class DetailInput {
   placeholder?: string;
   @JsonProperty('options')
   options?: string[];
+  @JsonProperty('defaultValue')
+  defaultValue: string;
 
   constructor() {
     this.label = undefined;
@@ -49,6 +51,7 @@ export class DetailInput {
     this.type = undefined;
     this.placeholder = undefined;
     this.options = undefined;
+    this.defaultValue = undefined;
   }
 }
 
@@ -79,6 +82,8 @@ export class Subcategory {
   details?: SubcategoryDetails;
   @JsonProperty({ name: 'detailInputs', clazz: DetailInput })
   detailInputs?: DetailInput[];
+  @JsonProperty('fileLabel')
+  fileLabel?: string;
   @JsonProperty('information')
   information?: Information;
 
@@ -90,6 +95,7 @@ export class Subcategory {
     this.subcategories = undefined;
     this.details = undefined;
     this.detailInputs = undefined;
+    this.fileLabel = undefined;
     this.information = undefined;
   }
 }

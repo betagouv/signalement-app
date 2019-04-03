@@ -166,7 +166,7 @@
         },
         {
           "title": "Produit en retrait/ rappel",
-          "report.lastSubcategory": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
+          "samples": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
         },
         {
           "title": "Autre problème de nourriture"
@@ -209,7 +209,7 @@
         },
         {
           "title": "Produit en retrait/ rappel",
-          "report.lastSubcategory": "Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités"
+          "samples": "Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités"
         },
         {
           "title": "Effet indésirable sur la santé",
@@ -229,7 +229,7 @@
         },
         {
           "title": "Durée de vie trop courte",
-          "report.lastSubcategory": "Vous trouvez que la durée de vie de votre appareil est trop courte.",
+          "samples": "Vous trouvez que la durée de vie de votre appareil est trop courte.",
           "details": {
             "descriptionTips": "Précisez également la date d'achat."
           }
@@ -325,7 +325,7 @@
       "icon": "icon_pub.png",
       "subcategories": [
         {
-          "title": "Indisponibilité des produits du catalogue",
+          "title": "Indisponibilité des produits",
           "subcategories": [
             {
               "title": "Produit affiché dans le catalogue non disponible dans le magasin",
@@ -334,6 +334,7 @@
                   "label": "Date du constat",
                   "rank": 1,
                   "type": "DATE",
+                  "defaultValue": "SYSDATE",
                   "placeholder": "Date du constat"
                 },
                 {
@@ -347,24 +348,106 @@
                   "rank": 3,
                   "type": "TEXT",
                   "placeholder": "Nom du produit"
+                }
+              ],
+              "fileLabel": "Photo(s) du catalogue"
+            },
+            {
+              "title": "Produit proposé sur le menu/carte non disponible à la vente",
+              "detailInputs": [
+                {
+                  "label": "Date du constat",
+                  "rank": 1,
+                  "type": "DATE",
+                  "defaultValue": "SYSDATE",
+                  "placeholder": "Date du constat"
                 },
                 {
-                  "label": "Photo du catalogue",
-                  "rank": 4,
-                  "type": "FILE"
+                  "label": "Où l'avez-vous vu indiqué ?",
+                  "rank": 2,
+                  "type": "TEXT"
+                },
+                {
+                  "label": "De quel type de produit / prestation s'agissait-il ?",
+                  "rank": 3,
+                  "type": "TEXT",
+                  "placeholder": "Type de produit / prestatin"
+                }
+              ],
+              "fileLabel": "Photo si vous avez"
+            },
+            {
+              "title": "Autres",
+              "detailInputs": [
+                {
+                  "label": "Date du constat",
+                  "rank": 1,
+                  "type": "DATE",
+                  "defaultValue": "SYSDATE",
+                  "placeholder": "Date du constat"
+                },
+                {
+                  "label": "Quel type de produit était indisponible ?",
+                  "rank": 2,
+                  "type": "TEXT",
+                  "placeholder": "Type de produit"
+                },
+                {
+                  "label": "Description",
+                  "rank": 3,
+                  "type": "TEXTAREA"
                 }
               ]
-            },
-            {
-              "title": "Produit proposé sur le menu/carte non disponible à la vente"
-            },
-            {
-              "title": "Autres"
             }
           ]
         },
         {
-          "title": "Information mensongère, publicité trompeuse"
+          "title": "Information mensongère, publicité trompeuse",
+          "detailInputs": [
+            {
+              "label": "Date du constat",
+              "rank": 1,
+              "type": "DATE",
+              "defaultValue": "SYSDATE",
+              "placeholder": "Date du constat"
+            },
+            {
+              "label": "Où se trouve cette information ?",
+              "rank": 2,
+              "type": "RADIO",
+              "options": [
+                "Sur l'emballage d'un produit",
+                "Sur l'affichage chez le commerçant",
+                "Dans un catalogue",
+                "Sur un site internet (à préciser)",
+                "Dans une spot télé ou radio",
+                "Dans un contrat ou un devis",
+                "Discours du vendeur",
+                "Catalogue papier"
+              ]
+            },
+            {
+              "label": "Pourquoi estimez-vous cela trompeur ?",
+              "rank": 3,
+              "type": "TEXT",
+              "placeholder": ""
+            },
+            {
+              "label": "Merci de détailler au mieux la situation",
+              "rank": 4,
+              "type": "TEXTAREA"
+            },
+            {
+              "label": "Avez-vous déjà contacté le commerçant pour ce problème ?",
+              "rank": 5,
+              "type": "RADIO",
+              "options": [
+                "Oui",
+                "Non"
+              ]
+            }
+          ],
+          "fileLabel": "Photo(s) si possible"
         }
       ]
     },
