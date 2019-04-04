@@ -1,11 +1,22 @@
 @import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
 .company {
   border: 1px solid #c9d3df;
   padding-left: 0.5em;
   padding-right: 0.5em;
   cursor: pointer;
+  transition: all .2s ease-in-out;
+  
+  @media #{$larger-than-tablet} {
+    &:hover {
+      transform: scale(1.1);
+      border-color: $primary;
+    }
+  }
 }
+
+
 
 :host /deep/ {
 

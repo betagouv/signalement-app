@@ -1,11 +1,11 @@
 <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white position-relative">
-  <div class="container">
+  <div class="container max-width">
     <form (submit)="selectCompany(report?.company)" *ngIf="report?.company; else noCompany">
       <div class="row">
         <div class="col-12 text-center">
-          <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
-          <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
+          <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
+          <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
           <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
           <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
           <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
@@ -86,13 +86,13 @@
 
       <div *ngIf="companies && companies.length">
 
-        <div class="notification warning mt-4">
-          Veuillez sélectionner un établissement dans la liste ci-dessous.
-        </div>
+        <p class="mt-4">
+          Veuillez sélectionner un établissement dans la liste ci-dessous :
+        </p>
 
         <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
-          <span *ngIf="company.line1">{{company.line1}}<br /></span>
-          <span *ngIf="company.line2">{{company.line2}}<br /></span>
+          <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
+          <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
           <span *ngIf="company.line3">{{company.line3}}<br /></span>
           <span *ngIf="company.line4">{{company.line4}}<br /></span>
           <span *ngIf="company.line5">{{company.line5}}<br /></span>
@@ -100,12 +100,12 @@
           <span *ngIf="company.line7">{{company.line7}}<br /></span>
         </p>
 
-        <div class="notification warning mt-4">
+        <div class="notification info mt-4">
           Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
         </div>
       </div>
 
-      <div class="notification error mt-4" *ngIf="searchWarning">
+      <div class="notification warning mt-4" *ngIf="searchWarning">
         <p>
           {{searchWarning}}
         </p>
