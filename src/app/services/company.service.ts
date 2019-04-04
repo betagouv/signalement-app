@@ -19,8 +19,14 @@ export class CompanyService {
   }
 
   searchCompanies(search: string, searchPostalCode: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
+    httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
-      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]).concat(`?code_postal=${searchPostalCode}&per_page=${MaxCompanyResult}`)
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', search]),
+      {
+        params: httpParams
+      }
     ).pipe(
       map(result => deserialize(CompanySearchResult, result)),
       catchError(err => {
@@ -46,8 +52,6 @@ export class CompanyService {
       }
     ).pipe(
       map(result => {
-        //result['etablissement'] = result['etablissements'];
-        //delete result['etablissements'];
         return deserialize(CompanySearchResult, result)
       }),
       catchError(err => {
