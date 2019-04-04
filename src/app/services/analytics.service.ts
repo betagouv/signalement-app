@@ -51,6 +51,7 @@ export enum CompanySearchEventNames {
   tooManyResults = 'Trop de résultat',
   severalResult = 'Plusieurs résultats',
   singleResult = 'Un seul résultat',
+  around = 'A proximité',
   error = 'Erreur technique'
 }
 

@@ -69,6 +69,7 @@ describe('CompanyComponent', () => {
     expect(component.searchForm.controls['search']).toBeDefined();
     expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
     expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
+    expect(nativeElement.querySelector('form#aroundForm')).toBeNull();
     expect(nativeElement.querySelector('form#companyForm')).toBeNull();
   });
 
@@ -88,7 +89,7 @@ describe('CompanyComponent', () => {
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
+      nativeElement.querySelector('button#submitSearchForm').click();
       fixture.detectChanges();
 
       expect(component.companies).toEqual([]);
@@ -114,7 +115,7 @@ describe('CompanyComponent', () => {
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
+      nativeElement.querySelector('button#submitSearchForm').click();
       fixture.detectChanges();
 
       expect(component.companies).toEqual(companySearchResult.companies);
@@ -152,7 +153,7 @@ describe('CompanyComponent', () => {
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
+      nativeElement.querySelector('button#submitSearchForm').click();
       fixture.detectChanges();
 
       expect(component.companies).toEqual(companySearchResult.companies);

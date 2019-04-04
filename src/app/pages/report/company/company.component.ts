@@ -25,6 +25,8 @@ export class CompanyComponent implements OnInit {
   step: Step;
   report: Report;
 
+  around: boolean;
+
   searchForm: FormGroup;
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
@@ -63,6 +65,7 @@ export class CompanyComponent implements OnInit {
   }
 
   initSearchForm() {
+    this.around = false;
     this.searchCtrl = this.formBuilder.control('', Validators.required);
     this.searchPostalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
     this.searchForm = this.formBuilder.group({
@@ -90,31 +93,84 @@ export class CompanyComponent implements OnInit {
     this.searchError = '';
   }
 
+  isAround() {
+    this.around = true;
+    this.showErrors = false;
+    this.initSearch();
+
+  }
+
+  isNotAround() {
+    this.around = false;
+    this.showErrors = false;
+    this.initSearch();
+  }
+
   searchCompany() {
-    if (!this.searchForm.valid) {
-      this.showErrors = true;
-    } else {
+    if (this.around) {
+      this.showErrors = false;
       this.initSearch();
       this.loading = true;
-      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, this.searchCtrl.value + " " + this.searchPostalCodeCtrl.value);
-      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
-        companySearchResult => {
-          this.loading = false;
-          if (companySearchResult.total === 0) {
-            this.treatCaseNoResult();
-          } else if (companySearchResult.total === 1) {
-            this.treatCaseSingleResult(companySearchResult);
-          } else if (companySearchResult.total > MaxCompanyResult) {
-            this.treatCaseTooManyResults();
-          } else {
-            this.treatCaseSeveralResults(companySearchResult);
+      if (navigator.geolocation) {
+        let options = {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        };
+        navigator.geolocation.getCurrentPosition((position) => {
+          let lat = position.coords.latitude;
+          let long = position.coords.longitude;
+          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.around);
+          this.companyService.getNearbyCompanies(lat, long).subscribe(
+            companySearchResult => {
+              this.loading = false;
+              if (companySearchResult.total === 0) {
+                this.treatCaseNoResult();
+              } else if (companySearchResult.total === 1) {
+                this.treatCaseSingleResult(companySearchResult);
+              } else {
+                this.treatCaseSeveralResults(companySearchResult);
+              }
+            },
+            error => {
+              this.loading = false;
+              this.treatCaseError();
+            }
+          );
+        }, (error) => {
+           this.loading = false;
+           this.showErrors = true;
+        }, options);
+      } else {
+        this.loading = false;
+        this.showErrors = true;
+      }
+    } else {
+      if (!this.searchForm.valid) {
+        this.showErrors = true;
+      } else {
+        this.initSearch();
+        this.loading = true;
+        this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, this.searchCtrl.value + " " + this.searchPostalCodeCtrl.value);
+        this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
+          companySearchResult => {
+            this.loading = false;
+            if (companySearchResult.total === 0) {
+              this.treatCaseNoResult();
+            } else if (companySearchResult.total === 1) {
+              this.treatCaseSingleResult(companySearchResult);
+            } else if (companySearchResult.total > MaxCompanyResult) {
+              this.treatCaseTooManyResults();
+            } else {
+              this.treatCaseSeveralResults(companySearchResult);
+            }
+          },
+          error => {
+            this.loading = false;
+            this.treatCaseError();
           }
-        },
-        error => {
-          this.loading = false;
-          this.treatCaseError();
-        }
-      );
+        );
+       }
     }
   }
 
