@@ -34,7 +34,7 @@ La version de démo de l'application est accessible à l'adresse https://signale
 
 ## Production
 
-L'application de production de l'application  est accessible à l'adresse https://signalement.beta.gouv.fr
+L'application de production de l'application  est accessible à l'adresse https://signalconso.beta.gouv.fr
 
 ## API
 

@@ -1,13 +1,14 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { Report } from '../model/Report';
+import { Report, ReportDetails } from '../model/Report';
 import moment from 'moment';
 import { Company } from '../model/Company';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
-import { AnomalyService } from './anomaly.service';
-import { isPlatformBrowser } from '@angular/common';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { Step } from './report-router.service';
+
+const ReportStorageKey = 'ReportSignalConso';
 
 @Injectable({
   providedIn: 'root',
@@ -17,97 +18,93 @@ export class ReportService {
   private reportSource = new BehaviorSubject<Report>(undefined);
   currentReport = this.reportSource.asObservable();
 
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private http: HttpClient,
+  constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils,
-              private anomalyService: AnomalyService,
-              private router: Router) {
+              private localStorage: LocalStorage) {
+
+    this.retrieveReportFromStorage();
+
   }
 
-  reinit() {
-    this.router.navigate(['/']);
+  private retrieveReportFromStorage() {
+    this.localStorage.getItem(ReportStorageKey).subscribe((report) => {
+      if (report) {
+        report.retrievedFromStorage = true;
+        this.reportSource.next(report);
+      }
+    });
   }
 
-  changeReport(report: Report, step: Step) {
+  removeReport() {
+    this.removeReportFromStorage();
+    this.reportSource.next(undefined);
+  }
+
+  removeReportFromStorage() {
+    this.reportSource.getValue().retrievedFromStorage = false;
+    this.localStorage.removeItemSubscribe(ReportStorageKey);
+  }
+
+  changeReportFromStep(report: Report, step: Step) {
+    report.retrievedFromStorage = false;
+    report.storedStep = step;
     this.reportSource.next(report);
-    if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
-    }
-    this.router.navigate(this.nextRoute(step));
+    this.localStorage.setItemSubscribe(ReportStorageKey, report);
   }
 
-  nextRoute(currentStep: Step) {
-    switch (currentStep) {
-      case Step.Category:
-        const anomaly = this.anomalyService.getAnomalyByCategory(this.reportSource.getValue().category);
-        if (anomaly.information) {
-          return [ReportPaths.Information];
-        } else if (anomaly.subcategories && anomaly.subcategories.length) {
-          return [ReportPaths.Subcategory];
-        } else {
-          return [ReportPaths.Details];
-        }
-      case Step.Subcategory:
-        if (this.reportSource.getValue().subcategory.information) {
-          return [ReportPaths.Information];
-        } else {
-          return [ReportPaths.Details];
-        }
-      case Step.Details:
-        return [ReportPaths.Company];
-      case Step.Company:
-        return [ReportPaths.Consumer];
-      case Step.Consumer:
-        return [ReportPaths.Confirmation];
-      case Step.Confirmation:
-        return [ReportPaths.Acknowledgment];
-      default:
-        return [ReportPaths.Category];
-    }
+  uploadFile(file: File) {
+    const fileFormData: FormData = new FormData();
+    fileFormData.append('reportFile', file, file.name);
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files']),
+      fileFormData,
+    );
   }
 
   createReport(report: Report) {
     return this.http.post(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-      this.generateReportFormData(report),
+      this.generateReportToPost(report),
     );
   }
 
-  private generateReportFormData(report: Report) {
-
-    const reportFormData: FormData = new FormData();
-    reportFormData.append('category', report.category);
-    if (report.subcategory) {
-      reportFormData.append('subcategory', report.subcategory.title);
-    }
-    if (report.details.precision) {
-      reportFormData.append('precision', report.details.precision);
-    }
-    reportFormData.append('companyName', report.company.name);
-    reportFormData.append('companyAddress', this.getCompanyAddress(report.company));
-    reportFormData.append('companyPostalCode', report.company.postalCode);
-    if (report.company.siret) {
-      reportFormData.append('companySiret', report.company.siret);
-    }
-    reportFormData.append('anomalyDate', moment(report.details.anomalyDate).format('YYYY-MM-DD'));
+  private generateReportToPost(report: Report) {
+    const reportToPost = {
+      'category': report.category,
+      'subcategory': report.subcategory ? report.subcategory.title : '',
+      'precision': report.details.precision ? this.getDetailsPrecision(report.details) : '',
+      'companyName': report.company.name,
+      'companyAddress': this.getCompanyAddress(report.company),
+      'companyPostalCode': report.company.postalCode,
+      'companySiret': report.company.siret,
+      'anomalyDate': moment(report.details.anomalyDate).format('YYYY-MM-DD'),
+      'description': report.details.description,
+      'firstName': report.consumer.firstName,
+      'lastName': report.consumer.lastName,
+      'email': report.consumer.email,
+      'contactAgreement': report.contactAgreement,
+      'fileIds': report.details.uploadedFiles.map(f => f.id)
+    };
     if (report.details.anomalyTimeSlot) {
-      reportFormData.append('anomalyTimeSlot', report.details.anomalyTimeSlot.toString());
+      reportToPost['anomalyTimeSlot'] = Number(report.details.anomalyTimeSlot);
     }
-    if (report.details.ticketFile) {
-      reportFormData.append('ticketFile', report.details.ticketFile, report.details.ticketFile.name);
-    }
-    if (report.details.anomalyFile) {
-      reportFormData.append('anomalyFile', report.details.anomalyFile, report.details.anomalyFile.name);
-    }
-    reportFormData.append('description', report.details.description);
-    reportFormData.append('firstName', report.consumer.firstName);
-    reportFormData.append('lastName', report.consumer.lastName);
-    reportFormData.append('email', report.consumer.email);
-    if (report.contactAgreement) {
-      reportFormData.append('contactAgreement', report.contactAgreement.toString());
-    }
+    return reportToPost;
+  }
 
-    return reportFormData;
+  getDetailsPrecision(details: ReportDetails) {
+    let precision = '';
+    if (typeof details.precision  === 'string') {
+      precision = details.precision;
+      if (precision === otherPrecisionValue && details.otherPrecision) {
+        precision =  `${precision} (${details.otherPrecision})`;
+      }
+    } else {
+      precision = details.precision.join(', ');
+      if (precision.indexOf(otherPrecisionValue) !== -1 && details.otherPrecision) {
+        precision = precision.replace(otherPrecisionValue, `${otherPrecisionValue} (${details.otherPrecision})`);
+      }
+    }
+    return precision;
   }
 
 
@@ -125,25 +122,5 @@ export class ReportService {
   }
 }
 
-export enum Step {
-  Category = 'Category',
-  Subcategory = 'Subcategory',
-  Details = 'Details',
-  Company = 'Company',
-  Consumer = 'Consumer',
-  Confirmation = 'Confirmation',
-  Acknowledgment = 'Acknowledgment',
-  Information = 'Information'
-}
+export const otherPrecisionValue = 'Autre';
 
-
-export enum ReportPaths {
-  Category = '',
-  Subcategory = 'signalement/le-probleme',
-  Details = 'signalement/la-description',
-  Company = 'signalement/le-commerçant',
-  Consumer = 'signalement/le-consommateur',
-  Confirmation = 'signalement/confirmation',
-  Acknowledgment = 'signalement/accuse-de-reception',
-  Information = 'signalement/information'
-}

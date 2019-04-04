@@ -1,14 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { ReportService, Step } from '../../../services/report.service';
+import { otherPrecisionValue, ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { KeywordService } from '../../../services/keyword.service';
+import { AnomalyService } from '../../../services/anomaly.service';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { Information } from '../../../model/Anomaly';
+import { UploadedFile } from '../../../model/UploadedFile';
+import { FileUploaderService } from '../../../services/file-uploader.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        display: 'block',
+        opacity: 1,
+      })),
+      state('closed', style({
+        display: 'none',
+        opacity: 0,
+      })),
+      transition('open => closed', [
+        animate('0.2s ease-out')
+      ]),
+      transition('closed => open', [
+        animate('0.5s ease-in-out')
+      ]),
+    ]),
+  ],
 })
 export class DetailsComponent implements OnInit {
 
@@ -16,21 +41,30 @@ export class DetailsComponent implements OnInit {
   report: Report;
 
   detailsForm: FormGroup;
-  precisionCtrl: FormControl;
+  singlePrecisionCtrl: FormControl;
+  multiplePrecisionCtrl: FormArray;
+  otherPrecisionCtrl: FormControl;
   anomalyDateCtrl: FormControl;
   anomalyTimeSlotCtrl: FormControl;
   descriptionCtrl: FormControl;
 
+  @ViewChild('fileInput') fileInput;
+
   plageHoraireList: number[];
-  ticketFile: File;
-  anomalyFile: File;
+  uploadedFiles: UploadedFile[];
 
   showErrors: boolean;
+  tooLargeFilename: string;
+  keywordsDetected: Keyword;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService,
-              private localeService: BsLocaleService) {
+              private fileUploaderService: FileUploaderService,
+              private localeService: BsLocaleService,
+              private keywordService: KeywordService,
+              private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
@@ -39,12 +73,16 @@ export class DetailsComponent implements OnInit {
       if (report) {
         this.report = report;
         this.initDetailsForm();
+        this.initUploadedFiles();
         this.constructPlageHoraireList();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
     this.localeService.use('fr');
+
+    this.searchKeywords();
+
   }
 
   initDetailsForm() {
@@ -55,7 +93,6 @@ export class DetailsComponent implements OnInit {
       this.report.details ? this.report.details.anomalyDate : new Date(), Validators.required
     );
     this.anomalyTimeSlotCtrl = this.formBuilder.control(this.report.details ? this.report.details.anomalyTimeSlot : '');
-    this.precisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.precision : '', Validators.required);
 
     this.detailsForm = this.formBuilder.group({
       anomalyDate: this.anomalyDateCtrl,
@@ -64,9 +101,55 @@ export class DetailsComponent implements OnInit {
     });
 
     if (this.report.subcategory && this.report.subcategory.details && this.report.subcategory.details.precision) {
-      this.detailsForm.addControl('precision', this.precisionCtrl);
+      this.initPrecisionsCtrl();
     }
+  }
 
+  initUploadedFiles() {
+    if (this.report.details && this.report.details.uploadedFiles) {
+      this.uploadedFiles = this.report.details.uploadedFiles;
+    } else {
+      this.uploadedFiles = [];
+    }
+  }
+
+  removeUploaderFile(uploadedFile: UploadedFile) {
+    this.uploadedFiles.splice(
+      this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
+      1
+    );
+    this.fileUploaderService.deleteFile(uploadedFile).subscribe();
+  }
+
+  initPrecisionsCtrl() {
+    const subcategoryDetailsPrecision = this.report.subcategory.details.precision;
+    if (subcategoryDetailsPrecision.severalOptionsAllowed) {
+      this.multiplePrecisionCtrl = new FormArray(
+        subcategoryDetailsPrecision.options.map(option =>
+          this.formBuilder.control(this.isOptionChecked(option) ? true : false)
+        )
+      );
+      this.detailsForm.addControl('multiplePrecision', this.multiplePrecisionCtrl);
+    } else {
+      this.singlePrecisionCtrl = this.formBuilder.control(
+        this.report.details ? this.report.details.precision : '', Validators.required
+      );
+      this.detailsForm.addControl('singlePrecision', this.singlePrecisionCtrl);
+    }
+    this.otherPrecisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.otherPrecision : '');
+    this.initOtherPrecision();
+  }
+
+  isOptionChecked(option: Information) {
+    return this.report.details && this.report.details.precision && this.report.details.precision.indexOf(option.title) !== -1;
+  }
+
+  initOtherPrecision() {
+    if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1) {
+      this.detailsForm.addControl('otherPrecision', this.otherPrecisionCtrl);
+    } else {
+      this.detailsForm.removeControl('otherPrecision');
+    }
   }
 
   constructPlageHoraireList() {
@@ -76,29 +159,117 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  onTicketFileSelected(file: File) {
-    this.ticketFile = file;
-  }
-
-  onAnomalyFileSelected(file: File) {
-    this.anomalyFile = file;
+  onFileUploaded(uploadedFile: UploadedFile) {
+    this.uploadedFiles.push(uploadedFile);
   }
 
   submitDetailsForm() {
+
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
       const reportDetails = new ReportDetails();
-      reportDetails.precision = this.precisionCtrl.value;
+      if (this.getPrecisionFromCtrl()) {
+        reportDetails.precision = this.getPrecisionFromCtrl();
+      }
+      if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
+        reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
+      }
       reportDetails.anomalyDate = this.anomalyDateCtrl.value;
       reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
       reportDetails.description = this.descriptionCtrl.value;
-      reportDetails.ticketFile = this.ticketFile;
-      reportDetails.anomalyFile = this.anomalyFile;
+      reportDetails.uploadedFiles = this.uploadedFiles.filter(file => file.id);
       this.report.details = reportDetails;
-      this.reportService.changeReport(this.report, this.step);
+      this.reportService.changeReportFromStep(this.report, this.step);
+      this.reportRouterService.routeForward(this.step);
     }
   }
 
+  getPrecisionFromCtrl() {
+    if (this.singlePrecisionCtrl) {
+      return this.singlePrecisionCtrl.value;
+    } else if (this.multiplePrecisionCtrl) {
+      return this.multiplePrecisionCtrl.controls
+        .map((control, index) => {
+          return control.value ? this.report.subcategory.details.precision.options[index].title : null;
+        })
+        .filter(value => value !== null);
+    } else {
+      return '';
+    }
+  }
+
+  bringFileSelector() {
+    this.fileInput.nativeElement.click();
+  }
+
+  selectFile() {
+    this.tooLargeFilename = undefined;
+    if (this.fileInput.nativeElement.files[0]) {
+      if (this.fileInput.nativeElement.files[0].size > fileSizeMax) {
+        this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
+      } else {
+        const fileToUpload = new UploadedFile();
+        fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
+        fileToUpload.displayedFilename = this.textOverflowMiddleCropping(fileToUpload.filename, 32);
+        fileToUpload.loading = true;
+        this.uploadedFiles.push(fileToUpload);
+        this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
+          fileToUpload.loading = false;
+          fileToUpload.id = uploadedFile.id;
+        }, error => {
+          fileToUpload.loading = false;
+          fileToUpload.displayedFilename = `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
+        });
+      }
+    }
+  }
+
+  isUploadingFile() {
+    return this.uploadedFiles.find(file => file.loading);
+  }
+
+  textOverflowMiddleCropping(text: string, limit: number) {
+    return text.length > limit ? `${text.substr(0, limit / 2)}...${text.substr(text.length - (limit / 2), text.length)}` : text;
+  }
+
+  getFileDownloadUrl(uploadedFile: UploadedFile) {
+    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
+  }
+
+  searchKeywords() {
+    const res = this.keywordService.search(this.descriptionCtrl.value);
+    if (!res) {
+      this.keywordsDetected = null;
+    } else {
+      const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
+      if (anomaly) {
+        this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.keywordsDetection, JSON.stringify(res.found.map(elt => elt.expression)));
+        this.keywordsDetected = {
+          category: anomaly.category,
+          message: anomaly.information ? anomaly.information.title : ''
+        };
+      } else {
+        this.keywordsDetected = null;
+      }
+    }
+  }
+
+  goToInformationPage() {
+    // modification des éléments du report et du step pour que le router affiche la page d'info avec le contexte
+    this.step = Step.Category;
+    this.report.category = this.keywordsDetected.category;
+    this.report.subcategory = null;
+
+    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportRouterService.routeForward(this.step);
+  }
 }
+
+interface Keyword {
+  readonly category: string;
+  readonly message: string;
+}
+
+export const fileSizeMax = 5000000;

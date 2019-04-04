@@ -1,6 +1,19 @@
 @import "../../../../theme/variables";
 @import "../../../../theme/media-queries";
 
+
+:host /deep/ {
+  .alert.alert-danger.alert-dismissible {
+    color: $black;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: $theme-warning-bg;
+    border: none;
+  }
+}
+
 .max-width {
   max-width: 750px;
 }
@@ -47,6 +60,8 @@
 
 .notification {
 
+  overflow-wrap: break-word;
+
   img {
     width: 24px;
     vertical-align: top;
@@ -58,4 +73,8 @@
     padding-bottom: 0.5em;
   }
 
+}
+
+.nav-link.disabled {
+  pointer-events: auto;
 }

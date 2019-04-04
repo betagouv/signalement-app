@@ -6,22 +6,27 @@ export class Information {
   title: string;
   @JsonProperty('content')
   content?: string;
+  @JsonProperty('reference')
+  reference?: string;
 
   constructor() {
     this.title = undefined;
     this.content = undefined;
-    this.content = undefined;
+    this.reference = undefined;
   }
 }
 
 export class Precision {
   @JsonProperty('title')
   title: string;
+  @JsonProperty('severalOptionsAllowed')
+  severalOptionsAllowed: boolean;
   @JsonProperty({ name: 'options', clazz: Information })
   options: Information[];
 
   constructor() {
     this.title = undefined;
+    this.severalOptionsAllowed = false;
     this.options = undefined;
   }
 }
@@ -59,23 +64,38 @@ export class Subcategory {
 export class Anomaly {
   @JsonProperty('category')
   category: string;
+  @JsonProperty('categoryId')
+  categoryId: string;
+  @JsonProperty('hidden')
+  hidden?: boolean;
   @JsonProperty('description')
   description: string;
   @JsonProperty('rank')
   rank?: number;
+  @JsonProperty('withInternetPurchase')
+  withInternetPurchase?: boolean;
   @JsonProperty('icon')
   icon?: string;
   @JsonProperty({ name: 'information', clazz: Information })
   information?: Information;
+  @JsonProperty('breadcrumbTitle')
+  breadcrumbTitle?: string;
+  @JsonProperty('subcategoryTitle')
+  subcategoryTitle?: string;
   @JsonProperty({ name: 'subcategories', clazz: Subcategory })
   subcategories?: Subcategory[];
 
   constructor() {
     this.category = undefined;
+    this.categoryId = undefined;
+    this.hidden = false;
     this.description = undefined;
     this.rank = undefined;
+    this.withInternetPurchase = undefined;
     this.icon = undefined;
     this.information = undefined;
+    this.breadcrumbTitle = undefined;
+    this.subcategoryTitle = undefined;
     this.subcategories = undefined;
   }
 }

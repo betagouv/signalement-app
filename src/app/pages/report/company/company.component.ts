@@ -11,8 +11,9 @@ import {
   EventCategories,
   ReportEventActions,
 } from '../../../services/analytics.service';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-company',
@@ -36,6 +37,7 @@ export class CompanyComponent implements OnInit {
   companies: Company[];
   loading: boolean;
   searchWarning: string;
+  searchError: string;
 
   showErrors: boolean;
 
@@ -43,6 +45,7 @@ export class CompanyComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
               private addressService: AddressService,
               private analyticsService: AnalyticsService) { }
@@ -54,7 +57,7 @@ export class CompanyComponent implements OnInit {
         this.report = report;
         this.initSearchForm();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
   }
@@ -84,6 +87,7 @@ export class CompanyComponent implements OnInit {
     this.companyForm = null;
     this.companies = [];
     this.searchWarning = '';
+    this.searchError = '';
   }
 
   searchCompany() {
@@ -105,6 +109,10 @@ export class CompanyComponent implements OnInit {
           } else {
             this.treatCaseSeveralResults(companySearchResult);
           }
+        },
+        error => {
+          this.loading = false;
+          this.treatCaseError();
         }
       );
     }
@@ -130,6 +138,11 @@ export class CompanyComponent implements OnInit {
     this.companies = companySearchResult.companies;
   }
 
+  treatCaseError() {
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
+    this.searchError = 'Une erreur technique s\'est produite.';
+  }
+
   selectCompanyFromResults(company: Company) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.select);
     this.selectCompany(company);
@@ -138,7 +151,8 @@ export class CompanyComponent implements OnInit {
   selectCompany(company: Company) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
     this.report.company = company;
-    this.reportService.changeReport(this.report, this.step);
+    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportRouterService.routeForward(this.step);
   }
 
   submitCompanyForm() {
@@ -165,5 +179,9 @@ export class CompanyComponent implements OnInit {
     if (selected) {
       this.addressCtrlPostalCode = selected.originalObject.postcode;
     }
+  }
+
+  changeCompany() {
+    this.report.company = undefined;
   }
 }

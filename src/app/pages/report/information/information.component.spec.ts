@@ -10,6 +10,7 @@ import { Anomaly, Information } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { of } from 'rxjs';
 import { Report } from '../../../model/Report';
+import { RetractationComponent } from './retractation/retractation.component';
 
 describe('InformationComponent', () => {
 
@@ -26,6 +27,7 @@ describe('InformationComponent', () => {
       declarations: [
         InformationComponent,
         BreadcrumbComponent,
+        RetractationComponent,
       ],
       imports: [
         HttpClientModule,
@@ -38,6 +40,7 @@ describe('InformationComponent', () => {
       ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
+      .overrideTemplate(RetractationComponent, '')
       .compileComponents();
   }));
 

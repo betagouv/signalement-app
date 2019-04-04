@@ -60,21 +60,6 @@
     ul {
       margin-bottom: 0;
       padding-left: 1em;
-
-      li + li {
-        padding-top: 0.5em;
-      }
-    }
-  }
-
-  .banner {
-
-    .container {
-
-      img {
-        margin: 1em 0;
-        max-height: 200px;
-      }
     }
   }
 
@@ -96,6 +81,17 @@
     span {
       font-style: italic;
     }
+  }
+
+  ul {
+    li + li {
+      padding-top: 0.5em;
+    }
+  }
+
+  span.error {
+    color: $red;
+    font-style: italic;
   }
 
 }

@@ -69,11 +69,11 @@ select:disabled {
 input[type=radio],
 input[type=checkbox] {
   margin-right: 6px;
-  margin-top: 5px;
   cursor: pointer;
 }
 
 input[type=radio] {
+  margin-top: 5px;
   height: 20px;
   width: 20px;
   border-radius: 50%;
@@ -119,9 +119,6 @@ input[type="checkbox"] {
   appearance: none;
   height: 22px;
   width: 22px;
-  padding: 0;
-  position: absolute;
-  top: 2px;
 }
 
 input[type="checkbox"] + .label-inline {

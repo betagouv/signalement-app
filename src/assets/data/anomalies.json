@@ -2,6 +2,7 @@
   "list": [
     {
       "category": "Pratique d'hygiène",
+      "categoryId": "HYG",
       "description": "Locaux sales, présence de rat, rupture de la chaîne du froid...",
       "rank" : 1,
       "icon": "icon_hygien.png",
@@ -12,14 +13,15 @@
           "details": {
             "descriptionTips": "Afin que le professionnel puisse corriger la situation, vous pouvez préciser le rayon exact, le type de salissure...",
             "precision": {
-              "title": "Quelle zone est concernée ? ",
+              "title": "Quelle(s) zone(s) est concernée(s) ? ",
+              "severalOptionsAllowed": true,
               "options": [
                 { "title": "Cuisine" },
                 { "title": "Salle du restaurant / bar" },
                 { "title": "WC" },
-                { "title": "Atelier de fabrication" },
                 { "title": "Magasin (sol)" },
                 { "title": "Magasin (vitrine /frigo)" },
+                { "title": "Atelier de fabrication" },
                 { "title": "Autre" }
               ]
             }
@@ -43,14 +45,8 @@
                   "title": "Tenue sale"
                 },
                 {
-                  "title": "Pas de coiffe ou pas de gants"
-                },
-                {
-                  "title": "Mauvaises pratiques d'hygiène",
-                  "content": "Exemples : pas de lavage des mains, personnel qui fume en cuisine..."
-                },
-                {
-                  "title": "Autre"
+                  "title": "Autre",
+                  "content": "Exemples : mauvaise pratique d'hygiène, personnel qui fume en cuisine..."
                 }
               ]
             }
@@ -85,18 +81,23 @@
               ]
             }
           }
+        },
+        {
+          "title": "Autre problème d'hygiène"
         }
       ]
     },
     {
       "category": "Nourriture / Boissons",
+      "categoryId": "NOURR",
       "description": "Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...",
       "rank" : 2,
+      "withInternetPurchase": true,
       "icon": "icon_food.png",
       "subcategories": [
         {
           "title": "Produit présentant un défaut",
-          "description": "Exemples : présence de moisissure, d'un bout de verre",
+          "description": "Exemples : présence de moisissure, odeur anormale, ...",
           "details": {
             "precision": {
               "title": "Veuillez préciser :",
@@ -106,13 +107,17 @@
                 {
                   "title": "Corps étranger \"mou\"",
                   "content": "Présence de quelque chose de \"mou\" dans le produit. <br/>Exemples : morceau de gant, morceau de tissus.."
-                },
-                {
-                  "title": "Corps étranger \"dur\" ",
-                  "content": "Présence de quelque chose de \"dur\" dans le produit. <br/>Exemples : bout de verre, morceau de métal.."
                 }
               ]
             }
+          }
+        },
+        {
+          "title": "Corps étranger \"dur\" ",
+          "description": "Présence de quelque chose de \"dur\" dans le produit. <br/>Exemples : bout de verre, morceau de métal..",
+          "information": {
+            "title": "Vous souhaitez signaler la présence d'un corps étranger \"dur\"",
+            "content": "Ce cas représente une alerte et nécessite une analyse individualisée.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4211\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4211</a>"
           }
         },
         {
@@ -165,14 +170,16 @@
           "description": "Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités"
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de nourriture"
         }
       ]
     },
     {
       "category": "Matériel / Objet",
+      "categoryId": "MATOS",
       "description": "Effet indésirable type brûlure, objet dangereux, problème avec une notice, étiquetage incomplet...",
       "rank" : 3,
+      "withInternetPurchase": true,
       "icon": "icon_material.png",
       "subcategories": [
         {
@@ -207,11 +214,19 @@
         },
         {
           "title": "Effet indésirable sur la santé",
-          "description": "Exemples : brûlure, picotement, démangeaison, allergie"
+          "description": "Exemples : brûlure, picotement, démangeaison, allergie",
+          "information": {
+            "title": "Vous souhaitez signaler un effet indésirable sur la santé",
+            "content": "Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
+          }
         },
         {
           "title": "Produit dangereux",
-          "description": "Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu..."
+          "description": "Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...",
+          "information": {
+            "title": "Vous souhaitez signaler un produit dangereux",
+            "content": "Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.<br/><br/>Veuillez remplir le formulaire de la DGCCRF en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4212\" target=\"_blank\">https://www.economie.gouv.fr/courrier/4212</a>"
+          }
         },
         {
           "title": "Durée de vie trop courte",
@@ -224,25 +239,28 @@
           "title": "Le volume / poids / nombre annoncé est non conforme."
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de matériel"
         }
       ]
     },
     {
       "category": "Intoxication alimentaire",
+      "categoryId": "INTOX",
       "description": "Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.",
       "rank" : 4,
       "icon": "icon_disease.png",
       "information": {
-        "title": "Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil signalement.",
+        "title": "Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.",
         "content": "Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs. <br/><br/>Veuillez remplir le formulaire \"Courrier\" de la <abbr title=\"Direction Général de la Concurrence, Consommation et Répression des Fraudes\">DGCCRF</abbr> en cliquant sur le lien ci-contre : <a href=\"https://www.economie.gouv.fr/courrier/4210\" target=\"_blank\" />Contact Hygiène et intoxication</a>"
       }
 
     },
     {
       "category": "Prix / Paiement",
+      "categoryId": "PRIX",
       "description": "Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...",
       "rank" : 5,
+      "withInternetPurchase": true,
       "icon": "icon_price.png",
       "subcategories": [
         {
@@ -294,14 +312,16 @@
           "description": "Exemple : on vous facture un surplus \"service en terrasse\" alors que ce prix n'était indiqué nulle part"
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de prix"
         }
       ]
     },
     {
       "category": "Publicité",
+      "categoryId": "PUB",
       "description": "promotion indiquée dans le catalogue non disponible en magasin, publicité trompeuse...",
       "rank" : 6,
+      "withInternetPurchase": true,
       "icon": "icon_pub.png",
       "subcategories": [
         {
@@ -314,8 +334,10 @@
     },
     {
       "category": "Services associés à l'achat",
+      "categoryId": "SERACH",
       "description": "Colis non reçu, problème de garantie constructeur, hotline injoignable,...",
       "rank" : 7,
+      "withInternetPurchase": true,
       "icon": "icon_service.png",
       "subcategories": [
         {
@@ -361,17 +383,41 @@
           }
         },
         {
-          "title": "Autre"
+          "title": "Autre problème de service"
         }
       ]
     },
     {
+      "category": "Problème suite à un achat sur internet",
+      "categoryId": "PBINT",
+      "rank" : 101,
+      "breadcrumbTitle": "Vous avez identifié un problème suite à un achat sur internet",
+      "information": {
+        "title": "Nous sommes désolés, la vente sur internet ne fait pas encore partie de notre site.",
+        "content": "Votre signalement concerne : <p><ul><li>un problème avec un commerçant ? <br/><span class=\"note\">Exemple : colis non reçu, pas de nouvelle de votre commande... </span><br />Vous pouvez saisir la <abbr title=\"Direction Général de la Concurrence, Consommation et Répression des Fraudes\">DGCCRF</abbr> avec le formulaire disponible ici : <a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a></li><li>un spam que vous avez reçu ?<br />Vous pouvez le signaler ici : <a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a></li><li>un contenu qui vous semble inapproprié ? <br/><span class=\"note\">Exemple : trafic illicite, pédopornographie ...</span><br/>Vous pouvez le signaler ici : <a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a></li></ul></p>"
+      }
+    },
+    {
       "category": "Refus de servir/ vendre",
-      "rank" : 100
+      "categoryId": "REFSRV",
+      "rank" : 102
     },
     {
       "category": "Chien d'assistance refusé",
-      "rank" : 101
+      "categoryId": "CHREF",
+      "rank" : 103
+    },
+    {
+      "category": "Travail au noir",
+      "categoryId": "TNOIR",
+      "hidden": true,
+      "rank" : 104,
+      "breadcrumbTitle": "Vous souhaitez signaler un cas de travail au noir ?",
+      "information": {
+        "title": "Vous souhaitez signaler un cas de travail au noir ?",
+        "content": "Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;<ul><li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href=\"mailto:fraude.npdc@urssaf.fr\">fraude.npdc@urssaf.fr</a></li><li>écrire à l’inspection du travail en contactant la <a href=\"http://direccte.gouv.fr/\">DIRECCTE</a> de la région concernée</li><li>écrire à la Brigades de contrôle et de recherche des impôts</li><li>écrire à la police/gendarmerie</li></ul>La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir."
+      }
     }
+
   ]
 }

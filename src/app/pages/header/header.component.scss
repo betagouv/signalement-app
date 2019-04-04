@@ -4,6 +4,7 @@
 .navbar__container {
   width: 100%;
 
+
   @media #{$larger-than-tablet} {
     .ribbon {
       text-align: center;
@@ -25,6 +26,9 @@
 
 
   @media #{$smaller-than-tablet} {
+
+    padding: 1em 0;
+
     .ribbon {
       text-align: center;
       text-transform: uppercase;
@@ -41,11 +45,12 @@
     }
 
     .navbar__domain {
-      font-size: 12px;
+      font-size: 14px;
 
       & + img {
-        height: 28px;
+        height: 34px;
       }
     }
+
   }
 }

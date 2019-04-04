@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { ReportService, Step } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Information } from '../../../model/Anomaly';
 import { Report } from '../../../model/Report';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-information',
@@ -18,8 +19,9 @@ export class InformationComponent implements OnInit {
   informationToDisplay: Information;
 
   constructor(private reportService: ReportService,
-              private anomalyService: AnomalyService,
-              private analyticsService: AnalyticsService) { }
+    private reportRouterService: ReportRouterService,
+    private anomalyService: AnomalyService,
+    private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.step = Step.Information;
@@ -28,14 +30,14 @@ export class InformationComponent implements OnInit {
         this.report = report;
         this.initInformation();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
   }
 
   initInformation() {
     const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
-    if (anomaly.information) {
+    if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
     } else if (this.report.subcategory && this.report.subcategory.information) {
@@ -45,7 +47,12 @@ export class InformationComponent implements OnInit {
   }
 
   newReport() {
-    this.reportService.changeReport(this.report, this.step);
+    this.reportService.removeReport();
+    this.reportRouterService.routeToFirstStep();
+  }
+
+  ngOnDestroy() {
+    this.reportRouterService.routeBackward(this.step);
   }
 
 }

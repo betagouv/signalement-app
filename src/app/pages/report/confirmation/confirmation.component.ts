@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ReportService, Step } from '../../../services/report.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { FileUploaderService } from '../../../services/file-uploader.service';
+import { UploadedFile } from '../../../model/UploadedFile';
 
 @Component({
   selector: 'app-confirmation',
@@ -15,13 +18,15 @@ export class ConfirmationComponent implements OnInit {
   report: Report;
 
   confirmationForm: FormGroup;
-  contactAgreementCtrl: FormControl;
 
   showErrors: boolean;
   loading: boolean;
+  loadingError: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportRouterService: ReportRouterService,
+              private fileUploaderService: FileUploaderService,
               private analyticsService: AnalyticsService) {
   }
 
@@ -32,37 +37,34 @@ export class ConfirmationComponent implements OnInit {
         this.report = report;
         this.initConfirmationForm();
       } else {
-        this.reportService.reinit();
+        this.reportRouterService.routeToFirstStep();
       }
     });
   }
 
   initConfirmationForm() {
     this.showErrors = false;
-
-    this.contactAgreementCtrl = this.formBuilder.control('');
-
-    this.confirmationForm = this.formBuilder.group({
-      contactAgreement: this.contactAgreementCtrl
-    });
+    this.confirmationForm = this.formBuilder.group({});
   }
 
   submitConfirmationForm() {
+    this.loadingError = false;
     if (!this.confirmationForm.valid) {
       this.showErrors = true;
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
-      this.report.contactAgreement = this.contactAgreementCtrl.value;
       this.reportService.createReport(this.report)
         .subscribe(
         result => {
           this.loading = false;
-          this.reportService.changeReport(this.report, this.step);
+          this.reportService.changeReportFromStep(this.report, this.step);
+          this.reportService.removeReportFromStorage();
+          this.reportRouterService.routeForward(this.step);
         },
         error => {
           this.loading = false;
-          // TODO cas d'erreur
+          this.loadingError = true;
         });
 
     }
@@ -72,6 +74,10 @@ export class ConfirmationComponent implements OnInit {
     if (this.report.details.anomalyTimeSlot) {
       return Number(this.report.details.anomalyTimeSlot) + 1;
     }
+  }
+
+  getFileDownloadUrl(uploadedFile: UploadedFile) {
+    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
 }

@@ -35,10 +35,10 @@ app.set('view engine', 'html');
 app.set('views', './dist/browser');
 
 app.all('*', (req, res, next) => {
-  const xfp = req.get("X-Forwarded-Proto");
+  const xfp = req.get('X-Forwarded-Proto');
   if (xfp) {
     // protocol check, if http, redirect to https
-    if(req.get("X-Forwarded-Proto").indexOf("https") != -1) {
+    if(req.get('X-Forwarded-Proto').indexOf('https') !== -1) {
       return next();
     } else {
       res.redirect('https://' + req.hostname + req.url);

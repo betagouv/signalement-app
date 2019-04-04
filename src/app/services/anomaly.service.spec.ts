@@ -14,4 +14,5 @@ describe('AnomalyService', () => {
     const service: AnomalyService = TestBed.get(AnomalyService);
     expect(service).toBeTruthy();
   });
+
 });
