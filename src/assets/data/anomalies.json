@@ -68,8 +68,7 @@
             {
               "label": "Heure du constat",
               "rank": 7,
-              "type": "TEXT",
-              "placeholder": "Heure du constat"
+              "type": "TIMESLOT"
             }
           ],
           "fileLabel": "Pièces jointes"
@@ -106,8 +105,7 @@
                     {
                       "label": "Heure du constat",
                       "rank": 3,
-                      "type": "TEXT",
-                      "placeholder": "Heure du constat"
+                      "type": "TIMESLOT"
                     }
                   ],
                   "fileLabel": "Pièces jointes"
@@ -132,8 +130,7 @@
                 {
                   "label": "Heure du constat",
                   "rank": 3,
-                  "type": "TEXT",
-                  "placeholder": "Heure du constat"
+                  "type": "TIMESLOT"
                 }
               ],
               "fileLabel": "Pièces jointes"
@@ -157,8 +154,7 @@
                 {
                   "label": "Heure du constat",
                   "rank": 3,
-                  "type": "TEXT",
-                  "placeholder": "Heure du constat"
+                  "type": "TIMESLOT"
                 }
               ],
               "fileLabel": "Pièces jointes"
@@ -181,8 +177,7 @@
                 {
                   "label": "Heure du constat",
                   "rank": 3,
-                  "type": "TEXT",
-                  "placeholder": "Heure du constat"
+                  "type": "TIMESLOT"
                 }
               ],
               "fileLabel": "Pièces jointes"
@@ -230,8 +225,7 @@
             {
               "label": "Heure du constat",
               "rank": 5,
-              "type": "TEXT",
-              "placeholder": "Heure du constat"
+              "type": "TIMESLOT"
             }
           ],
           "fileLabel": "Pièces jointes"
@@ -266,8 +260,7 @@
             {
               "label": "Heure du constat",
               "rank": 4,
-              "type": "TEXT",
-              "placeholder": "Heure du constat"
+              "type": "TIMESLOT"
             }
           ],
           "fileLabel": "Pièces jointes"
@@ -290,8 +283,7 @@
             {
               "label": "Heure du constat",
               "rank": 3,
-              "type": "TEXT",
-              "placeholder": "Heure du constat"
+              "type": "TIMESLOT"
             }
           ],
           "fileLabel": "Pièces jointes"

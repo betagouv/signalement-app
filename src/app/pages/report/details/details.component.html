@@ -43,6 +43,17 @@
             </div>
           </div>
 
+          <div class="row" *ngIf="detailInput.type === 'TIMESLOT'">
+            <div class="col-12 col-sm-6">
+              <select [formControlName]="getFormControlName(detailInput)"
+                      [id]="getFormControlId(detailInput)"
+                      [class]="getFormControlValue(detailInput) ? 'selected' : ''">
+                <option disabled value="">Plage horaire</option>
+                <option *ngFor="let hour of plageHoraireList" value="de {{hour}}h à {{hour + 1}}h">de {{hour}}h à {{hour + 1}}h</option>
+              </select>
+            </div>
+          </div>
+
           <ng-container *ngIf="detailInput.type === 'RADIO'">
             <div class="row pb-2 pl-3" *ngFor="let option of detailInput.options">
               <div class="col-2 col-sm-1 text-right pr-1">
@@ -50,11 +61,32 @@
                        [formControlName]="getFormControlName(detailInput)"
                        [value]="option"
                        [id]="getFormControlId(detailInput, option)"
-                       (change)="initRadioPrecision(detailInput, option)"/>
+                       (change)="initDetailInputPrecision(detailInput, option)"/>
               </div>
               <div class="col-10 col-sm-11 pl-1">
                 <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)">{{option}}</label>
-                <div class="row" *ngIf="isRadioPrecisionRequired(detailInput, option)">
+                <div class="row" *ngIf="isDetailInputPrecisionRequired(detailInput, option)">
+                  <div class="col-12">
+                    <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="detailInput.type === 'CHECKBOX'">
+
+            <div class="row pb-2 pl-3" *ngFor="let option of detailInput.options">
+              <div class="col-2 col-sm-1 text-right pr-1">
+                <input type="checkbox"
+                       [formControlName]="getFormControlName(detailInput)"
+                       [value]="option"
+                       [id]="getFormControlId(detailInput, option)"
+                       (change)="initDetailInputPrecision(detailInput, option)"/>
+              </div>
+              <div class="col-10 col-sm-11 pl-1">
+                <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)">{{option}}</label>
+                <div class="row" *ngIf="isDetailInputPrecisionRequired(detailInput, option)">
                   <div class="col-12">
                     <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
                   </div>

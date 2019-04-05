@@ -93,15 +93,24 @@ export class DetailsComponent implements OnInit {
       this.getReportLastSubcategory().detailInputs
         .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
         .forEach(detailInput => {
-          this.detailsForm.addControl(
-            this.getFormControlName(detailInput),
-            this.formBuilder.control(this.getFormControlInitialValue(detailInput), Validators.required)
-          );
+          if (detailInput.type === 'CHECKBOX') {
+            this.detailsForm.addControl(
+              this.getFormControlName(detailInput),
+              this.formBuilder.array(detailInput.options.map(option => {
+               return this.formBuilder.control(false, Validators.required);
+              }))
+            );
+          } else {
+            this.detailsForm.addControl(
+              this.getFormControlName(detailInput),
+              this.formBuilder.control(this.getFormControlInitialValue(detailInput), Validators.required)
+            );
+          }
           if (detailInput.type === 'TEXTAREA') {
             this.searchKeywords(this.getFormControl(detailInput));
           }
           if (detailInput.type === 'RADIO') {
-            this.initRadioPrecision(detailInput, this.getFormControlInitialValue(detailInput) as string);
+            this.initDetailInputPrecision(detailInput, this.getFormControlInitialValue(detailInput) as string);
           }
         });
     } else {
@@ -130,7 +139,7 @@ export class DetailsComponent implements OnInit {
       const detailInputValue = this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
       if (detailInputValue) {
         value = detailInputValue.value;
-        if (detailInput.type === 'RADIO') {
+        if (detailInput.type === 'RADIO' || detailInput.type === 'CHECKBOX') {
           let stringValue = value as string;
           if (stringValue && stringValue.indexOf(PrecisionKeyword) !== -1) {
             stringValue = stringValue.slice(0, stringValue.indexOf(PrecisionKeyword) + PrecisionKeyword.length);
@@ -166,7 +175,7 @@ export class DetailsComponent implements OnInit {
 
   getFormControlValue(detailInput: DetailInput) {
     let detailInputValue = this.getFormControl(detailInput).value;
-    if (this.isRadioPrecisionRequired(detailInput, detailInputValue)) {
+    if (this.isDetailInputPrecisionRequired(detailInput, detailInputValue)) {
       detailInputValue = detailInputValue + this.detailsForm.controls[this.getFormControlName(detailInput, detailInputValue)].value;
     }return detailInputValue;
   }
@@ -356,20 +365,25 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  isRadioPrecisionRequired(detailInput: DetailInput, option: string) {
-    return detailInput.type === 'RADIO' && this.getFormControl(detailInput).value === option && option.indexOf(PrecisionKeyword) !== -1;
+  isDetailInputPrecisionRequired(detailInput: DetailInput, option: string) {
+    console.log('detailInput', detailInput)
+    if (detailInput.type === 'RADIO') {
+      return this.getFormControl(detailInput).value === option && option.indexOf(PrecisionKeyword) !== -1;
+    } else if (detailInput.type === 'CHECKBOX') {
+      return this.getFormControl(detailInput).value && option.indexOf(PrecisionKeyword) !== -1;
+    }
   }
 
-  initRadioPrecision(detailInput: DetailInput, checkedOption: string) {
-    if (this.isRadioPrecisionRequired(detailInput, checkedOption)) {
+  initDetailInputPrecision(detailInput: DetailInput, checkedOption: string) {
+    if (this.isDetailInputPrecisionRequired(detailInput, checkedOption)) {
 
       let precisionValue = '';
       if (this.report.detailInputValues) {
         const detailInputValue = this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
         if (detailInputValue) {
-          const radioValue = detailInputValue.value as string;
-          if (radioValue && radioValue.indexOf(PrecisionKeyword) !== -1) {
-            precisionValue = radioValue.slice(radioValue.indexOf(PrecisionKeyword) + PrecisionKeyword.length);
+          const value = detailInputValue.value as string;
+          if (value && value.indexOf(PrecisionKeyword) !== -1) {
+            precisionValue = value.slice(value.indexOf(PrecisionKeyword) + PrecisionKeyword.length);
           }
         }
       }
