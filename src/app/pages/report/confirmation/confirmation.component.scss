@@ -1,16 +1,19 @@
 @import "../../../../theme/variables";
 
-h4, h5 {
-  font-weight: bold;
-}
+section {
 
-ul.filename {
+  word-break: break-all;
 
-  padding-left: 1em;
+  h4, h5 {
+    font-weight: bold;
+  }
 
-  li {
-    a {
-      word-break: break-all;
+  ul.filename {
+
+    padding-left: 1em;
+
+    li + li {
+      padding-top: 0;
     }
   }
 }

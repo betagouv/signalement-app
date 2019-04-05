@@ -80,4 +80,10 @@ export class ConfirmationComponent implements OnInit {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
+  getReportLastSubcategory() {
+    if (this.report && this.report.subcategories && this.report.subcategories.length) {
+      return this.report.subcategories[this.report.subcategories.length - 1];
+    }
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Report, ReportDetails } from '../../../model/Report';
+import { DetailInputValue, PrecisionKeyword, Report, ReportDetails } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { otherPrecisionValue, ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
@@ -130,6 +130,13 @@ export class DetailsComponent implements OnInit {
       const detailInputValue = this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
       if (detailInputValue) {
         value = detailInputValue.value;
+        if (detailInput.type === 'RADIO') {
+          let stringValue = value as string;
+          if (stringValue && stringValue.indexOf(PrecisionKeyword) !== -1) {
+            stringValue = stringValue.slice(0, stringValue.indexOf(PrecisionKeyword) + PrecisionKeyword.length);
+          }
+          value = stringValue;
+        }
       }
     } else if (detailInput.type === 'DATE' && detailInput.defaultValue === 'SYSDATE') {
       value = new Date();
@@ -157,20 +164,16 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  /*getFormControlValue(detailInput: DetailInput) {
+  getFormControlValue(detailInput: DetailInput) {
     let detailInputValue = this.getFormControl(detailInput).value;
-    if (this.getFormControl(detailInput, detailInputValue)) {
-      const optionValue = this.getFormControl(detailInput, detailInputValue).value;
-      detailInputValue = detailInputValue + optionValue;
-    }
-    return detailInputValue;
-  }*/
+    if (this.isRadioPrecisionRequired(detailInput, detailInputValue)) {
+      detailInputValue = detailInputValue + this.detailsForm.controls[this.getFormControlName(detailInput, detailInputValue)].value;
+    }return detailInputValue;
+  }
 
   initUploadedFiles() {
     if (this.report.uploadedFiles) {
       this.uploadedFiles = this.report.uploadedFiles;
-    } else if (this.report.details && this.report.details.uploadedFiles) {
-      this.uploadedFiles = this.report.details.uploadedFiles;
     } else {
       this.uploadedFiles = [];
     }
@@ -236,10 +239,10 @@ export class DetailsComponent implements OnInit {
         this.report.detailInputValues = this.getReportLastSubcategory().detailInputs
           .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
           .map(detailInput => {
-            return {
+            return Object.assign(new DetailInputValue(), {
               label: detailInput.label,
-              value: this.getFormControl(detailInput).value
-            };
+              value: this.getFormControlValue(detailInput)
+            });
           });
         this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
       } else {
@@ -253,8 +256,8 @@ export class DetailsComponent implements OnInit {
         reportDetails.anomalyDate = this.anomalyDateCtrl.value;
         reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
         reportDetails.description = this.descriptionCtrl.value;
-        reportDetails.uploadedFiles = this.uploadedFiles.filter(file => file.id);
         this.report.details = reportDetails;
+        this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
       }
       this.reportService.changeReportFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
@@ -354,14 +357,26 @@ export class DetailsComponent implements OnInit {
   }
 
   isRadioPrecisionRequired(detailInput: DetailInput, option: string) {
-    return this.getFormControl(detailInput).value === option && option.indexOf('(à préciser)') !== -1;
+    return detailInput.type === 'RADIO' && this.getFormControl(detailInput).value === option && option.indexOf(PrecisionKeyword) !== -1;
   }
 
   initRadioPrecision(detailInput: DetailInput, checkedOption: string) {
     if (this.isRadioPrecisionRequired(detailInput, checkedOption)) {
+
+      let precisionValue = '';
+      if (this.report.detailInputValues) {
+        const detailInputValue = this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
+        if (detailInputValue) {
+          const radioValue = detailInputValue.value as string;
+          if (radioValue && radioValue.indexOf(PrecisionKeyword) !== -1) {
+            precisionValue = radioValue.slice(radioValue.indexOf(PrecisionKeyword) + PrecisionKeyword.length);
+          }
+        }
+      }
+
       this.detailsForm.addControl(
         this.getFormControlName(detailInput, checkedOption),
-        this.formBuilder.control('', Validators.required)
+        this.formBuilder.control(precisionValue, Validators.required)
       );
     }
     detailInput.options.forEach(o => {
@@ -370,6 +385,8 @@ export class DetailsComponent implements OnInit {
         }
     });
   }
+
+
 }
 
 interface Keyword {

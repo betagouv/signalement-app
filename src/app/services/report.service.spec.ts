@@ -86,7 +86,6 @@ describe('ReportService', () => {
       reportDetails.description = 'desc';
       reportDetails.anomalyDate = anomalyDate;
       reportDetails.anomalyTimeSlot = 5;
-      reportDetails.uploadedFiles = [anomalyFile];
       const consumer = new Consumer();
       consumer.lastName = 'lastName';
       consumer.firstName = 'firstName';
@@ -97,6 +96,7 @@ describe('ReportService', () => {
       company.line2 = 'line 2';
       company.line4 = 'line 4';
       const report = new Report();
+      report.uploadedFiles = [anomalyFile];
       report.category = 'category';
       report.subcategories = [subcategory1, subcategory2];
       report.details = reportDetails;
@@ -114,7 +114,7 @@ describe('ReportService', () => {
       httpMock.verify();
       expect(reportRequest.request.body['category']).toBe('category');
       expect(reportRequest.request.body['subcategories']).toEqual([subcategory1.title, subcategory2.title]);
-      expect(reportRequest.request.body['precision']).toBe('precision');
+      expect(reportRequest.request.body['details']).toEqual([{label: 'Précision :', value: 'precision'}]);
       expect(reportRequest.request.body['companyName']).toBe('companyName');
       expect(reportRequest.request.body['companyAddress']).toBe('line 1 - line 2 - line 4');
       expect(reportRequest.request.body['description']).toBe('desc');

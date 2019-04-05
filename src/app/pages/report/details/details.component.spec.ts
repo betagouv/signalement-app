@@ -3,7 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
-import { Report, ReportDetails } from '../../../model/Report';
+import { DetailInputValue, Report, ReportDetails } from '../../../model/Report';
 import { DetailInput, Precision, Subcategory, SubcategoryDetails } from '../../../model/Anomaly';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
@@ -179,7 +179,7 @@ describe('DetailsComponent', () => {
 
       const reportExpected = new Report();
       reportExpected.subcategories = reportWithSubcategory.subcategories;
-      reportExpected.detailInputValues = [{label: textDetailInputFixture.label, value: 'valeur'}];
+      reportExpected.detailInputValues = [Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'})];
       reportExpected.uploadedFiles = [];
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
@@ -251,15 +251,13 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      console.log('valid', component.detailsForm.controls.formControl_3_1.hasError('required'))
-
       const reportExpected = new Report();
       reportExpected.subcategories = reportWithSubcategory.subcategories;
       reportExpected.detailInputValues = [
-        {label: textDetailInputFixture.label, value: 'valeur'},
-        {label: dateDetailInputFixture.label, value: anomalyDateFixture},
-        {label: radioDetailInputFixture.label, value: radioDetailInputFixture.options[1]},
-        {label: textareaDetailInputFixture.label, value: 'ma description'}
+        Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'}),
+        Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),
+        Object.assign(new DetailInputValue(), {label: radioDetailInputFixture.label, value: radioDetailInputFixture.options[1] + 'ma précision'}),
+        Object.assign(new DetailInputValue(), {label: textareaDetailInputFixture.label, value: 'ma description'})
       ];
       reportExpected.uploadedFiles = [];
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
@@ -334,8 +332,8 @@ describe('DetailsComponent', () => {
       detailsExpected.otherPrecision = 'Autre précision';
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
+      reportExpected.uploadedFiles = [anomalyFileFixture];
       reportExpected.subcategories = [new Subcategory()];
       reportExpected.subcategories[0].details = subcategoryDetails;
       reportExpected.details = detailsExpected;
@@ -410,8 +408,8 @@ describe('DetailsComponent', () => {
       detailsExpected.precision = ['option 1', 'option 3'];
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
+      reportExpected.uploadedFiles = [anomalyFileFixture];
       reportExpected.subcategories = [new Subcategory()];
       reportExpected.subcategories[0].details = subcategoryDetails;
       reportExpected.details = detailsExpected;
@@ -472,8 +470,8 @@ describe('DetailsComponent', () => {
       detailsExpected.description = 'Description';
       detailsExpected.anomalyDate = anomalyDateFixture;
       detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
+      reportExpected.uploadedFiles = [anomalyFileFixture];
       reportExpected.subcategories = [new Subcategory()];
       reportExpected.subcategories[0].details = subcategoryDetails;
       reportExpected.details = detailsExpected;
