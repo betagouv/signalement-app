@@ -97,7 +97,10 @@ export class DetailsComponent implements OnInit {
             this.detailsForm.addControl(
               this.getFormControlName(detailInput),
               this.formBuilder.array(detailInput.options.map(option => {
-               return this.formBuilder.control(false, Validators.required);
+               return this.formBuilder.control(
+                 (this.getFormControlInitialValue(detailInput) as string).indexOf(option) !== -1,
+                 Validators.required
+               );
               }))
             );
           } else {
@@ -110,7 +113,7 @@ export class DetailsComponent implements OnInit {
             this.searchKeywords(this.getFormControl(detailInput));
           }
           if (detailInput.type === 'RADIO') {
-            this.initDetailInputPrecision(detailInput, this.getFormControlInitialValue(detailInput) as string);
+            this.initRadioInputPrecision(detailInput, this.getFormControlInitialValue(detailInput) as string);
           }
         });
     } else {
@@ -139,7 +142,7 @@ export class DetailsComponent implements OnInit {
       const detailInputValue = this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
       if (detailInputValue) {
         value = detailInputValue.value;
-        if (detailInput.type === 'RADIO' || detailInput.type === 'CHECKBOX') {
+        if (detailInput.type === 'RADIO') {
           let stringValue = value as string;
           if (stringValue && stringValue.indexOf(PrecisionKeyword) !== -1) {
             stringValue = stringValue.slice(0, stringValue.indexOf(PrecisionKeyword) + PrecisionKeyword.length);
@@ -155,6 +158,10 @@ export class DetailsComponent implements OnInit {
 
   getFormControl(detailInput: DetailInput, option?: string) {
     return this.detailsForm.controls[this.getFormControlName(detailInput, option)];
+  }
+
+  getFormArray(detailInput: DetailInput) {
+    return this.getFormControl(detailInput) as FormArray;
   }
 
   getFormControlName(detailInput: DetailInput, option?: string) {
@@ -174,10 +181,17 @@ export class DetailsComponent implements OnInit {
   }
 
   getFormControlValue(detailInput: DetailInput) {
-    let detailInputValue = this.getFormControl(detailInput).value;
-    if (this.isDetailInputPrecisionRequired(detailInput, detailInputValue)) {
-      detailInputValue = detailInputValue + this.detailsForm.controls[this.getFormControlName(detailInput, detailInputValue)].value;
-    }return detailInputValue;
+    const detailInputValue = this.getFormControl(detailInput).value;
+    if (detailInput.type === 'CHECKBOX') {
+      return this.getFormArray(detailInput).controls
+        .map((control, index) => control.value ? detailInput.options[index] : null)
+        .filter(value => value !== null)
+        .reduce((v1, v2) => `${v1}, ${v2}`);
+    } else if (detailInput.type === 'RADIO' && this.isRadioInputPrecisionRequired(detailInput, detailInputValue)) {
+      return detailInputValue + this.detailsForm.controls[this.getFormControlName(detailInput, detailInputValue)].value;
+    } else {
+      return detailInputValue;
+    }
   }
 
   initUploadedFiles() {
@@ -365,18 +379,12 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  isDetailInputPrecisionRequired(detailInput: DetailInput, option: string) {
-    console.log('detailInput', detailInput)
-    if (detailInput.type === 'RADIO') {
-      return this.getFormControl(detailInput).value === option && option.indexOf(PrecisionKeyword) !== -1;
-    } else if (detailInput.type === 'CHECKBOX') {
-      return this.getFormControl(detailInput).value && option.indexOf(PrecisionKeyword) !== -1;
-    }
+  isRadioInputPrecisionRequired(detailInput: DetailInput, option: string) {
+    return option && this.getFormControl(detailInput).value === option && option.indexOf(PrecisionKeyword) !== -1;
   }
 
-  initDetailInputPrecision(detailInput: DetailInput, checkedOption: string) {
-    if (this.isDetailInputPrecisionRequired(detailInput, checkedOption)) {
-
+  initRadioInputPrecision(detailInput: DetailInput, checkedOption: string) {
+    if (this.isRadioInputPrecisionRequired(detailInput, checkedOption)) {
       let precisionValue = '';
       if (this.report.detailInputValues) {
         const detailInputValue = this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
@@ -387,7 +395,6 @@ export class DetailsComponent implements OnInit {
           }
         }
       }
-
       this.detailsForm.addControl(
         this.getFormControlName(detailInput, checkedOption),
         this.formBuilder.control(precisionValue, Validators.required)
@@ -400,6 +407,19 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  isCheckboxInputPrecisionRequired(detailInput: DetailInput, optionIndex: number) {
+    //TODO
+    return false && this.getFormArray(detailInput).controls[optionIndex].value && detailInput.options[optionIndex].indexOf(PrecisionKeyword) !== -1;
+  }
+
+  initCheckboxInputPrecision(detailInput: DetailInput, optionIndex: number) {
+    if (this.isCheckboxInputPrecisionRequired(detailInput, optionIndex)) {
+      this.detailsForm.addControl(
+        this.getFormControlName(detailInput, detailInput.options[optionIndex]),
+        this.formBuilder.control('', Validators.required)
+      );
+    }
+  }
 
 }
 

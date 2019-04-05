@@ -61,11 +61,11 @@
                        [formControlName]="getFormControlName(detailInput)"
                        [value]="option"
                        [id]="getFormControlId(detailInput, option)"
-                       (change)="initDetailInputPrecision(detailInput, option)"/>
+                       (change)="initRadioInputPrecision(detailInput, option)"/>
               </div>
               <div class="col-10 col-sm-11 pl-1">
                 <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)">{{option}}</label>
-                <div class="row" *ngIf="isDetailInputPrecisionRequired(detailInput, option)">
+                <div class="row" *ngIf="isRadioInputPrecisionRequired(detailInput, option)">
                   <div class="col-12">
                     <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
                   </div>
@@ -76,19 +76,18 @@
 
           <ng-container *ngIf="detailInput.type === 'CHECKBOX'">
 
-            <div class="row pb-2 pl-3" *ngFor="let option of detailInput.options">
+            <div class="row pb-2 pl-3" *ngFor="let precisionControl of getFormControl(detailInput).controls; let i = index">
               <div class="col-2 col-sm-1 text-right pr-1">
                 <input type="checkbox"
-                       [formControlName]="getFormControlName(detailInput)"
-                       [value]="option"
-                       [id]="getFormControlId(detailInput, option)"
-                       (change)="initDetailInputPrecision(detailInput, option)"/>
+                       [formControl]="precisionControl"
+                       [id]="getFormControlId(detailInput, detailInput.options[i])"
+                       (change)="initCheckboxInputPrecision(detailInput, i)"/>
               </div>
               <div class="col-10 col-sm-11 pl-1">
-                <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)">{{option}}</label>
-                <div class="row" *ngIf="isDetailInputPrecisionRequired(detailInput, option)">
+                <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, detailInput.options[i])">{{detailInput.options[i]}}</label>
+                <div class="row" *ngIf="isCheckboxInputPrecisionRequired(detailInput, i)">
                   <div class="col-12">
-                    <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
+                    <input type="text" [formControlName]="getFormControlName(detailInput, detailInput.options[i])" [id]="getFormControlId(detailInput, detailInput.options[i], true)" placeholder="Précisez ...">
                   </div>
                 </div>
               </div>

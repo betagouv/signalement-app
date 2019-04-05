@@ -12,16 +12,16 @@
           "samples": "Exemples : cuisine, WC, rayon réfrigéré...",
           "detailInputs": [
             {
-              "label": "Quel endroits est concerné ?",
+              "label": "Quels endroits sont concernés ?",
               "rank": 1,
-              "type": "RADIO",
+              "type": "CHECKBOX",
               "options": [
                 "Cuisine",
                 "Atelier de fabrication",
                 "Salle du restaurant / bar",
                 "Lieu de vente",
                 "WC",
-                "Autre (à préciser)"
+                "Autre"
               ]
             },
             {
@@ -48,26 +48,20 @@
               ]
             },
             {
-              "label": "Où avez-vous vu la publicité ?",
-              "rank": 4,
-              "type": "RADIO",
-              "options": ["Internet", "Catalogue papier"]
-            },
-            {
               "label": "Pour aider les enquêteurs et le commerçant, dites-nous en plus (rayon du magasin, type de saleté ...)",
-              "rank": 5,
+              "rank": 4,
               "type": "TEXTAREA"
             },
             {
               "label": "Date du constat",
-              "rank": 6,
+              "rank": 5,
               "type": "DATE",
               "defaultValue": "SYSDATE",
               "placeholder": "Date du constat"
             },
             {
               "label": "Heure du constat",
-              "rank": 7,
+              "rank": 6,
               "type": "TIMESLOT"
             }
           ],
