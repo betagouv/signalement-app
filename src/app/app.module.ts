@@ -46,7 +46,7 @@ registerLocaleData(localeFr, 'fr');
       { path: 'comment-ça-marche', component: HowComponent },
       { path: 'qui-sommes-nous', component: AboutComponent },
       { path: 'vous-êtes-un-commerçant', component: ProComponent }
-    ]),
+    ], {scrollPositionRestoration: 'top'}),
     ReportModule,
     BrowserModule,
     BrowserAnimationsModule,

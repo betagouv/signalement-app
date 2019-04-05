@@ -1,5 +1,4 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { ReportService } from './report.service';
 import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
@@ -44,36 +43,24 @@ export class ReportRouterService {
   }
 
   routeForward(currentStep: Step) {
-    if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
-    }
     this.router.navigate(
       this.getRouteFromStep(this.nextStep(currentStep))
     );
   }
 
   routeBackward(currentStep: Step) {
-    if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
-    }
     this.router.navigate(
       this.getRouteFromStep(this.previousStep(currentStep))
     );
   }
 
   routeToFirstStep() {
-    if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
-    }
     this.router.navigate(
       this.getRouteFromStep(Step.Category)
     );
   }
 
   routeToStep(step: Step) {
-    if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
-    }
    this.router.navigate(this.getRouteFromStep(step));
   }
 

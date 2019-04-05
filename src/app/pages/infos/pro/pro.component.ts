@@ -15,8 +15,6 @@ export class ProComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pages.pro.title);
     this.meta.updateTag({ name: 'description', content: pages.pro.description });
-
-    window.scroll(0, 0);
   }
 
 }
