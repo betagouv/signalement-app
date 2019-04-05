@@ -34,6 +34,8 @@ export class DetailInputValue {
     } else {
       if (this._value.indexOf(PrecisionKeyword) !== -1) {
         this.renderedValue = this._value.replace(PrecisionKeyword, '(').concat(')');
+      } else {
+        this.renderedValue = value as string;
       }
     }
   }

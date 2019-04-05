@@ -1,5 +1,5 @@
 <div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''">
-  <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Quel a été votre problème ?'"></h4>
+  <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
 
   <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
     <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
