@@ -8,82 +8,293 @@
       "icon": "icon_hygien.png",
       "subcategories": [
         {
-          "title": "Locaux / matériel sales",
+          "title": "Locaux / matériel sales ou dégradés",
           "samples": "Exemples : cuisine, WC, rayon réfrigéré...",
-          "details": {
-            "descriptionTips": "Afin que le professionnel puisse corriger la situation, vous pouvez préciser le rayon exact, le type de salissure...",
-            "precision": {
-              "title": "Quelle(s) zone(s) est concernée(s) ? ",
-              "severalOptionsAllowed": true,
+          "detailInputs": [
+            {
+              "label": "Quel endroits est concerné ?",
+              "rank": 1,
+              "type": "RADIO",
               "options": [
-                { "title": "Cuisine" },
-                { "title": "Salle du restaurant / bar" },
-                { "title": "WC" },
-                { "title": "Magasin (sol)" },
-                { "title": "Magasin (vitrine /frigo)" },
-                { "title": "Atelier de fabrication" },
-                { "title": "Autre" }
+                "Cuisine",
+                "Atelier de fabrication",
+                "Salle du restaurant / bar",
+                "Lieu de vente",
+                "WC",
+                "Autre (à préciser)"
               ]
+            },
+            {
+              "label": "A quel niveau ?",
+              "rank": 2,
+              "type": "RADIO",
+              "options": [
+                "Sol",
+                "Mur",
+                "Vitrine / frigo",
+                "Équipements mis à disposition des clients",
+                "Matériel de fabrication",
+                "Distributeur automatique",
+                "Autre (à préciser)"
+              ]
+            },
+            {
+              "label": "Quel est le problème ?",
+              "rank": 3,
+              "type": "RADIO",
+              "options": [
+                "C'est sale",
+                "C'est dégradé, en mauvais état"
+              ]
+            },
+            {
+              "label": "Où avez-vous vu la publicité ?",
+              "rank": 4,
+              "type": "RADIO",
+              "options": ["Internet", "Catalogue papier"]
+            },
+            {
+              "label": "Pour aider les enquêteurs et le commerçant, dites-nous en plus (rayon du magasin, type de saleté ...)",
+              "rank": 5,
+              "type": "TEXTAREA"
+            },
+            {
+              "label": "Date du constat",
+              "rank": 6,
+              "type": "DATE",
+              "defaultValue": "SYSDATE",
+              "placeholder": "Date du constat"
+            },
+            {
+              "label": "Heure du constat",
+              "rank": 7,
+              "type": "TEXT",
+              "placeholder": "Heure du constat"
             }
-          }
-        },
-        {
-          "title": "Personnel sans coiffe ou sans gants",
-          "information": {
-            "title": "Cet incident ne constitue pas un motif de signalement.",
-            "content": "Il n'existe pas d'obligation réglementaire imposant le port de la coiffe (charlotte) ou des gants.<br/>Le lavage des mains peut être suffisant pour éviter les contaminations."
-          }
+          ],
+          "fileLabel": "Pièces jointes"
         },
         {
           "title": "Hygiène du personnel",
           "samples": "Exemples : tenue sale, mauvaise pratique d'hygiène...",
-          "details": {
-            "precision": {
-              "title": "Veuillez préciser :",
-              "options": [
+          "subcategories": [
+            {
+              "title": "Tenue de travail pas adaptée",
+              "subcategories": [
                 {
-                  "title": "Tenue sale"
+                  "title": "Pas de coiffe ou pas de gants",
+                  "information": {
+                    "title": "Cet incident ne constitue pas un motif de signalement.",
+                    "content": "La réglementation précise les personnes qui travaillent dans une zone où sont manipulés des aliments doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.\nLes restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Le lavage des mains peut être suffisant pour éviter les contaminations."
+                  }
                 },
                 {
-                  "title": "Autre",
-                  "content": "Exemples : mauvaise pratique d'hygiène, personnel qui fume en cuisine..."
+                  "title": "Autre problème sur la tenue de travail",
+                  "detailInputs": [
+                    {
+                      "label": "Description",
+                      "rank": 1,
+                      "type": "TEXTAREA"
+                    },
+                    {
+                      "label": "Date du constat",
+                      "rank": 2,
+                      "type": "DATE",
+                      "defaultValue": "SYSDATE",
+                      "placeholder": "Date du constat"
+                    },
+                    {
+                      "label": "Heure du constat",
+                      "rank": 3,
+                      "type": "TEXT",
+                      "placeholder": "Heure du constat"
+                    }
+                  ],
+                  "fileLabel": "Pièces jointes"
                 }
               ]
+            },
+            {
+              "title": "Tenue sale",
+              "detailInputs": [
+                {
+                  "label": "Description",
+                  "rank": 1,
+                  "type": "TEXTAREA"
+                },
+                {
+                  "label": "Date du constat",
+                  "rank": 2,
+                  "type": "DATE",
+                  "defaultValue": "SYSDATE",
+                  "placeholder": "Date du constat"
+                },
+                {
+                  "label": "Heure du constat",
+                  "rank": 3,
+                  "type": "TEXT",
+                  "placeholder": "Heure du constat"
+                }
+              ],
+              "fileLabel": "Pièces jointes"
+            },
+            {
+              "title": "Mauvaises pratiques d'hygiène",
+              "samples": "Exemples : pas de lavage des mains, personne qui fume en cuisine...",
+              "detailInputs": [
+                {
+                  "label": "Description",
+                  "rank": 1,
+                  "type": "TEXTAREA"
+                },
+                {
+                  "label": "Date du constat",
+                  "rank": 2,
+                  "type": "DATE",
+                  "defaultValue": "SYSDATE",
+                  "placeholder": "Date du constat"
+                },
+                {
+                  "label": "Heure du constat",
+                  "rank": 3,
+                  "type": "TEXT",
+                  "placeholder": "Heure du constat"
+                }
+              ],
+              "fileLabel": "Pièces jointes"
+            },
+            {
+              "title": "Autre",
+              "detailInputs": [
+                {
+                  "label": "Description",
+                  "rank": 1,
+                  "type": "TEXTAREA"
+                },
+                {
+                  "label": "Date du constat",
+                  "rank": 2,
+                  "type": "DATE",
+                  "defaultValue": "SYSDATE",
+                  "placeholder": "Date du constat"
+                },
+                {
+                  "label": "Heure du constat",
+                  "rank": 3,
+                  "type": "TEXT",
+                  "placeholder": "Heure du constat"
+                }
+              ],
+              "fileLabel": "Pièces jointes"
             }
-          }
+          ]
         },
         {
           "title": "Présence d'animaux",
-          "samples": "Exemples : rat, insectes, oiseaux, chien...",
-          "details": {
-            "precision": {
-              "title": "Veuillez préciser :",
+          "samples": "Exemples : rat, insectes, oiseaux, ...",
+          "detailInputs": [
+            {
+              "label": "Quel animal avez-vous vu ?",
+              "rank": 1,
+              "type": "RADIO",
               "options": [
-                { "title": "Insectes" },
-                { "title": "Rongeurs (rat, souris)" },
-                { "title": "Oiseau" },
-                { "title": "Chien" },
-                { "title": "Autre" }
+                "Insectes (cafard..)",
+                "Rongeurs (rat, souris)",
+                "Oiseau (pigeon..)",
+                "Autre (à préciser)"
               ]
+            },
+            {
+              "label": "Où l'avez-vous vu ?",
+              "rank": 2,
+              "type": "RADIO",
+              "options": [
+                "Cuisine / Lieu de production",
+                "Intérieur d'un magasin",
+                "Salle d'un bar ou d'un restaurant",
+                "Autre (à préciser)"
+              ]
+            },
+            {
+              "label": "Description",
+              "rank": 3,
+              "type": "TEXTAREA"
+            },
+            {
+              "label": "Date du constat",
+              "rank": 4,
+              "type": "DATE",
+              "defaultValue": "SYSDATE",
+              "placeholder": "Date du constat"
+            },
+            {
+              "label": "Heure du constat",
+              "rank": 5,
+              "type": "TEXT",
+              "placeholder": "Heure du constat"
             }
-          }
+          ],
+          "fileLabel": "Pièces jointes"
         },
         {
           "title": "Problème de température",
           "samples": "Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...",
-          "details": {
-            "precision": {
-              "title": "Veuillez préciser :",
+          "detailInputs": [
+            {
+              "label": "Quel est le problème ?",
+              "rank": 1,
+              "type": "RADIO",
               "options": [
-                { "title": "Meuble réfrigéré en panne ou température insuffisante" },
-                { "title": "Stockage de produits frais à température ambiante" },
-                { "title": "Autre" }
+                "Meuble réfrigéré / surgelé en panne ou température insuffisante",
+                "Stockage de produits frais / surgelés à température ambiante",
+                "Transport de produits frais / surgelés à température ambiante",
+                "Autre problème de température"
               ]
+            },
+            {
+              "label": "Description",
+              "rank": 2,
+              "type": "TEXTAREA"
+            },
+            {
+              "label": "Date du constat",
+              "rank": 3,
+              "type": "DATE",
+              "defaultValue": "SYSDATE",
+              "placeholder": "Date du constat"
+            },
+            {
+              "label": "Heure du constat",
+              "rank": 4,
+              "type": "TEXT",
+              "placeholder": "Heure du constat"
             }
-          }
+          ],
+          "fileLabel": "Pièces jointes"
         },
         {
-          "title": "Autre problème d'hygiène"
+          "title": "Autre problème d'hygiène",
+          "detailInputs": [
+            {
+              "label": "Description",
+              "rank": 1,
+              "type": "TEXTAREA"
+            },
+            {
+              "label": "Date du constat",
+              "rank": 2,
+              "type": "DATE",
+              "defaultValue": "SYSDATE",
+              "placeholder": "Date du constat"
+            },
+            {
+              "label": "Heure du constat",
+              "rank": 3,
+              "type": "TEXT",
+              "placeholder": "Heure du constat"
+            }
+          ],
+          "fileLabel": "Pièces jointes"
         }
       ]
     },
