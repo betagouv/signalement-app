@@ -1,123 +1,132 @@
 <div class="banner text-center section section-primary" role="banner">
-  <div class="container">
-    <h1>
-      Signalez un problème au commerçant et à la répression des fraudes
-    </h1>
-    <h3>
-      en <strong class="text-uppercase">Centre-Val de Loire</strong> et <strong class="text-uppercase">Auvergne-Rhône-Alpes</strong>
-    </h3>
-    <img src="/assets/images/carte-de-france.png" alt="Carte de la France" />
-  </div>
-</div>
-
-<main role="main">
-
-  <alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
-    <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer au commerçant ?</h4>
-    <button type="submit" class="button-outline warning" (click)="removeStoredReport()">Non</button>
-    <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
-  </alert>
-
-  <section class="section section-lighter-grey py-3">
     <div class="container">
-      <nav class="nav nav-pills nav-justified">
-        <a class="nav-item nav-link" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
-        <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Service)" [ngClass]="{'active': selectedCompanyType == companyType.Service}">Prestations de service</a>
-        <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Internet)" [ngClass]="{'active': selectedCompanyType == companyType.Internet}">Achats sur internet</a>
-      </nav>
+      <h1 class="rounded">
+        Signalez un problème au commerçant et à la répression des fraudes
+      </h1>
+      <h4>
+        en <strong class="text-uppercase">Centre-Val de Loire</strong> et <strong class="text-uppercase">Auvergne-Rhône-Alpes</strong>
+      </h4>
+      <img src="/assets/images/carte-de-france.png" alt="Carte de la France" />
     </div>
-  </section>
-
-  <section class="section section-lightest-grey position-relative">
-
-    <div class="container" *ngIf="selectedCompanyType == companyType.Physical">
-      <h3 class="text-center">Quel est le problème ?</h3>
-      <div class="row pb-4">
-        <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
-          <div class="category pointer" (click)="selectAnomaly(category)">
-            <div class="row">
-              <div class="col-12 col-lg-3 mb-2 text-center">
-                <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
-              </div>
-              <div class="col-12 col-lg-9 pl-lg-0">
-                <h5 class="mb-0">{{category.category}}</h5>
-                <span class="note">{{category.description}}</span>
+  </div>
+  
+  <main role="main">
+  
+    <alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
+      <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer au commerçant ?</h4>
+      <button type="submit" class="button-outline warning" (click)="removeStoredReport()">Non</button>
+      <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
+    </alert>
+  
+    <section class="section section-lighter-grey py-3">
+      <div class="container">
+        <nav class="nav nav-pills nav-justified">
+          <a class="nav-item nav-link blue light" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
+          <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Service)" [ngClass]="{'active': selectedCompanyType == companyType.Service}">Prestations de service</a>
+          <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Internet)" [ngClass]="{'active': selectedCompanyType == companyType.Internet}">Achats sur internet</a>
+        </nav>
+      </div>
+    </section>
+  
+    <section class="section section-lightest-grey position-relative">
+  
+      <div class="container mt-n4" *ngIf="selectedCompanyType == companyType.Physical">
+        <h3 class="text-center">Quel est le problème ?</h3>
+        <div class="row pb-4">
+          <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
+            <div class="category pointer" (click)="selectAnomaly(category)">
+              <div class="row">
+                <div class="col-12 col-lg-3 mb-2 text-center">
+                  <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
+                </div>
+                <div class="col-12 col-lg-9 pl-lg-0">
+                  <h5 class="mb-0">{{category.category}}</h5>
+                  <span class="note">{{category.description}}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <h3 class="text-center pointer" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
-        <u>Mon problème n'est pas dans la liste</u>
-      </h3>
-      <ng-template #secondaryCategories>
-        <h3 class="text-center">
-          Autres problèmes
+  
+        <h3 class="text-center pointer" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
+          <u>Mon problème n'est pas dans la liste</u>
         </h3>
-        <ul>
-          <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)">
-            <h5><u>{{category.category}}</u></h5>
-          </li>
-        </ul>
-      </ng-template>
-    </div>
-
-    <div class="container" *ngIf="selectedCompanyType == companyType.Service">
-      <div class="notification">
-        <p>Le signalement de problèmes rencontrés lors de prestations de service n’est pas encore disponible mais nous y travaillons activement.</p>
-        <p>Ceci comprend notamment les activités suivantes :</p>
-        <ul>
-          <li>métiers des soins et de la beauté</li>
-          <li>transports (taxi, train, …)</li>
-          <li>travaux et dépannage</li>
-          <li>aide à la personne</li>
-          <li>soin des vêtements (laverie, pressing, …)</li>
-          <li>hôtellerie</li>
-        </ul>
+        <ng-template #secondaryCategories>
+          <h3 class="text-center">
+            Autres problèmes
+          </h3>
+          <ul>
+            <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)">
+              <h5><u>{{category.category}}</u></h5>
+            </li>
+          </ul>
+        </ng-template>
       </div>
-    </div>
-
-    <div class="container" *ngIf="selectedCompanyType == companyType.Internet">
-      <div class="notification">
-        <p>Le signalement de problèmes rencontrés lors d’achats sur internet n’est pas encore disponible mais nous y travaillons activement.</p>
-        <p [innerHTML]="internetInformation?.content"></p>
-      </div>
-    </div>
-
-  </section>
-
-  <section class="section section-lighter-grey">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
-          <div class="icon">
-            <img src="/assets/images/icon_fast.png" alt="Icône magasin"/>
-          </div>
-          <p class="text-center"><b>Rapide</b></p>
-          <p>
-            Des questions simples pour vous guider afin de signaler rapidement votre problème et connaître vos droits.
-          </p>
-        </div>
-        <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
-          <div class="icon">
-            <img src="/assets/images/icon_approbation.png" alt="Icône workflow"/>
-          </div>
-          <p class="text-center"><b>Transparent</b></p>
-          <p>
-            Le commerçant, s’il le souhaite, a accès aux signalements. Cela lui permet de procéder spontanément aux corrections utiles, sans sanction.
-          </p>
-        </div>
-        <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
-          <div class="icon">
-            <img src="/assets/images/icon_collaboration.png" alt="Icône alarme"/>
-          </div>
-          <p class="text-center"><b>Participatif</b></p>
-          <p>
-            Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ? Les enquêteurs de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>) seront avertis afin d’intervenir.
-          </p>
+  
+      <div class="container" *ngIf="selectedCompanyType == companyType.Service">
+        <div class="notification">
+          <p>Le signalement de problèmes rencontrés lors de prestations de service n’est pas encore disponible mais nous y travaillons activement.</p>
+          <p>Ceci comprend notamment les activités suivantes :</p>
+          <ul>
+            <li>métiers des soins et de la beauté</li>
+            <li>transports (taxi, train, …)</li>
+            <li>travaux et dépannage</li>
+            <li>aide à la personne</li>
+            <li>soin des vêtements (laverie, pressing, …)</li>
+            <li>hôtellerie</li>
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+  
+      <div class="container max-width" *ngIf="selectedCompanyType == companyType.Internet">
+        <p class="mx-auto mb-4 text-center title" [innerHTML]="internetInformation?.title"></p>
+  
+        <p class="mb-4 text-center">{{ internetInformation?.subTitle }}</p>
+        <p class="mb-5" *ngIf="internetInformation?.content" [innerHTML]="internetInformation?.content"></p>
+  
+        <div class="card mx-auto mb-4 rounded-lg action" *ngFor="let action of internetInformation?.actions">
+          <div class="card-body">
+            <p class="card-text">{{ action.question }}</p>
+            <p class="card-text text-muted" *ngIf="action.example">{{ action.example }}</p>
+          </div>
+          <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
+        </div>
+      </div>
+  
+    </section>
+  
+    <section class="section section-lighter-grey">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
+            <div class="icon">
+              <img src="/assets/images/icon_fast.png" alt="Icône magasin"/>
+            </div>
+            <p class="text-center"><b>Rapide</b></p>
+            <p>
+              Des questions simples pour vous guider afin de signaler rapidement votre problème et connaître vos droits.
+            </p>
+          </div>
+          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
+            <div class="icon">
+              <img src="/assets/images/icon_approbation.png" alt="Icône workflow"/>
+            </div>
+            <p class="text-center"><b>Transparent</b></p>
+            <p>
+              Le commerçant, s’il le souhaite, a accès aux signalements. Cela lui permet de procéder spontanément aux corrections utiles, sans sanction.
+            </p>
+          </div>
+          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
+            <div class="icon">
+              <img src="/assets/images/icon_collaboration.png" alt="Icône alarme"/>
+            </div>
+            <p class="text-center"><b>Participatif</b></p>
+            <p>
+              Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ? Les enquêteurs de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>) seront avertis afin d’intervenir.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  

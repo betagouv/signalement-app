@@ -70,6 +70,6 @@ describe('InformationComponent', () => {
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelector('h4').textContent).toEqual(anomalyFixture.information.title);
+    expect(nativeElement.querySelector('.title').textContent).toEqual(anomalyFixture.information.title);
   });
 });

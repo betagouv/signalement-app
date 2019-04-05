@@ -1,17 +1,38 @@
 import { JsonProperty } from 'json-typescript-mapper';
 
 
+export class Action {
+  @JsonProperty('question')
+  question: string;
+  @JsonProperty('example')
+  example: string;
+  @JsonProperty('answer')
+  answer: string;
+
+  constructor() {
+    this.question = undefined;
+    this.example = undefined;
+    this.answer = undefined;
+  }
+}
+
 export class Information {
   @JsonProperty('title')
   title: string;
+  @JsonProperty('subTitle')
+  subTitle?: string;
   @JsonProperty('content')
   content?: string;
+  @JsonProperty({ name: 'actions', clazz: Action})
+  actions?: Action[];
   @JsonProperty('reference')
   reference?: string;
 
   constructor() {
     this.title = undefined;
+    this.subTitle = undefined;
     this.content = undefined;
+    this.actions = undefined;
     this.reference = undefined;
   }
 }

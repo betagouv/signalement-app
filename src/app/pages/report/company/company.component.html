@@ -1,11 +1,11 @@
 <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white position-relative">
-  <div class="container">
+  <div class="container max-width">
     <form (submit)="selectCompany(report?.company)" *ngIf="report?.company; else noCompany">
       <div class="row">
         <div class="col-12 text-center">
-          <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
-          <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
+          <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
+          <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
           <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
           <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
           <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
@@ -26,13 +26,19 @@
     </form>
 
     <ng-template #noCompany>
-      <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
-        <div class="form__group">
+
+      <nav class="nav nav-tabs nav-justified">
+        <a class="nav-item nav-link" [routerLink]="" (click)="isNotAround()" [ngClass]="{'active': !around}">Recherche de l'établissement</a>
+        <a class="nav-item nav-link" [routerLink]="" (click)="isAround()" [ngClass]="{'active': around}">Recherche à proximité</a>
+      </nav>
+
+      <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="!around && searchForm">
+        
+        <div class="form__group mt-4">
           <label for="searchInput">Nom ou enseigne de l'établissement <span>*</span>
           </label>
           <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
         </div>
-
         <div class="form__group">
           <label for="searchPostalCodeInput">
             Code postal <span>*</span>
@@ -43,7 +49,7 @@
             </div>
           </div>
         </div>
-        <div class="notification error mt-3" *ngIf="showErrors && searchForm.invalid">
+        <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
           <span *ngIf="searchCtrl.hasError('required')">
             Veuillez renseigner le nom de l'établissement.<br />
           </span>
@@ -54,46 +60,64 @@
             Le code postal doit être composé de 5 chiffres.
           </span>
         </div>
-        <div class="text-center mt-3">
-          <button type="submit" class="btn btn-lg btn-primary">Rechercher</button>
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-lg btn-primary" id="submitSearchForm">
+            <img alt="Icône du bouton recherche" src="/assets/images/icon_search.png">
+            Rechercher
+          </button>
         </div>
 
-
-        <div *ngIf="companies && companies.length">
-
-          <div class="notification warning mt-4">
-            Veuillez sélectionner un établissement dans la liste ci-dessous.
-          </div>
-
-          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
-            <span *ngIf="company.line1">{{company.line1}}<br /></span>
-            <span *ngIf="company.line2">{{company.line2}}<br /></span>
-            <span *ngIf="company.line3">{{company.line3}}<br /></span>
-            <span *ngIf="company.line4">{{company.line4}}<br /></span>
-            <span *ngIf="company.line5">{{company.line5}}<br /></span>
-            <span *ngIf="company.line6">{{company.line6}}<br /></span>
-            <span *ngIf="company.line7">{{company.line7}}<br /></span>
-          </p>
-
-          <div class="notification warning mt-4">
-            Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
-          </div>
-        </div>
-
-        <div class="notification error mt-4" *ngIf="searchWarning">
-          <p>
-            {{searchWarning}}
-          </p>
-          Veuillez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
-        </div>
-
-        <div class="notification error mt-4" *ngIf="searchError">
-          <p>
-            {{searchError}}
-          </p>
-          Veuillez réessayer ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
-        </div>
       </form>
+
+      <form (submit)="searchCompany()" id="aroundForm" *ngIf="around">
+
+        <div class="notification error mt-4" *ngIf="showErrors">
+            Veuillez nous autoriser à connaître votre position géographique.<br />Celle-ci ne sera utilisée que dans le cadre de cette recherche.
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-lg btn-primary" id="submitAroundForm">
+            <img alt="Icône du bouton autour" src="/assets/images/icon_around.png">
+            Rechercher autour de moi
+          </button>
+        </div>
+
+      </form>
+
+      <div *ngIf="companies && companies.length">
+
+        <p class="mt-4">
+          Veuillez sélectionner un établissement dans la liste ci-dessous :
+        </p>
+
+        <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
+          <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
+          <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
+          <span *ngIf="company.line3">{{company.line3}}<br /></span>
+          <span *ngIf="company.line4">{{company.line4}}<br /></span>
+          <span *ngIf="company.line5">{{company.line5}}<br /></span>
+          <span *ngIf="company.line6">{{company.line6}}<br /></span>
+          <span *ngIf="company.line7">{{company.line7}}<br /></span>
+        </p>
+
+        <div class="notification info mt-4">
+          Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+        </div>
+      </div>
+
+      <div class="notification warning mt-4" *ngIf="searchWarning">
+        <p>
+          {{searchWarning}}
+        </p>
+        Veuillez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+      </div>
+
+      <div class="notification error mt-4" *ngIf="searchError">
+        <p>
+          {{searchError}}
+        </p>
+        Veuillez réessayer ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+      </div>
 
       <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm" *ngIf="companyForm">
 
@@ -140,7 +164,6 @@
     </ng-template>
 
   </div>
-
 
   <ngx-loading [show]="loading"></ngx-loading>
 

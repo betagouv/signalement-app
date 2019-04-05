@@ -1,0 +1,18 @@
+@import "../../../../theme/variables";
+
+.action-lighter-grey {
+    background-color: $lighter-grey;
+}
+
+.title {
+    font-size: 1.125rem;
+}
+
+.card-body {
+    padding-bottom: 18px !important;
+    padding-top: 18px !important;
+}
+
+.card-text {
+    margin-bottom: 0 !important;
+}
