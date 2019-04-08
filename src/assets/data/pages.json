@@ -10,5 +10,9 @@
   "how": {
     "title": "Comment ça marche ? - SignalConso",
     "description": "Vous signalez votre problème en remplissant le formulaire en ligne. Notre équipe contacte le commerçant afin de l'informer de votre signalement. Le commerçant peut procéder spontanément aux corrections utiles, sans sanction. Votre signalement est enregistré à la répression des fraudes (DGCCRF)."
+  },
+  "pro": {
+    "title": "Vous êtes un commerçant ? - SignalConso",
+    "description": "Découvrez SignalConso, le nouveau service public pour les Consommateurs et les Professionnels"
   }
 }
