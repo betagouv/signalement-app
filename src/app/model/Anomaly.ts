@@ -44,6 +44,8 @@ export class DetailInput {
   options?: string[];
   @JsonProperty('defaultValue')
   defaultValue: string;
+  @JsonProperty('samples')
+  samples?: string;
 
   constructor() {
     this.label = undefined;
@@ -52,6 +54,7 @@ export class DetailInput {
     this.placeholder = undefined;
     this.options = undefined;
     this.defaultValue = undefined;
+    this.samples = undefined;
   }
 }
 
