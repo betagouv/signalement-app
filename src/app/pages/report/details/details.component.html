@@ -95,6 +95,7 @@
           </ng-container>
 
           <ng-container *ngIf="detailInput.type === 'TEXTAREA'">
+            <br />
             <span class="note" [innerHTML]="detailInput.samples" *ngIf="detailInput.samples"></span>
             <textarea [formControlName]="getFormControlName(detailInput)"
                       [id]="getFormControlId(detailInput)"
