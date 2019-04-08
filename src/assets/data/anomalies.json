@@ -12,7 +12,7 @@
           "samples": "Exemples : cuisine, WC, rayon réfrigéré...",
           "detailInputs": [
             {
-              "label": "Quels endroits sont concernés ?",
+              "label": "Quel endroit est concerné ?",
               "rank": 1,
               "type": "CHECKBOX",
               "options": [
@@ -21,13 +21,13 @@
                 "Salle du restaurant / bar",
                 "Lieu de vente",
                 "WC",
-                "Autre"
+                "Autre (à préciser)"
               ]
             },
             {
               "label": "A quel niveau ?",
               "rank": 2,
-              "type": "RADIO",
+              "type": "CHECKBOX",
               "options": [
                 "Sol",
                 "Mur",
@@ -41,16 +41,17 @@
             {
               "label": "Quel est le problème ?",
               "rank": 3,
-              "type": "RADIO",
+              "type": "CHECKBOX",
               "options": [
                 "C'est sale",
                 "C'est dégradé, en mauvais état"
               ]
             },
             {
-              "label": "Pour aider les enquêteurs et le commerçant, dites-nous en plus (rayon du magasin, type de saleté ...)",
+              "label": "Pour aider les enquêteurs et le commerçant, dites-nous en plus",
               "rank": 4,
-              "type": "TEXTAREA"
+              "type": "TEXTAREA",
+              "samples": "Exemples : rayon du magasin, type de saleté..."
             },
             {
               "label": "Date du constat",
@@ -196,7 +197,7 @@
             {
               "label": "Où l'avez-vous vu ?",
               "rank": 2,
-              "type": "RADIO",
+              "type": "CHECKBOX",
               "options": [
                 "Cuisine / Lieu de production",
                 "Intérieur d'un magasin",
