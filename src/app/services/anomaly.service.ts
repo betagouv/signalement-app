@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
 import anomalies from '../../assets/data/anomalies.json';
 import { deserialize } from 'json-typescript-mapper';
@@ -16,7 +16,8 @@ export class AnomalyService {
   }
 
   getAnomalies() {
-    if (!this.anomalies) {
+    // rechargement à chaque fois si l'on est en mode développement
+    if (!this.anomalies || isDevMode()) {
       this.anomalies = deserialize(AnomalyList, anomalies).list;
     }
     return this.anomalies;

@@ -16,4 +16,9 @@
     <priority>0.5</priority>
   </url>
 
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/vous-êtes-un-commerçant</loc>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>
