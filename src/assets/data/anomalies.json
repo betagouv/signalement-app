@@ -57,8 +57,7 @@
               "label": "Date du constat",
               "rank": 5,
               "type": "DATE",
-              "defaultValue": "SYSDATE",
-              "placeholder": "Date du constat"
+              "defaultValue": "SYSDATE"
             },
             {
               "label": "Heure du constat",
@@ -94,8 +93,7 @@
                       "label": "Date du constat",
                       "rank": 2,
                       "type": "DATE",
-                      "defaultValue": "SYSDATE",
-                      "placeholder": "Date du constat"
+                      "defaultValue": "SYSDATE"
                     },
                     {
                       "label": "Heure du constat",
@@ -119,8 +117,7 @@
                   "label": "Date du constat",
                   "rank": 2,
                   "type": "DATE",
-                  "defaultValue": "SYSDATE",
-                  "placeholder": "Date du constat"
+                  "defaultValue": "SYSDATE"
                 },
                 {
                   "label": "Heure du constat",
@@ -143,8 +140,7 @@
                   "label": "Date du constat",
                   "rank": 2,
                   "type": "DATE",
-                  "defaultValue": "SYSDATE",
-                  "placeholder": "Date du constat"
+                  "defaultValue": "SYSDATE"
                 },
                 {
                   "label": "Heure du constat",
@@ -166,8 +162,7 @@
                   "label": "Date du constat",
                   "rank": 2,
                   "type": "DATE",
-                  "defaultValue": "SYSDATE",
-                  "placeholder": "Date du constat"
+                  "defaultValue": "SYSDATE"
                 },
                 {
                   "label": "Heure du constat",
@@ -214,8 +209,7 @@
               "label": "Date du constat",
               "rank": 4,
               "type": "DATE",
-              "defaultValue": "SYSDATE",
-              "placeholder": "Date du constat"
+              "defaultValue": "SYSDATE"
             },
             {
               "label": "Heure du constat",
@@ -249,8 +243,7 @@
               "label": "Date du constat",
               "rank": 3,
               "type": "DATE",
-              "defaultValue": "SYSDATE",
-              "placeholder": "Date du constat"
+              "defaultValue": "SYSDATE"
             },
             {
               "label": "Heure du constat",
@@ -272,8 +265,7 @@
               "label": "Date du constat",
               "rank": 2,
               "type": "DATE",
-              "defaultValue": "SYSDATE",
-              "placeholder": "Date du constat"
+              "defaultValue": "SYSDATE"
             },
             {
               "label": "Heure du constat",
@@ -549,8 +541,7 @@
                   "label": "Date du constat",
                   "rank": 1,
                   "type": "DATE",
-                  "defaultValue": "SYSDATE",
-                  "placeholder": "Date du constat"
+                  "defaultValue": "SYSDATE"
                 },
                 {
                   "label": "Où avez-vous vu la publicité ?",
@@ -574,8 +565,7 @@
                   "label": "Date du constat",
                   "rank": 1,
                   "type": "DATE",
-                  "defaultValue": "SYSDATE",
-                  "placeholder": "Date du constat"
+                  "defaultValue": "SYSDATE"
                 },
                 {
                   "label": "Où l'avez-vous vu indiqué ?",
@@ -586,7 +576,7 @@
                   "label": "De quel type de produit / prestation s'agissait-il ?",
                   "rank": 3,
                   "type": "TEXT",
-                  "placeholder": "Type de produit / prestatin"
+                  "placeholder": "Type de produit / prestation"
                 }
               ],
               "fileLabel": "Photo si vous avez"
@@ -598,8 +588,7 @@
                   "label": "Date du constat",
                   "rank": 1,
                   "type": "DATE",
-                  "defaultValue": "SYSDATE",
-                  "placeholder": "Date du constat"
+                  "defaultValue": "SYSDATE"
                 },
                 {
                   "label": "Quel type de produit était indisponible ?",
@@ -623,8 +612,7 @@
               "label": "Date du constat",
               "rank": 1,
               "type": "DATE",
-              "defaultValue": "SYSDATE",
-              "placeholder": "Date du constat"
+              "defaultValue": "SYSDATE"
             },
             {
               "label": "Où se trouve cette information ?",
@@ -667,7 +655,7 @@
       ]
     },
     {
-      "category": "Services associés à l'achat",
+      "category": "Services après-vente",
       "categoryId": "SERACH",
       "description": "Colis non reçu, problème de garantie constructeur, hotline injoignable,...",
       "rank" : 7,
@@ -675,28 +663,8 @@
       "icon": "icon_service.png",
       "subcategories": [
         {
-          "title": "Problème de SAV, hotline",
-          "samples": "Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ..."
-        },
-        {
-          "title": "Problème de livraison",
-          "samples": "Exemples : colis perdu et non reçu, livraison tardive, colis abimé...",
-          "details": {
-            "precision": {
-              "title": "Veuillez préciser :",
-              "options": [
-                { "title": "Colis non reçu" },
-                {
-                  "title": "Colis endommagé",
-                  "content": "<ul><li>Vous êtes présent au moment de la livraison : <br/>Il est conseillé de vérifier la commande lorsque le livreur vous l'apporte, même si celui-ci n'a pas le temps.<br/>Si le colis est endommagé ou qu'il ne correspond pas à votre commande, il faut refuser le colis. Vous devez écrire les problèmes sur le bon de livraison (\"colis déchiré dans les angles\"...). Il est conseillé de prendre des photos du colis ou du produit endommagé. Vous devez ensuite prévenir rapidement le vendeur. Vous n'avez pas à régler les frais de retour ni les frais d'envoi d'un autre produit conforme.<br/></li><li>Vous êtes absent lors de la livraison : <br/>Vérifier votre colis dès que possible. Si vous constatez un problème ou erreur de commande, contactez le transporteur et le vendeur. Vous avez entre 3 et 10 jours suivant les cas, renseignez-vous auprès de votre vendeur.\nSi le colis a été abîmé pendant le transport, c'est au vendeur de se retourner contre le transporteur. En effet, <b>le vendeur est responsable en cas de dommage transport</b>.</li></ul><br/>Si le vendeur refuse votre demande, vous pouvez faire un signalement."
-                },
-                { "title": "Livraison tardive" }
-              ]
-            }
-          }
-        },
-        {
           "title": "Refus de reprendre un produit sous garantie",
+          "samples": "Exemple : le commerçant refuse de me prendre mon achat encore sous garantie",
           "subcategoriesTitle": "Avez-vous acheté ce produit neuf ou d'occasion ?",
           "subcategories": [
             {
@@ -705,20 +673,99 @@
               "subcategories": [
                 {
                   "title": "Il y a moins de 2 ans",
-                  "description": "Le vendeur a l'obligation de garantir 2 ans le fonctionnement normal de tous les objets. Cette garantie ne comprend pas la casse ou un défaut suite à un mauvais usage."
+                  "description": "Le vendeur a l'obligation de garantir 2 ans le fonctionnement normal de tous les objets.<br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l'avez mal utilisé (exemple : vous avez marché sur votre téléphone).",
+                  "detailTitle": "Problème de garantie légale",
+                  "detailInputs": [
+                    {
+                      "label": "Date d'achat",
+                      "rank": 1,
+                      "type": "DATE"
+                    },
+                    {
+                      "label": "Nom du produit",
+                      "rank": 2,
+                      "type": "TEXT"
+                    },
+                    {
+                      "label": "Date du constat",
+                      "rank": 3,
+                      "type": "DATE",
+                      "defaultValue": "SYSDATE"
+                    },
+                    {
+                      "label": "Interlocuteur",
+                      "rank": 4,
+                      "type": "RADIO",
+                      "options": [
+                        "Vendeur",
+                        "Accueil magasin",
+                        "Service client (téléphone, mail, courrier)"
+                      ]
+                    },
+                    {
+                      "label": "Pour quelle raison le commerçant ne veut pas vous reprendre le produit ?",
+                      "rank": 5,
+                      "type": "TEXTAREA"
+                    }
+                  ],
+                  "fileLabel": "Preuve d'achat / publicité / offre de vente"
                 },
                 {
                   "title": "Il y a plus de 2 ans",
                   "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie ?",
                   "subcategories": [
                     {
-                      "title": "Oui"
+                      "title": "Oui",
+                      "samples": "Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...",
+                      "subcategoriesTitle": "Les extensions de garantie sont indiquées dans votre contrat de garantie. <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.",
+                      "subcategories": [
+                        {
+                          "title": "J'ai pris connaissance des conditions écrites dans mon contrat de garantie",
+                          "detailTitle": "Problème de garantie commerciale",
+                          "detailInputs": [
+                            {
+                              "label": "Date d'achat",
+                              "rank": 1,
+                              "type": "DATE"
+                            },
+                            {
+                              "label": "Nom du produit",
+                              "rank": 2,
+                              "type": "TEXT"
+                            },
+                            {
+                              "label": "Date de fin de garantie supplémentaire",
+                              "rank": 3,
+                              "type": "DATE"
+                            },
+                            {
+                              "label": "Date du constat",
+                              "rank": 4,
+                              "type": "DATE",
+                              "defaultValue": "SYSDATE"
+                            },
+                            {
+                              "label": "Motif de refus",
+                              "rank": 5,
+                              "type": "TEXT"
+                            }
+                          ],
+                          "fileLabel": "Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie"
+                        }
+                      ]
                     },
                     {
                       "title": "Non",
                       "information": {
                         "title": "Votre produit n'est plus couvert par la garantie.",
-                        "content": "Votre produit n'est plus couvert par la garantie.<br/>Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
+                        "subTitle": "Votre produit n'est plus couvert par la garantie de base, appelée \" garantie légale de conformité\".",
+                        "actions": [
+                          {
+                          "question" : "Un problème avec un commerçant ?",
+                          "example": "Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? <br/><br/>Un vice caché d'un produit est un défaut :<ul><li>présent dès le départ qui rend le produit inutilisable et</li><li>que vous ne connaissiez pas quand vous avez acheté le produit.</li></ul>",
+                          "answer": "C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple."
+                          }
+                        ]
                       }
                     }
                   ]
@@ -731,20 +778,99 @@
               "subcategories": [
                 {
                   "title": "Il y a moins de 6 mois",
-                  "description": "Le vendeur a l'obligation de garantir 6 mois le fonctionnement normal de tous les objets. Cette garantie ne comprend pas la casse ou un défaut suite à un mauvais usage."
+                  "description": "Le vendeur a l'obligation de garantir 6 mois le fonctionnement normal de tous les objets.<br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l'avez mal utilisé (exemple : vous avez marché sur votre téléphone).",
+                  "detailTitle": "Problème de garantie légale",
+                  "detailInputs": [
+                    {
+                      "label": "Date d'achat",
+                      "rank": 1,
+                      "type": "DATE"
+                    },
+                    {
+                      "label": "Nom du produit",
+                      "rank": 2,
+                      "type": "TEXT"
+                    },
+                    {
+                      "label": "Date du constat",
+                      "rank": 3,
+                      "type": "DATE",
+                      "defaultValue": "SYSDATE"
+                    },
+                    {
+                      "label": "Interlocuteur",
+                      "rank": 4,
+                      "type": "RADIO",
+                      "options": [
+                        "Vendeur",
+                        "Accueil magasin",
+                        "Service client (téléphone, mail, courrier)"
+                      ]
+                    },
+                    {
+                      "label": "Pour quelle raison le commerçant ne veut pas vous reprendre le produit ?",
+                      "rank": 5,
+                      "type": "TEXTAREA"
+                    }
+                  ],
+                  "fileLabel": "Preuve d'achat / publicité / offre de vente"
                 },
                 {
                   "title": "Il y a plus de 6 mois",
                   "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie ?",
                   "subcategories": [
                     {
-                      "title": "Oui"
+                      "title": "Oui",
+                      "samples": "Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...",
+                      "subcategoriesTitle": "Les extensions de garantie sont indiquées dans votre contrat de garantie. <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.",
+                      "subcategories": [
+                        {
+                          "title": "J'ai pris connaissance des conditions écrites dans mon contrat de garantie",
+                          "detailTitle": "Problème de garantie commerciale",
+                          "detailInputs": [
+                            {
+                              "label": "Date d'achat",
+                              "rank": 1,
+                              "type": "DATE"
+                            },
+                            {
+                              "label": "Nom du produit",
+                              "rank": 2,
+                              "type": "TEXT"
+                            },
+                            {
+                              "label": "Date de fin de garantie supplémentaire",
+                              "rank": 3,
+                              "type": "DATE"
+                            },
+                            {
+                              "label": "Date du constat",
+                              "rank": 4,
+                              "type": "DATE",
+                              "defaultValue": "SYSDATE"
+                            },
+                            {
+                              "label": "Motif de refus",
+                              "rank": 5,
+                              "type": "TEXT"
+                            }
+                          ],
+                          "fileLabel": "Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie"
+                        }
+                      ]
                     },
                     {
                       "title": "Non",
                       "information": {
                         "title": "Votre produit n'est plus couvert par la garantie.",
-                        "content": "Votre produit n'est plus couvert par la garantie.<br/>Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? Ce sera à vous de démontrer les vices cachés (rapport d'expertise par exemple) auprès de l'entreprise."
+                        "subTitle": "Votre produit n'est plus couvert par la garantie de base, appelée \" garantie légale de conformité\".",
+                        "actions": [
+                          {
+                            "question" : "Un problème avec un commerçant ?",
+                            "example": "Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? <br/><br/>Un vice caché d'un produit est un défaut :<ul><li>présent dès le départ qui rend le produit inutilisable et</li><li>que vous ne connaissiez pas quand vous avez acheté le produit.</li></ul>",
+                            "answer": "C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple."
+                          }
+                        ]
                       }
                     }
                   ]
@@ -752,6 +878,248 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Refus de rembourser un achat ou d'annuler un contrat qui ne me convient pas",
+          "subcategoriesTitle": "Pourquoi souhaitez-vous échanger, rembourser ou annuler un contrat ?",
+          "subcategories": [
+            {
+              "title": "Le produit ne fonctionne pas ou présente un défaut",
+              "information": {
+                "title": "Renvoi vers refus de reprendre un produit sous garantie"
+              }
+            },
+            {
+              "title": "Le produit ne me convient pas / j'ai changé d'avis",
+              "subcategoriesTitle": "Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat",
+              "subcategories": [
+                {
+                  "title": "Dans un magasin dans lequel vous vous êtes rendu",
+                  "subcategoriesTitle": "Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement ?",
+                  "samples": "Exemple : affiche à la caisse du magasin",
+                  "subcategories": [
+                    {
+                      "title": "Oui",
+                      "subcategoriesTitle": "Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant ?",
+                      "subcategories": [
+                        {
+                          "title": "Oui",
+                          "description": "Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.",
+                          "detailInputs": [
+                            {
+                              "label": "Date du constat",
+                              "rank": 1,
+                              "type": "DATE",
+                              "defaultValue": "SYSDATE"
+                            },
+                            {
+                              "label": "Description",
+                              "rank": 2,
+                              "type": "TEXTAREA"
+                            }
+                          ],
+                          "fileLabel": "Pièces jointes"
+                        },
+                        {
+                          "title": "Non",
+                          "information": {
+                            "title": "Le commerçant est libre de choisir les conditions d'échange ou de remboursement.",
+                            "content": "Par exemple, ces affiches sont autorisées : <ul><li>\"remboursement sous 5 jours\"</li><li>\"avoir seulement\"</li><li>\"échange possible, pas de remboursement\"</li></ul>"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Non",
+                      "information": {
+                        "title": "Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.",
+                        "content": "En effet, dans votre cas, rien n'oblige un commerçant à le faire.<br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "title": "Sur internet"
+                },
+                {
+                  "title": "Auprès d’un démarcheur qui est venu dans votre domicile"
+                },
+                {
+                  "title": "Sur un stand dans une foire ou un salon",
+                  "subcategoriesTitle": "Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement ?",
+                  "samples": "Exemple : affiche à la caisse du magasin",
+                  "subcategories": [
+                    {
+                      "title": "Oui",
+                      "subcategoriesTitle": "Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant ?",
+                      "subcategories": [
+                        {
+                          "title": "Oui",
+                          "description": "Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.",
+                          "detailInputs": [
+                            {
+                              "label": "Date du constat",
+                              "rank": 1,
+                              "type": "DATE",
+                              "defaultValue": "SYSDATE"
+                            },
+                            {
+                              "label": "Description",
+                              "rank": 2,
+                              "type": "TEXTAREA"
+                            }
+                          ],
+                          "fileLabel": "Pièces jointes"
+                        },
+                        {
+                          "title": "Non",
+                          "information": {
+                            "title": "Le commerçant est libre de choisir les conditions d'échange ou de remboursement.",
+                            "content": "Par exemple, ces affiches sont autorisées : <ul><li>\"remboursement sous 5 jours\"</li><li>\"avoir seulement\"</li><li>\"échange possible, pas de remboursement\"</li></ul>"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Non",
+                      "information": {
+                        "title": "Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.",
+                        "content": "En effet, dans votre cas, rien n'oblige un commerçant à le faire.<br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "title": "Par téléphone"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Problème de livraison",
+          "samples": "Exemples : colis perdu et non reçu, livraison tardive, colis abimé...",
+          "subcategoriesTitle": "Quel est le problème ?",
+          "subcategories": [
+            {
+              "title": "Colis non reçu ou perdu",
+              "subcategoriesTitle": "De quoi s'agit-il ?",
+              "subcategories": [
+                {
+                  "title": "D'une commande auprès d'un commerçant",
+                  "detailInputs": [
+                    {
+                      "label": "Date du constat",
+                      "rank": 1,
+                      "type": "DATE",
+                      "defaultValue": "SYSDATE"
+                    },
+                    {
+                      "label": "Date d'achat",
+                      "rank": 2,
+                      "type": "DATE"
+                    },
+                    {
+                      "label": "Numéro de commande",
+                      "rank": 3,
+                      "type": "TEXT"
+                    },
+                    {
+                      "label": "Quelle est le nom de l'entreprise de livraison ?",
+                      "description": "A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit",
+                      "rank": 4,
+                      "type": "TEXT",
+                      "placeholder": "Entreprise de livraison"
+                    }
+                  ],
+                  "fileLabel": "Pièces jointes"
+                },
+                {
+                  "title": "D'un colis envoyé entre particuliers"
+                }
+              ]
+            },
+            {
+              "title": "Colis endommagé",
+              "subcategoriesTitle": "De quoi s'agit-il ?",
+              "subcategories": [
+                {
+                  "title": "D'une commande auprès d'un commerçant",
+                  "detailInputs": [
+                    {
+                      "label": "Date du constat",
+                      "rank": 1,
+                      "type": "DATE",
+                      "defaultValue": "SYSDATE"
+                    },
+                    {
+                      "label": "Date d'achat",
+                      "rank": 2,
+                      "type": "DATE"
+                    },
+                    {
+                      "label": "Numéro de commande",
+                      "rank": 3,
+                      "type": "TEXT"
+                    },
+                    {
+                      "label": "Quelle est le nom de l'entreprise de livraison ?",
+                      "description": "A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit",
+                      "rank": 4,
+                      "type": "TEXT",
+                      "placeholder": "Entreprise de livraison"
+                    }
+                  ],
+                  "fileLabel": "Pièces jointes"
+                },
+                {
+                  "title": "D'un colis envoyé entre particuliers"
+                }
+              ]
+            },
+            {
+              "title": "Colis en retard par rapport à ce qui était annoncé",
+              "subcategoriesTitle": "De quoi s'agit-il ?",
+              "subcategories": [
+                {
+                  "title": "D'une commande auprès d'un commerçant",
+                  "detailInputs": [
+                    {
+                      "label": "Date du constat",
+                      "rank": 1,
+                      "type": "DATE",
+                      "defaultValue": "SYSDATE"
+                    },
+                    {
+                      "label": "Date d'achat",
+                      "rank": 2,
+                      "type": "DATE"
+                    },
+                    {
+                      "label": "Numéro de commande",
+                      "rank": 3,
+                      "type": "TEXT"
+                    },
+                    {
+                      "label": "Quelle est le nom de l'entreprise de livraison ?",
+                      "description": "A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit",
+                      "rank": 4,
+                      "type": "TEXT",
+                      "placeholder": "Entreprise de livraison"
+                    }
+                  ],
+                  "fileLabel": "Pièces jointes"
+                },
+                {
+                  "title": "D'un colis envoyé entre particuliers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Service client / SAV fantôme",
+          "samples": "Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ..."
         },
         {
           "title": "Personnel peu aimable",
@@ -766,7 +1134,7 @@
           }
         },
         {
-          "title": "Autre problème de service"
+          "title": "Autre problème de service après-vente"
         }
       ]
     },

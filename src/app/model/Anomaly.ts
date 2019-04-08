@@ -104,6 +104,8 @@ export class Subcategory {
   subcategories?: Subcategory[];
   @JsonProperty({ name: 'details', clazz: SubcategoryDetails })
   details?: SubcategoryDetails;
+  @JsonProperty('detailTitle')
+  detailTitle?: string;
   @JsonProperty({ name: 'detailInputs', clazz: DetailInput })
   detailInputs?: DetailInput[];
   @JsonProperty('fileLabel')
@@ -118,6 +120,7 @@ export class Subcategory {
     this.subcategoriesTitle = undefined;
     this.subcategories = undefined;
     this.details = undefined;
+    this.detailTitle = undefined;
     this.detailInputs = undefined;
     this.fileLabel = undefined;
     this.information = undefined;

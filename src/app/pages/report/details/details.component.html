@@ -4,8 +4,8 @@
 
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
 
-      <div class="notification success" *ngIf="report.subcategories">
-        <h4>{{getSubcategoryTitles()}}</h4>
+      <div class="notification success" *ngIf="getReportLastSubcategory()?.detailTitle">
+        <h4>{{getReportLastSubcategory().detailTitle}}</h4>
       </div>
 
       <div *ngIf="getReportLastSubcategory()?.description" class="row notification note">
@@ -13,7 +13,7 @@
           <img alt="Icône information" src="/assets/images/icon_info.png">
         </div>
         <div class="text-left">
-          <app-collapsable-text [content]="getReportLastSubcategory().description" [title]="getReportLastSubcategory().title"></app-collapsable-text>
+          <p [innerHTML]="getReportLastSubcategory().description"></p>
         </div>
       </div>
 
@@ -27,7 +27,7 @@
             <div class="col-12">
               <input type="text"
                      [formControlName]="getFormControlName(detailInput)"
-                     [placeholder]="detailInput.placeholder"
+                     [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
                      [id]="getFormControlId(detailInput)">
             </div>
           </div>
@@ -36,7 +36,7 @@
             <div class="col-12 col-sm-6">
               <input type="text"
                      [formControlName]="getFormControlName(detailInput)"
-                     [placeholder]="detailInput.placeholder"
+                     [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
                      [id]="getFormControlId(detailInput)"
                      bsDatepicker
                      [bsConfig]="{ containerClass: 'theme-default' }">
