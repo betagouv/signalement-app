@@ -4,6 +4,7 @@ import { Subcategory } from './Anomaly';
 import { Step } from '../services/report-router.service';
 import { UploadedFile } from './UploadedFile';
 import moment from 'moment';
+import { isDefined } from '@angular/compiler/src/util';
 
 export class Report {
 
@@ -23,20 +24,29 @@ export class Report {
 
 export class DetailInputValue {
   private _label: string;
-  private _value: string | Date;
+  private _value: string | Date | Array<string>;
   renderedLabel: string;
   renderedValue: string;
 
-  set value(value: string | Date) {
+  set value(value: string | Date | Array<string>) {
     this._value = value;
     if (this._value instanceof Date) {
-      this.renderedValue = moment(this.value).format('DD/MM/YYYY');
+      this.renderedValue = moment(this._value).format('DD/MM/YYYY');
+    } else if (this._value instanceof Array) {
+      this.renderedValue = this._value
+        .filter(v => isDefined(v))
+        .map(v => {
+          if (v.indexOf(PrecisionKeyword) !== -1) {
+            return v.replace(PrecisionKeyword, '(').concat(')');
+          } else {
+            return v;
+          }
+        })
+        .reduce((v1, v2) => `${v1}, ${v2}`);
+    } else if (this._value.indexOf && this._value.indexOf(PrecisionKeyword) !== -1) {
+      this.renderedValue = this._value.replace(PrecisionKeyword, '(').concat(')');
     } else {
-      if (this._value.indexOf(PrecisionKeyword) !== -1) {
-        this.renderedValue = this._value.replace(PrecisionKeyword, '(').concat(')');
-      } else {
-        this.renderedValue = value as string;
-      }
+      this.renderedValue = value as string;
     }
   }
 

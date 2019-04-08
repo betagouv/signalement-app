@@ -97,6 +97,8 @@ export class ReportService {
     if (report.details) {
       if (report.details.precision) {
         reportToPost['details'] = [{ label: 'Précision :', value: this.getDetailsPrecision(report.details) }];
+      } else {
+        reportToPost['details'] = [];
       }
       reportToPost['anomalyDate'] = moment(report.details.anomalyDate).format('YYYY-MM-DD');
       reportToPost['description'] = report.details.description;

@@ -147,3 +147,12 @@ export class AnomalyList {
     this.list = undefined;
   }
 }
+
+export enum InputType {
+  Text = 'TEXT',
+  Radio = 'RADIO',
+  Checkbox = 'CHECKBOX',
+  Textarea = 'TEXTAREA',
+  Timeslot = 'TIMESLOT',
+  Date = 'DATE'
+}

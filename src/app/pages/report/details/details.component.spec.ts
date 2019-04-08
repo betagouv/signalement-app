@@ -252,7 +252,7 @@ describe('DetailsComponent', () => {
       component.detailsForm.controls.formControl_1.setValue('valeur');
       component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
       component.detailsForm.controls.formControl_4.setValue('ma description');
-      const changeReportSpy = spyOn(reportService, 'changeReportFromStep').and.callFake(param =>  console.log('param', param.detailInputValues));
+      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('input[type="radio"]#formControl_3_1').click();
@@ -272,7 +272,7 @@ describe('DetailsComponent', () => {
         Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),
         Object.assign(new DetailInputValue(), {label: radioDetailInputFixture.label, value: radioDetailInputFixture.options[1] + 'ma précision'}),
         Object.assign(new DetailInputValue(), {label: textareaDetailInputFixture.label, value: 'ma description'}),
-        Object.assign(new DetailInputValue(), {label: checkboxDetailInputFixture.label, value: 'CHECKBOX1, CHECKBOX3'}),
+        Object.assign(new DetailInputValue(), {label: checkboxDetailInputFixture.label, value: ['CHECKBOX1', undefined, 'CHECKBOX3']}),
       ];
       reportExpected.uploadedFiles = [];
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
