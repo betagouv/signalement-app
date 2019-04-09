@@ -939,7 +939,10 @@
                   ]
                 },
                 {
-                  "title": "Sur internet"
+                  "title": "Sur internet",
+                  "information": {
+                    "reference": "retractation"
+                  }
                 },
                 {
                   "title": "Auprès d’un démarcheur qui est venu dans votre domicile"
