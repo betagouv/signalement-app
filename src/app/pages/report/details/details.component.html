@@ -5,7 +5,7 @@
     <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
 
       <div class="notification success" *ngIf="getReportLastSubcategory()?.detailTitle">
-        <h4>{{getReportLastSubcategory().detailTitle}}</h4>
+        <h4 [innerHTML]="getReportLastSubcategory().detailTitle"></h4>
       </div>
 
       <div *ngIf="getReportLastSubcategory()?.description" class="row notification note">
@@ -20,7 +20,7 @@
       <ng-container *ngIf="this.getReportLastSubcategory()?.detailInputs; else noDetailsInput">
         <div class="form__group" *ngFor="let detailInput of this.getReportLastSubcategory().detailInputs">
           <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
-            {{detailInput.label}} <span>*</span>
+            <span [innerHTML]="detailInput.label"></span> <span class="error">*</span>
           </label>
 
           <div class="row" *ngIf="detailInput.type === 'TEXT'">

@@ -35,13 +35,13 @@
       <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="!around && searchForm">
         
         <div class="form__group mt-4">
-          <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'établissement <span>*</span>
+          <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'établissement <span class="error">*</span>
           </label>
           <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
         </div>
         <div class="form__group">
           <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
-            Code postal <span>*</span>
+            Code postal <span class="error">*</span>
           </label>
           <div class="row">
             <div class="col-12 col-sm-6">
@@ -123,14 +123,14 @@
 
         <div class="form__group">
           <label for="companyName" [class]="hasError(nameCtrl) ? 'error' : ''">
-            Nom de l'établissement <span>*</span>
+            Nom de l'établissement <span class="error">*</span>
           </label>
           <input formControlName="name" type="text" id="companyName" placeholder="Nom de l'établissement">
         </div>
 
         <div class="form__group">
           <label for="companyAddress" [class]="hasError(addressCtrl) ? 'error' : ''">
-            Adresse de l'établissement <span>*</span>
+            Adresse de l'établissement <span class="error">*</span>
           </label>
           <ng2-completer
             [datasource]="addressData"
