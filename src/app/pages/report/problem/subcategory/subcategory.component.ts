@@ -39,6 +39,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   @Input() subcategories: Subcategory[];
   @Input() subcategoriesSelected: Subcategory[];
   @Input() subcategoriesTitle: string;
+  @Input() subcategoryDescription: string;
   @Input() subcategoryName: string;
 
   subcategoryForm: FormGroup;

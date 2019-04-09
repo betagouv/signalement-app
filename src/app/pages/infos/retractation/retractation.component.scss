@@ -1,0 +1,15 @@
+@import "../../../../theme/variables";
+
+table {
+  margin: 1em auto 2em auto;
+  border: $theme-info-border 2px solid;
+
+  thead {
+    background-color: $theme-info-bg;
+    font-weight: bold;
+  }
+
+  th, td {
+    border: 1px solid $theme-info-border;
+  }
+}

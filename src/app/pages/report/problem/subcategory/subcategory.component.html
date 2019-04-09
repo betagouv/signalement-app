@@ -1,4 +1,11 @@
 <div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''">
+
+  <div *ngIf="subcategoryDescription" class="row">
+    <div class="col-12">
+      <p [innerHTML]="subcategoryDescription"></p>
+    </div>
+  </div>
+
   <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
 
   <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
@@ -24,6 +31,7 @@
                  [subcategoriesTitle]="subcategorySelected.subcategoriesTitle"
                  [subcategories]="subcategorySelected.subcategories"
                  [subcategoryName]="subcategorySelected.title"
+                 [subcategoryDescription]="subcategorySelected.description"
                  [subcategoriesSelected]="subcategoriesSelected"
                  (select)="onSelectSubSubcategories($event)">
 </app-subcategory>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { isUndefined } from 'util';
 import { BsLocaleService } from 'ngx-bootstrap';
+import { Meta, Title } from '@angular/platform-browser';
+import pages from '../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-retractation',
@@ -12,9 +14,13 @@ export class RetractationComponent implements OnInit {
   contractDate: Date;
   retractationDeadline: Date;
 
-  constructor(private localeService: BsLocaleService) { }
+  constructor(private localeService: BsLocaleService,
+              private titleService: Title,
+              private meta: Meta) { }
 
   ngOnInit() {
+    this.titleService.setTitle(pages.how.title);
+    this.meta.updateTag({ name: 'description', content: pages.retractation.description });
     this.localeService.use('fr');
   }
 
@@ -27,7 +33,6 @@ export class RetractationComponent implements OnInit {
       }
     }
   }
-
 
   isClosingDate(date: Date) {
     return date.getDay() === 6 || // samedi

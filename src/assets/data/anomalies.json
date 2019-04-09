@@ -12,7 +12,7 @@
           "samples": "Exemples : cuisine, WC, rayon réfrigéré...",
           "detailInputs": [
             {
-              "label": "Quel endroit est concerné ?",
+              "label": "Quel endroit est concerné&#160;?",
               "rank": 1,
               "type": "CHECKBOX",
               "options": [
@@ -25,7 +25,7 @@
               ]
             },
             {
-              "label": "A quel niveau ?",
+              "label": "A quel niveau&#160;?",
               "rank": 2,
               "type": "CHECKBOX",
               "options": [
@@ -39,7 +39,7 @@
               ]
             },
             {
-              "label": "Quel est le problème ?",
+              "label": "Quel est le problème&#160;?",
               "rank": 3,
               "type": "CHECKBOX",
               "options": [
@@ -179,7 +179,7 @@
           "samples": "Exemples : rat, insectes, oiseaux, ...",
           "detailInputs": [
             {
-              "label": "Quel animal avez-vous vu ?",
+              "label": "Quel animal avez-vous vu&#160;?",
               "rank": 1,
               "type": "RADIO",
               "options": [
@@ -190,7 +190,7 @@
               ]
             },
             {
-              "label": "Où l'avez-vous vu ?",
+              "label": "Où l'avez-vous vu&#160;?",
               "rank": 2,
               "type": "CHECKBOX",
               "options": [
@@ -224,7 +224,7 @@
           "samples": "Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...",
           "detailInputs": [
             {
-              "label": "Quel est le problème ?",
+              "label": "Quel est le problème&#160;?",
               "rank": 1,
               "type": "RADIO",
               "options": [
@@ -544,13 +544,13 @@
                   "defaultValue": "SYSDATE"
                 },
                 {
-                  "label": "Où avez-vous vu la publicité ?",
+                  "label": "Où avez-vous vu la publicité&#160;?",
                   "rank": 2,
                   "type": "RADIO",
                   "options": ["Internet", "Catalogue papier"]
                 },
                 {
-                  "label": "De quel produit s'agissait-il ?",
+                  "label": "De quel produit s'agissait-il&#160;?",
                   "rank": 3,
                   "type": "TEXT",
                   "placeholder": "Nom du produit"
@@ -568,12 +568,12 @@
                   "defaultValue": "SYSDATE"
                 },
                 {
-                  "label": "Où l'avez-vous vu indiqué ?",
+                  "label": "Où l'avez-vous vu indiqué&#160;?",
                   "rank": 2,
                   "type": "TEXT"
                 },
                 {
-                  "label": "De quel type de produit / prestation s'agissait-il ?",
+                  "label": "De quel type de produit / prestation s'agissait-il&#160;?",
                   "rank": 3,
                   "type": "TEXT",
                   "placeholder": "Type de produit / prestation"
@@ -591,7 +591,7 @@
                   "defaultValue": "SYSDATE"
                 },
                 {
-                  "label": "Quel type de produit était indisponible ?",
+                  "label": "Quel type de produit était indisponible&#160;?",
                   "rank": 2,
                   "type": "TEXT",
                   "placeholder": "Type de produit"
@@ -615,7 +615,7 @@
               "defaultValue": "SYSDATE"
             },
             {
-              "label": "Où se trouve cette information ?",
+              "label": "Où se trouve cette information&#160;?",
               "rank": 2,
               "type": "RADIO",
               "options": [
@@ -630,7 +630,7 @@
               ]
             },
             {
-              "label": "Pourquoi estimez-vous cela trompeur ?",
+              "label": "Pourquoi estimez-vous cela trompeur&#160;?",
               "rank": 3,
               "type": "TEXT",
               "placeholder": ""
@@ -641,7 +641,7 @@
               "type": "TEXTAREA"
             },
             {
-              "label": "Avez-vous déjà contacté le commerçant pour ce problème ?",
+              "label": "Avez-vous déjà contacté le commerçant pour ce problème&#160;?",
               "rank": 5,
               "type": "RADIO",
               "options": [
@@ -665,11 +665,11 @@
         {
           "title": "Refus de reprendre un produit sous garantie",
           "samples": "Exemple : le commerçant refuse de me prendre mon achat encore sous garantie",
-          "subcategoriesTitle": "Avez-vous acheté ce produit neuf ou d'occasion ?",
+          "subcategoriesTitle": "Avez-vous acheté ce produit neuf ou d'occasion&#160;?",
           "subcategories": [
             {
               "title": "Neuf",
-              "subcategoriesTitle": "Quand avez-vous acheté le produit ?",
+              "subcategoriesTitle": "Quand avez-vous acheté le produit&#160;?",
               "subcategories": [
                 {
                   "title": "Il y a moins de 2 ans",
@@ -703,7 +703,7 @@
                       ]
                     },
                     {
-                      "label": "Pour quelle raison le commerçant ne veut pas vous reprendre le produit ?",
+                      "label": "Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?",
                       "rank": 5,
                       "type": "TEXTAREA"
                     }
@@ -712,7 +712,7 @@
                 },
                 {
                   "title": "Il y a plus de 2 ans",
-                  "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie ?",
+                  "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie&#160;?",
                   "subcategories": [
                     {
                       "title": "Oui",
@@ -761,7 +761,7 @@
                         "subTitle": "Votre produit n'est plus couvert par la garantie de base, appelée \" garantie légale de conformité\".",
                         "actions": [
                           {
-                          "question" : "Un problème avec un commerçant ?",
+                          "question" : "Un problème avec un commerçant&#160;?",
                           "example": "Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? <br/><br/>Un vice caché d'un produit est un défaut :<ul><li>présent dès le départ qui rend le produit inutilisable et</li><li>que vous ne connaissiez pas quand vous avez acheté le produit.</li></ul>",
                           "answer": "C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple."
                           }
@@ -774,7 +774,7 @@
             },
             {
               "title": "Occasion",
-              "subcategoriesTitle": "Quand avez-vous acheté le produit ?",
+              "subcategoriesTitle": "Quand avez-vous acheté le produit&#160;?",
               "subcategories": [
                 {
                   "title": "Il y a moins de 6 mois",
@@ -808,7 +808,7 @@
                       ]
                     },
                     {
-                      "label": "Pour quelle raison le commerçant ne veut pas vous reprendre le produit ?",
+                      "label": "Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?",
                       "rank": 5,
                       "type": "TEXTAREA"
                     }
@@ -817,7 +817,7 @@
                 },
                 {
                   "title": "Il y a plus de 6 mois",
-                  "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie ?",
+                  "subcategoriesTitle": "Bénéficiez-vous d'une extension garantie&#160;?",
                   "subcategories": [
                     {
                       "title": "Oui",
@@ -866,7 +866,7 @@
                         "subTitle": "Votre produit n'est plus couvert par la garantie de base, appelée \" garantie légale de conformité\".",
                         "actions": [
                           {
-                            "question" : "Un problème avec un commerçant ?",
+                            "question" : "Un problème avec un commerçant&#160;?",
                             "example": "Vous souhaitez attaquer l'entreprise pour \"vices cachées \"? <br/><br/>Un vice caché d'un produit est un défaut :<ul><li>présent dès le départ qui rend le produit inutilisable et</li><li>que vous ne connaissiez pas quand vous avez acheté le produit.</li></ul>",
                             "answer": "C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple."
                           }
@@ -881,7 +881,7 @@
         },
         {
           "title": "Refus de rembourser un achat ou d'annuler un contrat qui ne me convient pas",
-          "subcategoriesTitle": "Pourquoi souhaitez-vous échanger, rembourser ou annuler un contrat ?",
+          "subcategoriesTitle": "Pourquoi souhaitez-vous échanger, rembourser ou annuler un contrat&#160;?",
           "subcategories": [
             {
               "title": "Le produit ne fonctionne pas ou présente un défaut",
@@ -891,16 +891,16 @@
             },
             {
               "title": "Le produit ne me convient pas / j'ai changé d'avis",
-              "subcategoriesTitle": "Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat",
+              "subcategoriesTitle": "Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat&#160;?",
               "subcategories": [
                 {
                   "title": "Dans un magasin dans lequel vous vous êtes rendu",
-                  "subcategoriesTitle": "Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement ?",
                   "samples": "Exemple : affiche à la caisse du magasin",
+                  "subcategoriesTitle": "Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?",
                   "subcategories": [
                     {
                       "title": "Oui",
-                      "subcategoriesTitle": "Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant ?",
+                      "subcategoriesTitle": "Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?",
                       "subcategories": [
                         {
                           "title": "Oui",
@@ -940,21 +940,72 @@
                 },
                 {
                   "title": "Sur internet",
-                  "information": {
-                    "reference": "retractation"
-                  }
+                  "description": "Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le \"délai de rétractation\".<br />Vous n’avez pas à vous justifier auprès du commerçant.<br/><a href=\"../delai-de-retractation\" target=\"_blank\">>> Comment calculer mon délai de retractation</a>",
+                  "subcategoriesTitle": "Avez-vous fait votre demande dans ce délai&#160;?",
+                  "subcategories": [
+                    {
+                      "title": "Oui",
+                      "detailInputs": [
+                        {
+                          "label": "Date du constat",
+                          "rank": 1,
+                          "type": "DATE",
+                          "defaultValue": "SYSDATE"
+                        },
+                        {
+                          "label": "Description",
+                          "rank": 2,
+                          "type": "TEXTAREA"
+                        }
+                      ],
+                      "fileLabel": "Pièces jointes"
+                    },
+                    {
+                      "title": "Non",
+                      "information": {
+                        "title": "Ceci ne constitue pas un motif de signalement."
+                      }
+                    }
+                  ]
                 },
                 {
-                  "title": "Auprès d’un démarcheur qui est venu dans votre domicile"
+                  "title": "Auprès d’un démarcheur qui est venu dans votre domicile",
+                  "description": "Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le \"délai de rétractation\".<br />Vous n’avez pas à vous justifier auprès du commerçant.<br/><a href=\"../delai-de-retractation\" target=\"_blank\">>> Comment calculer mon délai de retractation</a>",
+                  "subcategoriesTitle": "Avez-vous fait votre demande dans ce délai&#160;?",
+                  "subcategories": [
+                    {
+                      "title": "Oui",
+                      "detailInputs": [
+                        {
+                          "label": "Date du constat",
+                          "rank": 1,
+                          "type": "DATE",
+                          "defaultValue": "SYSDATE"
+                        },
+                        {
+                          "label": "Description",
+                          "rank": 2,
+                          "type": "TEXTAREA"
+                        }
+                      ],
+                      "fileLabel": "Pièces jointes"
+                    },
+                    {
+                      "title": "Non",
+                      "information": {
+                        "title": "Ceci ne constitue pas un motif de signalement."
+                      }
+                    }
+                  ]
                 },
                 {
                   "title": "Sur un stand dans une foire ou un salon",
-                  "subcategoriesTitle": "Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement ?",
+                  "subcategoriesTitle": "Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?",
                   "samples": "Exemple : affiche à la caisse du magasin",
                   "subcategories": [
                     {
                       "title": "Oui",
-                      "subcategoriesTitle": "Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant ?",
+                      "subcategoriesTitle": "Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?",
                       "subcategories": [
                         {
                           "title": "Oui",
@@ -993,7 +1044,34 @@
                   ]
                 },
                 {
-                  "title": "Par téléphone"
+                  "title": "Par téléphone",
+                  "description": "Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le \"délai de rétractation\".<br />Vous n’avez pas à vous justifier auprès du commerçant.<br/><a href=\"../delai-de-retractation\" target=\"_blank\">>> Comment calculer mon délai de retractation</a>",
+                  "subcategoriesTitle": "Avez-vous fait votre demande dans ce délai&#160;?",
+                  "subcategories": [
+                    {
+                      "title": "Oui",
+                      "detailInputs": [
+                        {
+                          "label": "Date du constat",
+                          "rank": 1,
+                          "type": "DATE",
+                          "defaultValue": "SYSDATE"
+                        },
+                        {
+                          "label": "Description",
+                          "rank": 2,
+                          "type": "TEXTAREA"
+                        }
+                      ],
+                      "fileLabel": "Pièces jointes"
+                    },
+                    {
+                      "title": "Non",
+                      "information": {
+                        "title": "Ceci ne constitue pas un motif de signalement."
+                      }
+                    }
+                  ]
                 }
               ]
             }
@@ -1002,11 +1080,11 @@
         {
           "title": "Problème de livraison",
           "samples": "Exemples : colis perdu et non reçu, livraison tardive, colis abimé...",
-          "subcategoriesTitle": "Quel est le problème ?",
+          "subcategoriesTitle": "Quel est le problème&#160;?",
           "subcategories": [
             {
               "title": "Colis non reçu ou perdu",
-              "subcategoriesTitle": "De quoi s'agit-il ?",
+              "subcategoriesTitle": "De quoi s'agit-il&#160;?",
               "subcategories": [
                 {
                   "title": "D'une commande auprès d'un commerçant",
@@ -1028,7 +1106,7 @@
                       "type": "TEXT"
                     },
                     {
-                      "label": "Quelle est le nom de l'entreprise de livraison ?",
+                      "label": "Quelle est le nom de l'entreprise de livraison&#160;?",
                       "description": "A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit",
                       "rank": 4,
                       "type": "TEXT",
@@ -1044,7 +1122,7 @@
             },
             {
               "title": "Colis endommagé",
-              "subcategoriesTitle": "De quoi s'agit-il ?",
+              "subcategoriesTitle": "De quoi s'agit-il&#160;?",
               "subcategories": [
                 {
                   "title": "D'une commande auprès d'un commerçant",
@@ -1066,7 +1144,7 @@
                       "type": "TEXT"
                     },
                     {
-                      "label": "Quelle est le nom de l'entreprise de livraison ?",
+                      "label": "Quelle est le nom de l'entreprise de livraison&#160;?",
                       "description": "A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit",
                       "rank": 4,
                       "type": "TEXT",
@@ -1082,7 +1160,7 @@
             },
             {
               "title": "Colis en retard par rapport à ce qui était annoncé",
-              "subcategoriesTitle": "De quoi s'agit-il ?",
+              "subcategoriesTitle": "De quoi s'agit-il&#160;?",
               "subcategories": [
                 {
                   "title": "D'une commande auprès d'un commerçant",
@@ -1104,7 +1182,7 @@
                       "type": "TEXT"
                     },
                     {
-                      "label": "Quelle est le nom de l'entreprise de livraison ?",
+                      "label": "Quelle est le nom de l'entreprise de livraison&#160;?",
                       "description": "A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit",
                       "rank": 4,
                       "type": "TEXT",
@@ -1150,14 +1228,14 @@
         "title": "Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !",
         "subTitle": "Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.",
         "actions": [{
-          "question" : "Un problème avec un commerçant ?",
+          "question" : "Un problème avec un commerçant&#160;?",
           "example": "Colis non reçu, pas de nouvelle de votre commande, etc.",
           "answer": "Signaler à la DGCCRF<br><a href=\"https://www.economie.gouv.fr/courrier/80666\" target=\"_blank\">https://www.economie.gouv.fr/courrier/80666</a>"
         }, {
-          "question" : "Un spam que vous avez reçu ?",
+          "question" : "Un spam que vous avez reçu&#160;?",
           "answer": "Signaler sur Signal-Spam<br><a href=\"http://www.signal-spam.fr\" target=\"_blank\">http://www.signal-spam.fr</a>"
         }, {
-          "question" : "Un contenu qui vous semble inapproprié ?",
+          "question" : "Un contenu qui vous semble inapproprié&#160;?",
           "example": "Trafic illicite, pédopornographie, etc.",
           "answer": "Signaler sur Internet-Signalement<br><a href=\"https://www.internet-signalement.gouv.fr\" target=\"_blank\">https://www.internet-signalement.gouv.fr</a>"
         }]
@@ -1178,9 +1256,9 @@
       "categoryId": "TNOIR",
       "hidden": true,
       "rank" : 104,
-      "breadcrumbTitle": "Vous souhaitez signaler un cas de travail au noir ?",
+      "breadcrumbTitle": "Vous souhaitez signaler un cas de travail au noir&#160;?",
       "information": {
-        "title": "Vous souhaitez signaler un cas de travail au noir ?",
+        "title": "Vous souhaitez signaler un cas de travail au noir&#160;?",
         "content": "Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;<ul><li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href=\"mailto:fraude.npdc@urssaf.fr\">fraude.npdc@urssaf.fr</a></li><li>écrire à l’inspection du travail en contactant la <a href=\"http://direccte.gouv.fr/\">DIRECCTE</a> de la région concernée</li><li>écrire à la Brigades de contrôle et de recherche des impôts</li><li>écrire à la police/gendarmerie</li></ul>La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir."
       }
     }

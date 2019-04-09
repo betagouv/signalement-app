@@ -5,7 +5,6 @@
       <p class="mx-auto mb-4 text-center title" [innerHTML]="informationToDisplay?.title"></p>
       <p class="mb-4 text-center" [innerHTML]="informationToDisplay?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
       <p class="mb-5" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
-      <app-retractation *ngIf="informationToDisplay?.reference === 'retractation'"></app-retractation>
       
       <div class="card mx-auto mb-4 rounded-lg" *ngFor="let action of informationToDisplay?.actions">
         <div class="card-body">
