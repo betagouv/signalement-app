@@ -240,4 +240,8 @@ export class CompanyComponent implements OnInit {
   changeCompany() {
     this.report.company = undefined;
   }
+
+  hasError(formControl: FormControl) {
+    return this.showErrors && formControl.errors;
+  }
 }

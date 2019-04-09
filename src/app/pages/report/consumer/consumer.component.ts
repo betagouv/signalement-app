@@ -72,4 +72,8 @@ export class ConsumerComponent implements OnInit {
       this.reportRouterService.routeForward(this.step);
     }
   }
+
+  hasError(formControl: FormControl) {
+    return this.showErrors && formControl.errors;
+  }
 }

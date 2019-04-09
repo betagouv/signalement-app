@@ -144,6 +144,10 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  hasRequiredError(detailInput: DetailInput, option?: string) {
+    return this.showErrors && this.getFormControl(detailInput, option) && this.getFormControl(detailInput, option).hasError('required');
+  }
+
   getDateFormControlInitialValue(detailInput: DetailInput) {
     let value: Date;
     if (this.getReportDetailInputValue(detailInput)) {
