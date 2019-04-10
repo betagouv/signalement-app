@@ -52,8 +52,8 @@ export class DetailInput {
   defaultValue: string;
   @JsonProperty('example')
   example?: string;
-  @JsonProperty('required')
-  required?: boolean;
+  @JsonProperty('optionnal')
+  optionnal?: boolean;
 
   constructor() {
     this.label = undefined;
@@ -63,7 +63,7 @@ export class DetailInput {
     this.options = undefined;
     this.defaultValue = undefined;
     this.example = undefined;
-    this.required = true;
+    this.optionnal = undefined;
   }
 }
 

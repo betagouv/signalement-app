@@ -108,7 +108,7 @@ export class DetailsComponent implements OnInit {
       label: 'Heure du constat',
       rank: 3,
       type: InputType.Timeslot,
-      required: false
+      optionnal: true
     }));
     return detailInputs;
   }
@@ -155,7 +155,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getDetailInputValidators(detailInput: DetailInput) {
-    return detailInput.required ? Validators.required : [];
+    return detailInput.optionnal ? Validators.required : [];
   }
 
   hasRequiredError(detailInput: DetailInput, option?: string) {

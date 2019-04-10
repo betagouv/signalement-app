@@ -19,7 +19,7 @@
 
       <div class="form__group" *ngFor="let detailInput of this.detailInputs">
         <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
-          <span [innerHTML]="detailInput.label"></span> <span class="error" *ngIf="detailInput.required">*</span>
+          <span [innerHTML]="detailInput.label"></span> <span class="error" *ngIf="!detailInput.optionnal">*</span>
         </label>
 
         <div class="row" *ngIf="detailInput.type === 'TEXT'">
