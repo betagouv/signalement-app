@@ -47,6 +47,7 @@ list:
           - label: Heure du constat
             rank: 6
             type: TIMESLOT
+            optionnal: true
       - title: Hygiène du personnel
         example: 'Exemples : tenue sale, mauvaise pratique d''hygiène...'
         subcategories:
@@ -92,6 +93,7 @@ list:
           - label: Heure du constat
             rank: 5
             type: TIMESLOT
+            optionnal: true
       - title: Problème de température
         example: 'Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...'
         detailInputs:
@@ -113,56 +115,258 @@ list:
           - label: Heure du constat
             rank: 4
             type: TIMESLOT
+            optionnal: true
       - title: Autre problème d'hygiène
   - category: Nourriture / Boissons
     categoryId: NOURR
-    description: Absence de liste d'ingrédients, date de consommation dépassée, produit
-      avec moisissure...
+    description: Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...
     rank: 2
     withInternetPurchase: true
     icon: icon_food.png
     subcategories:
-      - title: Produit présentant un défaut
-        example: 'Exemples : présence de moisissure, odeur anormale, ...'
-      - title: 'Corps étranger "dur" '
-        example: 'Présence de quelque chose de "dur" dans le produit. <br/>Exemples :
-      bout de verre, morceau de métal..'
-        information:
-          title: Vous souhaitez signaler la présence d'un corps étranger "dur"
-          subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
-          actions:
-            - question: Signaler la présence d'un corps étranger "dur"?
-              answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4211"
-                target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
       - title: Produit périmé
-        description: '"À consommer jusqu''au..." = date limite de consommation (DLC).<br/>Un
-      produit peut-être vendu jusqu''au jour indiqué sur l''étiquette. Il est <b>interdit</b>
-      de le vendre si cette date est dépassée.<br/><br/>"À consommer de préférence
-      avant le" = date de durabilité minimale (DDM).<br/><b>Cette date est indicative</b>.
-      Il n''est pas interdit de vendre un produit avec une DDM dépassée. Vous pouvez
-      également consommer le produit après cette date si son emballage n''est pas
-      altéré.'
-      - title: Produit pas bon
-        information:
-          title: Cet incident ne constitue pas un motif de signalement.
-          content: '<ul><li class="pb-3">Produit acheté en magasin : <br/>vous pouvez
-        contacter le service client (généralement indiqué sur l''emballage). Si non,
-        contactez directement le commerçant afin de lui faire part de votre avis ou
-        mécontentement.</li><li>Produit commandé dans un bar ou un restaurant :<br/>Vous
-        pouvez demander que l''on remplace un plat si vous estimez que le plat qui
-        vous a été proposé n''est pas frais ou pas suffisamment chaud. Vous pouvez
-        exiger la même chose pour le vin, notamment s''il est "bouchonné".<br/>En
-        revanche, si un plat commandé ne vous convient pas pour une question de goût,
-        le restaurateur est libre de le reprendre ou non et de vous servir un autre
-        plat.</li></ul>'
+        subcategoriesTitle: 'Vous souhaitez signaler&#160;:'
+        subcategories:
+          - title: Un problème fréquent de produits périmés
+            subcategoriesTitle: Quels sont les produits concernés&#160;?
+            subcategories:
+              - title: Des produits frais vendus dans un réfrigérateur ou au rayon "froid"
+                example: 'Exemples : viande, poisson, quiche, jambon...'
+                subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
+                subcategories:
+                  - title: Oui
+                    detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
+                    description: Après cette date, il est dangereux de consommer le produit.
+                  - title: Non pas encore (mais bientôt)
+                    information:
+                      title: Il est autorisé de vendre un produit jusqu’au jour indiqué sur l'étiquette de la DLC.
+                      content: Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
+                      actions:
+                        - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
+                          answer: Contacter directement le service client de votre magasin pour leur proposer.
+              - title: Des produits vendus à température ambiante
+                example: 'Exemples : chocolat, conserve, compote, petits pots...'
+                information:
+                  content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
+                    <br/>Le commerçant peut vendre un produit avec cette date dépassée.
+                    <br/>Ces dates sont seulement une indication.
+                    <br/>Vous pouvez consommer le produit après cette date.
+                    <br/>Il n'est pas nécessaire de le jeter.
+          - title: Un produit en particulier
+            subcategoriesTitle: Comment est formulée la date&#160;?
+            subcategories:
+              - title: À consommer de préférence avant le...
+                example: concerne généralement des produits secs = date de durabilité minimale (DDM) = À consommer avant fin
+                information:
+                  content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
+                    <br/>Le commercant peut vendre un produit avec cette date dépassée.
+                    <br/>Ces dates sont seulement une indication.
+                    <br/>Vous pouvez consommer le produit après cette date.
+                    <br/>Il n'est pas nécessaire de le jeter.
+              - title: À consommer jusqu’au...
+                example: concerne des produits frais = date limite de consommation (DLC)
+                subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
+                subcategories:
+                  - title: Oui
+                    detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
+                    description: Après cette date, il est dangereux de consommer le produit.
+                    detailInputs:
+                      - label: Date du constat (ou d'achat suivant le cas)
+                        rank: 1
+                        type: DATE
+                        defaultValue: SYSDATE
+                      - label: Date Limite de Consommation (DLC)
+                        rank: 2
+                        type: DATE
+                    fileLabel: Photo de la DLC / du produit / de la marque
+                  - title: Non pas encore (mais bientôt)
+                    information:
+                      title: Il est autorisé de vendre un produit jusqu’au jour indiqué sur l'étiquette de la DLC.
+                      content: Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
+                      actions:
+                        - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
+                          answer: Contacter directement le service client de votre magasin pour leur proposer.
+              - title: Date de consommation recommandée
+                example: concerne les oeufs
+                detailInputs:
+                  - label: La date est-elle ?
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - Dépassée
+                      - Dans moins de 7 jours
+                  - label: Date Limite de Consommation (DLC)
+                    rank: 2
+                    type: DATE
+                  - label: Date du constat
+                    rank: 3
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo
+      - title: Problème avec le produit
+        example: 'Exemple : présence de moisissure'
+        subcategoriesTitle: S'agit-il d'un problème de corps étranger "dur"&#160;?
+        subcategories:
+          - title: Oui
+            example: 'Présence de quelque chose de "dur" dans le produit.<br/>Exemples : bout de verre, morceau de métal...'
+            information:
+              title: Vous souhaitez signaler la présence d'un corps étranger "dur"
+              subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
+              actions:
+                - question: Signaler la présence d'un corps étranger "dur"?
+                  answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4211"
+                    target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
+          - title: Non
+            subcategoriesTitle: de quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Quel est-le problème&#160;?
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - Moisissure
+                      - Couleur ou odeur anormale
+                      - Corps étranger "mou"
+                      - Autre (à préciser)
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 3
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: Quel est-le problème&#160;?
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - Moisissure
+                      - Couleur ou odeur anormale
+                      - Corps étranger "mou"
+                      - Autre (à préciser)
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 3
+                    type: TEXT
+                  - label: Marque
+                    rank: 4
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 5
+                    type: TEXT
+                  - label: Date limite
+                    rank: 6
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 7
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
       - title: Problème sur l'étiquette / emballage
-        example: 'Exemples : liste des ingrédients non disponible, mention des allergènes
-      non conforme, logo trompeur...'
+        example: 'Exemples : liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...'
+        subcategories:
+          - title: Pas d'étiquetage ou informations absentes
+            detailInputs:
+              - label: Quel est-le problème&#160;?
+                rank: 1
+                type: RADIO
+                options:
+                  - Pas d'étiquetage
+                  - Date limite
+                  - Allergènes
+                  - Composition
+                  - Autre (à préciser)
+              - label: Date du constat (ou d'achat suivant le cas)
+                rank: 2
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Type de produit
+                rank: 3
+                type: TEXT
+              - label: Nom /marque
+                rank: 4
+                type: TEXT
+              - label: Qu'avez-vous constaté&#160;?
+                rank: 5
+                type: TEXTAREA
+            fileLabel: Photos du code barre / n° de lot / référence
+          - title: Informations trompeuses ou fausses
+            detailInputs:
+              - label: Date du constat (ou d'achat suivant le cas)
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Type de produit
+                rank: 2
+                type: TEXT
+              - label: Nom /marque
+                rank: 3
+                type: TEXT
+              - label: Qu'avez-vous constaté&#160;?
+                rank: 4
+                type: TEXTAREA
+          - title: Étiquetage uniquement en langue étrangère
+            example: Aucune information traduite en français
+            detailInputs:
+              - label: Date du constat (ou d'achat suivant le cas)
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Type de produit
+                rank: 2
+                type: TEXT
+              - label: Nom /marque
+                rank: 3
+                type: TEXT
+              - label: Qu'avez-vous constaté&#160;?
+                rank: 4
+                type: TEXTAREA
+          - title: Autres problèmes d'étiquetage
       - title: Problème de quantité
         example: 'Exemples : poids indiqué non conforme, balance non tarée...'
-      - title: Produit en retrait/ rappel
+      - title: Produit pas bon
+        information:
+          title: Trouver qu'un produit n'est pas bon n'est pas un motif de signalement sur SignalConso.
+          actions:
+            - question: Vous avez acheté votre produit en magasin&#160;?
+              answer: Contactez plutôt le service client de la marque.
+                <br/>Généralement il est indiqué sur l'emballage.
+                <br/>Si ce n'est pas le cas, contactez votre commerçant afin de lui faire part de votre avis ou de votre mécontentement.
+            - question: Vous avez commandé votre produit dans un bar ou un restaurant&#160;?
+              answer: Si vous trouvez que le plat n'est pas frais ou pas assez chaud, vous pouvez demander que l'on vous remplace le plat.
+                <br/>Si votre vin est bouchonné, vous pouvez demander à le changer.
+                <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.
+      - title: Produit en retrait / rappel
         example: Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités
-      - title: Autre problème de nourriture
+        detailInputs:
+          - label: Date du constat
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Heure du constat
+            rank: 2
+            type: TIMESLOT
+            optionnal: true
+          - label: Nom du produit / marque
+            rank: 3
+            type: TEXT
+          - label: Numéro de lot / référence
+            rank: 4
+            type: TEXT
+          - label: Qu'avez-vous constaté&#160;?
+            rank: 5
+            type: TEXTAREA
+      - title: Autre
   - category: Matériel / Objet
     categoryId: MATOS
     description: Effet indésirable type brûlure, objet dangereux, problème avec une
