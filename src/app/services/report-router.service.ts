@@ -109,7 +109,7 @@ export class ReportRouterService {
           return Step.Category;
         }
       case Step.Information:
-        if (this.report.subcategories) {
+        if (this.report && this.report.subcategories) {
           return Step.Problem;
         } else {
           return Step.Category;
