@@ -205,70 +205,174 @@ list:
                 fileLabel: Photo
       - title: Problème avec le produit
         example: 'Exemple : présence de moisissure'
-        subcategoriesTitle: S'agit-il d'un problème de corps étranger "dur"&#160;?
+        subcategoriesTitle: Quel est-le problème&#160;?
         subcategories:
-          - title: Oui
-            example: 'Présence de quelque chose de "dur" dans le produit.<br/>Exemples : bout de verre, morceau de métal...'
-            information:
-              title: Vous souhaitez signaler la présence d'un corps étranger "dur"
-              subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
-              actions:
-                - question: Signaler la présence d'un corps étranger "dur"?
-                  answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4211"
-                    target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
-          - title: Non
-            subcategoriesTitle: de quel type de produit s'agit-il&#160;?
+          - title: Moisissure
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
               - title: Un produit vendu sans emballage.
                 example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
                 detailInputs:
-                  - label: Quel est-le problème&#160;?
-                    rank: 1
-                    type: RADIO
-                    options:
-                      - Moisissure
-                      - Couleur ou odeur anormale
-                      - Corps étranger "mou"
-                      - Autre (à préciser)
                   - label: Nom du produit
-                    rank: 2
+                    rank: 1
                     type: TEXT
                   - label: Date du constat (ou d'achat suivant le cas)
-                    rank: 3
+                    rank: 2
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
                 detailInputs:
-                  - label: Quel est-le problème&#160;?
-                    rank: 1
-                    type: RADIO
-                    options:
-                      - Moisissure
-                      - Couleur ou odeur anormale
-                      - Corps étranger "mou"
-                      - Autre (à préciser)
                   - label: 'C''est un produit vendu&#160;:'
-                    rank: 2
+                    rank: 1
                     type: RADIO
                     options:
                       - au rayon frais
                       - au rayon surgelé
                       - à température ambiante
                   - label: Nom du produit
-                    rank: 3
+                    rank: 2
                     type: TEXT
                   - label: Marque
-                    rank: 4
+                    rank: 3
                     type: TEXT
                   - label: Numéro de lot
-                    rank: 5
+                    rank: 4
                     type: TEXT
                   - label: Date limite
-                    rank: 6
+                    rank: 5
                     type: DATE
                   - label: Date du constat (ou d'achat suivant le cas)
-                    rank: 7
+                    rank: 6
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+          - title: Couleur ou odeur anormale
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Nom du produit
+                    rank: 1
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 2
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Marque
+                    rank: 3
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 4
+                    type: TEXT
+                  - label: Date limite
+                    rank: 5
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 6
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+          - title: Corps étranger "mou"
+            example: 'Présence de quelque chose de "mou" dans le produit.<br/>Exemples: morceau de gant, morceau de tissus..'
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Nom du produit
+                    rank: 1
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 2
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Marque
+                    rank: 3
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 4
+                    type: TEXT
+                  - label: Date limite
+                    rank: 5
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 6
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+          - title: Corps étranger "dur"
+            example: 'Présence de quelque chose de "dur" dans le produit.<br/>Exemples : bout de verre, morceau de métal...'
+            information:
+              title: Vous souhaitez signaler la présence d'un corps étranger "dur"
+              subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
+              actions:
+                - question: Signaler la présence d'un corps étranger "dur"?
+                  answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4211" target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
+          - title: Autre
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Nom du produit
+                    rank: 1
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 2
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Marque
+                    rank: 3
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 4
+                    type: TEXT
+                  - label: Date limite
+                    rank: 5
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 6
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
