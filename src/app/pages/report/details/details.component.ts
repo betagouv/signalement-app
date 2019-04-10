@@ -155,7 +155,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getDetailInputValidators(detailInput: DetailInput) {
-    return detailInput.optionnal ? Validators.required : [];
+    return !detailInput.optionnal ? Validators.required : [];
   }
 
   hasRequiredError(detailInput: DetailInput, option?: string) {

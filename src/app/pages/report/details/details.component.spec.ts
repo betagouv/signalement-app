@@ -153,7 +153,7 @@ describe('DetailsComponent', () => {
 
     const reportWithSubcategory = new Report();
     reportWithSubcategory.subcategories = [new Subcategory()];
-    reportWithSubcategory.subcategories[0].detailInputs = [textDetailInputFixture];
+    reportWithSubcategory.subcategories[0].detailInputs = [Object.assign(new DetailInput(), textDetailInputFixture)];
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
