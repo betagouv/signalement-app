@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DetailInputValue, PrecisionKeyword, Report, ReportDetails } from '../../../model/Report';
+import { DetailInputValue, PrecisionKeyword, Report } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { otherPrecisionValue, ReportService } from '../../../services/report.service';
+import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
-import { DetailInput, Information, InputType } from '../../../model/Anomaly';
+import { DetailInput, InputType } from '../../../model/Anomaly';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -41,6 +41,7 @@ export class DetailsComponent implements OnInit {
   step: Step;
   report: Report;
 
+  detailInputs: DetailInput[];
   detailsForm: FormGroup;
   singlePrecisionCtrl: FormControl;
   multiplePrecisionCtrl: FormArray;
@@ -73,6 +74,7 @@ export class DetailsComponent implements OnInit {
     this.reportService.currentReport.subscribe(report => {
       if (report) {
         this.report = report;
+        this.initDetailInputs();
         this.initDetailsForm();
         this.initUploadedFiles();
         this.constructPlageHoraireList();
@@ -86,62 +88,74 @@ export class DetailsComponent implements OnInit {
 
   }
 
+  initDetailInputs() {
+    if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
+      this.detailInputs = this.getReportLastSubcategory().detailInputs;
+    } else {
+      this.detailInputs = this.getDefaultDetailInputs();
+    }
+  }
+
+  getDefaultDetailInputs() {
+    const detailInputs = [];
+    detailInputs.push(Object.assign(new DetailInput(), {
+      label: 'Description',
+      rank: 1,
+      type: InputType.Textarea
+    }));
+    detailInputs.push(Object.assign(new DetailInput(), {
+      label: 'Date du constat',
+      rank: 2,
+      type: InputType.Date,
+      defaultValue: 'SYSDATE'
+    }));
+    detailInputs.push(Object.assign(new DetailInput(), {
+      label: 'Heure du constat',
+      rank: 3,
+      type: InputType.Timeslot
+    }));
+    return detailInputs;
+  }
+
   initDetailsForm() {
 
     this.showErrors = false;
-    if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
-      this.detailsForm = this.formBuilder.group({});
-      this.getReportLastSubcategory().detailInputs
-        .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
-        .forEach(detailInput => {
-          if (detailInput.type === InputType.Checkbox) {
-            this.detailsForm.addControl(
-              this.getFormControlName(detailInput),
-              this.formBuilder.array(detailInput.options.map((option, optionIndex) => {
-               return this.formBuilder.control(
-                 this.getCheckboxFormControlInitialValue(detailInput, optionIndex)
-               );
-              }), ValidateCheckboxControl)
-            );
-            this.initCheckboxInputsPrecision(detailInput);
-          } else if (detailInput.type === InputType.Radio) {
-            this.detailsForm.addControl(
-              this.getFormControlName(detailInput),
-              this.formBuilder.control(this.getRadioFormControlInitialValue(detailInput), Validators.required)
-            );
-            this.initRadioInputPrecision(detailInput, this.getRadioFormControlInitialValue(detailInput));
-          } else if (detailInput.type === InputType.Date) {
-            this.detailsForm.addControl(
-              this.getFormControlName(detailInput),
-              this.formBuilder.control(this.getDateFormControlInitialValue(detailInput), Validators.required)
-            );
-          } else {
-            this.detailsForm.addControl(
-              this.getFormControlName(detailInput),
-              this.formBuilder.control(this.getTextFormControlInitialValue(detailInput), Validators.required)
-            );
-          }
-          if (detailInput.type === InputType.Textarea) {
-            this.searchKeywords(this.getFormControl(detailInput));
-          }
-        });
-    } else { // A supprimer quand arborescence fini
-      this.descriptionCtrl = this.formBuilder.control(this.report.details ? this.report.details.description : '');
-      this.anomalyDateCtrl = this.formBuilder.control(
-        this.report.details ? this.report.details.anomalyDate : new Date(), Validators.required
-      );
-      this.anomalyTimeSlotCtrl = this.formBuilder.control(this.report.details ? this.report.details.anomalyTimeSlot : '');
 
-      this.detailsForm = this.formBuilder.group({
-        anomalyDate: this.anomalyDateCtrl,
-        anomalyTimeSlot: this.anomalyTimeSlotCtrl,
-        description: this.descriptionCtrl
+    this.detailsForm = this.formBuilder.group({});
+    this.detailInputs
+      .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
+      .forEach(detailInput => {
+        if (detailInput.type === InputType.Checkbox) {
+          this.detailsForm.addControl(
+            this.getFormControlName(detailInput),
+            this.formBuilder.array(detailInput.options.map((option, optionIndex) => {
+             return this.formBuilder.control(
+               this.getCheckboxFormControlInitialValue(detailInput, optionIndex)
+             );
+            }), ValidateCheckboxControl)
+          );
+          this.initCheckboxInputsPrecision(detailInput);
+        } else if (detailInput.type === InputType.Radio) {
+          this.detailsForm.addControl(
+            this.getFormControlName(detailInput),
+            this.formBuilder.control(this.getRadioFormControlInitialValue(detailInput), Validators.required)
+          );
+          this.initRadioInputPrecision(detailInput, this.getRadioFormControlInitialValue(detailInput));
+        } else if (detailInput.type === InputType.Date) {
+          this.detailsForm.addControl(
+            this.getFormControlName(detailInput),
+            this.formBuilder.control(this.getDateFormControlInitialValue(detailInput), Validators.required)
+          );
+        } else {
+          this.detailsForm.addControl(
+            this.getFormControlName(detailInput),
+            this.formBuilder.control(this.getTextFormControlInitialValue(detailInput), Validators.required)
+          );
+        }
+        if (detailInput.type === InputType.Textarea) {
+          this.searchKeywords(this.getFormControl(detailInput));
+        }
       });
-
-      if (this.getReportLastSubcategory() && this.getReportLastSubcategory().details && this.getReportLastSubcategory().details.precision) {
-        this.initPrecisionsCtrl();
-      }
-    }
   }
 
   hasRequiredError(detailInput: DetailInput, option?: string) {
@@ -216,7 +230,7 @@ export class DetailsComponent implements OnInit {
         .map((control, index) => {
           if (control.value) {
             if (this.isCheckboxInputPrecisionRequired(detailInput, index)) {
-              return detailInput.options[index] + this.detailsForm.controls[this.getFormControlName(detailInput, detailInput.options[index])].value;
+              return detailInput.options[index] + this.getFormControl(detailInput, detailInput.options[index]).value;
             } else {
               return detailInput.options[index];
             }
@@ -230,31 +244,11 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  initUploadedFiles() {
-    if (this.report.uploadedFiles) {
-      this.uploadedFiles = this.report.uploadedFiles;
-    } else {
-      this.uploadedFiles = [];
-    }
-  }
-
-  removeUploaderFile(uploadedFile: UploadedFile) {
-    this.uploadedFiles.splice(
-      this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
-      1
-    );
-    this.fileUploaderService.deleteFile(uploadedFile).subscribe();
-  }
-
   constructPlageHoraireList() {
     this.plageHoraireList = [];
     for (let i = 0; i < 24; i++) {
       this.plageHoraireList.push(i);
     }
-  }
-
-  onFileUploaded(uploadedFile: UploadedFile) {
-    this.uploadedFiles.push(uploadedFile);
   }
 
   submitDetailsForm() {
@@ -263,51 +257,18 @@ export class DetailsComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
-      if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
-        this.report.detailInputValues = this.getReportLastSubcategory().detailInputs
-          .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
-          .map(detailInput => {
-            return Object.assign(new DetailInputValue(), {
-              label: detailInput.label,
-              value: this.getFormControlValue(detailInput)
-            });
+      this.report.detailInputValues = this.detailInputs
+        .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
+        .map(detailInput => {
+          return Object.assign(new DetailInputValue(), {
+            label: detailInput.label,
+            value: this.getFormControlValue(detailInput)
           });
-        this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
-      } else {
-        const reportDetails = new ReportDetails();
-        if (this.getPrecisionFromCtrl()) {
-          reportDetails.precision = this.getPrecisionFromCtrl();
-        }
-        if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1 && this.otherPrecisionCtrl) {
-          reportDetails.otherPrecision = this.otherPrecisionCtrl.value;
-        }
-        reportDetails.anomalyDate = this.anomalyDateCtrl.value;
-        reportDetails.anomalyTimeSlot = this.anomalyTimeSlotCtrl.value;
-        reportDetails.description = this.descriptionCtrl.value;
-        this.report.details = reportDetails;
-        this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
-      }
+        });
+      this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
       this.reportService.changeReportFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
     }
-  }
-
-  getPrecisionFromCtrl() {
-    if (this.singlePrecisionCtrl) {
-      return this.singlePrecisionCtrl.value;
-    } else if (this.multiplePrecisionCtrl) {
-      return this.multiplePrecisionCtrl.controls
-        .map((control, index) => {
-          return control.value ? this.getReportLastSubcategory().details.precision.options[index].title : null;
-        })
-        .filter(value => value !== null);
-    } else {
-      return '';
-    }
-  }
-
-  getSubcategoryTitles() {
-    return this.report.subcategories.map(s => s.title).reduce((t1, t2) => `${t1}, ${t2}`);
   }
 
   bringFileSelector() {
@@ -330,7 +291,8 @@ export class DetailsComponent implements OnInit {
           fileToUpload.id = uploadedFile.id;
         }, error => {
           fileToUpload.loading = false;
-          fileToUpload.displayedFilename = `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
+          fileToUpload.displayedFilename =
+            `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
         });
       }
     }
@@ -338,6 +300,26 @@ export class DetailsComponent implements OnInit {
 
   isUploadingFile() {
     return this.uploadedFiles.find(file => file.loading);
+  }
+
+  initUploadedFiles() {
+    if (this.report.uploadedFiles) {
+      this.uploadedFiles = this.report.uploadedFiles;
+    } else {
+      this.uploadedFiles = [];
+    }
+  }
+
+  removeUploadedFile(uploadedFile: UploadedFile) {
+    this.uploadedFiles.splice(
+      this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
+      1
+    );
+    this.fileUploaderService.deleteFile(uploadedFile).subscribe();
+  }
+
+  onFileUploaded(uploadedFile: UploadedFile) {
+    this.uploadedFiles.push(uploadedFile);
   }
 
   textOverflowMiddleCropping(text: string, limit: number) {
@@ -356,7 +338,11 @@ export class DetailsComponent implements OnInit {
       } else {
         const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
         if (anomaly) {
-          this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.keywordsDetection, JSON.stringify(res.found.map(elt => elt.expression)));
+          this.analyticsService.trackEvent(
+            EventCategories.report,
+            ReportEventActions.keywordsDetection,
+            JSON.stringify(res.found.map(elt => elt.expression))
+          );
           this.keywordsDetected = {
             category: anomaly.category,
             message: anomaly.information ? anomaly.information.title : ''
@@ -424,7 +410,6 @@ export class DetailsComponent implements OnInit {
       let precisionValue = '';
       if (this.getReportDetailInputValue(detailInput)) {
         const value = (this.getReportDetailInputValue(detailInput).value as Array<string>)[optionIndex];
-        console.log('value', value)
         if (value && value.indexOf(PrecisionKeyword) !== -1) {
           precisionValue = value.slice(value.indexOf(PrecisionKeyword) + PrecisionKeyword.length);
         }
@@ -441,41 +426,6 @@ export class DetailsComponent implements OnInit {
   getReportDetailInputValue(detailInput: DetailInput) {
     if (this.report.detailInputValues) {
       return this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
-    }
-  }
-
-
-
-
-  //fonctions à supprimer quand nouvelle arborescence complète
-  initPrecisionsCtrl() {
-    const subcategoryDetailsPrecision = this.getReportLastSubcategory().details.precision;
-    if (subcategoryDetailsPrecision.severalOptionsAllowed) {
-      this.multiplePrecisionCtrl = new FormArray(
-        subcategoryDetailsPrecision.options.map(option =>
-          this.formBuilder.control(this.isOptionChecked(option) ? true : false)
-        )
-      );
-      this.detailsForm.addControl('multiplePrecision', this.multiplePrecisionCtrl);
-    } else {
-      this.singlePrecisionCtrl = this.formBuilder.control(
-        this.report.details ? this.report.details.precision : '', Validators.required
-      );
-      this.detailsForm.addControl('singlePrecision', this.singlePrecisionCtrl);
-    }
-    this.otherPrecisionCtrl = this.formBuilder.control(this.report.details ? this.report.details.otherPrecision : '');
-    this.initOtherPrecision();
-  }
-
-  isOptionChecked(option: Information) {
-    return this.report.details && this.report.details.precision && this.report.details.precision.indexOf(option.title) !== -1;
-  }
-
-  initOtherPrecision() {
-    if (this.getPrecisionFromCtrl().indexOf(otherPrecisionValue) !== -1) {
-      this.detailsForm.addControl('otherPrecision', this.otherPrecisionCtrl);
-    } else {
-      this.detailsForm.removeControl('otherPrecision');
     }
   }
 

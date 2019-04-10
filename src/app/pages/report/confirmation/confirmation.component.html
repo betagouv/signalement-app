@@ -21,20 +21,10 @@
         <h5>Description</h5>
         <div class="row">
           <div class="col-12">
-            <ng-container *ngIf="getReportLastSubcategory()?.detailInputs; else noDetailsInput">
-              <div class="mb-3 flex" *ngFor="let detailInputValue of report.detailInputValues">
-                <span [innerHTML]="detailInputValue.renderedLabel"></span>
-                &nbsp;<span [innerHTML]="detailInputValue.renderedValue"></span>
-              </div>
-            </ng-container>
-            <ng-template #noDetailsInput>
-              Date du constat : {{report.details.anomalyDate | date:'dd/MM/yyyy'}}
-              <br />
-              Plage horaire : <ng-container *ngIf="report.details.anomalyTimeSlot"> de {{report.details.anomalyTimeSlot}}h à {{getTimeSlotEnd()}}h </ng-container>
-              <br />
-              Description du problème : {{report.details.description}}
-            </ng-template>
-
+            <div class="mb-3 flex" *ngFor="let detailInputValue of report.detailInputValues">
+              <span [innerHTML]="detailInputValue.renderedLabel"></span>
+              &nbsp;<span [innerHTML]="detailInputValue.renderedValue"></span>
+            </div>
             <div *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noUploadedFiles">
               Pièce(s) jointe(s) :
               <div class="col-12">

@@ -65,8 +65,8 @@ export class DetailInput {
   options?: string[];
   @JsonProperty('defaultValue')
   defaultValue: string;
-  @JsonProperty('samples')
-  samples?: string;
+  @JsonProperty('example')
+  example?: string;
 
   constructor() {
     this.label = undefined;
@@ -75,19 +75,7 @@ export class DetailInput {
     this.placeholder = undefined;
     this.options = undefined;
     this.defaultValue = undefined;
-    this.samples = undefined;
-  }
-}
-
-export class SubcategoryDetails {
-  @JsonProperty('descriptionTips')
-  descriptionTips?: string;
-  @JsonProperty({ name: 'precision', clazz: Precision })
-  precision?: Precision;
-
-  constructor() {
-    this.descriptionTips = undefined;
-    this.precision = undefined;
+    this.example = undefined;
   }
 }
 
@@ -96,14 +84,12 @@ export class Subcategory {
   title: string;
   @JsonProperty('description')
   description?: string;
-  @JsonProperty('samples')
-  samples?: string;
+  @JsonProperty('example')
+  example?: string;
   @JsonProperty('subcategoriesTitle')
   subcategoriesTitle?: string;
   @JsonProperty({ name: 'subcategories', clazz: Subcategory })
   subcategories?: Subcategory[];
-  @JsonProperty({ name: 'details', clazz: SubcategoryDetails })
-  details?: SubcategoryDetails;
   @JsonProperty('detailTitle')
   detailTitle?: string;
   @JsonProperty({ name: 'detailInputs', clazz: DetailInput })
@@ -116,10 +102,9 @@ export class Subcategory {
   constructor() {
     this.title = undefined;
     this.description = undefined;
-    this.samples = undefined;
+    this.example = undefined;
     this.subcategoriesTitle = undefined;
     this.subcategories = undefined;
-    this.details = undefined;
     this.detailTitle = undefined;
     this.detailInputs = undefined;
     this.fileLabel = undefined;

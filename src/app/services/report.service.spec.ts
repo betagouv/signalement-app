@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { ReportService } from './report.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ServiceUtils } from './service.utils';
-import { Report, ReportDetails } from '../model/Report';
+import { DetailInputValue, Report } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
 import { Company } from '../model/Company';
@@ -35,39 +35,6 @@ describe('ReportService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('get precision from report details', () => {
-
-    it('should return the precision title for a single precision different from "Autre"', () => {
-      const reportDetails = new ReportDetails();
-      reportDetails.precision = 'précision';
-
-      const precision = reportService.getDetailsPrecision(reportDetails);
-
-      expect(precision).toEqual('précision');
-    });
-
-    it('should return the precision title for a single precision "Autre" with and other precision', () => {
-      const reportDetails = new ReportDetails();
-      reportDetails.precision = 'Autre';
-      reportDetails.otherPrecision = 'autre précision';
-
-      const precision = reportService.getDetailsPrecision(reportDetails);
-
-      expect(precision).toEqual('Autre (autre précision)');
-    });
-
-
-    it('should return the list of precisions title for a multiple precisions all differents from "Autre"', () => {
-      const reportDetails = new ReportDetails();
-      reportDetails.precision = ['précision1', 'précision2'];
-
-      const precision = reportService.getDetailsPrecision(reportDetails);
-
-      expect(precision).toEqual('précision1, précision2');
-    });
-
-  });
-
   describe('report creation', () => {
 
     it('should post an http request with data to the report creation API', (done) => {
@@ -81,11 +48,6 @@ describe('ReportService', () => {
       subcategory1.title = 'sous catégorie 1';
       const subcategory2 = new Subcategory();
       subcategory2.title = 'sous catégorie 2';
-      const reportDetails = new ReportDetails();
-      reportDetails.precision = 'precision';
-      reportDetails.description = 'desc';
-      reportDetails.anomalyDate = anomalyDate;
-      reportDetails.anomalyTimeSlot = 5;
       const consumer = new Consumer();
       consumer.lastName = 'lastName';
       consumer.firstName = 'firstName';
@@ -95,13 +57,16 @@ describe('ReportService', () => {
       company.line1 = 'line 1';
       company.line2 = 'line 2';
       company.line4 = 'line 4';
+      const detailInputValue = new DetailInputValue();
+      detailInputValue.label = 'mon label';
+      detailInputValue.value = 'ma value';
       const report = new Report();
       report.uploadedFiles = [anomalyFile];
       report.category = 'category';
       report.subcategories = [subcategory1, subcategory2];
-      report.details = reportDetails;
       report.consumer = consumer;
       report.company = company;
+      report.detailInputValues = [detailInputValue];
 
       reportService.createReport(report).subscribe(result => {
           done();
@@ -114,16 +79,13 @@ describe('ReportService', () => {
       httpMock.verify();
       expect(reportRequest.request.body['category']).toBe('category');
       expect(reportRequest.request.body['subcategories']).toEqual([subcategory1.title, subcategory2.title]);
-      expect(reportRequest.request.body['details']).toEqual([{label: 'Précision :', value: 'precision'}]);
       expect(reportRequest.request.body['companyName']).toBe('companyName');
       expect(reportRequest.request.body['companyAddress']).toBe('line 1 - line 2 - line 4');
-      expect(reportRequest.request.body['description']).toBe('desc');
-      expect(reportRequest.request.body['anomalyDate']).toBe('2018-03-01');
-      expect(reportRequest.request.body['anomalyTimeSlot']).toBe(5);
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['email']).toBe('email@mail.fr');
       expect(reportRequest.request.body['fileIds']).toEqual([anomalyFile.id]);
+      expect(reportRequest.request.body['details']).toEqual([{label: 'mon label :', value: 'ma value'}]);
     });
 
   });

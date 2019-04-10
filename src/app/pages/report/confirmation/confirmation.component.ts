@@ -70,12 +70,6 @@ export class ConfirmationComponent implements OnInit {
     }
   }
 
-  getTimeSlotEnd() {
-    if (this.report.details.anomalyTimeSlot) {
-      return Number(this.report.details.anomalyTimeSlot) + 1;
-    }
-  }
-
   getFileDownloadUrl(uploadedFile: UploadedFile) {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }

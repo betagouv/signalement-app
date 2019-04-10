@@ -11,7 +11,6 @@ export class Report {
   category: string;
   subcategories: Subcategory[];
   company: Company;
-  details: ReportDetails;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
@@ -66,16 +65,6 @@ export class DetailInputValue {
   get label() {
     return this._label;
   }
-
-}
-
-export class ReportDetails {
-
-  anomalyDate: Date;
-  anomalyTimeSlot: number;
-  description: string;
-  precision?: string | string[];
-  otherPrecision?: string;
 
 }
 
