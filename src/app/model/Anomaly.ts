@@ -37,21 +37,6 @@ export class Information {
   }
 }
 
-export class Precision {
-  @JsonProperty('title')
-  title: string;
-  @JsonProperty('severalOptionsAllowed')
-  severalOptionsAllowed: boolean;
-  @JsonProperty({ name: 'options', clazz: Information })
-  options: Information[];
-
-  constructor() {
-    this.title = undefined;
-    this.severalOptionsAllowed = false;
-    this.options = undefined;
-  }
-}
-
 export class DetailInput {
   @JsonProperty('label')
   label: string;
@@ -67,6 +52,8 @@ export class DetailInput {
   defaultValue: string;
   @JsonProperty('example')
   example?: string;
+  @JsonProperty('required')
+  required?: boolean;
 
   constructor() {
     this.label = undefined;
@@ -76,6 +63,7 @@ export class DetailInput {
     this.options = undefined;
     this.defaultValue = undefined;
     this.example = undefined;
+    this.required = true;
   }
 }
 

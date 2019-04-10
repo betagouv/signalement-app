@@ -42,7 +42,7 @@ export class DetailInputValue {
           }
         })
         .reduce((v1, v2) => `${v1}, ${v2}`);
-    } else if (this._value.indexOf && this._value.indexOf(PrecisionKeyword) !== -1) {
+    } else if (this._value && this._value.indexOf && this._value.indexOf(PrecisionKeyword) !== -1) {
       this.renderedValue = this._value.replace(PrecisionKeyword, '(').concat(')');
     } else {
       this.renderedValue = value as string;

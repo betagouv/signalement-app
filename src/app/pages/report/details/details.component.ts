@@ -43,11 +43,6 @@ export class DetailsComponent implements OnInit {
 
   detailInputs: DetailInput[];
   detailsForm: FormGroup;
-  singlePrecisionCtrl: FormControl;
-  multiplePrecisionCtrl: FormArray;
-  otherPrecisionCtrl: FormControl;
-  anomalyDateCtrl: FormControl;
-  anomalyTimeSlotCtrl: FormControl;
   descriptionCtrl: FormControl;
 
   @ViewChild('fileInput') fileInput;
@@ -112,7 +107,8 @@ export class DetailsComponent implements OnInit {
     detailInputs.push(Object.assign(new DetailInput(), {
       label: 'Heure du constat',
       rank: 3,
-      type: InputType.Timeslot
+      type: InputType.Timeslot,
+      required: false
     }));
     return detailInputs;
   }
@@ -138,24 +134,28 @@ export class DetailsComponent implements OnInit {
         } else if (detailInput.type === InputType.Radio) {
           this.detailsForm.addControl(
             this.getFormControlName(detailInput),
-            this.formBuilder.control(this.getRadioFormControlInitialValue(detailInput), Validators.required)
+            this.formBuilder.control(this.getRadioFormControlInitialValue(detailInput), this.getDetailInputValidators(detailInput))
           );
           this.initRadioInputPrecision(detailInput, this.getRadioFormControlInitialValue(detailInput));
         } else if (detailInput.type === InputType.Date) {
           this.detailsForm.addControl(
             this.getFormControlName(detailInput),
-            this.formBuilder.control(this.getDateFormControlInitialValue(detailInput), Validators.required)
+            this.formBuilder.control(this.getDateFormControlInitialValue(detailInput), this.getDetailInputValidators(detailInput))
           );
         } else {
           this.detailsForm.addControl(
             this.getFormControlName(detailInput),
-            this.formBuilder.control(this.getTextFormControlInitialValue(detailInput), Validators.required)
+            this.formBuilder.control(this.getTextFormControlInitialValue(detailInput), this.getDetailInputValidators(detailInput))
           );
         }
         if (detailInput.type === InputType.Textarea) {
           this.searchKeywords(this.getFormControl(detailInput));
         }
       });
+  }
+
+  getDetailInputValidators(detailInput: DetailInput) {
+    return detailInput.required ? Validators.required : [];
   }
 
   hasRequiredError(detailInput: DetailInput, option?: string) {
@@ -258,6 +258,7 @@ export class DetailsComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
       this.report.detailInputValues = this.detailInputs
+        .filter(d => isDefined(this.getFormControlValue(d)))
         .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
         .map(detailInput => {
           return Object.assign(new DetailInputValue(), {
