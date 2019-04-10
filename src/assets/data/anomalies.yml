@@ -676,7 +676,7 @@ list:
     withInternetPurchase: true
     icon: icon_service.png
     subcategories:
-      - title: Refus de reprendre un produit sous garantie
+      - title: Refus de reprendre un produit défectueux
         example: 'Exemple : le commerçant refuse de me prendre mon achat encore sous garantie'
         subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
         subcategories:
@@ -684,10 +684,8 @@ list:
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
               - title: Il y a moins de 2 ans
-                description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement
-          normal de tous les objets.<br />Attention : vous ne bénéficiez pas de cette
-          garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé
-          (exemple : vous avez marché sur votre téléphone).'
+                description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets.
+                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
                 detailTitle: Problème de garantie légale
                 detailInputs:
                   - label: Date d'achat
@@ -715,14 +713,11 @@ list:
                 subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                 subcategories:
                   - title: Oui
-                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie
-            constructeur, extension de garantie, échange à neuf...'
-                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre
-                      contrat de garantie. <br />Avant de faire un signalement, relisez les
-                      conditions écrites dans ce contrat.
+                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
+                      <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                     subcategories:
-                      - title: J'ai pris connaissance des conditions écrites dans mon contrat
-                          de garantie
+                      - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
                         detailTitle: Problème de garantie commerciale
                         detailInputs:
                           - label: Date d'achat
@@ -745,24 +740,22 @@ list:
                   - title: Non
                     information:
                       title: Votre produit n'est plus couvert par la garantie.
-                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée
-                        " garantie légale de conformité".
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                       actions:
                         - question: Un problème avec un commerçant&#160;?
-                          example: Vous souhaitez attaquer l'entreprise pour "vices cachées "?
-                            <br/><br/>Un vice caché d'un produit est un défaut :<ul><li>présent
-                            dès le départ qui rend le produit inutilisable et</li><li>que vous
-                            ne connaissiez pas quand vous avez acheté le produit.</li></ul>
-                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport
-                            d'expertise par exemple.
+                          example: 'Vous souhaitez attaquer l''entreprise pour "vices cachées "?
+                            <br/><br/>Un vice caché d''un produit est un défaut :
+                            <ul>
+                              <li>présent dès le départ qui rend le produit inutilisable et</li>
+                              <li>que vousne connaissiez pas quand vous avez acheté le produit.</li>
+                            </ul>'
+                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
           - title: Occasion
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
               - title: Il y a moins de 6 mois
-                description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement
-          normal de tous les objets.<br />Attention : vous ne bénéficiez pas de cette
-          garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé
-          (exemple : vous avez marché sur votre téléphone).'
+                description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets.
+                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
                 detailTitle: Problème de garantie légale
                 detailInputs:
                   - label: Date d'achat
@@ -790,14 +783,11 @@ list:
                 subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                 subcategories:
                   - title: Oui
-                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie
-            constructeur, extension de garantie, échange à neuf...'
-                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre
-                      contrat de garantie. <br />Avant de faire un signalement, relisez les
-                      conditions écrites dans ce contrat.
+                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
+                      <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                     subcategories:
-                      - title: J'ai pris connaissance des conditions écrites dans mon contrat
-                          de garantie
+                      - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
                         detailTitle: Problème de garantie commerciale
                         detailInputs:
                           - label: Date d'achat
@@ -820,115 +810,96 @@ list:
                   - title: Non
                     information:
                       title: Votre produit n'est plus couvert par la garantie.
-                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée
-                        " garantie légale de conformité".
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                       actions:
                         - question: Un problème avec un commerçant&#160;?
-                          example: Vous souhaitez attaquer l'entreprise pour "vices cachées "?
-                            <br/><br/>Un vice caché d'un produit est un défaut :<ul><li>présent
-                            dès le départ qui rend le produit inutilisable et</li><li>que vous
-                            ne connaissiez pas quand vous avez acheté le produit.</li></ul>
-                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport
-                            d'expertise par exemple.
-      - title: Refus de rembourser un achat ou d'annuler un contrat qui ne me convient
-          pas
-        subcategoriesTitle: Pourquoi souhaitez-vous échanger, rembourser ou annuler un
-          contrat&#160;?
+                          example: 'Vous souhaitez attaquer l''entreprise pour "vices cachées "?
+                            <br/><br/>Un vice caché d''un produit est un défaut :
+                            <ul>
+                              <li>présent dès le départ qui rend le produit inutilisable et</li>
+                              <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                            </ul>'
+                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+      - title: Refus de rembourser un achat ou d'annuler un contrat
+        example: Vêtement trop petit, cadeau en doublon, changement d'avis, prix moins cher ailleurs
+        subcategoriesTitle: Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat&#160;?
         subcategories:
-          - title: Le produit ne fonctionne pas ou présente un défaut
-            information:
-              title: Renvoi vers refus de reprendre un produit sous garantie
-          - title: Le produit ne me convient pas / j'ai changé d'avis
-            subcategoriesTitle: Où avez-vous acheté votre produit ou souscrit votre abonnement
-              / contrat&#160;?
+          - title: Dans un magasin dans lequel vous vous êtes rendu
+            example: 'Exemple : affiche à la caisse du magasin'
+            subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?
             subcategories:
-              - title: Dans un magasin dans lequel vous vous êtes rendu
-                example: 'Exemple : affiche à la caisse du magasin'
-                subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange
-                  ou de remboursement&#160;?
+              - title: Oui
+                subcategoriesTitle: Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?
                 subcategories:
                   - title: Oui
-                    subcategoriesTitle: Votre demande est-elle en accord avec les conditions
-                      d'échange/remboursement précisées par le commerçant&#160;?
-                    subcategories:
-                      - title: Oui
-                        description: Le commerçant doit respecter les conditions d’échange et
-                          de remboursement qui sont affichées dans son commerce ou dans votre
-                          contrat.
-                      - title: Non
-                        information:
-                          title: Le commerçant est libre de choisir les conditions d'échange ou
-                            de remboursement.
-                          content: 'Par exemple, ces affiches sont autorisées : <ul><li>"remboursement
-                sous 5 jours"</li><li>"avoir seulement"</li><li>"échange possible,
-                pas de remboursement"</li></ul>'
+                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
                   - title: Non
                     information:
-                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation
-                        gratuite de votre contrat.
-                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.<br/>Si
-                        vous annuler un contrat ou un abonnement, vous aurez peut-être des frais
-                        d'annulation.
-              - title: Sur internet
-                description: Vous avez un délai de 14 jours pour changer d’avis. On appelle
-                  ce délai le "délai de rétractation".<br />Vous n’avez pas à vous justifier
-                  auprès du commerçant.<br/><a href="../delai-de-retractation" target="_blank">>>
-                  Comment calculer mon délai de retractation</a>
-                subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+                      title: Le commerçant est libre de choisir les conditions d'échange ou de remboursement.
+                      content: 'Par exemple, ces affiches sont autorisées :
+                        <ul>
+                          <li>"remboursement sous 5 jours"</li>
+                          <li>"avoir seulement"</li>
+                          <li>"échange possible, pas de remboursement"</li>
+                        </ul>'
+              - title: Non
+                information:
+                  title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                  content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                    <br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+          - title: Sur internet
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
+          - title: Auprès d’un démarcheur qui est venu dans votre domicile
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
+          - title: Sur un stand dans une foire ou un salon
+            subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?
+            example: 'Exemple : affiche à la caisse du magasin'
+            subcategories:
+              - title: Oui
+                subcategoriesTitle: Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?
                 subcategories:
                   - title: Oui
+                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
                   - title: Non
                     information:
-                      title: Ceci ne constitue pas un motif de signalement.
-              - title: Auprès d’un démarcheur qui est venu dans votre domicile
-                description: Vous avez un délai de 14 jours pour changer d’avis. On appelle
-                  ce délai le "délai de rétractation".<br />Vous n’avez pas à vous justifier
-                  auprès du commerçant.<br/><a href="../delai-de-retractation" target="_blank">>>
-                  Comment calculer mon délai de retractation</a>
-                subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
-                subcategories:
-                  - title: Oui
-                  - title: Non
-                    information:
-                      title: Ceci ne constitue pas un motif de signalement.
-              - title: Sur un stand dans une foire ou un salon
-                subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange
-                  ou de remboursement&#160;?
-                example: 'Exemple : affiche à la caisse du magasin'
-                subcategories:
-                  - title: Oui
-                    subcategoriesTitle: Votre demande est-elle en accord avec les conditions
-                      d'échange/remboursement précisées par le commerçant&#160;?
-                    subcategories:
-                      - title: Oui
-                        description: Le commerçant doit respecter les conditions d’échange et
-                          de remboursement qui sont affichées dans son commerce ou dans votre
-                          contrat.
-                      - title: Non
-                        information:
-                          title: Le commerçant est libre de choisir les conditions d'échange ou
-                            de remboursement.
-                          content: 'Par exemple, ces affiches sont autorisées : <ul><li>"remboursement
-                sous 5 jours"</li><li>"avoir seulement"</li><li>"échange possible,
-                pas de remboursement"</li></ul>'
-                  - title: Non
-                    information:
-                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation
-                        gratuite de votre contrat.
-                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.<br/>Si
-                        vous annuler un contrat ou un abonnement, vous aurez peut-être des frais
-                        d'annulation.
-              - title: Par téléphone
-                description: Vous avez un délai de 14 jours pour changer d’avis. On appelle
-                  ce délai le "délai de rétractation".<br />Vous n’avez pas à vous justifier
-                  auprès du commerçant.<br/><a href="../delai-de-retractation" target="_blank">>>
-                  Comment calculer mon délai de retractation</a>
-                subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
-                subcategories:
-                  - title: Oui
-                  - title: Non
-                    information:
-                      title: Ceci ne constitue pas un motif de signalement.
+                      title: Le commerçant est libre de choisir les conditions d'échange ou de remboursement.
+                      content: 'Par exemple, ces affiches sont autorisées :
+                        <ul>
+                          <li>"remboursement sous 5 jours"</li>
+                          <li>"avoir seulement"</li>
+                          <li>"échange possible, pas de remboursement"</li>
+                        </ul>'
+              - title: Non
+                information:
+                  title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                  content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                    <br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+          - title: Par téléphone
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+                <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
       - title: Problème de livraison
         example: 'Exemples : colis perdu et non reçu, livraison tardive, colis abimé...'
         subcategoriesTitle: Quel est le problème&#160;?
@@ -949,8 +920,7 @@ list:
                     rank: 3
                     type: TEXT
                   - label: Quelle est le nom de l'entreprise de livraison&#160;?
-                    description: A l'étape suivant, merci de préciser l'entreprise qui vous
-                      a vendu le produit
+                    description: A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit
                     rank: 4
                     type: TEXT
                     placeholder: Entreprise de livraison
@@ -971,8 +941,7 @@ list:
                     rank: 3
                     type: TEXT
                   - label: Quelle est le nom de l'entreprise de livraison&#160;?
-                    description: A l'étape suivant, merci de préciser l'entreprise qui vous
-                      a vendu le produit
+                    description: A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit
                     rank: 4
                     type: TEXT
                     placeholder: Entreprise de livraison
@@ -993,8 +962,7 @@ list:
                     rank: 3
                     type: TEXT
                   - label: Quelle est le nom de l'entreprise de livraison&#160;?
-                    description: A l'étape suivant, merci de préciser l'entreprise qui vous
-                      a vendu le produit
+                    description: A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit
                     rank: 4
                     type: TEXT
                     placeholder: Entreprise de livraison
@@ -1006,37 +974,29 @@ list:
         example: 'Exemples : l''accueil est froid, le personnel est mal poli'
         information:
           title: Ceci ne constitue pas un motif de signalement.
-          subTitle: Il n'existe pas de disposition spécifique contraignant le professionnel
-            à être aimable ou à sourire... C'est une question de relation client ! Nous
-            vous invitons à contacter directement le service client ou le gérant pour
-            faire part de votre mécontentement. Par contre, si vous avez été victime d'injures
-            ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une
-            pré-plainte en ligne
+          subTitle: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
+            Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.
+            Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne
           actions:
             - question: Signaler un cas de harcèlement ou d'injure?
-              answer: Faire une pré-plainte en ligne<br><a href="https://www.pre-plainte-en-ligne.gouv.fr"
-                target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
+              answer: Faire une pré-plainte en ligne<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
       - title: Autre problème de service après-vente
   - category: Problème suite à un achat sur internet
     categoryId: PBINT
     rank: 101
     breadcrumbTitle: Vous avez identifié un problème suite à un achat sur internet
     information:
-      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons
-        activement !
-      subTitle: Dans certains cas, d'autres services de signalement existent déjà et
-        pourraient correspondre au problème que vous souhaitez signaler.
+      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
+      subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
         - question: Un problème avec un commerçant&#160;?
           example: Colis non reçu, pas de nouvelle de votre commande, etc.
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/80666"
-            target="_blank">https://www.economie.gouv.fr/courrier/80666</a>
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/80666" target="_blank">https://www.economie.gouv.fr/courrier/80666</a>
         - question: Un spam que vous avez reçu&#160;?
           answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
         - question: Un contenu qui vous semble inapproprié&#160;?
           example: Trafic illicite, pédopornographie, etc.
-          answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr"
-            target="_blank">https://www.internet-signalement.gouv.fr</a>
+          answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
   - category: Refus de servir/ vendre
     categoryId: REFSRV
     rank: 102
@@ -1050,9 +1010,11 @@ list:
     breadcrumbTitle: Vous souhaitez signaler un cas de travail au noir&#160;?
     information:
       title: Vous souhaitez signaler un cas de travail au noir&#160;?
-      content: Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;<ul><li>envoyer
-        un email à cette adresse&nbsp;:&nbsp;<a href="mailto:fraude.npdc@urssaf.fr">fraude.npdc@urssaf.fr</a></li><li>écrire
-        à l’inspection du travail en contactant la <a href="http://direccte.gouv.fr/">DIRECCTE</a>
-        de la région concernée</li><li>écrire à la Brigades de contrôle et de recherche
-        des impôts</li><li>écrire à la police/gendarmerie</li></ul>La DGCCRF (répression
-        des fraudes) ne s’occupe pas des cas de travail au noir.
+      content: Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;
+          <ul>
+            <li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href="mailto:fraude.npdc@urssaf.fr">fraude.npdc@urssaf.fr</a></li>
+            <li>écrire  à l’inspection du travail en contactant la <a href="http://direccte.gouv.fr/">DIRECCTE</a> de la région concernée</li>
+            <li>écrire à la Brigades de contrôle et de recherche des impôts</li>
+            <li>écrire à la police/gendarmerie</li>
+          </ul>
+          La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
