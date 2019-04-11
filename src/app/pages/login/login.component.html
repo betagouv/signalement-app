@@ -1,3 +1,44 @@
-<p>
-  login works!
-</p>
+<main role="main">
+  <section class="section section-lightest-grey pb-2 pt-3">
+    <div class="container">
+      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal" *ngIf="!user">
+        <div class="form-group row">
+          <label for="email" class="col-sm-3 control-label">
+            Email <span>*</span>
+          </label>
+          <div class="col-sm-9">
+            <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-sm-3 control-label">
+            Mot de passe  <span>*</span>
+          </label>
+          <div class="col-sm-9">
+            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
+          </div>
+        </div>
+
+        <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
+          <span *ngIf="emailCtrl.hasError('required')">
+            Veuillez renseigner votre adresse email.<br />
+          </span>
+            <span *ngIf="passwordCtrl.hasError('required')">
+            Veuillez renseigner votre mot de passe.<br />
+          </span>
+        </div>
+        <hr />
+        <div class="form-group row">
+          <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-lg btn-primary">
+              Valider
+            </button>
+          </div>
+        </div>
+      </form>
+      <div *ngIf="user">
+        <h3>Utilisateur connecté : {{user.firstName}} {{user.lastName}}</h3>
+      </div>
+    </div>
+  </section>
+</main>
