@@ -438,6 +438,81 @@ list:
           - title: Autres problèmes d'étiquetage
       - title: Problème de quantité
         example: 'Exemples : poids indiqué non conforme, balance non tarée...'
+        subcategories:
+          - title: Le commerçant n'effectue pas la tare lors de la pesée.
+            example: Tarer une balance signifie imposer la valeur zéro sur une balance alors qu'il y a un emballage dessus, pour ne peser que le contenu.
+            description: La tare peut aussi être enregistrée préalablement. Vous ne voyez donc pas toujours la manipulation alors que la tare est bien effectuée.
+            detailInputs:
+              - label: Préciser le lieu (rayon) dans le cas d'un grand magasin
+                rank: 1
+                type: TEXT
+                placeholder: lieu
+                optionnal: true
+          - title: Le volume/poids/nombre annoncé est non conforme.
+            subcategoriesTitle: Comment est emballé le produit&#160;?
+            subcategories:
+              - title: Dans un emballage classique avec un poids / volume imprimé et identique sur tous les produits
+                example: 'Exemples : paquet, bouteille,conserve, filet de clémentines'
+                description: Le poids/volume indiqué sur l'emballage est la moyenne des poids des produits qui ont été produits.
+                  <br/>Le poids/volume n'est donc pas forcément celui du produit que vous avez acheté.
+                  <br/>Des petites différences en plus ou en moins sont autorisées sur un nombre limité de produits.
+                  <br/>Ces différences sont encadrées.
+                  <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
+                detailInputs:
+                  - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
+                  - label: Type de produit
+                    rank: 2
+                    type: TEXT
+                  - label: Nom /marque
+                    rank: 3
+                    type: TEXT
+                  - label: Quelle erreur a été constatée&#160;?
+                    rank: 4
+                    type: TEXTAREA
+              - title: Dans un emballage fait par le magasin et dont la quantité peut varier suivant celui que l'on choisit
+                example: 'Exemples : barquette de viande, barquette de poisson boite de croissant'
+                description: Le poids/volume annoncé correspond au poids/volume minimum que vous devez avoir.
+                detailInputs:
+                  - label: Date du constat ou d'achat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Elements d'identification (date limite, n° de lot)
+                    rank: 3
+                    type: TEXT
+                    optionnal: true
+                    placeholder: Elements d'identification
+                  - label: Description
+                    rank: 4
+                    type: TEXTAREA
+              - title: Pas emballé mais servi directement
+                example: 'Exemples : verre de vin, plat au restaurant'
+                description: Le poids/volume annoncé correspond au poids/volume minimum que vous devez avoir.
+                detailInputs:
+                  - label: Date du constat ou d'achat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Elements d'identification (date limite, n° de lot)
+                    rank: 3
+                    type: TEXT
+                    optionnal: true
+                    placeholder: Elements d'identification
+                  - label: Description
+                    rank: 4
+                    type: TEXTAREA
+          - title: Autre
       - title: Produit pas bon
         information:
           title: Trouver qu'un produit n'est pas bon n'est pas un motif de signalement sur SignalConso.
