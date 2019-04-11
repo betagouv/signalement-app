@@ -3,6 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,13 @@ export class LoginComponent implements OnInit {
   passwordCtrl: FormControl;
 
   showErrors: boolean;
-
-  user: User;
+  authenticationError: string;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private router: Router) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.login.title);
@@ -41,14 +42,18 @@ export class LoginComponent implements OnInit {
   }
 
   submitLoginForm() {
+    this.authenticationError = '';
     if (!this.loginForm.valid) {
       this.showErrors = true;
     } else {
       this.authenticationService.login(this.emailCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
-          this.user = user;
+          this.router.navigate(['suivi-des-signalements']);
+        },
+        error => {
+          this.authenticationError = `Echec de l'authentification`;
         }
-      )
+      );
     }
   }
 

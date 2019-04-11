@@ -20,6 +20,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
 import { ReportComponent } from './pages/report/report.component';
 import { LoginModule } from './pages/login/login.module';
+import { AdminModule } from './pages/admin/admin.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -52,6 +53,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     BrowserAnimationsModule,
     LoginModule,
+    AdminModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

@@ -1,7 +1,7 @@
 <main role="main">
   <section class="section section-lightest-grey pb-2 pt-3">
     <div class="container">
-      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal" *ngIf="!user">
+      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
         <div class="form-group row">
           <label for="email" class="col-sm-3 control-label">
             Email <span>*</span>
@@ -27,6 +27,9 @@
             Veuillez renseigner votre mot de passe.<br />
           </span>
         </div>
+        <div class="notification error mt-3" *ngIf="authenticationError ">
+          {{authenticationError}}
+        </div>
         <hr />
         <div class="form-group row">
           <div class="col-sm-12 text-center">
@@ -36,9 +39,6 @@
           </div>
         </div>
       </form>
-      <div *ngIf="user">
-        <h3>Utilisateur connecté : {{user.firstName}} {{user.lastName}}</h3>
-      </div>
     </div>
   </section>
 </main>
