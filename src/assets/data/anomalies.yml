@@ -153,10 +153,10 @@ list:
                     <br/>Vous pouvez consommer le produit après cette date.
                     <br/>Il n'est pas nécessaire de le jeter.
           - title: Un produit en particulier
-            subcategoriesTitle: Comment est formulée la date&#160;?
+            subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
             subcategories:
               - title: À consommer de préférence avant le...
-                example: concerne généralement des produits secs = date de durabilité minimale (DDM) = À consommer avant fin
+                example: C'est souvent le cas des produits vendus à température ambiante.
                 information:
                   content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
                     <br/>Le commercant peut vendre un produit avec cette date dépassée.
@@ -164,7 +164,7 @@ list:
                     <br/>Vous pouvez consommer le produit après cette date.
                     <br/>Il n'est pas nécessaire de le jeter.
               - title: À consommer jusqu’au...
-                example: concerne des produits frais = date limite de consommation (DLC)
+                example: C'est souvent le cas des produits frais.
                 subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
                 subcategories:
                   - title: Oui
