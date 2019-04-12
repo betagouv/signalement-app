@@ -37,30 +37,33 @@ export class Information {
   }
 }
 
-export class Precision {
-  @JsonProperty('title')
-  title: string;
-  @JsonProperty('severalOptionsAllowed')
-  severalOptionsAllowed: boolean;
-  @JsonProperty({ name: 'options', clazz: Information })
-  options: Information[];
+export class DetailInput {
+  @JsonProperty('label')
+  label: string;
+  @JsonProperty('rank')
+  rank: number;
+  @JsonProperty('type')
+  type: string;
+  @JsonProperty('placeholder')
+  placeholder?: string;
+  @JsonProperty('options')
+  options?: string[];
+  @JsonProperty('defaultValue')
+  defaultValue: string;
+  @JsonProperty('example')
+  example?: string;
+  @JsonProperty('optionnal')
+  optionnal?: boolean;
 
   constructor() {
-    this.title = undefined;
-    this.severalOptionsAllowed = false;
+    this.label = undefined;
+    this.rank = undefined;
+    this.type = undefined;
+    this.placeholder = undefined;
     this.options = undefined;
-  }
-}
-
-export class SubcategoryDetails {
-  @JsonProperty('descriptionTips')
-  descriptionTips?: string;
-  @JsonProperty({ name: 'precision', clazz: Precision })
-  precision?: Precision;
-
-  constructor() {
-    this.descriptionTips = undefined;
-    this.precision = undefined;
+    this.defaultValue = undefined;
+    this.example = undefined;
+    this.optionnal = undefined;
   }
 }
 
@@ -69,16 +72,31 @@ export class Subcategory {
   title: string;
   @JsonProperty('description')
   description?: string;
-  @JsonProperty({ name: 'details', clazz: SubcategoryDetails })
-  details?: SubcategoryDetails;
+  @JsonProperty('example')
+  example?: string;
+  @JsonProperty('subcategoriesTitle')
+  subcategoriesTitle?: string;
+  @JsonProperty({ name: 'subcategories', clazz: Subcategory })
+  subcategories?: Subcategory[];
+  @JsonProperty('detailTitle')
+  detailTitle?: string;
+  @JsonProperty({ name: 'detailInputs', clazz: DetailInput })
+  detailInputs?: DetailInput[];
+  @JsonProperty('fileLabel')
+  fileLabel?: string;
   @JsonProperty('information')
   information?: Information;
 
   constructor() {
     this.title = undefined;
     this.description = undefined;
+    this.example = undefined;
+    this.subcategoriesTitle = undefined;
+    this.subcategories = undefined;
+    this.detailTitle = undefined;
+    this.detailInputs = undefined;
+    this.fileLabel = undefined;
     this.information = undefined;
-    this.details = undefined;
   }
 }
 
@@ -101,8 +119,8 @@ export class Anomaly {
   information?: Information;
   @JsonProperty('breadcrumbTitle')
   breadcrumbTitle?: string;
-  @JsonProperty('subcategoryTitle')
-  subcategoryTitle?: string;
+  @JsonProperty('subcategoriesTitle')
+  subcategoriesTitle?: string;
   @JsonProperty({ name: 'subcategories', clazz: Subcategory })
   subcategories?: Subcategory[];
 
@@ -116,7 +134,7 @@ export class Anomaly {
     this.icon = undefined;
     this.information = undefined;
     this.breadcrumbTitle = undefined;
-    this.subcategoryTitle = undefined;
+    this.subcategoriesTitle = undefined;
     this.subcategories = undefined;
   }
 }
@@ -128,4 +146,13 @@ export class AnomalyList {
   constructor() {
     this.list = undefined;
   }
+}
+
+export enum InputType {
+  Text = 'TEXT',
+  Radio = 'RADIO',
+  Checkbox = 'CHECKBOX',
+  Textarea = 'TEXTAREA',
+  Timeslot = 'TIMESLOT',
+  Date = 'DATE'
 }

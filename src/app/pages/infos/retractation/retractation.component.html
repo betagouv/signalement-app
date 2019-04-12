@@ -1,0 +1,98 @@
+<div class="banner text-center section section-lighter-grey" role="banner">
+  <div class="container">
+    <h1 class="text-center">
+      Délai de rétractation
+    </h1>
+  </div>
+</div>
+
+<main role="main">
+  <section class="section section-lightest-grey">
+    <div class="container max-width">
+      <h3>
+        Vous avez 14 jours pour changer d’avis.
+      </h3>
+      <p>
+        Vous n’avez pas à vous justifier auprès du commerçant.
+      </p>
+      <p>
+        Il faut renvoyer par <u>lettre recommandée avec accusé de réception</u> le formulaire de rétractation ou une lettre écrite dans un délai de 14 jours.
+        <br />
+        Vous pouvez aussi le faire en ligne lorsque le vendeur dispose d’un site internet et qu’il a prévu cette possibilité (vous ne devez pas renvoyer seulement le colis).
+        <br />
+        Un signalement sur notre site ne suffit pas pour demander la rétractation.
+      </p>
+      <p>
+        Vous devez conserver toutes les pièces justifiant que vous avez fait les démarches dans les délais.
+        <br />
+        C’est pourquoi il est important de préférer un courrier avec accusé de réception.
+      </p>
+
+      <p>
+        Si le vendeur ne vous a pas informé de votre droit de rétractation, le délai est prolongé de 12 mois à partir de la fin du délai initial de rétractation. Mais si cette information vous est fournie pendant cette prolongation, le délai est de nouveau de 14 jours. Il commence à la date où vous recevez l'information.
+      </p>
+
+      <div class="notification info">
+        <h4 class="text-center mt-sm-2 mb-3 mb-sm-5">Calculez votre date de rétractation</h4>
+        <form class="mb-sm-5">
+          <div class="row">
+            <div class="col-12 col-sm-5">
+              <div class="form__group">
+                <label for="contractDateInput">
+                  Date de départ
+                </label>
+                <input type="text" id="contractDateInput"
+                       [(ngModel)]="contractDate" placeholder="Date de départ"
+                       name="contractDateInput"
+                       bsDatepicker [bsConfig]="{ containerClass: 'theme-default' }"
+                       (bsValueChange)="calculRetractationDeadline($event)"/>
+              </div>
+            </div>
+            <div class="col-sm-2 d-none d-sm-block text-center pt-4">
+              <img src="/assets/images/icon_arrow_right.png" alt="Icône flêche vers la droite"/>
+            </div>
+            <div class="col-12 d-sm-none text-center p-3">
+              <img src="/assets/images/icon_arrow_down.png" alt="Icône flêche descendante"/>
+            </div>
+            <div class="col-12 col-sm-5">
+              <div class="form__group">
+                <label for="contractDateInput">
+                  Date limite de rétractation
+                </label>
+                <input type="text" disabled
+                       [value]="retractationDeadline | date : 'EEEE d MMMM yyyy'"
+                       placeholder="Date limite de rétractation"/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <h4 class="text-center mt-sm-5">A partir de quand compter les 14 jours ?</h4>
+      <table cellpadding="5" class="text-center">
+        <thead>
+          <tr>
+            <td>Type de contrat</td>
+            <td>Date à prendre en compte</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>Contrats de prestation de services</td>
+          <td>Date de conclusion du contrat</td>
+        </tr>
+        <tr>
+          <td>Contrats portant sur la fourniture  d’eau, de gaz ou d’électricité</td>
+          <td>Date de conclusion du contrat</td>
+        </tr>
+        <tr>
+          <td>Produits livrés</td>
+          <td>Date de livraison</td>
+        </tr>
+        <tr>
+          <td>Produits livrés en plusieurs paquets</td>
+          <td>Date de réception du dernier bien, lot ou pièce reçu</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+</main>

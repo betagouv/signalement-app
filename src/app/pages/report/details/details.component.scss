@@ -1,3 +1,6 @@
+@import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
+
 label > img {
   height: 30px;
   vertical-align: top;
@@ -8,10 +11,55 @@ img {
 }
 
 textarea {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .link-keyword {
-    margin: 0 0 0 10px;
-    text-decoration: none;
+  margin: 0 0 0 10px;
+  text-decoration: none;
 }
+
+.notification {
+
+  &.success {
+    border: none;
+    margin: 0 2em 1em 2em;
+  }
+
+  h4 {
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  img {
+    margin-right: 0.5em;
+    height: 30px;
+  }
+
+  &.note{
+    border: none;
+    background-color: $white;
+    padding: 0;
+
+    div {
+      position: relative;
+      padding: 0;
+      margin: 0;
+
+      &:first-of-type {
+        width: 40px;
+      }
+
+      &:nth-of-type(2) {
+        width: calc(100% - 40px);
+      }
+    }
+  }
+
+  @media #{$smaller-than-phablet} {
+    margin: 0 0 1em 0;
+  }
+
+}
+

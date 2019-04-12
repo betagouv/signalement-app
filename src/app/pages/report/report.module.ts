@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent } from './category/category.component';
 import { InformationComponent } from './information/information.component';
-import { SubcategoryComponent } from './subcategory/subcategory.component';
+import { ProblemComponent } from './problem/problem.component';
 import { DetailsComponent } from './details/details.component';
 import { CompanyComponent } from './company/company.component';
 import { ConsumerComponent } from './consumer/consumer.component';
@@ -19,15 +19,16 @@ import { CollapsableTextComponent } from '../../components/collapsable-text/coll
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { ReportPaths } from '../../services/report-router.service';
-import { RetractationComponent } from './information/retractation/retractation.component';
+import { RetractationComponent } from '../infos/retractation/retractation.component';
 import { ReportComponent } from './report.component';
+import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 
 defineLocale('fr', frLocale);
 
 const routes: Routes = [
   { path: '', component: CategoryComponent },
   { path: ReportPaths.Information, component: InformationComponent },
-  { path: ReportPaths.Subcategory, component: SubcategoryComponent },
+  { path: ReportPaths.Problem, component: ProblemComponent },
   { path: ReportPaths.Details, component: DetailsComponent },
   { path: ReportPaths.Company, component: CompanyComponent },
   { path: ReportPaths.Consumer, component: ConsumerComponent },
@@ -43,7 +44,7 @@ const routes: Routes = [
     BreadcrumbComponent,
     ConsumerComponent,
     ConfirmationComponent,
-    SubcategoryComponent,
+    ProblemComponent,
     CategoryComponent,
     InformationComponent,
     RetractationComponent,
@@ -51,6 +52,7 @@ const routes: Routes = [
     CollapsableTextComponent,
     PrecedeByPipe,
     TruncatePipe,
+    SubcategoryComponent,
   ],
   imports: [
     CommonModule,

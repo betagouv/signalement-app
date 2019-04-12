@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/src/assets/data/anomalies.json
 
 # dependencies
 /node_modules

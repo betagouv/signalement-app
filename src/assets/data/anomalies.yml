@@ -1,0 +1,1199 @@
+---
+list:
+  - category: Pratique d'hygiène
+    categoryId: HYG
+    description: Locaux sales, présence de rat, rupture de la chaîne du froid...
+    rank: 1
+    icon: icon_hygien.png
+    subcategories:
+      - title: Locaux / matériel sales ou dégradés
+        example: 'Exemples : cuisine, WC, rayon réfrigéré...'
+        detailInputs:
+          - label: Quel endroit est concerné&#160;?
+            rank: 1
+            type: CHECKBOX
+            options:
+              - Cuisine
+              - Atelier de fabrication
+              - Salle du restaurant / bar
+              - Lieu de vente
+              - WC
+              - Autre (à préciser)
+          - label: A quel niveau&#160;?
+            rank: 2
+            type: CHECKBOX
+            options:
+              - Sol
+              - Mur
+              - Vitrine / frigo
+              - Équipements mis à disposition des clients
+              - Matériel de fabrication
+              - Distributeur automatique
+              - Autre (à préciser)
+          - label: Quel est le problème&#160;?
+            rank: 3
+            type: CHECKBOX
+            options:
+              - C'est sale
+              - C'est dégradé, en mauvais état
+          - label: Pour aider les enquêteurs et le commerçant, dites-nous en plus
+            rank: 4
+            type: TEXTAREA
+            example: 'Exemples : rayon du magasin, type de saleté...'
+          - label: Date du constat
+            rank: 5
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Heure du constat
+            rank: 6
+            type: TIMESLOT
+            optionnal: true
+      - title: Hygiène du personnel
+        example: 'Exemples : tenue sale, mauvaise pratique d''hygiène...'
+        subcategories:
+          - title: Tenue de travail pas adaptée
+            subcategories:
+              - title: Pas de coiffe ou pas de gants
+                information:
+                  title: Cet incident ne constitue pas un motif de signalement.
+                  content: |-
+                    La réglementation précise les personnes qui travaillent dans une zone où sont manipulés des aliments doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
+                    Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Le lavage des mains peut être suffisant pour éviter les contaminations.
+              - title: Autre problème sur la tenue de travail
+          - title: Tenue sale
+          - title: Mauvaises pratiques d'hygiène
+            example: 'Exemples : pas de lavage des mains, personne qui fume en cuisine...'
+          - title: Autre
+      - title: Présence d'animaux
+        example: 'Exemples : rat, insectes, oiseaux, ...'
+        detailInputs:
+          - label: Quel animal avez-vous vu&#160;?
+            rank: 1
+            type: RADIO
+            options:
+              - Insectes (cafard..)
+              - Rongeurs (rat, souris)
+              - Oiseau (pigeon..)
+              - Autre (à préciser)
+          - label: Où l'avez-vous vu&#160;?
+            rank: 2
+            type: CHECKBOX
+            options:
+              - Cuisine / Lieu de production
+              - Intérieur d'un magasin
+              - Salle d'un bar ou d'un restaurant
+              - Autre (à préciser)
+          - label: Description
+            rank: 3
+            type: TEXTAREA
+          - label: Date du constat
+            rank: 4
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Heure du constat
+            rank: 5
+            type: TIMESLOT
+            optionnal: true
+      - title: Problème de température
+        example: 'Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...'
+        detailInputs:
+          - label: Quel est le problème&#160;?
+            rank: 1
+            type: RADIO
+            options:
+              - Meuble réfrigéré / surgelé en panne ou température insuffisante
+              - Stockage de produits frais / surgelés à température ambiante
+              - Transport de produits frais / surgelés à température ambiante
+              - Autre problème de température
+          - label: Description
+            rank: 2
+            type: TEXTAREA
+          - label: Date du constat
+            rank: 3
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Heure du constat
+            rank: 4
+            type: TIMESLOT
+            optionnal: true
+      - title: Autre problème d'hygiène
+  - category: Nourriture / Boissons
+    categoryId: NOURR
+    description: Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...
+    rank: 2
+    withInternetPurchase: true
+    icon: icon_food.png
+    subcategories:
+      - title: Produit périmé
+        subcategoriesTitle: 'Vous souhaitez signaler&#160;:'
+        subcategories:
+          - title: Un problème fréquent de produits périmés
+            subcategoriesTitle: Quels sont les produits concernés&#160;?
+            subcategories:
+              - title: Des produits frais vendus dans un réfrigérateur ou au rayon "froid"
+                example: 'Exemples : viande, poisson, quiche, jambon...'
+                subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
+                subcategories:
+                  - title: Oui
+                    detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
+                    description: Après cette date, il est dangereux de consommer le produit.
+                  - title: Non pas encore (mais bientôt)
+                    information:
+                      title: Il est autorisé de vendre un produit jusqu’au jour indiqué sur l'étiquette de la DLC.
+                      content: Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
+                      actions:
+                        - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
+                          answer: Contacter directement le service client de votre magasin pour leur proposer.
+              - title: Des produits vendus à température ambiante
+                example: 'Exemples : chocolat, conserve, compote, petits pots...'
+                information:
+                  content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
+                    <br/>Le commerçant peut vendre un produit avec cette date dépassée.
+                    <br/>Ces dates sont seulement une indication.
+                    <br/>Vous pouvez consommer le produit après cette date.
+                    <br/>Il n'est pas nécessaire de le jeter.
+          - title: Un produit en particulier
+            subcategoriesTitle: Comment est formulée la date&#160;?
+            subcategories:
+              - title: À consommer de préférence avant le...
+                example: concerne généralement des produits secs = date de durabilité minimale (DDM) = À consommer avant fin
+                information:
+                  content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
+                    <br/>Le commercant peut vendre un produit avec cette date dépassée.
+                    <br/>Ces dates sont seulement une indication.
+                    <br/>Vous pouvez consommer le produit après cette date.
+                    <br/>Il n'est pas nécessaire de le jeter.
+              - title: À consommer jusqu’au...
+                example: concerne des produits frais = date limite de consommation (DLC)
+                subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
+                subcategories:
+                  - title: Oui
+                    detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
+                    description: Après cette date, il est dangereux de consommer le produit.
+                    detailInputs:
+                      - label: Date du constat (ou d'achat suivant le cas)
+                        rank: 1
+                        type: DATE
+                        defaultValue: SYSDATE
+                      - label: Date Limite de Consommation (DLC)
+                        rank: 2
+                        type: DATE
+                    fileLabel: Photo de la DLC / du produit / de la marque
+                  - title: Non pas encore (mais bientôt)
+                    information:
+                      title: Il est autorisé de vendre un produit jusqu’au jour indiqué sur l'étiquette de la DLC.
+                      content: Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
+                      actions:
+                        - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
+                          answer: Contacter directement le service client de votre magasin pour leur proposer.
+              - title: Date de consommation recommandée
+                example: concerne les oeufs
+                detailInputs:
+                  - label: La date est-elle ?
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - Dépassée
+                      - Dans moins de 7 jours
+                  - label: Date Limite de Consommation (DLC)
+                    rank: 2
+                    type: DATE
+                  - label: Date du constat
+                    rank: 3
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo
+      - title: Problème avec le produit
+        example: 'Exemple : présence de moisissure'
+        subcategoriesTitle: Quel est-le problème&#160;?
+        subcategories:
+          - title: Moisissure
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Nom du produit
+                    rank: 1
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 2
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Marque
+                    rank: 3
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 4
+                    type: TEXT
+                  - label: Date limite
+                    rank: 5
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 6
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+          - title: Couleur ou odeur anormale
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Nom du produit
+                    rank: 1
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 2
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Marque
+                    rank: 3
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 4
+                    type: TEXT
+                  - label: Date limite
+                    rank: 5
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 6
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+          - title: Corps étranger "mou"
+            example: 'Présence de quelque chose de "mou" dans le produit.<br/>Exemples: morceau de gant, morceau de tissus..'
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Nom du produit
+                    rank: 1
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 2
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Marque
+                    rank: 3
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 4
+                    type: TEXT
+                  - label: Date limite
+                    rank: 5
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 6
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+          - title: Corps étranger "dur"
+            example: 'Présence de quelque chose de "dur" dans le produit.<br/>Exemples : bout de verre, morceau de métal...'
+            information:
+              title: Vous souhaitez signaler la présence d'un corps étranger "dur"
+              subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
+              actions:
+                - question: Signaler la présence d'un corps étranger "dur"?
+                  answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4211" target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
+          - title: Autre
+            subcategoriesTitle: De quel type de produit s'agit-il&#160;?
+            subcategories:
+              - title: Un produit vendu sans emballage.
+                example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+                detailInputs:
+                  - label: Nom du produit
+                    rank: 1
+                    type: TEXT
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 2
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+              - title: Un produit vendu dans un emballage
+                detailInputs:
+                  - label: 'C''est un produit vendu&#160;:'
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - au rayon frais
+                      - au rayon surgelé
+                      - à température ambiante
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Marque
+                    rank: 3
+                    type: TEXT
+                  - label: Numéro de lot
+                    rank: 4
+                    type: TEXT
+                  - label: Date limite
+                    rank: 5
+                    type: DATE
+                  - label: Date du constat (ou d'achat suivant le cas)
+                    rank: 6
+                    type: DATE
+                    defaultValue: SYSDATE
+                fileLabel: Photo du produit
+      - title: Problème sur l'étiquette / emballage
+        example: 'Exemples : liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...'
+        subcategories:
+          - title: Pas d'étiquetage ou informations absentes
+            detailInputs:
+              - label: Quel est-le problème&#160;?
+                rank: 1
+                type: RADIO
+                options:
+                  - Pas d'étiquetage
+                  - Date limite
+                  - Allergènes
+                  - Composition
+                  - Autre (à préciser)
+              - label: Date du constat (ou d'achat suivant le cas)
+                rank: 2
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Type de produit
+                rank: 3
+                type: TEXT
+              - label: Nom /marque
+                rank: 4
+                type: TEXT
+              - label: Qu'avez-vous constaté&#160;?
+                rank: 5
+                type: TEXTAREA
+            fileLabel: Photos du code barre / n° de lot / référence
+          - title: Informations trompeuses ou fausses
+            detailInputs:
+              - label: Date du constat (ou d'achat suivant le cas)
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Type de produit
+                rank: 2
+                type: TEXT
+              - label: Nom /marque
+                rank: 3
+                type: TEXT
+              - label: Qu'avez-vous constaté&#160;?
+                rank: 4
+                type: TEXTAREA
+          - title: Étiquetage uniquement en langue étrangère
+            example: Aucune information traduite en français
+            detailInputs:
+              - label: Date du constat (ou d'achat suivant le cas)
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Type de produit
+                rank: 2
+                type: TEXT
+              - label: Nom /marque
+                rank: 3
+                type: TEXT
+              - label: Qu'avez-vous constaté&#160;?
+                rank: 4
+                type: TEXTAREA
+          - title: Autres problèmes d'étiquetage
+      - title: Problème de quantité
+        example: 'Exemples : poids indiqué non conforme, balance non tarée...'
+        subcategories:
+          - title: Le commerçant n'effectue pas la tare lors de la pesée.
+            example: Tarer une balance signifie imposer la valeur zéro sur une balance alors qu'il y a un emballage dessus, pour ne peser que le contenu.
+            description: La tare peut aussi être enregistrée préalablement. Vous ne voyez donc pas toujours la manipulation alors que la tare est bien effectuée.
+            detailInputs:
+              - label: Préciser le lieu (rayon) dans le cas d'un grand magasin
+                rank: 1
+                type: TEXT
+                placeholder: lieu
+                optionnal: true
+          - title: Le volume/poids/nombre annoncé est non conforme.
+            subcategoriesTitle: Comment est emballé le produit&#160;?
+            subcategories:
+              - title: Dans un emballage classique avec un poids / volume imprimé et identique sur tous les produits
+                example: 'Exemples : paquet, bouteille,conserve, filet de clémentines'
+                description: Le poids/volume indiqué sur l'emballage est la moyenne des poids des produits qui ont été produits.
+                  <br/>Le poids/volume n'est donc pas forcément celui du produit que vous avez acheté.
+                  <br/>Des petites différences en plus ou en moins sont autorisées sur un nombre limité de produits.
+                  <br/>Ces différences sont encadrées.
+                  <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
+                detailInputs:
+                  - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
+                    rank: 1
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
+                  - label: Type de produit
+                    rank: 2
+                    type: TEXT
+                  - label: Nom /marque
+                    rank: 3
+                    type: TEXT
+                  - label: Quelle erreur a été constatée&#160;?
+                    rank: 4
+                    type: TEXTAREA
+              - title: Dans un emballage fait par le magasin et dont la quantité peut varier suivant celui que l'on choisit
+                example: 'Exemples : barquette de viande, barquette de poisson boite de croissant'
+                description: Le poids/volume annoncé correspond au poids/volume minimum que vous devez avoir.
+                detailInputs:
+                  - label: Date du constat ou d'achat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Elements d'identification (date limite, n° de lot)
+                    rank: 3
+                    type: TEXT
+                    optionnal: true
+                    placeholder: Elements d'identification
+                  - label: Description
+                    rank: 4
+                    type: TEXTAREA
+              - title: Pas emballé mais servi directement
+                example: 'Exemples : verre de vin, plat au restaurant'
+                description: Le poids/volume annoncé correspond au poids/volume minimum que vous devez avoir.
+                detailInputs:
+                  - label: Date du constat ou d'achat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Elements d'identification (date limite, n° de lot)
+                    rank: 3
+                    type: TEXT
+                    optionnal: true
+                    placeholder: Elements d'identification
+                  - label: Description
+                    rank: 4
+                    type: TEXTAREA
+          - title: Autre
+      - title: Produit pas bon
+        information:
+          title: Trouver qu'un produit n'est pas bon n'est pas un motif de signalement sur SignalConso.
+          actions:
+            - question: Vous avez acheté votre produit en magasin&#160;?
+              answer: Contactez plutôt le service client de la marque.
+                <br/>Généralement il est indiqué sur l'emballage.
+                <br/>Si ce n'est pas le cas, contactez votre commerçant afin de lui faire part de votre avis ou de votre mécontentement.
+            - question: Vous avez commandé votre produit dans un bar ou un restaurant&#160;?
+              answer: Si vous trouvez que le plat n'est pas frais ou pas assez chaud, vous pouvez demander que l'on vous remplace le plat.
+                <br/>Si votre vin est bouchonné, vous pouvez demander à le changer.
+                <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.
+      - title: Produit en retrait / rappel
+        example: Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités
+        detailInputs:
+          - label: Date du constat
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Heure du constat
+            rank: 2
+            type: TIMESLOT
+            optionnal: true
+          - label: Nom du produit / marque
+            rank: 3
+            type: TEXT
+          - label: Numéro de lot / référence
+            rank: 4
+            type: TEXT
+          - label: Qu'avez-vous constaté&#160;?
+            rank: 5
+            type: TEXTAREA
+      - title: Autre problème de nourriture
+  - category: Matériel / Objet
+    categoryId: MATOS
+    description: Problème avec une notice ou un appareil, étiquetage incomplet...
+    rank: 3
+    withInternetPurchase: true
+    icon: icon_material.png
+    subcategories:
+      - title: Étiquetage et notice
+        example: 'Exemples : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
+        subcategories:
+          - title: Pas d’étiquetage ou informations absentes
+            description: 'Certaines informations sont obligatoires.
+              <br/>Par exemple :
+              <ul>
+                <li>Vêtements : la composition des tissus (noms et proportions des matières)...</li>
+                <li>Meubles : la composition, la taille, s''il faut le monter soi-même, de quel cuir il s’agit...</li>
+                <li>Electroménagers: l''étiquetage énergétique, la disponibilité des pièces de rechange...</li>
+              </ul>'
+            detailInputs:
+              - label: Quel est-le problème&#160;?
+                rank: 1
+                type: RADIO
+                options:
+                  - Composition
+                  - Données énergétiques
+                  - Disponibilité des pièces de rechange
+                  - Autre (à préciser)
+              - label: Quel est le type de produit&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - Textiles
+                  - Meubles
+                  - Électroménager
+                  - Jouets
+                  - Électroniques
+                  - Autre (à préciser)
+              - label: Date du constat ou d'achat
+                rank: 3
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Nom / marque
+                rank: 4
+                type: TEXT
+              - label: Qu'avez-vous constaté&#160;?
+                rank: 5
+                type: TEXTAREA
+            fileLabel: Photos du code barre / n° de lot / référence
+          - title: Étiquetage ou notice uniquement en langue étrangère
+            example: Aucune information traduite en français
+            subcategoriesTitle: Où avez-vous acheté votre produit&#160;?
+            subcategories:
+              - title: En France (Outre-mer compris)
+                detailTitle: Problème de langue française
+                description: Les informations relatives aux produits et aux services doivent être rédigées ou traduites en français.
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Nom / marque / type de produit
+                    rank: 2
+                    type: TEXT
+                  - label: Référence
+                    rank: 3
+                    type: TEXT
+                  - label: Description
+                    rank: 4
+                    type: TEXTAREA
+              - title: A l'étranger
+                information:
+                  title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
+          - title: Informations trompeuses ou fausses
+            example: 'Exemples : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas ...'
+            detailInputs:
+              - label: Quel est le type de produit&#160;?
+                rank: 1
+                type: RADIO
+                options:
+                  - Textiles
+                  - Meubles
+                  - Électroménager
+                  - Jouets
+                  - Électroniques
+                  - Autre (à préciser)
+              - label: Date du constat
+                rank: 2
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Nom / marque / référence
+                rank: 3
+                type: TEXT
+              - label: Description
+                rank: 4
+                type: TEXTAREA
+      - title: Effet indésirable sur la santé
+        example: 'Exemples : brûlure, picotement, démangeaison, allergie'
+        information:
+          title: Vous souhaitez signaler un effet indésirable sur la santé
+          subTitle: Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
+          actions:
+            - question: Signaler un effet indésirable sur la santé?
+              answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
+
+      - title: Produit dangereux
+        example: 'Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...'
+        information:
+          title: Vous souhaitez signaler un produit dangereux
+          subTitle: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
+          actions:
+            - question: Signaler un produit dangereux?
+              answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
+      - title: Durée de vie trop courte
+        example: Vous trouvez que la durée de vie de votre appareil est trop courte.
+        detailInputs:
+          - label: Date d'achat
+            rank: 2
+            type: DATE
+          - label: Date du constat
+            rank: 2
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Type de produit
+            rank: 3
+            type: TEXT
+          - label: Nom / marque / référence
+            rank: 4
+            type: TEXT
+          - label: Description
+            rank: 5
+            type: TEXTAREA
+      - title: Le volume / poids / nombre annoncé est non conforme.
+      - title: Produit en retrait/ rappel
+        example: Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités
+        detailInputs:
+          - label: Date du constat
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Heure du constat
+            rank: 2
+            type: TIMESLOT
+            optionnal: true
+          - label: Nom du produit / marque
+            rank: 3
+            type: TEXT
+          - label: N° de lot / référence
+            rank: 4
+            type: TEXT
+          - label: Qu'avez-vous constaté&#160;?
+            rank: 5
+            type: TEXTAREA
+      - title: Autre problème de matériel
+  - category: Intoxication alimentaire
+    categoryId: INTOX
+    description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après
+      avoir consommé un aliment.
+    rank: 4
+    icon: icon_disease.png
+    information:
+      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil
+        SignalConso.
+      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée
+        (notamment le nombre de personnes malades, symptômes et aliments suspectés )
+        et peuvent déboucher sur un échange avec les enquêteurs.
+      actions:
+        - question: Signaler un cas d'intoxication alimentaire?
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210"
+            target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
+  - category: Prix / Paiement
+    categoryId: PRIX
+    description: Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...
+    rank: 5
+    withInternetPurchase: true
+    icon: icon_price.png
+    subcategories:
+      - title: Absence de prix
+        example: 'Exemples : pas d''affichage de prix en rayon ou en vitrine, pas de carte
+      des prix dans le bar...'
+      - title: Prix trop cher
+        description: 'C''est autorisé de vendre un produit "cher", les commerçants sont
+      libres de choisir leurs prix.<br/><br/>Attention, les prix doivent être clairement
+      indiqués (par un affichage ou une étiquette, écrit sur la carte du restaurant...)
+      pour que vous soyez au courant avant d''acheter ou de commander.<br/>Par exemple,
+      il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le
+      prix est bien marqué sur la carte des boissons.<br/><br/>Par contre, un commerçant
+      ne doit pas abuser d''une situation pour pratiquer des prix exagérés. <br/>Par
+      exemple, un serrurier qui vous demande de payer une somme exagérée en situation
+      d''urgence sans vous avoir averti avant.<br/>Si c''est votre cas, vous devez
+      faire une réclamation avec ce formulaire : <a href="https://www.economie.gouv.fr/courrier/4191"
+      target="_blank">https://www.economie.gouv.fr/courrier/4191</a>'
+      - title: Prix différent de celui affiché
+        example: 'Exemples : le prix du paquet à la caisse est de 5 euros alors qu''il
+      est affiché à 3 euros en rayon, le pantalon ne passe qu''à -30% alors que tous
+      les pantalons sont étiquetés -50%.'
+        description: 'En cas de différence de prix, le vendeur doit vendre le produit
+      au prix le faible pour le client.<br/><br/>Par contre, ce principe ne s''applique
+      pas lorsque l''erreur de prix est tellement énorme que le client se doute de
+      l''erreur (exemple : une voiture neuve affichée à 500 euros, un meuble affiché
+      à 0 euros...). On appelle ça une erreur de prix manifeste.'
+      - title: Fausse réduction de prix
+        example: 'Exemple : fausse promotion pendant les soldes ou une liquidation totale'
+      - title: Refus de payer en espèces
+        description: Le vendeur ne peut pas refuser des espèces sauf s'il n'a pas suffisamment
+          de monnaie. C'est à vous de faire l'appoint.<br/>Par contre, il peut refuser
+          les espèces à partir de 1 000 euros.
+      - title: Refus de payer par CB / chèque
+        description: 'Le commerçant peut refuser les chèques ou la carte bancaire. Dans
+      ce cas, il doit l''indiquer très visiblement au consommateur (affichage à l''entrée
+      du magasin ou à la caisse, sur une carte du restaurant..)<br/><br/>Bon à savoir:
+      le vendeur a le droit de demander une pièce d''identité ou un montant minimum
+      pour ce type de paiement.'
+      - title: Frais facturés qui sont injustifiés
+        example: 'Exemple : on vous facture un surplus "service en terrasse" alors que
+      ce prix n''était indiqué nulle part'
+      - title: Autre problème de prix
+  - category: Publicité
+    categoryId: PUB
+    description: promotion indiquée dans le catalogue non disponible en magasin, publicité
+      trompeuse...
+    rank: 6
+    withInternetPurchase: true
+    icon: icon_pub.png
+    subcategories:
+      - title: Indisponibilité des produits
+        subcategories:
+          - title: Produit affiché dans le catalogue non disponible dans le magasin
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Où avez-vous vu la publicité&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - Internet
+                  - Catalogue papier
+              - label: De quel produit s'agissait-il&#160;?
+                rank: 3
+                type: TEXT
+                placeholder: Nom du produit
+            fileLabel: Photo(s) du catalogue
+          - title: Produit proposé sur le menu/carte non disponible à la vente
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Où l'avez-vous vu indiqué&#160;?
+                rank: 2
+                type: TEXT
+              - label: De quel type de produit / prestation s'agissait-il&#160;?
+                rank: 3
+                type: TEXT
+                placeholder: Type de produit / prestation
+            fileLabel: Photo si vous avez
+          - title: Autres
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Quel type de produit était indisponible&#160;?
+                rank: 2
+                type: TEXT
+                placeholder: Type de produit
+              - label: Description
+                rank: 3
+                type: TEXTAREA
+      - title: Information mensongère, publicité trompeuse
+        detailInputs:
+          - label: Date du constat
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Où se trouve cette information&#160;?
+            rank: 2
+            type: RADIO
+            options:
+              - Sur l'emballage d'un produit
+              - Sur l'affichage chez le commerçant
+              - Dans un catalogue
+              - Sur un site internet (à préciser)
+              - Dans une spot télé ou radio
+              - Dans un contrat ou un devis
+              - Discours du vendeur
+              - Catalogue papier
+          - label: Pourquoi estimez-vous cela trompeur&#160;?
+            rank: 3
+            type: TEXT
+            placeholder: ''
+          - label: Merci de détailler au mieux la situation
+            rank: 4
+            type: TEXTAREA
+          - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+            rank: 5
+            type: RADIO
+            options:
+              - Oui
+              - Non
+        fileLabel: Photo(s) si possible
+  - category: Services après-vente
+    categoryId: SERACH
+    description: Colis non reçu, problème de garantie constructeur, hotline injoignable,...
+    rank: 7
+    withInternetPurchase: true
+    icon: icon_service.png
+    subcategories:
+      - title: Refus de reprendre un produit défectueux
+        example: 'Exemple : le commerçant refuse de me prendre mon achat encore sous garantie'
+        subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
+        subcategories:
+          - title: Neuf
+            subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+            subcategories:
+              - title: Il y a moins de 2 ans
+                description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets.
+                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                detailTitle: Problème de garantie légale
+                detailInputs:
+                  - label: Date d'achat
+                    rank: 1
+                    type: DATE
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Date du constat
+                    rank: 3
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Interlocuteur
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Vendeur
+                      - Accueil magasin
+                      - Service client (téléphone, mail, courrier)
+                  - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
+                    rank: 5
+                    type: TEXTAREA
+                fileLabel: Preuve d'achat / publicité / offre de vente
+              - title: Il y a plus de 2 ans
+                subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+                subcategories:
+                  - title: Oui
+                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
+                      <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                    subcategories:
+                      - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                        detailTitle: Problème de garantie commerciale
+                        detailInputs:
+                          - label: Date d'achat
+                            rank: 1
+                            type: DATE
+                          - label: Nom du produit
+                            rank: 2
+                            type: TEXT
+                          - label: Date de fin de garantie supplémentaire
+                            rank: 3
+                            type: DATE
+                          - label: Date du constat
+                            rank: 4
+                            type: DATE
+                            defaultValue: SYSDATE
+                          - label: Motif de refus
+                            rank: 5
+                            type: TEXT
+                        fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                  - title: Non
+                    information:
+                      title: Votre produit n'est plus couvert par la garantie.
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                      actions:
+                        - question: Un problème avec un commerçant&#160;?
+                          example: 'Vous souhaitez attaquer l''entreprise pour "vices cachées "?
+                            <br/><br/>Un vice caché d''un produit est un défaut :
+                            <ul>
+                              <li>présent dès le départ qui rend le produit inutilisable et</li>
+                              <li>que vousne connaissiez pas quand vous avez acheté le produit.</li>
+                            </ul>'
+                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+          - title: Occasion
+            subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+            subcategories:
+              - title: Il y a moins de 6 mois
+                description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets.
+                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                detailTitle: Problème de garantie légale
+                detailInputs:
+                  - label: Date d'achat
+                    rank: 1
+                    type: DATE
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Date du constat
+                    rank: 3
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Interlocuteur
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Vendeur
+                      - Accueil magasin
+                      - Service client (téléphone, mail, courrier)
+                  - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
+                    rank: 5
+                    type: TEXTAREA
+                fileLabel: Preuve d'achat / publicité / offre de vente
+              - title: Il y a plus de 6 mois
+                subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+                subcategories:
+                  - title: Oui
+                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
+                      <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                    subcategories:
+                      - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                        detailTitle: Problème de garantie commerciale
+                        detailInputs:
+                          - label: Date d'achat
+                            rank: 1
+                            type: DATE
+                          - label: Nom du produit
+                            rank: 2
+                            type: TEXT
+                          - label: Date de fin de garantie supplémentaire
+                            rank: 3
+                            type: DATE
+                          - label: Date du constat
+                            rank: 4
+                            type: DATE
+                            defaultValue: SYSDATE
+                          - label: Motif de refus
+                            rank: 5
+                            type: TEXT
+                        fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                  - title: Non
+                    information:
+                      title: Votre produit n'est plus couvert par la garantie.
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                      actions:
+                        - question: Un problème avec un commerçant&#160;?
+                          example: 'Vous souhaitez attaquer l''entreprise pour "vices cachées "?
+                            <br/><br/>Un vice caché d''un produit est un défaut :
+                            <ul>
+                              <li>présent dès le départ qui rend le produit inutilisable et</li>
+                              <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                            </ul>'
+                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+      - title: Refus de rembourser un achat ou d'annuler un contrat
+        example: Vêtement trop petit, cadeau en doublon, changement d'avis, prix moins cher ailleurs
+        subcategoriesTitle: Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat&#160;?
+        subcategories:
+          - title: Dans un magasin dans lequel vous vous êtes rendu
+            example: 'Exemple : affiche à la caisse du magasin'
+            subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?
+            subcategories:
+              - title: Oui
+                subcategoriesTitle: Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?
+                subcategories:
+                  - title: Oui
+                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+                  - title: Non
+                    information:
+                      title: Le commerçant est libre de choisir les conditions d'échange ou de remboursement.
+                      content: 'Par exemple, ces affiches sont autorisées :
+                        <ul>
+                          <li>"remboursement sous 5 jours"</li>
+                          <li>"avoir seulement"</li>
+                          <li>"échange possible, pas de remboursement"</li>
+                        </ul>'
+              - title: Non
+                information:
+                  title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                  content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                    <br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+          - title: Sur internet
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
+          - title: Auprès d’un démarcheur qui est venu dans votre domicile
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
+          - title: Sur un stand dans une foire ou un salon
+            subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?
+            example: 'Exemple : affiche à la caisse du magasin'
+            subcategories:
+              - title: Oui
+                subcategoriesTitle: Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?
+                subcategories:
+                  - title: Oui
+                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+                  - title: Non
+                    information:
+                      title: Le commerçant est libre de choisir les conditions d'échange ou de remboursement.
+                      content: 'Par exemple, ces affiches sont autorisées :
+                        <ul>
+                          <li>"remboursement sous 5 jours"</li>
+                          <li>"avoir seulement"</li>
+                          <li>"échange possible, pas de remboursement"</li>
+                        </ul>'
+              - title: Non
+                information:
+                  title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                  content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                    <br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+          - title: Par téléphone
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+                <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
+      - title: Problème de livraison
+        example: 'Exemples : colis perdu et non reçu, livraison tardive, colis abimé...'
+        subcategoriesTitle: Quel est le problème&#160;?
+        subcategories:
+          - title: Colis non reçu ou perdu
+            subcategoriesTitle: De quoi s'agit-il&#160;?
+            subcategories:
+              - title: D'une commande auprès d'un commerçant
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Date d'achat
+                    rank: 2
+                    type: DATE
+                  - label: Numéro de commande
+                    rank: 3
+                    type: TEXT
+                  - label: Quelle est le nom de l'entreprise de livraison&#160;?
+                    description: A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit
+                    rank: 4
+                    type: TEXT
+                    placeholder: Entreprise de livraison
+              - title: D'un colis envoyé entre particuliers
+          - title: Colis endommagé
+            subcategoriesTitle: De quoi s'agit-il&#160;?
+            subcategories:
+              - title: D'une commande auprès d'un commerçant
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Date d'achat
+                    rank: 2
+                    type: DATE
+                  - label: Numéro de commande
+                    rank: 3
+                    type: TEXT
+                  - label: Quelle est le nom de l'entreprise de livraison&#160;?
+                    description: A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit
+                    rank: 4
+                    type: TEXT
+                    placeholder: Entreprise de livraison
+              - title: D'un colis envoyé entre particuliers
+          - title: Colis en retard par rapport à ce qui était annoncé
+            subcategoriesTitle: De quoi s'agit-il&#160;?
+            subcategories:
+              - title: D'une commande auprès d'un commerçant
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Date d'achat
+                    rank: 2
+                    type: DATE
+                  - label: Numéro de commande
+                    rank: 3
+                    type: TEXT
+                  - label: Quelle est le nom de l'entreprise de livraison&#160;?
+                    description: A l'étape suivant, merci de préciser l'entreprise qui vous a vendu le produit
+                    rank: 4
+                    type: TEXT
+                    placeholder: Entreprise de livraison
+              - title: D'un colis envoyé entre particuliers
+      - title: Service client / SAV fantôme
+        example: 'Exemples : le SAV (service après vente) ou le service client est inexistant,
+      aucun retour du SAV malgré mes relances ...'
+      - title: Personnel peu aimable
+        example: 'Exemples : l''accueil est froid, le personnel est mal poli'
+        information:
+          title: Ceci ne constitue pas un motif de signalement.
+          subTitle: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
+            Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.
+            Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne
+          actions:
+            - question: Signaler un cas de harcèlement ou d'injure?
+              answer: Faire une pré-plainte en ligne<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
+      - title: Autre problème de service après-vente
+  - category: Problème suite à un achat sur internet
+    categoryId: PBINT
+    rank: 101
+    breadcrumbTitle: Vous avez identifié un problème suite à un achat sur internet
+    information:
+      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
+      subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
+      actions:
+        - question: Un problème avec un commerçant&#160;?
+          example: Colis non reçu, pas de nouvelle de votre commande, etc.
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/80666" target="_blank">https://www.economie.gouv.fr/courrier/80666</a>
+        - question: Un spam que vous avez reçu&#160;?
+          answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
+        - question: Un contenu qui vous semble inapproprié&#160;?
+          example: Trafic illicite, pédopornographie, etc.
+          answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
+  - category: Refus de servir/ vendre
+    categoryId: REFSRV
+    rank: 102
+  - category: Chien d'assistance refusé
+    categoryId: CHREF
+    rank: 103
+  - category: Travail au noir
+    categoryId: TNOIR
+    hidden: true
+    rank: 104
+    breadcrumbTitle: Vous souhaitez signaler un cas de travail au noir&#160;?
+    information:
+      title: Vous souhaitez signaler un cas de travail au noir&#160;?
+      content: Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;
+          <ul>
+            <li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href="mailto:fraude.npdc@urssaf.fr">fraude.npdc@urssaf.fr</a></li>
+            <li>écrire  à l’inspection du travail en contactant la <a href="http://direccte.gouv.fr/">DIRECCTE</a> de la région concernée</li>
+            <li>écrire à la Brigades de contrôle et de recherche des impôts</li>
+            <li>écrire à la police/gendarmerie</li>
+          </ul>
+          La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.

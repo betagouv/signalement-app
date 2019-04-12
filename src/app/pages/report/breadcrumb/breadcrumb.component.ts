@@ -52,7 +52,7 @@ export class BreadcrumbComponent implements OnInit {
   getStepNumber(step: Step) {
     const initialStep = this.anomaly && this.anomaly.subcategories && this.anomaly.subcategories.length ? 0 : -1;
     switch (step) {
-      case Step.Subcategory: {
+      case Step.Problem: {
         return initialStep + 1;
       }
       case Step.Details: {
