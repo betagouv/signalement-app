@@ -111,10 +111,13 @@ export class ReportService {
     return address.substring(0, address.length - 3);
   }
 
-  getReports(offset: number, limit: number) {
+  getReports(offset: number, limit: number, codeDepartement?: string) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
     httpParams = httpParams.append('limit', limit.toString());
+    if (codeDepartement) {
+      httpParams = httpParams.append('codePostal', codeDepartement);
+    }
     return this.http.get<PaginatedData<any>>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
       Object.assign(this.serviceUtils.getAuthHeaders(), { params: httpParams })

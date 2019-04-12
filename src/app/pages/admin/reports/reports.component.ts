@@ -43,6 +43,7 @@ export class ReportsComponent implements OnInit {
   totalCount: number;
   currentPage: number;
   itemsPerPage = 20;
+  currentDepartment;
 
   constructor(private reportService: ReportService) { }
 
@@ -50,9 +51,13 @@ export class ReportsComponent implements OnInit {
     this.loadReports(1);
   }
 
-  loadReports(page) {
+  loadReports(page: number) {
     this.currentPage = page;
-    this.reportService.getReports((page - 1) * this.itemsPerPage, this.itemsPerPage).subscribe(result => {
+    this.reportService.getReports(
+      (page - 1) * this.itemsPerPage,
+      this.itemsPerPage,
+      this.currentDepartment ? this.currentDepartment.code : undefined
+    ).subscribe(result => {
       this.reports = result.entities;
       this.totalCount = result.totalCount;
     });
@@ -62,9 +67,9 @@ export class ReportsComponent implements OnInit {
     this.loadReports(pageEvent.page);
   }
 
-  filterByDeparment(department: string) {
-    console.log('department', department);
-    // TODO reload reports
+  filterByDeparment(department?) {
+    this.currentDepartment = department;
+    this.loadReports(1);
   }
 
 }
