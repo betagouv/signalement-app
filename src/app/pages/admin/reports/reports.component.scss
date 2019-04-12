@@ -1,0 +1,24 @@
+@import "../../../../theme/variables";
+
+th {
+  text-align: center;
+}
+
+ul.dropdown-menu {
+  height: 200px;
+  overflow-y: scroll;
+
+  li.disabled {
+    padding-top: 0;
+  }
+
+  a.disabled {
+    font-weight: bold;
+    color: $light-blue;
+  }
+
+  .dropdown-item {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

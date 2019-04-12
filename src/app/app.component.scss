@@ -87,7 +87,7 @@
     }
   }
 
-  ul {
+  ul:not(.pagination) {
     li + li {
       padding-top: 0.5em;
     }

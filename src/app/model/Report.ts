@@ -5,7 +5,7 @@ import { Step } from '../services/report-router.service';
 import { UploadedFile } from './UploadedFile';
 
 export class Report {
-
+  id: string;
   category: string;
   subcategory: Subcategory;
   company: Company;
@@ -14,8 +14,8 @@ export class Report {
   contactAgreement: boolean;
   internetPurchase: boolean;
   retrievedFromStorage: boolean;
+  creationDate: Date;
   storedStep: Step;
-
 }
 
 export class ReportDetails {

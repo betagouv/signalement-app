@@ -1,3 +1,86 @@
-<p>
-  reports works!
-</p>
+<div class="banner text-center section section-lighter-grey" role="banner">
+  <div class="container">
+    <h1 class="text-center">
+      Suivi des signalements
+    </h1>
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-12 text-center">
+    <div class="btn-group" dropdown>
+      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        Filtrer par département <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+        <ng-container *ngFor="let region of regions; let index = index">
+          <li class="divider dropdown-divider" *ngIf="index > 0"></li>
+          <li class="disabled" role="menuitem"><a class="dropdown-item disabled" href="#">{{region.label}}</a></li>
+          <li role="menuitem" *ngFor="let department of region.departments">
+            <span class="pointer dropdown-item" (click)="filterByDeparment(department.code)">
+              {{department.code}} - {{department.label}}
+            </span>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row pt-5">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Identifiant</th>
+          <th>Date de création</th>
+          <th>Siret</th>
+          <th>Commerçant</th>
+          <th>Dept.</th>
+          <th>Problème</th>
+          <th>Description</th>
+          <th>Consommateur</th>
+          <th>Pièces jointes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports">
+          <td class="text-center">
+            <span [tooltip]="report.id">
+              {{report.id | slice : 0 : 5}}...{{report.id | slice : 31}}
+            </span>
+          </td>
+          <td class="text-center">{{report.creationDate | date : 'dd/MM/yyyy'}}</td>
+          <td class="text-center">{{report.company.siret}}</td>
+          <td class="text-center">
+            <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
+            <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
+            <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+            <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+            <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+            <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+            <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          </td>
+          <td class="text-center">{{report.company.postalCode | slice : 0 : 2}}</td>
+          <td>{{report.category}}</td>
+          <td>{{report.subcategory}}</td>
+          <td>{{report.consumer.firstName}} {{report.consumer.lastName}}<br />{{report.consumer.email}}</td>
+          <td class="text-center">
+            <span *ngFor="let fileId of report.fileIds">
+              {{fileId}}
+              <br/>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+    </pagination>
+  </div>
+</div>
+
+

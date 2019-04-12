@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { Report, ReportDetails } from '../model/Report';
 import moment from 'moment';
@@ -7,6 +7,9 @@ import { Company } from '../model/Company';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Step } from './report-router.service';
+import { PaginatedData } from '../model/PaginatedData';
+import { map } from 'rxjs/operators';
+import { Consumer } from '../model/Consumer';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -85,9 +88,6 @@ export class ReportService {
       'contactAgreement': report.contactAgreement,
       'fileIds': report.details.uploadedFiles.map(f => f.id)
     };
-    if (report.details.anomalyTimeSlot) {
-      reportToPost['anomalyTimeSlot'] = Number(report.details.anomalyTimeSlot);
-    }
     return reportToPost;
   }
 
@@ -119,6 +119,45 @@ export class ReportService {
       }
     }
     return address.substring(0, address.length - 3);
+  }
+
+  getReports(offset: number, limit: number) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('offset', offset.toString());
+    httpParams = httpParams.append('limit', limit.toString());
+    return this.http.get<PaginatedData<any>>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
+      Object.assign(this.serviceUtils.getAuthHeaders(), { params: httpParams })
+    ).pipe(
+      map(paginatedData => Object.assign(new PaginatedData<Report>(), {
+        totalCount: paginatedData.totalCount,
+        hasNextPage: paginatedData.hasNextPage,
+        entities: paginatedData.entities.map(entity => Object.assign(new Report(), {
+          id: entity.id,
+          creationDate: entity.creationDate,
+          category: entity.category,
+          subcategory: entity.subcategory,
+          company: Object.assign(new Company(), {
+            name: entity.companyName,
+            siret: entity.companySiret,
+            postalCode: entity.companyPostalCode,
+            line1: entity.companyAddress.split('-')[0],
+            line2: entity.companyAddress.split('-')[1],
+            line3: entity.companyAddress.split('-')[2],
+            line4: entity.companyAddress.split('-')[3],
+            line5: entity.companyAddress.split('-')[4],
+            line6: entity.companyAddress.split('-')[5],
+            line7: entity.companyAddress.split('-')[6],
+          }),
+          consumer: Object.assign(new Consumer(), {
+            firstName: entity.firstName,
+            lastName: entity.lastName,
+            email: entity.email
+          }),
+          fileIds: entity.fileIds
+        }))
+      }))
+    );
   }
 }
 

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthUser, User } from '../model/AuthUser';
-import { Api, ServiceUtils } from './service.utils';
+import { Api, AuthUserStorageKey, ServiceUtils } from './service.utils';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { BehaviorSubject } from 'rxjs';
-
-const AuthUserStorageKey = 'AuthUserSignalConso';
 
 @Injectable({
   providedIn: 'root'
