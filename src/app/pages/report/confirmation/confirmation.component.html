@@ -21,7 +21,7 @@
         <h5>Description</h5>
         <div class="row">
           <div class="col-12">
-            <div class="mb-3 flex" *ngFor="let detailInputValue of report.detailInputValues">
+            <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
               <span [innerHTML]="detailInputValue.renderedLabel"></span>
               &nbsp;<span [innerHTML]="detailInputValue.renderedValue"></span>
             </div>
