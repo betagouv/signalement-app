@@ -52,8 +52,9 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    return this.localStorage.getItem(AuthUserStorageKey).subscribe(authUser => {
-      return authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token);
-    });
+    return this.localStorage.getItem(AuthUserStorageKey)
+    .pipe(
+      map(authUser => authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
+    );
   }
 }
