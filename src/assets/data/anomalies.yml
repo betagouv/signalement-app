@@ -223,7 +223,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
-                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -264,7 +264,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
-                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -306,7 +306,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
-                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -355,7 +355,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage.
-                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
