@@ -16,7 +16,7 @@ list:
               - Cuisine
               - Atelier de fabrication
               - Salle du restaurant / bar
-              - Lieu de vente
+              - Zone de vente
               - WC
               - Autre (à préciser)
           - label: A quel niveau&#160;?
@@ -52,10 +52,11 @@ list:
         example: 'Exemples : tenue sale, mauvaise pratique d''hygiène...'
         subcategories:
           - title: Tenue de travail pas adaptée
+            example: 'Exemples : pas de tenue de travail dédiée...'
             subcategories:
-              - title: Pas de coiffe ou pas de gants
+              - title: Pas de gants ou pas de coiffe
                 information:
-                  title: Cet incident ne constitue pas un motif de signalement.
+                  title: Cet incident ne doit nécessairement être signalé.
                   content: |-
                     La réglementation précise les personnes qui travaillent dans une zone où sont manipulés des aliments doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
                     Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Le lavage des mains peut être suffisant pour éviter les contaminations.
@@ -65,7 +66,7 @@ list:
             example: 'Exemples : pas de lavage des mains, personne qui fume en cuisine...'
           - title: Autre
       - title: Présence d'animaux
-        example: 'Exemples : rat, insectes, oiseaux, ...'
+        example: 'Exemples : rat, cafard, pigeon ...'
         detailInputs:
           - label: Quel animal avez-vous vu&#160;?
             rank: 1
@@ -95,15 +96,15 @@ list:
             type: TIMESLOT
             optionnal: true
       - title: Problème de température
-        example: 'Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...'
+        example: 'Exemples : rupture de la chaîne du froid, problème sur une vitrine réfrigérée...'
         detailInputs:
           - label: Quel est le problème&#160;?
             rank: 1
             type: RADIO
             options:
-              - Meuble réfrigéré / surgelé en panne ou température insuffisante
-              - Stockage de produits frais / surgelés à température ambiante
-              - Transport de produits frais / surgelés à température ambiante
+              - Vitrine ou réfrigérateur en panne ou trop chaud
+              - Stockage à température ambiante de produits frais ou congelés
+              - Transport à température ambiante de produit frais ou congelés
               - Autre problème de température
           - label: Description
             rank: 2
@@ -119,7 +120,7 @@ list:
       - title: Autre problème d'hygiène
   - category: Nourriture / Boissons
     categoryId: NOURR
-    description: Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...
+    description: Produit périmé, problème de quantité, goût anormal...
     rank: 2
     withInternetPurchase: true
     icon: icon_food.png
@@ -127,10 +128,10 @@ list:
       - title: Produit périmé
         subcategoriesTitle: 'Vous souhaitez signaler&#160;:'
         subcategories:
-          - title: Un problème fréquent de produits périmés
+          - title: Un constat fréquent de produits périmés dans un établissement
             subcategoriesTitle: Quels sont les produits concernés&#160;?
             subcategories:
-              - title: Des produits frais vendus dans un réfrigérateur ou au rayon "froid"
+              - title: Des produits vendus au rayon frais
                 example: 'Exemples : viande, poisson, quiche, jambon...'
                 subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
                 subcategories:
@@ -139,20 +140,21 @@ list:
                     description: Après cette date, il est dangereux de consommer le produit.
                   - title: Non pas encore (mais bientôt)
                     information:
-                      title: Il est autorisé de vendre un produit jusqu’au jour indiqué sur l'étiquette de la DLC.
+                      title: Il est autorisé de vendre un produit jusqu’à la date (comprise) limite de consommation.
                       content: Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
+                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation. 
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
               - title: Des produits vendus à température ambiante
                 example: 'Exemples : chocolat, conserve, compote, petits pots...'
                 information:
-                  content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
+                  title: Ce n'est pas un motif de signalement.
+                  content: Les produits vendus à température ambiante comme de l'eau, des biscuits, des petits pots ou des conserves ont une date appelée date de durabilité minimale.
                     <br/>Le commerçant peut vendre un produit avec cette date dépassée.
                     <br/>Ces dates sont seulement une indication.
-                    <br/>Vous pouvez consommer le produit après cette date.
-                    <br/>Il n'est pas nécessaire de le jeter.
-          - title: Un produit en particulier
+                    <br/>Vous pouvez consommer le produit après cette date. Il n'est pas nécessaire de le jeter.
+          - title: Un produit périmé en particulier
             subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
             subcategories:
               - title: À consommer de préférence avant le...
@@ -186,8 +188,7 @@ list:
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
-              - title: Date de consommation recommandée
-                example: concerne les oeufs
+              - title: Cas particulier des oeufs
                 detailInputs:
                   - label: La date est-elle ?
                     rank: 1
@@ -195,10 +196,10 @@ list:
                     options:
                       - Dépassée
                       - Dans moins de 7 jours
-                  - label: Date Limite de Consommation (DLC)
+                  - label: Date de consommation recommandée
                     rank: 2
                     type: DATE
-                  - label: Date du constat
+                  - label: Date du constat (ou date d'achat)
                     rank: 3
                     type: DATE
                     defaultValue: SYSDATE
@@ -222,6 +223,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
+                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -262,6 +264,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
+                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -287,8 +290,8 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-          - title: Corps étranger "mou"
-            example: 'Présence de quelque chose de "mou" dans le produit.<br/>Exemples: morceau de gant, morceau de tissus..'
+          - title: Présence anormale de quelque chose de "mou"
+            example: 'Exemples: morceau de gant, morceau de tissus..'
             subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
               - title: Un produit vendu sans emballage.
@@ -303,6 +306,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
+                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -328,8 +332,8 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-          - title: Corps étranger "dur"
-            example: 'Présence de quelque chose de "dur" dans le produit.<br/>Exemples : bout de verre, morceau de métal...'
+          - title: présence anormal de quelque chose de "dur"
+            example: 'Exemples : bout de verre, morceau de métal...'
             information:
               title: Vous souhaitez signaler la présence d'un corps étranger "dur"
               subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
@@ -350,7 +354,8 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-              - title: Un produit vendu dans un emballage
+              - title: Un produit vendu dans un emballage.
+                example: 'Exemple : bouteille d'eau, conserve de légumes, paquet de chips..."
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -365,10 +370,10 @@ list:
                   - label: Marque
                     rank: 3
                     type: TEXT
-                  - label: Numéro de lot
+                  - label: Numéro de lot (si possible)
                     rank: 4
                     type: TEXT
-                  - label: Date limite
+                  - label: Date limite (si possible)
                     rank: 5
                     type: DATE
                   - label: Date du constat (ou d'achat suivant le cas)
