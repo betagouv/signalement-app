@@ -1,7 +1,14 @@
 @import "../../../../theme/variables";
 
-th {
-  text-align: center;
+.table {
+
+  th {
+    text-align: center;
+  }
+
+  th, td {
+    border-left: 1px solid #dee2e6;
+  }
 }
 
 ul.dropdown-menu {

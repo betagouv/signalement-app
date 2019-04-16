@@ -78,5 +78,4 @@ export class ReportsComponent implements OnInit {
   getFileDownloadUrl(uploadedFile: UploadedFile) {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
-
 }

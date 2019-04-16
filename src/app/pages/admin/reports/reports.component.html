@@ -34,65 +34,72 @@
 </div>
 <div class="row pt-5">
   <div class="col-12">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Identifiant</th>
-          <th>Date de création</th>
-          <th>Siret</th>
-          <th>Commerçant</th>
-          <th>Dept.</th>
-          <th>Catégorie</th>
-          <th>Problème</th>
-          <th>Description</th>
-          <th>Consommateur</th>
-          <th>Pièces jointes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let report of reports">
-          <td class="text-center">
-            <span [tooltip]="report.id">
-              {{report.id | slice : 0 : 5}}...{{report.id | slice : 31}}
-            </span>
-          </td>
-          <td class="text-center">{{report.creationDate | date : 'dd/MM/yyyy'}}</td>
-          <td class="text-center">{{report.company.siret}}</td>
-          <td class="text-center">
-            <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
-            <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
-            <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
-            <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
-            <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
-            <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
-            <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
-          </td>
-          <td class="text-center">{{report.company.postalCode | slice : 0 : 2}}</td>
-          <td>{{report.category}}</td>
-          <td>
-            <span *ngFor="let subcategory of report.subcategories">
-              {{subcategory}}
-              <br />
-            </span>
-          </td>
-          <td>
-            <ng-container *ngFor="let detailInputValue of report.detailInputValues">
-              <span [innerHTML]="detailInputValue.label"></span> <span [innerHTML]="detailInputValue.value"></span>
-              <br />
-            </ng-container>
-          </td>
-          <td>{{report.consumer.firstName}} {{report.consumer.lastName}}<br />{{report.consumer.email}}</td>
-          <td class="text-center">
-            <span *ngFor="let file of report.files" [tooltip]="file.filename">
-              <a href="{{getFileDownloadUrl(file)}}">
-                {{file.displayedFilename}}
-              </a>
-              <br/>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Identifiant</th>
+            <th>Date de création</th>
+            <th>Siret</th>
+            <th>Commerçant</th>
+            <th>Dept.</th>
+            <th>Catégorie</th>
+            <th>Problème</th>
+            <th>Description</th>
+            <th>Consommateur</th>
+            <th>Pièces jointes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of reports">
+            <td class="text-center">
+              <span [tooltip]="report.id">
+                {{report.id | slice : 0 : 5}}...{{report.id | slice : 31}}
+              </span>
+            </td>
+            <td class="text-center">{{report.creationDate | date : 'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{report.company.siret}}</td>
+            <td class="text-center">
+              <span [tooltip]="companyTooltip">
+                {{report.company.name}}
+                <ng-template #companyTooltip>
+                  <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
+                  <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
+                  <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+                  <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+                  <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+                  <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+                  <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+                </ng-template>
+              </span>
+            </td>
+            <td class="text-center">{{report.company.postalCode | slice : 0 : 2}}</td>
+            <td>{{report.category}}</td>
+            <td>
+              <span *ngFor="let subcategory of report.subcategories">
+                {{subcategory}}
+                <br />
+              </span>
+            </td>
+            <td>
+              <ng-container *ngFor="let detailInputValue of report.detailInputValues">
+                <div class="font-weight-bold" [innerHTML]="detailInputValue.label"></div>
+                <div class="mb-2" [innerHTML]="detailInputValue.value"></div>
+              </ng-container>
+            </td>
+            <td>{{report.consumer.firstName}} {{report.consumer.lastName}}<br />{{report.consumer.email}}</td>
+            <td class="text-center">
+              <span *ngFor="let file of report.files" [tooltip]="file.filename">
+                <a href="{{getFileDownloadUrl(file)}}">
+                  {{file.displayedFilename}}
+                </a>
+                <br/>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <div class="row">
