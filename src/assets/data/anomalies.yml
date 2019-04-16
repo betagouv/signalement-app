@@ -654,7 +654,6 @@ list:
           actions:
             - question: Signaler un effet indésirable sur la santé&#160;?
               answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
-
       - title: Produit dangereux
         example: 'Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...'
         information:
@@ -1247,8 +1246,7 @@ list:
                     placeholder: Entreprise de livraison
               - title: D'un colis envoyé entre particuliers
       - title: Service client / SAV fantôme
-        example: 'Exemples : le SAV (service après vente) ou le service client est inexistant,
-      aucun retour du SAV malgré mes relances ...'
+        example: 'Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ...'
       - title: Personnel peu aimable
         example: 'Exemples : l''accueil est froid, le personnel est mal poli'
         information:
