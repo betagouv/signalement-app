@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
+import { UploadedFile } from '../../../model/UploadedFile';
+import { FileUploaderService } from '../../../services/file-uploader.service';
 
 @Component({
   selector: 'app-reports',
@@ -45,7 +47,8 @@ export class ReportsComponent implements OnInit {
   itemsPerPage = 20;
   currentDepartment;
 
-  constructor(private reportService: ReportService) { }
+  constructor(private reportService: ReportService,
+              private fileUploaderService: FileUploaderService) { }
 
   ngOnInit() {
     this.loadReports(1);
@@ -70,6 +73,10 @@ export class ReportsComponent implements OnInit {
   filterByDeparment(department?) {
     this.currentDepartment = department;
     this.loadReports(1);
+  }
+
+  getFileDownloadUrl(uploadedFile: UploadedFile) {
+    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
 }

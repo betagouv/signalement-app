@@ -71,8 +71,10 @@
           <td>{{report.subcategory}}</td>
           <td>{{report.consumer.firstName}} {{report.consumer.lastName}}<br />{{report.consumer.email}}</td>
           <td class="text-center">
-            <span *ngFor="let fileId of report.fileIds">
-              {{fileId}}
+            <span *ngFor="let file of report.files" [tooltip]="file.filename">
+              <a href="{{getFileDownloadUrl(file)}}">
+                {{file.displayedFilename}}
+              </a>
               <br/>
             </span>
           </td>

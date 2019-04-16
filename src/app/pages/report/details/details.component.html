@@ -131,9 +131,12 @@
                 </td>
                 <td class="text-left" *ngIf="!uploadedFile.loading">
                   <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                      <span [class]="uploadedFile.id ? '' : 'error'">
-                        {{uploadedFile.displayedFilename}}
-                      </span>
+                    <span *ngIf="uploadedFile.id">
+                      {{uploadedFile.displayedFilename}}
+                    </span>
+                    <span *ngIf="!uploadedFile.id" class="error">
+                      {{getErrorFilename(uploadedFile.filename)}}
+                    </span>
                   </a>
                 </td>
                 <td class="text-right pointer" *ngIf="!uploadedFile.loading">

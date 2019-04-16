@@ -9,6 +9,7 @@ import { Step } from './report-router.service';
 import { PaginatedData } from '../model/PaginatedData';
 import { map } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
+import { UploadedFile } from '../model/UploadedFile';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -32,9 +33,12 @@ export class ReportService {
     this.localStorage.getItem(ReportStorageKey).subscribe((report: Report) => {
       if (report) {
         report.retrievedFromStorage = true;
+        // To force class method to be valuate
         if (report.detailInputValues) {
-          // To force class method to be valuate
           report.detailInputValues = report.detailInputValues.map(d => Object.assign(new DetailInputValue(), d));
+        }
+        if (report.uploadedFiles) {
+          report.uploadedFiles = report.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
         }
         this.reportSource.next(report);
       }
@@ -86,7 +90,7 @@ export class ReportService {
       lastName: report.consumer.lastName,
       email: report.consumer.email,
       contactAgreement: report.contactAgreement,
-      fileIds: report.uploadedFiles.map(f => f.id),
+      files: report.uploadedFiles,
       details: report.detailInputValues.map(detailInputValue => {
         return {
           label: detailInputValue.renderedLabel,
@@ -147,7 +151,7 @@ export class ReportService {
             lastName: entity.lastName,
             email: entity.email
           }),
-          fileIds: entity.fileIds
+          files: entity.files.map(f => Object.assign(new UploadedFile(), f))
         }))
       }))
     );

@@ -12,6 +12,7 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isDefined } from '@angular/compiler/src/util';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-details',
@@ -284,19 +285,21 @@ export class DetailsComponent implements OnInit {
       } else {
         const fileToUpload = new UploadedFile();
         fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
-        fileToUpload.displayedFilename = this.textOverflowMiddleCropping(fileToUpload.filename, 32);
         fileToUpload.loading = true;
         this.uploadedFiles.push(fileToUpload);
         this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
           fileToUpload.loading = false;
           fileToUpload.id = uploadedFile.id;
+          fileToUpload.creationDate = uploadedFile.creationDate;
         }, error => {
           fileToUpload.loading = false;
-          fileToUpload.displayedFilename =
-            `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
         });
       }
     }
+  }
+
+  getErrorFilename(filename: string) {
+    return `Echec du téléchargement (${Utils.textOverflowMiddleCropping(filename, 10)})`.concat();
   }
 
   isUploadingFile() {
@@ -316,15 +319,13 @@ export class DetailsComponent implements OnInit {
       this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
       1
     );
-    this.fileUploaderService.deleteFile(uploadedFile).subscribe();
+    if (uploadedFile.id) {
+      this.fileUploaderService.deleteFile(uploadedFile).subscribe();
+    }
   }
 
   onFileUploaded(uploadedFile: UploadedFile) {
     this.uploadedFiles.push(uploadedFile);
-  }
-
-  textOverflowMiddleCropping(text: string, limit: number) {
-    return text.length > limit ? `${text.substr(0, limit / 2)}...${text.substr(text.length - (limit / 2), text.length)}` : text;
   }
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {
