@@ -16,7 +16,7 @@ list:
               - Cuisine
               - Atelier de fabrication
               - Salle du restaurant / bar
-              - Lieu de vente
+              - Zone de vente
               - WC
               - Autre (à préciser)
           - label: A quel niveau&#160;?
@@ -52,10 +52,11 @@ list:
         example: 'Exemples : tenue sale, mauvaise pratique d''hygiène...'
         subcategories:
           - title: Tenue de travail pas adaptée
+            example: 'Exemples : pas de tenue de travail dédiée...'
             subcategories:
-              - title: Pas de coiffe ou pas de gants
+              - title: Pas de gants ou pas de coiffe
                 information:
-                  title: Cet incident ne constitue pas un motif de signalement.
+                  title: Cet incident ne doit nécessairement être signalé.
                   content: |-
                     La réglementation précise les personnes qui travaillent dans une zone où sont manipulés des aliments doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
                     Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Le lavage des mains peut être suffisant pour éviter les contaminations.
@@ -65,7 +66,7 @@ list:
             example: 'Exemples : pas de lavage des mains, personne qui fume en cuisine...'
           - title: Autre
       - title: Présence d'animaux
-        example: 'Exemples : rat, insectes, oiseaux, ...'
+        example: 'Exemples : rat, cafard, pigeon ...'
         detailInputs:
           - label: Quel animal avez-vous vu&#160;?
             rank: 1
@@ -95,15 +96,15 @@ list:
             type: TIMESLOT
             optionnal: true
       - title: Problème de température
-        example: 'Exemples : rupture de la chaîne du froid, vitrine réfrigérée trop chaude...'
+        example: 'Exemples : rupture de la chaîne du froid, problème sur une vitrine réfrigérée...'
         detailInputs:
           - label: Quel est le problème&#160;?
             rank: 1
             type: RADIO
             options:
-              - Meuble réfrigéré / surgelé en panne ou température insuffisante
-              - Stockage de produits frais / surgelés à température ambiante
-              - Transport de produits frais / surgelés à température ambiante
+              - Vitrine ou réfrigérateur en panne ou trop chaud
+              - Stockage à température ambiante de produits frais ou congelés
+              - Transport à température ambiante de produit frais ou congelés
               - Autre problème de température
           - label: Description
             rank: 2
@@ -119,7 +120,7 @@ list:
       - title: Autre problème d'hygiène
   - category: Nourriture / Boissons
     categoryId: NOURR
-    description: Absence de liste d'ingrédients, date de consommation dépassée, produit avec moisissure...
+    description: Produit périmé, problème de quantité, goût anormal...
     rank: 2
     withInternetPurchase: true
     icon: icon_food.png
@@ -127,10 +128,10 @@ list:
       - title: Produit périmé
         subcategoriesTitle: 'Vous souhaitez signaler&#160;:'
         subcategories:
-          - title: Un problème fréquent de produits périmés
+          - title: Un constat fréquent de produits périmés dans un établissement
             subcategoriesTitle: Quels sont les produits concernés&#160;?
             subcategories:
-              - title: Des produits frais vendus dans un réfrigérateur ou au rayon "froid"
+              - title: Des produits vendus au rayon frais
                 example: 'Exemples : viande, poisson, quiche, jambon...'
                 subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
                 subcategories:
@@ -139,24 +140,25 @@ list:
                     description: Après cette date, il est dangereux de consommer le produit.
                   - title: Non pas encore (mais bientôt)
                     information:
-                      title: Il est autorisé de vendre un produit jusqu’au jour indiqué sur l'étiquette de la DLC.
+                      title: Il est autorisé de vendre un produit jusqu’à la date (comprise) limite de consommation.
                       content: Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
+                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation. 
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
               - title: Des produits vendus à température ambiante
                 example: 'Exemples : chocolat, conserve, compote, petits pots...'
                 information:
-                  content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
+                  title: Ce n'est pas un motif de signalement.
+                  content: Les produits vendus à température ambiante comme de l'eau, des biscuits, des petits pots ou des conserves ont une date appelée date de durabilité minimale.
                     <br/>Le commerçant peut vendre un produit avec cette date dépassée.
                     <br/>Ces dates sont seulement une indication.
-                    <br/>Vous pouvez consommer le produit après cette date.
-                    <br/>Il n'est pas nécessaire de le jeter.
-          - title: Un produit en particulier
-            subcategoriesTitle: Comment est formulée la date&#160;?
+                    <br/>Vous pouvez consommer le produit après cette date. Il n'est pas nécessaire de le jeter.
+          - title: Un produit périmé en particulier
+            subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
             subcategories:
               - title: À consommer de préférence avant le...
-                example: concerne généralement des produits secs = date de durabilité minimale (DDM) = À consommer avant fin
+                example: C'est souvent le cas des produits vendus à température ambiante.
                 information:
                   content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
                     <br/>Le commercant peut vendre un produit avec cette date dépassée.
@@ -164,7 +166,7 @@ list:
                     <br/>Vous pouvez consommer le produit après cette date.
                     <br/>Il n'est pas nécessaire de le jeter.
               - title: À consommer jusqu’au...
-                example: concerne des produits frais = date limite de consommation (DLC)
+                example: C'est souvent le cas des produits frais.
                 subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
                 subcategories:
                   - title: Oui
@@ -186,8 +188,7 @@ list:
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
-              - title: Date de consommation recommandée
-                example: concerne les oeufs
+              - title: Cas particulier des oeufs
                 detailInputs:
                   - label: La date est-elle ?
                     rank: 1
@@ -195,10 +196,10 @@ list:
                     options:
                       - Dépassée
                       - Dans moins de 7 jours
-                  - label: Date Limite de Consommation (DLC)
+                  - label: Date de consommation recommandée
                     rank: 2
                     type: DATE
-                  - label: Date du constat
+                  - label: Date du constat (ou date d'achat)
                     rank: 3
                     type: DATE
                     defaultValue: SYSDATE
@@ -222,6 +223,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -262,6 +264,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -287,8 +290,8 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-          - title: Corps étranger "mou"
-            example: 'Présence de quelque chose de "mou" dans le produit.<br/>Exemples: morceau de gant, morceau de tissus..'
+          - title: Présence anormale de quelque chose de "mou"
+            example: 'Exemples: morceau de gant, morceau de tissus..'
             subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
               - title: Un produit vendu sans emballage.
@@ -303,6 +306,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -328,8 +332,8 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-          - title: Corps étranger "dur"
-            example: 'Présence de quelque chose de "dur" dans le produit.<br/>Exemples : bout de verre, morceau de métal...'
+          - title: présence anormal de quelque chose de "dur"
+            example: 'Exemples : bout de verre, morceau de métal...'
             information:
               title: Vous souhaitez signaler la présence d'un corps étranger "dur"
               subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
@@ -350,7 +354,8 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-              - title: Un produit vendu dans un emballage
+              - title: Un produit vendu dans un emballage.
+                example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
                     rank: 1
@@ -365,10 +370,10 @@ list:
                   - label: Marque
                     rank: 3
                     type: TEXT
-                  - label: Numéro de lot
+                  - label: Numéro de lot (si possible)
                     rank: 4
                     type: TEXT
-                  - label: Date limite
+                  - label: Date limite (si possible)
                     rank: 5
                     type: DATE
                   - label: Date du constat (ou d'achat suivant le cas)
@@ -647,9 +652,8 @@ list:
           title: Vous souhaitez signaler un effet indésirable sur la santé
           subTitle: Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
           actions:
-            - question: Signaler un effet indésirable sur la santé?
+            - question: Signaler un effet indésirable sur la santé&#160;?
               answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
-
       - title: Produit dangereux
         example: 'Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...'
         information:
@@ -701,20 +705,15 @@ list:
       - title: Autre problème de matériel
   - category: Intoxication alimentaire
     categoryId: INTOX
-    description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après
-      avoir consommé un aliment.
+    description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
     rank: 4
     icon: icon_disease.png
     information:
-      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil
-        SignalConso.
-      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée
-        (notamment le nombre de personnes malades, symptômes et aliments suspectés )
-        et peuvent déboucher sur un échange avec les enquêteurs.
+      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
+      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
       actions:
-        - question: Signaler un cas d'intoxication alimentaire?
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210"
-            target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
+        - question: Signaler un cas d'intoxication alimentaire&#160;?
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
   - category: Prix / Paiement
     categoryId: PRIX
     description: Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...
@@ -722,46 +721,154 @@ list:
     withInternetPurchase: true
     icon: icon_price.png
     subcategories:
-      - title: Absence de prix
-        example: 'Exemples : pas d''affichage de prix en rayon ou en vitrine, pas de carte
-      des prix dans le bar...'
-      - title: Prix trop cher
-        description: 'C''est autorisé de vendre un produit "cher", les commerçants sont
-      libres de choisir leurs prix.<br/><br/>Attention, les prix doivent être clairement
-      indiqués (par un affichage ou une étiquette, écrit sur la carte du restaurant...)
-      pour que vous soyez au courant avant d''acheter ou de commander.<br/>Par exemple,
-      il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le
-      prix est bien marqué sur la carte des boissons.<br/><br/>Par contre, un commerçant
-      ne doit pas abuser d''une situation pour pratiquer des prix exagérés. <br/>Par
-      exemple, un serrurier qui vous demande de payer une somme exagérée en situation
-      d''urgence sans vous avoir averti avant.<br/>Si c''est votre cas, vous devez
-      faire une réclamation avec ce formulaire : <a href="https://www.economie.gouv.fr/courrier/4191"
-      target="_blank">https://www.economie.gouv.fr/courrier/4191</a>'
-      - title: Prix différent de celui affiché
-        example: 'Exemples : le prix du paquet à la caisse est de 5 euros alors qu''il
-      est affiché à 3 euros en rayon, le pantalon ne passe qu''à -30% alors que tous
-      les pantalons sont étiquetés -50%.'
-        description: 'En cas de différence de prix, le vendeur doit vendre le produit
-      au prix le faible pour le client.<br/><br/>Par contre, ce principe ne s''applique
-      pas lorsque l''erreur de prix est tellement énorme que le client se doute de
-      l''erreur (exemple : une voiture neuve affichée à 500 euros, un meuble affiché
-      à 0 euros...). On appelle ça une erreur de prix manifeste.'
+      - title: Prix pas affiché ou prix incomplet
+        example: 'Exemples : prix qui manque en rayon, supplément "terrasse" non annoncé avant'
+        description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+        detailInputs:
+          - label: Veuillez préciser
+            rank: 1
+            type: RADIO
+            options:
+              - Prix pas affiché
+              - Prix affiché incomplet
+              - Frais supplémentaires qui n'étaient pas annoncés à l'avance
+          - label: Date du constat
+            rank: 2
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Description
+            example: Précisez si possible le produit ou le rayon
+            rank: 5
+            type: TEXTAREA
+      - title: Prix à la caisse différent du prix affiché
+        example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros.'
+        subcategoriesTitle: Le prix qui était affiché est-il très différent du prix réel&#160;?
+        subcategories:
+          - title: Oui
+            example: Par exemple, une voiture neuve indiquée à 500 euros. Le consommateur se doute que c'est une erreur de prix.
+            information:
+              content: Si l’erreur de prix est énorme et que le client se doute de l'erreur, on appelle cela une "erreur de prix manifeste".
+                <br/>Dans ce cas-là, le vendeur a le droit de refuser de vous vendre à ce prix.
+                <br/>Vous ne pouvez malheureusement pas exiger qu'il vous fasse le prix indiqué.
+                <br/>Si vous avez déjà passé votre commande, il peut revenir vers vous et annuler la commande.
+          - title: Non
+            description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.'
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Heure du constat
+                rank: 2
+                type: TIMESLOT
+                optionnal: true
+              - label: Quel produit&#160;?
+                rank: 3
+                type: TEXT
+                placeholder: Nom du produit
+              - label: Quel était le prix indiqué si vous vous en rappelez&#160;?
+                rank: 4
+                type: TEXT
+                placeholder: Prix indiqué
+                optionnal: true
+              - label: 'L''avez-vous signaler au moment de payer&#160;?'
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui, à qui&#160;? (à préciser)
+                  - Non
+              - label: Le commerçant a-t-il bien voulu vous faire payer le prix affiché&#160;?
+                rank: 6
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+              - label: Description
+                rank: 7
+                type: TEXTAREA
+      - title: Prix exagéré ou plus cher qu'ailleurs
+        information:
+          title: Les prix sont chois librement par les commerçants.
+          content: 'Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d’acheter ou de commander.
+            <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte des boissons.
+            <br/><br/><b>Cas particulier !</b>
+            <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
+            <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d''urgence sans vous avoir averti avant.
+            <br />Si c’est votre cas, vous devez faire une réclamation avec ce formulaire : Contact Abus de faiblesse'
       - title: Fausse réduction de prix
         example: 'Exemple : fausse promotion pendant les soldes ou une liquidation totale'
-      - title: Refus de payer en espèces
-        description: Le vendeur ne peut pas refuser des espèces sauf s'il n'a pas suffisamment
-          de monnaie. C'est à vous de faire l'appoint.<br/>Par contre, il peut refuser
-          les espèces à partir de 1 000 euros.
-      - title: Refus de payer par CB / chèque
-        description: 'Le commerçant peut refuser les chèques ou la carte bancaire. Dans
-      ce cas, il doit l''indiquer très visiblement au consommateur (affichage à l''entrée
-      du magasin ou à la caisse, sur une carte du restaurant..)<br/><br/>Bon à savoir:
-      le vendeur a le droit de demander une pièce d''identité ou un montant minimum
-      pour ce type de paiement.'
-      - title: Frais facturés qui sont injustifiés
-        example: 'Exemple : on vous facture un surplus "service en terrasse" alors que
-      ce prix n''était indiqué nulle part'
-      - title: Autre problème de prix
+        description: '<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l''entreprise
+          <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
+          Une copie du récépissé de déclaration doit être affichée sur le lieu de vente, pendant toute la durée de la liquidation, de manière à être lisible et visible depuis la voie publique.'
+        detailInputs:
+          - label: 'Il s''agit d''un problème sur :'
+            rank: 1
+            type: RADIO
+            options:
+              - Les soldes
+              - Une promotion
+              - Une liquidation
+              - Autre (à préciser)
+          - label: Date du constat
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE    
+          - label: Description
+            example: Précisez si possible le problème
+            rank: 5
+            type: TEXTAREA
+      - title: Problème pour payer
+        subcategories:
+          - title: Refus d'un moyen de paiement
+            subcategories:
+              - title: Refus de payer en espèces
+                subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+                subcategories:
+                  - title: Il refuse tout paiement en espèces
+                    description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+                  - title: Il n'avait pas assez de monnaie
+                    information:
+                      content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                  - title: Mes pièces / billets étaient en mauvais état
+                    information:
+                      content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                  - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
+                    information:
+                      content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                        <br/>Le paiement de plus de 50 pièces pour un seul paiement peut être refusé.
+                  - title: Autre
+              - title: Refus de payer par CB / chèque
+                example: 'Le commerçant peut refuser les chèques ou la carte bancaire. Dans ce cas, il doit l''indiquer très visiblement au consommateur (affichage à l''entrée du magasin ou à la caisse, sur une carte du restaurant..)
+                  <br/>Bon à savoir: le vendeur a le droit de demander une pièce d''identité ou un montant minimum pour ce type de paiement.'
+                subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
+                subcategories:
+                  - title: Il exige un minimum d'achat
+                    subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                    subcategories:
+                      - title: Oui
+                        example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                        information:
+                          title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                          content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                      - title: Non
+                  - title: Il refuse tous les paiements par chèque ou carte bleue
+                    subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+                    subcategories:
+                      - title: Oui
+                        example: 'Exemple : sur une affiche au niveau des caisses'
+                        information:
+                          title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                          content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                      - title: Non
+                  - title: Autres
+                    example: 'Exemple : problème avec le terminal de paiement'
+          - title: Autres problèmes de prix ou paiement
+            subcategoriesTitle: 'Problème avec :'
+            subcategories:
+              - title: Le cash-back
+              - title: Tickets
+              - title: Autre
+      - title: Problème de facture/ticket de caisse
   - category: Publicité
     categoryId: PUB
     description: promotion indiquée dans le catalogue non disponible en magasin, publicité
@@ -771,25 +878,38 @@ list:
     icon: icon_pub.png
     subcategories:
       - title: Indisponibilité des produits
+        subcategoriesTitle: Où avez-vous vu ce produit&#160;?
         subcategories:
-          - title: Produit affiché dans le catalogue non disponible dans le magasin
+          - title: Dans une publicité (catalogue ou spot publicitaire)
             detailInputs:
               - label: Date du constat
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
-              - label: Où avez-vous vu la publicité&#160;?
+              - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
                 rank: 2
                 type: RADIO
                 options:
-                  - Internet
-                  - Catalogue papier
-              - label: De quel produit s'agissait-il&#160;?
+                  - Oui
+                  - Non
+              - label: Quel est le nom et marque du produit&#160;?
                 rank: 3
                 type: TEXT
-                placeholder: Nom du produit
-            fileLabel: Photo(s) du catalogue
-          - title: Produit proposé sur le menu/carte non disponible à la vente
+                placeholder: Nom et marque du produit
+              - label: De quelle publicité s'agit-il&#160;?
+                rank: 4
+                type: RADIO
+                options:
+                  - Catalogue papier ou flyers
+                  - Publicité sur internet
+                  - Spot radio (à préciser)
+                  - Spot télé (à préciser)
+                  - Autres (à préciser)
+              - label: Pour les publicités papier et internet, précisez si possible la publicité concernée en copiant ci-dessous le lien correspondant du site bonial ou envoyant une photo&#160;?
+                rank: 5
+                type: TEXT
+            fileLabel: Photo(s) de la publicité
+          - title: Sur le menu ou la carte des prestations
             detailInputs:
               - label: Date du constat
                 rank: 1
@@ -1147,8 +1267,7 @@ list:
                     placeholder: Entreprise de livraison
               - title: D'un colis envoyé entre particuliers
       - title: Service client / SAV fantôme
-        example: 'Exemples : le SAV (service après vente) ou le service client est inexistant,
-      aucun retour du SAV malgré mes relances ...'
+        example: 'Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ...'
       - title: Personnel peu aimable
         example: 'Exemples : l''accueil est froid, le personnel est mal poli'
         information:
