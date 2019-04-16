@@ -42,6 +42,7 @@
           <th>Siret</th>
           <th>Commerçant</th>
           <th>Dept.</th>
+          <th>Catégorie</th>
           <th>Problème</th>
           <th>Description</th>
           <th>Consommateur</th>
@@ -68,7 +69,18 @@
           </td>
           <td class="text-center">{{report.company.postalCode | slice : 0 : 2}}</td>
           <td>{{report.category}}</td>
-          <td>{{report.subcategory}}</td>
+          <td>
+            <span *ngFor="let subcategory of report.subcategories">
+              {{subcategory}}
+              <br />
+            </span>
+          </td>
+          <td>
+            <ng-container *ngFor="let detailInputValue of report.detailInputValues">
+              <span [innerHTML]="detailInputValue.label"></span> <span [innerHTML]="detailInputValue.value"></span>
+              <br />
+            </ng-container>
+          </td>
           <td>{{report.consumer.firstName}} {{report.consumer.lastName}}<br />{{report.consumer.email}}</td>
           <td class="text-center">
             <span *ngFor="let file of report.files" [tooltip]="file.filename">

@@ -133,7 +133,8 @@ export class ReportService {
           id: entity.id,
           creationDate: entity.creationDate,
           category: entity.category,
-          subcategory: entity.subcategory,
+          subcategories: entity.subcategories,
+          detailInputValues: entity.details,
           company: Object.assign(new Company(), {
             name: entity.companyName,
             siret: entity.companySiret,
