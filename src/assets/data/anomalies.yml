@@ -721,7 +721,7 @@ list:
     withInternetPurchase: true
     icon: icon_price.png
     subcategories:
-      - title: Prix pas affiché ou incomplet
+      - title: Prix pas affiché ou prix incomplet
         example: 'Exemples : prix qui manque en rayon, supplément "terrasse" non annoncé avant'
         description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
         detailInputs:
@@ -729,9 +729,9 @@ list:
             rank: 1
             type: RADIO
             options:
-              - Absence de prix
+              - Prix pas affiché
               - Prix affiché incomplet
-              - Frais qui n'étaient pas annoncés à l'avance
+              - Frais supplémentaires qui n'étaient pas annoncés à l'avance
           - label: Date du constat
             rank: 2
             type: DATE
@@ -740,8 +740,8 @@ list:
             example: Précisez si possible le produit ou le rayon
             rank: 5
             type: TEXTAREA
-      - title: Prix affiché qu'on vous refuse
-        example: 'Exemple : le prix à la caisse est de 5 euros alors que le produit est affiché à 3 euros en rayon.'
+      - title: Prix à la caisse différent du prix affiché
+        example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros.'
         subcategoriesTitle: Le prix qui était affiché est-il très différent du prix réel&#160;?
         subcategories:
           - title: Oui
@@ -809,6 +809,14 @@ list:
               - Une promotion
               - Une liquidation
               - Autre (à préciser)
+          - label: Date du constat
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE    
+          - label: Description
+            example: Précisez si possible le problème
+            rank: 5
+            type: TEXTAREA
       - title: Problème pour payer
         subcategories:
           - title: Refus d'un moyen de paiement
