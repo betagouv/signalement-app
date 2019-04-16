@@ -878,25 +878,38 @@ list:
     icon: icon_pub.png
     subcategories:
       - title: Indisponibilité des produits
+        subcategoriesTitle: Où avez-vous vu ce produit&#160;?
         subcategories:
-          - title: Produit affiché dans le catalogue non disponible dans le magasin
+          - title: Dans une publicité (catalogue ou spot publicitaire)
             detailInputs:
               - label: Date du constat
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
-              - label: Où avez-vous vu la publicité&#160;?
+              - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
                 rank: 2
                 type: RADIO
                 options:
-                  - Internet
-                  - Catalogue papier
-              - label: De quel produit s'agissait-il&#160;?
+                  - Oui
+                  - Non
+              - label: Quel est le nom et marque du produit&#160;?
                 rank: 3
                 type: TEXT
-                placeholder: Nom du produit
-            fileLabel: Photo(s) du catalogue
-          - title: Produit proposé sur le menu/carte non disponible à la vente
+                placeholder: Nom et marque du produit
+              - label: De quelle publicité s'agit-il&#160;?
+                rank: 4
+                type: RADIO
+                options:
+                  - Catalogue papier ou flyers
+                  - Publicité sur internet
+                  - Spot radio (à préciser)
+                  - Spot télé (à préciser)
+                  - Autres (à préciser)
+              - label: Pour les publicités papier et internet, précisez si possible la publicité concernée en copiant ci-dessous le lien correspondant du site bonial ou envoyant une photo&#160;?
+                rank: 5
+                type: TEXT
+            fileLabel: Photo(s) de la publicité
+          - title: Sur le menu ou la carte des prestations
             detailInputs:
               - label: Date du constat
                 rank: 1
