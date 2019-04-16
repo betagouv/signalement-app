@@ -652,7 +652,7 @@ list:
           title: Vous souhaitez signaler un effet indésirable sur la santé
           subTitle: Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
           actions:
-            - question: Signaler un effet indésirable sur la santé?
+            - question: Signaler un effet indésirable sur la santé&#160;?
               answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
 
       - title: Produit dangereux
@@ -706,20 +706,15 @@ list:
       - title: Autre problème de matériel
   - category: Intoxication alimentaire
     categoryId: INTOX
-    description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après
-      avoir consommé un aliment.
+    description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
     rank: 4
     icon: icon_disease.png
     information:
-      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil
-        SignalConso.
-      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée
-        (notamment le nombre de personnes malades, symptômes et aliments suspectés )
-        et peuvent déboucher sur un échange avec les enquêteurs.
+      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
+      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
       actions:
-        - question: Signaler un cas d'intoxication alimentaire?
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210"
-            target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
+        - question: Signaler un cas d'intoxication alimentaire&#160;?
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
   - category: Prix / Paiement
     categoryId: PRIX
     description: Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...
@@ -727,46 +722,146 @@ list:
     withInternetPurchase: true
     icon: icon_price.png
     subcategories:
-      - title: Absence de prix
-        example: 'Exemples : pas d''affichage de prix en rayon ou en vitrine, pas de carte
-      des prix dans le bar...'
-      - title: Prix trop cher
-        description: 'C''est autorisé de vendre un produit "cher", les commerçants sont
-      libres de choisir leurs prix.<br/><br/>Attention, les prix doivent être clairement
-      indiqués (par un affichage ou une étiquette, écrit sur la carte du restaurant...)
-      pour que vous soyez au courant avant d''acheter ou de commander.<br/>Par exemple,
-      il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le
-      prix est bien marqué sur la carte des boissons.<br/><br/>Par contre, un commerçant
-      ne doit pas abuser d''une situation pour pratiquer des prix exagérés. <br/>Par
-      exemple, un serrurier qui vous demande de payer une somme exagérée en situation
-      d''urgence sans vous avoir averti avant.<br/>Si c''est votre cas, vous devez
-      faire une réclamation avec ce formulaire : <a href="https://www.economie.gouv.fr/courrier/4191"
-      target="_blank">https://www.economie.gouv.fr/courrier/4191</a>'
-      - title: Prix différent de celui affiché
-        example: 'Exemples : le prix du paquet à la caisse est de 5 euros alors qu''il
-      est affiché à 3 euros en rayon, le pantalon ne passe qu''à -30% alors que tous
-      les pantalons sont étiquetés -50%.'
-        description: 'En cas de différence de prix, le vendeur doit vendre le produit
-      au prix le faible pour le client.<br/><br/>Par contre, ce principe ne s''applique
-      pas lorsque l''erreur de prix est tellement énorme que le client se doute de
-      l''erreur (exemple : une voiture neuve affichée à 500 euros, un meuble affiché
-      à 0 euros...). On appelle ça une erreur de prix manifeste.'
+      - title: Prix pas affiché ou incomplet
+        example: 'Exemples : prix qui manque en rayon, supplément "terrasse" non annoncé avant'
+        description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+        detailInputs:
+          - label: Veuillez préciser
+            rank: 1
+            type: RADIO
+            options:
+              - Absence de prix
+              - Prix affiché incomplet
+              - Frais qui n'étaient pas annoncés à l'avance
+          - label: Date du constat
+            rank: 2
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Description
+            example: Précisez si possible le produit ou le rayon
+            rank: 5
+            type: TEXTAREA
+      - title: Prix affiché qu'on vous refuse
+        example: 'Exemple : le prix à la caisse est de 5 euros alors que le produit est affiché à 3 euros en rayon.'
+        subcategoriesTitle: Le prix qui était affiché est-il très différent du prix réel&#160;?
+        subcategories:
+          - title: Oui
+            example: Par exemple, une voiture neuve indiquée à 500 euros. Le consommateur se doute que c'est une erreur de prix.
+            information:
+              content: Si l’erreur de prix est énorme et que le client se doute de l'erreur, on appelle cela une "erreur de prix manifeste".
+                <br/>Dans ce cas-là, le vendeur a le droit de refuser de vous vendre à ce prix.
+                <br/>Vous ne pouvez malheureusement pas exiger qu'il vous fasse le prix indiqué.
+                <br/>Si vous avez déjà passé votre commande, il peut revenir vers vous et annuler la commande.
+          - title: Non
+            description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.'
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Heure du constat
+                rank: 2
+                type: TIMESLOT
+                optionnal: true
+              - label: Quel produit&#160;?
+                rank: 3
+                type: TEXT
+                placeholder: Nom du produit
+              - label: Quel était le prix indiqué si vous vous en rappelez&#160;?
+                rank: 4
+                type: TEXT
+                placeholder: Prix indiqué
+                optionnal: true
+              - label: 'L''avez-vous signaler au moment de payer&#160;?'
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui, à qui&#160;? (à préciser)
+                  - Non
+              - label: Le commerçant a-t-il bien voulu vous faire payer le prix affiché&#160;?
+                rank: 6
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+              - label: Description
+                rank: 7
+                type: TEXTAREA
+      - title: Prix exagéré ou plus cher qu'ailleurs
+        information:
+          title: Les prix sont chois librement par les commerçants.
+          content: 'Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d’acheter ou de commander.
+            <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte des boissons.
+            <br/><br/><b>Cas particulier !</b>
+            <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
+            <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d''urgence sans vous avoir averti avant.
+            <br />Si c’est votre cas, vous devez faire une réclamation avec ce formulaire : Contact Abus de faiblesse'
       - title: Fausse réduction de prix
         example: 'Exemple : fausse promotion pendant les soldes ou une liquidation totale'
-      - title: Refus de payer en espèces
-        description: Le vendeur ne peut pas refuser des espèces sauf s'il n'a pas suffisamment
-          de monnaie. C'est à vous de faire l'appoint.<br/>Par contre, il peut refuser
-          les espèces à partir de 1 000 euros.
-      - title: Refus de payer par CB / chèque
-        description: 'Le commerçant peut refuser les chèques ou la carte bancaire. Dans
-      ce cas, il doit l''indiquer très visiblement au consommateur (affichage à l''entrée
-      du magasin ou à la caisse, sur une carte du restaurant..)<br/><br/>Bon à savoir:
-      le vendeur a le droit de demander une pièce d''identité ou un montant minimum
-      pour ce type de paiement.'
-      - title: Frais facturés qui sont injustifiés
-        example: 'Exemple : on vous facture un surplus "service en terrasse" alors que
-      ce prix n''était indiqué nulle part'
-      - title: Autre problème de prix
+        description: '<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l''entreprise
+          <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
+          Une copie du récépissé de déclaration doit être affichée sur le lieu de vente, pendant toute la durée de la liquidation, de manière à être lisible et visible depuis la voie publique.'
+        detailInputs:
+          - label: 'Il s''agit d''un problème sur :'
+            rank: 1
+            type: RADIO
+            options:
+              - Les soldes
+              - Une promotion
+              - Une liquidation
+              - Autre (à préciser)
+      - title: Problème pour payer
+        subcategories:
+          - title: Refus d'un moyen de paiement
+            subcategories:
+              - title: Refus de payer en espèces
+                subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+                subcategories:
+                  - title: Il refuse tout paiement en espèces
+                    description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+                  - title: Il n'avait pas assez de monnaie
+                    information:
+                      content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                  - title: Mes pièces / billets étaient en mauvais état
+                    information:
+                      content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                  - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
+                    information:
+                      content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                        <br/>Le paiement de plus de 50 pièces pour un seul paiement peut être refusé.
+                  - title: Autre
+              - title: Refus de payer par CB / chèque
+                example: 'Le commerçant peut refuser les chèques ou la carte bancaire. Dans ce cas, il doit l''indiquer très visiblement au consommateur (affichage à l''entrée du magasin ou à la caisse, sur une carte du restaurant..)
+                  <br/>Bon à savoir: le vendeur a le droit de demander une pièce d''identité ou un montant minimum pour ce type de paiement.'
+                subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
+                subcategories:
+                  - title: Il exige un minimum d'achat
+                    subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                    subcategories:
+                      - title: Oui
+                        example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                        information:
+                          title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                          content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                      - title: Non
+                  - title: Il refuse tous les paiements par chèque ou carte bleue
+                    subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+                    subcategories:
+                      - title: Oui
+                        example: 'Exemple : sur une affiche au niveau des caisses'
+                        information:
+                          title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                          content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                      - title: Non
+                  - title: Autres
+                    example: 'Exemple : problème avec le terminal de paiement'
+          - title: Autres problèmes de prix ou paiement
+            subcategoriesTitle: 'Problème avec :'
+            subcategories:
+              - title: Le cash-back
+              - title: Tickets
+              - title: Autre
+      - title: Problème de facture/ticket de caisse
   - category: Publicité
     categoryId: PUB
     description: promotion indiquée dans le catalogue non disponible en magasin, publicité
