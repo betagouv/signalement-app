@@ -55,13 +55,12 @@ export class DetailInputValue {
 
   set label(label: string) {
     this._label = label;
-    if (this._label.endsWith('?')) {
-      this.renderedLabel = this._label.replace('?', ':');
+    this.renderedLabel = label;
+    if (this.renderedLabel.endsWith('?')) {
+      this.renderedLabel = this.renderedLabel.replace('?', ':');
     }
-    if (!this._label.endsWith(':')) {
-      this.renderedLabel = `${this._label} :`;
-    } else {
-      this.renderedLabel = this._label;
+    if (!this.renderedLabel.endsWith(':')) {
+      this.renderedLabel = `${this.renderedLabel} :`;
     }
   }
 
