@@ -886,7 +886,7 @@ list:
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
-              - label: De quelle publicité s''agit-il&#160;?
+              - label: De quelle publicité s'agit-il&#160;?
                 rank: 2
                 type: RADIO
                 options:
@@ -899,17 +899,17 @@ list:
                 rank: 3
                 type: TEXT
                 placeholder: Type, nom et marque du produit
-             - label: Le commerçant vous-a-t-il proposé de commander le produit ou d''en avoir un autre équivalent&#160;?
+              - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
                 rank: 4
                 type: RADIO
                 options:
                   - Oui
                   - Non
-                optionnal:true 
+                optionnal: true 
               - label: Précisez la publicité concernée en collant ci-dessous le lien issu du site Bonial ou en envoyant une photo&#160;?
                 rank: 5
                 type: TEXT
-                placeholder:"Lien vers la publicité"
+                placeholder: "Lien vers la publicité"
             fileLabel: Photo(s) de la publicité
           - title: Sur le menu ou la carte des prestations
             detailInputs:
