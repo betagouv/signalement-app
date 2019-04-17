@@ -886,7 +886,7 @@ list:
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
-              - label: De quelle publicité s'agit-il&#160;?
+              - label: De quelle publicité s''agit-il&#160;?
                 rank: 2
                 type: RADIO
                 options:
@@ -899,7 +899,7 @@ list:
                 rank: 3
                 type: TEXT
                 placeholder: Type, nom et marque du produit
-             - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
+             - label: Le commerçant vous-a-t-il proposé de commander le produit ou d''en avoir un autre équivalent&#160;?
                 rank: 4
                 type: RADIO
                 options:
