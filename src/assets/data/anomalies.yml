@@ -906,7 +906,7 @@ list:
                   - Oui
                   - Non
                 optionnal: true 
-              - label: Précisez la publicité concernée en collant ci-dessous le lien issu du site Bonial ou en envoyant une photo&#160;?
+              - label: Précisez la publicité concernée en collant ci-dessous le lien issu du site Bonial ou en envoyant une photo&#160;?<a href="https://www.economie.gouv.fr/courrier/4211" target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
                 rank: 5
                 type: TEXT
                 placeholder: "Lien vers la publicité"
