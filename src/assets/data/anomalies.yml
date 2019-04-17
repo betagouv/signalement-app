@@ -942,20 +942,20 @@ list:
             rank: 1
             type: DATE
             defaultValue: SYSDATE
-          - label: Où se trouve l'information que vous estimez trompeuse&#160;?
+          - label: Qu'es-ce qui est trompeur&#160;?
             rank: 2
             type: RADIO
             options:
-              - Sur l'emballage d'un produit
-              - Sur un affichage chez le commerçant
-              - Dans un catalogue
-              - Sur un site internet (à préciser)
-              - Dans une spot télé ou radio (à préciser))
-              - Dans un contrat ou un devis
-              - dans le discours du vendeur
-              - Dans la façon de mettre en vente
-              - Autres (à préciser))
-          - label: A propos de quoi estimez-vous cela trompeur&#160;?
+              - L'emballage d'un produit (à préciser)
+              - Un affichage chez le commerçant
+              - Une annonce sur un catalogue
+              - Un site internet (à préciser)
+              - Un spot télé ou radio (à préciser)
+              - Un contrat ou un devis
+              - Le discours d'un vendeur ou du commercial
+              - La façon de mettre en vente
+              - Autres (à préciser)
+          - label: A propos de quoi est-ce trompeur&#160;?
             rank: 3
             type: RADIO
             options:
@@ -963,10 +963,11 @@ list:
               - La composition
               - Un label ou un certificat
               - Une promesse de résultat
-              - Autres (à préciser))
-          - label: Merci de détailler au mieux la situation
+              - Autres (à préciser)
+          - label: Pourquoi trouvez-vous ça trompeur ?
             rank: 4
             type: TEXTAREA
+            optionnal: true
           - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
             rank: 5
             type: RADIO
