@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../../services/report.service';
-import { Report } from '../../../model/Report';
-import { UploadedFile } from '../../../model/UploadedFile';
-import { FileUploaderService } from '../../../services/file-uploader.service';
+import { ReportService } from '../../../../services/report.service';
+import { Report } from '../../../../model/Report';
+import { UploadedFile } from '../../../../model/UploadedFile';
+import { FileUploaderService } from '../../../../services/file-uploader.service';
+import moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-reports',
-  templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss']
+  selector: 'app-report-list',
+  templateUrl: './report-list.component.html',
+  styleUrls: ['./report-list.component.scss']
 })
-export class ReportsComponent implements OnInit {
+export class ReportListComponent implements OnInit {
 
   regions = [
     {
@@ -41,14 +43,15 @@ export class ReportsComponent implements OnInit {
       ]
     }];
 
-  reports: Report[];
+  reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
   currentPage: number;
   itemsPerPage = 20;
   currentDepartment;
 
   constructor(private reportService: ReportService,
-              private fileUploaderService: FileUploaderService) { }
+              private fileUploaderService: FileUploaderService,
+              private router: Router) { }
 
   ngOnInit() {
     this.loadReports(1);
@@ -61,7 +64,17 @@ export class ReportsComponent implements OnInit {
       this.itemsPerPage,
       this.currentDepartment ? this.currentDepartment.code : undefined
     ).subscribe(result => {
-      this.reports = result.entities;
+      this.reportsByDate = [];
+      const distinctDates = result.entities
+        .map(e => moment(e.creationDate).format('DD/MM/YYYY'))
+        .filter((date, index, self) => self.indexOf(date) === index);
+      distinctDates.forEach(date => {
+        this.reportsByDate.push(
+          {
+            date: date,
+            reports: result.entities.filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
+          });
+      });
       this.totalCount = result.totalCount;
     });
   }
@@ -77,5 +90,9 @@ export class ReportsComponent implements OnInit {
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
+  }
+
+  openReport(report: Report) {
+    this.router.navigate(['suivi-des-signalements', report.id]);
   }
 }

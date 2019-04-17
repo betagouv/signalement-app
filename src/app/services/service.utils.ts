@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { LocalStorageDatabase } from '@ngx-pwa/local-storage';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { map } from 'rxjs/operators';
 
 export const AuthUserStorageKey = 'AuthUserSignalConso';
 
@@ -9,7 +10,7 @@ export const AuthUserStorageKey = 'AuthUserSignalConso';
 })
 export class ServiceUtils {
 
-  constructor(private localStorage: LocalStorageDatabase) {
+  constructor(private localStorage: LocalStorage) {
   }
 
 
@@ -28,14 +29,15 @@ export class ServiceUtils {
   }
 
   getAuthHeaders() {
-    return this.localStorage.getItem(AuthUserStorageKey).subscribe(authUser => {
-      if (authUser) {
-        const httpHeaders = { 'X-Auth-Token': authUser.token };
-        httpHeaders['Content-Type'] = 'application/json';
-        httpHeaders['Accept'] = 'application/json';
+    return this.localStorage.getItem(AuthUserStorageKey).pipe(
+      map(authUser => {
+        const httpHeaders = this.getHttpHeaders();
+        if (authUser) {
+          Object.assign(httpHeaders.headers, { 'X-Auth-Token': authUser.token});
+        }
         return httpHeaders;
-      }
-    });
+      })
+    );
   }
 
 }

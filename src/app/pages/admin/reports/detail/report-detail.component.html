@@ -1,0 +1,96 @@
+<div class="banner text-center section section-lighter-grey" role="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-2 col-sm-1 text-right">
+        <img src="/assets/images/icon_back.png" class="back pointer" (click)="back()" alt="page précédente"/>
+      </div>
+      <div class="col-10 col-sm-11">
+        <h1 class="text-center">
+          Détail du signalement
+        </h1>
+        <h5 class="text-center">
+          {{report?.id}}
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section section-white position-relative">
+  <div class="container">
+    <div class="panel">
+      <ng-container *ngIf="report">
+        <h5>Problème</h5>
+        <div class="row">
+          <div class="col-12">
+            {{report.category}}
+            <br />
+            <ng-container *ngFor="let subcategory of report.subcategories">
+              {{subcategory}}
+              <br />
+            </ng-container>
+          </div>
+        </div>
+        <hr />
+        <h5>Description</h5>
+        <div class="row">
+          <div class="col-12">
+            <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
+              <span [innerHTML]="detailInputValue.label"></span>
+              &nbsp;<span [innerHTML]="detailInputValue.value"></span>
+            </div>
+            <div *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noUploadedFiles">
+              Pièce(s) jointe(s) :
+              <div class="col-12">
+                <ul class="filename">
+                  <li *ngFor="let uploadedFile of report.uploadedFiles">
+                    <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                      {{uploadedFile.filename}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h5>Commerçant</h5>
+        <div class="row">
+          <div class="col-12">
+            <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
+            <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
+            <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+            <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+            <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+            <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+            <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          </div>
+        </div>
+        <hr />
+        <h5>Consommateur</h5>
+        <div class="row">
+          <div class="col-12">
+            Nom : {{report.consumer.lastName}}
+            <br />
+            Prénom : {{report.consumer.firstName}}
+            <br />
+            Email : {{report.consumer.email}}
+            <br />
+            Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
+          </div>
+        </div>
+        <hr />
+        <h5>Historique</h5>
+        <div class="row">
+          <div class="col-12">
+            Créé le : {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}}
+            <br/>
+            Statut :
+          </div>
+        </div>
+      </ng-container>
+      <ngx-loading [show]="loading"></ngx-loading>
+    </div>
+  </div>
+
+</section>

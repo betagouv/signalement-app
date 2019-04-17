@@ -1,13 +1,19 @@
-@import "../../../../theme/variables";
+@import "../../../../../theme/variables";
 
 .table {
 
   th {
     text-align: center;
+    background-color: $lighter-grey;
   }
 
   th, td {
     border-left: 1px solid #dee2e6;
+  }
+
+  td.report-group {
+    background-color: $lightest-grey;
+    font-weight: bold;
   }
 }
 
@@ -27,5 +33,12 @@ ul.dropdown-menu {
   .dropdown-item {
     padding-top: 0;
     padding-bottom: 0;
+  }
+}
+
+:host ::ng-deep {
+  .tooltip-inner {
+    max-width: none !important;
+    text-align: left;
   }
 }

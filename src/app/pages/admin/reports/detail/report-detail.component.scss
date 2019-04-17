@@ -1,0 +1,11 @@
+img.back {
+
+  vertical-align: top;
+  height: 30px;
+
+  & + div {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
+}

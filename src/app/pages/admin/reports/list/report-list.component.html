@@ -1,0 +1,123 @@
+<div class="banner text-center section section-lighter-grey" role="banner">
+  <div class="container">
+    <h1 class="text-center">
+      Suivi des signalements
+    </h1>
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-12 text-center">
+    <div class="btn-group" dropdown>
+      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <ng-container *ngIf="!currentDepartment">Tous les départements <span class="caret"></span></ng-container>
+        <ng-container *ngIf="currentDepartment">{{currentDepartment.code}} - {{currentDepartment.label}} <span class="caret"></span></ng-container>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+        <li role="menuitem" class="menutitle">
+            <span class="pointer dropdown-item menutitle" (click)="filterByDeparment()">
+              Tous les départements
+            </span>
+        </li>
+        <ng-container *ngFor="let region of regions">
+          <li class="divider dropdown-divider"></li>
+          <li class="disabled" role="menuitem"><a class="dropdown-item disabled menutitle" href="#">{{region.label}}</a></li>
+          <li role="menuitem" *ngFor="let department of region.departments">
+            <span class="pointer dropdown-item" (click)="filterByDeparment(department)">
+              {{department.code}} - {{department.label}}
+            </span>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row pt-5">
+  <div class="col-12">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Dept.</th>
+            <th>Commerçant</th>
+            <th>Problème</th>
+            <th>Description</th>
+            <th>Consommateur</th>
+            <th>Pièces jointes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let reportsByDate of reportsByDate">
+            <tr>
+              <td colspan="8" class="report-group">
+                {{reportsByDate.date}}
+              </td>
+            </tr>
+            <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="openReport(report)">
+              <td class="text-center">{{report.company.postalCode | slice : 0 : 2}}</td>
+              <td class="text-center">
+                <span [tooltip]="companyTooltip">
+                  {{report.company.name}}
+                  <br />...
+                  <ng-template #companyTooltip>
+                    <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
+                    <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
+                    <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+                    <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+                    <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+                    <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+                    <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+                  </ng-template>
+                </span>
+              </td>
+              <td>
+                {{report.category}}
+                <br/>
+                <span *ngFor="let subcategory of report.subcategories">
+                  {{subcategory}}
+                  <br />
+                </span>
+              </td>
+              <td>
+                <ng-container *ngIf="report.detailInputValues && report.detailInputValues.length">
+                  <div [tooltip]="detailsTooltip">
+                    <span [innerHTML]="report.detailInputValues[0].label"></span>
+                    &nbsp;
+                    <span [innerHTML]="report.detailInputValues[0].value"></span>
+                    <br />...
+                  </div>
+                  <ng-template #detailsTooltip>
+                    <ng-container *ngFor="let detailInputValue of report.detailInputValues">
+                      <span class="font-weight-bold" [innerHTML]="detailInputValue.label"></span>
+                      &nbsp;
+                      <span class="mb-2" [innerHTML]="detailInputValue.value"></span>
+                      <br/>
+                    </ng-container>
+                  </ng-template>
+                </ng-container>
+              </td>
+              <td>{{report.consumer.firstName}} {{report.consumer.lastName}}<br />{{report.consumer.email}}</td>
+              <td class="text-center">
+                <span *ngFor="let file of report.uploadedFiles" [tooltip]="file.filename">
+                  <a href="{{getFileDownloadUrl(file)}}">
+                    {{file.displayedFilename}}
+                  </a>
+                  <br/>
+                </span>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+    </pagination>
+  </div>
+</div>
+
+
