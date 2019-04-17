@@ -7,6 +7,24 @@
     background-color: $lighter-grey;
   }
 
+  tr.hors-perimetre {
+    background: repeating-linear-gradient(
+        135deg,
+        rgba(235,239,243, 0.5),
+        rgba(235,239,243, 0.5) 10px,
+        rgba(250,251,252, 0.5) 10px,
+        rgba(250,251,252, 0.5) 20px
+    );
+  }
+
+  tr.a-contacter {
+    background-color: rgba(239,172,166,0.3);
+  }
+
+  tr:hover {
+    background-color: $lighter-blue;
+  }
+
   th, td {
     border-left: 1px solid #dee2e6;
   }

@@ -53,7 +53,7 @@
                 {{reportsByDate.date}}
               </td>
             </tr>
-            <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="openReport(report)">
+            <tr *ngFor="let report of reportsByDate.reports" [class]="getReportCssClass(report.statusPro)" (click)="openReport(report)">
               <td class="text-center">{{report.company.postalCode | slice : 0 : 2}}</td>
               <td class="text-center">
                 <span [tooltip]="companyTooltip">

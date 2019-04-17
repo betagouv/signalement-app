@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { Report } from '../../../../model/Report';
+import { Report, StatusPro } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
@@ -94,5 +94,20 @@ export class ReportListComponent implements OnInit {
 
   openReport(report: Report) {
     this.router.navigate(['suivi-des-signalements', report.id]);
+  }
+
+  getReportCssClass(status: StatusPro) {
+    let cssClass;
+    switch (status) {
+      case StatusPro['HORS-PERIMETRE']:
+        cssClass = `hors-perimetre`;
+        break;
+      case StatusPro['A-CONTACTER']:
+        cssClass = `a-contacter`;
+        break;
+      default:
+        break;
+    }
+    return `${cssClass} pointer`;
   }
 }
