@@ -46,7 +46,7 @@ export class ReportListComponent implements OnInit {
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
   currentPage: number;
-  itemsPerPage = 20;
+  itemsPerPage = 10;
   currentDepartment;
 
   constructor(private reportService: ReportService,

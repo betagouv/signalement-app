@@ -75,8 +75,14 @@
             Prénom : {{report.consumer.firstName}}
             <br />
             Email : {{report.consumer.email}}
-            <br />
-            Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
+            <div *ngIf="report.contactAgreement">
+              <span class="agreement">&#x2705;</span>
+              Contact pro accepté
+            </div>
+            <div *ngIf="!report.contactAgreement">
+              <span class="agreement">&#10060;</span>
+              Contact pro refusé
+            </div>
           </div>
         </div>
         <hr />

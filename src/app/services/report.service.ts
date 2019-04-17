@@ -174,6 +174,7 @@ export class ReportService {
         lastName: reportApi.lastName,
         email: reportApi.email
       }),
+      contactAgreement: reportApi.contactAgreement,
       uploadedFiles: reportApi.files.map(f => Object.assign(new UploadedFile(), f))
     });
   }

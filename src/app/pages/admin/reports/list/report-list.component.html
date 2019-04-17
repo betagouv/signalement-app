@@ -96,7 +96,19 @@
                   </ng-template>
                 </ng-container>
               </td>
-              <td>{{report.consumer.firstName}} {{report.consumer.lastName}}<br />{{report.consumer.email}}</td>
+              <td>
+                {{report.consumer.firstName}} {{report.consumer.lastName}}
+                <br />
+                {{report.consumer.email}}
+                <div *ngIf="report.contactAgreement">
+                  <span class="agreement">&#x2705;</span>
+                  Contact pro accepté
+                </div>
+                <div *ngIf="!report.contactAgreement">
+                  <span class="agreement">&#10060;</span>
+                  Contact pro refusé
+                </div>
+              </td>
               <td class="text-center">
                 <span *ngFor="let file of report.uploadedFiles" [tooltip]="file.filename">
                   <a href="{{getFileDownloadUrl(file)}}">
