@@ -1,20 +1,17 @@
 @import "../../../../../theme/variables";
 
+.table-responsive {
+  width: 98% !important;
+  margin-left: 1%;
+}
+
 .table {
 
-  th {
-    text-align: center;
-    background-color: $lighter-grey;
-  }
+  border: none;
 
-  tr.hors-perimetre {
-    background: repeating-linear-gradient(
-        135deg,
-        rgba(235,239,243, 0.5),
-        rgba(235,239,243, 0.5) 10px,
-        rgba(250,251,252, 0.5) 10px,
-        rgba(250,251,252, 0.5) 20px
-    );
+  th {
+    background-color: $lighter-grey;
+    border-bottom-width: 2px !important;
   }
 
   tr.a-contacter {
@@ -26,7 +23,15 @@
   }
 
   th, td {
-    border-left: 1px solid #dee2e6;
+    border: 1px solid #dee2e6;
+    padding: 0.25em 0.5em;
+    text-align: center;
+
+    &:last-of-type {
+      background-color: $white !important;
+      border: none;
+      vertical-align: middle;
+    }
   }
 
   td.report-group {

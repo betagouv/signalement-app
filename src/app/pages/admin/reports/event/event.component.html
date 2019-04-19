@@ -1,0 +1,42 @@
+<div class="modal__">
+  <form [formGroup]="eventForm" (submit)="submitEventForm()" id="eventForm">
+
+    <div class="form__group mt-4">
+      <div class="row">
+        <div class="col-12">
+          <label [class]="hasError(actionCtrl) ? 'error' : ''">
+            Action <span class="error">*</span>
+          </label>
+          <select [formControl]="actionCtrl">
+            <option *ngFor="let action of eventActions">
+              {{action}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form__group mt-4">
+      <div class="row">
+        <div class="col-12">
+          <label [class]="hasError(detailCtrl) ? 'error' : ''">
+            Détail <span class="error">*</span>
+          </label>
+          <textarea [formControl]="detailCtrl"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification error" *ngIf="showErrors && eventForm.invalid">
+      Veuillez renseigner les champs obligatoires.<br />
+    </div>
+
+    <div class="notification error" *ngIf="notYet">
+      Ca marchera bientôt, sois patient ;)<br />
+    </div>
+
+    <hr />
+    <button type="submit" class="btn btn-lg btn-primary" id="submitEventForm">
+      Enregistrer
+    </button>
+  </form>
+</div>

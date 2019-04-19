@@ -5,6 +5,8 @@ import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { EventComponent } from '../event/event.component';
 
 @Component({
   selector: 'app-report-list',
@@ -46,12 +48,16 @@ export class ReportListComponent implements OnInit {
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
   currentPage: number;
-  itemsPerPage = 10;
+  itemsPerPage = 20;
   currentDepartment;
+
+  bsModalRef: BsModalRef;
 
   constructor(private reportService: ReportService,
               private fileUploaderService: FileUploaderService,
-              private router: Router) { }
+              private router: Router,
+              private modalService: BsModalService) {
+}
 
   ngOnInit() {
     this.loadReports(1);
@@ -109,5 +115,10 @@ export class ReportListComponent implements OnInit {
         break;
     }
     return `${cssClass} pointer`;
+  }
+
+  addEvent(event$: Event, report: Report) {
+    event$.stopPropagation();
+    this.bsModalRef = this.modalService.show(EventComponent, {});
   }
 }

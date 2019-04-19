@@ -57,13 +57,18 @@
         <h5>Commerçant</h5>
         <div class="row">
           <div class="col-12">
-            <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
-            <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
-            <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
-            <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
-            <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
-            <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
-            <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+            Siret : {{report.company.siret}}
+            <br/>
+            Nom : {{report.company.name}}
+            <br/>
+            Adresse :
+            <span *ngIf="report.company.line1">{{report.company.line1}}</span>
+            <span *ngIf="report.company.line2">-{{report.company.line2}}</span>
+            <span *ngIf="report.company.line3">-{{report.company.line3}}</span>
+            <span *ngIf="report.company.line4">-{{report.company.line4}}</span>
+            <span *ngIf="report.company.line5">-{{report.company.line5}}</span>
+            <span *ngIf="report.company.line6">-{{report.company.line6}}</span>
+            <span *ngIf="report.company.line7">-{{report.company.line7}}</span>
           </div>
         </div>
         <hr />
@@ -75,14 +80,8 @@
             Prénom : {{report.consumer.firstName}}
             <br />
             Email : {{report.consumer.email}}
-            <div *ngIf="report.contactAgreement">
-              <span class="agreement">&#x2705;</span>
-              Contact pro accepté
-            </div>
-            <div *ngIf="!report.contactAgreement">
-              <span class="agreement">&#10060;</span>
-              Contact pro refusé
-            </div>
+            <br />
+            Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
           </div>
         </div>
         <hr />

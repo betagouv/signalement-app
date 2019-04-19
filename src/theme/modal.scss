@@ -1,0 +1,32 @@
+@import "../theme/variables";
+
+.modal__ {
+  border-radius: $theme-border-radius;
+  -webkit-box-shadow: $theme-box-shadow;
+  box-shadow: $theme-box-shadow;
+  background: $white;
+  padding: 1.5em;
+  max-width: 32em;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  .button__group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 1.5em;
+
+    .button {
+      margin: 0;
+    }
+
+    .button + .button {
+      margin-left: 1em;
+    }
+  }
+}

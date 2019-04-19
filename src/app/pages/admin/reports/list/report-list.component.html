@@ -33,7 +33,7 @@
   </div>
 </div>
 <div class="row pt-5">
-  <div class="col-12">
+  <div class="col-12 text-center">
     <div class="table-responsive">
       <table class="table">
         <thead>
@@ -44,21 +44,23 @@
             <th>Description</th>
             <th>Consommateur</th>
             <th>Pièces jointes</th>
+            <th>Statut</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let reportsByDate of reportsByDate">
             <tr>
-              <td colspan="8" class="report-group">
+              <td colspan="7" class="report-group">
                 {{reportsByDate.date}}
               </td>
+              <td></td>
             </tr>
             <tr *ngFor="let report of reportsByDate.reports" [class]="getReportCssClass(report.statusPro)" (click)="openReport(report)">
-              <td class="text-center">{{report.company.postalCode | slice : 0 : 2}}</td>
-              <td class="text-center">
+              <td>{{report.company.postalCode | slice : 0 : 2}}</td>
+              <td>
                 <span [tooltip]="companyTooltip">
                   {{report.company.name}}
-                  <br />...
                   <ng-template #companyTooltip>
                     <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
                     <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
@@ -71,12 +73,17 @@
                 </span>
               </td>
               <td>
-                {{report.category}}
-                <br/>
-                <span *ngFor="let subcategory of report.subcategories">
-                  {{subcategory}}
-                  <br />
-                </span>
+                <div [tooltip]="subcategoriesTooltip">
+                  {{report.category}}
+                </div>
+                <ng-template #subcategoriesTooltip>
+                  {{report.category}}
+                  <br/>
+                  <span *ngFor="let subcategory of report.subcategories">
+                    {{subcategory}}
+                    <br />
+                  </span>
+                </ng-template>
               </td>
               <td>
                 <ng-container *ngIf="report.detailInputValues && report.detailInputValues.length">
@@ -84,7 +91,6 @@
                     <span [innerHTML]="report.detailInputValues[0].label"></span>
                     &nbsp;
                     <span [innerHTML]="report.detailInputValues[0].value"></span>
-                    <br />...
                   </div>
                   <ng-template #detailsTooltip>
                     <ng-container *ngFor="let detailInputValue of report.detailInputValues">
@@ -97,25 +103,32 @@
                 </ng-container>
               </td>
               <td>
-                {{report.consumer.firstName}} {{report.consumer.lastName}}
-                <br />
-                {{report.consumer.email}}
-                <div *ngIf="report.contactAgreement">
-                  <span class="agreement">&#x2705;</span>
-                  Contact pro accepté
+                <div [tooltip]="consumerTooltip">
+                  {{report.consumer.email}}&nbsp;
+                  <span class="agreement" *ngIf="report.contactAgreement">&#x2705;</span>
+                  <span class="agreement" *ngIf="!report.contactAgreement">&#10060;</span>
                 </div>
-                <div *ngIf="!report.contactAgreement">
-                  <span class="agreement">&#10060;</span>
-                  Contact pro refusé
-                </div>
+                <ng-template #consumerTooltip>
+                  {{report.consumer.firstName}} {{report.consumer.lastName}}
+                  <br />
+                  {{report.consumer.email}}
+                  <br />
+                  Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
+                </ng-template>
               </td>
-              <td class="text-center">
+              <td>
                 <span *ngFor="let file of report.uploadedFiles" [tooltip]="file.filename">
                   <a href="{{getFileDownloadUrl(file)}}">
                     {{file.displayedFilename}}
                   </a>
                   <br/>
                 </span>
+              </td>
+              <td>
+                {{report.statusPro}}
+              </td>
+              <td>
+                <img alt="Icône du bouton ajouter" src="/assets/images/icon_add.png" (click)="addEvent($event, report)">
               </td>
             </tr>
           </ng-container>
