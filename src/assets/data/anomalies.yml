@@ -886,28 +886,30 @@ list:
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
-              - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
-                rank: 2
-                type: RADIO
-                options:
-                  - Oui
-                  - Non
-              - label: Quel est le nom et marque du produit&#160;?
-                rank: 3
-                type: TEXT
-                placeholder: Nom et marque du produit
               - label: De quelle publicité s'agit-il&#160;?
-                rank: 4
+                rank: 2
                 type: RADIO
                 options:
                   - Catalogue papier ou flyers
                   - Publicité sur internet
                   - Spot radio (à préciser)
                   - Spot télé (à préciser)
-                  - Autres (à préciser)
-              - label: Pour les publicités papier et internet, précisez si possible la publicité concernée en copiant ci-dessous le lien correspondant du site bonial ou envoyant une photo&#160;?
+                  - Autres (à préciser)                         
+              - label: Quel est le produit que vous vouliez&#160;?
+                rank: 3
+                type: TEXT
+                placeholder: Type, nom et marque du produit
+              - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
+                rank: 4
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+                optionnal: true 
+              - label: Précisez la publicité concernée en collant ci-dessous le lien issu du site Bonial ou en envoyant une photo&#160;? <a href="https://www.bonial.fr" target="_blank">site bonial.fr</a>
                 rank: 5
                 type: TEXT
+                placeholder: "Lien vers la publicité"
             fileLabel: Photo(s) de la publicité
           - title: Sur le menu ou la carte des prestations
             detailInputs:
@@ -942,25 +944,32 @@ list:
             rank: 1
             type: DATE
             defaultValue: SYSDATE
-          - label: Où se trouve cette information&#160;?
+          - label: Qu'es-ce qui est trompeur&#160;?
             rank: 2
             type: RADIO
             options:
-              - Sur l'emballage d'un produit
-              - Sur l'affichage chez le commerçant
-              - Dans un catalogue
-              - Sur un site internet (à préciser)
-              - Dans une spot télé ou radio
-              - Dans un contrat ou un devis
-              - Discours du vendeur
-              - Catalogue papier
-          - label: Pourquoi estimez-vous cela trompeur&#160;?
+              - L'emballage d'un produit (à préciser)
+              - Un affichage chez le commerçant
+              - Une annonce sur un catalogue
+              - Un site internet (à préciser)
+              - Un spot télé ou radio (à préciser)
+              - Un contrat ou un devis
+              - Le discours d'un vendeur ou du commercial
+              - La façon de mettre en vente
+              - Autres (à préciser)
+          - label: A propos de quoi est-ce trompeur&#160;?
             rank: 3
-            type: TEXT
-            placeholder: ''
-          - label: Merci de détailler au mieux la situation
+            type: RADIO
+            options:
+              - L'origine
+              - La composition
+              - Un label ou un certificat
+              - Une promesse de résultat
+              - Autres (à préciser)
+          - label: Pourquoi trouvez-vous ça trompeur ?
             rank: 4
             type: TEXTAREA
+            optionnal: true
           - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
             rank: 5
             type: RADIO

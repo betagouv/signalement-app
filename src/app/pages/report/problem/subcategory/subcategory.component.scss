@@ -9,10 +9,16 @@ h4 {
   label, h4 {
     color: $dark-grey;
   }
+
 }
 
 .subcategorySelected {
   background-color: $light-green;
+
+  label, h4 {
+    color: $black;
+  }
+
 }
 
 .scrollNotification {
@@ -26,7 +32,9 @@ h4 {
   margin-right: auto;
   margin-left: auto;
   padding: 0.5em;
-  width: fit-content;
+  width: 150px;
+  border-top-left-radius: $theme-border-radius;
+  border-top-right-radius: $theme-border-radius;
 
   img {
     height: 20px;
