@@ -17,6 +17,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { isPlatformBrowser } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+declare var jQuery: any;
+
 @Component({
   selector: 'app-subcategory',
   templateUrl: './subcategory.component.html',
@@ -27,7 +29,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
         opacity: 1
       })),
       state('hide',   style({
-        opacity: 0
+        opacity: 0,
       })),
       transition('show => hide', animate('700ms ease-out')),
       transition('hide => show', animate('700ms ease-in'))
@@ -77,7 +79,10 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   }
 
   scrollToElement() {
-    this.elementRef.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'start'});
+    jQuery('html, body').animate({
+      scrollTop: this.elementRef.nativeElement.offsetTop
+    }, 1000);
+
     this.scrollNotificationState = 'hide';
   }
 
