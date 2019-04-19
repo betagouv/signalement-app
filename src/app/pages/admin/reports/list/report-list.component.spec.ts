@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BsDropdownModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportListComponent } from './report-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -20,6 +20,7 @@ describe('ReportsComponent', () => {
         BsDropdownModule.forRoot(),
         HttpClientModule,
         RouterTestingModule,
+        ModalModule.forRoot(),
       ]
     })
     .compileComponents();
