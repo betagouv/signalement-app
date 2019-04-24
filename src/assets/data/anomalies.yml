@@ -384,16 +384,16 @@ list:
       - title: Problème sur l'étiquette / emballage
         example: 'Exemples : liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...'
         subcategories:
-          - title: Pas d'étiquetage ou informations absentes
+          - title: Informations manquantes ou pas d'étiquette du tout
             detailInputs:
               - label: Quel est-le problème&#160;?
                 rank: 1
                 type: RADIO
                 options:
-                  - Pas d'étiquetage
+                  - Pas d'étiquette du tout
                   - Date limite
                   - Allergènes
-                  - Composition
+                  - Liste des ingrédients
                   - Autre (à préciser)
               - label: Date du constat (ou d'achat suivant le cas)
                 rank: 2
@@ -438,6 +438,7 @@ list:
                 rank: 5
                 type: TEXTAREA
                 optionnal: true
+            fileLabel: Photos du produit (si possible tous les côtés)
           - title: Étiquetage uniquement en langue étrangère
             example: Aucune information traduite en français
             detailInputs:
