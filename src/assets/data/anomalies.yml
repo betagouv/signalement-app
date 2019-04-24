@@ -415,15 +415,29 @@ list:
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
-              - label: Type de produit
+              - label: De quel produit s'agit-il&#160;?
                 rank: 2
-                type: TEXT
-              - label: Nom /marque
+                type: RADIO
+                options:
+                - Alcool (vin, spiritueux...)
+                - Fruits et légumes
+                - Autres (à préciser)
+              - label: Nom  et marque du produit
                 rank: 3
                 type: TEXT
-              - label: Qu'avez-vous constaté&#160;?
+              - label: A propos de quoi est-ce trompeur&#160;?
                 rank: 4
+                type: RADIO
+                options:
+                - L'origine
+                - La composition
+                - Un label ou un certificat
+                - Une promesse de résultat
+                - Autres (à préciser)
+              - label: Pourquoi trouvez-vous ça trompeur&#160;?
+                rank: 5
                 type: TEXTAREA
+                optionnal: true
           - title: Étiquetage uniquement en langue étrangère
             example: Aucune information traduite en français
             detailInputs:
