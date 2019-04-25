@@ -149,22 +149,26 @@ list:
               - title: Des produits vendus à température ambiante
                 example: 'Exemples : chocolat, conserve, compote, petits pots...'
                 information:
-                  title: Ce n'est pas un motif de signalement.
-                  content: Les produits vendus à température ambiante comme de l'eau, des biscuits, des petits pots ou des conserves ont une date appelée date de durabilité minimale.
-                    <br/>Le commerçant peut vendre un produit avec cette date dépassée.
-                    <br/>Ces dates sont seulement une indication.
-                    <br/>Vous pouvez consommer le produit après cette date. Il n'est pas nécessaire de le jeter.
+                  title: Ce problème n'est pas un motif de signalement.
+                  content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
+                    <br/>Le commerçant a le droit de vendre un produit avec cette date dépassée.
+                    <br/>Cette date est seulement une indication. Au-delà de celle-ci, l'aliment peut perdre certaines de ses qualités gustatives ou nutritionnelles mais peut être consommé sans danger pour la santé. Il n'est pas nécessaire de le jeter.
+                  actions:
+                    - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
+                      answer: Contacter directement le service client de votre magasin pour leur expliquer.
           - title: Un produit périmé en particulier
             subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
             subcategories:
               - title: À consommer de préférence avant le...
                 example: C'est souvent le cas des produits vendus à température ambiante.
                 information:
-                  content: Les produits vendus à température ambiante comme les compotes, le chocolat, de l'eau, des biscuits ou des conserves ont une date de durabilité minimale.
-                    <br/>Le commercant peut vendre un produit avec cette date dépassée.
-                    <br/>Ces dates sont seulement une indication.
-                    <br/>Vous pouvez consommer le produit après cette date.
-                    <br/>Il n'est pas nécessaire de le jeter.
+                  title: Ce problème n'est pas un motif de signalement.
+                  content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement DLUO).
+                    <br/>Le commercant a le droit de vendre un produit avec cette date dépassée.
+                    <br/>Cette date est seulement une indication. Au-delà de celle-ci, l'aliment peut perdre certaines de ses qualités gustatives ou nutritionnelles mais peut être consommé sans danger pour la santé. Il n'est pas nécessaire de le jeter.
+                  actions:
+                    - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
+                      answer: Contacter directement le service client de votre magasin pour leur expliquer.
               - title: À consommer jusqu’au...
                 example: C'est souvent le cas des produits frais.
                 subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
@@ -204,7 +208,7 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo
-      - title: Problème avec le produit
+      - title: Problème de qualité
         example: 'Exemple : présence de moisissure'
         subcategoriesTitle: Quel est-le problème&#160;?
         subcategories:
@@ -381,8 +385,8 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-      - title: Problème sur l'étiquette / emballage
-        example: 'Exemples : liste des ingrédients non disponible, mention des allergènes non conforme, logo trompeur...'
+      - title: Problème avec l'emballage ou l'étiquette
+        example: 'Exemples : liste des ingrédients manquante, logo trompeur...'
         subcategories:
           - title: Informations manquantes ou pas d'étiquette du tout
             detailInputs:
