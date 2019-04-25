@@ -209,7 +209,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo
       - title: Problème de qualité
-        example: 'Exemple : présence de moisissure'
+        example: 'Exemple : présence de moisissure...'
         subcategoriesTitle: Quel est-le problème&#160;?
         subcategories:
           - title: Moisissure
@@ -245,6 +245,7 @@ list:
                   - label: Numéro de lot
                     rank: 4
                     type: TEXT
+                    placeholder: il est imprimé sur l'emballage ou près de la date de consommation
                   - label: Date limite
                     rank: 5
                     type: DATE
@@ -286,6 +287,7 @@ list:
                   - label: Numéro de lot
                     rank: 4
                     type: TEXT
+                    placeholder: il est imprimé sur l'emballage ou près de la date de consommation
                   - label: Date limite
                     rank: 5
                     type: DATE
@@ -328,6 +330,7 @@ list:
                   - label: Numéro de lot
                     rank: 4
                     type: TEXT
+                    placeholder: il est imprimé sur l'emballage ou près de la date de consommation
                   - label: Date limite
                     rank: 5
                     type: DATE
@@ -340,10 +343,9 @@ list:
             example: 'Exemples : bout de verre, morceau de métal...'
             information:
               title: Vous souhaitez signaler la présence d'un corps étranger "dur"
-              subTitle: Ce cas représente une alerte et nécessite une analyse individualisée.
               actions:
-                - question: Signaler la présence d'un corps étranger "dur"?
-                  answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4211" target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
+                - question: Ce cas représente une alerte et nécessite une analyse individualisée.
+                  answer: Signaler-le sur<br><a href="https://www.economie.gouv.fr/courrier/4211" target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
           - title: Autre
             subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
