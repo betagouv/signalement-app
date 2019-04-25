@@ -140,9 +140,9 @@ list:
                   - title: Non pas encore (mais bientôt)
                     information:
                       title: Il est autorisé de vendre un produit jusqu’au jour de la date limite de consommation.
-                      content: "Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril."
-                        <br/>Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
-                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation. 
+                      content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
+                        <br/>Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n''est pas une obligation.
+                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n''est pas une obligation. 
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service consommateur de votre magasin pour leur proposer.
