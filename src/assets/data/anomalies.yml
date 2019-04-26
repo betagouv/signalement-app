@@ -562,13 +562,13 @@ list:
         example: 'Exemples : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
         subcategories:
           - title: Pas d’étiquetage ou informations absentes
-            description: 'Certaines informations sont obligatoires.
+            description: "Certaines informations sont obligatoires.
               <br/>Par exemple :
               <ul>
                 <li>Vêtements : la composition des tissus (noms et proportions des matières)...</li>
-                <li>Meubles : la composition, la taille, s''il faut le monter soi-même, de quel cuir il s’agit...</li>
-                <li>Electroménagers: l''étiquetage énergétique, la disponibilité des pièces de rechange...</li>
-              </ul>'
+                <li>Meubles : la composition, la taille, s'il faut le monter soi-même, de quel cuir il s'agit...</li>
+                <li>Electroménagers: l'étiquetage énergétique, la disponibilité des pièces de rechange...</li>
+              </ul>"
             detailInputs:
               - label: Quel est-le problème&#160;?
                 rank: 1
@@ -788,20 +788,20 @@ list:
                 type: TEXTAREA
       - title: Prix exagéré ou plus cher qu'ailleurs
         information:
-          title: Les prix sont chois librement par les commerçants.
-          content: 'Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d’acheter ou de commander.
+          title: Les prix sont choisis librement par les commerçants.
+          content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte des boissons.
             <br/><br/><b>Cas particulier !</b>
             <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
-            <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d''urgence sans vous avoir averti avant.
-            <br />Si c’est votre cas, vous devez faire une réclamation avec ce formulaire : Contact Abus de faiblesse'
+            <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.
+            <br />Si c’est votre cas, vous devez faire une réclamation avec ce formulaire : Contact Abus de faiblesse"
       - title: Fausse réduction de prix
         example: 'Exemple : fausse promotion pendant les soldes ou une liquidation totale'
-        description: '<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l''entreprise
+        description: "<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l'entreprise
           <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
-          Une copie du récépissé de déclaration doit être affichée sur le lieu de vente, pendant toute la durée de la liquidation, de manière à être lisible et visible depuis la voie publique.'
+          Une copie du récépissé de déclaration doit être affichée sur le lieu de vente, pendant toute la durée de la liquidation, de manière à être lisible et visible depuis la voie publique."
         detailInputs:
-          - label: 'Il s''agit d''un problème sur :'
+          - label: "Il s'agit d'un problème sur :"
             rank: 1
             type: RADIO
             options:
@@ -838,8 +838,8 @@ list:
                         <br/>Le paiement de plus de 50 pièces pour un seul paiement peut être refusé.
                   - title: Autre
               - title: Refus de payer par CB / chèque
-                example: 'Le commerçant peut refuser les chèques ou la carte bancaire. Dans ce cas, il doit l''indiquer très visiblement au consommateur (affichage à l''entrée du magasin ou à la caisse, sur une carte du restaurant..)
-                  <br/>Bon à savoir: le vendeur a le droit de demander une pièce d''identité ou un montant minimum pour ce type de paiement.'
+                example: "Le commerçant peut refuser les chèques ou la carte bancaire. Dans ce cas, il doit l'indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant..)
+                  <br/>Bon à savoir: le vendeur a le droit de demander une pièce d'identité ou un montant minimum pour ce type de paiement."
                 subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
                 subcategories:
                   - title: Il exige un minimum d'achat
@@ -989,8 +989,8 @@ list:
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
               - title: Il y a moins de 2 ans
-                description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets.
-                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                description: "Le vendeur a l'obligation de garantir 2 ans le fonctionnement normal de tous les objets.
+                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l'avez mal utilisé (exemple : vous avez marché sur votre téléphone)."
                 detailTitle: Problème de garantie légale
                 detailInputs:
                   - label: Date d'achat
@@ -1048,19 +1048,19 @@ list:
                       subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                       actions:
                         - question: Un problème avec un commerçant&#160;?
-                          example: 'Vous souhaitez attaquer l''entreprise pour "vices cachées "?
-                            <br/><br/>Un vice caché d''un produit est un défaut :
+                          example: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\" ?
+                            <br/><br/>Un vice caché d'un produit est un défaut :
                             <ul>
                               <li>présent dès le départ qui rend le produit inutilisable et</li>
-                              <li>que vousne connaissiez pas quand vous avez acheté le produit.</li>
-                            </ul>'
+                              <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                            </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
           - title: Occasion
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
               - title: Il y a moins de 6 mois
-                description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets.
-                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                description: "Le vendeur a l'obligation de garantir 6 mois le fonctionnement normal de tous les objets.
+                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l'avez mal utilisé (exemple : vous avez marché sur votre téléphone)."
                 detailTitle: Problème de garantie légale
                 detailInputs:
                   - label: Date d'achat
@@ -1118,12 +1118,12 @@ list:
                       subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                       actions:
                         - question: Un problème avec un commerçant&#160;?
-                          example: 'Vous souhaitez attaquer l''entreprise pour "vices cachées "?
-                            <br/><br/>Un vice caché d''un produit est un défaut :
+                          example: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\" ?
+                            <br/><br/>Un vice caché d'un produit est un défaut :
                             <ul>
                               <li>présent dès le départ qui rend le produit inutilisable et</li>
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
-                            </ul>'
+                            </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
       - title: Refus de rembourser un achat ou d'annuler un contrat
         example: Vêtement trop petit, cadeau en doublon, changement d'avis, prix moins cher ailleurs
