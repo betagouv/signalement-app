@@ -1005,7 +1005,7 @@ list:
     withInternetPurchase: true
     icon: icon_service.png
     subcategories:
-      - title: Refus de reprendre un produit défectueux
+      - title: Problème de garantie
         example: 'Exemple : le commerçant refuse de me prendre mon achat encore sous garantie'
         subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
         subcategories:
@@ -1154,12 +1154,12 @@ list:
         subcategoriesTitle: Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat&#160;?
         subcategories:
           - title: Dans un magasin dans lequel vous vous êtes rendu
-            example: 'Exemple : affiche à la caisse du magasin'
-            subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?
+            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ? 
             subcategories:
-              - title: Oui
-                subcategoriesTitle: Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?
-                subcategories:
+              - title: Il est défecteux et je ne l'avais pas vu
+              - title: Autre raison
+                example: Vêtement trop petit, cadeau en doublon, j'ai changé d'avis, prix moins cher ailleurs
+                subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.</br>Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles? Les conditions sont souvent affichées près des caisses ou sur le ticket de caisse.&#160;?
                   - title: Oui
                     description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
                   - title: Non
@@ -1296,8 +1296,8 @@ list:
                     type: TEXT
                     placeholder: Entreprise de livraison
               - title: D'un colis envoyé entre particuliers
-      - title: Service client / SAV fantôme
-        example: 'Exemples : le SAV (service après vente) ou le service client est inexistant, aucun retour du SAV malgré mes relances ...'
+      - title: Pas de réponse du service client / service après-vente
+        example: 'Exemples : le SAV (service après vente) est inexistant, aucun retour du SAV malgré mes relances ...'
       - title: Personnel peu aimable
         example: 'Exemples : l''accueil est froid, le personnel est mal poli'
         information:
