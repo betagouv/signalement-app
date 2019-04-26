@@ -1160,6 +1160,7 @@ list:
               - title: Autre raison
                 example: Vêtement trop petit, cadeau en doublon, j'ai changé davis, prix moins cher ailleurs
                 subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles. Les conditions sont souvent affichées près des caisses ou sur le ticket de caisse.&#160;?
+                subcategories:
                   - title: Oui
                     description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
                   - title: Non
