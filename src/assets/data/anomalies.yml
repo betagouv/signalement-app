@@ -1158,24 +1158,15 @@ list:
             subcategories:
               - title: Il est défecteux et je ne l'avais pas vu
               - title: Autre raison
-                example: Vêtement trop petit, cadeau en doublon, j'ai changé d'avis, prix moins cher ailleurs
-                subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.</br>Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles? Les conditions sont souvent affichées près des caisses ou sur le ticket de caisse.&#160;?
+                example: Vêtement trop petit, cadeau en doublon, j'ai changé davis, prix moins cher ailleurs
+                subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles. Les conditions sont souvent affichées près des caisses ou sur le ticket de caisse.&#160;?
                   - title: Oui
                     description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
                   - title: Non
                     information:
-                      title: Le commerçant est libre de choisir les conditions d'échange ou de remboursement.
-                      content: 'Par exemple, ces affiches sont autorisées :
-                        <ul>
-                          <li>"remboursement sous 5 jours"</li>
-                          <li>"avoir seulement"</li>
-                          <li>"échange possible, pas de remboursement"</li>
-                        </ul>'
-              - title: Non
-                information:
-                  title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
-                  content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
-                    <br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                        <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
           - title: Sur internet
             description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
               <br />Vous n’avez pas à vous justifier auprès du commerçant.
