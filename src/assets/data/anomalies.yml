@@ -809,7 +809,7 @@ list:
             <br/><br/><b>Cas particulier !</b>
             <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
             <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.
-            <br/> 'Si c’est votre cas, vous devez faire une réclamation avec ce formulaire :'<a href='https://www.economie.gouv.fr/courrier/4191' target='_blank'> https://www.economie.gouv.fr/courrier/491</a>"
+            <br/> Si c’est votre cas, vous devez faire une réclamation avec ce formulaire :<a href='https://www.economie.gouv.fr/courrier/4191' target='_blank'> https://www.economie.gouv.fr/courrier/491</a>"
       - title: Fausse réduction de prix
         example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
         description: "<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l'entreprise
@@ -920,9 +920,9 @@ list:
                 options:
                   - Oui
                   - Non
-                  - "Je n'ai pas demandé"
+                  - "je n'ai pas demandé"
                 optionnal: true 
-              - label: Précisez la publicité concernée en collant ci-dessous le lien issu du site Bonial ou en envoyant une photo&#160;? <a href="https://www.bonial.fr" target="_blank">site bonial.fr</a>
+              - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur ce site  pa&#160;? <a href="https://www.bonial.fr" target="_blank">site bonial.fr</a>
                 rank: 5
                 type: TEXT
                 placeholder: "Lien vers la publicité"
