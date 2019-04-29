@@ -499,8 +499,8 @@ list:
                   - label: Quelle erreur a été constatée&#160;?
                     rank: 4
                     type: TEXTAREA
-              - title: Un produit emballé et étiqueté par le magasin comme une barquette de viande.
-                example: 'La quantité est sur une étiquette collée par le commerçant'
+              - title: Un produit emballé et étiqueté par le magasin comme une barquette de viande
+                example: 'La quantité est marquée sur une étiquette collée par le commerçant'
                 description: La quantité annoncée correspond à la quantité que vous devez avoir au minimum.
                 detailInputs:
                   - label: Date du constat ou d'achat
@@ -545,8 +545,8 @@ list:
               answer: Si vous trouvez que le plat n'est pas frais ou pas assez chaud, vous pouvez demander que l'on vous remplace le plat.
                 <br/>Si votre vin est bouchonné, vous pouvez demander à le changer.
                 <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.
-      - title: Produit en retrait / rappel
-        example: Le produit vendu fait l'objet d'une mesure de retrait/rappel des autorités
+      - title: Produit rappelé toujours en vente
+        example: Le produit fait l'objet d'une mesure de rappel des autorités
         detailInputs:
           - label: Date du constat
             rank: 1
@@ -662,7 +662,7 @@ list:
                 rank: 4
                 type: TEXTAREA
       - title: Effet indésirable sur la santé
-        example: 'Exemples : brûlure, picotement, démangeaison, allergie'
+        example: 'Exemples : brûlure, picotement, démangeaisons, allergie'
         information:
           title: Vous souhaitez signaler un effet indésirable sur la santé
           subTitle: Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
@@ -736,8 +736,8 @@ list:
     withInternetPurchase: true
     icon: icon_price.png
     subcategories:
-      - title: Prix pas affiché ou prix incomplet
-        example: 'Exemples : prix qui manque en rayon, supplément "terrasse" non annoncé avant'
+      - title: Prix pas affiché ou prix augmenté par la suite
+        example: 'Exemples : prix qui manque en rayon, supplément "terrasse" non annoncé avant...'
         description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
         detailInputs:
           - label: Veuillez préciser
