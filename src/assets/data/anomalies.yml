@@ -131,7 +131,7 @@ list:
             subcategoriesTitle: Quels sont les produits concernés&#160;?
             subcategories:
               - title: Des produits vendus au rayon frais
-                example: 'Exemples : viande, poisson, quiche, jambon...'
+                example: 'Exemple : viande, poisson, quiche, jambon...'
                 subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
                 subcategories:
                   - title: Oui
@@ -147,7 +147,7 @@ list:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service consommateur de votre magasin pour leur proposer.
               - title: Des produits vendus à température ambiante
-                example: 'Exemples : chocolat, conserve, compote, petits pots...'
+                example: 'Exemple : chocolat, conserve, compote, petits pots...'
                 information:
                   title: Ce problème n'est pas un motif de signalement.
                   content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
@@ -297,7 +297,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
           - title: Présence anormale de quelque chose de "mou"
-            example: 'Exemples: morceau de gant, morceau de tissus..'
+            example: 'Exemple : morceau de gant, morceau de tissus..'
             subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
               - title: Un produit vendu sans emballage
@@ -340,7 +340,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
           - title: présence anormal de quelque chose de "dur"
-            example: 'Exemples : bout de verre, morceau de métal...'
+            example: 'Exemple : bout de verre, morceau de métal...'
             information:
               title: Vous souhaitez signaler la présence d'un corps étranger "dur"
               actions:
@@ -388,7 +388,7 @@ list:
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
       - title: Problème avec l'emballage ou l'étiquette
-        example: 'Exemples : liste des ingrédients manquante, logo trompeur...'
+        example: 'Exemple : liste des ingrédients manquante, logo trompeur...'
         subcategories:
           - title: Informations manquantes
             detailInputs:
@@ -463,7 +463,7 @@ list:
                 type: TEXTAREA
           - title: Autres problèmes d'étiquette ou emballage
       - title: Problème de quantité
-        example: 'Exemples : poids indiqué non conforme, balance non tarée...'
+        example: 'Exemple : poids indiqué non conforme, balance non tarée...'
         subcategories:
           - title: Le commerçant n'effectue pas la tare lors de la pesée
             example: Tarer une balance signifie imposer la valeur zéro sur une balance alors qu'il y a un emballage dessus, pour ne peser que le contenu.
@@ -519,7 +519,7 @@ list:
                     rank: 4
                     type: TEXTAREA
               - title: Un produit sans emballage, directement consommé
-                example: 'Exemples : verre de vin dans un café, plat au restaurant'
+                example: 'Exemple : verre de vin dans un café, plat au restaurant'
                 description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
                 detailInputs:
                   - label: Date du constat ou d'achat
@@ -574,7 +574,7 @@ list:
     icon: icon_material.png
     subcategories:
       - title: Étiquetage et notice
-        example: 'Exemples : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
+        example: 'Exemple : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
         subcategories:
           - title: Pas d’étiquetage ou informations absentes
             description: "Certaines informations sont obligatoires.
@@ -639,7 +639,7 @@ list:
                 information:
                   title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
           - title: Informations trompeuses ou fausses
-            example: 'Exemples : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas ...'
+            example: 'Exemple : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas ...'
             detailInputs:
               - label: Quel est le type de produit&#160;?
                 rank: 1
@@ -662,7 +662,7 @@ list:
                 rank: 4
                 type: TEXTAREA
       - title: Effet indésirable sur la santé
-        example: 'Exemples : brûlure, picotement, démangeaisons, allergie'
+        example: 'Exemple : brûlure, picotement, démangeaisons, allergie...'
         information:
           title: Vous souhaitez signaler un effet indésirable sur la santé
           subTitle: Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
@@ -670,7 +670,7 @@ list:
             - question: Signaler un effet indésirable sur la santé&#160;?
               answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
       - title: Produit dangereux
-        example: 'Exemples : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...'
+        example: 'Exemple : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...'
         information:
           title: Vous souhaitez signaler un produit dangereux
           subTitle: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
@@ -737,7 +737,7 @@ list:
     icon: icon_price.png
     subcategories:
       - title: Prix pas affiché ou prix augmenté par la suite
-        example: 'Exemples : prix qui manque en rayon, supplément "terrasse" non annoncé avant...'
+        example: 'Exemple : prix qui manque en rayon, supplément "terrasse" non annoncé avant...'
         description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
         detailInputs:
           - label: Veuillez préciser
@@ -809,7 +809,7 @@ list:
             <br/><br/><b>Cas particulier !</b>
             <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
             <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.
-            <br />Si c’est votre cas, vous devez faire une réclamation avec ce formulaire : Contact Abus de faiblesse"
+            <br/> 'Si c’est votre cas, vous devez faire une réclamation avec ce formulaire :'<a href='https://www.economie.gouv.fr/courrier/4191' target='_blank'> https://www.economie.gouv.fr/courrier/491</a>"
       - title: Fausse réduction de prix
         example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
         description: "<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l'entreprise
@@ -870,13 +870,13 @@ list:
                     subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
                     subcategories:
                       - title: Oui
-                        example: 'Exemple : sur une affiche au niveau des caisses'
+                        example: 'Exemple : sur une affiche au niveau des caisses...'
                         information:
                           title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
                           content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
                       - title: Non
                   - title: Autres
-                    example: 'Exemple : problème avec le terminal de paiement'
+                    example: 'Exemple : problème avec le terminal de paiement...'
           - title: Autres problèmes de prix ou paiement
             subcategoriesTitle: 'Problème avec :'
             subcategories:
@@ -1000,7 +1000,7 @@ list:
     icon: icon_service.png
     subcategories:
       - title: Problème de garantie
-        example: 'Exemple : le commerçant refuse de me prendre mon achat encore sous garantie'
+        example: 'Exemple : le commerçant refuse de me prendre mon achat encore sous garantie...'
         subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
         subcategories:
           - title: Neuf
@@ -1036,7 +1036,7 @@ list:
                 subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                 subcategories:
                   - title: Oui
-                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                    example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
                     subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
                       <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                     subcategories:
@@ -1106,7 +1106,7 @@ list:
                 subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                 subcategories:
                   - title: Oui
-                    example: 'Exemples : garantie conventionnelle, garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                    example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
                     subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
                       <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                     subcategories:
@@ -1144,7 +1144,7 @@ list:
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
       - title: Problème de livraison
-        example: 'Exemples : colis perdu et non reçu, livraison tardive, colis abimé...'
+        example: 'Exemple : colis perdu et non reçu, livraison tardive, colis abimé...'
         subcategoriesTitle: Quel est le problème&#160;?
         subcategories:
           - title: Colis non reçu ou perdu
@@ -1254,7 +1254,7 @@ list:
               - title: Il est défecteux et je ne l'avais pas vu
               - title: Autre raison
                 example: j'ai trouvé mieux ou moins cher ailleurs, je regrette mon achat
-                subcategoriesTitle: Le remboursement ou la reprise d'un article lors d'un salon n'est pas une obligation.Vous êtes vous assuré que le commerçant proposait l'échange ou le remboursement des articles ?&#160;?
+                subcategoriesTitle: Le remboursement ou la reprise d'un article lors d'un salon n'est pas une obligation.</br>Vous êtes vous assuré que le commerçant proposait l'échange ou le remboursement des articles&#160;?
                 subcategories:
                   - title: Oui
                     description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
@@ -1274,9 +1274,9 @@ list:
                 information:
                   title: Ceci ne constitue pas un motif de signalement.
       - title: Pas de réponse du service client / service après-vente
-        example: 'Exemples : le SAV (service après vente) est inexistant, aucun retour du SAV malgré mes relances ...'
+        example: 'Exemple : le SAV (service après vente) est inexistant, aucun retour du SAV malgré mes relances...'
       - title: Personnel peu aimable
-        example: 'Exemples : l''accueil est froid, le personnel est mal poli'
+        example: 'Exemple : l''accueil est froid, le personnel est mal poli...'
         information:
           title: Ceci ne constitue pas un motif de signalement.
           subTitle: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
