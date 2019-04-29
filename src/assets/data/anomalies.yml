@@ -920,6 +920,7 @@ list:
                 options:
                   - Oui
                   - Non
+                  - "Je n'ai pas demandé"
                 optionnal: true 
               - label: Précisez la publicité concernée en collant ci-dessous le lien issu du site Bonial ou en envoyant une photo&#160;? <a href="https://www.bonial.fr" target="_blank">site bonial.fr</a>
                 rank: 5
