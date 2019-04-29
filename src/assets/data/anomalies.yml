@@ -886,8 +886,7 @@ list:
       - title: Problème de facture/ticket de caisse
   - category: Publicité
     categoryId: PUB
-    description: promotion indiquée dans le catalogue non disponible en magasin, publicité
-      trompeuse...
+    description: Information trompeuse, produit en promotion pas disponible...
     rank: 6
     withInternetPurchase: true
     icon: icon_pub.png
