@@ -103,7 +103,7 @@ list:
             options:
               - Vitrine ou réfrigérateur trop chaud, cassé ou en panne
               - Stockage à température ambiante de produits frais ou congelés
-              - Transport à température ambiante de produit frais ou congelés
+              - Transport à température ambiante de produits frais ou congelés
               - Autre problème de température
           - label: Pour corriger ce problème, dites-nous en plus
             rank: 2
@@ -300,7 +300,7 @@ list:
             example: 'Exemples: morceau de gant, morceau de tissus..'
             subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
-              - title: Un produit vendu sans emballage.
+              - title: Un produit vendu sans emballage
                 example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
                 detailInputs:
                   - label: Nom du produit
@@ -349,7 +349,7 @@ list:
           - title: Autre
             subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
-              - title: Un produit vendu sans emballage.
+              - title: Un produit vendu sans emballage
                 example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
                 detailInputs:
                   - label: Nom du produit
@@ -360,7 +360,7 @@ list:
                     type: DATE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
-              - title: Un produit vendu dans un emballage.
+              - title: Un produit vendu dans un emballage
                 example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
                 detailInputs:
                   - label: 'C''est un produit vendu&#160;:'
@@ -390,7 +390,7 @@ list:
       - title: Problème avec l'emballage ou l'étiquette
         example: 'Exemples : liste des ingrédients manquante, logo trompeur...'
         subcategories:
-          - title: Informations manquantes ou pas d'étiquette du tout
+          - title: Informations manquantes
             detailInputs:
               - label: Quel est-le problème&#160;?
                 rank: 1
@@ -445,7 +445,7 @@ list:
                 type: TEXTAREA
                 optionnal: true
             fileLabel: Photos du produit (si possible tous les côtés)
-          - title: Étiquetage uniquement en langue étrangère
+          - title: Informations sur l'emballage uniquement en langue étrangère
             example: Aucune information traduite en français
             detailInputs:
               - label: Date du constat (ou d'achat suivant le cas)
@@ -461,11 +461,11 @@ list:
               - label: Qu'avez-vous constaté&#160;?
                 rank: 4
                 type: TEXTAREA
-          - title: Autres problèmes d'étiquetage
+          - title: Autres problèmes d'étiquette ou emballage
       - title: Problème de quantité
         example: 'Exemples : poids indiqué non conforme, balance non tarée...'
         subcategories:
-          - title: Le commerçant n'effectue pas la tare lors de la pesée.
+          - title: Le commerçant n'effectue pas la tare lors de la pesée
             example: Tarer une balance signifie imposer la valeur zéro sur une balance alors qu'il y a un emballage dessus, pour ne peser que le contenu.
             description: La tare peut aussi être enregistrée préalablement. Vous ne voyez donc pas toujours la manipulation alors que la tare est bien effectuée.
             detailInputs:
@@ -474,16 +474,15 @@ list:
                 type: TEXT
                 placeholder: lieu
                 optionnal: true
-          - title: Le volume/poids/nombre annoncé est non conforme.
-            subcategoriesTitle: Comment est emballé le produit&#160;?
+          - title: La quantité annoncée est non conforme
+            subcategoriesTitle: Quel est le type de produit&#160;?
             subcategories:
-              - title: Dans un emballage classique avec un poids / volume imprimé et identique sur tous les produits
-                example: 'Exemples : paquet, bouteille,conserve, filet de clémentines'
-                description: Le poids/volume indiqué sur l'emballage est la moyenne des poids des produits qui ont été produits.
-                  <br/>Le poids/volume n'est donc pas forcément celui du produit que vous avez acheté.
-                  <br/>Des petites différences en plus ou en moins sont autorisées sur un nombre limité de produits.
-                  <br/>Ces différences sont encadrées.
+              - title: Un produit emballé par le fabricant comme une boîte de conserve, un paquet, une bouteille
+                example: 'La quantité est directement imprimée sur l''emballage par le fabricant'
+                description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
+                  <br/>Par contre, ces différences sont encadrées par la loi.
                   <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
+                  <br/>Pour en savoir plus (lien)
                 detailInputs:
                   - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
                     rank: 1
@@ -500,9 +499,9 @@ list:
                   - label: Quelle erreur a été constatée&#160;?
                     rank: 4
                     type: TEXTAREA
-              - title: Dans un emballage fait par le magasin et dont la quantité peut varier suivant celui que l'on choisit
-                example: 'Exemples : barquette de viande, barquette de poisson boite de croissant'
-                description: Le poids/volume annoncé correspond au poids/volume minimum que vous devez avoir.
+              - title: Un produit emballé et étiqueté par le magasin comme une barquette de viande.
+                example: 'La quantité est sur une étiquette collée par le commerçant'
+                description: La quantité annoncée correspond à la quantité que vous devez avoir au minimum.
                 detailInputs:
                   - label: Date du constat ou d'achat
                     rank: 1
@@ -519,9 +518,9 @@ list:
                   - label: Description
                     rank: 4
                     type: TEXTAREA
-              - title: Pas emballé mais servi directement
-                example: 'Exemples : verre de vin, plat au restaurant'
-                description: Le poids/volume annoncé correspond au poids/volume minimum que vous devez avoir.
+              - title: Un produit sans emballage, directement consommé
+                example: 'Exemples : verre de vin dans un café, plat au restaurant'
+                description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
                 detailInputs:
                   - label: Date du constat ou d'achat
                     rank: 1
@@ -530,13 +529,8 @@ list:
                   - label: Nom du produit
                     rank: 2
                     type: TEXT
-                  - label: Elements d'identification (date limite, n° de lot)
-                    rank: 3
-                    type: TEXT
-                    optionnal: true
-                    placeholder: Elements d'identification
                   - label: Description
-                    rank: 4
+                    rank: 3
                     type: TEXTAREA
           - title: Autre
       - title: Produit pas bon
