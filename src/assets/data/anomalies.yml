@@ -132,20 +132,21 @@ list:
             subcategories:
               - title: Des produits vendus au rayon frais
                 example: 'Exemple : viande, poisson, quiche, jambon...'
-                subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
+                subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
                 subcategories:
                   - title: Oui
-                    detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
-                    description: Après cette date, il est dangereux de consommer le produit.
-                  - title: Non pas encore (mais bientôt)
+                    detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée. 
+                        <br/>Après cette date, il est dangereux de consommer le produit.
+                    description: Les dates "DLC" concernent surtout des produits frais.
+                  - title: Non
                     information:
-                      title: Il est autorisé de vendre un produit jusqu’au jour de la date limite de consommation.
+                      title: Le commerçant n'a pas le droit de vendre un produit si la date limite de consommation (DLC) est passée.
                       content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
-                        <br/>Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n''est pas une obligation.
-                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n''est pas une obligation. 
+                        <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
+                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation. 
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
-                          answer: Contacter directement le service consommateur de votre magasin pour leur proposer.
+                          answer: Contacter directement le service client de votre magasin pour leur proposer.
               - title: Des produits vendus à température ambiante
                 example: 'Exemple : chocolat, conserve, compote, petits pots...'
                 information:
@@ -185,21 +186,23 @@ list:
                         rank: 2
                         type: DATE
                     fileLabel: Photo de la DLC / du produit / de la marque
-                  - title: Non pas encore (mais bientôt)
+                  - title: Non
                     information:
-                      title: Il est autorisé de vendre un produit jusqu’au jour indiqué sur l'étiquette de la DLC.
-                      content: Le commerçant peut choisir de proposer une réduction de prix pour les dates "courtes" mais ce n'est pas une obligation.
+                      title: Le commerçant n'a pas le droit de vendre un produit si la date limite de consommation (DLC) est passée.
+                      content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
+                        <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
+                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation.
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
               - title: Cas particulier des oeufs
                 detailInputs:
-                  - label: La date est-elle ?
+                  - label: Quel est le problème ?
                     rank: 1
                     type: RADIO
                     options:
-                      - Dépassée
-                      - Dans moins de 7 jours
+                      - La date est dépassée
+                      - La date sera dépassée dans moins de 7 jours
                   - label: Date de consommation recommandée
                     rank: 2
                     type: DATE
@@ -245,7 +248,7 @@ list:
                   - label: Numéro de lot
                     rank: 4
                     type: TEXT
-                    placeholder: il est imprimé sur l'emballage ou près de la date de consommation
+                    placeholder: Il est imprimé sur l'emballage ou près de la date de consommation
                   - label: Date limite
                     rank: 5
                     type: DATE
@@ -566,17 +569,17 @@ list:
             rank: 5
             type: TEXTAREA
       - title: Autre problème de nourriture
-  - category: Matériel / Objet
+  - category: Matériel et objets
     categoryId: MATOS
-    description: Problème avec une notice ou un appareil, étiquetage incomplet...
+    description: Problème avec une notice ou un appareil...
     rank: 3
     withInternetPurchase: true
     icon: icon_material.png
     subcategories:
-      - title: Étiquetage et notice
-        example: 'Exemple : étiquette / affichette en magasin absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
+      - title: Informations du produit et notice
+        example: 'Exemple : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
         subcategories:
-          - title: Pas d’étiquetage ou informations absentes
+          - title: Informations manquantes
             description: "Certaines informations sont obligatoires.
               <br/>Par exemple :
               <ul>
@@ -614,7 +617,7 @@ list:
                 rank: 5
                 type: TEXTAREA
             fileLabel: Photos du code barre / n° de lot / référence
-          - title: Étiquetage ou notice uniquement en langue étrangère
+          - title: Informations du produit ou notice uniquement en langue étrangère
             example: Aucune information traduite en français
             subcategoriesTitle: Où avez-vous acheté votre produit&#160;?
             subcategories:
@@ -836,7 +839,7 @@ list:
         subcategories:
           - title: Refus d'un moyen de paiement
             subcategories:
-              - title: Refus de payer en espèces
+              - title: Le commerçant refuse le paiement en espèces
                 subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
                 subcategories:
                   - title: Il refuse tout paiement en espèces
@@ -852,7 +855,7 @@ list:
                       content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
                         <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
                   - title: Autre
-              - title: Refus de payer par CB / chèque
+              - title: Le commerçant refuse la carte bancaire ou les chèques
                 example: "Le commerçant peut refuser les chèques ou la carte bancaire. Dans ce cas, il doit l'indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant..)
                   <br/>Bon à savoir: le vendeur a le droit de demander une pièce d'identité ou un montant minimum pour ce type de paiement."
                 subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
@@ -873,7 +876,7 @@ list:
                         example: 'Exemple : sur une affiche au niveau des caisses...'
                         information:
                           title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                          content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                          content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...
                       - title: Non
                   - title: Autres
                     example: 'Exemple : problème avec le terminal de paiement...'
