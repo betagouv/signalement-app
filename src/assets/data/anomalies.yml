@@ -811,7 +811,7 @@ list:
             <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.
             <br />Si c’est votre cas, vous devez faire une réclamation avec ce formulaire : Contact Abus de faiblesse"
       - title: Fausse réduction de prix
-        example: 'Exemple : fausse promotion pendant les soldes ou une liquidation totale'
+        example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
         description: "<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l'entreprise
           <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
           Une copie du récépissé de déclaration doit être affichée sur le lieu de vente, pendant toute la durée de la liquidation, de manière à être lisible et visible depuis la voie publique."
@@ -850,7 +850,7 @@ list:
                   - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
                     information:
                       content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
-                        <br/>Le paiement de plus de 50 pièces pour un seul paiement peut être refusé.
+                        <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
                   - title: Autre
               - title: Refus de payer par CB / chèque
                 example: "Le commerçant peut refuser les chèques ou la carte bancaire. Dans ce cas, il doit l'indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant..)
@@ -1143,78 +1143,6 @@ list:
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-      - title: Refus de rembourser un achat ou d'annuler un contrat
-        example: Vêtement trop petit, cadeau en doublon, changement d'avis, prix moins cher ailleurs
-        subcategoriesTitle: Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat&#160;?
-        subcategories:
-          - title: Dans un magasin dans lequel vous vous êtes rendu
-            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ? 
-            subcategories:
-              - title: Il est défecteux et je ne l'avais pas vu
-              - title: Autre raison
-                example: Vêtement trop petit, cadeau en doublon, j'ai changé davis, prix moins cher ailleurs
-                subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles. Les conditions sont souvent affichées près des caisses ou sur le ticket de caisse.&#160;?
-                subcategories:
-                  - title: Oui
-                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-                  - title: Non
-                    information:
-                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
-                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
-                        <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
-          - title: Sur internet
-            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
-              <br />Vous n’avez pas à vous justifier auprès du commerçant.
-              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
-            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
-            subcategories:
-              - title: Oui
-              - title: Non
-                information:
-                  title: Ceci ne constitue pas un motif de signalement.
-          - title: Auprès d’un démarcheur qui est venu dans votre domicile
-            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
-              <br />Vous n’avez pas à vous justifier auprès du commerçant.
-              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
-            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
-            subcategories:
-              - title: Oui
-              - title: Non
-                information:
-                  title: Ceci ne constitue pas un motif de signalement.
-          - title: Sur un stand dans une foire ou un salon
-            subcategoriesTitle: Le commerçant proposait-il clairement la possibilité d'échange ou de remboursement&#160;?
-            example: 'Exemple : affiche à la caisse du magasin'
-            subcategories:
-              - title: Oui
-                subcategoriesTitle: Votre demande est-elle en accord avec les conditions d'échange/remboursement précisées par le commerçant&#160;?
-                subcategories:
-                  - title: Oui
-                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-                  - title: Non
-                    information:
-                      title: Le commerçant est libre de choisir les conditions d'échange ou de remboursement.
-                      content: 'Par exemple, ces affiches sont autorisées :
-                        <ul>
-                          <li>"remboursement sous 5 jours"</li>
-                          <li>"avoir seulement"</li>
-                          <li>"échange possible, pas de remboursement"</li>
-                        </ul>'
-              - title: Non
-                information:
-                  title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
-                  content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
-                    <br/>Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
-          - title: Par téléphone
-            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
-                <br />Vous n’avez pas à vous justifier auprès du commerçant.
-                <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
-            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
-            subcategories:
-              - title: Oui
-              - title: Non
-                information:
-                  title: Ceci ne constitue pas un motif de signalement.
       - title: Problème de livraison
         example: 'Exemples : colis perdu et non reçu, livraison tardive, colis abimé...'
         subcategoriesTitle: Quel est le problème&#160;?
@@ -1281,7 +1209,70 @@ list:
                     rank: 4
                     type: TEXT
                     placeholder: Entreprise de livraison
-              - title: D'un colis envoyé entre particuliers
+              - title: D'un colis envoyé entre particuliers                  
+      - title: Refus de rembourser un achat ou d'annuler un contrat
+        subcategoriesTitle: Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat&#160;?
+        subcategories:
+          - title: Dans un magasin dans lequel vous vous êtes rendu
+            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ? 
+            subcategories:
+              - title: Il est défecteux et je ne l'avais pas vu
+              - title: Autre raison
+                example: Vêtement trop petit, cadeau en doublon, j'ai changé davis, prix moins cher ailleurs
+                subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
+                subcategories:
+                  - title: Oui
+                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+                  - title: Non
+                    information:
+                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                        <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+          - title: Sur internet
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
+          - title: Auprès d’un démarcheur qui est venu dans votre domicile
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
+          - title: Sur un stand, dans une foire ou un salon
+            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ? 
+            subcategories:
+              - title: Il est défecteux et je ne l'avais pas vu
+              - title: Autre raison
+                example: j'ai trouvé mieux ou moins cher ailleurs, je regrette mon achat
+                subcategoriesTitle: Le remboursement ou la reprise d'un article lors d'un salon n'est pas une obligation.Vous êtes vous assuré que le commerçant proposait l'échange ou le remboursement des articles ?&#160;?
+                subcategories:
+                  - title: Oui
+                    description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+                  - title: Non
+                    information:
+                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                        <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+          - title: Par téléphone
+            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+                <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Ceci ne constitue pas un motif de signalement.
       - title: Pas de réponse du service client / service après-vente
         example: 'Exemples : le SAV (service après vente) est inexistant, aucun retour du SAV malgré mes relances ...'
       - title: Personnel peu aimable
