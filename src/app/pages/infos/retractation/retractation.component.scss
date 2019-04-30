@@ -1,5 +1,11 @@
 @import "../../../../theme/variables";
 
+h4 {
+  text-align: center;
+  margin-bottom: 1em;
+  margin-top: 2em;
+}
+
 table {
   margin: 1em auto 2em auto;
   border: $theme-info-border 2px solid;
