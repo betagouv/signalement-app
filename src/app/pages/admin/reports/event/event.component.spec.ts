@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventComponent } from './event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxLoadingModule } from 'ngx-loading';
+import { BsModalRef, ModalModule } from 'ngx-bootstrap';
 
 describe('EventComponent', () => {
   let component: EventComponent;
@@ -15,6 +18,12 @@ describe('EventComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
+        NgxLoadingModule,
+        ModalModule.forRoot(),
+      ],
+      providers: [
+        BsModalRef
       ]
     })
     .compileComponents();
