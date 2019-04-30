@@ -1,0 +1,23 @@
+<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
+<section class="section section-white">
+  <div class="container max-width">
+
+    <div class="pb-sm-5 pt-sm-5" *ngIf="anomaly?.withInternetPurchase && report.internetPurchase === undefined; else subcategoryTemplate">
+      <h4 class="text-center">Est-ce que votre problème fait suite à un achat sur internet ?</h4>
+      <div class="text-center pt-2 pt-sm-3 pb-lg-5">
+        <button type="submit" class="btn btn-lg btn-outline-primary" (click)="setInternetPurchase(true)">Oui</button>
+        <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5" (click)="setInternetPurchase(false)">Non, pas sur internet</button>
+      </div>
+    </div>
+
+    <ng-template #subcategoryTemplate>
+      <app-subcategory
+        [subcategoriesTitle]="anomaly?.subcategoriesTitle"
+        [subcategoryName]="anomaly?.category"
+        [subcategories]="anomaly?.subcategories"
+        [subcategoriesSelected]="report?.subcategories"
+        (select)="onSelectSubcategories($event)">
+      </app-subcategory>
+    </ng-template>
+  </div>
+</section>

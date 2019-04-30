@@ -10,15 +10,15 @@
       <div class="form__group mt-4">
         <div class="row">
           <div class="col-12 col-sm-6">
-            <label>
-              Votre prénom <span>*</span>
+            <label [class]="hasError(firstNameCtrl) ? 'error' : ''">
+              Votre prénom <span class="error">*</span>
             </label>
             <input type="text" formControlName="firstName" name="fname" autocomplete="given-name">
           </div>
 
           <div class="col-12 col-sm-6">
-            <label>
-              Votre nom <span>*</span>
+            <label [class]="hasError(lastNameCtrl) ? 'error' : ''">
+              Votre nom <span class="error">*</span>
             </label>
             <input type="text" formControlName="lastName" name="lname" autocomplete="family-name">
           </div>
@@ -26,8 +26,8 @@
       </div>
 
       <div class="form__group">
-        <label>
-          Votre email <span>*</span>
+        <label [class]="hasError(emailCtrl) ? 'error' : ''">
+          Votre email <span class="error">*</span>
         </label>
         <input type="email" formControlName="email" name="email" autocomplete="email" />
       </div>

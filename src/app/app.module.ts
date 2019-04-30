@@ -19,6 +19,7 @@ import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
 import { ReportComponent } from './pages/report/report.component';
+import { RetractationComponent } from './pages/infos/retractation/retractation.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -45,7 +46,8 @@ registerLocaleData(localeFr, 'fr');
       { path: 'stats', component: StatsComponent },
       { path: 'comment-ça-marche', component: HowComponent },
       { path: 'qui-sommes-nous', component: AboutComponent },
-      { path: 'vous-êtes-un-commerçant', component: ProComponent }
+      { path: 'vous-êtes-un-commerçant', component: ProComponent },
+      { path: 'delai-de-retractation', component: RetractationComponent }
     ], {scrollPositionRestoration: 'top'}),
     ReportModule,
     BrowserModule,

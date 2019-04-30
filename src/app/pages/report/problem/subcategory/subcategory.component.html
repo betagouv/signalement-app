@@ -1,0 +1,41 @@
+<div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''">
+
+  <div *ngIf="subcategoryDescription" class="row">
+    <div class="col-12">
+      <p [innerHTML]="subcategoryDescription"></p>
+    </div>
+  </div>
+
+  <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
+
+  <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+    <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
+      <div class="row pb-2 pt-2">
+        <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
+          <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
+        </div>
+        <div class="col-10 col-sm-11 pl-1">
+          <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
+          <div class="note" [innerHTML]="subcategory.example" *ngIf="subcategory.example"></div>
+        </div>
+      </div>
+    </div>
+    <hr *ngIf="subcategoryForm.valid"/>
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory() && subcategoryForm.valid">
+      <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
+      Détailler le problème
+    </button>
+  </form>
+</div>
+<app-subcategory *ngIf="hasSubSubcategory()"
+                 [subcategoriesTitle]="subcategorySelected.subcategoriesTitle"
+                 [subcategories]="subcategorySelected.subcategories"
+                 [subcategoryName]="subcategorySelected.title"
+                 [subcategoryDescription]="subcategorySelected.description"
+                 [subcategoriesSelected]="subcategoriesSelected"
+                 (select)="onSelectSubSubcategories($event)">
+</app-subcategory>
+<div [@scrollAnimation]="scrollNotificationState" class="scrollNotification pointer" *ngIf="!hasSubSubcategory()" (click)="scrollToElement()">
+  <span class="link ml-2 mr-2">Poursuivre</span>
+  <img alt="Icône flêche descendante" src="/assets/images/icon_arrow_down.png">
+</div>

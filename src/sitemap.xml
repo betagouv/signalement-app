@@ -21,4 +21,9 @@
     <priority>0.5</priority>
   </url>
 
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/delai-de-retractation</loc>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>

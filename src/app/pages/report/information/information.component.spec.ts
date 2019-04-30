@@ -10,7 +10,7 @@ import { Anomaly, Information } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { of } from 'rxjs';
 import { Report } from '../../../model/Report';
-import { RetractationComponent } from './retractation/retractation.component';
+import { RetractationComponent } from '../../infos/retractation/retractation.component';
 
 describe('InformationComponent', () => {
 
