@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Event } from '../model/Event';
 import { Api, ServiceUtils } from './service.utils';
 import { HttpClient } from '@angular/common/http';
 import { mergeMap } from 'rxjs/operators';
@@ -13,7 +12,7 @@ export class EventService {
   constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils) { }
 
-  createEvent(event: Event) {
+  createEvent(event: ReportEvent) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.post(
