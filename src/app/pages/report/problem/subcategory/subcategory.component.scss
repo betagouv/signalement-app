@@ -1,0 +1,43 @@
+@import "../../../../../theme/variables";
+
+h4 {
+  font-weight: bold;
+}
+
+.withSiblingSubcategories {
+
+  label, h4 {
+    color: $dark-grey;
+  }
+
+}
+
+.subcategorySelected {
+  background-color: $light-green;
+
+  label, h4 {
+    color: $black;
+  }
+
+}
+
+.scrollNotification {
+  background-color: $lighter-blue;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  text-align: center;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0.5em;
+  width: 150px;
+  border-top-left-radius: $theme-border-radius;
+  border-top-right-radius: $theme-border-radius;
+
+  img {
+    height: 20px;
+  }
+
+}

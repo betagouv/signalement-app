@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { Report, ReportDetails } from '../model/Report';
-import moment from 'moment';
+import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorage } from '@ngx-pwa/local-storage';
@@ -27,9 +26,13 @@ export class ReportService {
   }
 
   private retrieveReportFromStorage() {
-    this.localStorage.getItem(ReportStorageKey).subscribe((report) => {
+    this.localStorage.getItem(ReportStorageKey).subscribe((report: Report) => {
       if (report) {
         report.retrievedFromStorage = true;
+        if (report.detailInputValues) {
+          // To force class method to be valuate
+          report.detailInputValues = report.detailInputValues.map(d => Object.assign(new DetailInputValue(), d));
+        }
         this.reportSource.next(report);
       }
     });
@@ -70,41 +73,25 @@ export class ReportService {
 
   private generateReportToPost(report: Report) {
     const reportToPost = {
-      'category': report.category,
-      'subcategory': report.subcategory ? report.subcategory.title : '',
-      'precision': report.details.precision ? this.getDetailsPrecision(report.details) : '',
-      'companyName': report.company.name,
-      'companyAddress': this.getCompanyAddress(report.company),
-      'companyPostalCode': report.company.postalCode,
-      'companySiret': report.company.siret,
-      'anomalyDate': moment(report.details.anomalyDate).format('YYYY-MM-DD'),
-      'description': report.details.description,
-      'firstName': report.consumer.firstName,
-      'lastName': report.consumer.lastName,
-      'email': report.consumer.email,
-      'contactAgreement': report.contactAgreement,
-      'fileIds': report.details.uploadedFiles.map(f => f.id)
+      category: report.category,
+      subcategories: report.subcategories.map(subcategory => subcategory.title),
+      companyName: report.company.name,
+      companyAddress: this.getCompanyAddress(report.company),
+      companyPostalCode: report.company.postalCode,
+      companySiret: report.company.siret,
+      firstName: report.consumer.firstName,
+      lastName: report.consumer.lastName,
+      email: report.consumer.email,
+      contactAgreement: report.contactAgreement,
+      fileIds: report.uploadedFiles.map(f => f.id),
+      details: report.detailInputValues.map(detailInputValue => {
+        return {
+          label: detailInputValue.renderedLabel,
+          value: detailInputValue.renderedValue,
+        };
+      })
     };
-    if (report.details.anomalyTimeSlot) {
-      reportToPost['anomalyTimeSlot'] = Number(report.details.anomalyTimeSlot);
-    }
     return reportToPost;
-  }
-
-  getDetailsPrecision(details: ReportDetails) {
-    let precision = '';
-    if (typeof details.precision  === 'string') {
-      precision = details.precision;
-      if (precision === otherPrecisionValue && details.otherPrecision) {
-        precision =  `${precision} (${details.otherPrecision})`;
-      }
-    } else {
-      precision = details.precision.join(', ');
-      if (precision.indexOf(otherPrecisionValue) !== -1 && details.otherPrecision) {
-        precision = precision.replace(otherPrecisionValue, `${otherPrecisionValue} (${details.otherPrecision})`);
-      }
-    }
-    return precision;
   }
 
 

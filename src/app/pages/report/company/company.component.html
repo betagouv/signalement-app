@@ -35,13 +35,13 @@
       <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="!around && searchForm">
         
         <div class="form__group mt-4">
-          <label for="searchInput">Nom ou enseigne de l'établissement <span>*</span>
+          <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'établissement <span class="error">*</span>
           </label>
           <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
         </div>
         <div class="form__group">
-          <label for="searchPostalCodeInput">
-            Code postal <span>*</span>
+          <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
+            Code postal <span class="error">*</span>
           </label>
           <div class="row">
             <div class="col-12 col-sm-6">
@@ -122,21 +122,21 @@
       <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm" *ngIf="companyForm">
 
         <div class="form__group">
-          <label for="companyName">
-            Nom de l'établissement <span>*</span>
+          <label for="companyName" [class]="hasError(nameCtrl) ? 'error' : ''">
+            Nom de l'établissement <span class="error">*</span>
           </label>
           <input formControlName="name" type="text" id="companyName" placeholder="Nom de l'établissement">
         </div>
 
         <div class="form__group">
-          <label for="companyAddress">
-            Adresse de l'établissement <span>*</span>
+          <label for="companyAddress" [class]="hasError(addressCtrl) ? 'error' : ''">
+            Adresse de l'établissement <span class="error">*</span>
           </label>
           <ng2-completer
             [datasource]="addressData"
             formControlName="address"
             inputName="address"
-            inputId="companyAddress"
+            id="companyAddress"
             textSearching=""
             textNoResults="Adresse non trouvée"
             clearUnselected="true"

@@ -31,6 +31,7 @@ describe('BreadcrumbComponent', () => {
     component.step = Step.Category;
     component.report = new Report();
     component.report.category = 'categorie';
+    component.report.subcategories = [];
     fixture.detectChanges();
   });
 

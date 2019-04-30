@@ -3,8 +3,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
-import { Report, ReportDetails } from '../../../model/Report';
-import { Precision, Subcategory, SubcategoryDetails } from '../../../model/Anomaly';
+import { DetailInputValue, Report } from '../../../model/Report';
+import { DetailInput, Subcategory } from '../../../model/Anomaly';
 import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
@@ -16,6 +16,7 @@ import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { ReportPaths, Step } from '../../../services/report-router.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { NgxLoadingModule } from 'ngx-loading';
+import moment from 'moment';
 
 describe('DetailsComponent', () => {
 
@@ -28,10 +29,39 @@ describe('DetailsComponent', () => {
     id: '856cdf46-a8c2-436d-a34c-bb303ff108a6',
     filename: 'anomaly.jpg'
   });
-  const reportDetailsFixture = new ReportDetails();
-  reportDetailsFixture.description = 'Description';
-  reportDetailsFixture.anomalyDate = anomalyDateFixture;
-  reportDetailsFixture.anomalyTimeSlot = 5;
+
+  const textDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'texte label',
+    rank: 1,
+    type: 'TEXT'
+  });
+
+  const dateDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'date label',
+    rank: 2,
+    type: 'DATE',
+    defaultValue: 'SYSDATE'
+  });
+
+  const radioDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'radio label',
+    rank: 3,
+    type: 'RADIO',
+    options: ['OPTION1', 'OPTION2 (à préciser)']
+  });
+
+  const checkboxDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'checkbox label',
+    rank: 5,
+    type: 'CHECKBOX',
+    options: ['CHECKBOX1', 'CHECKBOX2 (à préciser)', 'CHECKBOX3']
+  });
+
+  const textareaDetailInputFixture = Object.assign(new DetailInput(), {
+    label: 'description',
+    rank: 4,
+    type: 'TEXTAREA'
+  });
 
   beforeEach(async(() => {
     defineLocale('fr', frLocale);
@@ -58,7 +88,7 @@ describe('DetailsComponent', () => {
   }));
 
 
-  describe('commons tests', () => {
+  describe('case of default detail inputs', () => {
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
@@ -73,80 +103,21 @@ describe('DetailsComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should initially display the form and no errors message', () => {
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('form')).not.toBeNull();
-      expect(nativeElement.querySelector('.notification.error')).toBeNull();
-    });
-
-    it('should initialize the details inputs with empty values and current date when there is no initial value', () => {
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('textarea[formControlName="description"]').value).toEqual('');
-      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value).toEqual((new Date()).toLocaleDateString('fr'));
-      expect(nativeElement.querySelector('select').value).toEqual('');
-    });
-
-    it('should initialize the details inputs with initial value when it exists', () => {
-      const reportWithDetails = new Report();
-      reportWithDetails.details = reportDetailsFixture;
-      reportService.currentReport = of(reportWithDetails);
-
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('textarea[formControlName="description"]').value).toEqual(reportDetailsFixture.description);
-      expect(nativeElement.querySelector('input[formControlName="anomalyDate"]').value)
-        .toEqual(reportDetailsFixture.anomalyDate.toLocaleDateString('fr'));
-      expect(nativeElement.querySelector('select').value).toEqual(reportDetailsFixture.anomalyTimeSlot.toString());
-    });
-
     it ('should define the plageHoraireList to display', () => {
       expect(component.plageHoraireList).toBeDefined();
       expect(component.plageHoraireList.length).toBe(24);
     });
 
-  });
-
-
-  describe('case of report subcategory with a precision list and mutiple selection not allowed', () => {
-
-    const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategory = new Subcategory();
-    const precision = new Precision();
-    precision.title = 'titre precision';
-    precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'Autre'}];
-    const subcategoryDetails = new SubcategoryDetails();
-    subcategoryDetails.precision = precision;
-    reportWithSubcategory.subcategory.details = subcategoryDetails;
-
-    beforeEach(() => {
-      reportService = TestBed.get(ReportService);
-      reportService.currentReport = of(reportWithSubcategory);
-
-      fixture = TestBed.createComponent(DetailsComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it('sould display radio inputs to select precision', () => {
+    it('should initialize the form inputs with default details input', () => {
       const nativeElement = fixture.nativeElement;
-      expect(component.singlePrecisionCtrl).toBeDefined();
-      expect(component.multiplePrecisionCtrl).toBeUndefined();
-      expect(nativeElement.querySelectorAll('input[formControlName="singlePrecision"]').length).toEqual(precision.options.length);
-    });
-
-    it('should display an additionnal text input when precision "Autre" is checked', () => {
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('#radio-Autre').click();
-      fixture.detectChanges();
-
-      expect(nativeElement.querySelector('input[formControlName="otherPrecision"]')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('input').length).toEqual(2);
+      expect(nativeElement.querySelector('textarea#formControl_1')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="text"]#formControl_2')).not.toBeNull();
+      expect(nativeElement.querySelector('select#formControl_3')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="file"]')).not.toBeNull();
     });
 
     it('should display errors on submit', () => {
-      component.singlePrecisionCtrl.setValue('');
-
       component.submitDetailsForm();
       fixture.detectChanges();
 
@@ -156,46 +127,33 @@ describe('DetailsComponent', () => {
     });
 
     it ('should emit and event with a details object which contains form inputs when no errors', () => {
-      component.descriptionCtrl.setValue('Description');
-      component.singlePrecisionCtrl.setValue('Autre');
-      component.otherPrecisionCtrl = component.formBuilder.control('Autre précision');
-      component.detailsForm.addControl('otherPrecision', component.otherPrecisionCtrl);
-      component.anomalyDateCtrl.setValue(anomalyDateFixture);
-      component.anomalyTimeSlotCtrl.setValue(5);
-      component.uploadedFiles = [anomalyFileFixture];
+      component.detailsForm.controls.formControl_1.setValue('valeur');
+      component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
+      component.detailsForm.controls.formControl_3.setValue('de 2h à 3h');
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const detailsExpected = new ReportDetails();
-      detailsExpected.description = 'Description';
-      detailsExpected.precision = 'Autre';
-      detailsExpected.otherPrecision = 'Autre précision';
-      detailsExpected.anomalyDate = anomalyDateFixture;
-      detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
-      reportExpected.subcategory = new Subcategory();
-      reportExpected.subcategory.details = subcategoryDetails;
-      reportExpected.details = detailsExpected;
-
+      reportExpected.detailInputValues = [
+        Object.assign(new DetailInputValue(), {label: 'Description', value: 'valeur'}),
+        Object.assign(new DetailInputValue(), {label: 'Date du constat', value: anomalyDateFixture}),
+        Object.assign(new DetailInputValue(), {label: 'Heure du constat', value: 'de 2h à 3h'})
+      ];
+      reportExpected.uploadedFiles = [];
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
+
   });
 
-  describe('case of report subcategory with a precision list and mutiple selection allowed', () => {
+
+  describe('case of report subcategory with only a text detail input', () => {
 
     const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategory = new Subcategory();
-    const precision = new Precision();
-    precision.title = 'titre precision';
-    precision.severalOptionsAllowed = true;
-    precision.options = [ {title: 'option 1'}, { title: 'option 2'}, { title: 'option 3'}, { title: 'Autre'}];
-    const subcategoryDetails = new SubcategoryDetails();
-    subcategoryDetails.precision = precision;
-    reportWithSubcategory.subcategory.details = subcategoryDetails;
+    reportWithSubcategory.subcategories = [new Subcategory()];
+    reportWithSubcategory.subcategories[0].detailInputs = [Object.assign(new DetailInput(), textDetailInputFixture)];
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
@@ -206,24 +164,14 @@ describe('DetailsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('sould display checkbox inputs to select precisions', () => {
+    it('should initialize the form inputs with anomaly details input', () => {
       const nativeElement = fixture.nativeElement;
-      expect(component.singlePrecisionCtrl).toBeUndefined();
-      expect(component.multiplePrecisionCtrl).toBeDefined();
-      expect(nativeElement.querySelectorAll('input[type="checkbox"]').length).toEqual(precision.options.length);
-    });
-
-    it('should display an additionnal text input when precision "Autre" is checked', () => {
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('#checkbox-Autre').click();
-      fixture.detectChanges();
-
-      expect(nativeElement.querySelector('input[formControlName="otherPrecision"]')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('input').length).toEqual(2);
+      expect(nativeElement.querySelector('input[type="text"]#formControl_1')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="file"]')).not.toBeNull();
     });
 
     it('should display errors on submit', () => {
-      component.anomalyDateCtrl.setValue('');
-
       component.submitDetailsForm();
       fixture.detectChanges();
 
@@ -232,43 +180,34 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
-    it ('should emit and event with a company which contains form inputs when no errors', () => {
-      component.descriptionCtrl.setValue('Description');
-      component.multiplePrecisionCtrl.controls[0].setValue(true);
-      component.multiplePrecisionCtrl.controls[1].setValue(false);
-      component.multiplePrecisionCtrl.controls[2].setValue(true);
-      component.anomalyDateCtrl.setValue(anomalyDateFixture);
-      component.anomalyTimeSlotCtrl.setValue(5);
-      component.uploadedFiles = [anomalyFileFixture];
+    it ('should emit and event with a details object which contains form inputs when no errors', () => {
+      component.detailsForm.controls.formControl_1.setValue('valeur');
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const detailsExpected = new ReportDetails();
-      detailsExpected.description = 'Description';
-      detailsExpected.precision = ['option 1', 'option 3'];
-      detailsExpected.anomalyDate = anomalyDateFixture;
-      detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
-      reportExpected.subcategory = new Subcategory();
-      reportExpected.subcategory.details = subcategoryDetails;
-      reportExpected.details = detailsExpected;
-
+      reportExpected.subcategories = reportWithSubcategory.subcategories;
+      reportExpected.detailInputValues = [Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'})];
+      reportExpected.uploadedFiles = [];
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
 
   });
 
-
-  describe('case of report subcategory without precision list', () => {
+  describe('case of report subcategory with several detail inputs', () => {
 
     const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategory = new Subcategory();
-    const subcategoryDetails = new SubcategoryDetails();
-    reportWithSubcategory.subcategory.details = subcategoryDetails;
+    reportWithSubcategory.subcategories = [new Subcategory()];
+    reportWithSubcategory.subcategories[0].detailInputs = [
+      dateDetailInputFixture,
+      textDetailInputFixture,
+      radioDetailInputFixture,
+      textareaDetailInputFixture,
+      checkboxDetailInputFixture
+    ];
 
     beforeEach(() => {
       reportService = TestBed.get(ReportService);
@@ -279,16 +218,22 @@ describe('DetailsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('sould not display inputs to select precision', () => {
+    it('should initialize the form inputs with anomaly details input', () => {
       const nativeElement = fixture.nativeElement;
-      expect(component.singlePrecisionCtrl).toBeUndefined();
-      expect(component.multiplePrecisionCtrl).toBeUndefined();
-      expect(nativeElement.querySelectorAll('input[type="radio"]').length).toEqual(0);
-      expect(nativeElement.querySelectorAll('input[type="checkbox"]').length).toEqual(0);
+      expect(nativeElement.querySelectorAll('input').length).toEqual(8);
+      expect(nativeElement.querySelector('input[type="text"]#formControl_1')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="text"]#formControl_2')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="text"]#formControl_2').value).toEqual(moment(new Date()).format('DD/MM/YYYY'));
+      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_0')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="radio"]#formControl_3_1')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="checkbox"]#formControl_5_0')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="checkbox"]#formControl_5_1')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="checkbox"]#formControl_5_2')).not.toBeNull();
+      expect(nativeElement.querySelector('textarea#formControl_4')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="file"]')).not.toBeNull();
     });
 
     it('should display errors on submit', () => {
-      component.anomalyDateCtrl.setValue('');
 
       component.submitDetailsForm();
       fixture.detectChanges();
@@ -298,29 +243,46 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
-    it ('should emit and event with a company which contains form inputs when no errors', () => {
-      component.descriptionCtrl.setValue('Description');
-      component.anomalyDateCtrl.setValue(anomalyDateFixture);
-      component.anomalyTimeSlotCtrl.setValue(5);
-      component.uploadedFiles = [anomalyFileFixture];
+    it('should display an additionnal text input when precision on radio input is required', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('input[type="radio"]#formControl_3_1').click();
+      nativeElement.querySelector('input[type="checkbox"]#formControl_5_1').click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('input[type="text"]#formControl_3_1_precision')).not.toBeNull();
+      //expect(nativeElement.querySelector('input[type="text"]#formControl_5_1_precision')).not.toBeNull();
+    });
+
+    it ('should emit and event with a details object which contains form inputs when no errors', () => {
+      component.detailsForm.controls.formControl_1.setValue('valeur');
+      component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
+      component.detailsForm.controls.formControl_4.setValue('ma description');
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
 
       const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('input[type="radio"]#formControl_3_1').click();
+      nativeElement.querySelector('input[type="checkbox"]#formControl_5_0').click();
+      nativeElement.querySelector('input[type="checkbox"]#formControl_5_2').click();
+      fixture.detectChanges();
+      nativeElement.querySelector('input[type="text"]#formControl_3_1_precision').value = 'ma précision';
+      nativeElement.querySelector('input[type="text"]#formControl_3_1_precision').dispatchEvent(new Event('input'));
+      fixture.detectChanges();
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const detailsExpected = new ReportDetails();
-      detailsExpected.description = 'Description';
-      detailsExpected.anomalyDate = anomalyDateFixture;
-      detailsExpected.anomalyTimeSlot = 5;
-      detailsExpected.uploadedFiles = [anomalyFileFixture];
       const reportExpected = new Report();
-      reportExpected.subcategory = new Subcategory();
-      reportExpected.subcategory.details = subcategoryDetails;
-      reportExpected.details = detailsExpected;
-
+      reportExpected.subcategories = reportWithSubcategory.subcategories;
+      reportExpected.detailInputValues = [
+        Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'}),
+        Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),
+        Object.assign(new DetailInputValue(), {label: radioDetailInputFixture.label, value: radioDetailInputFixture.options[1] + 'ma précision'}),
+        Object.assign(new DetailInputValue(), {label: textareaDetailInputFixture.label, value: 'ma description'}),
+        Object.assign(new DetailInputValue(), {label: checkboxDetailInputFixture.label, value: ['CHECKBOX1', undefined, 'CHECKBOX3']}),
+      ];
+      reportExpected.uploadedFiles = [];
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
 
   });
+
 });

@@ -6,7 +6,7 @@ import { Report } from '../model/Report';
 
 export enum Step {
   Category = 'Category',
-  Subcategory = 'Subcategory',
+  Problem = 'Problem',
   Details = 'Details',
   Company = 'Company',
   Consumer = 'Consumer',
@@ -17,7 +17,7 @@ export enum Step {
 
 export enum ReportPaths {
   Category = '',
-  Subcategory = 'signalement/le-probleme',
+  Problem = 'signalement/le-probleme',
   Details = 'signalement/la-description',
   Company = 'signalement/le-commerçant',
   Consumer = 'signalement/le-consommateur',
@@ -75,12 +75,12 @@ export class ReportRouterService {
         if (anomaly.information) {
           return Step.Information;
         } else if (anomaly.subcategories && anomaly.subcategories.length) {
-          return Step.Subcategory;
+          return Step.Problem;
         } else {
           return Step.Details;
         }
-      case Step.Subcategory:
-        if (this.report.subcategory.information) {
+      case Step.Problem:
+        if (this.isReportLastSubcategoryInformation()) {
           return Step.Information;
         } else {
           return Step.Details;
@@ -100,11 +100,17 @@ export class ReportRouterService {
 
   previousStep(currentStep: Step) {
     switch (currentStep) {
-      case Step.Subcategory:
+      case Step.Problem:
         return Step.Category;
       case Step.Details:
-        if (this.report.subcategory) {
-          return Step.Subcategory;
+        if (this.report.subcategories) {
+          return Step.Problem;
+        } else {
+          return Step.Category;
+        }
+      case Step.Information:
+        if (this.report && this.report.subcategories) {
+          return Step.Problem;
         } else {
           return Step.Category;
         }
@@ -117,5 +123,11 @@ export class ReportRouterService {
       default:
         return Step.Category;
     }
+  }
+
+  isReportLastSubcategoryInformation() {
+    return this.report
+      && this.report.subcategories && this.report.subcategories.length
+      && this.report.subcategories[this.report.subcategories.length - 1].information;
   }
 }

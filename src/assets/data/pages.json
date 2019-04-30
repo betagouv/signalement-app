@@ -14,5 +14,9 @@
   "pro": {
     "title": "Vous êtes un commerçant ? - SignalConso",
     "description": "Découvrez SignalConso, le nouveau service public pour les Consommateurs et les Professionnels"
+  },
+  "retractation": {
+    "title": "Delai de rétractation ? - SignalConso",
+    "description": "Comprendre et calculer un délai de rétractation"
   }
 }

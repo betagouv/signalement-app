@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
@@ -11,7 +11,7 @@ import { ReportRouterService, Step } from '../../../services/report-router.servi
   templateUrl: './information.component.html',
   styleUrls: ['./information.component.scss']
 })
-export class InformationComponent implements OnInit {
+export class InformationComponent implements OnInit, OnDestroy {
 
   step: Step;
   report: Report;
@@ -40,9 +40,9 @@ export class InformationComponent implements OnInit {
     if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
-    } else if (this.report.subcategory && this.report.subcategory.information) {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.report.subcategory.title);
-      this.informationToDisplay = this.report.subcategory.information;
+    } else if (this.report.subcategories && this.getReportLastSubcategory().information) {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.getReportLastSubcategory().title);
+      this.informationToDisplay = this.getReportLastSubcategory().information;
     }
   }
 
@@ -53,6 +53,12 @@ export class InformationComponent implements OnInit {
 
   ngOnDestroy() {
     this.reportRouterService.routeBackward(this.step);
+  }
+
+  getReportLastSubcategory() {
+    if (this.report && this.report.subcategories && this.report.subcategories.length) {
+      return this.report.subcategories[this.report.subcategories.length - 1];
+    }
   }
 
 }

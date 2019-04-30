@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubcategoryComponent } from './subcategory.component';
+import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { deserialize } from 'json-typescript-mapper';
@@ -15,11 +15,13 @@ import { of } from 'rxjs';
 import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportPaths, Step } from '../../../services/report-router.service';
+import { SubcategoryComponent } from './subcategory/subcategory.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('SubcategoryComponent', () => {
+describe('ProblemComponent', () => {
 
-  let component: SubcategoryComponent;
-  let fixture: ComponentFixture<SubcategoryComponent>;
+  let component: ProblemComponent;
+  let fixture: ComponentFixture<ProblemComponent>;
   let reportService: ReportService;
   let anomalyService: AnomalyService;
 
@@ -29,7 +31,14 @@ describe('SubcategoryComponent', () => {
   const subcategoriesFixture = [
     deserialize(Subcategory, { title: 'title1', description: 'description1' }),
     deserialize(Subcategory, { title: 'title2', description: 'description2' }),
-    deserialize(Subcategory, { title: 'title3', description: 'description3' }),
+    deserialize(Subcategory, {
+      title: 'title3',
+      description: 'description3',
+      subcategories: [
+        deserialize(Subcategory, { title: 'title31', description: 'description31' }),
+        deserialize(Subcategory, { title: 'title32', description: 'description32' })
+        ]
+    }),
   ];
 
   const anomalyFixture = new Anomaly();
@@ -39,6 +48,7 @@ describe('SubcategoryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        ProblemComponent,
         SubcategoryComponent,
         BreadcrumbComponent,
         CollapsableTextComponent,
@@ -50,6 +60,7 @@ describe('SubcategoryComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: ReportPaths.Details, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
+        NoopAnimationsModule
       ],
     })
       .overrideTemplate(BreadcrumbComponent, '')
@@ -61,7 +72,7 @@ describe('SubcategoryComponent', () => {
     reportService = TestBed.get(ReportService);
     reportService.currentReport = of(reportFixture);
 
-    fixture = TestBed.createComponent(SubcategoryComponent);
+    fixture = TestBed.createComponent(ProblemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -74,7 +85,7 @@ describe('SubcategoryComponent', () => {
 
     it('shoud request the user if the problem concerns an internet purchase or not', () => {
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
-        Object.assign(new Anomaly(), anomalyFixture, { withInternetPurchase: true })
+        Object.assign(anomalyFixture, { withInternetPurchase: true })
       );
 
       component.ngOnInit();
@@ -90,55 +101,31 @@ describe('SubcategoryComponent', () => {
 
   describe('when problem does not concern an internet purchase', () => {
 
-    it('should initially display the form with subcategories as radio buttons list and no errors message', () => {
+    it('should display subcategories', () => {
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
-        Object.assign(new Anomaly(), anomalyFixture, { withInternetPurchase: true })
+        Object.assign(anomalyFixture, { withInternetPurchase: false })
       );
 
-      const nativeElement = fixture.nativeElement;
       component.ngOnInit();
       fixture.detectChanges();
 
-      nativeElement.querySelectorAll('button')[1].click();
-      fixture.detectChanges();
-
-      expect(nativeElement.querySelector('form')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('input[type="radio"]').length).toEqual(subcategoriesFixture.length);
-      expect(nativeElement.querySelector('.notification.error')).toBeNull();
-    });
-
-    it('should define all form controls', () => {
-      expect(component.subcategoryForm.controls['anomalySubcategory']).toEqual(component.anomalySubcategoryCtrl);
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('app-subcategory')).not.toBeNull();
     });
 
   });
 
-  describe('submitSubcategoryForm function', () => {
+  describe('when receive subcategories', () => {
 
-    it('should display errors when occurs', () => {
-      component.anomalySubcategoryCtrl.setValue('');
-      reportFixture.internetPurchase = false;
-
-      component.submitSubcategoryForm();
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(component.showErrors).toBeTruthy();
-      expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
-    });
-
-    it('should change the shared report with a report which contains a subcategory when no errors', () => {
+    it('should change the shared report with a report which contains subcategories', () => {
       reportFixture.internetPurchase = false;
       component.anomaly = new Anomaly();
       component.anomaly.subcategories = subcategoriesFixture;
-      component.anomalySubcategoryCtrl.setValue('title2');
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
       const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
       fixture.detectChanges();
 
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button[type="submit"]').click();
-      fixture.detectChanges();
+      component.onSelectSubcategories([subcategoriesFixture[1]]);
 
       const subcategoryExpected = new Subcategory();
       subcategoryExpected.title = 'title2';
@@ -146,9 +133,9 @@ describe('SubcategoryComponent', () => {
       const reportExpected = new Report();
       reportExpected.internetPurchase = false;
       reportExpected.category = reportFixture.category;
-      reportExpected.subcategory = subcategoryExpected;
+      reportExpected.subcategories = [subcategoryExpected];
 
-      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Subcategory);
+      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Problem);
 
     });
   });
