@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { EventService } from '../../../../services/event.service';
+import { ReportEvent } from '../../../../model/ReportEvent';
+import { AuthenticationService } from '../../../../services/authentication.service';
+import { User } from '../../../../model/AuthUser';
+import { BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-event',
@@ -13,14 +18,20 @@ export class EventComponent implements OnInit {
   actionCtrl: FormControl;
   detailCtrl: FormControl;
   eventActions = Object.values(EventActions);
+  reportId: string;
+  user: User;
 
   showErrors: boolean;
-  notYet: boolean;
+  loading: boolean;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder,
+              public bsModalRef: BsModalRef,
+              private eventService: EventService,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.initEventForm();
+    this.authenticationService.user.subscribe(user => this.user = user);
   }
   
   initEventForm() {
@@ -41,7 +52,18 @@ export class EventComponent implements OnInit {
     if (!this.eventForm.valid) {
       this.showErrors = true;
     } else {
-      this.notYet = true;
+      this.loading = true;
+      this.eventService.createEvent(Object.assign(new ReportEvent(), {
+        reportId: this.reportId,
+        userId: this.user.id,
+        eventType: 'PRO',
+        action: this.actionCtrl.value,
+        detail: this.detailCtrl.value
+      })).subscribe( event => {
+        this.bsModalRef.hide();
+        this.loading = false;
+        }
+      );
     }
   }
 

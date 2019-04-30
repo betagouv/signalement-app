@@ -20,6 +20,8 @@
   <div class="container">
     <div class="panel">
       <ng-container *ngIf="report">
+        <h5>Statut pro : {{report.statusPro}}</h5>
+        <hr />
         <h5>Problème</h5>
         <div class="row">
           <div class="col-12">
@@ -88,9 +90,10 @@
         <h5>Historique</h5>
         <div class="row">
           <div class="col-12">
-            Créé le : {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}}
-            <br/>
-            Statut pro : {{report.statusPro}}
+            Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
+          </div>
+          <div class="col-12" *ngFor="let event of events">
+            Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action}}
           </div>
         </div>
       </ng-container>

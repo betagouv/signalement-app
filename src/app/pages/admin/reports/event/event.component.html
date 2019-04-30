@@ -30,13 +30,11 @@
       Veuillez renseigner les champs obligatoires.<br />
     </div>
 
-    <div class="notification error" *ngIf="notYet">
-      Ca marchera bientôt, sois patient ;)<br />
-    </div>
-
     <hr />
     <button type="submit" class="btn btn-lg btn-primary" id="submitEventForm">
       Enregistrer
     </button>
   </form>
 </div>
+
+<ngx-loading [show]="loading"></ngx-loading>

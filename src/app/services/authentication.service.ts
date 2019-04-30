@@ -22,7 +22,7 @@ export class AuthenticationService {
               private localStorage: LocalStorage) {
     this.localStorage.getItem(AuthUserStorageKey).subscribe(authUser => {
       if (authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token)) {
-        this.userSource.next(authUser);
+        this.userSource.next(authUser.user);
       }
     });
   }

@@ -119,6 +119,10 @@ export class ReportListComponent implements OnInit {
 
   addEvent(event$: Event, report: Report) {
     event$.stopPropagation();
-    this.bsModalRef = this.modalService.show(EventComponent, {});
+    this.bsModalRef = this.modalService.show(
+      EventComponent,
+      {
+        initialState: {reportId: report.id}
+      });
   }
 }
