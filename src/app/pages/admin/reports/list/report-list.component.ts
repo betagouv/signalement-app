@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { Report, StatusPro } from '../../../../model/Report';
+import { Report } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
