@@ -1066,17 +1066,19 @@ list:
                         fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
                   - title: Non
                     information:
-                      title: Votre produit n'est plus couvert par la garantie.
-                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de       conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
+                      title: <b>Votre produit n'est plus couvert par la garantie.</b>
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". 
+                                <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                       actions:
                         - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                          example: <br/><br/>Un vice caché d'un produit est un défaut :
+                            <br/><br/>Un vice caché d'un produit est un défaut :
                             <ul>
-                              <li>présent dès le départ qui rend le produit inutilisable et</li>
+                              <li>qui rend le produit inutilisable, </li>
+                              <li>présent dès le départ et</li>
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                                  <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande . 
+                                  <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande . 
           - title: Occasion
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
@@ -1136,14 +1138,15 @@ list:
                         fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
                   - title: Non
                     information:
-                      title: Votre produit n'est plus couvert par la garantie.
+                      title: <b>Votre produit n'est plus couvert par la garantie.</b>
                       subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                       actions:
                         - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
                           example: 
                             <br/><br/>Un vice caché d'un produit est un défaut :
                             <ul>
-                              <li>présent dès le départ qui rend le produit inutilisable et</li>
+                              <li>qui rend le produit inutilisable, </li>
+                              <li>présent dès le départ et</li>
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple. 
@@ -1285,11 +1288,12 @@ list:
         information:
           title: Ceci ne constitue pas un motif de signalement.
           subTitle: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
-            Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.
-            Par contre, si vous avez été victime d'injures ou de harcèlement, vous pouvez vous rendre dans un commissariat ou faire une pré-plainte en ligne
+              <br/>Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.
           actions:
-            - question: Signaler un cas de harcèlement ou d'injure?
-              answer: Faire une pré-plainte en ligne<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
+            - question: Vous avez été victime d'harcélement ou d'injure?
+              answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
+            - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
+              answer: Vous pouvez appeler le 3977. C'est numéro d’appel national unique pour les victimes ou les témoins.
       - title: Autre problème de service après-vente
   - category: Problème suite à un achat sur internet
     categoryId: PBINT
