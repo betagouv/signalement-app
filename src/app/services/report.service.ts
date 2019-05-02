@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report, StatusPro } from '../model/Report';
+import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { BehaviorSubject, of } from 'rxjs';
 import { LocalStorage } from '@ngx-pwa/local-storage';
@@ -176,7 +176,7 @@ export class ReportService {
       }),
       contactAgreement: reportApi.contactAgreement,
       uploadedFiles: reportApi.files.map(f => Object.assign(new UploadedFile(), f)),
-      statusPro: StatusPro[reportApi.statusPro]
+      statusPro: reportApi.statusPro
     });
   }
 }

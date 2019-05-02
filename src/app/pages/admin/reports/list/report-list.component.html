@@ -56,7 +56,7 @@
               </td>
               <td></td>
             </tr>
-            <tr *ngFor="let report of reportsByDate.reports" [class]="getReportCssClass(report.statusPro)" (click)="openReport(report)">
+            <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="openReport(report)">
               <td>{{report.company.postalCode | slice : 0 : 2}}</td>
               <td>
                 <span [tooltip]="companyTooltip">
@@ -104,9 +104,7 @@
               </td>
               <td>
                 <div [tooltip]="consumerTooltip">
-                  {{report.consumer.email}}&nbsp;
-                  <span class="agreement" *ngIf="report.contactAgreement">&#x2705;</span>
-                  <span class="agreement" *ngIf="!report.contactAgreement">&#10060;</span>
+                  {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement">&#x2705;</span><span class="agreement" *ngIf="!report.contactAgreement">&#10060;</span>
                 </div>
                 <ng-template #consumerTooltip>
                   {{report.consumer.firstName}} {{report.consumer.lastName}}
@@ -124,7 +122,7 @@
                   <br/>
                 </span>
               </td>
-              <td>
+              <td [class]="getReportCssClass(report.statusPro)">
                 {{report.statusPro}}
               </td>
               <td>

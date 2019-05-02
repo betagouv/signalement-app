@@ -102,21 +102,6 @@ export class ReportListComponent implements OnInit {
     this.router.navigate(['suivi-des-signalements', report.id]);
   }
 
-  getReportCssClass(status: StatusPro) {
-    let cssClass;
-    switch (status) {
-      case StatusPro['HORS-PERIMETRE']:
-        cssClass = `hors-perimetre`;
-        break;
-      case StatusPro['A-CONTACTER']:
-        cssClass = `a-contacter`;
-        break;
-      default:
-        break;
-    }
-    return `${cssClass} pointer`;
-  }
-
   addEvent(event$: Event, report: Report) {
     event$.stopPropagation();
     this.bsModalRef = this.modalService.show(
@@ -124,5 +109,13 @@ export class ReportListComponent implements OnInit {
       {
         initialState: {reportId: report.id}
       });
+  }
+
+  getReportCssClass(status: string) {
+    if (status) {
+      return `status-${status.toLowerCase().split(' ').join('-')}`;
+    } else {
+      return '';
+    }
   }
 }

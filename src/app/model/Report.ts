@@ -19,7 +19,7 @@ export class Report {
   retrievedFromStorage: boolean;
   creationDate: Date;
   storedStep: Step;
-  statusPro: StatusPro;
+  statusPro: string;
 }
 
 export class DetailInputValue {
@@ -72,8 +72,3 @@ export class DetailInputValue {
 }
 
 export const PrecisionKeyword = '(à préciser)';
-
-export enum StatusPro {
-  'HORS-PERIMETRE' = 'Hors périmètre',
-  'A-CONTACTER' = 'A contacter',
-}

@@ -92,8 +92,15 @@
           <div class="col-12">
             Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
           </div>
-          <div class="col-12" *ngFor="let event of events">
-            Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action}}
+          <div class="col-12" *ngFor="let event of events; let eventIndex = index">
+            <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
+              <span class="collapsed-icon">&#43;</span>
+              <span class="uncollapsed-icon">&#8722;</span>
+              Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action}}
+            </a>
+            <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
+              Détail : {{event.detail}}
+            </div>
           </div>
         </div>
       </ng-container>

@@ -13,3 +13,22 @@ img.back {
 .agreement {
   font-size: 12px;
 }
+
+.collapsable {
+  .collapsed-icon {
+    display: none;
+  }
+  .uncollapsed-icon {
+    display: inline;
+  }
+
+  &.collapsed {
+    .collapsed-icon {
+      display: inline;
+    }
+    .uncollapsed-icon {
+      display: none;
+    }
+  }
+}
+
