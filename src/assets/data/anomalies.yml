@@ -783,24 +783,25 @@ list:
               - label: Quel produit&#160;?
                 rank: 3
                 type: TEXT
-                placeholder: Nom du produit
+                placeholder: Nom ou type de produit
               - label: Quel était le prix indiqué si vous vous en rappelez&#160;?
                 rank: 4
                 type: TEXT
                 placeholder: Prix indiqué
                 optionnal: true
-              - label: 'L''avez-vous signaler au moment de payer&#160;?'
+              - label: 'L''avez-vous signalé au moment de payer&#160;?'
                 rank: 5
                 type: RADIO
                 options:
-                  - Oui, à qui&#160;? (à préciser)
+                  - Oui. Pouvez-vous préciser à qui&#160;? (à préciser)
                   - Non
-              - label: Le commerçant a-t-il bien voulu vous faire payer le prix affiché&#160;?
+              - label: Si oui, le commerçant a-t-il bien voulu vous faire payer le prix affiché&#160;?
                 rank: 6
                 type: RADIO
                 options:
                   - Oui
                   - Non
+                optionnal: true
               - label: Description
                 rank: 7
                 type: TEXTAREA
@@ -1040,7 +1041,7 @@ list:
                 subcategories:
                   - title: Oui
                     example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
-                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
+                    subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                       <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                     subcategories:
                       - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
@@ -1066,16 +1067,16 @@ list:
                   - title: Non
                     information:
                       title: Votre produit n'est plus couvert par la garantie.
-                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de       conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                       actions:
-                        - question: Un problème avec un commerçant&#160;?
-                          example: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\" ?
-                            <br/><br/>Un vice caché d'un produit est un défaut :
+                        - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                          example: <br/><br/>Un vice caché d'un produit est un défaut :
                             <ul>
                               <li>présent dès le départ qui rend le produit inutilisable et</li>
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                                  <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande . 
           - title: Occasion
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
@@ -1110,7 +1111,7 @@ list:
                 subcategories:
                   - title: Oui
                     example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
-                    subcategoriesTitle: Les extensions de garantie sont indiquées dans votre contrat de garantie.
+                    subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                       <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                     subcategories:
                       - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
@@ -1136,16 +1137,17 @@ list:
                   - title: Non
                     information:
                       title: Votre produit n'est plus couvert par la garantie.
-                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                       actions:
-                        - question: Un problème avec un commerçant&#160;?
-                          example: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\" ?
+                        - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                          example: 
                             <br/><br/>Un vice caché d'un produit est un défaut :
                             <ul>
                               <li>présent dès le départ qui rend le produit inutilisable et</li>
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
-                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple. 
+                                  <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande . 
       - title: Problème de livraison
         example: 'Exemple : colis perdu et non reçu, livraison tardive, colis abimé...'
         subcategoriesTitle: Quel est le problème&#160;?
