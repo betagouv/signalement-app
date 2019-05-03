@@ -6,32 +6,50 @@
   </div>
 </div>
 
-<div class="row pt-5">
-  <div class="col-12 text-center">
-    <div class="btn-group" dropdown>
-      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
-        <ng-container *ngIf="!currentDepartment">Tous les départements <span class="caret"></span></ng-container>
-        <ng-container *ngIf="currentDepartment">{{currentDepartment.code}} - {{currentDepartment.label}} <span class="caret"></span></ng-container>
-      </button>
-      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-        <li role="menuitem" class="menutitle">
-            <span class="pointer dropdown-item menutitle" (click)="filterByDeparment()">
-              Tous les départements
-            </span>
-        </li>
-        <ng-container *ngFor="let region of regions">
-          <li class="divider dropdown-divider"></li>
-          <li class="disabled" role="menuitem"><a class="dropdown-item disabled menutitle" href="#">{{region.label}}</a></li>
-          <li role="menuitem" *ngFor="let department of region.departments">
-            <span class="pointer dropdown-item" (click)="filterByDeparment(department)">
-              {{department.code}} - {{department.label}}
-            </span>
+<form (submit)="loadReports()">
+  <div class="row pt-5 text-center">
+    <div class="col-12">
+      <div class="btn-group" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-primary dropdown-toggle" aria-controls="dropdown-basic">
+          {{filter.departementsLabel}} <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem" class="menutitle">
+              <span class="pointer dropdown-item menutitle" (click)="selectDepartments([], 'Tous les départements')">
+                Tous les départements
+              </span>
           </li>
-        </ng-container>
-      </ul>
+          <ng-container *ngFor="let region of regions">
+            <li class="divider dropdown-divider"></li>
+            <li class="menutitle pt-0" role="menuitem">
+              <span class="pointer dropdown-item menutitle" (click)="selectDepartments(region.departments, region.label)">
+                {{region.label}}
+              </span>
+            </li>
+            <li role="menuitem" *ngFor="let department of region.departments">
+              <span class="pointer dropdown-item" (click)="selectDepartments([department], department.code.concat('-').concat(department.label))">
+                {{department.code}} - {{department.label}}
+              </span>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+  <div class="row pt-2 text-center">
+    <div class="col-12">
+      <button type="submit" class="btn btn btn-primary">
+        Filtrer
+      </button>
+      &nbsp;
+      <!--
+      <button type="submit" class="btn btn btn-primary">
+        Exporter
+      </button>
+      -->
+    </div>
+  </div>
+</form>
 <div class="row pt-5">
   <div class="col-12 text-center">
     <div class="table-responsive">

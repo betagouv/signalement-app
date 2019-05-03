@@ -90,12 +90,12 @@ export class ReportService {
     );
   }
 
-  getReports(offset: number, limit: number, codeDepartement?: string) {
+  getReports(offset: number, limit: number, departments?: string[]) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
     httpParams = httpParams.append('limit', limit.toString());
-    if (codeDepartement) {
-      httpParams = httpParams.append('codePostal', codeDepartement);
+    if (departments && departments.length) {
+      httpParams = httpParams.append('departments', departments.join(','));
     }
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
