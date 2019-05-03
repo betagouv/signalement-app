@@ -16,7 +16,7 @@ export class EventService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.post(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'events']),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', event.reportId, 'events']),
           event,
           headers
         );
@@ -27,7 +27,7 @@ export class EventService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<ReportEvent[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'events', reportId]),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'events']),
           headers
         );
       })
