@@ -775,10 +775,10 @@ list:
             type: TEXTAREA
       - title: Prix à la caisse différent du prix affiché
         example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros.'
-        subcategoriesTitle: Le prix qui était affiché est-il très différent du prix réel&#160;?
+        subcategoriesTitle: Vous doutiez vous que c'était dû à une erreur de prix  par le commerçant&#160;?
         subcategories:
           - title: Oui
-            example: Par exemple, une voiture neuve indiquée à 500 euros. Le consommateur se doute que c'est une erreur de prix.
+            example: Par exemple, une voiture neuve indiquée à 500 euros. Le consommateur se doute que c'est une erreur d'affichage du prix.
             information:
               content: Si l’erreur de prix est énorme et que le client se doute de l'erreur, on appelle cela une "erreur de prix manifeste".
                 <br/>Dans ce cas-là, le vendeur a le droit de refuser de vous vendre à ce prix.
