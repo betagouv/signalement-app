@@ -80,14 +80,13 @@
   
       <div class="container max-width" *ngIf="selectedCompanyType == companyType.Internet">
         <p class="mx-auto mb-4 text-center title" [innerHTML]="internetInformation?.title"></p>
-  
-        <p class="mb-4 text-center">{{ internetInformation?.subTitle }}</p>
+        <p class="mb-4 text-center" [innerHTML]="internetInformation?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
         <p class="mb-5" *ngIf="internetInformation?.content" [innerHTML]="internetInformation?.content"></p>
   
         <div class="card mx-auto mb-4 rounded-lg action" *ngFor="let action of internetInformation?.actions">
           <div class="card-body">
-            <p class="card-text">{{ action.question }}</p>
-            <p class="card-text text-muted" *ngIf="action.example">{{ action.example }}</p>
+            <p class="card-text" [innerHTML]="action.question" *ngIf="action.question"></p>
+            <p class="card-text text-muted" *ngIf="action.example" [innerHTML]="action.example"></p>
           </div>
           <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
         </div>
@@ -129,4 +128,3 @@
       </div>
     </section>
   </main>
-  
