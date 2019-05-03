@@ -944,7 +944,7 @@ list:
                 rank: 5
                 type: TEXT
                 placeholder: "Lien vers la publicité"
-            fileLabel: Photo(s) de la publicité
+            fileLabel: Photo(s) de la publicité si possible
           - title: Sur le menu ou la carte des prestations
             detailInputs:
               - label: Date du constat
@@ -958,7 +958,7 @@ list:
                 rank: 3
                 type: TEXT
                 placeholder: Type de produit / prestation
-            fileLabel: Photo si vous avez
+            fileLabel: Photo(s) si possible
           - title: Autres
             detailInputs:
               - label: Date du constat
@@ -982,15 +982,15 @@ list:
             rank: 2
             type: RADIO
             options:
-              - L'emballage d'un produit (à préciser)
-              - Un affichage chez le commerçant
+              - L'emballage d'un produit
+              - Une affiche chez le commerçant
               - Une annonce sur un catalogue
               - Un site internet (à préciser)
               - Un spot télé ou radio (à préciser)
               - Un contrat ou un devis
-              - Le discours d'un vendeur ou du commercial
+              - Le discours d'un vendeur
               - La façon de mettre en vente
-              - Autres (à préciser)
+              - Autre (à préciser)
           - label: A propos de quoi est-ce trompeur&#160;?
             rank: 3
             type: RADIO
@@ -999,7 +999,8 @@ list:
               - La composition
               - Un label ou un certificat
               - Une promesse de résultat
-              - Autres (à préciser)
+              - Une marque
+              - Autre (à préciser)
           - label: Pourquoi trouvez-vous ça trompeur ?
             rank: 4
             type: TEXTAREA
