@@ -1261,8 +1261,9 @@ list:
               - title: Oui
               - title: Non
                 information:
-                  title: Ceci ne constitue pas un motif de signalement.
-          - title: Auprès d’un démarcheur qui est venu dans votre domicile
+                  title: Vous ne pouvez plus exiger le remboursement ou l'annulation.
+                  content: Une fois le délai de rétractation terminé, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.       
+          - title: Auprès d’un démarcheur qui est venu chez vous
             description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
               <br />Vous n’avez pas à vous justifier auprès du commerçant.
               <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
@@ -1272,7 +1273,7 @@ list:
               - title: Non
                 information:
                   title: Vous ne pouvez plus exiger le remboursement ou l'annulation.
-                  content: Une fois le délai de rétractation terminée, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.                        
+                  content: Une fois le délai de rétractation terminé, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.                        
           - title: Sur un stand, dans une foire ou un salon
             subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ? 
             subcategories:
