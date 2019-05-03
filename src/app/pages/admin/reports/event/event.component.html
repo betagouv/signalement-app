@@ -7,8 +7,9 @@
           <label [class]="hasError(actionCtrl) ? 'error' : ''">
             Action <span class="error">*</span>
           </label>
-          <select [formControl]="actionCtrl">
-            <option *ngFor="let action of eventActions">
+          <select [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''">
+            <option value=""disabled>Sélectionnez une action</option>
+            <option *ngFor="let action of actionPros">
               {{action}}
             </option>
           </select>

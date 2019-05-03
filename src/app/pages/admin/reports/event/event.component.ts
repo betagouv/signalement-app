@@ -5,6 +5,7 @@ import { ReportEvent } from '../../../../model/ReportEvent';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { User } from '../../../../model/AuthUser';
 import { BsModalRef } from 'ngx-bootstrap';
+import { ConstantService } from '../../../../services/constant.service';
 
 @Component({
   selector: 'app-event',
@@ -17,9 +18,9 @@ export class EventComponent implements OnInit {
   eventForm: FormGroup;
   actionCtrl: FormControl;
   detailCtrl: FormControl;
-  eventActions = Object.values(EventActions);
   reportId: string;
   user: User;
+  actionPros: string[];
 
   showErrors: boolean;
   loading: boolean;
@@ -27,11 +28,13 @@ export class EventComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               public bsModalRef: BsModalRef,
               private eventService: EventService,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private constantService: ConstantService) { }
 
   ngOnInit() {
     this.initEventForm();
     this.authenticationService.user.subscribe(user => this.user = user);
+    this.constantService.getActionPros().subscribe(actionPros => this.actionPros = actionPros);
   }
   
   initEventForm() {
@@ -67,15 +70,4 @@ export class EventComponent implements OnInit {
     }
   }
 
-}
-
-export enum EventActions {
-  'HORS-PERIMETRE' = 'Hors périmètre',
-  'A-CONTACTER' = 'A contacter',
-  'CONTACT-TEL' = 'Appel téléphonique',
-  'CONTACT-EMAIL' = 'Envoi d\'un email',
-  'CONTACT-COURRIER' = 'Envoi d\'un courrier',
-  'REPONSE-PRO-CONTACT' = 'Réponse du professionnel au contact',
-  'ENVOI-SIGNALEMENT' = 'Envoi du signalement',
-  'REPONSE-PRO-SIGNALEMENT' = 'Réponse du professionnel au signalement'
 }
