@@ -10,7 +10,7 @@ import { ConstantService } from '../../../../services/constant.service';
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css', '../../../../app.component.scss'],
+  styleUrls: ['./event.component.scss', '../../../../app.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
 export class EventComponent implements OnInit {

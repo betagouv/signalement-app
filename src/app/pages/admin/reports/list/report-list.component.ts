@@ -61,6 +61,7 @@ export class ReportListComponent implements OnInit {
 
   ngOnInit() {
     this.loadReports(1);
+    this.updateReportOnModalHide();
   }
 
   loadReports(page: number) {
@@ -111,9 +112,22 @@ export class ReportListComponent implements OnInit {
       });
   }
 
+  updateReportOnModalHide() {
+    this.modalService.onHide.subscribe(reason => {
+      if (!reason && this.bsModalRef.content && this.bsModalRef.content.reportId) {
+        this.reportService.getReport(this.bsModalRef.content.reportId).subscribe(report => {
+          const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
+            return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
+          }).reports;
+          reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
+        });
+      }
+    });
+  }
+
   getReportCssClass(status: string) {
     if (status) {
-      return `status-${status.toLowerCase().split(' ').join('-')}`;
+      return `status-${status.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(' ').join('-')}`;
     } else {
       return '';
     }
