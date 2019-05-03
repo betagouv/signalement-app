@@ -1306,7 +1306,7 @@ list:
         example: 'Exemple : l''accueil est froid, le personnel est mal poli...'
         information:
           title: Ceci ne constitue pas un motif de signalement.
-          subTitle: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
+          content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
               <br/>Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.
           actions:
             - question: Vous avez été victime d'harcélement ou d'injure?
