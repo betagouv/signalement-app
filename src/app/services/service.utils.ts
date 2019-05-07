@@ -40,6 +40,18 @@ export class ServiceUtils {
     );
   }
 
+  getAuthHttpParam() {
+    return this.localStorage.getItem(AuthUserStorageKey).pipe(
+      map(authUser => {
+        let param = 'X-Auth-Token';
+        if (authUser) {
+          param = `${param}=${authUser.token}`;
+        }
+        return param;
+      })
+    );
+  }
+
 }
 
 

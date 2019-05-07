@@ -6,12 +6,12 @@
   </div>
 </div>
 
-<form (submit)="loadReports()">
-  <div class="row pt-5 text-center">
+<div class="filters">
+  <div class="row text-center">
     <div class="col-12">
       <div class="btn-group" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-primary dropdown-toggle" aria-controls="dropdown-basic">
-          {{filter.departementsLabel}} <span class="caret"></span>
+        <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+          {{departmentsValue}} <span class="caret"></span>
         </button>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
           <li role="menuitem" class="menutitle">
@@ -34,23 +34,26 @@
           </ng-container>
         </ul>
       </div>
-    </div>
-  </div>
-  <div class="row pt-2 text-center">
-    <div class="col-12">
-      <button type="submit" class="btn btn btn-primary">
-        Filtrer
-      </button>
       &nbsp;
-      <!--
-      <button type="submit" class="btn btn btn-primary">
-        Exporter
-      </button>
-      -->
+      <input type="text"
+             [(ngModel)]="periodValue"
+             name="period"
+             placeholder="Daterangepicker"
+             placeholder="Période sélectionnée"
+             bsDaterangepicker
+             (bsValueChange)="changePeriod($event)"
+             [bsConfig]="{
+               containerClass: 'theme-default',
+               rangeInputFormat: 'DD MMMM YYYY'
+             }" />
+      &nbsp;
+      <a href="{{reportExtractUrl}}">
+        <img alt="Icône du bouton exporter en CSV" src="/assets/images/icon_csv.png"/>
+      </a>
     </div>
   </div>
-</form>
-<div class="row pt-5">
+</div>
+<div class="row">
   <div class="col-12 text-center">
     <div class="table-responsive">
       <table class="table">
@@ -155,7 +158,7 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)"
+    <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
                 previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
     </pagination>
   </div>

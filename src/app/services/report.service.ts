@@ -7,9 +7,11 @@ import { BehaviorSubject, of } from 'rxjs';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Step } from './report-router.service';
 import { PaginatedData } from '../model/PaginatedData';
-import { mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
+import { ReportFilter } from '../model/ReportFilter';
+import moment from 'moment';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -90,12 +92,18 @@ export class ReportService {
     );
   }
 
-  getReports(offset: number, limit: number, departments?: string[]) {
+  getReports(offset: number, limit: number, reportFilter: ReportFilter) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
     httpParams = httpParams.append('limit', limit.toString());
-    if (departments && departments.length) {
-      httpParams = httpParams.append('departments', departments.join(','));
+    if (reportFilter.departments && reportFilter.departments.length) {
+      httpParams = httpParams.append('departments', reportFilter.departments.join(','));
+    }
+    if (reportFilter.period && reportFilter.period[0]) {
+      httpParams = httpParams.append('start', moment(reportFilter.period[0]).format('YYYY-MM-DD'));
+    }
+    if (reportFilter.period && reportFilter.period[1]) {
+      httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
@@ -110,6 +118,25 @@ export class ReportService {
           hasNextPage: paginatedData.hasNextPage,
           entities: paginatedData.entities.map(entity => this.reportApi2report(entity))
         }));
+      })
+    );
+  }
+
+  getReportExtractUrl(reportFilter: ReportFilter) {
+    return this.serviceUtils.getAuthHttpParam().pipe(
+      map(param => {
+        const url = this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']);
+        const httpParams = [param];
+        if (reportFilter.departments && reportFilter.departments.length) {
+          httpParams.push(`departments=${reportFilter.departments.join(',')}`);
+        }
+        if (reportFilter.period && reportFilter.period[0]) {
+          httpParams.push(`start=${moment(reportFilter.period[0]).format('YYYY-MM-DD')}`);
+        }
+        if (reportFilter.period && reportFilter.period[1]) {
+          httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
+        }
+        return `${url}?${httpParams.join('&')}`;
       })
     );
   }

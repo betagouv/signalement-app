@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { BsDropdownModule, ModalModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { ReportDetailComponent } from './reports/detail/report-detail.component';
 import { ReportListComponent } from './reports/list/report-list.component';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -31,6 +31,7 @@ const routes: Routes = [
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
+    BsDatepickerModule.forRoot(),
   ],
   exports: [
     RouterModule,

@@ -5,8 +5,9 @@ import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
 import { Router } from '@angular/router';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
+import { ReportFilter } from '../../../../model/ReportFilter';
 
 @Component({
   selector: 'app-report-list',
@@ -21,25 +22,28 @@ export class ReportListComponent implements OnInit {
   currentPage: number;
   itemsPerPage = 20;
 
-  filter: {
-    departments: string[],
-    departementsLabel: string
-  }
+  reportFilter: ReportFilter;
+  departmentsValue: string;
+  periodValue: any;
+  reportExtractUrl: string;
 
   bsModalRef: BsModalRef;
 
   constructor(private reportService: ReportService,
               private fileUploaderService: FileUploaderService,
+              private localeService: BsLocaleService,
               private router: Router,
               private modalService: BsModalService) {
 }
 
   ngOnInit() {
 
-    this.filter = {
+    this.reportFilter = {
       departments: [],
-      departementsLabel: 'Tous les départements'
+      period: []
     };
+    this.departmentsValue = 'Tous les départements';
+    this.localeService.use('fr');
 
     this.loadReports(1);
     this.updateReportOnModalHide();
@@ -47,11 +51,8 @@ export class ReportListComponent implements OnInit {
 
   loadReports(page = 1) {
     this.currentPage = page;
-    this.reportService.getReports(
-      (page - 1) * this.itemsPerPage,
-      this.itemsPerPage,
-      this.filter.departments
-    ).subscribe(result => {
+    this.getReportExtractUrl();
+    this.reportService.getReports((page - 1) * this.itemsPerPage, this.itemsPerPage, this.reportFilter).subscribe(result => {
       this.reportsByDate = [];
       const distinctDates = result.entities
         .map(e => moment(e.creationDate).format('DD/MM/YYYY'))
@@ -67,7 +68,12 @@ export class ReportListComponent implements OnInit {
     });
   }
 
-  pageChanged(pageEvent: {page: number, itemPerPage: number}) {
+  changePeriod(event) {
+    this.reportFilter.period = event;
+    this.loadReports();
+  }
+
+  changePage(pageEvent: {page: number, itemPerPage: number}) {
     this.loadReports(pageEvent.page);
   }
 
@@ -110,8 +116,15 @@ export class ReportListComponent implements OnInit {
   }
 
   selectDepartments(departments: { code: string, label: string }[], label) {
-    this.filter.departments = departments.map(d => d.code);
-    this.filter.departementsLabel = label;
+    this.reportFilter.departments = departments.map(d => d.code);
+    this.departmentsValue = label;
+    this.loadReports();
+  }
+
+  getReportExtractUrl() {
+    return this.reportService.getReportExtractUrl(this.reportFilter).subscribe(url => {
+      this.reportExtractUrl = url;
+      });
   }
 }
 
