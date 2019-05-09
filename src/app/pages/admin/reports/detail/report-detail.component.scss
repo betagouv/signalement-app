@@ -10,6 +10,10 @@ img.back {
 
 }
 
+img.remove {
+  height: 15px;
+}
+
 .agreement {
   font-size: 12px;
 }
@@ -29,6 +33,15 @@ img.back {
     .uncollapsed-icon {
       display: none;
     }
+  }
+}
+
+table {
+  border: none;
+
+  td {
+    border: none;
+    padding: 0;
   }
 }
 

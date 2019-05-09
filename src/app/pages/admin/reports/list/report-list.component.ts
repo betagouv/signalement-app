@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
 import { Report } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
@@ -8,13 +8,14 @@ import { Router } from '@angular/router';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
 import { ReportFilter } from '../../../../model/ReportFilter';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
   styleUrls: ['./report-list.component.scss']
 })
-export class ReportListComponent implements OnInit {
+export class ReportListComponent implements OnInit, OnDestroy {
 
   regions = Regions;
   reportsByDate: {date: string, reports: Array<Report>}[];
@@ -27,7 +28,8 @@ export class ReportListComponent implements OnInit {
   periodValue: any;
   reportExtractUrl: string;
 
-  bsModalRef: BsModalRef;
+  modalRef: BsModalRef;
+  modalOnHideSubscription: Subscription;
 
   constructor(private reportService: ReportService,
               private fileUploaderService: FileUploaderService,
@@ -46,7 +48,11 @@ export class ReportListComponent implements OnInit {
     this.localeService.use('fr');
 
     this.loadReports(1);
-    this.updateReportOnModalHide();
+    this.modalOnHideSubscription = this.updateReportOnModalHide();
+  }
+
+  ngOnDestroy() {
+    this.modalOnHideSubscription.unsubscribe();
   }
 
   loadReports(page = 1) {
@@ -87,7 +93,7 @@ export class ReportListComponent implements OnInit {
 
   addEvent(event$: Event, report: Report) {
     event$.stopPropagation();
-    this.bsModalRef = this.modalService.show(
+    this.modalRef = this.modalService.show(
       EventComponent,
       {
         initialState: {reportId: report.id}
@@ -95,9 +101,9 @@ export class ReportListComponent implements OnInit {
   }
 
   updateReportOnModalHide() {
-    this.modalService.onHide.subscribe(reason => {
-      if (!reason && this.bsModalRef.content && this.bsModalRef.content.reportId) {
-        this.reportService.getReport(this.bsModalRef.content.reportId).subscribe(report => {
+    return this.modalService.onHide.subscribe(reason => {
+      if (!reason && this.modalRef.content && this.modalRef.content.reportId) {
+        this.reportService.getReport(this.modalRef.content.reportId).subscribe(report => {
           const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
             return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
           }).reports;

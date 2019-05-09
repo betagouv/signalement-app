@@ -41,16 +41,33 @@
               <span [innerHTML]="detailInputValue.label"></span>
               &nbsp;<span [innerHTML]="detailInputValue.value"></span>
             </div>
-            <div *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noUploadedFiles">
+            <div *ngIf="report.uploadedFiles && report.uploadedFiles.length;">
               Pièce(s) jointe(s) :
               <div class="col-12">
-                <ul class="filename">
-                  <li *ngFor="let uploadedFile of report.uploadedFiles">
-                    <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                      {{uploadedFile.filename}}
-                    </a>
-                  </li>
-                </ul>
+                <table class="table table-sm">
+                  <tbody>
+                  <tr *ngFor="let uploadedFile of report.uploadedFiles">
+                    <td class="text-left" *ngIf="!uploadedFile.loading">
+                      <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                        <span *ngIf="uploadedFile.id">
+                          {{uploadedFile.filename}}
+                        </span>
+                      </a>
+                    </td>
+                    <td class="text-right pointer">
+                      <img class="remove" alt="Icône du bouton suppression" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
+                    </td>
+                    <ng-template #removeTemplate>
+                      <div class="modal-body text-center">
+                        <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
+                      </div>
+                    </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
