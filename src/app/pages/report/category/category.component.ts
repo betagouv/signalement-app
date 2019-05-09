@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({
   selector: 'app-category',
@@ -24,19 +24,19 @@ export class CategoryComponent implements OnInit {
   internetInformation: Information;
 
   constructor(private anomalyService: AnomalyService,
-              private reportService: ReportService,
+              private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.step = Step.Category;
-    this.reportService.currentReport.subscribe(report => this.report = report);
+    this.reportStorageService.reportInProgess.subscribe(report => this.report = report);
     this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
-    const anomaly = this.anomalyService.getAnomalyByCategoryId("PBINT");
+    const anomaly = this.anomalyService.getAnomalyByCategoryId('PBINT');
     if (anomaly) {
-      this.internetInformation = anomaly.information; 
+      this.internetInformation = anomaly.information;
     }
   }
 
@@ -66,17 +66,17 @@ export class CategoryComponent implements OnInit {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
     this.report = new Report();
     this.report.category = anomaly.category;
-    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
   }
   
   restoreStoredReport() {
-    this.reportService.changeReportFromStep(this.report, this.report.storedStep);
+    this.reportStorageService.changeReportInProgressFromStep(this.report, this.report.storedStep);
     this.reportRouterService.routeForward(this.report.storedStep);
   }
 
   removeStoredReport() {
-    this.reportService.removeReportFromStorage();
+    this.reportStorageService.removeReportInProgressFromStorage();
   }
 
   selectCompanyType(type: CompanyType) {

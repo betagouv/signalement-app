@@ -1,76 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report } from '../model/Report';
+import { Report } from '../model/Report';
 import { Company } from '../model/Company';
-import { BehaviorSubject, of } from 'rxjs';
-import { LocalStorage } from '@ngx-pwa/local-storage';
-import { Step } from './report-router.service';
+import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
 import { map, mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
-import { ReportFilter } from '../model/ReportFilter';
+import { Region, ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
-
-const ReportStorageKey = 'ReportSignalConso';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReportService {
 
-  private reportSource = new BehaviorSubject<Report>(undefined);
-  currentReport = this.reportSource.asObservable();
-
   constructor(private http: HttpClient,
-              private serviceUtils: ServiceUtils,
-              private localStorage: LocalStorage) {
-
-    this.retrieveReportFromStorage();
-
-  }
-
-  private retrieveReportFromStorage() {
-    this.localStorage.getItem(ReportStorageKey).subscribe((report: Report) => {
-      if (report) {
-        report.retrievedFromStorage = true;
-        // To force class method to be valuate
-        if (report.detailInputValues) {
-          report.detailInputValues = report.detailInputValues.map(d => Object.assign(new DetailInputValue(), d));
-        }
-        if (report.uploadedFiles) {
-          report.uploadedFiles = report.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
-        }
-        this.reportSource.next(report);
-      }
-    });
-  }
-
-  removeReport() {
-    this.removeReportFromStorage();
-    this.reportSource.next(undefined);
-  }
-
-  removeReportFromStorage() {
-    this.reportSource.getValue().retrievedFromStorage = false;
-    this.localStorage.removeItemSubscribe(ReportStorageKey);
-  }
-
-  changeReportFromStep(report: Report, step: Step) {
-    report.retrievedFromStorage = false;
-    report.storedStep = step;
-    this.reportSource.next(report);
-    this.localStorage.setItemSubscribe(ReportStorageKey, report);
-  }
-
-  uploadFile(file: File) {
-    const fileFormData: FormData = new FormData();
-    fileFormData.append('reportFile', file, file.name);
-    return this.http.post(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files']),
-      fileFormData,
-    );
+              private serviceUtils: ServiceUtils) {
   }
 
   createReport(report: Report) {
@@ -96,8 +43,12 @@ export class ReportService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
     httpParams = httpParams.append('limit', limit.toString());
-    if (reportFilter.departments && reportFilter.departments.length) {
-      httpParams = httpParams.append('departments', reportFilter.departments.join(','));
+    if (reportFilter.area) {
+      if (reportFilter.area instanceof Region) {
+        httpParams = httpParams.append('departments', (reportFilter.area as Region).departments.map(d => d.code).join(','));
+      } else {
+        httpParams = httpParams.append('departments', reportFilter.area.code);
+      }
     }
     if (reportFilter.period && reportFilter.period[0]) {
       httpParams = httpParams.append('start', moment(reportFilter.period[0]).format('YYYY-MM-DD'));
@@ -127,8 +78,12 @@ export class ReportService {
       map(param => {
         const url = this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']);
         const httpParams = [param];
-        if (reportFilter.departments && reportFilter.departments.length) {
-          httpParams.push(`departments=${reportFilter.departments.join(',')}`);
+        if (reportFilter.area) {
+          if (reportFilter.area instanceof Region) {
+            httpParams.push(`departments=${(reportFilter.area as Region).departments.map(d => d.code).join(',')}`);
+          } else {
+            httpParams.push(`departments=${reportFilter.area.code}`);
+          }
         }
         if (reportFilter.period && reportFilter.period[0]) {
           httpParams.push(`start=${moment(reportFilter.period[0]).format('YYYY-MM-DD')}`);

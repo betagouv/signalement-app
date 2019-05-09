@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Report } from '../../../model/Report';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({
   selector: 'app-problem',
@@ -22,13 +22,13 @@ export class ProblemComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
             private anomalyService: AnomalyService,
-            private reportService: ReportService,
+            private reportStorageService: ReportStorageService,
             private reportRouterService: ReportRouterService,
             private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.step = Step.Problem;
-    this.reportService.currentReport.subscribe(report => {
+    this.reportStorageService.reportInProgess.subscribe(report => {
       if (report && report.category) {
         this.report = report;
         this.initAnomalyFromReport();
@@ -48,7 +48,7 @@ export class ProblemComponent implements OnInit {
   onSelectSubcategories(subcategories: Subcategory[]) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, subcategories);
     this.report.subcategories = subcategories;
-    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
@@ -56,7 +56,7 @@ export class ProblemComponent implements OnInit {
     this.report.internetPurchase = internetPurchase;
     if (this.report.internetPurchase) {
       this.report.category = this.anomalyService.getAnomalyByCategoryId('PBINT').category;
-      this.reportService.changeReportFromStep(this.report, Step.Category);
+      this.reportStorageService.changeReportInProgressFromStep(this.report, Step.Category);
       this.reportRouterService.routeForward(Step.Category);
     }
   }

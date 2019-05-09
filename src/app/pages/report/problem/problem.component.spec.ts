@@ -10,19 +10,19 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReportService } from '../../../services/report.service';
 import { of } from 'rxjs';
 import { Report } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportPaths, Step } from '../../../services/report-router.service';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 describe('ProblemComponent', () => {
 
   let component: ProblemComponent;
   let fixture: ComponentFixture<ProblemComponent>;
-  let reportService: ReportService;
+  let reportStorageService: ReportStorageService;
   let anomalyService: AnomalyService;
 
   const reportFixture = new Report();
@@ -69,8 +69,8 @@ describe('ProblemComponent', () => {
 
   beforeEach(() => {
     anomalyService = TestBed.get(AnomalyService);
-    reportService = TestBed.get(ReportService);
-    reportService.currentReport = of(reportFixture);
+    reportStorageService = TestBed.get(ReportStorageService);
+    reportStorageService.reportInProgess = of(reportFixture);
 
     fixture = TestBed.createComponent(ProblemComponent);
     component = fixture.componentInstance;
@@ -122,7 +122,7 @@ describe('ProblemComponent', () => {
       component.anomaly = new Anomaly();
       component.anomaly.subcategories = subcategoriesFixture;
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
-      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
       fixture.detectChanges();
 
       component.onSelectSubcategories([subcategoriesFixture[1]]);
