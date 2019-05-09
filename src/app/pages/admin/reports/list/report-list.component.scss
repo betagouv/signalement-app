@@ -72,6 +72,22 @@
     &.status-promesse-action {
       background-color: $lighter-blue;
     }
+
+    &.status-a-recontacter {
+      background-color: $light-red;
+    }
+
+    &.status-a-informer-transmission {
+      background-color: $light-orange;
+    }
+
+    &.status-a-informer-reponse-pro {
+      background-color: $light-orange;
+    }
+
+    &.status-fait {
+      background-color: $light-green;
+    }
   }
 
   td.report-group {

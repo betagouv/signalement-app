@@ -7,7 +7,7 @@ import moment from 'moment';
 import { Router } from '@angular/router';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
-import { ReportFilter } from '../../../../model/ReportFilter';
+import { Department, Region, Regions, ReportFilter } from '../../../../model/ReportFilter';
 import { Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
@@ -26,7 +26,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
   itemsPerPage = 20;
 
   reportFilter: ReportFilter;
-  departmentsValue: string;
   periodValue: any;
   reportExtractUrl: string;
 
@@ -48,10 +47,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.admin.reports.description });
 
     this.reportFilter = {
-      departments: [],
       period: []
     };
-    this.departmentsValue = 'Tous les départements';
     this.localeService.use('fr');
 
     this.loadReports(1);
@@ -128,10 +125,19 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectDepartments(departments: { code: string, label: string }[], label) {
-    this.reportFilter.departments = departments.map(d => d.code);
-    this.departmentsValue = label;
+  selectArea(area?: Region | Department) {
+    this.reportFilter.area = area;
     this.loadReports();
+  }
+
+  getAreaLabel() {
+    if (!this.reportFilter.area) {
+      return 'Tous les départements';
+    } else if (this.reportFilter.area instanceof Region) {
+      return this.reportFilter.area.label;
+    } else {
+      return `${this.reportFilter.area.code} - ${this.reportFilter.area.label}`;
+    }
   }
 
   getReportExtractUrl() {
@@ -140,33 +146,3 @@ export class ReportListComponent implements OnInit, OnDestroy {
       });
   }
 }
-
-export const Regions = [
-  {
-    label: 'Centre-Val de Loire',
-    departments: [
-      { code: '18', label: 'Cher' },
-      { code: '28', label: 'Eure-et-Loir' },
-      { code: '36', label: 'Indre' },
-      { code: '37', label: 'Indre-et-Loire' },
-      { code: '41', label: 'Loir-et-Cher' },
-      { code: '45', label: 'Loiret' },
-    ]
-  },
-  {
-    label: 'Auvergne-Rhône-Alpes',
-    departments: [
-      { code: '01', label: 'Ain' },
-      { code: '03', label: 'Allier' },
-      { code: '07', label: 'Ardèche' },
-      { code: '15', label: 'Cantal' },
-      { code: '26', label: 'Drôme' },
-      { code: '38', label: 'Isère' },
-      { code: '42', label: 'Loire' },
-      { code: '43', label: 'Haute-Loire' },
-      { code: '63', label: 'Puy-de-Dôme' },
-      { code: '69', label: 'Rhône' },
-      { code: '73', label: 'Savoie' },
-      { code: '74', label: 'Haute-Savoie' }
-    ]
-  }];

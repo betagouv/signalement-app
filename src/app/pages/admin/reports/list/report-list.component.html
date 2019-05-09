@@ -11,23 +11,23 @@
     <div class="col-12">
       <div class="btn-group" dropdown>
         <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
-          {{departmentsValue}} <span class="caret"></span>
+          {{getAreaLabel()}} <span class="caret"></span>
         </button>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
           <li role="menuitem" class="menutitle">
-              <span class="pointer dropdown-item menutitle" (click)="selectDepartments([], 'Tous les départements')">
+              <span class="pointer dropdown-item menutitle" (click)="selectArea()">
                 Tous les départements
               </span>
           </li>
           <ng-container *ngFor="let region of regions">
             <li class="divider dropdown-divider"></li>
             <li class="menutitle pt-0" role="menuitem">
-              <span class="pointer dropdown-item menutitle" (click)="selectDepartments(region.departments, region.label)">
+              <span class="pointer dropdown-item menutitle" (click)="selectArea(region)">
                 {{region.label}}
               </span>
             </li>
             <li role="menuitem" *ngFor="let department of region.departments">
-              <span class="pointer dropdown-item" (click)="selectDepartments([department], department.code.concat('-').concat(department.label))">
+              <span class="pointer dropdown-item" (click)="selectArea(department)">
                 {{department.code}} - {{department.label}}
               </span>
             </li>
@@ -73,7 +73,7 @@
         <tbody>
           <ng-container *ngFor="let reportsByDate of reportsByDate">
             <tr>
-              <td colspan="7" class="report-group">
+              <td colspan="8" class="report-group">
                 {{reportsByDate.date}}
               </td>
               <td></td>

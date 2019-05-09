@@ -4,6 +4,7 @@ import { ReportDetailComponent } from './report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap';
 
 describe('ReportDetailComponent', () => {
   let component: ReportDetailComponent;
@@ -18,6 +19,7 @@ describe('ReportDetailComponent', () => {
         NgxLoadingModule,
         RouterTestingModule,
         HttpClientModule,
+        ModalModule.forRoot(),
       ]
     })
     .compileComponents();

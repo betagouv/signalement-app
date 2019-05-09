@@ -19,6 +19,7 @@ export class EventComponent implements OnInit {
   eventForm: FormGroup;
   actionCtrl: FormControl;
   detailCtrl: FormControl;
+  resultActionCtrl: FormControl;
   reportId: string;
   user: User;
   actionPros: string[];
@@ -51,10 +52,12 @@ export class EventComponent implements OnInit {
   initEventForm() {
     this.actionCtrl = this.formBuilder.control('', Validators.required);
     this.detailCtrl = this.formBuilder.control('', Validators.required);
+    this.resultActionCtrl = this.formBuilder.control(true, Validators.required);
 
     this.eventForm = this.formBuilder.group({
       action: this.actionCtrl,
-      detail: this.detailCtrl
+      detail: this.detailCtrl,
+      resultAction: this.resultActionCtrl
     });
   }
 
@@ -70,9 +73,10 @@ export class EventComponent implements OnInit {
       this.eventService.createEvent(Object.assign(new ReportEvent(), {
         reportId: this.reportId,
         userId: this.user.id,
-        eventType: this.actionPros.find(this.actionCtrl.value) ? 'PRO' : 'CONSO',
+        eventType: this.actionPros.find(a => a === this.actionCtrl.value) ? 'PRO' : 'CONSO',
         action: this.actionCtrl.value,
-        detail: this.detailCtrl.value
+        detail: this.detailCtrl.value,
+        resultAction: this.resultActionCtrl.value
       })).subscribe( event => {
         this.bsModalRef.hide();
         this.loading = false;

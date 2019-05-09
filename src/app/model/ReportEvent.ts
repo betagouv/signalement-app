@@ -5,6 +5,6 @@ export class ReportEvent {
   userId: string;
   eventType: string;
   action: string;
-  resultAction: string;
+  resultAction: boolean;
   detail: string;
 }
