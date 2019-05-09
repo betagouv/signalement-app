@@ -19,12 +19,18 @@
     "title": "Delai de rétractation ? - SignalConso",
     "description": "Comprenez le délai de rétractation et calculez votre date limite de rétractation"
   },
+  "cgu": {
+    "title": "Conditions générales d'utilisation - SignalConso",
+    "description": "Consultez les conditions générales d'utilisation"
+  },
   "login": {
     "title": "Authentification - SignalConso",
     "description": "Accédez à l'espace authentifié de SignalConso"
   },
-  "cgu": {
-    "title": "Conditions générales d'utilisation - SignalConso",
-    "description": "Consultez les conditions générales d'utilisation"
+  "admin": {
+    "reports": {
+      "title": "Suivi des signalements - SignalConso",
+      "description": "Suivi des signalements de SignalConso"
+    }
   }
 }

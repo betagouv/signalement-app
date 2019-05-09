@@ -9,6 +9,8 @@ import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
 import { ReportFilter } from '../../../../model/ReportFilter';
 import { Subscription } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
+import pages from '../../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-report-list',
@@ -31,7 +33,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
   modalOnHideSubscription: Subscription;
 
-  constructor(private reportService: ReportService,
+  constructor(private titleService: Title,
+              private meta: Meta,
+              private reportService: ReportService,
               private fileUploaderService: FileUploaderService,
               private localeService: BsLocaleService,
               private router: Router,
@@ -39,6 +43,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
 }
 
   ngOnInit() {
+
+    this.titleService.setTitle(pages.admin.reports.title);
+    this.meta.updateTag({ name: 'description', content: pages.admin.reports.description });
 
     this.reportFilter = {
       departments: [],

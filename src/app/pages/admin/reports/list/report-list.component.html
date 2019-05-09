@@ -65,7 +65,8 @@
             <th>Description</th>
             <th>Consommateur</th>
             <th>Pièces jointes</th>
-            <th>Statut</th>
+            <th>Statut pro</th>
+            <th>Statut Conso</th>
             <th></th>
           </tr>
         </thead>
@@ -138,13 +139,16 @@
               <td>
                 <span *ngFor="let file of report.uploadedFiles" [tooltip]="file.filename">
                   <a href="{{getFileDownloadUrl(file)}}">
-                    {{file.displayedFilename}}
+                    {{file.displayedFilenameSmall}}
                   </a>
                   <br/>
                 </span>
               </td>
               <td [class]="getReportCssClass(report.statusPro)">
                 {{report.statusPro}}
+              </td>
+              <td [class]="getReportCssClass(report.statusConso)">
+                {{report.statusConso}}
               </td>
               <td>
                 <img alt="Icône du bouton ajouter" src="/assets/images/icon_add.png" (click)="addEvent($event, report)">

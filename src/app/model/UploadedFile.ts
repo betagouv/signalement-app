@@ -9,4 +9,8 @@ export class UploadedFile {
   get displayedFilename() {
     return Utils.textOverflowMiddleCropping(this.filename, 32);
   }
+
+  get displayedFilenameSmall() {
+    return Utils.textOverflowMiddleCropping(this.filename, 12);
+  }
 }

@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { User } from '../../../../model/AuthUser';
 import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-event',
@@ -21,6 +22,7 @@ export class EventComponent implements OnInit {
   reportId: string;
   user: User;
   actionPros: string[];
+  actionConsos: string[];
 
   showErrors: boolean;
   loading: boolean;
@@ -33,8 +35,17 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
     this.initEventForm();
-    this.authenticationService.user.subscribe(user => this.user = user);
-    this.constantService.getActionPros().subscribe(actionPros => this.actionPros = actionPros);
+    combineLatest(
+      this.authenticationService.user,
+      this.constantService.getActionPros(),
+      this.constantService.getActionConsos(),
+    ).subscribe(
+      ([user, actionPros, actionConsos]) => {
+        this.user = user;
+        this.actionPros = actionPros;
+        this.actionConsos = actionConsos;
+      }
+    );
   }
   
   initEventForm() {
@@ -59,7 +70,7 @@ export class EventComponent implements OnInit {
       this.eventService.createEvent(Object.assign(new ReportEvent(), {
         reportId: this.reportId,
         userId: this.user.id,
-        eventType: 'PRO',
+        eventType: this.actionPros.find(this.actionCtrl.value) ? 'PRO' : 'CONSO',
         action: this.actionCtrl.value,
         detail: this.detailCtrl.value
       })).subscribe( event => {

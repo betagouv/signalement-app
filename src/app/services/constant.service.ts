@@ -21,4 +21,15 @@ export class ConstantService {
       })
     );
   }
+
+  getActionConsos() {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<string[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionConsos']),
+          headers
+        );
+      })
+    );
+  }
 }

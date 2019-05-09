@@ -8,10 +8,16 @@
             Action <span class="error">*</span>
           </label>
           <select [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''">
-            <option value=""disabled>Sélectionnez une action</option>
-            <option *ngFor="let action of actionPros">
-              {{action}}
-            </option>
+            <optgroup label="Actions pros">
+              <option *ngFor="let action of actionPros">
+                {{action}}
+              </option>
+            </optgroup>
+            <optgroup label="Actions consos">
+              <option *ngFor="let action of actionConsos">
+                {{action}}
+              </option>
+            </optgroup>
           </select>
         </div>
       </div>
