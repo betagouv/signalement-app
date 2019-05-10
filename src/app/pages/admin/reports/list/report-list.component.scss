@@ -73,16 +73,20 @@
       background-color: $lighter-blue;
     }
 
+    &.status-en-attente {
+      background-color: $light-orange;
+    }
+
     &.status-a-recontacter {
       background-color: $light-red;
     }
 
     &.status-a-informer-transmission {
-      background-color: $light-orange;
+      background-color: $light-red;
     }
 
     &.status-a-informer-reponse-pro {
-      background-color: $light-orange;
+      background-color: $light-red;
     }
 
     &.status-fait {
