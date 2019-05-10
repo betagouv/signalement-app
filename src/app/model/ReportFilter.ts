@@ -1,16 +1,43 @@
+import { deserialize, JsonProperty, serialize } from 'json-typescript-mapper';
+
 export class Department {
   code: string;
   label: string;
+
+  constructor() {
+    this.code = undefined;
+    this.label = undefined;
+  }
 }
 
 export class Region {
   label: string;
   departments: Department[];
+
+  constructor() {
+    this.label = undefined;
+    this.departments = undefined;
+  }
 }
 
 export class ReportFilter {
+  @JsonProperty({customConverter: {
+      fromJson(data) {
+        if (data) {
+          return data.departments ? deserialize(Region, data) : deserialize(Department, data);
+        }
+      },
+      toJson(data: Region | Department) {
+        return serialize(data);
+      }
+    }})
   area?: Region | Department;
-  period: Date[];
+  period?: Date[];
+
+  constructor() {
+    this.area = undefined;
+    this.period = undefined;
+  }
 }
 
 export const Regions = [

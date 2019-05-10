@@ -11,6 +11,10 @@ import { Department, Region, Regions, ReportFilter } from '../../../../model/Rep
 import { Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
+import { StorageService } from '../../../../services/storage.service';
+import { deserialize } from 'json-typescript-mapper';
+
+const ReportFilterStorageKey = 'ReportFilterSignalConso';
 
 @Component({
   selector: 'app-report-list',
@@ -36,6 +40,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private meta: Meta,
               private reportService: ReportService,
               private fileUploaderService: FileUploaderService,
+              private storageService: StorageService,
               private localeService: BsLocaleService,
               private router: Router,
               private modalService: BsModalService) {
@@ -45,13 +50,19 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
     this.titleService.setTitle(pages.admin.reports.title);
     this.meta.updateTag({ name: 'description', content: pages.admin.reports.description });
+    this.localeService.use('fr');
 
     this.reportFilter = {
       period: []
     };
-    this.localeService.use('fr');
+    this.storageService.getItem(ReportFilterStorageKey).subscribe(reportFilter => {
+      if (reportFilter) {
+        this.reportFilter = deserialize(ReportFilter, reportFilter);
+        this.periodValue = this.reportFilter.period;
+      }
+      this.loadReports(1);
+    });
 
-    this.loadReports(1);
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
@@ -62,6 +73,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   loadReports(page = 1) {
     this.currentPage = page;
     this.getReportExtractUrl();
+    this.storageService.setItem(ReportFilterStorageKey, this.reportFilter);
     this.reportService.getReports((page - 1) * this.itemsPerPage, this.itemsPerPage, this.reportFilter).subscribe(result => {
       this.reportsByDate = [];
       const distinctDates = result.entities
