@@ -45,3 +45,10 @@ table {
   }
 }
 
+
+:host ::ng-deep {
+  .tooltip-inner {
+    max-width: none !important;
+    text-align: left;
+  }
+}

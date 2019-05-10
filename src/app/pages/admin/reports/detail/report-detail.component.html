@@ -121,6 +121,31 @@
             Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
           </div>
         </div>
+
+        <hr />
+        <button type="submit" class="btn btn-danger" (click)="openModal(delete)">
+          Supprimer ce signalement
+        </button>
+        <ng-template #delete>
+          <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
+            Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
+            <br />
+            <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fermer</button>
+          </div>
+          <ng-template #noFiles>
+            <div class="modal-body text-center">
+              <p>
+                Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
+                <br/>
+                {{reportId}}
+              </p>
+              <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
+              <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+              &nbsp;
+              <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
+            </div>
+          </ng-template>
+        </ng-template>
       </ng-container>
       <ngx-loading [show]="loading"></ngx-loading>
     </div>

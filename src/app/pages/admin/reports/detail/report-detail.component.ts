@@ -17,13 +17,14 @@ export class ReportDetailComponent implements OnInit {
 
   @Input() reportId: string;
 
-  @Output() close = new EventEmitter<Report>();
+  @Output() close = new EventEmitter();
 
   report: Report;
   loading: boolean;
   events: ReportEvent[];
 
   modalRef: BsModalRef;
+  reportIdToDelete: string;
 
   constructor(private reportService: ReportService,
               private eventService: EventService,
@@ -65,6 +66,13 @@ export class ReportDetailComponent implements OnInit {
         this.report.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
         1
       );
+    });
+  }
+
+  deleteReport() {
+    this.reportService.deleteReport(this.reportId).subscribe(() => {
+      this.modalRef.hide();
+      this.close.emit();
     });
   }
 

@@ -27,6 +27,17 @@ export class ReportService {
     );
   }
 
+  deleteReport(reportId: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.delete(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId]),
+          headers
+        );
+      }),
+    );
+  }
+
   getReport(reportId: string) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {

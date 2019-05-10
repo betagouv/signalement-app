@@ -135,19 +135,23 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   updateReportOnModalHide() {
     return this.modalService.onHide.subscribe(reason => {
-      if (!reason && this.modalRef.content && this.modalRef.content.reportId) {
+      if (!reason && this.modalRef && this.modalRef.content && this.modalRef.content.reportId) {
         this.updateReport(this.modalRef.content.reportId);
       }
     });
   }
 
   updateReport(reportId: string) {
-    this.reportService.getReport(reportId).subscribe(report => {
-      const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
-        return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
-      }).reports;
-      reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
-    });
+    this.reportService.getReport(reportId).subscribe(
+      report => {
+        const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
+            return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
+          }).reports;
+          reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
+        },
+      err => {
+        this.loadReports(this.currentPage);
+      });
   }
 
   getReportCssClass(status: string) {
