@@ -95,10 +95,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   changePeriod(event) {
-    if (this.reportFilter.period !== event) {
-      this.reportFilter.period = event;
-      this.loadReports();
-    }
+    this.reportFilter.period = event;
+    this.loadReports();
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {

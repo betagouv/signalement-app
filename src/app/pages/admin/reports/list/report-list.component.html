@@ -42,7 +42,7 @@
                placeholder="Daterangepicker"
                placeholder="Période sélectionnée"
                bsDaterangepicker
-               (change)="changePeriod($event)"
+               (bsValueChange)="changePeriod($event)"
                [bsConfig]="{
                  containerClass: 'theme-default',
                  rangeInputFormat: 'DD MMMM YYYY'
