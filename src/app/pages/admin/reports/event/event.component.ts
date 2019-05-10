@@ -76,7 +76,7 @@ export class EventComponent implements OnInit {
         action: this.actionCtrl.value,
         detail: this.detailCtrl.value
       });
-      if (this.actionCtrl.value.resultAction) {
+      if (this.actionCtrl.value.withResult) {
         eventToCreate.resultAction = this.resultActionCtrl.value;
       }
       this.eventService.createEvent(eventToCreate).subscribe( event => {
