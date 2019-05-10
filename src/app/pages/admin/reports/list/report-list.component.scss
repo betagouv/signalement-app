@@ -15,7 +15,11 @@
   }
 
   tr:hover {
-    background-color: $lighter-blue;
+    background-color: $lighter-blue !important;
+
+    td {
+      background-color: transparent;
+    }
   }
 
   th, td {
@@ -58,7 +62,7 @@
     }
 
     &.status-a-transferer-signalement {
-      background-color: $light-yellow;
+      background-color: $light-orange;
     }
 
     &.status-signalement-transmis {
