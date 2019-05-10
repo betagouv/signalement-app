@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
 import { Report } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
-import { Router } from '@angular/router';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
 import { Department, Region, Regions, ReportFilter } from '../../../../model/ReportFilter';
@@ -13,6 +12,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
 import { StorageService } from '../../../../services/storage.service';
 import { deserialize } from 'json-typescript-mapper';
+import { isPlatformBrowser } from '@angular/common';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 
@@ -35,14 +35,16 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   modalRef: BsModalRef;
   modalOnHideSubscription: Subscription;
+  
+  selectedReportId: string;
 
-  constructor(private titleService: Title,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              private titleService: Title,
               private meta: Meta,
               private reportService: ReportService,
               private fileUploaderService: FileUploaderService,
               private storageService: StorageService,
               private localeService: BsLocaleService,
-              private router: Router,
               private modalService: BsModalService) {
 }
 
@@ -55,13 +57,15 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.reportFilter = {
       period: []
     };
-    this.storageService.getItem(ReportFilterStorageKey).subscribe(reportFilter => {
-      if (reportFilter) {
-        this.reportFilter = deserialize(ReportFilter, reportFilter);
-        this.periodValue = this.reportFilter.period;
+    this.storageService.getLocalStorageItem(ReportFilterStorageKey).subscribe(
+      reportFilter => {
+        if (reportFilter) {
+          this.reportFilter = deserialize(ReportFilter, reportFilter);
+          this.periodValue = this.reportFilter.period;
+        }
+        this.loadReports();
       }
-      this.loadReports(1);
-    });
+    );
 
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
@@ -71,9 +75,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   loadReports(page = 1) {
-    this.currentPage = page;
     this.getReportExtractUrl();
-    this.storageService.setItem(ReportFilterStorageKey, this.reportFilter);
     this.reportService.getReports((page - 1) * this.itemsPerPage, this.itemsPerPage, this.reportFilter).subscribe(result => {
       this.reportsByDate = [];
       const distinctDates = result.entities
@@ -86,13 +88,17 @@ export class ReportListComponent implements OnInit, OnDestroy {
             reports: result.entities.filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
           });
       });
+      this.currentPage = page;
       this.totalCount = result.totalCount;
+      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
     });
   }
 
   changePeriod(event) {
-    this.reportFilter.period = event;
-    this.loadReports();
+    if (this.reportFilter.period !== event) {
+      this.reportFilter.period = event;
+      this.loadReports();
+    }
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
@@ -103,8 +109,19 @@ export class ReportListComponent implements OnInit, OnDestroy {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
-  openReport(report: Report) {
-    this.router.navigate(['suivi-des-signalements', report.id]);
+  displayReport(report: Report) {
+    this.selectedReportId = report.id;
+    if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0, 0);
+    }
+  }
+
+  closeReport() {
+    this.updateReport(this.selectedReportId);
+    this.selectedReportId = undefined;
+    if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0, 0);
+    }
   }
 
   addEvent(event$: Event, report: Report) {
@@ -119,13 +136,17 @@ export class ReportListComponent implements OnInit, OnDestroy {
   updateReportOnModalHide() {
     return this.modalService.onHide.subscribe(reason => {
       if (!reason && this.modalRef.content && this.modalRef.content.reportId) {
-        this.reportService.getReport(this.modalRef.content.reportId).subscribe(report => {
-          const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
-            return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
-          }).reports;
-          reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
-        });
+        this.updateReport(this.modalRef.content.reportId);
       }
+    });
+  }
+
+  updateReport(reportId: string) {
+    this.reportService.getReport(reportId).subscribe(report => {
+      const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
+        return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
+      }).reports;
+      reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
     });
   }
 

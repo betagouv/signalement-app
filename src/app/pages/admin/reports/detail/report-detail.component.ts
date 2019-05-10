@@ -1,9 +1,6 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Report } from '../../../../model/Report';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { ReportService } from '../../../../services/report.service';
-import { Location } from '@angular/common';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import { ReportEvent } from '../../../../model/ReportEvent';
@@ -18,27 +15,26 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 })
 export class ReportDetailComponent implements OnInit {
 
+  @Input() reportId: string;
+
+  @Output() close = new EventEmitter<Report>();
+
   report: Report;
   loading: boolean;
   events: ReportEvent[];
 
   modalRef: BsModalRef;
 
-  constructor(private route: ActivatedRoute,
-              private reportService: ReportService,
+  constructor(private reportService: ReportService,
               private eventService: EventService,
               private fileUploaderService: FileUploaderService,
-              private location: Location,
               private modalService: BsModalService) { }
 
   ngOnInit() {
     this.loading = true;
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        combineLatest(
-          this.reportService.getReport(params.get('reportId')),
-          this.eventService.getEvents(params.get('reportId'))
-        ))
+    combineLatest(
+      this.reportService.getReport(this.reportId),
+      this.eventService.getEvents(this.reportId)
     ).subscribe(
       ([report, events]) => {
        this.report = report;
@@ -51,7 +47,7 @@ export class ReportDetailComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.close.emit();
   }
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {

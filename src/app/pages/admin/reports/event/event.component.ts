@@ -88,7 +88,7 @@ export class EventComponent implements OnInit {
   }
 
   selectAction() {
-    if ([...this.actionPros, ...this.actionConsos].find(action => action.name === this.actionCtrl.value).withResult) {
+    if ([...this.actionPros, ...this.actionConsos].find(action => action === this.actionCtrl.value).withResult) {
       this.eventForm.addControl('resultAction', this.resultActionCtrl);
     } else {
       this.eventForm.removeControl('resultAction');
