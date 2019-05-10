@@ -17,7 +17,7 @@ export class EventService {
       mergeMap(headers => {
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', event.reportId, 'events']),
-          event,
+          this.event2eventApi(event),
           headers
         );
       }));
@@ -32,5 +32,16 @@ export class EventService {
         );
       })
     );
+  }
+
+  event2eventApi(event: ReportEvent) {
+    return {
+      reportId: event.reportId,
+      userId: event.userId,
+      eventType: event.eventType,
+      action: event.action.name,
+      resultAction: event.resultAction,
+      detail: event.detail
+    };
   }
 }

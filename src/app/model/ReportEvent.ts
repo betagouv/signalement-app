@@ -4,7 +4,12 @@ export class ReportEvent {
   creationDate: Date;
   userId: string;
   eventType: string;
-  action: string;
+  action: ReportEventAction;
   resultAction: boolean;
   detail: string;
+}
+
+export class ReportEventAction {
+  name: string;
+  withResult: boolean;
 }

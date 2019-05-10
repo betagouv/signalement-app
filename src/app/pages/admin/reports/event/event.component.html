@@ -7,15 +7,15 @@
           <label [class]="hasError(actionCtrl) ? 'error' : ''">
             Action <span class="error">*</span>
           </label>
-          <select [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''">
+          <select [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''" (change)="selectAction()">
             <optgroup label="Actions pros">
-              <option *ngFor="let action of actionPros">
-                {{action}}
+              <option *ngFor="let action of actionPros" [ngValue]="action">
+                {{action.name}}
               </option>
             </optgroup>
             <optgroup label="Actions consos">
-              <option *ngFor="let action of actionConsos">
-                {{action}}
+              <option *ngFor="let action of actionConsos" [ngValue]="action">
+                {{action.name}}
               </option>
             </optgroup>
           </select>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="form__group mt-4">
+    <div class="form__group mt-4" *ngIf="eventForm.contains('resultAction')">
       <div class="row">
         <div class="col-2 col-sm-1 text-right pr-1">
           <input type="checkbox" [formControl]="resultActionCtrl" id="resultAction"/>

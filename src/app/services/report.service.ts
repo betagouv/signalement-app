@@ -158,7 +158,8 @@ export class ReportService {
       }),
       contactAgreement: reportApi.contactAgreement,
       uploadedFiles: reportApi.files.map(f => Object.assign(new UploadedFile(), f)),
-      statusPro: reportApi.statusPro
+      statusPro: reportApi.statusPro,
+      statusConso: reportApi.statusConso
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../../../services/event.service';
-import { ReportEvent } from '../../../../model/ReportEvent';
+import { ReportEvent, ReportEventAction } from '../../../../model/ReportEvent';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { User } from '../../../../model/AuthUser';
 import { BsModalRef } from 'ngx-bootstrap';
@@ -22,8 +22,8 @@ export class EventComponent implements OnInit {
   resultActionCtrl: FormControl;
   reportId: string;
   user: User;
-  actionPros: string[];
-  actionConsos: string[];
+  actionPros: ReportEventAction[];
+  actionConsos: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
@@ -56,8 +56,7 @@ export class EventComponent implements OnInit {
 
     this.eventForm = this.formBuilder.group({
       action: this.actionCtrl,
-      detail: this.detailCtrl,
-      resultAction: this.resultActionCtrl
+      detail: this.detailCtrl
     });
   }
 
@@ -70,18 +69,29 @@ export class EventComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.loading = true;
-      this.eventService.createEvent(Object.assign(new ReportEvent(), {
+      const eventToCreate = Object.assign(new ReportEvent(), {
         reportId: this.reportId,
         userId: this.user.id,
         eventType: this.actionPros.find(a => a === this.actionCtrl.value) ? 'PRO' : 'CONSO',
         action: this.actionCtrl.value,
-        detail: this.detailCtrl.value,
-        resultAction: this.resultActionCtrl.value
-      })).subscribe( event => {
+        detail: this.detailCtrl.value
+      });
+      if (this.actionCtrl.value.resultAction) {
+        eventToCreate.resultAction = this.resultActionCtrl.value;
+      }
+      this.eventService.createEvent(eventToCreate).subscribe( event => {
         this.bsModalRef.hide();
         this.loading = false;
         }
       );
+    }
+  }
+
+  selectAction() {
+    if ([...this.actionPros, ...this.actionConsos].find(action => action.name === this.actionCtrl.value).withResult) {
+      this.eventForm.addControl('resultAction', this.resultActionCtrl);
+    } else {
+      this.eventForm.removeControl('resultAction');
     }
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { mergeMap } from 'rxjs/operators';
+import { ReportEventAction } from '../model/ReportEvent';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ConstantService {
   getActionPros() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.get<string[]>(
+        return this.http.get<ReportEventAction[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionPros']),
           headers
         );
@@ -25,7 +26,7 @@ export class ConstantService {
   getActionConsos() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.get<string[]>(
+        return this.http.get<ReportEventAction[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionConsos']),
           headers
         );
