@@ -51,7 +51,7 @@ export class EventComponent implements OnInit {
   
   initEventForm() {
     this.actionCtrl = this.formBuilder.control('', Validators.required);
-    this.detailCtrl = this.formBuilder.control('', Validators.required);
+    this.detailCtrl = this.formBuilder.control('');
     this.resultActionCtrl = this.formBuilder.control(true, Validators.required);
 
     this.eventForm = this.formBuilder.group({
