@@ -88,7 +88,7 @@
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  background-color: $light-blue !important;
+  background-color: $light-blue;
 }
 
 .card-body {
@@ -98,4 +98,23 @@
 
 .card-text {
   margin-bottom: 0 !important;
+}
+
+a.active.disabled {
+  background-color: #54657C !important;
+  color: white;
+}
+
+.category.disabled {
+  background: repeating-linear-gradient(
+    135deg,
+    #fff,
+    #fff 10px,
+    #DEE5EC 10px,
+    #DEE5EC 20px
+  );
+}
+
+.category.disabled h5 {
+  color: #9B9DA0
 }

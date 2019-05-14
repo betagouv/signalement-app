@@ -20,7 +20,7 @@
 
     <section class="section section-lighter-grey py-3">
       <div class="container">
-        <nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-fill justify-content-around">
           <a class="nav-item nav-link blue light" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
           <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Service)" [ngClass]="{'active': selectedCompanyType == companyType.Service}">Prestations de service</a>
           <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Internet)" [ngClass]="{'active': selectedCompanyType == companyType.Internet}">Achats sur internet</a>
@@ -64,6 +64,49 @@
       </div>
 
       <div class="container" *ngIf="selectedCompanyType == companyType.Service">
+          <div class="container max-width">
+            <p class="mx-auto mb-4 text-center title">Ces signalements ne sont <b>pas encore disponibles</b>,<br/> mais nous y travaillons activement&nbsp;!</p>
+
+            <div class="row pb-4">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
+                      <h5>Beauté et soins</h5>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
+                      <h5>Transport<br/>(taxi,&nbsp;train,&nbsp;...)</h5>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
+                      <h5>Travaux et dépannage</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pb-4">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
+                      <h5>Aide à la personne</h5>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
+                      <h5>Entretien des vêtements<br/>(laverie,&nbsp;pressing)</h5>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
+                      <h5>Hôtellerie</h5>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+      </div>
+
+      <!--
         <div class="notification">
           <p>Le signalement de problèmes rencontrés lors de prestations de service n’est pas encore disponible mais nous y travaillons activement.</p>
           <p>Ceci comprend notamment les activités suivantes :</p>
@@ -77,6 +120,8 @@
           </ul>
         </div>
       </div>
+
+      -->
 
       <div class="container max-width" *ngIf="selectedCompanyType == companyType.Internet">
         <p class="mx-auto mb-4 text-center title" [innerHTML]="internetInformation?.title"></p>
