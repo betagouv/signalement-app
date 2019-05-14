@@ -46,7 +46,7 @@ export class ProblemComponent implements OnInit {
   }
 
   onSelectSubcategories(subcategories: Subcategory[]) {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, subcategories);
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateSubcategory, subcategories.map(subcategory => subcategory.title));
     this.report.subcategories = subcategories;
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
