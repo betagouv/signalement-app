@@ -4,7 +4,7 @@ import { ReportDetailComponent } from './report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('ReportDetailComponent', () => {
   let component: ReportDetailComponent;
@@ -17,6 +17,7 @@ describe('ReportDetailComponent', () => {
       ],
       imports: [
         FormsModule,
+        ReactiveFormsModule,
         NgxLoadingModule,
         HttpClientModule,
         ModalModule.forRoot(),

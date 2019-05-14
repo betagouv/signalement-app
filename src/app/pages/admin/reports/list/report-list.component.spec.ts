@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BsDatepickerModule, BsDropdownModule, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportListComponent } from './report-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportDetailComponent } from '../detail/report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
 
@@ -25,7 +25,8 @@ describe('ReportsComponent', () => {
         NgxLoadingModule,
         ModalModule.forRoot(),
         BsDatepickerModule.forRoot(),
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
       ]
     })
     .compileComponents();

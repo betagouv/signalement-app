@@ -76,7 +76,7 @@
         <hr />
         <h5>Commerçant</h5>
         <div class="row">
-          <div class="col-12">
+          <div class="col-10">
             Siret : {{report.company.siret}}
             <br/>
             Nom : {{report.company.name}}
@@ -90,6 +90,39 @@
             <span *ngIf="report.company.line6">-{{report.company.line6}}</span>
             <span *ngIf="report.company.line7">-{{report.company.line7}}</span>
           </div>
+          <div class="col-2 text-right">
+            <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
+          </div>
+          <ng-template #companySearch>
+            <div class="modal-body text-center">
+              <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm">
+                <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+                <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyForm.invalid">
+                  Rechercher
+                </button>
+              </form>
+              <div *ngIf="companyForSiret">
+                <hr />
+                <div *ngIf="!companyForSiret.siret">
+                  Aucun établissement trouvé
+                </div>
+                <div *ngIf="companyForSiret.siret">
+                  <p class="company" (click)="selectCompanyFromResults(company)">
+                    <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
+                    <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
+                    <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
+                    <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
+                    <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
+                    <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
+                    <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
+                  </p>
+                  <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+                  &nbsp;
+                  <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
         <hr />
         <h5>Consommateur</h5>
@@ -108,14 +141,17 @@
         <h5>Historique</h5>
         <div class="row">
           <div class="col-12" *ngFor="let event of events; let eventIndex = index">
-            <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
+            <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}" *ngIf="event.detail">
               <span class="collapsed-icon">&#43;</span>
               <span class="uncollapsed-icon">&#8722;</span>
-              Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.eventType === 'PRO' ? 'Action pro' : 'Action conso'}} - {{event.action.name}}
+              Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
             </a>
             <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
-              Détail : {{event.detail}}
+              {{event.detail}}
             </div>
+            <span *ngIf="!event.detail">
+              Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
+            </span>
           </div>
           <div class="col-12">
             Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement

@@ -7,6 +7,10 @@ import { ReportEvent } from '../../../../model/ReportEvent';
 import { combineLatest } from 'rxjs';
 import { EventService } from '../../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CompanyService } from '../../../../services/company.service';
+import { Company } from '../../../../model/Company';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-report-detail',
@@ -26,9 +30,15 @@ export class ReportDetailComponent implements OnInit {
   modalRef: BsModalRef;
   reportIdToDelete: string;
 
-  constructor(private reportService: ReportService,
+  companyForm: FormGroup;
+  siretCtrl: FormControl;
+  companyForSiret: Company;
+
+  constructor(public formBuilder: FormBuilder,
+              private reportService: ReportService,
               private eventService: EventService,
               private fileUploaderService: FileUploaderService,
+              private companyService: CompanyService,
               private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -45,6 +55,16 @@ export class ReportDetailComponent implements OnInit {
       error => {
         this.loading = false;
       });
+
+    this.initCompanyForm();
+  }
+
+  initCompanyForm() {
+    this.siretCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{14}')]);
+
+    this.companyForm = this.formBuilder.group({
+      siret: this.siretCtrl
+    });
   }
 
   back() {
@@ -55,7 +75,7 @@ export class ReportDetailComponent implements OnInit {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
-  openModal(template: TemplateRef<any>, uploadedFile: UploadedFile) {
+  openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
@@ -75,5 +95,40 @@ export class ReportDetailComponent implements OnInit {
       this.close.emit();
     });
   }
+
+  submitCompanyForm() {
+    this.loading = true;
+    this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
+      company => {
+        this.loading = false;
+        this.companyForSiret = company ? company : new Company();
+      }
+    );
+  }
+
+  changeCompany() {
+    this.reportService.updateReport(Object.assign(new Report(), this.report, {company: this.companyForSiret}))
+      .pipe(
+        switchMap(() => {
+          return this.eventService.createEvent(Object.assign(new ReportEvent(), {
+            reportId: this.reportId,
+            eventType: 'RECTIF',
+            action: {name: 'Modification du commerçant'},
+            detail: `Commerçant précédent : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ${this.reportService.company2adresseApi(this.report.company)}`
+          }));
+        }),
+        switchMap(() => {
+          return this.eventService.getEvents(this.reportId);
+        })
+      )
+      .subscribe(events => {
+        this.report.company = this.companyForSiret;
+        this.events = events;
+        this.companyForSiret = undefined;
+        this.siretCtrl.setValue('');
+        this.modalRef.hide();
+      });
+  }
+
 
 }

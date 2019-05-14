@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { Report } from '../model/Report';
+import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
@@ -32,6 +32,18 @@ export class ReportService {
       mergeMap(headers => {
         return this.http.delete(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId]),
+          headers
+        );
+      }),
+    );
+  }
+
+  updateReport(report: Report) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.put(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
+          this.report2reportApi(report),
           headers
         );
       }),
@@ -109,8 +121,9 @@ export class ReportService {
 
   private report2reportApi(report: Report) {
     const reportApi = {
+      id: report.id,
       category: report.category,
-      subcategories: report.subcategories.map(subcategory => subcategory.title),
+      subcategories: report.subcategories.map(subcategory => subcategory.title ? subcategory.title : subcategory),
       companyName: report.company.name,
       companyAddress: this.company2adresseApi(report.company),
       companyPostalCode: report.company.postalCode,
@@ -120,17 +133,19 @@ export class ReportService {
       email: report.consumer.email,
       contactAgreement: report.contactAgreement,
       files: report.uploadedFiles,
-      details: report.detailInputValues.map(detailInputValue => {
-        return {
-          label: detailInputValue.renderedLabel,
-          value: detailInputValue.renderedValue,
-        };
-      })
+      details: report.detailInputValues
+        .map(d => Object.assign(new DetailInputValue(), d))
+        .map(detailInputValue => {
+          return {
+            label: detailInputValue.renderedLabel,
+            value: detailInputValue.renderedValue,
+          };
+        })
     };
     return reportApi;
   }
 
-  private company2adresseApi(company: Company) {
+  company2adresseApi(company: Company) {
     let address = '';
     const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
     if (company) {

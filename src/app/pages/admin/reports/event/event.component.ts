@@ -2,8 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../../../services/event.service';
 import { ReportEvent, ReportEventAction } from '../../../../model/ReportEvent';
-import { AuthenticationService } from '../../../../services/authentication.service';
-import { User } from '../../../../model/AuthUser';
 import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
 import { combineLatest } from 'rxjs';
@@ -21,7 +19,6 @@ export class EventComponent implements OnInit {
   detailCtrl: FormControl;
   resultActionCtrl: FormControl;
   reportId: string;
-  user: User;
   actionPros: ReportEventAction[];
   actionConsos: ReportEventAction[];
 
@@ -31,24 +28,21 @@ export class EventComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               public bsModalRef: BsModalRef,
               private eventService: EventService,
-              private authenticationService: AuthenticationService,
               private constantService: ConstantService) { }
 
   ngOnInit() {
     this.initEventForm();
     combineLatest(
-      this.authenticationService.user,
       this.constantService.getActionPros(),
       this.constantService.getActionConsos(),
     ).subscribe(
-      ([user, actionPros, actionConsos]) => {
-        this.user = user;
+      ([actionPros, actionConsos]) => {
         this.actionPros = actionPros;
         this.actionConsos = actionConsos;
       }
     );
   }
-  
+
   initEventForm() {
     this.actionCtrl = this.formBuilder.control('', Validators.required);
     this.detailCtrl = this.formBuilder.control('');
@@ -71,7 +65,6 @@ export class EventComponent implements OnInit {
       this.loading = true;
       const eventToCreate = Object.assign(new ReportEvent(), {
         reportId: this.reportId,
-        userId: this.user.id,
         eventType: this.actionPros.find(a => a === this.actionCtrl.value) ? 'PRO' : 'CONSO',
         action: this.actionCtrl.value,
         detail: this.detailCtrl.value
