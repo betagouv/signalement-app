@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Api, ServiceUtils } from './service.utils';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { UploadedFile } from '../model/UploadedFile';
 
 @Injectable({
@@ -24,8 +24,13 @@ export class FileUploaderService {
   }
 
   deleteFile(uploadedFile: UploadedFile) {
-    return this.http.delete(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files', uploadedFile.id, uploadedFile.filename])
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.delete(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files', uploadedFile.id, uploadedFile.filename]),
+          headers
+        );
+      }),
     );
   }
 
