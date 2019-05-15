@@ -1,5 +1,5 @@
 <div class="modal__">
-  <form [formGroup]="eventForm" (submit)="submitEventForm()" id="eventForm">
+  <form [formGroup]="eventForm" (submit)="submitEventForm()" id="eventForm" *ngIf="eventForm">
 
     <div class="form__group mt-4">
       <div class="row">

@@ -31,14 +31,16 @@ export class EventComponent implements OnInit {
               private constantService: ConstantService) { }
 
   ngOnInit() {
-    this.initEventForm();
+    this.loading = true;
     combineLatest(
       this.constantService.getActionPros(),
       this.constantService.getActionConsos(),
     ).subscribe(
       ([actionPros, actionConsos]) => {
+        this.loading = false;
         this.actionPros = actionPros;
         this.actionConsos = actionConsos;
+        this.initEventForm();
       }
     );
   }
