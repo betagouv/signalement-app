@@ -11,8 +11,7 @@ import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] }
+  { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
