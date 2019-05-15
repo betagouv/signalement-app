@@ -31,7 +31,7 @@
     <section class="section section-lightest-grey position-relative">
 
       <div class="container mt-n4" *ngIf="selectedCompanyType == companyType.Physical">
-        <h3 class="text-center">Quel est le problème ?</h3>
+        <h3 class="text-center sous-titre">Quel est le problème ?</h3>
         <div class="row pb-4">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
             <div class="category pointer" (click)="selectAnomaly(category)">
@@ -48,16 +48,16 @@
           </div>
         </div>
 
-        <h3 class="text-center pointer" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
-          <u>Mon problème n'est pas dans la liste</u>
+        <h3 class="pointer other-problems" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
+          Autres problèmes&nbsp;?
         </h3>
         <ng-template #secondaryCategories>
-          <h3 class="text-center">
-            Autres problèmes
+          <h3 class="other-problems">
+            Autres problèmes&nbsp;?
           </h3>
           <ul>
             <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)">
-              <h5><u>{{category.category}}</u></h5>
+              <h5 class="other-problems">{{category.category}}</h5>
             </li>
           </ul>
         </ng-template>

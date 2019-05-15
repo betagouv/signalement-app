@@ -123,3 +123,17 @@ a.active.disabled {
 h3 {
   margin: 0.2em 0 0.8em;
 }
+
+.other-problems {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  padding-bottom: .2em;
+  color: #0053b3;
+}
+
+.other-problems:hover {
+  color: #003067;
+}
+
+h3.other-problems {
+  padding-bottom: .2em;
+}
