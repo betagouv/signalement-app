@@ -138,12 +138,16 @@
                   </ng-template>
                 </td>
                 <td>
-                  <span *ngFor="let file of report.uploadedFiles" [tooltip]="file.filename">
+                  <span *ngFor="let file of report.uploadedFiles | slice : 0 : 3" [tooltip]="file.filename">
                     <a href="{{getFileDownloadUrl(file)}}">
                       {{file.displayedFilenameSmall}}
                     </a>
                     <br/>
                   </span>
+                  <span *ngIf="report.uploadedFiles.length > 3" [tooltip]="moreFileTooltip">...</span>
+                  <ng-template #moreFileTooltip>
+                    <span *ngFor="let file of report.uploadedFiles">{{file.filename}}<br /></span>
+                  </ng-template>
                 </td>
                 <td [class]="getReportCssClass(report.statusPro)">
                   {{report.statusPro}}
