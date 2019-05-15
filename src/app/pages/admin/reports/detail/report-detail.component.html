@@ -1,0 +1,190 @@
+<div class="banner text-center section section-lighter-grey" role="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-2 col-sm-1 text-right">
+        <img src="/assets/images/icon_back.png" class="back pointer" (click)="back()" alt="page précédente"/>
+      </div>
+      <div class="col-10 col-sm-11">
+        <h1 class="text-center">
+          Détail du signalement
+        </h1>
+        <h5 class="text-center">
+          {{report?.id}}
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section section-white position-relative">
+  <div class="container">
+    <div class="panel">
+      <ng-container *ngIf="report">
+        <h5>Statut pro : {{report.statusPro}}</h5>
+        <h5>Statut conso : {{report.statusConso}}</h5>
+        <hr />
+        <h5>Problème</h5>
+        <div class="row">
+          <div class="col-12">
+            {{report.category}}
+            <br />
+            <ng-container *ngFor="let subcategory of report.subcategories">
+              {{subcategory}}
+              <br />
+            </ng-container>
+          </div>
+        </div>
+        <hr />
+        <h5>Description</h5>
+        <div class="row">
+          <div class="col-12">
+            <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
+              <span [innerHTML]="detailInputValue.label"></span>
+              &nbsp;<span [innerHTML]="detailInputValue.value"></span>
+            </div>
+            <div *ngIf="report.uploadedFiles && report.uploadedFiles.length;">
+              Pièce(s) jointe(s) :
+              <div class="col-12">
+                <table class="table table-sm">
+                  <tbody>
+                  <tr *ngFor="let uploadedFile of report.uploadedFiles">
+                    <td class="text-left" *ngIf="!uploadedFile.loading">
+                      <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                        <span *ngIf="uploadedFile.id">
+                          {{uploadedFile.filename}}
+                        </span>
+                      </a>
+                    </td>
+                    <td class="text-right pointer">
+                      <img class="remove" alt="Icône du bouton suppression" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
+                    </td>
+                    <ng-template #removeTemplate>
+                      <div class="modal-body text-center">
+                        <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
+                      </div>
+                    </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h5>Commerçant</h5>
+        <div class="row">
+          <div class="col-10">
+            Siret : {{report.company.siret}}
+            <br/>
+            Nom : {{report.company.name}}
+            <br/>
+            Adresse :
+            <span *ngIf="report.company.line1">{{report.company.line1}}</span>
+            <span *ngIf="report.company.line2">-{{report.company.line2}}</span>
+            <span *ngIf="report.company.line3">-{{report.company.line3}}</span>
+            <span *ngIf="report.company.line4">-{{report.company.line4}}</span>
+            <span *ngIf="report.company.line5">-{{report.company.line5}}</span>
+            <span *ngIf="report.company.line6">-{{report.company.line6}}</span>
+            <span *ngIf="report.company.line7">-{{report.company.line7}}</span>
+          </div>
+          <div class="col-2 text-right">
+            <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
+          </div>
+          <ng-template #companySearch>
+            <div class="modal-body text-center">
+              <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm">
+                <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+                <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyForm.invalid">
+                  Rechercher
+                </button>
+              </form>
+              <div *ngIf="companyForSiret">
+                <hr />
+                <div *ngIf="!companyForSiret.siret">
+                  Aucun établissement trouvé
+                </div>
+                <div *ngIf="companyForSiret.siret">
+                  <p class="company" (click)="selectCompanyFromResults(company)">
+                    <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
+                    <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
+                    <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
+                    <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
+                    <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
+                    <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
+                    <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
+                  </p>
+                  <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+                  &nbsp;
+                  <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        <hr />
+        <h5>Consommateur</h5>
+        <div class="row">
+          <div class="col-12">
+            Nom : {{report.consumer.lastName}}
+            <br />
+            Prénom : {{report.consumer.firstName}}
+            <br />
+            Email : {{report.consumer.email}}
+            <br />
+            Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
+          </div>
+        </div>
+        <hr />
+        <h5>Historique</h5>
+        <div class="row">
+          <div class="col-12" *ngFor="let event of events; let eventIndex = index">
+            <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}" *ngIf="event.detail">
+              <span class="collapsed-icon">&#43;</span>
+              <span class="uncollapsed-icon">&#8722;</span>
+              Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
+            </a>
+            <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
+              {{event.detail}}
+            </div>
+            <span *ngIf="!event.detail">
+              Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
+            </span>
+          </div>
+          <div class="col-12">
+            Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
+          </div>
+        </div>
+
+        <hr />
+        <button type="submit" class="btn btn-danger" (click)="openModal(delete)">
+          Supprimer ce signalement
+        </button>
+        <ng-template #delete>
+          <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
+            Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
+            <br />
+            <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fermer</button>
+          </div>
+          <ng-template #noFiles>
+            <div class="modal-body text-center">
+              <p>
+                Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
+                <br/>
+                {{reportId}}
+              </p>
+              <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
+              <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+              &nbsp;
+              <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
+            </div>
+          </ng-template>
+        </ng-template>
+      </ng-container>
+      <ngx-loading [show]="loading"></ngx-loading>
+    </div>
+  </div>
+
+</section>

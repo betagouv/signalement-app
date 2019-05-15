@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
-import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Report } from '../../../model/Report';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({
   selector: 'app-consumer',
@@ -25,13 +25,13 @@ export class ConsumerComponent implements OnInit {
   showErrors: boolean;
 
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService,
+              private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.step = Step.Consumer;
-    this.reportService.currentReport.subscribe(report => {
+    this.reportStorageService.reportInProgess.subscribe(report => {
       if (report) {
         this.report = report;
         this.initConsumerForm();
@@ -68,7 +68,7 @@ export class ConsumerComponent implements OnInit {
       consumer.email = this.emailCtrl.value;
       this.report.consumer = consumer;
       this.report.contactAgreement = this.contactAgreementCtrl.value;
-      this.reportService.changeReportFromStep(this.report, this.step);
+      this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
     }
   }

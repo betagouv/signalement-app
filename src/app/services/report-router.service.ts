@@ -1,8 +1,8 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { ReportService } from './report.service';
 import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
 import { Report } from '../model/Report';
+import { ReportStorageService } from './report-storage.service';
 
 export enum Step {
   Category = 'Category',
@@ -35,10 +35,10 @@ export class ReportRouterService {
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private anomalyService: AnomalyService,
-              private reportService: ReportService,
+              private reportStorageService: ReportStorageService,
               private router: Router) {
 
-    this.reportService.currentReport.subscribe(report => this.report = report);
+    this.reportStorageService.reportInProgess.subscribe(report => this.report = report);
 
   }
 

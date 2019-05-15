@@ -11,11 +11,11 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { AddressService } from '../../../services/address.service';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths, Step } from '../../../services/report-router.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 describe('CompanyComponent', () => {
 
@@ -23,7 +23,7 @@ describe('CompanyComponent', () => {
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
   let addressService: AddressService;
-  let reportService: ReportService;
+  let reportStorageService: ReportStorageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -49,8 +49,8 @@ describe('CompanyComponent', () => {
   beforeEach(() => {
     companyService = TestBed.get(CompanyService);
     addressService = TestBed.get(AddressService);
-    reportService = TestBed.get(ReportService);
-    reportService.currentReport = of(new Report());
+    reportStorageService = TestBed.get(ReportStorageService);
+    reportStorageService.reportInProgess = of(new Report());
 
     spyOn(addressService, 'addressData').and.returnValue(of([]));
     fixture = TestBed.createComponent(CompanyComponent);
@@ -190,7 +190,7 @@ describe('CompanyComponent', () => {
       component.nameCtrl.setValue('Mon entreprise');
       component.addressCtrl.setValue('Mon adresse dans ma ville');
       component.addressCtrlPostalCode = '87270';
-      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;

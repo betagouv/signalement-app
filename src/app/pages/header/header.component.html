@@ -17,6 +17,9 @@
             Comment ça marche ?
           </a>
         </li>
+        <li class="nav__item" *ngIf="user">
+          <span (click)="logout()" class="pointer link">Se déconnecter</span>
+        </li>
       </ul>
     </nav>
     <div class="ribbon"> BETA </div>

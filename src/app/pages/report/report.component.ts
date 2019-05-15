@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 
@@ -7,7 +7,7 @@ import pages from '../../../assets/data/pages.json';
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss'],
 })
-export class ReportComponent {
+export class ReportComponent implements OnInit {
 
   constructor(private titleService: Title,
               private meta: Meta) { }

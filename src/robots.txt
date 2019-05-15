@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /signalement/
+Disallow: /login
+Disallow: /suivi-des-signalements*

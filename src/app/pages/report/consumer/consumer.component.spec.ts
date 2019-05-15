@@ -6,17 +6,17 @@ import { Consumer } from '../../../model/Consumer';
 import { Report } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
-import { ReportService } from '../../../services/report.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { ReportPaths, Step } from '../../../services/report-router.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 describe('ConsumerComponent', () => {
 
   let component: ConsumerComponent;
   let fixture: ComponentFixture<ConsumerComponent>;
-  let reportService: ReportService;
+  let reportStorageService: ReportStorageService;
 
   const consumerFixture = new Consumer();
   consumerFixture.firstName = 'Prénom';
@@ -38,7 +38,7 @@ describe('ConsumerComponent', () => {
         Angulartics2RouterlessModule.forRoot(),
       ],
       providers: [
-        ReportService,
+        ReportStorageService,
       ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
@@ -46,8 +46,8 @@ describe('ConsumerComponent', () => {
   }));
 
   beforeEach(() => {
-    reportService = TestBed.get(ReportService);
-    reportService.currentReport = of(new Report());
+    reportStorageService = TestBed.get(ReportStorageService);
+    reportStorageService.reportInProgess = of(new Report());
 
     fixture = TestBed.createComponent(ConsumerComponent);
     component = fixture.componentInstance;
@@ -87,7 +87,7 @@ describe('ConsumerComponent', () => {
       const reportWithConsumer = new Report();
       reportWithConsumer.consumer = consumerFixture;
       reportWithConsumer.contactAgreement = contactAgreementFixture;
-      reportService.currentReport = of(reportWithConsumer);
+      reportStorageService.reportInProgess = of(reportWithConsumer);
 
       component.ngOnInit();
       fixture.detectChanges();
@@ -129,7 +129,7 @@ describe('ConsumerComponent', () => {
       component.lastNameCtrl.setValue(consumerFixture.lastName);
       component.emailCtrl.setValue(consumerFixture.email);
       component.contactAgreementCtrl.setValue(contactAgreementFixture);
-      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button#submitConsumerForm').click();

@@ -939,8 +939,8 @@ list:
                   - Oui
                   - Non
                   - "je n'ai pas demandé"
-                optionnal: true
-              - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur ce site  pa&#160;? <a href="https://www.bonial.fr" target="_blank">site bonial.fr</a>
+                optionnal: true 
+              - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
                 rank: 5
                 type: TEXT
                 placeholder: "Lien vers la publicité"

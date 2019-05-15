@@ -19,6 +19,8 @@ import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
 import { ReportComponent } from './pages/report/report.component';
+import { LoginModule } from './pages/login/login.module';
+import { AdminModule } from './pages/admin/admin.module';
 import { RetractationComponent } from './pages/infos/retractation/retractation.component';
 import { CguComponent } from './pages/infos/cgu/cgu.component';
 
@@ -55,6 +57,8 @@ registerLocaleData(localeFr, 'fr');
     ReportModule,
     BrowserModule,
     BrowserAnimationsModule,
+    LoginModule,
+    AdminModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

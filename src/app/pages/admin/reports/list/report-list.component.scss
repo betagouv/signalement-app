@@ -1,0 +1,154 @@
+@import "../../../../../theme/variables";
+
+.table-responsive {
+  width: 98% !important;
+  margin-left: 1%;
+}
+
+.table {
+
+  border: none;
+
+  th {
+    background-color: $lighter-grey;
+    border-bottom-width: 2px !important;
+  }
+
+  tr:hover {
+    background-color: $lighter-blue !important;
+
+    td {
+      background-color: transparent;
+    }
+  }
+
+  th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.25em;
+    text-align: center;
+
+    &:last-of-type {
+      background-color: $white !important;
+      border: none;
+      vertical-align: middle;
+    }
+
+    &.status-a-traiter {
+      background-color: $light-red;
+    }
+
+    &.status-na {
+      background-color: $white;
+    }
+
+    &.status-traitement-en-cours {
+      background-color: $light-yellow;
+    }
+
+    &.status-a-rappeler {
+      background-color: $light-yellow;
+    }
+
+    &.status-a-envoyer-email {
+      background-color: $light-yellow;
+    }
+
+    &.status-a-envoyer-courrier {
+      background-color: $light-yellow;
+    }
+
+    &.status-attente-reponse {
+      background-color: $light-orange;
+    }
+
+    &.status-a-transferer-signalement {
+      background-color: $light-orange;
+    }
+
+    &.status-signalement-transmis {
+      background-color: $light-green;
+    }
+
+    &.status-signalement-refuse {
+      background-color: $light-grey;
+    }
+
+    &.status-promesse-action {
+      background-color: $lighter-blue;
+    }
+
+    &.status-en-attente {
+      background-color: $light-orange;
+    }
+
+    &.status-a-recontacter {
+      background-color: $light-red;
+    }
+
+    &.status-a-informer-transmission {
+      background-color: $light-red;
+    }
+
+    &.status-a-informer-reponse-pro {
+      background-color: $light-red;
+    }
+
+    &.status-fait {
+      background-color: $light-green;
+    }
+  }
+
+  td.report-group {
+    background-color: $lightest-grey;
+    font-weight: bold;
+  }
+
+  .agreement {
+    font-size: 12px;
+  }
+}
+
+.filters {
+
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 2em 0;
+  background-color: $lightest-grey;
+
+  .btn-group[dropdown] {
+    .dropdown-toggle {
+      border-color: $grey;
+      background-color: $white;
+    }
+
+    ul.dropdown-menu {
+      height: 300px;
+      overflow-y: scroll;
+
+      .menutitle {
+        font-weight: bold;
+      }
+
+      .dropdown-item {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .btn {
+    height: 43px;
+  }
+
+  input {
+    width: 300px;
+  }
+}
+
+
+:host ::ng-deep {
+  .tooltip-inner {
+    max-width: none !important;
+    text-align: left;
+  }
+}
