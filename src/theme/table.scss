@@ -1,0 +1,40 @@
+@import "../theme/variables";
+
+.table {
+  background: #fff;
+  background: $theme-background-white;
+  border: 1px solid #c9d3df;
+  border: 1px solid $theme-border-lighter;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 2px;
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table td,
+.table th {
+  padding: 1em;
+  text-align: left;
+}
+
+.table td {
+  border-top: 1px solid #ebeff3;
+  border-top: 1px solid $lighter-grey;
+}
+
+.table thead th {
+  background: #fafbfc;
+  background: $lightest-grey;
+  border-bottom: 1px solid #c9d3df;
+  border-bottom: 1px solid $theme-border-lighter;
+  font-size: 0.875em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.table tr:hover {
+  background: #fafbfc;
+  background: $lightest-grey;
+}

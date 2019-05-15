@@ -11,9 +11,9 @@ import {
   EventCategories,
   ReportEventActions,
 } from '../../../services/analytics.service';
-import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({
   selector: 'app-company',
@@ -46,7 +46,7 @@ export class CompanyComponent implements OnInit {
   addressData: RemoteData;
 
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService,
+              private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
               private addressService: AddressService,
@@ -54,7 +54,7 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Company;
-    this.reportService.currentReport.subscribe(report => {
+    this.reportStorageService.reportInProgess.subscribe(report => {
       if (report) {
         this.report = report;
         this.initSearchForm();
@@ -112,14 +112,14 @@ export class CompanyComponent implements OnInit {
       this.initSearch();
       this.loading = true;
       if (navigator.geolocation) {
-        let options = {
+        const options = {
           enableHighAccuracy: true,
           timeout: 10000,
           maximumAge: 0
         };
         navigator.geolocation.getCurrentPosition((position) => {
-          let lat = position.coords.latitude;
-          let long = position.coords.longitude;
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
           this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.around);
           this.companyService.getNearbyCompanies(lat, long).subscribe(
             companySearchResult => {
@@ -151,7 +151,10 @@ export class CompanyComponent implements OnInit {
       } else {
         this.initSearch();
         this.loading = true;
-        this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, this.searchCtrl.value + " " + this.searchPostalCodeCtrl.value);
+        this.analyticsService.trackEvent(
+          EventCategories.company,
+          CompanyEventActions.search,
+          this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
         this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
           companySearchResult => {
             this.loading = false;
@@ -207,7 +210,7 @@ export class CompanyComponent implements OnInit {
   selectCompany(company: Company) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
     this.report.company = company;
-    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 

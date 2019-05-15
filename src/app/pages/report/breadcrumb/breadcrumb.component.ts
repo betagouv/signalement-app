@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
-import { ReportService } from '../../../services/report.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { Anomaly } from '../../../model/Anomaly';
@@ -17,8 +16,7 @@ export class BreadcrumbComponent implements OnInit {
 
   anomaly: Anomaly;
 
-  constructor(private reportService: ReportService,
-              private reportRouterService: ReportRouterService,
+  constructor(private reportRouterService: ReportRouterService,
               private anomalyService: AnomalyService) { }
 
   ngOnInit() {

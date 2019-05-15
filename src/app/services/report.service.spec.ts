@@ -9,11 +9,24 @@ import { Consumer } from '../model/Consumer';
 import { Company } from '../model/Company';
 import { Subcategory } from '../model/Anomaly';
 import { UploadedFile } from '../model/UploadedFile';
+import { Department, Region, ReportFilter } from '../model/ReportFilter';
+import { of } from 'rxjs';
 
 describe('ReportService', () => {
 
   let reportService: ReportService;
+  let serviceUtils: ServiceUtils;
   let httpMock: HttpTestingController;
+
+  const regionFixture = new Region();
+  regionFixture.label = 'labelRegion';
+  const dept1Fixture = new Department();
+  dept1Fixture.code = 'codeDept1';
+  dept1Fixture.label = 'labelDept1';
+  const dept2Fixture = new Department();
+  dept2Fixture.code = 'codeDept2';
+  dept2Fixture.label = 'labelDept2';
+  regionFixture.departments = [dept1Fixture, dept2Fixture];
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
@@ -27,7 +40,18 @@ describe('ReportService', () => {
 
   beforeEach(() => {
     reportService = TestBed.get(ReportService);
+    serviceUtils = TestBed.get(ServiceUtils);
     httpMock = TestBed.get(HttpTestingController);
+  });
+
+  beforeEach(() => {
+    spyOn(serviceUtils, 'getAuthHeaders').and.returnValue(of({
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Auth-Token': 'lklklkjlkjlkj'
+      }
+    }));
   });
 
   it('should be created', () => {
@@ -84,9 +108,91 @@ describe('ReportService', () => {
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['email']).toBe('email@mail.fr');
-      expect(reportRequest.request.body['fileIds']).toEqual([anomalyFile.id]);
+      expect(reportRequest.request.body['files']).toEqual([anomalyFile]);
       expect(reportRequest.request.body['details']).toEqual([{label: 'mon label :', value: 'ma value'}]);
     });
 
+  });
+  describe('get reports', () => {
+
+    it('should not pass a departments http param when there are no area report filter', (done) => {
+
+      const reportFilter = new ReportFilter();
+      reportFilter.period = [new Date(), new Date()];
+      const offset = 0;
+      const limit = 10;
+
+      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+          done();
+        }
+      );
+
+      const getReportRequest = httpMock.expectOne(req => req.url === `${environment.apiReportBaseUrl}/api/reports`);
+      getReportRequest.flush({
+        totalCount: 0,
+        hasNextPage: false,
+        entities: []
+      });
+
+      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('departments')).toBeNull();
+
+      httpMock.verify();
+    });
+
+    it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
+
+      const reportFilter = new ReportFilter();
+      reportFilter.area = regionFixture;
+      reportFilter.period = [new Date(), new Date()];
+      const offset = 0;
+      const limit = 10;
+
+      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+          done();
+        }
+      );
+
+      const getReportRequest = httpMock.expectOne(req => req.url === `${environment.apiReportBaseUrl}/api/reports`);
+      getReportRequest.flush({
+        totalCount: 0,
+        hasNextPage: false,
+        entities: []
+      });
+
+      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('departments')).toEqual(`${dept1Fixture.code},${dept2Fixture.code}`);
+
+      httpMock.verify();
+    });
+
+    it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
+
+      const reportFilter = new ReportFilter();
+      reportFilter.area = dept2Fixture;
+      reportFilter.period = [new Date(), new Date()];
+      const offset = 0;
+      const limit = 10;
+
+      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+          done();
+        }
+      );
+
+      const getReportRequest = httpMock.expectOne(req => req.url === `${environment.apiReportBaseUrl}/api/reports`);
+      getReportRequest.flush({
+        totalCount: 0,
+        hasNextPage: false,
+        entities: []
+      });
+
+      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('departments')).toEqual(`${dept2Fixture.code}`);
+
+      httpMock.verify();
+    });
   });
 });

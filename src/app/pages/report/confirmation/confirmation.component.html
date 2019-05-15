@@ -25,7 +25,7 @@
               <span [innerHTML]="detailInputValue.renderedLabel"></span>
               &nbsp;<span [innerHTML]="detailInputValue.renderedValue"></span>
             </div>
-            <div *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noUploadedFiles">
+            <div *ngIf="report.uploadedFiles && report.uploadedFiles.length;">
               Pièce(s) jointe(s) :
               <div class="col-12">
                 <ul class="filename">

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DetailInputValue, PrecisionKeyword, Report } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
@@ -12,6 +11,8 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isDefined } from '@angular/compiler/src/util';
+import Utils from '../../../utils';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({
   selector: 'app-details',
@@ -55,7 +56,7 @@ export class DetailsComponent implements OnInit {
   keywordsDetected: Keyword;
 
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService,
+              private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService,
               private fileUploaderService: FileUploaderService,
@@ -66,7 +67,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Details;
-    this.reportService.currentReport.subscribe(report => {
+    this.reportStorageService.reportInProgess.subscribe(report => {
       if (report) {
         this.report = report;
         this.initDetailInputs();
@@ -267,7 +268,7 @@ export class DetailsComponent implements OnInit {
           });
         });
       this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
-      this.reportService.changeReportFromStep(this.report, this.step);
+      this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
       this.reportRouterService.routeForward(this.step);
     }
   }
@@ -284,19 +285,21 @@ export class DetailsComponent implements OnInit {
       } else {
         const fileToUpload = new UploadedFile();
         fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
-        fileToUpload.displayedFilename = this.textOverflowMiddleCropping(fileToUpload.filename, 32);
         fileToUpload.loading = true;
         this.uploadedFiles.push(fileToUpload);
         this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
           fileToUpload.loading = false;
           fileToUpload.id = uploadedFile.id;
+          fileToUpload.creationDate = uploadedFile.creationDate;
         }, error => {
           fileToUpload.loading = false;
-          fileToUpload.displayedFilename =
-            `Echec du téléchargement (${this.textOverflowMiddleCropping(fileToUpload.filename, 10)})`.concat();
         });
       }
     }
+  }
+
+  getErrorFilename(filename: string) {
+    return `Echec du téléchargement (${Utils.textOverflowMiddleCropping(filename, 10)})`.concat();
   }
 
   isUploadingFile() {
@@ -316,15 +319,13 @@ export class DetailsComponent implements OnInit {
       this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
       1
     );
-    this.fileUploaderService.deleteFile(uploadedFile).subscribe();
+    if (uploadedFile.id) {
+      this.fileUploaderService.deleteFile(uploadedFile).subscribe();
+    }
   }
 
   onFileUploaded(uploadedFile: UploadedFile) {
     this.uploadedFiles.push(uploadedFile);
-  }
-
-  textOverflowMiddleCropping(text: string, limit: number) {
-    return text.length > limit ? `${text.substr(0, limit / 2)}...${text.substr(text.length - (limit / 2), text.length)}` : text;
   }
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {
@@ -361,7 +362,7 @@ export class DetailsComponent implements OnInit {
     this.report.category = this.keywordsDetected.category;
     this.report.subcategories = null;
 
-    this.reportService.changeReportFromStep(this.report, this.step);
+    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 

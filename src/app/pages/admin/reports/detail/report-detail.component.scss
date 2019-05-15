@@ -1,0 +1,54 @@
+img.back {
+
+  vertical-align: top;
+  height: 30px;
+
+  & + div {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
+}
+
+img.remove {
+  height: 15px;
+}
+
+.agreement {
+  font-size: 12px;
+}
+
+.collapsable {
+  .collapsed-icon {
+    display: none;
+  }
+  .uncollapsed-icon {
+    display: inline;
+  }
+
+  &.collapsed {
+    .collapsed-icon {
+      display: inline;
+    }
+    .uncollapsed-icon {
+      display: none;
+    }
+  }
+}
+
+table {
+  border: none;
+
+  td {
+    border: none;
+    padding: 0;
+  }
+}
+
+
+:host ::ng-deep {
+  .tooltip-inner {
+    max-width: none !important;
+    text-align: left;
+  }
+}
