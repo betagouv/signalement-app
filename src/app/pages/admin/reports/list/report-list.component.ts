@@ -88,15 +88,16 @@ export class ReportListComponent implements OnInit, OnDestroy {
             reports: result.entities.filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
           });
       });
-      this.currentPage = page;
       this.totalCount = result.totalCount;
       this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
     });
   }
 
   changePeriod(event) {
-    this.reportFilter.period = event;
-    this.loadReports();
+    if (this.reportFilter.period !== event) {
+      this.reportFilter.period = event;
+      this.loadReports();
+    }
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
