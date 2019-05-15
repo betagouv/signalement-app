@@ -64,11 +64,17 @@
 }
 
 a.navbar__home {
-  font-family: 'Evolventa';
+  font-family: 'Source Sans Pro", Arial, sans-serif';
+  font-size: 21px;
   display: flex;
   align-items: center;
-  color: $almost-black;
   letter-spacing: 0.05em;
+  text-decoration: none;
+  font-size: 21px;
+
+}
+
+a.navbar__home:hover {
   text-decoration: none;
 }
 
@@ -78,16 +84,6 @@ a.navbar__home {
 
 .navbar__logo {
   margin-right: 0.8em;
-}
-
-.navbar__gouvfr {
-  height: 40px;
-}
-
-span.navbar__domain {
-  font-weight: 400;
-  color: $theme-dark-text;
-  -webkit-padding-after: 3px; /* fix the broken line-height in logo */
 }
 
 @media #{$smaller-than-tablet} {
