@@ -124,7 +124,7 @@
       -->
 
       <div class="container max-width" *ngIf="selectedCompanyType == companyType.Internet">
-        <p class="mx-auto mb-4 text-center title" [innerHTML]="internetInformation?.title"></p>
+        <p class="mx-auto mb-4 text-center title internet-information" [innerHTML]="internetInformation?.title"></p>
         <p class="mb-4 text-center" [innerHTML]="internetInformation?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
         <p class="mb-5" *ngIf="internetInformation?.content" [innerHTML]="internetInformation?.content"></p>
 
