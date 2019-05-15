@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
-import { Report } from '../../../model/Report';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { Report, Step } from '../../../model/Report';
+import { ReportRouterService } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-acknowledgment',

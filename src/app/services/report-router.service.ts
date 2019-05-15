@@ -2,18 +2,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ReportService } from './report.service';
 import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
-import { Report } from '../model/Report';
-
-export enum Step {
-  Category = 'Category',
-  Problem = 'Problem',
-  Details = 'Details',
-  Company = 'Company',
-  Consumer = 'Consumer',
-  Confirmation = 'Confirmation',
-  Acknowledgment = 'Acknowledgment',
-  Information = 'Information'
-}
+import { Report, Step } from '../model/Report';
 
 export enum ReportPaths {
   Category = '',

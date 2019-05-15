@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Report } from '../../../model/Report';
+import { Report, Step } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportRouterService } from '../../../services/report-router.service';
 import { Anomaly } from '../../../model/Anomaly';
 
 @Component({

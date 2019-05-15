@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report } from '../model/Report';
+import { DetailInputValue, Report, Step } from '../model/Report';
 import { Company } from '../model/Company';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { Step } from './report-router.service';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -52,7 +51,11 @@ export class ReportService {
     report.retrievedFromStorage = false;
     report.storedStep = step;
     this.reportSource.next(report);
-    this.localStorage.setItemSubscribe(ReportStorageKey, report);
+    if (step === Step.Category) {
+      this.removeReportFromStorage();
+    } else {
+      this.localStorage.setItemSubscribe(ReportStorageKey, report);
+    }
   }
 
   uploadFile(file: File) {

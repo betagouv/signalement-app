@@ -3,14 +3,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConsumerComponent } from './consumer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
-import { Report } from '../../../model/Report';
+import { Report, Step } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { ReportService } from '../../../services/report.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { ReportPaths, Step } from '../../../services/report-router.service';
+import { ReportPaths } from '../../../services/report-router.service';
 
 describe('ConsumerComponent', () => {
 
