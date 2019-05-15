@@ -10,19 +10,19 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReportService } from '../../../services/report.service';
 import { of } from 'rxjs';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { ReportPaths, Step } from '../../../services/report-router.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { NgxLoadingModule } from 'ngx-loading';
 import moment from 'moment';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 describe('DetailsComponent', () => {
 
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
-  let reportService: ReportService;
+  let reportStorageService: ReportStorageService;
 
   const anomalyDateFixture = new Date(2018, 1, 2);
   const anomalyFileFixture = Object.assign(new UploadedFile(), {
@@ -91,8 +91,8 @@ describe('DetailsComponent', () => {
   describe('case of default detail inputs', () => {
 
     beforeEach(() => {
-      reportService = TestBed.get(ReportService);
-      reportService.currentReport = of(new Report());
+      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService.reportInProgess = of(new Report());
 
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -130,7 +130,7 @@ describe('DetailsComponent', () => {
       component.detailsForm.controls.formControl_1.setValue('valeur');
       component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
       component.detailsForm.controls.formControl_3.setValue('de 2h à 3h');
-      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -156,8 +156,8 @@ describe('DetailsComponent', () => {
     reportWithSubcategory.subcategories[0].detailInputs = [Object.assign(new DetailInput(), textDetailInputFixture)];
 
     beforeEach(() => {
-      reportService = TestBed.get(ReportService);
-      reportService.currentReport = of(reportWithSubcategory);
+      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService.reportInProgess = of(reportWithSubcategory);
 
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -182,7 +182,7 @@ describe('DetailsComponent', () => {
 
     it ('should emit and event with a details object which contains form inputs when no errors', () => {
       component.detailsForm.controls.formControl_1.setValue('valeur');
-      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button[type="submit"]').click();
@@ -210,8 +210,8 @@ describe('DetailsComponent', () => {
     ];
 
     beforeEach(() => {
-      reportService = TestBed.get(ReportService);
-      reportService.currentReport = of(reportWithSubcategory);
+      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService.reportInProgess = of(reportWithSubcategory);
 
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -257,7 +257,7 @@ describe('DetailsComponent', () => {
       component.detailsForm.controls.formControl_1.setValue('valeur');
       component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
       component.detailsForm.controls.formControl_4.setValue('ma description');
-      const changeReportSpy = spyOn(reportService, 'changeReportFromStep');
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('input[type="radio"]#formControl_3_1').click();

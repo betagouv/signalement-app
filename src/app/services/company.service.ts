@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { CompanySearchResult } from '../model/Company';
+import { Company, CompanySearchResult } from '../model/Company';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { catchError, map } from 'rxjs/operators';
@@ -32,6 +32,27 @@ export class CompanyService {
       catchError(err => {
         if (err.status === 404) {
           return of(deserialize(CompanySearchResult, {total_results: 0}));
+        } else {
+          return throwError(err);
+        }
+      })
+    );
+  }
+
+  searchCompaniesBySiret(siret: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('siret', siret);
+    httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
+    return this.http.get(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'siret', siret]),
+      {
+        params: httpParams
+      }
+    ).pipe(
+      map(result => deserialize(Company, result['etablissement'])),
+      catchError(err => {
+        if (err.status === 404) {
+          return of(undefined);
         } else {
           return throwError(err);
         }

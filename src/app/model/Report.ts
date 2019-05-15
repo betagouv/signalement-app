@@ -7,7 +7,7 @@ import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
 
 export class Report {
-
+  id: string;
   category: string;
   subcategories: Subcategory[];
   company: Company;
@@ -17,8 +17,10 @@ export class Report {
   contactAgreement: boolean;
   internetPurchase: boolean;
   retrievedFromStorage: boolean;
+  creationDate: Date;
   storedStep: Step;
-
+  statusPro: string;
+  statusConso: string;
 }
 
 export class DetailInputValue {

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Report } from '../../../model/Report';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ReportService } from '../../../services/report.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { UploadedFile } from '../../../model/UploadedFile';
+import { ReportService } from '../../../services/report.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -25,6 +26,7 @@ export class ConfirmationComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
+              private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private fileUploaderService: FileUploaderService,
               private analyticsService: AnalyticsService) {
@@ -32,7 +34,7 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Confirmation;
-    this.reportService.currentReport.subscribe(report => {
+    this.reportStorageService.reportInProgess.subscribe(report => {
       if (report) {
         this.report = report;
         this.initConfirmationForm();
@@ -58,8 +60,8 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
         result => {
           this.loading = false;
-          this.reportService.changeReportFromStep(this.report, this.step);
-          this.reportService.removeReportFromStorage();
+          this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+          this.reportStorageService.removeReportInProgressFromStorage();
           this.reportRouterService.routeForward(this.step);
         },
         error => {
