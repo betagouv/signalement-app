@@ -34,7 +34,7 @@ export class CategoryComponent implements OnInit {
     this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
-    const anomaly = this.anomalyService.getAnomalyByCategoryId('PBINT');
+    const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
@@ -69,7 +69,7 @@ export class CategoryComponent implements OnInit {
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
   }
-  
+
   restoreStoredReport() {
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.report.storedStep);
     this.reportRouterService.routeForward(this.report.storedStep);

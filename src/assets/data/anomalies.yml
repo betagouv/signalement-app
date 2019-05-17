@@ -939,7 +939,7 @@ list:
                   - Oui
                   - Non
                   - "je n'ai pas demandé"
-                optionnal: true 
+                optionnal: true
               - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
                 rank: 5
                 type: TEXT
@@ -1319,24 +1319,8 @@ list:
     description: Vous avez passé commande sur internet, votre problème concerne un site web
     rank: 8
     icon: email-24px.svg
-    information:       
-      title: Ces signalements ne sont <b>pas encore disponibles</b>,<br/> mais nous y travaillons activement !
-      subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
-      actions:
-        - question: Un problème avec un commerçant&#160;?
-          example: Colis non reçu, pas de nouvelle de votre commande, etc.
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/80666" target="_blank">https://www.economie.gouv.fr/courrier/80666</a>
-        - question: Un spam que vous avez reçu&#160;?
-          answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
-        - question: Un contenu qui vous semble inapproprié&#160;?
-          example: Trafic illicite, pédopornographie, etc.
-          answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
-  - category: Problème suite à un achat sur internet
-    categoryId: PBINT
-    rank: 101
-    breadcrumbTitle: Vous avez identifié un problème suite à un achat sur internet
     information:
-      title: Ces signalements ne sont <b>pas encore disponibles</b>,<br/> mais nous y travaillons activement !
+      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
       subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
         - question: Un problème avec un commerçant&#160;?
