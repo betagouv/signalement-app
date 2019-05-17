@@ -9,6 +9,8 @@ import { ReportListComponent } from './reports/list/report-list.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppPermissionDirective } from '../../directives/app-permission.directive';
+import { AppRoleDirective } from '../../directives/app-role.directive';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] }
@@ -18,7 +20,9 @@ const routes: Routes = [
   declarations: [
     ReportListComponent,
     ReportDetailComponent,
-    EventComponent
+    EventComponent,
+    AppPermissionDirective,
+    AppRoleDirective,
   ],
   imports: [
     CommonModule,

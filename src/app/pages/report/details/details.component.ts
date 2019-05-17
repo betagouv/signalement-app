@@ -6,7 +6,7 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService, Step } from '../../../services/report-router.service';
-import { DetailInput, InputType } from '../../../model/Anomaly';
+import { DescriptionLabel, DetailInput, InputType, ReportingDateLabel, ReportingTimeslotLabel } from '../../../model/Anomaly';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -95,18 +95,18 @@ export class DetailsComponent implements OnInit {
   getDefaultDetailInputs() {
     const detailInputs = [];
     detailInputs.push(Object.assign(new DetailInput(), {
-      label: 'Description',
+      label: DescriptionLabel,
       rank: 1,
       type: InputType.Textarea
     }));
     detailInputs.push(Object.assign(new DetailInput(), {
-      label: 'Date du constat',
+      label: ReportingDateLabel,
       rank: 2,
       type: InputType.Date,
       defaultValue: 'SYSDATE'
     }));
     detailInputs.push(Object.assign(new DetailInput(), {
-      label: 'Heure du constat',
+      label: ReportingTimeslotLabel,
       rank: 3,
       type: InputType.Timeslot,
       optionnal: true

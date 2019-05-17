@@ -3,6 +3,7 @@
 .table-responsive {
   width: 98% !important;
   margin-left: 1%;
+  overflow-x: unset;
 }
 
 .table {
@@ -26,8 +27,9 @@
     border: 1px solid #dee2e6;
     padding: 0.25em;
     text-align: center;
+    max-width: 500px;
 
-    &:last-of-type {
+    &.action {
       background-color: $white !important;
       border: none;
       vertical-align: middle;
@@ -147,8 +149,11 @@
 
 
 :host ::ng-deep {
-  .tooltip-inner {
-    max-width: none !important;
-    text-align: left;
+  .tooltip {
+    max-width: 50%;
+    .tooltip-inner {
+      max-width: none !important;
+      text-align: left;
+    }
   }
 }

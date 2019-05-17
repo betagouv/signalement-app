@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CompanyService } from '../../../../services/company.service';
 import { Company } from '../../../../model/Company';
 import { switchMap } from 'rxjs/operators';
+import { Permissions } from '../../../../model/AuthUser';
 
 @Component({
   selector: 'app-report-detail',
@@ -23,6 +24,7 @@ export class ReportDetailComponent implements OnInit {
 
   @Output() close = new EventEmitter();
 
+  permissions = Permissions;
   report: Report;
   loading: boolean;
   events: ReportEvent[];

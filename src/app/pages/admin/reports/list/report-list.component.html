@@ -56,31 +56,36 @@
   </div>
   <div class="row">
     <div class="col-12 text-center">
-      <div class="table-responsive">
+      <div class="table-responsive" *appPermission="permissions.listReports">
         <table class="table">
           <thead>
             <tr>
               <th>Dept.</th>
+              <th *appRole="roles.DGCCRF">Commune</th>
+              <th *appRole="roles.DGCCRF">Siret</th>
               <th>Commerçant</th>
               <th>Problème</th>
               <th>Description</th>
-              <th>Consommateur</th>
+              <th *appRole="roles.DGCCRF">Date du constat</th>
+              <th *appRole="roles.Admin">Consommateur</th>
               <th>Pièces jointes</th>
               <th>Statut pro</th>
-              <th>Statut Conso</th>
-              <th></th>
+              <th *appRole="roles.Admin">Statut Conso</th>
+              <th *appPermission="permissions.createEvent" class="action"></th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let reportsByDate of reportsByDate">
-              <tr>
+              <tr *appRole="roles.Admin">
                 <td colspan="8" class="report-group">
                   {{reportsByDate.date}}
                 </td>
-                <td></td>
+                <td class="action"></td>
               </tr>
               <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
                 <td>{{report.company.postalCode | slice : 0 : 2}}</td>
+                <td *appRole="roles.DGCCRF">{{report.company.postalCode}}</td>
+                <td *appRole="roles.DGCCRF">{{report.company.siret}}</td>
                 <td>
                   <span [tooltip]="companyTooltip">
                     {{report.company.name}}
@@ -125,7 +130,10 @@
                     </ng-template>
                   </ng-container>
                 </td>
-                <td>
+                <td *appRole="roles.DGCCRF">
+                  {{getReportingDate(report)}}
+                </td>
+                <td *appRole="roles.Admin">
                   <div [tooltip]="consumerTooltip">
                     {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement">&#x2705;</span><span class="agreement" *ngIf="!report.contactAgreement">&#10060;</span>
                   </div>
@@ -152,10 +160,10 @@
                 <td [class]="getReportCssClass(report.statusPro)">
                   {{report.statusPro}}
                 </td>
-                <td [class]="getReportCssClass(report.statusConso)">
+                <td *appRole="roles.Admin" [class]="getReportCssClass(report.statusConso)">
                   {{report.statusConso}}
                 </td>
-                <td>
+                <td *appPermission="permissions.createEvent" class="action">
                   <img alt="Icône du bouton ajouter" src="/assets/images/icon_add.png" (click)="addEvent($event, report)">
                 </td>
               </tr>

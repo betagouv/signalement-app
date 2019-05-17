@@ -13,6 +13,8 @@ import pages from '../../../../../assets/data/pages.json';
 import { StorageService } from '../../../../services/storage.service';
 import { deserialize } from 'json-typescript-mapper';
 import { isPlatformBrowser } from '@angular/common';
+import { Permissions, Roles } from '../../../../model/AuthUser';
+import { ReportingDateLabel } from '../../../../model/Anomaly';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 
@@ -23,6 +25,8 @@ const ReportFilterStorageKey = 'ReportFilterSignalConso';
 })
 export class ReportListComponent implements OnInit, OnDestroy {
 
+  permissions = Permissions;
+  roles = Roles;
   regions = Regions;
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
@@ -49,7 +53,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 }
 
   ngOnInit() {
-
     this.titleService.setTitle(pages.admin.reports.title);
     this.meta.updateTag({ name: 'description', content: pages.admin.reports.description });
     this.localeService.use('fr');
@@ -180,5 +183,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
     return this.reportService.getReportExtractUrl(this.reportFilter).subscribe(url => {
       this.reportExtractUrl = url;
       });
+  }
+
+  getReportingDate(report: Report) {
+    return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
   }
 }
