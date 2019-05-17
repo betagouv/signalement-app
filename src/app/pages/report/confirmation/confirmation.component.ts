@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Report } from '../../../model/Report';
+import { Report, Step } from '../../../model/Report';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportRouterService } from '../../../services/report-router.service';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { ReportService } from '../../../services/report.service';

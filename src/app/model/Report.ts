@@ -1,10 +1,20 @@
 import { Consumer } from './Consumer';
 import { Company } from './Company';
 import { Subcategory } from './Anomaly';
-import { Step } from '../services/report-router.service';
 import { UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
+
+export enum Step {
+  Category = 'Category',
+  Problem = 'Problem',
+  Details = 'Details',
+  Company = 'Company',
+  Consumer = 'Consumer',
+  Confirmation = 'Confirmation',
+  Acknowledgment = 'Acknowledgment',
+  Information = 'Information'
+}
 
 export class Report {
   id: string;

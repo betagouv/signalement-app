@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
-import { Report } from '../../../model/Report';
+import { Report, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({

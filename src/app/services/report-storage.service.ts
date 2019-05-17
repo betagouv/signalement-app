@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DetailInputValue, Report } from '../model/Report';
+import { DetailInputValue, Report, Step } from '../model/Report';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UploadedFile } from '../model/UploadedFile';
-import { Step } from './report-router.service';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -41,7 +40,9 @@ export class ReportStorageService {
   }
 
   removeReportInProgressFromStorage() {
-    this.reportInProgessSource.getValue().retrievedFromStorage = false;
+    if (this.reportInProgessSource.getValue()) {
+      this.reportInProgessSource.getValue().retrievedFromStorage = false;
+    }
     this.localStorage.removeItemSubscribe(ReportStorageKey);
   }
 
@@ -49,6 +50,10 @@ export class ReportStorageService {
     report.retrievedFromStorage = false;
     report.storedStep = step;
     this.reportInProgessSource.next(report);
-    this.localStorage.setItemSubscribe(ReportStorageKey, report);
+    if (step === Step.Category) {
+      this.removeReportInProgressFromStorage();
+    } else {
+      this.localStorage.setItemSubscribe(ReportStorageKey, report);
+    }
   }
 }
