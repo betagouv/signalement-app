@@ -1314,11 +1314,12 @@ list:
             - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
               answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées..
       - title: Autre problème de service après-vente
-  - category: Problème suite à un achat sur internet
-    categoryId: PBINT
-    rank: 101
-    breadcrumbTitle: Vous avez identifié un problème suite à un achat sur internet
-    information:
+  - category: Achat sur internet
+    categoryId: INTERNET
+    description: 
+    rank: 8
+    icon: email-24px.svg
+    information: Vous avez passé commande sur internet, votre problème concerne un site web      
       title: Ces signalements ne sont <b>pas encore disponibles</b>,<br/> mais nous y travaillons activement !
       subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
