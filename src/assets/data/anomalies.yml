@@ -1316,10 +1316,10 @@ list:
       - title: Autre problème de service après-vente
   - category: Achat sur internet
     categoryId: INTERNET
-    description: 
+    description: Vous avez passé commande sur internet, votre problème concerne un site web
     rank: 8
     icon: email-24px.svg
-    information: Vous avez passé commande sur internet, votre problème concerne un site web      
+    information:       
       title: Ces signalements ne sont <b>pas encore disponibles</b>,<br/> mais nous y travaillons activement !
       subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
