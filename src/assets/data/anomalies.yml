@@ -699,7 +699,7 @@ list:
         example: Vous trouvez que la durée de vie de votre appareil est trop courte.
         detailInputs:
           - label: Date d'achat
-            rank: 2
+            rank: 1
             type: DATE
           - label: Date du constat
             rank: 2
@@ -771,7 +771,7 @@ list:
             defaultValue: SYSDATE
           - label: Description
             example: Précisez si possible le produit ou le rayon
-            rank: 5
+            rank: 3
             type: TEXTAREA
       - title: Prix à la caisse différent du prix affiché
         example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros.'
@@ -844,12 +844,12 @@ list:
               - Une liquidation
               - Autre (à préciser)
           - label: Date du constat
-            rank: 1
+            rank: 2
             type: DATE
             defaultValue: SYSDATE
           - label: Description
             example: Précisez si possible le problème
-            rank: 5
+            rank: 3
             type: TEXTAREA
       - title: Problème pour payer
         subcategories:
