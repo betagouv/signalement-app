@@ -1,19 +1,8 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
-import { Report } from '../model/Report';
+import { Report, Step } from '../model/Report';
 import { ReportStorageService } from './report-storage.service';
-
-export enum Step {
-  Category = 'Category',
-  Problem = 'Problem',
-  Details = 'Details',
-  Company = 'Company',
-  Consumer = 'Consumer',
-  Confirmation = 'Confirmation',
-  Acknowledgment = 'Acknowledgment',
-  Information = 'Information'
-}
 
 export enum ReportPaths {
   Category = '',
@@ -33,8 +22,7 @@ export class ReportRouterService {
 
   report: Report;
 
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private anomalyService: AnomalyService,
+  constructor(private anomalyService: AnomalyService,
               private reportStorageService: ReportStorageService,
               private router: Router) {
 

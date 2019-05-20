@@ -138,7 +138,7 @@ list:
                 subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
                 subcategories:
                   - title: Oui
-                    detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée. 
+                    detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée.
                         <br/>Après cette date, il est dangereux de consommer le produit.
                     description: Les dates "DLC" concernent surtout des produits frais.
                   - title: Non
@@ -146,7 +146,7 @@ list:
                       title: Le commerçant a le droit de vendre un produit jusqu'au jour indiqué sur la date limite de consommation (DLC).
                       content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
                         <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
-                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation. 
+                        <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation.
                       actions:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
@@ -500,7 +500,7 @@ list:
                 description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
                   <br/>Par contre, ces différences sont encadrées par la loi.
                   <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
-                  <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>                  
+                  <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
                 detailInputs:
                   - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
                     rank: 1
@@ -846,7 +846,7 @@ list:
           - label: Date du constat
             rank: 1
             type: DATE
-            defaultValue: SYSDATE    
+            defaultValue: SYSDATE
           - label: Description
             example: Précisez si possible le problème
             rank: 5
@@ -927,7 +927,7 @@ list:
                   - Publicité sur internet
                   - Spot radio (à préciser)
                   - Spot télé (à préciser)
-                  - Autres (à préciser)                         
+                  - Autres (à préciser)
               - label: Quel est le produit que vous vouliez&#160;?
                 rank: 3
                 type: TEXT
@@ -939,7 +939,7 @@ list:
                   - Oui
                   - Non
                   - "je n'ai pas demandé"
-                optionnal: true 
+                optionnal: true
               - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
                 rank: 5
                 type: TEXT
@@ -1083,7 +1083,7 @@ list:
                   - title: Non
                     information:
                       title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". 
+                      subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                                 <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                       actions:
                         - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
@@ -1094,7 +1094,7 @@ list:
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                                  <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande . 
+                                  <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
           - title: Occasion
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
@@ -1158,15 +1158,15 @@ list:
                       subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                       actions:
                         - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                          example: 
+                          example:
                             <br/><br/>Un vice caché d'un produit est un défaut :
                             <ul>
                               <li>qui rend le produit inutilisable, </li>
                               <li>présent dès le départ et</li>
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
-                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple. 
-                                  <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande . 
+                          answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                                  <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
       - title: Problème de livraison
         example: 'Exemple : colis perdu et non reçu, livraison tardive, colis abimé...'
         subcategoriesTitle: Quel est le problème&#160;?
@@ -1233,12 +1233,12 @@ list:
                     rank: 4
                     type: TEXT
                     placeholder: Entreprise de livraison
-              - title: D'un colis envoyé entre particuliers                  
+              - title: D'un colis envoyé entre particuliers
       - title: Refus de rembourser un achat ou d'annuler un contrat
         subcategoriesTitle: Où avez-vous acheté votre produit ou souscrit votre abonnement / contrat&#160;?
         subcategories:
           - title: Dans un magasin dans lequel vous vous êtes rendu
-            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ? 
+            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
             subcategories:
               - title: Il est défecteux et je ne l'avais pas vu
               - title: Autre raison
@@ -1262,7 +1262,7 @@ list:
               - title: Non
                 information:
                   title: Vous ne pouvez plus exiger le remboursement ou l'annulation.
-                  content: Une fois le délai de rétractation terminé, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.       
+                  content: Une fois le délai de rétractation terminé, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.
           - title: Auprès d’un démarcheur qui est venu chez vous
             description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
               <br />Vous n’avez pas à vous justifier auprès du commerçant.
@@ -1273,9 +1273,9 @@ list:
               - title: Non
                 information:
                   title: Vous ne pouvez plus exiger le remboursement ou l'annulation.
-                  content: Une fois le délai de rétractation terminé, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.                        
+                  content: Une fois le délai de rétractation terminé, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.
           - title: Sur un stand, dans une foire ou un salon
-            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ? 
+            subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
             subcategories:
               - title: Il est défecteux et je ne l'avais pas vu
               - title: Autre raison
@@ -1297,9 +1297,9 @@ list:
             subcategories:
               - title: Oui
               - title: Non
-                information:                  
+                information:
                   title: Vous ne pouvez plus exiger le remboursement ou l'annulation.
-                  content: Une fois le délai de rétractation terminée, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.                        
+                  content: Une fois le délai de rétractation terminée, le commerçant n'est plus obligé de vous reprendre votre achat ou d'annuler votre contrat.
       - title: Pas de réponse du service client / service après-vente
         example: 'Exemple : le SAV (service après vente) est inexistant, aucun retour du SAV malgré mes relances...'
       - title: Personnel peu aimable
@@ -1314,10 +1314,11 @@ list:
             - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
               answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées..
       - title: Autre problème de service après-vente
-  - category: Problème suite à un achat sur internet
-    categoryId: PBINT
-    rank: 101
-    breadcrumbTitle: Vous avez identifié un problème suite à un achat sur internet
+  - category: Achat sur internet
+    categoryId: INTERNET
+    description: Vous avez passé commande sur internet, votre problème concerne un site web
+    rank: 8
+    icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
       subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.

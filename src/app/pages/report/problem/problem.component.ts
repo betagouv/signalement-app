@@ -3,8 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Report } from '../../../model/Report';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { Report, Step } from '../../../model/Report';
+import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({
@@ -55,7 +55,7 @@ export class ProblemComponent implements OnInit {
   setInternetPurchase(internetPurchase: boolean) {
     this.report.internetPurchase = internetPurchase;
     if (this.report.internetPurchase) {
-      this.report.category = this.anomalyService.getAnomalyByCategoryId('PBINT').category;
+      this.report.category = this.anomalyService.getAnomalyByCategoryId('INTERNET').category;
       this.reportStorageService.changeReportInProgressFromStep(this.report, Step.Category);
       this.reportRouterService.routeForward(Step.Category);
     }
