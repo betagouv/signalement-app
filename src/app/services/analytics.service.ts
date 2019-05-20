@@ -23,7 +23,8 @@ export class AnalyticsService {
 
 export enum EventCategories {
   report = 'Signalement',
-  company = 'Identification de l\'établissement'
+  company = 'Identification de l\'établissement',
+  authentication = 'Authentification'
 }
 
 export enum ReportEventActions {
@@ -55,6 +56,7 @@ export enum CompanySearchEventNames {
   error = 'Erreur technique'
 }
 
-
-
-
+export enum AuthenticationEventActions {
+  success = 'Authentification réussie',
+  fail = 'Authentification en échec'
+}

@@ -3,6 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { AnalyticsService, EventCategories, AuthenticationEventActions } from '../../services/analytics.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
               private titleService: Title,
               private meta: Meta,
               private authenticationService: AuthenticationService,
+              private analyticsService: AnalyticsService,
               private router: Router) { }
 
   ngOnInit() {
@@ -48,9 +50,11 @@ export class LoginComponent implements OnInit {
     } else {
       this.authenticationService.login(this.emailCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, (user as any).role);
           this.router.navigate(['suivi-des-signalements']);
         },
         error => {
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
           this.authenticationError = `Echec de l'authentification`;
         }
       );
