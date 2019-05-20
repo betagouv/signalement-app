@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Report } from '../../../model/Report';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { Report, Step } from '../../../model/Report';
+import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 
 @Component({

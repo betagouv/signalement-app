@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DetailInputValue, PrecisionKeyword, Report } from '../../../model/Report';
+import { DetailInputValue, PrecisionKeyword, Report, Step } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { KeywordService } from '../../../services/keyword.service';

@@ -13,7 +13,6 @@
     border: none;
   }
 }
-
 .banner {
   padding-top: 1.5em;
   padding-bottom: 0;
@@ -26,8 +25,10 @@
 .banner h1 {
   color: #26353f;
   background-color: #fff;
-  padding: .5em;
+  padding: .5em 1em .6em;
   display: inline-block;
+  font-size: 1.5rem !important;
+  margin-bottom: .6em;
 }
 
 .category {
@@ -88,7 +89,7 @@
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  background-color: $light-blue !important;
+  background-color: $light-blue;
 }
 
 .card-body {
@@ -98,4 +99,45 @@
 
 .card-text {
   margin-bottom: 0 !important;
+}
+
+a.active.disabled {
+  background-color: #53657D !important;
+  color: white;
+}
+
+.category.disabled {
+  background: repeating-linear-gradient(
+    135deg,
+    #fff,
+    #fff 10px,
+    #DEE5EC 10px,
+    #DEE5EC 20px
+  );
+}
+
+.category.disabled h5 {
+  color: #9B9DA0
+}
+
+h3 {
+  margin: 0.2em 0 0.8em;
+}
+
+.other-problems {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  padding-bottom: .2em;
+  color: #0053b3;
+}
+
+.other-problems:hover {
+  color: #003067;
+}
+
+h3.other-problems {
+  padding-bottom: .2em;
+}
+
+p.internet-information {
+  margin-bottom: 40px !important
 }

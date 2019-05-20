@@ -1,7 +1,23 @@
 @import "../../../theme/media-queries";
+@import "../../../theme/variables";
 
 .navbar__container {
   width: 100%;
+
+  .navbar__domain, .navbar__gouvfr {
+    font-size: 21px;
+    font-family: "Source Sans Pro", Arial, sans-serif;
+    color: $light-blue;
+    font-weight: bold;
+
+    & + img {
+      height: 34px;
+    }
+  }
+
+  .navbar__gouvfr {
+    color: $darker-grey;
+  }
 
 
   @media #{$larger-than-tablet} {
@@ -44,7 +60,6 @@
     }
 
     .navbar__domain {
-      font-size: 14px;
 
       & + img {
         height: 34px;
