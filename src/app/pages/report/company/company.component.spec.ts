@@ -11,10 +11,10 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { AddressService } from '../../../services/address.service';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
-import { Report } from '../../../model/Report';
+import { Report, Step } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReportPaths, Step } from '../../../services/report-router.service';
+import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 
 describe('CompanyComponent', () => {

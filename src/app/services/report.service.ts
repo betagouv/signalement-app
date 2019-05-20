@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report } from '../model/Report';
+import { DetailInputValue, Report, Step } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';

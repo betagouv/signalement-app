@@ -33,7 +33,7 @@
       </nav>
 
       <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="!around && searchForm">
-        
+
         <div class="form__group mt-4">
           <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'établissement <span class="error">*</span>
           </label>
@@ -45,7 +45,7 @@
           </label>
           <div class="row">
             <div class="col-12 col-sm-6">
-              <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 75001" />
+              <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110" />
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@
             (selected)="selectAddress($event)">
           </ng2-completer>
         </div>
-        
+
         <div class="notification error mt-3" *ngIf="showErrors && companyForm.invalid">
           <span *ngIf="nameCtrl.hasError('required')">
             Veuillez renseigner le nom de l'établissement.<br />

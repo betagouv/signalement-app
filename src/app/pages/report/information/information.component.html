@@ -2,10 +2,10 @@
   <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
   <section class="section section-white">
     <div class="container max-width">
-      <p class="mx-auto mb-4 text-center title" [innerHTML]="informationToDisplay?.title"></p>
-      <p class="mb-4 text-center" [innerHTML]="informationToDisplay?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
+      <p class="mx-auto mb-4 text-left title" [innerHTML]="informationToDisplay?.title"></p>
+      <p class="mb-4 text-left" [innerHTML]="informationToDisplay?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
       <p class="mb-5" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
-      
+
       <div class="card mx-auto mb-4 rounded-lg" *ngFor="let action of informationToDisplay?.actions">
         <div class="card-body">
           <p class="card-text" [innerHTML]="action.question" *ngIf="action.question"></p>
@@ -13,7 +13,7 @@
         </div>
         <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
       </div>
-      
+
       <hr class="mb-6" />
 
       <button class="btn btn-lg btn-primary mx-auto" (click)="newReport()">

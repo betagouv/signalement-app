@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Information } from '../../../model/Anomaly';
-import { Report } from '../../../model/Report';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { Report, Step } from '../../../model/Report';
+import { ReportRouterService } from '../../../services/report-router.service';
 
 @Component({
   selector: 'app-information',
@@ -29,6 +29,7 @@ export class InformationComponent implements OnInit, OnDestroy {
       if (report) {
         this.report = report;
         this.initInformation();
+        this.reportStorageService.removeReportInProgressFromStorage();
       } else {
         this.reportRouterService.routeToFirstStep();
       }
