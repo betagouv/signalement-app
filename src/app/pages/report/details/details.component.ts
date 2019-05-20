@@ -5,7 +5,7 @@ import { BsLocaleService } from 'ngx-bootstrap';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { ReportRouterService, Step } from '../../../services/report-router.service';
+import { ReportRouterService } from '../../../services/report-router.service';
 import { DescriptionLabel, DetailInput, InputType, ReportingDateLabel, ReportingTimeslotLabel } from '../../../model/Anomaly';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
