@@ -158,7 +158,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   getReportCssClass(status: string) {
     if (status) {
-      return `status-${status.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(' ').join('-')}`;
+      return `status-${status.toLowerCase().replace(/[àáâãäå]/g, 'a').replace(/[éèêë]/g, 'e').split(' ').join('-')}`;
     } else {
       return '';
     }
