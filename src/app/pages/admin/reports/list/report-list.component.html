@@ -12,7 +12,7 @@
       <div class="row form-group">
         <div class="col-2 text-right">
           <label>
-            Département / région
+            Département(s)
           </label>
         </div>
         <div class="col-4 text-left">
@@ -69,6 +69,34 @@
         </div>
         <div class="col-4 text-left">
           <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
+        </div>
+        <div class="col-2 text-right">
+          <label for="statusFilter">
+            Statut pro
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <select [(ngModel)]="reportFilter.statusPro" placeholder="Statut pro" id="statusFilter" name="status" [class]="reportFilter.statusPro ? 'selected' : ''">
+            <option value="" selected>Tous les status</option>
+            <option *ngFor="let statusPro of statusPros">
+              {{statusPro}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-2 text-right">
+          <label for="categoryFilter">
+            Catégorie
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" [class]="reportFilter.category ? 'selected' : ''">
+            <option value="" selected>Toutes les catégories</option>
+            <option *ngFor="let category of categories">
+              {{category}}
+            </option>
+          </select>
         </div>
       </div>
       <div class="row">

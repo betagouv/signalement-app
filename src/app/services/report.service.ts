@@ -82,6 +82,12 @@ export class ReportService {
     if (reportFilter.siret) {
       httpParams = httpParams.append('siret', reportFilter.siret);
     }
+    if (reportFilter.statusPro) {
+      httpParams = httpParams.append('statusPro', reportFilter.statusPro);
+    }
+    if (reportFilter.category) {
+      httpParams = httpParams.append('category', reportFilter.category);
+    }
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<PaginatedData<any>>(
@@ -119,6 +125,12 @@ export class ReportService {
         }
         if (reportFilter.siret) {
           httpParams.push(`siret=${reportFilter.siret}`);
+        }
+        if (reportFilter.statusPro) {
+          httpParams.push(`statusPro=${reportFilter.statusPro}`);
+        }
+        if (reportFilter.category) {
+          httpParams.push(`category=${reportFilter.category}`);
         }
         return `${url}?${httpParams.join('&')}`;
       })
