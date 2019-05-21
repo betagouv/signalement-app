@@ -30,7 +30,7 @@ export class AppPermissionDirective implements OnInit {
   }
 
   hasPermission(user: User, permission: Permissions) {
-    return user && user.permissions && user.permissions.includes(permission);
+    return user && user.permissions && user.permissions.indexOf(permission) !== -1;
   }
 }
 

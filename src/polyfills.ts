@@ -74,6 +74,3 @@ import 'zone.js/dist/zone'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-String.prototype.includes = function (str) {
-  return this.indexOf(str) !== -1;
-}
