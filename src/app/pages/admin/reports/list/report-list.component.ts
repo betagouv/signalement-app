@@ -99,7 +99,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
   changePeriod(event) {
     if (this.reportFilter.period !== event) {
       this.reportFilter.period = event;
-      this.loadReports();
     }
   }
 
@@ -166,7 +165,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   selectArea(area?: Region | Department) {
     this.reportFilter.area = area;
-    this.loadReports();
   }
 
   getAreaLabel() {
@@ -187,5 +185,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   getReportingDate(report: Report) {
     return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
+  }
+
+  cancelFilters() {
+    this.reportFilter = new ReportFilter();
+    this.periodValue = undefined;
+    this.loadReports();
   }
 }

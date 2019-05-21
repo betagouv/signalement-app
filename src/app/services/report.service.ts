@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report, Step } from '../model/Report';
+import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
@@ -79,6 +79,9 @@ export class ReportService {
     if (reportFilter.period && reportFilter.period[1]) {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
+    if (reportFilter.siret) {
+      httpParams = httpParams.append('siret', reportFilter.siret);
+    }
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<PaginatedData<any>>(
@@ -113,6 +116,9 @@ export class ReportService {
         }
         if (reportFilter.period && reportFilter.period[1]) {
           httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
+        }
+        if (reportFilter.siret) {
+          httpParams.push(`siret=${reportFilter.siret}`);
         }
         return `${url}?${httpParams.join('&')}`;
       })

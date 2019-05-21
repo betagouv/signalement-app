@@ -1,5 +1,21 @@
 @import "../../../../../theme/variables";
 
+form {
+  width: 98% !important;
+  max-width: unset !important;
+
+  .text-right {
+    padding-right: 0;
+  }
+
+  label {
+    font-size: 16px;
+    line-height: 43px;
+    margin-bottom: 0;
+  }
+
+}
+
 .table-responsive {
   width: 98% !important;
   margin-left: 1%;

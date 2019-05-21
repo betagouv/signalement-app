@@ -8,51 +8,81 @@
   </div>
 
   <div class="filters">
-    <div class="row text-center">
-      <div class="col-12">
-        <div class="btn-group" dropdown>
-          <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
-            {{getAreaLabel()}} <span class="caret"></span>
-          </button>
-          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem" class="menutitle">
-                <span class="pointer dropdown-item menutitle" (click)="selectArea()">
-                  Tous les départements
-                </span>
-            </li>
-            <ng-container *ngFor="let region of regions">
-              <li class="divider dropdown-divider"></li>
-              <li class="menutitle pt-0" role="menuitem">
-                <span class="pointer dropdown-item menutitle" (click)="selectArea(region)">
-                  {{region.label}}
-                </span>
-              </li>
-              <li role="menuitem" *ngFor="let department of region.departments">
-                <span class="pointer dropdown-item" (click)="selectArea(department)">
-                  {{department.code}} - {{department.label}}
-                </span>
-              </li>
-            </ng-container>
-          </ul>
+    <form>
+      <div class="row form-group">
+        <div class="col-2 text-right">
+          <label>
+            Département / région
+          </label>
         </div>
-        &nbsp;
-        <input type="text"
-               [(ngModel)]="periodValue"
-               name="period"
-               placeholder="Daterangepicker"
-               placeholder="Période sélectionnée"
-               bsDaterangepicker
-               (bsValueChange)="changePeriod($event)"
-               [bsConfig]="{
-                 containerClass: 'theme-default',
-                 rangeInputFormat: 'DD MMMM YYYY'
-               }" />
-        &nbsp;
-        <a href="{{reportExtractUrl}}">
-          <img alt="Icône du bouton exporter en XLS" src="/assets/images/icon_export_xls.png"/>
-        </a>
+        <div class="col-4 text-left">
+          <div class="btn-group" dropdown>
+            <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+              {{getAreaLabel()}} <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem" class="menutitle">
+                  <span class="pointer dropdown-item menutitle" (click)="selectArea()">
+                    Tous les départements
+                  </span>
+              </li>
+              <ng-container *ngFor="let region of regions">
+                <li class="divider dropdown-divider"></li>
+                <li class="menutitle pt-0" role="menuitem">
+                  <span class="pointer dropdown-item menutitle" (click)="selectArea(region)">
+                    {{region.label}}
+                  </span>
+                </li>
+                <li role="menuitem" *ngFor="let department of region.departments">
+                  <span class="pointer dropdown-item" (click)="selectArea(department)">
+                    {{department.code}} - {{department.label}}
+                  </span>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="col-2 text-right">
+          <label>
+            Période
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <input type="text"
+                 [(ngModel)]="periodValue"
+                 name="period"
+                 placeholder="Daterangepicker"
+                 placeholder="Période sélectionnée"
+                 bsDaterangepicker
+                 (bsValueChange)="changePeriod($event)"
+                 [bsConfig]="{
+                   containerClass: 'theme-default',
+                   rangeInputFormat: 'DD MMMM YYYY'
+                 }" />
+        </div>
       </div>
-    </div>
+      <div class="row form-group">
+        <div class="col-2 text-right">
+          <label for="siretFilter">
+            Siret
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="button" class="btn btn-outline-primary" (click)="cancelFilters()">Effacer les filtres</button>
+          &nbsp;
+          <button type="button" class="btn btn-primary" (click)="loadReports()">Filtrer les signalements</button>
+          &nbsp;
+          <a href="{{reportExtractUrl}}">
+            <img alt="Icône du bouton exporter en XLS" src="/assets/images/icon_export_xls.png"/>
+          </a>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="row">
     <div class="col-12 text-center">
