@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from '../../services/authentication.service';
 import { AnalyticsService, EventCategories, AuthenticationEventActions } from '../../services/analytics.service';
 import { Router } from '@angular/router';
+import { User } from '../../model/AuthUser';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.authenticationService.login(this.emailCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
-          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, (user as any).role);
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, (user as User).id);
           this.router.navigate(['suivi-des-signalements']);
         },
         error => {

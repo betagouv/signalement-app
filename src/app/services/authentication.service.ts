@@ -38,7 +38,7 @@ export class AuthenticationService {
         if (authUser.token) {
           this.userSource.next(authUser.user);
           this.localStorage.setItemSubscribe(AuthUserStorageKey, authUser);
-          return authUser;
+          return authUser.user;
         } else {
           return false;
         }
