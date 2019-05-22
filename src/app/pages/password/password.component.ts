@@ -18,9 +18,11 @@ export class PasswordComponent implements OnInit {
 
   changePasswordForm: FormGroup;
   oldPasswordCtrl: FormControl;
-  newPasswordCtrl: FormControl;
+  passwordCtrl: FormControl;
+  confirmPasswordCtrl: FormControl;
 
   showErrors: boolean;
+  showSuccess: boolean;
   authenticationError: string;
 
   constructor(public formBuilder: FormBuilder,
@@ -42,31 +44,56 @@ export class PasswordComponent implements OnInit {
   }
 
   initForm() {
+
+    function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+      return (group: FormGroup) => {
+        let password = group.controls[passwordKey];
+        let confirmPassword = group.controls[confirmPasswordKey];
+
+        if (password.value !== confirmPassword.value) {
+          return confirmPassword.setErrors({notEquivalent: true});
+        }
+      }
+    }
+
     this.oldPasswordCtrl = this.formBuilder.control('', Validators.required);
-    this.newPasswordCtrl = this.formBuilder.control('', Validators.required);
+    this.passwordCtrl = this.formBuilder.control('', Validators.required);
+    this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
 
     this.changePasswordForm = this.formBuilder.group({
       oldPasswordCtrl: this.oldPasswordCtrl,
-      newPasswordCtrl: this.newPasswordCtrl
-    });
+      passwordCtrl: this.passwordCtrl,
+      confirmPasswordCtrl: this.confirmPasswordCtrl,
+    }, { validator: matchingPasswords('passwordCtrl', 'confirmPasswordCtrl')});
   }
 
   submitForm() {
     this.authenticationError = '';
+    this.showSuccess = false;
+
     if (!this.changePasswordForm.valid) {
       this.showErrors = true;
     } else {
-      this.authenticationService.changePassword(this.user.email, this.oldPasswordCtrl.value, this.newPasswordCtrl.value)
-      // .subscribe(
-      //   user => {
-      //     this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.success, (user as User).id);
-      //     this.router.navigate(['suivi-des-signalements']);
-      //   },
-      //   error => {
-      //     this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.fail);
-      //     this.authenticationError = `Echec de l'authentification`;
-      //   }
-      // );
+      this.authenticationService.changePassword(this.oldPasswordCtrl.value, this.passwordCtrl.value)
+      .subscribe(
+        () => {
+          this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.success);
+          this.showSuccess = true;
+          // TODO : erreur si l'on reset le formulaire. Si erreur auparavant, elles sont à nouveau visible
+          // this.changePasswordForm.reset({emitEvent: false});
+        },
+        error => {
+          this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.fail);
+          if (error.status == "401") {
+            this.authenticationError = `Problème d'authentification`;
+          } else if (error.status = "400") {
+            this.authenticationError = `Les données ne sont pas cohérentes`;
+          } else {
+            this.authenticationError = `Echec de la mise à jour du mot de passe`;
+          }
+          console.error(error);
+        }
+      );
     }
   }
 
