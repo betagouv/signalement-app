@@ -36,6 +36,7 @@ export class ReportFilter {
   siret?: string;
   category?: string;
   statusPro?: string;
+  details?: string;
 
   constructor() {
     this.area = undefined;
@@ -43,6 +44,7 @@ export class ReportFilter {
     this.siret = undefined;
     this.category = '';
     this.statusPro = '';
+    this.details = undefined;
   }
 }
 

@@ -8,7 +8,7 @@
   </div>
 
   <div class="filters">
-    <form>
+    <form (submit)="loadReports()">
       <div class="row form-group">
         <div class="col-2 text-right">
           <label>
@@ -98,12 +98,20 @@
             </option>
           </select>
         </div>
+        <div class="col-2 text-right">
+          <label for="detailsFilter">
+            Détails
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" />
+        </div>
       </div>
       <div class="row">
         <div class="col-12 text-center">
           <button type="button" class="btn btn-outline-primary" (click)="cancelFilters()">Effacer les filtres</button>
           &nbsp;
-          <button type="button" class="btn btn-primary" (click)="loadReports()">Filtrer les signalements</button>
+          <button type="submit" class="btn btn-primary">Filtrer les signalements</button>
           &nbsp;
           <a href="{{reportExtractUrl}}">
             <img alt="Icône du bouton exporter en XLS" src="/assets/images/icon_export_xls.png"/>

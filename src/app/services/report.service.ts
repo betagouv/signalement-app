@@ -79,15 +79,11 @@ export class ReportService {
     if (reportFilter.period && reportFilter.period[1]) {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
-    if (reportFilter.siret) {
-      httpParams = httpParams.append('siret', reportFilter.siret);
-    }
-    if (reportFilter.statusPro) {
-      httpParams = httpParams.append('statusPro', reportFilter.statusPro);
-    }
-    if (reportFilter.category) {
-      httpParams = httpParams.append('category', reportFilter.category);
-    }
+    ['siret', 'statusPro', 'category', 'details'].forEach(filterName => {
+      if (reportFilter[filterName]) {
+        httpParams = httpParams.append(filterName, reportFilter[filterName]);
+      }
+    });
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<PaginatedData<any>>(
@@ -123,15 +119,11 @@ export class ReportService {
         if (reportFilter.period && reportFilter.period[1]) {
           httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
         }
-        if (reportFilter.siret) {
-          httpParams.push(`siret=${reportFilter.siret}`);
-        }
-        if (reportFilter.statusPro) {
-          httpParams.push(`statusPro=${reportFilter.statusPro}`);
-        }
-        if (reportFilter.category) {
-          httpParams.push(`category=${reportFilter.category}`);
-        }
+        ['siret', 'statusPro', 'category', 'details'].forEach(filterName => {
+          if (reportFilter[filterName]) {
+            httpParams.push(`${filterName}=${reportFilter[filterName]}`);
+          }
+        });
         return `${url}?${httpParams.join('&')}`;
       })
     );
