@@ -11,9 +11,11 @@ import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
+import { PasswordComponent } from '../../pages/password/password.component';
 
 const routes: Routes = [
-  { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] }
+  { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
+  { path: 'change-password', component: PasswordComponent }
 ];
 
 @NgModule({
@@ -23,6 +25,7 @@ const routes: Routes = [
     EventComponent,
     AppPermissionDirective,
     AppRoleDirective,
+    PasswordComponent,
   ],
   imports: [
     CommonModule,

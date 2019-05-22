@@ -57,4 +57,8 @@ export class AuthenticationService {
       map(authUser => authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
     );
   }
+
+  changePassword(email: string, oldPassword: string, newPassword: string) {
+    console.log(`Dans changePassword ${email} ${oldPassword} ${newPassword}`)
+  }
 }

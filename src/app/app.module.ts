@@ -23,6 +23,7 @@ import { LoginModule } from './pages/login/login.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { RetractationComponent } from './pages/infos/retractation/retractation.component';
 import { CguComponent } from './pages/infos/cgu/cgu.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -58,7 +59,8 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     BrowserAnimationsModule,
     LoginModule,
-    AdminModule
+    AdminModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

@@ -18,7 +18,20 @@
           </a>
         </li>
         <li class="nav__item" *ngIf="user">
-          <span (click)="logout()" class="pointer link">Se déconnecter</span>
+          <div class="btn-group" dropdown>
+            <button id="button-avatar" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
+                    aria-controls="dropdown-basic">Compte <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item" href="#">{{ user.firstName + " " + user.lastName }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="#"><b>Profil</b> : {{ user.role }}</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><span class="dropdown-item" (click)="changePassword()">Modifier mot de passe</span>
+              <li role="menuitem"><span class="dropdown-item" (click)="logout()">Se déconnecter</span>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </nav>
