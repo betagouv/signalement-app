@@ -105,6 +105,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
       });
       this.totalCount = result.totalCount;
       this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+      if (isPlatformBrowser(this.platformId)) {
+        window.scroll(0, 0);
+      }
     });
   }
 
