@@ -164,6 +164,10 @@ select {
   border-radius: 3px;
 }
 
+select::-ms-expand {
+  display: none;
+}
+
 select:focus {
   outline: none;
 }
