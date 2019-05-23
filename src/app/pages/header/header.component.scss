@@ -19,6 +19,9 @@
     color: $darker-grey;
   }
 
+  .dropdown-item.cursor {
+    cursor: pointer;
+  }
 
   @media #{$larger-than-tablet} {
     .ribbon {
