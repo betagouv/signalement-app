@@ -106,7 +106,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
       this.totalCount = result.totalCount;
       this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
       if (isPlatformBrowser(this.platformId)) {
-        window.scroll(0, 0);
+        window.scroll(0, 260);
       }
     });
   }
@@ -172,7 +172,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   getReportCssClass(status: string) {
     if (status) {
-      return `status-${status.toLowerCase().replace(/[àáâãäå]/g, 'a').replace(/[éèêë]/g, 'e').split(' ').join('-')}`;
+      return `status-${status.toLowerCase()
+        .replace(/[àáâãäå]/g, 'a')
+        .replace(/[éèêë]/g, 'e')
+        .replace(/['']/g, '')
+        .split(' ').join('-')}`;
     } else {
       return '';
     }
