@@ -51,13 +51,13 @@ export class PasswordComponent implements OnInit {
         let confirmPassword = group.controls[confirmPasswordKey];
 
         if (password.value !== confirmPassword.value) {
-          return confirmPassword.setErrors({notEquivalent: true});
+          return { notEquivalent: true };
         }
       }
     }
 
     this.oldPasswordCtrl = this.formBuilder.control('', Validators.required);
-    this.passwordCtrl = this.formBuilder.control('', Validators.required);
+    this.passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(8)]);
     this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
 
     this.changePasswordForm = this.formBuilder.group({
@@ -70,6 +70,7 @@ export class PasswordComponent implements OnInit {
   submitForm() {
     this.authenticationError = '';
     this.showSuccess = false;
+    this.showErrors = false;
 
     if (!this.changePasswordForm.valid) {
       this.showErrors = true;
@@ -80,10 +81,11 @@ export class PasswordComponent implements OnInit {
           this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.success);
           this.showSuccess = true;
           // TODO : erreur si l'on reset le formulaire. Si erreur auparavant, elles sont à nouveau visible
-          // this.changePasswordForm.reset({emitEvent: false});
+          this.changePasswordForm.reset();
         },
         error => {
           this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.fail);
+          this.showErrors = true;
           if (error.status == "401") {
             this.authenticationError = `Problème d'authentification`;
           } else if (error.status = "400") {
@@ -91,10 +93,17 @@ export class PasswordComponent implements OnInit {
           } else {
             this.authenticationError = `Echec de la mise à jour du mot de passe`;
           }
-          console.error(error);
+
         }
       );
     }
+  }
+
+  resetMessages() {
+    this.showSuccess = false;
+    this.showErrors = false;
+    this.authenticationError = '';
+
   }
 
 
