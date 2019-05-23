@@ -24,9 +24,10 @@
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                 role="menu" aria-labelledby="button-basic">
-              <li role="menuitem"><span class="dropdown-item">{{ user.firstName + " " + user.lastName }}</span></li>
-              <li role="menuitem"><span class="dropdown-item"><b>Profil</b> : {{ user.role }}</span></li>
+              <li role="menuitem"><span class="item">{{ user.firstName + " " + user.lastName }}</span></li>
+              <li role="menuitem"><span class="item"><b>Profil</b> : {{ user.role }}</span></li>
               <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><span class="dropdown-item cursor" (click)="goHome()">Suivi des signalements</span>
               <li role="menuitem"><span class="dropdown-item cursor" (click)="changePassword()">Modifier mot de passe</span>
               <li role="menuitem"><span class="dropdown-item cursor" (click)="logout()">Se déconnecter</span>
               </li>

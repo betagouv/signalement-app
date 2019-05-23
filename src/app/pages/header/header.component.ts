@@ -31,4 +31,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['change-password']);
   }
 
+  goHome() {
+    this.router.navigate(['suivi-des-signalements']);
+  }
+
 }
