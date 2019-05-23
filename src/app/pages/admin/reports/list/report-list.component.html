@@ -120,6 +120,9 @@
       </div>
     </form>
   </div>
+  <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+              [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+  </pagination>
   <div class="row">
     <div class="col-12 text-center">
       <div class="table-responsive" *appPermission="permissions.listReports">
@@ -229,8 +232,8 @@
                 <td *appRole="roles.Admin" [class]="getReportCssClass(report.statusConso)">
                   {{report.statusConso}}
                 </td>
-                <td *appPermission="permissions.createEvent" class="action">
-                  <img alt="Icône du bouton ajouter" src="/assets/images/icon_add.png" (click)="addEvent($event, report)">
+                <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
+                  <img alt="Icône du bouton ajouter" src="/assets/images/icon_add.png">
                 </td>
               </tr>
             </ng-container>

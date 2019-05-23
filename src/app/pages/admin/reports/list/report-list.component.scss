@@ -31,7 +31,7 @@ form {
   border: none;
 
   th {
-    background-color: $lighter-grey;
+    background-color: $light-grey;
     border-bottom-width: 2px !important;
   }
 
@@ -99,6 +99,10 @@ form {
       background-color: $lighter-blue;
     }
 
+    &.status-pas-de-promesse-daction {
+      background-color: $light-green;
+    }
+
     &.status-en-attente {
       background-color: $light-orange;
     }
@@ -121,7 +125,7 @@ form {
   }
 
   td.report-group {
-    background-color: $lightest-grey;
+    background-color: $lighter-grey;
     font-weight: bold;
   }
 
