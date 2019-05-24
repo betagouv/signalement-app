@@ -81,7 +81,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.categories = this.anomalyService.getAnomalies().map(anomaly => anomaly.category);
+    this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
