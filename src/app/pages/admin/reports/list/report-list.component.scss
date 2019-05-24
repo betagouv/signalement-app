@@ -33,6 +33,7 @@ form {
   th {
     background-color: $light-grey;
     border-bottom-width: 2px !important;
+    vertical-align: middle;
   }
 
   tr:hover {
@@ -48,6 +49,7 @@ form {
     padding: 0.25em;
     text-align: center;
     max-width: 500px;
+    vertical-align: middle;
 
     &.action {
       background-color: $white !important;

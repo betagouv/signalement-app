@@ -100,7 +100,7 @@
         </div>
         <div class="col-2 text-right">
           <label for="detailsFilter">
-            Recherche <br />mots clés
+            Mots-clés&nbsp;<i class="material-icons md-dark" alt="icone popover aide" title="Recherche de texte dans les colonnes problème et description">help_outline</i>
           </label>
         </div>
         <div class="col-4 text-left">
@@ -204,7 +204,7 @@
                 </td>
                 <td *appRole="roles.Admin">
                   <div [tooltip]="consumerTooltip">
-                    {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement">&#x2705;</span><span class="agreement" *ngIf="!report.contactAgreement">&#10060;</span>
+                    {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement"><i class="material-icons md-red" alt="Icône pas d'accord de contact" title="L'utilisateur ne souhaite pas être contacté">close</i></span><span class="agreement" *ngIf="!report.contactAgreement"><i class="material-icons md-green" alt="Icône accord de contact" title="L'utilisateur souhaite être contacté">check</i></span>
                   </div>
                   <ng-template #consumerTooltip>
                     {{report.consumer.firstName}} {{report.consumer.lastName}}
@@ -233,7 +233,7 @@
                   {{report.statusConso}}
                 </td>
                 <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
-                  <img alt="Icône du bouton ajouter" src="/assets/images/icon_add.png">
+                  <i class="material-icons md-light-blue" alt="Icône ajouter" title="Ajouter une action">add_circle</i>
                 </td>
               </tr>
             </ng-container>
