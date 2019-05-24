@@ -171,7 +171,7 @@ export class ReportService {
   private reportApi2report(reportApi) {
     return Object.assign(new Report(), {
       id: reportApi.id,
-      creationDate: reportApi.creationDate,
+      creationDate: new Date(reportApi.creationDate),
       category: reportApi.category,
       subcategories: reportApi.subcategories,
       detailInputValues: reportApi.details,

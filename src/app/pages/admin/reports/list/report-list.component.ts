@@ -100,7 +100,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.reportsByDate.push(
           {
             date: date,
-            reports: result.entities.filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
+            reports: result.entities
+              .filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
+              .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
           });
       });
       this.totalCount = result.totalCount;
