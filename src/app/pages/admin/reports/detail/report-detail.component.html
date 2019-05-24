@@ -21,7 +21,7 @@
     <div class="panel">
       <ng-container *ngIf="report">
         <h5>Statut pro : {{report.statusPro}}</h5>
-        <h5>Statut conso : {{report.statusConso}}</h5>
+        <h5 *appRole="roles.Admin">Statut conso : {{report.statusConso}}</h5>
         <hr />
         <h5>Problème</h5>
         <div class="row">
