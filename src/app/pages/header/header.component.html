@@ -17,10 +17,15 @@
             Comment ça marche ?
           </a>
         </li>
+        <li class="nav__item" *ngIf="user && user.role === 'DGCCRF'">
+          <a routerLink="/mode-emploi-dgccrf">
+            Mode d'emploi
+          </a>
+        </li>
         <li class="nav__item" *ngIf="user">
           <div class="btn-group" dropdown placement="bottom right">
             <button id="button-avatar" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
-                    aria-controls="dropdown-basic">Compte <span class="caret"></span>
+                    aria-controls="dropdown-basic"><i class="material-icons">person</i>&nbsp;Compte <span class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                 role="menu" aria-labelledby="button-basic">

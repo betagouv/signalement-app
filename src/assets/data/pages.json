@@ -35,6 +35,10 @@
     "reports": {
       "title": "Suivi des signalements - SignalConso",
       "description": "Suivi des signalements de SignalConso"
+    },
+    "dgccrf": {
+      "title": "Mode d'emploi DGCCRF - SignalConso",
+      "description": "Mode d'emploi pour le profil back-office DGCCRF"
     }
   }
 }
