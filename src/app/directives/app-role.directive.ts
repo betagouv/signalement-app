@@ -20,7 +20,7 @@ export class AppRoleDirective implements OnInit {
   ngOnInit() {
     this.authenticationService.user.subscribe(
       user => {
-        if (this.hasRole(user, this.appRole)) {
+        if (this.templateRef && this.hasRole(user, this.appRole)) {
           this.viewContainer.createEmbeddedView(this.templateRef);
         } else if (this.appRoleElse) {
           this.viewContainer.createEmbeddedView(this.appRoleElse);
