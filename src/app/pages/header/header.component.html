@@ -17,8 +17,27 @@
             Comment ça marche ?
           </a>
         </li>
+        <li class="nav__item" *ngIf="user && user.role === 'DGCCRF'">
+          <a routerLink="/mode-emploi-dgccrf">
+            Mode d'emploi
+          </a>
+        </li>
         <li class="nav__item" *ngIf="user">
-          <span (click)="logout()" class="pointer link">Se déconnecter</span>
+          <div class="btn-group" dropdown placement="bottom right">
+            <button id="button-avatar" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
+                    aria-controls="dropdown-basic"><i class="material-icons">person</i>&nbsp;Compte <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+                role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><span class="item">{{ user.firstName + " " + user.lastName }}</span></li>
+              <li role="menuitem"><span class="item"><b>Profil</b> : {{ user.role }}</span></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><span class="dropdown-item cursor" (click)="goHome()">Suivi des signalements</span>
+              <li role="menuitem"><span class="dropdown-item cursor" (click)="changePassword()">Modifier mot de passe</span>
+              <li role="menuitem"><span class="dropdown-item cursor" (click)="logout()">Se déconnecter</span>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </nav>

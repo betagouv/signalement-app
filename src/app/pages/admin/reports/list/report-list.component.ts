@@ -7,12 +7,16 @@ import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
 import { Department, Region, Regions, ReportFilter } from '../../../../model/ReportFilter';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
 import { StorageService } from '../../../../services/storage.service';
 import { deserialize } from 'json-typescript-mapper';
 import { isPlatformBrowser } from '@angular/common';
+import { Permissions, Roles } from '../../../../model/AuthUser';
+import { ReportingDateLabel } from '../../../../model/Anomaly';
+import { ConstantService } from '../../../../services/constant.service';
+import { AnomalyService } from '../../../../services/anomaly.service';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 
@@ -23,6 +27,8 @@ const ReportFilterStorageKey = 'ReportFilterSignalConso';
 })
 export class ReportListComponent implements OnInit, OnDestroy {
 
+  permissions = Permissions;
+  roles = Roles;
   regions = Regions;
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
@@ -32,6 +38,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
   reportFilter: ReportFilter;
   periodValue: any;
   reportExtractUrl: string;
+  statusPros: string[];
+  categories: string[];
 
   modalRef: BsModalRef;
   modalOnHideSubscription: Subscription;
@@ -41,7 +49,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
               private meta: Meta,
+              private anomalyService: AnomalyService,
               private reportService: ReportService,
+              private constantService: ConstantService,
               private fileUploaderService: FileUploaderService,
               private storageService: StorageService,
               private localeService: BsLocaleService,
@@ -49,7 +59,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 }
 
   ngOnInit() {
-
     this.titleService.setTitle(pages.admin.reports.title);
     this.meta.updateTag({ name: 'description', content: pages.admin.reports.description });
     this.localeService.use('fr');
@@ -57,16 +66,22 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.reportFilter = {
       period: []
     };
-    this.storageService.getLocalStorageItem(ReportFilterStorageKey).subscribe(
-      reportFilter => {
+
+    combineLatest(
+      this.storageService.getLocalStorageItem(ReportFilterStorageKey),
+      this.constantService.getStatusPros()
+    ).subscribe(
+      ([reportFilter, statusPros]) => {
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
           this.periodValue = this.reportFilter.period;
         }
+        this.statusPros = statusPros;
         this.loadReports();
       }
     );
 
+    this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
@@ -85,18 +100,22 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.reportsByDate.push(
           {
             date: date,
-            reports: result.entities.filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
+            reports: result.entities
+              .filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
+              .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
           });
       });
       this.totalCount = result.totalCount;
       this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+      if (isPlatformBrowser(this.platformId)) {
+        window.scroll(0, 260);
+      }
     });
   }
 
   changePeriod(event) {
     if (this.reportFilter.period !== event) {
       this.reportFilter.period = event;
-      this.loadReports();
     }
   }
 
@@ -155,7 +174,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   getReportCssClass(status: string) {
     if (status) {
-      return `status-${status.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(' ').join('-')}`;
+      return `status-${status.toLowerCase()
+        .replace(/[àáâãäå]/g, 'a')
+        .replace(/[éèêë]/g, 'e')
+        .replace(/['']/g, '')
+        .split(' ').join('-')}`;
     } else {
       return '';
     }
@@ -163,7 +186,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   selectArea(area?: Region | Department) {
     this.reportFilter.area = area;
-    this.loadReports();
   }
 
   getAreaLabel() {
@@ -180,5 +202,15 @@ export class ReportListComponent implements OnInit, OnDestroy {
     return this.reportService.getReportExtractUrl(this.reportFilter).subscribe(url => {
       this.reportExtractUrl = url;
       });
+  }
+
+  getReportingDate(report: Report) {
+    return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
+  }
+
+  cancelFilters() {
+    this.reportFilter = new ReportFilter();
+    this.periodValue = undefined;
+    this.loadReports();
   }
 }

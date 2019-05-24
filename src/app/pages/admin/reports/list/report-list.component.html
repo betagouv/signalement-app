@@ -8,79 +8,153 @@
   </div>
 
   <div class="filters">
-    <div class="row text-center">
-      <div class="col-12">
-        <div class="btn-group" dropdown>
-          <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
-            {{getAreaLabel()}} <span class="caret"></span>
-          </button>
-          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem" class="menutitle">
-                <span class="pointer dropdown-item menutitle" (click)="selectArea()">
-                  Tous les départements
-                </span>
-            </li>
-            <ng-container *ngFor="let region of regions">
-              <li class="divider dropdown-divider"></li>
-              <li class="menutitle pt-0" role="menuitem">
-                <span class="pointer dropdown-item menutitle" (click)="selectArea(region)">
-                  {{region.label}}
-                </span>
-              </li>
-              <li role="menuitem" *ngFor="let department of region.departments">
-                <span class="pointer dropdown-item" (click)="selectArea(department)">
-                  {{department.code}} - {{department.label}}
-                </span>
-              </li>
-            </ng-container>
-          </ul>
+    <form (submit)="loadReports()">
+      <div class="row form-group">
+        <div class="col-2 text-right">
+          <label>
+            Département(s)
+          </label>
         </div>
-        &nbsp;
-        <input type="text"
-               [(ngModel)]="periodValue"
-               name="period"
-               placeholder="Daterangepicker"
-               placeholder="Période sélectionnée"
-               bsDaterangepicker
-               (bsValueChange)="changePeriod($event)"
-               [bsConfig]="{
-                 containerClass: 'theme-default',
-                 rangeInputFormat: 'DD MMMM YYYY'
-               }" />
-        &nbsp;
-        <a href="{{reportExtractUrl}}">
-          <img alt="Icône du bouton exporter en CSV" src="/assets/images/icon_csv.png"/>
-        </a>
+        <div class="col-4 text-left">
+          <div class="btn-group" dropdown>
+            <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+              {{getAreaLabel()}} <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem" class="menutitle">
+                  <span class="pointer dropdown-item menutitle" (click)="selectArea()">
+                    Tous les départements
+                  </span>
+              </li>
+              <ng-container *ngFor="let region of regions">
+                <li class="divider dropdown-divider"></li>
+                <li class="menutitle pt-0" role="menuitem">
+                  <span class="pointer dropdown-item menutitle" (click)="selectArea(region)">
+                    {{region.label}}
+                  </span>
+                </li>
+                <li role="menuitem" *ngFor="let department of region.departments">
+                  <span class="pointer dropdown-item" (click)="selectArea(department)">
+                    {{department.code}} - {{department.label}}
+                  </span>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="col-2 text-right">
+          <label>
+            Période
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <input type="text"
+                 [(ngModel)]="periodValue"
+                 name="period"
+                 placeholder="Daterangepicker"
+                 placeholder="Période sélectionnée"
+                 bsDaterangepicker
+                 (bsValueChange)="changePeriod($event)"
+                 [bsConfig]="{
+                   containerClass: 'theme-default',
+                   rangeInputFormat: 'DD MMMM YYYY'
+                 }" />
+        </div>
       </div>
-    </div>
+      <div class="row form-group">
+        <div class="col-2 text-right">
+          <label for="siretFilter">
+            Siret
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
+        </div>
+        <div class="col-2 text-right">
+          <label for="statusFilter">
+            Statut pro
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <select [(ngModel)]="reportFilter.statusPro" placeholder="Statut pro" id="statusFilter" name="status" [class]="reportFilter.statusPro ? 'selected' : ''">
+            <option value="" selected>Tous les status</option>
+            <option *ngFor="let statusPro of statusPros">
+              {{statusPro}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-2 text-right">
+          <label for="categoryFilter">
+            Catégorie
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" [class]="reportFilter.category ? 'selected' : ''">
+            <option value="" selected>Toutes les catégories</option>
+            <option *ngFor="let category of categories">
+              {{category}}
+            </option>
+          </select>
+        </div>
+        <div class="col-2 text-right">
+          <label for="detailsFilter">
+            Mots-clés&nbsp;<i class="material-icons md-dark" alt="icone popover aide" title="Recherche de texte dans les colonnes problème et description">help_outline</i>
+          </label>
+        </div>
+        <div class="col-4 text-left">
+          <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="button" class="btn btn-outline-primary" (click)="cancelFilters()">Effacer les filtres</button>
+          &nbsp;
+          <button type="submit" class="btn btn-primary">Filtrer les signalements</button>
+          &nbsp;
+          <a href="{{reportExtractUrl}}">
+            <img alt="Icône du bouton exporter en XLS" src="/assets/images/icon_export_xls.png"/>
+          </a>
+        </div>
+      </div>
+    </form>
   </div>
+  <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+              [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+  </pagination>
   <div class="row">
     <div class="col-12 text-center">
-      <div class="table-responsive">
+      <div class="table-responsive" *appPermission="permissions.listReports">
         <table class="table">
           <thead>
             <tr>
               <th>Dept.</th>
+              <th *appRole="roles.DGCCRF">Commune</th>
+              <th *appRole="roles.DGCCRF">Siret</th>
               <th>Commerçant</th>
               <th>Problème</th>
               <th>Description</th>
-              <th>Consommateur</th>
+              <th *appRole="roles.DGCCRF">Date du constat</th>
+              <th *appRole="roles.Admin">Consommateur</th>
               <th>Pièces jointes</th>
               <th>Statut pro</th>
-              <th>Statut Conso</th>
-              <th></th>
+              <th *appRole="roles.Admin">Statut Conso</th>
+              <th *appPermission="permissions.createEvent" class="action"></th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let reportsByDate of reportsByDate">
-              <tr>
+              <tr *appRole="roles.Admin">
                 <td colspan="8" class="report-group">
                   {{reportsByDate.date}}
                 </td>
-                <td></td>
+                <td class="action"></td>
               </tr>
               <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
                 <td>{{report.company.postalCode | slice : 0 : 2}}</td>
+                <td *appRole="roles.DGCCRF">{{report.company.postalCode}}</td>
+                <td *appRole="roles.DGCCRF">{{report.company.siret}}</td>
                 <td>
                   <span [tooltip]="companyTooltip">
                     {{report.company.name}}
@@ -125,9 +199,12 @@
                     </ng-template>
                   </ng-container>
                 </td>
-                <td>
+                <td *appRole="roles.DGCCRF">
+                  {{getReportingDate(report)}}
+                </td>
+                <td *appRole="roles.Admin">
                   <div [tooltip]="consumerTooltip">
-                    {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement">&#x2705;</span><span class="agreement" *ngIf="!report.contactAgreement">&#10060;</span>
+                    {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement"><i class="material-icons md-red md-18" alt="Icône pas d'accord de contact" title="L'utilisateur ne souhaite pas être contacté">close</i></span><span class="agreement" *ngIf="!report.contactAgreement"><i class="material-icons md-green md-18" alt="Icône accord de contact" title="L'utilisateur souhaite être contacté">check</i></span>
                   </div>
                   <ng-template #consumerTooltip>
                     {{report.consumer.firstName}} {{report.consumer.lastName}}
@@ -152,11 +229,11 @@
                 <td [class]="getReportCssClass(report.statusPro)">
                   {{report.statusPro}}
                 </td>
-                <td [class]="getReportCssClass(report.statusConso)">
+                <td *appRole="roles.Admin" [class]="getReportCssClass(report.statusConso)">
                   {{report.statusConso}}
                 </td>
-                <td>
-                  <img alt="Icône du bouton ajouter" src="/assets/images/icon_add.png" (click)="addEvent($event, report)">
+                <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
+                  <i class="material-icons md-light-blue" alt="Icône ajouter" title="Ajouter une action">add_circle</i>
                 </td>
               </tr>
             </ng-container>

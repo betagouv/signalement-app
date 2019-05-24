@@ -5,6 +5,8 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoleDirective } from '../../../../directives/app-role.directive';
+import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
 
 describe('ReportDetailComponent', () => {
   let component: ReportDetailComponent;
@@ -13,7 +15,9 @@ describe('ReportDetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ReportDetailComponent
+        ReportDetailComponent,
+        AppRoleDirective,
+        AppPermissionDirective
       ],
       imports: [
         FormsModule,
