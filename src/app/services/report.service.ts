@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report, Step } from '../model/Report';
+import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
@@ -79,6 +79,11 @@ export class ReportService {
     if (reportFilter.period && reportFilter.period[1]) {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
+    ['siret', 'statusPro', 'category', 'details'].forEach(filterName => {
+      if (reportFilter[filterName]) {
+        httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
+      }
+    });
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<PaginatedData<any>>(
@@ -114,6 +119,11 @@ export class ReportService {
         if (reportFilter.period && reportFilter.period[1]) {
           httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
         }
+        ['siret', 'statusPro', 'category', 'details'].forEach(filterName => {
+          if (reportFilter[filterName]) {
+            httpParams.push(`${filterName}=${reportFilter[filterName]}`);
+          }
+        });
         return `${url}?${httpParams.join('&')}`;
       })
     );
@@ -161,7 +171,7 @@ export class ReportService {
   private reportApi2report(reportApi) {
     return Object.assign(new Report(), {
       id: reportApi.id,
-      creationDate: reportApi.creationDate,
+      creationDate: new Date(reportApi.creationDate),
       category: reportApi.category,
       subcategories: reportApi.subcategories,
       detailInputValues: reportApi.details,

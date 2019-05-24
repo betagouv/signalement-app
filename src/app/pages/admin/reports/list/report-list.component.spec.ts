@@ -6,6 +6,8 @@ import { ReportListComponent } from './report-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportDetailComponent } from '../detail/report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { AppRoleDirective } from '../../../../directives/app-role.directive';
+import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
 
 describe('ReportsComponent', () => {
   let component: ReportListComponent;
@@ -15,7 +17,9 @@ describe('ReportsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ReportListComponent,
-        ReportDetailComponent
+        ReportDetailComponent,
+        AppRoleDirective,
+        AppPermissionDirective
       ],
       imports: [
         PaginationModule.forRoot(),

@@ -16,12 +16,12 @@
   </div>
 </div>
 
-<section class="section section-white position-relative">
+<section class="section section-white position-relative pb-0">
   <div class="container">
     <div class="panel">
       <ng-container *ngIf="report">
         <h5>Statut pro : {{report.statusPro}}</h5>
-        <h5>Statut conso : {{report.statusConso}}</h5>
+        <h5 *appRole="roles.Admin">Statut conso : {{report.statusConso}}</h5>
         <hr />
         <h5>Problème</h5>
         <div class="row">
@@ -47,26 +47,26 @@
               <div class="col-12">
                 <table class="table table-sm">
                   <tbody>
-                  <tr *ngFor="let uploadedFile of report.uploadedFiles">
-                    <td class="text-left" *ngIf="!uploadedFile.loading">
-                      <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                        <span *ngIf="uploadedFile.id">
-                          {{uploadedFile.filename}}
-                        </span>
-                      </a>
-                    </td>
-                    <td class="text-right pointer">
-                      <img class="remove" alt="Icône du bouton suppression" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
-                    </td>
-                    <ng-template #removeTemplate>
-                      <div class="modal-body text-center">
-                        <p>Voulez-vous supprimer cette pièce jointe ?</p>
-                        <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
-                      </div>
-                    </ng-template>
-                  </tr>
+                    <tr *ngFor="let uploadedFile of report.uploadedFiles">
+                      <td class="text-left" *ngIf="!uploadedFile.loading">
+                        <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                          <span *ngIf="uploadedFile.id">
+                            {{uploadedFile.filename}}
+                          </span>
+                        </a>
+                      </td>
+                      <td class="text-right pointer" *appPermission="permissions.deleteFile">
+                        <img class="remove" alt="Icône du bouton suppression" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
+                      </td>
+                      <ng-template #removeTemplate>
+                        <div class="modal-body text-center">
+                          <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                          <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+                          &nbsp;
+                          <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
+                        </div>
+                      </ng-template>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -90,7 +90,7 @@
             <span *ngIf="report.company.line6">-{{report.company.line6}}</span>
             <span *ngIf="report.company.line7">-{{report.company.line7}}</span>
           </div>
-          <div class="col-2 text-right">
+          <div class="col-2 text-right" *appPermission="permissions.updateReport">
             <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
           </div>
           <ng-template #companySearch>
@@ -158,33 +158,44 @@
           </div>
         </div>
 
-        <hr />
-        <button type="submit" class="btn btn-danger" (click)="openModal(delete)">
-          Supprimer ce signalement
-        </button>
-        <ng-template #delete>
-          <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
-            Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
-            <br />
-            <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fermer</button>
-          </div>
-          <ng-template #noFiles>
-            <div class="modal-body text-center">
-              <p>
-                Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
-                <br/>
-                {{reportId}}
-              </p>
-              <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
-              <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
-              &nbsp;
-              <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
+        <ng-container *appPermission="permissions.deleteReport">
+          <hr />
+          <button type="submit" class="btn btn-danger" (click)="openModal(delete)">
+            Supprimer ce signalement
+          </button>
+          <ng-template #delete>
+            <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
+              Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
+              <br />
+              <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fermer</button>
             </div>
+            <ng-template #noFiles>
+              <div class="modal-body text-center">
+                <p>
+                  Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
+                  <br/>
+                  {{reportId}}
+                </p>
+                <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
+                <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+                &nbsp;
+                <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
+              </div>
+            </ng-template>
           </ng-template>
-        </ng-template>
+        </ng-container>
       </ng-container>
       <ngx-loading [show]="loading"></ngx-loading>
     </div>
   </div>
 
 </section>
+
+<div class="container pb-3">
+  <div class="row">
+    <div class="col-12 pointer" (click)="back()">
+      <img src="/assets/images/icon_back.png" class="back pointer" alt="page précédente"/>
+      Retour à la liste
+    </div>
+  </div>
+</div>

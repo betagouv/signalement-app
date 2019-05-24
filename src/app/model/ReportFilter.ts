@@ -33,10 +33,18 @@ export class ReportFilter {
     }})
   area?: Region | Department;
   period?: Date[];
+  siret?: string;
+  category?: string;
+  statusPro?: string;
+  details?: string;
 
   constructor() {
     this.area = undefined;
     this.period = undefined;
+    this.siret = undefined;
+    this.category = '';
+    this.statusPro = '';
+    this.details = undefined;
   }
 }
 
