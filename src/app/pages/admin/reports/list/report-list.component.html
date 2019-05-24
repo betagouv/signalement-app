@@ -204,7 +204,7 @@
                 </td>
                 <td *appRole="roles.Admin">
                   <div [tooltip]="consumerTooltip">
-                    {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement"><i class="material-icons md-red" alt="Icône pas d'accord de contact" title="L'utilisateur ne souhaite pas être contacté">close</i></span><span class="agreement" *ngIf="!report.contactAgreement"><i class="material-icons md-green" alt="Icône accord de contact" title="L'utilisateur souhaite être contacté">check</i></span>
+                    {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="report.contactAgreement"><i class="material-icons md-red md-18" alt="Icône pas d'accord de contact" title="L'utilisateur ne souhaite pas être contacté">close</i></span><span class="agreement" *ngIf="!report.contactAgreement"><i class="material-icons md-green md-18" alt="Icône accord de contact" title="L'utilisateur souhaite être contacté">check</i></span>
                   </div>
                   <ng-template #consumerTooltip>
                     {{report.consumer.firstName}} {{report.consumer.lastName}}
