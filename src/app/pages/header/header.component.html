@@ -17,6 +17,11 @@
             Comment ça marche ?
           </a>
         </li>
+        <li class="nav__item" *ngIf="user && user.role === 'DGCCRF'">
+          <a routerLink="/mode-emploi-dgccrf">
+            Mode d'emploi
+          </a>
+        </li>
         <li class="nav__item" *ngIf="user">
           <div class="btn-group" dropdown placement="bottom right">
             <button id="button-avatar" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
