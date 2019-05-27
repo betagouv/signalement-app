@@ -6,16 +6,18 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BsDatepickerModule, BsDropdownModule, ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { ReportDetailComponent } from './reports/detail/report-detail.component';
 import { ReportListComponent } from './reports/list/report-list.component';
+import { DGCCRFComponent } from './dgccrf/dgccrf.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
-import { PasswordComponent } from '../../pages/password/password.component';
+import { PasswordComponent } from './password/password.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'change-password', component: PasswordComponent }
+  { path: 'change-password', component: PasswordComponent, canActivate: [AuthGuard] },
+  { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -26,6 +28,7 @@ const routes: Routes = [
     AppPermissionDirective,
     AppRoleDirective,
     PasswordComponent,
+    DGCCRFComponent,
   ],
   imports: [
     CommonModule,
@@ -49,4 +52,4 @@ const routes: Routes = [
     EventComponent
   ]
 })
-export class AdminModule { }
+export class SecuredModule { }

@@ -13,8 +13,8 @@ export class DGCCRFComponent implements OnInit {
               private meta: Meta) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.admin.dgccrf.title);
-    this.meta.updateTag({ name: 'description', content: pages.admin.dgccrf.description });
+    this.titleService.setTitle(pages.secured.dgccrf.title);
+    this.meta.updateTag({ name: 'description', content: pages.secured.dgccrf.description });
   }
 
 }

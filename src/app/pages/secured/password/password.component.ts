@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
-import { AuthenticationService } from '../../services/authentication.service';
-import { AnalyticsService, EventCategories, ChangePasswordEventActions } from '../../services/analytics.service';
+import pages from '../../../../assets/data/pages.json';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { AnalyticsService, EventCategories, ChangePasswordEventActions } from '../../../services/analytics.service';
 import { Router } from '@angular/router';
-import { User } from '../../model/AuthUser';
+import { User } from '../../../model/AuthUser';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 

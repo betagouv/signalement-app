@@ -43,7 +43,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   modalRef: BsModalRef;
   modalOnHideSubscription: Subscription;
-  
+
   selectedReportId: string;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
@@ -59,8 +59,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
 }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.admin.reports.title);
-    this.meta.updateTag({ name: 'description', content: pages.admin.reports.description });
+    this.titleService.setTitle(pages.secured.reports.title);
+    this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
 
     this.reportFilter = {
