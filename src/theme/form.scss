@@ -160,8 +160,12 @@ select {
   background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVFhH7c5BCoMwFIThSG/Qy3UnFXqUXqMb7SF6Je8g2HmBARcqUfMMLfPBLBIC+YOIiPyQK9Zj93jyd8Fe2CeeZlRYiw1YYxeOLKbD7K/aLpZMH3pF2R9vLPkPz6jNMeQRtTuGckYdjqEcUdli6EhU9hjaE+UWQ1ui3GMoJeq0GFqLOj2G5qKKxdA06oEVjSFGjVjxGLKoJ3aLJxER+WshfAH2ozroY6A/rwAAAABJRU5ErkJggg==') no-repeat;
   background-position: top 0.8em right 1em;
   background-size: 15px;
-  padding-right: 45px;
+  padding-right: 15px;
   border-radius: 3px;
+}
+
+select::-ms-expand {
+  opacity: .01
 }
 
 select:focus {

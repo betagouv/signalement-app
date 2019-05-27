@@ -1,5 +1,8 @@
 import { JsonProperty } from 'json-typescript-mapper';
 
+export const ReportingDateLabel = 'Date du constat';
+export const ReportingTimeslotLabel = 'Heure du constat';
+export const DescriptionLabel = 'Description';
 
 export class Action {
   @JsonProperty('question')

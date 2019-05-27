@@ -33,4 +33,15 @@ export class ConstantService {
       })
     );
   }
+
+  getStatusPros() {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<string[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'statusPros']),
+          headers
+        );
+      })
+    );
+  }
 }

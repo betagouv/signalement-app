@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthUser, User } from '../model/AuthUser';
 import { Api, AuthUserStorageKey, ServiceUtils } from './service.utils';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { BehaviorSubject } from 'rxjs';
@@ -38,7 +38,7 @@ export class AuthenticationService {
         if (authUser.token) {
           this.userSource.next(authUser.user);
           this.localStorage.setItemSubscribe(AuthUserStorageKey, authUser);
-          return true;
+          return authUser.user;
         } else {
           return false;
         }
@@ -55,6 +55,18 @@ export class AuthenticationService {
     return this.localStorage.getItem(AuthUserStorageKey)
     .pipe(
       map(authUser => authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
+    );
+  }
+
+  changePassword(oldPassword: string, newPassword: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'password']),
+          { oldPassword, newPassword},
+          headers
+        );
+      })
     );
   }
 }

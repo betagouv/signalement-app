@@ -10,6 +10,7 @@ import { HeaderComponent } from './pages/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HowComponent } from './pages/infos/how/how.component';
+import { DGCCRFComponent } from './pages/admin/dgccrf/dgccrf.component';
 import { AboutComponent } from './pages/infos/about/about.component';
 import { ProComponent } from './pages/infos/pro/pro.component';
 import { RouterModule } from '@angular/router';
@@ -23,6 +24,7 @@ import { LoginModule } from './pages/login/login.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { RetractationComponent } from './pages/infos/retractation/retractation.component';
 import { CguComponent } from './pages/infos/cgu/cgu.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -32,6 +34,7 @@ registerLocaleData(localeFr, 'fr');
     HeaderComponent,
     FooterComponent,
     HowComponent,
+    DGCCRFComponent,
     AboutComponent,
     ProComponent,
     StatsComponent,
@@ -49,6 +52,7 @@ registerLocaleData(localeFr, 'fr');
       { path: '', component: ReportComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'comment-ça-marche', component: HowComponent },
+      { path: 'mode-emploi-dgccrf', component: DGCCRFComponent },
       { path: 'qui-sommes-nous', component: AboutComponent },
       { path: 'vous-êtes-un-commerçant', component: ProComponent },
       { path: 'delai-de-retractation', component: RetractationComponent },
@@ -58,7 +62,8 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     BrowserAnimationsModule,
     LoginModule,
-    AdminModule
+    AdminModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

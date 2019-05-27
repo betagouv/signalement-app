@@ -18,6 +18,11 @@
             <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
           </div>
         </div>
+        <div>
+            <br />
+            <span class="form-text text-muted text-center">En cas d'oubli de mot de passe, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr">SignalConso</a>.</span>
+            <br />
+        </div>
 
         <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
           <span *ngIf="emailCtrl.hasError('required')">
