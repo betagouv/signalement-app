@@ -39,6 +39,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   periodValue: any;
   reportExtractUrl: string;
   statusPros: string[];
+  statusConsos: string[];
   categories: string[];
 
   modalRef: BsModalRef;
@@ -69,14 +70,16 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
     combineLatest(
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
-      this.constantService.getStatusPros()
+      this.constantService.getStatusPros(),
+      this.constantService.getStatusConsos(),
     ).subscribe(
-      ([reportFilter, statusPros]) => {
+      ([reportFilter, statusPros, statusConsos]) => {
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
           this.periodValue = this.reportFilter.period;
         }
         this.statusPros = statusPros;
+        this.statusConsos = statusConsos;
         this.loadReports();
       }
     );
