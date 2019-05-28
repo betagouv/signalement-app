@@ -27,6 +27,14 @@
     cursor: pointer;
   }
 
+  .nav__item a:first-child {
+    padding-left: 0;
+  }
+
+  a.navbar__home {
+    margin-right: 15px;
+  }
+
   @media #{$larger-than-tablet} {
     .ribbon {
       text-align: center;
