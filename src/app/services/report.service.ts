@@ -121,7 +121,7 @@ export class ReportService {
         }
         ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
           if (reportFilter[filterName]) {
-            httpParams.push(`${filterName}=${encodeURIComponent(reportFilter[filterName] as string).trim()}`);
+            httpParams.push(`${filterName}=${encodeURIComponent((reportFilter[filterName] as string).trim())}`);
           }
         });
         return `${url}?${httpParams.join('&')}`;
