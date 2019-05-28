@@ -45,20 +45,25 @@ form {
     }
   }
 
-  .details {
-    height: 50px;
-    overflow: hidden;
-  }
-
   .status-header {
     width: 100px;
   }
 
+  td .pre {
+    white-space: pre;
+  }
+
+  td.report-group {
+    padding: 0;
+    height: 35px;
+  }
+
   th, td {
     border: 1px solid #dee2e6;
+    height: 60px;
+    max-width: 500px;
     padding: 0.25em;
     text-align: center;
-    max-width: 500px;
     vertical-align: middle;
 
     &.action {

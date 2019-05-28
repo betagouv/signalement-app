@@ -164,7 +164,7 @@
               <td colspan="8" class="report-group">
                 {{reportsByDate.date}}
               </td>
-              <td class="action"></td>
+              <td class="action report-group"></td>
             </tr>
             <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
               <td>{{report.company.postalCode | slice : 0 : 2}}</td>
@@ -185,8 +185,8 @@
                 </span>
               </td>
               <td>
-                <div [tooltip]="subcategoriesTooltip">
-                  {{report.category}}
+                <div [tooltip]="subcategoriesTooltip" class="pre">
+                  {{report.category}}&nbsp;<i class="material-icons md-18" alt="Icône sous-catégories" title="Il existe des sous-catégories">keyboard_arrow_down</i>
                 </div>
                 <ng-template #subcategoriesTooltip>
                   {{report.category}}
@@ -199,10 +199,13 @@
               </td>
               <td>
                 <ng-container *ngIf="report.detailInputValues && report.detailInputValues.length">
-                  <div [tooltip]="detailsTooltip" class="details">
+                  <div [tooltip]="detailsTooltip">
                     <span [innerHTML]="report.detailInputValues[0].label"></span>
                     &nbsp;
                     <span [innerHTML]="report.detailInputValues[0].value"></span>
+                    <span *ngIf="report.detailInputValues.length > 1">...&nbsp;
+                      <i class="material-icons md-18" alt="Icône détails supplémentaires" title="Il existe des détails supplémentaires">keyboard_arrow_down</i>
+                    </span>
                   </div>
                   <ng-template #detailsTooltip>
                     <ng-container *ngFor="let detailInputValue of report.detailInputValues">
@@ -218,7 +221,7 @@
                 {{getReportingDate(report)}}
               </td>
               <td *appRole="roles.Admin">
-                <div [tooltip]="consumerTooltip">
+                <div [tooltip]="consumerTooltip" class="pre">
                   {{report.consumer.email}}&nbsp;<span class="agreement" *ngIf="!report.contactAgreement"><i class="material-icons md-red md-18" alt="Icône pas d'accord de contact" title="L'utilisateur ne souhaite pas être contacté">close</i></span><span class="agreement" *ngIf="report.contactAgreement"><i class="material-icons md-green md-18" alt="Icône accord de contact" title="L'utilisateur souhaite être contacté">check</i></span>
                 </div>
                 <ng-template #consumerTooltip>
