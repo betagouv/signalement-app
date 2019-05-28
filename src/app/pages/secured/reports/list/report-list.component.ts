@@ -12,13 +12,16 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
 import { StorageService } from '../../../../services/storage.service';
 import { deserialize } from 'json-typescript-mapper';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { AnomalyService } from '../../../../services/anomaly.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
+const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
 @Component({
   selector: 'app-report-list',
@@ -36,7 +39,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
   itemsPerPage = 20;
 
   reportFilter: ReportFilter;
-  periodValue: any;
   reportExtractUrl: string;
   statusPros: string[];
   statusConsos: string[];
@@ -44,8 +46,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   modalRef: BsModalRef;
   modalOnHideSubscription: Subscription;
-
-  selectedReportId: string;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -56,8 +56,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private fileUploaderService: FileUploaderService,
               private storageService: StorageService,
               private localeService: BsLocaleService,
-              private modalService: BsModalService) {
-}
+              private modalService: BsModalService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private location: Location) {
+  }
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.reports.title);
@@ -72,15 +75,16 @@ export class ReportListComponent implements OnInit, OnDestroy {
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
       this.constantService.getStatusPros(),
       this.constantService.getStatusConsos(),
+      this.route.paramMap
     ).subscribe(
-      ([reportFilter, statusPros, statusConsos]) => {
+      ([reportFilter, statusPros, statusConsos, params]) => {
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
-          this.periodValue = this.reportFilter.period;
         }
         this.statusPros = statusPros;
         this.statusConsos = statusConsos;
-        this.loadReports();
+        this.loadReportExtractUrl();
+        this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
       }
     );
 
@@ -92,38 +96,70 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.modalOnHideSubscription.unsubscribe();
   }
 
-  loadReports(page = 1) {
-    this.getReportExtractUrl();
-    this.reportService.getReports((page - 1) * this.itemsPerPage, this.itemsPerPage, this.reportFilter).subscribe(result => {
-      this.reportsByDate = [];
-      const distinctDates = result.entities
-        .map(e => moment(e.creationDate).format('DD/MM/YYYY'))
-        .filter((date, index, self) => self.indexOf(date) === index);
-      distinctDates.forEach(date => {
-        this.reportsByDate.push(
-          {
-            date: date,
-            reports: result.entities
-              .filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
-              .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
-          });
-      });
+  initPagination() {
+    this.totalCount = 0;
+    this.currentPage = 1;
+  }
+
+  submitFilters() {
+    this.location.go('suivi-des-signalements/page/1');
+    this.loadReportExtractUrl();
+    this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    this.initPagination();
+    this.loadReports(1);
+  }
+
+  cancelFilters() {
+    this.reportFilter = new ReportFilter();
+    this.submitFilters();
+  }
+
+  loadReports(page: number) {
+    this.storageService.getLocalStorageItem(ReportFilterStorageKey).pipe(
+      switchMap(reportFilter => {
+        return this.reportService.getReports(
+          (page - 1) * this.itemsPerPage,
+          this.itemsPerPage,
+          reportFilter ? deserialize(ReportFilter, reportFilter) : new ReportFilter()
+        );
+      })
+    ).subscribe(result => {
+      this.groupReportsByDate(result.entities);
       this.totalCount = result.totalCount;
-      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
-      if (isPlatformBrowser(this.platformId)) {
-        window.scroll(0, 260);
-      }
+      setTimeout(() => {
+        this.currentPage = page;
+        if (isPlatformBrowser(this.platformId)) {
+          window.scroll(
+            0,
+            sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 260
+          );
+          sessionStorage.removeItem(ReportsScrollYStorageKey);
+        }
+      }, 1);
     });
   }
 
-  changePeriod(event) {
-    if (this.reportFilter.period !== event) {
-      this.reportFilter.period = event;
-    }
+  groupReportsByDate(reports: Report[]) {
+    this.reportsByDate = [];
+    const distinctDates = reports
+      .map(e => moment(e.creationDate).format('DD/MM/YYYY'))
+      .filter((date, index, self) => self.indexOf(date) === index);
+    distinctDates.forEach(date => {
+      this.reportsByDate.push(
+        {
+          date: date,
+          reports: reports
+            .filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
+            .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
+        });
+    });
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
-    this.loadReports(pageEvent.page);
+    if (this.currentPage !== pageEvent.page) {
+      this.loadReports(pageEvent.page);
+      this.location.go(`suivi-des-signalements/page/${pageEvent.page}`);
+    }
   }
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {
@@ -131,17 +167,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   displayReport(report: Report) {
-    this.selectedReportId = report.id;
+    this.router.navigate(['suivi-des-signalements', 'report', report.id]);
     if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
-    }
-  }
-
-  closeReport() {
-    this.updateReport(this.selectedReportId);
-    this.selectedReportId = undefined;
-    if (isPlatformBrowser(this.platformId)) {
-      window.scroll(0, 0);
+      sessionStorage.setItem(ReportsScrollYStorageKey, window.scrollY.toString());
     }
   }
 
@@ -201,7 +229,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getReportExtractUrl() {
+  loadReportExtractUrl() {
     return this.reportService.getReportExtractUrl(this.reportFilter).subscribe(url => {
       this.reportExtractUrl = url;
       });
@@ -209,11 +237,5 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   getReportingDate(report: Report) {
     return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
-  }
-
-  cancelFilters() {
-    this.reportFilter = new ReportFilter();
-    this.periodValue = undefined;
-    this.loadReports();
   }
 }

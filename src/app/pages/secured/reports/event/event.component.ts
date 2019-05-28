@@ -5,6 +5,7 @@ import { ReportEvent, ReportEventAction } from '../../../../model/ReportEvent';
 import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
 import { combineLatest } from 'rxjs';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-event',
@@ -28,10 +29,12 @@ export class EventComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               public bsModalRef: BsModalRef,
               private eventService: EventService,
-              private constantService: ConstantService) { }
+              private constantService: ConstantService,
+              private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
     this.loading = true;
+    this.platformLocation.onPopState(() => this.bsModalRef.hide());
     combineLatest(
       this.constantService.getActionPros(),
       this.constantService.getActionConsos(),
