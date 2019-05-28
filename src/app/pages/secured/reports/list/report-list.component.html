@@ -201,7 +201,7 @@
                 </td>
                 <td>
                   <ng-container *ngIf="report.detailInputValues && report.detailInputValues.length">
-                    <div [tooltip]="detailsTooltip">
+                    <div [tooltip]="detailsTooltip" class="details">
                       <span [innerHTML]="report.detailInputValues[0].label"></span>
                       &nbsp;
                       <span [innerHTML]="report.detailInputValues[0].value"></span>

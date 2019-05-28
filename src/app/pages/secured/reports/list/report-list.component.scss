@@ -22,8 +22,9 @@ form {
 
 .table-responsive {
   width: 98% !important;
+  min-width: 400px;
   margin-left: 1%;
-  overflow-x: unset;
+  overflow-x: auto;
 }
 
 .table {
@@ -42,6 +43,11 @@ form {
     td {
       background-color: transparent;
     }
+  }
+
+  .details {
+    height: 50px;
+    overflow: hidden;
   }
 
   th, td {
