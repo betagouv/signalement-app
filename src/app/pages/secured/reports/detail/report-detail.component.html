@@ -19,6 +19,9 @@
 <section class="section section-white position-relative pb-0">
   <div class="container">
     <div class="panel">
+      <ng-container *ngIf="!loading && !report">
+        Une erreur s'est produite lors de la récupération de ce signalement.
+      </ng-container>
       <ng-container *ngIf="report">
         <h5>Statut pro : {{report.statusPro}}</h5>
         <h5 *appRole="roles.Admin">Statut conso : {{report.statusConso}}</h5>
@@ -61,7 +64,7 @@
                       <ng-template #removeTemplate>
                         <div class="modal-body text-center">
                           <p>Voulez-vous supprimer cette pièce jointe ?</p>
-                          <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
                           &nbsp;
                           <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
                         </div>
@@ -116,7 +119,7 @@
                     <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
                     <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
                   </p>
-                  <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+                  <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                   &nbsp;
                   <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
                 </div>
@@ -167,7 +170,7 @@
             <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
               Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
               <br />
-              <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fermer</button>
+              <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
             </div>
             <ng-template #noFiles>
               <div class="modal-body text-center">
@@ -177,7 +180,7 @@
                   {{reportId}}
                 </p>
                 <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
-                <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+                <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                 &nbsp;
                 <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
               </div>
@@ -191,7 +194,7 @@
 
 </section>
 
-<div class="container pb-3">
+<div class="container pb-3" *ngIf="report">
   <div class="row">
     <div class="col-12 pointer" (click)="back()">
       <img src="/assets/images/icon_back.png" class="back pointer" alt="page précédente"/>

@@ -16,6 +16,8 @@ import { PasswordComponent } from './password/password.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
+  { path: 'suivi-des-signalements/page/:pageNumber', component: ReportListComponent, canActivate: [AuthGuard] },
+  { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'change-password', component: PasswordComponent, canActivate: [AuthGuard] },
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
 ];
