@@ -81,7 +81,7 @@ export class ReportService {
     }
     ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
       if (reportFilter[filterName]) {
-        httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
+        httpParams = httpParams.append(filterName, encodeURIComponent(reportFilter[filterName] as string).trim());
       }
     });
     return this.serviceUtils.getAuthHeaders().pipe(
