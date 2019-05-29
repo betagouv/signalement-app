@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { Report } from '../../../../model/Report';
+import { Report, DetailInputValue } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
@@ -18,7 +18,7 @@ import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
@@ -46,6 +46,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   modalRef: BsModalRef;
   modalOnHideSubscription: Subscription;
+  objectKeys = Object.keys;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -238,4 +239,59 @@ export class ReportListComponent implements OnInit, OnDestroy {
   getReportingDate(report: Report) {
     return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
   }
+
+  getDetailContent(detailInputValues: DetailInputValue[]) {
+    const MAX_CHAR_DETAILS = 56;
+
+    function getLines(str: String, maxLength: Number) {
+      function helper(strings, currentLine, nbWords) {
+        if (!strings || !strings.length) return nbWords;
+        if (nbWords >= strings.length) return nbWords;
+        else {
+          let newLine = currentLine + " " + strings[nbWords];
+          if (newLine.length > maxLength) return nbWords;
+          else return helper(strings, newLine, nbWords + 1);
+        }
+      }
+      const strings = str.split(" ");
+      const nbWords = helper(str.split(" "), "", 0);
+
+      let line = "";
+      let rest = "";
+
+      strings.forEach((_, index) => {
+        if (index < nbWords) {
+          line += strings[index] + " ";
+        } else {
+          rest += strings[index] + " ";
+        }
+      })
+
+      return { line: line.trim(), rest: rest.trim() }
+    }
+
+    let firstLine = "";
+    let secondLine = "";
+    let hasNext = false;
+
+    if (detailInputValues && detailInputValues.length) {
+      if (detailInputValues.length > 2) hasNext = true
+
+      let lines = getLines(detailInputValues[0].label + " " + detailInputValues[0].value, MAX_CHAR_DETAILS);
+      firstLine = lines.line;
+
+      if (lines.rest) {
+        lines = getLines(lines.rest, MAX_CHAR_DETAILS);
+        secondLine = lines.rest ? lines.line.slice(0, -3) + "..." : lines.line;
+
+      } else if (detailInputValues.length > 1) {
+        lines = getLines(detailInputValues[1].label + " " + detailInputValues[1].value, MAX_CHAR_DETAILS);
+        secondLine = lines.rest ? lines.line.slice(0, -3) + "..." : lines.line;
+
+      }
+
+      return {firstLine, secondLine, hasNext };
+    }
+  }
+
 }

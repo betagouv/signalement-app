@@ -144,7 +144,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Dept.</th>
+            <th>Dep</th>
             <th *appRole="roles.DGCCRF">Commune</th>
             <th *appRole="roles.DGCCRF">Siret</th>
             <th>Commerçant</th>
@@ -197,14 +197,15 @@
                   </span>
                 </ng-template>
               </td>
-              <td>
-                <ng-container *ngIf="report.detailInputValues && report.detailInputValues.length">
+              <td class="details">
+                <ng-container *ngIf="getDetailContent(report.detailInputValues); let detail">
                   <div [tooltip]="detailsTooltip">
-                    <span [innerHTML]="report.detailInputValues[0].label"></span>
-                    &nbsp;
-                    <span [innerHTML]="report.detailInputValues[0].value"></span>
-                    <span *ngIf="report.detailInputValues.length > 1">...&nbsp;
-                      <i class="material-icons md-18" alt="Icône détails supplémentaires" title="Il existe des détails supplémentaires">keyboard_arrow_down</i>
+                    <span [innerHTML]="detail.firstLine"></span>
+                    <br />
+                    <span [innerHTML]="detail.secondLine"></span>
+
+                    <span *ngIf="detail.hasNext">
+                      &nbsp;<i class="material-icons md-18" alt="Icône détails supplémentaires" title="Il existe des détails supplémentaires">keyboard_arrow_down</i>
                     </span>
                   </div>
                   <ng-template #detailsTooltip>

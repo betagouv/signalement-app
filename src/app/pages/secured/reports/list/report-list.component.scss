@@ -37,7 +37,7 @@ form {
     vertical-align: middle;
   }
 
-  tr:hover {
+  tr.pointer:hover {
     background-color: $lighter-blue !important;
 
     td {
@@ -46,7 +46,7 @@ form {
   }
 
   .status-header {
-    width: 100px;
+    width: 125px;
   }
 
   td .pre {
@@ -56,6 +56,10 @@ form {
   td.report-group {
     padding: 0;
     height: 35px;
+  }
+
+  td.details {
+    width: 400px;
   }
 
   th, td {
