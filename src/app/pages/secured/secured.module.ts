@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
 import { PasswordComponent } from './password/password.component';
+import { MiddleCropPipe } from '../../pipes/middlecrop.pipe';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
@@ -31,6 +32,7 @@ const routes: Routes = [
     AppRoleDirective,
     PasswordComponent,
     DGCCRFComponent,
+    MiddleCropPipe
   ],
   imports: [
     CommonModule,
