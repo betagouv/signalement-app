@@ -1,7 +1,11 @@
 @import "../../../../../theme/variables";
 
+.overflow-container {
+  overflow-x: auto;
+}
+
 form {
-  width: 98% !important;
+  width: 97% !important;
   max-width: 100%;
 
   .text-right {
@@ -24,7 +28,7 @@ form {
   width: 98% !important;
   min-width: 400px;
   margin-left: 1%;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .table {
