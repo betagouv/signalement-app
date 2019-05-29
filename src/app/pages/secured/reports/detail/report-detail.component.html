@@ -19,9 +19,11 @@
 <section class="section section-white position-relative pb-0">
   <div class="container">
     <div class="panel">
-      <ng-container *ngIf="!loading && !report">
-        Une erreur s'est produite lors de la récupération de ce signalement.
-      </ng-container>
+      <div class="text-center" *ngIf="loadingError && !report">
+        <span class="error">
+          Une erreur s'est produite lors de la récupération de ce signalement.
+        </span>
+      </div>
       <ng-container *ngIf="report">
         <h5>Statut pro : {{report.statusPro}}</h5>
         <h5 *appRole="roles.Admin">Statut conso : {{report.statusConso}}</h5>
@@ -100,6 +102,12 @@
             <div class="modal-body text-center">
               <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm">
                 <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+
+                <div class="notification error" *ngIf="!companyForSiret && loadingError">
+                  Une erreur technique s'est produite<br />
+                </div>
+
+                <hr />
                 <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyForm.invalid">
                   Rechercher
                 </button>
@@ -110,7 +118,7 @@
                   Aucun établissement trouvé
                 </div>
                 <div *ngIf="companyForSiret.siret">
-                  <p class="company" (click)="selectCompanyFromResults(company)">
+                  <p class="company">
                     <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
                     <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
                     <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
@@ -119,6 +127,12 @@
                     <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
                     <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
                   </p>
+
+                  <div class="notification error" *ngIf="loadingError">
+                    Une erreur technique s'est produite<br />
+                  </div>
+
+                  <hr />
                   <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                   &nbsp;
                   <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
@@ -180,6 +194,12 @@
                   {{reportId}}
                 </p>
                 <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
+
+                <div class="notification error" *ngIf="loadingError">
+                  Une erreur technique s'est produite<br />
+                </div>
+
+                <hr />
                 <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                 &nbsp;
                 <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
@@ -188,7 +208,7 @@
           </ng-template>
         </ng-container>
       </ng-container>
-      <ngx-loading [show]="loading"></ngx-loading>
+      <ngx-loading [show]="!report && loading"></ngx-loading>
     </div>
   </div>
 

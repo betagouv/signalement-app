@@ -28,6 +28,7 @@ export class ReportDetailComponent implements OnInit {
   roles = Roles;
   report: Report;
   loading: boolean;
+  loadingError: boolean;
   events: ReportEvent[];
 
   bsModalRef: BsModalRef;
@@ -48,6 +49,7 @@ export class ReportDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.loadingError = false;
     this.platformLocation.onPopState(() => this.bsModalRef.hide());
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
@@ -64,8 +66,9 @@ export class ReportDetailComponent implements OnInit {
         this.events = events;
         this.loading = false;
       },
-      error => {
+      err => {
         this.loading = false;
+        this.loadingError = true;
       });
 
     this.initCompanyForm();
@@ -88,37 +91,53 @@ export class ReportDetailComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
+    this.loadingError = false;
     this.bsModalRef = this.modalService.show(template);
   }
 
   removeUploadedFile(uploadedFile: UploadedFile) {
-    this.fileUploaderService.deleteFile(uploadedFile).subscribe(() => {
-      this.bsModalRef.hide();
-      this.report.uploadedFiles.splice(
-        this.report.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
-        1
-      );
-    });
+    this.fileUploaderService.deleteFile(uploadedFile).subscribe(
+      () => {
+        this.bsModalRef.hide();
+        this.report.uploadedFiles.splice(
+          this.report.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
+          1
+        );
+      });
   }
 
   deleteReport() {
-    this.reportService.deleteReport(this.reportId).subscribe(() => {
-      this.bsModalRef.hide();
-      this.platformLocation.back();
-    });
+    this.loading = true;
+    this.loadingError = false;
+    this.reportService.deleteReport(this.reportId).subscribe(
+      () => {
+        this.loading = false;
+        this.bsModalRef.hide();
+        this.platformLocation.back();
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
   }
 
   submitCompanyForm() {
     this.loading = true;
+    this.loadingError = false;
     this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
         this.companyForSiret = company ? company : new Company();
-      }
-    );
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
   }
 
   changeCompany() {
+    this.loading = true;
+    this.loadingError = false;
     this.reportService.updateReport(Object.assign(new Report(), this.report, {company: this.companyForSiret}))
       .pipe(
         switchMap(() => {
@@ -133,13 +152,18 @@ export class ReportDetailComponent implements OnInit {
           return this.eventService.getEvents(this.reportId);
         })
       )
-      .subscribe(events => {
-        this.report.company = this.companyForSiret;
-        this.events = events;
-        this.companyForSiret = undefined;
-        this.siretCtrl.setValue('');
-        this.bsModalRef.hide();
-      });
+      .subscribe(
+        events => {
+          this.report.company = this.companyForSiret;
+          this.events = events;
+          this.companyForSiret = undefined;
+          this.siretCtrl.setValue('');
+          this.bsModalRef.hide();
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
   }
 
 

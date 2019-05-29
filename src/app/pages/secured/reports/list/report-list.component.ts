@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { Report, DetailInputValue } from '../../../../model/Report';
+import { DetailInputValue, Report } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
@@ -18,7 +18,7 @@ import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap, first } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
@@ -46,7 +46,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   modalRef: BsModalRef;
   modalOnHideSubscription: Subscription;
-  objectKeys = Object.keys;
+
+  loading: boolean;
+  loadingError: boolean;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -72,6 +74,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
+    this.loading = true;
+    this.loadingError = false;
     combineLatest(
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
       this.constantService.getStatusPros(),
@@ -86,8 +90,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.statusConsos = statusConsos;
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
-      }
-    );
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
 
     this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
     this.modalOnHideSubscription = this.updateReportOnModalHide();
@@ -116,6 +123,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   loadReports(page: number) {
+    this.loading = true;
+    this.loadingError = false;
     this.storageService.getLocalStorageItem(ReportFilterStorageKey).pipe(
       switchMap(reportFilter => {
         return this.reportService.getReports(
@@ -124,20 +133,26 @@ export class ReportListComponent implements OnInit, OnDestroy {
           reportFilter ? deserialize(ReportFilter, reportFilter) : new ReportFilter()
         );
       })
-    ).subscribe(result => {
-      this.groupReportsByDate(result.entities);
-      this.totalCount = result.totalCount;
-      setTimeout(() => {
-        this.currentPage = page;
-        if (isPlatformBrowser(this.platformId)) {
-          window.scroll(
-            0,
-            sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 260
-          );
-          sessionStorage.removeItem(ReportsScrollYStorageKey);
-        }
-      }, 1);
-    });
+    ).subscribe(
+      result => {
+        this.loading = false;
+        this.groupReportsByDate(result.entities);
+        this.totalCount = result.totalCount;
+        setTimeout(() => {
+          this.currentPage = page;
+          if (isPlatformBrowser(this.platformId)) {
+            window.scroll(
+              0,
+              sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 260
+            );
+            sessionStorage.removeItem(ReportsScrollYStorageKey);
+          }
+        }, 1);
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
   }
 
   groupReportsByDate(reports: Report[]) {

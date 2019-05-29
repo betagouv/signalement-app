@@ -159,6 +159,12 @@
           </tr>
         </thead>
         <tbody>
+          <tr *ngIf="!loading && !reportsByDate?.length">
+            <td colspan="8">
+              <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
+              <span *ngIf="!loadingError">Aucun signalement trouvé</span>
+            </td>
+          </tr>
           <ng-container *ngFor="let reportsByDate of reportsByDate">
             <tr *appRole="roles.Admin">
               <td colspan="8" class="report-group">
@@ -257,6 +263,7 @@
             </tr>
           </ng-container>
         </tbody>
+        <ngx-loading [show]="loading"></ngx-loading>
       </table>
     </div>
   </div>

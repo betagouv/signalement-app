@@ -1,6 +1,5 @@
 <div class="modal__">
   <form [formGroup]="eventForm" (submit)="submitEventForm()" id="eventForm" *ngIf="eventForm">
-
     <div class="form__group mt-4">
       <div class="row">
         <div class="col-12">
@@ -49,11 +48,18 @@
       Veuillez renseigner les champs obligatoires.<br />
     </div>
 
+    <div class="notification error" *ngIf="loadingError">
+      Une erreur technique s'est produite<br />
+    </div>
+
     <hr />
     <button type="submit" class="btn btn-lg btn-primary" id="submitEventForm">
       Enregistrer
     </button>
   </form>
+  <span class="error" *ngIf="!eventForm && loadingError">
+    Une erreur technique s'est produite
+  </span>
 </div>
 
 <ngx-loading [show]="loading"></ngx-loading>

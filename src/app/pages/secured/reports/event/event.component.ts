@@ -25,6 +25,7 @@ export class EventComponent implements OnInit {
 
   showErrors: boolean;
   loading: boolean;
+  loadingError: boolean;
 
   constructor(public formBuilder: FormBuilder,
               public bsModalRef: BsModalRef,
@@ -34,6 +35,7 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.loadingError = false;
     this.platformLocation.onPopState(() => this.bsModalRef.hide());
     combineLatest(
       this.constantService.getActionPros(),
@@ -44,8 +46,11 @@ export class EventComponent implements OnInit {
         this.actionPros = actionPros;
         this.actionConsos = actionConsos;
         this.initEventForm();
-      }
-    );
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
   }
 
   initEventForm() {
@@ -68,6 +73,7 @@ export class EventComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.loading = true;
+      this.loadingError = false;
       const eventToCreate = Object.assign(new ReportEvent(), {
         reportId: this.reportId,
         eventType: this.actionPros.find(a => a === this.actionCtrl.value) ? 'PRO' : 'CONSO',
@@ -77,11 +83,15 @@ export class EventComponent implements OnInit {
       if (this.actionCtrl.value.withResult) {
         eventToCreate.resultAction = this.resultActionCtrl.value;
       }
-      this.eventService.createEvent(eventToCreate).subscribe( event => {
-        this.bsModalRef.hide();
-        this.loading = false;
-        }
-      );
+      this.eventService.createEvent(eventToCreate).subscribe(
+        event => {
+          this.bsModalRef.hide();
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
     }
   }
 
