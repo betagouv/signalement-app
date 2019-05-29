@@ -271,18 +271,12 @@ export class ReportListComponent implements OnInit, OnDestroy {
       const strings = str.split(" ");
       const nbWords = helper(str.split(" "), "", 0);
 
-      let line = "";
-      let rest = "";
+      const lines = strings.reduce((prev, curr, index) => index < nbWords
+        ? {...prev, line: prev.line + curr + " "}
+        : {...prev, rest: prev.rest + curr + " "}
+      , {line: "", rest: ""})
 
-      strings.forEach((_, index) => {
-        if (index < nbWords) {
-          line += strings[index] + " ";
-        } else {
-          rest += strings[index] + " ";
-        }
-      })
-
-      return { line: line.trim(), rest: rest.trim() }
+      return { line: lines.line.trim(), rest: lines.rest.trim() }
     }
 
     let firstLine = "";
