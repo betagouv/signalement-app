@@ -18,7 +18,6 @@ import { Angulartics2Module } from 'angulartics2';
 import { CollapsableTextComponent } from '../../components/collapsable-text/collapsable-text.component';
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
-import { MiddleCropPipe } from '../../pipes/middlecrop.pipe';
 import { ReportPaths } from '../../services/report-router.service';
 import { RetractationComponent } from '../infos/retractation/retractation.component';
 import { ReportComponent } from './report.component';
@@ -53,7 +52,6 @@ const routes: Routes = [
     CollapsableTextComponent,
     PrecedeByPipe,
     TruncatePipe,
-    MiddleCropPipe,
     SubcategoryComponent,
   ],
   imports: [
