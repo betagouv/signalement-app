@@ -3,23 +3,6 @@ import { CompleterItem, RemoteData } from 'ng2-completer';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AddressService {
-
-  private _addressData: AddressData;
-
-  constructor(private http: HttpClient,
-              private serviceUtils: ServiceUtils) {
-    this._addressData = new AddressData(this.http, this.serviceUtils);
-  }
-
-  get addressData() {
-    return this._addressData;
-  }
-}
-
 class AddressData extends RemoteData {
 
   constructor(http: HttpClient, serviceUtils: ServiceUtils) {
@@ -34,5 +17,22 @@ class AddressData extends RemoteData {
       title: data.properties.label,
       originalObject: data.properties,
     } as CompleterItem : data;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AddressService {
+
+  private _addressData: AddressData;
+
+  constructor(private http: HttpClient,
+              private serviceUtils: ServiceUtils) {
+    this._addressData = new AddressData(this.http, this.serviceUtils);
+  }
+
+  get addressData() {
+    return this._addressData;
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { AnalyticsService, EventCategories, ChangePasswordEventActions } from '../../../services/analytics.service';
+import { AnalyticsService, ChangePasswordEventActions, EventCategories } from '../../../services/analytics.service';
 import { Router } from '@angular/router';
 import { User } from '../../../model/AuthUser';
 
@@ -47,13 +47,13 @@ export class PasswordComponent implements OnInit {
 
     function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
       return (group: FormGroup) => {
-        let password = group.controls[passwordKey];
-        let confirmPassword = group.controls[confirmPasswordKey];
+        const password = group.controls[passwordKey];
+        const confirmPassword = group.controls[confirmPasswordKey];
 
         if (password.value !== confirmPassword.value) {
           return { notEquivalent: true };
         }
-      }
+      };
     }
 
     this.oldPasswordCtrl = this.formBuilder.control('', Validators.required);
@@ -86,9 +86,9 @@ export class PasswordComponent implements OnInit {
         error => {
           this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.fail);
           this.showErrors = true;
-          if (error.status == "401") {
+          if (error.status === '401') {
             this.authenticationError = `Problème d'authentification`;
-          } else if (error.status = "400") {
+          } else if (error.status === '400') {
             this.authenticationError = `Les données ne sont pas cohérentes`;
           } else {
             this.authenticationError = `Echec de la mise à jour du mot de passe`;

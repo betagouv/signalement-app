@@ -39,46 +39,46 @@ describe('KeywordServiceService', () => {
 
   it('should found a keyword', () => {
 
-    const service: KeywordService = TestBed.get(KeywordService);
+    const keywordService: KeywordService = TestBed.get(KeywordService);
 
     const expected = JSON.stringify({
       categoryId: 'TRAVAIL_AU_NOIR',
       found: [{
-        expression: "esclave",
+        expression: 'esclave',
         index: 31
       }]
     });
 
-    const res = JSON.stringify(service.search('j\'ai été témoin d\'un travail d\'esclave'));
+    const res = JSON.stringify(keywordService.search('j\'ai été témoin d\'un travail d\'esclave'));
 
     expect(res).toBe(expected);
   });
 
   it('should found multiple keywords', () => {
 
-    const service: KeywordService = TestBed.get(KeywordService);
+    const keywordService: KeywordService = TestBed.get(KeywordService);
 
     const expected = JSON.stringify({
       categoryId: 'TRAVAIL_AU_NOIR',
       found: [{
-        expression: "immigré",
+        expression: 'immigré',
         index: 47
       }, {
-        expression: "esclave",
+        expression: 'esclave',
         index: 31
       }]
     });
 
-    const res = JSON.stringify(service.search('j\'ai été témoin d\'un travail d\'esclave avec un immigré qui travaillait là bas.'));
+    const res = JSON.stringify(keywordService.search('j\'ai été témoin d\'un travail d\'esclave avec un immigré qui travaillait là bas.'));
 
     expect(res).toBe(expected);
   });
 
   it('should not found a keyword', () => {
 
-    const service: KeywordService = TestBed.get(KeywordService);
-    service.setKeywords(data);
+    const keywordService: KeywordService = TestBed.get(KeywordService);
+    keywordService.setKeywords(data);
 
-    expect(service.search('Je viens faire un signalement sur l\'hygiène d\'un restaurant')).toBeNull();
+    expect(keywordService.search('Je viens faire un signalement sur l\'hygiène d\'un restaurant')).toBeNull();
   });
 });

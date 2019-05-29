@@ -259,50 +259,57 @@ export class ReportListComponent implements OnInit, OnDestroy {
     const MAX_CHAR_DETAILS = 56;
 
     function getLines(str: String, maxLength: Number) {
-      function helper(strings, currentLine, nbWords) {
-        if (!strings || !strings.length) return nbWords;
-        if (nbWords >= strings.length) return nbWords;
-        else {
-          let newLine = currentLine + " " + strings[nbWords];
-          if (newLine.length > maxLength) return nbWords;
-          else return helper(strings, newLine, nbWords + 1);
+      function helper(_strings, currentLine, _nbWords) {
+        if (!_strings || !_strings.length) {
+          return _nbWords;
+        }
+        if (_nbWords >= _strings.length) {
+          return _nbWords;
+        } else {
+          const newLine = currentLine + ' ' + _strings[_nbWords];
+          if (newLine.length > maxLength) {
+            return _nbWords;
+          } else {
+            return helper(_strings, newLine, _nbWords + 1);
+          }
         }
       }
-      const strings = str.split(" ");
-      const nbWords = helper(str.split(" "), "", 0);
+      const strings = str.split(' ');
+      const nbWords = helper(str.split(' '), '', 0);
 
-      let line = "";
-      let rest = "";
+      let line = '';
+      let rest = '';
 
       strings.forEach((_, index) => {
         if (index < nbWords) {
-          line += strings[index] + " ";
+          line += strings[index] + ' ';
         } else {
-          rest += strings[index] + " ";
+          rest += strings[index] + ' ';
         }
-      })
+      });
 
-      return { line: line.trim(), rest: rest.trim() }
+      return { line: line.trim(), rest: rest.trim() };
     }
 
-    let firstLine = "";
-    let secondLine = "";
+    let firstLine = '';
+    let secondLine = '';
     let hasNext = false;
 
     if (detailInputValues && detailInputValues.length) {
-      if (detailInputValues.length > 2) hasNext = true
+      if (detailInputValues.length > 2) {
+        hasNext = true;
+      }
 
-      let lines = getLines(detailInputValues[0].label + " " + detailInputValues[0].value, MAX_CHAR_DETAILS);
+      let lines = getLines(detailInputValues[0].label + ' ' + detailInputValues[0].value, MAX_CHAR_DETAILS);
       firstLine = lines.line;
 
       if (lines.rest) {
         lines = getLines(lines.rest, MAX_CHAR_DETAILS);
-        secondLine = lines.rest ? lines.line.slice(0, -3) + "..." : lines.line;
+        secondLine = lines.rest ? lines.line.slice(0, -3) + '...' : lines.line;
 
       } else if (detailInputValues.length > 1) {
-        lines = getLines(detailInputValues[1].label + " " + detailInputValues[1].value, MAX_CHAR_DETAILS);
-        secondLine = lines.rest ? lines.line.slice(0, -3) + "..." : lines.line;
-
+        lines = getLines(detailInputValues[1].label + ' ' + detailInputValues[1].value, MAX_CHAR_DETAILS);
+        secondLine = lines.rest ? lines.line.slice(0, -3) + '...' : lines.line;
       }
 
       return {firstLine, secondLine, hasNext };
