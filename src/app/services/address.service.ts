@@ -3,7 +3,9 @@ import { CompleterItem, RemoteData } from 'ng2-completer';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 
+
 class AddressData extends RemoteData {
+  static POST_CODE = /[0-9]{5}/;
 
   constructor(http: HttpClient, serviceUtils: ServiceUtils) {
     super(http);
@@ -13,10 +15,10 @@ class AddressData extends RemoteData {
   }
 
   public convertToItem(data: any): CompleterItem | null {
-    return data ? {
+    return data && AddressData.POST_CODE.test(data.properties.label) ? {
       title: data.properties.label,
       originalObject: data.properties,
-    } as CompleterItem : data;
+    } as CompleterItem : null;
   }
 }
 
