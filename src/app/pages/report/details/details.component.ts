@@ -14,6 +14,8 @@ import { isDefined } from '@angular/compiler/src/util';
 import Utils from '../../../utils';
 import { ReportStorageService } from '../../../services/report-storage.service';
 
+export const fileSizeMax = 5000000;
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -437,8 +439,6 @@ interface Keyword {
   readonly category: string;
   readonly message: string;
 }
-
-export const fileSizeMax = 5000000;
 
 export function ValidateCheckboxControl(formArray: FormArray) {
   let isOneOptionChecked = false;

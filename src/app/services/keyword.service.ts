@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import keywords from '../../assets/data/keywords.json';
 import { deserialize } from 'json-typescript-mapper';
-import { KeywordList, Keyword } from '../model/Keyword';
+import { Keyword, KeywordList } from '../model/Keyword';
 
 @Injectable({
   providedIn: 'root'
@@ -45,13 +45,11 @@ export class KeywordService {
           return {
             categoryId: keywordsCategory.categoryId,
             found
-          }
+          };
         }
       }
     }
-
     return null;
-    
   }
 
 }

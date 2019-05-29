@@ -98,7 +98,9 @@ export class SubcategoryComponent implements OnInit, OnChanges {
     if (this.subcategoriesSelected && this.subcategoriesSelected.length) {
       this.subcategorySelected = this.subcategoriesSelected.shift();
     }
-    this.subcategoryTitleCtrl = this.formBuilder.control(this.subcategorySelected ? this.subcategorySelected.title : '', Validators.required);
+    this.subcategoryTitleCtrl = this.formBuilder.control(
+      this.subcategorySelected ? this.subcategorySelected.title : '', Validators.required
+    );
     this.subcategoryForm = this.formBuilder.group({});
     this.subcategoryForm.addControl(this.subcategoryName, this.subcategoryTitleCtrl);
   }
@@ -116,7 +118,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
     }
   }
 
-  isSubcategorySelected(subcategory : Subcategory) {
+  isSubcategorySelected(subcategory: Subcategory) {
     return this.subcategorySelected && this.subcategorySelected.title === subcategory.title;
   }
 

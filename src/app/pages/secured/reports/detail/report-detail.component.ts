@@ -145,7 +145,8 @@ export class ReportDetailComponent implements OnInit {
             reportId: this.reportId,
             eventType: 'RECTIF',
             action: {name: 'Modification du commerçant'},
-            detail: `Commerçant précédent : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ${this.reportService.company2adresseApi(this.report.company)}`
+            detail: `Commerçant précédent : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ` +
+              `${this.reportService.company2adresseApi(this.report.company)}`
           }));
         }),
         switchMap(() => {
