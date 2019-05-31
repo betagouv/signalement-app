@@ -202,7 +202,7 @@
                 </span>
               </ng-template>
             </td>
-            <td class="details">
+            <td>
               <ng-container *ngIf="getDetailContent(report.detailInputValues); let detail">
                 <div [tooltip]="detailsTooltip">
                   <span [innerHTML]="detail.firstLine"></span>
@@ -241,7 +241,7 @@
             <td class="pre">
               <span *ngFor="let file of report.uploadedFiles | slice : 0 : 2; let isFirst=first;" [tooltip]="file.filename">
                 <a href="{{getFileDownloadUrl(file)}}">
-                  {{file.displayedFilenameSmall}}<span *ngIf="isFirst">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  {{file.displayedFilenameSmall}}
                 </a>
                 <br *ngIf="isFirst" />
               </span>

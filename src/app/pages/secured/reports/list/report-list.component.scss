@@ -49,35 +49,6 @@ form {
     }
   }
 
-  .status-header, .email {
-    width: 125px;
-    min-width: 125px;
-  }
-
-  .pj {
-    width: 200px;
-    min-width: 200px;
-
-  }
-
-  .description {
-    width: 300px;
-    min-width: 300px;
-  }
-
-  td .pre {
-    white-space: pre;
-  }
-
-  td.report-group {
-    padding: 0;
-    height: 35px;
-  }
-
-  td.details {
-    width: 400px;
-  }
-
   th, td {
     border: 1px solid #dee2e6;
     height: 60px;
@@ -164,6 +135,27 @@ form {
   td.report-group {
     background-color: $lighter-grey;
     font-weight: bold;
+  }
+
+  td .pre {
+    white-space: pre;
+  }
+
+  td.report-group {
+    padding: 0;
+    height: 35px;
+  }
+
+  th.status-header, th.email {
+    min-width: 120px;
+  }
+
+  th.pj {
+    min-width: 175px;
+  }
+
+  th.description {
+    min-width: 315px;
   }
 
   .agreement {
