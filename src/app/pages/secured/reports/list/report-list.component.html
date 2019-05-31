@@ -148,10 +148,10 @@
           <th *appRole="roles.DGCCRF">Siret</th>
           <th>Commerçant</th>
           <th>Problème</th>
-          <th>Description</th>
+          <th class="description">Description</th>
           <th *appRole="roles.DGCCRF">Date du constat</th>
-          <th *appRole="roles.Admin">Consommateur</th>
-          <th>Pièces jointes</th>
+          <th *appRole="roles.Admin" class="email">Consommateur</th>
+          <th class="pj">Pièces jointes</th>
           <th class="status-header">Statut pro</th>
           <th *appRole="roles.Admin" class="status-header">Statut Conso</th>
           <th *appPermission="permissions.createEvent" class="action"></th>
@@ -238,14 +238,14 @@
                 Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
               </ng-template>
             </td>
-            <td>
-              <span *ngFor="let file of report.uploadedFiles | slice : 0 : 3" [tooltip]="file.filename">
+            <td class="pre">
+              <span *ngFor="let file of report.uploadedFiles | slice : 0 : 2; let isFirst=first;" [tooltip]="file.filename">
                 <a href="{{getFileDownloadUrl(file)}}">
-                  {{file.displayedFilenameSmall}}
+                  {{file.displayedFilenameSmall}}<span *ngIf="isFirst">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </a>
-                <br/>
+                <br *ngIf="isFirst" />
               </span>
-              <span *ngIf="report.uploadedFiles.length > 3" [tooltip]="moreFileTooltip">...</span>
+              <span *ngIf="report.uploadedFiles.length > 2" [tooltip]="moreFileTooltip">&nbsp;<i class="material-icons md-18" alt="Icône sous-catégories" title="Il existe des sous-catégories">keyboard_arrow_down</i></span>
               <ng-template #moreFileTooltip>
                 <span *ngFor="let file of report.uploadedFiles">{{file.filename}}<br /></span>
               </ng-template>

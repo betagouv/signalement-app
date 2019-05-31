@@ -49,8 +49,20 @@ form {
     }
   }
 
-  .status-header {
+  .status-header, .email {
     width: 125px;
+    min-width: 125px;
+  }
+
+  .pj {
+    width: 200px;
+    min-width: 200px;
+
+  }
+
+  .description {
+    width: 300px;
+    min-width: 300px;
   }
 
   td .pre {
