@@ -5,6 +5,8 @@ import { UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
 
+export const PrecisionKeyword = '(à préciser)';
+
 export enum Step {
   Category = 'Category',
   Problem = 'Problem',
@@ -81,5 +83,3 @@ export class DetailInputValue {
   }
 
 }
-
-export const PrecisionKeyword = '(à préciser)';

@@ -19,6 +19,11 @@
 <section class="section section-white position-relative pb-0">
   <div class="container">
     <div class="panel">
+      <div class="text-center" *ngIf="loadingError && !report">
+        <span class="error">
+          Une erreur s'est produite lors de la récupération de ce signalement.
+        </span>
+      </div>
       <ng-container *ngIf="report">
         <h5>Statut pro : {{report.statusPro}}</h5>
         <h5 *appRole="roles.Admin">Statut conso : {{report.statusConso}}</h5>
@@ -61,7 +66,7 @@
                       <ng-template #removeTemplate>
                         <div class="modal-body text-center">
                           <p>Voulez-vous supprimer cette pièce jointe ?</p>
-                          <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
                           &nbsp;
                           <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
                         </div>
@@ -97,6 +102,12 @@
             <div class="modal-body text-center">
               <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm">
                 <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+
+                <div class="notification error" *ngIf="!companyForSiret && loadingError">
+                  Une erreur technique s'est produite<br />
+                </div>
+
+                <hr />
                 <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyForm.invalid">
                   Rechercher
                 </button>
@@ -107,7 +118,7 @@
                   Aucun établissement trouvé
                 </div>
                 <div *ngIf="companyForSiret.siret">
-                  <p class="company" (click)="selectCompanyFromResults(company)">
+                  <p class="company">
                     <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
                     <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
                     <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
@@ -116,7 +127,13 @@
                     <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
                     <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
                   </p>
-                  <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+
+                  <div class="notification error" *ngIf="loadingError">
+                    Une erreur technique s'est produite<br />
+                  </div>
+
+                  <hr />
+                  <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                   &nbsp;
                   <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
                 </div>
@@ -167,7 +184,7 @@
             <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
               Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
               <br />
-              <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fermer</button>
+              <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
             </div>
             <ng-template #noFiles>
               <div class="modal-body text-center">
@@ -177,7 +194,13 @@
                   {{reportId}}
                 </p>
                 <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
-                <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Annuler</button>
+
+                <div class="notification error" *ngIf="loadingError">
+                  Une erreur technique s'est produite<br />
+                </div>
+
+                <hr />
+                <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                 &nbsp;
                 <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
               </div>
@@ -185,13 +208,13 @@
           </ng-template>
         </ng-container>
       </ng-container>
-      <ngx-loading [show]="loading"></ngx-loading>
+      <ngx-loading [show]="!report && loading"></ngx-loading>
     </div>
   </div>
 
 </section>
 
-<div class="container pb-3">
+<div class="container pb-3" *ngIf="report">
   <div class="row">
     <div class="col-12 pointer" (click)="back()">
       <img src="/assets/images/icon_back.png" class="back pointer" alt="page précédente"/>

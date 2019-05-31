@@ -12,67 +12,7 @@ describe('CompanyService', () => {
   let httpMock: HttpTestingController;
   let companyService: CompanyService;
 
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule
-    ],
-    providers: [
-      ServiceUtils,
-    ]
-  }));
 
-  beforeEach(() => {
-    httpMock = TestBed.get(HttpTestingController);
-    companyService = TestBed.get(CompanyService);
-  });
-
-  it('should be created', () => {
-    expect(companyService).toBeTruthy();
-  });
-
-  it('should map the result into a CompanySearchResult object', (done) => {
-
-    const search = 'recherche';
-    const searchPostalCode = '87270';
-
-    companyService.searchCompanies(search, searchPostalCode).subscribe(companySearchResult => {
-      expect(companySearchResult.total).toEqual(2);
-      expect(companySearchResult.companies.length).toEqual(2);
-      expect(companySearchResult.companies[0]).toEqual(deserialize(Company, {
-        'l1_normalisee': 'CASINO CARBURANTS',
-        'l2_normalisee': null,
-        'l3_normalisee': null,
-        'l4_normalisee': 'AVENUE DE LIMOGES',
-        'l5_normalisee': null,
-        'l6_normalisee': '87270 COUZEIX',
-        'l7_normalisee': 'FRANCE',
-        'enseigne': null,
-        'nom_raison_sociale': 'CASINO CARBURANTS',
-        'siren': '428267942',
-        'siret': '42826794201192',
-        'code_postal': '87270'
-      }));
-      done();
-    });
-
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
-    companiesRequest.flush(result);
-
-  });
-
-  it('should catch error with status 404 and return a CompanySearchResult object', (done) => {
-
-    const search = 'recherche';
-    const searchPostalCode = '87270';
-
-    companyService.searchCompanies(search, searchPostalCode).subscribe(companySearchResult => {
-      expect(companySearchResult.total).toEqual(0);
-      done();
-    });
-
-    const companiesRequest = httpMock.expectOne(`${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`);
-    companiesRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
-  });
 
   const result = {
     'total_results': 2,
@@ -171,4 +111,70 @@ describe('CompanyService', () => {
     ],
     'spellcheck': null
   };
+
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule
+    ],
+    providers: [
+      ServiceUtils,
+    ]
+  }));
+
+  beforeEach(() => {
+    httpMock = TestBed.get(HttpTestingController);
+    companyService = TestBed.get(CompanyService);
+  });
+
+  it('should be created', () => {
+    expect(companyService).toBeTruthy();
+  });
+
+  it('should map the result into a CompanySearchResult object', (done) => {
+
+    const search = 'recherche';
+    const searchPostalCode = '87270';
+
+    companyService.searchCompanies(search, searchPostalCode).subscribe(companySearchResult => {
+      expect(companySearchResult.total).toEqual(2);
+      expect(companySearchResult.companies.length).toEqual(2);
+      expect(companySearchResult.companies[0]).toEqual(deserialize(Company, {
+        'l1_normalisee': 'CASINO CARBURANTS',
+        'l2_normalisee': null,
+        'l3_normalisee': null,
+        'l4_normalisee': 'AVENUE DE LIMOGES',
+        'l5_normalisee': null,
+        'l6_normalisee': '87270 COUZEIX',
+        'l7_normalisee': 'FRANCE',
+        'enseigne': null,
+        'nom_raison_sociale': 'CASINO CARBURANTS',
+        'siren': '428267942',
+        'siret': '42826794201192',
+        'code_postal': '87270'
+      }));
+      done();
+    });
+
+    const companiesRequest = httpMock.expectOne(
+      `${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`
+    );
+    companiesRequest.flush(result);
+
+  });
+
+  it('should catch error with status 404 and return a CompanySearchResult object', (done) => {
+
+    const search = 'recherche';
+    const searchPostalCode = '87270';
+
+    companyService.searchCompanies(search, searchPostalCode).subscribe(companySearchResult => {
+      expect(companySearchResult.total).toEqual(0);
+      done();
+    });
+
+    const companiesRequest = httpMock.expectOne(
+      `${environment.apiReportBaseUrl}/api/companies/${search}?postalCode=${searchPostalCode}&maxCount=${MaxCompanyResult}`
+    );
+    companiesRequest.flush({ message: 'no results found' }, {status: 404, statusText: 'not found'});
+  });
 });

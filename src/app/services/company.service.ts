@@ -73,7 +73,7 @@ export class CompanyService {
       }
     ).pipe(
       map(result => {
-        return deserialize(CompanySearchResult, result)
+        return deserialize(CompanySearchResult, result);
       }),
       catchError(err => {
         if (err.status === 404) {
