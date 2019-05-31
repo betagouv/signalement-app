@@ -4,6 +4,17 @@ import { BsLocaleService } from 'ngx-bootstrap';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 
+const closingDays = [
+  { day: 1, month: 0 },
+  { day: 1, month: 4 },
+  { day: 8, month: 4 },
+  { day: 14, month: 6 },
+  { day: 15, month: 7 },
+  { day: 1, month: 10 },
+  { day: 11, month: 10 },
+  { day: 25, month: 11 }
+];
+
 @Component({
   selector: 'app-retractation',
   templateUrl: './retractation.component.html',
@@ -40,15 +51,3 @@ export class RetractationComponent implements OnInit {
       !isUndefined(closingDays.find(d => d.day === date.getDate() && d.month === date.getMonth())); // jours fériés
   }
 }
-
-
-const closingDays = [
-  { day: 1, month: 0 },
-  { day: 1, month: 4 },
-  { day: 8, month: 4 },
-  { day: 14, month: 6 },
-  { day: 15, month: 7 },
-  { day: 1, month: 10 },
-  { day: 11, month: 10 },
-  { day: 25, month: 11 }
-  ];

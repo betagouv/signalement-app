@@ -1,8 +1,12 @@
 @import "../../../../../theme/variables";
 
+.overflow-container {
+  overflow-x: auto;
+}
+
 form {
-  width: 98% !important;
-  max-width: unset !important;
+  width: 97% !important;
+  max-width: 100%;
 
   .text-right {
     padding-right: 0;
@@ -22,8 +26,9 @@ form {
 
 .table-responsive {
   width: 98% !important;
+  min-width: 400px;
   margin-left: 1%;
-  overflow-x: unset;
+  overflow-x: initial;
 }
 
 .table {
@@ -36,7 +41,7 @@ form {
     vertical-align: middle;
   }
 
-  tr:hover {
+  tr.pointer:hover {
     background-color: $lighter-blue !important;
 
     td {
@@ -46,9 +51,10 @@ form {
 
   th, td {
     border: 1px solid #dee2e6;
+    height: 60px;
+    max-width: 500px;
     padding: 0.25em;
     text-align: center;
-    max-width: 500px;
     vertical-align: middle;
 
     &.action {
@@ -129,6 +135,27 @@ form {
   td.report-group {
     background-color: $lighter-grey;
     font-weight: bold;
+  }
+
+  td .pre {
+    white-space: pre;
+  }
+
+  td.report-group {
+    padding: 0;
+    height: 35px;
+  }
+
+  th.status-header, th.email {
+    min-width: 120px;
+  }
+
+  th.pj {
+    min-width: 175px;
+  }
+
+  th.description {
+    min-width: 315px;
   }
 
   .agreement {

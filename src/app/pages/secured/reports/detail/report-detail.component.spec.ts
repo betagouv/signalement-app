@@ -7,6 +7,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoleDirective } from '../../../../directives/app-role.directive';
 import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ReportDetailComponent', () => {
   let component: ReportDetailComponent;
@@ -25,6 +26,7 @@ describe('ReportDetailComponent', () => {
         NgxLoadingModule,
         HttpClientModule,
         ModalModule.forRoot(),
+        RouterTestingModule,
       ]
     })
     .compileComponents();

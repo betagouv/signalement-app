@@ -250,7 +250,6 @@ describe('DetailsComponent', () => {
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('input[type="text"]#formControl_3_1_precision')).not.toBeNull();
-      //expect(nativeElement.querySelector('input[type="text"]#formControl_5_1_precision')).not.toBeNull();
     });
 
     it ('should emit and event with a details object which contains form inputs when no errors', () => {
@@ -275,7 +274,9 @@ describe('DetailsComponent', () => {
       reportExpected.detailInputValues = [
         Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'}),
         Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),
-        Object.assign(new DetailInputValue(), {label: radioDetailInputFixture.label, value: radioDetailInputFixture.options[1] + 'ma précision'}),
+        Object.assign(new DetailInputValue(), {
+          label: radioDetailInputFixture.label,
+          value: radioDetailInputFixture.options[1] + 'ma précision'}),
         Object.assign(new DetailInputValue(), {label: textareaDetailInputFixture.label, value: 'ma description'}),
         Object.assign(new DetailInputValue(), {label: checkboxDetailInputFixture.label, value: ['CHECKBOX1', undefined, 'CHECKBOX3']}),
       ];

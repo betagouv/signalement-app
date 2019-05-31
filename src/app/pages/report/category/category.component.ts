@@ -6,6 +6,12 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 
+export enum CompanyType {
+  Physical = 'Physical',
+  Service = 'Service',
+  Internet = 'Internet'
+}
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -84,10 +90,4 @@ export class CategoryComponent implements OnInit {
     this.selectedCompanyType = type;
   }
 
-}
-
-export enum CompanyType {
-  Physical = 'Physical',
-  Service = 'Service',
-  Internet = 'Internet'
 }

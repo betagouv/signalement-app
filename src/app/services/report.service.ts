@@ -79,7 +79,7 @@ export class ReportService {
     if (reportFilter.period && reportFilter.period[1]) {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
-    ['siret', 'statusPro', 'category', 'details'].forEach(filterName => {
+    ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
       if (reportFilter[filterName]) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
       }
@@ -119,9 +119,9 @@ export class ReportService {
         if (reportFilter.period && reportFilter.period[1]) {
           httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
         }
-        ['siret', 'statusPro', 'category', 'details'].forEach(filterName => {
+        ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
           if (reportFilter[filterName]) {
-            httpParams.push(`${filterName}=${reportFilter[filterName]}`);
+            httpParams.push(`${filterName}=${encodeURIComponent((reportFilter[filterName] as string).trim())}`);
           }
         });
         return `${url}?${httpParams.join('&')}`;

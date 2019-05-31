@@ -8,6 +8,8 @@ import { ReportDetailComponent } from '../detail/report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { AppRoleDirective } from '../../../../directives/app-role.directive';
 import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MiddleCropPipe } from 'src/app/pipes/middlecrop.pipe';
 
 describe('ReportsComponent', () => {
   let component: ReportListComponent;
@@ -19,7 +21,8 @@ describe('ReportsComponent', () => {
         ReportListComponent,
         ReportDetailComponent,
         AppRoleDirective,
-        AppPermissionDirective
+        AppPermissionDirective,
+        MiddleCropPipe
       ],
       imports: [
         PaginationModule.forRoot(),
@@ -30,7 +33,8 @@ describe('ReportsComponent', () => {
         ModalModule.forRoot(),
         BsDatepickerModule.forRoot(),
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterTestingModule,
       ]
     })
     .compileComponents();
