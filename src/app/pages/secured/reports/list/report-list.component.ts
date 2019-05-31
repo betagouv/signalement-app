@@ -256,7 +256,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   getDetailContent(detailInputValues: DetailInputValue[]) {
-    const MAX_CHAR_DETAILS = 50;
+    const MAX_CHAR_DETAILS = 40;
 
     function getLines(str: String, maxLength: Number) {
       function helper(_strings, currentLine, _nbWords) {
