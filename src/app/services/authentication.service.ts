@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthUser, User } from '../model/AuthUser';
 import { Api, AuthUserStorageKey, ServiceUtils } from './service.utils';
 import { map, mergeMap } from 'rxjs/operators';
@@ -27,11 +27,11 @@ export class AuthenticationService {
     });
   }
 
-  login(email: string, password: string) {
+  login(login: string, password: string) {
 
     return this.http.post<AuthUser>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate']),
-      JSON.stringify({ email, password }), this.serviceUtils.getHttpHeaders()
+      JSON.stringify({ login, password }), this.serviceUtils.getHttpHeaders()
     )
     .pipe(
       map(authUser => {
