@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
-import { AuthenticationService } from '../../../services/authentication.service';
-import { AnalyticsService, ChangePasswordEventActions, EventCategories } from '../../../services/analytics.service';
+import pages from '../../../../../assets/data/pages.json';
+import { AccountEventActions, AnalyticsService, EventCategories } from '../../../../services/analytics.service';
 import { Router } from '@angular/router';
-import { User } from '../../../model/AuthUser';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from '../../../../services/account.service';
 
 @Component({
   selector: 'app-password',
@@ -14,7 +13,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./password.component.css']
 })
 export class PasswordComponent implements OnInit {
-  user: User;
 
   changePasswordForm: FormGroup;
   oldPasswordCtrl: FormControl;
@@ -28,23 +26,17 @@ export class PasswordComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
     private titleService: Title,
     private meta: Meta,
-    private authenticationService: AuthenticationService,
+    private accountService: AccountService,
     private analyticsService: AnalyticsService,
     private router: Router) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.changePassword.title);
-    this.meta.updateTag({ name: 'description', content: pages.login.description });
+    this.titleService.setTitle(pages.secured.account.changePassword.title);
+    this.meta.updateTag({ name: 'description', content: pages.secured.account.changePassword.description });
     this.initForm();
-
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
-    });
-
   }
 
   initForm() {
-
     function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
       return (group: FormGroup) => {
         const password = group.controls[passwordKey];
@@ -75,20 +67,20 @@ export class PasswordComponent implements OnInit {
     if (!this.changePasswordForm.valid) {
       this.showErrors = true;
     } else {
-      this.authenticationService.changePassword(this.oldPasswordCtrl.value, this.passwordCtrl.value)
+      this.accountService.changePassword(this.oldPasswordCtrl.value, this.passwordCtrl.value)
       .subscribe(
         () => {
-          this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.success);
+          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.changePasswordSuccess);
           this.showSuccess = true;
           // TODO : erreur si l'on reset le formulaire. Si erreur auparavant, elles sont à nouveau visible
           this.changePasswordForm.reset();
         },
         error => {
-          this.analyticsService.trackEvent(EventCategories.changePassword, ChangePasswordEventActions.fail);
+          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.changePasswordFail);
           this.showErrors = true;
-          if (error.status === '401') {
+          if (error.status === 401) {
             this.authenticationError = `Problème d'authentification`;
-          } else if (error.status === '400') {
+          } else if (error.status === 400) {
             this.authenticationError = `Les données ne sont pas cohérentes`;
           } else {
             this.authenticationError = `Echec de la mise à jour du mot de passe`;
@@ -103,8 +95,6 @@ export class PasswordComponent implements OnInit {
     this.showSuccess = false;
     this.showErrors = false;
     this.authenticationError = '';
-
   }
-
 
 }

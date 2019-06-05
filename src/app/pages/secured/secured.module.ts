@@ -12,14 +12,16 @@ import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
-import { PasswordComponent } from './password/password.component';
+import { PasswordComponent } from './account/password/password.component';
 import { MiddleCropPipe } from '../../pipes/middlecrop.pipe';
+import { AccountActivationComponent } from './account/activation/account-activation.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/page/:pageNumber', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
-  { path: 'change-password', component: PasswordComponent, canActivate: [AuthGuard] },
+  { path: 'compte/mot-de-passe', component: PasswordComponent, canActivate: [AuthGuard] },
+  { path: 'compte/activation', component: AccountActivationComponent, canActivate: [AuthGuard] },
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
 ];
 
@@ -32,7 +34,8 @@ const routes: Routes = [
     AppRoleDirective,
     PasswordComponent,
     DGCCRFComponent,
-    MiddleCropPipe
+    MiddleCropPipe,
+    AccountActivationComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule,
+    AppRoleDirective,
   ],
   providers: [
     AuthGuard

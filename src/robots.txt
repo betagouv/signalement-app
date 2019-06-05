@@ -2,5 +2,5 @@ User-agent: *
 Disallow: /signalement/
 Disallow: /login
 Disallow: /suivi-des-signalements*
-Disallow: /mode-emploi-dgccrf*
-Disallow: /change-password*
+Disallow: /mode-emploi-dgccrf
+Disallow: /compte*

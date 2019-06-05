@@ -3,9 +3,9 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
-import { AnalyticsService, EventCategories, AuthenticationEventActions } from '../../services/analytics.service';
+import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../services/analytics.service';
 import { Router } from '@angular/router';
-import { User } from '../../model/AuthUser';
+import { Roles } from '../../model/AuthUser';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ import { User } from '../../model/AuthUser';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  emailCtrl: FormControl;
+  loginCtrl: FormControl;
   passwordCtrl: FormControl;
 
   showErrors: boolean;
@@ -35,11 +35,11 @@ export class LoginComponent implements OnInit {
   }
 
   initLoginForm() {
-    this.emailCtrl = this.formBuilder.control('', Validators.required);
+    this.loginCtrl = this.formBuilder.control('', Validators.required);
     this.passwordCtrl = this.formBuilder.control('', Validators.required);
 
     this.loginForm = this.formBuilder.group({
-      login: this.emailCtrl,
+      login: this.loginCtrl,
       password: this.passwordCtrl
     });
   }
@@ -49,10 +49,14 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       this.showErrors = true;
     } else {
-      this.authenticationService.login(this.emailCtrl.value, this.passwordCtrl.value).subscribe(
+      this.authenticationService.login(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
-          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, (user as User).id);
-          this.router.navigate(['suivi-des-signalements']);
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
+          if (user.role === Roles.ToActivate.toString()) {
+            this.router.navigate(['compte', 'activation']);
+          } else {
+            this.router.navigate(['suivi-des-signalements']);
+          }
         },
         error => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
@@ -60,6 +64,10 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+  }
+
+  hasError(formControl: FormControl) {
+    return this.showErrors && formControl.errors;
   }
 
 }

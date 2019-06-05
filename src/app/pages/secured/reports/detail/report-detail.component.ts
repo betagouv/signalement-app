@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Report } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
@@ -22,7 +22,7 @@ import { PlatformLocation } from '@angular/common';
 })
 export class ReportDetailComponent implements OnInit {
 
-  @Input() reportId: string;
+  reportId: string;
 
   permissions = Permissions;
   roles = Roles;

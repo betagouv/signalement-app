@@ -1,0 +1,121 @@
+<div class="banner text-center section section-lighter-grey" role="banner">
+  <div class="container">
+    <h1 class="text-center">
+      Activation du compte
+    </h1>
+  </div>
+</div>
+
+<main role="main">
+  <section class="section section-lightest-grey">
+    <div class="container">
+      <div class="notification success mt-3" *ngIf="showSuccess; else activation">
+        Votre compte est maintenant activé, vous pouvez <a routerLink="/login">vous connecter</a> pour accéder à votre espace sécurisé.
+      </div>
+      <ng-template #activation>
+        <form [formGroup]="activationForm" (ngSubmit)="submitForm()" class="form-horizontal">
+          <div class="form-group row">
+            <div class="col-sm-6 control-label">
+              <label for="siret">
+                Identifiant
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="siret" disabled [value]="user?.login">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 control-label">
+              <label for="firstName" [class]="hasError(firstNameCtrl) ? 'error' : ''">
+                Prénom&nbsp;<span class="error">*</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <input [formControl]="firstNameCtrl" type="text" class="form-control" id="firstName" placeholder="Prénom" name="fname" autocomplete="given-name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 control-label">
+              <label for="lastName" [class]="hasError(lastNameCtrl) ? 'error' : ''">
+                Nom&nbsp;<span class="error">*</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <input [formControl]="lastNameCtrl" type="text" class="form-control" id="lastName" placeholder="Nom" name="lname" autocomplete="family-name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 control-label">
+              <label for="email" [class]="hasError(emailCtrl) ? 'error' : ''">
+                Email&nbsp;<span class="error">*</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 control-label">
+              <label for="password" [class]="hasError(passwordCtrl) ? 'error' : ''">
+                Mot de passe&nbsp;<span class="error">*</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
+              <small class="form-text text-muted">Le mot de passe doit avoir 8 caractères minimum.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 control-label">
+              <label for="confirmPassword" [class]="hasError(confirmPasswordCtrl) ? 'error' : ''">
+                Confirmer le mot de passe&nbsp;<span class="error">*</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <input [formControl]="confirmPasswordCtrl" type="password" class="form-control" id="confirmPassword" placeholder="Mot de passe">
+            </div>
+          </div>
+
+          <div class="notification error mt-3" *ngIf="showErrors && activationForm.invalid">
+            <span *ngIf="firstNameCtrl.hasError('required')">
+              Veuillez renseigner votre prénom.<br />
+            </span>
+              <span *ngIf="lastNameCtrl.hasError('required')">
+              Veuillez renseigner votre nom.<br />
+            </span>
+              <span *ngIf="emailCtrl.hasError('required')">
+              Veuillez renseigner votre email.<br />
+            </span>
+              <span *ngIf="emailCtrl.hasError('email')">
+              Veuillez renseigner une adresse email valide.<br />
+            </span>
+            <span *ngIf="passwordCtrl.hasError('required')">
+              Veuillez renseigner le mot de passe.<br />
+            </span>
+            <span *ngIf="passwordCtrl.hasError('minlength')">
+              Le mot de passe doit avoir 8 caractères minimum.<br />
+            </span>
+            <span *ngIf="confirmPasswordCtrl.hasError('required')">
+              Veuillez confirmer le mot de passe.<br />
+            </span>
+            <span *ngIf="activationForm.hasError('notEquivalent')">
+              Les 2 mots de passe ne correspondent pas.<br />
+            </span>
+          </div>
+          <div class="notification error mt-3" *ngIf="loadingError">
+            Une erreur technique s'est produite
+          </div>
+          <hr />
+          <div class="form-group row">
+            <div class="col-sm-12 text-center">
+              <button type="submit" class="btn btn-lg btn-primary">
+                Activer le compte
+              </button>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+    <ngx-loading [show]="loading"></ngx-loading>
+  </section>
+</main>

@@ -8,8 +8,6 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AppRoleDirective implements OnInit {
 
   @Input() appRole: Roles;
-
-
   @Input() appRoleElse: TemplateRef<any>;
 
   constructor(private authenticationService: AuthenticationService,
