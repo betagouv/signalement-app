@@ -10,7 +10,7 @@ import { AccountService } from '../../../../services/account.service';
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',
-  styleUrls: ['./password.component.css']
+  styleUrls: ['./password.component.scss']
 })
 export class PasswordComponent implements OnInit {
 
