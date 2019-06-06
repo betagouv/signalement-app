@@ -136,7 +136,8 @@
       </div>
     </form>
   </div>
-  <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+  <pagination *appRole="[roles.Admin, roles.DGCCRF]"
+              [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
               [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
   </pagination>
   <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
