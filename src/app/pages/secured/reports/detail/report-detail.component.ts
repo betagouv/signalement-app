@@ -50,7 +50,11 @@ export class ReportDetailComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.loadingError = false;
-    this.platformLocation.onPopState(() => this.bsModalRef.hide());
+    this.platformLocation.onPopState(() => {
+      if (this.bsModalRef) {
+        this.bsModalRef.hide();
+      }
+    });
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
           this.reportId = params.get('reportId');

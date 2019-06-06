@@ -7,7 +7,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class AppRoleDirective implements OnInit {
 
-  @Input() appRole: Roles;
+  @Input() appRole: Roles[];
   @Input() appRoleElse: TemplateRef<any>;
 
   constructor(private authenticationService: AuthenticationService,
@@ -29,8 +29,8 @@ export class AppRoleDirective implements OnInit {
     );
   }
 
-  hasRole(user: User, role: Roles) {
-    return user && user.role === role.toString();
+  hasRole(user: User, roles: Roles[]) {
+    return user && roles.find(role => role.toString() === user.role);
   }
 
 }

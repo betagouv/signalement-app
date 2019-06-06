@@ -35,7 +35,7 @@
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                   role="menu" aria-labelledby="button-basic">
 
-                <ng-container *appRole="roles.ToActivate; else activatedRole">
+                <ng-container *appRole="[roles.ToActivate]; else activatedRole">
                   <li role="menuitem" >
                     <span class="item">{{ user.login }}</span>
                   </li>
