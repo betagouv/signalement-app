@@ -13,12 +13,13 @@ import pages from '../../../../../assets/data/pages.json';
 import { StorageService } from '../../../../services/storage.service';
 import { deserialize } from 'json-typescript-mapper';
 import { isPlatformBrowser, Location } from '@angular/common';
-import { Permissions, Roles } from '../../../../model/AuthUser';
+import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { AuthenticationService } from '../../../../services/authentication.service';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
@@ -30,6 +31,7 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 })
 export class ReportListComponent implements OnInit, OnDestroy {
 
+  user: User;
   permissions = Permissions;
   roles = Roles;
   regions = Regions;
@@ -53,6 +55,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
               private meta: Meta,
+              private authenticationService: AuthenticationService,
               private anomalyService: AnomalyService,
               private reportService: ReportService,
               private constantService: ConstantService,
@@ -69,6 +72,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.titleService.setTitle(pages.secured.reports.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
+
+    this.authenticationService.user.subscribe(user => {
+      this.user = user;
+    });
 
     this.reportFilter = {
       period: []
@@ -140,7 +147,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.totalCount = result.totalCount;
         setTimeout(() => {
           this.currentPage = page;
-          if (isPlatformBrowser(this.platformId)) {
+          if (isPlatformBrowser(this.platformId) && this.user && this.user.role !== Roles.Pro) {
             window.scroll(
               0,
               sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 260
