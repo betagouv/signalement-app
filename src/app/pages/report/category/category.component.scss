@@ -29,6 +29,10 @@
   display: inline-block;
   font-size: 1.5rem !important;
   margin-bottom: .6em;
+
+  @media #{$smaller-than-mobile} {
+    display: block;
+  }
 }
 
 .category {
