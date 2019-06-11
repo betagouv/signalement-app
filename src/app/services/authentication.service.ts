@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthUser, User } from '../model/AuthUser';
 import { Api, AuthUserStorageKey, ServiceUtils } from './service.utils';
 import { map } from 'rxjs/operators';
@@ -28,7 +28,6 @@ export class AuthenticationService {
   }
 
   login(login: string, password: string) {
-
     return this.http.post<AuthUser>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate']),
       JSON.stringify({ login, password }), this.serviceUtils.getHttpHeaders()
@@ -55,6 +54,24 @@ export class AuthenticationService {
     return this.localStorage.getItem(AuthUserStorageKey)
     .pipe(
       map(authUser => authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
+    );
+  }
+
+  forgotPassword(login: string) {
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate', 'password', 'forgot']),
+      { login },
+      this.serviceUtils.getHttpHeaders()
+    );
+  }
+
+  resetPassword(password: string, authToken: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('token', encodeURIComponent(authToken));
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate', 'password', 'reset']),
+      { password },
+      Object.assign(this.serviceUtils.getHttpHeaders(), { params: httpParams })
     );
   }
 }

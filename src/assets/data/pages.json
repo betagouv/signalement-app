@@ -25,7 +25,15 @@
   },
   "login": {
     "title": "Authentification - SignalConso",
-    "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso"
+    "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso",
+    "forgotPassword": {
+      "title": "Mot de passe oublié - SignalConso",
+      "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+    },
+    "resetPassword": {
+      "title": "Nouveau mot de passe - SignalConso",
+      "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+    }
   },
   "secured": {
     "reports": {

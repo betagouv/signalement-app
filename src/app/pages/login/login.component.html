@@ -7,7 +7,7 @@
 </div>
 
 <main role="main">
-  <section class="section section-lightest-grey pb-2 pt-3">
+  <section class="section section-lightest-grey">
     <div class="container">
       <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
         <div class="form-group row">
@@ -30,12 +30,6 @@
             <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
           </div>
         </div>
-        <div>
-            <br />
-            <span class="form-text text-muted text-center">En cas d'oubli de mot de passe, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr">SignalConso</a>.</span>
-            <br />
-        </div>
-
         <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
           <span *ngIf="loginCtrl.hasError('required')">
             Veuillez renseigner votre identifant.<br />
@@ -55,6 +49,12 @@
             </button>
           </div>
         </div>
+        <div class="form-group row">
+          <div class="col-sm-12 text-center">
+            <a routerLink="/connexion/perte-mot-de-passe">Mot de passe oublié</a>
+          </div>
+        </div>
+        <p class="form-text text-muted text-center pt-3">En cas de difficultés pour vous connecter, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr">SignalConso</a>.</p>
       </form>
     </div>
   </section>
