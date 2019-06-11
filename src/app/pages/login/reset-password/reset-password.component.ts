@@ -65,7 +65,7 @@ export class ResetPasswordComponent implements OnInit {
 
   submitForm() {
 
-    this.loadingError = false;
+    this.loadingError = undefined;
     this.showSuccess = false;
     this.showErrors = false;
     if (!this.newPasswordForm.valid) {
