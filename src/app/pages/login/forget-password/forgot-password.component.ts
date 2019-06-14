@@ -4,6 +4,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../../services/analytics.service';
 import pages from '../../../../assets/data/pages.json';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -19,17 +20,24 @@ export class ForgotPasswordComponent implements OnInit {
   showSuccess: boolean;
   loading: boolean;
   loadingError: boolean;
+  isDgccrf = false;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
               private authenticationService: AuthenticationService,
-              private analyticsService: AnalyticsService) { }
+              private analyticsService: AnalyticsService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.login.forgotPassword.title);
     this.meta.updateTag({ name: 'description', content: pages.login.forgotPassword.description });
     this.initLoginForm();
+
+    this.route.url.subscribe(url => {
+      console.log('url', url)
+      this.isDgccrf = url.findIndex(u => u.toString() === 'dgccrf') >= 0;
+    });
   }
 
   initLoginForm() {

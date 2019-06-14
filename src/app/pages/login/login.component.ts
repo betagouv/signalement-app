@@ -4,7 +4,7 @@ import pages from '../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../services/analytics.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Roles } from '../../model/AuthUser';
 
 @Component({
@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginCtrl: FormControl;
   passwordCtrl: FormControl;
+  isConnection = false;
+  isDgccrf = false;
 
   showErrors: boolean;
   authenticationError: string;
@@ -26,12 +28,21 @@ export class LoginComponent implements OnInit {
               private meta: Meta,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.login.title);
     this.meta.updateTag({ name: 'description', content: pages.login.description });
     this.initLoginForm();
+
+    this.route.url.subscribe(url => {
+      if (url[0]) {
+        this.isConnection = url[0].toString() === 'dgccrf' || url[0].toString() === 'connexion';
+        this.isDgccrf = url[0].toString() === 'dgccrf';
+      }
+
+    });
   }
 
   initLoginForm() {

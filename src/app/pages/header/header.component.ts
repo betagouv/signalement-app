@@ -24,8 +24,13 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    const role = this.user.role
     this.authenticationService.logout();
-    this.router.navigate(['connexion']);
+    if (role === Roles.Pro) {
+      this.router.navigate(['connexion']);
+    } else {
+      this.router.navigate(['dgccrf']);
+    }
   }
 
   changePassword() {

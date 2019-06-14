@@ -1,6 +1,9 @@
 User-agent: *
 Disallow: /signalement/
 Disallow: /login
+Disallow: /dgccrf
+Disallow: /activation
+Disallow: /connexion*
 Disallow: /suivi-des-signalements*
 Disallow: /mode-emploi-dgccrf
 Disallow: /compte*

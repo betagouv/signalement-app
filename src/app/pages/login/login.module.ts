@@ -11,9 +11,12 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 defineLocale('fr', frLocale);
 
 const routes: Routes = [
-  { path: 'login', redirectTo: 'connexion' },
+  { path: 'login', redirectTo: 'dgccrf' },
+  { path: 'activation', component: LoginComponent },
   { path: 'connexion', component: LoginComponent },
+  { path: 'dgccrf', component: LoginComponent },
   { path: 'connexion/perte-mot-de-passe', component: ForgotPasswordComponent },
+  { path: 'connexion/perte-mot-de-passe/dgccrf', component: ForgotPasswordComponent },
   { path: 'connexion/nouveau-mot-de-passe/:token', component: ResetPasswordComponent }
 ];
 
