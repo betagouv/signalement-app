@@ -243,8 +243,18 @@
       <ngx-loading [show]="!report && loading"></ngx-loading>
     </div>
   </div>
-
 </section>
+
+<div class="notification info container" *ngIf="report">
+  <span *ngIf="!report.contactAgreement; else notifContactAgreement">
+    Vous pouvez maintenant, si ce signalement s'avère justifié, prendre des mesures correctives.
+  </span>
+  <ng-template #notifContactAgreement>
+    <span>
+      Vous pouvez maintenant, si ce signalement s'avère justifié, prendre des mesures correctives et contacter le consommateur.
+    </span>
+  </ng-template>
+</div>
 
 <div class="container pb-3" *ngIf="report">
   <div class="row">
