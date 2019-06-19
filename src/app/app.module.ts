@@ -51,7 +51,7 @@ registerLocaleData(localeFr, 'fr');
       { path: 'stats', component: StatsComponent },
       { path: 'comment-ça-marche', component: HowComponent },
       { path: 'qui-sommes-nous', component: AboutComponent },
-      { path: 'vous-êtes-un-commerçant', component: ProComponent },
+      { path: 'vous-êtes-un-professionnel', component: ProComponent },
       { path: 'delai-de-retractation', component: RetractationComponent },
       { path: 'conditions-generales-utilisation', component: CguComponent }
     ], {scrollPositionRestoration: 'top'}),
