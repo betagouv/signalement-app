@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Company, CompanySearchResult } from '../../../model/Company';
-import { CompanyService, MaxCompanyResult, UNTAKE_POI_LIST, UNTAKE_NATURE_ACTIVITE_LIST } from '../../../services/company.service';
+import { Company } from '../../../model/Company';
+import { CompanyService, UNTAKE_NATURE_ACTIVITE_LIST, UNTAKE_POI_LIST } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../../services/address.service';
 import { CompleterItem, RemoteData } from 'ng2-completer';
@@ -14,7 +14,9 @@ import {
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { combineLatest, of } from 'rxjs';
+import { combineLatest } from 'rxjs';
+import * as L from 'leaflet';
+import { Map } from 'leaflet';
 
 @Component({
   selector: 'app-company',
@@ -45,6 +47,7 @@ export class CompanyComponent implements OnInit {
   showErrors: boolean;
 
   addressData: RemoteData;
+  companiesMap: Map;
 
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
@@ -224,6 +227,7 @@ export class CompanyComponent implements OnInit {
   treatCaseSingleResult(companies: Company[]) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.singleResult);
     this.companies = companies;
+    this.displayCompaniesMap();
   }
 
   treatCaseTooManyResults() {
@@ -234,6 +238,27 @@ export class CompanyComponent implements OnInit {
   treatCaseSeveralResults(companies: Company[]) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.severalResult);
     this.companies = companies;
+    this.displayCompaniesMap();
+  }
+
+  displayCompaniesMap() {
+
+    if (this.companiesMap) {
+      this.companiesMap.remove();
+    }
+    if (this.companies) {
+      this.companiesMap = L.map('companiesMap').setView([this.companies[0].latitude, this.companies[0].longitude], 20);
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: 'Carte des entreprises'
+      }).addTo(this.companiesMap);
+      const myIcon = L.icon({
+        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png'
+      });
+      this.companies.forEach(company => {
+        L.marker([company.latitude, company.longitude], {icon: myIcon}).addTo(this.companiesMap).bindPopup(company.name);
+      });
+    }
+
   }
 
   treatCaseError() {

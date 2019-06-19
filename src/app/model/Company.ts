@@ -32,6 +32,10 @@ export class Company {
   codeActivite: string;
   @JsonProperty('nature_activite')
   natureActivite: string;
+  @JsonProperty('latitude')
+  latitude: number;
+  @JsonProperty('longitude')
+  longitude: number;
 
   constructor() {
     this.name = undefined;
@@ -49,6 +53,8 @@ export class Company {
     this.libActivite = undefined;
     this.codeActivite = undefined;
     this.natureActivite = undefined;
+    this.latitude = undefined;
+    this.longitude = undefined;
   }
 }
 

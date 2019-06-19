@@ -5,7 +5,8 @@
     "baseUrl": "./",
     "module": "commonjs",
     "types": [
-      "node"
+      "node",
+      "leaflet"
     ]
   },
   "exclude": [
