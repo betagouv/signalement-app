@@ -277,6 +277,7 @@
         <i class="material-icons md-24 float-right" alt="Icône détail" title="Détail du signalement">keyboard_arrow_right</i>
       </div>
     </ng-container>
+    <ngx-loading [show]="loading"></ngx-loading>
   </div>
   <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
               [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
