@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Company } from '../../../model/Company';
 import { CompanyService, UNTAKE_NATURE_ACTIVITE_LIST, UNTAKE_POI_LIST } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,6 +17,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { combineLatest } from 'rxjs';
 import * as L from 'leaflet';
 import { Map } from 'leaflet';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-company',
@@ -49,7 +50,8 @@ export class CompanyComponent implements OnInit {
   addressData: RemoteData;
   companiesMap: Map;
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
@@ -243,20 +245,22 @@ export class CompanyComponent implements OnInit {
 
   displayCompaniesMap() {
 
-    if (this.companiesMap) {
-      this.companiesMap.remove();
-    }
-    if (this.companies) {
-      this.companiesMap = L.map('companiesMap').setView([this.companies[0].latitude, this.companies[0].longitude], 20);
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: 'Carte des entreprises'
-      }).addTo(this.companiesMap);
-      const myIcon = L.icon({
-        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png'
-      });
-      this.companies.forEach(company => {
-        L.marker([company.latitude, company.longitude], {icon: myIcon}).addTo(this.companiesMap).bindPopup(company.name);
-      });
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.companiesMap) {
+        this.companiesMap.remove();
+      }
+      if (this.companies) {
+        this.companiesMap = L.map('companiesMap').setView([this.companies[0].latitude, this.companies[0].longitude], 20);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution: 'Carte des entreprises'
+        }).addTo(this.companiesMap);
+        const myIcon = L.icon({
+          iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png'
+        });
+        this.companies.forEach(company => {
+          L.marker([company.latitude, company.longitude], { icon: myIcon }).addTo(this.companiesMap).bindPopup(company.name);
+        });
+      }
     }
 
   }
