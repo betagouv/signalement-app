@@ -25,7 +25,7 @@ export enum EventCategories {
   report = 'Signalement',
   company = 'Identification de l\'établissement',
   authentication = 'Authentification',
-  changePassword = 'Changement mdp'
+  account = 'Compte utilisateur'
 }
 
 export enum ReportEventActions {
@@ -59,10 +59,16 @@ export enum CompanySearchEventNames {
 
 export enum AuthenticationEventActions {
   success = 'Authentification réussie',
-  fail = 'Authentification en échec'
+  fail = 'Authentification en échec',
+  forgotPasswordSuccess = 'Mot de passe oublié - envoi du mail',
+  forgotPasswordFail = 'Mot de passe oublié - erreur technique',
+  resetPasswordSuccess = 'Réinitialistation du mot de passe',
+  resetPasswordFail = 'Réinitialistation du mot de passe - erreur technique',
 }
 
-export enum ChangePasswordEventActions {
-  success = 'Changement mdp réussie',
-  fail = 'Changement mdp en échec'
+export enum AccountEventActions {
+  changePasswordSuccess = 'Changement mdp réussi',
+  changePasswordFail = 'Changement mdp en échec',
+  activateAccountSuccess = 'Activation du compte réussie',
+  activateAccountFail = 'Activation du compte en échec'
 }

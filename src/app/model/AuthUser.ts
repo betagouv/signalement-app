@@ -1,6 +1,7 @@
 export class User {
 
   id: string;
+  login: string;
   email: string;
   password: string;
   firstName: string;
@@ -25,5 +26,7 @@ export enum Permissions {
 
 export enum Roles {
   Admin = 'Admin',
-  DGCCRF = 'DGCCRF'
+  DGCCRF = 'DGCCRF',
+  Pro = 'Professionnel',
+  ToActivate = 'ToActivate'
 }

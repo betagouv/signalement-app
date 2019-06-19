@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="filters">
+  <div class="filters" *appRole="[roles.Admin, roles.DGCCRF]">
     <form (ngSubmit)="submitFilters()">
       <div class="row form-group">
         <div class="col-2 text-right">
@@ -83,7 +83,7 @@
           </select>
         </div>
       </div>
-      <div class="row form-group" *appRole="roles.Admin">
+      <div class="row form-group" *appRole="[roles.Admin]">
         <div class="col-6 text-right">
         </div>
         <div class="col-2 text-right">
@@ -136,24 +136,25 @@
       </div>
     </form>
   </div>
-  <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+  <pagination *appRole="[roles.Admin, roles.DGCCRF]"
+              [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
               [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
   </pagination>
-  <div class="table-responsive" *appPermission="permissions.listReports">
+  <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
     <table class="table">
       <thead>
         <tr>
           <th>Dep</th>
-          <th *appRole="roles.DGCCRF">Commune</th>
-          <th *appRole="roles.DGCCRF">Siret</th>
+          <th *appRole="[roles.DGCCRF]">Commune</th>
+          <th *appRole="[roles.DGCCRF]">Siret</th>
           <th>Commerçant</th>
           <th>Problème</th>
           <th class="description">Description</th>
-          <th *appRole="roles.DGCCRF">Date du constat</th>
-          <th *appRole="roles.Admin" class="email">Consommateur</th>
+          <th *appRole="[roles.DGCCRF]">Date du constat</th>
+          <th *appRole="[roles.Admin]" class="email">Consommateur</th>
           <th class="pj">Pièces jointes</th>
           <th class="status-header">Statut pro</th>
-          <th *appRole="roles.Admin" class="status-header">Statut Conso</th>
+          <th *appRole="[roles.Admin]" class="status-header">Statut Conso</th>
           <th *appPermission="permissions.createEvent" class="action"></th>
         </tr>
       </thead>
@@ -165,7 +166,7 @@
           </td>
         </tr>
         <ng-container *ngFor="let reportsByDate of reportsByDate">
-          <tr *appRole="roles.Admin">
+          <tr *appRole="[roles.Admin]">
             <td colspan="8" class="report-group">
               {{reportsByDate.date}}
             </td>
@@ -173,8 +174,8 @@
           </tr>
           <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
             <td>{{report.company.postalCode | slice : 0 : 2}}</td>
-            <td *appRole="roles.DGCCRF">{{report.company.postalCode}}</td>
-            <td *appRole="roles.DGCCRF">{{report.company.siret}}</td>
+            <td *appRole="[roles.DGCCRF]">{{report.company.postalCode}}</td>
+            <td *appRole="[roles.DGCCRF]">{{report.company.siret}}</td>
             <td>
               <span [tooltip]="companyTooltip">
                 {{report.company.name}}
@@ -223,10 +224,10 @@
                 </ng-template>
               </ng-container>
             </td>
-            <td *appRole="roles.DGCCRF">
+            <td *appRole="[roles.DGCCRF]">
               {{getReportingDate(report)}}
             </td>
-            <td *appRole="roles.Admin">
+            <td *appRole="[roles.Admin]">
               <div [tooltip]="consumerTooltip" class="pre">
                 {{report.consumer.email | middleCrop : 25 }}&nbsp;<span class="agreement" *ngIf="!report.contactAgreement"><i class="material-icons md-red md-18" alt="Icône pas d'accord de contact" title="L'utilisateur ne souhaite pas être contacté">close</i></span><span class="agreement" *ngIf="report.contactAgreement"><i class="material-icons md-green md-18" alt="Icône accord de contact" title="L'utilisateur souhaite être contacté">check</i></span>
               </div>
@@ -253,7 +254,7 @@
             <td [class]="getReportCssClass(report.statusPro)">
               {{report.statusPro}}
             </td>
-            <td *appRole="roles.Admin" [class]="getReportCssClass(report.statusConso)">
+            <td *appRole="[roles.Admin]" [class]="getReportCssClass(report.statusConso)">
               {{report.statusConso}}
             </td>
             <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
@@ -264,6 +265,19 @@
       </tbody>
       <ngx-loading [show]="loading"></ngx-loading>
     </table>
+  </div>
+  <div class="container max-width mb-2" *appRole="[roles.Pro]">
+    <div class="notification error" *ngIf="loadingError">
+      Une erreur technique s'est produite
+    </div>
+    <ng-container *ngFor="let reportsByDate of reportsByDate">
+      <div class="col-12 item pointer" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
+        Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}
+        <i class="material-icons md-18" alt="Icône pièces jointes" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
+        <i class="material-icons md-24 float-right" alt="Icône détail" title="Détail du signalement">keyboard_arrow_right</i>
+      </div>
+    </ng-container>
+    <ngx-loading [show]="loading"></ngx-loading>
   </div>
   <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
               [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">

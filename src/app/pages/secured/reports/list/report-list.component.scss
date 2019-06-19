@@ -163,11 +163,24 @@ form {
   }
 }
 
+.item {
+  border-bottom: 1px solid $theme-border-lighter;
+  padding: 1em;
+
+  &:hover {
+    background: $lightest-grey;
+  }
+}
+
+.banner {
+  margin-bottom: 2em;
+}
+
 .filters {
 
   padding-top: 2em;
   padding-bottom: 2em;
-  margin: 2em 0;
+  margin: 0 0 2em 0;
   background-color: $lightest-grey;
 
   .btn-group[dropdown] {

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppRoleDirective } from '../../directives/app-role.directive';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -12,6 +13,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         HeaderComponent,
+        AppRoleDirective,
       ],
       imports: [
         HttpClientModule,

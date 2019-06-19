@@ -25,20 +25,34 @@
   },
   "login": {
     "title": "Authentification - SignalConso",
-    "description": "Accédez à l'espace authentifié de SignalConso"
-  },
-  "changePassword": {
-    "title": "Changement de mot de passe - SignalConso",
-    "description": "Changement de mot de passe pour l'accès à l'espace authentifié de SignalConso"
+    "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso",
+    "forgotPassword": {
+      "title": "Mot de passe oublié - SignalConso",
+      "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+    },
+    "resetPassword": {
+      "title": "Nouveau mot de passe - SignalConso",
+      "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+    }
   },
   "secured": {
     "reports": {
       "title": "Suivi des signalements - SignalConso",
-      "description": "Suivi des signalements de SignalConso"
+      "description": "Consultez les signalements qui vous concernent"
     },
     "dgccrf": {
       "title": "Mode d'emploi DGCCRF - SignalConso",
       "description": "Mode d'emploi pour le profil back-office DGCCRF"
+    },
+    "account": {
+      "changePassword": {
+        "title": "Changement de mot de passe - SignalConso",
+        "description": "Changez votre mot de passe d'accès à votre espace personnel sur SignalConso"
+      },
+      "activation": {
+        "title": "Activation du compte - SignalConso",
+        "description": "Activez votre compte pour accéder à votre espace personnel sur SignalConso"
+      }
     }
   }
 }
