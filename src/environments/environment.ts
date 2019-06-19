@@ -7,6 +7,7 @@ export const environment = {
   apiReportBaseUrl: 'http://localhost:9000',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
+  apiPoiAddok: 'http://poi.addok.xyz'
 };
 
 /*

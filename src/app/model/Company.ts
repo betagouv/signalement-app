@@ -26,6 +26,12 @@ export class Company {
   siren: string;
   @JsonProperty('code_postal')
   postalCode: string;
+  @JsonProperty('libelle_activite_principale')
+  libActivite: string;
+  @JsonProperty('activite_principale_entreprise')
+  codeActivite: string;
+  @JsonProperty('nature_activite')
+  natureActivite: string;
 
   constructor() {
     this.name = undefined;
@@ -40,6 +46,9 @@ export class Company {
     this.siret = undefined;
     this.siren = undefined;
     this.postalCode = undefined;
+    this.libActivite = undefined;
+    this.codeActivite = undefined;
+    this.natureActivite = undefined;
   }
 }
 
@@ -52,6 +61,78 @@ export class CompanySearchResult {
   constructor() {
     this.total = undefined;
     this.companies = undefined;
+  }
+
+}
+
+export class Properties {
+  @JsonProperty('name')
+  name: string;
+
+  @JsonProperty('score')
+  score: number;
+
+  @JsonProperty('label')
+  label: string
+
+  @JsonProperty('poi')
+  poi: string
+
+  @JsonProperty('id')
+  idOSM: string
+
+  @JsonProperty('city')
+  city: string
+
+  @JsonProperty('citycode')
+  cityCode: string
+
+  @JsonProperty('type')
+  type: string
+
+  @JsonProperty('importance')
+  importance: number
+
+  constructor() {
+    this.name = undefined;
+    this.score = undefined;
+    this.label = undefined;
+    this.poi = undefined;
+    this.idOSM = undefined;
+    this.city = undefined;
+    this.cityCode = undefined;
+    this.type = undefined;
+    this.importance = undefined;
+  }
+}
+
+export class Geometry {
+  @JsonProperty('coordinates')
+  coordinates: number[];
+
+  constructor() {
+    this.coordinates = undefined;
+  }
+}
+
+export class Feature {
+  @JsonProperty({name: 'geometry', clazz: Geometry})
+  geometry: Geometry;
+  @JsonProperty({name: 'properties', clazz: Properties})
+  properties: Properties;
+
+  constructor() {
+    this.geometry = undefined;
+    this.properties = undefined;
+  }
+}
+
+export class CompanyFromAddok {
+  @JsonProperty({name: 'features', clazz: Feature})
+  features: Feature[];
+
+  constructor() {
+    this.features = undefined;
   }
 
 }

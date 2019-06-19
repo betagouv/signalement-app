@@ -1,13 +1,55 @@
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { Company, CompanySearchResult } from '../model/Company';
+import { Company, CompanySearchResult, CompanyFromAddok, Feature } from '../model/Company';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, pluck, filter } from 'rxjs/operators';
 import { deserialize } from 'json-typescript-mapper';
 
 export const MaxCompanyResult = 20;
 export const Radius = 0.2;
+
+// see https://wiki.openstreetmap.org/wiki/Map_Features
+export const UNTAKE_POI_LIST = [
+  'bicycle_parking',
+  'bus_stop',
+  'cathedral',
+  'chapel',
+  'church',
+  'clinic',
+  'clothes',
+  'hospital',
+  'military',
+  'mosque',
+  'place_of_worship',
+  'police',
+  'pitch',
+  'religious',
+  //'residential',
+  'school',
+  'shrine',
+  'social_facility',
+  'sports_centre',
+  'stadium',
+  'synagogue',
+  'temple',
+  'toilets',
+  'townhall',
+  'yes',
+]
+
+export const UNTAKE_NATURE_ACTIVITE_LIST = [
+  '03', //	Extraction
+  '04', //	Fabrication, production
+  '07', //	Transport
+  '08', //	Import, export
+  '09', //	Commerce de gros ou intermédiaire du commerce
+  '11', //	Profession libérale
+  '13', //	Location de meublés
+  '14', //	Bâtiments, travaux publics
+  '15', //	Services aux entreprises
+  '20', //	Donneur d'ordre
+]
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +81,28 @@ export class CompanyService {
     );
   }
 
+  searchCompaniesFromAddok(search: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('limit', '' + 20);
+    httpParams = httpParams.append('q', search);
+    return this.http.get(
+      this.serviceUtils.getUrl(Api.PoiAddok, ['search']),
+      {
+        params: httpParams
+      }
+    ).pipe(
+      map(result => deserialize(CompanyFromAddok, result)),
+      catchError(err => {
+        if (err.status === 404) {
+          return of(deserialize(CompanyFromAddok, {}));
+        } else {
+          return throwError(err);
+        }
+      })
+    );
+  }
+
+
   searchCompaniesBySiret(siret: string) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('siret', siret);
@@ -60,11 +124,11 @@ export class CompanyService {
     );
   }
 
-  getNearbyCompanies(lat: number, long: number) {
+  getNearbyCompanies(lat: number, long: number, radius: number = Radius) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('lat', lat.toString());
     httpParams = httpParams.append('long', long.toString());
-    httpParams = httpParams.append('radius', Radius.toString());
+    httpParams = httpParams.append('radius', radius.toString());
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
       this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'nearby', '']),

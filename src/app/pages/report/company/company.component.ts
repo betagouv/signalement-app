@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Company, CompanySearchResult } from '../../../model/Company';
-import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
+import { CompanyService, MaxCompanyResult, UNTAKE_POI_LIST, UNTAKE_NATURE_ACTIVITE_LIST } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../../services/address.service';
 import { CompleterItem, RemoteData } from 'ng2-completer';
@@ -14,6 +14,7 @@ import {
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { combineLatest, of } from 'rxjs';
 
 @Component({
   selector: 'app-company',
@@ -67,10 +68,10 @@ export class CompanyComponent implements OnInit {
   initSearchForm() {
     this.around = false;
     this.searchCtrl = this.formBuilder.control('', Validators.required);
-    this.searchPostalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
+    //this.searchPostalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
     this.searchForm = this.formBuilder.group({
       search: this.searchCtrl,
-      searchPostalCode: this.searchPostalCodeCtrl
+      //searchPostalCode: this.searchPostalCodeCtrl
     });
   }
 
@@ -127,9 +128,9 @@ export class CompanyComponent implements OnInit {
               if (companySearchResult.total === 0) {
                 this.treatCaseNoResult();
               } else if (companySearchResult.total === 1) {
-                this.treatCaseSingleResult(companySearchResult);
+                this.treatCaseSingleResult(companySearchResult.companies);
               } else {
-                this.treatCaseSeveralResults(companySearchResult);
+                this.treatCaseSeveralResults(companySearchResult.companies);
               }
             },
             error => {
@@ -154,18 +155,56 @@ export class CompanyComponent implements OnInit {
         this.analyticsService.trackEvent(
           EventCategories.company,
           CompanyEventActions.search,
-          this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-        this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
+          //this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
+          this.searchCtrl.value);
+        // this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
+        //   companySearchResult => {
+        //     this.loading = false;
+        //     if (companySearchResult.total === 0) {
+        //       this.treatCaseNoResult();
+        //     } else if (companySearchResult.total === 1) {
+        //       this.treatCaseSingleResult(companySearchResult);
+        //     } else if (companySearchResult.total > MaxCompanyResult) {
+        //       this.treatCaseTooManyResults();
+        //     } else {
+        //       this.treatCaseSeveralResults(companySearchResult);
+        //     }
+        //   },
+        this.companyService.searchCompaniesFromAddok(this.searchCtrl.value).subscribe(
           companySearchResult => {
             this.loading = false;
-            if (companySearchResult.total === 0) {
+
+            let features = companySearchResult.features.filter(feature => feature.properties &&
+              ! UNTAKE_POI_LIST.includes(feature.properties.poi) &&
+              feature.properties.score >= 0.66)
+
+            console.log("features", features);
+            if (features.length === 0) {
               this.treatCaseNoResult();
-            } else if (companySearchResult.total === 1) {
-              this.treatCaseSingleResult(companySearchResult);
-            } else if (companySearchResult.total > MaxCompanyResult) {
-              this.treatCaseTooManyResults();
             } else {
-              this.treatCaseSeveralResults(companySearchResult);
+              combineLatest(
+                features.map(feature => this.companyService.getNearbyCompanies(feature.geometry.coordinates[1], feature.geometry.coordinates[0], 0.015))
+              ).subscribe(
+                companySearchResults => {
+
+                  let companies = companySearchResults.reduce((acc, curr) => curr.companies ? acc.concat(curr.companies) : acc, [])
+                  companies = companies.filter((c: Company) => !UNTAKE_NATURE_ACTIVITE_LIST.includes(c.natureActivite))
+                  console.log("companies", companies)
+
+                  this.loading = false;
+                  if (!companies.length) {
+                    this.treatCaseNoResult();
+                  } else if (companies.length === 1) {
+                    this.treatCaseSingleResult(companies);
+                  } else {
+                    this.treatCaseSeveralResults(companies);
+                  }
+                },
+                error => {
+                  this.loading = false;
+                  this.treatCaseError();
+                }
+              );
             }
           },
           error => {
@@ -182,9 +221,9 @@ export class CompanyComponent implements OnInit {
     this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
   }
 
-  treatCaseSingleResult(companySearchResult: CompanySearchResult) {
+  treatCaseSingleResult(companies: Company[]) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.singleResult);
-    this.companies = companySearchResult.companies;
+    this.companies = companies;
   }
 
   treatCaseTooManyResults() {
@@ -192,9 +231,9 @@ export class CompanyComponent implements OnInit {
     this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
   }
 
-  treatCaseSeveralResults(companySearchResult) {
+  treatCaseSeveralResults(companies: Company[]) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.severalResult);
-    this.companies = companySearchResult.companies;
+    this.companies = companies;
   }
 
   treatCaseError() {

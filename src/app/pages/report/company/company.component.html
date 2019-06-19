@@ -27,19 +27,17 @@
 
     <ng-template #noCompany>
 
-      <nav class="nav nav-tabs nav-justified">
+      <!-- <nav class="nav nav-tabs nav-justified">
         <a class="nav-item nav-link" [routerLink]="" (click)="isNotAround()" [ngClass]="{'active': !around}">Recherche de l'établissement</a>
         <a class="nav-item nav-link" [routerLink]="" (click)="isAround()" [ngClass]="{'active': around}">Recherche à proximité</a>
-      </nav>
+      </nav> -->
 
-      <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="!around && searchForm">
+      <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
 
         <div class="form__group mt-4">
-          <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'établissement <span class="error">*</span>
-          </label>
-          <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
+          <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Vincennes, Monoprix 94300, SIRET" />
         </div>
-        <div class="form__group">
+        <!-- <div class="form__group">
           <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
             Code postal <span class="error">*</span>
           </label>
@@ -48,7 +46,7 @@
               <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110" />
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
           <span *ngIf="searchCtrl.hasError('required')">
             Veuillez renseigner le nom de l'établissement.<br />
@@ -69,7 +67,7 @@
 
       </form>
 
-      <form (submit)="searchCompany()" id="aroundForm" *ngIf="around">
+      <!-- <form (submit)="searchCompany()" id="aroundForm" *ngIf="around">
 
         <div class="notification error mt-4" *ngIf="showErrors">
             Veuillez nous autoriser à connaître votre position géographique.<br />Celle-ci ne sera utilisée que dans le cadre de cette recherche.
@@ -82,7 +80,7 @@
           </button>
         </div>
 
-      </form>
+      </form> -->
 
       <div *ngIf="companies && companies.length">
 
@@ -93,6 +91,7 @@
         <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
           <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
           <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
+          <span *ngIf="company.libActivite">{{company.libActivite}}<br /></span>
           <span *ngIf="company.line3">{{company.line3}}<br /></span>
           <span *ngIf="company.line4">{{company.line4}}<br /></span>
           <span *ngIf="company.line5">{{company.line5}}<br /></span>
