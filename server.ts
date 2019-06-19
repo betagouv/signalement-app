@@ -12,6 +12,12 @@ import { join } from 'path';
 
 enableProdMode();
 
+const MockBrowser = require('mock-browser').mocks.MockBrowser;
+const mock = new MockBrowser();
+global['navigator'] = mock.getNavigator();
+global['window'] = MockBrowser.createWindow();
+global['document'] = MockBrowser.createDocument();
+
 export const app = express();
 
 app.use(compression());
