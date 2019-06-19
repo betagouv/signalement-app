@@ -1,35 +1,49 @@
-<main role="main">
-  <section class="section section-lightest-grey pb-2 pt-3">
-    <div class="container">
-      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
-        <div class="form-group row">
-          <label for="email" class="col-sm-3 control-label">
-            Email <span>*</span>
-          </label>
-          <div class="col-sm-9">
-            <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="password" class="col-sm-3 control-label">
-            Mot de passe  <span>*</span>
-          </label>
-          <div class="col-sm-9">
-            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
-          </div>
-        </div>
-        <div>
-            <br />
-            <span class="form-text text-muted text-center">En cas d'oubli de mot de passe, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr">SignalConso</a>.</span>
-            <br />
-        </div>
+<div class="banner text-center section section-lighter-grey" role="banner">
+  <div class="container">
+    <h1 class="text-center">
+      {{isConnection ? 'Connexion' : 'Activation de l\'espace professionnel'}}
+    </h1>
+  </div>
+</div>
 
+<main role="main">
+  <section class="section section-lightest-grey">
+    <div class="container max-width">
+      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
+        <ng-container *ngIf="!isConnection">
+          <h4 class="text-center">
+            Vous avez reçu un courrier pour consulter vos signalements ?
+          </h4>
+          <h4 class="text-center pb-5">
+            Veuillez renseigner votre numéro Siret et le code à 6 chiffres reçu pour activer votre compte.
+          </h4>
+        </ng-container>
+        <div class="form-group row">
+          <div class="col-sm-3 control-label">
+            <label for="login" [class]="hasError(loginCtrl) ? 'error' : ''">
+              {{isDgccrf ? 'Email' : 'Siret'}} <span class="error">*</span>
+            </label>
+          </div>
+          <div class="col-sm-9">
+            <input [formControl]="loginCtrl" type="text" class="form-control" id="login" placeholder="{{isDgccrf ? 'Email' : 'Siret'}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3 control-label">
+            <label for="password" [class]="hasError(passwordCtrl) ? 'error' : ''">
+              {{isConnection ? 'Mot de passe' : 'Code'}} <span class="error">*</span>
+            </label>
+          </div>
+          <div class="col-sm-9">
+            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="{{isConnection ? 'Mot de passe' : 'Code d\'activation'}}">
+          </div>
+        </div>
         <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
-          <span *ngIf="emailCtrl.hasError('required')">
-            Veuillez renseigner votre adresse email.<br />
+          <span *ngIf="loginCtrl.hasError('required')">
+            Veuillez renseigner votre {{isDgccrf ? 'email' : 'Siret'}}.<br />
           </span>
             <span *ngIf="passwordCtrl.hasError('required')">
-            Veuillez renseigner votre mot de passe.<br />
+            Veuillez renseigner votre {{isConnection ? 'mot de passe' : 'code d\'activation'}}.<br />
           </span>
         </div>
         <div class="notification error mt-3" *ngIf="authenticationError ">
@@ -39,11 +53,32 @@
         <div class="form-group row">
           <div class="col-sm-12 text-center">
             <button type="submit" class="btn btn-lg btn-primary">
-              Valider
+              {{isConnection ? 'Se connecter' : 'Activer le compte'}}
             </button>
           </div>
         </div>
+        <p class="form-text text-muted text-center" *ngIf="!isConnection">
+          La création d'un compte est réservé aux professionnels qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement concernant leur établissement.
+        </p>
       </form>
+      <div class="form-group row" *ngIf="isConnection">
+        <div class="col-sm-12 text-center">
+          <a routerLink="{{isDgccrf ? '/connexion/perte-mot-de-passe/dgccrf' : '/connexion/perte-mot-de-passe'}}">Mot de passe oublié</a>
+        </div>
+      </div>
+      <div class="notification bg-white" *ngIf="!isConnection">
+        <div class="row">
+          <div class="col-12 col-md-8 pb-2 pt-2 text-center text-md-left">
+            <h4>Vous avez déjà activé votre compte ?</h4>
+          </div>
+          <div class="col-12 col-md-4 text-center text-md-right">
+            <button type="button" class="btn btn-lg btn-primary" [routerLink]="['/connexion']">
+              Connectez-vous <i class="material-icons md-18" alt="Icône suite" title="Se connecter">keyboard_arrow_right</i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr">SignalConso</a>.</p>
     </div>
   </section>
 </main>

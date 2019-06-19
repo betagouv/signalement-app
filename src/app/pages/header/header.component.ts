@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../model/AuthUser';
+import { Roles, User } from '../../model/AuthUser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  roles = Roles;
   user: User;
 
   constructor(private authenticationService: AuthenticationService,
@@ -23,12 +24,17 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    const role = this.user.role
     this.authenticationService.logout();
-    this.router.navigate(['login']);
+    if (role === Roles.Pro) {
+      this.router.navigate(['connexion']);
+    } else {
+      this.router.navigate(['dgccrf']);
+    }
   }
 
   changePassword() {
-    this.router.navigate(['change-password']);
+    this.router.navigate(['compte/mot-de-passe']);
   }
 
   goHome() {

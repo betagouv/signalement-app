@@ -27,6 +27,7 @@
 
 .navbar__logo {
   height: 40px;
+  margin-right: 0.8em;
 }
 
 .nav__links {
@@ -82,10 +83,6 @@ a.navbar__home:hover {
   vertical-align: middle;
 }
 
-.navbar__logo {
-  margin-right: 0.8em;
-}
-
 @media #{$smaller-than-tablet} {
   .navbar__container {
     flex-direction: column;
@@ -95,4 +92,13 @@ a.navbar__home:hover {
   .nav__links {
     padding-top: 1em;
   }
+
+}
+
+@media #{$smaller-than-mobile} {
+
+  .navbar__logo {
+    height: 30px;
+  }
+
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthUser, User } from '../model/AuthUser';
 import { Api, AuthUserStorageKey, ServiceUtils } from './service.utils';
-import { map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { BehaviorSubject } from 'rxjs';
@@ -27,11 +27,10 @@ export class AuthenticationService {
     });
   }
 
-  login(email: string, password: string) {
-
+  login(login: string, password: string) {
     return this.http.post<AuthUser>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate']),
-      JSON.stringify({ email, password }), this.serviceUtils.getHttpHeaders()
+      JSON.stringify({ login, password }), this.serviceUtils.getHttpHeaders()
     )
     .pipe(
       map(authUser => {
@@ -40,7 +39,7 @@ export class AuthenticationService {
           this.localStorage.setItemSubscribe(AuthUserStorageKey, authUser);
           return authUser.user;
         } else {
-          return false;
+          throw Error('Unauthenticated');
         }
       })
     );
@@ -58,15 +57,21 @@ export class AuthenticationService {
     );
   }
 
-  changePassword(oldPassword: string, newPassword: string) {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.post(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'password']),
-          { oldPassword, newPassword},
-          headers
-        );
-      })
+  forgotPassword(login: string) {
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate', 'password', 'forgot']),
+      { login },
+      this.serviceUtils.getHttpHeaders()
+    );
+  }
+
+  resetPassword(password: string, authToken: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('token', encodeURIComponent(authToken));
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate', 'password', 'reset']),
+      { password },
+      Object.assign(this.serviceUtils.getHttpHeaders(), { params: httpParams })
     );
   }
 }

@@ -36,7 +36,11 @@ export class EventComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.loadingError = false;
-    this.platformLocation.onPopState(() => this.bsModalRef.hide());
+    this.platformLocation.onPopState(() => {
+      if (this.bsModalRef) {
+        this.bsModalRef.hide();
+      }
+    });
     combineLatest(
       this.constantService.getActionPros(),
       this.constantService.getActionConsos(),

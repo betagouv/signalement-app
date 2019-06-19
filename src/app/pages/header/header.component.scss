@@ -9,10 +9,6 @@
     font-family: "Source Sans Pro", Arial, sans-serif;
     color: $light-blue;
     font-weight: bold;
-
-    & + img {
-      height: 34px;
-    }
   }
 
   .navbar__gouvfr {
@@ -21,10 +17,7 @@
 
   .item {
     padding: 0.25rem 1.5rem;
-  }
-
-  .dropdown-item.cursor {
-    cursor: pointer;
+    display: block;
   }
 
   .nav__item a:first-child {
@@ -74,12 +67,26 @@
       z-index: 100;
     }
 
-    .navbar__domain {
+  }
 
-      & + img {
-        height: 34px;
+
+  @media #{$smaller-than-tablet} {
+    nav {
+      width: 100%;
+
+      .nav__links {
+        width: 100%;
+      }
+
+      .nav__account {
+        float: right;
       }
     }
+  }
 
+  @media #{$smaller-than-mobile} {
+    .navbar__domain, .navbar__gouvfr {
+      font-size: 18px;
+    }
   }
 }
