@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Company } from '../../../model/Company';
+import { Company, Feature } from '../../../model/Company';
 import { CompanyService, UNTAKE_NATURE_ACTIVITE_LIST, UNTAKE_POI_LIST } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../../services/address.service';
@@ -14,10 +14,11 @@ import {
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { combineLatest } from 'rxjs';
+import { combineLatest, of } from 'rxjs';
 import * as L from 'leaflet';
 import { Map } from 'leaflet';
 import { isPlatformBrowser } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-company',
@@ -73,7 +74,7 @@ export class CompanyComponent implements OnInit {
   initSearchForm() {
     this.around = false;
     this.searchCtrl = this.formBuilder.control('', Validators.required);
-    //this.searchPostalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
+    this.searchPostalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
     this.searchForm = this.formBuilder.group({
       search: this.searchCtrl,
       //searchPostalCode: this.searchPostalCodeCtrl
@@ -157,59 +158,56 @@ export class CompanyComponent implements OnInit {
       } else {
         this.initSearch();
         this.loading = true;
+        let companiesFound: Company[] = [];
         this.analyticsService.trackEvent(
           EventCategories.company,
           CompanyEventActions.search,
-          //this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-          this.searchCtrl.value);
-        // this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
-        //   companySearchResult => {
-        //     this.loading = false;
-        //     if (companySearchResult.total === 0) {
-        //       this.treatCaseNoResult();
-        //     } else if (companySearchResult.total === 1) {
-        //       this.treatCaseSingleResult(companySearchResult);
-        //     } else if (companySearchResult.total > MaxCompanyResult) {
-        //       this.treatCaseTooManyResults();
-        //     } else {
-        //       this.treatCaseSeveralResults(companySearchResult);
-        //     }
-        //   },
-        this.companyService.searchCompaniesFromAddok(this.searchCtrl.value).subscribe(
+          this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value
+        );
+        this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value)
+          .pipe(
+            switchMap( companySearchResult => {
+              if (companySearchResult.total > 0) {
+                companiesFound = companySearchResult.companies;
+              }
+              return this.companyService.searchCompaniesFromAddok(this.searchCtrl.value);
+            })
+          )
+          .subscribe(
           companySearchResult => {
-            this.loading = false;
 
-            let features = companySearchResult.features.filter(feature => feature.properties &&
-              ! UNTAKE_POI_LIST.includes(feature.properties.poi) &&
-              feature.properties.score >= 0.66)
+            const features = companySearchResult.features.filter(feature => {
+              return feature.properties && ! UNTAKE_POI_LIST.includes(feature.properties.poi) && feature.properties.score >= 0.66;
+            });
 
-            console.log("features", features);
-            if (features.length === 0) {
-              this.treatCaseNoResult();
-            } else {
-              combineLatest(
-                features.map(feature => this.companyService.getNearbyCompanies(feature.geometry.coordinates[1], feature.geometry.coordinates[0], 0.015))
-              ).subscribe(
-                companySearchResults => {
-
-                  let companies = companySearchResults.reduce((acc, curr) => curr.companies ? acc.concat(curr.companies) : acc, [])
-                  companies = companies.filter((c: Company) => !UNTAKE_NATURE_ACTIVITE_LIST.includes(c.natureActivite))
-                  console.log("companies", companies)
-
+            if (features.length) {
+              this.addNearbyCompaniesFromFeatures(companiesFound, features, 0.015)
+                .subscribe(
+                  companies => {
                   this.loading = false;
-                  if (!companies.length) {
-                    this.treatCaseNoResult();
-                  } else if (companies.length === 1) {
-                    this.treatCaseSingleResult(companies);
-                  } else {
-                    this.treatCaseSeveralResults(companies);
+
+                    if (!companies.length) {
+                      this.treatCaseNoResult();
+                    } else if (companies.length === 1) {
+                      this.treatCaseSingleResult(companies);
+                    } else {
+                      this.treatCaseSeveralResults(companies);
+                    }
+                  },
+                  error => {
+                    this.loading = false;
+                    this.treatCaseError();
                   }
-                },
-                error => {
-                  this.loading = false;
-                  this.treatCaseError();
-                }
-              );
+                );
+            } else {
+              this.loading = false;
+              if (!companiesFound.length) {
+                this.treatCaseNoResult();
+              } else if (companiesFound.length === 1) {
+                this.treatCaseSingleResult(companiesFound);
+              } else {
+                this.treatCaseSeveralResults(companiesFound);
+              }
             }
           },
           error => {
@@ -221,6 +219,29 @@ export class CompanyComponent implements OnInit {
     }
   }
 
+  addNearbyCompaniesFromFeatures(companies: Company[], features: Feature[], radius: number) {
+    return combineLatest(
+      features.map(feature => {
+        return this.companyService.getNearbyCompanies(feature.geometry.coordinates[1], feature.geometry.coordinates[0], radius);
+      })
+    ).pipe(
+      switchMap(
+        companySearchResults => {
+          companies = [...companies, ...companySearchResults
+            .reduce((acc, curr) => curr.companies ? [...acc, ...curr.companies.filter(company => !acc.find(c1 => c1.siret === company.siret))] : acc, [])
+            .filter((c: Company) => !UNTAKE_NATURE_ACTIVITE_LIST.includes(c.natureActivite))
+            .filter((c: Company) => !companies.find(c1 => c1.siret === c.siret))];
+
+          if (companies.length < 10) {
+            return this.addNearbyCompaniesFromFeatures(companies, features, radius * 2);
+          } else {
+            return of(companies);
+          }
+        }
+      )
+    );
+  }
+
   treatCaseNoResult() {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
     this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
@@ -229,7 +250,6 @@ export class CompanyComponent implements OnInit {
   treatCaseSingleResult(companies: Company[]) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.singleResult);
     this.companies = companies;
-    this.displayCompaniesMap();
   }
 
   treatCaseTooManyResults() {
@@ -240,7 +260,6 @@ export class CompanyComponent implements OnInit {
   treatCaseSeveralResults(companies: Company[]) {
     this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.severalResult);
     this.companies = companies;
-    this.displayCompaniesMap();
   }
 
   displayCompaniesMap() {

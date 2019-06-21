@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { Company, CompanySearchResult, CompanyFromAddok, Feature } from '../model/Company';
+import { Company, CompanyFromAddok, CompanySearchResult } from '../model/Company';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { catchError, map, pluck, filter } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { deserialize } from 'json-typescript-mapper';
 
 export const MaxCompanyResult = 20;
@@ -60,9 +60,11 @@ export class CompanyService {
               private serviceUtils: ServiceUtils) {
   }
 
-  searchCompanies(search: string, searchPostalCode: string) {
+  searchCompanies(search: string, searchPostalCode?: string) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
+    if (searchPostalCode) {
+      httpParams = httpParams.append('postalCode', searchPostalCode.toString());
+    }
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get(
       this.serviceUtils.getUrl(Api.Report, ['api', 'companies', search]),
@@ -82,14 +84,8 @@ export class CompanyService {
   }
 
   searchCompaniesFromAddok(search: string) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('limit', '' + 20);
-    httpParams = httpParams.append('q', search);
     return this.http.get(
-      this.serviceUtils.getUrl(Api.PoiAddok, ['search']),
-      {
-        params: httpParams
-      }
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'addok', search]),
     ).pipe(
       map(result => deserialize(CompanyFromAddok, result)),
       catchError(err => {
