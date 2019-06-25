@@ -1,4 +1,4 @@
-![](https://github.com/betagouv/signalement-app/blob/blog/src/assets/blog/2019/06/18/la-methode-incrementale/Methode3.jpg "Methode incrémentale")
+![Methode incrémentale](/assets/blog/2019/06/18/la-methode-incrementale/Methode3.jpg)
 
 # La méthode incrémentale ou comment être plus souple et rapide 
 
