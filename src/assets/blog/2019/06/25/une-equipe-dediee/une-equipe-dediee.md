@@ -1,4 +1,4 @@
-![alt text](https://github.com/betagouv/signalement-app/blob/blog/src/assets/blog/2019/06/25/une-equipe-dediee/Article%204.jpg "Une equipe dediee")
+![Une équipe dédiée](/assets/blog/2019/06/25/une-equipe-dediee/Article 4.jpg)
 
 # Une équipe dédiée
 
