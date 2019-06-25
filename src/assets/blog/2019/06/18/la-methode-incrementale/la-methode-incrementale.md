@@ -1,3 +1,5 @@
+![alt text](https://github.com/betagouv/signalement-app/blob/blog/src/assets/blog/2019/06/18/la-methode-incrementale/M%C3%A9thode3.jpg "Methode incrémentale")
+
 # La méthode incrémentale ou comment être plus souple et rapide 
 
 **L’approche incrémentale** est un des **trois principes fondamentaux** d’une Startup d’Etat, aux côtés d’un problème de politique publique et d’une équipe dédiée. 
