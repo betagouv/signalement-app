@@ -1,4 +1,4 @@
-
+![alt text](https://github.com/betagouv/signalement-app/blob/blog/src/assets/blog/2019/06/11/Solution-Start-up-dEtat/Politique_publique.jpg "Politique Publique")
 
 # Problème de politique publique ? Solution Start-up d’Etat !
 
