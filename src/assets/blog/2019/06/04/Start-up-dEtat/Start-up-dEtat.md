@@ -1,4 +1,4 @@
-![alt text](https://github.com/betagouv/signalement-app/blob/blog/src/assets/blog/2019/06/04/Start-up-dEtat/Startup.jpg "Start-up d'Etat")
+![alt text](/assets/blog/2019/06/04/Start-up-dEtat/Startup.jpg "Start-up d'Etat")
 
 # Une Startup d’Etat, c’est quoi ? 
 
