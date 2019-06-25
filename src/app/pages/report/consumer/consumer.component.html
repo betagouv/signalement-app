@@ -3,9 +3,9 @@
   <div class="container">
 
     <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
-      <h5 class="font-weight-bold">
-        Merci de compléter votre identité afin d'authentifier votre signalement.
-      </h5>
+      <h4 class="text-center mb-4 font-weight-bold">
+        Vos coordonnées nous permettent d'authentifier votre signalement
+      </h4>
 
       <div class="form__group mt-4">
         <div class="row">
@@ -33,20 +33,20 @@
       </div>
 
       <div class="form__group">
+        <div class="row pl-1 mb-4">
+          <div class="col-2 col-sm-1 text-right pr-1">
+            <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
+          </div>
+          <div class="col-10 col-sm-11 pl-1">
+            <label for="contactAgreementFalse" class="label-inline pointer"><strong>Je ne partage pas</strong> mes coordonnées au commerçant. Seule la répression des fraudes pourra en prendre connaissance</label>
+          </div>
+        </div>
         <div class="row pl-1">
           <div class="col-2 col-sm-1 text-right pr-1">
             <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
           </div>
           <div class="col-10 col-sm-11 pl-1">
-            <label for="contactAgreementTrue" class="label-inline pointer">J'accepte de transmettre mes coordonnées au professionnel afin qu'il puisse me contacter</label>
-          </div>
-        </div>
-        <div class="row pl-1">
-          <div class="col-2 col-sm-1 text-right pr-1">
-            <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
-          </div>
-          <div class="col-10 col-sm-11 pl-1">
-            <label for="contactAgreementFalse" class="label-inline pointer">Je refuse et je ne serai pas sollicité</label>
+            <label for="contactAgreementTrue" class="label-inline pointer"><strong>Je partage</strong> mes coordonnées au commerçant afin qu'il puisse me contacter dans le cadre de mon signalement (<u>uniquement</u>). <span class="font-weight-light">J'ai conscience que la répression des fraudes n'aura pas accès à ces échanges éventuels et ne pourra donc pas les contrôler</span></label>
           </div>
         </div>
       </div>
