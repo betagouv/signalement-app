@@ -1,4 +1,4 @@
-![Une équipe dédiée](/assets/blog/2019/06/25/une-equipe-dediee/Article 4.jpg)
+![equipe dediee](assets/blog/2019/06/25/une-equipe-dediee/Article 4.jpg)
 
 # Une équipe dédiée
 
