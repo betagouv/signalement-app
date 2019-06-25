@@ -1,4 +1,6 @@
-# Une équipe dédiée 
+# Une équipe dédiée
+
+![photo d'équipe](/assets/blog/2019/06/25/une-equipe-dediee/equipe.jpg)
 
 Une Start-up d’Etat fonctionne grâce à une «équipe dédiée» qui travaille exclusivement sur le produit; 
 à la différence d’une «équipe projet» dont les membres opèrent sur plusieurs missions en parallèle. 

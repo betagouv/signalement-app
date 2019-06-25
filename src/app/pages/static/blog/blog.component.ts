@@ -16,7 +16,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-        this.articleUrl = `/assets/blog/${params.get('article')}.md`;
+        this.articleUrl = `/assets/blog/${params.get('year')}/${params.get('month')}/${params.get('day')}/${params.get('article')}/${params.get('article')}.md`;
       }
     );
   }

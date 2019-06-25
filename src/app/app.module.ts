@@ -57,7 +57,7 @@ registerLocaleData(localeFr, 'fr');
       { path: 'vous-êtes-un-professionnel', component: ProComponent },
       { path: 'delai-de-retractation', component: RetractationComponent },
       { path: 'conditions-generales-utilisation', component: CguComponent },
-      { path: 'blog/:article', component: BlogComponent }
+      { path: 'blog/:year/:month/:day/:article', component: BlogComponent }
     ], {scrollPositionRestoration: 'top'}),
     ReportModule,
     BrowserModule,
