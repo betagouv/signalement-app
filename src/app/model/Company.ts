@@ -26,6 +26,16 @@ export class Company {
   siren: string;
   @JsonProperty('code_postal')
   postalCode: string;
+  @JsonProperty('libelle_activite_principale')
+  activityLabel: string;
+  @JsonProperty('activite_principale_entreprise')
+  activityCode: string;
+  @JsonProperty('nature_activite')
+  activityNature: string;
+  @JsonProperty('latitude')
+  latitude: number;
+  @JsonProperty('longitude')
+  longitude: number;
 
   constructor() {
     this.name = undefined;
@@ -40,6 +50,12 @@ export class Company {
     this.siret = undefined;
     this.siren = undefined;
     this.postalCode = undefined;
+    this.activityLabel = undefined;
+    this.activityCode = undefined;
+    this.activityNature = undefined;
+    this.latitude = undefined;
+    this.longitude = undefined;
+
   }
 }
 

@@ -93,6 +93,7 @@
         <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
           <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
           <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
+          <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
           <span *ngIf="company.line3">{{company.line3}}<br /></span>
           <span *ngIf="company.line4">{{company.line4}}<br /></span>
           <span *ngIf="company.line5">{{company.line5}}<br /></span>
