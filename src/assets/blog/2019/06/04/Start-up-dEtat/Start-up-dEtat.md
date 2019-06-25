@@ -1,4 +1,4 @@
-![alt text](/assets/blog/2019/06/04/Start-up-dEtat/Startup.jpg "Start-up d'Etat")
+![Start-Up](/assets/blog/2019/06/04/Start-up-dEtat/Startup.jpg)
 
 # Une Startup d’Etat, c’est quoi ? 
 
