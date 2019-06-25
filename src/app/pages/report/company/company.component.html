@@ -29,7 +29,7 @@
 
       <nav class="nav nav-tabs nav-justified">
         <a class="nav-item nav-link" [routerLink]="" (click)="isNotAround()" [ngClass]="{'active': !around}">Recherche de l'établissement</a>
-        <a class="nav-item nav-link" [routerLink]="" (click)="isAround()" [ngClass]="{'active': around}">Recherche à proximité</a>
+        <a class="nav-item nav-link" [routerLink]="" (click)="isAround()" [ngClass]="{'active': around}">Recherche à proximité <i class="material-icons md-24" alt="Icône géolocalisation">location_on</i></a>
       </nav>
 
       <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="!around && searchForm">
@@ -77,7 +77,7 @@
 
         <div class="text-center mt-4">
           <button type="submit" class="btn btn-lg btn-primary" id="submitAroundForm">
-            <img alt="Icône du bouton autour" src="/assets/images/icon_around.png">
+            <i class="material-icons md-24" alt="Icône du bouton autour de moi" title="bouton autour de moi">location_searching</i>
             Rechercher autour de moi
           </button>
         </div>
