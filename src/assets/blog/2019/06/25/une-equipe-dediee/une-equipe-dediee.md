@@ -1,6 +1,6 @@
-# Une équipe dédiée
+![alt text](https://github.com/betagouv/signalement-app/blob/blog/src/assets/blog/2019/06/25/une-equipe-dediee/Article%204.jpg "Une equipe dediee")
 
-![photo d'équipe](/assets/blog/2019/06/25/une-equipe-dediee/equipe.jpg)
+# Une équipe dédiée
 
 Une Start-up d’Etat fonctionne grâce à une «équipe dédiée» qui travaille exclusivement sur le produit; 
 à la différence d’une «équipe projet» dont les membres opèrent sur plusieurs missions en parallèle. 
