@@ -1,4 +1,4 @@
-
+![Start-Up d'Etat](src/assets/blog/2019/06/04/Startup.jpg)
 
 # Une Startup d’Etat, c’est quoi ? 
 
