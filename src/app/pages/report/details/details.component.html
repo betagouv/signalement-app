@@ -38,6 +38,7 @@
                    [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
                    [id]="getFormControlId(detailInput)"
                    bsDatepicker
+                   [maxDate]="maxDate"
                    [bsConfig]="{ containerClass: 'theme-default' }">
           </div>
         </div>
@@ -116,7 +117,7 @@
       </div>
       <div class="form__group">
         <label>
-          <img alt="Icône du bouton joindre" src="/assets/images/icon_attachment.png">
+          <i class="material-icons md-24" alt="Icône du bouton joindre" title="bouton attacher un fichier">attach_file</i>
           {{this.getReportLastSubcategory()?.fileLabel ? this.getReportLastSubcategory().fileLabel : 'Pièces jointes'}}
         </label>
         <div class="row text-center">
@@ -167,7 +168,7 @@
 
       <hr />
       <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
-        <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
+        <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
         Identifier le commerçant
       </button>
     </form>
