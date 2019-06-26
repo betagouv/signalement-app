@@ -14,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
+import { Consumer } from '../../../../model/Consumer';
 
 @Component({
   selector: 'app-report-detail',
@@ -37,6 +38,12 @@ export class ReportDetailComponent implements OnInit {
   companyForm: FormGroup;
   siretCtrl: FormControl;
   companyForSiret: Company;
+
+  consumerForm: FormGroup;
+  firstNameCtrl: FormControl;
+  lastNameCtrl: FormControl;
+  emailCtrl: FormControl;
+  contactAgreementCtrl: FormControl;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -69,6 +76,7 @@ export class ReportDetailComponent implements OnInit {
         this.report = report;
         this.events = events;
         this.loading = false;
+        this.initConsumerForm();
       },
       err => {
         this.loading = false;
@@ -83,6 +91,20 @@ export class ReportDetailComponent implements OnInit {
 
     this.companyForm = this.formBuilder.group({
       siret: this.siretCtrl
+    });
+  }
+
+  initConsumerForm() {
+    this.firstNameCtrl = this.formBuilder.control(this.report.consumer.firstName, Validators.required);
+    this.lastNameCtrl = this.formBuilder.control(this.report.consumer.lastName, Validators.required);
+    this.emailCtrl = this.formBuilder.control(this.report.consumer.email, [Validators.required, Validators.email]);
+    this.contactAgreementCtrl = this.formBuilder.control(this.report.contactAgreement, Validators.required);
+
+    this.consumerForm = this.formBuilder.group({
+      firstName: this.firstNameCtrl,
+      lastName: this.lastNameCtrl,
+      email: this.emailCtrl,
+      contactAgreement: this.contactAgreementCtrl
     });
   }
 
@@ -163,6 +185,44 @@ export class ReportDetailComponent implements OnInit {
           this.events = events;
           this.companyForSiret = undefined;
           this.siretCtrl.setValue('');
+          this.bsModalRef.hide();
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
+  }
+
+  submitConsumerForm() {
+    this.loading = true;
+    this.loadingError = false;
+    const consumer = Object.assign(new Consumer(),
+      {
+        firstName: this.firstNameCtrl.value,
+        lastName: this.lastNameCtrl.value,
+        email: this.emailCtrl.value
+      });
+    const contactAgreement = this.contactAgreementCtrl.value;
+    this.reportService.updateReport(Object.assign(new Report(), this.report, { consumer, contactAgreement }))
+      .pipe(
+        switchMap(() => {
+          return this.eventService.createEvent(Object.assign(new ReportEvent(), {
+            reportId: this.reportId,
+            eventType: 'RECTIF',
+            action: {name: 'Modification du consommateur'},
+            detail: `Consommateur précédent : ${this.report.consumer.firstName} ${this.report.consumer.lastName}` +
+              ` - ${this.report.consumer.email} - Accord pour contact : ${this.report.contactAgreement ? 'oui' : 'non'}`
+          }));
+        }),
+        switchMap(() => {
+          return this.eventService.getEvents(this.reportId);
+        })
+      )
+      .subscribe(
+        events => {
+          this.report.consumer = consumer;
+          this.report.contactAgreement = contactAgreement;
+          this.events = events;
           this.bsModalRef.hide();
         },
         err => {

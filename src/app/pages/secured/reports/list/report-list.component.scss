@@ -130,6 +130,10 @@ form {
     &.status-fait {
       background-color: $light-green;
     }
+
+    &.status-adresse-postale-incorrecte {
+      background-color: $light-red;
+    }
   }
 
   td.report-group {

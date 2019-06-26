@@ -57,6 +57,8 @@ export class DetailsComponent implements OnInit {
   tooLargeFilename: string;
   keywordsDetected: Keyword;
 
+  maxDate: Date;
+
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
@@ -84,6 +86,7 @@ export class DetailsComponent implements OnInit {
 
     this.searchKeywords();
 
+    this.maxDate = new Date();
   }
 
   initDetailInputs() {

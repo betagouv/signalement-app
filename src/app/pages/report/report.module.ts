@@ -19,7 +19,7 @@ import { CollapsableTextComponent } from '../../components/collapsable-text/coll
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { ReportPaths } from '../../services/report-router.service';
-import { RetractationComponent } from '../infos/retractation/retractation.component';
+import { RetractationComponent } from '../static/retractation/retractation.component';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 
