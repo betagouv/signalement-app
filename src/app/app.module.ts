@@ -9,9 +9,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
-import { HowComponent } from './pages/infos/how/how.component';
-import { AboutComponent } from './pages/infos/about/about.component';
-import { ProComponent } from './pages/infos/pro/pro.component';
+import { HowComponent } from './pages/static/how/how.component';
+import { AboutComponent } from './pages/static/about/about.component';
+import { ProComponent } from './pages/static/pro/pro.component';
 import { RouterModule } from '@angular/router';
 import { StatsComponent } from './pages/stats/stats.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -21,9 +21,11 @@ import localeFr from '@angular/common/locales/fr';
 import { ReportComponent } from './pages/report/report.component';
 import { LoginModule } from './pages/login/login.module';
 import { SecuredModule } from './pages/secured/secured.module';
-import { RetractationComponent } from './pages/infos/retractation/retractation.component';
-import { CguComponent } from './pages/infos/cgu/cgu.component';
+import { RetractationComponent } from './pages/static/retractation/retractation.component';
+import { CguComponent } from './pages/static/cgu/cgu.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BlogComponent } from './pages/static/blog/blog.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -37,6 +39,7 @@ registerLocaleData(localeFr, 'fr');
     ProComponent,
     StatsComponent,
     CguComponent,
+    BlogComponent,
   ],
   imports: [
     CommonModule,
@@ -53,14 +56,16 @@ registerLocaleData(localeFr, 'fr');
       { path: 'qui-sommes-nous', component: AboutComponent },
       { path: 'vous-êtes-un-professionnel', component: ProComponent },
       { path: 'delai-de-retractation', component: RetractationComponent },
-      { path: 'conditions-generales-utilisation', component: CguComponent }
+      { path: 'conditions-generales-utilisation', component: CguComponent },
+      { path: 'blog/:year/:month/:day/:article', component: BlogComponent }
     ], {scrollPositionRestoration: 'top'}),
     ReportModule,
     BrowserModule,
     BrowserAnimationsModule,
     LoginModule,
     SecuredModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    MarkdownModule.forRoot(),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
