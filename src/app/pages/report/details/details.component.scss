@@ -15,6 +15,10 @@ textarea {
   text-decoration: none;
 }
 
+i.blue {
+  color: $blue;
+}
+
 .notification {
 
   &.success {
