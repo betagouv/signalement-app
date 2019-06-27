@@ -234,6 +234,9 @@ export class CompanyComponent implements OnInit {
           this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.noResult);
           this.loadingBySiretError = true;
         }
+      },
+      error => {
+        this.loading = false;
       });
     }
   }
