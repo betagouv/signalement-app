@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { Company, CompanySearchResult } from '../../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AddressService } from '../../../services/address.service';
-import { CompleterItem, RemoteData } from 'ng2-completer';
 import {
   AnalyticsService,
   CompanyEventActions,
@@ -14,6 +12,7 @@ import {
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-company',
@@ -31,26 +30,27 @@ export class CompanyComponent implements OnInit {
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
 
-  companyForm: FormGroup;
-  nameCtrl: FormControl;
-  addressCtrl: FormControl;
-  addressCtrlPostalCode: string;
+  siretForm: FormGroup;
+  siretCtrl: FormControl;
 
   companies: Company[];
   loading: boolean;
   searchWarning: string;
   searchError: string;
+  loadingBySiretError: boolean;
 
   showErrors: boolean;
 
-  addressData: RemoteData;
+  scriptElement;
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
-              private addressService: AddressService,
-              private analyticsService: AnalyticsService) { }
+              private analyticsService: AnalyticsService,
+              private renderer: Renderer2,
+              public elementRef: ElementRef) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -74,20 +74,17 @@ export class CompanyComponent implements OnInit {
     });
   }
 
-  editCompany() {
+  searchBySiret() {
     this.showErrors = false;
-    this.nameCtrl = this.formBuilder.control('', Validators.required);
-    this.addressCtrl = this.formBuilder.control('', Validators.required);
-    this.addressCtrlPostalCode = '';
-    this.companyForm = this.formBuilder.group({
-      name: this.nameCtrl,
-      address: this.addressCtrl,
+    this.siretCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{14}')]));
+    this.siretForm = this.formBuilder.group({
+      siret: this.siretCtrl,
     });
-    this.addressData = this.addressService.addressData;
+    this.displayLiveChat();
   }
 
   initSearch() {
-    this.companyForm = null;
+    this.siretForm = null;
     this.companies = [];
     this.searchWarning = '';
     this.searchError = '';
@@ -138,8 +135,8 @@ export class CompanyComponent implements OnInit {
             }
           );
         }, (error) => {
-           this.loading = false;
-           this.showErrors = true;
+          this.loading = false;
+          this.showErrors = true;
         }, options);
       } else {
         this.loading = false;
@@ -173,7 +170,7 @@ export class CompanyComponent implements OnInit {
             this.treatCaseError();
           }
         );
-       }
+      }
     }
   }
 
@@ -210,41 +207,64 @@ export class CompanyComponent implements OnInit {
   selectCompany(company: Company) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
     this.report.company = company;
+    this.destroyLiveChat();
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
-  submitCompanyForm() {
-    if (!this.companyForm.valid) {
+  submitSiretForm() {
+    this.loadingBySiretError = false;
+    if (!this.siretForm.valid) {
       this.showErrors = true;
     } else {
-      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.manualEntry);
-      this.selectCompany(
-        Object.assign(
-          new Company(),
-          {
-            name: this.nameCtrl.value,
-            line1: this.nameCtrl.value,
-            line2: this.addressCtrl.value,
-            postalCode: this.addressCtrlPostalCode
+      this.loading = true;
+      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, this.siretCtrl.value);
+      this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
+      company => {
+        this.loading = false;
+        if (company) {
+          this.destroyLiveChat();
+          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.singleResult);
+          this.report.company = company;
+          this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+          if (isPlatformBrowser(this.platformId)) {
+            window.scrollTo(0, 0);
           }
-        )
-      );
-    }
-  }
-
-  selectAddress(selected: CompleterItem) {
-    this.addressCtrlPostalCode = '';
-    if (selected) {
-      this.addressCtrlPostalCode = selected.originalObject.postcode;
+        } else {
+          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.noResult);
+          this.loadingBySiretError = true;
+        }
+      });
     }
   }
 
   changeCompany() {
     this.report.company = undefined;
+    this.siretForm = undefined;
+    this.companies = [];
+    this.showErrors = false;
   }
 
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
+  }
+
+  displayLiveChat() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.scriptElement = this.renderer.createElement('script');
+      this.renderer.setAttribute(this.scriptElement, 'src', 'https://signalconso.rocket.chat/packages/rocketchat_livechat/assets/rocketchat-livechat.min.js?_=201702160944');
+      this.renderer.setAttribute(this.scriptElement, 'async', 'true');
+      this.renderer.appendChild(this.elementRef.nativeElement, this.scriptElement);
+      window['RocketChat'] = (c => window['RocketChat']._.push(c));
+      window['RocketChat']._ = [];
+      window['RocketChat'].url = 'https://signalconso.rocket.chat/livechat';
+    }
+  }
+
+  destroyLiveChat() {
+    if (isPlatformBrowser(this.platformId) && this.scriptElement) {
+      document.getElementsByClassName('rocketchat-widget')[0].remove();
+      this.renderer.removeChild(this.elementRef.nativeElement, this.scriptElement);
+    }
   }
 }

@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { AddressService } from '../../../services/address.service';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Report, Step } from '../../../model/Report';
@@ -22,7 +21,6 @@ describe('CompanyComponent', () => {
   let component: CompanyComponent;
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
-  let addressService: AddressService;
   let reportStorageService: ReportStorageService;
 
   beforeEach(async(() => {
@@ -48,11 +46,9 @@ describe('CompanyComponent', () => {
 
   beforeEach(() => {
     companyService = TestBed.get(CompanyService);
-    addressService = TestBed.get(AddressService);
     reportStorageService = TestBed.get(ReportStorageService);
     reportStorageService.reportInProgess = of(new Report());
 
-    spyOn(addressService, 'addressData').and.returnValue(of([]));
     fixture = TestBed.createComponent(CompanyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -70,7 +66,7 @@ describe('CompanyComponent', () => {
     expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
     expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
     expect(nativeElement.querySelector('form#aroundForm')).toBeNull();
-    expect(nativeElement.querySelector('form#companyForm')).toBeNull();
+    expect(nativeElement.querySelector('form#siretForm')).toBeNull();
   });
 
   describe('search companies', () => {
@@ -160,23 +156,22 @@ describe('CompanyComponent', () => {
     });
 
     it('enable to display a form to enter manually company information', () => {
-      component.editCompany();
+      component.searchBySiret();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('form#companyForm')).not.toBeNull();
+      expect(nativeElement.querySelector('form#siretForm')).not.toBeNull();
     });
 
   });
 
-  describe('submitting company form', () => {
+  describe('submitting siret form', () => {
 
     it('should display errors when occurs', () => {
-      component.editCompany();
-      component.nameCtrl.setValue('');
-      component.addressCtrl.setValue('');
+      component.searchBySiret();
+      component.siretCtrl.setValue('123');
 
-      component.submitCompanyForm();
+      component.submitSiretForm();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -184,30 +179,31 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
-    it ('should change the shared report with a report where company contains form inputs', () => {
+    it ('should change the shared report with the company found by siret', () => {
 
-      component.editCompany();
-      component.nameCtrl.setValue('Mon entreprise');
-      component.addressCtrl.setValue('Mon adresse dans ma ville');
-      component.addressCtrlPostalCode = '87270';
-      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button#submitCompanyForm').click();
-      fixture.detectChanges();
-
-      const companyExpected = Object.assign(
+      const companyBySiret = Object.assign(
         new Company(),
         {
           name: 'Mon entreprise',
           line1: 'Mon entreprise',
           line2: 'Mon adresse dans ma ville',
-          postalCode: '87270'
+          postalCode: '87270',
+          siret: '12345678901234'
         }
       );
+      spyOn(companyService, 'searchCompaniesBySiret').and.returnValue(of(companyBySiret));
+
+      component.searchBySiret();
+      component.siretCtrl.setValue('12345678901234');
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('button#submitSiretForm').click();
+      fixture.detectChanges();
+
       const reportExpected = new Report();
-      reportExpected.company = companyExpected;
+      reportExpected.company = companyBySiret;
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Company);
 

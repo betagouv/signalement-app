@@ -102,7 +102,7 @@
         </p>
 
         <div class="notification info mt-4">
-          Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+          Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="searchBySiret()">saisir l'établissement manuellement</span>.
         </div>
       </div>
 
@@ -110,55 +110,42 @@
         <p>
           {{searchWarning}}
         </p>
-        Veuillez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+        Veuillez modifier votre recherche ou <span class="link" (click)="searchBySiret()">saisir l'établissement manuellement</span>.
       </div>
 
       <div class="notification error mt-4" *ngIf="searchError">
         <p>
           {{searchError}}
         </p>
-        Veuillez réessayer ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
+        Veuillez réessayer ou <span class="link" (click)="searchBySiret()">saisir l'établissement manuellement</span>.
       </div>
 
-      <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm" *ngIf="companyForm">
+      <form [formGroup]="siretForm" (submit)="submitSiretForm()" id="siretForm" *ngIf="siretForm">
 
         <div class="form__group">
-          <label for="companyName" [class]="hasError(nameCtrl) ? 'error' : ''">
-            Nom de l'établissement <span class="error">*</span>
+          <label for="siret" [class]="hasError(siretCtrl) ? 'error' : ''">
+            Numéro Siret de l'établissement <span class="error">*</span>
           </label>
-          <input formControlName="name" type="text" id="companyName" placeholder="Nom de l'établissement">
+          <input formControlName="siret" type="text" id="siret" placeholder="Numéro Siret de l'établissement">
         </div>
 
-        <div class="form__group">
-          <label for="companyAddress" [class]="hasError(addressCtrl) ? 'error' : ''">
-            Adresse de l'établissement <span class="error">*</span>
-          </label>
-          <ng2-completer
-            [datasource]="addressData"
-            formControlName="address"
-            inputName="address"
-            id="companyAddress"
-            textSearching=""
-            textNoResults="Adresse non trouvée"
-            clearUnselected="true"
-            minSearchLength="1"
-            placeholder="numéro, voie, code postal, ville, ..."
-            (selected)="selectAddress($event)">
-          </ng2-completer>
-        </div>
-
-        <div class="notification error mt-3" *ngIf="showErrors && companyForm.invalid">
-          <span *ngIf="nameCtrl.hasError('required')">
-            Veuillez renseigner le nom de l'établissement.<br />
+        <div class="notification error mt-3" *ngIf="showErrors && siretForm.invalid">
+          <span *ngIf="siretCtrl.hasError('required')">
+            Veuillez renseigner le numéro Siret de l'établissement.<br />
           </span>
-          <span *ngIf="addressCtrl.hasError('required')">
-            Veuillez renseigner l'adresse de l'établissement.
+          <span *ngIf="siretCtrl.hasError('pattern')">
+            Le numéro Siret doit être composé de 14 chiffres.
+          </span>
+        </div>
+        <div class="notification error mt-3" *ngIf="loadingBySiretError">
+          <span>
+            Aucun établissement ne correspond à ce numéro Siret.
           </span>
         </div>
         <hr />
-        <button type="submit" class="btn btn-lg btn-primary" id="submitCompanyForm">
-          <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
-          S'identifier
+        <button type="submit" class="btn btn-lg btn-primary" id="submitSiretForm">
+          <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
+          Rechercher
         </button>
 
       </form>
