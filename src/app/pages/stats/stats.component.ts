@@ -64,8 +64,8 @@ export class StatsComponent implements OnInit {
     const currentYear = (new Date()).getFullYear() - 2000;
     const months = ['jan.', 'fév.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
     return [
-      ...months.slice(currentMonth + 1).map(label => `${label} ${currentYear - 1}`),
-      ...months.slice(0, currentMonth + 1).map(label => `${label} ${currentYear}`)
+      ...months.slice(currentMonth).map(label => `${label} ${currentYear - 1}`),
+      ...months.slice(0, currentMonth).map(label => `${label} ${currentYear}`)
     ];
   }
 

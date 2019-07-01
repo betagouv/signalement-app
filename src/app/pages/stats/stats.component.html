@@ -19,40 +19,48 @@
         <div class="col-4 count stat">
           <h3>Signalements des 7 derniers jours</h3>
           {{ statistics?.reportsCount7Days }}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
           <h3>Signalements des 7 derniers jours en région</h3>
           {{ statistics?.reportsCount7DaysInRegion }}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
       <div class="row">
         <div class="col-4 count stat">
           <h3>Signalements des 30 derniers jours</h3>
           {{ statistics?.reportsCount30Days }}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
           <h3>Signalements des 30 derniers jours en région</h3>
           {{ statistics?.reportsCount30DaysInRegion }}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
       <div class="row">
         <div class="col-4 count stat">
           <h3>Signalements transmis</h3>
           {{ ! statistics ? "NA" : ((statistics.reportsCountSendedToPro / statistics.reportsCountInRegion) * 100).toFixed(0) + "%"}}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
           <h3>Promesses d'action</h3>
           {{ ! statistics ? "NA" : ((statistics.reportsCountPromise / statistics.reportsCountInRegion) * 100).toFixed(0) + "%" }}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
       <div class="row">
         <div class="col-4 count stat">
           <h3>Signalements sans SIRET</h3>
           {{ ! statistics ? "NA" : ((statistics.reportsCountWithoutSiret / statistics.reportsCount) * 100).toFixed(0) + "%"}}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
           <h3>Temps moyen d'envoi de signalement</h3>
           {{ ! statistics ? "NA" : statistics.reportsDurationsForEnvoiSignalement + "j" }}
+          <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
 
