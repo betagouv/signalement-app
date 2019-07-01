@@ -43,7 +43,8 @@ export class StatsComponent implements OnInit {
         series: [{
           data: this.getSeriesData(),
           type: 'line',
-          animationDuration: 5000
+          animationDuration: 5000,
+          smooth: true
         }],
         title: {
           text: 'Nombre de signalements / mois',
