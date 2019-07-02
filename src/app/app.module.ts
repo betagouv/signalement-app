@@ -56,7 +56,9 @@ registerLocaleData(localeFr, 'fr');
       { path: 'qui-sommes-nous', component: AboutComponent },
       { path: 'vous-êtes-un-professionnel', component: ProComponent },
       { path: 'delai-de-retractation', component: RetractationComponent },
-      { path: 'conditions-generales-utilisation', component: CguComponent },
+      { path: 'conditions-generales-utilisation', redirectTo: 'conditions-generales-utilisation/consommateur' },
+      { path: 'conditions-generales-utilisation/consommateur', component: CguComponent },
+      { path: 'conditions-generales-utilisation/professionnel', component: CguComponent },
       { path: 'blog/:year/:month/:day/:article', component: BlogComponent }
     ], {scrollPositionRestoration: 'top'}),
     ReportModule,
