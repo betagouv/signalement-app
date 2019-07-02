@@ -113,10 +113,10 @@ describe('StatsComponent', () => {
 
       const data = component.ngOnInit();
 
-      expect(component.chartOption.xAxis['data']).toEqual(
+      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
         [
-          'avr. 17', 'mai 17', 'juin 17', 'juil. 17', 'août 17', 'sept. 17',
-          'oct. 17', 'nov. 17', 'déc. 17', 'jan. 18', 'fév. 18', 'mars 18'
+          'mai 17', 'juin 17', 'juil. 17', 'août 17', 'sept. 17', 'oct. 17',
+          'nov. 17', 'déc. 17', 'jan. 18', 'fév. 18', 'mars 18', 'avr. 18'
         ]
       );
 
@@ -128,10 +128,10 @@ describe('StatsComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.chartOption.xAxis['data']).toEqual(
+      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
         [
-          'jan. 17', 'fév. 17', 'mars 17', 'avr. 17', 'mai 17', 'juin 17',
-          'juil. 17', 'août 17', 'sept. 17', 'oct. 17', 'nov. 17', 'déc. 17'
+          'fév. 17', 'mars 17', 'avr. 17', 'mai 17', 'juin 17', 'juil. 17',
+          'août 17', 'sept. 17', 'oct. 17', 'nov. 17', 'déc. 17', 'jan. 18'
         ]
       );
 
@@ -143,10 +143,10 @@ describe('StatsComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.chartOption.xAxis['data']).toEqual(
+      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
         [
-          'déc. 17', 'jan. 18', 'fév. 18', 'mars 18', 'avr. 18', 'mai 18',
-          'juin 18', 'juil. 18', 'août 18', 'sept. 18', 'oct. 18', 'nov. 18'
+          'jan. 18', 'fév. 18', 'mars 18', 'avr. 18', 'mai 18', 'juin 18',
+          'juil. 18', 'août 18', 'sept. 18', 'oct. 18', 'nov. 18', 'déc. 18'
         ]
       );
 
@@ -160,7 +160,7 @@ describe('StatsComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.chartOption.series[0]['data']).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0]);
+      expect(component.byMonthsChartOption.series[0]['data']).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0]);
     });
 
   });
