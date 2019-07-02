@@ -15,6 +15,31 @@ export class ReportsPerMonth {
   }
 }
 
+export class ReportsByCategory {
+  @JsonProperty('category')
+  category: string;
+  @JsonProperty('count')
+  count: number;
+
+  constructor() {
+    this.category = undefined;
+    this.count = undefined;
+  }
+
+}
+export class ReportsByRegion {
+  @JsonProperty('region')
+  region: string;
+  @JsonProperty('count')
+  count: number;
+
+  constructor() {
+    this.region = undefined;
+    this.count = undefined;
+  }
+
+}
+
 export class Statistics {
   @JsonProperty('reportsCount')
   reportsCount: number;
@@ -38,6 +63,10 @@ export class Statistics {
   reportsCountWithoutSiret: number;
   @JsonProperty('reportsDurationsForEnvoiSignalement')
   reportsDurationsForEnvoiSignalement: number;
+  @JsonProperty('reportsCountByCategoryList')
+  reportsCountByCategoryList: ReportsByCategory[];
+  @JsonProperty('reportsCountByRegionList')
+  reportsCountByRegionList: ReportsByRegion[];
 
   constructor() {
     this.reportsCount = undefined;
@@ -51,5 +80,7 @@ export class Statistics {
     this.reportsCountPromise = undefined;
     this.reportsCountWithoutSiret = undefined;
     this.reportsDurationsForEnvoiSignalement = undefined;
+    this.reportsCountByCategoryList = undefined;
+    this.reportsCountByRegionList = undefined;
   }
 }

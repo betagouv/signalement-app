@@ -8,14 +8,7 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
-      <div class="row" *ngIf="isPlatformBrowser()">
-        <div class="col-12 chart">
-          <div echarts [options]="chartOption"></div>
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-      </div>
-
-      <div class="row">
+      <div class="row" *ngIf="user && user.role === 'Admin'">
         <div class="col-4 count stat">
           <h3>Signalements des 7 derniers jours</h3>
           {{ statistics?.reportsCount7Days }}
@@ -27,7 +20,7 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="user && user.role === 'Admin'">
         <div class="col-4 count stat">
           <h3>Signalements des 30 derniers jours</h3>
           {{ statistics?.reportsCount30Days }}
@@ -51,7 +44,7 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="user && user.role === 'Admin'">
         <div class="col-4 count stat">
           <h3>Signalements sans SIRET</h3>
           {{ ! statistics ? "NA" : ((statistics.reportsCountWithoutSiret / statistics.reportsCount) * 100).toFixed(0) + "%"}}
@@ -63,6 +56,27 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
+      <hr>
+      <div class="row" *ngIf="isPlatformBrowser()">
+        <div class="col-12 chart">
+            <div echarts [options]="byMonthsChartOption"></div>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </div>
+        <hr>
+        <div class="row mt-4" *ngIf="isPlatformBrowser()">
+          <div class="col-12 chart">
+            <div echarts [options]="byCategoriesChartOption"></div>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </div>
+        <hr>
+        <div class="row mt-4" *ngIf="isPlatformBrowser() && user && user.role === 'Admin'">
+          <div class="col-12 chart">
+            <div echarts [options]="byRegionsChartOption"></div>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </div>
 
     </section>
   </div>
