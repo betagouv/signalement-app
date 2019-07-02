@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Report, Step } from '../../../model/Report';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
@@ -7,13 +7,17 @@ import { FileUploaderService } from '../../../services/file-uploader.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
   styleUrls: ['./confirmation.component.scss']
 })
-export class ConfirmationComponent implements OnInit {
+export class ConfirmationComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -34,14 +38,21 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Confirmation;
-    this.reportStorageService.reportInProgess.subscribe(report => {
-      if (report) {
-        this.report = report;
-        this.initConfirmationForm();
-      } else {
-        this.reportRouterService.routeToFirstStep();
-      }
-    });
+    this.reportStorageService.reportInProgess
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(report => {
+        if (report) {
+          this.report = report;
+          this.initConfirmationForm();
+        } else {
+          this.reportRouterService.routeToFirstStep();
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   initConfirmationForm() {

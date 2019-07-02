@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { Company, CompanySearchResult } from '../../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,13 +13,17 @@ import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.scss']
 })
-export class CompanyComponent implements OnInit {
+export class CompanyComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -54,14 +58,21 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Company;
-    this.reportStorageService.reportInProgess.subscribe(report => {
-      if (report) {
-        this.report = report;
-        this.initSearchForm();
-      } else {
-        this.reportRouterService.routeToFirstStep();
-      }
-    });
+    this.reportStorageService.reportInProgess
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(report => {
+        if (report) {
+          this.report = report;
+          this.initSearchForm();
+        } else {
+          this.reportRouterService.routeToFirstStep();
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   initSearchForm() {
@@ -230,6 +241,7 @@ export class CompanyComponent implements OnInit {
           if (isPlatformBrowser(this.platformId)) {
             window.scrollTo(0, 0);
           }
+
         } else {
           this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.noResult);
           this.loadingBySiretError = true;
@@ -266,7 +278,10 @@ export class CompanyComponent implements OnInit {
 
   destroyLiveChat() {
     if (isPlatformBrowser(this.platformId) && this.scriptElement) {
-      document.getElementsByClassName('rocketchat-widget')[0].remove();
+      const rocketChatElement = document.getElementsByClassName('rocketchat-widget');
+      if (rocketChatElement && rocketChatElement.length) {
+        rocketChatElement[0].remove();
+      }
       this.renderer.removeChild(this.elementRef.nativeElement, this.scriptElement);
     }
   }

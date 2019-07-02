@@ -22,6 +22,7 @@ describe('CompanyComponent', () => {
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
   let reportStorageService: ReportStorageService;
+  let displayLiveChatSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -51,6 +52,7 @@ describe('CompanyComponent', () => {
 
     fixture = TestBed.createComponent(CompanyComponent);
     component = fixture.componentInstance;
+    displayLiveChatSpy = spyOn(component, 'displayLiveChat').and.callFake(() => {});
     fixture.detectChanges();
   });
 
@@ -155,12 +157,13 @@ describe('CompanyComponent', () => {
       expect(component.companies).toEqual(companySearchResult.companies);
     });
 
-    it('enable to display a form to enter manually company information', () => {
+    it('enable to display a form to enter manually company information and disply live chat', () => {
       component.searchBySiret();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('form#siretForm')).not.toBeNull();
+      expect(displayLiveChatSpy).toHaveBeenCalled();
     });
 
   });
@@ -192,13 +195,13 @@ describe('CompanyComponent', () => {
         }
       );
       spyOn(companyService, 'searchCompaniesBySiret').and.returnValue(of(companyBySiret));
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
       component.searchBySiret();
-      component.siretCtrl.setValue('12345678901234');
-      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
+      component.siretCtrl.setValue('12345678901234');
       nativeElement.querySelector('button#submitSiretForm').click();
       fixture.detectChanges();
 
