@@ -16,6 +16,11 @@
   }
 }
 
+li {
+  li + li {
+    padding-top: 0em;
+  }
+}
 
 
 :host /deep/ {

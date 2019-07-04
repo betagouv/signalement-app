@@ -28,22 +28,26 @@ export class CompanyComponent implements OnInit, OnDestroy {
   step: Step;
   report: Report;
 
-  around: boolean;
-
   searchForm: FormGroup;
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
-
-  siretForm: FormGroup;
-  siretCtrl: FormControl;
-
   companies: Company[];
-  loading: boolean;
-  searchWarning: string;
-  searchError: string;
-  loadingBySiretError: boolean;
 
   showErrors: boolean;
+  searchWarning: string;
+  searchError: string;
+
+  searchBySiretForm: FormGroup;
+  siretCtrl: FormControl;
+  companyBySiret: Company;
+
+  showErrorsBySiret: boolean;
+  searchBySiretWarning: string;
+  searchBySiretError: string;
+
+  loading: boolean;
+
+  bySiret = false;
 
   scriptElement;
 
@@ -64,6 +68,10 @@ export class CompanyComponent implements OnInit, OnDestroy {
         if (report) {
           this.report = report;
           this.initSearchForm();
+          this.initSearchBySiretForm();
+          if (!this.report.company) {
+            this.displayLiveChat();
+          }
         } else {
           this.reportRouterService.routeToFirstStep();
         }
@@ -73,10 +81,17 @@ export class CompanyComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.destroyLiveChat();
+  }
+
+  changeNavTab() {
+    this.bySiret = !this.bySiret;
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo(0, 0);
+    }
   }
 
   initSearchForm() {
-    this.around = false;
     this.searchCtrl = this.formBuilder.control('', Validators.required);
     this.searchPostalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
     this.searchForm = this.formBuilder.group({
@@ -85,103 +100,47 @@ export class CompanyComponent implements OnInit, OnDestroy {
     });
   }
 
-  searchBySiret() {
-    this.showErrors = false;
+  initSearchBySiretForm() {
     this.siretCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{14}')]));
-    this.siretForm = this.formBuilder.group({
+    this.searchBySiretForm = this.formBuilder.group({
       siret: this.siretCtrl,
     });
-    this.displayLiveChat();
   }
 
   initSearch() {
-    this.siretForm = null;
     this.companies = [];
     this.searchWarning = '';
     this.searchError = '';
   }
 
-  isAround() {
-    this.around = true;
-    this.showErrors = false;
-    this.initSearch();
-
-  }
-
-  isNotAround() {
-    this.around = false;
-    this.showErrors = false;
-    this.initSearch();
-  }
-
   searchCompany() {
-    if (this.around) {
-      this.showErrors = false;
+    if (!this.searchForm.valid) {
+      this.showErrors = true;
+    } else {
       this.initSearch();
       this.loading = true;
-      if (navigator.geolocation) {
-        const options = {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0
-        };
-        navigator.geolocation.getCurrentPosition((position) => {
-          const lat = position.coords.latitude;
-          const long = position.coords.longitude;
-          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.around);
-          this.companyService.getNearbyCompanies(lat, long).subscribe(
-            companySearchResult => {
-              this.loading = false;
-              if (companySearchResult.total === 0) {
-                this.treatCaseNoResult();
-              } else if (companySearchResult.total === 1) {
-                this.treatCaseSingleResult(companySearchResult);
-              } else {
-                this.treatCaseSeveralResults(companySearchResult);
-              }
-            },
-            error => {
-              this.loading = false;
-              this.treatCaseError();
-            }
-          );
-        }, (error) => {
+      this.analyticsService.trackEvent(
+        EventCategories.company,
+        CompanyEventActions.search,
+        this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
+      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
+        companySearchResult => {
           this.loading = false;
-          this.showErrors = true;
-        }, options);
-      } else {
-        this.loading = false;
-        this.showErrors = true;
-      }
-    } else {
-      if (!this.searchForm.valid) {
-        this.showErrors = true;
-      } else {
-        this.initSearch();
-        this.loading = true;
-        this.analyticsService.trackEvent(
-          EventCategories.company,
-          CompanyEventActions.search,
-          this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-        this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
-          companySearchResult => {
-            this.loading = false;
-            if (companySearchResult.total === 0) {
-              this.treatCaseNoResult();
-            } else if (companySearchResult.total === 1) {
-              this.treatCaseSingleResult(companySearchResult);
-            } else if (companySearchResult.total > MaxCompanyResult) {
-              this.treatCaseTooManyResults();
-            } else {
-              this.treatCaseSeveralResults(companySearchResult);
-            }
-          },
-          error => {
-            this.loading = false;
-            this.treatCaseError();
+          if (companySearchResult.total === 0) {
+            this.treatCaseNoResult();
+          } else if (companySearchResult.total === 1) {
+            this.treatCaseSingleResult(companySearchResult);
+          } else if (companySearchResult.total > MaxCompanyResult) {
+            this.treatCaseTooManyResults();
+          } else {
+            this.treatCaseSeveralResults(companySearchResult);
           }
-        );
-      }
+        },
+        () => {
+          this.loading = false;
+          this.treatCaseError();
+        }
+      );
     }
   }
 
@@ -206,7 +165,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   }
 
   treatCaseError() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
+    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.error);
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
@@ -218,56 +177,71 @@ export class CompanyComponent implements OnInit, OnDestroy {
   selectCompany(company: Company) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
     this.report.company = company;
-    this.destroyLiveChat();
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
-  submitSiretForm() {
-    this.loadingBySiretError = false;
-    if (!this.siretForm.valid) {
-      this.showErrors = true;
+  initSearchBySiret() {
+    this.companyBySiret = undefined;
+    this.searchBySiretWarning = '';
+    this.searchBySiretError = '';
+  }
+
+  searchCompanyBySiret() {
+    if (!this.searchBySiretForm.valid) {
+      this.showErrorsBySiret = true;
     } else {
+      this.initSearchBySiret();
       this.loading = true;
       this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, this.siretCtrl.value);
       this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
         if (company) {
-          this.destroyLiveChat();
-          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.singleResult);
-          this.report.company = company;
-          this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
-          if (isPlatformBrowser(this.platformId)) {
-            window.scrollTo(0, 0);
-          }
-
+          this.analyticsService.trackEvent(
+            EventCategories.company,
+            CompanyEventActions.searchBySiret,
+            CompanySearchEventNames.singleResult
+          );
+          this.companyBySiret = company;
         } else {
           this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.noResult);
-          this.loadingBySiretError = true;
+          this.searchBySiretWarning = 'Aucun établissement ne correspond à la recherche.';
         }
       },
-      error => {
-        this.loading = false;
+        () => {
+          this.loading = false;
+          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.error);
+          this.searchBySiretError = 'Une erreur technique s\'est produite.';
       });
     }
   }
 
   changeCompany() {
     this.report.company = undefined;
-    this.siretForm = undefined;
     this.companies = [];
+    this.companyBySiret = undefined;
     this.showErrors = false;
+    this.showErrorsBySiret = false;
+    this.displayLiveChat();
   }
 
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
   }
 
+  hasErrorBySiret(formControl: FormControl) {
+    return this.showErrorsBySiret && formControl.errors;
+  }
+
   displayLiveChat() {
     if (isPlatformBrowser(this.platformId)) {
       this.scriptElement = this.renderer.createElement('script');
-      this.renderer.setAttribute(this.scriptElement, 'src', 'https://signalconso.rocket.chat/packages/rocketchat_livechat/assets/rocketchat-livechat.min.js?_=201702160944');
+      this.renderer.setAttribute(
+        this.scriptElement,
+        'src',
+        'https://signalconso.rocket.chat/packages/rocketchat_livechat/assets/rocketchat-livechat.min.js?_=201702160944'
+      );
       this.renderer.setAttribute(this.scriptElement, 'async', 'true');
       this.renderer.appendChild(this.elementRef.nativeElement, this.scriptElement);
       window['RocketChat'] = (c => window['RocketChat']._.push(c));
