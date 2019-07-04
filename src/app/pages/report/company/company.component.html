@@ -4,18 +4,20 @@
     <form (submit)="selectCompany(report?.company)" *ngIf="report?.company; else noCompany">
       <div class="row">
         <div class="col-12 text-center">
-          <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
-          <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
-          <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
-          <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
-          <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
-          <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
-          <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          <div class="company-card">
+              <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
+              <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
+              <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+              <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+              <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+              <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+              <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-12 text-right">
-          <span class="link pointer" (click)="changeCompany()">Modifier</span>
+          <span class="link pointer" (click)="changeCompany()">Modifier</span>&nbsp;<i class="material-icons md-18 edit" alt="Icône crayon" title="bouton modifier le professionnel">edit</i>
         </div>
       </div>
       <hr />
@@ -113,7 +115,7 @@
 
         <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm" *ngIf="searchBySiretForm">
 
-          <div class="notification info">
+          <div class="notification info-siret">
             <p>
               Le SIRET est un numéro composé de 14 chiffres identifiant le professionnel concerné.
               Signalconso en a besoin pour le contacter et informer la répression des fraudes.
@@ -186,7 +188,7 @@
             <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
               Numéro Siret de l'établissement <span class="error">*</span>
             </label>
-            <input formControlName="siret" type="text" id="siret" placeholder="Numéro Siret de l'établissement">
+            <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010">
           </div>
 
           <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">
