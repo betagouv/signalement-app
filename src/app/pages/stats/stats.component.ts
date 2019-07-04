@@ -96,6 +96,7 @@ export class StatsComponent implements OnInit {
         legend: {
             orient: 'vertical',
             left: 'left',
+            top: 25,
             data: this.statistics.reportsCountByCategoryList.map(s => s.category)
         },
         series : [
