@@ -143,9 +143,17 @@
             clearUnselected="true"
             minSearchLength="1"
             placeholder="numéro, voie, code postal, ville, ..."
+            (keydown)="erasePostalCode()"
             (selected)="selectAddress($event)">
           </ng2-completer>
         </div>
+
+        <div class="notification warning mt-4" *ngIf="searchWarningReworked">
+          <p>
+            {{searchWarningReworked}}
+          </p>
+        </div>
+
 
         <div class="notification error mt-3" *ngIf="showErrors && companyForm.invalid">
           <span *ngIf="nameCtrl.hasError('required')">

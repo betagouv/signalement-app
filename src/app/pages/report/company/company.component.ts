@@ -39,6 +39,7 @@ export class CompanyComponent implements OnInit {
   companies: Company[];
   loading: boolean;
   searchWarning: string;
+  searchWarningReworked: string;
   searchError: string;
 
   showErrors: boolean;
@@ -90,6 +91,7 @@ export class CompanyComponent implements OnInit {
     this.companyForm = null;
     this.companies = [];
     this.searchWarning = '';
+    this.searchWarningReworked = '';
     this.searchError = '';
   }
 
@@ -218,18 +220,24 @@ export class CompanyComponent implements OnInit {
     if (!this.companyForm.valid) {
       this.showErrors = true;
     } else {
-      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.manualEntry);
-      this.selectCompany(
-        Object.assign(
-          new Company(),
-          {
-            name: this.nameCtrl.value,
-            line1: this.nameCtrl.value,
-            line2: this.addressCtrl.value,
-            postalCode: this.addressCtrlPostalCode
-          }
-        )
-      );
+      if (!this.addressCtrlPostalCode) {
+        this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.manualEntryReworked);
+        this.searchWarning = '';
+        this.searchWarningReworked = `L\'adresse ${this.addressCtrl.value} n\'est pas reconnue.`;
+      } else {
+        this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.manualEntry);
+        this.selectCompany(
+          Object.assign(
+            new Company(),
+            {
+              name: this.nameCtrl.value,
+              line1: this.nameCtrl.value,
+              line2: this.addressCtrl.value,
+              postalCode: this.addressCtrlPostalCode
+            }
+          )
+        );
+      }
     }
   }
 
@@ -238,6 +246,11 @@ export class CompanyComponent implements OnInit {
     if (selected) {
       this.addressCtrlPostalCode = selected.originalObject.postcode;
     }
+  }
+
+  erasePostalCode() {
+    this.addressCtrlPostalCode = '';
+    this.searchWarningReworked = '';
   }
 
   changeCompany() {
