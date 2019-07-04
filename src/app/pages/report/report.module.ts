@@ -22,19 +22,32 @@ import { ReportPaths } from '../../services/report-router.service';
 import { RetractationComponent } from '../static/retractation/retractation.component';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
+import { deserialize } from 'json-typescript-mapper';
+import { AnomalyList } from '../../model/Anomaly';
+import anomalies from '../../../assets/data/anomalies.json';
 
 defineLocale('fr', frLocale);
 
-const routes: Routes = [
-  { path: '', component: CategoryComponent },
-  { path: ReportPaths.Information, component: InformationComponent },
-  { path: ReportPaths.Problem, component: ProblemComponent },
-  { path: ReportPaths.Details, component: DetailsComponent },
-  { path: ReportPaths.Company, component: CompanyComponent },
-  { path: ReportPaths.Consumer, component: ConsumerComponent },
-  { path: ReportPaths.Confirmation, component: ConfirmationComponent },
-  { path: ReportPaths.Acknowledgment, component: AcknowledgmentComponent }
-];
+const routes: Routes = deserialize(AnomalyList, anomalies).list
+  .map(anomaly => {
+    if (anomaly.information) {
+      return [
+        { path: anomaly.path, component: InformationComponent },
+        { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent }
+      ];
+    } else {
+      return [
+        { path: anomaly.path, component: ProblemComponent },
+        { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent },
+        { path: `${anomaly.path}/${ReportPaths.Problem}`, component: ProblemComponent },
+        { path: `${anomaly.path}/${ReportPaths.Details}`, component: DetailsComponent },
+        { path: `${anomaly.path}/${ReportPaths.Company}`, component: CompanyComponent },
+        { path: `${anomaly.path}/${ReportPaths.Consumer}`, component: ConsumerComponent },
+        { path: `${anomaly.path}/${ReportPaths.Confirmation}`, component: ConfirmationComponent },
+        { path: `${anomaly.path}/${ReportPaths.Acknowledgment}`, component: AcknowledgmentComponent }
+      ];
+    }
+  }).reduce((r1, r2) => [...r1, ...r2], [{ path: '', component: CategoryComponent }]);
 
 @NgModule({
   declarations: [

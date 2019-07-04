@@ -2,6 +2,7 @@
 list:
   - category: Pratique d'hygiène
     categoryId: HYG
+    path: pratique-d-hygiene
     description: Locaux sales, présence de rat, rupture de la chaîne du froid...
     rank: 1
     icon: icon_hygien.png
@@ -122,6 +123,7 @@ list:
       - title: Autre problème d'hygiène
   - category: Nourriture et boissons
     categoryId: NOURR
+    path: nourriture-et-boissons
     description: Produit périmé, emballage trompeur, problème de quantité...
     rank: 2
     withInternetPurchase: true
@@ -586,6 +588,7 @@ list:
       - title: Autre problème de nourriture
   - category: Matériel et objets
     categoryId: MATOS
+    path: materiel-et-objets
     description: Problème avec une notice ou un appareil...
     rank: 3
     withInternetPurchase: true
@@ -738,6 +741,7 @@ list:
       - title: Autre problème de matériel
   - category: Intoxication alimentaire
     categoryId: INTOX
+    path: intoxication-alimentaire
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
     rank: 4
     icon: icon_disease.png
@@ -749,6 +753,7 @@ list:
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
   - category: Prix / Paiement
     categoryId: PRIX
+    path: prix-et-paiement
     description: Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...
     rank: 5
     withInternetPurchase: true
@@ -905,6 +910,7 @@ list:
       - title: Problème de facture/ticket de caisse
   - category: Publicité
     categoryId: PUB
+    path: publicite
     description: Information trompeuse, produit en promotion pas disponible...
     rank: 6
     withInternetPurchase: true
@@ -1014,6 +1020,7 @@ list:
         fileLabel: Photo(s) si possible
   - category: Services après-vente
     categoryId: SERACH
+    path: services-apres-vente
     description: Colis non reçu, problème de garantie constructeur, hotline injoignable,...
     rank: 7
     withInternetPurchase: true
@@ -1316,6 +1323,7 @@ list:
       - title: Autre problème de service après-vente
   - category: Achat sur internet
     categoryId: INTERNET
+    path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
     rank: 8
     icon: email-24px.svg
@@ -1333,12 +1341,15 @@ list:
           answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
   - category: Refus de servir/ vendre
     categoryId: REFSRV
+    path: refus-de-servir
     rank: 102
   - category: Chien d'assistance refusé
     categoryId: CHREF
+    path: chien-d-assistance-refuse
     rank: 103
   - category: Travail au noir
     categoryId: TNOIR
+    path: travail-au-noir
     hidden: true
     rank: 104
     breadcrumbTitle: Vous souhaitez signaler un cas de travail au noir&#160;?

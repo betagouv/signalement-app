@@ -6,6 +6,8 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-problem',
@@ -21,15 +23,30 @@ export class ProblemComponent implements OnInit {
   showErrors: boolean;
 
   constructor(public formBuilder: FormBuilder,
-            private anomalyService: AnomalyService,
-            private reportStorageService: ReportStorageService,
-            private reportRouterService: ReportRouterService,
-            private analyticsService: AnalyticsService) { }
+              private anomalyService: AnomalyService,
+              private reportStorageService: ReportStorageService,
+              private reportRouterService: ReportRouterService,
+              private analyticsService: AnalyticsService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.step = Step.Problem;
-    this.reportStorageService.reportInProgess.subscribe(report => {
-      if (report && report.category) {
+
+    this.activatedRoute.url.pipe(
+      switchMap(
+        url => {
+          const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path)
+          if (anomaly) {
+            this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
+            this.report = new Report();
+            this.report.category = anomaly.category;
+            this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+          }
+          return this.reportStorageService.reportInProgess;
+        }
+      )
+    ).subscribe(report => {
+      if (report) {
         this.report = report;
         this.initAnomalyFromReport();
       } else {

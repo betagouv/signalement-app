@@ -6,13 +6,13 @@ import { ReportStorageService } from './report-storage.service';
 
 export enum ReportPaths {
   Category = '',
-  Problem = 'signalement/le-probleme',
-  Details = 'signalement/la-description',
-  Company = 'signalement/le-commerçant',
-  Consumer = 'signalement/le-consommateur',
-  Confirmation = 'signalement/confirmation',
-  Acknowledgment = 'signalement/accuse-de-reception',
-  Information = 'signalement/information'
+  Problem = 'le-probleme',
+  Details = 'la-description',
+  Company = 'le-commerçant',
+  Consumer = 'le-consommateur',
+  Confirmation = 'confirmation',
+  Acknowledgment = 'accuse-de-reception',
+  Information = 'information'
 }
 
 @Injectable({
@@ -53,7 +53,12 @@ export class ReportRouterService {
   }
 
   private getRouteFromStep(step: Step) {
-    return [ReportPaths[step]];
+    const route = [];
+    if (step !== Step.Category) {
+      route.push(this.anomalyService.getAnomalyByCategory(this.report.category).path);
+    }
+    route.push(ReportPaths[step]);
+    return route;
   }
 
   nextStep(currentStep: Step) {
