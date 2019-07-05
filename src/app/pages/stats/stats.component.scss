@@ -15,7 +15,7 @@
 
 .count {
   text-align: center;
-  font-size: 90px;
+  font-size: 70px;
   line-height: 90px;
   font-weight: bold;
   color: $primary;
@@ -28,3 +28,49 @@
     font-weight: bolder;
   }
 }
+
+.dark-grey {
+  color: $darker-grey;
+  vertical-align: top !important;
+}
+
+@media (max-width: 575.98px) {
+  .count {
+    text-align: center;
+    font-size: 40px;
+    line-height: 90px;
+    font-weight: bold;
+    color: $primary;
+    padding: 0.5em 0.25em;
+    margin-bottom: 0.5em;
+    min-height: 150px;
+
+    h3 {
+      color: $darker-grey;
+      font-weight: bolder;
+      font-size: 20px !important;
+    }
+  }
+
+}
+
+@media (max-width: 400px) {
+  .count {
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: bold;
+    color: $primary;
+    padding: 0.5em 0.25em;
+    margin-bottom: 0.5em;
+    min-height: 150px;
+
+    h3 {
+      color: $darker-grey;
+      font-weight: bolder;
+      font-size: 17px !important;
+    }
+  }
+
+}
+
