@@ -30,8 +30,8 @@
     <ng-template #noCompany>
 
       <nav class="nav nav-tabs nav-justified">
-        <a class="nav-item nav-link" (click)="changeNavTab()" [ngClass]="{'active': !bySiret}">Recherche par nom</a>
-        <a class="nav-item nav-link" (click)="changeNavTab()" [ngClass]="{'active': bySiret}">Recherche par Siret</a>
+        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': !bySiret}">Recherche par nom</a>
+        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': bySiret}">Recherche par Siret</a>
       </nav>
 
       <ng-container *ngIf="!bySiret; else searchBySiret">
