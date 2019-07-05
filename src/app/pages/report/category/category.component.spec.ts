@@ -8,7 +8,7 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { Anomaly } from '../../../model/Anomaly';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { ReportPaths } from '../../../services/report-router.service';
+import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
 import { AlertModule } from 'ngx-bootstrap';
 
 describe('CategoryComponent', () => {
@@ -18,6 +18,7 @@ describe('CategoryComponent', () => {
   let anomalyService: AnomalyService;
   let location: Location;
   let router: Router;
+  let reportRouterService: ReportRouterService;
 
   const primaryAnomaly1 = Object.assign(new Anomaly(), {
     category: 'category1',
@@ -58,6 +59,7 @@ describe('CategoryComponent', () => {
     location = TestBed.get(Location);
     router = TestBed.get(Router);
     anomalyService = TestBed.get(AnomalyService);
+    reportRouterService = TestBed.get(ReportRouterService);
     spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
 
     fixture = TestBed.createComponent(CategoryComponent);
@@ -72,15 +74,6 @@ describe('CategoryComponent', () => {
   it('should initially display only primary categories', () => {
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelectorAll('.category').length).toEqual(2);
-  });
-
-  it('should route to information page when a category with information is selected', () => {
-    const routerSpy = spyOn(router, 'navigate');
-    const nativeElement = fixture.nativeElement;
-    nativeElement.querySelectorAll('.category')[1].click();
-    fixture.detectChanges();
-
-    expect(routerSpy).toHaveBeenCalledWith([ReportPaths.Information]);
   });
 
   it('should route to information page when a category with information is selected', () => {

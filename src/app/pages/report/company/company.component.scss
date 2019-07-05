@@ -7,7 +7,7 @@
   padding-right: 0.5em;
   cursor: pointer;
   transition: all .2s ease-in-out;
-  
+
   @media #{$larger-than-tablet} {
     &:hover {
       transform: scale(1.1);
@@ -16,6 +16,11 @@
   }
 }
 
+li {
+  li + li {
+    padding-top: 0em;
+  }
+}
 
 
 :host /deep/ {
@@ -28,4 +33,29 @@
   .completer-dropdown-holder div {
     width: 100%;
   }
+}
+
+.info-siret {
+  background: $white;
+  border: 1px solid $light-blue;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid $light-blue;
+}
+
+.nav-link {
+  border: 0;
+  color: $light-blue !important;
+}
+
+.company-card {
+  border: 1px solid $blue;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 10px
+}
+
+.edit {
+  color: $blue;
 }

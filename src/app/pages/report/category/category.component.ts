@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export enum CompanyType {
   Physical = 'Physical',
@@ -17,7 +19,9 @@ export enum CompanyType {
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -36,7 +40,9 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Category;
-    this.reportStorageService.reportInProgess.subscribe(report => this.report = report);
+    this.reportStorageService.reportInProgess
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(report => this.report = report);
     this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
@@ -44,6 +50,11 @@ export class CategoryComponent implements OnInit {
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   primaryCategoriesOrderByRank() {

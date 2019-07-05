@@ -8,7 +8,6 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 
@@ -47,7 +46,7 @@ describe('ConsumerComponent', () => {
 
   beforeEach(() => {
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.reportInProgess = of(new Report());
+    reportStorageService.changeReportInProgress(new Report());
 
     fixture = TestBed.createComponent(ConsumerComponent);
     component = fixture.componentInstance;
@@ -87,7 +86,7 @@ describe('ConsumerComponent', () => {
       const reportWithConsumer = new Report();
       reportWithConsumer.consumer = consumerFixture;
       reportWithConsumer.contactAgreement = contactAgreementFixture;
-      reportStorageService.reportInProgess = of(reportWithConsumer);
+      reportStorageService.changeReportInProgress(reportWithConsumer);
 
       component.ngOnInit();
       fixture.detectChanges();

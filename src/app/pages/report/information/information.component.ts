@@ -5,6 +5,8 @@ import { Information } from '../../../model/Anomaly';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-information',
@@ -12,6 +14,8 @@ import { ReportRouterService } from '../../../services/report-router.service';
   styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -25,15 +29,17 @@ export class InformationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Information;
-    this.reportStorageService.reportInProgess.subscribe(report => {
-      if (report) {
-        this.report = report;
-        this.initInformation();
-        this.reportStorageService.removeReportInProgressFromStorage();
-      } else {
-        this.reportRouterService.routeToFirstStep();
-      }
-    });
+    this.reportStorageService.reportInProgess
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(report => {
+        if (report) {
+          this.report = report;
+          this.initInformation();
+          this.reportStorageService.removeReportInProgressFromStorage();
+        } else {
+          this.reportRouterService.routeToFirstStep();
+        }
+      });
   }
 
   initInformation() {
@@ -54,6 +60,8 @@ export class InformationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.reportRouterService.routeBackward(this.step);
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   getReportLastSubcategory() {

@@ -4,18 +4,20 @@
     <form (submit)="selectCompany(report?.company)" *ngIf="report?.company; else noCompany">
       <div class="row">
         <div class="col-12 text-center">
-          <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
-          <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
-          <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
-          <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
-          <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
-          <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
-          <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          <div class="company-card">
+              <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
+              <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
+              <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
+              <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
+              <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
+              <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
+              <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-12 text-right">
-          <span class="link pointer" (click)="changeCompany()">Modifier</span>
+          <span class="link pointer" (click)="changeCompany()">Modifier</span>&nbsp;<i class="material-icons md-18 edit" alt="Icône crayon" title="bouton modifier le professionnel">edit</i>
         </div>
       </div>
       <hr />
@@ -28,140 +30,221 @@
     <ng-template #noCompany>
 
       <nav class="nav nav-tabs nav-justified">
-        <a class="nav-item nav-link" [routerLink]="" (click)="isNotAround()" [ngClass]="{'active': !around}">Recherche de l'établissement</a>
-        <a class="nav-item nav-link" [routerLink]="" (click)="isAround()" [ngClass]="{'active': around}">Recherche à proximité <i class="material-icons md-24" alt="Icône géolocalisation">location_on</i></a>
+        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': !bySiret}">Recherche par nom</a>
+        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': bySiret}">Recherche par Siret</a>
       </nav>
 
-      <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="!around && searchForm">
+      <ng-container *ngIf="!bySiret; else searchBySiret">
 
-        <div class="form__group mt-4">
-          <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'établissement <span class="error">*</span>
-          </label>
-          <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
-        </div>
-        <div class="form__group">
-          <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
-            Code postal <span class="error">*</span>
-          </label>
-          <div class="row">
-            <div class="col-12 col-sm-6">
-              <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110" />
+        <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
+
+          <div class="form__group mt-4">
+            <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'établissement <span class="error">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" />
+          </div>
+          <div class="form__group">
+            <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
+              Code postal <span class="error">*</span>
+            </label>
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110" />
+              </div>
             </div>
           </div>
-        </div>
-        <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
-          <span *ngIf="searchCtrl.hasError('required')">
-            Veuillez renseigner le nom de l'établissement.<br />
-          </span>
-          <span *ngIf="searchPostalCodeCtrl.hasError('required')">
-            Veuillez renseigner le code postal.
-          </span>
-          <span *ngIf="searchPostalCodeCtrl.hasError('pattern')">
-            Le code postal doit être composé de 5 chiffres.
-          </span>
-        </div>
-        <div class="my-5">
-          <button type="submit" class="btn btn-lg btn-primary" id="submitSearchForm">
-            <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
-            Rechercher
-          </button>
-        </div>
+          <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
+            <span *ngIf="searchCtrl.hasError('required')">
+              Veuillez renseigner le nom de l'établissement.<br />
+            </span>
+            <span *ngIf="searchPostalCodeCtrl.hasError('required')">
+              Veuillez renseigner le code postal.
+            </span>
+            <span *ngIf="searchPostalCodeCtrl.hasError('pattern')">
+              Le code postal doit être composé de 5 chiffres.
+            </span>
+          </div>
+          <hr />
+          <div class="my-5">
+            <button type="submit" class="btn btn-lg btn-primary" id="submitSearchForm">
+              <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
+              Rechercher
+            </button>
+          </div>
 
-      </form>
+        </form>
 
-      <form (submit)="searchCompany()" id="aroundForm" *ngIf="around">
+        <div *ngIf="companies && companies.length">
 
-        <div class="notification error mt-4" *ngIf="showErrors">
-            Veuillez nous autoriser à connaître votre position géographique.<br />Celle-ci ne sera utilisée que dans le cadre de cette recherche.
-        </div>
+          <p class="mt-4">
+            Veuillez sélectionner un établissement dans la liste ci-dessous :
+          </p>
 
-        <div class="text-center mt-4">
-          <button type="submit" class="btn btn-lg btn-primary" id="submitAroundForm">
-            <i class="material-icons md-24" alt="Icône du bouton autour de moi" title="bouton autour de moi">location_searching</i>
-            Rechercher autour de moi
-          </button>
-        </div>
+          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
+            <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
+            <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
+            <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
+            <span *ngIf="company.line3">{{company.line3}}<br /></span>
+            <span *ngIf="company.line4">{{company.line4}}<br /></span>
+            <span *ngIf="company.line5">{{company.line5}}<br /></span>
+            <span *ngIf="company.line6">{{company.line6}}<br /></span>
+            <span *ngIf="company.line7">{{company.line7}}<br /></span>
+          </p>
 
-      </form>
-
-      <div *ngIf="companies && companies.length">
-
-        <p class="mt-4">
-          Veuillez sélectionner un établissement dans la liste ci-dessous :
-        </p>
-
-        <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
-          <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
-          <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
-          <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
-          <span *ngIf="company.line3">{{company.line3}}<br /></span>
-          <span *ngIf="company.line4">{{company.line4}}<br /></span>
-          <span *ngIf="company.line5">{{company.line5}}<br /></span>
-          <span *ngIf="company.line6">{{company.line6}}<br /></span>
-          <span *ngIf="company.line7">{{company.line7}}<br /></span>
-        </p>
-
-        <div class="notification info mt-4">
-          Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
-        </div>
-      </div>
-
-      <div class="notification warning mt-4" *ngIf="searchWarning">
-        <p>
-          {{searchWarning}}
-        </p>
-        Veuillez modifier votre recherche ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
-      </div>
-
-      <div class="notification error mt-4" *ngIf="searchError">
-        <p>
-          {{searchError}}
-        </p>
-        Veuillez réessayer ou <span class="link" (click)="editCompany()">saisir l'établissement manuellement</span>.
-      </div>
-
-      <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm" *ngIf="companyForm">
-
-        <div class="form__group">
-          <label for="companyName" [class]="hasError(nameCtrl) ? 'error' : ''">
-            Nom de l'établissement <span class="error">*</span>
-          </label>
-          <input formControlName="name" type="text" id="companyName" placeholder="Nom de l'établissement">
+          <div class="notification info mt-4">
+            Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro Siret de l'établissement</span>.
+          </div>
         </div>
 
-        <div class="form__group">
-          <label for="companyAddress" [class]="hasError(addressCtrl) ? 'error' : ''">
-            Adresse de l'établissement <span class="error">*</span>
-          </label>
-          <ng2-completer
-            [datasource]="addressData"
-            formControlName="address"
-            inputName="address"
-            id="companyAddress"
-            textSearching=""
-            textNoResults="Adresse non trouvée"
-            clearUnselected="true"
-            minSearchLength="1"
-            placeholder="numéro, voie, code postal, ville, ..."
-            (selected)="selectAddress($event)">
-          </ng2-completer>
+        <div class="notification warning mt-4" *ngIf="searchWarning">
+          <p>
+            {{searchWarning}}
+          </p>
+          Veuillez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro Siret de l'établissement</span>.
         </div>
 
-        <div class="notification error mt-3" *ngIf="showErrors && companyForm.invalid">
-          <span *ngIf="nameCtrl.hasError('required')">
-            Veuillez renseigner le nom de l'établissement.<br />
-          </span>
-          <span *ngIf="addressCtrl.hasError('required')">
-            Veuillez renseigner l'adresse de l'établissement.
-          </span>
+        <div class="notification error mt-4" *ngIf="searchError">
+          <p>
+            {{searchError}}
+          </p>
+          Veuillez réessayer ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro Siret de l'établissement</span>.
         </div>
-        <hr />
-        <button type="submit" class="btn btn-lg btn-primary" id="submitCompanyForm">
-          <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
-          S'identifier
-        </button>
+      </ng-container>
 
-      </form>
+      <ng-template #searchBySiret>
+
+        <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm" *ngIf="searchBySiretForm">
+
+          <div class="notification info-siret">
+            <p>
+              Le SIRET est un numéro composé de 14 chiffres identifiant le professionnel concerné.
+              Signalconso en a besoin pour le contacter et informer la répression des fraudes.
+            </p>
+            <p>
+              <a data-toggle="collapse" href="#collapseHow">Comment retrouver un SIRET ?</a>
+            </p>
+            <ul class="collapse" id="collapseHow">
+              <li>
+                <a data-toggle="collapse" href="#collapseDoc">Le professionnel vous a remis un document ?</a>
+                <div class="collapse" id="collapseDoc">
+                  Vous pourrez probablement retrouver le SIRET sur :
+                  <ul>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseTicket">le ticket de carte bleue</a>
+                      <div class="collapse" id="collapseTicket">
+                        <div class="card card-body">
+                          Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le numéro à 14 chiffres qui se situe en principe entre l’adresse du professionnel et le montant de votre achat.
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseEstimate">un devis</a>
+                      <div class="collapse" id="collapseEstimate">
+                        <div class="card card-body">
+                          Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse du professionnel (généralement en haut à gauche).
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseContract">un contrat</a>
+                      <div class="collapse" id="collapseContract">
+                        <div class="card card-body">
+                          Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse du professionnel (généralement en haut à gauche).
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      Tout autre document ou échange avec le professionnel (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a data-toggle="collapse" href="#collapseNoDoc">Vous n’avez pas de documents émanants du professionnel ?</a>
+                <div class="collapse" id="collapseNoDoc">
+                  Faites une recherche en ligne sur :
+                  <ul>
+                    <li><a href="https://www.societe.com" target="_blank">https://www.societe.com</a></li>
+                    <li><a href="https://www.pagesjaunes.fr" target="_blank">https://www.pagesjaunes.fr</a></li>
+                    <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr">https://www.infogreffe.fr</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a data-toggle="collapse" href="#collapseNotFound">Vous n’avez pas trouvé le numéro SIRET sur le(s) document(s) listés ?</a>
+                <div class="collapse" id="collapseNotFound">
+                  Faites une recherche en ligne sur :
+                  <ul>
+                    <li><a href="https://www.societe.com" target="_blank">https://www.societe.com</a></li>
+                    <li><a href="https://www.pagesjaunes.fr" target="_blank">https://www.pagesjaunes.fr</a></li>
+                    <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr">https://www.infogreffe.fr</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form__group mt-4">
+            <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
+              Numéro Siret de l'établissement <span class="error">*</span>
+            </label>
+            <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010">
+          </div>
+
+          <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">
+            <span *ngIf="siretCtrl.hasError('required')">
+              Veuillez renseigner le numéro Siret de l'établissement.<br />
+            </span>
+            <span *ngIf="siretCtrl.hasError('pattern')">
+              Le numéro Siret doit être composé de 14 chiffres.
+            </span>
+          </div>
+          <hr />
+          <div class="my-5">
+            <button type="submit" class="btn btn-lg btn-primary" id="submitSiretForm">
+              <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
+              Rechercher
+            </button>
+          </div>
+
+        </form>
+
+        <div *ngIf="companyBySiret">
+
+          <p class="mt-4">
+            Veuillez cliquer sur l'établissement ci-dessous s'il correspond bien à l'établissement recherché :
+          </p>
+
+          <p class="company" (click)="selectCompanyFromResults(companyBySiret)">
+            <strong *ngIf="companyBySiret.line1">{{companyBySiret.line1}}<br /></strong>
+            <strong *ngIf="companyBySiret.line2">{{companyBySiret.line2}}<br /></strong>
+            <span *ngIf="companyBySiret.activityLabel">{{companyBySiret.activityLabel}}<br /></span>
+            <span *ngIf="companyBySiret.line3">{{companyBySiret.line3}}<br /></span>
+            <span *ngIf="companyBySiret.line4">{{companyBySiret.line4}}<br /></span>
+            <span *ngIf="companyBySiret.line5">{{companyBySiret.line5}}<br /></span>
+            <span *ngIf="companyBySiret.line6">{{companyBySiret.line6}}<br /></span>
+            <span *ngIf="companyBySiret.line7">{{companyBySiret.line7}}<br /></span>
+          </p>
+
+          <div class="notification info mt-4">
+            Si l'établissement n'est pas celui recherché, vous pouvez modifier votre recherche.
+          </div>
+        </div>
+
+        <div class="notification warning mt-4" *ngIf="searchBySiretWarning">
+          <p>
+            {{searchBySiretWarning}}
+          </p>
+          Veuillez modifier votre recherche.
+        </div>
+
+        <div class="notification error mt-4" *ngIf="searchBySiretError">
+          <p>
+            {{searchBySiretError}}
+          </p>
+          Veuillez réessayer.
+        </div>
+      </ng-template>
     </ng-template>
 
   </div>

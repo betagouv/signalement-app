@@ -7,3 +7,12 @@ hr {
 .blue {
   color: $blue;
 }
+
+.nav-tabs {
+  border-bottom: 1px solid $light-blue;
+}
+
+.nav-link {
+  border: 0;
+  color: $light-blue !important;
+}
