@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, HostListener } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { Statistics } from '../../model/Statistics';
@@ -21,6 +21,7 @@ export class StatsComponent implements OnInit {
   loading: boolean;
 
   user: User;
+  innerWidth: any;
 
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
@@ -33,7 +34,22 @@ export class StatsComponent implements OnInit {
     this.authenticationService.user.subscribe(user => {
       this.user = user;
     });
+    this.innerWidth = window.innerWidth;
 
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    this.setOptionnalLegend();
+  }
+
+  setOptionnalLegend() {
+    if (this.innerWidth < 850) {
+      this.byCategoriesChartOption = {...this.byCategoriesChartOption, legend: { ...this.byCategoriesChartOption.legend, show: false }};
+    } else {
+      this.byCategoriesChartOption = {...this.byCategoriesChartOption, legend: { ...this.byCategoriesChartOption.legend, show: true }};
+    }
   }
 
   loadStatistics() {
@@ -136,6 +152,8 @@ export class StatsComponent implements OnInit {
         ]
 
       }
+
+      this.setOptionnalLegend();
 
       const dataRegion = this.statistics.reportsCountByRegionList.map(s => s.count);
       const nbHorsRegion = this.statistics.reportsCount - dataRegion.reduce((acc, curr) => acc + curr, 0)
