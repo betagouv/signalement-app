@@ -22,13 +22,11 @@ import { ReportPaths } from '../../services/report-router.service';
 import { RetractationComponent } from '../static/retractation/retractation.component';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
-import { deserialize } from 'json-typescript-mapper';
-import { AnomalyList } from '../../model/Anomaly';
 import anomalies from '../../../assets/data/anomalies.json';
 
 defineLocale('fr', frLocale);
 
-const routes: Routes = deserialize(AnomalyList, anomalies).list
+const routes: Routes = anomalies.list
   .map(anomaly => {
     if (anomaly.information) {
       return [
