@@ -21,10 +21,12 @@ describe('CategoryComponent', () => {
 
   const primaryAnomaly1 = Object.assign(new Anomaly(), {
     category: 'category1',
+    path: 'path1',
     rank: 1
   });
   const primaryAnomalyWithInformation = Object.assign(new Anomaly(), {
     category: 'category2',
+    path: 'path2',
     rank: 2,
     information: {
       title: 'titre',
@@ -80,16 +82,7 @@ describe('CategoryComponent', () => {
     nativeElement.querySelectorAll('.category')[1].click();
     fixture.detectChanges();
 
-    expect(routerSpy).toHaveBeenCalledWith([ReportPaths.Information]);
-  });
-
-  it('should route to information page when a category with information is selected', () => {
-    const routerSpy = spyOn(router, 'navigate');
-    const nativeElement = fixture.nativeElement;
-    nativeElement.querySelectorAll('.category')[1].click();
-    fixture.detectChanges();
-
-    expect(routerSpy).toHaveBeenCalledWith([ReportPaths.Information]);
+    expect(routerSpy).toHaveBeenCalledWith([primaryAnomalyWithInformation.path, ReportPaths.Information]);
   });
 
   it('should route to details page when a category with no information is selected', () => {
@@ -98,7 +91,7 @@ describe('CategoryComponent', () => {
     nativeElement.querySelectorAll('.category')[0].click();
     fixture.detectChanges();
 
-    expect(routerSpy).toHaveBeenCalledWith([ReportPaths.Details]);
+    expect(routerSpy).toHaveBeenCalledWith([primaryAnomaly1.path, ReportPaths.Details]);
   });
 
 });

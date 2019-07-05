@@ -70,7 +70,6 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('description')
     this.step = Step.Details;
     this.reportStorageService.reportInProgess.subscribe(report => {
       if (report) {

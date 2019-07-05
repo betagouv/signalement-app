@@ -54,7 +54,7 @@ export class ReportRouterService {
 
   private getRouteFromStep(step: Step) {
     const route = [];
-    if (step !== Step.Category) {
+    if (step !== Step.Category && this.anomalyService.getAnomalyByCategory(this.report.category)) {
       route.push(this.anomalyService.getAnomalyByCategory(this.report.category).path);
     }
     route.push(ReportPaths[step]);
