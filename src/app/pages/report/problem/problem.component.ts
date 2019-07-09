@@ -8,6 +8,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-problem',
@@ -27,7 +28,8 @@ export class ProblemComponent implements OnInit {
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private meta: Meta) { }
 
   ngOnInit() {
     this.step = Step.Problem;
@@ -41,6 +43,7 @@ export class ProblemComponent implements OnInit {
             this.report = new Report();
             this.report.category = anomaly.category;
             this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+            this.meta.updateTag({ name: 'description', content: anomaly.description });
           }
           return this.reportStorageService.reportInProgess;
         }

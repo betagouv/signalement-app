@@ -18,34 +18,12 @@ import { Angulartics2Module } from 'angulartics2';
 import { CollapsableTextComponent } from '../../components/collapsable-text/collapsable-text.component';
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
-import { ReportPaths } from '../../services/report-router.service';
-import { RetractationComponent } from '../static/retractation/retractation.component';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
-import anomalies from '../../../assets/data/anomalies.json';
 
 defineLocale('fr', frLocale);
 
-const routes: Routes = anomalies.list
-  .map(anomaly => {
-    if (anomaly.information) {
-      return [
-        { path: anomaly.path, component: InformationComponent },
-        { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent }
-      ];
-    } else {
-      return [
-        { path: anomaly.path, component: ProblemComponent },
-        { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent },
-        { path: `${anomaly.path}/${ReportPaths.Problem}`, component: ProblemComponent },
-        { path: `${anomaly.path}/${ReportPaths.Details}`, component: DetailsComponent },
-        { path: `${anomaly.path}/${ReportPaths.Company}`, component: CompanyComponent },
-        { path: `${anomaly.path}/${ReportPaths.Consumer}`, component: ConsumerComponent },
-        { path: `${anomaly.path}/${ReportPaths.Confirmation}`, component: ConfirmationComponent },
-        { path: `${anomaly.path}/${ReportPaths.Acknowledgment}`, component: AcknowledgmentComponent }
-      ];
-    }
-  }).reduce((r1, r2) => [...r1, ...r2], [{ path: '', component: CategoryComponent }]);
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -58,12 +36,21 @@ const routes: Routes = anomalies.list
     ProblemComponent,
     CategoryComponent,
     InformationComponent,
-    RetractationComponent,
     AcknowledgmentComponent,
     CollapsableTextComponent,
     PrecedeByPipe,
     TruncatePipe,
     SubcategoryComponent,
+  ],
+  entryComponents: [
+    CategoryComponent,
+    InformationComponent,
+    ProblemComponent,
+    DetailsComponent,
+    ConsumerComponent,
+    CompanyComponent,
+    ConfirmationComponent,
+    AcknowledgmentComponent,
   ],
   imports: [
     CommonModule,
