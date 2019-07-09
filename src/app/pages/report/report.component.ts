@@ -35,7 +35,6 @@ export class ReportComponent implements OnInit {
         ...this.router.config.filter(route => route.component !== ReportComponent)
       ]
     );
-    console.log('routes', this.router.config)
     this.activatedRoute.url.subscribe(urls => {
       this.router.navigate( urls.map(url => url.path));
     });
