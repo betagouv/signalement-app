@@ -8,7 +8,7 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { Anomaly } from '../../../model/Anomaly';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { ReportPaths } from '../../../services/report-router.service';
+import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
 import { AlertModule } from 'ngx-bootstrap';
 
 describe('CategoryComponent', () => {
@@ -18,6 +18,7 @@ describe('CategoryComponent', () => {
   let anomalyService: AnomalyService;
   let location: Location;
   let router: Router;
+  let reportRouterService: ReportRouterService;
 
   const primaryAnomaly1 = Object.assign(new Anomaly(), {
     category: 'category1',
@@ -60,6 +61,7 @@ describe('CategoryComponent', () => {
     location = TestBed.get(Location);
     router = TestBed.get(Router);
     anomalyService = TestBed.get(AnomalyService);
+    reportRouterService = TestBed.get(ReportRouterService);
     spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
 
     fixture = TestBed.createComponent(CategoryComponent);

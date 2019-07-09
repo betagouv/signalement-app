@@ -751,7 +751,7 @@ list:
       actions:
         - question: Signaler un cas d'intoxication alimentaire&#160;?
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
-  - category: Prix / Paiement
+  - category: Prix et paiement
     categoryId: PRIX
     path: prix-et-paiement
     description: Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...

@@ -7,7 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { of } from 'rxjs';
 import { Report } from '../../../model/Report';
 import { RetractationComponent } from '../../static/retractation/retractation.component';
 import { ReportStorageService } from '../../../services/report-storage.service';
@@ -47,7 +46,7 @@ describe('InformationComponent', () => {
   beforeEach(() => {
     anomalyService = TestBed.get(AnomalyService);
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.reportInProgess = of(reportFixture);
+    reportStorageService.changeReportInProgress(reportFixture);
 
     fixture = TestBed.createComponent(InformationComponent);
     component = fixture.componentInstance;

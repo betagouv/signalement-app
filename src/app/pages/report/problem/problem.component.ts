@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
@@ -7,15 +7,18 @@ import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { Meta } from '@angular/platform-browser';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-problem',
   templateUrl: './problem.component.html',
   styleUrls: ['./problem.component.scss']
 })
-export class ProblemComponent implements OnInit {
+export class ProblemComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -35,6 +38,7 @@ export class ProblemComponent implements OnInit {
     this.step = Step.Problem;
 
     this.activatedRoute.url.pipe(
+      takeUntil(this.unsubscribe),
       switchMap(
         url => {
           const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path)
@@ -49,13 +53,18 @@ export class ProblemComponent implements OnInit {
         }
       )
     ).subscribe(report => {
-      if (report) {
+      if (report && report.category) {
         this.report = report;
         this.initAnomalyFromReport();
       } else {
         this.reportRouterService.routeToFirstStep();
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   initAnomalyFromReport() {
