@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BsModalRef, ModalModule } from 'ngx-bootstrap';
+import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
 
 describe('EventComponent', () => {
   let component: EventComponent;
@@ -13,7 +14,8 @@ describe('EventComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        EventComponent
+        EventComponent,
+        AppPermissionDirective,
       ],
       imports: [
         FormsModule,

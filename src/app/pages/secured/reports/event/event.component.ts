@@ -6,6 +6,8 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
 import { combineLatest } from 'rxjs';
 import { PlatformLocation } from '@angular/common';
+import { Permissions } from '../../../../model/AuthUser';
+import { AccountService } from '../../../../services/account.service';
 
 @Component({
   selector: 'app-event',
@@ -15,22 +17,26 @@ import { PlatformLocation } from '@angular/common';
 })
 export class EventComponent implements OnInit {
 
+  permissions = Permissions;
   eventForm: FormGroup;
   actionCtrl: FormControl;
   detailCtrl: FormControl;
   resultActionCtrl: FormControl;
   reportId: string;
+  siret: string;
   actionPros: ReportEventAction[];
   actionConsos: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
   loadingError: boolean;
+  activationDocumentUrl: string;
 
   constructor(public formBuilder: FormBuilder,
               public bsModalRef: BsModalRef,
               private eventService: EventService,
               private constantService: ConstantService,
+              private accountService: AccountService,
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
@@ -44,11 +50,13 @@ export class EventComponent implements OnInit {
     combineLatest(
       this.constantService.getActionPros(),
       this.constantService.getActionConsos(),
+      this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionConsos]) => {
+      ([actionPros, actionConsos, url]) => {
         this.loading = false;
         this.actionPros = actionPros;
         this.actionConsos = actionConsos;
+        this.activationDocumentUrl = url;
         this.initEventForm();
       },
       err => {
@@ -105,6 +113,11 @@ export class EventComponent implements OnInit {
     } else {
       this.eventForm.removeControl('resultAction');
     }
+  }
+
+  isActionEnvoiCourrier() {
+    return this.actionPros.find(a => a === this.actionCtrl.value)
+      && this.actionPros.find(a => a === this.actionCtrl.value).name === `Envoi d'un courrier`;
   }
 
 }

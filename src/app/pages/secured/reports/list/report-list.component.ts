@@ -201,7 +201,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.modalRef = this.modalService.show(
       EventComponent,
       {
-        initialState: {reportId: report.id}
+        initialState: {reportId: report.id, siret: report.company.siret}
       });
   }
 
