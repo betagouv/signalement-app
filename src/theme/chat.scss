@@ -1,0 +1,8 @@
+.rocketchat-widget {
+  max-height: 30%;
+  max-width: 100% !important;
+
+  &[data-state='opened'] {
+    min-height: 210px !important;
+  }
+}

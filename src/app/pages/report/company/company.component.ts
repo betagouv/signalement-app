@@ -81,7 +81,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
-    this.destroyLiveChat();
+    this.hideLiveChat();
   }
 
   changeNavTab() {
@@ -236,6 +236,17 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
   displayLiveChat() {
     if (isPlatformBrowser(this.platformId)) {
+      const rocketChatElement = document.getElementsByClassName('rocketchat-widget');
+      if (rocketChatElement && rocketChatElement.length) {
+        this.renderer.removeClass(rocketChatElement[0], 'd-none');
+      } else {
+        this.createLiveChat();
+      }
+    }
+  }
+
+  createLiveChat() {
+    if (isPlatformBrowser(this.platformId)) {
       this.scriptElement = this.renderer.createElement('script');
       this.renderer.setAttribute(
         this.scriptElement,
@@ -250,13 +261,12 @@ export class CompanyComponent implements OnInit, OnDestroy {
     }
   }
 
-  destroyLiveChat() {
-    if (isPlatformBrowser(this.platformId) && this.scriptElement) {
+  hideLiveChat() {
+    if (isPlatformBrowser(this.platformId)) {
       const rocketChatElement = document.getElementsByClassName('rocketchat-widget');
       if (rocketChatElement && rocketChatElement.length) {
-        rocketChatElement[0].remove();
+        this.renderer.addClass(rocketChatElement[0], 'd-none');
       }
-      this.renderer.removeChild(this.elementRef.nativeElement, this.scriptElement);
     }
   }
 }
