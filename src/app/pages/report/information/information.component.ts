@@ -5,10 +5,10 @@ import { Information } from '../../../model/Anomaly';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-information',
@@ -28,8 +28,9 @@ export class InformationComponent implements OnInit, OnDestroy {
               private reportRouterService: ReportRouterService,
               private anomalyService: AnomalyService,
               private analyticsService: AnalyticsService,
-              private activatedRoute: ActivatedRoute
-  ) { }
+              private activatedRoute: ActivatedRoute,
+              private titleService: Title,
+              private meta: Meta) { }
 
   ngOnInit() {
     this.step = Step.Information;
@@ -44,6 +45,8 @@ export class InformationComponent implements OnInit, OnDestroy {
             this.report = new Report();
             this.report.category = anomaly.category;
             this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+            this.titleService.setTitle(`${anomaly.category} - SignalConso`);
+            this.meta.updateTag({ name: 'description', content: anomaly.description });
           }
           return this.reportStorageService.reportInProgess;
         }
