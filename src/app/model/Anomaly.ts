@@ -108,6 +108,8 @@ export class Anomaly {
   category: string;
   @JsonProperty('categoryId')
   categoryId: string;
+  @JsonProperty('path')
+  path: string;
   @JsonProperty('hidden')
   hidden?: boolean;
   @JsonProperty('description')
@@ -130,6 +132,7 @@ export class Anomaly {
   constructor() {
     this.category = undefined;
     this.categoryId = undefined;
+    this.path = undefined;
     this.hidden = false;
     this.description = undefined;
     this.rank = undefined;
