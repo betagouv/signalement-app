@@ -4,7 +4,7 @@
 
 **L’approche incrémentale** est un des **trois principes fondamentaux** d’une Startup d’Etat, aux côtés d’un problème de politique publique et d’une équipe dédiée. 
  
-Partant d’une proposition crédible afin de résoudre un problème de politique publique, le projet **commence par une simple idée**. L’outil est-il techniquement réalisable ? Des citoyens ont-ils besoin de l’utiliser ? Les réponses à ces questions sont essentielles avant d’engager plus d’argent dans la Start-up après ses 6 mois d’existence. 
+Partant d’une proposition crédible afin de résoudre un problème de politique publique, le projet **commence par une simple idée**. L’outil est-il techniquement réalisable ? Des citoyens ont-ils besoin de l’utiliser ? Les réponses à ces questions sont essentielles avant d’engager plus d’argent dans la Startup après ses 6 mois d’existence. 
 
 Une solution imparfaite (béta) est **testée sur un échantillon d’individus**. A l’origine, SignalConso était un formulaire en ligne. Les retours positifs des utilisateurs ont permis d’améliorer notre service et de le transformer en site web. Au début de l’aventure, les **tâches sont exécutées manuellement** par l’équipe dédiée **avant l’automatisation** du produit. 
 
@@ -15,4 +15,4 @@ Par exemple, les Chargés de déploiement de SignalConso ont transmis, individue
 Avec la méthode incrémentale, il est impossible de connaitre la version finale de SignalConso et cela nous **permet d’innover en permanence** !
 
 Rendez-vous sur https://signalconso.beta.gouv.fr/
-Envie de connaitre les Start-up d’Etat ? C’est par [ici](https://www.facebook.com/notes/equipe-signalconso-betagouvfr/une-startup-detat-cest-quoi-/2813910375305421/) !
+Envie de connaitre les Startup d’Etat ? C’est par [ici](https://www.facebook.com/notes/equipe-signalconso-betagouvfr/une-startup-detat-cest-quoi-/2813910375305421/) !
