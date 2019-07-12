@@ -6,8 +6,10 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Meta, Title } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-problem',
@@ -25,23 +27,41 @@ export class ProblemComponent implements OnInit, OnDestroy {
   showErrors: boolean;
 
   constructor(public formBuilder: FormBuilder,
-            private anomalyService: AnomalyService,
-            private reportStorageService: ReportStorageService,
-            private reportRouterService: ReportRouterService,
-            private analyticsService: AnalyticsService) { }
+              private anomalyService: AnomalyService,
+              private reportStorageService: ReportStorageService,
+              private reportRouterService: ReportRouterService,
+              private analyticsService: AnalyticsService,
+              private activatedRoute: ActivatedRoute,
+              private titleService: Title,
+              private meta: Meta) { }
 
   ngOnInit() {
     this.step = Step.Problem;
-    this.reportStorageService.reportInProgess
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(report => {
-        if (report && report.category) {
-          this.report = report;
-          this.initAnomalyFromReport();
-        } else {
-          this.reportRouterService.routeToFirstStep();
+
+    this.activatedRoute.url.pipe(
+      takeUntil(this.unsubscribe),
+      switchMap(
+        url => {
+          const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path)
+          if (anomaly && !url[1]) {
+            this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
+            this.report = new Report();
+            this.report.category = anomaly.category;
+            this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+            this.titleService.setTitle(`${anomaly.category} - SignalConso`);
+            this.meta.updateTag({ name: 'description', content: anomaly.description });
+          }
+          return this.reportStorageService.reportInProgess;
         }
-      });
+      )
+    ).subscribe(report => {
+      if (report && report.category) {
+        this.report = report;
+        this.initAnomalyFromReport();
+      } else {
+        this.reportRouterService.routeToFirstStep();
+      }
+    });
   }
 
   ngOnDestroy() {

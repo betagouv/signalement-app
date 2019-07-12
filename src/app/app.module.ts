@@ -38,8 +38,9 @@ registerLocaleData(localeFr, 'fr');
     NgxEchartsModule,
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     RouterModule.forRoot([
-      { path: '', component: ReportComponent },
-      { path: 'stats', component: StatsComponent }
+      { path: 'stats', component: StatsComponent },
+      { path: '**', component: ReportComponent },
+      { path: '**', redirectTo: '' }
     ], {scrollPositionRestoration: 'top'}),
     ReportModule,
     BrowserModule,
