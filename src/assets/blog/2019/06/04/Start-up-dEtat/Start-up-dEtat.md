@@ -18,7 +18,7 @@ Un **problème de politique publique**, une **équipe dédiée** et une **approc
 
 ### Découvrir la méthode Startup d'Etat
 
-I - Une Startup d'Etat, c'est quoi ?
+**I - Une Startup d'Etat, c'est quoi ?**
 
 II - [Problème de politique publique ? Solution Startup d’Etat !](https://signalconso.beta.gouv.fr/blog/2019/06/11/Solution-Start-up-dEtat)
 
