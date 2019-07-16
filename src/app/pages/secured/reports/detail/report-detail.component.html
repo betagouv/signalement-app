@@ -319,6 +319,11 @@
   </div>
 </section>
 
+<div class="notification container" *ngIf="report">
+  <p>Les retours des professionnels sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF.</p>
+  <textarea></textarea>
+</div>
+
 <div class="container pb-3" *ngIf="report">
   <div class="row">
     <div class="col-12 pointer" (click)="back()">
@@ -326,9 +331,4 @@
       Retour à la liste
     </div>
   </div>
-</div>
-
-<div class="notification info container" *ngIf="report">
-  <p>Les retours des professionnels sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF.</p>
-  <p>Le cas échéant, nous aimerions donc connaitre les mesures correctives ou préventives que vous avez adoptées, par l'envoi d'un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank">contact@signalconso.beta.gouv.fr</a>.</p>
 </div>
