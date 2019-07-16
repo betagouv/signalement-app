@@ -43,6 +43,7 @@ describe('ProblemComponent', () => {
   const anomalyFixture = new Anomaly();
   anomalyFixture.category = reportFixture.category;
   anomalyFixture.subcategories = subcategoriesFixture;
+  anomalyFixture.path = 'myPath';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -57,7 +58,7 @@ describe('ProblemComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule.withRoutes([{ path: ReportPaths.Details, redirectTo: '' }]),
+        RouterTestingModule.withRoutes([{ path: `myPath/${ReportPaths.Details}`, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
         NoopAnimationsModule
       ],
