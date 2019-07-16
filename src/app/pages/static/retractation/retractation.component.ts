@@ -30,7 +30,7 @@ export class RetractationComponent implements OnInit {
               private meta: Meta) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.how.title);
+    this.titleService.setTitle(pages.retractation.title);
     this.meta.updateTag({ name: 'description', content: pages.retractation.description });
     this.localeService.use('fr');
   }

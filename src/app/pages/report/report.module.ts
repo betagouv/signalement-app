@@ -18,23 +18,12 @@ import { Angulartics2Module } from 'angulartics2';
 import { CollapsableTextComponent } from '../../components/collapsable-text/collapsable-text.component';
 import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
-import { ReportPaths } from '../../services/report-router.service';
-import { RetractationComponent } from '../static/retractation/retractation.component';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 
 defineLocale('fr', frLocale);
 
-const routes: Routes = [
-  { path: '', component: CategoryComponent },
-  { path: ReportPaths.Information, component: InformationComponent },
-  { path: ReportPaths.Problem, component: ProblemComponent },
-  { path: ReportPaths.Details, component: DetailsComponent },
-  { path: ReportPaths.Company, component: CompanyComponent },
-  { path: ReportPaths.Consumer, component: ConsumerComponent },
-  { path: ReportPaths.Confirmation, component: ConfirmationComponent },
-  { path: ReportPaths.Acknowledgment, component: AcknowledgmentComponent }
-];
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -47,12 +36,21 @@ const routes: Routes = [
     ProblemComponent,
     CategoryComponent,
     InformationComponent,
-    RetractationComponent,
     AcknowledgmentComponent,
     CollapsableTextComponent,
     PrecedeByPipe,
     TruncatePipe,
     SubcategoryComponent,
+  ],
+  entryComponents: [
+    CategoryComponent,
+    InformationComponent,
+    ProblemComponent,
+    DetailsComponent,
+    ConsumerComponent,
+    CompanyComponent,
+    ConfirmationComponent,
+    AcknowledgmentComponent,
   ],
   imports: [
     CommonModule,

@@ -5,8 +5,10 @@ import { Information } from '../../../model/Anomaly';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-information',
@@ -23,23 +25,41 @@ export class InformationComponent implements OnInit, OnDestroy {
   informationToDisplay: Information;
 
   constructor(private reportStorageService: ReportStorageService,
-    private reportRouterService: ReportRouterService,
-    private anomalyService: AnomalyService,
-    private analyticsService: AnalyticsService) { }
+              private reportRouterService: ReportRouterService,
+              private anomalyService: AnomalyService,
+              private analyticsService: AnalyticsService,
+              private activatedRoute: ActivatedRoute,
+              private titleService: Title,
+              private meta: Meta) { }
 
   ngOnInit() {
     this.step = Step.Information;
-    this.reportStorageService.reportInProgess
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(report => {
-        if (report) {
-          this.report = report;
-          this.initInformation();
-          this.reportStorageService.removeReportInProgressFromStorage();
-        } else {
-          this.reportRouterService.routeToFirstStep();
+
+    this.activatedRoute.url.pipe(
+      takeUntil(this.unsubscribe),
+      switchMap(
+        url => {
+          const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
+          if (anomaly && !url[1]) {
+            this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
+            this.report = new Report();
+            this.report.category = anomaly.category;
+            this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+            this.titleService.setTitle(`${anomaly.category} - SignalConso`);
+            this.meta.updateTag({ name: 'description', content: anomaly.description });
+          }
+          return this.reportStorageService.reportInProgess;
         }
-      });
+      )
+    ).subscribe(report => {
+      if (report) {
+        this.report = report;
+        this.initInformation();
+        this.reportStorageService.removeReportInProgressFromStorage();
+      } else {
+        this.reportRouterService.routeToFirstStep();
+      }
+    });
   }
 
   initInformation() {
