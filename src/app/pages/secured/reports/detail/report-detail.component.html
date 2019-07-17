@@ -258,6 +258,19 @@
           </ng-template>
         </ng-container>
 
+        <ng-container *ngIf="getProAnswerEvent()">
+          <hr />
+          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
+          <ng-template #titleAnswerNoPro>
+            <h5>Réponse apportée par le professionnel</h5>
+          </ng-template>
+          <div class="row" id="proAnswer">
+            <div class="col-12">
+              {{getProAnswerEvent().detail}}
+            </div>
+          </div>
+        </ng-container>
+
         <ng-container  *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
           <h5>Historique</h5>
@@ -316,13 +329,40 @@
       </ng-container>
       <ngx-loading [show]="!report && loading"></ngx-loading>
     </div>
+
+    <ng-container *appRole="[roles.Pro]">
+      <div *ngIf="report && !getProAnswerEvent()">
+        <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
+          <p>Les retours des professionnels sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF.</p>
+          <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
+        </div>
+        <ng-template #proAnswer>
+          <div class="notification">
+            <form [formGroup]="proAnswerForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
+              <label for="proAnswerInput" [class]="hasError(answerCtrl) ? 'error' : ''">
+                Réponse
+              </label>
+              <textarea [formControl]="answerCtrl" id="proAnswerInput" rows="5"></textarea>
+              <div class="notification error" *ngIf="showErrors && proAnswerForm.invalid">
+                Veuillez renseigner les champs obligatoires.<br />
+              </div>
+              <div class="notification error" *ngIf="loadingError">
+                Une erreur technique s'est produite<br />
+              </div>
+              <hr />
+              <div class="text-center">
+                <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
+                &nbsp;
+                <button type="submit" class="btn btn-lg btn-primary">Envoyer</button>
+              </div>
+            </form>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </ng-template>
+      </div>
+    </ng-container>
   </div>
 </section>
-
-<div class="notification container" *ngIf="report">
-  <p>Les retours des professionnels sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF.</p>
-  <textarea></textarea>
-</div>
 
 <div class="container pb-3" *ngIf="report">
   <div class="row">

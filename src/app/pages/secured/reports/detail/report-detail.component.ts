@@ -3,7 +3,7 @@ import { Report } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
-import { ReportEvent } from '../../../../model/ReportEvent';
+import { ProAnswerReportEventAction, ReportEvent } from '../../../../model/ReportEvent';
 import { combineLatest } from 'rxjs';
 import { EventService } from '../../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -12,7 +12,7 @@ import { CompanyService } from '../../../../services/company.service';
 import { Company } from '../../../../model/Company';
 import { switchMap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../../model/AuthUser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
 
@@ -28,6 +28,8 @@ export class ReportDetailComponent implements OnInit {
   permissions = Permissions;
   roles = Roles;
   report: Report;
+
+  showErrors: boolean;
   loading: boolean;
   loadingError: boolean;
   events: ReportEvent[];
@@ -45,6 +47,9 @@ export class ReportDetailComponent implements OnInit {
   emailCtrl: FormControl;
   contactAgreementCtrl: FormControl;
 
+  proAnswerForm: FormGroup;
+  answerCtrl: FormControl;
+
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
               private eventService: EventService,
@@ -52,6 +57,7 @@ export class ReportDetailComponent implements OnInit {
               private companyService: CompanyService,
               private modalService: BsModalService,
               private route: ActivatedRoute,
+              private router: Router,
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
@@ -231,5 +237,49 @@ export class ReportDetailComponent implements OnInit {
         });
   }
 
+  showProAnswerForm() {
+    this.answerCtrl = this.formBuilder.control('', Validators.required);
+    this.proAnswerForm = this.formBuilder.group({
+      answer: this.answerCtrl
+    });
+  }
 
+  hideProAnswerForm() {
+    this.proAnswerForm = undefined;
+  }
+
+  submitProAnswerForm() {
+    if (!this.proAnswerForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.loading = true;
+      this.loadingError = false;
+      this.eventService.createEvent(
+        Object.assign(new ReportEvent(), {
+          reportId: this.reportId,
+          eventType: 'CONSO',
+          action: Object.assign(ProAnswerReportEventAction),
+          detail: this.answerCtrl.value,
+          resultAction: true
+        })
+      ).subscribe(
+        event => {
+          this.loading = false;
+          this.hideProAnswerForm();
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
+    }
+
+  }
+
+  hasError(formControl: FormControl) {
+    return this.showErrors && formControl.errors;
+  }
+
+  getProAnswerEvent() {
+    return this.events.find(event => event.action.name === ProAnswerReportEventAction.name);
+  }
 }
