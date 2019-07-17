@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BsModalRef, ModalModule } from 'ngx-bootstrap';
 import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
+import { AppRoleDirective } from '../../../../directives/app-role.directive';
 
 describe('EventComponent', () => {
   let component: EventComponent;
@@ -16,6 +17,7 @@ describe('EventComponent', () => {
       declarations: [
         EventComponent,
         AppPermissionDirective,
+        AppRoleDirective,
       ],
       imports: [
         FormsModule,
