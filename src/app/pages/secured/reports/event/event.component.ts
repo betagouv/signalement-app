@@ -6,7 +6,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
 import { combineLatest } from 'rxjs';
 import { PlatformLocation } from '@angular/common';
-import { Permissions } from '../../../../model/AuthUser';
+import { Permissions, Roles } from '../../../../model/AuthUser';
 import { AccountService } from '../../../../services/account.service';
 
 @Component({
@@ -17,6 +17,7 @@ import { AccountService } from '../../../../services/account.service';
 })
 export class EventComponent implements OnInit {
 
+  roles = Roles;
   permissions = Permissions;
   eventForm: FormGroup;
   actionCtrl: FormControl;
@@ -26,6 +27,7 @@ export class EventComponent implements OnInit {
   siret: string;
   actionPros: ReportEventAction[];
   actionConsos: ReportEventAction[];
+  actionAgents: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
@@ -50,12 +52,14 @@ export class EventComponent implements OnInit {
     combineLatest(
       this.constantService.getActionPros(),
       this.constantService.getActionConsos(),
+      this.constantService.getActionAgents(),
       this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionConsos, url]) => {
+      ([actionPros, actionConsos, actionAgents, url]) => {
         this.loading = false;
         this.actionPros = actionPros;
         this.actionConsos = actionConsos;
+        this.actionAgents = actionAgents;
         this.activationDocumentUrl = url;
         this.initEventForm();
       },
