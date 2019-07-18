@@ -8,12 +8,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-export enum CompanyType {
-  Physical = 'Physical',
-  Service = 'Service',
-  Internet = 'Internet'
-}
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -29,8 +23,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
   anomalies: Anomaly[];
   showSecondaryCategories: boolean;
 
-  companyType = CompanyType;
-  selectedCompanyType: CompanyType;
   internetInformation: Information;
 
   constructor(private anomalyService: AnomalyService,
@@ -43,7 +35,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.reportStorageService.reportInProgess
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => this.report = report);
-    this.selectedCompanyType = CompanyType.Physical;
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
     const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
@@ -94,11 +85,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   removeStoredReport() {
     this.reportStorageService.removeReportInProgressFromStorage();
-  }
-
-  selectCompanyType(type: CompanyType) {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.companyTypeSelection, type);
-    this.selectedCompanyType = type;
   }
 
 }

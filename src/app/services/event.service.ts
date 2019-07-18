@@ -22,7 +22,7 @@ export class EventService {
       this.serviceUtils.getAuthHeaders()
     ).pipe(
       mergeMap(([user, headers]) => {
-        return this.http.post(
+        return this.http.post<ReportEvent>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', event.reportId, 'events']),
           this.event2eventApi(event, user),
           headers

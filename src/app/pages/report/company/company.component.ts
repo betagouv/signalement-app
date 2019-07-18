@@ -188,6 +188,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   }
 
   searchCompanyBySiret() {
+    this.siretCtrl.setValue((this.siretCtrl.value as string).replace(/ /g, ''));
     if (!this.searchBySiretForm.valid) {
       this.showErrorsBySiret = true;
     } else {
