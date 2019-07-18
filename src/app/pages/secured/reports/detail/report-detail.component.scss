@@ -1,3 +1,5 @@
+@import "../../../../../theme/variables";
+
 img.back {
 
   vertical-align: top;
@@ -45,6 +47,19 @@ table {
   }
 }
 
+.nav-tabs {
+  border-bottom: 1px solid $light-blue;
+}
+
+.nav-link {
+  border: 0;
+  color: $light-blue !important;
+  cursor: pointer;
+}
+
+input + input {
+  margin-top: 0.5em;
+}
 
 :host ::ng-deep {
   .tooltip-inner {

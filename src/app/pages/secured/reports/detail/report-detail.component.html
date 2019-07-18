@@ -96,56 +96,81 @@
               <br/>
               Adresse :
               <span *ngIf="report.company.line1">{{report.company.line1}}</span>
-              <span *ngIf="report.company.line2">-{{report.company.line2}}</span>
-              <span *ngIf="report.company.line3">-{{report.company.line3}}</span>
-              <span *ngIf="report.company.line4">-{{report.company.line4}}</span>
-              <span *ngIf="report.company.line5">-{{report.company.line5}}</span>
-              <span *ngIf="report.company.line6">-{{report.company.line6}}</span>
-              <span *ngIf="report.company.line7">-{{report.company.line7}}</span>
+              <span *ngIf="report.company.line2"> - {{report.company.line2}}</span>
+              <span *ngIf="report.company.line3"> - {{report.company.line3}}</span>
+              <span *ngIf="report.company.line4"> - {{report.company.line4}}</span>
+              <span *ngIf="report.company.line5"> - {{report.company.line5}}</span>
+              <span *ngIf="report.company.line6"> - {{report.company.line6}}</span>
+              <span *ngIf="report.company.line7"> - {{report.company.line7}}</span>
             </div>
             <div class="col-2 text-right" *appPermission="permissions.updateReport">
               <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
             </div>
             <ng-template #companySearch>
               <div class="modal-body text-center">
-                <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm">
-                  <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+                <nav class="nav nav-tabs nav-justified mb-3">
+                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Siret</h4></a>
+                  <a class="nav-item nav-link" [ngClass]="!searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Adresse</h4></a>
+                </nav>
+                <ng-container *ngIf="searchBySiret">
+                  <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
+                    <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
 
-                  <div class="notification error" *ngIf="!companyForSiret && loadingError">
-                    Une erreur technique s'est produite<br />
-                  </div>
+                    <div class="notification error" *ngIf="!companyForSiret && loadingError">
+                      Une erreur technique s'est produite<br />
+                    </div>
 
-                  <hr />
-                  <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyForm.invalid">
-                    Rechercher
-                  </button>
-                </form>
-                <div *ngIf="companyForSiret">
-                  <hr />
-                  <div *ngIf="!companyForSiret.siret">
-                    Aucun établissement trouvé
+                    <hr />
+                    <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companySiretForm.invalid">
+                      Rechercher
+                    </button>
+                  </form>
+                  <div *ngIf="companyForSiret">
+                    <hr />
+                    <div *ngIf="!companyForSiret.siret">
+                      Aucun établissement trouvé
+                    </div>
+                    <div *ngIf="companyForSiret.siret">
+                      <p class="company">
+                        <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
+                        <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
+                        <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
+                        <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
+                        <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
+                        <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
+                        <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
+                      </p>
+
+                      <div class="notification error" *ngIf="loadingError">
+                        Une erreur technique s'est produite<br />
+                      </div>
+
+                      <hr />
+                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-primary" (click)="changeCompany(companyForSiret)">Valider</button>
+                    </div>
                   </div>
-                  <div *ngIf="companyForSiret.siret">
-                    <p class="company">
-                      <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
-                      <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
-                      <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
-                      <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
-                      <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
-                      <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
-                      <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
-                    </p>
+                </ng-container>
+                <ng-container *ngIf="!searchBySiret">
+                  <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
+                    <input [formControl]="nameCtrl" placeholder="Nom de l'entreprise" id="name" />
+                    <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
+                    <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
+                    <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
+                    <input [formControl]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
+                    <input [formControl]="cityCtrl" placeholder="Ville" id="city" />
 
                     <div class="notification error" *ngIf="loadingError">
                       Une erreur technique s'est produite<br />
                     </div>
 
                     <hr />
-                    <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                    &nbsp;
-                    <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
-                  </div>
-                </div>
+                    <button type="submit" class="btn btn-primary mt-2" id="submitCompanyAddressForm" [disabled]="companyAddressForm.invalid">
+                      Enregistrer
+                    </button>
+                  </form>
+                </ng-container>
               </div>
             </ng-template>
           </div>
@@ -210,32 +235,6 @@
                     </button>
                   </div>
                 </form>
-                <div *ngIf="companyForSiret">
-                  <hr />
-                  <div *ngIf="!companyForSiret.siret">
-                    Aucun établissement trouvé
-                  </div>
-                  <div *ngIf="companyForSiret.siret">
-                    <p class="company">
-                      <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
-                      <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
-                      <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
-                      <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
-                      <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
-                      <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
-                      <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
-                    </p>
-
-                    <div class="notification error" *ngIf="loadingError">
-                      Une erreur technique s'est produite<br />
-                    </div>
-
-                    <hr />
-                    <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                    &nbsp;
-                    <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
-                  </div>
-                </div>
               </div>
             </ng-template>
           </div>
