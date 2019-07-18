@@ -58,6 +58,7 @@ export class ReportDetailComponent implements OnInit {
 
   proAnswerForm: FormGroup;
   answerCtrl: FormControl;
+  answerSuccess: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -311,7 +312,8 @@ export class ReportDetailComponent implements OnInit {
       ).subscribe(
         event => {
           this.loading = false;
-          this.hideProAnswerForm();
+          this.events.push(event);
+          this.answerSuccess = true;
         },
         err => {
           this.loading = false;

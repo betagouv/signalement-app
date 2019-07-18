@@ -332,16 +332,18 @@
     <ng-container *appRole="[roles.Pro]">
       <div *ngIf="report && !getProAnswerEvent()">
         <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
-          <p>Les retours des professionnels sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF.</p>
+          <p>Votre réponse est importante ; elle sera visible par le consommateur et la DGCCRF.</p>
           <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
         </div>
         <ng-template #proAnswer>
           <div class="notification">
             <form [formGroup]="proAnswerForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
               <label for="proAnswerInput" [class]="hasError(answerCtrl) ? 'error' : ''">
-                Réponse
+                Réponse au consommateur et à la DGCCRF
               </label>
-              <textarea [formControl]="answerCtrl" id="proAnswerInput" rows="5"></textarea>
+              <textarea [formControl]="answerCtrl" id="proAnswerInput" rows="5"
+                        placeholder="Précisez les actions préventives / correctives que vous allez mettre en place. Si vous estimez que le signalement est infondé, merci de l'indiquer ici">
+              </textarea>
               <div class="notification error" *ngIf="showErrors && proAnswerForm.invalid">
                 Veuillez renseigner les champs obligatoires.<br />
               </div>
@@ -358,6 +360,9 @@
             <ngx-loading [show]="loading"></ngx-loading>
           </div>
         </ng-template>
+      </div>
+      <div class="notification success" *ngIf="answerSuccess">
+        Votre réponse a bien été prise en compte, nous vous en remercions.
       </div>
     </ng-container>
   </div>
