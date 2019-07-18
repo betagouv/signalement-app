@@ -11,3 +11,17 @@ Porteuse du projet de la startup, Magali devient une « intrapreneuse » et form
 La startup évolue au sein de **l’incubateur beta.gouv.fr** aux côtés des autres Startups d’Etat. Beta.gouv.fr fournit un **appui logistique** : aide au lancement des projets, montage des équipes, formation… Profitant de l’énergie de l’incubateur, SignalConso se développe de **manière incrémentale** : la startup évolue ainsi progressivement, **sans cahier des charges**, et s’assure que chaque valeur ajoutée apporte une réelle amélioration à l’outil, sans créer de dysfonctionnement. 
 
 Un **problème de politique publique**, une **équipe dédiée** et une **approche incrémentale** sont ainsi les trois principes fondamentaux d’une Startup d’Etat. Des questions sur Beta.gouv.fr ? Toutes les infos [ici](https://beta.gouv.fr/) ! Intéressé(e) par **l’aventure SignalConso** ? C’est par [là](https://signalconso.beta.gouv.fr/) !  
+
+
+
+
+
+### Découvrir la méthode Startup d'Etat
+
+**I - Une Startup d'Etat, c'est quoi ?**
+
+II - [Problème de politique publique ? Solution Startup d’Etat !](/blog/2019/06/11/Solution-Start-up-dEtat)
+
+III - [La méthode incrémentale ou comment être plus souple et rapide](/blog/2019/06/18/la-methode-incrementale)
+
+IV - [Une équipe dédiée](/blog/2019/06/25/une-equipe-dediee)
