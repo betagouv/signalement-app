@@ -21,7 +21,8 @@ export enum Permissions {
   updateReport = 'updateReport',
   deleteReport = 'deleteReport',
   deleteFile = 'deleteFile',
-  createEvent = 'createEvent'
+  createEvent = 'createEvent',
+  editDocuments = 'editDocuments'
 }
 
 export enum Roles {

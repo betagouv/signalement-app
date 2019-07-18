@@ -6,6 +6,8 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
 import { combineLatest } from 'rxjs';
 import { PlatformLocation } from '@angular/common';
+import { Permissions, Roles } from '../../../../model/AuthUser';
+import { AccountService } from '../../../../services/account.service';
 
 @Component({
   selector: 'app-event',
@@ -15,22 +17,28 @@ import { PlatformLocation } from '@angular/common';
 })
 export class EventComponent implements OnInit {
 
+  roles = Roles;
+  permissions = Permissions;
   eventForm: FormGroup;
   actionCtrl: FormControl;
   detailCtrl: FormControl;
   resultActionCtrl: FormControl;
   reportId: string;
+  siret: string;
   actionPros: ReportEventAction[];
   actionConsos: ReportEventAction[];
+  actionAgents: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
   loadingError: boolean;
+  activationDocumentUrl: string;
 
   constructor(public formBuilder: FormBuilder,
               public bsModalRef: BsModalRef,
               private eventService: EventService,
               private constantService: ConstantService,
+              private accountService: AccountService,
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
@@ -44,11 +52,15 @@ export class EventComponent implements OnInit {
     combineLatest(
       this.constantService.getActionPros(),
       this.constantService.getActionConsos(),
+      this.constantService.getActionAgents(),
+      this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionConsos]) => {
+      ([actionPros, actionConsos, actionAgents, url]) => {
         this.loading = false;
         this.actionPros = actionPros;
         this.actionConsos = actionConsos;
+        this.actionAgents = actionAgents;
+        this.activationDocumentUrl = url;
         this.initEventForm();
       },
       err => {
@@ -105,6 +117,11 @@ export class EventComponent implements OnInit {
     } else {
       this.eventForm.removeControl('resultAction');
     }
+  }
+
+  isActionEnvoiCourrier() {
+    return this.actionPros.find(a => a === this.actionCtrl.value)
+      && this.actionPros.find(a => a === this.actionCtrl.value).name === `Envoi d'un courrier`;
   }
 
 }

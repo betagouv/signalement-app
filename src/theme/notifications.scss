@@ -1,8 +1,8 @@
 @import "../theme/variables";
 
 .notification {
-  background: $theme-info-bg;
-  border: 1px solid $theme-info-border;
+  background: $white;
+  border: 1px solid $light-blue;
   border-radius: $theme-border-radius;
   padding: 1em;
   margin-bottom: 1em;
@@ -38,6 +38,11 @@
 
 .notification.full-width.closable .close {
   right: unset;
+}
+
+.notification.info {
+  background: $theme-info-bg;
+  border-color: $theme-info-border;
 }
 
 .notification.success {

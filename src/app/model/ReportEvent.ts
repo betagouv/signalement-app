@@ -13,3 +13,8 @@ export class ReportEventAction {
   name: string;
   withResult: boolean;
 }
+
+export const ProAnswerReportEventAction = Object.assign(new ReportEventAction(), {
+  name: 'Réponse du professionnel au signalement',
+  withResult: true
+});
