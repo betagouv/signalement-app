@@ -20,8 +20,8 @@ Un **problème de politique publique**, une **équipe dédiée** et une **approc
 
 **I - Une Startup d'Etat, c'est quoi ?**
 
-II - [Problème de politique publique ? Solution Startup d’Etat !](https://signalconso.beta.gouv.fr/blog/2019/06/11/Solution-Start-up-dEtat)
+II - [Problème de politique publique ? Solution Startup d’Etat !](/blog/2019/06/11/Solution-Start-up-dEtat)
 
-III - [La méthode incrémentale ou comment être plus souple et rapide](https://signalconso.beta.gouv.fr/blog/2019/06/18/la-methode-incrementale)
+III - [La méthode incrémentale ou comment être plus souple et rapide](/blog/2019/06/18/la-methode-incrementale)
 
-IV - [Une équipe dédiée](https://signalconso.beta.gouv.fr/blog/2019/06/25/une-equipe-dediee)
+IV - [Une équipe dédiée](/blog/2019/06/25/une-equipe-dediee)

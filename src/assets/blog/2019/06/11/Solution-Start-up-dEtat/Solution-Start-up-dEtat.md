@@ -19,10 +19,10 @@ Rendez-vous sur https://signalconso.beta.gouv.fr/
 
 ### Découvrir la méthode Startup d'Etat
 
-I - [Une Startup d'Etat, c'est quoi ?](https://signalconso.beta.gouv.fr/blog/2019/06/04/Start-up-dEtat)
+I - [Une Startup d'Etat, c'est quoi ?](/blog/2019/06/04/Start-up-dEtat)
 
 **II - Problème de politique publique ? Solution Startup d’Etat !**
 
-III - [La méthode incrémentale ou comment être plus souple et rapide](https://signalconso.beta.gouv.fr/blog/2019/06/18/la-methode-incrementale)
+III - [La méthode incrémentale ou comment être plus souple et rapide](/blog/2019/06/18/la-methode-incrementale)
 
-IV - [Une équipe dédiée](https://signalconso.beta.gouv.fr/blog/2019/06/25/une-equipe-dediee)
+IV - [Une équipe dédiée](/blog/2019/06/25/une-equipe-dediee)
