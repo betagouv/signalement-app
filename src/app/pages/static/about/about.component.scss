@@ -7,6 +7,10 @@
   margin: 5px;
   padding: 1em;
   font-size: 15px;
+  
+  &.old {
+   opacity: 0.3; 
+  }
 
   img {
     height: 64px;
