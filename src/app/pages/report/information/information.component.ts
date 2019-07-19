@@ -9,6 +9,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
+import { RatingService } from '../../../services/rating.service';
 
 @Component({
   selector: 'app-information',
@@ -23,11 +24,15 @@ export class InformationComponent implements OnInit, OnDestroy {
   report: Report;
 
   informationToDisplay: Information;
+  loading: boolean;
+  loadingError: boolean;
+  ratingSuccess: boolean;
 
   constructor(private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private anomalyService: AnomalyService,
               private analyticsService: AnalyticsService,
+              private ratingService: RatingService,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
               private meta: Meta) { }
@@ -88,6 +93,21 @@ export class InformationComponent implements OnInit, OnDestroy {
     if (this.report && this.report.subcategories && this.report.subcategories.length) {
       return this.report.subcategories[this.report.subcategories.length - 1];
     }
+  }
+
+  rateInformation(positive: boolean) {
+    this.loading = true;
+    this.loadingError = false;
+    this.ratingService.rate(this.report.category, this.report.subcategories, positive).subscribe(
+      _ => {
+        this.loading = false;
+        this.ratingSuccess = true;
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      }
+    );
   }
 
 }
