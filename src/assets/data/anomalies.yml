@@ -293,13 +293,83 @@ list:
                   <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recencent les établissemets acceptant les chiens.
             - title: Oui (je possède la carte d'assistance)
           - title: Autre problème de service
+
+  - category: Téléphonie / abonnement / fournisseur d'accès
+    categoryId: TEL
+    path: pratique-d-hygiene
+    description: forfait téléphone, opérateur
+    rank: 2
+    icon: icon_hygien.png
+    subcategories:
+      - title: Publicité
+        example: 'Exempl e: mention mensongère'
+        subcategories:
+          - title: Indisponibilité des produits/offres
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Quel type de produit/offre était indisponible&#160;?
+                rank: 2
+                type: TEXT
+                placeholder: Type de produit
+              - label: Description
+                rank: 3
+                type: TEXTAREA
+          - title: Information mensongère ou trompeuse
+            detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Qu'es-ce qui est trompeur&#160;?
+              rank: 2
+              type: RADIO
+              options:
+              - Une affiche
+              - Un site internet (à préciser)
+              - Le discours d'un vendeur
+              - La façon de mettre en vente
+              - Autre (à préciser)
+            - label: A propos de quoi est-ce trompeur&#160;?
+              rank: 3
+              type: RADIO
+              options:
+              - Un label ou une mention
+              - Le prix
+              - Autre (à préciser)
+            - label: Pourquoi trouvez-vous ça trompeur ?
+              rank: 4
+              type: TEXTAREA
+              optionnal: true
+            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+              rank: 5
+              type: RADIO
+              options:
+                - Oui
+                - Non
+            fileLabel: Photo(s) si possible
+      - title: Contrat
+        example: 'Exemple : reconduction de contrat, clause abusive'
+      - title: SAV
+        example: 'Exemple : pas de réponse du service client'
+      - title: Appels ou sms indésirables
+        example: 'Exemple : spams, démarchages téléphoniques'
+          
+        
+        
+        
+        
+        
+        
         
         
   - category: Pratique d'hygiène
     categoryId: HYG
     path: pratique-d-hygiene
     description: Locaux sales, présence de rat, rupture de la chaîne du froid...
-    rank: 2
+    rank: 10
     icon: icon_hygien.png
     subcategories:
       - title: Hygiène des locaux et du matériel
