@@ -157,9 +157,9 @@ list:
                 rank: 2
                 type: TEXTAREA
                 placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
-          - tilte: Prix différent de celui affiché
+          - title: Prix différent de celui affiché
             example: 'Exemple : le prix sur l''addition est différent de celui affiché'
-          - title: Prix exgagéré ou plus cher qu'ailleurs
+          - title: Prix exgagéré
             example: 'Exemple : le prix du café est très cher'
             information:
               title: Les prix sont choisis librement par les commerçants.
@@ -208,12 +208,12 @@ list:
                       - title: Non
                   - title: Autres
                     example: 'Exemple : problème avec le terminal de paiement...'
-          - title: Autres problèmes de prix ou paiement
-            subcategoriesTitle: 'Problème avec :'
-            subcategories:
-              - title: Le cash-back
-              - title: Tickets restaurant
-              - title: Autre
+              - title: Autres problèmes de prix ou paiement
+                subcategoriesTitle: 'Problème avec :'
+                subcategories:
+                - title: Le cash-back
+                - title: Tickets restaurant
+                - title: Autre
           - title: Problème de facture/ticket de caisse
             example: 'Exemple : refus de délivrer une note'
       - title: Service
