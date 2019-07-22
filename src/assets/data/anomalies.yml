@@ -3,7 +3,7 @@ list:
   - category: Café / Restaurant
     categoryId: CR
     path: pratique-d-hygiene
-    description: restaurant, bar, cafétariat, food truck...
+    description: bar, cafeteria, food truck...
     rank: 1
     icon: icon_hygien.png
     subcategories:
@@ -165,7 +165,7 @@ list:
               title: Les prix sont choisis librement par les commerçants.
               content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
                 <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte.
-                <br/> Le saviez-vous ? Un café a également le droit de faire payer l''eau du robinet si le prix est marqué. Par contre, au cours d''un repas, l''eau du robinet doit vous être fournie gratuitement."
+                <br/> Le saviez-vous ? Un café a également le droit de faire payer l'eau du robinet si le prix est marqué. Par contre, au cours d'un repas, l'eau du robinet doit vous être fournie gratuitement."
           - title: Problème pour payer
             example: 'Exemple : refus de la carte bancaire'
             subcategories:
@@ -216,6 +216,57 @@ list:
                 - title: Autre
           - title: Problème de facture/ticket de caisse
             example: 'Exemple : refus de délivrer une note'
+      - title: Publicité trompeuse
+        example: 'Exemple : mention mensongère'
+        subcategories:
+          - title: Indisponibilité des produits du menu
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Quel type de produit était indisponible&#160;?
+                rank: 2
+                type: TEXT
+                placeholder: Type de produit
+              - label: Description
+                rank: 3
+                type: TEXTAREA
+          - title: Information mensongère, publicité trompeuse
+            detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Qu'es-ce qui est trompeur&#160;?
+              rank: 2
+              type: RADIO
+              options:
+              - Une affiche chez le commerçant
+              - Un site internet (à préciser)
+              - Le discours d'un vendeur
+              - La façon de mettre en vente
+              - Autre (à préciser)
+          - label: A propos de quoi est-ce trompeur&#160;?
+            rank: 3
+            type: RADIO
+            options:
+              - L'origine
+              - La composition
+              - Un label ou une mention (exemple fait maison)
+              - Une marque
+              - Autre (à préciser)
+          - label: Pourquoi trouvez-vous ça trompeur ?
+            rank: 4
+            type: TEXTAREA
+            optionnal: true
+          - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+            rank: 5
+            type: RADIO
+            options:
+              - Oui
+              - Non
+        fileLabel: Photo(s) si possible
       - title: Service
         example: 'Exemple : refus de mon chien, refus de me servir, personnel peu aimable'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
@@ -242,9 +293,6 @@ list:
                   <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recencent les établissemets acceptant les chiens.
             - title: Oui (je possède la carte d'assistance)
           - title: Autre problème de service
-        
-        
-        
         
         
   - category: Pratique d'hygiène
