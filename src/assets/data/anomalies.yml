@@ -20,6 +20,35 @@ list:
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Présence d'animaux
+            detailInputs:
+            - label: Quel animal avez-vous vu&#160;?
+              rank: 1
+              type: RADIO
+              options:
+                - Insectes (cafard..)
+                - Rongeurs (rat, souris..)
+                - Oiseau (pigeon..)
+                - Autre (à préciser)
+            - label: Où l'avez-vous vu&#160;?
+              rank: 2
+              type: CHECKBOX
+              options:
+                - Cuisine ou zone de production
+                - Intérieur d'un magasin
+                - Salle d'un bar ou d'un restaurant
+                - Autre (à préciser)
+            - label: Pouvez-vous nous en dire plus ?
+              rank: 3
+              type: TEXTAREA
+              optionnal: true
+            - label: Date du constat
+              rank: 4
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Heure du constat (facultatif)
+              rank: 5
+              type: TIMESLOT
+              optionnal: true
           - title: Problème de température
           - title: Problème d'hygiène des locaux
             subcategories:
