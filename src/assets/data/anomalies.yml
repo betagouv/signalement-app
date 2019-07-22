@@ -1,10 +1,72 @@
 ---
 list:
+  - category: Café / Restaurant
+    categoryId: CR
+    path: pratique-d-hygiene
+    description: restaurant, bar, cafétariat, food truck...
+    rank: 1
+    icon: icon_hygien.png
+    subcategories:
+      - title: Intoxication alimentaire
+        example: 'Vous avez été malade après être allé dans l''établissement'
+        information:
+          title: Les intoxications alimentaires ne rentrent pas actuellement dans le périmètre de SignalConso.
+          subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+            actions:
+            - question: Comment le signaler&#160;?
+              answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>   
+      - title: Pratiques d'hygiène
+        example: 'Exemple : locaux sales, rats, problème de chaîne du froid'
+        subcategoriesTitle: 'Vous voulez signaler&#160;:'
+        subcategories:
+          - title: Présence d'animaux
+          - title: Problème de température
+          - title: Problème d'hygiène des locaux
+            subcategories:
+              - title: Problème de voisinage (odeur, bruit)
+              - title: Locaux sales ou dégradés
+                example: 'Exemple : cuisine sale, WC sale'
+              - title: Locaux non déclarés
+          - title: Problème d'hygiène du personnel
+            subcategories:
+              - title: Tenue de travail pas adaptée
+                example: 'Exemple : pas de gant, torse-nu en zone de production'
+              - title: Tenue sale
+              - title: Mauvaises pratiques d'hygiène
+                example: 'Exemple : personne qui fume en cuisine'
+              - title: Autres
+          - title: Autre problème d'hygiène
+      - title: Prix et paiement
+        example: 'Exemple : refus de CB, prix trop cher, supplément'
+        subcategoriesTitle: 'Vous voulez signaler&#160;:'
+        subcategories:
+          - title: Prix pas affiché
+          - tilte: Prix différent de celui affiché
+          - title: Prix exgagéré ou plus cher qu'ailleurs
+          - title: Problème pour payer
+          - title: Problème de facture/ticket de caisse
+      - title: Service
+        example: 'Exemple : refus de mon chien, refus de me servir, personnel peu aimable'
+        subcategoriesTitle: 'Vous voulez signaler&#160;:'
+        subcategories:
+          - title: Personnel peu aimable
+          - title: Refus de me servir
+          - title: Refus de mon chien
+            subcategoriesTitle: Est-ce un chien d'assistance&#160;?
+            subcategories:
+            - title: Non
+              information:
+                content: Tout comme dans un hôtel, un restaurateur peut refuser la présence d’un chien dans son établissement. 
+                  <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recencent les établissemets acceptant les chiens.
+            - title: Oui (je possède la carte d'assistance)
+          - title: Autre problème de service
+        
+        
   - category: Pratique d'hygiène
     categoryId: HYG
     path: pratique-d-hygiene
     description: Locaux sales, présence de rat, rupture de la chaîne du froid...
-    rank: 1
+    rank: 2
     icon: icon_hygien.png
     subcategories:
       - title: Hygiène des locaux et du matériel
@@ -125,7 +187,7 @@ list:
     categoryId: NOURR
     path: nourriture-et-boissons
     description: Produit périmé, emballage trompeur, problème de quantité...
-    rank: 2
+    rank: 3
     withInternetPurchase: true
     icon: icon_food.png
     subcategories:
@@ -590,7 +652,7 @@ list:
     categoryId: MATOS
     path: materiel-et-objets
     description: Problème avec une notice ou un appareil...
-    rank: 3
+    rank: 4
     withInternetPurchase: true
     icon: icon_material.png
     subcategories:
@@ -743,7 +805,7 @@ list:
     categoryId: INTOX
     path: intoxication-alimentaire
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
-    rank: 4
+    rank: 5
     icon: icon_disease.png
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
@@ -755,7 +817,7 @@ list:
     categoryId: PRIX
     path: prix-et-paiement
     description: Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...
-    rank: 5
+    rank: 6
     withInternetPurchase: true
     icon: icon_price.png
     subcategories:
@@ -912,7 +974,7 @@ list:
     categoryId: PUB
     path: publicite
     description: Information trompeuse, produit en promotion pas disponible...
-    rank: 6
+    rank: 7
     withInternetPurchase: true
     icon: icon_pub.png
     subcategories:
@@ -1022,7 +1084,7 @@ list:
     categoryId: SERACH
     path: services-apres-vente
     description: Colis non reçu, problème de garantie constructeur, hotline injoignable,...
-    rank: 7
+    rank: 8
     withInternetPurchase: true
     icon: icon_service.png
     subcategories:
@@ -1325,7 +1387,7 @@ list:
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 8
+    rank: 9
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
