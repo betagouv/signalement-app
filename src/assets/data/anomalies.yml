@@ -11,10 +11,10 @@ list:
         example: 'Vous avez été malade après être allé dans l''établissement'
         information:
           title: Les intoxications alimentaires ne rentrent pas actuellement dans le périmètre de SignalConso.
-          subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
-            actions:
-              - question: Comment le signaler&#160;?
-                answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>   
+          subtitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+          actions:
+            - question: Comment le signaler&#160;?
+              answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>   
       - title: Pratiques d'hygiène
         example: 'Exemple : locaux sales, rats, problème de chaîne du froid'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
