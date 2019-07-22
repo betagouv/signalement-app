@@ -232,7 +232,7 @@ list:
               - label: Description
                 rank: 3
                 type: TEXTAREA
-          - title: Information mensongère, publicité trompeuse
+          - title: Information mensongère ou trompeuse
             detailInputs:
             - label: Date du constat
               rank: 1
@@ -247,26 +247,26 @@ list:
               - Le discours d'un vendeur
               - La façon de mettre en vente
               - Autre (à préciser)
-          - label: A propos de quoi est-ce trompeur&#160;?
-            rank: 3
-            type: RADIO
-            options:
+            - label: A propos de quoi est-ce trompeur&#160;?
+              rank: 3
+              type: RADIO
+              options:
               - L'origine
               - La composition
               - Un label ou une mention (exemple fait maison)
               - Une marque
               - Autre (à préciser)
-          - label: Pourquoi trouvez-vous ça trompeur ?
-            rank: 4
-            type: TEXTAREA
-            optionnal: true
-          - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
-            rank: 5
-            type: RADIO
-            options:
-              - Oui
-              - Non
-        fileLabel: Photo(s) si possible
+            - label: Pourquoi trouvez-vous ça trompeur ?
+              rank: 4
+              type: TEXTAREA
+              optionnal: true
+            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+              rank: 5
+              type: RADIO
+              options:
+                - Oui
+                - Non
+            fileLabel: Photo(s) si possible
       - title: Service
         example: 'Exemple : refus de mon chien, refus de me servir, personnel peu aimable'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
