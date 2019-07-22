@@ -20,6 +20,7 @@ list:
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Présence d'animaux
+            example: 'Exemple : cafards...'
             detailInputs:
             - label: Quel animal avez-vous vu&#160;?
               rank: 1
@@ -49,10 +50,15 @@ list:
               rank: 5
               type: TIMESLOT
               optionnal: true
-          - title: Problème de température
           - title: Problème d'hygiène des locaux
             subcategories:
               - title: Problème de voisinage (odeur, bruit)
+                information:
+                  title: Trouble anormal de voisinage
+                  subtitle: Les problèmes de nuisance tel que le bruit et les odeurs ne font pas partie du périmètre de la repression des fraudes.
+                  actions:
+                    - question: Vous trouverez sur ce lien les recours possibles pour ce type de problème.&#160;?
+                      answer: <br><a href="https://www.service-public.fr/particuliers/vosdroits/F19299" target="_blank" />https://www.service-public.fr/particuliers/vosdroits/F19299</a>  
               - title: Locaux sales ou dégradés
                 example: 'Exemple : cuisine sale, WC sale'
               - title: Locaux non déclarés
@@ -64,6 +70,7 @@ list:
               - title: Mauvaises pratiques d'hygiène
                 example: 'Exemple : personne qui fume en cuisine'
               - title: Autres
+          - title: Problème de température    
           - title: Autre problème d'hygiène
       - title: Prix et paiement
         example: 'Exemple : refus de CB, prix trop cher, supplément'
