@@ -302,7 +302,7 @@ list:
     icon: icon_hygien.png
     subcategories:
       - title: Publicité
-        example: 'Exempl e: mention mensongère'
+        example: 'Exemple: mention mensongère'
         subcategories:
           - title: Indisponibilité des produits/offres
             detailInputs:
@@ -356,14 +356,27 @@ list:
         example: 'Exemple : pas de réponse du service client'
       - title: Appels ou sms indésirables
         example: 'Exemple : spams, démarchages téléphoniques'
-          
         
+# transport / véhicule     
+  - category: Transport / Automobile
+    categoryId: VEH
+    path: pratique-d-hygiene
+    description: location de voiture, billets, taxi, auto-école
+    rank: 3
+    icon: icon_hygien.png
+    subcategoriesTitle: "Quel est le secteur r&#160;?"
+    subcategories:
+      - title: Location de véhicule
+      - title: Vente / réparation de véhicule
+        example: 'Exemple : garagistre, dépanneur'
+      - title: Taxi / VTC
+      - title: Transport en commun
+        example: 'Exemple : train, avion, bus'
+      - title: Permis
+        example: 'Exemple : auto-école'
         
-        
-        
-        
-        
-        
+    
+    
         
   - category: Pratique d'hygiène
     categoryId: HYG
@@ -1108,7 +1121,7 @@ list:
     categoryId: INTOX
     path: intoxication-alimentaire
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
-    rank: 5
+    rank: 116
     icon: icon_disease.png
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
