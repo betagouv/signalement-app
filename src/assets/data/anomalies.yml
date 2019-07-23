@@ -390,8 +390,8 @@ list:
                 example: 'Exemple : absence de l''affichette des prix'
               - title: Prix différent de celui affiché
                 example: 'Exemple : le prix à payer est différent de celui annoncé'
-              - title: Problème pour payer
-                example: 'Exemple : refus d''un moyen de paiement'
+              - title: Refus d'un moyen de paiement
+                example: 'Exemple : refus de la carte bancaire'
                 subcategories:
                   - title: Refus du paiement en espèces
                     subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
@@ -409,32 +409,11 @@ list:
                           content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
                             <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
                       - title: Autre
-                      - title: Refus de la carte bancaire
-                        subcategories:
-                          - title: Il s'agit d'un taxi officiel
-                          - title: Il s'agit d'un service de VTC
-                            subcategoriesTitle: Pour quelle raison le professionnel a-t-il refusé votre carte bleue&#160;?
-                            subcategories:
-                              - title: Il exige un minimum d'achat
-                                subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
-                                subcategories:
-                                  - title: Oui
-                                    example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
-                                    information:
-                                      title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
-                                      content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
-                                  - title: Non
-                              - title: Il refuse tous les paiements par chèque ou carte bleue
-                                subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
-                                subcategories:
-                                  - title: Oui
-                                    example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
-                                    information:
-                                      title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                                      content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
-                                  - title: Non
-                      - title: Refus d'un chèque
-                        subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque&#160;?
+                  - title: Refus de la carte bancaire
+                    subcategories:
+                      - title: Il s'agit d'un taxi officiel
+                      - title: Il s'agit d'un service de VTC
+                        subcategoriesTitle: Pour quelle raison le professionnel a-t-il refusé votre carte bancaire&#160;?
                         subcategories:
                           - title: Il exige un minimum d'achat
                             subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
@@ -445,14 +424,35 @@ list:
                                   title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
                                   content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
                               - title: Non
-                      - title: Il refuse tous les paiements par chèque ou carte bleue
-                        subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+                          - title: Il refuse tout paiement par carte bancaire
+                            subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bancaire&#160;?
+                            subcategories:
+                              - title: Oui
+                                example: 'Exemple : sur une affiche au niveau ses vitres'
+                                information:
+                                  title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                                  content: Il doit l’indiquer très visiblement au consommateur.
+                              - title: Non
+                  - title: Refus d'un chèque
+                    subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque&#160;?
+                    subcategories:
+                      - title: Il exige un minimum d'achat
+                        subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                        subcategories:
+                          - title: Oui
+                            example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                            information:
+                              title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                              content: Il doit l’indiquer très visiblement au consommateur.
+                          - title: Non
+                      - title: Il refuse tout paiements par chèque
+                        subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait les chèques&#160;?
                         subcategories:
                           - title: Oui
                             example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
                             information:
                               title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                              content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                              content: Il doit l’indiquer très visiblement au consommateur.
                           - title: Non
                       - title: Autres
                         example: 'Exemple : problème avec le terminal de paiement...'
