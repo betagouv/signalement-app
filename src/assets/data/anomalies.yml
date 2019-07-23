@@ -364,16 +364,42 @@ list:
     description: location de voiture, billets, taxi, auto-école
     rank: 3
     icon: icon_hygien.png
-    subcategoriesTitle: "Quel est le secteur r&#160;?"
+    subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
-      - title: Location de véhicule
+    # location de voiture, leasing, velib
+      - title: Location
+        example: 'Exemple : location de voiture, leasing, vélo libre-service'
+        subcategories:
+          - title: Prix / Paiement
+          - title: Publicité
+          - title: Autre
+    # garagiste et dépanneur
       - title: Vente / réparation de véhicule
         example: 'Exemple : garagistre, dépanneur'
+        subcategories:
+          - title: Prix / Paiement
+          - title: Publicité
+          - title: Autre
+    # taxi VTC
       - title: Taxi / VTC
+        subcategories:
+          - title: Prix / Paiement
+          - title: Publicité
+          - title: Autre
+    # train, avion, bus
       - title: Transport en commun
         example: 'Exemple : train, avion, bus'
+        subcategories:
+          - title: Prix / Paiement
+          - title: Publicité
+          - title: Autre'
+    # autoécole
       - title: Permis
         example: 'Exemple : auto-école'
+        subcategories:
+          - title: Prix / Paiement
+          - title: Publicité
+          - title: Autre
         
     
     
