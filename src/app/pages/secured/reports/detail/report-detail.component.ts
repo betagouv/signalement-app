@@ -304,7 +304,7 @@ export class ReportDetailComponent implements OnInit {
       this.eventService.createEvent(
         Object.assign(new ReportEvent(), {
           reportId: this.reportId,
-          eventType: 'CONSO',
+          eventType: 'PRO',
           action: Object.assign(ProAnswerReportEventAction),
           detail: this.answerCtrl.value,
           resultAction: true
