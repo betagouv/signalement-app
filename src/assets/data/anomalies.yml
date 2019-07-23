@@ -5,7 +5,7 @@ list:
     path: pratique-d-hygiene
     description: bar, cafeteria, food truck...
     rank: 1
-    icon: icon_hygien.png
+    icon: icon_rest.png
     subcategories:
       - title: Intoxication alimentaire
         example: 'Vous avez été malade (vomissement, maux de ventre) après être allé dans l''établissement'
@@ -299,7 +299,7 @@ list:
     path: pratique-d-hygiene
     description: forfait téléphone, opérateur
     rank: 2
-    icon: icon_hygien.png
+    icon: icon_tel.png
     subcategories:
       - title: Publicité
         example: 'Exemple: mention mensongère'
@@ -363,15 +363,15 @@ list:
     path: pratique-d-hygiene
     description: location de voiture, billets, taxi, auto-école
     rank: 3
-    icon: icon_hygien.png
+    icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
     # location de voiture, leasing, velib
       - title: Location
         example: 'Exemple : location de voiture, leasing, vélo libre-service'
         subcategories:
-          - title: Prix / Paiement
           - title: Publicité
+          - title: Prix / Paiement
           - title: Autre
     # garagiste et dépanneur
       - title: Vente / réparation de véhicule
@@ -384,6 +384,81 @@ list:
       - title: Taxi / VTC
         subcategories:
           - title: Prix / Paiement
+            example: 'Exemple : refus de CB, supplément'
+            subcategories:
+              - title: Prix pas affiché
+                example: 'Exemple : absence de l''affichette des prix'
+              - title: Prix différent de celui affiché
+                example: 'Exemple : le prix à payer est différent de celui annoncé'
+              - title: Problème pour payer
+                example: 'Exemple : refus d''un moyen de paiement'
+                subcategories:
+                  - title: Refus du paiement en espèces
+                    subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+                    subcategories:
+                      - title: Il refuse tout paiement en espèces
+                        description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+                      - title: Il n'avait pas assez de monnaie
+                        information:
+                        content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                      - title: Mes pièces / billets étaient en mauvais état
+                        information:
+                            content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                      - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
+                        information:
+                          content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                            <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+                      - title: Autre
+                      - title: Refus de la carte bancaire
+                        subcategories:
+                          - title: Il s'agit d'un taxi officiel
+                          - title: Il s'agit d'un service de VTC
+                            subcategoriesTitle: Pour quelle raison le professionnel a-t-il refusé votre carte bleue&#160;?
+                            subcategories:
+                              - title: Il exige un minimum d'achat
+                                subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                                subcategories:
+                                  - title: Oui
+                                    example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                                    information:
+                                    title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                                    content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                                  - title: Non
+                              - title: Il refuse tous les paiements par chèque ou carte bleue
+                                subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+                                subcategories:
+                                  - title: Oui
+                                    example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                                    information:
+                                    title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                                    content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                                  - title: Non
+                      - title: Refus d'un chèque
+                        subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque&#160;?
+                        subcategories:
+                          - title: Il exige un minimum d'achat
+                            subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                            subcategories:
+                              - title: Oui
+                                example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                                information:
+                                title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                                content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                              - title: Non
+                      - title: Il refuse tous les paiements par chèque ou carte bleue
+                        subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+                        subcategories:
+                          - title: Oui
+                            example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                            information:
+                            title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                            content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                          - title: Non
+                      - title: Autres
+                        example: 'Exemple : problème avec le terminal de paiement...'
+                  - title: Autres problèmes de prix ou paiement
+              - title: Problème de facture/ticket de caisse
+                example: 'Exemple : refus de délivrer une note'
           - title: Publicité
           - title: Autre
     # train, avion, bus
@@ -392,7 +467,7 @@ list:
         subcategories:
           - title: Prix / Paiement
           - title: Publicité
-          - title: Autre'
+          - title: Autre
     # autoécole
       - title: Permis
         example: 'Exemple : auto-école'
