@@ -369,7 +369,7 @@ list:
     categoryId: HYG
     path: pratique-d-hygiene
     description: Locaux sales, présence de rat, rupture de la chaîne du froid...
-    rank: 10
+    rank: 110
     icon: icon_hygien.png
     subcategories:
       - title: Hygiène des locaux et du matériel
@@ -490,7 +490,7 @@ list:
     categoryId: NOURR
     path: nourriture-et-boissons
     description: Produit périmé, emballage trompeur, problème de quantité...
-    rank: 3
+    rank: 111
     withInternetPurchase: true
     icon: icon_food.png
     subcategories:
@@ -955,7 +955,7 @@ list:
     categoryId: MATOS
     path: materiel-et-objets
     description: Problème avec une notice ou un appareil...
-    rank: 4
+    rank: 112
     withInternetPurchase: true
     icon: icon_material.png
     subcategories:
@@ -1120,7 +1120,7 @@ list:
     categoryId: PRIX
     path: prix-et-paiement
     description: Absence de prix, erreur de prix, refus de prendre une CB, fausse promotion...
-    rank: 6
+    rank: 113
     withInternetPurchase: true
     icon: icon_price.png
     subcategories:
@@ -1277,7 +1277,7 @@ list:
     categoryId: PUB
     path: publicite
     description: Information trompeuse, produit en promotion pas disponible...
-    rank: 7
+    rank: 114
     withInternetPurchase: true
     icon: icon_pub.png
     subcategories:
@@ -1387,7 +1387,7 @@ list:
     categoryId: SERACH
     path: services-apres-vente
     description: Colis non reçu, problème de garantie constructeur, hotline injoignable,...
-    rank: 8
+    rank: 115
     withInternetPurchase: true
     icon: icon_service.png
     subcategories:
@@ -1690,7 +1690,7 @@ list:
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 9
+    rank: 5
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
