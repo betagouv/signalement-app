@@ -22,6 +22,36 @@
   </url>
 
   <url>
+    <loc>https://signalconso.beta.gouv.fr/pratique-d-hygiene</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/nourriture-et-boissons</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/materiel-et-objets</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/prix-et-paiement</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/publicite</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/services-apres-vente</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
     <loc>https://signalconso.beta.gouv.fr/delai-de-retractation</loc>
     <priority>0.3</priority>
   </url>

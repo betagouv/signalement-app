@@ -1,8 +1,8 @@
-![equipe dediee](assets/blog/2019/06/25/une-equipe-dediee/Article4.jpg)
+![equipe dediee](/assets/blog/2019/06/25/une-equipe-dediee/Article4.jpg)
 
 # Une équipe dédiée
 
-Une Start-up d’Etat fonctionne grâce à une «équipe dédiée» qui travaille exclusivement sur le produit; 
+Une Startup d’Etat fonctionne grâce à une «équipe dédiée» qui travaille exclusivement sur le produit; 
 à la différence d’une «équipe projet» dont les membres opèrent sur plusieurs missions en parallèle. 
 Très bien coordonnée, l’équipe dédiée teste et améliore sa solution très rapidement pour toujours innover. 
 Elle se compose de plusieurs membres : 
@@ -24,4 +24,16 @@ Il propose ensuite des améliorations ou de nouvelles idées grâce à toutes ce
 Les usagers restent ainsi au centre des préoccupations de la Startup. 
 
 Une **équipe dédiée** est donc l’un des trois principes fondamentaux d’une Startup d’Etat, aux côtés des **problèmes de politique publique** et de l’**approche incrémentale**. 
-Des questions sur Beta.gouv.fr? Toutes les infos [ici](https://beta.gouv.fr) ! Intéressé(e) par l’**aventure SignalConso** ? C’est par [là](https://signalconso.beta.gouv.fr) ! 
+Des questions sur Beta.gouv.fr? Toutes les infos [ici](https://beta.gouv.fr) ! Intéressé(e) par l’**histoire de SignalConso** ? C’est par [là](https://signalconso.beta.gouv.fr) ! 
+
+
+
+### Découvrir la méthode Startup d'Etat
+
+I - [Une Startup d'Etat, c'est quoi ?](/blog/2019/06/04/Start-up-dEtat)
+
+II - [Problème de politique publique ? Solution Startup d’Etat !](/blog/2019/06/11/Solution-Start-up-dEtat)
+
+III - [La méthode incrémentale ou comment être plus souple et rapide](/blog/2019/06/18/la-methode-incrementale)
+
+**IV - Une équipe dédiée**

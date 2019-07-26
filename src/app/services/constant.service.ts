@@ -34,6 +34,17 @@ export class ConstantService {
     );
   }
 
+  getActionAgents() {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<ReportEventAction[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionAgents']),
+          headers
+        );
+      })
+    );
+  }
+
   getStatusPros() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {

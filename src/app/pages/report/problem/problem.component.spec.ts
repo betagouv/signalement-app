@@ -10,7 +10,6 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
 import { Report, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportPaths } from '../../../services/report-router.service';
@@ -44,6 +43,7 @@ describe('ProblemComponent', () => {
   const anomalyFixture = new Anomaly();
   anomalyFixture.category = reportFixture.category;
   anomalyFixture.subcategories = subcategoriesFixture;
+  anomalyFixture.path = 'myPath';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -58,7 +58,7 @@ describe('ProblemComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule.withRoutes([{ path: ReportPaths.Details, redirectTo: '' }]),
+        RouterTestingModule.withRoutes([{ path: `myPath/${ReportPaths.Details}`, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
         NoopAnimationsModule
       ],
@@ -70,7 +70,7 @@ describe('ProblemComponent', () => {
   beforeEach(() => {
     anomalyService = TestBed.get(AnomalyService);
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.reportInProgess = of(reportFixture);
+    reportStorageService.changeReportInProgress(reportFixture);
 
     fixture = TestBed.createComponent(ProblemComponent);
     component = fixture.componentInstance;

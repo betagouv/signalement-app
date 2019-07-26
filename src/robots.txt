@@ -7,3 +7,10 @@ Disallow: /connexion*
 Disallow: /suivi-des-signalements*
 Disallow: /mode-emploi-dgccrf
 Disallow: /compte*
+Disallow: /*le-probleme
+Disallow: /*la-description
+Disallow: /*le-commerçant
+Disallow: /*le-consommateur
+Disallow: /*confirmation
+Disallow: /*accuse-de-reception
+Disallow: /*information

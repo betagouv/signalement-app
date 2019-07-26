@@ -14,11 +14,35 @@
         <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
       </div>
 
-      <hr class="mb-6" />
+      <div class="position-relative">
+        <hr class="mb-6" />
+
+        <div class="text-center" *ngIf="!ratingSuccess; else ratingSuccessTpl">
+          <p class="title">Est-ce que cette information vous a été utile ?</p>
+          <button type="button" class="btn btn-outline-primary mr-3" (click)="rateInformation(true)">
+            <i class="material-icons md-24" alt="Icône pouce levé" title="information utile">thumb_up</i>
+          </button>
+          <button type="button" class="btn btn-outline-primary" (click)="rateInformation(false)">
+            <i class="material-icons md-24" alt="Icône pouce baissé" title="information inutile">thumb_down</i>
+          </button>
+        </div>
+        <div class="notification error" *ngIf="loadingError">
+          Une erreur technique s'est produite<br />
+        </div>
+        <ng-template #ratingSuccessTpl>
+          <div class="notification success text-center">
+            Votre avis a bien été enregistré, nous vous en remercions.
+          </div>
+        </ng-template>
+
+        <hr class="mb-6" />
+        <ngx-loading [show]="loading"></ngx-loading>
+      </div>
 
       <button class="btn btn-lg btn-primary mx-auto" (click)="newReport()">
         Identifier un autre problème
       </button>
+
     </div>
   </section>
 </main>

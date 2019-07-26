@@ -3,7 +3,7 @@ import { Report } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
-import { ReportEvent } from '../../../../model/ReportEvent';
+import { ProAnswerReportEventAction, ReportEvent } from '../../../../model/ReportEvent';
 import { combineLatest } from 'rxjs';
 import { EventService } from '../../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -12,7 +12,7 @@ import { CompanyService } from '../../../../services/company.service';
 import { Company } from '../../../../model/Company';
 import { switchMap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../../model/AuthUser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
 
@@ -28,6 +28,8 @@ export class ReportDetailComponent implements OnInit {
   permissions = Permissions;
   roles = Roles;
   report: Report;
+
+  showErrors: boolean;
   loading: boolean;
   loadingError: boolean;
   events: ReportEvent[];
@@ -35,15 +37,28 @@ export class ReportDetailComponent implements OnInit {
   bsModalRef: BsModalRef;
   reportIdToDelete: string;
 
-  companyForm: FormGroup;
+  companySiretForm: FormGroup;
   siretCtrl: FormControl;
   companyForSiret: Company;
+  searchBySiret = true;
+
+  companyAddressForm: FormGroup;
+  nameCtrl: FormControl;
+  line1Ctrl: FormControl;
+  line2Ctrl: FormControl;
+  line3Ctrl: FormControl;
+  postalCodeCtrl: FormControl;
+  cityCtrl: FormControl;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
   lastNameCtrl: FormControl;
   emailCtrl: FormControl;
   contactAgreementCtrl: FormControl;
+
+  proAnswerForm: FormGroup;
+  answerCtrl: FormControl;
+  answerSuccess: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -52,6 +67,7 @@ export class ReportDetailComponent implements OnInit {
               private companyService: CompanyService,
               private modalService: BsModalService,
               private route: ActivatedRoute,
+              private router: Router,
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
@@ -83,15 +99,38 @@ export class ReportDetailComponent implements OnInit {
         this.loadingError = true;
       });
 
-    this.initCompanyForm();
+    this.initCompanySiretForm();
+    this.initCompanyAddressForm();
   }
 
-  initCompanyForm() {
+  initCompanySiretForm() {
     this.siretCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{14}')]);
 
-    this.companyForm = this.formBuilder.group({
+    this.companySiretForm = this.formBuilder.group({
       siret: this.siretCtrl
     });
+  }
+
+  initCompanyAddressForm() {
+    this.nameCtrl = this.formBuilder.control('', Validators.required);
+    this.line1Ctrl = this.formBuilder.control('', Validators.required);
+    this.line2Ctrl = this.formBuilder.control('');
+    this.line3Ctrl = this.formBuilder.control('');
+    this.postalCodeCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{5}')]);
+    this.cityCtrl = this.formBuilder.control('', Validators.required);
+
+    this.companyAddressForm = this.formBuilder.group({
+      name: this.nameCtrl,
+      line1: this.line1Ctrl,
+      line2: this.line2Ctrl,
+      line3: this.line3Ctrl,
+      postalCode: this.postalCodeCtrl,
+      city: this.cityCtrl,
+    });
+  }
+
+  changeCompanySearchTab() {
+    this.searchBySiret = !this.searchBySiret;
   }
 
   initConsumerForm() {
@@ -147,7 +186,7 @@ export class ReportDetailComponent implements OnInit {
       });
   }
 
-  submitCompanyForm() {
+  submitCompanySiretForm() {
     this.loading = true;
     this.loadingError = false;
     this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
@@ -161,10 +200,23 @@ export class ReportDetailComponent implements OnInit {
       });
   }
 
-  changeCompany() {
+  submitCompanyAddressForm() {
+    this.changeCompany(Object.assign(new Company(), {
+      siret: this.report.company.siret,
+      name: this.nameCtrl.value,
+      line1: this.nameCtrl.value,
+      line2: this.line1Ctrl.value,
+      line3: this.line2Ctrl.value,
+      line4: this.line3Ctrl.value,
+      line5: `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`,
+      postalCode: this.postalCodeCtrl.value,
+    }));
+  }
+
+  changeCompany(company: Company) {
     this.loading = true;
     this.loadingError = false;
-    this.reportService.updateReport(Object.assign(new Report(), this.report, {company: this.companyForSiret}))
+    this.reportService.updateReport(Object.assign(new Report(), this.report, { company }))
       .pipe(
         switchMap(() => {
           return this.eventService.createEvent(Object.assign(new ReportEvent(), {
@@ -181,13 +233,14 @@ export class ReportDetailComponent implements OnInit {
       )
       .subscribe(
         events => {
-          this.report.company = this.companyForSiret;
+          this.report.company = company;
           this.events = events;
           this.companyForSiret = undefined;
           this.siretCtrl.setValue('');
           this.bsModalRef.hide();
         },
         err => {
+          console.log('err', err)
           this.loading = false;
           this.loadingError = true;
         });
@@ -231,5 +284,50 @@ export class ReportDetailComponent implements OnInit {
         });
   }
 
+  showProAnswerForm() {
+    this.answerCtrl = this.formBuilder.control('', Validators.required);
+    this.proAnswerForm = this.formBuilder.group({
+      answer: this.answerCtrl
+    });
+  }
 
+  hideProAnswerForm() {
+    this.proAnswerForm = undefined;
+  }
+
+  submitProAnswerForm() {
+    if (!this.proAnswerForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.loading = true;
+      this.loadingError = false;
+      this.eventService.createEvent(
+        Object.assign(new ReportEvent(), {
+          reportId: this.reportId,
+          eventType: 'PRO',
+          action: Object.assign(ProAnswerReportEventAction),
+          detail: this.answerCtrl.value,
+          resultAction: true
+        })
+      ).subscribe(
+        event => {
+          this.loading = false;
+          this.events.push(event);
+          this.answerSuccess = true;
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
+    }
+
+  }
+
+  hasError(formControl: FormControl) {
+    return this.showErrors && formControl.errors;
+  }
+
+  getProAnswerEvent() {
+    return this.events.find(event => event.action.name === ProAnswerReportEventAction.name);
+  }
 }

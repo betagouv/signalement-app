@@ -35,7 +35,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.initLoginForm();
 
     this.route.url.subscribe(url => {
-      console.log('url', url)
       this.isDgccrf = url.findIndex(u => u.toString() === 'dgccrf') >= 0;
     });
   }
