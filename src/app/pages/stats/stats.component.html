@@ -36,19 +36,19 @@
       <div class="row">
         <div class="col-4 count stat">
           <h3>Signalements transmis&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Pourcentage de signalements transmis au professionnel&#10;(dans les régions d'expérimentation)">help_outline</i></h3>
-          {{ ! statistics ? "NA" : ((statistics.reportsCountSendedToPro / statistics.reportsCountInRegion) * 100).toFixed(0) + "%"}}
+          {{ ! statistics ? "NA" : statistics.reportsPercentageSendedToPro.toFixed(0) + "%"}}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
           <h3>Promesses d'action&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Pourcentage de promesses d'action positives&#10;des professionels (dans les régions d'expérimentation)">help_outline</i></h3>
-          {{ ! statistics ? "NA" : ((statistics.reportsCountPromise / statistics.reportsCountInRegion) * 100).toFixed(0) + "%" }}
+          {{ ! statistics ? "NA" : statistics.reportsPercentagePromise.toFixed(0) + "%" }}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
       <div class="row" *ngIf="user && user.role === 'Admin'">
         <div class="col-4 count stat">
           <h3>Signalements sans SIRET</h3>
-          {{ ! statistics ? "NA" : ((statistics.reportsCountWithoutSiret / statistics.reportsCount) * 100).toFixed(0) + "%"}}
+          {{ ! statistics ? "NA" : statistics.reportsPercentageWithoutSiret.toFixed(0) + "%"}}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
