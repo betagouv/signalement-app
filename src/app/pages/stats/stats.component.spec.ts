@@ -28,9 +28,9 @@ describe('StatsComponent', () => {
     "reportsCountInRegion": 9,
     "reportsCount7DaysInRegion": 2,
     "reportsCount30DaysInRegion": 3,
-    "reportsCountSendedToPro": 4,
-    "reportsCountPromise": 2,
-    "reportsCountWithoutSiret": 3,
+    "reportsPercentageSendedToPro":	85.71,
+    "reportsPercentagePromise": 33.33,
+    "reportsPercentageWithoutSiret": 4.76,
     "reportsCountByCategoryList": [
         {
             "category": "Nourriture et boissons",
