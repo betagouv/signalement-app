@@ -55,12 +55,12 @@ export class Statistics {
   reportsCount30Days: number;
   @JsonProperty('reportsCount30DaysInRegion')
   reportsCount30DaysInRegion: number;
-  @JsonProperty('reportsCountSendedToPro')
-  reportsCountSendedToPro: number;
-  @JsonProperty('reportsCountPromise')
-  reportsCountPromise: number;
-  @JsonProperty('reportsCountWithoutSiret')
-  reportsCountWithoutSiret: number;
+  @JsonProperty('reportsPercentageSendedToPro')
+  reportsPercentageSendedToPro: number;
+  @JsonProperty('reportsPercentagePromise')
+  reportsPercentagePromise: number;
+  @JsonProperty('reportsPercentageWithoutSiret')
+  reportsPercentageWithoutSiret: number;
   @JsonProperty('reportsDurationsForEnvoiSignalement')
   reportsDurationsForEnvoiSignalement: number;
   @JsonProperty('reportsCountByCategoryList')
@@ -76,9 +76,9 @@ export class Statistics {
     this.reportsCount7DaysInRegion = undefined;
     this.reportsCount30Days = undefined;
     this.reportsCount30DaysInRegion = undefined;
-    this.reportsCountSendedToPro = undefined;
-    this.reportsCountPromise = undefined;
-    this.reportsCountWithoutSiret = undefined;
+    this.reportsPercentageSendedToPro = undefined;
+    this.reportsPercentagePromise = undefined;
+    this.reportsPercentageWithoutSiret = undefined;
     this.reportsDurationsForEnvoiSignalement = undefined;
     this.reportsCountByCategoryList = undefined;
     this.reportsCountByRegionList = undefined;
