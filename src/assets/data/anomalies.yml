@@ -361,8 +361,8 @@ list:
   - category: Transport / Automobile
     categoryId: VEH
     path: pratique-d-hygiene
-    description: location de voiture, billets, taxi, auto-école
-    rank: 
+    description: location de voiture, taxi, auto-école
+    rank: 3
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
@@ -461,9 +461,9 @@ list:
                 example: 'Exemple : refus de délivrer une note'
           - title: Publicité
           - title: Autre
-    # train, avion, bus
+    # transport en commun
       - title: Transport en commun
-        example: 'Exemple : train, avion, bus'
+        example: 'Exemple : bus'
         subcategories:
           - title: Prix / Paiement
           - title: Publicité
@@ -481,22 +481,35 @@ list:
     path: pratique-d-hygiene
     description: supermarché, boulangerie, magasin de jouet...
     rank: 2
-    icon: icon_mag.png
+    icon: icon_store.png
     
   - category: Travaux / rénovation
     categoryId: TRAV
     path: pratique-d-hygiene
     description: dépannage, plombier, couvreur, pose de panneaux...
     rank: 4
-    icon: icon_trav.png
+    icon: icon_craft.png
     
   - category: Banque / Assurance
     categoryId: BAQ
     path: pratique-d-hygiene
     description: crédit, assurance
     rank: 5
-    icon: icon_banq.png
+    icon: icon_bank.png
     
+  - category: Immobilier
+    categoryId: IMM
+    path: pratique-d-hygiene
+    description: location, agence immobiliere...
+    rank: 7
+    icon: icon_real_estate.png
+    
+  - category: Voyage / Loisirs
+    categoryId: VOY
+    path: pratique-d-hygiene
+    description: voyage organisé, camping, concert, sport, billets d''avion
+    rank: 8
+    icon: icon_hobbies.png
         
   - category: Pratique d'hygiène
     categoryId: HYG
@@ -1823,7 +1836,7 @@ list:
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 7
+    rank: 9
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
