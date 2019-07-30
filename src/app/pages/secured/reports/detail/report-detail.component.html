@@ -259,9 +259,14 @@
 
         <ng-container *ngIf="getProAnswerEvent()">
           <hr />
-          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
+          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée
+            <i class="material-icons md-18 valign-top" alt="Icône pouce levé" title="signalement accepté" *ngIf="getProAnswerEvent().resultAction">thumb_up</i>
+            <i class="material-icons md-18 valign-top" alt="Icône pouce baissé" title="signalement refusé" *ngIf="!getProAnswerEvent().resultAction">thumb_down</i>
+          </h5>
           <ng-template #titleAnswerNoPro>
-            <h5>Réponse apportée par le professionnel</h5>
+            <h5>
+              Réponse apportée par le professionnel
+            </h5>
           </ng-template>
           <div class="row" id="proAnswer">
             <div class="col-12">
@@ -333,7 +338,12 @@
       <div *ngIf="report && !getProAnswerEvent()">
         <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
           <p>Votre réponse est importante ; elle sera visible par le consommateur et la DGCCRF.</p>
-          <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
+          <div class="mb-4">
+            <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
+          </div>
+          <div>
+            <span class="link pointer" (click)="showProAnswerFormDeclined()">je considère que le signalement est infondé</span>
+          </div>
         </div>
         <ng-template #proAnswer>
           <div class="notification">
@@ -342,7 +352,7 @@
                 Réponse au consommateur et à la DGCCRF
               </label>
               <textarea [formControl]="answerCtrl" id="proAnswerInput" rows="5"
-                        placeholder="Précisez les actions préventives / correctives que vous allez mettre en place. Si vous estimez que le signalement est infondé, merci de l'indiquer ici">
+                        placeholder="{{ placeholderPro }}">
               </textarea>
               <div class="notification error" *ngIf="showErrors && proAnswerForm.invalid">
                 Veuillez renseigner les champs obligatoires.<br />
