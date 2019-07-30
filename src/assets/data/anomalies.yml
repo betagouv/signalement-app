@@ -298,7 +298,7 @@ list:
     categoryId: TEL
     path: pratique-d-hygiene
     description: forfait téléphone, opérateur
-    rank: 2
+    rank: 6
     icon: icon_tel.png
     subcategories:
       - title: Publicité
@@ -362,7 +362,7 @@ list:
     categoryId: VEH
     path: pratique-d-hygiene
     description: location de voiture, billets, taxi, auto-école
-    rank: 3
+    rank: 
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
@@ -476,7 +476,26 @@ list:
           - title: Publicité
           - title: Autre
         
+  - category: Magasin
+    categoryId: MAG
+    path: pratique-d-hygiene
+    description: supermarché, boulangerie, magasin de jouet...
+    rank: 2
+    icon: icon_mag.png
     
+  - category: Travaux / rénovation
+    categoryId: TRAV
+    path: pratique-d-hygiene
+    description: dépannage, plombier, couvreur, pose de panneaux...
+    rank: 4
+    icon: icon_trav.png
+    
+    - category: Banque / Assurance
+    categoryId: BAQ
+    path: pratique-d-hygiene
+    description: crédit, assurance
+    rank: 5
+    icon: icon_banq.png
     
         
   - category: Pratique d'hygiène
@@ -1804,7 +1823,7 @@ list:
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 5
+    rank: 7
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
