@@ -10,6 +10,7 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { Report } from '../../../model/Report';
 import { RetractationComponent } from '../../static/retractation/retractation.component';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { NgxLoadingModule } from 'ngx-loading';
 
 describe('InformationComponent', () => {
 
@@ -32,6 +33,7 @@ describe('InformationComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         Angulartics2RouterlessModule.forRoot(),
+        NgxLoadingModule,
       ],
       providers: [
         ReportStorageService,
