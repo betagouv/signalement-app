@@ -490,7 +490,7 @@ list:
     rank: 4
     icon: icon_trav.png
     
-    - category: Banque / Assurance
+  - category: Banque / Assurance
     categoryId: BAQ
     path: pratique-d-hygiene
     description: crédit, assurance
