@@ -141,7 +141,7 @@ list:
               optionnal: true
           - title: Autre problème d'hygiène
       - title: Prix et paiement
-        example: 'Exemple : refus de CB, prix trop cher, supplément'
+        example: 'Exemple : refus de CB, prix trop cher, supplément non annoncé à l''avance'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Prix pas affiché
@@ -294,10 +294,10 @@ list:
             - title: Oui (je possède la carte d'assistance)
           - title: Autre problème de service
 
-  - category: Téléphonie / abonnement / fournisseur d'accès
+  - category: Téléphonie / Eau-Gaz-Electricité
     categoryId: TEL
     path: pratique-d-hygiene
-    description: forfait téléphone, opérateur
+    description: forfait téléphone, fournisseur d'accès, contrat gaz..
     rank: 6
     icon: icon_tel.png
     subcategories:
@@ -354,14 +354,16 @@ list:
         example: 'Exemple : reconduction de contrat, clause abusive'
       - title: SAV
         example: 'Exemple : pas de réponse du service client'
+      - title: Démarchage
+        example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
       - title: Appels ou sms indésirables
         example: 'Exemple : spams, démarchages téléphoniques'
         
 # transport / véhicule     
-  - category: Transport / Automobile
+  - category: Automobile / Transport
     categoryId: VEH
     path: pratique-d-hygiene
-    description: location de voiture, taxi, auto-école
+    description: vente et réparation de voiture, location, taxi, auto-école ..
     rank: 3
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
@@ -377,7 +379,10 @@ list:
       - title: Vente / réparation de véhicule
         example: 'Exemple : garagistre, dépanneur'
         subcategories:
-          - title: Prix / Paiement
+          - title: Prix / Facturation
+            example: 'Exemple : devis non détaillé, devis non respecté"
+          - title: Prestation mal ou non réalisée
+            example: 'Exemple : malfaçon, panne non réparée, pose d'un équipement endommagé"
           - title: Publicité
           - title: Autre
     # taxi VTC
@@ -473,15 +478,28 @@ list:
         example: 'Exemple : auto-école'
         subcategories:
           - title: Prix / Paiement
+            example: 'Exemple : prix non affiché'
           - title: Publicité
+            example: 'Exemple : publicité trompeuse'
           - title: Autre
+            example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement '
         
   - category: Magasin
     categoryId: MAG
     path: pratique-d-hygiene
     description: supermarché, boulangerie, magasin de jouet...
     rank: 2
-    icon: icon_store.png
+    icon: icon_store.png 
+    subcategories:
+      - title: prix
+        example: 'Exemple : il manque des prix en rayon, prix faux en caisse'
+      - title: hygiène
+        example: 'Exemple : magasin sale, rayon froid pas à bonne température"      
+      - title: publicité
+        example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
+      - title: service après-vente
+        example: 'Exemple : service client injoignable, problème de garantie'   
+      - title: autres
     
   - category: Travaux / rénovation
     categoryId: TRAV
@@ -489,6 +507,18 @@ list:
     description: dépannage, plombier, couvreur, pose de panneaux...
     rank: 4
     icon: icon_craft.png
+    subcategories:
+      - title: prix
+        example: 'Exemple : prix non affiché, devis non respecté'
+      - title: prestation
+        example: 'Exemple : malfaçons sur le chantier, chantier commencé mais j''amais terminé'
+      - title: contrat
+        example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
+      - title: publicité
+        example: 'Exemple : publicité trompeuse, logo de l''Etat or n''est pas un organisme affilié'
+      - title: service après-vente
+        example: 'Exemple : SAV injoignable'   
+      - title: autres
     
   - category: Banque / Assurance
     categoryId: BAQ
@@ -496,6 +526,16 @@ list:
     description: crédit, assurance
     rank: 5
     icon: icon_bank.png
+    subcategories:
+      - title: prix
+        example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir '
+      - title: contrat
+        example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
+      - title: publicité
+        example: 'Exemple : publicité pour un crédit non conforme'
+      - title: service après-vente
+        example: 'Exemple : SAV injoignable'   
+      - title: autres
     
   - category: Immobilier
     categoryId: IMM
@@ -505,7 +545,7 @@ list:
     icon: icon_real_estate.png
     subcategories:
       - title: prix
-        example: 'Exemple : affichage des prix, augmentation du loyer'
+        example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
       - title: facturation / remboursement
         example: 'Exemple : frais facturés injustifiés, caution non rendue'
       - title: contrat
@@ -525,6 +565,18 @@ list:
     description: voyage organisé, camping, concert, sport, billets d''avion
     rank: 8
     icon: icon_hobbies.png
+    subcategories:
+      - title: prix
+        example: 'Exemple : absence de prix, prix illisible'
+      - title: facturation / remboursement
+        example: 'Exemple : remboursement billet, surfacturation non prévue, annulation d''un spectacle ou d''un vol'
+      - title: contrat
+        example: 'Exemple : clause abusive dans le contrat de ma salle de sport'
+      - title: publicité
+        example: 'Exemple : publicité trompeuse'
+      - title: service après-vente
+        example: 'Exemple : SAV injoignable'       
+      - title: autres
         
   - category: Pratique d'hygiène
     categoryId: HYG
