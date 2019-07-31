@@ -505,15 +505,19 @@ list:
     icon: icon_real_estate.png
     subcategories:
       - title: prix
-        example: 'Exemple : affichage des prix'
+        example: 'Exemple : affichage des prix, augmentation du loyer'
       - title: facturation / remboursement
         example: 'Exemple : frais facturés injustifiés, caution non rendue'
       - title: contrat
-        example: 'Exemple : clause abusive dans le contrat'
+        example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
       - title: publicité
         example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
       - title: service après-vente
         example: 'Exemple : SAV injoignable'
+      - title: documents / dossier
+        example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
+      - title: autres
+        
     
   - category: Voyage / Loisirs
     categoryId: VOY
