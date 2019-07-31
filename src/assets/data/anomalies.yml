@@ -380,9 +380,9 @@ list:
         example: 'Exemple : garagistre, dépanneur'
         subcategories:
           - title: Prix / Facturation
-            example: 'Exemple : devis non détaillé, devis non respecté"
-          - title: Prestation mal ou non réalisée
-            example: 'Exemple : malfaçon, panne non réparée, pose d'un équipement endommagé"
+            example: 'Exemple : devis non détaillé, devis non respecté'
+          - title: Prestation mal réalisée ou pas réalisée
+            example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé'
           - title: Publicité
           - title: Autre
     # taxi VTC
