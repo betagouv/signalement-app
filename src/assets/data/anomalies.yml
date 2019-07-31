@@ -503,6 +503,17 @@ list:
     description: location, agence immobiliere...
     rank: 7
     icon: icon_real_estate.png
+    subcategories:
+      - title: prix
+        example: 'Exemple : affichage des prix'
+      - title: facturation / remboursement
+        example: 'Exemple : frais facturés injustifiés, caution non rendue'
+      - title: contrat
+        example: 'Exemple : clause abusive dans le contrat'
+      - title: publicité
+        example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
+      - title: service après-vente
+        example: 'Exemple : SAV injoignable'
     
   - category: Voyage / Loisirs
     categoryId: VOY
