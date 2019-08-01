@@ -5,6 +5,10 @@
       <h4 class="text-center">
         Récapitulatif de votre problème
       </h4>
+      <p class="text-center mt-3 mb-4 font-weight-bold text-primary">
+        <i class="material-icons md-18" alt="Icône d'avertissement" title="avertissement">warning</i>&nbsp;
+        Attention : le signalement n'a pas encore été envoyé. Cliquez sur envoyer.
+      </p>
       <div class="panel">
         <h5>Problème</h5>
         <div class="row">
@@ -70,10 +74,10 @@
       <div class="notification error mt-3" *ngIf="loadingError">
           Une erreur technique s'est produite lors de l'envoi, veuillez réessayer ultérieurement.<br />
       </div>
-      <hr />
+
       <button type="submit" class="btn btn-lg btn-primary">
         <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
-        Envoyer
+        Étape suivante : envoyer
       </button>
     </form>
   </div>

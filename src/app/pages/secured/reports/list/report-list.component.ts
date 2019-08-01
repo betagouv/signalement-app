@@ -176,6 +176,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
             .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
         });
     });
+
+    console.log("XXX ", JSON.stringify(this.reportsByDate))
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
@@ -236,6 +238,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
     } else {
       return '';
     }
+  }
+
+  getReportCssClassNewReport(status: string) {
+    return status ? "mr-3" : "bold mr-3"
   }
 
   selectArea(area?: Region | Department) {
