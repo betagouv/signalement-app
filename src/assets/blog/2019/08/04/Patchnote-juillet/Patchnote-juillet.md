@@ -32,7 +32,7 @@ Liste complète des ajouts et modifications apportés en juillet 2019 :
 + Publication de 5 articles de blog :
 + Article 1 : [Une Startup d'Etat, c'est quoi ?](/blog/2019/06/04/Start-up-dEtat)
 + Article 2 : [Problème de politique publique ? Solution Startup d’Etat !](/blog/2019/06/11/Solution-Start-up-dEtat)
-+ Article 3 : [La méthode incrémentale](/blog/2019/06/18/la-methode-incrementale/la-methode-incrementale)
++ Article 3 : [La méthode incrémentale](/blog/2019/06/18/la-methode-incrementale)
 + Article 4 : [Une équipe dédiée](/blog/2019/06/25/une-equipe-dediee)
 + Article 5 : [Pourquoi signaler ?](/blog/2019/07/28/Pourquoi-signaler) 
  
