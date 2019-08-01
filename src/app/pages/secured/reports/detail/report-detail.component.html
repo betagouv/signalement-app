@@ -337,7 +337,7 @@
     <ng-container *appRole="[roles.Pro]">
       <div *ngIf="report && !getProAnswerEvent()">
         <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
-          <p>Votre réponse est importante ; elle sera visible par le consommateur et la DGCCRF.</p>
+          <p>Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.</p>
           <div class="mb-4">
             <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
           </div>
@@ -360,8 +360,12 @@
               <div class="notification error" *ngIf="loadingError">
                 Une erreur technique s'est produite<br />
               </div>
-              <hr />
-              <div class="text-center">
+              <p class="text-center mt-3 mb-4 text-primary">
+                <i class="material-icons md-18" alt="Icône d'avertissement" title="avertissement">warning</i>&nbsp;
+                Votre réponse sera envoyée automatiquement par mail au consommateur ainsi qu'à la DGCCRF.
+              </p>
+
+              <div class="mt-4 text-center">
                 <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
                 &nbsp;
                 <button type="submit" class="btn btn-lg btn-primary">Envoyer</button>
