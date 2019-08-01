@@ -33,6 +33,12 @@ export class ReportDetailComponent implements OnInit {
   loading: boolean;
   loadingError: boolean;
   events: ReportEvent[];
+  reportIsAccepted: boolean;
+
+  placeholderPro: string;
+
+  placeholderProAccepted = "Précisez les actions préventives / correctives que vous allez mettre en place.";
+  placeholderProDeclined = "Si vous estimez que le signalement est infondé, merci de l'indiquer ici.";
 
   bsModalRef: BsModalRef;
   reportIdToDelete: string;
@@ -285,6 +291,17 @@ export class ReportDetailComponent implements OnInit {
   }
 
   showProAnswerForm() {
+    this.placeholderPro = this.placeholderProAccepted;
+    this.reportIsAccepted = true;
+    this.answerCtrl = this.formBuilder.control('', Validators.required);
+    this.proAnswerForm = this.formBuilder.group({
+      answer: this.answerCtrl
+    });
+  }
+
+  showProAnswerFormDeclined() {
+    this.placeholderPro = this.placeholderProDeclined;
+    this.reportIsAccepted = false;
     this.answerCtrl = this.formBuilder.control('', Validators.required);
     this.proAnswerForm = this.formBuilder.group({
       answer: this.answerCtrl
@@ -307,7 +324,7 @@ export class ReportDetailComponent implements OnInit {
           eventType: 'PRO',
           action: Object.assign(ProAnswerReportEventAction),
           detail: this.answerCtrl.value,
-          resultAction: true
+          resultAction: this.reportIsAccepted
         })
       ).subscribe(
         event => {
