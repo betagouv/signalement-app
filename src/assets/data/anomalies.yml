@@ -294,73 +294,24 @@ list:
             - title: Oui (je possède la carte d'assistance)
           - title: Autre problème de service
 
-  - category: Téléphonie / Eau-Gaz-Electricité
-    categoryId: TEL
+  - category: Achat / Magasin
+    categoryId: MAG
     path: pratique-d-hygiene
-    description: forfait téléphone, fournisseur d'accès, contrat gaz..
-    rank: 6
-    icon: icon_tel.png
+    description: supermarché, boulangerie, magasin de jouet...
+    rank: 2
+    icon: icon_store.png 
     subcategories:
-      - title: Publicité
-        example: 'Exemple: mention mensongère'
-        subcategories:
-          - title: Indisponibilité des produits/offres
-            detailInputs:
-              - label: Date du constat
-                rank: 1
-                type: DATE
-                defaultValue: SYSDATE
-              - label: Quel type de produit/offre était indisponible&#160;?
-                rank: 2
-                type: TEXT
-                placeholder: Type de produit
-              - label: Description
-                rank: 3
-                type: TEXTAREA
-          - title: Information mensongère ou trompeuse
-            detailInputs:
-            - label: Date du constat
-              rank: 1
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Qu'es-ce qui est trompeur&#160;?
-              rank: 2
-              type: RADIO
-              options:
-              - Une affiche
-              - Un site internet (à préciser)
-              - Le discours d'un vendeur
-              - La façon de mettre en vente
-              - Autre (à préciser)
-            - label: A propos de quoi est-ce trompeur&#160;?
-              rank: 3
-              type: RADIO
-              options:
-              - Un label ou une mention
-              - Le prix
-              - Autre (à préciser)
-            - label: Pourquoi trouvez-vous ça trompeur ?
-              rank: 4
-              type: TEXTAREA
-              optionnal: true
-            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
-              rank: 5
-              type: RADIO
-              options:
-                - Oui
-                - Non
-            fileLabel: Photo(s) si possible
-      - title: Contrat
-        example: 'Exemple : reconduction de contrat, clause abusive'
-      - title: SAV
-        example: 'Exemple : pas de réponse du service client'
-      - title: Démarchage
-        example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
-      - title: Appels ou sms indésirables
-        example: 'Exemple : spams, démarchages téléphoniques'
-        
-# transport / véhicule     
-  - category: Automobile / Transport
+      - title: prix
+        example: 'Exemple : il manque des prix en rayon, prix faux en caisse'
+      - title: hygiène
+        example: 'Exemple : magasin sale, rayon froid pas à bonne température'      
+      - title: publicité
+        example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
+      - title: service après-vente
+        example: 'Exemple : service client injoignable, problème de garantie'   
+      - title: autres
+
+  - category: Voiture / Véhicule
     categoryId: VEH
     path: pratique-d-hygiene
     description: vente et réparation de voiture, location, taxi, auto-école ..
@@ -483,25 +434,8 @@ list:
             example: 'Exemple : publicité trompeuse'
           - title: Autre
             example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement '
-        
-  - category: Magasin
-    categoryId: MAG
-    path: pratique-d-hygiene
-    description: supermarché, boulangerie, magasin de jouet...
-    rank: 2
-    icon: icon_store.png 
-    subcategories:
-      - title: prix
-        example: 'Exemple : il manque des prix en rayon, prix faux en caisse'
-      - title: hygiène
-        example: 'Exemple : magasin sale, rayon froid pas à bonne température"      
-      - title: publicité
-        example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
-      - title: service après-vente
-        example: 'Exemple : service client injoignable, problème de garantie'   
-      - title: autres
-    
-  - category: Travaux / rénovation
+            
+  - category: Travaux / Rénovation
     categoryId: TRAV
     path: pratique-d-hygiene
     description: dépannage, plombier, couvreur, pose de panneaux...
@@ -519,12 +453,77 @@ list:
       - title: service après-vente
         example: 'Exemple : SAV injoignable'   
       - title: autres
-    
-  - category: Banque / Assurance
+
+  - category: Téléphonie / Eau-Gaz-Electricité
+    categoryId: TEL
+    path: pratique-d-hygiene
+    description: forfait téléphone, fournisseur d'accès, contrat gaz..
+    rank: 5
+    icon: icon_tel.png
+    subcategories:
+      - title: Publicité
+        example: 'Exemple: mention mensongère'
+        subcategories:
+          - title: Indisponibilité des produits/offres
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Quel type de produit/offre était indisponible&#160;?
+                rank: 2
+                type: TEXT
+                placeholder: Type de produit
+              - label: Description
+                rank: 3
+                type: TEXTAREA
+          - title: Information mensongère ou trompeuse
+            detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Qu'es-ce qui est trompeur&#160;?
+              rank: 2
+              type: RADIO
+              options:
+              - Une affiche
+              - Un site internet (à préciser)
+              - Le discours d'un vendeur
+              - La façon de mettre en vente
+              - Autre (à préciser)
+            - label: A propos de quoi est-ce trompeur&#160;?
+              rank: 3
+              type: RADIO
+              options:
+              - Un label ou une mention
+              - Le prix
+              - Autre (à préciser)
+            - label: Pourquoi trouvez-vous ça trompeur ?
+              rank: 4
+              type: TEXTAREA
+              optionnal: true
+            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+              rank: 5
+              type: RADIO
+              options:
+                - Oui
+                - Non
+            fileLabel: Photo(s) si possible
+      - title: Contrat
+        example: 'Exemple : reconduction de contrat, clause abusive'
+      - title: SAV
+        example: 'Exemple : pas de réponse du service client'
+      - title: Démarchage
+        example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
+      - title: Appels ou sms indésirables
+        example: 'Exemple : spams, démarchages téléphoniques'
+        
+  - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: pratique-d-hygiene
     description: crédit, assurance
-    rank: 5
+    rank: 6
     icon: icon_bank.png
     subcategories:
       - title: prix
@@ -558,7 +557,6 @@ list:
         example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
       - title: autres
         
-    
   - category: Voyage / Loisirs
     categoryId: VOY
     path: pratique-d-hygiene
@@ -577,6 +575,31 @@ list:
       - title: service après-vente
         example: 'Exemple : SAV injoignable'       
       - title: autres
+      
+  - category: Services aux particuliers
+    categoryId: SERV
+    path: pratique-d-hygiene
+    description: coiffeur, pressing, esthéticienne, aide à la personne..
+    rank: 9
+       
+  - category: Animaux
+    categoryId: ANI
+    path: pratique-d-hygiene
+    description: vétérinaire, aliment pour animaux, service de garde ..
+    rank: 10
+    
+  - category: Santé et médical
+    categoryId: SANT
+    path: pratique-d-hygiene
+    description: dentiste, opticien, médicaments
+    rank: 11
+    
+  - category: Démarches administratives
+    categoryId: ADM
+    path: pratique-d-hygiene
+    description: accessibilité, acte de naissance, calendrier numéros utiles de la mairie ..
+    rank: 12
+    
         
   - category: Pratique d'hygiène
     categoryId: HYG
@@ -1903,7 +1926,7 @@ list:
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 9
+    rank: 117
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
