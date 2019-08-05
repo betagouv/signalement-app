@@ -587,7 +587,7 @@ list:
     categoryId: ANI
     path: pratique-d-hygiene
     description: vétérinaire, aliment pour animaux, service de garde ..
-    rank: 10
+    rank: 120
     icon: icon_pet.png
     subcategories:
       - title: alimentation
@@ -600,7 +600,7 @@ list:
     categoryId: SANT
     path: pratique-d-hygiene
     description: dentiste, opticien, médicaments
-    rank: 11
+    rank: 10
     icon: icon_health.png
     subcategories:
       - title: professionnel de la santé 
@@ -610,12 +610,12 @@ list:
             example: les tarifs ne sont pas affichés en salle d'attente, les prix ne sont pas indiqués dans les rayons de la pharmacie ..
           - title: devis avant acte
             example: je n'ai pas eu de devis, le devis incomplet ..
-          - titre: prestation mal (ou pas)réalisée
-          - titre: publicité trompeuse
+          - title: prestation mal (ou pas)réalisée
+          - title: publicité trompeuse
             example: offre promotionnelle trompeuse, prothèse indiquée '100% française' fabriquée à l'étranger ...
-          - titre: plate-forme médicale à distance
-          - titre: loi anti-cadeau
-          - titre: autre
+          - title: plate-forme médicale à distance
+          - title: loi anti-cadeau
+          - title: autre
       - title: transport (ambulance)
       - title: EPADH / maison de retraite
         subcategories:
@@ -646,7 +646,7 @@ list:
     categoryId: ADM
     path: pratique-d-hygiene
     description: accessibilité, acte de naissance, calendrier numéros utiles de la mairie ..
-    rank: 12
+    rank: 11
     icon: icon_marianne.png
     subcategories:
       - title: courrier/société se faisant passer pour l'administration
