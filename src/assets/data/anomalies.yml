@@ -581,24 +581,48 @@ list:
     path: pratique-d-hygiene
     description: coiffeur, pressing, esthéticienne, aide à la personne..
     rank: 9
+    icon: icon_service.png
        
   - category: Animaux
     categoryId: ANI
     path: pratique-d-hygiene
     description: vétérinaire, aliment pour animaux, service de garde ..
     rank: 10
-    
+    icon: icon_pet.png
+    subcategories:
+      - title: alimentation
+      - title: achat
+      - title: service de garde
+      - title: soins
+        example: vétérinaire, toiletteur ..
+        
   - category: Santé et médical
     categoryId: SANT
     path: pratique-d-hygiene
     description: dentiste, opticien, médicaments
     rank: 11
-    
+    icon: icon_health.png
+    subcategories:
+      - title: professionnel de la santé 
+        example: pharmacie, médecin, opticien, dentiste..
+      - title: médicaments
+      - title: EPADH / maison de retraite
+      - title: cure
+      - title: autre
+        
   - category: Démarches administratives
     categoryId: ADM
     path: pratique-d-hygiene
     description: accessibilité, acte de naissance, calendrier numéros utiles de la mairie ..
     rank: 12
+    icon: icon_marianne.png
+    subcategories:
+      - title: courrier/société se faisant passer pour l'administration
+      - title: site internet pour obtenir un document administratif (casier, acte de naissance)
+      - title: détournement d'un logo officiel
+      - title: carte des numéros utiles de la mairie (numéro urgence serrurier, plombier..)
+      - title: autre
+        
     
         
   - category: Pratique d'hygiène
