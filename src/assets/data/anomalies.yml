@@ -604,10 +604,42 @@ list:
     icon: icon_health.png
     subcategories:
       - title: professionnel de la santé 
-        example: pharmacie, médecin, opticien, dentiste..
-      - title: médicaments
+        example: pharmacie, médecin, opticien, laboratoire ..
+        subcategories:
+          - title: affichage des prix
+            example: les tarifs ne sont pas affichés en salle d'attente, les prix ne sont pas indiqués dans les rayons de la pharmacie ..
+          - title: devis avant acte
+            example: je n'ai pas eu de devis, le devis incomplet ..
+          - titre: prestation mal (ou pas)réalisée
+          - titre: publicité trompeuse
+            example: offre promotionnelle trompeuse, prothèse indiquée '100% française' fabriquée à l'étranger ...
+          - titre: plate-forme médicale à distance
+          - titre: loi anti-cadeau
+          - titre: autre
+      - title: transport (ambulance)
       - title: EPADH / maison de retraite
-      - title: cure
+        subcategories:
+          - title: prix et devis
+          - title: respect du contrat
+          - title: résiliation du contrat
+          - title: facturation après décès
+          - title: maltraitance
+          - tilte: autre
+      - title: cure de thalassothérapie
+        subcategories:
+          - title: prix et facture
+            example: prix pas affiché, pas de remise d'une facture
+          - title: prestation
+            example: les soins ne correspondant pas à ce qui était prévu
+          - title: publicité trompeuse
+            example: utilisation frauduleuse du label Qualicert, spa simple déclaré en thalassothérapie ..
+          - title: contrat
+            example: je souhaite annuler ma cure, le contrat n'est pas clair
+      - title: médicament / appareil médical
+        subcategories:
+           - title: un médicament m'a provoqué un effet indésirable
+           - title: l'emballage ou la publicité d'un médicament/objet médical est trompeur
+           - title: autre
       - title: autre
         
   - category: Démarches administratives
