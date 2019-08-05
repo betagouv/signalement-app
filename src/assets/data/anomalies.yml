@@ -539,7 +539,7 @@ list:
   - category: Immobilier
     categoryId: IMM
     path: pratique-d-hygiene
-    description: location, agence immobiliere...
+    description: location, agence immobiliere, syndicat de copropriété...
     rank: 7
     icon: icon_real_estate.png
     subcategories:
