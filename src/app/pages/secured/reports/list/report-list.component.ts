@@ -177,7 +177,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
         });
     });
 
-    console.log("XXX ", JSON.stringify(this.reportsByDate))
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
