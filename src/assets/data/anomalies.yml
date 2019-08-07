@@ -615,7 +615,7 @@ list:
               actions:
                 - question: Un professionnel de santé (médecin, dentiste, podologue..)
                   answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
-                - question: Un professionnel en médecine douce (exemple:: naturopathe, sophrologue.. )
+                - question: Un professionnel en médecine douce (exemple: naturopathe, sophrologue.. )
                   answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
           - title: c'est un problème de devis
             subcategories:
@@ -648,9 +648,9 @@ list:
               - title: les prix sont exagérés
                 information:
                 title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
-                content: " Le pharmacien peut choisir les prix des médicaments non remboursables, et des autres produits de la pharmacie (biberon, brosse à dent, crème..). Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter.
-                <br/><br/><b>Cas particulier:: les médicaments remboursables !</b>
-                <br/>Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href='http://base-donnees-publique.medicaments.gouv.fr/'>http://base-donnees-publique.medicaments.gouv.fr/</a>"
+                  content: "Le pharmacien peut choisir les prix des médicaments non remboursables, et des autres produits de la pharmacie (biberon, brosse à dent, crème..). Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter.
+                  <br/><br/><b>Cas particulier:: les médicaments remboursables !</b>
+                  <br/>Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>"
               - title: autre
           - title: problème de commande
           - title: autre
@@ -658,19 +658,11 @@ list:
         subcategories:
            - title: un médicament m'a provoqué une réaction indésirable
              example: allergie, hallucination, vomissement..
-             subcategoriesTitle: 'Le mot "médicament" est-il écrit ? Sur un médicament, il est écrit "Médicament autorisé n°AMM" sur la boîte ou la notice.&#160;'
-             subcategories:
-               - title: oui
-                 information:
-                   title: Vous devez le signaler au ministère de la Santé
-                   content: Remplir le formulaire ici<br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil</a>
-               - title: non
-               - title: je n'ai pas la boite ni la notice
-                 information:
-                   title: Demandez à un pharmacien
-                   content: Nous vous conseillons de montrer le produit à un pharmacien. Il pourra dire si c'est un médicament ou non. Il vous conseillera. 
+             information:
+               title: Vous devez le signaler au ministère de la Santé
+               content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
            - title: la publicité pour un médicament / matériel médical est trompeuse
-           - title: la qualité d'un dispotifi médical
+           - title: la qualité d'un dispositif médical
              
            - title: autre
       - title: ambulance / autre transport sanitaire
