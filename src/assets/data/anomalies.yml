@@ -631,13 +631,12 @@ list:
         subcategories:
            - title: un médicament m'a provoqué une réaction indésirable
              example: allergie, hallucination, vomissement..
-             subcategoriesTitle: 'Le mot "médicament" est-il écrit la boîte ou sur la notice&#160;?'
-             detailTitle: Sur un médicament, il est écrit "Médicament autorisé n°AMM" sur la boîte ou la notice.
+             subcategoriesTitle: 'Le mot "médicament" est-il écrit ? Sur un médicament, il est écrit "Médicament autorisé n°AMM" sur la boîte ou la notice.&#160;'
              subcategories:
                - title: oui
-                 actions:
-                   - question: Vous devez le signaler au ministère de la Santé
-                     answer: Remplir le formulaire ici<br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil</a>
+                 information:
+                   title: Vous devez le signaler au ministère de la Santé
+                   content: Remplir le formulaire ici<br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil</a>
                - title: non
                - title: je n'ai pas la boite ni la notice
                  information:
