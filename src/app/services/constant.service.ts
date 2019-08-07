@@ -67,6 +67,17 @@ export class ConstantService {
     );
   }
 
+  getStatusProFinals() {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<string[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'statusProFinals']),
+          headers
+        );
+      })
+    );
+  }
+
   getStatusConsos() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {

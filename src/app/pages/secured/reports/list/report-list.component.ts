@@ -52,6 +52,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
   loading: boolean;
   loadingError: boolean;
 
+  statusProFinals: string[];
+  statusProNotFinals: string[];
+  statusProNotFinalsLabel: string;
+
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
               private meta: Meta,
@@ -86,14 +90,17 @@ export class ReportListComponent implements OnInit, OnDestroy {
     combineLatest(
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
       this.constantService.getStatusPros(),
+      this.constantService.getStatusProFinals(),
       this.constantService.getStatusConsos(),
       this.route.paramMap
     ).subscribe(
-      ([reportFilter, statusPros, statusConsos, params]) => {
+      ([reportFilter, statusPros, statusProFinals, statusConsos, params]) => {
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
         }
         this.statusPros = statusPros;
+        this.statusProFinals = statusProFinals;
+        this.statusProNotFinals = statusPros.filter(status => !statusProFinals.includes(status));
         this.statusConsos = statusConsos;
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
@@ -105,6 +112,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
     this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
     this.modalOnHideSubscription = this.updateReportOnModalHide();
+
+    this.statusProNotFinalsLabel = "Traitement en cours";
   }
 
   ngOnDestroy() {
@@ -320,6 +329,23 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
       return {firstLine, secondLine, hasNext };
     }
+  }
+
+  getStatusProWithProfile(statusPro: string) {
+
+    if (this.user.role === "DGCCRF") {
+      return this.statusProFinals.includes(statusPro) ? statusPro : "Traitement en cours";
+    }
+    return statusPro;
+
+  }
+
+  getAllStatusProWithProfile() {
+
+    if (this.user.role === "DGCCRF") {
+      return [...this.statusProFinals, this.statusProNotFinalsLabel];
+    }
+    return this.statusPros;
   }
 
 }
