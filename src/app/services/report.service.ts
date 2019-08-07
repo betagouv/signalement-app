@@ -80,8 +80,6 @@ export class ReportService {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
     if (reportFilter.statusPros && reportFilter.statusPros.length) {
-      console.log("statusPro", reportFilter.statusPros);
-
       httpParams = httpParams.append('statusPros', reportFilter.statusPros.join(','));
     }
     ['siret', 'statusConso', 'category', 'details'].forEach(filterName => {
