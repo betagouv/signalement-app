@@ -648,10 +648,10 @@ list:
               - title: il n'y a pas de catalogue des prix disponible (papier ou sur écran)
               - title: les prix sont exagérés
                 information:
-                title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
-                  content: "Le pharmacien peut choisir les prix des médicaments non remboursables, et des autres produits de la pharmacie (biberon, brosse à dent, crème..). Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter.
-                  <br/><br/><b>Cas particulier:: les médicaments remboursables !</b>
-                  <br/>Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>"
+                  title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
+                  content: Le pharmacien peut choisir les prix des médicaments non remboursables, et des produits divers de la pharmacie (biberon, brosse à dent, crème..). Les prix doivent être clairement indiqués sans devoir les demander.
+                      Cas particulier des médicaments remboursables !
+                      Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
               - title: autre
           - title: problème de commande
           - title: autre
