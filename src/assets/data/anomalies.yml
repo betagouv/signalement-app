@@ -613,10 +613,10 @@ list:
               title: Les prix dépendent du type de professionnel
               content: 
               actions:
-              - question: Un professionnel de santé (médecin, dentiste, podologue..)
-                answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
-              - question: Un professionnel en "médecine douce" (exemple:: naturopathe, sophrologue.. )
-                answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
+                - question: Un professionnel de santé (médecin, dentiste, podologue..)
+                  answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
+                - question: Un professionnel en médecine douce (exemple:: naturopathe, sophrologue.. )
+                  answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
           - title: c'est un problème de devis
             subcategories:
               - title: je n'ai pas eu de devis écrit
