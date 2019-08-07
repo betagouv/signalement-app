@@ -615,7 +615,7 @@ list:
               actions:
                 - question: Un professionnel de santé (médecin, dentiste, podologue..)
                   answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
-                - question: "Un professionnel en médecine douce (exemple: naturopathe, sophrologue.. )"
+                - question: Un professionnel en médecine douce (exemple: naturopathe, sophrologue.. )
                   answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
           - title: c'est un problème de devis
             subcategories:
@@ -626,15 +626,16 @@ list:
             example: je n'ai pas eu de devis, devis pas respecté..
           - title: le professionnel ne m'a pas délivré de facture (note)
           - title: la prestation est mal (ou pas) réalisée
-            subcategories: l'acte de soin  
-            example: mon dentiste a mal soigné ma dent
-            information:
+            subcategories: 
+              - title: l'acte de soin  
+                example: mon dentiste a mal soigné ma dent
+                information:
                    title: Vous devez écrire à l'Ordre des médecins
                    content:
-            subcategories: la prestation ne correspond pas à ce qui était indiqué
-            example: duréee plus courte
-            subcategories: j'ai un problème avec la fabrication/pose d'appareil médical
-            example: lunette, prothèse..
+              - title: la prestation ne correspond pas à ce qui était indiqué
+                example: duréee plus courte
+              - title: j'ai un problème avec la fabrication/pose d'appareil médical
+                example: lunette, prothèse..
           - title: la publicité est trompeuse
             example: offre promotionnelle trompeuse sur des lunettes..
           - title: autre
