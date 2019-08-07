@@ -606,15 +606,37 @@ list:
       - title: professionnel de la santé / médecine douce 
         example: médecin, dentiste, opticien, laboratoire d'analyse, kiné..
         subcategories:
-          - title: affichage des prix
-            example: les tarifs ne sont pas affichés en salle d'attente, les prix ne sont pas indiqués dans les rayons de la pharmacie ..
-          - title: devis avant acte
-            example: je n'ai pas eu de devis, le devis incomplet ..
-          - title: prestation mal (ou pas)réalisée
-          - title: publicité trompeuse
-            example: offre promotionnelle trompeuse, prothèse indiquée '100% française' fabriquée à l'étranger ...
-          - title: plate-forme médicale à distance
-          - title: loi anti-cadeau
+          - title: les prix ne sont pas indiqués
+            example: les tarifs ne sont pas affichés en salle d'attente
+          - title: les prix sont trop chers
+            information:
+              title: Les prix dépendent du type de professionnel
+              content: 
+              actions:
+              - question: Un professionnel de santé (médecin, dentiste, podologue..)
+                answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
+              - question: Un professionnel en "médecine douce" (exemple:: naturopathe, sophrologue.. )
+                answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
+          - title: c'est un problème de devis
+            subcategories:
+              - title: je n'ai pas eu de devis écrit
+                example: chez l'opticien, le dentiste, le chirurgien esthététique, l'audioprothésiste notamment
+              - title: le devis est incomplet
+              - title: j'ai payé plus cher que le devis
+            example: je n'ai pas eu de devis, devis pas respecté..
+          - title: le professionnel ne m'a pas délivré de facture (note)
+          - title: la prestation est mal (ou pas) réalisée
+            subcategories: l'acte de soin  
+            example: mon dentiste a mal soigné ma dent
+            information:
+                   title: Vous devez écrire à l'Ordre des médecins
+                   content:
+            subcategories: la prestation ne correspond pas à ce qui était indiqué
+            example: duréee plus courte
+            subcategories: j'ai un problème avec la fabrication/pose d'appareil médical
+            example: lunette, prothèse..
+          - title: la publicité est trompeuse
+            example: offre promotionnelle trompeuse sur des lunettes..
           - title: autre
       - title: pharmacie
         subcategories:
@@ -623,10 +645,15 @@ list:
               - title: les prix ne sont pas indiqués dans les rayons
               - title: les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
               - title: il n'y a pas de catalogue des prix disponible (papier ou sur écran)
+              - title: les prix sont exagérés
+                information:
+                title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
+                content: " Le pharmacien peut choisir les prix des médicaments non remboursables, et des autres produits de la pharmacie (biberon, brosse à dent, crème..). Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter.
+                <br/><br/><b>Cas particulier:: les médicaments remboursables !</b>
+                <br/>Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href='http://base-donnees-publique.medicaments.gouv.fr/'>http://base-donnees-publique.medicaments.gouv.fr/</a>"
               - title: autre
           - title: problème de commande
           - title: autre
-          
       - title: médicament / matériel médical
         subcategories:
            - title: un médicament m'a provoqué une réaction indésirable
