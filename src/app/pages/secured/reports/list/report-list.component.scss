@@ -64,7 +64,7 @@ form {
     }
 
     &.status-a-traiter {
-      background-color: $light-red;
+      background-color: $light-yellow;
     }
 
     &.status-na {
@@ -92,11 +92,11 @@ form {
     }
 
     &.status-a-transferer-signalement {
-      background-color: $light-orange;
+      background-color: $light-yellow;
     }
 
     &.status-signalement-transmis {
-      background-color: $light-green;
+      background-color: $light-yellow;
     }
 
     &.status-signalement-refuse {
@@ -144,7 +144,7 @@ form {
     }
 
     &.status-adresse-postale-incorrecte {
-      background-color: $light-red;
+      background-color: $light-yellow;
     }
   }
 

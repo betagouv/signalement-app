@@ -24,6 +24,8 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
+const GENERIC_STATUS_PRO_NOT_FINAL = "Traitement en cours";
+
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
@@ -42,6 +44,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   reportFilter: ReportFilter;
   reportExtractUrl: string;
+  statusProSelected: string;
   statusPros: string[];
   statusConsos: string[];
   categories: string[];
@@ -54,7 +57,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   statusProFinals: string[];
   statusProNotFinals: string[];
-  statusProNotFinalsLabel: string;
+  availableStatusPros: string[];
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -102,8 +105,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.statusProFinals = statusProFinals;
         this.statusProNotFinals = statusPros.filter(status => !statusProFinals.includes(status));
         this.statusConsos = statusConsos;
+        this.statusProSelected = this.reportFilter && this.reportFilter.statusPros && this.reportFilter.statusPros.length ? this.getGenericStatusProIfDgccrf(this.reportFilter.statusPros[0]) : "";
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
+
+        this.availableStatusPros = this.getGenericsStatusProIfDgccrf()
       },
       err => {
         this.loading = false;
@@ -112,8 +118,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
     this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
     this.modalOnHideSubscription = this.updateReportOnModalHide();
-
-    this.statusProNotFinalsLabel = "Traitement en cours";
   }
 
   ngOnDestroy() {
@@ -128,7 +132,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
     this.loadReportExtractUrl();
-    this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    this.storageService.setLocalStorageItem(ReportFilterStorageKey, {...this.reportFilter, statusPros: this.getSpecificStatusProIfDgccrf(this.statusProSelected)});
     this.initPagination();
     this.loadReports(1);
   }
@@ -331,19 +335,27 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getStatusProWithProfile(statusPro: string) {
-
+  getGenericStatusProIfDgccrf(statusPro: string) {
     if (this.user.role === "DGCCRF") {
-      return this.statusProFinals.includes(statusPro) ? statusPro : "Traitement en cours";
+      return this.statusProFinals.includes(statusPro) ? statusPro : GENERIC_STATUS_PRO_NOT_FINAL;
     }
     return statusPro;
 
   }
 
-  getAllStatusProWithProfile() {
+  getSpecificStatusProIfDgccrf(statusPro: string): string[] {
+    if (!statusPro) return [];
+    if (this.user.role === "DGCCRF" && statusPro === GENERIC_STATUS_PRO_NOT_FINAL) {
+      return this.statusProNotFinals;
+    }
+    return [statusPro];
+
+  }
+
+  getGenericsStatusProIfDgccrf() {
 
     if (this.user.role === "DGCCRF") {
-      return [...this.statusProFinals, this.statusProNotFinalsLabel];
+      return [...this.statusProFinals, GENERIC_STATUS_PRO_NOT_FINAL];
     }
     return this.statusPros;
   }
