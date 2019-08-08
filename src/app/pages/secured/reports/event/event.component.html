@@ -9,7 +9,7 @@
           <select [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''" (change)="selectAction()">
             <optgroup label="Actions pros" *appRole="[roles.Admin]">
               <option *ngFor="let action of actionPros" [ngValue]="action">
-                {{action.name}}<span *ngIf="isStatusProFinal(action.name)"> (C)</span>
+                {{action.name}}
               </option>
             </optgroup>
             <optgroup label="Actions consos" *appRole="[roles.Admin]">

@@ -64,7 +64,7 @@ form {
     }
 
     &.status-a-traiter {
-      background-color: $light-yellow;
+      background-color: $light-red;
     }
 
     &.status-na {
@@ -92,11 +92,11 @@ form {
     }
 
     &.status-a-transferer-signalement {
-      background-color: $light-yellow;
+      background-color: $light-orange;
     }
 
     &.status-signalement-transmis {
-      background-color: $light-yellow;
+      background-color: $light-green;
     }
 
     &.status-signalement-refuse {
@@ -107,20 +107,8 @@ form {
       background-color: $lighter-blue;
     }
 
-    &.status-signalement-infonde {
-      background-color: $light-grey
-    }
-
-    &.status-signalement-mal-attribue {
-      background-color: $light-grey
-    }
-
-    &.status-signalement-non-consulte {
-      background-color: $light-grey
-    }
-
-    &.status-signalement-consulte-ignore {
-      background-color: $light-grey
+    &.status-pas-de-promesse-daction {
+      background-color: $light-green;
     }
 
     &.status-en-attente {
@@ -144,7 +132,7 @@ form {
     }
 
     &.status-adresse-postale-incorrecte {
-      background-color: $light-yellow;
+      background-color: $light-red;
     }
   }
 

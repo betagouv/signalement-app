@@ -24,8 +24,6 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
-const GENERIC_STATUS_PRO_NOT_FINAL = "Traitement en cours";
-
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
@@ -44,7 +42,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   reportFilter: ReportFilter;
   reportExtractUrl: string;
-  statusProSelected: string;
   statusPros: string[];
   statusConsos: string[];
   categories: string[];
@@ -54,10 +51,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   loading: boolean;
   loadingError: boolean;
-
-  statusProFinals: string[];
-  statusProNotFinals: string[];
-  availableStatusPros: string[];
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -93,23 +86,17 @@ export class ReportListComponent implements OnInit, OnDestroy {
     combineLatest(
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
       this.constantService.getStatusPros(),
-      this.constantService.getStatusProFinals(),
       this.constantService.getStatusConsos(),
       this.route.paramMap
     ).subscribe(
-      ([reportFilter, statusPros, statusProFinals, statusConsos, params]) => {
+      ([reportFilter, statusPros, statusConsos, params]) => {
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
         }
         this.statusPros = statusPros;
-        this.statusProFinals = statusProFinals;
-        this.statusProNotFinals = statusPros.filter(status => !statusProFinals.includes(status));
         this.statusConsos = statusConsos;
-        this.statusProSelected = this.reportFilter && this.reportFilter.statusPros && this.reportFilter.statusPros.length ? this.getGenericStatusProIfDgccrf(this.reportFilter.statusPros[0]) : "";
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
-
-        this.availableStatusPros = this.getGenericsStatusProIfDgccrf()
       },
       err => {
         this.loading = false;
@@ -132,7 +119,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
     this.loadReportExtractUrl();
-    this.storageService.setLocalStorageItem(ReportFilterStorageKey, {...this.reportFilter, statusPros: this.getSpecificStatusProIfDgccrf(this.statusProSelected)});
+    this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
     this.initPagination();
     this.loadReports(1);
   }
@@ -190,6 +177,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         });
     });
 
+    console.log("XXX ", JSON.stringify(this.reportsByDate))
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
@@ -333,31 +321,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
       return {firstLine, secondLine, hasNext };
     }
-  }
-
-  getGenericStatusProIfDgccrf(statusPro: string) {
-    if (this.user.role === "DGCCRF") {
-      return this.statusProFinals.includes(statusPro) ? statusPro : GENERIC_STATUS_PRO_NOT_FINAL;
-    }
-    return statusPro;
-
-  }
-
-  getSpecificStatusProIfDgccrf(statusPro: string): string[] {
-    if (!statusPro) return [];
-    if (this.user.role === "DGCCRF" && statusPro === GENERIC_STATUS_PRO_NOT_FINAL) {
-      return this.statusProNotFinals;
-    }
-    return [statusPro];
-
-  }
-
-  getGenericsStatusProIfDgccrf() {
-
-    if (this.user.role === "DGCCRF") {
-      return [...this.statusProFinals, GENERIC_STATUS_PRO_NOT_FINAL];
-    }
-    return this.statusPros;
   }
 
 }
