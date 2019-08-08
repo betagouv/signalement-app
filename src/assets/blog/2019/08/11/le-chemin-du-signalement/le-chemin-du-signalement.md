@@ -2,7 +2,7 @@
 
 # Le Chemin du Signalement
 
-À première vue, SignalConso est une plateforme plutôt simple : un **consommateur** rencontre un problème, il va sur SignalConso et dépose un signalement. Quelques temps plus tard, il recoit une réponse du **professionnel** signalé. Tout ça bien sûr, sous le regard attentif de la **répression des fraudes*. 
+À première vue, SignalConso est une plateforme plutôt simple : un **consommateur** rencontre un problème, il va sur SignalConso et dépose un signalement. Quelques temps plus tard, il recoit une réponse du **professionnel** signalé. Tout ça bien sûr, sous le regard attentif de la **répression des fraudes**. 
 
 Mais concrètement, une fois le signalement déposé, que devient-il ? 
 C'est le moment de tout découvrir !
