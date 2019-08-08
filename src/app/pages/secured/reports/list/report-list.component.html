@@ -75,9 +75,9 @@
           </label>
         </div>
         <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.statusPro" placeholder="Statut pro" id="statusProFilter" name="statusPro" [class]="reportFilter.statusPro ? 'selected' : ''">
+          <select [(ngModel)]="statusProSelected" placeholder="Statut pro" id="statusProFilter" name="statusPro" [class]="reportFilter.statusPro ? 'selected' : ''">
             <option value="" selected>Tous les status</option>
-            <option *ngFor="let statusPro of statusPros">
+            <option *ngFor="let statusPro of availableStatusPros">
               {{statusPro}}
             </option>
           </select>
@@ -252,7 +252,7 @@
               </ng-template>
             </td>
             <td [class]="getReportCssClass(report.statusPro)">
-              {{report.statusPro}}
+              {{ getGenericStatusProIfDgccrf(report.statusPro) }}
             </td>
             <td *appRole="[roles.Admin]" [class]="getReportCssClass(report.statusConso)">
               {{report.statusConso}}

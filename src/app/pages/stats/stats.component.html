@@ -79,6 +79,14 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-4 count stat">
+            <h3>Correspondance nb ETP</h3>
+            {{statistics? (statistics.reportsCountInRegion * 0.58 / 1400).toFixed(2) : 0}}
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </div>
+
     </section>
   </div>
 </main>
