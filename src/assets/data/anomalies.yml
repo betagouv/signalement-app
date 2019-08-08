@@ -599,7 +599,7 @@ list:
   - category: Santé et médical
     categoryId: SANT
     path: pratique-d-hygiene
-    description: dentiste, opticien, médicaments
+    description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre..)
     rank: 10
     icon: icon_health.png
     subcategories:
@@ -655,16 +655,25 @@ list:
               - title: autre
           - title: problème de commande
           - title: autre
-      - title: médicament / matériel médical
+      - title: un produit pour la santé en particulier
+        example: médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant..
         subcategories:
-           - title: un médicament m'a provoqué une réaction indésirable
-             example: allergie, hallucination, vomissement..
-             information:
-               title: Vous devez le signaler au ministère de la Santé
-               content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
-           - title: la publicité pour un médicament / matériel médical est trompeuse
-           - title: la qualité d'un dispositif médical
-             
+           - title: j'ai eu un problème de santé/sécurité avec un produit
+             example: allergie, vomissement, électrocution..
+             subcategoriesTitle: Quel est le type de produit ?
+             subcategories:
+               - title: un médicament
+                 information:
+                   title: Vous devez le signaler au ministère de la Santé
+                   content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
+               - title: un objet
+                 example: pansement, tensiomètre
+                 information:
+                   title: "Vous devez le signaler avec un formulaire spécifique."
+                   content: <br><a href="https://www.economie.gouv.fr/courrier/4212">Remplir le formulaire ici/a>
+           - title: la publicité pour un médicament / dispositif médical est trompeuse
+           - title: un produit de santé est de mauvaise qualité
+             example: béquille qui se tord, audioprothèse qui se fissure rapidement..
            - title: autre
       - title: ambulance / autre transport sanitaire
       - title: cure de thalassothérapie / thermalisme
@@ -679,11 +688,27 @@ list:
             example: je souhaite annuler ma cure, le contrat n'est pas clair
       - title: maison de retraite
         subcategories:
-          - title: prix et devis
-          - title: respect du contrat
-          - title: résiliation du contrat
-          - title: facturation après décès
-          - title: maltraitance
+          - title: communication sur les prix
+            example: affichage des prix des options
+              subcategories:
+                - title: les prix ne sont pas communiquées clairement
+                - title: je ne paye pas le prix qui était indiqué
+                - title: les prix sont élevés pour la prestation
+                  information:
+                    title: Les prix sont choisis librement par les maisons de retraite.
+                    content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
+          - title: publicité mensongère
+            example: le site internet parle d'un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu..
+          - title: mon contrat
+            subcategories:
+              - title: le contrat n'est pas respecté
+                example: le contrat prévoit des fruits tous les jours et ce n'est pas fait..
+              - title: je veux résilier le contrat
+              - title: une clause dans le contrat est abusive, c'est-à-dire qu'elle n'est pas très juste pour le consommateur
+                example: imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois
+          - title: la facturation après décès
+          - title: l'état des lieux entée et sortie
+          - title: problème de maltraitance ou d'hygiène/sécurité des lieux
           - tilte: autre
       - title: autre
         
