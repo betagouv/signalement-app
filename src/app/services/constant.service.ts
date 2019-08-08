@@ -23,17 +23,6 @@ export class ConstantService {
     );
   }
 
-  getActionProFinals() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionProFinals']),
-          headers
-        );
-      })
-    );
-  }
-
   getActionConsos() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
@@ -61,17 +50,6 @@ export class ConstantService {
       mergeMap(headers => {
         return this.http.get<string[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'statusPros']),
-          headers
-        );
-      })
-    );
-  }
-
-  getStatusProFinals() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<string[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'statusProFinals']),
           headers
         );
       })
