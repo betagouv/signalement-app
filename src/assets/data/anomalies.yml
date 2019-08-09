@@ -293,7 +293,6 @@ list:
                   <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recencent les établissemets acceptant les chiens.
             - title: Oui (je possède la carte d'assistance)
           - title: Autre problème de service
-
   - category: Achat / Magasin
     categoryId: MAG
     path: pratique-d-hygiene
@@ -310,12 +309,11 @@ list:
       - title: service après-vente
         example: 'Exemple : service client injoignable, problème de garantie'   
       - title: autres
-
   - category: Voiture / Véhicule
     categoryId: VEH
     path: pratique-d-hygiene
     description: vente et réparation de voiture, location, taxi, auto-école ..
-    rank: 3
+    rank: 127
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
@@ -434,12 +432,11 @@ list:
             example: 'Exemple : publicité trompeuse'
           - title: Autre
             example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement '
-            
   - category: Travaux / Rénovation
     categoryId: TRAV
     path: pratique-d-hygiene
     description: dépannage, plombier, couvreur, pose de panneaux...
-    rank: 4
+    rank: 126
     icon: icon_craft.png
     subcategories:
       - title: prix
@@ -453,7 +450,6 @@ list:
       - title: service après-vente
         example: 'Exemple : SAV injoignable'   
       - title: autres
-
   - category: Téléphonie / Eau-Gaz-Electricité
     categoryId: TEL
     path: pratique-d-hygiene
@@ -461,69 +457,67 @@ list:
     rank: 5
     icon: icon_tel.png
     subcategories:
-      - title: Publicité
-        example: 'Exemple: mention mensongère'
+      - title: Téléphonie / Internet
         subcategories:
-          - title: Indisponibilité des produits/offres
-            detailInputs:
-              - label: Date du constat
-                rank: 1
-                type: DATE
-                defaultValue: SYSDATE
-              - label: Quel type de produit/offre était indisponible&#160;?
-                rank: 2
-                type: TEXT
-                placeholder: Type de produit
-              - label: Description
-                rank: 3
-                type: TEXTAREA
-          - title: Information mensongère ou trompeuse
-            detailInputs:
-            - label: Date du constat
-              rank: 1
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Qu'es-ce qui est trompeur&#160;?
-              rank: 2
-              type: RADIO
-              options:
-              - Une affiche
-              - Un site internet (à préciser)
-              - Le discours d'un vendeur
-              - La façon de mettre en vente
-              - Autre (à préciser)
-            - label: A propos de quoi est-ce trompeur&#160;?
-              rank: 3
-              type: RADIO
-              options:
-              - Un label ou une mention
-              - Le prix
-              - Autre (à préciser)
-            - label: Pourquoi trouvez-vous ça trompeur ?
-              rank: 4
-              type: TEXTAREA
-              optionnal: true
-            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
-              rank: 5
-              type: RADIO
-              options:
-                - Oui
-                - Non
-            fileLabel: Photo(s) si possible
-      - title: Contrat
-        example: 'Exemple : reconduction de contrat, clause abusive'
-      - title: SAV
-        example: 'Exemple : pas de réponse du service client'
-      - title: Démarchage
-        example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
-      - title: Appels ou sms indésirables
-        example: 'Exemple : spams, démarchages téléphoniques'
-        
+          - title: Publicité
+            example: 'Exemple: mention mensongère'
+            subcategories:
+              - title: Indisponibilité des produits/offres
+                detailInputs:
+                - label: Date du constat
+                  rank: 1
+                  type: DATE
+                  defaultValue: SYSDATE
+                - label: Quel type de produit/offre était indisponible&#160;?
+                  rank: 2
+                  type: TEXT
+                  placeholder: Type de produit
+                - label: Description
+                  rank: 3
+                  type: TEXTAREA
+              - title: Information mensongère ou trompeuse
+          - title: Contrat
+            example: 'Exemple : reconduction de contrat, clause abusive'
+          - title: SAV
+            example: 'Exemple : pas de réponse du service client'
+          - title: Offre promotionnelle pas respectée
+            example: 'Exemple: je devais bénéficié d''une reduction de 15e sur le telephone mais je ne l''ai jamais reçu'
+          - title: Appels ou sms indésirables
+            example: 'Exemple : spams, démarchages téléphoniques'
+          - title: Initérance
+            example: pas de réception du sms, itinérance à la frontière
+      - title: Eau / gaz / électricité
+        subcategories:
+          - title: Publicité
+            example: 'Exemple: mention mensongère'
+            subcategories:
+              - title: Indisponibilité des produits/offres
+                detailInputs:
+                - label: Date du constat
+                  rank: 1
+                  type: DATE
+                  defaultValue: SYSDATE
+                - label: Quel type de produit/offre était indisponible&#160;?
+                  rank: 2
+                  type: TEXT
+                  placeholder: Type de produit
+                - label: Description
+                  rank: 3
+                  type: TEXTAREA
+              - title: Information mensongère ou trompeuse
+          - title: Contrat
+            example: 'Exemple : reconduction de contrat, clause abusive'
+          - title: SAV
+            example: 'Exemple : pas de réponse du service client'
+          - title: Démarchage à domicile
+            example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
+      
+      
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: pratique-d-hygiene
     description: crédit, assurance
-    rank: 6
+    rank: 121
     icon: icon_bank.png
     subcategories:
       - title: prix
@@ -535,12 +529,11 @@ list:
       - title: service après-vente
         example: 'Exemple : SAV injoignable'   
       - title: autres
-    
   - category: Immobilier
     categoryId: IMM
     path: pratique-d-hygiene
     description: location, agence immobiliere, syndicat de copropriété...
-    rank: 7
+    rank: 120
     icon: icon_real_estate.png
     subcategories:
       - title: prix
@@ -556,12 +549,11 @@ list:
       - title: documents / dossier
         example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
       - title: autres
-        
   - category: Voyage / Loisirs
     categoryId: VOY
     path: pratique-d-hygiene
     description: voyage organisé, camping, concert, sport, billets d''avion
-    rank: 8
+    rank: 122
     icon: icon_hobbies.png
     subcategories:
       - title: prix
@@ -575,14 +567,12 @@ list:
       - title: service après-vente
         example: 'Exemple : SAV injoignable'       
       - title: autres
-      
   - category: Services aux particuliers
     categoryId: SERV
     path: pratique-d-hygiene
     description: coiffeur, pressing, esthéticienne, aide à la personne..
-    rank: 9
+    rank: 123
     icon: icon_service.png
-       
   - category: Animaux
     categoryId: ANI
     path: pratique-d-hygiene
@@ -595,7 +585,6 @@ list:
       - title: service de garde
       - title: soins
         example: vétérinaire, toiletteur ..
-        
   - category: Santé et médical
     categoryId: SANT
     path: pratique-d-hygiene
@@ -711,12 +700,11 @@ list:
           - title: problème de maltraitance ou d'hygiène/sécurité des lieux
           - tilte: autre
       - title: autre
-        
   - category: Démarches administratives
     categoryId: ADM
     path: pratique-d-hygiene
     description: accessibilité, acte de naissance, calendrier numéros utiles de la mairie ..
-    rank: 11
+    rank: 124
     icon: icon_marianne.png
     subcategories:
       - title: courrier/société se faisant passer pour l'administration
