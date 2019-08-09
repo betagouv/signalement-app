@@ -585,15 +585,36 @@ list:
       - title: service de garde
       - title: soins
         example: vétérinaire, toiletteur ..
-  - category: Santé et médical
+  - category: Secteur de la santé
     categoryId: SANT
     path: pratique-d-hygiene
-    description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre..)
+    description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre..), clinique
     rank: 10
     icon: icon_health.png
+    subcategoriesTitle: 'Votre problème concerne :'
     subcategories:
-      - title: professionnel de la santé / médecine douce 
-        example: médecin, dentiste, opticien, laboratoire d'analyse, kiné..
+      - title: Produit en particulier
+        example: médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant..
+        subcategories:
+           - title: j'ai eu un problème de santé/sécurité avec un produit
+             example: allergie, vomissement, électrocution..
+             subcategoriesTitle: Quel est le type de produit ?
+             subcategories:
+               - title: un médicament
+                 information:
+                   title: Vous devez le signaler au ministère de la Santé
+                   content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
+               - title: un objet
+                 example: pansement, tensiomètre
+                 information:
+                   title: "Vous devez le signaler avec un formulaire spécifique."
+                   content: <br><a href="https://www.economie.gouv.fr/courrier/4212">Remplir le formulaire ici/a>
+           - title: la publicité pour un médicament / dispositif médical est trompeuse
+           - title: un produit de santé est de mauvaise qualité
+             example: béquille qui se tord, audioprothèse qui se fissure rapidement..
+           - title: autre
+      - title: Professionnel de la santé
+        example: dentiste, opticien, kiné, infirmier, psychiatre, médecine douce..
         subcategories:
           - title: les prix ne sont pas indiqués
             example: les tarifs ne sont pas affichés en salle d'attente
@@ -628,7 +649,8 @@ list:
           - title: la publicité est trompeuse
             example: offre promotionnelle trompeuse sur des lunettes..
           - title: autre
-      - title: pharmacie
+      - title: Hopital / Clinique
+      - title: Pharmacie
         subcategories:
           - title: problème de prix
             subcategories:
@@ -644,28 +666,10 @@ list:
               - title: autre
           - title: problème de commande
           - title: autre
-      - title: un produit pour la santé en particulier
-        example: médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant..
-        subcategories:
-           - title: j'ai eu un problème de santé/sécurité avec un produit
-             example: allergie, vomissement, électrocution..
-             subcategoriesTitle: Quel est le type de produit ?
-             subcategories:
-               - title: un médicament
-                 information:
-                   title: Vous devez le signaler au ministère de la Santé
-                   content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
-               - title: un objet
-                 example: pansement, tensiomètre
-                 information:
-                   title: "Vous devez le signaler avec un formulaire spécifique."
-                   content: <br><a href="https://www.economie.gouv.fr/courrier/4212">Remplir le formulaire ici/a>
-           - title: la publicité pour un médicament / dispositif médical est trompeuse
-           - title: un produit de santé est de mauvaise qualité
-             example: béquille qui se tord, audioprothèse qui se fissure rapidement..
-           - title: autre
-      - title: ambulance / autre transport sanitaire
-      - title: cure de thalassothérapie / thermalisme
+      - title: Ambulance
+        example: "et autre transport sanitaire (exemple: taxi)"
+      - title: Cure
+        example: thalassothérapie, thermalisme
         subcategories:
           - title: prix et facture
             example: prix pas affiché, pas de remise d'une facture
@@ -675,31 +679,56 @@ list:
             example: utilisation frauduleuse du label Qualicert, spa simple déclaré en thalassothérapie ..
           - title: contrat
             example: je souhaite annuler ma cure, le contrat n'est pas clair
-      - title: maison de retraite
+      - title: Ehpad (Maison de retraite)
         subcategories:
-          - title: communication sur les prix
-            example: affichage des prix des options
+          - title: Les tarifs
             subcategories:
-              - title: les prix ne sont pas communiquées clairement
-              - title: je ne paye pas le prix qui était indiqué
+              - title: les tarifs ne sont pas communiqués clairement
+                example: les prix des options ne sont pas dans le contrat
+              - title: je ne paye pas le prix qui était prévu au départ
               - title: les prix sont élevés pour la prestation
                 information:
                   title: Les prix sont choisis librement par les maisons de retraite.
                   content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
-          - title: publicité mensongère
-            example: le site internet parle d'un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu..
-          - title: mon contrat
+          - title: Mon contrat
             subcategories:
               - title: le contrat n'est pas respecté
-                example: le contrat prévoit des fruits tous les jours et ce n'est pas fait..
+                example: 'Exemple: le contrat prévoit des fruits tous les jours et ce n''est pas le cas..'
               - title: je veux résilier le contrat
-              - title: une clause dans le contrat est abusive, c'est-à-dire qu'elle n'est pas très juste pour le consommateur
-                example: imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois
-          - title: la facturation après décès
-          - title: l'état des lieux entée et sortie
-          - title: problème de maltraitance ou d'hygiène/sécurité des lieux
-          - tilte: autre
-      - title: autre
+              - title: une clause dans le contrat est abusive, c'est-à-dire pas très juste pour le consommateur
+                example: imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois       
+          - title: Sommes facturées
+          - title: Etat des lieux de la chambre
+            example: Etat des lieux d'entrée ou de sortie, caution..
+            subcategories:
+              - title: je n'ai pas eu d'état des lieux (entrée ou sortie)
+              - title: je ne suis pas d'accord avec l'état des lieux
+              - title: la caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
+                subcategoriesTitle: 'Multipliez par 2 le tarif de l''hébergement mensuel (indiqué dans votre contrat).La caution demandée est-elle plus cher que ce résultat ?'
+                subcategories:
+                  - title: oui 
+                  - title: non
+                    information:
+                      title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif hébergement mensuel.
+                      content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
+              - title: je n'ai toujours pas récupéré la caution
+                subcategoriesTitle: Quand avez-vous libéré la chambre ?
+                subcategories:
+                  - title: il y a moins de 30 jours
+                    information:
+                      title: Soyez encore un peu patient !
+                      content: La maison de retraite a 30 jours pour vous rendre la caution.
+                  - tilte: il y a plus de 30 jours
+                  
+              
+          - title: Publicité pour la maison de retraite est mensongère
+            example: le site internet parle d'un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu..
+          - title: Maltraitance
+          
+          
+          
+          - tilte: Autre
+      - title: Autre
   - category: Démarches administratives
     categoryId: ADM
     path: pratique-d-hygiene
