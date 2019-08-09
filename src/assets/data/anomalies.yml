@@ -718,16 +718,11 @@ list:
                     information:
                       title: Soyez encore un peu patient !
                       content: La maison de retraite a 30 jours pour vous rendre la caution.
-                  - tilte: il y a plus de 30 jours
-                  
-              
+                  - title: il y a plus de 30 jours
           - title: Publicité pour la maison de retraite est mensongère
             example: le site internet parle d'un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu..
           - title: Maltraitance
-          
-          
-          
-          - tilte: Autre
+          - title: Autre
       - title: Autre
   - category: Démarches administratives
     categoryId: ADM
