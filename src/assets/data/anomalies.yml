@@ -414,32 +414,32 @@ list:
                   - title: Il y a plus de 2 ans
                     subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                     subcategories:
-                        - title: Oui
-                    example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
-                    subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
-                      <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
-                    subcategories:
-                      - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
-                        detailTitle: Problème de garantie commerciale
-                        detailInputs:
-                          - label: Date d'achat
-                            rank: 1
-                            type: DATE
-                          - label: Nom du produit
-                            rank: 2
-                            type: TEXT
-                          - label: Date de fin de garantie supplémentaire
-                            rank: 3
-                            type: DATE
-                          - label: Date du constat
-                            rank: 4
-                            type: DATE
-                            defaultValue: SYSDATE
-                          - label: Motif de refus
-                            rank: 5
-                            type: TEXT
-                        fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                        - title: Non
+                      - title: Oui
+                        example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                        subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
+                         <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                        subcategories:
+                          - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                            detailTitle: Problème de garantie commerciale
+                            detailInputs:
+                              - label: Date d'achat
+                                rank: 1
+                                type: DATE
+                              - label: Nom du produit
+                                rank: 2
+                                type: TEXT
+                              - label: Date de fin de garantie supplémentaire
+                                rank: 3
+                                type: DATE
+                              - label: Date du constat
+                                rank: 4
+                                type: DATE
+                                defaultValue: SYSDATE
+                              - label: Motif de refus
+                                rank: 5
+                                type: TEXT
+                                fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                      - title: Non
                         information:
                           title: <b>Votre produit n'est plus couvert par la garantie.</b>
                           subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
