@@ -300,15 +300,294 @@ list:
     rank: 2
     icon: icon_store.png 
     subcategories:
-      - title: prix
+      - title: Prix
         example: 'Exemple : il manque des prix en rayon, prix faux en caisse'
-      - title: hygiène
+        subcategories:
+          - title: Prix à la caisse différent du prix affiché
+            example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros.'
+            description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.'
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Heure du constat
+                rank: 2
+                type: TIMESLOT
+                optionnal: true
+              - label: Quel produit&#160;?
+                rank: 3
+                type: TEXT
+                placeholder: Nom ou type de produit
+              - label: Quel était le prix indiqué si vous vous en rappelez&#160;?
+                rank: 4
+                type: TEXT
+                placeholder: Prix indiqué
+                optionnal: true
+              - label: 'L''avez-vous signalé au moment de payer&#160;?'
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui. Pouvez-vous préciser à qui&#160;? (à préciser)
+                  - Non
+              - label: Si oui, le commerçant a-t-il bien voulu vous faire payer le prix affiché&#160;?
+                rank: 6
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+                optionnal: true
+              - label: Description
+                rank: 7
+                type: TEXTAREA
+          - title: Il manque des prix en rayon ou sur les produits
+          - title: Les prix sont plus chers qu'ailleurs
+            information:
+              title: Les prix sont choisis librement par les commerçants.
+              content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+                <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte des boissons.
+                <br/><br/><b>Cas particulier !</b>
+                <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
+                <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.
+                <br/> Si c’est votre cas, vous devez faire une réclamation avec ce formulaire :<a href='https://www.economie.gouv.fr/courrier/4191' target='_blank'> https://www.economie.gouv.fr/courrier/491</a>"
+          - title: Fausse réduction de prix
+            example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
+            description: "<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l'entreprise
+               <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
+               Une copie du récépissé de déclaration doit être affichée sur le lieu de vente, pendant toute la durée de la liquidation, de manière à être lisible et visible depuis la voie publique."
+            detailInputs:
+              - label: "Il s'agit d'un problème sur :"
+                rank: 1
+                type: RADIO
+                options:
+                  - Les soldes
+                  - Une promotion
+                  - Une liquidation
+                  - Autre (à préciser)
+              - label: Date du constat
+                rank: 2
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Description
+                example: Précisez si possible le problème
+                rank: 3
+                type: TEXTAREA
+      - title: Hygiène
         example: 'Exemple : magasin sale, rayon froid pas à bonne température'      
-      - title: publicité
+      - title: Publicité
         example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
-      - title: service après-vente
-        example: 'Exemple : service client injoignable, problème de garantie'   
-      - title: autres
+      - title: Remboursement / garantie
+        example: 'Exemple : le magasin refuse de me reprendre un article'
+        subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
+        subcategories:
+          - title: Il présent un défaut ou il ne marche plus
+            subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
+            subcategories:
+              - title: Neuf
+                subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+                subcategories:
+                  - title: Il y a moins de 2 ans
+                description: "Le vendeur a l'obligation de garantir 2 ans le fonctionnement normal de tous les objets.
+                  <br />Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l'avez mal utilisé (exemple : vous avez marché sur votre téléphone)."
+                detailTitle: Problème de garantie légale
+                detailInputs:
+                  - label: Date d'achat
+                    rank: 1
+                    type: DATE
+                  - label: Nom du produit
+                    rank: 2
+                    type: TEXT
+                  - label: Date du constat
+                    rank: 3
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Interlocuteur
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Vendeur
+                      - Accueil magasin
+                      - Service client (téléphone, mail, courrier)
+                  - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
+                    rank: 5
+                    type: TEXTAREA
+                fileLabel: Preuve d'achat / publicité / offre de vente
+                  - title: Il y a plus de 2 ans
+                    subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+                    subcategories:
+                      - title: Oui
+                    example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                    subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
+                      <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                    subcategories:
+                      - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                        detailTitle: Problème de garantie commerciale
+                        detailInputs:
+                          - label: Date d'achat
+                            rank: 1
+                            type: DATE
+                          - label: Nom du produit
+                            rank: 2
+                            type: TEXT
+                          - label: Date de fin de garantie supplémentaire
+                            rank: 3
+                            type: DATE
+                          - label: Date du constat
+                            rank: 4
+                            type: DATE
+                            defaultValue: SYSDATE
+                          - label: Motif de refus
+                            rank: 5
+                            type: TEXT
+                        fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                      - title: Non
+                        information:
+                          title: <b>Votre produit n'est plus couvert par la garantie.</b>
+                          subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                                <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
+                          actions:
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                            <br/><br/>Un vice caché d'un produit est un défaut :
+                            <ul>
+                              <li>qui rend le produit inutilisable, </li>
+                              <li>présent dès le départ et</li>
+                              <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                            </ul>"
+                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple. 
+                              <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
+              - title: Occasion
+                subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+                subcategories:
+                  - title: Il y a moins de 6 mois
+                    description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets.'
+                    <br /> 'Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                    detailTitle: Problème de garantie légale
+                    detailInputs:
+                      - label: Date d'achat
+                        rank: 1
+                        type: DATE
+                      - label: Nom du produit
+                        rank: 2
+                        type: TEXT
+                      - label: Date du constat
+                        rank: 3
+                        type: DATE
+                        defaultValue: SYSDATE
+                      - label: Interlocuteur
+                        rank: 4
+                        type: RADIO
+                        options:
+                          - Vendeur
+                          - Accueil magasin
+                          - Service client (téléphone, mail, courrier)
+                      - label: Pour quelle raison le commerçant ne veut pas vous reprendre  le produit&#160;?
+                        rank: 5
+                        type: TEXTAREA
+                        fileLabel: Preuve d'achat / publicité / offre de vente
+                  - title: Il y a plus de 6 mois
+                    subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+                    subcategories:
+                      - title: Oui
+                        example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                        subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
+                          <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                        subcategories:
+                          - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                            detailTitle: Problème de garantie commerciale
+                            detailInputs:
+                              - label: Date d'achat
+                                rank: 1
+                                type: DATE
+                              - label: Nom du produit
+                                rank: 2
+                                type: TEXT
+                              - label: Date de fin de garantie supplémentaire
+                                rank: 3
+                                type: DATE
+                              - label: Date du constat
+                                rank: 4
+                                type: DATE
+                                defaultValue: SYSDATE
+                              - label: Motif de refus
+                                rank: 5
+                                type: TEXT
+                            fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                      - title: Non
+                        information:
+                          title: <b>Votre produit n'est plus couvert par la garantie.</b>
+                          subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
+                          actions:
+                            - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                              example:
+                              <br/><br/>Un vice caché d'un produit est un défaut :
+                              <ul>
+                                <li>qui rend le produit inutilisable, </li>
+                                <li>présent dès le départ et</li>
+                                <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                              </ul>"
+                              answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                                  <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
+          - title: Autre raison
+                  example: 'Vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur..'
+                  subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
+                  subcategories:
+                    - title: Oui
+                      description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+                    - title: Non
+                      information:
+                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                        <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+      - title: Moyens de paiement
+        example: 'Exemple : refus de la carte bancaire'
+        subcategories:
+          - title: Le commerçant refuse que je paie en espèces
+            subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+            subcategories:
+              - title: Il refuse les espèces d'une façon générale
+                description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+              - title: Il n'avait pas assez de monnaie
+                information:
+                content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+              - title: Mes pièces / billets étaient en mauvais état
+                information:
+                content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+              - title: Le prix était supérieur à 1 000 euros ou à 50 pièces
+                information:
+                content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                    <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+              - title: Autre
+          - title: Le commerçant refuse que je paie par carte bancaire ou chèque
+            subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bancaire&#160;?
+            subcategories:
+              - title: Il exige un minimum d'achat
+                subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                subcategories:
+                  - title: Oui
+                    example: 'Exemple : sur une affiche au niveau des caisses'
+                    information:
+                    title: Le commerçant a le droit d'exiger un minimum d'achat pour les paiements par carte bancaire et par chèque.
+                      <br/> Si vous voulez acheter un produit moins cher que le minimum d'achat, c'est à vous de trouver de la monnaie. 
+                    content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+                  - title: Non
+              - title: Il refuse les paiements par chèque ou carte bleue de façon générale
+                subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+                subcategories:
+                  - title: Oui
+                    example: 'Exemple : sur une affiche au niveau des caisses'
+                    information:
+                    title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                    content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+                  - title: Non
+              - title: Autres
+                example: 'Exemple : problème avec le terminal de paiement...'
+          - title: Autres problèmes de prix ou paiement
+            subcategoriesTitle: 'Problème avec :'
+            subcategories:
+              - title: Le cash-back
+              - title: Une carte cadeaux
+              - title: Autre
+      - title: Autres
   - category: Voiture / Véhicule
     categoryId: VEH
     path: pratique-d-hygiene
