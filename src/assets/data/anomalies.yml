@@ -493,18 +493,18 @@ list:
           - title: Indisponibilité des produits en publicité
             detailInputs:
               - label: Date du constat
-                    rank: 1
-                    type: DATE
-                    defaultValue: SYSDATE
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
               - label: De quelle publicité s'agit-il&#160;?
-                    rank: 2
-                    type: RADIO
-                    options:
-                      - Catalogue papier
-                      - Publicité sur internet
-                      - Spot radio (à préciser)
-                      - Spot télé (à préciser)
-                      - Autres (à préciser)
+                rank: 2
+                type: RADIO
+                options:
+                  - Catalogue papier
+                  - Publicité sur internet
+                  - Spot radio (à préciser)
+                  - Spot télé (à préciser)
+                  - Autres (à préciser)
               - label: Quel est le produit que vous vouliez&#160;?
                     rank: 3
                     type: TEXT
