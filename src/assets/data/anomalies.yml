@@ -341,7 +341,7 @@ list:
                 rank: 7
                 type: TEXTAREA
           - title: Il manque des prix / les prix sont illisibles
-              description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+            description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
             detailInputs:
               - label: Veuillez préciser
                 rank: 1
