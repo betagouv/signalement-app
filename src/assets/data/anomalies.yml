@@ -445,21 +445,20 @@ list:
                           subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                                 <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                           actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                            <br/><br/>Un vice caché d'un produit est un défaut :
-                            <ul>
-                              <li>qui rend le produit inutilisable, </li>
-                              <li>présent dès le départ et</li>
-                              <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
-                            </ul>"
-                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple. 
-                              <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
+                            - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                              <br/><br/>Un vice caché d'un produit est un défaut :
+                              <ul>
+                                <li>qui rend le produit inutilisable, </li>
+                                <li>présent dès le départ et</li>
+                                <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                              </ul>"
+                              answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple. 
+                                <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
               - title: Occasion
                 subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
                 subcategories:
                   - title: Il y a moins de 6 mois
-                    description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets.'
-                    <br /> 'Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                    description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
                     detailTitle: Problème de garantie légale
                     detailInputs:
                       - label: Date d'achat
@@ -482,7 +481,7 @@ list:
                       - label: Pour quelle raison le commerçant ne veut pas vous reprendre  le produit&#160;?
                         rank: 5
                         type: TEXTAREA
-                        fileLabel: Preuve d'achat / publicité / offre de vente
+                    fileLabel: Preuve d'achat / publicité / offre de vente
                   - title: Il y a plus de 6 mois
                     subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                     subcategories:
