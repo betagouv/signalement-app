@@ -373,7 +373,120 @@ list:
                 rank: 3
                 type: TEXTAREA
       - title: Hygiène
-        example: 'Exemple : magasin sale, rayon froid pas à bonne température'      
+        example: 'Exemple : magasin sale, rayon froid pas à bonne température'
+        subcategories:
+          - title: Locaux sales
+            detailInputs:
+              - label: Quel endroit est concerné&#160;?
+                rank: 1
+                type: CHECKBOX
+                options:
+                  - Cuisine
+                  - Atelier de fabrication
+                  - Salle du restaurant, du bar
+                  - Intérieur du magasin
+                  - WC
+                  - Autre (à préciser)
+              - label: Quel est le problème&#160;?
+                rank: 2
+                type: CHECKBOX
+                options:
+                  - C'est sale
+                  - C'est dégradé, en mauvais état
+              - label: A quel niveau&#160;?
+                rank: 3
+                type: CHECKBOX
+                options:
+                  - Sol
+                  - Mur
+                  - Vitrine, réfrigérateur
+                  - Équipements mis à disposition des clients
+                  - Matériel de fabrication
+                  - Distributeur automatique
+                  - Autre (à préciser)
+              - label: Pour corriger ce problème, dites-nous en plus
+                rank: 4
+                type: TEXTAREA
+                placeholder: 'rayon du magasin, type de saleté...'
+                optionnal: true
+              - label: Date du constat
+                rank: 5
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Heure du constat (facultatif)
+                rank: 6
+                type: TIMESLOT
+                optionnal: true
+          - title: Hygiène du personnel
+            example: 'Exemple : tenue sale ou pas adaptée...'
+            subcategories:
+              - title: Tenue de travail pas adaptée
+                subcategories:
+                  - title: Pas de gants ou pas de coiffe
+                    information:
+                      title: Cet incident ne doit pas nécessairement être signalé.
+                      content: |-
+                        La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
+                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
+                  - title: Autre problème sur la tenue de travail
+              - title: Tenue sale
+              - title: Mauvaises pratiques d'hygiène
+                example: 'Exemple : personne qui fume en cuisine'
+              - title: Autre
+          - title: Présence d'animaux
+            example: 'Exemple : cafards...'
+            detailInputs:
+              - label: Quel animal avez-vous vu&#160;?
+                rank: 1
+                type: RADIO
+                options:
+                  - Insectes (cafard..)
+                  - Rongeurs (rat, souris..)
+                  - Oiseau (pigeon..)
+                  - Autre (à préciser)
+              - label: Où l'avez-vous vu&#160;?
+                rank: 2
+                type: CHECKBOX
+                options:
+                  - Zone de production
+                  - Intérieur d'un magasin
+                  - Autre (à préciser)
+              - label: Pour corriger ce problème, dites-nous en plus
+                rank: 3
+                type: TEXTAREA
+                optionnal: true
+              - label: Date du constat
+                rank: 4
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Heure du constat (facultatif)
+                rank: 5
+                type: TIMESLOT
+                optionnal: true
+          - title: Problème de température
+            example: 'Exemple : rupture de la chaîne du froid...'
+            detailInputs:
+              - label: Quel est le problème&#160;?
+                rank: 1
+                type: RADIO
+                options:
+                  - Vitrine ou réfrigérateur trop chaud, cassé ou en panne
+                  - Stockage à température ambiante de produits frais ou congelés
+                  - Transport à température ambiante de produits frais ou congelés
+                  - Autre problème de température
+              - label: Pour corriger ce problème, dites-nous en plus
+                rank: 2
+                type: TEXTAREA
+                optionnal: true
+              - label: Date du constat
+                rank: 3
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Heure du constat (facultatif)
+                rank: 4
+                type: TIMESLOT
+                optionnal: true
+          - title: Autre problème d'hygiène
       - title: Publicité
         example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
       - title: Remboursement / garantie
