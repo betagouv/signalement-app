@@ -508,15 +508,15 @@ list:
               - label: Quel est le produit que vous vouliez&#160;?
                 rank: 3
                 type: TEXT
-            placeholder: Type, nom et marque du produit
+                placeholder: Type, nom et marque du produit
               - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
-                    rank: 4
-                    type: RADIO
-                    options:
-                      - Oui
-                      - Non
-                      - "je n'ai pas demandé"
-                    optionnal: true
+                rank: 4
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+                  - "je n'ai pas demandé"
+                optionnal: true
               - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
                 rank: 5
                 type: TEXT
