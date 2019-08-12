@@ -301,9 +301,9 @@ list:
     icon: icon_store.png 
     subcategories:
       - title: Prix
-        example: 'Exemple : il manque des prix en rayon, prix faux en caisse'
+        example: 'Exemple : prix faux en caisse, prix pas affiché'
         subcategories:
-          - title: Prix à la caisse différent du prix affiché
+          - title: Le prix à la caisse est différent du prix affiché
             example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros.'
             description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.'
             detailInputs:
@@ -340,21 +340,37 @@ list:
               - label: Description
                 rank: 7
                 type: TEXTAREA
-          - title: Il manque des prix en rayon ou sur les produits
+          - title: Il manque des prix / les prix sont illisibles
+              description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+            detailInputs:
+              - label: Veuillez préciser
+                rank: 1
+                type: RADIO
+                options:
+                  - Prix pas affiché
+                  - Prix illisible
+                  - Autre (à préciser)
+              - label: Date du constat
+                rank: 2
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Description
+                example: Précisez si possible le rayon concerné
+                rank: 3
+                type: TEXTAREA
           - title: Les prix sont plus chers qu'ailleurs
             information:
-              title: Les prix sont choisis librement par les commerçants.
+              title: Les commerçant ont le droit de choisir leurs prix.
               content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
-                <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte des boissons.
-                <br/><br/><b>Cas particulier !</b>
-                <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
-                <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.
-                <br/> Si c’est votre cas, vous devez faire une réclamation avec ce formulaire :<a href='https://www.economie.gouv.fr/courrier/4191' target='_blank'> https://www.economie.gouv.fr/courrier/491</a>"
+                <br/> Par exemple, il est autorisé de vendre une bouteille d'eau  8 euros dsi le prix est bien marqué.
+                <br/><br/><b>Le saviez-vous ?</b>
+                <br/>Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
+                <br/> Par exemple, le prix des livres est réglementé." 
           - title: Fausse réduction de prix
             example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
-            description: "<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l'entreprise
+            description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
                <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
-               Une copie du récépissé de déclaration doit être affichée sur le lieu de vente, pendant toute la durée de la liquidation, de manière à être lisible et visible depuis la voie publique."
+               Un document prouvant ette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue.
             detailInputs:
               - label: "Il s'agit d'un problème sur :"
                 rank: 1
@@ -381,10 +397,8 @@ list:
                 rank: 1
                 type: CHECKBOX
                 options:
-                  - Cuisine
-                  - Atelier de fabrication
-                  - Salle du restaurant, du bar
                   - Intérieur du magasin
+                  - Atelier de fabrication
                   - WC
                   - Autre (à préciser)
               - label: Quel est le problème&#160;?
@@ -427,11 +441,11 @@ list:
                       title: Cet incident ne doit pas nécessairement être signalé.
                       content: |-
                         La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
-                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
+                        Les commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
                   - title: Autre problème sur la tenue de travail
               - title: Tenue sale
               - title: Mauvaises pratiques d'hygiène
-                example: 'Exemple : personne qui fume en cuisine'
+                example: 'Exemple : personne qui fume dans un local de production'
               - title: Autre
           - title: Présence d'animaux
             example: 'Exemple : cafards...'
