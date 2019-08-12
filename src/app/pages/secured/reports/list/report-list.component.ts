@@ -53,8 +53,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
   loading: boolean;
   loadingError: boolean;
 
-  statusProFinals: string[];
-
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
               private meta: Meta,
@@ -89,16 +87,14 @@ export class ReportListComponent implements OnInit, OnDestroy {
     combineLatest(
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
       this.constantService.getStatusPros(),
-      this.constantService.getStatusProFinals(),
       this.constantService.getStatusConsos(),
       this.route.paramMap
     ).subscribe(
-      ([reportFilter, statusPros, statusProFinals, statusConsos, params]) => {
+      ([reportFilter, statusPros, statusConsos, params]) => {
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
         }
         this.statusPros = statusPros;
-        this.statusProFinals = statusProFinals;
         this.statusConsos = statusConsos;
         this.statusProSelected = this.reportFilter && this.reportFilter.statusPro ? this.reportFilter.statusPro : "";
         this.loadReportExtractUrl();

@@ -26,6 +26,7 @@ export class EventComponent implements OnInit {
   reportId: string;
   siret: string;
   actionPros: ReportEventAction[];
+  actionProFinals: string[];
   actionConsos: ReportEventAction[];
   actionAgents: ReportEventAction[];
 
@@ -51,13 +52,15 @@ export class EventComponent implements OnInit {
     });
     combineLatest(
       this.constantService.getActionPros(),
+      this.constantService.getActionProFinals(),
       this.constantService.getActionConsos(),
       this.constantService.getActionAgents(),
       this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionConsos, actionAgents, url]) => {
+      ([actionPros, actionProFinals, actionConsos, actionAgents, url]) => {
         this.loading = false;
         this.actionPros = actionPros;
+        this.actionProFinals = actionProFinals.map(action => action.name);
         this.actionConsos = actionConsos;
         this.actionAgents = actionAgents;
         this.activationDocumentUrl = url;
@@ -78,6 +81,10 @@ export class EventComponent implements OnInit {
       action: this.actionCtrl,
       detail: this.detailCtrl
     });
+  }
+
+  isStatusProFinal(status: string) {
+    return this.actionProFinals.includes(status);
   }
 
   hasError(formControl: FormControl) {
