@@ -370,9 +370,9 @@ list:
             example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
             description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
                <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
-               Un document prouvant ette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue.
+               Un document prouvant ette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue."
             detailInputs:
-              - label: "Il s'agit d'un problème sur :"
+              - label: "Il s'agit d'un problème sur:"
                 rank: 1
                 type: RADIO
                 options:
