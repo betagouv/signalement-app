@@ -526,16 +526,16 @@ list:
                               answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
                                   <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
           - title: Autre raison
-                  example: 'Vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur..'
-                  subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
-                  subcategories:
-                    - title: Oui
-                      description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-                    - title: Non
-                      information:
-                      title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
-                      content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
-                        <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+            example: 'Vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur..'
+            subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
+            subcategories:
+              - title: Oui
+                description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+              - title: Non
+                information:
+                  title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                  content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                    <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
       - title: Moyens de paiement
         example: 'Exemple : refus de la carte bancaire'
         subcategories:
