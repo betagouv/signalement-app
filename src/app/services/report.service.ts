@@ -122,7 +122,11 @@ export class ReportService {
         if (reportFilter.period && reportFilter.period[1]) {
           httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
         }
-        ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
+        if (reportFilter.statusPros && reportFilter.statusPros.length) {
+          httpParams.push(`statusPros=${reportFilter.statusPros.join(',')}`);
+        }
+
+        ['siret', 'statusConso', 'category', 'details'].forEach(filterName => {
           if (reportFilter[filterName]) {
             httpParams.push(`${filterName}=${encodeURIComponent((reportFilter[filterName] as string).trim())}`);
           }

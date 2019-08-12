@@ -131,9 +131,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
+    this.reportFilter = {...this.reportFilter, statusPros: this.getSpecificStatusProIfDgccrf(this.statusProSelected)};
+    this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
     this.loadReportExtractUrl();
-    this.storageService.setLocalStorageItem(ReportFilterStorageKey, {...this.reportFilter, statusPros: this.getSpecificStatusProIfDgccrf(this.statusProSelected)});
     this.initPagination();
+
     this.loadReports(1);
   }
 
@@ -335,7 +337,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getGenericStatusProIfDgccrf(statusPro: string) {
+  getGenericStatusProIfDgccrf(statusPro: string): string {
     if (this.user.role === "DGCCRF") {
       return this.statusProFinals.includes(statusPro) ? statusPro : GENERIC_STATUS_PRO_NOT_FINAL;
     }
@@ -352,7 +354,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   }
 
-  getGenericsStatusProIfDgccrf() {
+  getGenericsStatusProIfDgccrf(): string[] {
 
     if (this.user.role === "DGCCRF") {
       return [...this.statusProFinals, GENERIC_STATUS_PRO_NOT_FINAL];
