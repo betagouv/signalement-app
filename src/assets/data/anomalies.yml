@@ -489,6 +489,80 @@ list:
           - title: Autre problème d'hygiène
       - title: Publicité
         example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
+        subcategories:
+          - title: Indisponibilité des produits en publicité
+            detailInputs:
+              - label: Date du constat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+              - label: De quelle publicité s'agit-il&#160;?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - Catalogue papier
+                      - Publicité sur internet
+                      - Spot radio (à préciser)
+                      - Spot télé (à préciser)
+                      - Autres (à préciser)
+              - label: Quel est le produit que vous vouliez&#160;?
+                    rank: 3
+                    type: TEXT
+                    placeholder: Type, nom et marque du produit
+              - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
+                      - "je n'ai pas demandé"
+                    optionnal: true
+              - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
+                rank: 5
+                type: TEXT
+                placeholder: "Lien vers la publicité"
+            fileLabel: Photo(s) de la publicité si possible
+          - title: Informations de vente mensongères
+            exemple: 'Exemple: pancarte "produits locaux" or ce n''est pas le cas, affiche "pain bio" or ce n''est pas le cas'
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Qu'es-ce qui est trompeur&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - L'emballage d'un produit
+                  - Une affiche chez le commerçant
+                  - Une annonce sur un catalogue
+                  - Un site internet (à préciser)
+                  - Un spot télé ou radio (à préciser)
+                  - Un contrat ou un devis
+                  - Le discours d'un vendeur
+                  - La façon de mettre en vente
+                  - Autre (à préciser)
+              - label: A propos de quoi est-ce trompeur&#160;?
+                rank: 3
+                type: RADIO
+                options:
+                  - L'origine du produit
+                  - La composition du produit
+                  - Un label (bio par exemple)
+                  - Une promesse de résultat
+                  - Une marque
+                  - Autre (à préciser)
+              - label: Pourquoi trouvez-vous ça trompeur ?
+                rank: 4
+                type: TEXTAREA
+                optionnal: true
+              - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+            fileLabel: Photo(s) si possible
       - title: Remboursement / garantie
         example: 'Exemple : le magasin refuse de me reprendre un article'
         subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
