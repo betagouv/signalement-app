@@ -42,7 +42,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   reportFilter: ReportFilter;
   reportExtractUrl: string;
-  statusProSelected: string;
   statusPros: string[];
   statusConsos: string[];
   categories: string[];
@@ -82,6 +81,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
+    if (this.user.role === Roles.Pro) {
+      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    }
+
     this.loading = true;
     this.loadingError = false;
     combineLatest(
@@ -96,7 +99,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
         }
         this.statusPros = statusPros;
         this.statusConsos = statusConsos;
-        this.statusProSelected = this.reportFilter && this.reportFilter.statusPro ? this.reportFilter.statusPro : "";
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
 
@@ -121,7 +123,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
-    this.reportFilter = {...this.reportFilter, statusPro: this.statusProSelected };
     this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
     this.loadReportExtractUrl();
     this.initPagination();

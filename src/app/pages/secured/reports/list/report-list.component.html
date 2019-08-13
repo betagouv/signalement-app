@@ -75,7 +75,7 @@
           </label>
         </div>
         <div class="col-4 text-left">
-          <select [(ngModel)]="statusProSelected" placeholder="Statut pro" id="statusProFilter" name="statusPro" [class]="reportFilter.statusPro ? 'selected' : ''">
+          <select [(ngModel)]="reportFilter.statusPro" placeholder="Statut pro" id="statusProFilter" name="statusPro" [class]="reportFilter.statusPro ? 'selected' : ''">
             <option value="" selected>Tous les status</option>
             <option *ngFor="let statusPro of statusPros">
               {{statusPro}}
