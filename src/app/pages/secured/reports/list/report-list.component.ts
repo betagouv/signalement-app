@@ -81,7 +81,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
-    if (this.user.role === Roles.Pro) {
+    if (this.user && this.user.role === Roles.Pro) {
       this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
     }
 
