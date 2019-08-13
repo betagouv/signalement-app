@@ -975,6 +975,30 @@ list:
         subcategories:
           - title: Démarchage à domicile ou par téléphone
             example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
+            detailInputs:
+              - label: Date du passage du commercial (ou de son appel)
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: De quoi s'agit-il&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - démarchage à domicile, cest-à-dire qu'un commercial est venu chez vous
+                  - démarchage par téléphone uniquement
+              - label: Avez-vous signé, volontairement ou non, un contrat&#160;?
+                rank: 3
+                type: RADIO
+                options:
+                  - oui
+                  - non
+              - label: Si la date est différente, merci d'indiquer la date de début du contrat&#160;?
+                rank: 4
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Décrivez nous ce qui s'est passé
+                rank: 7
+                type: TEXTAREA
           - title: Publicité mensongère ou trompeuse
             example: 'Exemple: publicité "offre verte" mensongère'
           - title: Contrat
