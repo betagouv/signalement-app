@@ -1012,6 +1012,39 @@ list:
             fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
           - title: Publicité mensongère ou trompeuse
             example: 'Exemple: publicité "offre verte" mensongère'
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Quel support trouvez-vous trompeur&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - Une publicité (affiche, flyers)
+                  - Un site internet (à préciser)
+                  - Un spot télé ou radio (à préciser)
+                  - Le discours d'un vendeur
+                  - Autre (à préciser)
+              - label: A propos de quoi est-ce trompeur&#160;?
+                rank: 3
+                type: RADIO
+                options:
+                  - Un label / certificat
+                  - Une baisse de prix
+                  - Une information (exemple:origine géographique de mon électricité)
+                  - Autre (à préciser)
+              - label: Pourquoi trouvez-vous ça trompeur ?
+                rank: 4
+                type: TEXTAREA
+                optionnal: true
+              - label: Avez-vous déjà contacté l'entreprise pour lui signaler ce problème&#160;?
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+            fileLabel: Photo(s) si possible
           - title: Contrat
             example: 'Exemple : reconduction de contrat, clause abusive'
             subcategories:
