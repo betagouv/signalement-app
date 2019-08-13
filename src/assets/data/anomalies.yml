@@ -988,7 +988,7 @@ list:
                   - démarchage par téléphone uniquement
               - label: Que s'est-il passé?
                 rank: 3
-                type: CASES
+                type: RADIO
                 options:
                   - le vendeur s'est fait passer pour une autre société (à préciser)
                   - le vendeur m'a fait signer des papiers sans me dire que c'était un contrat
