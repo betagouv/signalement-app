@@ -1001,10 +1001,11 @@ list:
                 options:
                   - oui
                   - non
-              - label: Si la date est différente, merci d'indiquer la date de début du contrat&#160;?
+              - label: Date de début du contrat si il démarre un autre jour que celui du démarchage&#160;?
                 rank: 5
                 type: DATE
                 defaultValue: SYSDATE
+                optionnal: true
               - label: Décrivez nous plus en détails ce qui s'est passé
                 rank: 6
                 type: TEXTAREA
