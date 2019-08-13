@@ -976,7 +976,7 @@ list:
           - title: Démarchage à domicile ou par téléphone
             example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
             detailInputs:
-              - label: Date du passage du commercial (ou de son appel)
+              - label: Date du passage du vendeur (ou de son appel)
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
@@ -984,21 +984,31 @@ list:
                 rank: 2
                 type: RADIO
                 options:
-                  - démarchage à domicile, cest-à-dire qu'un commercial est venu chez vous
+                  - démarchage à domicile (porte-à-porte)
                   - démarchage par téléphone uniquement
-              - label: Avez-vous signé, volontairement ou non, un contrat&#160;?
+              - label: Que s'est-il passé?
                 rank: 3
+                type: RADIO
+                options:
+                  - le vendeur s'est fait passer pour une autre société (à préciser)
+                  - le vendeur m'a fait signer des papiers sans me dire que c'était un contrat
+                  - le vendeur m'a obligé à un signer un nouveau contrat en m'indiquant que mon contrat actuel allait être arreté
+                  - le vendeur a demandé à voir mes factures, mon compteur
+                  - autre (à préciser)
+              - label: Avez-vous signé, volontairement ou non, un contrat&#160;?
+                rank: 4
                 type: RADIO
                 options:
                   - oui
                   - non
               - label: Si la date est différente, merci d'indiquer la date de début du contrat&#160;?
-                rank: 4
+                rank: 5
                 type: DATE
                 defaultValue: SYSDATE
-              - label: Décrivez nous ce qui s'est passé
-                rank: 7
+              - label: Décrivez nous plus en détails ce qui s'est passé
+                rank: 6
                 type: TEXTAREA
+            fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
           - title: Publicité mensongère ou trompeuse
             example: 'Exemple: publicité "offre verte" mensongère'
           - title: Contrat
