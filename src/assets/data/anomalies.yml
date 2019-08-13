@@ -964,31 +964,27 @@ list:
             example: 'Exemple : spams, démarchages téléphoniques'
           - title: Initérance
             example: pas de réception du sms, itinérance à la frontière
-      - title: Eau / gaz / électricité
+      - title: Eau
         subcategories:
-          - title: Publicité
-            example: 'Exemple: mention mensongère'
-            subcategories:
-              - title: Indisponibilité des produits/offres
-                detailInputs:
-                - label: Date du constat
-                  rank: 1
-                  type: DATE
-                  defaultValue: SYSDATE
-                - label: Quel type de produit/offre était indisponible&#160;?
-                  rank: 2
-                  type: TEXT
-                  placeholder: Type de produit
-                - label: Description
-                  rank: 3
-                  type: TEXTAREA
-              - title: Information mensongère ou trompeuse
+          - title: contrat et facturation
+          - title: coupure de l'eau
+          - title: travaux sur les canalisations
+          - title: fosse septique
+            example: 'Exemple: malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier.. '
+      - title: Gaz / Electricité / Fioul / GPL
+        subcategories:
+          - title: Démarchage à domicile ou par téléphone
+            example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
+          - title: Publicité mensongère ou trompeuse
+            example: 'Exemple: publicité "offre verte" mensongère'
           - title: Contrat
             example: 'Exemple : reconduction de contrat, clause abusive'
-          - title: SAV
-            example: 'Exemple : pas de réponse du service client'
-          - title: Démarchage à domicile
-            example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
+            subcategories:
+              - title: résilier un contrat
+              - title: clause abusive
+          - title: Facturation
+      - title: Autres
+        example: 'Exemple: granulés bois'
       
       
   - category: Banque / Assurance / Mutuelle
