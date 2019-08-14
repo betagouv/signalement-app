@@ -13,7 +13,7 @@ Au programme :
 * mise en place d’actions “choc nettoyage” aussi bien dans le magasin que dans les réserves
 * sensibilisation du responsable du magasin ainsi que de ses équipes sur le maintien de l’hygiène et de la propreté dans tous les locaux.
 
-La directrice a promis que tout serait mis en oeuvre pour se débarrasser de la présence des rongeurs. Le problème vient du magasin et la directrice a pris ses responsabilités et a agi ! 
+La directrice a promis que tout serait mis en oeuvre pour se débarrasser de la présence des rongeurs.  
 
 ![Souris](/assets/blog/2019/08/18/les-actions-du-commercant/Souris-check.jpg)
 
@@ -42,7 +42,7 @@ En effet, un commerçant a le droit de contester un signalement. il peut le qual
 
 Un dernier exemple mais pas des moindres : dans un **supermarché** d’une enseigne nationale, un consommateur achète une chemise vendue comme “100% Coton” dans une publicité. Une fois chez lui, il ouvre le sachet plastique dans lequel se trouvait la chemise. Horreur ! L’étiquette de composition qui se trouve dans le col du vêtement indique qu’il s’agit d’un mélange “70% Coton 30% polyester”. Il a signalé le problème au magasin, mais n’a constaté aucun changement en rayon. En consommateur averti, il dépose donc un signalement sur SignalConso pour **publicité mensongère**. 
 
-La réponse du commerçant ne traîne pas : un message a été envoyé à tous les points de vente à l’échelle nationale pour que chaque responsable de magasin corrige cette erreur. Ils doivent mettre sans attendre sur les produits en rayon et en stock une étiquette indiquant la composition réelle de ce vêtement.
+La réponse du commerçant ne traîne pas : un message a été envoyé à tous les points de vente à l’échelle nationale pour que chaque responsable de magasin corrige cette erreur. Ils doivent modifier sans attendre les informations relatives à la composition réelle du vêtement. 
 
 C’est aussi ça SignalConso : un consommateur, un article, un signalement, des centaines de magasins impactés !
 
