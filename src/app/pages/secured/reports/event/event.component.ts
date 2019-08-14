@@ -29,6 +29,7 @@ export class EventComponent implements OnInit {
   actionProFinals: string[];
   actionConsos: ReportEventAction[];
   actionAgents: ReportEventAction[];
+  allActions: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
@@ -63,6 +64,7 @@ export class EventComponent implements OnInit {
         this.actionProFinals = actionProFinals.map(action => action.name);
         this.actionConsos = actionConsos;
         this.actionAgents = actionAgents;
+        this.allActions = [...this.actionPros, ...this.actionConsos, ...this.actionAgents];
         this.activationDocumentUrl = url;
         this.initEventForm();
       },
@@ -70,6 +72,7 @@ export class EventComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
+
   }
 
   initEventForm() {
@@ -119,7 +122,8 @@ export class EventComponent implements OnInit {
   }
 
   selectAction() {
-    if ([...this.actionPros, ...this.actionConsos].find(action => action === this.actionCtrl.value).withResult) {
+
+    if (this.allActions.find(action => action === this.actionCtrl.value).withResult) {
       this.eventForm.addControl('resultAction', this.resultActionCtrl);
     } else {
       this.eventForm.removeControl('resultAction');
