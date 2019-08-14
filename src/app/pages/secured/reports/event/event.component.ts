@@ -84,7 +84,7 @@ export class EventComponent implements OnInit {
   }
 
   isStatusProFinal(status: string) {
-    return this.actionProFinals.includes(status);
+    return this.actionProFinals.indexOf(status) !== -1;
   }
 
   hasError(formControl: FormControl) {
