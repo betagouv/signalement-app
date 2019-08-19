@@ -1164,7 +1164,7 @@ list:
                                     rank: 2
                                     type: DATE
                                     defaultValue: SYSDATE
-                                  - label: Précisez comment et à qui vous avza fait la demande&#160;:
+                                  - label: Précisez comment et à qui vous avez fait la demande
                                     rank: 3
                                     type: TEXTAREA
                               - title: Non
