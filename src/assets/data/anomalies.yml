@@ -1012,6 +1012,7 @@ list:
             example: Mon débit d'eau a été réduit car je ne peux payer ma facture
             information:
               title: Il est interdit de couper ou réduire l'eau en cas d'impayé pour une rédisence principale.
+              content: XX
               actions: Les coupures d'eau et les réductions de débit sont interdites, toute l'année, en cas de factures impayées, pour les résidences principales. Par contre, vous devrez toujours payer votre facture. 
                 - question: Vous souhaitez bénéficier d'une aide pour payer votre facture d'eau &#160;?
                   answer: <a href="https://www.inc-conso.fr/content/beneficier-dune-aide-pour-payer-sa-facture-deau" target="_blank" />plus d'informations ici</a>
