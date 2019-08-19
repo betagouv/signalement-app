@@ -967,8 +967,33 @@ list:
       - title: Eau
         subcategories:
           - title: contrat et facturation
+            example: 'Exemple: la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives..'
+            subcategories:
+              - title: on me refuse l'abonnement car je suis locataire et non propriétaire.
+              - title: on me demande de payer une avance sur ma consommation.
+                subcategoriesTitle: Quand est-il prévu de vous rendre cet argent ?
+                subcategories:
+                  - title: il sera déduit à ma première facture
+                    information:
+                      title: Ce n'est pas un motif de signalement
+                      subtitle: Le distributeur peut vous demander une avance si il est prévu de la déduire de votre facture de consommation.
+                  - title: à la résiliation de de l'abonnement ou au changement de locataire
+              - title: je ne suis pas d'accord avec la consommation indiquée.
+              - title: une clause du contrat (réglement de service) est abusive, c'est-à-dire elle désavantage fortement le consommateur.
+              - title: autre
           - title: coupure de l'eau
-          - title: travaux sur les canalisations
+            subcategoriesTitle: Pourquoi vous a-t-on coupé l'eau ?
+            subcategories:
+              - réalisation de travaux (rue, bâtiment)
+              - factures impayées
+          - title: dégâts / travaux sur les canalisations
+            example: 'Exemple: fuite d''eau avant compteur'
+            information:
+              title: En règle générale, le compteur d'eau est la limite.
+              subtitle: Les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également de votre responsabilité. 
+              actions:
+                - question: Que faire en cas de désaccord&#160;?
+                  answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a> 
           - title: fosse septique
             example: 'Exemple: malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier.. '
       - title: Gaz / Electricité / Fioul / GPL
