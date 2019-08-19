@@ -1141,6 +1141,8 @@ list:
                               - label: Précisez comment et à qui vous avez fait la demande&#160;:
                                 rank: 3
                                 type: TEXTAREA
+                                rank: 3
+                                type: TEXTAREA
                           - title: Non
                             information:
                               title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -1180,54 +1182,6 @@ list:
                     information:
                       title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                       actions: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
-                    
-                
-                subcategoriesTitle: Ce contrat concerne un logement
-                subcategories:
-                  - title: dans lequel vous venez d'emmenager
-                    description: Si vous avez soucrit votre contrat sur internet, par téléphone ou chez vous avec un conseiller, vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
-                      <br />Vous n’avez pas à vous justifier auprès du commerçant.
-                      <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
-                    subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
-                    subcategories:
-                      - title: Oui
-                      - title: Non
-                  - title: un logement que vous occupiez déjà
-                    description: Si vous avez soucrit votre contrat sur internet, par téléphone ou chez vous avec un consiller, vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
-                      <br />Vous n’avez pas à vous justifier auprès du commerçant.
-                      <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
-                    subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
-                    subcategories:
-                      - title: Oui
-                        detailInputs:
-                          - label: Date de signature du contrat (elle est indiquée sur votre contrat).
-                            rank: 1
-                            type: DATE
-                            defaultValue: SYSDATE
-                          - label: Date de la demande d'annulation
-                            rank: 2
-                            type: DATE
-                            defaultValue: SYSDATE
-                          - label: Précisez comment et à qui vous avza fait la demande&#160;:
-                            rank: 3
-                            type: TEXTAREA
-                      - title: Non
-                        information:
-                        title: Vous ne pouvez plus exiger l'annulation de votre contrat.
-                        content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
-                
-                detailInputs:
-                  - label: Date de signature du contrat
-                    rank: 1
-                    type: DATE
-                    defaultValue: SYSDATE
-                  - label: Quel est le problème&#160;?
-                    rank: 2
-                    type: RADIO
-                    options:
-                  - malfaçons sur la pose de la fosse spetique
-                  - le bureau d'étude impose une marque/modèle en particulier
-                  - autre (
               - title: Une clause du contrat est abusive, c'est-à-dire elle désavantage fortement le consommateur.
               - title: Autre
           - title: Facturation
