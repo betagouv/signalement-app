@@ -1117,7 +1117,7 @@ list:
             subcategories:
               - title: Difficulté pour résilier un contrat
                 example: 'Exemple: le bulletin de retractation n''a pas été prise en compte'
-                subactegoriesTitle: Où avez-vous souscrit votre contrat ?
+                subcategoriesTitle: Où avez-vous souscrit votre contrat ?
                 subcategories:
                   - title: sur internet, par téléphone ou chez moi avec un conseiller
                     subcategoriesTitle: Ce contrat concerne un logement
@@ -1149,7 +1149,7 @@ list:
                         subcategoriesTitle: Avez-vous demander à faire démarrer votre contrat immédiatement ?
                         subcategories:
                           - title: Non. Le contrat doit démarrer à la fin du délai de retractation.
-                            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+                            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
                               <br />Vous n’avez pas à vous justifier auprès du commerçant.
                               <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
                             subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
