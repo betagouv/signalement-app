@@ -966,7 +966,7 @@ list:
             example: pas de réception du sms, itinérance à la frontière
       - title: Eau
         subcategories:
-          - title: contrat et facturation
+          - title: Contrat / facture
             example: 'Exemple: la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives..'
             subcategories:
               - title: Le distributeur refuse de m'ouvrir un contrat / abonnement car je suis locataire et non propriétaire.
@@ -1008,12 +1008,14 @@ list:
                     type: TEXTAREA
                 fileLabel: Joindre une copie du contrat / réglement.
               - title: autre
-          - title: coupure de l'eau
-            subcategoriesTitle: 'Pourquoi l''eau a-t-elle été coupée ?'
-            subcategories:
-              - title: réalisation de travaux (rue, bâtiment)
-              - title: factures impayées
-          - title: dégâts / travaux sur les canalisations
+          - title: Coupure de l'eau pour impayé
+            example: Mon débit d'eau a été réduit car je ne peux payer ma facture
+            information:
+              title: Il est interdit de couper ou réduire l'eau en cas d'impayé pour une rédisence principale.
+              actions: Les coupures d'eau et les réductions de débit sont interdites, toute l'année, en cas de factures impayées, pour les résidences principales. Par contre, vous devrez toujours payer votre facture. 
+                - question: Vous souhaitez bénéficier d'une aide pour payer votre facture d'eau ?
+                  answer:  <br><a href="https://www.inc-conso.fr/content/beneficier-dune-aide-pour-payer-sa-facture-deau" target="_blank" />plus d'informations ici</a>
+          - title: Dégâts / travaux sur les canalisations
             example: 'Exemple: fuite d''eau avant compteur'
             information:
               title: En règle générale, le compteur d'eau est la limite.
@@ -1021,9 +1023,24 @@ list:
               actions:
                 - question: Que faire en cas de désaccord&#160;?
                   answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a> 
-          - title: fosse septique
+          - title: Fosse septique
             example: 'Exemple: malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier.. '
-      - title: Gaz / Electricité / Fioul / GPL
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Quel est le problème&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - malfaçons sur la pose de la fosse spetique
+                  - le bureau d'étude impose une marque/modèle en particulier
+                  - autre (à préciser)
+              - label: Décrivez nous plus en détails ce qui s'est passé
+                rank: 3
+                type: TEXTAREA
+      - title: Gaz / Electricité
         subcategories:
           - title: Démarchage à domicile ou par téléphone
             example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
@@ -1100,11 +1117,123 @@ list:
           - title: Contrat
             example: 'Exemple : reconduction de contrat, clause abusive'
             subcategories:
-              - title: résilier un contrat
-              - title: clause abusive
+              - title: Difficulté pour résilier un contrat
+                example: 'Exemple: le bulletin de retractation n''a pas été prise en compte'
+                subactegoriesTitle: Où avez-vous souscrit votre contrat ?
+                subcategories:
+                  - title: sur internet, par téléphone ou chez moi avec un conseiller
+                    subcategoriesTitle: Ce contrat concerne un logement
+                    subcategories:
+                      - title: dans lequel vous venez d'emmenager
+                        description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+                          <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                          <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+                        subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+                        subcategories:
+                          - title: Oui
+                            detailInputs:
+                              - label: Date de signature du contrat (elle est indiquée sur votre contrat).
+                                rank: 1
+                                type: DATE
+                                defaultValue: SYSDATE
+                              - label: Date de la demande d'annulation
+                                rank: 2
+                                type: DATE
+                                defaultValue: SYSDATE
+                              - label: Précisez comment et à qui vous avez fait la demande&#160;:
+                                rank: 3
+                                type: TEXTAREA
+                          - title: Non
+                            information:
+                              title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                              content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                      - title: un logement que vous occupiez déjà
+                        subcategoriesTitle: Avez-vous demander à faire démarrer votre contrat immédiatement ?
+                        subcategories:
+                          - title: Non. Le contrat doit démarrer à la fin du délai de retractation.
+                            description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+                              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+                            subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+                            subcategories:
+                              - title: Oui
+                                detailInputs:
+                                  - label: Date de signature du contrat (elle est indiquée sur votre contrat).
+                                    rank: 1
+                                    type: DATE
+                                    defaultValue: SYSDATE
+                                  - label: Date de la demande d'annulation
+                                    rank: 2
+                                    type: DATE
+                                    defaultValue: SYSDATE
+                                  - label: Précisez comment et à qui vous avza fait la demande&#160;:
+                                    rank: 3
+                                    type: TEXTAREA
+                              - title: Non
+                                information:
+                                  title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                                  content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                          - title: Oui. J'ai renoncé au délai de retractation.
+                            information:
+                              title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                              content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                          - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
+                  - title: dans une boutique
+                    information:
+                      title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                      actions: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
+                    
+                
+                subcategoriesTitle: Ce contrat concerne un logement
+                subcategories:
+                  - title: dans lequel vous venez d'emmenager
+                    description: Si vous avez soucrit votre contrat sur internet, par téléphone ou chez vous avec un conseiller, vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+                      <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                      <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+                    subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+                    subcategories:
+                      - title: Oui
+                      - title: Non
+                  - title: un logement que vous occupiez déjà
+                    description: Si vous avez soucrit votre contrat sur internet, par téléphone ou chez vous avec un consiller, vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+                      <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                      <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+                    subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+                    subcategories:
+                      - title: Oui
+                        detailInputs:
+                          - label: Date de signature du contrat (elle est indiquée sur votre contrat).
+                            rank: 1
+                            type: DATE
+                            defaultValue: SYSDATE
+                          - label: Date de la demande d'annulation
+                            rank: 2
+                            type: DATE
+                            defaultValue: SYSDATE
+                          - label: Précisez comment et à qui vous avza fait la demande&#160;:
+                            rank: 3
+                            type: TEXTAREA
+                      - title: Non
+                        information:
+                        title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                        content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                
+                detailInputs:
+                  - label: Date de signature du contrat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Quel est le problème&#160;?
+                    rank: 2
+                    type: RADIO
+                    options:
+                  - malfaçons sur la pose de la fosse spetique
+                  - le bureau d'étude impose une marque/modèle en particulier
+                  - autre (
+              - title: Une clause du contrat est abusive, c'est-à-dire elle désavantage fortement le consommateur.
+              - title: Autre
           - title: Facturation
-      - title: Autres
-        example: 'Exemple: granulés bois'
+      - title: Autres (Fioul / GPL / granulés de bois ..)
       
       
   - category: Banque / Assurance / Mutuelle
