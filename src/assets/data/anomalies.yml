@@ -970,7 +970,7 @@ list:
             example: 'Exemple: la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives..'
             subcategories:
               - title: Le distributeur refuse de m'ouvrir un contrat / abonnement car je suis locataire et non propriétaire.
-                detailTitle: Refuser la demande d'abonnement d'un locataire car il n'est pas propriétaire est interdit. C'est un refus de vente.
+                description: Conditionner l'abonnement du locataire à l'accord écrit du propriétaire est interdit. Refuser la demande d'abonnement d'un locataire car il n'est pas propriétaire est aussi interdit.
               - title: Le distributeur demande de payer une avance sur ma consommation.
                 subcategoriesTitle: Quand doit-être remboursée cette avance ?
                 subcategories:
