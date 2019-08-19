@@ -969,17 +969,18 @@ list:
           - title: contrat et facturation
             example: 'Exemple: la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives..'
             subcategories:
-              - title: on me refuse l'abonnement car je suis locataire et non propriétaire.
-              - title: on me demande de payer une avance sur ma consommation.
-                subcategoriesTitle: Quand est-il prévu de vous rendre cet argent ?
+              - title: Le distributeur refuse de m'ouvrir un contrat / abonnement car je suis locataire et non propriétaire.
+                description: Conditionner l'abonnement du locataire au consentement écrit du propriétaire est illicite. Refuser la demande d'abonnement d'un locataire car il n'est pas propriétaire est un refus de vente.
+              - title: Le distributeur demande de payer une avance sur ma consommation.
+                subcategoriesTitle: Quand doit-être remboursée cette avance ?
                 subcategories:
-                  - title: il sera déduit à ma première facture
+                  - title: Elle sera déduite à ma première facture d'eau
                     information:
                       title: Ce n'est pas un motif de signalement
                       content: Le distributeur peut vous demander une avance si il est prévu de déduire cette somme de votre facture de consommation.
-                  - title: à la résiliation de l'abonnement ou au changement de locataire
+                  - title: A la résiliation de l'abonnement ou au changement de locataire
                     detailTitle: Il est interdit de demander un dépôt de garantie.
-                    description: Rendre l'argent à la fin de l'abonnement ou du contrat sous-endent que c'est un dépôt de garantie. C'est interdit par la loi.
+                    description: Rendre l'argent à la fin de l'abonnement ou du contrat sous-entend que c'est un dépôt de garantie. C'est interdit par la loi.
                     detailInputs:
                       - label: Date du contrat
                         rank: 1
@@ -989,7 +990,13 @@ list:
                         rank: 2
                         type: TEXTAREA
                     fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
-              - title: je ne suis pas d'accord avec la consommation indiquée.
+              - title: je ne suis pas d'accord avec la consommation indiquée sur ma facture.
+                information:
+                  title: Vous devez demander à faire vérifier le compteur.
+                  content: Si vous recevez une facture d'eau que vous trouvez trop élevée par rapport à votre consommation habituelle et que vous avez vérifié l'absence de fuite d'eau, vous devez demander la vérification de votre compteur. Des frais vous seront facturés. Si la vérification révèle une anomalie, ces frais vous seront remboursés.
+                  actions:
+                    - question: Vous souhaitez obtenir la vérification de votre compteur d’eau&#160;?
+                      answer: Voici un modèle de lettre à envoyer<br><a href="https://www.inc-conso.fr/content/vous-souhaitez-obtenir-la-verification-de-votre-compteur-deau-en-raison-dune-consommation" target="_blank" /> cliquez ici </a>
               - title: une clause du contrat (réglement de service) est abusive, c'est-à-dire elle désavantage fortement le consommateur.
                 detailInputs:
                   - label: Date du constat (ou du contrat)
