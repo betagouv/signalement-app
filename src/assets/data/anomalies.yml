@@ -977,9 +977,29 @@ list:
                     information:
                       title: Ce n'est pas un motif de signalement
                       content: Le distributeur peut vous demander une avance si il est prévu de déduire cette somme de votre facture de consommation.
-                  - title: à la résiliation de de l'abonnement ou au changement de locataire
+                  - title: à la résiliation de l'abonnement ou au changement de locataire
+                    detailTitle: Il est interdit de demander un dépôt de garantie.
+                    description: Rendre l'argent à la fin de l'abonnement ou du contrat sous-endent que c'est un dépôt de garantie. C'est interdit par la loi.
+                    detailInputs:
+                      - label: Date du contrat
+                        rank: 1
+                        type: DATE
+                        defaultValue: SYSDATE
+                      - label: Décrivez nous plus en détails ce qui s'est passé
+                        rank: 2
+                        type: TEXTAREA
+                    fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
               - title: je ne suis pas d'accord avec la consommation indiquée.
               - title: une clause du contrat (réglement de service) est abusive, c'est-à-dire elle désavantage fortement le consommateur.
+                detailInputs:
+                  - label: Date du constat (ou du contrat)
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Quelle partie du contrat / réglement trouvez-vous abusive ?
+                    rank: 2
+                    type: TEXTAREA
+                fileLabel: Joindre une copie du contrat / réglement.
               - title: autre
           - title: coupure de l'eau
             subcategoriesTitle: 'Pourquoi l''eau a-t-elle été coupée ?'
