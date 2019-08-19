@@ -990,14 +990,14 @@ list:
                         rank: 2
                         type: TEXTAREA
                     fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
-              - title: je ne suis pas d'accord avec la consommation indiquée sur ma facture.
+              - title: Je ne suis pas d'accord avec la consommation indiquée sur ma facture.
                 information:
                   title: Vous devez demander à faire vérifier le compteur.
                   content: Si vous recevez une facture d'eau que vous trouvez trop élevée par rapport à votre consommation habituelle et que vous avez vérifié l'absence de fuite d'eau, vous devez demander la vérification de votre compteur. Des frais vous seront facturés. Si la vérification révèle une anomalie, ces frais vous seront remboursés.
                   actions:
                     - question: Vous souhaitez obtenir la vérification de votre compteur d’eau&#160;?
                       answer: Voici un modèle de lettre à envoyer<br><a href="https://www.inc-conso.fr/content/vous-souhaitez-obtenir-la-verification-de-votre-compteur-deau-en-raison-dune-consommation" target="_blank" /> cliquez ici </a>
-              - title: une clause du contrat (réglement de service) est abusive, c'est-à-dire elle désavantage fortement le consommateur.
+              - title: Une clause du contrat (réglement de service) est abusive, c'est-à-dire elle désavantage fortement le consommateur.
                 detailInputs:
                   - label: Date du constat (ou du contrat)
                     rank: 1
@@ -1007,13 +1007,13 @@ list:
                     rank: 2
                     type: TEXTAREA
                 fileLabel: Joindre une copie du contrat / réglement.
-              - title: autre
+              - title: Autre
           - title: Coupure de l'eau pour impayé
             example: Mon débit d'eau a été réduit car je ne peux payer ma facture
             information:
               title: Il est interdit de couper ou réduire l'eau en cas d'impayé pour une rédisence principale.
               actions: Les coupures d'eau et les réductions de débit sont interdites, toute l'année, en cas de factures impayées, pour les résidences principales. Par contre, vous devrez toujours payer votre facture. 
-                - question: Vous souhaitez bénéficier d'une aide pour payer votre facture d'eau ?
+                - question: Vous souhaitez bénéficier d'une aide pour payer votre facture d'eau &#160;?
                   answer: <a href="https://www.inc-conso.fr/content/beneficier-dune-aide-pour-payer-sa-facture-deau" target="_blank" />plus d'informations ici</a>
           - title: Dégâts / travaux sur les canalisations
             example: 'Exemple: fuite d''eau avant compteur'
