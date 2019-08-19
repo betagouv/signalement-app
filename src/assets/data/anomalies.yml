@@ -976,13 +976,13 @@ list:
                   - title: il sera déduit à ma première facture
                     information:
                       title: Ce n'est pas un motif de signalement
-                      subTitle: Le distributeur peut vous demander une avance si il est prévu de déduire cette somme de votre facture de consommation.
+                      content: Le distributeur peut vous demander une avance si il est prévu de déduire cette somme de votre facture de consommation.
                   - title: à la résiliation de de l'abonnement ou au changement de locataire
               - title: je ne suis pas d'accord avec la consommation indiquée.
               - title: une clause du contrat (réglement de service) est abusive, c'est-à-dire elle désavantage fortement le consommateur.
               - title: autre
           - title: coupure de l'eau
-            subcategoriesTitle: Pourquoi vous a-t-on coupé l'eau ?
+            subcategoriesTitle: 'Pourquoi l''eau a-t-elle été coupée ?'
             subcategories:
               - title: réalisation de travaux (rue, bâtiment)
               - title: factures impayées
