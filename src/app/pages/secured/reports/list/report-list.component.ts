@@ -81,6 +81,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
+    if (this.user && this.user.role === Roles.Pro) {
+      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    }
+
     this.loading = true;
     this.loadingError = false;
     combineLatest(
@@ -97,6 +101,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.statusConsos = statusConsos;
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
+
       },
       err => {
         this.loading = false;
@@ -118,9 +123,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
-    this.loadReportExtractUrl();
     this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    this.loadReportExtractUrl();
     this.initPagination();
+
     this.loadReports(1);
   }
 
@@ -177,7 +183,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
         });
     });
 
-    console.log("XXX ", JSON.stringify(this.reportsByDate))
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
