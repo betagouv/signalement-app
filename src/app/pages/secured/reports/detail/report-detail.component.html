@@ -257,12 +257,9 @@
           </ng-template>
         </ng-container>
 
-        <ng-container *ngIf="getProAnswerEvent()">
+        <ng-container *ngIf="getProAnswerEvent() && ! isClosed()">
           <hr />
-          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée
-            <i class="material-icons md-18 valign-top" alt="Icône pouce levé" title="Signalement accepté" *ngIf="getProAnswerEvent().resultAction">thumb_up</i>
-            <i class="material-icons md-18 valign-top" alt="Icône pouce baissé" title="Signalement infondé" *ngIf="!getProAnswerEvent().resultAction">thumb_down</i>
-          </h5>
+          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
           <ng-template #titleAnswerNoPro>
             <h5>
               Réponse apportée par le professionnel
@@ -335,7 +332,7 @@
     </div>
 
     <ng-container *appRole="[roles.Pro]">
-      <div *ngIf="report && !getProAnswerEvent()">
+      <div *ngIf="report && !getProAnswerEvent() && ! isClosed()">
         <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
           <p>Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.</p>
           <div class="mb-4">

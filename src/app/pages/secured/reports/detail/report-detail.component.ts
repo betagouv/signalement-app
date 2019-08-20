@@ -347,4 +347,8 @@ export class ReportDetailComponent implements OnInit {
   getProAnswerEvent() {
     return this.events.find(event => event.action.name === ProAnswerReportEventAction.name);
   }
+
+  isClosed() {
+    return ["Signalement mal attribué", "Signalement non consulté", "Signalement consulté ignoré"].indexOf(this.report.statusPro) !== -1;
+  }
 }
