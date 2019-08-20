@@ -15,7 +15,7 @@ list:
           actions:
             - question: Comment le signaler&#160;?
               answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>   
-      - title: Pratiques d'hygiène
+      - title: Hygiène
         example: 'Exemple : locaux sales, rats, problème de chaîne du froid'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
@@ -141,7 +141,7 @@ list:
               optionnal: true
           - title: Autre problème d'hygiène
       - title: Prix et paiement
-        example: 'Exemple : refus de CB, prix trop cher, supplément non annoncé à l''avance'
+        example: 'Exemple : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance..'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Prix pas affiché
@@ -216,8 +216,8 @@ list:
                 - title: Autre
           - title: Problème de facture/ticket de caisse
             example: 'Exemple : refus de délivrer une note'
-      - title: Publicité trompeuse
-        example: 'Exemple : mention mensongère'
+      - title: Publicité trompeuse / informations mensongères
+        example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles..'
         subcategories:
           - title: Indisponibilité des produits du menu
             detailInputs:
@@ -268,7 +268,7 @@ list:
                 - Non
             fileLabel: Photo(s) si possible
       - title: Service
-        example: 'Exemple : refus de mon chien, refus de me servir, personnel peu aimable'
+        example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avons une poussette..'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Personnel peu aimable
