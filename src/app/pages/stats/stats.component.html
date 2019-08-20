@@ -79,7 +79,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="user && user.role === 'Admin'">
           <div class="col-12 col-sm-6 col-lg-4 count stat">
             <h3>Correspondance nb ETPT</h3>
             {{statistics? (statistics.reportsCountInRegion * 0.58 / 1400).toFixed(2) : 0}}
