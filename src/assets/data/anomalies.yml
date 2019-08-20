@@ -1107,7 +1107,7 @@ list:
             example: 'Exemple: fuite d''eau avant compteur'
             information:
               title: Le compteur d'eau représente la frontière entre ce qui est à votre charge et ce qui ne l'est pas.
-              subtitle: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. 
+              subTitle: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. 
                 <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. 
                 <br> Cette règle est valable même les canalisations sont situées dans une propriété privée.
               actions:
