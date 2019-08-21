@@ -480,7 +480,6 @@ list:
       - title: Hygiène
         example: 'Exemple : magasin sale, rayon froid pas à bonne température'
         subcategories:
-          
           - title: Locaux sales
             detailInputs:
               - label: Quel endroit est concerné&#160;?
@@ -1100,9 +1099,8 @@ list:
               - title: Autre
           - title: Coupure de l'eau pour impayé
             example: Mon débit d'eau a été réduit car je ne peux payer ma facture
-            information:
-              title: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale. 
-              content: Les coupures d'eau et les réductions de débit sont interdites en cas de factures impayées, pour les résidences principales et ce toute l'anné. Par contre, vous devrez toujours payer votre facture. 
+            detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
+            description: Les coupures d'eau et les réductions de débit sont interdites en cas de factures impayées, pour les résidences principales et ce toute l'anné. Par contre, vous devrez toujours payer votre facture.
           - title: Dégâts / travaux sur les canalisations
             example: 'Exemple: fuite d''eau avant compteur'
             information:
