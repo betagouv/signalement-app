@@ -1101,6 +1101,15 @@ list:
             example: Mon débit d'eau a été réduit car je ne peux payer ma facture
             detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
             description: Les coupures d'eau et les réductions de débit sont interdites en cas de factures impayées, pour les résidences principales et ce toute l'anné. Par contre, vous devrez toujours payer votre facture.
+            detailInputs:
+                  - label: Date du du contrat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Date de la coupure 
+                    rank: 2
+                    type: DATE
+                    fileLabel: Joindre une copie du contrat / réglement.
           - title: Dégâts / travaux sur les canalisations
             example: 'Exemple: fuite d''eau avant compteur'
             information:
@@ -1269,6 +1278,15 @@ list:
                       title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                       actions: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
               - title: Une clause du contrat est abusive, c'est-à-dire elle désavantage fortement le consommateur.
+                detailInputs:
+                  - label: Date du constat (ou du contrat)
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Quelle partie du contrat / réglement trouvez-vous abusive ?
+                    rank: 2
+                    type: TEXTAREA
+                fileLabel: Joindre une copie du contrat / réglement.
               - title: Autre
           - title: Facturation
       - title: Autres (Fioul / GPL / granulés de bois ..)
