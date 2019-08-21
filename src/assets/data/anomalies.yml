@@ -1312,22 +1312,69 @@ list:
     categoryId: IMM
     path: pratique-d-hygiene
     description: location, agence immobiliere, syndicat de copropriété...
-    rank: 120
+    rank: 5
     icon: icon_real_estate.png
     subcategories:
-      - title: prix
-        example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
-      - title: facturation / remboursement
-        example: 'Exemple : frais facturés injustifiés, caution non rendue'
-      - title: contrat
-        example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
-      - title: publicité
-        example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
-      - title: service après-vente
-        example: 'Exemple : SAV injoignable'
-      - title: documents / dossier
-        example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
-      - title: autres
+      - title: agence immobilière
+        example: 'Exemple: location, vente, gestion locative..'
+        subcategories:
+          - title: prix
+            example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
+          - title: facturation / remboursement
+            example: 'Exemple : frais facturés injustifiés, caution non rendue'
+          - title: contrat
+            example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
+          - title: publicité
+            example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
+          - title: service après-vente
+            example: 'Exemple : SAV injoignable'
+          - title: documents / dossier
+            example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
+          - title: autres
+      - title: vente / location entre particuliers
+        subcategories:
+          - title: problème avec mon locataire / propriétaire
+            information:
+              title: Votre problème ne rentre pas dans le cadre de SignalConso.
+              content: La répression des fraudes n'a pas le pouvoir d'agir pour les conflits entre deux particuliers. <br> Vous pouvez passer par un médiateur ou un conciliateur de justice.
+              actions:
+                - question: Le médiateur civil&#160;
+                  answer: Le médiateur civil est une personne indépendante chargée de trouver une solution amiable. <br> Le recours à un médiateur est payant. <br> Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1822"_blank" />ici</a>
+                - question: Le conciliateur de justice&#160;
+                  answer: Le conciliateur de justice intervient pour les conflits entre propriétaires et locataires, ou locataires entre eux. <br> Le recours à un conciliateur de justice est gratuit. <br>Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1736"_blank" />ici</a>
+          - title: problème avec un site de mise en relation entre particuliers
+            
+      - title: syndic de copropriété
+        subcategories:
+          - title: prix
+            example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
+          - title: facturation / remboursement
+            example: 'Exemple : frais facturés injustifiés, caution non rendue'
+          - title: contrat
+            example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
+          - title: publicité
+            example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
+          - title: service après-vente
+            example: 'Exemple : SAV injoignable'
+          - title: documents / dossier
+            example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
+          - title: autres
+      - title: notaire
+        subcategories:
+          - title: prix
+            example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
+          - title: facturation / remboursement
+            example: 'Exemple : frais facturés injustifiés, caution non rendue'
+          - title: contrat
+            example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
+          - title: publicité
+            example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
+          - title: service après-vente
+            example: 'Exemple : SAV injoignable'
+          - title: documents / dossier
+            example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
+          - title: autres
+      
   - category: Voyage / Loisirs
     categoryId: VOY
     path: pratique-d-hygiene
