@@ -1326,10 +1326,10 @@ list:
             example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
           - title: publicité
             example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
-          - title: service après-vente
-            example: 'Exemple : SAV injoignable'
+          - title: service client
+            example: 'Exemple : service client injoignable'
           - title: documents / dossier
-            example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
+            example: 'Exemple : demande de pièce non justifiée pour mon dossier..'  
           - title: autres
       - title: vente / location entre particuliers
         subcategories:
@@ -1343,36 +1343,23 @@ list:
                 - question: Le conciliateur de justice&#160;
                   answer: Le conciliateur de justice intervient pour les conflits entre propriétaires et locataires, ou locataires entre eux. <br> Le recours à un conciliateur de justice est gratuit. <br>Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1736"_blank" />ici</a>
           - title: problème avec un site de mise en relation entre particuliers
-            
       - title: syndic de copropriété
         subcategories:
           - title: prix
-            example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
-          - title: facturation / remboursement
-            example: 'Exemple : frais facturés injustifiés, caution non rendue'
+            example: 'Exemple : prix non affiché..'
+          - title: facturation
+            example: 'Exemple : frais facturés injustifiés..'
           - title: contrat
-            example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
-          - title: publicité
-            example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
-          - title: service après-vente
-            example: 'Exemple : SAV injoignable'
+            example: 'Exemple : clause abusive dans le contrat, la prestation proposée ne correspond pas à ce qui est fait..'
+          - title: service client
+            example: 'Exemple : aucune réponse du syndic malgré des relances..'
           - title: documents / dossier
-            example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
+            example: 'Exemple : impossibilité d''accèder aux documents du syndic..'  
           - title: autres
       - title: notaire
         subcategories:
-          - title: prix
-            example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
-          - title: facturation / remboursement
-            example: 'Exemple : frais facturés injustifiés, caution non rendue'
-          - title: contrat
-            example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
-          - title: publicité
-            example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
-          - title: service après-vente
-            example: 'Exemple : SAV injoignable'
-          - title: documents / dossier
-            example: 'Exemple : demande de pièce non justifiée pour mon dossier, impossibilité d''accèder aux documents du syndic'  
+          - title: honoraires
+            example: 'Exemple : ..'
           - title: autres
       
   - category: Voyage / Loisirs
