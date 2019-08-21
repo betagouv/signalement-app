@@ -1296,17 +1296,17 @@ list:
     categoryId: BAQ
     path: pratique-d-hygiene
     description: crédit, assurance
-    rank: 121
+    rank: 6
     icon: icon_bank.png
     subcategories:
-      - title: prix
+      - title: frais bancaires 
         example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir '
       - title: contrat
         example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
       - title: publicité
         example: 'Exemple : publicité pour un crédit non conforme'
-      - title: service après-vente
-        example: 'Exemple : SAV injoignable'   
+      - title: service client
+        example: 'Exemple : service client injoignable'   
       - title: autres
   - category: Immobilier
     categoryId: IMM
@@ -1551,7 +1551,6 @@ list:
       - title: autre
         
     
-        
   - category: Pratique d'hygiène
     categoryId: HYG
     path: pratique-d-hygiene
