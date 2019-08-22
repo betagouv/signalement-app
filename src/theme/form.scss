@@ -28,6 +28,10 @@ form {
     fill: #adb9c9;
     fill: var(--grey);
   }
+
+  .error {
+    color: $red;
+  }
 }
 
 input,

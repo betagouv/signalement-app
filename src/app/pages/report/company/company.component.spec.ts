@@ -8,10 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { AddressService } from '../../../services/address.service';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
-import { Report, Step } from '../../../model/Report';
+import { Report } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
@@ -22,8 +21,8 @@ describe('CompanyComponent', () => {
   let component: CompanyComponent;
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
-  let addressService: AddressService;
   let reportStorageService: ReportStorageService;
+  let displayLiveChatSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -48,13 +47,12 @@ describe('CompanyComponent', () => {
 
   beforeEach(() => {
     companyService = TestBed.get(CompanyService);
-    addressService = TestBed.get(AddressService);
     reportStorageService = TestBed.get(ReportStorageService);
     reportStorageService.reportInProgess = of(new Report());
 
-    spyOn(addressService, 'addressData').and.returnValue(of([]));
     fixture = TestBed.createComponent(CompanyComponent);
     component = fixture.componentInstance;
+    displayLiveChatSpy = spyOn(component, 'displayLiveChat').and.callFake(() => {});
     fixture.detectChanges();
   });
 
@@ -62,15 +60,29 @@ describe('CompanyComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize and display a form with a search input', () => {
+  it('should initialize forms and display the search form', () => {
 
     const nativeElement = fixture.nativeElement;
     expect(component.searchForm).toBeDefined();
     expect(component.searchForm.controls['search']).toBeDefined();
     expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
+    expect(component.searchBySiretForm).toBeDefined();
+    expect(component.searchBySiretForm.controls['siret']).toBeDefined();
     expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
-    expect(nativeElement.querySelector('form#aroundForm')).toBeNull();
-    expect(nativeElement.querySelector('form#companyForm')).toBeNull();
+    expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+  });
+
+  it('should display live chat', () => {
+    expect(displayLiveChatSpy).toHaveBeenCalled();
+  });
+
+  it('should enable to display the searchBySiret form whith navTabs', () => {
+    const nativeElement = fixture.nativeElement;
+    nativeElement.querySelectorAll('.nav-item')[1].click();
+    fixture.detectChanges();
+
+    expect(nativeElement.querySelector('form#searchForm')).toBeNull();
+    expect(nativeElement.querySelector('form#searchBySiretForm')).not.toBeNull();
   });
 
   describe('search companies', () => {
@@ -159,57 +171,46 @@ describe('CompanyComponent', () => {
       expect(component.companies).toEqual(companySearchResult.companies);
     });
 
-    it('enable to display a form to enter manually company information', () => {
-      component.editCompany();
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('form#companyForm')).not.toBeNull();
-    });
-
   });
 
-  describe('submitting company form', () => {
+  describe('submitting siret form', () => {
 
     it('should display errors when occurs', () => {
-      component.editCompany();
-      component.nameCtrl.setValue('');
-      component.addressCtrl.setValue('');
-
-      component.submitCompanyForm();
+      component.bySiret = true;
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(component.showErrors).toBeTruthy();
+      component.siretCtrl.setValue('123');
+      nativeElement.querySelector('button#submitSiretForm').click();
+      fixture.detectChanges();
+
+      expect(component.showErrorsBySiret).toBeTruthy();
       expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
     });
 
-    it ('should change the shared report with a report where company contains form inputs', () => {
+    it('should display the company found by siret when existed', () => {
 
-      component.editCompany();
-      component.nameCtrl.setValue('Mon entreprise');
-      component.addressCtrl.setValue('Mon adresse dans ma ville');
-      component.addressCtrlPostalCode = '87270';
-      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('button#submitCompanyForm').click();
-      fixture.detectChanges();
-
-      const companyExpected = Object.assign(
+      const companyBySiret = Object.assign(
         new Company(),
         {
           name: 'Mon entreprise',
           line1: 'Mon entreprise',
           line2: 'Mon adresse dans ma ville',
-          postalCode: '87270'
+          postalCode: '87270',
+          siret: '12345678901234'
         }
       );
-      const reportExpected = new Report();
-      reportExpected.company = companyExpected;
+      spyOn(companyService, 'searchCompaniesBySiret').and.returnValue(of(companyBySiret));
 
-      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Company);
+      component.bySiret = true;
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      component.siretCtrl.setValue('12345678901234');
+      nativeElement.querySelector('button#submitSiretForm').click();
+      fixture.detectChanges();
+
+      expect(component.companyBySiret).toEqual(companyBySiret);
 
     });
 

@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-acknowledgment',
   templateUrl: './acknowledgment.component.html',
   styleUrls: ['./acknowledgment.component.scss']
 })
-export class AcknowledgmentComponent implements OnInit {
+export class AcknowledgmentComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -18,13 +22,20 @@ export class AcknowledgmentComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Acknowledgment;
-    this.reportStorageService.reportInProgess.subscribe(report => {
-      if (report) {
-        this.report = report;
-      } else {
-        this.reportRouterService.routeToFirstStep();
-      }
-    });
+    this.reportStorageService.reportInProgess
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(report => {
+        if (report) {
+          this.report = report;
+        } else {
+          this.reportRouterService.routeToFirstStep();
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   newReport() {

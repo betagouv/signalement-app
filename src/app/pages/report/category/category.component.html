@@ -18,19 +18,9 @@
       <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
     </alert>
 
-    <!-- <section class="section section-lighter-grey py-3">
-      <div class="container">
-        <nav class="nav nav-pills nav-fill justify-content-around">
-          <a class="nav-item nav-link blue light" [routerLink]="" (click)="selectCompanyType(companyType.Physical)" [ngClass]="{'active': selectedCompanyType == companyType.Physical}">Magasins et restauration</a>
-          <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Service)" [ngClass]="{'active': selectedCompanyType == companyType.Service}">Prestations de service</a>
-          <a class="nav-item nav-link disabled" [routerLink]="" (click)="selectCompanyType(companyType.Internet)" [ngClass]="{'active': selectedCompanyType == companyType.Internet}">Achats sur internet</a>
-        </nav>
-      </div>
-    </section> -->
-
     <section class="section section-lightest-grey position-relative">
 
-      <div class="container mt-n4" *ngIf="selectedCompanyType == companyType.Physical">
+      <div class="container mt-n4">
         <h3 class="text-center sous-titre">Quel est le problème ?</h3>
         <div class="row pb-4">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
@@ -62,81 +52,6 @@
           </ul>
         </ng-template>
       </div>
-
-      <div class="container" *ngIf="selectedCompanyType == companyType.Service">
-          <div class="container max-width">
-            <p class="mx-auto mb-4 text-center title">Ces signalements ne sont <b>pas encore disponibles</b>,<br/> mais nous y travaillons activement&nbsp;!</p>
-
-            <div class="row pb-4">
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
-                      <h5>Beauté et soins</h5>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
-                      <h5>Transport<br/>(taxi,&nbsp;train,&nbsp;...)</h5>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
-                      <h5>Travaux et dépannage</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row pb-4">
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
-                      <h5>Aide à la personne</h5>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
-                      <h5>Entretien des vêtements<br/>(laverie,&nbsp;pressing)</h5>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="category disabled d-flex justify-content-center align-items-center text-center">
-                      <h5>Hôtellerie</h5>
-                    </div>
-                </div>
-            </div>
-
-          </div>
-      </div>
-
-      <!--
-        <div class="notification">
-          <p>Le signalement de problèmes rencontrés lors de prestations de service n’est pas encore disponible mais nous y travaillons activement.</p>
-          <p>Ceci comprend notamment les activités suivantes :</p>
-          <ul>
-            <li>métiers des soins et de la beauté</li>
-            <li>transports (taxi, train, …)</li>
-            <li>travaux et dépannage</li>
-            <li>aide à la personne</li>
-            <li>soin des vêtements (laverie, pressing, …)</li>
-            <li>hôtellerie</li>
-          </ul>
-        </div>
-      </div>
-
-      -->
-
-      <div class="container max-width" *ngIf="selectedCompanyType == companyType.Internet">
-        <p class="mx-auto mb-4 text-center title internet-information" [innerHTML]="internetInformation?.title"></p>
-        <p class="mb-4 text-center" [innerHTML]="internetInformation?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
-        <p class="mb-5" *ngIf="internetInformation?.content" [innerHTML]="internetInformation?.content"></p>
-
-        <div class="card mx-auto mb-4 rounded-lg action" *ngFor="let action of internetInformation?.actions">
-          <div class="card-body">
-            <p class="card-text" [innerHTML]="action.question" *ngIf="action.question"></p>
-            <p class="card-text text-muted" *ngIf="action.example" [innerHTML]="action.example"></p>
-          </div>
-          <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
-        </div>
-      </div>
-
     </section>
 
     <section class="section section-lighter-grey">

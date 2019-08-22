@@ -1,23 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-
-export enum CompanyType {
-  Physical = 'Physical',
-  Service = 'Service',
-  Internet = 'Internet'
-}
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -25,8 +23,6 @@ export class CategoryComponent implements OnInit {
   anomalies: Anomaly[];
   showSecondaryCategories: boolean;
 
-  companyType = CompanyType;
-  selectedCompanyType: CompanyType;
   internetInformation: Information;
 
   constructor(private anomalyService: AnomalyService,
@@ -36,14 +32,20 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Category;
-    this.reportStorageService.reportInProgess.subscribe(report => this.report = report);
-    this.selectedCompanyType = CompanyType.Physical;
+    this.reportStorageService.reportInProgess
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(report => this.report = report);
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
     const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   primaryCategoriesOrderByRank() {
@@ -83,11 +85,6 @@ export class CategoryComponent implements OnInit {
 
   removeStoredReport() {
     this.reportStorageService.removeReportInProgressFromStorage();
-  }
-
-  selectCompanyType(type: CompanyType) {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.companyTypeSelection, type);
-    this.selectedCompanyType = type;
   }
 
 }

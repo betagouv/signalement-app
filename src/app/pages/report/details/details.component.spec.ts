@@ -10,7 +10,6 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { ReportPaths } from '../../../services/report-router.service';
 import { UploadedFile } from '../../../model/UploadedFile';
@@ -92,7 +91,7 @@ describe('DetailsComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.reportInProgess = of(new Report());
+      reportStorageService.changeReportInProgress(new Report());
 
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -157,7 +156,7 @@ describe('DetailsComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.reportInProgess = of(reportWithSubcategory);
+      reportStorageService.changeReportInProgress(reportWithSubcategory);
 
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -211,7 +210,7 @@ describe('DetailsComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.reportInProgess = of(reportWithSubcategory);
+      reportStorageService.changeReportInProgress(reportWithSubcategory);
 
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;

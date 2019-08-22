@@ -81,6 +81,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
+    if (this.user && this.user.role === Roles.Pro) {
+      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    }
+
     this.loading = true;
     this.loadingError = false;
     combineLatest(
@@ -97,6 +101,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.statusConsos = statusConsos;
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
+
       },
       err => {
         this.loading = false;
@@ -118,9 +123,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
-    this.loadReportExtractUrl();
     this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    this.loadReportExtractUrl();
     this.initPagination();
+
     this.loadReports(1);
   }
 
@@ -176,6 +182,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
             .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
         });
     });
+
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
@@ -201,7 +208,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.modalRef = this.modalService.show(
       EventComponent,
       {
-        initialState: {reportId: report.id}
+        initialState: {reportId: report.id, siret: report.company.siret}
       });
   }
 
@@ -236,6 +243,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
     } else {
       return '';
     }
+  }
+
+  getReportCssClassNewReport(status: string) {
+    return status ? "mr-3" : "bold mr-3"
   }
 
   selectArea(area?: Region | Department) {

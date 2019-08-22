@@ -23,6 +23,7 @@ export class AccountActivationComponent implements OnInit {
   emailCtrl: FormControl;
   passwordCtrl: FormControl;
   confirmPasswordCtrl: FormControl;
+  gcuAgreementCtrl: FormControl;
 
   showErrors: boolean;
   showSuccess: boolean;
@@ -67,6 +68,7 @@ export class AccountActivationComponent implements OnInit {
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
     this.passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(8)]);
     this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
+    this.gcuAgreementCtrl = this.formBuilder.control('', Validators.requiredTrue);
 
     this.activationForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,
@@ -74,6 +76,7 @@ export class AccountActivationComponent implements OnInit {
       email: this.emailCtrl,
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl,
+      gcuAgreement: this.gcuAgreementCtrl,
     }, { validator: matchingPasswords('password', 'confirmPassword')});
   }
 

@@ -22,7 +22,53 @@ describe('StatsComponent', () => {
     reportsPerMonthList: [
       reportsPerMonth1,
       reportsPerMonth2
-    ]
+    ],
+    "reportsCount7Days": 8,
+    "reportsCount30Days": 9,
+    "reportsCountInRegion": 9,
+    "reportsCount7DaysInRegion": 2,
+    "reportsCount30DaysInRegion": 3,
+    "reportsPercentageSendedToPro":	85.71,
+    "reportsPercentagePromise": 33.33,
+    "reportsPercentageWithoutSiret": 4.76,
+    "reportsCountByCategoryList": [
+        {
+            "category": "Nourriture et boissons",
+            "count": 4
+        },
+        {
+            "category": "Pratique d'hygiène",
+            "count": 49
+        },
+        {
+            "category": "Prix / Paiement",
+            "count": 4
+        },
+        {
+            "category": "Publicité",
+            "count": 1
+        },
+        {
+            "category": "Services après-vente",
+            "count": 3
+        }
+    ],
+    "reportsCountByRegionList": [
+        {
+            "region": "AURA",
+            "count": 1
+        },
+        {
+            "region": "CDVL",
+            "count": 6
+        },
+        {
+            "region": "OCC",
+            "count": 2
+        }
+    ],
+    "reportsDurationsForEnvoiSignalement": 4
+
   };
 
   beforeEach(async(() => {
@@ -67,7 +113,7 @@ describe('StatsComponent', () => {
 
       const data = component.ngOnInit();
 
-      expect(component.chartOption.xAxis['data']).toEqual(
+      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
         [
           'mai 17', 'juin 17', 'juil. 17', 'août 17', 'sept. 17', 'oct. 17',
           'nov. 17', 'déc. 17', 'jan. 18', 'fév. 18', 'mars 18', 'avr. 18'
@@ -82,7 +128,7 @@ describe('StatsComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.chartOption.xAxis['data']).toEqual(
+      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
         [
           'fév. 17', 'mars 17', 'avr. 17', 'mai 17', 'juin 17', 'juil. 17',
           'août 17', 'sept. 17', 'oct. 17', 'nov. 17', 'déc. 17', 'jan. 18'
@@ -97,7 +143,7 @@ describe('StatsComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.chartOption.xAxis['data']).toEqual(
+      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
         [
           'jan. 18', 'fév. 18', 'mars 18', 'avr. 18', 'mai 18', 'juin 18',
           'juil. 18', 'août 18', 'sept. 18', 'oct. 18', 'nov. 18', 'déc. 18'
@@ -114,7 +160,7 @@ describe('StatsComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.chartOption.series[0]['data']).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0]);
+      expect(component.byMonthsChartOption.series[0]['data']).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0]);
     });
 
   });

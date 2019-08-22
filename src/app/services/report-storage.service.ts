@@ -56,4 +56,8 @@ export class ReportStorageService {
       this.localStorage.setItemSubscribe(ReportStorageKey, report);
     }
   }
+
+  changeReportInProgress(report: Report) {
+    this.reportInProgessSource.next(report);
+  }
 }

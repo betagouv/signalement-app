@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DetailInputValue, PrecisionKeyword, Report, Step } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
@@ -13,6 +13,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { isDefined } from '@angular/compiler/src/util';
 import Utils from '../../../utils';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export const fileSizeMax = 5000000;
 
@@ -39,7 +41,9 @@ export const fileSizeMax = 5000000;
     ]),
   ],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -57,6 +61,8 @@ export class DetailsComponent implements OnInit {
   tooLargeFilename: string;
   keywordsDetected: Keyword;
 
+  maxDate: Date;
+
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
@@ -69,21 +75,29 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Details;
-    this.reportStorageService.reportInProgess.subscribe(report => {
-      if (report) {
-        this.report = report;
-        this.initDetailInputs();
-        this.initDetailsForm();
-        this.initUploadedFiles();
-        this.constructPlageHoraireList();
-      } else {
-        this.reportRouterService.routeToFirstStep();
-      }
-    });
+    this.reportStorageService.reportInProgess
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(report => {
+        if (report) {
+          this.report = report;
+          this.initDetailInputs();
+          this.initDetailsForm();
+          this.initUploadedFiles();
+          this.constructPlageHoraireList();
+        } else {
+          this.reportRouterService.routeToFirstStep();
+        }
+      });
     this.localeService.use('fr');
 
     this.searchKeywords();
 
+    this.maxDate = new Date();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   initDetailInputs() {

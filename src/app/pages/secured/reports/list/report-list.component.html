@@ -252,7 +252,7 @@
               </ng-template>
             </td>
             <td [class]="getReportCssClass(report.statusPro)">
-              {{report.statusPro}}
+              {{ report.statusPro }}
             </td>
             <td *appRole="[roles.Admin]" [class]="getReportCssClass(report.statusConso)">
               {{report.statusConso}}
@@ -272,7 +272,7 @@
     </div>
     <ng-container *ngFor="let reportsByDate of reportsByDate">
       <div class="col-12 item pointer" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
-        Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}
+        <span [class]="getReportCssClassNewReport(report.statusPro)">Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}</span>
         <i class="material-icons md-18" alt="Icône pièces jointes" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
         <i class="material-icons md-24 float-right" alt="Icône détail" title="Détail du signalement">keyboard_arrow_right</i>
       </div>

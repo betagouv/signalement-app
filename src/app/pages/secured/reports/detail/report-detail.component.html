@@ -96,56 +96,81 @@
               <br/>
               Adresse :
               <span *ngIf="report.company.line1">{{report.company.line1}}</span>
-              <span *ngIf="report.company.line2">-{{report.company.line2}}</span>
-              <span *ngIf="report.company.line3">-{{report.company.line3}}</span>
-              <span *ngIf="report.company.line4">-{{report.company.line4}}</span>
-              <span *ngIf="report.company.line5">-{{report.company.line5}}</span>
-              <span *ngIf="report.company.line6">-{{report.company.line6}}</span>
-              <span *ngIf="report.company.line7">-{{report.company.line7}}</span>
+              <span *ngIf="report.company.line2"> - {{report.company.line2}}</span>
+              <span *ngIf="report.company.line3"> - {{report.company.line3}}</span>
+              <span *ngIf="report.company.line4"> - {{report.company.line4}}</span>
+              <span *ngIf="report.company.line5"> - {{report.company.line5}}</span>
+              <span *ngIf="report.company.line6"> - {{report.company.line6}}</span>
+              <span *ngIf="report.company.line7"> - {{report.company.line7}}</span>
             </div>
             <div class="col-2 text-right" *appPermission="permissions.updateReport">
               <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
             </div>
             <ng-template #companySearch>
               <div class="modal-body text-center">
-                <form [formGroup]="companyForm" (submit)="submitCompanyForm()" id="companyForm">
-                  <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+                <nav class="nav nav-tabs nav-justified mb-3">
+                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Siret</h4></a>
+                  <a class="nav-item nav-link" [ngClass]="!searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Adresse</h4></a>
+                </nav>
+                <ng-container *ngIf="searchBySiret">
+                  <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
+                    <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
 
-                  <div class="notification error" *ngIf="!companyForSiret && loadingError">
-                    Une erreur technique s'est produite<br />
-                  </div>
+                    <div class="notification error" *ngIf="!companyForSiret && loadingError">
+                      Une erreur technique s'est produite<br />
+                    </div>
 
-                  <hr />
-                  <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyForm.invalid">
-                    Rechercher
-                  </button>
-                </form>
-                <div *ngIf="companyForSiret">
-                  <hr />
-                  <div *ngIf="!companyForSiret.siret">
-                    Aucun établissement trouvé
+                    <hr />
+                    <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companySiretForm.invalid">
+                      Rechercher
+                    </button>
+                  </form>
+                  <div *ngIf="companyForSiret">
+                    <hr />
+                    <div *ngIf="!companyForSiret.siret">
+                      Aucun établissement trouvé
+                    </div>
+                    <div *ngIf="companyForSiret.siret">
+                      <p class="company">
+                        <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
+                        <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
+                        <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
+                        <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
+                        <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
+                        <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
+                        <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
+                      </p>
+
+                      <div class="notification error" *ngIf="loadingError">
+                        Une erreur technique s'est produite<br />
+                      </div>
+
+                      <hr />
+                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-primary" (click)="changeCompany(companyForSiret)">Valider</button>
+                    </div>
                   </div>
-                  <div *ngIf="companyForSiret.siret">
-                    <p class="company">
-                      <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
-                      <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
-                      <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
-                      <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
-                      <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
-                      <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
-                      <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
-                    </p>
+                </ng-container>
+                <ng-container *ngIf="!searchBySiret">
+                  <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
+                    <input [formControl]="nameCtrl" placeholder="Nom de l'entreprise" id="name" />
+                    <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
+                    <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
+                    <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
+                    <input [formControl]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
+                    <input [formControl]="cityCtrl" placeholder="Ville" id="city" />
 
                     <div class="notification error" *ngIf="loadingError">
                       Une erreur technique s'est produite<br />
                     </div>
 
                     <hr />
-                    <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                    &nbsp;
-                    <button type="button" class="btn btn-primary" (click)="changeCompany()">Valider</button>
-                  </div>
-                </div>
+                    <button type="submit" class="btn btn-primary mt-2" id="submitCompanyAddressForm" [disabled]="companyAddressForm.invalid">
+                      Enregistrer
+                    </button>
+                  </form>
+                </ng-container>
               </div>
             </ng-template>
           </div>
@@ -155,7 +180,7 @@
           <hr />
           <h5>Consommateur</h5>
           <div class="row">
-            <div class="col-12">
+            <div class="col-10">
               Nom : {{report.consumer.lastName}}
               <br />
               Prénom : {{report.consumer.firstName}}
@@ -164,6 +189,54 @@
               <br />
               Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
             </div>
+            <div class="col-2 text-right" *appPermission="permissions.updateReport">
+              <button type="button" class="btn btn-outline-primary" (click)="openModal(updateConsumer)">Corriger</button>
+            </div>
+            <ng-template #updateConsumer>
+              <div class="modal-body">
+                <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm">
+                  <div class="form__group">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <label> Prénom <span class="error">*</span></label>
+                        <input type="text" formControlName="firstName">
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label>Nom <span class="error">*</span></label>
+                        <input type="text" formControlName="lastName">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label>Email <span class="error">*</span></label>
+                    <input type="email" formControlName="email"/>
+                  </div>
+                  <div class="form__group">
+                    <div class="row">
+                      <div class="col-2 col-sm-1 text-right pr-1">
+                        <input type="checkbox" formControlName="contactAgreement" id="contactAgreement"/>
+                      </div>
+                      <div class="col-10 col-sm-11 pl-1">
+                        <label class="d-block mb-0 pointer" for="contactAgreement">
+                          Accord pour contact par professionnel
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="notification error" *ngIf="loadingError">
+                    Une erreur technique s'est produite<br />
+                  </div>
+
+                  <hr />
+                  <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary mt-2" id="submitConsumerForm" [disabled]="consumerForm.invalid">
+                      Valider
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </ng-template>
           </div>
         </ng-container>
 
@@ -182,6 +255,21 @@
               </div>
             </div>
           </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="getProAnswerEvent() && ! isClosed()">
+          <hr />
+          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
+          <ng-template #titleAnswerNoPro>
+            <h5>
+              Réponse apportée par le professionnel
+            </h5>
+          </ng-template>
+          <div class="row" id="proAnswer">
+            <div class="col-12">
+              {{getProAnswerEvent().detail}}
+            </div>
+          </div>
         </ng-container>
 
         <ng-container  *appRole="[roles.Admin, roles.DGCCRF]">
@@ -242,6 +330,52 @@
       </ng-container>
       <ngx-loading [show]="!report && loading"></ngx-loading>
     </div>
+
+    <ng-container *appRole="[roles.Pro]">
+      <div *ngIf="report && !getProAnswerEvent() && ! isClosed()">
+        <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
+          <p>Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.</p>
+          <div class="mb-4">
+            <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
+          </div>
+          <div>
+            <span class="link pointer" (click)="showProAnswerFormDeclined()">je considère que le signalement est infondé</span>
+          </div>
+        </div>
+        <ng-template #proAnswer>
+          <div class="notification">
+            <form [formGroup]="proAnswerForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
+              <label for="proAnswerInput" [class]="hasError(answerCtrl) ? 'error' : ''">
+                Réponse au consommateur et à la DGCCRF
+              </label>
+              <textarea [formControl]="answerCtrl" id="proAnswerInput" rows="5"
+                        placeholder="{{ placeholderPro }}">
+              </textarea>
+              <div class="notification error" *ngIf="showErrors && proAnswerForm.invalid">
+                Veuillez renseigner les champs obligatoires.<br />
+              </div>
+              <div class="notification error" *ngIf="loadingError">
+                Une erreur technique s'est produite<br />
+              </div>
+              <p class="text-center mt-3 mb-4 text-primary">
+                <i class="material-icons md-18" alt="Icône d'avertissement" title="avertissement">warning</i>&nbsp;
+                Votre réponse sera envoyée automatiquement par mail au consommateur ainsi qu'à la DGCCRF.
+              </p>
+
+              <div class="mt-4 text-center">
+                <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
+                &nbsp;
+                <button type="submit" class="btn btn-lg btn-primary">Envoyer</button>
+              </div>
+            </form>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </ng-template>
+      </div>
+      <div class="notification success" *ngIf="answerSuccess">
+        Votre réponse a bien été prise en compte, nous vous en remercions.
+      </div>
+    </ng-container>
   </div>
 </section>
 
@@ -252,9 +386,4 @@
       Retour à la liste
     </div>
   </div>
-</div>
-
-<div class="notification info container" *ngIf="report">
-  <p>Les retours des professionnels sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF.</p>
-  <p>Le cas échéant, nous aimerions donc connaitre les mesures correctives ou préventives que vous avez adoptées, par l'envoi d'un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank">contact@signalconso.beta.gouv.fr</a>.</p>
 </div>

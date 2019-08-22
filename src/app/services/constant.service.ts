@@ -23,11 +23,33 @@ export class ConstantService {
     );
   }
 
+  getActionProFinals() {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<ReportEventAction[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionProFinals']),
+          headers
+        );
+      })
+    );
+  }
+
   getActionConsos() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<ReportEventAction[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionConsos']),
+          headers
+        );
+      })
+    );
+  }
+
+  getActionAgents() {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<ReportEventAction[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionAgents']),
           headers
         );
       })

@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <h4 class="text-center mb-4" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
+  <h4 class="text-center mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
 
   <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
     <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
@@ -22,8 +22,8 @@
     </div>
     <hr *ngIf="subcategoryForm.valid"/>
     <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory() && subcategoryForm.valid">
-      <img alt="Icône du bouton suivant" src="/assets/images/icon_play.png">
-      Détailler le problème
+      <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
+      Étape suivante : détailler le problème
     </button>
   </form>
 </div>

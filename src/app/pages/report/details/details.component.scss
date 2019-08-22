@@ -6,10 +6,6 @@ label > img {
   vertical-align: top;
 }
 
-img {
-  height: 15px;
-}
-
 textarea {
   margin-bottom: 8px;
 }
@@ -17,6 +13,10 @@ textarea {
 .link-keyword {
   margin: 0 0 0 10px;
   text-decoration: none;
+}
+
+i.blue {
+  color: $blue;
 }
 
 .notification {
