@@ -1378,16 +1378,18 @@ list:
           - title: prix
             example: 'Exemple : absence de prix, prix illisible'
           - title: facturation / remboursement
-        example: 'Exemple : remboursement billet, surfacturation non prévue, annulation d''un spectacle ou d''un vol'
+            example: 'Exemple : remboursement billet, surfacturation non prévue, annulation d''un spectacle ou d''un vol'
           - title: contrat
-        example: 'Exemple : clause abusive dans le contrat de ma salle de sport'
+            example: 'Exemple : clause abusive dans le contrat de ma salle de sport'
           - title: publicité
-        example: 'Exemple : publicité trompeuse'
+            example: 'Exemple : publicité trompeuse'
           - title: service après-vente
-        example: 'Exemple : SAV injoignable'       
+            example: 'Exemple : SAV injoignable'       
           - title: autres
-      - title: divertissement
-        example: musée, cinéma, piscine, concert, match..
+      - title: sport
+        example: piscine, salle de sport..
+      - title: divertissement culturel
+        example: musée, cinéma, concert...
   - category: Services aux particuliers
     categoryId: SERV
     path: pratique-d-hygiene
