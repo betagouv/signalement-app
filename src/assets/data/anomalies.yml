@@ -1369,17 +1369,25 @@ list:
     rank: 122
     icon: icon_hobbies.png
     subcategories:
-      - title: prix
-        example: 'Exemple : absence de prix, prix illisible'
-      - title: facturation / remboursement
+      - title: hébergement
+        example: hotel, camping, chambre d'hôte..
+      - title: agence de voyage
+      - title: transport
+        example: avion, train ..
+        subcategories:
+          - title: prix
+            example: 'Exemple : absence de prix, prix illisible'
+          - title: facturation / remboursement
         example: 'Exemple : remboursement billet, surfacturation non prévue, annulation d''un spectacle ou d''un vol'
-      - title: contrat
+          - title: contrat
         example: 'Exemple : clause abusive dans le contrat de ma salle de sport'
-      - title: publicité
+          - title: publicité
         example: 'Exemple : publicité trompeuse'
-      - title: service après-vente
+          - title: service après-vente
         example: 'Exemple : SAV injoignable'       
-      - title: autres
+          - title: autres
+      - title: divertissement
+        example: musée, cinéma, piscine, concert, match..
   - category: Services aux particuliers
     categoryId: SERV
     path: pratique-d-hygiene
