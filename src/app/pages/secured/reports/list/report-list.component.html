@@ -231,10 +231,10 @@
               <div [tooltip]="consumerTooltip" class="pre">
                 {{report.consumer.email | middleCrop : 25 }}&nbsp;
                 <span class="agreement" *ngIf="!report.contactAgreement">
-                  <i class="material-icons md-red md-18" aria-label="L'utilisateur ne souhaite pas être contacté" title="L'utilisateur ne souhaite pas être contacté">close</i>
+                  <i class="material-icons md-red md-18" title="L'utilisateur ne souhaite pas être contacté">close</i>
                 </span>
                 <span class="agreement" *ngIf="report.contactAgreement">
-                  <i class="material-icons md-green md-18" aria-label="L'utilisateur souhaite être contacté" title="L'utilisateur souhaite être contacté">check</i>
+                  <i class="material-icons md-green md-18" title="L'utilisateur souhaite être contacté">check</i>
                 </span>
               </div>
               <ng-template #consumerTooltip>
@@ -264,7 +264,7 @@
               {{report.statusConso}}
             </td>
             <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
-              <i class="material-icons md-light-blue" aria-label="Ajouter une action" title="Ajouter une action">add_circle</i>
+              <i class="material-icons md-light-blue" title="Ajouter une action">add_circle</i>
             </td>
           </tr>
         </ng-container>
