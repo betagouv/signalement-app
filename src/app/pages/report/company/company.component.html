@@ -17,12 +17,13 @@
       </div>
       <div class="row">
         <div class="col-12 text-right">
-          <span class="link pointer" (click)="changeCompany()">Modifier</span>&nbsp;<i class="material-icons md-18 edit" alt="Icône crayon" title="bouton modifier le professionnel">edit</i>
+          <!-- TODO a11y span -> btn -->
+          <span class="link pointer" (click)="changeCompany()" aria-label="Modifier professionnel">Modifier</span>&nbsp;<i class="material-icons md-18 edit" aria-hidden="true">edit</i>
         </div>
       </div>
       <hr />
       <button type="submit" class="btn btn-lg btn-primary">
-        <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
+        <i class="material-icons md-24" aria-hidden="true">play_arrow</i>
         Étape suivante : s'identifier
       </button>
     </form>
@@ -67,7 +68,7 @@
           <hr />
           <div class="my-5">
             <button type="submit" class="btn btn-lg btn-primary" id="submitSearchForm">
-              <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
+              <i class="material-icons md-24" aria-hidden="true">search</i>
               Rechercher
             </button>
           </div>
@@ -197,7 +198,7 @@
           <hr />
           <div class="my-5">
             <button type="submit" class="btn btn-lg btn-primary" id="submitSiretForm">
-              <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
+              <i class="material-icons md-24" aria-hidden="true">search</i>
               Rechercher
             </button>
           </div>

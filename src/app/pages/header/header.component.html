@@ -24,7 +24,7 @@
         <li class="nav__item d-inline-block d-lg-none mr-2">
           <div class="btn-group" dropdown placement="bottom right">
             <button id="button-menu" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
-                    aria-controls="dropdown-menu"><i class="material-icons">menu</i><span class="caret"></span>
+                    aria-controls="dropdown-menu"><i class="material-icons" aria-hidden="true">menu</i><span class="caret"></span>
             </button>
             <ul id="dropdown-menu" *dropdownMenu class="dropdown-menu dropdown-menu-left"
                 role="menu" aria-labelledby="button-basic">
@@ -48,14 +48,14 @@
         </li>
         <li class="nav__item nav__account" *ngIf="!user; else userMenu">
           <button type="button" class="btn btn-outline-secondary" [routerLink]="['activation']">
-            <i class="material-icons">lock</i> Espace professionnel
+            <i class="material-icons" aria-hidden="true">lock</i> Espace professionnel
           </button>
         </li>
         <ng-template #userMenu>
           <li class="nav__item nav__account">
             <div class="btn-group" dropdown placement="bottom right">
               <button id="button-avatar" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
-                      aria-controls="dropdown-account"><i class="material-icons">person</i>&nbsp;Compte <span class="caret"></span>
+                      aria-controls="dropdown-account"><i class="material-icons" aria-hidden="true">person</i>&nbsp;Compte <span class="caret"></span>
               </button>
               <ul id="dropdown-account" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                   role="menu" aria-labelledby="button-basic">

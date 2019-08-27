@@ -76,7 +76,7 @@
         </div>
         <div class="col-4 text-left">
           <select [(ngModel)]="reportFilter.statusPro" placeholder="Statut pro" id="statusProFilter" name="statusPro" [class]="reportFilter.statusPro ? 'selected' : ''">
-            <option value="" selected>Tous les status</option>
+            <option value="" selected>Tous les statuts</option>
             <option *ngFor="let statusPro of statusPros">
               {{statusPro}}
             </option>
@@ -93,7 +93,7 @@
         </div>
         <div class="col-4 text-left">
           <select [(ngModel)]="reportFilter.statusConso" placeholder="Statut conso" id="statusConsoFilter" name="statusConso" [class]="reportFilter.statusConso ? 'selected' : ''">
-            <option value="" selected>Tous les status</option>
+            <option value="" selected>Tous les statuts</option>
             <option *ngFor="let statusConso of statusConsos">
               {{statusConso}}
             </option>
@@ -116,7 +116,7 @@
         </div>
         <div class="col-2 text-right">
           <label for="detailsFilter">
-            Mots-clés&nbsp;<i class="material-icons md-dark" alt="icone popover aide" title="Recherche de texte dans les colonnes problème et description">help_outline</i>
+            Mots-clés&nbsp;<i class="material-icons md-dark" aria-hidden="true" title="Recherche dans les colonnes problème et description">help_outline</i>
           </label>
         </div>
         <div class="col-4 text-left">
@@ -192,7 +192,7 @@
             </td>
             <td>
               <div [tooltip]="subcategoriesTooltip" class="pre">
-                {{report.category}}&nbsp;<i class="material-icons md-18" alt="Icône sous-catégories" title="Il existe des sous-catégories">keyboard_arrow_down</i>
+                {{report.category}}&nbsp;<i class="material-icons md-18" aria-hidden="true" title="Il existe des sous-catégories">keyboard_arrow_down</i>
               </div>
               <ng-template #subcategoriesTooltip>
                 {{report.category}}
@@ -211,7 +211,7 @@
                   <span [innerHTML]="detail.secondLine"></span>
 
                   <span *ngIf="detail.hasNext">
-                    &nbsp;<i class="material-icons md-18" alt="Icône détails supplémentaires" title="Il existe des détails supplémentaires">keyboard_arrow_down</i>
+                    &nbsp;<i class="material-icons md-18" aria-hidden="true" title="Il existe des détails supplémentaires">keyboard_arrow_down</i>
                   </span>
                 </div>
                 <ng-template #detailsTooltip>
@@ -229,7 +229,13 @@
             </td>
             <td *appRole="[roles.Admin]">
               <div [tooltip]="consumerTooltip" class="pre">
-                {{report.consumer.email | middleCrop : 25 }}&nbsp;<span class="agreement" *ngIf="!report.contactAgreement"><i class="material-icons md-red md-18" alt="Icône pas d'accord de contact" title="L'utilisateur ne souhaite pas être contacté">close</i></span><span class="agreement" *ngIf="report.contactAgreement"><i class="material-icons md-green md-18" alt="Icône accord de contact" title="L'utilisateur souhaite être contacté">check</i></span>
+                {{report.consumer.email | middleCrop : 25 }}&nbsp;
+                <span class="agreement" *ngIf="!report.contactAgreement">
+                  <i class="material-icons md-red md-18" aria-label="L'utilisateur ne souhaite pas être contacté" title="L'utilisateur ne souhaite pas être contacté">close</i>
+                </span>
+                <span class="agreement" *ngIf="report.contactAgreement">
+                  <i class="material-icons md-green md-18" aria-label="L'utilisateur souhaite être contacté" title="L'utilisateur souhaite être contacté">check</i>
+                </span>
               </div>
               <ng-template #consumerTooltip>
                 {{report.consumer.firstName}} {{report.consumer.lastName}}
@@ -246,7 +252,7 @@
                 </a>
                 <br *ngIf="isFirst" />
               </span>
-              <span *ngIf="report.uploadedFiles.length > 2" [tooltip]="moreFileTooltip">&nbsp;<i class="material-icons md-18" alt="Icône sous-catégories" title="Il existe des sous-catégories">keyboard_arrow_down</i></span>
+              <span *ngIf="report.uploadedFiles.length > 2" [tooltip]="moreFileTooltip">&nbsp;<i class="material-icons md-18" aria-hidden="true" title="Il existe des sous-catégories">keyboard_arrow_down</i></span>
               <ng-template #moreFileTooltip>
                 <span *ngFor="let file of report.uploadedFiles">{{file.filename}}<br /></span>
               </ng-template>
@@ -258,7 +264,7 @@
               {{report.statusConso}}
             </td>
             <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
-              <i class="material-icons md-light-blue" alt="Icône ajouter" title="Ajouter une action">add_circle</i>
+              <i class="material-icons md-light-blue" aria-label="Ajouter une action" title="Ajouter une action">add_circle</i>
             </td>
           </tr>
         </ng-container>
@@ -273,8 +279,8 @@
     <ng-container *ngFor="let reportsByDate of reportsByDate">
       <div class="col-12 item pointer" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
         <span [class]="getReportCssClassNewReport(report.statusPro)">Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}</span>
-        <i class="material-icons md-18" alt="Icône pièces jointes" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
-        <i class="material-icons md-24 float-right" alt="Icône détail" title="Détail du signalement">keyboard_arrow_right</i>
+        <i class="material-icons md-18" aria-hidden="true" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
+        <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
       </div>
     </ng-container>
     <ngx-loading [show]="loading"></ngx-loading>
