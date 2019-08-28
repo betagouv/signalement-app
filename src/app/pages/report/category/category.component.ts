@@ -70,10 +70,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.showSecondaryCategories = !this.showSecondaryCategories;
     if (this.showSecondaryCategories) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.secondaryCategories);
-      const $otherCategories = document.querySelector("#otherCategories") as HTMLElement;
-
-      Utils.scrollToElement($otherCategories);
-      $otherCategories.focus();
     }
 
   }
