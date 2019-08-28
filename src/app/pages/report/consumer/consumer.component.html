@@ -1,5 +1,5 @@
 <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
-<section class="section section-white">
+<section class="section section-white" role="main">
   <div class="container">
 
     <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
@@ -10,26 +10,26 @@
       <div class="form__group mt-4">
         <div class="row">
           <div class="col-12 col-sm-6">
-            <label [class]="hasError(firstNameCtrl) ? 'error' : ''">
+            <label for="fname" [class]="hasError(firstNameCtrl) ? 'error' : ''">
               Votre prénom <span class="error">*</span>
+              <input type="text" formControlName="firstName" id="fname" name="fname" autocomplete="given-name" appAutofocus>
             </label>
-            <input type="text" formControlName="firstName" name="fname" autocomplete="given-name" appAutofocus>
           </div>
 
           <div class="col-12 col-sm-6">
-            <label [class]="hasError(lastNameCtrl) ? 'error' : ''">
+            <label for="lname" [class]="hasError(lastNameCtrl) ? 'error' : ''">
               Votre nom <span class="error">*</span>
+              <input type="text" formControlName="lastName" id="lname" name="lname" autocomplete="family-name">
             </label>
-            <input type="text" formControlName="lastName" name="lname" autocomplete="family-name">
           </div>
         </div>
       </div>
 
       <div class="form__group">
-        <label [class]="hasError(emailCtrl) ? 'error' : ''">
+        <label for="email" [class]="hasError(emailCtrl) ? 'error' : ''">
           Votre email <span class="error">*</span>
+          <input type="email" formControlName="email" id="email" name="email" autocomplete="email" />
         </label>
-        <input type="email" formControlName="email" name="email" autocomplete="email" />
       </div>
 
       <div class="form__group">
