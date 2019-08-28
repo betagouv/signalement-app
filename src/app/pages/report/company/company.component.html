@@ -81,7 +81,7 @@
             Veuillez sélectionner un établissement dans la liste ci-dessous :
           </p>
 
-          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)" tabindex="0">
+          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)" (keydown.enter)="selectCompanyFromResults(company)" tabindex="0">
             <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
             <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
             <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
