@@ -7,6 +7,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-category',
@@ -65,9 +66,16 @@ export class CategoryComponent implements OnInit, OnDestroy {
     }
   }
 
-  displaySecondaryCategories() {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.secondaryCategories);
-    this.showSecondaryCategories = true;
+  toggleSecondaryCategories() {
+    this.showSecondaryCategories = !this.showSecondaryCategories;
+    if (this.showSecondaryCategories) {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.secondaryCategories);
+      const $otherCategories = document.querySelector("#otherCategories") as HTMLElement;
+
+      Utils.scrollToElement($otherCategories);
+      $otherCategories.focus();
+    }
+
   }
 
   selectAnomaly(anomaly: Anomaly) {

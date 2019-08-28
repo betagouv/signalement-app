@@ -51,6 +51,10 @@
       transform: scale(1.1);
       border-color: $primary;
     }
+    &:focus {
+      transform: scale(1.1);
+      border-color: $primary;
+    }
   }
   @media #{$smaller-than-tablet} {
     &:active {
@@ -144,4 +148,9 @@ h3.other-problems {
 
 p.internet-information {
   margin-bottom: 40px !important
+}
+
+button.button-outline:focus {
+  border: 1px solid $darker-grey;
+  color: $darker-grey;
 }

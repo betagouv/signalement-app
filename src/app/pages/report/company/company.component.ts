@@ -76,6 +76,12 @@ export class CompanyComponent implements OnInit, OnDestroy {
           this.reportRouterService.routeToFirstStep();
         }
       });
+
+      const elt = document.querySelector("#searchForm");
+      if (elt && elt instanceof HTMLElement) {
+        elt.focus();
+      }
+
   }
 
   ngOnDestroy() {
@@ -225,6 +231,16 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.showErrors = false;
     this.showErrorsBySiret = false;
     this.displayLiveChat();
+
+    setTimeout(() => {
+      const elt = document.querySelector("#firstTab");
+
+      if (elt && elt instanceof HTMLElement) {
+        elt.focus();
+      } else {
+        console.error("firstTab non trouvé pour le focus")
+      }
+    });
   }
 
   hasError(formControl: FormControl) {

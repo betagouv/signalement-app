@@ -13,6 +13,10 @@
       transform: scale(1.1);
       border-color: $primary;
     }
+    &:focus {
+      transform: scale(1.1);
+      border-color: $primary;
+    }
   }
 }
 

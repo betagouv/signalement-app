@@ -30,12 +30,12 @@
 
     <ng-template #noCompany>
 
-      <nav class="nav nav-tabs nav-justified">
-        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': !bySiret}">Recherche par nom</a>
-        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': bySiret}">Recherche par Siret</a>
+      <nav class="nav nav-tabs nav-justified" role="tablist">
+        <a id="firstTab" nga11y-focus class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
+        <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par Siret</a>
       </nav>
 
-      <ng-container *ngIf="!bySiret; else searchBySiret">
+      <ng-container *ngIf="!bySiret; else searchBySiret" role="tabpanel">
 
         <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
 
@@ -81,7 +81,7 @@
             Veuillez sélectionner un établissement dans la liste ci-dessous :
           </p>
 
-          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
+          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)" tabindex="0">
             <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
             <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
             <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
@@ -112,7 +112,7 @@
         </div>
       </ng-container>
 
-      <ng-template #searchBySiret>
+      <ng-template #searchBySiret role="tabpanel">
 
         <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm" *ngIf="searchBySiretForm">
 
@@ -211,7 +211,7 @@
             Veuillez cliquer sur l'établissement ci-dessous s'il correspond bien à l'établissement recherché :
           </p>
 
-          <p class="company" (click)="selectCompanyFromResults(companyBySiret)">
+          <p class="company" (click)="selectCompanyFromResults(companyBySiret)" (keydown.enter)="selectCompanyFromResults(companyBySiret)" tabindex="0">
             <strong *ngIf="companyBySiret.line1">{{companyBySiret.line1}}<br /></strong>
             <strong *ngIf="companyBySiret.line2">{{companyBySiret.line2}}<br /></strong>
             <span *ngIf="companyBySiret.activityLabel">{{companyBySiret.activityLabel}}<br /></span>

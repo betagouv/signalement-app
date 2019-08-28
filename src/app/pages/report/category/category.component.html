@@ -24,7 +24,7 @@
         <h3 class="text-center sous-titre">Quel est le problème ?</h3>
         <div class="row pb-4">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
-            <div class="category pointer" (click)="selectAnomaly(category)">
+            <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
                 <div class="col-12 col-lg-3 mb-2 text-center">
                   <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
@@ -38,19 +38,16 @@
           </div>
         </div>
 
-        <h3 class="pointer other-problems" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
-          Autres problèmes&nbsp;?
+        <h3 id="otherCategories" class="pointer other-problems" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
+          Autres problèmes &nbsp;?
         </h3>
-        <ng-template #secondaryCategories>
-          <h3 class="other-problems">
-            Autres problèmes&nbsp;?
-          </h3>
-          <ul>
-            <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)">
-              <h5 class="other-problems">{{category.category}}</h5>
-            </li>
-          </ul>
-        </ng-template>
+
+        <ul *ngIf="showSecondaryCategories">
+          <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
+            <h5 class="other-problems">{{category.category}}</h5>
+          </li>
+        </ul>
+
       </div>
     </section>
 
