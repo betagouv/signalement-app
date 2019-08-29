@@ -18,9 +18,45 @@
       <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
     </alert>
 
-    <section class="section section-lightest-grey position-relative">
+    <section class="section section-lighter-grey position-relative">
+        <div class="container mt-4">
+            <div class="row pb-4 ">
+              <div class="col-12 col-md-3 text-center">
+                <img src="/assets/images/formulaire.png" width="110px" style="vertical-align: middle"/>
+                <p class="legend">
+                  <span class="d-inline d-md-none">1.</span> Déposez un signalement
+                </p>
+              </div>
+              <div class="col-md-1 text-center mt-4 d-none d-md-block">
+                <img src="/assets/images/arrow-right.png" width="48"/>
+              </div>
+              <div class="col-12 col-md-4 text-center">
+                <img src="/assets/images/magasin.png" width="110px" style="vertical-align: middle"/>
+                <p class="legend">
+                    <span class="d-inline d-md-none">2.</span> Le commerçant est prévenu et peut se corriger
+                </p>
+              </div>
+              <div class="col-md-1 text-center mt-4 d-none d-md-block">
+                <img src="/assets/images/arrow-right.png" width="48"/>
+              </div>
+              <div class="col-12 col-md-3 text-center">
+                <img src="/assets/images/jumelles.png" width="110px" style="vertical-align: middle"/>
+                <p class="legend">
+                    <span class="d-inline d-md-none">3.</span> La répression des fraudes est alertée
+                </p>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center">
+              <button type="button" class="btn btn-primary btn-lg cta-btn" (click)="scrollToElement(categoryList)">&nbsp;&nbsp;Je signale&nbsp;&nbsp;</button>
+            </div>
+          </div>
+        </div>
+    </section>
 
-      <div class="container mt-n4">
+    <section #categoryList class="section section-lightest-grey position-relative">
+
+      <div class="container">
         <h3 class="text-center sous-titre">Quel est le problème ?</h3>
         <div class="row pb-4">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">

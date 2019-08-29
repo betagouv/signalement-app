@@ -154,3 +154,13 @@ button.button-outline:focus {
   border: 1px solid $darker-grey;
   color: $darker-grey;
 }
+
+p.legend {
+  padding-top: 20px;
+  font-size: 18px;
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+
+button.cta-btn {
+  font-size: 30px;
+}

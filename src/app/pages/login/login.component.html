@@ -12,7 +12,7 @@
       <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
         <ng-container *ngIf="!isConnection">
           <h4 class="text-center">
-            Vous avez reçu un courrier pour consulter vos signalements ?
+            Vous avez reçu un courrier postal pour consulter vos signalements ?
           </h4>
           <h4 class="text-center pb-5">
             Veuillez renseigner votre numéro Siret et le code à 6 chiffres reçu pour activer votre compte.
@@ -25,7 +25,7 @@
             </label>
           </div>
           <div class="col-sm-9">
-            <input [formControl]="loginCtrl" type="text" class="form-control" id="login" placeholder="{{isDgccrf ? 'Email' : 'Siret'}}">
+            <input [formControl]="loginCtrl" type="text" class="form-control" id="login" placeholder="{{isDgccrf ? 'Email' : '14 caractères de votre SIRET'}}">
           </div>
         </div>
         <div class="form-group row">
@@ -35,7 +35,7 @@
             </label>
           </div>
           <div class="col-sm-9">
-            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="{{isConnection ? 'Mot de passe' : 'Code d\'activation'}}">
+            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="{{isConnection ? 'Mot de passe' : 'Code d\'activation à 6 chiffres'}}">
           </div>
         </div>
         <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
@@ -58,7 +58,8 @@
           </div>
         </div>
         <p class="form-text text-muted text-center" *ngIf="!isConnection">
-          La création d'un compte est réservé aux professionnels qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement concernant leur établissement.
+          La création d'un compte est réservé aux professionnels qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement concernant leur établissement.<br/><br/>
+          Pour plus d'informations, veuillez-vous reporter à <a routerLink="/vous-êtes-un-professionnel">la page d'aide pour les professionnels</a>.
         </p>
       </form>
       <div class="form-group row" *ngIf="isConnection">
