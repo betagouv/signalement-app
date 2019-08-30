@@ -9,8 +9,7 @@ La réponse est  qu’un contrôle n’est pas systématique ! Pourquoi ?
 **Parce que l’esprit SignalConso c’est d’assurer une relation de transparence et de confiance entre les trois acteurs concernés : le consommateur, le professionnel et les agents de la répression des fraudes.**
 
 L’intérêt de SignalConso : permettre une action optimale (correction des anomalies…) du professionnel sans qu’un contrôle soit nécessairement effectué.
-Le professionnel est informé qu’il fait l’objet d’un signalement. Il peut ainsi activer son compte et le visualiser. Il fera l’objet de relance lui proposant d’apporter une réponse à votre problème s’il ne l’a pas fait. 
-Il dispose donc de tous les éléments pour agir de manière rapide et efficace. 
+Le professionnel est informé qu’il fait l’objet d’un signalement. Il peut activer son compte et visualiser le signalement. Il dispose ainsi des éléments pour corriger la situation. Il fera l’objet de relance lui proposant d’apporter une réponse à votre problème s’il ne l’a pas fait. 
 
 Toutefois, un professionnel qui ne répondrait pas au signalement est un indice pouvant conduire les enquêteurs à faire un contrôle… 
 
@@ -32,7 +31,7 @@ Votre signalement permet donc un meilleur ciblage. Il est également un appui à
 ---
 
 **Dans tous les cas, votre signalement est très utile à bien des égards :** 
-+ **Pour vous** : il permet de trouver un terrain d’entente avec le professionnel si vous n’avez pas préalablement réussi.
++ **Pour vous** : il permet de trouver un terrain d’entente avec le professionnel si vous n’y êtes pas préalablement parvenu.
 + **Pour les professionnels** : ils corrigeront les anomalies que vous avez détecté plus rapidement et feront attention à ne plus les reproduire.
 +	**Pour les autres consommateurs** : afin que ce qui vous est arrivé n’arrive pas à d’autres ; il s’agit là d’un acte citoyen !
 +	**Pour les enquêteurs** : ils peuvent cibler leurs contrôles en les orientant vers les professionnels ne respectant pas les droits des consommateurs.
