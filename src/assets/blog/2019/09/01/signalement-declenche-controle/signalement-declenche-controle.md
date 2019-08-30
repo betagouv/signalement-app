@@ -1,11 +1,12 @@
 ![control](/assets/blog/2019/09/01/signalement-declenche-controle/controle.png)
+
 # Un signalement déclenche-t-il toujours un contrôle ?
 
-Lorsque vous avez fait votre signalement, vous vous demandez si les enquêteurs de la répression des fraudes iront faire un contrôle chez le professionnel ? 
+Lorsque vous avez fait votre signalement, vous vous demandez si les enquêteurs de la répression des fraudes iront faire un contrôle chez le professionnel ?
 
-La réponse est  qu’un contrôle n’est pas systématique ! Pourquoi ? 
+La réponse est  qu’un contrôle n’est pas systématique ! Pourquoi ?
 
-#### Parce que l’esprit SignalConso c’est d’assurer une relation de transparence et de confiance entre les trois acteurs concernés : le consommateur, le professionnel et les agents de la répression des fraudes. 
+**Parce que l’esprit SignalConso c’est d’assurer une relation de transparence et de confiance entre les trois acteurs concernés : le consommateur, le professionnel et les agents de la répression des fraudes.**
 
 L’intérêt de SignalConso : permettre une action optimale (correction des anomalies…) du professionnel sans qu’un contrôle soit nécessairement effectué.
 Le professionnel est informé qu’il fait l’objet d’un signalement. Il peut ainsi activer son compte et le visualiser. Il fera l’objet de relance lui proposant d’apporter une réponse à votre problème s’il ne l’a pas fait. 
@@ -14,7 +15,7 @@ Il dispose donc de tous les éléments pour agir de manière rapide et efficace.
 Toutefois, un professionnel qui ne répondrait pas au signalement est un indice pouvant conduire les enquêteurs à faire un contrôle… 
 
 
-#### Parce que les enquêteurs doivent prioriser leurs actions en croisant les informations.
+**Parce que les enquêteurs doivent prioriser leurs actions en croisant les informations.**
 
 Votre signalement est systématiquement enregistré sur une base de données à laquelle les enquêteurs ont accès afin de les analyser et de décider de faire ou non un contrôle. 
 Les enquêteurs peuvent décider de mener une enquête à partir des éléments apportés dans votre signalement : plus vous êtes précis et plus les agents auront des informations pour mener une enquête. 
