@@ -64,11 +64,11 @@ export class InformationComponent implements OnInit, OnDestroy {
       } else {
         this.reportRouterService.routeToFirstStep();
       }
-
-      const firstElement: HTMLElement = document.querySelector("#titleInformation");
-      firstElement.focus();
-      firstElement.blur();
     });
+
+    const firstElement: HTMLElement = document.querySelector("#titleInformation");
+    firstElement.focus();
+    firstElement.blur();
   }
 
   initInformation() {
