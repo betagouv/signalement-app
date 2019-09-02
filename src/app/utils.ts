@@ -7,4 +7,12 @@ export default class Utils {
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
+  static focusAndBlurOnTop() {
+    setTimeout(() => {
+      const firstElement = document.querySelector("#banner") as HTMLElement;
+      firstElement.focus();
+      firstElement.blur();
+    })
+  }
+
 }

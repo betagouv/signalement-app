@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute } from '@angular/router';
 import blogMetaData from '../../../../assets/data/blog-meta-data.json';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-blog',
@@ -46,6 +47,8 @@ export class BlogComponent implements OnInit {
           this.previous = blogMetaData[index + 1];
         }
       }
+
+      Utils.focusAndBlurOnTop();
     });
   }
 
