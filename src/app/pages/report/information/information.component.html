@@ -2,7 +2,7 @@
   <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
   <section class="section section-white">
     <div class="container max-width">
-      <p class="mx-auto mb-4 text-left title" [innerHTML]="informationToDisplay?.title"></p>
+      <p tabindex="-1" id="titleInformation" class="mx-auto mb-4 text-left title" [innerHTML]="informationToDisplay?.title"></p>
       <p class="mb-4 text-left" [innerHTML]="informationToDisplay?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
       <p class="mb-5" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
 
