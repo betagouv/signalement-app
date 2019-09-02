@@ -61,10 +61,11 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.scrollNotificationState = 'hide';
-    const firstElement: HTMLElement = document.querySelector("#problemTitle");
+    const allTitles: Array<HTMLElement> = Array.from(document.querySelectorAll(".problemTitle"));
 
-    firstElement.focus();
-    firstElement.blur();
+    allTitles[allTitles.length - 1].focus();
+    allTitles[allTitles.length - 1].blur();
+
     setTimeout(() => {
       this.checkScrollNotification();
     }, 2000);
