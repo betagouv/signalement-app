@@ -1290,8 +1290,6 @@ list:
               - title: Autre
           - title: Facturation
       - title: Autres (Fioul / GPL / granulés de bois ..)
-      
-      
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: pratique-d-hygiene
@@ -1316,22 +1314,58 @@ list:
     icon: icon_real_estate.png
     subcategories:
       - title: agence immobilière
-        example: 'Exemple: location, vente, gestion locative..'
+        example: 'Exemple: location, vente, gestion locative, mandataire indépendant, marchand de liste, chasseur d''appartement..'
         subcategories:
-          - title: prix
-            example: 'Exemple : prix non affiché, augmentation du loyer non conforme'
-          - title: facturation / remboursement
-            example: 'Exemple : frais facturés injustifiés, caution non rendue'
-          - title: contrat
-            example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
-          - title: publicité
-            example: 'Exemple : maison affichée "à vendre" déjà vendue, publicité trompeuse'
-          - title: service client
-            example: 'Exemple : service client injoignable'
-          - title: documents / dossier
-            example: 'Exemple : demande de pièce non justifiée pour mon dossier..'  
-          - title: autres
-      - title: vente / location entre particuliers
+          - title: je cherche une location ou un bien à acheter
+            example: 'Exemple: marchand de liste, annonce immobilière, dossier de location..'
+            subcategories:
+                  - title: je cherche une location
+                    subcategories:
+                      - title: annonces immobilières
+                        example: 'Exemple: charges non indiquées sur les annonces, annonces en vitrine déja pourvues..'
+                      - title: marchand de liste
+                        example: 'Exemple: peu d''appartement disponible dans la liste '
+                      - title: visite de bien / dépôt de dossier
+                        example: 'Exemple: demande d''un relevé de compte bancaire alors que c''est interdit'
+                      - title: autre
+                  - title: je cherche à acheter
+                    subcategories:
+                      - title: annonces immobilières
+                        example: 'Exemple: prix incomplet sur les annonces, annonces en vitrine déja pourvues, aucun DPE d''affiché..'
+                      - title: visite
+                      - title: offre d'achat / compromis de vente
+                        example: 'Exemple: refus de mon offre au prix sans justification'
+                      - title: chasseur d'appartement
+                        example: 'Exemple: frais d''étude alors que c''est interdit'
+                      - title: mandataire indépendant (agent commercial)
+          - title: j''ai un problème en tant que locataire
+            example: 'Exemple: état des lieux, charges, loyer...'
+            subcategories: 
+                  - title: charges / honoraires
+                  - title: loyer
+                  - title: état des lieux / caution
+                  - title: bail / contrat de location
+                    example: 'Exemple : clause abusive dans le contrat'
+                  - title: autre
+          - title: j''ai un problème en tant que propriétaire
+            example: 'Exemple: gestion locative, mise en vente...'
+            subcategories:
+              - title: gestion locative
+                subcategories:
+                  - title: contrat et mandat
+                    example: 'Exemple : clause abusive dans le contrat'
+                  - title: honoraires
+                  - title: assurance loyer impayé
+                  - title: autre
+              - title: vente de mon bien
+                subcategories:
+                  - title: mise en vente sans mandat
+                    example: 'Exemple: une agence a mis mon bien en vente sans mandat signé '
+                  - title: honoraires de vente
+                  - title: discours trompeur
+                    example: 'Exemple: L''agent immobilier m''a promis de vendre sous 7 jours'
+              - title: autre
+      - title: vente / location directement entre particuliers
         subcategories:
           - title: problème avec mon locataire / propriétaire
             information:
@@ -1345,23 +1379,28 @@ list:
           - title: problème avec un site de mise en relation entre particuliers
       - title: syndic de copropriété
         subcategories:
-          - title: prix
-            example: 'Exemple : prix non affiché..'
-          - title: facturation
-            example: 'Exemple : frais facturés injustifiés..'
-          - title: contrat
-            example: 'Exemple : clause abusive dans le contrat, la prestation proposée ne correspond pas à ce qui est fait..'
-          - title: service client
-            example: 'Exemple : aucune réponse du syndic malgré des relances..'
-          - title: documents / dossier
-            example: 'Exemple : impossibilité d''accèder aux documents du syndic..'  
+          - title: Facturation
+            example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévus'
+            subcategoriesTitle: 'Le détail des frais est marqué dans le contrat de syndic. Avant de faire un signalement, veuiller vérifier ce contrat au chapitre 7. Si vous ne l''avez pas, demandez le à votre syndic. Ce document est obligatoire et gratuit.'
+            subcategories:
+              - title: J'ai pris connaissance de mon contrat de syndic.
+                subcategories:
+                  - title: les frais sont plus chers que dans le contrat
+                  - title: les frais ne correspondent à aucune des prestations dites "prestations particulières".
+                  - title: les frais sont normalement déjà inclus dans le socle général (forfait)
+                  - title: autre
+          - title: Contrat de syndic
+            example: 'Exemple : clause abusive dans le contrat'
+          - title: Documents à disposition des copropriétaires
+            example: 'Exemple : pas de fiche synthétique de copropriété..'  
+          - title: Gestion des travaux par le syndic
+            example: 'Devis, choix des prestataires..'
+          - title: Absence de réponse du syndic
+            example: 'Exemple : aucune réponse malgré des relances..'
+            
           - title: autres
       - title: notaire
-        subcategories:
-          - title: honoraires
-            example: 'Exemple : ..'
-          - title: autres
-      
+      - title: autre
   - category: Voyage / Loisirs
     categoryId: VOY
     path: pratique-d-hygiene
