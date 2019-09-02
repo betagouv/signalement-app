@@ -15,8 +15,8 @@
       </markdown>
 
       <div class="footer-links">
-        <a [href]="next" *ngIf="next" class="float-left"><i class="material-icons">fast_rewind</i>&nbsp;Suivant</a>&nbsp;
-        <a [href]="previous" *ngIf="previous" class="float-right">Précédent&nbsp;<i class="material-icons">fast_forward</i></a>
+        <a [routerLink]="next" *ngIf="next" class="float-left"><i class="material-icons">fast_rewind</i>&nbsp;Suivant</a>&nbsp;
+        <a [routerLink]="previous" *ngIf="previous" class="float-right">Précédent&nbsp;<i class="material-icons">fast_forward</i></a>
       </div>
 
     </div>
