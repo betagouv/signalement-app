@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="col-2 text-right">
-          <label>
+          <label for="period">
             Période
           </label>
         </div>
@@ -51,6 +51,7 @@
           <input type="text"
                  [(ngModel)]="reportFilter.period"
                  name="period"
+                 id="period"
                  placeholder="Daterangepicker"
                  placeholder="Période sélectionnée"
                  bsDaterangepicker

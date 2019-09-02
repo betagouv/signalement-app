@@ -34,10 +34,10 @@
             </div>
             <div class="col-12 col-sm-5">
               <div class="form__group">
-                <label for="contractDateInput">
+                <label for="limitContractDateInput">
                   Date limite de rétractation
                 </label>
-                <input type="text" disabled
+                <input id="limitContractDateInput" type="text" disabled
                        [value]="retractationDeadline | date : 'EEEE d MMMM yyyy'"
                        placeholder="Date limite de rétractation"/>
               </div>
