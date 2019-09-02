@@ -44,7 +44,7 @@ list:
             optionnal: true
           - label: Date du constat
             rank: 5
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Heure du constat (facultatif)
             rank: 6
@@ -91,7 +91,7 @@ list:
             optionnal: true
           - label: Date du constat
             rank: 4
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Heure du constat (facultatif)
             rank: 5
@@ -114,7 +114,7 @@ list:
             optionnal: true
           - label: Date du constat
             rank: 3
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Heure du constat (facultatif)
             rank: 4
@@ -185,7 +185,7 @@ list:
                     detailInputs:
                       - label: Date du constat (ou d'achat suivant le cas)
                         rank: 1
-                        type: DATE
+                        type: DATE_NOT_IN_FUTURE
                         defaultValue: SYSDATE
                       - label: Date Limite de Consommation (DLC)
                         rank: 2
@@ -215,7 +215,7 @@ list:
                     type: DATE
                   - label: Date du constat (ou date d'achat)
                     rank: 3
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo
       - title: Problème de qualité
@@ -233,7 +233,7 @@ list:
                     type: TEXT
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 2
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
@@ -263,7 +263,7 @@ list:
                     optionnal: true
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 6
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
           - title: Couleur ou odeur anormale
@@ -277,7 +277,7 @@ list:
                     type: TEXT
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 2
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
@@ -307,7 +307,7 @@ list:
                     optionnal: true
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 6
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
           - title: Corps étranger "mou"
@@ -322,7 +322,7 @@ list:
                     type: TEXT
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 2
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
@@ -352,7 +352,7 @@ list:
                     optionnal: true
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 6
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
           - title: Corps étranger "dur"
@@ -373,7 +373,7 @@ list:
                     type: TEXT
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 2
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
               - title: Un produit vendu dans un emballage
@@ -402,7 +402,7 @@ list:
                     optionnal: true
                   - label: Date du constat (ou d'achat suivant le cas)
                     rank: 6
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                 fileLabel: Photo du produit
       - title: Problème avec l'emballage ou l'étiquette
@@ -421,7 +421,7 @@ list:
                   - Autre (à préciser)
               - label: Date du constat (ou d'achat suivant le cas)
                 rank: 2
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: Type de produit
                 rank: 3
@@ -437,7 +437,7 @@ list:
             detailInputs:
               - label: Date du constat (ou d'achat suivant le cas)
                 rank: 1
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: De quel produit s'agit-il&#160;?
                 rank: 2
@@ -470,7 +470,7 @@ list:
             detailInputs:
               - label: Date du constat (ou d'achat suivant le cas)
                 rank: 1
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: Type de produit
                 rank: 2
@@ -525,7 +525,7 @@ list:
                 detailInputs:
                   - label: Date du constat ou d'achat
                     rank: 1
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Nom du produit
                     rank: 2
@@ -544,7 +544,7 @@ list:
                 detailInputs:
                   - label: Date du constat ou d'achat
                     rank: 1
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Nom du produit
                     rank: 2
@@ -570,7 +570,7 @@ list:
         detailInputs:
           - label: Date du constat
             rank: 1
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Heure du constat
             rank: 2
@@ -626,7 +626,7 @@ list:
                   - Autre (à préciser)
               - label: Date du constat ou d'achat
                 rank: 3
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: Nom / marque
                 rank: 4
@@ -645,7 +645,7 @@ list:
                 detailInputs:
                   - label: Date du constat
                     rank: 1
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Nom / marque / type de produit
                     rank: 2
@@ -674,7 +674,7 @@ list:
                   - Autre (à préciser)
               - label: Date du constat
                 rank: 2
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: Nom / marque / référence
                 rank: 3
@@ -706,7 +706,7 @@ list:
             type: DATE
           - label: Date du constat
             rank: 2
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Type de produit
             rank: 3
@@ -723,7 +723,7 @@ list:
         detailInputs:
           - label: Date du constat
             rank: 1
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Heure du constat
             rank: 2
@@ -772,7 +772,7 @@ list:
               - Frais supplémentaires qui n'étaient pas annoncés à l'avance
           - label: Date du constat
             rank: 2
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Description
             example: Précisez si possible le produit ou le rayon
@@ -794,7 +794,7 @@ list:
             detailInputs:
               - label: Date du constat
                 rank: 1
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: Heure du constat
                 rank: 2
@@ -850,7 +850,7 @@ list:
               - Autre (à préciser)
           - label: Date du constat
             rank: 2
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Description
             example: Précisez si possible le problème
@@ -923,7 +923,7 @@ list:
             detailInputs:
               - label: Date du constat
                 rank: 1
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: De quelle publicité s'agit-il&#160;?
                 rank: 2
@@ -955,7 +955,7 @@ list:
             detailInputs:
               - label: Date du constat
                 rank: 1
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: Où l'avez-vous vu indiqué&#160;?
                 rank: 2
@@ -969,7 +969,7 @@ list:
             detailInputs:
               - label: Date du constat
                 rank: 1
-                type: DATE
+                type: DATE_NOT_IN_FUTURE
                 defaultValue: SYSDATE
               - label: Quel type de produit était indisponible&#160;?
                 rank: 2
@@ -982,7 +982,7 @@ list:
         detailInputs:
           - label: Date du constat
             rank: 1
-            type: DATE
+            type: DATE_NOT_IN_FUTURE
             defaultValue: SYSDATE
           - label: Qu'es-ce qui est trompeur&#160;?
             rank: 2
@@ -1046,7 +1046,7 @@ list:
                     type: TEXT
                   - label: Date du constat
                     rank: 3
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Interlocuteur
                     rank: 4
@@ -1081,7 +1081,7 @@ list:
                             type: DATE
                           - label: Date du constat
                             rank: 4
-                            type: DATE
+                            type: DATE_NOT_IN_FUTURE
                             defaultValue: SYSDATE
                           - label: Motif de refus
                             rank: 5
@@ -1118,7 +1118,7 @@ list:
                     type: TEXT
                   - label: Date du constat
                     rank: 3
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Interlocuteur
                     rank: 4
@@ -1153,7 +1153,7 @@ list:
                             type: DATE
                           - label: Date du constat
                             rank: 4
-                            type: DATE
+                            type: DATE_NOT_IN_FUTURE
                             defaultValue: SYSDATE
                           - label: Motif de refus
                             rank: 5
@@ -1185,7 +1185,7 @@ list:
                 detailInputs:
                   - label: Date du constat
                     rank: 1
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Date d'achat
                     rank: 2
@@ -1206,7 +1206,7 @@ list:
                 detailInputs:
                   - label: Date du constat
                     rank: 1
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Date d'achat
                     rank: 2
@@ -1227,7 +1227,7 @@ list:
                 detailInputs:
                   - label: Date du constat
                     rank: 1
-                    type: DATE
+                    type: DATE_NOT_IN_FUTURE
                     defaultValue: SYSDATE
                   - label: Date d'achat
                     rank: 2
