@@ -10,32 +10,43 @@ import blogMetaData from '../../../../assets/data/blog-meta-data.json';
 })
 export class BlogComponent implements OnInit {
 
-  articleUrl: string;
+  articlePath: string;
   previous: string;
   next: string;
 
   constructor(private markdownService: MarkdownService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
 
     this.route.paramMap.subscribe(params => {
-        this.articleUrl = `/assets/blog/${params.get('year')}/${params.get('month')}/${params.get('day')}/${params.get('article')}/${params.get('article')}.md`;
 
-        const index = this.getIndexOf(params.get('article'));
+      let index = 0;
 
-        if (index !== -1) {
-          if (index > 0) {
-            this.next = blogMetaData[index - 1];
-          }
+      if (!params || !params.get('year')) {
 
-          if (index < blogMetaData.length - 1) {
-            this.previous = blogMetaData[index + 1];
-          }
+        const parts = blogMetaData[0].split('/')
+        if (parts.length) {
+          this.articlePath = `/assets/${blogMetaData[index]}/${parts[parts.length - 1]}.md`;
+        }
+
+      } else {
+
+        this.articlePath = `/assets/blog/${params.get('year')}/${params.get('month')}/${params.get('day')}/${params.get('article')}/${params.get('article')}.md`;
+        index = this.getIndexOf(params.get('article'));
+
+      }
+
+      if (index !== -1) {
+        if (index > 0) {
+          this.next = blogMetaData[index - 1];
+        }
+
+        if (index < blogMetaData.length - 1) {
+          this.previous = blogMetaData[index + 1];
         }
       }
-    );
-
+    });
   }
 
   getIndexOf(article) {
