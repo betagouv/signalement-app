@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="detailInput.type === 'DATE'">
+        <div class="row" *ngIf="detailInput.type === 'DATE_NOT_IN_FUTURE'">
           <div class="col-12 col-sm-6">
             <input type="text"
                    [formControlName]="getFormControlName(detailInput)"
@@ -39,6 +39,17 @@
                    [id]="getFormControlId(detailInput)"
                    bsDatepicker
                    [maxDate]="maxDate"
+                   [bsConfig]="{ containerClass: 'theme-default' }">
+          </div>
+        </div>
+
+        <div class="row" *ngIf="detailInput.type === 'DATE'">
+          <div class="col-12 col-sm-6">
+            <input type="text"
+                   [formControlName]="getFormControlName(detailInput)"
+                   [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
+                   [id]="getFormControlId(detailInput)"
+                   bsDatepicker
                    [bsConfig]="{ containerClass: 'theme-default' }">
           </div>
         </div>
