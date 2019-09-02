@@ -42,6 +42,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
+
+    Utils.focusAndBlurOnTop();
   }
 
   ngOnDestroy() {
