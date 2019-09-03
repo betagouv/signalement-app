@@ -10,8 +10,10 @@ export default class Utils {
   static focusAndBlurOnTop() {
     setTimeout(() => {
       const firstElement = document.querySelector("#banner") as HTMLElement;
-      firstElement.focus();
-      firstElement.blur();
+      if (firstElement) {
+        firstElement.focus();
+        firstElement.blur();
+      }
     })
   }
 
