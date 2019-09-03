@@ -4,7 +4,7 @@ export default class Utils {
   }
 
   static scrollToElement($element): void {
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
 
   static focusAndBlurOnTop() {
@@ -15,6 +15,16 @@ export default class Utils {
         firstElement.blur();
       }
     })
+  }
+  static focusAndBlurOnBackButton() {
+    setTimeout(() => {
+      const backButton: HTMLElement = document.querySelector("#back-button");
+
+      if (backButton) {
+        backButton.focus();
+        backButton.blur();
+      }
+    });
   }
 
 }

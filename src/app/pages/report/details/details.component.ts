@@ -11,10 +11,10 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isDefined } from '@angular/compiler/src/util';
-import Utils from '../../../utils';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Utils from '../../../utils';
 
 export const fileSizeMax = 5000000;
 
@@ -93,6 +93,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.searchKeywords();
 
     this.maxDate = new Date();
+
+    Utils.focusAndBlurOnBackButton();
+
   }
 
   ngOnDestroy() {

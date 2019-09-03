@@ -15,6 +15,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-company',
@@ -77,10 +78,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
         }
       });
 
-      const elt = document.querySelector("#searchForm");
-      if (elt && elt instanceof HTMLElement) {
-        elt.focus();
-      }
+      Utils.focusAndBlurOnBackButton();
 
   }
 

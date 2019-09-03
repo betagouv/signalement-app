@@ -7,6 +7,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-consumer',
@@ -45,6 +46,8 @@ export class ConsumerComponent implements OnInit, OnDestroy {
           this.reportRouterService.routeToFirstStep();
         }
       });
+
+    Utils.focusAndBlurOnBackButton();
   }
 
   ngOnDestroy() {
