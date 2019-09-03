@@ -39,13 +39,8 @@ export class BlogComponent implements OnInit {
       }
 
       if (index !== -1) {
-        if (index > 0) {
-          this.next = blogMetaData[index - 1];
-        }
-
-        if (index < blogMetaData.length - 1) {
-          this.previous = blogMetaData[index + 1];
-        }
+        this.next = index > 0 ? blogMetaData[index - 1] : null;
+        this.previous = index < blogMetaData.length - 1 ? blogMetaData[index + 1] : null;
       }
 
       Utils.focusAndBlurOnTop();
