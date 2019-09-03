@@ -35,7 +35,7 @@ export class ConsumerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Consumer;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => {
         if (report) {

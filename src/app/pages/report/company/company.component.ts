@@ -62,7 +62,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Company;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => {
         if (report) {

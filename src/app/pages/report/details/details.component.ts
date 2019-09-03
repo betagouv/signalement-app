@@ -75,7 +75,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Details;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => {
         if (report) {

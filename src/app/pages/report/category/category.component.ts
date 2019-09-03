@@ -33,7 +33,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Category;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => this.report = report);
     this.showSecondaryCategories = false;
