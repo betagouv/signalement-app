@@ -31,6 +31,16 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
           this.reportRouterService.routeToFirstStep();
         }
       });
+
+      setTimeout(() => {
+        const title: HTMLElement = document.querySelector("#title-thanks");
+
+        if (title) {
+          title.focus();
+          title.blur();
+        }
+
+      });
   }
 
   ngOnDestroy() {
