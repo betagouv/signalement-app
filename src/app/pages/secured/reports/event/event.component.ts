@@ -86,7 +86,7 @@ export class EventComponent implements OnInit {
     });
 
     // Fix pour Safari/IE 11 (voir fonction fixDefaultSelectedOpionOnSafariAndIE)
-    //this.eventForm.controls.action.setValue("-1");
+    // this.eventForm.controls.action.setValue("-1");
 
   }
 

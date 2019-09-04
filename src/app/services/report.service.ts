@@ -135,7 +135,8 @@ export class ReportService {
     const reportApi = {
       id: report.id,
       category: report.category,
-      subcategories: !report.subcategories ? [] : report.subcategories.map(subcategory => subcategory.title ? subcategory.title : subcategory),
+      subcategories: !report.subcategories ? [] : report.subcategories.map(subcategory => subcategory.title ?
+        subcategory.title : subcategory),
       companyName: report.company.name,
       companyAddress: this.company2adresseApi(report.company),
       companyPostalCode: report.company.postalCode,

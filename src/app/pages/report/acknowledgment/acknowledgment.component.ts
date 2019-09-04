@@ -33,7 +33,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
       });
 
       setTimeout(() => {
-        const title: HTMLElement = document.querySelector("#title-thanks");
+        const title: HTMLElement = document.querySelector('#title-thanks');
 
         if (title) {
           title.focus();

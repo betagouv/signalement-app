@@ -60,8 +60,6 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    console.log("onInit");
-
     this.scrollNotificationState = 'hide';
     setTimeout(() => {
       this.checkScrollNotification();
@@ -69,7 +67,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
 
     setTimeout(() => {
-      const allTitles: Array<HTMLElement> = Array.from(document.querySelectorAll(".problemTitle"));
+      const allTitles: Array<HTMLElement> = Array.from(document.querySelectorAll('.problemTitle'));
       const lastTitle = allTitles[allTitles.length - 1];
 
       if (lastTitle) {

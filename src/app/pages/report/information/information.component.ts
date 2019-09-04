@@ -66,7 +66,7 @@ export class InformationComponent implements OnInit, OnDestroy {
       }
     });
 
-    const firstElement: HTMLElement = document.querySelector("#titleInformation");
+    const firstElement: HTMLElement = document.querySelector('#titleInformation');
     firstElement.focus();
     firstElement.blur();
   }

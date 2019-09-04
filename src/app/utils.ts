@@ -4,21 +4,21 @@ export default class Utils {
   }
 
   static scrollToElement($element): void {
-    $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   }
 
   static focusAndBlurOnTop() {
     setTimeout(() => {
-      const firstElement = document.querySelector("#banner") as HTMLElement;
+      const firstElement = document.querySelector('#banner') as HTMLElement;
       if (firstElement) {
         firstElement.focus();
         firstElement.blur();
       }
-    })
+    });
   }
   static focusAndBlurOnBackButton() {
     setTimeout(() => {
-      const backButton: HTMLElement = document.querySelector("#back-button");
+      const backButton: HTMLElement = document.querySelector('#back-button');
 
       if (backButton) {
         backButton.focus();
