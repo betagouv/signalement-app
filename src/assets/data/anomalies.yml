@@ -880,13 +880,13 @@ list:
     categoryId: VEH
     path: pratique-d-hygiene
     description: vente et réparation de voiture, location, taxi, auto-école ..
-    rank: 127
+    rank: 8
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
     # location de voiture, leasing, velib
       - title: Location
-        example: 'Exemple : location de voiture, leasing, vélo libre-service'
+        example: 'Exemple : location de voiture, leasing, velib, autolib..'
         subcategories:
           - title: Publicité
           - title: Prix / Paiement
