@@ -93,7 +93,7 @@
           </p>
 
           <div class="notification info mt-4">
-            Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro Siret de l'établissement</span>.
+            Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" tabindex="0">rechercher avec le numéro Siret de l'établissement</span>.
           </div>
         </div>
 

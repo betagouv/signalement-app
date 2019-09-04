@@ -89,6 +89,9 @@ export class CompanyComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo(0, 0);
     }
+
+    Utils.focusAndBlurOnBackButton();
+
   }
 
   initSearchForm() {
