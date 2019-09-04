@@ -1,4 +1,4 @@
-![en-construction](
+![en-construction](/assets/blog/2019/09/08/mise-a-jour-aout/patch-note-aout.jpg)
 
 # Note de mises à jour - Août 2019
 
@@ -13,6 +13,8 @@ D’abord, la page d’accueil de SignalConso fait peau neuve ! De nombreux cons
 
 Voilà qui devrait clarifier notre action vis-à-vis des consommateurs ! Il ne vous reste plus qu’à appuyer sur le bouton “Je signale” pour commencer à remplir votre signalement. 
 
+![page-accueil](/assets/blog/2019/09/08/mise-a-jour-aout/page-accueil.PNG)
+
 Deuxième nouveauté : **la refonte du système de traitement des signalements**. Elle était nécessaire pour remplir la promesse initiale de SignalConso. 
 Par le passé, la durée pendant laquelle un professionnel pouvait consulter ou même répondre à un signalement après son dépôt n’était pas limitée. Pour les inviter à agir vite, nous avons non seulement intensifier nos relances, mais nous avons fixé des “paliers”. Dorénavant, après un certain temps, si le professionnel n’a pas consulté le signalement, ce dernier sera **considéré comme non consulté**. Il sera traité comme tel par la répression des fraudes, et vous serez averti que le professionnel n’a pas consulté votre signalement. De la même manière, si le professionnel n’a pas répondu au signalement, celui ci sera **considéré comme ignoré**, et sera là encore traité comme tel.
 
@@ -20,7 +22,7 @@ Vous retrouverez le reste des nouveautés du mois d’août à la fin de cet art
 
 **Pour septembre, accrochez-vous bien, les nouvelles catégories arrivent !** Voici un petit aperçu (sujet à modifications) :
 
-![nouvelles-categories](
+![nouvelles-categories](/assets/blog/2019/09/08/mise-a-jour-aout/categories.PNG)
 
 **Liste complète des ajouts et modifications apportés en Août 2019 :**
 
