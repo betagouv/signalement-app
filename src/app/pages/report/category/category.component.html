@@ -3,10 +3,10 @@
       <h1 class="rounded">
         Signaler un problème à la répression&nbsp;des&nbsp;fraudes<br> en toute transparence avec le commerçant
       </h1>
-      <h4>
+      <h4 class="pb-2">
         en <strong class="text-uppercase">Centre-Val de Loire</strong>, <strong class="text-uppercase">Auvergne-Rhône-Alpes</strong> et&nbsp;<strong class="text-uppercase">Occitanie</strong>
       </h4>
-      <img src="/assets/images/ARA-CVL-OCC.svg" style="width: 145px" alt="Carte de la France" />
+      <img class="d-none d-md-inline" src="/assets/images/ARA-CVL-OCC.svg" style="width: 145px" alt="Carte de la France" />
     </div>
   </div>
 
@@ -18,35 +18,35 @@
       <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
     </alert>
 
-    <section class="section section-lighter-grey position-relative">
-        <div class="container mt-4">
-            <div class="row pb-4 ">
+    <section class="section section-lighter-grey position-relative pt-0 pt-sm-1 pt-md-4 pb-0 pb-sm-1 pb-md-4">
+        <div class="container">
+            <div class="row pb-0 pb-md-4">
               <div class="col-12 col-md-3 text-center">
-                <img src="/assets/images/formulaire.png" alt="formulaire" width="110px" style="vertical-align: middle"/>
-                <p class="legend">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/formulaire.png" alt="formulaire" width="110px"/>
+                <p class="legend pt-3">
                   <span class="d-inline d-md-none">1.</span> Déposez un signalement
                 </p>
               </div>
               <div class="col-md-1 text-center mt-4 d-none d-md-block">
-                <img src="/assets/images/arrow-right.png" alt="flêche" width="48"/>
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/arrow-right.png" alt="flêche" width="48"/>
               </div>
               <div class="col-12 col-md-4 text-center">
-                <img src="/assets/images/magasin.png" alt="magasin" width="110px" style="vertical-align: middle"/>
-                <p class="legend">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/magasin.png" alt="magasin" width="110px"/>
+                <p class="legend pt-0">
                     <span class="d-inline d-md-none">2.</span> Le commerçant est prévenu et peut se corriger
                 </p>
               </div>
               <div class="col-md-1 text-center mt-4 d-none d-md-block">
-                <img src="/assets/images/arrow-right.png" alt="flêche" width="48"/>
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/arrow-right.png" alt="flêche" width="48"/>
               </div>
               <div class="col-12 col-md-3 text-center">
-                <img src="/assets/images/jumelles.png" alt="jumelles" width="110px" style="vertical-align: middle"/>
-                <p class="legend">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/jumelles.png" alt="jumelles" width="110px"/>
+                <p class="legend pt-0">
                     <span class="d-inline d-md-none">3.</span> La répression des fraudes est alertée
                 </p>
               </div>
           </div>
-          <div class="row">
+          <div class="row d-none d-md-block pb-0 pb-sm-4">
             <div class="col-12 text-center">
               <button type="button" class="btn btn-primary btn-lg cta-btn" (click)="scrollToElement(categoryList)">&nbsp;&nbsp;Je signale&nbsp;&nbsp;</button>
             </div>
@@ -54,7 +54,7 @@
         </div>
     </section>
 
-    <section #categoryList class="section section-lightest-grey position-relative">
+    <section #categoryList class="section section-lightest-grey position-relative pt-3">
 
       <div class="container">
         <h3 class="text-center sous-titre">Quel est le problème ?</h3>
