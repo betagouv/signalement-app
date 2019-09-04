@@ -4,6 +4,7 @@ import { HeaderComponent } from './header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppRoleDirective } from '../../directives/app-role.directive';
+import { AppPermissionDirective } from '../../directives/app-permission.directive';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -14,6 +15,7 @@ describe('HeaderComponent', () => {
       declarations: [
         HeaderComponent,
         AppRoleDirective,
+        AppPermissionDirective,
       ],
       imports: [
         HttpClientModule,

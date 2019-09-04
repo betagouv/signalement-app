@@ -9,8 +9,9 @@ import { Consumer } from '../model/Consumer';
 import { Company } from '../model/Company';
 import { Subcategory } from '../model/Anomaly';
 import { UploadedFile } from '../model/UploadedFile';
-import { Department, Region, ReportFilter } from '../model/ReportFilter';
+import { ReportFilter } from '../model/ReportFilter';
 import { of } from 'rxjs';
+import { Department, Region } from '../model/Region';
 
 describe('ReportService', () => {
 

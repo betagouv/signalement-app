@@ -8,8 +8,9 @@ import { PaginatedData } from '../model/PaginatedData';
 import { map, mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
-import { Region, ReportFilter } from '../model/ReportFilter';
+import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
+import { Region } from '../model/Region';
 
 @Injectable({
   providedIn: 'root',
@@ -132,10 +133,11 @@ export class ReportService {
   }
 
   private report2reportApi(report: Report) {
-    const reportApi = {
+    return {
       id: report.id,
       category: report.category,
-      subcategories: !report.subcategories ? [] : report.subcategories.map(subcategory => subcategory.title ? subcategory.title : subcategory),
+      subcategories: !report.subcategories ? [] : report.subcategories
+        .map(subcategory => subcategory.title ? subcategory.title : subcategory),
       companyName: report.company.name,
       companyAddress: this.company2adresseApi(report.company),
       companyPostalCode: report.company.postalCode,
@@ -154,7 +156,6 @@ export class ReportService {
           };
         })
     };
-    return reportApi;
   }
 
   company2adresseApi(company: Company) {
