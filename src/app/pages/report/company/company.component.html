@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-12 text-right">
           <!-- TODO a11y span -> btn -->
-          <span class="link pointer" (click)="changeCompany()" aria-label="Modifier professionnel">Modifier</span>&nbsp;<i class="material-icons md-18 edit" aria-hidden="true">edit</i>
+          <span class="link pointer" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier professionnel" tabindex="0">Modifier</span>&nbsp;<i class="material-icons md-18 edit" aria-hidden="true">edit</i>
         </div>
       </div>
       <hr />
