@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Title } from '@angular/platform-browser';
+import Utils from '../../utils';
 
 @Component({
   selector: 'app-stats',
@@ -39,6 +40,8 @@ export class StatsComponent implements OnInit {
       this.user = user;
     });
     this.innerWidth = window.innerWidth;
+
+    Utils.focusAndBlurOnTop();
 
   }
 
