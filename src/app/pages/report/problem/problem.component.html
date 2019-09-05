@@ -17,6 +17,7 @@
         [subcategoryName]="anomaly?.category"
         [subcategories]="anomaly?.subcategories"
         [subcategoriesSelected]="report?.subcategories"
+        [firstLevel]="true"
         (select)="onSelectSubcategories($event)">
       </app-subcategory>
     </ng-template>

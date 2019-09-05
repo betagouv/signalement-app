@@ -8,7 +8,7 @@
 
   <h4 tabindex="-1" class="text-center mb-4 font-weight-bold problemTitle" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
 
-  <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+  <form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
     <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
       <div class="row pb-2 pt-2">
         <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
@@ -33,9 +33,6 @@
                  [subcategoryName]="subcategorySelected.title"
                  [subcategoryDescription]="subcategorySelected.description"
                  [subcategoriesSelected]="subcategoriesSelected"
+                 [firstLevel]="false"
                  (select)="onSelectSubSubcategories($event)">
 </app-subcategory>
-<div [@scrollAnimation]="scrollNotificationState" class="scrollNotification pointer" *ngIf="!hasSubSubcategory()" (click)="scrollToElement()">
-  <span class="ml-2 mr-2">Poursuivre</span>
-  <img alt="Icône flêche descendante" src="/assets/images/icon_arrow_down.png">
-</div>

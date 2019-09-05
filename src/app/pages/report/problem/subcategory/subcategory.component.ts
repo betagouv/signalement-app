@@ -2,7 +2,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Inject,
   Input,
   OnChanges,
@@ -14,8 +13,6 @@ import {
 } from '@angular/core';
 import { Subcategory } from '../../../../model/Anomaly';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { isPlatformBrowser } from '@angular/common';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 
 declare var jQuery: any;
 
@@ -23,18 +20,6 @@ declare var jQuery: any;
   selector: 'app-subcategory',
   templateUrl: './subcategory.component.html',
   styleUrls: ['./subcategory.component.scss'],
-  animations: [
-    trigger('scrollAnimation', [
-      state('show', style({
-        opacity: 1
-      })),
-      state('hide',   style({
-        opacity: 0,
-      })),
-      transition('show => hide', animate('700ms ease-out')),
-      transition('hide => show', animate('700ms ease-in'))
-    ])
-  ]
 })
 export class SubcategoryComponent implements OnInit, OnChanges {
 
@@ -43,6 +28,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   @Input() subcategoriesTitle: string;
   @Input() subcategoryDescription: string;
   @Input() subcategoryName: string;
+  @Input() firstLevel: boolean;
 
   subcategoryForm: FormGroup;
   subcategoryTitleCtrl: FormControl;
@@ -51,7 +37,6 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   @Output() select = new EventEmitter<Subcategory[]>();
 
   showErrors: boolean;
-  scrollNotificationState: string;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -60,35 +45,24 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    this.scrollNotificationState = 'hide';
-    setTimeout(() => {
-      this.checkScrollNotification();
-    }, 2000);
 
+    if (this.firstLevel) {
+      setTimeout(() => {
+        const allForms: Array<HTMLElement> = Array.from(document.querySelectorAll('.subForm'));
+        const lastForm = allForms[allForms.length - 1];
 
-    setTimeout(() => {
-      const allTitles: Array<HTMLElement> = Array.from(document.querySelectorAll('.problemTitle'));
-      const lastTitle = allTitles[allTitles.length - 1];
+        if (lastForm) {
+          const firstInput: HTMLElement = lastForm.querySelector('input:first-child');
 
-      if (lastTitle) {
-        lastTitle.focus();
-        lastTitle.blur();
-      }
+          if (firstInput) {
+            firstInput.focus();
+          }
+        }
 
-    });
+      }, 100);
 
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  checkScrollNotification() {
-    if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
-      const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      if (rect.top > 1 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
-        this.scrollNotificationState = 'show';
-      } else {
-        this.scrollNotificationState = 'hide';
-      }
     }
+
   }
 
   scrollToElement() {
@@ -96,7 +70,6 @@ export class SubcategoryComponent implements OnInit, OnChanges {
       scrollTop: this.elementRef.nativeElement.offsetTop
     }, 1000);
 
-    this.scrollNotificationState = 'hide';
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -119,8 +92,23 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   }
 
   selectSubcategory(subcategory: Subcategory) {
+
     this.subcategorySelected = subcategory;
     this.subcategoriesSelected = [];
+
+    setTimeout(() => {
+      const allForms: Array<HTMLElement> = Array.from(document.querySelectorAll('.subForm'));
+      const lastForm = allForms[allForms.length - 1];
+
+      if (lastForm) {
+        const firstInput: HTMLElement = lastForm.querySelector('input:first-child');
+
+        if (firstInput) {
+          this.scrollToElement();
+        }
+      }
+
+    }, 100);
   }
 
   submitSubcategoryForm() {
@@ -141,7 +129,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
   onSelectSubSubcategories(subSubcategories: Subcategory[]) {
     this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value), ...subSubcategories]);
-  }
 
+  }
 
 }
