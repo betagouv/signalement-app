@@ -26,7 +26,7 @@ export class ReportRouterService {
               private reportStorageService: ReportStorageService,
               private router: Router) {
 
-    this.reportStorageService.reportInProgess.subscribe(report => {
+    this.reportStorageService.retrieveReportInProgressFromStorage().subscribe(report => {
       this.report = report;
     });
 

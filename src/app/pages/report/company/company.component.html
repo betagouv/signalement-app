@@ -17,24 +17,25 @@
       </div>
       <div class="row">
         <div class="col-12 text-right">
-          <span class="link pointer" (click)="changeCompany()">Modifier</span>&nbsp;<i class="material-icons md-18 edit" alt="Icône crayon" title="bouton modifier le professionnel">edit</i>
+          <!-- TODO a11y span -> btn -->
+          <span class="link pointer" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier professionnel" tabindex="0">Modifier</span>&nbsp;<i class="material-icons md-18 edit" aria-hidden="true">edit</i>
         </div>
       </div>
       <hr />
       <button type="submit" class="btn btn-lg btn-primary">
-        <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
+        <i class="material-icons md-24" aria-hidden="true">play_arrow</i>
         Étape suivante : s'identifier
       </button>
     </form>
 
     <ng-template #noCompany>
 
-      <nav class="nav nav-tabs nav-justified">
-        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': !bySiret}">Recherche par nom</a>
-        <a class="nav-item nav-link pointer" (click)="changeNavTab()" [ngClass]="{'active': bySiret}">Recherche par Siret</a>
+      <nav class="nav nav-tabs nav-justified" role="tablist">
+        <a id="firstTab" nga11y-focus class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
+        <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par Siret</a>
       </nav>
 
-      <ng-container *ngIf="!bySiret; else searchBySiret">
+      <ng-container *ngIf="!bySiret; else searchBySiret" role="tabpanel">
 
         <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
 
@@ -67,7 +68,7 @@
           <hr />
           <div class="my-5">
             <button type="submit" class="btn btn-lg btn-primary" id="submitSearchForm">
-              <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
+              <i class="material-icons md-24" aria-hidden="true">search</i>
               Rechercher
             </button>
           </div>
@@ -80,7 +81,7 @@
             Veuillez sélectionner un établissement dans la liste ci-dessous :
           </p>
 
-          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)">
+          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)" (keydown.enter)="selectCompanyFromResults(company)" tabindex="0">
             <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
             <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
             <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
@@ -92,7 +93,7 @@
           </p>
 
           <div class="notification info mt-4">
-            Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro Siret de l'établissement</span>.
+            Si l'établissement ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" tabindex="0">rechercher avec le numéro Siret de l'établissement</span>.
           </div>
         </div>
 
@@ -111,7 +112,7 @@
         </div>
       </ng-container>
 
-      <ng-template #searchBySiret>
+      <ng-template #searchBySiret role="tabpanel">
 
         <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm" *ngIf="searchBySiretForm">
 
@@ -164,16 +165,16 @@
                 <div class="collapse" id="collapseNoDoc">
                   Faites une recherche en ligne sur :
                   <ul>
-                    <li><a href="https://www.societe.com" target="_blank">https://www.societe.com</a></li>
-                    <li><a href="https://www.pagesjaunes.fr" target="_blank">https://www.pagesjaunes.fr</a></li>
-                    <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr">https://www.infogreffe.fr</a></li>
+                    <li><a href="https://www.societe.com" target="_blank" title="societe.com (nouvelle fenêtre)">https://www.societe.com</a></li>
+                    <li><a href="https://www.pagesjaunes.fr" target="_blank" title="pages jaunes (nouvelle fenêtre)">https://www.pagesjaunes.fr</a></li>
+                    <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr" title="infogreffe (nouvelle fenêtre)">https://www.infogreffe.fr</a></li>
                   </ul>
                 </div>
               </li>
               <li>
                 <a data-toggle="collapse" href="#collapseNotFound">Vous n’avez pas trouvé le numéro SIRET ?</a>
                 <div class="collapse" id="collapseNotFound">
-                  Envoyez-nous un email à <a href="mailto:contact@signalconso.beta.gouv.fr">contact@signalconso.beta.gouv.fr</a> afin de nous indiquer l'établissement pour que nous puissions vous aider à le retrouver.
+                  Envoyez-nous un email à <a href="mailto:contact@signalconso.beta.gouv.fr" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a> afin de nous indiquer l'établissement pour que nous puissions vous aider à le retrouver.
                 </div>
               </li>
             </ul>
@@ -197,7 +198,7 @@
           <hr />
           <div class="my-5">
             <button type="submit" class="btn btn-lg btn-primary" id="submitSiretForm">
-              <i class="material-icons md-24" alt="Icône loupe" title="bouton recherche de professionnel">search</i>
+              <i class="material-icons md-24" aria-hidden="true">search</i>
               Rechercher
             </button>
           </div>
@@ -210,7 +211,7 @@
             Veuillez cliquer sur l'établissement ci-dessous s'il correspond bien à l'établissement recherché :
           </p>
 
-          <p class="company" (click)="selectCompanyFromResults(companyBySiret)">
+          <p class="company" (click)="selectCompanyFromResults(companyBySiret)" (keydown.enter)="selectCompanyFromResults(companyBySiret)" tabindex="0">
             <strong *ngIf="companyBySiret.line1">{{companyBySiret.line1}}<br /></strong>
             <strong *ngIf="companyBySiret.line2">{{companyBySiret.line2}}<br /></strong>
             <span *ngIf="companyBySiret.activityLabel">{{companyBySiret.activityLabel}}<br /></span>

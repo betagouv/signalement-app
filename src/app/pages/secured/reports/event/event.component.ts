@@ -85,9 +85,6 @@ export class EventComponent implements OnInit {
       detail: this.detailCtrl
     });
 
-    // Fix pour Safari/IE 11 (voir fonction fixDefaultSelectedOpionOnSafariAndIE)
-    //this.eventForm.controls.action.setValue("-1");
-
   }
 
   isStatusProFinal(status: string) {
@@ -97,18 +94,6 @@ export class EventComponent implements OnInit {
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
   }
-
-  // Fix pour Safari/IE 11 : le 1er élément du select n'a pas d'input action
-  // fixDefaultSelectedOpionOnSafariAndIE(eventToCreate) {
-  //   if (eventToCreate.action === "-1") {
-  //     if (this.user && this.user.role === Roles.DGCCRF) {
-  //       eventToCreate.action = this.actionAgents && this.actionAgents.length ? this.actionAgents[0] : undefined;
-  //     }
-  //     else if (this.user && this.user.role == Roles.Admin) {
-  //       eventToCreate.action = this.actionPros && this.actionPros.length ? this.actionPros[0] : undefined;
-  //     }
-  //   }
-  // }
 
   submitEventForm() {
     if (!this.eventForm.valid) {
@@ -125,8 +110,6 @@ export class EventComponent implements OnInit {
       if (this.actionCtrl.value.withResult) {
         eventToCreate.resultAction = this.resultActionCtrl.value;
       }
-
-      // this.fixDefaultSelectedOpionOnSafariAndIE(eventToCreate);
 
       this.eventService.createEvent(eventToCreate).subscribe(
         event => {

@@ -2,7 +2,7 @@
   <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
   <section class="section section-white">
     <div class="container max-width">
-      <p class="mx-auto mb-4 text-left title" [innerHTML]="informationToDisplay?.title"></p>
+      <p tabindex="-1" id="titleInformation" class="mx-auto mb-4 text-left title" [innerHTML]="informationToDisplay?.title"></p>
       <p class="mb-4 text-left" [innerHTML]="informationToDisplay?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
       <p class="mb-5" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
 
@@ -19,11 +19,11 @@
 
         <div class="text-center" *ngIf="!ratingSuccess; else ratingSuccessTpl">
           <p class="title">Est-ce que cette information vous a été utile ?</p>
-          <button type="button" class="btn btn-outline-primary mr-3" (click)="rateInformation(true)">
-            <i class="material-icons md-24" alt="Icône pouce levé" title="information utile">thumb_up</i>
+          <button type="button" class="btn btn-outline-primary mr-3" (click)="rateInformation(true)" title="oui">
+            <i class="material-icons md-24" aria-hidden="true">thumb_up</i>
           </button>
-          <button type="button" class="btn btn-outline-primary" (click)="rateInformation(false)">
-            <i class="material-icons md-24" alt="Icône pouce baissé" title="information inutile">thumb_down</i>
+          <button type="button" class="btn btn-outline-primary" (click)="rateInformation(false)" title="non">
+            <i class="material-icons md-24" aria-hidden="true">thumb_down</i>
           </button>
         </div>
         <div class="notification error" *ngIf="loadingError">

@@ -1,4 +1,4 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-lighter-grey" role="region">
   <div class="container">
     <div class="row">
       <div class="col-2 col-sm-1 text-right">
@@ -198,18 +198,18 @@
                   <div class="form__group">
                     <div class="row">
                       <div class="col-12 col-sm-6">
-                        <label> Prénom <span class="error">*</span></label>
-                        <input type="text" formControlName="firstName">
+                        <label for="firstName"> Prénom <span class="error">*</span></label>
+                        <input type="text" formControlName="firstName" id="firstName">
                       </div>
                       <div class="col-12 col-sm-6">
-                        <label>Nom <span class="error">*</span></label>
-                        <input type="text" formControlName="lastName">
+                        <label for="lastName">Nom <span class="error">*</span></label>
+                        <input type="text" formControlName="lastName" id="lastName">
                       </div>
                     </div>
                   </div>
                   <div class="form__group">
-                    <label>Email <span class="error">*</span></label>
-                    <input type="email" formControlName="email"/>
+                    <label for="email">Email <span class="error">*</span></label>
+                    <input type="email" formControlName="email" id="email"/>
                   </div>
                   <div class="form__group">
                     <div class="row">
@@ -358,7 +358,7 @@
                 Une erreur technique s'est produite<br />
               </div>
               <p class="text-center mt-3 mb-4 text-primary">
-                <i class="material-icons md-18" alt="Icône d'avertissement" title="avertissement">warning</i>&nbsp;
+                <i class="material-icons md-18" aria-hidden="true">warning</i>&nbsp;
                 Votre réponse sera envoyée automatiquement par mail au consommateur ainsi qu'à la DGCCRF.
               </p>
 

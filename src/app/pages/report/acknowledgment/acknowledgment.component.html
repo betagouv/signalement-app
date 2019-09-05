@@ -1,7 +1,7 @@
 <main role="main">
   <section class="section-small section-lighter-grey">
     <div class="container">
-      <h1 class="text-center">Merci pour votre signalement</h1>
+      <h1 id="title-thanks" class="text-center" tabindex="-1">Merci pour votre signalement</h1>
     </div>
   </section>
   <section class="section section-white" *ngIf="report">
@@ -16,7 +16,7 @@
           Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
         </p>
         <p>
-          En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank">contact@signalconso.beta.gouv.fr</a>
+          En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
         </p>
       </div>
       <div class="mt-4" *ngIf="!report.contactAgreement">
@@ -29,7 +29,7 @@
           Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
         </p>
         <p>
-          En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank">contact@signalconso.beta.gouv.fr</a>
+          En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
         </p>
       </div>
         <hr />
