@@ -1,8 +1,8 @@
-<section class="section-small section-primary">
+<section class="section-small section-primary" aria-label="Avertissement légal">
   <div class="container">
     <div class="row">
       <div class="col-12 col-sm-2 icon">
-        <i class="material-icons md-48 mr-2" alt="Icône attention" title="attention">error</i>
+        <i class="material-icons md-48 mr-2" aria-hidden="true">error</i>
       </div>
       <div class="col-12 col-sm-10">
         <h5>
@@ -20,30 +20,30 @@
     <div class="footer__logo col-12 col-sm-6  text-center">
       <ul class="footer__links">
         <li>
-          <h2 class="d-none d-sm-block mb-0">SignalConso.beta.gouv.fr</h2>
+          <h3 class="d-none d-sm-block mb-0">SignalConso.beta.gouv.fr</h3>
           <h4 class="d-block d-sm-none">SignalConso.beta.gouv.fr</h4>
         </li>
         <li class="pt-0">
-          <a href="https://www.economie.gouv.fr/dgccrf" target="_blank">Un service proposé par la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr></a>
+          <a href="https://www.economie.gouv.fr/dgccrf" target="_blank" title="Un service proposé par la Direction Général de la Concurrence, Consommation et Répression des Fraudes (nouvelle fenêtre)">Un service proposé par la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr></a>
         </li>
       </ul>
       <ul class="footer__social">
         <li>
-          <a href="https://twitter.com/SignalConso" target="_blank" title="Twitter"><svg class="icon icon-tw"><use xlink:href="#twitter"></use></svg></a>
+          <a href="https://twitter.com/SignalConso" target="_blank" title="Retrouvez-nous sur Twitter (nouvelle fenêtre)"><svg class="icon icon-tw"><use xlink:href="#twitter"></use></svg></a>
         </li>
         <li>
-          <a href="https://www.facebook.com/SignalConso/" target="_blank" title="Facebook"><svg class="icon icon-fb"><use xlink:href="#facebook"></use></svg></a>
+          <a href="https://www.facebook.com/SignalConso/" target="_blank" title="Retrouvez-nous sur Facebook (nouvelle fenêtre)"><svg class="icon icon-fb"><use xlink:href="#facebook"></use></svg></a>
         </li>
-        <li><a href="mailto:contact@signalconso.beta.gouv.fr" target="_blank" title="Nous écrire un mail"><svg class="icon icon-mail"><use xlink:href="#envelope"></use></svg></a></li>
+        <li><a href="mailto:contact@signalconso.beta.gouv.fr" target="_blank" title="Nous contacter (ouverture de la messagerie par défaut)" title="Nous contacter"><svg class="icon icon-mail"><use xlink:href="#envelope"></use></svg></a></li>
       </ul>
     </div>
     <div class="col-12 col-sm-6">
       <ul class="footer__links">
         <li>
-          <a href="https://beta.gouv.fr/suivi/" target="_blank">Suivi d'audience et vie privée</a>
+          <a href="https://beta.gouv.fr/suivi/" target="_blank" title="Suivi d'audience et vie privée (nouvelle fenêtre)">Suivi d'audience et vie privée</a>
         </li>
         <li>
-          <a href="/conditions-generales-utilisation/consommateur" target="_blank">Conditions générales d'utilisation</a>
+          <a routerLink="/conditions-generales-utilisation/consommateur" title="Conditions générales d'utilisation (nouvelle fenêtre)">Conditions générales d'utilisation</a>
         </li>
         <li>
           <a routerLink="/vous-êtes-un-professionnel">Vous êtes un professionnel&nbsp;?</a>
@@ -52,10 +52,13 @@
           <a routerLink="/dgccrf">Espace DGCCRF</a>
         </li>
         <li>
-          <a href="/stats">Statistiques</a>
+          <a routerLink="/stats">Statistiques</a>
         </li>
         <li>
-          <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank">
+          <a routerLink="/blog">Blog</a>
+        </li>
+        <li>
+          <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="Vous rencontrez un problème avec notre site ? Contactez-nous (ouverture de la messagerie par défaut).">
             Vous rencontrez un problème avec notre site ?
             <br class="d-sm-none"/>
             Contactez-nous !

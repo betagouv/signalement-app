@@ -246,7 +246,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   getReportCssClassNewReport(status: string) {
-    return status ? "mr-3" : "bold mr-3"
+    return status ? 'mr-3' : 'bold mr-3';
   }
 
   selectArea(area?: Region | Department) {
@@ -296,11 +296,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
       const nbWords = helper(str.split(' '), '', 0);
 
       const lines = strings.reduce((prev, curr, index) => index < nbWords
-        ? {...prev, line: prev.line + curr + " "}
-        : {...prev, rest: prev.rest + curr + " "}
-      , {line: "", rest: ""})
+        ? {...prev, line: prev.line + curr + ' '}
+        : {...prev, rest: prev.rest + curr + ' '}
+      , {line: '', rest: ''});
 
-      return { line: lines.line.trim(), rest: lines.rest.trim() }
+      return { line: lines.line.trim(), rest: lines.rest.trim() };
     }
 
     let firstLine = '';

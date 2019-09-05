@@ -1,4 +1,4 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-lighter-grey" role="region">
   <div class="container">
     <h1 class="text-center">
       Vous êtes un professionnel&#160;?
@@ -18,7 +18,7 @@
                 <img width="250px" src="/assets/images/image-pro.png" alt="Illustration relation SignalConso et marchand" />
               </div>
             </div>
-          </div>      
+          </div>
     </div>
   </section>
   <section class="section section-lightest-grey mb-5 pt-2">
@@ -26,10 +26,10 @@
 
       <p class="lead blue">Vous avez reçu un courrier de SignalConso car votre établissement a été signalé par un consommateur ?</p>
       <p>
-        Pour connaitre ce signalement, rendez-vous sur <a href="https://signalconso.beta.gouv.fr">https://signalconso.beta.gouv.fr</a>
+        Pour connaitre ce signalement, rendez-vous sur <a routerLink="/connexion">https://signalconso.beta.gouv.fr</a>
         avec votre code d’activation de 6 chiffres inscrit dans votre courrier SignalConso et cliquez sur le bouton
         <button type="button" class="btn-sm btn-outline-secondary" [routerLink]="['/activation']">
-          <i class="material-icons">lock</i> Espace professionnel
+          <i class="material-icons" aria-hidden="true">lock</i> Espace professionnel
         </button> en haut à droite de votre écran.
       </p>
       Lors de votre 1ère connexion, vous devez vous identifier avec :
@@ -47,7 +47,7 @@
       <p>
         Vous pouvez y accéder avec votre mot de passe en cliquant sur le bouton
         <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/connexion']">
-          Connectez-vous <i class="material-icons md-18" alt="Icône suite" title="Se connecter">keyboard_arrow_right</i>
+          Connectez-vous <i class="material-icons md-18" aria-hidden="true" title="Se connecter">keyboard_arrow_right</i>
         </button>
       </p>
       Vous pouvez consulter les signalements concernant votre établissement et le cas échéant :
@@ -60,11 +60,11 @@
 
       <p class="lead blue">Vous avez oublié votre mot de passe ?</p>
       <p>
-        Vous pouvez <a routerLink="/connexion/perte-mot-de-passe">demander un nouveau mot de passe</a> ou, en cas de difficultés, contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr">SignalConso</a>
+        Vous pouvez <a routerLink="/connexion/perte-mot-de-passe">demander un nouveau mot de passe</a> ou, en cas de difficultés, contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">SignalConso</a>
       </p>
 
       <hr>
-      
+
        <p class="lead blue">Mon établissement apparait déjà sur SignalConso, a-t-il déjà été signalé ?</p>
       <p>
         Afin de faciliter le dépôt du signalement par le consommateur, la base de données de l’ensemble des entreprises françaises a été intégrée à notre outil. <br/>
@@ -72,7 +72,7 @@
       </p>
 
       <hr>
-      
+
        <p class="lead blue">Est-ce que mon établissement va être contrôlé suite à un signalement ?</p>
       <p>
         En fonction de la gravité et de la fréquence des signalements, les enquêteurs de la DGCCRF pourront déclencher un contrôle. <br/>
@@ -80,7 +80,7 @@
       </p>
 
       <hr>
-      
+
        <p class="lead blue">Puis-je communiquer directement avec le consommateur à l’origine du signalement ?</p>
       <p>
         SignalConso laisse le choix au consommateur de transmettre, ou non, ses coordonnées au professionnel signalé. <br/>
@@ -92,9 +92,9 @@
        <p class="lead blue">Dois-je apporter les détails des actions correctives mises en œuvre pour rectifier le problème ?</p>
       <p>
         Les retours des professionnels sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF. <br/>
-        Nous aimerions donc connaitre les mesures correctives ou préventives que vous avez adoptées, par l'envoi d'un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank">contact@signalconso.beta.gouv.fr</a>.
+        Nous aimerions donc connaitre les mesures correctives ou préventives que vous avez adoptées, par l'envoi d'un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>.
       </p>
-      
+
     </div>
   </section>
 </main>

@@ -22,7 +22,6 @@ describe('CompanyComponent', () => {
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
   let reportStorageService: ReportStorageService;
-  let displayLiveChatSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -52,7 +51,6 @@ describe('CompanyComponent', () => {
 
     fixture = TestBed.createComponent(CompanyComponent);
     component = fixture.componentInstance;
-    displayLiveChatSpy = spyOn(component, 'displayLiveChat').and.callFake(() => {});
     fixture.detectChanges();
   });
 
@@ -70,10 +68,6 @@ describe('CompanyComponent', () => {
     expect(component.searchBySiretForm.controls['siret']).toBeDefined();
     expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
     expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
-  });
-
-  it('should display live chat', () => {
-    expect(displayLiveChatSpy).toHaveBeenCalled();
   });
 
   it('should enable to display the searchBySiret form whith navTabs', () => {

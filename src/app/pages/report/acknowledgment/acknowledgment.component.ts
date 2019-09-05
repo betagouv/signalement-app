@@ -22,7 +22,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Acknowledgment;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => {
         if (report) {
@@ -30,6 +30,16 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
         } else {
           this.reportRouterService.routeToFirstStep();
         }
+      });
+
+      setTimeout(() => {
+        const title: HTMLElement = document.querySelector('#title-thanks');
+
+        if (title) {
+          title.focus();
+          title.blur();
+        }
+
       });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { ActivatedRoute } from '@angular/router';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-cgu',
@@ -25,9 +26,9 @@ export class CguComponent implements OnInit {
         this.isCguConso = url[1].toString() === 'consommateur';
       }
 
+      Utils.focusAndBlurOnTop();
+
     });
   }
-
-
 
 }
