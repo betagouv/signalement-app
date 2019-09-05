@@ -53,6 +53,10 @@
         "title": "Activation du compte - SignalConso",
         "description": "Activez votre compte pour accéder à votre espace personnel sur SignalConso"
       }
+    },
+    "subscriptions": {
+      "title": "Abonnements - SignalConso",
+      "description": "Abonnez-vous pour recevoir les signalements qui vous concernent"
     }
   }
 }

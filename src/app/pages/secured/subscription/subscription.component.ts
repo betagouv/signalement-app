@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Departments, Regions } from '../../../model/Region';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { Subscription } from '../../../model/Subscription';
+import pages from '../../../../assets/data/pages.json';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-subscription',
@@ -22,9 +24,14 @@ export class SubscriptionComponent implements OnInit {
   loadingError: boolean;
 
   constructor(public formBuilder: FormBuilder,
+              private titleService: Title,
+              private meta: Meta,
               private subscriptionService: SubscriptionService) { }
 
   ngOnInit() {
+    this.titleService.setTitle(pages.secured.subscriptions.title);
+    this.meta.updateTag({ name: 'description', content: pages.secured.subscriptions.description });
+
     this.loading = true;
     this.subscriptionService.getSubscriptions().subscribe(
       subscriptions => {
