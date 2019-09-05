@@ -95,6 +95,16 @@ export class EventComponent implements OnInit {
     return this.showErrors && formControl.errors;
   }
 
+  getTypeOfEvent(label) {
+    if (this.actionPros.find(a => a === label)) {
+      return 'PRO';
+    } else if (this.actionConsos.find(a => a === label)) {
+      return 'CONSO';
+    } else {
+      return 'DGCCRF';
+    }
+  }
+
   submitEventForm() {
     if (!this.eventForm.valid) {
       this.showErrors = true;
@@ -103,7 +113,7 @@ export class EventComponent implements OnInit {
       this.loadingError = false;
       const eventToCreate = Object.assign(new ReportEvent(), {
         reportId: this.reportId,
-        eventType: this.actionPros.find(a => a === this.actionCtrl.value) ? 'PRO' : 'CONSO',
+        eventType:  this.getTypeOfEvent(this.actionCtrl.value),
         action: this.actionCtrl.value,
         detail: this.detailCtrl.value
       });
