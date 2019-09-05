@@ -47,21 +47,25 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   ngOnInit() {
 
     if (this.firstLevel) {
-      setTimeout(() => {
-        const allForms: Array<HTMLElement> = Array.from(document.querySelectorAll('.subForm'));
-        const lastForm = allForms[allForms.length - 1];
-
-        if (lastForm) {
-          const firstInput: HTMLElement = lastForm.querySelector('input:first-child');
-
-          if (firstInput) {
-            firstInput.focus();
-          }
-        }
-
-      }, 100);
-
+      this.manageFirstInput((firstInput) => firstInput.focus());
     }
+
+  }
+
+  manageFirstInput(callback) {
+    setTimeout(() => {
+      const allForms: Array<HTMLElement> = Array.from(document.querySelectorAll('.subForm'));
+      const lastForm = allForms[allForms.length - 1];
+
+      if (lastForm) {
+        const firstInput: HTMLElement = lastForm.querySelector('input:first-child');
+
+        if (firstInput) {
+          callback(firstInput);
+        }
+      }
+
+    }, 100);
 
   }
 
@@ -96,19 +100,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
     this.subcategorySelected = subcategory;
     this.subcategoriesSelected = [];
 
-    setTimeout(() => {
-      const allForms: Array<HTMLElement> = Array.from(document.querySelectorAll('.subForm'));
-      const lastForm = allForms[allForms.length - 1];
-
-      if (lastForm) {
-        const firstInput: HTMLElement = lastForm.querySelector('input:first-child');
-
-        if (firstInput) {
-          this.scrollToElement();
-        }
-      }
-
-    }, 100);
+    this.manageFirstInput(() => this.scrollToElement());
   }
 
   submitSubcategoryForm() {
