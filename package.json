@@ -15,7 +15,7 @@
     "build:browser:prod": "ng build --prod",
     "build:prod": "npm run build:server:prod && npm run build:browser:prod",
     "heroku-postbuild": "echo Skip build on Heroku",
-    "generate-json-files": "node src/generate-json-files.ts",
+    "generate-json-files": "node src/scripts/generate-json-files.ts",
     "generate-blog-metadata" : "node src/scripts/generate-blog-metadata.js"
   },
   "private": true,
