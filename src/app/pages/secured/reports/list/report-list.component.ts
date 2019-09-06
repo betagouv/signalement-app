@@ -6,7 +6,7 @@ import { FileUploaderService } from '../../../../services/file-uploader.service'
 import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
-import { Department, Region, Regions, ReportFilter } from '../../../../model/ReportFilter';
+import { ReportFilter } from '../../../../model/ReportFilter';
 import { combineLatest, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
@@ -20,6 +20,7 @@ import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
+import { Department, Region, Regions } from '../../../../model/Region';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
