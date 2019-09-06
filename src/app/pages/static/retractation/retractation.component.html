@@ -1,4 +1,4 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-lighter-grey" role="region">
   <div class="container">
     <h1 class="text-center">
       Délai de rétractation
@@ -34,10 +34,10 @@
             </div>
             <div class="col-12 col-sm-5">
               <div class="form__group">
-                <label for="contractDateInput">
+                <label for="limitContractDateInput">
                   Date limite de rétractation
                 </label>
-                <input type="text" disabled
+                <input id="limitContractDateInput" type="text" disabled
                        [value]="retractationDeadline | date : 'EEEE d MMMM yyyy'"
                        placeholder="Date limite de rétractation"/>
               </div>

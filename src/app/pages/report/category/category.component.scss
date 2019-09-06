@@ -17,21 +17,29 @@
   padding-top: 1.5em;
   padding-bottom: 0;
 
+  h1 {
+    color: #26353f;
+    background-color: #fff;
+    padding: .5em 1em .6em;
+    display: inline-block;
+    font-size: 1.5rem !important;
+    margin-bottom: .6em;
+
+    @media #{$smaller-than-tablet} {
+      display: block;
+    }
+
+    @media #{$smaller-than-tablet} {
+      font-size: 1.2rem !important;
+    }
+  }
+
   h4 {
     margin-bottom: 0;
-  }
-}
 
-.banner h1 {
-  color: #26353f;
-  background-color: #fff;
-  padding: .5em 1em .6em;
-  display: inline-block;
-  font-size: 1.5rem !important;
-  margin-bottom: .6em;
-
-  @media #{$smaller-than-mobile} {
-    display: block;
+    @media #{$smaller-than-tablet} {
+      font-size: 1rem !important;
+    }
   }
 }
 
@@ -48,6 +56,10 @@
 
   @media #{$larger-than-tablet} {
     &:hover {
+      transform: scale(1.1);
+      border-color: $primary;
+    }
+    &:focus {
       transform: scale(1.1);
       border-color: $primary;
     }
@@ -146,6 +158,11 @@ p.internet-information {
   margin-bottom: 40px !important
 }
 
+button.button-outline:focus {
+  border: 1px solid $darker-grey;
+  color: $darker-grey;
+}
+
 p.legend {
   padding-top: 20px;
   font-size: 18px;
@@ -154,4 +171,9 @@ p.legend {
 
 button.cta-btn {
   font-size: 30px;
+}
+
+.icon-explanation {
+  vertical-align: middle;
+
 }

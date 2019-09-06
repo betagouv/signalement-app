@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Roles } from '../../model/AuthUser';
+import Utils from '../../utils';
 
 @Component({
   selector: 'app-login',
@@ -43,6 +44,8 @@ export class LoginComponent implements OnInit {
       }
 
     });
+
+    Utils.focusAndBlurOnTop();
   }
 
   initLoginForm() {

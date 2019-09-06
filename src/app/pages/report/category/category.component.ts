@@ -7,6 +7,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-category',
@@ -32,7 +33,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Category;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => this.report = report);
     this.showSecondaryCategories = false;
@@ -41,6 +42,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
+
+    Utils.focusAndBlurOnTop();
   }
 
   ngOnDestroy() {
@@ -65,9 +68,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
     }
   }
 
-  displaySecondaryCategories() {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.secondaryCategories);
-    this.showSecondaryCategories = true;
+  toggleSecondaryCategories() {
+    this.showSecondaryCategories = !this.showSecondaryCategories;
+    if (this.showSecondaryCategories) {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.secondaryCategories);
+    }
+
   }
 
   selectAnomaly(anomaly: Anomaly) {
@@ -89,6 +95,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   scrollToElement($element): void {
     console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 }

@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    const role = this.user.role
+    const role = this.user.role;
     this.authenticationService.logout();
     if (role === Roles.Pro) {
       this.router.navigate(['connexion']);

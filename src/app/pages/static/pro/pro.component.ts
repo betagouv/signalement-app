@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { Router } from '@angular/router';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-pro',
@@ -17,6 +18,8 @@ export class ProComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pages.pro.title);
     this.meta.updateTag({ name: 'description', content: pages.pro.description });
+
+    Utils.focusAndBlurOnTop();
   }
 
 }

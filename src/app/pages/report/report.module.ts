@@ -20,6 +20,7 @@ import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
+import { AutofocusDirective } from '../../directives/auto-focus.directive';
 
 defineLocale('fr', frLocale);
 
@@ -41,6 +42,7 @@ const routes: Routes = [];
     PrecedeByPipe,
     TruncatePipe,
     SubcategoryComponent,
+    AutofocusDirective
   ],
   entryComponents: [
     CategoryComponent,
@@ -65,6 +67,7 @@ const routes: Routes = [];
   ],
   exports: [
     RouterModule,
+    AutofocusDirective
   ]
 })
 export class ReportModule { }

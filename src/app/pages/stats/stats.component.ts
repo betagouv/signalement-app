@@ -5,6 +5,9 @@ import { Statistics } from '../../model/Statistics';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
+import pages from '../../../assets/data/pages.json';
+import { Title } from '@angular/platform-browser';
+import Utils from '../../utils';
 
 @Component({
   selector: 'app-stats',
@@ -16,25 +19,29 @@ export class StatsComponent implements OnInit {
   statistics: Statistics;
 
   byMonthsChartOption: EChartOption;
-  byCategoriesChartOption : EChartOption;
-  byRegionsChartOption : EChartOption;
+  byCategoriesChartOption: EChartOption;
+  byRegionsChartOption: EChartOption;
   loading: boolean;
 
   user: User;
   innerWidth: any;
 
-
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private statsService: StatsService,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle(pages.stats.title);
+
     this.loadStatistics();
 
     this.authenticationService.user.subscribe(user => {
       this.user = user;
     });
     this.innerWidth = window.innerWidth;
+
+    Utils.focusAndBlurOnTop();
 
   }
 
@@ -107,7 +114,7 @@ export class StatsComponent implements OnInit {
         },
         tooltip : {
             trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         legend: {
             orient: 'vertical',
@@ -151,18 +158,18 @@ export class StatsComponent implements OnInit {
             }
         ]
 
-      }
+      };
 
       this.setOptionnalLegend();
 
       const dataRegion = this.statistics.reportsCountByRegionList.map(s => s.count);
-      const nbHorsRegion = this.statistics.reportsCount - dataRegion.reduce((acc, curr) => acc + curr, 0)
+      const nbHorsRegion = this.statistics.reportsCount - dataRegion.reduce((acc, curr) => acc + curr, 0);
 
       this.byRegionsChartOption = {
         color: ['#0053b3'],
         xAxis: {
           type: 'category',
-          data: [...this.statistics.reportsCountByRegionList.map(s => s.region), "Autre"],
+          data: [...this.statistics.reportsCountByRegionList.map(s => s.region), 'Autre'],
           axisLabel: {
             rotate: 0
           }
@@ -192,7 +199,7 @@ export class StatsComponent implements OnInit {
           }
         },
 
-      }
+      };
 
     });
   }
