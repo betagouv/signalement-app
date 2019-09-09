@@ -1726,63 +1726,63 @@ list:
             rank: 5
             type: TEXTAREA
       - title: La quantité annoncée est non conforme
-            subcategoriesTitle: Quel est le type de produit&#160;?
-            subcategories:
-              - title: Un produit emballé par le fabricant comme une boîte de conserve, un paquet, une bouteille
-                example: 'La quantité est directement imprimée sur l''emballage par le fabricant'
-                description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
-                  <br/>Par contre, ces différences sont encadrées par la loi.
-                  <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
-                  <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
-                detailInputs:
-                  - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
-                    rank: 1
-                    type: RADIO
-                    options:
-                      - Oui
-                      - Non
-                  - label: Type de produit
-                    rank: 2
-                    type: TEXT
-                  - label: Nom /marque
-                    rank: 3
-                    type: TEXT
-                  - label: Quelle erreur a été constatée&#160;?
-                    rank: 4
-                    type: TEXTAREA
-              - title: Un produit emballé et étiqueté par le magasin comme une barquette de viande
-                example: 'La quantité est marquée sur une étiquette collée par le commerçant'
-                description: La quantité annoncée correspond à la quantité que vous devez avoir au minimum.
-                detailInputs:
-                  - label: Date du constat ou d'achat
-                    rank: 1
-                    type: DATE
-                    defaultValue: SYSDATE
-                  - label: Nom du produit
-                    rank: 2
-                    type: TEXT
-                  - label: Elements d'identification (date limite, n° de lot)
-                    rank: 3
-                    type: TEXT
-                    optionnal: true
-                    placeholder: Elements d'identification
-                  - label: Description
-                    rank: 4
-                    type: TEXTAREA
-              - title: Un produit sans emballage, directement consommé
-                example: 'Exemple : verre de vin dans un café, plat au restaurant'
-                description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
-                detailInputs:
-                  - label: Date du constat ou d'achat
-                    rank: 1
-                    type: DATE
-                    defaultValue: SYSDATE
-                  - label: Nom du produit
-                    rank: 2
-                    type: TEXT
-                  - label: Description
-                    rank: 3
-                    type: TEXTAREA
+        subcategoriesTitle: Quel est le type de produit&#160;?
+        subcategories:
+          - title: Un produit emballé par le fabricant comme une boîte de conserve, un paquet, une bouteille
+            example: 'La quantité est directement imprimée sur l''emballage par le fabricant'
+            description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
+                <br/>Par contre, ces différences sont encadrées par la loi.
+                <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
+                <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
+            detailInputs:
+              - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
+                rank: 1
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+              - label: Type de produit
+                rank: 2
+                type: TEXT
+              - label: Nom /marque
+                rank: 3
+                type: TEXT
+              - label: Quelle erreur a été constatée&#160;?
+                rank: 4
+                type: TEXTAREA
+          - title: Un produit emballé et étiqueté par le magasin comme une barquette de viande
+            example: 'La quantité est marquée sur une étiquette collée par le commerçant'
+            description: La quantité annoncée correspond à la quantité que vous devez avoir au minimum.
+            detailInputs:
+              - label: Date du constat ou d'achat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Nom du produit
+                rank: 2
+                type: TEXT
+              - label: Elements d'identification (date limite, n° de lot)
+                rank: 3
+                type: TEXT
+                optionnal: true
+                placeholder: Elements d'identification
+              - label: Description
+                rank: 4
+                type: TEXTAREA
+          - title: Un produit sans emballage, directement consommé
+            example: 'Exemple : verre de vin dans un café, plat au restaurant'
+            description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
+            detailInputs:
+              - label: Date du constat ou d'achat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Nom du produit
+                rank: 2
+                type: TEXT
+              - label: Description
+                rank: 3
+                type: TEXTAREA
       - title: Produit en retrait/ rappel
         example: Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités
         detailInputs:
