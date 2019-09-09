@@ -876,143 +876,20 @@ list:
               - title: Une carte cadeaux
               - title: Autre
       - title: Autres
-  - category: Voiture / Véhicule
-    categoryId: VEH
+  - category: Services aux particuliers
+    categoryId: SERV
     path: pratique-d-hygiene
-    description: vente et réparation de voiture, location, taxi, auto-école ..
-    rank: 8
-    icon: icon_transport.png
-    subcategoriesTitle: "Pouvez-vous préciser &#160;?"
+    description: coiffeur, pressing, esthéticienne, aide à la personne..
+    rank: 3
+    icon: icon_service.png
     subcategories:
-      - title: Location
-        example: 'Exemple : location de voiture, leasing, velib, autolib..'
-        subcategories:
-          - title: Publicité
-          - title: Prix / Paiement
-          - title: Autre
-      - title: Vente / réparation de véhicule
-        example: 'Exemple : garagiste, dépanneur'
-        subcategories:
-          - title: Prix / Facturation
-            example: 'Exemple : devis non détaillé, devis non respecté'
-          - title: Prestation mal réalisée ou pas réalisée
-            example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé'
-          - title: Publicité
-          - title: Autre
-      - title: Taxi / VTC
-        subcategories:
-          - title: Prix / Paiement
-            example: 'Exemple : refus de CB, supplément'
-            subcategories:
-              - title: Prix pas affiché
-                example: 'Exemple : absence de l''affichette des prix'
-              - title: Prix différent de celui affiché
-                example: 'Exemple : le prix à payer est différent de celui annoncé'
-              - title: Refus d'un moyen de paiement
-                example: 'Exemple : refus de la carte bancaire'
-                subcategories:
-                  - title: Refus du paiement en espèces
-                    subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
-                    subcategories:
-                      - title: Il refuse tout paiement en espèces
-                        description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
-                      - title: Il n'avait pas assez de monnaie
-                        information:
-                        content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
-                      - title: Mes pièces / billets étaient en mauvais état
-                        information:
-                            content: Le paiement en pièces ou billets en mauvais état peut être refusé.
-                      - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
-                        information:
-                          content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
-                            <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
-                      - title: Autre
-                  - title: Refus de la carte bancaire
-                    subcategories:
-                      - title: Il s'agit d'un taxi officiel
-                      - title: Il s'agit d'un service de VTC
-                        subcategoriesTitle: Pour quelle raison le professionnel a-t-il refusé votre carte bancaire&#160;?
-                        subcategories:
-                          - title: Il exige un minimum d'achat
-                            subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
-                            subcategories:
-                              - title: Oui
-                                example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
-                                information:
-                                  title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
-                                  content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
-                              - title: Non
-                          - title: Il refuse tout paiement par carte bancaire
-                            subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bancaire&#160;?
-                            subcategories:
-                              - title: Oui
-                                example: 'Exemple : sur une affiche au niveau ses vitres'
-                                information:
-                                  title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                                  content: Il doit l’indiquer très visiblement au consommateur.
-                              - title: Non
-                  - title: Refus d'un chèque
-                    subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque&#160;?
-                    subcategories:
-                      - title: Il exige un minimum d'achat
-                        subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
-                        subcategories:
-                          - title: Oui
-                            example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
-                            information:
-                              title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
-                              content: Il doit l’indiquer très visiblement au consommateur.
-                          - title: Non
-                      - title: Il refuse tout paiements par chèque
-                        subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait les chèques&#160;?
-                        subcategories:
-                          - title: Oui
-                            example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
-                            information:
-                              title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                              content: Il doit l’indiquer très visiblement au consommateur.
-                          - title: Non
-                      - title: Autres
-                        example: 'Exemple : problème avec le terminal de paiement...'
-                  - title: Autres problèmes de prix ou paiement
-              - title: Problème de facture/ticket de caisse
-                example: 'Exemple : refus de délivrer une note'
-          - title: Publicité
-          - title: Autre
-      - title: Transport en commun
-        example: 'Exemple : bus'
-        subcategories:
-          - title: Prix / Paiement
-          - title: Publicité
-          - title: Autre
-      - title: Permis / leçons de conduite
-        example: 'Exemple : auto-école'
-        subcategories:
-          - title: Prix / Paiement
-            example: 'Exemple : prix non affiché'
-          - title: Publicité
-            example: 'Exemple : publicité trompeuse'
-          - title: Autre
-            example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement '
-      - title: Autre      
-  - category: Travaux / Rénovation
-    categoryId: TRAV
-    path: pratique-d-hygiene
-    description: dépannage, plombier, couvreur, pose de panneaux...
-    rank: 126
-    icon: icon_craft.png
-    subcategories:
-      - title: prix
-        example: 'Exemple : prix non affiché, devis non respecté'
-      - title: prestation
-        example: 'Exemple : malfaçons sur le chantier, chantier commencé mais j''amais terminé'
-      - title: contrat
-        example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
-      - title: publicité
-        example: 'Exemple : publicité trompeuse, logo de l''Etat or n''est pas un organisme affilié'
-      - title: service après-vente
-        example: 'Exemple : SAV injoignable'   
-      - title: autres
+      - title: Bien-être
+        example: coiffeur, esthéticienne, salon de massage..
+      - title: Vie quotidienne
+        example: conciergerie, pressing, cordonnier, ménage, garde d'enfants
+      - title: Aide à la personne
+      - title: Déménageur
+      - title: Autre    
   - category: Téléphonie / Eau-Gaz-Electricité
     categoryId: TEL
     path: pratique-d-hygiene
@@ -1286,23 +1163,7 @@ list:
                 fileLabel: Joindre une copie du contrat / réglement.
               - title: Autre
           - title: Facturation
-      - title: Autres (Fioul / GPL / granulés de bois ..)
-  - category: Banque / Assurance / Mutuelle
-    categoryId: BAQ
-    path: pratique-d-hygiene
-    description: crédit, assurance
-    rank: 6
-    icon: icon_bank.png
-    subcategories:
-      - title: Frais bancaires 
-        example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir '
-      - title: Contrat
-        example: 'Exemple : contrat de crédit'
-      - title: Publicité
-        example: 'Exemple : publicité pour un crédit non conforme'
-      - title: Service client
-        example: 'Exemple : service client injoignable'   
-      - title: Autre
+      - title: Autres (Fioul / GPL / granulés de bois ..)    
   - category: Immobilier
     categoryId: IMM
     path: pratique-d-hygiene
@@ -1397,63 +1258,23 @@ list:
             
           - title: autres
       - title: Notaire
-      - title: Autre
-  - category: Voyage / Loisirs
-    categoryId: VOY
+      - title: Autre    
+  - category: Banque / Assurance / Mutuelle
+    categoryId: BAQ
     path: pratique-d-hygiene
-    description: voyage organisé, camping, concert, sport, billets d''avion
-    rank: 122
-    icon: icon_hobbies.png
+    description: crédit, assurance
+    rank: 6
+    icon: icon_bank.png
     subcategories:
-      - title: hébergement
-        example: hotel, camping, chambre d'hôte..
-      - title: agence de voyage
-      - title: transport
-        example: avion, train ..
-        subcategories:
-          - title: prix
-            example: 'Exemple : absence de prix, prix illisible'
-          - title: facturation / remboursement
-            example: 'Exemple : remboursement billet, surfacturation non prévue, annulation d''un spectacle ou d''un vol'
-          - title: contrat
-            example: 'Exemple : clause abusive dans le contrat de ma salle de sport'
-          - title: publicité
-            example: 'Exemple : publicité trompeuse'
-          - title: service après-vente
-            example: 'Exemple : SAV injoignable'       
-          - title: autres
-      - title: sport
-        example: piscine, salle de sport..
-      - title: divertissement culturel
-        example: musée, cinéma, concert...
-  - category: Services aux particuliers
-    categoryId: SERV
-    path: pratique-d-hygiene
-    description: coiffeur, pressing, esthéticienne, aide à la personne..
-    rank: 3
-    icon: icon_service.png
-    subcategories:
-      - title: Bien-être
-        example: coiffeur, esthéticienne, salon de massage..
-      - title: Vie quotidienne
-        example: conciergerie, pressing, cordonnier, ménage, garde d'enfants
-      - title: Aide à la personne
-      - title: Déménageur
-      - title: Autre
-  - category: Animaux
-    categoryId: ANI
-    path: pratique-d-hygiene
-    description: vétérinaire, aliment pour animaux, service de garde ..
-    rank: 120
-    icon: icon_pet.png
-    subcategories:
-      - title: Alimentation / Matériel pour animaux
-        example: jouet, cage, laisse, croquettes..
-      - title: Soins
-        example: Vétérinaire, toiletteur ..
-      - title: Garde
-        example: Pension, site de petsitter..
-      - title: Vendeur d'animaux
+      - title: Frais bancaires 
+        example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir '
+      - title: Contrat
+        example: 'Exemple : contrat de crédit'
+      - title: Publicité
+        example: 'Exemple : publicité pour un crédit non conforme'
+      - title: Service client
+        example: 'Exemple : service client injoignable'   
+      - title: Autre      
   - category: Secteur de la santé
     categoryId: SANT
     path: pratique-d-hygiene
@@ -1593,17 +1414,137 @@ list:
           - title: Maltraitance
           - title: Autre
       - title: Autre
-  - category: Démarches administratives
-    categoryId: ADM
+  - category: Voiture / Véhicule
+    categoryId: VEH
     path: pratique-d-hygiene
-    description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville ..
-    rank: 124
-    icon: icon_marianne.png
+    description: vente et réparation de voiture, location, taxi, auto-école ..
+    rank: 8
+    icon: icon_transport.png
+    subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
-      - title: Courrier/société qui se fait passer pour l'administration
-      - title: Site internet pour obtenir un document administratif (casier, acte de naissance)
-      - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier..)
-      - title: Autre
+      - title: Location
+        example: 'Exemple : location de voiture, leasing, velib, autolib..'
+        subcategories:
+          - title: Publicité
+          - title: Prix / Paiement
+          - title: Autre
+      - title: Vente / réparation de véhicule
+        example: 'Exemple : garagiste, dépanneur'
+        subcategories:
+          - title: Prix / Facturation
+            example: 'Exemple : devis non détaillé, devis non respecté'
+          - title: Prestation mal réalisée ou pas réalisée
+            example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé'
+          - title: Publicité
+          - title: Autre
+      - title: Taxi / VTC
+        subcategories:
+          - title: Prix / Paiement
+            example: 'Exemple : refus de CB, supplément'
+            subcategories:
+              - title: Prix pas affiché
+                example: 'Exemple : absence de l''affichette des prix'
+              - title: Prix différent de celui affiché
+                example: 'Exemple : le prix à payer est différent de celui annoncé'
+              - title: Refus d'un moyen de paiement
+                example: 'Exemple : refus de la carte bancaire'
+                subcategories:
+                  - title: Refus du paiement en espèces
+                    subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+                    subcategories:
+                      - title: Il refuse tout paiement en espèces
+                        description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+                      - title: Il n'avait pas assez de monnaie
+                        information:
+                        content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                      - title: Mes pièces / billets étaient en mauvais état
+                        information:
+                            content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                      - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
+                        information:
+                          content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                            <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+                      - title: Autre
+                  - title: Refus de la carte bancaire
+                    subcategories:
+                      - title: Il s'agit d'un taxi officiel
+                      - title: Il s'agit d'un service de VTC
+                        subcategoriesTitle: Pour quelle raison le professionnel a-t-il refusé votre carte bancaire&#160;?
+                        subcategories:
+                          - title: Il exige un minimum d'achat
+                            subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                            subcategories:
+                              - title: Oui
+                                example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                                information:
+                                  title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                                  content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                              - title: Non
+                          - title: Il refuse tout paiement par carte bancaire
+                            subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bancaire&#160;?
+                            subcategories:
+                              - title: Oui
+                                example: 'Exemple : sur une affiche au niveau ses vitres'
+                                information:
+                                  title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                                  content: Il doit l’indiquer très visiblement au consommateur.
+                              - title: Non
+                  - title: Refus d'un chèque
+                    subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque&#160;?
+                    subcategories:
+                      - title: Il exige un minimum d'achat
+                        subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                        subcategories:
+                          - title: Oui
+                            example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                            information:
+                              title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                              content: Il doit l’indiquer très visiblement au consommateur.
+                          - title: Non
+                      - title: Il refuse tout paiements par chèque
+                        subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait les chèques&#160;?
+                        subcategories:
+                          - title: Oui
+                            example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                            information:
+                              title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                              content: Il doit l’indiquer très visiblement au consommateur.
+                          - title: Non
+                      - title: Autres
+                        example: 'Exemple : problème avec le terminal de paiement...'
+                  - title: Autres problèmes de prix ou paiement
+              - title: Problème de facture/ticket de caisse
+                example: 'Exemple : refus de délivrer une note'
+          - title: Publicité
+          - title: Autre
+      - title: Transport en commun
+        example: 'Exemple : bus'
+        subcategories:
+          - title: Prix / Paiement
+          - title: Publicité
+          - title: Autre
+      - title: Permis / leçons de conduite
+        example: 'Exemple : auto-école'
+        subcategories:
+          - title: Prix / Paiement
+            example: 'Exemple : prix non affiché'
+          - title: Publicité
+            example: 'Exemple : publicité trompeuse'
+          - title: Autre
+            example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement '
+      - title: Autre      
+  - category: Intoxication alimentaire
+    categoryId: INTOX
+    path: intoxication-alimentaire
+    description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
+    rank: 9
+    icon: icon_disease.png
+    information:
+      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
+      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+      actions:
+        - question: Signaler un cas d'intoxication alimentaire&#160;?
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>   
   - category: Signaler un problème sur un produit
     categoryId: SIGN
     path: pratique-d-hygiene
@@ -1815,26 +1756,38 @@ list:
             - question: Vous avez commandé votre produit dans un bar ou un restaurant&#160;?
               answer: Si vous trouvez que le plat n'est pas frais ou pas assez chaud, vous pouvez demander que l'on vous remplace le plat.
                 <br/>Si votre vin est bouchonné, vous pouvez demander à le changer.
-                <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.
-
-
-  - category: Intoxication alimentaire
-    categoryId: INTOX
-    path: intoxication-alimentaire
-    description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
-    rank: 116
-    icon: icon_disease.png
-    information:
-      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
-      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
-      actions:
-        - question: Signaler un cas d'intoxication alimentaire&#160;?
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
+                <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.    
+  - category: Animaux
+    categoryId: ANI
+    path: pratique-d-hygiene
+    description: vétérinaire, aliment pour animaux, service de garde ..
+    rank: 11
+    icon: icon_pet.png
+    subcategories:
+      - title: Alimentation / Matériel pour animaux
+        example: jouet, cage, laisse, croquettes..
+      - title: Soins
+        example: Vétérinaire, toiletteur ..
+      - title: Garde
+        example: Pension, site de petsitter..
+      - title: Vendeur d'animaux
+      - title: Autre             
+  - category: Démarches administratives
+    categoryId: ADM
+    path: pratique-d-hygiene
+    description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville ..
+    rank: 12
+    icon: icon_marianne.png
+    subcategories:
+      - title: Courrier/société qui se fait passer pour l'administration
+      - title: Site internet pour obtenir un document administratif (casier, acte de naissance)
+      - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier..)
+      - title: Autre              
   - category: Achat sur internet
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 117
+    rank: 13
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
@@ -1847,7 +1800,56 @@ list:
           answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
         - question: Un contenu qui vous semble inapproprié&#160;?
           example: Trafic illicite, pédopornographie, etc.
-          answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
+          answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>    
+          
+  - category: Travaux / Rénovation
+    categoryId: TRAV
+    path: pratique-d-hygiene
+    description: dépannage, plombier, couvreur, pose de panneaux...
+    rank: 126
+    icon: icon_craft.png
+    subcategories:
+      - title: prix
+        example: 'Exemple : prix non affiché, devis non respecté'
+      - title: prestation
+        example: 'Exemple : malfaçons sur le chantier, chantier commencé mais j''amais terminé'
+      - title: contrat
+        example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
+      - title: publicité
+        example: 'Exemple : publicité trompeuse, logo de l''Etat or n''est pas un organisme affilié'
+      - title: service après-vente
+        example: 'Exemple : SAV injoignable'   
+      - title: autres
+  - category: Voyage / Loisirs
+    categoryId: VOY
+    path: pratique-d-hygiene
+    description: voyage organisé, camping, concert, sport, billets d''avion
+    rank: 122
+    icon: icon_hobbies.png
+    subcategories:
+      - title: hébergement
+        example: hotel, camping, chambre d'hôte..
+      - title: agence de voyage
+      - title: transport
+        example: avion, train ..
+        subcategories:
+          - title: prix
+            example: 'Exemple : absence de prix, prix illisible'
+          - title: facturation / remboursement
+            example: 'Exemple : remboursement billet, surfacturation non prévue, annulation d''un spectacle ou d''un vol'
+          - title: contrat
+            example: 'Exemple : clause abusive dans le contrat de ma salle de sport'
+          - title: publicité
+            example: 'Exemple : publicité trompeuse'
+          - title: service après-vente
+            example: 'Exemple : SAV injoignable'       
+          - title: autres
+      - title: sport
+        example: piscine, salle de sport..
+      - title: divertissement culturel
+        example: musée, cinéma, concert...
+  
+  #Jerome je ne l'ai pas enlevée car je ne sais pas si le détecteur de mots fonctionnera sans sinon
   - category: Travail au noir
     categoryId: TNOIR
     path: travail-au-noir
