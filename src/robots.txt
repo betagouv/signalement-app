@@ -5,6 +5,7 @@ Disallow: /dgccrf
 Disallow: /activation
 Disallow: /connexion*
 Disallow: /suivi-des-signalements*
+Disallow: /abonnements*
 Disallow: /mode-emploi-dgccrf
 Disallow: /compte*
 Disallow: /*le-probleme
