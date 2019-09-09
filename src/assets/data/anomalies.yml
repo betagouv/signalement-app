@@ -884,16 +884,14 @@ list:
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
-    # location de voiture, leasing, velib
       - title: Location
         example: 'Exemple : location de voiture, leasing, velib, autolib..'
         subcategories:
           - title: Publicité
           - title: Prix / Paiement
           - title: Autre
-    # garagiste et dépanneur
       - title: Vente / réparation de véhicule
-        example: 'Exemple : garagistre, dépanneur'
+        example: 'Exemple : garagiste, dépanneur'
         subcategories:
           - title: Prix / Facturation
             example: 'Exemple : devis non détaillé, devis non respecté'
@@ -901,7 +899,6 @@ list:
             example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé'
           - title: Publicité
           - title: Autre
-    # taxi VTC
       - title: Taxi / VTC
         subcategories:
           - title: Prix / Paiement
@@ -982,15 +979,13 @@ list:
                 example: 'Exemple : refus de délivrer une note'
           - title: Publicité
           - title: Autre
-    # transport en commun
       - title: Transport en commun
         example: 'Exemple : bus'
         subcategories:
           - title: Prix / Paiement
           - title: Publicité
           - title: Autre
-    # autoécole
-      - title: Permis
+      - title: Permis / leçons de conduite
         example: 'Exemple : auto-école'
         subcategories:
           - title: Prix / Paiement
@@ -999,6 +994,7 @@ list:
             example: 'Exemple : publicité trompeuse'
           - title: Autre
             example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement '
+      - title: Autre      
   - category: Travaux / Rénovation
     categoryId: TRAV
     path: pratique-d-hygiene
@@ -1021,7 +1017,7 @@ list:
     categoryId: TEL
     path: pratique-d-hygiene
     description: forfait téléphone, fournisseur d'accès, contrat gaz..
-    rank: 5
+    rank: 4
     icon: icon_tel.png
     subcategories:
       - title: Téléphonie / Internet
@@ -1051,8 +1047,9 @@ list:
             example: 'Exemple: je devais bénéficié d''une reduction de 15e sur le telephone mais je ne l''ai jamais reçu'
           - title: Appels ou sms indésirables
             example: 'Exemple : spams, démarchages téléphoniques'
-          - title: Initérance
+          - title: Itinérance
             example: pas de réception du sms, itinérance à la frontière
+          - title: Autre
       - title: Eau
         subcategories:
           - title: Contrat / facture
@@ -1433,8 +1430,16 @@ list:
     categoryId: SERV
     path: pratique-d-hygiene
     description: coiffeur, pressing, esthéticienne, aide à la personne..
-    rank: 123
+    rank: 3
     icon: icon_service.png
+    subcategories:
+      - title: Bien-être
+        example: coiffeur, esthéticienne, salon de massage..
+      - title: Vie quotidienne
+        example: conciergerie, pressing, cordonnier, ménage, garde d'enfants
+      - title: Aide à la personne
+      - title: Déménageur
+      - title: Autre
   - category: Animaux
     categoryId: ANI
     path: pratique-d-hygiene
@@ -1442,11 +1447,14 @@ list:
     rank: 120
     icon: icon_pet.png
     subcategories:
-      - title: alimentation
-      - title: achat
-      - title: service de garde
-      - title: soins
-        example: vétérinaire, toiletteur ..
+      - title: Alimentation / Matériel pour animaux
+        example: jouet, cage, laisse, croquettes..
+      - title: Soins
+        example: Vétérinaire, toiletteur ..
+      - title: Garde
+        example: Pension, site de petsitter..
+      - title: Vendeur d'animaux
+        
   - category: Secteur de la santé
     categoryId: SANT
     path: pratique-d-hygiene
