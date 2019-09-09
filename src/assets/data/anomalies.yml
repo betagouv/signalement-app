@@ -1294,15 +1294,15 @@ list:
     rank: 6
     icon: icon_bank.png
     subcategories:
-      - title: frais bancaires 
+      - title: Frais bancaires 
         example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir '
-      - title: contrat
-        example: 'Exemple : clause abusive dans le contrat, contrat non respecté'
-      - title: publicité
+      - title: Contrat
+        example: 'Exemple : contrat de crédit'
+      - title: Publicité
         example: 'Exemple : publicité pour un crédit non conforme'
-      - title: service client
+      - title: Service client
         example: 'Exemple : service client injoignable'   
-      - title: autres
+      - title: Autre
   - category: Immobilier
     categoryId: IMM
     path: pratique-d-hygiene
@@ -1310,7 +1310,7 @@ list:
     rank: 5
     icon: icon_real_estate.png
     subcategories:
-      - title: agence immobilière
+      - title: Agence immobilière
         example: 'Exemple: location, vente, gestion locative, mandataire indépendant, marchand de liste, chasseur d''appartement..'
         subcategories:
           - title: je cherche une location ou un bien à acheter
@@ -1362,7 +1362,7 @@ list:
                   - title: discours trompeur
                     example: 'Exemple: L''agent immobilier m''a promis de vendre sous 7 jours'
               - title: autre
-      - title: vente / location directement entre particuliers
+      - title: Vente / location directement entre particuliers
         subcategories:
           - title: problème avec mon locataire / propriétaire
             information:
@@ -1374,7 +1374,7 @@ list:
                 - question: Le conciliateur de justice&#160;
                   answer: Le conciliateur de justice intervient pour les conflits entre propriétaires et locataires, ou locataires entre eux. <br> Le recours à un conciliateur de justice est gratuit. <br>Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1736"_blank" />ici</a>
           - title: problème avec un site de mise en relation entre particuliers
-      - title: syndic de copropriété
+      - title: Syndic de copropriété
         subcategories:
           - title: Facturation
             example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévus'
@@ -1396,8 +1396,8 @@ list:
             example: 'Exemple : aucune réponse malgré des relances..'
             
           - title: autres
-      - title: notaire
-      - title: autre
+      - title: Notaire
+      - title: Autre
   - category: Voyage / Loisirs
     categoryId: VOY
     path: pratique-d-hygiene
@@ -1454,12 +1454,11 @@ list:
       - title: Garde
         example: Pension, site de petsitter..
       - title: Vendeur d'animaux
-        
   - category: Secteur de la santé
     categoryId: SANT
     path: pratique-d-hygiene
     description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre..), clinique
-    rank: 10
+    rank: 7
     icon: icon_health.png
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories:
@@ -1605,9 +1604,11 @@ list:
       - title: Site internet pour obtenir un document administratif (casier, acte de naissance)
       - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier..)
       - title: Autre
-        
   - category: Signaler un problème sur un produit
-    example: nourriture et objets
+    categoryId: SIGN
+    path: pratique-d-hygiene
+    description: nourriture et objets
+    rank: 10
     icon: icon_material.png
     subcategories:
       - title: Notice et emballage
