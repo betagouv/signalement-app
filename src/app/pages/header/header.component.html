@@ -71,6 +71,7 @@
                   <li role="menuitem"><span class="item"><b>Profil</b> : {{ user.role }}</span></li>
                   <li class="divider dropdown-divider"></li>
                   <li role="menuitem"><span class="dropdown-item pointer" (click)="goHome()">Suivi des signalements</span></li>
+                  <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><span class="dropdown-item pointer" (click)="mostReportedPro()">Entreprises les plus signalés</span></li>
                   <li role="menuitem"><span class="dropdown-item pointer" *appPermission="permissions.subscribeReports" (click)="goTo(['abonnements'])">Abonnements</span></li>
                   <li role="menuitem"><span class="dropdown-item pointer" (click)="changePassword()">Modifier mot de passe</span></li>
                 </ng-template>
