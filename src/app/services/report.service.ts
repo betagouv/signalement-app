@@ -5,12 +5,14 @@ import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
+import { NbReportsGroupByCompany } from '../model/NbReportsGroupByCompany';
 import { map, mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
 import { Region } from '../model/Region';
+import { deserialize } from 'json-typescript-mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -61,6 +63,29 @@ export class ReportService {
       }),
       mergeMap(reportApi => of(this.reportApi2report(reportApi)))
     );
+  }
+
+  getNbReportsGroupByCompany(offset: number, limit: number) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('offset', offset.toString());
+    httpParams = httpParams.append('limit', limit.toString());
+
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<PaginatedData<any>>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'nbReportsGroupByCompany']),
+          Object.assign(headers, { params: httpParams })
+        );
+      }),
+      mergeMap(paginatedData => {
+        return of(Object.assign(new PaginatedData<Report>(), {
+          totalCount: paginatedData.totalCount,
+          hasNextPage: paginatedData.hasNextPage,
+          entities: paginatedData.entities.map(res => deserialize(NbReportsGroupByCompany, res))
+        }));
+      })
+    );
+
   }
 
   getReports(offset: number, limit: number, reportFilter: ReportFilter) {
