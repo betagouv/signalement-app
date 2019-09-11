@@ -17,40 +17,25 @@
       <thead>
         <tr>
           <th>Dep</th>
-          <th *appRole="[roles.DGCCRF]">Commune</th>
-          <th *appRole="[roles.DGCCRF]">Siret</th>
+          <th>Commune</th>
+          <th>Siret</th>
           <th>Commerçant</th>
           <th># signalements</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="!loading && !reports.length">
+        <tr *ngIf="!loading && !lines.length">
           <td colspan="8">
             <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
             <span *ngIf="!loadingError">Aucun signalement trouvé</span>
           </td>
         </tr>
-        <tr *ngFor="let report of reports" class="pointer">
-          <td>{{report.company.postalCode | slice : 0 : 2}}</td>
-          <td *appRole="[roles.DGCCRF]">{{report.company.postalCode}}</td>
-          <td *appRole="[roles.DGCCRF]">{{report.company.siret}}</td>
-          <td>
-            <span [tooltip]="companyTooltip">
-              {{report.company.name}}
-              <ng-template #companyTooltip>
-                <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
-                <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
-                <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
-                <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
-                <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
-                <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
-                <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
-              </ng-template>
-            </span>
-          </td>
-          <td>
-            12
-          </td>
+        <tr *ngFor="let line of lines" class="pointer" (click)="reportsOfSiret([line.companySiret])">
+          <td>{{line.companyPostalCode | slice : 0 : 2}}</td>
+          <td>{{line.companyPostalCode}}</td>
+          <td>{{line.companySiret}}</td>
+          <td>{{line.companyName}}</td>
+          <td>{{line.count}}</td>
         </tr>
       </tbody>
       <ngx-loading [show]="loading"></ngx-loading>

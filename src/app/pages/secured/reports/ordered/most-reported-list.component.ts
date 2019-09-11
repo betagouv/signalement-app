@@ -1,13 +1,12 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { Report } from '../../../../model/Report';
+import { NbReportsGroupByCompany } from '../../../../model/NbReportsGroupByCompany';
 import { Location } from '@angular/common';
 import { BsLocaleService } from 'ngx-bootstrap';
-import { AuthenticationService } from '../../../../services/authentication.service';
 import pages from '../../../../../assets/data/pages.json';
-import { Roles, User } from 'src/app/model/AuthUser';
+import { Roles } from 'src/app/model/AuthUser';
 import { ReportService } from '../../../../services/report.service';
-import { ReportFilter } from '../../../../model/ReportFilter';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-most-reported-list',
@@ -16,12 +15,11 @@ import { ReportFilter } from '../../../../model/ReportFilter';
 })
 export class MostReportedListComponent implements OnInit {
 
-  user: User;
   roles = Roles;
   totalCount: number;
   currentPage: number;
   itemsPerPage = 20;
-  reports: Report[];
+  lines: NbReportsGroupByCompany[];
 
   loading: boolean;
   loadingError: boolean;
@@ -31,26 +29,14 @@ export class MostReportedListComponent implements OnInit {
     private meta: Meta,
     private localeService: BsLocaleService,
     private location: Location,
-    private authenticationService: AuthenticationService,
     private reportService: ReportService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.reports.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
-
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
-
-      console.log(this.user);
-    });
-
-
-    if (this.user && this.user.role === Roles.Pro) {
-    }
-
-
     this.loading = true;
     this.loadingError = false;
 
@@ -61,17 +47,16 @@ export class MostReportedListComponent implements OnInit {
     this.loading = true;
     this.loadingError = false;
 
-    this.reportService.getReports(
+    this.reportService.getNbReportsGroupByCompany(
       (page - 1) * this.itemsPerPage,
-      this.itemsPerPage,
-      new ReportFilter()).subscribe(
+      this.itemsPerPage).subscribe(
         result => {
           this.loading = false;
 
           this.totalCount = result.totalCount;
           this.currentPage = page;
 
-          this.reports = result.entities ? result.entities : [];
+          this.lines = result.entities ? result.entities : [];
 
         },
         err => {
@@ -88,5 +73,10 @@ export class MostReportedListComponent implements OnInit {
     }
   }
 
+  reportsOfSiret(siret) {
+    this.location.go(`suivi-des-signalements/siret/${siret}`);
+    //this.router.navigate(['suivi-des-signalements', 'siret', siret]);
+
+  }
 
 }
