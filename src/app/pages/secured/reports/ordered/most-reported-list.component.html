@@ -30,7 +30,7 @@
             <span *ngIf="!loadingError">Aucun signalement trouvé</span>
           </td>
         </tr>
-        <tr *ngFor="let line of lines" class="pointer" (click)="reportsOfSiret([line.companySiret])">
+        <tr *ngFor="let line of lines" class="pointer" [routerLink]="['/suivi-des-signalements', 'siret', line.companySiret]">
           <td>{{line.companyPostalCode | slice : 0 : 2}}</td>
           <td>{{line.companyPostalCode}}</td>
           <td>{{line.companySiret}}</td>
