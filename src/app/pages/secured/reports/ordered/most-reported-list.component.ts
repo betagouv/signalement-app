@@ -4,7 +4,7 @@ import { NbReportsGroupByCompany } from '../../../../model/NbReportsGroupByCompa
 import { Location } from '@angular/common';
 import { BsLocaleService } from 'ngx-bootstrap';
 import pages from '../../../../../assets/data/pages.json';
-import { Roles } from 'src/app/model/AuthUser';
+import { Roles } from '../../../../model/AuthUser';
 import { ReportService } from '../../../../services/report.service';
 import { Router } from '@angular/router';
 
@@ -71,12 +71,6 @@ export class MostReportedListComponent implements OnInit {
       this.loadReports(pageEvent.page);
       this.location.go(`suivi-des-signalements/page/${pageEvent.page}`);
     }
-  }
-
-  reportsOfSiret(siret) {
-    this.location.go(`suivi-des-signalements/siret/${siret}`);
-    //this.router.navigate(['suivi-des-signalements', 'siret', siret]);
-
   }
 
 }
