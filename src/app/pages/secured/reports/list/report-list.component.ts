@@ -95,9 +95,19 @@ export class ReportListComponent implements OnInit, OnDestroy {
       this.route.paramMap
     ).subscribe(
       ([reportFilter, statusPros, statusConsos, params]) => {
+
+
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
         }
+        const siret = params.get('siret');
+
+        if (siret) {
+          this.reportFilter = { ...this.reportFilter, siret};
+        }
+
+        this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+
         this.statusPros = statusPros;
         this.statusConsos = statusConsos;
         this.loadReportExtractUrl();
