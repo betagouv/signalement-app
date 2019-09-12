@@ -59,6 +59,7 @@ export enum CompanySearchEventNames {
 
 export enum AuthenticationEventActions {
   success = 'Authentification réussie',
+  role = 'Rôle de la personne authentifiée',
   fail = 'Authentification en échec',
   forgotPasswordSuccess = 'Mot de passe oublié - envoi du mail',
   forgotPasswordFail = 'Mot de passe oublié - erreur technique',

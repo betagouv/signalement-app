@@ -42,6 +42,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['suivi-des-signalements']);
   }
 
+  mostReportedPro() {
+    this.router.navigate(['pro-les-plus-signales']);
+  }
+
   goTo(commands: any[]) {
     this.router.navigate(commands);
   }

@@ -6,6 +6,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BsDatepickerModule, BsDropdownModule, ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { ReportDetailComponent } from './reports/detail/report-detail.component';
 import { ReportListComponent } from './reports/list/report-list.component';
+import { MostReportedListComponent } from './reports/ordered/most-reported-list.component';
 import { DGCCRFComponent } from './dgccrf/dgccrf.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EventComponent } from './reports/event/event.component';
@@ -19,8 +20,10 @@ import { SubscriptionComponent } from './subscription/subscription.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
+  { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/page/:pageNumber', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
+  { path: 'suivi-des-signalements/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
   { path: 'compte/mot-de-passe', component: PasswordComponent, canActivate: [AuthGuard] },
   { path: 'compte/activation', component: AccountActivationComponent, canActivate: [AuthGuard] },
@@ -38,7 +41,8 @@ const routes: Routes = [
     DGCCRFComponent,
     MiddleCropPipe,
     AccountActivationComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    MostReportedListComponent
   ],
   imports: [
     CommonModule,
