@@ -65,8 +65,9 @@ export class LoginComponent implements OnInit {
     } else {
       this.authenticationService.login(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
-          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success,
-            user.id + `(${ user.role })`);
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
+
           if (user.role === Roles.ToActivate.toString()) {
             this.router.navigate(['compte', 'activation']);
           } else {
