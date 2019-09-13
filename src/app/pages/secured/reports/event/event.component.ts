@@ -26,8 +26,10 @@ export class EventComponent implements OnInit {
   reportId: string;
   siret: string;
   actionPros: ReportEventAction[];
+  actionProFinals: string[];
   actionConsos: ReportEventAction[];
   actionAgents: ReportEventAction[];
+  allActions: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
@@ -51,15 +53,18 @@ export class EventComponent implements OnInit {
     });
     combineLatest(
       this.constantService.getActionPros(),
+      this.constantService.getActionProFinals(),
       this.constantService.getActionConsos(),
       this.constantService.getActionAgents(),
       this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionConsos, actionAgents, url]) => {
+      ([actionPros, actionProFinals, actionConsos, actionAgents, url]) => {
         this.loading = false;
         this.actionPros = actionPros;
+        this.actionProFinals = actionProFinals.map(action => action.name);
         this.actionConsos = actionConsos;
         this.actionAgents = actionAgents;
+        this.allActions = [...this.actionPros, ...this.actionConsos, ...this.actionAgents];
         this.activationDocumentUrl = url;
         this.initEventForm();
       },
@@ -67,6 +72,7 @@ export class EventComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
+
   }
 
   initEventForm() {
@@ -78,10 +84,25 @@ export class EventComponent implements OnInit {
       action: this.actionCtrl,
       detail: this.detailCtrl
     });
+
+  }
+
+  isStatusProFinal(status: string) {
+    return this.actionProFinals.indexOf(status) !== -1;
   }
 
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
+  }
+
+  getTypeOfEvent(label) {
+    if (this.actionPros.find(a => a === label)) {
+      return 'PRO';
+    } else if (this.actionConsos.find(a => a === label)) {
+      return 'CONSO';
+    } else {
+      return 'DGCCRF';
+    }
   }
 
   submitEventForm() {
@@ -92,13 +113,14 @@ export class EventComponent implements OnInit {
       this.loadingError = false;
       const eventToCreate = Object.assign(new ReportEvent(), {
         reportId: this.reportId,
-        eventType: this.actionPros.find(a => a === this.actionCtrl.value) ? 'PRO' : 'CONSO',
+        eventType:  this.getTypeOfEvent(this.actionCtrl.value),
         action: this.actionCtrl.value,
         detail: this.detailCtrl.value
       });
       if (this.actionCtrl.value.withResult) {
         eventToCreate.resultAction = this.resultActionCtrl.value;
       }
+
       this.eventService.createEvent(eventToCreate).subscribe(
         event => {
           this.bsModalRef.hide();
@@ -112,7 +134,8 @@ export class EventComponent implements OnInit {
   }
 
   selectAction() {
-    if ([...this.actionPros, ...this.actionConsos].find(action => action === this.actionCtrl.value).withResult) {
+
+    if (this.allActions.find(action => action === this.actionCtrl.value).withResult) {
       this.eventForm.addControl('resultAction', this.resultActionCtrl);
     } else {
       this.eventForm.removeControl('resultAction');

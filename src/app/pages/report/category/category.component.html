@@ -1,12 +1,12 @@
-<div class="banner text-center section section-primary" role="banner">
+<div class="banner text-center section section-primary pb-2" role="region">
     <div class="container">
       <h1 class="rounded">
         Signaler un problème à la répression&nbsp;des&nbsp;fraudes<br> en toute transparence avec le commerçant
       </h1>
-      <h4>
+      <h4 class="pb-2">
         en <strong class="text-uppercase">Centre-Val de Loire</strong>, <strong class="text-uppercase">Auvergne-Rhône-Alpes</strong> et&nbsp;<strong class="text-uppercase">Occitanie</strong>
       </h4>
-      <img src="/assets/images/ARA-CVL-OCC.svg" style="width: 145px" alt="Carte de la France" />
+      <img class="d-none d-md-inline" src="/assets/images/ARA-CVL-OCC.svg" style="width: 145px" alt="Carte de la France" />
     </div>
   </div>
 
@@ -14,17 +14,53 @@
 
     <alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
       <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer au commerçant ?</h4>
-      <button type="submit" class="button-outline warning" (click)="removeStoredReport()">Non</button>
+      <button type="submit" class="button-outline warning" (click)="removeStoredReport()" appAutofocus>Non</button>
       <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
     </alert>
 
-    <section class="section section-lightest-grey position-relative">
+    <section class="section section-lighter-grey position-relative pt-0 pt-sm-1 pt-md-4 pb-0 pb-sm-1 pb-md-4">
+        <div class="container">
+            <div class="row pb-0 pb-md-4">
+              <div class="col-12 col-md-3 text-center">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/formulaire.png" alt="formulaire" width="110px"/>
+                <p class="legend pt-3">
+                  <span class="d-inline d-md-none">1.</span> Déposez un signalement
+                </p>
+              </div>
+              <div class="col-md-1 text-center mt-4 d-none d-md-block">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/arrow-right.png" alt="flêche" width="48"/>
+              </div>
+              <div class="col-12 col-md-4 text-center">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/magasin.png" alt="magasin" width="110px"/>
+                <p class="legend pt-0">
+                    <span class="d-inline d-md-none">2.</span> Le commerçant est prévenu et peut se corriger
+                </p>
+              </div>
+              <div class="col-md-1 text-center mt-4 d-none d-md-block">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/arrow-right.png" alt="flêche" width="48"/>
+              </div>
+              <div class="col-12 col-md-3 text-center">
+                <img class="icon-explanation d-none d-md-inline" src="/assets/images/jumelles.png" alt="jumelles" width="110px"/>
+                <p class="legend pt-0">
+                    <span class="d-inline d-md-none">3.</span> La répression des fraudes est alertée
+                </p>
+              </div>
+          </div>
+          <div class="row d-none d-md-block pb-0 pb-sm-4">
+            <div class="col-12 text-center">
+              <button type="button" class="btn btn-primary btn-lg cta-btn" (click)="scrollToElement(categoryList)">&nbsp;&nbsp;Je signale&nbsp;&nbsp;</button>
+            </div>
+          </div>
+        </div>
+    </section>
 
-      <div class="container mt-n4">
+    <section #categoryList class="section section-lightest-grey position-relative pt-3">
+
+      <div class="container">
         <h3 class="text-center sous-titre">Quel est le problème ?</h3>
         <div class="row pb-4">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
-            <div class="category pointer" (click)="selectAnomaly(category)">
+            <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
                 <div class="col-12 col-lg-3 mb-2 text-center">
                   <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
@@ -38,19 +74,16 @@
           </div>
         </div>
 
-        <h3 class="pointer other-problems" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
-          Autres problèmes&nbsp;?
+        <h3 id="otherCategories" class="pointer other-problems" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
+          Autres problèmes &nbsp;?
         </h3>
-        <ng-template #secondaryCategories>
-          <h3 class="other-problems">
-            Autres problèmes&nbsp;?
-          </h3>
-          <ul>
-            <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)">
-              <h5 class="other-problems">{{category.category}}</h5>
-            </li>
-          </ul>
-        </ng-template>
+
+        <ul *ngIf="showSecondaryCategories">
+          <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
+            <h5 class="other-problems">{{category.category}}</h5>
+          </li>
+        </ul>
+
       </div>
     </section>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Roles, User } from '../../model/AuthUser';
+import { Permissions, Roles, User } from '../../model/AuthUser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   roles = Roles;
+  permissions = Permissions;
   user: User;
 
   constructor(private authenticationService: AuthenticationService,
@@ -24,7 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    const role = this.user.role
+    const role = this.user.role;
     this.authenticationService.logout();
     if (role === Roles.Pro) {
       this.router.navigate(['connexion']);
@@ -39,6 +40,14 @@ export class HeaderComponent implements OnInit {
 
   goHome() {
     this.router.navigate(['suivi-des-signalements']);
+  }
+
+  mostReportedPro() {
+    this.router.navigate(['pro-les-plus-signales']);
+  }
+
+  goTo(commands: any[]) {
+    this.router.navigate(commands);
   }
 
 }

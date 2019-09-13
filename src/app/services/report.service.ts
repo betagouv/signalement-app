@@ -5,11 +5,14 @@ import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
+import { NbReportsGroupByCompany } from '../model/NbReportsGroupByCompany';
 import { map, mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
-import { Region, ReportFilter } from '../model/ReportFilter';
+import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
+import { Region } from '../model/Region';
+import { deserialize } from 'json-typescript-mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +65,29 @@ export class ReportService {
     );
   }
 
+  getNbReportsGroupByCompany(offset: number, limit: number) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('offset', offset.toString());
+    httpParams = httpParams.append('limit', limit.toString());
+
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<PaginatedData<any>>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'nbReportsGroupByCompany']),
+          Object.assign(headers, { params: httpParams })
+        );
+      }),
+      mergeMap(paginatedData => {
+        return of(Object.assign(new PaginatedData<Report>(), {
+          totalCount: paginatedData.totalCount,
+          hasNextPage: paginatedData.hasNextPage,
+          entities: paginatedData.entities.map(res => deserialize(NbReportsGroupByCompany, res))
+        }));
+      })
+    );
+
+  }
+
   getReports(offset: number, limit: number, reportFilter: ReportFilter) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
@@ -79,6 +105,7 @@ export class ReportService {
     if (reportFilter.period && reportFilter.period[1]) {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
+
     ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
       if (reportFilter[filterName]) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
@@ -119,6 +146,7 @@ export class ReportService {
         if (reportFilter.period && reportFilter.period[1]) {
           httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
         }
+
         ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
           if (reportFilter[filterName]) {
             httpParams.push(`${filterName}=${encodeURIComponent((reportFilter[filterName] as string).trim())}`);
@@ -130,10 +158,11 @@ export class ReportService {
   }
 
   private report2reportApi(report: Report) {
-    const reportApi = {
+    return {
       id: report.id,
       category: report.category,
-      subcategories: report.subcategories.map(subcategory => subcategory.title ? subcategory.title : subcategory),
+      subcategories: !report.subcategories ? [] : report.subcategories
+        .map(subcategory => subcategory.title ? subcategory.title : subcategory),
       companyName: report.company.name,
       companyAddress: this.company2adresseApi(report.company),
       companyPostalCode: report.company.postalCode,
@@ -152,7 +181,6 @@ export class ReportService {
           };
         })
     };
-    return reportApi;
   }
 
   company2adresseApi(company: Company) {

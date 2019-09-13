@@ -4,4 +4,33 @@
     width: 100%;
   }
 
+  main .section {
+    padding-top: 20px;
+  }
+
+  markdown {
+
+    p {
+      // Version native : peut être à préférer ?
+      // font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      font-family: "Source Sans Pro", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 27px;
+    }
+
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+  }
+
+  .footer-links {
+    border-top: 1px solid lightgray;
+    padding-top: 30px;
+    margin: 50px 0 0;
+  }
+
+
+
 }

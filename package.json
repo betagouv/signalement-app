@@ -3,9 +3,9 @@
   "version": "0.0.1-SNAPSHOT",
   "scripts": {
     "ng": "ng",
-    "start:local": "npm run generate-json-files && ng serve --host 0.0.0.0",
+    "start:local": "npm run generate-json-files && npm run generate-blog-metadata && ng serve --host 0.0.0.0",
     "start": "node dist/server.js",
-    "prebuild": "npm run generate-json-files && envsub --env API_BASE_URL ./src/environments/environment.prod.ts",
+    "prebuild": "npm run generate-json-files && npm run generate-blog-metadata && envsub --env API_BASE_URL ./src/environments/environment.prod.ts",
     "build": "ng build",
     "test": "ng test --watch false",
     "lint": "ng lint",
@@ -15,7 +15,8 @@
     "build:browser:prod": "ng build --prod",
     "build:prod": "npm run build:server:prod && npm run build:browser:prod",
     "heroku-postbuild": "echo Skip build on Heroku",
-    "generate-json-files": "node src/generate-json-files.ts"
+    "generate-json-files": "node src/scripts/generate-json-files.ts",
+    "generate-blog-metadata" : "node src/scripts/generate-blog-metadata.js"
   },
   "private": true,
   "dependencies": {

@@ -37,8 +37,8 @@ export class ReportDetailComponent implements OnInit {
 
   placeholderPro: string;
 
-  placeholderProAccepted = "Précisez les actions préventives / correctives que vous allez mettre en place.";
-  placeholderProDeclined = "Si vous estimez que le signalement est infondé, merci de l'indiquer ici.";
+  placeholderProAccepted = 'Précisez les actions préventives / correctives que vous allez mettre en place.';
+  placeholderProDeclined = 'Si vous estimez que le signalement est infondé, merci de l\'indiquer ici.';
 
   bsModalRef: BsModalRef;
   reportIdToDelete: string;
@@ -246,7 +246,7 @@ export class ReportDetailComponent implements OnInit {
           this.bsModalRef.hide();
         },
         err => {
-          console.log('err', err)
+          console.log('err', err);
           this.loading = false;
           this.loadingError = true;
         });
@@ -346,5 +346,9 @@ export class ReportDetailComponent implements OnInit {
 
   getProAnswerEvent() {
     return this.events.find(event => event.action.name === ProAnswerReportEventAction.name);
+  }
+
+  isClosed() {
+    return ['Signalement mal attribué', 'Signalement non consulté', 'Signalement consulté ignoré'].indexOf(this.report.statusPro) !== -1;
   }
 }

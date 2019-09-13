@@ -3,13 +3,13 @@
     <div class="form__group mt-4">
       <div class="row">
         <div class="col-12">
-          <label [class]="hasError(actionCtrl) ? 'error' : ''">
+          <label for="actionSelect" [class]="hasError(actionCtrl) ? 'error' : ''">
             Action <span class="error">*</span>
           </label>
-          <select [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''" (change)="selectAction()">
+          <select id="actionSelect" [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''" (change)="selectAction()">
             <optgroup label="Actions pros" *appRole="[roles.Admin]">
               <option *ngFor="let action of actionPros" [ngValue]="action">
-                {{action.name}}
+                {{action.name}}<span *ngIf="isStatusProFinal(action.name)"> (C)</span>
               </option>
             </optgroup>
             <optgroup label="Actions consos" *appRole="[roles.Admin]">
@@ -36,10 +36,10 @@
     <div class="form__group mt-4">
       <div class="row">
         <div class="col-12">
-          <label [class]="hasError(detailCtrl) ? 'error' : ''">
+          <label for="detail" [class]="hasError(detailCtrl) ? 'error' : ''">
             Détail
           </label>
-          <textarea [formControl]="detailCtrl"></textarea>
+          <textarea id="detail" [formControl]="detailCtrl"></textarea>
         </div>
       </div>
     </div>

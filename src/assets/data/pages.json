@@ -23,6 +23,14 @@
     "title": "Conditions générales d'utilisation - SignalConso",
     "description": "Consultez les conditions générales d'utilisation"
   },
+  "blog": {
+    "title": "Blog - SignalConso",
+    "description": "Les articles du blog de SignalConso"
+  },
+  "stats": {
+    "title": "Statistiques - SignalConso",
+    "description": "Les différentes statistiques du site"
+  },
   "login": {
     "title": "Authentification - SignalConso",
     "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso",
@@ -53,6 +61,10 @@
         "title": "Activation du compte - SignalConso",
         "description": "Activez votre compte pour accéder à votre espace personnel sur SignalConso"
       }
+    },
+    "subscriptions": {
+      "title": "Abonnements - SignalConso",
+      "description": "Abonnez-vous pour recevoir les signalements qui vous concernent"
     }
   }
 }

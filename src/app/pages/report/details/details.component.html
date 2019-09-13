@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="detailInput.type === 'DATE'">
+        <div class="row" *ngIf="detailInput.type === 'DATE_NOT_IN_FUTURE'">
           <div class="col-12 col-sm-6">
             <input type="text"
                    [formControlName]="getFormControlName(detailInput)"
@@ -39,6 +39,19 @@
                    [id]="getFormControlId(detailInput)"
                    bsDatepicker
                    [maxDate]="maxDate"
+                   autocomplete="off"
+                   [bsConfig]="{ containerClass: 'theme-default' }">
+          </div>
+        </div>
+
+        <div class="row" *ngIf="detailInput.type === 'DATE'">
+          <div class="col-12 col-sm-6">
+            <input type="text"
+                   [formControlName]="getFormControlName(detailInput)"
+                   [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
+                   [id]="getFormControlId(detailInput)"
+                   bsDatepicker
+                   autocomplete="off"
                    [bsConfig]="{ containerClass: 'theme-default' }">
           </div>
         </div>
@@ -117,7 +130,7 @@
       </div>
       <div class="form__group">
         <label>
-          <i class="material-icons md-24" alt="Icône du bouton joindre" title="bouton attacher un fichier">attach_file</i>
+          <i class="material-icons md-24" aria-hidden="true">attach_file</i>
           {{this.getReportLastSubcategory()?.fileLabel ? this.getReportLastSubcategory().fileLabel : 'Pièces jointes'}}
         </label>
         <div class="row text-center">
@@ -140,7 +153,7 @@
                   </a>
                 </td>
                 <td class="text-right pointer" *ngIf="!uploadedFile.loading">
-                  <i class="material-icons md-24 blue" alt="Icône du bouton suppression" title="bouton suppression" (click)="removeUploadedFile(uploadedFile)">remove_circle_outline</i>
+                  <i class="material-icons md-24 blue" title="Supprimer la pièce jointe" (click)="removeUploadedFile(uploadedFile)">remove_circle_outline</i>
                 </td>
               </tr>
               </tbody>
@@ -168,7 +181,7 @@
 
       <hr />
       <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
-        <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
+        <i class="material-icons md-24" aria-hidden="true">play_arrow</i>
         Étape suivante : identifier le commerçant
       </button>
     </form>

@@ -14,7 +14,7 @@ list:
           subtitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et aliments suspectés ).
           actions:
             - question: Comment le signaler&#160;?
-              answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>   
+              answer: Signaler à la DGCCRF ici<br><a href="https://www2.economie.gouv.fr/courrier/4210" target="_blank" />https://www2.economie.gouv.fr/courrier/4210</a>   
       - title: Hygiène
         example: 'Exemple : locaux sales, rats, problème de chaîne du froid'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
@@ -988,7 +988,7 @@ list:
             example: 'Exemple: fuite d''eau avant compteur'
             information:
               title: Le compteur d'eau représente la frontière entre ce qui est à votre charge et ce qui ne l'est pas.
-              subTitle: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
+              subTitle: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www2.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
               actions:  
                 - question: Que faire en cas de désaccord&#160;?
                   answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a> 
@@ -1298,7 +1298,7 @@ list:
                  example: pansement, tensiomètre
                  information:
                    title: "Vous devez le signaler avec un formulaire spécifique."
-                   content: <br><a href="https://www.economie.gouv.fr/courrier/4212">Remplir le formulaire ici/a>
+                   content: <br><a href="https://www2.economie.gouv.fr/courrier/4212">Remplir le formulaire ici/a>
            - title: la publicité pour un médicament / dispositif médical est trompeuse
            - title: un produit de santé est de mauvaise qualité
              example: béquille qui se tord, audioprothèse qui se fissure rapidement..
@@ -1544,7 +1544,7 @@ list:
       subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
       actions:
         - question: Signaler un cas d'intoxication alimentaire&#160;?
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>   
+          answer: Signaler à la DGCCRF<br><a href="https://www2.economie.gouv.fr/courrier/4210" target="_blank" />https://www2.economie.gouv.fr/courrier/4210</a>   
   - category: Signaler un problème sur un produit
     categoryId: SIGN
     path: pratique-d-hygiene
@@ -1647,7 +1647,7 @@ list:
           subTitle: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
           actions:
             - question: Signaler un produit dangereux?
-              answer: Utiliser ce formulaire spécifique<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
+              answer: Utiliser ce formulaire spécifique<br><a href="https://www2.economie.gouv.fr/courrier/4212" target="_blank">https://www2.economie.gouv.fr/courrier/4212</a>
       - title: Durée de vie trop courte
         example: Vous trouvez que la durée de vie de votre appareil est trop courte.
         detailInputs:
@@ -1675,7 +1675,7 @@ list:
             description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
                 <br/>Par contre, ces différences sont encadrées par la loi.
                 <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
-                <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
+                <br/><a href="https://www2.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
             detailInputs:
               - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
                 rank: 1
@@ -1795,7 +1795,7 @@ list:
       actions:
         - question: Un problème avec un commerçant&#160;?
           example: Colis non reçu, pas de nouvelle de votre commande, etc.
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/80666" target="_blank">https://www.economie.gouv.fr/courrier/80666</a>
+          answer: Signaler à la DGCCRF<br><a href="https://www2.economie.gouv.fr/courrier/80666" target="_blank">https://www2.economie.gouv.fr/courrier/80666</a>
         - question: Un spam que vous avez reçu&#160;?
           answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
         - question: Un contenu qui vous semble inapproprié&#160;?

@@ -6,7 +6,7 @@ import { FileUploaderService } from '../../../../services/file-uploader.service'
 import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
-import { Department, Region, Regions, ReportFilter } from '../../../../model/ReportFilter';
+import { ReportFilter } from '../../../../model/ReportFilter';
 import { combineLatest, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
@@ -20,6 +20,7 @@ import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
+import { Department, Region, Regions } from '../../../../model/Region';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
@@ -81,6 +82,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
+    if (this.user && this.user.role === Roles.Pro) {
+      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    }
+
     this.loading = true;
     this.loadingError = false;
     combineLatest(
@@ -90,13 +95,24 @@ export class ReportListComponent implements OnInit, OnDestroy {
       this.route.paramMap
     ).subscribe(
       ([reportFilter, statusPros, statusConsos, params]) => {
+
+
         if (reportFilter) {
           this.reportFilter = deserialize(ReportFilter, reportFilter);
         }
+        const siret = params.get('siret');
+
+        if (siret) {
+          this.reportFilter = { ...this.reportFilter, siret};
+        }
+
+        this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+
         this.statusPros = statusPros;
         this.statusConsos = statusConsos;
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
+
       },
       err => {
         this.loading = false;
@@ -118,9 +134,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
-    this.loadReportExtractUrl();
     this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    this.loadReportExtractUrl();
     this.initPagination();
+
     this.loadReports(1);
   }
 
@@ -177,7 +194,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
         });
     });
 
-    console.log("XXX ", JSON.stringify(this.reportsByDate))
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
@@ -241,7 +257,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   getReportCssClassNewReport(status: string) {
-    return status ? "mr-3" : "bold mr-3"
+    return status ? 'mr-3' : 'bold mr-3';
   }
 
   selectArea(area?: Region | Department) {
@@ -291,11 +307,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
       const nbWords = helper(str.split(' '), '', 0);
 
       const lines = strings.reduce((prev, curr, index) => index < nbWords
-        ? {...prev, line: prev.line + curr + " "}
-        : {...prev, rest: prev.rest + curr + " "}
-      , {line: "", rest: ""})
+        ? {...prev, line: prev.line + curr + ' '}
+        : {...prev, rest: prev.rest + curr + ' '}
+      , {line: '', rest: ''});
 
-      return { line: lines.line.trim(), rest: lines.rest.trim() }
+      return { line: lines.line.trim(), rest: lines.rest.trim() };
     }
 
     let firstLine = '';

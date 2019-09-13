@@ -16,7 +16,7 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
-          <h3>Signalements des 7 derniers jours en région&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Nombre de signalements des 7 derniers jours&#10;sur les régions d'expérimentation">help_outline</i></h3>
+          <h3>Signalements des 7 derniers jours en région&nbsp;<i class="material-icons dark-grey" aria-hidden="true" title="Nombre de signalements des 7 derniers jours&#10;sur les régions d'expérimentation">help_outline</i></h3>
           {{ statistics?.reportsCount7DaysInRegion }}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
@@ -28,19 +28,19 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
-          <h3>Signalements des 30 derniers jours en région&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Nombre de signalements des 30 derniers jours&#10;sur les régions d'expérimentation">help_outline</i></h3>
+          <h3>Signalements des 30 derniers jours en région&nbsp;<i class="material-icons dark-grey" aria-hidden="true" title="Nombre de signalements des 30 derniers jours&#10;sur les régions d'expérimentation">help_outline</i></h3>
           {{ statistics?.reportsCount30DaysInRegion }}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
       </div>
       <div class="row">
         <div class="col-4 count stat">
-          <h3>Signalements transmis&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Pourcentage de signalements transmis au professionnel&#10;(dans les régions d'expérimentation)">help_outline</i></h3>
+          <h3>Signalements transmis&nbsp;<i class="material-icons dark-grey" aria-hidden="true" title="Pourcentage de signalements transmis au professionnel&#10;(dans les régions d'expérimentation)">help_outline</i></h3>
           {{ ! statistics ? "NA" : statistics.reportsPercentageSendedToPro.toFixed(0) + "%"}}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
-          <h3>Promesses d'action&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Pourcentage de promesses d'action positives&#10;des professionels (dans les régions d'expérimentation)">help_outline</i></h3>
+          <h3>Promesses d'action&nbsp;<i class="material-icons dark-grey" aria-hidden="true" title="Pourcentage de promesses d'action positives&#10;des professionels (dans les régions d'expérimentation)">help_outline</i></h3>
           {{ ! statistics ? "NA" : statistics.reportsPercentagePromise.toFixed(0) + "%" }}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
@@ -52,7 +52,7 @@
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
         <div class="col-4 count stat">
-          <h3>Temps moyen de transmission du signalement&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Temps moyen entre entre la création du signalement&#10;et la prise de connaissance du professionel">help_outline</i></h3>
+          <h3>Temps moyen de transmission du signalement&nbsp;<i class="material-icons dark-grey" aria-hidden="true" title="Temps moyen entre entre la création du signalement&#10;et la prise de connaissance du professionel">help_outline</i></h3>
           {{ ! statistics ? "NA" : statistics.reportsDurationsForEnvoiSignalement + "j" }}
           <ngx-loading [show]="loading"></ngx-loading>
         </div>
@@ -75,6 +75,14 @@
         <div class="row mt-2" *ngIf="isPlatformBrowser() && user && user.role === 'Admin'">
           <div class="col-12 chart">
             <div echarts [options]="byRegionsChartOption"></div>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="user && user.role === 'Admin'">
+          <div class="col-12 col-sm-6 col-lg-4 count stat">
+            <h3>Correspondance nb ETPT</h3>
+            {{statistics? (statistics.reportsCountInRegion * 0.58 / 1400).toFixed(2) : 0}}
             <ngx-loading [show]="loading"></ngx-loading>
           </div>
         </div>

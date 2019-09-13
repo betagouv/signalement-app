@@ -1,4 +1,4 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-lighter-grey" role="region">
   <div class="container">
     <div class="row">
       <div class="col-2 col-sm-1 text-right">
@@ -198,18 +198,18 @@
                   <div class="form__group">
                     <div class="row">
                       <div class="col-12 col-sm-6">
-                        <label> Prénom <span class="error">*</span></label>
-                        <input type="text" formControlName="firstName">
+                        <label for="firstName"> Prénom <span class="error">*</span></label>
+                        <input type="text" formControlName="firstName" id="firstName">
                       </div>
                       <div class="col-12 col-sm-6">
-                        <label>Nom <span class="error">*</span></label>
-                        <input type="text" formControlName="lastName">
+                        <label for="lastName">Nom <span class="error">*</span></label>
+                        <input type="text" formControlName="lastName" id="lastName">
                       </div>
                     </div>
                   </div>
                   <div class="form__group">
-                    <label>Email <span class="error">*</span></label>
-                    <input type="email" formControlName="email"/>
+                    <label for="email">Email <span class="error">*</span></label>
+                    <input type="email" formControlName="email" id="email"/>
                   </div>
                   <div class="form__group">
                     <div class="row">
@@ -257,12 +257,9 @@
           </ng-template>
         </ng-container>
 
-        <ng-container *ngIf="getProAnswerEvent()">
+        <ng-container *ngIf="getProAnswerEvent() && ! isClosed()">
           <hr />
-          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée
-            <i class="material-icons md-18 valign-top" alt="Icône pouce levé" title="Signalement accepté" *ngIf="getProAnswerEvent().resultAction">thumb_up</i>
-            <i class="material-icons md-18 valign-top" alt="Icône pouce baissé" title="Signalement infondé" *ngIf="!getProAnswerEvent().resultAction">thumb_down</i>
-          </h5>
+          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
           <ng-template #titleAnswerNoPro>
             <h5>
               Réponse apportée par le professionnel
@@ -335,7 +332,7 @@
     </div>
 
     <ng-container *appRole="[roles.Pro]">
-      <div *ngIf="report && !getProAnswerEvent()">
+      <div *ngIf="report && !getProAnswerEvent() && ! isClosed()">
         <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
           <p>Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.</p>
           <div class="mb-4">
@@ -361,7 +358,7 @@
                 Une erreur technique s'est produite<br />
               </div>
               <p class="text-center mt-3 mb-4 text-primary">
-                <i class="material-icons md-18" alt="Icône d'avertissement" title="avertissement">warning</i>&nbsp;
+                <i class="material-icons md-18" aria-hidden="true">warning</i>&nbsp;
                 Votre réponse sera envoyée automatiquement par mail au consommateur ainsi qu'à la DGCCRF.
               </p>
 

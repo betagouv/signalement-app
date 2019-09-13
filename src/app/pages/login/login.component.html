@@ -1,4 +1,4 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-lighter-grey" role="region">
   <div class="container">
     <h1 class="text-center">
       {{isConnection ? 'Connexion' : 'Activation de l\'espace professionnel'}}
@@ -12,7 +12,7 @@
       <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
         <ng-container *ngIf="!isConnection">
           <h4 class="text-center">
-            Vous avez reçu un courrier pour consulter vos signalements ?
+            Vous avez reçu un courrier postal pour consulter vos signalements ?
           </h4>
           <h4 class="text-center pb-5">
             Veuillez renseigner votre numéro Siret et le code à 6 chiffres reçu pour activer votre compte.
@@ -25,7 +25,7 @@
             </label>
           </div>
           <div class="col-sm-9">
-            <input [formControl]="loginCtrl" type="text" class="form-control" id="login" placeholder="{{isDgccrf ? 'Email' : 'Siret'}}">
+            <input [formControl]="loginCtrl" type="text" class="form-control" id="login" placeholder="{{isDgccrf ? 'Email' : '14 caractères de votre SIRET'}}">
           </div>
         </div>
         <div class="form-group row">
@@ -35,7 +35,7 @@
             </label>
           </div>
           <div class="col-sm-9">
-            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="{{isConnection ? 'Mot de passe' : 'Code d\'activation'}}">
+            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="{{isConnection ? 'Mot de passe' : 'Code d\'activation à 6 chiffres'}}">
           </div>
         </div>
         <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
@@ -58,7 +58,8 @@
           </div>
         </div>
         <p class="form-text text-muted text-center" *ngIf="!isConnection">
-          La création d'un compte est réservé aux professionnels qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement concernant leur établissement.
+          La création d'un compte est réservé aux professionnels qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement concernant leur établissement.<br/><br/>
+          Pour plus d'informations, veuillez-vous reporter à <a routerLink="/vous-êtes-un-professionnel">la page d'aide pour les professionnels</a>.
         </p>
       </form>
       <div class="form-group row" *ngIf="isConnection">
@@ -73,12 +74,12 @@
           </div>
           <div class="col-12 col-md-4 text-center text-md-right">
             <button type="button" class="btn btn-lg btn-primary" [routerLink]="['/connexion']">
-              Connectez-vous <i class="material-icons md-18" alt="Icône suite" title="Se connecter">keyboard_arrow_right</i>
+              Connectez-vous <i class="material-icons md-18" aria-hidden="true">keyboard_arrow_right</i>
             </button>
           </div>
         </div>
       </div>
-      <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr">SignalConso</a>.</p>
+      <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">SignalConso</a>.</p>
     </div>
   </section>
 </main>
