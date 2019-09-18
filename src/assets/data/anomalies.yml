@@ -361,7 +361,7 @@ list:
               title: Vous souhaitez signaler la présence d'un corps étranger "dur"
               actions:
                 - question: Ce cas représente une alerte et nécessite une analyse individualisée par la répression des fraudes.
-                  answer: Veuillez le signaler ici<br><a href="https://www.economie.gouv.fr/courrier/4211" target="_blank">https://www.economie.gouv.fr/courrier/4211</a>
+                  answer: Veuillez le signaler ici<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
           - title: Autre
             subcategoriesTitle: De quel type de produit s'agit-il&#160;?
             subcategories:
@@ -502,7 +502,7 @@ list:
                 description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
                   <br/>Par contre, ces différences sont encadrées par la loi.
                   <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
-                  <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
+                  <br/><a href="https://www2.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
                 detailInputs:
                   - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
                     rank: 1
@@ -689,7 +689,7 @@ list:
           subTitle: Les cas d'effets indésirables nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
           actions:
             - question: Signaler un effet indésirable sur la santé&#160;?
-              answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
+              answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
       - title: Produit dangereux
         example: 'Exemple : pièce qui explose, jouet bébé qui se casse facilement, objet coupant, choc électrique, jeu qui prend feu...'
         information:
@@ -697,7 +697,7 @@ list:
           subTitle: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
           actions:
             - question: Signaler un produit dangereux?
-              answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4212" target="_blank">https://www.economie.gouv.fr/courrier/4212</a>
+              answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
       - title: Durée de vie trop courte
         example: Vous trouvez que la durée de vie de votre appareil est trop courte.
         detailInputs:
@@ -750,7 +750,7 @@ list:
       subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
       actions:
         - question: Signaler un cas d'intoxication alimentaire&#160;?
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/4210" target="_blank" />https://www.economie.gouv.fr/courrier/4210</a>
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
   - category: Prix et paiement
     categoryId: PRIX
     path: prix-et-paiement
@@ -833,7 +833,7 @@ list:
             <br/><br/><b>Cas particulier !</b>
             <br/>Un commerçant ne doit pas abuser d’une situation pour pratiquer des prix exagérés.
             <br/> Par exemple, un serrurier, qui vous demande de payer une somme exagérée en situation d'urgence sans vous avoir averti avant.
-            <br/> Si c’est votre cas, vous devez faire une réclamation avec ce formulaire :<a href='https://www.economie.gouv.fr/courrier/4191' target='_blank'> https://www.economie.gouv.fr/courrier/491</a>"
+            <br/> Si c’est votre cas, vous devez faire une réclamation avec ce formulaire :<a href='https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier' target='_blank'> https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>"
       - title: Fausse réduction de prix
         example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
         description: "<b>Soldes :</b> les dates des soldes sont encadrées par la loi. Les dates des soldes sur Internet sont les mêmes que les dates nationales, quelques soient le lieu du siège de l'entreprise
@@ -1333,7 +1333,7 @@ list:
       actions:
         - question: Un problème avec un commerçant&#160;?
           example: Colis non reçu, pas de nouvelle de votre commande, etc.
-          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/courrier/80666" target="_blank">https://www.economie.gouv.fr/courrier/80666</a>
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
         - question: Un spam que vous avez reçu&#160;?
           answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
         - question: Un contenu qui vous semble inapproprié&#160;?
