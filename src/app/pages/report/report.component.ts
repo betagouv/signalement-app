@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InformationComponent } from './information/information.component';
 import { ReportPaths } from '../../services/report-router.service';
@@ -20,16 +18,11 @@ import { AnomalyService } from '../../services/anomaly.service';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(private titleService: Title,
-              private meta: Meta,
-              private anomalyService: AnomalyService,
+  constructor(private anomalyService: AnomalyService,
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.default.title);
-    this.meta.updateTag({ name: 'description', content: pages.default.description });
-
     this.router.resetConfig(
       [
         ...this.getRoutesForCategories(),

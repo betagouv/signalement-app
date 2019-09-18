@@ -8,6 +8,8 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import Utils from '../../../utils';
+import pages from '../../../../assets/data/pages.json';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-category',
@@ -26,12 +28,17 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   internetInformation: Information;
 
-  constructor(private anomalyService: AnomalyService,
+  constructor(private titleService: Title,
+              private meta: Meta,
+              private anomalyService: AnomalyService,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
+    this.titleService.setTitle(pages.default.title);
+    this.meta.updateTag({ name: 'description', content: pages.default.description });
+
     this.step = Step.Category;
     this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
