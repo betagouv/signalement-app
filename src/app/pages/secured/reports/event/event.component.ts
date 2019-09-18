@@ -143,8 +143,8 @@ export class EventComponent implements OnInit {
   }
 
   isActionEnvoiCourrier() {
-    return this.actionPros.find(a => a === this.actionCtrl.value)
-      && this.actionPros.find(a => a === this.actionCtrl.value).name === `Envoi d'un courrier`;
+    return this.actionPros.find(a => a === this.eventForm.controls['action'].value)
+      && this.actionPros.find(a => a === this.eventForm.controls['action'].value).name === `Envoi d'un courrier`;
   }
 
 }

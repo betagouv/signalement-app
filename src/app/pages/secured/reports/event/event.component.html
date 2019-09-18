@@ -27,7 +27,7 @@
       </div>
     </div>
     <ng-container *appPermission="permissions.editDocuments">
-      <div class="row" *ngIf="isActionEnvoiCourrier()">
+      <div class="row" id="linkSendPostMail" *ngIf="isActionEnvoiCourrier()">
         <div class="col-12">
           <a [href]="activationDocumentUrl" target="_blank">Télécharger le courrier avec le code d'activation</a>
         </div>
