@@ -1,8 +1,17 @@
-const inputfile = 'src/assets/data/anomalies.yml';
-const outputfile = 'src/assets/data/anomalies.json';
+const files = [
+  {
+    input: 'src/assets/data/anomalies-v1.yml',
+    output: 'src/assets/data/anomalies-v1.json'
+  },
+  {
+    input: 'src/assets/data/anomalies-v2.yml',
+    output: 'src/assets/data/anomalies-v2.json'
+  }
+]
 const yaml = require('js-yaml');
 const fs = require('fs');
 
-const obj = yaml.load(fs.readFileSync(inputfile, {encoding: 'utf-8'}));
-
-fs.writeFileSync(outputfile, JSON.stringify(obj, null, 2));
+files.forEach(file => {
+  const obj = yaml.load(fs.readFileSync(file.input, {encoding: 'utf-8'}));
+  fs.writeFileSync(file.output, JSON.stringify(obj, null, 2));
+});
