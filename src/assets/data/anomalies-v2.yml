@@ -8,7 +8,7 @@ list:
     icon: icon_rest.png
     subcategories:
       - title: Intoxication alimentaire
-        example: 'Vous avez été malade (vomissement, maux de ventre) après être allé dans l''établissement'
+        example: 'Exemple: vous avez été malade (vomissement, maux de ventre) après être allé dans l''établissement'
         information:
           title: Les intoxications alimentaires ne doivent pas être signalées sur SignalConso.
           subtitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et aliments suspectés ).
@@ -16,19 +16,19 @@ list:
             - question: Comment le signaler&#160;?
               answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
       - title: Hygiène
-        example: 'Exemple : locaux sales, rats, problème de chaîne du froid'
+        example: 'Exemples : locaux sales, rats, problème de chaîne du froid...'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Présence d'animaux
-            example: 'Exemple : cafards...'
+            example: 'Exemples : cafards, rats...'
             detailInputs:
             - label: Quel animal avez-vous vu&#160;?
               rank: 1
               type: RADIO
               options:
-                - Insectes (cafard..)
-                - Rongeurs (rat, souris..)
-                - Oiseau (pigeon..)
+                - Insectes (cafard...)
+                - Rongeurs (rat, souris...)
+                - Oiseau (pigeon...)
                 - Autre (à préciser)
             - label: Où l'avez-vous vu&#160;?
               rank: 2
@@ -51,10 +51,10 @@ list:
               type: TIMESLOT
               optionnal: true
           - title: Hygiène des locaux et du matériel
-            example: 'Exemple : cuisine sale...'
+            example: 'Exemples : cuisine sale, trouble du voisinage...'
             subcategories:
               - title: Locaux sales ou dégradés
-                example: 'Exemple : cuisine sale, WC sale'
+                example: 'Exemples : cuisine sale, WC sale...'
                 detailInputs:
                   - label: Quel endroit est concerné&#160;?
                     rank: 1
@@ -70,7 +70,7 @@ list:
                     options:
                       - C'est sale
                       - C'est dégradé, en mauvais état
-                  - label: A quel niveau&#160;?
+                  - label: À quel niveau&#160;?
                     rank: 3
                     type: CHECKBOX
                     options:
@@ -97,27 +97,26 @@ list:
                   title: Trouble anormal de voisinage
                   subtitle: Les problèmes de nuisance tel que le bruit et les odeurs ne font pas partie du périmètre de la repression des fraudes.
                   actions:
-                    - question: Vous trouverez sur ce lien les recours possibles pour ce type de problème.&#160;?
+                    - question: Vous trouverez sur ce lien les recours possibles pour ce type de problème.
                       answer: <br><a href="https://www.service-public.fr/particuliers/vosdroits/F19299" target="_blank" />https://www.service-public.fr/particuliers/vosdroits/F19299</a>
           - title: Hygiène du personnel
-            example: 'Exemple : tenue sale ou pas adaptée...'
+            example: 'Exemples : tenue sale ou pas adaptée...'
             subcategories:
               - title: Tenue de travail pas adaptée
-                example: 'Exemple : pas de gant, torse-nu en cuisine'
+                example: 'Exemples : pas de gants, torse-nu en cuisine...'
                 subcategories:
                   - title: Pas de gants ou pas de coiffe
                     information:
                       title: Cet incident ne doit pas nécessairement être signalé.
-                      content: |-
-                        La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
-                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
-                  - title: Autre problème sur la tenue de travail          -
+                      content: La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
+                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
+                  - title: Autres problème sur la tenue de travail
               - title: Tenue sale
               - title: Mauvaises pratiques d'hygiène
-                example: 'Exemple : personne qui fume en cuisine'
-              - title: Autres
+                example: 'Exemple : personne qui fume en cuisine/'
+              - title: Autres problèmes sur l’hygiène du personnel
           - title: Problème de température
-            example: 'Exemple : rupture de la chaine du froid...'
+            example: 'Exemples : rupture de la chaine du froid...'
             detailInputs:
             - label: Quel est le problème&#160;?
               rank: 1
@@ -139,9 +138,9 @@ list:
               rank: 4
               type: TIMESLOT
               optionnal: true
-          - title: Autre problème d'hygiène
+          - title: Autres problème d'hygiène
       - title: Prix et paiement
-        example: 'Exemple : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance..'
+        example: 'Exemples : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance...'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Prix pas affiché
@@ -184,7 +183,7 @@ list:
                     information:
                       content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
                         <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
-                  - title: Autre
+                  - title: Autres
               - title: Le commerçant refuse la carte bancaire ou les chèques
                 subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
                 subcategories:
@@ -207,17 +206,17 @@ list:
                           content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
                       - title: Non
                   - title: Autres
-                    example: 'Exemple : problème avec le terminal de paiement...'
+                    example: 'Exemples : problème avec le terminal de paiement...'
               - title: Autres problèmes de prix ou paiement
                 subcategoriesTitle: 'Problème avec :'
                 subcategories:
                 - title: Le cash-back
                 - title: Tickets restaurant
-                - title: Autre
+                - title: Autres
           - title: Problème de facture/ticket de caisse
             example: 'Exemple : refus de délivrer une note'
       - title: Publicité trompeuse / informations mensongères
-        example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles..'
+        example: 'Exemples : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles...'
         subcategories:
           - title: Indisponibilité des produits du menu
             detailInputs:
@@ -238,7 +237,7 @@ list:
               rank: 1
               type: DATE
               defaultValue: SYSDATE
-            - label: Qu'es-ce qui est trompeur&#160;?
+            - label: Qu'est-ce qui est trompeur&#160;?
               rank: 2
               type: RADIO
               options:
@@ -247,7 +246,7 @@ list:
               - Le discours d'un vendeur
               - La façon de mettre en vente
               - Autre (à préciser)
-            - label: A propos de quoi est-ce trompeur&#160;?
+            - label: À propos de quoi est-ce trompeur&#160;?
               rank: 3
               type: RADIO
               options:
@@ -268,11 +267,11 @@ list:
                 - Non
             fileLabel: Photo(s) si possible
       - title: Service
-        example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avons une poussette..'
+        example: 'Exemples : chien refusé, personnel peu aimable, refus de nous donner une table car nous avons une poussette...'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Personnel peu aimable
-            example: 'Exemple : l''accueil est froid, le personnel est mal poli...'
+            example: 'Exemples : l''accueil est froid, le personnel est mal poli...'
             information:
               title: Ceci ne constitue pas un motif de signalement.
               content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
@@ -281,18 +280,18 @@ list:
                 - question: Vous avez été victime d'harcélement ou d'injure?
                   answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
                 - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
-                  answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées..
+                  answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées...
           - title: Refus de me servir
-            example: 'Exemple : refus de donner une table au motif de la presence d''enfant, refus de vente pour un motif discriminatoire'
+            example: 'Exemples : refus de donner une table au motif de la presence d''enfant, refus de vente pour un motif discriminatoire...'
           - title: Refus de mon chien
             subcategoriesTitle: Est-ce un chien d'assistance&#160;?
             subcategories:
             - title: Non
               information:
                 content: Tout comme dans un hôtel, un restaurateur peut refuser la présence d’un chien dans son établissement. 
-                  <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recencent les établissemets acceptant les chiens.
+                  <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recensent les établissements acceptant les chiens.
             - title: Oui (je possède la carte d'assistance)
-          - title: Autre problème de service
+          - title: Autres problème de service
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
@@ -301,10 +300,10 @@ list:
     icon: icon_store.png 
     subcategories:
       - title: Prix
-        example: 'Exemple : prix faux en caisse, prix pas affiché'
+        example: 'Exemples : prix faux en caisse, prix pas affiché...'
         subcategories:
           - title: Le prix à la caisse est différent du prix affiché
-            example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros.'
+            example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros'
             description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.'
             detailInputs:
               - label: Date du constat
@@ -360,14 +359,14 @@ list:
                 type: TEXTAREA
           - title: Les prix sont plus chers qu'ailleurs
             information:
-              title: Les commerçant ont le droit de choisir leurs prix.
+              title: Les commerçants ont le droit de choisir leurs prix.
               content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
                 <br/> Par exemple, il est autorisé de vendre une bouteille d'eau  8 euros dsi le prix est bien marqué.
                 <br/><br/><b>Le saviez-vous ?</b>
                 <br/>Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
                 <br/> Par exemple, le prix des livres est réglementé." 
           - title: Fausse réduction de prix
-            example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale...'
+            example: 'Exemples : fausse promotion pendant les soldes, fausse liquidation totale...'
             description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
                <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
                Un document prouvant ette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue."
@@ -395,7 +394,7 @@ list:
             subcategoriesTitle: Quels sont les produits concernés&#160;?
             subcategories:
               - title: Des produits vendus au rayon frais
-                example: 'Exemple : viande, poisson, quiche, jambon...'
+                example: 'Exemples : viande, poisson, quiche, jambon...'
                 subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
                 subcategories:
                   - title: Oui
@@ -412,7 +411,7 @@ list:
                         - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
               - title: Des produits vendus à température ambiante
-                example: 'Exemple : chocolat, conserve, compote, petits pots...'
+                example: 'Exemples : chocolat, conserve, compote, petits pots...'
                 information:
                   title: Ce problème n'est pas un motif de signalement.
                   content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
@@ -478,7 +477,7 @@ list:
                     defaultValue: SYSDATE
                     fileLabel: Photo
       - title: Hygiène
-        example: 'Exemple : magasin sale, rayon froid pas à bonne température'
+        example: 'Exemples : magasin sale, rayon froid pas à bonne température...'
         subcategories:
           - title: Locaux sales
             detailInputs:
@@ -496,7 +495,7 @@ list:
                 options:
                   - C'est sale
                   - C'est dégradé, en mauvais état
-              - label: A quel niveau&#160;?
+              - label: À quel niveau&#160;?
                 rank: 3
                 type: CHECKBOX
                 options:
@@ -521,7 +520,7 @@ list:
                 type: TIMESLOT
                 optionnal: true
           - title: Hygiène du personnel
-            example: 'Exemple : tenue sale ou pas adaptée...'
+            example: 'Exemples : tenue sale ou pas adaptée...'
             subcategories:
               - title: Tenue de travail pas adaptée
                 subcategories:
@@ -530,12 +529,12 @@ list:
                       title: Cet incident ne doit pas nécessairement être signalé.
                       content: |-
                         La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
-                        Les commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot..) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
-                  - title: Autre problème sur la tenue de travail
+                        Les commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
+                  - title: Autres problème sur la tenue de travail
               - title: Tenue sale
               - title: Mauvaises pratiques d'hygiène
                 example: 'Exemple : personne qui fume dans un local de production'
-              - title: Autre
+              - title: Autres
           - title: Présence d'animaux
             example: 'Exemple : cafards...'
             detailInputs:
@@ -543,9 +542,9 @@ list:
                 rank: 1
                 type: RADIO
                 options:
-                  - Insectes (cafard..)
-                  - Rongeurs (rat, souris..)
-                  - Oiseau (pigeon..)
+                  - Insectes (cafard...)
+                  - Rongeurs (rat, souris...)
+                  - Oiseau (pigeon...)
                   - Autre (à préciser)
               - label: Où l'avez-vous vu&#160;?
                 rank: 2
@@ -567,7 +566,7 @@ list:
                 type: TIMESLOT
                 optionnal: true
           - title: Problème de température
-            example: 'Exemple : rupture de la chaîne du froid...'
+            example: 'Exemples : rupture de la chaîne du froid...'
             detailInputs:
               - label: Quel est le problème&#160;?
                 rank: 1
@@ -589,9 +588,9 @@ list:
                 rank: 4
                 type: TIMESLOT
                 optionnal: true
-          - title: Autre problème d'hygiène
+          - title: Autres problème d'hygiène
       - title: Publicité
-        example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
+        example: 'Exemples : publicité trompeuse, produit du catalogue pas disponible...'
         subcategories:
           - title: Indisponibilité des produits en publicité
             detailInputs:
@@ -618,7 +617,7 @@ list:
                 options:
                   - Oui
                   - Non
-                  - "je n'ai pas demandé"
+                  - Je n'ai pas demandé
                 optionnal: true
               - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
                 rank: 5
@@ -626,13 +625,13 @@ list:
                 placeholder: "Lien vers la publicité"
             fileLabel: Photo(s) de la publicité si possible
           - title: Informations de vente mensongères
-            exemple: 'Exemple: pancarte "produits locaux" or ce n''est pas le cas, affiche "pain bio" or ce n''est pas le cas'
+            exemple : 'Exemples : pancarte "produits locaux" or ce n''est pas le cas, affiche "pain bio" or ce n''est pas le cas...'
             detailInputs:
               - label: Date du constat
                 rank: 1
                 type: DATE
                 defaultValue: SYSDATE
-              - label: Qu'es-ce qui est trompeur&#160;?
+              - label: Qu'est-ce qui est trompeur&#160;?
                 rank: 2
                 type: RADIO
                 options:
@@ -645,7 +644,7 @@ list:
                   - Le discours d'un vendeur
                   - La façon de mettre en vente
                   - Autre (à préciser)
-              - label: A propos de quoi est-ce trompeur&#160;?
+              - label: À propos de quoi est-ce trompeur&#160;?
                 rank: 3
                 type: RADIO
                 options:
@@ -670,14 +669,14 @@ list:
         example: 'Exemple : le magasin refuse de me reprendre un article'
         subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
         subcategories:
-          - title: Il présent un défaut ou il ne marche plus
+          - title: Il présente un défaut ou il ne marche plus
             subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
             subcategories:
               - title: Neuf
                 subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
                 subcategories:
                   - title: Il y a moins de 2 ans
-                    description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple: vous avez marché sur votre téléphone).'
+                    description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
                     detailTitle: Problème de garantie légale
                     detailInputs:
                     - label: Date d'achat
@@ -705,7 +704,7 @@ list:
                     subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                     subcategories:
                       - title: Oui
-                        example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                        example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
                         subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                          <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                         subcategories:
@@ -776,7 +775,7 @@ list:
                     subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                     subcategories:
                       - title: Oui
-                        example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
+                        example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf...'
                         subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                           <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                         subcategories:
@@ -815,8 +814,8 @@ list:
                               </ul>"
                               answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
                                   <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
-          - title: Autre raison
-            example: 'Vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur..'
+          - title: Autres raison
+            example: 'Exemples: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur...'
             subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
             subcategories:
               - title: Oui
@@ -844,7 +843,7 @@ list:
                 information:
                 content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
                     <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
-              - title: Autre
+              - title: Autres
           - title: Le commerçant refuse que je paie par carte bancaire ou chèque
             subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bancaire&#160;?
             subcategories:
@@ -868,39 +867,39 @@ list:
                       content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
                   - title: Non
               - title: Autres
-                example: 'Exemple : problème avec le terminal de paiement...'
+                example: 'Exemples : problème avec le terminal de paiement...'
           - title: Autres problèmes de prix ou paiement
             subcategoriesTitle: 'Problème avec :'
             subcategories:
               - title: Le cash-back
               - title: Une carte cadeaux
-              - title: Autre
+              - title: Autres
       - title: Autres
   - category: Services aux particuliers
     categoryId: SERV
     path: services-aux-particuliers
-    description: coiffeur, pressing, esthéticienne, aide à la personne..
+    description: coiffeur, pressing, esthéticienne, aide à la personne...
     rank: 11
     icon: icon_service.png
     subcategories:
       - title: Bien-être
-        example: coiffeur, esthéticienne, salon de massage..
+        example: coiffeur, esthéticienne, salon de massage...
       - title: Vie quotidienne
         example: conciergerie, pressing, cordonnier, ménage, garde d'enfants
       - title: Aide à la personne
       - title: Déménageur
-      - title: Autre    
+      - title: Autres    
   - category: Téléphonie / Eau-Gaz-Electricité
     categoryId: TEL
     path: telephonie-eau-gaz-electricite
-    description: forfait téléphone, fournisseur d'accès, contrat gaz..
+    description: forfait téléphone, fournisseur d'accès, contrat gaz...
     rank: 12
     icon: icon_tel.png
     subcategories:
       - title: Téléphonie / Internet
         subcategories:
           - title: Publicité
-            example: 'Exemple: mention mensongère'
+            example: 'Exemple : mention mensongère'
             subcategories:
               - title: Indisponibilité des produits/offres
                 detailInputs:
@@ -921,16 +920,16 @@ list:
           - title: SAV
             example: 'Exemple : pas de réponse du service client'
           - title: Offre promotionnelle pas respectée
-            example: 'Exemple: je devais bénéficié d''une reduction de 15e sur le telephone mais je ne l''ai jamais reçu'
+            example: 'Exemple : je devais bénéficié d''une reduction de 15e sur le telephone mais je ne l''ai jamais reçu'
           - title: Appels ou sms indésirables
-            example: 'Exemple : spams, démarchages téléphoniques'
+            example: 'Exemples : spams, démarchages téléphoniques...'
           - title: Itinérance
-            example: pas de réception du sms, itinérance à la frontière
-          - title: Autre
+            example: Pas de réception du sms, itinérance à la frontière
+          - title: Autres
       - title: Eau
         subcategories:
           - title: Contrat / facture
-            example: 'Exemple: la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives..'
+            example: 'Exemples : la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives...'
             subcategories:
               - title: Le distributeur refuse de m'ouvrir un contrat car je suis locataire et non propriétaire.
                 description: Conditionner l'abonnement du locataire à l'accord écrit du propriétaire est interdit. Refuser la demande d'abonnement d'un locataire car il n'est pas propriétaire est aussi interdit.
@@ -941,7 +940,7 @@ list:
                     information:
                       title: Ce n'est pas un motif de signalement
                       content: Le distributeur peut vous demander une avance si il est prévu de déduire cette somme de votre facture de consommation.
-                  - title: A la résiliation de l'abonnement ou au changement de locataire
+                  - title: À la résiliation de l'abonnement ou au changement de locataire
                     detailTitle: Il est interdit de demander un dépôt de garantie.
                     description: Rendre l'argent à la fin de l'abonnement ou du contrat sous-entend que c'est un dépôt de garantie. C'est interdit par la loi.
                     detailInputs:
@@ -960,17 +959,17 @@ list:
                   actions:
                     - question: Vous souhaitez obtenir la vérification de votre compteur d’eau&#160;?
                       answer: Voici un modèle de lettre à envoyer<br><a href="https://www.inc-conso.fr/content/vous-souhaitez-obtenir-la-verification-de-votre-compteur-deau-en-raison-dune-consommation" target="_blank" /> cliquez ici </a>
-              - title: Une clause du contrat (réglement de service) est abusive, c'est-à-dire elle désavantage fortement le consommateur.
+              - title: Une clause du contrat (règlement de service) est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
                 detailInputs:
                   - label: Date du constat (ou du contrat)
                     rank: 1
                     type: DATE
                     defaultValue: SYSDATE
-                  - label: Quelle partie du contrat / réglement trouvez-vous abusive ?
+                  - label: Quelle partie du contrat / règlement trouvez-vous abusive ?
                     rank: 2
                     type: TEXTAREA
-                fileLabel: Joindre une copie du contrat / réglement.
-              - title: Autre
+                fileLabel: Joindre une copie du contrat / règlement.
+              - title: Autres
           - title: Coupure de l'eau pour impayé
             example: Mon débit d'eau a été réduit car je ne peux payer ma facture
             detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
@@ -983,9 +982,9 @@ list:
                   - label: Date de la coupure 
                     rank: 2
                     type: DATE
-                    fileLabel: Joindre une copie du contrat / réglement.
+                    fileLabel: Joindre une copie du contrat / règlement.
           - title: Dégâts / travaux sur les canalisations
-            example: 'Exemple: fuite d''eau avant compteur'
+            example: 'Exemple : fuite d''eau avant compteur'
             information:
               title: Le compteur d'eau représente la frontière entre ce qui est à votre charge et ce qui ne l'est pas.
               subTitle: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
@@ -993,7 +992,7 @@ list:
                 - question: Que faire en cas de désaccord&#160;?
                   answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a> 
           - title: Fosse septique
-            example: 'Exemple: malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier.. '
+            example: 'Exemples : malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier... '
             detailInputs:
               - label: Date du constat
                 rank: 1
@@ -1012,7 +1011,7 @@ list:
       - title: Gaz / Electricité
         subcategories:
           - title: Démarchage à domicile ou par téléphone
-            example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif '
+            example: 'Exemples : vendeur prétend être envoyé par EDF, démarcheur agressif...'
             detailInputs:
               - label: Date du passage du vendeur (ou de son appel)
                 rank: 1
@@ -1024,7 +1023,7 @@ list:
                 options:
                   - démarchage à domicile (porte-à-porte)
                   - démarchage par téléphone uniquement
-              - label: Que s'est-il passé?
+              - label: Que s'est-il passé&#160;?
                 rank: 3
                 type: RADIO
                 options:
@@ -1049,7 +1048,7 @@ list:
                 type: TEXTAREA
             fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
           - title: Publicité mensongère ou trompeuse
-            example: 'Exemple: publicité "offre verte" mensongère'
+            example: 'Exemple : publicité "offre verte" mensongère'
             detailInputs:
               - label: Date du constat
                 rank: 1
@@ -1064,13 +1063,13 @@ list:
                   - Un spot télé ou radio (à préciser)
                   - Le discours d'un vendeur
                   - Autre (à préciser)
-              - label: A propos de quoi est-ce trompeur&#160;?
+              - label: À propos de quoi est-ce trompeur&#160;?
                 rank: 3
                 type: RADIO
                 options:
                   - Un label / certificat
                   - Une baisse de prix
-                  - Une information (exemple:origine géographique de mon électricité)
+                  - "Une information (exemple : origine géographique de mon électricité)"
                   - Autre (à préciser)
               - label: Pourquoi trouvez-vous ça trompeur ?
                 rank: 4
@@ -1086,14 +1085,14 @@ list:
           - title: Contrat
             example: 'Exemple : reconduction de contrat, clause abusive'
             subcategories:
-              - title: Difficulté pour résilier un contrat
-                example: 'Exemple: le bulletin de retractation n''a pas été prise en compte'
+              - title: Difficultés pour résilier un contrat
+                example: 'Exemple : le bulletin de retractation n''a pas été prise en compte'
                 subcategoriesTitle: Où avez-vous souscrit votre contrat ?
                 subcategories:
-                  - title: sur internet, par téléphone ou chez moi avec un conseiller
+                  - title: Sur internet, par téléphone ou chez moi avec un conseiller
                     subcategoriesTitle: Ce contrat concerne un logement
                     subcategories:
-                      - title: dans lequel vous venez d'emmenager
+                      - title: Dans lequel vous venez d'emménager
                         description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
                           <br />Vous n’avez pas à vous justifier auprès du commerçant.
                           <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
@@ -1116,7 +1115,7 @@ list:
                             information:
                               title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                               content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
-                      - title: un logement que vous occupiez déjà
+                      - title: Un logement que vous occupiez déjà
                         subcategoriesTitle: Avez-vous demander à faire démarrer votre contrat immédiatement ?
                         subcategories:
                           - title: Non. Le contrat doit démarrer à la fin du délai de retractation.
@@ -1147,23 +1146,23 @@ list:
                               title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                               content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
                           - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
-                  - title: dans une boutique
+                  - title: Dans une boutique
                     information:
                       title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                       actions: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
-              - title: Une clause du contrat est abusive, c'est-à-dire elle désavantage fortement le consommateur.
+              - title: Une clause du contrat est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
                 detailInputs:
                   - label: Date du constat (ou du contrat)
                     rank: 1
                     type: DATE
                     defaultValue: SYSDATE
-                  - label: Quelle partie du contrat / réglement trouvez-vous abusive ?
+                  - label: Quelle partie du contrat / règlement trouvez-vous abusive ?
                     rank: 2
                     type: TEXTAREA
-                fileLabel: Joindre une copie du contrat / réglement.
-              - title: Autre
+                fileLabel: Joindre une copie du contrat / règlement.
+              - title: Autres
           - title: Facturation
-      - title: Autres (Fioul / GPL / granulés de bois ..)    
+      - title: Autres (Fioul / GPL / granulés de bois...)
   - category: Immobilier
     categoryId: IMM
     path: immobilier
@@ -1172,60 +1171,60 @@ list:
     icon: icon_real_estate.png
     subcategories:
       - title: Agence immobilière
-        example: 'Exemple: location, vente, gestion locative, mandataire indépendant, marchand de liste, chasseur d''appartement..'
+        example: 'Exemples : location, vente, gestion locative, mandataire indépendant, marchand de liste, chasseur d''appartements...'
         subcategories:
-          - title: je cherche une location ou un bien à acheter
-            example: 'Exemple: marchand de liste, annonce immobilière, dossier de location..'
+          - title: Je cherche une location ou un bien à acheter
+            example: 'Exemples : marchand de liste, annonce immobilière, dossier de location...'
             subcategories:
-                  - title: je cherche une location
+                  - title: Je cherche une location
                     subcategories:
-                      - title: annonces immobilières
-                        example: 'Exemple: charges non indiquées sur les annonces, annonces en vitrine déja pourvues..'
-                      - title: marchand de liste
-                        example: 'Exemple: peu d''appartement disponible dans la liste '
-                      - title: visite de bien / dépôt de dossier
-                        example: 'Exemple: demande d''un relevé de compte bancaire alors que c''est interdit'
-                      - title: autre
-                  - title: je cherche à acheter
+                      - title: Annonces immobilières
+                        example: 'Exemples : charges non indiquées sur les annonces, annonces en vitrine déja pourvues...'
+                      - title: Marchand de liste
+                        example: 'Exemple : peu d''appartements disponibles dans la liste'
+                      - title: Visite de bien / dépôt de dossier
+                        example: 'Exemple : demande d''un relevé de compte bancaire alors que c''est interdit'
+                      - title: Autres
+                  - title: Je cherche à acheter
                     subcategories:
-                      - title: annonces immobilières
-                        example: 'Exemple: prix incomplet sur les annonces, annonces en vitrine déja pourvues, aucun DPE d''affiché..'
-                      - title: visite
-                      - title: offre d'achat / compromis de vente
-                        example: 'Exemple: refus de mon offre au prix sans justification'
-                      - title: chasseur d'appartement
-                        example: 'Exemple: frais d''étude alors que c''est interdit'
-                      - title: mandataire indépendant (agent commercial)
-          - title: j''ai un problème en tant que locataire
-            example: 'Exemple: état des lieux, charges, loyer...'
+                      - title: Annonces immobilières
+                        example: 'Exemples : prix incomplet sur les annonces, annonces en vitrine déjà pourvues, aucun DPE d''affiché...'
+                      - title: Visite
+                      - title: Offre d'achat / compromis de vente
+                        example: 'Exemple : refus de mon offre au prix sans justification'
+                      - title: Chasseur d'appartements
+                        example: 'Exemple : frais d''étude alors que c''est interdit'
+                      - title: Mandataire indépendant (agent commercial)
+          - title: J'ai un problème en tant que locataire
+            example: 'Exemples : état des lieux, charges, loyer...'
             subcategories: 
-                  - title: charges / honoraires
-                  - title: loyer
-                  - title: état des lieux / caution
-                  - title: bail / contrat de location
+                  - title: Charges / honoraires
+                  - title: Loyer
+                  - title: Etat des lieux / caution
+                  - title: Bail / contrat de location
                     example: 'Exemple : clause abusive dans le contrat'
-                  - title: autre
-          - title: j''ai un problème en tant que propriétaire
-            example: 'Exemple: gestion locative, mise en vente...'
+                  - title: Autres
+          - title: J'ai un problème en tant que propriétaire
+            example: 'Exemples : gestion locative, mise en vente...'
             subcategories:
-              - title: gestion locative
+              - title: Gestion locative
                 subcategories:
-                  - title: contrat et mandat
+                  - title: Contrat et mandat
                     example: 'Exemple : clause abusive dans le contrat'
-                  - title: honoraires
-                  - title: assurance loyer impayé
-                  - title: autre
-              - title: vente de mon bien
+                  - title: Honoraires
+                  - title: Assurance loyer impayé
+                  - title: Autres
+              - title: Vente de mon bien
                 subcategories:
-                  - title: mise en vente sans mandat
-                    example: 'Exemple: une agence a mis mon bien en vente sans mandat signé '
-                  - title: honoraires de vente
-                  - title: discours trompeur
-                    example: 'Exemple: L''agent immobilier m''a promis de vendre sous 7 jours'
-              - title: autre
+                  - title: Mise en vente sans mandat
+                    example: 'Exemple : une agence a mis mon bien en vente sans mandat signé '
+                  - title: Honoraires de vente
+                  - title: Discours trompeur
+                    example: 'Exemple : L''agent immobilier m''a promis de vendre sous 7 jours'
+              - title: Autres
       - title: Vente / location directement entre particuliers
         subcategories:
-          - title: problème avec mon locataire / propriétaire
+          - title: Problème avec mon locataire / propriétaire
             information:
               title: Votre problème ne rentre pas dans le cadre de SignalConso.
               content: La répression des fraudes n'a pas le pouvoir d'agir pour les conflits entre deux particuliers. <br> Vous pouvez passer par un médiateur ou un conciliateur de justice.
@@ -1234,7 +1233,7 @@ list:
                   answer: Le médiateur civil est une personne indépendante chargée de trouver une solution amiable. <br> Le recours à un médiateur est payant. <br> Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1822"_blank" />ici</a>
                 - question: Le conciliateur de justice&#160;
                   answer: Le conciliateur de justice intervient pour les conflits entre propriétaires et locataires, ou locataires entre eux. <br> Le recours à un conciliateur de justice est gratuit. <br>Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1736"_blank" />ici</a>
-          - title: problème avec un site de mise en relation entre particuliers
+          - title: Problème avec un site de mise en relation entre particuliers
       - title: Syndic de copropriété
         subcategories:
           - title: Facturation
@@ -1243,22 +1242,22 @@ list:
             subcategories:
               - title: J'ai pris connaissance de mon contrat de syndic.
                 subcategories:
-                  - title: les frais sont plus chers que dans le contrat
-                  - title: les frais ne correspondent à aucune des prestations dites "prestations particulières".
-                  - title: les frais sont normalement déjà inclus dans le socle général (forfait)
-                  - title: autre
+                  - title: Les frais sont plus chers que dans le contrat
+                  - title: Les frais ne correspondent à aucune des prestations dites "prestations particulières".
+                  - title: Les frais sont normalement déjà inclus dans le socle général (forfait)
+                  - title: Autres
           - title: Contrat de syndic
             example: 'Exemple : clause abusive dans le contrat'
           - title: Documents à disposition des copropriétaires
-            example: 'Exemple : pas de fiche synthétique de copropriété..'  
+            example: 'Exemple : pas de fiche synthétique de copropriété'
           - title: Gestion des travaux par le syndic
-            example: 'Devis, choix des prestataires..'
+            example: 'Exemples: devis, choix des prestataires...'
           - title: Absence de réponse du syndic
-            example: 'Exemple : aucune réponse malgré des relances..'
+            example: 'Exemple : aucune réponse malgré des relances'
             
-          - title: autres
+          - title: Autres
       - title: Notaire
-      - title: Autre    
+      - title: Autres    
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: banque-assurance-mutuelle
@@ -1267,180 +1266,180 @@ list:
     icon: icon_bank.png
     subcategories:
       - title: Frais bancaires 
-        example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir '
+        example: 'Exemples : prix non affiché, augmentation des frais bancaires sans prévenir...'
       - title: Contrat
         example: 'Exemple : contrat de crédit'
       - title: Publicité
         example: 'Exemple : publicité pour un crédit non conforme'
       - title: Service client
         example: 'Exemple : service client injoignable'   
-      - title: Autre      
+      - title: Autres      
   - category: Secteur de la santé
     categoryId: SANT
     path: sante
-    description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre..), clinique
+    description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
     rank: 15
     icon: icon_health.png
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories:
       - title: Produit en particulier
-        example: médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant..
+        example: 'Exemples : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant...'
         subcategories:
-           - title: j'ai eu un problème de santé/sécurité avec un produit
-             example: allergie, vomissement, électrocution..
+           - title: J'ai eu un problème de santé / sécurité avec un produit
+             example: 'Exemple : allergie, vomissement, électrocution...'
              subcategoriesTitle: Quel est le type de produit ?
              subcategories:
-               - title: un médicament
+               - title: Un médicament
                  information:
                    title: Vous devez le signaler au ministère de la Santé
                    content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
-               - title: un objet
-                 example: pansement, tensiomètre
+               - title: Un objet
+                 example: 'Exemple : pansement, tensiomètre...'
                  information:
                    title: "Vous devez le signaler avec un formulaire spécifique."
                    content: <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">Remplir le formulaire ici/a>
-           - title: la publicité pour un médicament / dispositif médical est trompeuse
-           - title: un produit de santé est de mauvaise qualité
-             example: béquille qui se tord, audioprothèse qui se fissure rapidement..
-           - title: autre
+           - title: La publicité pour un médicament / dispositif médical est trompeuse
+           - title: Un produit de santé est de mauvaise qualité
+             example: 'Exemple : béquille qui se tord, audioprothèse qui se fissure rapidement...'
+           - title: Autres
       - title: Professionnel de la santé
-        example: dentiste, opticien, kiné, infirmier, psychiatre, médecine douce..
+        example: Dentiste, opticien, kiné, infirmier, psychiatre, médecine douce...
         subcategories:
-          - title: les prix ne sont pas indiqués
-            example: les tarifs ne sont pas affichés en salle d'attente
-          - title: les prix sont trop chers
+          - title: Les prix ne sont pas indiqués
+            example: "Exemple : les tarifs ne sont pas affichés en salle d'attente"
+          - title: Les prix sont trop chers
             information:
               title: Les prix dépendent du type de professionnel
               content: 
               actions:
-                - question: Un professionnel de santé (médecin, dentiste, podologue..)
+                - question: Un professionnel de santé (médecin, dentiste, podologue...)
                   answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
-                - question: "Un professionnel en médecine douce (exemple: naturopathe, sophrologue.. )"
+                - question: "Un professionnel en médecine douce (exemple : naturopathe, sophrologue... )"
                   answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
-          - title: c'est un problème de devis
+          - title: C'est un problème de devis
             subcategories:
-              - title: je n'ai pas eu de devis écrit
-                example: chez l'opticien, le dentiste, le chirurgien esthététique, l'audioprothésiste notamment
-              - title: le devis est incomplet
-              - title: j'ai payé plus cher que le devis
-            example: je n'ai pas eu de devis, devis pas respecté..
-          - title: le professionnel ne m'a pas délivré de facture (note)
-          - title: la prestation est mal (ou pas) réalisée
+              - title: Je n'ai pas eu de devis écrit
+                example: "Exemples : chez l'opticien, le dentiste, le chirurgien esthététique, l'audioprothésiste..."
+              - title: Le devis est incomplet
+              - title: J'ai payé plus cher que le devis
+            example: "Exemple : je n'ai pas eu de devis, devis pas respecté..."
+          - title: Le professionnel ne m'a pas délivré de facture (note)
+          - title: La prestation est mal (ou pas) réalisée
             subcategories: 
-              - title: l'acte de soin  
-                example: mon dentiste a mal soigné ma dent
+              - title: L'acte de soin
+                example: 'Exemple : mon dentiste a mal soigné ma dent'
                 information:
                    title: Vous devez écrire à l'Ordre des médecins
                    content:
-              - title: la prestation ne correspond pas à ce qui était indiqué
-                example: duréee plus courte
-              - title: j'ai un problème avec la fabrication/pose d'appareil médical
-                example: lunette, prothèse..
-          - title: la publicité est trompeuse
-            example: offre promotionnelle trompeuse sur des lunettes..
-          - title: autre
+              - title: La prestation ne correspond pas à ce qui était indiqué
+                example: 'Exemple : duréee plus courte'
+              - title: J'ai un problème avec la fabrication/pose d'appareil médical
+                example: 'Exemples : lunette, prothèse...'
+          - title: La publicité est trompeuse
+            example: 'Exemples : offre promotionnelle trompeuse sur des lunettes...'
+          - title: Autres
       - title: Hopital / Clinique
       - title: Pharmacie
         subcategories:
-          - title: problème de prix
+          - title: Problème de prix
             subcategories:
-              - title: les prix ne sont pas indiqués dans les rayons
-              - title: les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
-              - title: il n'y a pas de catalogue des prix disponible (papier ou sur écran)
-              - title: les prix sont exagérés
+              - title: Les prix ne sont pas indiqués dans les rayons
+              - title: Les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
+              - title: Il n'y a pas de catalogue des prix disponible (papier ou sur écran)
+              - title: Les prix sont exagérés
                 information:
                   title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
-                  content: Le pharmacien peut choisir les prix des médicaments non remboursables, et des produits divers de la pharmacie (biberon, brosse à dent, crème..). Les prix doivent être clairement indiqués sans devoir les demander.
+                  content: Le pharmacien peut choisir les prix des médicaments non remboursables, et des produits divers de la pharmacie (biberon, brosse à dent, crème...). Les prix doivent être clairement indiqués sans devoir les demander.
                       Cas particulier des médicaments remboursables !
                       Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
-              - title: autre
-          - title: problème de commande
-          - title: autre
+              - title: Autres
+          - title: Problème de commande
+          - title: Autres
       - title: Ambulance
-        example: "et autre transport sanitaire (exemple: taxi)"
+        example: "et autre transport sanitaire (exemple : taxi)"
       - title: Cure
-        example: thalassothérapie, thermalisme
+        example: 'Exemples : thalassothérapie, thermalisme...'
         subcategories:
-          - title: prix et facture
-            example: prix pas affiché, pas de remise d'une facture
-          - title: prestation
-            example: les soins ne correspondant pas à ce qui était prévu
-          - title: publicité trompeuse
-            example: utilisation frauduleuse du label Qualicert, spa simple déclaré en thalassothérapie ..
-          - title: contrat
-            example: je souhaite annuler ma cure, le contrat n'est pas clair
+          - title: Prix et facture
+            example: "Exemple : prix pas affiché, pas de remise d'une facture"
+          - title: Prestation
+            example: 'Exemple : les soins ne correspondant pas à ce qui était prévu'
+          - title: Publicité trompeuse
+            example: 'Exemples : utilisation frauduleuse du label Qualicert, spa simple déclaré en thalassothérapie...'
+          - title: Contrat
+            example: "Exemples : je souhaite annuler ma cure, le contrat n'est pas clair..."
       - title: Ehpad (Maison de retraite)
         subcategories:
           - title: Les tarifs
             subcategories:
-              - title: les tarifs ne sont pas communiqués clairement
-                example: les prix des options ne sont pas dans le contrat
-              - title: je ne paye pas le prix qui était prévu au départ
-              - title: les prix sont élevés pour la prestation
+              - title: Les tarifs ne sont pas communiqués clairement
+                example: 'Exemple : les prix des options ne sont pas dans le contrat'
+              - title: Je ne paye pas le prix qui était prévu au départ
+              - title: Les prix sont élevés pour la prestation
                 information:
                   title: Les prix sont choisis librement par les maisons de retraite.
                   content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
           - title: Mon contrat
             subcategories:
-              - title: le contrat n'est pas respecté
-                example: 'Exemple: le contrat prévoit des fruits tous les jours et ce n''est pas le cas..'
-              - title: je veux résilier le contrat
-              - title: une clause dans le contrat est abusive, c'est-à-dire pas très juste pour le consommateur
-                example: imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois       
+              - title: Le contrat n'est pas respecté
+                example: 'Exemples : le contrat prévoit des fruits tous les jours et ce n''est pas le cas...'
+              - title: Je veux résilier le contrat
+              - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le consommateur
+                example: 'Exemple : imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois'
           - title: Sommes facturées
           - title: Etat des lieux de la chambre
-            example: Etat des lieux d'entrée ou de sortie, caution..
+            example: "Exemple : état des lieux d'entrée ou de sortie, caution..."
             subcategories:
-              - title: je n'ai pas eu d'état des lieux (entrée ou sortie)
-              - title: je ne suis pas d'accord avec l'état des lieux
-              - title: la caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
+              - title: Je n'ai pas eu d'état des lieux (entrée ou sortie)
+              - title: Je ne suis pas d'accord avec l'état des lieux
+              - title: La caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
                 subcategoriesTitle: 'Multipliez par 2 le tarif de l''hébergement mensuel (indiqué dans votre contrat).La caution demandée est-elle plus cher que ce résultat ?'
                 subcategories:
-                  - title: oui 
-                  - title: non
+                  - title: Oui
+                  - title: Non
                     information:
                       title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif hébergement mensuel.
                       content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
-              - title: je n'ai toujours pas récupéré la caution
+              - title: Je n'ai toujours pas récupéré la caution
                 subcategoriesTitle: Quand avez-vous libéré la chambre ?
                 subcategories:
-                  - title: il y a moins de 30 jours
+                  - title: Il y a moins de 30 jours
                     information:
                       title: Soyez encore un peu patient !
                       content: La maison de retraite a 30 jours pour vous rendre la caution.
-                  - title: il y a plus de 30 jours
-          - title: Publicité pour la maison de retraite est mensongère
-            example: le site internet parle d'un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu..
+                  - title: Il y a plus de 30 jours
+          - title: Publicité pour la maison de retraite mensongère
+            example: "Exemples : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu..."
           - title: Maltraitance
-          - title: Autre
-      - title: Autre
+          - title: Autres
+      - title: Autres
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
-    description: vente et réparation de voiture, location, taxi, auto-école ..
+    description: vente et réparation de voiture, location, taxi, auto-école...
     rank: 16
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
       - title: Location
-        example: 'Exemple : location de voiture, leasing, velib, autolib..'
+        example: 'Exemples : location de voiture, leasing, velib, autolib...'
         subcategories:
           - title: Publicité
           - title: Prix / Paiement
-          - title: Autre
+          - title: Autres
       - title: Vente / réparation de véhicule
-        example: 'Exemple : garagiste, dépanneur'
+        example: 'Exemples : garagiste, dépanneur...'
         subcategories:
           - title: Prix / Facturation
-            example: 'Exemple : devis non détaillé, devis non respecté'
+            example: 'Exemples : devis non détaillé, devis non respecté...'
           - title: Prestation mal réalisée ou pas réalisée
-            example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé'
+            example: 'Exemples : malfaçon, panne non réparée, pose d''un équipement endommagé...'
           - title: Publicité
-          - title: Autre
+          - title: Autres
       - title: Taxi / VTC
         subcategories:
           - title: Prix / Paiement
-            example: 'Exemple : refus de CB, supplément'
+            example: 'Exemples : refus de CB, supplément...'
             subcategories:
               - title: Prix pas affiché
                 example: 'Exemple : absence de l''affichette des prix'
@@ -1464,7 +1463,7 @@ list:
                         information:
                           content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
                             <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
-                      - title: Autre
+                      - title: Autres
                   - title: Refus de la carte bancaire
                     subcategories:
                       - title: Il s'agit d'un taxi officiel
@@ -1484,7 +1483,7 @@ list:
                             subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bancaire&#160;?
                             subcategories:
                               - title: Oui
-                                example: 'Exemple : sur une affiche au niveau ses vitres'
+                                example: 'Exemple : sur une affiche au niveau de ses vitres'
                                 information:
                                   title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
                                   content: Il doit l’indiquer très visiblement au consommateur.
@@ -1511,18 +1510,18 @@ list:
                               content: Il doit l’indiquer très visiblement au consommateur.
                           - title: Non
                       - title: Autres
-                        example: 'Exemple : problème avec le terminal de paiement...'
+                        example: 'Exemples : problème avec le terminal de paiement...'
                   - title: Autres problèmes de prix ou paiement
               - title: Problème de facture/ticket de caisse
                 example: 'Exemple : refus de délivrer une note'
           - title: Publicité
-          - title: Autre
+          - title: Autres
       - title: Transport en commun
         example: 'Exemple : bus'
         subcategories:
           - title: Prix / Paiement
           - title: Publicité
-          - title: Autre
+          - title: Autres
       - title: Permis / leçons de conduite
         example: 'Exemple : auto-école'
         subcategories:
@@ -1530,9 +1529,9 @@ list:
             example: 'Exemple : prix non affiché'
           - title: Publicité
             example: 'Exemple : publicité trompeuse'
-          - title: Autre
-            example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement '
-      - title: Autre      
+          - title: Autres
+            example: 'Exemples : clause abusive dans le contrat, obligation de payer des heures régulièrement...'
+      - title: Autres      
   - category: Intoxication alimentaire
     categoryId: INTOX
     path: intoxication-alimentaire
@@ -1553,7 +1552,7 @@ list:
     icon: icon_material.png
     subcategories:
       - title: Notice et emballage
-        example: 'Exemple : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
+        example: 'Exemples : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais...'
         subcategories:
           - title: Informations manquantes
             description: "Certaines informations sont obligatoires.
@@ -1561,7 +1560,7 @@ list:
               <ul>
                 <li>Vêtements : la composition des tissus (noms et proportions des matières)...</li>
                 <li>Meubles : la composition, la taille, s'il faut le monter soi-même, de quel cuir il s'agit...</li>
-                <li>Electroménagers: l'étiquetage énergétique, la disponibilité des pièces de rechange...</li>
+                <li>Electroménagers : l'étiquetage énergétique, la disponibilité des pièces de rechange...</li>
               </ul>"
             detailInputs:
               - label: Quel est-le problème&#160;?
@@ -1614,11 +1613,11 @@ list:
                   - label: Description
                     rank: 4
                     type: TEXTAREA
-              - title: A l'étranger
+              - title: À l'étranger
                 information:
                   title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
           - title: Informations trompeuses ou fausses
-            example: 'Exemple : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas ...'
+            example: 'Exemples : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas ...'
             detailInputs:
               - label: Quel est le type de produit&#160;?
                 rank: 1
@@ -1641,7 +1640,7 @@ list:
                 rank: 4
                 type: TEXTAREA
       - title: Produit dangereux
-        example: 'Exemple : jouet qui prend feu, allergie, intoxication...'
+        example: 'Exemples : jouet qui prend feu, allergie, intoxication...'
         information:
           title: Vous souhaitez signaler un produit dangereux
           subTitle: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
@@ -1649,7 +1648,7 @@ list:
             - question: Signaler un produit dangereux?
               answer: Utiliser ce formulaire spécifique<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
       - title: Durée de vie trop courte
-        example: Vous trouvez que la durée de vie de votre appareil est trop courte.
+        example: Vous trouvez que la durée de vie de votre appareil est trop courte
         detailInputs:
           - label: Date d'achat
             rank: 1
@@ -1675,7 +1674,7 @@ list:
             description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
                 <br/>Par contre, ces différences sont encadrées par la loi.
                 <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
-                <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Metrologie-pour-professionnels" target="_blank"> En savoir plus </a>
+                <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/controle-des-quantites-vendues-a-destination-des-professionnels" target="_blank"> En savoir plus </a>
             detailInputs:
               - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
                 rank: 1
@@ -1712,7 +1711,7 @@ list:
                 rank: 4
                 type: TEXTAREA
           - title: Un produit sans emballage, directement consommé
-            example: 'Exemple : verre de vin dans un café, plat au restaurant'
+            example: 'Exemples : verre de vin dans un café, plat au restaurant...'
             description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
             detailInputs:
               - label: Date du constat ou d'achat
@@ -1725,7 +1724,7 @@ list:
               - label: Description
                 rank: 3
                 type: TEXTAREA
-      - title: Produit en retrait/ rappel
+      - title: Produit en retrait / rappel
         example: Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités
         detailInputs:
           - label: Date du constat
@@ -1760,29 +1759,29 @@ list:
   - category: Animaux
     categoryId: ANI
     path: animaux
-    description: vétérinaire, aliment pour animaux, service de garde ..
+    description: vétérinaire, aliment pour animaux, service de garde...
     rank: 19
     icon: icon_pet.png
     subcategories:
       - title: Alimentation / Matériel pour animaux
-        example: jouet, cage, laisse, croquettes..
+        example: 'Exemples : jouet, cage, laisse, croquettes...'
       - title: Soins
-        example: Vétérinaire, toiletteur ..
+        example: 'Exemples : vétérinaire, toiletteur...'
       - title: Garde
-        example: Pension, site de petsitter..
+        example: 'Exemples : pension, site de petsitter...'
       - title: Vendeur d'animaux
-      - title: Autre             
+      - title: Autres             
   - category: Démarches administratives
     categoryId: ADM
     path: demarches-administratives
-    description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville ..
+    description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
     rank: 20
     icon: icon_marianne.png
     subcategories:
       - title: Courrier/société qui se fait passer pour l'administration
       - title: Site internet pour obtenir un document administratif (casier, acte de naissance)
-      - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier..)
-      - title: Autre              
+      - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
+      - title: Autres              
   - category: Achat sur internet
     categoryId: INTERNET
     path: achat-sur-internet
@@ -1794,12 +1793,12 @@ list:
       subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
         - question: Un problème avec un commerçant&#160;?
-          example: Colis non reçu, pas de nouvelle de votre commande, etc.
+          example: 'Exemples : colis non reçu, pas de nouvelle de votre commande...'
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
         - question: Un spam que vous avez reçu&#160;?
           answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
         - question: Un contenu qui vous semble inapproprié&#160;?
-          example: Trafic illicite, pédopornographie, etc.
+          example: 'Exemples : trafic illicite, pédopornographie...'
           answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>    
           
   - category: Travaux / Rénovation
@@ -1835,7 +1834,7 @@ list:
                       - Le site internet
                       - Les documents mis à votre disposition par le professionnel (flyer, plaquette de présentation...)
                       - Autre (à préciser)
-                  - label: A propos de quoi est-ce trompeur&#160;?
+                  - label: À propos de quoi est-ce trompeur&#160;?
                     rank: 2
                     type: RADIO
                     options:
@@ -1901,7 +1900,7 @@ list:
                       - Le site internet
                       - Les documents mis à votre disposition par le professionnel (flyer, plaquette de présentation...)
                       - Autre (à préciser)
-                  - label: A propos de quoi est-ce trompeur&#160;?
+                  - label: À propos de quoi est-ce trompeur&#160;?
                     rank: 2
                     type: RADIO
                     options:
@@ -1948,13 +1947,13 @@ list:
                 example: Une fois le contrat signé, vous souhaitez revenir en arrière
                 subcategoriesTitle: Où avez-vous signé le contrat ?
                 subcategories:
-                  - title: A votre domicile
+                  - title: À votre domicile
                     example: Un démarcheur est venu chez vous
                     description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
                       <br />Vous n’avez pas à vous justifier auprès du commerçant.
                       <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
-                  - title: A distance
-                    example: Par exemple, sur internet
+                  - title: À distance
+                    example: 'Exemple : sur internet'
                     description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
                       <br />Vous n’avez pas à vous justifier auprès du commerçant.
                       <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
@@ -2011,10 +2010,10 @@ list:
               - title: Prix non affiché
                 example: Sur un site, un catalogue...
               - title: Prix final non-conforme au prix annoncé
-                example: "Exemple : fausse réduction, suppléments non prévus..."
+                example: "Exemples : fausse réduction, suppléments non prévus..."
               - title: Autres
           - title: Publicité
-            example: Publicité trompeuse, absence d'information
+            example: "Exemples : publicité trompeuse, absence d'information..."
             subcategories:
               - title: Absence d'information
               - title: Information mensongère ou trompeuse
@@ -2027,7 +2026,7 @@ list:
                       - Le site internet
                       - Les documents mis à votre disposition par le professionnel (flyer, plaquette de présentation...)
                       - Autre (à préciser)
-                  - label: A propos de quoi est-ce trompeur&#160;?
+                  - label: À propos de quoi est-ce trompeur&#160;?
                     rank: 2
                     type: RADIO
                     options:
@@ -2062,12 +2061,12 @@ list:
                   content: Les professionnels ont le droit de choisir leurs prix.
                     <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
               - title: Prix non affiché
-                example: Sur un site, un catalogue...
+                example: 'Exemples : sur un site, un catalogue...'
               - title: Prix final non-conforme au prix annoncé
                 example: "Exemple : fausse réduction, suppléments non prévus..."
               - title: Autres
           - title: Publicité
-            example: Publicité trompeuse, absence d'information
+            example: "Exemples : publicité trompeuse, absence d'information"
             subcategories:
               - title: Absence d'information
               - title: Information mensongère ou trompeuse
@@ -2080,7 +2079,7 @@ list:
                       - Le site internet
                       - Les documents mis à votre disposition par le professionnel (flyer, plaquette de présentation...)
                       - Autre (à préciser)
-                  - label: A propos de quoi est-ce trompeur&#160;?
+                  - label: À propos de quoi est-ce trompeur&#160;?
                     rank: 2
                     type: RADIO
                     options:
@@ -2101,13 +2100,13 @@ list:
           - title: Prestation
             subcategories:
               - title: La prestation ne correspond pas à ce que l'agence m'a vendu
-                example: "Exemple : une excursion était prévue dans le voyage et elle a été annulée sans motifs..."
+                example: "Exemples : une excursion était prévue dans le voyage et elle a été annulée sans motifs..."
               - title: Autres
           - title: Annulation / remboursement
           - title: Assurance
           - title: Autres
       - title: Transport
-        example: Avion, train, taxi, ...
+        example: 'Exemples : avion, train, taxi...'
         subcategories:
           - title: Prix
             subcategories:
@@ -2117,12 +2116,12 @@ list:
                   content: Les professionnels ont le droit de choisir leurs prix.
                     <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
               - title: Prix non affiché
-                example: Sur un site, un catalogue...
+                example: 'Exemples : sur un site, un catalogue...'
               - title: Prix final non-conforme au prix annoncé
-                example: "Exemple : fausse réduction, suppléments non prévus..."
+                example: "Exemples : fausse réduction, suppléments non prévus..."
               - title: Autres
           - title: Publicité
-            example: Publicité trompeuse, absence d'information
+            example: "Exemples : publicité trompeuse, absence d'information"
             subcategories:
               - title: Absence d'information
               - title: Information mensongère ou trompeuse
@@ -2135,7 +2134,7 @@ list:
                       - Le site internet
                       - Les documents mis à votre disposition par le professionnel (flyer, plaquette de présentation...)
                       - Autre (à préciser)
-                  - label: A propos de quoi est-ce trompeur&#160;?
+                  - label: À propos de quoi est-ce trompeur&#160;?
                     rank: 2
                     type: RADIO
                     options:
@@ -2160,10 +2159,10 @@ list:
               - title: Bagage
               - title: Autres
           - title: Abonnement de transport
-            example: "Exemple : TGV max, pass navigo..."
+            example: "Exemples : TGV max, pass navigo..."
           - title: Autres
       - title: Sport
-        example: Piscine, salle de sport...
+        example: 'Exemples : piscine, salle de sport...'
         subcategories:
           - title: Prix
             subcategories:
@@ -2173,12 +2172,12 @@ list:
                   content: Les professionnels ont le droit de choisir leurs prix.
                     <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
               - title: Prix non affiché
-                example: Sur un site, un catalogue...
+                example: 'Exemples : sur un site, un catalogue...'
               - title: Prix final non-conforme au prix annoncé
-                example: "Exemple : fausse réduction, suppléments non prévus..."
+                example: "Exemples : fausse réduction, suppléments non prévus..."
               - title: Autres
           - title: Publicité
-            example: Publicité trompeuse, absence d'information
+            example: "Exemples : publicité trompeuse, absence d'information"
             subcategories:
               - title: Absence d'information
               - title: Information mensongère ou trompeuse
@@ -2191,7 +2190,7 @@ list:
                       - Le site internet
                       - Les documents mis à votre disposition par le professionnel (flyer, plaquette de présentation...)
                       - Autre (à préciser)
-                  - label: A propos de quoi est-ce trompeur&#160;?
+                  - label: À propos de quoi est-ce trompeur&#160;?
                     rank: 2
                     type: RADIO
                     options:
@@ -2210,7 +2209,7 @@ list:
                     type: TIMESLOT
                     optionnal: true
           - title: Contrat et abonnement
-            example: Contrat non respecté, clause abusive...
+            example: 'Exemples : contrat non respecté, clause abusive...'
             subcategories:
               - title: Clause abusive
               - title: Contrat non respecté
@@ -2220,7 +2219,7 @@ list:
               - title: Compléments alimentaires
               - title: Hygiène
       - title: Divertissement culturel
-        example: Musée, cinéma, concert...
+        example: 'Exemples : musée, cinéma, concert...'
         subcategories:
           - title: Prix
             subcategories:
@@ -2230,12 +2229,12 @@ list:
                   content: Les professionnels ont le droit de choisir leurs prix.
                     <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
               - title: Prix non affiché
-                example: Sur un site, un catalogue...
+                example: 'Exemples : sur un site, un catalogue...'
               - title: Prix final non-conforme au prix annoncé
-                example: "Exemple : fausse réduction, suppléments non prévus..."
+                example: "Exemples : fausse réduction, suppléments non prévus..."
               - title: Autres
           - title: Publicité
-            example: Publicité trompeuse, absence d'information
+            example: "Exemples : publicité trompeuse, absence d'information"
             subcategories:
               - title: Absence d'information
               - title: Information mensongère ou trompeuse
@@ -2248,7 +2247,7 @@ list:
                       - Le site internet
                       - Les documents mis à votre disposition par le professionnel (flyer, plaquette de présentation...)
                       - Autre (à préciser)
-                  - label: A propos de quoi est-ce trompeur&#160;?
+                  - label: À propos de quoi est-ce trompeur&#160;?
                     rank: 2
                     type: RADIO
                     options:
