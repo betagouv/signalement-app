@@ -10,6 +10,8 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
 import { AlertModule } from 'ngx-bootstrap';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../../test';
 
 describe('CategoryComponent', () => {
 
@@ -53,6 +55,7 @@ describe('CategoryComponent', () => {
       ],
       providers: [
         AnomalyService,
+        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     }).compileComponents();
   }));
