@@ -94,7 +94,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   scrollToElement($element): void {
-    console.log($element);
     $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 }
