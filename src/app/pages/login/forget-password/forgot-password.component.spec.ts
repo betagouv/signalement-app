@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../../test';
 
 describe('ForgetPasswordComponent', () => {
   let component: ForgotPasswordComponent;
@@ -21,6 +23,9 @@ describe('ForgetPasswordComponent', () => {
         RouterTestingModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot()
+      ],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     })
       .compileComponents();

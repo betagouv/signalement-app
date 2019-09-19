@@ -16,6 +16,8 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { NgxLoadingModule } from 'ngx-loading';
 import moment from 'moment';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../../test';
 
 describe('DetailsComponent', () => {
 
@@ -81,6 +83,9 @@ describe('DetailsComponent', () => {
         NgxLoadingModule,
         NoopAnimationsModule
       ],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

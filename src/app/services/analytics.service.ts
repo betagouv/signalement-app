@@ -1,6 +1,8 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Angulartics2 } from 'angulartics2';
 import { isPlatformBrowser } from '@angular/common';
+import { AbTestsService } from 'angular-ab-tests';
+import { CategoryScope } from '../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +10,27 @@ import { isPlatformBrowser } from '@angular/common';
 export class AnalyticsService {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private angulartics2: Angulartics2) {
+              private angulartics2: Angulartics2,
+              private abTestsService: AbTestsService) {
   }
 
   trackEvent(category, action, name?, value?) {
     if (isPlatformBrowser(this.platformId)) {
       this.angulartics2.eventTrack.next({
-        action,
-        properties: { category, name, value }
+        action: this.prefixByVersion(action),
+        properties: {
+          category: this.prefixByVersion(category),
+          name: this.prefixByVersion(name),
+          value: this.prefixByVersion(value)
+        }
       });
     }
   }
+
+  prefixByVersion(text: string) {
+    return `${this.abTestsService.getVersion(CategoryScope)} - ${text}`;
+  }
+
 }
 
 export enum EventCategories {

@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxLoadingModule } from 'ngx-loading';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../../../test';
 
 describe('AccountActivationComponent', () => {
   let component: AccountActivationComponent;
@@ -22,6 +24,9 @@ describe('AccountActivationComponent', () => {
         RouterTestingModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot()
+      ],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     })
     .compileComponents();

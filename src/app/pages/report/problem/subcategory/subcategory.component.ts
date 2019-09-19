@@ -28,7 +28,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   @Input() subcategoriesTitle: string;
   @Input() subcategoryDescription: string;
   @Input() subcategoryName: string;
-  @Input() firstLevel: boolean;
+  @Input() level: number;
 
   subcategoryForm: FormGroup;
   subcategoryTitleCtrl: FormControl;
@@ -46,7 +46,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    if (this.firstLevel) {
+    if (this.level === 1) {
       this.manageFirstInput((firstInput) => firstInput.focus());
     }
 

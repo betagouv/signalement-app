@@ -1,12 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AnomalyService } from './anomaly.service';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../test';
 
 describe('AnomalyService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: []
+      imports: [],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
+      ]
     });
   });
 
