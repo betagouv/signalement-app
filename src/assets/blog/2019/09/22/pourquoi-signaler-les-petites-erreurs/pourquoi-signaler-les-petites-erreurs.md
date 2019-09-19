@@ -29,7 +29,7 @@ consommateurs à plusieurs jours d’intervalle. A priori, cette indisponibilit�
 est répétée et les signalements à ce sujet sont autant d’indices permettant aux
 enquêteurs de déclencher une enquête.  
 
- ![false.jpg](/assets/blog/2019/08/18/les-actions-du-commercant/Souris-check.jpg)
+ ![false.jpg](/assets/blog/2019/09/22/pourquoi-signaler-les-petites-erreurs/false.jpg)
 
 Enfin, différents signalements faits par les consommateurs concernant
 un même magasin peuvent provoquer une enquête. Par exemple il y a eu un
@@ -63,7 +63,7 @@ généralisée peut constituer une pratique commerciale trompeuse c’est-à-dir
 le professionnel trompe délibérément les consommateurs sur ce qu’ils pensaient
 avoir acheté. 
 
- ![konsyap.jpg](/assets/blog/2019/08/18/les-actions-du-commercant/Souris-check.jpg)
+ ![konsyap.jpg](/assets/blog/2019/09/22/pourquoi-signaler-les-petites-erreurs/konsyap.jpg)
 
 Un autre exemple fréquent est le cas des hôtels. Vous pensiez avoir
 réservé une chambre avec vue mer et quand vous arrivez dans votre lieu de
@@ -74,7 +74,7 @@ la méditerranée. Bref, les vacances commencent bien… Cela peut tout à fait 
 une erreur lors de la réservation mais l’hôtel peut aussi avoir l’habitude de
 tromper ses clients pour avoir le plus de réservations possibles. 
 
- ![beach.jpg](/assets/blog/2019/08/18/les-actions-du-commercant/Souris-check.jpg)
+ ![beach.jpg](/assets/blog/2019/09/22/pourquoi-signaler-les-petites-erreurs/beach.jpg)
 
 
 Votre signalement constitue un indice précieux pour la répression des
