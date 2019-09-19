@@ -72,17 +72,29 @@
               </div>
             </div>
           </div>
+
+          <div class="col-12 col-sm-6 col-md-4" *ngIf="!showSecondaryCategories; else secondaryCategories">
+            <div class="category pointer text-center align-middle" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
+              <h5><br/>Autres problèmes</h5>
+            </div>
+          </div>
+
+          <ng-template #secondaryCategories>
+            <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
+              <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
+                <div class="row">
+                  <div class="col-12 col-lg-3 mb-2 text-center">
+                    <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
+                  </div>
+                  <div class="col-12 col-lg-9 pl-lg-0">
+                    <h5 class="mb-0">{{category.category}}</h5>
+                    <span class="note">{{category.description}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
-
-        <h3 id="otherCategories" class="pointer other-problems" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
-          Autres problèmes &nbsp;?
-        </h3>
-
-        <ul *ngIf="showSecondaryCategories">
-          <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
-            <h5 class="other-problems">{{category.category}}</h5>
-          </li>
-        </ul>
 
       </div>
     </section>
