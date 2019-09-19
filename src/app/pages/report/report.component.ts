@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
 import { ActivatedRoute, Router } from '@angular/router';
-import anomalies from '../../../assets/data/anomalies.json';
 import { InformationComponent } from './information/information.component';
 import { ReportPaths } from '../../services/report-router.service';
 import { ProblemComponent } from './problem/problem.component';
@@ -12,6 +9,7 @@ import { ConsumerComponent } from './consumer/consumer.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
 import { CategoryComponent } from './category/category.component';
+import { AnomalyService } from '../../services/anomaly.service';
 
 @Component({
   selector: 'app-report',
@@ -20,15 +18,11 @@ import { CategoryComponent } from './category/category.component';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(private titleService: Title,
-              private meta: Meta,
+  constructor(private anomalyService: AnomalyService,
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.default.title);
-    this.meta.updateTag({ name: 'description', content: pages.default.description });
-
     this.router.resetConfig(
       [
         ...this.getRoutesForCategories(),
@@ -41,7 +35,7 @@ export class ReportComponent implements OnInit {
   }
 
   getRoutesForCategories() {
-    return anomalies.list
+    return this.anomalyService.anomalies
       .map(anomaly => {
         if (anomaly.information) {
           return [

@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../test';
 
 
 describe('LoginComponent', () => {
@@ -22,6 +24,9 @@ describe('LoginComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         Angulartics2RouterlessModule.forRoot()
+      ],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     })
     .compileComponents();

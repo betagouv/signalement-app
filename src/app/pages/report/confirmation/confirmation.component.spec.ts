@@ -12,6 +12,8 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report } from '../../../model/Report';
 import { Company } from '../../../model/Company';
 import { Consumer } from '../../../model/Consumer';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../../test';
 
 describe('ConfirmationComponent', () => {
 
@@ -52,6 +54,9 @@ describe('ConfirmationComponent', () => {
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
       ],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

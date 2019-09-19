@@ -15,7 +15,6 @@ export class ReportStorageService {
   reportInProgess = this.reportInProgessSource.asObservable();
 
   constructor(private localStorage: LocalStorage) {
-    console.log('ReportStorageService');
   }
 
   retrieveReportInProgressFromStorage() {

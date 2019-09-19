@@ -141,7 +141,7 @@ list:
                 subcategories:
                   - title: Oui
                     detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée.
-                        <br/>Après cette date, il est dangereux de consommer le produit.
+                      <br/>Après cette date, il est dangereux de consommer le produit.
                     description: Les dates "DLC" concernent surtout des produits frais.
                   - title: Non
                     information:
@@ -202,7 +202,7 @@ list:
                           answer: Contacter directement le service client de votre magasin pour leur proposer.
               - title: Cas particulier des oeufs
                 description: La date des oeufs est une date de consommation recommandée (DCR).
-                             <br/> Les oeufs ne peuvent être vendus au-delà de 7 jours avant la DCR.
+                  <br/> Les oeufs ne peuvent être vendus au-delà de 7 jours avant la DCR.
                 detailInputs:
                   - label: Quel est le problème?
                     rank: 1
@@ -443,9 +443,9 @@ list:
                 rank: 2
                 type: RADIO
                 options:
-                - Alcool (vin, spiritueux...)
-                - Fruits et légumes
-                - Autre (à préciser)
+                  - Alcool (vin, spiritueux...)
+                  - Fruits et légumes
+                  - Autre (à préciser)
               - label: Nom  et marque du produit
                 rank: 3
                 type: TEXT
@@ -454,12 +454,12 @@ list:
                 rank: 4
                 type: RADIO
                 options:
-                - L'origine
-                - La composition
-                - Un label ou un certificat
-                - Une promesse de résultat
-                - Une marque
-                - Autres (à préciser)
+                  - L'origine
+                  - La composition
+                  - Un label ou un certificat
+                  - Une promesse de résultat
+                  - Une marque
+                  - Autres (à préciser)
               - label: Pourquoi trouvez-vous ça trompeur&#160;?
                 rank: 5
                 type: TEXTAREA
@@ -1091,7 +1091,7 @@ list:
                     information:
                       title: <b>Votre produit n'est plus couvert par la garantie.</b>
                       subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
-                                <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
+                        <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                       actions:
                         - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
                             <br/><br/>Un vice caché d'un produit est un défaut :
@@ -1101,7 +1101,7 @@ list:
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                                  <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
+                            <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
           - title: Occasion
             subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
             subcategories:
@@ -1173,7 +1173,7 @@ list:
                               <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                             </ul>"
                           answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                                  <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
+                            <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
       - title: Problème de livraison
         example: 'Exemple : colis perdu et non reçu, livraison tardive, colis abimé...'
         subcategoriesTitle: Quel est le problème&#160;?
@@ -1298,8 +1298,8 @@ list:
                         <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
           - title: Par téléphone
             description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
-                <br />Vous n’avez pas à vous justifier auprès du commerçant.
-                <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+              <br />Vous n’avez pas à vous justifier auprès du commerçant.
+              <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
             subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
             subcategories:
               - title: Oui
@@ -1314,7 +1314,7 @@ list:
         information:
           title: Ceci ne constitue pas un motif de signalement.
           content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
-              <br/>Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.
+            <br/>Nous vous invitons à contacter directement le service client ou le gérant pour faire part de votre mécontentement.
           actions:
             - question: Vous avez été victime d'harcélement ou d'injure?
               answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
@@ -1356,10 +1356,10 @@ list:
     information:
       title: Vous souhaitez signaler un cas de travail au noir&#160;?
       content: Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;
-          <ul>
-            <li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href="mailto:fraude.npdc@urssaf.fr">fraude.npdc@urssaf.fr</a></li>
-            <li>écrire  à l’inspection du travail en contactant la <a href="http://direccte.gouv.fr/">DIRECCTE</a> de la région concernée</li>
-            <li>écrire à la Brigades de contrôle et de recherche des impôts</li>
-            <li>écrire à la police/gendarmerie</li>
-          </ul>
-          La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
+        <ul>
+        <li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href="mailto:fraude.npdc@urssaf.fr">fraude.npdc@urssaf.fr</a></li>
+        <li>écrire  à l’inspection du travail en contactant la <a href="http://direccte.gouv.fr/">DIRECCTE</a> de la région concernée</li>
+        <li>écrire à la Brigades de contrôle et de recherche des impôts</li>
+        <li>écrire à la police/gendarmerie</li>
+        </ul>
+        La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.

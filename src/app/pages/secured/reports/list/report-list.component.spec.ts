@@ -10,6 +10,8 @@ import { AppRoleDirective } from '../../../../directives/app-role.directive';
 import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MiddleCropPipe } from 'src/app/pipes/middlecrop.pipe';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../../../test';
 
 describe('ReportsComponent', () => {
   let component: ReportListComponent;
@@ -35,6 +37,9 @@ describe('ReportsComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         RouterTestingModule,
+      ],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     })
     .compileComponents();

@@ -16,6 +16,8 @@ import { ReportPaths } from '../../../services/report-router.service';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { AbTestsService } from 'angular-ab-tests';
+import { MockAbTestsService } from '../../../../test';
 
 describe('ProblemComponent', () => {
 
@@ -62,6 +64,9 @@ describe('ProblemComponent', () => {
         Angulartics2RouterlessModule.forRoot(),
         NoopAnimationsModule
       ],
+      providers: [
+        { provide: AbTestsService, useClass: MockAbTestsService },
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

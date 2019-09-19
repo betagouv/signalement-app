@@ -12,10 +12,10 @@
     <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
       <div class="row pb-2 pt-2">
         <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
-          <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
+          <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{level}}-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
         </div>
         <div class="col-10 col-sm-11 pl-1">
-          <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
+          <label class="d-block mb-0 pointer" for="radio-{{level}}-{{subcategory.title}}">{{subcategory.title}}</label>
           <div class="note" [innerHTML]="subcategory.example" *ngIf="subcategory.example"></div>
         </div>
       </div>
@@ -33,6 +33,6 @@
                  [subcategoryName]="subcategorySelected.title"
                  [subcategoryDescription]="subcategorySelected.description"
                  [subcategoriesSelected]="subcategoriesSelected"
-                 [firstLevel]="false"
+                 [level]="level + 1"
                  (select)="onSelectSubSubcategories($event)">
 </app-subcategory>
