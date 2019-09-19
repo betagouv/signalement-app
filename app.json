@@ -4,7 +4,7 @@
   },
   "env": {
     "API_BASE_URL": {
-      "value": "https://demo-signalement-api.beta.gouv.fr"
+      "value": "https://https://signalement-api-pr-80.herokuapp.com"
     }
   },
   "formation": {
