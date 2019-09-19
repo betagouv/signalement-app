@@ -45,7 +45,7 @@ export class InformationComponent implements OnInit, OnDestroy {
       switchMap(
         url => {
           const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
-          if (anomaly) {
+          if (anomaly && !url[1]) {
             this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
             this.report = new Report();
             this.report.category = anomaly.category;
