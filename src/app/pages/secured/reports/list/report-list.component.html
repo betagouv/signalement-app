@@ -55,6 +55,7 @@
                  placeholder="Daterangepicker"
                  placeholder="Période sélectionnée"
                  bsDaterangepicker
+                 autocomplete="off"
                  [bsConfig]="{
                    containerClass: 'theme-default',
                    rangeInputFormat: 'DD MMMM YYYY'
@@ -80,23 +81,6 @@
             <option value="" selected>Tous les statuts</option>
             <option *ngFor="let statusPro of statusPros">
               {{statusPro}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="row form-group" *appRole="[roles.Admin]">
-        <div class="col-6 text-right">
-        </div>
-        <div class="col-2 text-right">
-          <label for="statusConsoFilter">
-            Statut conso
-          </label>
-        </div>
-        <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.statusConso" placeholder="Statut conso" id="statusConsoFilter" name="statusConso" [class]="reportFilter.statusConso ? 'selected' : ''">
-            <option value="" selected>Tous les statuts</option>
-            <option *ngFor="let statusConso of statusConsos">
-              {{statusConso}}
             </option>
           </select>
         </div>
@@ -155,20 +139,19 @@
           <th *appRole="[roles.Admin]" class="email">Consommateur</th>
           <th class="pj">Pièces jointes</th>
           <th class="status-header">Statut pro</th>
-          <th *appRole="[roles.Admin]" class="status-header">Statut Conso</th>
           <th *appPermission="permissions.createEvent" class="action"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngIf="!loading && !reportsByDate?.length">
-          <td colspan="8">
+          <td colspan="7">
             <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
             <span *ngIf="!loadingError">Aucun signalement trouvé</span>
           </td>
         </tr>
         <ng-container *ngFor="let reportsByDate of reportsByDate">
           <tr *appRole="[roles.Admin]">
-            <td colspan="8" class="report-group">
+            <td colspan="7" class="report-group">
               {{reportsByDate.date}}
             </td>
             <td class="action report-group"></td>
@@ -260,9 +243,6 @@
             </td>
             <td [class]="getReportCssClass(report.statusPro)">
               {{ report.statusPro }}
-            </td>
-            <td *appRole="[roles.Admin]" [class]="getReportCssClass(report.statusConso)">
-              {{report.statusConso}}
             </td>
             <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
               <i class="material-icons md-light-blue" title="Ajouter une action">add_circle</i>

@@ -27,7 +27,6 @@ export class EventComponent implements OnInit {
   siret: string;
   actionPros: ReportEventAction[];
   actionProFinals: string[];
-  actionConsos: ReportEventAction[];
   actionAgents: ReportEventAction[];
   allActions: ReportEventAction[];
 
@@ -54,17 +53,15 @@ export class EventComponent implements OnInit {
     combineLatest(
       this.constantService.getActionPros(),
       this.constantService.getActionProFinals(),
-      this.constantService.getActionConsos(),
       this.constantService.getActionAgents(),
       this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionProFinals, actionConsos, actionAgents, url]) => {
+      ([actionPros, actionProFinals, actionAgents, url]) => {
         this.loading = false;
         this.actionPros = actionPros;
         this.actionProFinals = actionProFinals.map(action => action.name);
-        this.actionConsos = actionConsos;
         this.actionAgents = actionAgents;
-        this.allActions = [...this.actionPros, ...this.actionConsos, ...this.actionAgents];
+        this.allActions = [...this.actionPros, ...this.actionAgents];
         this.activationDocumentUrl = url;
         this.initEventForm();
       },
@@ -98,8 +95,6 @@ export class EventComponent implements OnInit {
   getTypeOfEvent(label) {
     if (this.actionPros.find(a => a === label)) {
       return 'PRO';
-    } else if (this.actionConsos.find(a => a === label)) {
-      return 'CONSO';
     } else {
       return 'DGCCRF';
     }

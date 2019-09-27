@@ -32,7 +32,6 @@ export class Report {
   creationDate: Date;
   storedStep: Step;
   statusPro: string;
-  statusConso: string;
 }
 
 export class DetailInputValue {

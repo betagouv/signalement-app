@@ -7,21 +7,16 @@
             Action <span class="error">*</span>
           </label>
           <select id="actionSelect" [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''" (change)="selectAction()">
-            <optgroup label="Actions pros" *appRole="[roles.Admin]">
+            <ng-container *appRole="[roles.Admin]">
               <option *ngFor="let action of actionPros" [ngValue]="action">
                 {{action.name}}<span *ngIf="isStatusProFinal(action.name)"> (C)</span>
               </option>
-            </optgroup>
-            <optgroup label="Actions consos" *appRole="[roles.Admin]">
-              <option *ngFor="let action of actionConsos" [ngValue]="action">
-                {{action.name}}
-              </option>
-            </optgroup>
-            <optgroup label="Actions DGCCRF" *appRole="[roles.DGCCRF]">
+            </ng-container>
+            <ng-container *appRole="[roles.DGCCRF]">
               <option *ngFor="let action of actionAgents" [ngValue]="action">
                 {{action.name}}
               </option>
-            </optgroup>
+            </ng-container>
           </select>
         </div>
       </div>
