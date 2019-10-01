@@ -25,10 +25,7 @@ export class EventComponent implements OnInit {
   resultActionCtrl: FormControl;
   reportId: string;
   siret: string;
-  actionPros: ReportEventAction[];
-  actionProFinals: string[];
-  actionAgents: ReportEventAction[];
-  allActions: ReportEventAction[];
+  actions: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
@@ -51,17 +48,12 @@ export class EventComponent implements OnInit {
       }
     });
     combineLatest(
-      this.constantService.getActionPros(),
-      this.constantService.getActionProFinals(),
-      this.constantService.getActionAgents(),
+      this.constantService.getActions(),
       this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionProFinals, actionAgents, url]) => {
+      ([actions, url]) => {
         this.loading = false;
-        this.actionPros = actionPros;
-        this.actionProFinals = actionProFinals.map(action => action.name);
-        this.actionAgents = actionAgents;
-        this.allActions = [...this.actionPros, ...this.actionAgents];
+        this.actions = actions;
         this.activationDocumentUrl = url;
         this.initEventForm();
       },
@@ -84,20 +76,8 @@ export class EventComponent implements OnInit {
 
   }
 
-  isStatusProFinal(status: string) {
-    return this.actionProFinals.indexOf(status) !== -1;
-  }
-
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
-  }
-
-  getTypeOfEvent(label) {
-    if (this.actionPros.find(a => a === label)) {
-      return 'PRO';
-    } else {
-      return 'DGCCRF';
-    }
   }
 
   submitEventForm() {
@@ -108,7 +88,7 @@ export class EventComponent implements OnInit {
       this.loadingError = false;
       const eventToCreate = Object.assign(new ReportEvent(), {
         reportId: this.reportId,
-        eventType:  this.getTypeOfEvent(this.actionCtrl.value),
+        eventType: 'PRO',
         action: this.actionCtrl.value,
         detail: this.detailCtrl.value
       });
@@ -130,7 +110,7 @@ export class EventComponent implements OnInit {
 
   selectAction() {
 
-    if (this.allActions.find(action => action === this.actionCtrl.value).withResult) {
+    if (this.actions.find(action => action === this.actionCtrl.value).withResult) {
       this.eventForm.addControl('resultAction', this.resultActionCtrl);
     } else {
       this.eventForm.removeControl('resultAction');
@@ -138,8 +118,8 @@ export class EventComponent implements OnInit {
   }
 
   isActionEnvoiCourrier() {
-    return this.actionPros.find(a => a === this.actionCtrl.value)
-      && this.actionPros.find(a => a === this.actionCtrl.value).name === `Envoi d'un courrier`;
+    return this.actions.find(a => a === this.actionCtrl.value)
+      && this.actions.find(a => a === this.actionCtrl.value).name === `Envoi d'un courrier`;
   }
 
 }

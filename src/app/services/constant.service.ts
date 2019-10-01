@@ -12,33 +12,11 @@ export class ConstantService {
   constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils) { }
 
-  getActionPros() {
+  getActions() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionPros']),
-          headers
-        );
-      })
-    );
-  }
-
-  getActionProFinals() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionProFinals']),
-          headers
-        );
-      })
-    );
-  }
-
-  getActionAgents() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionAgents']),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actions']),
           headers
         );
       })
