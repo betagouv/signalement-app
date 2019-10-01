@@ -116,7 +116,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.loadingError = true;
       });
 
-    this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
+    this.categories = this.anomalyService.getAllAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 

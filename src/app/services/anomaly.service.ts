@@ -12,22 +12,31 @@ import { CategoryScope, CategoryVersions } from '../utils';
 })
 export class AnomalyService {
 
-  anomalies: Anomaly[];
+  anomaliesWithABTesting: Anomaly[];
+  allAnomalies: Anomaly[];
 
   constructor(private abTestsService: AbTestsService) {
-    this.anomalies = this.getAnomalies();
+    this.anomaliesWithABTesting = this.getAnomaliesWithABTesting();
+    this.allAnomalies = this.getAllAnomalies();
   }
 
-  getAnomalies() {
-    if (!this.anomalies) {
-      this.anomalies = this.abTestsService.getVersion(CategoryScope) === CategoryVersions.V1 ?
+  getAnomaliesWithABTesting() {
+    if (!this.anomaliesWithABTesting) {
+      this.anomaliesWithABTesting = this.abTestsService.getVersion(CategoryScope) === CategoryVersions.V1 ?
         deserialize(AnomalyList, anomaliesV1).list : deserialize(AnomalyList, anomaliesV2).list;
     }
-    return this.anomalies;
+    return this.anomaliesWithABTesting;
+  }
+
+  getAllAnomalies() {
+    if (!this.allAnomalies) {
+      this.allAnomalies = [...deserialize(AnomalyList, anomaliesV1).list, ...deserialize(AnomalyList, anomaliesV2).list];
+    }
+    return this.allAnomalies;
   }
 
   getAnomalyBy(predicate: (anomaly) => boolean) {
-    return this.getAnomalies()
+    return this.getAllAnomalies()
       .find(predicate);
   }
 

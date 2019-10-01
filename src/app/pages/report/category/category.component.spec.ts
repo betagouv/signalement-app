@@ -65,7 +65,8 @@ describe('CategoryComponent', () => {
     router = TestBed.get(Router);
     anomalyService = TestBed.get(AnomalyService);
     reportRouterService = TestBed.get(ReportRouterService);
-    spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
+    spyOn(anomalyService, 'getAnomaliesWithABTesting').and.returnValue(anomaliesFixture);
+    spyOn(anomalyService, 'getAllAnomalies').and.returnValue(anomaliesFixture);
 
     fixture = TestBed.createComponent(CategoryComponent);
     component = fixture.componentInstance;
