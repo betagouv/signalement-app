@@ -35,7 +35,7 @@ export class ReportComponent implements OnInit {
   }
 
   getRoutesForCategories() {
-    return this.anomalyService.anomalies
+    return this.anomalyService.anomaliesWithABTesting
       .map(anomaly => {
         if (anomaly.information) {
           return [
