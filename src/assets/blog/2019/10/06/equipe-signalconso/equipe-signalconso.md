@@ -1,3 +1,5 @@
+![equipe](/assets/blog/2019/10/06/equipe-signalconso/team-3373638_1280.jpg)
+
 # L'équipe SignalConso
 
 Vous connaissez SignalConso en tant que dispositif, mais **connaissez-vous les personnes qui participent à son développement** ? Il était temps pour nous de nous présenter, car SignalConso, c’est aussi une [équipe dédiée](https://signalconso.beta.gouv.fr/blog/2019/06/25/une-equipe-dediee), et la nôtre est **soudée** et curieusement **hétéroclite**. Faisons le tour des membres de l’équipe :
@@ -20,4 +22,4 @@ On en profite pour saluer **Alexandre et Franck**, deux personnes qui ont travai
 
 Et voilà, vous connaissez maintenant les personnes qui font SignalConso ! 
 
-
+![dreamteam](/assets/blog/2019/10/06/equipe-signalconso/photo-team.jpg)
