@@ -43,7 +43,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   reportFilter: ReportFilter;
   reportExtractUrl: string;
-  statusPros: string[];
+  statusList: string[];
   categories: string[];
 
   modalRef: BsModalRef;
@@ -89,10 +89,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.loadingError = false;
     combineLatest(
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
-      this.constantService.getStatusPros(),
+      this.constantService.getReportStatusList(),
       this.route.paramMap
     ).subscribe(
-      ([reportFilter, statusPros, params]) => {
+      ([reportFilter, statusList, params]) => {
 
 
         if (reportFilter) {
@@ -106,7 +106,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
         this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
 
-        this.statusPros = statusPros;
+        this.statusList = statusList;
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
 

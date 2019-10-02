@@ -349,6 +349,6 @@ export class ReportDetailComponent implements OnInit {
   }
 
   isClosed() {
-    return ['Signalement mal attribué', 'Signalement non consulté', 'Signalement consulté ignoré'].indexOf(this.report.statusPro) !== -1;
+    return ['Signalement mal attribué', 'Signalement non consulté', 'Signalement consulté ignoré'].indexOf(this.report.status) !== -1;
   }
 }

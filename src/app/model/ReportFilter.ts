@@ -16,7 +16,7 @@ export class ReportFilter {
   period?: Date[];
   siret?: string;
   category?: string;
-  statusPro?: string;
+  status?: string;
   details?: string;
 
   constructor() {
@@ -24,7 +24,7 @@ export class ReportFilter {
     this.period = undefined;
     this.siret = undefined;
     this.category = '';
-    this.statusPro = '';
+    this.status = '';
     this.details = undefined;
   }
 }

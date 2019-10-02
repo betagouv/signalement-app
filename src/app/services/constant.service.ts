@@ -23,11 +23,11 @@ export class ConstantService {
     );
   }
 
-  getStatusPros() {
+  getReportStatusList() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<string[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'statusPros']),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'reportStatus']),
           headers
         );
       })

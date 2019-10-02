@@ -31,7 +31,7 @@ export class Report {
   retrievedFromStorage: boolean;
   creationDate: Date;
   storedStep: Step;
-  statusPro: string;
+  status: string;
 }
 
 export class DetailInputValue {

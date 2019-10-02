@@ -72,15 +72,15 @@
           <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
         </div>
         <div class="col-2 text-right">
-          <label for="statusProFilter">
-            Statut pro
+          <label for="statusFilter">
+            Statut
           </label>
         </div>
         <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.statusPro" placeholder="Statut pro" id="statusProFilter" name="statusPro" [class]="reportFilter.statusPro ? 'selected' : ''">
+          <select [(ngModel)]="reportFilter.status" placeholder="Statut pro" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
             <option value="" selected>Tous les statuts</option>
-            <option *ngFor="let statusPro of statusPros">
-              {{statusPro}}
+            <option *ngFor="let status of statusList">
+              {{status}}
             </option>
           </select>
         </div>
@@ -241,8 +241,8 @@
                 <span *ngFor="let file of report.uploadedFiles">{{file.filename}}<br /></span>
               </ng-template>
             </td>
-            <td [class]="getReportCssClass(report.statusPro)">
-              {{ report.statusPro }}
+            <td [class]="getReportCssClass(report.status)">
+              {{ report.status }}
             </td>
             <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
               <i class="material-icons md-light-blue" title="Ajouter une action">add_circle</i>
@@ -259,7 +259,7 @@
     </div>
     <ng-container *ngFor="let reportsByDate of reportsByDate">
       <div class="col-12 item pointer" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
-        <span [class]="getReportCssClassNewReport(report.statusPro)">Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}</span>
+        <span [class]="getReportCssClassNewReport(report.status)">Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}</span>
         <i class="material-icons md-18" aria-hidden="true" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
       </div>
