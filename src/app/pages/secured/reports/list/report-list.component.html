@@ -77,7 +77,7 @@
           </label>
         </div>
         <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.status" placeholder="Statut pro" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
+          <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
             <option value="" selected>Tous les statuts</option>
             <option *ngFor="let status of statusList">
               {{status}}
@@ -138,7 +138,7 @@
           <th *appRole="[roles.DGCCRF]">Date du constat</th>
           <th *appRole="[roles.Admin]" class="email">Consommateur</th>
           <th class="pj">Pièces jointes</th>
-          <th class="status-header">Statut pro</th>
+          <th class="status-header">Statut</th>
           <th *appPermission="permissions.createEvent" class="action"></th>
         </tr>
       </thead>
