@@ -12,66 +12,22 @@ export class ConstantService {
   constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils) { }
 
-  getActionPros() {
+  getActions() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionPros']),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actions']),
           headers
         );
       })
     );
   }
 
-  getActionProFinals() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionProFinals']),
-          headers
-        );
-      })
-    );
-  }
-
-  getActionConsos() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionConsos']),
-          headers
-        );
-      })
-    );
-  }
-
-  getActionAgents() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<ReportEventAction[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'actionAgents']),
-          headers
-        );
-      })
-    );
-  }
-
-  getStatusPros() {
+  getReportStatusList() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<string[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'statusPros']),
-          headers
-        );
-      })
-    );
-  }
-
-  getStatusConsos() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<string[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'statusConsos']),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'constants', 'reportStatus']),
           headers
         );
       })

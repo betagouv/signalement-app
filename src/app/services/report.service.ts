@@ -106,7 +106,7 @@ export class ReportService {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
 
-    ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
+    ['siret', 'status', 'category', 'details'].forEach(filterName => {
       if (reportFilter[filterName]) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
       }
@@ -147,7 +147,7 @@ export class ReportService {
           httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
         }
 
-        ['siret', 'statusPro', 'statusConso', 'category', 'details'].forEach(filterName => {
+        ['siret', 'status', 'category', 'details'].forEach(filterName => {
           if (reportFilter[filterName]) {
             httpParams.push(`${filterName}=${encodeURIComponent((reportFilter[filterName] as string).trim())}`);
           }
@@ -222,8 +222,7 @@ export class ReportService {
       }),
       contactAgreement: reportApi.contactAgreement,
       uploadedFiles: reportApi.files.map(f => Object.assign(new UploadedFile(), f)),
-      statusPro: reportApi.statusPro,
-      statusConso: reportApi.statusConso
+      status: reportApi.status
     });
   }
 }
