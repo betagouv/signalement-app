@@ -55,6 +55,7 @@
                  placeholder="Daterangepicker"
                  placeholder="Période sélectionnée"
                  bsDaterangepicker
+                 autocomplete="off"
                  [bsConfig]="{
                    containerClass: 'theme-default',
                    rangeInputFormat: 'DD MMMM YYYY'
@@ -71,32 +72,15 @@
           <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
         </div>
         <div class="col-2 text-right">
-          <label for="statusProFilter">
-            Statut pro
+          <label for="statusFilter">
+            Statut
           </label>
         </div>
         <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.statusPro" placeholder="Statut pro" id="statusProFilter" name="statusPro" [class]="reportFilter.statusPro ? 'selected' : ''">
+          <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
             <option value="" selected>Tous les statuts</option>
-            <option *ngFor="let statusPro of statusPros">
-              {{statusPro}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="row form-group" *appRole="[roles.Admin]">
-        <div class="col-6 text-right">
-        </div>
-        <div class="col-2 text-right">
-          <label for="statusConsoFilter">
-            Statut conso
-          </label>
-        </div>
-        <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.statusConso" placeholder="Statut conso" id="statusConsoFilter" name="statusConso" [class]="reportFilter.statusConso ? 'selected' : ''">
-            <option value="" selected>Tous les statuts</option>
-            <option *ngFor="let statusConso of statusConsos">
-              {{statusConso}}
+            <option *ngFor="let status of statusList">
+              {{status}}
             </option>
           </select>
         </div>
@@ -154,21 +138,20 @@
           <th *appRole="[roles.DGCCRF]">Date du constat</th>
           <th *appRole="[roles.Admin]" class="email">Consommateur</th>
           <th class="pj">Pièces jointes</th>
-          <th class="status-header">Statut pro</th>
-          <th *appRole="[roles.Admin]" class="status-header">Statut Conso</th>
+          <th class="status-header">Statut</th>
           <th *appPermission="permissions.createEvent" class="action"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngIf="!loading && !reportsByDate?.length">
-          <td colspan="8">
+          <td colspan="7">
             <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
             <span *ngIf="!loadingError">Aucun signalement trouvé</span>
           </td>
         </tr>
         <ng-container *ngFor="let reportsByDate of reportsByDate">
           <tr *appRole="[roles.Admin]">
-            <td colspan="8" class="report-group">
+            <td colspan="7" class="report-group">
               {{reportsByDate.date}}
             </td>
             <td class="action report-group"></td>
@@ -258,11 +241,8 @@
                 <span *ngFor="let file of report.uploadedFiles">{{file.filename}}<br /></span>
               </ng-template>
             </td>
-            <td [class]="getReportCssClass(report.statusPro)">
-              {{ report.statusPro }}
-            </td>
-            <td *appRole="[roles.Admin]" [class]="getReportCssClass(report.statusConso)">
-              {{report.statusConso}}
+            <td [class]="getReportCssClass(report.status)">
+              {{ report.status }}
             </td>
             <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
               <i class="material-icons md-light-blue" title="Ajouter une action">add_circle</i>
@@ -279,7 +259,7 @@
     </div>
     <ng-container *ngFor="let reportsByDate of reportsByDate">
       <div class="col-12 item pointer" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
-        <span [class]="getReportCssClassNewReport(report.statusPro)">Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}</span>
+        <span [class]="getReportCssClassNewReport(report.status)">Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}</span>
         <i class="material-icons md-18" aria-hidden="true" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
       </div>
