@@ -1,4 +1,4 @@
-<div class="banner text-center section section-lighter-grey" role="region">
+<div class="banner text-center section section-primary" role="region">
   <div class="container">
     <h1 class="text-center">
       {{isConnection ? 'Connexion' : 'Activation de l\'espace professionnel'}}
@@ -69,10 +69,10 @@
       </div>
       <div class="notification" *ngIf="!isConnection">
         <div class="row">
-          <div class="col-12 col-md-8 pb-2 pt-2 text-center text-md-left">
+          <div class="col-12 col-md-7 pb-2 pt-2 text-center text-md-left">
             <h4>Vous avez déjà activé votre compte ?</h4>
           </div>
-          <div class="col-12 col-md-4 text-center text-md-right">
+          <div class="col-12 col-md-5 text-center text-md-right">
             <button type="button" class="btn btn-lg btn-primary" [routerLink]="['/connexion']">
               Connectez-vous <i class="material-icons md-18" aria-hidden="true">keyboard_arrow_right</i>
             </button>

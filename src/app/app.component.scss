@@ -21,8 +21,15 @@
   }
 
   .section-primary {
-    background-color: $primary;
-    color: #fff;
+    background: linear-gradient(180deg, #407CA8 0%, #2A8194 99.99%, #5A4B5F 100%);
+
+    h1, h2 {
+      color: #fff;
+    }
+  }
+
+  .section-secondary {
+    background: $secondary;
   }
 
   .section-lighter-grey {
@@ -87,10 +94,17 @@
     }
   }
 
-  ul:not(.pagination) {
-    li + li {
-      padding-top: 0.5em;
+
+  .btn {
+    font-size: 20px;
+    line-height: 25px;
+    border-radius: 34px;
+    padding: 13px 29px;
+
+    img {
+      margin-left: 16px;
     }
+
   }
 
 }
