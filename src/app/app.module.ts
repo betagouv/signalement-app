@@ -22,6 +22,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
 import { AbTestsModule } from 'angular-ab-tests';
 import { CategoryScope, CategoryVersions } from './utils';
+import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -31,6 +32,7 @@ registerLocaleData(localeFr, 'fr');
     HeaderComponent,
     FooterComponent,
     StatsComponent,
+    AccountMenuComponent,
   ],
   imports: [
     CommonModule,

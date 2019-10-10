@@ -4,102 +4,127 @@
   <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
 </alert>
 
-<div class="banner text-center section section-primary" role="region">
+<div class="banner text-center section section-primary d-none d-lg-block" role="region">
   <div class="container text-center">
     <img src="/assets/images/icons-baseline.svg" class="pb-3 d-none d-lg-inline-block" alt="Icônes signaler" />
     <h1>
-      Signaler un problème à la répression&nbsp;des&nbsp;fraudes<br> en toute transparence avec le commerçant !
+      Signaler un problème à la répression des fraudes<br> en toute transparence avec le commerçant !
     </h1>
   </div>
 </div>
 
 <main role="main">
 
-  <section class="section section-white">
-      <div class="container">
-        <h2 class="text-center">Comment ça marche</h2>
-        <div class="row">
-          <div class="col-12 col-sm-3">
-            <div class="card">
-              <div class="card-body">
-                <h6 class="card-title">
-                  Vous avez rencontré un problème avec un commerçant ?
-                </h6>
-              </div>
-              <img src="/assets/images/picture-problem.svg" class="card-img-bottom" alt="Illustration" />
+  <section class="section section-white d-none d-lg-block">
+    <div class="container">
+      <h2 class="text-center mb-4">Comment ça marche ?</h2>
+      <div class="row">
+        <div class="col-12 col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">
+                Vous avez rencontré un problème avec un commerçant ?
+              </h6>
             </div>
-          </div>
-          <div class="col-12 col-sm-3">
-            <div class="card">
-              <div class="card-body">
-                <h6 class="card-title">
-                  Faites un signalement SignalConso.
-                </h6>
-              </div>
-              <img src="/assets/images/picture-alert.svg" class="card-img-bottom" alt="Illustration" />
-            </div>
-          </div>
-          <div class="col-12 col-sm-3">
-            <div class="card">
-              <div class="card-body">
-                <h6 class="card-title">
-                  Le commerçant est prévenu et peut intervenir.
-                </h6>
-              </div>
-              <img src="/assets/images/picture-pro.svg" class="card-img-bottom" alt="Illustration" />
-            </div>
-          </div>
-          <div class="col-12 col-sm-3">
-            <div class="card">
-              <div class="card-body">
-                <h6 class="card-title">
-                  La répression des fraudes intervient si c’est nécessaire.
-                </h6>
-              </div>
-              <img src="/assets/images/picture-inspect.svg" class="card-img-bottom" alt="Illustration" />
-            </div>
+            <img src="/assets/images/picture-problem.svg" class="card-img-bottom" alt="Illustration" />
           </div>
         </div>
-        <p class="indication">
-          Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
-          l’<u>article L. 112-8 du code des relations entre le public et l’administration</u>.
-          <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
-        </p>
-        <div class="text-center">
-          <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
-            Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
-          </button>
+        <div class="col-12 col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">
+                Faites un signalement SignalConso.
+              </h6>
+            </div>
+            <img src="/assets/images/picture-alert.svg" class="card-img-bottom" alt="Illustration" />
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">
+                Le commerçant est prévenu et peut intervenir.
+              </h6>
+            </div>
+            <img src="/assets/images/picture-pro.svg" class="card-img-bottom" alt="Illustration" />
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">
+                La répression des fraudes intervient si c’est nécessaire.
+              </h6>
+            </div>
+            <img src="/assets/images/picture-inspect.svg" class="card-img-bottom" alt="Illustration" />
+          </div>
         </div>
       </div>
+      <p class="indication">
+        Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
+        l’<u>article L. 112-8 du code des relations entre le public et l’administration</u>.
+        <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
+      </p>
+      <div class="text-center">
+        <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+        </button>
+      </div>
+    </div>
   </section>
 
-  <section #categoryList class="section section-primary">
+  <section class="section section-primary">
+
+    <h2 class="text-center d-lg-none mb-4">Signaler un problème à la répression <br/>des fraudes en toute transparence <br />avec le commerçant !</h2>
 
     <div class="container">
-      <h2 class="text-center">Quel problème avez-vous rencontré ?</h2>
-      <div class="row pb-4">
-        <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
-          <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
-            <div class="row">
-              <div class="col-12 col-lg-3 mb-2 text-center">
-                <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
-              </div>
-              <div class="col-12 col-lg-9 pl-lg-0">
-                <h5 class="mb-0">{{category.category}}</h5>
-                <span class="note">{{category.description}}</span>
-              </div>
+      <div id="carousel" class="carousel slide d-lg-none" data-ride="carousel" data-interval="">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="carousel-title">
+              <h6>Vous avez rencontré un problème avec un commerçant ?</h6>
             </div>
+            <img src="/assets/images/picture-problem.svg" class="d-block w-100" alt="Illustration" />
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-title">
+              <h6>Faites un signalement SignalConso.<br />&nbsp;</h6>
+            </div>
+            <img src="/assets/images/picture-alert.svg" class="d-block w-100" alt="Illustration" />
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-title">
+              <h6>Le commerçant est prévenu et peut intervenir.</h6>
+            </div>
+            <img src="/assets/images/picture-pro.svg" class="d-block w-100" alt="Illustration" />
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-title">
+              <h6>La répression des fraudes intervient si c’est nécessaire.</h6>
+            </div>
+            <img src="/assets/images/picture-inspect.svg" class="d-block w-100" alt="Illustration" />
           </div>
         </div>
+        <ol class="carousel-indicators">
+          <li data-target="#carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel" data-slide-to="1"></li>
+          <li data-target="#carousel" data-slide-to="2"></li>
+          <li data-target="#carousel" data-slide-to="3"></li>
+        </ol>
+      </div>
 
-        <div class="col-12 col-sm-6 col-md-4" *ngIf="!showSecondaryCategories; else secondaryCategories">
-          <div class="category pointer text-center align-middle" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
-            <h5><br/>Autres problèmes</h5>
-          </div>
-        </div>
+      <div class="text-center mt-4 mb-4">
+        <button type="button" class="btn btn-warning d-lg-none" (click)="scrollToElement(categoryList)">
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+        </button>
+      </div>
 
-        <ng-template #secondaryCategories>
-          <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
+      <div #categoryList>
+
+        <h2 class="text-center mb-0 mb-lg-4">Quel problème avez-vous rencontré ?</h2>
+
+        <div class="row pb-4">
+          <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
             <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
                 <div class="col-12 col-lg-3 mb-2 text-center">
@@ -112,7 +137,29 @@
               </div>
             </div>
           </div>
-        </ng-template>
+
+          <div class="col-12 col-sm-6 col-md-4" *ngIf="!showSecondaryCategories; else secondaryCategories">
+            <div class="category pointer text-center align-middle" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
+              <h5><br/>Autres problèmes</h5>
+            </div>
+          </div>
+
+          <ng-template #secondaryCategories>
+            <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
+              <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
+                <div class="row">
+                  <div class="col-12 col-lg-3 mb-2 text-center">
+                    <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
+                  </div>
+                  <div class="col-12 col-lg-9 pl-lg-0">
+                    <h5 class="mb-0">{{category.category}}</h5>
+                    <span class="note">{{category.description}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
       </div>
 
     </div>

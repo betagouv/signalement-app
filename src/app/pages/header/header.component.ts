@@ -24,30 +24,4 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  logout() {
-    const role = this.user.role;
-    this.authenticationService.logout();
-    if (role === Roles.Pro) {
-      this.router.navigate(['connexion']);
-    } else {
-      this.router.navigate(['dgccrf']);
-    }
-  }
-
-  changePassword() {
-    this.router.navigate(['compte/mot-de-passe']);
-  }
-
-  goHome() {
-    this.router.navigate(['suivi-des-signalements']);
-  }
-
-  mostReportedPro() {
-    this.router.navigate(['pro-les-plus-signales']);
-  }
-
-  goTo(commands: any[]) {
-    this.router.navigate(commands);
-  }
-
 }

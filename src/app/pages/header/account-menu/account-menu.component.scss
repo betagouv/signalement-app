@@ -1,0 +1,17 @@
+@import "../../../../theme/media-queries";
+@import "../../../../theme/variables";
+
+@media #{$smaller-than-tablet} {
+
+  .btn {
+    height: 29px;
+    font-size: 12px;
+    padding: 0 16px;
+    margin-right: 10px;
+
+    img {
+      height: 12px;
+      margin-left: 6px;
+    }
+  }
+}

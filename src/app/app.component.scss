@@ -40,6 +40,12 @@
     background-color: $lightest-grey;
   }
 
+  @media #{$smaller-than-tablet} {
+    .section {
+      padding: 1em 0;
+    }
+  }
+
   .panel {
     background: #fff;
     border-radius: 2px;
@@ -100,6 +106,11 @@
     line-height: 25px;
     border-radius: 34px;
     padding: 13px 29px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    @media #{$smaller-than-tablet} {
+      border-radius: 25px;
+    }
 
     img {
       margin-left: 16px;
