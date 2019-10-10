@@ -1,10 +1,12 @@
+![travaux](/assets/blog/2019/10/13/patchnote-septembre/travaux.jpg)
+
 # Note de mises à jour - Septembre 2019
 
 Chaque mois sur le Blog SignalConso, nous vous indiquons tous les ajouts et modifications apportés au site. Faisons le bilan pour le mois de Septembre 2019.
 
 D’abord, les **nouvelles catégories sont arrivées** ! Vous pouvez maintenant faire votre signalement en fonction du type d’établissement dans lequel vous avez rencontré un problème (café / restaurant, Magasin, Banque / Assurance…). Vous n’avez pas vu ces nouvelles catégories ? C’est normal ! Elles ne sont disponibles que pour 50% des visiteurs car nous devons d’abord vérifier leur efficacité avant de les appliquer définitivement au site. C’est ce qu’on appelle **l’A/B testing** ; comparer deux versions et garder la meilleure.
 
-![photo-accueil](/…..)
+![accueil](/assets/blog/2019/10/13/patchnote-septembre/accueil.PNG)
 
 Deuxième nouveauté : **SignalConso est maintenant complètement utilisable au clavier**, et nous avons aussi intégré **la description auditive** pour permettre à tous d’utiliser le site ! Ces éléments entrent dans le cadre du [Référentiel Général d'Accessibilité pour les Administrations (RGAA)](http://references.modernisation.gouv.fr/accessibilite-numerique). N’hésitez pas à nous [envoyer un email](mailto:contact@signalconso.beta.gouv.fr) si vous constatez un problème et nous le corrigerons rapidement.
 
