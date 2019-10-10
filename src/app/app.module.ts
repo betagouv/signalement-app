@@ -58,7 +58,7 @@ registerLocaleData(localeFr, 'fr');
           versionForCrawlers: CategoryVersions.V1,
           scope: CategoryScope,
           expiration: 5,
-          weights: { V1: 49, V2: 49 }
+          weights: { V1: 0, V2: 99 }
         }
       ]
     )
