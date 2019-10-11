@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryComponent } from './category/category.component';
+import { CategoryComponent, IllustrationCardComponent } from './category/category.component';
 import { InformationComponent } from './information/information.component';
 import { ProblemComponent } from './problem/problem.component';
 import { DetailsComponent } from './details/details.component';
@@ -36,6 +36,7 @@ const routes: Routes = [];
     ConfirmationComponent,
     ProblemComponent,
     CategoryComponent,
+    IllustrationCardComponent,
     InformationComponent,
     AcknowledgmentComponent,
     CollapsableTextComponent,

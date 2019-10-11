@@ -20,44 +20,16 @@
       <h2 class="text-center mb-4">Comment ça marche ?</h2>
       <div class="row">
         <div class="col-12 col-sm-3">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">
-                Vous avez rencontré un problème avec un commerçant ?
-              </h6>
-            </div>
-            <img src="/assets/images/picture-problem.svg" class="card-img-bottom" alt="Illustration" />
-          </div>
+          <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
         </div>
         <div class="col-12 col-sm-3">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">
-                Faites un signalement avec SignalConso.
-              </h6>
-            </div>
-            <img src="/assets/images/picture-alert.svg" class="card-img-bottom" alt="Illustration" />
-          </div>
+          <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
         </div>
         <div class="col-12 col-sm-3">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">
-                Le commerçant est prévenu et peut intervenir.
-              </h6>
-            </div>
-            <img src="/assets/images/picture-pro.svg" class="card-img-bottom" alt="Illustration" />
-          </div>
+          <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
         </div>
         <div class="col-12 col-sm-3">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">
-                La répression des fraudes intervient si c’est nécessaire.
-              </h6>
-            </div>
-            <img src="/assets/images/picture-inspect.svg" class="card-img-bottom" alt="Illustration" />
-          </div>
+          <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
         </div>
       </div>
       <p class="indication">
@@ -79,30 +51,18 @@
       <h2 class="tmb-4">Signaler un problème à la répression <br/>des fraudes en toute transparence <br />avec le commerçant !</h2>
 
       <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000">
-        <div class="carousel-inner d-md-none">
+        <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="carousel-title">
-              <h6 class="text-left">Vous avez rencontré un problème avec un commerçant&#160;?</h6>
-            </div>
-            <img src="/assets/images/picture-problem.svg" class="d-block w-100" alt="Illustration" />
+            <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
           </div>
           <div class="carousel-item">
-            <div class="carousel-title">
-              <h6 class="text-left">Faites un signalement avec SignalConso.</h6>
-            </div>
-            <img src="/assets/images/picture-alert.svg" class="d-block w-100" alt="Illustration" />
+            <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
           </div>
           <div class="carousel-item">
-            <div class="carousel-title">
-              <h6 class="text-left">Le commerçant est prévenu et peut intervenir.</h6>
-            </div>
-            <img src="/assets/images/picture-pro.svg" class="d-block w-100" alt="Illustration" />
+            <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
           </div>
           <div class="carousel-item">
-            <div class="carousel-title">
-              <h6 class="text-left">La répression des fraudes intervient si c’est nécessaire.</h6>
-            </div>
-            <img src="/assets/images/picture-inspect.svg" class="d-block w-100" alt="Illustration" />
+            <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
           </div>
         </div>
         <ol class="carousel-indicators">
@@ -113,24 +73,34 @@
         </ol>
       </div>
 
-
-      <carousel [itemsPerSlide]="2"
-                [interval]="false"
-                [noWrap]="false"
-                [singleSlideOffset]="false">
-        <slide>
-          <img src="/assets/images/picture-problem.svg"  style="display: block; width: 100%;">
-        </slide>
-        <slide>
-          <img src="/assets/images/picture-alert.svg"  style="display: block; width: 100%;">
-        </slide>
-        <slide>
-          <img src="/assets/images/picture-pro.svg"  style="display: block; width: 100%;">
-        </slide>
-        <slide>
-          <img src="/assets/images/picture-inspect.svg"  style="display: block; width: 100%;">
-        </slide>
-      </carousel>
+      <div id="carousel-md" class="carousel slide d-none d-md-block" data-ride="carousel" data-interval="30000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
+              </div>
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
+              </div>
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-md" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-md" data-slide-to="1"></li>
+        </ol>
+      </div>
     </div>
 
     <div class="container">
