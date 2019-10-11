@@ -71,7 +71,9 @@
 
 .carousel {
 
-  padding: 0 50px;
+  .carousel-inner {
+    padding: 0 45px;
+  }
 
   .carousel-indicators {
 
@@ -79,8 +81,8 @@
     position: relative;
 
     li {
-      height: 10px;
-      width: 10px;
+      height: 20px;
+      width: 20px;
       background: none;
       border: 1px solid $white;
       border-radius: 50%;

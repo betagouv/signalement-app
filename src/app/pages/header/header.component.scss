@@ -10,14 +10,6 @@ header {
 
   .beta {
     background: $light-grey;
-    font-size: 12px;
-    line-height: 16px;
-    height: 28px;
-    padding: 4px 22px;
-  }
-
-  .beta-lg {
-    background: $light-grey;
     font-size: 18px;
     line-height: 24px;
     height: 40px;
@@ -27,6 +19,12 @@ header {
       font-size: 16px;
       text-align: right;
       text-decoration-line: underline;
+    }
+
+    @media #{$smaller-than-tablet} {
+      font-size: 12px;
+      line-height: 12px;
+      height: 28px;
     }
   }
 
