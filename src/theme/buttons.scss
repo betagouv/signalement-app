@@ -17,7 +17,7 @@ input[type="button"]:visited {
   display: inline-block;
   padding: 0.5em 2em;
   color: #fff;
-  background-color: #0053b3;
+  background-color: $primary;
   border-radius: 3px;
   border: 0;
   -webkit-box-shadow: 0 -2px inset #003b80;
@@ -84,8 +84,8 @@ input[type="button"].button-outline:hover {
 
 .button-outline.primary,
 a.button-outline.primary {
-  border-color: #0053b3;
-  color: #0053b3;
+  border-color: $primary;
+  color: $primary;
 }
 
 .button-outline.primary:hover,
