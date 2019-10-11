@@ -2021,52 +2021,71 @@ list:
           - title: Un produit de santé est de mauvaise qualité
             example: 'Exemples : béquille qui se tord, audioprothèse qui se fissure rapidement'
           - title: Autres
-      - title: Professionnel de la santé
+      - title: Professionnel de la santé et médecine douce
         example: 'Exemples: dentiste, opticien, kiné, infirmier, psychiatre, médecine douce'
+        subcategoriesTitle: 'Quel type de médecine exerce-t-il ?' 
         subcategories:
-          - title: Les prix ne sont pas indiqués
-            example: "Exemple : les tarifs ne sont pas affichés en salle d'attente"
-          - title: Les prix sont trop chers
-            information:
-              title: Les prix dépendent du type de professionnel
-              content:
-              actions:
-                - question: Un professionnel de santé (médecin, dentiste, podologue...)
-                  answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
-                - question: "Un professionnel en médecine douce (exemple : naturopathe, sophrologue... )"
-                  answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
-          - title: C'est un problème de devis
+          - title: La médecine dite "conventionnelle"
+            example: 'Cest-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sages-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, nutritionniste, psychiatre, ou autre médecin spécialiste'
             subcategories:
-              - title: Je n'ai pas eu de devis écrit
-                example: "Exemples : chez l'opticien, le dentiste, le chirurgien esthététique, l'audioprothésiste"
-              - title: Le devis est incomplet
-              - title: J'ai payé plus cher que le devis
-            example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
-          - title: Le professionnel ne m'a pas délivré de facture (note)
-          - title: La prestation est mal (ou pas) réalisée
-            subcategories:
-              - title: L'acte de soin
-                example: 'Exemple : mon dentiste a mal soigné ma dent'
+              - title: Les tarifs ne sont pas affichés en salle d'attente
+              - title: Le professionnel n'indique pas s' il est conventionné, ou s'il est secteur 1 ou secteur 2
+                example: Cette indication est obligatoire sur sa plaque (au niveau de sa porte ou du hall d'entrée) ainsi que dans la salle d'attente.
+              - title: Ses prix sont exagérés
                 information:
-                  title: Vous devez écrire à l'Ordre des médecins
-                  content:
-              - title: La prestation ne correspond pas à ce qui était indiqué
-                example: 'Exemple : duréee plus courte'
+                title: Un professionnel de santé non conventionné peut choisir ses tarifs
+                content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
+                    <br>Un médecin conventionné pratiquera des tarifs classiques.
+              - title: C'est un problème de devis
+                example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
+                subcategories:
+                  - title: Je n'ai pas eu de devis écrit
+                    example: "Exemples : chez l'opticien, le dentiste, le chirurgien esthététique, l'audioprothésiste"
+                  - title: Le devis est incomplet
+                  - title: J'ai payé plus cher que le devis
+              - title: Le professionnel ne m'a pas délivré de facture (note)
+              - title: La prestation est mal (ou pas) réalisée
+                subcategories:
+                  - title: L'acte de soin
+                    example: 'Exemple : mon dentiste a mal soigné ma dent'
+                    information:
+                      title: Vous devez écrire à l'Ordre des médecins
+                      content:
+                  - title: La prestation ne correspond pas à ce qui était indiqué
+                    example: 'Exemple : duréee plus courte'
               - title: J'ai un problème avec la fabrication/pose d'appareil médical
                 example: 'Exemples : lunette, prothèse'
-          - title: La publicité est trompeuse
-            example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
-          - title: Autres
+              - title: Autre
+            
+            
+          - title: La médecine dite "alternative" ou "douce"
+            example: Acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute 
+            subcategories:
+            - title: Les prix ne sont pas indiqués
+              example: "Exemple : les tarifs ne sont pas affichés en salle d'attente"
+            - title: Les prix sont trop chers
+              information:
+                title: Les prix dépendent du type de professionnel
+                content: XX
+            - title: Le professionnel ne m'a pas délivré de facture (note)
+            - title: La prestation ne correspond pas à ce qui était indiqué ou mal été effectuée
+              example: 'Exemple : duréee plus courte'
+            - title: La publicité est trompeuse
+              example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
+          
+          - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)  
+          
+          
       - title: Hopital / Clinique
         subcategories:
-          - title: J'ai mal été soigné, j'ai subi un mauvais traitement
+          - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
             information:
                   title: Vous devez contacter la Commissions des Usagers
-                  content: Si vous estimez avoir mal été soigné ou traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+                  content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
           - title: J'ai dû payer un "forfait administratif"
-            example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont jusitifés par des frais de photocopies, un contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
-          - title: J'ai été facturé pour un supplément que je n'ai pas demandé
-            example: supplément "chambre seule" au prextexte qu'elles étaient toutes occupées, supplément "télévision" alors que je n'ai pas demandé à avoir la télévision
+            example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
+          - title: J'ai été facturé pour un supplément que je n'avais pas demandé
+            example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
       - title: Pharmacie
         subcategories:
           - title: Problème de prix
