@@ -1908,23 +1908,28 @@ list:
             subcategories:
               - title: Je cherche une location
                 subcategories:
-                  - title: Annonces immobilières
-                    example: 'Exemples : charges non indiquées sur les annonces, annonces en vitrine déja pourvues'
-                  - title: Marchand de liste
-                    example: 'Exemple : peu d''appartements disponibles dans la liste'
-                  - title: Visite de bien / dépôt de dossier
-                    example: 'Exemple : demande d''un relevé de compte bancaire alors que c''est interdit'
+                  - title: Diffusion d'annonces de location pour des biens non disponibles (en vitrine ou sur internet)
+                  - title: Honoraires de location non affichés ou différents de ceux affichés (en vitrine ou sur internet)
+                  - title: Annonces de location incomplètes ou mensongères (en vitrine ou sur internet)
+                    example: 'Exemple : loyer annoncé faux, descriptif de l''appartement mensonger'
+                  - title: Demande d'un document interdit pour le dossier de location
+                    example: 'Exemple : relevé bancaire, photocopie de la carte vitale'
+                  - title: demande de paiement à completer
+                    example: 'Exemple : '
                   - title: Autres
               - title: Je cherche à acheter
                 subcategories:
-                  - title: Annonces immobilières
-                    example: 'Exemples : prix incomplet sur les annonces, annonces en vitrine déjà pourvues, aucun DPE d''affiché'
-                  - title: Visite
-                  - title: Offre d'achat / compromis de vente
+                  - title: Diffusion d'annonces de biens non disponibles à la vente (en vitrine ou sur internet)
+                    example: 'Exemple : la maison affiché en vitrine est en fait déjà vendue'
+                  - title: Honoraires de vente non affichés ou différents de ceux affichés (en vitrine ou sur internet)
+                  - title: Annonces de vente incomplètes ou mensongères (en vitrine ou sur internet)
+                    example: 'Exemple : absence de DPE, descriptif d''un appartement mensonger'
+                  - title: Paiement à compléter
+                  - title: Problème avec une offre d'achat ou un compromis de vente
                     example: 'Exemple : refus de mon offre au prix sans justification'
-                  - title: Chasseur d'appartements
+                  - title: Cas particulier d'un chasseur d'appartements
                     example: 'Exemple : frais d''étude alors que c''est interdit'
-                  - title: Mandataire indépendant (agent commercial)
+                  - title: Cas particulier d'un mandataire indépendant (agent commercial)
           - title: J'ai un problème en tant que locataire
             example: 'Exemples : état des lieux, charges, loyer'
             subcategories:
@@ -2053,6 +2058,15 @@ list:
             example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
           - title: Autres
       - title: Hopital / Clinique
+        subcategories:
+          - title: J'ai mal été soigné, j'ai subi un mauvais traitement
+            information:
+                  title: Vous devez contacter la Commissions des Usagers
+                  content: Si vous estimez avoir mal été soigné ou traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+          - title: J'ai dû payer un "forfait administratif"
+            example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont jusitifés par des frais de photocopies, un contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
+          - title: J'ai été facturé pour un supplément que je n'ai pas demandé
+            example: supplément "chambre seule" au prextexte qu'elles étaient toutes occupées, supplément "télévision" alors que je n'ai pas demandé à avoir la télévision
       - title: Pharmacie
         subcategories:
           - title: Problème de prix
