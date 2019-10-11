@@ -33,7 +33,7 @@
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">
-                Faites un signalement SignalConso.
+                Faites un signalement avec SignalConso.
               </h6>
             </div>
             <img src="/assets/images/picture-alert.svg" class="card-img-bottom" alt="Illustration" />
@@ -75,32 +75,32 @@
 
   <section class="section section-primary">
 
-    <h2 class="text-center d-lg-none mb-4">Signaler un problème à la répression <br/>des fraudes en toute transparence <br />avec le commerçant !</h2>
+    <div class="text-center d-lg-none">
+      <h2 class="tmb-4">Signaler un problème à la répression <br/>des fraudes en toute transparence <br />avec le commerçant !</h2>
 
-    <div class="container">
-      <div id="carousel" class="carousel slide d-lg-none" data-ride="carousel" data-interval="">
-        <div class="carousel-inner">
+      <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000">
+        <div class="carousel-inner d-md-none">
           <div class="carousel-item active">
             <div class="carousel-title">
-              <h6>Vous avez rencontré un problème avec un commerçant ?</h6>
+              <h6 class="text-left">Vous avez rencontré un problème avec un commerçant&#160;?</h6>
             </div>
             <img src="/assets/images/picture-problem.svg" class="d-block w-100" alt="Illustration" />
           </div>
           <div class="carousel-item">
             <div class="carousel-title">
-              <h6>Faites un signalement SignalConso.<br />&nbsp;</h6>
+              <h6 class="text-left">Faites un signalement avec SignalConso.</h6>
             </div>
             <img src="/assets/images/picture-alert.svg" class="d-block w-100" alt="Illustration" />
           </div>
           <div class="carousel-item">
             <div class="carousel-title">
-              <h6>Le commerçant est prévenu et peut intervenir.</h6>
+              <h6 class="text-left">Le commerçant est prévenu et peut intervenir.</h6>
             </div>
             <img src="/assets/images/picture-pro.svg" class="d-block w-100" alt="Illustration" />
           </div>
           <div class="carousel-item">
             <div class="carousel-title">
-              <h6>La répression des fraudes intervient si c’est nécessaire.</h6>
+              <h6 class="text-left">La répression des fraudes intervient si c’est nécessaire.</h6>
             </div>
             <img src="/assets/images/picture-inspect.svg" class="d-block w-100" alt="Illustration" />
           </div>
@@ -112,6 +112,29 @@
           <li data-target="#carousel" data-slide-to="3"></li>
         </ol>
       </div>
+
+
+      <carousel [itemsPerSlide]="2"
+                [interval]="false"
+                [noWrap]="false"
+                [singleSlideOffset]="false"
+                class="d-none d-sm-block">
+        <slide>
+          <img src="/assets/images/picture-problem.svg"  style="display: block; width: 100%;">
+        </slide>
+        <slide>
+          <img src="/assets/images/picture-alert.svg"  style="display: block; width: 100%;">
+        </slide>
+        <slide>
+          <img src="/assets/images/picture-pro.svg"  style="display: block; width: 100%;">
+        </slide>
+        <slide>
+          <img src="/assets/images/picture-inspect.svg"  style="display: block; width: 100%;">
+        </slide>
+      </carousel>
+    </div>
+
+    <div class="container">
 
       <div class="text-center mt-4 mb-4">
         <button type="button" class="btn btn-warning d-lg-none" (click)="scrollToElement(categoryList)">

@@ -21,7 +21,7 @@ header {
       text-decoration-line: underline;
     }
 
-    @media #{$smaller-than-tablet} {
+    @media #{$smaller-than-desktop} {
       font-size: 12px;
       line-height: 12px;
       height: 28px;
@@ -44,7 +44,7 @@ header {
       }
     }
 
-    @media #{$smaller-than-tablet} {
+    @media #{$smaller-than-desktop} {
       padding: 10px;
       height: 50px;
       background-color: #407CA8;
