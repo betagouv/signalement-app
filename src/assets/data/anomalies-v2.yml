@@ -2033,8 +2033,8 @@ list:
                 example: Cette indication est obligatoire sur sa plaque (au niveau de sa porte ou du hall d'entrée) ainsi que dans la salle d'attente.
               - title: Ses prix sont exagérés
                 information:
-                title: Un professionnel de santé non conventionné peut choisir ses tarifs
-                content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
+                  title: Un professionnel de santé non conventionné peut choisir ses tarifs
+                  content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
                     <br>Un médecin conventionné pratiquera des tarifs classiques.
               - title: C'est un problème de devis
                 example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
