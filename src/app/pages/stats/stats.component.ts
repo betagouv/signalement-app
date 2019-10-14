@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID, HostListener } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { Statistics } from '../../model/Statistics';
@@ -67,7 +67,7 @@ export class StatsComponent implements OnInit {
       this.statistics = stats;
 
       this.byMonthsChartOption = {
-        color: ['#0053b3'],
+        color: ['#407CA8'],
         xAxis: {
           type: 'category',
           data: this.getXAxisData(),
@@ -166,7 +166,7 @@ export class StatsComponent implements OnInit {
       const nbHorsRegion = this.statistics.reportsCount - dataRegion.reduce((acc, curr) => acc + curr, 0);
 
       this.byRegionsChartOption = {
-        color: ['#0053b3'],
+        color: ['#407CA8'],
         xAxis: {
           type: 'category',
           data: [...this.statistics.reportsCountByRegionList.map(s => s.region), 'Autre'],

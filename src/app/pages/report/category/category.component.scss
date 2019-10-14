@@ -13,35 +13,6 @@
     border: none;
   }
 }
-.banner {
-  padding-top: 1.5em;
-  padding-bottom: 0;
-
-  h1 {
-    color: #26353f;
-    background-color: #fff;
-    padding: .5em 1em .6em;
-    display: inline-block;
-    font-size: 1.5rem !important;
-    margin-bottom: .6em;
-
-    @media #{$smaller-than-tablet} {
-      display: block;
-    }
-
-    @media #{$smaller-than-tablet} {
-      font-size: 1.2rem !important;
-    }
-  }
-
-  h4 {
-    margin-bottom: 0;
-
-    @media #{$smaller-than-tablet} {
-      font-size: 1rem !important;
-    }
-  }
-}
 
 .category {
   background: $white;
@@ -64,116 +35,50 @@
       border-color: $primary;
     }
   }
-  @media #{$smaller-than-tablet} {
-    &:active {
-      border-color: $primary;
-    }
-  }
 
   img {
     height: 40px;
   }
 }
 
-.notification {
+.indication {
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 1rem;
+}
 
-  overflow-wrap: break-word;
+.card {
+  height: 100%;
 
-  img {
-    width: 24px;
-    vertical-align: top;
+  .card-title {
+    font-weight: bold;
+    height: 80px;
+    text-align: left;
+  }
+}
+
+.carousel {
+
+  .carousel-inner {
+    padding: 0 50px;
   }
 
-  h5 {
-    display: inline-block;
-    margin: 0 0.5em;
-    padding-bottom: 0.5em;
+  .carousel-indicators {
+
+    padding-top: 10px;
+    position: relative;
+
+    li {
+      height: 20px;
+      width: 20px;
+      background: none;
+      border: 1px solid $white;
+      border-radius: 50%;
+
+      &.active {
+        background-color: $white;
+      }
+    }
+
   }
-
-}
-
-.nav-link.disabled {
-  pointer-events: auto;
-}
-
-.action-lighter-grey {
-  background-color: $lighter-grey;
-}
-
-.title {
-  font-size: 1.125rem;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  background-color: $light-blue;
-}
-
-.card-body {
-  padding-bottom: 18px !important;
-  padding-top: 18px !important;
-}
-
-.card-text {
-  margin-bottom: 0 !important;
-}
-
-a.active.disabled {
-  background-color: #53657D !important;
-  color: white;
-}
-
-.category.disabled {
-  background: repeating-linear-gradient(
-    135deg,
-    #fff,
-    #fff 10px,
-    #DEE5EC 10px,
-    #DEE5EC 20px
-  );
-}
-
-.category.disabled h5 {
-  color: #9B9DA0
-}
-
-h3 {
-  margin: 0.2em 0 0.8em;
-}
-
-.other-problems {
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  padding-bottom: .2em;
-  color: #0053b3;
-}
-
-.other-problems:hover {
-  color: #003067;
-}
-
-h3.other-problems {
-  padding-bottom: .2em;
-}
-
-p.internet-information {
-  margin-bottom: 40px !important
-}
-
-button.button-outline:focus {
-  border: 1px solid $darker-grey;
-  color: $darker-grey;
-}
-
-p.legend {
-  padding-top: 20px;
-  font-size: 18px;
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-}
-
-button.cta-btn {
-  font-size: 30px;
-}
-
-.icon-explanation {
-  vertical-align: middle;
-
 }

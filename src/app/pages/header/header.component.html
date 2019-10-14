@@ -1,87 +1,71 @@
-<header class="navbar" role="banner" id="banner" tabindex="-1">
-  <div class="navbar__container">
-    <a id="logo" class="navbar__home" routerLink="/">
-      <img class="navbar__logo" src="/assets/images/logo-marianne.svg" alt="Retour à la page sommaire" />
-      <span class="navbar__domain">SignalConso</span><span class="navbar__gouvfr" alt="data.gouv.fr">.beta.gouv.fr</span>
+<header role="banner" id="banner" tabindex="-1">
+
+  <div class="row d-lg-none mr-0 ml-0">
+    <div class="col-6">
+      <a class="brand" routerLink="/">
+        <img src="/assets/images/signalconso.svg" alt="Retour à la page sommaire" />
+      </a>
+    </div>
+    <div class="col-6 beta font-weight-bold text-center">
+      Ce site est en BETA
+    </div>
+  </div>
+
+  <div class="beta d-none d-lg-block">
+    <div class="float-left font-weight-bold">
+      Ce site est en version BETA.
+    </div>
+    <div class="text-right departments">
+      Service actif en régions Auvergne-Rhône-Alpes - Centre-Val de Loire & Occitanie
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg">
+    <a id="logo" class="navbar-brand d-none d-lg-block" routerLink="/">
+      <img src="/assets/images/signalconso.svg" alt="Retour à la page sommaire" />
     </a>
-    <nav>
-      <ul class="nav__links">
-        <li class="nav__item d-none d-lg-inline-block">
-          <a routerLink="/qui-sommes-nous">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="material-icons">menu</i><span>MENU</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-lg-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/qui-sommes-nous">
             Qui sommes-nous ?
           </a>
         </li>
-        <li class="nav__item d-none d-lg-inline-block">
-          <a routerLink="/comment-ça-marche">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/comment-ça-marche">
             Comment ça marche ?
           </a>
         </li>
-        <li class="nav__item d-none d-lg-inline-block" *ngIf="user && user.role === 'DGCCRF'">
-          <a routerLink="/mode-emploi-dgccrf">
-            Mode d'emploi
-          </a>
-        </li>
-        <li class="nav__item d-inline-block d-lg-none mr-2">
-          <div class="btn-group" dropdown placement="bottom right">
-            <button id="button-menu" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
-                    ><i class="material-icons">menu</i><span class="caret"></span>
-            </button>
-            <ul id="dropdown-menu" *dropdownMenu class="dropdown-menu dropdown-menu-left"
-                role="menu" aria-labelledby="button-menu">
-              <li role="menuitem" class="dropdown-item pointer">
-                <a routerLink="/qui-sommes-nous">
-                  Qui sommes-nous ?
-                </a>
-              </li>
-              <li role="menuitem" class="dropdown-item pointer">
-                <a routerLink="/comment-ça-marche">
-                  Comment ça marche ?
-                </a>
-              </li>
-              <li role="menuitem" class="dropdown-item pointer" *ngIf="user && user.role === 'DGCCRF'">
-                <a routerLink="/mode-emploi-dgccrf">
-                  Mode d'emploi
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav__item nav__account" *ngIf="!user; else userMenu">
-          <button type="button" class="btn btn-outline-secondary" [routerLink]="['activation']">
-            <i class="material-icons" aria-hidden="true">lock</i> Espace professionnel
+        <ng-template *ngIf="user && user.role === 'DGCCRF'">
+          <li class="nav-item" *ngIf="user && user.role === 'DGCCRF'">
+            <a routerLink="/mode-emploi-dgccrf">
+              Mode d'emploi
+            </a>
+          </li>
+        </ng-template>
+        <li class="nav-item d-none d-lg-block" *ngIf="!user; else userMenuLg">
+          <button type="button" class="btn btn-secondary" [routerLink]="['activation']">
+           Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
           </button>
         </li>
-        <ng-template #userMenu>
-          <li class="nav__item nav__account">
-            <div class="btn-group" dropdown placement="bottom right">
-              <button id="button-avatar" dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"
-                      ><i class="material-icons" aria-hidden="true">person</i>&nbsp;Compte <span class="caret"></span>
-              </button>
-              <ul id="dropdown-account" *dropdownMenu class="dropdown-menu dropdown-menu-right"
-                  role="menu" aria-labelledby="button-avatar">
-
-                <ng-container *appRole="[roles.ToActivate]; else activatedRole">
-                  <li role="menuitem" >
-                    <span class="item">{{ user.login }}</span>
-                  </li>
-                  <li class="divider dropdown-divider"></li>
-                </ng-container>
-                <ng-template #activatedRole>
-                  <li role="menuitem"><span class="item">{{ user.firstName + " " + user.lastName }}</span></li>
-                  <li role="menuitem"><span class="item"><b>Profil</b> : {{ user.role }}</span></li>
-                  <li class="divider dropdown-divider"></li>
-                  <li role="menuitem"><span class="dropdown-item pointer" (click)="goHome()">Suivi des signalements</span></li>
-                  <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><span class="dropdown-item pointer" (click)="mostReportedPro()">Entreprises les plus signalés</span></li>
-                  <li role="menuitem"><span class="dropdown-item pointer" *appPermission="permissions.subscribeReports" (click)="goTo(['abonnements'])">Abonnements</span></li>
-                  <li role="menuitem"><span class="dropdown-item pointer" (click)="changePassword()">Modifier mot de passe</span></li>
-                </ng-template>
-                <li role="menuitem"><span class="dropdown-item pointer" (click)="logout()">Se déconnecter</span></li>
-              </ul>
-            </div>
+        <ng-template #userMenuLg>
+          <li class="nav-item d-none d-lg-block">
+            <app-account-menu></app-account-menu>
           </li>
         </ng-template>
       </ul>
-    </nav>
-    <div class="ribbon"> BETA </div>
-  </div>
+    </div>
+    <div class="d-block d-lg-none position-absolute">
+      <button type="button" class="btn btn-secondary" [routerLink]="['activation']" *ngIf="!user; else userMenu">
+        Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
+      </button>
+      <ng-template #userMenu>
+        <app-account-menu></app-account-menu>
+      </ng-template>
+    </div>
+  </nav>
 </header>

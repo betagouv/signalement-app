@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report, Step } from '../../../model/Report';
@@ -14,7 +14,8 @@ import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CategoryComponent implements OnInit, OnDestroy {
 
@@ -27,6 +28,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
   showSecondaryCategories: boolean;
 
   internetInformation: Information;
+
+  illustrations = [
+    { title: 'Vous avez rencontré un problème avec un commerçant&#160;?', picture: 'picture-problem.svg' },
+    { title: 'Faites un signalement avec SignalConso.', picture: 'picture-alert.svg' },
+    { title: 'Le commerçant est prévenu et peut intervenir.', picture: 'picture-pro.svg' },
+    { title: 'La répression des fraudes intervient si c’est nécessaire.', picture: 'picture-inspect.svg' },
+  ]
 
   constructor(private titleService: Title,
               private meta: Meta,
@@ -103,4 +111,22 @@ export class CategoryComponent implements OnInit, OnDestroy {
   scrollToElement($element): void {
     $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
+}
+
+
+@Component({
+  selector: 'app-illustration-card',
+  template: `
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title" [innerHTML]="illustration.title"></h6>
+      </div>
+      <img src="/assets/images/{{illustration.picture}}" class="card-img-bottom" alt="Illustration" />
+    </div>
+  `,
+})
+export class IllustrationCardComponent {
+
+  @Input() illustration: { title: string, picture: string };
+
 }
