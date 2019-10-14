@@ -85,7 +85,7 @@ input[type=radio] {
 
 input[type=radio]::before {
   content: '';
-  border-color: #0053b3;
+  border-color: $primary;
   border-radius: 50%;
   position: absolute;
   top: 5px;
@@ -98,12 +98,12 @@ input[type=radio]::before {
 
 input[type=radio]:checked {
   background-color: #fff;
-  border-color: #0053b3;
+  border-color: $primary;
   opacity: 1;
 }
 
 input[type=radio]:checked::before {
-  background-color: #0053b3;
+  background-color: $primary;
   -webkit-transform: scale(1);
   transform: scale(1);
   -webkit-transition: -webkit-transform 0.2s ease-out;
@@ -127,8 +127,8 @@ input[type="checkbox"] + .label-inline {
 }
 
 input[type="checkbox"]:checked {
-  background-color: #0053b3;
-  border-color: #0053b3;
+  background-color: $primary;
+  border-color: $primary;
   opacity: 1;
   -webkit-transition: border-color 0.2s ease-in, background-color 0.2s ease-out;
   transition: border-color 0.2s ease-in, background-color 0.2s ease-out;
