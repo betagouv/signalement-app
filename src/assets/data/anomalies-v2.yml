@@ -2001,8 +2001,8 @@ list:
     icon: icon_health.png
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories:
-      - title: Produit en particulier
-        example: 'Exemples : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant'
+      - title: Produit de santé en particulier
+        example: 'Exemples : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant, compléments alimentaires, autres produits achetés en pharmacie'
         subcategories:
           - title: J'ai eu un problème de santé / sécurité avec un produit
             example: 'Exemples : allergie, vomissement, électrocution'
@@ -2010,14 +2010,38 @@ list:
             subcategories:
               - title: Un médicament
                 information:
-                  title: Vous devez le signaler au ministère de la Santé
-                  content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
+                  title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la santé.
+                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en<a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">cliquant sur ce lien</a>
               - title: Un objet
                 example: 'Exemples : pansement, tensiomètre'
                 information:
-                  title: "Vous devez le signaler avec un formulaire spécifique."
-                  content: <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">Remplir le formulaire ici/a>
-          - title: La publicité pour un médicament / dispositif médical est trompeuse
+                  title: Les problèmes de sécurité doivent être signalés avec un formulaire spécifique afin de traiter plus rapidement votre signalement.
+                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en<a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">cliquant sur ce lien</a>
+          - title: La publicité (ou les informations sur la boîte) est trompeuse
+            detailInputs:
+              - label: Date de constat (ou date d'achat)
+                rank: 1
+                type: DATE
+              - label: Quel est le nom du produit ? 
+                rank: 2
+                type: TEXT
+              - label: Pourquoi trouvez-vous la publicité trompeuse ?
+                rank: 3
+                type: CHECKBOX
+                options:
+                  - le produit ne remplit pas sa promesse
+                  - la photo du produit est trompeuse
+                  - les labels (bio, naturel etc.) sont trompeurs
+                  - autre (à préciser)
+              - label: Où avez-vous vu ces informations ?
+                rank: 4
+                type: CHECKBOX
+                options:
+                  - site internet
+                  - publicité (affiche, dans un magazine)
+                  - sur la boîte
+                  - autre (à préciser)
+            fileLabel: Merci de joindre une photo de la publicité ou de la boîte afin de traiter au mieux votre signalement. 
           - title: Un produit de santé est de mauvaise qualité
             example: 'Exemples : béquille qui se tord, audioprothèse qui se fissure rapidement, préservatif qui se perce'
             detailInputs:
@@ -2041,7 +2065,6 @@ list:
               - label: "Expliquez le problème en quelques mots :"
                 rank: 4
                 type: TEXT
-          - title: Autres
       - title: Professionnel de la santé et médecine douce
         example: 'Exemple : dentiste, opticien, kiné, psychiatre, médecine douce'
         subcategoriesTitle: 'Quel type de médecine exerce-t-il ?' 
@@ -2071,7 +2094,7 @@ list:
                     type: DATE
                   - label: Quel est le problème ? (plsuieurs réponses possibles)
                     rank: 2
-                    type: RADIO
+                    type: CHECKBOX
                     options:
                       - pas d'indication au niveau de sa plaque
                       - absence d'affichage dans sa salle d'attente (ou lieu d'exercice si il n'a pas de salle d'attente)
@@ -2106,7 +2129,7 @@ list:
                           - autre soin / traitement supérieur à 70 euros
                       - label: Quelle est le problème ? (plusieurs réponses possibles)
                         rank: 3
-                        type: RADIO
+                        type: CHECKBOX
                         options:
                           - le médecin/praticien m'a donné un prix à l'oral
                           - le médecin/praticien ne pas m'a remis de devis écrit
@@ -2123,7 +2146,7 @@ list:
                         type: TEXT
                       - label: Quelles informations manquent-ils sur votre devis  ? (plusieurs réponses possibles)
                         rank: 3
-                        type: RADIO
+                        type: CHECKBOX
                         options:
                           - description détaillée du soin envisagé et/ou des matériaux utilisés
                           - lieu de fabrication de la prothèse le cas échéant
@@ -2145,9 +2168,6 @@ list:
                 information:
                       title: Porter une réclamation sur la qualité d’un soin 
                       content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
-              - title: J'ai un problème avec un appareil médical
-                example: 'Exemples : lunette, prothèse'
-              - title: Autre
           - title: La médecine dite "alternative" ou "douce"
             example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute etc." 
             subcategories:
@@ -2315,21 +2335,57 @@ list:
                     Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
               - title: Autres
           - title: Problème de commande
-          - title: Autres
       - title: Ambulance
         example: "et autre transport sanitaire (exemple : taxi)"
       - title: Cure
         example: 'Exemples : thalassothérapie, thermalisme'
         subcategories:
           - title: Prix et facture
-            example: "Exemple : prix pas affiché, pas de remise d'une facture"
-          - title: Prestation
-            example: 'Exemple : les soins ne correspondant pas à ce qui était prévu'
-          - title: Publicité trompeuse
-            example: 'Exemples : utilisation frauduleuse du label Qualicert, spa simple déclaré en thalassothérapie'
+            example: "Exemple : les prix ne sont pas affichés, pas de remise d'une facture"
+            subcategories:
+              - title: Les prix ne sont pas affichés
+                example: "Exemple : les prix des soins ne sont pas affichés, les prix affichés ne sont pas très clairs"
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - les prix ne sont pas affichés du tout
+                      - les prix sont affichés de façon non visible
+                      - les prix affichés ne sont pas clairs
+                fileLabel: Si possible merci de joindre une photo pour appuyer votre signalement.
+              - title: J'ai payé plus cher que les prix affichés
+                example: "Exemple : j'ai payé un supplément non prévu sans être prévenu, les prix affichés ne sont pas à jour "
+                detailInputs:
+                  - label: Date de constat (ou date de paiement)
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: CHECKBOX
+                    options:
+                      - les prix affichés ne sont pas à jour
+                      - les prix des suppléments et options ne sont pas affichés
+                      - "j'ai payé un supplément (exemple : supplément chambre simple)sans donner mon accord avant"
+                fileLabel: Si possible merci de joindre une photo de la facture ou de l'affichage des prix pour appuyer votre signalement.
+              - title: Je n'ai pas eu de facture (note)
+                detailInputs:
+                  - label: Date de constat (ou date de paiement)
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - je n'ai pas eu de facture et je ne l'ai pas demandée
+                      - j'ai demandé une facture mais on ne me l'a pas donnée 
+          - title: Publicité pour la cure trompeuse
+            example: 'Exemples : spa simple déclaré en thalassothérapie, soins qui ne correspondent pas à la description sur la publicité, utilisation frauduleuse du label Qualicert'
           - title: Contrat
-            example: "Exemples : je souhaite annuler ma cure, le contrat n'est pas clair"
-     
+            example: "Exemples : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
