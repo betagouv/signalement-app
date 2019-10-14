@@ -2160,8 +2160,7 @@ list:
                     type: TEXT
                 fileLabel: Merci de joindre si possible une photo du produit ou de la facture d'achat.
               - title: Autre
-          
-      - title: Hopital / Clinique
+      - title: Hôpital / Clinique
         subcategories:
           - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
             information:
@@ -2169,8 +2168,41 @@ list:
                   content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
           - title: J'ai dû payer un "forfait administratif"
             example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
+            detailInputs:
+              - label: Date de sortie (ou date de la facture)
+                rank: 1
+                type: DATE
+              - label: Quel est le montant de ces frais ?
+                rank: 2
+                type: TEXT
+            fileLabel: Merci de joindre une photo de la facture ou du panneau d'affichage des prix.
           - title: J'ai été facturé pour un supplément que je n'avais pas demandé
             example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
+            detailInputs:
+              - label: Date de sortie (ou date de la facture)
+                rank: 1
+                type: DATE
+              - label: Quel supplément vous a-t-on facturé ?
+                rank: 2
+                type: TEXT
+                placeholder: chambre double, télévision, repas spécifique ...
+              - label: Aviez-vous demandé ce supplément ? 
+                rank: 3
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+              - label: Quel est le prix de ce supplément ?
+                rank: 4
+                type: TEXT
+                optionnal: true
+              - label: L'hôpital/clinique vous a t-il justifié ce supplément ?
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui (à préciser)
+                  - Non
+            fileLabel: Merci de joindre une photo de la facture si possible afin d'appuyer votre signalement.
       - title: Pharmacie
         subcategories:
           - title: Problème de prix
@@ -2244,7 +2276,6 @@ list:
             example: "Exemples : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu"
           - title: Maltraitance
           - title: Autres
-      - title: Autres
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
