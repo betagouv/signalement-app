@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryComponent } from './category/category.component';
+import { CategoryComponent, IllustrationCardComponent } from './category/category.component';
 import { InformationComponent } from './information/information.component';
 import { ProblemComponent } from './problem/problem.component';
 import { DetailsComponent } from './details/details.component';
@@ -11,7 +11,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AlertModule, BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
+import { AlertModule, BsDatepickerModule, CarouselModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { Angulartics2Module } from 'angulartics2';
@@ -36,6 +36,7 @@ const routes: Routes = [];
     ConfirmationComponent,
     ProblemComponent,
     CategoryComponent,
+    IllustrationCardComponent,
     InformationComponent,
     AcknowledgmentComponent,
     CollapsableTextComponent,
@@ -64,6 +65,7 @@ const routes: Routes = [];
     Ng2CompleterModule,
     Angulartics2Module.forRoot(),
     RouterModule.forChild(routes),
+    CarouselModule
   ],
   exports: [
     RouterModule,
