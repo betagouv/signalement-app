@@ -2026,7 +2026,7 @@ list:
         subcategoriesTitle: 'Quel type de médecine exerce-t-il ?' 
         subcategories:
           - title: La médecine dite "conventionnelle"
-            example: 'Cest-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sages-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, nutritionniste, psychiatre, ou autre médecin spécialiste'
+            example: 'C''est-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sage-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, nutritionniste, psychiatre, ou autre médecin spécialiste.'
             subcategories:
               - title: Les tarifs ne sont pas affichés en salle d'attente
               - title: Le professionnel n'indique pas s' il est conventionné, ou s'il est secteur 1 ou secteur 2
@@ -2040,41 +2040,37 @@ list:
                 example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
                 subcategories:
                   - title: Je n'ai pas eu de devis écrit
-                    example: "Exemples : chez l'opticien, le dentiste, le chirurgien esthététique, l'audioprothésiste"
+                    example: Un devis est obligatoire dès que les dépassements d'honoraires et la prestation dépassent 70 euros.
                   - title: Le devis est incomplet
                   - title: J'ai payé plus cher que le devis
-              - title: Le professionnel ne m'a pas délivré de facture (note)
               - title: La prestation est mal (ou pas) réalisée
-                subcategories:
-                  - title: L'acte de soin
-                    example: 'Exemple : mon dentiste a mal soigné ma dent'
-                    information:
-                      title: Vous devez écrire à l'Ordre des médecins
-                      content:
-                  - title: La prestation ne correspond pas à ce qui était indiqué
-                    example: 'Exemple : duréee plus courte'
-              - title: J'ai un problème avec la fabrication/pose d'appareil médical
+                example: "Exemples : j'ai mal été soigné"
+                information:
+                      title: Porter une réclamation sur la qualité d’un soin ou d’une prise en charge
+                      content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> Plus de renseignements sur cette <br><a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">page</a>
+              - title: J'ai un problème avec un appareil médical
                 example: 'Exemples : lunette, prothèse'
               - title: Autre
-            
-            
           - title: La médecine dite "alternative" ou "douce"
-            example: Acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute 
+            example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute etc." 
             subcategories:
-            - title: Les prix ne sont pas indiqués
-              example: "Exemple : les tarifs ne sont pas affichés en salle d'attente"
+            - title: Les prix ne sont pas indiqués de façon claire
+              example: "Les prix doivent être affichés en salle d'attente."
             - title: Les prix sont trop chers
               information:
-                title: Les prix dépendent du type de professionnel
-                content: XX
-            - title: Le professionnel ne m'a pas délivré de facture (note)
-            - title: La prestation ne correspond pas à ce qui était indiqué ou mal été effectuée
-              example: 'Exemple : duréee plus courte'
-            - title: La publicité est trompeuse
-              example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
-          
-          - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)  
-          
+                title: Un praticien en médecine non conventionnelle peut choisir librement ses prix. 
+                content: "Il peut proposer des prix élevés et choisir d'être plus cher que ses concurrents. Il a cependant une obligation : indiquer tous ces prix de façon claire. Vous devez connaître le prix avant de vous faire soigner. Les prix sont normalement affichés en salle d'attente de manière lisible."
+                actions:
+                  - question: Vous n'avez pas eu connaissance des prix avant&#160;?
+                    answer: Faites un signalement à la rubrique "Les prix ne sont pas indiqués de façon claire"
+            - title: Je n'ai pas reçu de note (facture, ticket)
+              example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
+            - title: La publicité ou le descriptif de la prestation sont trompeurs
+              example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse.'
+          - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
+            subcategories:
+                - title: La publicité est trompeuse
+                    example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
           
       - title: Hopital / Clinique
         subcategories:
