@@ -2019,7 +2019,28 @@ list:
                   content: <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">Remplir le formulaire ici/a>
           - title: La publicité pour un médicament / dispositif médical est trompeuse
           - title: Un produit de santé est de mauvaise qualité
-            example: 'Exemples : béquille qui se tord, audioprothèse qui se fissure rapidement'
+            example: 'Exemples : béquille qui se tord, audioprothèse qui se fissure rapidement, préservatif qui se perce'
+            detailInputs:
+              - label: Date de constat (ou date d'achat)
+                rank: 1
+                type: DATE
+              - label: Quel est le type de produit ?
+                rank: 2
+                type: RADIO
+                options:
+                  - lunette / lentilles de contact 
+                  - prothèse
+                  - béquille, fauteuil roulant
+                  - contraception (préservatif)
+                  - bas de contention
+                  - appareil de mesure (thermomètre, tensiomètre etc.)
+                  - autre (à préciser)
+              - label: Quelle sa marque et sa référence / numéro de modèle ? Vous pouvez trouver ces informations sur votre facture d'achat.
+                rank: 3
+                type: TEXT
+              - label: "Expliquez le problème en quelques mots :"
+                rank: 4
+                type: TEXT
           - title: Autres
       - title: Professionnel de la santé et médecine douce
         example: 'Exemple : dentiste, opticien, kiné, psychiatre, médecine douce'
