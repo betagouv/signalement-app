@@ -2073,12 +2073,14 @@ list:
                     options:
                       - Oui
                       - Non
+                    optionnal: true
                   - label: S'ils sont affichés, ces prix sont-ils exacts ?
                     rank: 4
                     type: RADIO
-                    option:
+                    options:
                       - Oui
                       - Non
+                    optionnal: true
                 fileLabel: Vous pouvez joindre une photo
               - title: Les prix sont trop chers
                 example: "Exemple : ce naturopathe est plus cher que ceux de la région"
