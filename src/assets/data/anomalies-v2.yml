@@ -2073,12 +2073,14 @@ list:
                     options:
                       - Oui
                       - Non
+                    optionnal: true
                   - labels: S'ils sont affichés, ces prix sont-ils exacts ?
                     rank: 4
                     type: RADIO
                     option:
                       - Oui
                       - Non
+                    optionnal: true
                 fileLabel: Vous pouvez joindre une photo
               - title: Les prix sont trop chers
                 example: "Exemple : ce naturopathe est plus cher que ceux de la région"
@@ -2090,8 +2092,42 @@ list:
                       answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
               - title: Je n'ai pas reçu de note (facture, ticket)
                 example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
+                detailInputs:
+                  - label: Date de visite
+                    rank: 1
+                    type: DATE
+                  - label: Si vous vous en rappelez, combien avez-vous payé ?
+                    rank: 2
+                    type: TEXT
+                    optionnal: true
+                  - label: Avez-vous demandé une note ?
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
               - title: La publicité ou la description de la prestation est trompeuse
                 example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse.'
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Que trouvez-vous trompeur ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - la durée de la prestation
+                      - une offre promotionnelle, une réduction de prix
+                      - le résultat attendu / promis
+                      - les labels (bio, vegan...) utilisés
+                      - le diplôme du praticien
+                      - des informations médicales fausses
+                      - autre (à préciser)
+                  - label: "Précisez en quelques mots pourquoi vous trouvez cela trompeur :"
+                    rank: 3
+                    type: TEXT
+                    placeholder: Soyez factuel et courtois merci !
+                fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et traiter plus rapidement votre signalement.
           - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
             subcategories:
               - title: La publicité est trompeuse ou non appliquée
