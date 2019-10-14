@@ -2046,8 +2046,8 @@ list:
               - title: La prestation est mal (ou pas) réalisée
                 example: "Exemples : j'ai mal été soigné"
                 information:
-                      title: Porter une réclamation sur la qualité d’un soin ou d’une prise en charge
-                      content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> Plus de renseignements sur cette <br><a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">page</a>
+                      title: Porter une réclamation sur la qualité d’un soin 
+                      content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
               - title: J'ai un problème avec un appareil médical
                 example: 'Exemples : lunette, prothèse'
               - title: Autre
@@ -2064,16 +2064,16 @@ list:
                   - label: Les prix sont-ils affichés en salle d'attente ?
                     rank: 2
                     type: RADIO
-                    option:
+                    options:
                       - Oui
                       - Non
-                  - label: Si ils sont affichés, les prix sont-ils lisibles et compréhensibles ?
+                  - label: S'ils sont affichés, ces prix sont-ils lisibles et compréhensibles ?
                     rank: 3
                     type: RADIO
-                    option:
+                    options:
                       - Oui
                       - Non
-                  - label: Si ils sont affichés, les prix sont-ils à jour ?
+                  - labels: S'ils sont affichés, ces prix sont-ils exacts ?
                     rank: 4
                     type: RADIO
                     option:
@@ -2081,21 +2081,23 @@ list:
                       - Non
                 fileLabel: Vous pouvez joindre une photo
               - title: Les prix sont trop chers
+                example: "Exemple : ce naturopathe est plus cher que ceux de la région"
                 information:
-                  title: Un praticien en médecine non conventionnelle peut choisir librement ses prix. 
-                  content: "Il peut proposer des prix élevés et choisir d'être plus cher que ses concurrents. Il a cependant une obligation : indiquer tous ces prix de façon claire. Vous devez connaître le prix avant de vous faire soigner. Les prix sont normalement affichés en salle d'attente de manière lisible."
+                  title: En médecine non conventionnelle, un praticien peut choisir librement ses prix. 
+                  content: "Il peut proposer des prix élevés et choisir d'être plus cher que ses concurrents. <br> Cependant il a une obligation : indiquer tous ces prix de façon claire. Vous devez connaître le prix avant de vous faire soigner. <br> Les prix doivent être affichés en salle d'attente de manière lisible."
                   actions:
                     - question: Vous n'avez pas eu connaissance des prix avant&#160;?
-                      answer: Faites un signalement à la rubrique "Les prix ne sont pas indiqués de façon claire"
+                      answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
               - title: Je n'ai pas reçu de note (facture, ticket)
                 example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
-              - title: La publicité ou le descriptif de la prestation sont trompeurs
+              - title: La publicité ou la description de la prestation est trompeuse
                 example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse.'
           - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
             subcategories:
-              - title: La publicité est trompeuse
+              - title: La publicité est trompeuse ou non appliquée
                 example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
-              - title: Lunettes me  
+              - title: Je ne suis pas satisfait de la qualité de mes lunettes/prothèses
+              - title: Autre
           
       - title: Hopital / Clinique
         subcategories:
