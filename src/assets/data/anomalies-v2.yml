@@ -2106,8 +2106,8 @@ list:
                     options:
                       - Oui
                       - Non
-              - title: La publicité ou la description de la prestation est trompeuse
-                example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse.'
+              - title: La publicité ou la description du soin est trompeuse
+                example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse'
                 detailInputs:
                   - label: Date du constat
                     rank: 1
@@ -2116,7 +2116,7 @@ list:
                     rank: 2
                     type: RADIO
                     options:
-                      - la durée de la prestation
+                      - la durée du soin
                       - une offre promotionnelle, une réduction de prix
                       - le résultat attendu / promis
                       - les labels (bio, vegan...) utilisés
@@ -2126,13 +2126,39 @@ list:
                   - label: "Précisez en quelques mots pourquoi vous trouvez cela trompeur :"
                     rank: 3
                     type: TEXT
-                    placeholder: Soyez factuel et courtois merci !
-                fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et traiter plus rapidement votre signalement.
+                    placeholder: Soyez factuel et courtois, merci !
+                fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
           - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
             subcategories:
               - title: La publicité est trompeuse ou non appliquée
                 example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Que trouvez-vous trompeur ?
+                    rank: 2
+                    type: TEXT
+                fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.    
               - title: Je ne suis pas satisfait de la qualité de mes lunettes/prothèses
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: De quel produit s'agit-il ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - lunette
+                      - lentilles de contact
+                      - prothèse
+                  - label: Quel est la marque et le modèle ?
+                    rank: 3
+                    type: TEXT
+                  - label: Quel est le problème ?
+                    rank: 4
+                    type: TEXT
+                fileLabel: Merci de joindre si possible une photo du produit ou de la facture d'achat.
               - title: Autre
           
       - title: Hopital / Clinique
