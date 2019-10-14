@@ -2382,8 +2382,33 @@ list:
                     options:
                       - je n'ai pas eu de facture et je ne l'ai pas demandée
                       - j'ai demandé une facture mais on ne me l'a pas donnée 
-          - title: Publicité pour la cure trompeuse
+          - title: Publicité trompeuse
             example: 'Exemples : spa simple déclaré en thalassothérapie, soins qui ne correspondent pas à la description sur la publicité, utilisation frauduleuse du label Qualicert'
+            detailInputs:
+              - label: Date de constat
+                rank: 1
+                type: DATE
+              - label: A propos de quoi est-ce trompeur ?
+                rank: 2
+                type: CHECKBOX
+                options:
+                  - un label (Qualicert) ou un certificat
+                  - la description/photo du bâtiment ou des équipements (piscines, bassins etc.)
+                  - la description des soins (durée, produits utilisés etc. )
+                  - spa simple déclaré en thalassothérapie
+                  - autre (à préciser)
+              - label: Où avez-vous vu cette information (ou photo) que vous trouvez trompeuse ?
+                rank: 3
+                type: RADIO
+                options:
+                  - site internet ou publicité sur internet
+                  - publicité papier
+                  - affiche/ panneau publicitaire
+                  - autre (à préciser)
+              - label: 'Expliquez en quelques mots pourquoi vous trouvez cela trompeur :'
+                rank: 4
+                type: TEXT
+            fileLabel: Merci de joindre tout document (photo, pdf) pouvant appuyer votre signalement.
           - title: Contrat
             example: "Exemples : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
   - category: Voiture / Véhicule
