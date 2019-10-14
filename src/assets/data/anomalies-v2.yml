@@ -2022,15 +2022,46 @@ list:
             example: 'Exemples : béquille qui se tord, audioprothèse qui se fissure rapidement'
           - title: Autres
       - title: Professionnel de la santé et médecine douce
-        example: 'Exemples: dentiste, opticien, kiné, infirmier, psychiatre, médecine douce'
+        example: 'Exemple : dentiste, opticien, kiné, psychiatre, médecine douce'
         subcategoriesTitle: 'Quel type de médecine exerce-t-il ?' 
         subcategories:
           - title: La médecine dite "conventionnelle"
             example: 'C''est-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sage-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, nutritionniste, psychiatre, ou autre médecin spécialiste.'
             subcategories:
               - title: Les tarifs ne sont pas affichés en salle d'attente
+                example: Les tarifs doivent être clairement affichés dans la salle d'attente.
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - aucun affichage des prix
+                      - affichage des prix incomplet
+                      - les prix affichés ne sont pas à jour
+                fileLabel: Vous pouvez joindre une photo pour appuyer votre signalement.
               - title: Le professionnel n'indique pas s' il est conventionné, ou s'il est secteur 1 ou secteur 2
-                example: Cette indication est obligatoire sur sa plaque (au niveau de sa porte ou du hall d'entrée) ainsi que dans la salle d'attente.
+                example: Cette indication est obligatoire sur sa plaque (au niveau de sa porte ou du hall d'entrée) et dans la salle d'attente.
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ? (plsuieurs réponses possibles)
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - pas d'indication au niveau de sa plaque
+                      - absence d'affichage dans sa salle d'attente (ou lieu d'exercice si il n'a pas de salle d'attente)
+                  - label: "Si vous avez eu l'information par un autre moyen (mutuelle, recherche internet), pouvez-vous préciser s'il est :"
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - conventionné secteur 1
+                      - conventionné secteur 2
+                      - non conventionné
+                    optionnal: true
               - title: Ses prix sont exagérés
                 information:
                   title: Un professionnel de santé non conventionné peut choisir ses tarifs
@@ -2040,9 +2071,54 @@ list:
                 example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
                 subcategories:
                   - title: Je n'ai pas eu de devis écrit
-                    example: Un devis est obligatoire dès que les dépassements d'honoraires et la prestation dépassent 70 euros.
+                    example: Un devis est obligatoire dès que les dépassements d'honoraires et la prestation dépassent 70 euros. Un devis est obligatoire en cas de pose de couronne, implant, bridge etc. Un devis est oligatoire en chirurgie esthétique.
+                    detailInputs:
+                      - label: Date du rendez-vous
+                        rank: 1
+                        type: DATE
+                      - label: Quel est le type de soin ?
+                        rank: 2
+                        type: RADIO
+                        options:
+                          - pose d'un implant, bridge, couronne
+                          - acte de chirurgie esthétique
+                          - autre soin / traitement supérieur à 70 euros
+                      - label: Quelle est le problème ? (plusieurs réponses possibles)
+                        rank: 3
+                        type: RADIO
+                        options:
+                          - le médecin/praticien m'a donné un prix à l'oral
+                          - le médecin/praticien ne pas m'a remis de devis écrit
+                      - label: Combien a coûté le soin au total (environ) ?
+                        rank: 4
+                        type: TEXT
                   - title: Le devis est incomplet
+                    detailInputs:
+                      - label: Date du rendez-vous
+                        rank: 1
+                        type: DATE
+                      - label: Combien a coûté le soin au total ?
+                        rank: 2
+                        type: TEXT
+                      - label: Quelles informations manquent-ils sur votre devis  ? (plusieurs réponses possibles)
+                        rank: 3
+                        type: RADIO
+                        options:
+                          - description détaillée du soin envisagé et/ou des matériaux utilisés
+                          - lieu de fabrication de la prothèse le cas échéant
+                          - montant des honoraires du soin
+                          - montant remboursé par l'assurance maladie
                   - title: J'ai payé plus cher que le devis
+                    detailInputs:
+                      - label: Date de constat
+                        rank: 1
+                        type: DATE
+                      - label: Quel était le prix sur votre devis ?
+                        rank: 2
+                        type: TEXT
+                      - label: Combien avez-vous payé ?
+                        rank: 3
+                        type: TEXT
               - title: La prestation est mal (ou pas) réalisée
                 example: "Exemples : j'ai mal été soigné"
                 information:
@@ -2232,50 +2308,7 @@ list:
             example: 'Exemples : utilisation frauduleuse du label Qualicert, spa simple déclaré en thalassothérapie'
           - title: Contrat
             example: "Exemples : je souhaite annuler ma cure, le contrat n'est pas clair"
-      - title: Ehpad (Maison de retraite)
-        subcategories:
-          - title: Les tarifs
-            subcategories:
-              - title: Les tarifs ne sont pas communiqués clairement
-                example: 'Exemple : les prix des options ne sont pas dans le contrat'
-              - title: Je ne paye pas le prix qui était prévu au départ
-              - title: Les prix sont élevés pour la prestation
-                information:
-                  title: Les prix sont choisis librement par les maisons de retraite.
-                  content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
-          - title: Mon contrat
-            subcategories:
-              - title: Le contrat n'est pas respecté
-                example: 'Exemple : le contrat prévoit des fruits tous les jours et ce n''est pas le cas'
-              - title: Je veux résilier le contrat
-              - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le consommateur
-                example: 'Exemple : imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois'
-          - title: Sommes facturées
-          - title: Etat des lieux de la chambre
-            example: "Exemples : état des lieux d'entrée ou de sortie, caution"
-            subcategories:
-              - title: Je n'ai pas eu d'état des lieux (entrée ou sortie)
-              - title: Je ne suis pas d'accord avec l'état des lieux
-              - title: La caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
-                subcategoriesTitle: 'Multipliez par 2 le tarif de l''hébergement mensuel (indiqué dans votre contrat).La caution demandée est-elle plus cher que ce résultat ?'
-                subcategories:
-                  - title: Oui
-                  - title: Non
-                    information:
-                      title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif hébergement mensuel.
-                      content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
-              - title: Je n'ai toujours pas récupéré la caution
-                subcategoriesTitle: Quand avez-vous libéré la chambre ?
-                subcategories:
-                  - title: Il y a moins de 30 jours
-                    information:
-                      title: Soyez encore un peu patient !
-                      content: La maison de retraite a 30 jours pour vous rendre la caution.
-                  - title: Il y a plus de 30 jours
-          - title: Publicité pour la maison de retraite mensongère
-            example: "Exemples : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu"
-          - title: Maltraitance
-          - title: Autres
+     
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
@@ -2434,3 +2467,51 @@ list:
             <li>écrire à la police/gendarmerie</li>
           </ul>
           La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
+  - category: Maison de retraite (EHPAD)       
+    categoryId: EHPAD
+    path: ehpad
+    rank: 110
+    icon:  
+    subcategories:
+      - title: Les tarifs
+        subcategories:
+          - title: Les tarifs ne sont pas communiqués clairement
+            example: 'Exemple : les prix des options ne sont pas dans le contrat'
+          - title: Je ne paye pas le prix qui était prévu au départ
+          - title: Les prix sont élevés pour la prestation
+            information:
+              title: Les prix sont choisis librement par les maisons de retraite.
+              content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
+      - title: Mon contrat
+        subcategories:
+          - title: Le contrat n'est pas respecté
+            example: 'Exemple : le contrat prévoit des fruits tous les jours et ce n''est pas le cas'
+          - title: Je veux résilier le contrat
+          - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le consommateur
+            example: 'Exemple : imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois'
+      - title: Sommes facturées
+      - title: Etat des lieux de la chambre
+        example: "Exemples : état des lieux d'entrée ou de sortie, caution"
+        subcategories:
+          - title: Je n'ai pas eu d'état des lieux (entrée ou sortie)
+          - title: Je ne suis pas d'accord avec l'état des lieux
+          - title: La caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
+            subcategoriesTitle: 'Multipliez par 2 le tarif de l''hébergement mensuel (indiqué dans votre contrat).La caution demandée est-elle plus cher que ce résultat ?'
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif hébergement mensuel.
+                  content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
+              - title: Je n'ai toujours pas récupéré la caution
+                subcategoriesTitle: Quand avez-vous libéré la chambre ?
+                subcategories:
+                  - title: Il y a moins de 30 jours
+                    information:
+                      title: Soyez encore un peu patient !
+                      content: La maison de retraite a 30 jours pour vous rendre la caution.
+                  - title: Il y a plus de 30 jours
+      - title: Publicité pour la maison de retraite mensongère
+        example: "Exemples : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu"
+      - title: Maltraitance
+      - title: Autres
