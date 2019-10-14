@@ -2001,22 +2001,22 @@ list:
     icon: icon_health.png
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories:
-      - title: Produit de santé en particulier
-        example: 'Exemples : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant, compléments alimentaires, autres produits achetés en pharmacie'
+      - title: Produit de santé
+        example: 'Exemples : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant, compléments alimentaires, autres produits achetés en pharmacie ou rayon pharmacie'
         subcategories:
           - title: J'ai eu un problème de santé / sécurité avec un produit
-            example: 'Exemples : allergie, vomissement, électrocution'
+            example: 'Exemple : allergie, vomissement, électrocution'
             subcategoriesTitle: Quel est le type de produit ?
             subcategories:
               - title: Un médicament
                 information:
                   title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la santé.
-                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en<a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">cliquant sur ce lien</a>
-              - title: Un objet
-                example: 'Exemples : pansement, tensiomètre'
+                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">cliquant sur ce lien</a>
+              - title: Un objet de santé
+                example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
                 information:
                   title: Les problèmes de sécurité doivent être signalés avec un formulaire spécifique afin de traiter plus rapidement votre signalement.
-                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en<a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">cliquant sur ce lien</a>
+                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">cliquant sur ce lien</a>
           - title: La publicité (ou les informations sur la boîte) est trompeuse
             detailInputs:
               - label: Date de constat (ou date d'achat)
@@ -2043,7 +2043,7 @@ list:
                   - autre (à préciser)
             fileLabel: Merci de joindre une photo de la publicité ou de la boîte afin de traiter au mieux votre signalement. 
           - title: Un produit de santé est de mauvaise qualité
-            example: 'Exemples : béquille qui se tord, audioprothèse qui se fissure rapidement, préservatif qui se perce'
+            example: 'Exemple : béquille qui se tord, audioprothèse qui se fissure rapidement, préservatif qui se perce'
             detailInputs:
               - label: Date de constat (ou date d'achat)
                 rank: 1
@@ -2106,12 +2106,12 @@ list:
                       - conventionné secteur 2
                       - non conventionné
                     optionnal: true
-              - title: Ses prix sont exagérés
+              - title: Les prix sont exagérés
                 information:
                   title: Un professionnel de santé non conventionné peut choisir ses tarifs
                   content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
-                    <br>Un médecin conventionné pratiquera des tarifs classiques.
-              - title: C'est un problème de devis
+                    <br><br>Un médecin conventionné pratiquera des tarifs classiques.
+              - title: Problème de devis
                 example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
                 subcategories:
                   - title: Je n'ai pas eu de devis écrit
@@ -2247,7 +2247,7 @@ list:
                 fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
           - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
             subcategories:
-              - title: La publicité est trompeuse ou non appliquée
+              - title: Une publicité est trompeuse ou non appliquée
                 example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
                 detailInputs:
                   - label: Date du constat
@@ -2255,7 +2255,7 @@ list:
                     type: DATE
                   - label: Que trouvez-vous trompeur ?
                     rank: 2
-                    type: TEXT
+                    type: TEXTAREA
                 fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.    
               - title: Je ne suis pas satisfait de la qualité de mes lunettes/prothèses
                 detailInputs:
@@ -2292,7 +2292,7 @@ list:
               - label: Quel est le montant de ces frais ?
                 rank: 2
                 type: TEXT
-            fileLabel: Merci de joindre une photo de la facture ou du panneau d'affichage des prix.
+            fileLabel: Merci de joindre si posisble une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
           - title: J'ai été facturé pour un supplément que je n'avais pas demandé
             example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
             detailInputs:
@@ -2324,9 +2324,19 @@ list:
         subcategories:
           - title: Problème de prix
             subcategories:
-              - title: Les prix ne sont pas indiqués dans les rayons
-              - title: Les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
-              - title: Il n'y a pas de catalogue des prix disponible (papier ou sur écran)
+              - title: Les prix ne sont pas indiqués
+                example: Les prix doivent être indiqués dans les rayons, visibles pour les médicaments situés derrière le comptoir. La pharmacie doit également avoir un catalogue des prix.
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ? (plusieurs réponses possibles)
+                    rank: 2
+                    type: CHECKBOX
+                    options:
+                      - Les prix ne sont pas tous indiqués dans les rayons
+                      - Les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
+                      - Il n'y a pas de catalogue des prix disponible (papier ou sur écran)
               - title: Les prix sont exagérés
                 information:
                   title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
