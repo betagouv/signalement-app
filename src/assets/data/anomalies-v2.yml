@@ -2054,23 +2054,48 @@ list:
           - title: La médecine dite "alternative" ou "douce"
             example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute etc." 
             subcategories:
-            - title: Les prix ne sont pas indiqués de façon claire
-              example: "Les prix doivent être affichés en salle d'attente."
-            - title: Les prix sont trop chers
-              information:
-                title: Un praticien en médecine non conventionnelle peut choisir librement ses prix. 
-                content: "Il peut proposer des prix élevés et choisir d'être plus cher que ses concurrents. Il a cependant une obligation : indiquer tous ces prix de façon claire. Vous devez connaître le prix avant de vous faire soigner. Les prix sont normalement affichés en salle d'attente de manière lisible."
-                actions:
-                  - question: Vous n'avez pas eu connaissance des prix avant&#160;?
-                    answer: Faites un signalement à la rubrique "Les prix ne sont pas indiqués de façon claire"
-            - title: Je n'ai pas reçu de note (facture, ticket)
-              example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
-            - title: La publicité ou le descriptif de la prestation sont trompeurs
-              example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse.'
+              - title: Les prix ne sont pas affichés ou sont faux
+                example: "Les prix doivent être affichés en salle d'attente."
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Les prix sont-ils affichés en salle d'attente ?
+                    rank: 2
+                    type: RADIO
+                    option:
+                      - Oui
+                      - Non
+                  - label: Si ils sont affichés, les prix sont-ils lisibles et compréhensibles ?
+                    rank: 3
+                    type: RADIO
+                    option:
+                      - Oui
+                      - Non
+                  - label: Si ils sont affichés, les prix sont-ils à jour ?
+                    rank: 4
+                    type: RADIO
+                    option:
+                      - Oui
+                      - Non
+                fileLabel: Vous pouvez joindre une photo
+              - title: Les prix sont trop chers
+                information:
+                  title: Un praticien en médecine non conventionnelle peut choisir librement ses prix. 
+                  content: "Il peut proposer des prix élevés et choisir d'être plus cher que ses concurrents. Il a cependant une obligation : indiquer tous ces prix de façon claire. Vous devez connaître le prix avant de vous faire soigner. Les prix sont normalement affichés en salle d'attente de manière lisible."
+                  actions:
+                    - question: Vous n'avez pas eu connaissance des prix avant&#160;?
+                      answer: Faites un signalement à la rubrique "Les prix ne sont pas indiqués de façon claire"
+              - title: Je n'ai pas reçu de note (facture, ticket)
+                example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
+              - title: La publicité ou le descriptif de la prestation sont trompeurs
+                example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse.'
           - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
             subcategories:
-                - title: La publicité est trompeuse
-                    example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
+              - title: La publicité est trompeuse
+                example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
+              - title: Lunettes me  
           
       - title: Hopital / Clinique
         subcategories:
