@@ -2002,7 +2002,7 @@ list:
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories:
       - title: Produit de santé
-        example: 'Exemples : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant, compléments alimentaires, autres produits achetés en pharmacie ou rayon pharmacie'
+        example: 'Exemple : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant, compléments alimentaires, autres produits achetés en pharmacie ou rayon pharmacie'
         subcategories:
           - title: J'ai eu un problème de santé / sécurité avec un produit
             example: 'Exemple : allergie, vomissement, électrocution'
