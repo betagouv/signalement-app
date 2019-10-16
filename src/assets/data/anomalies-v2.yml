@@ -2483,18 +2483,18 @@ list:
                         options:
                           - Oui (à préciser)
                           - Non
-                      - label: Quel était l'adresse de départ ?
+                      - label: Adresse de départ
                         rank: 4
                         type: TEXT
-                      - label: Quelle était l'heure de départ ? Elle est normalement écrit sur la note (facture). 
+                      - label: Heure de départ. Elle est normalement écrit sur la note (facture). 
                         rank: 5
-                        type: TIMESLOT
-                      - label: Quel était l'adresse d'arrivée ?
+                        type: TEXT
+                      - label: Adresse d'arrivée
                         rank: 6
                         type: TEXT
-                      - label: Quelle était l'heure d'arrivée ? Elle est normalement écrit sur la note (facture). Si vous la contestez, noter l'heure réelle d'arrivée.
+                      - label: Heure d'arrivée. Elle est normalement écrit sur la note (facture). Si vous la contestez, noter l'heure réelle d'arrivée.
                         rank: 7
-                        type: TIMESLOT
+                        type: TEXT
                       - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
                         rank: 8
                         type: TEXT
@@ -2517,6 +2517,12 @@ list:
                           - bagage
                           - passager supplémentaire
                           - animaux
+                      - label: Combien étiez-vous de passagers (enfant compris) ?
+                        rank: 3
+                        type: TEXT
+                      - label: Combien aviez-vous de bagages en tout ?
+                        rank: 4
+                        type: TEXT
                   - title: Le prix au compteur était élevé dès la prise en charge
                     detailInputs:
                       - label: Date de la course
@@ -2529,10 +2535,10 @@ list:
                         rank: 3
                         type: RADIO
                         options:
-                          - Oui je l'avais reservé à l'avance
-                          - Oui je l'ai commandé 
+                          - Oui, je l'avais reservé à l'avance
+                          - Oui, je l'ai commandé juste avant de le prendre
                           - Non, il m'a pris en charge sur une place de taxi ou dans la rue
-                      - label: Quel était le montant de départ ?
+                      - label: Quel était le montant indiqué dès le départ ?
                         rank: 4
                         type: TEXT
                     filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
@@ -2546,13 +2552,13 @@ list:
                         type: TEXT
                       - label: Heure de départ. Elle est normalement écrit sur la note (facture). 
                         rank: 3
-                        type: TIMESLOT
+                        type: TEXT
                       - label: Adresse d'arrivée
                         rank: 4
                         type: TEXT
                       - label: Heure d'arrivée
                         rank: 5
-                        type: TIMESLOT
+                        type: TEXT
                       - label: Combien avez-vous payé ?
                         rank: 6
                         type: TEXT
@@ -2667,7 +2673,7 @@ list:
           - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
             information:
               title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
-              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) ou que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils agissent souvent aux abords des aéroports ou des lieux de sorties le soir. <br><br> 
+              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) ou que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils proposent souvent "taxi taxi" et sont par exemple dans les aéroports ou près des lieux de sorties le soir. <br><br> 
                   Comme ces chauffeurs ne sont pas déclarés, il n'est pas possible de faire un signalement sur notre plate-forme.
               actions:
                 - question: Que faire en cas de problème avec un "faux" taxi&#160;?
