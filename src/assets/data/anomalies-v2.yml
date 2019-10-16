@@ -2533,16 +2533,16 @@ list:
                           - label: Date de la course
                             rank: 1
                             type: DATE
-                         - label: Comment avez-vous régler votre course ?
-                           rank: 2
-                           type: TEXT
-                         - label: Noter le lieu de départ et le lieu d'arrivée
-                           rank: 3
-                           type: TEXTAREA
-                         - label: Merci de noter les informations pour identifier le véhicule
-                           rank: 4
-                           type: TEXTAREA
-                           placeholder: Immatriculation du véhicule, numéro ADS ...
+                          - label: Comment avez-vous régler votre course ?
+                            rank: 2
+                            type: TEXT
+                          - label: Noter le lieu de départ et le lieu d'arrivée
+                            rank: 3
+                            type: TEXTAREA
+                          - label: Merci de noter les informations pour identifier le véhicule
+                            rank: 4
+                            type: TEXTAREA
+                            placeholder: Immatriculation du véhicule, numéro ADS ...
                         fileLabel: Merci de joindre tout document utile pour appuyer votre signalement.
                       - title: Je n'ai pas fait attention
                   - title: Le prix annoncé au départ de la course n'a pas été respecté
