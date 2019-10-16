@@ -2580,10 +2580,16 @@ list:
                         type: TEXT
                         placeholder: Identification du taxi, nom de la centrale d'appel ... 
                     fileLabel: Merci de joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
-            
           - title: VTC (voiture avec chauffeur)
             example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
-          - title: chauffeur qui s'est proposé dans la rue
+          - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
+            information:
+              title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
+              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) et que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils agissent souvent aux abords des aéroports ou des lieux de sorties le soir. <br><br> 
+                  Comme ces chauffeurs ne sont pas déclarés, il n'est pas possible de faire un signalement sur notre plate-forme.
+              actions:
+                - question: Que faire en cas de problème avec un "faux" taxi&#160;?
+                  answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie. 
           
           
       - title: Transport en commun
