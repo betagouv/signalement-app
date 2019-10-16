@@ -2584,12 +2584,49 @@ list:
             example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
             subcategories:
               - title: Une remise ou une offre promotionnelle qui n'est pas appliquée ou qui est mensongère
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Quelle était l'offre ou la promotion annoncée ?
+                    rank: 2
+                    type: TEXT
+                    placeholder: "Exemple : -20% offert à la première course"
+                  - label: Où avez-vous vu cette offre  ?
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - site internet / application mobile de la société
+                      - publicité par email
+                      - publicité sur un affichage (dans le métro, sur une pancarte..)
+                      - autre (à préciser)
+                  - label: Quel est le problème ?
+                    rank: 4
+                    type: TEXTAREA
+                fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course etc.)
               - title: Le prix payé n'est pas celui annoncé au départ
+                detailInputs:
+                  - label: Date de la course
+                    rank: 1
+                    type: DATE
+                  - label: Quel était le prix annoncé au départ ?
+                    rank: 2
+                    type: TEXT
+                  - label: Quel prix avez-vous payé ?
+                    rank: 3
+                    type: TEXT
+                  - label: Le chauffeur / la société vous a-t-elle donné une raison ?
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Oui (à préciser)
+                      - Non
+                fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile etc.)
               - title: Autre
           - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
             information:
               title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
-              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) et que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils agissent souvent aux abords des aéroports ou des lieux de sorties le soir. <br><br> 
+              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) ou que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils agissent souvent aux abords des aéroports ou des lieux de sorties le soir. <br><br> 
                   Comme ces chauffeurs ne sont pas déclarés, il n'est pas possible de faire un signalement sur notre plate-forme.
               actions:
                 - question: Que faire en cas de problème avec un "faux" taxi&#160;?
