@@ -2451,6 +2451,14 @@ list:
             subcategories:
               - title: Refus de faire la course
                 example: "Exemple : le taxi refuse de vous prendre car ce n'est pas assez loin"
+                subcategoriesTitle: Pour quelle raison le chauffeur a-t-il refusé de vous prendre ?
+                subcategories: 
+                  - title: Trajet trop court ou pas assez rentable
+                  - title: Présence de mon chien
+                  - title: Mes bagages/objets ne rentrent pas dans le coffre
+                  - title: Etat d'ébriété ou de violence
+                  - title: Borne taxi à proximité
+                  - title: Autre
               - title: Les prix ne sont pas affichés dans la voiture
                 example: Une affiche avec les prix et les suppléments doit être visible dans la voiture.
               - title: Refus de prendre votre carte bancaire
@@ -2498,11 +2506,45 @@ list:
                         type: TEXT
                     fileLabel: Si possible, joindre une copie de la note (facture), et toute preuve du trajet réellement emprunté.    
                   - title: j'ai payé un supplément que je ne comprends pas
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Quel supplément avez-vous payé ?
+                        rank: 2
+                        type: CHECKBOX
+                        options:
+                          - bagage
+                          - passager supplémentaire
+                          - animaux
                   - title: le prix au compteur était élevé dès la prise en charge
                   - title: le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
               - title: Autre
                 subcategories:
                   - title: Refus de prendre les chèques
+                    subcategoriesTitle: Est-ce que c'était marqué sur la voiture ? 
+                    subcategories:
+                      - title: Oui
+                        information:
+                          title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
+                          content: A la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
+                      - title: Non
+                        detailInputs:
+                          - label: Date de la course
+                            rank: 1
+                            type: DATE
+                         - label: Comment avez-vous régler votre course ?
+                           rank: 2
+                           type: TEXT
+                         - label: Noter le lieu de départ et le lieu d'arrivée
+                           rank: 3
+                           type: TEXTAREA
+                         - label: Merci de noter les informations pour identifier le véhicule
+                           rank: 4
+                           type: TEXTAREA
+                           placeholder: Immatriculation du véhicule, numéro ADS ...
+                        fileLabel: Merci de joindre tout document utile pour appuyer votre signalement.
+                      - title: Je n'ai pas fait attention
                   - title: Le prix annoncé au départ de la course n'a pas été respecté
                   - title: J'ai été prélevé deux fois
                   
