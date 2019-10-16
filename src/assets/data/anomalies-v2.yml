@@ -2466,7 +2466,7 @@ list:
               - title: Refus de me donner une note (facture)
               - title: Le prix payé ne me convient pas
                 subcategories:
-                  - title: je pense que le trajet n'était pas le plus court
+                  - title: Je pense que le trajet n'était pas le plus court
                     detailInputs:
                       - label: Date de la course
                         rank: 1
@@ -2505,7 +2505,7 @@ list:
                         rank: 10
                         type: TEXT
                     fileLabel: Si possible, joindre une copie de la note (facture), et toute preuve du trajet réellement emprunté.    
-                  - title: j'ai payé un supplément que je ne comprends pas
+                  - title: J'ai payé un supplément que je ne comprends pas
                     detailInputs:
                       - label: Date de la course
                         rank: 1
@@ -2517,12 +2517,35 @@ list:
                           - bagage
                           - passager supplémentaire
                           - animaux
-                  - title: le prix au compteur était élevé dès la prise en charge
-                  - title: le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
+                  - title: Le prix au compteur était élevé dès la prise en charge
+                  - title: Le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
+                  - title: Le chauffeur n'a pas appliqué le prix du forfait
+                    example: Dans certaines villes, il existe des forfaits (c'est-à-dire un prix unique connu à l'avance) pour faire les trajets vers ou depuis un aéroport. Le prix de ces forfaits est fixe.
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Lieu de départ
+                        rank: 2
+                        type: TEXT
+                      - label: Lieu d'arrivée
+                        rank: 3
+                        type: TEXT
+                      - label: Quel est normalement le prix du forfait pour votre trajet ?
+                        rank: 4
+                        type: TEXT
+                      - label: Combien avez-vous payé ?
+                        rank: 5
+                        type: TEXT
+                      - label: Noter les éléments qui permettent d'identifier le taxi.
+                        rank: 6
+                        type: TEXTAREA
+                        placeholder: Numéro ADS, plaque d'immatriculation, société de réservation ...
+                    fileLabel: Joindre la note (facture) de votre course ou tout document utile pour appuyer votre signalement.
               - title: Autre
                 subcategories:
                   - title: Refus de prendre les chèques
-                    subcategoriesTitle: Est-ce que c'était marqué sur la voiture ? 
+                    subcategoriesTitle: Est-ce que c'était indiqué sur la voiture ? 
                     subcategories:
                       - title: Oui
                         information:
@@ -2544,10 +2567,19 @@ list:
                             type: TEXTAREA
                             placeholder: Immatriculation du véhicule, numéro ADS ...
                         fileLabel: Merci de joindre tout document utile pour appuyer votre signalement.
-                      - title: Je n'ai pas fait attention
-                  - title: Le prix annoncé au départ de la course n'a pas été respecté
                   - title: J'ai été prélevé deux fois
-                  
+                    detailInputs:
+                      - label: Date de la course ?
+                        rank: 1
+                        type: DATE
+                      - label: Montant de la course ?
+                        rank: 2
+                        type: TEXT
+                      - label: Noter toute autre information utile.
+                        rank: 3
+                        type: TEXT
+                        placeholder: Identification du taxi, nom de la centrale d'appel ... 
+                    fileLabel: Merci de joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
             
           - title: VTC (voiture avec chauffeur)
             example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
