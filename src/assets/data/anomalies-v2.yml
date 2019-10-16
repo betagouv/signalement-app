@@ -2582,6 +2582,10 @@ list:
                     fileLabel: Merci de joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
           - title: VTC (voiture avec chauffeur)
             example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
+            subcategories:
+              - title: Une remise ou une offre promotionnelle qui n'est pas appliquée ou qui est mensongère
+              - title: Le prix payé n'est pas celui annoncé au départ
+              - title: Autre
           - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
             information:
               title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
