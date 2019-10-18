@@ -256,7 +256,7 @@
           </ng-template>
         </ng-container>
 
-        <ng-container *ngIf="getReportResponse() && ! isClosed()">
+        <ng-container *ngIf="getReportResponse()">
           <hr />
           <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
           <ng-template #titleAnswerNoPro>
@@ -266,9 +266,9 @@
           </ng-template>
           <div class="row" id="proAnswer">
             <div class="col-12" [ngSwitch]="getReportResponse().responseType">
-              <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte.</span>
-              <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé.</span>
-              <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement.</span>
+              <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte</span>
+              <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé</span>
+              <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement</span>
               <br />Réponse au consommateur : {{getReportResponse().consumerDetails}}
               <br />Réponse à la DGCCRF : {{getReportResponse().dgccrfDetails}}
             </div>
