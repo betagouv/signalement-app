@@ -8,6 +8,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as compression from 'compression';
+import * as hsts from 'hsts';
 import { join } from 'path';
 
 enableProdMode();
@@ -18,6 +19,11 @@ app.use(compression());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Setup Strict-Transport-Security: max-age: 15552000; includeSubDomains
+app.use(hsts({
+  maxAge: 15552000  // 180 days in seconds
+}));
 
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const PORT = process.env.PORT || 8080;
