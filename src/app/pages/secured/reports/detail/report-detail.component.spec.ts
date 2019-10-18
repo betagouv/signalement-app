@@ -36,7 +36,10 @@ describe('ReportDetailComponent', () => {
 
   const answerEventFixture = Object.assign(new ReportEvent(), {
     action: ProAnswerReportEventAction,
-    detail: 'détails'
+    details: {
+      responseType: 'ACCEPTED',
+      consumerDetails: 'details'
+    }
   });
 
   beforeEach(async(() => {
@@ -113,7 +116,7 @@ describe('ReportDetailComponent', () => {
         const nativeElement = fixture.nativeElement;
         expect(nativeElement.querySelector('#answerBtn')).toBeNull();
         expect(nativeElement.querySelector('#proAnswer')).not.toBeNull();
-        expect(nativeElement.querySelector('#proAnswer').textContent.indexOf(answerEventFixture.detail)).toBeGreaterThan(-1);
+        expect(nativeElement.querySelector('#proAnswer').textContent.indexOf(answerEventFixture.details.consumerDetails)).toBeGreaterThan(-1);
       });
 
     });
