@@ -256,7 +256,7 @@
           </ng-template>
         </ng-container>
 
-        <ng-container *ngIf="getProAnswerEvent() && ! isClosed()">
+        <ng-container *ngIf="getReportResponse() && ! isClosed()">
           <hr />
           <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
           <ng-template #titleAnswerNoPro>
@@ -265,28 +265,36 @@
             </h5>
           </ng-template>
           <div class="row" id="proAnswer">
-            <div class="col-12">
-              {{getProAnswerEvent().detail}}
+            <div class="col-12" [ngSwitch]="getReportResponse().responseType">
+              <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte.</span>
+              <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé.</span>
+              <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement.</span>
+              <br />Réponse au consommateur : {{getReportResponse().consumerDetails}}
+              <br />Réponse à la DGCCRF : {{getReportResponse().dgccrfDetails}}
             </div>
           </div>
         </ng-container>
 
-        <ng-container  *appRole="[roles.Admin, roles.DGCCRF]">
+        <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
           <h5>Historique</h5>
           <div class="row">
             <div class="col-12" *ngFor="let event of events; let eventIndex = index">
-              <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}" *ngIf="event.detail">
-                <span class="collapsed-icon">&#43;</span>
-                <span class="uncollapsed-icon">&#8722;</span>
-                Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
-              </a>
-              <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
-                {{event.detail}}
-              </div>
-              <span *ngIf="!event.detail">
-                Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
-              </span>
+              <ng-container *ngIf="event.details && event.details.description; else noDescription">
+                <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
+                  <span class="collapsed-icon">&#43;</span>
+                  <span class="uncollapsed-icon">&#8722;</span>
+                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
+                </a>
+                <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
+                  {{event.details.description}}
+                </div>
+              </ng-container>
+              <ng-template #noDescription>
+                <span>
+                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
+                </span>
+              </ng-template>
             </div>
             <div class="col-12">
               Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
@@ -331,35 +339,84 @@
     </div>
 
     <ng-container *appRole="[roles.Pro]">
-      <div *ngIf="report && !getProAnswerEvent() && ! isClosed()">
-        <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
+      <div *ngIf="report && !getReportResponse() && ! isClosed()">
+        <div class="pb-3 text-center" *ngIf="!responseForm; else proAnswer">
           <p>Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.</p>
           <div class="mb-4">
             <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
           </div>
-          <div>
-            <span class="link pointer" (click)="showProAnswerFormDeclined()">je considère que le signalement est infondé</span>
-          </div>
         </div>
         <ng-template #proAnswer>
           <div class="notification">
-            <form [formGroup]="proAnswerForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
-              <label for="proAnswerInput" [class]="hasError(answerCtrl) ? 'error' : ''">
-                Réponse au consommateur et à la DGCCRF
-              </label>
-              <textarea [formControl]="answerCtrl" id="proAnswerInput" rows="5"
-                        placeholder="{{ placeholderPro }}">
-              </textarea>
-              <div class="notification error" *ngIf="showErrors && proAnswerForm.invalid">
+            <form [formGroup]="responseForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
+
+              <div class="form__group">
+                <label class="text-center" [class]="hasError(responseTypeCtrl) ? 'error' : ''">
+                  Pouvez-vous préciser votre réponse ? <span class="error">*</span>
+                </label>
+                <div [class]="getResponseTypeClass(reportResponseTypes.Accepted)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="reportAccepted" class="label-inline pointer">Je prends en compte ce signalement</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getResponseTypeClass(reportResponseTypes.Rejected)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="reportRejected" class="label-inline pointer">J'estime que ce signalement est infondé</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getResponseTypeClass(reportResponseTypes.NotConcerned)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="reportNotConcerned" class="label-inline pointer">J'estime que ce signalement ne concerne pas mon établissement</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container *ngIf="responseTypeCtrl.valid">
+
+                <div class="form__group">
+                  <label for="proAnswerInput" [class]="hasError(responseConsumerDetailsCtrl) ? 'error' : ''" [ngSwitch]="responseTypeCtrl.value">
+                    <span *ngSwitchCase="reportResponseTypes.Accepted">Détaillez les actions préventives / correctives que vous allez mettre en place.</span>
+                    <span *ngSwitchDefault>Apportez une réponse au consommateur</span>
+                    <span class="error">*</span>
+                  </label>
+                  <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3" placeholder="Cette réponse sera envoyée automatiquement par mail au consommateur et pourra être consultée par la DGCCRF.">
+                  </textarea>
+                </div>
+
+                <hr />
+
+                <div class="form__group">
+                  <label for="proAnswerDgccrfInput">
+                    Vous pouvez également, si vous le souhaitez, apporter une précision à l'attention de la DGCCRF qui ne sera pas transmise au consommateur
+                  </label>
+                  <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3" placeholder="Cette réponse pourra être consultée par la DGCCRF uniquement.">
+                  </textarea>
+                </div>
+
+              </ng-container>
+
+              <div class="notification error" *ngIf="showErrors && responseForm.invalid">
                 Veuillez renseigner les champs obligatoires.<br />
               </div>
+
               <div class="notification error" *ngIf="loadingError">
                 Une erreur technique s'est produite<br />
               </div>
-              <p class="text-center mt-3 mb-4 text-primary">
-                <i class="material-icons md-18" aria-hidden="true">warning</i>&nbsp;
-                Votre réponse sera envoyée automatiquement par mail au consommateur ainsi qu'à la DGCCRF.
-              </p>
 
               <div class="mt-4 text-center">
                 <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
@@ -371,7 +428,7 @@
           </div>
         </ng-template>
       </div>
-      <div class="notification success" *ngIf="answerSuccess">
+      <div class="notification success" *ngIf="responseSuccess">
         Votre réponse a bien été prise en compte, nous vous en remercions.
       </div>
     </ng-container>

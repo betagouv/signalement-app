@@ -22,7 +22,6 @@ export class EventComponent implements OnInit {
   eventForm: FormGroup;
   actionCtrl: FormControl;
   detailCtrl: FormControl;
-  resultActionCtrl: FormControl;
   reportId: string;
   siret: string;
   actions: ReportEventAction[];
@@ -67,7 +66,6 @@ export class EventComponent implements OnInit {
   initEventForm() {
     this.actionCtrl = this.formBuilder.control('', Validators.required);
     this.detailCtrl = this.formBuilder.control('');
-    this.resultActionCtrl = this.formBuilder.control(true, Validators.required);
 
     this.eventForm = this.formBuilder.group({
       action: this.actionCtrl,
@@ -90,11 +88,8 @@ export class EventComponent implements OnInit {
         reportId: this.reportId,
         eventType: 'PRO',
         action: this.actionCtrl.value,
-        detail: this.detailCtrl.value
+        details: {description: this.detailCtrl.value}
       });
-      if (this.actionCtrl.value.withResult) {
-        eventToCreate.resultAction = this.resultActionCtrl.value;
-      }
 
       this.eventService.createEvent(eventToCreate).subscribe(
         event => {
@@ -105,15 +100,6 @@ export class EventComponent implements OnInit {
           this.loading = false;
           this.loadingError = true;
         });
-    }
-  }
-
-  selectAction() {
-
-    if (this.actions.find(action => action === this.actionCtrl.value).withResult) {
-      this.eventForm.addControl('resultAction', this.resultActionCtrl);
-    } else {
-      this.eventForm.removeControl('resultAction');
     }
   }
 
