@@ -48,13 +48,18 @@ table {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid $light-blue;
+  border-bottom: 1px solid $blue;
 }
 
 .nav-link {
   border: 0;
-  color: $light-blue !important;
+  color: $blue !important;
   cursor: pointer;
+
+  &.active {
+    color: $white !important;
+    background-color: $blue;
+  }
 }
 
 input + input {
