@@ -8,6 +8,8 @@ import { combineLatest } from 'rxjs';
 import { PlatformLocation } from '@angular/common';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { AccountService } from '../../../../services/account.service';
+import { AuthenticationService } from '../../../../services/authentication.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-event',
@@ -36,6 +38,7 @@ export class EventComponent implements OnInit {
               private eventService: EventService,
               private constantService: ConstantService,
               private accountService: AccountService,
+              private authenticationService: AuthenticationService,
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
@@ -84,14 +87,19 @@ export class EventComponent implements OnInit {
     } else {
       this.loading = true;
       this.loadingError = false;
-      const eventToCreate = Object.assign(new ReportEvent(), {
-        reportId: this.reportId,
-        eventType: 'PRO',
-        action: this.actionCtrl.value,
-        details: {description: this.detailCtrl.value}
-      });
 
-      this.eventService.createEvent(eventToCreate).subscribe(
+      this.authenticationService.user.pipe(
+        switchMap(user => {
+          const eventToCreate = Object.assign(new ReportEvent(), {
+            reportId: this.reportId,
+            eventType: user.role === Roles.DGCCRF ? 'DGCCRF' : 'PRO',
+            action: this.actionCtrl.value,
+            details: {description: this.detailCtrl.value}
+          });
+
+          return this.eventService.createEvent(eventToCreate);
+        })
+      ).subscribe(
         event => {
           this.bsModalRef.hide();
           this.loading = false;
