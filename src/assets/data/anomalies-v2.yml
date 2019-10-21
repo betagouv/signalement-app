@@ -7,14 +7,14 @@ list:
     rank: 9
     icon: icon_rest.png
     subcategories:
-      - title: Intoxication alimentaire
-        example: 'Exemple : vous avez été malade (vomissement, maux de ventre) après être allé dans l''établissement'
+      - title: J'ai été malade après avoir mangé
+        example: 'Exemple : vomissement, maux de ventre'
         information:
-          title: Les intoxications alimentaires ne doivent pas être signalées sur SignalConso.
-          subtitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et aliments suspectés ).
+          title: Il peut s'agir d'une intoxication alimentaire
+          subtitle: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et les aliments consommés ).
           actions:
             - question: Comment le signaler&#160;?
-              answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+              answer: Signaler-le à la DGCCRF avec <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />ce lien dédié</a>
       - title: Hygiène
         example: 'Exemples : locaux sales, rat, problème de chaîne du froid'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
@@ -53,7 +53,7 @@ list:
           - title: Hygiène des locaux et du matériel
             example: 'Exemples : cuisine sale, trouble du voisinage'
             subcategories:
-              - title: Locaux sales ou dégradés
+              - title: Je trouve les locaux sales ou dégradés
                 example: 'Exemples : cuisine sale, WC sale'
                 detailInputs:
                   - label: Quel endroit est concerné&#160;?
@@ -92,13 +92,13 @@ list:
                     rank: 6
                     type: TIMESLOT
                     optionnal: true
-              - title: Trouble du voisinage (odeur, bruit)
+              - title: Je subis des nuisances à cause des odeurs, du bruit ..
                 information:
-                  title: Trouble anormal de voisinage
-                  subtitle: Les problèmes de nuisance tel que le bruit et les odeurs ne font pas partie du périmètre de la repression des fraudes.
+                  title: Je subis des nuisances à cause d'un commerce
+                  subtitle: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème. 
                   actions:
-                    - question: Vous trouverez sur ce lien les recours possibles pour ce type de problème.
-                      answer: <br><a href="https://www.service-public.fr/particuliers/vosdroits/F19299" target="_blank" />https://www.service-public.fr/particuliers/vosdroits/F19299</a>
+                    - question: Mais alors, à qui demander de l'aide ?
+                      answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/F19299" target="_blank" />lien</a>
           - title: Hygiène du personnel
             example: 'Exemples : tenue sale ou pas adaptée'
             subcategories:
