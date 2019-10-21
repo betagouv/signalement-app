@@ -275,37 +275,37 @@ list:
                   - autre raison (à préciser)
           - title: Information mensongère ou trompeuse
             detailInputs:
-            - label: Date du constat
-              rank: 1
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Qu'est-ce qui est trompeur&#160;?
-              rank: 2
-              type: RADIO
-              options:
-                - La carte, le menu, une pancarte 
-                - Le site internet (à préciser)
-                - Le discours d'un serveur ou du gérant
-                - Autre (à préciser)
-            - label: À propos de quoi est-ce trompeur&#160;?
-              rank: 3
-              type: RADIO
-              options:
-                - 'L''origine (exemple : origine des vins )'
-                - 'Un label ou une mention (exemple: fait maison)'
-                - 'Une marque (exemple: la marque de rhum proposée est mensongère'
-                - Autre (à préciser)
-            - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur :
-              rank: 4
-              type: TEXT
-              placeholder: Soyez factuel et courtois, merci !
-              optionnal: true
-            - label: Avez-vous déjà contacté le restaurant/bar pour lui parler de problème&#160;?
-              rank: 5
-              type: RADIO
-              options:
-                - Oui
-                - Non
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Qu'est-ce qui est trompeur&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - La carte, le menu, une pancarte 
+                  - Le site internet (à préciser)
+                  - Le discours d'un serveur ou du gérant
+                  - Autre (à préciser)
+              - label: À propos de quoi est-ce trompeur&#160;?
+                rank: 3
+                type: RADIO
+                options:
+                  - 'L''origine (exemple : origine des vins )'
+                  - 'Un label ou une mention (exemple: fait maison)'
+                  - 'Une marque (exemple: la marque de rhum proposée est mensongère'
+                  - Autre (à préciser)
+              - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur :
+                rank: 4
+                type: TEXT
+                placeholder: Soyez factuel et courtois, merci !
+                optionnal: true
+              - label: Avez-vous déjà contacté le restaurant/bar pour lui parler de problème&#160;?
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
             fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
       - title: Service
         example: 'Exemples : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
