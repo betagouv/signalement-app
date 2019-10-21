@@ -295,11 +295,10 @@ list:
                   - 'Un label ou une mention (exemple: fait maison)'
                   - 'Une marque (exemple: la marque de rhum proposée est mensongère'
                   - Autre (à préciser)
-              - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur :
+              - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur
                 rank: 4
                 type: TEXT
-                placeholder: Soyez factuel et courtois, merci !
-                optionnal: true
+                placeholder: Soyez factuel et courtois, merci !                
               - label: Avez-vous déjà contacté le restaurant/bar pour lui parler de problème&#160;?
                 rank: 5
                 type: RADIO
