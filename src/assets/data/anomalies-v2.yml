@@ -19,7 +19,7 @@ list:
         example: 'Exemples : locaux sales, rat, problème de chaîne du froid'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
-          - title: Présence d'animaux
+          - title: J'ai vu un animal (nuisible)
             example: 'Exemples : cafards, rat'
             detailInputs:
             - label: Quel animal avez-vous vu&#160;?
@@ -98,7 +98,7 @@ list:
                   content: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème. 
                   actions:
                     - question: Mais alors, à qui demander de l'aide ?
-                      answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/F19299" target="_blank" />lien</a>
+                      answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/N356" target="_blank" />lien</a>
           - title: Hygiène du personnel
             example: 'Exemples : tenue sale ou pas adaptée'
             subcategories:
@@ -267,11 +267,11 @@ list:
                 - Non
             fileLabel: Photo(s) si possible
       - title: Service
-        example: 'Exemples : chien refusé, personnel peu aimable, refus de nous donner une table car nous avons une poussette'
+        example: 'Exemples : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
-          - title: Personnel peu aimable
-            example: 'Exemples : l''accueil est froid, le personnel est mal poli'
+          - title: Le personnel est peu aimable
+            example: 'Exemples : l''accueil est froid, le personnel parle mal aux clients'
             information:
               title: Ceci ne constitue pas un motif de signalement.
               content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
@@ -281,16 +281,33 @@ list:
                   answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
                 - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
                   answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées...
-          - title: Refus de me servir
-            example: 'Exemples : refus de donner une table au motif de la présence d''enfant, refus de vente pour un motif discriminatoire'
-          - title: Refus de mon chien
+          - title: On a refusé de me servir ou de me laisser une table
+            example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, car je ne prenais qu''un café'
+            detailInputs:
+              - label: Date du problème
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE      
+              - label: Pour quelle raison a-t-on refusé de vous servir ou de vous donner une table ?
+                rank: 2
+                type: TEXT
+            fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement. 
+          - title: Mon chien a été refusé
             subcategoriesTitle: Est-ce un chien d'assistance&#160;?
             subcategories:
-            - title: Non
-              information:
-                content: Tout comme dans un hôtel, un restaurateur peut refuser la présence d’un chien dans son établissement. 
-                  <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recensent les établissements acceptant les chiens.
-            - title: Oui (je possède la carte d'assistance)
+              - title: Non
+                information:
+                  content: Tout comme dans un hôtel, un restaurateur (ou un cafetier) peut refuser la présence d’un chien dans son établissement. 
+                    <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. <br> Il existe également des sites internet qui recensent les établissements acceptant les chiens.
+              - title: Oui (je possède la carte d'assistance)
+                detailInputs:
+                  - label: Date du refus
+                    rank: 1
+                    type: DATE
+                  - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
+                    rank: 2
+                    type: TEXTAREA
+                fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
           - title: Autres problème de service
   - category: Achat / Magasin
     categoryId: MAG
