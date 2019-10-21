@@ -16,14 +16,18 @@ list:
             - question: Comment le signaler&#160;?
               answer: Signaler-le à la DGCCRF avec <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />ce lien dédié</a>
       - title: Hygiène
-        example: 'Exemples : locaux sales, rat, problème de chaîne du froid'
+        example: 'Exemple : locaux sales, rat, chaîne du froid'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: J'ai vu un animal (nuisible)
             example: 'Exemples : cafards, rat'
             detailInputs:
-            - label: Quel animal avez-vous vu&#160;?
+            - label: Date du constat
               rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Quel animal avez-vous vu&#160;?
+              rank: 2
               type: RADIO
               options:
                 - Insectes (cafard...)
@@ -31,24 +35,16 @@ list:
                 - Oiseau (pigeon...)
                 - Autre (à préciser)
             - label: Où l'avez-vous vu&#160;?
-              rank: 2
+              rank: 3
               type: CHECKBOX
               options:
                 - Cuisine ou zone de production
-                - Intérieur d'un magasin
-                - Salle d'un bar ou d'un restaurant
+                - Salle du bar, du restaurant
+                - Dans mon plat
                 - Autre (à préciser)
-            - label: Pouvez-vous nous en dire plus ?
-              rank: 3
-              type: TEXTAREA
-              optionnal: true
-            - label: Date du constat
+            - label: Merci de préciser le problème en quelques mots
               rank: 4
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Heure du constat (facultatif)
-              rank: 5
-              type: TIMESLOT
+              type: TEXT
               optionnal: true
           - title: Hygiène des locaux et du matériel
             example: 'Exemples : cuisine sale, trouble du voisinage'
@@ -56,42 +52,39 @@ list:
               - title: Je trouve les locaux sales ou dégradés
                 example: 'Exemples : cuisine sale, WC sale'
                 detailInputs:
-                  - label: Quel endroit est concerné&#160;?
+                  - label: Date du constat
                     rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Heure du constat (facultatif)
+                    rank: 2
+                    type: TIMESLOT
+                    optionnal: true
+                  - label: Quel endroit est concerné&#160;?
+                    rank: 3
                     type: CHECKBOX
                     options:
                       - Cuisine
                       - Salle du restaurant, du bar
-                      - WC
+                      - Le lieu de vente (vitrine réfigérée)
+                      - Les WC
                       - Autre (à préciser)
                   - label: Quel est le problème&#160;?
-                    rank: 2
+                    rank: 3
                     type: CHECKBOX
                     options:
                       - C'est sale
                       - C'est dégradé, en mauvais état
                   - label: À quel niveau&#160;?
-                    rank: 3
+                    rank: 4
                     type: CHECKBOX
                     options:
-                      - Sol
-                      - Mur
+                      - Sol / mur
                       - Vitrine, réfrigérateur
-                      - Équipements mis à disposition des clients
                       - Matériel de fabrication, équipement en cuisine
+                      - Equipements pour les clients (table, plateaux, couverts, micro-ondes..)
                       - Autre (à préciser)
-                  - label: Pouvez-vous nous en dire plus ?
-                    rank: 4
-                    type: TEXTAREA
-                    optionnal: true
-                  - label: Date du constat
-                    rank: 5
-                    type: DATE
-                    defaultValue: SYSDATE
-                  - label: Heure du constat (facultatif)
-                    rank: 6
-                    type: TIMESLOT
-                    optionnal: true
+                fileLabel: Merci de joindre si possible une photo pour appuyer votre signalement. 
               - title: Je subis des nuisances à cause des odeurs, du bruit ..
                 information:
                   title: Je subis des nuisances à cause d'un commerce
@@ -102,43 +95,67 @@ list:
           - title: Hygiène du personnel
             example: 'Exemples : tenue sale ou pas adaptée'
             subcategories:
-              - title: Tenue de travail pas adaptée
-                example: 'Exemples : pas de gants, torse-nu en cuisine'
+              - title: La tenue de travail n'est pas adaptée
+                example: 'Exemple : pas de gants, torse-nu en cuisine'
                 subcategories:
-                  - title: Pas de gants ou pas de coiffe
+                  - title: Les employés ne portent pas de gants ou pas de coiffe (calot, charlotte)
                     information:
                       title: Cet incident ne doit pas nécessairement être signalé.
                       content: La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
-                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
-                  - title: Autres problème sur la tenue de travail
-              - title: Tenue sale
+                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut également être suffisant pour éviter les contaminations. <br> Vous pouvez directement discuter avec le gérant pour lui faire part de votre étonnement ou comprendre leurs habitudes de travail.
+                  - title: Autre problème de tenue
+                    example: 'Exemple : pas de tenue spécifique, torse-nu en cuisine'
+                    detailInputs:
+                      - label: Date de constat
+                        rank: 1
+                        type: DATE
+                      - label: Quel est le problème ?
+                        rank: 2
+                        type: TEXT
+                    fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
+              - title: La tenue de travail est sale
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: TEXT
+                fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
               - title: Mauvaises pratiques d'hygiène
                 example: 'Exemple : personne qui fume en cuisine'
-              - title: Autres problèmes sur l’hygiène du personnel
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: TEXT
+                fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
           - title: Problème de température
             example: 'Exemple : rupture de la chaine du froid'
             detailInputs:
-            - label: Quel est le problème&#160;?
-              rank: 1
-              type: RADIO
-              options:
-                - Vitrine ou réfrigérateur trop chaud, cassé ou en panne
-                - Stockage à température ambiante de produits frais ou congelés
-                - Transport à température ambiante de produits frais ou congelés
-                - Autre problème de température
-            - label: Pouvez-vous nous en dire plus ?
-              rank: 2
-              type: TEXTAREA
-              optionnal: true
             - label: Date du constat
-              rank: 3
+              rank: 1
               type: DATE
               defaultValue: SYSDATE
             - label: Heure du constat (facultatif)
-              rank: 4
+              rank: 2
               type: TIMESLOT
               optionnal: true
-          - title: Autres problème d'hygiène
+            - label: Quel est le problème&#160;?
+              rank: 3
+              type: RADIO
+              options:
+                - Vitrine/réfrigérateur trop chaud ou en panne
+                - Stockage à température ambiante de produits frais ou congelés
+                - Transport à température ambiante de produits frais ou congelés
+                - Autre problème de température (à préciser)
+            - label: Pouvez-vous préciser ?
+              rank: 3
+              type: TEXT
+              optionnal: true
+            fileLabel: Si possible, merci de joindre une photo ou un document pour appuyer votre signalement.
       - title: Prix et paiement
         example: 'Exemple : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
@@ -255,7 +272,7 @@ list:
       - title: Informations sur le menu, la carte ou le site mensongères
         example: 'Exemples : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
         subcategories:
-          - title: Indisponibilité des produits du menu
+          - title: Indisponibilité des produits proposés
             detailInputs:
               - label: Date du constat
                 rank: 1
@@ -265,14 +282,14 @@ list:
                 rank: 2
                 type: TEXT
                 placeholder: 'Exemple : Vin blanc, menu en promotion '
-              - label: Le seveur/gérant vous a-t-il donné une raison ?  
+              - label: Le commerçant vous a-t-il donné une raison ?  
                 rank: 3
                 type: RADIO
                 options:
-                  - non
-                  - il n'y en avait plus
-                  - la carte n'est pas à jour
-                  - autre raison (à préciser)
+                  - Non
+                  - Il n'y en avait plus
+                  - La carte n'est pas à jour
+                  - Autre raison (à préciser)
           - title: Information mensongère ou trompeuse
             detailInputs:
               - label: Date du constat
@@ -298,8 +315,8 @@ list:
               - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur
                 rank: 4
                 type: TEXT
-                placeholder: Soyez factuel et courtois, merci !                
-              - label: Avez-vous déjà contacté le restaurant/bar pour lui parler de problème&#160;?
+                placeholder: Soyez factuel et courtois, merci !
+              - label: Avez-vous déjà expliqué le problème au commerçant &#160;?
                 rank: 5
                 type: RADIO
                 options:
@@ -307,7 +324,7 @@ list:
                   - Non
             fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
       - title: Service
-        example: 'Exemples : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
+        example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Le personnel est peu aimable
@@ -348,6 +365,40 @@ list:
                     rank: 2
                     type: TEXTAREA
                 fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+      - title: Qualité des plats/boissons
+        example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
+        subcategories:
+          - title: Les plats ne correspondent pas à la description
+            example: 'Exemple : Produit industriel vendu sous la mention "fait maison"'
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: À propos de quoi est-ce trompeur selon vous&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - 'L''origine (exemple : origine des vins )'
+                  - 'Un label ou une mention (exemple: fait maison)'
+                  - 'Une marque (exemple: la marque de rhum proposée est mensongère'
+                  - Autre (à préciser)
+              - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur
+                rank: 3
+                type: TEXT
+                placeholder: Soyez factuel et courtois, merci !
+              - label: Avez-vous déjà expliqué le problème au commerçant &#160;?
+                rank: 4
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+            fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
+          - title: Les produits ne sont pas bons
+            information:
+                title: Je trouve que les produits ne sont pas bons ou de grande qualité.
+                content: Si la qualité des produits ne vous a pas convenu, nous vous invitons à contacter directement l'établissement. <br> Vous pouvez notamment contacter le service client. Le service client est présent dans la plupart des restaurants et bars qui font partie d'un groupe ou d'une chaîne. Il est conçu pour recevoir ce type de plainte. <br> Vous ne pouvez pas faire un signalement sur SignalConso car la répression des fraudes ne pourra pas traiter votre signalement.
+          - title: Les produits ne sont pas frais ou certains aliments sont périmés, cest-à-dire que les dates indiquées sont dépassées.
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
