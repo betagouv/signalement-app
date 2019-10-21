@@ -140,11 +140,11 @@ list:
               optionnal: true
           - title: Autres problème d'hygiène
       - title: Prix et paiement
-        example: 'Exemples : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance'
+        example: 'Exemple : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
-          - title: Prix pas affiché
-            example: 'Exemple : absence de carte des vins avec les prix'
+          - title: Il manque certains prix
+            example: 'Exemple : absence de prix sur la carte des vins'
             description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
             detailInputs:
               - label: Date du constat
@@ -156,16 +156,42 @@ list:
                 rank: 2
                 type: TEXTAREA
                 placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
-          - title: Prix différent de celui affiché
-            example: 'Exemple : le prix sur l''addition est différent de celui affiché'
-          - title: Prix exgagéré
-            example: 'Exemple : le prix du café est très cher'
+                fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
+          - title: J'ai payé plus cher que le prix affiché
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+              - label: Quel était le prix affiché ?
+                rank: 2
+                type: TEXT
+              - label: Combien avez-vous payé ?
+                rank: 3
+                type: TEXT
+              - label: L'avez-vous signalé au gérant/serveur ?
+                rank: 4
+                type: RADIO
+                options: 
+                  - Oui
+                  - Non
+              - label: Si oui, vous a-t-il donné une raison ?
+                rank : 5
+                type: RADIO
+                options:
+                  - Les prix affichés ne sont pas à jour
+                  - Un supplément s'applique (jour férié, vacances scolaire, terrasse..)
+                  - Erreur lors de l'addition
+                  - Autre (à préciser)
+                  - Non, aucune raison.
+                fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
+          - title: Je trouve que les pris sont très chers
+            example: 'Exemple : le prix du menu est très cher pour la qualité'
             information:
               title: Les prix sont choisis librement par les commerçants.
               content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
                 <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte.
                 <br/> Le saviez-vous ? Un café a également le droit de faire payer l'eau du robinet si le prix est marqué. Par contre, au cours d'un repas, l'eau du robinet doit vous être fournie gratuitement."
-          - title: Problème pour payer
+          - title: J'ai eu un problème pour payer
             example: 'Exemple : refus de la carte bancaire'
             subcategories:
               - title: Le commerçant refuse le paiement en espèces
@@ -213,9 +239,20 @@ list:
                 - title: Le cash-back
                 - title: Tickets restaurant
                 - title: Autres
-          - title: Problème de facture/ticket de caisse
-            example: 'Exemple : refus de délivrer une note'
-      - title: Publicité trompeuse / informations mensongères
+          - title: Refus de me donner une note (ticket, facture)
+            detailInputs:
+              - label: Date de constat
+                rank: 1
+                type: DATE
+              - label: Quel est le problème?
+                rank: 2
+                type: RADIO
+                options: 
+                  - Refus de me faire une note
+                  - La note ne comporte pas les taux de TVA
+                  - Autre (à préciser)
+          - title: Autres problèmes
+      - title: Informations sur le menu, la carte ou le site mensongères
         example: 'Exemples : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
         subcategories:
           - title: Indisponibilité des produits du menu
@@ -227,10 +264,15 @@ list:
               - label: Quel type de produit était indisponible&#160;?
                 rank: 2
                 type: TEXT
-                placeholder: Type de produit
-              - label: Description
+                placeholder: 'Exemple : Vin blanc, menu en promotion '
+              - label: Le seveur/gérant vous a-t-il donné une raison ?  
                 rank: 3
-                type: TEXTAREA
+                type: RADIO
+                options:
+                  - non
+                  - il n'y en avait plus
+                  - la carte n'est pas à jour
+                  - autre raison (à préciser)
           - title: Information mensongère ou trompeuse
             detailInputs:
             - label: Date du constat
@@ -241,31 +283,30 @@ list:
               rank: 2
               type: RADIO
               options:
-              - Une affiche chez le commerçant
-              - Un site internet (à préciser)
-              - Le discours d'un vendeur
-              - La façon de mettre en vente
-              - Autre (à préciser)
+                - La carte, le menu, une pancarte 
+                - Le site internet (à préciser)
+                - Le discours d'un serveur ou du gérant
+                - Autre (à préciser)
             - label: À propos de quoi est-ce trompeur&#160;?
               rank: 3
               type: RADIO
               options:
-              - L'origine
-              - La composition
-              - Un label ou une mention (exemple fait maison)
-              - Une marque
-              - Autre (à préciser)
-            - label: Pourquoi trouvez-vous ça trompeur ?
+                - 'L''origine (exemple : origine des vins )'
+                - 'Un label ou une mention (exemple: fait maison)'
+                - 'Une marque (exemple: la marque de rhum proposée est mensongère'
+                - Autre (à préciser)
+            - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur :
               rank: 4
-              type: TEXTAREA
+              type: TEXT
+              placeholder: Soyez factuel et courtois, merci !
               optionnal: true
-            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+            - label: Avez-vous déjà contacté le restaurant/bar pour lui parler de problème&#160;?
               rank: 5
               type: RADIO
               options:
                 - Oui
                 - Non
-            fileLabel: Photo(s) si possible
+            fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
       - title: Service
         example: 'Exemples : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
@@ -308,7 +349,6 @@ list:
                     rank: 2
                     type: TEXTAREA
                 fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
-          - title: Autres problème de service
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
