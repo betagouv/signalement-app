@@ -11,7 +11,7 @@ list:
         example: 'Exemple : vomissement, maux de ventre'
         information:
           title: Il peut s'agir d'une intoxication alimentaire
-          subtitle: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et les aliments consommés ).
+          content: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et les aliments consommés ).
           actions:
             - question: Comment le signaler&#160;?
               answer: Signaler-le à la DGCCRF avec <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />ce lien dédié</a>
@@ -95,7 +95,7 @@ list:
               - title: Je subis des nuisances à cause des odeurs, du bruit ..
                 information:
                   title: Je subis des nuisances à cause d'un commerce
-                  subtitle: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème. 
+                  content: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème. 
                   actions:
                     - question: Mais alors, à qui demander de l'aide ?
                       answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/F19299" target="_blank" />lien</a>
