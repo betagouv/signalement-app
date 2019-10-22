@@ -343,9 +343,9 @@ export class ReportDetailComponent implements OnInit {
 
   getReportResponse(): ReportResponse {
     const reportResponseEvent = this.events.find(event => event.action.name === ProAnswerReportEventAction.name);
-     if (reportResponseEvent) {
-       return reportResponseEvent.details as ReportResponse;
-     }
+    if (reportResponseEvent) {
+      return reportResponseEvent.details as ReportResponse;
+    }
   }
 
   getResponseTypeClass(value) {
