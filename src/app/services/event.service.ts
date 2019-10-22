@@ -47,8 +47,7 @@ export class EventService {
       userId: user.id,
       eventType: event.eventType,
       action: event.action.name,
-      resultAction: event.resultAction,
-      detail: event.detail
+      details: event.details
     };
   }
 }
