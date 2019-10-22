@@ -20,7 +20,7 @@ list:
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: J'ai vu un animal (nuisible)
-            example: 'Exemples : cafards, rat'
+            example: 'Exemple : cafards, rat'
             detailInputs:
             - label: Date du constat
               rank: 1
@@ -42,15 +42,15 @@ list:
                 - Salle du bar, du restaurant
                 - Dans mon plat
                 - Autre (à préciser)
-            - label: Merci de préciser le problème en quelques mots
+            - label: Vous pouvez préciser le problème en quelques mots
               rank: 4
               type: TEXT
               optionnal: true
           - title: Hygiène des locaux et du matériel
-            example: 'Exemples : cuisine sale, trouble du voisinage'
+            example: 'Exemple : cuisine sale, odeur de poubelle dans ma cour'
             subcategories:
               - title: Je trouve les locaux sales ou dégradés
-                example: 'Exemples : cuisine sale, WC sale'
+                example: 'Exemple : cuisine sale, WC sale'
                 detailInputs:
                   - label: Date du constat
                     rank: 1
@@ -64,7 +64,7 @@ list:
                     rank: 3
                     type: CHECKBOX
                     options:
-                      - Cuisine
+                      - La cuisine et zone de production/stockage
                       - Salle du restaurant, du bar
                       - Le lieu de vente (vitrine réfigérée)
                       - Les WC
@@ -86,6 +86,7 @@ list:
                       - Autre (à préciser)
                 fileLabel: Merci de joindre si possible une photo pour appuyer votre signalement. 
               - title: Je subis des nuisances à cause des odeurs, du bruit ..
+                example: 'Exemple : les odeurs des poubelles ou de la cuisine arrivent dans mon appartement'
                 information:
                   title: Je subis des nuisances à cause d'un commerce
                   content: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème. 
@@ -93,7 +94,7 @@ list:
                     - question: Mais alors, à qui demander de l'aide ?
                       answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/N356" target="_blank" />lien</a>
           - title: Hygiène du personnel
-            example: 'Exemples : tenue sale ou pas adaptée'
+            example: 'Exemple : tenue sale ou pas adaptée'
             subcategories:
               - title: La tenue de travail n'est pas adaptée
                 example: 'Exemple : pas de gants, torse-nu en cuisine'
@@ -269,8 +270,8 @@ list:
                   - La note ne comporte pas les taux de TVA
                   - Autre (à préciser)
           - title: Autres problèmes
-      - title: Informations sur le menu, la carte ou le site mensongères
-        example: 'Exemples : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
+      - title: Informations mensongères (sur le menu, la carte ou le site internet)
+        example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
         subcategories:
           - title: Indisponibilité des produits proposés
             detailInputs:
@@ -328,7 +329,7 @@ list:
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Le personnel est peu aimable
-            example: 'Exemples : l''accueil est froid, le personnel parle mal aux clients'
+            example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
             information:
               title: Ceci ne constitue pas un motif de signalement.
               content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
