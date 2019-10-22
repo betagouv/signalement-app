@@ -1735,7 +1735,7 @@ list:
   - category: Voyage / Loisirs
     categoryId: VOY
     path: voyage-loisirs
-    description: voyage organisé, camping, concert, sport, billets d''avion
+    description: voyage organisé, camping, concert, sport, billets d''avion, taxi
     rank: 18
     icon: icon_hobbies.png
     subcategories:
@@ -2779,7 +2779,7 @@ list:
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
-    description: vente et réparation de voiture, location, taxi, auto-école...
+    description: vente et réparation de voiture, location, auto-école...
     rank: 107
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
@@ -2797,12 +2797,6 @@ list:
             example: 'Exemples : devis non détaillé, devis non respecté'
           - title: Prestation mal réalisée ou pas réalisée
             example: 'Exemples : malfaçon, panne non réparée, pose d''un équipement endommagé'
-          - title: Publicité
-          - title: Autres
-      - title: Transport en commun
-        example: 'Exemple : bus'
-        subcategories:
-          - title: Prix / Paiement
           - title: Publicité
           - title: Autres
       - title: Permis / leçons de conduite
