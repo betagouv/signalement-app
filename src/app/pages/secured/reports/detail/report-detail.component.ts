@@ -292,9 +292,9 @@ export class ReportDetailComponent implements OnInit {
   }
 
   showProAnswerForm() {
+    this.responseTypeCtrl = this.formBuilder.control('', Validators.required);
     this.responseConsumerDetailsCtrl = this.formBuilder.control('', Validators.required);
-    this.responseDgccrfDetailsCtrl = this.formBuilder.control('', Validators.required);
-    this.responseTypeCtrl = this.formBuilder.control('');
+    this.responseDgccrfDetailsCtrl = this.formBuilder.control('');
     this.responseForm = this.formBuilder.group({
       responseConsumerDetails: this.responseConsumerDetailsCtrl,
       responseDgccrfDetails: this.responseDgccrfDetailsCtrl,
