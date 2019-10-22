@@ -1740,7 +1740,7 @@ list:
     icon: icon_hobbies.png
     subcategories:
       - title: Hébergement
-        example: "Exemples : hotel, camping, chambre d'hôte"
+        example: "Exemple : hotel, camping, chambre d'hôte, location saisonnière"
         subcategories:
           - title: Prix
             subcategories:
@@ -1750,12 +1750,12 @@ list:
                   content: Les professionnels ont le droit de choisir leurs prix.
                     <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
               - title: Prix non affiché
-                example: 'Exemples: sur un site, un catalogue'
+                example: 'Exemple: sur un site, un catalogue'
               - title: Prix final non-conforme au prix annoncé
-                example: "Exemples : fausse réduction, suppléments non prévus"
+                example: "Exemple : fausse réduction, suppléments non prévus"
               - title: Autres
           - title: Publicité
-            example: "Exemples : publicité trompeuse, absence d'information"
+            example: "Exemple : publicité trompeuse, absence d'information"
             subcategories:
               - title: Absence d'information
               - title: Information mensongère ou trompeuse
@@ -1789,7 +1789,7 @@ list:
           - title: Prestation
             subcategories:
               - title: La prestation d'hébergement ne correspond pas à ce qui m'a été vendu
-                example: "Exemples : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
+                example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
               - title: Autres
           - title: Annulation / remboursement
           - title: Autres
@@ -1847,8 +1847,8 @@ list:
           - title: Annulation / remboursement
           - title: Assurance
           - title: Autres
-      - title: Transport
-        example: 'Exemples : avion, train, taxi'
+      - title: Transport en commun
+        example: 'Exemple : avion, train'
         subcategories:
           - title: Prix
             subcategories:
@@ -2233,7 +2233,7 @@ list:
                   content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
                     <br><br>Un médecin conventionné pratiquera des tarifs classiques.
               - title: Problème de devis
-                example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
+                example: "Exemple : je n'ai pas eu de devis, devis pas respecté"
                 subcategories:
                   - title: Je n'ai pas eu de devis écrit
                     example: Un devis est obligatoire dès que les dépassements d'honoraires et la prestation dépassent 70 euros. Un devis est obligatoire en cas de pose de couronne, implant, bridge etc. Un devis est oligatoire en chirurgie esthétique.
@@ -2285,7 +2285,7 @@ list:
                         rank: 3
                         type: TEXT
               - title: La prestation est mal (ou pas) réalisée
-                example: "Exemples : j'ai mal été soigné"
+                example: "Exemple : j'ai mal été soigné"
                 information:
                       title: Porter une réclamation sur la qualité d’un soin 
                       content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
@@ -2469,7 +2469,7 @@ list:
       - title: Ambulance
         example: "et autre transport sanitaire (exemple : taxi)"
       - title: Cure
-        example: 'Exemples : thalassothérapie, thermalisme'
+        example: 'Exemple : thalassothérapie, thermalisme'
         subcategories:
           - title: Prix et facture
             example: "Exemple : les prix ne sont pas affichés, pas de remise d'une facture"
@@ -2500,7 +2500,7 @@ list:
                     options:
                       - les prix affichés ne sont pas à jour
                       - les prix des suppléments et options ne sont pas affichés
-                      - "j'ai payé un supplément (exemple : supplément chambre simple)sans donner mon accord avant"
+                      - "j'ai payé un supplément (exemple : supplément chambre simple) sans donner mon accord avant"
                 fileLabel: Si possible merci de joindre une photo de la facture ou de l'affichage des prix pour appuyer votre signalement.
               - title: Je n'ai pas eu de facture (note)
                 detailInputs:
@@ -2514,7 +2514,7 @@ list:
                       - je n'ai pas eu de facture et je ne l'ai pas demandée
                       - j'ai demandé une facture mais on ne me l'a pas donnée 
           - title: Publicité trompeuse
-            example: 'Exemples : spa simple déclaré en thalassothérapie, soins qui ne correspondent pas à la description sur la publicité, utilisation frauduleuse du label Qualicert'
+            example: 'Exemple : spa simple déclaré en thalassothérapie, soins qui ne correspondent pas à la description sur la publicité, utilisation frauduleuse du label Qualicert'
             detailInputs:
               - label: Date de constat
                 rank: 1
@@ -2541,7 +2541,7 @@ list:
                 type: TEXT
             fileLabel: Merci de joindre tout document (photo, pdf) pouvant appuyer votre signalement.
           - title: Contrat
-            example: "Exemples : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
+            example: "Exemple : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
