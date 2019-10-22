@@ -15,8 +15,6 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
 
 describe('CompanyComponent', () => {
 
@@ -40,9 +38,7 @@ describe('CompanyComponent', () => {
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
       ],
-      providers: [
-        { provide: AbTestsService, useClass: MockAbTestsService },
-      ]
+      providers: []
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

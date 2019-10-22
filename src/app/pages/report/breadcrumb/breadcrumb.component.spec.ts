@@ -5,8 +5,6 @@ import { Report, Step } from '../../../model/Report';
 import { PrecedeByPipe } from '../../../pipes/precede-by.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
 
 describe('BreadcrumbComponent', () => {
   let component: BreadcrumbComponent;
@@ -22,9 +20,7 @@ describe('BreadcrumbComponent', () => {
         HttpClientModule,
         RouterTestingModule,
       ],
-      providers: [
-        { provide: AbTestsService, useClass: MockAbTestsService },
-      ]
+      providers: []
     })
     .compileComponents();
   }));
