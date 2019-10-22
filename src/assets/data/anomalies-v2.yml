@@ -1618,6 +1618,240 @@ list:
     rank: 18
     icon: icon_hobbies.png
     subcategories:
+      - title: Taxi / VTC
+        subcategories:
+          - title: Taxi
+            example: Les taxis sont reconnaissables avec l'enseigne lumineuse sur le toit. Les voitures qui n'ont pas cette enseigne ne sont pas des "vrais" taxis.
+            subcategories:
+              - title: Refus de faire la course
+                example: "Exemple : le taxi refuse de vous prendre car ce n'est pas assez loin"
+                subcategoriesTitle: Pour quelle raison le chauffeur a-t-il refusé de vous prendre ?
+                subcategories:
+                  - title: Trajet trop court ou pas assez rentable
+                  - title: Présence de mon chien
+                  - title: Mes bagages/objets ne rentrent pas dans le coffre
+                  - title: Etat d'ébriété ou de violence
+                  - title: Borne taxi à proximité
+                  - title: Autre
+              - title: Les prix ne sont pas affichés dans la voiture
+                example: Une affiche avec les prix et les suppléments doit être visible dans la voiture.
+              - title: Refus de prendre votre carte bancaire
+                example: Tous les taxis ont obligation de prendre la carte bancaire quelque soit le montant.
+              - title: Refus de me donner une note (reçu, facture)
+              - title: Le prix payé ne me convient pas
+                subcategories:
+                  - title: Je pense que le trajet n'était pas le plus direct
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Avez-vous demandé de prendre un itinéraire particulier en début de course ?
+                        rank: 2
+                        type: RADIO
+                        options:
+                          - Oui
+                          - Non
+                      - label: Avez-vous fait remarquer au chauffeur que le chemin vous paraissait trop long en cours de route ? Si oui, merci de préciser sa réponse.
+                        rank: 3
+                        type: RADIO
+                        options:
+                          - Oui (à préciser)
+                          - Non
+                      - label: Adresse de départ
+                        rank: 4
+                        type: TEXT
+                      - label: Heure de départ. Elle est normalement écrit sur la note (facture).
+                        rank: 5
+                        type: TEXT
+                      - label: Adresse d'arrivée
+                        rank: 6
+                        type: TEXT
+                      - label: Heure d'arrivée. Elle est normalement écrit sur la note (facture). Si vous la contestez, noter l'heure réelle d'arrivée.
+                        rank: 7
+                        type: TEXT
+                      - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
+                        rank: 8
+                        type: TEXT
+                      - label: Si vous avez appelé une centrale de réservation, noter son nom.
+                        rank: 9
+                        type: TEXT
+                      - label: "Ajouter ici toutes autres informations utiles à votre signalement."
+                        rank: 10
+                        type: TEXT
+                    fileLabel: Si possible, joindre une copie de la note (facture), et toute preuve du trajet réellement emprunté.
+                  - title: J'ai payé un supplément que je ne comprends pas
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Quel supplément avez-vous payé ?
+                        rank: 2
+                        type: CHECKBOX
+                        options:
+                          - bagage
+                          - passager supplémentaire
+                          - animaux
+                      - label: Combien étiez-vous de passagers (enfant compris) ?
+                        rank: 3
+                        type: TEXT
+                      - label: Combien aviez-vous de bagages en tout ?
+                        rank: 4
+                        type: TEXT
+                  - title: Le prix au compteur était élevé dès la prise en charge
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Adresse de départ
+                        rank: 2
+                        type: TEXT
+                      - label: Aviez-vous commandé votre taxi ?
+                        rank: 3
+                        type: RADIO
+                        options:
+                          - Oui, je l'avais reservé à l'avance
+                          - Oui, je l'ai commandé juste avant de le prendre
+                          - Non, il m'a pris en charge sur une place de taxi ou dans la rue
+                      - label: Quel était le montant indiqué dès le départ ?
+                        rank: 4
+                        type: TEXT
+                    filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
+                  - title: Le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Adresse de départ
+                        rank: 2
+                        type: TEXT
+                      - label: Heure de départ. Elle est normalement écrit sur la note (facture).
+                        rank: 3
+                        type: TEXT
+                      - label: Adresse d'arrivée
+                        rank: 4
+                        type: TEXT
+                      - label: Heure d'arrivée
+                        rank: 5
+                        type: TEXT
+                      - label: Combien avez-vous payé ?
+                        rank: 6
+                        type: TEXT
+                      - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
+                        rank: 8
+                        type: TEXT
+                    fileLabel: Joindre si possible la note (facture) pour appuyer votre signalement.
+                  - title: Le chauffeur n'a pas appliqué le prix prévu pour le forfait
+                    example: Dans certaines villes, il existe des forfaits (c'est-à-dire un prix unique connu à l'avance) pour faire les trajets vers ou depuis un aéroport. Le prix de ces forfaits est fixe.
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Adresse de départ
+                        rank: 2
+                        type: TEXT
+                      - label: Adresse d'arrivée
+                        rank: 3
+                        type: TEXT
+                      - label: Quel est normalement le prix du forfait pour votre trajet ?
+                        rank: 4
+                        type: TEXT
+                      - label: Combien avez-vous payé ?
+                        rank: 5
+                        type: TEXT
+                      - label: Noter les éléments qui permettent d'identifier le taxi.
+                        rank: 6
+                        type: TEXTAREA
+                        placeholder: Numéro ADS, plaque d'immatriculation, société de réservation ...
+                    fileLabel: Joindre la note (facture) de votre course ou tout document utile pour appuyer votre signalement.
+              - title: Autre
+                subcategories:
+                  - title: Refus de prendre les chèques
+                    subcategoriesTitle: Est-ce que c'était indiqué sur la voiture ?
+                    subcategories:
+                      - title: Oui
+                        information:
+                          title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
+                          content: A la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
+                      - title: Non
+                        detailInputs:
+                          - label: Date de la course
+                            rank: 1
+                            type: DATE
+                          - label: Comment avez-vous régler votre course ?
+                            rank: 2
+                            type: TEXT
+                          - label: Noter le lieu de départ et le lieu d'arrivée
+                            rank: 3
+                            type: TEXTAREA
+                          - label: Merci de noter les informations pour identifier le véhicule
+                            rank: 4
+                            type: TEXTAREA
+                            placeholder: Immatriculation du véhicule, numéro ADS ...
+                        fileLabel: Joindre tout document utile pour appuyer votre signalement.
+                  - title: J'ai été prélevé deux fois
+                    detailInputs:
+                      - label: Date de la course ?
+                        rank: 1
+                        type: DATE
+                      - label: Montant de la course ?
+                        rank: 2
+                        type: TEXT
+                      - label: Noter toute autre information utile.
+                        rank: 3
+                        type: TEXT
+                        placeholder: Identification du taxi, nom de la centrale d'appel ...
+                    fileLabel: Joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
+          - title: VTC (voiture avec chauffeur)
+            example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
+            subcategories:
+              - title: Une remise ou une offre promotionnelle qui n'est pas appliquée ou qui est mensongère
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Quelle était l'offre ou la promotion annoncée ?
+                    rank: 2
+                    type: TEXT
+                    placeholder: "Exemple : -20% offert à la première course"
+                  - label: Où avez-vous vu cette offre  ?
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - site internet / application mobile de la société
+                      - publicité par email
+                      - publicité sur un affichage (dans le métro, sur une pancarte..)
+                      - autre (à préciser)
+                  - label: Quel est le problème ?
+                    rank: 4
+                    type: TEXTAREA
+                fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course etc.)
+              - title: Le prix payé n'est pas celui annoncé au départ
+                detailInputs:
+                  - label: Date de la course
+                    rank: 1
+                    type: DATE
+                  - label: Quel était le prix annoncé au départ ?
+                    rank: 2
+                    type: TEXT
+                  - label: Quel prix avez-vous payé ?
+                    rank: 3
+                    type: TEXT
+                  - label: Le chauffeur / la société vous a-t-elle donné une raison ?
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Oui (à préciser)
+                      - Non
+                fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile etc.)
+              - title: Autre
+          - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
+            information:
+              title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
+              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) ou que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils proposent souvent "taxi taxi" et sont par exemple dans les aéroports ou près des lieux de sorties le soir. <br><br>
+                Comme ces chauffeurs ne sont pas déclarés, il n'est pas possible de faire un signalement sur notre plate-forme.
+              actions:
+                - question: Que faire en cas de problème avec un "faux" taxi&#160;?
+                  answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie.
       - title: Hébergement
         example: "Exemples : hotel, camping, chambre d'hôte"
         subcategories:
@@ -2444,242 +2678,6 @@ list:
             example: 'Exemples : malfaçon, panne non réparée, pose d''un équipement endommagé'
           - title: Publicité
           - title: Autres
-      - title: Taxi / VTC
-        subcategories:
-          - title: Taxi
-            example: Les taxis sont reconnaissables avec l'enseigne lumineuse sur le toit. Les voitures qui n'ont pas cette enseigne ne sont pas des "vrais" taxis.
-            subcategories:
-              - title: Refus de faire la course
-                example: "Exemple : le taxi refuse de vous prendre car ce n'est pas assez loin"
-                subcategoriesTitle: Pour quelle raison le chauffeur a-t-il refusé de vous prendre ?
-                subcategories: 
-                  - title: Trajet trop court ou pas assez rentable
-                  - title: Présence de mon chien
-                  - title: Mes bagages/objets ne rentrent pas dans le coffre
-                  - title: Etat d'ébriété ou de violence
-                  - title: Borne taxi à proximité
-                  - title: Autre
-              - title: Les prix ne sont pas affichés dans la voiture
-                example: Une affiche avec les prix et les suppléments doit être visible dans la voiture.
-              - title: Refus de prendre votre carte bancaire
-                example: Tous les taxis ont obligation de prendre la carte bancaire quelque soit le montant.
-              - title: Refus de me donner une note (reçu, facture)
-              - title: Le prix payé ne me convient pas
-                subcategories:
-                  - title: Je pense que le trajet n'était pas le plus direct
-                    detailInputs:
-                      - label: Date de la course
-                        rank: 1
-                        type: DATE
-                      - label: Avez-vous demandé de prendre un itinéraire particulier en début de course ?
-                        rank: 2
-                        type: RADIO
-                        options:
-                          - Oui
-                          - Non
-                      - label: Avez-vous fait remarquer au chauffeur que le chemin vous paraissait trop long en cours de route ? Si oui, merci de préciser sa réponse.
-                        rank: 3
-                        type: RADIO
-                        options:
-                          - Oui (à préciser)
-                          - Non
-                      - label: Adresse de départ
-                        rank: 4
-                        type: TEXT
-                      - label: Heure de départ. Elle est normalement écrit sur la note (facture). 
-                        rank: 5
-                        type: TEXT
-                      - label: Adresse d'arrivée
-                        rank: 6
-                        type: TEXT
-                      - label: Heure d'arrivée. Elle est normalement écrit sur la note (facture). Si vous la contestez, noter l'heure réelle d'arrivée.
-                        rank: 7
-                        type: TEXT
-                      - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
-                        rank: 8
-                        type: TEXT
-                      - label: Si vous avez appelé une centrale de réservation, noter son nom.
-                        rank: 9
-                        type: TEXT
-                      - label: "Ajouter ici toutes autres informations utiles à votre signalement."
-                        rank: 10
-                        type: TEXT
-                    fileLabel: Si possible, joindre une copie de la note (facture), et toute preuve du trajet réellement emprunté.    
-                  - title: J'ai payé un supplément que je ne comprends pas
-                    detailInputs:
-                      - label: Date de la course
-                        rank: 1
-                        type: DATE
-                      - label: Quel supplément avez-vous payé ?
-                        rank: 2
-                        type: CHECKBOX
-                        options:
-                          - bagage
-                          - passager supplémentaire
-                          - animaux
-                      - label: Combien étiez-vous de passagers (enfant compris) ?
-                        rank: 3
-                        type: TEXT
-                      - label: Combien aviez-vous de bagages en tout ?
-                        rank: 4
-                        type: TEXT
-                  - title: Le prix au compteur était élevé dès la prise en charge
-                    detailInputs:
-                      - label: Date de la course
-                        rank: 1
-                        type: DATE
-                      - label: Adresse de départ
-                        rank: 2
-                        type: TEXT
-                      - label: Aviez-vous commandé votre taxi ?
-                        rank: 3
-                        type: RADIO
-                        options:
-                          - Oui, je l'avais reservé à l'avance
-                          - Oui, je l'ai commandé juste avant de le prendre
-                          - Non, il m'a pris en charge sur une place de taxi ou dans la rue
-                      - label: Quel était le montant indiqué dès le départ ?
-                        rank: 4
-                        type: TEXT
-                    filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
-                  - title: Le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
-                    detailInputs:
-                      - label: Date de la course
-                        rank: 1
-                        type: DATE
-                      - label: Adresse de départ
-                        rank: 2
-                        type: TEXT
-                      - label: Heure de départ. Elle est normalement écrit sur la note (facture). 
-                        rank: 3
-                        type: TEXT
-                      - label: Adresse d'arrivée
-                        rank: 4
-                        type: TEXT
-                      - label: Heure d'arrivée
-                        rank: 5
-                        type: TEXT
-                      - label: Combien avez-vous payé ?
-                        rank: 6
-                        type: TEXT
-                      - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
-                        rank: 8
-                        type: TEXT
-                    fileLabel: Joindre si possible la note (facture) pour appuyer votre signalement.
-                  - title: Le chauffeur n'a pas appliqué le prix prévu pour le forfait
-                    example: Dans certaines villes, il existe des forfaits (c'est-à-dire un prix unique connu à l'avance) pour faire les trajets vers ou depuis un aéroport. Le prix de ces forfaits est fixe.
-                    detailInputs:
-                      - label: Date de la course
-                        rank: 1
-                        type: DATE
-                      - label: Adresse de départ
-                        rank: 2
-                        type: TEXT
-                      - label: Adresse d'arrivée
-                        rank: 3
-                        type: TEXT
-                      - label: Quel est normalement le prix du forfait pour votre trajet ?
-                        rank: 4
-                        type: TEXT
-                      - label: Combien avez-vous payé ?
-                        rank: 5
-                        type: TEXT
-                      - label: Noter les éléments qui permettent d'identifier le taxi.
-                        rank: 6
-                        type: TEXTAREA
-                        placeholder: Numéro ADS, plaque d'immatriculation, société de réservation ...
-                    fileLabel: Joindre la note (facture) de votre course ou tout document utile pour appuyer votre signalement.
-              - title: Autre
-                subcategories:
-                  - title: Refus de prendre les chèques
-                    subcategoriesTitle: Est-ce que c'était indiqué sur la voiture ? 
-                    subcategories:
-                      - title: Oui
-                        information:
-                          title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
-                          content: A la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
-                      - title: Non
-                        detailInputs:
-                          - label: Date de la course
-                            rank: 1
-                            type: DATE
-                          - label: Comment avez-vous régler votre course ?
-                            rank: 2
-                            type: TEXT
-                          - label: Noter le lieu de départ et le lieu d'arrivée
-                            rank: 3
-                            type: TEXTAREA
-                          - label: Merci de noter les informations pour identifier le véhicule
-                            rank: 4
-                            type: TEXTAREA
-                            placeholder: Immatriculation du véhicule, numéro ADS ...
-                        fileLabel: Joindre tout document utile pour appuyer votre signalement.
-                  - title: J'ai été prélevé deux fois
-                    detailInputs:
-                      - label: Date de la course ?
-                        rank: 1
-                        type: DATE
-                      - label: Montant de la course ?
-                        rank: 2
-                        type: TEXT
-                      - label: Noter toute autre information utile.
-                        rank: 3
-                        type: TEXT
-                        placeholder: Identification du taxi, nom de la centrale d'appel ... 
-                    fileLabel: Joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
-          - title: VTC (voiture avec chauffeur)
-            example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
-            subcategories:
-              - title: Une remise ou une offre promotionnelle qui n'est pas appliquée ou qui est mensongère
-                detailInputs:
-                  - label: Date du constat
-                    rank: 1
-                    type: DATE
-                  - label: Quelle était l'offre ou la promotion annoncée ?
-                    rank: 2
-                    type: TEXT
-                    placeholder: "Exemple : -20% offert à la première course"
-                  - label: Où avez-vous vu cette offre  ?
-                    rank: 3
-                    type: RADIO
-                    options:
-                      - site internet / application mobile de la société
-                      - publicité par email
-                      - publicité sur un affichage (dans le métro, sur une pancarte..)
-                      - autre (à préciser)
-                  - label: Quel est le problème ?
-                    rank: 4
-                    type: TEXTAREA
-                fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course etc.)
-              - title: Le prix payé n'est pas celui annoncé au départ
-                detailInputs:
-                  - label: Date de la course
-                    rank: 1
-                    type: DATE
-                  - label: Quel était le prix annoncé au départ ?
-                    rank: 2
-                    type: TEXT
-                  - label: Quel prix avez-vous payé ?
-                    rank: 3
-                    type: TEXT
-                  - label: Le chauffeur / la société vous a-t-elle donné une raison ?
-                    rank: 4
-                    type: RADIO
-                    options:
-                      - Oui (à préciser)
-                      - Non
-                fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile etc.)
-              - title: Autre
-          - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
-            information:
-              title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
-              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) ou que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils proposent souvent "taxi taxi" et sont par exemple dans les aéroports ou près des lieux de sorties le soir. <br><br> 
-                  Comme ces chauffeurs ne sont pas déclarés, il n'est pas possible de faire un signalement sur notre plate-forme.
-              actions:
-                - question: Que faire en cas de problème avec un "faux" taxi&#160;?
-                  answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie. 
-          
-          
       - title: Transport en commun
         example: 'Exemple : bus'
         subcategories:
