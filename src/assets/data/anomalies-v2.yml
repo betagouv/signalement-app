@@ -2740,7 +2740,7 @@ list:
     categoryId: EHPAD
     path: ehpad
     rank: 110
-    icon:  
+    icon: icon_epahd.png
     subcategories:
       - title: Les tarifs
         subcategories:
