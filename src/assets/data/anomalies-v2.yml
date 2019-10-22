@@ -7,23 +7,27 @@ list:
     rank: 9
     icon: icon_rest.png
     subcategories:
-      - title: Intoxication alimentaire
-        example: 'Exemple : vous avez été malade (vomissement, maux de ventre) après être allé dans l''établissement'
+      - title: J'ai été malade après avoir mangé
+        example: 'Exemple : vomissement, maux de ventre'
         information:
-          title: Les intoxications alimentaires ne doivent pas être signalées sur SignalConso.
-          subtitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et aliments suspectés ).
+          title: Il peut s'agir d'une intoxication alimentaire
+          content: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et les aliments consommés ).
           actions:
             - question: Comment le signaler&#160;?
-              answer: Signaler à la DGCCRF ici<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+              answer: Signaler-le à la DGCCRF avec <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />ce lien dédié</a>
       - title: Hygiène
-        example: 'Exemples : locaux sales, rat, problème de chaîne du froid'
+        example: 'Exemple : locaux sales, rat, chaîne du froid'
         subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
-          - title: Présence d'animaux
-            example: 'Exemples : cafards, rat'
+          - title: J'ai vu un animal (nuisible)
+            example: 'Exemple : cafards, rat'
             detailInputs:
-            - label: Quel animal avez-vous vu&#160;?
+            - label: Date du constat
               rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Quel animal avez-vous vu&#160;?
+              rank: 2
               type: RADIO
               options:
                 - Insectes (cafard...)
@@ -31,121 +35,134 @@ list:
                 - Oiseau (pigeon...)
                 - Autre (à préciser)
             - label: Où l'avez-vous vu&#160;?
-              rank: 2
+              rank: 3
               type: CHECKBOX
               options:
                 - Cuisine ou zone de production
-                - Intérieur d'un magasin
-                - Salle d'un bar ou d'un restaurant
+                - Salle du bar, du restaurant
+                - Dans mon plat
                 - Autre (à préciser)
-            - label: Pouvez-vous nous en dire plus ?
-              rank: 3
-              type: TEXTAREA
-              optionnal: true
-            - label: Date du constat
+            - label: Vous pouvez préciser le problème en quelques mots
               rank: 4
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Heure du constat (facultatif)
-              rank: 5
-              type: TIMESLOT
+              type: TEXT
               optionnal: true
           - title: Hygiène des locaux et du matériel
-            example: 'Exemples : cuisine sale, trouble du voisinage'
+            example: 'Exemple : cuisine sale, odeur de poubelle dans ma cour'
             subcategories:
-              - title: Locaux sales ou dégradés
-                example: 'Exemples : cuisine sale, WC sale'
+              - title: Je trouve les locaux sales ou dégradés
+                example: 'Exemple : cuisine sale, WC sale'
                 detailInputs:
-                  - label: Quel endroit est concerné&#160;?
+                  - label: Date du constat
                     rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Heure du constat (facultatif)
+                    rank: 2
+                    type: TIMESLOT
+                    optionnal: true
+                  - label: Quel endroit est concerné&#160;?
+                    rank: 3
                     type: CHECKBOX
                     options:
-                      - Cuisine
+                      - La cuisine et zone de production/stockage
                       - Salle du restaurant, du bar
-                      - WC
+                      - Le lieu de vente (vitrine réfigérée)
+                      - Les WC
                       - Autre (à préciser)
                   - label: Quel est le problème&#160;?
-                    rank: 2
+                    rank: 3
                     type: CHECKBOX
                     options:
                       - C'est sale
                       - C'est dégradé, en mauvais état
                   - label: À quel niveau&#160;?
-                    rank: 3
+                    rank: 4
                     type: CHECKBOX
                     options:
-                      - Sol
-                      - Mur
+                      - Sol / mur
                       - Vitrine, réfrigérateur
-                      - Équipements mis à disposition des clients
                       - Matériel de fabrication, équipement en cuisine
+                      - Equipements pour les clients (table, plateaux, couverts, micro-ondes..)
                       - Autre (à préciser)
-                  - label: Pouvez-vous nous en dire plus ?
-                    rank: 4
-                    type: TEXTAREA
-                    optionnal: true
-                  - label: Date du constat
-                    rank: 5
-                    type: DATE
-                    defaultValue: SYSDATE
-                  - label: Heure du constat (facultatif)
-                    rank: 6
-                    type: TIMESLOT
-                    optionnal: true
-              - title: Trouble du voisinage (odeur, bruit)
+                fileLabel: Merci de joindre si possible une photo pour appuyer votre signalement. 
+              - title: Je subis des nuisances à cause des odeurs, du bruit ..
+                example: 'Exemple : les odeurs des poubelles ou de la cuisine arrivent dans mon appartement'
                 information:
-                  title: Trouble anormal de voisinage
-                  subtitle: Les problèmes de nuisance tel que le bruit et les odeurs ne font pas partie du périmètre de la repression des fraudes.
+                  title: Je subis des nuisances à cause d'un commerce
+                  content: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème. 
                   actions:
-                    - question: Vous trouverez sur ce lien les recours possibles pour ce type de problème.
-                      answer: <br><a href="https://www.service-public.fr/particuliers/vosdroits/F19299" target="_blank" />https://www.service-public.fr/particuliers/vosdroits/F19299</a>
+                    - question: Mais alors, à qui demander de l'aide ?
+                      answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/N356" target="_blank" />lien</a>
           - title: Hygiène du personnel
-            example: 'Exemples : tenue sale ou pas adaptée'
+            example: 'Exemple : tenue sale ou pas adaptée'
             subcategories:
-              - title: Tenue de travail pas adaptée
-                example: 'Exemples : pas de gants, torse-nu en cuisine'
+              - title: La tenue de travail n'est pas adaptée
+                example: 'Exemple : pas de gants, torse-nu en cuisine'
                 subcategories:
-                  - title: Pas de gants ou pas de coiffe
+                  - title: Les employés ne portent pas de gants ou pas de coiffe (calot, charlotte)
                     information:
                       title: Cet incident ne doit pas nécessairement être signalé.
                       content: La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
-                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
-                  - title: Autres problème sur la tenue de travail
-              - title: Tenue sale
+                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut également être suffisant pour éviter les contaminations. <br> Vous pouvez directement discuter avec le gérant pour lui faire part de votre questionnement.
+                  - title: Autre problème de tenue
+                    example: 'Exemple : pas de tenue spécifique, torse-nu en cuisine'
+                    detailInputs:
+                      - label: Date de constat
+                        rank: 1
+                        type: DATE
+                      - label: Quel est le problème ?
+                        rank: 2
+                        type: TEXT
+                    fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
+              - title: La tenue de travail est sale
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: TEXT
+                fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
               - title: Mauvaises pratiques d'hygiène
                 example: 'Exemple : personne qui fume en cuisine'
-              - title: Autres problèmes sur l’hygiène du personnel
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: TEXT
+                fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
           - title: Problème de température
             example: 'Exemple : rupture de la chaine du froid'
             detailInputs:
-            - label: Quel est le problème&#160;?
-              rank: 1
-              type: RADIO
-              options:
-                - Vitrine ou réfrigérateur trop chaud, cassé ou en panne
-                - Stockage à température ambiante de produits frais ou congelés
-                - Transport à température ambiante de produits frais ou congelés
-                - Autre problème de température
-            - label: Pouvez-vous nous en dire plus ?
-              rank: 2
-              type: TEXTAREA
-              optionnal: true
             - label: Date du constat
-              rank: 3
+              rank: 1
               type: DATE
               defaultValue: SYSDATE
             - label: Heure du constat (facultatif)
-              rank: 4
+              rank: 2
               type: TIMESLOT
               optionnal: true
-          - title: Autres problème d'hygiène
+            - label: Quel est le problème&#160;?
+              rank: 3
+              type: RADIO
+              options:
+                - Vitrine/réfrigérateur trop chaud ou en panne
+                - Stockage à température ambiante de produits frais ou congelés
+                - Transport à température ambiante de produits frais ou congelés
+                - Autre problème de température (à préciser)
+            - label: Pouvez-vous préciser ?
+              rank: 3
+              type: TEXT
+              optionnal: true
+            fileLabel: Si possible, merci de joindre une photo ou un document pour appuyer votre signalement.
       - title: Prix et paiement
-        example: 'Exemples : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance'
-        subcategoriesTitle: 'Vous voulez signaler&#160;:'
+        example: 'Exemple : refus de la carte bancaire, j''ai payé plus cher que prévu'
         subcategories:
-          - title: Prix pas affiché
-            example: 'Exemple : absence de carte des vins avec les prix'
-            description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+          - title: Il manque certains prix
+            example: 'Exemple : absence de prix sur la carte des vins'
+            description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligé de les demander.'
             detailInputs:
               - label: Date du constat
                 rank: 1
@@ -156,16 +173,42 @@ list:
                 rank: 2
                 type: TEXTAREA
                 placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
-          - title: Prix différent de celui affiché
-            example: 'Exemple : le prix sur l''addition est différent de celui affiché'
-          - title: Prix exgagéré
-            example: 'Exemple : le prix du café est très cher'
+                fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
+          - title: J'ai payé plus cher que le prix affiché
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+              - label: Quel était le prix affiché ?
+                rank: 2
+                type: TEXT
+              - label: Combien avez-vous payé ?
+                rank: 3
+                type: TEXT
+              - label: L'avez-vous signalé au gérant/serveur ?
+                rank: 4
+                type: RADIO
+                options: 
+                  - Oui
+                  - Non
+              - label: Si oui, vous a-t-il donné une raison ?
+                rank : 5
+                type: RADIO
+                options:
+                  - Les prix affichés ne sont pas à jour
+                  - Un supplément s'applique (jour férié, vacances scolaire, terrasse..)
+                  - Erreur lors de l'addition
+                  - Autre (à préciser)
+                  - Non, aucune raison.
+                fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
+          - title: Je trouve que les pris sont très chers
+            example: 'Exemple : le prix du menu est très cher pour la qualité'
             information:
               title: Les prix sont choisis librement par les commerçants.
               content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
                 <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte.
                 <br/> Le saviez-vous ? Un café a également le droit de faire payer l'eau du robinet si le prix est marqué. Par contre, au cours d'un repas, l'eau du robinet doit vous être fournie gratuitement."
-          - title: Problème pour payer
+          - title: J'ai eu un problème pour payer
             example: 'Exemple : refus de la carte bancaire'
             subcategories:
               - title: Le commerçant refuse le paiement en espèces
@@ -196,7 +239,7 @@ list:
                           title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
                           content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
                       - title: Non
-                  - title: Il refuse tous les paiements par chèque ou carte bleue
+                  - title: Il n'accepte jamais les paiements par chèque ou carte bleue
                     subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
                     subcategories:
                       - title: Oui
@@ -210,15 +253,25 @@ list:
               - title: Autres problèmes de prix ou paiement
                 subcategoriesTitle: 'Problème avec :'
                 subcategories:
-                - title: Le cash-back
                 - title: Tickets restaurant
                 - title: Autres
-          - title: Problème de facture/ticket de caisse
-            example: 'Exemple : refus de délivrer une note'
-      - title: Publicité trompeuse / informations mensongères
-        example: 'Exemples : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
+          - title: Refus de me donner une note (ticket, facture)
+            detailInputs:
+              - label: Date de constat
+                rank: 1
+                type: DATE
+              - label: Quel est le problème?
+                rank: 2
+                type: RADIO
+                options: 
+                  - Refus de me faire une note
+                  - La note ne comporte pas les taux de TVA
+                  - Autre (à préciser)
+          - title: Autres problèmes
+      - title: Informations mensongères (sur le menu, la carte ou le site internet)
+        example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
         subcategories:
-          - title: Indisponibilité des produits du menu
+          - title: Indisponibilité des produits proposés
             detailInputs:
               - label: Date du constat
                 rank: 1
@@ -227,51 +280,53 @@ list:
               - label: Quel type de produit était indisponible&#160;?
                 rank: 2
                 type: TEXT
-                placeholder: Type de produit
-              - label: Description
+                placeholder: 'Exemple : Vin blanc, menu en promotion '
+              - label: Le commerçant vous a-t-il donné une raison ?  
                 rank: 3
-                type: TEXTAREA
+                type: RADIO
+                options:
+                  - Non
+                  - Il n'y en avait plus
+                  - La carte n'est pas à jour
+                  - Autre raison (à préciser)
           - title: Information mensongère ou trompeuse
             detailInputs:
-            - label: Date du constat
-              rank: 1
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Qu'est-ce qui est trompeur&#160;?
-              rank: 2
-              type: RADIO
-              options:
-              - Une affiche chez le commerçant
-              - Un site internet (à préciser)
-              - Le discours d'un vendeur
-              - La façon de mettre en vente
-              - Autre (à préciser)
-            - label: À propos de quoi est-ce trompeur&#160;?
-              rank: 3
-              type: RADIO
-              options:
-              - L'origine
-              - La composition
-              - Un label ou une mention (exemple fait maison)
-              - Une marque
-              - Autre (à préciser)
-            - label: Pourquoi trouvez-vous ça trompeur ?
-              rank: 4
-              type: TEXTAREA
-              optionnal: true
-            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
-              rank: 5
-              type: RADIO
-              options:
-                - Oui
-                - Non
-            fileLabel: Photo(s) si possible
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Qu'est-ce qui est trompeur&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - La carte, le menu, une pancarte 
+                  - Le site internet (à préciser)
+                  - Le discours d'un serveur ou du gérant
+                  - Autre (à préciser)
+              - label: À propos de quoi est-ce trompeur&#160;?
+                rank: 3
+                type: RADIO
+                options:
+                  - 'L''origine (exemple : origine des vins )'
+                  - 'Un label ou une mention (exemple: fait maison)'
+                  - 'Une marque (exemple: la marque de rhum proposée est mensongère'
+                  - Autre (à préciser)
+              - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur
+                rank: 4
+                type: TEXT
+                placeholder: Soyez factuel et courtois, merci !
+              - label: Avez-vous déjà expliqué le problème au commerçant &#160;?
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+            fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
       - title: Service
-        example: 'Exemples : chien refusé, personnel peu aimable, refus de nous donner une table car nous avons une poussette'
-        subcategoriesTitle: 'Vous voulez signaler&#160;:'
+        example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
         subcategories:
-          - title: Personnel peu aimable
-            example: 'Exemples : l''accueil est froid, le personnel est mal poli'
+          - title: Le personnel est peu aimable
+            example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
             information:
               title: Ceci ne constitue pas un motif de signalement.
               content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
@@ -281,17 +336,83 @@ list:
                   answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
                 - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
                   answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées...
-          - title: Refus de me servir
-            example: 'Exemples : refus de donner une table au motif de la présence d''enfant, refus de vente pour un motif discriminatoire'
-          - title: Refus de mon chien
+          - title: On a refusé de me donner une table ou de me servir
+            example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, refus de d''une table en terrasse pour un simple café'
+            detailInputs:
+              - label: Date du problème
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE      
+              - label: Pour quelle raison a-t-on refusé de vous servir ou de vous donner une table ?
+                rank: 2
+                type: TEXTAREA
+            fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement. 
+          - title: Mon chien a été refusé
             subcategoriesTitle: Est-ce un chien d'assistance&#160;?
             subcategories:
-            - title: Non
-              information:
-                content: Tout comme dans un hôtel, un restaurateur peut refuser la présence d’un chien dans son établissement. 
-                  <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. Il existe également des sites internet qui recensent les établissements acceptant les chiens.
-            - title: Oui (je possède la carte d'assistance)
-          - title: Autres problème de service
+              - title: Non
+                information:
+                  content: Tout comme dans un hôtel, un restaurateur (ou un cafetier) peut refuser la présence d’un chien dans son établissement. 
+                    <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. <br> <br> Il existe également des sites internet qui recensent les établissements acceptant les chiens.
+              - title: Oui (je possède la carte d'assistance)
+                detailInputs:
+                  - label: Date du refus
+                    rank: 1
+                    type: DATE
+                  - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
+                    rank: 2
+                    type: TEXTAREA
+                fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+      - title: Qualité des plats/boissons
+        example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
+        subcategories:
+          - title: Les plats ne correspondent pas à la description
+            example: 'Exemple : Produit industriel vendu sous la mention "fait maison"'
+            detailInputs:
+              - label: Date du constat
+                rank: 1
+                type: DATE
+                defaultValue: SYSDATE
+              - label: À propos de quoi est-ce trompeur selon vous&#160;?
+                rank: 2
+                type: RADIO
+                options:
+                  - 'L''origine (exemple : origine des vins )'
+                  - 'Un label ou une mention (exemple: fait maison)'
+                  - 'Une marque (exemple: la marque de rhum proposée est mensongère'
+                  - Autre (à préciser)
+              - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur
+                rank: 3
+                type: TEXT
+                placeholder: Soyez factuel et courtois, merci !
+              - label: Avez-vous déjà expliqué le problème au commerçant &#160;?
+                rank: 4
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+            fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
+          - title: Les produits ne sont pas bons
+            information:
+                title: Je trouve que les produits ne sont pas bons ou de grande qualité.
+                content: Si la qualité des produits ne vous a pas convenu, nous vous invitons à contacter directement l'établissement. <br> Vous pouvez notamment contacter le service client. Le service client est présent dans la plupart des restaurants et bars qui font partie d'un groupe ou d'une chaîne. Il est conçu pour recevoir ce type de plainte. <br><br> Vous ne pouvez pas faire un signalement sur SignalConso car la répression des fraudes ne pourra pas traiter votre signalement.
+          - title: Les produits ne sont pas frais ou certains aliments sont périmés, c'est-à-dire que les dates indiquées sont dépassées.
+            detailInputs:
+              - label: Date de constat
+                rank: 1
+                type: DATE
+              - label: Quel produit est concerné ?
+                rank: 2
+                type: TEXT
+              - label: Quel est le problème ?
+                rank: 3
+                type: RADIO
+                options:
+                  - Produit pas frais
+                  - Produit avec date dépassée
+                  - Insecte dans un plat
+                  - Autre (à préciser)
+            fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
@@ -1614,12 +1735,246 @@ list:
   - category: Voyage / Loisirs
     categoryId: VOY
     path: voyage-loisirs
-    description: voyage organisé, camping, concert, sport, billets d''avion
+    description: voyage organisé, camping, concert, sport, billets d''avion, taxi
     rank: 18
     icon: icon_hobbies.png
     subcategories:
+      - title: Taxi / VTC
+        subcategories:
+          - title: Taxi
+            example: Les taxis sont reconnaissables avec l'enseigne lumineuse sur le toit. Les voitures qui n'ont pas cette enseigne ne sont pas des "vrais" taxis.
+            subcategories:
+              - title: Refus de faire la course
+                example: "Exemple : le taxi refuse de vous prendre car ce n'est pas assez loin"
+                subcategoriesTitle: Pour quelle raison le chauffeur a-t-il refusé de vous prendre ?
+                subcategories:
+                  - title: Trajet trop court ou pas assez rentable
+                  - title: Présence de mon chien
+                  - title: Mes bagages/objets ne rentrent pas dans le coffre
+                  - title: Etat d'ébriété ou de violence
+                  - title: Borne taxi à proximité
+                  - title: Autre
+              - title: Les prix ne sont pas affichés dans la voiture
+                example: Une affiche avec les prix et les suppléments doit être visible dans la voiture.
+              - title: Refus de prendre votre carte bancaire
+                example: Tous les taxis ont obligation de prendre la carte bancaire quelque soit le montant.
+              - title: Refus de me donner une note (reçu, facture)
+              - title: Le prix payé ne me convient pas
+                subcategories:
+                  - title: Je pense que le trajet n'était pas le plus direct
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Avez-vous demandé de prendre un itinéraire particulier en début de course ?
+                        rank: 2
+                        type: RADIO
+                        options:
+                          - Oui
+                          - Non
+                      - label: Avez-vous fait remarquer au chauffeur que le chemin vous paraissait trop long en cours de route ? Si oui, merci de préciser sa réponse.
+                        rank: 3
+                        type: RADIO
+                        options:
+                          - Oui (à préciser)
+                          - Non
+                      - label: Adresse de départ
+                        rank: 4
+                        type: TEXT
+                      - label: Heure de départ. Elle est normalement écrit sur la note (facture).
+                        rank: 5
+                        type: TEXT
+                      - label: Adresse d'arrivée
+                        rank: 6
+                        type: TEXT
+                      - label: Heure d'arrivée. Elle est normalement écrit sur la note (facture). Si vous la contestez, noter l'heure réelle d'arrivée.
+                        rank: 7
+                        type: TEXT
+                      - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
+                        rank: 8
+                        type: TEXT
+                      - label: Si vous avez appelé une centrale de réservation, noter son nom.
+                        rank: 9
+                        type: TEXT
+                      - label: "Ajouter ici toutes autres informations utiles à votre signalement."
+                        rank: 10
+                        type: TEXT
+                    fileLabel: Si possible, joindre une copie de la note (facture), et toute preuve du trajet réellement emprunté.
+                  - title: J'ai payé un supplément que je ne comprends pas
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Quel supplément avez-vous payé ?
+                        rank: 2
+                        type: CHECKBOX
+                        options:
+                          - bagage
+                          - passager supplémentaire
+                          - animaux
+                      - label: Combien étiez-vous de passagers (enfant compris) ?
+                        rank: 3
+                        type: TEXT
+                      - label: Combien aviez-vous de bagages en tout ?
+                        rank: 4
+                        type: TEXT
+                  - title: Le prix au compteur était élevé dès la prise en charge
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Adresse de départ
+                        rank: 2
+                        type: TEXT
+                      - label: Aviez-vous commandé votre taxi ?
+                        rank: 3
+                        type: RADIO
+                        options:
+                          - Oui, je l'avais reservé à l'avance
+                          - Oui, je l'ai commandé juste avant de le prendre
+                          - Non, il m'a pris en charge sur une place de taxi ou dans la rue
+                      - label: Quel était le montant indiqué dès le départ ?
+                        rank: 4
+                        type: TEXT
+                    filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
+                  - title: Le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Adresse de départ
+                        rank: 2
+                        type: TEXT
+                      - label: Heure de départ. Elle est normalement écrit sur la note (facture).
+                        rank: 3
+                        type: TEXT
+                      - label: Adresse d'arrivée
+                        rank: 4
+                        type: TEXT
+                      - label: Heure d'arrivée
+                        rank: 5
+                        type: TEXT
+                      - label: Combien avez-vous payé ?
+                        rank: 6
+                        type: TEXT
+                      - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
+                        rank: 8
+                        type: TEXT
+                    fileLabel: Joindre si possible la note (facture) pour appuyer votre signalement.
+                  - title: Le chauffeur n'a pas appliqué le prix prévu pour le forfait
+                    example: Dans certaines villes, il existe des forfaits (c'est-à-dire un prix unique connu à l'avance) pour faire les trajets vers ou depuis un aéroport. Le prix de ces forfaits est fixe.
+                    detailInputs:
+                      - label: Date de la course
+                        rank: 1
+                        type: DATE
+                      - label: Adresse de départ
+                        rank: 2
+                        type: TEXT
+                      - label: Adresse d'arrivée
+                        rank: 3
+                        type: TEXT
+                      - label: Quel est normalement le prix du forfait pour votre trajet ?
+                        rank: 4
+                        type: TEXT
+                      - label: Combien avez-vous payé ?
+                        rank: 5
+                        type: TEXT
+                      - label: Noter les éléments qui permettent d'identifier le taxi.
+                        rank: 6
+                        type: TEXTAREA
+                        placeholder: Numéro ADS, plaque d'immatriculation, société de réservation ...
+                    fileLabel: Joindre la note (facture) de votre course ou tout document utile pour appuyer votre signalement.
+              - title: Autre
+                subcategories:
+                  - title: Refus de prendre les chèques
+                    subcategoriesTitle: Est-ce que c'était indiqué sur la voiture ?
+                    subcategories:
+                      - title: Oui
+                        information:
+                          title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
+                          content: A la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
+                      - title: Non
+                        detailInputs:
+                          - label: Date de la course
+                            rank: 1
+                            type: DATE
+                          - label: Comment avez-vous régler votre course ?
+                            rank: 2
+                            type: TEXT
+                          - label: Noter le lieu de départ et le lieu d'arrivée
+                            rank: 3
+                            type: TEXTAREA
+                          - label: Merci de noter les informations pour identifier le véhicule
+                            rank: 4
+                            type: TEXTAREA
+                            placeholder: Immatriculation du véhicule, numéro ADS ...
+                        fileLabel: Joindre tout document utile pour appuyer votre signalement.
+                  - title: J'ai été prélevé deux fois
+                    detailInputs:
+                      - label: Date de la course ?
+                        rank: 1
+                        type: DATE
+                      - label: Montant de la course ?
+                        rank: 2
+                        type: TEXT
+                      - label: Noter toute autre information utile.
+                        rank: 3
+                        type: TEXT
+                        placeholder: Identification du taxi, nom de la centrale d'appel ...
+                    fileLabel: Joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
+          - title: VTC (voiture avec chauffeur)
+            example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
+            subcategories:
+              - title: Une remise ou une offre promotionnelle qui n'est pas appliquée ou qui est mensongère
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Quelle était l'offre ou la promotion annoncée ?
+                    rank: 2
+                    type: TEXT
+                    placeholder: "Exemple : -20% offert à la première course"
+                  - label: Où avez-vous vu cette offre  ?
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - site internet / application mobile de la société
+                      - publicité par email
+                      - publicité sur un affichage (dans le métro, sur une pancarte..)
+                      - autre (à préciser)
+                  - label: Quel est le problème ?
+                    rank: 4
+                    type: TEXTAREA
+                fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course etc.)
+              - title: Le prix payé n'est pas celui annoncé au départ
+                detailInputs:
+                  - label: Date de la course
+                    rank: 1
+                    type: DATE
+                  - label: Quel était le prix annoncé au départ ?
+                    rank: 2
+                    type: TEXT
+                  - label: Quel prix avez-vous payé ?
+                    rank: 3
+                    type: TEXT
+                  - label: Le chauffeur / la société vous a-t-elle donné une raison ?
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Oui (à préciser)
+                      - Non
+                fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile etc.)
+              - title: Autre
+          - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
+            information:
+              title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
+              content: Lorsqu'un véhicule n'est pas identifié comme un taxi "officiel" (c'est-à-dire une enseigne lumineuse sur le toit, un numéro d'identification marqué sur la voiture) ou que vous ne l'avez pas réservé, il s'agit souvent de taxi clandestin ou "faux" taxi. <br> Ces "faux" taxis sont interdits. <br> Ils proposent souvent "taxi taxi" et sont par exemple dans les aéroports ou près des lieux de sorties le soir. <br><br>
+                Comme ces chauffeurs ne sont pas déclarés, il n'est pas possible de faire un signalement sur notre plate-forme.
+              actions:
+                - question: Que faire en cas de problème avec un "faux" taxi&#160;?
+                  answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie.
       - title: Hébergement
-        example: "Exemples : hotel, camping, chambre d'hôte"
+        example: "Exemple : hotel, camping, chambre d'hôte, location saisonnière"
         subcategories:
           - title: Prix
             subcategories:
@@ -1629,12 +1984,12 @@ list:
                   content: Les professionnels ont le droit de choisir leurs prix.
                     <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
               - title: Prix non affiché
-                example: 'Exemples: sur un site, un catalogue'
+                example: 'Exemple: sur un site, un catalogue'
               - title: Prix final non-conforme au prix annoncé
-                example: "Exemples : fausse réduction, suppléments non prévus"
+                example: "Exemple : fausse réduction, suppléments non prévus"
               - title: Autres
           - title: Publicité
-            example: "Exemples : publicité trompeuse, absence d'information"
+            example: "Exemple : publicité trompeuse, absence d'information"
             subcategories:
               - title: Absence d'information
               - title: Information mensongère ou trompeuse
@@ -1668,7 +2023,7 @@ list:
           - title: Prestation
             subcategories:
               - title: La prestation d'hébergement ne correspond pas à ce qui m'a été vendu
-                example: "Exemples : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
+                example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
               - title: Autres
           - title: Annulation / remboursement
           - title: Autres
@@ -1726,8 +2081,8 @@ list:
           - title: Annulation / remboursement
           - title: Assurance
           - title: Autres
-      - title: Transport
-        example: 'Exemples : avion, train, taxi'
+      - title: Transport en commun
+        example: 'Exemple : avion, train'
         subcategories:
           - title: Prix
             subcategories:
@@ -1908,23 +2263,28 @@ list:
             subcategories:
               - title: Je cherche une location
                 subcategories:
-                  - title: Annonces immobilières
-                    example: 'Exemples : charges non indiquées sur les annonces, annonces en vitrine déja pourvues'
-                  - title: Marchand de liste
-                    example: 'Exemple : peu d''appartements disponibles dans la liste'
-                  - title: Visite de bien / dépôt de dossier
-                    example: 'Exemple : demande d''un relevé de compte bancaire alors que c''est interdit'
+                  - title: Diffusion d'annonces de location pour des biens non disponibles (en vitrine ou sur internet)
+                  - title: Honoraires de location non affichés ou différents de ceux affichés (en vitrine ou sur internet)
+                  - title: Annonces de location incomplètes ou mensongères (en vitrine ou sur internet)
+                    example: 'Exemple : loyer annoncé faux, descriptif de l''appartement mensonger'
+                  - title: Demande d'un document interdit pour le dossier de location
+                    example: 'Exemple : relevé bancaire, photocopie de la carte vitale'
+                  - title: demande de paiement à completer
+                    example: 'Exemple : '
                   - title: Autres
               - title: Je cherche à acheter
                 subcategories:
-                  - title: Annonces immobilières
-                    example: 'Exemples : prix incomplet sur les annonces, annonces en vitrine déjà pourvues, aucun DPE d''affiché'
-                  - title: Visite
-                  - title: Offre d'achat / compromis de vente
+                  - title: Diffusion d'annonces de biens non disponibles à la vente (en vitrine ou sur internet)
+                    example: 'Exemple : la maison affiché en vitrine est en fait déjà vendue'
+                  - title: Honoraires de vente non affichés ou différents de ceux affichés (en vitrine ou sur internet)
+                  - title: Annonces de vente incomplètes ou mensongères (en vitrine ou sur internet)
+                    example: 'Exemple : absence de DPE, descriptif d''un appartement mensonger'
+                  - title: Paiement à compléter
+                  - title: Problème avec une offre d'achat ou un compromis de vente
                     example: 'Exemple : refus de mon offre au prix sans justification'
-                  - title: Chasseur d'appartements
+                  - title: Cas particulier d'un chasseur d'appartements
                     example: 'Exemple : frais d''étude alors que c''est interdit'
-                  - title: Mandataire indépendant (agent commercial)
+                  - title: Cas particulier d'un mandataire indépendant (agent commercial)
           - title: J'ai un problème en tant que locataire
             example: 'Exemples : état des lieux, charges, loyer'
             subcategories:
@@ -1996,70 +2356,342 @@ list:
     icon: icon_health.png
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories:
-      - title: Produit en particulier
-        example: 'Exemples : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant'
+      - title: Produit de santé
+        example: 'Exemple : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant, compléments alimentaires, autres produits achetés en pharmacie ou rayon pharmacie'
         subcategories:
           - title: J'ai eu un problème de santé / sécurité avec un produit
-            example: 'Exemples : allergie, vomissement, électrocution'
+            example: 'Exemple : allergie, vomissement, électrocution'
             subcategoriesTitle: Quel est le type de produit ?
             subcategories:
               - title: Un médicament
                 information:
-                  title: Vous devez le signaler au ministère de la Santé
-                  content: <br><a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">Remplir le formulaire ici</a>
-              - title: Un objet
-                example: 'Exemples : pansement, tensiomètre'
+                  title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la santé.
+                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">cliquant sur ce lien</a>
+              - title: Un objet de santé
+                example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
                 information:
-                  title: "Vous devez le signaler avec un formulaire spécifique."
-                  content: <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">Remplir le formulaire ici/a>
-          - title: La publicité pour un médicament / dispositif médical est trompeuse
+                  title: Les problèmes de sécurité doivent être signalés avec un formulaire spécifique afin de traiter plus rapidement votre signalement.
+                  content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">cliquant sur ce lien</a>
+          - title: La publicité (ou les informations sur la boîte) est trompeuse
+            detailInputs:
+              - label: Date de constat (ou date d'achat)
+                rank: 1
+                type: DATE
+              - label: Quel est le nom du produit ? 
+                rank: 2
+                type: TEXT
+              - label: Pourquoi trouvez-vous la publicité trompeuse ?
+                rank: 3
+                type: CHECKBOX
+                options:
+                  - le produit ne remplit pas sa promesse
+                  - la photo du produit est trompeuse
+                  - les labels (bio, naturel etc.) sont trompeurs
+                  - autre (à préciser)
+              - label: Où avez-vous vu ces informations ?
+                rank: 4
+                type: CHECKBOX
+                options:
+                  - site internet
+                  - publicité (affiche, dans un magazine)
+                  - sur la boîte
+                  - autre (à préciser)
+            fileLabel: Merci de joindre une photo de la publicité ou de la boîte afin de traiter au mieux votre signalement. 
           - title: Un produit de santé est de mauvaise qualité
-            example: 'Exemples : béquille qui se tord, audioprothèse qui se fissure rapidement'
-          - title: Autres
-      - title: Professionnel de la santé
-        example: 'Exemples: dentiste, opticien, kiné, infirmier, psychiatre, médecine douce'
+            example: 'Exemple : béquille qui se tord, audioprothèse qui se fissure rapidement, préservatif qui se perce'
+            detailInputs:
+              - label: Date de constat (ou date d'achat)
+                rank: 1
+                type: DATE
+              - label: Quel est le type de produit ?
+                rank: 2
+                type: RADIO
+                options:
+                  - lunette / lentilles de contact 
+                  - prothèse
+                  - béquille, fauteuil roulant
+                  - contraception (préservatif)
+                  - bas de contention
+                  - appareil de mesure (thermomètre, tensiomètre etc.)
+                  - autre (à préciser)
+              - label: Quelle sa marque et sa référence / numéro de modèle ? Vous pouvez trouver ces informations sur votre facture d'achat.
+                rank: 3
+                type: TEXT
+              - label: "Expliquez le problème en quelques mots :"
+                rank: 4
+                type: TEXT
+      - title: Professionnel de la santé et médecine douce
+        example: 'Exemple : dentiste, opticien, kiné, psychiatre, médecine douce'
+        subcategoriesTitle: 'Quel type de médecine exerce-t-il ?' 
         subcategories:
-          - title: Les prix ne sont pas indiqués
-            example: "Exemple : les tarifs ne sont pas affichés en salle d'attente"
-          - title: Les prix sont trop chers
-            information:
-              title: Les prix dépendent du type de professionnel
-              content:
-              actions:
-                - question: Un professionnel de santé (médecin, dentiste, podologue...)
-                  answer: Le prix varie selon qu'il est conventionné ou non conventionné. Un médecin non conventionné peut choisir librement ses prix. En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
-                - question: "Un professionnel en médecine douce (exemple : naturopathe, sophrologue... )"
-                  answer: Les tarifs sont choisis librement. Ils doivent être clairement affichés dans la salle d'attente.
-          - title: C'est un problème de devis
+          - title: La médecine dite "conventionnelle"
+            example: 'C''est-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sage-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, nutritionniste, psychiatre, ou autre médecin spécialiste.'
             subcategories:
-              - title: Je n'ai pas eu de devis écrit
-                example: "Exemples : chez l'opticien, le dentiste, le chirurgien esthététique, l'audioprothésiste"
-              - title: Le devis est incomplet
-              - title: J'ai payé plus cher que le devis
-            example: "Exemples : je n'ai pas eu de devis, devis pas respecté"
-          - title: Le professionnel ne m'a pas délivré de facture (note)
-          - title: La prestation est mal (ou pas) réalisée
-            subcategories:
-              - title: L'acte de soin
-                example: 'Exemple : mon dentiste a mal soigné ma dent'
+              - title: Les tarifs ne sont pas affichés en salle d'attente
+                example: Les tarifs doivent être clairement affichés dans la salle d'attente.
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - aucun affichage des prix
+                      - affichage des prix incomplet
+                      - les prix affichés ne sont pas à jour
+                fileLabel: Vous pouvez joindre une photo pour appuyer votre signalement.
+              - title: Le professionnel n'indique pas s' il est conventionné, ou s'il est secteur 1 ou secteur 2
+                example: Cette indication est obligatoire sur sa plaque (au niveau de sa porte ou du hall d'entrée) et dans la salle d'attente.
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ? (plsuieurs réponses possibles)
+                    rank: 2
+                    type: CHECKBOX
+                    options:
+                      - pas d'indication au niveau de sa plaque
+                      - absence d'affichage dans sa salle d'attente (ou lieu d'exercice si il n'a pas de salle d'attente)
+                  - label: "Si vous avez eu l'information par un autre moyen (mutuelle, recherche internet), pouvez-vous préciser s'il est :"
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - conventionné secteur 1
+                      - conventionné secteur 2
+                      - non conventionné
+                    optionnal: true
+              - title: Les prix sont exagérés
                 information:
-                  title: Vous devez écrire à l'Ordre des médecins
-                  content:
-              - title: La prestation ne correspond pas à ce qui était indiqué
-                example: 'Exemple : duréee plus courte'
-              - title: J'ai un problème avec la fabrication/pose d'appareil médical
-                example: 'Exemples : lunette, prothèse'
-          - title: La publicité est trompeuse
-            example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
-          - title: Autres
-      - title: Hopital / Clinique
+                  title: Un professionnel de santé non conventionné peut choisir ses tarifs
+                  content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
+                    <br><br>Un médecin conventionné pratiquera des tarifs classiques.
+              - title: Problème de devis
+                example: "Exemple : je n'ai pas eu de devis, devis pas respecté"
+                subcategories:
+                  - title: Je n'ai pas eu de devis écrit
+                    example: Un devis est obligatoire dès que les dépassements d'honoraires et la prestation dépassent 70 euros. Un devis est obligatoire en cas de pose de couronne, implant, bridge etc. Un devis est oligatoire en chirurgie esthétique.
+                    detailInputs:
+                      - label: Date du rendez-vous
+                        rank: 1
+                        type: DATE
+                      - label: Quel est le type de soin ?
+                        rank: 2
+                        type: RADIO
+                        options:
+                          - pose d'un implant, bridge, couronne
+                          - acte de chirurgie esthétique
+                          - autre soin / traitement supérieur à 70 euros
+                      - label: Quelle est le problème ? (plusieurs réponses possibles)
+                        rank: 3
+                        type: CHECKBOX
+                        options:
+                          - le médecin/praticien m'a donné un prix à l'oral
+                          - le médecin/praticien ne pas m'a remis de devis écrit
+                      - label: Combien a coûté le soin au total (environ) ?
+                        rank: 4
+                        type: TEXT
+                  - title: Le devis est incomplet
+                    detailInputs:
+                      - label: Date du rendez-vous
+                        rank: 1
+                        type: DATE
+                      - label: Combien a coûté le soin au total ?
+                        rank: 2
+                        type: TEXT
+                      - label: Quelles informations manquent-ils sur votre devis  ? (plusieurs réponses possibles)
+                        rank: 3
+                        type: CHECKBOX
+                        options:
+                          - description détaillée du soin envisagé et/ou des matériaux utilisés
+                          - lieu de fabrication de la prothèse le cas échéant
+                          - montant des honoraires du soin
+                          - montant remboursé par l'assurance maladie
+                  - title: J'ai payé plus cher que le devis
+                    detailInputs:
+                      - label: Date de constat
+                        rank: 1
+                        type: DATE
+                      - label: Quel était le prix sur votre devis ?
+                        rank: 2
+                        type: TEXT
+                      - label: Combien avez-vous payé ?
+                        rank: 3
+                        type: TEXT
+              - title: La prestation est mal (ou pas) réalisée
+                example: "Exemple : j'ai mal été soigné"
+                information:
+                      title: Porter une réclamation sur la qualité d’un soin 
+                      content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
+          - title: La médecine dite "alternative" ou "douce"
+            example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute etc." 
+            subcategories:
+              - title: Les prix ne sont pas affichés ou sont faux
+                example: "Les prix doivent être affichés en salle d'attente."
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                    defaultValue: SYSDATE
+                  - label: Les prix sont-ils affichés en salle d'attente ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
+                  - label: S'ils sont affichés, ces prix sont-ils lisibles et compréhensibles ?
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
+                    optionnal: true
+                  - label: S'ils sont affichés, ces prix sont-ils exacts ?
+                    rank: 4
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
+                    optionnal: true
+                fileLabel: Vous pouvez joindre une photo
+              - title: Les prix sont trop chers
+                example: "Exemple : ce naturopathe est plus cher que ceux de la région"
+                information:
+                  title: En médecine non conventionnelle, un praticien peut choisir librement ses prix. 
+                  content: "Il peut proposer des prix élevés et choisir d'être plus cher que ses concurrents. <br> Cependant il a une obligation : indiquer tous ces prix de façon claire. Vous devez connaître le prix avant de vous faire soigner. <br> Les prix doivent être affichés en salle d'attente de manière lisible."
+                  actions:
+                    - question: Vous n'avez pas eu connaissance des prix avant&#160;?
+                      answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
+              - title: Je n'ai pas reçu de note (facture, ticket)
+                example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
+                detailInputs:
+                  - label: Date de visite
+                    rank: 1
+                    type: DATE
+                  - label: Si vous vous en rappelez, combien avez-vous payé ?
+                    rank: 2
+                    type: TEXT
+                    optionnal: true
+                  - label: Avez-vous demandé une note ?
+                    rank: 3
+                    type: RADIO
+                    options:
+                      - Oui
+                      - Non
+              - title: La publicité ou la description du soin est trompeuse
+                example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse'
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Que trouvez-vous trompeur ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - la durée du soin
+                      - une offre promotionnelle, une réduction de prix
+                      - le résultat attendu / promis
+                      - les labels (bio, vegan...) utilisés
+                      - le diplôme du praticien
+                      - des informations médicales fausses
+                      - autre (à préciser)
+                  - label: "Précisez en quelques mots pourquoi vous trouvez cela trompeur :"
+                    rank: 3
+                    type: TEXT
+                    placeholder: Soyez factuel et courtois, merci !
+                fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
+          - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
+            subcategories:
+              - title: Une publicité est trompeuse ou non appliquée
+                example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: Que trouvez-vous trompeur ?
+                    rank: 2
+                    type: TEXTAREA
+                fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.    
+              - title: Je ne suis pas satisfait de la qualité de mes lunettes/prothèses
+                detailInputs:
+                  - label: Date du constat
+                    rank: 1
+                    type: DATE
+                  - label: De quel produit s'agit-il ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - lunette
+                      - lentilles de contact
+                      - prothèse
+                  - label: Quel est la marque et le modèle ?
+                    rank: 3
+                    type: TEXT
+                  - label: Quel est le problème ?
+                    rank: 4
+                    type: TEXT
+                fileLabel: Merci de joindre si possible une photo du produit ou de la facture d'achat.
+              - title: Autre
+      - title: Hôpital / Clinique
+        subcategories:
+          - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
+            information:
+                  title: Vous devez contacter la Commissions des Usagers
+                  content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+          - title: J'ai dû payer un "forfait administratif"
+            example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
+            detailInputs:
+              - label: Date de sortie (ou date de la facture)
+                rank: 1
+                type: DATE
+              - label: Quel est le montant de ces frais ?
+                rank: 2
+                type: TEXT
+            fileLabel: Merci de joindre si posisble une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
+          - title: J'ai été facturé pour un supplément que je n'avais pas demandé
+            example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
+            detailInputs:
+              - label: Date de sortie (ou date de la facture)
+                rank: 1
+                type: DATE
+              - label: Quel supplément vous a-t-on facturé ?
+                rank: 2
+                type: TEXT
+                placeholder: chambre double, télévision, repas spécifique ...
+              - label: Aviez-vous demandé ce supplément ? 
+                rank: 3
+                type: RADIO
+                options:
+                  - Oui
+                  - Non
+              - label: Quel est le prix de ce supplément ?
+                rank: 4
+                type: TEXT
+                optionnal: true
+              - label: L'hôpital/clinique vous a t-il justifié ce supplément ?
+                rank: 5
+                type: RADIO
+                options:
+                  - Oui (à préciser)
+                  - Non
+            fileLabel: Merci de joindre une photo de la facture si possible afin d'appuyer votre signalement.
       - title: Pharmacie
         subcategories:
           - title: Problème de prix
             subcategories:
-              - title: Les prix ne sont pas indiqués dans les rayons
-              - title: Les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
-              - title: Il n'y a pas de catalogue des prix disponible (papier ou sur écran)
+              - title: Les prix ne sont pas indiqués
+                example: Les prix doivent être indiqués dans les rayons, visibles pour les médicaments situés derrière le comptoir. La pharmacie doit également avoir un catalogue des prix.
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ? (plusieurs réponses possibles)
+                    rank: 2
+                    type: CHECKBOX
+                    options:
+                      - Les prix ne sont pas tous indiqués dans les rayons
+                      - Les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
+                      - Il n'y a pas de catalogue des prix disponible (papier ou sur écran)
               - title: Les prix sont exagérés
                 information:
                   title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
@@ -2068,69 +2700,86 @@ list:
                     Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
               - title: Autres
           - title: Problème de commande
-          - title: Autres
       - title: Ambulance
         example: "et autre transport sanitaire (exemple : taxi)"
       - title: Cure
-        example: 'Exemples : thalassothérapie, thermalisme'
+        example: 'Exemple : thalassothérapie, thermalisme'
         subcategories:
           - title: Prix et facture
-            example: "Exemple : prix pas affiché, pas de remise d'une facture"
-          - title: Prestation
-            example: 'Exemple : les soins ne correspondant pas à ce qui était prévu'
+            example: "Exemple : les prix ne sont pas affichés, pas de remise d'une facture"
+            subcategories:
+              - title: Les prix ne sont pas affichés
+                example: "Exemple : les prix des soins ne sont pas affichés, les prix affichés ne sont pas très clairs"
+                detailInputs:
+                  - label: Date de constat
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - les prix ne sont pas affichés du tout
+                      - les prix sont affichés de façon non visible
+                      - les prix affichés ne sont pas clairs
+                fileLabel: Si possible merci de joindre une photo pour appuyer votre signalement.
+              - title: J'ai payé plus cher que les prix affichés
+                example: "Exemple : j'ai payé un supplément non prévu sans être prévenu, les prix affichés ne sont pas à jour "
+                detailInputs:
+                  - label: Date de constat (ou date de paiement)
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: CHECKBOX
+                    options:
+                      - les prix affichés ne sont pas à jour
+                      - les prix des suppléments et options ne sont pas affichés
+                      - "j'ai payé un supplément (exemple : supplément chambre simple) sans donner mon accord avant"
+                fileLabel: Si possible merci de joindre une photo de la facture ou de l'affichage des prix pour appuyer votre signalement.
+              - title: Je n'ai pas eu de facture (note)
+                detailInputs:
+                  - label: Date de constat (ou date de paiement)
+                    rank: 1
+                    type: DATE
+                  - label: Quel est le problème ?
+                    rank: 2
+                    type: RADIO
+                    options:
+                      - je n'ai pas eu de facture et je ne l'ai pas demandée
+                      - j'ai demandé une facture mais on ne me l'a pas donnée 
           - title: Publicité trompeuse
-            example: 'Exemples : utilisation frauduleuse du label Qualicert, spa simple déclaré en thalassothérapie'
+            example: 'Exemple : spa simple déclaré en thalassothérapie, soins qui ne correspondent pas à la description sur la publicité, utilisation frauduleuse du label Qualicert'
+            detailInputs:
+              - label: Date de constat
+                rank: 1
+                type: DATE
+              - label: A propos de quoi est-ce trompeur ?
+                rank: 2
+                type: CHECKBOX
+                options:
+                  - un label (Qualicert) ou un certificat
+                  - la description/photo du bâtiment ou des équipements (piscines, bassins etc.)
+                  - la description des soins (durée, produits utilisés etc. )
+                  - spa simple déclaré en thalassothérapie
+                  - autre (à préciser)
+              - label: Où avez-vous vu cette information (ou photo) que vous trouvez trompeuse ?
+                rank: 3
+                type: RADIO
+                options:
+                  - site internet ou publicité sur internet
+                  - publicité papier
+                  - affiche/ panneau publicitaire
+                  - autre (à préciser)
+              - label: 'Expliquez en quelques mots pourquoi vous trouvez cela trompeur :'
+                rank: 4
+                type: TEXT
+            fileLabel: Merci de joindre tout document (photo, pdf) pouvant appuyer votre signalement.
           - title: Contrat
-            example: "Exemples : je souhaite annuler ma cure, le contrat n'est pas clair"
-      - title: Ehpad (Maison de retraite)
-        subcategories:
-          - title: Les tarifs
-            subcategories:
-              - title: Les tarifs ne sont pas communiqués clairement
-                example: 'Exemple : les prix des options ne sont pas dans le contrat'
-              - title: Je ne paye pas le prix qui était prévu au départ
-              - title: Les prix sont élevés pour la prestation
-                information:
-                  title: Les prix sont choisis librement par les maisons de retraite.
-                  content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
-          - title: Mon contrat
-            subcategories:
-              - title: Le contrat n'est pas respecté
-                example: 'Exemple : le contrat prévoit des fruits tous les jours et ce n''est pas le cas'
-              - title: Je veux résilier le contrat
-              - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le consommateur
-                example: 'Exemple : imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois'
-          - title: Sommes facturées
-          - title: Etat des lieux de la chambre
-            example: "Exemples : état des lieux d'entrée ou de sortie, caution"
-            subcategories:
-              - title: Je n'ai pas eu d'état des lieux (entrée ou sortie)
-              - title: Je ne suis pas d'accord avec l'état des lieux
-              - title: La caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
-                subcategoriesTitle: 'Multipliez par 2 le tarif de l''hébergement mensuel (indiqué dans votre contrat).La caution demandée est-elle plus cher que ce résultat ?'
-                subcategories:
-                  - title: Oui
-                  - title: Non
-                    information:
-                      title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif hébergement mensuel.
-                      content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
-              - title: Je n'ai toujours pas récupéré la caution
-                subcategoriesTitle: Quand avez-vous libéré la chambre ?
-                subcategories:
-                  - title: Il y a moins de 30 jours
-                    information:
-                      title: Soyez encore un peu patient !
-                      content: La maison de retraite a 30 jours pour vous rendre la caution.
-                  - title: Il y a plus de 30 jours
-          - title: Publicité pour la maison de retraite mensongère
-            example: "Exemples : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu"
-          - title: Maltraitance
-          - title: Autres
-      - title: Autres
+            example: "Exemple : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
-    description: vente et réparation de voiture, location, taxi, auto-école...
+    description: vente et réparation de voiture, location, auto-école...
     rank: 107
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
@@ -2148,89 +2797,6 @@ list:
             example: 'Exemples : devis non détaillé, devis non respecté'
           - title: Prestation mal réalisée ou pas réalisée
             example: 'Exemples : malfaçon, panne non réparée, pose d''un équipement endommagé'
-          - title: Publicité
-          - title: Autres
-      - title: Taxi / VTC
-        subcategories:
-          - title: Prix / Paiement
-            example: 'Exemples : refus de CB, supplément'
-            subcategories:
-              - title: Prix pas affiché
-                example: 'Exemple : absence de l''affichette des prix'
-              - title: Prix différent de celui affiché
-                example: 'Exemple : le prix à payer est différent de celui annoncé'
-              - title: Refus d'un moyen de paiement
-                example: 'Exemple : refus de la carte bancaire'
-                subcategories:
-                  - title: Refus du paiement en espèces
-                    subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
-                    subcategories:
-                      - title: Il refuse tout paiement en espèces
-                        description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
-                      - title: Il n'avait pas assez de monnaie
-                        information:
-                        content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
-                      - title: Mes pièces / billets étaient en mauvais état
-                        information:
-                          content: Le paiement en pièces ou billets en mauvais état peut être refusé.
-                      - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
-                        information:
-                          content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
-                            <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
-                      - title: Autres
-                  - title: Refus de la carte bancaire
-                    subcategories:
-                      - title: Il s'agit d'un taxi officiel
-                      - title: Il s'agit d'un service de VTC
-                        subcategoriesTitle: Pour quelle raison le professionnel a-t-il refusé votre carte bancaire&#160;?
-                        subcategories:
-                          - title: Il exige un minimum d'achat
-                            subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
-                            subcategories:
-                              - title: Oui
-                                information:
-                                  title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
-                                  content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
-                              - title: Non
-                          - title: Il refuse tout paiement par carte bancaire
-                            subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bancaire&#160;?
-                            subcategories:
-                              - title: Oui
-                                example: 'Exemple : sur une affiche au niveau de ses vitres'
-                                information:
-                                  title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                                  content: Il doit l’indiquer très visiblement au consommateur.
-                              - title: Non
-                  - title: Refus d'un chèque
-                    subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque&#160;?
-                    subcategories:
-                      - title: Il exige un minimum d'achat
-                        subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
-                        subcategories:
-                          - title: Oui
-                            information:
-                              title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
-                              content: Il doit l’indiquer très visiblement au consommateur.
-                          - title: Non
-                      - title: Il refuse tout paiement par chèque
-                        subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait les chèques&#160;?
-                        subcategories:
-                          - title: Oui
-                            information:
-                              title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                              content: Il doit l’indiquer très visiblement au consommateur.
-                          - title: Non
-                      - title: Autres
-                        example: 'Exemple : problème avec le terminal de paiement'
-                  - title: Autres problèmes de prix ou paiement
-              - title: Problème de facture/ticket de caisse
-                example: 'Exemple : refus de délivrer une note'
-          - title: Publicité
-          - title: Autres
-      - title: Transport en commun
-        example: 'Exemple : bus'
-        subcategories:
-          - title: Prix / Paiement
           - title: Publicité
           - title: Autres
       - title: Permis / leçons de conduite
@@ -2285,3 +2851,51 @@ list:
             <li>écrire à la police/gendarmerie</li>
           </ul>
           La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
+  - category: Maison de retraite (EHPAD)       
+    categoryId: EHPAD
+    path: ehpad
+    rank: 110
+    icon: icon_epahd.png
+    subcategories:
+      - title: Les tarifs
+        subcategories:
+          - title: Les tarifs ne sont pas communiqués clairement
+            example: 'Exemple : les prix des options ne sont pas dans le contrat'
+          - title: Je ne paye pas le prix qui était prévu au départ
+          - title: Les prix sont élevés pour la prestation
+            information:
+              title: Les prix sont choisis librement par les maisons de retraite.
+              content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
+      - title: Mon contrat
+        subcategories:
+          - title: Le contrat n'est pas respecté
+            example: 'Exemple : le contrat prévoit des fruits tous les jours et ce n''est pas le cas'
+          - title: Je veux résilier le contrat
+          - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le consommateur
+            example: 'Exemple : imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois'
+      - title: Sommes facturées
+      - title: Etat des lieux de la chambre
+        example: "Exemples : état des lieux d'entrée ou de sortie, caution"
+        subcategories:
+          - title: Je n'ai pas eu d'état des lieux (entrée ou sortie)
+          - title: Je ne suis pas d'accord avec l'état des lieux
+          - title: La caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
+            subcategoriesTitle: 'Multipliez par 2 le tarif de l''hébergement mensuel (indiqué dans votre contrat).La caution demandée est-elle plus cher que ce résultat ?'
+            subcategories:
+              - title: Oui
+              - title: Non
+                information:
+                  title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif hébergement mensuel.
+                  content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
+              - title: Je n'ai toujours pas récupéré la caution
+                subcategoriesTitle: Quand avez-vous libéré la chambre ?
+                subcategories:
+                  - title: Il y a moins de 30 jours
+                    information:
+                      title: Soyez encore un peu patient !
+                      content: La maison de retraite a 30 jours pour vous rendre la caution.
+                  - title: Il y a plus de 30 jours
+      - title: Publicité pour la maison de retraite mensongère
+        example: "Exemples : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu"
+      - title: Maltraitance
+      - title: Autres
