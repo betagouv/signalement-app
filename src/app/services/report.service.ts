@@ -13,6 +13,7 @@ import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
 import { Region } from '../model/Region';
 import { deserialize } from 'json-typescript-mapper';
+import { ReportResponse } from '../model/ReportEvent';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +48,18 @@ export class ReportService {
         return this.http.put(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
           this.report2reportApi(report),
+          headers
+        );
+      }),
+    );
+  }
+
+  postReportResponse(reportId: string, reportResponse: ReportResponse) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'response']),
+          reportResponse,
           headers
         );
       }),

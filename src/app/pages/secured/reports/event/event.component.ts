@@ -8,6 +8,8 @@ import { combineLatest } from 'rxjs';
 import { PlatformLocation } from '@angular/common';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { AccountService } from '../../../../services/account.service';
+import { AuthenticationService } from '../../../../services/authentication.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-event',
@@ -22,7 +24,6 @@ export class EventComponent implements OnInit {
   eventForm: FormGroup;
   actionCtrl: FormControl;
   detailCtrl: FormControl;
-  resultActionCtrl: FormControl;
   reportId: string;
   siret: string;
   actions: ReportEventAction[];
@@ -37,6 +38,7 @@ export class EventComponent implements OnInit {
               private eventService: EventService,
               private constantService: ConstantService,
               private accountService: AccountService,
+              private authenticationService: AuthenticationService,
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
@@ -67,7 +69,6 @@ export class EventComponent implements OnInit {
   initEventForm() {
     this.actionCtrl = this.formBuilder.control('', Validators.required);
     this.detailCtrl = this.formBuilder.control('');
-    this.resultActionCtrl = this.formBuilder.control(true, Validators.required);
 
     this.eventForm = this.formBuilder.group({
       action: this.actionCtrl,
@@ -86,17 +87,19 @@ export class EventComponent implements OnInit {
     } else {
       this.loading = true;
       this.loadingError = false;
-      const eventToCreate = Object.assign(new ReportEvent(), {
-        reportId: this.reportId,
-        eventType: 'PRO',
-        action: this.actionCtrl.value,
-        detail: this.detailCtrl.value
-      });
-      if (this.actionCtrl.value.withResult) {
-        eventToCreate.resultAction = this.resultActionCtrl.value;
-      }
 
-      this.eventService.createEvent(eventToCreate).subscribe(
+      this.authenticationService.user.pipe(
+        switchMap(user => {
+          const eventToCreate = Object.assign(new ReportEvent(), {
+            reportId: this.reportId,
+            eventType: user.role === Roles.DGCCRF ? 'DGCCRF' : 'PRO',
+            action: this.actionCtrl.value,
+            details: {description: this.detailCtrl.value}
+          });
+
+          return this.eventService.createEvent(eventToCreate);
+        })
+      ).subscribe(
         event => {
           this.bsModalRef.hide();
           this.loading = false;
@@ -105,15 +108,6 @@ export class EventComponent implements OnInit {
           this.loading = false;
           this.loadingError = true;
         });
-    }
-  }
-
-  selectAction() {
-
-    if (this.actions.find(action => action === this.actionCtrl.value).withResult) {
-      this.eventForm.addControl('resultAction', this.resultActionCtrl);
-    } else {
-      this.eventForm.removeControl('resultAction');
     }
   }
 

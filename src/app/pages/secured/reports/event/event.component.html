@@ -6,7 +6,7 @@
           <label for="actionSelect" [class]="hasError(actionCtrl) ? 'error' : ''">
             Action <span class="error">*</span>
           </label>
-          <select id="actionSelect" [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''" (change)="selectAction()">
+          <select id="actionSelect" [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''">
             <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
               <option *ngFor="let action of actions" [ngValue]="action">
                 {{action.name}}
@@ -30,18 +30,6 @@
             Détail
           </label>
           <textarea id="detail" [formControl]="detailCtrl"></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="form__group mt-4" *ngIf="eventForm.contains('resultAction')">
-      <div class="row">
-        <div class="col-2 col-sm-1 text-right pr-1">
-          <input type="checkbox" [formControl]="resultActionCtrl" id="resultAction"/>
-        </div>
-        <div class="col-10 col-sm-11 pl-1">
-          <label class="d-block mb-0 pointer" for="resultAction">
-            L'action a eu une issue positive
-          </label>
         </div>
       </div>
     </div>
