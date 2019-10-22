@@ -103,7 +103,7 @@ list:
                     information:
                       title: Cet incident ne doit pas nécessairement être signalé.
                       content: La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
-                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut également être suffisant pour éviter les contaminations. <br> Vous pouvez directement discuter avec le gérant pour lui faire part de votre étonnement ou comprendre leurs habitudes de travail.
+                        Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut également être suffisant pour éviter les contaminations. <br> Vous pouvez directement discuter avec le gérant pour lui faire part de votre questionnement.
                   - title: Autre problème de tenue
                     example: 'Exemple : pas de tenue spécifique, torse-nu en cuisine'
                     detailInputs:
@@ -158,12 +158,11 @@ list:
               optionnal: true
             fileLabel: Si possible, merci de joindre une photo ou un document pour appuyer votre signalement.
       - title: Prix et paiement
-        example: 'Exemple : refus de la carte bancaire, prix trop cher, supplément non annoncé à l''avance'
-        subcategoriesTitle: 'Vous voulez signaler&#160;:'
+        example: 'Exemple : refus de la carte bancaire, j''ai payé plus cher que prévu'
         subcategories:
           - title: Il manque certains prix
             example: 'Exemple : absence de prix sur la carte des vins'
-            description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+            description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligé de les demander.'
             detailInputs:
               - label: Date du constat
                 rank: 1
@@ -240,7 +239,7 @@ list:
                           title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
                           content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
                       - title: Non
-                  - title: Il refuse tous les paiements par chèque ou carte bleue
+                  - title: Il n'accepte jamais les paiements par chèque ou carte bleue
                     subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
                     subcategories:
                       - title: Oui
@@ -254,7 +253,6 @@ list:
               - title: Autres problèmes de prix ou paiement
                 subcategoriesTitle: 'Problème avec :'
                 subcategories:
-                - title: Le cash-back
                 - title: Tickets restaurant
                 - title: Autres
           - title: Refus de me donner une note (ticket, facture)
@@ -326,7 +324,6 @@ list:
             fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
       - title: Service
         example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
-        subcategoriesTitle: 'Vous voulez signaler&#160;:'
         subcategories:
           - title: Le personnel est peu aimable
             example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
@@ -339,8 +336,8 @@ list:
                   answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
                 - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
                   answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées...
-          - title: On a refusé de me servir ou de me laisser une table
-            example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, car je ne prenais qu''un café'
+          - title: On a refusé de me donner une table ou de me servir
+            example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, refus de d''une table en terrasse pour un simple café'
             detailInputs:
               - label: Date du problème
                 rank: 1
@@ -348,7 +345,7 @@ list:
                 defaultValue: SYSDATE      
               - label: Pour quelle raison a-t-on refusé de vous servir ou de vous donner une table ?
                 rank: 2
-                type: TEXT
+                type: TEXTAREA
             fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement. 
           - title: Mon chien a été refusé
             subcategoriesTitle: Est-ce un chien d'assistance&#160;?
@@ -356,7 +353,7 @@ list:
               - title: Non
                 information:
                   content: Tout comme dans un hôtel, un restaurateur (ou un cafetier) peut refuser la présence d’un chien dans son établissement. 
-                    <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. <br> Il existe également des sites internet qui recensent les établissements acceptant les chiens.
+                    <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. <br> <br> Il existe également des sites internet qui recensent les établissements acceptant les chiens.
               - title: Oui (je possède la carte d'assistance)
                 detailInputs:
                   - label: Date du refus
@@ -398,8 +395,24 @@ list:
           - title: Les produits ne sont pas bons
             information:
                 title: Je trouve que les produits ne sont pas bons ou de grande qualité.
-                content: Si la qualité des produits ne vous a pas convenu, nous vous invitons à contacter directement l'établissement. <br> Vous pouvez notamment contacter le service client. Le service client est présent dans la plupart des restaurants et bars qui font partie d'un groupe ou d'une chaîne. Il est conçu pour recevoir ce type de plainte. <br> Vous ne pouvez pas faire un signalement sur SignalConso car la répression des fraudes ne pourra pas traiter votre signalement.
-          - title: Les produits ne sont pas frais ou certains aliments sont périmés, cest-à-dire que les dates indiquées sont dépassées.
+                content: Si la qualité des produits ne vous a pas convenu, nous vous invitons à contacter directement l'établissement. <br> Vous pouvez notamment contacter le service client. Le service client est présent dans la plupart des restaurants et bars qui font partie d'un groupe ou d'une chaîne. Il est conçu pour recevoir ce type de plainte. <br><br> Vous ne pouvez pas faire un signalement sur SignalConso car la répression des fraudes ne pourra pas traiter votre signalement.
+          - title: Les produits ne sont pas frais ou certains aliments sont périmés, c'est-à-dire que les dates indiquées sont dépassées.
+            detailInputs:
+              - label: Date de constat
+                rank: 1
+                type: DATE
+              - label: Quel produit est concerné ?
+                rank: 2
+                type: TEXT
+              - label: Quel est le problème ?
+                rank: 3
+                type: RADIO
+                options:
+                  - Produit pas frais
+                  - Produit avec date dépassée
+                  - Insecte dans un plat
+                  - Autre (à préciser)
+            fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
