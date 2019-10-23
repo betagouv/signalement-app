@@ -70,13 +70,13 @@ list:
                       - Les WC
                       - Autre (à préciser)
                   - label: Quel est le problème&#160;?
-                    rank: 3
+                    rank: 4
                     type: CHECKBOX
                     options:
                       - C'est sale
                       - C'est dégradé, en mauvais état
                   - label: À quel niveau&#160;?
-                    rank: 4
+                    rank: 5
                     type: CHECKBOX
                     options:
                       - Sol / mur
