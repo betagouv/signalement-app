@@ -14,7 +14,7 @@ import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
-import { ProAnswerReportEventAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
+import { EventActions, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
 
 @Component({
   selector: 'app-report-detail',
@@ -341,8 +341,12 @@ export class ReportDetailComponent implements OnInit {
     return this.showErrors && formControl.errors;
   }
 
+  getFirstVisitEvent() {
+    return this.events.find(event => event.action.name === EventActions.FirstVisitEventAction);
+  }
+
   getReportResponse(): ReportResponse {
-    const reportResponseEvent = this.events.find(event => event.action.name === ProAnswerReportEventAction.name);
+    const reportResponseEvent = this.events.find(event => event.action.name === EventActions.ProAnswerReportEventAction);
     if (reportResponseEvent) {
       return reportResponseEvent.details as ReportResponse;
     }

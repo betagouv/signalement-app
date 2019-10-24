@@ -275,10 +275,10 @@
           </div>
         </ng-container>
 
-        <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+        <ng-container>
           <hr />
           <h5>Historique</h5>
-          <div class="row">
+          <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
             <div class="col-12" *ngFor="let event of events; let eventIndex = index">
               <ng-container *ngIf="event.details && event.details.description; else noDescription">
                 <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
@@ -300,6 +300,14 @@
               Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
             </div>
           </div>
+          <ng-container *appRole="[roles.Pro]">
+            Signalement créé {{report.creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
+            <ng-container *ngIf="getFirstVisitEvent()">
+              <br />
+              Première consultation {{getFirstVisitEvent().creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
+            </ng-container>
+            <hr />
+          </ng-container>
         </ng-container>
 
         <ng-container *appPermission="permissions.deleteReport">

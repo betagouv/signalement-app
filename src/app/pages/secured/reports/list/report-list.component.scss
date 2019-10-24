@@ -179,15 +179,6 @@ form {
   }
 }
 
-.item {
-  border-bottom: 1px solid $theme-border-lighter;
-  padding: 1em;
-
-  &:hover {
-    background: $lightest-grey;
-  }
-}
-
 .banner {
   margin-bottom: 2em;
 }
@@ -246,4 +237,24 @@ form {
 
 .bold {
   font-weight: bold;
+}
+
+.container.pro {
+
+  .item {
+    border-bottom: 1px solid $theme-border-lighter;
+    padding: 1em;
+
+    &:hover {
+      background: $lightest-grey;
+    }
+  }
+
+  .status-non-consulte {
+    font-weight: bold;
+  }
+
+  .attach-icon {
+    margin-left: -20px;
+  }
 }

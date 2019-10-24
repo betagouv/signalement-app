@@ -253,15 +253,20 @@
       <ngx-loading [show]="loading"></ngx-loading>
     </table>
   </div>
-  <div class="container max-width mb-2" *appRole="[roles.Pro]">
+  <div class="container pro max-width mb-2" *appRole="[roles.Pro]">
     <div class="notification error" *ngIf="loadingError">
       Une erreur technique s'est produite
     </div>
     <ng-container *ngFor="let reportsByDate of reportsByDate">
-      <div class="col-12 item pointer" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
-        <span [class]="getReportCssClassNewReport(report.status)">Signalement reçu le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss' }}</span>
-        <i class="material-icons md-18" aria-hidden="true" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
-        <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
+      <div class="row item pointer {{getReportCssClass(report.status)}}" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
+        <div class="col-12 col-lg-6">
+          <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
+          {{report.creationDate | date : 'dd/MM/yyyy' }} - {{report.category}}
+        </div>
+        <div class="col-12 col-lg-6">
+          {{report.status}}
+          <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
+        </div>
       </div>
     </ng-container>
     <ngx-loading [show]="loading"></ngx-loading>

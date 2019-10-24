@@ -13,10 +13,10 @@ export class ReportEventAction {
   withResult: boolean;
 }
 
-export const ProAnswerReportEventAction = Object.assign(new ReportEventAction(), {
-  name: 'Réponse du professionnel au signalement',
-  withResult: true
-});
+export enum EventActions {
+  FirstVisitEventAction = 'Envoi du signalement',
+  ProAnswerReportEventAction = 'Réponse du professionnel au signalement'
+}
 
 export class ReportResponse {
   responseType: ReportResponseTypes;
