@@ -18,7 +18,7 @@
   <section class="section section-white d-none d-lg-block">
     <div class="container">
       <h2 class="text-center mb-4">Comment ça marche ?</h2>
-      <div class="row">
+      <div class="row" (click)="scrollToElement(categoryList)">
         <div class="col-12 col-sm-3">
           <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
         </div>
