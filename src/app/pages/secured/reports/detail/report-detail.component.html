@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-2 col-sm-1 text-right">
-        <img src="/assets/images/icon_back.png" class="back pointer" (click)="back()" alt="page précédente"/>
+        <img src="/assets/images/icon_back_white.png" class="back pointer" (click)="back()" alt="page précédente"/>
       </div>
       <div class="col-10 col-sm-11">
         <h1 class="text-center">
@@ -302,11 +302,14 @@
           </div>
           <ng-container *appRole="[roles.Pro]">
             Signalement créé {{report.creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
-            <ng-container *ngIf="getFirstVisitEvent()">
+            <ng-container *ngIf="getEvent(eventActionValues.FirstVisit)">
               <br />
-              Première consultation {{getFirstVisitEvent().creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
+              Première consultation {{getEvent(eventActionValues.FirstVisit).creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
             </ng-container>
-            <hr />
+            <ng-container *ngIf="getReportResponse()">
+              <br />
+              Réponse apportée le {{getEvent(eventActionValues.ReportResponse).creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
+            </ng-container>
           </ng-container>
         </ng-container>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Report } from '../../../../model/Report';
+import { Report, ReportStatus } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
@@ -25,6 +25,7 @@ export class ReportDetailComponent implements OnInit {
 
   reportId: string;
 
+  eventActionValues = EventActionValues
   permissions = Permissions;
   roles = Roles;
   report: Report;
@@ -341,12 +342,12 @@ export class ReportDetailComponent implements OnInit {
     return this.showErrors && formControl.errors;
   }
 
-  getFirstVisitEvent() {
-    return this.events.find(event => event.action.value === EventActionValues.FirstVisit);
+  getEvent(eventActionValue: EventActionValues) {
+    return this.events.find(event => event.action.value === eventActionValue);
   }
 
   getReportResponse(): ReportResponse {
-    const reportResponseEvent = this.events.find(event => event.action.value === EventActionValues.ReportResponse);
+    const reportResponseEvent = this.getEvent(EventActionValues.ReportResponse);
     if (reportResponseEvent) {
       return reportResponseEvent.details as ReportResponse;
     }
@@ -359,6 +360,6 @@ export class ReportDetailComponent implements OnInit {
   }
 
   isClosed() {
-    return ['Signalement mal attribué', 'Signalement non consulté', 'Signalement consulté ignoré'].indexOf(this.report.status) !== -1;
+    return this.report.status === ReportStatus.ClosedForPro;
   }
 }

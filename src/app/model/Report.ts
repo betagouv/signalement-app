@@ -18,6 +18,11 @@ export enum Step {
   Information = 'Information'
 }
 
+
+export enum ReportStatus {
+  ClosedForPro = 'Clôturé'
+}
+
 export class Report {
   id: string;
   category: string;
