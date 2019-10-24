@@ -1,4 +1,4 @@
-<div class="overflow-container">
+<div class="overflow-container" xmlns="http://www.w3.org/1999/html">
   <div class="banner text-center section section-primary" role="region">
     <div class="container">
       <h1 class="text-center">
@@ -7,116 +7,158 @@
     </div>
   </div>
 
-  <div class="filters" *appRole="[roles.Admin, roles.DGCCRF]">
+  <div class="filters">
     <form (ngSubmit)="submitFilters()">
-      <div class="row form-group">
-        <div class="col-2 text-right">
-          <label>
-            Département(s)
-          </label>
-        </div>
-        <div class="col-4 text-left">
-          <div class="btn-group" dropdown>
-            <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" aria-controls="dropdown-basic">
-              {{getAreaLabel()}} <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-              <li role="menuitem" class="menutitle">
-                  <span class="pointer dropdown-item menutitle" (click)="selectArea()">
-                    Tous les départements
-                  </span>
-              </li>
-              <ng-container *ngFor="let region of regions">
-                <li class="divider dropdown-divider"></li>
-                <li class="menutitle pt-0" role="menuitem">
-                  <span class="pointer dropdown-item menutitle" (click)="selectArea(region)">
-                    {{region.label}}
-                  </span>
+      <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+        <div class="row form-group">
+          <div class="col-2 text-right">
+            <label>
+              Département(s)
+            </label>
+          </div>
+          <div class="col-4 text-left">
+            <div class="btn-group" dropdown>
+              <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" aria-controls="dropdown-basic">
+                {{getAreaLabel()}} <span class="caret"></span>
+              </button>
+              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem" class="menutitle">
+                    <span class="pointer dropdown-item menutitle" (click)="selectArea()">
+                      Tous les départements
+                    </span>
                 </li>
-                <li role="menuitem" *ngFor="let department of region.departments">
-                  <span class="pointer dropdown-item" (click)="selectArea(department)">
-                    {{department.code}} - {{department.label}}
-                  </span>
-                </li>
-              </ng-container>
-            </ul>
+                <ng-container *ngFor="let region of regions">
+                  <li class="divider dropdown-divider"></li>
+                  <li class="menutitle pt-0" role="menuitem">
+                    <span class="pointer dropdown-item menutitle" (click)="selectArea(region)">
+                      {{region.label}}
+                    </span>
+                  </li>
+                  <li role="menuitem" *ngFor="let department of region.departments">
+                    <span class="pointer dropdown-item" (click)="selectArea(department)">
+                      {{department.code}} - {{department.label}}
+                    </span>
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+          <div class="col-2 text-right">
+            <label for="period">
+              Période
+            </label>
+          </div>
+          <div class="col-4 text-left">
+            <input type="text"
+                   [(ngModel)]="reportFilter.period"
+                   name="period"
+                   id="period"
+                   placeholder="Daterangepicker"
+                   placeholder="Période sélectionnée"
+                   bsDaterangepicker
+                   autocomplete="off"
+                   [bsConfig]="{
+                     containerClass: 'theme-default',
+                     rangeInputFormat: 'DD MMMM YYYY'
+                   }" />
           </div>
         </div>
-        <div class="col-2 text-right">
-          <label for="period">
-            Période
-          </label>
+        <div class="row form-group">
+          <div class="col-2 text-right">
+            <label for="siretFilter">
+              Siret
+            </label>
+          </div>
+          <div class="col-4 text-left">
+            <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
+          </div>
+          <div class="col-2 text-right">
+            <label for="statusFilter">
+              Statut
+            </label>
+          </div>
+          <div class="col-4 text-left">
+            <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
+              <option value="" selected>Tous les statuts</option>
+              <option *ngFor="let status of statusList">
+                {{status}}
+              </option>
+            </select>
+          </div>
         </div>
-        <div class="col-4 text-left">
-          <input type="text"
-                 [(ngModel)]="reportFilter.period"
-                 name="period"
-                 id="period"
-                 placeholder="Daterangepicker"
-                 placeholder="Période sélectionnée"
-                 bsDaterangepicker
-                 autocomplete="off"
-                 [bsConfig]="{
-                   containerClass: 'theme-default',
-                   rangeInputFormat: 'DD MMMM YYYY'
-                 }" />
+        <div class="row form-group">
+          <div class="col-2 text-right">
+            <label for="categoryFilter">
+              Catégorie
+            </label>
+          </div>
+          <div class="col-4 text-left">
+            <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" [class]="reportFilter.category ? 'selected' : ''">
+              <option value="" selected>Toutes les catégories</option>
+              <option *ngFor="let category of categories">
+                {{category}}
+              </option>
+            </select>
+          </div>
+          <div class="col-2 text-right">
+            <label for="detailsFilter">
+              Mots-clés&nbsp;<i class="material-icons md-dark" aria-hidden="true" title="Recherche dans les colonnes problème et description">help_outline</i>
+            </label>
+          </div>
+          <div class="col-4 text-left">
+            <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" />
+          </div>
         </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-2 text-right">
-          <label for="siretFilter">
-            Siret
-          </label>
+      </ng-container>
+      <div class="container max-width" *appRole="[roles.Pro]">
+        <div class="row form-group">
+          <div class="col-3 col-lg-4 text-right">
+            <label for="period">
+              Période
+            </label>
+          </div>
+          <div class="col-9 col-lg-8 text-left">
+            <input type="text"
+                   [(ngModel)]="reportFilter.period"
+                   name="period"
+                   id="period"
+                   placeholder="Daterangepicker"
+                   placeholder="Période sélectionnée"
+                   bsDaterangepicker
+                   autocomplete="off"
+                   [bsConfig]="{
+                     containerClass: 'theme-default',
+                     rangeInputFormat: 'DD MMMM YYYY'
+                   }" />
+          </div>
         </div>
-        <div class="col-4 text-left">
-          <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
-        </div>
-        <div class="col-2 text-right">
-          <label for="statusFilter">
-            Statut
-          </label>
-        </div>
-        <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
-            <option value="" selected>Tous les statuts</option>
-            <option *ngFor="let status of statusList">
-              {{status}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-2 text-right">
-          <label for="categoryFilter">
-            Catégorie
-          </label>
-        </div>
-        <div class="col-4 text-left">
-          <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" [class]="reportFilter.category ? 'selected' : ''">
-            <option value="" selected>Toutes les catégories</option>
-            <option *ngFor="let category of categories">
-              {{category}}
-            </option>
-          </select>
-        </div>
-        <div class="col-2 text-right">
-          <label for="detailsFilter">
-            Mots-clés&nbsp;<i class="material-icons md-dark" aria-hidden="true" title="Recherche dans les colonnes problème et description">help_outline</i>
-          </label>
-        </div>
-        <div class="col-4 text-left">
-          <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" />
+        <div class="row form-group">
+          <div class="col-3 col-lg-4 text-right">
+            <label for="statusFilter">
+              Statut
+            </label>
+          </div>
+          <div class="col-9 col-lg-8 text-left">
+            <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
+              <option value="" selected>Tous les statuts</option>
+              <option *ngFor="let status of statusList">
+                {{status}}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-12 text-center">
-          <button type="button" class="btn btn-outline-primary" (click)="cancelFilters()">Effacer les filtres</button>
-          &nbsp;
-          <button type="submit" class="btn btn-primary">Filtrer les signalements</button>
-          &nbsp;
+        <div class="col-12 text-center">          &nbsp;
+          <button type="submit" class="btn btn-primary">Filtrer les signalements</button>          &nbsp;
           <a href="{{reportExtractUrl}}">
             <img alt="bouton exporter en XLS" title="exporter en XLS" src="/assets/images/icon_export_xls.png"/>
           </a>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-12 text-center">
+          <span class="link pointer" (click)="cancelFilters()">Effacer les filtres</span>
         </div>
       </div>
     </form>
@@ -253,7 +295,7 @@
       <ngx-loading [show]="loading"></ngx-loading>
     </table>
   </div>
-  <div class="container pro max-width mb-2" *appRole="[roles.Pro]">
+  <div class="container pro max-width mb-2 position-relative" *appRole="[roles.Pro]">
     <div class="notification error" *ngIf="loadingError">
       Une erreur technique s'est produite
     </div>
