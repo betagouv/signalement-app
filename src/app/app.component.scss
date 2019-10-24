@@ -64,7 +64,12 @@
   .link {
     color: $primary;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
+    
+    &:hover {
+      color: $dark-blue;
+      text-decoration: underline;
+    }
   }
 
   .pointer {
