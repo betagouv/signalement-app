@@ -284,7 +284,7 @@
                 <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
                   <span class="collapsed-icon">&#43;</span>
                   <span class="uncollapsed-icon">&#8722;</span>
-                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
+                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.value}}
                 </a>
                 <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
                   {{event.details.description}}
@@ -292,7 +292,7 @@
               </ng-container>
               <ng-template #noDescription>
                 <span>
-                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
+                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.value}}
                 </span>
               </ng-template>
             </div>

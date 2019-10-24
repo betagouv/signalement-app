@@ -9,13 +9,13 @@ export class ReportEvent {
 }
 
 export class ReportEventAction {
-  name: string;
-  withResult: boolean;
+  value: string;
 }
 
-export enum EventActions {
-  FirstVisitEventAction = 'Envoi du signalement',
-  ProAnswerReportEventAction = 'Réponse du professionnel au signalement'
+export enum EventActionValues {
+  FirstVisit = 'Envoi du signalement',
+  ReportResponse = 'Réponse du professionnel au signalement',
+  PostalSend = 'Envoi d\'un courrier'
 }
 
 export class ReportResponse {

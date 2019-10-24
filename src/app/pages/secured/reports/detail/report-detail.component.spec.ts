@@ -15,7 +15,7 @@ import { ReportService } from '../../../../services/report.service';
 import { Report } from '../../../../model/Report';
 import { EventService } from '../../../../services/event.service';
 import { Consumer } from '../../../../model/Consumer';
-import { ProAnswerReportEventAction, ReportEvent } from '../../../../model/ReportEvent';
+import { EventActionValues, ReportEvent } from '../../../../model/ReportEvent';
 
 describe('ReportDetailComponent', () => {
 
@@ -35,7 +35,7 @@ describe('ReportDetailComponent', () => {
   });
 
   const answerEventFixture = Object.assign(new ReportEvent(), {
-    action: ProAnswerReportEventAction,
+    action: {value : EventActionValues.ReportResponse},
     details: {
       responseType: 'ACCEPTED',
       consumerDetails: 'details'
@@ -116,7 +116,8 @@ describe('ReportDetailComponent', () => {
         const nativeElement = fixture.nativeElement;
         expect(nativeElement.querySelector('#answerBtn')).toBeNull();
         expect(nativeElement.querySelector('#proAnswer')).not.toBeNull();
-        expect(nativeElement.querySelector('#proAnswer').textContent.indexOf(answerEventFixture.details.consumerDetails)).toBeGreaterThan(-1);
+        expect(nativeElement.querySelector('#proAnswer').textContent
+          .indexOf(answerEventFixture.details.consumerDetails)).toBeGreaterThan(-1);
       });
 
     });
