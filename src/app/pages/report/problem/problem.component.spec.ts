@@ -4,8 +4,6 @@ import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { deserialize } from 'json-typescript-mapper';
-import { TruncatePipe } from '../../../pipes/truncate.pipe';
-import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,6 +16,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { AbTestsService } from 'angular-ab-tests';
 import { MockAbTestsService } from '../../../../test';
+import { ComponentsModule } from '../../../components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 describe('ProblemComponent', () => {
 
@@ -53,8 +53,6 @@ describe('ProblemComponent', () => {
         ProblemComponent,
         SubcategoryComponent,
         BreadcrumbComponent,
-        CollapsableTextComponent,
-        TruncatePipe,
       ],
       imports: [
         FormsModule,
@@ -62,7 +60,9 @@ describe('ProblemComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: `myPath/${ReportPaths.Details}`, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        ComponentsModule,
+        PipesModule,
       ],
       providers: [
         { provide: AbTestsService, useClass: MockAbTestsService },

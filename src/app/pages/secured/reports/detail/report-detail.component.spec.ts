@@ -16,6 +16,8 @@ import { Report, ReportStatus } from '../../../../model/Report';
 import { EventService } from '../../../../services/event.service';
 import { Consumer } from '../../../../model/Consumer';
 import { EventActionValues, ReportEvent } from '../../../../model/ReportEvent';
+import { ComponentsModule } from '../../../../components/components.module';
+import { PipesModule } from '../../../../pipes/pipes.module';
 
 describe('ReportDetailComponent', () => {
 
@@ -47,7 +49,7 @@ describe('ReportDetailComponent', () => {
       declarations: [
         ReportDetailComponent,
         AppRoleDirective,
-        AppPermissionDirective
+        AppPermissionDirective,
       ],
       imports: [
         FormsModule,
@@ -56,6 +58,8 @@ describe('ReportDetailComponent', () => {
         HttpClientModule,
         ModalModule.forRoot(),
         RouterTestingModule,
+        ComponentsModule,
+        PipesModule,
       ]
     })
     .compileComponents();

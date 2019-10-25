@@ -129,48 +129,10 @@
 
       </div>
       <div class="form__group">
-        <label>
-          <i class="material-icons md-24" aria-hidden="true">attach_file</i>
-          {{this.getReportLastSubcategory()?.fileLabel ? this.getReportLastSubcategory().fileLabel : 'Pièces jointes'}}
-        </label>
-        <div class="row text-center">
-          <div class="col-12 offset-md-6 col-md-6">
-            <table class="table table-sm">
-              <tbody>
-              <tr *ngFor="let uploadedFile of uploadedFiles">
-                <td class="text-left" style="position: relative" *ngIf="uploadedFile.loading" colspan="2">
-                  {{uploadedFile.displayedFilename}}
-                  <ngx-loading [show]="uploadedFile.loading" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
-                </td>
-                <td class="text-left" *ngIf="!uploadedFile.loading">
-                  <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                    <span *ngIf="uploadedFile.id">
-                      {{uploadedFile.displayedFilename}}
-                    </span>
-                    <span *ngIf="!uploadedFile.id" class="error">
-                      {{getErrorFilename(uploadedFile.filename)}}
-                    </span>
-                  </a>
-                </td>
-                <td class="text-right pointer" *ngIf="!uploadedFile.loading">
-                  <i class="material-icons md-24 blue" title="Supprimer la pièce jointe" (click)="removeUploadedFile(uploadedFile)">remove_circle_outline</i>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="notification error" *ngIf="tooLargeFilename">
-          Le fichier <i>"{{tooLargeFilename}}"</i> est trop volumineux, veuillez choisir un fichier de moins de 5Mo.
-        </div>
-        <div class="row pb-3">
-          <div class="col-12 text-center">
-            <input type="file" #fileInput class="form-control-file" hidden (change)="selectFile()">
-            <button type="button" class="btn btn-outline-primary"(click)="bringFileSelector()">
-              Ajouter
-            </button>
-          </div>
-        </div>
+        <app-attachments [label]="this.getReportLastSubcategory()?.fileLabel"
+                         [uploadedFiles]="uploadedFiles"
+                         [origin]="fileOrigins.Consumer">
+        </app-attachments>
         <div class="note">
           Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part du professionnel.
         </div>

@@ -5,12 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { DetailInputValue, Report, Step } from '../../../model/Report';
 import { DetailInput, Subcategory } from '../../../model/Anomaly';
-import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { ReportPaths } from '../../../services/report-router.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -18,6 +16,8 @@ import moment from 'moment';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { AbTestsService } from 'angular-ab-tests';
 import { MockAbTestsService } from '../../../../test';
+import { ComponentsModule } from '../../../components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 describe('DetailsComponent', () => {
 
@@ -70,8 +70,6 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         BreadcrumbComponent,
-        CollapsableTextComponent,
-        TruncatePipe,
       ],
       imports: [
         FormsModule,
@@ -81,7 +79,9 @@ describe('DetailsComponent', () => {
         BsDatepickerModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
         NgxLoadingModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        ComponentsModule,
+        PipesModule,
       ],
       providers: [
         { provide: AbTestsService, useClass: MockAbTestsService },

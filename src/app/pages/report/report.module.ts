@@ -15,12 +15,11 @@ import { AlertModule, BsDatepickerModule, CarouselModule, defineLocale, frLocale
 import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { Angulartics2Module } from 'angulartics2';
-import { CollapsableTextComponent } from '../../components/collapsable-text/collapsable-text.component';
-import { PrecedeByPipe } from '../../pipes/precede-by.pipe';
-import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { AutofocusDirective } from '../../directives/auto-focus.directive';
+import { ComponentsModule } from '../../components/components.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 defineLocale('fr', frLocale);
 
@@ -39,11 +38,8 @@ const routes: Routes = [];
     IllustrationCardComponent,
     InformationComponent,
     AcknowledgmentComponent,
-    CollapsableTextComponent,
-    PrecedeByPipe,
-    TruncatePipe,
     SubcategoryComponent,
-    AutofocusDirective
+    AutofocusDirective,
   ],
   entryComponents: [
     CategoryComponent,
@@ -65,11 +61,13 @@ const routes: Routes = [];
     Ng2CompleterModule,
     Angulartics2Module.forRoot(),
     RouterModule.forChild(routes),
-    CarouselModule
+    CarouselModule,
+    ComponentsModule,
+    PipesModule
   ],
   exports: [
     RouterModule,
-    AutofocusDirective
+    AutofocusDirective,
   ]
 })
 export class ReportModule { }

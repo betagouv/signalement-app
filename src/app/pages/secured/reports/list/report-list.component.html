@@ -272,15 +272,15 @@
               </ng-template>
             </td>
             <td class="pre">
-              <span *ngFor="let file of report.uploadedFiles | slice : 0 : 2; let isFirst=first;" [tooltip]="file.filename">
+              <span *ngFor="let file of report.consumerUploadedFiles | slice : 0 : 2; let isFirst=first;" [tooltip]="file.filename">
                 <a href="{{getFileDownloadUrl(file)}}">
                   {{file.displayedFilenameSmall}}
                 </a>
                 <br *ngIf="isFirst" />
               </span>
-              <span *ngIf="report.uploadedFiles.length > 2" [tooltip]="moreFileTooltip">&nbsp;<i class="material-icons md-18" aria-hidden="true" title="Il existe des sous-catégories">keyboard_arrow_down</i></span>
+              <span *ngIf="report.consumerUploadedFiles.length > 2" [tooltip]="moreFileTooltip">&nbsp;<i class="material-icons md-18" aria-hidden="true" title="Il existe des sous-catégories">keyboard_arrow_down</i></span>
               <ng-template #moreFileTooltip>
-                <span *ngFor="let file of report.uploadedFiles">{{file.filename}}<br /></span>
+                <span *ngFor="let file of report.consumerUploadedFiles">{{file.filename}}<br /></span>
               </ng-template>
             </td>
             <td [class]="getReportCssClass(report.status)">
@@ -302,7 +302,7 @@
     <ng-container *ngFor="let reportsByDate of reportsByDate">
       <div class="row item pointer {{getReportCssClass(report.status)}}" *ngFor="let report of reportsByDate.reports" [routerLink]="['report', report.id]">
         <div class="col-12 col-lg-6">
-          <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.uploadedFiles.length">attach_file</i>
+          <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length">attach_file</i>
           {{report.creationDate | date : 'dd/MM/yyyy' }} - {{report.category}}
         </div>
         <div class="col-12 col-lg-6">

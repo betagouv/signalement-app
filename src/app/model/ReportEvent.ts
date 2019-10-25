@@ -22,6 +22,7 @@ export class ReportResponse {
   responseType: ReportResponseTypes;
   consumerDetails: string;
   dgccrfDetails: string;
+  fileIds: string[];
 }
 
 

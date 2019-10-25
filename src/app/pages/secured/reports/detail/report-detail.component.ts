@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Report, ReportStatus } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
-import { UploadedFile } from '../../../../model/UploadedFile';
+import { FileOrigin, UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import { combineLatest } from 'rxjs';
 import { EventService } from '../../../../services/event.service';
@@ -63,6 +63,8 @@ export class ReportDetailComponent implements OnInit {
   responseTypeCtrl: FormControl;
   responseSuccess: boolean;
   reportResponseTypes = ReportResponseTypes;
+  fileOrigins = FileOrigin;
+  uploadedFiles: UploadedFile[];
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -301,10 +303,17 @@ export class ReportDetailComponent implements OnInit {
       responseDgccrfDetails: this.responseDgccrfDetailsCtrl,
       responseType: this.responseTypeCtrl
     });
+    if (!this.uploadedFiles) {
+      this.uploadedFiles = [];
+    }
   }
 
   hideProAnswerForm() {
     this.responseForm = undefined;
+  }
+
+  isUploadingFile() {
+    return this.uploadedFiles.find(file => file.loading);
   }
 
   submitProAnswerForm() {
@@ -318,7 +327,8 @@ export class ReportDetailComponent implements OnInit {
         Object.assign(new ReportResponse(), {
           responseType: this.responseTypeCtrl.value,
           consumerDetails: this.responseConsumerDetailsCtrl.value,
-          dgccrfDetails: this.responseDgccrfDetailsCtrl.value
+          dgccrfDetails: this.responseDgccrfDetailsCtrl.value,
+          fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
         })
       ).pipe(
         switchMap(() => {
@@ -327,6 +337,7 @@ export class ReportDetailComponent implements OnInit {
       ).subscribe(
         events => {
           this.events = events;
+          this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
           this.loading = false;
           this.responseSuccess = true;
         },

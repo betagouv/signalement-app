@@ -51,12 +51,12 @@
                 <span [innerHTML]="detailInputValue.label"></span>
                 &nbsp;<span [innerHTML]="detailInputValue.value"></span>
               </div>
-              <div *ngIf="report.uploadedFiles && report.uploadedFiles.length;">
+              <div *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length;">
                 Pièce(s) jointe(s) :
                 <div class="col-12">
                   <table class="table table-sm">
                     <tbody>
-                      <tr *ngFor="let uploadedFile of report.uploadedFiles">
+                      <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
                         <td class="text-left" *ngIf="!uploadedFile.loading">
                           <a href="{{getFileDownloadUrl(uploadedFile)}}">
                             <span *ngIf="uploadedFile.id">
@@ -273,6 +273,16 @@
               <br />Réponse à la DGCCRF : {{getReportResponse().dgccrfDetails}}
             </div>
           </div>
+          <div *ngIf="report.professionalUploadedFiles && report.professionalUploadedFiles.length">
+            Pièce(s) jointe(s) à la réponse :
+            <div class="col-12" *ngFor="let uploadedFile of report.professionalUploadedFiles">
+              <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                          <span *ngIf="uploadedFile.id">
+                            {{uploadedFile.filename}}
+                          </span>
+              </a>
+            </div>
+          </div>
         </ng-container>
 
         <ng-container>
@@ -319,7 +329,7 @@
             Supprimer ce signalement
           </button>
           <ng-template #delete>
-            <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
+            <div class="modal-body text-center" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length; else noFiles">
               Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
               <br />
               <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
@@ -399,7 +409,7 @@
 
               <ng-container *ngIf="responseTypeCtrl.valid">
 
-                <div class="form__group">
+                <div class="form__group pb-2">
                   <label for="proAnswerInput" [class]="hasError(responseConsumerDetailsCtrl) ? 'error' : ''" [ngSwitch]="responseTypeCtrl.value">
                     <span *ngSwitchCase="reportResponseTypes.Accepted">Détaillez les actions préventives / correctives que vous allez mettre en place.</span>
                     <span *ngSwitchDefault>Apportez une réponse au consommateur</span>
@@ -411,12 +421,19 @@
 
                 <hr />
 
-                <div class="form__group">
+                <div class="form__group pt-2">
                   <label for="proAnswerDgccrfInput">
-                    Vous pouvez également, si vous le souhaitez, apporter une précision à l'attention de la DGCCRF qui ne sera pas transmise au consommateur
+                    Vous pouvez également, si vous le souhaitez, apporter une précision <u>à l'attention de la DGCCRF</u> qui ne sera pas transmise au consommateur
                   </label>
                   <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3" placeholder="Cette réponse pourra être consultée par la DGCCRF uniquement.">
                   </textarea>
+                </div>
+
+                <div class="form__group">
+                  <app-attachments label="Pièces jointes <u>à l'attention de la DGCCRF</u>"
+                                   [uploadedFiles]="uploadedFiles"
+                                   [origin]="fileOrigins.Professional">
+                  </app-attachments>
                 </div>
 
               </ng-container>
@@ -432,7 +449,9 @@
               <div class="mt-4 text-center">
                 <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
                 &nbsp;
-                <button type="submit" class="btn btn-lg btn-primary">Envoyer</button>
+                <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                  Envoyer
+                </button>
               </div>
             </form>
             <ngx-loading [show]="loading"></ngx-loading>
