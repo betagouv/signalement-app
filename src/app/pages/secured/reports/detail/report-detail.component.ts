@@ -337,7 +337,7 @@ export class ReportDetailComponent implements OnInit {
       ).subscribe(
         events => {
           this.events = events;
-          this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
+          this.report.uploadedFiles = [...this.report.uploadedFiles, ...this.uploadedFiles.filter(file => file.id)];
           this.loading = false;
           this.responseSuccess = true;
         },
