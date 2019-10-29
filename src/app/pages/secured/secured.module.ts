@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'suivi-des-signalements/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
   { path: 'compte/mot-de-passe', component: PasswordComponent, canActivate: [AuthGuard] },
-  { path: 'compte/activation', component: AccountActivationComponent, canActivate: [AuthGuard] },
+  { path: 'compte/activation', component: AccountActivationComponent },
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
 ];
 

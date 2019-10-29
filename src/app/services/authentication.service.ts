@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { AuthUser, User } from '../model/AuthUser';
-import { Api, AuthUserStorageKey, ServiceUtils } from './service.utils';
+import { AuthUser, User, TokenInfo } from '../model/AuthUser';
+import { Api, AuthUserStorageKey, TokenInfoStorageKey, ServiceUtils } from './service.utils';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
@@ -13,7 +13,9 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthenticationService {
 
   private userSource = new BehaviorSubject<User>(undefined);
+  private tokenInfoSource = new BehaviorSubject<TokenInfo>(undefined);
   user = this.userSource.asObservable();
+  tokenInfo = this.tokenInfoSource.asObservable();
 
   jwtHelperService = new JwtHelperService();
 
@@ -24,6 +26,12 @@ export class AuthenticationService {
       if (authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token)) {
         this.userSource.next(authUser.user);
       }
+    });
+    this.localStorage.getItem(TokenInfoStorageKey).subscribe(tokenInfo => {
+        const minTimestamp = new Date();
+        minTimestamp.setHours(minTimestamp.getHours() - 1);
+        if (tokenInfo && tokenInfo.timestamp > minTimestamp)
+          this.tokenInfoSource.next(tokenInfo);
     });
   }
 
@@ -72,6 +80,31 @@ export class AuthenticationService {
       this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate', 'password', 'reset']),
       { password },
       Object.assign(this.serviceUtils.getHttpHeaders(), { params: httpParams })
+    );
+  }
+
+  fetchTokenInfo(siret: string, token: string) {
+    return this.http.get<TokenInfo>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', 'token']),
+      {
+        params:
+          new HttpParams()
+            .set('siret', siret)
+            .set('token', token),
+        ...this.serviceUtils.getHttpHeaders()
+      }
+    )
+    .pipe(
+      map(data => {
+        if (data) {
+          const tokenInfo = <TokenInfo>Object.assign({timestamp: new Date()}, data);
+          this.localStorage.setItemSubscribe(TokenInfoStorageKey, tokenInfo);
+          this.tokenInfoSource.next(tokenInfo);
+          return tokenInfo;
+        } else {
+          throw Error('Token invalide');
+        }
+      })
     );
   }
 }

@@ -16,6 +16,12 @@ export class AuthUser {
   user: User;
 }
 
+export class TokenInfo {
+  token: String;
+  companySiret: String;
+  timestamp: Date;
+}
+
 export enum Permissions {
   listReports = 'listReports',
   updateReport = 'updateReport',
