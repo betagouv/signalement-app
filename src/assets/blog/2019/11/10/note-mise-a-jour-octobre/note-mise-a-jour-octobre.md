@@ -6,7 +6,7 @@ Chaque mois sur le Blog SignalConso, nous vous indiquons tous les ajouts et modi
 
 D’abord, les **nouvelles catégories sont maintenant généralisées à tout le site**. Après avoir recueilli tous vos **retours d’expériences** durant notre phase d’A/B Testing, nous avons compris qu’il était plus simple pour les consommateurs de faire un signalement en partant du **type d’établissement** plutôt que du type de problème. Nous avons donc remplacé l’ancien système ! Vous souhaitez faire un signalement mais vous ne trouvez pas le type d’établissement dans la liste existante ? Pas de panique ! **Nous allons continuer à étoffer cette liste au gré des semaines.**
 
-![photo-accueil](/assets/blog/2019/11/10/note-mise-a-jour-octobre/accueil.jpg)
+![photo-accueil](/assets/blog/2019/11/10/note-mise-a-jour-octobre/accueil.JPG)
 
 Deuxième nouveauté : **SignalConso fait peau neuve** ! Vous l’avez peut-être constaté, SignalConso a pris des couleurs. Cette mise à jour est la première étape d’une **refonte graphique globale** et nous sommes très heureux de l’avoir dévoilé ce mois-ci. Gardez l’oeil ouvert, le mois prochain apportera aussi son lot de nouveautés esthétiques. Comme toujours, si vous avez des commentaires ou des suggestions, vous pouvez nous [envoyer un email](mailto:contact@signalconso.beta.gouv.fr)
 
