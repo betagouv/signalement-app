@@ -21,6 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { Department, Region, Regions } from '../../../../model/Region';
+import oldCategories from '../../../../../assets/data/old-categories.json';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
@@ -116,7 +117,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.loadingError = true;
       });
 
-    this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
+    this.categories =
+      [
+        ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
+        ...oldCategories
+      ];
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
