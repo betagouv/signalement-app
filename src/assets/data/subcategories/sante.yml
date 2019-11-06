@@ -1,0 +1,420 @@
+- title: Produit de santé
+  example: 'Exemple : médicament, bas de contention, prothèse, lunette, pansement, fauteuil roulant, compléments alimentaires, autres produits achetés en pharmacie ou rayon pharmacie'
+  subcategories:
+    - title: J'ai eu un problème de santé / sécurité avec un produit
+      example: 'Exemple : allergie, vomissement, électrocution'
+      subcategoriesTitle: Quel est le type de produit ?
+      subcategories:
+        - title: Un médicament
+          information:
+            title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la santé.
+            content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">cliquant sur ce lien</a>
+        - title: Un objet de santé
+          example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
+          information:
+            title: Les problèmes de sécurité doivent être signalés avec un formulaire spécifique afin de traiter plus rapidement votre signalement.
+            content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">cliquant sur ce lien</a>
+    - title: La publicité (ou les informations sur la boîte) est trompeuse
+      detailInputs:
+        - label: Date de constat (ou date d'achat)
+          rank: 1
+          type: DATE
+        - label: Quel est le nom du produit ?
+          rank: 2
+          type: TEXT
+        - label: Pourquoi trouvez-vous la publicité trompeuse ?
+          rank: 3
+          type: CHECKBOX
+          options:
+            - le produit ne remplit pas sa promesse
+            - la photo du produit est trompeuse
+            - les labels (bio, naturel etc.) sont trompeurs
+            - autre (à préciser)
+        - label: Où avez-vous vu ces informations ?
+          rank: 4
+          type: CHECKBOX
+          options:
+            - site internet
+            - publicité (affiche, dans un magazine)
+            - sur la boîte
+            - autre (à préciser)
+      fileLabel: Merci de joindre une photo de la publicité ou de la boîte afin de traiter au mieux votre signalement.
+    - title: Un produit de santé est de mauvaise qualité
+      example: 'Exemple : béquille qui se tord, audioprothèse qui se fissure rapidement, préservatif qui se perce'
+      detailInputs:
+        - label: Date de constat (ou date d'achat)
+          rank: 1
+          type: DATE
+        - label: Quel est le type de produit ?
+          rank: 2
+          type: RADIO
+          options:
+            - lunette / lentilles de contact
+            - prothèse
+            - béquille, fauteuil roulant
+            - contraception (préservatif)
+            - bas de contention
+            - appareil de mesure (thermomètre, tensiomètre etc.)
+            - autre (à préciser)
+        - label: Quelle sa marque et sa référence / numéro de modèle ? Vous pouvez trouver ces informations sur votre facture d'achat.
+          rank: 3
+          type: TEXT
+        - label: "Expliquez le problème en quelques mots :"
+          rank: 4
+          type: TEXT
+- title: Professionnel de la santé et médecine douce
+  example: 'Exemple : dentiste, opticien, kiné, psychiatre, médecine douce'
+  subcategoriesTitle: 'Quel type de médecine exerce-t-il ?'
+  subcategories:
+    - title: La médecine dite "conventionnelle"
+      example: 'C''est-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sage-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, nutritionniste, psychiatre, ou autre médecin spécialiste.'
+      subcategories:
+        - title: Les tarifs ne sont pas affichés en salle d'attente
+          example: Les tarifs doivent être clairement affichés dans la salle d'attente.
+          detailInputs:
+            - label: Date de constat
+              rank: 1
+              type: DATE
+            - label: Quel est le problème ?
+              rank: 2
+              type: RADIO
+              options:
+                - aucun affichage des prix
+                - affichage des prix incomplet
+                - les prix affichés ne sont pas à jour
+          fileLabel: Vous pouvez joindre une photo pour appuyer votre signalement.
+        - title: Le professionnel n'indique pas s' il est conventionné, ou s'il est secteur 1 ou secteur 2
+          example: Cette indication est obligatoire sur sa plaque (au niveau de sa porte ou du hall d'entrée) et dans la salle d'attente.
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+            - label: Quel est le problème ? (plsuieurs réponses possibles)
+              rank: 2
+              type: CHECKBOX
+              options:
+                - pas d'indication au niveau de sa plaque
+                - absence d'affichage dans sa salle d'attente (ou lieu d'exercice si il n'a pas de salle d'attente)
+            - label: "Si vous avez eu l'information par un autre moyen (mutuelle, recherche internet), pouvez-vous préciser s'il est :"
+              rank: 3
+              type: RADIO
+              options:
+                - conventionné secteur 1
+                - conventionné secteur 2
+                - non conventionné
+              optionnal: true
+        - title: Les prix sont exagérés
+          information:
+            title: Un professionnel de santé non conventionné peut choisir ses tarifs
+            content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
+              <br><br>Un médecin conventionné pratiquera des tarifs classiques.
+        - title: Problème de devis
+          example: "Exemple : je n'ai pas eu de devis, devis pas respecté"
+          subcategories:
+            - title: Je n'ai pas eu de devis écrit
+              example: Un devis est obligatoire dès que les dépassements d'honoraires et la prestation dépassent 70 euros. Un devis est obligatoire en cas de pose de couronne, implant, bridge etc. Un devis est oligatoire en chirurgie esthétique.
+              detailInputs:
+                - label: Date du rendez-vous
+                  rank: 1
+                  type: DATE
+                - label: Quel est le type de soin ?
+                  rank: 2
+                  type: RADIO
+                  options:
+                    - pose d'un implant, bridge, couronne
+                    - acte de chirurgie esthétique
+                    - autre soin / traitement supérieur à 70 euros
+                - label: Quelle est le problème ? (plusieurs réponses possibles)
+                  rank: 3
+                  type: CHECKBOX
+                  options:
+                    - le médecin/praticien m'a donné un prix à l'oral
+                    - le médecin/praticien ne pas m'a remis de devis écrit
+                - label: Combien a coûté le soin au total (environ) ?
+                  rank: 4
+                  type: TEXT
+            - title: Le devis est incomplet
+              detailInputs:
+                - label: Date du rendez-vous
+                  rank: 1
+                  type: DATE
+                - label: Combien a coûté le soin au total ?
+                  rank: 2
+                  type: TEXT
+                - label: Quelles informations manquent-ils sur votre devis  ? (plusieurs réponses possibles)
+                  rank: 3
+                  type: CHECKBOX
+                  options:
+                    - description détaillée du soin envisagé et/ou des matériaux utilisés
+                    - lieu de fabrication de la prothèse le cas échéant
+                    - montant des honoraires du soin
+                    - montant remboursé par l'assurance maladie
+            - title: J'ai payé plus cher que le devis
+              detailInputs:
+                - label: Date de constat
+                  rank: 1
+                  type: DATE
+                - label: Quel était le prix sur votre devis ?
+                  rank: 2
+                  type: TEXT
+                - label: Combien avez-vous payé ?
+                  rank: 3
+                  type: TEXT
+        - title: La prestation est mal (ou pas) réalisée
+          example: "Exemple : j'ai mal été soigné"
+          information:
+            title: Porter une réclamation sur la qualité d’un soin
+            content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
+    - title: La médecine dite "alternative" ou "douce"
+      example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute etc."
+      subcategories:
+        - title: Les prix ne sont pas affichés ou sont faux
+          example: "Les prix doivent être affichés en salle d'attente."
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Les prix sont-ils affichés en salle d'attente ?
+              rank: 2
+              type: RADIO
+              options:
+                - Oui
+                - Non
+            - label: S'ils sont affichés, ces prix sont-ils lisibles et compréhensibles ?
+              rank: 3
+              type: RADIO
+              options:
+                - Oui
+                - Non
+              optionnal: true
+            - label: S'ils sont affichés, ces prix sont-ils exacts ?
+              rank: 4
+              type: RADIO
+              options:
+                - Oui
+                - Non
+              optionnal: true
+          fileLabel: Vous pouvez joindre une photo
+        - title: Les prix sont trop chers
+          example: "Exemple : ce naturopathe est plus cher que ceux de la région"
+          information:
+            title: En médecine non conventionnelle, un praticien peut choisir librement ses prix.
+            content: "Il peut proposer des prix élevés et choisir d'être plus cher que ses concurrents. <br> Cependant il a une obligation : indiquer tous ces prix de façon claire. Vous devez connaître le prix avant de vous faire soigner. <br> Les prix doivent être affichés en salle d'attente de manière lisible."
+            actions:
+              - question: Vous n'avez pas eu connaissance des prix avant&#160;?
+                answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
+        - title: Je n'ai pas reçu de note (facture, ticket)
+          example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
+          detailInputs:
+            - label: Date de visite
+              rank: 1
+              type: DATE
+            - label: Si vous vous en rappelez, combien avez-vous payé ?
+              rank: 2
+              type: TEXT
+              optionnal: true
+            - label: Avez-vous demandé une note ?
+              rank: 3
+              type: RADIO
+              options:
+                - Oui
+                - Non
+        - title: La publicité ou la description du soin est trompeuse
+          example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse'
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+            - label: Que trouvez-vous trompeur ?
+              rank: 2
+              type: RADIO
+              options:
+                - la durée du soin
+                - une offre promotionnelle, une réduction de prix
+                - le résultat attendu / promis
+                - les labels (bio, vegan...) utilisés
+                - le diplôme du praticien
+                - des informations médicales fausses
+                - autre (à préciser)
+            - label: "Précisez en quelques mots pourquoi vous trouvez cela trompeur :"
+              rank: 3
+              type: TEXT
+              placeholder: Soyez factuel et courtois, merci !
+          fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
+    - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
+      subcategories:
+        - title: Une publicité est trompeuse ou non appliquée
+          example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+            - label: Que trouvez-vous trompeur ?
+              rank: 2
+              type: TEXTAREA
+          fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
+        - title: Je ne suis pas satisfait de la qualité de mes lunettes/prothèses
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+            - label: De quel produit s'agit-il ?
+              rank: 2
+              type: RADIO
+              options:
+                - lunette
+                - lentilles de contact
+                - prothèse
+            - label: Quel est la marque et le modèle ?
+              rank: 3
+              type: TEXT
+            - label: Quel est le problème ?
+              rank: 4
+              type: TEXT
+          fileLabel: Merci de joindre si possible une photo du produit ou de la facture d'achat.
+        - title: Autre
+- title: Hôpital / Clinique
+  subcategories:
+    - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
+      information:
+        title: Vous devez contacter la Commissions des Usagers
+        content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+    - title: J'ai dû payer un "forfait administratif"
+      example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
+      detailInputs:
+        - label: Date de sortie (ou date de la facture)
+          rank: 1
+          type: DATE
+        - label: Quel est le montant de ces frais ?
+          rank: 2
+          type: TEXT
+      fileLabel: Merci de joindre si posisble une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
+    - title: J'ai été facturé pour un supplément que je n'avais pas demandé
+      example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
+      detailInputs:
+        - label: Date de sortie (ou date de la facture)
+          rank: 1
+          type: DATE
+        - label: Quel supplément vous a-t-on facturé ?
+          rank: 2
+          type: TEXT
+          placeholder: chambre double, télévision, repas spécifique ...
+        - label: Aviez-vous demandé ce supplément ?
+          rank: 3
+          type: RADIO
+          options:
+            - Oui
+            - Non
+        - label: Quel est le prix de ce supplément ?
+          rank: 4
+          type: TEXT
+          optionnal: true
+        - label: L'hôpital/clinique vous a t-il justifié ce supplément ?
+          rank: 5
+          type: RADIO
+          options:
+            - Oui (à préciser)
+            - Non
+      fileLabel: Merci de joindre une photo de la facture si possible afin d'appuyer votre signalement.
+- title: Pharmacie
+  subcategories:
+    - title: Problème de prix
+      subcategories:
+        - title: Les prix ne sont pas indiqués
+          example: Les prix doivent être indiqués dans les rayons, visibles pour les médicaments situés derrière le comptoir. La pharmacie doit également avoir un catalogue des prix.
+          detailInputs:
+            - label: Date de constat
+              rank: 1
+              type: DATE
+            - label: Quel est le problème ? (plusieurs réponses possibles)
+              rank: 2
+              type: CHECKBOX
+              options:
+                - Les prix ne sont pas tous indiqués dans les rayons
+                - Les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
+                - Il n'y a pas de catalogue des prix disponible (papier ou sur écran)
+        - title: Les prix sont exagérés
+          information:
+            title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
+            content: Le pharmacien peut choisir les prix des médicaments non remboursables, et des produits divers de la pharmacie (biberon, brosse à dent, crème...). Les prix doivent être clairement indiqués sans devoir les demander.
+              Cas particulier des médicaments remboursables !
+              Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
+        - title: Autres
+    - title: Problème de commande
+- title: Ambulance
+  example: "et autre transport sanitaire (exemple : taxi)"
+- title: Cure
+  example: 'Exemple : thalassothérapie, thermalisme'
+  subcategories:
+    - title: Prix et facture
+      example: "Exemple : les prix ne sont pas affichés, pas de remise d'une facture"
+      subcategories:
+        - title: Les prix ne sont pas affichés
+          example: "Exemple : les prix des soins ne sont pas affichés, les prix affichés ne sont pas très clairs"
+          detailInputs:
+            - label: Date de constat
+              rank: 1
+              type: DATE
+            - label: Quel est le problème ?
+              rank: 2
+              type: RADIO
+              options:
+                - les prix ne sont pas affichés du tout
+                - les prix sont affichés de façon non visible
+                - les prix affichés ne sont pas clairs
+          fileLabel: Si possible merci de joindre une photo pour appuyer votre signalement.
+        - title: J'ai payé plus cher que les prix affichés
+          example: "Exemple : j'ai payé un supplément non prévu sans être prévenu, les prix affichés ne sont pas à jour "
+          detailInputs:
+            - label: Date de constat (ou date de paiement)
+              rank: 1
+              type: DATE
+            - label: Quel est le problème ?
+              rank: 2
+              type: CHECKBOX
+              options:
+                - les prix affichés ne sont pas à jour
+                - les prix des suppléments et options ne sont pas affichés
+                - "j'ai payé un supplément (exemple : supplément chambre simple) sans donner mon accord avant"
+          fileLabel: Si possible merci de joindre une photo de la facture ou de l'affichage des prix pour appuyer votre signalement.
+        - title: Je n'ai pas eu de facture (note)
+          detailInputs:
+            - label: Date de constat (ou date de paiement)
+              rank: 1
+              type: DATE
+            - label: Quel est le problème ?
+              rank: 2
+              type: RADIO
+              options:
+                - je n'ai pas eu de facture et je ne l'ai pas demandée
+                - j'ai demandé une facture mais on ne me l'a pas donnée
+    - title: Publicité trompeuse
+      example: 'Exemple : spa simple déclaré en thalassothérapie, soins qui ne correspondent pas à la description sur la publicité, utilisation frauduleuse du label Qualicert'
+      detailInputs:
+        - label: Date de constat
+          rank: 1
+          type: DATE
+        - label: A propos de quoi est-ce trompeur ?
+          rank: 2
+          type: CHECKBOX
+          options:
+            - un label (Qualicert) ou un certificat
+            - la description/photo du bâtiment ou des équipements (piscines, bassins etc.)
+            - la description des soins (durée, produits utilisés etc. )
+            - spa simple déclaré en thalassothérapie
+            - autre (à préciser)
+        - label: Où avez-vous vu cette information (ou photo) que vous trouvez trompeuse ?
+          rank: 3
+          type: RADIO
+          options:
+            - site internet ou publicité sur internet
+            - publicité papier
+            - affiche/ panneau publicitaire
+            - autre (à préciser)
+        - label: 'Expliquez en quelques mots pourquoi vous trouvez cela trompeur :'
+          rank: 4
+          type: TEXT
+      fileLabel: Merci de joindre tout document (photo, pdf) pouvant appuyer votre signalement.
+    - title: Contrat
+      example: "Exemple : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
