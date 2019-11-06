@@ -2785,29 +2785,53 @@ list:
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories:
       - title: Location
-        example: 'Exemples : location de voiture, leasing, velib, autolib'
+        example: 'Exemple : location de voiture, velib, LDD'
         subcategories:
-          - title: Publicité
-          - title: Prix / Paiement
-          - title: Autres
+          - title: Location de voiture auprès d'une agence ou d'un magasin
+            example: 'Exemple : agence à l''aéroport, location de camionnette dans un supermarché, plate-forme de location sur internet'
+            subcategories:
+              - title: Prix / paiement
+              - title: Publicité (CO2)
+              - title: Autre (caractéristiques, équipements)
+          - title: Location en libre-service
+            example: 'Exemple : location de vélo, trotinette, voiture électrique'
+            subcategories:
+              - title: Prix / paiement
+              - title: Publicité
+              - title: Autre
+          - title: Location longue durée (leasing, LDD, LOA...)
+            subcategories:
+              - title: Prix / paiement
+              - title: Publicité
+              - title: Autre
+          - title: Location de voiture entre particuliers
+            subcategories:
+              - title: Prix
+              - title: Publicité
+              - title: Autre
+          - title: Service de voiture partagée
+            subcategories:
+              - title: Prix
+              - title: Publicité
+              - title: Autre
       - title: Vente / réparation de véhicule
-        example: 'Exemples : garagiste, dépanneur'
+        example: 'Exemple : garagiste, dépanneur'
         subcategories:
           - title: Prix / Facturation
-            example: 'Exemples : devis non détaillé, devis non respecté'
+            example: 'Exemple : devis non détaillé, devis non respecté, délais'
           - title: Prestation mal réalisée ou pas réalisée
-            example: 'Exemples : malfaçon, panne non réparée, pose d''un équipement endommagé'
+            example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé, pièce d''origine douteuse'
           - title: Publicité
           - title: Autres
       - title: Permis / leçons de conduite
         example: 'Exemple : auto-école'
         subcategories:
           - title: Prix / Paiement
-            example: 'Exemple : prix non affiché'
+            example: 'Exemple : prix non affiché, forfait/pack obligatoire'
           - title: Publicité
-            example: 'Exemple : publicité trompeuse'
+            example: 'Exemple : publicité trompeuse avec un nombre d''heures infaisable'
           - title: Autres
-            example: 'Exemples : clause abusive dans le contrat, obligation de payer des heures régulièrement'
+            example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement, heure de conduite qui ne dure pas une heure'
       - title: Autres
   - category: Animaux
     categoryId: ANI
