@@ -1,0 +1,36 @@
+<div class="overflow-container">
+    <div class="banner text-center section section-primary" role="region">
+        <div class="container">
+        <h1 class="text-center">
+            Inviter un nouvel utilisateur
+        </h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form class="form">
+        <div class="row">
+            <div class="col">
+                <label>Email de l'utilisateur</label>
+                <input type="email" class="form-control">
+            </div>
+            <div class="col">
+                <label>Niveau d'accès</label>
+                <select class="form-control" [value]="'member'">
+                    <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <small class="form-text text-muted">
+                Un courrier électronique sera envoyé à l'adresse e-mail saisie ci-dessus avec un lien sécurisé permettant de rejoindre le compte de l'entreprise.
+            </small>
+        </div>
+        <div class="row">
+            <div class="col text-center mb-1">
+                <button type="submit" class="btn btn-secondary">Envoyer</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -62,6 +62,14 @@
         "description": "Activez votre compte pour accéder à votre espace personnel sur SignalConso"
       }
     },
+    "companyAccesses": {
+      "title": "Accès au compte de l'entreprise - SignalConso",
+      "description": "Gestion des accès au compte de l'entreprise"
+    },
+    "companyInvitation": {
+      "title": "Accès au compte de l'entreprise - SignalConso",
+      "description": "Ajout d'un accès au compte de l'entreprise"
+    },
     "subscriptions": {
       "title": "Abonnements - SignalConso",
       "description": "Abonnez-vous pour recevoir les signalements qui vous concernent"
