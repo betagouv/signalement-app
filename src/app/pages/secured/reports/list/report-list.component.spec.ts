@@ -9,11 +9,10 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { AppRoleDirective } from '../../../../directives/app-role.directive';
 import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MiddleCropPipe } from 'src/app/pipes/middlecrop.pipe';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../../test';
+import { PipesModule } from '../../../../pipes/pipes.module';
+import { ComponentsModule } from '../../../../components/components.module';
 
-describe('ReportsComponent', () => {
+describe('ReportListComponent', () => {
   let component: ReportListComponent;
   let fixture: ComponentFixture<ReportListComponent>;
 
@@ -24,7 +23,6 @@ describe('ReportsComponent', () => {
         ReportDetailComponent,
         AppRoleDirective,
         AppPermissionDirective,
-        MiddleCropPipe
       ],
       imports: [
         PaginationModule.forRoot(),
@@ -37,10 +35,10 @@ describe('ReportsComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         RouterTestingModule,
+        PipesModule,
+        ComponentsModule
       ],
-      providers: [
-        { provide: AbTestsService, useClass: MockAbTestsService },
-      ]
+      providers: []
     })
     .compileComponents();
   }));

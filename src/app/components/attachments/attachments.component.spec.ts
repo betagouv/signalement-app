@@ -1,27 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AcknowledgmentComponent } from './acknowledgment.component';
+import { AttachmentsComponent } from './attachments.component';
+import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
 
-describe('AcknoledgmentComponent', () => {
-  let component: AcknowledgmentComponent;
-  let fixture: ComponentFixture<AcknowledgmentComponent>;
+describe('AttachmentsComponent', () => {
+  let component: AttachmentsComponent;
+  let fixture: ComponentFixture<AttachmentsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AcknowledgmentComponent ],
+      declarations: [ AttachmentsComponent ],
       imports: [
+        NgxLoadingModule,
         HttpClientModule,
-        RouterTestingModule,
-      ],
-      providers: []
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AcknowledgmentComponent);
+    fixture = TestBed.createComponent(AttachmentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

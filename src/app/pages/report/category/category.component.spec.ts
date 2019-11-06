@@ -10,8 +10,6 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
 import { AlertModule } from 'ngx-bootstrap';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
 
 describe('CategoryComponent', () => {
 
@@ -56,7 +54,6 @@ describe('CategoryComponent', () => {
       ],
       providers: [
         AnomalyService,
-        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     }).compileComponents();
   }));
@@ -66,8 +63,7 @@ describe('CategoryComponent', () => {
     router = TestBed.get(Router);
     anomalyService = TestBed.get(AnomalyService);
     reportRouterService = TestBed.get(ReportRouterService);
-    spyOn(anomalyService, 'getAnomaliesWithABTesting').and.returnValue(anomaliesFixture);
-    spyOn(anomalyService, 'getAllAnomalies').and.returnValue(anomaliesFixture);
+    spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
 
     fixture = TestBed.createComponent(CategoryComponent);
     component = fixture.componentInstance;
@@ -78,9 +74,9 @@ describe('CategoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initially display only primary categories plus a category "others"', () => {
+  it('should initially display only primary categories', () => {
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelectorAll('.category').length).toEqual(3);
+    expect(nativeElement.querySelectorAll('.category').length).toEqual(2);
   });
 
   it('should route to information page when a category with information is selected', () => {
