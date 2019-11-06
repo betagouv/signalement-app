@@ -394,8 +394,8 @@ list:
             fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
           - title: Les produits ne sont pas bons
             information:
-                title: Je trouve que les produits ne sont pas bons ou de grande qualité.
-                content: Si la qualité des produits ne vous a pas convenu, nous vous invitons à contacter directement l'établissement. <br> Vous pouvez notamment contacter le service client. Le service client est présent dans la plupart des restaurants et bars qui font partie d'un groupe ou d'une chaîne. Il est conçu pour recevoir ce type de plainte. <br><br> Vous ne pouvez pas faire un signalement sur SignalConso car la répression des fraudes ne pourra pas traiter votre signalement.
+              title: Je trouve que les produits ne sont pas bons ou de grande qualité.
+              content: Si la qualité des produits ne vous a pas convenu, nous vous invitons à contacter directement l'établissement. <br> Vous pouvez notamment contacter le service client. Le service client est présent dans la plupart des restaurants et bars qui font partie d'un groupe ou d'une chaîne. Il est conçu pour recevoir ce type de plainte. <br><br> Vous ne pouvez pas faire un signalement sur SignalConso car la répression des fraudes ne pourra pas traiter votre signalement.
           - title: Les produits ne sont pas frais ou certains aliments sont périmés, c'est-à-dire que les dates indiquées sont dépassées.
             detailInputs:
               - label: Date de constat
@@ -852,7 +852,7 @@ list:
                       - title: Non
                         information:
                           title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                          subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                          content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                                 <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                           actions:
                             - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
@@ -923,7 +923,7 @@ list:
                       - title: Non
                         information:
                           title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                          subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
+                          content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                           actions:
                             - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
                               example:
@@ -956,13 +956,13 @@ list:
                 description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
               - title: Il n'avait pas assez de monnaie
                 information:
-                content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                  content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
               - title: Mes pièces / billets étaient en mauvais état
                 information:
-                content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                  content: Le paiement en pièces ou billets en mauvais état peut être refusé.
               - title: Le prix était supérieur à 1 000 euros ou à 50 pièces
                 information:
-                content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                  content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
                     <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
               - title: Autres
           - title: Le commerçant refuse que je paie par carte bancaire ou chèque
@@ -1108,7 +1108,7 @@ list:
             example: 'Exemple : fuite d''eau avant compteur'
             information:
               title: Le compteur d'eau représente la frontière entre ce qui est à votre charge et ce qui ne l'est pas.
-              subTitle: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
+              content: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
               actions:  
                 - question: Que faire en cas de désaccord&#160;?
                   answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a> 
@@ -1270,7 +1270,7 @@ list:
                   - title: Dans une boutique
                     information:
                       title: Vous ne pouvez plus exiger l'annulation de votre contrat.
-                      actions: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
+                      content: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
               - title: Une clause du contrat est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
                 detailInputs:
                   - label: Date du constat (ou du contrat)
@@ -1308,7 +1308,7 @@ list:
     icon: icon_disease.png
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
-      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+      content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
       actions:
         - question: Signaler un cas d'intoxication alimentaire&#160;?
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
@@ -1411,7 +1411,7 @@ list:
         example: 'Exemples : jouet qui prend feu, allergie, intoxication'
         information:
           title: Vous souhaitez signaler un produit dangereux
-          subTitle: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
+          content: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
           actions:
             - question: Signaler un produit dangereux?
               answer: Utiliser ce formulaire spécifique<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
@@ -1532,7 +1532,7 @@ list:
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
-      subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
+      content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
         - question: Un problème avec un commerçant&#160;?
           example: 'Exemples : colis non reçu, pas de nouvelle de votre commande'
@@ -2521,8 +2521,8 @@ list:
               - title: La prestation est mal (ou pas) réalisée
                 example: "Exemple : j'ai mal été soigné"
                 information:
-                      title: Porter une réclamation sur la qualité d’un soin 
-                      content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
+                  title: Porter une réclamation sur la qualité d’un soin
+                  content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
           - title: La médecine dite "alternative" ou "douce"
             example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute etc." 
             subcategories:
@@ -2636,8 +2636,8 @@ list:
         subcategories:
           - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
             information:
-                  title: Vous devez contacter la Commissions des Usagers
-                  content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+              title: Vous devez contacter la Commissions des Usagers
+              content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
           - title: J'ai dû payer un "forfait administratif"
             example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
             detailInputs:

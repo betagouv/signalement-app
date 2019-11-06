@@ -1,18 +1,24 @@
 @import "../../../../theme/variables";
 
-.action-lighter-grey {
-    background-color: $lighter-grey;
+* {
+  font-size: 20px;
 }
 
-.title {
-    font-size: 1.125rem;
+.text-muted {
+  font-size: 16px;
+  line-height: 16px;
+  margin-bottom: 5px;
 }
 
 .card-body {
-    padding-bottom: 18px !important;
-    padding-top: 18px !important;
+  padding: 1em;
+  margin: 1em 0;
 }
 
-.card-text {
-    margin-bottom: 0 !important;
+a:hover {
+  text-decoration: none;
+
+  div {
+    background-color: $lighter-grey;
+  }
 }

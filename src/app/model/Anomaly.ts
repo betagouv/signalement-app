@@ -22,8 +22,6 @@ export class Action {
 export class Information {
   @JsonProperty('title')
   title: string;
-  @JsonProperty('subTitle')
-  subTitle?: string;
   @JsonProperty('content')
   content?: string;
   @JsonProperty({ name: 'actions', clazz: Action})
@@ -33,7 +31,6 @@ export class Information {
 
   constructor() {
     this.title = undefined;
-    this.subTitle = undefined;
     this.content = undefined;
     this.actions = undefined;
     this.reference = undefined;
