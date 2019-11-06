@@ -9,8 +9,6 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { AppRoleDirective } from '../../../../directives/app-role.directive';
 import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../../test';
 import { PipesModule } from '../../../../pipes/pipes.module';
 import { ComponentsModule } from '../../../../components/components.module';
 
@@ -40,9 +38,7 @@ describe('ReportListComponent', () => {
         PipesModule,
         ComponentsModule
       ],
-      providers: [
-        { provide: AbTestsService, useClass: MockAbTestsService },
-      ]
+      providers: []
     })
     .compileComponents();
   }));

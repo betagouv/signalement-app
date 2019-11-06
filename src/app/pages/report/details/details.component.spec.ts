@@ -14,8 +14,6 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { NgxLoadingModule } from 'ngx-loading';
 import moment from 'moment';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 
@@ -83,9 +81,7 @@ describe('DetailsComponent', () => {
         ComponentsModule,
         PipesModule,
       ],
-      providers: [
-        { provide: AbTestsService, useClass: MockAbTestsService },
-      ]
+      providers: []
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

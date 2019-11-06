@@ -11,8 +11,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report } from '../../../model/Report';
 import { Company } from '../../../model/Company';
 import { Consumer } from '../../../model/Consumer';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
 import { PipesModule } from '../../../pipes/pipes.module';
 
 describe('ConfirmationComponent', () => {
@@ -54,9 +52,7 @@ describe('ConfirmationComponent', () => {
         Angulartics2RouterlessModule.forRoot(),
         PipesModule
       ],
-      providers: [
-        { provide: AbTestsService, useClass: MockAbTestsService },
-      ]
+      providers: []
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

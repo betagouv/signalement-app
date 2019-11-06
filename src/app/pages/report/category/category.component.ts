@@ -52,7 +52,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => this.report = report);
     this.showSecondaryCategories = false;
-    this.anomalies = this.anomalyService.getAnomaliesWithABTesting();
+    this.anomalies = this.anomalyService.getAnomalies();
     const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
     if (anomaly) {
       this.internetInformation = anomaly.information;

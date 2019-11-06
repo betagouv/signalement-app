@@ -20,8 +20,6 @@ import { LoginModule } from './pages/login/login.module';
 import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
-import { AbTestsModule } from 'angular-ab-tests';
-import { CategoryScope, CategoryVersions } from './utils';
 import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 
 registerLocaleData(localeFr, 'fr');
@@ -53,17 +51,6 @@ registerLocaleData(localeFr, 'fr');
     SecuredModule,
     StaticModule,
     BsDropdownModule.forRoot(),
-    AbTestsModule.forRoot(
-      [
-        {
-          versions: [ CategoryVersions.V1, CategoryVersions.V2 ],
-          versionForCrawlers: CategoryVersions.V1,
-          scope: CategoryScope,
-          expiration: 5,
-          weights: { V1: 0, V2: 99 }
-        }
-      ]
-    )
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

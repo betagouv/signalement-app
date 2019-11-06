@@ -11,8 +11,6 @@ import { Report } from '../../../model/Report';
 import { RetractationComponent } from '../../static/retractation/retractation.component';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { NgxLoadingModule } from 'ngx-loading';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
 
 describe('InformationComponent', () => {
 
@@ -40,7 +38,6 @@ describe('InformationComponent', () => {
       providers: [
         ReportStorageService,
         AnomalyService,
-        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
