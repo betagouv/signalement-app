@@ -78,9 +78,9 @@ describe('CategoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initially display only primary categories plus a category "others"', () => {
+  it('should initially display only primary categories', () => {
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelectorAll('.category').length).toEqual(3);
+    expect(nativeElement.querySelectorAll('.category').length).toEqual(2);
   });
 
   it('should route to information page when a category with information is selected', () => {

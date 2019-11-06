@@ -46,7 +46,7 @@ export class EventService {
       reportId: event.reportId,
       userId: user.id,
       eventType: event.eventType,
-      action: event.action.name,
+      action: event.action.value,
       details: event.details
     };
   }
