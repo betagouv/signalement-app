@@ -1,42 +1,28 @@
 import { Injectable } from '@angular/core';
-
-import anomaliesV1 from '../../assets/data/anomalies-v1.json';
-import anomaliesV2 from '../../assets/data/anomalies-v2.json';
+import anomalies from '../../assets/data/anomalies.json';
 import { deserialize } from 'json-typescript-mapper';
 import { Anomaly, AnomalyList } from '../model/Anomaly';
-import { AbTestsService } from 'angular-ab-tests';
-import { CategoryScope, CategoryVersions } from '../utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnomalyService {
 
-  anomaliesWithABTesting: Anomaly[];
-  allAnomalies: Anomaly[];
+  anomalies: Anomaly[];
 
-  constructor(private abTestsService: AbTestsService) {
-    this.anomaliesWithABTesting = this.getAnomaliesWithABTesting();
-    this.allAnomalies = this.getAllAnomalies();
+  constructor() {
+    this.anomalies = this.getAnomalies();
   }
 
-  getAnomaliesWithABTesting() {
-    if (!this.anomaliesWithABTesting) {
-      this.anomaliesWithABTesting = this.abTestsService.getVersion(CategoryScope) === CategoryVersions.V1 ?
-        deserialize(AnomalyList, anomaliesV1).list : deserialize(AnomalyList, anomaliesV2).list;
+  getAnomalies() {
+    if (!this.anomalies) {
+      this.anomalies = deserialize(AnomalyList, anomalies).list;
     }
-    return this.anomaliesWithABTesting;
-  }
-
-  getAllAnomalies() {
-    if (!this.allAnomalies) {
-      this.allAnomalies = [...deserialize(AnomalyList, anomaliesV1).list, ...deserialize(AnomalyList, anomaliesV2).list];
-    }
-    return this.allAnomalies;
+    return this.anomalies;
   }
 
   getAnomalyBy(predicate: (anomaly) => boolean) {
-    return this.getAllAnomalies()
+    return this.getAnomalies()
       .find(predicate);
   }
 

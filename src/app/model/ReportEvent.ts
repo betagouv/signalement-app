@@ -9,19 +9,20 @@ export class ReportEvent {
 }
 
 export class ReportEventAction {
-  name: string;
-  withResult: boolean;
+  value: string;
 }
 
-export const ProAnswerReportEventAction = Object.assign(new ReportEventAction(), {
-  name: 'Réponse du professionnel au signalement',
-  withResult: true
-});
+export enum EventActionValues {
+  FirstVisit = 'Envoi du signalement',
+  ReportResponse = 'Réponse du professionnel au signalement',
+  PostalSend = 'Envoi d\'un courrier'
+}
 
 export class ReportResponse {
   responseType: ReportResponseTypes;
   consumerDetails: string;
   dgccrfDetails: string;
+  fileIds: string[];
 }
 
 

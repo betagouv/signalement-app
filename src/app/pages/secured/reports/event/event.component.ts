@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../../../services/event.service';
-import { ReportEvent, ReportEventAction } from '../../../../model/ReportEvent';
+import { EventActionValues, ReportEvent, ReportEventAction } from '../../../../model/ReportEvent';
 import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
 import { combineLatest } from 'rxjs';
@@ -113,7 +113,7 @@ export class EventComponent implements OnInit {
 
   isActionEnvoiCourrier() {
     return this.actions.find(a => a === this.actionCtrl.value)
-      && this.actions.find(a => a === this.actionCtrl.value).name === `Envoi d'un courrier`;
+      && this.actions.find(a => a === this.actionCtrl.value).value === EventActionValues.PostalSend;
   }
 
 }
