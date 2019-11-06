@@ -85,11 +85,10 @@ export class AuthenticationService {
 
   fetchTokenInfo(siret: string, token: string) {
     return this.http.get<TokenInfo>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', 'token']),
+      this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'token']),
       {
         params:
           new HttpParams()
-            .set('siret', siret)
             .set('token', token),
         ...this.serviceUtils.getHttpHeaders()
       }
