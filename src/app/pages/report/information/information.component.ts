@@ -80,7 +80,7 @@ export class InformationComponent implements OnInit, OnDestroy {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.getReportLastSubcategory().title);
       this.informationToDisplay = this.getReportLastSubcategory().information;
     }
-    if (!this.informationToDisplay.title) {
+    if (this.informationToDisplay && !this.informationToDisplay.title) {
       this.informationToDisplay.title = 'Nous ne doutons pas que vous ayez réellement rencontré un problème mais... il ne s’agit pas d’une fraude.';
     }
   }

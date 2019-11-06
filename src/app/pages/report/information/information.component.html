@@ -3,12 +3,12 @@
     <div class="container max-width">
       <h2 class="text-center">Emmh, nous ne pouvons pas traiter votre signalement.</h2>
       <div class="bg-white m-4 p-4">
-        <p tabindex="-1" id="titleInformation" class="text-left" [innerHTML]="informationToDisplay.title">
+        <p tabindex="-1" id="titleInformation" class="text-left" [innerHTML]="informationToDisplay?.title">
         </p>
         <p *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
 
         <div *ngIf="informationToDisplay?.actions">
-          <ul class="mt-5">
+          <ul>
             <li *ngFor="let action of informationToDisplay?.actions; let index = index">
               <a data-toggle="collapse" href="#collapseAction_{{index}}">
                 <div>
