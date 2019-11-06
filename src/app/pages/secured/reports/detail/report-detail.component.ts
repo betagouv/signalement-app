@@ -15,6 +15,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
 import { EventActionValues, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
+import { Constants } from '../../../../model/Constants';
 
 @Component({
   selector: 'app-report-detail',
@@ -28,6 +29,8 @@ export class ReportDetailComponent implements OnInit {
   eventActionValues = EventActionValues
   permissions = Permissions;
   roles = Roles;
+  constants = Constants;
+
   report: Report;
 
   showErrors: boolean;
@@ -77,6 +80,7 @@ export class ReportDetailComponent implements OnInit {
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
+
     this.loading = true;
     this.loadingError = false;
     this.platformLocation.onPopState(() => {

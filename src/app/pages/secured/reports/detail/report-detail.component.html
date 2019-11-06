@@ -294,7 +294,7 @@
                 <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
                   <span class="collapsed-icon">&#43;</span>
                   <span class="uncollapsed-icon">&#8722;</span>
-                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.value}}
+                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
                 </a>
                 <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
                   {{event.details.description}}
@@ -302,23 +302,23 @@
               </ng-container>
               <ng-template #noDescription>
                 <span>
-                  Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.value}}
+                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
                 </span>
               </ng-template>
             </div>
             <div class="col-12">
-              Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
+              Le {{report.creationDate | date : constants.DateTimeFormat}} : Création du signalement
             </div>
           </div>
           <ng-container *appRole="[roles.Pro]">
-            Signalement créé {{report.creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
+            Signalement créé le {{report.creationDate | date : constants.DateTimeFormat}}
             <ng-container *ngIf="getEvent(eventActionValues.FirstVisit)">
               <br />
-              Première consultation {{getEvent(eventActionValues.FirstVisit).creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
+              Première consultation le {{getEvent(eventActionValues.FirstVisit).creationDate | date : constants.DateTimeFormat}}
             </ng-container>
             <ng-container *ngIf="getReportResponse()">
               <br />
-              Réponse apportée le {{getEvent(eventActionValues.ReportResponse).creationDate | date : 'le dd/MM/yyyy à HH:mm:ss'}}
+              Réponse apportée le {{getEvent(eventActionValues.ReportResponse).creationDate | date : constants.DateTimeFormat}}
             </ng-container>
           </ng-container>
         </ng-container>
