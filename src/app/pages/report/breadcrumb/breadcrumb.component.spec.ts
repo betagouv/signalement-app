@@ -2,11 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { Report, Step } from '../../../model/Report';
-import { PrecedeByPipe } from '../../../pipes/precede-by.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 describe('BreadcrumbComponent', () => {
   let component: BreadcrumbComponent;
@@ -16,15 +14,13 @@ describe('BreadcrumbComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         BreadcrumbComponent,
-        PrecedeByPipe,
       ],
       imports: [
         HttpClientModule,
         RouterTestingModule,
+        PipesModule,
       ],
-      providers: [
-        { provide: AbTestsService, useClass: MockAbTestsService },
-      ]
+      providers: []
     })
     .compileComponents();
   }));

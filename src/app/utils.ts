@@ -28,9 +28,3 @@ export default class Utils {
   }
 
 }
-
-export const CategoryScope = 'categories';
-export enum CategoryVersions {
-  V1 = 'V1',
-  V2 = 'V2',
-}

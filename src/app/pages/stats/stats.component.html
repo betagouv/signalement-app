@@ -65,13 +65,6 @@
           </div>
         </div>
         <hr>
-        <div class="row mt-4" *ngIf="isPlatformBrowser()">
-          <div class="col-12 chart">
-            <div echarts [options]="byCategoriesChartOption"></div>
-            <ngx-loading [show]="loading"></ngx-loading>
-          </div>
-        </div>
-        <hr>
         <div class="row mt-2" *ngIf="isPlatformBrowser() && user && user.role === 'Admin'">
           <div class="col-12 chart">
             <div echarts [options]="byRegionsChartOption"></div>

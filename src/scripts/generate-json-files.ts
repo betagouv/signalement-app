@@ -1,11 +1,7 @@
 const files = [
   {
-    input: 'src/assets/data/anomalies-v1.yml',
-    output: 'src/assets/data/anomalies-v1.json'
-  },
-  {
-    input: 'src/assets/data/anomalies-v2.yml',
-    output: 'src/assets/data/anomalies-v2.json'
+    input: 'src/assets/data/anomalies.yml',
+    output: 'src/assets/data/anomalies.json'
   }
 ]
 const yaml = require('js-yaml');
