@@ -258,10 +258,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getReportCssClassNewReport(status: string) {
-    return status ? 'mr-3' : 'bold mr-3';
-  }
-
   selectArea(area?: Region | Department) {
     this.reportFilter.area = area;
   }

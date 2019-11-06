@@ -64,7 +64,12 @@
   .link {
     color: $primary;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
+    
+    &:hover {
+      color: $dark-blue;
+      text-decoration: underline;
+    }
   }
 
   .pointer {
@@ -116,6 +121,14 @@
       margin-left: 16px;
     }
 
+  }
+
+  .btn-sm {
+    padding: 8px 14px;;
+    font-size: inherit;
+    line-height: 1.5;
+    border-radius: 3px;
+    box-shadow: none;
   }
 
 }

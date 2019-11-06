@@ -4,7 +4,6 @@ import { ConfirmationComponent } from './confirmation.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PrecedeByPipe } from '../../../pipes/precede-by.pipe';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -12,6 +11,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report } from '../../../model/Report';
 import { Company } from '../../../model/Company';
 import { Consumer } from '../../../model/Consumer';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 describe('ConfirmationComponent', () => {
 
@@ -42,7 +42,6 @@ describe('ConfirmationComponent', () => {
       declarations: [
         ConfirmationComponent,
         BreadcrumbComponent,
-        PrecedeByPipe,
       ],
       imports: [
         FormsModule,
@@ -51,6 +50,7 @@ describe('ConfirmationComponent', () => {
         RouterTestingModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
+        PipesModule
       ],
       providers: []
     })

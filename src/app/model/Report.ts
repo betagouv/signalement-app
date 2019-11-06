@@ -1,7 +1,7 @@
 import { Consumer } from './Consumer';
 import { Company } from './Company';
 import { Subcategory } from './Anomaly';
-import { UploadedFile } from './UploadedFile';
+import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
 
@@ -18,6 +18,11 @@ export enum Step {
   Information = 'Information'
 }
 
+
+export enum ReportStatus {
+  ClosedForPro = 'Clôturé'
+}
+
 export class Report {
   id: string;
   category: string;
@@ -32,6 +37,13 @@ export class Report {
   creationDate: Date;
   storedStep: Step;
   status: string;
+
+  get consumerUploadedFiles() {
+    return this.uploadedFiles ? this.uploadedFiles.filter(file => file.origin === FileOrigin.Consumer) : [];
+  }
+  get professionalUploadedFiles() {
+    return this.uploadedFiles ? this.uploadedFiles.filter(file => file.origin === FileOrigin.Professional) : [];
+  }
 }
 
 export class DetailInputValue {

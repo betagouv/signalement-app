@@ -14,9 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
 import { PasswordComponent } from './account/password/password.component';
-import { MiddleCropPipe } from '../../pipes/middlecrop.pipe';
 import { AccountActivationComponent } from './account/activation/account-activation.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { ComponentsModule } from '../../components/components.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
@@ -39,7 +40,6 @@ const routes: Routes = [
     AppRoleDirective,
     PasswordComponent,
     DGCCRFComponent,
-    MiddleCropPipe,
     AccountActivationComponent,
     SubscriptionComponent,
     MostReportedListComponent
@@ -55,6 +55,8 @@ const routes: Routes = [
     ModalModule.forRoot(),
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     BsDatepickerModule.forRoot(),
+    ComponentsModule,
+    PipesModule
   ],
   exports: [
     RouterModule,

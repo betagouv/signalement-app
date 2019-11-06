@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DetailInputValue, PrecisionKeyword, Report, Step } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
@@ -7,7 +7,7 @@ import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { DescriptionLabel, DetailInput, InputType, ReportingDateLabel, ReportingTimeslotLabel } from '../../../model/Anomaly';
-import { UploadedFile } from '../../../model/UploadedFile';
+import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isDefined } from '@angular/compiler/src/util';
@@ -52,16 +52,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
   detailsForm: FormGroup;
   descriptionCtrl: FormControl;
 
-  @ViewChild('fileInput') fileInput;
-
   plageHoraireList: number[];
   uploadedFiles: UploadedFile[];
 
   showErrors: boolean;
-  tooLargeFilename: string;
   keywordsDetected: Keyword;
 
   maxDate: Date;
+  fileOrigins = FileOrigin;
 
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
@@ -292,35 +290,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  bringFileSelector() {
-    this.fileInput.nativeElement.click();
-  }
-
-  selectFile() {
-    this.tooLargeFilename = undefined;
-    if (this.fileInput.nativeElement.files[0]) {
-      if (this.fileInput.nativeElement.files[0].size > fileSizeMax) {
-        this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
-      } else {
-        const fileToUpload = new UploadedFile();
-        fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
-        fileToUpload.loading = true;
-        this.uploadedFiles.push(fileToUpload);
-        this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
-          fileToUpload.loading = false;
-          fileToUpload.id = uploadedFile.id;
-          fileToUpload.creationDate = uploadedFile.creationDate;
-        }, error => {
-          fileToUpload.loading = false;
-        });
-      }
-    }
-  }
-
-  getErrorFilename(filename: string) {
-    return `Echec du téléchargement (${Utils.textOverflowMiddleCropping(filename, 10)})`.concat();
-  }
-
   isUploadingFile() {
     return this.uploadedFiles.find(file => file.loading);
   }
@@ -331,24 +300,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     } else {
       this.uploadedFiles = [];
     }
-  }
-
-  removeUploadedFile(uploadedFile: UploadedFile) {
-    this.uploadedFiles.splice(
-      this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
-      1
-    );
-    if (uploadedFile.id) {
-      this.fileUploaderService.deleteFile(uploadedFile).subscribe();
-    }
-  }
-
-  onFileUploaded(uploadedFile: UploadedFile) {
-    this.uploadedFiles.push(uploadedFile);
-  }
-
-  getFileDownloadUrl(uploadedFile: UploadedFile) {
-    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
   searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
