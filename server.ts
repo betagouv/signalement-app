@@ -8,6 +8,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as compression from 'compression';
+import * as helmet from 'helmet';
 import { join } from 'path';
 
 enableProdMode();
@@ -18,6 +19,15 @@ app.use(compression());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(helmet({
+  hsts: {
+    maxAge: 5184000   // 60 days in seconds
+  },
+  frameguard: {
+    action: 'deny'
+  }
+}));
 
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const PORT = process.env.PORT || 8080;
