@@ -3,7 +3,7 @@
     <div class="container max-width">
       <h2 class="text-center">Emmh, nous ne pouvons pas traiter votre signalement.</h2>
       <div class="bg-white m-4 p-4">
-        <p *ngIf="informationToDisplay.outOfScope">
+        <p *ngIf="informationToDisplay?.outOfScope">
           Nous ne doutons pas que vous ayez réellement rencontré un problème mais... il ne s’agit pas d’une fraude.
         </p>
         <p tabindex="-1" id="titleInformation" [innerHTML]="informationToDisplay?.title">
