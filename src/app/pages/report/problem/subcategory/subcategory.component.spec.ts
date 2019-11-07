@@ -3,13 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubcategoryComponent } from './subcategory.component';
 import { Subcategory } from '../../../../model/Anomaly';
 import { deserialize } from 'json-typescript-mapper';
-import { CollapsableTextComponent } from '../../../../components/collapsable-text/collapsable-text.component';
-import { TruncatePipe } from '../../../../pipes/truncate.pipe';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SimpleChange } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentsModule } from '../../../../components/components.module';
+import { PipesModule } from '../../../../pipes/pipes.module';
 
 describe('SubcategoryComponent', () => {
 
@@ -33,8 +33,6 @@ describe('SubcategoryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SubcategoryComponent,
-        CollapsableTextComponent,
-        TruncatePipe
       ],
       imports: [
         FormsModule,
@@ -42,6 +40,8 @@ describe('SubcategoryComponent', () => {
         RouterTestingModule,
         Angulartics2RouterlessModule.forRoot(),
         NoopAnimationsModule,
+        ComponentsModule,
+        PipesModule,
       ]
     })
     .compileComponents();

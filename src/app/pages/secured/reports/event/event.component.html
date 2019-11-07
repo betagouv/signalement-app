@@ -9,7 +9,7 @@
           <select id="actionSelect" [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''">
             <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
               <option *ngFor="let action of actions" [ngValue]="action">
-                {{action.name}}
+                {{action.value}}
               </option>
             </ng-container>
           </select>

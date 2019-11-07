@@ -10,8 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { AbTestsService } from 'angular-ab-tests';
-import { MockAbTestsService } from '../../../../test';
 
 describe('ConsumerComponent', () => {
 
@@ -40,7 +38,6 @@ describe('ConsumerComponent', () => {
       ],
       providers: [
         ReportStorageService,
-        { provide: AbTestsService, useClass: MockAbTestsService },
       ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
