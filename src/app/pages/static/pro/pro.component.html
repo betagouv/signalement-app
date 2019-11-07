@@ -6,24 +6,6 @@
   </div>
 </div>
 
-<main role="main">
-  <section class="section section-lightest-grey pb-2 pt-3">
-    <div class="container max-width">
-        <div class="row align-items-center">
-            <div class="col-12 col-sm-6 pl-sm-6 pr-sm-6 text-center">
-              <p class="lead">Découvrez SignalConso, le nouveau service public pour les Consommateurs et les Professionnels</p>
-            </div>
-            <div class="col-12 col-sm-6 pl-sm-6 pr-sm-6 text-center">
-              <div class="mr-2">
-                <img width="250px" src="/assets/images/image-pro.png" alt="Illustration relation SignalConso et marchand" />
-              </div>
-            </div>
-          </div>
-    </div>
-  </section>
-  <section class="section section-lightest-grey mb-5 pt-2">
-    <div class="container max-width">
-
       <p class="lead blue">Vous avez reçu un courrier de SignalConso car votre établissement a été signalé par un consommateur ?</p>
       <p>
         Pour connaitre ce signalement, rendez-vous sur <a routerLink="/connexion">https://signalconso.beta.gouv.fr</a>
@@ -110,11 +92,13 @@
       <p class="lead blue">A quoi correspondent les différents statuts du signalement ?</p>
       <p>
       	Une fois connecté sur votre Espace Professionnel, vous avez accès à la liste de tous les signalements déposés sur votre établissement. 
-		    Cette liste vous donne quelques indications sur chaque signalement sans que vous ayez besoin de les ouvrir : la date de dépôt du signalement, le type de problème soulevé, ainsi que le statut du signalement. Il existe trois statuts pour le signalement : 
-		    <strong>Non consulté :</strong> vous n’avez pas encore consulté ce signalement - il apparaît en gras. Dès que vous aurez cliqué dessus, le signalement passera au statut suivant.
-		    <strong>En attente de réponse :</strong> vous avez consulté le signalement mais vous n’y avez pas encore répondu.
-		    <strong>Clôturé :</strong> le signalement est clôturé - vous y avez déjà apporté une réponse ou alors le délai de traitement a été dépassé. (cf les relances).
-        <br> Vous pouvez filtrer la liste des signalements par période ou par statut. Vous pouvez aussi faire une extraction Excel de vos signalements en cliquant sur le bouton “Extraction excel”.
+        Cette liste vous donne quelques indications sur chaque signalement sans que vous ayez besoin de les ouvrir : la date de dépôt du signalement, le type de problème soulevé, ainsi que le statut du signalement. Il existe trois statuts pour le signalement : </p>
+        <ul>		    
+          <li><strong>Non consulté :</strong> vous n’avez pas encore consulté ce signalement - il apparaît en gras. Dès que vous aurez cliqué dessus, le signalement passera au statut suivant.</li>
+		      <li><strong>En attente de réponse :</strong> vous avez consulté le signalement mais vous n’y avez pas encore répondu.</li>
+		      <li><strong>Clôturé :</strong> le signalement est clôturé - vous y avez déjà apporté une réponse ou alors le délai de traitement a été dépassé. (cf les relances).</li>
+        </ul>
+        <p>Vous pouvez filtrer la liste des signalements par période ou par statut. Vous pouvez aussi faire une extraction Excel de vos signalements en cliquant sur le bouton “Extraction excel”.
 	    </p>
 
       <hr>
@@ -127,8 +111,8 @@
 			    <li>J'estime que ce signalement est infondé</li>
 			    <li>J'estime que ce signalement ne concerne pas mon établissement</li>
         </ul>
-	    <p> Quelque soit le choix que vous prenez, nous vous invitons à l’expliquer au consommateur. Cette réponse sera bien entendu visible par la DGCCRF. Nous vous offrons aussi la possibilité d’ajouter un commentaire et des pièces jointes destinés uniquement à la DGCCRF dans le champ de saisie suivant. Actuellement, le site ne permet pas de transmettre les pièces jointes au consommateur.
- 	      Une fois cette réponse validée, vous recevrez un accusé de réception. Cette réponse sera aussi visible dans la section "Réponse apportée".</p>
+	    <p> Quelque soit le choix que vous prenez, nous vous invitons à l’expliquer au consommateur. Cette réponse sera visible par la DGCCRF. <br>Nous vous offrons aussi la possibilité d’ajouter un commentaire et des pièces jointes destinés uniquement à la DGCCRF dans le champ de saisie spécifique. Actuellement, le site ne permet pas de transmettre les pièces jointes au consommateur.
+ 	      <br><br>Une fois votre réponse validée, vous recevrez un accusé de réception. Cette réponse sera aussi visible dans la section "Réponse apportée".</p>
 
       <hr>
       
@@ -136,7 +120,7 @@
       <p> Vous avez reçu le courrier SignalConso mais votre établissement était fermé pour congés annuels ? Vous avez consulté le signalement mais vous n’avez pas apporté immédiatement une réponse car vous attendiez la confirmation d’un collaborateur ? Pas de panique !
 		  Après avoir récolter les retours de nombreux professionnels, nous avons conçu un système de relances offrant de la souplesse dans le traitement du signalement :</p>
 		    <ul>
-          <li> <strong>Relance courrier :</strong> nous vous avons adressé un courrier vous indiquant qu’un signalement avait été déposé sur votre établissement mais vous n’avez pas encore activé votre Espace Professionnel. Après 21 jours, nous vous adressons un nouveau courrier vous invitant à l’activer. Une nouvelle période de 21 jours est lancée, au terme de laquelle nous clôturons le signalement. Vous pourrez toujours activer votre Espace Professionnel, mais vous ne pourrez plus répondre au signalement.</li>
+          <li> <strong>Relance courrier :</strong> nous vous avons adressé un courrier vous indiquant qu’un signalement avait été déposé sur votre établissement mais vous n’avez pas encore activé votre Espace Professionnel. <br>Après 21 jours, nous vous adressons un nouveau courrier vous invitant à l’activer. Une nouvelle période de 21 jours est lancée, au terme de laquelle nous clôturons le signalement. Vous pourrez toujours activer votre Espace Professionnel, mais vous ne pourrez plus répondre au signalement.</li>
 			    <li> <strong>Relance mail :</strong> qu’il s’agisse d’un nouveau signalement que vous n’avez pas encore consulté ou d’un signalement consulté mais resté sans réponse, nous vous envoyons un email tous les 7 jours pendant 3 semaines pour vous inviter à faire le nécessaire. Au terme de ces relances, vous ne pourrez plus répondre au signalement.</li>
 		    </ul>
 
