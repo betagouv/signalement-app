@@ -9,16 +9,16 @@
 </div>
 
 <div class="container">
-    <form class="form">
+    <form class="form" [formGroup]="invitationForm" (ngSubmit)="submitForm()">
         <div class="row">
             <div class="col">
                 <label>Email de l'utilisateur</label>
-                <input type="email" class="form-control">
+                <input type="email" class="form-control" [formControl]="emailCtrl">
             </div>
             <div class="col">
                 <label>Niveau d'accès</label>
-                <select class="form-control" [value]="'member'">
-                    <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
+                <select class="form-control" [value]="'member'" [formControl]="levelCtrl">
+                    <option *ngFor="let level of accessLevels | keyvalue" [ngValue]="level.key">{{level.value}}</option>
                 </select>
             </div>
         </div>
@@ -31,6 +31,17 @@
             <div class="col text-center mb-1">
                 <button type="submit" class="btn btn-secondary">Envoyer</button>
             </div>
+        </div>
+        <div class="notification error mt-3" *ngIf="showErrors && invitationForm.invalid">
+            <span *ngIf="emailCtrl.hasError('required')">
+                Veuillez renseigner votre email.<br />
+            </span>
+            <span *ngIf="emailCtrl.hasError('email')">
+                Veuillez renseigner une adresse email valide.<br />
+            </span>
+            <span *ngIf="levelCtrl.hasError('required')">
+                Sélectionnez le niveau d'accès.<br />
+            </span>
         </div>
     </form>
 </div>

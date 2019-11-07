@@ -23,5 +23,20 @@ export class CompanyAccessesService {
       })
     );
   }
+
+  sendInvitation(siret: string, email: string, level: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'invitation']),
+          {
+            email: email,
+            level: level
+          },
+          headers
+        );
+      })
+    );
+  }
 }
 

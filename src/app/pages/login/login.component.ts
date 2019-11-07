@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
         this.isConnection = url[0].toString() === 'dgccrf' || url[0].toString() === 'connexion';
         this.isDgccrf = url[0].toString() === 'dgccrf';
       }
-
     });
 
     Utils.focusAndBlurOnTop();

@@ -31,6 +31,10 @@
     "title": "Statistiques - SignalConso",
     "description": "Les différentes statistiques du site"
   },
+  "accesstoken": {
+    "title": "Accès au compte de l'entreprise - SignalConso",
+    "description": "Rejoindre le compte d'une entreprise"
+  },
   "login": {
     "title": "Authentification - SignalConso",
     "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso",
