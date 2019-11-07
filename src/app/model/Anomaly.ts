@@ -28,12 +28,15 @@ export class Information {
   actions?: Action[];
   @JsonProperty('reference')
   reference?: string;
+  @JsonProperty('outOfScope')
+  outOfScope?: boolean;
 
   constructor() {
     this.title = undefined;
     this.content = undefined;
     this.actions = undefined;
     this.reference = undefined;
+    this.outOfScope = undefined;
   }
 }
 
