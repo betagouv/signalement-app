@@ -59,8 +59,9 @@
     - title: Les prix sont plus chers qu'ailleurs
       information:
         title: Les commerçants ont le droit de choisir leurs prix.
+        outOfScope: true
         content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
-                <br/> Par exemple, il est autorisé de vendre une bouteille d'eau  8 euros dsi le prix est bien marqué.
+                <br/> Par exemple, il est autorisé de vendre une bouteille d'eau à 8 euros ou un café à 6 euros ! C'est au consommateur de regarder les prix (sur le menu, la carte des boissons..) avant de commander.
                 <br/><br/><b>Le saviez-vous ?</b>
                 <br/>Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
                 <br/> Par exemple, le prix des livres est réglementé."
