@@ -1,0 +1,211 @@
+<main role="main">
+  <section class="section section-lighter-grey">
+    <div class="container max-width">
+      <h1 class="text-center pb-4">Votre signalement a bien été envoyé !</h1>
+      <div class="row">
+        <div class="col-3">
+          <img src="/assets/images/picture-pro.svg" alt="Illustration" />
+        </div>
+        <div class="col-9">
+          <h2>Que va-t-il se passer pour le commerçant ?</h2>
+          <p>
+            Le commerçant recevra votre signalement sans connaître votre identité.
+            Il aura la possibilité de corriger directement le problème, grâce à vos informations.
+            Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>) qui pourra intervenir si nécessaire.
+          </p>
+          <p>
+            En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
+          </p>
+        </div>
+      </div>
+      <div class="row pt-4">
+        <div class="col-3">
+          <img src="/assets/images/picture-problem.svg" alt="Illustration" />
+        </div>
+        <div class="col-9">
+          <h2>Et maintenant comment faire aboutir ma demande ?</h2>
+          <div class="card">
+            <div class="card-body">
+              <h2>1</h2>
+              <div class="row">
+                <div class="col-2 text-right">
+                  <img src="/assets/images/icon-hand-shake.svg" alt="icône amiable" class="pt-1"/>
+                </div>
+                <div class="col-10 m-auto">
+                  J’écris au professionnel pour résoudre le problème à l’amiable
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-outline-dark" (click)="openModal(template1)">
+                  Comment s'y prendre ?
+                </button>
+              </div>
+              <ng-template #template1>
+                <div class="modal-body">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                    <tr>
+                      <td>Quand&#160;?</td>
+                      <td>Le plus tôt possible</td>
+                    </tr>
+                    <tr>
+                      <td>A qui&#160;?</td>
+                      <td>Auprès du service des  réclamations de la société</td>
+                    </tr>
+                    <tr>
+                      <td>Comment&#160;?</td>
+                      <td><ul>
+                        <li>Par lettre recommandée avec AR</li>
+                        <li>Je mets toutes les documents justificatifs</li>
+                        <li>Je peux utiliser modèle-type  lettre-type pour mon litige</li>
+                        <li>Je garde une copie du courrier</li>
+                      </ul></td>
+                    </tr>
+                    <tr>
+                      <td>Pourquoi&#160;?</td>
+                      <td>Ce courrier est la preuve de votre démarche. Il est obligatoire pour résoudre votre problème ou aller au tribunal.</td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h2>2</h2>
+              <div class="row">
+                <div class="col-2 text-right">
+                  <img src="/assets/images/icon-help.svg" alt="icône amiable" class="pt-1"/>
+                </div>
+                <div class="col-10 m-auto">
+                  Je contacte un médiateur de la consommation compétent, c’est-à-dire une personne tierce à mon litige chargée de régler mon problème.
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-outline-dark" (click)="openModal(template2)">
+                  Comment s'y prendre ?
+                </button>
+              </div>
+              <ng-template #template2>
+                <div class="modal-body">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                    <tr>
+                      <td>Quand&#160;?</td>
+                      <td>Si 2 mois après avoir envoyé mon courrier je n’ai pas de réponse du professionnel</td>
+                    </tr>
+                    <tr>
+                      <td>Comment&#160;?</td>
+                      <td>
+                        En recherchant le médiateur compétent pour mon litige. Le professionnel a l’obligation de communiquer les coordonnées du médiateur dont il relève (sur son site internet, sur le contrat, ou par tout moyen approprié...). Je peux aussi rechercher dans la liste (mettre le lien liste des médiateurs).
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Pourquoi&#160;?</td>
+                      <td>Pour m’aider à trouver un arrangement avec le professionnel</td>
+                    </tr>
+                    <tr>
+                      <td>Combien ça coûte&#160;?</td>
+                      <td>C’est gratuit</td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h2>3</h2>
+              <div class="row">
+                <div class="col-2 text-right">
+                  <img src="/assets/images/icon-help.svg" alt="icône amiable" class="pt-1"/>
+                </div>
+                <div class="col-10 m-auto">
+                  Je contacte un conciliateur c’est-à-dire une personne qui m’aide à trouver une solution avec le professionnel.
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-outline-dark" (click)="openModal(template3)">
+                  Comment s'y prendre ?
+                </button>
+              </div>
+              <ng-template #template3>
+                <div class="modal-body">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                    <tr>
+                      <td>Quand&#160;?</td>
+                      <td>Comme pour la médiation, si 2 mois après avoir envoyé mon courrier au professionnel je n’ai pas eu de réponse ou si je n’ai pas trouvé le médiateur compétent pour mon litige.</td>
+                    </tr>
+                    <tr>
+                      <td>Comment&#160;?</td>
+                      <td>En contactant le conciliateur le plus proche de chez moi (cf page www.conciliateurs.fr/Trouver-une-permanence)</td>
+                    </tr>
+                    <tr>
+                      <td>Pourquoi&#160;?</td>
+                      <td>Pour instaurer le dialogue avec le professionnel et trouver un arrangement qui convient aux deux.</td>
+                    </tr>
+                    <tr>
+                      <td>Combien ça coûte&#160;?</td>
+                      <td>C’est gratuit !</td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h2>4</h2>
+              <div class="row">
+                <div class="col-2 text-right">
+                  <img src="/assets/images/icon-courthouse.svg" alt="icône amiable" class="pt-1"/>
+                </div>
+                <div class="col-10 m-auto">
+                  Je vais au tribunal d’instance
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-outline-dark" (click)="openModal(template4)">
+                  Comment s'y prendre ?
+                </button>
+              </div>
+              <ng-template #template4>
+                <div class="modal-body">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                    <tr>
+                      <td>Quand&#160;?</td>
+                      <td>Lorsque la médiation ou la conciliation ont échoué</td>
+                    </tr>
+                    <tr>
+                      <td>Comment&#160;?</td>
+                      <td>En faisant une déclaration auprès du greffe du Tribunal d’Instance à l’aide du CERFA n°11764*09</td>
+                    </tr>
+                    <tr>
+                      <td>Pourquoi&#160;?</td>
+                      <td>Pour que le juge tranche définitivement mon litige</td>
+                    </tr>
+                    <tr>
+                      <td>Combien ça coûte&#160;?</td>
+                      <td>La saisine est gratuite mais des frais au cours de la procédure peuvent intervenir (avocat, expertise…).</td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
