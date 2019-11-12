@@ -25,7 +25,7 @@
                     <td>{{access.lastName}}</td>
                     <td>{{access.email}}</td>
                     <td>
-                        <select class="form-control" [value]="access.level" *ngIf="access.email != user.email; else currentUserLevel">
+                        <select class="form-control" [value]="access.level" *ngIf="access.email != user.email; else currentUserLevel" (change)="updateAccess(access.userId, $event.target.value)">
                             <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
                         </select>
                         <ng-template #currentUserLevel>
@@ -33,7 +33,7 @@
                         </ng-template>
                     </td>
                     <td>
-                        <a *ngIf="access.email != user.email; else currentUserDelete" href="" class="text-danger">Supprimer l'accès</a>
+                        <a href="#" *ngIf="access.email != user.email; else currentUserDelete" class="text-danger" (click)="removeAccess(access.userId)">Supprimer l'accès</a>
                         <ng-template #currentUserDelete>
                             <small class="text-muted text-wrap">
                                 Vous ne pouvez pas supprimer votre propre accès.

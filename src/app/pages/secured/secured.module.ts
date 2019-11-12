@@ -16,13 +16,10 @@ import { AppRoleDirective } from '../../directives/app-role.directive';
 import { PasswordComponent } from './account/password/password.component';
 import { AccountActivationComponent } from './account/activation/account-activation.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
-<<<<<<< HEAD
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
-=======
 import { CompanyAccessesComponent } from './companyaccesses/companyaccesses.component';
 import { CompanyInvitationComponent } from './companyaccesses/invitation.component';
->>>>>>> Add draft (hidden) pages for company accesses management
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },

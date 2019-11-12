@@ -24,6 +24,31 @@ export class CompanyAccessesService {
     );
   }
 
+  updateAccess(siret: string, userId: string, level: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.put(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, userId]),
+          {
+            level: level
+          },
+          headers
+        );
+      })
+    );
+  }
+
+  removeAccess(siret: string, userId: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.delete(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, userId]),
+          headers
+        );
+      })
+    );
+  }
+
   sendInvitation(siret: string, email: string, level: string) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {

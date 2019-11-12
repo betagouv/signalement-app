@@ -21,6 +21,7 @@ export class CompanyAccessesComponent implements OnInit {
               private companyAccessesService: CompanyAccessesService,
               private route: ActivatedRoute) { }
   
+  siret: string;
   user: User;
   companyAccesses: CompanyAccess[];
   accessLevels = accessLevels;
@@ -35,12 +36,25 @@ export class CompanyAccessesComponent implements OnInit {
       this.user = user;
     });
   
-    siretParam.subscribe(siret =>
-      this.companyAccessesService.listAccesses(siret).subscribe(
-        accesses => {
-          this.companyAccesses = accesses;
-        }
-      )
-    );
+    siretParam.subscribe(siret => {
+      this.siret = siret;
+      this.refresh();
+    });
+  }
+
+  refresh() {
+    this.companyAccessesService.listAccesses(this.siret).subscribe(
+      accesses => {
+        this.companyAccesses = accesses;
+      }
+    )
+  }
+
+  updateAccess(userId: string, level: string) {
+    this.companyAccessesService.updateAccess(this.siret, userId, level).subscribe(() => this.refresh());
+  }
+
+  removeAccess(userId: string) {
+    this.companyAccessesService.removeAccess(this.siret, userId).subscribe(() => this.refresh())
   }
 }
