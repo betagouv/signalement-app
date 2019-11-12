@@ -23,15 +23,15 @@ export class AppRoleDirective implements OnInit {
           this.viewContainer.createEmbeddedView(this.templateRef);
         } else if (this.appRoleElse) {
           this.viewContainer.createEmbeddedView(this.appRoleElse);
-        } else {
-          this.templateRef = null;
         }
       }
     );
   }
 
   hasRole(user: User, roles: Roles[]) {
-    return user && roles.find(role => role.toString() === user.role);
+    return user && roles.find(role => {
+      return role.toString() === user.role;
+    });
   }
 
 }
