@@ -4,7 +4,6 @@ import { StatsComponent } from './stats.component';
 import { StatsService } from '../../services/stats.service';
 import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
-import { deserialize } from 'json-typescript-mapper';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ReportsPerMonth } from '../../model/Statistics';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -14,8 +13,8 @@ describe('StatsComponent', () => {
   let fixture: ComponentFixture<StatsComponent>;
   let statsService: StatsService;
 
-  const reportsPerMonth1 = deserialize(ReportsPerMonth, { month: 1, year: 2018, count: 5 });
-  const reportsPerMonth2 = deserialize(ReportsPerMonth, { month: 2, year: 2018, count: 8 });
+  const reportsPerMonth1 = Object.assign(new ReportsPerMonth(), { month: 1, year: 2018, count: 5 });
+  const reportsPerMonth2 = Object.assign(new ReportsPerMonth(), { month: 2, year: 2018, count: 8 });
 
   const statisticsFixture = {
     reportsCount: 53,
@@ -23,51 +22,51 @@ describe('StatsComponent', () => {
       reportsPerMonth1,
       reportsPerMonth2
     ],
-    "reportsCount7Days": 8,
-    "reportsCount30Days": 9,
-    "reportsCountInRegion": 9,
-    "reportsCount7DaysInRegion": 2,
-    "reportsCount30DaysInRegion": 3,
-    "reportsPercentageSendedToPro":	85.71,
-    "reportsPercentagePromise": 33.33,
-    "reportsPercentageWithoutSiret": 4.76,
-    "reportsCountByCategoryList": [
+    reportsCount7Days: 8,
+    reportsCount30Days: 9,
+    reportsCountInRegion: 9,
+    reportsCount7DaysInRegion: 2,
+    reportsCount30DaysInRegion: 3,
+    reportsPercentageSendedToPro:	85.71,
+    reportsPercentagePromise: 33.33,
+    reportsPercentageWithoutSiret: 4.76,
+    reportsCountByCategoryList: [
         {
-            "category": "Nourriture et boissons",
-            "count": 4
+            category: 'Nourriture et boissons',
+            count: 4
         },
         {
-            "category": "Pratique d'hygiène",
-            "count": 49
+            category: 'Pratique d\'hygiène',
+            count: 49
         },
         {
-            "category": "Prix / Paiement",
-            "count": 4
+            category: 'Prix / Paiement',
+            count: 4
         },
         {
-            "category": "Publicité",
-            "count": 1
+            category: 'Publicité',
+            count: 1
         },
         {
-            "category": "Services après-vente",
-            "count": 3
+            category: 'Services après-vente',
+            count: 3
         }
     ],
-    "reportsCountByRegionList": [
+    reportsCountByRegionList: [
         {
-            "region": "AURA",
-            "count": 1
+            region: 'AURA',
+            count: 1
         },
         {
-            "region": "CDVL",
-            "count": 6
+            region: 'CDVL',
+            count: 6
         },
         {
-            "region": "OCC",
-            "count": 2
+            region: 'OCC',
+            count: 2
         }
     ],
-    "reportsDurationsForEnvoiSignalement": 4
+    reportsDurationsForEnvoiSignalement: 4
 
   };
 

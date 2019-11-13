@@ -5,7 +5,6 @@ import { CompanyService } from '../../../services/company.service';
 import { Company, CompanySearchResult } from '../../../model/Company';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { deserialize } from 'json-typescript-mapper';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
@@ -87,10 +86,10 @@ describe('CompanyComponent', () => {
     });
 
     it('should initialize previous results', () => {
-      component.companies = [deserialize(Company, { name: 'C1' }), deserialize(Company, { name: 'C2' })];
-      const companySearchResult = deserialize(CompanySearchResult, {
-        'total_results': 0,
-        'etablissement': []
+      component.companies = [Object.assign(new Company(), { name: 'C1' }), Object.assign(new Company(), { name: 'C2' })];
+      const companySearchResult = Object.assign(new CompanySearchResult(), {
+        total_results: 0,
+        etablissement: []
       });
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
 
@@ -103,19 +102,19 @@ describe('CompanyComponent', () => {
 
     it('should display the company list when only one result has been found', () => {
 
-      const companySearchResult = deserialize(CompanySearchResult, {
-        'total_results': 1,
-        'etablissement': [{
-          'l1_normalisee': 'CASINO CARBURANTS',
-          'l2_normalisee': null,
-          'l3_normalisee': null,
-          'l4_normalisee': 'AVENUE DE LIMOGES',
-          'l5_normalisee': null,
-          'l6_normalisee': '87270 COUZEIX',
-          'l7_normalisee': 'FRANCE',
-          'enseigne': null,
-          'nom_raison_sociale': 'CASINO CARBURANTS',
-          'code_postal': '87270'
+      const companySearchResult = Object.assign(new CompanySearchResult(), {
+        total_results: 1,
+        etablissement: [{
+          l1_normalisee: 'CASINO CARBURANTS',
+          l2_normalisee: null,
+          l3_normalisee: null,
+          l4_normalisee: 'AVENUE DE LIMOGES',
+          l5_normalisee: null,
+          l6_normalisee: '87270 COUZEIX',
+          l7_normalisee: 'FRANCE',
+          enseigne: null,
+          nom_raison_sociale: 'CASINO CARBURANTS',
+          code_postal: '87270'
         }]
       });
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
@@ -130,30 +129,30 @@ describe('CompanyComponent', () => {
 
     it('should display the company list when many results have been found', () => {
 
-      const companySearchResult = deserialize(CompanySearchResult, {
-        'total_results': 2,
-        'etablissement': [
+      const companySearchResult = Object.assign(new CompanySearchResult(), {
+        total_results: 2,
+        etablissement: [
           {
-            'l1_normalisee': 'CASINO CARBURANTS',
-            'l2_normalisee': null,
-            'l3_normalisee': null,
-            'l4_normalisee': 'AVENUE DE LIMOGES',
-            'l5_normalisee': null,
-            'l6_normalisee': '87270 COUZEIX',
-            'l7_normalisee': 'FRANCE',
-            'enseigne': null,
-            'nom_raison_sociale': 'CASINO CARBURANTS',
+            l1_normalisee: 'CASINO CARBURANTS',
+            l2_normalisee: null,
+            l3_normalisee: null,
+            l4_normalisee: 'AVENUE DE LIMOGES',
+            l5_normalisee: null,
+            l6_normalisee: '87270 COUZEIX',
+            l7_normalisee: 'FRANCE',
+            enseigne: null,
+            nom_raison_sociale: 'CASINO CARBURANTS',
           },
           {
-            'l1_normalisee': 'DISTRIBUTION CASINO FRANCE',
-            'l2_normalisee': null,
-            'l3_normalisee': null,
-            'l4_normalisee': '1 RUE DU DOCTEUR ROBERT PASCAUD',
-            'l5_normalisee': null,
-            'l6_normalisee': '87270 COUZEIX',
-            'l7_normalisee': 'FRANCE',
-            'enseigne': null,
-            'nom_raison_sociale': 'DISTRIBUTION CASINO FRANCE',
+            l1_normalisee: 'DISTRIBUTION CASINO FRANCE',
+            l2_normalisee: null,
+            l3_normalisee: null,
+            l4_normalisee: '1 RUE DU DOCTEUR ROBERT PASCAUD',
+            l5_normalisee: null,
+            l6_normalisee: '87270 COUZEIX',
+            l7_normalisee: 'FRANCE',
+            enseigne: null,
+            nom_raison_sociale: 'DISTRIBUTION CASINO FRANCE',
           }]
       });
       spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));

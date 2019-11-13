@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
-import { deserialize } from 'json-typescript-mapper';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,14 +27,14 @@ describe('ProblemComponent', () => {
   reportFixture.category = 'catégorie';
 
   const subcategoriesFixture = [
-    deserialize(Subcategory, { title: 'title1', description: 'description1' }),
-    deserialize(Subcategory, { title: 'title2', description: 'description2' }),
-    deserialize(Subcategory, {
+    Object.assign( new Subcategory(), { title: 'title1', description: 'description1' }),
+    Object.assign( new Subcategory(), { title: 'title2', description: 'description2' }),
+    Object.assign( new Subcategory(), {
       title: 'title3',
       description: 'description3',
       subcategories: [
-        deserialize(Subcategory, { title: 'title31', description: 'description31' }),
-        deserialize(Subcategory, { title: 'title32', description: 'description32' })
+        Object.assign( new Subcategory(), { title: 'title31', description: 'description31' }),
+        Object.assign( new Subcategory(), { title: 'title32', description: 'description32' })
         ]
     }),
   ];
