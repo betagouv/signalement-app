@@ -18,10 +18,7 @@
                 "pas declare"
             ],
             "categoryId": "TNOIR"
-        }
-    ]
-  
-    "list": [
+        },
         {
             "words": [
                 "intoxication",
@@ -45,10 +42,7 @@
                 "douleurs"
             ],
             "categoryId": "INTOXI"
-        }
-    ]
-
-    "list": [
+        },
         {
             "words": [
                 "brûlure",
@@ -59,10 +53,7 @@
                 "electrocute",
             ],
             "categoryId": "SECUR"
-        }
-    ]
-
-    "list": [
+        },
         {
             "words": [
                 "amazon",
