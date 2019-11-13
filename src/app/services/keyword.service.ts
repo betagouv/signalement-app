@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import keywords from '../../assets/data/keywords.json';
-import { deserialize } from 'json-typescript-mapper';
-import { Keyword, KeywordList } from '../model/Keyword';
+import { Keyword } from '../model/Keyword';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +16,14 @@ export class KeywordService {
 
   getKeywords() {
     if (!this.keywords) {
-      this.keywords = deserialize(KeywordList, keywords).list;
+      this.keywords = keywords.list;
     }
     return this.keywords;
   }
 
   // injection de dépendances (pour les tests uniquement)
   setKeywords(words) {
-    this.keywords = deserialize(KeywordList, words).list;
+    this.keywords = words.list;
   }
 
   search(text) {

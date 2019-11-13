@@ -19,7 +19,7 @@
           <div class="col-4 text-left">
             <div class="btn-group" dropdown>
               <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" aria-controls="dropdown-basic">
-                {{getAreaLabel()}} <span class="caret"></span>
+                {{reportFilter.areaLabel ? reportFilter.areaLabel : 'Tous les départements'}} <span class="caret"></span>
               </button>
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                 <li role="menuitem" class="menutitle">
