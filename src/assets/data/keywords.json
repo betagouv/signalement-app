@@ -4,15 +4,77 @@
             "words": [
                 "au noir",
                 "au black",
+                "au blak",
                 "sans papier",
                 "immigré",
                 "immigre",
                 "travail dissimulé",
                 "travail dissimule",
                 "esclave",
-                "esclavage"
+                "esclavage",
+                "non déclaré",
+                "non declare",
+                "pas déclaré",
+                "pas declare"
             ],
             "categoryId": "TNOIR"
+        }
+    ]
+  
+    "list": [
+        {
+            "words": [
+                "intoxication",
+                "intoxiqué",
+                "intoxique",
+                "intoxiquer",
+                "vomissement",
+                "vomi",
+                "vomis",
+                "crampe",
+                "mal au ventre",
+                "mal de ventre",
+                "urgence",
+                "hôpital",
+                "hopital",
+                "malade",
+                "médecin",
+                "medecin",
+                "gastro",
+                "douleur",
+                "douleurs"
+            ],
+            "categoryId": "INTOXI"
+        }
+    ]
+
+    "list": [
+        {
+            "words": [
+                "brûlure",
+                "brulure",
+                "brûle",
+                "brule",
+                "electrocuté",
+                "electrocute",
+            ],
+            "categoryId": "SECUR"
+        }
+    ]
+
+    "list": [
+        {
+            "words": [
+                "amazon",
+                "cdiscount",
+                "boncoin",
+                "bon coin",
+                "Boncoin",
+                "Bon Coin",
+                "Bon coin",
+             
+            ],
+            "categoryId": "INTERNET"
         }
     ]
 }
