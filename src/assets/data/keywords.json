@@ -50,7 +50,7 @@
                 "brûle",
                 "brule",
                 "electrocuté",
-                "electrocute",
+                "electrocute"
             ],
             "categoryId": "SECUR"
         },
@@ -62,8 +62,7 @@
                 "bon coin",
                 "Boncoin",
                 "Bon Coin",
-                "Bon coin",
-             
+                "Bon coin"
             ],
             "categoryId": "INTERNET"
         }
