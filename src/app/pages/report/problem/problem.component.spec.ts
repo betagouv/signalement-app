@@ -15,6 +15,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
+import { of } from 'rxjs';
 
 describe('ProblemComponent', () => {
 
@@ -70,11 +71,8 @@ describe('ProblemComponent', () => {
   beforeEach(() => {
     anomalyService = TestBed.get(AnomalyService);
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.changeReportInProgress(reportFixture);
-
     fixture = TestBed.createComponent(ProblemComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -84,11 +82,11 @@ describe('ProblemComponent', () => {
   describe('on init', () => {
 
     it('shoud request the user if the problem concerns an internet purchase or not', () => {
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(Object.assign(new Report(), reportFixture)));
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
         Object.assign(anomalyFixture, { withInternetPurchase: true })
       );
 
-      component.ngOnInit();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -102,11 +100,11 @@ describe('ProblemComponent', () => {
   describe('when problem does not concern an internet purchase', () => {
 
     it('should display subcategories', () => {
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(Object.assign(new Report(), reportFixture)));
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
         Object.assign(anomalyFixture, { withInternetPurchase: false })
       );
 
-      component.ngOnInit();
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
@@ -118,11 +116,14 @@ describe('ProblemComponent', () => {
   describe('when receive subcategories', () => {
 
     it('should change the shared report with a report which contains subcategories', () => {
-      reportFixture.internetPurchase = false;
+      const sharedReportFixture = Object.assign(new Report(), reportFixture, {internetPurchase: false});
+      reportStorageService.changeReportInProgress(sharedReportFixture);
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(sharedReportFixture));
       component.anomaly = new Anomaly();
       component.anomaly.subcategories = subcategoriesFixture;
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
       const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+
       fixture.detectChanges();
 
       component.onSelectSubcategories([subcategoriesFixture[1]]);
@@ -132,7 +133,7 @@ describe('ProblemComponent', () => {
       subcategoryExpected.description = 'description2';
       const reportExpected = new Report();
       reportExpected.internetPurchase = false;
-      reportExpected.category = reportFixture.category;
+      reportExpected.category = sharedReportFixture.category;
       reportExpected.subcategories = [subcategoryExpected];
 
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Problem);
