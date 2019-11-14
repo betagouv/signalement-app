@@ -139,6 +139,16 @@ list:
             <li>écrire à la police/gendarmerie</li>
           </ul>
           La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
+  - category: Intoxication
+    categoryId: INTOXI
+    path: intoxication
+    hidden: true
+    rank: 110
+    breadcrumbTitle: Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?
+    information:
+      title: Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?
+      content: 
+          La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
   - category: Maison de retraite (EHPAD)
     categoryId: EHPAD
     path: ehpad
