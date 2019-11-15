@@ -21,7 +21,7 @@
 }
 
 
-:host /deep/ {
+:host ::ng-deep {
 
   .completer-holder {
     width: 100%;

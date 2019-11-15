@@ -51,7 +51,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
             this.titleService.setTitle(`${anomaly.category} - SignalConso`);
             this.meta.updateTag({ name: 'description', content: anomaly.description });
           }
-          return this.reportStorageService.reportInProgess;
+          return this.reportStorageService.retrieveReportInProgressFromStorage();
         }
       )
     ).subscribe(report => {

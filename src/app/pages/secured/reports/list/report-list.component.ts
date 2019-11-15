@@ -11,7 +11,6 @@ import { combineLatest, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
 import { StorageService } from '../../../../services/storage.service';
-import { deserialize } from 'json-typescript-mapper';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
@@ -97,7 +96,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
 
         if (reportFilter) {
-          this.reportFilter = deserialize(ReportFilter, reportFilter);
+          this.reportFilter = reportFilter;
         }
         const siret = params.get('siret');
 
@@ -156,7 +155,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         return this.reportService.getReports(
           (page - 1) * this.itemsPerPage,
           this.itemsPerPage,
-          reportFilter ? deserialize(ReportFilter, reportFilter) : new ReportFilter()
+          Object.assign(new ReportFilter(), reportFilter)
         );
       })
     ).subscribe(
@@ -259,16 +258,15 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   selectArea(area?: Region | Department) {
-    this.reportFilter.area = area;
-  }
-
-  getAreaLabel() {
-    if (!this.reportFilter.area) {
-      return 'Tous les départements';
-    } else if (this.reportFilter.area instanceof Region) {
-      return this.reportFilter.area.label;
+    if (!area) {
+      this.reportFilter.areaLabel = undefined;
+      this.reportFilter.departments = [];
+    } else if (area instanceof Region) {
+      this.reportFilter.areaLabel = area.label;
+      this.reportFilter.departments = area.departments;
     } else {
-      return `${this.reportFilter.area.code} - ${this.reportFilter.area.label}`;
+      this.reportFilter.areaLabel = `${area.code} - ${area.label}`;
+      this.reportFilter.departments = [area];
     }
   }
 

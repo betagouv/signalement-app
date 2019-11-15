@@ -5,14 +5,11 @@ import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
-import { NbReportsGroupByCompany } from '../model/NbReportsGroupByCompany';
 import { map, mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
-import { Region } from '../model/Region';
-import { deserialize } from 'json-typescript-mapper';
 import { ReportResponse } from '../model/ReportEvent';
 
 @Injectable({
@@ -94,7 +91,7 @@ export class ReportService {
         return of(Object.assign(new PaginatedData<Report>(), {
           totalCount: paginatedData.totalCount,
           hasNextPage: paginatedData.hasNextPage,
-          entities: paginatedData.entities.map(res => deserialize(NbReportsGroupByCompany, res))
+          entities: paginatedData.entities
         }));
       })
     );
@@ -105,12 +102,8 @@ export class ReportService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
     httpParams = httpParams.append('limit', limit.toString());
-    if (reportFilter.area) {
-      if (reportFilter.area instanceof Region) {
-        httpParams = httpParams.append('departments', (reportFilter.area as Region).departments.map(d => d.code).join(','));
-      } else {
-        httpParams = httpParams.append('departments', reportFilter.area.code);
-      }
+    if (reportFilter.departments && reportFilter.departments.length) {
+      httpParams = httpParams.append('departments', reportFilter.departments.map(d => d.code).join(','));
     }
     if (reportFilter.period && reportFilter.period[0]) {
       httpParams = httpParams.append('start', moment(reportFilter.period[0]).format('YYYY-MM-DD'));
@@ -146,12 +139,8 @@ export class ReportService {
       map(param => {
         const url = this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']);
         const httpParams = [param];
-        if (reportFilter.area) {
-          if (reportFilter.area instanceof Region) {
-            httpParams.push(`departments=${(reportFilter.area as Region).departments.map(d => d.code).join(',')}`);
-          } else {
-            httpParams.push(`departments=${reportFilter.area.code}`);
-          }
+        if (reportFilter.departments && reportFilter.departments.length) {
+          httpParams.push(`departments=${reportFilter.departments.map(d => d.code).join(',')}`);
         }
         if (reportFilter.period && reportFilter.period[0]) {
           httpParams.push(`start=${moment(reportFilter.period[0]).format('YYYY-MM-DD')}`);
