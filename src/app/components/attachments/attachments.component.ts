@@ -15,9 +15,11 @@ export class AttachmentsComponent implements OnInit {
   @Input() uploadedFiles: UploadedFile[];
   @Input() origin: FileOrigin;
 
-  @ViewChild('fileInput') fileInput;
+  @ViewChild('fileInput', {static: false}) fileInput;
 
   tooLargeFilename: string;
+  invalidFileExtension = false;
+  allowedExtensions = ["jpg", "jpeg", "pdf", "png", "gif", "doc", "docx", "odt"];
 
   constructor(private fileUploaderService: FileUploaderService) { }
 
@@ -31,6 +33,10 @@ export class AttachmentsComponent implements OnInit {
     }
   }
 
+  getInputAcceptExtensions() {
+    return this.allowedExtensions.map(ext => `.${ext}`).join(',');
+  }
+
   getFileDownloadUrl(uploadedFile: UploadedFile) {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
@@ -39,11 +45,18 @@ export class AttachmentsComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
+  checkExtension(filename: string) {
+    return this.allowedExtensions.includes(filename.split('.').pop().toLowerCase())
+  }
+
   selectFile() {
     this.tooLargeFilename = undefined;
+    this.invalidFileExtension = false;
     if (this.fileInput.nativeElement.files[0]) {
       if (this.fileInput.nativeElement.files[0].size > fileSizeMax) {
         this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
+      } else if (!this.checkExtension(this.fileInput.nativeElement.files[0].name)) {
+        this.invalidFileExtension = true;
       } else {
         const fileToUpload = new UploadedFile();
         fileToUpload.filename = this.fileInput.nativeElement.files[0].name;

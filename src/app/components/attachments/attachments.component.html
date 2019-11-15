@@ -35,9 +35,12 @@
 <div class="notification error" *ngIf="tooLargeFilename">
   Le fichier <i>"{{tooLargeFilename}}"</i> est trop volumineux, veuillez choisir un fichier de moins de 5Mo.
 </div>
+<div class="notification error" *ngIf="invalidFileExtension">
+  Type de fichier invalide. Les extensions acceptées sont : {{ allowedExtensions.join(", ") }}
+</div>
 <div class="row pb-3 d-md-none">
   <div class="col-12 text-center">
-    <input type="file" #fileInput class="form-control-file" hidden (change)="selectFile()">
+    <input type="file" #fileInput class="form-control-file" hidden (change)="selectFile()" accept="{{ getInputAcceptExtensions() }}">
     <button type="button" class="btn btn-sm btn-outline-primary"(click)="bringFileSelector()">
       Ajouter
     </button>

@@ -16,6 +16,7 @@ import moment from 'moment';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
+import { of } from 'rxjs';
 
 describe('DetailsComponent', () => {
 
@@ -92,8 +93,7 @@ describe('DetailsComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(new Report());
-
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(new Report()));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -157,8 +157,7 @@ describe('DetailsComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(reportWithSubcategory);
-
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(Object.assign(new Report(), reportWithSubcategory)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -211,8 +210,7 @@ describe('DetailsComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(reportWithSubcategory);
-
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(Object.assign(new Report(), reportWithSubcategory)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();

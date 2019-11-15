@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import { Router } from '@angular/router';
-import Utils from '../../../utils';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pro',
@@ -11,15 +10,19 @@ import Utils from '../../../utils';
 })
 export class ProComponent implements OnInit {
 
+  fragment: string;
+
   constructor(private titleService: Title,
               private meta: Meta,
-              private router: Router) { }
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.pro.title);
     this.meta.updateTag({ name: 'description', content: pages.pro.description });
 
-    Utils.focusAndBlurOnTop();
+    this.activatedRoute.fragment.subscribe(fragment => {
+      this.fragment = fragment;
+    });
   }
 
 }
