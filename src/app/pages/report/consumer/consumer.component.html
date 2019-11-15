@@ -32,7 +32,7 @@
         </label>
       </div>
 
-      <div class="form__group">
+      <div class="form__group" *ngIf="!report.employeeConsumer else employee">
         <div class="row pl-1 mb-4">
           <div class="col-2 col-sm-1 text-right pr-1">
             <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
@@ -50,6 +50,10 @@
           </div>
         </div>
       </div>
+
+      <ng-template #employee>
+        Petit message réconfortant
+      </ng-template>
 
       <div class="notification error mt-3" *ngIf="showErrors && consumerForm.invalid">
         <span *ngIf="firstNameCtrl.hasError('required')">

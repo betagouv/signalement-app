@@ -401,6 +401,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  setEmployeeConsumerValue(value: boolean) {
+    this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
+    this.report.employeeConsumer = value;
+  }
+
 }
 
 interface Keyword {

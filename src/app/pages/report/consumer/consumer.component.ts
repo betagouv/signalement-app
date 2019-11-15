@@ -61,14 +61,19 @@ export class ConsumerComponent implements OnInit, OnDestroy {
     this.emailCtrl = this.formBuilder.control(
       this.report.consumer ? this.report.consumer.email : '', [Validators.required, Validators.email]
     );
-    this.contactAgreementCtrl = this.formBuilder.control(this.report.contactAgreement, Validators.required);
 
     this.consumerForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
-      email: this.emailCtrl,
-      contactAgreement: this.contactAgreementCtrl
+      email: this.emailCtrl
     });
+
+    if (this.report.employeeConsumer) {
+      this.contactAgreementCtrl = this.formBuilder.control(false);
+    } else {
+      this.contactAgreementCtrl = this.formBuilder.control(this.report.contactAgreement, Validators.required);
+      this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
+    }
   }
 
   submitConsumerForm() {
