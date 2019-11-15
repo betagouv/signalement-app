@@ -1,30 +1,11 @@
-import { deserialize, JsonProperty, serialize } from 'json-typescript-mapper';
-import { Department, Region } from './Region';
+import { Department } from './Region';
 
 export class ReportFilter {
-  @JsonProperty({customConverter: {
-      fromJson(data) {
-        if (data) {
-          return data.departments ? deserialize(Region, data) : deserialize(Department, data);
-        }
-      },
-      toJson(data: Region | Department) {
-        return serialize(data);
-      }
-    }})
-  area?: Region | Department;
+  departments?: Department[];
+  areaLabel?: string;
   period?: Date[];
   siret?: string;
   category?: string;
   status?: string;
   details?: string;
-
-  constructor() {
-    this.area = undefined;
-    this.period = undefined;
-    this.siret = undefined;
-    this.category = '';
-    this.status = '';
-    this.details = undefined;
-  }
 }

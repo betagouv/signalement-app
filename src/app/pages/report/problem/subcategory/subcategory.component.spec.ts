@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubcategoryComponent } from './subcategory.component';
 import { Subcategory } from '../../../../model/Anomaly';
-import { deserialize } from 'json-typescript-mapper';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,14 +16,14 @@ describe('SubcategoryComponent', () => {
   let fixture: ComponentFixture<SubcategoryComponent>;
 
   const subcategoriesFixture = [
-    deserialize(Subcategory, { title: 'title1', description: 'description1' }),
-    deserialize(Subcategory, { title: 'title2', description: 'description2' }),
-    deserialize(Subcategory, {
+    Object.assign(new Subcategory(), { title: 'title1', description: 'description1' }),
+    Object.assign(new Subcategory(), { title: 'title2', description: 'description2' }),
+    Object.assign(new Subcategory(), {
       title: 'title3',
       description: 'description3',
       subcategories: [
-        deserialize(Subcategory, { title: 'title31', description: 'description31' }),
-        deserialize(Subcategory, { title: 'title32', description: 'description32' })
+        Object.assign(new Subcategory(), { title: 'title31', description: 'description31' }),
+        Object.assign(new Subcategory(), { title: 'title32', description: 'description32' })
       ]
     }),
   ];

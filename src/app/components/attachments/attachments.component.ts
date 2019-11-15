@@ -15,7 +15,7 @@ export class AttachmentsComponent implements OnInit {
   @Input() uploadedFiles: UploadedFile[];
   @Input() origin: FileOrigin;
 
-  @ViewChild('fileInput') fileInput;
+  @ViewChild('fileInput', {static: false}) fileInput;
 
   tooLargeFilename: string;
   invalidFileExtension = false;
