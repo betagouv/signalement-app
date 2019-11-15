@@ -30,6 +30,8 @@ export class AccountActivationComponent implements OnInit {
   loading: boolean;
   loadingError: boolean;
 
+  mayEditEmail: boolean = false;
+
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
@@ -43,8 +45,17 @@ export class AccountActivationComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.secured.account.activation.description });
     this.initForm();
 
-    this.authenticationService.tokenInfo.subscribe(tokenInfo => {
-      this.tokenInfo = tokenInfo;
+    this.authenticationService.getStoredTokenInfo().then(tokenInfo => {
+      if (tokenInfo == null) {
+        return this.router.navigate(['connexion']);
+      }
+      this.tokenInfo = <TokenInfo>tokenInfo;
+      this.mayEditEmail = (this.tokenInfo.emailedTo == undefined);
+      if (!this.mayEditEmail) {
+        console.log("Cleaning email validation");
+        this.activationForm.controls.email.clearValidators();
+        this.activationForm.controls.email.updateValueAndValidity();
+      }
     });
   }
 

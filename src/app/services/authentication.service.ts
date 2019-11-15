@@ -13,9 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthenticationService {
 
   private userSource = new BehaviorSubject<User>(undefined);
-  private tokenInfoSource = new BehaviorSubject<TokenInfo>(undefined);
   user = this.userSource.asObservable();
-  tokenInfo = this.tokenInfoSource.asObservable();
 
   jwtHelperService = new JwtHelperService();
 
@@ -27,11 +25,18 @@ export class AuthenticationService {
         this.userSource.next(authUser.user);
       }
     });
-    this.localStorage.getItem(TokenInfoStorageKey).subscribe(tokenInfo => {
+  }
+
+  async getStoredTokenInfo() {
+    return this.localStorage.getItem(TokenInfoStorageKey).toPromise().then(tokenInfo => {
         const minTimestamp = new Date();
         minTimestamp.setHours(minTimestamp.getHours() - 1);
-        if (tokenInfo && tokenInfo.timestamp > minTimestamp)
-          this.tokenInfoSource.next(tokenInfo);
+        if (tokenInfo && tokenInfo.timestamp > minTimestamp) {
+          return tokenInfo;
+        } else {
+          console.log("No TokenInfo, or expired");
+          return null;
+        }
     });
   }
 
@@ -98,7 +103,6 @@ export class AuthenticationService {
         if (data) {
           const tokenInfo = <TokenInfo>Object.assign({timestamp: new Date()}, data);
           this.localStorage.setItemSubscribe(TokenInfoStorageKey, tokenInfo);
-          this.tokenInfoSource.next(tokenInfo);
           return tokenInfo;
         } else {
           throw Error('Token invalide');

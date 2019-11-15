@@ -31,7 +31,7 @@ export class AccessTokenComponent implements OnInit {
       this.route.snapshot.queryParamMap.get('token'),
     ).subscribe(
       token => {
-        // FIXME: handle logged-in user
+        // TODO: handle logged-in user
         this.router.navigate(['compte', 'activation']);
       },
       error => {this.hasError = true}

@@ -17,9 +17,10 @@ export class AuthUser {
 }
 
 export class TokenInfo {
-  token: String;
-  companySiret: String;
+  token: string;
+  companySiret: string;
   timestamp: Date;
+  emailedTo?: string;
 }
 
 export enum Permissions {
