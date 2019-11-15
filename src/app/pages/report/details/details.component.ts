@@ -317,7 +317,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           );
           this.keywordsDetected = {
             category: anomaly.category,
-            message: anomaly.information ? anomaly.information.title : ''
+            message: res.message
           };
         } else {
           this.keywordsDetected = null;

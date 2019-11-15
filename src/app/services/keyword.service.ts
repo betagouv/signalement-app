@@ -43,6 +43,7 @@ export class KeywordService {
         if (found && found.length > 0) {
           return {
             categoryId: keywordsCategory.categoryId,
+            message: keywordsCategory.message,
             found
           };
         }
