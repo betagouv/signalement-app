@@ -128,9 +128,9 @@ list:
     path: travail-au-noir
     hidden: true
     rank: 110
-    breadcrumbTitle: Vous souhaitez signaler un cas de travail au noir&#160;?
+    breadcrumbTitle: Vous souhaitez signaler un cas de travail au noir ?
     information:
-      title: Vous souhaitez signaler un cas de travail au noir&#160;?
+      title: Vous souhaitez signaler un cas de travail au noir ?
       content: Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;
           <ul>
             <li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href="mailto:fraude.npdc@urssaf.fr">fraude.npdc@urssaf.fr</a></li>
@@ -139,34 +139,15 @@ list:
             <li>écrire à la police/gendarmerie</li>
           </ul>
           La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
-  - category: Intoxication
-    categoryId: INTOXI
-    path: intoxication
-    hidden: true
-    rank: 110
-    breadcrumbTitle: Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?
-    information:
-      title: Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?
-      content: 
-          La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
   - category: Alerte securite
     categoryId: SECUR
     path: secur
     hidden: true
     rank: 110
-    breadcrumbTitle: HH&#160;?
+    breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez avez une réaction allergique ?
     information:
-      title: HH
-      content: HH
-  - category: Internet
-    categoryId: INTERNETT
-    path: Inter
-    hidden: true
-    rank: 110
-    breadcrumbTitle: HH&#160;?
-    information:
-      title: HH
-      content: HH
+      title: Les problèmes de blessure, allergie.. ne rentrent pas dans le périmètre de l'outil SignalConso.
+      content: "Pour le signaler à la DGCCRF, utilisez ce lien :" <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
   - category: Maison de retraite (EHPAD)
     categoryId: EHPAD
     path: ehpad
