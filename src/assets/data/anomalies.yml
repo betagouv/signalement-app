@@ -149,6 +149,24 @@ list:
       title: Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?
       content: 
           La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
+  - category: Alerte securite
+    categoryId: SECUR
+    path: secur
+    hidden: true
+    rank: 110
+    breadcrumbTitle: HH&#160;?
+    information:
+      title: HH
+      content: HH
+  - category: Internet
+    categoryId: INTERNETT
+    path: Inter
+    hidden: true
+    rank: 110
+    breadcrumbTitle: HH&#160;?
+    information:
+      title: HH
+      content: HH
   - category: Maison de retraite (EHPAD)
     categoryId: EHPAD
     path: ehpad
