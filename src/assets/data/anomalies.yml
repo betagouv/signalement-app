@@ -147,7 +147,7 @@ list:
     breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez avez une réaction allergique ?
     information:
       title: Les problèmes de blessure, allergie.. ne rentrent pas dans le périmètre de l'outil SignalConso.
-      content: "Pour le signaler à la DGCCRF, utilisez ce lien :" <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+      content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
   - category: Maison de retraite (EHPAD)
     categoryId: EHPAD
     path: ehpad
