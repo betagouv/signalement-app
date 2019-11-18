@@ -582,6 +582,7 @@
   subcategories:
     - title: C'est un aliment ou une boisson
       example: 'Exemples : bonbon, viande, pain, conserve, vin, eau en bouteille ...'
+      subcategories: !!import/single subcategories/produits-objets.yml
     - title: C'est un objet 
       example: 'Exemples : jouet, électroménager, vêtement, savon, vaisselle, meuble ...'
       subcategories:
