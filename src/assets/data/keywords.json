@@ -254,7 +254,7 @@
         "intoxicatipn",
         "intoxicatiob"
       ],
-      "categoryId": "INTOXI",
+      "categoryId": "INTOX",
       "message": "Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?"
     },
     {
@@ -279,7 +279,7 @@
         "Bon Coin",
         "Bon coin"
       ],
-      "categoryId": "INTERNETT",
+      "categoryId": "INTERNET",
       "message": "Vous avez un problème avec une commande ou une annonce sur internet&#160;?"
     }
   ]
