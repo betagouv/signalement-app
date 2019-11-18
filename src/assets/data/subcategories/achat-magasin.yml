@@ -1,91 +1,105 @@
-- title: Prix
-  example: 'Exemples : prix faux en caisse, prix pas affiché'
+- title: Un problème qui concerne le magasin / commerce
+  example: 'Exemples : prix manquant, prix faux en caisse, magasin sale'
   subcategories:
-    - title: Le prix à la caisse est différent du prix affiché
-      example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros'
-      description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.'
-      detailInputs:
-        - label: Date du constat
-          rank: 1
-          type: DATE
-          defaultValue: SYSDATE
-        - label: Heure du constat
-          rank: 2
-          type: TIMESLOT
-          optionnal: true
-        - label: Quel produit&#160;?
-          rank: 3
-          type: TEXT
-          placeholder: Nom ou type de produit
-        - label: Quel était le prix indiqué si vous vous en rappelez&#160;?
-          rank: 4
-          type: TEXT
-          placeholder: Prix indiqué
-          optionnal: true
-        - label: 'L''avez-vous signalé au moment de payer&#160;?'
-          rank: 5
-          type: RADIO
-          options:
-            - Oui. Pouvez-vous préciser à qui&#160;? (à préciser)
-            - Non
-        - label: Si oui, le commerçant a-t-il bien voulu vous faire payer le prix affiché&#160;?
-          rank: 6
-          type: RADIO
-          options:
-            - Oui
-            - Non
-          optionnal: true
-        - label: Description
-          rank: 7
-          type: TEXTAREA
-    - title: Il manque des prix / les prix sont illisibles
-      description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
-      detailInputs:
-        - label: Veuillez préciser
-          rank: 1
-          type: RADIO
-          options:
-            - Prix pas affiché
-            - Prix illisible
-            - Autre (à préciser)
-        - label: Date du constat
-          rank: 2
-          type: DATE
-          defaultValue: SYSDATE
-        - label: Description
-          example: Précisez si possible le rayon concerné
-          rank: 3
-          type: TEXTAREA
-    - title: Les prix sont plus chers qu'ailleurs
-      information:
-        title: Les commerçants ont le droit de choisir leurs prix.
-        content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
-                <br/> Par exemple, il est autorisé de vendre une bouteille d'eau  8 euros dsi le prix est bien marqué.
-                <br/><br/><b>Le saviez-vous ?</b>
-                <br/>Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
-                <br/> Par exemple, le prix des livres est réglementé."
-    - title: Fausse réduction de prix
-      example: 'Exemples : fausse promotion pendant les soldes, fausse liquidation totale'
-      description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
-               <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
-               Un document prouvant ette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue."
-      detailInputs:
-        - label: "Il s'agit d'un problème sur:"
-          rank: 1
-          type: RADIO
-          options:
-            - Les soldes
-            - Une promotion
-            - Une liquidation
-            - Autre (à préciser)
-        - label: Date du constat
-          rank: 2
-          type: DATE
-          defaultValue: SYSDATE
-        - label: Description
-          example: Précisez si possible le problème
-          rank: 3
-          type: TEXTAREA
+  - title: Prix
+    example: 'Exemples : prix faux en caisse, prix pas affiché'
+    subcategories:       
+      - title: Le prix à la caisse est différent du prix affiché
+        example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros'
+        description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le faible pour le client.'
+        detailInputs:
+          - label: Date du constat
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Heure du constat
+            rank: 2
+            type: TIMESLOT
+            optionnal: true
+          - label: Quel produit&#160;?
+            rank: 3
+            type: TEXT
+            placeholder: Nom ou type de produit
+          - label: Quel était le prix indiqué si vous vous en rappelez&#160;?
+            rank: 4
+            type: TEXT
+            placeholder: Prix indiqué
+            optionnal: true
+          - label: 'L''avez-vous signalé au moment de payer&#160;?'
+            rank: 5
+            type: RADIO
+            options:
+              - Oui. Pouvez-vous préciser à qui&#160;? (à préciser)
+              - Non
+          - label: Si oui, le commerçant a-t-il bien voulu vous faire payer le prix affiché&#160;?
+            rank: 6
+            type: RADIO
+            options:
+              - Oui
+              - Non
+            optionnal: true
+          - label: Description
+            rank: 7
+            type: TEXTAREA
+      - title: Il manque des prix / les prix sont illisibles
+        description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+        detailInputs:
+          - label: Veuillez préciser
+            rank: 1
+            type: RADIO
+            options:
+              - Prix pas affiché
+              - Prix illisible
+              - Autre (à préciser)
+          - label: Date du constat
+            rank: 2
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Description
+            example: Précisez si possible le rayon concerné
+            rank: 3
+            type: TEXTAREA
+      - title: Les prix sont plus chers qu'ailleurs
+        information:
+          title: Les commerçants ont le droit de choisir leurs prix.
+          content: "Par contre, les prix doivent être clairement indiqués pour que vous   soyez au courant avant d'acheter ou de commander.
+                  <br/> Par exemple, il est autorisé de vendre une bouteille d'eau  8 euros dsi le prix est bien marqué.
+                  <br/><br/><b>Le saviez-vous ?</b>
+                  <br/>Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
+                  <br/> Par exemple, le prix des livres est réglementé."
+      - title: Fausse réduction de prix
+        example: 'Exemples : fausse promotion pendant les soldes, fausse liquidation totale'
+        description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
+                 <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
+                 Un document prouvant ette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue."
+        detailInputs:
+          - label: "Il s'agit d'un problème sur:"
+            rank: 1
+            type: RADIO
+            options:
+              - Les soldes
+              - Une promotion
+              - Une liquidation
+              - Autre (à préciser)
+          - label: Date du constat
+            rank: 2
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Description
+            example: Précisez si possible le problème
+            rank: 3
+            type: TEXTAREA
+    
+    
+    
+    
+    
+- title: Un problème avec un produit que j'ai acheté
+  example: 'Exemples : il manque des informations sur le produit, produit douteux'
+
+
+
+    
 - title: Produit périmé
   subcategoriesTitle: 'Vous voulez signaler&#160;:'
   subcategories:
