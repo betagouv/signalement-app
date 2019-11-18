@@ -18,6 +18,7 @@
         "pas declare"
       ],
       "categoryId": "TNOIR"
+      "message": "Vous pensez que l'entreprise emploie des gens au noir&#160;?"
     },
     {
       "words": [
@@ -266,6 +267,7 @@
         "electrocute"
       ],
       "categoryId": "SECUR"
+      "message": "Vous avez été blessé avec un objet (jouet, vêtement ...)&#160;?" 
     },
     {
       "words": [
@@ -278,6 +280,7 @@
         "Bon coin"
       ],
       "categoryId": "INTERNET"
+      "message": "Vous avez un problème avec une commande ou une annonce sur internet&#160;?"
     }
   ]
 }
