@@ -17,7 +17,7 @@
         "pas déclaré",
         "pas declare"
       ],
-      "categoryId": "TNOIR"
+      "categoryId": "TNOIR",
       "message": "Vous pensez que l'entreprise emploie des gens au noir&#160;?"
     },
     {
@@ -266,7 +266,7 @@
         "electrocuté",
         "electrocute"
       ],
-      "categoryId": "SECUR"
+      "categoryId": "SECUR",
       "message": "Vous avez été blessé avec un objet (jouet, vêtement ...)&#160;?" 
     },
     {
@@ -279,7 +279,7 @@
         "Bon Coin",
         "Bon coin"
       ],
-      "categoryId": "INTERNET"
+      "categoryId": "INTERNET",
       "message": "Vous avez un problème avec une commande ou une annonce sur internet&#160;?"
     }
   ]
