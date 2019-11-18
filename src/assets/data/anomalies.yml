@@ -51,7 +51,8 @@ list:
     categoryId: SIGN
     path: produits-objets
     description: textile, jouet, meuble...
-    rank:
+    hidden: true
+    rank: 110
     icon: icon_material.png
     subcategories: !!import/single subcategories/produits-objets.yml
   - category: Achat sur internet
