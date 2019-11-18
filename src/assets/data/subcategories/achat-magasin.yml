@@ -148,35 +148,35 @@
             - title: Mauvaises pratiques d'hygiène
               example: 'Exemple : personne qui fume dans un local de production'
             - title: Présence d'animaux
-          example: 'Exemple : cafards'
-          detailInputs:
-            - label: Quel animal avez-vous vu&#160;?
-              rank: 1
-              type: RADIO
-              options:
-                - Insectes (cafard...)
-                - Rongeurs (rat, souris...)
-                - Oiseau (pigeon...)
-                - Autre (à préciser)
-            - label: Où l'avez-vous vu&#160;?
-              rank: 2
-              type: CHECKBOX
-              options:
-                - Zone de production
-                - Intérieur d'un magasin
-                - Autre (à préciser)
-            - label: Pour corriger ce problème, dites-nous en plus
-              rank: 3
-              type: TEXTAREA
-              optionnal: true
-            - label: Date du constat
-              rank: 4
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Heure du constat (facultatif)
-              rank: 5
-              type: TIMESLOT
-              optionnal: true
+              example: 'Exemple : cafards'
+              detailInputs:
+                - label: Quel animal avez-vous vu&#160;?
+                  rank: 1
+                  type: RADIO
+                  options:
+                    - Insectes (cafard...)
+                    - Rongeurs (rat, souris...)
+                    - Oiseau (pigeon...)
+                    - Autre (à préciser)
+                - label: Où l'avez-vous vu&#160;?
+                  rank: 2
+                  type: CHECKBOX
+                  options:
+                    - Zone de production
+                    - Intérieur d'un magasin
+                    - Autre (à préciser)
+                - label: Pour corriger ce problème, dites-nous en plus
+                  rank: 3
+                  type: TEXTAREA
+                  optionnal: true
+                - label: Date du constat
+                  rank: 4
+                  type: DATE
+                  defaultValue: SYSDATE
+                - label: Heure du constat (facultatif)
+                  rank: 5
+                  type: TIMESLOT
+                  optionnal: true
         - title: Problème de température
           example: 'Exemple : rupture de la chaîne du froid'
           detailInputs:
@@ -579,3 +579,11 @@
         
 - title: Un problème avec un produit que j'ai acheté
   example: 'Exemples : il manque des informations sur le produit, produit douteux'
+
+
+
+    
+
+
+
+
