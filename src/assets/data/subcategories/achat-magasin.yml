@@ -1,4 +1,4 @@
-- title: Un problème qui concerne le magasin / commerce
+- title: Un problème qui concerne le magasin / le commerce
   example: 'Exemples : prix manquant, prix faux en caisse, magasin sale'
   subcategories:
     - title: Prix
@@ -147,444 +147,435 @@
             - title: Tenue sale
             - title: Mauvaises pratiques d'hygiène
               example: 'Exemple : personne qui fume dans un local de production'
-        - title: Autres
-    - title: Présence d'animaux
-      example: 'Exemple : cafards'
-      detailInputs:
-        - label: Quel animal avez-vous vu&#160;?
-          rank: 1
-          type: RADIO
-          options:
-            - Insectes (cafard...)
-            - Rongeurs (rat, souris...)
-            - Oiseau (pigeon...)
-            - Autre (à préciser)
-        - label: Où l'avez-vous vu&#160;?
-          rank: 2
-          type: CHECKBOX
-          options:
-            - Zone de production
-            - Intérieur d'un magasin
-            - Autre (à préciser)
-        - label: Pour corriger ce problème, dites-nous en plus
-          rank: 3
-          type: TEXTAREA
-          optionnal: true
-        - label: Date du constat
-          rank: 4
-          type: DATE
-          defaultValue: SYSDATE
-        - label: Heure du constat (facultatif)
-          rank: 5
-          type: TIMESLOT
-          optionnal: true
-    - title: Problème de température
-      example: 'Exemple : rupture de la chaîne du froid'
-      detailInputs:
-        - label: Quel est le problème&#160;?
-          rank: 1
-          type: RADIO
-          options:
-            - Vitrine ou réfrigérateur trop chaud, cassé ou en panne
-            - Stockage à température ambiante de produits frais ou congelés
-            - Transport à température ambiante de produits frais ou congelés
-            - Autre problème de température
-        - label: Pour corriger ce problème, dites-nous en plus
-          rank: 2
-          type: TEXTAREA
-          optionnal: true
-        - label: Date du constat
-          rank: 3
-          type: DATE
-          defaultValue: SYSDATE
-        - label: Heure du constat (facultatif)
-          rank: 4
-          type: TIMESLOT
-          optionnal: true
-    - title: Autres problème d'hygiène 
-    
-    
-    
-    
-- title: Un problème avec un produit que j'ai acheté
-  example: 'Exemples : il manque des informations sur le produit, produit douteux'
-
-
-
-    
-- title: Produit périmé
-  subcategoriesTitle: 'Vous voulez signaler&#160;:'
-  subcategories:
-    - title: Un constat fréquent de produits périmés dans un établissement
-      subcategoriesTitle: Quels sont les produits concernés&#160;?
-      subcategories:
-        - title: Des produits vendus au rayon frais
-          example: 'Exemples : viande, poisson, quiche, jambon'
-          subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
-          subcategories:
-            - title: Oui
-              detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée.
-                <br/>Après cette date, il est dangereux de consommer le produit.
-              description: Les dates "DLC" concernent surtout des produits frais.
-            - title: Non
-              information:
-                title: Le commerçant a le droit de vendre un produit jusqu'au jour indiqué sur la date limite de consommation (DLC).
-                content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
-                  <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
-                  <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation.
-                actions:
-                  - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
-                    answer: Contacter directement le service client de votre magasin pour leur proposer.
-        - title: Des produits vendus à température ambiante
-          example: 'Exemples : chocolat, conserve, compote, petits pots'
-          information:
-            title: Ce problème n'est pas un motif de signalement.
-            content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
-              <br/><br/><b>Le commerçant a le droit de vendre un produit avec cette date dépassée.</b>
-              <br/><br/>Cette date est seulement une indication. Au-delà de celle-ci, l'aliment peut perdre certaines de ses qualités gustatives ou nutritionnelles mais peut être consommé sans danger pour la santé. Il n'est pas nécessaire de le jeter.
-            actions:
-              - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
-                answer: Contacter directement le service client de votre magasin pour leur expliquer.
-    - title: Un produit périmé en particulier
-      subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
-      subcategories:
-        - title: À consommer de préférence avant le...
-          example: C'est souvent le cas des produits vendus à température ambiante.
-          information:
-            title: Ce problème n'est pas un motif de signalement.
-            content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement DLUO).
-              <br/><br/><b>Le commerçant a le droit de vendre un produit avec cette date dépassée.</b>
-              <br/>Cette date est seulement une indication. Au-delà de celle-ci, l'aliment peut perdre certaines de ses qualités gustatives ou nutritionnelles mais peut être consommé sans danger pour la santé. Il n'est pas nécessaire de le jeter.
-            actions:
-              - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
-                answer: Contacter directement le service client de votre magasin pour leur expliquer.
-        - title: À consommer jusqu’au...
-          example: C'est souvent le cas des produits frais.
-          subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
-          subcategories:
-            - title: Oui
-              detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
-              description: Après cette date, il est dangereux de consommer le produit.
-              detailInputs:
-                - label: Date du constat (ou d'achat suivant le cas)
-                  rank: 1
-                  type: DATE
-                  defaultValue: SYSDATE
-                - label: Date Limite de Consommation (DLC)
-                  rank: 2
-                  type: DATE
-                  fileLabel: Photo de la DLC / du produit / de la marque
-            - title: Non
-              information:
-                title: Le commerçant n'a pas le droit de vendre un produit si la date limite de consommation (DLC) est passée.
-                content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
-                  <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
-                  <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation.
-                actions:
-                  - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
-                    answer: Contacter directement le service client de votre magasin pour leur proposer.
-        - title: Cas particulier des oeufs
-          description: La date des oeufs est une date de consommation recommandée (DCR).
-            <br/> Les oeufs ne peuvent être vendus au-delà de 7 jours avant la DCR.
+            - title: Présence d'animaux
+          example: 'Exemple : cafards'
           detailInputs:
-            - label: Quel est le problème?
+            - label: Quel animal avez-vous vu&#160;?
               rank: 1
               type: RADIO
               options:
-                - La date est dépassée
-                - La date sera dépassée d'ici 7 jours
-            - label: Date de consommation recommandée
+                - Insectes (cafard...)
+                - Rongeurs (rat, souris...)
+                - Oiseau (pigeon...)
+                - Autre (à préciser)
+            - label: Où l'avez-vous vu&#160;?
               rank: 2
+              type: CHECKBOX
+              options:
+                - Zone de production
+                - Intérieur d'un magasin
+                - Autre (à préciser)
+            - label: Pour corriger ce problème, dites-nous en plus
+              rank: 3
+              type: TEXTAREA
+              optionnal: true
+            - label: Date du constat
+              rank: 4
               type: DATE
-            - label: Date du constat (ou date d'achat)
+              defaultValue: SYSDATE
+            - label: Heure du constat (facultatif)
+              rank: 5
+              type: TIMESLOT
+              optionnal: true
+        - title: Problème de température
+          example: 'Exemple : rupture de la chaîne du froid'
+          detailInputs:
+            - label: Quel est le problème&#160;?
+              rank: 1
+              type: RADIO
+              options:
+                - Vitrine ou réfrigérateur trop chaud, cassé ou en panne
+                - Stockage à température ambiante de produits frais ou congelés
+                - Transport à température ambiante de produits frais ou congelés
+                - Autre problème de température
+            - label: Pour corriger ce problème, dites-nous en plus
+              rank: 2
+              type: TEXTAREA
+              optionnal: true
+            - label: Date du constat
               rank: 3
               type: DATE
               defaultValue: SYSDATE
-              fileLabel: Photo
-
-- title: Publicité
-  example: 'Exemples : publicité trompeuse, produit du catalogue pas disponible'
-  subcategories:
-    - title: Indisponibilité des produits en publicité
-      detailInputs:
-        - label: Date du constat
-          rank: 1
-          type: DATE
-          defaultValue: SYSDATE
-        - label: De quelle publicité s'agit-il&#160;?
-          rank: 2
-          type: RADIO
-          options:
-            - Catalogue papier
-            - Publicité sur internet
-            - Spot radio (à préciser)
-            - Spot télé (à préciser)
-            - Autres (à préciser)
-        - label: Quel est le produit que vous vouliez&#160;?
-          rank: 3
-          type: TEXT
-          placeholder: Type, nom et marque du produit
-        - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
-          rank: 4
-          type: RADIO
-          options:
-            - Oui
-            - Non
-            - Je n'ai pas demandé
-          optionnal: true
-        - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
-          rank: 5
-          type: TEXT
-          placeholder: "Lien vers la publicité"
-      fileLabel: Photo(s) de la publicité si possible
-    - title: Informations de vente mensongères
-      example : 'Exemples : pancarte "produits locaux" or ce n''est pas le cas, affiche "pain bio" or ce n''est pas le cas'
-      detailInputs:
-        - label: Date du constat
-          rank: 1
-          type: DATE
-          defaultValue: SYSDATE
-        - label: Qu'est-ce qui est trompeur&#160;?
-          rank: 2
-          type: RADIO
-          options:
-            - L'emballage d'un produit
-            - Une affiche chez le commerçant
-            - Une annonce sur un catalogue
-            - Un site internet (à préciser)
-            - Un spot télé ou radio (à préciser)
-            - Un contrat ou un devis
-            - Le discours d'un vendeur
-            - La façon de mettre en vente
-            - Autre (à préciser)
-        - label: À propos de quoi est-ce trompeur&#160;?
-          rank: 3
-          type: RADIO
-          options:
-            - L'origine du produit
-            - La composition du produit
-            - Un label (bio par exemple)
-            - Une promesse de résultat
-            - Une marque
-            - Autre (à préciser)
-        - label: Pourquoi trouvez-vous ça trompeur ?
-          rank: 4
-          type: TEXTAREA
-          optionnal: true
-        - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
-          rank: 5
-          type: RADIO
-          options:
-            - Oui
-            - Non
-      fileLabel: Photo(s) si possible
-- title: Remboursement / garantie
-  example: 'Exemple : le magasin refuse de me reprendre un article'
-  subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
-  subcategories:
-    - title: Il présente un défaut ou il ne marche plus
-      subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
+            - label: Heure du constat (facultatif)
+              rank: 4
+              type: TIMESLOT
+              optionnal: true
+        - title: Autres problème d'hygiène 
+    - title: Produit périmé
+      subcategoriesTitle: 'Vous voulez signaler&#160;:'
       subcategories:
-        - title: Neuf
-          subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+        - title: Un constat fréquent de produits périmés dans un établissement
+          subcategoriesTitle: Quels sont les produits concernés&#160;?
           subcategories:
-            - title: Il y a moins de 2 ans
-              description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
-              detailTitle: Problème de garantie légale
+            - title: Des produits vendus au rayon frais
+              example: 'Exemples : viande, poisson, quiche, jambon'
+              subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
+              subcategories:
+                - title: Oui
+                  detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée.
+                    <br/>Après cette date, il est dangereux de consommer le produit.
+                  description: Les dates "DLC" concernent surtout des produits frais.
+                - title: Non
+                  information:
+                    title: Le commerçant a le droit de vendre un produit jusqu'au jour indiqué sur la date limite de consommation (DLC).
+                    content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
+                      <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
+                      <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation.
+                    actions:
+                      - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
+                        answer: Contacter directement le service client de votre magasin pour leur proposer.
+            - title: Des produits vendus à température ambiante
+              example: 'Exemples : chocolat, conserve, compote, petits pots'
+              information:
+                title: Ce problème n'est pas un motif de signalement.
+                content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
+                  <br/><br/><b>Le commerçant a le droit de vendre un produit avec cette date dépassée.</b>
+                  <br/><br/>Cette date est seulement une indication. Au-delà de celle-ci, l'aliment peut perdre certaines de ses qualités gustatives ou nutritionnelles mais peut être consommé sans danger pour la santé. Il n'est pas nécessaire de le jeter.
+                actions:
+                  - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
+                    answer: Contacter directement le service client de votre magasin pour leur expliquer.
+        - title: Un produit périmé en particulier
+          subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
+          subcategories:
+            - title: À consommer de préférence avant le...
+              example: C'est souvent le cas des produits vendus à température ambiante.
+              information:
+                title: Ce problème n'est pas un motif de signalement.
+                content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement DLUO).
+                  <br/><br/><b>Le commerçant a le droit de vendre un produit avec cette date dépassée.</b>
+                  <br/>Cette date est seulement une indication. Au-delà de celle-ci, l'aliment peut perdre certaines de ses qualités gustatives ou nutritionnelles mais peut être consommé sans danger pour la santé. Il n'est pas nécessaire de le jeter.
+                actions:
+                  - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
+                    answer: Contacter directement le service client de votre magasin pour leur expliquer.
+            - title: À consommer jusqu’au...
+              example: C'est souvent le cas des produits frais.
+              subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
+              subcategories:
+                - title: Oui
+                  detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
+                  description: Après cette date, il est dangereux de consommer le produit.
+                  detailInputs:
+                    - label: Date du constat (ou d'achat suivant le cas)
+                      rank: 1
+                      type: DATE
+                      defaultValue: SYSDATE
+                    - label: Date Limite de Consommation (DLC)
+                      rank: 2
+                      type: DATE
+                      fileLabel: Photo de la DLC / du produit / de la marque
+                - title: Non
+                  information:
+                    title: Le commerçant n'a pas le droit de vendre un produit si la date limite de consommation (DLC) est passée.
+                    content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
+                      <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
+                      <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation.
+                    actions:
+                      - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
+                        answer: Contacter directement le service client de votre magasin pour leur proposer.
+            - title: Cas particulier des oeufs
+              description: La date des oeufs est une date de consommation recommandée (DCR).
+                <br/> Les oeufs ne peuvent être vendus au-delà de 7 jours avant la DCR.
               detailInputs:
-                - label: Date d'achat
+                - label: Quel est le problème?
                   rank: 1
-                  type: DATE
-                - label: Nom du produit
+                  type: RADIO
+                  options:
+                    - La date est dépassée
+                    - La date sera dépassée d'ici 7 jours
+                - label: Date de consommation recommandée
                   rank: 2
-                  type: TEXT
-                - label: Date du constat
+                  type: DATE
+                - label: Date du constat (ou date d'achat)
                   rank: 3
                   type: DATE
                   defaultValue: SYSDATE
-                - label: Interlocuteur
-                  rank: 4
-                  type: RADIO
-                  options:
-                    - Vendeur
-                    - Accueil magasin
-                    - Service client (téléphone, mail, courrier)
-                - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
-                  rank: 5
-                  type: TEXTAREA
-              fileLabel: Preuve d'achat / publicité / offre de vente
-            - title: Il y a plus de 2 ans
-              subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+                  fileLabel: Photo    
+    - title: Publicité
+      example: 'Exemples : publicité trompeuse, produit du catalogue pas disponible'
+      subcategories:
+        - title: Indisponibilité des produits en publicité
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: De quelle publicité s'agit-il&#160;?
+              rank: 2
+              type: RADIO
+              options:
+                - Catalogue papier
+                - Publicité sur internet
+                - Spot radio (à préciser)
+                - Spot télé (à préciser)
+                - Autres (à préciser)
+            - label: Quel est le produit que vous vouliez&#160;?
+              rank: 3
+              type: TEXT
+              placeholder: Type, nom et marque du produit
+            - label: Le commerçant vous-a-t-il proposé de commander le produit ou d'en avoir un autre équivalent&#160;?
+              rank: 4
+              type: RADIO
+              options:
+                - Oui
+                - Non
+                - Je n'ai pas demandé
+              optionnal: true
+            - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
+              rank: 5
+              type: TEXT
+              placeholder: "Lien vers la publicité"
+          fileLabel: Photo(s) de la publicité si possible
+        - title: Informations de vente mensongères
+          example : 'Exemples : pancarte "produits locaux" or ce n''est pas le cas, affiche "pain bio" or ce n''est pas le cas'
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Qu'est-ce qui est trompeur&#160;?
+              rank: 2
+              type: RADIO
+              options:
+                - L'emballage d'un produit
+                - Une affiche chez le commerçant
+                - Une annonce sur un catalogue
+                - Un site internet (à préciser)
+                - Un spot télé ou radio (à préciser)
+                - Un contrat ou un devis
+                - Le discours d'un vendeur
+                - La façon de mettre en vente
+                - Autre (à préciser)
+            - label: À propos de quoi est-ce trompeur&#160;?
+              rank: 3
+              type: RADIO
+              options:
+                - L'origine du produit
+                - La composition du produit
+                - Un label (bio par exemple)
+                - Une promesse de résultat
+                - Une marque
+                - Autre (à préciser)
+            - label: Pourquoi trouvez-vous ça trompeur ?
+              rank: 4
+              type: TEXTAREA
+              optionnal: true
+            - label: Avez-vous déjà contacté le commerçant pour ce problème&#160;?
+              rank: 5
+              type: RADIO
+              options:
+                - Oui
+                - Non
+          fileLabel: Photo(s) si possible   
+    - title: Remboursement / garantie
+      example: 'Exemple : le magasin refuse de me reprendre un article'
+      subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
+      subcategories:
+        - title: Il présente un défaut ou il ne marche plus
+          subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
+          subcategories:
+            - title: Neuf
+              subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
               subcategories:
-                - title: Oui
-                  example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
-                  subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
-                    <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                - title: Il y a moins de 2 ans
+                  description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                  detailTitle: Problème de garantie légale
+                  detailInputs:
+                    - label: Date d'achat
+                      rank: 1
+                      type: DATE
+                    - label: Nom du produit
+                      rank: 2
+                      type: TEXT
+                    - label: Date du constat
+                      rank: 3
+                      type: DATE
+                      defaultValue: SYSDATE
+                    - label: Interlocuteur
+                      rank: 4
+                      type: RADIO
+                      options:
+                        - Vendeur
+                        - Accueil magasin
+                        - Service client (téléphone, mail, courrier)
+                    - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
+                      rank: 5
+                      type: TEXTAREA
+                  fileLabel: Preuve d'achat / publicité / offre de vente
+                - title: Il y a plus de 2 ans
+                  subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
-                    - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
-                      detailTitle: Problème de garantie commerciale
-                      detailInputs:
-                        - label: Date d'achat
-                          rank: 1
-                          type: DATE
-                        - label: Nom du produit
-                          rank: 2
-                          type: TEXT
-                        - label: Date de fin de garantie supplémentaire
-                          rank: 3
-                          type: DATE
-                        - label: Date du constat
-                          rank: 4
-                          type: DATE
-                          defaultValue: SYSDATE
-                        - label: Motif de refus
-                          rank: 5
-                          type: TEXT
+                    - title: Oui
+                      example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                      subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
+                        <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                      subcategories:
+                        - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                          detailTitle: Problème de garantie commerciale
+                          detailInputs:
+                            - label: Date d'achat
+                              rank: 1
+                              type: DATE
+                            - label: Nom du produit
+                              rank: 2
+                              type: TEXT
+                            - label: Date de fin de garantie supplémentaire
+                              rank: 3
+                              type: DATE
+                            - label: Date du constat
+                              rank: 4
+                              type: DATE
+                              defaultValue: SYSDATE
+                            - label: Motif de refus
+                              rank: 5
+                              type: TEXT
+                              fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                    - title: Non
+                      information:
+                        title: <b>Votre produit n'est plus couvert par la garantie.</b>
+                        subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                          <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
+                        actions:
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                                  <br/><br/>Un vice caché d'un produit est un défaut :
+                                  <ul>
+                                    <li>qui rend le produit inutilisable, </li>
+                                    <li>présent dès le départ et</li>
+                                    <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                                  </ul>"
+                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                              <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
+            - title: Occasion
+              subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+              subcategories:
+                - title: Il y a moins de 6 mois
+                  description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                  detailTitle: Problème de garantie légale
+                  detailInputs:
+                    - label: Date d'achat
+                      rank: 1
+                      type: DATE
+                    - label: Nom du produit
+                      rank: 2
+                      type: TEXT
+                    - label: Date du constat
+                      rank: 3
+                      type: DATE
+                      defaultValue: SYSDATE
+                    - label: Interlocuteur
+                      rank: 4
+                      type: RADIO
+                      options:
+                        - Vendeur
+                        - Accueil magasin
+                        - Service client (téléphone, mail, courrier)
+                    - label: Pour quelle raison le commerçant ne veut pas vous reprendre  le produit&#160;?
+                      rank: 5
+                      type: TEXTAREA
+                  fileLabel: Preuve d'achat / publicité / offre de vente
+                - title: Il y a plus de 6 mois
+                  subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+                  subcategories:
+                    - title: Oui
+                      example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                      subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
+                        <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                      subcategories:
+                        - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                          detailTitle: Problème de garantie commerciale
+                          detailInputs:
+                            - label: Date d'achat
+                              rank: 1
+                              type: DATE
+                            - label: Nom du produit
+                              rank: 2
+                              type: TEXT
+                            - label: Date de fin de garantie supplémentaire
+                              rank: 3
+                              type: DATE
+                            - label: Date du constat
+                              rank: 4
+                              type: DATE
+                              defaultValue: SYSDATE
+                            - label: Motif de refus
+                              rank: 5
+                              type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                - title: Non
-                  information:
-                    title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                    subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
-                      <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
-                    actions:
-                      - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                              <br/><br/>Un vice caché d'un produit est un défaut :
-                              <ul>
-                                <li>qui rend le produit inutilisable, </li>
-                                <li>présent dès le départ et</li>
-                                <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
-                              </ul>"
-                        answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                          <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
-        - title: Occasion
-          subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+                    - title: Non
+                      information:
+                        title: <b>Votre produit n'est plus couvert par la garantie.</b>
+                        subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
+                        actions:
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                                  example:
+                                  <br/><br/>Un vice caché d'un produit est un défaut :
+                                  <ul>
+                                    <li>qui rend le produit inutilisable, </li>
+                                    <li>présent dès le départ et</li>
+                                    <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
+                                  </ul>"
+                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                              <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
+        - title: Autres raison
+          example: 'Exemples: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
+          subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
           subcategories:
-            - title: Il y a moins de 6 mois
-              description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
-              detailTitle: Problème de garantie légale
-              detailInputs:
-                - label: Date d'achat
-                  rank: 1
-                  type: DATE
-                - label: Nom du produit
-                  rank: 2
-                  type: TEXT
-                - label: Date du constat
-                  rank: 3
-                  type: DATE
-                  defaultValue: SYSDATE
-                - label: Interlocuteur
-                  rank: 4
-                  type: RADIO
-                  options:
-                    - Vendeur
-                    - Accueil magasin
-                    - Service client (téléphone, mail, courrier)
-                - label: Pour quelle raison le commerçant ne veut pas vous reprendre  le produit&#160;?
-                  rank: 5
-                  type: TEXTAREA
-              fileLabel: Preuve d'achat / publicité / offre de vente
-            - title: Il y a plus de 6 mois
-              subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+            - title: Oui
+              description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+            - title: Non
+              information:
+                title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+                content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+                  <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+    - title: Moyens de paiement
+      example: 'Exemple : refus de la carte bancaire'
+      subcategories:
+        - title: Le commerçant refuse que je paie en espèces
+          subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+          subcategories:
+            - title: Il refuse les espèces d'une façon générale
+              description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+            - title: Il n'avait pas assez de monnaie
+              information:
+              content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+            - title: Mes pièces / billets étaient en mauvais état
+              information:
+              content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+            - title: Le prix était supérieur à 1 000 euros ou à 50 pièces
+              information:
+              content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+            - title: Autres
+        - title: Le commerçant refuse que je paie par carte bancaire ou chèque
+          subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bancaire&#160;?
+          subcategories:
+            - title: Il exige un minimum d'achat
+              subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
               subcategories:
                 - title: Oui
-                  example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
-                  subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
-                    <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
-                  subcategories:
-                    - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
-                      detailTitle: Problème de garantie commerciale
-                      detailInputs:
-                        - label: Date d'achat
-                          rank: 1
-                          type: DATE
-                        - label: Nom du produit
-                          rank: 2
-                          type: TEXT
-                        - label: Date de fin de garantie supplémentaire
-                          rank: 3
-                          type: DATE
-                        - label: Date du constat
-                          rank: 4
-                          type: DATE
-                          defaultValue: SYSDATE
-                        - label: Motif de refus
-                          rank: 5
-                          type: TEXT
-                      fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                - title: Non
+                  example: 'Exemple : sur une affiche au niveau des caisses'
                   information:
-                    title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                    subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
-                    actions:
-                      - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                              example:
-                              <br/><br/>Un vice caché d'un produit est un défaut :
-                              <ul>
-                                <li>qui rend le produit inutilisable, </li>
-                                <li>présent dès le départ et</li>
-                                <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
-                              </ul>"
-                        answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                          <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
-    - title: Autres raison
-      example: 'Exemples: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
-      subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
-      subcategories:
-        - title: Oui
-          description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-        - title: Non
-          information:
-            title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
-            content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
-              <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
-- title: Moyens de paiement
-  example: 'Exemple : refus de la carte bancaire'
-  subcategories:
-    - title: Le commerçant refuse que je paie en espèces
-      subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
-      subcategories:
-        - title: Il refuse les espèces d'une façon générale
-          description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
-        - title: Il n'avait pas assez de monnaie
-          information:
-          content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
-        - title: Mes pièces / billets étaient en mauvais état
-          information:
-          content: Le paiement en pièces ou billets en mauvais état peut être refusé.
-        - title: Le prix était supérieur à 1 000 euros ou à 50 pièces
-          information:
-          content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
-            <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
-        - title: Autres
-    - title: Le commerçant refuse que je paie par carte bancaire ou chèque
-      subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bancaire&#160;?
-      subcategories:
-        - title: Il exige un minimum d'achat
-          subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+                    title: Le commerçant a le droit d'exiger un minimum d'achat pour les paiements par carte bancaire et par chèque.
+                      <br/> Si vous voulez acheter un produit moins cher que le minimum d'achat, c'est à vous de trouver de la monnaie.
+                    content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+                - title: Non
+            - title: Il refuse les paiements par chèque ou carte bleue de façon générale
+              subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+              subcategories:
+                - title: Oui
+                  example: 'Exemple : sur une affiche au niveau des caisses'
+                  information:
+                    title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                    content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+                - title: Non
+            - title: Autres
+              example: 'Exemples : problème avec le terminal de paiement'
+        - title: Autres problèmes de prix ou paiement
+          subcategoriesTitle: 'Problème avec :'
           subcategories:
-            - title: Oui
-              example: 'Exemple : sur une affiche au niveau des caisses'
-              information:
-                title: Le commerçant a le droit d'exiger un minimum d'achat pour les paiements par carte bancaire et par chèque.
-                  <br/> Si vous voulez acheter un produit moins cher que le minimum d'achat, c'est à vous de trouver de la monnaie.
-                content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
-            - title: Non
-        - title: Il refuse les paiements par chèque ou carte bleue de façon générale
-          subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
-          subcategories:
-            - title: Oui
-              example: 'Exemple : sur une affiche au niveau des caisses'
-              information:
-                title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
-            - title: Non
-        - title: Autres
-          example: 'Exemples : problème avec le terminal de paiement'
-    - title: Autres problèmes de prix ou paiement
-      subcategoriesTitle: 'Problème avec :'
-      subcategories:
-        - title: Le cash-back
-        - title: Une carte cadeaux
-        - title: Autres
-- title: Autres
+            - title: Le cash-back
+            - title: Une carte cadeaux
+            - title: Autres
+    - title: Autres     
+        
+- title: Un problème avec un produit que j'ai acheté
+  example: 'Exemples : il manque des informations sur le produit, produit douteux'
