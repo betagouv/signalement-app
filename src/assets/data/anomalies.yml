@@ -144,9 +144,18 @@ list:
     path: secur
     hidden: true
     rank: 110
-    breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez avez une réaction allergique ?
+    breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez eu une réaction allergique ?
     information:
-      title: Les problèmes de blessure, allergie.. ne rentrent pas dans le périmètre de l'outil SignalConso.
+      title: Les problèmes de blessure, allergie.. ne rentrent pas dans le périmètre de l'outil SignalConso. Ces problèmes imposent une analyse immédiate du signalement, ce qui ne sera pas le cas avec SignalConso.
+      content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+  - category: Alerte corps étranger
+    categoryId: CORPSETRANGER
+    path: stranger
+    hidden: true
+    rank: 110
+    breadcrumbTitle: Vous avez trouvé un petit morceau dur ou une vis dans un aliment ?
+    information:
+      title: Un objet ou morceau d'objet qui se trouve dans un aliment alors que ce ne devrait pas être le cas s'appelle un corps étranger. Cela peut être une vis, un clou, un boulon, un bout de plastique, un morceau de verre par exemple.
       content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
   - category: Maison de retraite (EHPAD)
     categoryId: EHPAD
