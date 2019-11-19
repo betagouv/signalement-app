@@ -47,7 +47,7 @@ export class AccountActivationComponent implements OnInit {
 
     this.authenticationService.getStoredTokenInfo().then(tokenInfo => {
       if (tokenInfo == null) {
-        return this.router.navigate(['connexion']);
+        return this.router.navigate(['/connexion']);
       }
       this.tokenInfo = <TokenInfo>tokenInfo;
       this.mayEditEmail = (this.tokenInfo.emailedTo == undefined);
