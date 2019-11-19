@@ -304,7 +304,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
-    if (formControl) {
+    if (formControl && this.report.category) {
       const res = this.keywordService.search(formControl.value, this.anomalyService.getAnomalyByCategory(this.report.category).categoryId);
       if (!res) {
         this.keywordDetected = null;
