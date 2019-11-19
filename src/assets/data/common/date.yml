@@ -15,7 +15,7 @@ subcategories:
     subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
     subcategories:
       - title: Oui
-         detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
+        detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
         description: Après cette date, il est dangereux de consommer le produit.
         detailInputs:
           - label: Date du constat (ou d'achat suivant le cas)
