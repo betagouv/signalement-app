@@ -1,0 +1,55 @@
+subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
+subcategories:
+  - title: À consommer de préférence avant le...
+    example: C'est souvent le cas des produits vendus à température ambiante.
+    information:
+      title: Ce problème n'est pas un motif de signalement.
+      content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement DLUO).
+               <br/><br/><b>Le commerçant a le droit de vendre un produit avec cette date dépassée.</b>
+               <br/>Cette date est seulement une indication. Au-delà de celle-ci, l'aliment peut perdre certaines de ses qualités gustatives ou nutritionnelles mais peut être consommé sans danger pour la santé. Il n'est pas nécessaire de le jeter.
+      actions:
+        - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
+          answer: Contacter directement le service client de votre magasin pour leur expliquer.
+  - title: À consommer jusqu’au...
+    example: C'est souvent le cas des produits frais.
+    subcategoriesTitle: La date est-elle dépassée au moment de la vente ou de l'achat&#160;?
+    subcategories:
+      - title: Oui
+        detailTitle: Il est interdit de vendre un produit avec une date limite de consommation dépassée. Ces dates concernent surtout des produits frais.
+        description: Après cette date, il est dangereux de consommer le produit.
+        detailInputs:
+          - label: Date du constat (ou d'achat suivant le cas)
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Date Limite de Consommation (DLC)
+            rank: 2
+            type: DATE
+            fileLabel: Photo de la DLC / du produit / de la marque          
+      - title: Non
+        information:
+          title: Le commerçant n'a pas le droit de vendre un produit si la date limite de consommation (DLC) est passée.
+          content: Par exemple, si la date est le 13 avril, il est possible de vendre le produit le 13 avril mais pas le 14 avril.
+                <br/>Le commerçant peut choisir de faire une réduction du prix pour les dates "courtes" mais ce n'est pas une obligation.
+                <br/>Le commerçant peut indiquer que les produits se périment bientôt ou le jour-même mais ce n'est pas une obligation.
+          actions:
+            - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
+              answer: Contacter directement le service client de votre magasin pour leur proposer.
+  - title: Cas particulier des oeufs
+    description: La date des oeufs est une date de consommation recommandée (DCR).
+                <br/> Les oeufs ne peuvent être vendus au-delà de 7 jours avant la DCR.
+    detailInputs:
+      - label: Quel est le problème?
+        rank: 1
+        type: RADIO
+        options:
+          - La date est dépassée
+          - La date sera dépassée d'ici 7 jours
+      - label: Date de consommation recommandée
+        rank: 2
+        type: DATE
+      - label: Date du constat (ou date d'achat)
+        rank: 3
+        type: DATE
+        defaultValue: SYSDATE
+        fileLabel: Photo    
