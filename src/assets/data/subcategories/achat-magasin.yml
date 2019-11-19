@@ -235,6 +235,7 @@
                   - question: Vous souhaitez néanmoins faire part de votre mécontentement&#160;?
                     answer: Contacter directement le service client de votre magasin pour leur expliquer.
         - title: Un produit périmé en particulier
+          subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
           subcategories: !!import/single ../common/date.yml
     - title: Publicité
       example: 'Exemples : publicité trompeuse, produit du catalogue pas disponible'
