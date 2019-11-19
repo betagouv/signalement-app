@@ -26,15 +26,19 @@ export class KeywordService {
     this.keywords = words.list;
   }
 
-  search(text) {
+  search(text: string, activeCategoryId: string) {
 
     if (text) {
-      for (let i = 0; i < this.keywords.length; i++) {
-        const keywordsCategory = this.keywords[i];
-        const found = keywordsCategory.words.map(word => ({
-          word,
-          result: new RegExp(word).exec(text)
-        })).filter(elt => elt.result && elt.result.length > 0)
+      const keywordsToSearch = this.keywords
+        .filter(keyword => keyword.filteredCategories && keyword.filteredCategories.includes(activeCategoryId));
+      for (let i = 0; i < keywordsToSearch.length; i++) {
+        const keyword = this.keywords[i];
+        const found = keyword.words
+          .map(word => ({
+            word,
+            result: new RegExp(word).exec(text)
+          }))
+          .filter(elt => elt.result && elt.result.length > 0)
           .map(elt => ({
             expression: elt.result[0],
             index: elt.result.index
@@ -42,8 +46,7 @@ export class KeywordService {
 
         if (found && found.length > 0) {
           return {
-            categoryId: keywordsCategory.categoryId,
-            message: keywordsCategory.message,
+            keyword ,
             found
           };
         }

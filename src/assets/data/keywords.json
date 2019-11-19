@@ -17,7 +17,12 @@
         "pas déclaré",
         "pas declare"
       ],
-      "categoryId": "TNOIR",
+      "redirectCategory": "TNOIR",
+      "filteredCategories": [
+        "CR",
+        "MAG",
+        "SIGN"
+      ],
       "message": "Vous pensez que l'entreprise emploie des gens au noir&#160;?"
     },
     {
@@ -254,7 +259,12 @@
         "intoxicatipn",
         "intoxicatiob"
       ],
-      "categoryId": "INTOX",
+      "redirectCategory": "INTOX",
+      "filteredCategories": [
+        "CR",
+        "MAG",
+        "SIGN"
+      ],
       "message": "Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?"
     },
     {
@@ -266,7 +276,12 @@
         "electrocuté",
         "electrocute"
       ],
-      "categoryId": "SECUR",
+      "redirectCategory": "SECUR",
+      "filteredCategories": [
+        "CR",
+        "MAG",
+        "SIGN"
+      ],
       "message": "Vous avez été blessé avec un objet (jouet, vêtement ...)&#160;?" 
     },
     {
@@ -278,7 +293,12 @@
         "bout de",
         "éclat"
       ],
-      "categoryId": "CORPSETRANGER",
+      "redirectCategory": "CORPSETRANGER",
+      "filteredCategories": [
+        "CR",
+        "MAG",
+        "SIGN"
+      ],
       "message": "Vous avez trouvé un corps étranger (morceau de verre, de plastique, une vis..) dans un aliment qui aurait pu vous blesser&#160;?" 
     },     
     {
@@ -297,7 +317,12 @@
         "Bon Coin",
         "Bon coin"
       ],
-      "categoryId": "INTERNET",
+      "redirectCategory": "INTERNET",
+      "filteredCategories": [
+        "CR",
+        "MAG",
+        "SIGN"
+      ],
       "message": "Vous avez un problème avec une commande ou une annonce sur internet&#160;?"
     }
   ]
