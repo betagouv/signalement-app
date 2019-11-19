@@ -52,7 +52,22 @@
       </div>
 
       <ng-template #employee>
-        Petit message réconfortant
+        <div class="notification info">
+          <p>
+            Votre signalement sera lu uniquement par la répression des fraudes.
+          </p>
+          <p>
+            Vos coordonnées sont à destination des enquêteurs uniquement.
+            Ils peuvent être amenés à vous contacter afin de vérifier votre identité et votre signalement.
+          </p>
+          <p>
+            Votre employeur ne sera pas mis au courant de votre signalement.
+          </p>
+          <p>
+            Pendant l'enquête, si les enquêteurs ont besoin de révéler votre identité à la justice ou à votre employeur, ils vous demanderont l'autorisation avant.
+            Vous pourrez refuser.
+          </p>
+        </div>
       </ng-template>
 
       <div class="notification error mt-3" *ngIf="showErrors && consumerForm.invalid">
