@@ -21,7 +21,7 @@
               </label>
             </div>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="siret" disabled [value]="user?.login">
+              <input type="text" class="form-control" id="siret" disabled [value]="tokenInfo?.companySiret">
             </div>
           </div>
           <div class="form-group row">
@@ -51,7 +51,7 @@
               </label>
             </div>
             <div class="col-sm-6">
-              <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" />
+              <input [formControl]="emailCtrl" [readonly]="!mayEditEmail" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" [value]="mayEditEmail ? null : tokenInfo?.emailedTo" />
             </div>
           </div>
           <div class="form-group row">
