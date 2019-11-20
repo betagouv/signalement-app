@@ -43,7 +43,10 @@ registerLocaleData(localeFr, 'fr');
       { path: 'stats', component: StatsComponent },
       { path: '**', component: ReportComponent },
       { path: '**', redirectTo: '' }
-    ], {scrollPositionRestoration: 'top'}),
+    ], {
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+    }),
     ReportModule,
     BrowserModule,
     BrowserAnimationsModule,

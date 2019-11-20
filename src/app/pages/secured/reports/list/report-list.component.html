@@ -19,7 +19,7 @@
           <div class="col-4 text-left">
             <div class="btn-group" dropdown>
               <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" aria-controls="dropdown-basic">
-                {{getAreaLabel()}} <span class="caret"></span>
+                {{reportFilter.areaLabel ? reportFilter.areaLabel : 'Tous les départements'}} <span class="caret"></span>
               </button>
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                 <li role="menuitem" class="menutitle">
@@ -135,7 +135,7 @@
         <div class="row form-group">
           <div class="col-3 col-lg-4 text-right">
             <label for="statusFilter">
-              Statut
+              Statut <a [routerLink]="['/vous-êtes-un-professionnel']" fragment="les-status" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
             </label>
           </div>
           <div class="col-9 col-lg-8 text-left">

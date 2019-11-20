@@ -145,7 +145,7 @@ describe('ReportService', () => {
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
       const reportFilter = new ReportFilter();
-      reportFilter.area = regionFixture;
+      reportFilter.departments = regionFixture.departments;
       reportFilter.period = [new Date(), new Date()];
       const offset = 0;
       const limit = 10;
@@ -172,7 +172,7 @@ describe('ReportService', () => {
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
       const reportFilter = new ReportFilter();
-      reportFilter.area = dept2Fixture;
+      reportFilter.departments = [dept2Fixture];
       reportFilter.period = [new Date(), new Date()];
       const offset = 0;
       const limit = 10;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import anomalies from '../../assets/data/anomalies.json';
-import { deserialize } from 'json-typescript-mapper';
-import { Anomaly, AnomalyList } from '../model/Anomaly';
+import { Anomaly } from '../model/Anomaly';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ export class AnomalyService {
 
   getAnomalies() {
     if (!this.anomalies) {
-      this.anomalies = deserialize(AnomalyList, anomalies).list;
+      this.anomalies = anomalies.list;
     }
     return this.anomalies;
   }

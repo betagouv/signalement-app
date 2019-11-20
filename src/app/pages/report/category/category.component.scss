@@ -2,7 +2,7 @@
 @import "../../../../theme/media-queries";
 
 
-:host /deep/ {
+:host ::ng-deep {
   .alert.alert-danger.alert-dismissible {
     color: $black;
     position: fixed;
