@@ -20,7 +20,6 @@ export class ForgotPasswordComponent implements OnInit {
   showSuccess: boolean;
   loading: boolean;
   loadingError: boolean;
-  isDgccrf = false;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -33,10 +32,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.titleService.setTitle(pages.login.forgotPassword.title);
     this.meta.updateTag({ name: 'description', content: pages.login.forgotPassword.description });
     this.initLoginForm();
-
-    this.route.url.subscribe(url => {
-      this.isDgccrf = url.findIndex(u => u.toString() === 'dgccrf') >= 0;
-    });
   }
 
   initLoginForm() {

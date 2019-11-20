@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { AuthUser, User } from '../model/AuthUser';
-import { Api, AuthUserStorageKey, ServiceUtils } from './service.utils';
+import { AuthUser, User, TokenInfo } from '../model/AuthUser';
+import { Api, AuthUserStorageKey, TokenInfoStorageKey, ServiceUtils } from './service.utils';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
@@ -24,6 +24,19 @@ export class AuthenticationService {
       if (authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token)) {
         this.userSource.next(authUser.user);
       }
+    });
+  }
+
+  async getStoredTokenInfo() {
+    return this.localStorage.getItem(TokenInfoStorageKey).toPromise().then(tokenInfo => {
+        const minTimestamp = new Date();
+        minTimestamp.setHours(minTimestamp.getHours() - 1);
+        if (tokenInfo && tokenInfo.timestamp > minTimestamp) {
+          return tokenInfo;
+        } else {
+          console.log("No TokenInfo, or expired");
+          return null;
+        }
     });
   }
 
@@ -72,6 +85,29 @@ export class AuthenticationService {
       this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate', 'password', 'reset']),
       { password },
       Object.assign(this.serviceUtils.getHttpHeaders(), { params: httpParams })
+    );
+  }
+
+  fetchTokenInfo(siret: string, token: string) {
+    return this.http.get<TokenInfo>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'token']),
+      {
+        params:
+          new HttpParams()
+            .set('token', token),
+        ...this.serviceUtils.getHttpHeaders()
+      }
+    )
+    .pipe(
+      map(data => {
+        if (data) {
+          const tokenInfo = <TokenInfo>Object.assign({timestamp: new Date()}, data);
+          this.localStorage.setItemSubscribe(TokenInfoStorageKey, tokenInfo);
+          return tokenInfo;
+        } else {
+          throw Error('Token invalide');
+        }
+      })
     );
   }
 }
