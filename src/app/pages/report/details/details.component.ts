@@ -325,6 +325,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   goToInformationPage() {
+    this.analyticsService.trackEvent(
+      EventCategories.report,
+      ReportEventActions.informationFromKeywordsDetection,
+      this.keywordDetected.redirectCategory
+    );
+
     this.step = Step.Category;
     this.report.category = this.anomalyService.getAnomalyByCategoryId(this.keywordDetected.redirectCategory).category;
     this.report.subcategories = null;

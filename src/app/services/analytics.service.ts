@@ -42,7 +42,8 @@ export enum ReportEventActions {
   validateCompany = 'Validation de l\'établissement',
   validateConsumer = 'Validation du consommateur',
   validateConfirmation = 'Envoi d\'un signalement',
-  keywordsDetection = 'Mots-clés détectés'
+  keywordsDetection = 'Mots-clés détectés',
+  informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés'
 }
 
 export enum CompanyEventActions {
