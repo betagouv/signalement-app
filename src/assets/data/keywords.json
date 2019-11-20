@@ -30,7 +30,7 @@
         "SANT",
         "VEH",
         "ANI",
-        "ADM",        
+        "ADM"       
       ],
       "message": "Vous pensez que l'entreprise emploie des gens au noir&#160;?"
     },
@@ -339,7 +339,7 @@
         "SANT",
         "VEH",
         "ANI",
-        "ADM",        
+        "ADM"       
       ],
       "message": "Vous avez un problème avec une commande ou une annonce sur internet&#160;?"
     }
