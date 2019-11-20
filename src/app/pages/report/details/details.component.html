@@ -27,6 +27,7 @@
             <input type="text"
                    [formControlName]="getFormControlName(detailInput)"
                    [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
+                   (blur)="searchKeywords(getFormControl(detailInput))"
                    [id]="getFormControlId(detailInput)">
           </div>
         </div>
@@ -120,11 +121,6 @@
                     maxlength="500"
                     placeholder="500 caractères maximum">
           </textarea>
-          <br />
-          <div class="notification warning" [@openClose]="keywordsDetected ? 'open' : 'closed'">
-            <span [innerHTML]="keywordsDetected?.message"></span>
-            <span *ngIf="keywordsDetected" class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
-          </div>
         </ng-container>
 
       </div>
@@ -142,6 +138,10 @@
       </div>
 
       <hr />
+      <div class="notification warning" [@openClose]="keywordDetected ? 'open' : 'closed'">
+        <span [innerHTML]="keywordDetected?.message"></span>
+        <span *ngIf="keywordDetected" class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
+      </div>
       <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
         <i class="material-icons md-24" aria-hidden="true">play_arrow</i>
         Étape suivante : identifier le commerçant
