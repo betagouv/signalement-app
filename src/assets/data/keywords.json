@@ -17,12 +17,7 @@
         "pas déclaré",
         "pas declare"
       ],
-      "redirectCategory": "TNOIR",
-      "filteredCategories": [
-        "CR",
-        "MAG",
-        "SIGN"
-      ],
+      "redirectCategory": "TNOIR",      
       "message": "Vous pensez que l'entreprise emploie des gens au noir&#160;?"
     },
     {
@@ -317,12 +312,7 @@
         "Bon Coin",
         "Bon coin"
       ],
-      "redirectCategory": "INTERNET",
-      "filteredCategories": [
-        "CR",
-        "MAG",
-        "SIGN"
-      ],
+      "redirectCategory": "INTERNET",      
       "message": "Vous avez un problème avec une commande ou une annonce sur internet&#160;?"
     }
   ]
