@@ -45,7 +45,7 @@ export enum ReportEventActions {
   validateConsumer = 'Validation du consommateur',
   validateConfirmation = 'Envoi d\'un signalement',
   keywordsDetection = 'Mots-clés détectés',
-  companyTypeSelection = 'Sélection d\'un type d\'entreprise'
+  informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés'
 }
 
 export enum CompanyEventActions {
@@ -59,7 +59,6 @@ export enum CompanySearchEventNames {
   tooManyResults = 'Trop de résultat',
   severalResult = 'Plusieurs résultats',
   singleResult = 'Un seul résultat',
-  around = 'A proximité',
   error = 'Erreur technique'
 }
 

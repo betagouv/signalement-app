@@ -15,6 +15,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import Utils from '../../../utils';
+import { Keyword } from '../../../model/Keyword';
 
 export const fileSizeMax = 5000000;
 
@@ -56,7 +57,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   uploadedFiles: UploadedFile[];
 
   showErrors: boolean;
-  keywordsDetected: Keyword;
+  keywordDetected: Keyword;
 
   maxDate: Date;
   fileOrigins = FileOrigin;
@@ -303,33 +304,35 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
-    if (formControl) {
-      const res = this.keywordService.search(formControl.value);
+    if (formControl && this.report.category) {
+      const res = this.keywordService.search(formControl.value, this.anomalyService.getAnomalyByCategory(this.report.category).categoryId);
       if (!res) {
-        this.keywordsDetected = null;
+        this.keywordDetected = null;
       } else {
-        const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
+        const anomaly = this.anomalyService.getAnomalyByCategoryId(res.keyword.redirectCategory);
         if (anomaly) {
           this.analyticsService.trackEvent(
             EventCategories.report,
             ReportEventActions.keywordsDetection,
             JSON.stringify(res.found.map(elt => elt.expression))
           );
-          this.keywordsDetected = {
-            category: anomaly.category,
-            message: anomaly.information ? anomaly.information.title : ''
-          };
+          this.keywordDetected = res.keyword;
         } else {
-          this.keywordsDetected = null;
+          this.keywordDetected = null;
         }
       }
     }
   }
 
   goToInformationPage() {
-    // modification des éléments du report et du step pour que le router affiche la page d'info avec le contexte
+    this.analyticsService.trackEvent(
+      EventCategories.report,
+      ReportEventActions.informationFromKeywordsDetection,
+      this.keywordDetected.redirectCategory
+    );
+
     this.step = Step.Category;
-    this.report.category = this.keywordsDetected.category;
+    this.report.category = this.anomalyService.getAnomalyByCategoryId(this.keywordDetected.redirectCategory).category;
     this.report.subcategories = null;
 
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
@@ -406,11 +409,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.report.employeeConsumer = value;
   }
 
-}
-
-interface Keyword {
-  readonly category: string;
-  readonly message: string;
 }
 
 export function ValidateCheckboxControl(formArray: FormArray) {

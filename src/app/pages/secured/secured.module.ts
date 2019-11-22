@@ -18,6 +18,8 @@ import { AccountActivationComponent } from './account/activation/account-activat
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
+import { CompanyAccessesComponent } from './companyaccesses/companyaccesses.component';
+import { CompanyInvitationComponent } from './companyaccesses/invitation.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
@@ -27,8 +29,10 @@ const routes: Routes = [
   { path: 'suivi-des-signalements/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
   { path: 'compte/mot-de-passe', component: PasswordComponent, canActivate: [AuthGuard] },
-  { path: 'compte/activation', component: AccountActivationComponent, canActivate: [AuthGuard] },
-  { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
+  { path: 'compte/activation', component: AccountActivationComponent },
+  { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] },
+  { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
+  { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -42,7 +46,9 @@ const routes: Routes = [
     DGCCRFComponent,
     AccountActivationComponent,
     SubscriptionComponent,
-    MostReportedListComponent
+    MostReportedListComponent,
+    CompanyAccessesComponent,
+    CompanyInvitationComponent
   ],
   imports: [
     CommonModule,
