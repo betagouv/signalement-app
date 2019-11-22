@@ -15,20 +15,41 @@
     </div>
 
     <ng-template #detailsFormTemplate>
+
+      <div class="row notification info ml-0 md-0">
+        <div class="col-1 pl-0 d-none d-sm-block">
+          <img alt="Icône information" src="/assets/images/picture-observation.svg">
+        </div>
+        <div class="col-12 col-sm-11">
+          <ng-container *ngIf="!report.employeeConsumer else employeeConsumer">
+            <b>Votre description ci-dessous sera lue par l'entreprise et la répression des fraudes.</b>
+            <br />Les pièces jointes seront également lues par l'entreprise.
+            <br />Si vous souhaitez restez anonyme, c’est-à-dire que l'entreprise ne connaisse pas votre identité,
+            pensez à retirer votre nom des pièces jointes et à ne rien citer de personnel.
+          </ng-container>
+          <ng-template #employeeConsumer>
+            Votre signalement sera lu <b>uniquement par la répression des fraudes.</b>
+            <br />Rien ne sera communiqué à votre employeur.
+          </ng-template>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row notification success ml-0 md-0" *ngIf="getReportLastSubcategory()?.detailTitle">
+        <h4 [innerHTML]="getReportLastSubcategory().detailTitle"></h4>
+      </div>
+
+      <div class="row notification note ml-0 md-0" *ngIf="getReportLastSubcategory()?.description">
+        <div class="col-1 pl-0 d-none d-sm-block">
+          <img alt="Icône information" src="/assets/images/icon_info.png">
+        </div>
+        <div class="col-12 col-sm-11">
+          <p [innerHTML]="getReportLastSubcategory().description"></p>
+        </div>
+      </div>
+
       <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
-
-        <div class="notification success" *ngIf="getReportLastSubcategory()?.detailTitle">
-          <h4 [innerHTML]="getReportLastSubcategory().detailTitle"></h4>
-        </div>
-
-        <div *ngIf="getReportLastSubcategory()?.description" class="row notification note">
-          <div class="text-right">
-            <img alt="Icône information" src="/assets/images/icon_info.png">
-          </div>
-          <div class="text-left">
-            <p [innerHTML]="getReportLastSubcategory().description"></p>
-          </div>
-        </div>
 
         <div class="form__group" *ngFor="let detailInput of this.detailInputs">
           <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
@@ -160,6 +181,7 @@
           Étape suivante : identifier le commerçant
         </button>
       </form>
+
     </ng-template>
   </div>
 </section>
