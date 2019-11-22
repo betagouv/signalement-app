@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { CompanyAccess } from '../../../model/CompanyAccess';
+import { CompanyAccess, PendingToken } from '../../../model/CompanyAccess';
 import { User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { accessLevels } from './common';
@@ -24,7 +24,10 @@ export class CompanyAccessesComponent implements OnInit {
   siret: string;
   user: User;
   companyAccesses: CompanyAccess[];
+  pendingTokens: PendingToken[];
   accessLevels = accessLevels;
+
+  showSuccess = false;
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.companyAccesses.title);
@@ -38,11 +41,12 @@ export class CompanyAccessesComponent implements OnInit {
   
     siretParam.subscribe(siret => {
       this.siret = siret;
-      this.refresh();
+      this.refreshAccesses();
+      this.refreshPendingTokens();
     });
   }
 
-  refresh() {
+  refreshAccesses() {
     this.companyAccessesService.listAccesses(this.siret).subscribe(
       accesses => {
         this.companyAccesses = accesses;
@@ -50,11 +54,32 @@ export class CompanyAccessesComponent implements OnInit {
     )
   }
 
+  refreshPendingTokens() {
+    this.companyAccessesService.listPendingTokens(this.siret).subscribe(
+      pendingTokens => {
+        this.pendingTokens = pendingTokens;
+      }
+    )
+  }
+
   updateAccess(userId: string, level: string) {
-    this.companyAccessesService.updateAccess(this.siret, userId, level).subscribe(() => this.refresh());
+    this.showSuccess = false;
+    this.companyAccessesService
+        .updateAccess(this.siret, userId, level)
+        .subscribe(() => {this.showSuccess = true; this.refreshAccesses()});
   }
 
   removeAccess(userId: string) {
-    this.companyAccessesService.removeAccess(this.siret, userId).subscribe(() => this.refresh())
+    this.showSuccess = false;
+    this.companyAccessesService
+        .removeAccess(this.siret, userId)
+        .subscribe(() => {this.showSuccess = true; this.refreshAccesses()})
+  }
+
+  removePendingToken(tokenId: string) {
+    this.showSuccess = false;
+    this.companyAccessesService
+        .removePendingToken(this.siret, tokenId)
+        .subscribe(() => {this.showSuccess = true; this.refreshPendingTokens()});
   }
 }

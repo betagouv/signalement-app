@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { CompanyAccess } from '../model/CompanyAccess';
+import { CompanyAccess, PendingToken } from '../model/CompanyAccess';
 import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
@@ -58,6 +58,28 @@ export class CompanyAccessesService {
             email: email,
             level: level
           },
+          headers
+        );
+      })
+    );
+  }
+
+  listPendingTokens(siret: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<PendingToken[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'pending']),
+          headers
+        );
+      })
+    );
+  }
+
+  removePendingToken(siret: string, tokenId: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.delete(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'token', tokenId]),
           headers
         );
       })

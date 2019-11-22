@@ -8,6 +8,7 @@
     </div>
 </div>
 <div class="container">
+    <div class="alert alert-success" *ngIf="showSuccess">Modifications enregistrées !</div>
     <div class="row">
         <table class="table">
             <thead>
@@ -33,7 +34,7 @@
                         </ng-template>
                     </td>
                     <td>
-                        <a href="#" *ngIf="access.email != user.email; else currentUserDelete" class="text-danger" (click)="removeAccess(access.userId)">Supprimer l'accès</a>
+                        <button *ngIf="access.email != user.email; else currentUserDelete" class="btn btn-sm btn-danger" (click)="removeAccess(access.userId)">Supprimer l'accès</button>
                         <ng-template #currentUserDelete>
                             <small class="text-muted text-wrap">
                                 Vous ne pouvez pas supprimer votre propre accès.
@@ -41,12 +42,20 @@
                         </ng-template>
                     </td>
                 </tr>
+                <tr *ngFor="let pendingToken of pendingTokens">
+                    <td colspan="2" class="text-center"><small class="text-muted">L'invitation a été envoyée et est en attente d'acceptation.</small></td>
+                    <td>{{pendingToken.emailedTo}}</td>
+                    <td>{{accessLevels.get(pendingToken.level)}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" (click)="removePendingToken(pendingToken.id)">Annuler l'invitation</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
     <div class="row">
         <div class="col text-center mb-1">
-            <a routerLink="./invitation" class="btn btn-secondary">Ajouter un utilisateur</a>
+            <a routerLink="./invitation" class="btn btn-primary">Ajouter un utilisateur</a>
         </div>
     </div>
 </div>
