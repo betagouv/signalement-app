@@ -1,33 +1,34 @@
 - title: Téléphonie / Internet
   subcategories:
-    - title: Publicité
-      example: 'Exemple : mention mensongère'
+    - title: 'Mon forfait : prix, contrat et facture'
+      example: 'Exemples : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
       subcategories:
-        - title: Indisponibilité des produits/offres
-          detailInputs:
-            - label: Date du constat
-              rank: 1
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Quel type de produit/offre était indisponible&#160;?
-              rank: 2
-              type: TEXT
-              placeholder: Type de produit
-            - label: Description
-              rank: 3
-              type: TEXTAREA
-        - title: Information mensongère ou trompeuse
-    - title: Contrat
-      example: 'Exemples : reconduction de contrat, clause abusive'
-    - title: SAV
-      example: 'Exemple : pas de réponse du service client'
-    - title: Offre promotionnelle pas respectée
-      example: 'Exemple : je devais bénéficié d''une reduction de 15e sur le telephone mais je ne l''ai jamais reçu'
+        - title: Je ne suis pas d'accord avec ma facture
+        - title: Le prix de mon forfait a été augmenté
+        - title: Des options payantes ont été automatiquement rajoutées à mon forfait
+        - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
+        - title: Autre
+    - title: Qualité du réseau
+      example: 'Exemples : je ne capte pas, je capte mal, débit faible'
+    - title: Résiliation / changement d'opérateur
+      subcategories:
+        - title: Frais de résiliation
+        - title: Restitution du materiel
+        - title: Problème avec le RIO (Relevé d'Identité Opérateur)
+        - title: Mon ancien opérateur continue de me prélever
     - title: Appels ou sms indésirables
-      example: 'Exemples : spams, démarchages téléphoniques'
-    - title: Itinérance
-      example: Pas de réception du sms, itinérance à la frontière
-    - title: Autres
+      example: 'Exemples : spams, démarchages téléphoniques, BlocTel'
+      subcategories:
+        - title: Je reçois des appels indésirables alors que je suis sur BlocTel
+        - title: J'ai répondu à un appel ou à un sms et j'ai été surtaxé
+        - title: Je veux signaler un numéro qui m'envoi des spams (sms ou appel)
+        - title: J'ai eu un problème avec un démarcheur téléphonique
+    - title: Autre
+      subcategories:
+        - title: Utilisation de mon forfait à l'étranger
+        - title: SAV
+          example: 'Exemple : pas de réponse du service client'
+        - title: Téléphone acheté avec le forfait
 - title: Eau
   subcategories:
     - title: Contrat / facture
