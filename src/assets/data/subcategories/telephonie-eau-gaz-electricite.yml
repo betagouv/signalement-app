@@ -10,6 +10,9 @@
         - title: Autre
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
+      information:
+      title: La qualité du réseau est mauvaise
+      content: Les problèmes de réseau ne sont pas à signaler sur SignalConso. <br> Vous devez le signaler à l'ARCEP sur le site dédié <a href="https://jalerte.arcep.fr/" target="_blank" /> 'J''alerte l''Arcep' </a>
     - title: Résiliation / changement d'opérateur
       subcategories:
         - title: Frais de résiliation
