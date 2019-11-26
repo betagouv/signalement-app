@@ -90,7 +90,7 @@
   example: 'Exemples : jouet qui prend feu, allergie, intoxication'
   information:
     title: Vous souhaitez signaler un produit dangereux
-    subTitle: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
+    content: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
     actions:
       - question: Signaler un produit dangereux?
         answer: Utiliser ce formulaire spécifique<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
