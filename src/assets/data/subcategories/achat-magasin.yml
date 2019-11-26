@@ -350,6 +350,7 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
+                  consumerActions: !!import/single ../common/actions/garantie.yml
                 - title: Il y a plus de 2 ans
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -378,10 +379,11 @@
                               rank: 5
                               type: TEXT
                               fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                          consumerActions: !!import/single ../common/actions/garantie.yml
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                        subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                        content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                           <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                         actions:
                           - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
@@ -421,6 +423,7 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
+                  consumerActions: !!import/single ../common/actions/garantie.yml
                 - title: Il y a plus de 6 mois
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -449,6 +452,7 @@
                               rank: 5
                               type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                          consumerActions: !!import/single ../common/actions/garantie.yml
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -470,6 +474,7 @@
           subcategories:
             - title: Oui
               description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+              consumerActions: !!import/single ../common/actions/garantie.yml
             - title: Non
               information:
                 title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.

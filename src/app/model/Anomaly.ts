@@ -37,6 +37,7 @@ export class Subcategory {
   detailInputs?: DetailInput[];
   fileLabel?: string;
   information?: Information;
+  consumerActions?: Information[];
 }
 
 export class Anomaly {
