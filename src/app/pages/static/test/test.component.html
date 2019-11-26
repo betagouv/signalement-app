@@ -1,51 +1,54 @@
 <main role="main">
   <section class="section section-lighter-grey">
     <div class="container max-width">
-      <h1 class="text-center pb-4">Votre signalement a bien été envoyé !</h1>
-      <div class="row">
-        <div class="col-3">
-          <img src="/assets/images/picture-pro.svg" alt="Illustration" />
-        </div>
-        <div class="col-9">
-          <h2>Que va-t-il se passer pour le commerçant ?</h2>
-          <p>
-            Le commerçant recevra votre signalement sans connaître votre identité.
-            Il aura la possibilité de corriger directement le problème, grâce à vos informations.
-            Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>) qui pourra intervenir si nécessaire.
-          </p>
-          <p>
-            En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
-          </p>
+      <h1 class="text-center pb-2 pb-sm-4">Votre signalement a bien été envoyé&#160;!</h1>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <img src="/assets/images/picture-pro.svg" alt="Illustration" />
+            </div>
+            <div class="col-9 d-sm-none">
+              <h2>Que va-t-il se passer pour l'entreprise ?</h2>
+            </div>
+            <div class="col-12 col-sm-9">
+              <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
+              <p>
+                L'entreprise recevra votre signalement sans connaître votre identité.
+                Il aura la possibilité de corriger directement le problème, grâce à vos informations.
+                Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>) qui pourra intervenir si nécessaire.
+              </p>
+              <p>
+                En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row pt-4">
-        <div class="col-3">
-          <img src="/assets/images/picture-problem.svg" alt="Illustration" />
-        </div>
-        <div class="col-9">
-          <h2>Et maintenant comment faire aboutir ma demande ?</h2>
-          <div class="card">
-            <div class="card-body">
-              <h2>1</h2>
-              <div class="row">
-                <div class="col-2 text-right">
-                  <img src="/assets/images/icon-hand-shake.svg" alt="icône amiable" class="pt-1"/>
-                </div>
-                <div class="col-10 m-auto">
-                  J’écris au professionnel pour résoudre le problème à l’amiable
-                </div>
-              </div>
-              <div class="text-center">
-                <button class="btn btn-outline-primary" (click)="openModal(template1)">
-                  Comment s'y prendre ?
-                </button>
-              </div>
-              <ng-template #template1>
-                <div class="modal-body">
-                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <img src="/assets/images/picture-problem.svg" alt="Illustration" />
+            </div>
+            <div class="col-9 d-sm-none">
+              <h2>Et maintenant comment faire aboutir ma demande ?</h2>
+            </div>
+            <div class="col-12 col-sm-9">
+              <h2 class="d-none d-sm-block">Et maintenant comment faire aboutir ma demande ?</h2>
+              <div class="collapse-container">
+                <div class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse1">
+                  <button type="button" class="btn">1</button>
+                  <button type="button" class="btn">
+                    J’écris au professionnel pour résoudre le problème à l’amiable
                   </button>
-                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                  <button type="button" class="btn">
+                    <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                    <i class="material-icons md-24 up">keyboard_arrow_up</i>
+                  </button>
+                </div>
+                <div class="collapse" id="collapse1">
+                  <table class="table table-bordered no-hover" cellpadding="2">
                     <tr>
                       <td>Quand&#160;?</td>
                       <td>Le plus tôt possible</td>
@@ -69,31 +72,20 @@
                     </tr>
                   </table>
                 </div>
-              </ng-template>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h2>2</h2>
-              <div class="row">
-                <div class="col-2 text-right">
-                  <img src="/assets/images/icon-help.svg" alt="icône amiable" class="pt-1"/>
-                </div>
-                <div class="col-10 m-auto">
-                  Je contacte un médiateur de la consommation compétent, c’est-à-dire une personne tierce à mon litige chargée de régler mon problème.
-                </div>
               </div>
-              <div class="text-center">
-                <button class="btn btn-outline-primary" (click)="openModal(template2)">
-                  Comment s'y prendre ?
-                </button>
-              </div>
-              <ng-template #template2>
-                <div class="modal-body">
-                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
+              <div class="collapse-container">
+                <div class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse2">
+                  <button type="button" class="btn">2</button>
+                  <button type="button" class="btn">
+                    Je contacte un médiateur de la consommation compétent, c’est-à-dire une personne tierce à mon litige chargée de régler mon problème.
                   </button>
-                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                  <button type="button" class="btn">
+                    <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                    <i class="material-icons md-24 up">keyboard_arrow_up</i>
+                  </button>
+                </div>
+                <div class="collapse" id="collapse2">
+                  <table class="table table-bordered no-hover" cellpadding="2">
                     <tr>
                       <td>Quand&#160;?</td>
                       <td>Si 2 mois après avoir envoyé mon courrier je n’ai pas de réponse du professionnel</td>
@@ -114,31 +106,20 @@
                     </tr>
                   </table>
                 </div>
-              </ng-template>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h2>3</h2>
-              <div class="row">
-                <div class="col-2 text-right">
-                  <img src="/assets/images/icon-help.svg" alt="icône amiable" class="pt-1"/>
-                </div>
-                <div class="col-10 m-auto">
-                  Je contacte un conciliateur c’est-à-dire une personne qui m’aide à trouver une solution avec le professionnel.
-                </div>
               </div>
-              <div class="text-center">
-                <button class="btn btn-outline-primary" (click)="openModal(template3)">
-                  Comment s'y prendre ?
-                </button>
-              </div>
-              <ng-template #template3>
-                <div class="modal-body">
-                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
+              <div class="collapse-container">
+                <div class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse3">
+                  <button type="button" class="btn">3</button>
+                  <button type="button" class="btn">
+                    Je contacte un conciliateur c’est-à-dire une personne qui m’aide à trouver une solution avec le professionnel.
                   </button>
-                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                  <button type="button" class="btn">
+                    <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                    <i class="material-icons md-24 up">keyboard_arrow_up</i>
+                  </button>
+                </div>
+                <div class="collapse" id="collapse3">
+                  <table class="table table-bordered no-hover" cellpadding="2">
                     <tr>
                       <td>Quand&#160;?</td>
                       <td>Comme pour la médiation, si 2 mois après avoir envoyé mon courrier au professionnel je n’ai pas eu de réponse ou si je n’ai pas trouvé le médiateur compétent pour mon litige.</td>
@@ -157,31 +138,20 @@
                     </tr>
                   </table>
                 </div>
-              </ng-template>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h2>4</h2>
-              <div class="row">
-                <div class="col-2 text-right">
-                  <img src="/assets/images/icon-courthouse.svg" alt="icône amiable" class="pt-1"/>
-                </div>
-                <div class="col-10 m-auto">
-                  Je vais au tribunal d’instance
-                </div>
               </div>
-              <div class="text-center">
-                <button class="btn btn-outline-primary" (click)="openModal(template4)">
-                  Comment s'y prendre ?
-                </button>
-              </div>
-              <ng-template #template4>
-                <div class="modal-body">
-                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
+              <div class="collapse-container">
+                <div class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse4">
+                  <button type="button" class="btn">4</button>
+                  <button type="button" class="btn">
+                    Je vais au tribunal d’instance
                   </button>
-                  <table class="table table-dark table-bordered no-hover" cellpadding="2">
+                  <button type="button" class="btn">
+                    <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                    <i class="material-icons md-24 up">keyboard_arrow_up</i>
+                  </button>
+                </div>
+                <div class="collapse" id="collapse4">
+                  <table class="table table-bordered no-hover" cellpadding="2">
                     <tr>
                       <td>Quand&#160;?</td>
                       <td>Lorsque la médiation ou la conciliation ont échoué</td>
@@ -200,30 +170,38 @@
                     </tr>
                   </table>
                 </div>
-              </ng-template>
+              </div>
             </div>
           </div>
         </div>
-        <div class="row pt-4">
-          <div class="col-3">
-          </div>
-          <div class="col-9">
-            <h2>Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
-            <p>
-              Une association de consommateur pourra vous aider à écrire les courriers de réclamation ou de mise en demeure,
-              contacter l'entreprise directement, vous aider à saisir la justice.
-            </p>
-            <p>
-              Pour bénéficier de leur aide, vous devez payer une somme, appelée "adhésion".
-              Pour connaître le prix de cette adhésion, vous pouvez les contacter directement.
-              En fonction de votre situation, certaines associations peuvent baisser le prix de l'adhésion.
-            </p>
-            <p>
-              Liste des associations de consommateurs officielles :
-              <a href="https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales" target="_blank">
-                https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales
-              </a>
-            </p>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <img src="/assets/images/picture-help.svg" alt="Illustration" />
+            </div>
+            <div class="col-9 d-sm-none">
+              <h2>Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
+            </div>
+            <div class="col-12 col-sm-9">
+              <h2 class="d-none d-sm-block">Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
+              <p>
+                Une association de consommateur pourra vous aider à écrire les courriers de réclamation ou de mise en demeure,
+                contacter l'entreprise directement, vous aider à saisir la justice.
+              </p>
+              <p>
+                Pour bénéficier de leur aide, vous devez payer une somme, appelée "adhésion".
+                Pour connaître le prix de cette adhésion, vous pouvez les contacter directement.
+                En fonction de votre situation, certaines associations peuvent baisser le prix de l'adhésion.
+              </p>
+              <p>
+                Liste des associations de consommateurs officielles :
+                <a href="https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales" target="_blank">
+                  https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
