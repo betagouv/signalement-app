@@ -15,3 +15,4 @@ Disallow: /*le-consommateur
 Disallow: /*confirmation
 Disallow: /*accuse-de-reception
 Disallow: /*information
+Disallow: /entreprise/*

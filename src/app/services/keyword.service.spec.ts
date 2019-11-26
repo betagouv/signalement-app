@@ -2,27 +2,30 @@ import { TestBed } from '@angular/core/testing';
 
 import { KeywordService } from './keyword.service';
 
-/* tslint:disable:quotemark */
 const data = {
-  "list": [
+  'list': [
     {
-      "words": [
-        "au noir",
-        "au black",
-        "sans papier",
-        "immigré",
-        "immigre",
-        "travail dissimulé",
-        "travail dissimule",
-        "esclave",
-        "esclavage",
+      'words': [
+        'au noir',
+        'au black',
+        'sans papier',
+        'immigré',
+        'immigre',
+        'travail dissimulé',
+        'travail dissimule',
+        'esclave',
+        'esclavage',
       ],
-      "category": "Travail au noir",
-      "categoryId": "TRAVAIL_AU_NOIR"
+      'redirectCategory': 'TNOIR',
+      'filteredCategories': [
+        'CR',
+        'MAG',
+        'SIGN'
+      ],
+      'message': 'Vous pensez que l\'entreprise emploie des gens au noir?'
     }
   ]
 };
-/* tslint:enable:quotemark */
 
 let service: KeywordService;
 
@@ -37,29 +40,38 @@ describe('KeywordServiceService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should found a keyword', () => {
+  it('should found a keyword on a category to be filtered', () => {
 
     const keywordService: KeywordService = TestBed.get(KeywordService);
 
-    const expected = JSON.stringify({
-      categoryId: 'TRAVAIL_AU_NOIR',
+    const expected = {
+      keyword: data.list[0],
       found: [{
         expression: 'esclave',
         index: 31
       }]
-    });
+    };
 
-    const res = JSON.stringify(keywordService.search('j\'ai été témoin d\'un travail d\'esclave'));
+    const res = keywordService.search('j\'ai été témoin d\'un travail d\'esclave', 'CR');
 
-    expect(res).toBe(expected);
+    expect(res).toEqual(expected);
+  });
+
+  it('should not found a keyword on a category not to be filtered', () => {
+
+    const keywordService: KeywordService = TestBed.get(KeywordService);
+
+    const res = keywordService.search('j\'ai été témoin d\'un travail d\'esclave', 'TEL');
+
+    expect(res).toBeNull();
   });
 
   it('should found multiple keywords', () => {
 
     const keywordService: KeywordService = TestBed.get(KeywordService);
 
-    const expected = JSON.stringify({
-      categoryId: 'TRAVAIL_AU_NOIR',
+    const expected = {
+      keyword: data.list[0],
       found: [{
         expression: 'immigré',
         index: 47
@@ -67,11 +79,11 @@ describe('KeywordServiceService', () => {
         expression: 'esclave',
         index: 31
       }]
-    });
+    };
 
-    const res = JSON.stringify(keywordService.search('j\'ai été témoin d\'un travail d\'esclave avec un immigré qui travaillait là bas.'));
+    const res = keywordService.search('j\'ai été témoin d\'un travail d\'esclave avec un immigré qui travaillait là bas.', 'CR');
 
-    expect(res).toBe(expected);
+    expect(res).toEqual(expected);
   });
 
   it('should not found a keyword', () => {
@@ -79,6 +91,6 @@ describe('KeywordServiceService', () => {
     const keywordService: KeywordService = TestBed.get(KeywordService);
     keywordService.setKeywords(data);
 
-    expect(keywordService.search('Je viens faire un signalement sur l\'hygiène d\'un restaurant')).toBeNull();
+    expect(keywordService.search('Je viens faire un signalement sur l\'hygiène d\'un restaurant', 'CR')).toBeNull();
   });
 });

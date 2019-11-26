@@ -233,7 +233,7 @@
           - question: Que faire en cas de problème avec un "faux" taxi&#160;?
             answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie.
 - title: Hébergement
-  example: "Exemple : hotel, camping, chambre d'hôte, location saisonnière"
+  example: "Exemples : hotel, camping, chambre d'hôte, location saisonnière"
   subcategories:
     - title: Prix
       subcategories:
@@ -247,8 +247,8 @@
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, suppléments non prévus"
         - title: Autres
-    - title: Publicité
-      example: "Exemple : publicité trompeuse, absence d'information"
+    - title: Informations concernant le logement / Publicité
+      example: "Exemples : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
         - title: Information mensongère ou trompeuse
@@ -279,12 +279,34 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
-    - title: Prestation
+    - title: Qualité de la chambre / de l'hébergement
+      example: 'Exemples : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna.'
       subcategories:
-        - title: La prestation d'hébergement ne correspond pas à ce qui m'a été vendu
+        - title: L'hébergement ne correspond pas à ce qui m'a été vendu
           example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
+        - title: Problème d'hygiène ou de propreté
+          example: 'Exemples : chambre sale, sauna sale, puces de lit'
+          information:
+            title: Vous souhaitez signaler un problème d'hygiène ou de propreté d'un logement ?
+            content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie et/ou le  Service Communal d’Hygiène et de la Santé de la commune de l'hébergement.
+        - title: Problème de bruit
+          example: 'Exemples : chambre bruyante, mauvaise isolation'
+          information:
+            title: Vous souhaitez signaler un problème de bruit ?
+            content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie de la commune de l'hébergement.
         - title: Autres
     - title: Annulation / remboursement
+      subcategoriesTitle: Qui a annulé la réservation&#160;?
+      subcategories:
+        - title: l'hôtel, le camping, le gérant ...
+        - title: moi-même
+          subcategoriesTitle: Aviez-vous une assurance annulation&#160;?
+          subcategories:
+            - title: Oui
+            - title: Non
+              information:
+                title:
+                content: les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
     - title: Autres
 - title: Agence de voyage
   subcategories:

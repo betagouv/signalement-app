@@ -5,7 +5,7 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { AccountEventActions, AnalyticsService, EventCategories } from '../../../../services/analytics.service';
 import { Router } from '@angular/router';
 import pages from '../../../../../assets/data/pages.json';
-import { User } from '../../../../model/AuthUser';
+import { TokenInfo, User } from '../../../../model/AuthUser';
 import { AccountService } from '../../../../services/account.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { AccountService } from '../../../../services/account.service';
 })
 export class AccountActivationComponent implements OnInit {
 
-  user: User;
+  tokenInfo: TokenInfo;
 
   activationForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -30,6 +30,8 @@ export class AccountActivationComponent implements OnInit {
   loading: boolean;
   loadingError: boolean;
 
+  mayEditEmail: boolean = false;
+
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
@@ -43,14 +45,21 @@ export class AccountActivationComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.secured.account.activation.description });
     this.initForm();
 
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
+    this.authenticationService.getStoredTokenInfo().then(tokenInfo => {
+      if (tokenInfo == null) {
+        return this.router.navigate(['/connexion']);
+      }
+      this.tokenInfo = <TokenInfo>tokenInfo;
+      this.mayEditEmail = (this.tokenInfo.emailedTo == undefined);
+      if (!this.mayEditEmail) {
+        console.log("Cleaning email validation");
+        this.activationForm.controls.email.clearValidators();
+        this.activationForm.controls.email.updateValueAndValidity();
+      }
     });
-
   }
 
   initForm() {
-
     function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
       return (group: FormGroup) => {
         const password = group.controls[passwordKey];
@@ -88,25 +97,27 @@ export class AccountActivationComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.loading = true;
-      this.accountService.activateAccount(Object.assign(this.user, {
-        firstName: this.firstNameCtrl.value,
-        lastName: this.lastNameCtrl.value,
-        email: this.emailCtrl.value,
-        password: this.passwordCtrl.value
-      })).subscribe(
-          () => {
-            this.loading = false;
-            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountSuccess);
-            this.authenticationService.logout();
-            this.showSuccess = true;
-          },
-          error => {
-            this.loading = false;
-            this.loadingError = true;
-            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountFail);
-            this.showErrors = true;
-          }
-        );
+      this.accountService.activateAccount(
+        this.tokenInfo,
+        <User>{
+          firstName: this.firstNameCtrl.value,
+          lastName: this.lastNameCtrl.value,
+          email: this.emailCtrl.value,
+          password: this.passwordCtrl.value
+        }
+      ).subscribe(
+        () => {
+          this.loading = false;
+          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountSuccess);
+          this.showSuccess = true;
+        },
+        error => {
+          this.loading = false;
+          this.loadingError = true;
+          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountFail);
+          this.showErrors = true;
+        }
+      );
     }
   }
 
