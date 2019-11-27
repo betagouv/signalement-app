@@ -232,7 +232,7 @@ export class ReportDetailComponent implements OnInit {
           return this.eventService.createEvent(Object.assign(new ReportEvent(), {
             reportId: this.reportId,
             eventType: 'RECTIF',
-            action: {name: 'Modification du commerçant'},
+            action: {value: EventActionValues.EditCompany},
             details: {
               description: `Commerçant précédent : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ` +
               `${this.reportService.company2adresseApi(this.report.company)}`
@@ -274,7 +274,7 @@ export class ReportDetailComponent implements OnInit {
           return this.eventService.createEvent(Object.assign(new ReportEvent(), {
             reportId: this.reportId,
             eventType: 'RECTIF',
-            action: {name: 'Modification du consommateur'},
+            action: {value: EventActionValues.EditConsumer},
             details: {
               description: `Consommateur précédent : ${this.report.consumer.firstName} ${this.report.consumer.lastName}` +
               ` - ${this.report.consumer.email} - Accord pour contact : ${this.report.contactAgreement ? 'oui' : 'non'}`
