@@ -55,7 +55,7 @@
                 <div class="collapse-container" *ngFor="let consumerActionGroup of getReportLastSubcategory().consumerActions; let index = index">
                   <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse{{index}}">
                     <button type="button" class="btn">{{index + 1}}</button>
-                    <button type="button" class="btn">
+                    <button type="button" class="btn link">
                       {{consumerActionGroup.title}}
                     </button>
                     <button type="button" class="btn">
@@ -64,7 +64,7 @@
                     </button>
                   </a>
                   <div class="collapse" id="collapse{{index}}">
-                    <table class="table table-bordered no-hover" cellpadding="2">
+                    <table class="table table-bordered no-hover collapse-content" cellpadding="2">
                       <tr *ngFor="let consumerAction of consumerActionGroup.actions">
                         <td [innerHTML]="consumerAction.question"></td>
                         <td [innerHTML]="consumerAction.answer"></td>
