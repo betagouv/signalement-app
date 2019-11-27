@@ -104,7 +104,7 @@ describe('DetailsComponent', () => {
 
     it('should request the user if he is an employee of the company or not', () => {
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h4').textContent).toEqual(`Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler ?`);
+      expect(nativeElement.querySelector('h4').textContent).toEqual(`Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler ?`);
       expect(nativeElement.querySelectorAll('button')[0].textContent.trim()).toEqual('Oui');
       expect(nativeElement.querySelectorAll('button')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
       expect(nativeElement.querySelector('form')).toBeNull();
