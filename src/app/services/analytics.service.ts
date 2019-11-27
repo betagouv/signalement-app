@@ -38,6 +38,8 @@ export enum ReportEventActions {
   secondaryCategories = 'Affichage des autres problèmes',
   validateCategory = 'Sélection d\'une catégorie',
   validateSubcategory = 'Sélection d\'une sous catégorie',
+  employee = 'Consommateur employé de l\'entreprise',
+  notEmployee = 'Consommateur non employé de l\'entreprise',
   validateDetails = 'Validation de la description',
   validateCompany = 'Validation de l\'établissement',
   validateConsumer = 'Validation du consommateur',

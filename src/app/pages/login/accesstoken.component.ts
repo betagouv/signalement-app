@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
-import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Roles } from '../../model/AuthUser';
-import Utils from '../../utils';
 
 @Component({
   selector: 'app-accesstoken',

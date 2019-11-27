@@ -9,67 +9,68 @@
   margin-top: 1em;
   position: relative;
   font-size: 18px;
-}
 
-.notification .close {
-  border: 0;
-  background: 0;
-  color: currentColor;
-  position: absolute;
-  right: 1em;
-}
+  .close {
+    border: 0;
+    background: 0;
+    color: currentColor;
+    position: absolute;
+    right: 1em;
+  }
 
-.notification .icon {
-  fill: currentColor;
-  width: 20px;
-  height: 20px;
-}
+  .icon {
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+  }
 
-.notification.closable {
-  padding-right: 3em;
-}
+  &.closable {
+    padding-right: 3em;
+  }
 
-.notification.full-width {
-  width: 100%;
-  margin-bottom: 0;
-  text-align: center;
-  border: 0;
-}
+  &.full-width {
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    border: 0;
+  }
 
-.notification.full-width.closable .close {
-  right: unset;
-}
+  &.full-width.closable .close {
+    right: unset;
+  }
 
-.notification.info {
-  background: $theme-info-bg;
-  border-color: $theme-info-border;
-}
+  &.info {
+    border-color: $theme-primary;
+    border-left: 7px solid $primary;
+  }
 
-.notification.success {
-  background: $theme-success-bg;
-  border-color: $theme-success-border;
-}
+  &.success {
+    background: $theme-success-bg;
+    border-color: $theme-success-border;
+  }
 
-.notification.warning {
-  background: $theme-warning-bg;
-  border-color: $theme-warning-border;
-}
+  &.warning {
+    background: $theme-warning-bg;
+    border-color: $theme-warning-border;
+  }
 
-.notification.error {
-  background-color: $theme-error-bg;
-  border: $theme-error-border;
-}
+  &.error {
+    background-color: $theme-error-bg;
+    border: $theme-error-border;
+  }
 
-.notification:before {
-  background: none;
-  border: 1px solid $white;
-  content: "";
-  display: block;
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  right: 1px;
-  bottom: 1px;
-  pointer-events: none;
-  border-radius: $theme-border-radius;
+  &:before {
+    background: none;
+    border: 1px solid $white;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    pointer-events: none;
+    border-radius: $theme-border-radius;
+  }
+
 }

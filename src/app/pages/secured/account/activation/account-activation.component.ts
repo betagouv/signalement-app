@@ -5,7 +5,7 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { AccountEventActions, AnalyticsService, EventCategories } from '../../../../services/analytics.service';
 import { Router } from '@angular/router';
 import pages from '../../../../../assets/data/pages.json';
-import { User, TokenInfo } from '../../../../model/AuthUser';
+import { TokenInfo, User } from '../../../../model/AuthUser';
 import { AccountService } from '../../../../services/account.service';
 
 @Component({

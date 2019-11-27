@@ -173,6 +173,7 @@ export class ReportService {
       lastName: report.consumer.lastName,
       email: report.consumer.email,
       contactAgreement: report.contactAgreement,
+      employeeConsumer: report.employeeConsumer,
       files: report.uploadedFiles,
       details: report.detailInputValues
         .map(d => Object.assign(new DetailInputValue(), d))
@@ -223,6 +224,7 @@ export class ReportService {
         email: reportApi.email
       }),
       contactAgreement: reportApi.contactAgreement,
+      employeeConsumer: reportApi.employeeConsumer,
       uploadedFiles: reportApi.files.map(f => Object.assign(new UploadedFile(), f)),
       status: reportApi.status
     });

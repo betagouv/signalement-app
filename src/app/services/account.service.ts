@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { AuthenticationService } from './authentication.service';
 import { map, mergeMap } from 'rxjs/operators';
-import { User, TokenInfo } from '../model/AuthUser';
+import { TokenInfo, User } from '../model/AuthUser';
 
 @Injectable({
   providedIn: 'root'

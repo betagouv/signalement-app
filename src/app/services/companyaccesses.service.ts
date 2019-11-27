@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { CompanyAccess } from '../model/CompanyAccess';
 import { mergeMap } from 'rxjs/operators';
