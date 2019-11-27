@@ -8,17 +8,81 @@
   font-size: 16px;
   line-height: 16px;
   margin-bottom: 5px;
-}
 
-.card-body {
-  padding: 1em;
-  margin: 1em 0;
-}
-
-a:hover {
-  text-decoration: none;
-
-  div {
-    background-color: $lighter-grey;
+  &:hover {
+    text-decoration: none;
   }
+}
+
+.collapse-container {
+
+  margin-top: 1em;
+  border: $light-grey 1px solid;
+  border-radius: 4px;
+
+  a, a:hover {
+    text-decoration: none;
+  }
+
+  .btn-group {
+
+    border-bottom: $light-grey 1px solid;
+    border-radius: 4px;
+    width: 100%;
+
+    .btn {
+      box-shadow: none;
+      padding: 1em;
+      font-size: 16px;
+
+      &:first-child {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        width: 100%;
+        text-align: left;
+      }
+
+      &:last-child {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        background-color: $primary;
+        color: $white;
+
+        .up {
+          display: block;
+        }
+        .down {
+          display: none;
+        }
+      }
+
+    }
+
+  }
+
+  .btn-group.collapsed {
+
+    .btn {
+
+      &:last-child {
+        background-color: $lighter-grey;
+        color: $black;
+        .up {
+          display: none;
+        }
+
+        .down {
+          display: block;
+        }
+      }
+    }
+
+  }
+
+  .collapse-content {
+    display: block;
+    padding: 1em;
+    font-size: 16px;
+  }
+
 }
