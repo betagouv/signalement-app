@@ -386,8 +386,8 @@
                         content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
                           <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                                  <br/><br/>Un vice caché d'un produit est un défaut :
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                            example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
                                     <li>présent dès le départ et</li>
@@ -458,9 +458,8 @@
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
                         content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                                  example:
-                                  <br/><br/>Un vice caché d'un produit est un défaut :
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                            example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
                                     <li>présent dès le départ et</li>
@@ -490,14 +489,14 @@
               description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
             - title: Il n'avait pas assez de monnaie
               information:
-              content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
             - title: Mes pièces / billets étaient en mauvais état
               information:
-              content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                content: Le paiement en pièces ou billets en mauvais état peut être refusé.
             - title: Le prix était supérieur à 1 000 euros ou à 50 pièces
               information:
-              content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
-                <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+                content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                  <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
             - title: Autres
         - title: Le commerçant refuse que je paie par carte bancaire ou chèque
           subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bancaire&#160;?
