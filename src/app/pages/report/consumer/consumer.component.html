@@ -1,6 +1,29 @@
 <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
 <section class="section section-white" role="main">
-  <div class="container">
+  <div class="container max-width">
+
+    <ng-container *ngIf="report.employeeConsumer">
+      <div class="notification info mb-4">
+        <h6 class="text-center mb-4 font-weight-bold">
+          Vous avez déclaré être employé de l’entreprise
+        </h6>
+        <p>
+          Votre signalement sera lu <b>uniquement par la répression des fraudes</b>.
+        </p>
+        <p>
+          Vos coordonnées sont à destination des enquêteurs uniquement.
+          Ils peuvent être amenés à vous contacter afin de vérifier votre identité et votre signalement.
+        </p>
+        <p>
+          Votre employeur ne sera pas mis au courant de votre signalement.
+        </p>
+        <p>
+          Pendant l'enquête, si les enquêteurs ont besoin de révéler votre identité à la justice ou à votre employeur, ils vous demanderont l'autorisation avant.
+          <b>Vous pourrez refuser.</b>
+        </p>
+      </div>
+      <hr/>
+    </ng-container>
 
     <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
       <h4 class="text-center mb-4 font-weight-bold">
@@ -32,7 +55,7 @@
         </label>
       </div>
 
-      <div class="form__group" *ngIf="!report.employeeConsumer else employee">
+      <div class="form__group" *ngIf="!report.employeeConsumer">
         <div class="row pl-1 mb-4">
           <div class="col-2 col-sm-1 text-right pr-1">
             <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
@@ -50,28 +73,6 @@
           </div>
         </div>
       </div>
-
-      <ng-template #employee>
-        <div class="notification info">
-          <h4 class="text-center mb-4 font-weight-bold">
-            Vous avez déclaré être employé de l’entreprise
-          </h4>
-          <p>
-            Votre signalement sera lu <b>uniquement par la répression des fraudes</b>.
-          </p>
-          <p>
-            Vos coordonnées sont à destination des enquêteurs uniquement.
-            Ils peuvent être amenés à vous contacter afin de vérifier votre identité et votre signalement.
-          </p>
-          <p>
-            Votre employeur ne sera pas mis au courant de votre signalement.
-          </p>
-          <p>
-            Pendant l'enquête, si les enquêteurs ont besoin de révéler votre identité à la justice ou à votre employeur, ils vous demanderont l'autorisation avant.
-            Vous pourrez refuser.
-          </p>
-        </div>
-      </ng-template>
 
       <div class="notification error mt-3" *ngIf="showErrors && consumerForm.invalid">
         <span *ngIf="firstNameCtrl.hasError('required')">

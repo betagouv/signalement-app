@@ -3,12 +3,12 @@
   <div class="container max-width">
 
     <div class="pb-sm-5 pt-sm-5" *ngIf="report.employeeConsumer === undefined; else detailsFormTemplate">
-      <h4 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler ?</h4>
+      <h4 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h4>
       <div class="text-center pt-2 pt-sm-3 pb-lg-5">
-        <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary" (click)="setEmployeeConsumerValue(true)">
+        <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
           Oui
         </button>
-        <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5" appAutofocus (click)="setEmployeeConsumerValue(false)">
+        <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5 mt-2" appAutofocus (click)="setEmployeeConsumerValue(false)">
           Non, je n'y travaille pas
         </button>
       </div>
@@ -163,7 +163,7 @@
                            [uploadedFiles]="uploadedFiles"
                            [origin]="fileOrigins.Consumer">
           </app-attachments>
-          <div class="note">
+          <div class="note" *ngIf="!report.employeeConsumer">
             Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part du professionnel.
           </div>
         </div>
