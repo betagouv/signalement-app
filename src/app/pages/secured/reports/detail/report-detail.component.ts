@@ -152,9 +152,12 @@ export class ReportDetailComponent implements OnInit {
     this.consumerForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
-      email: this.emailCtrl,
-      contactAgreement: this.contactAgreementCtrl
+      email: this.emailCtrl
     });
+
+    if (!this.report.employeeConsumer) {
+      this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
+    }
   }
 
   back() {

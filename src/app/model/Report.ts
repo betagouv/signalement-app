@@ -31,6 +31,7 @@ export class Report {
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
+  employeeConsumer: boolean;
   contactAgreement: boolean;
   internetPurchase: boolean;
   retrievedFromStorage: boolean;

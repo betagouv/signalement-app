@@ -19,7 +19,7 @@ describe('AccountActivationComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: 'connexion', redirectTo: '' }]),
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot()
       ],
