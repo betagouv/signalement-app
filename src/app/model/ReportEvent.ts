@@ -15,7 +15,9 @@ export class ReportEventAction {
 export enum EventActionValues {
   FirstVisit = 'Envoi du signalement',
   ReportResponse = 'Réponse du professionnel au signalement',
-  PostalSend = 'Envoi d\'un courrier'
+  PostalSend = 'Envoi d\'un courrier',
+  EditConsumer = 'Modification du consommateur',
+  EditCompany = 'Modification du commerçant'
 }
 
 export class ReportResponse {
