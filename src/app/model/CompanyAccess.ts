@@ -6,6 +6,12 @@ export interface CompanyAccess {
   level: string;
 }
 
+export interface UserAccess {
+  companySiret: string;
+  companyName: string;
+  level: string;
+}
+
 export interface PendingToken {
   id: string;
   level: string;
