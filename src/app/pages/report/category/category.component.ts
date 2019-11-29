@@ -30,9 +30,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
   internetInformation: Information;
 
   illustrations = [
-    { title: 'Vous avez rencontré un problème avec un commerçant&#160;?', picture: 'picture-problem.svg' },
+    { title: 'Vous avez rencontré un problème avec une entreprise&#160;?', picture: 'picture-problem.svg' },
     { title: 'Faites un signalement avec SignalConso.', picture: 'picture-alert.svg' },
-    { title: 'Le commerçant est prévenu et peut intervenir.', picture: 'picture-pro.svg' },
+    { title: "L'entreprise est prévenue et peut intervenir.", picture: 'picture-pro.svg' },
     { title: 'La répression des fraudes intervient si c’est nécessaire.', picture: 'picture-inspect.svg' },
   ]
 

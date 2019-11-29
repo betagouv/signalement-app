@@ -10,7 +10,7 @@
         <ng-container *ngIf="!report.employeeConsumer; else employeeConsumer">
           <ng-container *ngIf="report.contactAgreement; else noContactAgreement">
             <p>
-              Votre signalement va être communiqué au commerçant.
+              Votre signalement va être communiqué à l'entreprise.
               Il pourra corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
             </p>
             <p>
@@ -20,7 +20,7 @@
           </ng-container>
           <ng-template #noContactAgreement>
             <p>
-              Votre signalement va être communiqué de façon anonyme au commerçant.
+              Votre signalement va être communiqué de façon anonyme à l'entreprise.
               Il pourra corriger directement le problème grâce à vos informations.
             </p>
             <p>
