@@ -8,7 +8,6 @@
     </div>
 </div>
 <div class="container">
-    <div class="alert alert-success" *ngIf="showSuccess">Modifications enregistrées !</div>
     <div class="row table-responsive">
         <table class="table">
             <thead>
@@ -68,6 +67,7 @@
                 </tr>
             </tbody>
         </table>
+        <div class="notification success" *ngIf="showSuccess">Modifications enregistrées !</div>
     </div>
     <div class="row">
         <div class="col text-center mb-1">
