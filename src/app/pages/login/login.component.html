@@ -1,7 +1,7 @@
 <div class="banner text-center section section-primary" role="region">
   <div class="container">
     <h1 class="text-center">
-      {{isConnection ? 'Connexion' : 'Activation de l\'espace professionnel'}}
+      {{isConnection ? 'Connexion' : 'Activation de l\'espace entreprise'}}
     </h1>
   </div>
 </div>
@@ -59,7 +59,7 @@
         </div>
         <p class="form-text text-muted text-center" *ngIf="!isConnection">
           La création d'un compte est réservé aux professionnels qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement concernant leur établissement.<br/><br/>
-          Pour plus d'informations, veuillez-vous reporter à <a routerLink="/vous-êtes-un-professionnel">la page d'aide pour les professionnels</a>.
+          Pour plus d'informations, veuillez-vous reporter à <a routerLink="/vous-êtes-un-professionnel">la page d'aide pour les entreprises</a>.
         </p>
       </form>
       <div class="form-group row" *ngIf="isConnection">
