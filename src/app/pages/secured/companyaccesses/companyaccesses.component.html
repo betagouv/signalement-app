@@ -34,11 +34,19 @@
                         </ng-template>
                     </td>
                     <td>
-                        <button *ngIf="access.email != user.email; else currentUserDelete" class="btn btn-sm btn-danger" (click)="removeAccess(access.userId)">Supprimer l'accès</button>
+                        <button *ngIf="access.email != user.email; else currentUserDelete" class="btn btn-sm btn-danger" (click)="openModal(removeAccessModal)">Supprimer l'accès</button>
                         <ng-template #currentUserDelete>
                             <small class="text-muted text-wrap">
                                 Vous ne pouvez pas supprimer votre propre accès.
                             </small>
+                        </ng-template>
+                        <ng-template #removeAccessModal>
+                            <div class="modal-body text-center">
+                              <p>Confirmer la suppression de l'accès de l'utilisateur <strong>{{access.firstName}} {{access.lastName}}</strong> ?</p>
+                              <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                              &nbsp;
+                              <button type="button" class="btn btn-primary" (click)="removeAccess(access.userId);bsModalRef.hide();" >Oui</button>
+                            </div>
                         </ng-template>
                     </td>
                 </tr>
@@ -47,8 +55,16 @@
                     <td>{{pendingToken.emailedTo}}</td>
                     <td>{{accessLevels.get(pendingToken.level)}}</td>
                     <td>
-                        <button class="btn btn-sm btn-danger" (click)="removePendingToken(pendingToken.id)">Annuler l'invitation</button>
+                        <button class="btn btn-sm btn-danger" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
                     </td>
+                    <ng-template #removeTokenModal>
+                        <div class="modal-body text-center">
+                          <p>Annuler l'invitation envoyée à <strong>{{pendingToken.emailedTo}}</strong> ?</p>
+                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                          &nbsp;
+                          <button type="button" class="btn btn-primary" (click)="removePendingToken(pendingToken.id);bsModalRef.hide();" >Oui</button>
+                        </div>
+                    </ng-template>
                 </tr>
             </tbody>
         </table>

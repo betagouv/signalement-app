@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
@@ -8,6 +8,7 @@ import { CompanyAccess, PendingToken } from '../../../model/CompanyAccess';
 import { User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { accessLevels } from './common';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-company-accesses',
@@ -19,8 +20,10 @@ export class CompanyAccessesComponent implements OnInit {
               private meta: Meta,
               private authenticationService: AuthenticationService,
               private companyAccessesService: CompanyAccessesService,
+              private modalService: BsModalService,
               private route: ActivatedRoute) { }
   
+  bsModalRef: BsModalRef;
   siret: string;
   user: User;
   companyAccesses: CompanyAccess[];
@@ -44,6 +47,10 @@ export class CompanyAccessesComponent implements OnInit {
       this.refreshAccesses();
       this.refreshPendingTokens();
     });
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.bsModalRef = this.modalService.show(template);
   }
 
   refreshAccesses() {
