@@ -28,8 +28,8 @@
         - title: Prix
         - title: Publicité
         - title: Autre
-- title: Vente / réparation de véhicule
-  example: 'Exemple : garagiste, dépanneur'
+- title: Vente, contrôle et réparation de véhicule
+  example: 'Exemple : garagiste, dépanneur, contrôle technique'
   subcategories:
     - title: Prix / Facturation
       example: 'Exemple : devis non détaillé, devis non respecté, délais'
@@ -47,3 +47,4 @@
     - title: Autres
       example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement, heure de conduite qui ne dure pas une heure'
 - title: Autres
+  example: 'Exemple : fourrière'
