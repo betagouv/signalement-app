@@ -5,7 +5,7 @@ import { StatsService } from '../../services/stats.service';
 import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ReportsPerMonth } from '../../model/Statistics';
+import { MonthlyStat, SimpleStat } from '../../model/Statistics';
 import { NgxLoadingModule } from 'ngx-loading';
 
 describe('StatsComponent', () => {
@@ -13,62 +13,13 @@ describe('StatsComponent', () => {
   let fixture: ComponentFixture<StatsComponent>;
   let statsService: StatsService;
 
-  const reportsPerMonth1 = Object.assign(new ReportsPerMonth(), { month: 1, year: 2018, count: 5 });
-  const reportsPerMonth2 = Object.assign(new ReportsPerMonth(), { month: 2, year: 2018, count: 8 });
+  const reportCount = Object.assign(new SimpleStat(), { value: 53 });
+  const reportReadByProPercentage = Object.assign(new SimpleStat(), { value: 12.5 });
+  const reportWithResponseCount = Object.assign(new SimpleStat(), { value: 43.89 });
 
-  const statisticsFixture = {
-    reportsCount: 53,
-    reportsPerMonthList: [
-      reportsPerMonth1,
-      reportsPerMonth2
-    ],
-    reportsCount7Days: 8,
-    reportsCount30Days: 9,
-    reportsCountInRegion: 9,
-    reportsCount7DaysInRegion: 2,
-    reportsCount30DaysInRegion: 3,
-    reportsPercentageSendedToPro:	85.71,
-    reportsPercentagePromise: 33.33,
-    reportsPercentageWithoutSiret: 4.76,
-    reportsCountByCategoryList: [
-        {
-            category: 'Nourriture et boissons',
-            count: 4
-        },
-        {
-            category: 'Pratique d\'hygiène',
-            count: 49
-        },
-        {
-            category: 'Prix / Paiement',
-            count: 4
-        },
-        {
-            category: 'Publicité',
-            count: 1
-        },
-        {
-            category: 'Services après-vente',
-            count: 3
-        }
-    ],
-    reportsCountByRegionList: [
-        {
-            region: 'AURA',
-            count: 1
-        },
-        {
-            region: 'CDVL',
-            count: 6
-        },
-        {
-            region: 'OCC',
-            count: 2
-        }
-    ],
-    reportsDurationsForEnvoiSignalement: 4
-
-  };
+  const monthlyStat1 = Object.assign(new MonthlyStat(), { month: 1, year: 2018, value: 5 });
+  const monthlyStat2 = Object.assign(new MonthlyStat(), { month: 2, year: 2018, value: 8 });
+  const monthyReportCount = [monthlyStat1, monthlyStat2];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -84,7 +35,10 @@ describe('StatsComponent', () => {
 
   beforeEach(() => {
     statsService = TestBed.get(StatsService);
-    spyOn(statsService, 'getStatistics').and.returnValue(of(statisticsFixture));
+    spyOn(statsService, 'getReportCount').and.returnValue(of(reportCount));
+    spyOn(statsService, 'getReportReadByProPercentage').and.returnValue(of(reportReadByProPercentage));
+    spyOn(statsService, 'getReportWithResponsePercentage').and.returnValue(of(reportWithResponseCount));
+    spyOn(statsService, 'getMonthlyReportCount').and.returnValue(of(monthyReportCount));
     fixture = TestBed.createComponent(StatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -96,23 +50,22 @@ describe('StatsComponent', () => {
 
   describe('onInit', () => {
 
-    it('should load the stats', () => {
+    it('should load the global stats', () => {
 
       component.ngOnInit();
 
-      expect(component.statistics.reportsCount).toEqual(53);
-      expect(component.statistics.reportsPerMonthList.length).toEqual(2);
-      expect(component.statistics.reportsPerMonthList).toContain(reportsPerMonth1);
-      expect(component.statistics.reportsPerMonthList).toContain(reportsPerMonth2);
+      expect(component.reportCount).toEqual(53);
+      expect(component.reportReadByProPercentage).toEqual(12.5);
+      expect(component.reportWithResponsePercentage).toEqual(43.89);
     });
 
     it ('should set the last 12 months on the xAxis when current month is April', () => {
       const baseTime = new Date(2018, 3, 8);
       jasmine.clock().mockDate(baseTime);
 
-      const data = component.ngOnInit();
+      component.loadMonthlyReportChart();
 
-      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
+      expect(component.monthlyReportChart.xAxis['data']).toEqual(
         [
           'mai 17', 'juin 17', 'juil. 17', 'août 17', 'sept. 17', 'oct. 17',
           'nov. 17', 'déc. 17', 'jan. 18', 'fév. 18', 'mars 18', 'avr. 18'
@@ -125,9 +78,9 @@ describe('StatsComponent', () => {
       const baseTime = new Date(2018, 0, 8);
       jasmine.clock().mockDate(baseTime);
 
-      component.ngOnInit();
+      component.loadMonthlyReportChart();
 
-      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
+      expect(component.monthlyReportChart.xAxis['data']).toEqual(
         [
           'fév. 17', 'mars 17', 'avr. 17', 'mai 17', 'juin 17', 'juil. 17',
           'août 17', 'sept. 17', 'oct. 17', 'nov. 17', 'déc. 17', 'jan. 18'
@@ -140,9 +93,9 @@ describe('StatsComponent', () => {
       const baseTime = new Date(2018, 11, 8);
       jasmine.clock().mockDate(baseTime);
 
-      component.ngOnInit();
+      component.loadMonthlyReportChart();
 
-      expect(component.byMonthsChartOption.xAxis['data']).toEqual(
+      expect(component.monthlyReportChart.xAxis['data']).toEqual(
         [
           'jan. 18', 'fév. 18', 'mars 18', 'avr. 18', 'mai 18', 'juin 18',
           'juil. 18', 'août 18', 'sept. 18', 'oct. 18', 'nov. 18', 'déc. 18'
@@ -155,11 +108,9 @@ describe('StatsComponent', () => {
       const baseTime = new Date(2018, 3, 8);
       jasmine.clock().mockDate(baseTime);
 
-      component.statistics = statisticsFixture;
+      component.loadMonthlyReportChart();
 
-      component.ngOnInit();
-
-      expect(component.byMonthsChartOption.series[0]['data']).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0]);
+      expect(component.monthlyReportChart.series[0]['data']).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0]);
     });
 
   });
