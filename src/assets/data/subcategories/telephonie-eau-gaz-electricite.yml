@@ -1,37 +1,42 @@
 - title: Téléphonie / Internet
   subcategories:
-    - title: Publicité
-      example: 'Exemple : mention mensongère'
+    - title: 'Mon forfait : prix, contrat et facture'
+      example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
       subcategories:
-        - title: Indisponibilité des produits/offres
-          detailInputs:
-            - label: Date du constat
-              rank: 1
-              type: DATE
-              defaultValue: SYSDATE
-            - label: Quel type de produit/offre était indisponible&#160;?
-              rank: 2
-              type: TEXT
-              placeholder: Type de produit
-            - label: Description
-              rank: 3
-              type: TEXTAREA
-        - title: Information mensongère ou trompeuse
-    - title: Contrat
-      example: 'Exemples : reconduction de contrat, clause abusive'
-    - title: SAV
-      example: 'Exemple : pas de réponse du service client'
-    - title: Offre promotionnelle pas respectée
-      example: 'Exemple : je devais bénéficié d''une reduction de 15e sur le telephone mais je ne l''ai jamais reçu'
+        - title: Je ne suis pas d'accord avec ma facture
+        - title: Le prix de mon forfait a été augmenté
+        - title: Des options payantes ont été automatiquement rajoutées à mon forfait
+        - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
+        - title: Autre
+    - title: Qualité du réseau
+      example: 'Exemple : je ne capte pas, je capte mal, débit faible'
+      information:
+        title: La qualité du réseau est mauvaise
+        content: Les problèmes de réseau ou d'éligibilité ne sont pas à signaler sur SignalConso. <br> Vous devez les signaler à l'ARCEP sur le site dédié  <a href="https://jalerte.arcep.fr/" target="_blank" /> J'alerte l'Arcep </a>
+    - title: Résiliation / changement d'opérateur
+      subcategories:
+        - title: Frais de résiliation
+        - title: Restitution du materiel
+        - title: Problème avec le RIO (Relevé d'Identité Opérateur)
+        - title: Mon ancien opérateur continue de me prélever
     - title: Appels ou sms indésirables
-      example: 'Exemples : spams, démarchages téléphoniques'
-    - title: Itinérance
-      example: Pas de réception du sms, itinérance à la frontière
+      example: 'Exemple : spams, démarchages téléphoniques, BlocTel'
+      subcategories:
+        - title: Je reçois des appels indésirables alors que je suis sur BlocTel
+        - title: J'ai répondu à un appel ou à un sms et j'ai été surtaxé
+        - title: Je veux signaler un numéro qui m'envoi des spams (sms ou appel)
+        - title: J'ai eu un problème avec un démarcheur téléphonique
     - title: Autres
+      example: 'Exemple : téléphone acheté avec le forfait, utilisation de mon portable à l''étranger'
+      subcategories:
+        - title: Utilisation de mon forfait à l'étranger
+        - title: Qualité du service client
+          example: 'Exemple : pas de réponse du service client'
+        - title: Téléphone acheté avec le forfait
 - title: Eau
   subcategories:
     - title: Contrat / facture
-      example: 'Exemples : la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives'
+      example: 'Exemple : la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives'
       subcategories:
         - title: Le distributeur refuse de m'ouvrir un contrat car je suis locataire et non propriétaire.
           description: Conditionner l'abonnement du locataire à l'accord écrit du propriétaire est interdit. Refuser la demande d'abonnement d'un locataire car il n'est pas propriétaire est aussi interdit.
@@ -94,7 +99,7 @@
           - question: Que faire en cas de désaccord&#160;?
             answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a>
     - title: Fosse septique
-      example: 'Exemples : malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier '
+      example: 'Exemple : malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier '
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -113,7 +118,7 @@
 - title: Gaz / Electricité
   subcategories:
     - title: Démarchage à domicile ou par téléphone
-      example: 'Exemples : vendeur prétend être envoyé par EDF, démarcheur agressif'
+      example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif'
       detailInputs:
         - label: Date du passage du vendeur (ou de son appel)
           rank: 1
@@ -185,7 +190,7 @@
             - Non
       fileLabel: Photo(s) si possible
     - title: Contrat
-      example: 'Exemples : reconduction de contrat, clause abusive'
+      example: 'Exemple : reconduction de contrat, clause abusive'
       subcategories:
         - title: Difficultés pour résilier un contrat
           example: 'Exemple : le bulletin de retractation n''a pas été prise en compte'
