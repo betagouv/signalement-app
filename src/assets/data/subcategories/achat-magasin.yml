@@ -452,8 +452,7 @@
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
                         subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
-                                  example:
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?                                 
                                   <br/><br/>Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
