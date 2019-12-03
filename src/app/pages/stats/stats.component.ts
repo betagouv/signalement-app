@@ -1,13 +1,11 @@
-import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
-import { Statistics } from '../../model/Statistics';
-import { isPlatformBrowser } from '@angular/common';
+import { MonthlyStat } from '../../model/Statistics';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Title } from '@angular/platform-browser';
-import Utils from '../../utils';
 
 @Component({
   selector: 'app-stats',
@@ -16,192 +14,89 @@ import Utils from '../../utils';
 })
 export class StatsComponent implements OnInit {
 
-  statistics: Statistics;
+  reportCount: number;
+  reportReadByProPercentage: number;
+  reportWithResponsePercentage: number;
 
-  byMonthsChartOption: EChartOption;
-  byCategoriesChartOption: EChartOption;
-  byRegionsChartOption: EChartOption;
-  loading: boolean;
+  monthlyReportChart: EChartOption;
+  monthlyReportReadByProChart: EChartOption;
+  monthlyReportWithResponseChart: EChartOption;
 
   user: User;
-  innerWidth: any;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private statsService: StatsService,
+  constructor(private statsService: StatsService,
               private authenticationService: AuthenticationService,
               private titleService: Title) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.stats.title);
 
-    this.loadStatistics();
-
     this.authenticationService.user.subscribe(user => {
       this.user = user;
     });
-    this.innerWidth = window.innerWidth;
 
-    Utils.focusAndBlurOnTop();
-
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = window.innerWidth;
-    this.setOptionnalLegend();
-  }
-
-  setOptionnalLegend() {
-    if (this.innerWidth < 850) {
-      this.byCategoriesChartOption = {...this.byCategoriesChartOption, legend: { ...this.byCategoriesChartOption.legend, show: false }};
-    } else {
-      this.byCategoriesChartOption = {...this.byCategoriesChartOption, legend: { ...this.byCategoriesChartOption.legend, show: true }};
-    }
+    this.loadStatistics();
   }
 
   loadStatistics() {
-    this.loading = true;
-    this.statsService.getStatistics().subscribe(stats => {
-
-      this.loading = false;
-      this.statistics = stats;
-
-      this.byMonthsChartOption = {
-        color: ['#407CA8'],
-        xAxis: {
-          type: 'category',
-          data: this.getXAxisData(),
-          axisLabel: {
-            rotate: 45
-          }
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [{
-          data: this.getSeriesData(),
-          type: 'bar',
-          animationDuration: 5000,
-          smooth: true
-        }],
-        title: {
-          text: 'Nombre de signalements par mois',
-          left: 'center',
-          top: '20',
-          textStyle: {
-            color: '#53657d',
-            fontSize: 18
-          }
-        },
-        tooltip : {
-          trigger: 'axis',
-          axisPointer : {
-              type : 'shadow'
-          }
-        },
-
-      };
-
-      this.byCategoriesChartOption = {
-        title : {
-          text: 'Signalements par catégorie',
-          left: 'center',
-          textStyle: {
-            color: '#003b80',
-            fontSize: 18
-          }
-
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            top: 25,
-            data: this.statistics.reportsCountByCategoryList.map(s => s.category)
-        },
-        series : [
-            {
-                name: 'Catégorie',
-                type: 'pie',
-                radius: ['50%', '70%'],
-                center: ['50%', '60%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: false,
-                        textStyle: {
-                            fontSize: '20',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: true
-                    }
-                },
-                data: this.statistics.reportsCountByCategoryList.map(s => ({name: s.category, value: s.count})),
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-
-      };
-
-      this.setOptionnalLegend();
-
-      const dataRegion = this.statistics.reportsCountByRegionList.map(s => s.count);
-      const nbHorsRegion = this.statistics.reportsCount - dataRegion.reduce((acc, curr) => acc + curr, 0);
-
-      this.byRegionsChartOption = {
-        color: ['#407CA8'],
-        xAxis: {
-          type: 'category',
-          data: [...this.statistics.reportsCountByRegionList.map(s => s.region), 'Autre'],
-          axisLabel: {
-            rotate: 0
-          }
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [{
-          data: [...this.statistics.reportsCountByRegionList.map(s => s.count), nbHorsRegion],
-          type: 'bar',
-          animationDuration: 5000,
-          smooth: true
-        }],
-        title: {
-          text: 'Nombre de signalements par région',
-          left: 'center',
-          top: '20',
-          textStyle: {
-            color: '#003b80',
-            fontSize: 18
-          }
-        },
-        tooltip : {
-          trigger: 'axis',
-          axisPointer : {
-              type : 'shadow'
-          }
-        },
-
-      };
-
+    this.statsService.getReportCount().subscribe(simpleStat => {
+      this.reportCount = simpleStat.value;
     });
+
+    this.statsService.getReportReadByProPercentage().subscribe(simpleStat => {
+      this.reportReadByProPercentage = simpleStat.value;
+    });
+
+    this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
+      this.reportWithResponsePercentage = simpleStat.value;
+    });
+  }
+
+
+  loadMonthlyReportChart() {
+    this.statsService.getMonthlyReportCount().subscribe(monthlyStats => {
+      this.monthlyReportChart = this.getChartOption(monthlyStats);
+    });
+  }
+
+  loadMonthlyReportReadByProChart() {
+    this.statsService.getMonthlyReportReadByProPercentage().subscribe(monthlyStats => {
+      this.monthlyReportReadByProChart = this.getChartOption(monthlyStats);
+    });
+  }
+
+  loadMonthlyReportWithReponseChart() {
+    this.statsService.getMonthlyReportWithResponsePercentage().subscribe(monthlyStats => {
+      this.monthlyReportWithResponseChart = this.getChartOption(monthlyStats);
+    });
+  }
+
+  getChartOption(monthlyStats: MonthlyStat[]): EChartOption {
+    return {
+      color: ['#407CA8'],
+      xAxis: {
+        type: 'category',
+        data: this.getXAxisData(),
+        axisLabel: {
+          rotate: 45
+        }
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        data: this.getStatsData(monthlyStats),
+        type: 'bar',
+        animationDuration: 5000,
+        smooth: true
+      }],
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      }
+    };
   }
 
   getXAxisData() {
@@ -214,16 +109,12 @@ export class StatsComponent implements OnInit {
     ];
   }
 
-  getSeriesData() {
+  getStatsData(monthlyStats: MonthlyStat[]) {
     const currentMonth = (new Date()).getMonth();
     const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    this.statistics.reportsPerMonthList.forEach(reportsPerMonth => {
-      data[reportsPerMonth.month] = reportsPerMonth.count;
+    monthlyStats.forEach(monthlyStat => {
+      data[monthlyStat.month] = monthlyStat.value;
     });
     return [...data.slice(currentMonth + 1), ...data.slice(0, currentMonth + 1)];
-  }
-
-  isPlatformBrowser() {
-    return isPlatformBrowser(this.platformId);
   }
 }
