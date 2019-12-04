@@ -1,0 +1,25 @@
+<div class="overflow-container">
+    <div class="banner text-center section section-primary" role="region">
+      <div class="container">
+        <h1 class="text-center">
+          Mon entreprise
+        </h1>
+      </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-3 mb-3">
+        <div class="col-sm-4" *ngFor="let access of myAccesses">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ access.companyName }}</h5>
+                    <p class="card-text">
+                        SIRET :<br>
+                        {{access.companySiret}}
+                    </p>
+                    <a class="card-link" [routerLink]="['/entreprise', 'acces', access.companySiret]" *ngIf="access.level == 'admin'">Gérer les accès</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
