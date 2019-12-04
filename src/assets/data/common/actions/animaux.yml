@@ -1,0 +1,59 @@
+- title: J’écris au professionnel pour résoudre le problème à l’amiable
+  actions:
+    - question: Quand&#160;?
+      answer: Le plus tôt possible
+    - question: A qui&#160;?
+      answer: Auprès du service des  réclamations de la société
+    - question: Comment&#160;?
+      answer: <ul>
+        <li>Par lettre recommandée avec AR</li>
+        <li>Je mets toutes les documents justificatifs</li>
+        <li>Je peux utiliser modèle-type  lettre-type pour mon litige</li>
+        <li>Je garde une copie du courrier</li>
+        </ul>
+    - question: Pourquoi&#160;?
+      answer: Ce courrier est la preuve de votre démarche. Il est obligatoire pour résoudre votre problème ou aller au tribunal.
+- title: Je contacte un médiateur de la consommation compétent, c’est-à-dire une personne tierce à mon litige chargée de régler mon problème.
+  actions:
+    - question: Quand&#160;?
+      answer: Si 2 mois après avoir envoyé mon courrier je n’ai pas de réponse du professionnel
+    - question: A qui&#160;?
+      answer: Auprès du médiateur compétent pour mon litige
+    - question: Comment&#160;?
+      answer: Le professionnel a l’obligation de communiquer les coordonnées du médiateur dont il relève (sur son site internet, sur le contrat, ou par tout moyen approprié...).
+        <br />
+        Je peux aussi rechercher dans la liste des médiateurs
+        <a href="https://www.economie.gouv.fr/mediation-conso/liste-des-mediateurs-references" target="_blank">
+        https://www.economie.gouv.fr/mediation-conso/liste-des-mediateurs-references
+        </a>
+    - question: Pourquoi&#160;?
+      answer: Pour m’aider à trouver un arrangement avec le professionnel
+    - question: Combien ça coûte&#160;?
+      answer: C’est gratuit !
+- title: Je contacte un conciliateur c’est-à-dire une personne qui m’aide à trouver une solution avec le professionnel.
+  actions:
+    - question: Quand&#160;?
+      answer: Comme pour la médiation, si 2 mois après avoir envoyé mon courrier au professionnel je n’ai pas eu de réponse ou si je n’ai pas trouvé le médiateur compétent pour mon litige.
+    - question: Comment&#160;?
+      answer: En contactant le conciliateur le plus proche de chez moi
+        <a href="https://www.conciliateurs.fr/Trouver-une-permanence" target="_blank">
+          https://www.conciliateurs.fr/Trouver-une-permanence
+        </a>
+    - question: Pourquoi&#160;?
+      answer: Pour instaurer le dialogue avec le professionnel et trouver un arrangement qui convient aux deux.
+    - question: Combien ça coûte&#160;?
+      answer: C’est gratuit !
+- title: Je vais au tribunal d’instance
+  actions:
+    - question: Quand&#160;?
+      answer: Lorsque la médiation ou la conciliation ont échoué
+    - question: Comment&#160;?
+      answer: En faisant une déclaration auprès du greffe du Tribunal d’Instance à l’aide du
+        <a href="https://www.formulaires.modernisation.gouv.fr/gf/cerfa_11764.do" target="_blank">
+        CERFA n°11764*09
+        </a>
+    - question: Pourquoi&#160;?
+      answer: Pour que le juge tranche définitivement mon litige
+    - question: Combien ça coûte&#160;?
+      answer: La saisine est gratuite mais des frais au cours de la procédure peuvent intervenir (avocat, expertise...).
+
