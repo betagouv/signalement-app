@@ -8,6 +8,7 @@
         - title: Des options payantes ont été automatiquement rajoutées à mon forfait
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
         - title: Autre
+      consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
@@ -19,6 +20,7 @@
         - title: Restitution du materiel
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
         - title: Mon ancien opérateur continue de me prélever
+      consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Appels ou sms indésirables
       example: 'Exemple : spams, démarchages téléphoniques, BlocTel'
       subcategories:
@@ -33,6 +35,7 @@
         - title: Qualité du service client
           example: 'Exemple : pas de réponse du service client'
         - title: Téléphone acheté avec le forfait
+      consumerActions: !!import/single ../common/actions/telephonie-internet.yml
 - title: Eau
   subcategories:
     - title: Contrat / facture
@@ -59,6 +62,7 @@
                   rank: 2
                   type: TEXTAREA
               fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
+              consumerActions: !!import/single ../common/actions/eau.yml
         - title: Je ne suis pas d'accord avec la consommation indiquée sur ma facture.
           information:
             title: Vous devez demander à faire vérifier le compteur.
@@ -76,7 +80,9 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
+          consumerActions: !!import/single ../common/actions/eau.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/eau.yml
     - title: Coupure de l'eau pour impayé
       example: Mon débit d'eau a été réduit car je ne peux payer ma facture
       detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
@@ -89,7 +95,8 @@
         - label: Date de la coupure
           rank: 2
           type: DATE
-          fileLabel: Joindre une copie du contrat / règlement.
+        fileLabel: Joindre une copie du contrat / règlement.
+        consumerActions: !!import/single ../common/actions/eau.yml
     - title: Dégâts / travaux sur les canalisations
       example: 'Exemple : fuite d''eau avant compteur'
       information:
