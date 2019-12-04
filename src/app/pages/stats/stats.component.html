@@ -17,7 +17,7 @@
           </div>
           <div class="text-right">
             <a (click)="loadMonthlyReportChart()" data-toggle="collapse" href="#collapseMonthlyReportChart" class="collapsed">
-              >> Consulter les statistiques mensuelles
+               Consulter les statistiques mensuelles
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportChart">
@@ -41,7 +41,7 @@
           </div>
           <div class="text-right">
             <a (click)="loadMonthlyReportReadByProChart()" data-toggle="collapse" href="#collapseMonthlyReportReadByProChart" class="collapsed">
-              >> Consulter les statistiques mensuelles
+               Consulter les statistiques mensuelles
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportReadByProChart">
@@ -51,7 +51,7 @@
           <ngx-loading [show]="!reportReadByProPercentage"></ngx-loading>
         </div>
       </div>
-      <div class="card">
+      <div class="card" *appRole="[roles.Admin]">
         <div class="card-body">
           <h3>
             Délai moyen de lecture par les entreprises
@@ -80,7 +80,7 @@
           </div>
           <div class="text-right">
             <a (click)="loadMonthlyReportWithReponseChart()" data-toggle="collapse" href="#collapseMonthlyReportWithReponseChart" class="collapsed">
-              >> Consulter les statistiques mensuelles
+               Consulter les statistiques mensuelles
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportWithReponseChart">
@@ -90,7 +90,7 @@
           <ngx-loading [show]="!reportWithResponsePercentage"></ngx-loading>
         </div>
       </div>
-      <div class="card">
+      <div class="card" *appRole="[roles.Admin]">
         <div class="card-body">
           <h3>
             Délai moyen de réponse par les entreprises
@@ -101,8 +101,8 @@
           </h3>
           <div class="count" *ngIf="reportWithResponseMedianDelay">
             {{(reportWithResponseMedianDelay).toFixed(2)}} jours
-            <ngx-loading [show]="!reportWithResponseMedianDelay"></ngx-loading>
           </div>
+          <ngx-loading [show]="!reportWithResponseMedianDelay"></ngx-loading>
         </div>
       </div>
     </div>

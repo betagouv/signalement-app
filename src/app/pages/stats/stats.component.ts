@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { MonthlyStat } from '../../model/Statistics';
-import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../model/AuthUser';
+import { Roles, User } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 
 @Component({
@@ -14,6 +13,8 @@ import * as moment from 'moment';
   styleUrls: ['./stats.component.scss']
 })
 export class StatsComponent implements OnInit {
+
+  roles = Roles;
 
   reportCount: number;
   reportReadByProPercentage: number;
@@ -28,15 +29,12 @@ export class StatsComponent implements OnInit {
   user: User;
 
   constructor(private statsService: StatsService,
-              private authenticationService: AuthenticationService,
-              private titleService: Title) { }
+              private titleService: Title,
+              private meta: Meta) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.stats.title);
-
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
-    });
+    this.meta.updateTag({ name: 'description', content: pages.stats.description });
 
     this.loadStatistics();
   }
