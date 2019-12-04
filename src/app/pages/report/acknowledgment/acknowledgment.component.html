@@ -16,23 +16,36 @@
               <h2>Que va-t-il se passer pour l'entreprise ?</h2>
             </div>
             <div class="col-12 col-sm-9">
-              <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
-              <ng-container *ngIf="report.contactAgreement else noContactAgreement">
-                <p>
-                  L'entreprise recevra votre signalement.
-                  Elle aura la possibilité de corriger directement le problème grâce à vos informations.
-                </p>
+              <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2><ng-container *ngIf="!report.employeeConsumer; else employeeConsumer">
+                <ng-container *ngIf="report.contactAgreement; else noContactAgreement">
+                  <p>
+                    L'entreprise recevra votre signalement.
+                    Elle aura la possibilité de corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
+                  </p>
+                  <p>
+                    Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                    Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+                  </p>
+                </ng-container>
+                <ng-template #noContactAgreement>
+                  <p>
+                    L'entreprise recevra votre signalement sans connaître votre identité.
+                    Elle aura la possibilité de corriger directement le problème grâce à vos informations.
+                  </p>
+                  <p>
+                    Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                    Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+                  </p>
+                </ng-template>
               </ng-container>
-              <ng-template #noContactAgreement>
+              <ng-template #employeeConsumer>
                 <p>
-                  L'entreprise recevra votre signalement sans connaître votre identité.
-                  Elle aura la possibilité de corriger directement le problème grâce à vos informations.
+                  Vous avez indiqué être employé de l'entreprise que vous avez signalé.
+                </p>
+                <p>
+                  Afin de garantir la sécurité de votre emploi, votre signalement ne sera pas transmis à l'entreprise. Par contre, il a bien été enregistré dans la base de données de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
                 </p>
               </ng-template>
-              <p>
-                Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>)
-                qui pourra intervenir si nécessaire.
-              </p>
               <p>
                 En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
               </p>

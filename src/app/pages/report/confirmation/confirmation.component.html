@@ -65,8 +65,10 @@
             Prénom : {{report.consumer.firstName}}
             <br />
             Email : {{report.consumer.email}}
-            <br />
-            Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
+            <ng-container *ngIf="!report.employeeConsumer">
+              <br />
+              Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
+            </ng-container>
           </div>
         </div>
       </div>
