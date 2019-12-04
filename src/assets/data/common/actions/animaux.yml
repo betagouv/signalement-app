@@ -1,7 +1,7 @@
 - title: J'écris un courrier à l'entreprise pour demander à résoudre mon problème
   actions:
     - question: Quand&#160;?
-      answer: Le plus tôt possible. Vous pouvez attendre de voir si l'entreprise vous répond à travers SignalConso.
+      answer: Le plus tôt possible. Vous pouvez attendre de voir si l'entreprise vous répond avec SignalConso.
     - question: A qui&#160;?
       answer: Auprès du service client de l'entreprise
     - question: Comment&#160;?
@@ -23,37 +23,40 @@
         Je peux aussi rechercher dans la liste des médiateurs
         <a href="https://www.economie.gouv.fr/mediation-conso/liste-des-mediateurs-references" target="_blank">
         https://www.economie.gouv.fr/mediation-conso/liste-des-mediateurs-references
-        </a>
+        </a> <br/>
+        Par exemple, il existe le <a href="https://www.veterinaire.fr/mediateur-de-la-consommation.html" target="_blank">
+        médiateur pour les vétérinaires </a> et le <a href="https://www.mediateurprofessionchienchat.fr/" target="_blank">
+        médiateur pour les métiers du chien et du chat. </a>        
     - question: Comment&#160;?
       answer: Je remplis le formulaire sur le site internet du médiateur.
     - question: Pourquoi&#160;?
-      answer: Pour m’aider à trouver un arrangement avec le professionnel
+      answer: Le émdiateur va m’aider à trouver un arrangement avec l'entreprise
     - question: Combien ça coûte&#160;?
       answer: C’est gratuit !
-- title: Je contacte un conciliateur c’est-à-dire une personne qui m’aide à trouver une solution avec le professionnel.
+- title: Je contacte un conciliateur, c’est-à-dire une personne qui m’aide à trouver une solution avec l'entreprise.
   actions:
     - question: Quand&#160;?
-      answer: Comme pour la médiation, si 2 mois après avoir envoyé mon courrier au professionnel je n’ai pas eu de réponse ou si je n’ai pas trouvé le médiateur compétent pour mon litige.
+      answer: Après avoir essayé les étapes 1 et 2 ci-dessus
     - question: Comment&#160;?
       answer: En contactant le conciliateur le plus proche de chez moi
         <a href="https://www.conciliateurs.fr/Trouver-une-permanence" target="_blank">
           https://www.conciliateurs.fr/Trouver-une-permanence
         </a>
     - question: Pourquoi&#160;?
-      answer: Pour instaurer le dialogue avec le professionnel et trouver un arrangement qui convient aux deux.
+      answer: Pour instaurer le dialogue avec l'entreprise et trouver un arrangement.
     - question: Combien ça coûte&#160;?
       answer: C’est gratuit !
-- title: Je vais au tribunal d’instance
+- title: Je vais en justice, c'est-à-dire que je demande un procès au tribunal d’instance
   actions:
     - question: Quand&#160;?
-      answer: Lorsque la médiation ou la conciliation ont échoué
+      answer: Lorsque je n'ai pas trouvé de solution avec le médiateur ou le conciliateur
     - question: Comment&#160;?
-      answer: En faisant une déclaration auprès du greffe du Tribunal d’Instance à l’aide du
+      answer: En faisant une déclaration au greffe du Tribunal d’Instance à l’aide du
         <a href="https://www.formulaires.modernisation.gouv.fr/gf/cerfa_11764.do" target="_blank">
-        CERFA n°11764*09
+        formulaire CERFA n°11764*09
         </a>
     - question: Pourquoi&#160;?
-      answer: Pour que le juge tranche définitivement mon litige
+      answer: Pour que le juge du tribunal décide qui est en tord et quelles solutions doivent être mises en place.
     - question: Combien ça coûte&#160;?
-      answer: La saisine est gratuite mais des frais au cours de la procédure peuvent intervenir (avocat, expertise...).
+      answer: Aller au tribunal est gratuit mais des frais peuvent se rajouter au cours de la procédure  (frais d'avocat, frais d'expertise...).
 
