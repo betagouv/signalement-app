@@ -95,8 +95,8 @@
         - label: Date de la coupure
           rank: 2
           type: DATE
-        fileLabel: Joindre une copie du contrat / règlement.
-        consumerActions: !!import/single ../common/actions/eau.yml
+      fileLabel: Joindre une copie du contrat / règlement.
+      consumerActions: !!import/single ../common/actions/eau.yml
     - title: Dégâts / travaux sur les canalisations
       example: 'Exemple : fuite d''eau avant compteur'
       information:
@@ -161,6 +161,7 @@
           rank: 6
           type: TEXTAREA
       fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
+      consumerActions: !!import/single ../common/actions/energie.yml
     - title: Publicité mensongère ou trompeuse
       example: 'Exemple : publicité "offre verte" mensongère'
       detailInputs:
@@ -196,6 +197,7 @@
             - Oui
             - Non
       fileLabel: Photo(s) si possible
+      consumerActions: !!import/single ../common/actions/energie.yml
     - title: Contrat
       example: 'Exemple : reconduction de contrat, clause abusive'
       subcategories:
@@ -225,6 +227,7 @@
                         - label: Précisez comment et à qui vous avez fait la demande
                           rank: 3
                           type: TEXTAREA
+                      consumerActions: !!import/single ../common/actions/energie.yml
                     - title: Non
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -251,6 +254,7 @@
                             - label: Précisez comment et à qui vous avez fait la demande
                               rank: 3
                               type: TEXTAREA
+                          consumerActions: !!import/single ../common/actions/energie.yml
                         - title: Non
                           information:
                             title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -260,6 +264,7 @@
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                         content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
                     - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
+                      consumerActions: !!import/single ../common/actions/energie.yml
             - title: Dans une boutique
               information:
                 title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -274,6 +279,10 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
+          consumerActions: !!import/single ../common/actions/energie.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/energie.yml
     - title: Facturation
+      consumerActions: !!import/single ../common/actions/energie.yml
 - title: Autres (Fioul / GPL / granulés de bois...)
+  consumerActions: !!import/single ../common/actions/energie.yml
