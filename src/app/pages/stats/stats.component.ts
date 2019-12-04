@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Title } from '@angular/platform-browser';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-stats',
@@ -16,7 +17,9 @@ export class StatsComponent implements OnInit {
 
   reportCount: number;
   reportReadByProPercentage: number;
+  reportReadByProMedianDelay: number;
   reportWithResponsePercentage: number;
+  reportWithResponseMedianDelay: number;
 
   monthlyReportChart: EChartOption;
   monthlyReportReadByProChart: EChartOption;
@@ -47,8 +50,16 @@ export class StatsComponent implements OnInit {
       this.reportReadByProPercentage = simpleStat.value;
     });
 
+    this.statsService.getReportReadByProMedianDelay().subscribe(simpleStat => {
+      this.reportReadByProMedianDelay = moment.duration(simpleStat.value).asDays();
+    });
+
     this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
       this.reportWithResponsePercentage = simpleStat.value;
+    });
+
+    this.statsService.getReportWithResponseMedianDelay().subscribe(simpleStat => {
+      this.reportWithResponseMedianDelay = moment.duration(simpleStat.value).asDays();
     });
   }
 

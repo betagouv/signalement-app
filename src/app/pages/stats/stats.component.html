@@ -30,9 +30,9 @@
       <div class="card">
         <div class="card-body">
           <h3>
-            Taux de lecture par le professionnel
+            Taux de lecture par les entreprises
             <i class="material-icons" aria-hidden="true"
-               tooltip="Pourcentage de professionnel qui a pris connaissance du signalement">
+               tooltip="Pourcentage d'entreprises qui ont pris connaissance du signalement">
               help_outline
             </i>
           </h3>
@@ -54,9 +54,24 @@
       <div class="card">
         <div class="card-body">
           <h3>
-            Taux de réponse du  professionnel
+            Délai moyen de lecture par les entreprises
             <i class="material-icons" aria-hidden="true"
-               tooltip="Pourcentage de professionnel qui, ayant pris connaissance du signalement, ont apporté une réponse">
+               tooltip="Délai moyen entre la création du signalement et la prise connaissance du signalement par les entreprises">
+              help_outline
+            </i>
+          </h3>
+          <div class="count" *ngIf="reportReadByProMedianDelay">
+            {{(reportReadByProMedianDelay).toFixed(2)}} jours
+          </div>
+          <ngx-loading [show]="!reportReadByProMedianDelay"></ngx-loading>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3>
+            Taux de réponse des entreprises
+            <i class="material-icons" aria-hidden="true"
+               tooltip="Pourcentage d'entreprises qui, ayant pris connaissance du signalement, ont apporté une réponse">
               help_outline
             </i>
           </h3>
@@ -73,6 +88,21 @@
             <ngx-loading [show]="!monthlyReportWithResponseChart"></ngx-loading>
           </div>
           <ngx-loading [show]="!reportWithResponsePercentage"></ngx-loading>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3>
+            Délai moyen de réponse par les entreprises
+            <i class="material-icons" aria-hidden="true"
+               tooltip="Délai moyen entre la prise de connaissance du signalement et la réponse par les entreprises">
+              help_outline
+            </i>
+          </h3>
+          <div class="count" *ngIf="reportWithResponseMedianDelay">
+            {{(reportWithResponseMedianDelay).toFixed(2)}} jours
+            <ngx-loading [show]="!reportWithResponseMedianDelay"></ngx-loading>
+          </div>
         </div>
       </div>
     </div>
