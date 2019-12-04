@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { UserAccess } from "../../../model/CompanyAccess";
-import { User } from "src/app/model/AuthUser.js";
+import { User } from "../../../model/AuthUser.js";
 
 @Component({
   selector: 'app-my-companies',

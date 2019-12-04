@@ -9,7 +9,6 @@
 </div>
 
 <div class="container mt-1">
-    <div class="alert alert-success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>
     <form class="form" [formGroup]="invitationForm" (ngSubmit)="submitForm()">
         <div class="row">
             <div class="col">
@@ -46,4 +45,5 @@
             </span>
         </div>
     </form>
+    <div class="notification success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>
 </div>

@@ -1,8 +1,8 @@
 <div class="container">
     <h2 class="error" *ngIf="hasError">Une erreur est survenue</h2>
 </div>
-
-<div class="banner text-center section section-primary" role="region">
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="banner text-center section section-primary" role="region" *ngIf="hasError">
     <div class="container">
       <h1 class="text-center">
         Une erreur est survenue
@@ -11,10 +11,8 @@
     <main role="main">
         <section class="section section-lightest-grey">
             <p class="font-weight-bold">Le lien sur lequel vous avez cliqué n'est plus valide.</p>
-            <ul>
-                <li>Si vous avez déjà créé votre compte, vous pouvez vous connecter à l'aide de votre adresse email et mot de passe.</li>
-                <li>Sinon, vous pouvez demander au gestionnaire de l'entreprise de vous envoyer une nouvelle invitation.</li>
-            </ul>
+            <p>Si vous avez déjà créé votre compte, vous pouvez vous connecter à l'aide de votre adresse email et mot de passe.</p>
+            <p>Sinon, vous pouvez demander au gestionnaire de l'entreprise de vous envoyer une nouvelle invitation.</p>
         </section>
     </main>
 </div>

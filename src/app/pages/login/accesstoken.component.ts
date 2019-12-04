@@ -17,6 +17,7 @@ export class AccessTokenComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   hasError = false;
+  loading = true;
 
   ngOnInit() {
     this.titleService.setTitle(pages.accesstoken.title);
@@ -30,7 +31,7 @@ export class AccessTokenComponent implements OnInit {
         // TODO: handle logged-in user
         this.router.navigate(['compte', 'activation']);
       },
-      error => {this.hasError = true}
+      error => {this.loading = false; this.hasError = true}
     )
   }
 }
