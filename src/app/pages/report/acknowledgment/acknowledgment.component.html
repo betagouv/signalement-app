@@ -16,8 +16,9 @@
               <h2>Que va-t-il se passer pour l'entreprise ?</h2>
             </div>
             <div class="col-12 col-sm-9">
-              <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2><ng-container *ngIf="!report.employeeConsumer; else employeeConsumer">
-                <ng-container *ngIf="report.contactAgreement; else noContactAgreement">
+              <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
+              <ng-container *ngIf="!report?.employeeConsumer; else employeeConsumer">
+                <ng-container *ngIf="report?.contactAgreement; else noContactAgreement">
                   <p>
                     L'entreprise recevra votre signalement.
                     Elle aura la possibilité de corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
@@ -53,7 +54,7 @@
           </div>
         </div>
       </div>
-      <ng-container *ngIf="getReportLastSubcategory().consumerActions">
+      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
         <div class="card">
           <div class="card-body">
             <div class="row">
