@@ -1,31 +1,31 @@
-- title: J’écris au professionnel pour résoudre le problème à l’amiable
+- title: J'écris un courrier à l'entreprise pour demander à résoudre mon problème
   actions:
     - question: Quand&#160;?
-      answer: Le plus tôt possible
+      answer: Le plus tôt possible. Vous pouvez attendre de voir si l'entreprise vous répond à travers SignalConso.
     - question: A qui&#160;?
-      answer: Auprès du service des  réclamations de la société
+      answer: Auprès du service client de l'entreprise
     - question: Comment&#160;?
       answer: <ul>
         <li>Par lettre recommandée avec AR</li>
         <li>Je mets toutes les documents justificatifs</li>
-        <li>Je peux utiliser modèle-type  lettre-type pour mon litige</li>
-        <li>Je garde une copie du courrier</li>
+        <li>Je peux utiliser cette lettre-type pour mon litige</li>
+        <li>Je garde une copie du courrier et la preuve de l'envoi</li>
         </ul>
     - question: Pourquoi&#160;?
       answer: Ce courrier est la preuve de votre démarche. Il est obligatoire pour résoudre votre problème ou aller au tribunal.
-- title: Je contacte un médiateur de la consommation compétent, c’est-à-dire une personne tierce à mon litige chargée de régler mon problème.
+- title: Je contacte un médiateur de la consommation, c’est-à-dire une personne chargée de régler les problèmes des consommateurs avec les entreprises.
   actions:
     - question: Quand&#160;?
-      answer: Si 2 mois après avoir envoyé mon courrier je n’ai pas de réponse du professionnel
+      answer: 2 mois après avoir envoyé mon courrier si je n’ai pas eu de réponse du professionnel ou que la réponse ne me satisfait pas
     - question: A qui&#160;?
-      answer: Auprès du médiateur compétent pour mon litige
-    - question: Comment&#160;?
-      answer: Le professionnel a l’obligation de communiquer les coordonnées du médiateur dont il relève (sur son site internet, sur le contrat, ou par tout moyen approprié...).
+      answer: Auprès du médiateur compétent. L'entreprise a l’obligation de communiquer les coordonnées du médiateur qu'elle a choisit (sur son site internet, sur le contrat, ou par tout moyen approprié...).
         <br />
         Je peux aussi rechercher dans la liste des médiateurs
         <a href="https://www.economie.gouv.fr/mediation-conso/liste-des-mediateurs-references" target="_blank">
         https://www.economie.gouv.fr/mediation-conso/liste-des-mediateurs-references
         </a>
+    - question: Comment&#160;?
+      answer: Je remplis le formulaire sur le site internet du médiateur.
     - question: Pourquoi&#160;?
       answer: Pour m’aider à trouver un arrangement avec le professionnel
     - question: Combien ça coûte&#160;?
