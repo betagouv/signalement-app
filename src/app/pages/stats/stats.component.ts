@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { MonthlyStat } from '../../model/Statistics';
-import { Roles, User } from '../../model/AuthUser';
+import { Roles } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 import * as moment from 'moment';
+import { AuthenticationService } from '../../services/authentication.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.scss']
 })
-export class StatsComponent implements OnInit {
+export class StatsComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   roles = Roles;
 
@@ -26,9 +31,8 @@ export class StatsComponent implements OnInit {
   monthlyReportReadByProChart: EChartOption;
   monthlyReportWithResponseChart: EChartOption;
 
-  user: User;
-
   constructor(private statsService: StatsService,
+              private authenticationService: AuthenticationService,
               private titleService: Title,
               private meta: Meta) { }
 
@@ -36,7 +40,20 @@ export class StatsComponent implements OnInit {
     this.titleService.setTitle(pages.stats.title);
     this.meta.updateTag({ name: 'description', content: pages.stats.description });
 
+    this.authenticationService.user
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(user => {
+        if (user && user.role === this.roles.Admin) {
+          this.loadAminStatistics();
+        }
+      });
+
     this.loadStatistics();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   loadStatistics() {
@@ -48,12 +65,15 @@ export class StatsComponent implements OnInit {
       this.reportReadByProPercentage = simpleStat.value;
     });
 
-    this.statsService.getReportReadByProMedianDelay().subscribe(simpleStat => {
-      this.reportReadByProMedianDelay = moment.duration(simpleStat.value).asDays();
-    });
-
     this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
       this.reportWithResponsePercentage = simpleStat.value;
+    });
+  }
+
+  loadAminStatistics() {
+
+    this.statsService.getReportReadByProMedianDelay().subscribe(simpleStat => {
+      this.reportReadByProMedianDelay = moment.duration(simpleStat.value).asDays();
     });
 
     this.statsService.getReportWithResponseMedianDelay().subscribe(simpleStat => {

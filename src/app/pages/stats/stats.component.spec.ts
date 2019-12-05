@@ -7,15 +7,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MonthlyStat, SimpleStat } from '../../model/Statistics';
 import { NgxLoadingModule } from 'ngx-loading';
+import { AppRoleDirective } from '../../directives/app-role.directive';
+import { AuthenticationService } from '../../services/authentication.service';
+import { User } from '../../model/AuthUser';
 
 describe('StatsComponent', () => {
   let component: StatsComponent;
   let fixture: ComponentFixture<StatsComponent>;
   let statsService: StatsService;
+  let authenticationService: AuthenticationService;
 
   const reportCount = Object.assign(new SimpleStat(), { value: 53 });
   const reportReadByProPercentage = Object.assign(new SimpleStat(), { value: 12.5 });
   const reportWithResponseCount = Object.assign(new SimpleStat(), { value: 43.89 });
+  const reportReadByProMedianDelay = Object.assign(new SimpleStat(), { value: 'PT25H11M18.691S'});
+  const reportWithResponseMedianDelay = Object.assign(new SimpleStat(), { value: 'PT140H12M35.691S'});
 
   const monthlyStat1 = Object.assign(new MonthlyStat(), { month: 1, year: 2018, value: 5 });
   const monthlyStat2 = Object.assign(new MonthlyStat(), { month: 2, year: 2018, value: 8 });
@@ -23,7 +29,10 @@ describe('StatsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatsComponent ],
+      declarations: [
+        StatsComponent,
+        AppRoleDirective
+      ],
       imports: [
         HttpClientModule,
         NgxEchartsModule,
@@ -39,6 +48,8 @@ describe('StatsComponent', () => {
     spyOn(statsService, 'getReportReadByProPercentage').and.returnValue(of(reportReadByProPercentage));
     spyOn(statsService, 'getReportWithResponsePercentage').and.returnValue(of(reportWithResponseCount));
     spyOn(statsService, 'getMonthlyReportCount').and.returnValue(of(monthyReportCount));
+    spyOn(statsService, 'getReportReadByProMedianDelay').and.returnValue(of(reportReadByProMedianDelay));
+    spyOn(statsService, 'getReportWithResponseMedianDelay').and.returnValue(of(reportWithResponseMedianDelay));
     fixture = TestBed.createComponent(StatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -50,13 +61,15 @@ describe('StatsComponent', () => {
 
   describe('onInit', () => {
 
-    it('should load the global stats', () => {
+    it('should load the public global stats', () => {
 
       component.ngOnInit();
 
       expect(component.reportCount).toEqual(53);
       expect(component.reportReadByProPercentage).toEqual(12.5);
       expect(component.reportWithResponsePercentage).toEqual(43.89);
+      expect(component.reportWithResponseMedianDelay).toBeUndefined();
+      expect(component.reportReadByProMedianDelay).toBeUndefined();
     });
 
     it ('should set the last 12 months on the xAxis when current month is April', () => {
@@ -111,6 +124,26 @@ describe('StatsComponent', () => {
       component.loadMonthlyReportChart();
 
       expect(component.monthlyReportChart.series[0]['data']).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0]);
+    });
+
+  });
+
+  describe('for a professional user', () => {
+
+    beforeEach(() => {
+      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
+    });
+
+    it('on init it should load the public and admins global stats', () => {
+
+      component.ngOnInit();
+
+      expect(component.reportCount).toEqual(53);
+      expect(component.reportReadByProPercentage).toEqual(12.5);
+      expect(component.reportWithResponsePercentage).toEqual(43.89);
+      expect(component.reportWithResponseMedianDelay).toEqual(5.842079756944444);
+      expect(component.reportReadByProMedianDelay).toEqual(1.049521886574074);
     });
 
   });
