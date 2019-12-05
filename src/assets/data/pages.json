@@ -35,6 +35,10 @@
     "title": "Accès au compte de l'entreprise - SignalConso",
     "description": "Rejoindre le compte d'une entreprise"
   },
+  "contact": {
+    "title": "Contact - SignalConso",
+    "description": "Trouvez le bon interlocuteur à contacter sur SignalConso"
+  },
   "login": {
     "title": "Authentification - SignalConso",
     "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso",

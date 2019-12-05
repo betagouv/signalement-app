@@ -1,0 +1,99 @@
+<div class="banner text-center section section-primary" role="region">
+  <div class="container">
+    <h1 class="text-center">
+      Contact
+    </h1>
+  </div>
+</div>
+
+
+<main role="main">
+  <section class="section section-lightest-grey">
+    <div class="container max-width">
+
+
+      <h2 class="pb-2 pb-lg-3">Avant de vous précipitez sur votre boite mail, vérifiez bien que vous utilisez le bon contact !</h2>
+
+      <a class="lead show" data-toggle="collapse" href="#collapse1">
+        Vous avez rencontré un problème avec une entreprise et vous souhaitez le signaler ?
+      </a>
+      <div class="collapse" id="collapse1">
+        <p>
+          SignalConso est là pour ça !
+          <br />
+          <b>Pas la peine de nous envoyez votre signalement par email, nous ne prenons aucun signalement par email ;)</b>
+        </p>
+      </div>
+
+      <hr>
+
+      <a class="lead show" data-toggle="collapse" href="#collapse2">
+        Vous souhaitez signaler un problème avec un site internet ?
+      </a>
+      <div class="collapse" id="collapse2">
+        <p tabindex="-1" id="titleInformation" [innerHTML]="internetInformation?.title">
+        </p>
+        <p *ngIf="internetInformation?.content" [innerHTML]="internetInformation?.content"></p>
+
+        <div *ngIf="internetInformation?.actions">
+          <div class="collapse-container" *ngFor="let action of internetInformation?.actions; let index = index">
+            <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapseAction_{{index}}">
+              <button type="button" class="btn link">
+                <div [innerHTML]="action.question"></div>
+                <div class="text-muted mt-2" *ngIf="action.example" [innerHTML]="action.example"></div>
+              </button>
+              <button type="button" class="btn">
+                <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                <i class="material-icons md-24 up">keyboard_arrow_up</i>
+              </button>
+            </a>
+            <div class="collapse" id="collapseAction_{{index}}">
+              <div [innerHTML]="action.answer" class="collapse-content"></div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+
+      <hr>
+
+      <a class="lead show" data-toggle="collapse" href="#collapse3">
+        Vous avez une question sur vos droits en tant que consommateur ?
+      </a>
+      <div class="collapse" id="collapse3">
+        <uL>
+          <li>Retrouvez l’ensemble des
+            <a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques-de-la-concurrence-et-de-la-consom" target="_blank">fiches pratiques</a> et
+            <a href="https://www.economie.gouv.fr/dgccrf/foire-aux-questions-0" target="_blank">foire aux questions</a> de la répression des fraudes (DGCCRF)</li>
+          <li>Contactez la répression des fraudes (DGCCRF) :
+            <ul>
+              <li>
+                Appelez le 3939 via un serveur vocal interactif : du lundi au vendredi de 8h45 à 17h30 heures de métropole (0.15 € la minute + prix de l’appel) ;
+              </li>
+              <li>
+                Envoyez un courrier ou un courriel à la DD(CS)PP
+              </li>
+            </ul>
+          </li>
+        </uL>
+      </div>
+
+      <hr>
+
+      <a class="lead show" data-toggle="collapse" href="#collapse4">
+        Votre question concerne un problème technique rencontré sur SignalConso ?
+      </a>
+      <div class="note">
+        Exemple : je ne trouve pas le SIRET de l’entreprise que je veux signaler, je rencontre un bug lors de la navigation sur le site, je ne trouve pas la bonne catégorie pour mon problème...
+      </div>
+
+      <div class="collapse" id="collapse4">
+        <p>
+          Ecrivez-vous à contact@signalconso.beta.gouv.fr
+        </p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
