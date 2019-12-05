@@ -11,16 +11,13 @@
 h3 {
   color: $darker-grey;
   font-weight: bolder;
-  text-align: center;
 }
 
 .count {
   text-align: center;
-  font-size: 70px;
-  line-height: 90px;
+  font-size: 40px;
   font-weight: bold;
   color: $primary;
-  padding: 0.25em;
 }
 
 a:not(.collapsed) {
