@@ -17,6 +17,7 @@ export class AccessTokenComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   hasError = false;
+  isAuthenticated = false;
   loading = true;
 
   ngOnInit() {
@@ -28,8 +29,17 @@ export class AccessTokenComponent implements OnInit {
       this.route.snapshot.queryParamMap.get('token'),
     ).subscribe(
       token => {
-        // TODO: handle logged-in user
-        this.router.navigate(['compte', 'activation']);
+        this.authenticationService.isAuthenticated().subscribe(
+          isAuthenticated => {
+            if (isAuthenticated) {
+              this.hasError = true;
+              this.isAuthenticated = true;
+              this.loading = false;
+            } else {
+              this.router.navigate(['compte', 'activation']);
+            }
+          }
+        )
       },
       error => {this.loading = false; this.hasError = true}
     )
