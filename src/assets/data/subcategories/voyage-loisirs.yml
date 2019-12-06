@@ -163,6 +163,7 @@
                   information:
                     title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
                     content: A la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
+                    outOfScope: true
                 - title: Non
                   detailInputs:
                     - label: Date de la course
@@ -257,6 +258,7 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemple: sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
@@ -328,9 +330,10 @@
               consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Non
               information:
-                title:
-                content: les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
-    - title: Autres
+                title: Les arrhes
+                content: Les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
+                outOfScope: true
+   - title: Autres
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Agence de voyage
   subcategories:
@@ -341,6 +344,7 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
@@ -405,6 +409,7 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
@@ -471,6 +476,7 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
           consumerActions: !!import/single ../common/actions/tourisme.yml
@@ -538,6 +544,7 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
           consumerActions: !!import/single ../common/actions/tourisme.yml
