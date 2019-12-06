@@ -112,6 +112,7 @@
             title: Un professionnel de santé non conventionné peut choisir ses tarifs
             content: Le prix varie selon qu'il est conventionné ou non conventionné. <br> Un médecin non conventionné peut choisir librement ses prix.  Il facture des « dépassements d’honoraires ». En savoir plus<br><a href="https://www.service-public.fr/particuliers/vosdroits/F17042" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F17042</a>
               <br><br>Un médecin conventionné pratiquera des tarifs classiques.
+            outOfScope: true
         - title: Problème de devis
           example: "Exemple : je n'ai pas eu de devis, devis pas respecté"
           subcategories:
@@ -212,6 +213,7 @@
             actions:
               - question: Vous n'avez pas eu connaissance des prix avant&#160;?
                 answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
+            outOfScope: true
         - title: Je n'ai pas reçu de note (facture, ticket)
           example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
           detailInputs:
@@ -356,6 +358,7 @@
             content: Le pharmacien peut choisir les prix des médicaments non remboursables, et des produits divers de la pharmacie (biberon, brosse à dent, crème...). Les prix doivent être clairement indiqués sans devoir les demander.
               Cas particulier des médicaments remboursables !
               Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
+              outOfScope: true
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Problème de commande
