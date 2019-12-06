@@ -333,7 +333,7 @@
                 title: Les arrhes
                 content: Les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
                 outOfScope: true
-   - title: Autres
+    - title: Autres
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Agence de voyage
   subcategories:
