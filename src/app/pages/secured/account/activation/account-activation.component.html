@@ -10,7 +10,7 @@
   <section class="section section-lightest-grey">
     <div class="container max-width">
       <div class="notification success mt-3" *ngIf="showSuccess; else activation">
-        Votre compte est maintenant activé, vous pouvez <a routerLink="/connexion">vous connecter</a> pour accéder à votre espace professionnel.
+        Votre compte est maintenant activé, vous pouvez <a routerLink="/connexion">vous connecter</a> pour accéder à votre espace entreprise.
       </div>
       <ng-template #activation>
         <form [formGroup]="activationForm" (ngSubmit)="submitForm()" class="form-horizontal">
