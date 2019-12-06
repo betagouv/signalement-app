@@ -598,4 +598,4 @@
     - title: Coffrets cadeaux et box
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autres
-      consumerActions: !!import/single ../common/actions/tourisme.yml
+      consumerActions: !!import/single ../common/actions/tourisme.yml 
