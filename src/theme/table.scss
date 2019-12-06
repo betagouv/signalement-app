@@ -34,7 +34,7 @@
   text-transform: uppercase;
 }
 
-.table tr:hover {
+.table:not(.no-hover) tr:hover {
   background: #fafbfc;
   background: $lightest-grey;
 }

@@ -4,10 +4,15 @@
       example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
       subcategories:
         - title: Je ne suis pas d'accord avec ma facture
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Le prix de mon forfait a été augmenté
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Des options payantes ont été automatiquement rajoutées à mon forfait
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Autre
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
@@ -16,9 +21,13 @@
     - title: Résiliation / changement d'opérateur
       subcategories:
         - title: Frais de résiliation
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Restitution du materiel
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Mon ancien opérateur continue de me prélever
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Appels ou sms indésirables
       example: 'Exemple : spams, démarchages téléphoniques, BlocTel'
       subcategories:
@@ -30,9 +39,12 @@
       example: 'Exemple : téléphone acheté avec le forfait, utilisation de mon portable à l''étranger'
       subcategories:
         - title: Utilisation de mon forfait à l'étranger
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Qualité du service client
           example: 'Exemple : pas de réponse du service client'
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Téléphone acheté avec le forfait
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
 - title: Eau
   subcategories:
     - title: Contrat / facture
@@ -59,6 +71,7 @@
                   rank: 2
                   type: TEXTAREA
               fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
+              consumerActions: !!import/single ../common/actions/eau.yml
         - title: Je ne suis pas d'accord avec la consommation indiquée sur ma facture.
           information:
             title: Vous devez demander à faire vérifier le compteur.
@@ -76,7 +89,9 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
+          consumerActions: !!import/single ../common/actions/eau.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/eau.yml
     - title: Coupure de l'eau pour impayé
       example: Mon débit d'eau a été réduit car je ne peux payer ma facture
       detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
@@ -89,15 +104,17 @@
         - label: Date de la coupure
           rank: 2
           type: DATE
-          fileLabel: Joindre une copie du contrat / règlement.
+      fileLabel: Joindre une copie du contrat / règlement.
+      consumerActions: !!import/single ../common/actions/eau.yml
     - title: Dégâts / travaux sur les canalisations
       example: 'Exemple : fuite d''eau avant compteur'
       information:
         title: Le compteur d'eau représente la frontière entre ce qui est à votre charge et ce qui ne l'est pas.
-        subTitle: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
+        content: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
         actions:
           - question: Que faire en cas de désaccord&#160;?
             answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a>
+        outOfScope: true
     - title: Fosse septique
       example: 'Exemple : malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier '
       detailInputs:
@@ -154,6 +171,7 @@
           rank: 6
           type: TEXTAREA
       fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
+      consumerActions: !!import/single ../common/actions/energie.yml
     - title: Publicité mensongère ou trompeuse
       example: 'Exemple : publicité "offre verte" mensongère'
       detailInputs:
@@ -189,6 +207,7 @@
             - Oui
             - Non
       fileLabel: Photo(s) si possible
+      consumerActions: !!import/single ../common/actions/energie.yml
     - title: Contrat
       example: 'Exemple : reconduction de contrat, clause abusive'
       subcategories:
@@ -218,10 +237,12 @@
                         - label: Précisez comment et à qui vous avez fait la demande
                           rank: 3
                           type: TEXTAREA
+                      consumerActions: !!import/single ../common/actions/energie.yml
                     - title: Non
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                         content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                        outOfScope: true
                 - title: Un logement que vous occupiez déjà
                   subcategoriesTitle: Avez-vous demander à faire démarrer votre contrat immédiatement ?
                   subcategories:
@@ -244,19 +265,24 @@
                             - label: Précisez comment et à qui vous avez fait la demande
                               rank: 3
                               type: TEXTAREA
+                          consumerActions: !!import/single ../common/actions/energie.yml
                         - title: Non
                           information:
                             title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                             content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                            outOfScope: true
                     - title: Oui. J'ai renoncé au délai de retractation.
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                         content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                        outOfScope: true
                     - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
+                      consumerActions: !!import/single ../common/actions/energie.yml
             - title: Dans une boutique
               information:
                 title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                 actions: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
+                outOfScope: true
         - title: Une clause du contrat est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
           detailInputs:
             - label: Date du constat (ou du contrat)
@@ -267,6 +293,10 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
+          consumerActions: !!import/single ../common/actions/energie.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/energie.yml
     - title: Facturation
+      consumerActions: !!import/single ../common/actions/energie.yml
 - title: Autres (Fioul / GPL / granulés de bois...)
+  consumerActions: !!import/single ../common/actions/energie.yml

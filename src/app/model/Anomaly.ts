@@ -10,10 +10,10 @@ export class Action {
 
 export class Information {
   title?: string;
-  subTitle?: string;
   content?: string;
   actions?: Action[];
   reference?: string;
+  outOfScope?: boolean;
 }
 
 export class DetailInput {
@@ -37,6 +37,7 @@ export class Subcategory {
   detailInputs?: DetailInput[];
   fileLabel?: string;
   information?: Information;
+  consumerActions?: Information[];
 }
 
 export class Anomaly {

@@ -1,24 +1,38 @@
 <main role="main">
-  <app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
-  <section class="section section-white">
+  <section class="section section-lighter-grey">
     <div class="container max-width">
-      <p tabindex="-1" id="titleInformation" class="mx-auto mb-4 text-left title" [innerHTML]="informationToDisplay?.title"></p>
-      <p class="mb-4 text-left" [innerHTML]="informationToDisplay?.subTitle" *ngIf="informationToDisplay?.subTitle"></p>
-      <p class="mb-5" *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
+      <h2 class="text-center">Emmh, nous ne pouvons pas traiter votre signalement.</h2>
+      <div class="bg-white m-4 p-4">
+        <p *ngIf="informationToDisplay?.outOfScope">
+          Nous ne doutons pas que vous ayez réellement rencontré un problème mais... il ne s’agit pas d’une fraude.
+        </p>
+        <p tabindex="-1" id="titleInformation" [innerHTML]="informationToDisplay?.title">
+        </p>
+        <p *ngIf="informationToDisplay?.content" [innerHTML]="informationToDisplay?.content"></p>
 
-      <div class="card mx-auto mb-4 rounded-lg" *ngFor="let action of informationToDisplay?.actions">
-        <div class="card-body">
-          <p class="card-text" [innerHTML]="action.question" *ngIf="action.question"></p>
-          <p class="card-text text-muted" *ngIf="action.example" [innerHTML]="action.example"></p>
+        <div *ngIf="informationToDisplay?.actions">
+          <div class="collapse-container" *ngFor="let action of informationToDisplay?.actions; let index = index">
+            <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapseAction_{{index}}">
+              <button type="button" class="btn link">
+                <div [innerHTML]="action.question"></div>
+                <div class="text-muted mt-2" *ngIf="action.example" [innerHTML]="action.example"></div>
+              </button>
+              <button type="button" class="btn">
+                <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                <i class="material-icons md-24 up">keyboard_arrow_up</i>
+              </button>
+            </a>
+            <div class="collapse" id="collapseAction_{{index}}">
+              <div [innerHTML]="action.answer" class="collapse-content"></div>
+            </div>
+          </div>
+          <hr />
         </div>
-        <div class="card-footer action-lighter-grey" [innerHTML]="action.answer"></div>
       </div>
 
-      <div class="position-relative">
-        <hr class="mb-6" />
-
+      <div class="bg-white m-4 p-4">
         <div class="text-center" *ngIf="!ratingSuccess; else ratingSuccessTpl">
-          <p class="title">Est-ce que cette information vous a été utile ?</p>
+          <p>Est-ce que cette information vous a été utile ?</p>
           <button type="button" class="btn btn-outline-primary mr-3" (click)="rateInformation(true)" title="oui">
             <i class="material-icons md-24" aria-hidden="true">thumb_up</i>
           </button>
@@ -34,15 +48,15 @@
             Votre avis a bien été enregistré, nous vous en remercions.
           </div>
         </ng-template>
-
-        <hr class="mb-6" />
         <ngx-loading [show]="loading"></ngx-loading>
       </div>
-
-      <button class="btn btn-lg btn-primary mx-auto" (click)="newReport()">
-        Identifier un autre problème
-      </button>
-
     </div>
+
+    <div class="text-center">
+      <button class="btn btn-lg btn-primary" (click)="newReport()">
+        Retourner à l'accueil<img src="/assets/images/icon-home.svg" alt="Icône accueil" />
+      </button>
+    </div>
+
   </section>
 </main>
