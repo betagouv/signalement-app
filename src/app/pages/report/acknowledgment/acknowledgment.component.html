@@ -6,6 +6,43 @@
   </section>
   <section class="section section-lighter-grey">
     <div class="container max-width">
+      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img src="/assets/images/picture-problem.svg" alt="Illustration" />
+              </div>
+              <div class="col-9 d-sm-none">
+                <h2>Comment me faire rembourser ou dédommager ?</h2>
+              </div>
+              <div class="col-12 col-sm-9">
+                <h2 class="d-none d-sm-block">Comment me faire rembourser ou dédommager ?</h2>
+                <div class="collapse-container" *ngFor="let consumerActionGroup of getReportLastSubcategory().consumerActions; let index = index">
+                  <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse{{index}}">
+                    <button type="button" class="btn">{{index + 1}}</button>
+                    <button type="button" class="btn link">
+                      {{consumerActionGroup.title}}
+                    </button>
+                    <button type="button" class="btn">
+                      <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                      <i class="material-icons md-24 up">keyboard_arrow_up</i>
+                    </button>
+                  </a>
+                  <div class="collapse" id="collapse{{index}}">
+                    <table class="table table-bordered no-hover collapse-content" cellpadding="2">
+                      <tr *ngFor="let consumerAction of consumerActionGroup.actions">
+                        <td [innerHTML]="consumerAction.question"></td>
+                        <td [innerHTML]="consumerAction.answer"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -55,41 +92,6 @@
         </div>
       </div>
       <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3">
-                <img src="/assets/images/picture-problem.svg" alt="Illustration" />
-              </div>
-              <div class="col-9 d-sm-none">
-                <h2>Comment me faire rembourser ou dédommager ?</h2>
-              </div>
-              <div class="col-12 col-sm-9">
-                <h2 class="d-none d-sm-block">Comment me faire rembourser ou dédommager ?</h2>
-                <div class="collapse-container" *ngFor="let consumerActionGroup of getReportLastSubcategory().consumerActions; let index = index">
-                  <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse{{index}}">
-                    <button type="button" class="btn">{{index + 1}}</button>
-                    <button type="button" class="btn link">
-                      {{consumerActionGroup.title}}
-                    </button>
-                    <button type="button" class="btn">
-                      <i class="material-icons md-24 down">keyboard_arrow_down</i>
-                      <i class="material-icons md-24 up">keyboard_arrow_up</i>
-                    </button>
-                  </a>
-                  <div class="collapse" id="collapse{{index}}">
-                    <table class="table table-bordered no-hover collapse-content" cellpadding="2">
-                      <tr *ngFor="let consumerAction of consumerActionGroup.actions">
-                        <td [innerHTML]="consumerAction.question"></td>
-                        <td [innerHTML]="consumerAction.answer"></td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="card">
           <div class="card-body">
             <div class="row">
