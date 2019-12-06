@@ -358,7 +358,7 @@
             content: Le pharmacien peut choisir les prix des médicaments non remboursables, et des produits divers de la pharmacie (biberon, brosse à dent, crème...). Les prix doivent être clairement indiqués sans devoir les demander.
               Cas particulier des médicaments remboursables !
               Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
-              outOfScope: true
+            outOfScope: true
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Problème de commande
