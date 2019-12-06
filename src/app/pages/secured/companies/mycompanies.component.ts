@@ -32,13 +32,9 @@ export class MyCompaniesComponent implements OnInit {
   }
   refreshAccesses() {
     this.companyAccessesService.myAccesses(this.user).subscribe(
-        accesses => {
-          if (accesses.length == 1) {
-            this.router.navigate(['/entreprise', 'acces', accesses[0].companySiret]);
-          } else {
-            this.myAccesses = accesses;
-          }
-        }
-      )
+      accesses => {
+        this.myAccesses = accesses;
+      }
+    )
   }
 }

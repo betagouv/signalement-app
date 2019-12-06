@@ -9,6 +9,7 @@ export interface CompanyAccess {
 export interface UserAccess {
   companySiret: string;
   companyName: string;
+  companyAddress: string;
   level: string;
 }
 
