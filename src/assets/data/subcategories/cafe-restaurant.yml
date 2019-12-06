@@ -165,7 +165,7 @@
           rank: 2
           type: TEXTAREA
           placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
-          fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
+      fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
     - title: J'ai payé plus cher que le prix affiché
       detailInputs:
         - label: Date du constat
@@ -192,7 +192,7 @@
             - Erreur lors de l'addition
             - Autre (à préciser)
             - Non, aucune raison.
-          fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
+      fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Je trouve que les pris sont très chers
       example: 'Exemple : le prix du menu est très cher pour la qualité'

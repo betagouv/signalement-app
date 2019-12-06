@@ -380,7 +380,7 @@
                             - label: Motif de refus
                               rank: 5
                               type: TEXT
-                              fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+                          fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
                           consumerActions: !!import/single ../common/actions/garantie.yml
                     - title: Non
                       information:
