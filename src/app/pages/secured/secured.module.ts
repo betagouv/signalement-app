@@ -20,6 +20,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 import { CompanyAccessesComponent } from './companyaccesses/companyaccesses.component';
 import { CompanyInvitationComponent } from './companyaccesses/invitation.component';
+import { MyCompaniesComponent } from './companies/mycompanies.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'compte/activation', component: AccountActivationComponent },
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
-  { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] }
+  { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] },
+  { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -48,7 +50,8 @@ const routes: Routes = [
     SubscriptionComponent,
     MostReportedListComponent,
     CompanyAccessesComponent,
-    CompanyInvitationComponent
+    CompanyInvitationComponent,
+    MyCompaniesComponent
   ],
   imports: [
     CommonModule,
