@@ -192,7 +192,7 @@
             - Autre (à préciser)
             - Non, aucune raison.
           fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
-        consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Je trouve que les pris sont très chers
       example: 'Exemple : le prix du menu est très cher pour la qualité'
       information:
