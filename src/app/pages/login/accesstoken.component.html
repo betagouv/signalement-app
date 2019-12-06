@@ -1,12 +1,16 @@
 <ngx-loading [show]="loading"></ngx-loading>
-<div class="banner text-center section section-primary" role="region" *ngIf="hasError">
+<div class="overflow-container">
+  <div class="banner text-center section section-primary" role="region" *ngIf="hasError">
     <div class="container">
       <h1 class="text-center">
         Une erreur est survenue
       </h1>
     </div>
+  </div>
+</div>
+<div class="container">
     <main role="main">
-        <section class="section section-lightest-grey">
+        <section class="section">
           <ng-template [ngIf]="isAuthenticated" [ngIfElse]="errorBlock">
               <p class="font-weight-bold">Vous êtes actuellement connecté.</p>
               <p>Pour procéder à la création d'un nouveau compte, vous devez vous déconnecter.</p>
