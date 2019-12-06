@@ -8,11 +8,17 @@
           subcategoriesTitle: Pour quelle raison le chauffeur a-t-il refusé de vous prendre ?
           subcategories:
             - title: Trajet trop court ou pas assez rentable
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Présence de mon chien
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Mes bagages/objets ne rentrent pas dans le coffre
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Etat d'ébriété ou de violence
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Borne taxi à proximité
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Autre
+              consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Les prix ne sont pas affichés dans la voiture
           example: Une affiche avec les prix et les suppléments doit être visible dans la voiture.
         - title: Refus de prendre votre carte bancaire
@@ -59,6 +65,7 @@
                   rank: 10
                   type: TEXT
               fileLabel: Si possible, joindre une copie de la note (facture), et toute preuve du trajet réellement emprunté.
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: J'ai payé un supplément que je ne comprends pas
               detailInputs:
                 - label: Date de la course
@@ -77,6 +84,7 @@
                 - label: Combien aviez-vous de bagages en tout ?
                   rank: 4
                   type: TEXT
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Le prix au compteur était élevé dès la prise en charge
               detailInputs:
                 - label: Date de la course
@@ -96,6 +104,7 @@
                   rank: 4
                   type: TEXT
               filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
               detailInputs:
                 - label: Date de la course
@@ -120,6 +129,7 @@
                   rank: 8
                   type: TEXT
               fileLabel: Joindre si possible la note (facture) pour appuyer votre signalement.
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Le chauffeur n'a pas appliqué le prix prévu pour le forfait
               example: Dans certaines villes, il existe des forfaits (c'est-à-dire un prix unique connu à l'avance) pour faire les trajets vers ou depuis un aéroport. Le prix de ces forfaits est fixe.
               detailInputs:
@@ -143,6 +153,7 @@
                   type: TEXTAREA
                   placeholder: Numéro ADS, plaque d'immatriculation, société de réservation ...
               fileLabel: Joindre la note (facture) de votre course ou tout document utile pour appuyer votre signalement.
+              consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
           subcategories:
             - title: Refus de prendre les chèques
@@ -152,6 +163,7 @@
                   information:
                     title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
                     content: A la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
+                    outOfScope: true
                 - title: Non
                   detailInputs:
                     - label: Date de la course
@@ -181,6 +193,7 @@
                   type: TEXT
                   placeholder: Identification du taxi, nom de la centrale d'appel ...
               fileLabel: Joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
+              consumerActions: !!import/single ../common/actions/defaut.yml
     - title: VTC (voiture avec chauffeur)
       example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
       subcategories:
@@ -205,6 +218,7 @@
               rank: 4
               type: TEXTAREA
           fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course etc.)
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Le prix payé n'est pas celui annoncé au départ
           detailInputs:
             - label: Date de la course
@@ -223,7 +237,9 @@
                 - Oui (à préciser)
                 - Non
           fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile etc.)
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
+          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
       information:
         title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
@@ -242,15 +258,19 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemple: sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, suppléments non prévus"
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Informations concernant le logement / Publicité
       example: "Exemples : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -279,11 +299,13 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
+          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Qualité de la chambre / de l'hébergement
       example: 'Exemples : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna.'
       subcategories:
         - title: L'hébergement ne correspond pas à ce qui m'a été vendu
           example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Problème d'hygiène ou de propreté
           example: 'Exemples : chambre sale, sauna sale, puces de lit'
           information:
@@ -295,19 +317,24 @@
             title: Vous souhaitez signaler un problème de bruit ?
             content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie de la commune de l'hébergement.
         - title: Autres
+          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Annulation / remboursement
       subcategoriesTitle: Qui a annulé la réservation&#160;?
       subcategories:
         - title: l'hôtel, le camping, le gérant ...
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: moi-même
           subcategoriesTitle: Aviez-vous une assurance annulation&#160;?
           subcategories:
             - title: Oui
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Non
               information:
-                title:
-                content: les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
+                title: Les arrhes
+                content: Les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
+                outOfScope: true
     - title: Autres
+      consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Agence de voyage
   subcategories:
     - title: Prix
@@ -317,15 +344,19 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemples : fausse réduction, suppléments non prévus"
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
       example: "Exemples : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -354,14 +385,20 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Prestation
       subcategories:
         - title: La prestation ne correspond pas à ce que l'agence m'a vendu
           example: "Exemple : une excursion était prévue dans le voyage et elle a été annulée sans motifs"
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Annulation / remboursement
+      consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Assurance
+      consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autres
+      consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Transport en commun
   example: 'Exemple : avion, train'
   subcategories:
@@ -372,15 +409,19 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemples : fausse réduction, suppléments non prévus"
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
       example: "Exemples : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -409,15 +450,22 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Retard / Annulation / Remboursement
+      consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Assurance
       subcategories:
         - title: Annulation
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Bagage
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Abonnement de transport
       example: "Exemples : TGV max, pass navigo"
+      consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autres
+      consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Sport
   example: 'Exemples : piscine, salle de sport'
   subcategories:
@@ -428,15 +476,20 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Prix final non-conforme au prix annoncé
           example: "Exemples : fausse réduction, suppléments non prévus"
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
       example: "Exemples : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -465,16 +518,22 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Contrat et abonnement
       example: 'Exemples : contrat non respecté, clause abusive'
       subcategories:
         - title: Clause abusive
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Contrat non respecté
-    - title: Autres
+          consumerActions: !!import/single ../common/actions/tourisme.yml
+    - title: Autres      
       subcategories:
         - title: Equipement
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Compléments alimentaires
-        - title: Hygiène
+          consumerActions: !!import/single ../common/actions/tourisme.yml
+        - title: Hygiène 
+          consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Divertissement culturel
   example: 'Exemples : musée, cinéma, concert'
   subcategories:
@@ -485,15 +544,20 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           example: 'Exemples : sur un site, un catalogue'
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Prix final non-conforme au prix annoncé
           example: "Exemples : fausse réduction, suppléments non prévus"
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Autres
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
       example: "Exemples : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
+          consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -522,10 +586,16 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
+          consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Remboursement / annulation
+      consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autres
+      consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Autres
   subcategories:
     - title: Abonnement
+      consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Coffrets cadeaux et box
+      consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autres
+      consumerActions: !!import/single ../common/actions/tourisme.yml 

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { CompanyAccess } from '../model/CompanyAccess';
+import { CompanyAccess, PendingToken, UserAccess } from '../model/CompanyAccess';
 import { mergeMap } from 'rxjs/operators';
+import { User } from '../model/AuthUser';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,17 @@ export class CompanyAccessesService {
 
   constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils) {
+  }
+
+  myAccesses(user: User) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<UserAccess[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', 'connected-user']),
+          headers
+        );
+      })
+    );
   }
 
   listAccesses(siret: string) {
@@ -58,6 +70,28 @@ export class CompanyAccessesService {
             email: email,
             level: level
           },
+          headers
+        );
+      })
+    );
+  }
+
+  listPendingTokens(siret: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<PendingToken[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'pending']),
+          headers
+        );
+      })
+    );
+  }
+
+  removePendingToken(siret: string, tokenId: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.delete(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'token', tokenId]),
           headers
         );
       })

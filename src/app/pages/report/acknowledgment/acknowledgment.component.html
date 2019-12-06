@@ -1,49 +1,133 @@
 <main role="main">
   <section class="section-small section-primary">
     <div class="container">
-      <h1 id="title-thanks" class="text-center" tabindex="-1">Merci pour votre signalement</h1>
+      <h1 id="title-thanks" class="text-center" tabindex="-1">Votre signalement a bien été envoyé&#160;!</h1>
     </div>
   </section>
-  <section class="section section-white" *ngIf="report">
+  <section class="section section-lighter-grey">
     <div class="container max-width">
-      <div class="mt-4">
-        <ng-container *ngIf="!report.employeeConsumer; else employeeConsumer">
-          <ng-container *ngIf="report.contactAgreement; else noContactAgreement">
-            <p>
-              Votre signalement va être communiqué au commerçant.
-              Il pourra corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
-            </p>
-            <p>
-              Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-              Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
-            </p>
-          </ng-container>
-          <ng-template #noContactAgreement>
-            <p>
-              Votre signalement va être communiqué de façon anonyme au commerçant.
-              Il pourra corriger directement le problème grâce à vos informations.
-            </p>
-            <p>
-              Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-              Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
-            </p>
-          </ng-template>
-        </ng-container>
-        <ng-template #employeeConsumer>
-          <p>
-            Vous avez indiqué être employé de l'entreprise que vous avez signalé.
-          </p>
-          <p>
-            Afin de garantir la sécurité de votre emploi, votre signalement ne sera pas transmis à l'entreprise. Par contre, il a bien été enregistré dans la base de données de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-          </p>
-        </ng-template>
-        <p>
-          En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
-        </p>
+      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img src="/assets/images/picture-problem.svg" alt="Illustration" />
+              </div>
+              <div class="col-9 d-sm-none">
+                <h2>Comment me faire rembourser ou dédommager ?</h2>
+              </div>
+              <div class="col-12 col-sm-9">
+                <h2 class="d-none d-sm-block">Comment me faire rembourser ou dédommager ?</h2>
+                <div class="collapse-container" *ngFor="let consumerActionGroup of getReportLastSubcategory().consumerActions; let index = index">
+                  <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse{{index}}">
+                    <button type="button" class="btn">{{index + 1}}</button>
+                    <button type="button" class="btn link">
+                      {{consumerActionGroup.title}}
+                    </button>
+                    <button type="button" class="btn">
+                      <i class="material-icons md-24 down">keyboard_arrow_down</i>
+                      <i class="material-icons md-24 up">keyboard_arrow_up</i>
+                    </button>
+                  </a>
+                  <div class="collapse" id="collapse{{index}}">
+                    <table class="table table-bordered no-hover collapse-content" cellpadding="2">
+                      <tr *ngFor="let consumerAction of consumerActionGroup.actions">
+                        <td [innerHTML]="consumerAction.question"></td>
+                        <td [innerHTML]="consumerAction.answer"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <img src="/assets/images/picture-pro.svg" alt="Illustration" />
+            </div>
+            <div class="col-9 d-sm-none">
+              <h2>Que va-t-il se passer pour l'entreprise ?</h2>
+            </div>
+            <div class="col-12 col-sm-9">
+              <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
+              <ng-container *ngIf="!report?.employeeConsumer; else employeeConsumer">
+                <ng-container *ngIf="report?.contactAgreement; else noContactAgreement">
+                  <p>
+                    L'entreprise recevra votre signalement.
+                    Elle aura la possibilité de corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
+                  </p>
+                  <p>
+                    Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                    Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+                  </p>
+                </ng-container>
+                <ng-template #noContactAgreement>
+                  <p>
+                    L'entreprise recevra votre signalement sans connaître votre identité.
+                    Elle aura la possibilité de corriger directement le problème grâce à vos informations.
+                  </p>
+                  <p>
+                    Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                    Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+                  </p>
+                </ng-template>
+              </ng-container>
+              <ng-template #employeeConsumer>
+                <p>
+                  Vous avez indiqué être employé de l'entreprise que vous avez signalé.
+                </p>
+                <p>
+                  Afin de garantir la sécurité de votre emploi, votre signalement ne sera pas transmis à l'entreprise. Par contre, il a bien été enregistré dans la base de données de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                </p>
+              </ng-template>
+              <p>
+                En cas d’erreur sur votre signalement, envoyez un email à <a href="mailto:contact@signalconso.beta.gouv.fr?subject=incident" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <hr />
+      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img src="/assets/images/picture-help.svg" alt="Illustration" />
+              </div>
+              <div class="col-9 d-sm-none">
+                <h2>Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
+              </div>
+              <div class="col-12 col-sm-9">
+                <h2 class="d-none d-sm-block">Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
+                <p>
+                  Une association de consommateur pourra vous aider à écrire les courriers de réclamation ou de mise en demeure,
+                  contacter l'entreprise directement, vous aider à saisir la justice.
+                </p>
+                <p>
+                  Pour bénéficier de leur aide, vous devez payer une somme, appelée "adhésion".
+                  Pour connaître le prix de cette adhésion, vous pouvez les contacter directement.
+                  En fonction de votre situation, certaines associations peuvent baisser le prix de l'adhésion.
+                </p>
+                <p>
+                  Liste des associations de consommateurs officielles :
+                  <a href="https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales" target="_blank">
+                    https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="text-center">
       <button class="btn btn-lg btn-primary" (click)="newReport()">
-        Identifier un autre problème
+        Retourner à l'accueil<img src="/assets/images/icon-home.svg" alt="Icône accueil" />
       </button>
     </div>
   </section>

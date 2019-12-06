@@ -1,7 +1,19 @@
 - title: Bien-être
   example: 'Exemples: coiffeur, esthéticienne, salon de massage'
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Vie quotidienne
   example: "Exemples: conciergerie, pressing, cordonnier, ménage, garde d'enfants"
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Aide à la personne
-- title: Déménageur
+  consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Services funéraires
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Autres
+  example: 'Exemple : déménageur, agence de rencontre'
+  subcategories:
+    - title: Déménageur
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Agence matrimoniale (agence de rencontre)
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
+      consumerActions: !!import/single ../common/actions/defaut.yml

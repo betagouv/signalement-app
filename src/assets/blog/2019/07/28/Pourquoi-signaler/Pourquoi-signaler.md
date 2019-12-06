@@ -8,7 +8,7 @@ Ils doivent pouvoir faire venir un dépanneur sans craindre d’être arnaqué.
 Ils doivent pouvoir accorder leur confiance dans un label BIO ou une origine France..
 
 Parce que les consommateurs ont des droits, ils doivent pouvoir les faire respecter de façon simple et en bonne intelligence.
- 
+
 **Permettre aux professionnels de corriger les anomalies**
 
 Lorsqu’on a un problème chez un commerçant ou avec une entreprise, on peut directement le lui signaler.
