@@ -8,6 +8,7 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix non affiché
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Prix final non conforme au prix annoncé
@@ -83,6 +84,7 @@
             title: Ceci ne constitue pas un motif de signalement.
             content: Les professionnels ont le droit de choisir leurs prix.
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
+            outOfScope: true
         - title: Prix final non conforme au prix annoncé
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Prix non affiché
@@ -164,12 +166,18 @@
                 <br />Vous n’avez pas à vous justifier auprès du commerçant.
                 <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
             - title: Au lieu habituel d'activité du professionnel
-              description: Il n'y a pas de délai de rétractation.
+              information: 
+                title: Vous ne pouvez plus vous retracter
+                content: Il n'y a pas de délai de retractation pour votre cas.
+                outOfScope: true
             - title: Sur un stand dans une foire ou salon
               subcategoriesTitle: Avez-vous un crédit affecté ?
               subcategories:
                 - title: Non
-                  description: Il n'y a pas de délai de rétractation.
+                  information: 
+                    title: Vous ne pouvez plus vous retracter
+                    content: Il n'y a pas de délai de retractation pour votre cas.
+                    outOfScope: true
                 - title: Oui
                   description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
                     <br />Vous n’avez pas à vous justifier auprès du commerçant.
