@@ -43,7 +43,7 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.put(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', report.id]),
           this.report2reportApi(report),
           headers
         );

@@ -25,6 +25,7 @@ export class CompanyInvitationComponent implements OnInit {
   emailCtrl: FormControl;
   levelCtrl: FormControl;
 
+  showSuccess = false;
   showErrors = false;
 
   ngOnInit() {
@@ -44,6 +45,7 @@ export class CompanyInvitationComponent implements OnInit {
   }
 
   submitForm() {
+    this.showSuccess = false;
     if (this.invitationForm.valid) {
       this.companyAccessesService
           .sendInvitation(
@@ -51,10 +53,7 @@ export class CompanyInvitationComponent implements OnInit {
             this.emailCtrl.value,
             this.levelCtrl.value
           )
-          .subscribe(
-            () => {alert("OK")},    // FIXME
-            error => {alert("KO")}  // FIXME
-          )
+          .subscribe(() => {this.showSuccess = true;})
     } else {
       this.showErrors = true;
     }

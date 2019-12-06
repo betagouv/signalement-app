@@ -70,6 +70,10 @@
         "description": "Activez votre compte pour accéder à votre espace personnel sur SignalConso"
       }
     },
+    "myCompanies": {
+      "title": "Entreprises - SignalConso",
+      "description": "Liste des entreprises rattachées"
+    },
     "companyAccesses": {
       "title": "Accès au compte de l'entreprise - SignalConso",
       "description": "Gestion des accès au compte de l'entreprise"
