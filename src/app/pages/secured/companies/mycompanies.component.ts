@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Title, Meta } from "@angular/platform-browser";
 import pages from '../../../../assets/data/pages.json';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -14,6 +15,7 @@ export class MyCompaniesComponent implements OnInit {
 
   constructor(private titleService: Title,
               private meta: Meta,
+              private router: Router,
               private authenticationService: AuthenticationService,
               private companyAccessesService: CompanyAccessesService) { }
     
@@ -31,7 +33,11 @@ export class MyCompaniesComponent implements OnInit {
   refreshAccesses() {
     this.companyAccessesService.myAccesses(this.user).subscribe(
         accesses => {
-          this.myAccesses = accesses;
+          if (accesses.length == 1) {
+            this.router.navigate(['/entreprise', 'acces', accesses[0].companySiret]);
+          } else {
+            this.myAccesses = accesses;
+          }
         }
       )
   }
