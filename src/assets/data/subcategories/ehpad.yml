@@ -9,6 +9,7 @@
       information:
         title: Les prix sont choisis librement par les maisons de retraite.
         content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
+        outOfScope: true
 - title: Mon contrat
   subcategories:
     - title: Le contrat n'est pas respecté
