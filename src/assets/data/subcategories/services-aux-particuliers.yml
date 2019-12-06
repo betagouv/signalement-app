@@ -9,7 +9,7 @@
 - title: Services funéraires
   consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Autres
-  example: 'Exemple : déménageur, agence de rencontre"
+  example: 'Exemple : déménageur, agence de rencontre'
   subcategories:
     - title: Déménageur
       consumerActions: !!import/single ../common/actions/defaut.yml
