@@ -164,7 +164,7 @@
                            [origin]="fileOrigins.Consumer">
           </app-attachments>
           <div class="note" *ngIf="!report.employeeConsumer">
-            Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part du professionnel.
+            Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part de l'entreprise.
           </div>
         </div>
         <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
@@ -178,7 +178,7 @@
         </div>
         <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
           <i class="material-icons md-24" aria-hidden="true">play_arrow</i>
-          Étape suivante : identifier le commerçant
+          Étape suivante : identifier l'entreprise
         </button>
       </form>
 

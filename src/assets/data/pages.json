@@ -9,7 +9,7 @@
   },
   "how": {
     "title": "Comment ça marche ? - SignalConso",
-    "description": "Vous signalez votre problème en remplissant le formulaire en ligne. Notre équipe contacte le commerçant afin de l'informer de votre signalement. Le commerçant peut procéder spontanément aux corrections utiles, sans sanction. Votre signalement est enregistré à la répression des fraudes (DGCCRF)."
+    "description": "Vous signalez votre problème en remplissant le formulaire en ligne. Notre équipe contacte l'entreprise afin de l'informer de votre signalement. L'entreprise peut procéder spontanément aux corrections utiles, sans sanction. Votre signalement est enregistré à la répression des fraudes (DGCCRF)."
   },
   "pro": {
     "title": "Vous êtes un professionnel ? - SignalConso",
@@ -34,6 +34,10 @@
   "accesstoken": {
     "title": "Accès au compte de l'entreprise - SignalConso",
     "description": "Rejoindre le compte d'une entreprise"
+  },
+  "contact": {
+    "title": "Contact - SignalConso",
+    "description": "Trouvez le bon interlocuteur à contacter sur SignalConso"
   },
   "login": {
     "title": "Authentification - SignalConso",
