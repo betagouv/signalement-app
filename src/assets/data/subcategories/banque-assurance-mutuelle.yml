@@ -1,9 +1,14 @@
 - title: Frais bancaires
   example: 'Exemples : prix non affiché, augmentation des frais bancaires sans prévenir'
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Contrat
   example: 'Exemple : contrat de crédit'
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Publicité
   example: 'Exemple : publicité pour un crédit non conforme'
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Service client
   example: 'Exemple : service client injoignable'
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Autres
+  consumerActions: !!import/single ../common/actions/defaut.yml
