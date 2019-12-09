@@ -21,8 +21,8 @@
           rank: 3
           type: TEXTAREA
           optionnal: true
-        fileLabel: Vous pouvez joindre une photo des prix ou tout document utile pour appuyer votre signalement.
-        consumerActions: !!import/single ../common/actions/defaut.yml
+      fileLabel: Vous pouvez joindre une photo des prix ou tout document utile pour appuyer votre signalement.
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: moyen de paiement
       example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
