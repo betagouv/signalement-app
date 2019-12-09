@@ -32,7 +32,7 @@
                   <br/> Si vous voulez acheter un produit moins cher que le minimum d'achat, vous devez trouver un autre moyen de paiement.
             content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
             outOfScope: true
-                - title: Non
+        - title: Non
     - title: Il refuse les paiements par chèque ou carte bleue de façon générale
       subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
       subcategories:
