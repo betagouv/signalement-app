@@ -1,6 +1,10 @@
 - title: Bien-être
   example: 'Exemples: coiffeur, esthéticienne, salon de massage'
   consumerActions: !!import/single ../common/actions/defaut.yml
+  subcategories:
+    - title: problème pour payer
+      subcategories: !!import/single ../common/paiement.yml
+    - title: autre
 - title: Vie quotidienne
   example: "Exemples: conciergerie, pressing, cordonnier, ménage, garde d'enfants"
   consumerActions: !!import/single ../common/actions/defaut.yml
