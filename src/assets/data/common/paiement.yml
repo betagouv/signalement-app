@@ -14,10 +14,10 @@
         outOfScope: true
     - title: Je souhaitais payer plus de 1 000 euros ou donner plus de 50 pièces 
       information:
-        content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+        content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros. Vous devez trouver un autre moyen de paiement.
                <br/> Un commerçant peut également refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
         outOfScope: true
-    - title: Autres
+    - title: Autre
 - title: Je n'ai pas pu payer par carte bancaire ou par chèque
   subcategoriesTitle: Pour quelle raison a-t-on refusé que vous payez par carte bancaire ou par chèque&#160;?
   subcategories:
@@ -30,19 +30,19 @@
           information:
             title: Le commerçant a le droit d'exiger un minimum d'achat pour les paiements par carte bancaire ou par chèque.
                   <br/> Si vous voulez acheter un produit moins cher que le minimum d'achat, vous devez trouver un autre moyen de paiement.
-            content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+            content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée ou à la caisse...'
             outOfScope: true
         - title: Non
-    - title: Il refuse les paiements par chèque ou carte bleue de façon générale
-      subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+    - title: Les cartes bleues ou les chèques sont systématiquement refusés
+      subcategoriesTitle: Le refus de la carte bleue ou des chèques est-il affiché&#160;?
       subcategories:
         - title: Oui
           example: 'Exemple : sur une affiche au niveau des caisses'
           information:
             title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-            content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+            content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée ou à la caisse...'
             outOfScope: true
         - title: Non
-    - title: Autres
-      example: 'Exemples : problème avec le terminal de paiement'
-- title: Autres problèmes de prix ou paiement
+    - title: Autre
+      example: 'Exemple : problème avec le terminal de paiement'
+- title: Autre problème pour payer
