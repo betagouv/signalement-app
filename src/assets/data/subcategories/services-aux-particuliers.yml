@@ -1,18 +1,40 @@
 - title: Bien-être
-  example: 'Exemples: coiffeur, esthéticienne, salon de massage'
+  example: 'Exemple : coiffeur, esthéticienne, salon de massage'
   consumerActions: !!import/single ../common/actions/defaut.yml
   subcategories:
-    - title: problème pour payer
+    - title: prix des soins
+      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
+    - title: moyen de paiement
+      example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
+    - title: publicité des soins mensongère
+      example: 'Exemple : durée du massage plus courte qu''indiqué'
     - title: autre
 - title: Vie quotidienne
   example: "Exemples: conciergerie, pressing, cordonnier, ménage, garde d'enfants"
   consumerActions: !!import/single ../common/actions/defaut.yml
+  subcategories:
+    - title: prix des prestations
+      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
+    - title: moyen de paiement
+      example: 'Exemple : carte bancaire refusée'
+      subcategories: !!import/single ../common/paiement.yml
+    - title: publicité des prestations mensongère
+    - title: autre
 - title: Aide à la personne
   consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Services funéraires
   consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Autres
+  subcategories:
+    - title: prix des prestations
+      example: 'Exemple : le prix final ne correspond pas du devis, prix des soins de conservation
+    - title: moyen de paiement
+      example: 'Exemple : carte bancaire refusée'
+      subcategories: !!import/single ../common/paiement.yml
+    - title: publicité des prestations mensongère
+      example: 'Exemple : composition d''un cercueil non conforme
+    - title: autre
+- title: Autres services
   example: 'Exemple : déménageur, agence de rencontre'
   subcategories:
     - title: Déménageur
