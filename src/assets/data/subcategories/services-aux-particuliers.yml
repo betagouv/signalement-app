@@ -3,7 +3,26 @@
   subcategories:
     - title: prix des soins
       example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Quel est le problème ?
+          rank: 2
+          type: RADIO
+          options:
+            - Les prix ne sont pas affichés
+            - Les prix affichés ne sont pas les bons
+            - Le prix donné au départ (devis) n''a pas été respecté
+            - Une promotion n''a pas été appliquée ou est fausse
+            - Autre (à préciser)
+        - label: Si besoin, merci de préciser ce qu''il s''est passé
+          rank: 3
+          type: TEXTAREA
+          optionnal: true
+        fileLabel: Vous pouvez joindre une photo des prix ou tout document utile pour appuyer votre signalement.
+        consumerActions: !!import/single ../common/actions/defaut.yml
     - title: moyen de paiement
       example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
@@ -40,12 +59,13 @@
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: autre
       consumerActions: !!import/single ../common/actions/defaut.yml
-- title: autres services
-  example: 'Exemple : déménageur, agence de rencontre'
+- title: autres types d''entreprises de service
+  example: 'Exemple : déménageur, agence de rencontre, organisme de formation'
   subcategories:
     - title: Déménageur
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Agence matrimoniale (agence de rencontre)
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: Autre
+    - title: Organisme de formation
       consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
