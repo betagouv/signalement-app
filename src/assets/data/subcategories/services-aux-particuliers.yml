@@ -40,7 +40,7 @@
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: autre
       consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Autres services
+- title: autres services
   example: 'Exemple : déménageur, agence de rencontre'
   subcategories:
     - title: Déménageur
