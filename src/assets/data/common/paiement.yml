@@ -40,7 +40,7 @@
           example: 'Exemple : sur une affiche au niveau des caisses'
           information:
             content: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-            <br/> Il doit l''indiquer très visiblement au consommateur. Avec un affichage à l''entrée ou à la caisse par exemple.
+                   <br/> Il doit l''indiquer très visiblement au consommateur. Avec un affichage à l''entrée ou à la caisse par exemple.
             outOfScope: true
         - title: Non
     - title: Autre raison
