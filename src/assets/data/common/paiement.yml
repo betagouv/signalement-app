@@ -1,1 +1,62 @@
-
+- title: Le commerçant refuse le paiement en espèces
+          subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+          subcategories:
+            - title: Il refuse tout paiement en espèces
+              description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+            - title: Il n'avait pas assez de monnaie
+              information:
+                content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                outOfScope: true
+            - title: Mes pièces / billets étaient en mauvais état
+              information:
+                content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                outOfScope: true
+            - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
+              information:
+                content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
+                  <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+                outOfScope: true
+            - title: Autres
+        - title: Le commerçant refuse la carte bancaire ou les chèques
+          subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
+          subcategories:
+            - title: Il exige un minimum d'achat
+              subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+              subcategories:
+                - title: Oui
+                  example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                  information:
+                    title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
+                    content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                    outOfScope: true
+                - title: Non
+            - title: Il n'accepte jamais les paiements par chèque ou carte bleue
+              subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
+              subcategories:
+                - title: Oui
+                  example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                  information:
+                    title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                    content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                    outOfScope: true
+                - title: Non
+            - title: Autres
+              example: 'Exemple : problème avec le terminal de paiement'
+        - title: Autres problèmes de prix ou paiement
+          subcategoriesTitle: 'Problème avec :'
+          subcategories:
+            - title: Tickets restaurant
+            - title: Autres
+    - title: Refus de me donner une note (ticket, facture)
+      detailInputs:
+        - label: Date de constat
+          rank: 1
+          type: DATE
+        - label: Quel est le problème?
+          rank: 2
+          type: RADIO
+          options:
+            - Refus de me faire une note
+            - La note ne comporte pas les taux de TVA
+            - Autre (à préciser)
+    - title: Autres problèmes
