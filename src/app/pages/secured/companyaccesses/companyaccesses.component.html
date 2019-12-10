@@ -2,13 +2,13 @@
     <div class="banner text-center section section-primary" role="region">
       <div class="container">
         <h1 class="text-center">
-          Liste des accès
+          Gestion des accès
         </h1>
       </div>
     </div>
 </div>
 <div class="container">
-    <div class="row">
+    <div class="row table-responsive">
         <table class="table">
             <thead>
                 <tr>
@@ -33,20 +33,45 @@
                         </ng-template>
                     </td>
                     <td>
-                        <a href="#" *ngIf="access.email != user.email; else currentUserDelete" class="text-danger" (click)="removeAccess(access.userId)">Supprimer l'accès</a>
+                        <button *ngIf="access.email != user.email; else currentUserDelete" class="btn btn-sm btn-danger" (click)="openModal(removeAccessModal)">Supprimer l'accès</button>
                         <ng-template #currentUserDelete>
                             <small class="text-muted text-wrap">
                                 Vous ne pouvez pas supprimer votre propre accès.
                             </small>
                         </ng-template>
+                        <ng-template #removeAccessModal>
+                            <div class="modal-body text-center">
+                              <p>Confirmer la suppression de l'accès de l'utilisateur <strong>{{access.firstName}} {{access.lastName}}</strong> ?</p>
+                              <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                              &nbsp;
+                              <button type="button" class="btn btn-primary" (click)="removeAccess(access.userId);bsModalRef.hide();" >Oui</button>
+                            </div>
+                        </ng-template>
                     </td>
+                </tr>
+                <tr *ngFor="let pendingToken of pendingTokens">
+                    <td colspan="2" class="text-center"><small class="text-muted">L'invitation a été envoyée et est en attente d'acceptation.</small></td>
+                    <td>{{pendingToken.emailedTo}}</td>
+                    <td>{{accessLevels.get(pendingToken.level)}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
+                    </td>
+                    <ng-template #removeTokenModal>
+                        <div class="modal-body text-center">
+                          <p>Annuler l'invitation envoyée à <strong>{{pendingToken.emailedTo}}</strong> ?</p>
+                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                          &nbsp;
+                          <button type="button" class="btn btn-primary" (click)="removePendingToken(pendingToken.id);bsModalRef.hide();" >Oui</button>
+                        </div>
+                    </ng-template>
                 </tr>
             </tbody>
         </table>
+        <div class="notification success" *ngIf="showSuccess">Modifications enregistrées !</div>
     </div>
     <div class="row">
         <div class="col text-center mb-1">
-            <a routerLink="./invitation" class="btn btn-secondary">Ajouter un utilisateur</a>
+            <a routerLink="./invitation" class="btn btn-primary">Ajouter un utilisateur</a>
         </div>
     </div>
 </div>

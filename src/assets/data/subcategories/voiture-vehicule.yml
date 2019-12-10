@@ -5,46 +5,69 @@
       example: 'Exemple : agence à l''aéroport, location de camionnette dans un supermarché, plate-forme de location sur internet'
       subcategories:
         - title: Prix / paiement
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Publicité (CO2)
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Autre (caractéristiques, équipements)
+          consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Location en libre-service
       example: 'Exemple : location de vélo, trotinette, voiture électrique'
       subcategories:
         - title: Prix / paiement
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Publicité
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Autre
+          consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Location longue durée (leasing, LDD, LOA...)
       subcategories:
         - title: Prix / paiement
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Publicité
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Autre
+          consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Location de voiture entre particuliers
       subcategories:
         - title: Prix
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Publicité
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Autre
+          consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Service de voiture partagée
       subcategories:
         - title: Prix
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Publicité
+          consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Autre
+          consumerActions: !!import/single ../common/actions/automobile.yml
 - title: Vente, contrôle et réparation de véhicule
   example: 'Exemple : garagiste, dépanneur, contrôle technique'
   subcategories:
     - title: Prix / Facturation
       example: 'Exemple : devis non détaillé, devis non respecté, délais'
+      consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Prestation mal réalisée ou pas réalisée
       example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé, pièce d''origine douteuse'
+      consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Publicité
+      consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Autres
+      consumerActions: !!import/single ../common/actions/automobile.yml
 - title: Permis / leçons de conduite
   example: 'Exemple : auto-école'
   subcategories:
     - title: Prix / Paiement
       example: 'Exemple : prix non affiché, forfait/pack obligatoire'
+      consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Publicité
       example: 'Exemple : publicité trompeuse avec un nombre d''heures infaisable'
+      consumerActions: !!import/single ../common/actions/automobile.yml
     - title: Autres
       example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement, heure de conduite qui ne dure pas une heure'
+      consumerActions: !!import/single ../common/actions/automobile.yml
 - title: Autres
   example: 'Exemple : fourrière'
+  consumerActions: !!import/single ../common/actions/automobile.yml

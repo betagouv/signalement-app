@@ -95,6 +95,7 @@
                 title: Cet incident ne doit pas nécessairement être signalé.
                 content: La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
                   Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut également être suffisant pour éviter les contaminations. <br> Vous pouvez directement discuter avec le gérant pour lui faire part de votre questionnement.
+                outOfScope: true
             - title: Autre problème de tenue
               example: 'Exemple : pas de tenue spécifique, torse-nu en cuisine'
               detailInputs:
@@ -164,7 +165,7 @@
           rank: 2
           type: TEXTAREA
           placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
-          fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
+      fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
     - title: J'ai payé plus cher que le prix affiché
       detailInputs:
         - label: Date du constat
@@ -191,7 +192,8 @@
             - Erreur lors de l'addition
             - Autre (à préciser)
             - Non, aucune raison.
-          fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
+      fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Je trouve que les pris sont très chers
       example: 'Exemple : le prix du menu est très cher pour la qualité'
       information:
@@ -199,6 +201,7 @@
         content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
                 <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte.
                 <br/> Le saviez-vous ? Un café a également le droit de faire payer l'eau du robinet si le prix est marqué. Par contre, au cours d'un repas, l'eau du robinet doit vous être fournie gratuitement."
+        outOfScope: true
     - title: J'ai eu un problème pour payer
       example: 'Exemple : refus de la carte bancaire'
       subcategories:
@@ -210,13 +213,16 @@
             - title: Il n'avait pas assez de monnaie
               information:
                 content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+                outOfScope: true
             - title: Mes pièces / billets étaient en mauvais état
               information:
                 content: Le paiement en pièces ou billets en mauvais état peut être refusé.
+                outOfScope: true
             - title: Le paiement était supérieur à 1 000 euros ou à 50 pièces
               information:
                 content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros.
                   <br/> Un commerçant peut refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+                outOfScope: true
             - title: Autres
         - title: Le commerçant refuse la carte bancaire ou les chèques
           subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
@@ -229,6 +235,7 @@
                   information:
                     title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
                     content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                    outOfScope: true
                 - title: Non
             - title: Il n'accepte jamais les paiements par chèque ou carte bleue
               subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
@@ -238,6 +245,7 @@
                   information:
                     title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
                     content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
+                    outOfScope: true
                 - title: Non
             - title: Autres
               example: 'Exemple : problème avec le terminal de paiement'
@@ -327,6 +335,7 @@
             answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
           - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
             answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées...
+        outOfScope: true
     - title: On a refusé de me donner une table ou de me servir
       example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, refus de d''une table en terrasse pour un simple café'
       detailInputs:
@@ -345,6 +354,7 @@
           information:
             content: Tout comme dans un hôtel, un restaurateur (ou un cafetier) peut refuser la présence d’un chien dans son établissement.
               <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. <br> <br> Il existe également des sites internet qui recensent les établissements acceptant les chiens.
+            outOfScope: true
         - title: Oui (je possède la carte d'assistance)
           detailInputs:
             - label: Date du refus
@@ -387,6 +397,7 @@
       information:
         title: Je trouve que les produits ne sont pas bons ou de grande qualité.
         content: Si la qualité des produits ne vous a pas convenu, nous vous invitons à contacter directement l'établissement. <br> Vous pouvez notamment contacter le service client. Le service client est présent dans la plupart des restaurants et bars qui font partie d'un groupe ou d'une chaîne. Il est conçu pour recevoir ce type de plainte. <br><br> Vous ne pouvez pas faire un signalement sur SignalConso car la répression des fraudes ne pourra pas traiter votre signalement.
+        outOfScope: true
     - title: Les produits ne sont pas frais ou certains aliments sont périmés, c'est-à-dire que les dates indiquées sont dépassées.
       detailInputs:
         - label: Date de constat

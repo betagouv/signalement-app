@@ -237,7 +237,7 @@ export class ReportDetailComponent implements OnInit {
             eventType: 'RECTIF',
             action: {value: EventActionValues.EditCompany},
             details: {
-              description: `Commerçant précédent : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ` +
+              description: `Entreprise précédente : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ` +
               `${this.reportService.company2adresseApi(this.report.company)}`
             }
           }));
