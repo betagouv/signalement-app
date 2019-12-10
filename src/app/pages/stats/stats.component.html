@@ -53,7 +53,7 @@
         <div class="card-body">
           <h3 *ngIf="reportReadByProMedianDelay">
             En moyenne l'entreprise met
-            <span class="count">{{reportReadByProMedianDelay.toFixed(2)}} jours</span>
+            <span class="count">{{reportReadByProMedianDelay.toFixed(1)}} jours</span>
             pour lire le signalement
             <i class="material-icons" aria-hidden="true"
                tooltip="Délai médian entre la création du signalement et la lecture du signalement par l'entreprise concernée">
@@ -90,7 +90,7 @@
         <div class="card-body">
           <h3 *ngIf="reportWithResponseMedianDelay">
             En moyenne une entreprise met
-            <span class="count">{{reportWithResponseMedianDelay.toFixed(2)}} jours</span>
+            <span class="count">{{reportWithResponseMedianDelay.toFixed(1)}} jours</span>
             pour répondre au signalement après l'avoir lu
             <i class="material-icons" aria-hidden="true"
                tooltip="Délai médian entre la lecture du signalement et la réponse par l'entreprise concernée">
