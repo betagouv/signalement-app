@@ -43,7 +43,7 @@ list:
     icon: icon_disease.png
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
-      subTitle: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+      content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
       actions:
         - question: Signaler un cas d'intoxication alimentaire&#160;?
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
@@ -63,7 +63,7 @@ list:
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
-      subTitle: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
+      content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
         - question: Un problème avec un commerçant&#160;?
           example: 'Exemples : colis non reçu, pas de nouvelle de votre commande'
@@ -156,7 +156,7 @@ list:
     rank: 110
     breadcrumbTitle: Vous avez trouvé un petit morceau dur ou une vis dans un aliment ?
     information:
-      title: Un objet ou morceau d'objet qui se trouve dans un aliment alors que ce ne devrait pas être le cas s'appelle un corps étranger. Cela peut être une vis, un clou, un boulon, un bout de plastique, un morceau de verre par exemple.
+      title: Un objet ou un morceau d'objet qui se trouve dans un aliment alors que ce ne devrait pas être le cas s'appelle un corps étranger. Cela peut être une vis, un clou, un boulon, un bout de plastique, un morceau de verre par exemple.
       content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
   - category: Maison de retraite (EHPAD)
     categoryId: EHPAD

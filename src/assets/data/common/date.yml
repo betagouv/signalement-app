@@ -23,7 +23,7 @@
         - label: Date Limite de Consommation (DLC)
           rank: 2
           type: DATE
-          fileLabel: Photo de la DLC / du produit / de la marque
+      fileLabel: Photo de la DLC / du produit / de la marque
     - title: Non
       information:
         title: Le commerçant n'a pas le droit de vendre un produit si la date limite de consommation (DLC) est passée.
@@ -50,4 +50,4 @@
       rank: 3
       type: DATE
       defaultValue: SYSDATE
-      fileLabel: Photo
+  fileLabel: Photo

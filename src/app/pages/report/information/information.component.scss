@@ -1,18 +1,88 @@
 @import "../../../../theme/variables";
 
-.action-lighter-grey {
-    background-color: $lighter-grey;
+* {
+  font-size: 20px;
 }
 
-.title {
-    font-size: 1.125rem;
+.text-muted {
+  font-size: 16px;
+  line-height: 16px;
+  margin-bottom: 5px;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
-.card-body {
-    padding-bottom: 18px !important;
-    padding-top: 18px !important;
-}
+.collapse-container {
 
-.card-text {
-    margin-bottom: 0 !important;
+  margin-top: 1em;
+  border: $light-grey 1px solid;
+  border-radius: 4px;
+
+  a, a:hover {
+    text-decoration: none;
+  }
+
+  .btn-group {
+
+    border-bottom: $light-grey 1px solid;
+    border-radius: 4px;
+    width: 100%;
+
+    .btn {
+      box-shadow: none;
+      padding: 1em;
+      font-size: 16px;
+
+      &:first-child {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        width: 100%;
+        text-align: left;
+      }
+
+      &:last-child {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        background-color: $primary;
+        color: $white;
+
+        .up {
+          display: block;
+        }
+        .down {
+          display: none;
+        }
+      }
+
+    }
+
+  }
+
+  .btn-group.collapsed {
+
+    .btn {
+
+      &:last-child {
+        background-color: $lighter-grey;
+        color: $black;
+        .up {
+          display: none;
+        }
+
+        .down {
+          display: block;
+        }
+      }
+    }
+
+  }
+
+  .collapse-content {
+    display: block;
+    padding: 1em;
+    font-size: 16px;
+  }
+
 }

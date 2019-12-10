@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container mt-1">
     <form class="form" [formGroup]="invitationForm" (ngSubmit)="submitForm()">
         <div class="row">
             <div class="col">
@@ -29,7 +29,7 @@
         </div>
         <div class="row">
             <div class="col text-center mb-1">
-                <button type="submit" class="btn btn-secondary">Envoyer</button>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
                 <a class="ml-3" routerLink="../">Revenir à la liste des accès</a>
             </div>
         </div>
@@ -45,4 +45,5 @@
             </span>
         </div>
     </form>
+    <div class="notification success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>
 </div>
