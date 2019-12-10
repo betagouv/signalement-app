@@ -14,6 +14,7 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { AutofocusDirective } from '../../../directives/auto-focus.directive';
 
 describe('CompanyComponent', () => {
 
@@ -27,6 +28,7 @@ describe('CompanyComponent', () => {
       declarations: [
         CompanyComponent,
         BreadcrumbComponent,
+        AutofocusDirective,
       ],
       imports: [
         FormsModule,

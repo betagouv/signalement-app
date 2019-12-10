@@ -42,7 +42,7 @@
           <div class="form__group mt-4">
             <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise <span class="error">*</span>
             </label>
-            <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" appAutofocus/>
+            <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" appAutofocus="true"/>
           </div>
           <div class="form__group">
             <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
@@ -184,7 +184,7 @@
             <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
               Numéro Siret de l'entreprise <span class="error">*</span>
             </label>
-            <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" appAutofocus>
+            <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" appAutofocus="true">
           </div>
 
           <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">

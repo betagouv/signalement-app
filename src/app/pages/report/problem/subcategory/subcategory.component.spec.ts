@@ -9,6 +9,7 @@ import { SimpleChange } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentsModule } from '../../../../components/components.module';
 import { PipesModule } from '../../../../pipes/pipes.module';
+import { AutofocusDirective } from '../../../../directives/auto-focus.directive';
 
 describe('SubcategoryComponent', () => {
 
@@ -32,6 +33,7 @@ describe('SubcategoryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SubcategoryComponent,
+        AutofocusDirective,
       ],
       imports: [
         FormsModule,
