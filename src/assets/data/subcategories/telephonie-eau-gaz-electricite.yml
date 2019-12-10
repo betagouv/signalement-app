@@ -5,8 +5,14 @@
       subcategories:
         - title: Je ne suis pas d'accord avec ma facture
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-        - title: Le prix de mon forfait a été augmenté
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Le prix de mon forfait a été augmenté 
+          subcategoriesTitle: Pour quelle raison votre forfait a été augmenté ?
+          subcategories:
+            - title: Augmentation du débit ou des giga
+            - title: Offre sur les sms/mms ou sur les appels
+              example: 'Exemple : sms illimité, appel illimité'
+            - title: Rajout d''une option télé, d''abonnement livre ou musique
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Des options payantes ont été automatiquement rajoutées à mon forfait
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
