@@ -1,11 +1,11 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   Inject,
   Input,
   OnChanges,
-  OnInit,
   Output,
   PLATFORM_ID,
   Renderer2,
@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { Subcategory } from '../../../../model/Anomaly';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
 
 declare var jQuery: any;
 
@@ -21,7 +22,7 @@ declare var jQuery: any;
   templateUrl: './subcategory.component.html',
   styleUrls: ['./subcategory.component.scss'],
 })
-export class SubcategoryComponent implements OnInit, OnChanges {
+export class SubcategoryComponent implements OnChanges, AfterViewInit {
 
   @Input() subcategories: Subcategory[];
   @Input() subcategoriesSelected: Subcategory[];
@@ -44,36 +45,25 @@ export class SubcategoryComponent implements OnInit, OnChanges {
               public elementRef: ElementRef) { }
 
 
-  ngOnInit() {
-
-    if (this.level === 1) {
-      this.manageFirstInput((firstInput) => firstInput.focus());
-    }
-
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.checkScrollNotification();
+    }, 500);
   }
 
-  manageFirstInput(callback) {
-    setTimeout(() => {
-      const allForms: Array<HTMLElement> = Array.from(document.querySelectorAll('.subForm'));
-      const lastForm = allForms[allForms.length - 1];
-
-      if (lastForm) {
-        const firstInput: HTMLElement = lastForm.querySelector('input:first-child');
-
-        if (firstInput) {
-          callback(firstInput);
-        }
+  checkScrollNotification() {
+    if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
+      const rect = this.elementRef.nativeElement.getBoundingClientRect();
+      if (rect.top > 1 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
+        this.scrollToElement();
       }
-
-    }, 100);
-
+    }
   }
 
   scrollToElement() {
     jQuery('html, body').animate({
       scrollTop: this.elementRef.nativeElement.offsetTop
     }, 1000);
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -100,7 +90,6 @@ export class SubcategoryComponent implements OnInit, OnChanges {
     this.subcategorySelected = subcategory;
     this.subcategoriesSelected = [];
 
-    this.manageFirstInput(() => this.scrollToElement());
   }
 
   submitSubcategoryForm() {

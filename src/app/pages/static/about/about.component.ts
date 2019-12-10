@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import Utils from '../../../utils';
 
 @Component({
   selector: 'app-about',
@@ -16,8 +15,6 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pages.about.title);
     this.meta.updateTag({ name: 'description', content: pages.about.description });
-
-    Utils.focusAndBlurOnTop();
   }
 
 }
