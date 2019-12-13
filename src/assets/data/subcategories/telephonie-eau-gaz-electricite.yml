@@ -35,7 +35,7 @@
               consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-        - title: Autre problème de facturation
+        - title: Autre problème de facturation ou de contrat
           subcategories:
             - title: Utilisation de mon forfait à l'étranger
               consumerActions: !!import/single ../common/actions/telephonie-internet.yml
