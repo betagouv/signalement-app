@@ -1,19 +1,71 @@
 - title: Bien-être
-  example: 'Exemples: coiffeur, esthéticienne, salon de massage'
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  example: 'Exemple : coiffeur, esthéticienne, salon de massage'  
+  subcategories:
+    - title: prix des soins
+      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Quel est le problème ?
+          rank: 2
+          type: RADIO
+          options:
+            - Les prix ne sont pas affichés
+            - Les prix affichés ne sont pas les bons
+            - Le prix donné au départ (devis) n''a pas été respecté
+            - Une promotion n''a pas été appliquée ou est fausse
+            - Autre (à préciser)
+        - label: Si besoin, merci de préciser ce qu''il s''est passé
+          rank: 3
+          type: TEXTAREA
+          optionnal: true
+      fileLabel: Vous pouvez joindre une photo des prix ou tout document utile pour appuyer votre signalement.
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: moyen de paiement
+      example: 'Exemple : carte bancaire refusée'
+      subcategories: !!import/single ../common/paiement.yml
+    - title: publicité des soins mensongère
+      example: 'Exemple : durée du massage plus courte qu''indiqué'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: autre
+      consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Vie quotidienne
   example: "Exemples: conciergerie, pressing, cordonnier, ménage, garde d'enfants"
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  subcategories:
+    - title: prix des prestations
+      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: moyen de paiement
+      example: 'Exemple : carte bancaire refusée'
+      subcategories: !!import/single ../common/paiement.yml
+    - title: publicité des prestations mensongère
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: autre
+      consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Aide à la personne
   consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Services funéraires
-  consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Autres
-  example: 'Exemple : déménageur, agence de rencontre'
+- title: Services funéraires  
+  subcategories:
+    - title: prix des prestations
+      example: 'Exemple : le prix final ne correspond pas du devis, prix des soins de conservation'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: moyen de paiement
+      example: 'Exemple : carte bancaire refusée'
+      subcategories: !!import/single ../common/paiement.yml
+    - title: publicité des prestations mensongère
+      example: 'Exemple : composition d''un cercueil non conforme'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: autre
+      consumerActions: !!import/single ../common/actions/defaut.yml
+- title: autres types d''entreprises de service
+  example: 'Exemple : déménageur, agence de rencontre, organisme de formation'
   subcategories:
     - title: Déménageur
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Agence matrimoniale (agence de rencontre)
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: Autre
+    - title: Organisme de formation
       consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
