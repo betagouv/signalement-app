@@ -8,13 +8,33 @@
         - title: Le prix de mon forfait a été augmenté 
           subcategoriesTitle: Pour quelle raison votre forfait a été augmenté ?
           subcategories:
-            - title: Augmentation du débit ou des giga
+            - title: Augmentation du débit ou de la data
+              example: 'Exemple : passage d'un forfait 20 Go à 40 Go'
+              information: !!import/single ../common/info/tel.yml
             - title: Offre sur les sms/mms ou sur les appels
               example: 'Exemple : sms illimité, appel illimité'
-            - title: Rajout d''une option télé, d''abonnement livre ou musique
+              information: !!import/single ../common/info/tel.yml
+            - title: Rajout d''une option télé, abonnement cybesécurité, d''abonnement livre ou musique
               consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Des options payantes ont été automatiquement rajoutées à mon forfait
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          subcategoriesTitle: Quel est le type d'option ?
+          subcategories:
+            - title: option télé ou musique
+              example: 'Exemple: option musique illimitée'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option livres
+              example: 'Exempel: abonnement livre audio'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option liée à la sécurité
+              example: 'Exemple: anti virus, cybersécurité'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option sms/mms ou appel illimitée
+              information: !!import/single ../common/info/tel.yml
+            - title: option lié au répondeur ou présentation du numéro 
+              information: !!import/single ../common/info/tel.yml
+            - title: autre type d'option
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Autre
