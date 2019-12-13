@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { DetailInputValue, Report } from '../../../../model/Report';
+import { DetailInputValue, Report, ReportStatus } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
@@ -21,6 +21,9 @@ import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { Department, Region, Regions } from '../../../../model/Region';
 import oldCategories from '../../../../../assets/data/old-categories.json';
+import { AccountService } from '../../../../services/account.service';
+import { HttpResponse } from '@angular/common/http';
+import { EventService } from '../../../../services/event.service';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
@@ -35,6 +38,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   user: User;
   permissions = Permissions;
   roles = Roles;
+  reportStatus = ReportStatus;
   regions = Regions;
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
@@ -52,6 +56,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
   loading: boolean;
   loadingError: boolean;
 
+  checkedReportUuids: string[] = [];
+
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
               private meta: Meta,
@@ -59,6 +65,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private anomalyService: AnomalyService,
               private reportService: ReportService,
               private constantService: ConstantService,
+              private accountService: AccountService,
+              private eventService: EventService,
               private fileUploaderService: FileUploaderService,
               private storageService: StorageService,
               private localeService: BsLocaleService,
@@ -334,5 +342,41 @@ export class ReportListComponent implements OnInit, OnDestroy {
       return {firstLine, secondLine, hasNext };
     }
   }
+
+  checkReport(event$: Event, reportUuid: string) {
+    event$.stopPropagation();
+    const reportIndex = this.checkedReportUuids.indexOf(reportUuid);
+    if (reportIndex !== -1) {
+      this.checkedReportUuids.splice(reportIndex, 1);
+    } else {
+      this.checkedReportUuids.push(reportUuid);
+    }
+  }
+
+  checkAllReports(event$: Event) {
+    event$.stopPropagation();
+    this.checkedReportUuids = (this.getCurrentPageReportUuids().length === this.checkedReportUuids.length) ? [] : [...this.getCurrentPageReportUuids()];
+  }
+
+  getCurrentPageReportUuids() {
+    if (this.reportsByDate) {
+      return this.reportsByDate.reduce((reportUuids, reportsByDate) => ([...reportUuids, ...reportsByDate.reports.map(r => r.id)]), []);
+    }
+  }
+
+  downloadActivationDocuments() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.accountService.downloadActivationDocuments(this.checkedReportUuids).subscribe(response => {
+        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'courriers.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+  }
+
 
 }

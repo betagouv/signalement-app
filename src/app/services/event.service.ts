@@ -17,10 +17,10 @@ export class EventService {
               private authenticationService: AuthenticationService) { }
 
   createEvent(event: ReportEvent) {
-    return combineLatest(
+    return combineLatest([
       this.authenticationService.user,
       this.serviceUtils.getAuthHeaders()
-    ).pipe(
+    ]).pipe(
       mergeMap(([user, headers]) => {
         return this.http.post<ReportEvent>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', event.reportId, 'events']),
@@ -28,6 +28,24 @@ export class EventService {
           headers
         );
       }));
+  }
+
+  createEventOnReportList(event: ReportEvent, reportuuids: string[]) {
+    return combineLatest([
+      this.authenticationService.user,
+      this.serviceUtils.getAuthHeaders()
+    ]).pipe(
+      mergeMap(([user, headers]) => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'events']),
+          {
+            reportIds : reportuuids,
+            event: this.event2eventApi(event, user)
+          },
+          headers
+        );
+      })
+    );
   }
 
   getEvents(reportId: string) {

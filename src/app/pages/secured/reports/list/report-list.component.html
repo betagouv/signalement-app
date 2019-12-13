@@ -23,9 +23,9 @@
               </button>
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                 <li role="menuitem" class="menutitle">
-                    <span class="pointer dropdown-item menutitle" (click)="selectArea()">
-                      Tous les départements
-                    </span>
+                  <span class="pointer dropdown-item menutitle" (click)="selectArea()">
+                    Tous les départements
+                  </span>
                 </li>
                 <ng-container *ngFor="let region of regions">
                   <li class="divider dropdown-divider"></li>
@@ -171,6 +171,23 @@
     <table class="table">
       <thead>
         <tr>
+          <th *appRole="[roles.Admin]">
+            <input type="checkbox"
+                   [checked]="getCurrentPageReportUuids()?.length === checkedReportUuids.length"
+                   (click)="checkAllReports($event)"/>
+            <div dropdown placement="bottom right" class="btn-group d-inline-block position-relative">
+              <button dropdownToggle type="button" class="dropdown-toggle bg-transparent border-0">
+              </button>
+              <ul id="dropdown-actions" *dropdownMenu class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem dropdown-item">
+                  <span class="pointer dropdown-item" (click)="downloadActivationDocuments()">Télécharger les courriers</span>
+                </li>
+                <li role="menuitem">
+                  <span class="pointer dropdown-item">Valider l'envoi des courriers</span>
+                </li>
+              </ul>
+            </div>
+          </th>
           <th>Dep</th>
           <th *appRole="[roles.DGCCRF]">Commune</th>
           <th *appRole="[roles.DGCCRF]">Siret</th>
@@ -193,12 +210,15 @@
         </tr>
         <ng-container *ngFor="let reportsByDate of reportsByDate">
           <tr *appRole="[roles.Admin]">
-            <td colspan="7" class="report-group">
+            <td colspan="8" class="report-group">
               {{reportsByDate.date}}
             </td>
             <td class="action report-group"></td>
           </tr>
           <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
+            <td *appRole="[roles.Admin]" (click)="checkReport($event, report.id)">
+              <input type="checkbox" [checked]="checkedReportUuids.includes(report.id)" *ngIf="report.status === reportStatus.ToProcess"/>
+            </td>
             <td>{{report.company.postalCode | slice : 0 : 2}}</td>
             <td *appRole="[roles.DGCCRF]">{{report.company.postalCode}}</td>
             <td *appRole="[roles.DGCCRF]">{{report.company.siret}}</td>
