@@ -9,10 +9,10 @@
             - title: Augmentation du débit ou des données
               example: "Exemple : passage d'un forfait 20 Go à 40 Go pour 5 euros de plus"
               information: !!import/single ../common/info/tel.yml
-            - title: Offre sur les sms/mms ou sur les appels
+            - title: Modification concernant les sms, mms ou appels
               example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
               information: !!import/single ../common/info/tel.yml
-            - title: Rajout d''une option télé, abonnement cybesécurité, d''abonnement livre ou musique
+            - title: Rajout d'une option télé, cyber-sécurité, livre audio, musique
               consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Des options payantes ont été automatiquement rajoutées à mon forfait
           example: 'Exemple : j''ai eu un mois gratuit pour une option musique puis j''ai été facturé car je ne l''ai pas désactivée'
