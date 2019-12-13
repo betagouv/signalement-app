@@ -1,14 +1,12 @@
 outOfScope: true
-information:  
-  content: Vous venez de recevoir un email ou un sms vous indiquant que votre forfait allait être augmenté à partir du mois prochain ? <b> Il ne s'agit pas d'une vente forcée.</b>
-  <br /> Les opérateurs téléphoniques ont le droit d'augmenter le prix des forfaits et abonnements sans vous demander au préalable.
-  <br /> Ils doivent respecter deux conditions :
-  <br /> <ul>
-   <li> vous prévenir un mois avant (par courrier, email, sms ...) </li>
-   <li> améliorer votre forfait téléphonique ou internet en échange (sms illimité, plus de data, meilleur débit ...). 
-   <br />Ils ne peuvent pas augmenter votre forfait pour une autre raison (option musique, option télé, abonnement à un livre ...). </li>
-   <ul>
-   
-  actions:
-    - question: Vous ne voulez pas payer plus cher votre forfait&#160;?
-      answer: Vous n'avez que deux choix : accepter cette augmentation ou résilier votre abonnement. Vous avez 4 mois pour résilier votre abonnement sans frais.
+content: "Vous venez de recevoir un email ou un sms vous indiquant que votre forfait allait être augmenté à partir du mois prochain ? <b> Il ne s'agit pas d'une vente forcée.</b>
+<br /> Les opérateurs téléphoniques ont le droit d'augmenter le prix des forfaits et abonnements sans vous demander au préalable.
+<br /> Ils doivent respecter deux conditions :
+<br /> <ul>
+ <li> vous prévenir un mois avant (par courrier, email, sms ...) </li>
+ <li> améliorer votre forfait téléphonique ou internet en échange (sms illimité, plus de data, meilleur débit ...).
+ <br />Ils ne peuvent pas augmenter votre forfait pour une autre raison (option musique, option télé, abonnement à un livre ...). </li>
+ <ul>"
+actions:
+  - question: Vous ne voulez pas payer plus cher votre forfait&#160;?
+    answer: "Vous n'avez que deux choix : accepter cette augmentation ou résilier votre abonnement. Vous avez 4 mois pour résilier votre abonnement sans frais."

@@ -9,7 +9,7 @@
           subcategoriesTitle: Pour quelle raison votre forfait a été augmenté ?
           subcategories:
             - title: Augmentation du débit ou de la data
-              example: 'Exemple : passage d'un forfait 20 Go à 40 Go'
+              example: "Exemple : passage d'un forfait 20 Go à 40 Go"
               information: !!import/single ../common/info/tel.yml
             - title: Offre sur les sms/mms ou sur les appels
               example: 'Exemple : sms illimité, appel illimité'
