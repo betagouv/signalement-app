@@ -2,17 +2,15 @@
   subcategories:
     - title: 'Mon forfait : prix, contrat et facture'
       example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
-      subcategories:
-        - title: Je ne suis pas d'accord avec ma facture
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-        - title: Le prix de mon forfait a été augmenté 
+      subcategories:       
+        - title: Le prix de mon forfait a été augmenté (ou va être augmenté)
           subcategoriesTitle: Pour quelle raison votre forfait a été augmenté ?
           subcategories:
-            - title: Augmentation du débit ou de la data
-              example: "Exemple : passage d'un forfait 20 Go à 40 Go"
+            - title: Augmentation du débit ou des données
+              example: "Exemple : passage d'un forfait 20 Go à 40 Go pour 5 euros de plus"
               information: !!import/single ../common/info/tel.yml
             - title: Offre sur les sms/mms ou sur les appels
-              example: 'Exemple : les appel deviennent illimités'
+              example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
               information: !!import/single ../common/info/tel.yml
             - title: Rajout d''une option télé, abonnement cybesécurité, d''abonnement livre ou musique
               consumerActions: !!import/single ../common/actions/telephonie-internet.yml
@@ -37,8 +35,12 @@
               consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-        - title: Autre
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Autre problème de facturation
+          subcategories:
+            - title: Utilisation de mon forfait à l'étranger
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: Autre
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
@@ -69,16 +71,13 @@
                         <br> Vous pouvez activer cette option dans votre espace client ou auprès d'un conseiller.  
                         <br> Cette option ne bloque pas la totalité des numéros surtaxés. 
                         <br>Les numéros peu surtaxés (maximum 50 centimes l'appel) et les services de renseignements (numéro commençant par 118) ne sont pas compris dans ce blocage.
-         
-        - title: Je reçois des publicités emails (spams) et je n'arrive pas à me désinscrire 
-        - title: J''ai eu un problème avec un démarcheur téléphonique
+        - title: Je reçois des spams dans mes emails 
+        - title: J'ai eu un problème avec un démarcheur téléphonique
     - title: Autres
-      example: 'Exemple : téléphone acheté avec le forfait, utilisation de mon portable à l''étranger'
-      subcategories:
-        - title: Utilisation de mon forfait à l'étranger
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+      example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
+      subcategories:        
         - title: Qualité du service client
-          example: 'Exemple : pas de réponse du service client'
+          example: 'Exemple : pas de réponse du service client, service client payant'
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Téléphone acheté avec le forfait
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
