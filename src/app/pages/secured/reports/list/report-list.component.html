@@ -171,9 +171,9 @@
     <table class="table">
       <thead>
         <tr>
-          <th *appRole="[roles.Admin]">
+          <th *appRole="[roles.Admin]" class="col-checkbox">
             <input type="checkbox"
-                   [checked]="getCurrentPageReportUuids()?.length === checkedReportUuids.length"
+                   [checked]="getCurrentPageReportUuidsToProcess()?.length === checkedReportUuids.length"
                    (click)="checkAllReports($event)"/>
             <div dropdown placement="bottom right" class="btn-group d-inline-block position-relative">
               <button dropdownToggle type="button" class="dropdown-toggle bg-transparent border-0">
@@ -183,7 +183,7 @@
                   <span class="pointer dropdown-item" (click)="downloadActivationDocuments()">Télécharger les courriers</span>
                 </li>
                 <li role="menuitem">
-                  <span class="pointer dropdown-item">Valider l'envoi des courriers</span>
+                  <span class="pointer dropdown-item" (click)="openModal(confirmLettersSendingTpl)">Valider l'envoi des courriers</span>
                 </li>
               </ul>
             </div>
@@ -199,6 +199,21 @@
           <th class="pj">Pièces jointes</th>
           <th class="status-header">Statut</th>
           <th *appPermission="permissions.createEvent" class="action"></th>
+          <ng-template #confirmLettersSendingTpl>
+            <div class="modal-body text-center">
+              <p>Confirmez-vous l'envoi des courriers pour les signalements sélectionnés ?</p>
+
+              <div class="notification error" *ngIf="loadingError">
+                Une erreur technique s'est produite<br />
+              </div>
+
+              <hr />
+
+              <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+              &nbsp;
+              <button type="button" class="btn btn-primary" (click)="confirmLettersSending()">Oui</button>
+            </div>
+          </ng-template>
         </tr>
       </thead>
       <tbody>
@@ -216,7 +231,7 @@
             <td class="action report-group"></td>
           </tr>
           <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
-            <td *appRole="[roles.Admin]" (click)="checkReport($event, report.id)">
+            <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkReport($event, report.id)">
               <input type="checkbox" [checked]="checkedReportUuids.includes(report.id)" *ngIf="report.status === reportStatus.ToProcess"/>
             </td>
             <td>{{report.company.postalCode | slice : 0 : 2}}</td>

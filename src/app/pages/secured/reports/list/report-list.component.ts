@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
 import { DetailInputValue, Report, ReportStatus } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
@@ -95,11 +95,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
     this.loading = true;
     this.loadingError = false;
-    combineLatest(
+    combineLatest([
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
       this.constantService.getReportStatusList(),
       this.route.paramMap
-    ).subscribe(
+    ]).subscribe(
       ([reportFilter, statusList, params]) => {
 
 
@@ -355,12 +355,20 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   checkAllReports(event$: Event) {
     event$.stopPropagation();
-    this.checkedReportUuids = (this.getCurrentPageReportUuids().length === this.checkedReportUuids.length) ? [] : [...this.getCurrentPageReportUuids()];
+    if (this.getCurrentPageReportUuidsToProcess().length === this.checkedReportUuids.length) {
+      this.checkedReportUuids = [];
+    } else {
+      this.checkedReportUuids = [...this.getCurrentPageReportUuidsToProcess()];
+    }
   }
 
-  getCurrentPageReportUuids() {
+  getCurrentPageReportUuidsToProcess() {
     if (this.reportsByDate) {
-      return this.reportsByDate.reduce((reportUuids, reportsByDate) => ([...reportUuids, ...reportsByDate.reports.map(r => r.id)]), []);
+      return this.reportsByDate
+        .reduce((reportUuids, reportsByDate) => ([
+          ...reportUuids,
+          ...reportsByDate.reports.filter(r => r.status === ReportStatus.ToProcess).map(r => r.id)
+        ]), []);
     }
   }
 
@@ -378,5 +386,22 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
 
+  confirmLettersSending() {
+    this.loading = true;
+    this.loadingError = false;
+    this.eventService.confirmContactByPostOnReportList(this.checkedReportUuids).subscribe(
+      events => {
+        this.loading = false;
+        this.modalRef.hide();
+        this.loadReports(this.currentPage);
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
+  }
 }

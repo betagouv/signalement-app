@@ -30,18 +30,12 @@ export class EventService {
       }));
   }
 
-  createEventOnReportList(event: ReportEvent, reportuuids: string[]) {
-    return combineLatest([
-      this.authenticationService.user,
-      this.serviceUtils.getAuthHeaders()
-    ]).pipe(
-      mergeMap(([user, headers]) => {
-        return this.http.post(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'events']),
-          {
-            reportIds : reportuuids,
-            event: this.event2eventApi(event, user)
-          },
+  confirmContactByPostOnReportList(reportuuids: string[]) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post<Event[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'events', 'contactByPost']),
+          { reportIds : reportuuids },
           headers
         );
       })
