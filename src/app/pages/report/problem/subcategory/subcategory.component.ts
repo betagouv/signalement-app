@@ -47,23 +47,19 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.checkScrollNotification();
+      this.scrollToElementIfHidden();
     }, 500);
   }
 
-  checkScrollNotification() {
+  scrollToElementIfHidden() {
     if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
       if (rect.top > 1 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
-        this.scrollToElement();
+        jQuery('html, body').animate({
+          scrollTop: this.elementRef.nativeElement.offsetTop
+        }, 1000);
       }
     }
-  }
-
-  scrollToElement() {
-    jQuery('html, body').animate({
-      scrollTop: this.elementRef.nativeElement.offsetTop
-    }, 1000);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
