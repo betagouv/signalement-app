@@ -30,12 +30,12 @@ export class EventService {
       }));
   }
 
-  confirmContactByPostOnReportList(reportuuids: string[]) {
+  confirmContactByPostOnReportList(reportuuids: Set<string>) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.post<Event[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'events', 'contactByPost']),
-          { reportIds : reportuuids },
+          { reportIds : Array.from(reportuuids) },
           headers
         );
       })

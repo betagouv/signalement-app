@@ -56,7 +56,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   loading: boolean;
   loadingError: boolean;
 
-  checkedReportUuids: string[] = [];
+  checkedReportUuids = new Set<string>();
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -345,20 +345,19 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   checkReport(event$: Event, reportUuid: string) {
     event$.stopPropagation();
-    const reportIndex = this.checkedReportUuids.indexOf(reportUuid);
-    if (reportIndex !== -1) {
-      this.checkedReportUuids.splice(reportIndex, 1);
+    if (this.checkedReportUuids.has(reportUuid)) {
+      this.checkedReportUuids.delete(reportUuid);
     } else {
-      this.checkedReportUuids.push(reportUuid);
+      this.checkedReportUuids.add(reportUuid);
     }
   }
 
   checkAllReports(event$: Event) {
     event$.stopPropagation();
-    if (this.getCurrentPageReportUuidsToProcess().length === this.checkedReportUuids.length) {
-      this.checkedReportUuids = [];
+    if (this.getCurrentPageReportUuidsToProcess().length === this.checkedReportUuids.size) {
+      this.checkedReportUuids.clear();
     } else {
-      this.checkedReportUuids = [...this.getCurrentPageReportUuidsToProcess()];
+      this.checkedReportUuids = new Set(this.getCurrentPageReportUuidsToProcess());
     }
   }
 
