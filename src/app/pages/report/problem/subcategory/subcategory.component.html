@@ -9,10 +9,15 @@
   <h4 tabindex="-1" class="text-center mb-4 font-weight-bold problemTitle" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
 
   <form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
-    <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
+    <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
       <div class="row pb-2 pt-2">
         <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
-          <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{level}}-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
+          <input type="radio"
+                 [formControlName]="subcategoryName"
+                 [value]="subcategory.title"
+                 id="radio-{{level}}-{{subcategory.title}}"
+                 (click)="selectSubcategory(subcategory)"
+                 [appAutofocus]="level === 1 && subcategoryIndex === 0"/>
         </div>
         <div class="col-10 col-sm-11 pl-1">
           <label class="d-block mb-0 pointer" for="radio-{{level}}-{{subcategory.title}}">{{subcategory.title}}</label>

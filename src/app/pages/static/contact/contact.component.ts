@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import Utils from '../../../utils';
 import { AnomalyService } from '../../../services/anomaly.service';
 
 @Component({
@@ -20,8 +19,6 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pages.contact.title);
     this.meta.updateTag({ name: 'description', content: pages.contact.description });
-
-    Utils.focusAndBlurOnTop();
 
     this.internetInformation = this.anomalyService.getAnomalyByCategoryId('INTERNET').information;
 

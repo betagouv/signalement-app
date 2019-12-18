@@ -7,7 +7,6 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
 import pages from '../../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 
@@ -57,8 +56,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
-
-    Utils.focusAndBlurOnTop();
   }
 
   ngOnDestroy() {

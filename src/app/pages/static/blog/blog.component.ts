@@ -3,7 +3,6 @@ import { Title } from '@angular/platform-browser';
 import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute } from '@angular/router';
 import blogMetaData from '../../../../assets/data/blog-meta-data.json';
-import Utils from '../../../utils';
 import pages from '../../../../assets/data/pages.json';
 
 @Component({
@@ -46,8 +45,6 @@ export class BlogComponent implements OnInit {
         this.next = index > 0 ? blogMetaData[index - 1] : null;
         this.previous = index < blogMetaData.length - 1 ? blogMetaData[index + 1] : null;
       }
-
-      Utils.focusAndBlurOnTop();
     });
   }
 

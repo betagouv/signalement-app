@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Permissions, Roles, User } from '../../model/AuthUser';
-import { Router } from '@angular/router';
+import { Router, Scroll } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild('banner', {static: false}) banner;
 
   roles = Roles;
   permissions = Permissions;
@@ -21,6 +23,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.authenticationService.user.subscribe(user => {
       this.user = user;
+    });
+
+    this.router.events.forEach((event) => {
+      if (event instanceof Scroll) {
+        this.banner.nativeElement.focus();
+      }
     });
   }
 
