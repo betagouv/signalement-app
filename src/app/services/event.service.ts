@@ -17,10 +17,10 @@ export class EventService {
               private authenticationService: AuthenticationService) { }
 
   createEvent(event: ReportEvent) {
-    return combineLatest(
+    return combineLatest([
       this.authenticationService.user,
       this.serviceUtils.getAuthHeaders()
-    ).pipe(
+    ]).pipe(
       mergeMap(([user, headers]) => {
         return this.http.post<ReportEvent>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', event.reportId, 'events']),
@@ -28,6 +28,18 @@ export class EventService {
           headers
         );
       }));
+  }
+
+  confirmContactByPostOnReportList(reportuuids: Set<string>) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post<Event[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'events', 'contactByPost']),
+          { reportIds : Array.from(reportuuids) },
+          headers
+        );
+      })
+    );
   }
 
   getEvents(reportId: string) {
