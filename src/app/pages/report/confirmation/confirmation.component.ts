@@ -9,7 +9,6 @@ import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
 
 @Component({
   selector: 'app-confirmation',
@@ -49,8 +48,6 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
           this.reportRouterService.routeToFirstStep();
         }
       });
-
-      Utils.focusAndBlurOnBackButton();
   }
 
   ngOnDestroy() {

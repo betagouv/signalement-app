@@ -5,14 +5,17 @@ import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 })
 export class AutofocusDirective implements AfterViewInit {
 
+    @Input('appAutofocus') autofocus;
+
     public constructor(private el: ElementRef) {
     }
 
     public ngAfterViewInit() {
-        window.setTimeout(() => {
-            this.el.nativeElement.focus();
+      if (this.autofocus) {
+        setTimeout(() => {
+          this.el.nativeElement.focus();
         });
-
+      }
     }
 
 }

@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from '../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import Utils from '../../utils';
 
 @Component({
   selector: 'app-login',
@@ -42,8 +41,6 @@ export class LoginComponent implements OnInit {
         this.isDgccrf = url[0].toString() === 'dgccrf';
       }
     });
-
-    Utils.focusAndBlurOnTop();
   }
 
   initLoginForm() {

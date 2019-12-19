@@ -2,17 +2,45 @@
   subcategories:
     - title: 'Mon forfait : prix, contrat et facture'
       example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
-      subcategories:
-        - title: Je ne suis pas d'accord avec ma facture
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-        - title: Le prix de mon forfait a été augmenté
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+      subcategories:       
+        - title: Le prix de mon forfait a été augmenté (ou va être augmenté)
+          subcategoriesTitle: Pour quelle raison votre forfait a été augmenté ?
+          subcategories:
+            - title: Augmentation du débit ou des données
+              example: "Exemple : passage d'un forfait 20 Go à 40 Go pour 5 euros de plus"
+              information: !!import/single ../common/info/tel.yml
+            - title: Modification concernant les sms, mms ou appels
+              example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
+              information: !!import/single ../common/info/tel.yml
+            - title: Rajout d'une option télé, cyber-sécurité, livre audio, musique
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Des options payantes ont été automatiquement rajoutées à mon forfait
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          example: 'Exemple : j''ai eu un mois gratuit pour une option musique puis j''ai été facturé car je ne l''ai pas désactivée'
+          subcategoriesTitle: Quel est le type d'option ?
+          subcategories:
+            - title: option télé ou musique
+              example: 'Exemple: option musique illimitée, chaîne télé supplémentaire'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option livres
+              example: 'Exempel: abonnement livre audio'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option liée à la sécurité
+              example: 'Exemple: anti virus, cybersécurité'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option sms/mms ou appels illimités
+              information: !!import/single ../common/info/tel.yml
+            - title: option lié au répondeur ou à la présentation du numéro 
+              information: !!import/single ../common/info/tel.yml
+            - title: autre type d'option
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-        - title: Autre
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Autre problème de facturation ou de contrat
+          subcategories:
+            - title: Utilisation de mon forfait à l'étranger
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: Autre
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
@@ -28,20 +56,28 @@
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Mon ancien opérateur continue de me prélever
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-    - title: Appels ou sms indésirables
-      example: 'Exemple : spams, démarchages téléphoniques, BlocTel'
+    - title: Appels, sms ou email indésirables
+      example: 'Exemple : spams, appel incessant, raoppel vers un numéro payant'
       subcategories:
         - title: Je reçois des appels indésirables alors que je suis sur BlocTel
-        - title: J'ai répondu à un appel ou à un sms et j'ai été surtaxé
-        - title: Je veux signaler un numéro qui m'envoi des spams (sms ou appel)
+        - title: J''ai répondu à un sms ou j''ai rappelé un numéro qui était payant sans le savoir
+          information:
+            content: Vous devez rentrer le numéro en question et la date sur le site <a href="https://www.infosva.org/" target="_blank" /> infosva. </a>
+                   <br> Puis cliquer "signaler un problème relatif à ce numéro".
+                   <br> La répression des fraudes aura accès à votre signalement directement avec le site Infosva.
+            actions:
+              - question: Comment bloquer ces numéros payants&#160;?
+                answer: Votre opérateur téléphonique doit vous proposer une option gratuite de blocage des numéros payants appelés "surtaxés". 
+                        <br> Vous pouvez activer cette option dans votre espace client ou auprès d'un conseiller.  
+                        <br> Cette option ne bloque pas la totalité des numéros surtaxés. 
+                        <br>Les numéros peu surtaxés (maximum 50 centimes l'appel) et les services de renseignements (numéro commençant par 118) ne sont pas compris dans ce blocage.
+        - title: Je reçois des spams dans mes emails 
         - title: J'ai eu un problème avec un démarcheur téléphonique
     - title: Autres
-      example: 'Exemple : téléphone acheté avec le forfait, utilisation de mon portable à l''étranger'
-      subcategories:
-        - title: Utilisation de mon forfait à l'étranger
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+      example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
+      subcategories:        
         - title: Qualité du service client
-          example: 'Exemple : pas de réponse du service client'
+          example: 'Exemple : pas de réponse du service client, service client payant'
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Téléphone acheté avec le forfait
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
