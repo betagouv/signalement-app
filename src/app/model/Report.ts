@@ -20,7 +20,8 @@ export enum Step {
 
 
 export enum ReportStatus {
-  ClosedForPro = 'Clôturé'
+  ClosedForPro = 'Clôturé',
+  ToProcess = 'À traiter'
 }
 
 export class Report {

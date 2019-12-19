@@ -15,7 +15,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
 
 @Component({
   selector: 'app-company',
@@ -74,9 +73,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
           this.reportRouterService.routeToFirstStep();
         }
       });
-
-      Utils.focusAndBlurOnBackButton();
-
   }
 
   ngOnDestroy() {
@@ -89,9 +85,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo(0, 0);
     }
-
-    Utils.focusAndBlurOnBackButton();
-
   }
 
   initSearchForm() {
@@ -227,14 +220,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.companyBySiret = undefined;
     this.showErrors = false;
     this.showErrorsBySiret = false;
-
-    setTimeout(() => {
-      const elt = document.querySelector('#firstTab');
-
-      if (elt && elt instanceof HTMLElement) {
-        elt.focus();
-      }
-    });
   }
 
   hasError(formControl: FormControl) {

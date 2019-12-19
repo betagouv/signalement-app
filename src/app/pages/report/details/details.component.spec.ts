@@ -17,6 +17,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
+import { AutofocusDirective } from '../../../directives/auto-focus.directive';
 
 describe('DetailsComponent', () => {
 
@@ -69,6 +70,7 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         BreadcrumbComponent,
+        AutofocusDirective,
       ],
       imports: [
         FormsModule,

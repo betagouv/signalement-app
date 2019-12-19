@@ -14,7 +14,6 @@ import { isDefined } from '@angular/compiler/src/util';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
 import { Keyword } from '../../../model/Keyword';
 
 export const fileSizeMax = 5000000;
@@ -92,8 +91,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.searchKeywords();
 
     this.maxDate = new Date();
-
-    Utils.focusAndBlurOnBackButton();
 
   }
 
