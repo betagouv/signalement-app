@@ -24,8 +24,8 @@
           <ng-container *ngIf="!report.employeeConsumer else employeeConsumer">
             <b>Votre description ci-dessous sera lue par l'entreprise et la répression des fraudes.</b>
             <br />Les pièces jointes seront également lues par l'entreprise.
-            <br />Si vous souhaitez restez anonyme, c’est-à-dire que l'entreprise ne connaisse pas votre identité,
-            pensez à retirer votre nom des pièces jointes et à ne rien citer de personnel.
+            <br /><br/> Si vous souhaitez que l'entreprise ne connaisse pas votre identité,
+            <b>cachez votre nom sur vos pièces jointes et ne citez rien de personnel</b>.
           </ng-container>
           <ng-template #employeeConsumer>
             Votre signalement sera lu <b>uniquement par la répression des fraudes.</b>
@@ -164,7 +164,8 @@
                            [origin]="fileOrigins.Consumer">
           </app-attachments>
           <div class="note" *ngIf="!report.employeeConsumer">
-            Un signalement avec des pièces jointes (ticket de caisse, photo, vidéo...) a 83% de chance en plus d'entrainer une mesure corrective de la part de l'entreprise.
+            Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective ! 
+            <br/> Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).
           </div>
         </div>
         <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
