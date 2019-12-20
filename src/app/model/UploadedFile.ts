@@ -7,7 +7,6 @@ export enum FileOrigin {
 export class UploadedFile {
   id: string;
   filename: string;
-  creationDate: Date;
   loading: boolean;
   origin: FileOrigin;
 
