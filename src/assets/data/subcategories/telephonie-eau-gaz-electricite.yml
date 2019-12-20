@@ -4,17 +4,18 @@
       example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
       subcategories:       
         - title: Le prix de mon forfait a été augmenté (ou va être augmenté)
-          subcategoriesTitle: Pour quelle raison votre forfait a été augmenté ?
+          subcategoriesTitle: Pour quelle raison votre forfait a été augmenté (ou va être augmenté) ?
           subcategories:
-            - title: Augmentation du débit ou des données
-              example: "Exemple : passage d'un forfait 20 Go à 40 Go pour 5 euros de plus"
+            - title: Modification de mon débit ou des données disponibles
+              example: "Exemple : passage de 20 Go à 40 Go pour 5 euros de plus"
               information: !!import/single ../common/info/tel.yml
             - title: Modification concernant les sms, mms ou appels
               example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
               information: !!import/single ../common/info/tel.yml
-            - title: Rajout d'une option télé, cyber-sécurité, livre audio, musique
+            - title: Rajout d'une option payante
+              example: 'Exemple : télé, cyber-sécurité, livre audio, musique"
               consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-        - title: Des options payantes ont été automatiquement rajoutées à mon forfait
+        - title: Une option payante a été automatiquement rajoutée à mon forfait suite à un essai gratuit
           example: 'Exemple : j''ai eu un mois gratuit pour une option musique puis j''ai été facturé car je ne l''ai pas désactivée'
           subcategoriesTitle: Quel est le type d'option ?
           subcategories:
