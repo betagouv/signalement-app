@@ -43,6 +43,7 @@
                     - label: Si vous avez reçu un courrier/email/sms, quel est sa date ?
                       rank: 5
                       type: DATE
+                      optionnal: true
         - title: Une option payante a été automatiquement rajoutée à mon forfait suite à un essai gratuit
           example: 'Exemple : j''ai eu un mois gratuit pour une option musique puis j''ai été facturé car je ne l''ai pas désactivée'
           subcategoriesTitle: Quel est le type d'option ?
