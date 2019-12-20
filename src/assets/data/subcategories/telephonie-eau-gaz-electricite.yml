@@ -14,7 +14,35 @@
               information: !!import/single ../common/info/tel.yml
             - title: Rajout d'une option payante
               example: 'Exemple : télé, cyber-sécurité, livre audio, musique'
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              subcategoriesTitle: Quel est le type d'option ?
+              subcategories:
+                - title: option liée à la data (Go), aux appels, aux sms, au débit ...
+                  information: !!import/single ../common/info/tel.yml
+                - title: option liée à de la musique, des livres, une chaine télé, un anti-virus ...
+                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  detailInputs:
+                    - label: A partir de quand cette option va-t-elle être payante ?
+                      rank: 1
+                      type: DATE
+                    - label: Quel est le nom de cette option ?
+                      rank: 2
+                      type: TEXT
+                      placeholder: "Indiquez l'intitulé figurant sur l'email ou la facture"
+                    - label: Quel est son prix ?
+                      rank: 3
+                      type: TEXT
+                    - label: Comment avez-vous été prévenu de cette option ?
+                      rank: 4
+                      type: RADIO
+                      options:
+                        - email
+                        - courrier papier
+                        - sms
+                        - message dans l'espace client
+                        - "je n'ai rien reçu"
+                    - label: Si vous avez reçu un courrier/email/sms, quel est sa date ?
+                      rank: 5
+                      type: DATE
         - title: Une option payante a été automatiquement rajoutée à mon forfait suite à un essai gratuit
           example: 'Exemple : j''ai eu un mois gratuit pour une option musique puis j''ai été facturé car je ne l''ai pas désactivée'
           subcategoriesTitle: Quel est le type d'option ?
