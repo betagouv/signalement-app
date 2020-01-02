@@ -4,10 +4,10 @@
       example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
       subcategories:       
         - title: Le prix de mon forfait a été augmenté (ou va être augmenté)
-          example: 'Exemple : ajout automatique d'une option payante, augmentation de 2 euros de mon forfait'
+          example: "Exemple : ajout automatique d'une option payante, augmentation de 2 euros de mon forfait"
           subcategoriesTitle: Pour quelle raison votre forfait a été augmenté (ou va être augmenté) ?
           subcategories:
-            - title: Modification de mon débit ou des données disponibles
+            - title: Augmentation du débit ou des données disponibles
               example: 'Exemple : passage de 20 Go à 40 Go pour 5 euros de plus'
               information: !!import/single ../common/info/tel.yml
             - title: Modification concernant les sms, mms ou appels
