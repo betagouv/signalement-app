@@ -148,6 +148,9 @@
               rank: 2
               type: DATE_NOT_IN_FUTURE
               defaultValue: SYSDATE
+            - label: Quel est le problème ?
+              rank: 3
+              type: TEXT
           fileLabel: Photo du produit
         - title: Un produit vendu dans un emballage
           example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
@@ -178,6 +181,9 @@
               rank: 6
               type: DATE_NOT_IN_FUTURE
               defaultValue: SYSDATE
+            - label: Quel est le problème ?
+              rank: 7
+              type: TEXT
           fileLabel: Photo du produit
     - title: Corps étranger "mou"
       example: 'Exemple : morceau de gant, morceau de tissus, limace..'
