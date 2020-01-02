@@ -533,10 +533,16 @@
             - title: Autres
               example: 'Exemples : problème avec le terminal de paiement'
         - title: Autres problèmes de prix ou paiement
-          subcategoriesTitle: 'Problème avec :'
           subcategories:
-            - title: Le cash-back
-            - title: Une carte cadeaux
+            - title: Problème avec le cash-back
+            - title: Problème avec une carte cadeau
+            - title: Le commerçant a réfusé de me faire une détaxe alors que je vis à l'étranger
+              information:
+                    title: Le commerçant a le droit de refuser de faire une détaxe sur vos achats.
+                    content: 'La vente en détaxe est une exonération de la taxe sur la valeur ajoutée (TVA) sur le prix de biens achetés par des personnes de passage en France, soumise à conditions. 
+                      <br /> Le commerçant est libre d'appliquer la détaxe, qui est facultative. L'acheteur ne peut pas l'exiger du vendeur.
+                      Retrouvez plus d'information sur <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F20558" target="_blank">cette page.</a>'
+                    outOfScope: true
             - title: Autres
     - title: Autres
 
