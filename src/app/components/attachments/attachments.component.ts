@@ -19,7 +19,7 @@ export class AttachmentsComponent implements OnInit {
 
   tooLargeFilename: string;
   invalidFileExtension = false;
-  allowedExtensions = ["jpg", "jpeg", "pdf", "png", "gif", "doc", "docx", "odt"];
+  allowedExtensions = ['jpg', 'jpeg', 'pdf', 'png', 'gif', 'doc', 'docx', 'odt'];
 
   constructor(private fileUploaderService: FileUploaderService) { }
 
@@ -46,7 +46,7 @@ export class AttachmentsComponent implements OnInit {
   }
 
   checkExtension(filename: string) {
-    return this.allowedExtensions.includes(filename.split('.').pop().toLowerCase())
+    return this.allowedExtensions.includes(filename.split('.').pop().toLowerCase());
   }
 
   selectFile() {
@@ -65,7 +65,6 @@ export class AttachmentsComponent implements OnInit {
         this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0], this.origin).subscribe(uploadedFile => {
           fileToUpload.loading = false;
           fileToUpload.id = uploadedFile.id;
-          fileToUpload.creationDate = uploadedFile.creationDate;
           fileToUpload.origin = uploadedFile.origin;
         }, error => {
           fileToUpload.loading = false;

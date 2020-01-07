@@ -66,7 +66,7 @@ export class ReportService {
   getReport(reportId: string) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.get<PaginatedData<any>>(
+        return this.http.get<{report: any, files: UploadedFile[]}>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId]),
           headers
         );
