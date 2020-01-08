@@ -66,7 +66,7 @@ export class ReportService {
   getReport(reportId: string) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.get<PaginatedData<any>>(
+        return this.http.get<{report: any, files: UploadedFile[]}>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId]),
           headers
         );
@@ -174,7 +174,7 @@ export class ReportService {
       email: report.consumer.email,
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
-      files: report.uploadedFiles,
+      fileIds: report.uploadedFiles.map(file => file.id),
       details: report.detailInputValues
         .map(d => Object.assign(new DetailInputValue(), d))
         .map(detailInputValue => {
@@ -199,34 +199,36 @@ export class ReportService {
     return address.substring(0, address.length - 3);
   }
 
-  private reportApi2report(reportApi) {
+  private reportApi2report(reportWithFiles: {report: any, files: UploadedFile[]}) {
+    const report = reportWithFiles.report;
+    const files = reportWithFiles.files;
     return Object.assign(new Report(), {
-      id: reportApi.id,
-      creationDate: new Date(reportApi.creationDate),
-      category: reportApi.category,
-      subcategories: reportApi.subcategories,
-      detailInputValues: reportApi.details,
+      id: report.id,
+      creationDate: new Date(report.creationDate),
+      category: report.category,
+      subcategories: report.subcategories,
+      detailInputValues: report.details,
       company: Object.assign(new Company(), {
-        name: reportApi.companyName,
-        siret: reportApi.companySiret,
-        postalCode: reportApi.companyPostalCode,
-        line1: reportApi.companyAddress.split('-')[0],
-        line2: reportApi.companyAddress.split('-')[1],
-        line3: reportApi.companyAddress.split('-')[2],
-        line4: reportApi.companyAddress.split('-')[3],
-        line5: reportApi.companyAddress.split('-')[4],
-        line6: reportApi.companyAddress.split('-')[5],
-        line7: reportApi.companyAddress.split('-')[6],
+        name: report.companyName,
+        siret: report.companySiret,
+        postalCode: report.companyPostalCode,
+        line1: report.companyAddress.split('-')[0],
+        line2: report.companyAddress.split('-')[1],
+        line3: report.companyAddress.split('-')[2],
+        line4: report.companyAddress.split('-')[3],
+        line5: report.companyAddress.split('-')[4],
+        line6: report.companyAddress.split('-')[5],
+        line7: report.companyAddress.split('-')[6],
       }),
       consumer: Object.assign(new Consumer(), {
-        firstName: reportApi.firstName,
-        lastName: reportApi.lastName,
-        email: reportApi.email
+        firstName: report.firstName,
+        lastName: report.lastName,
+        email: report.email
       }),
-      contactAgreement: reportApi.contactAgreement,
-      employeeConsumer: reportApi.employeeConsumer,
-      uploadedFiles: reportApi.files.map(f => Object.assign(new UploadedFile(), f)),
-      status: reportApi.status
+      contactAgreement: report.contactAgreement,
+      employeeConsumer: report.employeeConsumer,
+      uploadedFiles: files.map(f => Object.assign(new UploadedFile(), f)),
+      status: report.status
     });
   }
 }
