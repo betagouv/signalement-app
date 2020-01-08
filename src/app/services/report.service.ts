@@ -24,7 +24,30 @@ export class ReportService {
   createReport(report: Report) {
     return this.http.post(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-      this.report2reportApi(report),
+      {
+        id: report.id,
+        category: report.category,
+        subcategories: !report.subcategories ? [] : report.subcategories
+          .map(subcategory => subcategory.title ? subcategory.title : subcategory),
+        companyName: report.company.name,
+        companyAddress: this.company2Address(report.company),
+        companyPostalCode: report.company.postalCode,
+        companySiret: report.company.siret,
+        firstName: report.consumer.firstName,
+        lastName: report.consumer.lastName,
+        email: report.consumer.email,
+        contactAgreement: report.contactAgreement,
+        employeeConsumer: report.employeeConsumer,
+        fileIds: report.uploadedFiles.map(file => file.id),
+        details: report.detailInputValues
+          .map(d => Object.assign(new DetailInputValue(), d))
+          .map(detailInputValue => {
+            return {
+              label: detailInputValue.renderedLabel,
+              value: detailInputValue.renderedValue,
+            };
+          })
+      },
     );
   }
 
@@ -39,12 +62,34 @@ export class ReportService {
     );
   }
 
-  updateReport(report: Report) {
+  updateReportCompany(reportId: string, company: Company) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.put(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', report.id]),
-          this.report2reportApi(report),
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'company']),
+          {
+            name: company.name,
+            address: this.company2Address(company),
+            postalCode: company.postalCode,
+            siret: company.siret,
+          },
+          headers
+        );
+      }),
+    );
+  }
+
+  updateReportConsumer(reportId: string, consumer: Consumer, contactAgreement: boolean) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'consumer']),
+          {
+            firstName: consumer.firstName,
+            lastName: consumer.lastName,
+            email: consumer.email,
+            contactAgreement
+          },
           headers
         );
       }),
@@ -159,34 +204,7 @@ export class ReportService {
     );
   }
 
-  private report2reportApi(report: Report) {
-    return {
-      id: report.id,
-      category: report.category,
-      subcategories: !report.subcategories ? [] : report.subcategories
-        .map(subcategory => subcategory.title ? subcategory.title : subcategory),
-      companyName: report.company.name,
-      companyAddress: this.company2adresseApi(report.company),
-      companyPostalCode: report.company.postalCode,
-      companySiret: report.company.siret,
-      firstName: report.consumer.firstName,
-      lastName: report.consumer.lastName,
-      email: report.consumer.email,
-      contactAgreement: report.contactAgreement,
-      employeeConsumer: report.employeeConsumer,
-      fileIds: report.uploadedFiles.map(file => file.id),
-      details: report.detailInputValues
-        .map(d => Object.assign(new DetailInputValue(), d))
-        .map(detailInputValue => {
-          return {
-            label: detailInputValue.renderedLabel,
-            value: detailInputValue.renderedValue,
-          };
-        })
-    };
-  }
-
-  company2adresseApi(company: Company) {
+  company2Address(company: Company) {
     let address = '';
     const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
     if (company) {
