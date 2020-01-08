@@ -109,7 +109,6 @@ describe('ReportService', () => {
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['email']).toBe('email@mail.fr');
-      expect(reportRequest.request.body['files']).toEqual([anomalyFile]);
       expect(reportRequest.request.body['details']).toEqual([{label: 'mon label :', value: 'ma value'}]);
     });
 

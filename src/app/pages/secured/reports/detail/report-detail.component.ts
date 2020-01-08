@@ -229,19 +229,8 @@ export class ReportDetailComponent implements OnInit {
   changeCompany(company: Company) {
     this.loading = true;
     this.loadingError = false;
-    this.reportService.updateReport(Object.assign(new Report(), this.report, { company }))
+    this.reportService.updateReportCompany(this.reportId, company)
       .pipe(
-        switchMap(() => {
-          return this.eventService.createEvent(Object.assign(new ReportEvent(), {
-            reportId: this.reportId,
-            eventType: 'RECTIF',
-            action: {value: EventActionValues.EditCompany},
-            details: {
-              description: `Entreprise précédente : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ` +
-              `${this.reportService.company2adresseApi(this.report.company)}`
-            }
-          }));
-        }),
         switchMap(() => {
           return this.eventService.getEvents(this.reportId);
         })
@@ -271,19 +260,8 @@ export class ReportDetailComponent implements OnInit {
         email: this.emailCtrl.value
       });
     const contactAgreement = this.contactAgreementCtrl.value;
-    this.reportService.updateReport(Object.assign(new Report(), this.report, { consumer, contactAgreement }))
+    this.reportService.updateReportConsumer(this.reportId, consumer, contactAgreement)
       .pipe(
-        switchMap(() => {
-          return this.eventService.createEvent(Object.assign(new ReportEvent(), {
-            reportId: this.reportId,
-            eventType: 'RECTIF',
-            action: {value: EventActionValues.EditConsumer},
-            details: {
-              description: `Consommateur précédent : ${this.report.consumer.firstName} ${this.report.consumer.lastName}` +
-              ` - ${this.report.consumer.email} - Accord pour contact : ${this.report.contactAgreement ? 'oui' : 'non'}`
-            }
-          }));
-        }),
         switchMap(() => {
           return this.eventService.getEvents(this.reportId);
         })
