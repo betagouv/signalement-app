@@ -24,8 +24,10 @@ import { ReportPaths } from '../../services/report-router.service';
 
 defineLocale('fr', frLocale);
 
-function getRoutesForCategories() {
-  return anomalies.list
+
+const routes: Routes = [];
+routes.push(
+  ...anomalies.list
     .map(anomaly => {
       if (anomaly.information) {
         return [
@@ -45,13 +47,8 @@ function getRoutesForCategories() {
         ];
       }
     })
-    .reduce((routes1, routes2) => [...routes1, ...routes2], []);
-}
-
-const routes: Routes = [
-    ...getRoutesForCategories(),
-  { path: '', component: CategoryComponent }
-];
+    .reduce((routes1, routes2) => [...routes1, ...routes2], [])
+);
 
 @NgModule({
   declarations: [
