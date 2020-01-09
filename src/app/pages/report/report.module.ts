@@ -25,7 +25,7 @@ import { ReportPaths } from '../../services/report-router.service';
 defineLocale('fr', frLocale);
 
 
-const routes: Routes = [];
+const routes: Routes = [{ path: '', component: CategoryComponent }];
 routes.push(
   ...anomalies.list
     .map(anomaly => {
