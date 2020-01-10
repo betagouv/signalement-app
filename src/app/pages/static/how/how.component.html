@@ -7,58 +7,111 @@
 </div>
 
 <main role="main">
+
   <section class="section section-lightest-grey text-center py-0 pt-4">
-    <a class="btn btn-outline-primary" role="button" routerLink="/vous-êtes-un-professionnel">Vous êtes un professionnel ?</a>
+    <a class="btn btn-outline-primary" role="button" routerLink="/vous-êtes-un-professionnel">Vous êtes une entreprise ?</a>
   </section>
 
   <section class="section section-lightest-grey">
-    <div class="container steps">
-      <div class="step">
-        <p>
-          1. Signalez le problème en choissant un secteur et en répondant aux différentes questions.
-        </p>
-        <p>
-          Vous n'êtes pas sûr de vous ? SignalConso vous guide afin de savoir si vous pouvez ou non effectuer un signalement.
-        </p>
-        <p>
-          Suivant le problème, SignalConso vous conseille sur les démarches à faire en plus de votre signalement. Il vous donne également des informations sur vos droits.
-        </p>
-        <div class="text-center">
-          <img src="/assets/images/icon_check.png" alt="Icône case à cocher"/>
+    <div class="container max-width">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+              <h6 [innerHTML]="illustrations[0].title"></h6>
+            </div>
+            <div class="col-12 col-sm-9 order-1 order-sm-2 text-center text-sm-left flex-center pb-2 pb-sm-0">
+              <h2>1</h2>
+            </div>
+            <div class="col-3 order-2 order-sm-3 p-0">
+              <img src="/assets/images/{{illustrations[0].picture}}" alt="Illustration" />
+            </div>
+            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+              <p>
+                Signalez le problème en choissant un secteur et en répondant aux différentes questions.
+              </p>
+              <p>
+                Vous n'êtes pas sûr de vous ? SignalConso vous guide afin de savoir si vous pouvez ou non effectuer un signalement.
+              </p>
+              <p>Suivant le problème, SignalConso vous conseille sur les démarches à faire en plus de votre signalement. Il vous donne également des informations sur vos droits.
+              </p>
+            </div>
+          </div>
         </div>
-        <p class="notification warning">
-          SignalConso ne fonctionne pas encore pour des problèmes d'achat sur internet. Patience !
-        </p>
       </div>
-      <div class="text-center">
-        <img src="/assets/images/icon_arrow_down.png" alt="Icône flêche descendante"/>
-      </div>
-      <div class="step">
-        <p>
-          2. L'équipe SignalConso contacte l'entreprise afin de l'informer du signalement. Le signalement peut être anonymisé si vous en avez fait la demande.
-          L'entreprise peut alors corriger le problème si elle le souhaite.
-        </p>
-        <div class="text-center">
-          <img src="/assets/images/icon_store1.png" alt="Icône commerce"/>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+              <h6 [innerHTML]="illustrations[1].title"></h6>
+            </div>
+            <div class="col-12 col-sm-9 order-1 order-sm-2 text-center text-sm-left flex-center pb-2 pb-sm-0">
+              <h2>2</h2>
+            </div>
+            <div class="col-3 order-2 order-sm-3 p-0">
+              <img src="/assets/images/{{illustrations[1].picture}}" alt="Illustration" />
+            </div>
+            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+              <p>
+                Vous n'êtes pas sûr de vous ? Le site vous guide pas-à-pas afin de savoir si vous devez ou non effectuer un signalement.
+              </p>
+              <p>
+                Suivant les cas, le site vous conseille sur les démarches à faire en parallèle de votre signalement.
+                Il vous donne également des informations sur vos droits.
+              </p>
+              <p>
+                Pour le moment, notre site ne fonctionne pas pour des problèmes d'achat sur internet.
+              </p>
+            </div>
+          </div>
         </div>
-        <p>
-          Vous avez choisi de transmettre vos coordonnées à l'entreprise ? Elle peut alors vous contacter pour avoir plus de renseignements ou vous proposer des solutions.
-        </p>
       </div>
-      <div class="text-center">
-        <img src="/assets/images/icon_arrow_down.png" alt="Icône flêche descendante"/>
-      </div>
-      <div class="step">
-        <p>
-          3. Votre signalement est enregistré dans la base de données de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-        </p>
-        <div class="text-center">
-          <img src="/assets/images/icon_graph.png" alt="Icône graphique"/>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+              <h6 [innerHTML]="illustrations[2].title"></h6>
+            </div>
+            <div class="col-12 col-sm-9 order-1 order-sm-2 text-center text-sm-left flex-center pb-2 pb-sm-0">
+              <h2>3</h2>
+            </div>
+            <div class="col-3 order-2 order-sm-3 p-0">
+              <img src="/assets/images/{{illustrations[2].picture}}" alt="Illustration" />
+            </div>
+            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+              <p>
+                Notre équipe contacte le commerçant afin de l'informer de votre signalement (anonymisé).
+                Le commerçant, s'il le souhaite, peut procéder spontanément aux corrections utiles, sans sanction.
+              </p>
+              <p>
+                Vous avez choisi de transmettre vos coordonnées au commerçant ? Celui-ci pourra vous recontacter et vous tenir au courant de la situation.
+              </p>
+            </div>
+          </div>
         </div>
-        <p>
-          Les signalements deviennent trop nombreux pour une même entreprise ?
-          La situation perdure dans le temps ? Le problème est particulièrement grave ? Une alerte est envoyée aux enquêteurs de la répression des fraudes. Ils pourront, suivant le problème, décider de réaliser un contrôle.
-        </p>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+              <h6 [innerHTML]="illustrations[3].title"></h6>
+            </div>
+            <div class="col-12 col-sm-9 order-1 order-sm-2 text-center text-sm-left flex-center pb-2 pb-sm-0">
+              <h2>4</h2>
+            </div>
+            <div class="col-3 order-2 order-sm-3 p-0">
+              <img src="/assets/images/{{illustrations[3].picture}}" alt="Illustration" />
+            </div>
+            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+              <p>
+                Votre signalement est enregistré dans la base de données de la répression des fraudes (DGCCRF).
+              </p>
+              <p>
+                Les signalements deviennent trop nombreux sur un établissement ? La situation perdure malgré notre action ? Une alerte est envoyée aux enquêteurs qui pourront procéder à un contrôle.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
