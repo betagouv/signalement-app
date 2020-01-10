@@ -1,13 +1,23 @@
 @import "../../../../theme/variables";
 
+
+.card {
+
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+
+  h2 {
+    font-weight: bold;
+  }
+}
+
+
 .team-member {
-  max-width: 270px;
-  min-width: 270px;
-  min-height: 135px;
-  margin: 5px;
-  padding: 1em;
-  font-size: 15px;
-  
+
+  background-color: $lightest-grey;
+  border: $light-grey 1px solid;
+  padding: 5px;
+
   &.old {
    opacity: 0.3; 
   }
