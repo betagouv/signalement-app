@@ -24,10 +24,9 @@ import { MyCompaniesComponent } from './companies/mycompanies.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/page/:pageNumber', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
+  { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
+  { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
   { path: 'compte/mot-de-passe', component: PasswordComponent, canActivate: [AuthGuard] },
   { path: 'compte/activation', component: AccountActivationComponent },

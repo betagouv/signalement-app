@@ -90,9 +90,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.loadingError = false;
     combineLatest([
       this.constantService.getReportStatusList(),
-      this.route.paramMap
+      this.route.paramMap,
+      this.route.queryParamMap
     ]).subscribe(
-      ([statusList, params]) => {
+      ([statusList, params, queryParams]) => {
         const siret = params.get('siret');
 
         if (siret) {
@@ -101,8 +102,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
         this.statusList = statusList;
         this.loadReportExtractUrl();
-        this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
-
+        this.loadReports(Number(queryParams.get('page_number') || 1));
       },
       err => {
         this.loading = false;
@@ -127,7 +127,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   submitFilters() {
-    this.location.go('suivi-des-signalements/page/1');
+    this.location.go('suivi-des-signalements', 'page_number=1');
     this.loadReportExtractUrl();
     this.initPagination();
 
@@ -188,7 +188,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   changePage(pageEvent: {page: number, itemPerPage: number}) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go(`suivi-des-signalements/page/${pageEvent.page}`);
+      this.location.go('suivi-des-signalements', `page_number=${pageEvent.page}`);
     }
   }
 
