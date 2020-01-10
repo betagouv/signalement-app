@@ -10,7 +10,6 @@ import { ReportFilter } from '../../../../model/ReportFilter';
 import { combineLatest, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
-import { StorageService } from '../../../../services/storage.service';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
@@ -67,7 +66,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private accountService: AccountService,
               private eventService: EventService,
               private fileUploaderService: FileUploaderService,
-              private storageService: StorageService,
               private localeService: BsLocaleService,
               private modalService: BsModalService,
               private router: Router,
