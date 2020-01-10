@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { Compiler, FactoryProvider, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, ROUTES, Routes } from '@angular/router';
 import { CategoryComponent, IllustrationCardComponent } from './category/category.component';
 import { InformationComponent } from './information/information.component';
 import { ProblemComponent } from './problem/problem.component';
@@ -14,16 +14,52 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModule, BsDatepickerModule, CarouselModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { Angulartics2Module } from 'angulartics2';
 import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { AutofocusDirective } from '../../directives/auto-focus.directive';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
+import anomalies from '../../../assets/data/anomalies.json';
+import { ReportPaths } from '../../services/report-router.service';
 
 defineLocale('fr', frLocale);
 
-const routes: Routes = [];
+const routes: Routes = [{ path: '', component: CategoryComponent }];
+
+// Workaround to fix an issue with dynamic routes declaration.
+// It seems to be fixed with Ivy  rendering engine (angular 9) https://github.com/angular/angular/issues/22700
+export function AnomalyLazyRoutesFactory(compiler: Compiler): Routes {
+  return anomalies.list
+      .map(anomaly => {
+        if (anomaly.information) {
+          return [
+            { path: `${anomaly.path}`, component: InformationComponent },
+            { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent }
+          ];
+        } else {
+          return [
+            { path: `${anomaly.path}`, component: ProblemComponent },
+            { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent },
+            { path: `${anomaly.path}/${ReportPaths.Problem}`, component: ProblemComponent },
+            { path: `${anomaly.path}/${ReportPaths.Details}`, component: DetailsComponent },
+            { path: `${anomaly.path}/${ReportPaths.Company}`, component: CompanyComponent },
+            { path: `${anomaly.path}/${ReportPaths.Consumer}`, component: ConsumerComponent },
+            { path: `${anomaly.path}/${ReportPaths.Confirmation}`, component: ConfirmationComponent },
+            { path: `${anomaly.path}/${ReportPaths.Acknowledgment}`, component: AcknowledgmentComponent }
+          ];
+        }
+      })
+      .reduce((routes1, routes2) => [...routes1, ...routes2], []);
+}
+
+export const AnomalyLazyRoutesFactoryProvider: FactoryProvider = <any>{
+  provide: ROUTES,
+  multi: true,
+  deps: [Compiler],
+  useFactory: AnomalyLazyRoutesFactory,
+  useValue: [],
+};
+delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
 
 @NgModule({
   declarations: [
@@ -59,7 +95,6 @@ const routes: Routes = [];
     AlertModule.forRoot(),
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     Ng2CompleterModule,
-    Angulartics2Module.forRoot(),
     RouterModule.forChild(routes),
     CarouselModule,
     ComponentsModule,
@@ -68,6 +103,8 @@ const routes: Routes = [];
   exports: [
     RouterModule,
     AutofocusDirective,
-  ]
+  ],
+  providers: [AnomalyLazyRoutesFactoryProvider]
 })
 export class ReportModule { }
+
