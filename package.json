@@ -37,7 +37,7 @@
     "@nguniversal/express-engine": "^8.1.1",
     "@nguniversal/module-map-ngfactory-loader": "^8.1.1",
     "@ngx-pwa/local-storage": "^6.2.5",
-    "angulartics2": "8.1.0",
+    "angulartics2": "^8.3.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.10",
     "cors": "~2.8.5",
