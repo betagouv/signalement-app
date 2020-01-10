@@ -25,7 +25,6 @@ import { AccountService } from '../../../../services/account.service';
 import { HttpResponse } from '@angular/common/http';
 import { EventService } from '../../../../services/event.service';
 
-const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
 @Component({
@@ -89,30 +88,18 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
-    if (this.user && this.user.role === Roles.Pro) {
-      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
-    }
-
     this.loading = true;
     this.loadingError = false;
     combineLatest([
-      this.storageService.getLocalStorageItem(ReportFilterStorageKey),
       this.constantService.getReportStatusList(),
       this.route.paramMap
     ]).subscribe(
-      ([reportFilter, statusList, params]) => {
-
-
-        if (reportFilter) {
-          this.reportFilter = reportFilter;
-        }
+      ([statusList, params]) => {
         const siret = params.get('siret');
 
         if (siret) {
-          this.reportFilter = { ...this.reportFilter, siret};
+          this.reportFilter = {siret};
         }
-
-        this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
 
         this.statusList = statusList;
         this.loadReportExtractUrl();
@@ -143,7 +130,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
-    this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
     this.loadReportExtractUrl();
     this.initPagination();
 
@@ -158,14 +144,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
   loadReports(page: number) {
     this.loading = true;
     this.loadingError = false;
-    this.storageService.getLocalStorageItem(ReportFilterStorageKey).pipe(
-      switchMap(reportFilter => {
-        return this.reportService.getReports(
-          (page - 1) * this.itemsPerPage,
-          this.itemsPerPage,
-          Object.assign(new ReportFilter(), reportFilter)
-        );
-      })
+    this.reportService.getReports(
+      (page - 1) * this.itemsPerPage,
+      this.itemsPerPage,
+      Object.assign(new ReportFilter(), this.reportFilter)
     ).subscribe(
       result => {
         this.loading = false;
