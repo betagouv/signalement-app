@@ -3,7 +3,6 @@ import { AppModule } from './app.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Angulartics2Module } from 'angulartics2';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -13,7 +12,6 @@ import { Angulartics2Module } from 'angulartics2';
     BrowserTransferStateModule,
     BrowserAnimationsModule,
     AppModule,
-    Angulartics2Module.forRoot(),
   ],
 })
 export class AppBrowserModule {
