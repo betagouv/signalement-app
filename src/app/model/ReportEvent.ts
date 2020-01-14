@@ -5,16 +5,31 @@ export class ReportEvent {
   userId: string;
   eventType: string;
   action: ReportEventAction;
-  resultAction: boolean;
-  detail: string;
+  details: {description: string} | ReportResponse;
 }
 
 export class ReportEventAction {
-  name: string;
-  withResult: boolean;
+  value: string;
 }
 
-export const ProAnswerReportEventAction = Object.assign(new ReportEventAction(), {
-  name: 'Réponse du professionnel au signalement',
-  withResult: true
-});
+export enum EventActionValues {
+  FirstVisit = 'Envoi du signalement',
+  ReportResponse = 'Réponse du professionnel au signalement',
+  PostalSend = 'Envoi d\'un courrier',
+  EditConsumer = 'Modification du consommateur',
+  EditCompany = 'Modification du commerçant'
+}
+
+export class ReportResponse {
+  responseType: ReportResponseTypes;
+  consumerDetails: string;
+  dgccrfDetails: string;
+  fileIds: string[];
+}
+
+
+export enum ReportResponseTypes {
+  Accepted = 'ACCEPTED',
+  Rejected = 'REJECTED',
+  NotConcerned = 'NOT_CONCERNED'
+}

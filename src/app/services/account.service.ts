@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { AuthenticationService } from './authentication.service';
 import { map, mergeMap } from 'rxjs/operators';
-import { User } from '../model/AuthUser';
+import { TokenInfo, User } from '../model/AuthUser';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,15 @@ export class AccountService {
     );
   }
 
-  activateAccount(user: User) {
+  activateAccount(tokenInfo: TokenInfo, user: User) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.put(
+        return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'activation']),
-          user,
+          {
+            tokenInfo: tokenInfo,
+            draftUser: user
+          },
           headers
         );
       })
@@ -45,6 +48,19 @@ export class AccountService {
       map(param => {
         const url = this.serviceUtils.getUrl(Api.Report, ['api', 'account', siret, 'document', 'activation']);
         return `${url}?${param}`;
+      })
+    );
+  }
+
+  downloadActivationDocuments(reportuuids: Set<string>) {
+
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'document', 'activation']),
+          { reportIds : Array.from(reportuuids) },
+          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+        );
       })
     );
   }

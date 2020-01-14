@@ -1,30 +1,123 @@
-<div class="banner text-center section section-primary" role="banner">
-    <div class="container">
-      <h1 class="rounded">
-        Signaler un problème à la répression&nbsp;des&nbsp;fraudes<br> en toute transparence avec le commerçant
-      </h1>
-      <h4>
-        en <strong class="text-uppercase">Centre-Val de Loire</strong>, <strong class="text-uppercase">Auvergne-Rhône-Alpes</strong> et&nbsp;<strong class="text-uppercase">Occitanie</strong>
-      </h4>
-      <img src="/assets/images/ARA-CVL-OCC.svg" style="width: 145px" alt="Carte de la France" />
-    </div>
+<alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
+  <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</h4>
+  <button type="submit" class="button-outline warning" (click)="removeStoredReport()" appAutofocus="true">Non</button>
+  <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
+</alert>
+
+<div class="banner text-center section section-primary d-none d-lg-block" role="region">
+  <div class="container text-center">
+    <img src="/assets/images/icons-baseline.svg" class="pb-3 d-none d-lg-inline-block" alt="Icônes signaler" />
+    <h2>
+      Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
+    </h2>
   </div>
+</div>
 
-  <main role="main">
+<main role="main">
 
-    <alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
-      <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer au commerçant ?</h4>
-      <button type="submit" class="button-outline warning" (click)="removeStoredReport()">Non</button>
-      <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
-    </alert>
+  <section class="section section-white d-none d-lg-block">
+    <div class="container">
+      <h2 class="text-center mb-4">Comment ça marche ?</h2>
+      <div class="row" (click)="scrollToElement(categoryList)">
+        <div class="col-12 col-sm-3">
+          <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
+        </div>
+        <div class="col-12 col-sm-3">
+          <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
+        </div>
+        <div class="col-12 col-sm-3">
+          <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
+        </div>
+        <div class="col-12 col-sm-3">
+          <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
+        </div>
+      </div>
+      <p class="indication">
+        Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
+        l’<u>article L. 112-8 du code des relations entre le public et l’administration</u>.
+        <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
+      </p>
+      <div class="text-center">
+        <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+        </button>
+      </div>
+    </div>
+  </section>
 
-    <section class="section section-lightest-grey position-relative">
+  <section class="section section-primary">
 
-      <div class="container mt-n4">
-        <h3 class="text-center sous-titre">Quel est le problème ?</h3>
-        <div class="row pb-4">
+    <div class="text-center d-lg-none">
+      <h2 class="tmb-4">Signaler un problème à la répression <br/>des fraudes en toute transparence <br />avec l'entreprise !</h2>
+
+      <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
+          </div>
+          <div class="carousel-item">
+            <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
+          </div>
+          <div class="carousel-item">
+            <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
+          </div>
+          <div class="carousel-item">
+            <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
+          </div>
+        </div>
+        <ol class="carousel-indicators">
+          <li data-target="#carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel" data-slide-to="1"></li>
+          <li data-target="#carousel" data-slide-to="2"></li>
+          <li data-target="#carousel" data-slide-to="3"></li>
+        </ol>
+      </div>
+
+      <div id="carousel-md" class="carousel slide d-none d-md-block" data-ride="carousel" data-interval="30000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
+              </div>
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
+              </div>
+              <div class="col-6">
+                <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-md" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-md" data-slide-to="1"></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="text-center mt-4 mb-4">
+        <button type="button" class="btn btn-warning d-lg-none" (click)="scrollToElement(categoryList)">
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+        </button>
+      </div>
+
+      <div #categoryList>
+
+        <h2 class="text-center mb-0 mb-lg-4">Quel problème avez-vous rencontré&#160;?</h2>
+
+        <div class="row">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
-            <div class="category pointer" (click)="selectAnomaly(category)">
+            <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
                 <div class="col-12 col-lg-3 mb-2 text-center">
                   <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
@@ -36,55 +129,31 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <h3 class="pointer other-problems" (click)="displaySecondaryCategories()" *ngIf="!showSecondaryCategories; else secondaryCategories;">
-          Autres problèmes&nbsp;?
-        </h3>
-        <ng-template #secondaryCategories>
-          <h3 class="other-problems">
-            Autres problèmes&nbsp;?
-          </h3>
-          <ul>
-            <li *ngFor="let category of secondaryCategoriesOrderByRank()" class="pointer" (click)="selectAnomaly(category)">
-              <h5 class="other-problems">{{category.category}}</h5>
-            </li>
-          </ul>
-        </ng-template>
-      </div>
-    </section>
-
-    <section class="section section-lighter-grey">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
-            <div class="icon">
-              <img src="/assets/images/icon_fast.png" alt="Icône magasin"/>
+          <ng-container *ngIf="showSecondaryCategories">
+            <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
+              <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
+                <div class="row">
+                  <div class="col-12 col-lg-3 mb-2 text-center">
+                    <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
+                  </div>
+                  <div class="col-12 col-lg-9 pl-lg-0">
+                    <h5 class="mb-0">{{category.category}}</h5>
+                    <span class="note">{{category.description}}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p class="text-center"><b>Rapide</b></p>
-            <p>
-              Des questions simples pour vous guider afin de signaler rapidement votre problème et connaître vos droits.
-            </p>
-          </div>
-          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
-            <div class="icon">
-              <img src="/assets/images/icon_approbation.png" alt="Icône workflow"/>
-            </div>
-            <p class="text-center"><b>Transparent</b></p>
-            <p>
-              Le commerçant, s’il le souhaite, a accès aux signalements. Cela lui permet de procéder spontanément aux corrections utiles, sans sanction.
-            </p>
-          </div>
-          <div class="col-12 col-sm-4 pl-sm-4 pr-sm-4">
-            <div class="icon">
-              <img src="/assets/images/icon_collaboration.png" alt="Icône alarme"/>
-            </div>
-            <p class="text-center"><b>Participatif</b></p>
-            <p>
-              Vous êtes plusieurs à signaler les mêmes anomalies et la situation perdure ? Les enquêteurs de la répression des fraudes (<abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>) seront avertis afin d’intervenir.
-            </p>
-          </div>
+          </ng-container>
         </div>
       </div>
-    </section>
-  </main>
+
+      <ng-container *ngIf="!showSecondaryCategories">
+        <div id="all-categories-link" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
+          Voir toutes les catégories
+        </div>
+      </ng-container>
+
+    </div>
+  </section>
+</main>

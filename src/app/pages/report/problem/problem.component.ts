@@ -42,7 +42,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe),
       switchMap(
         url => {
-          const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path)
+          const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
           if (anomaly && !url[1]) {
             this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
             this.report = new Report();
@@ -51,7 +51,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
             this.titleService.setTitle(`${anomaly.category} - SignalConso`);
             this.meta.updateTag({ name: 'description', content: anomaly.description });
           }
-          return this.reportStorageService.reportInProgess;
+          return this.reportStorageService.retrieveReportInProgressFromStorage();
         }
       )
     ).subscribe(report => {

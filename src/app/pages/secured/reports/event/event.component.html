@@ -3,25 +3,15 @@
     <div class="form__group mt-4">
       <div class="row">
         <div class="col-12">
-          <label [class]="hasError(actionCtrl) ? 'error' : ''">
+          <label for="actionSelect" [class]="hasError(actionCtrl) ? 'error' : ''">
             Action <span class="error">*</span>
           </label>
-          <select [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''" (change)="selectAction()">
-            <optgroup label="Actions pros" *appRole="[roles.Admin]">
-              <option *ngFor="let action of actionPros" [ngValue]="action">
-                {{action.name}}
+          <select id="actionSelect" [formControl]="actionCtrl" [class]="actionCtrl.value ? 'selected' : ''">
+            <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+              <option *ngFor="let action of actions" [ngValue]="action">
+                {{action.value}}
               </option>
-            </optgroup>
-            <optgroup label="Actions consos" *appRole="[roles.Admin]">
-              <option *ngFor="let action of actionConsos" [ngValue]="action">
-                {{action.name}}
-              </option>
-            </optgroup>
-            <optgroup label="Actions DGCCRF" *appRole="[roles.DGCCRF]">
-              <option *ngFor="let action of actionAgents" [ngValue]="action">
-                {{action.name}}
-              </option>
-            </optgroup>
+            </ng-container>
           </select>
         </div>
       </div>
@@ -36,22 +26,10 @@
     <div class="form__group mt-4">
       <div class="row">
         <div class="col-12">
-          <label [class]="hasError(detailCtrl) ? 'error' : ''">
+          <label for="detail" [class]="hasError(detailCtrl) ? 'error' : ''">
             Détail
           </label>
-          <textarea [formControl]="detailCtrl"></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="form__group mt-4" *ngIf="eventForm.contains('resultAction')">
-      <div class="row">
-        <div class="col-2 col-sm-1 text-right pr-1">
-          <input type="checkbox" [formControl]="resultActionCtrl" id="resultAction"/>
-        </div>
-        <div class="col-10 col-sm-11 pl-1">
-          <label class="d-block mb-0 pointer" for="resultAction">
-            L'action a eu une issue positive
-          </label>
+          <textarea id="detail" [formControl]="detailCtrl"></textarea>
         </div>
       </div>
     </div>

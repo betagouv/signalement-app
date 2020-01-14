@@ -21,7 +21,8 @@ describe('ForgetPasswordComponent', () => {
         RouterTestingModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot()
-      ]
+      ],
+      providers: []
     })
       .compileComponents();
   }));

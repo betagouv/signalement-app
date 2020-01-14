@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import keywords from '../../assets/data/keywords.json';
-import { deserialize } from 'json-typescript-mapper';
-import { Keyword, KeywordList } from '../model/Keyword';
+import { Keyword } from '../model/Keyword';
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +16,29 @@ export class KeywordService {
 
   getKeywords() {
     if (!this.keywords) {
-      this.keywords = deserialize(KeywordList, keywords).list;
+      this.keywords = keywords.list;
     }
     return this.keywords;
   }
 
   // injection de dépendances (pour les tests uniquement)
   setKeywords(words) {
-    this.keywords = deserialize(KeywordList, words).list;
+    this.keywords = words.list;
   }
 
-  search(text) {
+  search(text: string, activeCategoryId: string) {
 
     if (text) {
-      for (let i = 0; i < this.keywords.length; i++) {
-        const keywordsCategory = this.keywords[i];
-        const found = keywordsCategory.words.map(word => ({
-          word,
-          result: new RegExp(word).exec(text)
-        })).filter(elt => elt.result && elt.result.length > 0)
+      const keywordsToSearch = this.keywords
+        .filter(keyword => keyword.filteredCategories && keyword.filteredCategories.includes(activeCategoryId));
+      for (let i = 0; i < keywordsToSearch.length; i++) {
+        const keyword = this.keywords[i];
+        const found = keyword.words
+          .map(word => ({
+            word,
+            result: new RegExp(word).exec(text)
+          }))
+          .filter(elt => elt.result && elt.result.length > 0)
           .map(elt => ({
             expression: elt.result[0],
             index: elt.result.index
@@ -43,7 +46,7 @@ export class KeywordService {
 
         if (found && found.length > 0) {
           return {
-            categoryId: keywordsCategory.categoryId,
+            keyword ,
             found
           };
         }

@@ -1,0 +1,50 @@
+<div class="overflow-container">
+  <div class="banner text-center section section-primary" role="region">
+    <div class="container">
+      <h1 class="text-center">
+        Professionnels triés par nombre de signalement
+      </h1>
+    </div>
+  </div>
+
+  <pagination *appRole="[roles.Admin, roles.DGCCRF]"
+              [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+              [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class=" mt-2 justify-content-center">
+  </pagination>
+
+  <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Dep</th>
+          <th>Commune</th>
+          <th>Siret</th>
+          <th>Entreprise</th>
+          <th># signalements</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!loading && !lines.length">
+          <td colspan="8">
+            <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
+            <span *ngIf="!loadingError">Aucun signalement trouvé</span>
+          </td>
+        </tr>
+        <tr *ngFor="let line of lines" class="pointer" [routerLink]="['/suivi-des-signalements', 'siret', line.companySiret]">
+          <td>{{line.companyPostalCode | slice : 0 : 2}}</td>
+          <td>{{line.companyPostalCode}}</td>
+          <td>{{line.companySiret}}</td>
+          <td>{{line.companyName}}</td>
+          <td>{{line.count}}</td>
+        </tr>
+      </tbody>
+      <ngx-loading [show]="loading"></ngx-loading>
+    </table>
+  </div>
+
+  <pagination *appRole="[roles.Admin, roles.DGCCRF]" [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+              [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+  </pagination>
+</div>
+
+

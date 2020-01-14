@@ -1,19 +1,11 @@
 @import "../../../../theme/variables";
 
-h4 {
-  margin-bottom: 20px;
-}
-
 hr {
   margin-top: 20px;
 }
 
-.blue {
-  color: $blue;
-}
-
-ul {
-  li + li {
-    padding-top: 0;
-  }
+.btn {
+  padding: 8px 14px;;
+  font-size: inherit;
+  line-height: 1.5;
 }

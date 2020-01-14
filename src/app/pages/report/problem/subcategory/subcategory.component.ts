@@ -1,12 +1,11 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Inject,
   Input,
   OnChanges,
-  OnInit,
   Output,
   PLATFORM_ID,
   Renderer2,
@@ -15,7 +14,6 @@ import {
 import { Subcategory } from '../../../../model/Anomaly';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 
 declare var jQuery: any;
 
@@ -23,26 +21,15 @@ declare var jQuery: any;
   selector: 'app-subcategory',
   templateUrl: './subcategory.component.html',
   styleUrls: ['./subcategory.component.scss'],
-  animations: [
-    trigger('scrollAnimation', [
-      state('show', style({
-        opacity: 1
-      })),
-      state('hide',   style({
-        opacity: 0,
-      })),
-      transition('show => hide', animate('700ms ease-out')),
-      transition('hide => show', animate('700ms ease-in'))
-    ])
-  ]
 })
-export class SubcategoryComponent implements OnInit, OnChanges {
+export class SubcategoryComponent implements OnChanges, AfterViewInit {
 
   @Input() subcategories: Subcategory[];
   @Input() subcategoriesSelected: Subcategory[];
   @Input() subcategoriesTitle: string;
   @Input() subcategoryDescription: string;
   @Input() subcategoryName: string;
+  @Input() level: number;
 
   subcategoryForm: FormGroup;
   subcategoryTitleCtrl: FormControl;
@@ -51,7 +38,6 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   @Output() select = new EventEmitter<Subcategory[]>();
 
   showErrors: boolean;
-  scrollNotificationState: string;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -59,31 +45,21 @@ export class SubcategoryComponent implements OnInit, OnChanges {
               public elementRef: ElementRef) { }
 
 
-  ngOnInit() {
-    this.scrollNotificationState = 'hide';
+  ngAfterViewInit() {
     setTimeout(() => {
-      this.checkScrollNotification();
-    }, 2000);
+      this.scrollToElementIfHidden();
+    }, 500);
   }
 
-  @HostListener('window:scroll', ['$event'])
-  checkScrollNotification() {
+  scrollToElementIfHidden() {
     if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
       if (rect.top > 1 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
-        this.scrollNotificationState = 'show';
-      } else {
-        this.scrollNotificationState = 'hide';
+        jQuery('html, body').animate({
+          scrollTop: this.elementRef.nativeElement.offsetTop
+        }, 1000);
       }
     }
-  }
-
-  scrollToElement() {
-    jQuery('html, body').animate({
-      scrollTop: this.elementRef.nativeElement.offsetTop
-    }, 1000);
-
-    this.scrollNotificationState = 'hide';
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -106,8 +82,10 @@ export class SubcategoryComponent implements OnInit, OnChanges {
   }
 
   selectSubcategory(subcategory: Subcategory) {
+
     this.subcategorySelected = subcategory;
     this.subcategoriesSelected = [];
+
   }
 
   submitSubcategoryForm() {
@@ -128,7 +106,7 @@ export class SubcategoryComponent implements OnInit, OnChanges {
 
   onSelectSubSubcategories(subSubcategories: Subcategory[]) {
     this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value), ...subSubcategories]);
-  }
 
+  }
 
 }

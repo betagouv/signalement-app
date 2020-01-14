@@ -9,8 +9,9 @@ import { Consumer } from '../model/Consumer';
 import { Company } from '../model/Company';
 import { Subcategory } from '../model/Anomaly';
 import { UploadedFile } from '../model/UploadedFile';
-import { Department, Region, ReportFilter } from '../model/ReportFilter';
+import { ReportFilter } from '../model/ReportFilter';
 import { of } from 'rxjs';
+import { Department, Region } from '../model/Region';
 
 describe('ReportService', () => {
 
@@ -108,7 +109,6 @@ describe('ReportService', () => {
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['lastName']).toBe('lastName');
       expect(reportRequest.request.body['email']).toBe('email@mail.fr');
-      expect(reportRequest.request.body['files']).toEqual([anomalyFile]);
       expect(reportRequest.request.body['details']).toEqual([{label: 'mon label :', value: 'ma value'}]);
     });
 
@@ -144,7 +144,7 @@ describe('ReportService', () => {
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
       const reportFilter = new ReportFilter();
-      reportFilter.area = regionFixture;
+      reportFilter.departments = regionFixture.departments;
       reportFilter.period = [new Date(), new Date()];
       const offset = 0;
       const limit = 10;
@@ -171,7 +171,7 @@ describe('ReportService', () => {
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
       const reportFilter = new ReportFilter();
-      reportFilter.area = dept2Fixture;
+      reportFilter.departments = [dept2Fixture];
       reportFilter.period = [new Date(), new Date()];
       const offset = 0;
       const limit = 10;

@@ -1,0 +1,118 @@
+- title: Agence immobilière
+  example: 'Exemples : location, vente, gestion locative, mandataire indépendant, marchand de liste, chasseur d''appartements'
+  subcategories:
+    - title: Je cherche une location ou un bien à acheter
+      example: 'Exemples : marchand de liste, annonce immobilière, dossier de location'
+      subcategories:
+        - title: Je cherche une location
+          subcategories:
+            - title: Diffusion d'annonces de location pour des biens non disponibles (en vitrine ou sur internet)
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Honoraires de location non affichés ou différents de ceux affichés (en vitrine ou sur internet)
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Annonces de location incomplètes ou mensongères (en vitrine ou sur internet)
+              example: 'Exemple : loyer annoncé faux, descriptif de l''appartement mensonger'
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Demande d'un document interdit pour le dossier de location
+              example: 'Exemple : relevé bancaire, photocopie de la carte vitale'
+            - title: Autres
+              consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Je cherche à acheter
+          subcategories:
+            - title: Diffusion d'annonces de biens non disponibles à la vente (en vitrine ou sur internet)
+              example: 'Exemple : la maison affiché en vitrine est en fait déjà vendue'
+            - title: Honoraires de vente non affichés ou différents de ceux affichés (en vitrine ou sur internet)
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Annonces de vente incomplètes ou mensongères (en vitrine ou sur internet)
+              example: 'Exemple : absence de DPE, descriptif d''un appartement mensonger'
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Problème avec une offre d'achat ou un compromis de vente
+              example: 'Exemple : refus de mon offre au prix sans justification'
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Cas particulier d'un chasseur d'appartements
+              example: 'Exemple : frais d''étude alors que c''est interdit'
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Cas particulier d'un mandataire indépendant (agent commercial)
+              consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: J'ai un problème en tant que locataire
+      example: 'Exemples : état des lieux, charges, loyer'
+      subcategories:
+        - title: Charges / honoraires
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Loyer
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Etat des lieux / caution
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Bail / contrat de location
+          example: 'Exemple : clause abusive dans le contrat'
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Autres
+          consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: J'ai un problème en tant que propriétaire
+      example: 'Exemples : gestion locative, mise en vente'
+      subcategories:
+        - title: Gestion locative
+          subcategories:
+            - title: Contrat et mandat
+              example: 'Exemple : clause abusive dans le contrat'
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Honoraires
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Assurance loyer impayé
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Autres
+              consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Vente de mon bien
+          subcategories:
+            - title: Mise en vente sans mandat
+              example: 'Exemple : une agence a mis mon bien en vente sans mandat signé '
+            - title: Honoraires de vente
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Discours trompeur
+              example: 'Exemple : L''agent immobilier m''a promis de vendre sous 7 jours'
+              consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Autres
+          consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Vente / location directement entre particuliers
+  subcategories:
+    - title: Problème avec mon locataire / propriétaire
+      information:
+        title: Votre problème ne rentre pas dans le cadre de SignalConso.
+        content: La répression des fraudes n'a pas le pouvoir d'agir pour les conflits entre deux particuliers. <br> Vous pouvez passer par un médiateur ou un conciliateur de justice.
+        actions:
+          - question: Le médiateur civil&#160;
+            answer: Le médiateur civil est une personne indépendante chargée de trouver une solution amiable. <br> Le recours à un médiateur est payant. <br> Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1822"_blank" />ici</a>
+          - question: Le conciliateur de justice&#160;
+            answer: Le conciliateur de justice intervient pour les conflits entre propriétaires et locataires, ou locataires entre eux. <br> Le recours à un conciliateur de justice est gratuit. <br>Pour en savoir plus, cliquez <a href="https://www.service-public.fr/particuliers/vosdroits/F1736"_blank" />ici</a>
+    - title: Problème avec un site de mise en relation entre particuliers
+- title: Syndic de copropriété
+  subcategories:
+    - title: Facturation
+      example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévus'
+      subcategoriesTitle: 'Le détail des frais est marqué dans le contrat de syndic. Avant de faire un signalement, veuiller vérifier ce contrat au chapitre 7. Si vous ne l''avez pas, demandez le à votre syndic. Ce document est obligatoire et gratuit.'
+      subcategories:
+        - title: J'ai pris connaissance de mon contrat de syndic.
+          subcategories:
+            - title: Les frais sont plus chers que dans le contrat
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Les frais ne correspondent à aucune des prestations dites "prestations particulières".
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Les frais sont normalement déjà inclus dans le socle général (forfait)
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Autres
+              consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Contrat de syndic
+      example: 'Exemple : clause abusive dans le contrat'
+    - title: Documents à disposition des copropriétaires
+      example: 'Exemple : pas de fiche synthétique de copropriété'
+    - title: Gestion des travaux par le syndic
+      example: 'Exemples: devis, choix des prestataires'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Absence de réponse du syndic
+      example: 'Exemple : aucune réponse malgré des relances'
+    - title: Autres
+      consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Notaire
+  consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Autres
+  consumerActions: !!import/single ../common/actions/defaut.yml

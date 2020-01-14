@@ -22,7 +22,8 @@ describe('LoginComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         Angulartics2RouterlessModule.forRoot()
-      ]
+      ],
+      providers: []
     })
     .compileComponents();
   }));

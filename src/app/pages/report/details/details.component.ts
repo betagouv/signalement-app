@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DetailInputValue, PrecisionKeyword, Report, Step } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
@@ -7,14 +7,14 @@ import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { DescriptionLabel, DetailInput, InputType, ReportingDateLabel, ReportingTimeslotLabel } from '../../../model/Anomaly';
-import { UploadedFile } from '../../../model/UploadedFile';
+import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isDefined } from '@angular/compiler/src/util';
-import Utils from '../../../utils';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Keyword } from '../../../model/Keyword';
 
 export const fileSizeMax = 5000000;
 
@@ -52,16 +52,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
   detailsForm: FormGroup;
   descriptionCtrl: FormControl;
 
-  @ViewChild('fileInput') fileInput;
-
   plageHoraireList: number[];
   uploadedFiles: UploadedFile[];
 
   showErrors: boolean;
-  tooLargeFilename: string;
-  keywordsDetected: Keyword;
+  keywordDetected: Keyword;
 
   maxDate: Date;
+  fileOrigins = FileOrigin;
 
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
@@ -75,7 +73,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Details;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => {
         if (report) {
@@ -93,6 +91,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.searchKeywords();
 
     this.maxDate = new Date();
+
   }
 
   ngOnDestroy() {
@@ -289,35 +288,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  bringFileSelector() {
-    this.fileInput.nativeElement.click();
-  }
-
-  selectFile() {
-    this.tooLargeFilename = undefined;
-    if (this.fileInput.nativeElement.files[0]) {
-      if (this.fileInput.nativeElement.files[0].size > fileSizeMax) {
-        this.tooLargeFilename = this.fileInput.nativeElement.files[0].name;
-      } else {
-        const fileToUpload = new UploadedFile();
-        fileToUpload.filename = this.fileInput.nativeElement.files[0].name;
-        fileToUpload.loading = true;
-        this.uploadedFiles.push(fileToUpload);
-        this.fileUploaderService.uploadFile(this.fileInput.nativeElement.files[0]).subscribe(uploadedFile => {
-          fileToUpload.loading = false;
-          fileToUpload.id = uploadedFile.id;
-          fileToUpload.creationDate = uploadedFile.creationDate;
-        }, error => {
-          fileToUpload.loading = false;
-        });
-      }
-    }
-  }
-
-  getErrorFilename(filename: string) {
-    return `Echec du téléchargement (${Utils.textOverflowMiddleCropping(filename, 10)})`.concat();
-  }
-
   isUploadingFile() {
     return this.uploadedFiles.find(file => file.loading);
   }
@@ -330,52 +300,36 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeUploadedFile(uploadedFile: UploadedFile) {
-    this.uploadedFiles.splice(
-      this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
-      1
-    );
-    if (uploadedFile.id) {
-      this.fileUploaderService.deleteFile(uploadedFile).subscribe();
-    }
-  }
-
-  onFileUploaded(uploadedFile: UploadedFile) {
-    this.uploadedFiles.push(uploadedFile);
-  }
-
-  getFileDownloadUrl(uploadedFile: UploadedFile) {
-    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
-  }
-
   searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
-    if (formControl) {
-      const res = this.keywordService.search(formControl.value);
+    if (formControl && this.report.category) {
+      const res = this.keywordService.search(formControl.value, this.anomalyService.getAnomalyByCategory(this.report.category).categoryId);
       if (!res) {
-        this.keywordsDetected = null;
+        this.keywordDetected = null;
       } else {
-        const anomaly = this.anomalyService.getAnomalyByCategoryId(res.categoryId);
+        const anomaly = this.anomalyService.getAnomalyByCategoryId(res.keyword.redirectCategory);
         if (anomaly) {
           this.analyticsService.trackEvent(
             EventCategories.report,
             ReportEventActions.keywordsDetection,
             JSON.stringify(res.found.map(elt => elt.expression))
           );
-          this.keywordsDetected = {
-            category: anomaly.category,
-            message: anomaly.information ? anomaly.information.title : ''
-          };
+          this.keywordDetected = res.keyword;
         } else {
-          this.keywordsDetected = null;
+          this.keywordDetected = null;
         }
       }
     }
   }
 
   goToInformationPage() {
-    // modification des éléments du report et du step pour que le router affiche la page d'info avec le contexte
+    this.analyticsService.trackEvent(
+      EventCategories.report,
+      ReportEventActions.informationFromKeywordsDetection,
+      this.keywordDetected.redirectCategory
+    );
+
     this.step = Step.Category;
-    this.report.category = this.keywordsDetected.category;
+    this.report.category = this.anomalyService.getAnomalyByCategoryId(this.keywordDetected.redirectCategory).category;
     this.report.subcategories = null;
 
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
@@ -447,11 +401,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-}
+  setEmployeeConsumerValue(value: boolean) {
+    this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
+    this.report.employeeConsumer = value;
+  }
 
-interface Keyword {
-  readonly category: string;
-  readonly message: string;
 }
 
 export function ValidateCheckboxControl(formArray: FormArray) {

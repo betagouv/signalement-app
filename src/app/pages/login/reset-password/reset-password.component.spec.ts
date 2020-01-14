@@ -22,7 +22,8 @@ describe('ResetPasswordComponent', () => {
         RouterTestingModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot()
-      ]
+      ],
+      providers: []
     })
       .compileComponents();
   }));

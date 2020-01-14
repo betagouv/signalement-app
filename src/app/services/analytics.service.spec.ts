@@ -7,7 +7,8 @@ describe('AnalyticsService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
       Angulartics2RouterlessModule.forRoot(),
-    ]
+    ],
+    providers: []
   }));
 
   it('should be created', () => {

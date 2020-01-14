@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pro',
@@ -10,13 +10,19 @@ import { Router } from '@angular/router';
 })
 export class ProComponent implements OnInit {
 
+  fragment: string;
+
   constructor(private titleService: Title,
               private meta: Meta,
-              private router: Router) { }
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.pro.title);
     this.meta.updateTag({ name: 'description', content: pages.pro.description });
+
+    this.activatedRoute.fragment.subscribe(fragment => {
+      this.fragment = fragment;
+    });
   }
 
 }

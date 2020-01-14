@@ -28,6 +28,4 @@ export class CguComponent implements OnInit {
     });
   }
 
-
-
 }

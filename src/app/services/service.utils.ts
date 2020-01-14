@@ -4,6 +4,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 import { map } from 'rxjs/operators';
 
 export const AuthUserStorageKey = 'AuthUserSignalConso';
+export const TokenInfoStorageKey = 'TokenInfoSignalConso';
 
 @Injectable({
   providedIn: 'root'

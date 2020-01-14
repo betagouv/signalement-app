@@ -15,6 +15,7 @@ describe('AcknoledgmentComponent', () => {
         HttpClientModule,
         RouterTestingModule,
       ],
+      providers: []
     })
     .compileComponents();
   }));

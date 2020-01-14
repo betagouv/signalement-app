@@ -16,13 +16,21 @@ export class AuthUser {
   user: User;
 }
 
+export class TokenInfo {
+  token: string;
+  companySiret: string;
+  timestamp: Date;
+  emailedTo?: string;
+}
+
 export enum Permissions {
   listReports = 'listReports',
   updateReport = 'updateReport',
   deleteReport = 'deleteReport',
   deleteFile = 'deleteFile',
   createEvent = 'createEvent',
-  editDocuments = 'editDocuments'
+  editDocuments = 'editDocuments',
+  subscribeReports = 'subscribeReports'
 }
 
 export enum Roles {

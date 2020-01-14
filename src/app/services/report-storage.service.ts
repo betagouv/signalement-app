@@ -15,10 +15,9 @@ export class ReportStorageService {
   reportInProgess = this.reportInProgessSource.asObservable();
 
   constructor(private localStorage: LocalStorage) {
-    this.retrieveReportInProgressFromStorage();
   }
 
-  private retrieveReportInProgressFromStorage() {
+  retrieveReportInProgressFromStorage() {
     this.localStorage.getItem(ReportStorageKey).subscribe((report: Report) => {
       if (report) {
         report.retrievedFromStorage = true;
@@ -32,6 +31,7 @@ export class ReportStorageService {
         this.reportInProgessSource.next(report);
       }
     });
+    return this.reportInProgess;
   }
 
   removeReportInProgress() {

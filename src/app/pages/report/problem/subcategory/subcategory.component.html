@@ -6,24 +6,29 @@
     </div>
   </div>
 
-  <h4 class="text-center mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
+  <h4 tabindex="-1" class="text-center mb-4 font-weight-bold problemTitle" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h4>
 
-  <form [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
-    <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories">
+  <form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+    <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
       <div class="row pb-2 pt-2">
         <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
-          <input type="radio" [formControlName]="subcategoryName" [value]="subcategory.title" id="radio-{{subcategory.title}}" (click)="selectSubcategory(subcategory)"/>
+          <input type="radio"
+                 [formControlName]="subcategoryName"
+                 [value]="subcategory.title"
+                 id="radio-{{level}}-{{subcategory.title}}"
+                 (click)="selectSubcategory(subcategory)"
+                 [appAutofocus]="level === 1 && subcategoryIndex === 0"/>
         </div>
         <div class="col-10 col-sm-11 pl-1">
-          <label class="d-block mb-0 pointer" for="radio-{{subcategory.title}}">{{subcategory.title}}</label>
+          <label class="d-block mb-0 pointer" for="radio-{{level}}-{{subcategory.title}}">{{subcategory.title}}</label>
           <div class="note" [innerHTML]="subcategory.example" *ngIf="subcategory.example"></div>
         </div>
       </div>
     </div>
     <hr *ngIf="subcategoryForm.valid"/>
     <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory() && subcategoryForm.valid">
-      <i class="material-icons md-24" alt="Icône du bouton suivant" title="bouton suivant">play_arrow</i>
-      Détailler le problème
+      <i class="material-icons md-24" aria-hidden="true">play_arrow</i>
+      Étape suivante : détailler le problème
     </button>
   </form>
 </div>
@@ -33,9 +38,6 @@
                  [subcategoryName]="subcategorySelected.title"
                  [subcategoryDescription]="subcategorySelected.description"
                  [subcategoriesSelected]="subcategoriesSelected"
+                 [level]="level + 1"
                  (select)="onSelectSubSubcategories($event)">
 </app-subcategory>
-<div [@scrollAnimation]="scrollNotificationState" class="scrollNotification pointer" *ngIf="!hasSubSubcategory()" (click)="scrollToElement()">
-  <span class="ml-2 mr-2">Poursuivre</span>
-  <img alt="Icône flêche descendante" src="/assets/images/icon_arrow_down.png">
-</div>

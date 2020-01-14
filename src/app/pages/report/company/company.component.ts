@@ -62,16 +62,13 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Company;
-    this.reportStorageService.reportInProgess
+    this.reportStorageService.retrieveReportInProgressFromStorage()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(report => {
         if (report) {
           this.report = report;
           this.initSearchForm();
           this.initSearchBySiretForm();
-          if (!this.report.company) {
-            this.displayLiveChat();
-          }
         } else {
           this.reportRouterService.routeToFirstStep();
         }
@@ -81,7 +78,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
-    this.hideLiveChat();
   }
 
   changeNavTab() {
@@ -224,7 +220,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.companyBySiret = undefined;
     this.showErrors = false;
     this.showErrorsBySiret = false;
-    this.displayLiveChat();
   }
 
   hasError(formControl: FormControl) {
@@ -233,41 +228,5 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
   hasErrorBySiret(formControl: FormControl) {
     return this.showErrorsBySiret && formControl.errors;
-  }
-
-  displayLiveChat() {
-    if (isPlatformBrowser(this.platformId)) {
-      const rocketChatElement = document.getElementsByClassName('rocketchat-widget');
-      if (rocketChatElement && rocketChatElement.length) {
-        this.renderer.removeClass(rocketChatElement[0], 'd-none');
-      } else {
-        this.createLiveChat();
-      }
-    }
-  }
-
-  createLiveChat() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.scriptElement = this.renderer.createElement('script');
-      this.renderer.setAttribute(
-        this.scriptElement,
-        'src',
-        'https://signalconso.rocket.chat/packages/rocketchat_livechat/assets/rocketchat-livechat.min.js?_=201702160944'
-      );
-      this.renderer.setAttribute(this.scriptElement, 'async', 'true');
-      this.renderer.appendChild(this.elementRef.nativeElement, this.scriptElement);
-      window['RocketChat'] = (c => window['RocketChat']._.push(c));
-      window['RocketChat']._ = [];
-      window['RocketChat'].url = 'https://signalconso.rocket.chat/livechat';
-    }
-  }
-
-  hideLiveChat() {
-    if (isPlatformBrowser(this.platformId)) {
-      const rocketChatElement = document.getElementsByClassName('rocketchat-widget');
-      if (rocketChatElement && rocketChatElement.length) {
-        this.renderer.addClass(rocketChatElement[0], 'd-none');
-      }
-    }
   }
 }

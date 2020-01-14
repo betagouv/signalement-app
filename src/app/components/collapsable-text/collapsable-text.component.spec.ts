@@ -17,6 +17,7 @@ describe('CollapsableTextComponent', () => {
       imports: [
         Angulartics2RouterlessModule.forRoot(),
       ],
+      providers: []
     })
     .compileComponents();
   }));

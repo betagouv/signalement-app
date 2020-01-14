@@ -1,0 +1,338 @@
+- title: Téléphonie / Internet
+  subcategories:
+    - title: 'Mon forfait : prix, contrat et facture'
+      example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
+      subcategories:       
+        - title: Le prix de mon forfait a été augmenté (ou va être augmenté)
+          subcategoriesTitle: Pour quelle raison votre forfait a été augmenté ?
+          subcategories:
+            - title: Augmentation du débit ou des données
+              example: "Exemple : passage d'un forfait 20 Go à 40 Go pour 5 euros de plus"
+              information: !!import/single ../common/info/tel.yml
+            - title: Modification concernant les sms, mms ou appels
+              example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
+              information: !!import/single ../common/info/tel.yml
+            - title: Rajout d'une option télé, cyber-sécurité, livre audio, musique
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Des options payantes ont été automatiquement rajoutées à mon forfait
+          example: 'Exemple : j''ai eu un mois gratuit pour une option musique puis j''ai été facturé car je ne l''ai pas désactivée'
+          subcategoriesTitle: Quel est le type d'option ?
+          subcategories:
+            - title: option télé ou musique
+              example: 'Exemple: option musique illimitée, chaîne télé supplémentaire'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option livres
+              example: 'Exempel: abonnement livre audio'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option liée à la sécurité
+              example: 'Exemple: anti virus, cybersécurité'
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: option sms/mms ou appels illimités
+              information: !!import/single ../common/info/tel.yml
+            - title: option lié au répondeur ou à la présentation du numéro 
+              information: !!import/single ../common/info/tel.yml
+            - title: autre type d'option
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Autre problème de facturation ou de contrat
+          subcategories:
+            - title: Utilisation de mon forfait à l'étranger
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+            - title: Autre
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+    - title: Qualité du réseau
+      example: 'Exemple : je ne capte pas, je capte mal, débit faible'
+      information:
+        title: La qualité du réseau est mauvaise
+        content: Les problèmes de réseau ou d'éligibilité ne sont pas à signaler sur SignalConso. <br> Vous devez les signaler à l'ARCEP sur le site dédié  <a href="https://jalerte.arcep.fr/" target="_blank" /> J'alerte l'Arcep </a>
+    - title: Résiliation / changement d'opérateur
+      subcategories:
+        - title: Frais de résiliation
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Restitution du materiel
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Problème avec le RIO (Relevé d'Identité Opérateur)
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Mon ancien opérateur continue de me prélever
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+    - title: Appels, sms ou email indésirables
+      example: 'Exemple : spams, appel incessant, raoppel vers un numéro payant'
+      subcategories:
+        - title: Je reçois des appels indésirables alors que je suis sur BlocTel
+        - title: J''ai répondu à un sms ou j''ai rappelé un numéro qui était payant sans le savoir
+          information:
+            content: Vous devez rentrer le numéro en question et la date sur le site <a href="https://www.infosva.org/" target="_blank" /> infosva. </a>
+                   <br> Puis cliquer "signaler un problème relatif à ce numéro".
+                   <br> La répression des fraudes aura accès à votre signalement directement avec le site Infosva.
+            actions:
+              - question: Comment bloquer ces numéros payants&#160;?
+                answer: Votre opérateur téléphonique doit vous proposer une option gratuite de blocage des numéros payants appelés "surtaxés". 
+                        <br> Vous pouvez activer cette option dans votre espace client ou auprès d'un conseiller.  
+                        <br> Cette option ne bloque pas la totalité des numéros surtaxés. 
+                        <br>Les numéros peu surtaxés (maximum 50 centimes l'appel) et les services de renseignements (numéro commençant par 118) ne sont pas compris dans ce blocage.
+        - title: Je reçois des spams dans mes emails 
+        - title: J'ai eu un problème avec un démarcheur téléphonique
+    - title: Autres
+      example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
+      subcategories:        
+        - title: Qualité du service client
+          example: 'Exemple : pas de réponse du service client, service client payant'
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+        - title: Téléphone acheté avec le forfait
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+- title: Eau
+  subcategories:
+    - title: Contrat / facture
+      example: 'Exemple : la facture est élevée par rapport à ma consommation, les mentions du contrat sont abusives'
+      subcategories:
+        - title: Le distributeur refuse de m'ouvrir un contrat car je suis locataire et non propriétaire.
+          description: Conditionner l'abonnement du locataire à l'accord écrit du propriétaire est interdit. Refuser la demande d'abonnement d'un locataire car il n'est pas propriétaire est aussi interdit.
+        - title: Le distributeur me demande de payer une avance sur ma consommation.
+          subcategoriesTitle: Quand doit-être remboursée cette avance ?
+          subcategories:
+            - title: Elle sera déduite à ma première facture d'eau
+              information:
+                title: Ce n'est pas un motif de signalement
+                content: Le distributeur peut vous demander une avance si il est prévu de déduire cette somme de votre facture de consommation.
+            - title: À la résiliation de l'abonnement ou au changement de locataire
+              detailTitle: Il est interdit de demander un dépôt de garantie.
+              description: Rendre l'argent à la fin de l'abonnement ou du contrat sous-entend que c'est un dépôt de garantie. C'est interdit par la loi.
+              detailInputs:
+                - label: Date du contrat
+                  rank: 1
+                  type: DATE
+                  defaultValue: SYSDATE
+                - label: Décrivez nous plus en détails ce qui s'est passé
+                  rank: 2
+                  type: TEXTAREA
+              fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
+              consumerActions: !!import/single ../common/actions/eau.yml
+        - title: Je ne suis pas d'accord avec la consommation indiquée sur ma facture.
+          information:
+            title: Vous devez demander à faire vérifier le compteur.
+            content: Si vous recevez une facture d'eau que vous trouvez trop élevée par rapport à votre consommation habituelle et que vous avez vérifié l'absence de fuite d'eau, vous devez demander la vérification de votre compteur. Des frais vous seront facturés. Si la vérification révèle une anomalie, ces frais vous seront remboursés.
+            actions:
+              - question: Vous souhaitez obtenir la vérification de votre compteur d’eau&#160;?
+                answer: Voici un modèle de lettre à envoyer<br><a href="https://www.inc-conso.fr/content/vous-souhaitez-obtenir-la-verification-de-votre-compteur-deau-en-raison-dune-consommation" target="_blank" /> cliquez ici </a>
+        - title: Une clause du contrat (règlement de service) est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
+          detailInputs:
+            - label: Date du constat (ou du contrat)
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Quelle partie du contrat / règlement trouvez-vous abusive ?
+              rank: 2
+              type: TEXTAREA
+          fileLabel: Joindre une copie du contrat / règlement.
+          consumerActions: !!import/single ../common/actions/eau.yml
+        - title: Autres
+          consumerActions: !!import/single ../common/actions/eau.yml
+    - title: Coupure de l'eau pour impayé
+      example: Mon débit d'eau a été réduit car je ne peux payer ma facture
+      detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
+      description: Les coupures d'eau et les réductions de débit sont interdites en cas de factures impayées, pour les résidences principales et ce toute l'anné. Par contre, vous devrez toujours payer votre facture.
+      detailInputs:
+        - label: Date du du contrat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Date de la coupure
+          rank: 2
+          type: DATE
+      fileLabel: Joindre une copie du contrat / règlement.
+      consumerActions: !!import/single ../common/actions/eau.yml
+    - title: Dégâts / travaux sur les canalisations
+      example: 'Exemple : fuite d''eau avant compteur'
+      information:
+        title: Le compteur d'eau représente la frontière entre ce qui est à votre charge et ce qui ne l'est pas.
+        content: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
+        actions:
+          - question: Que faire en cas de désaccord&#160;?
+            answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a>
+        outOfScope: true
+    - title: Fosse septique
+      example: 'Exemple : malfaçons sur la fosse, le bureau d''étude m''impose une marque de fosse en particulier '
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Quel est le problème&#160;?
+          rank: 2
+          type: RADIO
+          options:
+            - malfaçons sur la pose de la fosse spetique
+            - le bureau d'étude impose une marque/modèle en particulier
+            - autre (à préciser)
+        - label: Décrivez nous plus en détails ce qui s'est passé
+          rank: 3
+          type: TEXTAREA
+- title: Gaz / Electricité
+  subcategories:
+    - title: Démarchage à domicile ou par téléphone
+      example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif'
+      detailInputs:
+        - label: Date du passage du vendeur (ou de son appel)
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: De quoi s'agit-il&#160;?
+          rank: 2
+          type: RADIO
+          options:
+            - démarchage à domicile (porte-à-porte)
+            - démarchage par téléphone uniquement
+        - label: Que s'est-il passé&#160;?
+          rank: 3
+          type: RADIO
+          options:
+            - le vendeur s'est fait passer pour une autre société (à préciser)
+            - le vendeur m'a fait signer des papiers sans me dire que c'était un contrat
+            - le vendeur m'a obligé à un signer un nouveau contrat en m'indiquant que mon contrat actuel allait être arreté
+            - le vendeur a demandé à voir mes factures, mon compteur
+            - autre (à préciser)
+        - label: Avez-vous signé, volontairement ou non, un contrat&#160;?
+          rank: 4
+          type: RADIO
+          options:
+            - oui
+            - non
+        - label: Date de début du contrat si il démarre un autre jour que celui du démarchage&#160;?
+          rank: 5
+          type: DATE
+          defaultValue: SYSDATE
+          optionnal: true
+        - label: Décrivez nous plus en détails ce qui s'est passé
+          rank: 6
+          type: TEXTAREA
+      fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
+      consumerActions: !!import/single ../common/actions/energie.yml
+    - title: Publicité mensongère ou trompeuse
+      example: 'Exemple : publicité "offre verte" mensongère'
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Quel support trouvez-vous trompeur&#160;?
+          rank: 2
+          type: RADIO
+          options:
+            - Une publicité (affiche, flyers)
+            - Un site internet (à préciser)
+            - Un spot télé ou radio (à préciser)
+            - Le discours d'un vendeur
+            - Autre (à préciser)
+        - label: À propos de quoi est-ce trompeur&#160;?
+          rank: 3
+          type: RADIO
+          options:
+            - Un label / certificat
+            - Une baisse de prix
+            - "Une information (exemple : origine géographique de mon électricité)"
+            - Autre (à préciser)
+        - label: Pourquoi trouvez-vous ça trompeur ?
+          rank: 4
+          type: TEXTAREA
+          optionnal: true
+        - label: Avez-vous déjà contacté l'entreprise pour lui signaler ce problème&#160;?
+          rank: 5
+          type: RADIO
+          options:
+            - Oui
+            - Non
+      fileLabel: Photo(s) si possible
+      consumerActions: !!import/single ../common/actions/energie.yml
+    - title: Contrat
+      example: 'Exemple : reconduction de contrat, clause abusive'
+      subcategories:
+        - title: Difficultés pour résilier un contrat
+          example: 'Exemple : le bulletin de retractation n''a pas été prise en compte'
+          subcategoriesTitle: Où avez-vous souscrit votre contrat ?
+          subcategories:
+            - title: Sur internet, par téléphone ou chez moi avec un conseiller
+              subcategoriesTitle: Ce contrat concerne un logement
+              subcategories:
+                - title: Dans lequel vous venez d'emménager
+                  description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+                    <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                    <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+                  subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+                  subcategories:
+                    - title: Oui
+                      detailInputs:
+                        - label: Date de signature du contrat (elle est indiquée sur votre contrat).
+                          rank: 1
+                          type: DATE
+                          defaultValue: SYSDATE
+                        - label: Date de la demande d'annulation
+                          rank: 2
+                          type: DATE
+                          defaultValue: SYSDATE
+                        - label: Précisez comment et à qui vous avez fait la demande
+                          rank: 3
+                          type: TEXTAREA
+                      consumerActions: !!import/single ../common/actions/energie.yml
+                    - title: Non
+                      information:
+                        title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                        content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                        outOfScope: true
+                - title: Un logement que vous occupiez déjà
+                  subcategoriesTitle: Avez-vous demander à faire démarrer votre contrat immédiatement ?
+                  subcategories:
+                    - title: Non. Le contrat doit démarrer à la fin du délai de retractation.
+                      description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
+                        <br />Vous n’avez pas à vous justifier auprès du commerçant.
+                        <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
+                      subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
+                      subcategories:
+                        - title: Oui
+                          detailInputs:
+                            - label: Date de signature du contrat (elle est indiquée sur votre contrat).
+                              rank: 1
+                              type: DATE
+                              defaultValue: SYSDATE
+                            - label: Date de la demande d'annulation
+                              rank: 2
+                              type: DATE
+                              defaultValue: SYSDATE
+                            - label: Précisez comment et à qui vous avez fait la demande
+                              rank: 3
+                              type: TEXTAREA
+                          consumerActions: !!import/single ../common/actions/energie.yml
+                        - title: Non
+                          information:
+                            title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                            content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                            outOfScope: true
+                    - title: Oui. J'ai renoncé au délai de retractation.
+                      information:
+                        title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                        content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                        outOfScope: true
+                    - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
+                      consumerActions: !!import/single ../common/actions/energie.yml
+            - title: Dans une boutique
+              information:
+                title: Vous ne pouvez plus exiger l'annulation de votre contrat.
+                actions: Lorsque vous signez un contrat dans une boutique, vous ne bénéficiez pas d'un délai de retractation.
+                outOfScope: true
+        - title: Une clause du contrat est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
+          detailInputs:
+            - label: Date du constat (ou du contrat)
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Quelle partie du contrat / règlement trouvez-vous abusive ?
+              rank: 2
+              type: TEXTAREA
+          fileLabel: Joindre une copie du contrat / règlement.
+          consumerActions: !!import/single ../common/actions/energie.yml
+        - title: Autres
+          consumerActions: !!import/single ../common/actions/energie.yml
+    - title: Facturation
+      consumerActions: !!import/single ../common/actions/energie.yml
+- title: Autres (Fioul / GPL / granulés de bois...)
+  consumerActions: !!import/single ../common/actions/energie.yml

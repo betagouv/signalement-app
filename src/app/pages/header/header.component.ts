@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Roles, User } from '../../model/AuthUser';
-import { Router } from '@angular/router';
+import { Permissions, Roles, User } from '../../model/AuthUser';
+import { Router, Scroll } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,10 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  @ViewChild('banner', {static: false}) banner;
+
   roles = Roles;
+  permissions = Permissions;
   user: User;
 
   constructor(private authenticationService: AuthenticationService,
@@ -21,24 +24,12 @@ export class HeaderComponent implements OnInit {
     this.authenticationService.user.subscribe(user => {
       this.user = user;
     });
-  }
 
-  logout() {
-    const role = this.user.role
-    this.authenticationService.logout();
-    if (role === Roles.Pro) {
-      this.router.navigate(['connexion']);
-    } else {
-      this.router.navigate(['dgccrf']);
-    }
-  }
-
-  changePassword() {
-    this.router.navigate(['compte/mot-de-passe']);
-  }
-
-  goHome() {
-    this.router.navigate(['suivi-des-signalements']);
+    this.router.events.forEach((event) => {
+      if (event instanceof Scroll) {
+        this.banner.nativeElement.focus();
+      }
+    });
   }
 
 }

@@ -13,17 +13,15 @@
       transform: scale(1.1);
       border-color: $primary;
     }
+    &:focus {
+      transform: scale(1.1);
+      border-color: $primary;
+    }
   }
 }
 
-li {
-  li + li {
-    padding-top: 0em;
-  }
-}
 
-
-:host /deep/ {
+:host ::ng-deep {
 
   .completer-holder {
     width: 100%;
@@ -36,12 +34,17 @@ li {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid $light-blue;
+  border-bottom: 1px solid $blue;
 }
 
 .nav-link {
   border: 0;
-  color: $light-blue !important;
+  color: $blue !important;
+
+  &.active {
+    color: $white !important;
+    background-color: $blue;
+  }
 }
 
 .company-card {

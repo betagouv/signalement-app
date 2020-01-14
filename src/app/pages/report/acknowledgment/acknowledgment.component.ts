@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-acknowledgment',
@@ -11,8 +10,6 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./acknowledgment.component.scss']
 })
 export class AcknowledgmentComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -22,8 +19,8 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Acknowledgment;
-    this.reportStorageService.reportInProgess
-      .pipe(takeUntil(this.unsubscribe))
+    this.reportStorageService.retrieveReportInProgressFromStorage()
+      .pipe(take(1))
       .subscribe(report => {
         if (report) {
           this.report = report;
@@ -34,13 +31,18 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    this.reportStorageService.removeReportInProgress();
   }
 
   newReport() {
     this.reportStorageService.removeReportInProgress();
     this.reportRouterService.routeToFirstStep();
+  }
+
+  getReportLastSubcategory() {
+    if (this.report && this.report.subcategories && this.report.subcategories.length) {
+      return this.report.subcategories[this.report.subcategories.length - 1];
+    }
   }
 
 }

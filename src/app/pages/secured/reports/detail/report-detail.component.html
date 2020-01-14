@@ -1,12 +1,13 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-primary" role="region">
   <div class="container">
     <div class="row">
       <div class="col-2 col-sm-1 text-right">
-        <img src="/assets/images/icon_back.png" class="back pointer" (click)="back()" alt="page précédente"/>
+        <img src="/assets/images/icon_back_white.png" class="back pointer" (click)="back()" alt="page précédente"/>
       </div>
       <div class="col-10 col-sm-11">
         <h1 class="text-center">
           Détail du signalement
+          <a [routerLink]="['/vous-êtes-un-professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
         </h1>
         <h5 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
           {{report?.id}}
@@ -27,8 +28,7 @@
       <ng-container *ngIf="report">
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-          <h5>Statut pro : {{report.statusPro}}</h5>
-          <h5 *appRole="[roles.Admin]">Statut conso : {{report.statusConso}}</h5>
+          <h5>Statut : {{report.status}}</h5>
           <hr />
         </ng-container>
 
@@ -52,12 +52,12 @@
                 <span [innerHTML]="detailInputValue.label"></span>
                 &nbsp;<span [innerHTML]="detailInputValue.value"></span>
               </div>
-              <div *ngIf="report.uploadedFiles && report.uploadedFiles.length;">
+              <div *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length;">
                 Pièce(s) jointe(s) :
                 <div class="col-12">
                   <table class="table table-sm">
                     <tbody>
-                      <tr *ngFor="let uploadedFile of report.uploadedFiles">
+                      <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
                         <td class="text-left" *ngIf="!uploadedFile.loading">
                           <a href="{{getFileDownloadUrl(uploadedFile)}}">
                             <span *ngIf="uploadedFile.id">
@@ -87,7 +87,7 @@
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h5>Commerçant</h5>
+          <h5>Entreprise</h5>
           <div class="row">
             <div class="col-10">
               Siret : {{report.company.siret}}
@@ -198,27 +198,27 @@
                   <div class="form__group">
                     <div class="row">
                       <div class="col-12 col-sm-6">
-                        <label> Prénom <span class="error">*</span></label>
-                        <input type="text" formControlName="firstName">
+                        <label for="firstName"> Prénom <span class="error">*</span></label>
+                        <input type="text" formControlName="firstName" id="firstName">
                       </div>
                       <div class="col-12 col-sm-6">
-                        <label>Nom <span class="error">*</span></label>
-                        <input type="text" formControlName="lastName">
+                        <label for="lastName">Nom <span class="error">*</span></label>
+                        <input type="text" formControlName="lastName" id="lastName">
                       </div>
                     </div>
                   </div>
                   <div class="form__group">
-                    <label>Email <span class="error">*</span></label>
-                    <input type="email" formControlName="email"/>
+                    <label for="email">Email <span class="error">*</span></label>
+                    <input type="email" formControlName="email" id="email"/>
                   </div>
-                  <div class="form__group">
+                  <div class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
                     <div class="row">
                       <div class="col-2 col-sm-1 text-right pr-1">
                         <input type="checkbox" formControlName="contactAgreement" id="contactAgreement"/>
                       </div>
                       <div class="col-10 col-sm-11 pl-1">
                         <label class="d-block mb-0 pointer" for="contactAgreement">
-                          Accord pour contact par professionnel
+                          Accord pour contact par entreprise
                         </label>
                       </div>
                     </div>
@@ -257,40 +257,71 @@
           </ng-template>
         </ng-container>
 
-        <ng-container *ngIf="getProAnswerEvent()">
+        <ng-container *ngIf="getReportResponse()">
           <hr />
           <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
           <ng-template #titleAnswerNoPro>
-            <h5>Réponse apportée par le professionnel</h5>
+            <h5>
+              Réponse apportée par l'entreprise
+            </h5>
           </ng-template>
           <div class="row" id="proAnswer">
-            <div class="col-12">
-              {{getProAnswerEvent().detail}}
+            <div class="col-12" [ngSwitch]="getReportResponse().responseType">
+              <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte</span>
+              <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé</span>
+              <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement</span>
+              <br />Réponse au consommateur : {{getReportResponse().consumerDetails}}
+              <br />Réponse à la DGCCRF : {{getReportResponse().dgccrfDetails}}
+            </div>
+          </div>
+          <div *ngIf="report.professionalUploadedFiles && report.professionalUploadedFiles.length">
+            Pièce(s) jointe(s) à la réponse :
+            <div class="col-12" *ngFor="let uploadedFile of report.professionalUploadedFiles">
+              <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                          <span *ngIf="uploadedFile.id">
+                            {{uploadedFile.filename}}
+                          </span>
+              </a>
             </div>
           </div>
         </ng-container>
 
-        <ng-container  *appRole="[roles.Admin, roles.DGCCRF]">
+        <ng-container>
           <hr />
           <h5>Historique</h5>
-          <div class="row">
+          <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
             <div class="col-12" *ngFor="let event of events; let eventIndex = index">
-              <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}" *ngIf="event.detail">
-                <span class="collapsed-icon">&#43;</span>
-                <span class="uncollapsed-icon">&#8722;</span>
-                Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
-              </a>
-              <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
-                {{event.detail}}
-              </div>
-              <span *ngIf="!event.detail">
-                Le {{event.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : {{event.action.name}}
-              </span>
+              <ng-container *ngIf="event.details && event.details.description; else noDescription">
+                <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
+                  <span class="collapsed-icon">&#43;</span>
+                  <span class="uncollapsed-icon">&#8722;</span>
+                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                </a>
+                <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
+                  {{event.details.description}}
+                </div>
+              </ng-container>
+              <ng-template #noDescription>
+                <span>
+                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                </span>
+              </ng-template>
             </div>
             <div class="col-12">
-              Le {{report.creationDate | date : 'dd/MM/yyyy à HH:mm:ss'}} : Création du signalement
+              Le {{report.creationDate | date : constants.DateTimeFormat}} : Création du signalement
             </div>
           </div>
+          <ng-container *appRole="[roles.Pro]">
+            Signalement créé le {{report.creationDate | date : constants.DateTimeFormat}}
+            <ng-container *ngIf="getEvent(eventActionValues.FirstVisit)">
+              <br />
+              Première consultation le {{getEvent(eventActionValues.FirstVisit).creationDate | date : constants.DateTimeFormat}}
+            </ng-container>
+            <ng-container *ngIf="getReportResponse()">
+              <br />
+              Réponse apportée le {{getEvent(eventActionValues.ReportResponse).creationDate | date : constants.DateTimeFormat}}
+            </ng-container>
+          </ng-container>
         </ng-container>
 
         <ng-container *appPermission="permissions.deleteReport">
@@ -299,7 +330,7 @@
             Supprimer ce signalement
           </button>
           <ng-template #delete>
-            <div class="modal-body text-center" *ngIf="report.uploadedFiles && report.uploadedFiles.length; else noFiles">
+            <div class="modal-body text-center" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length; else noFiles">
               Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
               <br />
               <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
@@ -330,38 +361,111 @@
     </div>
 
     <ng-container *appRole="[roles.Pro]">
-      <div *ngIf="report && !getProAnswerEvent()">
-        <div class="pb-3 text-center" *ngIf="!proAnswerForm; else proAnswer">
-          <p>Votre réponse est importante ; elle sera visible par le consommateur et la DGCCRF.</p>
-          <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
+      <div *ngIf="report && !getReportResponse() && ! isClosed()">
+        <div class="pb-3 text-center" *ngIf="!responseForm; else proAnswer">
+          <p>
+            Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.
+            <a [routerLink]="['/vous-êtes-un-professionnel']" fragment="la-reponse" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
+          </p>
+          <div class="mb-4">
+            <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
+          </div>
         </div>
         <ng-template #proAnswer>
           <div class="notification">
-            <form [formGroup]="proAnswerForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
-              <label for="proAnswerInput" [class]="hasError(answerCtrl) ? 'error' : ''">
-                Réponse au consommateur et à la DGCCRF
-              </label>
-              <textarea [formControl]="answerCtrl" id="proAnswerInput" rows="5"
-                        placeholder="Précisez les actions préventives / correctives que vous allez mettre en place. Si vous estimez que le signalement est infondé, merci de l'indiquer ici">
-              </textarea>
-              <div class="notification error" *ngIf="showErrors && proAnswerForm.invalid">
+            <form [formGroup]="responseForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
+
+              <div class="form__group">
+                <label class="text-center" [class]="hasError(responseTypeCtrl) ? 'error' : ''">
+                  Pouvez-vous préciser votre réponse ? <span class="error">*</span>
+                </label>
+                <div [class]="getResponseTypeClass(reportResponseTypes.Accepted)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="reportAccepted" class="label-inline pointer">Je prends en compte ce signalement</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getResponseTypeClass(reportResponseTypes.Rejected)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="reportRejected" class="label-inline pointer">J'estime que ce signalement est infondé</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getResponseTypeClass(reportResponseTypes.NotConcerned)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="reportNotConcerned" class="label-inline pointer">J'estime que ce signalement ne concerne pas mon établissement</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container *ngIf="responseTypeCtrl.valid">
+
+                <div class="form__group pb-2">
+                  <label for="proAnswerInput" [class]="hasError(responseConsumerDetailsCtrl) ? 'error' : ''" [ngSwitch]="responseTypeCtrl.value">
+                    <span *ngSwitchCase="reportResponseTypes.Accepted">Détaillez les actions préventives / correctives que vous allez mettre en place.</span>
+                    <span *ngSwitchDefault>Apportez une réponse au consommateur</span>
+                    <span class="error">*</span>
+                  </label>
+                  <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3" placeholder="Cette réponse sera envoyée automatiquement par mail au consommateur et pourra être consultée par la DGCCRF.">
+                  </textarea>
+                  <p class="note">
+                    Nous vous demandons de rester courtois dans votre réponse. Les menaces et insultes n'ont pas leur place dans SignalConso !
+                  </p>
+                </div>
+
+                <hr />
+
+                <div class="form__group pt-2">
+                  <label for="proAnswerDgccrfInput">
+                    Vous pouvez également, si vous le souhaitez, apporter une précision <u>à l'attention de la DGCCRF</u> qui ne sera pas transmise au consommateur
+                  </label>
+                  <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3" placeholder="Cette réponse pourra être consultée par la DGCCRF uniquement.">
+                  </textarea>
+                </div>
+
+                <div class="form__group">
+                  <app-attachments label="Pièces jointes <u>visibles uniquement par la DGCCRF</u>"
+                                   [uploadedFiles]="uploadedFiles"
+                                   [origin]="fileOrigins.Professional">
+                  </app-attachments>
+                </div>
+
+              </ng-container>
+
+              <div class="notification error" *ngIf="showErrors && responseForm.invalid">
                 Veuillez renseigner les champs obligatoires.<br />
               </div>
+
               <div class="notification error" *ngIf="loadingError">
                 Une erreur technique s'est produite<br />
               </div>
-              <hr />
-              <div class="text-center">
+
+              <div class="mt-4 text-center">
                 <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
                 &nbsp;
-                <button type="submit" class="btn btn-lg btn-primary">Envoyer</button>
+                <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                  Envoyer
+                </button>
               </div>
             </form>
             <ngx-loading [show]="loading"></ngx-loading>
           </div>
         </ng-template>
       </div>
-      <div class="notification success" *ngIf="answerSuccess">
+      <div class="notification success" *ngIf="responseSuccess">
         Votre réponse a bien été prise en compte, nous vous en remercions.
       </div>
     </ng-container>

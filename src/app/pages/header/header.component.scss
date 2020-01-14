@@ -1,92 +1,108 @@
 @import "../../../theme/media-queries";
 @import "../../../theme/variables";
 
-.navbar__container {
-  width: 100%;
+header {
 
-  .navbar__domain, .navbar__gouvfr {
-    font-size: 21px;
-    font-family: "Source Sans Pro", Arial, sans-serif;
-    color: $light-blue;
-    font-weight: bold;
+  .brand > img {
+    max-width: 89px;
+    padding: 7px;
   }
 
-  .navbar__gouvfr {
-    color: $darker-grey;
-  }
+  .beta {
+    background: $light-grey;
+    font-size: 18px;
+    line-height: 24px;
+    height: 40px;
+    padding: 8px 22px;
 
-  .item {
-    padding: 0.25rem 1.5rem;
-    display: block;
-  }
+    .departments {
+      font-size: 16px;
+      text-align: right;
+      text-decoration-line: underline;
+    }
 
-  .nav__item a:first-child {
-    padding-left: 0;
-  }
-
-  a.navbar__home {
-    margin-right: 15px;
-  }
-
-  @media #{$larger-than-tablet} {
-    .ribbon {
-      text-align: center;
-      text-transform: uppercase;
-      position: absolute;
-      top: 10px;
-      right: -25px;
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
-      width: 90px;
-      background-color: red;
-      color: #fff;
-      padding: 5px;
-      font-size: 10px;
-      font-weight: 700;
-      z-index: 100;
+    @media #{$smaller-than-desktop} {
+      font-size: 12px;
+      line-height: 12px;
+      height: 28px;
     }
   }
 
+  .navbar {
+    height: 86px;
+    padding: 22px;
 
-  @media #{$smaller-than-tablet} {
-
-    padding: 1em 0;
-
-    .ribbon {
-      text-align: center;
-      text-transform: uppercase;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      width: 70px;
-      background-color: red;
-      color: #fff;
-      padding: 2px;
-      font-size: 10px;
-      font-weight: 700;
-      z-index: 100;
+    .navbar-brand > img {
+      width: 290px;
     }
 
-  }
-
-
-  @media #{$smaller-than-tablet} {
-    nav {
-      width: 100%;
-
-      .nav__links {
-        width: 100%;
-      }
-
-      .nav__account {
-        float: right;
-      }
-    }
-  }
-
-  @media #{$smaller-than-mobile} {
-    .navbar__domain, .navbar__gouvfr {
+    .nav-link {
+      color: $black;
       font-size: 18px;
+      padding: 13px;
+    }
+
+    @media #{$smaller-than-desktop} {
+      padding: 10px;
+      height: 50px;
+      background-color: #407CA8;
+
+      .navbar-toggler {
+        color: $white;
+        padding: 0;
+      }
+
+      .navbar-nav {
+        width: fit-content;
+        border: 1px solid rgba(28, 28, 28, 0.15);
+        border-radius: 0.25rem;
+      }
+
+      .nav-item {
+
+        background-color: $white;
+
+        & + .nav-item {
+          border-top: 1px solid rgba(28, 28, 28, 0.15);
+        }
+
+        .nav-link {
+          font-size: 16px;
+          padding: 4px 24px;
+
+          &:hover {
+            background-color: $primary;
+            color: white;
+          }
+        }
+      }
+
+      .material-icons {
+        height: 24px;
+        margin-top: 2px;
+        margin-right: 5px;
+
+        & + span {
+          font-size: 12px;
+        }
+      }
+
+      .btn {
+        height: 29px;
+        font-size: 12px;
+        padding: 0 16px;
+        margin-right: 10px;
+
+        img {
+          height: 12px;
+          margin-left: 6px;
+        }
+      }
+
+      .position-absolute {
+        right: 0px;
+      }
     }
   }
+
 }

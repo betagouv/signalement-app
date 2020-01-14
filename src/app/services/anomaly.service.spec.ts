@@ -6,7 +6,8 @@ describe('AnomalyService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: []
+      imports: [],
+      providers: []
     });
   });
 

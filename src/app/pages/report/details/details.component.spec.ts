@@ -5,17 +5,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { DetailInputValue, Report, Step } from '../../../model/Report';
 import { DetailInput, Subcategory } from '../../../model/Anomaly';
-import { CollapsableTextComponent } from '../../../components/collapsable-text/collapsable-text.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { ReportPaths } from '../../../services/report-router.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { NgxLoadingModule } from 'ngx-loading';
 import moment from 'moment';
 import { ReportStorageService } from '../../../services/report-storage.service';
+import { ComponentsModule } from '../../../components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
+import { of } from 'rxjs';
+import { AutofocusDirective } from '../../../directives/auto-focus.directive';
 
 describe('DetailsComponent', () => {
 
@@ -68,8 +70,7 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         BreadcrumbComponent,
-        CollapsableTextComponent,
-        TruncatePipe,
+        AutofocusDirective,
       ],
       imports: [
         FormsModule,
@@ -79,20 +80,21 @@ describe('DetailsComponent', () => {
         BsDatepickerModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
         NgxLoadingModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        ComponentsModule,
+        PipesModule,
       ],
+      providers: []
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();
   }));
 
-
-  describe('case of default detail inputs', () => {
+  describe('on init', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(new Report());
-
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(new Report()));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -100,6 +102,36 @@ describe('DetailsComponent', () => {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should request the user if he is an employee of the company or not', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('h4').textContent).toEqual(`Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler ?`);
+      expect(nativeElement.querySelectorAll('button')[0].textContent.trim()).toEqual('Oui');
+      expect(nativeElement.querySelectorAll('button')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
+      expect(nativeElement.querySelector('form')).toBeNull();
+    });
+
+    it('should hide the question and display the details form when the user answers', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelectorAll('button')[0].click();
+
+      fixture.detectChanges();
+      expect(nativeElement.querySelector('h4')).toBeNull()
+      expect(nativeElement.querySelector('form')).not.toBeNull();
+    });
+  });
+
+  describe('case of default detail inputs', () => {
+
+    beforeEach(() => {
+      reportStorageService = TestBed.get(ReportStorageService);
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(
+        of(Object.assign(new Report(), { employeeConsumer: true }))
+      );
+      fixture = TestBed.createComponent(DetailsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
     });
 
     it ('should define the plageHoraireList to display', () => {
@@ -135,13 +167,15 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const reportExpected = new Report();
-      reportExpected.detailInputValues = [
-        Object.assign(new DetailInputValue(), {label: 'Description', value: 'valeur'}),
-        Object.assign(new DetailInputValue(), {label: 'Date du constat', value: anomalyDateFixture}),
-        Object.assign(new DetailInputValue(), {label: 'Heure du constat', value: 'de 2h à 3h'})
-      ];
-      reportExpected.uploadedFiles = [];
+      const reportExpected = Object.assign(new Report(), {
+        detailInputValues: [
+          Object.assign(new DetailInputValue(), {label: 'Description', value: 'valeur'}),
+          Object.assign(new DetailInputValue(), {label: 'Date du constat', value: anomalyDateFixture}),
+          Object.assign(new DetailInputValue(), {label: 'Heure du constat', value: 'de 2h à 3h'})
+        ],
+        uploadedFiles: [],
+        employeeConsumer: true
+      });
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
 
@@ -150,14 +184,22 @@ describe('DetailsComponent', () => {
 
   describe('case of report subcategory with only a text detail input', () => {
 
-    const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategories = [new Subcategory()];
-    reportWithSubcategory.subcategories[0].detailInputs = [Object.assign(new DetailInput(), textDetailInputFixture)];
+    const reportWithSubcategory = Object.assign(new Report(), {
+      subcategories: [
+        Object.assign(new Subcategory(), {
+          detailInputs : [
+            textDetailInputFixture
+          ]
+        })
+      ],
+      employeeConsumer: true
+    });
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(reportWithSubcategory);
-
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(
+        Object.assign(new Report(), reportWithSubcategory))
+      );
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -187,10 +229,14 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const reportExpected = new Report();
-      reportExpected.subcategories = reportWithSubcategory.subcategories;
-      reportExpected.detailInputValues = [Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'})];
-      reportExpected.uploadedFiles = [];
+      const reportExpected = Object.assign(new Report(), {
+        subcategories: reportWithSubcategory.subcategories,
+        detailInputValues: [
+          Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'})
+        ],
+        uploadedFiles: [],
+        employeeConsumer: reportWithSubcategory.employeeConsumer
+      });
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
 
@@ -198,20 +244,26 @@ describe('DetailsComponent', () => {
 
   describe('case of report subcategory with several detail inputs', () => {
 
-    const reportWithSubcategory = new Report();
-    reportWithSubcategory.subcategories = [new Subcategory()];
-    reportWithSubcategory.subcategories[0].detailInputs = [
-      dateDetailInputFixture,
-      textDetailInputFixture,
-      radioDetailInputFixture,
-      textareaDetailInputFixture,
-      checkboxDetailInputFixture
-    ];
+    const reportWithSubcategory = Object.assign(new Report(), {
+      subcategories: [
+        Object.assign(new Subcategory(), {
+          detailInputs : [
+            dateDetailInputFixture,
+            textDetailInputFixture,
+            radioDetailInputFixture,
+            textareaDetailInputFixture,
+            checkboxDetailInputFixture
+          ]
+        })
+      ],
+      employeeConsumer: false
+    });
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(reportWithSubcategory);
-
+      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(
+        Object.assign(new Report(), reportWithSubcategory))
+      );
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -268,18 +320,20 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const reportExpected = new Report();
-      reportExpected.subcategories = reportWithSubcategory.subcategories;
-      reportExpected.detailInputValues = [
-        Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'}),
-        Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),
-        Object.assign(new DetailInputValue(), {
-          label: radioDetailInputFixture.label,
-          value: radioDetailInputFixture.options[1] + 'ma précision'}),
-        Object.assign(new DetailInputValue(), {label: textareaDetailInputFixture.label, value: 'ma description'}),
-        Object.assign(new DetailInputValue(), {label: checkboxDetailInputFixture.label, value: ['CHECKBOX1', undefined, 'CHECKBOX3']}),
-      ];
-      reportExpected.uploadedFiles = [];
+      const reportExpected = Object.assign(new Report(), {
+        subcategories: reportWithSubcategory.subcategories,
+        detailInputValues: [
+          Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'}),
+          Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),
+          Object.assign(new DetailInputValue(), {
+            label: radioDetailInputFixture.label,
+            value: radioDetailInputFixture.options[1] + 'ma précision'}),
+          Object.assign(new DetailInputValue(), {label: textareaDetailInputFixture.label, value: 'ma description'}),
+          Object.assign(new DetailInputValue(), {label: checkboxDetailInputFixture.label, value: ['CHECKBOX1', undefined, 'CHECKBOX3']})
+        ],
+        uploadedFiles: [],
+        employeeConsumer: reportWithSubcategory.employeeConsumer
+      });
       expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
     });
 

@@ -1,84 +1,108 @@
-<main role="main">
+<div class="banner text-center section section-primary" role="region">
   <div class="container">
-    <section class="section section-grey">
-      <div class="row">
-        <div class="col-12 col-sm-6 col-lg-4 count stat">
-          <h3>Nombre total de signalements</h3>
-          {{statistics?.reportsCount}}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-      </div>
-      <div class="row" *ngIf="user && user.role === 'Admin'">
-        <div class="col-4 count stat">
-          <h3>Signalements des 7 derniers jours</h3>
-
-          {{ statistics?.reportsCount7Days }}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-        <div class="col-4 count stat">
-          <h3>Signalements des 7 derniers jours en région&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Nombre de signalements des 7 derniers jours&#10;sur les régions d'expérimentation">help_outline</i></h3>
-          {{ statistics?.reportsCount7DaysInRegion }}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-      </div>
-      <div class="row" *ngIf="user && user.role === 'Admin'">
-        <div class="col-4 count stat">
-          <h3>Signalements des 30 derniers jours</h3>
-          {{ statistics?.reportsCount30Days }}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-        <div class="col-4 count stat">
-          <h3>Signalements des 30 derniers jours en région&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Nombre de signalements des 30 derniers jours&#10;sur les régions d'expérimentation">help_outline</i></h3>
-          {{ statistics?.reportsCount30DaysInRegion }}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4 count stat">
-          <h3>Signalements transmis&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Pourcentage de signalements transmis au professionnel&#10;(dans les régions d'expérimentation)">help_outline</i></h3>
-          {{ ! statistics ? "NA" : ((statistics.reportsCountSendedToPro / statistics.reportsCountInRegion) * 100).toFixed(0) + "%"}}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-        <div class="col-4 count stat">
-          <h3>Promesses d'action&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Pourcentage de promesses d'action positives&#10;des professionels (dans les régions d'expérimentation)">help_outline</i></h3>
-          {{ ! statistics ? "NA" : ((statistics.reportsCountPromise / statistics.reportsCountInRegion) * 100).toFixed(0) + "%" }}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-      </div>
-      <div class="row" *ngIf="user && user.role === 'Admin'">
-        <div class="col-4 count stat">
-          <h3>Signalements sans SIRET</h3>
-          {{ ! statistics ? "NA" : ((statistics.reportsCountWithoutSiret / statistics.reportsCount) * 100).toFixed(0) + "%"}}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-        <div class="col-4 count stat">
-          <h3>Temps moyen de transmission du signalement&nbsp;<i class="material-icons dark-grey" alt="icone légende" title="Temps moyen entre entre la création du signalement&#10;et la prise de connaissance du professionel">help_outline</i></h3>
-          {{ ! statistics ? "NA" : statistics.reportsDurationsForEnvoiSignalement + "j" }}
-          <ngx-loading [show]="loading"></ngx-loading>
-        </div>
-      </div>
-      <hr>
-      <div class="row" *ngIf="isPlatformBrowser()">
-        <div class="col-12 chart">
-            <div echarts [options]="byMonthsChartOption"></div>
-            <ngx-loading [show]="loading"></ngx-loading>
-          </div>
-        </div>
-        <hr>
-        <div class="row mt-4" *ngIf="isPlatformBrowser()">
-          <div class="col-12 chart">
-            <div echarts [options]="byCategoriesChartOption"></div>
-            <ngx-loading [show]="loading"></ngx-loading>
-          </div>
-        </div>
-        <hr>
-        <div class="row mt-2" *ngIf="isPlatformBrowser() && user && user.role === 'Admin'">
-          <div class="col-12 chart">
-            <div echarts [options]="byRegionsChartOption"></div>
-            <ngx-loading [show]="loading"></ngx-loading>
-          </div>
-        </div>
-
-    </section>
+    <h1 class="text-center">
+      Statistiques
+    </h1>
   </div>
+</div>
+
+<main role="main">
+  <section class="section section-lightest-grey">
+    <div class="container max-width">
+      <div class="card">
+        <div class="card-body">
+          <h3 *ngIf="reportCount">
+            <span class="count">{{reportCount}}</span>
+            signalements ont été déposés depuis le début de SignalConso
+          </h3>
+          <div class="text-right">
+            <a (click)="loadMonthlyReportChart()" data-toggle="collapse" href="#collapseMonthlyReportChart" class="collapsed">
+               Consulter les statistiques mensuelles
+            </a>
+          </div>
+          <div class="collapse" id="collapseMonthlyReportChart">
+            <div echarts [options]="monthlyReportChart"></div>
+            <ngx-loading [show]="!monthlyReportChart"></ngx-loading>
+          </div>
+          <ngx-loading [show]="!reportCount"></ngx-loading>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 *ngIf="reportReadByProPercentage">
+            <span class="count">{{reportReadByProPercentage.toFixed(0) + "%"}}</span>
+            des signalements ont été lus par les entreprises
+            <i class="material-icons" aria-hidden="true"
+               tooltip="Pourquoi pas 100 % ? Car Signalconso est facultatif. L'entreprise est libre de créer un compte et de lire le signalement.">
+              help_outline
+            </i>
+          </h3>
+          <div class="text-right">
+            <a (click)="loadMonthlyReportReadByProChart()" data-toggle="collapse" href="#collapseMonthlyReportReadByProChart" class="collapsed">
+               Consulter les statistiques mensuelles
+            </a>
+          </div>
+          <div class="collapse" id="collapseMonthlyReportReadByProChart">
+            <div echarts [options]="monthlyReportReadByProChart"></div>
+            <ngx-loading [show]="!monthlyReportReadByProChart"></ngx-loading>
+          </div>
+          <ngx-loading [show]="!reportReadByProPercentage"></ngx-loading>
+        </div>
+      </div>
+      <div class="card" *appRole="[roles.Admin]">
+        <div class="card-body">
+          <h3 *ngIf="reportReadByProMedianDelay">
+            En moyenne l'entreprise met
+            <span class="count">{{reportReadByProMedianDelay.toFixed(1)}} jours</span>
+            pour lire le signalement
+            <i class="material-icons" aria-hidden="true"
+               tooltip="Délai médian entre la création du signalement et la lecture du signalement par l'entreprise concernée">
+              help_outline
+            </i>
+          </h3>
+          <ngx-loading [show]="!reportReadByProMedianDelay"></ngx-loading>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 *ngIf="reportWithResponsePercentage">
+            Sur l'ensemble des signalements lus,
+            <span class="count">{{reportWithResponsePercentage.toFixed(0) + "%"}}</span>
+            ont eu une réponse de l'entreprise
+            <i class="material-icons" aria-hidden="true"
+               tooltip="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur.">
+              help_outline
+            </i>
+          </h3>
+          <div class="text-right">
+            <a (click)="loadMonthlyReportWithReponseChart()" data-toggle="collapse" href="#collapseMonthlyReportWithReponseChart" class="collapsed">
+               Consulter les statistiques mensuelles
+            </a>
+          </div>
+          <div class="collapse" id="collapseMonthlyReportWithReponseChart">
+            <div echarts [options]="monthlyReportWithResponseChart"></div>
+            <ngx-loading [show]="!monthlyReportWithResponseChart"></ngx-loading>
+          </div>
+          <ngx-loading [show]="!reportWithResponsePercentage"></ngx-loading>
+        </div>
+      </div>
+      <div class="card" *appRole="[roles.Admin]">
+        <div class="card-body">
+          <h3 *ngIf="reportWithResponseMedianDelay">
+            En moyenne une entreprise met
+            <span class="count">{{reportWithResponseMedianDelay.toFixed(1)}} jours</span>
+            pour répondre au signalement après l'avoir lu
+            <i class="material-icons" aria-hidden="true"
+               tooltip="Délai médian entre la lecture du signalement et la réponse par l'entreprise concernée">
+              help_outline
+            </i>
+          </h3>
+          <ngx-loading [show]="!reportWithResponseMedianDelay"></ngx-loading>
+        </div>
+      </div>
+      <p class="note pt-2">
+        Nos statistiques sont mises à jour en temps réel
+      </p>
+    </div>
+  </section>
 </main>

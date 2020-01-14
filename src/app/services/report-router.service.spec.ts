@@ -10,6 +10,7 @@ describe('ReportRouterService', () => {
       HttpClientTestingModule,
       RouterTestingModule,
     ],
+    providers: []
   }));
 
   it('should be created', () => {

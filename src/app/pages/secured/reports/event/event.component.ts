@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../../../services/event.service';
-import { ReportEvent, ReportEventAction } from '../../../../model/ReportEvent';
+import { EventActionValues, ReportEvent, ReportEventAction } from '../../../../model/ReportEvent';
 import { BsModalRef } from 'ngx-bootstrap';
 import { ConstantService } from '../../../../services/constant.service';
 import { combineLatest } from 'rxjs';
 import { PlatformLocation } from '@angular/common';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { AccountService } from '../../../../services/account.service';
+import { AuthenticationService } from '../../../../services/authentication.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-event',
@@ -22,12 +24,9 @@ export class EventComponent implements OnInit {
   eventForm: FormGroup;
   actionCtrl: FormControl;
   detailCtrl: FormControl;
-  resultActionCtrl: FormControl;
   reportId: string;
   siret: string;
-  actionPros: ReportEventAction[];
-  actionConsos: ReportEventAction[];
-  actionAgents: ReportEventAction[];
+  actions: ReportEventAction[];
 
   showErrors: boolean;
   loading: boolean;
@@ -39,6 +38,7 @@ export class EventComponent implements OnInit {
               private eventService: EventService,
               private constantService: ConstantService,
               private accountService: AccountService,
+              private authenticationService: AuthenticationService,
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
@@ -50,16 +50,12 @@ export class EventComponent implements OnInit {
       }
     });
     combineLatest(
-      this.constantService.getActionPros(),
-      this.constantService.getActionConsos(),
-      this.constantService.getActionAgents(),
+      this.constantService.getActions(),
       this.accountService.getActivationDocumentUrl(this.siret)
     ).subscribe(
-      ([actionPros, actionConsos, actionAgents, url]) => {
+      ([actions, url]) => {
         this.loading = false;
-        this.actionPros = actionPros;
-        this.actionConsos = actionConsos;
-        this.actionAgents = actionAgents;
+        this.actions = actions;
         this.activationDocumentUrl = url;
         this.initEventForm();
       },
@@ -67,17 +63,18 @@ export class EventComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
+
   }
 
   initEventForm() {
     this.actionCtrl = this.formBuilder.control('', Validators.required);
     this.detailCtrl = this.formBuilder.control('');
-    this.resultActionCtrl = this.formBuilder.control(true, Validators.required);
 
     this.eventForm = this.formBuilder.group({
       action: this.actionCtrl,
       detail: this.detailCtrl
     });
+
   }
 
   hasError(formControl: FormControl) {
@@ -90,16 +87,19 @@ export class EventComponent implements OnInit {
     } else {
       this.loading = true;
       this.loadingError = false;
-      const eventToCreate = Object.assign(new ReportEvent(), {
-        reportId: this.reportId,
-        eventType: this.actionPros.find(a => a === this.actionCtrl.value) ? 'PRO' : 'CONSO',
-        action: this.actionCtrl.value,
-        detail: this.detailCtrl.value
-      });
-      if (this.actionCtrl.value.withResult) {
-        eventToCreate.resultAction = this.resultActionCtrl.value;
-      }
-      this.eventService.createEvent(eventToCreate).subscribe(
+
+      this.authenticationService.user.pipe(
+        switchMap(user => {
+          const eventToCreate = Object.assign(new ReportEvent(), {
+            reportId: this.reportId,
+            eventType: user.role === Roles.DGCCRF ? 'DGCCRF' : 'PRO',
+            action: this.actionCtrl.value,
+            details: {description: this.detailCtrl.value}
+          });
+
+          return this.eventService.createEvent(eventToCreate);
+        })
+      ).subscribe(
         event => {
           this.bsModalRef.hide();
           this.loading = false;
@@ -111,17 +111,9 @@ export class EventComponent implements OnInit {
     }
   }
 
-  selectAction() {
-    if ([...this.actionPros, ...this.actionConsos].find(action => action === this.actionCtrl.value).withResult) {
-      this.eventForm.addControl('resultAction', this.resultActionCtrl);
-    } else {
-      this.eventForm.removeControl('resultAction');
-    }
-  }
-
   isActionEnvoiCourrier() {
-    return this.actionPros.find(a => a === this.actionCtrl.value)
-      && this.actionPros.find(a => a === this.actionCtrl.value).name === `Envoi d'un courrier`;
+    return this.actions.find(a => a === this.actionCtrl.value)
+      && this.actions.find(a => a === this.actionCtrl.value).value === EventActionValues.PostalSend;
   }
 
 }

@@ -10,6 +10,7 @@ import { BlogComponent } from './blog/blog.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   { path: 'comment-ça-marche', component: HowComponent },
@@ -19,7 +20,9 @@ const routes: Routes = [
   { path: 'conditions-generales-utilisation', component: CguComponent },
   { path: 'conditions-generales-utilisation/consommateur', component: CguComponent },
   { path: 'conditions-generales-utilisation/professionnel', component: CguComponent },
-  { path: 'blog/:year/:month/:day/:article', component: BlogComponent }
+  { path: 'blog/:year/:month/:day/:article', component: BlogComponent },
+  { path: 'blog', component: BlogComponent },
+  { path: 'contact', component: ContactComponent }
 ];
 
 @NgModule({
@@ -29,7 +32,8 @@ const routes: Routes = [
     ProComponent,
     CguComponent,
     BlogComponent,
-    RetractationComponent
+    RetractationComponent,
+    ContactComponent
   ],
   imports: [
     CommonModule,

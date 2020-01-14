@@ -1,4 +1,4 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-primary" role="region">
   <div class="container">
     <h1 class="text-center">
       Activation du compte
@@ -10,7 +10,7 @@
   <section class="section section-lightest-grey">
     <div class="container max-width">
       <div class="notification success mt-3" *ngIf="showSuccess; else activation">
-        Votre compte est maintenant activé, vous pouvez <a routerLink="/connexion">vous connecter</a> pour accéder à votre espace professionnel.
+        Votre compte est maintenant activé, vous pouvez <a routerLink="/connexion">vous connecter</a> pour accéder à votre espace entreprise.
       </div>
       <ng-template #activation>
         <form [formGroup]="activationForm" (ngSubmit)="submitForm()" class="form-horizontal">
@@ -21,7 +21,7 @@
               </label>
             </div>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="siret" disabled [value]="user?.login">
+              <input type="text" class="form-control" id="siret" disabled [value]="tokenInfo?.companySiret">
             </div>
           </div>
           <div class="form-group row">
@@ -51,7 +51,7 @@
               </label>
             </div>
             <div class="col-sm-6">
-              <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" />
+              <input [formControl]="emailCtrl" [readonly]="!mayEditEmail" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" [value]="mayEditEmail ? null : tokenInfo?.emailedTo" />
             </div>
           </div>
           <div class="form-group row">

@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from '../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Roles } from '../../model/AuthUser';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +40,6 @@ export class LoginComponent implements OnInit {
         this.isConnection = url[0].toString() === 'dgccrf' || url[0].toString() === 'connexion';
         this.isDgccrf = url[0].toString() === 'dgccrf';
       }
-
     });
   }
 
@@ -59,21 +57,29 @@ export class LoginComponent implements OnInit {
     this.authenticationError = '';
     if (!this.loginForm.valid) {
       this.showErrors = true;
-    } else {
+    } else if (this.isConnection) {
       this.authenticationService.login(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
-          if (user.role === Roles.ToActivate.toString()) {
-            this.router.navigate(['compte', 'activation']);
-          } else {
-            this.router.navigate(['suivi-des-signalements']);
-          }
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
+          this.router.navigate(['suivi-des-signalements']);
         },
         error => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
           this.authenticationError = `Echec de l'authentification`;
         }
       );
+    } else {
+      const handleError = () => {
+        this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
+        this.authenticationError = "Impossible de vous identifier. Veuillez vérifier le code d'accès et le SIRET";
+      }
+      this.authenticationService.fetchTokenInfo(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
+        token => {
+          this.router.navigate(['compte', 'activation']);
+        },
+        error => handleError()
+      )
     }
   }
 

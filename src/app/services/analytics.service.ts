@@ -15,7 +15,11 @@ export class AnalyticsService {
     if (isPlatformBrowser(this.platformId)) {
       this.angulartics2.eventTrack.next({
         action,
-        properties: { category, name, value }
+        properties: {
+          category,
+          name,
+          value
+        }
       });
     }
   }
@@ -34,12 +38,14 @@ export enum ReportEventActions {
   secondaryCategories = 'Affichage des autres problèmes',
   validateCategory = 'Sélection d\'une catégorie',
   validateSubcategory = 'Sélection d\'une sous catégorie',
+  employee = 'Consommateur employé de l\'entreprise',
+  notEmployee = 'Consommateur non employé de l\'entreprise',
   validateDetails = 'Validation de la description',
   validateCompany = 'Validation de l\'établissement',
   validateConsumer = 'Validation du consommateur',
   validateConfirmation = 'Envoi d\'un signalement',
   keywordsDetection = 'Mots-clés détectés',
-  companyTypeSelection = 'Sélection d\'un type d\'entreprise'
+  informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés'
 }
 
 export enum CompanyEventActions {
@@ -53,12 +59,12 @@ export enum CompanySearchEventNames {
   tooManyResults = 'Trop de résultat',
   severalResult = 'Plusieurs résultats',
   singleResult = 'Un seul résultat',
-  around = 'A proximité',
   error = 'Erreur technique'
 }
 
 export enum AuthenticationEventActions {
   success = 'Authentification réussie',
+  role = 'Rôle de la personne authentifiée',
   fail = 'Authentification en échec',
   forgotPasswordSuccess = 'Mot de passe oublié - envoi du mail',
   forgotPasswordFail = 'Mot de passe oublié - erreur technique',

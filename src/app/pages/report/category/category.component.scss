@@ -2,7 +2,7 @@
 @import "../../../../theme/media-queries";
 
 
-:host /deep/ {
+:host ::ng-deep {
   .alert.alert-danger.alert-dismissible {
     color: $black;
     position: fixed;
@@ -11,27 +11,6 @@
     width: 100%;
     background-color: $theme-warning-bg;
     border: none;
-  }
-}
-.banner {
-  padding-top: 1.5em;
-  padding-bottom: 0;
-
-  h4 {
-    margin-bottom: 0;
-  }
-}
-
-.banner h1 {
-  color: #26353f;
-  background-color: #fff;
-  padding: .5em 1em .6em;
-  display: inline-block;
-  font-size: 1.5rem !important;
-  margin-bottom: .6em;
-
-  @media #{$smaller-than-mobile} {
-    display: block;
   }
 }
 
@@ -51,9 +30,8 @@
       transform: scale(1.1);
       border-color: $primary;
     }
-  }
-  @media #{$smaller-than-tablet} {
-    &:active {
+    &:focus {
+      transform: scale(1.1);
       border-color: $primary;
     }
   }
@@ -63,85 +41,59 @@
   }
 }
 
-.notification {
+#all-categories-link {
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  color: $white;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 1em;
+  transition: all .2s ease-in-out;
 
-  overflow-wrap: break-word;
+  &:hover{
+    transform: scale(1.1);
+  }
+}
 
-  img {
-    width: 24px;
-    vertical-align: top;
+.indication {
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 1rem;
+}
+
+.card {
+  height: 100%;
+
+  .card-title {
+    font-weight: bold;
+    height: 80px;
+    text-align: left;
+  }
+}
+
+.carousel {
+
+  .carousel-inner {
+    padding: 0 50px;
   }
 
-  h5 {
-    display: inline-block;
-    margin: 0 0.5em;
-    padding-bottom: 0.5em;
+  .carousel-indicators {
+
+    padding-top: 10px;
+    position: relative;
+
+    li {
+      height: 20px;
+      width: 20px;
+      background: none;
+      border: 1px solid $white;
+      border-radius: 50%;
+
+      &.active {
+        background-color: $white;
+      }
+    }
+
   }
-
-}
-
-.nav-link.disabled {
-  pointer-events: auto;
-}
-
-.action-lighter-grey {
-  background-color: $lighter-grey;
-}
-
-.title {
-  font-size: 1.125rem;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  background-color: $light-blue;
-}
-
-.card-body {
-  padding-bottom: 18px !important;
-  padding-top: 18px !important;
-}
-
-.card-text {
-  margin-bottom: 0 !important;
-}
-
-a.active.disabled {
-  background-color: #53657D !important;
-  color: white;
-}
-
-.category.disabled {
-  background: repeating-linear-gradient(
-    135deg,
-    #fff,
-    #fff 10px,
-    #DEE5EC 10px,
-    #DEE5EC 20px
-  );
-}
-
-.category.disabled h5 {
-  color: #9B9DA0
-}
-
-h3 {
-  margin: 0.2em 0 0.8em;
-}
-
-.other-problems {
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  padding-bottom: .2em;
-  color: #0053b3;
-}
-
-.other-problems:hover {
-  color: #003067;
-}
-
-h3.other-problems {
-  padding-bottom: .2em;
-}
-
-p.internet-information {
-  margin-bottom: 40px !important
 }

@@ -1,4 +1,5 @@
 @import "../../../../../theme/variables";
+@import "../../../../../theme/media-queries";
 
 .overflow-container {
   overflow-x: auto;
@@ -57,6 +58,10 @@ form {
     text-align: center;
     vertical-align: middle;
 
+    &.col-checkbox {
+      min-width: 60px;
+    }
+
     &.action {
       background-color: $white !important;
       border: none;
@@ -64,7 +69,7 @@ form {
     }
 
     &.status-a-traiter {
-      background-color: $light-red;
+      background-color: $light-yellow;
     }
 
     &.status-na {
@@ -92,11 +97,11 @@ form {
     }
 
     &.status-a-transferer-signalement {
-      background-color: $light-orange;
+      background-color: $light-yellow;
     }
 
     &.status-signalement-transmis {
-      background-color: $light-green;
+      background-color: $light-yellow;
     }
 
     &.status-signalement-refuse {
@@ -107,8 +112,20 @@ form {
       background-color: $lighter-blue;
     }
 
-    &.status-pas-de-promesse-daction {
-      background-color: $light-green;
+    &.status-signalement-infonde {
+      background-color: $light-grey
+    }
+
+    &.status-signalement-mal-attribue {
+      background-color: $light-grey
+    }
+
+    &.status-signalement-non-consulte {
+      background-color: $light-grey
+    }
+
+    &.status-signalement-consulte-ignore {
+      background-color: $light-grey
     }
 
     &.status-en-attente {
@@ -132,7 +149,7 @@ form {
     }
 
     &.status-adresse-postale-incorrecte {
-      background-color: $light-red;
+      background-color: $light-yellow;
     }
   }
 
@@ -167,15 +184,6 @@ form {
   }
 }
 
-.item {
-  border-bottom: 1px solid $theme-border-lighter;
-  padding: 1em;
-
-  &:hover {
-    background: $lightest-grey;
-  }
-}
-
 .banner {
   margin-bottom: 2em;
 }
@@ -187,34 +195,44 @@ form {
   margin: 0 0 2em 0;
   background-color: $lightest-grey;
 
-  .btn-group[dropdown] {
-    .dropdown-toggle {
-      border-color: $grey;
-      background-color: $white;
-    }
-
-    ul.dropdown-menu {
-      height: 300px;
-      overflow-y: scroll;
-
-      .menutitle {
-        font-weight: bold;
-      }
-
-      .dropdown-item {
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-    }
-  }
-
-  .btn {
-    height: 43px;
+  ul.dropdown-menu {
+    height: 300px;
+    overflow-y: scroll;
   }
 
   input, select {
-    width: 300px;
+
+    @media #{$larger-than-tablet} {
+      width: 300px;
+    }
+    @media #{$smaller-than-phablet} {
+      width: 200px;
+    }
   }
+}
+
+.btn-group[dropdown] {
+  .dropdown-toggle {
+    border-color: $grey;
+    background-color: $white;
+  }
+
+  ul.dropdown-menu {
+
+    .menutitle {
+      font-weight: bold;
+    }
+
+    .dropdown-item {
+      padding-top: 0;
+      padding-bottom: 0;
+      text-transform: none;
+    }
+  }
+}
+
+.dropdown-toggle {
+  height: 43px;
 }
 
 
@@ -225,5 +243,33 @@ form {
       max-width: none !important;
       text-align: left;
     }
+  }
+}
+
+.valign-top {
+  vertical-align: top;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.container.pro {
+
+  .item {
+    border-bottom: 1px solid $theme-border-lighter;
+    padding: 1em;
+
+    &:hover {
+      background: $lightest-grey;
+    }
+  }
+
+  .status-non-consulte {
+    font-weight: bold;
+  }
+
+  .attach-icon {
+    margin-left: -20px;
   }
 }

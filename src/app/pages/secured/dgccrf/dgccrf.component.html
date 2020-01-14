@@ -1,106 +1,178 @@
-<div class="banner text-center section section-lighter-grey" role="banner">
+<div class="banner text-center section section-primary" role="region">
   <div class="container">
     <h1 class="text-center">
-      Mode d'emploi&nbsp;&nbsp;<small class="text-muted">Précisions sur le back-office</small>
+      Mode d'emploi
     </h1>
   </div>
 </div>
 
 <main role="main">
-
   <section class="section section-lightest-grey">
     <div class="container max-width">
-      <h2 class="mt-2">1. Base de données</h2>
-    </div>
 
-    <div class="container steps">
-      <div class="step">
+      <h2 class="pb-2 pb-lg-3">1. Base de données</h2>
 
-        <p class="mt-4">Les signalements sont affichés par date de création, du plus récent au plus vieux.<br />
-          En passant la souris sur un signalement, on peut lire le contenu plus en détails. De même, en cliquant sur une
-          ligne, on ouvre la page relatif au signalement.</p>
-
-        <p><strong>À quoi correspond le « Statut Pro » ?</strong></p>
-
-        <p>Il correspond au suivi du signalement par rapport au professionnel concerné.</p>
-
-        <ul>
-          <li><mark>À traiter</mark> (par l’équipe de SignalConso)</li>
-          <li><mark>NA</mark> : ne fait pas partie du périmètre de l’expérimentation ou le signalement n’est pas fondé
-            réglementairement</li>
-          <li><mark>Traitement en cours</mark> : un courrier informant le professionnel a été envoyé</li>
-          <li><mark>Signalement transmis</mark> : le professionnel nous a recontacté et a accepté de recevoir le
-            signalement</li>
-          <li><mark>Signalement refusé</mark> : le professionnel a refusé le signalement</li>
-          <li><mark>Promesse action</mark> : le professionnel souhaite mettre une action</li>
-          <li><mark>Pas de promesse d'action</mark> : le professionnel n’a pas mentionné de promesse d’action</li>
-        </ul>
-
+      <a class="lead show" data-toggle="collapse" href="#collapse1">
+        Comment est affichée la base de données ?
+      </a>
+      <div class="collapse" id="collapse1">
+        <p class="mt-4">
+          Les signalements sont affichés sous forme de liste, par date de création, du plus récent au plus vieux.
+          <br/>
+          En passant la souris sur un signalement, on peut lire le contenu plus en détails. En cliquant sur une
+          ligne, on ouvre la page détaillée relative au signalement.
+        </p>
       </div>
-    </div>
 
-    <div class="container max-width">
-      <h2 class="mt-5">2. Filtres</h2>
-    </div>
+      <hr>
 
-    <div class="container steps">
-      <div class="step">
-        <p class="mt-4">Pour le moment, il y a 6 possibilités de filtrage :</p>
-
-        <ul>
-          <li>Le Département ou la Région</li>
-          <li>La Catégorie ( = correspond à une icône sur la page d’accueil de SignalConso)</li>
-          <li>La Période</li>
-          <li>En utilisant un SIRET</li>
-          <li>Par « Statut Pro »</li>
-          <li>En recherchant par mot-clé</li>
-        </ul>
-
+      <a class="lead show" data-toggle="collapse" href="#collapse2">
+        Que signifie la colonne "Statut" ?
+      </a>
+      <div class="collapse" id="collapse2">
         <p>
-          La recherche par mot-clé permet de rechercher une sous-catégorie par exemple.<br />
-          La recherche par mot-clé va rechercher dans l’ensemble du champ «&nbsp;description&nbsp;» et dans le champ
-          «&nbsp;problème&nbsp;» (excepté le nom de la catégorie).<br />
+          Il correspond au traitement du signalement à un instant T.
         </p>
-
-        <p class="notification warning">
-          La recherche est insensible à la casse (majuscule/minuscule) par contre elle distingue les accents (pour le
-          moment).
-        </p>
-
-      </div>
-    </div>
-
-    <div class="container max-width">
-      <h2 class="mt-5">3. Export Excel</h2>
-    </div>
-
-    <div class="container steps">
-      <div class="step">
-
-        <p class="mt-4">L’export génère un fichier Excel qui reprend les signalements suivant les filtres appliqués le
-          cas échéant. Le fichier Excel comporte les informations suivantes :</p>
 
         <ul>
-          <li>Date de création</li>
-          <li>Département</li>
-          <li>Code postal</li>
-          <li>Siret</li>
-          <li>Nom de l'établissement</li>
-          <li>Adresse de l'établissement</li>
-          <li>Catégorie</li>
-          <li>Sous-catégories</li>
-          <li>Détails</li>
-          <li>Pièces jointes</li>
-          <li>Statut pro</li>
-          <li>Détail promesse d'action</li>
-          <li>Prénom (du consommateur)</li>
-          <li>Nom (du consommateur)</li>
-          <li>Email (du consommateur)</li>
-          <li>Accord pour contact ( oui = le consommateur a souhaité laissé visible ses coordonnées auprès du
-            professionnel, non = le consommateur a souhaité rester anonyme vis-à-vis du professionnel )</li>
+          <li>
+            <mark>Traitement en cours</mark>
+            Il s'agit d'un statut intermédiaire pendant lequel le signalement suit son cours et n'est pas clos.
+            C'est notamment la période laissée au professionnel pour prendre connaissance du signalement ou y répondre.
+          </li>
+          <li>
+            <mark>N.A (non-applicable)</mark>
+            : L'entreprise signalée ne fait pas partie du périmètre géographique de l’expérimentation.
+            Si la région n'a pas fait partie tout de suite de l'expérimentation, les signalements reçus sur cette période n'ont pas
+            été traités et sont classés en N.A.
+          </li>
+          <li>
+            <mark>Promesse d'action</mark>
+            : Le professionnel souhaite mettre en place une action préventive ou corrective.
+          </li>
+          <li>
+            <mark>Signalement infondé</mark>
+            : Le professionnel a déclaré le signalement comme infondé selon lui.
+          </li>
+          <li>
+            <mark>Signalement non consulté</mark>
+            : Le professionnel n'a pas créé de compte pour lire le signalement.
+          </li>
+          <li>
+            <mark>Signalement consulté ignoré</mark>
+            : Le professionnel a lu le signalement mais il n'a pas répondu malgré les relances.
+          </li>
+          <li>
+            <mark>Signalement mal attribué</mark>
+            : Le consommateur n'a pas sélectionné le bon établissement.
+          </li>
         </ul>
 
       </div>
+
+      <hr>
+
+      <a class="lead show" data-toggle="collapse" href="#collapse3">
+        Comment fonctionne le système de relance ?
+      </a>
+      <div class="collapse" id="collapse3">
+
+        <p>Un système de relance automatique est mis en place.</p>
+
+        <ul>
+          <li>
+            <strong>Le professionnel n'a pas encore de compte SignalConso : </strong>
+            Un premier courrier papier a été envoyé dès réception du signalement.
+            Après 21 jours, nous adressons un nouveau courrier l'incitant à créer son compte.
+            Une nouvelle période de 21 jours est lancée, au terme de laquelle nous clôturons le signalement.
+          </li>
+          <li>
+            <strong>Le professionnel a déjà ouvert un compte SignalConso : </strong>
+            Qu’il s’agisse d’un nouveau signalement pas encore consulté ou d’un signalement consulté mais resté sans réponse,
+            nous envoyons un email tous les 7 jours pendant 3 semaines pour inviter le professionnel à faire le nécessaire.
+            Au terme de ces relances, le signalement est clôturé.
+          </li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <a class="lead show" data-toggle="collapse" href="#collapse4">
+        A quoi sert la croix bleue sur la droite des signalements ?
+      </a>
+      <div class="collapse" id="collapse4">
+        <p> Sur le bord droit du tableau, la croix bleue permet d'enregistrer des actions DGCCRF.</p>
+
+        <ul>
+          <li>
+            <mark>Ajout d'un commentaire interne à la DGCCRF</mark>
+            : ce commentaire n'est visible que par la DGCCRF actuellement.
+          </li>
+          <li>
+            <mark>Contrôle effectué</mark>
+            : en l'absence de rattachement avec SORA, le suivi des contrôles peut être enregistré directement sur le site.
+          </li>
+        </ul>
+
+      </div>
+
+      <h2 class="pt-5 pb-2 pb-lg-3">2. Filtres</h2>
+
+      <p>Pour le moment, il y a 6 possibilités de filtrage :</p>
+
+      <ul>
+        <li>Le Département ou la Région</li>
+        <li>La Catégorie ( = correspond à une icône sur la page d’accueil de SignalConso)</li>
+        <li>La Période</li>
+        <li>En utilisant un SIRET</li>
+        <li>Par « Statut »</li>
+        <li>En recherchant par mot-clé</li>
+      </ul>
+
+      <p>
+        La recherche par mot-clé permet de rechercher une sous-catégorie par exemple.<br/>
+        La recherche par mot-clé va rechercher dans l’ensemble du champ «&nbsp;description&nbsp;» et dans le champ
+        «&nbsp;problème&nbsp;» (excepté le nom de la catégorie).<br/>
+      </p>
+
+      <p class="notification warning">
+        La recherche est insensible à la casse (majuscule/minuscule) par contre elle distingue les accents (pour le moment).
+      </p>
+
+      <h2 class="pt-5 pb-2 pb-lg-3">3. Export Excel</h2>
+
+      <p>
+        L’export génère un fichier Excel qui reprend les signalements suivant les filtres appliqués le cas échéant.
+        Le fichier Excel comporte les informations suivantes :
+      </p>
+
+      <ul>
+        <li>Date de création</li>
+        <li>Département, Code postal</li>
+        <li>Siret, Nom de l'établissement, Adresse de l'établissement</li>
+        <li>Catégorie, Sous-catégories</li>
+        <li>Détails du signalement, Pièces jointes</li>
+        <li>Statut</li>
+        <li>Détail promesse d'action</li>
+        <li>Prénom, Nom, Email (du consommateur)</li>
+        <li>Accord pour contact ( oui = le consommateur a souhaité laissé visible ses coordonnées auprès du
+          professionnel, non = le consommateur a souhaité rester anonyme vis-à-vis du professionnel )
+        </li>
+      </ul>
+
+      <h2 class="pt-5 pb-2 pb-lg-3">4. Autres outils disponibles</h2>
+
+      <p>Il existe deux outils disponibles pour le moment :</p>
+
+      <ul>
+        <li>La liste des entreprises les plus signalées ;</li>
+        <li>Un abonnement par zone géographique. En cochant un département, vous recevrez par email tous les
+          lundis matins le récapitulatif des signalements reçus pour ce département la semaine précédente. Cet
+          email ne contient que les informations principales. Vous pouvez ensuite aller sur la base de données
+          pour voir les signalements plus en détails.
+      </ul>
+
     </div>
   </section>
 </main>
+

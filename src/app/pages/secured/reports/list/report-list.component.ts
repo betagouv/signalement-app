@@ -1,17 +1,16 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { DetailInputValue, Report } from '../../../../model/Report';
+import { DetailInputValue, Report, ReportStatus } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
-import { Department, Region, Regions, ReportFilter } from '../../../../model/ReportFilter';
+import { ReportFilter } from '../../../../model/ReportFilter';
 import { combineLatest, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
 import { StorageService } from '../../../../services/storage.service';
-import { deserialize } from 'json-typescript-mapper';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
@@ -20,6 +19,11 @@ import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
+import { Department, Region, Regions } from '../../../../model/Region';
+import oldCategories from '../../../../../assets/data/old-categories.json';
+import { AccountService } from '../../../../services/account.service';
+import { HttpResponse } from '@angular/common/http';
+import { EventService } from '../../../../services/event.service';
 
 const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
@@ -34,6 +38,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   user: User;
   permissions = Permissions;
   roles = Roles;
+  reportStatus = ReportStatus;
   regions = Regions;
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
@@ -42,8 +47,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   reportFilter: ReportFilter;
   reportExtractUrl: string;
-  statusPros: string[];
-  statusConsos: string[];
+  statusList: string[];
   categories: string[];
 
   modalRef: BsModalRef;
@@ -52,6 +56,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
   loading: boolean;
   loadingError: boolean;
 
+  checkedReportUuids = new Set<string>();
+
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
               private meta: Meta,
@@ -59,6 +65,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private anomalyService: AnomalyService,
               private reportService: ReportService,
               private constantService: ConstantService,
+              private accountService: AccountService,
+              private eventService: EventService,
               private fileUploaderService: FileUploaderService,
               private storageService: StorageService,
               private localeService: BsLocaleService,
@@ -81,29 +89,46 @@ export class ReportListComponent implements OnInit, OnDestroy {
       period: []
     };
 
+    if (this.user && this.user.role === Roles.Pro) {
+      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    }
+
     this.loading = true;
     this.loadingError = false;
-    combineLatest(
+    combineLatest([
       this.storageService.getLocalStorageItem(ReportFilterStorageKey),
-      this.constantService.getStatusPros(),
-      this.constantService.getStatusConsos(),
+      this.constantService.getReportStatusList(),
       this.route.paramMap
-    ).subscribe(
-      ([reportFilter, statusPros, statusConsos, params]) => {
+    ]).subscribe(
+      ([reportFilter, statusList, params]) => {
+
+
         if (reportFilter) {
-          this.reportFilter = deserialize(ReportFilter, reportFilter);
+          this.reportFilter = reportFilter;
         }
-        this.statusPros = statusPros;
-        this.statusConsos = statusConsos;
+        const siret = params.get('siret');
+
+        if (siret) {
+          this.reportFilter = { ...this.reportFilter, siret};
+        }
+
+        this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+
+        this.statusList = statusList;
         this.loadReportExtractUrl();
         this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
+
       },
       err => {
         this.loading = false;
         this.loadingError = true;
       });
 
-    this.categories = this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
+    this.categories =
+      [
+        ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
+        ...oldCategories
+      ];
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
@@ -118,9 +143,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.go('suivi-des-signalements/page/1');
-    this.loadReportExtractUrl();
     this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    this.loadReportExtractUrl();
     this.initPagination();
+
     this.loadReports(1);
   }
 
@@ -137,7 +163,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         return this.reportService.getReports(
           (page - 1) * this.itemsPerPage,
           this.itemsPerPage,
-          reportFilter ? deserialize(ReportFilter, reportFilter) : new ReportFilter()
+          Object.assign(new ReportFilter(), reportFilter)
         );
       })
     ).subscribe(
@@ -176,6 +202,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
             .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
         });
     });
+
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
@@ -239,16 +266,15 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   selectArea(area?: Region | Department) {
-    this.reportFilter.area = area;
-  }
-
-  getAreaLabel() {
-    if (!this.reportFilter.area) {
-      return 'Tous les départements';
-    } else if (this.reportFilter.area instanceof Region) {
-      return this.reportFilter.area.label;
+    if (!area) {
+      this.reportFilter.areaLabel = undefined;
+      this.reportFilter.departments = [];
+    } else if (area instanceof Region) {
+      this.reportFilter.areaLabel = area.label;
+      this.reportFilter.departments = area.departments;
     } else {
-      return `${this.reportFilter.area.code} - ${this.reportFilter.area.label}`;
+      this.reportFilter.areaLabel = `${area.code} - ${area.label}`;
+      this.reportFilter.departments = [area];
     }
   }
 
@@ -285,11 +311,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
       const nbWords = helper(str.split(' '), '', 0);
 
       const lines = strings.reduce((prev, curr, index) => index < nbWords
-        ? {...prev, line: prev.line + curr + " "}
-        : {...prev, rest: prev.rest + curr + " "}
-      , {line: "", rest: ""})
+        ? {...prev, line: prev.line + curr + ' '}
+        : {...prev, rest: prev.rest + curr + ' '}
+      , {line: '', rest: ''});
 
-      return { line: lines.line.trim(), rest: lines.rest.trim() }
+      return { line: lines.line.trim(), rest: lines.rest.trim() };
     }
 
     let firstLine = '';
@@ -317,4 +343,64 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkReport(event$: Event, reportUuid: string) {
+    event$.stopPropagation();
+    if (this.checkedReportUuids.has(reportUuid)) {
+      this.checkedReportUuids.delete(reportUuid);
+    } else {
+      this.checkedReportUuids.add(reportUuid);
+    }
+  }
+
+  checkAllReports(event$: Event) {
+    event$.stopPropagation();
+    if (this.getCurrentPageReportUuidsToProcess().length === this.checkedReportUuids.size) {
+      this.checkedReportUuids.clear();
+    } else {
+      this.checkedReportUuids = new Set(this.getCurrentPageReportUuidsToProcess());
+    }
+  }
+
+  getCurrentPageReportUuidsToProcess() {
+    if (this.reportsByDate) {
+      return this.reportsByDate
+        .reduce((reportUuids, reportsByDate) => ([
+          ...reportUuids,
+          ...reportsByDate.reports.filter(r => r.status === ReportStatus.ToProcess).map(r => r.id)
+        ]), []);
+    }
+  }
+
+  downloadActivationDocuments() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.accountService.downloadActivationDocuments(this.checkedReportUuids).subscribe(response => {
+        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'courriers.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  confirmLettersSending() {
+    this.loading = true;
+    this.loadingError = false;
+    this.eventService.confirmContactByPostOnReportList(this.checkedReportUuids).subscribe(
+      events => {
+        this.loading = false;
+        this.modalRef.hide();
+        this.loadReports(this.currentPage);
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
+  }
 }

@@ -1,0 +1,207 @@
+- title: Notice et emballage
+  example: 'Exemples : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais'
+  subcategories:
+    - title: Informations manquantes
+      description: "Certaines informations sont obligatoires.
+              <br/>Par exemple :
+              <ul>
+                <li>Vêtements : la composition des tissus (noms et proportions des matières)</li>
+                <li>Meubles : la composition, la taille, s'il faut le monter soi-même, de quel cuir il s'agit</li>
+                <li>Electroménagers : l'étiquetage énergétique, la disponibilité des pièces de rechange</li>
+              </ul>"
+      detailInputs:
+        - label: Quel est-le problème&#160;?
+          rank: 1
+          type: RADIO
+          options:
+            - Composition
+            - Données énergétiques
+            - Disponibilité des pièces de rechange
+            - Autre (à préciser)
+        - label: Quel est le type de produit&#160;?
+          rank: 2
+          type: RADIO
+          options:
+            - Textiles
+            - Meubles
+            - Électroménager
+            - Jouets
+            - Électroniques
+            - Autre (à préciser)
+        - label: Date du constat ou d'achat
+          rank: 3
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Nom / marque
+          rank: 4
+          type: TEXT
+        - label: Qu'avez-vous constaté&#160;?
+          rank: 5
+          type: TEXTAREA
+      fileLabel: Photos du code barre / n° de lot / référence
+    - title: Informations du produit ou notice uniquement en langue étrangère
+      example: Aucune information traduite en français
+      subcategoriesTitle: Où avez-vous acheté votre produit&#160;?
+      subcategories:
+        - title: En France (Outre-mer compris)
+          detailTitle: Problème de langue française
+          description: Les informations relatives aux produits et aux services doivent être rédigées ou traduites en français.
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Nom / marque / type de produit
+              rank: 2
+              type: TEXT
+            - label: Référence
+              rank: 3
+              type: TEXT
+            - label: Description
+              rank: 4
+              type: TEXTAREA
+        - title: À l'étranger
+          information:
+            title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
+    - title: Informations trompeuses ou fausses
+      example: 'Exemples : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas '
+      detailInputs:
+        - label: Quel est le type de produit&#160;?
+          rank: 1
+          type: RADIO
+          options:
+            - Textiles
+            - Meubles
+            - Électroménager
+            - Jouets
+            - Électroniques
+            - Autre (à préciser)
+        - label: Date du constat
+          rank: 2
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Nom / marque / référence
+          rank: 3
+          type: TEXT
+        - label: Description
+          rank: 4
+          type: TEXTAREA
+      consumerActions: !!import/single ../common/actions/magasin.yml
+- title: Produit dangereux
+  example: 'Exemples : jouet qui prend feu, allergie, intoxication'
+  information:
+    title: Vous souhaitez signaler un produit dangereux
+    content: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
+    actions:
+      - question: Signaler un produit dangereux?
+        answer: Utiliser ce formulaire spécifique<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+- title: Durée de vie trop courte
+  example: Vous trouvez que la durée de vie de votre appareil est trop courte
+  detailInputs:
+    - label: Date d'achat
+      rank: 1
+      type: DATE
+    - label: Date du constat
+      rank: 2
+      type: DATE
+      defaultValue: SYSDATE
+    - label: Type de produit
+      rank: 3
+      type: TEXT
+    - label: Nom / marque / référence
+      rank: 4
+      type: TEXT
+    - label: Description
+      rank: 5
+      type: TEXTAREA
+- title: La quantité annoncée est non conforme
+  subcategoriesTitle: Quel est le type de produit&#160;?
+  subcategories:
+    - title: Un produit emballé par le fabricant comme une boîte de conserve, un paquet, une bouteille
+      example: 'La quantité est directement imprimée sur l''emballage par le fabricant'
+      description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
+        <br/>Par contre, ces différences sont encadrées par la loi.
+        <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
+        <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/controle-des-quantites-vendues-a-destination-des-professionnels" target="_blank"> En savoir plus </a>
+      detailInputs:
+        - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
+          rank: 1
+          type: RADIO
+          options:
+            - Oui
+            - Non
+        - label: Type de produit
+          rank: 2
+          type: TEXT
+        - label: Nom /marque
+          rank: 3
+          type: TEXT
+        - label: Quelle erreur a été constatée&#160;?
+          rank: 4
+          type: TEXTAREA
+    - title: Un produit emballé et étiqueté par le magasin comme une barquette de viande
+      example: 'La quantité est marquée sur une étiquette collée par le commerçant'
+      description: La quantité annoncée correspond à la quantité que vous devez avoir au minimum.
+      detailInputs:
+        - label: Date du constat ou d'achat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Nom du produit
+          rank: 2
+          type: TEXT
+        - label: Elements d'identification (date limite, n° de lot)
+          rank: 3
+          type: TEXT
+          optionnal: true
+          placeholder: Elements d'identification
+        - label: Description
+          rank: 4
+          type: TEXTAREA
+    - title: Un produit sans emballage, directement consommé
+      example: 'Exemples : verre de vin dans un café, plat au restaurant'
+      description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
+      detailInputs:
+        - label: Date du constat ou d'achat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Nom du produit
+          rank: 2
+          type: TEXT
+        - label: Description
+          rank: 3
+          type: TEXTAREA
+- title: Produit en retrait / rappel
+  example: Le produit vendu fait l'objet d'une mesure de retrait / rappel des autorités
+  detailInputs:
+    - label: Date du constat
+      rank: 1
+      type: DATE
+      defaultValue: SYSDATE
+    - label: Heure du constat
+      rank: 2
+      type: TIMESLOT
+      optionnal: true
+    - label: Nom du produit / marque
+      rank: 3
+      type: TEXT
+    - label: N° de lot / référence
+      rank: 4
+      type: TEXT
+    - label: Qu'avez-vous constaté&#160;?
+      rank: 5
+      type: TEXTAREA
+- title: Produit pas bon
+  information:
+    title: Trouver qu'un produit n'est pas bon n'est pas un motif de signalement sur SignalConso.
+    actions:
+      - question: Vous avez acheté votre produit en magasin&#160;?
+        answer: Contactez plutôt le service client de la marque.
+          <br/>Généralement il est indiqué sur l'emballage.
+          <br/>Si ce n'est pas le cas, contactez votre commerçant afin de lui faire part de votre avis ou de votre mécontentement.
+      - question: Vous avez commandé votre produit dans un bar ou un restaurant&#160;?
+        answer: Si vous trouvez que le plat n'est pas frais ou pas assez chaud, vous pouvez demander que l'on vous remplace le plat.
+          <br/>Si votre vin est bouchonné, vous pouvez demander à le changer.
+          <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.
+        outOfScope: true

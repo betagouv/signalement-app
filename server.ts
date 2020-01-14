@@ -8,7 +8,9 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as compression from 'compression';
+import * as helmet from 'helmet';
 import { join } from 'path';
+
 
 enableProdMode();
 
@@ -18,6 +20,25 @@ app.use(compression());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(helmet({
+  hsts: {
+    maxAge: 15768000   // 6 months in seconds
+  },
+  frameguard: {
+    action: 'deny'
+  }
+}));
+
+if (process.env.API_BASE_URL) {
+  app.use(function(req, res, next) {
+    res.setHeader("Content-Security-Policy",
+      `default-src 'self' *.data.gouv.fr ${process.env.API_BASE_URL} 'unsafe-inline';  \
+       script-src 'self' *.data.gouv.fr 'sha256-WWHGLj0eoGsKPEGMnTqjS4sH0zDInMRPKN098NNWH4E='; \
+       img-src 'self' *.data.gouv.fr data:;`);
+    return next();
+  });
+}
 
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const PORT = process.env.PORT || 8080;

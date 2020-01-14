@@ -12,10 +12,12 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { of } from 'rxjs';
 import { User } from '../../../../model/AuthUser';
 import { ReportService } from '../../../../services/report.service';
-import { Report } from '../../../../model/Report';
+import { Report, ReportStatus } from '../../../../model/Report';
 import { EventService } from '../../../../services/event.service';
 import { Consumer } from '../../../../model/Consumer';
-import { ProAnswerReportEventAction, ReportEvent } from '../../../../model/ReportEvent';
+import { EventActionValues, ReportEvent } from '../../../../model/ReportEvent';
+import { ComponentsModule } from '../../../../components/components.module';
+import { PipesModule } from '../../../../pipes/pipes.module';
 
 describe('ReportDetailComponent', () => {
 
@@ -35,8 +37,11 @@ describe('ReportDetailComponent', () => {
   });
 
   const answerEventFixture = Object.assign(new ReportEvent(), {
-    action: ProAnswerReportEventAction,
-    detail: 'détails'
+    action: {value : EventActionValues.ReportResponse},
+    details: {
+      responseType: 'ACCEPTED',
+      consumerDetails: 'details'
+    }
   });
 
   beforeEach(async(() => {
@@ -44,7 +49,7 @@ describe('ReportDetailComponent', () => {
       declarations: [
         ReportDetailComponent,
         AppRoleDirective,
-        AppPermissionDirective
+        AppPermissionDirective,
       ],
       imports: [
         FormsModule,
@@ -53,6 +58,8 @@ describe('ReportDetailComponent', () => {
         HttpClientModule,
         ModalModule.forRoot(),
         RouterTestingModule,
+        ComponentsModule,
+        PipesModule,
       ]
     })
     .compileComponents();
@@ -65,7 +72,7 @@ describe('ReportDetailComponent', () => {
       authenticationService.user = of(Object.assign(new User(), {role: 'Professionnel'}));
     });
 
-    describe('when no answer has been sent', () => {
+    describe('when no answer has been sent and the report is not closed', () => {
 
       beforeEach(() => {
         reportService = TestBed.get(ReportService);
@@ -95,6 +102,30 @@ describe('ReportDetailComponent', () => {
 
     });
 
+    describe('when no answer has been sent and the report is closed', () => {
+
+      beforeEach(() => {
+        reportService = TestBed.get(ReportService);
+        spyOn(reportService, 'getReport').and.returnValue(of(
+          Object.assign(new Report(), reportFixture, {status: ReportStatus.ClosedForPro})
+        ));
+
+        eventService = TestBed.get(EventService);
+        spyOn(eventService, 'getEvents').and.returnValue(of([]));
+
+        fixture = TestBed.createComponent(ReportDetailComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
+
+      it('should not display the answer and not enable to add another answer', () => {
+        const nativeElement = fixture.nativeElement;
+        expect(nativeElement.querySelector('#answerBtn')).toBeNull();
+        expect(nativeElement.querySelector('#proAnswer')).toBeNull();
+      });
+
+    });
+
     describe('when an answer has already been sent', () => {
 
       beforeEach(() => {
@@ -113,7 +144,8 @@ describe('ReportDetailComponent', () => {
         const nativeElement = fixture.nativeElement;
         expect(nativeElement.querySelector('#answerBtn')).toBeNull();
         expect(nativeElement.querySelector('#proAnswer')).not.toBeNull();
-        expect(nativeElement.querySelector('#proAnswer').textContent.indexOf(answerEventFixture.detail)).toBeGreaterThan(-1);
+        expect(nativeElement.querySelector('#proAnswer').textContent
+          .indexOf(answerEventFixture.details.consumerDetails)).toBeGreaterThan(-1);
       });
 
     });

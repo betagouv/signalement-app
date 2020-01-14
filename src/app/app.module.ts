@@ -20,6 +20,9 @@ import { LoginModule } from './pages/login/login.module';
 import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
+import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
+import { TooltipModule } from 'ngx-bootstrap';
+import { Angulartics2Module } from 'angulartics2';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -29,6 +32,7 @@ registerLocaleData(localeFr, 'fr');
     HeaderComponent,
     FooterComponent,
     StatsComponent,
+    AccountMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -40,8 +44,11 @@ registerLocaleData(localeFr, 'fr');
     RouterModule.forRoot([
       { path: 'stats', component: StatsComponent },
       { path: '**', component: ReportComponent },
-      { path: '**', redirectTo: '' }
-    ], {scrollPositionRestoration: 'top'}),
+      { path: '**', redirectTo: '' },
+    ], {
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+    }),
     ReportModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -49,6 +56,8 @@ registerLocaleData(localeFr, 'fr');
     SecuredModule,
     StaticModule,
     BsDropdownModule.forRoot(),
+    TooltipModule,
+    Angulartics2Module.forRoot(),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

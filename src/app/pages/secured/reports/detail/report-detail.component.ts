@@ -1,9 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Report } from '../../../../model/Report';
+import { Report, ReportStatus } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
-import { UploadedFile } from '../../../../model/UploadedFile';
+import { FileOrigin, UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
-import { ProAnswerReportEventAction, ReportEvent } from '../../../../model/ReportEvent';
 import { combineLatest } from 'rxjs';
 import { EventService } from '../../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -15,6 +14,8 @@ import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
+import { EventActionValues, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
+import { Constants } from '../../../../model/Constants';
 
 @Component({
   selector: 'app-report-detail',
@@ -25,8 +26,11 @@ export class ReportDetailComponent implements OnInit {
 
   reportId: string;
 
+  eventActionValues = EventActionValues
   permissions = Permissions;
   roles = Roles;
+  constants = Constants;
+
   report: Report;
 
   showErrors: boolean;
@@ -56,9 +60,14 @@ export class ReportDetailComponent implements OnInit {
   emailCtrl: FormControl;
   contactAgreementCtrl: FormControl;
 
-  proAnswerForm: FormGroup;
-  answerCtrl: FormControl;
-  answerSuccess: boolean;
+  responseForm: FormGroup;
+  responseConsumerDetailsCtrl: FormControl;
+  responseDgccrfDetailsCtrl: FormControl;
+  responseTypeCtrl: FormControl;
+  responseSuccess: boolean;
+  reportResponseTypes = ReportResponseTypes;
+  fileOrigins = FileOrigin;
+  uploadedFiles: UploadedFile[];
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -71,6 +80,7 @@ export class ReportDetailComponent implements OnInit {
               private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
+
     this.loading = true;
     this.loadingError = false;
     this.platformLocation.onPopState(() => {
@@ -142,9 +152,12 @@ export class ReportDetailComponent implements OnInit {
     this.consumerForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
-      email: this.emailCtrl,
-      contactAgreement: this.contactAgreementCtrl
+      email: this.emailCtrl
     });
+
+    if (!this.report.employeeConsumer) {
+      this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
+    }
   }
 
   back() {
@@ -216,17 +229,8 @@ export class ReportDetailComponent implements OnInit {
   changeCompany(company: Company) {
     this.loading = true;
     this.loadingError = false;
-    this.reportService.updateReport(Object.assign(new Report(), this.report, { company }))
+    this.reportService.updateReportCompany(this.reportId, company)
       .pipe(
-        switchMap(() => {
-          return this.eventService.createEvent(Object.assign(new ReportEvent(), {
-            reportId: this.reportId,
-            eventType: 'RECTIF',
-            action: {name: 'Modification du commerçant'},
-            detail: `Commerçant précédent : Siret ${this.report.company.siret ? this.report.company.siret : 'non renseigné'} - ` +
-              `${this.reportService.company2adresseApi(this.report.company)}`
-          }));
-        }),
         switchMap(() => {
           return this.eventService.getEvents(this.reportId);
         })
@@ -240,7 +244,7 @@ export class ReportDetailComponent implements OnInit {
           this.bsModalRef.hide();
         },
         err => {
-          console.log('err', err)
+          console.log('err', err);
           this.loading = false;
           this.loadingError = true;
         });
@@ -256,17 +260,8 @@ export class ReportDetailComponent implements OnInit {
         email: this.emailCtrl.value
       });
     const contactAgreement = this.contactAgreementCtrl.value;
-    this.reportService.updateReport(Object.assign(new Report(), this.report, { consumer, contactAgreement }))
+    this.reportService.updateReportConsumer(this.reportId, consumer, contactAgreement)
       .pipe(
-        switchMap(() => {
-          return this.eventService.createEvent(Object.assign(new ReportEvent(), {
-            reportId: this.reportId,
-            eventType: 'RECTIF',
-            action: {name: 'Modification du consommateur'},
-            detail: `Consommateur précédent : ${this.report.consumer.firstName} ${this.report.consumer.lastName}` +
-              ` - ${this.report.consumer.email} - Accord pour contact : ${this.report.contactAgreement ? 'oui' : 'non'}`
-          }));
-        }),
         switchMap(() => {
           return this.eventService.getEvents(this.reportId);
         })
@@ -285,35 +280,51 @@ export class ReportDetailComponent implements OnInit {
   }
 
   showProAnswerForm() {
-    this.answerCtrl = this.formBuilder.control('', Validators.required);
-    this.proAnswerForm = this.formBuilder.group({
-      answer: this.answerCtrl
+    this.responseTypeCtrl = this.formBuilder.control('', Validators.required);
+    this.responseConsumerDetailsCtrl = this.formBuilder.control('', Validators.required);
+    this.responseDgccrfDetailsCtrl = this.formBuilder.control('');
+    this.responseForm = this.formBuilder.group({
+      responseConsumerDetails: this.responseConsumerDetailsCtrl,
+      responseDgccrfDetails: this.responseDgccrfDetailsCtrl,
+      responseType: this.responseTypeCtrl
     });
+    if (!this.uploadedFiles) {
+      this.uploadedFiles = [];
+    }
   }
 
   hideProAnswerForm() {
-    this.proAnswerForm = undefined;
+    this.responseForm = undefined;
+  }
+
+  isUploadingFile() {
+    return this.uploadedFiles.find(file => file.loading);
   }
 
   submitProAnswerForm() {
-    if (!this.proAnswerForm.valid) {
+    if (!this.responseForm.valid) {
       this.showErrors = true;
     } else {
       this.loading = true;
       this.loadingError = false;
-      this.eventService.createEvent(
-        Object.assign(new ReportEvent(), {
-          reportId: this.reportId,
-          eventType: 'PRO',
-          action: Object.assign(ProAnswerReportEventAction),
-          detail: this.answerCtrl.value,
-          resultAction: true
+      this.reportService.postReportResponse(
+        this.reportId,
+        Object.assign(new ReportResponse(), {
+          responseType: this.responseTypeCtrl.value,
+          consumerDetails: this.responseConsumerDetailsCtrl.value,
+          dgccrfDetails: this.responseDgccrfDetailsCtrl.value,
+          fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
+        })
+      ).pipe(
+        switchMap(() => {
+          return this.eventService.getEvents(this.reportId);
         })
       ).subscribe(
-        event => {
+        events => {
+          this.events = events;
+          this.report.uploadedFiles = [...this.report.uploadedFiles, ...this.uploadedFiles.filter(file => file.id)];
           this.loading = false;
-          this.events.push(event);
-          this.answerSuccess = true;
+          this.responseSuccess = true;
         },
         err => {
           this.loading = false;
@@ -327,7 +338,24 @@ export class ReportDetailComponent implements OnInit {
     return this.showErrors && formControl.errors;
   }
 
-  getProAnswerEvent() {
-    return this.events.find(event => event.action.name === ProAnswerReportEventAction.name);
+  getEvent(eventActionValue: EventActionValues) {
+    return this.events.find(event => event.action.value === eventActionValue);
+  }
+
+  getReportResponse(): ReportResponse {
+    const reportResponseEvent = this.getEvent(EventActionValues.ReportResponse);
+    if (reportResponseEvent) {
+      return reportResponseEvent.details as ReportResponse;
+    }
+  }
+
+  getResponseTypeClass(value) {
+    if (this.responseTypeCtrl.value) {
+      return this.responseTypeCtrl.value === value ? 'selected' : 'not-selected';
+    }
+  }
+
+  isClosed() {
+    return this.report.status === ReportStatus.ClosedForPro;
   }
 }

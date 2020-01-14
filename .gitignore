@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /src/assets/data/anomalies.json
+/src/assets/data/blog-meta-data.json
 
 # dependencies
 /node_modules
