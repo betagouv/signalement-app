@@ -30,29 +30,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-lg-auto">
-        <li class="nav-item">
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent">
           <a class="nav-link" routerLink="/qui-sommes-nous">
             Qui sommes-nous ?
           </a>
         </li>
-        <li class="nav-item" *appRole="[roles.Pro] else how">
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" *appRole="[roles.Pro] else how">
           <a class="nav-link" routerLink="/vous-êtes-un-professionnel">
             Comment ça marche ?
           </a>
         </li>
         <ng-template #how>
-          <li class="nav-item">
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent">
             <a class="nav-link" routerLink="/comment-ça-marche">
               Comment ça marche ?
             </a>
           </li>
         </ng-template>
-        <li class="nav-item" *appRole="[roles.DGCCRF]">
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" *appRole="[roles.DGCCRF]">
           <a class="nav-link" routerLink="/mode-emploi-dgccrf">
             Mode d'emploi
           </a>
         </li>
-        <li class="nav-item d-none d-lg-block" *ngIf="!user; else userMenuLg">
+        <li class="nav-item d-none d-lg-block" data-toggle="collapse" data-target="#navbarSupportedContent" *ngIf="!user; else userMenuLg">
           <button type="button" class="btn btn-secondary" [routerLink]="['activation']">
            Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
           </button>
