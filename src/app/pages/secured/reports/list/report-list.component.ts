@@ -32,7 +32,6 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
   styleUrls: ['./report-list.component.scss']
 })
 export class ReportListComponent implements OnInit, OnDestroy {
-
   user: User;
   permissions = Permissions;
   roles = Roles;

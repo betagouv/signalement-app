@@ -22,7 +22,8 @@
                             <dt class="col-sm-3">Adresse</dt>
                             <dd class="col-sm-9">{{access.companyAddress}}</dd>
                         </dl>
-                    <a class="btn btn-primary" [routerLink]="['/entreprise', 'acces', access.companySiret]" *ngIf="access.level == 'admin'">Gérer les accès</a>
+                    <a class="btn btn-primary mr-1" [routerLink]="['/entreprise', 'acces', access.companySiret]" *ngIf="access.level == 'admin'">Gérer les accès</a>
+                    <a class="btn btn-primary" [routerLink]="['/suivi-des-signalements', 'siret', access.companySiret]">Consulter les signalements</a>
                 </div>
             </div>
         </div>
