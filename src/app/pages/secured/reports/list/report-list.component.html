@@ -308,7 +308,7 @@
             </td>
             <td class="pre">
               <span *ngFor="let file of report.consumerUploadedFiles | slice : 0 : 2; let isFirst=first;" [tooltip]="file.filename">
-                <a href="{{getFileDownloadUrl(file)}}">
+                <a href="{{getFileDownloadUrl(file)}}" (click)="$event.stopPropagation()">
                   {{file.displayedFilenameSmall}}
                 </a>
                 <br *ngIf="isFirst" />
