@@ -54,7 +54,7 @@
                         - sms
                         - message dans l'espace client
                         - "je n'ai rien reçu"
-                    - label: Si vous avez reçu un courrier/email/sms, quel est sa date ?
+                    - label: Si vous avez reçu un courrier/email/sms, quelle est sa date ?
                       rank: 5
                       type: DATE
                       optionnal: true 
