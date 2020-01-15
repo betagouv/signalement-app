@@ -1,8 +1,8 @@
 - title: Un problème qui concerne le magasin / le commerce
-  example: 'Exemples : prix manquant, prix faux en caisse, magasin sale'
+  example: 'Exemple : prix manquant, prix faux en caisse, magasin sale'
   subcategories:
     - title: Prix
-      example: 'Exemples : prix faux en caisse, prix pas affiché'
+      example: 'Exemple : prix faux en caisse, prix pas affiché'
       subcategories:
         - title: Le prix à la caisse est différent du prix affiché
           example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros'
@@ -70,7 +70,7 @@
                           <br/> Par exemple, le prix des livres est réglementé.
                           <br/><br/> Un commerçant n'a pas le droit de vendre à un prix trop bas : il ne peut pas vendre un produit moins cher que ce qu'il lui a coûté. Il existe quelques situations où il a le droit de vendre en dessous du prix d'achat, comme la période des soldes."
         - title: Fausse réduction de prix
-          example: 'Exemples : fausse promotion pendant les soldes, fausse liquidation totale'
+          example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale'
           description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
                    <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
                    Un document prouvant ette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue."
@@ -92,7 +92,7 @@
               rank: 3
               type: TEXTAREA
     - title: Hygiène
-      example: 'Exemples : magasin sale, rayon froid pas à bonne température'
+      example: 'Exemple : magasin sale, rayon froid pas à bonne température'
       subcategories:
         - title: Locaux sales
           detailInputs:
@@ -135,7 +135,7 @@
               type: TIMESLOT
               optionnal: true
         - title: Hygiène du personnel
-          example: 'Exemples : tenue sale ou pas adaptée'
+          example: 'Exemple : tenue sale ou pas adaptée'
           subcategories:
             - title: Tenue de travail pas adaptée
               subcategories:
@@ -202,7 +202,7 @@
               rank: 4
               type: TIMESLOT
               optionnal: true
-        - title: Autres problème d'hygiène
+        - title: Autre problème d'hygiène
     - title: Produit périmé
       subcategoriesTitle: 'Vous voulez signaler&#160;:'
       subcategories:
@@ -210,7 +210,7 @@
           subcategoriesTitle: Quels sont les produits concernés&#160;?
           subcategories:
             - title: Des produits vendus au rayon frais
-              example: 'Exemples : viande, poisson, quiche, jambon'
+              example: 'Exemple : viande, poisson, quiche, jambon'
               subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
               subcategories:
                 - title: Oui
@@ -228,7 +228,7 @@
                       - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                         answer: Contacter directement le service client de votre magasin pour leur proposer.
             - title: Des produits vendus à température ambiante
-              example: 'Exemples : chocolat, conserve, compote, petits pots'
+              example: 'Exemple : chocolat, conserve, compote, petits pots'
               information:
                 title: Ce problème n'est pas un motif de signalement.
                 content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
@@ -242,7 +242,7 @@
           subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
           subcategories: !!import/single ../common/date.yml
     - title: Publicité
-      example: 'Exemples : publicité trompeuse, produit du catalogue pas disponible'
+      example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
       subcategories:
         - title: Indisponibilité des produits en publicité
           detailInputs:
@@ -357,7 +357,7 @@
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
                     - title: Oui
-                      example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                      example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
                       subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                         <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                       subcategories:
@@ -431,7 +431,7 @@
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
                     - title: Oui
-                      example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                      example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
                       subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                         <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                       subcategories:
@@ -471,8 +471,8 @@
                                   </ul>"
                             answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
                               <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
-        - title: Autres raison
-          example: 'Exemples: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
+        - title: Autre raison
+          example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
           subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
           subcategories:
             - title: Oui
@@ -530,9 +530,9 @@
                     content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
                     outOfScope: true
                 - title: Non
-            - title: Autres
-              example: 'Exemples : problème avec le terminal de paiement'
-        - title: Autres problèmes de prix ou paiement
+            - title: Autre
+              example: 'Exemple : problème avec le terminal de paiement'
+        - title: Autre problème de prix ou paiement
           subcategories:
             - title: Problème avec le cash-back
             - title: Problème avec une carte cadeau
@@ -543,15 +543,15 @@
                       <br /> Le commerçant est libre d'appliquer la détaxe, qui est facultative. L'acheteur ne peut pas l'exiger du vendeur.
                       Retrouvez plus d'information sur <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F20558" target="_blank">cette page.</a>
                     outOfScope: true
-            - title: Autres
-    - title: Autres
+            - title: Autre
+    - title: Autre
 
 - title: Un problème avec un produit que j'ai acheté
-  example: 'Exemples : il manque des informations sur le produit, produit douteux'
+  example: 'Exemple : il manque des informations sur le produit, produit douteux'
   subcategories:
     - title: C'est un aliment ou une boisson
-      example: 'Exemples : bonbon, viande, pain, conserve, vin, eau en bouteille ...'
+      example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
       subcategories: !!import/single ../common/nourriture.yml
     - title: C'est un objet
-      example: 'Exemples : jouet, électroménager, vêtement, savon, vaisselle, meuble ...'
+      example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
       subcategories: !!import/single ../common/objet.yml
