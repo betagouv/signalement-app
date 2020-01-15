@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
@@ -14,18 +14,19 @@ import { Subject } from 'rxjs';
   templateUrl: './my-companies.component.html',
   styleUrls: ['./my-companies.component.scss']
 })
-export class MyCompaniesComponent implements OnInit {
+export class MyCompaniesComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject<void>();
+
+  myAccesses: UserAccess[];
+  user: User;
+  loading: boolean;
 
   constructor(private titleService: Title,
               private meta: Meta,
               private router: Router,
               private authenticationService: AuthenticationService,
               private companyAccessesService: CompanyAccessesService) { }
-    
-              myAccesses: UserAccess[];
-              user: User;
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.myCompanies.title);
@@ -37,16 +38,19 @@ export class MyCompaniesComponent implements OnInit {
       this.refreshAccesses();
     });
   }
+
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
 
   refreshAccesses() {
+    this.loading = true;
     this.companyAccessesService.myAccesses(this.user).subscribe(
       accesses => {
+        this.loading = false;
         this.myAccesses = accesses;
       }
-    )
+    );
   }
 }

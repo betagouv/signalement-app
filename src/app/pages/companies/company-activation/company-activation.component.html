@@ -14,7 +14,7 @@
 </div>
 
 <main role="main">
-  <section class="section section-lightest-grey">
+  <section class="section section-lightest-grey position-relative">
     <div class="container max-width">
       <form [formGroup]="activationForm" (ngSubmit)="submitActivationForm()" class="form-horizontal">
         <h4 class="text-center">
@@ -66,6 +66,7 @@
           La création d'un compte est réservée aux entreprises qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement les concernant.<br/><br/>
           Pour plus d'informations, veuillez-vous reporter à <a routerLink="/vous-êtes-un-professionnel">la page d'aide pour les entreprises</a>.
         </p>
+        <ngx-loading [show]="loading"></ngx-loading>
       </form>
       <div class="notification" *ngIf="!isAuthenticated">
         <div class="row">
@@ -81,5 +82,8 @@
       </div>
       <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">SignalConso</a>.</p>
     </div>
+
+    <ngx-loading [show]="loading"></ngx-loading>
+
   </section>
 </main>

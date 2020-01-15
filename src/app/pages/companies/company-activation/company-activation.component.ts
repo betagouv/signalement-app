@@ -23,6 +23,7 @@ export class CompanyActivationComponent implements OnInit {
   activationError: string;
 
   isAuthenticated: boolean;
+  loading: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -57,15 +58,17 @@ export class CompanyActivationComponent implements OnInit {
     if (!this.activationForm.valid) {
       this.showErrors = true;
     } else {
-
       const handleError = (action: string) => {
+        this.loading = false;
         this.analyticsService.trackEvent(EventCategories.account, action, ActionResults.fail);
         this.activationError = `Impossible d'activer ce compte. Veuillez vérifier le code d'accès et le SIRET`;
       };
 
+      this.loading = true;
       if (this.isAuthenticated) {
         this.authenticationService.acceptToken(this.siretCtrl.value, this.codeCtrl.value).subscribe(
           _ => {
+            this.loading = false;
             this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.addCompanyToAccount, ActionResults.success);
             this.router.navigate(['mes-entreprises']);
           },
@@ -76,6 +79,7 @@ export class CompanyActivationComponent implements OnInit {
       } else {
         this.authenticationService.fetchTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
           token => {
+            this.loading = false;
             this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccount, ActionResults.success);
             this.router.navigate(['compte', 'activation']);
           },

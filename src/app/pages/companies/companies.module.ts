@@ -9,6 +9,7 @@ import { AccessTokenComponent } from '../account/accesstoken.component';
 import { CompanyActivationComponent } from './company-activation/company-activation.component';
 import { MyCompaniesComponent } from './my-companies/my-companies.component';
 import { CompanyInvitationComponent } from './company-invitation/company-invitation.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
@@ -31,6 +32,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     ComponentsModule,
+    NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
   ],
   exports: [
     RouterModule
