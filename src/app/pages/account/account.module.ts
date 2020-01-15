@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { defineLocale, frLocale } from 'ngx-bootstrap';
-import { LoginComponent } from './login.component';
+import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forget-password/forgot-password.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AccessTokenComponent } from './accesstoken.component';
+import { ActivationComponent } from './activation/activation.component';
 
 defineLocale('fr', frLocale);
 
 const routes: Routes = [
   { path: 'login', redirectTo: 'dgccrf' },
-  { path: 'activation', component: LoginComponent },
+  { path: 'activation', component: ActivationComponent },
   { path: 'connexion', component: LoginComponent },
   { path: 'dgccrf', component: LoginComponent },
   { path: 'connexion/perte-mot-de-passe', component: ForgotPasswordComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    AccessTokenComponent
+    AccessTokenComponent,
+    ActivationComponent
   ],
   imports: [
     CommonModule,
@@ -40,4 +42,4 @@ const routes: Routes = [
     RouterModule,
   ]
 })
-export class LoginModule { }
+export class AccountModule { }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
+import pages from '../../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../services/authentication.service';
-import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../services/analytics.service';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginCtrl: FormControl;
   passwordCtrl: FormControl;
-  isConnection = false;
   isDgccrf = false;
 
   showErrors: boolean;
@@ -31,13 +30,12 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.login.title);
-    this.meta.updateTag({ name: 'description', content: pages.login.description });
+    this.titleService.setTitle(pages.account.login.title);
+    this.meta.updateTag({ name: 'description', content: pages.account.login.description });
     this.initLoginForm();
 
     this.route.url.subscribe(url => {
       if (url[0]) {
-        this.isConnection = url[0].toString() === 'dgccrf' || url[0].toString() === 'connexion';
         this.isDgccrf = url[0].toString() === 'dgccrf';
       }
     });
@@ -57,7 +55,7 @@ export class LoginComponent implements OnInit {
     this.authenticationError = '';
     if (!this.loginForm.valid) {
       this.showErrors = true;
-    } else if (this.isConnection) {
+    } else {
       this.authenticationService.login(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
@@ -69,17 +67,6 @@ export class LoginComponent implements OnInit {
           this.authenticationError = `Echec de l'authentification`;
         }
       );
-    } else {
-      const handleError = () => {
-        this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-        this.authenticationError = "Impossible de vous identifier. Veuillez vérifier le code d'accès et le SIRET";
-      }
-      this.authenticationService.fetchTokenInfo(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
-        token => {
-          this.router.navigate(['compte', 'activation']);
-        },
-        error => handleError()
-      )
     }
   }
 

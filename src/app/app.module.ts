@@ -16,12 +16,12 @@ import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
 import { ReportComponent } from './pages/report/report.component';
-import { LoginModule } from './pages/login/login.module';
 import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
 import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 import { TooltipModule } from 'ngx-bootstrap';
+import { AccountModule } from './pages/account/account.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -51,7 +51,7 @@ registerLocaleData(localeFr, 'fr');
     ReportModule,
     BrowserModule,
     BrowserAnimationsModule,
-    LoginModule,
+    AccountModule,
     SecuredModule,
     StaticModule,
     BsDropdownModule.forRoot(),
