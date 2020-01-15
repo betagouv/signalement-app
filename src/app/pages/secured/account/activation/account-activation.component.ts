@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../../services/authentication.service';
-import { AccountEventActions, AnalyticsService, EventCategories } from '../../../../services/analytics.service';
+import { AccountEventActions, ActionResults, AnalyticsService, EventCategories } from '../../../../services/analytics.service';
 import { Router } from '@angular/router';
 import pages from '../../../../../assets/data/pages.json';
 import { TokenInfo, User } from '../../../../model/AuthUser';
@@ -108,13 +108,13 @@ export class AccountActivationComponent implements OnInit {
       ).subscribe(
         () => {
           this.loading = false;
-          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountSuccess);
+          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccount, ActionResults.success);
           this.showSuccess = true;
         },
         error => {
           this.loading = false;
           this.loadingError = true;
-          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountFail);
+          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccount, ActionResults.fail);
           this.showErrors = true;
         }
       );

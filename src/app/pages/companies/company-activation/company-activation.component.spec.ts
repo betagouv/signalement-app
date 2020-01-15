@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActivationComponent } from './activation.component';
+import { CompanyActivationComponent } from './company-activation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 describe('ActivationComponent', () => {
-  let component: ActivationComponent;
-  let fixture: ComponentFixture<ActivationComponent>;
+  let component: CompanyActivationComponent;
+  let fixture: ComponentFixture<CompanyActivationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivationComponent ],
+      declarations: [ CompanyActivationComponent ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -25,7 +25,7 @@ describe('ActivationComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActivationComponent);
+    fixture = TestBed.createComponent(CompanyActivationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

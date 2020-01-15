@@ -22,6 +22,7 @@ import { StaticModule } from './pages/static/static.module';
 import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { AccountModule } from './pages/account/account.module';
+import { CompaniesModule } from './pages/companies/companies.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -52,6 +53,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     BrowserAnimationsModule,
     AccountModule,
+    CompaniesModule,
     SecuredModule,
     StaticModule,
     BsDropdownModule.forRoot(),

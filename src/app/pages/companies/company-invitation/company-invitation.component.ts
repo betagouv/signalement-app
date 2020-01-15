@@ -3,12 +3,12 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
-import { accessLevels } from './common';
+import { accessLevels } from '../common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-company-invitation',
-  templateUrl: './invitation.component.html'
+  templateUrl: './company-invitation.component.html'
 })
 export class CompanyInvitationComponent implements OnInit {
 

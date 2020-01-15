@@ -6,13 +6,14 @@ import { AccountEventActions, ActionResults, AnalyticsService, EventCategories }
 import { Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { take } from 'rxjs/operators';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
-  selector: 'app-activation',
-  templateUrl: './activation.component.html',
-  styleUrls: ['./activation.component.scss']
+  selector: 'app-company-activation',
+  templateUrl: './company-activation.component.html',
+  styleUrls: ['./company-activation.component.scss']
 })
-export class ActivationComponent implements OnInit {
+export class CompanyActivationComponent implements OnInit {
 
   activationForm: FormGroup;
   siretCtrl: FormControl;
@@ -28,7 +29,8 @@ export class ActivationComponent implements OnInit {
               private meta: Meta,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
-              private router: Router) { }
+              private router: Router,
+              private platformLocation: PlatformLocation) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.account.activation.title);
@@ -85,6 +87,10 @@ export class ActivationComponent implements OnInit {
 
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
+  }
+
+  back() {
+    this.platformLocation.back();
   }
 
 }

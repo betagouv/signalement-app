@@ -1,17 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Title, Meta } from "@angular/platform-browser";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
-import { UserAccess } from "../../../model/CompanyAccess";
-import { User } from "../../../model/AuthUser.js";
-import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import { UserAccess } from '../../../model/CompanyAccess';
+import { User } from '../../../model/AuthUser.js';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-my-companies',
-  templateUrl: './mycompanies.component.html'
+  templateUrl: './my-companies.component.html',
+  styleUrls: ['./my-companies.component.scss']
 })
 export class MyCompaniesComponent implements OnInit {
 

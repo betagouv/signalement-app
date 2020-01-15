@@ -53,7 +53,7 @@
           </a>
         </li>
         <li class="nav-item d-none d-lg-block" *ngIf="!user; else userMenuLg">
-          <button type="button" class="btn btn-secondary" [routerLink]="['activation']">
+          <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']">
            Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
           </button>
         </li>
@@ -65,7 +65,7 @@
       </ul>
     </div>
     <div class="d-block d-lg-none position-absolute">
-      <button type="button" class="btn btn-secondary" [routerLink]="['activation']" *ngIf="!user; else userMenu">
+      <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user; else userMenu">
         Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
       </button>
       <ng-template #userMenu>

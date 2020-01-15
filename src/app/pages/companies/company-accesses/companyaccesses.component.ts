@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { CompanyAccess, PendingToken } from '../../../model/CompanyAccess';
 import { User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { accessLevels } from './common';
+import { accessLevels } from '../common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
