@@ -75,6 +75,11 @@ export enum AuthenticationEventActions {
 export enum AccountEventActions {
   changePasswordSuccess = 'Changement mdp réussi',
   changePasswordFail = 'Changement mdp en échec',
-  activateAccountSuccess = 'Activation du compte réussie',
-  activateAccountFail = 'Activation du compte en échec'
+  activateAccount = 'Activation du compte',
+  addCompanyToAccount = 'Ajout d\'une entreprise à un compte'
+}
+
+export enum ActionResults {
+  success = 'Succès',
+  fail = 'Echec'
 }
