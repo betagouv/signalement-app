@@ -7,17 +7,17 @@
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/comment-ça-marche</loc>
+    <loc>https://signalconso.beta.gouv.fr/comment-ça-marche/consommateur</loc>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/comment-ça-marche/professionnel</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://signalconso.beta.gouv.fr/qui-sommes-nous</loc>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://signalconso.beta.gouv.fr/vous-êtes-un-professionnel</loc>
     <priority>0.5</priority>
   </url>
 
