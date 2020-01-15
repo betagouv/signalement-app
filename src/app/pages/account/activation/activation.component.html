@@ -60,7 +60,7 @@
           Pour plus d'informations, veuillez-vous reporter à <a routerLink="/vous-êtes-un-professionnel">la page d'aide pour les entreprises</a>.
         </p>
       </form>
-      <div class="notification">
+      <div class="notification" *ngIf="!isAuthenticated">
         <div class="row">
           <div class="col-12 col-md-7 pb-2 pt-2 text-center text-md-left">
             <h4>Vous avez déjà activé votre compte ?</h4>

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { AccountEventActions, AnalyticsService, EventCategories } from '../../../services/analytics.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AccountEventActions, ActionResults, AnalyticsService, EventCategories } from '../../../services/analytics.service';
+import { Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-activation',
@@ -20,18 +21,23 @@ export class ActivationComponent implements OnInit {
   showErrors: boolean;
   activationError: string;
 
+  isAuthenticated: boolean;
+
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.account.activation.title);
     this.meta.updateTag({ name: 'description', content: pages.account.activation.description });
     this.initActivationForm();
+
+    this.authenticationService.isAuthenticated()
+      .pipe(take(1))
+      .subscribe(isAuthenticated => this.isAuthenticated = isAuthenticated);
   }
 
   initActivationForm() {
@@ -49,17 +55,31 @@ export class ActivationComponent implements OnInit {
     if (!this.activationForm.valid) {
       this.showErrors = true;
     } else {
-      const handleError = () => {
-        this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountFail);
-        this.activationError = `Impossible de vous identifier. Veuillez vérifier le code d'accès et le SIRET`;
+
+      const handleError = (action: string) => {
+        this.analyticsService.trackEvent(EventCategories.account, action, ActionResults.fail);
+        this.activationError = `Impossible d'activer ce compte. Veuillez vérifier le code d'accès et le SIRET`;
       };
-      this.authenticationService.fetchTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
-        token => {
-          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccountSuccess);
-          this.router.navigate(['compte', 'activation']);
-        },
-        error => handleError()
-      );
+
+      if (this.isAuthenticated) {
+        this.authenticationService.acceptToken(this.siretCtrl.value, this.codeCtrl.value).subscribe(
+          _ => {
+            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.addCompanyToAccount, ActionResults.success);
+            this.router.navigate(['mes-entreprises']);
+          },
+          error => {
+            handleError(AccountEventActions.addCompanyToAccount);
+          }
+        );
+      } else {
+        this.authenticationService.fetchTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
+          token => {
+            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccount, ActionResults.success);
+            this.router.navigate(['compte', 'activation']);
+          },
+          error => handleError(AccountEventActions.activateAccount)
+        );
+      }
     }
   }
 
