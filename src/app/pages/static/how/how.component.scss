@@ -1,28 +1,43 @@
 @import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
-.number {
-  font-size: 2em;
-  padding-right: 10px;
+.card {
+
+  margin-bottom: 2em;
+
+  h2 {
+    width: 100%;
+    margin: 0;
+
+    font-size: 60px !important;
+
+    @media #{$smaller-than-mobile} {
+      font-size: 40px !important;
+    }
+  }
+
+  h6 {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .flex-center {
+    display:flex;
+    align-items: center;
+  }
 }
 
-.arrow {
-  color: $primary;
-  font-size: 100px;
-  font-weight: bold;
+
+.nav-tabs {
+  border-bottom: 1px solid $blue;
 }
 
-.step {
-  max-width: 750px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 2px;
-  -webkit-box-shadow: 0 1px 2px rgba(201, 211, 223, .2);
-  box-shadow: 0 1px 2px rgba(201, 211, 223, .2);
-  border: 1px solid #c9d3df;
-  padding: 1em;
-}
+.nav-link {
+  border: 0;
+  color: $blue !important;
 
-.steps img {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  &.active {
+    color: $white !important;
+    background-color: $blue;
+  }
 }

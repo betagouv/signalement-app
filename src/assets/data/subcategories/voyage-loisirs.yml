@@ -249,7 +249,7 @@
           - question: Que faire en cas de problème avec un "faux" taxi&#160;?
             answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie.
 - title: Hébergement
-  example: "Exemples : hotel, camping, chambre d'hôte, location saisonnière"
+  example: "Exemple : hotel, camping, chambre d'hôte, location saisonnière"
   subcategories:
     - title: Prix
       subcategories:
@@ -267,7 +267,7 @@
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Informations concernant le logement / Publicité
-      example: "Exemples : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
           consumerActions: !!import/single ../common/actions/defaut.yml
@@ -301,18 +301,18 @@
               optionnal: true
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Qualité de la chambre / de l'hébergement
-      example: 'Exemples : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna.'
+      example: 'Exemple : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna.'
       subcategories:
         - title: L'hébergement ne correspond pas à ce qui m'a été vendu
           example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Problème d'hygiène ou de propreté
-          example: 'Exemples : chambre sale, sauna sale, puces de lit'
+          example: 'Exemple : chambre sale, sauna sale, puces de lit'
           information:
             title: Vous souhaitez signaler un problème d'hygiène ou de propreté d'un logement ?
             content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie et/ou le  Service Communal d’Hygiène et de la Santé de la commune de l'hébergement.
         - title: Problème de bruit
-          example: 'Exemples : chambre bruyante, mauvaise isolation'
+          example: 'Exemple : chambre bruyante, mauvaise isolation'
           information:
             title: Vous souhaitez signaler un problème de bruit ?
             content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie de la commune de l'hébergement.
@@ -333,7 +333,7 @@
                 title: Les arrhes
                 content: Les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
                 outOfScope: true
-    - title: Autres
+    - title: Autre
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Agence de voyage
   subcategories:
@@ -346,14 +346,14 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
-          example: 'Exemples : sur un site, un catalogue'
+          example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemples : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           consumerActions: !!import/single ../common/actions/tourisme.yml
-        - title: Autres
+        - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
-      example: "Exemples : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
           consumerActions: !!import/single ../common/actions/tourisme.yml
@@ -391,13 +391,13 @@
         - title: La prestation ne correspond pas à ce que l'agence m'a vendu
           example: "Exemple : une excursion était prévue dans le voyage et elle a été annulée sans motifs"
           consumerActions: !!import/single ../common/actions/tourisme.yml
-        - title: Autres
+        - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Annulation / remboursement
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Assurance
       consumerActions: !!import/single ../common/actions/tourisme.yml
-    - title: Autres
+    - title: Autre
       consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Transport en commun
   example: 'Exemple : avion, train'
@@ -411,14 +411,14 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
-          example: 'Exemples : sur un site, un catalogue'
+          example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemples : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           consumerActions: !!import/single ../common/actions/tourisme.yml
-        - title: Autres
+        - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
-      example: "Exemples : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
           consumerActions: !!import/single ../common/actions/tourisme.yml
@@ -462,12 +462,12 @@
         - title: Autres
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Abonnement de transport
-      example: "Exemples : TGV max, pass navigo"
+      example: "Exemple : TGV max, pass navigo"
       consumerActions: !!import/single ../common/actions/tourisme.yml
-    - title: Autres
+    - title: Autre
       consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Sport
-  example: 'Exemples : piscine, salle de sport'
+  example: 'Exemple : piscine, salle de sport'
   subcategories:
     - title: Prix
       subcategories:
@@ -478,15 +478,15 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
-          example: 'Exemples : sur un site, un catalogue'
+          example: 'Exemple : sur un site, un catalogue'
           consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemples : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           consumerActions: !!import/single ../common/actions/tourisme.yml
-        - title: Autres
+        - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
-      example: "Exemples : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
           consumerActions: !!import/single ../common/actions/tourisme.yml
@@ -520,13 +520,13 @@
               optionnal: true
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Contrat et abonnement
-      example: 'Exemples : contrat non respecté, clause abusive'
+      example: 'Exemple : contrat non respecté, clause abusive'
       subcategories:
         - title: Clause abusive
           consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Contrat non respecté
           consumerActions: !!import/single ../common/actions/tourisme.yml
-    - title: Autres      
+    - title: Autre     
       subcategories:
         - title: Equipement
           consumerActions: !!import/single ../common/actions/tourisme.yml
@@ -535,7 +535,7 @@
         - title: Hygiène 
           consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Divertissement culturel
-  example: 'Exemples : musée, cinéma, concert'
+  example: 'Exemple : musée, cinéma, concert'
   subcategories:
     - title: Prix
       subcategories:
@@ -546,15 +546,15 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
-          example: 'Exemples : sur un site, un catalogue'
+          example: 'Exemple : sur un site, un catalogue'
           consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemples : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           consumerActions: !!import/single ../common/actions/tourisme.yml
-        - title: Autres
+        - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Publicité
-      example: "Exemples : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       subcategories:
         - title: Absence d'information
           consumerActions: !!import/single ../common/actions/tourisme.yml
@@ -589,13 +589,13 @@
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Remboursement / annulation
       consumerActions: !!import/single ../common/actions/tourisme.yml
-    - title: Autres
+    - title: Autre
       consumerActions: !!import/single ../common/actions/tourisme.yml
-- title: Autres
+- title: Autre
   subcategories:
     - title: Abonnement
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Coffrets cadeaux et box
       consumerActions: !!import/single ../common/actions/tourisme.yml
-    - title: Autres
+    - title: Autre
       consumerActions: !!import/single ../common/actions/tourisme.yml 

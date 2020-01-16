@@ -247,13 +247,13 @@
                     content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
                     outOfScope: true
                 - title: Non
-            - title: Autres
+            - title: Autre
               example: 'Exemple : problème avec le terminal de paiement'
-        - title: Autres problèmes de prix ou paiement
+        - title: Autre problème de prix ou paiement
           subcategoriesTitle: 'Problème avec :'
           subcategories:
             - title: Tickets restaurant
-            - title: Autres
+            - title: Autre
     - title: Refus de me donner une note (ticket, facture)
       detailInputs:
         - label: Date de constat

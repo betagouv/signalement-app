@@ -37,7 +37,7 @@
               subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
               subcategories:
                 - title: Oui
-                  example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                  example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
                   subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                     <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                   subcategories:
@@ -108,7 +108,7 @@
               subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
               subcategories:
                 - title: Oui
-                  example: 'Exemples : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                  example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
                   subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                     <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                   subcategories:
@@ -146,8 +146,8 @@
                               </ul>"
                         answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
                           <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
-    - title: Autres raison
-      example: 'Exemples: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
+    - title: Autre raison
+      example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
       subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
       subcategories:
         - title: Oui
