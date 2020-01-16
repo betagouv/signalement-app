@@ -47,7 +47,25 @@
           </span>
         </div>
         <div class="notification error mt-3" *ngIf="authenticationError ">
-          {{authenticationError}}
+          Échec de l'authentification.
+          <div *ngIf="!isConnection">
+          Nous vous invitons à vérifier les éléments suivants :
+            <ul>
+              <li>
+                Vous utilisez le SIRET associé à la raison sociale indiquée sur le courrier.
+                Pour une même adresse physique, il est possible d'avoir plusieurs entités juridiques
+                et donc plusieurs SIRET (exploitant, gestionnaire, etc.).
+                Le code d'activation envoyé n'est valable que pour un SIRET donné.
+              </li>
+              <li>
+                Il arrive que certains pare-feux bloquent l'utilisation normale de la plateforme,
+                nous vous invitons à vérifier ce point avec votre service informatique.
+              </li>
+            </ul>
+            Si vous ne parvenez néanmoins pas à vous connecter, contactez-nous sur
+            <a href="mailto:contact@signalconso.beta.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
+            en indiquant votre identité, la date du signalement, le SIRET et le nom de votre établissement.
+          </div>
         </div>
         <hr />
         <div class="form-group row">
