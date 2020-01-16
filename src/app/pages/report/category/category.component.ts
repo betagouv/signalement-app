@@ -20,6 +20,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject<void>();
 
+  illustrations = Illustrations;
+
   step: Step;
   report: Report;
 
@@ -27,13 +29,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
   showSecondaryCategories: boolean;
 
   internetInformation: Information;
-
-  illustrations = [
-    { title: 'Vous avez rencontré un problème avec une entreprise&#160;?', picture: 'picture-problem.svg' },
-    { title: 'Faites un signalement avec SignalConso.', picture: 'picture-alert.svg' },
-    { title: "L'entreprise est prévenue et peut intervenir.", picture: 'picture-pro.svg' },
-    { title: 'La répression des fraudes intervient si c’est nécessaire.', picture: 'picture-inspect.svg' },
-  ]
 
   constructor(private titleService: Title,
               private meta: Meta,
@@ -110,6 +105,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 }
 
+
+export const Illustrations = [
+  { title: 'Vous avez rencontré un problème avec une entreprise&#160;?', picture: 'picture-problem.svg' },
+  { title: 'Faites un signalement avec SignalConso.', picture: 'picture-alert.svg' },
+  { title: `L'entreprise est prévenue et peut intervenir.`, picture: 'picture-pro.svg' },
+  { title: 'La répression des fraudes intervient si c’est nécessaire.', picture: 'picture-inspect.svg' },
+]
 
 @Component({
   selector: 'app-illustration-card',
