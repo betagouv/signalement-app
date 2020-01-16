@@ -30,6 +30,7 @@ export class CompanyAccessesComponent implements OnInit {
   pendingTokens: PendingToken[];
   accessLevels = accessLevels;
 
+  loading: boolean;
   showSuccess = false;
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class CompanyAccessesComponent implements OnInit {
     this.authenticationService.user.subscribe(user => {
       this.user = user;
     });
-  
+
     siretParam.subscribe(siret => {
       this.siret = siret;
       this.refreshAccesses();
@@ -54,39 +55,58 @@ export class CompanyAccessesComponent implements OnInit {
   }
 
   refreshAccesses() {
+    this.loading = true;
     this.companyAccessesService.listAccesses(this.siret).subscribe(
       accesses => {
+        this.loading = false;
         this.companyAccesses = accesses;
       }
-    )
+    );
   }
 
   refreshPendingTokens() {
+    this.loading = true;
     this.companyAccessesService.listPendingTokens(this.siret).subscribe(
       pendingTokens => {
+        this.loading = false;
         this.pendingTokens = pendingTokens;
       }
-    )
+    );
   }
 
   updateAccess(userId: string, level: string) {
     this.showSuccess = false;
+    this.loading = true;
     this.companyAccessesService
         .updateAccess(this.siret, userId, level)
-        .subscribe(() => {this.showSuccess = true; this.refreshAccesses()});
+        .subscribe(() => {
+          this.loading = false;
+          this.showSuccess = true;
+          this.refreshAccesses();
+        });
   }
 
   removeAccess(userId: string) {
     this.showSuccess = false;
+    this.loading = true;
     this.companyAccessesService
         .removeAccess(this.siret, userId)
-        .subscribe(() => {this.showSuccess = true; this.refreshAccesses()})
+        .subscribe(() => {
+          this.loading = false;
+          this.showSuccess = true;
+          this.refreshAccesses();
+        });
   }
 
   removePendingToken(tokenId: string) {
     this.showSuccess = false;
+    this.loading = true;
     this.companyAccessesService
         .removePendingToken(this.siret, tokenId)
-        .subscribe(() => {this.showSuccess = true; this.refreshPendingTokens()});
+        .subscribe(() => {
+          this.loading = false;
+          this.showSuccess = true;
+          this.refreshPendingTokens();
+        });
   }
 }

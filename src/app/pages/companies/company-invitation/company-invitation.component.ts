@@ -25,6 +25,7 @@ export class CompanyInvitationComponent implements OnInit {
   emailCtrl: FormControl;
   levelCtrl: FormControl;
 
+  loading: boolean;
   showSuccess = false;
   showErrors = false;
 
@@ -46,6 +47,7 @@ export class CompanyInvitationComponent implements OnInit {
 
   submitForm() {
     this.showSuccess = false;
+    this.loading = true;
     if (this.invitationForm.valid) {
       this.companyAccessesService
           .sendInvitation(
@@ -53,7 +55,10 @@ export class CompanyInvitationComponent implements OnInit {
             this.emailCtrl.value,
             this.levelCtrl.value
           )
-          .subscribe(() => {this.showSuccess = true;})
+          .subscribe(() => {
+            this.loading = false;
+            this.showSuccess = true;
+          });
     } else {
       this.showErrors = true;
     }
