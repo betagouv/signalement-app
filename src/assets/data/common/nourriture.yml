@@ -4,8 +4,8 @@
     - title: Un constat fréquent de produits périmés dans un établissement
       subcategoriesTitle: Quels sont les produits concernés&#160;?
       subcategories:
-        - title: Des produits vendus au rayon frais
-          example: 'Exemple : viande, poisson, quiche, jambon...'
+        - title: Des produits vendus au rayon frais, notamment avec des oeufs, de la viande ou du poisson
+          example: 'Exemple : viande, poisson, quiche, jambon'
           subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
           subcategories:
             - title: Oui
@@ -22,7 +22,7 @@
                   - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                     answer: Contacter directement le service client de votre magasin pour leur proposer.
         - title: Des produits vendus à température ambiante
-          example: 'Exemple : chocolat, conserve, compote, petits pots...'
+          example: 'Exemple : chocolat, conserve, compote, petits pots bébé'
           information:
             title: Ce problème n'est pas un motif de signalement.
             content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
@@ -88,14 +88,14 @@
               defaultValue: SYSDATE
           fileLabel: Photo
 - title: Problème de qualité
-  example: 'Exemple : présence de moisissure...'
+  example: 'Exemple : présence de moisissure'
   subcategoriesTitle: Quel est-le problème&#160;?
   subcategories:
     - title: Moisissure
       subcategoriesTitle: De quel type de produit s'agit-il&#160;?
       subcategories:
         - title: Un produit vendu sans emballage
-          example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+          example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant'
           detailInputs:
             - label: Nom du produit
               rank: 1
@@ -106,7 +106,7 @@
               defaultValue: SYSDATE
           fileLabel: Photo du produit
         - title: Un produit vendu dans un emballage
-          example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
+          example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips'
           detailInputs:
             - label: 'C''est un produit vendu&#160;:'
               rank: 1
@@ -148,6 +148,9 @@
               rank: 2
               type: DATE_NOT_IN_FUTURE
               defaultValue: SYSDATE
+            - label: Quel est le problème ?
+              rank: 3
+              type: TEXT
           fileLabel: Photo du produit
         - title: Un produit vendu dans un emballage
           example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
@@ -178,13 +181,16 @@
               rank: 6
               type: DATE_NOT_IN_FUTURE
               defaultValue: SYSDATE
+            - label: Quel est le problème ?
+              rank: 7
+              type: TEXT
           fileLabel: Photo du produit
     - title: Corps étranger "mou"
-      example: 'Exemple : morceau de gant, morceau de tissus, limace..'
+      example: 'Exemple : morceau de gant, morceau de tissus, limace'
       subcategoriesTitle: De quel type de produit s'agit-il&#160;?
       subcategories:
         - title: Un produit vendu sans emballage
-          example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+          example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant'
           detailInputs:
             - label: Nom du produit
               rank: 1
@@ -195,7 +201,7 @@
               defaultValue: SYSDATE
           fileLabel: Photo du produit
         - title: Un produit vendu dans un emballage
-          example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
+          example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips'
           detailInputs:
             - label: 'C''est un produit vendu&#160;:'
               rank: 1
@@ -225,7 +231,7 @@
               defaultValue: SYSDATE
           fileLabel: Photo du produit
     - title: Corps étranger "dur"
-      example: 'Exemple : bout de verre, morceau de métal...'
+      example: 'Exemple : bout de verre, morceau de métal, dent'
       information:
         title: Vous souhaitez signaler la présence d'un corps étranger "dur"
         actions:
@@ -235,7 +241,7 @@
       subcategoriesTitle: De quel type de produit s'agit-il&#160;?
       subcategories:
         - title: Un produit vendu sans emballage
-          example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant...'
+          example: 'Exemple : pizza dans une boulangerie, plat dans un restaurant'
           detailInputs:
             - label: Nom du produit
               rank: 1
@@ -246,7 +252,7 @@
               defaultValue: SYSDATE
           fileLabel: Photo du produit
         - title: Un produit vendu dans un emballage
-          example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips...'
+          example: 'Exemple : bouteille d''eau, conserve de légumes, paquet de chips'
           detailInputs:
             - label: 'C''est un produit vendu&#160;:'
               rank: 1
@@ -275,7 +281,7 @@
               defaultValue: SYSDATE
           fileLabel: Photo du produit
 - title: Problème avec l'emballage ou l'étiquette
-  example: 'Exemple : liste des ingrédients manquante, logo trompeur...'
+  example: 'Exemple : liste des ingrédients manquante, logo trompeur'
   subcategories:
     - title: Informations manquantes
       detailInputs:
@@ -352,7 +358,7 @@
           type: TEXTAREA
     - title: Autres problèmes d'étiquette ou emballage
 - title: Problème de quantité
-  example: 'Exemple : poids indiqué non conforme, balance non tarée...'
+  example: 'Exemple : poids indiqué non conforme, balance non tarée'
   subcategories:
     - title: Le commerçant n'effectue pas la tare lors de la pesée
       example: Tarer une balance signifie imposer la valeur zéro sur une balance alors qu'il y a un emballage dessus, pour ne peser que le contenu.

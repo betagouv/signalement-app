@@ -1,287 +1,275 @@
+<div class="banner text-center section section-primary" role="region">
+  <div class="container">
+    <h1 class="text-center">
+      Comment ça marche&#160;?
+    </h1>
+  </div>
+</div>
 
-<div class="banner text-center section section-primary" role="region">	
-	 <div class="container">
-	   <h1 class="text-center">
-	     Vous êtes une entreprise&#160;?
-	   </h1>
-	 </div>
-	</div>
-	
+<main role="main">
 
-	<main role="main">
-	 <section class="section section-lightest-grey">
-	   <div class="container max-width">
-	
+  <section class="section section-lightest-grey">
+    <div class="container max-width">
+      <nav class="nav nav-tabs nav-justified mb-3">
+        <a class="nav-item nav-link" routerLink="/comment-ça-marche/consommateur"><h4>Consommateur</h4></a>
+        <a class="nav-item nav-link active" routerLink="/comment-ça-marche/professionnel"><h4>Professionnel</h4></a>
+      </nav>
 
-	     <h2 class="pb-2 pb-lg-3">Généralités</h2>
-	
+     <h2 class="pb-2 pb-lg-3">Généralités</h2>
 
-	     <a class="lead show" data-toggle="collapse" href="#collapse12">
-	       Est-ce que ce service est gratuit ?
-	     </a>
-	     <div class="collapse" id="collapse12">
-	       <p>
-	         SignalConso est un service public gratuit, que ce soit pour les consommateurs ou les entreprises.
-	         <br/> Si vous recevez un courrier vous réclamant de l'argent au motif de l'utilisation de SignalConso, ne répondez pas à la demande et prévenez la DGCCRF de la tentative d'arnaque.
-	       </p>
-	     </div>
-	    
-	     <hr>
-	    
-	     <a class="lead show" data-toggle="collapse" href="#collapse14">
-	       Qui a accès aux signalements déposés sur SignalConso ?
-	     </a>
-	     <div class="collapse" id="collapse14">
-	       <p> Seule l'entreprise signalée peut consulté le signalement qui la concerne. Ils ne sont pas rendus publiques auprès des consommateurs.
-	       <br/> L'ensemble des signalements est consultable et peut-être exploité par l'administration de contrôle.
-	       </p>     
-	     </div>
-	
-	     <hr>
-	    
-	     <a class="lead" data-toggle="collapse" href="#collapse4">
-	       Mon entreprise apparait déjà sur SignalConso, a-t-elle déjà été signalée ?
-	     </a>
-	     <div class="collapse" id="collapse4">
-	       <p>
-	         Afin de faciliter le dépôt du signalement par le consommateur, la base de données de l’ensemble des entreprises françaises a été intégrée à notre outil. <br/>
-	         C’est pourquoi, votre entreprise apparait sur notre plateforme mais en aucun cas cela signifie qu’elle a fait l’objet d’un signalement.
-	       </p>
-	     </div>
-	
+     <a class="lead show" data-toggle="collapse" href="#collapse12">
+       Est-ce que ce service est gratuit ?
+     </a>
+     <div class="collapse" id="collapse12">
+       <p>
+         SignalConso est un service public gratuit, que ce soit pour les consommateurs ou les entreprises.
+         <br/> Si vous recevez un courrier vous réclamant de l'argent au motif de l'utilisation de SignalConso, ne répondez pas à la demande et prévenez la DGCCRF de la tentative d'arnaque.
+       </p>
+     </div>
 
-	     <hr>
-	    
-	     <a class="lead show" data-toggle="collapse" href="#collapse17">
-	       Puis-je ouvrir un Espace Professionnel si je n'ai pas encore été signalé ?
-	     </a>
-	     <div class="collapse" id="collapse17">
-	       <p> Si votre entreprise n’a pas encore été signalée, et que vous n’avez donc pas reçu le courrier provenant de nos services, vous ne pourrez pas ouvrir d’Espace Professionnel sur SignalConso. 
-	       </p>     
-	     </div>
-	    
-	     <hr>
-	    
-	     <a class="lead show" data-toggle="collapse" href="#collapse13">
-	       Est-il obligatoire de consulter les signalements SignalConso et/ou d'y répondre ?
-	     </a>
-	     <div class="collapse" id="collapse13">
-	       <p>
-	         SignalConso est un service d'application volontaire.
-	         <br/> Vous pouvez, si vous le souhaitez, ne pas consulter les signalements déposés sur SignalConso. Dans ce cas, la DGCCRF et le consommateur seront avertis que le signalement n'a pas été consulté.
-	       </p>
-	     </div>
-	
+     <hr>
 
-	     <h2 class="pt-5 pb-2 pb-lg-3">Votre entreprise a été signalée</h2>
-	    
-	     <a class="lead" data-toggle="collapse" href="#collapse1">
-	       J'ai reçu un courrier de SignalConso car mon entreprise a été signalée. Que dois-je faire?
-	     </a>
-	     <div class="collapse" id="collapse1">
-	       <p>
-	         Pour connaître ce signalement, rendez-vous sur <a routerLink="/connexion">https://signalconso.beta.gouv.fr</a>
-	         avec votre code d’activation de 6 chiffres inscrit dans votre courrier SignalConso et cliquez sur le bouton
-	         <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']">
-	           Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
-	         </button> en haut à droite de votre écran.
-	       </p>
-	       Lors de votre 1ère connexion, vous devez vous identifier avec :
-	       <ul>
-	         <li>le numéro SIRET de votre entreprise (14 chiffres)</li>
-	         <li>votre code d’activation : le numéro présent dans le courrier SignalConso (6 chiffres)</li>
-	       </ul>
-	       <p>
-	         Renseignez ensuite votre nom, prénom, adresse email et choisissez votre mot de passe pour activer votre espace professionnel.
-	       </p>
-	      
-	       <hr>
-	
+     <a class="lead show" data-toggle="collapse" href="#collapse14">
+       Qui a accès aux signalements déposés sur SignalConso ?
+     </a>
+     <div class="collapse" id="collapse14">
+       <p> Seule l'entreprise signalée peut consulté le signalement qui la concerne. Ils ne sont pas rendus publiques auprès des consommateurs.
+       <br/> L'ensemble des signalements est consultable et peut-être exploité par l'administration de contrôle.
+       </p>
+     </div>
 
-	       <p class="font-weight-bold">
-	         Votre « Espace Professionnel » est maintenant activé !
-	       </p>
-	       <p>
-	         Vous pouvez y accéder avec votre mot de passe en cliquant sur le bouton
-	         <button type="button" class="btn btn-lg btn-primary" [routerLink]="['/connexion']">
-	           Connectez-vous <i class="material-icons md-18" aria-hidden="true" title="Se connecter">keyboard_arrow_right</i>
-	         </button>
-	       </p>
-	       Vous pouvez consulter les signalements concernant votre entreprise et le cas échéant :
-	       <ul>
-	         <li>Prendre des mesures correctives ou préventives suite au signalement</li>
-	         <li>Contacter le consommateur si ce dernier a souhaité vous laisser ses coordonnées</li>
-	       </ul>
-	     </div>
-	
+     <hr>
 
-	     <hr>
-	
+     <a class="lead" data-toggle="collapse" href="#collapse4">
+       Mon entreprise apparait déjà sur SignalConso, a-t-elle déjà été signalée ?
+     </a>
+     <div class="collapse" id="collapse4">
+       <p>
+         Afin de faciliter le dépôt du signalement par le consommateur, la base de données de l’ensemble des entreprises françaises a été intégrée à notre outil. <br/>
+         C’est pourquoi, votre entreprise apparait sur notre plateforme mais en aucun cas cela signifie qu’elle a fait l’objet d’un signalement.
+       </p>
+     </div>
 
-	     <a class="lead" data-toggle="collapse" href="#collapse3">
-	       Vous avez oublié votre mot de passe ?
-	     </a>
-	     <div class="collapse" id="collapse3">
-	       <p>
-	         Vous pouvez <a routerLink="/connexion/perte-mot-de-passe">demander un nouveau mot de passe</a> ou, en cas de difficultés, contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">SignalConso</a>
-	       </p>
-	     </div>
-	
+     <hr>
 
-	     <hr>
-	    
-	     <a class="lead" data-toggle="collapse" href="#collapse5">
-	       Est-ce que mon entreprise va être contrôlée suite à un signalement ?
-	     </a>
-	     <div class="collapse" id="collapse5">
-	       <p>
-	         En fonction de la gravité et de la fréquence des signalements, les enquêteurs de la DGCCRF pourront déclencher un contrôle. <br/>
-	         Le signalement est enregistré dans la base de données de la DGCCRF.
-	       </p>
-	     </div>
-	
+     <a class="lead show" data-toggle="collapse" href="#collapse17">
+       Puis-je ouvrir un Espace Professionnel si je n'ai pas encore été signalé ?
+     </a>
+     <div class="collapse" id="collapse17">
+       <p> Si votre entreprise n’a pas encore été signalée, et que vous n’avez donc pas reçu le courrier provenant de nos services, vous ne pourrez pas ouvrir d’Espace Professionnel sur SignalConso.
+       </p>
+     </div>
 
-	     <hr>
-	
+     <hr>
 
-	     <a class="lead" data-toggle="collapse" href="#collapse6">
-	       Puis-je communiquer directement avec le consommateur à l’origine du signalement ?
-	     </a>
-	     <div class="collapse" id="collapse6">
-	       <p>
-	         SignalConso laisse le choix au consommateur de transmettre, ou non, ses coordonnées à l’entreprise signalée. <br/>
-	         Le cas échéant, nous vous les communiquerons à votre demande. Dans tous les cas, nous communiquons avec le consommateur quant au suivi de son signalement.
-	       </p>
-	     </div>
-	
+     <a class="lead show" data-toggle="collapse" href="#collapse13">
+       Est-il obligatoire de consulter les signalements SignalConso et/ou d'y répondre ?
+     </a>
+     <div class="collapse" id="collapse13">
+       <p>
+         SignalConso est un service d'application volontaire.
+         <br/> Vous pouvez, si vous le souhaitez, ne pas consulter les signalements déposés sur SignalConso. Dans ce cas, la DGCCRF et le consommateur seront avertis que le signalement n'a pas été consulté.
+       </p>
+     </div>
 
-	     <hr>
-	    
-	     <a class="lead" data-toggle="collapse" href="#collapse7">
-	       Dois-je apporter les détails des actions correctives mises en œuvre pour rectifier le problème ?
-	     </a>
-	     <div class="collapse" id="collapse7">
-	       <p>
-	         Les retours des entreprises sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF. <br/>
-	       </p>
-	     </div>
-	    
-	     <hr>
-	
 
-	     <a class="lead" data-toggle="collapse" href="#collapse8" id="le-detail">
-	       Quelles informations composent un signalement ?
-	     </a>
-	     <div class="collapse" id="collapse8" [ngClass]="fragment === 'le-detail' ? 'show' : ''">
-	       <p>
-	     	  Un signalement comporte différentes informations :
-	       </p>
-	       <ul>
-	       	<li> <strong> Problème </strong><br/> Afin d'identifier le problème que le consommateur a rencontré et le secteur professionnel concerné, le consommateur doit répondre à une série de questions prédéfinies. Les réponses à toutes ces questions sont renseignées dans la catégorie "Problème" du signalement. Il s'agit d'éléments d'identification sur le type d'anomalie signalée.</li>
-				    <li> <strong> Description </strong><br/>La section Description permet au consommateur de décrire le contexte dans lequel il a rencontré le problème, d’y ajouter des précisions et de donner la date du constat. C’est aussi là que vous trouverez les éventuelles pièces jointes envoyées par le consommateur.</li>
-				    <li> <strong> Consommateur </strong><br/>La section Consommateur vous indique si le consommateur a souhaité vous laisser ses coordonnées afin d'être recontacté en direct. Si ce n’est pas le cas, vous pouvez tout de même lui indiquer une réponse à travers SignalConso. S'il a souhaité vous laisser ses coordonnées, vous pouvez le contacter directement (dans le cadre du signalement), mais n’oubliez pas de préciser cette réponse sur SignalConso pour en informer la DGCCRF.</li>
-			    </ul>
-	     </div>
-	    
-	     <hr>
-	
+     <h2 class="pt-5 pb-2 pb-lg-3">Votre entreprise a été signalée</h2>
 
-	     <a class="lead show" data-toggle="collapse" href="#collapse9" id="les-status">
-	       À quoi correspondent les différents statuts du signalement ?
-	     </a>
-	     <div class="collapse" id="collapse9" [ngClass]="fragment === 'les-status' ? 'show' : ''">
-	       <p>
-	         Une fois connecté sur votre Espace Professionnel, vous avez accès à la liste de tous les signalements déposés sur votre entreprise.
-	         Cette liste vous donne quelques indications sur chaque signalement sans que vous ayez besoin de les ouvrir : la date de dépôt du signalement, le type de problème soulevé, ainsi que le statut du signalement. Il existe trois statuts pour le signalement : </p>
-	         <ul>		   
-	           <li><strong>Non consulté :</strong> vous n’avez pas encore consulté ce signalement - il apparaît en gras. Dès que vous aurez cliqué dessus, le signalement passera au statut suivant.</li>
-	           <li><strong>En attente de réponse :</strong> vous avez consulté le signalement mais vous n’y avez pas encore répondu.</li>
-	           <li><strong>Clôturé :</strong> le signalement est clôturé - vous y avez déjà apporté une réponse ou alors le délai de traitement a été dépassé. (cf les relances).</li>
-	         </ul>
-	         <p>Vous pouvez filtrer la liste des signalements par période ou par statut. Vous pouvez aussi faire une extraction Excel de vos signalements en cliquant sur le bouton “Extraction excel”.
-	       </p>
-	     </div>
-	
+     <a class="lead" data-toggle="collapse" href="#collapse1">
+       J'ai reçu un courrier de SignalConso car mon entreprise a été signalée. Que dois-je faire?
+     </a>
+     <div class="collapse" id="collapse1">
+       <p>
+         Pour connaître ce signalement, rendez-vous sur <a routerLink="/connexion">https://signalconso.beta.gouv.fr</a>
+         avec votre code d’activation de 6 chiffres inscrit dans votre courrier SignalConso et cliquez sur le bouton
+         <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']">
+           Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
+         </button> en haut à droite de votre écran.
+       </p>
+       Lors de votre 1ère connexion, vous devez vous identifier avec :
+       <ul>
+         <li>le numéro SIRET de votre entreprise (14 chiffres)</li>
+         <li>votre code d’activation : le numéro présent dans le courrier SignalConso (6 chiffres)</li>
+       </ul>
+       <p>
+         Renseignez ensuite votre nom, prénom, adresse email et choisissez votre mot de passe pour activer votre espace professionnel.
+       </p>
 
-	     <hr>
-	
+       <hr>
 
-	     <a class="lead" data-toggle="collapse" href="#collapse10" id="la-reponse">
-	       Quelle réponse puis-je apporter ?
-	     </a>
-	     <div class="collapse" id="collapse10" [ngClass]="fragment === 'la-reponse' ? 'show' : ''">
-	       <p>
-	         Pour répondre au signalement, il vous suffit de cliquer sur le bouton Apporter une réponse. Trois choix s’offrent à vous :
-	       </p>
-	         <ul>
-	           <li>Je prends en compte ce signalement</li>
-	           <li>J'estime que ce signalement est infondé</li>
-	           <li>J'estime que ce signalement ne concerne pas mon entreprise</li>
-	         </ul>
-	       <p>
-	         Quelque soit le choix que vous prenez, nous vous invitons à l’expliquer au consommateur.
-	         Cette réponse sera visible par la DGCCRF.
-	         <br/>
-	         Nous vous offrons aussi la possibilité d’ajouter un commentaire et des pièces jointes destinés uniquement à la DGCCRF
-	         dans le champ de saisie spécifique. Actuellement, le site ne permet pas de transmettre les pièces jointes au consommateur.
-	         <br/><br/>
-	         Une fois votre réponse validée, vous recevrez un accusé de réception. Cette réponse sera aussi visible dans la section "Réponse apportée".</p>
-	     </div>
-	    
-	     <hr>
-	
+       <p class="font-weight-bold">
+         Votre « Espace Professionnel » est maintenant activé !
+       </p>
+       <p>
+         Vous pouvez y accéder avec votre mot de passe en cliquant sur le bouton
+         <button type="button" class="btn btn-lg btn-primary" [routerLink]="['/connexion']">
+           Connectez-vous <i class="material-icons md-18" aria-hidden="true" title="Se connecter">keyboard_arrow_right</i>
+         </button>
+       </p>
+       Vous pouvez consulter les signalements concernant votre entreprise et le cas échéant :
+       <ul>
+         <li>Prendre des mesures correctives ou préventives suite au signalement</li>
+         <li>Contacter le consommateur si ce dernier a souhaité vous laisser ses coordonnées</li>
+       </ul>
+     </div>
 
-	     <a class="lead" data-toggle="collapse" href="#collapse11">
-	       Et si le courrier SignalConso arrive pendant mes congés ?
-	     </a>
-	     <div class="collapse" id="collapse11">
-	       <p>
-	         Vous avez reçu le courrier SignalConso mais votre entreprise était fermée pour congés annuels ?
-	         Vous avez consulté le signalement mais vous n’avez pas apporté immédiatement une réponse car vous attendiez la confirmation d’un collaborateur ? Pas de panique !
-	         Après avoir récolter les retours de nombreuses entreprises, nous avons conçu un système de relances offrant de la souplesse dans le traitement du signalement :
-	       </p>
-			    <ul>
-	         <li>
-	           <strong>Relance courrier :</strong> nous vous avons adressé un courrier vous indiquant qu’un signalement avait été déposé sur votre entreprise
-	           mais vous n’avez pas encore activé votre Espace Professionnel.
-	           <br/>Après 21 jours, nous vous adressons un nouveau courrier vous invitant à l’activer.
-	           Une nouvelle période de 21 jours est lancée, au terme de laquelle nous clôturons le signalement.
-	           Vous pourrez toujours activer votre Espace Professionnel, mais vous ne pourrez plus répondre au signalement.
-	         </li>
-				    <li>
-	           <strong>Relance mail :</strong> qu’il s’agisse d’un nouveau signalement que vous n’avez pas encore consulté ou d’un signalement consulté mais resté sans réponse,
-	           nous vous envoyons un email tous les 7 jours pendant 3 semaines pour vous inviter à faire le nécessaire.
-	           Au terme de ces relances, vous ne pourrez plus répondre au signalement.
-	         </li>
-			    </ul>
-	     </div>
-	    
-	     <hr>
-	        
-	    <a class="lead show" data-toggle="collapse" href="#collapse15">
-	       Je n'ai pas réagi à temps et le signalement est clôturé, que puis-je faire ?
-	    </a>
-	    <div class="collapse" id="collapse15">
-	      <p> Vous pouvez toujours consulter le signalement, mais vous ne pourrez plus y répondre.
-	      <br/> Afin de limiter le nombre de signalements qui pourraient échapper à votre vigilance, nous envoyons régulièrement des relances sur votre adresse email. Pensez à la tenir à jour sur votre compte !
-	      </p>     
-	    </div>
-	
+     <hr>
 
-	    <hr>
-	
+     <a class="lead" data-toggle="collapse" href="#collapse3">
+       Vous avez oublié votre mot de passe ?
+     </a>
+     <div class="collapse" id="collapse3">
+       <p>
+         Vous pouvez <a routerLink="/connexion/perte-mot-de-passe">demander un nouveau mot de passe</a> ou, en cas de difficultés, contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr" target="_blank" title="contact@signalconso.beta.gouv.fr (ouverture de la messagerie par défaut)">SignalConso</a>
+       </p>
+     </div>
 
-	    <a class="lead show" data-toggle="collapse" href="#collapse16">
-	       Puis-je ouvrir plusieurs accès pour les collaborateurs de mon entreprise ?
-	    </a>
-	    <div class="collapse" id="collapse16">
-	      <p> Oui, vous pouvez inviter vos collaborateurs via leur adresse e-mail (fonctionnalité accessible dans la section "Mon entreprise" du menu en haut à gauche).
-          <br/> Vous pouvez les inviter comme simples collaborateurs ou comme administrateurs (dans ce cas, ils pourront également gérer les accès).
-	      </p>     
-	    </div>
-	
+     <hr>
 
-	   </div>
-	 </section>
-	</main>
+     <a class="lead" data-toggle="collapse" href="#collapse5">
+       Est-ce que mon entreprise va être contrôlée suite à un signalement ?
+     </a>
+     <div class="collapse" id="collapse5">
+       <p>
+         En fonction de la gravité et de la fréquence des signalements, les enquêteurs de la DGCCRF pourront déclencher un contrôle. <br/>
+         Le signalement est enregistré dans la base de données de la DGCCRF.
+       </p>
+     </div>
+
+     <hr>
+
+     <a class="lead" data-toggle="collapse" href="#collapse6">
+       Puis-je communiquer directement avec le consommateur à l’origine du signalement ?
+     </a>
+     <div class="collapse" id="collapse6">
+       <p>
+         SignalConso laisse le choix au consommateur de transmettre, ou non, ses coordonnées à l’entreprise signalée. <br/>
+         Le cas échéant, nous vous les communiquerons à votre demande. Dans tous les cas, nous communiquons avec le consommateur quant au suivi de son signalement.
+       </p>
+     </div>
+
+     <hr>
+
+     <a class="lead" data-toggle="collapse" href="#collapse7">
+       Dois-je apporter les détails des actions correctives mises en œuvre pour rectifier le problème ?
+     </a>
+     <div class="collapse" id="collapse7">
+       <p>
+         Les retours des entreprises sont importants afin d’améliorer le service ; ils sont également précieux pour les consommateurs et la DGCCRF. <br/>
+       </p>
+     </div>
+
+     <hr>
+
+     <a class="lead" data-toggle="collapse" href="#collapse8" id="le-detail">
+       Quelles informations composent un signalement ?
+     </a>
+     <div class="collapse" id="collapse8" [ngClass]="fragment === 'le-detail' ? 'show' : ''">
+       <p>
+         Un signalement comporte différentes informations :
+       </p>
+       <ul>
+         <li> <strong> Problème </strong><br/> Afin d'identifier le problème que le consommateur a rencontré et le secteur professionnel concerné, le consommateur doit répondre à une série de questions prédéfinies. Les réponses à toutes ces questions sont renseignées dans la catégorie "Problème" du signalement. Il s'agit d'éléments d'identification sur le type d'anomalie signalée.</li>
+         <li> <strong> Description </strong><br/>La section Description permet au consommateur de décrire le contexte dans lequel il a rencontré le problème, d’y ajouter des précisions et de donner la date du constat. C’est aussi là que vous trouverez les éventuelles pièces jointes envoyées par le consommateur.</li>
+         <li> <strong> Consommateur </strong><br/>La section Consommateur vous indique si le consommateur a souhaité vous laisser ses coordonnées afin d'être recontacté en direct. Si ce n’est pas le cas, vous pouvez tout de même lui indiquer une réponse à travers SignalConso. S'il a souhaité vous laisser ses coordonnées, vous pouvez le contacter directement (dans le cadre du signalement), mais n’oubliez pas de préciser cette réponse sur SignalConso pour en informer la DGCCRF.</li>
+       </ul>
+     </div>
+
+     <hr>
+
+     <a class="lead show" data-toggle="collapse" href="#collapse9" id="les-status">
+       À quoi correspondent les différents statuts du signalement ?
+     </a>
+     <div class="collapse" id="collapse9" [ngClass]="fragment === 'les-status' ? 'show' : ''">
+       <p>
+         Une fois connecté sur votre Espace Professionnel, vous avez accès à la liste de tous les signalements déposés sur votre entreprise.
+         Cette liste vous donne quelques indications sur chaque signalement sans que vous ayez besoin de les ouvrir : la date de dépôt du signalement, le type de problème soulevé, ainsi que le statut du signalement. Il existe trois statuts pour le signalement : </p>
+         <ul>
+           <li><strong>Non consulté :</strong> vous n’avez pas encore consulté ce signalement - il apparaît en gras. Dès que vous aurez cliqué dessus, le signalement passera au statut suivant.</li>
+           <li><strong>En attente de réponse :</strong> vous avez consulté le signalement mais vous n’y avez pas encore répondu.</li>
+           <li><strong>Clôturé :</strong> le signalement est clôturé - vous y avez déjà apporté une réponse ou alors le délai de traitement a été dépassé. (cf les relances).</li>
+         </ul>
+         <p>Vous pouvez filtrer la liste des signalements par période ou par statut. Vous pouvez aussi faire une extraction Excel de vos signalements en cliquant sur le bouton “Extraction excel”.
+       </p>
+     </div>
+
+     <hr>
+
+     <a class="lead" data-toggle="collapse" href="#collapse10" id="la-reponse">
+       Quelle réponse puis-je apporter ?
+     </a>
+     <div class="collapse" id="collapse10" [ngClass]="fragment === 'la-reponse' ? 'show' : ''">
+       <p>
+         Pour répondre au signalement, il vous suffit de cliquer sur le bouton Apporter une réponse. Trois choix s’offrent à vous :
+       </p>
+         <ul>
+           <li>Je prends en compte ce signalement</li>
+           <li>J'estime que ce signalement est infondé</li>
+           <li>J'estime que ce signalement ne concerne pas mon entreprise</li>
+         </ul>
+       <p>
+         Quelque soit le choix que vous prenez, nous vous invitons à l’expliquer au consommateur.
+         Cette réponse sera visible par la DGCCRF.
+         <br/>
+         Nous vous offrons aussi la possibilité d’ajouter un commentaire et des pièces jointes destinés uniquement à la DGCCRF
+         dans le champ de saisie spécifique. Actuellement, le site ne permet pas de transmettre les pièces jointes au consommateur.
+         <br/><br/>
+         Une fois votre réponse validée, vous recevrez un accusé de réception. Cette réponse sera aussi visible dans la section "Réponse apportée".</p>
+     </div>
+
+     <hr>
+
+     <a class="lead" data-toggle="collapse" href="#collapse11">
+       Et si le courrier SignalConso arrive pendant mes congés ?
+     </a>
+     <div class="collapse" id="collapse11">
+       <p>
+         Vous avez reçu le courrier SignalConso mais votre entreprise était fermée pour congés annuels ?
+         Vous avez consulté le signalement mais vous n’avez pas apporté immédiatement une réponse car vous attendiez la confirmation d’un collaborateur ? Pas de panique !
+         Après avoir récolter les retours de nombreuses entreprises, nous avons conçu un système de relances offrant de la souplesse dans le traitement du signalement :
+       </p>
+       <ul>
+         <li>
+           <strong>Relance courrier :</strong> nous vous avons adressé un courrier vous indiquant qu’un signalement avait été déposé sur votre entreprise
+           mais vous n’avez pas encore activé votre Espace Professionnel.
+           <br/>Après 21 jours, nous vous adressons un nouveau courrier vous invitant à l’activer.
+           Une nouvelle période de 21 jours est lancée, au terme de laquelle nous clôturons le signalement.
+           Vous pourrez toujours activer votre Espace Professionnel, mais vous ne pourrez plus répondre au signalement.
+         </li>
+         <li>
+           <strong>Relance mail :</strong> qu’il s’agisse d’un nouveau signalement que vous n’avez pas encore consulté ou d’un signalement consulté mais resté sans réponse,
+           nous vous envoyons un email tous les 7 jours pendant 3 semaines pour vous inviter à faire le nécessaire.
+           Au terme de ces relances, vous ne pourrez plus répondre au signalement.
+         </li>
+       </ul>
+     </div>
+
+     <hr>
+
+     <a class="lead show" data-toggle="collapse" href="#collapse15">
+       Je n'ai pas réagi à temps et le signalement est clôturé, que puis-je faire ?
+     </a>
+     <div class="collapse" id="collapse15">
+       <p>
+         Vous pouvez toujours consulter le signalement, mais vous ne pourrez plus y répondre.
+         <br/> Afin de limiter le nombre de signalements qui pourraient échapper à votre vigilance, nous envoyons régulièrement des relances sur votre adresse email. Pensez à la tenir à jour sur votre compte !
+       </p>
+     </div>
+
+     <hr>
+
+     <a class="lead show" data-toggle="collapse" href="#collapse16">
+       Puis-je ouvrir plusieurs accès pour les collaborateurs de mon entreprise ?
+     </a>
+     <div class="collapse" id="collapse16">
+       <p>
+         Oui, vous pouvez inviter vos collaborateurs via leur adresse e-mail (fonctionnalité accessible dans la section "Mon entreprise" du menu en haut à gauche).
+         <br/> Vous pouvez les inviter comme simples collaborateurs ou comme administrateurs (dans ce cas, ils pourront également gérer les accès).
+       </p>
+     </div>
+
+   </div>
+ </section>
+</main>
+
 

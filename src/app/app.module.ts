@@ -23,6 +23,7 @@ import { AccountMenuComponent } from './pages/header/account-menu/account-menu.c
 import { TooltipModule } from 'ngx-bootstrap';
 import { AccountModule } from './pages/account/account.module';
 import { CompaniesModule } from './pages/companies/companies.module';
+import { Angulartics2Module } from 'angulartics2';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -58,6 +59,7 @@ registerLocaleData(localeFr, 'fr');
     StaticModule,
     BsDropdownModule.forRoot(),
     TooltipModule,
+    Angulartics2Module.forRoot(),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

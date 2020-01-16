@@ -13,9 +13,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
-  { path: 'comment-ça-marche', component: HowComponent },
+  { path: 'comment-ça-marche/consommateur', component: HowComponent },
+  { path: 'comment-ça-marche/professionnel', component: ProComponent },
   { path: 'qui-sommes-nous', component: AboutComponent },
-  { path: 'vous-êtes-un-professionnel', component: ProComponent },
   { path: 'delai-de-retractation', component: RetractationComponent },
   { path: 'conditions-generales-utilisation', component: CguComponent },
   { path: 'conditions-generales-utilisation/consommateur', component: CguComponent },

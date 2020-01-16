@@ -32,7 +32,7 @@
     - title: autre
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Vie quotidienne
-  example: "Exemples: conciergerie, pressing, cordonnier, ménage, garde d'enfants"
+  example: "Exemple : conciergerie, pressing, cordonnier, ménage, garde d'enfants"
   subcategories:
     - title: prix des prestations
       example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'

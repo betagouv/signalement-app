@@ -135,7 +135,7 @@
         <div class="row form-group">
           <div class="col-3 col-lg-4 text-right">
             <label for="statusFilter">
-              Statut <a [routerLink]="['/vous-êtes-un-professionnel']" fragment="les-status" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
+              Statut <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
             </label>
           </div>
           <div class="col-9 col-lg-8 text-left">
@@ -308,7 +308,7 @@
             </td>
             <td class="pre">
               <span *ngFor="let file of report.consumerUploadedFiles | slice : 0 : 2; let isFirst=first;" [tooltip]="file.filename">
-                <a href="{{getFileDownloadUrl(file)}}">
+                <a href="{{getFileDownloadUrl(file)}}" (click)="$event.stopPropagation()">
                   {{file.displayedFilenameSmall}}
                 </a>
                 <br *ngIf="isFirst" />

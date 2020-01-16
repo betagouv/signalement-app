@@ -7,7 +7,12 @@
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/comment-ça-marche</loc>
+    <loc>https://signalconso.beta.gouv.fr/comment-ça-marche/consommateur</loc>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/comment-ça-marche/professionnel</loc>
     <priority>0.5</priority>
   </url>
 
@@ -17,42 +22,77 @@
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/vous-êtes-un-professionnel</loc>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
     <loc>https://signalconso.beta.gouv.fr/contact</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/pratique-d-hygiene</loc>
+    <loc>https://signalconso.beta.gouv.fr/cafe-restaurant</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/nourriture-et-boissons</loc>
+    <loc>https://signalconso.beta.gouv.fr/achat-magasin</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/materiel-et-objets</loc>
+    <loc>https://signalconso.beta.gouv.fr/services-aux-particuliers</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/prix-et-paiement</loc>
+    <loc>https://signalconso.beta.gouv.fr/telephonie-eau-gaz-electricite</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/publicite</loc>
+    <loc>https://signalconso.beta.gouv.fr/banque-assurance-mutuelle</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/services-apres-vente</loc>
+    <loc>https://signalconso.beta.gouv.fr/produits-objets</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/travaux-renovation</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/voyage-loisirs</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/immobilier</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/sante</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/voiture-vehicule</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/animaux</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/demarches-administratives</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signalconso.beta.gouv.fr/ehpad</loc>
     <priority>0.4</priority>
   </url>
 
