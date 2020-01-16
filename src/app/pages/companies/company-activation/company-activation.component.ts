@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { AccountEventActions, ActionResults, AnalyticsService, EventCategories } from '../../../services/analytics.service';
+import { ActionResultNames, AnalyticsService, CompanyAccessEventActions, EventCategories } from '../../../services/analytics.service';
 import { Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { take } from 'rxjs/operators';
@@ -60,7 +60,7 @@ export class CompanyActivationComponent implements OnInit {
     } else {
       const handleError = (action: string) => {
         this.loading = false;
-        this.analyticsService.trackEvent(EventCategories.account, action, ActionResults.fail);
+        this.analyticsService.trackEvent(EventCategories.companyAccess, action, ActionResultNames.fail);
         this.activationError = `Impossible d'activer ce compte. Veuillez vérifier le code d'accès et le SIRET`;
       };
 
@@ -69,21 +69,29 @@ export class CompanyActivationComponent implements OnInit {
         this.authenticationService.acceptToken(this.siretCtrl.value, this.codeCtrl.value).subscribe(
           _ => {
             this.loading = false;
-            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.addCompanyToAccount, ActionResults.success);
+            this.analyticsService.trackEvent(
+              EventCategories.account,
+              CompanyAccessEventActions.addCompanyToAccount,
+              ActionResultNames.success
+            );
             this.router.navigate(['mes-entreprises']);
           },
           error => {
-            handleError(AccountEventActions.addCompanyToAccount);
+            handleError(CompanyAccessEventActions.addCompanyToAccount);
           }
         );
       } else {
         this.authenticationService.fetchTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
           token => {
             this.loading = false;
-            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.activateAccount, ActionResults.success);
-            this.router.navigate(['compte', 'activation']);
+            this.analyticsService.trackEvent(
+              EventCategories.account,
+              CompanyAccessEventActions.activateCompanyCode,
+              ActionResultNames.success
+            );
+            this.router.navigate(['compte', 'inscription']);
           },
-          error => handleError(AccountEventActions.activateAccount)
+          error => handleError(CompanyAccessEventActions.activateCompanyCode)
         );
       }
     }
