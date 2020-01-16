@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './forget-password/forgot-password.compo
 import { NgxLoadingModule } from 'ngx-loading';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AccessTokenComponent } from './accesstoken.component';
+import { AccountRegistrationComponent } from './account-registration/account-registration.component';
 
 defineLocale('fr', frLocale);
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'connexion/perte-mot-de-passe', component: ForgotPasswordComponent },
   { path: 'connexion/perte-mot-de-passe/dgccrf', component: ForgotPasswordComponent },
   { path: 'connexion/nouveau-mot-de-passe/:token', component: ResetPasswordComponent },
+  { path: 'compte/inscription', component: AccountRegistrationComponent },
 ];
 
 @NgModule({
@@ -25,7 +27,8 @@ const routes: Routes = [
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    AccessTokenComponent
+    AccessTokenComponent,
+    AccountRegistrationComponent,
   ],
   imports: [
     CommonModule,

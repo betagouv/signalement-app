@@ -7,7 +7,7 @@
 </div>
 
 <main role="main">
-  <section class="section section-lightest-grey">
+  <section class="section section-lightest-grey position-relative">
     <div class="container max-width">
       <div class="notification success mt-3" *ngIf="showSuccess; else activation">
         Votre compte est maintenant activé, vous pouvez <a routerLink="/connexion">vous connecter</a> pour accéder à votre espace entreprise.
@@ -115,6 +115,14 @@
           </div>
           <div class="notification error mt-3" *ngIf="loadingError">
             Une erreur technique s'est produite
+          </div>
+          <div class="notification warning mt-3" *ngIf="conflictError">
+            <p>
+              <b>Il y a déjà un compte SignalConso associé à l'adresse mail {{emailCtrl.value}}.</b>
+            </p>
+            <p>
+              Pour rattacher le Siret {{tokenInfo?.companySiret}} à l'adresse mail {{emailCtrl.value}} vous devez d'abord <a routerLink="/connexion">vous connecter</a>.
+            </p>
           </div>
           <hr />
           <div class="form-group row">
