@@ -8,11 +8,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  selector: 'app-password-reset',
+  templateUrl: './password-reset.component.html',
+  styleUrls: ['./password-reset.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
+export class PasswordResetComponent implements OnInit {
 
   authToken: string;
   newPasswordForm: FormGroup;

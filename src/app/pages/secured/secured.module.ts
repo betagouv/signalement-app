@@ -13,7 +13,6 @@ import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
-import { PasswordComponent } from './account/password/password.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
@@ -24,7 +23,6 @@ const routes: Routes = [
   { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
-  { path: 'compte/mot-de-passe', component: PasswordComponent, canActivate: [AuthGuard] },
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
 ];
 
@@ -35,7 +33,6 @@ const routes: Routes = [
     EventComponent,
     AppPermissionDirective,
     AppRoleDirective,
-    PasswordComponent,
     DGCCRFComponent,
     SubscriptionComponent,
     MostReportedListComponent

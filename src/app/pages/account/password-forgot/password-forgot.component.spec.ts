@@ -1,32 +1,34 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PasswordComponent } from './password.component';
+import { PasswordForgotComponent } from './password-forgot.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { NgxLoadingModule } from 'ngx-loading';
 
-describe('PasswordComponent', () => {
-  let component: PasswordComponent;
-  let fixture: ComponentFixture<PasswordComponent>;
+describe('ForgetPasswordComponent', () => {
+  let component: PasswordForgotComponent;
+  let fixture: ComponentFixture<PasswordForgotComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordComponent ],
+      declarations: [ PasswordForgotComponent ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule,
+        NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot()
       ],
       providers: []
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PasswordComponent);
+    fixture = TestBed.createComponent(PasswordForgotComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../../assets/data/pages.json';
-import { AccountEventActions, AnalyticsService, EventCategories } from '../../../../services/analytics.service';
+import pages from '../../../../assets/data/pages.json';
+import { AccountEventActions, AnalyticsService, EventCategories } from '../../../services/analytics.service';
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from '../../../../services/account.service';
+import { AccountService } from '../../../services/account.service';
 
 @Component({
-  selector: 'app-password',
-  templateUrl: './password.component.html',
-  styleUrls: ['./password.component.scss']
+  selector: 'app-password-change',
+  templateUrl: './password-change.component.html',
+  styleUrls: ['./password-change.component.scss']
 })
-export class PasswordComponent implements OnInit {
+export class PasswordChangeComponent implements OnInit {
 
   changePasswordForm: FormGroup;
   oldPasswordCtrl: FormControl;

@@ -7,11 +7,11 @@ import pages from '../../../../assets/data/pages.json';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  selector: 'app-password-forgot',
+  templateUrl: './password-forgot.component.html',
+  styleUrls: ['./password-forgot.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class PasswordForgotComponent implements OnInit {
 
   loginForm: FormGroup;
   loginCtrl: FormControl;
