@@ -9,11 +9,12 @@ import {
   AnalyticsService,
   EventCategories,
 } from '../../../services/analytics.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { TokenInfo, User } from '../../../model/AuthUser';
 import { AccountService } from '../../../services/account.service';
 import HttpStatusCodes from 'http-status-codes';
+import { combineLatest, iif } from 'rxjs';
 
 @Component({
   selector: 'app-account-registration',
@@ -23,6 +24,7 @@ import HttpStatusCodes from 'http-status-codes';
 export class AccountRegistrationComponent implements OnInit {
 
   tokenInfo: TokenInfo;
+  isAuthenticated: boolean;
 
   activationForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -37,6 +39,7 @@ export class AccountRegistrationComponent implements OnInit {
   loading: boolean;
   loadingError = false;
   conflictError = false;
+  tokenError = false;
 
   mayEditEmail = false;
 
@@ -46,24 +49,42 @@ export class AccountRegistrationComponent implements OnInit {
               private accountService: AccountService,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
-              private router: Router) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.account.activation.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.account.activation.description });
-    this.initForm();
 
-    this.authenticationService.getStoredTokenInfo().then(tokenInfo => {
-      if (tokenInfo == null) {
-        return this.router.navigate(['/connexion']);
+    const siret = this.activatedRoute.snapshot.paramMap.get('siret');
+    const token = this.activatedRoute.snapshot.queryParamMap.get('token');
+
+    combineLatest([
+      this.authenticationService.isAuthenticated(),
+      iif(
+        () => siret !== null && token !== null,
+        this.authenticationService.fetchTokenInfo(siret, token),
+        this.authenticationService.getStoredTokenInfo()
+      )
+    ]).subscribe(([isAuthenticated, tokenInfo]: [boolean, TokenInfo]) => {
+        if (tokenInfo == null) {
+          return this.router.navigate(['/connexion']);
+        } else if (isAuthenticated) {
+          this.isAuthenticated = true;
+        } else {
+          this.initForm();
+          this.tokenInfo = <TokenInfo>tokenInfo;
+          this.mayEditEmail = (this.tokenInfo.emailedTo === undefined);
+          if (!this.mayEditEmail) {
+            this.activationForm.controls.email.clearValidators();
+            this.activationForm.controls.email.updateValueAndValidity();
+          }
+        }
+      },
+      (err) => {
+        this.tokenError = true;
       }
-      this.tokenInfo = <TokenInfo>tokenInfo;
-      this.mayEditEmail = (this.tokenInfo.emailedTo === undefined);
-      if (!this.mayEditEmail) {
-        this.activationForm.controls.email.clearValidators();
-        this.activationForm.controls.email.updateValueAndValidity();
-      }
-    });
+    );
   }
 
   initForm() {
