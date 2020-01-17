@@ -7,22 +7,24 @@ import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
 import { ReportFilter } from '../../../../model/ReportFilter';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest, EMPTY, iif, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
-import { isPlatformBrowser, Location } from '@angular/common';
+import { isPlatformBrowser, Location, PlatformLocation } from '@angular/common';
 import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { mergeMap, take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { Department, Region, Regions } from '../../../../model/Region';
 import oldCategories from '../../../../../assets/data/old-categories.json';
 import { AccountService } from '../../../../services/account.service';
 import { HttpResponse } from '@angular/common/http';
 import { EventService } from '../../../../services/event.service';
+import { UserAccess } from '../../../../model/CompanyAccess';
+import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
 
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
@@ -33,6 +35,7 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 })
 export class ReportListComponent implements OnInit, OnDestroy {
   user: User;
+  userAccesses: UserAccess[] = [];
   permissions = Permissions;
   roles = Roles;
   reportStatus = ReportStatus;
@@ -64,12 +67,14 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private constantService: ConstantService,
               private accountService: AccountService,
               private eventService: EventService,
+              private companyAccessesService: CompanyAccessesService,
               private fileUploaderService: FileUploaderService,
               private localeService: BsLocaleService,
               private modalService: BsModalService,
               private router: Router,
               private route: ActivatedRoute,
-              private location: Location) {
+              private location: Location,
+              private platformLocation: PlatformLocation) {
   }
 
   ngOnInit() {
@@ -77,9 +82,14 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
 
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
-    });
+    this.authenticationService.user.pipe(
+      take(1),
+      mergeMap(user => {
+        console.log('user', user)
+        this.user = user;
+        return iif(() => user && user.role === Roles.Pro, this.companyAccessesService.myAccesses(user), EMPTY);
+      })
+    ).subscribe(userAccesses => this.userAccesses = userAccesses);
 
     this.reportFilter = {
       period: []
@@ -381,5 +391,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.loadingError = true;
       });
+  }
+
+  back() {
+    this.platformLocation.back();
   }
 }
