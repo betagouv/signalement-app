@@ -1,21 +1,12 @@
-<div class="banner text-center section section-primary" role="region">
-  <div class="container">
-    <div class="row">
-      <div class="col-2 col-sm-1 text-right">
-        <img src="/assets/images/icon_back_white.png" class="back pointer" (click)="back()" alt="page précédente"/>
-      </div>
-      <div class="col-10 col-sm-11">
-        <h1 class="text-center">
-          Détail du signalement
-          <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
-        </h1>
-        <h5 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
-          {{report?.id}}
-        </h5>
-      </div>
-    </div>
-  </div>
-</div>
+<app-banner [backButton]="true">
+  <h1 class="text-center">
+    Détail du signalement
+    <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
+  </h1>
+  <h5 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
+    {{report?.id}}
+  </h5>
+</app-banner>
 
 <section class="section section-white position-relative pb-0">
   <div class="container">

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
-import { CompanyAccessesComponent } from './company-accesses/companyaccesses.component';
+import { CompanyAccessesComponent } from './company-accesses/company-accesses.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../../components/components.module';
 import { CompanyActivationComponent } from './company-activation/company-activation.component';

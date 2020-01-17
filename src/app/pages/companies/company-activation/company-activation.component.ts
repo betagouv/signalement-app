@@ -6,7 +6,6 @@ import { ActionResultNames, AnalyticsService, CompanyAccessEventActions, EventCa
 import { Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { take } from 'rxjs/operators';
-import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-company-activation',
@@ -30,8 +29,7 @@ export class CompanyActivationComponent implements OnInit {
               private meta: Meta,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
-              private router: Router,
-              private platformLocation: PlatformLocation) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.account.activation.title);
@@ -99,10 +97,6 @@ export class CompanyActivationComponent implements OnInit {
 
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
-  }
-
-  back() {
-    this.platformLocation.back();
   }
 
 }

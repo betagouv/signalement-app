@@ -10,7 +10,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
 import { combineLatest, EMPTY, iif, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
-import { isPlatformBrowser, Location, PlatformLocation } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
@@ -73,8 +73,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private modalService: BsModalService,
               private router: Router,
               private route: ActivatedRoute,
-              private location: Location,
-              private platformLocation: PlatformLocation) {
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -85,7 +84,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.authenticationService.user.pipe(
       take(1),
       mergeMap(user => {
-        console.log('user', user)
         this.user = user;
         return iif(() => user && user.role === Roles.Pro, this.companyAccessesService.myAccesses(user), EMPTY);
       })
@@ -391,9 +389,5 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.loadingError = true;
       });
-  }
-
-  back() {
-    this.platformLocation.back();
   }
 }

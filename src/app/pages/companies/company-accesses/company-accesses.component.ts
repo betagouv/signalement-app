@@ -12,7 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-company-accesses',
-  templateUrl: './companyaccesses.component.html'
+  templateUrl: './company-accesses.component.html'
 })
 export class CompanyAccessesComponent implements OnInit {
 
