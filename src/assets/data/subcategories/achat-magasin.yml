@@ -1,4 +1,4 @@
-- title: Un problème qui concerne le magasin / le commerce
+- title: Un problème qui concerne le magasin de façon générale
   example: 'Exemple : prix manquant, prix faux en caisse, magasin sale'
   subcategories:
     - title: Prix
@@ -545,9 +545,15 @@
                     outOfScope: true
             - title: Autre
     - title: Autre
-
-- title: Un problème avec un produit que j'ai acheté
-  example: 'Exemple : il manque des informations sur le produit, produit douteux'
+      subcategories:
+        - title: Problème d'accessibilité
+        - title: Problème lié à l'écologie
+          example: "Exemple : sac en plastique, éclairage de nuit "
+        - title: Problème de voisinage
+          example: "Exemple : bruit, odeur, voiture mal garée"
+        - title: Autre  
+- title: Un problème avec un produit en particulier
+  example: "Exemple : il manque des informations sur l'emballage, le produit est douteux"
   subcategories:
     - title: C'est un aliment ou une boisson
       example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
