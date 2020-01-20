@@ -547,6 +547,7 @@
     - title: Autre
       subcategories:
         - title: Problème d'accessibilité
+          information: !!import/single ../common/info/accessibilite.yml
         - title: Problème lié à l'écologie
           example: "Exemple : sac en plastique, éclairage de nuit "
         - title: Problème de voisinage
