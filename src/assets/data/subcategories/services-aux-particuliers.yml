@@ -69,9 +69,8 @@
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autre
       consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Autres types d''entreprises de service
-  example: 'Exemple : déménageur, agence de rencontre, organisme de formation'
-  example: La livraison de repas à domicile est dans la catégorie Café / Restaurant
+- title: Autres types d'entreprises de service
+  example: 'Exemple : déménageur, agence de rencontre, organisme de formation. Pour la livraison de repas à domicile, choisir la catégorie Café / Restaurant
   subcategories:
     - title: Déménageur
       consumerActions: !!import/single ../common/actions/defaut.yml
