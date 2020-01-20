@@ -78,12 +78,7 @@
           fileLabel: Merci de joindre si possible une photo pour appuyer votre signalement.
         - title: Je subis des nuisances à cause des odeurs, du bruit ..
           example: 'Exemple : les odeurs des poubelles ou de la cuisine arrivent dans mon appartement'
-          information:
-            title: Je subis des nuisances à cause d'un commerce
-            content: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème.
-            actions:
-              - question: Mais alors, à qui demander de l'aide ?
-                answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/N356" target="_blank" />lien</a>
+          information: !!import/single ../common/info/voisinage.yml            
     - title: Hygiène du personnel
       example: 'Exemple : tenue sale ou pas adaptée'
       subcategories:
