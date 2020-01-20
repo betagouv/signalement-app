@@ -92,12 +92,9 @@
               rank: 3
               type: TEXTAREA
     - title: Hygiène
-      example: 'Exemple : magasin sale, produit pas au frais, odeurs'
-      subcategories:
-        - title: Je subis des nuisances à cause des odeurs, du bruit ..
-          example: 'Exemple : les odeurs des poubelles arrivent dans mon appartement, les clients se garent devant chez moi'
-          information: !!import/single ../common/info/voisinage.yml    
-        - title: Locaux sales
+      example: 'Exemple : magasin sale, produit pas au frais, mauvaises odeurs'
+      subcategories:  
+        - title: Hygiène des locaux et du matériel
           detailInputs:
             - label: Quel endroit est concerné&#160;?
               rank: 1
@@ -205,6 +202,9 @@
               rank: 4
               type: TIMESLOT
               optionnal: true
+        - title: Je subis des nuisances à cause des odeurs, du bruit ..
+          example: 'Exemple : les odeurs des poubelles arrivent dans mon appartement, les clients se garent devant chez moi'
+          information: !!import/single ../common/info/voisinage.yml        
         - title: Autre problème d'hygiène
     - title: Produit périmé
       subcategoriesTitle: 'Vous voulez signaler&#160;:'
