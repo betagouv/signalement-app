@@ -7,7 +7,7 @@ import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
 import { ReportFilter } from '../../../../model/ReportFilter';
-import { combineLatest, EMPTY, iif, Subscription } from 'rxjs';
+import { combineLatest, iif, of, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
 import { isPlatformBrowser, Location } from '@angular/common';
@@ -35,7 +35,7 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 })
 export class ReportListComponent implements OnInit, OnDestroy {
   user: User;
-  userAccesses: UserAccess[] = [];
+  userAccesses: UserAccess[];
   permissions = Permissions;
   roles = Roles;
   reportStatus = ReportStatus;
@@ -81,32 +81,32 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
 
-    this.authenticationService.user.pipe(
-      take(1),
-      mergeMap(user => {
-        this.user = user;
-        return iif(() => user && user.role === Roles.Pro, this.companyAccessesService.myAccesses(user), EMPTY);
-      })
-    ).subscribe(userAccesses => this.userAccesses = userAccesses);
-
     this.reportFilter = {
       period: []
     };
 
     this.loading = true;
     this.loadingError = false;
-    combineLatest([
-      this.constantService.getReportStatusList(),
-      this.route.paramMap,
-      this.route.queryParamMap
-    ]).subscribe(
-      ([statusList, params, queryParams]) => {
+    this.authenticationService.user.pipe(
+      take(1),
+      mergeMap(user => {
+        this.user = user;
+        return combineLatest([
+          this.constantService.getReportStatusList(),
+          this.route.paramMap,
+          this.route.queryParamMap,
+          iif(() => user && user.role === Roles.Pro, this.companyAccessesService.myAccesses(user), of([]))
+        ]);
+      })
+    ).subscribe(
+      ([statusList, params, queryParams, userAccesses]) => {
+        console.log('subscribe')
         const siret = params.get('siret');
-
         if (siret) {
           this.reportFilter = {siret};
         }
 
+        this.userAccesses = userAccesses;
         this.statusList = statusList;
         this.loadReportExtractUrl();
         this.loadReports(Number(queryParams.get('page_number') || 1));
