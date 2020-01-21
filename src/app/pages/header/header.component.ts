@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Permissions, Roles, User } from '../../model/AuthUser';
 import { Router, Scroll } from '@angular/router';
@@ -11,6 +11,7 @@ import { Router, Scroll } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   @ViewChild('banner', {static: false}) banner;
+  @ViewChild('navbarContent', {static: false}) navbarContent: ElementRef<any>;
 
   roles = Roles;
   permissions = Permissions;
@@ -30,6 +31,11 @@ export class HeaderComponent implements OnInit {
         this.banner.nativeElement.focus();
       }
     });
+  }
+
+  getNavItemDataToggle() {
+    return (this.navbarContent && this.navbarContent.nativeElement.classList.contains('show')) ? 'collapse' : '';
+
   }
 
 }
