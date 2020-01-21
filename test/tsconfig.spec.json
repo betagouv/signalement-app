@@ -8,12 +8,13 @@
     ]
   },
   "files": [
-    "test.ts",
-    "polyfills.ts"
+    "./test.ts",
+    "./fixtures.spec.ts",
+    "../src/polyfills.ts"
   ],
   "include": [
-    "**/*.spec.ts",
-    "**/*.d.ts",
+    "../**/*.spec.ts",
+    "../**/*.d.ts",
     "../node_modules/json-typescript-mapper/libs/utils.ts"
   ]
 }
