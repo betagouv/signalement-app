@@ -336,7 +336,7 @@
     - title: Autre
       subcategories:
         - title: On a refusé de me donner une chambre
-          example: 'Exemple : Refus pour un motif discriminatoire, au motif d'enfant'
+          example: "Exemple : Refus pour un motif discriminatoire, au motif d'enfant"
           detailInputs:
             - label: Date du problème
               rank: 1
@@ -346,7 +346,7 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
-         -title: Mon chien a été refusé
+        - title: Mon chien n'a pas été accepté
           subcategoriesTitle: Est-ce un chien d'assistance&#160;?
           subcategories:
             - title: Non
