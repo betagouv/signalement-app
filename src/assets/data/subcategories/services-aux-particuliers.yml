@@ -31,9 +31,15 @@
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autre
       subcategories:
+        - title: Le personnel ne dispose pas des diplômes requis
         - title: Problème d'hygiène
+          example: "Exemple : établissement sale, mauvaises pratiques d'hygiène"
         - title: Je subis des nuisances à cause des odeurs, du bruit ..
           information: !!import/single ../common/info/tel.yml
+        - title: Le personnel n'est pas aimable
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Mon chien a été refusé dans le salon
+          information: !!import/single ../common/info/chienassistance.yml
         - title: Autre
           consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Vie quotidienne
@@ -49,9 +55,12 @@
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autre
       subcategories:
+        - title: Le personnel ne dispose pas des diplômes requis
         - title: Problème d'hygiène
         - title: Je subis des nuisances à cause des odeurs, du bruit ..
           information: !!import/single ../common/info/tel.yml
+        - title: Le personnel n'est pas aimable
+          information: !!import/single ../common/info/amabilite.yml
         - title: Autre
           consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Aide à la personne
@@ -68,7 +77,11 @@
       example: 'Exemple : composition d''un cercueil non conforme'
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autre
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      subcategories:
+        - title: Le personnel n'est pas aimable ou respecteux
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Le personnel ne dispose pas des diplômes requis
+        - title: Autre
 - title: Autres types d'entreprises de service
   example: 'Exemple : déménageur, agence de rencontre, organisme de formation. Pour la livraison de repas à domicile, choisir la catégorie Café / Restaurant'
   subcategories:
