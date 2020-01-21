@@ -484,7 +484,7 @@
                   rank: 1
                   type: DATE
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
-                   rank: 2
-                   type: TEXTAREA
+                  rank: 2
+                  type: TEXTAREA
               fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
         - title: Autre
