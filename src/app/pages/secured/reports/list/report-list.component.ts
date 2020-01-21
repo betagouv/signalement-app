@@ -100,7 +100,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
       })
     ).subscribe(
       ([statusList, params, queryParams, userAccesses]) => {
-        console.log('subscribe')
         const siret = params.get('siret');
         if (siret) {
           this.reportFilter = {siret};
@@ -108,8 +107,13 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
         this.userAccesses = userAccesses;
         this.statusList = statusList;
-        this.loadReportExtractUrl();
-        this.loadReports(Number(queryParams.get('page_number') || 1));
+
+        if (this.user.role !== Roles.Pro || this.userAccesses.length) {
+          this.loadReportExtractUrl();
+          this.loadReports(Number(queryParams.get('page_number') || 1));
+        } else {
+          this.loading = false;
+        }
       },
       err => {
         this.loading = false;
