@@ -194,6 +194,10 @@
                   placeholder: Identification du taxi, nom de la centrale d'appel ...
               fileLabel: Joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
               consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Le chauffeur n'était pas aimable
+              information: !!import/single ../common/info/amabilite.yml
+            - title: Autre
+              consumerActions: !!import/single ../common/actions/defaut.yml
     - title: VTC (voiture avec chauffeur)
       example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
       subcategories:
@@ -239,7 +243,11 @@
           fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile etc.)
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          subcategories:
+            - title: Le chauffeur n'était pas aimable
+              information: !!import/single ../common/info/amabilite.yml
+            - title: Autre
+              consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Un chauffeur qui s'est proposé dans la rue ou à l'aéroport
       information:
         title: Il s'agit d'un chauffeur non déclaré ("faux" taxi ou taxi clandestin)
@@ -426,7 +434,11 @@
     - title: Assurance
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autre
-      consumerActions: !!import/single ../common/actions/tourisme.yml
+      subcategories:
+        - title: Le personnel n'était pas aimable
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Autre
+          consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Transport en commun
   example: 'Exemple : avion, train'
   subcategories:
@@ -493,7 +505,11 @@
       example: "Exemple : TGV max, pass navigo"
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autre
-      consumerActions: !!import/single ../common/actions/tourisme.yml
+      subcategories:
+        - title: Le personnel n'était pas aimable
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Autre
+          consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Sport
   example: 'Exemple : piscine, salle de sport'
   subcategories:
@@ -562,6 +578,10 @@
           consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Hygiène 
           consumerActions: !!import/single ../common/actions/tourisme.yml
+        - title: Le personnel n'était pas aimable
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Autre
+          consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Divertissement culturel
   example: 'Exemple : musée, cinéma, concert'
   subcategories:
@@ -618,10 +638,15 @@
     - title: Remboursement / annulation
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autre
-      consumerActions: !!import/single ../common/actions/tourisme.yml
+      subcategories:
+        - title: Le personnel n'était pas aimable
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Autre
+          consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Autre
   subcategories:
     - title: Abonnement
+      example: "Exemple : abonnement magazine"
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Coffrets cadeaux et box
       consumerActions: !!import/single ../common/actions/tourisme.yml
