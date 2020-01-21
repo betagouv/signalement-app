@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BsDatepickerModule, BsDropdownModule, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, defineLocale, frLocale, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportListComponent } from './report-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,10 +11,37 @@ import { AppPermissionDirective } from '../../../../directives/app-permission.di
 import { RouterTestingModule } from '@angular/router/testing';
 import { PipesModule } from '../../../../pipes/pipes.module';
 import { ComponentsModule } from '../../../../components/components.module';
+import { AuthenticationService } from '../../../../services/authentication.service';
+import { of } from 'rxjs';
+import { Roles, User } from '../../../../model/AuthUser';
+import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
+import { ConstantService } from '../../../../services/constant.service';
+import { Report, ReportStatus } from '../../../../model/Report';
+import { ReportService } from '../../../../services/report.service';
+import { PaginatedData } from '../../../../model/PaginatedData';
+import { genUser, genUserAccess } from '../../../../../../test/fixtures.spec';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
   let fixture: ComponentFixture<ReportListComponent>;
+
+  let authenticationService: AuthenticationService;
+  let companyAccessesService: CompanyAccessesService;
+  let constantService: ConstantService;
+  let reportService: ReportService;
+
+  let proUser: User;
+  let adminUser: User;
+
+  const reportPaginatedDataFixture = Object.assign(new PaginatedData<Report>(), {
+    totalCount: 3,
+    hasNextPage: false,
+    entities: [
+      Object.assign(new Report(), {creationDate: new Date(), status: ReportStatus.ToProcess}),
+      Object.assign(new Report(), {creationDate: new Date(), status: ReportStatus.ToProcess}),
+      Object.assign(new Report(), {creationDate: new Date(), status: ReportStatus.ToProcess})
+    ]
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,12 +71,68 @@ describe('ReportListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    companyAccessesService = TestBed.get(CompanyAccessesService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+
+  describe('for a professional user', () => {
+
+    beforeEach(() => {
+      defineLocale('fr', frLocale);
+      reportService = TestBed.get(ReportService);
+      constantService = TestBed.get(ConstantService);
+      authenticationService = TestBed.get(AuthenticationService);
+      proUser = genUser(Roles.Pro);
+      authenticationService.user = of(proUser);
+      fixture = TestBed.createComponent(ReportListComponent);
+      component = fixture.componentInstance;
+
+      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToProcess]));
+      spyOn(reportService, 'getReportExtractUrl').and.returnValue(of(''));
+    });
+
+    it('should load user accesses on init', () => {
+      const myAccessesSpy = spyOn(companyAccessesService, 'myAccesses');
+
+      fixture.detectChanges();
+
+      expect(myAccessesSpy).toHaveBeenCalledWith(proUser);
+    });
+
+    it ('should display a specific message when pro has no accessess and should not load reports', () => {
+      spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([]));
+      const getReportsSpy = spyOn(reportService, 'getReports');
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('h4').innerText).toEqual('Vous n\'avez accès à aucune entreprise');
+      expect(nativeElement.querySelector('form')).toBeNull();
+      expect(getReportsSpy).not.toHaveBeenCalled();
+    });
+
+    it ('should display report list when pro has only one access', () => {
+      spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess()]));
+      spyOn(reportService, 'getReports').and.returnValue(of(reportPaginatedDataFixture));
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('form')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(3);
+    });
+
+    it ('should display company list when pro has several accesses and should not load reports yet', () => {
+      spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(), genUserAccess()]));
+      const getReportsSpy = spyOn(reportService, 'getReports').and.returnValue(of(reportPaginatedDataFixture));
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('h4').innerText).toEqual('Veuillez sélectionner une entreprise');
+      expect(nativeElement.querySelector('form')).toBeNull();
+      expect(getReportsSpy).not.toHaveBeenCalled();
+    });
+
   });
 });
