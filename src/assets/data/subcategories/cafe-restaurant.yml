@@ -321,16 +321,7 @@
   subcategories:
     - title: Le personnel est peu aimable
       example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
-      information:
-        title: Ceci ne constitue pas un motif de signalement.
-        content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
-          <br/>Nous vous invitons à contacter directement le gérant pour faire part de votre mécontentement.
-        actions:
-          - question: Vous avez été victime d'harcélement ou d'injure?
-            answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
-          - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
-            answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées...
-        outOfScope: true
+      information: !!import/single ../common/info/amabilite.yml        
     - title: On a refusé de me donner une table ou de me servir
       example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, refus de d''une table en terrasse pour un simple café'
       detailInputs:
@@ -346,10 +337,7 @@
       subcategoriesTitle: Est-ce un chien d'assistance&#160;?
       subcategories:
         - title: Non
-          information:
-            content: Tout comme dans un hôtel, un restaurateur (ou un cafetier) peut refuser la présence d’un chien dans son établissement.
-              <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. <br> <br> Il existe également des sites internet qui recensent les établissements acceptant les chiens.
-            outOfScope: true
+          information: !!import/single ../common/info/chienassistance.yml
         - title: Oui (je possède la carte d'assistance)
           detailInputs:
             - label: Date du refus
