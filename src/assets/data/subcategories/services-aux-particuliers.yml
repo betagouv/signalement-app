@@ -1,7 +1,7 @@
 - title: Bien-être
-  example: 'Exemple : coiffeur, esthéticienne, salon de massage'  
+  example: 'Exemple : coiffeur, esthéticien, salon de massage'
   subcategories:
-    - title: prix des soins
+    - title: Prix des soins
       example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
       detailInputs:
         - label: Date du constat
@@ -23,43 +23,43 @@
           optionnal: true
       fileLabel: Vous pouvez joindre une photo des prix ou tout document utile pour appuyer votre signalement.
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: moyen de paiement
+    - title: Moyen de paiement
       example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
-    - title: publicité des soins mensongère
+    - title: Publicité des soins mensongère
       example: 'Exemple : durée du massage plus courte qu''indiqué'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: autre
+    - title: Autre
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Vie quotidienne
   example: "Exemple : conciergerie, pressing, cordonnier, ménage, garde d'enfants"
   subcategories:
-    - title: prix des prestations
+    - title: Prix des prestations
       example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: moyen de paiement
+    - title: Moyen de paiement
       example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
-    - title: publicité des prestations mensongère
+    - title: Publicité des prestations mensongère
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: autre
+    - title: Autre
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Aide à la personne
   consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Services funéraires  
+- title: Services funéraires
   subcategories:
-    - title: prix des prestations
-      example: 'Exemple : le prix final ne correspond pas du devis, prix des soins de conservation'
+    - title: Prix des prestations
+      example: 'Exemple : le prix final ne correspond pas au devis, prix des soins de conservation'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: moyen de paiement
+    - title: Moyen de paiement
       example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
-    - title: publicité des prestations mensongère
+    - title: Publicité des prestations mensongère
       example: 'Exemple : composition d''un cercueil non conforme'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: autre
+    - title: Autre
       consumerActions: !!import/single ../common/actions/defaut.yml
-- title: autres types d''entreprises de service
+- title: Autres types d'entreprises de service
   example: 'Exemple : déménageur, agence de rencontre, organisme de formation'
   subcategories:
     - title: Déménageur

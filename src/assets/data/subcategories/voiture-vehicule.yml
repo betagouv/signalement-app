@@ -1,5 +1,5 @@
 - title: Location
-  example: 'Exemple : location de voiture, velib, LDD'
+  example: 'Exemple : location de voiture, de vélo, LDD'
   subcategories:
     - title: Location de voiture auprès d'une agence ou d'un magasin
       example: 'Exemple : agence à l''aéroport, location de camionnette dans un supermarché, plate-forme de location sur internet'
