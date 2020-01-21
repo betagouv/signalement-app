@@ -1,8 +1,8 @@
 - title: Location
-  example: 'Exemple : location de voiture, velib, LDD'
+  example: 'Exemple : location de voiture, location de vélo, LDD'
   subcategories:
     - title: Location de voiture auprès d'une agence ou d'un magasin
-      example: 'Exemple : agence à l''aéroport, location de camionnette dans un supermarché, plate-forme de location sur internet'
+      example: "Exemple : agence à l'aéroport, location de camionnette dans un supermarché, plate-forme de location sur internet"
       subcategories:
         - title: Prix / paiement
           consumerActions: !!import/single ../common/actions/automobile.yml
@@ -86,6 +86,8 @@
           consumerActions: !!import/single ../common/actions/automobile.yml
         - title: Le personnel (moniteur) n'est pas aimable
           information: !!import/single ../common/info/amabilite.yml
+        - title: Autre
+          consumerActions: !!import/single ../common/actions/automobile.yml
 - title: Autres
   example: 'Exemple : fourrière'
   consumerActions: !!import/single ../common/actions/automobile.yml
