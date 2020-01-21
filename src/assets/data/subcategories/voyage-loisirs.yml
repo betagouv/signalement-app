@@ -334,7 +334,35 @@
                 content: Les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
                 outOfScope: true
     - title: Autre
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      subcategories:
+        - title: On a refusé de me donner une chambre
+          example: 'Exemple : Refus pour un motif discriminatoire, au motif d'enfant'
+          detailInputs:
+            - label: Date du problème
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Pour quelle raison a-t-on refusé de vous donner une chambre ?
+              rank: 2
+              type: TEXTAREA
+          fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
+         -title: Mon chien a été refusé
+          subcategoriesTitle: Est-ce un chien d'assistance&#160;?
+          subcategories:
+            - title: Non
+              information: !!import/single ../common/info/chienassistance.yml           
+            - title: Oui (je possède la carte d'assistance)
+              detailInputs:
+                - label: Date du refus
+                  rank: 1
+                  type: DATE
+                - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
+                  rank: 2
+                  type: TEXTAREA
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+        - title: Le personnel est peu aimable
+          example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
+          information: !!import/single ../common/info/amabilite.yml
 - title: Agence de voyage
   subcategories:
     - title: Prix
