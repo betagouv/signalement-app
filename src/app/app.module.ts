@@ -15,7 +15,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
-import { ReportComponent } from './pages/report/report.component';
 import { LoginModule } from './pages/login/login.module';
 import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
