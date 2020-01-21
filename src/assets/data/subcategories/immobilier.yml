@@ -46,7 +46,7 @@
         - title: Bail / contrat de location
           example: 'Exemple : clause abusive dans le contrat'
           consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: Autres
+        - title: Autre
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: J'ai un problème en tant que propriétaire
       example: 'Exemple : gestion locative, mise en vente'
@@ -73,6 +73,12 @@
               consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
           consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
+      subcategories:
+        - title: Problème d'accessibilité de l'agence
+          information: !!import/single ../common/info/accessibilite.yml
+        - title: Le personnel ne dispose pas des diplômes ou qualifications requises
+        - title: Autre
 - title: Vente / location directement entre particuliers
   subcategories:
     - title: Problème avec mon locataire / propriétaire
