@@ -22,7 +22,7 @@
         - title: Les prix ne sont pas affichés dans la voiture
           example: Une affiche avec les prix et les suppléments doit être visible dans la voiture.
         - title: Refus de prendre votre carte bancaire
-          example: Tous les taxis ont obligation de prendre la carte bancaire quelque soit le montant.
+          example: Tous les taxis ont obligation de prendre la carte bancaire quel que soit le montant.
         - title: Refus de me donner une note (reçu, facture)
         - title: Le prix payé ne me convient pas
           subcategories:
@@ -46,22 +46,22 @@
                 - label: Adresse de départ
                   rank: 4
                   type: TEXT
-                - label: Heure de départ. Elle est normalement écrit sur la note (facture).
+                - label: Heure de départ. Elle est normalement écrite sur la note (facture).
                   rank: 5
                   type: TEXT
                 - label: Adresse d'arrivée
                   rank: 6
                   type: TEXT
-                - label: Heure d'arrivée. Elle est normalement écrit sur la note (facture). Si vous la contestez, noter l'heure réelle d'arrivée.
+                - label: Heure d'arrivée. Elle est normalement écrite sur la note (facture). Si vous la contestez, notez l'heure réelle d'arrivée.
                   rank: 7
                   type: TEXT
-                - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
+                - label: Notez le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
                   rank: 8
                   type: TEXT
-                - label: Si vous avez appelé une centrale de réservation, noter son nom.
+                - label: Si vous avez appelé une centrale de réservation, notez son nom.
                   rank: 9
                   type: TEXT
-                - label: "Ajouter ici toutes autres informations utiles à votre signalement."
+                - label: "Ajoutez ici toute autre information utile à votre signalement."
                   rank: 10
                   type: TEXT
               fileLabel: Si possible, joindre une copie de la note (facture), et toute preuve du trajet réellement emprunté.
@@ -78,7 +78,7 @@
                     - bagage
                     - passager supplémentaire
                     - animaux
-                - label: Combien étiez-vous de passagers (enfant compris) ?
+                - label: Combien étiez-vous de passagers (enfants compris) ?
                   rank: 3
                   type: TEXT
                 - label: Combien aviez-vous de bagages en tout ?
@@ -97,7 +97,7 @@
                   rank: 3
                   type: RADIO
                   options:
-                    - Oui, je l'avais reservé à l'avance
+                    - Oui, je l'avais réservé à l'avance
                     - Oui, je l'ai commandé juste avant de le prendre
                     - Non, il m'a pris en charge sur une place de taxi ou dans la rue
                 - label: Quel était le montant indiqué dès le départ ?
@@ -105,7 +105,7 @@
                   type: TEXT
               filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
               consumerActions: !!import/single ../common/actions/defaut.yml
-            - title: Le taxi a fait un tarif de nuit/we alors que ce n'était pas le cas
+            - title: Le taxi a fait un tarif de nuit/week-end alors que ce n'était pas le cas
               detailInputs:
                 - label: Date de la course
                   rank: 1
@@ -113,7 +113,7 @@
                 - label: Adresse de départ
                   rank: 2
                   type: TEXT
-                - label: Heure de départ. Elle est normalement écrit sur la note (facture).
+                - label: Heure de départ. Elle est normalement écrite sur la note (facture).
                   rank: 3
                   type: TEXT
                 - label: Adresse d'arrivée
@@ -125,7 +125,7 @@
                 - label: Combien avez-vous payé ?
                   rank: 6
                   type: TEXT
-                - label: Noter le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
+                - label: Notez le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
                   rank: 8
                   type: TEXT
               fileLabel: Joindre si possible la note (facture) pour appuyer votre signalement.
@@ -148,7 +148,7 @@
                 - label: Combien avez-vous payé ?
                   rank: 5
                   type: TEXT
-                - label: Noter les éléments qui permettent d'identifier le taxi.
+                - label: Notez les éléments qui permettent d'identifier le taxi.
                   rank: 6
                   type: TEXTAREA
                   placeholder: Numéro ADS, plaque d'immatriculation, société de réservation ...
@@ -157,7 +157,7 @@
         - title: Autre
           subcategories:
             - title: Refus de prendre les chèques
-              subcategoriesTitle: Est-ce que c'était indiqué sur la voiture ?
+              subcategoriesTitle: Etait-ce indiqué sur la voiture ?
               subcategories:
                 - title: Oui
                   information:
@@ -169,10 +169,10 @@
                     - label: Date de la course
                       rank: 1
                       type: DATE
-                    - label: Comment avez-vous régler votre course ?
+                    - label: Comment avez-vous réglé votre course ?
                       rank: 2
                       type: TEXT
-                    - label: Noter le lieu de départ et le lieu d'arrivée
+                    - label: Notez le lieu de départ et le lieu d'arrivée
                       rank: 3
                       type: TEXTAREA
                     - label: Merci de noter les informations pour identifier le véhicule
@@ -188,7 +188,7 @@
                 - label: Montant de la course ?
                   rank: 2
                   type: TEXT
-                - label: Noter toute autre information utile.
+                - label: Notez toute autre information utile.
                   rank: 3
                   type: TEXT
                   placeholder: Identification du taxi, nom de la centrale d'appel ...
@@ -257,7 +257,7 @@
           - question: Que faire en cas de problème avec un "faux" taxi&#160;?
             answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie.
 - title: Hébergement
-  example: "Exemple : hotel, camping, chambre d'hôte, location saisonnière"
+  example: "Exemple : hôtel, camping, chambre d'hôte, location saisonnière"
   subcategories:
     - title: Prix
       subcategories:
@@ -270,7 +270,7 @@
         - title: Prix non affiché
           example: 'Exemple: sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemple : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, supplément imprévu"
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml
@@ -318,7 +318,7 @@
           example: 'Exemple : chambre sale, sauna sale, puces de lit'
           information:
             title: Vous souhaitez signaler un problème d'hygiène ou de propreté d'un logement ?
-            content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie et/ou le  Service Communal d’Hygiène et de la Santé de la commune de l'hébergement.
+            content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie et/ou le Service Communal d’Hygiène et de la Santé de la commune de l'hébergement.
         - title: Problème de bruit
           example: 'Exemple : chambre bruyante, mauvaise isolation'
           information:
@@ -443,7 +443,7 @@
           information: !!import/single ../common/info/accessibilite.yml
         - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
-- title: Transport en commun
+- title: Transports en commun
   example: 'Exemple : avion, train'
   subcategories:
     - title: Prix
@@ -506,7 +506,7 @@
         - title: Autres
           consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Abonnement de transport
-      example: "Exemple : TGV max, pass navigo"
+      example: "Exemple : TGV max, pass Navigo"
       consumerActions: !!import/single ../common/actions/tourisme.yml
     - title: Autre
       subcategories:
