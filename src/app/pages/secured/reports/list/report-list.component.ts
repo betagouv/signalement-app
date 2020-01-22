@@ -108,7 +108,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.userAccesses = userAccesses;
         this.statusList = statusList;
 
-        if (this.user.role !== Roles.Pro || this.userAccesses.length === 1) {
+        if (this.user.role !== Roles.Pro || this.userAccesses.length === 1 || this.reportFilter.siret) {
           this.loadReportExtractUrl();
           this.loadReports(Number(queryParams.get('page_number') || 1));
         } else {
