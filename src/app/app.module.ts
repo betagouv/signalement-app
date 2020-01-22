@@ -10,19 +10,14 @@ import { HeaderComponent } from './pages/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { StatsComponent } from './pages/stats/stats.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
-import { LoginModule } from './pages/login/login.module';
-import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
-import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
-import { NotFoundComponent } from './pages/static/notfound/notfound.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { Angulartics2Module } from 'angulartics2';
+import { UnavailableComponent } from './pages/static/unavailable/unavailable.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -31,9 +26,7 @@ registerLocaleData(localeFr, 'fr');
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    StatsComponent,
-    AccountMenuComponent,
-    NotFoundComponent,
+    UnavailableComponent,
   ],
   imports: [
     CommonModule,
@@ -43,17 +36,13 @@ registerLocaleData(localeFr, 'fr');
     NgxEchartsModule,
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     RouterModule.forRoot([
-      { path: 'stats', component: StatsComponent },
-      { path: '**', component: NotFoundComponent },
+      { path: '**', component: UnavailableComponent },
     ], {
       scrollPositionRestoration: 'top',
       anchorScrolling: 'enabled',
     }),
-    ReportModule,
     BrowserModule,
     BrowserAnimationsModule,
-    LoginModule,
-    SecuredModule,
     StaticModule,
     BsDropdownModule.forRoot(),
     TooltipModule,
