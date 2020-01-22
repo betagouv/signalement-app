@@ -1,5 +1,5 @@
 - title: Notice et emballage
-  example: 'Exemples : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais'
+  example: 'Exemple : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais'
   subcategories:
     - title: Informations manquantes
       description: "Certaines informations sont obligatoires.
@@ -64,7 +64,7 @@
           information:
             title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
     - title: Informations trompeuses ou fausses
-      example: 'Exemples : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas '
+      example: 'Exemple : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas '
       detailInputs:
         - label: Quel est le type de produit&#160;?
           rank: 1
@@ -88,7 +88,7 @@
           type: TEXTAREA
       consumerActions: !!import/single ../common/actions/magasin.yml
 - title: Produit dangereux
-  example: 'Exemples : jouet qui prend feu, allergie, intoxication'
+  example: 'Exemple : jouet qui prend feu, allergie, intoxication'
   information:
     title: Vous souhaitez signaler un produit dangereux
     content: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
@@ -159,7 +159,7 @@
           rank: 4
           type: TEXTAREA
     - title: Un produit sans emballage, directement consommé
-      example: 'Exemples : verre de vin dans un café, plat au restaurant'
+      example: 'Exemple : verre de vin dans un café, plat au restaurant'
       description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
       detailInputs:
         - label: Date du constat ou d'achat

@@ -15,13 +15,13 @@
             Vous avez reçu un courrier postal pour consulter vos signalements ?
           </h4>
           <h4 class="text-center pb-5">
-            Veuillez renseigner votre numéro Siret et le code à 6 chiffres reçu pour activer votre compte.
+            Veuillez renseigner votre numéro SIRET et le code à 6 chiffres reçu pour activer votre compte.
           </h4>
         </ng-container>
         <div class="form-group row">
           <div class="col-sm-3 control-label">
             <label for="login" [class]="hasError(loginCtrl) ? 'error' : ''">
-              {{isConnection ? 'Email' : 'Siret'}} <span class="error">*</span>
+              {{isConnection ? 'Email' : 'SIRET'}} <span class="error">*</span>
             </label>
           </div>
           <div class="col-sm-9">
@@ -40,14 +40,33 @@
         </div>
         <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
           <span *ngIf="loginCtrl.hasError('required')">
-            Veuillez renseigner votre {{isConnection ? 'email' : 'Siret'}}.<br />
+            Veuillez renseigner votre {{isConnection ? 'email' : 'SIRET'}}.<br />
           </span>
             <span *ngIf="passwordCtrl.hasError('required')">
             Veuillez renseigner votre {{isConnection ? 'mot de passe' : 'code d\'activation'}}.<br />
           </span>
         </div>
         <div class="notification error mt-3" *ngIf="authenticationError ">
-          {{authenticationError}}
+          Échec de l'authentification.
+          <div *ngIf="!isConnection">
+          Nous vous invitons à vérifier les éléments suivants :
+            <ul>
+              <li>Le numéro SIRET est sur 14 chiffres</li>
+              <li>
+                Vous utilisez le SIRET associé à la raison sociale indiquée sur le courrier.
+                Pour une même adresse physique, il est possible d'avoir plusieurs entités juridiques
+                et donc plusieurs SIRET (exploitant, gestionnaire, etc.).
+                Le code d'activation envoyé n'est valable que pour un SIRET donné
+              </li>
+              <li>
+                Il arrive que certains pare-feux bloquent l'utilisation normale de la plateforme,
+                nous vous invitons à vérifier ce point avec votre service informatique
+              </li>
+            </ul>
+            Si vous ne parvenez néanmoins pas à vous connecter, contactez-nous sur
+            <a href="mailto:contact@signalconso.beta.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>
+            en indiquant votre identité, la date du signalement, le SIRET et le nom de votre établissement.
+          </div>
         </div>
         <hr />
         <div class="form-group row">
@@ -59,7 +78,7 @@
         </div>
         <p class="form-text text-muted text-center" *ngIf="!isConnection">
           La création d'un compte est réservée aux entreprises qui ont reçu un courrier qui leur est envoyé lors du premier dépôt d'un signalement les concernant.<br/><br/>
-          Pour plus d'informations, veuillez-vous reporter à <a routerLink="/vous-êtes-un-professionnel">la page d'aide pour les entreprises</a>.
+          Pour plus d'informations, veuillez-vous reporter à <a routerLink="/comment-ça-marche/professionnel">la page d'aide pour les entreprises</a>.
         </p>
       </form>
       <div class="form-group row" *ngIf="isConnection">
@@ -79,7 +98,7 @@
           </div>
         </div>
       </div>
-      <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">SignalConso</a>.</p>
+      <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:contact@signalconso.beta.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">contact@signalconso.beta.gouv.fr</a>.</p>
     </div>
   </section>
 </main>

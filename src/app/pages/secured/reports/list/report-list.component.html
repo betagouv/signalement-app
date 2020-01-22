@@ -66,11 +66,11 @@
         <div class="row form-group">
           <div class="col-2 text-right">
             <label for="siretFilter">
-              Siret
+              SIRET
             </label>
           </div>
           <div class="col-4 text-left">
-            <input type="text" [(ngModel)]="reportFilter.siret" placeholder="Siret" id="siretFilter" name="siret"/>
+            <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret"/>
           </div>
           <div class="col-2 text-right">
             <label for="statusFilter">
@@ -135,7 +135,7 @@
         <div class="row form-group">
           <div class="col-3 col-lg-4 text-right">
             <label for="statusFilter">
-              Statut <a [routerLink]="['/vous-êtes-un-professionnel']" fragment="les-status" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
+              Statut <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
             </label>
           </div>
           <div class="col-9 col-lg-8 text-left">
@@ -190,7 +190,7 @@
           </th>
           <th>Dep</th>
           <th *appRole="[roles.DGCCRF]">Commune</th>
-          <th *appRole="[roles.DGCCRF]">Siret</th>
+          <th *appRole="[roles.DGCCRF]">SIRET</th>
           <th>Entreprise</th>
           <th>Problème</th>
           <th class="description">Description</th>
@@ -308,7 +308,7 @@
             </td>
             <td class="pre">
               <span *ngFor="let file of report.consumerUploadedFiles | slice : 0 : 2; let isFirst=first;" [tooltip]="file.filename">
-                <a href="{{getFileDownloadUrl(file)}}">
+                <a href="{{getFileDownloadUrl(file)}}" (click)="$event.stopPropagation()">
                   {{file.displayedFilenameSmall}}
                 </a>
                 <br *ngIf="isFirst" />

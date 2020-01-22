@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   isDgccrf = false;
 
   showErrors: boolean;
-  authenticationError: string;
+  authenticationError = false;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
   }
 
   submitLoginForm() {
-    this.authenticationError = '';
     if (!this.loginForm.valid) {
       this.showErrors = true;
     } else if (this.isConnection) {
@@ -66,13 +65,13 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-          this.authenticationError = `Echec de l'authentification`;
+          this.authenticationError = true;
         }
       );
     } else {
       const handleError = () => {
         this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-        this.authenticationError = "Impossible de vous identifier. Veuillez vérifier le code d'accès et le SIRET";
+        this.authenticationError = true;
       }
       this.authenticationService.fetchTokenInfo(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
         token => {

@@ -3,5 +3,5 @@
 - title: Site internet pour obtenir un document administratif (casier, acte de naissance)
   consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
-- title: Autres
+- title: Autre
   consumerActions: !!import/single ../common/actions/defaut.yml

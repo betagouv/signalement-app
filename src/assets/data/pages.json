@@ -7,13 +7,17 @@
     "title": "Qui sommes-nous ? - SignalConso",
     "description": "SignalConso est un service proposé par la DGCCRF (Direction Générale de la Concurrence, de la Consommation et de la Répression des Fraudes) au travers d'une Startup d’État. Il permet à la fois de comprendre ses droits en tant que consommateurs et d’être aidé pour les faire respecter."
   },
+  "notfound": {
+    "title": "404 Page non trouvée - SignalConso",
+    "description": "SignalConso est un service proposé par la DGCCRF (Direction Générale de la Concurrence, de la Consommation et de la Répression des Fraudes) au travers d'une Startup d’État. Il permet à la fois de comprendre ses droits en tant que consommateurs et d’être aidé pour les faire respecter."
+  },
   "how": {
     "title": "Comment ça marche ? - SignalConso",
     "description": "Vous signalez votre problème en remplissant le formulaire en ligne. Notre équipe contacte l'entreprise afin de l'informer de votre signalement. L'entreprise peut procéder spontanément aux corrections utiles, sans sanction. Votre signalement est enregistré à la répression des fraudes (DGCCRF)."
   },
   "pro": {
-    "title": "Vous êtes un professionnel ? - SignalConso",
-    "description": "Découvrez SignalConso, le nouveau service public pour les Consommateurs et les Professionnels"
+    "title": "Comment ça marche ? - SignalConso",
+    "description": "Votre entreprise a été signalée ? Comprenez comment consulter le signalement afin de corriger le problème et de répondre au consommateur."
   },
   "retractation": {
     "title": "Delai de rétractation ? - SignalConso",

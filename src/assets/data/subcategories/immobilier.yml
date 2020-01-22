@@ -1,8 +1,8 @@
 - title: Agence immobilière
-  example: 'Exemples : location, vente, gestion locative, mandataire indépendant, marchand de liste, chasseur d''appartements'
+  example: 'Exemple : location, vente, gestion locative, mandataire indépendant, marchand de liste, chasseur d''appartements'
   subcategories:
     - title: Je cherche une location ou un bien à acheter
-      example: 'Exemples : marchand de liste, annonce immobilière, dossier de location'
+      example: 'Exemple : marchand de liste, annonce immobilière, dossier de location'
       subcategories:
         - title: Je cherche une location
           subcategories:
@@ -35,7 +35,7 @@
             - title: Cas particulier d'un mandataire indépendant (agent commercial)
               consumerActions: !!import/single ../common/actions/defaut.yml
     - title: J'ai un problème en tant que locataire
-      example: 'Exemples : état des lieux, charges, loyer'
+      example: 'Exemple : état des lieux, charges, loyer'
       subcategories:
         - title: Charges / honoraires
           consumerActions: !!import/single ../common/actions/defaut.yml
@@ -49,7 +49,7 @@
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: J'ai un problème en tant que propriétaire
-      example: 'Exemples : gestion locative, mise en vente'
+      example: 'Exemple : gestion locative, mise en vente'
       subcategories:
         - title: Gestion locative
           subcategories:
@@ -71,7 +71,7 @@
             - title: Discours trompeur
               example: 'Exemple : L''agent immobilier m''a promis de vendre sous 7 jours'
               consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: Autres
+        - title: Autre
           consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Vente / location directement entre particuliers
   subcategories:
@@ -106,13 +106,13 @@
     - title: Documents à disposition des copropriétaires
       example: 'Exemple : pas de fiche synthétique de copropriété'
     - title: Gestion des travaux par le syndic
-      example: 'Exemples: devis, choix des prestataires'
+      example: 'Exemple: devis, choix des prestataires'
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Absence de réponse du syndic
       example: 'Exemple : aucune réponse malgré des relances'
-    - title: Autres
+    - title: Autre
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Notaire
   consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Autres
+- title: Autre
   consumerActions: !!import/single ../common/actions/defaut.yml

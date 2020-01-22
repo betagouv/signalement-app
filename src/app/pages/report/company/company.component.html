@@ -32,7 +32,7 @@
 
       <nav class="nav nav-tabs nav-justified" role="tablist">
         <a id="firstTab" nga11y-focus class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
-        <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par Siret</a>
+        <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par SIRET</a>
       </nav>
 
       <ng-container *ngIf="!bySiret; else searchBySiret" role="tabpanel">
@@ -93,7 +93,7 @@
           </p>
 
           <div class="notification info mt-4">
-            Si l'entreprise ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" tabindex="0">rechercher avec le numéro Siret de l'entreprise</span>.
+            Si l'entreprise ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" tabindex="0">rechercher avec le numéro SIRET de l'entreprise</span>.
           </div>
         </div>
 
@@ -101,14 +101,14 @@
           <p>
             {{searchWarning}}
           </p>
-          Veuillez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro Siret de l'entreprise</span>.
+          Veuillez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro SIRET de l'entreprise</span>.
         </div>
 
         <div class="notification error mt-4" *ngIf="searchError">
           <p>
             {{searchError}}
           </p>
-          Veuillez réessayer ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro Siret de l'entreprise</span>.
+          Veuillez réessayer ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro SIRET de l'entreprise</span>.
         </div>
       </ng-container>
 
@@ -182,17 +182,17 @@
 
           <div class="form__group mt-4">
             <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
-              Numéro Siret de l'entreprise <span class="error">*</span>
+              Numéro SIRET de l'entreprise <span class="error">*</span>
             </label>
             <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" appAutofocus="true">
           </div>
 
           <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">
             <span *ngIf="siretCtrl.hasError('required')">
-              Veuillez renseigner le numéro Siret de l'entreprise.<br />
+              Veuillez renseigner le numéro SIRET de l'entreprise.<br />
             </span>
             <span *ngIf="siretCtrl.hasError('pattern')">
-              Le numéro Siret doit être composé de 14 chiffres.
+              Le numéro SIRET doit être composé de 14 chiffres.
             </span>
           </div>
           <hr />
