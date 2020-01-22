@@ -138,7 +138,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   submitFilters() {
-    this.location.go('suivi-des-signalements', 'page_number=1');
+    this.location.go(this.router.url, 'page_number=1');
     this.loadReportExtractUrl();
     this.initPagination();
 
@@ -146,7 +146,11 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   cancelFilters() {
-    this.reportFilter = new ReportFilter();
+    if (this.user.role === Roles.Pro) {
+      this.reportFilter = Object.assign(new ReportFilter(), { siret: this.reportFilter.siret });
+    } else {
+      this.reportFilter = new ReportFilter();
+    }
     this.submitFilters();
   }
 
