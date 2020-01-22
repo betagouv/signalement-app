@@ -13,13 +13,13 @@ import { PipesModule } from '../../../../pipes/pipes.module';
 import { ComponentsModule } from '../../../../components/components.module';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { of } from 'rxjs';
-import { Roles, User } from '../../../../model/AuthUser';
+import { Roles } from '../../../../model/AuthUser';
 import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
 import { ConstantService } from '../../../../services/constant.service';
 import { Report, ReportStatus } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { PaginatedData } from '../../../../model/PaginatedData';
-import { genUser, genUserAccess } from '../../../../../../test/fixtures.spec';
+import { genReport, genUser, genUserAccess } from '../../../../../../test/fixtures.spec';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
@@ -30,17 +30,10 @@ describe('ReportListComponent', () => {
   let constantService: ConstantService;
   let reportService: ReportService;
 
-  let proUser: User;
-  let adminUser: User;
-
   const reportPaginatedDataFixture = Object.assign(new PaginatedData<Report>(), {
     totalCount: 3,
     hasNextPage: false,
-    entities: [
-      Object.assign(new Report(), {creationDate: new Date(), status: ReportStatus.ToProcess}),
-      Object.assign(new Report(), {creationDate: new Date(), status: ReportStatus.ToProcess}),
-      Object.assign(new Report(), {creationDate: new Date(), status: ReportStatus.ToProcess})
-    ]
+    entities: [genReport(), genReport(), genReport()]
   });
 
   beforeEach(async(() => {
@@ -74,15 +67,15 @@ describe('ReportListComponent', () => {
     companyAccessesService = TestBed.get(CompanyAccessesService);
   });
 
-
   describe('for a professional user', () => {
+
+    const proUser = genUser(Roles.Pro);
 
     beforeEach(() => {
       defineLocale('fr', frLocale);
       reportService = TestBed.get(ReportService);
       constantService = TestBed.get(ConstantService);
       authenticationService = TestBed.get(AuthenticationService);
-      proUser = genUser(Roles.Pro);
       authenticationService.user = of(proUser);
       fixture = TestBed.createComponent(ReportListComponent);
       component = fixture.componentInstance;
@@ -131,7 +124,37 @@ describe('ReportListComponent', () => {
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelector('h4').innerText).toEqual('Veuillez sélectionner une entreprise');
       expect(nativeElement.querySelector('form')).toBeNull();
+      expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(2);
       expect(getReportsSpy).not.toHaveBeenCalled();
+    });
+
+  });
+
+  describe('for an admin user', () => {
+
+    const adminUser = genUser(Roles.Admin);
+
+    beforeEach(() => {
+      defineLocale('fr', frLocale);
+      reportService = TestBed.get(ReportService);
+      constantService = TestBed.get(ConstantService);
+      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService.user = of(adminUser);
+      fixture = TestBed.createComponent(ReportListComponent);
+      component = fixture.componentInstance;
+
+      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToProcess]));
+      spyOn(reportService, 'getReportExtractUrl').and.returnValue(of(''));
+    });
+
+    it ('should display report list in a table', () => {
+      spyOn(reportService, 'getReports').and.returnValue(of(reportPaginatedDataFixture));
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('form')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('tr.pointer').length).toEqual(3);
     });
 
   });
