@@ -51,7 +51,11 @@ export class CompanyService {
         params: httpParams
       }
     ).pipe(
-      map(result => Object.assign(new Company, result['etablissement'])),
+      map(result => {
+        if (result['etablissement'] && result['etablissement']['code_postal']) {
+          return Object.assign(new Company, result['etablissement']);
+        }
+      }),
       catchError(err => {
         if (err.status === 404) {
           return of(undefined);
