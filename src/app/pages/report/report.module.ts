@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModule, BsDatepickerModule, CarouselModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { ReportComponent } from './report.component';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { AutofocusDirective } from '../../directives/auto-focus.directive';
 import { ComponentsModule } from '../../components/components.module';
@@ -63,7 +62,6 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
 
 @NgModule({
   declarations: [
-    ReportComponent,
     CompanyComponent,
     DetailsComponent,
     BreadcrumbComponent,

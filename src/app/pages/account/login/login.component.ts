@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   isDgccrf = false;
 
   showErrors: boolean;
-  authenticationError: string;
+  authenticationError = false;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
   }
 
   submitLoginForm() {
-    this.authenticationError = '';
     if (!this.loginForm.valid) {
       this.showErrors = true;
     } else {
@@ -64,7 +63,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-          this.authenticationError = `Echec de l'authentification`;
+          this.authenticationError = true;
         }
       );
     }

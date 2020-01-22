@@ -19,7 +19,7 @@ export class CompanyActivationComponent implements OnInit {
   codeCtrl: FormControl;
 
   showErrors: boolean;
-  activationError: string;
+  activationError = false;
 
   isAuthenticated: boolean;
   loading: boolean;
@@ -52,14 +52,14 @@ export class CompanyActivationComponent implements OnInit {
   }
 
   submitActivationForm() {
-    this.activationError = '';
+    this.activationError = false;
     if (!this.activationForm.valid) {
       this.showErrors = true;
     } else {
       const handleError = (action: string) => {
         this.loading = false;
         this.analyticsService.trackEvent(EventCategories.companyAccess, action, ActionResultNames.fail);
-        this.activationError = `Impossible d'activer ce compte. Veuillez vérifier le code d'accès et le SIRET`;
+        this.activationError = true;
       };
 
       this.loading = true;

@@ -15,11 +15,11 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
-import { ReportComponent } from './pages/report/report.component';
 import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
 import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
+import { NotFoundComponent } from './pages/static/notfound/notfound.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { AccountModule } from './pages/account/account.module';
 import { CompaniesModule } from './pages/companies/companies.module';
@@ -34,6 +34,7 @@ registerLocaleData(localeFr, 'fr');
     FooterComponent,
     StatsComponent,
     AccountMenuComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -44,8 +45,7 @@ registerLocaleData(localeFr, 'fr');
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     RouterModule.forRoot([
       { path: 'stats', component: StatsComponent },
-      { path: '**', component: ReportComponent },
-      { path: '**', redirectTo: '' },
+      { path: '**', component: NotFoundComponent },
     ], {
       scrollPositionRestoration: 'top',
       anchorScrolling: 'enabled',

@@ -81,7 +81,7 @@
           <h5>Entreprise</h5>
           <div class="row">
             <div class="col-10">
-              Siret : {{report.company.siret}}
+              SIRET : {{report.company.siret}}
               <br/>
               Nom : {{report.company.name}}
               <br/>
@@ -100,12 +100,12 @@
             <ng-template #companySearch>
               <div class="modal-body text-center">
                 <nav class="nav nav-tabs nav-justified mb-3">
-                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Siret</h4></a>
+                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>SIRET</h4></a>
                   <a class="nav-item nav-link" [ngClass]="!searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Adresse</h4></a>
                 </nav>
                 <ng-container *ngIf="searchBySiret">
                   <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
-                    <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+                    <input [formControl]="siretCtrl" placeholder="SIRET de l'entreprise" />
 
                     <div class="notification error" *ngIf="!companyForSiret && loadingError">
                       Une erreur technique s'est produite<br />
