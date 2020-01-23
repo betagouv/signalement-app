@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
@@ -7,18 +7,15 @@ import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-problem',
   templateUrl: './problem.component.html',
   styleUrls: ['./problem.component.scss']
 })
-export class ProblemComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class ProblemComponent implements OnInit {
 
   step: Step;
   report: Report;
@@ -39,7 +36,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
     this.step = Step.Problem;
 
     this.activatedRoute.url.pipe(
-      takeUntil(this.unsubscribe),
+      take(1),
       switchMap(
         url => {
           const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
@@ -53,7 +50,8 @@ export class ProblemComponent implements OnInit, OnDestroy {
           }
           return this.reportStorageService.retrieveReportInProgressFromStorage();
         }
-      )
+      ),
+      take(1),
     ).subscribe(report => {
       if (report && report.category) {
         this.report = report;
@@ -62,11 +60,6 @@ export class ProblemComponent implements OnInit, OnDestroy {
         this.reportRouterService.routeToFirstStep();
       }
     });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   initAnomalyFromReport() {

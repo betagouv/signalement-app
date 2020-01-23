@@ -1,12 +1,11 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import pages from '../../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 
@@ -16,9 +15,7 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrls: ['./category.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CategoryComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class CategoryComponent implements OnInit {
 
   illustrations = Illustrations;
 
@@ -43,7 +40,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
     this.step = Step.Category;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(take(1))
       .subscribe(report => this.report = report);
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
@@ -51,11 +48,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   primaryCategoriesOrderByRank() {

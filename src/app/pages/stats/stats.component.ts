@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { MonthlyStat } from '../../model/Statistics';
@@ -7,17 +7,14 @@ import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.scss']
 })
-export class StatsComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class StatsComponent implements OnInit {
 
   roles = Roles;
 
@@ -41,7 +38,7 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.stats.description });
 
     this.authenticationService.user
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(take(1))
       .subscribe(user => {
         if (user && user.role === this.roles.Admin) {
           this.loadAminStatistics();
@@ -49,11 +46,6 @@ export class StatsComponent implements OnInit, OnDestroy {
       });
 
     this.loadStatistics();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   loadStatistics() {
