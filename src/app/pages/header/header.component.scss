@@ -3,11 +3,6 @@
 
 header {
 
-  .brand > img {
-    max-width: 89px;
-    padding: 7px;
-  }
-
   .beta {
     background: $light-grey;
     font-size: 18px;
@@ -20,21 +15,23 @@ header {
       text-align: right;
       text-decoration-line: underline;
     }
+  }
 
-    @media #{$smaller-than-desktop} {
+  @media #{$smaller-than-desktop} {
+    .beta {
       font-size: 12px;
-      line-height: 12px;
-      height: 28px;
+      line-height: 38px;
+      height: 50px;
+    }
+
+    .brand > img {
+      height: 50px;
     }
   }
 
   .navbar {
-    height: 86px;
+    height: 100px;
     padding: 22px;
-
-    .navbar-brand > img {
-      width: 290px;
-    }
 
     .nav-link {
       color: $black;
