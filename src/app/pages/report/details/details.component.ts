@@ -112,12 +112,6 @@ export class DetailsComponent implements OnInit {
       type: InputType.Date,
       defaultValue: 'SYSDATE'
     }));
-    detailInputs.push(Object.assign(new DetailInput(), {
-      label: ReportingTimeslotLabel,
-      rank: 3,
-      type: InputType.Timeslot,
-      optionnal: true
-    }));
     return detailInputs;
   }
 
