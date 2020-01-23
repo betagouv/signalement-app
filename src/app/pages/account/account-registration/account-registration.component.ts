@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -15,6 +15,7 @@ import { TokenInfo, User } from '../../../model/AuthUser';
 import { AccountService } from '../../../services/account.service';
 import HttpStatusCodes from 'http-status-codes';
 import { combineLatest, iif } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-account-registration',
@@ -43,7 +44,8 @@ export class AccountRegistrationComponent implements OnInit {
 
   mayEditEmail = false;
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
               private accountService: AccountService,
@@ -56,38 +58,41 @@ export class AccountRegistrationComponent implements OnInit {
     this.titleService.setTitle(pages.secured.account.activation.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.account.activation.description });
 
-    const siret = this.activatedRoute.snapshot.paramMap.get('siret');
-    const token = this.activatedRoute.snapshot.queryParamMap.get('token');
+    if (isPlatformBrowser(this.platformId)) {
 
-    this.loading = true;
-    combineLatest([
-      this.authenticationService.isAuthenticated(),
-      iif(
-        () => siret !== null && token !== null,
-        this.authenticationService.fetchTokenInfo(siret, token),
-        this.authenticationService.getStoredTokenInfo()
-      )
-    ]).subscribe(([isAuthenticated, tokenInfo]: [boolean, TokenInfo]) => {
-        this.loading = false;
-        if (tokenInfo == null) {
-          return this.router.navigate(['/connexion']);
-        } else if (isAuthenticated) {
-          this.isAuthenticated = true;
-        } else {
-          this.initForm();
-          this.tokenInfo = <TokenInfo>tokenInfo;
-          this.mayEditEmail = (this.tokenInfo.emailedTo === undefined);
-          if (!this.mayEditEmail) {
-            this.activationForm.controls.email.clearValidators();
-            this.activationForm.controls.email.updateValueAndValidity();
+      const siret = this.activatedRoute.snapshot.paramMap.get('siret');
+      const token = this.activatedRoute.snapshot.queryParamMap.get('token');
+
+      this.loading = true;
+      combineLatest([
+        this.authenticationService.isAuthenticated(),
+        iif(
+          () => siret !== null && token !== null,
+          this.authenticationService.fetchTokenInfo(siret, token),
+          this.authenticationService.getStoredTokenInfo()
+        )
+      ]).subscribe(([isAuthenticated, tokenInfo]: [boolean, TokenInfo]) => {
+          this.loading = false;
+          if (tokenInfo == null) {
+            return this.router.navigate(['/connexion']);
+          } else if (isAuthenticated) {
+            this.isAuthenticated = true;
+          } else {
+            this.initForm();
+            this.tokenInfo = <TokenInfo>tokenInfo;
+            this.mayEditEmail = (this.tokenInfo.emailedTo === undefined);
+            if (!this.mayEditEmail) {
+              this.activationForm.controls.email.clearValidators();
+              this.activationForm.controls.email.updateValueAndValidity();
+            }
           }
+        },
+        (err) => {
+          this.loading = false;
+          this.tokenError = true;
         }
-      },
-      (err) => {
-        this.loading = false;
-        this.tokenError = true;
-      }
-    );
+      );
+    }
   }
 
   initForm() {
