@@ -11,8 +11,6 @@ import { DGCCRFComponent } from './dgccrf/dgccrf.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppPermissionDirective } from '../../directives/app-permission.directive';
-import { AppRoleDirective } from '../../directives/app-role.directive';
 import { PasswordComponent } from './account/password/password.component';
 import { AccountActivationComponent } from './account/activation/account-activation.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
@@ -21,6 +19,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { CompanyAccessesComponent } from './companyaccesses/companyaccesses.component';
 import { CompanyInvitationComponent } from './companyaccesses/invitation.component';
 import { MyCompaniesComponent } from './companies/mycompanies.component';
+import { DirectivesModule } from '../../directives/directives.module';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
@@ -42,8 +41,6 @@ const routes: Routes = [
     ReportListComponent,
     ReportDetailComponent,
     EventComponent,
-    AppPermissionDirective,
-    AppRoleDirective,
     PasswordComponent,
     DGCCRFComponent,
     AccountActivationComponent,
@@ -65,12 +62,11 @@ const routes: Routes = [
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
     BsDatepickerModule.forRoot(),
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   exports: [
     RouterModule,
-    AppRoleDirective,
-    AppPermissionDirective,
   ],
   providers: [
     AuthGuard
