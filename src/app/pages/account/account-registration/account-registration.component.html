@@ -8,13 +8,13 @@
 
 <main role="main">
   <section class="section section-lightest-grey position-relative">
-    <div class="container max-width">
+    <div class="container max-width" *ngIf="!loading">
       <div class="notification error mt-3" *ngIf="isAuthenticated; else notAuthenticated">
         <p class="font-weight-bold">Vous êtes actuellement connecté.</p>
         <p>Pour procéder à la création d'un nouveau compte, vous devez vous déconnecter.</p>
       </div>
       <ng-template #notAuthenticated>
-        <div class="notification error mt-3" *ngIf="tokenError">
+        <div class="notification error mt-3" *ngIf="tokenError; else noErrors">
           <p class="font-weight-bold">Le lien sur lequel vous avez cliqué n'est plus valide.</p>
           <p>Si vous avez déjà créé votre compte, vous pouvez vous <a routerLink="/connexion">connecter</a> à l'aide de votre adresse email et mot de passe.</p>
           <p>Sinon, vous pouvez demander au gestionnaire de l'entreprise de vous envoyer une nouvelle invitation.</p>

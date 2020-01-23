@@ -59,6 +59,7 @@ export class AccountRegistrationComponent implements OnInit {
     const siret = this.activatedRoute.snapshot.paramMap.get('siret');
     const token = this.activatedRoute.snapshot.queryParamMap.get('token');
 
+    this.loading = true;
     combineLatest([
       this.authenticationService.isAuthenticated(),
       iif(
@@ -67,6 +68,7 @@ export class AccountRegistrationComponent implements OnInit {
         this.authenticationService.getStoredTokenInfo()
       )
     ]).subscribe(([isAuthenticated, tokenInfo]: [boolean, TokenInfo]) => {
+        this.loading = false;
         if (tokenInfo == null) {
           return this.router.navigate(['/connexion']);
         } else if (isAuthenticated) {
@@ -82,6 +84,7 @@ export class AccountRegistrationComponent implements OnInit {
         }
       },
       (err) => {
+        this.loading = false;
         this.tokenError = true;
       }
     );
