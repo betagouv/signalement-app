@@ -7,25 +7,25 @@ import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventComponent } from '../event/event.component';
 import { ReportFilter } from '../../../../model/ReportFilter';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest, iif, of, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
-import { StorageService } from '../../../../services/storage.service';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { mergeMap, take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { Department, Region, Regions } from '../../../../model/Region';
 import oldCategories from '../../../../../assets/data/old-categories.json';
 import { AccountService } from '../../../../services/account.service';
 import { HttpResponse } from '@angular/common/http';
 import { EventService } from '../../../../services/event.service';
+import { UserAccess } from '../../../../model/CompanyAccess';
+import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
 
-const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
 @Component({
@@ -34,8 +34,8 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
   styleUrls: ['./report-list.component.scss']
 })
 export class ReportListComponent implements OnInit, OnDestroy {
-
   user: User;
+  userAccesses: UserAccess[];
   permissions = Permissions;
   roles = Roles;
   reportStatus = ReportStatus;
@@ -67,8 +67,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private constantService: ConstantService,
               private accountService: AccountService,
               private eventService: EventService,
+              private companyAccessesService: CompanyAccessesService,
               private fileUploaderService: FileUploaderService,
-              private storageService: StorageService,
               private localeService: BsLocaleService,
               private modalService: BsModalService,
               private router: Router,
@@ -81,43 +81,39 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
 
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
-    });
-
     this.reportFilter = {
       period: []
     };
 
-    if (this.user && this.user.role === Roles.Pro) {
-      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
-    }
-
     this.loading = true;
     this.loadingError = false;
-    combineLatest([
-      this.storageService.getLocalStorageItem(ReportFilterStorageKey),
-      this.constantService.getReportStatusList(),
-      this.route.paramMap
-    ]).subscribe(
-      ([reportFilter, statusList, params]) => {
-
-
-        if (reportFilter) {
-          this.reportFilter = reportFilter;
-        }
+    this.authenticationService.user.pipe(
+      take(1),
+      mergeMap(user => {
+        this.user = user;
+        return combineLatest([
+          this.constantService.getReportStatusList(),
+          this.route.paramMap,
+          this.route.queryParamMap,
+          iif(() => user && user.role === Roles.Pro, this.companyAccessesService.myAccesses(user), of([]))
+        ]);
+      })
+    ).subscribe(
+      ([statusList, params, queryParams, userAccesses]) => {
         const siret = params.get('siret');
-
         if (siret) {
-          this.reportFilter = { ...this.reportFilter, siret};
+          this.reportFilter = {siret};
         }
 
-        this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
-
+        this.userAccesses = userAccesses;
         this.statusList = statusList;
-        this.loadReportExtractUrl();
-        this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
 
+        if (this.user.role !== Roles.Pro || this.userAccesses.length === 1 || this.reportFilter.siret) {
+          this.loadReportExtractUrl();
+          this.loadReports(Number(queryParams.get('page_number') || 1));
+        } else {
+          this.loading = false;
+        }
       },
       err => {
         this.loading = false;
@@ -142,8 +138,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   submitFilters() {
-    this.location.go('suivi-des-signalements/page/1');
-    this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
+    this.location.go(this.router.url, 'page_number=1');
     this.loadReportExtractUrl();
     this.initPagination();
 
@@ -151,21 +146,21 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   cancelFilters() {
-    this.reportFilter = new ReportFilter();
+    if (this.user.role === Roles.Pro) {
+      this.reportFilter = Object.assign(new ReportFilter(), { siret: this.reportFilter.siret });
+    } else {
+      this.reportFilter = new ReportFilter();
+    }
     this.submitFilters();
   }
 
   loadReports(page: number) {
     this.loading = true;
     this.loadingError = false;
-    this.storageService.getLocalStorageItem(ReportFilterStorageKey).pipe(
-      switchMap(reportFilter => {
-        return this.reportService.getReports(
-          (page - 1) * this.itemsPerPage,
-          this.itemsPerPage,
-          Object.assign(new ReportFilter(), reportFilter)
-        );
-      })
+    this.reportService.getReports(
+      (page - 1) * this.itemsPerPage,
+      this.itemsPerPage,
+      Object.assign(new ReportFilter(), this.reportFilter)
     ).subscribe(
       result => {
         this.loading = false;
@@ -208,7 +203,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   changePage(pageEvent: {page: number, itemPerPage: number}) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go(`suivi-des-signalements/page/${pageEvent.page}`);
+      this.location.go('suivi-des-signalements', `page_number=${pageEvent.page}`);
     }
   }
 

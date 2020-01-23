@@ -27,9 +27,10 @@ export class AnalyticsService {
 
 export enum EventCategories {
   report = 'Signalement',
-  company = 'Identification de l\'établissement',
+  companySearch = 'Identification de l\'établissement',
   authentication = 'Authentification',
-  account = 'Compte utilisateur'
+  account = 'Compte utilisateur',
+  companyAccess = 'Accès de l\'entreprise'
 }
 
 export enum ReportEventActions {
@@ -48,7 +49,7 @@ export enum ReportEventActions {
   informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés'
 }
 
-export enum CompanyEventActions {
+export enum CompanySearchEventActions {
   search = 'Recherche',
   select = 'Sélection dans la liste de résultats',
   searchBySiret = 'Recherche par SIRET'
@@ -75,6 +76,19 @@ export enum AuthenticationEventActions {
 export enum AccountEventActions {
   changePasswordSuccess = 'Changement mdp réussi',
   changePasswordFail = 'Changement mdp en échec',
-  activateAccountSuccess = 'Activation du compte réussie',
-  activateAccountFail = 'Activation du compte en échec'
+  registerUser = 'Inscription d\'un utilisateur',
+}
+
+export enum AccountEventNames {
+  userAlreadyRegistered = 'Compte déjà existant',
+}
+
+export enum CompanyAccessEventActions {
+  addCompanyToAccount = 'Ajout d\'une entreprise à un compte',
+  activateCompanyCode = 'Activation d\'une entreprise'
+}
+
+export enum ActionResultNames {
+  success = 'Succès',
+  fail = 'Echec'
 }

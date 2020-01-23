@@ -185,7 +185,9 @@ form {
 }
 
 .banner {
-  margin-bottom: 2em;
+  a {
+    color: $white;
+  }
 }
 
 .filters {

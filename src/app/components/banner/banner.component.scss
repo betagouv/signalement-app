@@ -1,0 +1,27 @@
+@import "../../../theme/variables";
+@import "../../../theme/media-queries";
+
+.banner {
+  color: $white;
+
+  img.back {
+    position: absolute;
+    left: 10px;
+    top: calc((100% - 50px) / 2);
+
+    @media #{$smaller-than-tablet} {
+      height: 24px;
+      top: calc((100% - 24px) / 2);
+    }
+  }
+}
+
+:host ::ng-deep {
+  h1, h2 {
+    margin: 0 0.5em;
+  }
+
+  h1 + h2 {
+    margin-top: 0.5em;
+  }
+}

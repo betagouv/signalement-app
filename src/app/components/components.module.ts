@@ -4,11 +4,13 @@ import { CollapsableTextComponent } from './collapsable-text/collapsable-text.co
 import { CommonModule } from '@angular/common';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgxLoadingModule } from 'ngx-loading';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
   declarations: [
     CollapsableTextComponent,
     AttachmentsComponent,
+    BannerComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { NgxLoadingModule } from 'ngx-loading';
   exports: [
     CollapsableTextComponent,
     AttachmentsComponent,
+    BannerComponent,
   ],
   providers: [
   ],

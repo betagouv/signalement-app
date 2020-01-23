@@ -4,7 +4,7 @@ import { CompanyService, MaxCompanyResult } from '../../../services/company.serv
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   AnalyticsService,
-  CompanyEventActions,
+  CompanySearchEventActions,
   CompanySearchEventNames,
   EventCategories,
   ReportEventActions,
@@ -108,8 +108,8 @@ export class CompanyComponent implements OnInit {
       this.initSearch();
       this.loading = true;
       this.analyticsService.trackEvent(
-        EventCategories.company,
-        CompanyEventActions.search,
+        EventCategories.companySearch,
+        CompanySearchEventActions.search,
         this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
       this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
         companySearchResult => {
@@ -133,32 +133,52 @@ export class CompanyComponent implements OnInit {
   }
 
   treatCaseNoResult() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.noResult
+    );
     this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
   }
 
   treatCaseSingleResult(companySearchResult: CompanySearchResult) {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.singleResult);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.singleResult
+    );
     this.companies = companySearchResult.companies;
   }
 
   treatCaseTooManyResults() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.tooManyResults);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.tooManyResults
+    );
     this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
   }
 
   treatCaseSeveralResults(companySearchResult) {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.severalResult);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.severalResult
+    );
     this.companies = companySearchResult.companies;
   }
 
   treatCaseError() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.error);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.error
+    );
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
   selectCompanyFromResults(company: Company) {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.select);
+    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
     this.selectCompany(company);
   }
 
@@ -182,25 +202,33 @@ export class CompanyComponent implements OnInit {
     } else {
       this.initSearchBySiret();
       this.loading = true;
-      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, this.siretCtrl.value);
+      this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchBySiret, this.siretCtrl.value);
       this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
         if (company) {
           this.analyticsService.trackEvent(
-            EventCategories.company,
-            CompanyEventActions.searchBySiret,
+            EventCategories.companySearch,
+            CompanySearchEventActions.searchBySiret,
             CompanySearchEventNames.singleResult
           );
           this.companyBySiret = company;
         } else {
-          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.noResult);
+          this.analyticsService.trackEvent(
+            EventCategories.companySearch,
+            CompanySearchEventActions.searchBySiret,
+            CompanySearchEventNames.noResult
+          );
           this.searchBySiretWarning = 'Aucun établissement ne correspond à la recherche.';
         }
       },
         () => {
           this.loading = false;
-          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.error);
+          this.analyticsService.trackEvent(
+            EventCategories.companySearch,
+            CompanySearchEventActions.searchBySiret,
+            CompanySearchEventNames.error
+          );
           this.searchBySiretError = 'Une erreur technique s\'est produite.';
       });
     }
