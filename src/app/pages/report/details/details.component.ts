@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DetailInputValue, PrecisionKeyword, Report, Step } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
@@ -12,8 +12,7 @@ import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isDefined } from '@angular/compiler/src/util';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Keyword } from '../../../model/Keyword';
 
 export const fileSizeMax = 5000000;
@@ -41,9 +40,7 @@ export const fileSizeMax = 5000000;
     ]),
   ],
 })
-export class DetailsComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class DetailsComponent implements OnInit {
 
   step: Step;
   report: Report;
@@ -74,7 +71,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.step = Step.Details;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(take(1))
       .subscribe(report => {
         if (report) {
           this.report = report;
@@ -92,11 +89,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     this.maxDate = new Date();
 
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   initDetailInputs() {
@@ -119,12 +111,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       rank: 2,
       type: InputType.Date,
       defaultValue: 'SYSDATE'
-    }));
-    detailInputs.push(Object.assign(new DetailInput(), {
-      label: ReportingTimeslotLabel,
-      rank: 3,
-      type: InputType.Timeslot,
-      optionnal: true
     }));
     return detailInputs;
   }

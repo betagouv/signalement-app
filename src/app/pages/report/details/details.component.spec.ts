@@ -26,10 +26,6 @@ describe('DetailsComponent', () => {
   let reportStorageService: ReportStorageService;
 
   const anomalyDateFixture = new Date(2018, 1, 2);
-  const anomalyFileFixture = Object.assign(new UploadedFile(), {
-    id: '856cdf46-a8c2-436d-a34c-bb303ff108a6',
-    filename: 'anomaly.jpg'
-  });
 
   const textDetailInputFixture = Object.assign(new DetailInput(), {
     label: 'texte label',
@@ -144,7 +140,6 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelectorAll('input').length).toEqual(2);
       expect(nativeElement.querySelector('textarea#formControl_1')).not.toBeNull();
       expect(nativeElement.querySelector('input[type="text"]#formControl_2')).not.toBeNull();
-      expect(nativeElement.querySelector('select#formControl_3')).not.toBeNull();
       expect(nativeElement.querySelector('input[type="file"]')).not.toBeNull();
     });
 
@@ -160,7 +155,6 @@ describe('DetailsComponent', () => {
     it ('should emit and event with a details object which contains form inputs when no errors', () => {
       component.detailsForm.controls.formControl_1.setValue('valeur');
       component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
-      component.detailsForm.controls.formControl_3.setValue('de 2h à 3h');
       const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
       const nativeElement = fixture.nativeElement;
@@ -170,8 +164,7 @@ describe('DetailsComponent', () => {
       const reportExpected = Object.assign(new Report(), {
         detailInputValues: [
           Object.assign(new DetailInputValue(), {label: 'Description', value: 'valeur'}),
-          Object.assign(new DetailInputValue(), {label: 'Date du constat', value: anomalyDateFixture}),
-          Object.assign(new DetailInputValue(), {label: 'Heure du constat', value: 'de 2h à 3h'})
+          Object.assign(new DetailInputValue(), {label: 'Date du constat', value: anomalyDateFixture})
         ],
         uploadedFiles: [],
         employeeConsumer: true

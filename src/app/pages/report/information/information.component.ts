@@ -5,9 +5,8 @@ import { Information } from '../../../model/Anomaly';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { Report, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import { RatingService } from '../../../services/rating.service';
 
@@ -17,8 +16,6 @@ import { RatingService } from '../../../services/rating.service';
   styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
 
   step: Step;
   report: Report;
@@ -41,7 +38,7 @@ export class InformationComponent implements OnInit, OnDestroy {
     this.step = Step.Information;
 
     this.activatedRoute.url.pipe(
-      takeUntil(this.unsubscribe),
+      take(1),
       switchMap(
         url => {
           const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
@@ -55,7 +52,8 @@ export class InformationComponent implements OnInit, OnDestroy {
           }
           return this.reportStorageService.reportInProgess;
         }
-      )
+      ),
+      take(1)
     ).subscribe(report => {
       if (report) {
         this.report = report;
@@ -85,8 +83,6 @@ export class InformationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.reportRouterService.routeBackward(this.step);
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   getReportLastSubcategory() {
