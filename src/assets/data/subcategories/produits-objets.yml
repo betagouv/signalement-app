@@ -124,7 +124,7 @@
         <br/>Par exemple, un produit marqué "1 kg" a le droit d'avoir 15g en moins et donc de peser 0, 985 kg.
         <br/><a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/controle-des-quantites-vendues-a-destination-des-professionnels" target="_blank"> En savoir plus </a>
       detailInputs:
-        - label: La lettre "e" est-elle écrite à côté de l'indication du poids/volume&#160;?
+        - label: La lettre "e" est-elle écrite à côté de l'indication du poids / volume&#160;?
           rank: 1
           type: RADIO
           options:
@@ -133,7 +133,7 @@
         - label: Type de produit
           rank: 2
           type: TEXT
-        - label: Nom /marque
+        - label: Nom / marque
           rank: 3
           type: TEXT
         - label: Quelle erreur a été constatée&#160;?
