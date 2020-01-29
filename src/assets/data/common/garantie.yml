@@ -1,157 +1,157 @@
-  subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
-  subcategories:
-    - title: Il présente un défaut ou il ne marche plus
-      subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
-      subcategories:
-        - title: Neuf
-          subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
-          subcategories:
-            - title: Il y a moins de 2 ans
-              description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
-              detailTitle: Problème de garantie légale
-              detailInputs:
-                - label: Date d'achat
-                  rank: 1
-                  type: DATE
-                - label: Nom du produit
-                  rank: 2
-                  type: TEXT
-                - label: Date du constat
-                  rank: 3
-                  type: DATE
-                  defaultValue: SYSDATE
-                - label: Interlocuteur
-                  rank: 4
-                  type: RADIO
-                  options:
-                    - Vendeur
-                    - Accueil magasin
-                    - Service client (téléphone, mail, courrier)
-                - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
-                  rank: 5
-                  type: TEXTAREA
-              fileLabel: Preuve d'achat / publicité / offre de vente
-            - title: Il y a plus de 2 ans
-              subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
-              subcategories:
-                - title: Oui
-                  example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
-                  subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
-                    <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
-                  subcategories:
-                    - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
-                      detailTitle: Problème de garantie commerciale
-                      detailInputs:
-                        - label: Date d'achat
-                          rank: 1
-                          type: DATE
-                        - label: Nom du produit
-                          rank: 2
-                          type: TEXT
-                        - label: Date de fin de garantie supplémentaire
-                          rank: 3
-                          type: DATE
-                        - label: Date du constat
-                          rank: 4
-                          type: DATE
-                          defaultValue: SYSDATE
-                        - label: Motif de refus
-                          rank: 5
-                          type: TEXT
-                      fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                - title: Non
-                  information:
-                    title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                    subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
-                      <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
-                    actions:
-                      - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
+subcategories:
+  - title: Il présente un défaut ou il ne marche plus
+    subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
+    subcategories:
+      - title: Neuf
+        subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+        subcategories:
+          - title: Il y a moins de 2 ans
+            description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+            detailTitle: Problème de garantie légale
+            detailInputs:
+              - label: Date d'achat
+                rank: 1
+                type: DATE
+              - label: Nom du produit
+                rank: 2
+                type: TEXT
+              - label: Date du constat
+                rank: 3
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Interlocuteur
+                rank: 4
+                type: RADIO
+                options:
+                  - Vendeur
+                  - Accueil magasin
+                  - Service client (téléphone, mail, courrier)
+              - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
+                rank: 5
+                type: TEXTAREA
+            fileLabel: Preuve d'achat / publicité / offre de vente
+          - title: Il y a plus de 2 ans
+            subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+            subcategories:
+              - title: Oui
+                example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
+                  <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                subcategories:
+                  - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                    detailTitle: Problème de garantie commerciale
+                    detailInputs:
+                      - label: Date d'achat
+                        rank: 1
+                        type: DATE
+                      - label: Nom du produit
+                        rank: 2
+                        type: TEXT
+                      - label: Date de fin de garantie supplémentaire
+                        rank: 3
+                        type: DATE
+                      - label: Date du constat
+                        rank: 4
+                        type: DATE
+                        defaultValue: SYSDATE
+                      - label: Motif de refus
+                        rank: 5
+                        type: TEXT
+                    fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+              - title: Non
+                information:
+                  title: <b>Votre produit n'est plus couvert par la garantie.</b>
+                  subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité".
+                    <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
+                  actions:
+                    - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
                               <br/><br/>Un vice caché d'un produit est un défaut :
                               <ul>
                                 <li>qui rend le produit inutilisable, </li>
                                 <li>présent dès le départ et</li>
                                 <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                               </ul>"
-                        answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                          <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
-        - title: Occasion
-          subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
-          subcategories:
-            - title: Il y a moins de 6 mois
-              description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
-              detailTitle: Problème de garantie légale
-              detailInputs:
-                - label: Date d'achat
-                  rank: 1
-                  type: DATE
-                - label: Nom du produit
-                  rank: 2
-                  type: TEXT
-                - label: Date du constat
-                  rank: 3
-                  type: DATE
-                  defaultValue: SYSDATE
-                - label: Interlocuteur
-                  rank: 4
-                  type: RADIO
-                  options:
-                    - Vendeur
-                    - Accueil magasin
-                    - Service client (téléphone, mail, courrier)
-                - label: Pour quelle raison le commerçant ne veut pas vous reprendre  le produit&#160;?
-                  rank: 5
-                  type: TEXTAREA
-              fileLabel: Preuve d'achat / publicité / offre de vente
-            - title: Il y a plus de 6 mois
-              subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
-              subcategories:
-                - title: Oui
-                  example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
-                  subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
-                    <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
-                  subcategories:
-                    - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
-                      detailTitle: Problème de garantie commerciale
-                      detailInputs:
-                        - label: Date d'achat
-                          rank: 1
-                          type: DATE
-                        - label: Nom du produit
-                          rank: 2
-                          type: TEXT
-                        - label: Date de fin de garantie supplémentaire
-                          rank: 3
-                          type: DATE
-                        - label: Date du constat
-                          rank: 4
-                          type: DATE
-                          defaultValue: SYSDATE
-                        - label: Motif de refus
-                          rank: 5
-                          type: TEXT
-                      fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                - title: Non
-                  information:
-                    title: <b>Votre produit n'est plus couvert par la garantie.</b>
-                    subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
-                    actions:
-                      - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
+                      answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                        <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
+      - title: Occasion
+        subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
+        subcategories:
+          - title: Il y a moins de 6 mois
+            description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+            detailTitle: Problème de garantie légale
+            detailInputs:
+              - label: Date d'achat
+                rank: 1
+                type: DATE
+              - label: Nom du produit
+                rank: 2
+                type: TEXT
+              - label: Date du constat
+                rank: 3
+                type: DATE
+                defaultValue: SYSDATE
+              - label: Interlocuteur
+                rank: 4
+                type: RADIO
+                options:
+                  - Vendeur
+                  - Accueil magasin
+                  - Service client (téléphone, mail, courrier)
+              - label: Pour quelle raison le commerçant ne veut pas vous reprendre  le produit&#160;?
+                rank: 5
+                type: TEXTAREA
+            fileLabel: Preuve d'achat / publicité / offre de vente
+          - title: Il y a plus de 6 mois
+            subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
+            subcategories:
+              - title: Oui
+                example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
+                  <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
+                subcategories:
+                  - title: J'ai pris connaissance des conditions écrites dans mon contrat de garantie
+                    detailTitle: Problème de garantie commerciale
+                    detailInputs:
+                      - label: Date d'achat
+                        rank: 1
+                        type: DATE
+                      - label: Nom du produit
+                        rank: 2
+                        type: TEXT
+                      - label: Date de fin de garantie supplémentaire
+                        rank: 3
+                        type: DATE
+                      - label: Date du constat
+                        rank: 4
+                        type: DATE
+                        defaultValue: SYSDATE
+                      - label: Motif de refus
+                        rank: 5
+                        type: TEXT
+                    fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
+              - title: Non
+                information:
+                  title: <b>Votre produit n'est plus couvert par la garantie.</b>
+                  subTitle: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
+                  actions:
+                    - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?
                               <br/><br/>Un vice caché d'un produit est un défaut :
                               <ul>
                                 <li>qui rend le produit inutilisable, </li>
                                 <li>présent dès le départ et</li>
                                 <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                               </ul>"
-                        answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
-                          <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
-    - title: Autre raison
-      example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
-      subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
-      subcategories:
-        - title: Oui
-          description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-        - title: Non
-          information:
-            title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
-            content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
-              <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
+                      answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                        <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
+  - title: Autre raison
+    example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
+    subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation.Vous êtes vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
+    subcategories:
+      - title: Oui
+        description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
+      - title: Non
+        information:
+          title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
+          content: En effet, dans votre cas, rien n'oblige un commerçant à le faire.
+            <br />Si vous annuler un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
