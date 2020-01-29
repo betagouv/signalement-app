@@ -1,7 +1,15 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Permissions, Roles, User } from '../../model/AuthUser';
-import { Router, Scroll } from '@angular/router';
+import { NavigationEnd, Router, Scroll } from '@angular/router';
+
+enum NavItems {
+  Home = '/',
+  HowConso = '/comment-ça-marche/consommateur',
+  HowPro = '/comment-ça-marche/professionnel',
+  HowDGCCRF = '/mode-emploi-dgccrf',
+  About = '/qui-sommes-nous',
+}
 
 @Component({
   selector: 'app-header',
@@ -17,6 +25,9 @@ export class HeaderComponent implements OnInit {
   permissions = Permissions;
   user: User;
 
+  navItems = NavItems
+  activeItem: NavItems;
+
   constructor(private authenticationService: AuthenticationService,
               private router: Router) {
   }
@@ -30,12 +41,14 @@ export class HeaderComponent implements OnInit {
       if (event instanceof Scroll) {
         this.banner.nativeElement.focus();
       }
+      if (event instanceof NavigationEnd) {
+        this.activeItem = NavItems[Object.keys(NavItems).find(key => encodeURI(NavItems[key]) === event.url)];
+      }
     });
   }
 
   getNavItemDataToggle() {
     return (this.navbarContent && this.navbarContent.nativeElement.classList.contains('show')) ? 'collapse' : '';
-
   }
 
 }

@@ -17,6 +17,10 @@ header {
     }
   }
 
+  .brand > img {
+    height: 55px;
+  }
+
   @media #{$smaller-than-desktop} {
     .beta {
       font-size: 12px;
@@ -30,13 +34,25 @@ header {
   }
 
   .navbar {
-    height: 100px;
-    padding: 22px;
+    height: 65px;
+    padding: 10px 22px;
 
     .nav-link {
-      color: $black;
+      color: $secondary;
       font-size: 18px;
-      padding: 13px;
+      font-weight: 600;
+      padding: 13px 25px;
+      cursor: pointer;
+
+      &:focus, &:hover, &.active {
+        color: $light-blue;
+      }
+    }
+
+    .btn {
+      padding: 6px 16px;
+      margin-top: 6px;
+      margin-left: 25px;
     }
 
     @media #{$smaller-than-desktop} {

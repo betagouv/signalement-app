@@ -1,6 +1,13 @@
 @import "../../../../theme/media-queries";
 @import "../../../../theme/variables";
 
+
+.btn {
+  padding: 6px 16px;
+  margin-top: 6px;
+  margin-left: 25px;
+}
+
 .dropdown-menu {
 
   background-color: $secondary;

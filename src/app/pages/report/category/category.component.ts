@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report, Step } from '../../../model/Report';
@@ -13,8 +13,7 @@ import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit, OnDestroy {
 
@@ -116,16 +115,19 @@ export const Illustrations = [
 @Component({
   selector: 'app-illustration-card',
   template: `
-    <div class="card">
+    <div class="card" [ngClass]="firstCard ?'first-card' : lastCard ? 'last-card' : ''">
+      <img src="/assets/images/{{illustration.picture}}" class="card-img-top" alt="Illustration" />
       <div class="card-body">
-        <h6 class="card-title" [innerHTML]="illustration.title"></h6>
+        <div class="card-title" [innerHTML]="illustration.title"></div>
       </div>
-      <img src="/assets/images/{{illustration.picture}}" class="card-img-bottom" alt="Illustration" />
     </div>
   `,
+  styleUrls: ['./category.component.scss']
 })
 export class IllustrationCardComponent {
 
   @Input() illustration: { title: string, picture: string };
+  @Input() firstCard = false;
+  @Input() lastCard = false;
 
 }

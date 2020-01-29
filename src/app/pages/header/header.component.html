@@ -20,7 +20,7 @@
   </div>
 
   <nav class="navbar navbar-expand-lg">
-    <a id="logo" class="navbar-brand d-none d-lg-block" routerLink="/">
+    <a id="logo" class="navbar-brand d-none d-lg-block brand" routerLink="/">
       <img src="/assets/images/logo-signalconso.png" alt="Retour à la page sommaire" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
@@ -30,24 +30,34 @@
     <div class="collapse navbar-collapse" id="navbarContent" #navbarContent>
       <ul class="navbar-nav ml-lg-auto">
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-          <a class="nav-link" routerLink="/qui-sommes-nous">
+          <a class="nav-link" routerLink="/"
+             [ngClass]="activeItem === navItems.Home ? 'active' : ''">
+            Accueil
+          </a>
+        </li>
+        <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
+          <a class="nav-link" routerLink="/qui-sommes-nous"
+             [ngClass]="activeItem === navItems.About ? 'active' : ''">
             Qui sommes-nous ?
           </a>
         </li>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.Pro] else how">
-          <a class="nav-link" routerLink="/comment-ça-marche/professionnel">
+          <a class="nav-link" routerLink="/comment-ça-marche/professionnel"
+             [ngClass]="activeItem === navItems.HowPro || activeItem === navItems.HowConso ? 'active' : ''">
             Comment ça marche ?
           </a>
         </li>
         <ng-template #how>
           <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-            <a class="nav-link" routerLink="/comment-ça-marche/consommateur">
+            <a class="nav-link" routerLink="/comment-ça-marche/consommateur"
+               [ngClass]="activeItem === navItems.HowConso || activeItem === navItems.HowPro ? 'active' : ''">
               Comment ça marche ?
             </a>
           </li>
         </ng-template>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.DGCCRF]">
-          <a class="nav-link" routerLink="/mode-emploi-dgccrf">
+          <a class="nav-link" routerLink="/mode-emploi-dgccrf"
+             [ngClass]="activeItem === navItems.HowDGCCRF ? 'active' : ''">
             Mode d'emploi
           </a>
         </li>
