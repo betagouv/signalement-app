@@ -44,7 +44,7 @@ describe('HeaderComponent', () => {
 
     it('should display 2 menu items and an authentication button when no user is authenticated', () => {
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(2);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
       expect(nativeElement.querySelector('.nav-item > button').textContent.trim()).toEqual('Espace pro');
     });
   });
@@ -62,7 +62,7 @@ describe('HeaderComponent', () => {
     it('should display 3 menu items and an account button', () => {
       const nativeElement = fixture.nativeElement;
 
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(4);
       expect(nativeElement.querySelector('.nav-item button').textContent.trim()).toEqual('Compte');
     });
   });
@@ -80,7 +80,7 @@ describe('HeaderComponent', () => {
     it('should display 2 menu items and an account button', () => {
       const nativeElement = fixture.nativeElement;
 
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(2);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
       expect(nativeElement.querySelector('.nav-item button').textContent.trim()).toEqual('Compte');
     });
   });
@@ -98,7 +98,7 @@ describe('HeaderComponent', () => {
     it('should display 2 menu items and an account button', () => {
       const nativeElement = fixture.nativeElement;
 
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(2);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
       expect(nativeElement.querySelector('.nav-item button').textContent.trim()).toEqual('Compte');
     });
   });
