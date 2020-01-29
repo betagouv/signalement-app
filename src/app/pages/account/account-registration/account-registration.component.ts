@@ -135,13 +135,14 @@ export class AccountRegistrationComponent implements OnInit {
     } else {
       this.loading = true;
       this.accountService.activateAccount(
-        this.tokenInfo,
         <User>{
           firstName: this.firstNameCtrl.value,
           lastName: this.lastNameCtrl.value,
           email: this.emailCtrl.value,
           password: this.passwordCtrl.value
-        }
+        },
+        this.tokenInfo.token,
+        this.tokenInfo.companySiret
       ).subscribe(
         () => {
           this.loading = false;

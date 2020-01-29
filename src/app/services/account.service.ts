@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { AuthenticationService } from './authentication.service';
 import { map, mergeMap } from 'rxjs/operators';
-import { TokenInfo, User } from '../model/AuthUser';
+import { User } from '../model/AuthUser';
 
 @Injectable({
   providedIn: 'root'
@@ -28,14 +28,15 @@ export class AccountService {
     );
   }
 
-  activateAccount(tokenInfo: TokenInfo, user: User) {
+  activateAccount(user: User, token: string, companySiret?: string) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'activation']),
           {
-            tokenInfo: tokenInfo,
-            draftUser: user
+            draftUser: user,
+            token: token,
+            ...(companySiret ? {companySiret} : {})
           },
           headers
         );

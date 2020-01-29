@@ -18,8 +18,9 @@ export class AuthUser {
 
 export class TokenInfo {
   token: string;
-  companySiret: string;
+  kind: string;
   timestamp: Date;
+  companySiret?: string;
   emailedTo?: string;
 }
 
