@@ -101,14 +101,9 @@ h2 {
   }
 
   @media #{$larger-than-desktop} {
-    height: 350px;
+    min-width: 240px;
     padding-bottom: 24px;
     background: url("../../../../assets/images/ellipse.png") no-repeat bottom;
-
-    .card-img-top {
-      height: 100%;
-      width: auto;
-    }
 
     &:not(.first-card):before {
       content: '';
