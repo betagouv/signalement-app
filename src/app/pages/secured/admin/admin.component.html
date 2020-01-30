@@ -1,0 +1,37 @@
+<app-banner title="Inviter d'un utilisateur DGCCRF" [backButton]="true"></app-banner>
+
+<section class="section section-white position-relative">
+  <div class="container">
+    <form class="form" [formGroup]="invitationForm" (ngSubmit)="submitForm()">
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <label>Email de l'utilisateur</label>
+          <input type="email" class="form-control" [formControl]="emailCtrl">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <small class="form-text text-muted">
+            Un courrier électronique sera envoyé à l'adresse e-mail saisie ci-dessus avec un lien sécurisé permettant de créer un compte DGCCRF.
+          </small>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col text-center mb-1">
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
+      </div>
+      <div class="notification error mt-3" *ngIf="showErrors && invitationForm.invalid">
+        <span *ngIf="emailCtrl.hasError('required')">
+            Veuillez renseigner une adresse email.<br/>
+        </span>
+        <span *ngIf="emailCtrl.hasError('email')">
+            Veuillez renseigner une adresse email valide.<br/>
+        </span>
+      </div>
+      <div class="notification success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>
+    </form>
+  </div>
+  <ngx-loading [show]="loading"></ngx-loading>
+</section>

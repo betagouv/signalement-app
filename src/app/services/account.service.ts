@@ -65,4 +65,16 @@ export class AccountService {
       })
     );
   }
+
+  sendDGCCRFInvitation(email: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'dgccrf', 'invitation']),
+          {email},
+          headers
+        );
+      })
+    );
+  }
 }
