@@ -4,8 +4,8 @@ content: "Vous venez de recevoir un email ou un sms vous indiquant que votre for
 <br /> Ils doivent respecter deux conditions :
 <br /> <ul>
  <li> vous prévenir <b> un mois avant </b> (par courrier ou par email). Un simple sms ne suffit pas. </li>
- <li> améliorer votre forfait téléphonique ou internet en échange (sms illimité, plus de data, meilleur débit ...).
- <br />Ils ne peuvent pas augmenter votre forfait pour une autre raison (option musique, option télé, abonnement à un livre ...). </li>
+ <li> améliorer votre forfait téléphonique ou internet en échange (sms illimité, plus de data, meilleur débit, etc.).
+ <br />Ils ne peuvent pas augmenter votre forfait pour une autre raison (option musique, option télé, abonnement à un livre, etc.). </li>
  <ul>"
 actions:
   - question: Que pouvez-vous faire&#160;?
