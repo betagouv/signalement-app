@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../../model/NbReportsGroupByCompany';
 import { Location } from '@angular/common';
@@ -57,7 +57,6 @@ export class MostReportedListComponent implements OnInit {
           this.currentPage = page;
 
           this.lines = result.entities ? result.entities : [];
-
         },
         err => {
           console.error(err);
@@ -69,8 +68,7 @@ export class MostReportedListComponent implements OnInit {
   changePage(pageEvent: { page: number, itemPerPage: number }) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go(`suivi-des-signalements/page/${pageEvent.page}`);
+      this.location.go("suivi-des-signalements", `page_number=${pageEvent.page}`);
     }
   }
-
 }

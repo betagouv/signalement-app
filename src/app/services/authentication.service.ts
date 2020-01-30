@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthUser, TokenInfo, User } from '../model/AuthUser';
 import { Api, AuthUserStorageKey, ServiceUtils, TokenInfoStorageKey } from './service.utils';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { BehaviorSubject } from 'rxjs';
@@ -108,6 +108,18 @@ export class AuthenticationService {
           throw Error('Token invalide');
         }
       })
+    );
+  }
+
+  acceptToken(siret: string, token: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'token', 'accept']),
+          { token },
+          headers
+        );
+      }),
     );
   }
 }

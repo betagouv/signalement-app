@@ -43,9 +43,17 @@
     "title": "Contact - SignalConso",
     "description": "Trouvez le bon interlocuteur à contacter sur SignalConso"
   },
+  "account": {
+    "login": {
+      "title": "Authentification - SignalConso",
+      "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso"
+    },
+    "activation": {
+      "title": "Activation de l'espace entreprise - SignalConso",
+      "description": "Activez votre espace entreprise sur SignalConso"
+    }
+  },
   "login": {
-    "title": "Authentification - SignalConso",
-    "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso",
     "forgotPassword": {
       "title": "Mot de passe oublié - SignalConso",
       "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"

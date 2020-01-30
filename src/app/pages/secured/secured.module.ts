@@ -13,28 +13,17 @@ import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
-import { PasswordComponent } from './account/password/password.component';
-import { AccountActivationComponent } from './account/activation/account-activation.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
-import { CompanyAccessesComponent } from './companyaccesses/companyaccesses.component';
-import { CompanyInvitationComponent } from './companyaccesses/invitation.component';
-import { MyCompaniesComponent } from './companies/mycompanies.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/page/:pageNumber', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
+  { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
+  { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
-  { path: 'compte/mot-de-passe', component: PasswordComponent, canActivate: [AuthGuard] },
-  { path: 'compte/activation', component: AccountActivationComponent },
-  { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] },
-  { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
-  { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] },
-  { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard] }
+  { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -44,14 +33,9 @@ const routes: Routes = [
     EventComponent,
     AppPermissionDirective,
     AppRoleDirective,
-    PasswordComponent,
     DGCCRFComponent,
-    AccountActivationComponent,
     SubscriptionComponent,
-    MostReportedListComponent,
-    CompanyAccessesComponent,
-    CompanyInvitationComponent,
-    MyCompaniesComponent
+    MostReportedListComponent
   ],
   imports: [
     CommonModule,
