@@ -67,8 +67,9 @@ export class AccountRegistrationComponent implements OnInit {
       combineLatest([
         this.authenticationService.isAuthenticated(),
         iif(
-          () => siret !== null && token !== null,
-          this.authenticationService.fetchTokenInfo(siret, token),
+          () => token !== null,
+          (siret === null) ? this.authenticationService.fetchTokenInfo(token)
+                           : this.authenticationService.fetchCompanyTokenInfo(siret, token),
           this.authenticationService.getStoredTokenInfo()
         )
       ]).subscribe(([isAuthenticated, tokenInfo]: [boolean, TokenInfo]) => {
