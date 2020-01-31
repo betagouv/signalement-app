@@ -10,7 +10,7 @@ import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
-import { AdviceOnReportResponse, ReportResponse } from '../model/ReportEvent';
+import { ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 
 @Injectable({
   providedIn: 'root',
@@ -108,10 +108,10 @@ export class ReportService {
     );
   }
 
-  postAdviceOnReportResponse(reportId: string, adviceOnReportResponse: AdviceOnReportResponse) {
+  postReviewOnReportResponse(reportId: string, reviewOnReportResponse: ReviewOnReportResponse) {
     return this.http.post(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'response', 'advice']),
-        adviceOnReportResponse
+      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'response', 'review']),
+        reviewOnReportResponse
     ) ;
   }
 

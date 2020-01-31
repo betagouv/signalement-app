@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../components/components.module';
-import { ConsumerAdviceComponent } from './consumer-advice/consumer-advice.component';
+import { ConsumerReviewComponent } from './consumer-review/consumer-review.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerAdviceComponent }
+  { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent }
 ];
 
 @NgModule({
   declarations: [
-    ConsumerAdviceComponent
+    ConsumerReviewComponent
   ],
   imports: [
     CommonModule,

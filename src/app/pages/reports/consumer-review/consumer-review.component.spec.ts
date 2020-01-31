@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConsumerAdviceComponent } from './consumer-advice.component';
+import { ConsumerReviewComponent } from './consumer-review.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentsModule } from '../../../components/components.module';
 
-describe('ConsumerAdviceComponent', () => {
-  let component: ConsumerAdviceComponent;
-  let fixture: ComponentFixture<ConsumerAdviceComponent>;
+describe('ConsumerReviewComponent', () => {
+  let component: ConsumerReviewComponent;
+  let fixture: ComponentFixture<ConsumerReviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConsumerAdviceComponent ],
+      declarations: [ ConsumerReviewComponent ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -27,7 +27,7 @@ describe('ConsumerAdviceComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConsumerAdviceComponent);
+    fixture = TestBed.createComponent(ConsumerReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

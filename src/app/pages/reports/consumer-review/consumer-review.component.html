@@ -2,7 +2,7 @@
 
 <section class="section section-white position-relative">
   <div class="container">
-    <form [formGroup]="adviceForm" (submit)="submitAdviceForm()" id="proAnswerForm" *ngIf="!postSuccess">
+    <form [formGroup]="reviewForm" (submit)="submitReviewForm()" id="proAnswerForm" *ngIf="!postSuccess">
 
       <div class="form__group">
         <label class="text-center" [class]="hasError(positiveCtrl) ? 'error' : ''">
@@ -42,7 +42,7 @@
 
       <hr />
 
-      <div class="notification error" *ngIf="showErrors && adviceForm.invalid">
+      <div class="notification error" *ngIf="showErrors && reviewForm.invalid">
         Veuillez renseigner les champs obligatoires.<br />
       </div>
 

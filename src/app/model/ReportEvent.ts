@@ -33,7 +33,7 @@ export enum ReportResponseTypes {
   NotConcerned = 'NOT_CONCERNED'
 }
 
-export class AdviceOnReportResponse {
+export class ReviewOnReportResponse {
   positive: boolean;
   details: string;
 }

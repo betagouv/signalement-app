@@ -2,21 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { AdviceOnReportResponse } from '../../../model/ReportEvent';
+import { ReviewOnReportResponse } from '../../../model/ReportEvent';
 import HttpStatusCodes from 'http-status-codes';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 
 @Component({
-  selector: 'app-consumer-advice',
-  templateUrl: './consumer-advice.component.html',
-  styleUrls: ['./consumer-advice.component.scss']
+  selector: 'app-consumer-review',
+  templateUrl: './consumer-review.component.html',
+  styleUrls: ['./consumer-review.component.scss']
 })
-export class ConsumerAdviceComponent implements OnInit {
+export class ConsumerReviewComponent implements OnInit {
 
   reportId: string;
 
-  adviceForm: FormGroup;
+  reviewForm: FormGroup;
   positiveCtrl: FormControl;
   detailsCtrl: FormControl;
 
@@ -33,35 +33,35 @@ export class ConsumerAdviceComponent implements OnInit {
               private meta: Meta) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.reports.advice.title);
-    this.meta.updateTag({ name: 'description', content: pages.reports.advice.title });
+    this.titleService.setTitle(pages.reports.review.title);
+    this.meta.updateTag({ name: 'description', content: pages.reports.review.title });
 
     this.activatedRoute.paramMap.subscribe(
       (params: ParamMap) => this.reportId = params.get('reportId')
     );
 
     this.postSuccess = false;
-    this.initAdviceForm();
+    this.initReviewForm();
   }
 
-  initAdviceForm() {
+  initReviewForm() {
     this.positiveCtrl = this.formBuilder.control('', Validators.required);
     this.detailsCtrl = this.formBuilder.control('');
-    this.adviceForm = this.formBuilder.group({
+    this.reviewForm = this.formBuilder.group({
       positive: this.positiveCtrl,
       details: this.detailsCtrl
     });
   }
 
-  submitAdviceForm() {
-    if (!this.adviceForm.valid) {
+  submitReviewForm() {
+    if (!this.reviewForm.valid) {
       this.showErrors = true;
     } else {
       this.loading = true;
       this.loadingError = false;
-      this.reportService.postAdviceOnReportResponse(
+      this.reportService.postReviewOnReportResponse(
         this.reportId,
-        Object.assign(new AdviceOnReportResponse(), {
+        Object.assign(new ReviewOnReportResponse(), {
           positive: this.positiveCtrl.value,
           details: this.detailsCtrl.value
         })
