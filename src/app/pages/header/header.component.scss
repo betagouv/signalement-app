@@ -50,9 +50,17 @@ header {
     }
 
     .btn {
-      padding: 6px 16px;
+      padding: 10px 16px;
       margin-top: 6px;
       margin-left: 25px;
+      font-size: 18px;
+      line-height: 18px;
+
+      img {
+        height: 18px;
+        bottom: 3px;
+        position: relative;
+      }
     }
 
     @media #{$smaller-than-desktop} {
@@ -84,7 +92,7 @@ header {
           padding: 4px 24px;
 
           &:hover {
-            background-color: $primary;
+            background-color: $secondary;
             color: white;
           }
         }

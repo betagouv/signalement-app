@@ -3,9 +3,17 @@
 
 
 .btn {
-  padding: 6px 16px;
+  padding: 10px 16px;
   margin-top: 6px;
   margin-left: 25px;
+  font-size: 18px;
+  line-height: 18px;
+
+  img {
+    height: 18px;
+    bottom: 3px;
+    position: relative;
+  }
 }
 
 .dropdown-menu {
