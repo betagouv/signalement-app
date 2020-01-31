@@ -10,6 +10,7 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { AccountRegistrationComponent } from './account-registration/account-registration.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { AuthGuard } from '../../guards/auth.guard';
+import { ComponentsModule } from '../../components/components.module';
 
 defineLocale('fr', frLocale);
 
@@ -39,6 +40,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
+    ComponentsModule,
   ],
   exports: [
     RouterModule,

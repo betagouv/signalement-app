@@ -11,6 +11,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ContactComponent } from './contact/contact.component';
+import { ComponentsModule } from '../../components/components.module';
 
 const routes: Routes = [
   { path: 'comment-ça-marche/consommateur', component: HowComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
     BsDatepickerModule.forRoot(),
     RouterModule.forChild(routes),
     MarkdownModule.forRoot(),
+    ComponentsModule,
   ],
   exports: [
     RouterModule,
