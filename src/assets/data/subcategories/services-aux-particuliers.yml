@@ -67,7 +67,7 @@
   consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Maison de retraite (ehpad)
   subcategories:
-    - title: Les tarifs
+    - title: Tarifs
       subcategories:
         - title: Les tarifs ne sont pas communiqués clairement
           example: 'Exemple : les prix des options ne sont pas dans le contrat'
@@ -77,46 +77,48 @@
         - title: Les prix sont élevés pour la prestation
           information:
             title: Les prix sont choisis librement par les maisons de retraite.
-            content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou de prendre des options.
+            content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou avant de prendre des options.
           outOfScope: true
-    - title: Mon contrat
+    - title: Contrat
+      example: 'Exemple : je veux résilier le contrat, les activités ne correspondent pas à mon contrat'
       subcategories:
         - title: Le contrat n'est pas respecté
           example: 'Exemple : le contrat prévoit des fruits tous les jours et ce n''est pas le cas'
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Je veux résilier le contrat
           consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le consommateur
-          example: 'Exemple : imposer le délai de 2 mois pour résilier le contrat alors que la maison de retraite a seulement 1 mois'
+        - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le résident
+          example: 'Exemple : imposer un préavis de 2 mois au résident pour résilier le contrat alors que la maison de retraite a un préavis d'1 mois seulement'
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Sommes facturées
+      example: "Exemple : je ne suis pas d'accord avec ma facture"
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: Etat des lieux de la chambre
+    - title: Emmenagement / sortie de la chambre
       example: "Exemple : état des lieux d'entrée ou de sortie, caution"
       subcategories:
         - title: Je n'ai pas eu d'état des lieux (entrée ou sortie)
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Je ne suis pas d'accord avec l'état des lieux
           consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: La caution, c'est-à-dire la somme d'argent pour la garantie de la chambre, est très elevée
-          subcategoriesTitle: 'Multipliez par 2 le tarif de l''hébergement mensuel (indiqué dans votre contrat).La caution demandée est-elle plus cher que ce résultat ?'
+        - title: La caution demandée à l'entrée est très elevée
+          subcategoriesTitle: 'Est-ce que la caution est plus élevée que 2 fois le tarif mensuel de la chambre (ce tarif est indiqué dans votre contrat) ?'
           subcategories:
             - title: Oui
               consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Non
               information:
-                title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif hébergement mensuel.
+                title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif mensuel d'hébergement.
                 content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
-            - title: Je n'ai toujours pas récupéré la caution
-              subcategoriesTitle: Quand avez-vous libéré la chambre ?
-              subcategories:
-                - title: Il y a moins de 30 jours
-                  information:
-                    title: Soyez encore un peu patient !
-                    content: La maison de retraite a 30 jours pour vous rendre la caution.
-                - title: Il y a plus de 30 jours
-                  consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: Publicité pour la maison de retraite mensongère
+        - title: Je n'ai toujours pas récupéré la caution
+          subcategoriesTitle: Quand avez-vous libéré la chambre ?
+          subcategories:
+            - title: Il y a moins de 30 jours
+              information:
+                title: Soyez encore un peu patient :)
+                content: La maison de retraite a 30 jours pour vous rendre la caution.
+            - title: Il y a plus de 30 jours
+              consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Publicité mensongère
       example: "Exemple : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu"
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Maltraitance
