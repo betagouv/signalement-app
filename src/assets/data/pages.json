@@ -97,6 +97,10 @@
     "subscriptions": {
       "title": "Abonnements - SignalConso",
       "description": "Abonnez-vous pour recevoir les signalements qui vous concernent"
+    },
+    "admin": {
+      "title": "Admin - SignalConso",
+      "description": "Invitation à rejoindre SignalConso (DGCCRF)"
     }
   }
 }

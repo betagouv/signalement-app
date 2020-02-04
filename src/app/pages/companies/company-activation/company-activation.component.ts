@@ -79,7 +79,7 @@ export class CompanyActivationComponent implements OnInit {
           }
         );
       } else {
-        this.authenticationService.fetchTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
+        this.authenticationService.fetchCompanyTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
           token => {
             this.loading = false;
             this.analyticsService.trackEvent(

@@ -16,10 +16,17 @@ export class AuthUser {
   user: User;
 }
 
+export enum TokenKind {
+  companyInit = 'COMPANY_INIT',
+  companyJoin = 'COMPANY_JOIN',
+  dgccrfAccount = 'DGCCRF_ACCOUNT',
+}
+
 export class TokenInfo {
   token: string;
-  companySiret: string;
+  kind: TokenKind;
   timestamp: Date;
+  companySiret?: string;
   emailedTo?: string;
 }
 
