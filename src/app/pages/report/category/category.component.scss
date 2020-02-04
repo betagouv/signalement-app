@@ -124,16 +124,19 @@ h2 {
       background: $light-blue;
     }
   }
-
-  @media #{$smaller-than-desktop} {
-    height: 280px;
-  }
 }
 
 .carousel {
 
   .carousel-inner {
-    padding: 0 80px;
+
+    @media #{$smaller-than-desktop} {
+      padding: 0 calc(25% - 140px);
+    }
+
+    @media #{$smaller-than-tablet} {
+      padding: 0 calc(50% - 140px);
+    }
   }
 
   .carousel-indicators {
@@ -159,7 +162,6 @@ h2 {
 
 @media #{$smaller-than-phablet} {
   h1 {
-    font-family: "Gill Sans";
     font-size: 20px !important;
     line-height: 28px !important;
   }
