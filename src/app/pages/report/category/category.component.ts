@@ -89,6 +89,7 @@ export class CategoryComponent implements OnInit {
 
   removeStoredReport() {
     this.reportStorageService.removeReportInProgressFromStorage();
+    this.report = undefined;
   }
 
   scrollToElement($element): void {
