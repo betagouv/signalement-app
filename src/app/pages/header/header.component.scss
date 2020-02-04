@@ -73,10 +73,15 @@ header {
         padding: 0;
       }
 
-      .navbar-nav {
-        width: fit-content;
-        border: 1px solid rgba(28, 28, 28, 0.15);
-        border-radius: 0.25rem;
+      .navbar-collapse{
+
+        z-index: 2;
+
+        .navbar-nav {
+          width: fit-content;
+          border: 1px solid rgba(28, 28, 28, 0.15);
+          border-radius: 0.25rem;
+        }
       }
 
       .nav-item {
