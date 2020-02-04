@@ -20,7 +20,7 @@
         </div>
         <ng-template #activation>
           <form [formGroup]="activationForm" (ngSubmit)="submitForm()" class="form-horizontal" *ngIf="activationForm">
-            <div class="form-group row">
+            <div class="form-group row" *ngIf="tokenInfo?.companySiret">
               <div class="col-sm-6 control-label">
                 <label for="siret">
                   Siret
@@ -126,7 +126,7 @@
               <p>
                 <b>Il y a déjà un compte SignalConso associé à l'adresse mail {{emailCtrl.value}}.</b>
               </p>
-              <p>
+              <p *ngIf="tokenInfo?.companySiret">
                 Pour rattacher le Siret {{tokenInfo?.companySiret}} à l'adresse mail {{emailCtrl.value}} vous devez d'abord <a routerLink="/connexion">vous connecter</a>.
               </p>
             </div>
