@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'compte/inscription', component: AccountRegistrationComponent },
   { path: 'compte/mot-de-passe', component: PasswordChangeComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/rejoindre/:siret', component: AccountRegistrationComponent },
+  { path: 'dgccrf/rejoindre', component: AccountRegistrationComponent },
 ];
 
 @NgModule({
