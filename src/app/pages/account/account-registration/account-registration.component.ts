@@ -67,8 +67,9 @@ export class AccountRegistrationComponent implements OnInit {
       combineLatest([
         this.authenticationService.isAuthenticated(),
         iif(
-          () => siret !== null && token !== null,
-          this.authenticationService.fetchTokenInfo(siret, token),
+          () => token !== null,
+          (siret === null) ? this.authenticationService.fetchTokenInfo(token)
+                           : this.authenticationService.fetchCompanyTokenInfo(siret, token),
           this.authenticationService.getStoredTokenInfo()
         )
       ]).subscribe(([isAuthenticated, tokenInfo]: [boolean, TokenInfo]) => {
@@ -135,13 +136,14 @@ export class AccountRegistrationComponent implements OnInit {
     } else {
       this.loading = true;
       this.accountService.activateAccount(
-        this.tokenInfo,
         <User>{
           firstName: this.firstNameCtrl.value,
           lastName: this.lastNameCtrl.value,
           email: this.emailCtrl.value,
           password: this.passwordCtrl.value
-        }
+        },
+        this.tokenInfo.token,
+        this.tokenInfo.companySiret
       ).subscribe(
         () => {
           this.loading = false;

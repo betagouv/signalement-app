@@ -8,6 +8,7 @@ import { ReportDetailComponent } from './reports/detail/report-detail.component'
 import { ReportListComponent } from './reports/list/report-list.component';
 import { MostReportedListComponent } from './reports/ordered/most-reported-list.component';
 import { DGCCRFComponent } from './dgccrf/dgccrf.component';
+import { AdminComponent } from './admin/admin.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 
 const routes: Routes = [
+  { path: 'admin/invitation-ccrf', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
@@ -35,7 +37,8 @@ const routes: Routes = [
     AppRoleDirective,
     DGCCRFComponent,
     SubscriptionComponent,
-    MostReportedListComponent
+    MostReportedListComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,
