@@ -8,12 +8,12 @@
         - title: Un médicament
           information:
             title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la santé.
-            content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil">cliquant sur ce lien</a>
+            content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank">signalement.social-sante.gouv.fr</a>
         - title: Un objet de santé
           example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
           information:
             title: Les problèmes de sécurité doivent être signalés avec un formulaire spécifique afin de traiter plus rapidement votre signalement.
-            content: <br>Merci de remplir le formulaire dédié à ce type de problème en <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier">cliquant sur ce lien</a>
+            content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">de la DGCCRF</a>
     - title: La publicité (ou les informations sur la boîte) est trompeuse
       detailInputs:
         - label: Date de constat (ou date d'achat)
@@ -358,7 +358,7 @@
             title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
             content: Le pharmacien peut choisir les prix des médicaments non remboursables, et des produits divers de la pharmacie (biberon, brosse à dent, crème...). Les prix doivent être clairement indiqués sans devoir les demander.
               Cas particulier des médicaments remboursables !
-              Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr"> http://base-donnees-publique.medicaments.gouv.fr/</a>
+              Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr" target="_blank"> http://base-donnees-publique.medicaments.gouv.fr/</a>
             outOfScope: true
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml

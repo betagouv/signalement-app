@@ -236,7 +236,7 @@
         title: Vous souhaitez signaler la présence d'un corps étranger "dur"
         actions:
           - question: Ce cas représente une alerte et nécessite une analyse individualisée par la répression des fraudes.
-            answer: Veuillez le signaler ici<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+            answer: Veuillez le signaler sur le site <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
     - title: Autre
       subcategoriesTitle: De quel type de produit s'agit-il&#160;?
       subcategories:

@@ -8,8 +8,7 @@
       answer: <ul>
         <li>Par lettre recommandée avec AR</li>
         <li>Je mets toutes les documents justificatifs</li>
-        <li>Je peux trouver <a href="https://www.inc-conso.fr/content/lettres-types-pour-regler-vos-litiges" target="_blank">
-        une lettre-type </a> pour expliquer mon problème </li>    
+        <li>Je peux trouver une lettre-type pour expliquer mon problème sur le site <a href="https://www.inc-conso.fr/content/lettres-types-pour-regler-vos-litiges" target="_blank">inc-conso.fr</a></li>
         <li>Je garde une copie du courrier et la preuve de l'envoi</li>
         </ul>
     - question: Pourquoi&#160;?
@@ -38,9 +37,9 @@
     - question: Quand&#160;?
       answer: Lorsque je n'ai pas trouvé de solution avec le médiateur et l'entreprise
     - question: Comment&#160;?
-      answer: Je contacte le conciliateur le plus proche de chez moi. Je le cherche sur cette 
+      answer: Je contacte le conciliateur le plus proche de chez moi. Je le cherche sur le site
         <a href="https://www.conciliateurs.fr/Trouver-une-permanence" target="_blank">
-          page internet.
+        conciliateurs.fr
         </a>
     - question: Pourquoi&#160;?
       answer: Pour instaurer le dialogue avec l'entreprise et trouver un arrangement.

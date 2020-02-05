@@ -5,7 +5,7 @@
     content: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, les symptômes et les aliments consommés ).
     actions:
       - question: Comment le signaler&#160;?
-        answer: Signaler-le à la DGCCRF avec <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />ce lien dédié</a>
+        answer: Signalez-le sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />de la DGCCRF</a>
 - title: Hygiène
   example: 'Exemple : locaux sales, rat, chaîne du froid'
   subcategoriesTitle: 'Vous voulez signaler&#160;:'

@@ -141,7 +141,7 @@
             content: Si vous recevez une facture d'eau que vous trouvez trop élevée par rapport à votre consommation habituelle et que vous avez vérifié l'absence de fuite d'eau, vous devez demander la vérification de votre compteur. Des frais vous seront facturés. Si la vérification révèle une anomalie, ces frais vous seront remboursés.
             actions:
               - question: Vous souhaitez obtenir la vérification de votre compteur d’eau&#160;?
-                answer: Voici un modèle de lettre à envoyer<br><a href="https://www.inc-conso.fr/content/vous-souhaitez-obtenir-la-verification-de-votre-compteur-deau-en-raison-dune-consommation" target="_blank" /> cliquez ici </a>
+                answer: Vous trouverez un modèle de lettre à envoyer sur le site <br><a href="https://www.inc-conso.fr/content/vous-souhaitez-obtenir-la-verification-de-votre-compteur-deau-en-raison-dune-consommation" target="_blank" />inc-conso.fr</a>
         - title: Une clause du contrat (règlement de service) est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
           detailInputs:
             - label: Date du constat (ou du contrat)

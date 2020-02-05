@@ -35,9 +35,9 @@
     - question: Quand&#160;?
       answer: Lorsque je n'ai pas trouvé de solution avec le médiateur et l'entreprise
     - question: Comment&#160;?
-      answer: Je contacte le conciliateur le plus proche de chez moi. Je le cherche sur cette 
+      answer: Je contacte le conciliateur le plus proche de chez moi. Je le cherche sur le site
         <a href="https://www.conciliateurs.fr/Trouver-une-permanence" target="_blank">
-          page internet.
+        conciliateurs.fr
         </a>
     - question: Pourquoi&#160;?
       answer: Pour instaurer le dialogue avec l'entreprise et trouver un arrangement.
