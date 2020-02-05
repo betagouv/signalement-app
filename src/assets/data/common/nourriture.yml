@@ -73,7 +73,7 @@
           description: La date des oeufs est une date de consommation recommandée (DCR).
             <br/> Les oeufs ne peuvent être vendus au-delà de 7 jours avant la DCR.
           detailInputs:
-            - label: Quel est le problème?
+            - label: Quel est le problème ?
               rank: 1
               type: RADIO
               options:

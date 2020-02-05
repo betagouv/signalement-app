@@ -254,7 +254,7 @@
         - label: Date de constat
           rank: 1
           type: DATE
-        - label: Quel est le problème?
+        - label: Quel est le problème ?
           rank: 2
           type: RADIO
           options:
