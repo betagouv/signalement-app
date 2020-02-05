@@ -112,7 +112,7 @@ h2 {
       position: absolute;
       bottom: 10px;
       left: -15px;
-      background: $light-blue;
+      background: $blue;
     }
     &:not(.last-card):after {
       content: '';
@@ -121,7 +121,7 @@ h2 {
       position: absolute;
       bottom: 10px;
       left: calc(50% + 12px);
-      background: $light-blue;
+      background: $blue;
     }
   }
 }

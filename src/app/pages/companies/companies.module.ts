@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
 import { CompanyAccessesComponent } from './company-accesses/company-accesses.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { CompanyActivationComponent } from './company-activation/company-activation.component';
 import { MyCompaniesComponent } from './my-companies/my-companies.component';
 import { CompanyInvitationComponent } from './company-invitation/company-invitation.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
+    NgxLoadingModule.forRoot(NgxLoadingConfig),
   ],
   exports: [
     RouterModule

@@ -24,7 +24,7 @@ import { TooltipModule } from 'ngx-bootstrap';
 import { AccountModule } from './pages/account/account.module';
 import { CompaniesModule } from './pages/companies/companies.module';
 import { Angulartics2Module } from 'angulartics2';
-import { ComponentsModule } from './components/components.module';
+import { ComponentsModule, NgxLoadingConfig } from './components/components.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -43,7 +43,7 @@ registerLocaleData(localeFr, 'fr');
     TransferHttpCacheModule,
     HttpClientModule,
     NgxEchartsModule,
-    NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
+    NgxLoadingModule.forRoot(NgxLoadingConfig),
     RouterModule.forRoot([
       { path: 'stats', component: StatsComponent },
       { path: '**', component: NotFoundComponent },

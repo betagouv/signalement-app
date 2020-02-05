@@ -1,3 +1,5 @@
+@import "../theme/variables";
+
 form {
 
   max-width: 750px;
@@ -55,7 +57,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #006be6;
+  border-color: $primary;
   -webkit-transition: border-color 0.2s ease-out;
   transition: border-color 0.2s ease-out;
 }

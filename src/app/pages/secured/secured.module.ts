@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPermissionDirective } from '../../directives/app-permission.directive';
 import { AppRoleDirective } from '../../directives/app-role.directive';
 import { SubscriptionComponent } from './subscription/subscription.component';
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 
 const routes: Routes = [
@@ -49,7 +49,7 @@ const routes: Routes = [
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
+    NgxLoadingModule.forRoot(NgxLoadingConfig),
     BsDatepickerModule.forRoot(),
     ComponentsModule,
     PipesModule
