@@ -19,17 +19,28 @@ header {
 
   .brand > img {
     height: 55px;
+    margin-left: 20px;
   }
 
   @media #{$smaller-than-desktop} {
+
     .beta {
       font-size: 12px;
-      line-height: 38px;
-      height: 50px;
+      line-height: 20px;
+      height: 20px;
+      padding: 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    img#marianne {
+      height: 30px;
+      margin: 10px 0px;
     }
 
     .brand > img {
       height: 50px;
+      margin-left: 0px;
     }
   }
 
