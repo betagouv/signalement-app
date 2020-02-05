@@ -151,7 +151,7 @@
                 - label: Notez les éléments qui permettent d'identifier le taxi.
                   rank: 6
                   type: TEXTAREA
-                  placeholder: Numéro ADS, plaque d'immatriculation, société de réservation ...
+                  placeholder: Numéro ADS, plaque d'immatriculation, société de réservation...
               fileLabel: Joindre la note (facture) de votre course ou tout document utile pour appuyer votre signalement.
               consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
@@ -178,7 +178,7 @@
                     - label: Merci de noter les informations pour identifier le véhicule
                       rank: 4
                       type: TEXTAREA
-                      placeholder: Immatriculation du véhicule, numéro ADS ...
+                      placeholder: Immatriculation du véhicule, numéro ADS...
                   fileLabel: Joindre tout document utile pour appuyer votre signalement.
             - title: J'ai été prélevé deux fois
               detailInputs:
@@ -191,7 +191,7 @@
                 - label: Notez toute autre information utile.
                   rank: 3
                   type: TEXT
-                  placeholder: Identification du taxi, nom de la centrale d'appel ...
+                  placeholder: Identification du taxi, nom de la centrale d'appel...
               fileLabel: Joindre la note (facture) et tout document utile pour appuyer votre signalement (extrait de relevé bancaire).
               consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Le chauffeur n'était pas aimable
@@ -221,7 +221,7 @@
             - label: Quel est le problème ?
               rank: 4
               type: TEXTAREA
-          fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course etc.)
+          fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course...)
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Le prix payé n'est pas celui annoncé au départ
           detailInputs:
@@ -240,7 +240,7 @@
               options:
                 - Oui (à préciser)
                 - Non
-          fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile etc.)
+          fileLabel: Merci de joindre tous les documents utiles pour appuyer votre signalement (reçu, capture d'écran en cas d'application mobile...)
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
           subcategories:
@@ -331,7 +331,7 @@
     - title: Annulation / remboursement
       subcategoriesTitle: Qui a annulé la réservation&#160;?
       subcategories:
-        - title: l'hôtel, le camping, le gérant ...
+        - title: l'hôtel, le camping, le gérant...
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: moi-même
           subcategoriesTitle: Aviez-vous une assurance annulation&#160;?

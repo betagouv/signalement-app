@@ -73,7 +73,7 @@
                 - Sol / mur
                 - Vitrine, réfrigérateur
                 - Matériel de fabrication, équipement en cuisine
-                - Equipements pour les clients (table, plateaux, couverts, micro-ondes..)
+                - Equipements pour les clients (table, plateaux, couverts, micro-ondes...)
                 - Autre (à préciser)
           fileLabel: Merci de joindre si possible une photo pour appuyer votre signalement.
         - title: Je subis des nuisances à cause des odeurs, du bruit
@@ -160,7 +160,7 @@
           rank: 2
           type: TEXTAREA
           placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
-      fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
+      fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine...)
     - title: J'ai payé plus cher que le prix affiché
       detailInputs:
         - label: Date du constat
@@ -183,7 +183,7 @@
           type: RADIO
           options:
             - Les prix affichés ne sont pas à jour
-            - Un supplément s'applique (jour férié, vacances scolaires, terrasse ...)
+            - Un supplément s'applique (jour férié, vacances scolaires, terrasse...)
             - Erreur lors de l'addition
             - Autre (à préciser)
             - Non, aucune raison
@@ -346,7 +346,7 @@
             - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
               rank: 2
               type: TEXTAREA
-          fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+          fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
 - title: Qualité des plats/boissons
   example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
   subcategories:
