@@ -6,6 +6,7 @@ import { AppRoleDirective } from '../../../../directives/app-role.directive';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentsModule } from '../../../../components/components.module';
 
 describe('MostReportedListComponent', () => {
   let component: MostReportedListComponent;
@@ -26,6 +27,7 @@ describe('MostReportedListComponent', () => {
         BsDatepickerModule.forRoot(),
         RouterTestingModule,
         HttpClientModule,
+         ComponentsModule
        ]
     })
     .compileComponents();

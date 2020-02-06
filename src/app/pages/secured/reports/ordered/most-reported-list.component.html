@@ -1,11 +1,5 @@
 <div class="overflow-container">
-  <div class="banner text-center section section-primary" role="region">
-    <div class="container">
-      <h1 class="text-center">
-        Professionnels triés par nombre de signalement
-      </h1>
-    </div>
-  </div>
+  <app-banner title="Professionnels triés par nombre de signalement"></app-banner>
 
   <pagination *appRole="[roles.Admin, roles.DGCCRF]"
               [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"

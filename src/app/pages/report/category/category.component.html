@@ -4,12 +4,12 @@
   <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
 </alert>
 
-<div class="banner text-center section section-primary d-none d-lg-block" role="region">
+<div class="banner text-center section-small section-primary d-none d-lg-block" role="region">
   <div class="container text-center">
-    <img src="/assets/images/icons-baseline.svg" class="pb-3 d-none d-lg-inline-block" alt="Icônes signaler" />
-    <h2>
+    <img src="/assets/images/logo-signalconso-white.svg" class="pb-4 d-none d-lg-inline-block" alt="Icônes signaler" />
+    <h1>
       Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
-    </h2>
+    </h1>
   </div>
 </div>
 
@@ -17,10 +17,10 @@
 
   <section class="section section-white d-none d-lg-block">
     <div class="container">
-      <h2 class="text-center mb-4">Comment ça marche ?</h2>
+      <h2 class="mb-4 text-secondary">Comment ça marche ?</h2>
       <div class="row" (click)="scrollToElement(categoryList)">
         <div class="col-12 col-sm-3">
-          <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
+          <app-illustration-card [illustration]="illustrations[0]" firstCard="true"></app-illustration-card>
         </div>
         <div class="col-12 col-sm-3">
           <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
@@ -29,26 +29,27 @@
           <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
         </div>
         <div class="col-12 col-sm-3">
-          <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
+          <app-illustration-card [illustration]="illustrations[3]" lastCard="true"></app-illustration-card>
         </div>
+      </div>
+      <div class="text-center pt-5">
+        <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+        </button>
       </div>
       <p class="indication">
         Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
         l’<u>article L. 112-8 du code des relations entre le public et l’administration</u>.
         <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
       </p>
-      <div class="text-center">
-        <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
-          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
-        </button>
-      </div>
     </div>
   </section>
 
   <section class="section section-primary">
 
-    <div class="text-center d-lg-none">
-      <h2 class="tmb-4">Signaler un problème à la répression <br/>des fraudes en toute transparence <br />avec l'entreprise !</h2>
+    <div class="text-center container d-lg-none">
+      <h1 class="tmb-4 d-none d-md-block">Signaler un problème à la répression des fraudes <br/>en toute transparence avec l'entreprise !</h1>
+      <h1 class="tmb-4 d-md-none">Signaler un problème à la répression des fraudes en toute transparence avec l'entreprise !</h1>
 
       <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000">
         <div class="carousel-inner">
@@ -107,13 +108,13 @@
 
       <div class="text-center mt-4 mb-4">
         <button type="button" class="btn btn-warning d-lg-none" (click)="scrollToElement(categoryList)">
-          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" class="d-none d-sm-inline-block" />
         </button>
       </div>
 
       <div #categoryList>
 
-        <h2 class="text-center mb-0 mb-lg-4">Quel problème avez-vous rencontré&#160;?</h2>
+        <h2 class="mb-0 mb-lg-4">Quel problème avez-vous rencontré&#160;?</h2>
 
         <div class="row">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">

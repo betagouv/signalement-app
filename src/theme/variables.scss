@@ -1,6 +1,6 @@
-$blue: #0048B3;
-$light-blue: #006be6;
-$dark-blue: #2b5371;
+$blue: #407ea7;
+$light-blue: #2A8194;
+$dark-blue: #1f2b50;
 $lighter-blue: #D6F0FF;
 $white: #fff;
 $lightest-grey: #fafbfc;
@@ -22,7 +22,7 @@ $light-red: #f7d5d2;
 $light-yellow: #faf8be;
 
 $primary: $blue;
-$secondary: #5A4B5F;
+$secondary: $dark-blue;
 $warning: #BE3D4D;
 
 $theme-primary: $blue;
@@ -32,7 +32,7 @@ $theme-secondary: $blue;
 $theme-secondary-darken: $dark-blue;
 $theme-border: $grey;
 $theme-border-lighter: $light-grey;
-$theme-border-active: $light-blue;
+$theme-border-active: $blue;
 $theme-border-radius: 3px;
 $theme-border-more-radius: 10px;
 $theme-background-white: $white;
@@ -49,5 +49,5 @@ $theme-warning-border: $orange;
 $theme-warning-bg: $lighter-orange;
 $theme-error-border: $red;
 $theme-error-bg: $light-red;
-$theme-info-border: $light-blue;
+$theme-info-border: $blue;
 $theme-info-bg: $lighter-blue;

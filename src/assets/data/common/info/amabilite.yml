@@ -1,0 +1,8 @@
+content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
+        <br/>Nous vous invitons à contacter directement le gérant pour faire part de votre mécontentement.
+actions:
+  - question: Vous avez été victime d'harcélement ou d'injure ?
+    answer: Vous pouvez faire une pré-plainte en ligne sur le site <br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">pre-plainte-en-ligne.gouv.fr</a>
+  - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou âgée ?
+    answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou âgées...
+outOfScope: true

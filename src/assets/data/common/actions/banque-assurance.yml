@@ -19,7 +19,7 @@
     - question: Quand&#160;?
       answer: 2 mois après avoir envoyé mon courrier, et que je n’ai pas eu de réponse ou que la réponse ne me satisfait pas
     - question: Qui&#160;?
-      answer: L'entreprise a l’obligation de communiquer le nom du médiateur qu'elle a choisit. Les coordonnées du médiateur sont normalement écrites sur le site internet de l'entreprise ou  sur le contrat, bon de commande ...
+      answer: L'entreprise a l’obligation de communiquer le nom du médiateur qu'elle a choisit. Les coordonnées du médiateur sont normalement écrites sur le site internet de l'entreprise ou  sur le contrat, bon de commande...
         <br />
         Vous pouvez aussi consulter la 
         <a href="https://www.economie.gouv.fr/mediation-conso/mediateurs-references" target="_blank">
@@ -29,20 +29,20 @@
     - question: Pourquoi&#160;?
       answer: Le médiateur va m’aider à trouver un arrangement avec l'entreprise
     - question: Combien ça coûte&#160;?
-      answer: C’est gratuit !
+      answer: C’est gratuit !
 - title: Je contacte un conciliateur, c’est-à-dire une personne qui m’aide à trouver une solution avec l'entreprise.
   actions:
     - question: Quand&#160;?
       answer: Lorsque je n'ai pas trouvé de solution avec le médiateur et l'entreprise
     - question: Comment&#160;?
-      answer: Je contacte le conciliateur le plus proche de chez moi. Je le cherche sur cette 
+      answer: Je contacte le conciliateur le plus proche de chez moi. Je le cherche sur le site
         <a href="https://www.conciliateurs.fr/Trouver-une-permanence" target="_blank">
-          page internet.
+        conciliateurs.fr
         </a>
     - question: Pourquoi&#160;?
       answer: Pour instaurer le dialogue avec l'entreprise et trouver un arrangement.
     - question: Combien ça coûte&#160;?
-      answer: C’est gratuit !
+      answer: C’est gratuit !
 - title: Je vais en justice, c'est-à-dire que je demande un procès au tribunal d’instance
   actions:
     - question: Quand&#160;?

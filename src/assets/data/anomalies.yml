@@ -62,16 +62,16 @@ list:
     rank: 16
     icon: email-24px.svg
     information:
-      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
+      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
       content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
         - question: Un problème avec un commerçant&#160;?
-          example: 'Exemples : colis non reçu, pas de nouvelle de votre commande'
+          example: 'Exemples : colis non reçu, pas de nouvelle de votre commande'
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
         - question: Un spam que vous avez reçu&#160;?
           answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
         - question: Un contenu qui vous semble inapproprié&#160;?
-          example: 'Exemples : trafic illicite, pédopornographie'
+          example: 'Exemples : trafic illicite, pédopornographie'
           answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
   - category: Travaux / Rénovation
     categoryId: TRAV
@@ -100,7 +100,7 @@ list:
     description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
     rank: 106
     icon: icon_health.png
-    subcategoriesTitle: 'Votre problème concerne :'
+    subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
   - category: Voiture / Véhicule
     categoryId: VEH
@@ -129,13 +129,13 @@ list:
     path: travail-au-noir
     hidden: true
     rank: 110
-    breadcrumbTitle: Vous souhaitez signaler un cas de travail au noir ?
+    breadcrumbTitle: Vous souhaitez signaler un cas de travail au noir ?
     information:
-      title: Vous souhaitez signaler un cas de travail au noir ?
+      title: Vous souhaitez signaler un cas de travail au noir ?
       content: Pour signaler du travail dissimulé (travail au noir), vous pouvez&nbsp;:&nbsp;
           <ul>
             <li>envoyer un email à cette adresse&nbsp;:&nbsp;<a href="mailto:fraude.npdc@urssaf.fr">fraude.npdc@urssaf.fr</a></li>
-            <li>écrire  à l’inspection du travail en contactant la <a href="http://direccte.gouv.fr/">DIRECCTE</a> de la région concernée</li>
+            <li>écrire  à l’inspection du travail en contactant la <a href="http://direccte.gouv.fr/" target="_blank">DIRECCTE</a> de la région concernée</li>
             <li>écrire à la Brigades de contrôle et de recherche des impôts</li>
             <li>écrire à la police/gendarmerie</li>
           </ul>
@@ -145,7 +145,7 @@ list:
     path: secur
     hidden: true
     rank: 110
-    breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez eu une réaction allergique ?
+    breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez eu une réaction allergique ?
     information:
       title: Les problèmes de blessure, allergie.. ne rentrent pas dans le périmètre de l'outil SignalConso. Ces problèmes imposent une analyse immédiate du signalement, ce qui ne sera pas le cas avec SignalConso.
       content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
@@ -154,7 +154,7 @@ list:
     path: stranger
     hidden: true
     rank: 110
-    breadcrumbTitle: Vous avez trouvé un petit morceau dur ou une vis dans un aliment ?
+    breadcrumbTitle: Vous avez trouvé un petit morceau dur ou une vis dans un aliment ?
     information:
       title: Un objet ou un morceau d'objet qui se trouve dans un aliment alors que ce ne devrait pas être le cas s'appelle un corps étranger. Cela peut être une vis, un clou, un boulon, un bout de plastique, un morceau de verre par exemple.
       content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>

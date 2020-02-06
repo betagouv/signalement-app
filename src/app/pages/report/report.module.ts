@@ -16,7 +16,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { AutofocusDirective } from '../../directives/auto-focus.directive';
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 import anomalies from '../../../assets/data/anomalies.json';
 import { ReportPaths } from '../../services/report-router.service';
@@ -91,7 +91,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     AlertModule.forRoot(),
-    NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
+    NgxLoadingModule.forRoot(NgxLoadingConfig),
     Ng2CompleterModule,
     RouterModule.forChild(routes),
     CarouselModule,

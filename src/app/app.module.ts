@@ -21,7 +21,7 @@ import { UnavailableComponent } from './pages/static/unavailable/unavailable.com
 import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { NotFoundComponent } from './pages/static/notfound/notfound.component';
-import { ComponentsModule } from './components/components.module';
+import { ComponentsModule, NgxLoadingConfig } from './components/components.module';
 import { DirectivesModule } from './directives/directives.module';
 
 registerLocaleData(localeFr, 'fr');
@@ -42,7 +42,7 @@ registerLocaleData(localeFr, 'fr');
     TransferHttpCacheModule,
     HttpClientModule,
     NgxEchartsModule,
-    NgxLoadingModule.forRoot({ primaryColour: '#003b80', secondaryColour: '#003b80', tertiaryColour: '#003b80' }),
+    NgxLoadingModule.forRoot(NgxLoadingConfig),
     RouterModule.forRoot([
       { path: '**', component: UnavailableComponent },
     ], {

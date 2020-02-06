@@ -1,16 +1,16 @@
 - title: Garantie et remboursement
-  example: 'Exemple : retour, garantie, échange'
+  example: 'Exemple : retour, garantie, échange'
   subcategories: !!import/single ../common/garantie.yml
 - title: Notice et emballage
-  example: 'Exemple : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais'
+  example: 'Exemple : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais'
   subcategories:
     - title: Informations manquantes
       description: "Certaines informations sont obligatoires.
-              <br/>Par exemple :
+              <br/>Par exemple :
               <ul>
-                <li>Vêtements : la composition des tissus (noms et proportions des matières)</li>
-                <li>Meubles : la composition, la taille, s'il faut le monter soi-même, de quel cuir il s'agit</li>
-                <li>Electroménagers : l'étiquetage énergétique, la disponibilité des pièces de rechange</li>
+                <li>Vêtements : la composition des tissus (noms et proportions des matières)</li>
+                <li>Meubles : la composition, la taille, s'il faut le monter soi-même, de quel cuir il s'agit</li>
+                <li>Electroménagers : l'étiquetage énergétique, la disponibilité des pièces de rechange</li>
               </ul>"
       detailInputs:
         - label: Quel est-le problème&#160;?
@@ -67,7 +67,7 @@
           information:
             title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
     - title: Informations trompeuses ou fausses
-      example: 'Exemple : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas '
+      example: 'Exemple : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas '
       detailInputs:
         - label: Quel est le type de produit&#160;?
           rank: 1
@@ -153,7 +153,7 @@
           rank: 4
           type: TEXTAREA
     - title: Un produit sans emballage, directement consommé
-      example: 'Exemple : verre de vin dans un café, plat au restaurant'
+      example: 'Exemple : verre de vin dans un café, plat au restaurant'
       description: Le poids ou volume annoncé correspond au poids ou volume minimum que vous devez avoir.
       detailInputs:
         - label: Date du constat ou d'achat
@@ -187,11 +187,11 @@
       rank: 5
       type: TEXTAREA
 - title: Produit dangereux
-  example: 'Exemple : jouet qui prend feu, allergie, intoxication'
+  example: 'Exemple : jouet qui prend feu, allergie, intoxication'
   information:
     title: Vous souhaitez signaler un produit dangereux
     content: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
     actions:
-      - question: Signaler un produit dangereux?
+      - question: Signaler un produit dangereux ?
         answer: Utiliser ce formulaire spécifique<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
 

@@ -2,7 +2,7 @@
   subcategoriesTitle: Pour quelle raison a-t-on refusé que vous payez en espèces&#160;?
   subcategories:
     - title: Les espèces sont systématiquement refusées
-      description: 'Votre droit : les billets et les pièces en euros doivent être obligatoirement acceptés en France.'
+      description: 'Votre droit : les billets et les pièces en euros doivent être obligatoirement acceptés en France.'
     - title: Je n'avais pas la monnaie
       information:
         content: C'est à vous de faire l'appoint. Un commerçant a le droit refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
@@ -21,11 +21,11 @@
   subcategoriesTitle: Pour quelle raison a-t-on refusé que vous payez par carte bancaire ou par chèque&#160;?
   subcategories:
     - title: Il y a un minimum d'achat
-      example: 'Exemple : carte bancaire acceptée à partir de 15 euros'
+      example: 'Exemple : carte bancaire acceptée à partir de 15 euros'
       subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
       subcategories:
         - title: Oui
-          example: 'Exemple : sur une affiche au niveau des caisses'
+          example: 'Exemple : sur une affiche au niveau des caisses'
           information:
             content: Le commerçant a le droit d''exiger un minimum d''achat pour les paiements par carte bancaire ou par chèque.
                     <br/> Ce minimum d''achat doit être indiqué très visiblement. Avec un affichage à l''entrée ou à la caisse par exemple.
@@ -37,12 +37,12 @@
       subcategoriesTitle: Le refus de la carte bleue ou des chèques est-il affiché&#160;?
       subcategories:
         - title: Oui
-          example: 'Exemple : sur une affiche au niveau des caisses'
+          example: 'Exemple : sur une affiche au niveau des caisses'
           information:
             content: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
                    <br/> Il doit l''indiquer très visiblement au consommateur. Avec un affichage à l''entrée ou à la caisse par exemple.
             outOfScope: true
         - title: Non
     - title: Autre raison
-      example: 'Exemple : problème avec le terminal de paiement'
+      example: 'Exemple : problème avec le terminal de paiement'
 - title: Autre problème pour payer

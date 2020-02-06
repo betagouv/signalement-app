@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProComponent } from './pro.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('ProComponent', () => {
   let component: ProComponent;
@@ -11,7 +12,8 @@ describe('ProComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ProComponent ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        ComponentsModule
       ]
     })
     .compileComponents();

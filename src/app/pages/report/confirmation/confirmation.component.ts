@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Report, Step } from '../../../model/Report';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
@@ -7,17 +7,14 @@ import { FileUploaderService } from '../../../services/file-uploader.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
   styleUrls: ['./confirmation.component.scss']
 })
-export class ConfirmationComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class ConfirmationComponent implements OnInit {
 
   step: Step;
   report: Report;
@@ -39,7 +36,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.step = Step.Confirmation;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(take(1))
       .subscribe(report => {
         if (report) {
           this.report = report;
@@ -48,11 +45,6 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
           this.reportRouterService.routeToFirstStep();
         }
       });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   initConfirmationForm() {

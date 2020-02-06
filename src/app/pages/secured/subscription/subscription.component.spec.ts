@@ -4,6 +4,7 @@ import { SubscriptionComponent } from './subscription.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('SubscriptionComponent', () => {
   let component: SubscriptionComponent;
@@ -19,6 +20,7 @@ describe('SubscriptionComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         NgxLoadingModule,
+        ComponentsModule
       ],
     })
     .compileComponents();

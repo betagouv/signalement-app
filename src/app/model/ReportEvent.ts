@@ -27,9 +27,13 @@ export class ReportResponse {
   fileIds: string[];
 }
 
-
 export enum ReportResponseTypes {
   Accepted = 'ACCEPTED',
   Rejected = 'REJECTED',
   NotConcerned = 'NOT_CONCERNED'
+}
+
+export class ReviewOnReportResponse {
+  positive: boolean;
+  details: string;
 }

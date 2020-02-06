@@ -1,14 +1,14 @@
 - title: Bien-être
-  example: 'Exemple : coiffeur, esthéticienne, salon de massage'  
+  example: 'Exemple : coiffeur, esthéticien, salon de massage'
   subcategories:
-    - title: prix des soins
-      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
+    - title: Prix des soins
+      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Quel est le problème ?
+        - label: Quel est le problème ?
           rank: 2
           type: RADIO
           options:
@@ -23,44 +23,130 @@
           optionnal: true
       fileLabel: Vous pouvez joindre une photo des prix ou tout document utile pour appuyer votre signalement.
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: moyen de paiement
-      example: 'Exemple : carte bancaire refusée'
+    - title: Moyens de paiement
+      example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
-    - title: publicité des soins mensongère
-      example: 'Exemple : durée du massage plus courte qu''indiqué'
+    - title: Publicité des soins mensongère
+      example: 'Exemple : durée du massage plus courte qu''indiqué'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: autre
-      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
+      subcategories:
+        - title: Le personnel ne dispose pas des diplômes requis
+        - title: Problème d'hygiène
+          example: "Exemple : établissement sale, mauvaises pratiques d'hygiène"
+        - title: Je subis des nuisances à cause des odeurs, du bruit ..
+          information: !!import/single ../common/info/tel.yml
+        - title: Le personnel n'est pas aimable
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Mon chien a été refusé dans le salon
+          information: !!import/single ../common/info/chienassistance.yml
+        - title: Autre
+          consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Vie quotidienne
-  example: "Exemple : conciergerie, pressing, cordonnier, ménage, garde d'enfants"
+  example: "Exemple : conciergerie, pressing, cordonnier, ménage, garde d'enfants"
   subcategories:
-    - title: prix des prestations
-      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
+    - title: Prix des prestations
+      example: 'Exemple : promotion non appliquée, prix en vitrine pas à jour'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: moyen de paiement
-      example: 'Exemple : carte bancaire refusée'
+    - title: Moyens de paiement
+      example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
-    - title: publicité des prestations mensongère
+    - title: Publicité des prestations mensongère
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: autre
-      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
+      subcategories:
+        - title: Le personnel ne dispose pas des diplômes requis
+        - title: Problème d'hygiène
+        - title: Je subis des nuisances à cause des odeurs, du bruit ..
+          information: !!import/single ../common/info/tel.yml
+        - title: Le personnel n'est pas aimable
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Autre
+          consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Aide à la personne
   consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Maison de retraite (ehpad)
+  subcategories:
+    - title: Tarifs / facture
+      subcategories:
+        - title: Les tarifs ne sont pas communiqués clairement
+          example: 'Exemple : les prix des options ne sont pas dans le contrat'
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Je ne paye pas le prix qui était prévu au départ
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Je ne suis pas d'accord avec ma facture
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Les prix sont élevés pour la prestation
+          information:
+            title: Les prix sont choisis librement par les maisons de retraite.
+            content: Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant de signer un contrat ou avant de prendre des options.
+          outOfScope: true
+    - title: Contrat
+      example: 'Exemple : je veux résilier le contrat, les activités ne correspondent pas à mon contrat'
+      subcategories:
+        - title: Le contrat n'est pas respecté
+          example: 'Exemple : le contrat prévoit des fruits tous les jours et ce n''est pas le cas'
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Je veux résilier le contrat
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Une clause dans le contrat est abusive, c'est-à-dire qu’elle désavantage fortement le résident
+          example: "Exemple : imposer un préavis de 2 mois au résident pour résilier le contrat alors que la maison de retraite a un préavis d'1 mois seulement"
+          consumerActions: !!import/single ../common/actions/defaut.yml
+    
+    - title: Emmenagement / sortie de la chambre
+      example: "Exemple : état des lieux d'entrée ou de sortie, caution"
+      subcategories:
+        - title: Je n'ai pas eu d'état des lieux (entrée ou sortie)
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Je ne suis pas d'accord avec l'état des lieux
+          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: La caution demandée à l'entrée est très elevée
+          subcategoriesTitle: 'Est-ce que la caution est plus élevée que 2 fois le tarif mensuel de la chambre (ce tarif est indiqué dans votre contrat) ?'
+          subcategories:
+            - title: Oui
+              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Non
+              information:
+                title: Une caution (somme d'argent) peut être demandée, mais elle ne doit pas dépasser 2 fois le tarif mensuel d'hébergement.
+                content: Retrouvez plus d'informations sur <a href="https://www.service-public.fr/particuliers/vosdroits/F763" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F763</a>
+        - title: Je n'ai toujours pas récupéré la caution
+          subcategoriesTitle: Quand avez-vous libéré la chambre ?
+          subcategories:
+            - title: Il y a moins de 30 jours
+              information:
+                title: Soyez encore un peu patient :)
+                content: La maison de retraite a 30 jours pour vous rendre la caution.
+            - title: Il y a plus de 30 jours
+              consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Publicité mensongère
+      example: "Exemple : le site internet mentionne un grand parc alors que ce n'est pas le cas, la brochure parle des animations régulières alors qu'il y en a très peu"
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Maltraitance
+      information: 
+        content: Vous ne pouvez pas signaler un cas de maltraitance sur SignalConso.<br> Vous pouvez vous rendre au commissariat de police ou à la gendarmerie. <br> Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées.
+                  <br><br> Le site officiel <a href="https://www.pour-les-personnes-agees.gouv.fr/exercer-ses-droits/en-cas-de-maltraitance" target="_blank">www.pour-les-personnes-agees.gouv.fr</a> vous propose toutes les solutions possibles pour signaler un cas de maltraitance.
+        outOfScope: true
+    - title: Autre
+      consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Services funéraires  
   subcategories:
-    - title: prix des prestations
-      example: 'Exemple : le prix final ne correspond pas du devis, prix des soins de conservation'
+    - title: Prix des prestations
+      example: 'Exemple : le prix final ne correspond pas du devis, prix des soins de conservation'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: moyen de paiement
-      example: 'Exemple : carte bancaire refusée'
+    - title: Moyens de paiement
+      example: 'Exemple : carte bancaire refusée'
       subcategories: !!import/single ../common/paiement.yml
-    - title: publicité des prestations mensongère
-      example: 'Exemple : composition d''un cercueil non conforme'
+    - title: Publicité des prestations mensongère
+      example: 'Exemple : composition d''un cercueil non conforme'
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: autre
-      consumerActions: !!import/single ../common/actions/defaut.yml
-- title: autres types d''entreprises de service
-  example: 'Exemple : déménageur, agence de rencontre, organisme de formation'
+    - title: Autre
+      subcategories:
+        - title: Le personnel n'est pas aimable ou respecteux
+          information: !!import/single ../common/info/amabilite.yml
+        - title: Le personnel ne dispose pas des diplômes requis
+        - title: Autre
+- title: Autres types d'entreprises de service
+  example: 'Exemple : déménageur, agence de rencontre, organisme de formation. Pour la livraison de repas à domicile, choisir la catégorie Café / Restaurant'
   subcategories:
     - title: Déménageur
       consumerActions: !!import/single ../common/actions/defaut.yml

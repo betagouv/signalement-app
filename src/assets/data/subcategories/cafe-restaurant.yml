@@ -1,17 +1,17 @@
 - title: J'ai été malade après avoir mangé
-  example: 'Exemple : vomissement, maux de ventre'
+  example: 'Exemple : vomissement, maux de ventre'
   information:
     title: Il peut s'agir d'une intoxication alimentaire
-    content: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, symptômes et les aliments consommés ).
+    content: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, les symptômes et les aliments consommés ).
     actions:
       - question: Comment le signaler&#160;?
-        answer: Signaler-le à la DGCCRF avec <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />ce lien dédié</a>
+        answer: Signalez-le sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />de la DGCCRF</a>
 - title: Hygiène
-  example: 'Exemple : locaux sales, rat, chaîne du froid'
+  example: 'Exemple : locaux sales, rat, chaîne du froid'
   subcategoriesTitle: 'Vous voulez signaler&#160;:'
   subcategories:
     - title: J'ai vu un animal (nuisible)
-      example: 'Exemple : cafards, rat'
+      example: 'Exemple : cafards, rat'
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -38,10 +38,10 @@
           type: TEXT
           optionnal: true
     - title: Hygiène des locaux et du matériel
-      example: 'Exemple : cuisine sale, odeur de poubelle dans ma cour'
+      example: 'Exemple : cuisine sale, odeur de poubelle dans ma cour'
       subcategories:
         - title: Je trouve les locaux sales ou dégradés
-          example: 'Exemple : cuisine sale, WC sale'
+          example: 'Exemple : cuisine sale, WC sale'
           detailInputs:
             - label: Date du constat
               rank: 1
@@ -73,36 +73,31 @@
                 - Sol / mur
                 - Vitrine, réfrigérateur
                 - Matériel de fabrication, équipement en cuisine
-                - Equipements pour les clients (table, plateaux, couverts, micro-ondes..)
+                - Equipements pour les clients (table, plateaux, couverts, micro-ondes...)
                 - Autre (à préciser)
           fileLabel: Merci de joindre si possible une photo pour appuyer votre signalement.
-        - title: Je subis des nuisances à cause des odeurs, du bruit ..
-          example: 'Exemple : les odeurs des poubelles ou de la cuisine arrivent dans mon appartement'
-          information:
-            title: Je subis des nuisances à cause d'un commerce
-            content: Les problèmes comme le bruit et les odeurs (de poubelle, de cuisine) sont appelés des troubles de voisinage. <br> Vous ne pouvez faire pas un signalement sur SignalConso car la répression des fraudes ne pourra pas intervenir pour régler votre problème.
-            actions:
-              - question: Mais alors, à qui demander de l'aide ?
-                answer: Vous trouverez les explications sur ce <a href="https://www.service-public.fr/particuliers/vosdroits/N356" target="_blank" />lien</a>
+        - title: Je subis des nuisances à cause des odeurs, du bruit
+          example: 'Exemple : les odeurs des poubelles ou de la cuisine arrivent dans mon appartement'
+          information: !!import/single ../common/info/voisinage.yml
     - title: Hygiène du personnel
-      example: 'Exemple : tenue sale ou pas adaptée'
+      example: 'Exemple : tenue sale ou pas adaptée'
       subcategories:
         - title: La tenue de travail n'est pas adaptée
-          example: 'Exemple : pas de gants, torse-nu en cuisine'
+          example: 'Exemple : pas de gants, torse-nu en cuisine'
           subcategories:
             - title: Les employés ne portent pas de gants ou pas de coiffe (calot, charlotte)
               information:
                 title: Cet incident ne doit pas nécessairement être signalé.
-                content: La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
+                content: La loi précise que les personnes qui travaillent dans un endroit où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
                   Les restaurateurs et commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut également être suffisant pour éviter les contaminations. <br> Vous pouvez directement discuter avec le gérant pour lui faire part de votre questionnement.
                 outOfScope: true
             - title: Autre problème de tenue
-              example: 'Exemple : pas de tenue spécifique, torse-nu en cuisine'
+              example: 'Exemple : pas de tenue spécifique, torse-nu en cuisine'
               detailInputs:
                 - label: Date de constat
                   rank: 1
                   type: DATE
-                - label: Quel est le problème ?
+                - label: Quel est le problème ?
                   rank: 2
                   type: TEXT
               fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
@@ -111,22 +106,22 @@
             - label: Date de constat
               rank: 1
               type: DATE
-            - label: Quel est le problème ?
+            - label: Quel est le problème ?
               rank: 2
               type: TEXT
           fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
         - title: Mauvaises pratiques d'hygiène
-          example: 'Exemple : personne qui fume en cuisine'
+          example: 'Exemple : personne qui fume en cuisine'
           detailInputs:
             - label: Date de constat
               rank: 1
               type: DATE
-            - label: Quel est le problème ?
+            - label: Quel est le problème ?
               rank: 2
               type: TEXT
           fileLabel: Merci de joindre si possible tout document (photo) pour appuyer votre signalement.
     - title: Problème de température
-      example: 'Exemple : rupture de la chaine du froid'
+      example: 'Exemple : rupture de la chaine du froid'
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -140,76 +135,76 @@
           rank: 3
           type: RADIO
           options:
-            - Vitrine/réfrigérateur trop chaud ou en panne
+            - Vitrine / réfrigérateur trop chaud ou en panne
             - Stockage à température ambiante de produits frais ou congelés
             - Transport à température ambiante de produits frais ou congelés
             - Autre problème de température (à préciser)
-        - label: Pouvez-vous préciser ?
+        - label: Pouvez-vous préciser ?
           rank: 3
           type: TEXT
           optionnal: true
       fileLabel: Si possible, merci de joindre une photo ou un document pour appuyer votre signalement.
 - title: Prix et paiement
-  example: 'Exemple : refus de la carte bancaire, j''ai payé plus cher que prévu'
+  example: 'Exemple : refus de la carte bancaire, j''ai payé plus cher que prévu'
   subcategories:
     - title: Il manque certains prix
-      example: 'Exemple : absence de prix sur la carte des vins'
-      description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligé de les demander.'
+      example: 'Exemple : absence de prix sur la carte des vins'
+      description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligé de les demander.'
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
         - label: Description
-          example: Pouvez-vous nous en dire plus ?
+          example: Pouvez-vous nous en dire plus ?
           rank: 2
           type: TEXTAREA
           placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
-      fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine..)
+      fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine...)
     - title: J'ai payé plus cher que le prix affiché
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
-        - label: Quel était le prix affiché ?
+        - label: Quel était le prix affiché ?
           rank: 2
           type: TEXT
-        - label: Combien avez-vous payé ?
+        - label: Combien avez-vous payé ?
           rank: 3
           type: TEXT
-        - label: L'avez-vous signalé au gérant/serveur ?
+        - label: L'avez-vous signalé au gérant / serveur ?
           rank: 4
           type: RADIO
           options:
             - Oui
             - Non
-        - label: Si oui, vous a-t-il donné une raison ?
-          rank : 5
+        - label: Si oui, vous a-t-il donné une raison ?
+          rank: 5
           type: RADIO
           options:
             - Les prix affichés ne sont pas à jour
-            - Un supplément s'applique (jour férié, vacances scolaire, terrasse..)
+            - Un supplément s'applique (jour férié, vacances scolaires, terrasse...)
             - Erreur lors de l'addition
             - Autre (à préciser)
-            - Non, aucune raison.
+            - Non, aucune raison
       fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
       consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: Je trouve que les pris sont très chers
-      example: 'Exemple : le prix du menu est très cher pour la qualité'
+    - title: Je trouve que les prix sont très chers
+      example: 'Exemple : le prix du menu est très cher pour la qualité'
       information:
         title: Les prix sont choisis librement par les commerçants.
         content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
                 <br/> Par exemple, il est autorisé de vendre un verre de limonade à 100 euros dans un bar si le prix est bien marqué sur la carte.
-                <br/> Le saviez-vous ? Un café a également le droit de faire payer l'eau du robinet si le prix est marqué. Par contre, au cours d'un repas, l'eau du robinet doit vous être fournie gratuitement."
+                <br/> Le saviez-vous ? Un café a également le droit de faire payer l'eau du robinet si le prix est marqué. Par contre, au cours d'un repas, l'eau du robinet doit vous être fournie gratuitement."
         outOfScope: true
     - title: J'ai eu un problème pour payer
-      example: 'Exemple : refus de la carte bancaire'
+      example: 'Exemple : refus de la carte bancaire'
       subcategories:
         - title: Le commerçant refuse le paiement en espèces
           subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
           subcategories:
             - title: Il refuse tout paiement en espèces
-              description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+              description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
             - title: Il n'avait pas assez de monnaie
               information:
                 content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
@@ -225,13 +220,13 @@
                 outOfScope: true
             - title: Autres
         - title: Le commerçant refuse la carte bancaire ou les chèques
-          subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bleue&#160;?
+          subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque / carte bleue&#160;?
           subcategories:
             - title: Il exige un minimum d'achat
               subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
               subcategories:
                 - title: Oui
-                  example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                  example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
                   information:
                     title: Le commerçant a le droit d'exiger un minimum d'achat pour ce type de paiement.
                     content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
@@ -241,16 +236,16 @@
               subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
               subcategories:
                 - title: Oui
-                  example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
+                  example: 'Exemple : sur une affiche au niveau des caisses ou sur le menu du restaurant'
                   information:
                     title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
                     content: Il doit l’indiquer très visiblement au consommateur (affichage à l'entrée du magasin ou à la caisse, sur une carte du restaurant...)
                     outOfScope: true
                 - title: Non
             - title: Autre
-              example: 'Exemple : problème avec le terminal de paiement'
+              example: 'Exemple : problème avec le terminal de paiement'
         - title: Autre problème de prix ou paiement
-          subcategoriesTitle: 'Problème avec :'
+          subcategoriesTitle: 'Problème avec :'
           subcategories:
             - title: Tickets restaurant
             - title: Autre
@@ -259,7 +254,7 @@
         - label: Date de constat
           rank: 1
           type: DATE
-        - label: Quel est le problème?
+        - label: Quel est le problème ?
           rank: 2
           type: RADIO
           options:
@@ -268,7 +263,7 @@
             - Autre (à préciser)
     - title: Autres problèmes
 - title: Informations mensongères (sur le menu, la carte ou le site internet)
-  example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
+  example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
   subcategories:
     - title: Indisponibilité des produits proposés
       detailInputs:
@@ -279,8 +274,8 @@
         - label: Quel type de produit était indisponible&#160;?
           rank: 2
           type: TEXT
-          placeholder: 'Exemple : Vin blanc, menu en promotion '
-        - label: Le commerçant vous a-t-il donné une raison ?
+          placeholder: 'Exemple : Vin blanc, menu en promotion '
+        - label: Le commerçant vous a-t-il donné une raison ?
           rank: 3
           type: RADIO
           options:
@@ -306,14 +301,14 @@
           rank: 3
           type: RADIO
           options:
-            - 'L''origine (exemple : origine des vins )'
-            - 'Un label ou une mention (exemple: fait maison)'
-            - 'Une marque (exemple: la marque de rhum proposée est mensongère'
+            - 'L''origine (exemple : origine des vins )'
+            - 'Un label ou une mention (exemple : fait maison)'
+            - 'Une marque (exemple : la marque de rhum proposée est mensongère)'
             - Autre (à préciser)
         - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur
           rank: 4
           type: TEXT
-          placeholder: Soyez factuel et courtois, merci !
+          placeholder: Soyez factuel et courtois, merci !
         - label: Avez-vous déjà expliqué le problème au commerçant &#160;?
           rank: 5
           type: RADIO
@@ -322,28 +317,19 @@
             - Non
       fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
 - title: Service
-  example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
+  example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
   subcategories:
     - title: Le personnel est peu aimable
-      example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
-      information:
-        title: Ceci ne constitue pas un motif de signalement.
-        content: Il n'existe pas de disposition spécifique contraignant le professionnel à être aimable ou à sourire... C'est une question de relation client !
-          <br/>Nous vous invitons à contacter directement le gérant pour faire part de votre mécontentement.
-        actions:
-          - question: Vous avez été victime d'harcélement ou d'injure?
-            answer: Vous pouvez faire une pré-plainte en ligne ici<br><a href="https://www.pre-plainte-en-ligne.gouv.fr" target="_blank">https://www.pre-plainte-en-ligne.gouv.fr</a>
-          - question: Vous souhaitez signaler un cas de maltraitance envers une personne handicapée ou agée?
-            answer: Vous pouvez appeler le 3977. C'est le numéro d’appel national unique pour les victimes ou les témoins de maltraitance envers les personnes handicapées ou agées...
-        outOfScope: true
+      example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
+      information: !!import/single ../common/info/amabilite.yml
     - title: On a refusé de me donner une table ou de me servir
-      example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, refus de d''une table en terrasse pour un simple café'
+      example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, refus de d''une table en terrasse pour un simple café'
       detailInputs:
         - label: Date du problème
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Pour quelle raison a-t-on refusé de vous servir ou de vous donner une table ?
+        - label: Pour quelle raison a-t-on refusé de vous servir ou de vous donner une table ?
           rank: 2
           type: TEXTAREA
       fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
@@ -351,24 +337,21 @@
       subcategoriesTitle: Est-ce un chien d'assistance&#160;?
       subcategories:
         - title: Non
-          information:
-            content: Tout comme dans un hôtel, un restaurateur (ou un cafetier) peut refuser la présence d’un chien dans son établissement.
-              <br/>Si vous souhaiter pouvoir prendre votre chien, pensez à questionner le restaurateur lors de votre réservation. <br> <br> Il existe également des sites internet qui recensent les établissements acceptant les chiens.
-            outOfScope: true
+          information: !!import/single ../common/info/chienassistance.yml
         - title: Oui (je possède la carte d'assistance)
           detailInputs:
             - label: Date du refus
               rank: 1
               type: DATE
-            - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
+            - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
               rank: 2
               type: TEXTAREA
-          fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+          fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
 - title: Qualité des plats/boissons
-  example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
+  example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
   subcategories:
     - title: Les plats ne correspondent pas à la description
-      example: 'Exemple : Produit industriel vendu sous la mention "fait maison"'
+      example: 'Exemple : Produit industriel vendu sous la mention "fait maison"'
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -378,14 +361,14 @@
           rank: 2
           type: RADIO
           options:
-            - 'L''origine (exemple : origine des vins )'
+            - 'L''origine (exemple : origine des vins)'
             - 'Un label ou une mention (exemple: fait maison)'
             - 'Une marque (exemple: la marque de rhum proposée est mensongère'
             - Autre (à préciser)
         - label: Précisez en quelques mots pourquoi vous trouvez cela trompeur
           rank: 3
           type: TEXT
-          placeholder: Soyez factuel et courtois, merci !
+          placeholder: Soyez factuel et courtois, merci !
         - label: Avez-vous déjà expliqué le problème au commerçant &#160;?
           rank: 4
           type: RADIO
@@ -403,10 +386,10 @@
         - label: Date de constat
           rank: 1
           type: DATE
-        - label: Quel produit est concerné ?
+        - label: Quel produit est concerné ?
           rank: 2
           type: TEXT
-        - label: Quel est le problème ?
+        - label: Quel est le problème ?
           rank: 3
           type: RADIO
           options:
