@@ -63,6 +63,12 @@
       "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
     }
   },
+  "reports": {
+    "review": {
+      "title": "Donnez votre avis - SignalConso",
+      "description": "Donnez votre avis sur la réponse de l'entreprise à votre signalement sur SignalConso"
+    }
+  },
   "secured": {
     "reports": {
       "title": "Suivi des signalements - SignalConso",
