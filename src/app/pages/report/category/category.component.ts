@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { Report, Step } from '../../../model/Report';
@@ -12,8 +12,7 @@ import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
 
@@ -90,6 +89,7 @@ export class CategoryComponent implements OnInit {
 
   removeStoredReport() {
     this.reportStorageService.removeReportInProgressFromStorage();
+    this.report = undefined;
   }
 
   scrollToElement($element): void {
@@ -99,25 +99,28 @@ export class CategoryComponent implements OnInit {
 
 
 export const Illustrations = [
-  { title: 'Vous avez rencontré un problème avec une entreprise&#160;?', picture: 'picture-problem.svg' },
-  { title: 'Faites un signalement avec SignalConso.', picture: 'picture-alert.svg' },
-  { title: `L'entreprise est prévenue et peut intervenir.`, picture: 'picture-pro.svg' },
-  { title: 'La répression des fraudes intervient si c’est nécessaire.', picture: 'picture-inspect.svg' },
+  { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'picture-problem.svg' },
+  { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'picture-alert.svg' },
+  { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'picture-pro.svg' },
+  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'picture-inspect.svg' },
 ]
 
 @Component({
   selector: 'app-illustration-card',
   template: `
-    <div class="card">
+    <div class="card" [ngClass]="firstCard ?'first-card' : lastCard ? 'last-card' : ''">
+      <img src="/assets/images/{{illustration.picture}}" class="card-img-top" alt="Illustration" />
       <div class="card-body">
-        <h6 class="card-title" [innerHTML]="illustration.title"></h6>
+        <div class="card-title" [innerHTML]="illustration.title"></div>
       </div>
-      <img src="/assets/images/{{illustration.picture}}" class="card-img-bottom" alt="Illustration" />
     </div>
   `,
+  styleUrls: ['./category.component.scss']
 })
 export class IllustrationCardComponent {
 
   @Input() illustration: { title: string, picture: string };
+  @Input() firstCard = false;
+  @Input() lastCard = false;
 
 }

@@ -1,12 +1,15 @@
 <header role="banner" id="banner" tabindex="-1" #banner>
+  <div class="d-lg-none beta">
+    Ce site est en version BETA.
+  </div>
   <div class="row d-lg-none mr-0 ml-0">
-    <div class="col-6">
-      <a class="brand" routerLink="/">
-        <img src="/assets/images/signalconso.svg" alt="Retour à la page sommaire" />
-      </a>
+    <div class="col-3 text-left">
+      <img id="marianne" src="/assets/images/logo-marianne.png" alt="Logo marianne" />
     </div>
-    <div class="col-6 beta font-weight-bold text-center">
-      Ce site est en BETA
+    <div class="col-6 text-center">
+      <a class="brand" routerLink="/">
+        <img src="/assets/images/logo-signalconso.png" alt="Retour à la page sommaire" />
+      </a>
     </div>
   </div>
 
@@ -14,15 +17,18 @@
     <div class="float-left font-weight-bold">
       Ce site est en version BETA.
     </div>
-    <div class="text-right departments">
+    <div class="text-right departments d-none d-lg-block">
       Service actif en régions Auvergne-Rhône-Alpes - Centre-Val de Loire & Occitanie
     </div>
   </div>
 
   <nav class="navbar navbar-expand-lg">
-    <a id="logo" class="navbar-brand d-none d-lg-block" routerLink="/">
-      <img src="/assets/images/signalconso.svg" alt="Retour à la page sommaire" />
-    </a>
+    <div class="d-none d-lg-block">
+      <img src="/assets/images/logo-marianne.png" alt="Logo marianne" />
+      <a id="logo" class="navbar-brand brand" routerLink="/">
+        <img src="/assets/images/logo-signalconso.png" alt="Retour à la page sommaire" />
+      </a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="material-icons">menu</i><span>MENU</span>
@@ -30,24 +36,34 @@
     <div class="collapse navbar-collapse" id="navbarContent" #navbarContent>
       <ul class="navbar-nav ml-lg-auto">
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-          <a class="nav-link" routerLink="/qui-sommes-nous">
+          <a class="nav-link" routerLink="/"
+             [ngClass]="activeItem === navItems.Home ? 'active' : ''">
+            Accueil
+          </a>
+        </li>
+        <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
+          <a class="nav-link" routerLink="/qui-sommes-nous"
+             [ngClass]="activeItem === navItems.About ? 'active' : ''">
             Qui sommes-nous ?
           </a>
         </li>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.Pro] else how">
-          <a class="nav-link" routerLink="/comment-ça-marche/professionnel">
+          <a class="nav-link" routerLink="/comment-ça-marche/professionnel"
+             [ngClass]="activeItem === navItems.HowPro || activeItem === navItems.HowConso ? 'active' : ''">
             Comment ça marche ?
           </a>
         </li>
         <ng-template #how>
           <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-            <a class="nav-link" routerLink="/comment-ça-marche/consommateur">
+            <a class="nav-link" routerLink="/comment-ça-marche/consommateur"
+               [ngClass]="activeItem === navItems.HowConso || activeItem === navItems.HowPro ? 'active' : ''">
               Comment ça marche ?
             </a>
           </li>
         </ng-template>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.DGCCRF]">
-          <a class="nav-link" routerLink="/mode-emploi-dgccrf">
+          <a class="nav-link" routerLink="/mode-emploi-dgccrf"
+             [ngClass]="activeItem === navItems.HowDGCCRF ? 'active' : ''">
             Mode d'emploi
           </a>
         </li>

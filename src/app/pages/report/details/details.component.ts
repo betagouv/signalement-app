@@ -6,7 +6,7 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { DescriptionLabel, DetailInput, InputType, ReportingDateLabel, ReportingTimeslotLabel } from '../../../model/Anomaly';
+import { DescriptionLabel, DetailInput, InputType, ReportingDateLabel } from '../../../model/Anomaly';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';

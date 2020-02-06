@@ -14,6 +14,30 @@
   }
 }
 
+h1 {
+  font-family: "Gill Sans";
+  font-size: 30px !important;
+  line-height: 40px !important;
+}
+
+h2 {
+  position: relative;
+  display: inline-block;
+
+  &:before {
+    content: '';
+    width: 80px;
+    height: 7px;
+    position: absolute;
+    bottom: -14px;
+    background: $white;
+  }
+
+  &.text-secondary:before {
+    background: $secondary;
+  }
+}
+
 .category {
   background: $white;
   border-radius: 2px;
@@ -59,23 +83,60 @@
 .indication {
   font-size: 14px;
   font-weight: bold;
-  padding-top: 1rem;
+  padding-top: 2rem;
+  margin-bottom: 0;
 }
 
 .card {
-  height: 100%;
+  border: none;
+  background-color: $white;
+
+  .card-body {
+    padding: 0;
+  }
 
   .card-title {
     font-weight: bold;
-    height: 80px;
-    text-align: left;
+    text-align: center;
+  }
+
+  @media #{$larger-than-desktop} {
+    min-width: 240px;
+    padding-bottom: 24px;
+    background: url("../../../../assets/images/ellipse.png") no-repeat bottom;
+
+    &:not(.first-card):before {
+      content: '';
+      width: calc(50% + 3px);
+      height: 4px;
+      position: absolute;
+      bottom: 10px;
+      left: -15px;
+      background: $blue;
+    }
+    &:not(.last-card):after {
+      content: '';
+      width: calc(50% + 3px);
+      height: 4px;
+      position: absolute;
+      bottom: 10px;
+      left: calc(50% + 12px);
+      background: $blue;
+    }
   }
 }
 
 .carousel {
 
   .carousel-inner {
-    padding: 0 50px;
+
+    @media #{$smaller-than-desktop} {
+      padding: 0 calc(25% - 140px);
+    }
+
+    @media #{$smaller-than-tablet} {
+      padding: 0 calc(50% - 140px);
+    }
   }
 
   .carousel-indicators {
@@ -95,5 +156,13 @@
       }
     }
 
+  }
+}
+
+
+@media #{$smaller-than-phablet} {
+  h1 {
+    font-size: 20px !important;
+    line-height: 28px !important;
   }
 }
