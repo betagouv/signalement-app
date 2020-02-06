@@ -1,7 +1,7 @@
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -26,8 +26,30 @@ import { CompaniesModule } from './pages/companies/companies.module';
 import { Angulartics2Module } from 'angulartics2';
 import { ComponentsModule, NgxLoadingConfig } from './components/components.module';
 import { ReportsModule } from './pages/reports/reports.module';
+import { environment } from '../environments/environment';
+import * as SentryBrowser from '@sentry/browser';
 
 registerLocaleData(localeFr, 'fr');
+
+class ErrorLogger implements ErrorHandler {
+
+  static initWith(sentry: any) {
+      return () => new ErrorLogger(sentry);
+  }
+
+  constructor(private sentry: any) {
+      if (environment.sentryDsn) {
+          this.sentry.init({ dsn: environment.sentryDsn });
+      }
+  }
+
+  handleError(error: any): void {
+      if (environment.sentryDsn) {
+          this.sentry.captureException(error.originalError || error);
+      }
+      throw error; // for default behaviour rather than silently dying
+  }
+}
 
 @NgModule({
   declarations: [
@@ -67,6 +89,7 @@ registerLocaleData(localeFr, 'fr');
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: ErrorHandler, useFactory: ErrorLogger.initWith(SentryBrowser) }
   ]
 })
 export class AppModule {
