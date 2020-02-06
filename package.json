@@ -39,6 +39,7 @@
     "@ngx-pwa/local-storage": "^6.2.5",
     "angulartics2": "^8.3.0",
     "bootstrap": "^4.3.1",
+    "caniuse-lite": "^1.0.30001025",
     "core-js": "^2.6.10",
     "cors": "~2.8.5",
     "echarts": "^4.4.0",
