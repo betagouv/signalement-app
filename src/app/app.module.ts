@@ -24,6 +24,7 @@ import { TooltipModule } from 'ngx-bootstrap';
 import { AccountModule } from './pages/account/account.module';
 import { CompaniesModule } from './pages/companies/companies.module';
 import { Angulartics2Module } from 'angulartics2';
+import { ReportsModule } from './pages/reports/reports.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -51,6 +52,7 @@ registerLocaleData(localeFr, 'fr');
       anchorScrolling: 'enabled',
     }),
     ReportModule,
+    ReportsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AccountModule,
