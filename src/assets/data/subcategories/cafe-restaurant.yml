@@ -78,7 +78,7 @@
           fileLabel: Merci de joindre si possible une photo pour appuyer votre signalement.
         - title: Je subis des nuisances à cause des odeurs, du bruit
           example: 'Exemple : les odeurs des poubelles ou de la cuisine arrivent dans mon appartement'
-          information: !!import/single ../common/info/voisinage.yml
+          information: !!import/single ../common/info/voisinage.yml
     - title: Hygiène du personnel
       example: 'Exemple : tenue sale ou pas adaptée'
       subcategories:
@@ -188,7 +188,7 @@
             - Autre (à préciser)
             - Non, aucune raison
       fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Je trouve que les prix sont très chers
       example: 'Exemple : le prix du menu est très cher pour la qualité'
       information:
@@ -321,7 +321,7 @@
   subcategories:
     - title: Le personnel est peu aimable
       example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
-      information: !!import/single ../common/info/amabilite.yml
+      information: !!import/single ../common/info/amabilite.yml
     - title: On a refusé de me donner une table ou de me servir
       example: 'Exemple : Refus au motif de la présence d''enfant, pour un motif discriminatoire, refus de d''une table en terrasse pour un simple café'
       detailInputs:
@@ -337,7 +337,7 @@
       subcategoriesTitle: Est-ce un chien d'assistance&#160;?
       subcategories:
         - title: Non
-          information: !!import/single ../common/info/chienassistance.yml
+          information: !!import/single ../common/info/chienassistance.yml
         - title: Oui (je possède la carte d'assistance)
           detailInputs:
             - label: Date du refus

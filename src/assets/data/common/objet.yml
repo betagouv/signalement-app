@@ -1,6 +1,6 @@
 - title: Garantie et remboursement
   example: 'Exemple : retour, garantie, échange'
-  subcategories: !!import/single ../common/garantie.yml
+  subcategories: !!import/single ../common/garantie.yml
 - title: Notice et emballage
   example: 'Exemple : données de la classe énergétique absente, étiquette du vêtement incomplète, notice de fonctionnement uniquement en anglais'
   subcategories:

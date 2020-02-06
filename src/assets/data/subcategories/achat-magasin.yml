@@ -204,7 +204,7 @@
               optionnal: true
         - title: Je subis des nuisances à cause du magasin
           example: 'Exemple : les odeurs des poubelles arrivent dans mon appartement, les clients se garent devant chez moi'
-          information: !!import/single ../common/info/voisinage.yml
+          information: !!import/single ../common/info/voisinage.yml
         - title: Autre problème d'hygiène
     - title: Produit périmé
       subcategoriesTitle: 'Vous voulez signaler&#160;:'
@@ -243,7 +243,7 @@
                     answer: Contacter directement le service client de votre magasin pour lui expliquer.
         - title: Un produit périmé en particulier
           subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
-          subcategories: !!import/single ../common/date.yml
+          subcategories: !!import/single ../common/date.yml
     - title: Publicité
       example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
       subcategories:
@@ -355,7 +355,7 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
-                  consumerActions: !!import/single ../common/actions/garantie.yml
+                  consumerActions: !!import/single ../common/actions/garantie.yml
                 - title: Il y a plus de 2 ans
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -384,7 +384,7 @@
                               rank: 5
                               type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                          consumerActions: !!import/single ../common/actions/garantie.yml
+                          consumerActions: !!import/single ../common/actions/garantie.yml
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -429,7 +429,7 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
-                  consumerActions: !!import/single ../common/actions/garantie.yml
+                  consumerActions: !!import/single ../common/actions/garantie.yml
                 - title: Il y a plus de 6 mois
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -458,7 +458,7 @@
                               rank: 5
                               type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                          consumerActions: !!import/single ../common/actions/garantie.yml
+                          consumerActions: !!import/single ../common/actions/garantie.yml
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -480,7 +480,7 @@
           subcategories:
             - title: Oui
               description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-              consumerActions: !!import/single ../common/actions/garantie.yml
+              consumerActions: !!import/single ../common/actions/garantie.yml
             - title: Non
               information:
                 title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
@@ -550,7 +550,7 @@
     - title: Autre
       subcategories:
         - title: Problème d'accessibilité
-          information: !!import/single ../common/info/accessibilite.yml
+          information: !!import/single ../common/info/accessibilite.yml
         - title: Problème lié à l'écologie
           example: "Exemple : sac en plastique, éclairage de nuit "
         - title: Problème de voisinage
@@ -561,7 +561,7 @@
   subcategories:
     - title: C'est un aliment ou une boisson
       example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
-      subcategories: !!import/single ../common/nourriture.yml
+      subcategories: !!import/single ../common/nourriture.yml
     - title: C'est un objet
       example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
-      subcategories: !!import/single ../common/objet.yml
+      subcategories: !!import/single ../common/objet.yml

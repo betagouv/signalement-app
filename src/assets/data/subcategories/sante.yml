@@ -39,7 +39,7 @@
             - sur la boîte
             - autre (à préciser)
       fileLabel: Merci de joindre une photo de la publicité ou de la boîte afin de traiter au mieux votre signalement.
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Un produit de santé est de mauvaise qualité
       example: 'Exemple : béquille qui se tord, audioprothèse qui se fissure rapidement, préservatif qui se perce'
       detailInputs:
@@ -63,7 +63,7 @@
         - label: "Expliquez le problème en quelques mots :"
           rank: 4
           type: TEXT
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Professionnel de la santé et médecine douce
   example: 'Exemple : dentiste, opticien, kiné, psychiatre, médecine douce'
   subcategoriesTitle: 'Quel type de médecine exerce-t-il ?'
@@ -85,7 +85,7 @@
                 - affichage des prix incomplet
                 - les prix affichés ne sont pas à jour
           fileLabel: Vous pouvez joindre une photo pour appuyer votre signalement.
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Le professionnel n'indique pas s' il est conventionné, ou s'il est secteur 1 ou secteur 2
           example: Cette indication est obligatoire sur sa plaque (au niveau de sa porte ou du hall d'entrée) et dans la salle d'attente.
           detailInputs:
@@ -106,7 +106,7 @@
                 - conventionné secteur 2
                 - non conventionné
               optionnal: true
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Les prix sont exagérés
           information:
             title: Un professionnel de santé non conventionné peut choisir ses tarifs
@@ -138,7 +138,7 @@
                 - label: Combien a coûté le soin au total (environ) ?
                   rank: 4
                   type: TEXT
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Le devis est incomplet
               detailInputs:
                 - label: Date du rendez-vous
@@ -155,7 +155,7 @@
                     - lieu de fabrication de la prothèse le cas échéant
                     - montant des honoraires du soin
                     - montant remboursé par l'assurance maladie
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: J'ai payé plus cher que le devis
               detailInputs:
                 - label: Date de constat
@@ -167,7 +167,7 @@
                 - label: Combien avez-vous payé ?
                   rank: 3
                   type: TEXT
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              consumerActions: !!import/single ../common/actions/defaut.yml
         - title: La prestation est mal (ou pas) réalisée
           example: "Exemple : j'ai mal été soigné"
           information:
@@ -204,7 +204,7 @@
                 - Non
               optionnal: true
           fileLabel: Vous pouvez joindre une photo
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Les prix sont trop chers
           example: "Exemple : ce naturopathe est plus cher que ceux de la région"
           information:
@@ -230,7 +230,7 @@
               options:
                 - Oui
                 - Non
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: La publicité ou la description du soin est trompeuse
           example: 'Exemple : durée plus courte que celle affichée, les résultats "garantis" ne se sont pas réalisés, publicité en vitrine trompeuse'
           detailInputs:
@@ -253,7 +253,7 @@
               type: TEXT
               placeholder: Soyez factuel et courtois, merci !
           fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
       subcategories:
         - title: Une publicité est trompeuse ou non appliquée
@@ -266,7 +266,7 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Je ne suis pas satisfait de la qualité de mes lunettes/prothèses
           detailInputs:
             - label: Date du constat
@@ -286,9 +286,9 @@
               rank: 4
               type: TEXT
           fileLabel: Merci de joindre si possible une photo du produit ou de la facture d'achat.
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Hôpital / Clinique
   subcategories:
     - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
@@ -305,7 +305,7 @@
           rank: 2
           type: TEXT
       fileLabel: Merci de joindre si posisble une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: J'ai été facturé pour un supplément que je n'avais pas demandé
       example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
       detailInputs:
@@ -333,7 +333,7 @@
             - Oui (à préciser)
             - Non
       fileLabel: Merci de joindre une photo de la facture si possible afin d'appuyer votre signalement.
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autre
 - title: Pharmacie
   subcategories:
@@ -352,7 +352,7 @@
                 - Les prix ne sont pas tous indiqués dans les rayons
                 - Les prix ne sont pas visibles pour les médicaments vendus derrière le comptoir
                 - Il n'y a pas de catalogue des prix disponible (papier ou sur écran)
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Les prix sont exagérés
           information:
             title: Le pharmacien a le droit de faire les prix qu'il souhaite (sauf pour les médicaments remboursables).
@@ -361,20 +361,20 @@
               Le prix des médicaments remboursables est fixe. Ces prix sont en ligne sur le site <a href="http://base-donnees-publique.medicaments.gouv.fr" target="_blank"> http://base-donnees-publique.medicaments.gouv.fr/</a>
             outOfScope: true
         - title: Autres
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Problème de commande
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autre
       subcategories:
         - title: Problème d'accessibilité
-          information: !!import/single ../common/info/accessibilite.yml
+          information: !!import/single ../common/info/accessibilite.yml
         - title: Personnel peu aimable
-          information: !!import/single ../common/info/amabilite.yml
+          information: !!import/single ../common/info/amabilite.yml
         - title: Mon chien a été refusé dans la pharmacie
           subcategoriesTitle: Est-ce un chien d'assistance&#160;?
           subcategories:
             - title: Non
-              information: !!import/single ../common/info/chienassistance.yml
+              information: !!import/single ../common/info/chienassistance.yml
             - title: Oui (je possède la carte d'assistance)
               detailInputs:
                 - label: Date du refus
@@ -387,7 +387,7 @@
         - title: Autre
 - title: Ambulance
   example: "et autre transport sanitaire (exemple : taxi)"
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Cure
   example: 'Exemple : thalassothérapie, thermalisme'
   subcategories:
@@ -408,7 +408,7 @@
                 - les prix sont affichés de façon non visible
                 - les prix affichés ne sont pas clairs
           fileLabel: Si possible merci de joindre une photo pour appuyer votre signalement.
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: J'ai payé plus cher que les prix affichés
           example: "Exemple : j'ai payé un supplément non prévu sans être prévenu, les prix affichés ne sont pas à jour "
           detailInputs:
@@ -423,7 +423,7 @@
                 - les prix des suppléments et options ne sont pas affichés
                 - "j'ai payé un supplément (exemple : supplément chambre simple) sans donner mon accord avant"
           fileLabel: Si possible merci de joindre une photo de la facture ou de l'affichage des prix pour appuyer votre signalement.
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Je n'ai pas eu de facture (note)
           detailInputs:
             - label: Date de constat (ou date de paiement)
@@ -435,7 +435,7 @@
               options:
                 - je n'ai pas eu de facture et je ne l'ai pas demandée
                 - j'ai demandé une facture mais on ne me l'a pas donnée
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Publicité mensongère
       example: 'Exemple : spa simple déclaré en thalassothérapie, soins qui ne correspondent pas à la description sur la publicité, utilisation frauduleuse du label Qualicert'
       detailInputs:
@@ -463,21 +463,21 @@
           rank: 4
           type: TEXT
       fileLabel: Merci de joindre tout document (photo, pdf) pouvant appuyer votre signalement.
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Contrat
       example: "Exemple : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autre
       subcategories:
         - title: Problème d'accessibilité
-          information: !!import/single ../common/info/accessibilite.yml
+          information: !!import/single ../common/info/accessibilite.yml
         - title: Personnel peu aimable
-          information: !!import/single ../common/info/amabilite.yml
+          information: !!import/single ../common/info/amabilite.yml
         - title: Mon chien a été refusé
           subcategoriesTitle: Est-ce un chien d'assistance&#160;?
           subcategories:
             - title: Non
-              information: !!import/single ../common/info/chienassistance.yml
+              information: !!import/single ../common/info/chienassistance.yml
             - title: Oui (je possède la carte d'assistance)
               detailInputs:
                 - label: Date du refus

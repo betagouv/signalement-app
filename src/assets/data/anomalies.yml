@@ -6,35 +6,35 @@ list:
     description: bar, cafeteria, food truck...
     rank: 9
     icon: icon_rest.png
-    subcategories: !!import/single subcategories/cafe-restaurant.yml
+    subcategories: !!import/single subcategories/cafe-restaurant.yml
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
     description: supermarché, boulangerie, magasin de jouet...
     rank: 10
     icon: icon_store.png
-    subcategories: !!import/single subcategories/achat-magasin.yml
+    subcategories: !!import/single subcategories/achat-magasin.yml
   - category: Services aux particuliers
     categoryId: SERV
     path: services-aux-particuliers
     description: coiffeur, pressing, esthéticienne, aide à la personne...
     rank: 11
     icon: icon_service.png
-    subcategories: !!import/single subcategories/services-aux-particuliers.yml
+    subcategories: !!import/single subcategories/services-aux-particuliers.yml
   - category: Téléphonie / Eau-Gaz-Electricité
     categoryId: TEL
     path: telephonie-eau-gaz-electricite
     description: forfait téléphone, fournisseur d'accès, contrat gaz...
     rank: 12
     icon: icon_tel.png
-    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
+    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: banque-assurance-mutuelle
     description: crédit, assurance
     rank: 13
     icon: icon_bank.png
-    subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
+    subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
   - category: Intoxication alimentaire
     categoryId: INTOX
     path: intoxication-alimentaire
@@ -54,7 +54,7 @@ list:
     hidden: true
     rank: 110
     icon: icon_material.png
-    subcategories: !!import/single subcategories/produits-objets.yml
+    subcategories: !!import/single subcategories/produits-objets.yml
   - category: Achat sur internet
     categoryId: INTERNET
     path: achat-sur-internet
@@ -79,21 +79,21 @@ list:
     description: dépannage, plombier, couvreur, pose de panneaux...
     rank: 17
     icon: icon_craft.png
-    subcategories: !!import/single subcategories/travaux-renovation.yml
+    subcategories: !!import/single subcategories/travaux-renovation.yml
   - category: Voyage / Loisirs
     categoryId: VOY
     path: voyage-loisirs
     description: voyage organisé, camping, concert, sport, billets d''avion, taxi
     rank: 18
     icon: icon_hobbies.png
-    subcategories: !!import/single subcategories/voyage-loisirs.yml
+    subcategories: !!import/single subcategories/voyage-loisirs.yml
   - category: Immobilier
     categoryId: IMM
     path: immobilier
     description: location, agence immobiliere, syndicat de copropriété...
     rank: 105
     icon: icon_real_estate.png
-    subcategories: !!import/single subcategories/immobilier.yml
+    subcategories: !!import/single subcategories/immobilier.yml
   - category: Secteur de la santé
     categoryId: SANT
     path: sante
@@ -101,7 +101,7 @@ list:
     rank: 106
     icon: icon_health.png
     subcategoriesTitle: 'Votre problème concerne :'
-    subcategories: !!import/single subcategories/sante.yml
+    subcategories: !!import/single subcategories/sante.yml
   - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
@@ -109,21 +109,21 @@ list:
     rank: 107
     icon: icon_transport.png
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
-    subcategories: !!import/single subcategories/voiture-vehicule.yml
+    subcategories: !!import/single subcategories/voiture-vehicule.yml
   - category: Animaux
     categoryId: ANI
     path: animaux
     description: vétérinaire, aliment pour animaux, service de garde...
     rank: 108
     icon: icon_pet.png
-    subcategories: !!import/single subcategories/animaux.yml
+    subcategories: !!import/single subcategories/animaux.yml
   - category: Démarches administratives
     categoryId: ADM
     path: demarches-administratives
     description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
     rank: 109
     icon: icon_marianne.png
-    subcategories: !!import/single subcategories/demarches-administratives.yml
+    subcategories: !!import/single subcategories/demarches-administratives.yml
   - category: Travail au noir
     categoryId: TNOIR
     path: travail-au-noir
@@ -163,4 +163,4 @@ list:
     path: ehpad
     rank: 110
     icon: icon_epahd.png
-    subcategories: !!import/single subcategories/ehpad.yml
+    subcategories: !!import/single subcategories/ehpad.yml

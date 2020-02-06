@@ -9,10 +9,10 @@
           subcategories:
             - title: Augmentation du débit ou des données disponibles
               example: 'Exemple : passage de 20 Go à 40 Go pour 5 euros de plus'
-              information: !!import/single ../common/info/tel.yml
+              information: !!import/single ../common/info/tel.yml
             - title: Modification concernant les sms, mms ou appels
               example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
-              information: !!import/single ../common/info/tel.yml
+              information: !!import/single ../common/info/tel.yml
             - title: Rajout d'une option payante
               example: 'Exemple : chaine télé supplémentaire, option cyber-sécurité, option livre audio, option musique...'
               subcategoriesTitle: Quel est le type d'option ?
@@ -21,9 +21,9 @@
                   subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir ?
                   subcategories:
                     - title: Oui, j'ai été prévenu par email ou courrier
-                      information: !!import/single ../common/info/tel.yml
+                      information: !!import/single ../common/info/tel.yml
                     - title: Non, je n'ai rien reçu   
-                      consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                      consumerActions: !!import/single ../common/actions/telephonie-internet.yml
                       detailInputs:
                         - label: Date du début de l'option (vous pouvez préciser le premier mois facturé)
                           rank: 1
@@ -33,7 +33,7 @@
                           type: TEXT
                           placeholder: "Indiquez l'intitulé figurant la facture"
                 - title: option liée à la musique, des livres, une chaine télé, un anti-virus
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
                   detailInputs:
                     - label: A partir de quand cette option va-t-elle être payante ?
                       rank: 1
@@ -59,15 +59,15 @@
                       type: DATE
                       optionnal: true 
             - title: Le lien pour refuser l'augmentation de mon forfait ne fonctionne pas
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Autre problème de facturation ou de contrat
           subcategories:
             - title: Utilisation de mon forfait à l'étranger
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
             - title: Autre
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
@@ -76,13 +76,13 @@
     - title: Résiliation / changement d'opérateur
       subcategories:
         - title: Frais de résiliation
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Restitution du matériel
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Mon ancien opérateur continue de me prélever
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Appels, sms ou email indésirables
       example: 'Exemple : spams, appel incessant, raoppel vers un numéro payant'
       subcategories:
@@ -105,9 +105,9 @@
       subcategories:        
         - title: Qualité du service client
           example: 'Exemple : pas de réponse du service client, service client payant'
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Téléphone acheté avec le forfait
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
 - title: Eau
   subcategories:
     - title: Contrat / facture
@@ -134,7 +134,7 @@
                   rank: 2
                   type: TEXTAREA
               fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
-              consumerActions: !!import/single ../common/actions/eau.yml
+              consumerActions: !!import/single ../common/actions/eau.yml
         - title: Je ne suis pas d'accord avec la consommation indiquée sur ma facture
           information:
             title: Vous devez demander à faire vérifier le compteur.
@@ -152,9 +152,9 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-          consumerActions: !!import/single ../common/actions/eau.yml
+          consumerActions: !!import/single ../common/actions/eau.yml
         - title: Autres
-          consumerActions: !!import/single ../common/actions/eau.yml
+          consumerActions: !!import/single ../common/actions/eau.yml
     - title: Coupure de l'eau pour impayé
       example: Mon débit d'eau a été réduit car je ne peux payer ma facture
       detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
@@ -168,7 +168,7 @@
           rank: 2
           type: DATE
       fileLabel: Joindre une copie du contrat / règlement.
-      consumerActions: !!import/single ../common/actions/eau.yml
+      consumerActions: !!import/single ../common/actions/eau.yml
     - title: Dégâts / travaux sur les canalisations
       example: 'Exemple : fuite d''eau avant compteur'
       information:
@@ -234,7 +234,7 @@
           rank: 6
           type: TEXTAREA
       fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
-      consumerActions: !!import/single ../common/actions/energie.yml
+      consumerActions: !!import/single ../common/actions/energie.yml
     - title: Publicité mensongère ou trompeuse
       example: 'Exemple : publicité "offre verte" mensongère'
       detailInputs:
@@ -270,7 +270,7 @@
             - Oui
             - Non
       fileLabel: Photo(s) si possible
-      consumerActions: !!import/single ../common/actions/energie.yml
+      consumerActions: !!import/single ../common/actions/energie.yml
     - title: Contrat
       example: 'Exemple : reconduction de contrat, clause abusive'
       subcategories:
@@ -300,7 +300,7 @@
                         - label: Précisez comment et à qui vous avez fait la demande
                           rank: 3
                           type: TEXTAREA
-                      consumerActions: !!import/single ../common/actions/energie.yml
+                      consumerActions: !!import/single ../common/actions/energie.yml
                     - title: Non
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -328,7 +328,7 @@
                             - label: Précisez comment et à qui vous avez fait la demande
                               rank: 3
                               type: TEXTAREA
-                          consumerActions: !!import/single ../common/actions/energie.yml
+                          consumerActions: !!import/single ../common/actions/energie.yml
                         - title: Non
                           information:
                             title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -340,7 +340,7 @@
                         content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
                         outOfScope: true
                     - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
-                      consumerActions: !!import/single ../common/actions/energie.yml
+                      consumerActions: !!import/single ../common/actions/energie.yml
             - title: Dans une boutique
               information:
                 title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -356,10 +356,10 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-          consumerActions: !!import/single ../common/actions/energie.yml
+          consumerActions: !!import/single ../common/actions/energie.yml
         - title: Autres
-          consumerActions: !!import/single ../common/actions/energie.yml
+          consumerActions: !!import/single ../common/actions/energie.yml
     - title: Facturation
-      consumerActions: !!import/single ../common/actions/energie.yml
+      consumerActions: !!import/single ../common/actions/energie.yml
 - title: Autres (Fioul / GPL / granulés de bois...)
-  consumerActions: !!import/single ../common/actions/energie.yml
+  consumerActions: !!import/single ../common/actions/energie.yml
