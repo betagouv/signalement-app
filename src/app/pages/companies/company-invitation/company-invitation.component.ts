@@ -47,8 +47,8 @@ export class CompanyInvitationComponent implements OnInit {
 
   submitForm() {
     this.showSuccess = false;
-    this.loading = true;
     if (this.invitationForm.valid) {
+      this.loading = true;
       this.companyAccessesService
           .sendInvitation(
             this.route.snapshot.paramMap.get('siret'),
