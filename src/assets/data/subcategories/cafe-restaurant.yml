@@ -179,7 +179,7 @@
             - Oui
             - Non
         - label: Si oui, vous a-t-il donné une raison ?
-          rank : 5
+          rank: 5
           type: RADIO
           options:
             - Les prix affichés ne sont pas à jour

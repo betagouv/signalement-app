@@ -202,7 +202,7 @@
                   consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Autres
               consumerActions: !!import/single ../common/actions/defaut.yml
-        - title : Garanties
+        - title: Garanties
           description: Vous trouverez des informations sur la garantie qui s'applique dans votre cas sur <a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales" target="_blank">https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales</a>
           subcategories:
             - title: Garantie de parfait achèvement
