@@ -5,6 +5,9 @@
   "env": {
     "API_BASE_URL": {
       "value": "https://signalement-api-pr-200.herokuapp.com"
+    },
+    "SENTRY_DSN": {
+      "value": "https://026fe640a3d5408bac25d56b8aa9647c@sentry.data.gouv.fr/44"
     }
   },
   "formation": {
