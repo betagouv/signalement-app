@@ -1,5 +1,5 @@
 - title: Dépannage
-  example: 'Vous faites appel à un professionnel dans l''urgence à votre domicile (par exemple : vous avez perdu votre clef d''appartement et vous contactez un serrurier pour qu''il vienne vous l''ouvrir, vous appelez un plombier suite à l''explosion de votre canalisation)'
+  example: 'Vous faites appel à un professionnel dans l''urgence à votre domicile (par exemple : vous avez perdu votre clef d''appartement et vous contactez un serrurier pour qu''il vienne vous l''ouvrir, vous appelez un plombier suite à l''explosion de votre canalisation)'
   subcategories:
     - title: Prix
       subcategories:
@@ -14,7 +14,7 @@
         - title: Prix final non conforme au prix annoncé
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Publicité et pratique du professionnel
-      example: "Exemple : information trompeuse ou mensongère, absence d'information, contrainte"
+      example: "Exemple : information trompeuse ou mensongère, absence d'information, contrainte"
       subcategories:
         - title: Absence d'information ou information incomplète
           consumerActions: !!import/single ../common/actions/defaut.yml
@@ -50,7 +50,7 @@
         - title: Contrainte du professionnel
           detailInputs:
             - label: Précisez les informations sur le contexte
-              example: "Exemple : lieu de la rencontre, discours du professionnel, âge"
+              example: "Exemple : lieu de la rencontre, discours du professionnel, âge"
               rank: 1
               type: TEXTAREA
             - label: Date du constat
@@ -68,7 +68,7 @@
       subcategories:
         - title: Malfaçon
           example: Constat d'un défaut résultant d'une mauvaise exécution des travaux
-          description: Le constat résulte d'une mauvaise exécution des travaux, vous pouvez faire jouer votre garantie !
+          description: Le constat résulte d'une mauvaise exécution des travaux, vous pouvez faire jouer votre garantie !
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml
@@ -77,7 +77,7 @@
 - title: Travaux / rénovation
   subcategories:
     - title: Prix
-      example: "Exemple : prix non affiché, devis non respecté"
+      example: "Exemple : prix non affiché, devis non respecté"
       subcategories:
         - title: Prix exagéré / élevé
           information:
@@ -90,7 +90,7 @@
         - title: Prix non affiché
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Publicité et pratique du professionnel
-      example: "Exemple : information trompeuse ou mensongère"
+      example: "Exemple : information trompeuse ou mensongère"
       subcategories:
         - title: Absence d'information ou information incomplète
           consumerActions: !!import/single ../common/actions/defaut.yml
@@ -126,7 +126,7 @@
         - title: Contrainte du professionnel
           detailInputs:
             - label: Précisez les informations sur le contexte
-              example: "Exemple : lieu de la rencontre, discours du professionnel, âge"
+              example: "Exemple : lieu de la rencontre, discours du professionnel, âge"
               rank: 1
               type: TEXTAREA
             - label: Date du constat
@@ -141,19 +141,19 @@
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Prestation
-      example: "Exemple : malfaçons sur le chantier, travaux commencés mais jamais terminés"
+      example: "Exemple : malfaçons sur le chantier, travaux commencés mais jamais terminés"
       subcategories:
         - title: Malfaçon
           example: Constat d'un défaut résultant d'une mauvaise exécution des travaux
-          description: Le constat résulte d'une mauvaise exécution des travaux, vous pouvez faire jouer votre garantie !
+          description: Le constat résulte d'une mauvaise exécution des travaux, vous pouvez faire jouer votre garantie !
         - title: Les travaux ne sont toujours pas terminés
           consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Contrat
-      example: "Exemple : contrat non respecté, délai de rétractation, clause abusive"
+      example: "Exemple : contrat non respecté, délai de rétractation, clause abusive"
       subcategories:
         - title: Droit de rétractation
           example: Une fois le contrat signé, vous souhaitez revenir en arrière
-          subcategoriesTitle: Où avez-vous signé le contrat ?
+          subcategoriesTitle: Où avez-vous signé le contrat ?
           subcategories:
             - title: À votre domicile
               example: Un démarcheur est venu chez vous
@@ -161,7 +161,7 @@
                 <br />Vous n’avez pas à vous justifier auprès du commerçant.
                 <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
             - title: À distance
-              example: 'Exemple : sur internet'
+              example: 'Exemple : sur internet'
               description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
                 <br />Vous n’avez pas à vous justifier auprès du commerçant.
                 <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
@@ -171,7 +171,7 @@
                 content: Il n'y a pas de délai de retractation pour votre cas.
                 outOfScope: true
             - title: Sur un stand dans une foire ou salon
-              subcategoriesTitle: Avez-vous un crédit affecté ?
+              subcategoriesTitle: Avez-vous un crédit affecté ?
               subcategories:
                 - title: Non
                   information: 
@@ -202,7 +202,7 @@
                   consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Autres
               consumerActions: !!import/single ../common/actions/defaut.yml
-        - title : Garanties
+        - title: Garanties
           description: Vous trouverez des informations sur la garantie qui s'applique dans votre cas sur <a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales" target="_blank">https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales</a>
           subcategories:
             - title: Garantie de parfait achèvement
