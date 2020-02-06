@@ -3,35 +3,12 @@
 
 header {
 
-  .beta {
-    background: $light-grey;
-    font-size: 18px;
-    line-height: 24px;
-    height: 40px;
-    padding: 8px 22px;
-
-    .departments {
-      font-size: 16px;
-      text-align: right;
-      text-decoration-line: underline;
-    }
-  }
-
   .brand > img {
     height: 55px;
     margin-left: 20px;
   }
 
   @media #{$smaller-than-desktop} {
-
-    .beta {
-      font-size: 12px;
-      line-height: 20px;
-      height: 20px;
-      padding: 0;
-      text-align: center;
-      width: 100%;
-    }
 
     img#marianne {
       height: 30px;
