@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('ResetPasswordComponent', () => {
   let component: PasswordResetComponent;
@@ -21,7 +22,8 @@ describe('ResetPasswordComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         NgxLoadingModule,
-        Angulartics2RouterlessModule.forRoot()
+        Angulartics2RouterlessModule.forRoot(),
+        ComponentsModule
       ],
       providers: []
     })

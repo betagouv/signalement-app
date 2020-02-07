@@ -1,6 +1,6 @@
-- title: Courrier/société qui se fait passer pour l'administration
+- title: Courrier / société qui se fait passer pour l'administration
   consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Site internet pour obtenir un document administratif (casier, acte de naissance)
+- title: Site internet pour obtenir un document administratif (casier, acte de naissance, vignette crit'air)
   consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
 - title: Autre

@@ -1,10 +1,10 @@
 {
-  "default" : {
+  "default": {
     "title": "SignalConso, un service public pour les consommateurs",
-    "description": "Signalez un problème au commerçant (magasins, commerces de proximité, cafés et restaurants...) et à la répression des fraudes : pratique d'hygiène, nourriture / boissons, matériel / objet, prix / paiement, publicité, services associés à l'achat."
+    "description": "Signalez un problème au commerçant (magasins, commerces de proximité, cafés et restaurants...) et à la répression des fraudes : pratique d'hygiène, nourriture / boissons, matériel / objet, prix / paiement, publicité, services associés à l'achat."
   },
   "about": {
-    "title": "Qui sommes-nous ? - SignalConso",
+    "title": "Qui sommes-nous ? - SignalConso",
     "description": "SignalConso est un service proposé par la DGCCRF (Direction Générale de la Concurrence, de la Consommation et de la Répression des Fraudes) au travers d'une Startup d’État. Il permet à la fois de comprendre ses droits en tant que consommateurs et d’être aidé pour les faire respecter."
   },
   "notfound": {
@@ -12,15 +12,15 @@
     "description": "SignalConso est un service proposé par la DGCCRF (Direction Générale de la Concurrence, de la Consommation et de la Répression des Fraudes) au travers d'une Startup d’État. Il permet à la fois de comprendre ses droits en tant que consommateurs et d’être aidé pour les faire respecter."
   },
   "how": {
-    "title": "Comment ça marche ? - SignalConso",
+    "title": "Comment ça marche ? - SignalConso",
     "description": "Vous signalez votre problème en remplissant le formulaire en ligne. Notre équipe contacte l'entreprise afin de l'informer de votre signalement. L'entreprise peut procéder spontanément aux corrections utiles, sans sanction. Votre signalement est enregistré à la répression des fraudes (DGCCRF)."
   },
   "pro": {
-    "title": "Comment ça marche ? - SignalConso",
-    "description": "Votre entreprise a été signalée ? Comprenez comment consulter le signalement afin de corriger le problème et de répondre au consommateur."
+    "title": "Comment ça marche ? - SignalConso",
+    "description": "Votre entreprise a été signalée ? Comprenez comment consulter le signalement afin de corriger le problème et de répondre au consommateur."
   },
   "retractation": {
-    "title": "Delai de rétractation ? - SignalConso",
+    "title": "Delai de rétractation ? - SignalConso",
     "description": "Comprenez le délai de rétractation et calculez votre date limite de rétractation"
   },
   "cgu": {
@@ -61,6 +61,12 @@
     "resetPassword": {
       "title": "Nouveau mot de passe - SignalConso",
       "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+    }
+  },
+  "reports": {
+    "review": {
+      "title": "Donnez votre avis - SignalConso",
+      "description": "Donnez votre avis sur la réponse de l'entreprise à votre signalement sur SignalConso"
     }
   },
   "secured": {

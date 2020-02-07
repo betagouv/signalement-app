@@ -1,6 +1,21 @@
 @import "../../../../theme/media-queries";
 @import "../../../../theme/variables";
 
+
+.btn {
+  padding: 10px 16px;
+  margin-top: 6px;
+  margin-left: 25px;
+  font-size: 18px;
+  line-height: 18px;
+
+  img {
+    height: 18px;
+    bottom: 3px;
+    position: relative;
+  }
+}
+
 .dropdown-menu {
 
   background-color: $secondary;
@@ -20,12 +35,13 @@
 }
 
 
-@media #{$smaller-than-tablet} {
+@media #{$smaller-than-desktop} {
 
   .btn {
     height: 29px;
     font-size: 12px;
     padding: 0 16px;
+    margin-top: 0px;
     margin-right: 10px;
 
     img {

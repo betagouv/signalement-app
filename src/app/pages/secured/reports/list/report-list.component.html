@@ -171,7 +171,7 @@
         <div class="row">
           <div class="col-12 text-center">          &nbsp;
             <button type="submit" class="btn btn-primary">Filtrer les signalements</button>          &nbsp;
-            <a href="{{reportExtractUrl}}">
+            <a href="{{reportExtractUrl}}" *appRole="[roles.Admin]">
               <img alt="bouton exporter en XLS" title="exporter en XLS" src="/assets/images/icon_export_xls.png"/>
             </a>
           </div>
@@ -342,7 +342,7 @@
                 {{ report.status }}
               </td>
               <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
-                <i class="material-icons md-light-blue" title="Ajouter une action">add_circle</i>
+                <i class="material-icons md-blue" title="Ajouter une action">add_circle</i>
               </td>
             </tr>
           </ng-container>

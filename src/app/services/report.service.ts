@@ -10,7 +10,7 @@ import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
-import { ReportResponse } from '../model/ReportEvent';
+import { ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 
 @Injectable({
   providedIn: 'root',
@@ -106,6 +106,13 @@ export class ReportService {
         );
       }),
     );
+  }
+
+  postReviewOnReportResponse(reportId: string, reviewOnReportResponse: ReviewOnReportResponse) {
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'response', 'review']),
+        reviewOnReportResponse
+    ) ;
   }
 
   getReport(reportId: string) {
