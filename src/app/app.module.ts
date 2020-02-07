@@ -31,23 +31,24 @@ import * as SentryBrowser from '@sentry/browser';
 
 registerLocaleData(localeFr, 'fr');
 
-class ErrorLogger implements ErrorHandler {
+class ErrorLogger extends ErrorHandler {
 
   static initWith(sentry: any) {
-      return () => new ErrorLogger(sentry);
+    return () => new ErrorLogger(sentry);
   }
 
   constructor(private sentry: any) {
-      if (environment.sentryDsn) {
-          this.sentry.init({ dsn: environment.sentryDsn });
-      }
+    super();
+    if (environment.sentryDsn) {
+      this.sentry.init({ dsn: environment.sentryDsn });
+    }
   }
 
   handleError(error: any): void {
-      if (environment.sentryDsn) {
-          this.sentry.captureException(error.originalError || error);
-      }
-      throw error; // for default behaviour rather than silently dying
+    if (environment.sentryDsn) {
+      this.sentry.captureException(error.originalError || error);
+    }
+    super.handleError(error);   // for default behaviour rather than silently dying
   }
 }
 
