@@ -46,7 +46,7 @@ export class AttachmentsComponent implements OnInit {
   }
 
   checkExtension(filename: string) {
-    return this.allowedExtensions.includes(filename.split('.').pop().toLowerCase());
+    return this.allowedExtensions.indexOf(filename.split('.').pop().toLowerCase()) != -1;
   }
 
   selectFile() {
