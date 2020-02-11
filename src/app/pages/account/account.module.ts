@@ -11,6 +11,7 @@ import { AccountRegistrationComponent } from './account-registration/account-reg
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { AuthGuard } from '../../guards/auth.guard';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
+import { PasswordStrengthModule } from '../../components/password-strength/password-strength.module';
 
 defineLocale('fr', frLocale);
 
@@ -42,6 +43,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     ComponentsModule,
+    PasswordStrengthModule
   ],
   exports: [
     RouterModule,

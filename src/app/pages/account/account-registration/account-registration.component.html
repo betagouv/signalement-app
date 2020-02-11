@@ -68,6 +68,7 @@
               </div>
               <div class="col-sm-6">
                 <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
+                <app-password-strength [passwordToCheck]="passwordCtrl.value"></app-password-strength>
                 <small class="form-text text-muted">Le mot de passe doit avoir 8 caractères minimum.</small>
               </div>
             </div>
