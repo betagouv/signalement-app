@@ -6,6 +6,7 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
+import { PasswordStrengthModule } from '../../../components/password-strength/password-strength.module';
 
 describe('AccountActivationComponent', () => {
   let component: AccountRegistrationComponent;
@@ -23,7 +24,8 @@ describe('AccountActivationComponent', () => {
         RouterTestingModule.withRoutes([{ path: 'connexion', redirectTo: '' }]),
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
-        ComponentsModule
+        ComponentsModule,
+        PasswordStrengthModule
       ],
       providers: []
     })

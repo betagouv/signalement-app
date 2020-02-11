@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
+import { PasswordStrengthModule } from '../../../components/password-strength/password-strength.module';
 
 describe('ResetPasswordComponent', () => {
   let component: PasswordResetComponent;
@@ -23,7 +24,8 @@ describe('ResetPasswordComponent', () => {
         RouterTestingModule,
         NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
-        ComponentsModule
+        ComponentsModule,
+        PasswordStrengthModule
       ],
       providers: []
     })
