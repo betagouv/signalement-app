@@ -392,7 +392,7 @@
                           <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                         outOfScope: true
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
                             example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
@@ -465,7 +465,7 @@
                         content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                         outOfScope: true
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
                             example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
