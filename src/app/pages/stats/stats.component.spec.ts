@@ -10,6 +10,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { AppRoleDirective } from '../../directives/app-role.directive';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
+import { ComponentsModule } from '../../components/components.module';
 
 describe('StatsComponent', () => {
   let component: StatsComponent;
@@ -36,7 +37,8 @@ describe('StatsComponent', () => {
       imports: [
         HttpClientModule,
         NgxEchartsModule,
-        NgxLoadingModule
+        NgxLoadingModule,
+        ComponentsModule
       ]
     })
     .compileComponents();

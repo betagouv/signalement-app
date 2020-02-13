@@ -43,9 +43,17 @@
     "title": "Contact - SignalConso",
     "description": "Trouvez le bon interlocuteur à contacter sur SignalConso"
   },
+  "account": {
+    "login": {
+      "title": "Authentification - SignalConso",
+      "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso"
+    },
+    "activation": {
+      "title": "Activation de l'espace entreprise - SignalConso",
+      "description": "Activez votre espace entreprise sur SignalConso"
+    }
+  },
   "login": {
-    "title": "Authentification - SignalConso",
-    "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso",
     "forgotPassword": {
       "title": "Mot de passe oublié - SignalConso",
       "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
@@ -53,6 +61,12 @@
     "resetPassword": {
       "title": "Nouveau mot de passe - SignalConso",
       "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+    }
+  },
+  "reports": {
+    "review": {
+      "title": "Donnez votre avis - SignalConso",
+      "description": "Donnez votre avis sur la réponse de l'entreprise à votre signalement sur SignalConso"
     }
   },
   "secured": {
@@ -89,6 +103,10 @@
     "subscriptions": {
       "title": "Abonnements - SignalConso",
       "description": "Abonnez-vous pour recevoir les signalements qui vous concernent"
+    },
+    "admin": {
+      "title": "Admin - SignalConso",
+      "description": "Invitation à rejoindre SignalConso (DGCCRF)"
     }
   }
 }

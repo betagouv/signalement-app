@@ -4,42 +4,51 @@
 header {
 
   .brand > img {
-    max-width: 89px;
-    padding: 7px;
+    height: 55px;
+    margin-left: 20px;
   }
 
-  .beta {
-    background: $light-grey;
-    font-size: 18px;
-    line-height: 24px;
-    height: 40px;
-    padding: 8px 22px;
+  @media #{$smaller-than-desktop} {
 
-    .departments {
-      font-size: 16px;
-      text-align: right;
-      text-decoration-line: underline;
+    img#marianne {
+      height: 30px;
+      margin: 10px 0px;
     }
 
-    @media #{$smaller-than-desktop} {
-      font-size: 12px;
-      line-height: 12px;
-      height: 28px;
+    .brand > img {
+      height: 50px;
+      margin-left: 0px;
     }
   }
 
   .navbar {
-    height: 86px;
-    padding: 22px;
-
-    .navbar-brand > img {
-      width: 290px;
-    }
+    height: 65px;
+    padding: 10px 22px;
 
     .nav-link {
-      color: $black;
+      color: $secondary;
       font-size: 18px;
-      padding: 13px;
+      font-weight: 600;
+      padding: 13px 25px;
+      cursor: pointer;
+
+      &:focus, &:hover, &.active {
+        color: $blue;
+      }
+    }
+
+    .btn {
+      padding: 10px 16px;
+      margin-top: 6px;
+      margin-left: 25px;
+      font-size: 18px;
+      line-height: 18px;
+
+      img {
+        height: 18px;
+        bottom: 3px;
+        position: relative;
+      }
     }
 
     @media #{$smaller-than-desktop} {
@@ -52,10 +61,15 @@ header {
         padding: 0;
       }
 
-      .navbar-nav {
-        width: fit-content;
-        border: 1px solid rgba(28, 28, 28, 0.15);
-        border-radius: 0.25rem;
+      .navbar-collapse{
+
+        z-index: 2;
+
+        .navbar-nav {
+          width: fit-content;
+          border: 1px solid rgba(28, 28, 28, 0.15);
+          border-radius: 0.25rem;
+        }
       }
 
       .nav-item {
@@ -71,7 +85,7 @@ header {
           padding: 4px 24px;
 
           &:hover {
-            background-color: $primary;
+            background-color: $secondary;
             color: white;
           }
         }
