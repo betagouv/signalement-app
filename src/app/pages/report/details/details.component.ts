@@ -97,7 +97,7 @@ export class DetailsComponent implements OnInit {
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
     }
-    if (!this.detailInputs.find(input => input.type === InputType.Textarea)) {
+    if (!this.detailInputs.some(input => input.type === InputType.Textarea)) {
       this.detailInputs.push(Object.assign(new DetailInput(), {
         label: DescriptionLabel,
         rank: this.detailInputs.length + 1,
