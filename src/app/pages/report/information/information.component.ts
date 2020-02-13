@@ -70,7 +70,7 @@ export class InformationComponent implements OnInit, OnDestroy {
     if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
-    } else if (this.report.subcategories && this.getReportLastSubcategory().information) {
+    } else if (this.getReportLastSubcategory() && this.getReportLastSubcategory().information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.getReportLastSubcategory().title);
       this.informationToDisplay = this.getReportLastSubcategory().information;
     }
