@@ -2,187 +2,189 @@
 <section class="section section-white">
   <div class="container max-width">
 
-    <div class="pb-sm-5 pt-sm-5" *ngIf="report.employeeConsumer === undefined; else detailsFormTemplate">
-      <h4 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h4>
-      <div class="text-center pt-2 pt-sm-3 pb-lg-5">
-        <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
-          Oui
-        </button>
-        <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5 mt-2" appAutofocus="true" (click)="setEmployeeConsumerValue(false)">
-          Non, je n'y travaille pas
-        </button>
-      </div>
-    </div>
-
-    <ng-template #detailsFormTemplate>
-
-      <div class="row notification info ml-0 md-0">
-        <div class="col-1 pl-0 d-none d-sm-block">
-          <img alt="Icône information" src="/assets/images/picture-observation.svg">
-        </div>
-        <div class="col-12 col-sm-11">
-          <ng-container *ngIf="!report.employeeConsumer else employeeConsumer">
-            <b>Votre description ci-dessous sera lue par l'entreprise et la répression des fraudes.</b>
-            <br />Les pièces jointes seront également lues par l'entreprise.
-            <br /><br/> Si vous souhaitez que l'entreprise ne connaisse pas votre identité,
-            <b>cachez votre nom sur vos pièces jointes et ne citez rien de personnel</b>.
-          </ng-container>
-          <ng-template #employeeConsumer>
-            Votre signalement sera lu <b>uniquement par la répression des fraudes.</b>
-            <br />Rien ne sera communiqué à votre employeur.
-          </ng-template>
+    <ng-container *ngIf="report">
+      <div class="pb-sm-5 pt-sm-5" *ngIf="report.employeeConsumer === undefined; else detailsFormTemplate">
+        <h4 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h4>
+        <div class="text-center pt-2 pt-sm-3 pb-lg-5">
+          <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
+            Oui
+          </button>
+          <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5 mt-2" appAutofocus="true" (click)="setEmployeeConsumerValue(false)">
+            Non, je n'y travaille pas
+          </button>
         </div>
       </div>
 
-      <hr />
+      <ng-template #detailsFormTemplate>
 
-      <div class="row notification success ml-0 md-0" *ngIf="getReportLastSubcategory()?.detailTitle">
-        <h4 [innerHTML]="getReportLastSubcategory().detailTitle"></h4>
-      </div>
-
-      <div class="row notification note ml-0 md-0" *ngIf="getReportLastSubcategory()?.description">
-        <div class="col-1 pl-0 d-none d-sm-block">
-          <img alt="Icône information" src="/assets/images/icon_info.png">
-        </div>
-        <div class="col-12 col-sm-11">
-          <p [innerHTML]="getReportLastSubcategory().description"></p>
-        </div>
-      </div>
-
-      <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
-
-        <div class="form__group" *ngFor="let detailInput of this.detailInputs">
-          <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
-            <span [innerHTML]="detailInput.label"></span> <span class="error" *ngIf="!detailInput.optionnal">*</span>
-          </label>
-
-          <div class="row" *ngIf="detailInput.type === 'TEXT'">
-            <div class="col-12">
-              <input type="text"
-                     [formControlName]="getFormControlName(detailInput)"
-                     [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
-                     (blur)="searchKeywords(getFormControl(detailInput))"
-                     [id]="getFormControlId(detailInput)">
-            </div>
+        <div class="row notification info ml-0 md-0">
+          <div class="col-1 pl-0 d-none d-sm-block">
+            <img alt="Icône information" src="/assets/images/picture-observation.svg">
           </div>
-
-          <div class="row" *ngIf="detailInput.type === 'DATE_NOT_IN_FUTURE'">
-            <div class="col-12 col-sm-6">
-              <input type="text"
-                     [formControlName]="getFormControlName(detailInput)"
-                     [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
-                     [id]="getFormControlId(detailInput)"
-                     bsDatepicker
-                     [maxDate]="maxDate"
-                     autocomplete="off"
-                     [bsConfig]="{ containerClass: 'theme-default' }">
-            </div>
+          <div class="col-12 col-sm-11">
+            <ng-container *ngIf="!report.employeeConsumer else employeeConsumer">
+              <b>Votre description ci-dessous sera lue par l'entreprise et la répression des fraudes.</b>
+              <br />Les pièces jointes seront également lues par l'entreprise.
+              <br /><br/> Si vous souhaitez que l'entreprise ne connaisse pas votre identité,
+              <b>cachez votre nom sur vos pièces jointes et ne citez rien de personnel</b>.
+            </ng-container>
+            <ng-template #employeeConsumer>
+              Votre signalement sera lu <b>uniquement par la répression des fraudes.</b>
+              <br />Rien ne sera communiqué à votre employeur.
+            </ng-template>
           </div>
-
-          <div class="row" *ngIf="detailInput.type === 'DATE'">
-            <div class="col-12 col-sm-6">
-              <input type="text"
-                     [formControlName]="getFormControlName(detailInput)"
-                     [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
-                     [id]="getFormControlId(detailInput)"
-                     bsDatepicker
-                     autocomplete="off"
-                     [bsConfig]="{ containerClass: 'theme-default' }">
-            </div>
-          </div>
-
-          <div class="row" *ngIf="detailInput.type === 'TIMESLOT'">
-            <div class="col-12 col-sm-6">
-              <select [formControlName]="getFormControlName(detailInput)"
-                      [id]="getFormControlId(detailInput)"
-                      [class]="getFormControlValue(detailInput) ? 'selected' : ''">
-                <option disabled value="">Plage horaire</option>
-                <option *ngFor="let hour of plageHoraireList" value="de {{hour}}h à {{hour + 1}}h">de {{hour}}h à {{hour + 1}}h</option>
-              </select>
-            </div>
-          </div>
-
-          <ng-container *ngIf="detailInput.type === 'RADIO'">
-            <div class="row pb-2 pl-3" *ngFor="let option of detailInput.options">
-              <div class="col-2 col-sm-1 text-right pr-1">
-                <input type="radio"
-                       [formControlName]="getFormControlName(detailInput)"
-                       [value]="option"
-                       [id]="getFormControlId(detailInput, option)"
-                       (change)="initRadioInputPrecision(detailInput, option)"/>
-              </div>
-              <div class="col-10 col-sm-11 pl-1">
-                <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)" [class]="hasRequiredError(detailInput, option) ? 'error' : ''" [innerHTML]="option">
-                </label>
-                <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, option))">
-                  <div class="col-12">
-                    <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="detailInput.type === 'CHECKBOX'">
-
-            <div class="row pb-2 pl-3" *ngFor="let precisionControl of getFormControl(detailInput).controls; let i = index">
-              <div class="col-2 col-sm-1 text-right pr-1">
-                <input type="checkbox"
-                       [formControl]="precisionControl"
-                       [id]="getFormControlId(detailInput, detailInput.options[i])"
-                       (change)="initCheckboxInputPrecision(detailInput, i)"/>
-              </div>
-              <div class="col-10 col-sm-11 pl-1">
-                <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, detailInput.options[i])" [class]="hasRequiredError(detailInput, detailInput.options[i]) ? 'error' : ''">
-                  {{detailInput.options[i]}}
-                </label>
-                <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, detailInput.options[i]))">
-                  <div class="col-12">
-                    <input type="text" [formControlName]="getFormControlName(detailInput, detailInput.options[i])" [id]="getFormControlId(detailInput, detailInput.options[i], true)" placeholder="Précisez ...">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="detailInput.type === 'TEXTAREA'">
-            <br />
-            <span class="note" [innerHTML]="detailInput.example" *ngIf="detailInput.example"></span>
-            <textarea [formControlName]="getFormControlName(detailInput)"
-                      [id]="getFormControlId(detailInput)"
-                      (blur)="searchKeywords(getFormControl(detailInput))"
-                      rows="3"
-                      maxlength="500"
-                      placeholder="500 caractères maximum">
-          </textarea>
-          </ng-container>
-
-        </div>
-        <div class="form__group">
-          <app-attachments [label]="this.getReportLastSubcategory()?.fileLabel"
-                           [uploadedFiles]="uploadedFiles"
-                           [origin]="fileOrigins.Consumer">
-          </app-attachments>
-          <div class="note" *ngIf="!report.employeeConsumer">
-            Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective ! 
-            <br/> Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).
-          </div>
-        </div>
-        <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
-          Veuillez renseigner les champs obligatoires.<br />
         </div>
 
         <hr />
-        <div class="notification warning" [@openClose]="keywordDetected ? 'open' : 'closed'">
-          <span [innerHTML]="keywordDetected?.message"></span>
-          <span *ngIf="keywordDetected" class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
-        </div>
-        <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
-          <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
-          Étape suivante : identifier l'entreprise
-        </button>
-      </form>
 
-    </ng-template>
+        <div class="row notification success ml-0 md-0" *ngIf="getReportLastSubcategory()?.detailTitle">
+          <h4 [innerHTML]="getReportLastSubcategory().detailTitle"></h4>
+        </div>
+
+        <div class="row notification note ml-0 md-0" *ngIf="getReportLastSubcategory()?.description">
+          <div class="col-1 pl-0 d-none d-sm-block">
+            <img alt="Icône information" src="/assets/images/icon_info.png">
+          </div>
+          <div class="col-12 col-sm-11">
+            <p [innerHTML]="getReportLastSubcategory().description"></p>
+          </div>
+        </div>
+
+        <form [formGroup]="detailsForm" (submit)="submitDetailsForm()" id="detailsForm" *ngIf="detailsForm">
+
+          <div class="form__group" *ngFor="let detailInput of this.detailInputs">
+            <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
+              <span [innerHTML]="detailInput.label"></span> <span class="error" *ngIf="!detailInput.optionnal">*</span>
+            </label>
+
+            <div class="row" *ngIf="detailInput.type === 'TEXT'">
+              <div class="col-12">
+                <input type="text"
+                       [formControlName]="getFormControlName(detailInput)"
+                       [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
+                       (blur)="searchKeywords(getFormControl(detailInput))"
+                       [id]="getFormControlId(detailInput)">
+              </div>
+            </div>
+
+            <div class="row" *ngIf="detailInput.type === 'DATE_NOT_IN_FUTURE'">
+              <div class="col-12 col-sm-6">
+                <input type="text"
+                       [formControlName]="getFormControlName(detailInput)"
+                       [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
+                       [id]="getFormControlId(detailInput)"
+                       bsDatepicker
+                       [maxDate]="maxDate"
+                       autocomplete="off"
+                       [bsConfig]="{ containerClass: 'theme-default' }">
+              </div>
+            </div>
+
+            <div class="row" *ngIf="detailInput.type === 'DATE'">
+              <div class="col-12 col-sm-6">
+                <input type="text"
+                       [formControlName]="getFormControlName(detailInput)"
+                       [placeholder]="detailInput.placeholder ? detailInput.placeholder : detailInput.label"
+                       [id]="getFormControlId(detailInput)"
+                       bsDatepicker
+                       autocomplete="off"
+                       [bsConfig]="{ containerClass: 'theme-default' }">
+              </div>
+            </div>
+
+            <div class="row" *ngIf="detailInput.type === 'TIMESLOT'">
+              <div class="col-12 col-sm-6">
+                <select [formControlName]="getFormControlName(detailInput)"
+                        [id]="getFormControlId(detailInput)"
+                        [class]="getFormControlValue(detailInput) ? 'selected' : ''">
+                  <option disabled value="">Plage horaire</option>
+                  <option *ngFor="let hour of plageHoraireList" value="de {{hour}}h à {{hour + 1}}h">de {{hour}}h à {{hour + 1}}h</option>
+                </select>
+              </div>
+            </div>
+
+            <ng-container *ngIf="detailInput.type === 'RADIO'">
+              <div class="row pb-2 pl-3" *ngFor="let option of detailInput.options">
+                <div class="col-2 col-sm-1 text-right pr-1">
+                  <input type="radio"
+                         [formControlName]="getFormControlName(detailInput)"
+                         [value]="option"
+                         [id]="getFormControlId(detailInput, option)"
+                         (change)="initRadioInputPrecision(detailInput, option)"/>
+                </div>
+                <div class="col-10 col-sm-11 pl-1">
+                  <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)" [class]="hasRequiredError(detailInput, option) ? 'error' : ''" [innerHTML]="option">
+                  </label>
+                  <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, option))">
+                    <div class="col-12">
+                      <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="detailInput.type === 'CHECKBOX'">
+
+              <div class="row pb-2 pl-3" *ngFor="let precisionControl of getFormControl(detailInput).controls; let i = index">
+                <div class="col-2 col-sm-1 text-right pr-1">
+                  <input type="checkbox"
+                         [formControl]="precisionControl"
+                         [id]="getFormControlId(detailInput, detailInput.options[i])"
+                         (change)="initCheckboxInputPrecision(detailInput, i)"/>
+                </div>
+                <div class="col-10 col-sm-11 pl-1">
+                  <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, detailInput.options[i])" [class]="hasRequiredError(detailInput, detailInput.options[i]) ? 'error' : ''">
+                    {{detailInput.options[i]}}
+                  </label>
+                  <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, detailInput.options[i]))">
+                    <div class="col-12">
+                      <input type="text" [formControlName]="getFormControlName(detailInput, detailInput.options[i])" [id]="getFormControlId(detailInput, detailInput.options[i], true)" placeholder="Précisez ...">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="detailInput.type === 'TEXTAREA'">
+              <br />
+              <span class="note" [innerHTML]="detailInput.example" *ngIf="detailInput.example"></span>
+              <textarea [formControlName]="getFormControlName(detailInput)"
+                        [id]="getFormControlId(detailInput)"
+                        (blur)="searchKeywords(getFormControl(detailInput))"
+                        rows="3"
+                        maxlength="500"
+                        placeholder="500 caractères maximum">
+            </textarea>
+            </ng-container>
+
+          </div>
+          <div class="form__group">
+            <app-attachments [label]="this.getReportLastSubcategory()?.fileLabel"
+                             [uploadedFiles]="uploadedFiles"
+                             [origin]="fileOrigins.Consumer">
+            </app-attachments>
+            <div class="note" *ngIf="!report.employeeConsumer">
+              Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective !
+              <br/> Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).
+            </div>
+          </div>
+          <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
+            Veuillez renseigner les champs obligatoires.<br />
+          </div>
+
+          <hr />
+          <div class="notification warning" [@openClose]="keywordDetected ? 'open' : 'closed'">
+            <span [innerHTML]="keywordDetected?.message"></span>
+            <span *ngIf="keywordDetected" class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+            <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
+            Étape suivante : identifier l'entreprise
+          </button>
+        </form>
+
+      </ng-template>
+    </ng-container>
   </div>
 </section>

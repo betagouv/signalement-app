@@ -274,7 +274,7 @@
                 - Non
                 - Je n'ai pas demandé
               optionnal: true
-            - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
+            - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https&#58;//www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
               rank: 5
               type: TEXT
               placeholder: "Lien vers la publicité"
@@ -392,14 +392,14 @@
                           <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                         outOfScope: true
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
                             example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
                                     <li>présent dès le départ et</li>
                                     <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                                   </ul>"
-                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                            answer: C'est à vous de prouver l'existence du vice caché, avec un rapport d'expertise par exemple.
                               <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
             - title: Occasion
               subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
@@ -465,14 +465,14 @@
                         content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                         outOfScope: true
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
                             example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
                                     <li>présent dès le départ et</li>
                                     <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                                   </ul>"
-                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                            answer: C'est à vous de prouver l'existence du vice caché, avec un rapport d'expertise par exemple.
                               <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
         - title: Autre raison
           example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'

@@ -97,6 +97,14 @@ export class DetailsComponent implements OnInit {
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
     }
+    if (!this.detailInputs.some(input => input.type === InputType.Textarea)) {
+      this.detailInputs.push(Object.assign(new DetailInput(), {
+        label: DescriptionLabel,
+        rank: this.detailInputs.length + 1,
+        type: InputType.Textarea,
+        optionnal: true
+      }));
+    }
   }
 
   getDefaultDetailInputs() {
