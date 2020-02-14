@@ -421,14 +421,14 @@
 
                 <div class="form__group pt-2">
                   <label for="proAnswerDgccrfInput">
-                    Vous pouvez également, si vous le souhaitez, apporter une précision <u>à l'attention de la DGCCRF</u> qui ne sera pas transmise au consommateur
+                    Vous pouvez également, si vous le souhaitez, apporter une précision <b>à l'attention de la DGCCRF</b> qui ne sera pas transmise au consommateur
                   </label>
                   <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3" placeholder="Cette réponse pourra être consultée par la DGCCRF uniquement.">
                   </textarea>
                 </div>
 
                 <div class="form__group">
-                  <app-attachments label="Pièces jointes <u>visibles uniquement par la DGCCRF</u>"
+                  <app-attachments label="Pièces jointes <b>visibles uniquement par la DGCCRF</b>"
                                    [uploadedFiles]="uploadedFiles"
                                    [origin]="fileOrigins.Professional">
                   </app-attachments>

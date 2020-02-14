@@ -52,7 +52,7 @@
   height: auto;
 }
 
-.footer__logo img {
+.footer__logo img:not(.icon) {
   max-height: 33px;
   border-radius: 3px;
 }
