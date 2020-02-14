@@ -10,7 +10,7 @@
     <table class="table table-sm">
       <tbody>
       <tr *ngFor="let uploadedFile of uploadedFiles">
-        <td class="text-left" class="relative" *ngIf="uploadedFile.loading" colspan="2">
+        <td class="text-left position-relative" *ngIf="uploadedFile.loading" colspan="2">
           {{uploadedFile.displayedFilename}}
           <ngx-loading [show]="uploadedFile.loading" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
         </td>
