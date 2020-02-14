@@ -214,7 +214,7 @@
           subcategories:
             - title: Des produits vendus au rayon frais
               example: 'Exemple : viande, poisson, quiche, jambon'
-              subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
+              subcategoriesTitle: La date est-elle <b>dépassée</b> au moment de la vente ou de l'achat&#160;?
               subcategories:
                 - title: Oui
                   detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée.
