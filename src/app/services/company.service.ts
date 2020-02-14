@@ -6,7 +6,6 @@ import { Api, ServiceUtils } from './service.utils';
 import { catchError, map } from 'rxjs/operators';
 
 export const MaxCompanyResult = 20;
-export const Radius = 0.2;
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +18,10 @@ export class CompanyService {
 
   searchCompanies(search: string, searchPostalCode: string) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
-    httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
+    httpParams = httpParams.append('code_postal', searchPostalCode.toString());
+    httpParams = httpParams.append('per_page', MaxCompanyResult.toString());
     return this.http.get<CompanySearchResult>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', search]),
+      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]),
       {
         params: httpParams
       }
@@ -43,10 +42,9 @@ export class CompanyService {
 
   searchCompaniesBySiret(siret: string) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('siret', siret);
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get<CompanySearchResult>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'siret', siret]),
+      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', siret]),
       {
         params: httpParams
       }
