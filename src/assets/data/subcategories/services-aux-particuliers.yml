@@ -34,7 +34,7 @@
         - title: Le personnel ne dispose pas des diplômes requis
         - title: Problème d'hygiène
           example: "Exemple : établissement sale, mauvaises pratiques d'hygiène"
-        - title: Je subis des nuisances à cause des odeurs, du bruit ..
+        - title: Je subis des nuisances à cause des odeurs, du bruit...
           information: !!import/single ../common/info/tel.yml
         - title: Le personnel n'est pas aimable
           information: !!import/single ../common/info/amabilite.yml
@@ -57,7 +57,7 @@
       subcategories:
         - title: Le personnel ne dispose pas des diplômes requis
         - title: Problème d'hygiène
-        - title: Je subis des nuisances à cause des odeurs, du bruit ..
+        - title: Je subis des nuisances à cause des odeurs, du bruit...
           information: !!import/single ../common/info/tel.yml
         - title: Le personnel n'est pas aimable
           information: !!import/single ../common/info/amabilite.yml

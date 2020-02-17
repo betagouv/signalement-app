@@ -296,7 +296,7 @@
         title: Vous devez contacter la Commissions des Usagers
         content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
     - title: J'ai dû payer un "forfait administratif"
-      example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
+      example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade... Ces frais sont interdits.
       detailInputs:
         - label: Date de sortie (ou date de la facture)
           rank: 1
@@ -304,7 +304,7 @@
         - label: Quel est le montant de ces frais ?
           rank: 2
           type: TEXT
-      fileLabel: Merci de joindre si posisble une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
+      fileLabel: Merci de joindre si possible une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: J'ai été facturé pour un supplément que je n'avais pas demandé
       example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
@@ -383,7 +383,7 @@
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre
 - title: Ambulance
   example: "et autre transport sanitaire (exemple : taxi)"
@@ -486,5 +486,5 @@
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre
