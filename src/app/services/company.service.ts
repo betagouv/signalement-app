@@ -77,6 +77,7 @@ const knownCompanies = [
   {
     etablissement: {
       siret: '12002503600035',
+      nom_raison_sociale: 'DIRECTION GENERALE DE LA CONCURRENCE, DE LA CONSOMMATION ET DE LA REPRESSION DES FRAUDES',
       l1_normalisee: 'DIRECTION GENERALE DE LA CONCURRENCE DE LA CONSOMMATION ET DE LA REPRESSION DES FRAUDES',
       l2_normalisee: 'TELEDOC 071',
       l3_normalisee: null,
