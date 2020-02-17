@@ -172,7 +172,7 @@
           example: "Exemple : j'ai mal été soigné"
           information:
             title: Porter une réclamation sur la qualité d’un soin
-            content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
+            content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
     - title: La médecine dite "alternative" ou "douce"
       example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute..."
       subcategories:
@@ -294,7 +294,7 @@
     - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
       information:
         title: Vous devez contacter la Commissions des Usagers
-        content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+        content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
     - title: J'ai dû payer un "forfait administratif"
       example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade... Ces frais sont interdits.
       detailInputs:
