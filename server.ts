@@ -15,6 +15,8 @@ import { join } from 'path';
 enableProdMode();
 
 export const app = express();
+const oldHostname = 'signalconso.beta.gouv.fr';
+const newHostname = 'signal.conso.gouv.fr';
 
 app.use(compression());
 app.use(cors());
@@ -59,11 +61,19 @@ app.all('*', (req, res, next) => {
   const xfp = req.get('X-Forwarded-Proto');
   if (xfp) {
     // protocol check, if http, redirect to https
-    if(req.get('X-Forwarded-Proto').indexOf('https') !== -1) {
+    if (req.get('X-Forwarded-Proto').indexOf('https') !== -1) {
       return next();
     } else {
-      res.redirect('https://' + req.hostname + req.url);
+      res.redirect('https://' + newHostname + req.url);
     }
+  } else {
+    return next();
+  }
+});
+
+app.all('*', (req, res, next) => {
+  if (req.hostname === oldHostname) {
+    res.redirect('https://' + newHostname + req.url);
   } else {
     return next();
   }

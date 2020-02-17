@@ -8,7 +8,7 @@ D’abord, les **nouvelles catégories sont maintenant généralisées à tout l
 
 ![photo-accueil](/assets/blog/2019/11/10/note-mise-a-jour-octobre/accueil.JPG)
 
-Deuxième nouveauté : **SignalConso fait peau neuve** ! Vous l’avez peut-être constaté, SignalConso a pris des couleurs. Cette mise à jour est la première étape d’une **refonte graphique globale** et nous sommes très heureux de l’avoir dévoilé ce mois-ci. Gardez l’oeil ouvert, le mois prochain apportera aussi son lot de nouveautés esthétiques. Comme toujours, si vous avez des commentaires ou des suggestions, vous pouvez nous [envoyer un email](mailto:contact@signalconso.beta.gouv.fr)
+Deuxième nouveauté : **SignalConso fait peau neuve** ! Vous l’avez peut-être constaté, SignalConso a pris des couleurs. Cette mise à jour est la première étape d’une **refonte graphique globale** et nous sommes très heureux de l’avoir dévoilé ce mois-ci. Gardez l’oeil ouvert, le mois prochain apportera aussi son lot de nouveautés esthétiques. Comme toujours, si vous avez des commentaires ou des suggestions, vous pouvez nous [envoyer un email](mailto:contact@signal.conso.gouv.fr)
 
 Dernier gros morceau de ce mois d’Octobre : **l’Espace Professionnel**. Après avoir questionné les professionnels sur leurs besoins, nous avons ajouté de nombreuses fonctionnalités, qui sont **nécessaires aux professionnels pour qu’ils répondent au mieux au signalement**. Plus d’options de tri, plus d’options de réponses, la possibilité d’ajouter des pièces jointes… Plus de nouveautés arriveront au fil du temps, et nous détaillerons ces ajouts dans un article du **Blog SignalConso**
 
