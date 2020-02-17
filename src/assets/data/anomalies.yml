@@ -147,7 +147,7 @@ list:
     rank: 110
     breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez eu une réaction allergique ?
     information:
-      title: Les problèmes de blessure, allergie.. ne rentrent pas dans le périmètre de l'outil SignalConso. Ces problèmes imposent une analyse immédiate du signalement, ce qui ne sera pas le cas avec SignalConso.
+      title: Les problèmes de blessure, allergie... ne rentrent pas dans le périmètre de l'outil SignalConso. Ces problèmes imposent une analyse immédiate du signalement, ce qui ne sera pas le cas avec SignalConso.
       content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
   - category: Alerte corps étranger
     categoryId: CORPSETRANGER

@@ -216,7 +216,7 @@
               options:
                 - site internet / application mobile de la société
                 - publicité par email
-                - publicité sur un affichage (dans le métro, sur une pancarte..)
+                - publicité sur un affichage (dans le métro, sur une pancarte...)
                 - autre (à préciser)
             - label: Quel est le problème ?
               rank: 4
@@ -369,7 +369,7 @@
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Le personnel est peu aimable
           example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
           information: !!import/single ../common/info/amabilite.yml
@@ -527,7 +527,7 @@
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Sport
@@ -678,7 +678,7 @@
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre
           consumerActions: !!import/single ../common/actions/tourisme.yml
 - title: Autre
