@@ -35,6 +35,10 @@
     "title": "Statistiques - SignalConso",
     "description": "Consultez les statistiques de SignalConso"
   },
+  "trackingAndPrivacy": {
+    "title": "Suivi d'audience et vie privée - SignalConso",
+    "description": "Consultez les informations concernant le suivi d'audience et le respect de la vie privée sur SignalConso"
+  },
   "accesstoken": {
     "title": "Accès au compte de l'entreprise - SignalConso",
     "description": "Rejoindre le compte d'une entreprise"

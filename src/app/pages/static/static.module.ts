@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../../components/components.module';
+import { TrackingAndPrivacyComponent } from './tracking-and-privacy/tracking-and-privacy.component';
 
 const routes: Routes = [
   { path: 'comment-ça-marche/consommateur', component: HowComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'conditions-generales-utilisation/professionnel', component: CguComponent },
   { path: 'blog/:year/:month/:day/:article', component: BlogComponent },
   { path: 'blog', component: BlogComponent },
-  { path: 'contact', component: ContactComponent }
+  { path: 'contact', component: ContactComponent },
+  { path: 'suivi-et-vie-privee', component: TrackingAndPrivacyComponent },
 ];
 
 @NgModule({
@@ -34,7 +36,8 @@ const routes: Routes = [
     CguComponent,
     BlogComponent,
     RetractationComponent,
-    ContactComponent
+    ContactComponent,
+    TrackingAndPrivacyComponent
   ],
   imports: [
     CommonModule,
