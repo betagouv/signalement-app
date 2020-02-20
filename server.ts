@@ -72,7 +72,7 @@ app.all('*', (req, res, next) => {
 });
 
 app.all('*', (req, res, next) => {
-  if (req.hostname === oldHostname) {
+  if (req.hostname.contains(oldHostname)) {
     res.redirect('https://' + newHostname + req.url);
   } else {
     return next();
