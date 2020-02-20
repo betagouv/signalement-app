@@ -83,7 +83,7 @@
             </p>
 
             <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)" (keydown.enter)="selectCompanyFromResults(company)" tabindex="0">
-              <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
+              <strong *ngIf="company.line1">{{company.line1}} <i class="material-icons md-green" *ngIf="company.highlight" title="Entreprise à sélectionner si votre signalement concerne la maison mère">check_circle</i><br /></strong>
               <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
               <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
               <span *ngIf="company.line3">{{company.line3}}<br /></span>

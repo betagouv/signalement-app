@@ -176,6 +176,7 @@ export class CompanyService extends RawCompanyService {
             total: match.results.length,
             etablissement: match.results
           });
+          matches.companies.forEach(c => c.highlight = true);
           results.companies = [
             ...matches.companies,
             ...results.companies.filter(c =>
