@@ -33,7 +33,7 @@ export class EventService {
   confirmContactByPostOnReportList(reportuuids: Set<string>) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.post<Event[]>(
+        return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'events', 'contactByPost']),
           { reportIds : Array.from(reportuuids) },
           headers
