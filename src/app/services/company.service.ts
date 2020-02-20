@@ -171,12 +171,25 @@ export class CompanyService extends RawCompanyService {
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
-    let match = this.searchHooks.find(hook => hook.query == search.trim().toLowerCase());
-    if (match !== undefined) return of(Object.assign(new CompanySearchResult(), {
-      total: match.results.length,
-      etablissement: match.results
-    }));
-    else return super.searchCompanies(search, searchPostalCode);
+    let terms = search.trim().toLowerCase().split(" ");
+    let match = this.searchHooks.find(hook => terms.indexOf(hook.query) != -1);
+    return super.searchCompanies(search, searchPostalCode).pipe(
+      map(results => {
+        if (match !== undefined) {
+          let matches = Object.assign(new CompanySearchResult(), {
+            total: match.results.length,
+            etablissement: match.results
+          });
+          results.companies = [
+            ...matches.companies,
+            ...results.companies.filter(c =>
+              !match.results.find(r => r.siret == c.siret)
+            )];
+          results.total = results.companies.length;
+        }
+        return results;
+      })
+    );
   }
 
   searchCompaniesBySiret(siret: string) {
