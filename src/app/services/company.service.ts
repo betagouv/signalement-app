@@ -85,10 +85,6 @@ export class CompanyService extends RawCompanyService {
 
   private searchHooks = [
     {
-      query: "dgccrf",
-      results: [this.DGCCRF_DATA]
-    },
-    {
       query: "orange",
       results: [
         {
