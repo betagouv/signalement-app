@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/activation', component: CompanyActivationComponent },
+  { path: 'activation', component: CompanyActivationComponent }, // TODO temporary fix, it can be removed after the 05/04/2020
   { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard] },
 ];
 
