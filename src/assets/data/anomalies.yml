@@ -158,9 +158,3 @@ list:
     information:
       title: Un objet ou un morceau d'objet qui se trouve dans un aliment alors que ce ne devrait pas être le cas s'appelle un corps étranger. Cela peut être une vis, un clou, un boulon, un bout de plastique, un morceau de verre par exemple.
       content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
-  - category: Maison de retraite (EHPAD)
-    categoryId: EHPAD
-    path: ehpad
-    rank: 110
-    icon: icon_epahd.png
-    subcategories: !!import/single subcategories/ehpad.yml
