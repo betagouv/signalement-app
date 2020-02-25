@@ -113,7 +113,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.statusList = statusList;
 
         if (this.user.role !== Roles.Pro || this.userAccesses.length === 1 || this.reportFilter.siret) {
-          this.loadReportExtractUrl();
           this.loadReports(Number(queryParams.get('page_number') || 1));
         } else {
           this.loading = false;
@@ -143,7 +142,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   submitFilters() {
     this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
-    this.loadReportExtractUrl();
     this.initPagination();
 
     this.loadReports(1);
@@ -277,10 +275,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadReportExtractUrl() {
-    return this.reportService.getReportExtractUrl(this.reportFilter).subscribe(url => {
-      this.reportExtractUrl = url;
-      });
+  launchExtraction() {
+    this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
+      this.router.navigate(['mes-telechargements']);
+    });
   }
 
   getReportingDate(report: Report) {

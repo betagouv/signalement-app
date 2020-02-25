@@ -193,27 +193,29 @@ export class ReportService {
     );
   }
 
-  getReportExtractUrl(reportFilter: ReportFilter) {
-    return this.serviceUtils.getAuthHttpParam().pipe(
-      map(param => {
-        const url = this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']);
-        const httpParams = [param];
+  launchExtraction(reportFilter: ReportFilter) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        const params = {};
         if (reportFilter.departments && reportFilter.departments.length) {
-          httpParams.push(`departments=${reportFilter.departments.map(d => d.code).join(',')}`);
+          params['departments'] = reportFilter.departments.map(d => d.code).join(',');
         }
         if (reportFilter.period && reportFilter.period[0]) {
-          httpParams.push(`start=${moment(reportFilter.period[0]).format('YYYY-MM-DD')}`);
+          params['start'] = moment(reportFilter.period[0]).format('YYYY-MM-DD');
         }
         if (reportFilter.period && reportFilter.period[1]) {
-          httpParams.push(`end=${moment(reportFilter.period[1]).format('YYYY-MM-DD')}`);
+          params['end'] = moment(reportFilter.period[1]).format('YYYY-MM-DD');
         }
-
         ['siret', 'status', 'category', 'details'].forEach(filterName => {
           if (reportFilter[filterName]) {
-            httpParams.push(`${filterName}=${encodeURIComponent((reportFilter[filterName] as string).trim())}`);
+            params[filterName] = (reportFilter[filterName] as string).trim();
           }
         });
-        return `${url}?${httpParams.join('&')}`;
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
+          params,
+          headers
+        );
       })
     );
   }
