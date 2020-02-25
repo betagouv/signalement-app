@@ -1,0 +1,27 @@
+<app-banner title="Téléchargements" [backButton]="true"></app-banner>
+
+<section class="section section-white position-relative">
+  <div class="container">
+    <p>
+      Si vous ne voyez pas votre téléchargement, veuillez rafraichir la page.
+      Les téléchargements peuvent mettre <strong>jusqu'à une minute</strong> à apparaître ici.
+    </p>
+    <div class="row table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Télécharger</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr *ngFor="let download of downloads">
+              <td>{{download.creationDate | date}}</td>
+              <td><a href="{{download.url}}" target="_blank"><i class="material-icons">cloud_download</i> {{download.filename}}</a></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <ngx-loading [show]="loading"></ngx-loading>
+</section>
