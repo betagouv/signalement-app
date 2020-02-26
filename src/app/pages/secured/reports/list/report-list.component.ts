@@ -100,9 +100,13 @@ export class ReportListComponent implements OnInit, OnDestroy {
       })
     ).subscribe(
       ([statusList, params, queryParams, userAccesses]) => {
+
+        this.reportFilter = this.reportService.currentReportFilter;
+        this.itemsPerPage = Number(queryParams.get('per_page')) || 20;
+
         const siret = params.get('siret');
-        if (siret) {
-          this.reportFilter = {siret};
+        if (siret || this.user.role === Roles.Pro) {
+          this.reportFilter = {...this.reportFilter, siret: siret};
         }
 
         this.userAccesses = userAccesses;
@@ -138,7 +142,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   submitFilters() {
-    this.location.go(this.router.url, 'page_number=1');
+    this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
     this.loadReportExtractUrl();
     this.initPagination();
 
@@ -203,7 +207,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   changePage(pageEvent: {page: number, itemPerPage: number}) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go('suivi-des-signalements', `page_number=${pageEvent.page}`);
+      this.location.go('suivi-des-signalements', `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
     }
   }
 

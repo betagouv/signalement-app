@@ -17,6 +17,12 @@ import { ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 })
 export class ReportService {
 
+  private _currentReportFilter = new ReportFilter();
+
+  get currentReportFilter() {
+    return this._currentReportFilter;
+  }
+
   constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils) {
   }
@@ -151,6 +157,7 @@ export class ReportService {
   }
 
   getReports(offset: number, limit: number, reportFilter: ReportFilter) {
+    this._currentReportFilter = reportFilter;
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
     httpParams = httpParams.append('limit', limit.toString());
