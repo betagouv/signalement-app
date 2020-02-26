@@ -5,6 +5,7 @@ import { AsyncFilesService } from '../../../services/asyncfiles.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AsyncFile } from '../../../model/AsyncFile';
+import { Constants } from '../../../model/Constants';
 
 @Component({
   selector: 'app-async',
@@ -20,11 +21,22 @@ export class AsyncFilesComponent implements OnInit {
 
   downloads: AsyncFile[];
   loading: boolean;
+  intervalId: any;
+  constants = Constants;
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.downloads.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.downloads.description });
     this.refresh();
+    this.intervalId = setInterval(() => {
+      this.refresh();
+    }, 5000);
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   refresh() {

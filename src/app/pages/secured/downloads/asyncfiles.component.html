@@ -16,7 +16,7 @@
         </thead>
           <tbody>
             <tr *ngFor="let download of downloads">
-              <td>{{download.creationDate | date}}</td>
+              <td>{{download.creationDate | date: constants.DateTimeFormat}}</td>
               <td><a href="{{download.url}}" target="_blank"><i class="material-icons">cloud_download</i> {{download.filename}}</a></td>
             </tr>
           </tbody>
