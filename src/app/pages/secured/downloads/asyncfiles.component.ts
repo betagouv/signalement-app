@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { AsyncFilesService } from '../../../services/asyncfiles.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AsyncFile } from 'src/app/model/AsyncFile.js';
+import { AsyncFile } from '../../../model/AsyncFile';
 
 @Component({
   selector: 'app-async',
