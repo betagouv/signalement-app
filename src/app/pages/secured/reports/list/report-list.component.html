@@ -183,10 +183,21 @@
         </div>
       </form>
     </div>
-    <pagination *appRole="[roles.Admin, roles.DGCCRF]"
-                [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
-                [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
-    </pagination>
+    <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
+      <div class="col-12 col-lg-6 offset-lg-3 text-center">
+        <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+                    [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+        </pagination>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <label>Nombre par page</label>
+        <select class="items-per-page-selector" [(ngModel)]="itemsPerPage" (change)="submitFilters()">
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+      </div>
+    </div>
     <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
       <table class="table">
         <thead>
@@ -366,9 +377,21 @@
         </div>
       </ng-container>
     </div>
-    <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
-                [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
-    </pagination>
+    <div class="row">
+      <div class="col-12 col-lg-6 offset-lg-3 text-center">
+        <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+                    [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+        </pagination>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <label>Nombre par page</label>
+        <select class="items-per-page-selector" [(ngModel)]="itemsPerPage" (change)="submitFilters()">
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+      </div>
+    </div>
   </ng-template>
 
   <ng-template #multiAccesses>
