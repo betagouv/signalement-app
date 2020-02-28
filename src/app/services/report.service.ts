@@ -197,9 +197,7 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         const params = {};
-        if (reportFilter.departments && reportFilter.departments.length) {
-          params['departments'] = reportFilter.departments.map(d => d.code).join(',');
-        }
+        params['departments'] = (reportFilter.departments || []).map(d => d.code);
         if (reportFilter.period && reportFilter.period[0]) {
           params['start'] = moment(reportFilter.period[0]).format('YYYY-MM-DD');
         }

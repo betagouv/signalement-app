@@ -27,9 +27,9 @@ export class AsyncFilesComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pages.secured.downloads.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.downloads.description });
-    this.refresh();
+    this.refresh(true);
     this.intervalId = setInterval(() => {
-      this.refresh();
+      this.refresh(false);
     }, 5000);
   }
 
@@ -39,8 +39,8 @@ export class AsyncFilesComponent implements OnInit {
     }
   }
 
-  refresh() {
-    this.loading = true;
+  refresh(showLoading: boolean = false) {
+    this.loading = showLoading;
     this.asyncFileService.listAsyncFiles().subscribe(
       downloads => {
           this.loading = false;
