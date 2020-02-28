@@ -8,6 +8,7 @@ import { ReportDetailComponent } from './reports/detail/report-detail.component'
 import { ReportListComponent } from './reports/list/report-list.component';
 import { MostReportedListComponent } from './reports/ordered/most-reported-list.component';
 import { DGCCRFComponent } from './dgccrf/dgccrf.component';
+import { AsyncFilesComponent } from './downloads/asyncfiles.component';
 import { AdminComponent } from './admin/admin.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EventComponent } from './reports/event/event.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
+  { path: 'mes-telechargements', component: AsyncFilesComponent, canActivate: [AuthGuard] },
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
 ];
 
@@ -38,6 +40,7 @@ const routes: Routes = [
     DGCCRFComponent,
     SubscriptionComponent,
     MostReportedListComponent,
+    AsyncFilesComponent,
     AdminComponent
   ],
   imports: [

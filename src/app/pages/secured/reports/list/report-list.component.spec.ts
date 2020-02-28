@@ -81,7 +81,6 @@ describe('ReportListComponent', () => {
       component = fixture.componentInstance;
 
       spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToProcess]));
-      spyOn(reportService, 'getReportExtractUrl').and.returnValue(of(''));
     });
 
     it('should load user accesses on init', () => {
@@ -144,7 +143,6 @@ describe('ReportListComponent', () => {
       component = fixture.componentInstance;
 
       spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToProcess]));
-      spyOn(reportService, 'getReportExtractUrl').and.returnValue(of(''));
     });
 
     it ('should display report list in a table', () => {

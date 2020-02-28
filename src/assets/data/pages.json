@@ -108,6 +108,10 @@
       "title": "Abonnements - SignalConso",
       "description": "Abonnez-vous pour recevoir les signalements qui vous concernent"
     },
+    "downloads": {
+      "title": "Téléchargements - SignalConso",
+      "description": "Mes téléchargements"
+    },
     "admin": {
       "title": "Admin - SignalConso",
       "description": "Invitation à rejoindre SignalConso (DGCCRF)"

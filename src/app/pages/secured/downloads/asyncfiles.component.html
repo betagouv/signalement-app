@@ -1,0 +1,28 @@
+<app-banner title="Téléchargements" [backButton]="true"></app-banner>
+
+<section class="section section-white position-relative">
+  <div class="container">
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Télécharger</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr *ngFor="let download of downloads">
+              <td>{{download.creationDate | date: constants.DateTimeFormat}}</td>
+              <td class="position-relative">
+                <a *ngIf="download.url; else loadingBlock" href="{{download.url}}" target="_blank"><i class="material-icons">cloud_download</i> {{download.filename}}</a>
+                <ng-template #loadingBlock>
+                  Le fichier est en cours de construction, il apparaîtra ici dès qu'il sera prêt (&lt; 1 minute)
+                  <ngx-loading [show]="true" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</section>

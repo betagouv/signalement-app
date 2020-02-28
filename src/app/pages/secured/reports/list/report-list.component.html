@@ -171,14 +171,17 @@
         <div class="row">
           <div class="col-12 text-center">          &nbsp;
             <button type="submit" class="btn btn-primary">Filtrer les signalements</button>          &nbsp;
-            <a href="{{reportExtractUrl}}" *appRole="[roles.Admin]">
-              <img alt="bouton exporter en XLS" title="exporter en XLS" src="/assets/images/icon_export_xls.png"/>
+            <a (click)="launchExtraction()" class="pointer">
+              <img alt="Bouton exporter en XLS" title="Exporter en XLS" src="/assets/images/icon_export_xls.png"/>
             </a>
           </div>
         </div>
         <div class="row pt-2">
           <div class="col-12 text-center">
             <span class="link pointer" (click)="cancelFilters()">Effacer les filtres</span>
+            | <a routerLink="/mes-telechargements">
+                Mes téléchargements <i class="material-icons" title="Mes téléchargements">folder</i>
+              </a>
           </div>
         </div>
       </form>
