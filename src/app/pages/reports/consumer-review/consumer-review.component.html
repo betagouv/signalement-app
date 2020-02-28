@@ -6,7 +6,7 @@
 
       <div class="form__group">
         <label class="text-center" [class]="hasError(positiveCtrl) ? 'error' : ''">
-          Est-ce que la réponse de l'entreprise répond à vos attentes ? <span class="error">*</span>
+          Est-ce que la réponse de l'entreprise répond à vos attentes ? <span class="error">*</span>
         </label>
         <div [class]="getPositiveCtrlClass(true)">
           <div class="row pb-2 pt-2">
@@ -61,9 +61,20 @@
       </div>
     </form>
 
-    <div class="notification success" *ngIf="postSuccess">
+    <div class="notification success max-width" *ngIf="postSuccess">
       Votre avis a bien été pris en compte, nous vous en remercions<br />
     </div>
     <ngx-loading [show]="loading"></ngx-loading>
+
+
+    <form class="mt-5 p-3 bg-grey text-center">
+      <label>Vous pouvez également donner votre avis sur SignalConso</label>
+      <br/>
+      <div class="text-center">
+        <a href="https://monavis.numerique.gouv.fr/Demarches/2071?&view-mode=formulaire-avis&nd_mode=en-ligne-enti%C3%A8rement&nd_source=button&key=5a58254dab900906fe4924e37c1c5bba">
+          <img src="https://monavis.numerique.gouv.fr/monavis-static/bouton-bleu.png" alt="Je donne mon avis" title="Je donne mon avis sur cette démarche" />
+        </a>
+      </div>
+    </form>
   </div>
 </section>
