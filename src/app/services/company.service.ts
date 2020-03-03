@@ -85,7 +85,7 @@ export class CompanyService extends RawCompanyService {
 
   private searchHooks = [
     {
-      query: "orange",
+      query: /\borange\b/i,
       results: [
         {
           "siret": "38012986645100",
@@ -102,7 +102,7 @@ export class CompanyService extends RawCompanyService {
       ]
     },
     {
-      query: "sfr",
+      query: /\bsfr\b/i,
       results: [
         {
           "siret": "34305956400959",
@@ -119,7 +119,7 @@ export class CompanyService extends RawCompanyService {
       ]
     },
     {
-      query: "bouygues",
+      query: /\bbouygues?\b/i,
       results: [
         {
           "siret": "39748093003464",
@@ -136,7 +136,7 @@ export class CompanyService extends RawCompanyService {
       ]
     },
     {
-      query: "free",
+      query: /\bfree\b/i,
       results: [
         {
           "siret": "49924713800021",
@@ -167,8 +167,7 @@ export class CompanyService extends RawCompanyService {
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
-    let terms = search.trim().toLowerCase().split(" ");
-    let match = this.searchHooks.find(hook => terms.indexOf(hook.query) != -1);
+    let match = this.searchHooks.find(hook => hook.query.test(search));
     return super.searchCompanies(search, searchPostalCode).pipe(
       map(results => {
         if (match !== undefined) {
