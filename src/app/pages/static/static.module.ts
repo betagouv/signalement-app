@@ -5,6 +5,7 @@ import { HowComponent } from './how/how.component';
 import { AboutComponent } from './about/about.component';
 import { ProComponent } from './pro/pro.component';
 import { RetractationComponent } from './retractation/retractation.component';
+import { AccessibilityComponent } from './accessibility/accessibility.component';
 import { CguComponent } from './cgu/cgu.component';
 import { BlogComponent } from './blog/blog.component';
 import { MarkdownModule } from 'ngx-markdown';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'comment-ça-marche/professionnel', component: ProComponent },
   { path: 'qui-sommes-nous', component: AboutComponent },
   { path: 'delai-de-retractation', component: RetractationComponent },
+  { path: 'accessibilite', component: AccessibilityComponent },
   { path: 'conditions-generales-utilisation', component: CguComponent },
   { path: 'conditions-generales-utilisation/consommateur', component: CguComponent },
   { path: 'conditions-generales-utilisation/professionnel', component: CguComponent },
@@ -33,6 +35,7 @@ const routes: Routes = [
     HowComponent,
     AboutComponent,
     ProComponent,
+    AccessibilityComponent,
     CguComponent,
     BlogComponent,
     RetractationComponent,
