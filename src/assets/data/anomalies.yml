@@ -1,5 +1,12 @@
 ---
 list:
+  - category: COVID-19 (coronavirus)
+    categoryId: C19
+    path: coronavirus
+    description: augmentation du prix des gels désinfectants, arnaque liée au COVID-19...
+    rank: 5
+    icon: icon_virus.png
+    subcategories: !!import/single subcategories/coronavirus.yml
   - category: Café / Restaurant
     categoryId: CR
     path: cafe-restaurant
