@@ -1,5 +1,21 @@
 - title: Les prix ont été augmentés ou sont excessivement chers
   example: Exemple : gel désinfectant pour les mains, masque 
+  detailInputs:
+    - label: Date du constat
+      rank: 1
+      type: DATE
+      defaultValue: SYSDATE
+    - label : Quel type de produit est concerné ?
+      rank: 2
+      type: RADIO
+      options:
+          - gel désinfectant (gel hydroalcoolique)
+          - autre (à préciser)
+    - label : Quel était le prix environ ?
+      rank: 3
+      type: TEXTE
+      optionnal: true
+    fileLabel: Photo du prix et du produit si possible     
 - title: Arnaque liée au covid-19
   example: Exemple : publicité trompeuse utilisant l'argument du COVID-19
 
