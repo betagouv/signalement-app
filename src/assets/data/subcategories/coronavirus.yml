@@ -13,7 +13,7 @@
         - autre (à préciser)
     - label : Quel était le prix environ ?
       rank: 3
-      type: TEXTE
+      type: TEXT
       optionnal: true
   fileLabel: Photo du prix et du produit si possible     
 - title: Arnaque liée au covid-19
