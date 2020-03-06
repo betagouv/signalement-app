@@ -1,6 +1,7 @@
 - title: Les prix sont trop élevés
   example: 'Exemple : gel désinfectant, masque'
   subcategoriesTitle: De quel produit s'agit-il&#160;?
+  subcategories:
     - title: Gel désinfectant (gel hydroalcoolique)
       detailInputs:
         - label: Date du constat
