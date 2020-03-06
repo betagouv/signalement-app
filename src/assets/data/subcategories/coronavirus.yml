@@ -1,21 +1,26 @@
-- title: Les prix ont été augmentés ou sont excessivement chers
-  example: 'Exemple : gel désinfectant pour les mains, masque' 
-  detailInputs:
-    - label: Date du constat
-      rank: 1
-      type: DATE
-      defaultValue: SYSDATE
-    - label : Quel type de produit est concerné ?
-      rank: 2
-      type: RADIO
-      options:
-        - gel désinfectant (gel hydroalcoolique)
-        - autre (à préciser)
-    - label : Quel était le prix environ ?
-      rank: 3
-      type: TEXT
-      optionnal: true
-  fileLabel: Photo du prix et du produit si possible     
+- title: Les prix sont trop élevés
+  example: 'Exemple : gel désinfectant, masque'
+  subcategoriesTitle: De quel produit s'agit-il&#160;?
+  subcategories:
+    - title: Gel désinfectant (gel hydroalcoolique)
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label : Caractéristiques du produit (volume)
+          rank: 2
+          type: TEXT
+          optionnal: true
+          placeholder: Volume, marque ...
+        - label : Quel est le prix de vente ?
+          rank: 3
+          type: TEXT
+          optionnal: true
+      fileLabel: Photo du prix et du produit si possible     
+    - title: Masque
+    - title: Autre
+- title: Autre problème lié à la vente de masque FFP2 / masques chirurgicaux
 - title: Arnaque liée au covid-19
-  example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19"
+  example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
 
