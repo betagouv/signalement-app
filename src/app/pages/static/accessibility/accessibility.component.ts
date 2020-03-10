@@ -5,7 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-accessibility',
-  templateUrl: './accessibility.component.html'
+  templateUrl: './accessibility.component.html',
+  styleUrls: ['./accessibility.component.scss']
 })
 export class AccessibilityComponent implements OnInit {
   constructor(private titleService: Title,
