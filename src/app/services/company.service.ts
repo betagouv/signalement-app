@@ -163,7 +163,43 @@ export class CompanyService extends RawCompanyService {
           "libelle_activite_principale": "Télécommunications filaires"
         }
       ]
-    }
+    },
+    {
+      query: /\beni\b/i,
+      results: [
+        {
+          "siret": "45122569200024",
+          "nom_raison_sociale": "ENI GAS & POWER FRANCE",
+          "l1_normalisee": "ENI GAS POWER FRANCE",
+          "l2_normalisee": "ENI",
+          "l3_normalisee": null,
+          "l4_normalisee": "24 RUE JACQUES IBERT",
+          "l5_normalisee": null,
+          "l6_normalisee": "92300 LEVALLOIS-PERRET",
+          "code_postal": "92300",
+          "libelle_activite_principale": "Commerce de combustibles gazeux par conduites",
+          "highlight": "Pour tout signalement relatif à ENI (abonnements énergétiques, gaz, etc.)"
+        }
+      ]
+    },
+    {
+      query: /\bamazone?\b/i,
+      results: [
+        {
+          "siret": "48777332700027",
+          "nom_raison_sociale": "AMAZON EU SARL",
+          "l1_normalisee": "AMAZON EU SARL",
+          "l2_normalisee": "AMAZON EU SARL SUCCURSALE FRANCAISE",
+          "l3_normalisee": null,
+          "l4_normalisee": "67 BOULEVARD DU GENERAL LECLERC",
+          "l5_normalisee": null,
+          "l6_normalisee": "92110 CLICHY",
+          "code_postal": "92110",
+          "libelle_activite_principale": "Vente à distance sur catalogue général",
+          "highlight": "Pour tout problème concernant le site de vente en ligne Amazon"
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
@@ -175,7 +211,7 @@ export class CompanyService extends RawCompanyService {
             total: match.results.length,
             etablissement: match.results
           });
-          matches.companies.forEach(c => c.highlight = true);
+          matches.companies.filter(c => c.highlight === null).forEach(c => c.highlight = "Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)");
           results.companies = [
             ...matches.companies,
             ...results.companies.filter(c =>
@@ -195,4 +231,3 @@ export class CompanyService extends RawCompanyService {
       return super.searchCompaniesBySiret(siret);
   }
 }
-
