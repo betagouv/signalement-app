@@ -2,10 +2,10 @@
 
 <main role="main">
   <section class="section section-lightest-grey">
-    <div class="container max-width">
+    <div class="container max-width bg-white pb-4">
       <nav class="nav nav-tabs nav-justified mb-3">
-        <a class="nav-item nav-link" [ngClass]="isCguConso ? 'active' : ''" routerLink="/conditions-generales-utilisation/consommateur"><h4>Consommateur</h4></a>
-        <a class="nav-item nav-link" [ngClass]="!isCguConso ? 'active' : ''" routerLink="/conditions-generales-utilisation/professionnel"><h4>Professionnel</h4></a>
+        <a class="nav-item nav-link" [ngClass]="isCguConso ? 'active' : ''" routerLink="/conditions-generales-utilisation/consommateur">Consommateur</a>
+        <a class="nav-item nav-link" [ngClass]="!isCguConso ? 'active' : ''" routerLink="/conditions-generales-utilisation/professionnel">Professionnel</a>
       </nav>
       <ng-container *ngIf="isCguConso; else cguPro">
 

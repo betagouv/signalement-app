@@ -36,6 +36,11 @@
     background-color: $lightest-grey;
   }
 
+  .container > .nav-tabs {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
   @media #{$smaller-than-tablet} {
     .section {
       padding: 1em 0;
