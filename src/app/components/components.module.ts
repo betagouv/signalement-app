@@ -6,7 +6,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BannerComponent } from './banner/banner.component';
 
-export const NgxLoadingConfig = { primaryColour: '#407ea7', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
+export const NgxLoadingConfig = { primaryColour: '#407e98', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
 @NgModule({
   declarations: [
