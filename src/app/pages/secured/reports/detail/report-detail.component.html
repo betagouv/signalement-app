@@ -3,9 +3,9 @@
     Détail du signalement
     <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
   </h1>
-  <h5 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
+  <h2 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
     {{report?.id}}
-  </h5>
+  </h2>
 </app-banner>
 
 <section class="section section-white position-relative pb-0">
@@ -19,12 +19,12 @@
       <ng-container *ngIf="report">
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-          <h5>Statut : {{report.status}}</h5>
+          <h3>Statut : {{report.status}}</h3>
           <hr />
         </ng-container>
 
         <ng-container>
-          <h5>Problème</h5>
+          <h3>Problème</h3>
           <div class="row">
             <div class="col-12">
               {{report.category}}
@@ -36,7 +36,7 @@
             </div>
           </div>
           <hr />
-          <h5>Description</h5>
+          <h3>Description</h3>
           <div class="row">
             <div class="col-12">
               <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
@@ -78,7 +78,7 @@
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h5>Entreprise</h5>
+          <h3>Entreprise</h3>
           <div class="row">
             <div class="col-10">
               SIRET : {{report.company.siret}}
@@ -100,8 +100,8 @@
             <ng-template #companySearch>
               <div class="modal-body text-center">
                 <nav class="nav nav-tabs nav-justified mb-3">
-                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>SIRET</h4></a>
-                  <a class="nav-item nav-link" [ngClass]="!searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Adresse</h4></a>
+                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h2>SIRET</h2></a>
+                  <a class="nav-item nav-link" [ngClass]="!searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h2>Adresse</h2></a>
                 </nav>
                 <ng-container *ngIf="searchBySiret">
                   <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
@@ -169,7 +169,7 @@
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h5>Consommateur</h5>
+          <h3>Consommateur</h3>
           <div class="row">
             <div class="col-10">
               Nom : {{report.consumer.lastName}}
@@ -233,9 +233,9 @@
 
         <ng-container *appRole="[roles.Pro]">
           <hr />
-          <h5 *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur ne souhaite pas être contacté</h5>
+          <h3 *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur ne souhaite pas être contacté</h3>
           <ng-template #contactAgreement>
-            <h5>Le consommateur a donné son accord pour être contacté</h5>
+            <h3>Le consommateur a donné son accord pour être contacté</h3>
             <div class="row">
               <div class="col-12">
                 Nom : {{report.consumer.lastName}}
@@ -250,11 +250,11 @@
 
         <ng-container *ngIf="getReportResponse()">
           <hr />
-          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
+          <h3 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h3>
           <ng-template #titleAnswerNoPro>
-            <h5>
+            <h3>
               Réponse apportée par l'entreprise
-            </h5>
+            </h3>
           </ng-template>
           <div class="row" id="proAnswer">
             <div class="col-12" [ngSwitch]="getReportResponse().responseType">
@@ -279,7 +279,7 @@
 
         <ng-container>
           <hr />
-          <h5>Historique</h5>
+          <h3>Historique</h3>
           <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
             <div class="col-12" *ngFor="let event of events; let eventIndex = index">
               <ng-container *ngIf="event.details && event.details.description; else noDescription">

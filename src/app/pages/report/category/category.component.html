@@ -1,5 +1,5 @@
 <alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
-  <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</h4>
+  <h2>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</h2>
   <button type="submit" class="button-outline warning" (click)="removeStoredReport()" appAutofocus="true">Non</button>
   <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
 </alert>

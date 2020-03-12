@@ -98,7 +98,7 @@ describe('ReportListComponent', () => {
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h4').innerText).toEqual('Vous n\'avez accès à aucune entreprise');
+      expect(nativeElement.querySelector('h2').innerText).toEqual('Vous n\'avez accès à aucune entreprise');
       expect(nativeElement.querySelector('form')).toBeNull();
       expect(getReportsSpy).not.toHaveBeenCalled();
     });
@@ -121,7 +121,7 @@ describe('ReportListComponent', () => {
       fixture.detectChanges();
 
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h4').innerText).toEqual('Veuillez sélectionner une entreprise');
+      expect(nativeElement.querySelector('h2').innerText).toEqual('Veuillez sélectionner une entreprise');
       expect(nativeElement.querySelector('form')).toBeNull();
       expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(2);
       expect(getReportsSpy).not.toHaveBeenCalled();
