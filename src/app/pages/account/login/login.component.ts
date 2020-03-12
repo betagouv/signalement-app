@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   isDgccrf = false;
 
   showErrors: boolean;
-  authenticationError = false;
+  authenticationError: String = null;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-          this.authenticationError = true;
+          this.authenticationError = (error.status == 403) ?
+            "Compte bloqué (trop de tentatives, veuillez réessayer dans 15 minutes)" : "Échec de l'authentification.";
         }
       );
     }
