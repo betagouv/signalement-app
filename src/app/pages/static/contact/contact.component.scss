@@ -1,5 +1,11 @@
 @import "../../../../theme/variables";
 
+.container {
+  border: 1px solid rgba(28, 28, 28, 0.125);
+  border-radius: 0.25rem;
+  max-width: min(750px, 95%);
+}
+
 .collapse-container {
 
   margin-top: 1em;

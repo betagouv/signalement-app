@@ -1,9 +1,11 @@
+@import "../../../../theme/variables";
+
 hr {
   margin-top: 20px;
 }
 
-.btn {
-  padding: 8px 14px;;
-  font-size: inherit;
-  line-height: 1.5;
+.container {
+  border: 1px solid rgba(28, 28, 28, 0.125);
+  border-radius: 0.25rem;
+  max-width: min(750px, 95%);
 }
