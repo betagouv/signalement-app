@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import HttpStatusCodes from 'http-status-codes';
 import pages from '../../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   isDgccrf = false;
 
   showErrors: boolean;
-  authenticationError = false;
+  authenticationError: String;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -63,7 +64,8 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-          this.authenticationError = true;
+          this.authenticationError = (error.status === HttpStatusCodes.FORBIDDEN) ?
+            "Compte bloqué (trop de tentatives, veuillez réessayer dans 15 minutes)" : "Échec de l'authentification.";
         }
       );
     }
