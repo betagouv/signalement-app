@@ -211,7 +211,7 @@ export class CompanyService extends RawCompanyService {
             total: match.results.length,
             etablissement: match.results
           });
-          matches.companies.filter(c => c.highlight === null).forEach(c => c.highlight = "Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)");
+          matches.companies.filter(c => !c.highlight).forEach(c => c.highlight = "Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)");
           results.companies = [
             ...matches.companies,
             ...results.companies.filter(c =>
