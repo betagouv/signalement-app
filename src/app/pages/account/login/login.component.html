@@ -32,8 +32,8 @@
             Veuillez renseigner votre mot de passe.<br />
           </span>
         </div>
-        <div class="notification error mt-3" *ngIf="authenticationError ">
-          Échec de l'authentification.
+        <div class="notification error mt-3" *ngIf="authenticationError">
+          {{authenticationError}}
         </div>
         <hr />
         <div class="form-group row">
