@@ -1,6 +1,6 @@
 export class Company {
 
-  highlight = false;
+  highlight: string;
   name: string;
   sign: string;
   line1: string;

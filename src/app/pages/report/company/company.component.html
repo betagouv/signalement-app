@@ -55,6 +55,11 @@
                 </div>
               </div>
             </div>
+            <div>
+              <small class="form-text text-muted">
+                Vous pouvez signaler des entreprises privées établies en France uniquement.
+              </small>
+            </div>
             <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
               <span *ngIf="searchCtrl.hasError('required')">
                 Veuillez renseigner le nom de l'entreprise.<br />
@@ -87,7 +92,7 @@
               <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
               <strong *ngIf="company.highlight">
                 <i class="material-icons md-green">check_circle</i>
-                <small class="text-success font-weight-bold">Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)</small>
+                <small class="text-success font-weight-bold">{{company.highlight}}</small>
                 <br />
               </strong>
               <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>

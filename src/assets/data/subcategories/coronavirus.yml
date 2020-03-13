@@ -1,0 +1,34 @@
+- title: Les prix sont trop élevés
+  example: 'Exemple : gel désinfectant, masque'
+  subcategoriesTitle: De quel produit s'agit-il&#160;?
+  subcategories:
+    - title: Gel désinfectant (gel hydroalcoolique)
+      description: Le prix des gels hydroalcooliques est réglementé depuis le 05 mars (Décret n° 2020-197). Pour un consommateur, les prix maximums autorisés sont&nbsp;:&nbsp;
+                    <ul>
+                      <li>2€ pour un flacon de 50 ml</li>
+                      <li>2,25€ pour 75 ml</li>
+                      <li>3€ pour 100 ml</li>
+                      <li>5€ pour 300 ml</li>
+                      <li>15€ pour un litre</li>
+                    </ul>
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label : Caractéristiques du produit (volume)
+          rank: 2
+          type: TEXT
+          optionnal: true
+          placeholder: Volume, marque ...
+        - label : Quel est le prix de vente ?
+          rank: 3
+          type: TEXT
+          optionnal: true
+      fileLabel: Photo du prix et du produit si possible     
+    - title: Masque
+    - title: Autre
+- title: Vente de masque FFP2 / masques chirurgicaux non autorisée
+- title: Arnaque et publicité mensongère liées au covid-19
+  example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
+
