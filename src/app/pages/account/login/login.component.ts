@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         error => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
           this.authenticationError = (error.status === HttpStatusCodes.FORBIDDEN) ?
-            "Compte bloqué (trop de tentatives, veuillez réessayer dans 15 minutes)" : "Échec de l'authentification.";
+            "Compte bloqué (trop de tentatives, veuillez réessayer dans 30 minutes)" : "Échec de l'authentification.";
         }
       );
     }
