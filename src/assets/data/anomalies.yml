@@ -66,7 +66,7 @@ list:
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 16
+    rank: 18
     icon: email-24px.svg
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
@@ -91,7 +91,7 @@ list:
     categoryId: VOY
     path: voyage-loisirs
     description: voyage organisé, camping, concert, sport, billets d''avion, taxi
-    rank: 18
+    rank: 16
     icon: icon_hobbies.png
     subcategories: !!import/single subcategories/voyage-loisirs.yml
   - category: Immobilier
