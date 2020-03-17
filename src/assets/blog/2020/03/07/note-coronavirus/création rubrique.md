@@ -14,7 +14,7 @@ La rubrique permet également de signaler les tentatives d'arnaque ou les public
 
 Par exemple, nous recevons des signalements de publicité pour des produits qui seraient efficaces contre le COVID-19. 
 
-Les enquêteurse se chargent ensuite de vérifier la véracité des éléments annoncés sur les publicités.
+Les enquêteurs se chargent ensuite de vérifier la véracité des éléments annoncés sur les publicités.
 
 ## Problème avec les sites de livraison <i>(nouveau)</i>
 
