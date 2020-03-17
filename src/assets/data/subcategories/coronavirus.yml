@@ -31,6 +31,14 @@
   example: "Exemple : site de livraison de courses à domicile"
   subcategories:
     - title: Le prix de la livraison a augmenté
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+       - label: Adresse du site internet (URL)
+         rank: 2
+         type: TEXT
     - title: Autre problème de prix
     - title: Problème avec un produit livré
 - title: Vente de masque FFP2 / masques chirurgicaux non autorisée
