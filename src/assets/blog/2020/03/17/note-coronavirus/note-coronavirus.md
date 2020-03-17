@@ -1,3 +1,5 @@
+![photo-article](/assets/blog/2020/03/17/note-coronavirus/coronavirus.jpg)
+
 # Note sur le coronavirus
 
 ## L'envoi des signalements aux entreprises
