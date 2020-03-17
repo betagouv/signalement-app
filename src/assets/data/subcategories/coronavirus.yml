@@ -68,6 +68,10 @@
           type: TEXTAREA
       fileLabel: Photo du produit si possible  
 - title: Vente de masque FFP2 / masques chirurgicaux non autorisée
+- title: Ouverture non autorisée d'un commerce ou lieu recevant du publique
+  information:
+    content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter la Police.
+          <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
 - title: Autre arnaque et publicité mensongère liées au covid-19
   example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
 
