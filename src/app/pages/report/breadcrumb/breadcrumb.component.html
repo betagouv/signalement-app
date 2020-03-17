@@ -6,9 +6,9 @@
       </div>
       <div class="col-10 col-sm-11">
         <div *ngIf="report">
-          <h4 *ngIf="anomaly?.breadcrumbTitle; else defautBreadcrumbTitle">{{anomaly?.breadcrumbTitle}}</h4>
+          <h1 *ngIf="anomaly?.breadcrumbTitle; else defautBreadcrumbTitle">{{anomaly?.breadcrumbTitle}}</h1>
           <ng-template #defautBreadcrumbTitle>
-            <h4>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h4>
+            <h1>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h1>
           </ng-template>
           <div class="steps" *ngIf="step !== 'Information'">
             <ng-container  *ngIf="getStepNumber('Problem') > 0">

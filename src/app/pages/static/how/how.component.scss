@@ -3,26 +3,34 @@
 
 .card {
 
-  margin-bottom: 2em;
+  border: none;
+
+  .card-body {
+    padding: 0 5px;
+  }
 
   img {
     width: 100%;
   }
 
-  h2 {
+  .step-number {
     width: 100%;
     margin: 0;
 
-    font-size: 60px !important;
+    font-size: 80px;
 
-    @media #{$smaller-than-mobile} {
-      font-size: 40px !important;
+    @media #{$smaller-than-phablet} {
+      font-size: 60px;
+      line-height: 45px;
+      text-align: center;
     }
   }
 
-  h6 {
+  h2 {
     font-weight: bold;
     margin: 0;
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
   }
 
   .flex-center {
@@ -31,6 +39,11 @@
   }
 }
 
+.container {
+  border: 1px solid rgba(28, 28, 28, 0.125);
+  border-radius: 0.25rem;
+  max-width: min(750px, 95%);
+}
 
 .nav-tabs {
   border-bottom: 1px solid $blue;
@@ -39,6 +52,7 @@
 .nav-link {
   border: 0;
   color: $blue !important;
+  font-size: 1.25rem;
 
   &.active {
     color: $white !important;

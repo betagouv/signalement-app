@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { ComponentsModule } from '../../../components/components.module';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 describe('LoginComponent', () => {
@@ -22,6 +23,7 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule,
+        NgxLoadingModule,
         Angulartics2RouterlessModule.forRoot(),
         ComponentsModule
       ],

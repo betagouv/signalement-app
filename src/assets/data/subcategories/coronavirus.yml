@@ -1,5 +1,4 @@
-- title: Les prix sont trop élevés
-  example: 'Exemple : gel désinfectant, masque'
+- title: Les prix (gel désinfectant, masque) sont trop élevés
   subcategoriesTitle: De quel produit s'agit-il&#160;?
   subcategories:
     - title: Gel désinfectant (gel hydroalcoolique)
@@ -18,7 +17,7 @@
           defaultValue: SYSDATE
         - label : Caractéristiques du produit (volume)
           rank: 2
-          type: TEXT
+          type: TEXTAREA
           optionnal: true
           placeholder: Volume, marque ...
         - label : Quel est le prix de vente ?
@@ -28,7 +27,51 @@
       fileLabel: Photo du prix et du produit si possible     
     - title: Masque
     - title: Autre
-- title: Vente de masque FFP2 / masques chirurgicaux non autorisée
-- title: Arnaque et publicité mensongère liées au covid-19
+- title: Problème / abus avec un site de vente en ligne
+  example: "Exemple : site de livraison de courses à domicile"
+  subcategories:
+    - title: Le prix de la livraison a augmenté
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Adresse du site internet (URL)
+          rank: 2
+          type: TEXT
+        - label: Quel est le problème avec le prix de la livraison ?
+          rank: 3
+          type: TEXTAREA
+    - title: Autre problème de prix
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Adresse du site internet (URL)
+          rank: 2
+          type: TEXT
+        - label: Quel est le problème ?
+          rank: 3
+          type: TEXTAREA
+    - title: Problème avec un produit livré
+      detailInputs:
+        - label: Date du constat
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Adresse du site internet (URL)
+          rank: 2
+          type: TEXT
+        - label: Quel est le problème ?
+          rank: 3
+          type: TEXTAREA
+      fileLabel: Photo du produit si possible  
+- title: Vente de masque (FFP2, chirurgicaux) non autorisée
+- title: Arnaque et publicité mensongère liées au COVID-19
   example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
+- title: Ouverture non autorisée d'un commerce ou lieu recevant du public
+  information:
+    content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter les services de police.
+          <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
 

@@ -5,13 +5,13 @@
   background-color: $light-green;
   border-radius: $theme-border-more-radius;
 
-  label, h4 {
+  label, h2 {
     color: $black;
   }
 }
 
 .not-selected {
-  label, h4 {
+  label, h2 {
     color: $darker-grey;
   }
 }

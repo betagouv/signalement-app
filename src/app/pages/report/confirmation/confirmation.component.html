@@ -2,14 +2,14 @@
 <section class="section section-white position-relative">
   <div class="container">
     <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm" *ngIf="confirmationForm">
-      <h4 class="text-center">
+      <h2 class="text-center">
         Récapitulatif de votre problème
-      </h4>
+      </h2>
       <p class="text-center mt-3 mb-4 font-weight-bold text-warning">
         Attention : le signalement n'a pas encore été envoyé. Cliquez sur envoyer.
       </p>
       <div class="panel text-break">
-        <h5>Problème</h5>
+        <h3>Problème</h3>
         <div class="row">
           <div class="col-12">
             {{report.category}}
@@ -21,7 +21,7 @@
           </div>
         </div>
         <hr />
-        <h5>Description</h5>
+        <h3>Description</h3>
         <div class="row">
           <div class="col-12">
             <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
@@ -43,7 +43,7 @@
           </div>
         </div>
         <hr />
-        <h5>Entreprise</h5>
+        <h3>Entreprise</h3>
         <div class="row">
           <div class="col-12">
             <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
@@ -56,7 +56,7 @@
           </div>
         </div>
         <hr />
-        <h5>Consommateur</h5>
+        <h3>Consommateur</h3>
         <div class="row">
           <div class="col-12">
             Nom : {{report.consumer.lastName}}

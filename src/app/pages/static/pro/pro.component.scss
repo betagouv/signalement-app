@@ -10,6 +10,11 @@ hr {
   line-height: 1.5;
 }
 
+.container {
+  border: 1px solid rgba(28, 28, 28, 0.125);
+  border-radius: 0.25rem;
+  max-width: min(750px, 95%);
+}
 
 .nav-tabs {
   border-bottom: 1px solid $blue;
@@ -18,6 +23,7 @@ hr {
 .nav-link {
   border: 0;
   color: $blue !important;
+  font-size: 1.25rem;
 
   &.active {
     color: $white !important;

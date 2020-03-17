@@ -22,7 +22,7 @@
 
   <ng-template #noAccess>
     <div class="container max-width pro">
-      <h4 class="text-center mb-4 font-weight-bold">Vous n'avez accès à aucune entreprise</h4>
+      <h2 class="text-center mb-4 font-weight-bold">Vous n'avez accès à aucune entreprise</h2>
     </div>
   </ng-template>
 
@@ -399,7 +399,7 @@
 
   <ng-template #multiAccesses>
     <div class="container max-width pro">
-      <h4 class="text-center mb-4 font-weight-bold">Veuillez sélectionner une entreprise</h4>
+      <h2 class="text-center mb-4 font-weight-bold">Veuillez sélectionner une entreprise</h2>
       <ng-container *ngFor="let userAccess of userAccesses">
         <div class="row item pointer" [routerLink]="['siret', userAccess.companySiret]">
           <div class="col-12 col-lg-6">

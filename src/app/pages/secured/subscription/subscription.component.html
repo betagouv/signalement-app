@@ -10,18 +10,16 @@
         </div>
 
         <ng-container *ngIf="departmentSubscription">
-          <h5 *ngIf="!departmentSubscription.values || !departmentSubscription.values.length; else subscriptions" class="p-3 text-center">
+          <h2 *ngIf="!departmentSubscription.values || !departmentSubscription.values.length; else subscriptions" class="p-3 text-center">
             Vous n'avez aucun abonnement.
-          </h5>
+          </h2>
           <ng-template #subscriptions>
-            <h5 class="p-3">
+            <p class="p-3">
               Vous êtes abonné pour recevoir chaque lundi les nouveaux signalements déposés dans les départements suivants :
-            </h5>
-            <h5>
-              <ul>
-                <li *ngFor="let value of departmentSubscription.values">{{getDepartement(value).code}} - {{getDepartement(value).label}}</li>
-              </ul>
-            </h5>
+            </p>
+            <ul>
+              <li *ngFor="let value of departmentSubscription.values">{{getDepartement(value).code}} - {{getDepartement(value).label}}</li>
+            </ul>
           </ng-template>
 
           <div class="pb-3 text-center mb-4">

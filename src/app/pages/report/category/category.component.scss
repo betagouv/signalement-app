@@ -8,8 +8,9 @@
     position: fixed;
     top: 0;
     z-index: 100;
-    width: 100%;
-    background-color: $theme-warning-bg;
+    width: 94%;
+    left: 3%;
+    background-color: $theme-error-bg;
     border: none;
   }
 }
