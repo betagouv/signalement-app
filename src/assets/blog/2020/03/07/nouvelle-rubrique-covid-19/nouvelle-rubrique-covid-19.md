@@ -18,6 +18,6 @@ Les enquêteurs se chargent ensuite de vérifier la véracité des éléments an
 
 ## Problème avec les sites de livraison <i>(nouveau)</i>
 
-Suite aux mesures de confinement, de plus en plus de consomateurs se tournent vers les sites internet pour effectuer leurs courses et se faire livrer.
+Suite aux mesures de confinement, de plus en plus de consommateurs se tournent vers les sites internet pour effectuer leurs courses et se faire livrer.
 
 Nous sommes attentifs aux abus qui pourraient être faits par certains opérateurs. Nous avons décidé de rajouter ce type de problème dans la catégorie COVID-19.
