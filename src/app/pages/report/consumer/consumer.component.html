@@ -5,9 +5,9 @@
     <ng-container *ngIf="report">
       <ng-container *ngIf="report.employeeConsumer">
         <div class="notification info mb-4">
-          <h6 class="text-center mb-4 font-weight-bold">
-            Vous avez déclaré être employé de l’entreprise
-          </h6>
+          <p>
+            <strong>Vous avez déclaré être employé de l’entreprise.</strong>
+          </p>
           <p>
             Votre signalement sera lu <b>uniquement par la répression des fraudes</b>.
           </p>
@@ -27,9 +27,9 @@
       </ng-container>
 
       <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
-        <h4 class="text-center mb-4 font-weight-bold">
+        <h2 class="text-center mb-4 font-weight-bold">
           Vos coordonnées nous permettent d'authentifier votre signalement
-        </h4>
+        </h2>
 
         <div class="form__group mt-4">
           <div class="row">

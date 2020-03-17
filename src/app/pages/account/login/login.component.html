@@ -2,7 +2,7 @@
 
 <main role="main">
   <section class="section section-lightest-grey">
-    <div class="container max-width">
+    <div class="container max-width bg-white pt-3">
       <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
         <div class="form-group row">
           <div class="col-sm-3 control-label">
@@ -35,7 +35,6 @@
         <div class="notification error mt-3" *ngIf="authenticationError">
           {{authenticationError}}
         </div>
-        <hr />
         <div class="form-group row">
           <div class="col-sm-12 text-center">
             <button type="submit" class="btn btn-lg btn-primary">
@@ -51,5 +50,6 @@
       </div>
       <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:support@signal.conso.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">support@signal.conso.gouv.fr</a>.</p>
     </div>
+    <ngx-loading [show]="loading"></ngx-loading>
   </section>
 </main>

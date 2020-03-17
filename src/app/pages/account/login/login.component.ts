@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   isDgccrf = false;
 
   showErrors: boolean;
+  loading: boolean;
   authenticationError: String;
 
   constructor(public formBuilder: FormBuilder,
@@ -56,13 +57,16 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       this.showErrors = true;
     } else {
+      this.loading = true;
       this.authenticationService.login(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
         user => {
+          this.loading = false;
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
           this.router.navigate(['suivi-des-signalements']);
         },
         error => {
+          this.loading = false;
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
           this.authenticationError = (error.status === HttpStatusCodes.FORBIDDEN) ?
             "Compte bloqué (trop de tentatives, veuillez réessayer dans 30 minutes)" : "Échec de l'authentification.";

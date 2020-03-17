@@ -5,10 +5,10 @@
     <div class="container max-width">
       <div class="card">
         <div class="card-body">
-          <h3 *ngIf="reportCount">
+          <h2 *ngIf="reportCount">
             <span class="count">{{reportCount}}</span>
             signalements ont été déposés depuis le début de SignalConso
-          </h3>
+          </h2>
           <div class="text-right">
             <a (click)="loadMonthlyReportChart()" data-toggle="collapse" href="#collapseMonthlyReportChart" class="collapsed">
                Consulter les statistiques mensuelles
@@ -23,14 +23,14 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <h3 *ngIf="reportReadByProPercentage">
+          <h2 *ngIf="reportReadByProPercentage">
             <span class="count">{{reportReadByProPercentage.toFixed(0) + "%"}}</span>
             des signalements ont été lus par les entreprises
             <i class="material-icons" aria-hidden="true"
                tooltip="Pourquoi pas 100 % ? Car Signalconso est facultatif. L'entreprise est libre de créer un compte et de lire le signalement.">
               help_outline
             </i>
-          </h3>
+          </h2>
           <div class="text-right">
             <a (click)="loadMonthlyReportReadByProChart()" data-toggle="collapse" href="#collapseMonthlyReportReadByProChart" class="collapsed">
                Consulter les statistiques mensuelles
@@ -45,7 +45,7 @@
       </div>
       <div class="card" *appRole="[roles.Admin]">
         <div class="card-body">
-          <h3 *ngIf="reportReadByProMedianDelay">
+          <h2 *ngIf="reportReadByProMedianDelay">
             En moyenne l'entreprise met
             <span class="count">{{reportReadByProMedianDelay.toFixed(1)}} jours</span>
             pour lire le signalement
@@ -53,13 +53,13 @@
                tooltip="Délai médian entre la création du signalement et la lecture du signalement par l'entreprise concernée">
               help_outline
             </i>
-          </h3>
+          </h2>
           <ngx-loading [show]="!reportReadByProMedianDelay"></ngx-loading>
         </div>
       </div>
       <div class="card">
         <div class="card-body">
-          <h3 *ngIf="reportWithResponsePercentage">
+          <h2 *ngIf="reportWithResponsePercentage">
             Sur l'ensemble des signalements lus,
             <span class="count">{{reportWithResponsePercentage.toFixed(0) + "%"}}</span>
             ont eu une réponse de l'entreprise
@@ -67,7 +67,7 @@
                tooltip="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur.">
               help_outline
             </i>
-          </h3>
+          </h2>
           <div class="text-right">
             <a (click)="loadMonthlyReportWithReponseChart()" data-toggle="collapse" href="#collapseMonthlyReportWithReponseChart" class="collapsed">
                Consulter les statistiques mensuelles
@@ -82,7 +82,7 @@
       </div>
       <div class="card" *appRole="[roles.Admin]">
         <div class="card-body">
-          <h3 *ngIf="reportWithResponseMedianDelay">
+          <h2 *ngIf="reportWithResponseMedianDelay">
             En moyenne une entreprise met
             <span class="count">{{reportWithResponseMedianDelay.toFixed(1)}} jours</span>
             pour répondre au signalement après l'avoir lu
@@ -90,7 +90,7 @@
                tooltip="Délai médian entre la lecture du signalement et la réponse par l'entreprise concernée">
               help_outline
             </i>
-          </h3>
+          </h2>
           <ngx-loading [show]="!reportWithResponseMedianDelay"></ngx-loading>
         </div>
       </div>
