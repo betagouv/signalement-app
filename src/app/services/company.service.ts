@@ -200,6 +200,42 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bmaif\b/i,
+      results: [
+        {
+          "siret": "77570970201646",
+          "nom_raison_sociale": "MUTUELLE ASSURANCE INSTITUTEUR FRANCE",
+          "l1_normalisee": "MUTUELLE ASSURANCE INSTITUTEUR FRANCE",
+          "l2_normalisee": "MAIF",
+          "l3_normalisee": null,
+          "l4_normalisee": "200 AVENUE SALVADOR ALLENDE",
+          "l5_normalisee": "BP 303",
+          "l6_normalisee": "79000 NIORT",
+          "code_postal": "79000",
+          "libelle_activite_principale": "Autres assurances",
+          "highlight": "Pour tout problème concernant votre assureur, peu importe votre lieu d'habitation"
+        }
+      ]
+    },
+    {
+      query: /\bgrdf\b/i,
+      results: [
+        {
+          "siret": "44478651100022",
+          "nom_raison_sociale": "GRDF",
+          "l1_normalisee": "GRDF",
+          "l2_normalisee": "TSA 60800",
+          "l3_normalisee": null,
+          "l4_normalisee": "6 RUE CONDORCET",
+          "l5_normalisee": null,
+          "l6_normalisee": "75009 PARIS 9",
+          "code_postal": "75009",
+          "libelle_activite_principale": "Distribution de combustibles gazeux par conduites",
+          "highlight": "Pour tout problème avec GRDF (facture, prélèvement, etc.), peu importe votre lieu d'habitation"
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
