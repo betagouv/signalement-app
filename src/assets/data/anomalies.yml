@@ -3,8 +3,8 @@ list:
   - category: COVID-19 (coronavirus)
     categoryId: C19
     path: coronavirus
-    description: augmentation du prix des gels désinfectants, arnaque liée au COVID-19...
-    rank: 5
+    description: prix des gels hydroalcooliques, arnaque liée au COVID-19, augmentation du prix de la livraison de courses à domicile...
+    rank: 1
     icon: icon_virus.png
     subcategories: !!import/single subcategories/coronavirus.yml
   - category: Café / Restaurant
@@ -18,7 +18,7 @@ list:
     categoryId: MAG
     path: achat-magasin
     description: supermarché, boulangerie, magasin de jouet...
-    rank: 10
+    rank: 2
     icon: icon_store.png
     subcategories: !!import/single subcategories/achat-magasin.yml
   - category: Services aux particuliers
@@ -84,7 +84,7 @@ list:
     categoryId: TRAV
     path: travaux-renovation
     description: dépannage, plombier, couvreur, pose de panneaux...
-    rank: 17
+    rank: 107
     icon: icon_craft.png
     subcategories: !!import/single subcategories/travaux-renovation.yml
   - category: Voyage / Loisirs
@@ -105,7 +105,7 @@ list:
     categoryId: SANT
     path: sante
     description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
-    rank: 106
+    rank: 3
     icon: icon_health.png
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
