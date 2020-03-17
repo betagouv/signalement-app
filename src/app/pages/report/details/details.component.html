@@ -4,7 +4,7 @@
 
     <ng-container *ngIf="report">
       <div class="pb-sm-5 pt-sm-5" *ngIf="report.employeeConsumer === undefined; else detailsFormTemplate">
-        <h4 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h4>
+        <h2 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h2>
         <div class="text-center pt-2 pt-sm-3 pb-lg-5">
           <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
             Oui
@@ -38,7 +38,7 @@
         <hr />
 
         <div class="row notification success ml-0 md-0" *ngIf="getReportLastSubcategory()?.detailTitle">
-          <h4 [innerHTML]="getReportLastSubcategory().detailTitle"></h4>
+          <h2 [innerHTML]="getReportLastSubcategory().detailTitle"></h2>
         </div>
 
         <div class="row notification note ml-0 md-0" *ngIf="getReportLastSubcategory()?.description">

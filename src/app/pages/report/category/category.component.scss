@@ -8,8 +8,9 @@
     position: fixed;
     top: 0;
     z-index: 100;
-    width: 100%;
-    background-color: $theme-warning-bg;
+    width: 94%;
+    left: 3%;
+    background-color: $theme-error-bg;
     border: none;
   }
 }
@@ -170,5 +171,12 @@ h2 {
   h1 {
     font-size: 20px !important;
     line-height: 28px !important;
+  }
+}
+
+@media #{$larger-than-desktop} {
+  .notification.warning {
+    margin-top: -1em;
+    margin-bottom: 1em;
   }
 }

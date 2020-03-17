@@ -1,14 +1,13 @@
-<alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
-  <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</h4>
-  <button type="submit" class="button-outline warning" (click)="removeStoredReport()" appAutofocus="true">Non</button>
-  <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
+<alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()"><strong>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</strong>
+  <button type="submit" class="button-outline warning ml-2" (click)="removeStoredReport()" appAutofocus="true">Non</button>
+  <button type="submit" class="button warning ml-2" (click)="restoreStoredReport()">Oui</button>
 </alert>
 
 <div class="banner text-center section-small section-primary d-none d-lg-block" role="region">
   <div class="container text-center">
     <img src="/assets/images/logo-signalconso-white.svg" class="pb-4 d-none d-lg-inline-block" alt="Icônes signaler" />
     <h1>
-      Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
+      Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
     </h1>
   </div>
 </div>
@@ -17,6 +16,12 @@
 
   <section class="section section-white d-none d-lg-block">
     <div class="container">
+
+      <div class="notification warning">
+        En raison des circonstances exceptionnelles liées au <strong>COVID-19</strong>, les signalements ne sont plus systématiquement transmis aux entreprises
+        <br /><a href="/blog/2020/03/17/note-coronavirus">Plus d'informations ici</a>
+      </div>
+
       <h2 class="mb-4 text-secondary">Comment ça marche ?</h2>
       <div class="row" (click)="scrollToElement(categoryList)">
         <div class="col-12 col-sm-3">
@@ -101,6 +106,11 @@
           <li data-target="#carousel-md" data-slide-to="0" class="active"></li>
           <li data-target="#carousel-md" data-slide-to="1"></li>
         </ol>
+      </div>
+
+      <div class="notification warning">
+        En raison des circonstances exceptionnelles liées au <strong>COVID-19</strong>, les signalements ne sont plus systématiquement transmis aux entreprises
+        <br /><a href="/blog/2020/03/17/note-coronavirus">Plus d'informations ici</a>
       </div>
     </div>
 

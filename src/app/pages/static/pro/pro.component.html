@@ -3,16 +3,16 @@
 <main role="main">
 
   <section class="section section-lightest-grey">
-    <div class="container max-width">
+    <div class="container max-width bg-white pb-3">
       <nav class="nav nav-tabs nav-justified mb-3">
-        <a class="nav-item nav-link" routerLink="/comment-ça-marche/consommateur"><h4>Consommateur</h4></a>
-        <a class="nav-item nav-link active" routerLink="/comment-ça-marche/professionnel"><h4>Professionnel</h4></a>
+        <a class="nav-item nav-link" routerLink="/comment-ça-marche/consommateur">Consommateur</a>
+        <a class="nav-item nav-link active" routerLink="/comment-ça-marche/professionnel">Professionnel</a>
       </nav>
 
      <h2 class="pb-2 pb-lg-3">Généralités</h2>
 
      <a class="lead show" data-toggle="collapse" href="#collapse12">
-       Est-ce que ce service est gratuit ?
+       <h3>Est-ce que ce service est gratuit ?</h3>
      </a>
      <div class="collapse" id="collapse12">
        <p>
@@ -24,7 +24,7 @@
      <hr>
 
      <a class="lead show" data-toggle="collapse" href="#collapse14">
-       Qui a accès aux signalements déposés sur SignalConso ?
+       <h3>Qui a accès aux signalements déposés sur SignalConso ?</h3>
      </a>
      <div class="collapse" id="collapse14">
        <p> Seule l'entreprise signalée peut consulter le signalement qui la concerne. Ils ne sont pas rendus publics auprès des consommateurs.
@@ -35,7 +35,7 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse4">
-       Mon entreprise apparait déjà sur SignalConso, a-t-elle déjà été signalée ?
+       <h3>Mon entreprise apparait déjà sur SignalConso, a-t-elle déjà été signalée ?</h3>
      </a>
      <div class="collapse" id="collapse4">
        <p>
@@ -47,7 +47,7 @@
      <hr>
 
      <a class="lead show" data-toggle="collapse" href="#collapse17">
-       Puis-je ouvrir un Espace Professionnel si je n'ai pas encore été signalé ?
+       <h3>Puis-je ouvrir un Espace Professionnel si je n'ai pas encore été signalé ?</h3>
      </a>
      <div class="collapse" id="collapse17">
        <p>Si votre entreprise n’a pas encore été signalée, et que vous n’avez donc pas reçu le courrier provenant de nos services, vous ne pourrez pas ouvrir d’Espace Professionnel sur SignalConso.
@@ -57,7 +57,7 @@
      <hr>
 
      <a class="lead show" data-toggle="collapse" href="#collapse13">
-       Est-il obligatoire de consulter les signalements SignalConso et/ou d'y répondre ?
+       <h3>Est-il obligatoire de consulter les signalements SignalConso et/ou d'y répondre ?</h3>
      </a>
      <div class="collapse" id="collapse13">
        <p>
@@ -70,7 +70,7 @@
      <h2 class="pt-5 pb-2 pb-lg-3">Votre entreprise a été signalée</h2>
 
      <a class="lead" data-toggle="collapse" href="#collapse1">
-       J'ai reçu un courrier de SignalConso car mon entreprise a été signalée. Que dois-je faire?
+       <h3>J'ai reçu un courrier de SignalConso car mon entreprise a été signalée. Que dois-je faire ?</h3>
      </a>
      <div class="collapse" id="collapse1">
        <p>
@@ -110,7 +110,7 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse3">
-       Vous avez oublié votre mot de passe ?
+       <h3>Vous avez oublié votre mot de passe ?</h3>
      </a>
      <div class="collapse" id="collapse3">
        <p>
@@ -121,7 +121,7 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse5">
-       Est-ce que mon entreprise va être contrôlée suite à un signalement ?
+       <h3>Est-ce que mon entreprise va être contrôlée suite à un signalement ?</h3>
      </a>
      <div class="collapse" id="collapse5">
        <p>
@@ -133,7 +133,7 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse6">
-       Puis-je communiquer directement avec le consommateur à l’origine du signalement ?
+       <h3>Puis-je communiquer directement avec le consommateur à l’origine du signalement ?</h3>
      </a>
      <div class="collapse" id="collapse6">
        <p>
@@ -145,7 +145,7 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse7">
-       Dois-je apporter les détails des actions correctives mises en œuvre pour rectifier le problème ?
+       <h3>Dois-je apporter les détails des actions correctives mises en œuvre pour rectifier le problème ?</h3>
      </a>
      <div class="collapse" id="collapse7">
        <p>
@@ -156,9 +156,9 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse8" id="le-detail">
-       Quelles informations composent un signalement ?
+       <h3>Quelles informations composent un signalement ?</h3>
      </a>
-     <div class="collapse" id="collapse8" [ngClass]="fragment === 'le-detail' ? 'show' : ''">
+     <div class="collapse" id="collapse8" [ngClass]="fragment === 'le-detail' ? 'show' : ''">
        <p>
          Un signalement comporte différentes informations :
        </p>
@@ -172,9 +172,9 @@
      <hr>
 
      <a class="lead show" data-toggle="collapse" href="#collapse9" id="les-status">
-       À quoi correspondent les différents statuts du signalement ?
+       <h3>À quoi correspondent les différents statuts du signalement ?</h3>
      </a>
-     <div class="collapse" id="collapse9" [ngClass]="fragment === 'les-status' ? 'show' : ''">
+     <div class="collapse" id="collapse9" [ngClass]="fragment === 'les-status' ? 'show' : ''">
        <p>
          Une fois connecté sur votre Espace Professionnel, vous avez accès à la liste de tous les signalements déposés sur votre entreprise.
          Cette liste vous donne quelques indications sur chaque signalement sans que vous ayez besoin de les ouvrir : la date de dépôt du signalement, le type de problème soulevé, ainsi que le statut du signalement. Il existe trois statuts pour le signalement : </p>
@@ -190,9 +190,9 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse10" id="la-reponse">
-       Quelle réponse puis-je apporter ?
+       <h3>Quelle réponse puis-je apporter ?</h3>
      </a>
-     <div class="collapse" id="collapse10" [ngClass]="fragment === 'la-reponse' ? 'show' : ''">
+     <div class="collapse" id="collapse10" [ngClass]="fragment === 'la-reponse' ? 'show' : ''">
        <p>
          Pour répondre au signalement, il vous suffit de cliquer sur le bouton Apporter une réponse. Trois choix s’offrent à vous :
        </p>
@@ -214,12 +214,12 @@
      <hr>
 
      <a class="lead" data-toggle="collapse" href="#collapse11">
-       Et si le courrier SignalConso arrive pendant mes congés ?
+       <h3>Et si le courrier SignalConso arrive pendant mes congés ?</h3>
      </a>
      <div class="collapse" id="collapse11">
        <p>
-         Vous avez reçu le courrier SignalConso mais votre entreprise était fermée pour congés annuels ?
-         Vous avez consulté le signalement mais vous n’avez pas apporté immédiatement une réponse car vous attendiez la confirmation d’un collaborateur ? Pas de panique !
+         Vous avez reçu le courrier SignalConso mais votre entreprise était fermée pour congés annuels ?
+         Vous avez consulté le signalement mais vous n’avez pas apporté immédiatement une réponse car vous attendiez la confirmation d’un collaborateur ? Pas de panique !
          Après avoir récolté les retours de nombreuses entreprises, nous avons conçu un système de relances offrant de la souplesse dans le traitement du signalement :
        </p>
        <ul>
@@ -241,7 +241,7 @@
      <hr>
 
      <a class="lead show" data-toggle="collapse" href="#collapse15">
-       Je n'ai pas réagi à temps et le signalement est clôturé, que puis-je faire ?
+       <h3>Je n'ai pas réagi à temps et le signalement est clôturé, que puis-je faire ?</h3>
      </a>
      <div class="collapse" id="collapse15">
        <p>
@@ -253,7 +253,7 @@
      <hr>
 
      <a class="lead show" data-toggle="collapse" href="#collapse16">
-       Puis-je ouvrir plusieurs accès pour les collaborateurs de mon entreprise ?
+       <h3>Puis-je ouvrir plusieurs accès pour les collaborateurs de mon entreprise ?</h3>
      </a>
      <div class="collapse" id="collapse16">
        <p>

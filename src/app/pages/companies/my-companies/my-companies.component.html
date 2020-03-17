@@ -2,15 +2,15 @@
 
 <section class="section section-white position-relative">
   <div class="container">
-    <h4 class="text-center mb-4 font-weight-bold" *ngIf="!myAccesses?.length; else companyAccesses">
+    <h2 class="text-center mb-4 font-weight-bold" *ngIf="!myAccesses?.length; else companyAccesses">
       Vous n'avez accès à aucune entreprise
-    </h4>
+    </h2>
     <ng-template  #companyAccesses>
       <div class="row">
         <div class="col-12 col-sm-6 mt-3" *ngFor="let access of myAccesses">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">{{ access.companyName }}</h4>
+              <h2 class="card-title">{{ access.companyName }}</h2>
               <p class="card-text">
               <dl class="row">
                 <dt class="col-sm-3">SIRET</dt>
