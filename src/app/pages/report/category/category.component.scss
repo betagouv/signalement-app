@@ -173,3 +173,10 @@ h2 {
     line-height: 28px !important;
   }
 }
+
+@media #{$larger-than-desktop} {
+  .notification.warning {
+    margin-top: -1em;
+    margin-bottom: 1em;
+  }
+}
