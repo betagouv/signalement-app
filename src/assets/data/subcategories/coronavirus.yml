@@ -36,9 +36,9 @@
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-       - label: Adresse du site internet (URL)
-         rank: 2
-         type: TEXT
+        - label: Adresse du site internet (URL)
+          rank: 2
+          type: TEXT
     - title: Autre problème de prix
     - title: Problème avec un produit livré
 - title: Vente de masque FFP2 / masques chirurgicaux non autorisée
