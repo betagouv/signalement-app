@@ -68,7 +68,7 @@
           type: TEXTAREA
       fileLabel: Photo du produit si possible  
 - title: Vente de masque (FFP2, chirurgicaux) non autorisée
-- title: Arnaque et publicité mensongère liées au covid-19
+- title: Arnaque et publicité mensongère liées au COVID-19
   example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
 - title: Ouverture non autorisée d'un commerce ou lieu recevant du public
   information:
