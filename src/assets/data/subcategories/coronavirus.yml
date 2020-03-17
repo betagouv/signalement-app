@@ -1,5 +1,4 @@
-- title: Les prix sont trop élevés
-  example: 'Exemple : gel désinfectant, masque'
+- title: Les prix (gel désinfectant, masque) sont trop élevés
   subcategoriesTitle: De quel produit s'agit-il&#160;?
   subcategories:
     - title: Gel désinfectant (gel hydroalcoolique)
@@ -28,7 +27,13 @@
       fileLabel: Photo du prix et du produit si possible     
     - title: Masque
     - title: Autre
+- title: Problème et abus avec un site de vente en ligne
+  example: "Exemple : site de livraison de courses à domicile"
+  subcategories:
+    - title: Le prix de la livraison a augmenté
+    - title: Autre problème de prix
+    - title: Problème avec un produit livré
 - title: Vente de masque FFP2 / masques chirurgicaux non autorisée
-- title: Arnaque et publicité mensongère liées au covid-19
+- title: Autre arnaque et publicité mensongère liées au covid-19
   example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
 
