@@ -1,19 +1,18 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { NbReportsGroupByCompany } from '../../../../model/NbReportsGroupByCompany';
+import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
 import { Location } from '@angular/common';
 import { BsLocaleService } from 'ngx-bootstrap';
-import pages from '../../../../../assets/data/pages.json';
-import { Roles } from '../../../../model/AuthUser';
-import { ReportService } from '../../../../services/report.service';
-import { Router } from '@angular/router';
+import pages from '../../../../assets/data/pages.json';
+import { Roles } from '../../../model/AuthUser';
+import { ReportService } from '../../../services/report.service';
 
 @Component({
-  selector: 'app-most-reported-list',
-  templateUrl: './most-reported-list.component.html',
-  styleUrls: ['./most-reported-list.component.scss']
+  selector: 'app-most-reported-companies',
+  templateUrl: './most-reported-companies.component.html',
+  styleUrls: ['./most-reported-companies.component.scss']
 })
-export class MostReportedListComponent implements OnInit {
+export class MostReportedCompaniesComponent implements OnInit {
 
   roles = Roles;
   totalCount: number;
@@ -29,8 +28,7 @@ export class MostReportedListComponent implements OnInit {
     private meta: Meta,
     private localeService: BsLocaleService,
     private location: Location,
-    private reportService: ReportService,
-    private router: Router,
+    private reportService: ReportService
   ) { }
 
   ngOnInit() {
@@ -68,7 +66,7 @@ export class MostReportedListComponent implements OnInit {
   changePage(pageEvent: { page: number, itemPerPage: number }) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go("suivi-des-signalements", `page_number=${pageEvent.page}`);
+      this.location.go('suivi-des-signalements', `page_number=${pageEvent.page}`);
     }
   }
 }
