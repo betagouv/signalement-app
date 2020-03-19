@@ -232,7 +232,7 @@ export class CompanyService extends RawCompanyService {
           "l6_normalisee": "75009 PARIS 9",
           "code_postal": "75009",
           "libelle_activite_principale": "Distribution de combustibles gazeux par conduites",
-          "highlight": "Pour tout problème avec GRDF (facture, prélèvement, etc.), peu importe votre lieu d'habitation"
+          "highlight": "Pour tout problème avec GRDF, peu importe votre lieu d'habitation"
         }
       ]
     },
