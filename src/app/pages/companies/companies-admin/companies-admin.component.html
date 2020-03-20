@@ -40,18 +40,24 @@
               <hr />
               <div [ngSwitch]="companies.length">
                 <h2 class="text-center" *ngSwitchCase="0">Aucune entreprise trouvée</h2>
-                <h2 class="text-center" *ngSwitchCase="1">Une entreprise trouvée</h2>
+                <ng-container *ngSwitchCase="1">
+                  <h2 class="text-center">Une entreprise trouvée</h2>
+                  <template [ngTemplateOutlet]="companyCards"></template>
+                </ng-container>
                 <ng-container *ngSwitchDefault>
-                  <h2 class="text-center" *ngIf="companies.length >= maxCompanyResult; else companyCards">Il y a trop d'entreprises correspondant à la recherche</h2>
-                  <ng-template #companyCards>
-                    <h2 class="text-center" *ngIf="companies.length < maxCompanyResult">{{companies.length}} entreprises trouvées</h2>
-                    <div class="row">
-                      <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies">
-                        <app-company-card [userAccess]="companyToUserAccess(company)"></app-company-card>
-                      </div>
-                    </div>
+                  <h2 class="text-center" *ngIf="companies.length >= maxCompanyResult; else displayCompanies">Il y a trop d'entreprises correspondant à la recherche</h2>
+                  <ng-template #displayCompanies>
+                    <h2 class="text-center">{{companies.length}} entreprises trouvées</h2>
+                    <template [ngTemplateOutlet]="companyCards"></template>
                   </ng-template>
                 </ng-container>
+                <ng-template #companyCards>
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies">
+                      <app-company-card [userAccess]="companyToUserAccess(company)"></app-company-card>
+                    </div>
+                  </div>
+                </ng-template>
               </div>
             </ng-container>
           </ng-container>
