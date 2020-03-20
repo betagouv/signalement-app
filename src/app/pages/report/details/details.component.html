@@ -4,15 +4,28 @@
 
     <ng-container *ngIf="report">
       <div class="pb-sm-5 pt-sm-5" *ngIf="report.employeeConsumer === undefined; else detailsFormTemplate">
-        <h2 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h2>
-        <div class="text-center pt-2 pt-sm-3 pb-lg-5">
-          <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
-            Oui
-          </button>
-          <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5 mt-2" appAutofocus="true" (click)="setEmployeeConsumerValue(false)">
-            Non, je n'y travaille pas
-          </button>
-        </div>
+        <ng-container *ngIf="!continueReport">
+          <h2 class="text-center">Que souhaitez-vous faire&#160;?</h2>
+          <div class="text-center pt-2 pt-sm-3 pb-lg-5">
+            <button type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setContinueReportValue(true)">
+              Déposer un signalement
+            </button>
+            <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5 mt-2" appAutofocus="true" (click)="setContinueReportValue(false)">
+              Poser une question
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="continueReport">
+          <h2 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h2>
+          <div class="text-center pt-2 pt-sm-3 pb-lg-5">
+            <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
+              Oui
+            </button>
+            <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5 mt-2" appAutofocus="true" (click)="setEmployeeConsumerValue(false)">
+              Non, je n'y travaille pas
+            </button>
+          </div>
+        </ng-container>
       </div>
 
       <ng-template #detailsFormTemplate>
