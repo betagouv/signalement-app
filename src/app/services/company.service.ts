@@ -245,7 +245,7 @@ export class CompanyService extends RawCompanyService {
           'l6_normalisee': '75009 PARIS 9',
           'code_postal': '75009',
           'libelle_activite_principale': 'Distribution de combustibles gazeux par conduites',
-          'highlight': 'Pour tout problème avec GRDF (facture, prélèvement, etc.), peu importe votre lieu d\'habitation'
+          'highlight': 'Pour tout problème avec GRDF, peu importe votre lieu d\'habitation'
         }
       ]
     },
@@ -274,9 +274,10 @@ export class CompanyService extends RawCompanyService {
   }
 
   searchCompaniesBySiret(siret: string) {
-    if (siret === this.DGCCRF_DATA.siret)
+    if (siret === this.DGCCRF_DATA.siret) {
       return of(Object.assign(new Company(), this.DGCCRF_DATA));
-    else
+    } else {
       return super.searchCompaniesBySiret(siret);
+    }
   }
 }
