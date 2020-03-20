@@ -45,6 +45,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   currentPage: number;
   itemsPerPage = 20;
 
+  siretUrlParam: string;
   reportFilter: ReportFilter;
   reportExtractUrl: string;
   statusList: string[];
@@ -104,9 +105,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.reportFilter = this.reportService.currentReportFilter;
         this.itemsPerPage = Number(queryParams.get('per_page')) || 20;
 
-        const siret = params.get('siret');
-        if (siret || this.user.role === Roles.Pro) {
-          this.reportFilter = {...this.reportFilter, siret: siret};
+        this.siretUrlParam = params.get('siret');
+        if (this.siretUrlParam || this.user.role === Roles.Pro) {
+          this.reportFilter = {...this.reportFilter, siret: this.siretUrlParam};
         }
 
         this.userAccesses = userAccesses;

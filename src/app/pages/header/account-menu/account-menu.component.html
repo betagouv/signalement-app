@@ -20,7 +20,7 @@
         <li role="menuitem"><span class="item"><b>Profil</b> : {{ user.role }}</span></li>
         <li class="divider dropdown-divider"></li>
         <li role="menuitem"><span [routerLink]="['suivi-des-signalements']" class="dropdown-item pointer">Suivi des signalements</span></li>
-        <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><span [routerLink]="['entreprises-les-plus-signales']" class="dropdown-item pointer">Entreprises les plus signalées</span></li>
+        <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><span [routerLink]="['entreprises']" class="dropdown-item pointer">Suivi des entreprises</span></li>
         <li role="menuitem"><span [routerLink]="['abonnements']" class="dropdown-item pointer" *appPermission="permissions.subscribeReports">Abonnements</span></li>
         <li role="menuitem" *appRole="[roles.Pro]"><span [routerLink]="['mes-entreprises']" class="dropdown-item pointer">Mes entreprises</span></li>
         <li role="menuitem" *appRole="[roles.Admin]"><span [routerLink]="['admin/invitation-ccrf']" class="dropdown-item pointer">Inviter un utilisateur DGCCRF</span></li>

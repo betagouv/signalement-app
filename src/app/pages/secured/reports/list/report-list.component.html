@@ -2,7 +2,7 @@
 
   <app-banner title="Suivi des signalements"
             [subTitle]="reportFilter.siret ? 'SIRET ' + reportFilter.siret : ''"
-            [backButton]="userAccesses?.length > 1 && reportFilter.siret">
+            [backButton]="siretUrlParam !== null">
   </app-banner>
 
   <section class="section section-white position-relative">
