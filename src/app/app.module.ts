@@ -28,6 +28,8 @@ import { ComponentsModule, NgxLoadingConfig } from './components/components.modu
 import { ReportsModule } from './pages/reports/reports.module';
 import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
+import { AbTestsModule } from 'angular-ab-tests';
+import { SVETestingScope, SVETestingVersions } from './utils';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -87,6 +89,17 @@ class ErrorLogger extends ErrorHandler {
     TooltipModule,
     Angulartics2Module.forRoot(),
     ComponentsModule,
+    AbTestsModule.forRoot(
+      [
+        {
+          versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test2 ],
+          versionForCrawlers: SVETestingVersions.NoTest,
+          scope: SVETestingScope,
+          expiration: 5,
+          weights: { [SVETestingVersions.NoTest]: 0, [SVETestingVersions.Test2]: 99 }
+        }
+      ]
+    )
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
