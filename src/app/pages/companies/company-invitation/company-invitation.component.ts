@@ -30,8 +30,8 @@ export class CompanyInvitationComponent implements OnInit {
   showErrors = false;
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.companyInvitation.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.companyInvitation.description });
+    this.titleService.setTitle(pages.companies.companyInvitation.title);
+    this.meta.updateTag({ name: 'description', content: pages.companies.companyInvitation.description });
     this.initForm();
   }
 

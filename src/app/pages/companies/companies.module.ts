@@ -9,6 +9,11 @@ import { CompanyActivationComponent } from './company-activation/company-activat
 import { MyCompaniesComponent } from './my-companies/my-companies.component';
 import { CompanyInvitationComponent } from './company-invitation/company-invitation.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { CompaniesAdminComponent } from './companies-admin/companies-admin.component';
+import { AppRoleModule } from '../../directives/app-role/app-role.module';
+import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
+import { PaginationModule } from 'ngx-bootstrap';
+import { CompanyCardComponent } from './company-card/company-card.component';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
@@ -16,6 +21,9 @@ const routes: Routes = [
   { path: 'entreprise/activation', component: CompanyActivationComponent },
   { path: 'activation', component: CompanyActivationComponent }, // TODO temporary fix, it can be removed after the 05/04/2020
   { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard] },
+  { path: 'entreprises', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
+  { path: 'entreprises/les-plus-signalees', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
+  { path: 'entreprises/recherche', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -23,7 +31,9 @@ const routes: Routes = [
     CompanyActivationComponent,
     CompanyAccessesComponent,
     CompanyInvitationComponent,
-    MyCompaniesComponent
+    MyCompaniesComponent,
+    CompaniesAdminComponent,
+    CompanyCardComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +42,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
+    AppRoleModule,
+    AppPermissionModule,
+    PaginationModule.forRoot(),
   ],
   exports: [
     RouterModule

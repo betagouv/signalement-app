@@ -6,24 +6,22 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BsDatepickerModule, BsDropdownModule, ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { ReportDetailComponent } from './reports/detail/report-detail.component';
 import { ReportListComponent } from './reports/list/report-list.component';
-import { MostReportedListComponent } from './reports/ordered/most-reported-list.component';
 import { DGCCRFComponent } from './dgccrf/dgccrf.component';
 import { AsyncFilesComponent } from './downloads/asyncfiles.component';
 import { AdminComponent } from './admin/admin.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppPermissionDirective } from '../../directives/app-permission.directive';
-import { AppRoleDirective } from '../../directives/app-role.directive';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
+import { AppRoleModule } from '../../directives/app-role/app-role.module';
+import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
 
 const routes: Routes = [
   { path: 'admin/invitation-ccrf', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'pro-les-plus-signales', component: MostReportedListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
   { path: 'abonnements', component: SubscriptionComponent, canActivate: [AuthGuard] },
   { path: 'mes-telechargements', component: AsyncFilesComponent, canActivate: [AuthGuard] },
@@ -35,11 +33,8 @@ const routes: Routes = [
     ReportListComponent,
     ReportDetailComponent,
     EventComponent,
-    AppPermissionDirective,
-    AppRoleDirective,
     DGCCRFComponent,
     SubscriptionComponent,
-    MostReportedListComponent,
     AsyncFilesComponent,
     AdminComponent
   ],
@@ -55,12 +50,12 @@ const routes: Routes = [
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     BsDatepickerModule.forRoot(),
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    AppRoleModule,
+    AppPermissionModule,
   ],
   exports: [
     RouterModule,
-    AppRoleDirective,
-    AppPermissionDirective,
   ],
   providers: [
     AuthGuard

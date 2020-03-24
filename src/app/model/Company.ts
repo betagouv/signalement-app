@@ -47,6 +47,17 @@ export class Company {
   set libelle_activite_principale(value) {
     this.activityLabel = value;
   }
+
+  get address() {
+    let address = '';
+    const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
+    for (const attribute of addressAttibutes) {
+      if (this[attribute]) {
+        address = address.concat(`${this[attribute]} - `);
+      }
+    }
+    return address.substring(0, address.length - 3);
+  }
 }
 
 export class CompanySearchResult {
