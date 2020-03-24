@@ -8,32 +8,7 @@
     <ng-template  #companyAccesses>
       <div class="row">
         <div class="col-12 col-sm-6 mt-3" *ngFor="let access of myAccesses">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">{{ access.companyName }}</h2>
-              <p class="card-text">
-              <dl class="row">
-                <dt class="col-sm-3">SIRET</dt>
-                <dd class="col-sm-9">{{access.companySiret}}</dd>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-3">Adresse</dt>
-                <dd class="col-sm-9">{{access.companyAddress}}</dd>
-              </dl>
-              <div class="row item pointer link" [routerLink]="['/entreprise', 'acces', access.companySiret]" *ngIf="access.level == 'admin'">
-                <div class="col-12">
-                  Gérer les accès
-                  <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
-                </div>
-              </div>
-              <div class="row item pointer link" [routerLink]="['/suivi-des-signalements', 'siret', access.companySiret]">
-                <div class="col-12">
-                  Consulter les signalements
-                  <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
-                </div>
-              </div>
-            </div>
-          </div>
+          <app-company-card [userAccess]="access"></app-company-card>
         </div>
       </div>
     </ng-template>
