@@ -107,7 +107,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
         this.siretUrlParam = params.get('siret');
         if (this.siretUrlParam || this.user.role === Roles.Pro) {
-          this.reportFilter = {...this.reportFilter, siret: this.siretUrlParam};
+          this.reportFilter.siret = this.siretUrlParam;
         }
 
         this.userAccesses = userAccesses;

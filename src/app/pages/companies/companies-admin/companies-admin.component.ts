@@ -60,11 +60,10 @@ export class CompaniesAdminComponent implements OnInit {
 
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       .subscribe(([url, user]) => {
-        if (user.role === this.roles.Admin) {
-          this.navTabs = [this.searchTab, this.mostReportedTab];
-        } else if (user.role === this.roles.DGCCRF) {
-          this.navTabs = [this.mostReportedTab];
-        }
+        this.navTabs = {
+          [this.roles.Admin]: [this.searchTab, this.mostReportedTab],
+          [this.roles.DGCCRF]: [this.mostReportedTab]
+        }[user.role];
         this.currentNavTab = this.navTabs.find(
           tab => lodash.isEqual(tab.link.slice(1), url.slice(0, 2).map(segment => segment.toString()))
         );
@@ -72,16 +71,10 @@ export class CompaniesAdminComponent implements OnInit {
           this.currentNavTab = this.navTabs[0];
         }
 
-        switch (this.currentNavTab) {
-          case this.searchTab: {
-            this.initSearchForm();
-            return;
-          }
-          case this.mostReportedTab: {
-            this.loadReports(1);
-            return;
-          }
-        }
+        ({
+          [this.searchTab.label]: () => this.initSearchForm(),
+          [this.mostReportedTab.label]: () => this.loadReports(1)
+        }[this.currentNavTab.label])();
       });
 
   }
@@ -142,7 +135,7 @@ export class CompaniesAdminComponent implements OnInit {
           this.totalCount = result.totalCount;
           this.currentPage = page;
 
-          this.lines = result.entities ? result.entities : [];
+          this.lines = result.entities || [];
         },
         err => {
           this.loading = false;
@@ -153,7 +146,7 @@ export class CompaniesAdminComponent implements OnInit {
   changePage(pageEvent: { page: number, itemPerPage: number }) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go('recherche/les-plus-signalees', `page_number=${pageEvent.page}`);
+      this.location.go('entreprises/les-plus-signalees', `page_number=${pageEvent.page}`);
     }
   }
 }
