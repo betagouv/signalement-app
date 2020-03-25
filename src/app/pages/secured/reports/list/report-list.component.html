@@ -90,7 +90,7 @@
               </label>
             </div>
             <div class="col-4 text-left">
-              <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret"/>
+              <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="email"/>
             </div>
             <div class="col-2 text-right">
               <label for="statusFilter">
@@ -127,6 +127,16 @@
             </div>
             <div class="col-4 text-left">
               <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-2 text-right">
+              <label for="emailFilter">
+                Email conso.
+              </label>
+            </div>
+            <div class="col-4 text-left">
+              <input type="text" [(ngModel)]="reportFilter.email" placeholder="Email consommateur" id="emailFilter" name="email"/>
             </div>
           </div>
         </ng-container>
