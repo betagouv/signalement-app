@@ -3,7 +3,7 @@ import { of, throwError } from 'rxjs';
 import { Company, CompanySearchResult } from '../model/Company';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 export const MaxCompanyResult = 20;
 
@@ -59,6 +59,19 @@ class RawCompanyService {
       })
     );
   }
+
+  searchRegisterCompanies(search: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('q', search);
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<Company[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
+          Object.assign(headers, { params: httpParams })
+        );
+      })
+    );
+  }
 }
 
 @Injectable({
@@ -88,16 +101,16 @@ export class CompanyService extends RawCompanyService {
       query: /\borange\b/i,
       results: [
         {
-          "siret": "38012986645100",
-          "nom_raison_sociale": "ORANGE",
-          "l1_normalisee": "ORANGE",
-          "l2_normalisee": "BAT A",
-          "l3_normalisee": null,
-          "l4_normalisee": "1 AVENUE DU PDT NELSON MANDELA",
-          "l5_normalisee": null,
-          "l6_normalisee": "94110 ARCUEIL",
-          "code_postal": "94110",
-          "libelle_activite_principale": "Commerce de détail de matériels de télécommunication en magasin spécialisé"
+          'siret': '38012986645100',
+          'nom_raison_sociale': 'ORANGE',
+          'l1_normalisee': 'ORANGE',
+          'l2_normalisee': 'BAT A',
+          'l3_normalisee': null,
+          'l4_normalisee': '1 AVENUE DU PDT NELSON MANDELA',
+          'l5_normalisee': null,
+          'l6_normalisee': '94110 ARCUEIL',
+          'code_postal': '94110',
+          'libelle_activite_principale': 'Commerce de détail de matériels de télécommunication en magasin spécialisé'
         }
       ]
     },
@@ -105,16 +118,16 @@ export class CompanyService extends RawCompanyService {
       query: /\bsfr\b/i,
       results: [
         {
-          "siret": "34305956400959",
-          "nom_raison_sociale": "SOCIETE FRANCAISE DU RADIOTELEPHONE - SFR",
-          "l1_normalisee": "SOCIETE FRANCAISE DU RADIOTELEPHONE SFR",
-          "l2_normalisee": "SFR",
-          "l3_normalisee": null,
-          "l4_normalisee": "16 RUE DU GENERAL DE BOISSIEU",
-          "l5_normalisee": null,
-          "l6_normalisee": "75015 PARIS 15",
-          "code_postal": "75015",
-          "libelle_activite_principale": "Télécommunications sans fil"
+          'siret': '34305956400959',
+          'nom_raison_sociale': 'SOCIETE FRANCAISE DU RADIOTELEPHONE - SFR',
+          'l1_normalisee': 'SOCIETE FRANCAISE DU RADIOTELEPHONE SFR',
+          'l2_normalisee': 'SFR',
+          'l3_normalisee': null,
+          'l4_normalisee': '16 RUE DU GENERAL DE BOISSIEU',
+          'l5_normalisee': null,
+          'l6_normalisee': '75015 PARIS 15',
+          'code_postal': '75015',
+          'libelle_activite_principale': 'Télécommunications sans fil'
         }
       ]
     },
@@ -122,16 +135,16 @@ export class CompanyService extends RawCompanyService {
       query: /\bbouygues?\b/i,
       results: [
         {
-          "siret": "39748093003464",
-          "nom_raison_sociale": "BOUYGUES TELECOM",
-          "l1_normalisee": "BOUYGUES TELECOM",
-          "l2_normalisee": "13 A 15",
-          "l3_normalisee": null,
-          "l4_normalisee": "13 AVENUE DU MARECHAL JUIN",
-          "l5_normalisee": null,
-          "l6_normalisee": "92360 MEUDON",
-          "code_postal": "92360",
-          "libelle_activite_principale": "Autres activités informatiques"
+          'siret': '39748093003464',
+          'nom_raison_sociale': 'BOUYGUES TELECOM',
+          'l1_normalisee': 'BOUYGUES TELECOM',
+          'l2_normalisee': '13 A 15',
+          'l3_normalisee': null,
+          'l4_normalisee': '13 AVENUE DU MARECHAL JUIN',
+          'l5_normalisee': null,
+          'l6_normalisee': '92360 MEUDON',
+          'code_postal': '92360',
+          'libelle_activite_principale': 'Autres activités informatiques'
         }
       ]
     },
@@ -139,28 +152,28 @@ export class CompanyService extends RawCompanyService {
       query: /\bfree\b/i,
       results: [
         {
-          "siret": "49924713800021",
-          "nom_raison_sociale": "FREE MOBILE",
-          "l1_normalisee": "FREE MOBILE",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": "16 RUE DE LA VILLE L EVEQUE",
-          "l5_normalisee": null,
-          "l6_normalisee": "75008 PARIS 8",
-          "code_postal": "75008",
-          "libelle_activite_principale": "Télécommunications sans fil"
+          'siret': '49924713800021',
+          'nom_raison_sociale': 'FREE MOBILE',
+          'l1_normalisee': 'FREE MOBILE',
+          'l2_normalisee': null,
+          'l3_normalisee': null,
+          'l4_normalisee': '16 RUE DE LA VILLE L EVEQUE',
+          'l5_normalisee': null,
+          'l6_normalisee': '75008 PARIS 8',
+          'code_postal': '75008',
+          'libelle_activite_principale': 'Télécommunications sans fil'
         },
         {
-          "siret": "42193886100034",
-          "nom_raison_sociale": "FREE",
-          "l1_normalisee": "FREE",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": "8 RUE DE LA VILLE L EVEQUE",
-          "l5_normalisee": null,
-          "l6_normalisee": "75008 PARIS 8",
-          "code_postal": "75008",
-          "libelle_activite_principale": "Télécommunications filaires"
+          'siret': '42193886100034',
+          'nom_raison_sociale': 'FREE',
+          'l1_normalisee': 'FREE',
+          'l2_normalisee': null,
+          'l3_normalisee': null,
+          'l4_normalisee': '8 RUE DE LA VILLE L EVEQUE',
+          'l5_normalisee': null,
+          'l6_normalisee': '75008 PARIS 8',
+          'code_postal': '75008',
+          'libelle_activite_principale': 'Télécommunications filaires'
         }
       ]
     },
@@ -168,17 +181,17 @@ export class CompanyService extends RawCompanyService {
       query: /\beni\b/i,
       results: [
         {
-          "siret": "45122569200024",
-          "nom_raison_sociale": "ENI GAS & POWER FRANCE",
-          "l1_normalisee": "ENI GAS POWER FRANCE",
-          "l2_normalisee": "ENI",
-          "l3_normalisee": null,
-          "l4_normalisee": "24 RUE JACQUES IBERT",
-          "l5_normalisee": null,
-          "l6_normalisee": "92300 LEVALLOIS-PERRET",
-          "code_postal": "92300",
-          "libelle_activite_principale": "Commerce de combustibles gazeux par conduites",
-          "highlight": "Pour tout signalement relatif à ENI (abonnements énergétiques, gaz, etc.)"
+          'siret': '45122569200024',
+          'nom_raison_sociale': 'ENI GAS & POWER FRANCE',
+          'l1_normalisee': 'ENI GAS POWER FRANCE',
+          'l2_normalisee': 'ENI',
+          'l3_normalisee': null,
+          'l4_normalisee': '24 RUE JACQUES IBERT',
+          'l5_normalisee': null,
+          'l6_normalisee': '92300 LEVALLOIS-PERRET',
+          'code_postal': '92300',
+          'libelle_activite_principale': 'Commerce de combustibles gazeux par conduites',
+          'highlight': 'Pour tout signalement relatif à ENI (abonnements énergétiques, gaz, etc.)'
         }
       ]
     },
@@ -186,36 +199,72 @@ export class CompanyService extends RawCompanyService {
       query: /\bamazone?\b/i,
       results: [
         {
-          "siret": "48777332700027",
-          "nom_raison_sociale": "AMAZON EU SARL",
-          "l1_normalisee": "AMAZON EU SARL",
-          "l2_normalisee": "AMAZON EU SARL SUCCURSALE FRANCAISE",
-          "l3_normalisee": null,
-          "l4_normalisee": "67 BOULEVARD DU GENERAL LECLERC",
-          "l5_normalisee": null,
-          "l6_normalisee": "92110 CLICHY",
-          "code_postal": "92110",
-          "libelle_activite_principale": "Vente à distance sur catalogue général",
-          "highlight": "Pour tout problème concernant le site de vente en ligne Amazon"
+          'siret': '48777332700027',
+          'nom_raison_sociale': 'AMAZON EU SARL',
+          'l1_normalisee': 'AMAZON EU SARL',
+          'l2_normalisee': 'AMAZON EU SARL SUCCURSALE FRANCAISE',
+          'l3_normalisee': null,
+          'l4_normalisee': '67 BOULEVARD DU GENERAL LECLERC',
+          'l5_normalisee': null,
+          'l6_normalisee': '92110 CLICHY',
+          'code_postal': '92110',
+          'libelle_activite_principale': 'Vente à distance sur catalogue général',
+          'highlight': 'Pour tout problème concernant le site de vente en ligne Amazon'
+        }
+      ]
+    },
+    {
+      query: /\bmaif\b/i,
+      results: [
+        {
+          'siret': '77570970201646',
+          'nom_raison_sociale': 'MUTUELLE ASSURANCE INSTITUTEUR FRANCE',
+          'l1_normalisee': 'MUTUELLE ASSURANCE INSTITUTEUR FRANCE',
+          'l2_normalisee': 'MAIF',
+          'l3_normalisee': null,
+          'l4_normalisee': '200 AVENUE SALVADOR ALLENDE',
+          'l5_normalisee': 'BP 303',
+          'l6_normalisee': '79000 NIORT',
+          'code_postal': '79000',
+          'libelle_activite_principale': 'Autres assurances',
+          'highlight': 'Pour tout problème concernant votre assureur, peu importe votre lieu d\'habitation'
+        }
+      ]
+    },
+    {
+      query: /\bgrdf\b/i,
+      results: [
+        {
+          'siret': '44478651100022',
+          'nom_raison_sociale': 'GRDF',
+          'l1_normalisee': 'GRDF',
+          'l2_normalisee': 'TSA 60800',
+          'l3_normalisee': null,
+          'l4_normalisee': '6 RUE CONDORCET',
+          'l5_normalisee': null,
+          'l6_normalisee': '75009 PARIS 9',
+          'code_postal': '75009',
+          'libelle_activite_principale': 'Distribution de combustibles gazeux par conduites',
+          'highlight': 'Pour tout problème avec GRDF, peu importe votre lieu d\'habitation'
         }
       ]
     },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
-    let match = this.searchHooks.find(hook => hook.query.test(search));
+    const match = this.searchHooks.find(hook => hook.query.test(search));
     return super.searchCompanies(search, searchPostalCode).pipe(
       map(results => {
         if (match !== undefined) {
-          let matches = Object.assign(new CompanySearchResult(), {
+          const matches = Object.assign(new CompanySearchResult(), {
             total: match.results.length,
             etablissement: match.results
           });
-          matches.companies.filter(c => !c.highlight).forEach(c => c.highlight = "Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)");
+          matches.companies.filter(c => !c.highlight).forEach(c => c.highlight = 'Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)');
           results.companies = [
             ...matches.companies,
             ...results.companies.filter(c =>
-              !match.results.find(r => r.siret == c.siret)
+              !match.results.find(r => r.siret === c.siret)
             )];
           results.total = results.companies.length;
         }
@@ -225,9 +274,10 @@ export class CompanyService extends RawCompanyService {
   }
 
   searchCompaniesBySiret(siret: string) {
-    if (siret === this.DGCCRF_DATA.siret)
+    if (siret === this.DGCCRF_DATA.siret) {
       return of(Object.assign(new Company(), this.DGCCRF_DATA));
-    else
+    } else {
       return super.searchCompaniesBySiret(siret);
+    }
   }
 }

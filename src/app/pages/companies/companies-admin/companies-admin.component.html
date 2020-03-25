@@ -1,0 +1,108 @@
+<div class="overflow-container">
+  <app-banner title="Suivi des entreprises"></app-banner>
+
+  <main role="main">
+
+    <section class="section section-lightest-grey">
+      <div class="container position-relative bg-white pb-3">
+        <nav class="nav nav-tabs nav-justified mb-3">
+          <a class="nav-item nav-link" *ngFor="let navTab of navTabs" [ngClass]="navTab === currentNavTab ? 'active' : ''" [routerLink]="navTab.link">
+            {{navTab.label}}
+          </a>
+        </nav>
+
+        <ng-container [ngSwitch]="currentNavTab">
+
+          <ng-container *ngSwitchCase="searchTab">
+            <form [formGroup]="searchForm" (ngSubmit)="submitSearchForm()">
+              <div class="form-group">
+                <div class="control-label">
+                  <label for="search">
+                    Recherche par SIRET / Nom / Référence de courrier<span class="error">*</span>
+                  </label>
+                </div>
+                <div>
+                  <input [formControl]="searchCtrl" type="text" class="form-control" id="search" placeholder="Entreprise recherchée">
+                </div>
+              </div>
+              <div class="notification error mt-3" *ngIf="loadingError">
+                Une erreur technique s'est produite, veuillez réessayer ultérieurement.<br />
+              </div>
+              <div class="form-group">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-lg btn-primary" [disabled]="this.searchForm.invalid">
+                    Rechercher
+                  </button>
+                </div>
+              </div>
+            </form>
+            <ng-container *ngIf="companies">
+              <hr />
+              <div [ngSwitch]="companies.length">
+                <h2 class="text-center" *ngSwitchCase="0">Aucune entreprise trouvée</h2>
+                <ng-container *ngSwitchCase="1">
+                  <h2 class="text-center">Une entreprise trouvée</h2>
+                  <template [ngTemplateOutlet]="companyCards"></template>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  <h2 class="text-center" *ngIf="companies.length >= maxCompanyResult; else displayCompanies">Il y a trop d'entreprises correspondant à la recherche</h2>
+                  <ng-template #displayCompanies>
+                    <h2 class="text-center">{{companies.length}} entreprises trouvées</h2>
+                    <template [ngTemplateOutlet]="companyCards"></template>
+                  </ng-template>
+                </ng-container>
+                <ng-template #companyCards>
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies">
+                      <app-company-card [userAccess]="companyToUserAccess(company)"></app-company-card>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="mostReportedTab">
+
+            <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Commune</th>
+                  <th>SIRET</th>
+                  <th>Entreprise</th>
+                  <th>Nombre de signalements</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="!loading && !lines.length">
+                  <td colspan="7">
+                    <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
+                    <span *ngIf="!loadingError">Aucun signalement trouvé</span>
+                  </td>
+                </tr>
+                <tr *ngFor="let line of lines" class="pointer" [routerLink]="['/suivi-des-signalements', 'siret', line.companySiret]">
+                  <td>{{line.companyPostalCode}}</td>
+                  <td>{{line.companySiret}}</td>
+                  <td>{{line.companyName}}</td>
+                  <td>{{line.count}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pagination *appRole="[roles.Admin, roles.DGCCRF]" [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+                        [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
+            </pagination>
+          </ng-container>
+
+        </ng-container>
+
+        <ngx-loading [show]="loading"></ngx-loading>
+
+      </div>
+    </section>
+  </main>
+</div>
+
+

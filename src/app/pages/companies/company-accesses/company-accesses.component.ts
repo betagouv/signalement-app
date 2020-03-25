@@ -34,8 +34,8 @@ export class CompanyAccessesComponent implements OnInit {
   showSuccess = false;
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.companyAccesses.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.companyAccesses.description });
+    this.titleService.setTitle(pages.companies.companyAccesses.title);
+    this.meta.updateTag({ name: 'description', content: pages.companies .companyAccesses.description });
 
     const siretParam = this.route.params.pipe(map(p => p.siret));
 

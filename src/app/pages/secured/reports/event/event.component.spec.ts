@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BsModalRef, ModalModule } from 'ngx-bootstrap';
-import { AppPermissionDirective } from '../../../../directives/app-permission.directive';
-import { AppRoleDirective } from '../../../../directives/app-role.directive';
+import { AppPermissionDirective } from '../../../../directives/app-permission/app-permission.directive';
+import { AppRoleDirective } from '../../../../directives/app-role/app-role.directive';
 
 describe('EventComponent', () => {
   let component: EventComponent;

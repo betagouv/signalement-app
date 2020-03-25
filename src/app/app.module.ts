@@ -28,6 +28,8 @@ import { ComponentsModule, NgxLoadingConfig } from './components/components.modu
 import { ReportsModule } from './pages/reports/reports.module';
 import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
+import { AppRoleModule } from './directives/app-role/app-role.module';
+import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -87,6 +89,8 @@ class ErrorLogger extends ErrorHandler {
     TooltipModule,
     Angulartics2Module.forRoot(),
     ComponentsModule,
+    AppRoleModule,
+    AppPermissionModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
