@@ -414,7 +414,7 @@ export class DetailsComponent implements OnInit {
   setContinueReportValue(value: boolean) {
     this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.continueReport : ReportEventActions.stopReport);
     if (!value) {
-      window.location.href = 'https://www.economie.gouv.fr/dgccrf';
+      window.location.href = 'https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier';
     } else {
       this.continueReport = true;
     }
