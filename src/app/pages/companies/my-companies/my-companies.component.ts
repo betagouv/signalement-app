@@ -29,8 +29,8 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
               private companyAccessesService: CompanyAccessesService) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.myCompanies.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.myCompanies.description });
+    this.titleService.setTitle(pages.companies.myCompanies.title);
+    this.meta.updateTag({ name: 'description', content: pages.companies.myCompanies.description });
     this.authenticationService.user
     .pipe(takeUntil(this.unsubscribe))
     .subscribe(user => {

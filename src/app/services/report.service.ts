@@ -5,7 +5,7 @@ import { DetailInputValue, Report } from '../model/Report';
 import { Company } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
-import { map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
@@ -36,7 +36,7 @@ export class ReportService {
         subcategories: !report.subcategories ? [] : report.subcategories
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
         companyName: report.company.name,
-        companyAddress: this.company2Address(report.company),
+        companyAddress: report.company.address,
         companyPostalCode: report.company.postalCode,
         companySiret: report.company.siret,
         firstName: report.consumer.firstName,
@@ -75,7 +75,7 @@ export class ReportService {
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'company']),
           {
             name: company.name,
-            address: this.company2Address(company),
+            address: company.address,
             postalCode: company.postalCode,
             siret: company.siret,
           },
@@ -171,7 +171,7 @@ export class ReportService {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
 
-    ['siret', 'status', 'category', 'details'].forEach(filterName => {
+    ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
       if (reportFilter[filterName]) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
       }
@@ -216,19 +216,6 @@ export class ReportService {
         );
       })
     );
-  }
-
-  company2Address(company: Company) {
-    let address = '';
-    const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
-    if (company) {
-      for (const attribute of addressAttibutes) {
-        if (company[attribute]) {
-          address = address.concat(`${company[attribute]} - `);
-        }
-      }
-    }
-    return address.substring(0, address.length - 3);
   }
 
   private reportApi2report(reportWithFiles: {report: any, files: UploadedFile[]}) {

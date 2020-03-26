@@ -30,6 +30,8 @@ import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
 import { AbTestsModule } from 'angular-ab-tests';
 import { SVETestingScope, SVETestingVersions } from './utils';
+import { AppRoleModule } from './directives/app-role/app-role.module';
+import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -99,7 +101,9 @@ class ErrorLogger extends ErrorHandler {
           weights: { NoTest: 0, Test2: 99 }
         }
       ]
-    )
+    ),
+    AppRoleModule,
+    AppPermissionModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
