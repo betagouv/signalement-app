@@ -301,14 +301,22 @@ export class ReportDetailComponent implements OnInit {
     this.responseForm = undefined;
   }
 
-  showActionForm(actionType?: EventActionValues) {
+  showActionForm() {
+    function detailRequired(actionType: string, detail: string) {
+      return (group: FormGroup) => {
+        if (group.controls[actionType].value === EventActionValues.Comment && !group.controls[detail].value) {
+          return { detailRequired: true };
+        }
+      };
+    }
+
     this.responseSuccess = false;
-    this.actionTypeCtrl = this.formBuilder.control(actionType || '', Validators.required);
-    this.detailCtrl = this.formBuilder.control('', Validators.required);
+    this.actionTypeCtrl = this.formBuilder.control('', Validators.required);
+    this.detailCtrl = this.formBuilder.control('');
     this.actionForm = this.formBuilder.group({
       action: this.actionTypeCtrl,
       detail: this.detailCtrl
-    });
+    }, { validator: detailRequired('action', 'detail')});
     this.uploadedFiles = [];
   }
 

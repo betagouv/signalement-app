@@ -20,6 +20,8 @@ export enum EventActionValues {
   EditCompany = 'Modification du commerçant',
   Comment = 'Ajout d\'un commentaire',
   Control = 'Contrôle effectué',
+  ConsumerAttachments = 'Ajout de pièces jointes du consommateur',
+  ProfessionalAttachments = 'Ajout de pièces jointes du professionnel'
 }
 
 export class ReportResponse {
