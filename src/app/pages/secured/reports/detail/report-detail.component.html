@@ -286,7 +286,7 @@
                 <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
                   <span class="collapsed-icon">&#43;</span>
                   <span class="uncollapsed-icon">&#8722;</span>
-                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}} ({{event.eventType}})
                 </a>
                 <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
                   {{event.details.description}}
@@ -294,7 +294,7 @@
               </ng-container>
               <ng-template #noDescription>
                 <span>
-                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}} ({{event.eventType}})
                 </span>
               </ng-template>
             </div>
@@ -370,7 +370,7 @@
                 <label class="text-center" [class]="hasError(responseTypeCtrl) ? 'error' : ''">
                   Pouvez-vous préciser votre réponse ? <span class="error">*</span>
                 </label>
-                <div [class]="getResponseTypeClass(reportResponseTypes.Accepted)">
+                <div [class]="getTypeClass(reportResponseTypes.Accepted)">
                   <div class="row pb-2 pt-2">
                     <div class="col-2 col-sm-1 text-right pr-1">
                       <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
@@ -380,7 +380,7 @@
                     </div>
                   </div>
                 </div>
-                <div [class]="getResponseTypeClass(reportResponseTypes.Rejected)">
+                <div [class]="getTypeClass(reportResponseTypes.Rejected)">
                   <div class="row pb-2 pt-2">
                     <div class="col-2 col-sm-1 text-right pr-1">
                       <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
@@ -390,7 +390,7 @@
                     </div>
                   </div>
                 </div>
-                <div [class]="getResponseTypeClass(reportResponseTypes.NotConcerned)">
+                <div [class]="getTypeClass(reportResponseTypes.NotConcerned)">
                   <div class="row pb-2 pt-2">
                     <div class="col-2 col-sm-1 text-right pr-1">
                       <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
@@ -456,10 +456,96 @@
           </div>
         </ng-template>
       </div>
-      <div class="notification success" *ngIf="responseSuccess">
-        Votre réponse a bien été prise en compte, nous vous en remercions.
-      </div>
     </ng-container>
+
+    <div class="pb-3 text-center" *ngIf="!actionForm; else actionFormTpl">
+      <div class="mb-4">
+        <button class="btn btn-primary btn-lg" (click)="showActionForm(eventActionValues.Comment)" *appRole="[roles.Admin, roles.Pro]">
+          Ajouter un commentaire ou des pièces jointes
+        </button>
+        <ng-container *appRole="[roles.DGCCRF]">
+          <button class="btn btn-outline-primary btn-lg" (click)="showActionForm(eventActionValues.Comment)">
+            Ajouter un commentaire interne à la DGCCRF
+          </button>
+          <br/>
+          <button class="btn btn-primary btn-lg mt-3" (click)="showActionForm(eventActionValues.Control)">
+            Saisir un contrôle
+          </button>
+        </ng-container>
+      </div>
+    </div>
+    <ng-template #actionFormTpl>
+      <div class="notification">
+        <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
+
+          <ng-container *appRole="[roles.Pro]">
+            <div class="form__group mt-4">
+              <div class="row">
+                <div class="col-12">
+                  <label for="proCommentInput" [class]="hasError(detailCtrl) ? 'error' : ''">
+                    Apporter un commentaire <b>à l'attention de la DGCCRF</b> qui ne sera pas transmis au consommateur
+                  </label>
+                  <textarea id="proCommentInput" [formControl]="detailCtrl"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group mt-4">
+              <app-attachments label="Pièces jointes <b>visibles uniquement par la DGCCRF</b>"
+                               [uploadedFiles]="uploadedFiles"
+                               [origin]="fileOrigins.Professional">
+              </app-attachments>
+            </div>
+          </ng-container>
+
+          <ng-container class="form__group mt-4" *appRole="[roles.Admin, roles.DGCCRF]">
+            <div class="form__group mt-4">
+              <div class="row">
+                <div class="col-12" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
+                  <label for="adminCommentInput" [class]="hasError(detailCtrl) ? 'error' : ''">
+                    Apporter un commentaire <b>interne à la DGCCRF</b>
+                  </label>
+                  <textarea id="adminCommentInput" [formControl]="detailCtrl"></textarea>
+                </div>
+                <div class="col-12" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
+                  <label for="controlInput" [class]="hasError(detailCtrl) ? 'error' : ''">
+                    Détail du contrôle
+                  </label>
+                  <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group mt-4" *appRole="[roles.Admin]">
+              <app-attachments label="Pièces jointes du consommateur (visibles par le professionnel)"
+                               [uploadedFiles]="uploadedFiles"
+                               [origin]="fileOrigins.Consumer">
+              </app-attachments>
+            </div>
+          </ng-container>
+
+          <div class="notification error" *ngIf="showErrors && actionForm.invalid">
+            Veuillez renseigner les champs obligatoires.<br />
+          </div>
+
+          <div class="notification error" *ngIf="loadingError">
+            Une erreur technique s'est produite<br />
+          </div>
+
+          <div class="mt-4 text-center">
+            <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideActionForm()">Annuler</button>
+            &nbsp;
+            <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+              Envoyer
+            </button>
+          </div>
+        </form>
+        <ngx-loading [show]="loading"></ngx-loading>
+      </div>
+    </ng-template>
+    <div class="notification success" *ngIf="responseSuccess">
+      Votre saisie a bien été prise en compte, nous vous en remercions.
+    </div>
   </div>
 </section>
 

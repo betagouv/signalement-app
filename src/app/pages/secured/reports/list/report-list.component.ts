@@ -5,7 +5,6 @@ import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { EventComponent } from '../event/event.component';
 import { ReportFilter } from '../../../../model/ReportFilter';
 import { combineLatest, iif, of, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
@@ -219,15 +218,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.setItem(ReportsScrollYStorageKey, window.scrollY.toString());
     }
-  }
-
-  addEvent(event$: Event, report: Report) {
-    event$.stopPropagation();
-    this.modalRef = this.modalService.show(
-      EventComponent,
-      {
-        initialState: {reportId: report.id, siret: report.company.siret}
-      });
   }
 
   updateReportOnModalHide() {
