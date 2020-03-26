@@ -98,7 +98,7 @@ class ErrorLogger extends ErrorHandler {
           versionForCrawlers: SVETestingVersions.NoTest,
           scope: SVETestingScope,
           expiration: 5,
-          weights: { NoTest: 0, Test2: 99 }
+          weights: { NoTest: 79, Test2: 20 }
         }
       ]
     ),
