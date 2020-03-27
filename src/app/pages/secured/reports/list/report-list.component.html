@@ -129,6 +129,16 @@
               <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" />
             </div>
           </div>
+          <div class="row form-group">
+            <div class="col-2 text-right">
+              <label for="emailFilter">
+                Email conso.
+              </label>
+            </div>
+            <div class="col-4 text-left">
+              <input type="text" [(ngModel)]="reportFilter.email" placeholder="Email consommateur" id="emailFilter" name="email"/>
+            </div>
+          </div>
         </ng-container>
         <div class="container max-width" *appRole="[roles.Pro]">
           <div class="row form-group">

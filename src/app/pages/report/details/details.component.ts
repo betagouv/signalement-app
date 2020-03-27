@@ -14,6 +14,8 @@ import { isDefined } from '@angular/compiler/src/util';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { Keyword } from '../../../model/Keyword';
+import { AbTestsService } from 'angular-ab-tests';
+import { SVETestingScope, SVETestingVersions } from '../../../utils';
 
 export const fileSizeMax = 5000000;
 
@@ -58,6 +60,8 @@ export class DetailsComponent implements OnInit {
   maxDate: Date;
   fileOrigins = FileOrigin;
 
+  continueReport: boolean;
+
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
@@ -65,7 +69,8 @@ export class DetailsComponent implements OnInit {
               private fileUploaderService: FileUploaderService,
               private localeService: BsLocaleService,
               private keywordService: KeywordService,
-              private anomalyService: AnomalyService) {
+              private anomalyService: AnomalyService,
+              private abTestsService: AbTestsService) {
   }
 
   ngOnInit() {
@@ -88,6 +93,12 @@ export class DetailsComponent implements OnInit {
     this.searchKeywords();
 
     this.maxDate = new Date();
+
+    if (this.abTestsService.getVersion(SVETestingScope) === SVETestingVersions.NoTest) {
+      this.continueReport = true;
+    } else {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.requestUserToContinueReport);
+    }
 
   }
 
@@ -398,6 +409,15 @@ export class DetailsComponent implements OnInit {
   setEmployeeConsumerValue(value: boolean) {
     this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
     this.report.employeeConsumer = value;
+  }
+
+  setContinueReportValue(value: boolean) {
+    this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.continueReport : ReportEventActions.stopReport);
+    if (!value) {
+      window.location.href = 'https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier';
+    } else {
+      this.continueReport = true;
+    }
   }
 
 }
