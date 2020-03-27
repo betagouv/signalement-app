@@ -43,8 +43,14 @@
                 <span [innerHTML]="detailInputValue.label"></span>
                 &nbsp;<span [innerHTML]="detailInputValue.value"></span>
               </div>
-              <div *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length;">
-                Pièce(s) jointe(s) :
+            </div>
+          </div>
+          <ng-container *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length">
+            <hr />
+            <h3 *ngIf="report.consumerUploadedFiles.length === 1">Pièce jointe fournie par le consommateur</h3>
+            <h3 *ngIf="report.consumerUploadedFiles.length > 1">Pièces jointes fournies par le consommateur</h3>
+            <div class="row">
+              <div class="col-12">
                 <table class="table table-sm">
                   <tbody>
                     <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
@@ -71,7 +77,7 @@
                 </table>
               </div>
             </div>
-          </div>
+          </ng-container>
         </ng-container>
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
@@ -480,124 +486,129 @@
     </ng-container>
 
     <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-      <div class="pb-3 text-center" *ngIf="!actionForm; else actionFormTpl">
-        <div class="mb-4">
-          <button class="btn btn-primary btn-lg" (click)="showActionForm()">
-            Ajouter des éléments
-          </button>
+      <div *ngIf="report">
+        <div class="pb-3 text-center" *ngIf="!actionForm; else actionFormTpl">
+          <div class="mb-4">
+            <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.DGCCRF]">
+              Ajouter des informations DGCCRF
+            </button>
+            <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.Admin]">
+              Ajouter des informations
+            </button>
+          </div>
         </div>
-      </div>
-      <ng-template #actionFormTpl>
-        <div class="notification">
-          <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
+        <ng-template #actionFormTpl>
+          <div class="notification">
+            <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
 
-            <div class="form__group">
-              <label class="text-center" [class]="hasError(actionTypeCtrl) ? 'error' : ''">
-                Pouvez-vous préciser ? <span class="error">*</span>
-              </label>
-              <div [class]="getTypeClass(eventActionValues.Comment)">
-                <div class="row pb-2 pt-2">
-                  <div class="col-2 col-sm-1 text-right pr-1">
-                    <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
-                  </div>
-                  <div class="col-10 col-sm-11 pl-1">
-                    <label for="commentAction" class="label-inline pointer">Ajouter un commentaire</label>
-                  </div>
-                </div>
-              </div>
-              <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
-                <div class="row pb-2 pt-2">
-                  <div class="col-2 col-sm-1 text-right pr-1">
-                    <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
-                  </div>
-                  <div class="col-10 col-sm-11 pl-1">
-                    <label for="consumerAttachmentsAction" class="label-inline pointer">Pièces jointes du consommateur</label>
+              <div class="form__group">
+                <label class="text-center" [class]="hasError(actionTypeCtrl) ? 'error' : ''">
+                  Pouvez-vous préciser ? <span class="error">*</span>
+                </label>
+                <div [class]="getTypeClass(eventActionValues.Comment)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="commentAction" class="label-inline pointer">Ajouter un commentaire (interne à la DGCCRF)</label>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
-                <div class="row pb-2 pt-2">
-                  <div class="col-2 col-sm-1 text-right pr-1">
-                    <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
-                  </div>
-                  <div class="col-10 col-sm-11 pl-1">
-                    <label for="proAttachmentsAction" class="label-inline pointer">Pièces jointes du professionel</label>
-                  </div>
-                </div>
-              </div>
-              <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
-                <div class="row pb-2 pt-2">
-                  <div class="col-2 col-sm-1 text-right pr-1">
-                    <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
-                  </div>
-                  <div class="col-10 col-sm-11 pl-1">
-                    <label for="controlAction" class="label-inline pointer">Contrôle effectué</label>
+                <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="consumerAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par le consommateur</label>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <ng-container *ngIf="actionTypeCtrl.valid">
-
-              <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
-                <div class="row">
-                  <div class="col-12">
-                    <label for="commentInput" [class]="hasError(detailCtrl) ? 'error' : ''">
-                      Commentaire <b>interne à la DGCCRF</b> <span class="error">*</span>
-                    </label>
-                    <textarea id="commentInput" [formControl]="detailCtrl"></textarea>
+                <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="proAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par l'entreprise</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="controlAction" class="label-inline pointer">Contrôle effectué (interne à la DGCCRF)</label>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ConsumerAttachments">
-                <app-attachments label="Pièces jointes du consommateur (visibles par le professionnel et la DGCCRF)"
-                                 [uploadedFiles]="uploadedFiles"
-                                 [origin]="fileOrigins.Consumer">
-                </app-attachments>
-              </div>
+              <ng-container *ngIf="actionTypeCtrl.valid">
 
-              <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ProfessionalAttachments">
-                <app-attachments label="Pièces jointes du professionel (visibles par le professionnel et la DGCCRF)"
-                                 [uploadedFiles]="uploadedFiles"
-                                 [origin]="fileOrigins.Professional">
-                </app-attachments>
-              </div>
-
-              <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
-                <div class="row">
-                  <div class="col-12">
-                    <label for="controlInput">
-                      Détail du contrôle (facultatif) <b>interne à la DGCCRF</b>
-                    </label>
-                    <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="commentInput" [class]="hasError(detailCtrl) ? 'error' : ''">
+                        Commentaire <span class="error">*</span>
+                      </label>
+                      <textarea id="commentInput" [formControl]="detailCtrl"></textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="notification error" *ngIf="showErrors && actionForm.invalid">
-                Veuillez renseigner les champs obligatoires.<br />
-              </div>
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ConsumerAttachments">
+                  <app-attachments label="Pièces jointes fournies par le consommateur (visibles par l'entreprise et la DGCCRF)"
+                                   [uploadedFiles]="uploadedFiles"
+                                   [origin]="fileOrigins.Consumer">
+                  </app-attachments>
+                </div>
 
-              <div class="notification error" *ngIf="loadingError">
-                Une erreur technique s'est produite<br />
-              </div>
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ProfessionalAttachments">
+                  <app-attachments label="Pièces jointes fournies par l'entreprise (visibles par l'entreprise et la DGCCRF)"
+                                   [uploadedFiles]="uploadedFiles"
+                                   [origin]="fileOrigins.Professional">
+                  </app-attachments>
+                </div>
 
-              <div class="mt-4 text-center">
-                <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideActionForm()">Annuler</button>
-                &nbsp;
-                <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
-                  Envoyer
-                </button>
-              </div>
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="controlInput">
+                        Détail du contrôle (facultatif)
+                      </label>
+                      <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
+                    </div>
+                  </div>
+                </div>
 
-            </ng-container>
-          </form>
-          <ngx-loading [show]="loading"></ngx-loading>
+                <div class="notification error" *ngIf="showErrors && actionForm.invalid">
+                  Veuillez renseigner les champs obligatoires.<br />
+                </div>
+
+                <div class="notification error" *ngIf="loadingError">
+                  Une erreur technique s'est produite<br />
+                </div>
+
+                <div class="mt-4 text-center">
+                  <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideActionForm()">Annuler</button>
+                  &nbsp;
+                  <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                    Envoyer
+                  </button>
+                </div>
+
+              </ng-container>
+            </form>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </ng-template>
+        <div class="notification success" *ngIf="responseSuccess">
+          Votre saisie a bien été prise en compte, nous vous en remercions.
         </div>
-      </ng-template>
-      <div class="notification success" *ngIf="responseSuccess">
-        Votre saisie a bien été prise en compte, nous vous en remercions.
       </div>
     </ng-container>
   </div>
