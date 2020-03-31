@@ -249,6 +249,24 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\b(erdf)|([ée]n[ée]dis?)\b/i,
+      results: [
+        {
+          "siret": "44460844213631",
+          "nom_raison_sociale": "ENEDIS",
+          "l1_normalisee": "ENEDIS",
+          "l2_normalisee": null,
+          "l3_normalisee": null,
+          "l4_normalisee": "34 PLACE DES COROLLES",
+          "l5_normalisee": null,
+          "l6_normalisee": "92400 COURBEVOIE",
+          "code_postal": "92400",
+          "libelle_activite_principale": "Distribution d'électricité",
+          'highlight': 'Pour tout problème avec ENEDIS, peu importe votre lieu d\'habitation'
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
