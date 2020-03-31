@@ -90,7 +90,7 @@ list:
   - category: Voyage / Loisirs
     categoryId: VOY
     path: voyage-loisirs
-    description: voyage organisé, camping, concert, sport, billets d''avion, taxi
+    description: voyage organisé, camping, concert, sport, avion, train, taxi
     rank: 16
     icon: icon_hobbies.png
     subcategories: !!import/single subcategories/voyage-loisirs.yml
