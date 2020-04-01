@@ -5,9 +5,10 @@ import { NavigationEnd, Router, Scroll } from '@angular/router';
 
 enum NavItems {
   Home = '/',
-  HowConso = '/comment-ça-marche/consommateur',
-  HowPro = '/comment-ça-marche/professionnel',
+  How = '/comment-ça-marche',
   HowDGCCRF = '/mode-emploi-dgccrf',
+  FaqConso = '/centre-aide/consommateur',
+  FaqPro = '/centre-aide/professionnel',
   About = '/qui-sommes-nous',
 }
 
