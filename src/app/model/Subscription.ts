@@ -1,6 +1,6 @@
 export class Subscription {
   id: string;
   userId: string;
-  category: string;
-  values: string[] = [];
+  departments: string[] = [];
+  categories: string[] = [];
 }
