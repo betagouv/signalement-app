@@ -96,10 +96,44 @@
             </pagination>
           </ng-container>
 
+          <ng-container *ngSwitchCase="toActivateTab">
+            <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *appRole="[roles.Admin]" class="col-checkbox">
+                    <input type="checkbox"
+                    [checked]="companiesToActivate && companiesToActivate.length === checkedCompaniesUuids.size"
+                    (click)="checkAllCompanies($event)"/>
+                  </th>
+                  <th>Entreprise</th>
+                  <th>SIRET</th>
+                  <th>Adresse</th>
+                  <th>Dernier courrier</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="!loading && !companiesToActivate.length">
+                  <td colspan="7">
+                    <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
+                    <span *ngIf="!loadingError">Aucune entreprise à activer</span>
+                  </td>
+                </tr>
+                <tr *ngFor="let toActivate of companiesToActivate">
+                  <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkCompany($event, toActivate.company.id)">
+                    <input type="checkbox" [checked]="checkedCompaniesUuids.has(toActivate.company.id)"/>
+                  </td>
+                  <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}}</a></td>
+                  <td>{{toActivate.company.siret}}</td>
+                  <td><small>{{toActivate.company.address}}</small></td>
+                  <td>{{toActivate.lastNotice}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
         </ng-container>
-
         <ngx-loading [show]="loading"></ngx-loading>
-
       </div>
     </section>
   </main>

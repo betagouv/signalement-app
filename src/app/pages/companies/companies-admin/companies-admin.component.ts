@@ -9,8 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { Company } from '../../../model/Company';
-import { UserAccess } from '../../../model/CompanyAccess';
+import { UserAccess, CompanyToActivate } from '../../../model/CompanyAccess';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { combineLatest } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -25,6 +26,7 @@ export class CompaniesAdminComponent implements OnInit {
 
   searchTab = {link: ['/', 'entreprises', 'recherche'], label: 'Recherche'};
   mostReportedTab = {link: ['/', 'entreprises', 'les-plus-signalees'], label: 'Les plus signalées'};
+  toActivateTab = {link: ['/', 'entreprises', 'a-activer'], label: "En attente d'activation"};
 
   navTabs: {link: string[], label: string}[];
   currentNavTab: {link: string[], label: string}
@@ -39,16 +41,20 @@ export class CompaniesAdminComponent implements OnInit {
   currentPage: number;
   itemsPerPage = 20;
   lines: NbReportsGroupByCompany[];
+  companiesToActivate: CompanyToActivate[];
 
   showErrors: boolean;
   loading: boolean;
   loadingError: boolean;
+
+  checkedCompaniesUuids = new Set<string>();
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
               private location: Location,
               private authenticationService: AuthenticationService,
+              private companyAccessesService: CompanyAccessesService,
               private reportService: ReportService,
               private companyService: CompanyService,
               private route: ActivatedRoute
@@ -61,7 +67,7 @@ export class CompaniesAdminComponent implements OnInit {
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       .subscribe(([url, user]) => {
         this.navTabs = {
-          [this.roles.Admin]: [this.searchTab, this.mostReportedTab],
+          [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
           [this.roles.DGCCRF]: [this.mostReportedTab]
         }[user.role];
         this.currentNavTab = this.navTabs.find(
@@ -73,7 +79,8 @@ export class CompaniesAdminComponent implements OnInit {
 
         ({
           [this.searchTab.label]: () => this.initSearchForm(),
-          [this.mostReportedTab.label]: () => this.loadReports(1)
+          [this.mostReportedTab.label]: () => this.loadReports(1),
+          [this.toActivateTab.label]: () => this.toActivate()
         }[this.currentNavTab.label])();
       });
 
@@ -141,6 +148,40 @@ export class CompaniesAdminComponent implements OnInit {
           this.loading = false;
           this.loadingError = true;
         });
+  }
+
+  checkCompany(event$: Event, uuid: string) {
+    event$.stopPropagation();
+    if (this.checkedCompaniesUuids.has(uuid)) {
+      this.checkedCompaniesUuids.delete(uuid);
+    } else {
+      this.checkedCompaniesUuids.add(uuid);
+    }
+  }
+
+  checkAllCompanies(event$: Event) {
+    event$.stopPropagation();
+    if (this.companiesToActivate.length === this.checkedCompaniesUuids.size) {
+      this.checkedCompaniesUuids.clear();
+    } else {
+      this.checkedCompaniesUuids = new Set(this.companiesToActivate.map(toActivate => toActivate.company.id));
+    }
+  }
+
+  toActivate() {
+    this.loading = true;
+    this.loadingError = false;
+
+    this.companyAccessesService.companiesToActivate().subscribe(
+      result => {
+        this.loading = false;
+        this.companiesToActivate = result;
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      }
+    );
   }
 
   changePage(pageEvent: { page: number, itemPerPage: number }) {

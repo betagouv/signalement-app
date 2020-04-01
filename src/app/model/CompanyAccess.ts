@@ -19,3 +19,16 @@ export interface PendingToken {
   emailedTo: string;
   expirationDate: Date;
 }
+
+export interface Company {
+  id: string;
+  siret: string;
+  creationDate: Date;
+  name: String;
+  address: String;
+}
+
+export interface CompanyToActivate {
+  company: Company;
+  lastNotice: Date;
+}

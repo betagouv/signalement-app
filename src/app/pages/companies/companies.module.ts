@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'entreprises', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
   { path: 'entreprises/les-plus-signalees', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
   { path: 'entreprises/recherche', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
+  { path: 'entreprises/a-activer', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
