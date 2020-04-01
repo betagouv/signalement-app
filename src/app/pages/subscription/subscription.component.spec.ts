@@ -1,40 +1,33 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventComponent } from './event.component';
+import { SubscriptionComponent } from './subscription.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
-import { BsModalRef, ModalModule } from 'ngx-bootstrap';
-import { AppPermissionDirective } from '../../../../directives/app-permission/app-permission.directive';
-import { AppRoleDirective } from '../../../../directives/app-role/app-role.directive';
+import { ComponentsModule } from '../../components/components.module';
 
-describe('EventComponent', () => {
-  let component: EventComponent;
-  let fixture: ComponentFixture<EventComponent>;
+describe('SubscriptionComponent', () => {
+  let component: SubscriptionComponent;
+  let fixture: ComponentFixture<SubscriptionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        EventComponent,
-        AppPermissionDirective,
-        AppRoleDirective,
+        SubscriptionComponent,
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         NgxLoadingModule,
-        ModalModule.forRoot(),
+        ComponentsModule
       ],
-      providers: [
-        BsModalRef
-      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventComponent);
+    fixture = TestBed.createComponent(SubscriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

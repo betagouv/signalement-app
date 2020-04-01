@@ -14,7 +14,7 @@ import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
-import { EventActionValues, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
+import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
 import { Constants } from '../../../../model/Constants';
 
 @Component({
@@ -26,7 +26,7 @@ export class ReportDetailComponent implements OnInit {
 
   reportId: string;
 
-  eventActionValues = EventActionValues
+  eventActionValues = EventActionValues;
   permissions = Permissions;
   roles = Roles;
   constants = Constants;
@@ -69,6 +69,10 @@ export class ReportDetailComponent implements OnInit {
   fileOrigins = FileOrigin;
   uploadedFiles: UploadedFile[];
 
+  actionForm: FormGroup;
+  actionTypeCtrl: FormControl;
+  detailCtrl: FormControl;
+
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
               private eventService: EventService,
@@ -91,10 +95,10 @@ export class ReportDetailComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
           this.reportId = params.get('reportId');
-          return combineLatest(
+          return combineLatest([
             this.reportService.getReport(this.reportId),
             this.eventService.getEvents(this.reportId)
-          );
+          ]);
         }
       )
     ).subscribe(
@@ -297,6 +301,29 @@ export class ReportDetailComponent implements OnInit {
     this.responseForm = undefined;
   }
 
+  showActionForm() {
+    function detailRequired(actionType: string, detail: string) {
+      return (group: FormGroup) => {
+        if (group.controls[actionType].value === EventActionValues.Comment && !group.controls[detail].value) {
+          return { detailRequired: true };
+        }
+      };
+    }
+
+    this.responseSuccess = false;
+    this.actionTypeCtrl = this.formBuilder.control('', Validators.required);
+    this.detailCtrl = this.formBuilder.control('');
+    this.actionForm = this.formBuilder.group({
+      action: this.actionTypeCtrl,
+      detail: this.detailCtrl
+    }, { validator: detailRequired('action', 'detail')});
+    this.uploadedFiles = [];
+  }
+
+  hideActionForm() {
+    this.actionForm = undefined;
+  }
+
   isUploadingFile() {
     return this.uploadedFiles.find(file => file.loading);
   }
@@ -334,6 +361,39 @@ export class ReportDetailComponent implements OnInit {
 
   }
 
+  submitActionForm() {
+    if (!this.actionForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.loading = true;
+      this.loadingError = false;
+      this.reportService.postReportAction(
+        this.reportId,
+        Object.assign(new ReportAction(), {
+          actionType: this.actionTypeCtrl.value,
+          details: this.detailCtrl.value,
+          fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
+        })
+      ).pipe(
+        switchMap(() => {
+          return this.eventService.getEvents(this.reportId);
+        })
+      ).subscribe(
+        events => {
+          this.events = events;
+          this.report.uploadedFiles = [...this.report.uploadedFiles, ...this.uploadedFiles.filter(file => file.id)];
+          this.loading = false;
+          this.responseSuccess = true;
+          this.actionForm = undefined;
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
+    }
+
+  }
+
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
   }
@@ -349,9 +409,11 @@ export class ReportDetailComponent implements OnInit {
     }
   }
 
-  getResponseTypeClass(value) {
-    if (this.responseTypeCtrl.value) {
+  getTypeClass(value: string) {
+    if (this.responseTypeCtrl && this.responseTypeCtrl.value) {
       return this.responseTypeCtrl.value === value ? 'selected' : 'not-selected';
+    } else if (this.actionTypeCtrl && this.actionTypeCtrl.value) {
+      return this.actionTypeCtrl.value === value ? 'selected' : 'not-selected';
     }
   }
 
