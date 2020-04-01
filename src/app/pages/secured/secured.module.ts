@@ -10,7 +10,6 @@ import { DGCCRFComponent } from './dgccrf/dgccrf.component';
 import { AsyncFilesComponent } from './downloads/asyncfiles.component';
 import { AdminComponent } from './admin/admin.component';
 import { NgxLoadingModule } from 'ngx-loading';
-import { EventComponent } from './reports/event/event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
@@ -30,7 +29,6 @@ const routes: Routes = [
   declarations: [
     ReportListComponent,
     ReportDetailComponent,
-    EventComponent,
     DGCCRFComponent,
     AsyncFilesComponent,
     AdminComponent
@@ -56,9 +54,6 @@ const routes: Routes = [
   ],
   providers: [
     AuthGuard
-  ],
-  entryComponents: [
-    EventComponent
   ]
 })
 export class SecuredModule { }

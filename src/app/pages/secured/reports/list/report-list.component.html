@@ -242,7 +242,6 @@
             <th *appRole="[roles.Admin]" class="email">Consommateur</th>
             <th class="pj">Pièces jointes</th>
             <th class="status-header">Statut</th>
-            <th *appPermission="permissions.createEvent" class="action"></th>
             <ng-template #confirmLettersSendingTpl>
               <div class="modal-body text-center">
                 <p>Confirmez-vous l'envoi des courriers pour les signalements sélectionnés ?</p>
@@ -262,7 +261,7 @@
         </thead>
         <tbody>
           <tr *ngIf="!loading && !reportsByDate?.length">
-            <td colspan="7">
+            <td colspan="9">
               <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
               <span *ngIf="!loadingError">Aucun signalement trouvé</span>
             </td>
@@ -272,7 +271,6 @@
               <td colspan="8" class="report-group">
                 {{reportsByDate.date}}
               </td>
-              <td class="action report-group"></td>
             </tr>
             <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
               <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkReport($event, report.id)">
@@ -364,9 +362,6 @@
               </td>
               <td [class]="getReportCssClass(report.status)">
                 {{ report.status }}
-              </td>
-              <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
-                <i class="material-icons md-blue" title="Ajouter une action">add_circle</i>
               </td>
             </tr>
           </ng-container>
