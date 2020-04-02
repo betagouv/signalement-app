@@ -105,9 +105,20 @@
                     <input type="checkbox"
                     [checked]="companiesToActivate && companiesToActivate.length === checkedCompaniesUuids.size"
                     (click)="checkAllCompanies($event)"/>
+                    <div dropdown placement="right" class="btn-group d-inline-block position-relative">
+                      <button dropdownToggle type="button" class="dropdown-toggle bg-transparent border-0">
+                      </button>
+                      <ul id="dropdown-actions" *dropdownMenu class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="button-basic">
+                        <li role="menuitem dropdown-item">
+                          <span class="pointer dropdown-item" (click)="return;">Télécharger les courriers</span>
+                        </li>
+                        <li role="menuitem">
+                          <span class="pointer dropdown-item" (click)="return;">Valider l'envoi des courriers</span>
+                        </li>
+                      </ul>
+                    </div>
                   </th>
                   <th>Entreprise</th>
-                  <th>SIRET</th>
                   <th>Adresse</th>
                   <th>Dernier courrier</th>
                 </tr>
@@ -123,8 +134,7 @@
                   <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkCompany($event, toActivate.company.id)">
                     <input type="checkbox" [checked]="checkedCompaniesUuids.has(toActivate.company.id)"/>
                   </td>
-                  <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}}</a></td>
-                  <td>{{toActivate.company.siret}}</td>
+                  <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}} ({{toActivate.company.siret}})</a></td>
                   <td><small>{{toActivate.company.address}}</small></td>
                   <td>{{toActivate.lastNotice}}</td>
                 </tr>
