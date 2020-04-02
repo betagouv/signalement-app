@@ -120,4 +120,16 @@ export class CompanyAccessesService {
       })
     );
   }
+
+  confirmContactByPostOnCompaniesList(companyIds: Set<string>) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'companies-posted']),
+          { companyIds : Array.from(companyIds) },
+          headers
+        );
+      })
+    );
+  }
 }

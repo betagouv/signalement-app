@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, TemplateRef } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
 import { Location, isPlatformBrowser } from '@angular/common';
@@ -17,6 +17,7 @@ import { take } from 'rxjs/operators';
 
 import * as lodash from 'lodash';
 import { HttpResponse } from '@angular/common/http';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-companies-admin',
@@ -49,6 +50,7 @@ export class CompaniesAdminComponent implements OnInit {
   loadingError: boolean;
 
   checkedCompaniesUuids = new Set<string>();
+  modalRef: BsModalRef;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -59,6 +61,7 @@ export class CompaniesAdminComponent implements OnInit {
               private companyAccessesService: CompanyAccessesService,
               private reportService: ReportService,
               private companyService: CompanyService,
+              private modalService: BsModalService,
               private route: ActivatedRoute
   ) { }
 
@@ -198,6 +201,25 @@ export class CompaniesAdminComponent implements OnInit {
         document.body.removeChild(link);
       });
     }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  confirmLettersSending() {
+    this.loading = true;
+    this.loadingError = false;
+    this.companyAccessesService.confirmContactByPostOnCompaniesList(this.checkedCompaniesUuids).subscribe(
+      events => {
+        this.loading = false;
+        this.modalRef.hide();
+        this.loadReports(this.currentPage);
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
   }
 
   changePage(pageEvent: { page: number, itemPerPage: number }) {

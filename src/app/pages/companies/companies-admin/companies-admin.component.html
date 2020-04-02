@@ -113,7 +113,7 @@
                           <span class="pointer dropdown-item" (click)="downloadActivationDocuments()">Télécharger les courriers</span>
                         </li>
                         <li role="menuitem">
-                          <span class="pointer dropdown-item" (click)="return;">Valider l'envoi des courriers</span>
+                          <span class="pointer dropdown-item" (click)="openModal(confirmLettersSendingTpl)">Valider l'envoi des courriers</span>
                         </li>
                       </ul>
                     </div>
@@ -121,6 +121,21 @@
                   <th>Entreprise</th>
                   <th>Adresse</th>
                   <th>Dernier courrier</th>
+                  <ng-template #confirmLettersSendingTpl>
+                    <div class="modal-body text-center">
+                      <p>Confirmez-vous l'envoi des courriers pour les entreprises sélectionnés ?</p>
+      
+                      <div class="notification error" *ngIf="loadingError">
+                        Une erreur technique s'est produite<br />
+                      </div>
+      
+                      <hr />
+      
+                      <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-primary" (click)="confirmLettersSending()">Oui</button>
+                    </div>
+                  </ng-template>
                 </tr>
                 </thead>
                 <tbody>
