@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
-import { Location } from '@angular/common';
+import { Location, isPlatformBrowser } from '@angular/common';
 import pages from '../../../../assets/data/pages.json';
 import { Roles } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
@@ -16,6 +16,7 @@ import { combineLatest } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import * as lodash from 'lodash';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-companies-admin',
@@ -49,7 +50,8 @@ export class CompaniesAdminComponent implements OnInit {
 
   checkedCompaniesUuids = new Set<string>();
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
               private location: Location,
@@ -182,6 +184,20 @@ export class CompaniesAdminComponent implements OnInit {
         this.loadingError = true;
       }
     );
+  }
+
+  downloadActivationDocuments() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.companyAccessesService.downloadActivationDocuments(this.checkedCompaniesUuids).subscribe(response => {
+        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'courriers.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
   }
 
   changePage(pageEvent: { page: number, itemPerPage: number }) {

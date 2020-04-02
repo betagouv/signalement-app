@@ -108,4 +108,16 @@ export class CompanyAccessesService {
       })
     );
   }
+
+  downloadActivationDocuments(companyIds: Set<string>) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'activation-document']),
+          { companyIds : Array.from(companyIds) },
+          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+        );
+      })
+    );
+  }
 }
