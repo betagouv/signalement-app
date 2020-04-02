@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FaqComponent } from './pro.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentsModule } from '../../../components/components.module';
+import { FaqComponent } from './faq.component';
 
 describe('ProComponent', () => {
   let component: FaqComponent;
