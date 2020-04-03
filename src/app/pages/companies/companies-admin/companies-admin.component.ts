@@ -85,7 +85,7 @@ export class CompaniesAdminComponent implements OnInit {
         ({
           [this.searchTab.label]: () => this.initSearchForm(),
           [this.mostReportedTab.label]: () => this.loadReports(1),
-          [this.toActivateTab.label]: () => this.toActivate()
+          [this.toActivateTab.label]: () => this.loadCompaniesToActivate()
         }[this.currentNavTab.label])();
       });
 
@@ -173,7 +173,7 @@ export class CompaniesAdminComponent implements OnInit {
     }
   }
 
-  toActivate() {
+  loadCompaniesToActivate() {
     this.loading = true;
     this.loadingError = false;
 
@@ -214,7 +214,7 @@ export class CompaniesAdminComponent implements OnInit {
       events => {
         this.loading = false;
         this.modalRef.hide();
-        this.loadReports(this.currentPage);
+        this.loadCompaniesToActivate();
       },
       err => {
         this.loading = false;

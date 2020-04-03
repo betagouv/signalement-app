@@ -151,7 +151,7 @@
                   </td>
                   <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}} ({{toActivate.company.siret}})</a></td>
                   <td><small>{{toActivate.company.address}}</small></td>
-                  <td>{{toActivate.lastNotice}}</td>
+                  <td>{{toActivate.lastNotice|date}}</td>
                 </tr>
                 </tbody>
               </table>
