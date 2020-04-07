@@ -53,8 +53,8 @@
                 </ng-container>
                 <ng-template #companyCards>
                   <div class="row">
-                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies">
-                      <app-company-card [userAccess]="companyToUserAccess(company)"></app-company-card>
+                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies; let companyIndex = index">
+                      <app-company-card [userAccess]="companyToUserAccess(company)" (change)="onCompanyChange($event, companyIndex)"></app-company-card>
                     </div>
                   </div>
                 </ng-template>

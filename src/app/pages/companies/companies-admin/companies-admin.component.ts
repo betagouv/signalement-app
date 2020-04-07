@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, PLATFORM_ID, TemplateRef } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
-import { Location, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import pages from '../../../../assets/data/pages.json';
 import { Roles } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { Company } from '../../../model/Company';
-import { UserAccess, CompanyToActivate } from '../../../model/CompanyAccess';
+import { CompanyToActivate, UserAccess } from '../../../model/CompanyAccess';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { combineLatest } from 'rxjs';
@@ -28,7 +28,7 @@ export class CompaniesAdminComponent implements OnInit {
 
   searchTab = {link: ['/', 'entreprises', 'recherche'], label: 'Recherche'};
   mostReportedTab = {link: ['/', 'entreprises', 'les-plus-signalees'], label: 'Les plus signalées'};
-  toActivateTab = {link: ['/', 'entreprises', 'a-activer'], label: "En attente d'activation"};
+  toActivateTab = {link: ['/', 'entreprises', 'a-activer'], label: 'En attente d\'activation'};
 
   navTabs: {link: string[], label: string}[];
   currentNavTab: {link: string[], label: string}
@@ -132,6 +132,10 @@ export class CompaniesAdminComponent implements OnInit {
       companyAddress: company.address,
       level: 'admin'
     };
+  }
+
+  onCompanyChange(company: Company, companyIndex: number) {
+    this.companies.splice(companyIndex, 1, company);
   }
 
   loadReports(page: number) {
