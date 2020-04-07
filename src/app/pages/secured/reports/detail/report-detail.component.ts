@@ -44,15 +44,6 @@ export class ReportDetailComponent implements OnInit {
   companySiretForm: FormGroup;
   siretCtrl: FormControl;
   companyForSiret: Company;
-  searchBySiret = true;
-
-  companyAddressForm: FormGroup;
-  nameCtrl: FormControl;
-  line1Ctrl: FormControl;
-  line2Ctrl: FormControl;
-  line3Ctrl: FormControl;
-  postalCodeCtrl: FormControl;
-  cityCtrl: FormControl;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -114,7 +105,6 @@ export class ReportDetailComponent implements OnInit {
       });
 
     this.initCompanySiretForm();
-    this.initCompanyAddressForm();
   }
 
   initCompanySiretForm() {
@@ -123,28 +113,6 @@ export class ReportDetailComponent implements OnInit {
     this.companySiretForm = this.formBuilder.group({
       siret: this.siretCtrl
     });
-  }
-
-  initCompanyAddressForm() {
-    this.nameCtrl = this.formBuilder.control('', Validators.required);
-    this.line1Ctrl = this.formBuilder.control('', Validators.required);
-    this.line2Ctrl = this.formBuilder.control('');
-    this.line3Ctrl = this.formBuilder.control('');
-    this.postalCodeCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{5}')]);
-    this.cityCtrl = this.formBuilder.control('', Validators.required);
-
-    this.companyAddressForm = this.formBuilder.group({
-      name: this.nameCtrl,
-      line1: this.line1Ctrl,
-      line2: this.line2Ctrl,
-      line3: this.line3Ctrl,
-      postalCode: this.postalCodeCtrl,
-      city: this.cityCtrl,
-    });
-  }
-
-  changeCompanySearchTab() {
-    this.searchBySiret = !this.searchBySiret;
   }
 
   initConsumerForm() {
@@ -215,19 +183,6 @@ export class ReportDetailComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
-  }
-
-  submitCompanyAddressForm() {
-    this.changeCompany(Object.assign(new Company(), {
-      siret: this.report.company.siret,
-      name: this.nameCtrl.value,
-      line1: this.nameCtrl.value,
-      line2: this.line1Ctrl.value,
-      line3: this.line2Ctrl.value,
-      line4: this.line3Ctrl.value,
-      line5: `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`,
-      postalCode: this.postalCodeCtrl.value,
-    }));
   }
 
   changeCompany(company: Company) {
