@@ -82,9 +82,16 @@
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h3>Entreprise</h3>
+          <h3>
+            Entreprise
+            <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
+               (click)="openModal(companySearch)"
+               *appPermission="permissions.updateReport">
+              edit
+            </i>
+          </h3>
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               SIRET : {{report.company.siret}}
               <br/>
               Nom : {{report.company.name}}
@@ -97,9 +104,6 @@
               <span *ngIf="report.company.line5"> - {{report.company.line5}}</span>
               <span *ngIf="report.company.line6"> - {{report.company.line6}}</span>
               <span *ngIf="report.company.line7"> - {{report.company.line7}}</span>
-            </div>
-            <div class="col-2 text-right" *appPermission="permissions.updateReport">
-              <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
             </div>
             <ng-template #companySearch>
               <div class="modal-body text-center">
@@ -148,9 +152,16 @@
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h3>Consommateur</h3>
+          <h3>
+            Consommateur
+            <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
+               (click)="openModal(updateConsumer)"
+               *appPermission="permissions.updateReport">
+              edit
+            </i>
+          </h3>
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               Nom : {{report.consumer.lastName}}
               <br />
               Prénom : {{report.consumer.firstName}}
@@ -158,9 +169,6 @@
               Email : {{report.consumer.email}}
               <br />
               Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
-            </div>
-            <div class="col-2 text-right" *appPermission="permissions.updateReport">
-              <button type="button" class="btn btn-outline-primary" (click)="openModal(updateConsumer)">Corriger</button>
             </div>
             <ng-template #updateConsumer>
               <div class="modal-body">
