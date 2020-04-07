@@ -17,7 +17,11 @@ export enum EventActionValues {
   ReportResponse = 'Réponse du professionnel au signalement',
   PostalSend = 'Envoi d\'un courrier',
   EditConsumer = 'Modification du consommateur',
-  EditCompany = 'Modification du commerçant'
+  EditCompany = 'Modification du commerçant',
+  Comment = 'Ajout d\'un commentaire',
+  Control = 'Contrôle effectué',
+  ConsumerAttachments = 'Ajout de pièces jointes fournies par le consommateur',
+  ProfessionalAttachments = 'Ajout de pièces jointes fournies par l\'entreprise'
 }
 
 export class ReportResponse {
@@ -36,4 +40,10 @@ export enum ReportResponseTypes {
 export class ReviewOnReportResponse {
   positive: boolean;
   details: string;
+}
+
+export class ReportAction {
+  actionType: ReportEventAction;
+  details: string;
+  fileIds: string[];
 }
