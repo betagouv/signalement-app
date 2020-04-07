@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanyCardComponent } from './company-card.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppPermissionDirective } from '../../../directives/app-permission/app-permission.directive';
 
 describe('CompanyCardComponent', () => {
   let component: CompanyCardComponent;
@@ -9,7 +10,10 @@ describe('CompanyCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompanyCardComponent ],
+      declarations: [
+        CompanyCardComponent,
+        AppPermissionDirective,
+      ],
       imports: [
         RouterTestingModule,
       ]

@@ -11,6 +11,7 @@ import { CompanyCardComponent } from '../company-card/company-card.component';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { of } from 'rxjs';
 import { User } from '../../../model/AuthUser';
+import { AppPermissionDirective } from '../../../directives/app-permission/app-permission.directive';
 
 describe('CompaniesAdminComponent', () => {
 
@@ -23,7 +24,8 @@ describe('CompaniesAdminComponent', () => {
       declarations: [
         CompaniesAdminComponent,
         AppRoleDirective,
-        CompanyCardComponent
+        CompanyCardComponent,
+        AppPermissionDirective,
       ],
       imports: [
         PaginationModule.forRoot(),
