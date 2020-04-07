@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BsDatepickerModule, BsDropdownModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesAdminComponent } from './companies-admin.component';
 import { AppRoleDirective } from '../../../directives/app-role/app-role.directive';
@@ -35,7 +35,8 @@ describe('CompaniesAdminComponent', () => {
         BsDatepickerModule.forRoot(),
         RouterTestingModule,
         HttpClientModule,
-        ComponentsModule
+        ComponentsModule,
+        ModalModule.forRoot()
       ]
     })
     .compileComponents();
