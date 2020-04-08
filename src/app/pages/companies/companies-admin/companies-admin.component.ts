@@ -17,7 +17,8 @@ import { take } from 'rxjs/operators';
 
 import * as lodash from 'lodash';
 import { HttpResponse } from '@angular/common/http';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
+import moment from 'moment';
 
 @Component({
   selector: 'app-companies-admin',
@@ -31,7 +32,7 @@ export class CompaniesAdminComponent implements OnInit {
   toActivateTab = {link: ['/', 'entreprises', 'a-activer'], label: 'En attente d\'activation'};
 
   navTabs: {link: string[], label: string}[];
-  currentNavTab: {link: string[], label: string}
+  currentNavTab: {link: string[], label: string};
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
@@ -44,6 +45,8 @@ export class CompaniesAdminComponent implements OnInit {
   itemsPerPage = 20;
   lines: NbReportsGroupByCompany[];
   companiesToActivate: CompanyToActivate[];
+  allCompaniesToActivate: CompanyToActivate[];
+  companiesToActivateFilter: {tokenCreation?: Date, lastNotice?: Date} = {};
 
   showErrors: boolean;
   loading: boolean;
@@ -59,6 +62,7 @@ export class CompaniesAdminComponent implements OnInit {
               private location: Location,
               private authenticationService: AuthenticationService,
               private companyAccessesService: CompanyAccessesService,
+              private localeService: BsLocaleService,
               private reportService: ReportService,
               private companyService: CompanyService,
               private modalService: BsModalService,
@@ -66,6 +70,8 @@ export class CompaniesAdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.localeService.use('fr');
+
     this.titleService.setTitle(pages.companies.companiesAdmin.title);
     this.meta.updateTag({ name: 'description', content: pages.companies.companiesAdmin.description });
 
@@ -184,13 +190,29 @@ export class CompaniesAdminComponent implements OnInit {
     this.companyAccessesService.companiesToActivate().subscribe(
       result => {
         this.loading = false;
-        this.companiesToActivate = result;
+        this.allCompaniesToActivate = result.sort((c1, c2) => {
+          if (moment(c1.tokenCreation).isSame(c2.tokenCreation, 'day') && c1.lastNotice) {
+            return c2.lastNotice ? moment(c2.lastNotice).diff(c1.lastNotice) : 1;
+          } else {
+            return moment(c2.tokenCreation).diff(c1.tokenCreation);
+          }
+        });
+        this.companiesToActivate = this.allCompaniesToActivate;
       },
       err => {
         this.loading = false;
         this.loadingError = true;
       }
     );
+  }
+
+  filterCompaniesToActivate(tokenCreation: Date, lastNotice: Date) {
+    if (this.allCompaniesToActivate) {
+      this.companiesToActivate = this.allCompaniesToActivate.filter(companyToActivate => {
+        return (!tokenCreation || moment(companyToActivate.tokenCreation).isSame(moment(tokenCreation), 'day')) &&
+          (!lastNotice || moment(companyToActivate.lastNotice).isSame(moment(lastNotice), 'day'));
+      });
+    }
   }
 
   downloadActivationDocuments() {

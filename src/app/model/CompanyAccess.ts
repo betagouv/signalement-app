@@ -31,4 +31,5 @@ export interface Company {
 export interface CompanyToActivate {
   company: Company;
   lastNotice: Date;
+  tokenCreation: Date;
 }

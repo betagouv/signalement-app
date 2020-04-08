@@ -120,7 +120,28 @@
                   </th>
                   <th>Entreprise</th>
                   <th>Adresse</th>
-                  <th>Dernier courrier</th>
+                  <th class="th-date text-center">
+                    Création
+                    <input type="text"
+                           id="creationDateInput"
+                           placeholder="Date de création"
+                           [(ngModel)]="companiesToActivateFilter.tokenCreation"
+                           (bsValueChange)="filterCompaniesToActivate($event, companiesToActivateFilter.lastNotice)"
+                           bsDatepicker
+                           autocomplete="off"
+                           [bsConfig]="{ containerClass: 'theme-default' }">
+                  </th>
+                  <th class="th-date text-center">
+                    Dernier courrier
+                    <input type="text"
+                           id="noticeDateInput"
+                           placeholder="Date du courrier"
+                           [(ngModel)]="companiesToActivateFilter.lastNotice"
+                           (bsValueChange)="filterCompaniesToActivate(companiesToActivateFilter.tokenCreation, $event)"
+                           bsDatepicker
+                           autocomplete="off"
+                           [bsConfig]="{ containerClass: 'theme-default' }">
+                  </th>
                   <ng-template #confirmLettersSendingTpl>
                     <div class="modal-body text-center">
                       <p>Confirmez-vous l'envoi des courriers pour les entreprises sélectionnés ?</p>
@@ -150,8 +171,11 @@
                     <input type="checkbox" [checked]="checkedCompaniesUuids.has(toActivate.company.id)"/>
                   </td>
                   <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}} ({{toActivate.company.siret}})</a></td>
-                  <td><small>{{toActivate.company.address}}</small></td>
-                  <td>{{toActivate.lastNotice|date}}</td>
+                  <td>
+                    <small *ngFor="let line of toActivate.company.address.split(' - ')">{{line}}<br /></small>
+                  </td>
+                  <td class="text-center">{{toActivate.tokenCreation | date : 'dd/MM/yyyy'}}</td>
+                  <td class="text-center">{{toActivate.lastNotice | date : 'dd/MM/yyyy'}}</td>
                 </tr>
                 </tbody>
               </table>

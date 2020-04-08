@@ -25,3 +25,12 @@
 .nav-link:not(.active) + .nav-link {
   border-left: 1px solid rgba(28, 28, 28, 0.125);
 }
+
+.table thead th {
+  vertical-align: top;
+
+  &.th-date {
+    width: 150px;
+  }
+}
+
