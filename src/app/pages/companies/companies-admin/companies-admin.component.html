@@ -101,7 +101,7 @@
               <table class="table">
                 <thead>
                 <tr>
-                  <th *appRole="[roles.Admin]" class="col-checkbox">
+                  <th *appRole="[roles.Admin]" class="th-checkbox">
                     <input type="checkbox"
                     [checked]="companiesToActivate && companiesToActivate.length === checkedCompaniesUuids.size"
                     (click)="checkAllCompanies($event)"/>
@@ -121,7 +121,6 @@
                   <th>Entreprise</th>
                   <th class="th-address">Adresse</th>
                   <th class="th-date text-center">
-                    Création
                     <input type="text"
                            id="creationDateInput"
                            placeholder="Date de création"
@@ -132,7 +131,6 @@
                            [bsConfig]="{ containerClass: 'theme-default' }">
                   </th>
                   <th class="th-date text-center">
-                    Dernier courrier
                     <input type="text"
                            id="noticeDateInput"
                            placeholder="Date du courrier"

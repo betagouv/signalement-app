@@ -27,7 +27,7 @@
 }
 
 .table thead th {
-  vertical-align: top;
+  vertical-align: middle;
 
   &.th-date {
     width: 150px;
@@ -35,6 +35,10 @@
 
   &.th-address {
     width: 300px;
+  }
+
+  &.th-checkbox {
+    min-width: 75px;
   }
 }
 
