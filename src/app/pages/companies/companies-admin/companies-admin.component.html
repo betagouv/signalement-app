@@ -53,8 +53,8 @@
                 </ng-container>
                 <ng-template #companyCards>
                   <div class="row">
-                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies">
-                      <app-company-card [userAccess]="companyToUserAccess(company)"></app-company-card>
+                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies; let companyIndex = index">
+                      <app-company-card [userAccess]="companyToUserAccess(company)" (change)="onCompanyChange($event, companyIndex)"></app-company-card>
                     </div>
                   </div>
                 </ng-template>
@@ -96,10 +96,91 @@
             </pagination>
           </ng-container>
 
+          <ng-container *ngSwitchCase="toActivateTab">
+            <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *appRole="[roles.Admin]" class="th-checkbox">
+                    <input type="checkbox"
+                    [checked]="companiesToActivate && companiesToActivate.length === checkedCompaniesUuids.size"
+                    (click)="checkAllCompanies()"/>
+                    <div dropdown placement="right" class="btn-group d-inline-block position-relative">
+                      <button dropdownToggle type="button" class="dropdown-toggle bg-transparent border-0">
+                      </button>
+                      <ul id="dropdown-actions" *dropdownMenu class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="button-basic">
+                        <li role="menuitem dropdown-item">
+                          <span class="pointer dropdown-item" (click)="downloadActivationDocuments()">Télécharger les courriers</span>
+                        </li>
+                        <li role="menuitem">
+                          <span class="pointer dropdown-item" (click)="openModal(confirmLettersSendingTpl)">Valider l'envoi des courriers</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </th>
+                  <th>Entreprise</th>
+                  <th class="th-address">Adresse</th>
+                  <th class="th-date text-center">
+                    <input type="text"
+                           id="creationDateInput"
+                           placeholder="Date de création"
+                           [(ngModel)]="companiesToActivateFilter.tokenCreation"
+                           (bsValueChange)="filterCompaniesToActivate($event, companiesToActivateFilter.lastNotice)"
+                           bsDatepicker
+                           autocomplete="off"
+                           [bsConfig]="{ containerClass: 'theme-default' }">
+                  </th>
+                  <th class="th-date text-center">
+                    <input type="text"
+                           id="noticeDateInput"
+                           placeholder="Date du courrier"
+                           [(ngModel)]="companiesToActivateFilter.lastNotice"
+                           (bsValueChange)="filterCompaniesToActivate(companiesToActivateFilter.tokenCreation, $event)"
+                           bsDatepicker
+                           autocomplete="off"
+                           [bsConfig]="{ containerClass: 'theme-default' }">
+                  </th>
+                  <ng-template #confirmLettersSendingTpl>
+                    <div class="modal-body text-center">
+                      <p>Confirmez-vous l'envoi des courriers pour les entreprises sélectionnés ?</p>
+      
+                      <div class="notification error" *ngIf="loadingError">
+                        Une erreur technique s'est produite<br />
+                      </div>
+      
+                      <hr />
+      
+                      <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-primary" (click)="confirmLettersSending()">Oui</button>
+                    </div>
+                  </ng-template>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="!loading && !companiesToActivate.length">
+                  <td colspan="7">
+                    <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
+                    <span *ngIf="!loadingError">Aucune entreprise à activer</span>
+                  </td>
+                </tr>
+                <tr *ngFor="let toActivate of companiesToActivate">
+                  <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkCompany(toActivate.company.id)">
+                    <input type="checkbox" [checked]="checkedCompaniesUuids.has(toActivate.company.id)"/>
+                  </td>
+                  <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}} ({{toActivate.company.siret}})</a></td>
+                  <td>
+                    <small *ngFor="let line of toActivate.company.address.split(' - ')">{{line}}<br /></small>
+                  </td>
+                  <td class="text-center">{{toActivate.tokenCreation | date : 'dd/MM/yyyy'}}</td>
+                  <td class="text-center">{{toActivate.lastNotice | date : 'dd/MM/yyyy'}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
         </ng-container>
-
         <ngx-loading [show]="loading"></ngx-loading>
-
       </div>
     </section>
   </main>

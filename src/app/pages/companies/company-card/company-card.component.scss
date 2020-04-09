@@ -12,3 +12,8 @@
     background: $lightest-grey;
   }
 }
+
+
+input + input {
+  margin-top: 0.5em;
+}
