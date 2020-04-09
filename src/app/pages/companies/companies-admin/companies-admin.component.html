@@ -104,7 +104,7 @@
                   <th *appRole="[roles.Admin]" class="th-checkbox">
                     <input type="checkbox"
                     [checked]="companiesToActivate && companiesToActivate.length === checkedCompaniesUuids.size"
-                    (click)="checkAllCompanies($event)"/>
+                    (click)="checkAllCompanies()"/>
                     <div dropdown placement="right" class="btn-group d-inline-block position-relative">
                       <button dropdownToggle type="button" class="dropdown-toggle bg-transparent border-0">
                       </button>
@@ -165,7 +165,7 @@
                   </td>
                 </tr>
                 <tr *ngFor="let toActivate of companiesToActivate">
-                  <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkCompany($event, toActivate.company.id)">
+                  <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkCompany(toActivate.company.id)">
                     <input type="checkbox" [checked]="checkedCompaniesUuids.has(toActivate.company.id)"/>
                   </td>
                   <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}} ({{toActivate.company.siret}})</a></td>
