@@ -82,9 +82,16 @@
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h3>Entreprise</h3>
+          <h3>
+            Entreprise
+            <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
+               (click)="openModal(companySearch)"
+               *appPermission="permissions.updateReport">
+              edit
+            </i>
+          </h3>
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               SIRET : {{report.company.siret}}
               <br/>
               Nom : {{report.company.name}}
@@ -98,74 +105,46 @@
               <span *ngIf="report.company.line6"> - {{report.company.line6}}</span>
               <span *ngIf="report.company.line7"> - {{report.company.line7}}</span>
             </div>
-            <div class="col-2 text-right" *appPermission="permissions.updateReport">
-              <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
-            </div>
             <ng-template #companySearch>
               <div class="modal-body text-center">
-                <nav class="nav nav-tabs nav-justified mb-3">
-                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h2>SIRET</h2></a>
-                  <a class="nav-item nav-link" [ngClass]="!searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h2>Adresse</h2></a>
-                </nav>
-                <ng-container *ngIf="searchBySiret">
-                  <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
-                    <input [formControl]="siretCtrl" placeholder="SIRET de l'entreprise" />
+                <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
+                  <input [formControl]="siretCtrl" placeholder="SIRET de l'entreprise" />
 
-                    <div class="notification error" *ngIf="!companyForSiret && loadingError">
-                      Une erreur technique s'est produite<br />
-                    </div>
-
-                    <hr />
-                    <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companySiretForm.invalid">
-                      Rechercher
-                    </button>
-                  </form>
-                  <div *ngIf="companyForSiret">
-                    <hr />
-                    <div *ngIf="!companyForSiret.siret">
-                      Aucun établissement trouvé
-                    </div>
-                    <div *ngIf="companyForSiret.siret">
-                      <p class="company">
-                        <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
-                        <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
-                        <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
-                        <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
-                        <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
-                        <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
-                        <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
-                      </p>
-
-                      <div class="notification error" *ngIf="loadingError">
-                        Une erreur technique s'est produite<br />
-                      </div>
-
-                      <hr />
-                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                      &nbsp;
-                      <button type="button" class="btn btn-primary" (click)="changeCompany(companyForSiret)">Valider</button>
-                    </div>
+                  <div class="notification error" *ngIf="!companyForSiret && loadingError">
+                    Une erreur technique s'est produite<br />
                   </div>
-                </ng-container>
-                <ng-container *ngIf="!searchBySiret">
-                  <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
-                    <input [formControl]="nameCtrl" placeholder="Nom de l'entreprise" id="name" />
-                    <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
-                    <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
-                    <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
-                    <input [formControl]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
-                    <input [formControl]="cityCtrl" placeholder="Ville" id="city" />
+
+                  <hr />
+                  <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companySiretForm.invalid">
+                    Rechercher
+                  </button>
+                </form>
+                <div *ngIf="companyForSiret">
+                  <hr />
+                  <div *ngIf="!companyForSiret.siret">
+                    Aucun établissement trouvé
+                  </div>
+                  <div *ngIf="companyForSiret.siret">
+                    <p class="company">
+                      <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
+                      <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
+                      <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
+                      <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
+                      <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
+                      <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
+                      <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
+                    </p>
 
                     <div class="notification error" *ngIf="loadingError">
                       Une erreur technique s'est produite<br />
                     </div>
 
                     <hr />
-                    <button type="submit" class="btn btn-primary mt-2" id="submitCompanyAddressForm" [disabled]="companyAddressForm.invalid">
-                      Enregistrer
-                    </button>
-                  </form>
-                </ng-container>
+                    <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-primary" (click)="changeCompany(companyForSiret)">Valider</button>
+                  </div>
+                </div>
               </div>
             </ng-template>
           </div>
@@ -173,9 +152,16 @@
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h3>Consommateur</h3>
+          <h3>
+            Consommateur
+            <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
+               (click)="openModal(updateConsumer)"
+               *appPermission="permissions.updateReport">
+              edit
+            </i>
+          </h3>
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               Nom : {{report.consumer.lastName}}
               <br />
               Prénom : {{report.consumer.firstName}}
@@ -183,9 +169,6 @@
               Email : {{report.consumer.email}}
               <br />
               Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
-            </div>
-            <div class="col-2 text-right" *appPermission="permissions.updateReport">
-              <button type="button" class="btn btn-outline-primary" (click)="openModal(updateConsumer)">Corriger</button>
             </div>
             <ng-template #updateConsumer>
               <div class="modal-body">

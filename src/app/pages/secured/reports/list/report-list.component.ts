@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
 import { DetailInputValue, Report, ReportStatus } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
@@ -20,7 +20,6 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { Department, Region, Regions } from '../../../../model/Region';
 import oldCategories from '../../../../../assets/data/old-categories.json';
 import { AccountService } from '../../../../services/account.service';
-import { HttpResponse } from '@angular/common/http';
 import { EventService } from '../../../../services/event.service';
 import { UserAccess } from '../../../../model/CompanyAccess';
 import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
@@ -55,8 +54,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   loading: boolean;
   loadingError: boolean;
-
-  checkedReportUuids = new Set<string>();
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -329,66 +326,5 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
       return {firstLine, secondLine, hasNext };
     }
-  }
-
-  checkReport(event$: Event, reportUuid: string) {
-    event$.stopPropagation();
-    if (this.checkedReportUuids.has(reportUuid)) {
-      this.checkedReportUuids.delete(reportUuid);
-    } else {
-      this.checkedReportUuids.add(reportUuid);
-    }
-  }
-
-  checkAllReports(event$: Event) {
-    event$.stopPropagation();
-    if (this.getCurrentPageReportUuidsToProcess().length === this.checkedReportUuids.size) {
-      this.checkedReportUuids.clear();
-    } else {
-      this.checkedReportUuids = new Set(this.getCurrentPageReportUuidsToProcess());
-    }
-  }
-
-  getCurrentPageReportUuidsToProcess() {
-    if (this.reportsByDate) {
-      return this.reportsByDate
-        .reduce((reportUuids, reportsByDate) => ([
-          ...reportUuids,
-          ...reportsByDate.reports.filter(r => r.status === ReportStatus.ToProcess).map(r => r.id)
-        ]), []);
-    }
-  }
-
-  downloadActivationDocuments() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.accountService.downloadActivationDocuments(this.checkedReportUuids).subscribe(response => {
-        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'courriers.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }
-  }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
-  confirmLettersSending() {
-    this.loading = true;
-    this.loadingError = false;
-    this.eventService.confirmContactByPostOnReportList(this.checkedReportUuids).subscribe(
-      events => {
-        this.loading = false;
-        this.modalRef.hide();
-        this.loadReports(this.currentPage);
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
   }
 }
