@@ -24,8 +24,8 @@ export interface Company {
   id: string;
   siret: string;
   creationDate: Date;
-  name: String;
-  address: String;
+  name: string;
+  address: string;
 }
 
 export interface CompanyToActivate {
