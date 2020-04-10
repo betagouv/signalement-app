@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProComponent } from './pro.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentsModule } from '../../../components/components.module';
+import { FaqComponent } from './faq.component';
 
 describe('ProComponent', () => {
-  let component: ProComponent;
-  let fixture: ComponentFixture<ProComponent>;
+  let component: FaqComponent;
+  let fixture: ComponentFixture<FaqComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProComponent ],
+      declarations: [ FaqComponent ],
       imports: [
         RouterTestingModule,
         ComponentsModule
@@ -20,7 +20,7 @@ describe('ProComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProComponent);
+    fixture = TestBed.createComponent(FaqComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

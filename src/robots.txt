@@ -6,7 +6,9 @@ Disallow: /activation
 Disallow: /connexion*
 Disallow: /suivi-des-signalements*
 Disallow: /abonnements*
+Disallow: /admin*
 Disallow: /mode-emploi-dgccrf
+Disallow: /mes-telechargements
 Disallow: /compte*
 Disallow: /*le-probleme
 Disallow: /*la-description
@@ -16,3 +18,5 @@ Disallow: /*confirmation
 Disallow: /*accuse-de-reception
 Disallow: /*information
 Disallow: /entreprise/*
+Disallow: /entreprises*
+Disallow: /mes-entreprises
