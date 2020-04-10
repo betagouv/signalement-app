@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { DetailInputValue, Report } from '../model/Report';
-import { Company } from '../model/Company';
+import { Company, Website } from '../model/Company';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
@@ -35,10 +35,6 @@ export class ReportService {
         category: report.category,
         subcategories: !report.subcategories ? [] : report.subcategories
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
-        companyName: report.company.name,
-        companyAddress: report.company.address,
-        companyPostalCode: report.company.postalCode,
-        companySiret: report.company.siret,
         firstName: report.consumer.firstName,
         lastName: report.consumer.lastName,
         email: report.consumer.email,
@@ -52,9 +48,23 @@ export class ReportService {
               label: detailInputValue.renderedLabel,
               value: detailInputValue.renderedValue,
             };
-          })
+          }),
+        ...this.companyData(report.company)
       },
     );
+  }
+
+  companyData(company: Company | Website) {
+    if (company instanceof Company) {
+      return {
+        companyName: company.name,
+        companyAddress: company.address,
+        companyPostalCode: company.postalCode,
+        companySiret: company.siret,
+      };
+    } else {
+      return {websiteURL: company.url};
+    }
   }
 
   deleteReport(reportId: string) {

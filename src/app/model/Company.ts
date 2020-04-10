@@ -72,3 +72,7 @@ export class CompanySearchResult {
   }
 
 }
+
+export class Website {
+  url: string;
+}

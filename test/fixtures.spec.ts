@@ -2,6 +2,7 @@ import { Roles, User } from '../src/app/model/AuthUser';
 import { Report, ReportStatus } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
 import { Company } from '../src/app/model/Company';
+import { Subcategory } from '../src/app/model/Anomaly';
 
 const randomstring = require('randomstring');
 
@@ -51,7 +52,7 @@ export function genReport() {
   return Object.assign(new Report(), {
     id: randomstring.generate(),
     category: randomstring.generate(),
-    subcategories: [randomstring.generate()],
+    subcategories: [genSubcategory()],
     detailInputValues: [],
     company: genCompany(),
     uploadedFiles: [],
@@ -79,5 +80,11 @@ export function genCompany() {
       length: 5,
       charset: 'numeric'
     })
+  });
+}
+
+export function genSubcategory() {
+  return Object.assign(new Subcategory(), {
+    title: randomstring.generate()
   });
 }

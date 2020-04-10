@@ -38,6 +38,7 @@ export class Subcategory {
   fileLabel?: string;
   information?: Information;
   consumerActions?: Information[];
+  companyKind?: string;
 }
 
 export class Anomaly {
@@ -62,4 +63,8 @@ export enum InputType {
   Textarea = 'TEXTAREA',
   Timeslot = 'TIMESLOT',
   Date = 'DATE'
+}
+
+export enum CompanyKinds {
+  SIRET = 'SIRET', WEBSITE = 'WEBSITE'
 }

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { Company, CompanySearchResult } from '../../../model/Company';
+import { Company, CompanySearchResult, Website } from '../../../model/Company';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -14,6 +14,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { isPlatformBrowser } from '@angular/common';
 import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-company',
@@ -24,6 +25,10 @@ export class CompanyComponent implements OnInit {
 
   step: Step;
   report: Report;
+  companyKinds = CompanyKinds;
+
+  websiteForm: FormGroup;
+  urlCtrl: FormControl;
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
@@ -46,8 +51,6 @@ export class CompanyComponent implements OnInit {
 
   bySiret = false;
 
-  scriptElement;
-
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
@@ -64,8 +67,12 @@ export class CompanyComponent implements OnInit {
       .subscribe(report => {
         if (report) {
           this.report = report;
-          this.initSearchForm();
-          this.initSearchBySiretForm();
+          if (this.report.companyKind === CompanyKinds.SIRET) {
+            this.initSearchForm();
+            this.initSearchBySiretForm();
+          } else {
+            this.initWebsiteForm();
+          }
         } else {
           this.reportRouterService.routeToFirstStep();
         }
@@ -85,6 +92,13 @@ export class CompanyComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       search: this.searchCtrl,
       searchPostalCode: this.searchPostalCodeCtrl
+    });
+  }
+
+  initWebsiteForm() {
+    this.urlCtrl = this.formBuilder.control('', Validators.required);
+    this.websiteForm = this.formBuilder.group({
+      url: this.urlCtrl
     });
   }
 
@@ -129,6 +143,16 @@ export class CompanyComponent implements OnInit {
           this.treatCaseError();
         }
       );
+    }
+  }
+
+  submitWebsiteForm() {
+    if (!this.websiteForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.selectCompany(Object.assign(new Website(), {
+        url: this.urlCtrl.value
+      }));
     }
   }
 
@@ -182,7 +206,7 @@ export class CompanyComponent implements OnInit {
     this.selectCompany(company);
   }
 
-  selectCompany(company: Company) {
+  selectCompany(company: Company | Website) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
     this.report.company = company;
     this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);

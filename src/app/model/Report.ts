@@ -1,6 +1,6 @@
 import { Consumer } from './Consumer';
-import { Company } from './Company';
-import { Subcategory } from './Anomaly';
+import { Company, Website } from './Company';
+import { CompanyKinds, Subcategory } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
@@ -28,7 +28,7 @@ export class Report {
   id: string;
   category: string;
   subcategories: Subcategory[];
-  company: Company;
+  company: Company | Website;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
@@ -45,6 +45,12 @@ export class Report {
   }
   get professionalUploadedFiles() {
     return this.uploadedFiles ? this.uploadedFiles.filter(file => file.origin === FileOrigin.Professional) : [];
+  }
+
+  get companyKind() {
+    if (this.subcategories && this.subcategories.length) {
+      return this.subcategories[this.subcategories.length - 1].companyKind || CompanyKinds.SIRET;
+    }
   }
 }
 
