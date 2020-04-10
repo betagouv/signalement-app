@@ -19,8 +19,8 @@ export class FaqComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.pro.title);
-    this.meta.updateTag({ name: 'description', content: pages.pro.description });
+    this.titleService.setTitle(pages.faq.title);
+    this.meta.updateTag({ name: 'description', content: pages.faq.description });
 
     this.activatedRoute.url.subscribe(url => {
       if (url[1]) {
