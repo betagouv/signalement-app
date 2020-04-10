@@ -32,6 +32,7 @@ import { AbTestsModule } from 'angular-ab-tests';
 import { SVETestingScope, SVETestingVersions } from './utils';
 import { AppRoleModule } from './directives/app-role/app-role.module';
 import { AppPermissionModule } from './directives/app-permission/app-permission.module';
+import { SubscriptionModule } from './pages/subscription/subscription.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -86,6 +87,7 @@ class ErrorLogger extends ErrorHandler {
     AccountModule,
     CompaniesModule,
     SecuredModule,
+    SubscriptionModule,
     StaticModule,
     BsDropdownModule.forRoot(),
     TooltipModule,

@@ -72,6 +72,21 @@ class RawCompanyService {
       })
     );
   }
+
+  updateCompanyAddress(siret: string, address: string, postalCode: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.put<Company>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', siret, 'address']),
+          {
+            address,
+            postalCode
+          },
+          headers
+        );
+      })
+    );
+  }
 }
 
 @Injectable({

@@ -14,7 +14,7 @@ import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
-import { EventActionValues, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
+import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
 import { Constants } from '../../../../model/Constants';
 
 @Component({
@@ -26,7 +26,7 @@ export class ReportDetailComponent implements OnInit {
 
   reportId: string;
 
-  eventActionValues = EventActionValues
+  eventActionValues = EventActionValues;
   permissions = Permissions;
   roles = Roles;
   constants = Constants;
@@ -44,15 +44,6 @@ export class ReportDetailComponent implements OnInit {
   companySiretForm: FormGroup;
   siretCtrl: FormControl;
   companyForSiret: Company;
-  searchBySiret = true;
-
-  companyAddressForm: FormGroup;
-  nameCtrl: FormControl;
-  line1Ctrl: FormControl;
-  line2Ctrl: FormControl;
-  line3Ctrl: FormControl;
-  postalCodeCtrl: FormControl;
-  cityCtrl: FormControl;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -68,6 +59,10 @@ export class ReportDetailComponent implements OnInit {
   reportResponseTypes = ReportResponseTypes;
   fileOrigins = FileOrigin;
   uploadedFiles: UploadedFile[];
+
+  actionForm: FormGroup;
+  actionTypeCtrl: FormControl;
+  detailCtrl: FormControl;
 
   constructor(public formBuilder: FormBuilder,
               private reportService: ReportService,
@@ -91,10 +86,10 @@ export class ReportDetailComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
           this.reportId = params.get('reportId');
-          return combineLatest(
+          return combineLatest([
             this.reportService.getReport(this.reportId),
             this.eventService.getEvents(this.reportId)
-          );
+          ]);
         }
       )
     ).subscribe(
@@ -110,7 +105,6 @@ export class ReportDetailComponent implements OnInit {
       });
 
     this.initCompanySiretForm();
-    this.initCompanyAddressForm();
   }
 
   initCompanySiretForm() {
@@ -119,28 +113,6 @@ export class ReportDetailComponent implements OnInit {
     this.companySiretForm = this.formBuilder.group({
       siret: this.siretCtrl
     });
-  }
-
-  initCompanyAddressForm() {
-    this.nameCtrl = this.formBuilder.control('', Validators.required);
-    this.line1Ctrl = this.formBuilder.control('', Validators.required);
-    this.line2Ctrl = this.formBuilder.control('');
-    this.line3Ctrl = this.formBuilder.control('');
-    this.postalCodeCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{5}')]);
-    this.cityCtrl = this.formBuilder.control('', Validators.required);
-
-    this.companyAddressForm = this.formBuilder.group({
-      name: this.nameCtrl,
-      line1: this.line1Ctrl,
-      line2: this.line2Ctrl,
-      line3: this.line3Ctrl,
-      postalCode: this.postalCodeCtrl,
-      city: this.cityCtrl,
-    });
-  }
-
-  changeCompanySearchTab() {
-    this.searchBySiret = !this.searchBySiret;
   }
 
   initConsumerForm() {
@@ -211,19 +183,6 @@ export class ReportDetailComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
-  }
-
-  submitCompanyAddressForm() {
-    this.changeCompany(Object.assign(new Company(), {
-      siret: this.report.company.siret,
-      name: this.nameCtrl.value,
-      line1: this.nameCtrl.value,
-      line2: this.line1Ctrl.value,
-      line3: this.line2Ctrl.value,
-      line4: this.line3Ctrl.value,
-      line5: `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`,
-      postalCode: this.postalCodeCtrl.value,
-    }));
   }
 
   changeCompany(company: Company) {
@@ -297,6 +256,29 @@ export class ReportDetailComponent implements OnInit {
     this.responseForm = undefined;
   }
 
+  showActionForm() {
+    function detailRequired(actionType: string, detail: string) {
+      return (group: FormGroup) => {
+        if (group.controls[actionType].value === EventActionValues.Comment && !group.controls[detail].value) {
+          return { detailRequired: true };
+        }
+      };
+    }
+
+    this.responseSuccess = false;
+    this.actionTypeCtrl = this.formBuilder.control('', Validators.required);
+    this.detailCtrl = this.formBuilder.control('');
+    this.actionForm = this.formBuilder.group({
+      action: this.actionTypeCtrl,
+      detail: this.detailCtrl
+    }, { validator: detailRequired('action', 'detail')});
+    this.uploadedFiles = [];
+  }
+
+  hideActionForm() {
+    this.actionForm = undefined;
+  }
+
   isUploadingFile() {
     return this.uploadedFiles.find(file => file.loading);
   }
@@ -334,6 +316,39 @@ export class ReportDetailComponent implements OnInit {
 
   }
 
+  submitActionForm() {
+    if (!this.actionForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.loading = true;
+      this.loadingError = false;
+      this.reportService.postReportAction(
+        this.reportId,
+        Object.assign(new ReportAction(), {
+          actionType: this.actionTypeCtrl.value,
+          details: this.detailCtrl.value,
+          fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
+        })
+      ).pipe(
+        switchMap(() => {
+          return this.eventService.getEvents(this.reportId);
+        })
+      ).subscribe(
+        events => {
+          this.events = events;
+          this.report.uploadedFiles = [...this.report.uploadedFiles, ...this.uploadedFiles.filter(file => file.id)];
+          this.loading = false;
+          this.responseSuccess = true;
+          this.actionForm = undefined;
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
+    }
+
+  }
+
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
   }
@@ -349,9 +364,11 @@ export class ReportDetailComponent implements OnInit {
     }
   }
 
-  getResponseTypeClass(value) {
-    if (this.responseTypeCtrl.value) {
+  getTypeClass(value: string) {
+    if (this.responseTypeCtrl && this.responseTypeCtrl.value) {
       return this.responseTypeCtrl.value === value ? 'selected' : 'not-selected';
+    } else if (this.actionTypeCtrl && this.actionTypeCtrl.value) {
+      return this.actionTypeCtrl.value === value ? 'selected' : 'not-selected';
     }
   }
 

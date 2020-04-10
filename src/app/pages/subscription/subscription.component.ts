@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Departments, Regions } from '../../../model/Region';
-import { SubscriptionService } from '../../../services/subscription.service';
-import { Subscription } from '../../../model/Subscription';
-import pages from '../../../../assets/data/pages.json';
+import { Departments, Regions } from '../../model/Region';
+import { SubscriptionService } from '../../services/subscription.service';
+import { Subscription } from '../../model/Subscription';
+import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
@@ -35,8 +35,13 @@ export class SubscriptionComponent implements OnInit {
     this.loading = true;
     this.subscriptionService.getSubscriptions().subscribe(
       subscriptions => {
-        this.departmentSubscription = subscriptions.length ? subscriptions[0] : new Subscription();
+        const departmentSubscriptions = subscriptions.filter(s => !s.categories || !s.categories.length)
+        this.departmentSubscription = departmentSubscriptions.length ? departmentSubscriptions[0] : new Subscription();
         this.loading = false;
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
       }
     );
   }
@@ -47,7 +52,7 @@ export class SubscriptionComponent implements OnInit {
       this.subscriptionForm.addControl(
         `department_${department.code}`,
         this.formBuilder.control(
-          this.departmentSubscription ? this.departmentSubscription.values.indexOf(department.code) !== -1 : false
+          this.departmentSubscription ? this.departmentSubscription.departments.indexOf(department.code) !== -1 : false
         )
       );
     });
@@ -65,8 +70,7 @@ export class SubscriptionComponent implements OnInit {
       this.loadingError = false;
       this.subscriptionService.subscribe(
         Object.assign(this.departmentSubscription ? this.departmentSubscription : new Subscription(), {
-          category: 'Departments',
-          values: this.departments
+          departments: this.departments
             .filter(department => this.subscriptionForm
               .get([`department_${department.code}`]) && this.subscriptionForm.get([`department_${department.code}`]).value)
             .map(department => department.code)

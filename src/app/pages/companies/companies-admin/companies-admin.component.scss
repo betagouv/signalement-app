@@ -25,3 +25,20 @@
 .nav-link:not(.active) + .nav-link {
   border-left: 1px solid rgba(28, 28, 28, 0.125);
 }
+
+.table thead th {
+  vertical-align: middle;
+
+  &.th-date {
+    width: 150px;
+  }
+
+  &.th-address {
+    width: 300px;
+  }
+
+  &.th-checkbox {
+    width: 75px;
+  }
+}
+

@@ -12,7 +12,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesAdminComponent } from './companies-admin/companies-admin.component';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
-import { PaginationModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
 import { CompanyCardComponent } from './company-card/company-card.component';
 
 const routes: Routes = [
@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'entreprises', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
   { path: 'entreprises/les-plus-signalees', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
   { path: 'entreprises/recherche', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
+  { path: 'entreprises/a-activer', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -39,8 +40,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    BsDropdownModule.forRoot(),
     ComponentsModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
+    BsDatepickerModule.forRoot(),
     AppRoleModule,
     AppPermissionModule,
     PaginationModule.forRoot(),

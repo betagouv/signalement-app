@@ -215,23 +215,6 @@
       <table class="table">
         <thead>
           <tr>
-            <th *appRole="[roles.Admin]" class="col-checkbox">
-              <input type="checkbox"
-                     [checked]="getCurrentPageReportUuidsToProcess()?.length === checkedReportUuids.size"
-                     (click)="checkAllReports($event)"/>
-              <div dropdown placement="bottom right" class="btn-group d-inline-block position-relative">
-                <button dropdownToggle type="button" class="dropdown-toggle bg-transparent border-0">
-                </button>
-                <ul id="dropdown-actions" *dropdownMenu class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="button-basic">
-                  <li role="menuitem dropdown-item">
-                    <span class="pointer dropdown-item" (click)="downloadActivationDocuments()">Télécharger les courriers</span>
-                  </li>
-                  <li role="menuitem">
-                    <span class="pointer dropdown-item" (click)="openModal(confirmLettersSendingTpl)">Valider l'envoi des courriers</span>
-                  </li>
-                </ul>
-              </div>
-            </th>
             <th>Dep</th>
             <th *appRole="[roles.DGCCRF]">Commune</th>
             <th *appRole="[roles.DGCCRF]">SIRET</th>
@@ -242,42 +225,22 @@
             <th *appRole="[roles.Admin]" class="email">Consommateur</th>
             <th class="pj">Pièces jointes</th>
             <th class="status-header">Statut</th>
-            <th *appPermission="permissions.createEvent" class="action"></th>
-            <ng-template #confirmLettersSendingTpl>
-              <div class="modal-body text-center">
-                <p>Confirmez-vous l'envoi des courriers pour les signalements sélectionnés ?</p>
-
-                <div class="notification error" *ngIf="loadingError">
-                  Une erreur technique s'est produite<br />
-                </div>
-
-                <hr />
-
-                <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
-                &nbsp;
-                <button type="button" class="btn btn-primary" (click)="confirmLettersSending()">Oui</button>
-              </div>
-            </ng-template>
           </tr>
         </thead>
         <tbody>
           <tr *ngIf="!loading && !reportsByDate?.length">
-            <td colspan="7">
+            <td colspan="8">
               <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
               <span *ngIf="!loadingError">Aucun signalement trouvé</span>
             </td>
           </tr>
           <ng-container *ngFor="let reportsByDate of reportsByDate">
             <tr *appRole="[roles.Admin]">
-              <td colspan="8" class="report-group">
+              <td colspan="7" class="report-group">
                 {{reportsByDate.date}}
               </td>
-              <td class="action report-group"></td>
             </tr>
             <tr *ngFor="let report of reportsByDate.reports" class="pointer" (click)="displayReport(report)">
-              <td *appRole="[roles.Admin]" class="col-checkbox" (click)="checkReport($event, report.id)">
-                <input type="checkbox" [checked]="checkedReportUuids.has(report.id)" *ngIf="report.status === reportStatus.ToProcess"/>
-              </td>
               <td>{{report.company.postalCode | slice : 0 : 2}}</td>
               <td *appRole="[roles.DGCCRF]">{{report.company.postalCode}}</td>
               <td *appRole="[roles.DGCCRF]">{{report.company.siret}}</td>
@@ -364,9 +327,6 @@
               </td>
               <td [class]="getReportCssClass(report.status)">
                 {{ report.status }}
-              </td>
-              <td *appPermission="permissions.createEvent" class="action" (click)="addEvent($event, report)">
-                <i class="material-icons md-blue" title="Ajouter une action">add_circle</i>
               </td>
             </tr>
           </ng-container>
