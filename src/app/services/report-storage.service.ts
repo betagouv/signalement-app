@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { DetailInputValue, Report, Step } from '../model/Report';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UploadedFile } from '../model/UploadedFile';
+import { Company } from '../model/Company';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -27,6 +28,9 @@ export class ReportStorageService {
         }
         if (report.uploadedFiles) {
           report.uploadedFiles = report.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
+        }
+        if (report.company) {
+          report.company = Object.assign(new Company(), report.company);
         }
         this.reportInProgessSource.next(report);
       }
