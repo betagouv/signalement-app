@@ -30,22 +30,22 @@
           </a>
         </li>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-          <a class="nav-link" routerLink="/qui-sommes-nous"
-             [ngClass]="activeItem === navItems.About ? 'active' : ''">
-            Qui sommes-nous ?
+          <a class="nav-link" routerLink="/comment-ça-marche"
+             [ngClass]="activeItem === navItems.How ? 'active' : ''">
+            Comment ça marche ?
           </a>
         </li>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.Pro] else how">
-          <a class="nav-link" routerLink="/comment-ça-marche/professionnel"
-             [ngClass]="activeItem === navItems.HowPro || activeItem === navItems.HowConso ? 'active' : ''">
-            Comment ça marche ?
+          <a class="nav-link" routerLink="/centre-aide/professionnel"
+             [ngClass]="activeItem === navItems.FaqPro || activeItem === navItems.FaqConso ? 'active' : ''">
+            Centre d'aide
           </a>
         </li>
         <ng-template #how>
           <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-            <a class="nav-link" routerLink="/comment-ça-marche/consommateur"
-               [ngClass]="activeItem === navItems.HowConso || activeItem === navItems.HowPro ? 'active' : ''">
-              Comment ça marche ?
+            <a class="nav-link" routerLink="/centre-aide/consommateur"
+               [ngClass]="activeItem === navItems.FaqConso || activeItem === navItems.FaqPro ? 'active' : ''">
+              Centre d'aide
             </a>
           </li>
         </ng-template>

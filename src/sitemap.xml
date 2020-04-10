@@ -5,24 +5,28 @@
     <loc>https://signal.conso.gouv.fr</loc>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://signal.conso.gouv.fr/coronavirus</loc>
+    <priority>1.0</priority>
+  </url>
 
   <url>
-    <loc>https://signal.conso.gouv.fr/comment-ça-marche/consommateur</loc>
+    <loc>https://signal.conso.gouv.fr/centre-aide/consommateur</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://signal.conso.gouv.fr/comment-ça-marche/professionnel</loc>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://signal.conso.gouv.fr/qui-sommes-nous</loc>
+    <loc>https://signal.conso.gouv.fr/centre-aide/professionnel</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://signal.conso.gouv.fr/contact</loc>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/qui-sommes-nous</loc>
     <priority>0.5</priority>
   </url>
 
@@ -88,11 +92,6 @@
 
   <url>
     <loc>https://signal.conso.gouv.fr/demarches-administratives</loc>
-    <priority>0.4</priority>
-  </url>
-
-  <url>
-    <loc>https://signal.conso.gouv.fr/ehpad</loc>
     <priority>0.4</priority>
   </url>
 
