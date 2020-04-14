@@ -49,7 +49,7 @@ export class ReportService {
               value: detailInputValue.renderedValue,
             };
           }),
-        ...this.companyData(draftReport.company)
+        ...this.companyData(draftReport.companyData)
       },
     );
   }

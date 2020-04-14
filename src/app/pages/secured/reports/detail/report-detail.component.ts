@@ -43,7 +43,7 @@ export class ReportDetailComponent implements OnInit {
 
   companySiretForm: FormGroup;
   siretCtrl: FormControl;
-  companyForSiret: CompanySearchResult;
+  companySearchBySiretResult: CompanySearchResult;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -177,7 +177,7 @@ export class ReportDetailComponent implements OnInit {
     this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
-        this.companyForSiret = company ? company : new CompanySearchResult();
+        this.companySearchBySiretResult = company ? company : new CompanySearchResult();
       },
       err => {
         this.loading = false;
@@ -200,7 +200,7 @@ export class ReportDetailComponent implements OnInit {
           this.report.company.name = company.name;
           this.report.company.address = company.address;
           this.events = events;
-          this.companyForSiret = undefined;
+          this.companySearchBySiretResult = undefined;
           this.siretCtrl.setValue('');
           this.bsModalRef.hide();
         },

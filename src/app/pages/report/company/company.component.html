@@ -3,17 +3,17 @@
   <div class="container max-width">
     <ng-container *ngIf="draftReport">
       <ng-container *ngIf="draftReport.companyKind === companyKinds.SIRET; else website">
-        <form (submit)="selectCompany(draftReport.company)" *ngIf="draftReport.company; else noCompany">
+        <form (submit)="selectCompany(draftReport.companyData)" *ngIf="draftReport.companyData; else noCompany">
           <div class="row">
             <div class="col-12 text-center">
               <div class="company-card">
-                  <strong *ngIf="draftReport.company.line1">{{draftReport.company.line1}}<br /></strong>
-                  <strong *ngIf="draftReport.company.line2">{{draftReport.company.line2}}<br /></strong>
-                  <span *ngIf="draftReport.company.line3">{{draftReport.company.line3}}<br /></span>
-                  <span *ngIf="draftReport.company.line4">{{draftReport.company.line4}}<br /></span>
-                  <span *ngIf="draftReport.company.line5">{{draftReport.company.line5}}<br /></span>
-                  <span *ngIf="draftReport.company.line6">{{draftReport.company.line6}}<br /></span>
-                  <span *ngIf="draftReport.company.line7">{{draftReport.company.line7}}<br /></span>
+                  <strong *ngIf="draftReport.companyData.line1">{{draftReport.companyData.line1}}<br /></strong>
+                  <strong *ngIf="draftReport.companyData.line2">{{draftReport.companyData.line2}}<br /></strong>
+                  <span *ngIf="draftReport.companyData.line3">{{draftReport.companyData.line3}}<br /></span>
+                  <span *ngIf="draftReport.companyData.line4">{{draftReport.companyData.line4}}<br /></span>
+                  <span *ngIf="draftReport.companyData.line5">{{draftReport.companyData.line5}}<br /></span>
+                  <span *ngIf="draftReport.companyData.line6">{{draftReport.companyData.line6}}<br /></span>
+                  <span *ngIf="draftReport.companyData.line7">{{draftReport.companyData.line7}}<br /></span>
               </div>
             </div>
           </div>
@@ -81,26 +81,26 @@
 
             </form>
 
-            <div *ngIf="companies && companies.length">
+            <div *ngIf="companySearchResults && companySearchResults.length">
 
               <p class="mt-4">
                 Veuillez sélectionner une entreprise dans la liste ci-dessous :
               </p>
 
-              <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)" (keydown.enter)="selectCompanyFromResults(company)" tabindex="0">
-                <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
-                <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
-                <strong *ngIf="company.highlight">
+              <p *ngFor="let companySearchResult of companySearchResults" class="company" (click)="selectCompanyFromResults(companySearchResult)" (keydown.enter)="selectCompanyFromResults(companySearchResult)" tabindex="0">
+                <strong *ngIf="companySearchResult.line1">{{companySearchResult.line1}}<br /></strong>
+                <strong *ngIf="companySearchResult.line2">{{companySearchResult.line2}}<br /></strong>
+                <strong *ngIf="companySearchResult.highlight">
                   <i class="material-icons md-green">check_circle</i>
-                  <small class="text-success font-weight-bold">{{company.highlight}}</small>
+                  <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
                   <br />
                 </strong>
-                <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
-                <span *ngIf="company.line3">{{company.line3}}<br /></span>
-                <span *ngIf="company.line4">{{company.line4}}<br /></span>
-                <span *ngIf="company.line5">{{company.line5}}<br /></span>
-                <span *ngIf="company.line6">{{company.line6}}<br /></span>
-                <span *ngIf="company.line7">{{company.line7}}<br /></span>
+                <span *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}<br /></span>
+                <span *ngIf="companySearchResult.line3">{{companySearchResult.line3}}<br /></span>
+                <span *ngIf="companySearchResult.line4">{{companySearchResult.line4}}<br /></span>
+                <span *ngIf="companySearchResult.line5">{{companySearchResult.line5}}<br /></span>
+                <span *ngIf="companySearchResult.line6">{{companySearchResult.line6}}<br /></span>
+                <span *ngIf="companySearchResult.line7">{{companySearchResult.line7}}<br /></span>
               </p>
 
               <div class="notification info mt-4">
@@ -217,21 +217,21 @@
 
             </form>
 
-            <div *ngIf="companyBySiret">
+            <div *ngIf="companySearchBySiretResult">
 
               <p class="mt-4">
                 Veuillez cliquer sur l'entreprise ci-dessous si elle correspond bien à l'entreprise recherché :
               </p>
 
-              <p class="company" (click)="selectCompanyFromResults(companyBySiret)" (keydown.enter)="selectCompanyFromResults(companyBySiret)" tabindex="0">
-                <strong *ngIf="companyBySiret.line1">{{companyBySiret.line1}}<br /></strong>
-                <strong *ngIf="companyBySiret.line2">{{companyBySiret.line2}}<br /></strong>
-                <span *ngIf="companyBySiret.activityLabel">{{companyBySiret.activityLabel}}<br /></span>
-                <span *ngIf="companyBySiret.line3">{{companyBySiret.line3}}<br /></span>
-                <span *ngIf="companyBySiret.line4">{{companyBySiret.line4}}<br /></span>
-                <span *ngIf="companyBySiret.line5">{{companyBySiret.line5}}<br /></span>
-                <span *ngIf="companyBySiret.line6">{{companyBySiret.line6}}<br /></span>
-                <span *ngIf="companyBySiret.line7">{{companyBySiret.line7}}<br /></span>
+              <p class="company" (click)="selectCompanyFromResults(companySearchBySiretResult)" (keydown.enter)="selectCompanyFromResults(companySearchBySiretResult)" tabindex="0">
+                <strong *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}<br /></strong>
+                <strong *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}<br /></strong>
+                <span *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}<br /></span>
+                <span *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}<br /></span>
+                <span *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}<br /></span>
+                <span *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}<br /></span>
+                <span *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}<br /></span>
+                <span *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}<br /></span>
               </p>
 
               <div class="notification info mt-4">

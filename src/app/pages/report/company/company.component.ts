@@ -34,7 +34,7 @@ export class CompanyComponent implements OnInit {
   searchForm: FormGroup;
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
-  companies: CompanySearchResult[];
+  companySearchResults: CompanySearchResult[];
 
   showErrors: boolean;
   searchWarning: string;
@@ -42,7 +42,7 @@ export class CompanyComponent implements OnInit {
 
   searchBySiretForm: FormGroup;
   siretCtrl: FormControl;
-  companyBySiret: CompanySearchResult;
+  companySearchBySiretResult: CompanySearchResult;
 
   showErrorsBySiret: boolean;
   searchBySiretWarning: string;
@@ -111,7 +111,7 @@ export class CompanyComponent implements OnInit {
   }
 
   initSearch() {
-    this.companies = [];
+    this.companySearchResults = [];
     this.searchWarning = '';
     this.searchError = '';
   }
@@ -127,16 +127,16 @@ export class CompanyComponent implements OnInit {
         CompanySearchEventActions.search,
         this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
       this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
-        companySearchResult => {
+        companySearchResults => {
           this.loading = false;
-          if (companySearchResult.total === 0) {
+          if (companySearchResults.total === 0) {
             this.treatCaseNoResult();
-          } else if (companySearchResult.total === 1) {
-            this.treatCaseSingleResult(companySearchResult);
-          } else if (companySearchResult.total > MaxCompanyResult) {
+          } else if (companySearchResults.total === 1) {
+            this.treatCaseSingleResult(companySearchResults);
+          } else if (companySearchResults.total > MaxCompanyResult) {
             this.treatCaseTooManyResults();
           } else {
-            this.treatCaseSeveralResults(companySearchResult);
+            this.treatCaseSeveralResults(companySearchResults);
           }
         },
         () => {
@@ -172,7 +172,7 @@ export class CompanyComponent implements OnInit {
       CompanySearchEventActions.search,
       CompanySearchEventNames.singleResult
     );
-    this.companies = companySearchResult.companies;
+    this.companySearchResults = companySearchResult.companies;
   }
 
   treatCaseTooManyResults() {
@@ -184,13 +184,13 @@ export class CompanyComponent implements OnInit {
     this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
   }
 
-  treatCaseSeveralResults(companySearchResult) {
+  treatCaseSeveralResults(companySearchResults: CompanySearchResults) {
     this.analyticsService.trackEvent(
       EventCategories.companySearch,
       CompanySearchEventActions.search,
       CompanySearchEventNames.severalResult
     );
-    this.companies = companySearchResult.companies;
+    this.companySearchResults = companySearchResults.companies;
   }
 
   treatCaseError() {
@@ -202,20 +202,20 @@ export class CompanyComponent implements OnInit {
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
-  selectCompanyFromResults(company: CompanySearchResult) {
+  selectCompanyFromResults(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.selectCompany(company);
+    this.selectCompany(companySearchResult);
   }
 
-  selectCompany(company: CompanySearchResult | Website) {
+  selectCompany(companySearchResult: CompanySearchResult | Website) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
-    this.draftReport.company = company;
+    this.draftReport.companyData = companySearchResult;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
   initSearchBySiret() {
-    this.companyBySiret = undefined;
+    this.companySearchBySiretResult = undefined;
     this.searchBySiretWarning = '';
     this.searchBySiretError = '';
   }
@@ -237,7 +237,7 @@ export class CompanyComponent implements OnInit {
             CompanySearchEventActions.searchBySiret,
             CompanySearchEventNames.singleResult
           );
-          this.companyBySiret = company;
+          this.companySearchBySiretResult = company;
         } else {
           this.analyticsService.trackEvent(
             EventCategories.companySearch,
@@ -260,9 +260,9 @@ export class CompanyComponent implements OnInit {
   }
 
   changeCompany() {
-    this.draftReport.company = undefined;
-    this.companies = [];
-    this.companyBySiret = undefined;
+    this.draftReport.companyData = undefined;
+    this.companySearchResults = [];
+    this.companySearchBySiretResult = undefined;
     this.showErrors = false;
     this.showErrorsBySiret = false;
   }

@@ -103,7 +103,7 @@
                 <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
                   <input [formControl]="siretCtrl" placeholder="SIRET de l'entreprise" />
 
-                  <div class="notification error" *ngIf="!companyForSiret && loadingError">
+                  <div class="notification error" *ngIf="!companySearchBySiretResult && loadingError">
                     Une erreur technique s'est produite<br />
                   </div>
 
@@ -112,20 +112,20 @@
                     Rechercher
                   </button>
                 </form>
-                <div *ngIf="companyForSiret">
+                <div *ngIf="companySearchBySiretResult">
                   <hr />
-                  <div *ngIf="!companyForSiret.siret">
+                  <div *ngIf="!companySearchBySiretResult.siret">
                     Aucun établissement trouvé
                   </div>
-                  <div *ngIf="companyForSiret.siret">
+                  <div *ngIf="companySearchBySiretResult.siret">
                     <p class="company">
-                      <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
-                      <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
-                      <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
-                      <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
-                      <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
-                      <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
-                      <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
+                      <strong *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}<br /></strong>
+                      <strong *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}<br /></strong>
+                      <span *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}<br /></span>
                     </p>
 
                     <div class="notification error" *ngIf="loadingError">
@@ -135,7 +135,7 @@
                     <hr />
                     <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                     &nbsp;
-                    <button type="button" class="btn btn-primary" (click)="changeCompany(companyForSiret)">Valider</button>
+                    <button type="button" class="btn btn-primary" (click)="changeCompany(companySearchBySiretResult)">Valider</button>
                   </div>
                 </div>
               </div>

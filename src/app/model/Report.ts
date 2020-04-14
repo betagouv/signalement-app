@@ -28,7 +28,7 @@ export enum ReportStatus {
 export class DraftReport {
   category: string;
   subcategories: Subcategory[];
-  company: CompanySearchResult | Website;
+  companyData: CompanySearchResult | Website;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;

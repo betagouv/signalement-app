@@ -54,7 +54,7 @@ describe('CompanyComponent', () => {
   describe('case of searching company with SIRET', () => {
 
     beforeEach(() => {
-      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {company: undefined}));
+      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {companyData: undefined}));
 
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;
@@ -94,23 +94,23 @@ describe('CompanyComponent', () => {
       });
 
       it('should initialize previous results', () => {
-        component.companies = [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
-        const companySearchResult = Object.assign(new CompanySearchResults(), {
+        component.companySearchResults = [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
+        const companySearchResults = Object.assign(new CompanySearchResults(), {
           total_results: 0,
           etablissement: []
         });
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
+        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResults));
 
         const nativeElement = fixture.nativeElement;
         nativeElement.querySelector('button#submitSearchForm').click();
         fixture.detectChanges();
 
-        expect(component.companies).toEqual([]);
+        expect(component.companySearchResults).toEqual([]);
       });
 
       it('should display the company list when only one result has been found', () => {
 
-        const companySearchResult = Object.assign(new CompanySearchResults(), {
+        const companySearchResults = Object.assign(new CompanySearchResults(), {
           total_results: 1,
           etablissement: [{
             l1_normalisee: 'CASINO CARBURANTS',
@@ -125,19 +125,19 @@ describe('CompanyComponent', () => {
             code_postal: '87270'
           }]
         });
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
+        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResults));
 
         const nativeElement = fixture.nativeElement;
         nativeElement.querySelector('button#submitSearchForm').click();
         fixture.detectChanges();
 
-        expect(component.companies).toEqual(companySearchResult.companies);
+        expect(component.companySearchResults).toEqual(companySearchResults.companies);
 
       });
 
       it('should display the company list when many results have been found', () => {
 
-        const companySearchResult = Object.assign(new CompanySearchResults(), {
+        const companySearchResults = Object.assign(new CompanySearchResults(), {
           total_results: 2,
           etablissement: [
             {
@@ -163,13 +163,13 @@ describe('CompanyComponent', () => {
               nom_raison_sociale: 'DISTRIBUTION CASINO FRANCE',
             }]
         });
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResult));
+        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResults));
 
         const nativeElement = fixture.nativeElement;
         nativeElement.querySelector('button#submitSearchForm').click();
         fixture.detectChanges();
 
-        expect(component.companies).toEqual(companySearchResult.companies);
+        expect(component.companySearchResults).toEqual(companySearchResults.companies);
       });
 
     });
@@ -211,7 +211,7 @@ describe('CompanyComponent', () => {
         nativeElement.querySelector('button#submitSiretForm').click();
         fixture.detectChanges();
 
-        expect(component.companyBySiret).toEqual(companyBySiret);
+        expect(component.companySearchBySiretResult).toEqual(companyBySiret);
 
       });
 

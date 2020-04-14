@@ -8,30 +8,12 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { DraftReport } from '../../../model/Report';
-import { CompanySearchResult } from '../../../model/CompanySearchResult';
-import { Consumer } from '../../../model/Consumer';
 import { PipesModule } from '../../../pipes/pipes.module';
+import { genDraftReport } from '../../../../../test/fixtures.spec';
 
 describe('ConfirmationComponent', () => {
 
-  const draftReportFixture = Object.assign(
-    new DraftReport(), {
-      company: Object.assign(
-        new CompanySearchResult(),
-        {
-          name: 'Mon entreprise',
-          line1: 'Mon entreprise',
-          line2: 'Mon adresse dans ma ville',
-          postalCode: '87270',
-          siret: '12345678901234'
-        }
-      ),
-      consumer: Object.assign(
-        new Consumer()
-      )
-    }
-  );
+  const draftReportFixture = genDraftReport();
 
   let component: ConfirmationComponent;
   let fixture: ComponentFixture<ConfirmationComponent>;

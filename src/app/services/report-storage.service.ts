@@ -29,8 +29,8 @@ export class ReportStorageService {
         if (draftReport.uploadedFiles) {
           draftReport.uploadedFiles = draftReport.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
         }
-        if (draftReport.company) {
-          draftReport.company = Object.assign(new CompanySearchResult(), draftReport.company);
+        if (draftReport.companyData) {
+          draftReport.companyData = Object.assign(new CompanySearchResult(), draftReport.companyData);
         }
         this.reportInProgessSource.next(draftReport);
       }
