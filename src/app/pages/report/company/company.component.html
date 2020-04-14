@@ -260,7 +260,7 @@
         <form [formGroup]="websiteForm" (submit)="submitWebsiteForm()" id="websiteForm" *ngIf="websiteForm">
 
           <div class="form__group mt-4">
-            <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Url du site <span class="error">*</span>
+            <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) <span class="error">*</span>
             </label>
             <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : http://site.fr" appAutofocus="true"/>
           </div>
