@@ -85,12 +85,16 @@
           </div>
           <div class="row form-group">
             <div class="col-2 text-right">
-              <label for="siretFilter">
-                SIRET
+              <label for="hasCompanyFilter">
+                Entreprise identifiée ?
               </label>
             </div>
             <div class="col-4 text-left">
-              <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret"/>
+              <select [(ngModel)]="reportFilter.hasCompany" id="hasCompanyFilter" name="hasCompany" [class]="reportFilter.hasCompany ? 'selected' : ''">
+                <option [ngValue]="undefined" selected>Indifférent</option>
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
+              </select>
             </div>
             <div class="col-2 text-right">
               <label for="statusFilter">
@@ -98,8 +102,8 @@
               </label>
             </div>
             <div class="col-4 text-left">
-              <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
-                <option value="" selected>Tous les statuts</option>
+              <select [(ngModel)]="reportFilter.status" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
+                <option [ngValue]="undefined" selected>Tous les statuts</option>
                 <option *ngFor="let status of statusList">
                   {{status}}
                 </option>
@@ -108,17 +112,12 @@
           </div>
           <div class="row form-group">
             <div class="col-2 text-right">
-              <label for="categoryFilter">
-                Catégorie
+              <label for="siretFilter">
+                SIRET
               </label>
             </div>
             <div class="col-4 text-left">
-              <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" [class]="reportFilter.category ? 'selected' : ''">
-                <option value="" selected>Toutes les catégories</option>
-                <option *ngFor="let category of categories">
-                  {{category}}
-                </option>
-              </select>
+              <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret"/>
             </div>
             <div class="col-2 text-right">
               <label for="detailsFilter">
@@ -130,6 +129,19 @@
             </div>
           </div>
           <div class="row form-group">
+            <div class="col-2 text-right">
+              <label for="categoryFilter">
+                Catégorie
+              </label>
+            </div>
+            <div class="col-4 text-left">
+              <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" [class]="reportFilter.category ? 'selected' : ''">
+                <option [ngValue]="undefined" selected>Toutes les catégories</option>
+                <option *ngFor="let category of categories">
+                  {{category}}
+                </option>
+              </select>
+            </div>
             <div class="col-2 text-right">
               <label for="emailFilter">
                 Email conso.
@@ -170,7 +182,7 @@
             </div>
             <div class="col-9 col-lg-8 text-left">
               <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
-                <option value="" selected>Tous les statuts</option>
+                <option [ngValue]="undefined" selected>Tous les statuts</option>
                 <option *ngFor="let status of statusList">
                   {{status}}
                 </option>

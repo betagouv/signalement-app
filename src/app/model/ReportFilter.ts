@@ -9,4 +9,5 @@ export class ReportFilter {
   category?: string;
   status?: string;
   details?: string;
+  hasCompany?: boolean;
 }
