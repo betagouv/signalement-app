@@ -37,4 +37,10 @@ export interface CompanyToActivate {
 
 export class Website {
   url: string;
+
+  get domain() {
+    if (this.url) {
+      return this.url.substring(0, 2);
+    }
+  }
 }

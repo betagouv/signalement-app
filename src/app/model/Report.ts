@@ -49,6 +49,7 @@ export class Report {
   category: string;
   subcategories: Subcategory[];
   company: Company;
+  website: Website;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;

@@ -43,19 +43,30 @@
           </div>
         </div>
         <hr />
-        <h3>Entreprise</h3>
-        <div class="row">
-          <div class="col-12">
-            <strong *ngIf="draftReport.companyData.line1">{{draftReport.companyData.line1}}<br /></strong>
-            <strong *ngIf="draftReport.companyData.line2">{{draftReport.companyData.line2}}<br /></strong>
-            <span *ngIf="draftReport.companyData.line3">{{draftReport.companyData.line3}}<br /></span>
-            <span *ngIf="draftReport.companyData.line4">{{draftReport.companyData.line4}}<br /></span>
-            <span *ngIf="draftReport.companyData.line5">{{draftReport.companyData.line5}}<br /></span>
-            <span *ngIf="draftReport.companyData.line6">{{draftReport.companyData.line6}}<br /></span>
-            <span *ngIf="draftReport.companyData.line7">{{draftReport.companyData.line7}}<br /></span>
+        <ng-container *ngIf="draftReport.companyKind === companyKinds.SIRET">
+          <h3>Entreprise</h3>
+          <div class="row">
+            <div class="col-12">
+              <strong *ngIf="draftReport.companyData.line1">{{draftReport.companyData.line1}}<br /></strong>
+              <strong *ngIf="draftReport.companyData.line2">{{draftReport.companyData.line2}}<br /></strong>
+              <span *ngIf="draftReport.companyData.line3">{{draftReport.companyData.line3}}<br /></span>
+              <span *ngIf="draftReport.companyData.line4">{{draftReport.companyData.line4}}<br /></span>
+              <span *ngIf="draftReport.companyData.line5">{{draftReport.companyData.line5}}<br /></span>
+              <span *ngIf="draftReport.companyData.line6">{{draftReport.companyData.line6}}<br /></span>
+              <span *ngIf="draftReport.companyData.line7">{{draftReport.companyData.line7}}<br /></span>
+            </div>
           </div>
-        </div>
-        <hr />
+          <hr />
+        </ng-container>
+        <ng-container *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
+          <h3>Site internet</h3>
+          <div class="row">
+            <div class="col-12">
+              {{draftReport.companyData.url}}
+            </div>
+          </div>
+          <hr />
+        </ng-container>
         <h3>Consommateur</h3>
         <div class="row">
           <div class="col-12">

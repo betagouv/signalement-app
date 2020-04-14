@@ -257,10 +257,16 @@
               <td *appRole="[roles.DGCCRF]">{{report.company.postalCode}}</td>
               <td *appRole="[roles.DGCCRF]">{{report.company.siret}}</td>
               <td>
-                <span [tooltip]="companyTooltip">
+                <span [tooltip]="companyTooltip" *ngIf="report.company">
                   {{report.company.name}}
                   <ng-template #companyTooltip>
                     <span *ngFor="let line of report.company.address.split(' - ')">{{line}}<br /></span>
+                  </ng-template>
+                </span>
+                <span [tooltip]="websiteTooltip" *ngIf="report.website">
+                  {{report.website.domain}}
+                  <ng-template #websiteTooltip>
+                    {{report.website.url}}
                   </ng-template>
                 </span>
               </td>

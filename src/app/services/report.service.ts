@@ -260,6 +260,7 @@ export class ReportService {
         lastName: report.lastName,
         email: report.email
       }),
+      website: Object.assign(new Website(), {url: report.websiteURL}),
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
       uploadedFiles: files.map(f => Object.assign(new UploadedFile(), f)),

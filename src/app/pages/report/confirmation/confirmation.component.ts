@@ -8,6 +8,7 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-confirmation',
@@ -18,6 +19,7 @@ export class ConfirmationComponent implements OnInit {
 
   step: Step;
   draftReport: DraftReport;
+  companyKinds = CompanyKinds;
 
   confirmationForm: FormGroup;
 
