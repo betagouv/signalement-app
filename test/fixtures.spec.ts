@@ -1,8 +1,9 @@
 import { Roles, User } from '../src/app/model/AuthUser';
-import { Report, ReportStatus } from '../src/app/model/Report';
+import { DraftReport, Report, ReportStatus } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
-import { Company } from '../src/app/model/Company';
+import { CompanySearchResult } from '../src/app/model/CompanySearchResult';
 import { Subcategory } from '../src/app/model/Anomaly';
+import { Company } from '../src/app/model/Company';
 
 const randomstring = require('randomstring');
 
@@ -48,6 +49,19 @@ export function genUser(role: Roles) {
   });
 }
 
+export function genDraftReport() {
+  return Object.assign(new DraftReport(), {
+    category: randomstring.generate(),
+    subcategories: [genSubcategory()],
+    detailInputValues: [],
+    company: genCompanySearchResult(),
+    uploadedFiles: [],
+    consumer: genConsumer(),
+    employeeConsumer: false,
+    contactAgreement: oneBoolean
+  });
+}
+
 export function genReport() {
   return Object.assign(new Report(), {
     id: randomstring.generate(),
@@ -59,7 +73,6 @@ export function genReport() {
     consumer: genConsumer(),
     employeeConsumer: false,
     contactAgreement: oneBoolean,
-    internetPurchase: oneBoolean(),
     creationDate: new Date(),
     status: oneOf(status)
   });
@@ -73,14 +86,22 @@ export function genConsumer() {
   });
 }
 
-export function genCompany() {
-  return Object.assign(new Company(), {
+export function genCompanySearchResult() {
+  return Object.assign(new CompanySearchResult(), {
     name: randomstring.generate(),
     postalCode: randomstring.generate({
       length: 5,
       charset: 'numeric'
     })
   });
+}
+
+export function genCompany() {
+  return <Company>{
+    id: randomstring.generate(),
+    name: randomstring.generate(),
+    siret: genSiret()
+  };
 }
 
 export function genSubcategory() {

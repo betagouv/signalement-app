@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanyComponent } from './company.component';
 import { CompanyService } from '../../../services/company.service';
-import { Company, CompanySearchResult } from '../../../model/Company';
+import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +14,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { AutofocusDirective } from '../../../directives/auto-focus.directive';
-import { genReport, genSubcategory } from '../../../../../test/fixtures.spec';
+import { genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
 import { CompanyKinds } from '../../../model/Anomaly';
 
 describe('CompanyComponent', () => {
@@ -54,7 +54,7 @@ describe('CompanyComponent', () => {
   describe('case of searching company with SIRET', () => {
 
     beforeEach(() => {
-      reportStorageService.reportInProgess = of(Object.assign(genReport(), {company: undefined}));
+      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {company: undefined}));
 
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;
@@ -94,8 +94,8 @@ describe('CompanyComponent', () => {
       });
 
       it('should initialize previous results', () => {
-        component.companies = [Object.assign(new Company(), { name: 'C1' }), Object.assign(new Company(), { name: 'C2' })];
-        const companySearchResult = Object.assign(new CompanySearchResult(), {
+        component.companies = [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
+        const companySearchResult = Object.assign(new CompanySearchResults(), {
           total_results: 0,
           etablissement: []
         });
@@ -110,7 +110,7 @@ describe('CompanyComponent', () => {
 
       it('should display the company list when only one result has been found', () => {
 
-        const companySearchResult = Object.assign(new CompanySearchResult(), {
+        const companySearchResult = Object.assign(new CompanySearchResults(), {
           total_results: 1,
           etablissement: [{
             l1_normalisee: 'CASINO CARBURANTS',
@@ -137,7 +137,7 @@ describe('CompanyComponent', () => {
 
       it('should display the company list when many results have been found', () => {
 
-        const companySearchResult = Object.assign(new CompanySearchResult(), {
+        const companySearchResult = Object.assign(new CompanySearchResults(), {
           total_results: 2,
           etablissement: [
             {
@@ -192,7 +192,7 @@ describe('CompanyComponent', () => {
       it('should display the company found by siret when existed', () => {
 
         const companyBySiret = Object.assign(
-          new Company(),
+          new CompanySearchResult(),
           {
             name: 'Mon entreprise',
             line1: 'Mon entreprise',
@@ -221,7 +221,7 @@ describe('CompanyComponent', () => {
   describe('case of searching company with WEBSITE', () => {
 
     beforeEach(() => {
-      reportStorageService.reportInProgess = of(Object.assign(genReport(),
+      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(),
         {subcategories: Object.assign(genSubcategory(), {companyKind: CompanyKinds.WEBSITE}
         )}
        ));

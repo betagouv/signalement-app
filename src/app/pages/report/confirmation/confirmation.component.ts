@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -17,7 +17,7 @@ import { take } from 'rxjs/operators';
 export class ConfirmationComponent implements OnInit {
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
 
   confirmationForm: FormGroup;
 
@@ -39,7 +39,7 @@ export class ConfirmationComponent implements OnInit {
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
-          this.report = report;
+          this.draftReport = report;
           this.initConfirmationForm();
         } else {
           this.reportRouterService.routeToFirstStep();
@@ -59,11 +59,11 @@ export class ConfirmationComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
-      this.reportService.createReport(this.report)
+      this.reportService.createReport(this.draftReport)
         .subscribe(
         result => {
           this.loading = false;
-          this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+          this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
           this.reportStorageService.removeReportInProgressFromStorage();
           this.reportRouterService.routeForward(this.step);
         },
@@ -81,8 +81,8 @@ export class ConfirmationComponent implements OnInit {
   }
 
   getReportLastSubcategory() {
-    if (this.report && this.report.subcategories && this.report.subcategories.length) {
-      return this.report.subcategories[this.report.subcategories.length - 1];
+    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
+      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
     }
   }
 

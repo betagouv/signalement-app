@@ -8,17 +8,17 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Report } from '../../../model/Report';
-import { Company } from '../../../model/Company';
+import { DraftReport } from '../../../model/Report';
+import { CompanySearchResult } from '../../../model/CompanySearchResult';
 import { Consumer } from '../../../model/Consumer';
 import { PipesModule } from '../../../pipes/pipes.module';
 
 describe('ConfirmationComponent', () => {
 
-  const reportFixture = Object.assign(
-    new Report(), {
+  const draftReportFixture = Object.assign(
+    new DraftReport(), {
       company: Object.assign(
-        new Company(),
+        new CompanySearchResult(),
         {
           name: 'Mon entreprise',
           line1: 'Mon entreprise',
@@ -60,7 +60,7 @@ describe('ConfirmationComponent', () => {
 
   beforeEach(() => {
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.changeReportInProgress(reportFixture);
+    reportStorageService.changeReportInProgress(draftReportFixture);
 
     fixture = TestBed.createComponent(ConfirmationComponent);
     component = fixture.componentInstance;

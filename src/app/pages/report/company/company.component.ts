@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { Company, CompanySearchResult, Website } from '../../../model/Company';
+import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -9,12 +9,13 @@ import {
   EventCategories,
   ReportEventActions,
 } from '../../../services/analytics.service';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { isPlatformBrowser } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
+import { Website } from '../../../model/Company';
 
 @Component({
   selector: 'app-company',
@@ -24,7 +25,7 @@ import { CompanyKinds } from '../../../model/Anomaly';
 export class CompanyComponent implements OnInit {
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
   companyKinds = CompanyKinds;
 
   websiteForm: FormGroup;
@@ -33,7 +34,7 @@ export class CompanyComponent implements OnInit {
   searchForm: FormGroup;
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
-  companies: Company[];
+  companies: CompanySearchResult[];
 
   showErrors: boolean;
   searchWarning: string;
@@ -41,7 +42,7 @@ export class CompanyComponent implements OnInit {
 
   searchBySiretForm: FormGroup;
   siretCtrl: FormControl;
-  companyBySiret: Company;
+  companyBySiret: CompanySearchResult;
 
   showErrorsBySiret: boolean;
   searchBySiretWarning: string;
@@ -66,8 +67,8 @@ export class CompanyComponent implements OnInit {
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
-          this.report = report;
-          if (this.report.companyKind === CompanyKinds.SIRET) {
+          this.draftReport = report;
+          if (this.draftReport.companyKind === CompanyKinds.SIRET) {
             this.initSearchForm();
             this.initSearchBySiretForm();
           } else {
@@ -165,7 +166,7 @@ export class CompanyComponent implements OnInit {
     this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
   }
 
-  treatCaseSingleResult(companySearchResult: CompanySearchResult) {
+  treatCaseSingleResult(companySearchResult: CompanySearchResults) {
     this.analyticsService.trackEvent(
       EventCategories.companySearch,
       CompanySearchEventActions.search,
@@ -201,15 +202,15 @@ export class CompanyComponent implements OnInit {
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
-  selectCompanyFromResults(company: Company) {
+  selectCompanyFromResults(company: CompanySearchResult) {
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
     this.selectCompany(company);
   }
 
-  selectCompany(company: Company | Website) {
+  selectCompany(company: CompanySearchResult | Website) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
-    this.report.company = company;
-    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+    this.draftReport.company = company;
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
@@ -259,7 +260,7 @@ export class CompanyComponent implements OnInit {
   }
 
   changeCompany() {
-    this.report.company = undefined;
+    this.draftReport.company = undefined;
     this.companies = [];
     this.companyBySiret = undefined;
     this.showErrors = false;

@@ -248,13 +248,7 @@
                 <span [tooltip]="companyTooltip">
                   {{report.company.name}}
                   <ng-template #companyTooltip>
-                    <span *ngIf="report.company.line1">{{report.company.line1}}<br /></span>
-                    <span *ngIf="report.company.line2">{{report.company.line2}}<br /></span>
-                    <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
-                    <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
-                    <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
-                    <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
-                    <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+                    <span *ngFor="let line of report.company.address.split(' - ')">{{line}}<br /></span>
                   </ng-template>
                 </span>
               </td>

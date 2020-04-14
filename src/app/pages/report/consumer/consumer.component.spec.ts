@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConsumerComponent } from './consumer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { HttpClientModule } from '@angular/common/http';
@@ -50,7 +50,7 @@ describe('ConsumerComponent', () => {
   describe('case of the consumer is not an employee', () => {
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(Object.assign(new Report(), { employeeConsumer : false }));
+      reportStorageService.changeReportInProgress(Object.assign(new DraftReport(), { employeeConsumer : false }));
 
       fixture = TestBed.createComponent(ConsumerComponent);
       component = fixture.componentInstance;
@@ -94,10 +94,10 @@ describe('ConsumerComponent', () => {
       });
 
       it('should initialize the details inputs with initial value when it exists', () => {
-        const reportWithConsumer = new Report();
-        reportWithConsumer.consumer = consumerFixture;
-        reportWithConsumer.contactAgreement = contactAgreementFixture;
-        reportStorageService.changeReportInProgress(reportWithConsumer);
+        const draftReportWithConsumer = new DraftReport();
+        draftReportWithConsumer.consumer = consumerFixture;
+        draftReportWithConsumer.contactAgreement = contactAgreementFixture;
+        reportStorageService.changeReportInProgress(draftReportWithConsumer);
 
         component.ngOnInit();
         fixture.detectChanges();
@@ -145,13 +145,13 @@ describe('ConsumerComponent', () => {
         nativeElement.querySelector('button#submitConsumerForm').click();
         fixture.detectChanges();
 
-        const reportExpected = Object.assign(new Report(), {
+        const draftReportExpected = Object.assign(new DraftReport(), {
           consumer: consumerFixture,
           contactAgreement: contactAgreementFixture,
           employeeConsumer: false
         });
 
-        expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Consumer);
+        expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Consumer);
 
       });
     });
@@ -162,7 +162,7 @@ describe('ConsumerComponent', () => {
   describe('case of the consumer is an employee', () => {
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(Object.assign(new Report(), { employeeConsumer : true }));
+      reportStorageService.changeReportInProgress(Object.assign(new DraftReport(), { employeeConsumer : true }));
 
       fixture = TestBed.createComponent(ConsumerComponent);
       component = fixture.componentInstance;

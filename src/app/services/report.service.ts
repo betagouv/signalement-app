@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report } from '../model/Report';
-import { Company, Website } from '../model/Company';
+import { DetailInputValue, DraftReport, Report } from '../model/Report';
+import { CompanySearchResult } from '../model/CompanySearchResult';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
+import { Company, Website } from '../model/Company';
 
 @Injectable({
   providedIn: 'root',
@@ -27,21 +28,20 @@ export class ReportService {
               private serviceUtils: ServiceUtils) {
   }
 
-  createReport(report: Report) {
+  createReport(draftReport: DraftReport) {
     return this.http.post(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
       {
-        id: report.id,
-        category: report.category,
-        subcategories: !report.subcategories ? [] : report.subcategories
+        category: draftReport.category,
+        subcategories: !draftReport.subcategories ? [] : draftReport.subcategories
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
-        firstName: report.consumer.firstName,
-        lastName: report.consumer.lastName,
-        email: report.consumer.email,
-        contactAgreement: report.contactAgreement,
-        employeeConsumer: report.employeeConsumer,
-        fileIds: report.uploadedFiles.map(file => file.id),
-        details: report.detailInputValues
+        firstName: draftReport.consumer.firstName,
+        lastName: draftReport.consumer.lastName,
+        email: draftReport.consumer.email,
+        contactAgreement: draftReport.contactAgreement,
+        employeeConsumer: draftReport.employeeConsumer,
+        fileIds: draftReport.uploadedFiles.map(file => file.id),
+        details: draftReport.detailInputValues
           .map(d => Object.assign(new DetailInputValue(), d))
           .map(detailInputValue => {
             return {
@@ -49,13 +49,13 @@ export class ReportService {
               value: detailInputValue.renderedValue,
             };
           }),
-        ...this.companyData(report.company)
+        ...this.companyData(draftReport.company)
       },
     );
   }
 
-  companyData(company: Company | Website) {
-    if (company instanceof Company) {
+  companyData(company: CompanySearchResult | Website) {
+    if (company instanceof CompanySearchResult) {
       return {
         companyName: company.name,
         companyAddress: company.address,
@@ -78,16 +78,16 @@ export class ReportService {
     );
   }
 
-  updateReportCompany(reportId: string, company: Company) {
+  updateReportCompany(reportId: string, companySearchResult: CompanySearchResult) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'company']),
           {
-            name: company.name,
-            address: company.address,
-            postalCode: company.postalCode,
-            siret: company.siret,
+            name: companySearchResult.name,
+            address: companySearchResult.address,
+            postalCode: companySearchResult.postalCode,
+            siret: companySearchResult.siret,
           },
           headers
         );
@@ -249,17 +249,11 @@ export class ReportService {
       category: report.category,
       subcategories: report.subcategories,
       detailInputValues: report.details,
-      company: Object.assign(new Company(), {
+      company: Object.assign(<Company>{
         name: report.companyName,
         siret: report.companySiret,
-        postalCode: report.companyPostalCode,
-        line1: report.companyAddress.split('-')[0],
-        line2: report.companyAddress.split('-')[1],
-        line3: report.companyAddress.split('-')[2],
-        line4: report.companyAddress.split('-')[3],
-        line5: report.companyAddress.split('-')[4],
-        line6: report.companyAddress.split('-')[5],
-        line7: report.companyAddress.split('-')[6],
+        address: report.companyAddress,
+        postalCode: report.companyPostalCode
       }),
       consumer: Object.assign(new Consumer(), {
         firstName: report.firstName,

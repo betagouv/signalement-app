@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { UserAccess } from '../../../model/CompanyAccess';
+import { Company, UserAccess } from '../../../model/Company';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Company } from '../../../model/Company';
 import { CompanyService } from '../../../services/company.service';
 import { Permissions } from '../../../model/AuthUser';
 
@@ -62,15 +61,13 @@ export class CompanyCardComponent implements OnInit {
     this.loadingError = false;
     this.companyService.updateCompanyAddress(
       this.userAccess.companySiret,
-      Object.assign(new Company(), {
-        name: this.userAccess.companyName,
-        line1: this.userAccess.companyName,
-        line2: this.line1Ctrl.value,
-        line3: this.line2Ctrl.value,
-        line4: this.line3Ctrl.value,
-        line5: `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`,
-        postalCode: this.postalCodeCtrl.value,
-      }).address,
+      [
+        this.userAccess.companyName,
+        this.line1Ctrl.value,
+        this.line2Ctrl.value,
+        this.line3Ctrl.value,
+        `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`
+      ].filter(l => l).reduce((prev, curr) => `${prev} - ${curr}`, ''),
       this.postalCodeCtrl.value
     ).subscribe(
       company => {

@@ -1,9 +1,9 @@
-<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
+<app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
 <section class="section section-white" role="main">
   <div class="container max-width">
 
-    <ng-container *ngIf="report">
-      <ng-container *ngIf="report.employeeConsumer">
+    <ng-container *ngIf="draftReport">
+      <ng-container *ngIf="draftReport.employeeConsumer">
         <div class="notification info mb-4">
           <p>
             <strong>Vous avez déclaré être employé de l’entreprise.</strong>
@@ -56,7 +56,7 @@
           </label>
         </div>
 
-        <div class="form__group" *ngIf="!report.employeeConsumer">
+        <div class="form__group" *ngIf="!draftReport.employeeConsumer">
           <div class="row pl-1 mb-4">
             <div class="col-2 col-sm-1 text-right pr-1">
               <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>

@@ -8,7 +8,7 @@ import { EventService } from '../../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../../services/company.service';
-import { Company } from '../../../../model/Company';
+import { CompanySearchResult } from '../../../../model/CompanySearchResult';
 import { switchMap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -43,7 +43,7 @@ export class ReportDetailComponent implements OnInit {
 
   companySiretForm: FormGroup;
   siretCtrl: FormControl;
-  companyForSiret: Company;
+  companyForSiret: CompanySearchResult;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -177,7 +177,7 @@ export class ReportDetailComponent implements OnInit {
     this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
-        this.companyForSiret = company ? company : new Company();
+        this.companyForSiret = company ? company : new CompanySearchResult();
       },
       err => {
         this.loading = false;
@@ -185,7 +185,7 @@ export class ReportDetailComponent implements OnInit {
       });
   }
 
-  changeCompany(company: Company) {
+  changeCompany(company: CompanySearchResult) {
     this.loading = true;
     this.loadingError = false;
     this.reportService.updateReportCompany(this.reportId, company)
@@ -196,7 +196,9 @@ export class ReportDetailComponent implements OnInit {
       )
       .subscribe(
         events => {
-          this.report.company = company;
+          this.report.company.siret = company.siret;
+          this.report.company.name = company.name;
+          this.report.company.address = company.address;
           this.events = events;
           this.companyForSiret = undefined;
           this.siretCtrl.setValue('');

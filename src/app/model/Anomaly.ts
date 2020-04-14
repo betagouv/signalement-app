@@ -48,7 +48,6 @@ export class Anomaly {
   hidden?: boolean;
   description?: string;
   rank?: number;
-  withInternetPurchase?: boolean;
   icon?: string;
   information?: Information;
   breadcrumbTitle?: string;

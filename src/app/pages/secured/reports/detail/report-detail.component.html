@@ -96,14 +96,7 @@
               <br/>
               Nom : {{report.company.name}}
               <br/>
-              Adresse :
-              <span *ngIf="report.company.line1">{{report.company.line1}}</span>
-              <span *ngIf="report.company.line2"> - {{report.company.line2}}</span>
-              <span *ngIf="report.company.line3"> - {{report.company.line3}}</span>
-              <span *ngIf="report.company.line4"> - {{report.company.line4}}</span>
-              <span *ngIf="report.company.line5"> - {{report.company.line5}}</span>
-              <span *ngIf="report.company.line6"> - {{report.company.line6}}</span>
-              <span *ngIf="report.company.line7"> - {{report.company.line7}}</span>
+              Adresse : {{report.company.address}}
             </div>
             <ng-template #companySearch>
               <div class="modal-body text-center">

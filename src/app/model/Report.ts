@@ -1,9 +1,10 @@
 import { Consumer } from './Consumer';
-import { Company, Website } from './Company';
+import { CompanySearchResult } from './CompanySearchResult';
 import { CompanyKinds, Subcategory } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
+import { Company, Website } from './Company';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -24,20 +25,36 @@ export enum ReportStatus {
   ToProcess = 'À traiter'
 }
 
-export class Report {
-  id: string;
+export class DraftReport {
   category: string;
   subcategories: Subcategory[];
-  company: Company | Website;
+  company: CompanySearchResult | Website;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
   employeeConsumer: boolean;
   contactAgreement: boolean;
-  internetPurchase: boolean;
   retrievedFromStorage: boolean;
-  creationDate: Date;
   storedStep: Step;
+
+  get companyKind() {
+    if (this.subcategories && this.subcategories.length) {
+      return this.subcategories[this.subcategories.length - 1].companyKind || CompanyKinds.SIRET;
+    }
+  }
+}
+
+export class Report {
+  id: string;
+  category: string;
+  subcategories: Subcategory[];
+  company: Company;
+  detailInputValues: DetailInputValue[];
+  uploadedFiles: UploadedFile[];
+  consumer: Consumer;
+  employeeConsumer: boolean;
+  contactAgreement: boolean;
+  creationDate: Date;
   status: string;
 
   get consumerUploadedFiles() {
@@ -45,12 +62,6 @@ export class Report {
   }
   get professionalUploadedFiles() {
     return this.uploadedFiles ? this.uploadedFiles.filter(file => file.origin === FileOrigin.Professional) : [];
-  }
-
-  get companyKind() {
-    if (this.subcategories && this.subcategories.length) {
-      return this.subcategories[this.subcategories.length - 1].companyKind || CompanyKinds.SIRET;
-    }
   }
 }
 
