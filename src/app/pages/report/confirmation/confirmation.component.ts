@@ -70,6 +70,7 @@ export class ConfirmationComponent implements OnInit {
         error => {
           this.loading = false;
           this.loadingError = true;
+          throw error;
         });
 
     }

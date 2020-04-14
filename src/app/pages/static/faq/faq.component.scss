@@ -30,3 +30,20 @@ hr {
     background-color: $blue;
   }
 }
+
+h2 {
+  position: relative;
+  display: inline-block;
+  color: $secondary;
+
+  margin-bottom: 1.25em;
+
+  &:before {
+    content: '';
+    width: 80px;
+    height: 7px;
+    position: absolute;
+    bottom: -14px;
+    background: $secondary;
+  }
+}

@@ -165,8 +165,7 @@ export class CompaniesAdminComponent implements OnInit {
         });
   }
 
-  checkCompany(event$: Event, uuid: string) {
-    event$.stopPropagation();
+  checkCompany(uuid: string) {
     if (this.checkedCompaniesUuids.has(uuid)) {
       this.checkedCompaniesUuids.delete(uuid);
     } else {
@@ -174,8 +173,7 @@ export class CompaniesAdminComponent implements OnInit {
     }
   }
 
-  checkAllCompanies(event$: Event) {
-    event$.stopPropagation();
+  checkAllCompanies() {
     if (this.companiesToActivate.length === this.checkedCompaniesUuids.size) {
       this.checkedCompaniesUuids.clear();
     } else {
