@@ -3,6 +3,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-acknowledgment',
@@ -13,6 +14,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
 
   step: Step;
   draftReport: DraftReport;
+  companyKinds = CompanyKinds;
 
   constructor(private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService) { }
