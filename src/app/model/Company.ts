@@ -38,9 +38,11 @@ export interface CompanyToActivate {
 export class Website {
   url: string;
 
-  get domain() {
-    if (this.url) {
-      return this.url.substring(0, 2);
-    }
+  get hosname() {
+    return this.url ? this.url
+      .replace('http://', '')
+      .replace('https://', '')
+      .replace('www.', '')
+      .split(/[/?#]/)[0] : this.url;
   }
 }

@@ -264,7 +264,7 @@
                   </ng-template>
                 </span>
                 <span [tooltip]="websiteTooltip" *ngIf="report.website">
-                  {{report.website.domain}}
+                  {{report.website.hosname}}
                   <ng-template #websiteTooltip>
                     {{report.website.url}}
                   </ng-template>
