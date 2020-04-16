@@ -22,6 +22,16 @@ export function genSiret() {
   });
 }
 
+export function genEmail() {
+  return randomstring.generate({
+    length: 10,
+    charset: 'alphabetic'
+  }) + '@' + randomstring.generate({
+    length: 10,
+    charset: 'alphabetic'
+  }) ;
+}
+
 export const lastNames = ['Doe', 'Durand', 'Dupont'];
 export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'Fanny', 'Gérard'];
 export const roles = [Roles.Admin, Roles.Pro, Roles.DGCCRF];
@@ -40,7 +50,7 @@ export function genUser(role: Roles) {
   return Object.assign(new User(), {
     id: randomstring.generate(),
     login: randomstring.generate(),
-    email: randomstring.generate(),
+    email: genEmail(),
     password: randomstring.generate(),
     firstName: oneOf(firstNames),
     lastName: oneOf(lastNames),
@@ -82,7 +92,7 @@ export function genConsumer() {
   return Object.assign(new Consumer(), {
     firstName: oneOf(firstNames),
     lastName: oneOf(lastNames),
-    email: randomstring.generate()
+    email: genEmail()
   });
 }
 
