@@ -6,6 +6,7 @@ import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-consumer',
@@ -57,7 +58,7 @@ export class ConsumerComponent implements OnInit {
       email: this.emailCtrl
     });
 
-    if (this.draftReport.employeeConsumer) {
+    if (this.draftReport.employeeConsumer || this.draftReport.companyKind !== CompanyKinds.SIRET) {
       this.contactAgreementCtrl = this.formBuilder.control(false);
     } else {
       this.contactAgreementCtrl = this.formBuilder.control(this.draftReport.contactAgreement, Validators.required);
