@@ -5,10 +5,10 @@
         <img id="back-button" src="/assets/images/icon_back.png" class="back pointer" (click)="back()" (keydown.enter)="back()" alt="page précédente" tabindex="0"/>
       </div>
       <div class="col-10 col-sm-11">
-        <div *ngIf="report">
+        <div *ngIf="draftReport">
           <h1 *ngIf="anomaly?.breadcrumbTitle; else defautBreadcrumbTitle">{{anomaly?.breadcrumbTitle}}</h1>
           <ng-template #defautBreadcrumbTitle>
-            <h1>Vous avez identifié un problème {{report.category | precedeBy : 'de' : 'd\''}}</h1>
+            <h1>Vous avez identifié un problème {{draftReport.category | precedeBy : 'de' : 'd\''}}</h1>
           </ng-template>
           <div class="steps" *ngIf="step !== 'Information'">
             <ng-container  *ngIf="getStepNumber('Problem') > 0">

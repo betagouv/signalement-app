@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { Company, CompanySearchResult } from '../model/Company';
+import { CompanySearchResult, CompanySearchResults } from '../model/CompanySearchResult';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Company } from '../model/Company';
 
 export const MaxCompanyResult = 20;
 
@@ -16,16 +17,16 @@ class RawCompanyService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('code_postal', searchPostalCode.toString());
     httpParams = httpParams.append('per_page', MaxCompanyResult.toString());
-    return this.http.get<CompanySearchResult>(
+    return this.http.get<CompanySearchResults>(
       this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]),
       {
         params: httpParams
       }
     ).pipe(
-      map(result => Object.assign(new CompanySearchResult(), result)),
+      map(result => Object.assign(new CompanySearchResults(), result)),
       catchError(err => {
         if (err.status === 404) {
-          return of(Object.assign(new CompanySearchResult(), {
+          return of(Object.assign(new CompanySearchResults(), {
             total: 0,
             companies: []
           }));
@@ -39,7 +40,7 @@ class RawCompanyService {
   searchCompaniesBySiret(siret: string) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
-    return this.http.get<CompanySearchResult>(
+    return this.http.get<CompanySearchResults>(
       this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', siret]),
       {
         params: httpParams
@@ -47,7 +48,7 @@ class RawCompanyService {
     ).pipe(
       map(result => {
         if (result['etablissement'] && result['etablissement']['code_postal']) {
-          return Object.assign(new Company(), result['etablissement']);
+          return Object.assign(new CompanySearchResult(), result['etablissement']);
         }
       }),
       catchError(err => {
@@ -268,16 +269,16 @@ export class CompanyService extends RawCompanyService {
       query: /\b(erdf)|([ée]n[ée]dis?)\b/i,
       results: [
         {
-          "siret": "44460844213631",
-          "nom_raison_sociale": "ENEDIS",
-          "l1_normalisee": "ENEDIS",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": "34 PLACE DES COROLLES",
-          "l5_normalisee": null,
-          "l6_normalisee": "92400 COURBEVOIE",
-          "code_postal": "92400",
-          "libelle_activite_principale": "Distribution d'électricité",
+          'siret': '44460844213631',
+          'nom_raison_sociale': 'ENEDIS',
+          'l1_normalisee': 'ENEDIS',
+          'l2_normalisee': null,
+          'l3_normalisee': null,
+          'l4_normalisee': '34 PLACE DES COROLLES',
+          'l5_normalisee': null,
+          'l6_normalisee': '92400 COURBEVOIE',
+          'code_postal': '92400',
+          'libelle_activite_principale': 'Distribution d\'électricité',
           'highlight': 'Pour tout problème avec ENEDIS, peu importe votre lieu d\'habitation'
         }
       ]
@@ -289,7 +290,7 @@ export class CompanyService extends RawCompanyService {
     return super.searchCompanies(search, searchPostalCode).pipe(
       map(results => {
         if (match !== undefined) {
-          const matches = Object.assign(new CompanySearchResult(), {
+          const matches = Object.assign(new CompanySearchResults(), {
             total: match.results.length,
             etablissement: match.results
           });
@@ -308,7 +309,7 @@ export class CompanyService extends RawCompanyService {
 
   searchCompaniesBySiret(siret: string) {
     if (siret === this.DGCCRF_DATA.siret) {
-      return of(Object.assign(new Company(), this.DGCCRF_DATA));
+      return of(Object.assign(new CompanySearchResult(), this.DGCCRF_DATA));
     } else {
       return super.searchCompaniesBySiret(siret);
     }

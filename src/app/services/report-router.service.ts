@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
-import { Report, Step } from '../model/Report';
+import { DraftReport, Step } from '../model/Report';
 import { ReportStorageService } from './report-storage.service';
 
 export enum ReportPaths {
@@ -20,14 +20,14 @@ export enum ReportPaths {
 })
 export class ReportRouterService {
 
-  report: Report;
+  draftReport: DraftReport;
 
   constructor(private anomalyService: AnomalyService,
               private reportStorageService: ReportStorageService,
               private router: Router) {
 
-    this.reportStorageService.retrieveReportInProgressFromStorage().subscribe(report => {
-      this.report = report;
+    this.reportStorageService.retrieveReportInProgressFromStorage().subscribe(draftReport => {
+      this.draftReport = draftReport;
     });
 
   }
@@ -56,8 +56,8 @@ export class ReportRouterService {
 
   private getRouteFromStep(step: Step) {
     const route = [];
-    if (step !== Step.Category && this.anomalyService.getAnomalyByCategory(this.report.category)) {
-      route.push(this.anomalyService.getAnomalyByCategory(this.report.category).path);
+    if (step !== Step.Category && this.anomalyService.getAnomalyByCategory(this.draftReport.category)) {
+      route.push(this.anomalyService.getAnomalyByCategory(this.draftReport.category).path);
     }
     route.push(ReportPaths[step]);
     return route;
@@ -66,7 +66,7 @@ export class ReportRouterService {
   nextStep(currentStep: Step) {
     switch (currentStep) {
       case Step.Category:
-        const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
+        const anomaly = this.anomalyService.getAnomalyByCategory(this.draftReport.category);
         if (anomaly.information) {
           return Step.Information;
         } else if (anomaly.subcategories && anomaly.subcategories.length) {
@@ -98,13 +98,13 @@ export class ReportRouterService {
       case Step.Problem:
         return Step.Category;
       case Step.Details:
-        if (this.report.subcategories) {
+        if (this.draftReport.subcategories) {
           return Step.Problem;
         } else {
           return Step.Category;
         }
       case Step.Information:
-        if (this.report && this.report.subcategories) {
+        if (this.draftReport && this.draftReport.subcategories) {
           return Step.Problem;
         } else {
           return Step.Category;
@@ -121,8 +121,8 @@ export class ReportRouterService {
   }
 
   isReportLastSubcategoryInformation() {
-    return this.report
-      && this.report.subcategories && this.report.subcategories.length
-      && this.report.subcategories[this.report.subcategories.length - 1].information;
+    return this.draftReport
+      && this.draftReport.subcategories && this.draftReport.subcategories.length
+      && this.draftReport.subcategories[this.draftReport.subcategories.length - 1].information;
   }
 }

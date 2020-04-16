@@ -1,9 +1,9 @@
-<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
+<app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
 <section class="section section-white">
   <div class="container max-width">
 
-    <ng-container *ngIf="report">
-      <div class="pb-sm-5" *ngIf="report.employeeConsumer === undefined; else detailsFormTemplate">
+    <ng-container *ngIf="draftReport">
+      <div class="pb-sm-5" *ngIf="draftReport.employeeConsumer === undefined; else detailsFormTemplate">
         <ng-container *ngIf="!continueReport">
           <div class="notification">
             Le problème rencontré est bien une infraction. Vous pouvez le signaler à la répression des fraudes.
@@ -39,7 +39,7 @@
             <img alt="Icône information" src="/assets/images/picture-observation.svg">
           </div>
           <div class="col-12 col-sm-11">
-            <ng-container *ngIf="!report.employeeConsumer else employeeConsumer">
+            <ng-container *ngIf="!draftReport.employeeConsumer else employeeConsumer">
               <b>Votre description ci-dessous sera lue par l'entreprise et la répression des fraudes.</b>
               <br />Les pièces jointes seront également lues par l'entreprise.
               <br /><br/> Si vous souhaitez que l'entreprise ne connaisse pas votre identité,
@@ -181,7 +181,7 @@
                              [uploadedFiles]="uploadedFiles"
                              [origin]="fileOrigins.Consumer">
             </app-attachments>
-            <div class="note" *ngIf="!report.employeeConsumer">
+            <div class="note" *ngIf="!draftReport.employeeConsumer">
               Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective !
               <br/> Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).
             </div>

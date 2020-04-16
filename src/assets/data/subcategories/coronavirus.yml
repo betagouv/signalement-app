@@ -31,40 +31,34 @@
   example: "Exemple : site de livraison de courses à domicile"
   subcategories:
     - title: Le prix de la livraison a augmenté
+      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Adresse du site internet (URL)
-          rank: 2
-          type: TEXT
         - label: Quel est le problème avec le prix de la livraison ?
-          rank: 3
+          rank: 2
           type: TEXTAREA
     - title: Autre problème de prix
+      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Adresse du site internet (URL)
-          rank: 2
-          type: TEXT
         - label: Quel est le problème ?
-          rank: 3
+          rank: 2
           type: TEXTAREA
     - title: Problème avec un produit livré
+      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Adresse du site internet (URL)
-          rank: 2
-          type: TEXT
         - label: Quel est le problème ?
-          rank: 3
+          rank: 2
           type: TEXTAREA
       fileLabel: Photo du produit si possible  
 - title: Vente de masque (FFP2, chirurgicaux) non autorisée

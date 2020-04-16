@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { Anomaly } from '../../../model/Anomaly';
@@ -11,7 +11,7 @@ import { Anomaly } from '../../../model/Anomaly';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  @Input() report: Report;
+  @Input() draftReport: DraftReport;
   @Input() step: Step;
 
   anomaly: Anomaly;
@@ -20,8 +20,8 @@ export class BreadcrumbComponent implements OnInit {
               private anomalyService: AnomalyService) { }
 
   ngOnInit() {
-    if (this.report) {
-      this.anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
+    if (this.draftReport) {
+      this.anomaly = this.anomalyService.getAnomalyByCategory(this.draftReport.category);
     }
   }
 
