@@ -12,12 +12,12 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { of } from 'rxjs';
 import { User } from '../../../../model/AuthUser';
 import { ReportService } from '../../../../services/report.service';
-import { Report, ReportStatus } from '../../../../model/Report';
+import { ReportStatus } from '../../../../model/Report';
 import { EventService } from '../../../../services/event.service';
-import { Consumer } from '../../../../model/Consumer';
 import { EventActionValues, ReportEvent } from '../../../../model/ReportEvent';
 import { ComponentsModule } from '../../../../components/components.module';
 import { PipesModule } from '../../../../pipes/pipes.module';
+import { genReport } from '../../../../../../test/fixtures.spec';
 
 describe('ReportDetailComponent', () => {
 
@@ -27,14 +27,6 @@ describe('ReportDetailComponent', () => {
   let authenticationService: AuthenticationService;
   let reportService: ReportService;
   let eventService: EventService;
-
-  const reportFixture = Object.assign(new Report(), {
-    consumer: Object.assign(new Consumer(), {
-      firstName: 'Prénom',
-      lastName: 'Nom',
-      email: 'Email'
-    })
-  });
 
   const answerEventFixture = Object.assign(new ReportEvent(), {
     action: {value : EventActionValues.ReportResponse},
@@ -76,7 +68,9 @@ describe('ReportDetailComponent', () => {
 
       beforeEach(() => {
         reportService = TestBed.get(ReportService);
-        spyOn(reportService, 'getReport').and.returnValue(of(reportFixture));
+        spyOn(reportService, 'getReport').and.returnValue(of(
+          Object.assign(genReport(), {status: ReportStatus.ToProcess})
+        ));
 
         eventService = TestBed.get(EventService);
         spyOn(eventService, 'getEvents').and.returnValue(of([]));
@@ -107,7 +101,7 @@ describe('ReportDetailComponent', () => {
       beforeEach(() => {
         reportService = TestBed.get(ReportService);
         spyOn(reportService, 'getReport').and.returnValue(of(
-          Object.assign(new Report(), reportFixture, {status: ReportStatus.ClosedForPro})
+          Object.assign(genReport(), {status: ReportStatus.ClosedForPro})
         ));
 
         eventService = TestBed.get(EventService);
@@ -130,7 +124,7 @@ describe('ReportDetailComponent', () => {
 
       beforeEach(() => {
         reportService = TestBed.get(ReportService);
-        spyOn(reportService, 'getReport').and.returnValue(of(reportFixture));
+        spyOn(reportService, 'getReport').and.returnValue(of(genReport()));
 
         eventService = TestBed.get(EventService);
         spyOn(eventService, 'getEvents').and.returnValue(of([answerEventFixture]));

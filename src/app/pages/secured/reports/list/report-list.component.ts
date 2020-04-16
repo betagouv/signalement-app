@@ -21,7 +21,7 @@ import { Department, Region, Regions } from '../../../../model/Region';
 import oldCategories from '../../../../../assets/data/old-categories.json';
 import { AccountService } from '../../../../services/account.service';
 import { EventService } from '../../../../services/event.service';
-import { UserAccess } from '../../../../model/CompanyAccess';
+import { UserAccess } from '../../../../model/Company';
 import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
 
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';

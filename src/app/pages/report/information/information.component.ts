@@ -3,7 +3,7 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Information } from '../../../model/Anomaly';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ import { RatingService } from '../../../services/rating.service';
 export class InformationComponent implements OnInit, OnDestroy {
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
 
   informationToDisplay: Information;
   loading: boolean;
@@ -44,9 +44,9 @@ export class InformationComponent implements OnInit, OnDestroy {
           const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
           if (anomaly && !url[1]) {
             this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
-            this.report = new Report();
-            this.report.category = anomaly.category;
-            this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+            this.draftReport = new DraftReport();
+            this.draftReport.category = anomaly.category;
+            this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
             this.titleService.setTitle(`${anomaly.category} - SignalConso`);
             this.meta.updateTag({ name: 'description', content: anomaly.description });
           }
@@ -56,7 +56,7 @@ export class InformationComponent implements OnInit, OnDestroy {
       take(1)
     ).subscribe(report => {
       if (report) {
-        this.report = report;
+        this.draftReport = report;
         this.initInformation();
         this.reportStorageService.removeReportInProgressFromStorage();
       } else {
@@ -66,7 +66,7 @@ export class InformationComponent implements OnInit, OnDestroy {
   }
 
   initInformation() {
-    const anomaly = this.anomalyService.getAnomalyByCategory(this.report.category);
+    const anomaly = this.anomalyService.getAnomalyByCategory(this.draftReport.category);
     if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
@@ -86,15 +86,15 @@ export class InformationComponent implements OnInit, OnDestroy {
   }
 
   getReportLastSubcategory() {
-    if (this.report && this.report.subcategories && this.report.subcategories.length) {
-      return this.report.subcategories[this.report.subcategories.length - 1];
+    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
+      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
     }
   }
 
   rateInformation(positive: boolean) {
     this.loading = true;
     this.loadingError = false;
-    this.ratingService.rate(this.report.category, this.report.subcategories, positive).subscribe(
+    this.ratingService.rate(this.draftReport.category, this.draftReport.subcategories, positive).subscribe(
       _ => {
         this.loading = false;
         this.ratingSuccess = true;

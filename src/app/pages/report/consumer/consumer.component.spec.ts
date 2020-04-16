@@ -2,8 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConsumerComponent } from './consumer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Consumer } from '../../../model/Consumer';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,18 +10,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { AutofocusDirective } from '../../../directives/auto-focus.directive';
+import { genConsumer, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 describe('ConsumerComponent', () => {
 
   let component: ConsumerComponent;
   let fixture: ComponentFixture<ConsumerComponent>;
   let reportStorageService: ReportStorageService;
-
-  const consumerFixture = new Consumer();
-  consumerFixture.firstName = 'Prénom';
-  consumerFixture.lastName = 'Nom';
-  consumerFixture.email = 'test@gmail.com';
-  const contactAgreementFixture = true;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,10 +42,16 @@ describe('ConsumerComponent', () => {
   }));
 
 
-  describe('case of the consumer is not an employee', () => {
+  describe('case of company report when the consumer is not an employee', () => {
+
+    const draftReport = Object.assign(genDraftReport(), {
+      consumer: undefined,
+      employeeConsumer : false
+    });
+
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(Object.assign(new Report(), { employeeConsumer : false }));
+      reportStorageService.changeReportInProgress(Object.assign(new DraftReport(), draftReport));
 
       fixture = TestBed.createComponent(ConsumerComponent);
       component = fixture.componentInstance;
@@ -94,19 +95,20 @@ describe('ConsumerComponent', () => {
       });
 
       it('should initialize the details inputs with initial value when it exists', () => {
-        const reportWithConsumer = new Report();
-        reportWithConsumer.consumer = consumerFixture;
-        reportWithConsumer.contactAgreement = contactAgreementFixture;
-        reportStorageService.changeReportInProgress(reportWithConsumer);
+        const draftReportWithConsumer = Object.assign(genDraftReport(), {
+          consumer: genConsumer(),
+          contactAgreement: true
+        });
+        reportStorageService.changeReportInProgress(draftReportWithConsumer);
 
         component.ngOnInit();
         fixture.detectChanges();
 
         const nativeElement = fixture.nativeElement;
-        expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual(consumerFixture.firstName);
-        expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual(consumerFixture.lastName);
-        expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual(consumerFixture.email);
-        if (contactAgreementFixture) {
+        expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual(draftReportWithConsumer.consumer.firstName);
+        expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual(draftReportWithConsumer.consumer.lastName);
+        expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual(draftReportWithConsumer.consumer.email);
+        if (draftReportWithConsumer.contactAgreement) {
           expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeTruthy();
           expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeFalsy();
         } else {
@@ -134,35 +136,56 @@ describe('ConsumerComponent', () => {
 
       it('should change the shared report with a report where consumer contains form inputs when no errors', () => {
 
+        const consumer = genConsumer();
         const anomalyDate = new Date();
-        component.firstNameCtrl.setValue(consumerFixture.firstName);
-        component.lastNameCtrl.setValue(consumerFixture.lastName);
-        component.emailCtrl.setValue(consumerFixture.email);
-        component.contactAgreementCtrl.setValue(contactAgreementFixture);
+        component.firstNameCtrl.setValue(consumer.firstName);
+        component.lastNameCtrl.setValue(consumer.lastName);
+        component.emailCtrl.setValue(consumer.email);
+        component.contactAgreementCtrl.setValue(true);
         const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
         const nativeElement = fixture.nativeElement;
         nativeElement.querySelector('button#submitConsumerForm').click();
         fixture.detectChanges();
 
-        const reportExpected = Object.assign(new Report(), {
-          consumer: consumerFixture,
-          contactAgreement: contactAgreementFixture,
+        const draftReportExpected = Object.assign(new DraftReport(), draftReport, {
+          consumer: consumer,
+          contactAgreement: true,
           employeeConsumer: false
         });
 
-        expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Consumer);
+        expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Consumer);
 
       });
     });
   });
 
+  describe('case of website report when the consumer is not an employee', () => {
+    beforeEach(() => {
+      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService.changeReportInProgress(Object.assign(genDraftReport(), {
+        subcategories: Object.assign(genSubcategory(), {companyKind: CompanyKinds.WEBSITE}),
+        employeeConsumer: false
+      }));
 
+      fixture = TestBed.createComponent(ConsumerComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should define all form controls except contactAgreement', () => {
+      expect(component.consumerForm.controls['firstName']).toEqual(component.firstNameCtrl);
+      expect(component.consumerForm.controls['lastName']).toEqual(component.lastNameCtrl);
+      expect(component.consumerForm.controls['email']).toEqual(component.emailCtrl);
+      expect(component.consumerForm.contains('contactAgreement')).toBeFalsy();
+    });
+
+  });
 
   describe('case of the consumer is an employee', () => {
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(Object.assign(new Report(), { employeeConsumer : true }));
+      reportStorageService.changeReportInProgress(Object.assign(genDraftReport(), { employeeConsumer : true }));
 
       fixture = TestBed.createComponent(ConsumerComponent);
       component = fixture.componentInstance;
