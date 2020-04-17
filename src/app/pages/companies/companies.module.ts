@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/activation', component: CompanyActivationComponent },
+  { path: 'activation', component: CompanyActivationComponent },
   { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard] },
   { path: 'entreprises', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
   { path: 'entreprises/les-plus-signalees', component: CompaniesAdminComponent, canActivate: [AuthGuard] },
