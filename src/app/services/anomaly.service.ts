@@ -33,4 +33,8 @@ export class AnomalyService {
     return this.getAnomalyBy(anomaly => anomaly.categoryId === categoryId);
   }
 
+  getCategories() {
+    return this.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
+  }
+
 }

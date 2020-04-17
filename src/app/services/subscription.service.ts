@@ -35,4 +35,15 @@ export class SubscriptionService {
       })
     );
   }
+
+  removeSubscription(subscriptionId: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.delete(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'subscriptions', subscriptionId]),
+          headers
+        );
+      })
+    );
+  }
 }

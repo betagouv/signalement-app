@@ -1,78 +1,149 @@
 <app-banner title="Abonnements"></app-banner>
 
-<section class="section section-white position-relative pb-0">
-  <div class="container">
-    <div class="panel">
+<main role="main">
 
-      <ng-container *ngIf="!subscriptionForm; else subscription">
-        <div class="notification error" *ngIf="loadingError">
-          Une erreur technique s'est produite
-        </div>
+  <section class="section section-lightest-grey">
+    <div class="container position-relative bg-white pb-3">
 
-        <ng-container *ngIf="departmentSubscription">
-          <h2 *ngIf="!departmentSubscription.departments || !departmentSubscription.departments.length; else subscriptions" class="p-3 text-center">
-            Vous n'avez aucun abonnement.
-          </h2>
-          <ng-template #subscriptions>
-            <p class="p-3">
-              Vous êtes abonné pour recevoir chaque lundi les nouveaux signalements déposés dans les départements suivants :
-            </p>
-            <ul>
-              <li *ngFor="let value of departmentSubscription.departments">{{getDepartement(value).code}} - {{getDepartement(value).label}}</li>
-            </ul>
-          </ng-template>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Départements</th>
+            <th>Catégories</th>
+            <th>Fréquence</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let subscription of subscriptions">
+              <td>
+                <span *ngFor="let dept of subscription.departments; let isLast=last">
+                  {{dept}}{{isLast ? '' : ' - '}}
+                </span>
+                <span *ngIf="!subscription.departments.length">Tous</span>
+              </td>
+              <td>
+                <span *ngFor="let category of subscription.categories; let isLast=last">
+                  {{category}}{{isLast ? '' : ' - '}}
+                </span>
+                <span *ngIf="!subscription.categories.length">Toutes</span>
+              </td>
+              <td></td>
+              <td>
+                <span class="pointer link" (click)="removeSubscription(subscription.id)">Supprimer</span>
+              </td>
+            </tr>
+            <tr *ngIf="!subscriptions || !subscriptions.length">
+              <td colspan="4" class="text-center">
+                Vous n'avez aucun abonnement
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-          <div class="pb-3 text-center mb-4">
-            <button class="btn btn-primary btn-lg" (click)="showSubscriptionForm()" id="answerBtn">Modifier</button>
-          </div>
+      <div class="text-center" *ngIf="!departmentForm; else subscriptionFormTpl">
+        <button class="btn btn-primary btn-lg" (click)="showSubscriptionForm()" id="answerBtn">Ajouter un abonnement</button>
+      </div>
 
-        </ng-container>
-      </ng-container>
+      <ng-template #subscriptionFormTpl>
+        <div class="notification">
+          <h2 class="mb-3">Nouvel abonnement</h2>
 
-      <ng-template #subscription>
-        <form [formGroup]="subscriptionForm" (submit)="submitSubscriptionForm()" id="subscriptionForm">
-
-          <div class="form__group">
-            <div class="row ml-4">
-              <div class="col-6">
-                <ng-container *ngFor="let region of regions; let index = index">
-                  <div *ngIf="index < 10" class="mt-3">
-                    <label class="font-weight-bold">{{region.label}}</label>
-                    <div *ngFor="let department of region.departments">
-                      <input type="checkbox" formControlName="department_{{department.code}}">
-                      <label class="label-inline pointer">
-                        {{department.code}} - {{department.label}}
-                      </label>
-                    </div>
-                  </div>
-                </ng-container>
+          <form [formGroup]="departmentForm" id="departmentForm" (submit)="addToDepartementFilter()">
+            <div class="row">
+              <div class="col-4">
+                <label class="d-block mb-0">
+                  Départements <br/>
+                </label>
+                <div class="badge badge-pill badge-primary" *ngIf="!departmentFilter.length">
+                  Tous les départements
+                </div>
+                <div class="badge badge-pill badge-primary" *ngFor="let dept of departmentFilter">
+                  {{dept.code}} - {{dept.label}}
+                  <i class="material-icons md-18 pointer" (click)="removeFromDepartementFilter(dept)">cancel</i>
+                </div>
               </div>
-              <div class="col-6">
-                <ng-container *ngFor="let region of regions; let index = index">
-                  <div *ngIf="index >= 10" class="mt-3">
-                    <label class="font-weight-bold">{{region.label}}</label>
-                    <div *ngFor="let department of region.departments">
-                      <input type="checkbox" formControlName="department_{{department.code}}">
-                      <label class="label-inline pointer">
-                        {{department.code}} - {{department.label}}
-                      </label>
-                    </div>
-                  </div>
-                </ng-container>
+              <div class="col-4">
+                <input [formControl]="departmentCtrl" type="text">
+              </div>
+              <p class="col-4 note">
+                Saisissez un ou plusieurs code département séparés par des virgules et validez par entrée
+              </p>
+            </div>
+          </form>
+
+          <hr />
+
+          <form [formGroup]="categoryForm" id="categoryForm">
+            <div class="row">
+              <div class="col-4">
+                <label class="d-block mb-0">
+                  Catégories <br/>
+                </label>
+                <div class="badge badge-pill badge-primary" *ngIf="!categoryFilter.length">
+                  Toutes les catégories
+                </div>
+                <div class="badge badge-pill badge-primary" *ngFor="let category of categoryFilter">
+                  {{category}}
+                  <i class="material-icons md-18 pointer" (click)="removeFromCategoryFilter(category)">cancel</i>
+                </div>
+              </div>
+              <div class="col-4">
+                <select [formControl]="categoryCtrl" (change)="addToCategoryFilter()">
+                  <option disabled></option>
+                  <option *ngFor="let category of categories">
+                    {{category}}
+                  </option>
+                </select>
               </div>
             </div>
-          </div>
-          <div class="notification error" *ngIf="loadingError">
-            Une erreur technique s'est produite<br />
-          </div>
-          <div class="mt-4 text-center">
-            <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideSubscriptionForm()">Annuler</button>
-            &nbsp;
-            <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
-          </div>
-        </form>
+          </form>
+
+          <hr />
+
+          <form [formGroup]="siretForm" id="siretForm" (submit)="addToSiretFilter()">
+            <div class="row">
+              <div class="col-4">
+                <label class="d-block mb-0">
+                  Numéros SIRET <br/>
+                </label>
+                <div class="badge badge-pill badge-primary" *ngIf="!siretFilter.length">
+                  Tous les SIRET
+                </div>
+                <div class="badge badge-pill badge-primary" *ngFor="let siret of siretFilter">
+                  {{siret}}
+                  <i class="material-icons md-18 pointer" (click)="removeFromSiretFilter(siret)">cancel</i>
+                </div>
+              </div>
+              <div class="col-4">
+                <input [formControl]="siretCtrl" type="text">
+              </div>
+              <p class="col-4 note">
+                Saisissez un ou sirets séparés par des virgules et validez par entrée
+              </p>
+            </div>
+          </form>
+
+          <hr />
+
+            <div class="notification error" *ngIf="loadingError">
+              Une erreur technique s'est produite<br />
+            </div>
+
+            <div class="mt-4 text-center">
+              <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideSubscriptionForm()">Annuler</button>
+              &nbsp;
+              <button type="button" class="btn btn-lg btn-primary" (click)="submitSubscription()">
+                Enregistrer
+              </button>
+            </div>
+          <ngx-loading [show]="loading"></ngx-loading>
+        </div>
       </ng-template>
+
       <ngx-loading [show]="loading"></ngx-loading>
     </div>
-  </div>
-</section>
+  </section>
+</main>

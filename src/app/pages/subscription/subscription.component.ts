@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Departments, Regions } from '../../model/Region';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Department, Departments } from '../../model/Region';
 import { SubscriptionService } from '../../services/subscription.service';
 import { Subscription } from '../../model/Subscription';
 import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
+import { AnomalyService } from '../../services/anomaly.service';
 
 @Component({
   selector: 'app-subscription',
@@ -13,11 +14,22 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class SubscriptionComponent implements OnInit {
 
-  regions = Regions;
   departments = Departments;
-  departmentSubscription: Subscription;
+  categories: string[];
 
-  subscriptionForm: FormGroup;
+  subscriptions: Subscription[];
+
+  departmentForm: FormGroup;
+  departmentCtrl: FormControl;
+  departmentFilter: Department[];
+
+  categoryForm: FormGroup;
+  categoryCtrl: FormControl;
+  categoryFilter: string[];
+
+  siretForm: FormGroup;
+  siretCtrl: FormControl;
+  siretFilter: String[];
 
   showErrors: boolean;
   loading: boolean;
@@ -26,7 +38,8 @@ export class SubscriptionComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
-              private subscriptionService: SubscriptionService) { }
+              private subscriptionService: SubscriptionService,
+              private anomalyService: AnomalyService) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.subscriptions.title);
@@ -35,8 +48,7 @@ export class SubscriptionComponent implements OnInit {
     this.loading = true;
     this.subscriptionService.getSubscriptions().subscribe(
       subscriptions => {
-        const departmentSubscriptions = subscriptions.filter(s => !s.categories || !s.categories.length)
-        this.departmentSubscription = departmentSubscriptions.length ? departmentSubscriptions[0] : new Subscription();
+        this.subscriptions = subscriptions;
         this.loading = false;
       },
       err => {
@@ -47,51 +59,98 @@ export class SubscriptionComponent implements OnInit {
   }
 
   showSubscriptionForm() {
-    this.subscriptionForm = this.formBuilder.group({});
-    this.departments.forEach(department => {
-      this.subscriptionForm.addControl(
-        `department_${department.code}`,
-        this.formBuilder.control(
-          this.departmentSubscription ? this.departmentSubscription.departments.indexOf(department.code) !== -1 : false
-        )
-      );
-    });
+    this.categories = this.anomalyService.getCategories();
+
+    this.departmentCtrl = new FormControl('');
+    this.departmentForm = this.formBuilder.group(this.departmentCtrl);
+    this.departmentFilter = [];
+
+    this.categoryCtrl = new FormControl('');
+    this.categoryForm = this.formBuilder.group(this.categoryCtrl);
+    this.categoryFilter = [];
+
+    this.siretCtrl = new FormControl('');
+    this.siretForm = this.formBuilder.group(this.siretCtrl);
+    this.siretFilter = [];
   }
 
   hideSubscriptionForm() {
-    this.subscriptionForm = undefined;
+    this.departmentForm = undefined;
+    this.categoryForm = undefined;
   }
 
-  submitSubscriptionForm() {
-    if (!this.subscriptionForm.valid) {
-      this.showErrors = true;
-    } else {
-      this.loading = true;
-      this.loadingError = false;
-      this.subscriptionService.subscribe(
-        Object.assign(this.departmentSubscription ? this.departmentSubscription : new Subscription(), {
-          departments: this.departments
-            .filter(department => this.subscriptionForm
-              .get([`department_${department.code}`]) && this.subscriptionForm.get([`department_${department.code}`]).value)
-            .map(department => department.code)
-        })
-      )
-      .subscribe(
-        subscription => {
-          this.loading = false;
-          this.departmentSubscription = subscription;
-          this.hideSubscriptionForm();
-        },
-        err => {
-          this.loading = false;
-          this.loadingError = true;
-        });
+  submitSubscription() {
+    // TODO rajouter test au moins un critère
+    this.loading = true;
+    this.loadingError = false;
+    this.subscriptionService.subscribe(
+      Object.assign(new Subscription(), {
+        departments: this.departmentFilter.map(dept => dept.code),
+        categories: this.categoryFilter,
+        sirets: this.siretFilter
+      })
+    )
+    .subscribe(
+      subscription => {
+        this.loading = false;
+        this.subscriptions.push(subscription);
+        this.hideSubscriptionForm();
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
+  }
+
+  removeSubscription(removeId: string) {
+    this.subscriptionService.removeSubscription(removeId).subscribe(
+      _ => this.subscriptions.splice(this.subscriptions.findIndex(s => s.id === removeId), 1)
+    );
+  }
+
+  addToDepartementFilter() {
+    const newDepartments = this.departmentCtrl.value.split(',')
+      .map(code => this.departments.find(d => d.code === code.trim().padStart(2, '0')))
+      .filter(dept => dept !== undefined)
+      .filter((dept, index, deptArray) => deptArray.findIndex(d => d === dept) === index) // unicity
+      .filter(dept => this.departmentFilter.indexOf(dept) === -1); // new department only
+    if (newDepartments) {
+      this.departmentFilter.push(...newDepartments);
+      this.departmentFilter.sort((d1, d2) => d1.code.localeCompare(d2.code));
     }
-
+    this.departmentCtrl.setValue('');
   }
 
-  getDepartement(code: string) {
-    return this.departments.find(department => department.code === code);
+  removeFromDepartementFilter(departement: Department) {
+    this.departmentFilter.splice(this.departmentFilter.findIndex(d => d === departement), 1);
+  }
+
+  addToCategoryFilter() {
+    if (this.categoryCtrl.value && this.categoryFilter.indexOf(this.categoryCtrl.value) === -1) {
+      this.categoryFilter.push(this.categoryCtrl.value);
+      this.categoryFilter.sort();
+    }
+    this.categoryCtrl.setValue('');
+  }
+
+  removeFromCategoryFilter(category: String) {
+    this.categoryFilter.splice(this.categoryFilter.findIndex(c => c === category), 1);
+  }
+
+  addToSiretFilter() {
+    const newSirets = this.siretCtrl.value.split(',')
+      .filter(siret => siret.match(/[0-9]{14}/))
+      .filter((siret, index, siretArray) => siretArray.findIndex(d => d === siret) === index) // unicity
+      .filter(siret => this.siretFilter.indexOf(siret) === -1); // new department only
+    if (newSirets) {
+      this.siretFilter.push(...newSirets);
+      this.siretFilter.sort();
+    }
+    this.siretCtrl.setValue('');
+  }
+
+  removeFromSiretFilter(siret: String) {
+    this.siretFilter.splice(this.siretFilter.findIndex(s => s === siret), 1);
   }
 
 }
