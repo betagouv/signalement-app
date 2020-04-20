@@ -13,4 +13,12 @@
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
 - title: Autre
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  subcategoriesTitle: Que voulez-vous signaler ?
+  subcategories:
+    - title: Une administration 
+      example: 'Exemple : ma mairie, mon centre des impôts'
+      information:
+        title: SignalConso ne fonctionne que pour les entreprises privées
+        content: "La répression des fraudes ne s'occupe pas des problèmes entre un citoyen et une administration. Si vous n'êtes pas content (concernant un délai, une réponse etc.), vous pouvez écrire directement à cette administration pour lui faire part de votre mécontentement. Vous pouvez également utiliser le site VoxUsager."
+    - title: Une entreprise privée
+      consumerActions: !!import/single ../common/actions/defaut.yml
