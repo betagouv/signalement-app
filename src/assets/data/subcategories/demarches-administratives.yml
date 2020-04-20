@@ -1,7 +1,18 @@
 - title: Courrier / société qui se fait passer pour l'administration
   consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Site internet pour obtenir un document administratif (casier, acte de naissance, vignette crit'air)
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  subcategoriesTitle: A qui appartient ce site internet&#160;?
+  subcategories:
+    - title: "A l'administration française, c'est-à-dire à l'Etat"
+      example: "Exemple : site internet d'une mairie"
+      example: "Les sites officiels de l'Etat doivent se terminer par gouv.fr ou .fr et jamais par .gouv.org ou .gouv.com. Vérifiez les mentions légales du site."
+      information:
+        title: SignalConso ne fonctionne que pour les entreprises privées
+        content: La répression des fraudes ne s'occupe pas des problèmes entre un citoyen et une administration.
+                <br> Si vous n'êtes pas content (concernant un délai, une réponse etc.), vous pouvez écrire directement à cette administration pour lui faire part de votre mécontentement. Vous pouvez également utiliser le site VoxUsager.
+    - tilte: A une entreprise
+      example: "Un site avec une Marianne ou un drapeau tricolore n'appartient pas forcément à l'Etat. Ces entreprises entretiennent une confusion pour tromper les consommateurs."
+      consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
 - title: Autre
   consumerActions: !!import/single ../common/actions/defaut.yml
