@@ -4,8 +4,7 @@
   subcategoriesTitle: A qui appartient ce site internet&#160;?
   subcategories:
     - title: "A l'administration française, c'est-à-dire à l'Etat"
-      example: "Exemple : site internet d'une mairie"
-      example: "Les sites officiels de l'Etat doivent se terminer par gouv.fr ou .fr et jamais par .gouv.org ou .gouv.com. Vérifiez les mentions légales du site."
+      example: "Exemple : site internet d'une mairie. Les sites officiels de l'Etat doivent se terminer par gouv.fr ou .fr et jamais par .gouv.org ou .gouv.com. Vérifiez les mentions légales du site."
       information:
         title: SignalConso ne fonctionne que pour les entreprises privées
         content: La répression des fraudes ne s'occupe pas des problèmes entre un citoyen et une administration.
