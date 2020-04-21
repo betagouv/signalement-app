@@ -8,7 +8,7 @@
       information:
         title: SignalConso ne fonctionne que pour les entreprises privées
         content: "La répression des fraudes ne s'occupe pas des problèmes entre un citoyen et une administration. Si vous n'êtes pas content (concernant un délai, une réponse etc.), vous pouvez écrire directement à cette administration pour lui faire part de votre mécontentement. Vous pouvez également utiliser le site VoxUsager."
-    - tilte: A une entreprise
+    - title: A une entreprise
       example: "Un site avec une Marianne ou un drapeau tricolore n'appartient pas forcément à l'Etat. Ces entreprises entretiennent une confusion pour tromper les consommateurs."
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
