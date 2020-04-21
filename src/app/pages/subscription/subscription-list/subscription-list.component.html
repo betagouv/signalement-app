@@ -1,0 +1,62 @@
+<app-banner title="Vos abonnements"></app-banner>
+
+<main role="main">
+
+  <section class="section section-lightest-grey">
+    <div class="container position-relative bg-white pb-3">
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Départements</th>
+            <th>Catégories</th>
+            <th>Siret</th>
+            <th class="actions"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let subscription of subscriptions" (click)="openSubscription(subscription.id)" class="pointer">
+            <td>
+                <div *ngFor="let dept of subscription.departments">
+                  {{dept.code}} - {{dept.label}}
+                </div>
+              <span *ngIf="!subscription.departments.length">Tous</span>
+            </td>
+            <td>
+              <div *ngFor="let category of subscription.categories">
+                {{category}}
+              </div>
+              <span *ngIf="!subscription.categories.length">Toutes</span>
+            </td>
+            <td>
+              <div *ngFor="let siret of subscription.sirets">
+                {{siret}}
+              </div>
+              <span *ngIf="!subscription.sirets.length">Tous</span>
+            </td>
+            <td (click)="removeSubscription(subscription.id, $event)">
+              <i class="material-icons text-warning">delete</i>
+            </td>
+          </tr>
+          <tr *ngIf="!loading && !subscriptions || !subscriptions.length">
+            <td colspan="4" class="text-center">
+              Vous n'avez aucun abonnement
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notification error" *ngIf="loadingError">
+        Une erreur technique s'est produite<br />
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg" (click)="openSubscription()" id="answerBtn">Ajouter un abonnement</button>
+      </div>
+
+      <ngx-loading [show]="loading"></ngx-loading>
+    </div>
+  </section>
+</main>

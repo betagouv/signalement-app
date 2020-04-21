@@ -9,6 +9,10 @@ export class Department {
     this.code = undefined;
     this.label = undefined;
   }
+
+  static fromCode(code: string) {
+    return Departments.find(dept => dept.code === code);
+  }
 }
 
 export class Region {
