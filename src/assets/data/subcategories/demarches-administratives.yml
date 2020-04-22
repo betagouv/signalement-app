@@ -3,7 +3,7 @@
 - title: Site internet pour obtenir un document administratif (casier, acte de naissance, vignette crit'air)
   subcategoriesTitle: A qui appartient ce site internet&#160;?
   subcategories:
-    - title: "A l'administration française, c'est-à-dire à l'Etat"
+    - title: A une administration
       example: "Exemple : site internet d'une mairie. Les sites officiels de l'Etat doivent se terminer par gouv.fr ou .fr et jamais par .gouv.org ou .gouv.com. Vérifiez les mentions légales du site."
       information: !!import/single ../common/info/administration.yml
     - title: A une entreprise
