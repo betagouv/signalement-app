@@ -121,6 +121,7 @@ export class SubscriptionDetailComponent implements OnInit {
 
   addToSiretFilter() {
     const newSirets = this.siretCtrl.value.split(',')
+      .map(siret => siret.replace(/ /g, ''))
       .filter(siret => siret.match(/[0-9]{14}/))
       .filter((siret, index, siretArray) => siretArray.findIndex(d => d === siret) === index) // unicity
       .filter(siret => this.subscription.sirets.indexOf(siret) === -1); // new department only
