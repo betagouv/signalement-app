@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SubscriptionDetailComponent', () => {
   let component: SubscriptionDetailComponent;
@@ -20,7 +21,8 @@ describe('SubscriptionDetailComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         NgxLoadingModule,
-        ComponentsModule
+        ComponentsModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();
