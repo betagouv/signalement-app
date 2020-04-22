@@ -75,6 +75,7 @@ export class SubscriptionDetailComponent implements OnInit {
   submitSubscription() {
     this.loading = true;
     this.loadingError = false;
+    this.showErrors = true;
     this.subscriptionService.createOrUpdateSubscription(this.subscription).subscribe(
       subscription => {
         this.loading = false;

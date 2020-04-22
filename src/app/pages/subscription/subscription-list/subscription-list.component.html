@@ -12,6 +12,7 @@
             <th>Départements</th>
             <th>Catégories</th>
             <th>Siret</th>
+            <th>Fréquence</th>
             <th class="actions"></th>
           </tr>
           </thead>
@@ -35,11 +36,15 @@
               </div>
               <span *ngIf="!subscription.sirets.length">Tous</span>
             </td>
+            <td>
+              <span *ngIf="subscription.frequency === 'P1D'">Quotidienne</span>
+              <span *ngIf="subscription.frequency === 'P7D'">Hebdomadaire</span>
+            </td>
             <td (click)="removeSubscription(subscription.id, $event)">
               <i class="material-icons text-warning">delete</i>
             </td>
           </tr>
-          <tr *ngIf="!loading && !subscriptions || !subscriptions.length">
+          <tr *ngIf="!loading && !subscriptions?.length">
             <td colspan="4" class="text-center">
               Vous n'avez aucun abonnement
             </td>

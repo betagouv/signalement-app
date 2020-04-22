@@ -6,4 +6,5 @@ export class Subscription {
   departments: Department[] = [];
   categories: string[] = [];
   sirets: string[] = [];
+  frequency: string;
 }

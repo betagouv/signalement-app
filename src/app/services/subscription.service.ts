@@ -19,7 +19,8 @@ export class SubscriptionService {
     const subscriptionApi = {
       departments: subscription.departments.map(dept => dept.code),
       categories: subscription.categories,
-      sirets: subscription.sirets
+      sirets: subscription.sirets,
+      frequency: subscription.frequency,
     };
     if (subscription.id) {
       return this.serviceUtils.getAuthHeaders().pipe(
@@ -85,7 +86,8 @@ export class SubscriptionService {
       userId: subscriptionApi.userId,
       departments: subscriptionApi.departments.map(code => Department.fromCode(code)),
       categories: subscriptionApi.categories,
-      sirets: subscriptionApi.sirets
+      sirets: subscriptionApi.sirets,
+      frequency: subscriptionApi.frequency
     });
   }
 }
