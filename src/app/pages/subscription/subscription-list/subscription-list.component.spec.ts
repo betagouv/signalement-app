@@ -4,6 +4,7 @@ import { SubscriptionListComponent } from './subscription-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SubscriptionListComponent', () => {
   let component: SubscriptionListComponent;
@@ -17,7 +18,8 @@ describe('SubscriptionListComponent', () => {
       imports: [
         HttpClientModule,
         NgxLoadingModule,
-        ComponentsModule
+        ComponentsModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();
