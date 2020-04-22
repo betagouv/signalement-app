@@ -29,11 +29,14 @@ describe('ReportDetailComponent', () => {
   let eventService: EventService;
 
   const answerEventFixture = Object.assign(new ReportEvent(), {
-    action: {value : EventActionValues.ReportResponse},
-    details: {
-      responseType: 'ACCEPTED',
-      consumerDetails: 'details'
-    }
+    data: {
+      action: {value : EventActionValues.ReportResponse},
+      details: {
+        responseType: 'ACCEPTED',
+        consumerDetails: 'details'
+      }
+    },
+    user: null
   });
 
   beforeEach(async(() => {
@@ -139,7 +142,7 @@ describe('ReportDetailComponent', () => {
         expect(nativeElement.querySelector('#answerBtn')).toBeNull();
         expect(nativeElement.querySelector('#proAnswer')).not.toBeNull();
         expect(nativeElement.querySelector('#proAnswer').textContent
-          .indexOf(answerEventFixture.details.consumerDetails)).toBeGreaterThan(-1);
+          .indexOf(answerEventFixture.data.details.consumerDetails)).toBeGreaterThan(-1);
       });
 
     });
