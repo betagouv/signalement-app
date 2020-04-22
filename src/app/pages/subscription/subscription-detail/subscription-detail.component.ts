@@ -75,16 +75,19 @@ export class SubscriptionDetailComponent implements OnInit {
   submitSubscription() {
     this.loading = true;
     this.loadingError = false;
-    this.showErrors = true;
-    this.subscriptionService.createOrUpdateSubscription(this.subscription).subscribe(
-      subscription => {
-        this.loading = false;
-        this.platformLocation.back();
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
+    if (!this.subscription.frequency) {
+      this.showErrors = true;
+    } else {
+      this.subscriptionService.createOrUpdateSubscription(this.subscription).subscribe(
+        subscription => {
+          this.loading = false;
+          this.platformLocation.back();
+        },
+        err => {
+          this.loading = false;
+          this.loadingError = true;
+        });
+    }
   }
 
   addToDepartementFilter() {
