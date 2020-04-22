@@ -283,6 +283,24 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bcanal\+?\b/i,
+      results: [
+        {
+          "siret": "42062477700108",
+          "nom_raison_sociale": "GROUPE CANAL+ SA",
+          "l1_normalisee": "GROUPE CANAL+ SA",
+          "l2_normalisee": "CANAL",
+          "l3_normalisee": null,
+          "l4_normalisee": "1 PLACE DU SPECTACLE",
+          "l5_normalisee": null,
+          "l6_normalisee": "92130 ISSY-LES-MOULINEAUX",
+          "code_postal": "92130",
+          "libelle_activite_principale": "Activités des sociétés holding",
+          "highlight": "Pour tout ce qui concerne Canal+ et ses différents services"
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
