@@ -58,12 +58,6 @@ form {
     text-align: center;
     vertical-align: middle;
 
-    &.action {
-      background-color: $white !important;
-      border: none;
-      vertical-align: middle;
-    }
-
     &.status-a-traiter {
       background-color: $light-yellow;
     }
