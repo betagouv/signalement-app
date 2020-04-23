@@ -45,7 +45,7 @@
               </label>
               <input [formControl]="departmentCtrl" type="text" placeholder="75, 87, 971...">
               <p class="note">
-                Saisissez un ou plusieurs code département séparés par des virgules et validez par entrée
+                Saisissez un ou plusieurs codes départements séparés par des virgules et validez par entrée
               </p>
             </div>
           </div>
@@ -127,7 +127,7 @@
 
         <hr />
 
-        <form>
+        <form *ngIf="subscription">
           <div class="row">
             <div class="col-3">
               <label>
