@@ -1,4 +1,4 @@
-<app-banner [backButton]="true">
+<app-banner [backButton]="backEnabled()">
   <h1 class="text-center">
     Détail du signalement
     <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
@@ -601,7 +601,7 @@
   </div>
 </section>
 
-<div class="container pb-3" *ngIf="report">
+<div class="container pb-3" *ngIf="report && backEnabled()">
   <div class="row">
     <div class="col-12 pointer" (click)="back()">
       <img src="/assets/images/icon_back.png" class="back pointer" alt="page précédente"/>
