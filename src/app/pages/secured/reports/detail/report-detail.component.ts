@@ -137,7 +137,7 @@ export class ReportDetailComponent implements OnInit {
   }
 
   backEnabled() {
-    return this.platformLocation.getState() && this.platformLocation.getState().navigationId !== 1;
+    return this.platformLocation.getState() && this.platformLocation.getState()['navigationId'] !== 1;
   }
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {
