@@ -360,13 +360,13 @@ export class ReportDetailComponent implements OnInit {
   }
 
   getEvent(eventActionValue: EventActionValues) {
-    return this.events.find(event => event.action.value === eventActionValue);
+    return this.events.find(event => event.data.action.value === eventActionValue);
   }
 
   getReportResponse(): ReportResponse {
     const reportResponseEvent = this.getEvent(EventActionValues.ReportResponse);
     if (reportResponseEvent) {
-      return reportResponseEvent.details as ReportResponse;
+      return reportResponseEvent.data.details as ReportResponse;
     }
   }
 

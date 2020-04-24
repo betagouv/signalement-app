@@ -221,7 +221,7 @@ export class CompanyComponent implements OnInit {
   }
 
   searchCompanyBySiret() {
-    this.siretCtrl.setValue((this.siretCtrl.value as string).replace(/ /g, ''));
+    this.siretCtrl.setValue((this.siretCtrl.value as string).replace(/\s/g, ''));
     if (!this.searchBySiretForm.valid) {
       this.showErrorsBySiret = true;
     } else {
