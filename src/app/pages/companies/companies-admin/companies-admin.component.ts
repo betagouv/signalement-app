@@ -117,7 +117,9 @@ export class CompaniesAdminComponent implements OnInit {
     this.loading = true;
     this.loadingError = false;
     this.companies = undefined;
-    this.searchCtrl.setValue((this.searchCtrl.value as string).replace(/\s/g, ''));
+    if (RegExp(/^[0-9\s]+$/g).test(this.searchCtrl.value)) {
+      this.searchCtrl.setValue((this.searchCtrl.value as string).replace(/\s/g, ''));
+    }
     this.location.go('entreprises/recherche', `q=${this.searchCtrl.value}`);
     this.companyService.searchRegisterCompanies(this.searchCtrl.value).subscribe(
       result => {
