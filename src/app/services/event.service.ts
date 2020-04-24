@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Api, ServiceUtils } from './service.utils';
 import { HttpClient } from '@angular/common/http';
 import { mergeMap } from 'rxjs/operators';
-import { ReportEvent, Event } from '../model/ReportEvent';
+import { Event, ReportEvent } from '../model/ReportEvent';
 import { AuthenticationService } from './authentication.service';
 import { combineLatest } from 'rxjs';
 import { User } from '../model/AuthUser';
