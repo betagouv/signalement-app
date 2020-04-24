@@ -1,4 +1,4 @@
-<app-banner [backButton]="true">
+<app-banner [backButton]="backEnabled()">
   <h1 class="text-center">
     Détail du signalement
     <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
@@ -296,20 +296,25 @@
           <h3>Historique</h3>
           <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
             <div class="col-12" *ngFor="let event of events; let eventIndex = index">
-              <ng-container *ngIf="event.details && event.details.description; else noDescription">
+              <ng-container *ngIf="event.data.details && event.data.details.description; else noDescription">
                 <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
                   <span class="collapsed-icon">&#43;</span>
                   <span class="uncollapsed-icon">&#8722;</span>
-                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                  Le {{event.data.creationDate | date : constants.DateTimeFormat}}
+                  <ng-template *ngTemplateOutlet="eventUser; context: {$implicit: event}"></ng-template> : {{event.data.action.value}}
                 </a>
                 <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
-                  {{event.details.description}}
+                  {{event.data.details.description}}
                 </div>
               </ng-container>
               <ng-template #noDescription>
                 <span>
-                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                  Le {{event.data.creationDate | date : constants.DateTimeFormat}}
+                  <ng-template *ngTemplateOutlet="eventUser; context: {$implicit: event}"></ng-template> : {{event.data.action.value}}
                 </span>
+              </ng-template>
+              <ng-template #eventUser let-event>
+                <small *ngIf="event.user">[{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})]</small>
               </ng-template>
             </div>
             <div class="col-12">
@@ -601,7 +606,7 @@
   </div>
 </section>
 
-<div class="container pb-3" *ngIf="report">
+<div class="container pb-3" *ngIf="report && backEnabled()">
   <div class="row">
     <div class="col-12 pointer" (click)="back()">
       <img src="/assets/images/icon_back.png" class="back pointer" alt="page précédente"/>

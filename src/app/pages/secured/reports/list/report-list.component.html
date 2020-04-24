@@ -237,6 +237,7 @@
             <th *appRole="[roles.Admin]" class="email">Consommateur</th>
             <th class="pj">Pièces jointes</th>
             <th class="status-header">Statut</th>
+            <th class="action"></th>
           </tr>
         </thead>
         <tbody>
@@ -339,6 +340,11 @@
               </td>
               <td [class]="getReportCssClass(report.status)">
                 {{ report.status }}
+              </td>
+              <td class="action" (click)="$event.stopPropagation()">
+                <a [routerLink]="['report', report.id]" target="_blank">
+                  <i class="material-icons text-primary md-18">open_in_new</i>
+                </a>
               </td>
             </tr>
           </ng-container>

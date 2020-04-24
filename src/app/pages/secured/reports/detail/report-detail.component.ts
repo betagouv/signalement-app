@@ -136,6 +136,10 @@ export class ReportDetailComponent implements OnInit {
     this.platformLocation.back();
   }
 
+  backEnabled() {
+    return this.platformLocation.getState() && this.platformLocation.getState()['navigationId'] !== 1;
+  }
+
   getFileDownloadUrl(uploadedFile: UploadedFile) {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
@@ -356,13 +360,13 @@ export class ReportDetailComponent implements OnInit {
   }
 
   getEvent(eventActionValue: EventActionValues) {
-    return this.events.find(event => event.action.value === eventActionValue);
+    return this.events.find(event => event.data.action.value === eventActionValue);
   }
 
   getReportResponse(): ReportResponse {
     const reportResponseEvent = this.getEvent(EventActionValues.ReportResponse);
     if (reportResponseEvent) {
-      return reportResponseEvent.details as ReportResponse;
+      return reportResponseEvent.data.details as ReportResponse;
     }
   }
 
