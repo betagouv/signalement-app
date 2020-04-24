@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <h2 tabindex="-1" class="text-center mb-4 font-weight-bold problemTitle" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
+  <h2 tabindex="-1" class="text-center mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
 
   <form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
     <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
