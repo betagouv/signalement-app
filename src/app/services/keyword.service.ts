@@ -30,7 +30,7 @@ export class KeywordService {
 
     if (text) {
       const keywordsToSearch = this.keywords
-        .filter(keyword => keyword.filteredCategories && keyword.filteredCategories.includes(activeCategoryId));
+        .filter(keyword => keyword.filteredCategories && keyword.filteredCategories.indexOf(activeCategoryId) != -1);
       for (let i = 0; i < keywordsToSearch.length; i++) {
         const keyword = this.keywords[i];
         const found = keyword.words

@@ -7,24 +7,10 @@ export default class Utils {
     $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   }
 
-  static focusAndBlurOnTop() {
-    setTimeout(() => {
-      const firstElement = document.querySelector('#banner') as HTMLElement;
-      if (firstElement) {
-        firstElement.focus();
-        firstElement.blur();
-      }
-    });
-  }
-  static focusAndBlurOnBackButton() {
-    setTimeout(() => {
-      const backButton: HTMLElement = document.querySelector('#back-button');
+}
 
-      if (backButton) {
-        backButton.focus();
-        backButton.blur();
-      }
-    });
-  }
-
+export const SVETestingScope = 'TestSVE';
+export enum SVETestingVersions {
+  NoTest = 'NoTest',
+  Test2 = 'Test2'
 }

@@ -1,8 +1,13 @@
 - title: Alimentation / Matériel pour animaux
-  example: 'Exemples : jouet, cage, laisse, croquettes'
+  example: 'Exemple : jouet, cage, laisse, croquettes'
+  consumerActions: !!import/single ../common/actions/animaux.yml
 - title: Soins
-  example: 'Exemples : vétérinaire, toiletteur'
+  example: 'Exemple : vétérinaire, toiletteur'
+  consumerActions: !!import/single ../common/actions/animaux.yml
 - title: Garde
-  example: 'Exemples : pension, site de petsitter'
+  example: 'Exemple : pension, site de petsitter'
+  consumerActions: !!import/single ../common/actions/animaux.yml
 - title: Vendeur d'animaux
-- title: Autres
+  consumerActions: !!import/single ../common/actions/animaux.yml
+- title: Autre
+  consumerActions: !!import/single ../common/actions/animaux.yml

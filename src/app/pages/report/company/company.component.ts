@@ -1,38 +1,40 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { Company, CompanySearchResult } from '../../../model/Company';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   AnalyticsService,
-  CompanyEventActions,
+  CompanySearchEventActions,
   CompanySearchEventNames,
   EventCategories,
   ReportEventActions,
 } from '../../../services/analytics.service';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { isPlatformBrowser } from '@angular/common';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
+import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
+import { Website } from '../../../model/Company';
 
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.scss']
 })
-export class CompanyComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class CompanyComponent implements OnInit {
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
+  companyKinds = CompanyKinds;
+
+  websiteForm: FormGroup;
+  urlCtrl: FormControl;
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
-  companies: Company[];
+  companySearchResults: CompanySearchResult[];
 
   showErrors: boolean;
   searchWarning: string;
@@ -40,7 +42,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
   searchBySiretForm: FormGroup;
   siretCtrl: FormControl;
-  companyBySiret: Company;
+  companySearchBySiretResult: CompanySearchResult;
 
   showErrorsBySiret: boolean;
   searchBySiretWarning: string;
@@ -49,8 +51,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   bySiret = false;
-
-  scriptElement;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -64,24 +64,20 @@ export class CompanyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.step = Step.Company;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(take(1))
       .subscribe(report => {
         if (report) {
-          this.report = report;
-          this.initSearchForm();
-          this.initSearchBySiretForm();
+          this.draftReport = report;
+          if (this.draftReport.companyKind === CompanyKinds.SIRET) {
+            this.initSearchForm();
+            this.initSearchBySiretForm();
+          } else {
+            this.initWebsiteForm();
+          }
         } else {
           this.reportRouterService.routeToFirstStep();
         }
       });
-
-      Utils.focusAndBlurOnBackButton();
-
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   changeNavTab() {
@@ -89,9 +85,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo(0, 0);
     }
-
-    Utils.focusAndBlurOnBackButton();
-
   }
 
   initSearchForm() {
@@ -103,6 +96,13 @@ export class CompanyComponent implements OnInit, OnDestroy {
     });
   }
 
+  initWebsiteForm() {
+    this.urlCtrl = this.formBuilder.control('', Validators.required);
+    this.websiteForm = this.formBuilder.group({
+      url: this.urlCtrl
+    });
+  }
+
   initSearchBySiretForm() {
     this.siretCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{14}')]));
     this.searchBySiretForm = this.formBuilder.group({
@@ -111,7 +111,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   }
 
   initSearch() {
-    this.companies = [];
+    this.companySearchResults = [];
     this.searchWarning = '';
     this.searchError = '';
   }
@@ -123,20 +123,20 @@ export class CompanyComponent implements OnInit, OnDestroy {
       this.initSearch();
       this.loading = true;
       this.analyticsService.trackEvent(
-        EventCategories.company,
-        CompanyEventActions.search,
+        EventCategories.companySearch,
+        CompanySearchEventActions.search,
         this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
       this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
-        companySearchResult => {
+        companySearchResults => {
           this.loading = false;
-          if (companySearchResult.total === 0) {
+          if (companySearchResults.total === 0) {
             this.treatCaseNoResult();
-          } else if (companySearchResult.total === 1) {
-            this.treatCaseSingleResult(companySearchResult);
-          } else if (companySearchResult.total > MaxCompanyResult) {
+          } else if (companySearchResults.total === 1) {
+            this.treatCaseSingleResult(companySearchResults);
+          } else if (companySearchResults.total > MaxCompanyResult) {
             this.treatCaseTooManyResults();
           } else {
-            this.treatCaseSeveralResults(companySearchResult);
+            this.treatCaseSeveralResults(companySearchResults);
           }
         },
         () => {
@@ -147,94 +147,124 @@ export class CompanyComponent implements OnInit, OnDestroy {
     }
   }
 
+  submitWebsiteForm() {
+    if (!this.websiteForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.selectCompany(Object.assign(new Website(), {
+        url: this.urlCtrl.value
+      }));
+    }
+  }
+
   treatCaseNoResult() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.noResult);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.noResult
+    );
     this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
   }
 
-  treatCaseSingleResult(companySearchResult: CompanySearchResult) {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.singleResult);
-    this.companies = companySearchResult.companies;
+  treatCaseSingleResult(companySearchResult: CompanySearchResults) {
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.singleResult
+    );
+    this.companySearchResults = companySearchResult.companies;
   }
 
   treatCaseTooManyResults() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.tooManyResults);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.tooManyResults
+    );
     this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
   }
 
-  treatCaseSeveralResults(companySearchResult) {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.severalResult);
-    this.companies = companySearchResult.companies;
+  treatCaseSeveralResults(companySearchResults: CompanySearchResults) {
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.severalResult
+    );
+    this.companySearchResults = companySearchResults.companies;
   }
 
   treatCaseError() {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.search, CompanySearchEventNames.error);
+    this.analyticsService.trackEvent(
+      EventCategories.companySearch,
+      CompanySearchEventActions.search,
+      CompanySearchEventNames.error
+    );
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
-  selectCompanyFromResults(company: Company) {
-    this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.select);
-    this.selectCompany(company);
+  selectCompanyFromResults(companySearchResult: CompanySearchResult) {
+    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
+    this.selectCompany(companySearchResult);
   }
 
-  selectCompany(company: Company) {
+  selectCompany(companySearchResult: CompanySearchResult | Website) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
-    this.report.company = company;
-    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+    this.draftReport.companyData = companySearchResult;
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
   initSearchBySiret() {
-    this.companyBySiret = undefined;
+    this.companySearchBySiretResult = undefined;
     this.searchBySiretWarning = '';
     this.searchBySiretError = '';
   }
 
   searchCompanyBySiret() {
-    this.siretCtrl.setValue((this.siretCtrl.value as string).replace(/ /g, ''));
+    this.siretCtrl.setValue((this.siretCtrl.value as string).replace(/\s/g, ''));
     if (!this.searchBySiretForm.valid) {
       this.showErrorsBySiret = true;
     } else {
       this.initSearchBySiret();
       this.loading = true;
-      this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, this.siretCtrl.value);
+      this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchBySiret, this.siretCtrl.value);
       this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
         if (company) {
           this.analyticsService.trackEvent(
-            EventCategories.company,
-            CompanyEventActions.searchBySiret,
+            EventCategories.companySearch,
+            CompanySearchEventActions.searchBySiret,
             CompanySearchEventNames.singleResult
           );
-          this.companyBySiret = company;
+          this.companySearchBySiretResult = company;
         } else {
-          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.noResult);
+          this.analyticsService.trackEvent(
+            EventCategories.companySearch,
+            CompanySearchEventActions.searchBySiret,
+            CompanySearchEventNames.noResult
+          );
           this.searchBySiretWarning = 'Aucun établissement ne correspond à la recherche.';
         }
       },
         () => {
           this.loading = false;
-          this.analyticsService.trackEvent(EventCategories.company, CompanyEventActions.searchBySiret, CompanySearchEventNames.error);
+          this.analyticsService.trackEvent(
+            EventCategories.companySearch,
+            CompanySearchEventActions.searchBySiret,
+            CompanySearchEventNames.error
+          );
           this.searchBySiretError = 'Une erreur technique s\'est produite.';
       });
     }
   }
 
   changeCompany() {
-    this.report.company = undefined;
-    this.companies = [];
-    this.companyBySiret = undefined;
+    this.draftReport.companyData = undefined;
+    this.companySearchResults = [];
+    this.companySearchBySiretResult = undefined;
     this.showErrors = false;
     this.showErrorsBySiret = false;
-
-    setTimeout(() => {
-      const elt = document.querySelector('#firstTab');
-
-      if (elt && elt instanceof HTMLElement) {
-        elt.focus();
-      }
-    });
   }
 
   hasError(formControl: FormControl) {

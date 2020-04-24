@@ -1,25 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Consumer } from '../../../model/Consumer';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
+import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-consumer',
   templateUrl: './consumer.component.html',
   styleUrls: ['./consumer.component.scss']
 })
-export class ConsumerComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class ConsumerComponent implements OnInit {
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -37,29 +34,22 @@ export class ConsumerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.step = Step.Consumer;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(take(1))
       .subscribe(report => {
         if (report) {
-          this.report = report;
+          this.draftReport = report;
           this.initConsumerForm();
         } else {
           this.reportRouterService.routeToFirstStep();
         }
       });
-
-    Utils.focusAndBlurOnBackButton();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   initConsumerForm() {
-    this.firstNameCtrl = this.formBuilder.control(this.report.consumer ? this.report.consumer.firstName : '', Validators.required);
-    this.lastNameCtrl = this.formBuilder.control(this.report.consumer ? this.report.consumer.lastName : '', Validators.required);
+    this.firstNameCtrl = this.formBuilder.control(this.draftReport.consumer ? this.draftReport.consumer.firstName : '', Validators.required);
+    this.lastNameCtrl = this.formBuilder.control(this.draftReport.consumer ? this.draftReport.consumer.lastName : '', Validators.required);
     this.emailCtrl = this.formBuilder.control(
-      this.report.consumer ? this.report.consumer.email : '', [Validators.required, Validators.email]
+      this.draftReport.consumer ? this.draftReport.consumer.email : '', [Validators.required, Validators.email]
     );
 
     this.consumerForm = this.formBuilder.group({
@@ -68,10 +58,10 @@ export class ConsumerComponent implements OnInit, OnDestroy {
       email: this.emailCtrl
     });
 
-    if (this.report.employeeConsumer) {
+    if (this.draftReport.employeeConsumer || this.draftReport.companyKind !== CompanyKinds.SIRET) {
       this.contactAgreementCtrl = this.formBuilder.control(false);
     } else {
-      this.contactAgreementCtrl = this.formBuilder.control(this.report.contactAgreement, Validators.required);
+      this.contactAgreementCtrl = this.formBuilder.control(this.draftReport.contactAgreement, Validators.required);
       this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
     }
   }
@@ -85,9 +75,9 @@ export class ConsumerComponent implements OnInit, OnDestroy {
       consumer.firstName = this.firstNameCtrl.value;
       consumer.lastName = this.lastNameCtrl.value;
       consumer.email = this.emailCtrl.value;
-      this.report.consumer = consumer;
-      this.report.contactAgreement = this.contactAgreementCtrl.value;
-      this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+      this.draftReport.consumer = consumer;
+      this.draftReport.contactAgreement = this.contactAgreementCtrl.value;
+      this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
       this.reportRouterService.routeForward(this.step);
     }
   }

@@ -1,18 +1,13 @@
 @import "../theme/media-queries";
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1 {
   font-family: "Evolventa", "Trebuchet MS", sans-serif;
 }
 
 h1 {
-  font-size: 1.5rem !important;
+  font-size: 2rem !important;
   font-weight: bold !important;
-  line-height: 32px !important;
+  line-height: 48px !important;
 }
 
 h2 {
@@ -42,16 +37,16 @@ h6 {
 
 
   h1 {
-    font-size: 1rem !important;
+    font-size: 1.4rem !important;
     line-height: 20px !important;
   }
 
   h2 {
-    font-size: 0.9rem !important;
+    font-size: 1.3rem !important;
     line-height: 20px !important;
   }
 
   h3 {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
   }
 }

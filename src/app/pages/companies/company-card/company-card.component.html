@@ -1,0 +1,55 @@
+<div class="card" *ngIf="userAccess">
+  <div class="card-body">
+    <h2 class="card-title">{{userAccess.companyName}}</h2>
+    <p class="card-text">
+    <dl class="row">
+      <dt class="col-sm-3">SIRET</dt>
+      <dd class="col-sm-9">{{userAccess.companySiret}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-3">
+        Adresse
+        <i class="material-icons md-18 text-primary pl-2 pointer" aria-hidden="true" title="Détail du signalement"
+           (click)="openModal(changeAddress)"
+           *appPermission="permissions.updateCompany">
+          edit
+        </i>
+      </dt>
+      <dd class="col-sm-9">{{userAccess.companyAddress}}</dd>
+    </dl>
+    <div class="row item pointer link" [routerLink]="['/entreprise', 'acces', userAccess.companySiret]" *ngIf="userAccess.level == 'admin'">
+      <div class="col-12">
+        Gérer les accès
+        <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
+      </div>
+    </div>
+    <div class="row item pointer link" [routerLink]="['/suivi-des-signalements', 'siret', userAccess.companySiret]">
+      <div class="col-12">
+        Consulter les signalements
+        <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
+      </div>
+    </div>
+  </div>
+  <ng-template #changeAddress>
+    <div class="modal-body text-center">
+      <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
+        <input [value]="userAccess.companyName" disabled />
+        <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
+        <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
+        <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
+        <input [formControl]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
+        <input [formControl]="cityCtrl" placeholder="Ville" id="city" />
+
+        <div class="notification error" *ngIf="loadingError">
+          Une erreur technique s'est produite<br />
+        </div>
+
+        <hr />
+        <button type="submit" class="btn btn-primary mt-2" id="submitCompanyAddressForm" [disabled]="companyAddressForm.invalid">
+          Enregistrer
+        </button>
+      </form>
+      <ngx-loading [show]="loading"></ngx-loading>
+    </div>
+  </ng-template>
+</div>

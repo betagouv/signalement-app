@@ -1,12 +1,11 @@
-<alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
-  <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</h4>
-  <button type="submit" class="button-outline warning" (click)="removeStoredReport()" appAutofocus>Non</button>
-  <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
+<alert class="text-center" type="danger" dismissible="true" [isOpen]="draftReport && draftReport.retrievedFromStorage" (onClosed)="removeStoredReport()"><strong>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</strong>
+  <button type="submit" class="button-outline warning ml-2" (click)="removeStoredReport()" appAutofocus="true">Non</button>
+  <button type="submit" class="button warning ml-2" (click)="restoreStoredReport()">Oui</button>
 </alert>
 
-<div class="banner text-center section section-primary d-none d-lg-block" role="region">
+<div class="banner text-center section-small section-primary d-none d-lg-block" role="region">
   <div class="container text-center">
-    <img src="/assets/images/icons-baseline.svg" class="pb-3 d-none d-lg-inline-block" alt="Icônes signaler" />
+    <img src="/assets/images/logo-signalconso-white.svg" class="pb-4 d-none d-lg-inline-block" alt="Icônes signaler" />
     <h1>
       Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
     </h1>
@@ -17,10 +16,16 @@
 
   <section class="section section-white d-none d-lg-block">
     <div class="container">
-      <h2 class="text-center mb-4">Comment ça marche ?</h2>
+
+      <div class="notification warning">
+        En raison des circonstances exceptionnelles liées au <strong>COVID-19</strong>, le délai de transmission des signalements aux entreprises est fortement rallongé
+        <br /><a href="/blog/2020/03/17/note-coronavirus">Plus d'informations ici</a>
+      </div>
+
+      <h2 class="mb-4 text-secondary">Comment ça marche ?</h2>
       <div class="row" (click)="scrollToElement(categoryList)">
         <div class="col-12 col-sm-3">
-          <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
+          <app-illustration-card [illustration]="illustrations[0]" firstCard="true"></app-illustration-card>
         </div>
         <div class="col-12 col-sm-3">
           <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
@@ -29,26 +34,27 @@
           <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
         </div>
         <div class="col-12 col-sm-3">
-          <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
+          <app-illustration-card [illustration]="illustrations[3]" lastCard="true"></app-illustration-card>
         </div>
       </div>
-      <p class="indication">
-        Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
-        l’<u>article L. 112-8 du code des relations entre le public et l’administration</u>.
-        <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
-      </p>
-      <div class="text-center">
+      <div class="text-center pt-5">
         <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
           Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
         </button>
       </div>
+      <p class="indication">
+        Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
+        l’article L. 112-8 du code des relations entre le public et l’administration.
+        <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
+      </p>
     </div>
   </section>
 
   <section class="section section-primary">
 
-    <div class="text-center d-lg-none">
-      <h2 class="tmb-4">Signaler un problème à la répression <br/>des fraudes en toute transparence <br />avec l'entreprise !</h2>
+    <div class="text-center container d-lg-none">
+      <h1 class="tmb-4 d-none d-md-block">Signaler un problème à la répression des fraudes <br/>en toute transparence avec l'entreprise !</h1>
+      <h1 class="tmb-4 d-md-none">Signaler un problème à la répression des fraudes en toute transparence avec l'entreprise !</h1>
 
       <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000">
         <div class="carousel-inner">
@@ -101,19 +107,24 @@
           <li data-target="#carousel-md" data-slide-to="1"></li>
         </ol>
       </div>
+
+      <div class="notification warning">
+        En raison des circonstances exceptionnelles liées au <strong>COVID-19</strong>, les signalements ne sont plus systématiquement transmis aux entreprises
+        <br /><a href="/blog/2020/03/17/note-coronavirus">Plus d'informations ici</a>
+      </div>
     </div>
 
     <div class="container">
 
       <div class="text-center mt-4 mb-4">
         <button type="button" class="btn btn-warning d-lg-none" (click)="scrollToElement(categoryList)">
-          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" class="d-none d-sm-inline-block" />
         </button>
       </div>
 
       <div #categoryList>
 
-        <h2 class="text-center mb-0 mb-lg-4">Quel problème avez-vous rencontré&#160;?</h2>
+        <h2 class="mb-0 mb-lg-4">Quel problème avez-vous rencontré&#160;?</h2>
 
         <div class="row">
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
@@ -123,7 +134,7 @@
                   <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
                 </div>
                 <div class="col-12 col-lg-9 pl-lg-0">
-                  <h5 class="mb-0">{{category.category}}</h5>
+                  <div class="category-title">{{category.category}}</div>
                   <span class="note">{{category.description}}</span>
                 </div>
               </div>
@@ -138,7 +149,7 @@
                     <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
                   </div>
                   <div class="col-12 col-lg-9 pl-lg-0">
-                    <h5 class="mb-0">{{category.category}}</h5>
+                    <div class="category-title">{{category.category}}</div>
                     <span class="note">{{category.description}}</span>
                   </div>
                 </div>

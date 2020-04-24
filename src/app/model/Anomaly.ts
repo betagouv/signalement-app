@@ -10,10 +10,10 @@ export class Action {
 
 export class Information {
   title?: string;
-  subTitle?: string;
   content?: string;
   actions?: Action[];
   reference?: string;
+  outOfScope?: boolean;
 }
 
 export class DetailInput {
@@ -37,6 +37,8 @@ export class Subcategory {
   detailInputs?: DetailInput[];
   fileLabel?: string;
   information?: Information;
+  consumerActions?: Information[];
+  companyKind?: string;
 }
 
 export class Anomaly {
@@ -46,7 +48,6 @@ export class Anomaly {
   hidden?: boolean;
   description?: string;
   rank?: number;
-  withInternetPurchase?: boolean;
   icon?: string;
   information?: Information;
   breadcrumbTitle?: string;
@@ -61,4 +62,8 @@ export enum InputType {
   Textarea = 'TEXTAREA',
   Timeslot = 'TIMESLOT',
   Date = 'DATE'
+}
+
+export enum CompanyKinds {
+  SIRET = 'SIRET', WEBSITE = 'WEBSITE'
 }

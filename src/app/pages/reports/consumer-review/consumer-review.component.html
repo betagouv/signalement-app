@@ -1,0 +1,80 @@
+<app-banner title="Donnez votre avis"></app-banner>
+
+<section class="section section-white position-relative">
+  <div class="container">
+    <form [formGroup]="reviewForm" (submit)="submitReviewForm()" id="proAnswerForm" *ngIf="!postSuccess">
+
+      <div class="form__group">
+        <label class="text-center" [class]="hasError(positiveCtrl) ? 'error' : ''">
+          Est-ce que la réponse de l'entreprise répond à vos attentes ? <span class="error">*</span>
+        </label>
+        <div [class]="getPositiveCtrlClass(true)">
+          <div class="row pb-2 pt-2">
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="radio" [formControl]="positiveCtrl" [value]="true" id="responseAccepted"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label for="responseAccepted" class="label-inline pointer">Oui</label>
+            </div>
+          </div>
+        </div>
+        <div [class]="getPositiveCtrlClass(false)">
+          <div class="row pb-2 pt-2">
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="radio" [formControl]="positiveCtrl" [value]="false" id="responseRejected"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label for="responseRejected" class="label-inline pointer">Non</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="positiveCtrl.valid">
+        <div class="form__group pb-2">
+          <label for="detailsInput">
+            Vous pouvez, si vous le souhaitez, apporter une précision <b>à l'attention de la DGCCRF</b> qui ne sera pas transmise à l'entreprise
+          </label>
+          <textarea [formControl]="detailsCtrl" id="detailsInput" rows="3">
+          </textarea>
+        </div>
+      </ng-container>
+
+      <hr />
+
+      <div class="notification error" *ngIf="showErrors && reviewForm.invalid">
+        Veuillez renseigner les champs obligatoires.<br />
+      </div>
+
+      <div class="notification error" *ngIf="loadingError">
+        Une erreur technique s'est produite<br />
+      </div>
+
+      <div class="notification error" *ngIf="conflictError">
+        Vous avez déjà envoyé un avis concernant ce signalement<br />
+      </div>
+
+      <div class="mt-4 text-center">
+        <button type="submit" class="btn btn-lg btn-primary">
+          Envoyer
+        </button>
+      </div>
+    </form>
+
+    <div class="notification success max-width" *ngIf="postSuccess">
+      Votre avis a bien été pris en compte, nous vous en remercions<br />
+    </div>
+    <ngx-loading [show]="loading"></ngx-loading>
+
+
+    <form class="mt-5 p-3 bg-grey text-center">
+      <label>Vous pouvez également donner votre avis sur SignalConso</label>
+      <br/>
+      <div class="text-center">
+        <a href="https://monavis.numerique.gouv.fr/Demarches/2071?&view-mode=formulaire-avis&nd_mode=en-ligne-enti%C3%A8rement&nd_source=button&key=5a58254dab900906fe4924e37c1c5bba">
+          <img src="https://monavis.numerique.gouv.fr/monavis-static/bouton-bleu.png" alt="Je donne mon avis" title="Je donne mon avis sur cette démarche" />
+        </a>
+      </div>
+    </form>
+  </div>
+</section>

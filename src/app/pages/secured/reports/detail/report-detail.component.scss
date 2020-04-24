@@ -1,15 +1,12 @@
 @import "../../../../../theme/variables";
+@import "../../../../../theme/media-queries";
 
-img.back {
-
-  vertical-align: top;
-  height: 30px;
-
-  & + div {
-    display: inline-block;
-    margin-left: 1em;
+:not(.banner) {
+  img.back {
+    @media #{$smaller-than-tablet} {
+      height: 20px;
+    }
   }
-
 }
 
 img.remove {
@@ -82,13 +79,13 @@ input + input {
   background-color: $light-green;
   border-radius: $theme-border-more-radius;
 
-  label, h4 {
+  label, h2 {
     color: $black;
   }
 }
 
 .not-selected {
-  label, h4 {
+  label, h2 {
     color: $darker-grey;
   }
 }

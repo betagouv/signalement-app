@@ -181,7 +181,9 @@ form {
 }
 
 .banner {
-  margin-bottom: 2em;
+  a {
+    color: $white;
+  }
 }
 
 .filters {
@@ -191,29 +193,9 @@ form {
   margin: 0 0 2em 0;
   background-color: $lightest-grey;
 
-  .btn-group[dropdown] {
-    .dropdown-toggle {
-      border-color: $grey;
-      background-color: $white;
-    }
-
-    ul.dropdown-menu {
-      height: 300px;
-      overflow-y: scroll;
-
-      .menutitle {
-        font-weight: bold;
-      }
-
-      .dropdown-item {
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-    }
-  }
-
-  .dropdown-toggle {
-    height: 43px;
+  ul.dropdown-menu {
+    height: 300px;
+    overflow-y: scroll;
   }
 
   input, select {
@@ -225,6 +207,30 @@ form {
       width: 200px;
     }
   }
+}
+
+.btn-group[dropdown] {
+  .dropdown-toggle {
+    border-color: $grey;
+    background-color: $white;
+  }
+
+  ul.dropdown-menu {
+
+    .menutitle {
+      font-weight: bold;
+    }
+
+    .dropdown-item {
+      padding-top: 0;
+      padding-bottom: 0;
+      text-transform: none;
+    }
+  }
+}
+
+.dropdown-toggle {
+  height: 43px;
 }
 
 
@@ -264,4 +270,12 @@ form {
   .attach-icon {
     margin-left: -20px;
   }
+}
+
+.items-per-page-selector {
+  color: $primary;
+  width: 70px;
+  padding: 6px;
+  margin-bottom: 4px;
+  margin-left: 10px;
 }

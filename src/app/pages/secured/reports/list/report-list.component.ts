@@ -1,28 +1,29 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { DetailInputValue, Report } from '../../../../model/Report';
+import { DetailInputValue, Report, ReportStatus } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { EventComponent } from '../event/event.component';
 import { ReportFilter } from '../../../../model/ReportFilter';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest, iif, of, Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../../assets/data/pages.json';
-import { StorageService } from '../../../../services/storage.service';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles, User } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { AnomalyService } from '../../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { mergeMap, take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { Department, Region, Regions } from '../../../../model/Region';
 import oldCategories from '../../../../../assets/data/old-categories.json';
+import { AccountService } from '../../../../services/account.service';
+import { EventService } from '../../../../services/event.service';
+import { UserAccess } from '../../../../model/Company';
+import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
 
-const ReportFilterStorageKey = 'ReportFilterSignalConso';
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
 @Component({
@@ -31,16 +32,18 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
   styleUrls: ['./report-list.component.scss']
 })
 export class ReportListComponent implements OnInit, OnDestroy {
-
   user: User;
+  userAccesses: UserAccess[];
   permissions = Permissions;
   roles = Roles;
+  reportStatus = ReportStatus;
   regions = Regions;
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
   currentPage: number;
   itemsPerPage = 20;
 
+  siretUrlParam: string;
   reportFilter: ReportFilter;
   reportExtractUrl: string;
   statusList: string[];
@@ -59,8 +62,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
               private anomalyService: AnomalyService,
               private reportService: ReportService,
               private constantService: ConstantService,
+              private accountService: AccountService,
+              private eventService: EventService,
+              private companyAccessesService: CompanyAccessesService,
               private fileUploaderService: FileUploaderService,
-              private storageService: StorageService,
               private localeService: BsLocaleService,
               private modalService: BsModalService,
               private router: Router,
@@ -73,43 +78,42 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
 
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
-    });
-
     this.reportFilter = {
       period: []
     };
 
-    if (this.user && this.user.role === Roles.Pro) {
-      this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
-    }
-
     this.loading = true;
     this.loadingError = false;
-    combineLatest(
-      this.storageService.getLocalStorageItem(ReportFilterStorageKey),
-      this.constantService.getReportStatusList(),
-      this.route.paramMap
+    this.authenticationService.user.pipe(
+      take(1),
+      mergeMap(user => {
+        this.user = user;
+        return combineLatest([
+          this.constantService.getReportStatusList(),
+          this.route.paramMap,
+          this.route.queryParamMap,
+          iif(() => user && user.role === Roles.Pro, this.companyAccessesService.myAccesses(user), of([]))
+        ]);
+      })
     ).subscribe(
-      ([reportFilter, statusList, params]) => {
+      ([statusList, params, queryParams, userAccesses]) => {
 
+        this.reportFilter = this.reportService.currentReportFilter;
+        this.itemsPerPage = Number(queryParams.get('per_page')) || 20;
 
-        if (reportFilter) {
-          this.reportFilter = reportFilter;
-        }
-        const siret = params.get('siret');
-
-        if (siret) {
-          this.reportFilter = { ...this.reportFilter, siret};
+        this.siretUrlParam = params.get('siret');
+        if (this.siretUrlParam || this.user.role === Roles.Pro) {
+          this.reportFilter.siret = this.siretUrlParam;
         }
 
-        this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
-
+        this.userAccesses = userAccesses;
         this.statusList = statusList;
-        this.loadReportExtractUrl();
-        this.loadReports(params.get('pageNumber') ? Number(params.get('pageNumber')) : 1);
 
+        if (this.user.role !== Roles.Pro || this.userAccesses.length === 1 || this.reportFilter.siret) {
+          this.loadReports(Number(queryParams.get('page_number') || 1));
+        } else {
+          this.loading = false;
+        }
       },
       err => {
         this.loading = false;
@@ -134,30 +138,28 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   submitFilters() {
-    this.location.go('suivi-des-signalements/page/1');
-    this.storageService.setLocalStorageItem(ReportFilterStorageKey, this.reportFilter);
-    this.loadReportExtractUrl();
+    this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
     this.initPagination();
-
+    this.reportFilter.siret = this.reportFilter.siret ? this.reportFilter.siret.replace(/\s/g, '') : '';
     this.loadReports(1);
   }
 
   cancelFilters() {
-    this.reportFilter = new ReportFilter();
+    if (this.user.role === Roles.Pro) {
+      this.reportFilter = Object.assign(new ReportFilter(), { siret: this.reportFilter.siret });
+    } else {
+      this.reportFilter = new ReportFilter();
+    }
     this.submitFilters();
   }
 
   loadReports(page: number) {
     this.loading = true;
     this.loadingError = false;
-    this.storageService.getLocalStorageItem(ReportFilterStorageKey).pipe(
-      switchMap(reportFilter => {
-        return this.reportService.getReports(
-          (page - 1) * this.itemsPerPage,
-          this.itemsPerPage,
-          Object.assign(new ReportFilter(), reportFilter)
-        );
-      })
+    this.reportService.getReports(
+      (page - 1) * this.itemsPerPage,
+      this.itemsPerPage,
+      Object.assign(new ReportFilter(), this.reportFilter)
     ).subscribe(
       result => {
         this.loading = false;
@@ -200,7 +202,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   changePage(pageEvent: {page: number, itemPerPage: number}) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go(`suivi-des-signalements/page/${pageEvent.page}`);
+      this.location.go('suivi-des-signalements', `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
     }
   }
 
@@ -213,15 +215,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.setItem(ReportsScrollYStorageKey, window.scrollY.toString());
     }
-  }
-
-  addEvent(event$: Event, report: Report) {
-    event$.stopPropagation();
-    this.modalRef = this.modalService.show(
-      EventComponent,
-      {
-        initialState: {reportId: report.id, siret: report.company.siret}
-      });
   }
 
   updateReportOnModalHide() {
@@ -270,10 +263,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadReportExtractUrl() {
-    return this.reportService.getReportExtractUrl(this.reportFilter).subscribe(url => {
-      this.reportExtractUrl = url;
-      });
+  launchExtraction() {
+    this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
+      this.router.navigate(['mes-telechargements']);
+    });
   }
 
   getReportingDate(report: Report) {
@@ -334,5 +327,4 @@ export class ReportListComponent implements OnInit, OnDestroy {
       return {firstLine, secondLine, hasNext };
     }
   }
-
 }

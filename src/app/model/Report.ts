@@ -1,9 +1,10 @@
 import { Consumer } from './Consumer';
-import { Company } from './Company';
-import { Subcategory } from './Anomaly';
+import { CompanySearchResult } from './CompanySearchResult';
+import { CompanyKinds, Subcategory } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
+import { Company, Website } from './Company';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -20,7 +21,27 @@ export enum Step {
 
 
 export enum ReportStatus {
-  ClosedForPro = 'Clôturé'
+  ClosedForPro = 'Clôturé',
+  ToProcess = 'À traiter'
+}
+
+export class DraftReport {
+  category: string;
+  subcategories: Subcategory[];
+  companyData: CompanySearchResult | Website;
+  detailInputValues: DetailInputValue[];
+  uploadedFiles: UploadedFile[];
+  consumer: Consumer;
+  employeeConsumer: boolean;
+  contactAgreement: boolean;
+  retrievedFromStorage: boolean;
+  storedStep: Step;
+
+  get companyKind() {
+    if (this.subcategories && this.subcategories.length) {
+      return this.subcategories[this.subcategories.length - 1].companyKind || CompanyKinds.SIRET;
+    }
+  }
 }
 
 export class Report {
@@ -28,15 +49,13 @@ export class Report {
   category: string;
   subcategories: Subcategory[];
   company: Company;
+  website: Website;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
   employeeConsumer: boolean;
   contactAgreement: boolean;
-  internetPurchase: boolean;
-  retrievedFromStorage: boolean;
   creationDate: Date;
-  storedStep: Step;
   status: string;
 
   get consumerUploadedFiles() {

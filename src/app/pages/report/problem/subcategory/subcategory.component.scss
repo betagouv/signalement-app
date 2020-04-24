@@ -2,7 +2,7 @@
 
 .withSiblingSubcategories {
 
-  label, h4 {
+  label, h2 {
     color: $darker-grey;
   }
 
@@ -12,32 +12,10 @@
   background-color: $light-green;
   border-radius: $theme-border-more-radius;
 
-  label, h4 {
+  label, h2 {
     color: $black;
   }
 
-}
-
-.scrollNotification {
-  background-color: $lighter-blue;
-  position: fixed;
-  bottom: 0;
-  z-index: 99;
-  text-align: center;
-  right: 0;
-  left: 0;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 25px;
-  padding: 0.5em;
-  width: 175px;
-  border-radius: $theme-border-radius;
-  box-shadow: 0 10px 14px -5px rgba(8,80,162,0.43);
-  color: $blue;
-
-  img {
-    height: 20px;
-  }
 }
 
 hr {

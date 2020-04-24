@@ -291,7 +291,7 @@
         "MAG",
         "SIGN"
       ],
-      "message": "Vous avez été blessé avec un objet (jouet, vêtement ...)&#160;?" 
+      "message": "Vous avez été blessé avec un objet (jouet, vêtement...)&#160;?"
     },
     {
       "words": [
@@ -308,7 +308,7 @@
         "MAG",
         "SIGN"
       ],
-      "message": "Vous avez trouvé un corps étranger (morceau de verre, de plastique, une vis..) dans un aliment qui aurait pu vous blesser&#160;?" 
+      "message": "Vous avez trouvé un corps étranger (morceau de verre, de plastique, une vis...) dans un aliment qui aurait pu vous blesser&#160;?"
     },     
     {
       "words": [

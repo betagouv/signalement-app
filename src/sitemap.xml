@@ -2,62 +2,101 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr</loc>
+    <loc>https://signal.conso.gouv.fr</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://signal.conso.gouv.fr/coronavirus</loc>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/comment-ça-marche</loc>
+    <loc>https://signal.conso.gouv.fr/centre-aide/consommateur</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/qui-sommes-nous</loc>
+    <loc>https://signal.conso.gouv.fr/centre-aide/professionnel</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/vous-êtes-un-professionnel</loc>
+    <loc>https://signal.conso.gouv.fr/contact</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/contact</loc>
+    <loc>https://signal.conso.gouv.fr/qui-sommes-nous</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/pratique-d-hygiene</loc>
+    <loc>https://signal.conso.gouv.fr/cafe-restaurant</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/nourriture-et-boissons</loc>
+    <loc>https://signal.conso.gouv.fr/achat-magasin</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/materiel-et-objets</loc>
+    <loc>https://signal.conso.gouv.fr/services-aux-particuliers</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/prix-et-paiement</loc>
+    <loc>https://signal.conso.gouv.fr/telephonie-eau-gaz-electricite</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/publicite</loc>
+    <loc>https://signal.conso.gouv.fr/banque-assurance-mutuelle</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/services-apres-vente</loc>
+    <loc>https://signal.conso.gouv.fr/produits-objets</loc>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://signalconso.beta.gouv.fr/delai-de-retractation</loc>
+    <loc>https://signal.conso.gouv.fr/travaux-renovation</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/voyage-loisirs</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/immobilier</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/sante</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/voiture-vehicule</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/animaux</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/demarches-administratives</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/delai-de-retractation</loc>
     <priority>0.3</priority>
   </url>
 

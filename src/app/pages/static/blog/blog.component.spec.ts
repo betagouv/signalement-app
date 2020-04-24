@@ -4,6 +4,7 @@ import { BlogComponent } from './blog.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('BlogComponent', () => {
   let component: BlogComponent;
@@ -15,7 +16,8 @@ describe('BlogComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
+        ComponentsModule
       ]
     })
     .compileComponents();

@@ -1,0 +1,55 @@
+<app-banner title="Connexion"></app-banner>
+
+<main role="main">
+  <section class="section section-lightest-grey position-relative">
+    <div class="container max-width bg-white pt-3">
+      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="form-horizontal">
+        <div class="form-group row">
+          <div class="col-sm-3 control-label">
+            <label for="login" [class]="hasError(loginCtrl) ? 'error' : ''">
+              Email <span class="error">*</span>
+            </label>
+          </div>
+          <div class="col-sm-9">
+            <input [formControl]="loginCtrl" type="text" class="form-control" id="login" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3 control-label">
+            <label for="password" [class]="hasError(passwordCtrl) ? 'error' : ''">
+              Mot de passe <span class="error">*</span>
+            </label>
+          </div>
+          <div class="col-sm-9">
+            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
+          </div>
+        </div>
+        <div class="notification error mt-3" *ngIf="showErrors && loginForm.invalid">
+          <span *ngIf="loginCtrl.hasError('required')">
+            Veuillez renseigner votre email.<br />
+          </span>
+            <span *ngIf="passwordCtrl.hasError('required')">
+            Veuillez renseigner votre mot de passe.<br />
+          </span>
+        </div>
+        <div class="notification error mt-3" *ngIf="authenticationError">
+          {{authenticationError}}
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-lg btn-primary">
+              Se connecter
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="form-group row">
+        <div class="col-sm-12 text-center">
+          <a routerLink="{{isDgccrf ? '/connexion/perte-mot-de-passe/dgccrf' : '/connexion/perte-mot-de-passe'}}">Mot de passe oublié</a>
+        </div>
+      </div>
+      <p class="form-text text-muted text-center pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:support@signal.conso.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">support@signal.conso.gouv.fr</a>.</p>
+    </div>
+    <ngx-loading [show]="loading"></ngx-loading>
+  </section>
+</main>

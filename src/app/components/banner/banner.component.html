@@ -1,0 +1,16 @@
+<div class="banner text-center section-small section-primary" role="region">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <img src="/assets/images/icon_back_white.png" class="back pointer" (click)="back()" alt="page précédente" *ngIf="backButton"/>
+        <h1 class="text-center" *ngIf="title">
+          {{title}}
+        </h1>
+        <h2 class="text-center" *ngIf="subTitle">
+          {{subTitle}}
+        </h2>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

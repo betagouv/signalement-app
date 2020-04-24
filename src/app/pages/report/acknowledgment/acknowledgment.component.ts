@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-acknowledgment',
@@ -12,10 +12,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AcknowledgmentComponent implements OnInit, OnDestroy {
 
-  private unsubscribe = new Subject<void>();
-
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
+  companyKinds = CompanyKinds;
 
   constructor(private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService) { }
@@ -23,34 +22,29 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.step = Step.Acknowledgment;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(report => {
-        if (report) {
-          this.report = report;
+      .pipe(take(1))
+      .subscribe(draftReport => {
+        if (draftReport) {
+          this.draftReport = draftReport;
         } else {
           this.reportRouterService.routeToFirstStep();
         }
       });
-
-      setTimeout(() => {
-        const title: HTMLElement = document.querySelector('#title-thanks');
-
-        if (title) {
-          title.focus();
-          title.blur();
-        }
-
-      });
   }
 
   ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    this.reportStorageService.removeReportInProgress();
   }
 
   newReport() {
     this.reportStorageService.removeReportInProgress();
     this.reportRouterService.routeToFirstStep();
+  }
+
+  getReportLastSubcategory() {
+    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
+      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
+    }
   }
 
 }

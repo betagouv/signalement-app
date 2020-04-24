@@ -1,40 +1,30 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
+import { take } from 'rxjs/operators';
 import pages from '../../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit, OnDestroy {
+export class CategoryComponent implements OnInit {
 
-  private unsubscribe = new Subject<void>();
+  illustrations = Illustrations;
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
 
   anomalies: Anomaly[];
   showSecondaryCategories: boolean;
 
   internetInformation: Information;
-
-  illustrations = [
-    { title: 'Vous avez rencontré un problème avec une entreprise&#160;?', picture: 'picture-problem.svg' },
-    { title: 'Faites un signalement avec SignalConso.', picture: 'picture-alert.svg' },
-    { title: "L'entreprise est prévenue et peut intervenir.", picture: 'picture-pro.svg' },
-    { title: 'La répression des fraudes intervient si c’est nécessaire.', picture: 'picture-inspect.svg' },
-  ]
 
   constructor(private titleService: Title,
               private meta: Meta,
@@ -49,21 +39,14 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
     this.step = Step.Category;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(report => this.report = report);
+      .pipe(take(1))
+      .subscribe(draftReport => this.draftReport = draftReport);
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
     const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
     if (anomaly) {
       this.internetInformation = anomaly.information;
     }
-
-    Utils.focusAndBlurOnTop();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   primaryCategoriesOrderByRank() {
@@ -93,19 +76,20 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   selectAnomaly(anomaly: Anomaly) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
-    this.report = new Report();
-    this.report.category = anomaly.category;
-    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+    this.draftReport = new DraftReport();
+    this.draftReport.category = anomaly.category;
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
   restoreStoredReport() {
-    this.reportStorageService.changeReportInProgressFromStep(this.report, this.report.storedStep);
-    this.reportRouterService.routeForward(this.report.storedStep);
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.draftReport.storedStep);
+    this.reportRouterService.routeForward(this.draftReport.storedStep);
   }
 
   removeStoredReport() {
     this.reportStorageService.removeReportInProgressFromStorage();
+    this.draftReport = undefined;
   }
 
   scrollToElement($element): void {
@@ -114,19 +98,29 @@ export class CategoryComponent implements OnInit, OnDestroy {
 }
 
 
+export const Illustrations = [
+  { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'picture-problem.svg' },
+  { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'picture-alert.svg' },
+  { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'picture-pro.svg' },
+  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'picture-inspect.svg' },
+];
+
 @Component({
   selector: 'app-illustration-card',
   template: `
-    <div class="card">
+    <div class="card" [ngClass]="firstCard ?'first-card' : lastCard ? 'last-card' : ''">
+      <img src="/assets/images/{{illustration.picture}}" class="card-img-top" alt="Illustration" />
       <div class="card-body">
-        <h6 class="card-title" [innerHTML]="illustration.title"></h6>
+        <div class="card-title" [innerHTML]="illustration.title"></div>
       </div>
-      <img src="/assets/images/{{illustration.picture}}" class="card-img-bottom" alt="Illustration" />
     </div>
   `,
+  styleUrls: ['./category.component.scss']
 })
 export class IllustrationCardComponent {
 
   @Input() illustration: { title: string, picture: string };
+  @Input() firstCard = false;
+  @Input() lastCard = false;
 
 }

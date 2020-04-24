@@ -25,12 +25,16 @@ export class AnomalyService {
       .find(predicate);
   }
 
-  getAnomalyByCategory(category: String) {
+  getAnomalyByCategory(category: string) {
     return this.getAnomalyBy(anomaly => anomaly.category === category);
   }
 
-  getAnomalyByCategoryId(categoryId: String) {
+  getAnomalyByCategoryId(categoryId: string) {
     return this.getAnomalyBy(anomaly => anomaly.categoryId === categoryId);
+  }
+
+  getCategories() {
+    return this.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
   }
 
 }

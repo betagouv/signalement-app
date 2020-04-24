@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Report, Step } from '../../../model/Report';
+import { Component, OnInit } from '@angular/core';
+import { DraftReport, Step } from '../../../model/Report';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -7,21 +7,19 @@ import { FileUploaderService } from '../../../services/file-uploader.service';
 import { UploadedFile } from '../../../model/UploadedFile';
 import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import Utils from '../../../utils';
+import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
   styleUrls: ['./confirmation.component.scss']
 })
-export class ConfirmationComponent implements OnInit, OnDestroy {
-
-  private unsubscribe = new Subject<void>();
+export class ConfirmationComponent implements OnInit {
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
+  companyKinds = CompanyKinds;
 
   confirmationForm: FormGroup;
 
@@ -40,22 +38,15 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.step = Step.Confirmation;
     this.reportStorageService.retrieveReportInProgressFromStorage()
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(take(1))
       .subscribe(report => {
         if (report) {
-          this.report = report;
+          this.draftReport = report;
           this.initConfirmationForm();
         } else {
           this.reportRouterService.routeToFirstStep();
         }
       });
-
-      Utils.focusAndBlurOnBackButton();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   initConfirmationForm() {
@@ -70,17 +61,18 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
-      this.reportService.createReport(this.report)
+      this.reportService.createReport(this.draftReport)
         .subscribe(
         result => {
           this.loading = false;
-          this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+          this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
           this.reportStorageService.removeReportInProgressFromStorage();
           this.reportRouterService.routeForward(this.step);
         },
         error => {
           this.loading = false;
           this.loadingError = true;
+          throw error;
         });
 
     }
@@ -91,8 +83,8 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   }
 
   getReportLastSubcategory() {
-    if (this.report && this.report.subcategories && this.report.subcategories.length) {
-      return this.report.subcategories[this.report.subcategories.length - 1];
+    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
+      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
     }
   }
 

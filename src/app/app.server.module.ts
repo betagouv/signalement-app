@@ -5,6 +5,7 @@ import { ServerModule, ServerTransferStateModule } from '@angular/platform-serve
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AbTestsServerModule } from 'angular-ab-tests';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -16,6 +17,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     NoopAnimationsModule,
     ModuleMapLoaderModule,
     ServerTransferStateModule,
+    AbTestsServerModule
   ],
 })
 export class AppServerModule {

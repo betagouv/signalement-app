@@ -23,7 +23,7 @@
         - label: Date Limite de Consommation (DLC)
           rank: 2
           type: DATE
-          fileLabel: Photo de la DLC / du produit / de la marque
+      fileLabel: Photo de la DLC / du produit / de la marque
     - title: Non
       information:
         title: Le commerçant n'a pas le droit de vendre un produit si la date limite de consommation (DLC) est passée.
@@ -37,7 +37,7 @@
   description: La date des oeufs est une date de consommation recommandée (DCR).
               <br/> Les oeufs ne peuvent être vendus au-delà de 7 jours avant la DCR.
   detailInputs:
-    - label: Quel est le problème?
+    - label: Quel est le problème ?
       rank: 1
       type: RADIO
       options:
@@ -50,4 +50,4 @@
       rank: 3
       type: DATE
       defaultValue: SYSDATE
-      fileLabel: Photo
+  fileLabel: Photo

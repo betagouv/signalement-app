@@ -8,7 +8,7 @@ D’abord, les **nouvelles catégories sont arrivées** ! Vous pouvez maintenant
 
 ![accueil](/assets/blog/2019/10/13/patchnote-septembre/accueil.PNG)
 
-Deuxième nouveauté : **SignalConso est maintenant complètement utilisable au clavier**, et nous avons aussi intégré **la description auditive** pour permettre à tous d’utiliser le site ! Ces éléments entrent dans le cadre du [Référentiel Général d'Accessibilité pour les Administrations (RGAA)](http://references.modernisation.gouv.fr/accessibilite-numerique). N’hésitez pas à nous [envoyer un email](mailto:contact@signalconso.beta.gouv.fr) si vous constatez un problème et nous le corrigerons rapidement.
+Deuxième nouveauté : **SignalConso est maintenant complètement utilisable au clavier**, et nous avons aussi intégré **la description auditive** pour permettre à tous d’utiliser le site ! Ces éléments entrent dans le cadre du [Référentiel Général d'Accessibilité pour les Administrations (RGAA)](http://references.modernisation.gouv.fr/accessibilite-numerique). N’hésitez pas à nous [envoyer un email](mailto:contact@signal.conso.gouv.fr) si vous constatez un problème et nous le corrigerons rapidement.
 
 Le mois de septembre a aussi été l’occasion de **rencontrer les professionnels** et de **récolter leur avis** sur le dispositif, et plus particulièrement sur l’espace professionnel qui leur est dédié. Pour l’instant, pas de nouveautés à dévoiler, mais sachez que **les discussions ont été enrichissantes**. Rendez-vous bientôt sur le Blog SignalConso pour tout découvrir !
 

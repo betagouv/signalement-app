@@ -1,0 +1,19 @@
+@import "../../../../theme/variables";
+
+.card-body {
+  padding-bottom: 0;
+}
+
+.item {
+  border-top: 1px solid $theme-border-lighter;
+  padding: 1em 0;
+
+  &:hover {
+    background: $lightest-grey;
+  }
+}
+
+
+input + input {
+  margin-top: 0.5em;
+}

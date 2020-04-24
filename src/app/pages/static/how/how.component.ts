@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import Utils from '../../../utils';
+import { Illustrations } from '../../report/category/category.component';
 
 @Component({
   selector: 'app-how',
@@ -10,15 +10,14 @@ import Utils from '../../../utils';
 })
 export class HowComponent implements OnInit {
 
+  illustrations = Illustrations;
+
   constructor(private titleService: Title,
               private meta: Meta) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.how.title);
     this.meta.updateTag({ name: 'description', content: pages.how.description });
-
-    Utils.focusAndBlurOnTop();
-
   }
 
 }

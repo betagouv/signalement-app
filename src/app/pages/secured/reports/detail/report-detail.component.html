@@ -1,21 +1,12 @@
-<div class="banner text-center section section-primary" role="region">
-  <div class="container">
-    <div class="row">
-      <div class="col-2 col-sm-1 text-right">
-        <img src="/assets/images/icon_back_white.png" class="back pointer" (click)="back()" alt="page précédente"/>
-      </div>
-      <div class="col-10 col-sm-11">
-        <h1 class="text-center">
-          Détail du signalement
-          <a [routerLink]="['/vous-êtes-un-professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
-        </h1>
-        <h5 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
-          {{report?.id}}
-        </h5>
-      </div>
-    </div>
-  </div>
-</div>
+<app-banner [backButton]="backEnabled()">
+  <h1 class="text-center">
+    Détail du signalement
+    <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
+  </h1>
+  <h2 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
+    {{report?.id}}
+  </h2>
+</app-banner>
 
 <section class="section section-white position-relative pb-0">
   <div class="container">
@@ -28,12 +19,12 @@
       <ng-container *ngIf="report">
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-          <h5>Statut : {{report.status}}</h5>
+          <h3>Statut : {{report.status}}</h3>
           <hr />
         </ng-container>
 
         <ng-container>
-          <h5>Problème</h5>
+          <h3>Problème</h3>
           <div class="row">
             <div class="col-12">
               {{report.category}}
@@ -45,78 +36,75 @@
             </div>
           </div>
           <hr />
-          <h5>Description</h5>
+          <h3>Description</h3>
           <div class="row">
             <div class="col-12">
               <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
                 <span [innerHTML]="detailInputValue.label"></span>
                 &nbsp;<span [innerHTML]="detailInputValue.value"></span>
               </div>
-              <div *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length;">
-                Pièce(s) jointe(s) :
-                <div class="col-12">
-                  <table class="table table-sm">
-                    <tbody>
-                      <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
-                        <td class="text-left" *ngIf="!uploadedFile.loading">
-                          <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                            <span *ngIf="uploadedFile.id">
-                              {{uploadedFile.filename}}
-                            </span>
-                          </a>
-                        </td>
-                        <td class="text-right pointer" *appPermission="permissions.deleteFile">
-                          <img class="remove" alt="Icône du bouton suppression" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
-                        </td>
-                        <ng-template #removeTemplate>
-                          <div class="modal-body text-center">
-                            <p>Voulez-vous supprimer cette pièce jointe ?</p>
-                            <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
-                            &nbsp;
-                            <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
-                          </div>
-                        </ng-template>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
             </div>
           </div>
+          <ng-container *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length">
+            <hr />
+            <h3 *ngIf="report.consumerUploadedFiles.length === 1">Pièce jointe fournie par le consommateur</h3>
+            <h3 *ngIf="report.consumerUploadedFiles.length > 1">Pièces jointes fournies par le consommateur</h3>
+            <div class="row">
+              <div class="col-12">
+                <table class="table table-sm">
+                  <tbody>
+                    <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
+                      <td class="text-left pl-2">
+                        <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                          <span *ngIf="uploadedFile.id">
+                            {{uploadedFile.filename}}
+                          </span>
+                        </a>
+                      </td>
+                      <td class="text-right pointer" *appPermission="permissions.deleteFile">
+                        <img class="remove" alt="Icône du bouton suppression" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
+                      </td>
+                      <ng-template #removeTemplate>
+                        <div class="modal-body text-center">
+                          <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                          &nbsp;
+                          <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
+                        </div>
+                      </ng-template>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ng-container>
         </ng-container>
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-          <hr />
-          <h5>Entreprise</h5>
-          <div class="row">
-            <div class="col-10">
-              Siret : {{report.company.siret}}
-              <br/>
-              Nom : {{report.company.name}}
-              <br/>
-              Adresse :
-              <span *ngIf="report.company.line1">{{report.company.line1}}</span>
-              <span *ngIf="report.company.line2"> - {{report.company.line2}}</span>
-              <span *ngIf="report.company.line3"> - {{report.company.line3}}</span>
-              <span *ngIf="report.company.line4"> - {{report.company.line4}}</span>
-              <span *ngIf="report.company.line5"> - {{report.company.line5}}</span>
-              <span *ngIf="report.company.line6"> - {{report.company.line6}}</span>
-              <span *ngIf="report.company.line7"> - {{report.company.line7}}</span>
-            </div>
-            <div class="col-2 text-right" *appPermission="permissions.updateReport">
-              <button type="button" class="btn btn-outline-primary" (click)="openModal(companySearch)">Corriger</button>
-            </div>
-            <ng-template #companySearch>
-              <div class="modal-body text-center">
-                <nav class="nav nav-tabs nav-justified mb-3">
-                  <a class="nav-item nav-link" [ngClass]="searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Siret</h4></a>
-                  <a class="nav-item nav-link" [ngClass]="!searchBySiret ? 'active' : ''" (click)="changeCompanySearchTab()"><h4>Adresse</h4></a>
-                </nav>
-                <ng-container *ngIf="searchBySiret">
+          <ng-container *ngIf="report.company.name">
+            <hr />
+            <h3>
+              Entreprise
+              <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
+                 (click)="openModal(companySearch)"
+                 *appPermission="permissions.updateReport">
+                edit
+              </i>
+            </h3>
+            <div class="row">
+              <div class="col-12">
+                SIRET : {{report.company.siret}}
+                <br/>
+                Nom : {{report.company.name}}
+                <br/>
+                Adresse : {{report.company.address}}
+              </div>
+              <ng-template #companySearch>
+                <div class="modal-body text-center">
                   <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
-                    <input [formControl]="siretCtrl" placeholder="Siret de l'entreprise" />
+                    <input [formControl]="siretCtrl" placeholder="SIRET de l'entreprise" />
 
-                    <div class="notification error" *ngIf="!companyForSiret && loadingError">
+                    <div class="notification error" *ngIf="!companySearchBySiretResult && loadingError">
                       Une erreur technique s'est produite<br />
                     </div>
 
@@ -125,20 +113,20 @@
                       Rechercher
                     </button>
                   </form>
-                  <div *ngIf="companyForSiret">
+                  <div *ngIf="companySearchBySiretResult">
                     <hr />
-                    <div *ngIf="!companyForSiret.siret">
+                    <div *ngIf="!companySearchBySiretResult.siret">
                       Aucun établissement trouvé
                     </div>
-                    <div *ngIf="companyForSiret.siret">
+                    <div *ngIf="companySearchBySiretResult.siret">
                       <p class="company">
-                        <strong *ngIf="companyForSiret.line1">{{companyForSiret.line1}}<br /></strong>
-                        <strong *ngIf="companyForSiret.line2">{{companyForSiret.line2}}<br /></strong>
-                        <span *ngIf="companyForSiret.line3">{{companyForSiret.line3}}<br /></span>
-                        <span *ngIf="companyForSiret.line4">{{companyForSiret.line4}}<br /></span>
-                        <span *ngIf="companyForSiret.line5">{{companyForSiret.line5}}<br /></span>
-                        <span *ngIf="companyForSiret.line6">{{companyForSiret.line6}}<br /></span>
-                        <span *ngIf="companyForSiret.line7">{{companyForSiret.line7}}<br /></span>
+                        <strong *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}<br /></strong>
+                        <strong *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}<br /></strong>
+                        <span *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}<br /></span>
+                        <span *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}<br /></span>
+                        <span *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}<br /></span>
+                        <span *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}<br /></span>
+                        <span *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}<br /></span>
                       </p>
 
                       <div class="notification error" *ngIf="loadingError">
@@ -148,39 +136,36 @@
                       <hr />
                       <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
                       &nbsp;
-                      <button type="button" class="btn btn-primary" (click)="changeCompany(companyForSiret)">Valider</button>
+                      <button type="button" class="btn btn-primary" (click)="changeCompany(companySearchBySiretResult)">Valider</button>
                     </div>
                   </div>
-                </ng-container>
-                <ng-container *ngIf="!searchBySiret">
-                  <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
-                    <input [formControl]="nameCtrl" placeholder="Nom de l'entreprise" id="name" />
-                    <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
-                    <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
-                    <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
-                    <input [formControl]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
-                    <input [formControl]="cityCtrl" placeholder="Ville" id="city" />
-
-                    <div class="notification error" *ngIf="loadingError">
-                      Une erreur technique s'est produite<br />
-                    </div>
-
-                    <hr />
-                    <button type="submit" class="btn btn-primary mt-2" id="submitCompanyAddressForm" [disabled]="companyAddressForm.invalid">
-                      Enregistrer
-                    </button>
-                  </form>
-                </ng-container>
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="report.website.url">
+            <hr />
+            <h3>Site internet</h3>
+            <div class="row">
+              <div class="col-12">
+                {{report.website.url}}
               </div>
-            </ng-template>
-          </div>
+            </div>
+          </ng-container>
         </ng-container>
 
         <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
           <hr />
-          <h5>Consommateur</h5>
+          <h3>
+            Consommateur
+            <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
+               (click)="openModal(updateConsumer)"
+               *appPermission="permissions.updateReport">
+              edit
+            </i>
+          </h3>
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               Nom : {{report.consumer.lastName}}
               <br />
               Prénom : {{report.consumer.firstName}}
@@ -188,9 +173,6 @@
               Email : {{report.consumer.email}}
               <br />
               Accord pour contact : {{report.contactAgreement ? 'oui' : 'non'}}
-            </div>
-            <div class="col-2 text-right" *appPermission="permissions.updateReport">
-              <button type="button" class="btn btn-outline-primary" (click)="openModal(updateConsumer)">Corriger</button>
             </div>
             <ng-template #updateConsumer>
               <div class="modal-body">
@@ -242,9 +224,9 @@
 
         <ng-container *appRole="[roles.Pro]">
           <hr />
-          <h5 *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur ne souhaite pas être contacté</h5>
+          <h3 *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur ne souhaite pas être contacté</h3>
           <ng-template #contactAgreement>
-            <h5>Le consommateur a donné son accord pour être contacté</h5>
+            <h3>Le consommateur a donné son accord pour être contacté</h3>
             <div class="row">
               <div class="col-12">
                 Nom : {{report.consumer.lastName}}
@@ -259,11 +241,11 @@
 
         <ng-container *ngIf="getReportResponse()">
           <hr />
-          <h5 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h5>
+          <h3 *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h3>
           <ng-template #titleAnswerNoPro>
-            <h5>
+            <h3>
               Réponse apportée par l'entreprise
-            </h5>
+            </h3>
           </ng-template>
           <div class="row" id="proAnswer">
             <div class="col-12" [ngSwitch]="getReportResponse().responseType">
@@ -274,37 +256,65 @@
               <br />Réponse à la DGCCRF : {{getReportResponse().dgccrfDetails}}
             </div>
           </div>
-          <div *ngIf="report.professionalUploadedFiles && report.professionalUploadedFiles.length">
-            Pièce(s) jointe(s) à la réponse :
-            <div class="col-12" *ngFor="let uploadedFile of report.professionalUploadedFiles">
-              <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                          <span *ngIf="uploadedFile.id">
-                            {{uploadedFile.filename}}
-                          </span>
-              </a>
+        </ng-container>
+        <ng-container *ngIf="report.professionalUploadedFiles && report.professionalUploadedFiles.length">
+          <hr />
+          <h3 *ngIf="report.professionalUploadedFiles.length === 1">Pièce jointe fournie par l'entreprise</h3>
+          <h3 *ngIf="report.professionalUploadedFiles.length > 1">Pièces jointes fournies par l'entreprise</h3>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-sm">
+                <tbody>
+                <tr *ngFor="let uploadedFile of report.professionalUploadedFiles">
+                  <td class="text-left pl-2">
+                    <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                      <span *ngIf="uploadedFile.id">
+                        {{uploadedFile.filename}}
+                      </span>
+                    </a>
+                  </td>
+                  <td class="text-right pointer" *appPermission="permissions.deleteFile">
+                    <img class="remove" alt="Icône du bouton suppression" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
+                  </td>
+                  <ng-template #removeTemplate>
+                    <div class="modal-body text-center">
+                      <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
+                    </div>
+                  </ng-template>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </ng-container>
 
         <ng-container>
           <hr />
-          <h5>Historique</h5>
+          <h3>Historique</h3>
           <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
             <div class="col-12" *ngFor="let event of events; let eventIndex = index">
-              <ng-container *ngIf="event.details && event.details.description; else noDescription">
+              <ng-container *ngIf="event.data.details && event.data.details.description; else noDescription">
                 <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
                   <span class="collapsed-icon">&#43;</span>
                   <span class="uncollapsed-icon">&#8722;</span>
-                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                  Le {{event.data.creationDate | date : constants.DateTimeFormat}}
+                  <ng-template *ngTemplateOutlet="eventUser; context: {$implicit: event}"></ng-template> : {{event.data.action.value}}
                 </a>
                 <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
-                  {{event.details.description}}
+                  {{event.data.details.description}}
                 </div>
               </ng-container>
               <ng-template #noDescription>
                 <span>
-                  Le {{event.creationDate | date : constants.DateTimeFormat}} : {{event.action.value}}
+                  Le {{event.data.creationDate | date : constants.DateTimeFormat}}
+                  <ng-template *ngTemplateOutlet="eventUser; context: {$implicit: event}"></ng-template> : {{event.data.action.value}}
                 </span>
+              </ng-template>
+              <ng-template #eventUser let-event>
+                <small *ngIf="event.user">[{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})]</small>
               </ng-template>
             </div>
             <div class="col-12">
@@ -365,7 +375,7 @@
         <div class="pb-3 text-center" *ngIf="!responseForm; else proAnswer">
           <p>
             Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.
-            <a [routerLink]="['/vous-êtes-un-professionnel']" fragment="la-reponse" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
+            <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="la-reponse" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
           </p>
           <div class="mb-4">
             <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
@@ -379,7 +389,7 @@
                 <label class="text-center" [class]="hasError(responseTypeCtrl) ? 'error' : ''">
                   Pouvez-vous préciser votre réponse ? <span class="error">*</span>
                 </label>
-                <div [class]="getResponseTypeClass(reportResponseTypes.Accepted)">
+                <div [class]="getTypeClass(reportResponseTypes.Accepted)">
                   <div class="row pb-2 pt-2">
                     <div class="col-2 col-sm-1 text-right pr-1">
                       <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
@@ -389,7 +399,7 @@
                     </div>
                   </div>
                 </div>
-                <div [class]="getResponseTypeClass(reportResponseTypes.Rejected)">
+                <div [class]="getTypeClass(reportResponseTypes.Rejected)">
                   <div class="row pb-2 pt-2">
                     <div class="col-2 col-sm-1 text-right pr-1">
                       <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
@@ -399,7 +409,7 @@
                     </div>
                   </div>
                 </div>
-                <div [class]="getResponseTypeClass(reportResponseTypes.NotConcerned)">
+                <div [class]="getTypeClass(reportResponseTypes.NotConcerned)">
                   <div class="row pb-2 pt-2">
                     <div class="col-2 col-sm-1 text-right pr-1">
                       <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
@@ -421,20 +431,23 @@
                   </label>
                   <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3" placeholder="Cette réponse sera envoyée automatiquement par mail au consommateur et pourra être consultée par la DGCCRF.">
                   </textarea>
+                  <p class="note">
+                    Nous vous demandons de rester courtois dans votre réponse. Les menaces et insultes n'ont pas leur place dans SignalConso !
+                  </p>
                 </div>
 
                 <hr />
 
                 <div class="form__group pt-2">
                   <label for="proAnswerDgccrfInput">
-                    Vous pouvez également, si vous le souhaitez, apporter une précision <u>à l'attention de la DGCCRF</u> qui ne sera pas transmise au consommateur
+                    Vous pouvez également, si vous le souhaitez, apporter une précision <b>à l'attention de la DGCCRF</b> qui ne sera pas transmise au consommateur
                   </label>
                   <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3" placeholder="Cette réponse pourra être consultée par la DGCCRF uniquement.">
                   </textarea>
                 </div>
 
                 <div class="form__group">
-                  <app-attachments label="Pièces jointes <u>visibles uniquement par la DGCCRF</u>"
+                  <app-attachments label="Pièces jointes <b>visibles uniquement par la DGCCRF</b>"
                                    [uploadedFiles]="uploadedFiles"
                                    [origin]="fileOrigins.Professional">
                   </app-attachments>
@@ -462,14 +475,138 @@
           </div>
         </ng-template>
       </div>
-      <div class="notification success" *ngIf="responseSuccess">
-        Votre réponse a bien été prise en compte, nous vous en remercions.
+    </ng-container>
+
+    <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+      <div *ngIf="report">
+        <div class="pb-3 text-center" *ngIf="!actionForm; else actionFormTpl">
+          <div class="mb-4">
+            <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.DGCCRF]">
+              Ajouter des informations DGCCRF
+            </button>
+            <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.Admin]">
+              Ajouter des informations
+            </button>
+          </div>
+        </div>
+        <ng-template #actionFormTpl>
+          <div class="notification">
+            <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
+
+              <div class="form__group">
+                <label class="text-center" [class]="hasError(actionTypeCtrl) ? 'error' : ''">
+                  Pouvez-vous préciser ? <span class="error">*</span>
+                </label>
+                <div [class]="getTypeClass(eventActionValues.Comment)">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="commentAction" class="label-inline pointer">Commentaire (interne à la DGCCRF)</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="consumerAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par le consommateur</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="proAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par l'entreprise</label>
+                    </div>
+                  </div>
+                </div>
+                <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
+                  <div class="row pb-2 pt-2">
+                    <div class="col-2 col-sm-1 text-right pr-1">
+                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
+                    </div>
+                    <div class="col-10 col-sm-11 pl-1">
+                      <label for="controlAction" class="label-inline pointer">Contrôle effectué (interne à la DGCCRF)</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container *ngIf="actionTypeCtrl.valid">
+
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="commentInput" [class]="hasError(detailCtrl) ? 'error' : ''">
+                        Commentaire <span class="error">*</span>
+                      </label>
+                      <textarea id="commentInput" [formControl]="detailCtrl"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ConsumerAttachments">
+                  <app-attachments label="Pièces jointes fournies par le consommateur (visibles par l'entreprise et la DGCCRF)"
+                                   [uploadedFiles]="uploadedFiles"
+                                   [origin]="fileOrigins.Consumer">
+                  </app-attachments>
+                </div>
+
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ProfessionalAttachments">
+                  <app-attachments label="Pièces jointes fournies par l'entreprise (visibles par l'entreprise et la DGCCRF)"
+                                   [uploadedFiles]="uploadedFiles"
+                                   [origin]="fileOrigins.Professional">
+                  </app-attachments>
+                </div>
+
+                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="controlInput">
+                        Détail du contrôle (facultatif)
+                      </label>
+                      <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="notification error" *ngIf="showErrors && actionForm.invalid">
+                  Veuillez renseigner les champs obligatoires.<br />
+                </div>
+
+                <div class="notification error" *ngIf="loadingError">
+                  Une erreur technique s'est produite<br />
+                </div>
+
+                <div class="mt-4 text-center">
+                  <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideActionForm()">Annuler</button>
+                  &nbsp;
+                  <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                    Envoyer
+                  </button>
+                </div>
+
+              </ng-container>
+            </form>
+            <ngx-loading [show]="loading"></ngx-loading>
+          </div>
+        </ng-template>
+        <div class="notification success" *ngIf="responseSuccess">
+          Votre saisie a bien été prise en compte, nous vous en remercions.
+        </div>
       </div>
     </ng-container>
   </div>
 </section>
 
-<div class="container pb-3" *ngIf="report">
+<div class="container pb-3" *ngIf="report && backEnabled()">
   <div class="row">
     <div class="col-12 pointer" (click)="back()">
       <img src="/assets/images/icon_back.png" class="back pointer" alt="page précédente"/>

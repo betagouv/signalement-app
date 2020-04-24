@@ -6,7 +6,7 @@
   box-shadow: $theme-box-shadow;
   background: $white;
   padding: 1.5em;
-  max-width: 32em;
+  max-width: 100%;
 
   > :first-child {
     margin-top: 0;
@@ -29,4 +29,8 @@
       margin-left: 1em;
     }
   }
+}
+
+.modal-dialog {
+  max-width: 680px !important;
 }

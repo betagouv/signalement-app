@@ -1,28 +1,61 @@
 @import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
-.number {
-  font-size: 2em;
-  padding-right: 10px;
+.card {
+
+  border: none;
+
+  .card-body {
+    padding: 0 5px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .step-number {
+    width: 100%;
+    margin: 0;
+
+    font-size: 80px;
+
+    @media #{$smaller-than-phablet} {
+      font-size: 60px;
+      line-height: 45px;
+      text-align: center;
+    }
+  }
+
+  h2 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .flex-center {
+    display:flex;
+    align-items: center;
+  }
 }
 
-.arrow {
-  color: $primary;
-  font-size: 100px;
-  font-weight: bold;
+.container {
+  border: 1px solid rgba(28, 28, 28, 0.125);
+  border-radius: 0.25rem;
+  max-width: min(750px, 95%);
 }
 
-.step {
-  max-width: 750px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 2px;
-  -webkit-box-shadow: 0 1px 2px rgba(201, 211, 223, .2);
-  box-shadow: 0 1px 2px rgba(201, 211, 223, .2);
-  border: 1px solid #c9d3df;
-  padding: 1em;
+.nav-tabs {
+  border-bottom: 1px solid $blue;
 }
 
-.steps img {
-  margin-bottom: 20px;
-  margin-top: 20px;
+.nav-link {
+  border: 0;
+  color: $blue !important;
+  font-size: 1.25rem;
+
+  &.active {
+    color: $white !important;
+    background-color: $blue;
+  }
 }

@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppRoleDirective } from '../../directives/app-role.directive';
-import { AppPermissionDirective } from '../../directives/app-permission.directive';
+import { AppRoleDirective } from '../../directives/app-role/app-role.directive';
+import { AppPermissionDirective } from '../../directives/app-permission/app-permission.directive';
 import { AccountMenuComponent } from './account-menu/account-menu.component';
 import { AuthenticationService } from '../../services/authentication.service';
 import { of } from 'rxjs';
@@ -44,7 +44,7 @@ describe('HeaderComponent', () => {
 
     it('should display 2 menu items and an authentication button when no user is authenticated', () => {
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(2);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
       expect(nativeElement.querySelector('.nav-item > button').textContent.trim()).toEqual('Espace pro');
     });
   });
@@ -62,7 +62,7 @@ describe('HeaderComponent', () => {
     it('should display 3 menu items and an account button', () => {
       const nativeElement = fixture.nativeElement;
 
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(4);
       expect(nativeElement.querySelector('.nav-item button').textContent.trim()).toEqual('Compte');
     });
   });
@@ -80,7 +80,7 @@ describe('HeaderComponent', () => {
     it('should display 2 menu items and an account button', () => {
       const nativeElement = fixture.nativeElement;
 
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(2);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
       expect(nativeElement.querySelector('.nav-item button').textContent.trim()).toEqual('Compte');
     });
   });
@@ -98,7 +98,7 @@ describe('HeaderComponent', () => {
     it('should display 2 menu items and an account button', () => {
       const nativeElement = fixture.nativeElement;
 
-      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(2);
+      expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
       expect(nativeElement.querySelector('.nav-item button').textContent.trim()).toEqual('Compte');
     });
   });

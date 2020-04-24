@@ -1,0 +1,48 @@
+- title: Je n'ai pas pu payer avec des espèces
+  subcategoriesTitle: Pour quelle raison a-t-on refusé que vous payez en espèces&#160;?
+  subcategories:
+    - title: Les espèces sont systématiquement refusées
+      description: 'Votre droit : les billets et les pièces en euros doivent être obligatoirement acceptés en France.'
+    - title: Je n'avais pas la monnaie
+      information:
+        content: C'est à vous de faire l'appoint. Un commerçant a le droit refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
+        outOfScope: true
+    - title: Mes pièces / billets étaient en mauvais état
+      information:
+        content: Le paiement en pièces ou billets en mauvais état peut être refusé. <br /> "Vous pouvez échanger vos billets abîmés auprès d'agence bancaire comme la Banque de France."
+        outOfScope: true
+    - title: Je souhaitais payer pour un montant de 1 000 euros (ou plus) ou donner plus de 50 pièces 
+      information:
+        content: Il est interdit pour un commerçant d'accepter des paiements en espèces de plus de 1 000 euros. Vous devez trouver un autre moyen de paiement.
+               <br/> Un commerçant peut également refuser un paiement en espèces si celui-ci est composé de plus de 50 pièces.
+        outOfScope: true
+    - title: Autre raison
+- title: Je n'ai pas pu payer par carte bancaire ou par chèque
+  subcategoriesTitle: Pour quelle raison a-t-on refusé que vous payez par carte bancaire ou par chèque&#160;?
+  subcategories:
+    - title: Il y a un minimum d'achat
+      example: 'Exemple : carte bancaire acceptée à partir de 15 euros'
+      subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
+      subcategories:
+        - title: Oui
+          example: 'Exemple : sur une affiche au niveau des caisses'
+          information:
+            content: Le commerçant a le droit d''exiger un minimum d''achat pour les paiements par carte bancaire ou par chèque.
+                    <br/> Ce minimum d''achat doit être indiqué très visiblement. Avec un affichage à l''entrée ou à la caisse par exemple.
+                  <br/> Si le prix n''atteint pas le minimum d''achat, vous devez trouver un autre moyen de paiement.
+                  <br/> Vous pouvez également directement expliquer au commerçant pourquoi ce minimum d''achat ne vous arrange pas. 
+            outOfScope: true
+        - title: Non
+    - title: Les cartes bleues ou les chèques sont systématiquement refusés
+      subcategoriesTitle: Le refus de la carte bleue ou des chèques est-il affiché&#160;?
+      subcategories:
+        - title: Oui
+          example: 'Exemple : sur une affiche au niveau des caisses'
+          information:
+            content: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
+                   <br/> Il doit l''indiquer très visiblement au consommateur. Avec un affichage à l''entrée ou à la caisse par exemple.
+            outOfScope: true
+        - title: Non
+    - title: Autre raison
+      example: 'Exemple : problème avec le terminal de paiement'
+- title: Autre problème pour payer

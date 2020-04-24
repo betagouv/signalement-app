@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DGCCRFComponent } from './dgccrf.component';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('HowComponent', () => {
   let component: DGCCRFComponent;
@@ -8,7 +9,10 @@ describe('HowComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DGCCRFComponent ]
+      declarations: [ DGCCRFComponent ],
+      imports: [
+        ComponentsModule
+      ]
     })
     .compileComponents();
   }));
