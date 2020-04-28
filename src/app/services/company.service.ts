@@ -301,6 +301,24 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bbooking(\.com)?\b/i,
+      results: [
+        {
+          "siret": "84455159800015",
+          "nom_raison_sociale": "PMDE BOOKING.COM BV",
+          "l1_normalisee": "BOOKING.COM",
+          "l2_normalisee": null,
+          "l3_normalisee": null,
+          "l4_normalisee": null,
+          "l5_normalisee": null,
+          "l6_normalisee": null,
+          "code_postal": null,
+          "libelle_activite_principale": "Activités des sièges sociaux",
+          "highlight": "Pour un problème relatif à une réservation sur le site Booking.com",
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
