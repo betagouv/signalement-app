@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Inject, PLATFORM_ID } from '@angular/core';
 import { Report, ReportStatus } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { FileOrigin, UploadedFile } from '../../../../model/UploadedFile';
@@ -12,10 +12,11 @@ import { CompanySearchResult } from '../../../../model/CompanySearchResult';
 import { switchMap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { PlatformLocation } from '@angular/common';
+import { PlatformLocation, isPlatformBrowser } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
 import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
 import { Constants } from '../../../../model/Constants';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-report-detail',
@@ -64,7 +65,8 @@ export class ReportDetailComponent implements OnInit {
   actionTypeCtrl: FormControl;
   detailCtrl: FormControl;
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private reportService: ReportService,
               private eventService: EventService,
               private fileUploaderService: FileUploaderService,
@@ -173,6 +175,20 @@ export class ReportDetailComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
+  }
+
+  downloadReport() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.reportService.downloadReport(this.reportId).subscribe(response => {
+        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'report.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
   }
 
   submitCompanySiretForm() {
