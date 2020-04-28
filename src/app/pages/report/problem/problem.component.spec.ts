@@ -17,6 +17,8 @@ import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
 import { AutofocusDirective } from '../../../directives/auto-focus.directive';
+import { AbTestsModule } from 'angular-ab-tests';
+import { SVETestingScope, SVETestingVersions } from '../../../utils';
 
 describe('ProblemComponent', () => {
 
@@ -63,6 +65,15 @@ describe('ProblemComponent', () => {
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule,
+        AbTestsModule.forRoot(
+          [
+            {
+              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test1 ],
+              scope: SVETestingScope,
+              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test1]: 0 }
+            }
+          ]
+        )
       ],
       providers: []
     })
