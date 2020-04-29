@@ -2,20 +2,20 @@
   subcategoriesTitle: De quel produit s'agit-il&#160;?
   subcategories:
     - title: Gel désinfectant (gel hydroalcoolique)
-      description: Le prix des gels hydroalcooliques est réglementé depuis le 05 mars (Décret n° 2020-197). Pour un consommateur, les prix maximums autorisés sont&nbsp;:&nbsp;
+      description: Le prix des gels hydroalcooliques est réglementé (décret n° 2020-293 du 23 mars 2020). Pour un consommateur, les prix maximums sont&nbsp;:&nbsp;
                     <ul>
-                      <li>2€ pour un flacon de 50 ml</li>
-                      <li>2,25€ pour 75 ml</li>
-                      <li>3€ pour 100 ml</li>
+                      <li>1,76€ pour un flacon de 50 ml</li>
+                      <li>2,64€ pour 75 ml</li>
+                      <li>4,4€ pour 100 ml</li>
                       <li>5€ pour 300 ml</li>
-                      <li>15€ pour un litre</li>
+                      <li>13,9€ pour un litre</li>
                     </ul>
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label : Caractéristiques du produit (volume)
+        - label : Volume du produit et autres caractéristiques
           rank: 2
           type: TEXTAREA
           optionnal: true
