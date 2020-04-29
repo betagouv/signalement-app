@@ -159,7 +159,7 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get(
-          `${this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId])}?pdf=1`,
+          `${this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'download'])}`,
           Object.assign(headers, {responseType: 'blob', observe: 'response' })
         );
       })
