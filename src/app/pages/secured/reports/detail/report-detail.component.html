@@ -365,8 +365,8 @@
               </div>
             </ng-template>
           </ng-template>
-          <button type="button" class="btn btn-secondary ml-3" (click)="downloadReport()">Télécharger <i class="material-icons">picture_as_pdf</i></button>
         </ng-container>
+        <button *appRole="[roles.Admin, roles.DGCCRF];" type="button" class="btn btn-secondary ml-3" (click)="downloadReport()">Télécharger <i class="material-icons">picture_as_pdf</i></button>
       </ng-container>
       <ngx-loading [show]="!report && loading"></ngx-loading>
     </div>
