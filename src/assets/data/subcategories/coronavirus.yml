@@ -10,6 +10,7 @@
                       <li>5€ pour 300 ml</li>
                       <li>13,9€ pour un litre</li>
                     </ul>
+                  Il existe des exceptions à ces prix en fonction par exemple du type de contenant. 
       detailInputs:
         - label: Date du constat
           rank: 1
