@@ -41,7 +41,7 @@
             <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
 
               <div class="form__group mt-4">
-                <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise <span class="error">*</span>
+                <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise signalée <span class="error">*</span>
                 </label>
                 <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" appAutofocus="true"/>
               </div>
