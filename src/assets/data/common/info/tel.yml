@@ -10,4 +10,4 @@ content: "Vous venez de recevoir un email ou un sms vous indiquant que votre for
 actions:
   - question: Que pouvez-vous faire&#160;?
     answer: "<b>Vous n'avez que deux choix : accepter cette augmentation ou résilier votre abonnement.</b>
-             <br /><br /> Vous avez 4 mois pour résilier votre abonnement.
+             <br /><br /> Vous avez 4 mois pour résilier votre abonnement."
