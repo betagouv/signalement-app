@@ -155,6 +155,17 @@ export class ReportService {
     );
   }
 
+  downloadReport(reportId: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get(
+          `${this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'download'])}`,
+          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+        );
+      })
+    );
+  }
+
   getNbReportsGroupByCompany(offset: number, limit: number) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('offset', offset.toString());
