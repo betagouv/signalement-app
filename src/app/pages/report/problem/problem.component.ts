@@ -43,10 +43,10 @@ export class ProblemComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.abTestsService.getVersion(SVETestingScope) === SVETestingVersions.NoTest) {
-      this.continueReport = true;
-    } else {
+    if (this.abTestsService.getVersion(SVETestingScope) === SVETestingVersions.Test1) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.requestUserToContinueReport);
+    } else {
+      this.continueReport = true;
     }
 
     this.step = Step.Problem;
