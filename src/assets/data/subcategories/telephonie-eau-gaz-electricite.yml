@@ -9,10 +9,24 @@
           subcategories:
             - title: Augmentation du débit ou des données disponibles
               example: 'Exemple : passage de 20 Go à 40 Go pour 5 euros de plus'
-              information: !!import/single ../common/info/tel.yml
+              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
+              subcategories:
+                - title: Oui, j'ai été prévenu par email ou courrier
+                  information: !!import/single ../common/info/tel.yml
+                - title: Non, j'ai reçu seulement un sms
+                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                - title: Non, je n'ai rien reçu du tout
+                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
             - title: Modification concernant les sms, mms ou appels
               example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
-              information: !!import/single ../common/info/tel.yml
+              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
+              subcategories:
+                - title: Oui, j'ai été prévenu par email ou courrier
+                  information: !!import/single ../common/info/tel.yml
+                - title: Non, j'ai reçu seulement un sms
+                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                - title: Non, je n'ai rien reçu du tout
+                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
             - title: Rajout d'une option payante
               example: 'Exemple : chaine télé supplémentaire, option cyber-sécurité, option livre audio, option musique...'
               subcategoriesTitle: Quel est le type d'option ?
