@@ -50,6 +50,9 @@ export enum ReportEventActions {
   requestUserToContinueReport = 'Affichage du choix signalement Pro avec SignalConso ou DGCCRF uniquement',
   continueReport = 'Poursuite du signalement',
   stopReport = 'Arrêt du signalement pour signaler à la DGCCRF uniquement ',
+  requestUserToContinueReportOnDetailsStep = 'Affichage du choix signalement ou question',
+  continueReportOnDetailsStep = 'Poursuite du signalement plutôt que poser une question',
+  stopReportBeforeDetailsStep = 'Arrêt du signalement pour poser une question',
 }
 
 export enum CompanySearchEventActions {
