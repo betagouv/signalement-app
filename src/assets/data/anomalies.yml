@@ -3,7 +3,7 @@ list:
   - category: COVID-19 (coronavirus)
     categoryId: C19
     path: coronavirus
-    description: prix des gels hydroalcooliques, arnaque liée au COVID-19, augmentation du prix de la livraison de courses à domicile...
+    description: gel hydroalcoolique, masque, arnaque liée au COVID-19, distanciation physique...
     rank: 1
     icon: icon_virus.png
     subcategories: !!import/single subcategories/coronavirus.yml
