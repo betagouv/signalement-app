@@ -8,3 +8,10 @@ export default class Utils {
   }
 
 }
+
+export const SVETestingScope = 'TestSVE';
+export enum SVETestingVersions {
+  NoTest = 'NoTest',
+  Test1 = 'Test1',
+  Test2 = 'Test2'
+}

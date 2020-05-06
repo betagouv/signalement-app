@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BsDatepickerModule, BsDropdownModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesAdminComponent } from './companies-admin.component';
 import { AppRoleDirective } from '../../../directives/app-role/app-role.directive';
@@ -11,6 +11,7 @@ import { CompanyCardComponent } from '../company-card/company-card.component';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { of } from 'rxjs';
 import { User } from '../../../model/AuthUser';
+import { AppPermissionDirective } from '../../../directives/app-permission/app-permission.directive';
 
 describe('CompaniesAdminComponent', () => {
 
@@ -23,7 +24,8 @@ describe('CompaniesAdminComponent', () => {
       declarations: [
         CompaniesAdminComponent,
         AppRoleDirective,
-        CompanyCardComponent
+        CompanyCardComponent,
+        AppPermissionDirective,
       ],
       imports: [
         PaginationModule.forRoot(),
@@ -35,7 +37,8 @@ describe('CompaniesAdminComponent', () => {
         BsDatepickerModule.forRoot(),
         RouterTestingModule,
         HttpClientModule,
-        ComponentsModule
+        ComponentsModule,
+        ModalModule.forRoot()
       ]
     })
     .compileComponents();

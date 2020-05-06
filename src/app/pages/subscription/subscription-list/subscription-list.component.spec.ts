@@ -1,33 +1,32 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubscriptionComponent } from './subscription.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SubscriptionListComponent } from './subscription-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('SubscriptionComponent', () => {
-  let component: SubscriptionComponent;
-  let fixture: ComponentFixture<SubscriptionComponent>;
+describe('SubscriptionListComponent', () => {
+  let component: SubscriptionListComponent;
+  let fixture: ComponentFixture<SubscriptionListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SubscriptionComponent,
+        SubscriptionListComponent,
       ],
       imports: [
-        FormsModule,
-        ReactiveFormsModule,
         HttpClientModule,
         NgxLoadingModule,
-        ComponentsModule
-      ],
+        ComponentsModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SubscriptionComponent);
+    fixture = TestBed.createComponent(SubscriptionListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

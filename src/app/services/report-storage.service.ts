@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DetailInputValue, Report, Step } from '../model/Report';
+import { DetailInputValue, DraftReport, Step } from '../model/Report';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UploadedFile } from '../model/UploadedFile';
+import { CompanySearchResult } from '../model/CompanySearchResult';
+import { CompanyKinds } from '../model/Anomaly';
+import { Website } from '../model/Company';
 
 const ReportStorageKey = 'ReportSignalConso';
 
@@ -11,24 +14,36 @@ const ReportStorageKey = 'ReportSignalConso';
 })
 export class ReportStorageService {
 
-  private reportInProgessSource = new BehaviorSubject<Report>(undefined);
+  private reportInProgessSource = new BehaviorSubject<DraftReport>(undefined);
   reportInProgess = this.reportInProgessSource.asObservable();
 
   constructor(private localStorage: LocalStorage) {
   }
 
   retrieveReportInProgressFromStorage() {
-    this.localStorage.getItem(ReportStorageKey).subscribe((report: Report) => {
-      if (report) {
-        report.retrievedFromStorage = true;
+    this.localStorage.getItem(ReportStorageKey).subscribe((draftReport: DraftReport) => {
+      if (draftReport) {
+        draftReport = Object.assign(new DraftReport(), draftReport);
+        draftReport.retrievedFromStorage = true;
         // To force class method to be valuate
-        if (report.detailInputValues) {
-          report.detailInputValues = report.detailInputValues.map(d => Object.assign(new DetailInputValue(), d));
+        if (draftReport.detailInputValues) {
+          draftReport.detailInputValues = draftReport.detailInputValues.map(d => Object.assign(new DetailInputValue(), d));
         }
-        if (report.uploadedFiles) {
-          report.uploadedFiles = report.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
+        if (draftReport.uploadedFiles) {
+          draftReport.uploadedFiles = draftReport.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
         }
-        this.reportInProgessSource.next(report);
+        if (draftReport.companyData) {
+          console.log('draftReport.companyData', draftReport.companyKind)
+          switch (draftReport.companyKind) {
+            case CompanyKinds.SIRET:
+              draftReport.companyData = Object.assign(new CompanySearchResult(), draftReport.companyData);
+              return;
+            case CompanyKinds.WEBSITE:
+              draftReport.companyData = Object.assign(new Website(), draftReport.companyData);
+              return;
+          }
+        }
+        this.reportInProgessSource.next(draftReport);
       }
     });
     return this.reportInProgess;
@@ -46,18 +61,18 @@ export class ReportStorageService {
     this.localStorage.removeItemSubscribe(ReportStorageKey);
   }
 
-  changeReportInProgressFromStep(report: Report, step: Step) {
-    report.retrievedFromStorage = false;
-    report.storedStep = step;
-    this.reportInProgessSource.next(report);
+  changeReportInProgressFromStep(draftReport: DraftReport, step: Step) {
+    draftReport.retrievedFromStorage = false;
+    draftReport.storedStep = step;
+    this.reportInProgessSource.next(draftReport);
     if (step === Step.Category) {
       this.removeReportInProgressFromStorage();
     } else {
-      this.localStorage.setItemSubscribe(ReportStorageKey, report);
+      this.localStorage.setItemSubscribe(ReportStorageKey, draftReport);
     }
   }
 
-  changeReportInProgress(report: Report) {
-    this.reportInProgessSource.next(report);
+  changeReportInProgress(draftReport: DraftReport) {
+    this.reportInProgessSource.next(draftReport);
   }
 }

@@ -58,10 +58,6 @@ form {
     text-align: center;
     vertical-align: middle;
 
-    &.col-checkbox {
-      min-width: 60px;
-    }
-
     &.action {
       background-color: $white !important;
       border: none;

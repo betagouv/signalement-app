@@ -38,6 +38,7 @@ export class Subcategory {
   fileLabel?: string;
   information?: Information;
   consumerActions?: Information[];
+  companyKind?: string;
 }
 
 export class Anomaly {
@@ -47,7 +48,6 @@ export class Anomaly {
   hidden?: boolean;
   description?: string;
   rank?: number;
-  withInternetPurchase?: boolean;
   icon?: string;
   information?: Information;
   breadcrumbTitle?: string;
@@ -62,4 +62,8 @@ export enum InputType {
   Textarea = 'TEXTAREA',
   Timeslot = 'TIMESLOT',
   Date = 'DATE'
+}
+
+export enum CompanyKinds {
+  SIRET = 'SIRET', WEBSITE = 'WEBSITE'
 }

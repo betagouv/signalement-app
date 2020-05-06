@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { CompanyAccess, PendingToken } from '../../../model/CompanyAccess';
+import { CompanyAccess, PendingToken } from '../../../model/Company';
 import { User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { accessLevels } from '../common';

@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
-import { Location } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import pages from '../../../../assets/data/pages.json';
 import { Roles } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
-import { Company } from '../../../model/Company';
-import { UserAccess } from '../../../model/CompanyAccess';
+import { Company, CompanyToActivate, UserAccess } from '../../../model/Company';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { combineLatest } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import * as lodash from 'lodash';
+import { HttpResponse } from '@angular/common/http';
+import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
+import moment from 'moment';
 
 @Component({
   selector: 'app-companies-admin',
@@ -25,9 +28,10 @@ export class CompaniesAdminComponent implements OnInit {
 
   searchTab = {link: ['/', 'entreprises', 'recherche'], label: 'Recherche'};
   mostReportedTab = {link: ['/', 'entreprises', 'les-plus-signalees'], label: 'Les plus signalées'};
+  toActivateTab = {link: ['/', 'entreprises', 'a-activer'], label: 'En attente d\'activation'};
 
   navTabs: {link: string[], label: string}[];
-  currentNavTab: {link: string[], label: string}
+  currentNavTab: {link: string[], label: string};
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
@@ -39,29 +43,41 @@ export class CompaniesAdminComponent implements OnInit {
   currentPage: number;
   itemsPerPage = 20;
   lines: NbReportsGroupByCompany[];
+  companiesToActivate: CompanyToActivate[];
+  allCompaniesToActivate: CompanyToActivate[];
+  companiesToActivateFilter: {tokenCreation?: Date, lastNotice?: Date} = {};
 
   showErrors: boolean;
   loading: boolean;
   loadingError: boolean;
 
-  constructor(public formBuilder: FormBuilder,
+  checkedCompaniesUuids = new Set<string>();
+  modalRef: BsModalRef;
+
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private titleService: Title,
               private meta: Meta,
               private location: Location,
               private authenticationService: AuthenticationService,
+              private companyAccessesService: CompanyAccessesService,
+              private localeService: BsLocaleService,
               private reportService: ReportService,
               private companyService: CompanyService,
+              private modalService: BsModalService,
               private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.localeService.use('fr');
+
     this.titleService.setTitle(pages.companies.companiesAdmin.title);
     this.meta.updateTag({ name: 'description', content: pages.companies.companiesAdmin.description });
 
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       .subscribe(([url, user]) => {
         this.navTabs = {
-          [this.roles.Admin]: [this.searchTab, this.mostReportedTab],
+          [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
           [this.roles.DGCCRF]: [this.mostReportedTab]
         }[user.role];
         this.currentNavTab = this.navTabs.find(
@@ -73,7 +89,8 @@ export class CompaniesAdminComponent implements OnInit {
 
         ({
           [this.searchTab.label]: () => this.initSearchForm(),
-          [this.mostReportedTab.label]: () => this.loadReports(1)
+          [this.mostReportedTab.label]: () => this.loadReports(1),
+          [this.toActivateTab.label]: () => this.loadCompaniesToActivate()
         }[this.currentNavTab.label])();
       });
 
@@ -100,6 +117,9 @@ export class CompaniesAdminComponent implements OnInit {
     this.loading = true;
     this.loadingError = false;
     this.companies = undefined;
+    if (RegExp(/^[0-9\s]+$/g).test(this.searchCtrl.value)) {
+      this.searchCtrl.setValue((this.searchCtrl.value as string).replace(/\s/g, ''));
+    }
     this.location.go('entreprises/recherche', `q=${this.searchCtrl.value}`);
     this.companyService.searchRegisterCompanies(this.searchCtrl.value).subscribe(
       result => {
@@ -122,6 +142,10 @@ export class CompaniesAdminComponent implements OnInit {
     };
   }
 
+  onCompanyChange(company: Company, companyIndex: number) {
+    this.companies.splice(companyIndex, 1, company);
+  }
+
   loadReports(page: number) {
     this.loading = true;
     this.loadingError = false;
@@ -141,6 +165,87 @@ export class CompaniesAdminComponent implements OnInit {
           this.loading = false;
           this.loadingError = true;
         });
+  }
+
+  checkCompany(uuid: string) {
+    if (this.checkedCompaniesUuids.has(uuid)) {
+      this.checkedCompaniesUuids.delete(uuid);
+    } else {
+      this.checkedCompaniesUuids.add(uuid);
+    }
+  }
+
+  checkAllCompanies() {
+    if (this.companiesToActivate.length === this.checkedCompaniesUuids.size) {
+      this.checkedCompaniesUuids.clear();
+    } else {
+      this.checkedCompaniesUuids = new Set(this.companiesToActivate.map(toActivate => toActivate.company.id));
+    }
+  }
+
+  loadCompaniesToActivate() {
+    this.loading = true;
+    this.loadingError = false;
+
+    this.companyAccessesService.companiesToActivate().subscribe(
+      result => {
+        this.loading = false;
+        this.allCompaniesToActivate = result.sort((c1, c2) => {
+          if (moment(c1.tokenCreation).isSame(c2.tokenCreation, 'day') && c1.lastNotice) {
+            return c2.lastNotice ? moment(c2.lastNotice).diff(c1.lastNotice) : 1;
+          } else {
+            return moment(c2.tokenCreation).diff(c1.tokenCreation);
+          }
+        });
+        this.companiesToActivate = this.allCompaniesToActivate;
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      }
+    );
+  }
+
+  filterCompaniesToActivate(tokenCreation: Date, lastNotice: Date) {
+    if (this.allCompaniesToActivate) {
+      this.companiesToActivate = this.allCompaniesToActivate.filter(companyToActivate => {
+        return (!tokenCreation || moment(companyToActivate.tokenCreation).isSame(moment(tokenCreation), 'day')) &&
+          (!lastNotice || moment(companyToActivate.lastNotice).isSame(moment(lastNotice), 'day'));
+      });
+    }
+  }
+
+  downloadActivationDocuments() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.companyAccessesService.downloadActivationDocuments(this.checkedCompaniesUuids).subscribe(response => {
+        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'courriers.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  confirmLettersSending() {
+    this.loading = true;
+    this.loadingError = false;
+    this.companyAccessesService.confirmContactByPostOnCompaniesList(this.checkedCompaniesUuids).subscribe(
+      events => {
+        this.loading = false;
+        this.modalRef.hide();
+        this.loadCompaniesToActivate();
+      },
+      err => {
+        this.loading = false;
+        this.loadingError = true;
+      });
   }
 
   changePage(pageEvent: { page: number, itemPerPage: number }) {
