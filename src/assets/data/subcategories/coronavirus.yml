@@ -27,7 +27,19 @@
           optionnal: true
       fileLabel: Photo du prix et du produit si possible     
     - title: Masque
+      description: "Le prix de certains masques est réglementé :
+                    <ul>
+                      <li> Pour un masque  à  usage  unique  (de  type chirurgical), le prix maximal est de 95 centimes d’euros (TTC).</li>
+                      <li> Pour un masque en tissu, il n'existe pas de prix maximal.</li>
+                    </ul>"
     - title: Autre
+- title: Arnaque et publicité mensongère liées au COVID-19
+  example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
+- title: Ouverture non autorisée d'un commerce ou lieu recevant du public
+  information:
+    content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter les services de police.
+          <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
+- title: Problème avec les règles d'hygiène ou de distanciation physique
 - title: Problème / abus avec un site de vente en ligne
   example: "Exemple : site de livraison de courses à domicile"
   subcategories:
@@ -61,13 +73,4 @@
         - label: Quel est le problème ?
           rank: 2
           type: TEXTAREA
-      fileLabel: Photo du produit si possible  
-- title: Vente de masque (FFP2, chirurgicaux) non autorisée
-- title: Arnaque et publicité mensongère liées au COVID-19
-  example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
-- title: Ouverture non autorisée d'un commerce ou lieu recevant du public
-  information:
-    content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter les services de police.
-          <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
-- title: Problème avec les règles d'hygiène ou de distanciation physique
-
+      fileLabel: Photo du produit si possible
