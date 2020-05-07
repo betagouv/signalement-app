@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { AutofocusDirective } from '../../../directives/auto-focus.directive';
 import { genConsumer, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
 import { CompanyKinds } from '../../../model/Anomaly';
 
@@ -24,7 +23,6 @@ describe('ConsumerComponent', () => {
       declarations: [
         ConsumerComponent,
         BreadcrumbComponent,
-        AutofocusDirective,
       ],
       imports: [
         FormsModule,

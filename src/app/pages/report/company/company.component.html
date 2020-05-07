@@ -32,7 +32,7 @@
         <ng-template #noCompany>
 
           <nav class="nav nav-tabs nav-justified" role="tablist">
-            <a id="firstTab" nga11y-focus class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
+            <a id="firstTab" class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
             <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par SIRET</a>
           </nav>
 
@@ -43,7 +43,7 @@
               <div class="form__group mt-4">
                 <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise signalée <span class="error">*</span>
                 </label>
-                <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" appAutofocus="true"/>
+                <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean"/>
               </div>
               <div class="form__group">
                 <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
@@ -196,7 +196,7 @@
                 <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
                   Numéro SIRET de l'entreprise <span class="error">*</span>
                 </label>
-                <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" appAutofocus="true">
+                <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010">
               </div>
 
               <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">
@@ -262,7 +262,7 @@
           <div class="form__group mt-4">
             <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) <span class="error">*</span>
             </label>
-            <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr" appAutofocus="true"/>
+            <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
           </div>
           <div class="notification error mt-4" *ngIf="showErrors && websiteForm.invalid">
             <span *ngIf="urlCtrl.hasError('required')">

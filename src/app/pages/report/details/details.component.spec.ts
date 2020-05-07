@@ -16,7 +16,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { AutofocusDirective } from '../../../directives/auto-focus.directive';
 import { AbTestsModule } from 'angular-ab-tests';
 import { SVETestingScope, SVETestingVersions } from '../../../utils';
 
@@ -67,7 +66,6 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         BreadcrumbComponent,
-        AutofocusDirective,
       ],
       imports: [
         FormsModule,
