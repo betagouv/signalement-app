@@ -53,6 +53,7 @@ export enum ReportEventActions {
   requestUserToContinueReportOnDetailsStep = 'Affichage du choix signalement ou question',
   continueReportOnDetailsStep = 'Poursuite du signalement plutôt que poser une question',
   stopReportBeforeDetailsStep = 'Arrêt du signalement pour poser une question',
+  contactualReport = 'Litige contractuel'
 }
 
 export enum CompanySearchEventActions {
