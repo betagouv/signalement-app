@@ -37,7 +37,9 @@ if (process.env.API_BASE_URL) {
     res.setHeader("Content-Security-Policy",
       `default-src 'self' *.data.gouv.fr ${process.env.API_BASE_URL} 'unsafe-inline';  \
        script-src 'self' *.data.gouv.fr 'sha256-WWHGLj0eoGsKPEGMnTqjS4sH0zDInMRPKN098NNWH4E='; \
-       img-src 'self' *.data.gouv.fr data: *.numerique.gouv.fr;`);
+       img-src 'self' *.data.gouv.fr data: *.numerique.gouv.fr; \
+       frame-src 'self' *.youtube-nocookie.com;
+       `);
     return next();
   });
 }
