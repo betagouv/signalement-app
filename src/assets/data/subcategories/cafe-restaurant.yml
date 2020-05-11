@@ -398,3 +398,11 @@
             - Insecte dans un plat
             - Autre (à préciser)
       fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
+- title: Site/application de livraison de repas
+  example: 'Exemple : livraison non assurée, promotion non valide'
+  subcategories:
+    - title: problème avec la livraison
+    - title: problème avec le service client
+    - title: problème avec une promotion, un parrainage
+    - title: autre
+      example: "Les problèmes d'hygiène ou de qualité des plats doivent être renseignées dans les catégories précédentes"
