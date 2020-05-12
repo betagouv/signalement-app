@@ -32,8 +32,8 @@
         <ng-template #noCompany>
 
           <nav class="nav nav-tabs nav-justified" role="tablist">
-            <a id="firstTab" class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
-            <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par SIRET</a>
+            <a id="firstTab" class="nav-item nav-link pointer" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
+            <a class="nav-item nav-link pointer" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par SIRET</a>
           </nav>
 
           <ng-container *ngIf="!bySiret; else searchBySiret" role="tabpanel">
