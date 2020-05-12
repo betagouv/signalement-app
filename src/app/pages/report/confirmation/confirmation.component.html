@@ -43,27 +43,24 @@
           </div>
         </div>
         <hr />
-        <ng-container *ngIf="draftReport.companyKind === companyKinds.SIRET">
-          <h3>Entreprise</h3>
-          <div class="row">
-            <div class="col-12">
-              <strong *ngIf="draftReport.draftCompany.name">{{draftReport.draftCompany.name}}<br /></strong>
-              <ng-container *ngIf="draftReport.draftCompany.address">
-                <span *ngFor="let line of draftReport.draftCompany.address.split(' - ') | slice : 1">{{line}}<br/></span>
-              </ng-container>
-            </div>
+        <h3>Entreprise</h3>
+        <div class="row" *ngIf="draftReport.draftCompany.name">
+          <div class="col-12">
+            Nom : <strong>{{draftReport.draftCompany.name}}<br /></strong>
+            Adresse : {{draftReport.draftCompany.address}}
           </div>
-          <hr />
-        </ng-container>
-        <ng-container *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
-          <h3>Site internet</h3>
-          <div class="row">
-            <div class="col-12">
-              {{draftReport.draftCompany.website.url}}
-            </div>
+        </div>
+        <div class="row" *ngIf="draftReport.draftCompany.siret">
+          <div class="col-12">
+            SIRET : {{draftReport.draftCompany.siret}}
           </div>
-          <hr />
-        </ng-container>
+        </div>
+        <div class="row" *ngIf="draftReport.draftCompany.website">
+          <div class="col-12">
+            Site internet : {{draftReport.draftCompany.website.url}}
+          </div>
+        </div>
+        <hr />
         <h3>Consommateur</h3>
         <div class="row">
           <div class="col-12">

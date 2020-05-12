@@ -261,6 +261,83 @@
             </label>
             <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr" appAutofocus="true"/>
           </div>
+
+
+          <div class="form__group mt-4">
+            <label for="siret">
+              Numéro SIRET de l'entreprise
+            </label>
+            <input [formControl]="siretCtrl" type="text" id="siret" placeholder="Ex: 83350861700010" appAutofocus="true">
+          </div>
+
+
+          <div class="notification info">
+            Le SIRET est un numéro composé de 14 chiffres identifiant l'entreprise concernée.
+            Signalconso en a besoin pour la contacter et informer la répression des fraudes.
+            <br/>
+            <a data-toggle="collapse" href="#collapseHow">Comment retrouver un SIRET ?</a>
+            <ul class="collapse" id="collapseHow">
+              <li>
+                <a data-toggle="collapse" href="#collapseDoc">L'entreprise vous a remis un document ?</a>
+                <div class="collapse" id="collapseDoc">
+                  Vous pourrez probablement retrouver le SIRET sur :
+                  <ul>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseTicket">le ticket de carte bleue</a>
+                      <div class="collapse" id="collapseTicket">
+                        <div class="card card-body">
+                          Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le numéro à 14 chiffres qui se situe en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseEstimate">un devis</a>
+                      <div class="collapse" id="collapseEstimate">
+                        <div class="card card-body">
+                          Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseContract">un contrat</a>
+                      <div class="collapse" id="collapseContract">
+                        <div class="card card-body">
+                          Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      Tout autre document ou échange avec l'entreprise (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a data-toggle="collapse" href="#collapseNoDoc">Vous n’avez pas de documents émanants de l'entreprise ?</a>
+                <div class="collapse" id="collapseNoDoc">
+                  Faites une recherche en ligne sur :
+                  <ul>
+                    <li><a href="https://www.societe.com" target="_blank" title="societe.com (nouvelle fenêtre)">https://www.societe.com</a></li>
+                    <li><a href="https://www.pagesjaunes.fr" target="_blank" title="pages jaunes (nouvelle fenêtre)">https://www.pagesjaunes.fr</a></li>
+                    <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr" title="infogreffe (nouvelle fenêtre)">https://www.infogreffe.fr</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a data-toggle="collapse" href="#collapseNotFound">Vous n’avez pas trouvé le numéro SIRET ?</a>
+                <div class="collapse" id="collapseNotFound">
+                  Utiliser <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank">le formulaire en ligne DGCCRF</a>
+                  <br />Ce formulaire ne nécessite pas le SIRET de l'entreprise.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+
+
+
+
+
           <div class="notification error mt-4" *ngIf="showErrors && websiteForm.invalid">
             <span *ngIf="urlCtrl.hasError('required')">
               Veuillez renseigner l'url du site.<br />

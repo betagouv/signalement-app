@@ -16,6 +16,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftCompany, Website } from '../../../model/Company';
+import { iif, of } from 'rxjs';
 
 @Component({
   selector: 'app-company',
@@ -96,8 +97,10 @@ export class CompanyComponent implements OnInit {
 
   initWebsiteForm() {
     this.urlCtrl = this.formBuilder.control('', Validators.required);
+    this.siretCtrl = this.formBuilder.control('', Validators.pattern('[0-9]{14}'));
     this.websiteForm = this.formBuilder.group({
-      url: this.urlCtrl
+      url: this.urlCtrl,
+      siret: this.siretCtrl
     });
   }
 
@@ -149,7 +152,23 @@ export class CompanyComponent implements OnInit {
     if (!this.websiteForm.valid) {
       this.showErrors = true;
     } else {
-      this.selectCompany( <DraftCompany>{ website: Object.assign(new Website(), { url: this.urlCtrl.value })});
+      this.loading = true;
+      iif(() => this.siretCtrl.value,
+        this.companyService.searchCompaniesBySiret(this.siretCtrl.value),
+        of(undefined)
+      ).subscribe(
+        company => {
+          this.loading = false;
+          this.selectCompany({
+            ...(company ? company.draftCompany : {}),
+            website: Object.assign(new Website(), { url: this.urlCtrl.value })
+          });
+        },
+        () => {
+          this.loading = false;
+          this.searchBySiretError = 'Une erreur technique s\'est produite.';
+        }
+      );
     }
   }
 
