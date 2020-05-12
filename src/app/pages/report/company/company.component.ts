@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { isPlatformBrowser } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
-import { Website } from '../../../model/Company';
+import { DraftCompany, Website } from '../../../model/Company';
 
 @Component({
   selector: 'app-company',
@@ -57,9 +57,7 @@ export class CompanyComponent implements OnInit {
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
-              private analyticsService: AnalyticsService,
-              private renderer: Renderer2,
-              public elementRef: ElementRef) { }
+              private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -151,9 +149,7 @@ export class CompanyComponent implements OnInit {
     if (!this.websiteForm.valid) {
       this.showErrors = true;
     } else {
-      this.selectCompany(Object.assign(new Website(), {
-        url: this.urlCtrl.value
-      }));
+      this.selectCompany( <DraftCompany>{ website: Object.assign(new Website(), { url: this.urlCtrl.value })});
     }
   }
 
@@ -204,12 +200,12 @@ export class CompanyComponent implements OnInit {
 
   selectCompanyFromResults(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.selectCompany(companySearchResult);
+    this.selectCompany(companySearchResult.draftCompany);
   }
 
-  selectCompany(companySearchResult: CompanySearchResult | Website) {
+  selectCompany(draftCompany: DraftCompany) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
-    this.draftReport.companyData = companySearchResult;
+    this.draftReport.draftCompany = draftCompany;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
@@ -260,7 +256,7 @@ export class CompanyComponent implements OnInit {
   }
 
   changeCompany() {
-    this.draftReport.companyData = undefined;
+    this.draftReport.draftCompany = undefined;
     this.companySearchResults = [];
     this.companySearchBySiretResult = undefined;
     this.showErrors = false;

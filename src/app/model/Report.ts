@@ -1,10 +1,9 @@
 import { Consumer } from './Consumer';
-import { CompanySearchResult } from './CompanySearchResult';
 import { CompanyKinds, Subcategory } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
-import { Company, Website } from './Company';
+import { Company, DraftCompany, Website } from './Company';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -28,7 +27,7 @@ export enum ReportStatus {
 export class DraftReport {
   category: string;
   subcategories: Subcategory[];
-  companyData: CompanySearchResult | Website;
+  draftCompany: DraftCompany;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;

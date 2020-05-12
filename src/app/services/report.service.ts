@@ -49,22 +49,13 @@ export class ReportService {
               value: detailInputValue.renderedValue,
             };
           }),
-        ...this.companyData(draftReport.companyData)
+        companyName: draftReport.draftCompany.name,
+        companyAddress: draftReport.draftCompany.address,
+        companyPostalCode: draftReport.draftCompany.postalCode,
+        companySiret: draftReport.draftCompany.siret,
+        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined
       },
     );
-  }
-
-  companyData(company: CompanySearchResult | Website) {
-    if (company instanceof CompanySearchResult) {
-      return {
-        companyName: company.name,
-        companyAddress: company.address,
-        companyPostalCode: company.postalCode,
-        companySiret: company.siret,
-      };
-    } else {
-      return {websiteURL: company.url};
-    }
   }
 
   deleteReport(reportId: string) {

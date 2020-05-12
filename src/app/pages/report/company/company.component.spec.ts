@@ -54,7 +54,7 @@ describe('CompanyComponent', () => {
   describe('case of searching company with SIRET', () => {
 
     beforeEach(() => {
-      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {companyData: undefined}));
+      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {draftCompany: undefined}));
 
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;

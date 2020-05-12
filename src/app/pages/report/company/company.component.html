@@ -3,17 +3,14 @@
   <div class="container max-width">
     <ng-container *ngIf="draftReport">
       <ng-container *ngIf="draftReport.companyKind === companyKinds.SIRET; else website">
-        <form (submit)="selectCompany(draftReport.companyData)" *ngIf="draftReport.companyData; else noCompany">
+        <form (submit)="selectCompany(draftReport.draftCompany)" *ngIf="draftReport.draftCompany; else noCompany">
           <div class="row">
             <div class="col-12 text-center">
               <div class="company-card">
-                  <strong *ngIf="draftReport.companyData.line1">{{draftReport.companyData.line1}}<br /></strong>
-                  <strong *ngIf="draftReport.companyData.line2">{{draftReport.companyData.line2}}<br /></strong>
-                  <span *ngIf="draftReport.companyData.line3">{{draftReport.companyData.line3}}<br /></span>
-                  <span *ngIf="draftReport.companyData.line4">{{draftReport.companyData.line4}}<br /></span>
-                  <span *ngIf="draftReport.companyData.line5">{{draftReport.companyData.line5}}<br /></span>
-                  <span *ngIf="draftReport.companyData.line6">{{draftReport.companyData.line6}}<br /></span>
-                  <span *ngIf="draftReport.companyData.line7">{{draftReport.companyData.line7}}<br /></span>
+                <strong *ngIf="draftReport.draftCompany.name">{{draftReport.draftCompany.name}}<br /></strong>
+                <ng-container *ngIf="draftReport.draftCompany.address">
+                  <span *ngFor="let line of draftReport.draftCompany.address.split(' - ') | slice : 1">{{line}}<br/></span>
+                </ng-container>
               </div>
             </div>
           </div>
