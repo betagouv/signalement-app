@@ -16,7 +16,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftCompany, Website } from '../../../model/Company';
-import { iif, of } from 'rxjs';
 
 @Component({
   selector: 'app-company',
@@ -28,6 +27,7 @@ export class CompanyComponent implements OnInit {
   step: Step;
   draftReport: DraftReport;
   companyKinds = CompanyKinds;
+  draftCompany: DraftCompany;
 
   websiteForm: FormGroup;
   urlCtrl: FormControl;
@@ -67,10 +67,12 @@ export class CompanyComponent implements OnInit {
       .subscribe(report => {
         if (report) {
           this.draftReport = report;
+          this.draftCompany = report.draftCompany;
+          this.initSearchBySiretForm();
           if (this.draftReport.companyKind === CompanyKinds.SIRET) {
             this.initSearchForm();
-            this.initSearchBySiretForm();
-          } else {
+          } else if (this.draftReport.companyKind === CompanyKinds.WEBSITE) {
+            this.bySiret = !this.bySiret;
             this.initWebsiteForm();
           }
         } else {
@@ -96,12 +98,12 @@ export class CompanyComponent implements OnInit {
   }
 
   initWebsiteForm() {
-    this.urlCtrl = this.formBuilder.control('', Validators.required);
-    this.siretCtrl = this.formBuilder.control('', Validators.pattern('[0-9]{14}'));
-    this.websiteForm = this.formBuilder.group({
-      url: this.urlCtrl,
-      siret: this.siretCtrl
-    });
+    if (this.draftCompany) {
+      this.urlCtrl = this.formBuilder.control(this.draftCompany.website ? this.draftCompany.website.url : '', Validators.required);
+      this.websiteForm = this.formBuilder.group({
+        url: this.urlCtrl
+      });
+    }
   }
 
   initSearchBySiretForm() {
@@ -152,23 +154,8 @@ export class CompanyComponent implements OnInit {
     if (!this.websiteForm.valid) {
       this.showErrors = true;
     } else {
-      this.loading = true;
-      iif(() => this.siretCtrl.value,
-        this.companyService.searchCompaniesBySiret(this.siretCtrl.value),
-        of(undefined)
-      ).subscribe(
-        company => {
-          this.loading = false;
-          this.selectCompany({
-            ...(company ? company.draftCompany : {}),
-            website: Object.assign(new Website(), { url: this.urlCtrl.value })
-          });
-        },
-        () => {
-          this.loading = false;
-          this.searchBySiretError = 'Une erreur technique s\'est produite.';
-        }
-      );
+      this.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
+      this.validDraftCompany();
     }
   }
 
@@ -219,12 +206,13 @@ export class CompanyComponent implements OnInit {
 
   selectCompanyFromResults(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.selectCompany(companySearchResult.draftCompany);
+    this.draftCompany = companySearchResult;
+    this.validDraftCompany();
   }
 
-  selectCompany(draftCompany: DraftCompany) {
+  validDraftCompany() {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
-    this.draftReport.draftCompany = draftCompany;
+    this.draftReport.draftCompany = this.draftCompany;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
@@ -252,7 +240,12 @@ export class CompanyComponent implements OnInit {
             CompanySearchEventActions.searchBySiret,
             CompanySearchEventNames.singleResult
           );
-          this.companySearchBySiretResult = company;
+          if (this.draftReport.companyKind === CompanyKinds.WEBSITE) {
+            this.draftCompany = company.draftCompany;
+            this.initWebsiteForm();
+          } else {
+            this.companySearchBySiretResult = company;
+          }
         } else {
           this.analyticsService.trackEvent(
             EventCategories.companySearch,
@@ -274,8 +267,13 @@ export class CompanyComponent implements OnInit {
     }
   }
 
+  continueWithoutCompany() {
+    this.draftCompany = {};
+    this.initWebsiteForm();
+  }
+
   changeCompany() {
-    this.draftReport.draftCompany = undefined;
+    this.draftCompany = undefined;
     this.companySearchResults = [];
     this.companySearchBySiretResult = undefined;
     this.showErrors = false;
