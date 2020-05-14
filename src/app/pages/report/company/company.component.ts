@@ -27,7 +27,6 @@ export class CompanyComponent implements OnInit {
   step: Step;
   draftReport: DraftReport;
   companyKinds = CompanyKinds;
-  draftCompany: DraftCompany;
 
   websiteForm: FormGroup;
   urlCtrl: FormControl;
@@ -67,12 +66,10 @@ export class CompanyComponent implements OnInit {
       .subscribe(report => {
         if (report) {
           this.draftReport = report;
-          this.draftCompany = report.draftCompany;
-          this.initSearchBySiretForm();
           if (this.draftReport.companyKind === CompanyKinds.SIRET) {
+            this.initSearchBySiretForm();
             this.initSearchForm();
           } else if (this.draftReport.companyKind === CompanyKinds.WEBSITE) {
-            this.bySiret = !this.bySiret;
             this.initWebsiteForm();
           }
         } else {
@@ -98,12 +95,10 @@ export class CompanyComponent implements OnInit {
   }
 
   initWebsiteForm() {
-    if (this.draftCompany) {
-      this.urlCtrl = this.formBuilder.control(this.draftCompany.website ? this.draftCompany.website.url : '', Validators.required);
-      this.websiteForm = this.formBuilder.group({
-        url: this.urlCtrl
-      });
-    }
+    this.urlCtrl = this.formBuilder.control('', Validators.required);
+    this.websiteForm = this.formBuilder.group({
+      url: this.urlCtrl
+    });
   }
 
   initSearchBySiretForm() {
@@ -154,8 +149,10 @@ export class CompanyComponent implements OnInit {
     if (!this.websiteForm.valid) {
       this.showErrors = true;
     } else {
-      this.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
-      this.validDraftCompany();
+      this.websiteForm = undefined;
+      this.showErrors = false;
+      this.initSearchForm();
+      this.initSearchBySiretForm();
     }
   }
 
@@ -206,13 +203,15 @@ export class CompanyComponent implements OnInit {
 
   selectCompanyFromResults(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.draftCompany = companySearchResult;
-    this.validDraftCompany();
+    this.selectCompany(companySearchResult.draftCompany);
   }
 
-  validDraftCompany() {
+  selectCompany(draftCompany: DraftCompany) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
-    this.draftReport.draftCompany = this.draftCompany;
+    this.draftReport.draftCompany = draftCompany;
+    if (this.urlCtrl) {
+      this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
+    }
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
@@ -240,12 +239,7 @@ export class CompanyComponent implements OnInit {
             CompanySearchEventActions.searchBySiret,
             CompanySearchEventNames.singleResult
           );
-          if (this.draftReport.companyKind === CompanyKinds.WEBSITE) {
-            this.draftCompany = company.draftCompany;
-            this.initWebsiteForm();
-          } else {
-            this.companySearchBySiretResult = company;
-          }
+          this.companySearchBySiretResult = company;
         } else {
           this.analyticsService.trackEvent(
             EventCategories.companySearch,
@@ -268,12 +262,11 @@ export class CompanyComponent implements OnInit {
   }
 
   continueWithoutCompany() {
-    this.draftCompany = {};
-    this.initWebsiteForm();
+    this.selectCompany({});
   }
 
   changeCompany() {
-    this.draftCompany = undefined;
+    this.draftReport.draftCompany = undefined;
     this.companySearchResults = [];
     this.companySearchBySiretResult = undefined;
     this.showErrors = false;
