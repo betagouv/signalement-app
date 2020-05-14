@@ -222,8 +222,10 @@ describe('CompanyComponent', () => {
 
     beforeEach(() => {
       reportStorageService.reportInProgess = of(Object.assign(genDraftReport(),
-        {subcategories: Object.assign(genSubcategory(), {companyKind: CompanyKinds.WEBSITE}
-        )}
+        {
+          subcategories: [Object.assign(genSubcategory(), { companyKind: CompanyKinds.WEBSITE })],
+          draftCompany: undefined
+        }
        ));
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;
@@ -235,7 +237,6 @@ describe('CompanyComponent', () => {
     });
 
     it('should initialize website form with a single input and display it', () => {
-
       const nativeElement = fixture.nativeElement;
       expect(component.websiteForm).toBeDefined();
       expect(component.searchForm).not.toBeDefined();
