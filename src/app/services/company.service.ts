@@ -319,6 +319,42 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bpaypal(\.com)?\b/i,
+      results: [
+        {
+          "siret": "82501514200011",
+          "nom_raison_sociale": "PAYPAL EUROPE ET CIE SCA",
+          "l1_normalisee": "PAYPAL EUROPE ET CIE SCA",
+          "l2_normalisee": null,
+          "l3_normalisee": null,
+          "l4_normalisee": null,
+          "l5_normalisee": null,
+          "l6_normalisee": null,
+          "code_postal": null,
+          "libelle_activite_principale": "Conseil pour les affaires et autres conseils de gestion",
+          "highlight": "Pour un problème relatif au service PayPal",
+        }
+      ]
+    },
+    {
+      query: /\bengie\b/i,
+      results: [
+        {
+          "siret": "54210765113030",
+          "nom_raison_sociale": "ENGIE",
+          "l1_normalisee": "ENGIE",
+          "l2_normalisee": "ENGIE",
+          "l3_normalisee": null,
+          "l4_normalisee": "1 PLACE SAMUEL DE CHAMPLAIN",
+          "l5_normalisee": null,
+          "l6_normalisee": "92400 COURBEVOIE",
+          "code_postal": "92400",
+          "libelle_activite_principale": "Commerce de combustibles gazeux par conduites",
+          "highlight": "Pour tout problème avec Engie, peu importe votre lieu d'habitation"
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
