@@ -90,22 +90,20 @@
               edit
             </i>
           </h3>
-          <ng-container *ngIf="report.company.name">
-            <div class="row">
-              <div class="col-12">
-                SIRET : {{report.company.siret}}
-                <br/>
-                Nom : {{report.company.name}}
-                <br/>
-                Adresse : {{report.company.address}}
-              </div>
+          <div class="row" *ngIf="report.company.name">
+            <div class="col-12">
+              SIRET : {{report.company.siret}}
+              <br/>
+              Nom : {{report.company.name}}
+              <br/>
+              Adresse : {{report.company.address}}
             </div>
-            <div class="row" *ngIf="report.website.url">
-              <div class="col-12">
-                Site internet : {{report.website.url}}
-              </div>
+          </div>
+          <div class="row" *ngIf="report.website.url">
+            <div class="col-12">
+              Site internet : {{report.website.url}}
             </div>
-          </ng-container>
+          </div>
           <ng-template #companySearch>
             <div class="modal-body text-center">
               <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">

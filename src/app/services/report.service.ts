@@ -72,7 +72,7 @@ export class ReportService {
   updateReportCompany(reportId: string, companySearchResult: CompanySearchResult) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.post(
+        return this.http.post<Report> (
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'company']),
           {
             name: companySearchResult.name,
