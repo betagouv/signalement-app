@@ -44,22 +44,28 @@
 
     <ng-template #noCompany>
 
-      <form [formGroup]="websiteForm" (submit)="submitWebsiteForm()" id="websiteForm" *ngIf="websiteForm">
-        <div class="form__group mt-4">
-          <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) <span class="error">*</span>
-          </label>
-          <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr" appAutofocus="true"/>
-        </div>
+      <ng-container *ngIf="websiteForm">
+        <h2 class="text-center mb-4 font-weight-bold">
+          Informations sur l'entreprise
+        </h2>
 
-        <div class="notification error mt-3" *ngIf="showErrors && websiteForm.invalid">
-          <span *ngIf="urlCtrl.hasError('required')">
-            Veuillez renseigner l'url du site.<br />
-          </span>
-        </div>
-        <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4">
-          Continuer
-        </button>
-      </form>
+        <form [formGroup]="websiteForm" (submit)="submitWebsiteForm()" id="websiteForm">
+          <div class="form__group mt-4">
+            <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) <span class="error">*</span>
+            </label>
+            <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr" appAutofocus="true"/>
+          </div>
+
+          <div class="notification error mt-3" *ngIf="showErrors && websiteForm.invalid">
+            <span *ngIf="urlCtrl.hasError('required')">
+              Veuillez renseigner l'url du site.<br />
+            </span>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4">
+            Continuer
+          </button>
+        </form>
+      </ng-container>
 
       <ng-container *ngIf="searchBySiretForm && searchForm">
         <nav class="nav nav-tabs nav-justified" role="tablist">
