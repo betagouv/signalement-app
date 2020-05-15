@@ -130,10 +130,10 @@
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
             <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
-                <div class="col-12 col-lg-3 mb-2 text-center">
+                <div class="col-12 col-lg-3 mb-2 pr-0 text-center">
                   <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
                 </div>
-                <div class="col-12 col-lg-9 pl-lg-0">
+                <div class="col-12 col-lg-9">
                   <div class="category-title">{{category.category}}</div>
                   <span class="note">{{category.description}}</span>
                 </div>

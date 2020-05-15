@@ -67,7 +67,7 @@ list:
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
     rank: 18
-    icon: email-24px.svg
+    icon: icon_ecommerce.png
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
       content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
@@ -129,7 +129,7 @@ list:
     path: demarches-administratives
     description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
     rank: 109
-    icon: icon_marianne.png
+    icon: icon_admin.png
     subcategories: !!import/single subcategories/demarches-administratives.yml
   - category: Travail au noir
     categoryId: TNOIR
