@@ -16,7 +16,7 @@ import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftCompany, Website } from '../../../model/Company';
 
-enum IdentificationKinds {
+export enum IdentificationKinds {
   Name = 'Name', Siret = 'Siret', None = 'None'
 }
 
