@@ -285,4 +285,5 @@ export class CompanyComponent implements OnInit {
   getIdentificationClass(kind: IdentificationKinds) {
     return this.identificationKind ? (this.identificationKind === kind ? 'selected' : 'unselected') : '';
   }
+
 }

@@ -76,19 +76,18 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
     });
 
-    it('should enable to display the search form when selecting radio', () => {
+    it('should enable to display the search form for identication by name', () => {
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelectorAll('input[type="radio"]')[0].select();
+      component.identificationKind = IdentificationKinds.Name;
       fixture.detectChanges();
 
-      console.log('kind', component.identificationKind)
       expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
       expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
     });
 
-    it('should enable to display the searchBySiret form when selecting radio', () => {
+    it('should enable to display the searchBySiret form for identification by siret', () => {
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelectorAll('input[type="radio"]')[1].click();
+      component.identificationKind = IdentificationKinds.Siret;
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
@@ -100,6 +99,8 @@ describe('CompanyComponent', () => {
       beforeEach(() => {
         component.searchCtrl.setValue('Mon entreprise dans ma ville');
         component.searchPostalCodeCtrl.setValue('87270');
+        component.identificationKind = IdentificationKinds.Name;
+        fixture.detectChanges();
       });
 
       it('should initialize previous results', () => {
@@ -255,6 +256,23 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelector('form#websiteForm')).not.toBeNull();
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
       expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+    });
+
+    it('should initialize others forms and display radios for identification choice on submitting website form ', () => {
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
+      nativeElement.querySelector('form#websiteForm #urlInput').dispatchEvent(new Event('input'));
+      nativeElement.querySelectorAll('form#websiteForm button')[0].click();
+      fixture.detectChanges();
+
+      expect(component.urlCtrl.value).toBe('http://monsite.com');
+      expect(component.searchForm).toBeDefined();
+      expect(component.searchForm.controls['search']).toBeDefined();
+      expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
+      expect(component.searchBySiretForm).toBeDefined();
+      expect(component.searchBySiretForm.controls['siret']).toBeDefined();
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
     });
 
   });
