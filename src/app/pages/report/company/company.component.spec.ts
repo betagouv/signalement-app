@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompanyComponent } from './company.component';
+import { CompanyComponent, IdentificationKinds } from './company.component';
 import { CompanyService } from '../../../services/company.service';
 import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { of } from 'rxjs';
@@ -65,7 +65,7 @@ describe('CompanyComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should initialize forms and display the search form', () => {
+    it('should initialize forms and display radios', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(component.searchForm).toBeDefined();
@@ -73,13 +73,22 @@ describe('CompanyComponent', () => {
       expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
       expect(component.searchBySiretForm).toBeDefined();
       expect(component.searchBySiretForm.controls['siret']).toBeDefined();
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
+    });
+
+    it('should enable to display the search form when selecting radio', () => {
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelectorAll('input[type="radio"]')[0].select();
+      fixture.detectChanges();
+
+      console.log('kind', component.identificationKind)
       expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
       expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
     });
 
-    it('should enable to display the searchBySiret form whith navTabs', () => {
+    it('should enable to display the searchBySiret form when selecting radio', () => {
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelectorAll('.nav-item')[1].click();
+      nativeElement.querySelectorAll('input[type="radio"]')[1].click();
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
@@ -94,7 +103,8 @@ describe('CompanyComponent', () => {
       });
 
       it('should initialize previous results', () => {
-        component.companySearchResults = [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
+        component.companySearchResults =
+          [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
         const companySearchResults = Object.assign(new CompanySearchResults(), {
           total_results: 0,
           etablissement: []
@@ -177,7 +187,7 @@ describe('CompanyComponent', () => {
     describe('submitting siret form', () => {
 
       it('should display errors when occurs', () => {
-        component.bySiret = true;
+        component.identificationKind = IdentificationKinds.Siret;
         fixture.detectChanges();
 
         const nativeElement = fixture.nativeElement;
@@ -203,7 +213,7 @@ describe('CompanyComponent', () => {
         );
         spyOn(companyService, 'searchCompaniesBySiret').and.returnValue(of(companyBySiret));
 
-        component.bySiret = true;
+        component.identificationKind = IdentificationKinds.Siret;
         fixture.detectChanges();
 
         const nativeElement = fixture.nativeElement;
