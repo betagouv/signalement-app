@@ -12,10 +12,13 @@ import {
 import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { isPlatformBrowser } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftCompany, Website } from '../../../model/Company';
+
+enum IdentificationKinds {
+  Name = 'Name', Siret = 'Siret', None = 'None'
+}
 
 @Component({
   selector: 'app-company',
@@ -50,7 +53,8 @@ export class CompanyComponent implements OnInit {
 
   loading: boolean;
 
-  bySiret = false;
+  identificationKinds = IdentificationKinds;
+  identificationKind: IdentificationKinds;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -76,13 +80,6 @@ export class CompanyComponent implements OnInit {
           this.reportRouterService.routeToFirstStep();
         }
       });
-  }
-
-  changeNavTab() {
-    this.bySiret = !this.bySiret;
-    if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo(0, 0);
-    }
   }
 
   initSearchForm() {
@@ -149,11 +146,19 @@ export class CompanyComponent implements OnInit {
     if (!this.websiteForm.valid) {
       this.showErrors = true;
     } else {
-      this.websiteForm = undefined;
+      this.websiteForm.disable();
       this.showErrors = false;
       this.initSearchForm();
       this.initSearchBySiretForm();
     }
+  }
+
+  changeWebsite() {
+    this.websiteForm.enable();
+    this.showErrors = false;
+    this.searchForm = undefined;
+    this.searchBySiretForm = undefined;
+    this.identificationKind = undefined;
   }
 
   treatCaseNoResult() {
@@ -261,10 +266,6 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  continueWithoutCompany() {
-    this.selectCompany({});
-  }
-
   changeCompany() {
     this.draftReport.draftCompany = undefined;
     this.companySearchResults = [];
@@ -279,5 +280,9 @@ export class CompanyComponent implements OnInit {
 
   hasErrorBySiret(formControl: FormControl) {
     return this.showErrorsBySiret && formControl.errors;
+  }
+
+  getIdentificationClass(kind: IdentificationKinds) {
+    return this.identificationKind ? (this.identificationKind === kind ? 'selected' : 'unselected') : '';
   }
 }

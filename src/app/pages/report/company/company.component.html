@@ -53,7 +53,7 @@
           <div class="form__group mt-4">
             <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) <span class="error">*</span>
             </label>
-            <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr" appAutofocus="true"/>
+            <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
           </div>
 
           <div class="notification error mt-3" *ngIf="showErrors && websiteForm.invalid">
@@ -61,26 +61,66 @@
               Veuillez renseigner l'url du site.<br />
             </span>
           </div>
-          <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4">
+          <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4" *ngIf="!websiteForm.disabled; else websiteFormDisabled">
             Continuer
           </button>
         </form>
+
+        <ng-template #websiteFormDisabled>
+          <div class="text-right" *ngIf="websiteForm.disabled">
+            <span class="link pointer" (click)="changeWebsite()" aria-label="Modifier adresse du site internet" tabindex="0">Modifier</span>
+            <i class="material-icons md-18 edit" aria-hidden="true">edit</i>
+          </div>
+          <hr />
+        </ng-template>
+
       </ng-container>
 
       <ng-container *ngIf="searchBySiretForm && searchForm">
-        <nav class="nav nav-tabs nav-justified" role="tablist">
-          <a id="firstTab" nga11y-focus class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
-          <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par SIRET</a>
-        </nav>
 
-        <ng-container *ngIf="!bySiret; else searchBySiret" role="tabpanel">
+        <h2 class="text-center mb-4 font-weight-bold">
+          Identifiez l'entreprise
+        </h2>
 
-          <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
+        <form>
+          <div class="row pb-2 pt-2" [ngClass]="getIdentificationClass(identificationKinds.Name)">
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Name" id="identByName"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label for="identByName" class="label-inline pointer">Par son nom et son code postal</label>
+            </div>
+          </div>
+
+          <div class="row pb-2 pt-2" [ngClass]="getIdentificationClass(identificationKinds.Siret)">
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Siret" id="identBySiret"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label for="identBySiret" class="label-inline pointer">Par son SIRET</label>
+            </div>
+          </div>
+
+          <div class="row pb-2 pt-2" [ngClass]="getIdentificationClass(identificationKinds.None)" *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label for="noIdent" class="label-inline pointer">Il n'est pas possible d'identifier l'entreprise</label>
+            </div>
+          </div>
+        </form>
+
+        <div *ngIf="identificationKind === identificationKinds.Name">
+
+          <hr />
+
+          <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
 
             <div class="form__group mt-4">
               <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise signalée <span class="error">*</span>
               </label>
-              <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" appAutofocus="true"/>
+              <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean"/>
             </div>
             <div class="form__group">
               <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
@@ -138,7 +178,7 @@
             </p>
 
             <div class="notification info mt-4">
-              Si l'entreprise ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" tabindex="0">rechercher avec le numéro SIRET de l'entreprise</span>.
+              Si l'entreprise ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="identificationKind = identificationKinds.Siret" tabindex="0">rechercher avec le numéro SIRET de l'entreprise</span>.
             </div>
           </div>
 
@@ -146,20 +186,24 @@
             <p>
               {{searchWarning}}
             </p>
-            Veuillez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro SIRET de l'entreprise</span>.
+            Veuillez modifier votre recherche ou <span class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</span>.
           </div>
 
           <div class="notification error mt-4" *ngIf="searchError">
             <p>
               {{searchError}}
             </p>
-            Veuillez réessayer ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro SIRET de l'entreprise</span>.
+            Veuillez réessayer ou <span class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</span>.
           </div>
-        </ng-container>
 
-        <ng-template #searchBySiret role="tabpanel">
 
-          <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm" *ngIf="searchBySiretForm">
+        </div>
+
+        <div *ngIf="identificationKind === identificationKinds.Siret">
+
+          <hr />
+
+          <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm">
 
             <div class="notification info">
               Le SIRET est un numéro composé de 14 chiffres identifiant l'entreprise concernée.
@@ -227,7 +271,7 @@
               <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
                 Numéro SIRET de l'entreprise <span class="error">*</span>
               </label>
-              <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" appAutofocus="true">
+              <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010">
             </div>
 
             <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">
@@ -281,20 +325,25 @@
             </p>
             Veuillez réessayer.
           </div>
-        </ng-template>
 
-        <div *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
+        </div>
+
+        <div *ngIf="identificationKind === identificationKinds.None">
 
           <hr />
-          <p>
+
+          <div class="notification info">
             Si vous ne parvenez pas à identifier l'entreprise, vous pouvez continuer votre signalement.
             <br />Il ne sera pas transmis à l'entreprise qui gère le site internet mais les enquêteurs de la répression des fraudes en seront informés.
-          </p>
-          <button type="submit" class="btn btn-outline-primary btn-lg" (click)="continueWithoutCompany()">
-            <i class="material-icons md-24" aria-hidden="true">play_arrow</i>
-            Poursuivre sans identifier l'entreprise
+          </div>
+
+          <button type="button" class="btn btn-lg btn-primary" (click)="selectCompany({})">
+            <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
+            Étape suivante : confirmer mon problème
           </button>
+
         </div>
+
       </ng-container>
     </ng-template>
 
