@@ -99,10 +99,10 @@ export class CategoryComponent implements OnInit {
 
 
 export const Illustrations = [
-  { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'picture-problem.svg' },
-  { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'picture-alert.svg' },
-  { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'picture-pro.svg' },
-  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'picture-inspect.svg' },
+  { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'illustrations/consumer.png' },
+  { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'illustrations/report.png' },
+  { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'illustrations/company.png' },
+  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'illustrations/dgccrf.png' },
 ];
 
 @Component({

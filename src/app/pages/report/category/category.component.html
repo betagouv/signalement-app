@@ -17,11 +17,6 @@
   <section class="section section-white d-none d-lg-block">
     <div class="container">
 
-      <div class="notification warning">
-        En raison des circonstances exceptionnelles liées au <strong>COVID-19</strong>, le délai de transmission des signalements aux entreprises est fortement rallongé
-        <br /><a href="/blog/2020/03/17/note-coronavirus">Plus d'informations ici</a>
-      </div>
-
       <h2 class="mb-4 text-secondary">Comment ça marche ?</h2>
       <div class="row" (click)="scrollToElement(categoryList)">
         <div class="col-12 col-sm-3">
@@ -42,11 +37,6 @@
           Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
         </button>
       </div>
-      <p class="indication">
-        Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
-        l’article L. 112-8 du code des relations entre le public et l’administration.
-        <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
-      </p>
     </div>
   </section>
 
@@ -107,11 +97,6 @@
           <li data-target="#carousel-md" data-slide-to="1"></li>
         </ol>
       </div>
-
-      <div class="notification warning">
-        En raison des circonstances exceptionnelles liées au <strong>COVID-19</strong>, les signalements ne sont plus systématiquement transmis aux entreprises
-        <br /><a href="/blog/2020/03/17/note-coronavirus">Plus d'informations ici</a>
-      </div>
     </div>
 
     <div class="container">
@@ -130,10 +115,10 @@
           <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
             <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
-                <div class="col-12 col-lg-3 mb-2 pr-0 text-center">
+                <div class="col-3 mb-2 pr-0 text-center">
                   <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
                 </div>
-                <div class="col-12 col-lg-9">
+                <div class="col-9">
                   <div class="category-title">{{category.category}}</div>
                   <span class="note">{{category.description}}</span>
                 </div>
@@ -145,10 +130,10 @@
             <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
               <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
                 <div class="row">
-                  <div class="col-12 col-lg-3 mb-2 text-center">
+                  <div class="col-3 mb-2 text-center">
                     <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
                   </div>
-                  <div class="col-12 col-lg-9 pl-lg-0">
+                  <div class="col-9 pl-lg-0">
                     <div class="category-title">{{category.category}}</div>
                     <span class="note">{{category.description}}</span>
                   </div>
