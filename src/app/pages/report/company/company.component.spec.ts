@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompanyComponent } from './company.component';
+import { CompanyComponent, IdentificationKinds } from './company.component';
 import { CompanyService } from '../../../services/company.service';
 import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { of } from 'rxjs';
@@ -54,7 +54,7 @@ describe('CompanyComponent', () => {
   describe('case of searching company with SIRET', () => {
 
     beforeEach(() => {
-      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {companyData: undefined}));
+      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {draftCompany: undefined}));
 
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;
@@ -65,7 +65,7 @@ describe('CompanyComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should initialize forms and display the search form', () => {
+    it('should initialize forms and display radios', () => {
 
       const nativeElement = fixture.nativeElement;
       expect(component.searchForm).toBeDefined();
@@ -73,13 +73,21 @@ describe('CompanyComponent', () => {
       expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
       expect(component.searchBySiretForm).toBeDefined();
       expect(component.searchBySiretForm.controls['siret']).toBeDefined();
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
+    });
+
+    it('should enable to display the search form for identication by name', () => {
+      const nativeElement = fixture.nativeElement;
+      component.identificationKind = IdentificationKinds.Name;
+      fixture.detectChanges();
+
       expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
       expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
     });
 
-    it('should enable to display the searchBySiret form whith navTabs', () => {
+    it('should enable to display the searchBySiret form for identification by siret', () => {
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelectorAll('.nav-item')[1].click();
+      component.identificationKind = IdentificationKinds.Siret;
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
@@ -91,10 +99,13 @@ describe('CompanyComponent', () => {
       beforeEach(() => {
         component.searchCtrl.setValue('Mon entreprise dans ma ville');
         component.searchPostalCodeCtrl.setValue('87270');
+        component.identificationKind = IdentificationKinds.Name;
+        fixture.detectChanges();
       });
 
       it('should initialize previous results', () => {
-        component.companySearchResults = [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
+        component.companySearchResults =
+          [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
         const companySearchResults = Object.assign(new CompanySearchResults(), {
           total_results: 0,
           etablissement: []
@@ -177,7 +188,7 @@ describe('CompanyComponent', () => {
     describe('submitting siret form', () => {
 
       it('should display errors when occurs', () => {
-        component.bySiret = true;
+        component.identificationKind = IdentificationKinds.Siret;
         fixture.detectChanges();
 
         const nativeElement = fixture.nativeElement;
@@ -203,7 +214,7 @@ describe('CompanyComponent', () => {
         );
         spyOn(companyService, 'searchCompaniesBySiret').and.returnValue(of(companyBySiret));
 
-        component.bySiret = true;
+        component.identificationKind = IdentificationKinds.Siret;
         fixture.detectChanges();
 
         const nativeElement = fixture.nativeElement;
@@ -222,8 +233,10 @@ describe('CompanyComponent', () => {
 
     beforeEach(() => {
       reportStorageService.reportInProgess = of(Object.assign(genDraftReport(),
-        {subcategories: Object.assign(genSubcategory(), {companyKind: CompanyKinds.WEBSITE}
-        )}
+        {
+          subcategories: [Object.assign(genSubcategory(), { companyKind: CompanyKinds.WEBSITE })],
+          draftCompany: undefined
+        }
        ));
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;
@@ -235,7 +248,6 @@ describe('CompanyComponent', () => {
     });
 
     it('should initialize website form with a single input and display it', () => {
-
       const nativeElement = fixture.nativeElement;
       expect(component.websiteForm).toBeDefined();
       expect(component.searchForm).not.toBeDefined();
@@ -244,6 +256,23 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelector('form#websiteForm')).not.toBeNull();
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
       expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+    });
+
+    it('should initialize others forms and display radios for identification choice on submitting website form ', () => {
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
+      nativeElement.querySelector('form#websiteForm #urlInput').dispatchEvent(new Event('input'));
+      nativeElement.querySelectorAll('form#websiteForm button')[0].click();
+      fixture.detectChanges();
+
+      expect(component.urlCtrl.value).toBe('http://monsite.com');
+      expect(component.searchForm).toBeDefined();
+      expect(component.searchForm.controls['search']).toBeDefined();
+      expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
+      expect(component.searchBySiretForm).toBeDefined();
+      expect(component.searchBySiretForm.controls['siret']).toBeDefined();
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
     });
 
   });

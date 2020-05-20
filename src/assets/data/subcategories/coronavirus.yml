@@ -41,9 +41,9 @@
 - title: Problème avec les règles d'hygiène ou de distanciation physique
 - title: Problème / abus avec un site de vente en ligne
   example: "Exemple : site de livraison de courses à domicile"
+  companyKind: 'WEBSITE'
   subcategories:
     - title: Le prix de la livraison a augmenté
-      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -53,7 +53,6 @@
           rank: 2
           type: TEXTAREA
     - title: Autre problème de prix
-      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -63,7 +62,6 @@
           rank: 2
           type: TEXTAREA
     - title: Problème avec un produit livré
-      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1

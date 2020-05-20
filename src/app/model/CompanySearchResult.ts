@@ -1,3 +1,5 @@
+import { DraftCompany } from './Company';
+
 export class CompanySearchResult {
 
   highlight: string;
@@ -57,6 +59,15 @@ export class CompanySearchResult {
       }
     }
     return address.substring(0, address.length - 3);
+  }
+  
+  get draftCompany() {
+    return <DraftCompany> {
+      name: this.name,
+      address: this.address,
+      postalCode: this.postalCode,
+      siret: this.siret,
+    };
   }
 }
 
