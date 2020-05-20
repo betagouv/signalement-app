@@ -15,7 +15,9 @@ export class AnomalyService {
 
   getAnomalies() {
     if (!this.anomalies) {
-      this.anomalies = anomalies.list;
+      this.anomalies = anomalies.list
+        .map(a => Object.assign(new Anomaly(), a))
+        .map(a => Object.assign(a, {subcategories: a.getSubcategoriesData().subcategories}));
     }
     return this.anomalies;
   }
