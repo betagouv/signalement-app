@@ -64,7 +64,7 @@ export function genDraftReport() {
     category: randomstring.generate(),
     subcategories: [genSubcategory()],
     detailInputValues: [],
-    companyData: genCompanySearchResult(),
+    draftCompany: genCompanySearchResult(),
     uploadedFiles: [],
     consumer: genConsumer(),
     employeeConsumer: false,

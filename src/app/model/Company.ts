@@ -1,10 +1,14 @@
-export interface Company {
+export interface DraftCompany {
+  siret?: string;
+  name?: string;
+  address?: string;
+  postalCode?: string;
+  website?: Website;
+}
+
+export interface Company extends DraftCompany {
   id: string;
-  siret: string;
   creationDate: Date;
-  name: string;
-  address: string;
-  postalCode: string;
 }
 
 export interface CompanyAccess {
@@ -38,7 +42,7 @@ export interface CompanyToActivate {
 export class Website {
   url: string;
 
-  get hosname() {
+  get hostname() {
     return this.url ? this.url
       .replace('http://', '')
       .replace('https://', '')
