@@ -79,7 +79,7 @@
       <ng-container *ngIf="searchBySiretForm && searchForm">
 
         <h2 class="text-center mb-4 font-weight-bold">
-          Identifiez l'entreprise
+          Pouvez-vous identifier l'entreprise ?
         </h2>
 
         <form>
@@ -106,7 +106,7 @@
               <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent"/>
             </div>
             <div class="col-10 col-sm-11 pl-1">
-              <label for="noIdent" class="label-inline pointer">Il n'est pas possible d'identifier l'entreprise</label>
+              <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier l'entreprise</label>
             </div>
           </div>
         </form>
