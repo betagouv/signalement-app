@@ -92,7 +92,9 @@ export class CompanyComponent implements OnInit {
   }
 
   initWebsiteForm() {
-    this.urlCtrl = this.formBuilder.control('', Validators.required);
+    this.urlCtrl = this.formBuilder.control(
+      this.draftReport.draftCompany && this.draftReport.draftCompany.website ? this.draftReport.draftCompany.website.url : '', Validators.required
+    );
     this.websiteForm = this.formBuilder.group({
       url: this.urlCtrl
     });
