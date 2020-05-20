@@ -214,7 +214,7 @@ export class CompanyComponent implements OnInit {
   }
 
   selectCompany(draftCompany: DraftCompany) {
-    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany);
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
     this.draftReport.draftCompany = draftCompany;
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
