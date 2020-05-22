@@ -91,6 +91,11 @@ export class ProblemComponent implements OnInit {
       ReportEventActions.validateSubcategory,
       subcategories.map(subcategory => subcategory.title)
     );
+    this.analyticsService.trackEvent(
+      EventCategories.report,
+      ReportEventActions.contactualReport,
+      subcategories[subcategories.length - 1].consumerActions ? 'Oui' : 'Non'
+    );
     this.draftReport.subcategories = subcategories;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);

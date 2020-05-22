@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
 import { Report, ReportStatus } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { FileOrigin, UploadedFile } from '../../../../model/UploadedFile';
@@ -9,10 +9,10 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../../services/company.service';
 import { CompanySearchResult } from '../../../../model/CompanySearchResult';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { PlatformLocation, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
 import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
 import { Constants } from '../../../../model/Constants';
@@ -210,15 +210,16 @@ export class ReportDetailComponent implements OnInit {
     this.loadingError = false;
     this.reportService.updateReportCompany(this.reportId, company)
       .pipe(
-        switchMap(() => {
-          return this.eventService.getEvents(this.reportId);
-        })
-      )
-      .subscribe(
-        events => {
+        tap(report => {
+          this.report.status = report.status;
           this.report.company.siret = company.siret;
           this.report.company.name = company.name;
           this.report.company.address = company.address;
+        }),
+        switchMap(_ => this.eventService.getEvents(this.reportId))
+      )
+      .subscribe(
+        events => {
           this.events = events;
           this.companySearchBySiretResult = undefined;
           this.siretCtrl.setValue('');

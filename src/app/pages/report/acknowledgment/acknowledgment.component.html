@@ -55,15 +55,7 @@
             <div class="col-12 col-sm-9">
               <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
               <ng-container *ngIf="!draftReport?.employeeConsumer; else employeeConsumer">
-                <ng-container *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
-                  <p>
-                    Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-                  </p>
-                  <p>
-                    Il ne pourra en revanche pas être transmis à l'entreprise qui gère le site internet signalé.
-                  </p>
-                </ng-container>
-                <ng-container *ngIf="draftReport.companyKind === companyKinds.SIRET">
+                <ng-container *ngIf="draftReport.draftCompany.siret; else noSiret">
                   <ng-container *ngIf="draftReport?.contactAgreement; else noContactAgreement">
                     <p>
                       L'entreprise recevra votre signalement.
@@ -85,6 +77,15 @@
                     </p>
                   </ng-template>
                 </ng-container>
+                <ng-template #noSiret>
+                  <p>
+                    Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                  </p>
+                  <p>
+                    Il ne pourra en revanche pas être transmis à l'entreprise qui gère le site internet signalé, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
+                    Dans ce cas, vous recevrez une notification.
+                  </p>
+                </ng-template>
               </ng-container>
               <ng-template #employeeConsumer>
                 <p>
