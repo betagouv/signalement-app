@@ -29,24 +29,31 @@ list:
     icon: icon_service.png
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
   - category: Téléphonie / Eau-Gaz-Electricité
-    categoryId: TEL
-    path: telephonie-eau-gaz-electricite
-    description: forfait téléphone, fournisseur d'accès, contrat gaz...
+    categoryId: ELEC
+    path: eau-gaz-electricite
+    description: Contrat et facture eau, gaz et électricité...
     rank: 12
+    icon: icon_tel.png
+    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
+  - category: Téléphonie / Internet / médias
+    categoryId: TEL
+    path: tel-internet-media
+    description: Fournisseur d'accès, abonnement télé...
+    rank: 13
     icon: icon_tel.png
     subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: banque-assurance-mutuelle
     description: crédit, assurance
-    rank: 13
+    rank: 14
     icon: icon_bank.png
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
   - category: Intoxication alimentaire
     categoryId: INTOX
     path: intoxication-alimentaire
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
-    rank: 14
+    rank: 15
     icon: icon_disease.png
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
