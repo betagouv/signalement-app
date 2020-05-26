@@ -20,40 +20,26 @@
   }
 }
 
-
-:host ::ng-deep {
-
-  .completer-holder {
-    width: 100%;
-    height: 100%;
-  }
-
-  .completer-dropdown-holder div {
-    width: 100%;
-  }
-}
-
-.nav-tabs {
-  border-bottom: 1px solid $blue;
-}
-
-.nav-link {
-  border: 0;
-  color: $blue !important;
-
-  &.active {
-    color: $white !important;
-    background-color: $blue;
-  }
-}
-
-.company-card {
-  border: 1px solid $blue;
-  display: inline-block;
-  padding: 20px;
-  border-radius: 10px
-}
-
 .edit {
   color: $blue;
+}
+
+hr {
+  margin-bottom: 60px;
+}
+
+.selected {
+  background-color: $light-green;
+  border-radius: $theme-border-more-radius;
+
+  label, h2 {
+    color: $black;
+  }
+
+}
+
+.unselected {
+  label, h2 {
+    color: $darker-grey;
+  }
 }

@@ -5,10 +5,9 @@
       description: Le prix des gels hydroalcooliques est réglementé (décret n° 2020-293 du 23 mars 2020). Pour un consommateur, les prix maximums sont&nbsp;:&nbsp;
                     <ul>
                       <li>1,76€ pour un flacon de 50 ml</li>
-                      <li>2,64€ pour 75 ml</li>
-                      <li>4,4€ pour 100 ml</li>
-                      <li>5€ pour 300 ml</li>
-                      <li>13,9€ pour un litre</li>
+                      <li>2,64€ pour 100 ml</li>
+                      <li>4,4€ pour 300 ml</li>
+                      <li>13,19€ pour un litre</li>
                     </ul>
                   Il existe des exceptions à ces prix en fonction par exemple du type de contenant. 
       detailInputs:
@@ -42,9 +41,9 @@
 - title: Problème avec les règles d'hygiène ou de distanciation physique
 - title: Problème / abus avec un site de vente en ligne
   example: "Exemple : site de livraison de courses à domicile"
+  companyKind: 'WEBSITE'
   subcategories:
     - title: Le prix de la livraison a augmenté
-      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -54,7 +53,6 @@
           rank: 2
           type: TEXTAREA
     - title: Autre problème de prix
-      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -64,7 +62,6 @@
           rank: 2
           type: TEXTAREA
     - title: Problème avec un produit livré
-      companyKind: 'WEBSITE'
       detailInputs:
         - label: Date du constat
           rank: 1

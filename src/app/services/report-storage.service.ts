@@ -3,8 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { DetailInputValue, DraftReport, Step } from '../model/Report';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UploadedFile } from '../model/UploadedFile';
-import { CompanySearchResult } from '../model/CompanySearchResult';
-import { CompanyKinds } from '../model/Anomaly';
 import { Website } from '../model/Company';
 
 const ReportStorageKey = 'ReportSignalConso';
@@ -32,16 +30,8 @@ export class ReportStorageService {
         if (draftReport.uploadedFiles) {
           draftReport.uploadedFiles = draftReport.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
         }
-        if (draftReport.companyData) {
-          console.log('draftReport.companyData', draftReport.companyKind)
-          switch (draftReport.companyKind) {
-            case CompanyKinds.SIRET:
-              draftReport.companyData = Object.assign(new CompanySearchResult(), draftReport.companyData);
-              return;
-            case CompanyKinds.WEBSITE:
-              draftReport.companyData = Object.assign(new Website(), draftReport.companyData);
-              return;
-          }
+        if (draftReport.draftCompany && draftReport.draftCompany.website) {
+          draftReport.draftCompany.website = Object.assign(new Website(), draftReport.draftCompany.website);
         }
         this.reportInProgessSource.next(draftReport);
       }

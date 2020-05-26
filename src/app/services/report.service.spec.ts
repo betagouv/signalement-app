@@ -90,7 +90,7 @@ describe('ReportService', () => {
       draftReport.category = 'category';
       draftReport.subcategories = [subcategory1, subcategory2];
       draftReport.consumer = consumer;
-      draftReport.companyData = company;
+      draftReport.draftCompany = company;
       draftReport.detailInputValues = [detailInputValue];
 
       reportService.createReport(draftReport).subscribe(result => {

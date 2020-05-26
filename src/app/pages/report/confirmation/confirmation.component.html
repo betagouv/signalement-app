@@ -43,30 +43,24 @@
           </div>
         </div>
         <hr />
-        <ng-container *ngIf="draftReport.companyKind === companyKinds.SIRET">
-          <h3>Entreprise</h3>
-          <div class="row">
-            <div class="col-12">
-              <strong *ngIf="draftReport.companyData.line1">{{draftReport.companyData.line1}}<br /></strong>
-              <strong *ngIf="draftReport.companyData.line2">{{draftReport.companyData.line2}}<br /></strong>
-              <span *ngIf="draftReport.companyData.line3">{{draftReport.companyData.line3}}<br /></span>
-              <span *ngIf="draftReport.companyData.line4">{{draftReport.companyData.line4}}<br /></span>
-              <span *ngIf="draftReport.companyData.line5">{{draftReport.companyData.line5}}<br /></span>
-              <span *ngIf="draftReport.companyData.line6">{{draftReport.companyData.line6}}<br /></span>
-              <span *ngIf="draftReport.companyData.line7">{{draftReport.companyData.line7}}<br /></span>
-            </div>
+        <h3>Entreprise</h3>
+        <div class="row" *ngIf="draftReport.draftCompany.name">
+          <div class="col-12">
+            Nom : <strong>{{draftReport.draftCompany.name}}<br /></strong>
+            Adresse : {{draftReport.draftCompany.address}}
           </div>
-          <hr />
-        </ng-container>
-        <ng-container *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
-          <h3>Site internet</h3>
-          <div class="row">
-            <div class="col-12">
-              {{draftReport.companyData.url}}
-            </div>
+        </div>
+        <div class="row" *ngIf="draftReport.draftCompany.siret">
+          <div class="col-12">
+            SIRET : {{draftReport.draftCompany.siret}}
           </div>
-          <hr />
-        </ng-container>
+        </div>
+        <div class="row" *ngIf="draftReport.draftCompany.website">
+          <div class="col-12">
+            Site internet : {{draftReport.draftCompany.website.url}}
+          </div>
+        </div>
+        <hr />
         <h3>Consommateur</h3>
         <div class="row">
           <div class="col-12">
