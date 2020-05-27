@@ -75,7 +75,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Details;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
@@ -272,7 +272,7 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetailsForm() {
-
+    console.log('detailsForm', this.detailsForm)
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {

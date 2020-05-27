@@ -37,7 +37,7 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Confirmation;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
@@ -66,7 +66,6 @@ export class ConfirmationComponent implements OnInit {
         result => {
           this.loading = false;
           this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
-          this.reportStorageService.removeReportInProgressFromStorage();
           this.reportRouterService.routeForward(this.step);
         },
         error => {

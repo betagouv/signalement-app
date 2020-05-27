@@ -41,6 +41,10 @@ export class DraftReport {
       return this.subcategories[this.subcategories.length - 1].companyKind || CompanyKinds.SIRET;
     }
   }
+
+  get information() {
+    return this.subcategories && this.subcategories.length && this.subcategories[this.subcategories.length - 1].information;
+  }
 }
 
 export class Report {

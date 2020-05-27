@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Information } from '../../../model/Anomaly';
+import { Anomaly, Information } from '../../../model/Anomaly';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -9,6 +9,7 @@ import { switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { RatingService } from '../../../services/rating.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-information',
@@ -39,30 +40,30 @@ export class InformationComponent implements OnInit, OnDestroy {
 
     this.activatedRoute.url.pipe(
       take(1),
-      switchMap(
-        url => {
-          const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
-          if (anomaly && !url[1]) {
-            this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
-            this.draftReport = new DraftReport();
-            this.draftReport.category = anomaly.category;
-            this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
-            this.titleService.setTitle(`${anomaly.category} - SignalConso`);
-            this.meta.updateTag({ name: 'description', content: anomaly.description });
-          }
-          return this.reportStorageService.reportInProgess;
+      switchMap(url => {
+        const anomaly = this.anomalyService.getAnomalyBy(a => a.path === url[0].path);
+        if (anomaly && !url[1]) {
+          return of(this.initFromAnomaly(anomaly));
+        } else {
+          return this.reportStorageService.retrieveReportInProgress();
         }
-      ),
-      take(1)
+      }),
     ).subscribe(report => {
       if (report) {
         this.draftReport = report;
         this.initInformation();
-        this.reportStorageService.removeReportInProgressFromStorage();
+        this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
       } else {
         this.reportRouterService.routeToFirstStep();
       }
     });
+  }
+
+  initFromAnomaly(anomaly: Anomaly) {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
+    this.titleService.setTitle(`${anomaly.category} - SignalConso`);
+    this.meta.updateTag({ name: 'description', content: anomaly.description });
+    return Object.assign(new DraftReport(), {category: anomaly.category});
   }
 
   initInformation() {
@@ -77,7 +78,6 @@ export class InformationComponent implements OnInit, OnDestroy {
   }
 
   newReport() {
-    this.reportStorageService.removeReportInProgress();
     this.reportRouterService.routeToFirstStep();
   }
 

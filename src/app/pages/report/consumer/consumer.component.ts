@@ -33,7 +33,7 @@ export class ConsumerComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Consumer;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {

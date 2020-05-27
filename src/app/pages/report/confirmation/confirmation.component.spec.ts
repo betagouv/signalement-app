@@ -10,10 +10,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
+import { Step } from '../../../model/Report';
+import { of } from 'rxjs';
 
 describe('ConfirmationComponent', () => {
-
-  const draftReportFixture = genDraftReport();
 
   let component: ConfirmationComponent;
   let fixture: ComponentFixture<ConfirmationComponent>;
@@ -42,7 +42,7 @@ describe('ConfirmationComponent', () => {
 
   beforeEach(() => {
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.changeReportInProgress(draftReportFixture);
+    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Consumer)));
 
     fixture = TestBed.createComponent(ConfirmationComponent);
     component = fixture.componentInstance;

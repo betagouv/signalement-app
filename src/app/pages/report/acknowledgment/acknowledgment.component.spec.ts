@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
+import { Step } from '../../../model/Report';
+import { of } from 'rxjs';
 
 describe('AcknoledgmentComponent', () => {
 
@@ -26,7 +28,7 @@ describe('AcknoledgmentComponent', () => {
 
   beforeEach(() => {
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.changeReportInProgress(genDraftReport());
+    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Confirmation)));
 
     fixture = TestBed.createComponent(AcknowledgmentComponent);
     component = fixture.componentInstance;

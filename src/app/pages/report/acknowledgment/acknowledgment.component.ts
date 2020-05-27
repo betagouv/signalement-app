@@ -21,7 +21,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Acknowledgment;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(draftReport => {
         if (draftReport) {

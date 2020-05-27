@@ -1,9 +1,10 @@
 import { Roles, User } from '../src/app/model/AuthUser';
-import { DraftReport, Report, ReportStatus } from '../src/app/model/Report';
+import { DraftReport, Report, ReportStatus, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
 import { CompanySearchResult } from '../src/app/model/CompanySearchResult';
 import { Subcategory } from '../src/app/model/Anomaly';
 import { Company } from '../src/app/model/Company';
+import anomalies from '../src/assets/data/anomalies.json';
 
 const randomstring = require('randomstring');
 
@@ -59,17 +60,37 @@ export function genUser(role: Roles) {
   });
 }
 
-export function genDraftReport() {
-  return Object.assign(new DraftReport(), {
-    category: randomstring.generate(),
-    subcategories: [genSubcategory()],
-    detailInputValues: [],
-    draftCompany: genCompanySearchResult(),
-    uploadedFiles: [],
-    consumer: genConsumer(),
-    employeeConsumer: false,
-    contactAgreement: oneBoolean
-  });
+export function genDraftReport(lastStep: Step) {
+  const stepOrder = [
+    Step.Category,
+    Step.Problem,
+    Step.Information,
+    Step.Details,
+    Step.Company,
+    Step.Consumer,
+    Step.Confirmation,
+    Step.Acknowledgment
+  ];
+  const draftReport = new DraftReport();
+  if (stepOrder.indexOf(lastStep) >= stepOrder.indexOf(Step.Category)) {
+    draftReport.category = oneOf(anomalies.list.filter(anomaly => !anomaly.information).map(anomaly => anomaly.category));
+  }
+  if (stepOrder.indexOf(lastStep) >= stepOrder.indexOf(Step.Problem)) {
+    draftReport.subcategories = [genSubcategory()];
+  }
+  if (stepOrder.indexOf(lastStep) >= stepOrder.indexOf(Step.Details)) {
+    draftReport.employeeConsumer = oneBoolean();
+    draftReport.detailInputValues = [];
+    draftReport.uploadedFiles = [];
+  }
+  if (stepOrder.indexOf(lastStep) >= stepOrder.indexOf(Step.Company)) {
+    draftReport.draftCompany = genCompanySearchResult();
+  }
+  if (stepOrder.indexOf(lastStep) >= stepOrder.indexOf(Step.Consumer)) {
+    draftReport.consumer = genConsumer();
+    draftReport.contactAgreement = oneBoolean();
+  }
+  return draftReport;
 }
 
 export function genReport() {
