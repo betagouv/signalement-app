@@ -117,7 +117,7 @@ describe('ProblemComponent', () => {
       const subcategoryExpected = new Subcategory();
       subcategoryExpected.title = 'title2';
       subcategoryExpected.description = 'description2';
-      const draftReportExpected = Object.assign(draftReportInProgress, {
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
         subcategories: [subcategoryExpected]
       });
 

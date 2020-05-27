@@ -175,7 +175,7 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const draftReportExpected = Object.assign(draftReportInProgress, {
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
         detailInputValues: [
           Object.assign(new DetailInputValue(), {label: 'Description', value: 'valeur'}),
           Object.assign(new DetailInputValue(), {label: 'Date du constat', value: anomalyDateFixture})
@@ -234,7 +234,7 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const draftReportExpected = Object.assign(draftReportInProgress, {
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
         detailInputValues: [
           Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'})
         ],
@@ -322,7 +322,7 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const draftReportExpected = Object.assign(draftReportInProgress, {
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
         detailInputValues: [
           Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'}),
           Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),

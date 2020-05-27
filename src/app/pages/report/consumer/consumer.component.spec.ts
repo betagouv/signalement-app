@@ -46,10 +46,12 @@ describe('ConsumerComponent', () => {
   describe('case of company report when the consumer is not an employee', () => {
 
     const draftReportInProgress = Object.assign(genDraftReport(Step.Company), { employeeConsumer : false });
+    let retrieveReportSpy;
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+      retrieveReportSpy = spyOn(reportStorageService, 'retrieveReportInProgress')
+        .and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
       fixture = TestBed.createComponent(ConsumerComponent);
       component = fixture.componentInstance;
@@ -83,6 +85,26 @@ describe('ConsumerComponent', () => {
         expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeFalsy();
         expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeFalsy();
       });
+
+      it('should initialize the details inputs with initial value when it exists', () => {
+        const draftReportWithConsumer = Object.assign(genDraftReport(Step.Consumer), { employeeConsumer : false });
+        retrieveReportSpy.and.returnValue(of(Object.assign(new DraftReport(), draftReportWithConsumer)));
+
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const nativeElement = fixture.nativeElement;
+        expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual(draftReportWithConsumer.consumer.firstName);
+        expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual(draftReportWithConsumer.consumer.lastName);
+        expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual(draftReportWithConsumer.consumer.email);
+        if (draftReportWithConsumer.contactAgreement) {
+          expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeTruthy();
+          expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeFalsy();
+        } else {
+          expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeFalsy();
+          expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeTruthy();
+        }
+      });
     });
 
     describe('submitConsumerForm function', () => {
@@ -115,7 +137,7 @@ describe('ConsumerComponent', () => {
         nativeElement.querySelector('button#submitConsumerForm').click();
         fixture.detectChanges();
 
-        const draftReportExpected = Object.assign(draftReportInProgress, {
+        const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
           consumer: consumer,
           contactAgreement: true
         });
@@ -124,39 +146,6 @@ describe('ConsumerComponent', () => {
 
       });
     });
-  });
-
-  describe('case of company report with initial consumer', () => {
-
-    const draftReportInProgress = Object.assign(genDraftReport(Step.Consumer), { employeeConsumer : false });
-
-    beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
-      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
-
-      fixture = TestBed.createComponent(ConsumerComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it('should initialize the details inputs', () => {
-
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual(draftReportInProgress.consumer.firstName);
-      expect(nativeElement.querySelector('input[formControlName="lastName"]').value).toEqual(draftReportInProgress.consumer.lastName);
-      expect(nativeElement.querySelector('input[formControlName="email"]').value).toEqual(draftReportInProgress.consumer.email);
-      if (draftReportInProgress.contactAgreement) {
-        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeTruthy();
-        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeFalsy();
-      } else {
-        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementTrue').checked).toBeFalsy();
-        expect(nativeElement.querySelector('input[type="radio"]#contactAgreementFalse').checked).toBeTruthy();
-      }
-    });
-
   });
 
   describe('case of website report when the consumer is not an employee', () => {
