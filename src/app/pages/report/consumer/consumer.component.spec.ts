@@ -10,8 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { AutofocusDirective } from '../../../directives/auto-focus.directive';
-import { genConsumer, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
-import { CompanyKinds } from '../../../model/Anomaly';
+import { genConsumer, genDraftReport } from '../../../../../test/fixtures.spec';
 import { of } from 'rxjs';
 
 describe('ConsumerComponent', () => {
@@ -146,32 +145,6 @@ describe('ConsumerComponent', () => {
 
       });
     });
-  });
-
-  describe('case of website report when the consumer is not an employee', () => {
-
-    const draftReportInProgress = Object.assign(genDraftReport(Step.Company), {
-      subcategories: [
-        Object.assign(genSubcategory(), {companyKind: CompanyKinds.WEBSITE})
-      ]
-    });
-
-    beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
-      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
-
-      fixture = TestBed.createComponent(ConsumerComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it('should define all form controls except contactAgreement', () => {
-      expect(component.consumerForm.controls['firstName']).toEqual(component.firstNameCtrl);
-      expect(component.consumerForm.controls['lastName']).toEqual(component.lastNameCtrl);
-      expect(component.consumerForm.controls['email']).toEqual(component.emailCtrl);
-      expect(component.consumerForm.contains('contactAgreement')).toBeFalsy();
-    });
-
   });
 
   describe('case of the consumer is an employee', () => {
