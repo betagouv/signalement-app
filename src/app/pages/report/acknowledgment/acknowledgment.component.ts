@@ -41,10 +41,4 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
     this.reportRouterService.routeToFirstStep();
   }
 
-  getReportLastSubcategory() {
-    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
-      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
-    }
-  }
-
 }

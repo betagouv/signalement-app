@@ -71,9 +71,9 @@ export class InformationComponent implements OnInit, OnDestroy {
     if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
-    } else if (this.getReportLastSubcategory() && this.getReportLastSubcategory().information) {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.getReportLastSubcategory().title);
-      this.informationToDisplay = this.getReportLastSubcategory().information;
+    } else if (this.draftReport.lastSubcategory && this.draftReport.lastSubcategory.information) {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.draftReport.lastSubcategory.title);
+      this.informationToDisplay = this.draftReport.lastSubcategory.information;
     }
   }
 
@@ -83,12 +83,6 @@ export class InformationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.reportRouterService.routeBackward(this.step);
-  }
-
-  getReportLastSubcategory() {
-    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
-      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
-    }
   }
 
   rateInformation(positive: boolean) {

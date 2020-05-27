@@ -78,7 +78,7 @@ export class ReportRouterService {
           return Step.Details;
         }
       case Step.Problem:
-        if (draftReport.information) {
+        if (draftReport.lastSubcategory.information) {
           return Step.Information;
         } else {
           return Step.Details;

@@ -6,7 +6,7 @@
   </section>
   <section class="section section-lighter-grey">
     <div class="container max-width">
-      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
+      <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -18,7 +18,7 @@
               </div>
               <div class="col-12 col-sm-9">
                 <h2 class="d-none d-sm-block">Comment me faire rembourser ou dédommager ?</h2>
-                <div class="collapse-container" *ngFor="let consumerActionGroup of getReportLastSubcategory().consumerActions; let index = index">
+                <div class="collapse-container" *ngFor="let consumerActionGroup of draftReport.lastSubcategory.consumerActions; let index = index">
                   <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse{{index}}">
                     <button type="button" class="btn">{{index + 1}}</button>
                     <button type="button" class="btn link">
@@ -102,7 +102,7 @@
           </div>
         </div>
       </div>
-      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
+      <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
         <div class="card">
           <div class="card-body">
             <div class="row">

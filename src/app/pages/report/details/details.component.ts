@@ -102,8 +102,8 @@ export class DetailsComponent implements OnInit {
   }
 
   initDetailInputs() {
-    if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
-      this.detailInputs = this.getReportLastSubcategory().detailInputs;
+    if (this.draftReport.lastSubcategory && this.draftReport.lastSubcategory.detailInputs) {
+      this.detailInputs = this.draftReport.lastSubcategory.detailInputs;
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
     }
@@ -272,7 +272,6 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetailsForm() {
-    console.log('detailsForm', this.detailsForm)
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {
@@ -306,7 +305,10 @@ export class DetailsComponent implements OnInit {
 
   searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
     if (formControl && this.draftReport.category) {
-      const res = this.keywordService.search(formControl.value, this.anomalyService.getAnomalyByCategory(this.draftReport.category).categoryId);
+      const res = this.keywordService.search(
+        formControl.value,
+        this.anomalyService.getAnomalyByCategory(this.draftReport.category).categoryId
+      );
       if (!res) {
         this.keywordDetected = null;
       } else {
@@ -338,12 +340,6 @@ export class DetailsComponent implements OnInit {
 
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
-  }
-
-  getReportLastSubcategory() {
-    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
-      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
-    }
   }
 
   isRadioInputPrecisionRequired(detailInput: DetailInput, option: string) {
@@ -412,7 +408,10 @@ export class DetailsComponent implements OnInit {
 
 
   setContinueReportValue(value: boolean) {
-    this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.continueReportOnDetailsStep : ReportEventActions.stopReportBeforeDetailsStep);
+    this.analyticsService.trackEvent(
+      EventCategories.report,
+      value ? ReportEventActions.continueReportOnDetailsStep : ReportEventActions.stopReportBeforeDetailsStep
+    );
     if (!value) {
       window.location.href = 'https://www.economie.gouv.fr/dgccrf';
     } else {

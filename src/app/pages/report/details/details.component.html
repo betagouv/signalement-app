@@ -54,16 +54,16 @@
 
         <hr />
 
-        <div class="row notification success ml-0 md-0" *ngIf="getReportLastSubcategory()?.detailTitle">
-          <h2 [innerHTML]="getReportLastSubcategory().detailTitle"></h2>
+        <div class="row notification success ml-0 md-0" *ngIf="draftReport.lastSubcategory?.detailTitle">
+          <h2 [innerHTML]="draftReport.lastSubcategory.detailTitle"></h2>
         </div>
 
-        <div class="row notification note ml-0 md-0" *ngIf="getReportLastSubcategory()?.description">
+        <div class="row notification note ml-0 md-0" *ngIf="draftReport.lastSubcategory?.description">
           <div class="col-1 pl-0 d-none d-sm-block">
             <img alt="Icône information" src="/assets/images/icon_info.png">
           </div>
           <div class="col-12 col-sm-11">
-            <p [innerHTML]="getReportLastSubcategory().description"></p>
+            <p [innerHTML]="draftReport.lastSubcategory.description"></p>
           </div>
         </div>
 
@@ -177,7 +177,7 @@
 
           </div>
           <div class="form__group">
-            <app-attachments [label]="this.getReportLastSubcategory()?.fileLabel"
+            <app-attachments [label]="this.draftReport.lastSubcategory?.fileLabel"
                              [uploadedFiles]="uploadedFiles"
                              [origin]="fileOrigins.Consumer">
             </app-attachments>
