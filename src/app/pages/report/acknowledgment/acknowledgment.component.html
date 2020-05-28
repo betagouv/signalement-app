@@ -4,7 +4,7 @@
       <h1 id="title-thanks" class="text-center" tabindex="-1">Votre signalement a bien été envoyé&#160;!</h1>
     </div>
   </section>
-  <section class="section section-lighter-grey">
+  <section class="section section-lighter-grey" *ngIf="draftReport">
     <div class="container max-width">
       <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
         <div class="card">
@@ -54,9 +54,9 @@
             </div>
             <div class="col-12 col-sm-9">
               <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
-              <ng-container *ngIf="!draftReport?.employeeConsumer; else employeeConsumer">
+              <ng-container *ngIf="!draftReport.employeeConsumer; else employeeConsumer">
                 <ng-container *ngIf="draftReport.draftCompany.siret; else noSiret">
-                  <ng-container *ngIf="draftReport?.contactAgreement; else noContactAgreement">
+                  <ng-container *ngIf="draftReport.contactAgreement; else noContactAgreement">
                     <p>
                       L'entreprise recevra votre signalement.
                       Elle aura la possibilité de corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
