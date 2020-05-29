@@ -17,6 +17,7 @@ export class CompanyActivationComponent implements OnInit {
   activationForm: FormGroup;
   siretCtrl: FormControl;
   codeCtrl: FormControl;
+  emailCtrl: FormControl;
 
   showErrors: boolean;
   activationError = false;
@@ -44,10 +45,12 @@ export class CompanyActivationComponent implements OnInit {
   initActivationForm() {
     this.siretCtrl = this.formBuilder.control('', Validators.required);
     this.codeCtrl = this.formBuilder.control('', Validators.required);
+    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
 
     this.activationForm = this.formBuilder.group({
       siret: this.siretCtrl,
-      code: this.codeCtrl
+      code: this.codeCtrl,
+      email: this.emailCtrl
     });
   }
 
