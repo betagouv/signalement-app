@@ -28,20 +28,20 @@ list:
     rank: 11
     icon: icon_service.png
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
-  - category: Téléphonie / Eau-Gaz-Electricité
+  - category: Eau-Gaz-Electricité
     categoryId: ELEC
     path: eau-gaz-electricite
     description: Contrat et facture eau, gaz et électricité...
     rank: 12
     icon: icon_tel.png
-    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
+    subcategories: !!import/single subcategories/eau-gaz-electricite.yml
   - category: Téléphonie / Internet / médias
     categoryId: TEL
     path: tel-internet-media
     description: Fournisseur d'accès, abonnement télé...
     rank: 13
     icon: icon_tel.png
-    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
+    subcategories: !!import/single subcategories/telephonie-media.yml
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: banque-assurance-mutuelle
