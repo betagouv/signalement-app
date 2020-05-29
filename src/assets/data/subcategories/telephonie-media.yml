@@ -122,3 +122,6 @@
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Téléphone acheté avec le forfait
           consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+- title: Abonnement télévision
+- title: Abonnement presse
+- title: Autres
