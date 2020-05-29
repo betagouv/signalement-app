@@ -7,10 +7,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { DraftReport } from '../../../model/Report';
+import { Step } from '../../../model/Report';
 import { RetractationComponent } from '../../static/retractation/retractation.component';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { NgxLoadingModule } from 'ngx-loading';
+import { genDraftReport } from '../../../../../test/fixtures.spec';
+import { of } from 'rxjs';
 
 describe('InformationComponent', () => {
 
@@ -18,9 +20,6 @@ describe('InformationComponent', () => {
   let fixture: ComponentFixture<InformationComponent>;
   let reportStorageService: ReportStorageService;
   let anomalyService: AnomalyService;
-
-  const draftReportFixture = new DraftReport();
-  draftReportFixture.category = 'catégorie';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -48,7 +47,7 @@ describe('InformationComponent', () => {
   beforeEach(() => {
     anomalyService = TestBed.get(AnomalyService);
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.changeReportInProgress(draftReportFixture);
+    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Category)));
 
     fixture = TestBed.createComponent(InformationComponent);
     component = fixture.componentInstance;

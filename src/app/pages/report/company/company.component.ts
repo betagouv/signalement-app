@@ -65,11 +65,12 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Company;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
           this.draftReport = report;
+          this.checkExistingCompanyCompliance();
           if (this.draftReport.companyKind === CompanyKinds.SIRET) {
             this.initSearchBySiretForm();
             this.initSearchForm();
@@ -80,6 +81,16 @@ export class CompanyComponent implements OnInit {
           this.reportRouterService.routeToFirstStep();
         }
       });
+  }
+
+  checkExistingCompanyCompliance() {
+    const draftCompany = this.draftReport.draftCompany;
+    if (draftCompany) {
+      if ((this.draftReport.companyKind === CompanyKinds.SIRET && draftCompany.website) ||
+        (this.draftReport.companyKind === CompanyKinds.WEBSITE && !draftCompany.website)) {
+        this.draftReport.draftCompany = undefined;
+      }
+    }
   }
 
   initSearchForm() {

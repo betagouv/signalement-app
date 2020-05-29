@@ -37,8 +37,12 @@ export class DraftReport {
   storedStep: Step;
 
   get companyKind() {
+    return this.lastSubcategory ? this.lastSubcategory.companyKind || CompanyKinds.SIRET : CompanyKinds.SIRET;
+  }
+
+  get lastSubcategory() {
     if (this.subcategories && this.subcategories.length) {
-      return this.subcategories[this.subcategories.length - 1].companyKind || CompanyKinds.SIRET;
+      return this.subcategories[this.subcategories.length - 1];
     }
   }
 }

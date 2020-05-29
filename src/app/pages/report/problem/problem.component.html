@@ -1,5 +1,5 @@
 <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
-<section class="section section-white">
+<section class="section section-white" *ngIf="draftReport">
   <div class="container max-width">
 
     <ng-container *ngIf="!continueReport">
@@ -99,7 +99,7 @@
         [subcategoriesTitle]="anomaly?.subcategoriesTitle"
         [subcategoryName]="anomaly?.category"
         [subcategories]="anomaly?.subcategories"
-        [subcategoriesSelected]="draftReport?.subcategories"
+        [subcategoriesSelected]="draftReport.subcategories"
         [level]="1"
         (select)="onSelectSubcategories($event)">
       </app-subcategory>

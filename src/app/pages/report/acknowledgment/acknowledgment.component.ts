@@ -21,7 +21,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.step = Step.Acknowledgment;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(draftReport => {
         if (draftReport) {
@@ -39,12 +39,6 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   newReport() {
     this.reportStorageService.removeReportInProgress();
     this.reportRouterService.routeToFirstStep();
-  }
-
-  getReportLastSubcategory() {
-    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
-      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
-    }
   }
 
 }

@@ -1,5 +1,5 @@
 <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
-<section class="section section-white position-relative">
+<section class="section section-white position-relative" *ngIf="draftReport">
   <div class="container">
     <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm" *ngIf="confirmationForm">
       <h2 class="text-center">

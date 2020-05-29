@@ -38,7 +38,7 @@ export class CategoryComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.default.description });
 
     this.step = Step.Category;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(draftReport => this.draftReport = draftReport);
     this.showSecondaryCategories = false;
@@ -88,7 +88,7 @@ export class CategoryComponent implements OnInit {
   }
 
   removeStoredReport() {
-    this.reportStorageService.removeReportInProgressFromStorage();
+    this.reportStorageService.removeReportInProgress();
     this.draftReport = undefined;
   }
 
