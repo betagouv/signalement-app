@@ -112,7 +112,6 @@ h2 {
   @media #{$larger-than-desktop} {
     min-width: 240px;
     padding-bottom: 24px;
-    background: url("../../../../assets/images/ellipse.png") no-repeat bottom;
 
     &:not(.first-card):before {
       content: '';
@@ -135,6 +134,16 @@ h2 {
 
     .card-title {
       color: $black;
+    }
+
+    .card-body:after {
+      content: '';
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      left: calc(50% - 12px);
+      border: 4px $blue solid;
+      border-radius: 12px;
     }
   }
 }
