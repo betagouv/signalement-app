@@ -39,7 +39,7 @@ list:
     rank: 12
     sprite: category-energy
     companyKind: SIRET
-    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
+    subcategories: !!import/single subcategories/eau-gaz-electricite.yml
   - category: Téléphonie / Internet / médias
     categoryId: TEL
     path: tel-internet-media
@@ -47,7 +47,7 @@ list:
     rank: 13
     sprite: category-internet
     companyKind: SIRET
-    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
+    subcategories: !!import/single subcategories/telephonie-media.yml
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: banque-assurance-mutuelle
