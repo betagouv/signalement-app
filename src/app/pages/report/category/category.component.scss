@@ -71,6 +71,78 @@ h2 {
     font-weight: bold;
     line-height: 1.2;
   }
+
+  .sprite-category {
+    background: url("../../../../assets/images/pictos/small/sprite.png") no-repeat bottom;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+  }
+
+  .sprite-category-covid {
+    background-position: 0 0;
+  }
+
+  .sprite-category-store {
+    background-position: -72px 0;
+  }
+
+  .sprite-category-health {
+    background-position: -144px 0;
+  }
+
+  .sprite-category-restaurant {
+    background-position: 0 -72px;
+  }
+
+  .sprite-category-service {
+    background-position: -72px -72px;
+  }
+
+  .sprite-category-energy {
+    background-position: -144px -72px;
+  }
+
+  .sprite-category-internet {
+    background-position: 0px -144px;
+  }
+
+  .sprite-category-bank {
+    background-position: -72px -144px;
+  }
+
+  .sprite-category-disease {
+    background-position: -144px -144px;
+  }
+
+  .sprite-category-hobbies {
+    background-position: 0 -216px;
+  }
+
+  .sprite-category-ecommerce {
+    background-position: -72px -216px;
+  }
+
+  .sprite-category-real-estate {
+    background-position: -144px -216px;
+  }
+
+  .sprite-category-craft {
+    background-position: 0 -288px;
+  }
+
+  .sprite-category-transport {
+    background-position: -72px -288px;
+  }
+
+  .sprite-category-pet {
+    background-position: -144px -288px;
+  }
+
+  .sprite-category-admin {
+    background-position: 0 -360px;
+  }
 }
 
 #all-categories-link {

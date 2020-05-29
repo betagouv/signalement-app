@@ -5,7 +5,7 @@ list:
     path: coronavirus
     description: gel hydroalcoolique, masque, arnaque liée au COVID-19, distanciation physique...
     rank: 1
-    icon: pictos/icon_covid.png
+    sprite: category-covid
     companyKind: SIRET
     subcategories: !!import/single subcategories/coronavirus.yml
   - category: Café / Restaurant
@@ -13,7 +13,7 @@ list:
     path: cafe-restaurant
     description: bar, cafeteria, food truck...
     rank: 9
-    icon: pictos/icon_rest.png
+    sprite: category-restaurant
     companyKind: SIRET
     subcategories: !!import/single subcategories/cafe-restaurant.yml
   - category: Achat / Magasin
@@ -21,7 +21,7 @@ list:
     path: achat-magasin
     description: supermarché, boulangerie, magasin de jouet...
     rank: 2
-    icon: pictos/icon_store.png
+    sprite: category-store
     companyKind: SIRET
     subcategories: !!import/single subcategories/achat-magasin.yml
   - category: Services aux particuliers
@@ -29,7 +29,7 @@ list:
     path: services-aux-particuliers
     description: coiffeur, pressing, esthéticienne, aide à la personne...
     rank: 11
-    icon: pictos/icon_service.png
+    sprite: category-service
     companyKind: SIRET
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
   - category: Eau / Gaz / Electricité
@@ -37,7 +37,7 @@ list:
     path: eau-gaz-electricite
     description: Contrat et facture eau, gaz et électricité...
     rank: 12
-    icon: pictos/icon_tel.png
+    sprite: category-energy
     companyKind: SIRET
     subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
   - category: Téléphonie / Internet / médias
@@ -45,7 +45,7 @@ list:
     path: tel-internet-media
     description: Fournisseur d'accès, abonnement télé...
     rank: 13
-    icon: pictos/icon_internet.png
+    sprite: category-internet
     companyKind: SIRET
     subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
   - category: Banque / Assurance / Mutuelle
@@ -53,7 +53,7 @@ list:
     path: banque-assurance-mutuelle
     description: crédit, assurance
     rank: 14
-    icon: pictos/icon_bank.png
+    sprite: category-bank
     companyKind: SIRET
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
   - category: Intoxication alimentaire
@@ -61,7 +61,7 @@ list:
     path: intoxication-alimentaire
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
     rank: 15
-    icon: pictos/icon_disease.png
+    sprite: category-disease
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
       content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
@@ -74,14 +74,13 @@ list:
     description: textile, jouet, meuble...
     hidden: true
     rank: 110
-    icon: pictos/icon_material.png
     subcategories: !!import/single subcategories/produits-objets.yml
   - category: Achat sur internet
     categoryId: INTERNET
     path: achat-sur-internet
     description: Vous avez passé commande sur internet, votre problème concerne un site web
     rank: 18
-    icon: pictos/icon_ecommerce.png
+    sprite: category-ecommerce
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
       content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
@@ -99,7 +98,7 @@ list:
     path: travaux-renovation
     description: dépannage, plombier, couvreur, pose de panneaux...
     rank: 107
-    icon: pictos/icon_craft.png
+    sprite: category-craft
     companyKind: SIRET
     subcategories: !!import/single subcategories/travaux-renovation.yml
   - category: Voyage / Loisirs
@@ -107,7 +106,7 @@ list:
     path: voyage-loisirs
     description: voyage organisé, camping, concert, sport, avion, train, taxi
     rank: 16
-    icon: pictos/icon_hobbies.png
+    sprite: category-hobbies
     companyKind: SIRET
     subcategories: !!import/single subcategories/voyage-loisirs.yml
   - category: Immobilier
@@ -115,7 +114,7 @@ list:
     path: immobilier
     description: location, agence immobiliere, syndicat de copropriété...
     rank: 105
-    icon: pictos/icon_real_estate.png
+    sprite: category-real-estate
     companyKind: SIRET
     subcategories: !!import/single subcategories/immobilier.yml
   - category: Secteur de la santé
@@ -123,7 +122,7 @@ list:
     path: sante
     description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
     rank: 3
-    icon: pictos/icon_health.png
+    sprite: category-health
     companyKind: SIRET
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
@@ -132,7 +131,7 @@ list:
     path: voiture-vehicule
     description: vente et réparation de voiture, location, auto-école...
     rank: 107
-    icon: pictos/icon_transport.png
+    sprite: category-transport
     companyKind: SIRET
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories: !!import/single subcategories/voiture-vehicule.yml
@@ -141,7 +140,7 @@ list:
     path: animaux
     description: vétérinaire, aliment pour animaux, service de garde...
     rank: 108
-    icon: pictos/icon_pet.png
+    sprite: category-pet
     companyKind: SIRET
     subcategories: !!import/single subcategories/animaux.yml
   - category: Démarches administratives
@@ -149,7 +148,7 @@ list:
     path: demarches-administratives
     description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
     rank: 109
-    icon: pictos/icon_admin.png
+    sprite: category-admin
     companyKind: SIRET
     subcategories: !!import/single subcategories/demarches-administratives.yml
   - category: Travail au noir
