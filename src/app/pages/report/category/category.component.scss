@@ -181,6 +181,10 @@ h2 {
     color: $white;
   }
 
+  .card-img-top {
+    width: 255px;
+  }
+
   @media #{$larger-than-desktop} {
     min-width: 240px;
     padding-bottom: 24px;

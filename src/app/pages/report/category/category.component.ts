@@ -108,7 +108,7 @@ export const Illustrations = [
 @Component({
   selector: 'app-illustration-card',
   template: `
-    <div class="card" [ngClass]="firstCard ?'first-card' : lastCard ? 'last-card' : ''">
+    <div class="card d-block" [ngClass]="firstCard ?'first-card' : lastCard ? 'last-card' : ''">
       <img src="/assets/images/{{illustration.picture}}" class="card-img-top" alt="Illustration" />
       <div class="card-body">
         <div class="card-title" [innerHTML]="illustration.title"></div>
