@@ -119,6 +119,18 @@ export class AuthenticationService {
     );
   }
 
+  sendActivationLink(siret: string, token: string, email: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', siret, 'send-activation-link']),
+          { token, email },
+          headers
+        );
+      }),
+    );
+  }
+
   acceptToken(siret: string, token: string) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {

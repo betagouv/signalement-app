@@ -24,6 +24,7 @@ export class CompanyActivationComponent implements OnInit {
 
   isAuthenticated: boolean;
   loading: boolean;
+  emailSent = false;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -82,15 +83,15 @@ export class CompanyActivationComponent implements OnInit {
           }
         );
       } else {
-        this.authenticationService.fetchCompanyTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
-          token => {
+        this.authenticationService.sendActivationLink(this.siretCtrl.value, this.codeCtrl.value, this.emailCtrl.value).subscribe(
+          _ => {
             this.loading = false;
+            this.emailSent = true;
             this.analyticsService.trackEvent(
               EventCategories.account,
               CompanyAccessEventActions.activateCompanyCode,
               ActionResultNames.success
             );
-            this.router.navigate(['compte', 'inscription']);
           },
           error => handleError(CompanyAccessEventActions.activateCompanyCode)
         );
