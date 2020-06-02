@@ -10,5 +10,8 @@
 
 @font-face {
   font-family: 'Gill Sans';
-  src: url("fonts/GillSans/gillsans.ttf") format("truetype");
+  src: url("fonts/GillSans/gillsans.eot") format("truetype"),
+       url("fonts/GillSans/gillsans.woff2") format('woff2'),
+       url("fonts/GillSans/gillsans.woff") format('woff'),
+       url("fonts/GillSans/gillsans.ttf") format('truetype');
 }
