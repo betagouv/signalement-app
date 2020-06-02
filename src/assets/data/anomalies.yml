@@ -35,7 +35,7 @@ list:
   - category: Eau / Gaz / Electricité
     categoryId: ELEC
     path: eau-gaz-electricite
-    description: Contrat et facture eau, gaz et électricité...
+    description: contrat et facture eau, gaz et électricité...
     rank: 12
     sprite: category-energy
     companyKind: SIRET
@@ -43,7 +43,7 @@ list:
   - category: Téléphonie / Internet / médias
     categoryId: TEL
     path: tel-internet-media
-    description: Fournisseur d'accès, abonnement télé...
+    description: fournisseur d'accès, abonnement télé...
     rank: 13
     sprite: category-internet
     companyKind: SIRET
@@ -78,7 +78,7 @@ list:
   - category: Achat sur internet
     categoryId: INTERNET
     path: achat-sur-internet
-    description: Vous avez passé commande sur internet, votre problème concerne un site web
+    description: Vous avez passé commande sur internet, votre problème concerne un site web.
     rank: 18
     sprite: category-ecommerce
     information:
