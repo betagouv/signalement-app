@@ -15,11 +15,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
-import { AutofocusDirective } from '../../../directives/auto-focus.directive';
+import { of } from 'rxjs';
 import { AbTestsModule } from 'angular-ab-tests';
 import { SVETestingScope, SVETestingVersions } from '../../../utils';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
-import { of } from 'rxjs';
 
 describe('ProblemComponent', () => {
 
@@ -51,7 +50,6 @@ describe('ProblemComponent', () => {
         ProblemComponent,
         SubcategoryComponent,
         BreadcrumbComponent,
-        AutofocusDirective,
       ],
       imports: [
         FormsModule,

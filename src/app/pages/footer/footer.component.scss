@@ -21,34 +21,39 @@
 
   .footer__social {
     margin-top: 1em;
-  }
 
-  .footer__social li {
-    display: inline;
-    margin-right: 1em;
-  }
+    li {
+      display: inline;
+      margin-right: 1em;
+    }
 
-  .footer__social .icon {
-    width: 35px;
-    height: 35px;
-    fill: $white;
-    padding-bottom: 0;
+    .icon {
+      width: 35px;
+      height: 35px;
+      fill: $white;
+      padding-bottom: 0;
+    }
+
+    a {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   .footer__links {
     margin: 0;
     margin-top: 1em;
     line-height: 2em;
-  }
 
-  .footer__links h2 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-  }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0.5em;
+    }
 
-  .footer__links a {
-    color: $white;
-    text-decoration: none;
+    a {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   .footer__logo {
