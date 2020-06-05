@@ -1,7 +1,20 @@
 - title: Courrier / société qui se fait passer pour l'administration
   consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Site internet pour obtenir un document administratif (casier, acte de naissance, vignette crit'air)
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  subcategoriesTitle: A qui appartient ce site internet&#160;?
+  subcategories:
+    - title: A une administration
+      example: "Exemple : site internet d'une mairie. Les sites officiels de l'Etat doivent se terminer par gouv.fr ou .fr et jamais par .gouv.org ou .gouv.com. Vérifiez les mentions légales du site."
+      information: !!import/single ../common/info/administration.yml
+    - title: A une entreprise
+      example: "Un site avec une Marianne ou un drapeau tricolore n'appartient pas forcément à l'Etat. Ces entreprises entretiennent une confusion pour tromper les consommateurs."
+      consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
 - title: Autre
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  subcategoriesTitle: Que voulez-vous signaler ?
+  subcategories:
+    - title: Une administration 
+      example: 'Exemple : ma mairie, mon centre des impôts'
+      information: !!import/single ../common/info/administration.yml
+    - title: Une entreprise privée
+      consumerActions: !!import/single ../common/actions/defaut.yml

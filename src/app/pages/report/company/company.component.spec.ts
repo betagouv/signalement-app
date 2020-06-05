@@ -15,6 +15,7 @@ import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
 import { CompanyKinds } from '../../../model/Anomaly';
+import { DraftReport, Step } from '../../../model/Report';
 
 describe('CompanyComponent', () => {
 
@@ -52,7 +53,7 @@ describe('CompanyComponent', () => {
   describe('case of searching company with SIRET', () => {
 
     beforeEach(() => {
-      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(), {draftCompany: undefined}));
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Details)));
 
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;
@@ -230,12 +231,10 @@ describe('CompanyComponent', () => {
   describe('case of searching company with WEBSITE', () => {
 
     beforeEach(() => {
-      reportStorageService.reportInProgess = of(Object.assign(genDraftReport(),
-        {
-          subcategories: [Object.assign(genSubcategory(), { companyKind: CompanyKinds.WEBSITE })],
-          draftCompany: undefined
-        }
-       ));
+      const draftReportInProgress = Object.assign(genDraftReport(Step.Details), {
+        subcategories: [Object.assign(genSubcategory(), { companyKind: CompanyKinds.WEBSITE })]
+      });
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(CompanyComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();

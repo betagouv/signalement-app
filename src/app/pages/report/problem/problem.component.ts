@@ -64,7 +64,7 @@ export class ProblemComponent implements OnInit {
             this.titleService.setTitle(`${anomaly.category} - SignalConso`);
             this.meta.updateTag({ name: 'description', content: anomaly.description });
           }
-          return this.reportStorageService.retrieveReportInProgressFromStorage();
+          return this.reportStorageService.retrieveReportInProgress();
         }
       ),
       take(1),

@@ -212,7 +212,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   displayReport(report: Report) {
     this.router.navigate(['suivi-des-signalements', 'report', report.id]);
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId && window.scrollY)) {
       sessionStorage.setItem(ReportsScrollYStorageKey, window.scrollY.toString());
     }
   }
