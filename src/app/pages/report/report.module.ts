@@ -15,7 +15,6 @@ import { AlertModule, BsDatepickerModule, CarouselModule, defineLocale, frLocale
 import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
-import { AutofocusDirective } from '../../directives/auto-focus.directive';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 import anomalies from '../../../assets/data/anomalies.json';
@@ -73,7 +72,6 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     InformationComponent,
     AcknowledgmentComponent,
     SubcategoryComponent,
-    AutofocusDirective,
   ],
   entryComponents: [
     CategoryComponent,
@@ -100,7 +98,6 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
   ],
   exports: [
     RouterModule,
-    AutofocusDirective,
   ],
   providers: [AnomalyLazyRoutesFactoryProvider]
 })
