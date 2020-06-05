@@ -89,7 +89,7 @@ export class Anomaly extends WithSubcategories {
   hidden?: boolean;
   description?: string;
   rank?: number;
-  sprite?: string;
+  icon?: string;
   information?: Information;
   breadcrumbTitle?: string;
 }
