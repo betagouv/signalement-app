@@ -7,7 +7,7 @@
           <p *ngIf="informationToDisplay.outOfScope">
             Nous ne doutons pas que vous ayez réellement rencontré un problème mais... il ne s’agit pas d’une fraude.
           </p>
-          <p tabindex="-1" id="titleInformation" [innerHTML]="informationToDisplay.title">
+          <p id="titleInformation" [innerHTML]="informationToDisplay.title">
           </p>
           <p *ngIf="informationToDisplay.content" [innerHTML]="informationToDisplay.content"></p>
   
@@ -56,7 +56,7 @@
 
     <div class="text-center">
       <button class="btn btn-lg btn-primary" (click)="newReport()">
-        Retourner à l'accueil<img src="/assets/images/icon-home.svg" alt="Icône accueil" />
+        Retourner à l'accueil<img src="/assets/images/icon_home.svg" alt="Icône accueil" />
       </button>
     </div>
 

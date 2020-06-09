@@ -280,10 +280,10 @@
               rank: 2
               type: TEXT
               optionnal: true
-            - label: Quel est le problème ?
+            - label: Quel est le problème ?
               rank: 3
               type: TEXTAREA
-              placeholder: Quel était le prix initial ? quel est le prix final ?
+              placeholder: Quel était le prix initial ? Quel est le prix final ?
           fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autres
