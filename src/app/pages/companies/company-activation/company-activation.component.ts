@@ -17,12 +17,14 @@ export class CompanyActivationComponent implements OnInit {
   activationForm: FormGroup;
   siretCtrl: FormControl;
   codeCtrl: FormControl;
+  emailCtrl: FormControl;
 
   showErrors: boolean;
   activationError = false;
 
   isAuthenticated: boolean;
   loading: boolean;
+  emailSent = false;
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -44,10 +46,12 @@ export class CompanyActivationComponent implements OnInit {
   initActivationForm() {
     this.siretCtrl = this.formBuilder.control('', Validators.required);
     this.codeCtrl = this.formBuilder.control('', Validators.required);
+    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
 
     this.activationForm = this.formBuilder.group({
       siret: this.siretCtrl,
-      code: this.codeCtrl
+      code: this.codeCtrl,
+      email: this.emailCtrl
     });
   }
 
@@ -79,15 +83,15 @@ export class CompanyActivationComponent implements OnInit {
           }
         );
       } else {
-        this.authenticationService.fetchCompanyTokenInfo(this.siretCtrl.value, this.codeCtrl.value).subscribe(
-          token => {
+        this.authenticationService.sendActivationLink(this.siretCtrl.value, this.codeCtrl.value, this.emailCtrl.value).subscribe(
+          _ => {
             this.loading = false;
+            this.emailSent = true;
             this.analyticsService.trackEvent(
               EventCategories.account,
               CompanyAccessEventActions.activateCompanyCode,
               ActionResultNames.success
             );
-            this.router.navigate(['compte', 'inscription']);
           },
           error => handleError(CompanyAccessEventActions.activateCompanyCode)
         );
