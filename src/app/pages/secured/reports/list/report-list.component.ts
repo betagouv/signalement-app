@@ -243,6 +243,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
       return `status-${status.toLowerCase()
         .replace(/[àáâãäå]/g, 'a')
         .replace(/[éèêë]/g, 'e')
+        .replace(/[ôö]/g, 'o')
         .replace(/['']/g, '')
         .split(' ').join('-')}`;
     } else {

@@ -256,19 +256,40 @@ form {
 
   .item {
     border-bottom: 1px solid $theme-border-lighter;
-    padding: 1em;
+    padding: 0.5em;
 
     &:hover {
       background: $lightest-grey;
     }
   }
 
+  .item-header {
+    color: $primary;
+    font-weight: bold;
+  }
+
   .status-non-consulte {
     font-weight: bold;
   }
 
-  .attach-icon {
-    margin-left: -20px;
+  .badge {
+
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5em 2em;
+
+    &.status-non-consulte {
+      background-color: $light-red;
+    }
+    &.status-cloture {
+      background-color: $light-green;
+      color: $green;
+    }
+    &.status-a-repondre {
+      background-color: $light-yellow;
+    }
+
   }
 }
 
