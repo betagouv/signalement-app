@@ -30,13 +30,11 @@
                   edit
                 </i>
               </div>
-              <div *ngIf="!report.contactAgreement;">Le consommateur souhaite rester anonyme</div>
+              <div class="text-darker-grey" *ngIf="!report.contactAgreement;">Le consommateur souhaite rester anonyme</div>
               <div>
-                Nom : {{report.consumer.lastName}}
+                <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
                 <br />
-                Prénom : {{report.consumer.firstName}}
-                <br />
-                Email : {{report.consumer.email}}
+                {{report.consumer.email}}
               </div>
               <ng-template #updateConsumer>
                 <div class="modal-body">
@@ -91,11 +89,9 @@
               </div>
               <div *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur souhaite rester anonyme</div>
               <ng-template #contactAgreement>
-                Nom : {{report.consumer.lastName}}
+                <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
                 <br />
-                Prénom : {{report.consumer.firstName}}
-                <br />
-                Email : {{report.consumer.email}}
+                {{report.consumer.email}}
               </ng-template>
             </ng-container>
 
@@ -108,15 +104,13 @@
                   edit
                 </i>
               </div>
-              <ng-container *ngIf="report.company.name">
-                SIRET : {{report.company.siret}}
+              <ng-container *ngIf="report.company">
+                <strong>{{report.company.siret}}</strong>
                 <br/>
-                Nom : {{report.company.name}}
-                <br/>
-                Adresse : {{report.company.address}}
+                <span *ngFor="let line of report.company.address.split(' - ')">{{line}}<br /></span>
               </ng-container>
               <div *ngIf="report.website.url">
-                Site internet : {{report.website.url}}
+                {{report.website.url}}
               </div>
 
               <ng-template #companySearch>
