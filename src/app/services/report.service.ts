@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { DetailInputValue, DraftReport, Report } from '../model/Report';
-import { CompanySearchResult } from '../model/CompanySearchResult';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
@@ -11,7 +10,7 @@ import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
-import { Company, Website } from '../model/Company';
+import { Company, CompanySearchResult, Website } from '../model/Company';
 
 @Injectable({
   providedIn: 'root',

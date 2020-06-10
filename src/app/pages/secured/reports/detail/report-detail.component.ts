@@ -8,7 +8,6 @@ import { EventService } from '../../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../../services/company.service';
-import { CompanySearchResult } from '../../../../model/CompanySearchResult';
 import { switchMap, tap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -17,6 +16,7 @@ import { Consumer } from '../../../../model/Consumer';
 import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
 import { Constants } from '../../../../model/Constants';
 import { HttpResponse } from '@angular/common/http';
+import { CompanySearchResult } from '../../../../model/Company';
 
 @Component({
   selector: 'app-report-detail',
@@ -197,7 +197,7 @@ export class ReportDetailComponent implements OnInit {
     this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
-        this.companySearchBySiretResult = company ? company : new CompanySearchResult();
+        this.companySearchBySiretResult = company;
       },
       err => {
         this.loading = false;

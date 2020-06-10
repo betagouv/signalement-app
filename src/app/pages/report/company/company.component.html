@@ -166,19 +166,14 @@
             </p>
 
             <div *ngFor="let companySearchResult of companySearchResults" class="company mb-3" (click)="selectCompanyFromResults(companySearchResult)" (keydown.enter)="selectCompanyFromResults(companySearchResult)" tabindex="0">
-              <strong *ngIf="companySearchResult.line1">{{companySearchResult.line1}}<br /></strong>
-              <strong *ngIf="companySearchResult.line2">{{companySearchResult.line2}}<br /></strong>
+              <strong *ngIf="companySearchResult.name">{{companySearchResult.name}}<br /></strong>
               <strong *ngIf="companySearchResult.highlight">
                 <i class="material-icons md-green">check_circle</i>
                 <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
                 <br />
               </strong>
               <span *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}<br /></span>
-              <span *ngIf="companySearchResult.line3">{{companySearchResult.line3}}<br /></span>
-              <span *ngIf="companySearchResult.line4">{{companySearchResult.line4}}<br /></span>
-              <span *ngIf="companySearchResult.line5">{{companySearchResult.line5}}<br /></span>
-              <span *ngIf="companySearchResult.line6">{{companySearchResult.line6}}<br /></span>
-              <span *ngIf="companySearchResult.line7">{{companySearchResult.line7}}<br /></span>
+              <span *ngIf="companySearchResult.address">{{companySearchResult.address}}</span>
             </div>
 
             <div class="notification info mt-1">
@@ -300,14 +295,9 @@
             </p>
 
             <div class="company mb-3" (click)="selectCompanyFromResults(companySearchBySiretResult)" (keydown.enter)="selectCompanyFromResults(companySearchBySiretResult)" tabindex="0">
-              <strong *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}<br /></strong>
-              <strong *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}<br /></strong>
+              <strong *ngIf="companySearchBySiretResult.name">{{companySearchBySiretResult.name}}<br /></strong>
               <span *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}<br /></span>
-              <span *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}<br /></span>
-              <span *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}<br /></span>
-              <span *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}<br /></span>
-              <span *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}<br /></span>
-              <span *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}<br /></span>
+              <span *ngIf="companySearchBySiretResult.address">{{companySearchBySiretResult.address}}</span>
             </div>
 
             <div class="notification info mt-1">

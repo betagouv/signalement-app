@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -14,7 +13,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
-import { DraftCompany, Website } from '../../../model/Company';
+import { CompanySearchResult, DraftCompany, Website } from '../../../model/Company';
 
 export enum IdentificationKinds {
   Name = 'Name', Siret = 'Siret', None = 'None'
@@ -137,11 +136,11 @@ export class CompanyComponent implements OnInit {
       this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
         companySearchResults => {
           this.loading = false;
-          if (companySearchResults.total === 0) {
+          if (companySearchResults.length === 0) {
             this.treatCaseNoResult();
-          } else if (companySearchResults.total === 1) {
-            this.treatCaseSingleResult(companySearchResults);
-          } else if (companySearchResults.total > MaxCompanyResult) {
+          } else if (companySearchResults.length === 1) {
+            this.treatCaseSingleResult(companySearchResults[0]);
+          } else if (companySearchResults.length > MaxCompanyResult) {
             this.treatCaseTooManyResults();
           } else {
             this.treatCaseSeveralResults(companySearchResults);
@@ -183,13 +182,13 @@ export class CompanyComponent implements OnInit {
     this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
   }
 
-  treatCaseSingleResult(companySearchResult: CompanySearchResults) {
+  treatCaseSingleResult(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(
       EventCategories.companySearch,
       CompanySearchEventActions.search,
       CompanySearchEventNames.singleResult
     );
-    this.companySearchResults = companySearchResult.companies;
+    this.companySearchResults = [companySearchResult];
   }
 
   treatCaseTooManyResults() {
@@ -201,13 +200,13 @@ export class CompanyComponent implements OnInit {
     this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
   }
 
-  treatCaseSeveralResults(companySearchResults: CompanySearchResults) {
+  treatCaseSeveralResults(companySearchResults: CompanySearchResult[]) {
     this.analyticsService.trackEvent(
       EventCategories.companySearch,
       CompanySearchEventActions.search,
       CompanySearchEventNames.severalResult
     );
-    this.companySearchResults = companySearchResults.companies;
+    this.companySearchResults = companySearchResults;
   }
 
   treatCaseError() {
@@ -221,7 +220,7 @@ export class CompanyComponent implements OnInit {
 
   selectCompanyFromResults(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.selectCompany(companySearchResult.draftCompany);
+    this.selectCompany(companySearchResult);
   }
 
   selectCompany(draftCompany: DraftCompany) {
@@ -257,7 +256,7 @@ export class CompanyComponent implements OnInit {
             CompanySearchEventActions.searchBySiret,
             CompanySearchEventNames.singleResult
           );
-          this.companySearchBySiretResult = company;
+          this.companySearchBySiretResult = company[0];
         } else {
           this.analyticsService.trackEvent(
             EventCategories.companySearch,

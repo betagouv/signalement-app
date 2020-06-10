@@ -11,6 +11,11 @@ export interface Company extends DraftCompany {
   creationDate: Date;
 }
 
+export interface CompanySearchResult extends DraftCompany {
+  highlight: string;
+  activityLabel: string;
+}
+
 export interface CompanyAccess {
   userId: string;
   firstName: string;
