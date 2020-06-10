@@ -72,7 +72,7 @@ describe('ReportDetailComponent', () => {
       beforeEach(() => {
         reportService = TestBed.get(ReportService);
         spyOn(reportService, 'getReport').and.returnValue(of(
-          Object.assign(genReport(), {status: ReportStatus.ToProcess})
+          Object.assign(genReport(), {status: ReportStatus.ToReviewedByPro})
         ));
 
         eventService = TestBed.get(EventService);

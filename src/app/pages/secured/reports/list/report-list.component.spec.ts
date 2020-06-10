@@ -80,7 +80,7 @@ describe('ReportListComponent', () => {
       fixture = TestBed.createComponent(ReportListComponent);
       component = fixture.componentInstance;
 
-      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToProcess]));
+      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToReviewedByPro]));
     });
 
     it('should load user accesses on init', () => {
@@ -142,7 +142,7 @@ describe('ReportListComponent', () => {
       fixture = TestBed.createComponent(ReportListComponent);
       component = fixture.componentInstance;
 
-      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToProcess]));
+      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.InProgress]));
     });
 
     it ('should display report list in a table', () => {
