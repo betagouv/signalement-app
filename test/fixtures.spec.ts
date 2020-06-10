@@ -36,7 +36,7 @@ export function genEmail() {
 export const lastNames = ['Doe', 'Durand', 'Dupont'];
 export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'Fanny', 'Gérard'];
 export const roles = [Roles.Admin, Roles.Pro, Roles.DGCCRF];
-export const status = [ReportStatus.ToProcess, ReportStatus.ClosedForPro];
+export const status = ReportStatus [ReportStatus.InProgress, ReportStatus.ClosedForPro];
 
 export function genUserAccess() {
   return {
