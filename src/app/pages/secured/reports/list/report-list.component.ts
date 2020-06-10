@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../../services/report.service';
-import { DetailInputValue, Report, ReportStatus } from '../../../../model/Report';
+import { DetailInputValue, Report, ReportStatus, StatusColor } from '../../../../model/Report';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import moment from 'moment';
@@ -37,6 +37,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   permissions = Permissions;
   roles = Roles;
   reportStatus = ReportStatus;
+  statusColor = StatusColor;
   regions = Regions;
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
@@ -236,19 +237,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
       err => {
         this.loadReports(this.currentPage);
       });
-  }
-
-  getReportCssClass(status: string) {
-    if (status) {
-      return `status-${status.toLowerCase()
-        .replace(/[àáâãäå]/g, 'a')
-        .replace(/[éèêë]/g, 'e')
-        .replace(/[ôö]/g, 'o')
-        .replace(/['']/g, '')
-        .split(' ').join('-')}`;
-    } else {
-      return '';
-    }
   }
 
   selectArea(area?: Region | Department) {

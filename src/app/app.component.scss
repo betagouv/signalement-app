@@ -137,4 +137,23 @@
     box-shadow: none;
   }
 
+  .text-dark-blue {
+    color: $dark-blue;
+  }
+
+  .text-darker-grey {
+    color: $darker-grey;
+  }
+
+  .bg-lightest-blue {
+    background: $lightest-blue;
+  }
+
+  .badge {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5em 2em;
+  }
+
 }

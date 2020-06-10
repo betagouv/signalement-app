@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
-import { Report, ReportStatus } from '../../../../model/Report';
+import { Report, ReportStatus, StatusColor } from '../../../../model/Report';
 import { ReportService } from '../../../../services/report.service';
 import { FileOrigin, UploadedFile } from '../../../../model/UploadedFile';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
@@ -15,7 +15,6 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { isPlatformBrowser, PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../../model/Consumer';
 import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
-import { Constants } from '../../../../model/Constants';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({
@@ -30,7 +29,7 @@ export class ReportDetailComponent implements OnInit {
   eventActionValues = EventActionValues;
   permissions = Permissions;
   roles = Roles;
-  constants = Constants;
+  statusColor = StatusColor;
 
   report: Report;
 

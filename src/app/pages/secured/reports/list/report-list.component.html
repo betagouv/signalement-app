@@ -338,7 +338,7 @@
                   <span *ngFor="let file of report.consumerUploadedFiles">{{file.filename}}<br /></span>
                 </ng-template>
               </td>
-              <td [class]="getReportCssClass(report.status)">
+              <td [ngStyle]="{'background-color': statusColor.get(report.status)}">
                 {{ report.status }}
               </td>
               <td class="action" (click)="$event.stopPropagation()">
@@ -370,7 +370,7 @@
         Une erreur technique s'est produite
       </div>
       <ng-container *ngFor="let reportsByDate of reportsByDate">
-        <div class="row item pointer {{getReportCssClass(report.status)}}" *ngFor="let report of reportsByDate.reports" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
+        <div class="row item pointer" [ngClass]="report.status === reportStatus.ClosedForPro ? 'font-weight-bold' : ''" *ngFor="let report of reportsByDate.reports" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
           <div class="col-3">
             {{report.creationDate | date : 'dd/MM/yyyy' }}
           </div>
@@ -378,7 +378,7 @@
             <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length">attach_file</i>
           </div>
           <div class="col-4">
-            <span class="badge {{getReportCssClass(report.status)}}">
+            <span class="badge" [ngStyle]="{'background-color': statusColor.get(report.status)}">
             {{report.status}}
             </span>
           </div>
