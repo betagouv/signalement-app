@@ -173,7 +173,9 @@
                 <br />
               </strong>
               <span *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}<br /></span>
-              <span *ngIf="companySearchResult.address">{{companySearchResult.address}}</span>
+              <ng-container *ngIf="companySearchResult.address">
+                <span *ngFor="let line of companySearchResult.address.split(' - ')">{{line}}<br/></span>
+              </ng-container>
             </div>
 
             <div class="notification info mt-1">
@@ -297,7 +299,9 @@
             <div class="company mb-3" (click)="selectCompanyFromResults(companySearchBySiretResult)" (keydown.enter)="selectCompanyFromResults(companySearchBySiretResult)" tabindex="0">
               <strong *ngIf="companySearchBySiretResult.name">{{companySearchBySiretResult.name}}<br /></strong>
               <span *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}<br /></span>
-              <span *ngIf="companySearchBySiretResult.address">{{companySearchBySiretResult.address}}</span>
+              <ng-container *ngIf="companySearchBySiretResult.address">
+                <span *ngFor="let line of companySearchBySiretResult.address.split(' - ')">{{line}}<br/></span>
+              </ng-container>
             </div>
 
             <div class="notification info mt-1">
