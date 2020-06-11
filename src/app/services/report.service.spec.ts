@@ -6,12 +6,12 @@ import { ServiceUtils } from './service.utils';
 import { DetailInputValue, DraftReport } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
-import { CompanySearchResult } from '../model/CompanySearchResult';
 import { Subcategory } from '../model/Anomaly';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import { of } from 'rxjs';
 import { Department, Region } from '../model/Region';
+import { CompanySearchResult } from '../model/Company';
 
 describe('ReportService', () => {
 
@@ -77,11 +77,10 @@ describe('ReportService', () => {
       consumer.lastName = 'lastName';
       consumer.firstName = 'firstName';
       consumer.email = 'email@mail.fr';
-      const company = new CompanySearchResult();
-      company.name = 'companyName';
-      company.line1 = 'line 1';
-      company.line2 = 'line 2';
-      company.line4 = 'line 4';
+      const company = <CompanySearchResult> {
+        name: 'companyName',
+        address: 'line 1 - line 2 - line 4'
+      };
       const detailInputValue = new DetailInputValue();
       detailInputValue.label = 'mon label';
       detailInputValue.value = 'ma value';
