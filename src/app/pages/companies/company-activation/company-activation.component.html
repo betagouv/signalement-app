@@ -10,54 +10,54 @@
         <div class="card mb-5">
           <div class="card-body">
             <form [formGroup]="activationForm" (ngSubmit)="submitActivationForm()" class="form-horizontal">
-              <h2 class="text-primary mb-0">
+              <h2 class="text-primary">
                 Vous avez reçu un courrier postal ?
               </h2>
-              <div class="font-weight-bold pb-4">
+              <div class="font-weight-bold pb-3">
                 Activez votre compte pour consulter votre signalement
               </div>
               <div class="form-group">
                 <label for="login">
-                  SIRET de votre entreprise <span class="error">*</span>
+                  SIRET de votre entreprise
                 </label>
                 <div class="note mb-1">
                   Il doit correspondre à la raison sociale indiquée sur le courrier.
                 </div>
                 <span *ngIf="showErrors && siretCtrl.hasError('required')" class="text-warning">
-                  <i class="material-icons">warning</i> Veuillez renseigner votre SIRET.
+                  <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre SIRET.
                 </span>
                 <span *ngIf="showErrors && siretCtrl.hasError('pattern')" class="text-warning">
-                   <i class="material-icons">warning</i> Le SIRET doit comporter 14 chiffres.
+                   <i class="material-icons md-18">error_outline</i> Le SIRET doit comporter 14 chiffres.
                 </span>
                 <input [formControl]="siretCtrl" type="text" class="form-control" id="login" placeholder="14 caractères de votre SIRET">
               </div>
               <div class="form-group">
                 <label for="password">
-                  Code d'activation <span class="error">*</span>
+                  Code d'activation
                 </label>
                 <div class="note mb-1">
                   Code à 6 chiffres indiqué sur le courrier.
                 </div>
                 <span *ngIf="showErrors && codeCtrl.hasError('required')" class="text-warning">
-                   <i class="material-icons">warning</i> Veuillez renseigner votre code d'activation.<br />
+                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre code d'activation.<br />
                 </span>
                 <span *ngIf="showErrors && codeCtrl.hasError('pattern')" class="text-warning">
-                   <i class="material-icons">warning</i> Le code doit comporter 6 chiffres.
+                   <i class="material-icons md-18">error_outline</i> Le code doit comporter 6 chiffres.
                 </span>
                 <input [formControl]="codeCtrl" type="password" class="form-control" id="password" placeholder="Code d'activation à 6 chiffres">
               </div>
               <div class="form-group">
                 <label for="email">
-                  Email&nbsp;<span class="error">*</span>
+                  Email
                 </label>
                 <div class="note mb-1">
                   Adresse email de votre choix.
                 </div>
                 <span *ngIf="showErrors && emailCtrl.hasError('required')" class="text-warning">
-                   <i class="material-icons">warning</i> Veuillez renseigner votre adresse email.<br />
+                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre adresse email.<br />
                 </span>
                 <span *ngIf="showErrors && emailCtrl.hasError('email')" class="text-warning">
-                   <i class="material-icons">warning</i> Veuillez renseigner une adresse email valide.<br />
+                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner une adresse email valide.<br />
                 </span>
                 <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" />
               </div>
@@ -65,22 +65,10 @@
                 <span class="font-weight-bold">
                   <i class="material-icons mr-2">error_outline</i>Échec de l'activation.
                 </span>
-                <div>
-                  Nous vous invitons à vérifier les éléments suivants :
-                  <ul>
-                    <li>
-                      Avez-vous utilisé le bon SIRET ?
-                      <br />Pour une même adresse physique, il est possible d'avoir plusieurs entités juridiques et donc plusieurs SIRET (exploitant, gestionnaire...).
-                    </li>
-                    <li>
-                      Il arrive que certains pare-feux bloquent l'utilisation normale de la plateforme,
-                      nous vous invitons à vérifier ce point avec votre service informatique
-                    </li>
-                  </ul>
-                  Si vous ne parvenez néanmoins pas à vous connecter, contactez-nous sur
-                  <a href="mailto:support@signal.conso.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">support@signal.conso.gouv.fr</a>
-                  en indiquant votre identité, la date du signalement, le SIRET et le nom de votre établissement.
-                </div>
+                <p>
+                  Avez-vous utilisé le bon SIRET ?
+                  <br />Pour une même adresse physique, il est possible d'avoir plusieurs entités juridiques et donc plusieurs SIRET (exploitant, gestionnaire...).
+                </p>
               </div>
               <div class="form-group row">
                 <div class="col-sm-12 text-center">
