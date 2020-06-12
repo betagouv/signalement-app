@@ -279,14 +279,11 @@
               <div class="pb-2" *ngFor="let subcategory of report.subcategories">
                 <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
               </div>
-              <h2 class="text-primary pt-4">Message du consommateur</h2>
-              <div class="text-dark-blue font-weight-bold">
-                Informations complémentaires
-              </div>
+              <h2 class="text-primary pt-4">Détail du signalement</h2>
               <div class="row">
                 <div class="col-12">
                   <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
-                    <span [innerHTML]="detailInputValue.label"></span>
+                    <span class="text-dark-blue font-weight-bold"[innerHTML]="detailInputValue.label"></span>
                     &nbsp;<span [innerHTML]="detailInputValue.value"></span>
                   </div>
                 </div>
