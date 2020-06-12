@@ -316,4 +316,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
       return {firstLine, secondLine, hasNext };
     }
   }
+
+  isFirstVisit() {
+    return this.reportsByDate && (this.reportsByDate.length === 1)
+      && this.reportsByDate[0].reports && (this.reportsByDate[0].reports.length === 1)
+      && this.reportsByDate[0].reports[0].status === ReportStatus.UnreadForPro;
+  }
 }

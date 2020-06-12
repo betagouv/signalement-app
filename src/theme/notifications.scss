@@ -45,8 +45,9 @@
   }
 
   &.success {
+    border: none;
     background: $theme-success-bg;
-    border-color: $theme-success-border;
+    color: $green;
   }
 
   &.warning {

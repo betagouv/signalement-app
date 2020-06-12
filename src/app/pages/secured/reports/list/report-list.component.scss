@@ -174,7 +174,7 @@ form {
     border-bottom: 1px solid $theme-border-lighter;
     padding: 0.5em;
 
-    &:hover {
+    &:not(.item-header):hover {
       background: $lightest-grey;
     }
   }

@@ -60,7 +60,14 @@
     position: relative;
     border: 1px solid #c9d3df;
     margin-bottom: 2em;
+
+    @media #{$smaller-than-mobile} {
+      & {
+        padding: 1em;
+      }
+    }
   }
+
 
   .max-width {
     max-width: 750px;
@@ -130,6 +137,14 @@
   }
 
   .btn-sm {
+    padding: 8px 14px;;
+    font-size: inherit;
+    line-height: 1.5;
+    border-radius: 34px;
+    box-shadow: none;
+  }
+
+  .btn-icon {
     padding: 8px 14px;;
     font-size: inherit;
     line-height: 1.5;

@@ -10,6 +10,11 @@
 
 <section class="section section-white position-relative pb-0">
   <div class="container">
+    <div class="notification success mb-5" *ngIf="responseSuccess">
+      <i class="material-icons md-18 attach-icon">check_circle</i>
+      <span  *appRole="[roles.Pro]">Votre réponse a été envoyée au consommateur. Elle sera aussi consultable par la DGCCRF.</span>
+      <span *appRole="[roles.Admin, roles.DGCCRF]">Votre saisie a bien été prise en compte, nous vous en remercions.</span>
+    </div>
     <div class="panel">
       <div class="text-center" *ngIf="loadingError && !report">
         <span class="error">
@@ -18,8 +23,11 @@
       </div>
       <ng-container *ngIf="report">
         <div class="row">
-          <div class="col-3">
-            <div class="badge" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
+          <div class="col-12 order-last col-sm-3 order-sm-first">
+
+            <div class="badge d-none d-sm-inline-block" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
+
+            <hr class="d-sm-none" />
 
             <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
               <div class="text-primary font-weight-bold pt-3">
@@ -192,14 +200,13 @@
                       <small class="text-darker-grey">
                         <i>{{event.data.creationDate | date : 'mediumDate'}}</i>
                       </small>
-                      <br />
                       <ng-template *ngTemplateOutlet="eventUser; context: {$implicit: event}"></ng-template>
                       <br />
                       {{event.data.action.value}}
                     </div>
                   </ng-template>
                   <ng-template #eventUser let-event>
-                   <small class="text-darker-grey" *ngIf="event.user"> <br />[{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})]</small>
+                    <small class="text-darker-grey" *ngIf="event.user"> <br />[{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})]</small>
                   </ng-template>
                 </div>
               </div>
@@ -223,19 +230,54 @@
               </ng-container>
             </ng-container>
           </div>
-          <div class="offset-1 col-8">
+          <div class="col-12 order-first offset-sm-1 col-sm-8 order-sm-last">
+            <div class="float-sm-right">
+              <button *appRole="[roles.Admin, roles.DGCCRF];" type="button" class="btn btn-icon btn-secondary mb-2" (click)="downloadReport()">
+                <i class="material-icons">picture_as_pdf</i>
+              </button>
+              <ng-container *appPermission="permissions.deleteReport">
+                <button type="submit" class="btn btn-danger btn-icon ml-2 mb-2" (click)="openModal(delete)">
+                  <i class="material-icons">delete</i>
+                </button>
+                <ng-template #delete>
+                  <div class="modal-body text-center" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length; else noFiles">
+                    Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
+                    <br />
+                    <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
+                  </div>
+                  <ng-template #noFiles>
+                    <div class="modal-body text-center">
+                      <p>
+                        Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
+                        <br/>
+                        {{reportId}}
+                      </p>
+                      <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
+
+                      <div class="notification error" *ngIf="loadingError">
+                        Une erreur technique s'est produite<br />
+                      </div>
+
+                      <hr />
+                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
+                    </div>
+                  </ng-template>
+                </ng-template>
+              </ng-container>
+            </div>
+            <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
             <ng-container>
               <h2 class="text-primary">Type de signalement</h2>
               <div class="text-darker-grey pb-3">
                 Les catégories du signalement sont sélectionnées par le consommateur.
               </div>
-              <div class="row">
-                <div class="col-12 p-1">
-                  <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{report.category}}
-                </div>
-                <div class="col-12 p-1" *ngFor="let subcategory of report.subcategories">
-                  <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
-                </div>
+              <div class="pb-2">
+                <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{report.category}}
+              </div>
+              <div class="pb-2" *ngFor="let subcategory of report.subcategories">
+                <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
               </div>
               <h2 class="text-primary pt-4">Message du consommateur</h2>
               <div class="text-dark-blue font-weight-bold">
@@ -269,7 +311,7 @@
                       </td>
                       <ng-template #removeTemplate>
                         <div class="modal-body text-center">
-                          <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                          <p>Voulez-vous supprimer cette pièce jointe ?</p>
                           <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
                           &nbsp;
                           <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
@@ -281,31 +323,25 @@
                 </div>
               </div>
             </ng-container>
-
             <ng-container *ngIf="getReportResponse()">
-              <h2 class="text-primary pt-4" *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse apportée</h2>
+              <h2 class="text-primary pt-4" *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse</h2>
               <ng-template #titleAnswerNoPro>
                 <h2 class="text-primary pt-4">
-                  Réponse apportée par l'entreprise
+                  Réponse du professionnel
                 </h2>
               </ng-template>
-              <div class="row" id="proAnswer">
-                <div class="col-12 pt-1" [ngSwitch]="getReportResponse().responseType">
-                  <i class="material-icons md-18 text-primary">keyboard_arrow_right</i>
-                  <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte</span>
-                  <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé</span>
-                  <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement</span>
-                </div>
-              </div>
-              <div class="text-dark-blue font-weight-bold pt-3">
-                Réponse au consommateur
+              <div class="pb-2" [ngSwitch]="getReportResponse().responseType" id="proAnswer">
+                <i class="material-icons md-18 text-primary">keyboard_arrow_right</i>
+                <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte</span>
+                <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé</span>
+                <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement</span>
               </div>
               <div class="bg-lightest-blue p-2">
                 {{getReportResponse().consumerDetails}}
               </div>
               <ng-container *ngIf="getReportResponse().dgccrfDetails">
                 <div class="text-dark-blue font-weight-bold pt-3">
-                  Réponse à la DGCCRF
+                  Informations complémentaires pour la DGCCRF
                 </div>
                 <div class="bg-lightest-blue p-2">
                   {{getReportResponse().dgccrfDetails}}
@@ -332,7 +368,7 @@
                     </td>
                     <ng-template #removeTemplate>
                       <div class="modal-body text-center">
-                        <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                        <p>Voulez-vous supprimer cette pièce jointe ?</p>
                         <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
                         &nbsp;
                         <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
@@ -343,279 +379,233 @@
                 </table>
               </div>
             </div>
-          </div>
-        </div>
-
-        <ng-container *appPermission="permissions.deleteReport">
-          <hr />
-          <button type="submit" class="btn btn-danger" (click)="openModal(delete)">
-            Supprimer ce signalement
-          </button>
-          <ng-template #delete>
-            <div class="modal-body text-center" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length; else noFiles">
-              Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
-              <br />
-              <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
-            </div>
-            <ng-template #noFiles>
-              <div class="modal-body text-center">
-                <p>
-                  Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
-                  <br/>
-                  {{reportId}}
-                </p>
-                <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
-
-                <div class="notification error" *ngIf="loadingError">
-                  Une erreur technique s'est produite<br />
-                </div>
-
-                <hr />
-                <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                &nbsp;
-                <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
-              </div>
-            </ng-template>
-          </ng-template>
-        </ng-container>
-        <button *appRole="[roles.Admin, roles.DGCCRF];" type="button" class="btn btn-secondary ml-3" (click)="downloadReport()">Télécharger <i class="material-icons">picture_as_pdf</i></button>
-      </ng-container>
-      <ngx-loading [show]="!report && loading"></ngx-loading>
-    </div>
-
-    <ng-container *appRole="[roles.Pro]">
-      <div *ngIf="report && !getReportResponse() && ! isClosed()">
-        <div class="pb-3 text-center" *ngIf="!responseForm; else proAnswer">
-          <p>
-            Votre réponse est importante. Elle sera visible par le consommateur et la DGCCRF.
-            <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="la-reponse" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
-          </p>
-          <div class="mb-4">
-            <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Apporter une réponse à ce signalement</button>
-          </div>
-        </div>
-        <ng-template #proAnswer>
-          <div class="notification">
-            <form [formGroup]="responseForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
-
-              <div class="form__group">
-                <label class="text-center" [class]="hasError(responseTypeCtrl) ? 'error' : ''">
-                  Pouvez-vous préciser votre réponse ? <span class="error">*</span>
-                </label>
-                <div [class]="getTypeClass(reportResponseTypes.Accepted)">
-                  <div class="row pb-2 pt-2">
-                    <div class="col-2 col-sm-1 text-right pr-1">
-                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
-                    </div>
-                    <div class="col-10 col-sm-11 pl-1">
-                      <label for="reportAccepted" class="label-inline pointer">Je prends en compte ce signalement</label>
-                    </div>
+            <ng-container *appRole="[roles.Pro]">
+              <div *ngIf="report && !getReportResponse() && ! isClosed()">
+                <div *ngIf="!responseForm; else proAnswer">
+                  <div class="pt-5 pb-2">
+                    <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Répondre à ce signalement</button>
                   </div>
-                </div>
-                <div [class]="getTypeClass(reportResponseTypes.Rejected)">
-                  <div class="row pb-2 pt-2">
-                    <div class="col-2 col-sm-1 text-right pr-1">
-                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
-                    </div>
-                    <div class="col-10 col-sm-11 pl-1">
-                      <label for="reportRejected" class="label-inline pointer">J'estime que ce signalement est infondé</label>
-                    </div>
-                  </div>
-                </div>
-                <div [class]="getTypeClass(reportResponseTypes.NotConcerned)">
-                  <div class="row pb-2 pt-2">
-                    <div class="col-2 col-sm-1 text-right pr-1">
-                      <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
-                    </div>
-                    <div class="col-10 col-sm-11 pl-1">
-                      <label for="reportNotConcerned" class="label-inline pointer">J'estime que ce signalement ne concerne pas mon établissement</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <ng-container *ngIf="responseTypeCtrl.valid">
-
-                <div class="form__group pb-2">
-                  <label for="proAnswerInput" [class]="hasError(responseConsumerDetailsCtrl) ? 'error' : ''" [ngSwitch]="responseTypeCtrl.value">
-                    <span *ngSwitchCase="reportResponseTypes.Accepted">Détaillez les actions préventives / correctives que vous allez mettre en place.</span>
-                    <span *ngSwitchDefault>Apportez une réponse au consommateur</span>
-                    <span class="error">*</span>
-                  </label>
-                  <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3" placeholder="Cette réponse sera envoyée automatiquement par mail au consommateur et pourra être consultée par la DGCCRF.">
-                  </textarea>
-                  <p class="note">
-                    Nous vous demandons de rester courtois dans votre réponse. Les menaces et insultes n'ont pas leur place dans SignalConso !
+                  <p>
+                    Votre réponse sera visible par le consommateur et la DGCCRF.
                   </p>
                 </div>
+                <ng-template #proAnswer>
+                  <form [formGroup]="responseForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
+                    <h2 class="text-primary pt-4">Ma réponse</h2>
 
-                <hr />
+                    <hr class="d-sm-none" />
 
-                <div class="form__group pt-2">
-                  <label for="proAnswerDgccrfInput">
-                    Vous pouvez également, si vous le souhaitez, apporter une précision <b>à l'attention de la DGCCRF</b> qui ne sera pas transmise au consommateur
-                  </label>
-                  <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3" placeholder="Cette réponse pourra être consultée par la DGCCRF uniquement.">
-                  </textarea>
+                    <div class="form__group">
+                      <label class="text-dark-blue">
+                        <strong>Pouvez-vous préciser votre réponse ?</strong>
+                      </label>
+                      <div *ngIf="showErrors && responseTypeCtrl.hasError('required')" class="text-warning">
+                        <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
+                      </div>
+                      <div [class]="getTypeClass(reportResponseTypes.Accepted)">
+                        <div class="row pb-2 pt-2">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="reportAccepted" class="label-inline pointer">Je prends en compte ce signalement</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(reportResponseTypes.Rejected)">
+                        <div class="row pb-2 pt-2">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="reportRejected" class="label-inline pointer">J'estime que ce signalement est infondé</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(reportResponseTypes.NotConcerned)">
+                        <div class="row pb-2 pt-2">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="reportNotConcerned" class="label-inline pointer">J'estime que ce signalement ne concerne pas mon établissement</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form__group pb-2">
+                      <label class="text-dark-blue" for="proAnswerInput">
+                        <strong>Votre réponse (obligatoire)</strong>
+                      </label>
+                      <div>
+                        <strong>Le consommateur</strong> la recevra par mail. Elle pourra aussi être consultée par la <strong>DGCCRF</strong>.
+                      </div>
+                      <div class="text-darker-grey">
+                        Nous vous demandons de rester courtois dans votre réponse. Les menaces et insultes n'ont pas leur place dans SignalConso !
+                      </div>
+                      <div *ngIf="showErrors && responseConsumerDetailsCtrl.hasError('required')" class="text-warning">
+                        <i class="material-icons md-18">warning</i> Veuillez saisir votre réponse.<br />
+                      </div>
+                      <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3"></textarea>
+                    </div>
+
+                    <div class="form__group pt-2">
+                      <label class="text-dark-blue" for="proAnswerDgccrfInput">
+                        <strong>Informations complémentaires</strong>
+                      </label>
+                      <div>
+                        Ces précisions sont <strong>à l'attention de la DGCCRF</strong>. Elles ne seront pas transmises au consommateur.
+                      </div>
+                      <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3"></textarea>
+                    </div>
+
+                    <div class="form__group">
+                      <app-attachments label="Pièces jointes <b>visibles uniquement par la DGCCRF</b>"
+                                       [uploadedFiles]="uploadedFiles"
+                                       [origin]="fileOrigins.Professional">
+                      </app-attachments>
+                    </div>
+
+                    <div class="notification error" *ngIf="loadingError">
+                      Une erreur technique s'est produite<br />
+                    </div>
+
+                    <div class="mt-4">
+                      <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
+                      &nbsp;
+                      <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                        Envoyer
+                      </button>
+                    </div>
+                  </form>
+                  <ngx-loading [show]="loading"></ngx-loading>
+                </ng-template>
+              </div>
+            </ng-container>
+            <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+              <div *ngIf="report">
+                <div *ngIf="!actionForm; else actionFormTpl">
+                  <div class="pt-5 pb-2">
+                    <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.DGCCRF]">
+                      Ajouter des informations DGCCRF
+                    </button>
+                    <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.Admin]">
+                      Ajouter des informations
+                    </button>
+                  </div>
                 </div>
+                <ng-template #actionFormTpl>
+                  <h2 class="text-primary pt-4" *appRole="[roles.DGCCRF]">Informations DGCCRF</h2>
+                  <h2 class="text-primary pt-4" *appRole="[roles.Admin]">Informations</h2>
 
-                <div class="form__group">
-                  <app-attachments label="Pièces jointes <b>visibles uniquement par la DGCCRF</b>"
-                                   [uploadedFiles]="uploadedFiles"
-                                   [origin]="fileOrigins.Professional">
-                  </app-attachments>
-                </div>
+                  <hr class="d-sm-none" />
 
-              </ng-container>
+                  <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
 
-              <div class="notification error" *ngIf="showErrors && responseForm.invalid">
-                Veuillez renseigner les champs obligatoires.<br />
+                    <div class="form__group">
+                      <label class="text-dark-blue">
+                        <strong>Pouvez-vous préciser ?</strong>
+                      </label>
+                      <div *ngIf="showErrors && actionTypeCtrl.hasError('required')" class="text-warning">
+                        <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.Comment)">
+                        <div class="row pb-2 pt-2">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="commentAction" class="label-inline pointer">Commentaire (interne à la DGCCRF)</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
+                        <div class="row pb-2 pt-2">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="consumerAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par le consommateur</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
+                        <div class="row pb-2 pt-2">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="proAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par l'entreprise</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
+                        <div class="row pb-2 pt-2">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="controlAction" class="label-inline pointer">Contrôle effectué (interne à la DGCCRF)</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <ng-container *ngIf="actionTypeCtrl.valid">
+
+                      <div class="form__group pb-2" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
+                        <label class="text-dark-blue"  for="commentInput">
+                          <strong>Commentaire (obligatoire)</strong>
+                        </label>
+                        <textarea id="commentInput" [formControl]="detailCtrl"></textarea>
+                      </div>
+
+                      <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ConsumerAttachments">
+                        <app-attachments label="Pièces jointes fournies par le consommateur (visibles par l'entreprise et la DGCCRF)"
+                                         [uploadedFiles]="uploadedFiles"
+                                         [origin]="fileOrigins.Consumer">
+                        </app-attachments>
+                      </div>
+
+                      <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ProfessionalAttachments">
+                        <app-attachments label="Pièces jointes fournies par l'entreprise (visibles par l'entreprise et la DGCCRF)"
+                                         [uploadedFiles]="uploadedFiles"
+                                         [origin]="fileOrigins.Professional">
+                        </app-attachments>
+                      </div>
+
+                      <div class="form__group pb-2" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
+                        <label for="controlInput">
+                          Détail du contrôle (facultatif)
+                        </label>
+                        <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
+                      </div>
+
+                      <div class="notification error" *ngIf="loadingError">
+                        Une erreur technique s'est produite<br />
+                      </div>
+
+                      <div class="mt-4">
+                        <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideActionForm()">Annuler</button>
+                        &nbsp;
+                        <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                          Envoyer
+                        </button>
+                      </div>
+
+                    </ng-container>
+                  </form>
+                  <ngx-loading [show]="loading"></ngx-loading>
+                </ng-template>
               </div>
-
-              <div class="notification error" *ngIf="loadingError">
-                Une erreur technique s'est produite<br />
-              </div>
-
-              <div class="mt-4 text-center">
-                <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
-                &nbsp;
-                <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
-                  Envoyer
-                </button>
-              </div>
-            </form>
-            <ngx-loading [show]="loading"></ngx-loading>
-          </div>
-        </ng-template>
-      </div>
-    </ng-container>
-
-    <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-      <div *ngIf="report">
-        <div class="pb-3 text-center" *ngIf="!actionForm; else actionFormTpl">
-          <div class="mb-4">
-            <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.DGCCRF]">
-              Ajouter des informations DGCCRF
-            </button>
-            <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.Admin]">
-              Ajouter des informations
-            </button>
+            </ng-container>
           </div>
         </div>
-        <ng-template #actionFormTpl>
-          <div class="notification">
-            <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
+      </ng-container>
 
-              <div class="form__group">
-                <label class="text-center" [class]="hasError(actionTypeCtrl) ? 'error' : ''">
-                  Pouvez-vous préciser ? <span class="error">*</span>
-                </label>
-                <div [class]="getTypeClass(eventActionValues.Comment)">
-                  <div class="row pb-2 pt-2">
-                    <div class="col-2 col-sm-1 text-right pr-1">
-                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
-                    </div>
-                    <div class="col-10 col-sm-11 pl-1">
-                      <label for="commentAction" class="label-inline pointer">Commentaire (interne à la DGCCRF)</label>
-                    </div>
-                  </div>
-                </div>
-                <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
-                  <div class="row pb-2 pt-2">
-                    <div class="col-2 col-sm-1 text-right pr-1">
-                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
-                    </div>
-                    <div class="col-10 col-sm-11 pl-1">
-                      <label for="consumerAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par le consommateur</label>
-                    </div>
-                  </div>
-                </div>
-                <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
-                  <div class="row pb-2 pt-2">
-                    <div class="col-2 col-sm-1 text-right pr-1">
-                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
-                    </div>
-                    <div class="col-10 col-sm-11 pl-1">
-                      <label for="proAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par l'entreprise</label>
-                    </div>
-                  </div>
-                </div>
-                <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
-                  <div class="row pb-2 pt-2">
-                    <div class="col-2 col-sm-1 text-right pr-1">
-                      <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
-                    </div>
-                    <div class="col-10 col-sm-11 pl-1">
-                      <label for="controlAction" class="label-inline pointer">Contrôle effectué (interne à la DGCCRF)</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <ng-container *ngIf="actionTypeCtrl.valid">
-
-                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
-                  <div class="row">
-                    <div class="col-12">
-                      <label for="commentInput" [class]="hasError(detailCtrl) ? 'error' : ''">
-                        Commentaire <span class="error">*</span>
-                      </label>
-                      <textarea id="commentInput" [formControl]="detailCtrl"></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ConsumerAttachments">
-                  <app-attachments label="Pièces jointes fournies par le consommateur (visibles par l'entreprise et la DGCCRF)"
-                                   [uploadedFiles]="uploadedFiles"
-                                   [origin]="fileOrigins.Consumer">
-                  </app-attachments>
-                </div>
-
-                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ProfessionalAttachments">
-                  <app-attachments label="Pièces jointes fournies par l'entreprise (visibles par l'entreprise et la DGCCRF)"
-                                   [uploadedFiles]="uploadedFiles"
-                                   [origin]="fileOrigins.Professional">
-                  </app-attachments>
-                </div>
-
-                <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
-                  <div class="row">
-                    <div class="col-12">
-                      <label for="controlInput">
-                        Détail du contrôle (facultatif)
-                      </label>
-                      <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="notification error" *ngIf="showErrors && actionForm.invalid">
-                  Veuillez renseigner les champs obligatoires.<br />
-                </div>
-
-                <div class="notification error" *ngIf="loadingError">
-                  Une erreur technique s'est produite<br />
-                </div>
-
-                <div class="mt-4 text-center">
-                  <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideActionForm()">Annuler</button>
-                  &nbsp;
-                  <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
-                    Envoyer
-                  </button>
-                </div>
-
-              </ng-container>
-            </form>
-            <ngx-loading [show]="loading"></ngx-loading>
-          </div>
-        </ng-template>
-        <div class="notification success" *ngIf="responseSuccess">
-          Votre saisie a bien été prise en compte, nous vous en remercions.
-        </div>
-      </div>
-    </ng-container>
+      <ngx-loading [show]="!report && loading"></ngx-loading>
+    </div>
   </div>
 </section>
 

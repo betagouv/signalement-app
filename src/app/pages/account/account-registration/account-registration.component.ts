@@ -7,6 +7,7 @@ import {
   AccountEventNames,
   ActionResultNames,
   AnalyticsService,
+  AuthenticationEventActions,
   EventCategories,
 } from '../../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +17,7 @@ import { AccountService } from '../../../services/account.service';
 import HttpStatusCodes from 'http-status-codes';
 import { combineLatest, iif } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-registration',
@@ -35,7 +37,6 @@ export class AccountRegistrationComponent implements OnInit {
   gcuAgreementCtrl: FormControl;
 
   showErrors: boolean;
-  showSuccess: boolean;
   loading: boolean;
   loadingError = false;
   conflictError = false;
@@ -118,7 +119,6 @@ export class AccountRegistrationComponent implements OnInit {
 
   submitForm() {
     this.showErrors = false;
-    this.showSuccess = false;
     this.loadingError = false;
     this.conflictError = false;
     if (!this.activationForm.valid) {
@@ -134,11 +134,18 @@ export class AccountRegistrationComponent implements OnInit {
         },
         this.tokenInfo.token,
         this.tokenInfo.companySiret
+      ).pipe(
+        switchMap(
+          () => {
+            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.registerUser, ActionResultNames.success);
+            return this.authenticationService.login(this.tokenInfo.emailedTo, this.passwordCtrl.value);
+          }
+        )
       ).subscribe(
-        () => {
-          this.loading = false;
-          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.registerUser, ActionResultNames.success);
-          this.showSuccess = true;
+        user => {
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
+          this.router.navigate(['suivi-des-signalements']);
         },
         error => {
           this.loading = false;

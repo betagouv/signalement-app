@@ -84,6 +84,12 @@ export class ReportDetailComponent implements OnInit {
         this.bsModalRef.hide();
       }
     });
+
+    this.loadReport();
+    this.initCompanySiretForm();
+  }
+
+  loadReport() {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
           this.reportId = params.get('reportId');
@@ -96,7 +102,7 @@ export class ReportDetailComponent implements OnInit {
     ).subscribe(
       ([report, events]) => {
         this.report = report;
-        this.events = events;
+        this.events = events.sort((e1, e2) => (new Date(e1.data.creationDate)).getTime() - (new Date(e2.data.creationDate).getTime()));
         this.loading = false;
         this.initConsumerForm();
       },
@@ -104,8 +110,6 @@ export class ReportDetailComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
-
-    this.initCompanySiretForm();
   }
 
   initCompanySiretForm() {
@@ -319,16 +323,10 @@ export class ReportDetailComponent implements OnInit {
           dgccrfDetails: this.responseDgccrfDetailsCtrl.value,
           fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
         })
-      ).pipe(
-        switchMap(() => {
-          return this.eventService.getEvents(this.reportId);
-        })
       ).subscribe(
-        events => {
-          this.events = events;
-          this.report.uploadedFiles = [...this.report.uploadedFiles, ...this.uploadedFiles.filter(file => file.id)];
-          this.loading = false;
+        _ => {
           this.responseSuccess = true;
+          this.loadReport();
         },
         err => {
           this.loading = false;
@@ -376,7 +374,9 @@ export class ReportDetailComponent implements OnInit {
   }
 
   getEvent(eventActionValue: EventActionValues) {
-    return this.events.find(event => event.data.action.value === eventActionValue);
+    if (this.events) {
+      return this.events.find(event => event.data.action.value === eventActionValue);
+    }
   }
 
   getReportResponse(): ReportResponse {

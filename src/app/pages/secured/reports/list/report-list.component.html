@@ -352,7 +352,10 @@
       </table>
     </div>
     <div class="container pro max-width mb-2 position-relative" *appRole="[roles.Pro]">
-      <div class="row item item-header">
+      <div class="notification success mb-5" *ngIf="isFirstVisit()">
+        <i class="material-icons md-18 attach-icon">check_circle</i> Votre compte est bien activé, vous pouvez consulter <strong>votre signalement</strong>.
+      </div>
+      <div class="row item item-header d-none d-sm-flex">
         <div class="col-3">
           Date de réception
         </div>
@@ -370,19 +373,19 @@
         Une erreur technique s'est produite
       </div>
       <ng-container *ngFor="let reportsByDate of reportsByDate">
-        <div class="row item pointer" [ngClass]="report.status === reportStatus.ClosedForPro ? 'font-weight-bold' : ''" *ngFor="let report of reportsByDate.reports" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
-          <div class="col-3">
+        <div class="row item pointer" [ngClass]="report.status === reportStatus.UnreadForPro ? 'font-weight-bold' : ''" *ngFor="let report of reportsByDate.reports" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
+          <div class="col-4 col-sm-3">
             {{report.creationDate | date : 'dd/MM/yyyy' }}
           </div>
-          <div class="col-1">
+          <div class="d-none d-sm-block col-sm-1">
             <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length">attach_file</i>
           </div>
-          <div class="col-4">
+          <div class="col-6 col-sm-4">
             <span class="badge" [ngStyle]="{'background-color': statusColor.get(report.status)}">
             {{report.status}}
             </span>
           </div>
-          <div class="col-4">
+          <div class="col-12 col-sm-4">
             {{report.contactAgreement ? report.consumer.firstName + ' ' + report.consumer.lastName : 'Signalement anonyme'}}
             <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
           </div>
