@@ -110,6 +110,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.userAccesses = userAccesses;
         this.statusList = statusList;
 
+        //TODO récupérer le nb de signalements par Siret pour affichage ou non du filtre ...
+
         if (this.user.role !== Roles.Pro || this.userAccesses.length === 1 || this.reportFilter.siret) {
           this.loadReports(Number(queryParams.get('page_number') || 1));
         } else {
@@ -321,5 +323,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
     return this.reportsByDate && (this.reportsByDate.length === 1)
       && this.reportsByDate[0].reports && (this.reportsByDate[0].reports.length === 1)
       && this.reportsByDate[0].reports[0].status === ReportStatus.UnreadForPro;
+  }
+
+  displayProFilter() {
+    return this.totalCount > 10 || (this.reportFilter && (this.reportFilter.period || this.reportFilter.status));
   }
 }

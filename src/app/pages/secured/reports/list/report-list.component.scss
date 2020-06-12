@@ -19,10 +19,6 @@ form {
     margin-bottom: 0;
   }
 
-  select {
-    width: auto;
-  }
-
 }
 
 .table-responsive {
@@ -104,23 +100,42 @@ form {
 
 .filters {
 
-  padding-top: 2em;
-  padding-bottom: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   margin: 0 0 2em 0;
   background-color: $lightest-grey;
+
+  .b-0 {
+    position: absolute;
+    bottom: 0;
+  }
 
   ul.dropdown-menu {
     height: 300px;
     overflow-y: scroll;
   }
 
-  input, select {
+  &:not(.pro) {
+    input, select {
 
-    @media #{$larger-than-tablet} {
-      width: 300px;
+      @media #{$larger-than-tablet} {
+        width: 300px;
+      }
+      @media #{$smaller-than-phablet} {
+        width: 200px;
+      }
     }
-    @media #{$smaller-than-phablet} {
-      width: 200px;
+  }
+
+  &.pro {
+    margin-top: -3em !important;
+
+
+    @media #{$smaller-than-tablet} {
+      & {
+        margin-top: -1em !important;
+        padding: 0.5em;
+      }
     }
   }
 }
