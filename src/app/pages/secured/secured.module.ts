@@ -12,11 +12,12 @@ import { ComponentsModule, NgxLoadingConfig } from '../../components/components.
 import { PipesModule } from '../../pipes/pipes.module';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
+import { Roles } from '../../model/AuthUser';
 
 const routes: Routes = [
-  { path: 'admin/invitation-ccrf', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin/invitation-ccrf', component: AdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
   { path: 'mes-telechargements', component: AsyncFilesComponent, canActivate: [AuthGuard] },
-  { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard] }
+  { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
 ];
 
 @NgModule({

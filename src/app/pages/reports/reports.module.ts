@@ -18,13 +18,13 @@ import { Roles } from '../../model/AuthUser';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
-  { path: 'suivi-des-signalements', component: ReportListProComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard], data: { roles: [Roles.Pro] } },
-  { path: 'suivi-des-signalements/admin', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/dgccrf', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/pro/siret/:siret', component: ReportListProComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/admin/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/dgccrf/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard] },
+  { path: 'suivi-des-signalements', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
+  { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
+  { path: 'suivi-des-signalements/admin', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
+  { path: 'suivi-des-signalements/dgccrf', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
+  { path: 'suivi-des-signalements/pro/siret/:siret', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
+  { path: 'suivi-des-signalements/admin/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
+  { path: 'suivi-des-signalements/dgccrf/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
 ];
 
