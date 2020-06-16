@@ -24,7 +24,7 @@
   </ng-template>
 
   <ng-template #reportList >
-    <div class="filters" *ngIf="displayProFilter()">
+    <div class="filters" *ngIf="withPagingAndFiltering()">
       <form (ngSubmit)="submitFilters()">
         <div class="container max-width">
           <div class="row form-group">
@@ -60,7 +60,7 @@
               <button type="submit" class="btn btn-outline-primary btn-sm b-0">Filtrer</button>
             </div>
           </div>
-          <div class="row" *ngIf="reportFilter">
+          <div class="row" *ngIf="hasFilter()">
             <div class="col-12">
               <span class="link pointer text-warning" (click)="cancelFilters()">Effacer les filtres</span>
             </div>
@@ -89,6 +89,11 @@
       <div class="notification error" *ngIf="loadingError">
         Une erreur technique s'est produite
       </div>
+      <div class="row item" *ngIf="reports && !reports.length">
+        <div class="col-12 text-center">
+          Aucun signalement trouvé
+        </div>
+      </div>
       <div class="row item pointer" [ngClass]="report.status === reportStatus.UnreadForPro ? 'font-weight-bold' : ''" *ngFor="let report of reports" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
         <div class="col-4 col-sm-3">
           {{report.creationDate | date : 'dd/MM/yyyy' }}
@@ -104,6 +109,19 @@
         <div class="col-12 col-sm-4">
           {{report.contactAgreement ? report.consumer.firstName + ' ' + report.consumer.lastName : 'Signalement anonyme'}}
           <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-12 col-sm-6">
+          <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="3" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
+                      [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center"
+                      *ngIf="withPagingAndFiltering()">
+          </pagination>
+        </div>
+        <div class="col-12 col-sm-6 text-center text-sm-right">
+          <button type="button" class="btn btn-outline-success btn-sm" (click)="launchExtraction()">
+            Exporter (XLS)
+          </button>
         </div>
       </div>
     </div>

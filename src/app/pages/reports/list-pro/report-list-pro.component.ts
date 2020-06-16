@@ -149,7 +149,11 @@ export class ReportListProComponent implements OnInit {
     return this.reports && this.reports.length === 1 && this.reports[0].status === ReportStatus.UnreadForPro;
   }
 
-  displayProFilter() {
-    return this.totalCount > 10 || (this.reportFilter && (this.reportFilter.period || this.reportFilter.status));
+  withPagingAndFiltering() {
+    return this.totalCount > 10 || this.route.snapshot.queryParamMap.has('page_number');
+  }
+
+  hasFilter() {
+    return this.reportFilter && (this.reportFilter.period || this.reportFilter.status);
   }
 }
