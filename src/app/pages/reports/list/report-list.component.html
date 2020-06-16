@@ -279,7 +279,7 @@
                 {{ report.status }}
               </td>
               <td class="action" (click)="$event.stopPropagation()">
-                <a [routerLink]="['report', report.id]" target="_blank">
+                <a [routerLink]="['/suivi-des-signalements', 'report', report.id]" target="_blank">
                   <i class="material-icons text-primary md-18">open_in_new</i>
                 </a>
               </td>
