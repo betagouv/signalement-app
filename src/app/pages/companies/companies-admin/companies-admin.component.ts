@@ -38,6 +38,7 @@ export class CompaniesAdminComponent implements OnInit {
   companies: Company[];
   maxCompanyResult = MaxCompanyResult;
 
+  user: User;
   roles = Roles;
   totalCount: number;
   currentPage: number;
@@ -76,6 +77,7 @@ export class CompaniesAdminComponent implements OnInit {
 
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       .subscribe(([url, user]) => {
+        this.user = user;
         this.navTabs = {
           [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
           [this.roles.DGCCRF]: [this.mostReportedTab]
