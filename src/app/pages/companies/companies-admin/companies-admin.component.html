@@ -81,7 +81,7 @@
                     <span *ngIf="!loadingError">Aucun signalement trouvé</span>
                   </td>
                 </tr>
-                <tr *ngFor="let line of lines" class="pointer" [routerLink]="['/suivi-des-signalements', 'siret', line.companySiret]">
+                <tr *ngFor="let line of lines" class="pointer" [routerLink]="['/suivi-des-signalements', 'admin', 'siret', line.companySiret]">
                   <td>{{line.companyPostalCode}}</td>
                   <td>{{line.companySiret}}</td>
                   <td>{{line.companyName}}</td>
@@ -143,13 +143,13 @@
                   <ng-template #confirmLettersSendingTpl>
                     <div class="modal-body text-center">
                       <p>Confirmez-vous l'envoi des courriers pour les entreprises sélectionnés ?</p>
-      
+
                       <div class="notification error" *ngIf="loadingError">
                         Une erreur technique s'est produite<br />
                       </div>
-      
+
                       <hr />
-      
+
                       <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Non</button>
                       &nbsp;
                       <button type="button" class="btn btn-primary" (click)="confirmLettersSending()">Oui</button>

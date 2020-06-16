@@ -9,6 +9,15 @@ export class User {
   role: string;
   permissions: Permissions[];
 
+  get roleUrlParam() {
+    console.log('roleUrlParam', this.role)
+    switch (this.role) {
+      case Roles.Admin: return 'admin';
+      case Roles.DGCCRF: return 'dgccrf';
+      case Roles.Pro: return 'pro';
+      default: return '';
+    }
+  }
 }
 
 export class AuthUser {

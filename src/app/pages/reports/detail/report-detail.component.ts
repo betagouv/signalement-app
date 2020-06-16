@@ -1,20 +1,20 @@
 import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
-import { Report, ReportStatus, StatusColor } from '../../../../model/Report';
-import { ReportService } from '../../../../services/report.service';
-import { FileOrigin, UploadedFile } from '../../../../model/UploadedFile';
-import { FileUploaderService } from '../../../../services/file-uploader.service';
+import { Report, ReportStatus, StatusColor } from '../../../model/Report';
+import { ReportService } from '../../../services/report.service';
+import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
+import { FileUploaderService } from '../../../services/file-uploader.service';
 import { combineLatest } from 'rxjs';
-import { EventService } from '../../../../services/event.service';
+import { EventService } from '../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CompanyService } from '../../../../services/company.service';
-import { CompanySearchResult } from '../../../../model/CompanySearchResult';
+import { CompanyService } from '../../../services/company.service';
+import { CompanySearchResult } from '../../../model/CompanySearchResult';
 import { switchMap, tap } from 'rxjs/operators';
-import { Permissions, Roles } from '../../../../model/AuthUser';
+import { Permissions, Roles } from '../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { isPlatformBrowser, PlatformLocation } from '@angular/common';
-import { Consumer } from '../../../../model/Consumer';
-import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../../model/ReportEvent';
+import { Consumer } from '../../../model/Consumer';
+import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../model/ReportEvent';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({

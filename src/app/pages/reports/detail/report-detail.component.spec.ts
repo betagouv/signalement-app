@@ -5,19 +5,19 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoleDirective } from '../../../../directives/app-role/app-role.directive';
-import { AppPermissionDirective } from '../../../../directives/app-permission/app-permission.directive';
+import { AppRoleDirective } from '../../../directives/app-role/app-role.directive';
+import { AppPermissionDirective } from '../../../directives/app-permission/app-permission.directive';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthenticationService } from '../../../../services/authentication.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 import { of } from 'rxjs';
-import { User } from '../../../../model/AuthUser';
-import { ReportService } from '../../../../services/report.service';
-import { ReportStatus } from '../../../../model/Report';
-import { EventService } from '../../../../services/event.service';
-import { EventActionValues, ReportEvent } from '../../../../model/ReportEvent';
-import { ComponentsModule } from '../../../../components/components.module';
-import { PipesModule } from '../../../../pipes/pipes.module';
-import { genReport } from '../../../../../../test/fixtures.spec';
+import { User } from '../../../model/AuthUser';
+import { ReportService } from '../../../services/report.service';
+import { ReportStatus } from '../../../model/Report';
+import { EventService } from '../../../services/event.service';
+import { EventActionValues, ReportEvent } from '../../../model/ReportEvent';
+import { ComponentsModule } from '../../../components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
+import { genReport } from '../../../../../test/fixtures.spec';
 
 describe('ReportDetailComponent', () => {
 

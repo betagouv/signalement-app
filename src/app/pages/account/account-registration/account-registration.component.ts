@@ -145,7 +145,7 @@ export class AccountRegistrationComponent implements OnInit {
         user => {
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
-          this.router.navigate(['suivi-des-signalements']);
+          this.router.navigate(['suivi-des-signalements', user.roleUrlParam]);
         },
         error => {
           this.loading = false;

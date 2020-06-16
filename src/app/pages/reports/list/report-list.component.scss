@@ -1,5 +1,5 @@
-@import "../../../../../theme/variables";
-@import "../../../../../theme/media-queries";
+@import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
 .overflow-container {
   overflow-x: auto;
@@ -115,7 +115,7 @@ form {
     overflow-y: scroll;
   }
 
-  &:not(.pro) {
+  & {
     input, select {
 
       @media #{$larger-than-tablet} {
@@ -123,18 +123,6 @@ form {
       }
       @media #{$smaller-than-phablet} {
         width: 200px;
-      }
-    }
-  }
-
-  &.pro {
-    margin-top: -3em !important;
-
-
-    @media #{$smaller-than-tablet} {
-      & {
-        margin-top: -1em !important;
-        padding: 0.5em;
       }
     }
   }
@@ -181,23 +169,6 @@ form {
 
 .bold {
   font-weight: bold;
-}
-
-.container.pro {
-
-  .item {
-    border-bottom: 1px solid $theme-border-lighter;
-    padding: 0.5em;
-
-    &:not(.item-header):hover {
-      background: $lightest-grey;
-    }
-  }
-
-  .item-header {
-    color: $primary;
-    font-weight: bold;
-  }
 }
 
 .items-per-page-selector {
