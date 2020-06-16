@@ -14,11 +14,12 @@ import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PipesModule } from '../../pipes/pipes.module';
+import { Roles } from '../../model/AuthUser';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
   { path: 'suivi-des-signalements', component: ReportListProComponent, canActivate: [AuthGuard] },
-  { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard] },
+  { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard], data: { roles: [Roles.Pro] } },
   { path: 'suivi-des-signalements/admin', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/dgccrf', component: ReportListComponent, canActivate: [AuthGuard] },
   { path: 'suivi-des-signalements/pro/siret/:siret', component: ReportListProComponent, canActivate: [AuthGuard] },

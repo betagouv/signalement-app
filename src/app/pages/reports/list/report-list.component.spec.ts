@@ -16,10 +16,9 @@ import { of } from 'rxjs';
 import { Roles } from '../../../model/AuthUser';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ConstantService } from '../../../services/constant.service';
-import { Report, ReportStatus } from '../../../model/Report';
+import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
-import { PaginatedData } from '../../../model/PaginatedData';
-import { genReport, genUser, genUserAccess } from '../../../../../test/fixtures.spec';
+import { genPaginatedReports, genUser } from '../../../../../test/fixtures.spec';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
@@ -29,12 +28,6 @@ describe('ReportListComponent', () => {
   let companyAccessesService: CompanyAccessesService;
   let constantService: ConstantService;
   let reportService: ReportService;
-
-  const reportPaginatedDataFixture = Object.assign(new PaginatedData<Report>(), {
-    totalCount: 3,
-    hasNextPage: false,
-    entities: [genReport(), genReport(), genReport()]
-  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -65,95 +58,26 @@ describe('ReportListComponent', () => {
 
   beforeEach(() => {
     companyAccessesService = TestBed.get(CompanyAccessesService);
-  });
-
-  describe('for a professional user', () => {
-
-    const proUser = genUser(Roles.Pro);
-
-    beforeEach(() => {
-      defineLocale('fr', frLocale);
-      reportService = TestBed.get(ReportService);
-      constantService = TestBed.get(ConstantService);
-      authenticationService = TestBed.get(AuthenticationService);
-      authenticationService.user = of(proUser);
-      fixture = TestBed.createComponent(ReportListComponent);
-      component = fixture.componentInstance;
-
-      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.ToReviewedByPro]));
-    });
-
-    it('should load user accesses on init', () => {
-      const myAccessesSpy = spyOn(companyAccessesService, 'myAccesses');
-
-      fixture.detectChanges();
-
-      expect(myAccessesSpy).toHaveBeenCalledWith(proUser);
-    });
-
-    it ('should display a specific message when pro has no accessess and should not load reports', () => {
-      spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([]));
-      const getReportsSpy = spyOn(reportService, 'getReports');
-
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h2').innerText).toEqual('Vous n\'avez accès à aucune entreprise');
-      expect(nativeElement.querySelector('form')).toBeNull();
-      expect(getReportsSpy).not.toHaveBeenCalled();
-    });
-
-    it ('should display report list when pro has only one access', () => {
-      spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess()]));
-      spyOn(reportService, 'getReports').and.returnValue(of(reportPaginatedDataFixture));
-
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('form')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(3);
-    });
-
-    it ('should display company list when pro has several accesses and should not load reports yet', () => {
-      spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(), genUserAccess()]));
-      const getReportsSpy = spyOn(reportService, 'getReports').and.returnValue(of(reportPaginatedDataFixture));
-
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h2').innerText).toEqual('Veuillez sélectionner une entreprise');
-      expect(nativeElement.querySelector('form')).toBeNull();
-      expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(2);
-      expect(getReportsSpy).not.toHaveBeenCalled();
-    });
-
-  });
-
-  describe('for an admin user', () => {
 
     const adminUser = genUser(Roles.Admin);
+    defineLocale('fr', frLocale);
+    reportService = TestBed.get(ReportService);
+    constantService = TestBed.get(ConstantService);
+    authenticationService = TestBed.get(AuthenticationService);
+    authenticationService.user = of(adminUser);
+    fixture = TestBed.createComponent(ReportListComponent);
+    component = fixture.componentInstance;
 
-    beforeEach(() => {
-      defineLocale('fr', frLocale);
-      reportService = TestBed.get(ReportService);
-      constantService = TestBed.get(ConstantService);
-      authenticationService = TestBed.get(AuthenticationService);
-      authenticationService.user = of(adminUser);
-      fixture = TestBed.createComponent(ReportListComponent);
-      component = fixture.componentInstance;
+    spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.InProgress]));
+  });
 
-      spyOn(constantService, 'getReportStatusList').and.returnValue(of([ReportStatus.InProgress]));
-    });
+  it ('should display report list in a table', () => {
+    spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(3)));
 
-    it ('should display report list in a table', () => {
-      spyOn(reportService, 'getReports').and.returnValue(of(reportPaginatedDataFixture));
+    fixture.detectChanges();
 
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('form')).not.toBeNull();
-      expect(nativeElement.querySelectorAll('tr.pointer').length).toEqual(3);
-    });
-
+    const nativeElement = fixture.nativeElement;
+    expect(nativeElement.querySelector('form')).not.toBeNull();
+    expect(nativeElement.querySelectorAll('tr.pointer').length).toEqual(3);
   });
 });

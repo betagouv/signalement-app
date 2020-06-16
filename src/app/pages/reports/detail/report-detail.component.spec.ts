@@ -140,8 +140,8 @@ describe('ReportDetailComponent', () => {
       it('should display the answer and not enable to add another answer', () => {
         const nativeElement = fixture.nativeElement;
         expect(nativeElement.querySelector('#answerBtn')).toBeNull();
-        expect(nativeElement.querySelector('#proAnswer')).not.toBeNull();
-        expect(nativeElement.querySelector('#proAnswer').textContent
+        expect(nativeElement.querySelector('#proAnswerConsumerDetails')).not.toBeNull();
+        expect(nativeElement.querySelector('#proAnswerConsumerDetails').textContent
           .indexOf(answerEventFixture.data.details.consumerDetails)).toBeGreaterThan(-1);
       });
 

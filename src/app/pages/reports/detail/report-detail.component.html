@@ -327,13 +327,13 @@
                   Réponse du professionnel
                 </h2>
               </ng-template>
-              <div class="pb-2" [ngSwitch]="getReportResponse().responseType" id="proAnswer">
+              <div class="pb-2" [ngSwitch]="getReportResponse().responseType">
                 <i class="material-icons md-18 text-primary">keyboard_arrow_right</i>
                 <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte</span>
                 <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé</span>
                 <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement</span>
               </div>
-              <div class="bg-lightest-blue p-2">
+              <div class="bg-lightest-blue p-2" id="proAnswerConsumerDetails">
                 {{getReportResponse().consumerDetails}}
               </div>
               <ng-container *ngIf="getReportResponse().dgccrfDetails">
