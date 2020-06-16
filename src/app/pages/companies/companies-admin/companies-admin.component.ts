@@ -3,7 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
 import { isPlatformBrowser, Location } from '@angular/common';
 import pages from '../../../../assets/data/pages.json';
-import { Roles } from '../../../model/AuthUser';
+import { Roles, User } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
