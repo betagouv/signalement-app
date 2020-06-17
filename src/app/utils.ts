@@ -12,6 +12,9 @@ export default class Utils {
 export const SVETestingScope = 'TestSVE';
 export enum SVETestingVersions {
   NoTest = 'NoTest',
-  Test1 = 'Test1',
-  Test2 = 'Test2'
+  Test3_Sentence1 = 'Test3_Sentence1',
+  Test3_Sentence2 = 'Test3_Sentence2',
+  Test3_Sentence3 = 'Test3_Sentence3',
+  Test3_Sentence4 = 'Test3_Sentence4',
+  Test3_Sentence5 = 'Test3_Sentence5'
 }
