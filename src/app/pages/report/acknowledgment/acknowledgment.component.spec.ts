@@ -20,6 +20,15 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
+        AbTestsModule.forRoot(
+          [
+            {
+              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test3_Sentence1 ],
+              scope: SVETestingScope,
+              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test3_Sentence1]: 0 }
+            }
+          ]
+        )
       ],
       providers: []
     })
