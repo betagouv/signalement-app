@@ -108,7 +108,7 @@ class ErrorLogger extends ErrorHandler {
           scope: SVETestingScope,
           expiration: 5,
           weights: {
-            NoTest: 0,
+            NoTest: 49,
             Test3_Sentence1: 10,
             Test3_Sentence2: 10,
             Test3_Sentence3: 10,
