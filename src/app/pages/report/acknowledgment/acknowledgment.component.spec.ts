@@ -7,8 +7,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
 import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
-import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
 
 describe('AcknoledgmentComponent', () => {
 
@@ -22,15 +20,6 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ SVETestingVersions.NoTest ],
-              scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99 }
-            }
-          ]
-        )
       ],
       providers: []
     })

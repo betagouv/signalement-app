@@ -47,9 +47,13 @@ export enum ReportEventActions {
   validateConfirmation = 'Envoi d\'un signalement',
   keywordsDetection = 'Mots-clés détectés',
   informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés',
-  contactualReport = 'Litige contractuel',
-  requestUserForAdditionnalInfos = 'Affichage du bouton de demande d\'informations complémentaires',
-  additionnalInfos = 'Demande d\'informations complémentaires'
+  requestUserToContinueReport = 'Affichage du choix signalement Pro avec SignalConso ou DGCCRF uniquement',
+  continueReport = 'Poursuite du signalement',
+  stopReport = 'Arrêt du signalement pour signaler à la DGCCRF uniquement ',
+  requestUserToContinueReportOnDetailsStep = 'Affichage du choix signalement ou question',
+  continueReportOnDetailsStep = 'Poursuite du signalement plutôt que poser une question',
+  stopReportBeforeDetailsStep = 'Arrêt du signalement pour poser une question',
+  contactualReport = 'Litige contractuel'
 }
 
 export enum CompanySearchEventActions {
