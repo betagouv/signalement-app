@@ -9,6 +9,8 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
+import { SVETestingScope, SVETestingVersions } from '../../../utils';
+import { AbTestsService } from 'angular-ab-tests';
 
 @Component({
   selector: 'app-problem',
@@ -23,6 +25,12 @@ export class ProblemComponent implements OnInit {
 
   showErrors: boolean;
 
+  continueReport: boolean;
+  stopReportChoice: boolean;
+  stopReportCause: string;
+  stopReportOtherCauseDetail: string;
+  stopReportCauses = StopReportCauses;
+
   constructor(public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
               private reportStorageService: ReportStorageService,
@@ -30,9 +38,16 @@ export class ProblemComponent implements OnInit {
               private analyticsService: AnalyticsService,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
-              private meta: Meta) { }
+              private meta: Meta,
+              private abTestsService: AbTestsService) { }
 
   ngOnInit() {
+
+    if (this.abTestsService.getVersion(SVETestingScope) === SVETestingVersions.Test1) {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.requestUserToContinueReport);
+    } else {
+      this.continueReport = true;
+    }
 
     this.step = Step.Problem;
 
@@ -85,5 +100,23 @@ export class ProblemComponent implements OnInit {
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
+
+  handleStopReportChoice() {
+    if (this.stopReportChoice) {
+      this.analyticsService.trackEvent(
+        EventCategories.report,
+        ReportEventActions.stopReport,
+        `${this.stopReportCause}${this.stopReportCause === this.stopReportCauses.Others ? ': '.concat(this.stopReportOtherCauseDetail) : ''}`
+      );
+      window.location.href = 'https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier';
+    } else {
+      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.continueReport);
+      this.continueReport = true;
+    }
+  }
+}
+
+export enum StopReportCauses {
+  Fear = 'Peur des représailles', Penalty = 'Souhait sanction uniquement', Others = 'Autre'
 }
 
