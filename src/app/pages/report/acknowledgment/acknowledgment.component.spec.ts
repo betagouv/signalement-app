@@ -9,6 +9,7 @@ import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
 import { AbTestsModule } from 'angular-ab-tests';
 import { SVETestingScope, SVETestingVersions } from '../../../utils';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 describe('AcknoledgmentComponent', () => {
 
@@ -22,6 +23,7 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
+        Angulartics2RouterlessModule.forRoot(),
         AbTestsModule.forRoot(
           [
             {
