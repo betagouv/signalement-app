@@ -355,24 +355,6 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
-    {
-      query: /\bmatmut\b/i,
-      results: [
-        {
-          "siret": "77570148500101",
-          "nom_raison_sociale": "MATMUT MUTUALITE",
-          "l1_normalisee": "MATMUT MUTUALITE",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": "66 RUE DE SOTTEVILLE",
-          "l5_normalisee": null,
-          "l6_normalisee": "76100 ROUEN",
-          "code_postal": "76100",
-          "libelle_activite_principale": "Autres assurances",
-          "highlight": "Pour tout problème avec la Matmut, peu importe votre lieu d'habitation"
-        }
-      ]
-    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
