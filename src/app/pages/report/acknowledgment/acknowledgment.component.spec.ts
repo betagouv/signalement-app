@@ -25,9 +25,9 @@ describe('AcknoledgmentComponent', () => {
         AbTestsModule.forRoot(
           [
             {
-              versions: [ SVETestingVersions.NoTest ],
+              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test3_Sentence1 ],
               scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99 }
+              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test3_Sentence1]: 0 }
             }
           ]
         )
