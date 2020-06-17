@@ -16,8 +16,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
 import { genDraftReport, oneBoolean } from '../../../../../test/fixtures.spec';
 
 describe('DetailsComponent', () => {
@@ -78,16 +76,7 @@ describe('DetailsComponent', () => {
         NgxLoadingModule,
         NoopAnimationsModule,
         ComponentsModule,
-        PipesModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test2 ],
-              scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test2]: 0 }
-            }
-          ]
-        )
+        PipesModule
       ],
       providers: []
     })
