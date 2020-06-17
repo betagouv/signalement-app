@@ -59,9 +59,9 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   testingSentence() {
     switch (this.abTestsService.getVersion(SVETestingScope)) {
       case SVETestingVersions.Test3_Sentence1:
-        return 'Vous voulez en connaitre d\'avantage sur vos droits et savoir quelles suites pourraient éventuellement apporter les enquêteurs de la répression des fraudes à votre signalement ?';
+        return 'Vous voulez en connaitre davantage sur vos droits et savoir quelles suites pourraient éventuellement apporter les enquêteurs de la répression des fraudes à votre signalement ?';
       case SVETestingVersions.Test3_Sentence2:
-        return 'Vous voulez en connaitre d\'avantage sur vos droits ?';
+        return 'Vous voulez en connaitre davantage sur vos droits ?';
       case SVETestingVersions.Test3_Sentence3:
         return 'Vous voulez savoir quelles suites pourraient éventuellement apporter les enquêteurs de la répression des fraudes à votre signalement ?';
       case SVETestingVersions.Test3_Sentence4:
