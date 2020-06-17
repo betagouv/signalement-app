@@ -96,11 +96,25 @@ class ErrorLogger extends ErrorHandler {
     AbTestsModule.forRoot(
       [
         {
-          versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test1, SVETestingVersions.Test2 ],
+          versions: [
+            SVETestingVersions.NoTest,
+            SVETestingVersions.Test3_Sentence1,
+            SVETestingVersions.Test3_Sentence2,
+            SVETestingVersions.Test3_Sentence3,
+            SVETestingVersions.Test3_Sentence4,
+            SVETestingVersions.Test3_Sentence5
+          ],
           versionForCrawlers: SVETestingVersions.NoTest,
           scope: SVETestingScope,
           expiration: 5,
-          weights: { NoTest: 59, Test1: 20, Test2: 20 }
+          weights: {
+            NoTest: 0,
+            Test3_Sentence1: 10,
+            Test3_Sentence2: 10,
+            Test3_Sentence3: 10,
+            Test3_Sentence4: 10,
+            Test3_Sentence5: 10
+          }
         }
       ]
     ),
