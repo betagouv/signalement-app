@@ -100,7 +100,14 @@ class ErrorLogger extends ErrorHandler {
           versionForCrawlers: SVETestingVersions.NoTest,
           scope: SVETestingScope,
           expiration: 5,
-          weights: { NoTest: 59, Test1: 20, Test2: 20 }
+          weights: {
+            NoTest: 0,
+            Test3_Sentence1: 10,
+            Test3_Sentence2: 10,
+            Test3_Sentence3: 10,
+            Test3_Sentence4: 10,
+            Test3_Sentence5: 10
+          }
         }
       ]
     ),
