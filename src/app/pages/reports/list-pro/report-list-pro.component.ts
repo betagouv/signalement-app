@@ -36,6 +36,7 @@ export class ReportListProComponent implements OnInit {
 
   loading: boolean;
   loadingError: boolean;
+  withFiltering: boolean;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
@@ -79,8 +80,6 @@ export class ReportListProComponent implements OnInit {
 
         this.userAccesses = userAccesses;
 
-        //TODO récupérer le nb de signalements par Siret pour affichage ou non du filtre ...
-
         if (this.userAccesses.length === 1 || this.reportFilter.siret) {
           this.loadReports(Number(queryParamMap.get('page_number') || 1));
         } else {
@@ -103,6 +102,7 @@ export class ReportListProComponent implements OnInit {
     this.initPagination();
     this.reportFilter.siret = this.reportFilter.siret ? this.reportFilter.siret.replace(/\s/g, '') : '';
     this.loadReports(1);
+    this.withFiltering = true;
   }
 
   cancelFilters() {
@@ -150,7 +150,7 @@ export class ReportListProComponent implements OnInit {
   }
 
   withPagingAndFiltering() {
-    return this.totalCount > 10 || this.route.snapshot.queryParamMap.has('page_number');
+    return this.totalCount > 10 || this.withFiltering;
   }
 
   hasFilter() {
