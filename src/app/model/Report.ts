@@ -26,7 +26,7 @@ export enum ReportStatus {
   Unread = 'Signalement non consulté',
   UnreadForPro = 'Non consulté',
   Transmitted = 'Signalement transmis',
-  ToReviewedByPro = 'A répondre',
+  ToReviewedByPro = 'À répondre',
   Accepted = 'Promesse action',
   ClosedForPro = 'Clôturé',
   Rejected = 'Signalement infondé',

@@ -270,13 +270,13 @@
             <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
             <ng-container>
               <h2 class="text-primary">Type de signalement</h2>
-              <div class="text-darker-grey pb-3">
+              <div class="text-darker-grey pb-2">
                 Les catégories du signalement sont sélectionnées par le consommateur.
               </div>
-              <div class="pb-2">
+              <div class="pb-1">
                 <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{report.category}}
               </div>
-              <div class="pb-2" *ngFor="let subcategory of report.subcategories">
+              <div class="pb-1" *ngFor="let subcategory of report.subcategories">
                 <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
               </div>
               <h2 class="text-primary pt-4">Détail du signalement</h2>
@@ -400,7 +400,7 @@
                         <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
                       </div>
                       <div [class]="getTypeClass(reportResponseTypes.Accepted)">
-                        <div class="row pb-2 pt-2">
+                        <div class="row pb-1 pt-1">
                           <div class="col-2 col-sm-1 text-right pr-1">
                             <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
                           </div>
@@ -410,7 +410,7 @@
                         </div>
                       </div>
                       <div [class]="getTypeClass(reportResponseTypes.Rejected)">
-                        <div class="row pb-2 pt-2">
+                        <div class="row pb-1 pt-1">
                           <div class="col-2 col-sm-1 text-right pr-1">
                             <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
                           </div>
@@ -420,7 +420,7 @@
                         </div>
                       </div>
                       <div [class]="getTypeClass(reportResponseTypes.NotConcerned)">
-                        <div class="row pb-2 pt-2">
+                        <div class="row pb-1 pt-1">
                           <div class="col-2 col-sm-1 text-right pr-1">
                             <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
                           </div>
@@ -431,7 +431,7 @@
                       </div>
                     </div>
 
-                    <div class="form__group pb-2">
+                    <div class="form__group">
                       <label class="text-dark-blue" for="proAnswerInput">
                         <strong>Votre réponse (obligatoire)</strong>
                       </label>
@@ -447,7 +447,7 @@
                       <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3"></textarea>
                     </div>
 
-                    <div class="form__group pt-2">
+                    <div class="form__group">
                       <label class="text-dark-blue" for="proAnswerDgccrfInput">
                         <strong>Informations complémentaires</strong>
                       </label>
@@ -469,11 +469,10 @@
                     </div>
 
                     <div class="mt-4">
-                      <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideProAnswerForm()">Annuler</button>
-                      &nbsp;
-                      <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                      <button type="submit" class="btn btn-lg btn-primary mb-1 mr-2" [disabled]="isUploadingFile()">
                         Envoyer
                       </button>
+                      <button type="button" class="btn btn-lg btn-outline-primary mb-1" (click)="hideProAnswerForm()">Annuler</button>
                     </div>
                   </form>
                   <ngx-loading [show]="loading"></ngx-loading>
@@ -508,7 +507,7 @@
                         <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
                       </div>
                       <div [class]="getTypeClass(eventActionValues.Comment)">
-                        <div class="row pb-2 pt-2">
+                        <div class="row pb-1 pt-1">
                           <div class="col-2 col-sm-1 text-right pr-1">
                             <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
                           </div>
@@ -518,7 +517,7 @@
                         </div>
                       </div>
                       <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
-                        <div class="row pb-2 pt-2">
+                        <div class="row pb-1 pt-1">
                           <div class="col-2 col-sm-1 text-right pr-1">
                             <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
                           </div>
@@ -528,7 +527,7 @@
                         </div>
                       </div>
                       <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
-                        <div class="row pb-2 pt-2">
+                        <div class="row pb-1 pt-1">
                           <div class="col-2 col-sm-1 text-right pr-1">
                             <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
                           </div>
@@ -538,7 +537,7 @@
                         </div>
                       </div>
                       <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
-                        <div class="row pb-2 pt-2">
+                        <div class="row pb-1 pt-1">
                           <div class="col-2 col-sm-1 text-right pr-1">
                             <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
                           </div>
@@ -551,7 +550,7 @@
 
                     <ng-container *ngIf="actionTypeCtrl.valid">
 
-                      <div class="form__group pb-2" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
+                      <div class="form__group" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
                         <label class="text-dark-blue"  for="commentInput">
                           <strong>Commentaire (obligatoire)</strong>
                         </label>
@@ -572,7 +571,7 @@
                         </app-attachments>
                       </div>
 
-                      <div class="form__group pb-2" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
+                      <div class="form__group" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
                         <label for="controlInput">
                           Détail du contrôle (facultatif)
                         </label>
@@ -584,11 +583,10 @@
                       </div>
 
                       <div class="mt-4">
-                        <button type="button" class="btn btn-lg btn-outline-primary" (click)="hideActionForm()">Annuler</button>
-                        &nbsp;
-                        <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
+                        <button type="submit" class="btn btn-lg btn-primary mb-1 mr-2" [disabled]="isUploadingFile()">
                           Envoyer
                         </button>
+                        <button type="button" class="btn btn-lg btn-outline-primary mb-1" (click)="hideActionForm()">Annuler</button>
                       </div>
 
                     </ng-container>

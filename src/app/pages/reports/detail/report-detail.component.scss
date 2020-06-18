@@ -89,3 +89,17 @@ input + input {
     color: $darker-grey;
   }
 }
+
+.label-inline {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+
+input[type=radio] {
+  margin-top: 0px;
+}
+
+.form__group + .form__group {
+  margin-top: 1em;
+}
