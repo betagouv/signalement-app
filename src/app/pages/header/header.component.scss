@@ -3,27 +3,32 @@
 
 header {
 
-  .brand > img {
-    height: 55px;
-    margin-left: 20px;
+  img.gov {
+    vertical-align: top;
+
+    @media #{$smaller-than-desktop} {
+      height: 20px;
+      margin: 20px 0 20px 15px;
+    }
   }
 
-  @media #{$smaller-than-desktop} {
+  .brand > img {
+    height: 80px;
+    margin-left: 40px;
 
-    img#marianne {
-      height: 30px;
-      margin: 10px 0px;
+    @media #{$smaller-than-large-desktop} {
+      height: 64px;
+      margin-top: 8px;
     }
 
-    .brand > img {
-      height: 50px;
-      margin-left: 0px;
+    @media #{$smaller-than-desktop} {
+      height: 36px;
+      margin: 12px 0 12px 22px;
     }
   }
 
   .navbar {
-    height: 65px;
-    padding: 10px 22px;
+    padding: 30px;
 
     .nav-link {
       color: $secondary;
@@ -34,6 +39,10 @@ header {
 
       &:focus, &:hover, &.active {
         color: $blue;
+      }
+
+      @media #{$smaller-than-large-desktop} {
+        padding: 13px;
       }
     }
 
@@ -53,7 +62,6 @@ header {
 
     @media #{$smaller-than-desktop} {
       padding: 10px;
-      height: 50px;
       background-color: #407CA8;
 
       .navbar-toggler {
