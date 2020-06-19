@@ -1,0 +1,180 @@
+@import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
+
+.overflow-container {
+  overflow-x: auto;
+}
+
+form {
+  width: 97% !important;
+  max-width: 100%;
+
+  .text-right {
+    padding-right: 0;
+  }
+
+  label {
+    font-size: 16px;
+    line-height: 43px;
+    margin-bottom: 0;
+  }
+
+}
+
+.table-responsive {
+  width: 98% !important;
+  min-width: 400px;
+  margin-left: 1%;
+  overflow-x: initial;
+}
+
+.table {
+
+  border: none;
+
+  th {
+    background-color: $light-grey;
+    border-bottom-width: 2px !important;
+    vertical-align: middle;
+  }
+
+  tr.pointer:hover {
+    background-color: $lighter-blue !important;
+
+    td {
+      background-color: transparent;
+    }
+  }
+
+  th, td {
+    border: 1px solid #dee2e6;
+    height: 60px;
+    max-width: 500px;
+    padding: 0.25em;
+    text-align: center;
+    vertical-align: middle;
+
+    &.action {
+      background-color: $white !important;
+      border: none;
+      vertical-align: middle;
+    }
+  }
+
+  td.report-group {
+    background-color: $lighter-grey;
+    font-weight: bold;
+  }
+
+  td .pre {
+    white-space: pre;
+  }
+
+  td.report-group {
+    padding: 0;
+    height: 35px;
+  }
+
+  th.status-header, th.email {
+    min-width: 120px;
+  }
+
+  th.pj {
+    min-width: 175px;
+  }
+
+  th.description {
+    min-width: 315px;
+  }
+
+  .agreement {
+    font-size: 12px;
+  }
+}
+
+.banner {
+  a {
+    color: $white;
+  }
+}
+
+.filters {
+
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin: 0 0 2em 0;
+  background-color: $lightest-grey;
+
+  .b-0 {
+    position: absolute;
+    bottom: 0;
+  }
+
+  ul.dropdown-menu {
+    height: 300px;
+    overflow-y: scroll;
+  }
+
+  & {
+    input, select {
+
+      @media #{$larger-than-tablet} {
+        width: 300px;
+      }
+      @media #{$smaller-than-phablet} {
+        width: 200px;
+      }
+    }
+  }
+}
+
+.btn-group[dropdown] {
+  .dropdown-toggle {
+    border-color: $grey;
+    background-color: $white;
+  }
+
+  ul.dropdown-menu {
+
+    .menutitle {
+      font-weight: bold;
+    }
+
+    .dropdown-item {
+      padding-top: 0;
+      padding-bottom: 0;
+      text-transform: none;
+    }
+  }
+}
+
+.dropdown-toggle {
+  height: 43px;
+}
+
+
+:host ::ng-deep {
+  .tooltip {
+    max-width: 50%;
+    .tooltip-inner {
+      max-width: none !important;
+      text-align: left;
+    }
+  }
+}
+
+.valign-top {
+  vertical-align: top;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.items-per-page-selector {
+  color: $primary;
+  width: 70px;
+  padding: 6px;
+  margin-bottom: 4px;
+  margin-left: 10px;
+}

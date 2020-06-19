@@ -75,6 +75,7 @@ class ErrorLogger extends ErrorHandler {
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     RouterModule.forRoot([
       { path: 'stats', component: StatsComponent },
+      { path: 'not-found', component: NotFoundComponent },
       { path: '**', component: NotFoundComponent },
     ], {
       scrollPositionRestoration: 'top',

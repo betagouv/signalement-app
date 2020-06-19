@@ -3,7 +3,8 @@ import { Company, UserAccess } from '../../../model/Company';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
-import { Permissions } from '../../../model/AuthUser';
+import { Permissions, User } from '../../../model/AuthUser';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-company-card',
@@ -15,6 +16,7 @@ export class CompanyCardComponent implements OnInit {
   @Input() userAccess: UserAccess;
   @Output() change = new EventEmitter<Company>();
 
+  user: User;
   permissions = Permissions;
 
   bsModalRef: BsModalRef;
@@ -30,9 +32,12 @@ export class CompanyCardComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private modalService: BsModalService,
-              private companyService: CompanyService) { }
+              private companyService: CompanyService,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.authenticationService.user.subscribe(user => this.user = user);
+
     this.initCompanyAddressForm();
   }
 
