@@ -34,8 +34,13 @@ export class AsyncFilesComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.stopInterval();
+  }
+
+  stopInterval() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
+      this.intervalId = null;
     }
   }
 
@@ -45,6 +50,9 @@ export class AsyncFilesComponent implements OnInit {
       downloads => {
           this.loading = false;
           this.downloads = downloads;
+          if (this.downloads.filter(f => !f.url).length == 0) {
+            this.stopInterval();
+          }
         }
     );
   }
