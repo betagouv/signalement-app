@@ -112,11 +112,10 @@
                   edit
                 </i>
               </div>
-              <ng-container *ngIf="report.company">
-                <strong>{{report.company.siret}}</strong>
-                <br/>
-                <span *ngFor="let line of report.company.address.split(' - ')">{{line}}<br /></span>
-              </ng-container>
+              <div>
+                <strong>{{report.company?.siret}}</strong>
+              </div>
+              <div *ngFor="let line of report.company.address?.split(' - ')">{{line}}</div>
               <div *ngIf="report.website.url">
                 {{report.website.url}}
               </div>
