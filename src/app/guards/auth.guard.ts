@@ -1,7 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable()
@@ -12,14 +12,20 @@ export class AuthGuard implements CanActivate {
     private authenticationService: AuthenticationService,
     private router: Router) { }
 
-  canActivate() {
+  canActivate(route: ActivatedRouteSnapshot) {
     return this.authenticationService.isAuthenticated()
       .pipe(
-        map(isAuthenticated => {
+        tap(isAuthenticated => {
           if (!isAuthenticated && isPlatformBrowser(this.platformId)) {
             this.router.navigate(['connexion']);
           }
-          return isAuthenticated;
+        }),
+        switchMap( _ => this.authenticationService.user),
+        map(user => {
+          if (route.data.expectedRoles && route.data.expectedRoles.indexOf(user.role) === -1) {
+            this.router.navigate(['not-found']);
+          }
+          return true;
         })
       );
   }

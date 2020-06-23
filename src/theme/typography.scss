@@ -1,7 +1,12 @@
 @import "../theme/media-queries";
 
-h1 {
+* {
+  letter-spacing: 0.2px;
+}
+
+h1, h2 {
   font-family: "Evolventa", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 h1 {

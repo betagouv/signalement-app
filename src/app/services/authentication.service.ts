@@ -22,7 +22,7 @@ export class AuthenticationService {
               private localStorage: LocalStorage) {
     this.localStorage.getItem(AuthUserStorageKey).subscribe(authUser => {
       if (authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token)) {
-        this.userSource.next(authUser.user);
+        this.userSource.next(Object.assign(new User(), authUser.user));
       }
     });
   }
@@ -34,7 +34,7 @@ export class AuthenticationService {
         if (tokenInfo && tokenInfo.timestamp > minTimestamp) {
           return tokenInfo;
         } else {
-          console.log("No TokenInfo, or expired");
+          console.log('No TokenInfo, or expired');
           return null;
         }
     });
@@ -48,9 +48,10 @@ export class AuthenticationService {
     .pipe(
       map(authUser => {
         if (authUser.token) {
-          this.userSource.next(authUser.user);
+          const user = Object.assign(new User(), authUser.user);
+          this.userSource.next(user);
           this.localStorage.setItemSubscribe(AuthUserStorageKey, authUser);
-          return authUser.user;
+          return user;
         } else {
           throw Error('Unauthenticated');
         }

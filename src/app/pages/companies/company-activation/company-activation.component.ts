@@ -44,8 +44,8 @@ export class CompanyActivationComponent implements OnInit {
   }
 
   initActivationForm() {
-    this.siretCtrl = this.formBuilder.control('', Validators.required);
-    this.codeCtrl = this.formBuilder.control('', Validators.required);
+    this.siretCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{14}')]);
+    this.codeCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{6}')]);
     this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
 
     this.activationForm = this.formBuilder.group({
@@ -56,6 +56,9 @@ export class CompanyActivationComponent implements OnInit {
   }
 
   submitActivationForm() {
+    if (RegExp(/^[0-9\s]+$/g).test(this.siretCtrl.value)) {
+      this.siretCtrl.setValue((this.siretCtrl.value as string).replace(/\s/g, ''));
+    }
     this.activationError = false;
     if (!this.activationForm.valid) {
       this.showErrors = true;
