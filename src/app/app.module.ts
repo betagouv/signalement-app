@@ -58,74 +58,77 @@ class ErrorLogger extends ErrorHandler {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    StatsComponent,
-    AccountMenuComponent,
-    NotFoundComponent,
-  ],
-  imports: [
-    CommonModule,
-    NgtUniversalModule,
-    TransferHttpCacheModule,
-    HttpClientModule,
-    NgxEchartsModule,
-    NgxLoadingModule.forRoot(NgxLoadingConfig),
-    RouterModule.forRoot([
-      { path: 'stats', component: StatsComponent },
-      { path: 'not-found', component: NotFoundComponent },
-      { path: '**', component: NotFoundComponent },
-    ], {
-      scrollPositionRestoration: 'top',
-      anchorScrolling: 'enabled',
-    }),
-    ReportModule,
-    ReportsModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AccountModule,
-    CompaniesModule,
-    SecuredModule,
-    SubscriptionModule,
-    StaticModule,
-    BsDropdownModule.forRoot(),
-    TooltipModule,
-    Angulartics2Module.forRoot(),
-    ComponentsModule,
-    AbTestsModule.forRoot(
-      [
-        {
-          versions: [
-            SVETestingVersions.NoTest,
-            SVETestingVersions.Test3_Sentence1,
-            SVETestingVersions.Test3_Sentence2,
-            SVETestingVersions.Test3_Sentence3,
-            SVETestingVersions.Test3_Sentence4,
-            SVETestingVersions.Test3_Sentence5
-          ],
-          versionForCrawlers: SVETestingVersions.NoTest,
-          scope: SVETestingScope,
-          expiration: 5,
-          weights: {
-            NoTest: 49,
-            Test3_Sentence1: 10,
-            Test3_Sentence2: 10,
-            Test3_Sentence3: 10,
-            Test3_Sentence4: 10,
-            Test3_Sentence5: 10
-          }
-        }
-      ]
-    ),
-    AppRoleModule,
-    AppPermissionModule
-  ],
-  providers: [
-    { provide: LOCALE_ID, useValue: 'fr' },
-    { provide: ErrorHandler, useFactory: ErrorLogger.initWith(SentryBrowser) }
-  ]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        StatsComponent,
+        AccountMenuComponent,
+        NotFoundComponent,
+    ],
+    imports: [
+        CommonModule,
+        NgtUniversalModule,
+        TransferHttpCacheModule,
+        HttpClientModule,
+        NgxEchartsModule,
+        NgxLoadingModule.forRoot(NgxLoadingConfig),
+        RouterModule.forRoot([
+            { path: 'stats', component: StatsComponent },
+            { path: 'not-found', component: NotFoundComponent },
+            { path: '**', component: NotFoundComponent },
+        ], {
+            scrollPositionRestoration: 'top',
+            anchorScrolling: 'enabled',
+        }),
+        ReportModule,
+        ReportsModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        AccountModule,
+        CompaniesModule,
+        SecuredModule,
+        SubscriptionModule,
+        StaticModule,
+        BsDropdownModule.forRoot(),
+        TooltipModule,
+        Angulartics2Module.forRoot(),
+        ComponentsModule,
+        AbTestsModule.forRoot(
+            [
+                {
+                    versions: [
+                        SVETestingVersions.NoTest,
+                        SVETestingVersions.Test3_Sentence1,
+                        SVETestingVersions.Test3_Sentence2,
+                        SVETestingVersions.Test3_Sentence3,
+                        SVETestingVersions.Test3_Sentence4,
+                        SVETestingVersions.Test3_Sentence5,
+                    ],
+                    versionForCrawlers: SVETestingVersions.NoTest,
+                    scope: SVETestingScope,
+                    expiration: 5,
+                    weights: {
+                        NoTest: 49,
+                        Test3_Sentence1: 10,
+                        Test3_Sentence2: 10,
+                        Test3_Sentence3: 10,
+                        Test3_Sentence4: 10,
+                        Test3_Sentence5: 10,
+                    },
+                },
+            ],
+        ),
+        AppRoleModule,
+        AppPermissionModule,
+    ],
+    exports: [
+        HeaderComponent,
+    ],
+    providers: [
+        { provide: LOCALE_ID, useValue: 'fr' },
+        { provide: ErrorHandler, useFactory: ErrorLogger.initWith(SentryBrowser) },
+    ],
 })
 export class AppModule {
 }

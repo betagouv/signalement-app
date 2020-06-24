@@ -56,7 +56,7 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
       if (rect.top > 1 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
         jQuery('html, body').animate({
-          scrollTop: this.elementRef.nativeElement.offsetTop
+          scrollTop: window.innerHeight > 575 ? this.elementRef.nativeElement.offsetTop : this.elementRef.nativeElement.offsetTop - 200
         }, 1000);
       }
     }

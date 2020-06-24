@@ -11,7 +11,12 @@
   }
 
   .brand {
-    font-size: 1.6rem;
+
+    font-weight: bold;
+
+    @media #{$larger-than-phablet} {
+      font-size: 1.6rem;
+    }
   }
 
   ul {
@@ -53,6 +58,17 @@
     a {
       color: $white;
       text-decoration: none;
+    }
+
+    li {
+      @media #{$smaller-than-phablet} {
+        font-size: 14px;
+        line-height: 18px;
+
+        &.dgccrf-link {
+          font-size: 12px;
+        }
+      }
     }
   }
 

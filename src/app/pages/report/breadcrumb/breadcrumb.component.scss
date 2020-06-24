@@ -1,16 +1,44 @@
 @import "../../../../theme/variables";
 @import "../../../../theme/media-queries";
 
+
+@media #{$smaller-than-tablet} {
+
+  .header-fixed {
+    position: fixed;
+    top: 0;
+    background-color: $white;
+    width: 100%;
+    z-index: 1;
+
+    img#marianne {
+      height: 30px;
+      margin: 10px 0px;
+    }
+
+    .brand > img {
+      height: 50px;
+      margin-left: 0px;
+    }
+  }
+
+  section {
+    position: fixed;
+    top: 50px;
+    z-index: 1;
+  }
+}
+
+
 h1 {
   font-size: 1.25rem !important;
   font-weight: unset !important;
   line-height: unset !important;
-}
+  color: $darker-grey;
 
-@media #{$smaller-than-tablet} {
-  h1 {
-    font-size: 1.4rem !important;
-    line-height: 20px !important;
+  @media #{$smaller-than-tablet} {
+    font-size: 16px !important;
+    line-height: 21px !important;
   }
 }
 
@@ -31,6 +59,15 @@ img.back {
   color: $darker-grey;
   padding-top: 1em;
   font-size: 1.1em;
+
+  @media #{$smaller-than-tablet} {
+    padding: 0;
+    font-size: 16px;
+
+    div {
+      padding: 0 !important;
+    }
+  }
 
   img {
     height: 20px;
@@ -89,8 +126,8 @@ img.back {
   }
 
   @media #{$smaller-than-desktop} {
-    img {
-      display: none;
+    img, .step-number, .achieved, .todo {
+      display: none !important;
     }
 
     div {
@@ -101,5 +138,3 @@ img.back {
     }
   }
 }
-
-

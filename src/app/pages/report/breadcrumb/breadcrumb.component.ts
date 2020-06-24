@@ -14,6 +14,8 @@ export class BreadcrumbComponent implements OnInit {
   @Input() draftReport: DraftReport;
   @Input() step: Step;
 
+  steps = Step;
+
   anomaly: Anomaly;
 
   constructor(private reportRouterService: ReportRouterService,
@@ -26,7 +28,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   getStepClass(step: string) {
-    return (this.step === Step[step]) ? 'current' : this.isStepAchieved(Step[step]) ? 'achieved' : '';
+    return (this.step === Step[step]) ? 'current' : this.isStepAchieved(Step[step]) ? 'achieved' : 'todo';
   }
 
   isStepAchieved(step: Step) {
@@ -70,5 +72,14 @@ export class BreadcrumbComponent implements OnInit {
 
   back() {
     this.reportRouterService.routeBackward(this.step);
+  }
+
+  precedeCategory() {
+    const apostropheRequiredLetters = ['a', 'e', 'i', 'o', 'u', 'y', 'h'];
+    if (apostropheRequiredLetters.indexOf(this.draftReport.category[0]) !== -1) {
+      return 'd\'';
+    } else {
+      return 'de ';
+    }
   }
 }

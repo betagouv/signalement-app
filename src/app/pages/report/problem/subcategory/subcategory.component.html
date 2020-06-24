@@ -11,7 +11,7 @@
   <form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
     <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
       <div class="row pb-2 pt-2">
-        <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
+        <div class="col-2 col-sm-1 text-right pr-1 z-0" *ngIf="subcategoryForm.contains(subcategoryName)">
           <input type="radio"
                  [formControlName]="subcategoryName"
                  [value]="subcategory.title"
