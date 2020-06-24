@@ -1,6 +1,7 @@
 export interface DraftCompany {
   siret?: string;
   name?: string;
+  brand?: string;
   address?: string;
   postalCode?: string;
   website?: Website;

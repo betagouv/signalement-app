@@ -167,6 +167,7 @@
 
             <div *ngFor="let companySearchResult of companySearchResults" class="company mb-3" (click)="selectCompanyFromResults(companySearchResult)" (keydown.enter)="selectCompanyFromResults(companySearchResult)" tabindex="0">
               <strong *ngIf="companySearchResult.name">{{companySearchResult.name}}<br /></strong>
+              <strong *ngIf="companySearchResult.brand">{{companySearchResult.brand}}<br /></strong>
               <strong *ngIf="companySearchResult.highlight">
                 <i class="material-icons md-green">check_circle</i>
                 <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
