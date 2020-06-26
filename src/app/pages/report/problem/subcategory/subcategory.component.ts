@@ -14,6 +14,7 @@ import {
 import { Subcategory } from '../../../../model/Anomaly';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var jQuery: any;
 
@@ -42,7 +43,8 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
               private renderer: Renderer2,
-              public elementRef: ElementRef) { }
+              public elementRef: ElementRef,
+              private sanitizer: DomSanitizer) { }
 
 
   ngAfterViewInit() {
@@ -51,13 +53,31 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
     }, 500);
   }
 
+  isSmallerThanPhablet() {
+    return isPlatformBrowser(this.platformId) && window && window.innerWidth <= 575;
+  }
+
+  subcategoryContainerStyle() {
+    const rect = this.elementRef.nativeElement.getBoundingClientRect();
+    const headerHeight = 156;
+    const footerHeight = 208;
+    if (this.isSmallerThanPhablet() && !this.hasSubSubcategory()
+      && rect.height < window.innerHeight - headerHeight
+      && rect.bottom <= jQuery( document ).height() - footerHeight) {
+      this.renderer.setStyle(this.elementRef.nativeElement.querySelector('div'), 'margin-bottom', `${window.innerHeight - rect.height - headerHeight}px`);
+      return this.sanitizer.bypassSecurityTrustStyle(`margin-bottom: ${window.innerHeight - rect.height - headerHeight}px`);
+    } else {
+      return this.sanitizer.bypassSecurityTrustStyle('');
+    }
+  }
+
   scrollToElementIfHidden() {
     if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      if (rect.top > 1 && rect.bottom >= (window.innerHeight || document.documentElement.clientHeight)) {
+      if (rect.top > 1) {
         jQuery('html, body').animate({
-          scrollTop: window.innerHeight > 575 ? this.elementRef.nativeElement.offsetTop : this.elementRef.nativeElement.offsetTop - 200
-        }, 1000);
+          scrollTop: this.isSmallerThanPhablet() ? this.elementRef.nativeElement.offsetTop - 200 : this.elementRef.nativeElement.offsetTop
+        }, 1000, 'linear');
       }
     }
   }
