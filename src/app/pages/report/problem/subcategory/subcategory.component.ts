@@ -61,7 +61,7 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
   scrollToElementIfHidden() {
     if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      if (rect.height < window.innerHeight - mobileHeaderHeight && rect.bottom <= jQuery( document ).height() - mobileFooterHeight) {
+      if (this.isSmallerThanPhablet() && rect.height < window.innerHeight - mobileHeaderHeight && rect.bottom <= jQuery( document ).height() - mobileFooterHeight) {
        this.renderer.setStyle(this.elementRef.nativeElement.children[0], 'margin-bottom', `${window.innerHeight - rect.height - mobileHeaderHeight}px`);
       }
       if (rect.top > 1) {

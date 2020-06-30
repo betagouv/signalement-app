@@ -1,6 +1,11 @@
 @import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
 section {
+
+  @media #{$smaller-than-tablet} {
+    margin-top: 108px;
+  }
 
   h2 {
     font-weight: bold;

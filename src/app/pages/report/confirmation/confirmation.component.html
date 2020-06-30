@@ -2,13 +2,13 @@
 <section class="section section-white position-relative" *ngIf="draftReport">
   <div class="container">
     <form [formGroup]="confirmationForm" (submit)="submitConfirmationForm()" id="confirmationForm" *ngIf="confirmationForm">
-      <h2 class="text-center">
+      <h2>
         Récapitulatif de votre problème
       </h2>
-      <p class="text-center mt-3 mb-4 font-weight-bold text-warning">
-        Attention : le signalement n'a pas encore été envoyé. Cliquez sur envoyer.
+      <p class="note">
+        Vérifiez  votre signalement avant de l’envoyer {{draftReport.employeeConsumer ? '' : 'à l\'entreprise et ' }}à la répression des fraudes.
       </p>
-      <div class="panel text-break">
+      <div class="text-break">
         <h3>Problème</h3>
         <div class="row">
           <div class="col-12">
@@ -82,8 +82,7 @@
       </div>
 
       <button type="submit" class="btn btn-lg btn-primary">
-        <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
-        Étape suivante : envoyer
+        Envoyer le signalement
       </button>
     </form>
   </div>

@@ -47,6 +47,8 @@ export class CompanyComponent implements OnInit {
   siretCtrl: FormControl;
   companySearchBySiretResult: CompanySearchResult;
 
+  selectedCompany: DraftCompany;
+
   showErrorsBySiret: boolean;
   searchBySiretWarning: string;
   searchBySiretError: string;
@@ -234,6 +236,10 @@ export class CompanyComponent implements OnInit {
     this.reportRouterService.routeForward(this.step);
   }
 
+  submitSelectedCompany() {
+    this.selectCompany(this.selectedCompany);
+  }
+
   initSearchBySiret() {
     this.companySearchBySiretResult = undefined;
     this.searchBySiretWarning = '';
@@ -295,8 +301,8 @@ export class CompanyComponent implements OnInit {
     return this.showErrorsBySiret && formControl.errors;
   }
 
-  getIdentificationClass(kind: IdentificationKinds) {
-    return this.identificationKind ? (this.identificationKind === kind ? 'selected' : 'unselected') : '';
+  getRadioContainerClass(input: any, value: any) {
+    return input === value ? 'selected' : '';
   }
 
 }
