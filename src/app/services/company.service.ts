@@ -373,6 +373,24 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bsncf\b/i,
+      results: [
+        {
+          "siret": "39284731500067",
+          "nom_raison_sociale": "SNCF VOYAGES DEVELOPPEMENT",
+          "l1_normalisee": "SNCF VOYAGES DEVELOPPEMENT",
+          "l2_normalisee": "CNIT 1",
+          "l3_normalisee": null,
+          "l4_normalisee": "2 PLACE DE LA DEFENSE",
+          "l5_normalisee": null,
+          "l6_normalisee": "92400 COURBEVOIE",
+          "code_postal": "92400",
+          "libelle_activite_principale": "SNCF",
+          "highlight": "Pour tout problème avec la SNCF, peu importe votre lieu d'habitation"
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
