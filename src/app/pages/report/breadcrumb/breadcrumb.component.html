@@ -25,33 +25,36 @@
             <ng-container  *ngIf="getStepNumber(steps.Problem) > 0">
               <div class="{{getStepClass(steps.Problem)}}" (click)="goToStep(steps.Problem)">
                 <span class="step-number" [innerHTML]="displayedStep(steps.Problem)"></span>
-                <span class="d-sm-none">Etape {{getStepNumber(steps.Problem)}} sur 5 : </span>
+                <span class="d-sm-none">Etape {{getStepNumber(steps.Problem)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
                 <span>Le problème</span>
               </div>
               <img src="/assets/images/icon_next.png" alt="étape suivante"/>
             </ng-container>
             <div class="{{getStepClass(steps.Details)}}" (click)="goToStep(steps.Details)">
               <span class="step-number" [innerHTML]="displayedStep(steps.Details)"></span>
-              <span class="d-sm-none">Etape {{getStepNumber(steps.Details)}} sur 5 : </span>
+              <span class="d-sm-none">Etape {{getStepNumber(steps.Details)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>La description</span>
             </div>
             <img src="/assets/images/icon_next.png" alt="étape suivante"/>
             <div class="{{getStepClass(steps.Company)}}" (click)="goToStep(steps.Company)">
               <span class="step-number" [innerHTML]="displayedStep(steps.Company)"></span>
-              <span class="d-sm-none">Etape {{getStepNumber(steps.Company)}} sur 5 : </span>
+              <span class="d-sm-none">Etape {{getStepNumber(steps.Company)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>L'entreprise</span>
             </div>
             <img src="/assets/images/icon_next.png" alt="étape suivante"/>
             <div class="{{getStepClass(steps.Consumer)}}" (click)="goToStep(steps.Consumer)">
               <span class="step-number" [innerHTML]="displayedStep(steps.Consumer)"></span>
-              <span class="d-sm-none">Etape {{getStepNumber(steps.Consumer)}} sur 5 : </span>
+              <span class="d-sm-none">Etape {{getStepNumber(steps.Consumer)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>Le consommateur</span>
             </div>
             <img src="/assets/images/icon_next.png" alt="étape suivante"/>
             <div class="{{getStepClass('Confirmation')}}" (click)="goToStep('Confirmation')">
               <span class="step-number" [innerHTML]="displayedStep('Confirmation')"></span>
-              <span class="d-sm-none">Etape {{getStepNumber(steps.Confirmation)}} sur 5 : </span>
+              <span class="d-sm-none">Etape {{getStepNumber(steps.Confirmation)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>Confirmation</span>
+            </div>
+            <div class="d-sm-none pointer link mt-2" (click)="back()" (keydown.enter)="back()" alt="page précédente" tabindex="0" *ngIf="getStepNumber(step) > 1">
+              <i class="material-icons">arrow_back</i>Retour
             </div>
           </div>
         </div>

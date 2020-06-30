@@ -15,6 +15,7 @@ import { Subcategory } from '../../../../model/Anomaly';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { mobileFooterHeight, mobileHeaderHeight, mobileMaxWidth } from '../../../../utils';
 
 declare var jQuery: any;
 
@@ -54,18 +55,15 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
   }
 
   isSmallerThanPhablet() {
-    return isPlatformBrowser(this.platformId) && window && window.innerWidth <= 575;
+    return isPlatformBrowser(this.platformId) && window && window.innerWidth <= mobileMaxWidth;
   }
 
   subcategoryContainerStyle() {
     const rect = this.elementRef.nativeElement.getBoundingClientRect();
-    const headerHeight = 156;
-    const footerHeight = 208;
     if (this.isSmallerThanPhablet() && !this.hasSubSubcategory()
-      && rect.height < window.innerHeight - headerHeight
-      && rect.bottom <= jQuery( document ).height() - footerHeight) {
-      this.renderer.setStyle(this.elementRef.nativeElement.querySelector('div'), 'margin-bottom', `${window.innerHeight - rect.height - headerHeight}px`);
-      return this.sanitizer.bypassSecurityTrustStyle(`margin-bottom: ${window.innerHeight - rect.height - headerHeight}px`);
+      && rect.height < window.innerHeight - mobileHeaderHeight
+      && rect.bottom <= jQuery( document ).height() - mobileFooterHeight) {
+      return this.sanitizer.bypassSecurityTrustStyle(`margin-bottom: ${window.innerHeight - rect.height - mobileHeaderHeight}px`);
     } else {
       return this.sanitizer.bypassSecurityTrustStyle('');
     }
@@ -76,7 +74,7 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
       if (rect.top > 1) {
         jQuery('html, body').animate({
-          scrollTop: this.isSmallerThanPhablet() ? this.elementRef.nativeElement.offsetTop - 200 : this.elementRef.nativeElement.offsetTop
+          scrollTop: this.isSmallerThanPhablet() ? this.elementRef.nativeElement.offsetTop - mobileHeaderHeight - 40 : this.elementRef.nativeElement.offsetTop
         }, 1000, 'linear');
       }
     }

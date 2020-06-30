@@ -18,3 +18,7 @@ export enum SVETestingVersions {
   Test3_Sentence4 = 'Test3_Sentence4',
   Test3_Sentence5 = 'Test3_Sentence5'
 }
+
+export const mobileHeaderHeight = 156;
+export const mobileFooterHeight = 208;
+export const mobileMaxWidth = 575;
