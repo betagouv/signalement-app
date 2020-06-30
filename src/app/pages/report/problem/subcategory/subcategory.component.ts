@@ -58,20 +58,12 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
     return isPlatformBrowser(this.platformId) && window && window.innerWidth <= mobileMaxWidth;
   }
 
-  subcategoryContainerStyle() {
-    const rect = this.elementRef.nativeElement.getBoundingClientRect();
-    if (this.isSmallerThanPhablet() && !this.hasSubSubcategory()
-      && rect.height < window.innerHeight - mobileHeaderHeight
-      && rect.bottom <= jQuery( document ).height() - mobileFooterHeight) {
-      return this.sanitizer.bypassSecurityTrustStyle(`margin-bottom: ${window.innerHeight - rect.height - mobileHeaderHeight}px`);
-    } else {
-      return this.sanitizer.bypassSecurityTrustStyle('');
-    }
-  }
-
   scrollToElementIfHidden() {
     if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
+      if (rect.height < window.innerHeight - mobileHeaderHeight && rect.bottom <= jQuery( document ).height() - mobileFooterHeight) {
+       this.renderer.setStyle(this.elementRef.nativeElement.children[0], 'margin-bottom', `${window.innerHeight - rect.height - mobileHeaderHeight}px`);
+      }
       if (rect.top > 1) {
         jQuery('html, body').animate({
           scrollTop: this.isSmallerThanPhablet() ? this.elementRef.nativeElement.offsetTop - mobileHeaderHeight - 40 : this.elementRef.nativeElement.offsetTop
@@ -100,9 +92,12 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
   }
 
   selectSubcategory(subcategory: Subcategory) {
-
     this.subcategorySelected = subcategory;
     this.subcategoriesSelected = [];
+
+    if (this.hasSubSubcategory()) {
+      this.renderer.removeStyle(this.elementRef.nativeElement.children[0], 'margin-bottom');
+    }
 
   }
 

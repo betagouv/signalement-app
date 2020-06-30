@@ -67,11 +67,5 @@ section {
     }
 
   }
-
-  .employeeConsumer {
-    @media #{$smaller-than-phablet} {
-      margin-bottom: calc(100vh - 425px);
-    }
-  }
 }
 

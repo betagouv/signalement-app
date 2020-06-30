@@ -4,6 +4,11 @@
 .footer {
   color: $white;
 
+  @media #{$smaller-than-phablet} {
+    position: absolute;
+    bottom: -192px;
+  }
+
   .container {
     display: flex;
     flex-flow: row wrap;
