@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReportListProComponent } from './list-pro/report-list-pro.component';
 import { ReportListComponent } from './list/report-list.component';
 import { AuthGuard } from '../../guards/auth.guard';
-import { BsDatepickerModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, TooltipModule } from 'ngx-bootstrap';
 import { ReportDetailComponent } from './detail/report-detail.component';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
@@ -40,6 +40,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     PaginationModule.forRoot(),
     NgxLoadingModule.forRoot(NgxLoadingConfig),
