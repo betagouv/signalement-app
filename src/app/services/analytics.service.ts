@@ -46,7 +46,10 @@ export enum ReportEventActions {
   validateConsumer = 'Validation du consommateur',
   validateConfirmation = 'Envoi d\'un signalement',
   keywordsDetection = 'Mots-clés détectés',
-  informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés'
+  informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés',
+  contactualReport = 'Litige contractuel',
+  requestUserForAdditionnalInfos = 'Affichage du bouton de demande d\'informations complémentaires',
+  additionnalInfos = 'Demande d\'informations complémentaires'
 }
 
 export enum CompanySearchEventActions {

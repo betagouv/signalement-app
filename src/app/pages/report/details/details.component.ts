@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DetailInputValue, PrecisionKeyword, Report, Step } from '../../../model/Report';
+import { DetailInputValue, DraftReport, PrecisionKeyword, Step } from '../../../model/Report';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { KeywordService } from '../../../services/keyword.service';
@@ -43,7 +43,7 @@ export const fileSizeMax = 5000000;
 export class DetailsComponent implements OnInit {
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
 
   detailInputs: DetailInput[];
   detailsForm: FormGroup;
@@ -58,6 +58,8 @@ export class DetailsComponent implements OnInit {
   maxDate: Date;
   fileOrigins = FileOrigin;
 
+  continueReport: boolean;
+
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
@@ -70,11 +72,11 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Details;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
-          this.report = report;
+          this.draftReport = report;
           this.initDetailInputs();
           this.initDetailsForm();
           this.initUploadedFiles();
@@ -88,12 +90,11 @@ export class DetailsComponent implements OnInit {
     this.searchKeywords();
 
     this.maxDate = new Date();
-
   }
 
   initDetailInputs() {
-    if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
-      this.detailInputs = this.getReportLastSubcategory().detailInputs;
+    if (this.draftReport.lastSubcategory && this.draftReport.lastSubcategory.detailInputs) {
+      this.detailInputs = this.draftReport.lastSubcategory.detailInputs;
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
     }
@@ -262,12 +263,11 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetailsForm() {
-
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateDetails);
-      this.report.detailInputValues = this.detailInputs
+      this.draftReport.detailInputValues = this.detailInputs
         .filter(d => isDefined(this.getFormControlValue(d)))
         .sort((d1, d2) => d1.rank < d2.rank ? -1 : 1)
         .map(detailInput => {
@@ -276,8 +276,8 @@ export class DetailsComponent implements OnInit {
             value: this.getFormControlValue(detailInput)
           });
         });
-      this.report.uploadedFiles = this.uploadedFiles.filter(file => file.id);
-      this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+      this.draftReport.uploadedFiles = this.uploadedFiles.filter(file => file.id);
+      this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
       this.reportRouterService.routeForward(this.step);
     }
   }
@@ -287,16 +287,19 @@ export class DetailsComponent implements OnInit {
   }
 
   initUploadedFiles() {
-    if (this.report.uploadedFiles) {
-      this.uploadedFiles = this.report.uploadedFiles;
+    if (this.draftReport.uploadedFiles) {
+      this.uploadedFiles = this.draftReport.uploadedFiles;
     } else {
       this.uploadedFiles = [];
     }
   }
 
   searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
-    if (formControl && this.report.category) {
-      const res = this.keywordService.search(formControl.value, this.anomalyService.getAnomalyByCategory(this.report.category).categoryId);
+    if (formControl && this.draftReport.category) {
+      const res = this.keywordService.search(
+        formControl.value,
+        this.anomalyService.getAnomalyByCategory(this.draftReport.category).categoryId
+      );
       if (!res) {
         this.keywordDetected = null;
       } else {
@@ -323,17 +326,11 @@ export class DetailsComponent implements OnInit {
     );
 
     this.step = Step.Category;
-    this.report.category = this.anomalyService.getAnomalyByCategoryId(this.keywordDetected.redirectCategory).category;
-    this.report.subcategories = null;
+    this.draftReport.category = this.anomalyService.getAnomalyByCategoryId(this.keywordDetected.redirectCategory).category;
+    this.draftReport.subcategories = null;
 
-    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
-  }
-
-  getReportLastSubcategory() {
-    if (this.report && this.report.subcategories && this.report.subcategories.length) {
-      return this.report.subcategories[this.report.subcategories.length - 1];
-    }
   }
 
   isRadioInputPrecisionRequired(detailInput: DetailInput, option: string) {
@@ -390,16 +387,15 @@ export class DetailsComponent implements OnInit {
   }
 
   getReportDetailInputValue(detailInput: DetailInput) {
-    if (this.report.detailInputValues) {
-      return this.report.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
+    if (this.draftReport.detailInputValues) {
+      return this.draftReport.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
     }
   }
 
   setEmployeeConsumerValue(value: boolean) {
     this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
-    this.report.employeeConsumer = value;
+    this.draftReport.employeeConsumer = value;
   }
-
 }
 
 export function ValidateCheckboxControl(formArray: FormArray) {

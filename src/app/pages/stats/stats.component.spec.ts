@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MonthlyStat, SimpleStat } from '../../model/Statistics';
 import { NgxLoadingModule } from 'ngx-loading';
-import { AppRoleDirective } from '../../directives/app-role.directive';
+import { AppRoleDirective } from '../../directives/app-role/app-role.directive';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import { ComponentsModule } from '../../components/components.module';

@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { DetailInputValue, Report } from '../model/Report';
-import { Company } from '../model/Company';
+import { DetailInputValue, DraftReport, Report } from '../model/Report';
+import { CompanySearchResult } from '../model/CompanySearchResult';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
-import { map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
-import { ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
+import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
+import { Company, Website } from '../model/Company';
 
 @Injectable({
   providedIn: 'root',
@@ -27,32 +28,32 @@ export class ReportService {
               private serviceUtils: ServiceUtils) {
   }
 
-  createReport(report: Report) {
+  createReport(draftReport: DraftReport) {
     return this.http.post(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
       {
-        id: report.id,
-        category: report.category,
-        subcategories: !report.subcategories ? [] : report.subcategories
+        category: draftReport.category,
+        subcategories: !draftReport.subcategories ? [] : draftReport.subcategories
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
-        companyName: report.company.name,
-        companyAddress: this.company2Address(report.company),
-        companyPostalCode: report.company.postalCode,
-        companySiret: report.company.siret,
-        firstName: report.consumer.firstName,
-        lastName: report.consumer.lastName,
-        email: report.consumer.email,
-        contactAgreement: report.contactAgreement,
-        employeeConsumer: report.employeeConsumer,
-        fileIds: report.uploadedFiles.map(file => file.id),
-        details: report.detailInputValues
+        firstName: draftReport.consumer.firstName,
+        lastName: draftReport.consumer.lastName,
+        email: draftReport.consumer.email,
+        contactAgreement: draftReport.contactAgreement,
+        employeeConsumer: draftReport.employeeConsumer,
+        fileIds: draftReport.uploadedFiles.map(file => file.id),
+        details: draftReport.detailInputValues
           .map(d => Object.assign(new DetailInputValue(), d))
           .map(detailInputValue => {
             return {
               label: detailInputValue.renderedLabel,
               value: detailInputValue.renderedValue,
             };
-          })
+          }),
+        companyName: draftReport.draftCompany.name,
+        companyAddress: draftReport.draftCompany.address,
+        companyPostalCode: draftReport.draftCompany.postalCode,
+        companySiret: draftReport.draftCompany.siret,
+        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined
       },
     );
   }
@@ -68,16 +69,16 @@ export class ReportService {
     );
   }
 
-  updateReportCompany(reportId: string, company: Company) {
+  updateReportCompany(reportId: string, companySearchResult: CompanySearchResult) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.post(
+        return this.http.post<Report> (
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'company']),
           {
-            name: company.name,
-            address: this.company2Address(company),
-            postalCode: company.postalCode,
-            siret: company.siret,
+            name: companySearchResult.name,
+            address: companySearchResult.address,
+            postalCode: companySearchResult.postalCode,
+            siret: companySearchResult.siret,
           },
           headers
         );
@@ -114,6 +115,18 @@ export class ReportService {
     );
   }
 
+  postReportAction(reportId: string, reportAction: ReportAction) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'action']),
+          reportAction,
+          headers
+        );
+      }),
+    );
+  }
+
   postReviewOnReportResponse(reportId: string, reviewOnReportResponse: ReviewOnReportResponse) {
     return this.http.post(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'response', 'review']),
@@ -130,6 +143,17 @@ export class ReportService {
         );
       }),
       mergeMap(reportApi => of(this.reportApi2report(reportApi)))
+    );
+  }
+
+  downloadReport(reportId: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get(
+          `${this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'download'])}`,
+          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+        );
+      })
     );
   }
 
@@ -171,7 +195,7 @@ export class ReportService {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
 
-    ['siret', 'status', 'category', 'details'].forEach(filterName => {
+    ['siret', 'status', 'category', 'details', 'email', 'hasCompany'].forEach(filterName => {
       if (reportFilter[filterName]) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
       }
@@ -218,19 +242,6 @@ export class ReportService {
     );
   }
 
-  company2Address(company: Company) {
-    let address = '';
-    const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
-    if (company) {
-      for (const attribute of addressAttibutes) {
-        if (company[attribute]) {
-          address = address.concat(`${company[attribute]} - `);
-        }
-      }
-    }
-    return address.substring(0, address.length - 3);
-  }
-
   private reportApi2report(reportWithFiles: {report: any, files: UploadedFile[]}) {
     const report = reportWithFiles.report;
     const files = reportWithFiles.files;
@@ -240,23 +251,18 @@ export class ReportService {
       category: report.category,
       subcategories: report.subcategories,
       detailInputValues: report.details,
-      company: Object.assign(new Company(), {
+      company: Object.assign(<Company>{
         name: report.companyName,
         siret: report.companySiret,
-        postalCode: report.companyPostalCode,
-        line1: report.companyAddress.split('-')[0],
-        line2: report.companyAddress.split('-')[1],
-        line3: report.companyAddress.split('-')[2],
-        line4: report.companyAddress.split('-')[3],
-        line5: report.companyAddress.split('-')[4],
-        line6: report.companyAddress.split('-')[5],
-        line7: report.companyAddress.split('-')[6],
+        address: report.companyAddress,
+        postalCode: report.companyPostalCode
       }),
       consumer: Object.assign(new Consumer(), {
         firstName: report.firstName,
         lastName: report.lastName,
         email: report.email
       }),
+      website: Object.assign(new Website(), {url: report.websiteURL}),
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
       uploadedFiles: files.map(f => Object.assign(new UploadedFile(), f)),

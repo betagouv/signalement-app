@@ -8,30 +8,12 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { Report } from '../../../model/Report';
-import { Company } from '../../../model/Company';
-import { Consumer } from '../../../model/Consumer';
 import { PipesModule } from '../../../pipes/pipes.module';
+import { genDraftReport } from '../../../../../test/fixtures.spec';
+import { Step } from '../../../model/Report';
+import { of } from 'rxjs';
 
 describe('ConfirmationComponent', () => {
-
-  const reportFixture = Object.assign(
-    new Report(), {
-      company: Object.assign(
-        new Company(),
-        {
-          name: 'Mon entreprise',
-          line1: 'Mon entreprise',
-          line2: 'Mon adresse dans ma ville',
-          postalCode: '87270',
-          siret: '12345678901234'
-        }
-      ),
-      consumer: Object.assign(
-        new Consumer()
-      )
-    }
-  );
 
   let component: ConfirmationComponent;
   let fixture: ComponentFixture<ConfirmationComponent>;
@@ -60,7 +42,7 @@ describe('ConfirmationComponent', () => {
 
   beforeEach(() => {
     reportStorageService = TestBed.get(ReportStorageService);
-    reportStorageService.changeReportInProgress(reportFixture);
+    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Consumer)));
 
     fixture = TestBed.createComponent(ConfirmationComponent);
     component = fixture.componentInstance;

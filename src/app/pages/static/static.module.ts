@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HowComponent } from './how/how.component';
 import { AboutComponent } from './about/about.component';
-import { ProComponent } from './pro/pro.component';
 import { RetractationComponent } from './retractation/retractation.component';
+import { AccessibilityComponent } from './accessibility/accessibility.component';
+import { NavigationComponent } from './accessibility/navigation.component';
 import { CguComponent } from './cgu/cgu.component';
 import { BlogComponent } from './blog/blog.component';
 import { MarkdownModule } from 'ngx-markdown';
@@ -13,12 +14,18 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../../components/components.module';
 import { TrackingAndPrivacyComponent } from './tracking-and-privacy/tracking-and-privacy.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
-  { path: 'comment-ça-marche/consommateur', component: HowComponent },
-  { path: 'comment-ça-marche/professionnel', component: ProComponent },
+  { path: 'comment-ça-marche', component: HowComponent },
+  { path: 'comment-ça-marche/consommateur', component: FaqComponent },
+  { path: 'comment-ça-marche/professionnel', component: FaqComponent },
+  { path: 'centre-aide/consommateur', component: FaqComponent },
+  { path: 'centre-aide/professionnel', component: FaqComponent },
   { path: 'qui-sommes-nous', component: AboutComponent },
   { path: 'delai-de-retractation', component: RetractationComponent },
+  // { path: 'accessibilite', component: AccessibilityComponent },
+  // { path: 'aide-a-la-navigation', component: NavigationComponent },
   { path: 'conditions-generales-utilisation', component: CguComponent },
   { path: 'conditions-generales-utilisation/consommateur', component: CguComponent },
   { path: 'conditions-generales-utilisation/professionnel', component: CguComponent },
@@ -32,7 +39,9 @@ const routes: Routes = [
   declarations: [
     HowComponent,
     AboutComponent,
-    ProComponent,
+    FaqComponent,
+    AccessibilityComponent,
+    NavigationComponent,
     CguComponent,
     BlogComponent,
     RetractationComponent,

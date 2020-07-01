@@ -1,0 +1,181 @@
+<app-banner title="Détail de l'abonnement" [backButton]="true"></app-banner>
+
+<main role="main">
+
+  <section class="section section-lightest-grey position-relative pb-0">
+    <div class="container">
+
+      <div class="notification info">
+        <p>
+          En créant un abonnement, vous recevrez un mail quotidien ou hebdomadaire (au choix) comportant les nouveaux signalements
+          correspondant à votre sélection de critères, qu’ils soient géographiques, thématiques ou par entreprise.
+          <br />
+          <strong>Ces différents critères peuvent se combiner.</strong>
+        </p>
+        <p>
+          Par exemple, si vous souhaitez recevoir les signalements liés à deux entreprises bancaires et ceux liés au secteur de l'immobilier, il faut créer deux alertes :
+          une avec les deux siret et une avec la catégorie immobilier.
+        </p>
+      </div>
+
+      <div class="panel">
+
+        <form [formGroup]="departmentForm" id="departmentForm" (submit)="addToDepartementFilter()" *ngIf="departmentForm">
+          <div class="row">
+            <div class="col-5">
+              <label>
+                <strong>Départements</strong>
+              </label>
+              <p class="note" *ngIf="!subscription.departments.length">
+                <i>Tous les départements</i>
+              </p>
+              <table class="table table-sm">
+                <tbody>
+                <tr *ngFor="let dept of subscription.departments">
+                  <td class="text-left">
+                    {{dept.code}} - {{dept.label}}
+                  </td>
+                  <td class="text-right pointer">
+                    <i class="material-icons md-18 text-warning" title="Supprimer" (click)="removeFromDepartementFilter(dept)">close</i>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="offset-1 col-6">
+              <label>
+                Ajouter des départements<br/>
+              </label>
+              <input [formControl]="departmentCtrl" type="text" placeholder="75, 87, 971...">
+              <p class="note">
+                Saisissez un ou plusieurs codes départements séparés par des virgules et validez par entrée
+              </p>
+            </div>
+          </div>
+        </form>
+
+        <hr />
+
+        <form [formGroup]="categoryForm" id="categoryForm" *ngIf="categoryForm">
+          <div class="row">
+            <div class="col-5">
+              <label>
+                <strong>Catégories</strong>
+              </label>
+              <p class="note" *ngIf="!subscription.categories.length">
+                <i>Toutes les catégories</i>
+              </p>
+              <table class="table table-sm">
+                <tbody>
+                <tr *ngFor="let category of subscription.categories">
+                  <td class="text-left">
+                    {{category}}
+                  </td>
+                  <td class="text-right pointer">
+                    <i class="material-icons md-18 text-warning" title="Supprimer" (click)="removeFromCategoryFilter(category)">close</i>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="offset-1 col-6">
+              <label>
+                Ajouter une catégorie<br/>
+              </label>
+              <select [formControl]="categoryCtrl" (change)="addToCategoryFilter()">
+                <option disabled ngValue="">Sélectionnez une catégorie pour l'ajouter</option>
+                <option *ngFor="let category of categories">
+                  {{category}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </form>
+
+        <hr />
+
+        <form [formGroup]="siretForm" id="siretForm" (submit)="addToSiretFilter()" *ngIf="siretForm">
+          <div class="row">
+            <div class="col-5">
+              <label>
+                <strong>Numéros SIRET</strong>
+              </label>
+              <p class="note" *ngIf="!subscription.sirets.length">
+                <i>Toutes les numéros SIRET</i>
+              </p>
+              <table class="table table-sm">
+                <tbody>
+                <tr *ngFor="let siret of subscription.sirets">
+                  <td class="text-left">
+                    {{siret}}
+                  </td>
+                  <td class="text-right pointer">
+                    <i class="material-icons md-18 text-warning" title="Supprimer" (click)="removeFromSiretFilter(siret)">close</i>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="offset-1 col-6">
+              <label>
+                Ajouter un numéro SIRET<br/>
+              </label>
+              <input [formControl]="siretCtrl" type="text" placeholder="12002503600035...">
+              <p class="note">
+                Saisissez un ou plusieurs numéros SIRET séparés par des virgules et validez par entrée
+              </p>
+            </div>
+          </div>
+        </form>
+
+        <hr />
+
+        <form *ngIf="subscription">
+          <div class="row">
+            <div class="col-3">
+              <label>
+                <strong>Fréquence d'envoi du mail <span class="error">*</span></strong>
+              </label>
+            </div>
+            <div class="col-sm-7">
+              <div class="row pl-1">
+                <div class="col-2 col-sm-1 text-right pr-1">
+                  <input type="radio" [(ngModel)]="subscription.frequency" value="P1D" id="dailySubscription" name="frequency"/>
+                </div>
+                <div class="col-10 col-sm-11 pl-1">
+                  <label for="dailySubscription" class="label-inline pointer">Quotidienne</label>
+                </div>
+              </div>
+              <div class="row pl-1">
+                <div class="col-2 col-sm-1 text-right pr-1">
+                  <input type="radio" [(ngModel)]="subscription.frequency" value="P7D" id="weeklySubscription" name="frequency"/>
+                </div>
+                <div class="col-10 col-sm-11 pl-1">
+                  <label for="weeklySubscription" class="label-inline pointer">Hebdomadaire</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <hr />
+
+        <div class="notification error" *ngIf="showErrors && !subscription.frequency">
+          Vous devez choisir une fréquence d'envoi du mail
+        </div>
+
+        <div class="notification error" *ngIf="loadingError">
+          Une erreur technique s'est produite<br />
+        </div>
+
+        <div class="mt-4 text-center">
+          <button type="button" class="btn btn-lg btn-outline-primary" (click)="cancel()">Annuler</button>
+          &nbsp;
+          <button type="button" class="btn btn-lg btn-primary" (click)="submitSubscription()">
+            Enregistrer
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -28,6 +28,11 @@ import { ComponentsModule, NgxLoadingConfig } from './components/components.modu
 import { ReportsModule } from './pages/reports/reports.module';
 import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
+import { AbTestsModule } from 'angular-ab-tests';
+import { SVETestingScope, SVETestingVersions } from './utils';
+import { AppRoleModule } from './directives/app-role/app-role.module';
+import { AppPermissionModule } from './directives/app-permission/app-permission.module';
+import { SubscriptionModule } from './pages/subscription/subscription.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -70,6 +75,7 @@ class ErrorLogger extends ErrorHandler {
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     RouterModule.forRoot([
       { path: 'stats', component: StatsComponent },
+      { path: 'not-found', component: NotFoundComponent },
       { path: '**', component: NotFoundComponent },
     ], {
       scrollPositionRestoration: 'top',
@@ -82,11 +88,39 @@ class ErrorLogger extends ErrorHandler {
     AccountModule,
     CompaniesModule,
     SecuredModule,
+    SubscriptionModule,
     StaticModule,
     BsDropdownModule.forRoot(),
     TooltipModule,
     Angulartics2Module.forRoot(),
     ComponentsModule,
+    AbTestsModule.forRoot(
+      [
+        {
+          versions: [
+            SVETestingVersions.NoTest,
+            SVETestingVersions.Test3_Sentence1,
+            SVETestingVersions.Test3_Sentence2,
+            SVETestingVersions.Test3_Sentence3,
+            SVETestingVersions.Test3_Sentence4,
+            SVETestingVersions.Test3_Sentence5
+          ],
+          versionForCrawlers: SVETestingVersions.NoTest,
+          scope: SVETestingScope,
+          expiration: 5,
+          weights: {
+            NoTest: 49,
+            Test3_Sentence1: 10,
+            Test3_Sentence2: 10,
+            Test3_Sentence3: 10,
+            Test3_Sentence4: 10,
+            Test3_Sentence5: 10
+          }
+        }
+      ]
+    ),
+    AppRoleModule,
+    AppPermissionModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

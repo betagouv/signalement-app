@@ -27,32 +27,71 @@ export class DetailInput {
   optionnal?: boolean;
 }
 
-export class Subcategory {
+export class WithSubcategories {
+  subcategoriesTitle?: string;
+  companyKind?: string;
+  subcategories: Subcategory[];
+
+  getSubcategoriesData() {
+    if (this.subcategories) {
+      return {
+        subcategoriesTitle: this.subcategoriesTitle,
+        subcategories: this.subcategories.map(s => {
+          s = Object.assign(new Subcategory(), s, { companyKind: s.companyKind || this.companyKind });
+          s = Object.assign(s, s.getSubcategoriesData());
+          return s;
+        })
+      };
+    } else if (!this.companyKind) {
+      return this.getInternetSubcategoriesData();
+    }
+  }
+
+  getInternetSubcategoriesData() {
+    return {
+      subcategoriesTitle: 'Est-ce que votre problème fait suite à un achat sur internet ?',
+      subcategories: [
+        Object.assign(new Subcategory(), this,
+          {
+            title: 'Oui',
+            companyKind: CompanyKinds.WEBSITE,
+            example: undefined
+          }),
+        Object.assign(new Subcategory(), this, {
+          title: 'Non, pas sur internet',
+          companyKind: CompanyKinds.SIRET,
+          example: undefined
+        }),
+      ]
+    };
+  }
+}
+
+export class Subcategory extends WithSubcategories {
   title: string;
   description?: string;
   example?: string;
-  subcategoriesTitle?: string;
-  subcategories?: Subcategory[];
   detailTitle?: string;
   detailInputs?: DetailInput[];
   fileLabel?: string;
   information?: Information;
   consumerActions?: Information[];
+
+  getInternetSubcategoriesData() {
+    return {...super.getInternetSubcategoriesData(), description: undefined };
+  }
 }
 
-export class Anomaly {
+export class Anomaly extends WithSubcategories {
   category: string;
   categoryId: string;
   path: string;
   hidden?: boolean;
   description?: string;
   rank?: number;
-  withInternetPurchase?: boolean;
-  icon?: string;
+  sprite?: string;
   information?: Information;
   breadcrumbTitle?: string;
-  subcategoriesTitle?: string;
-  subcategories?: Subcategory[];
 }
 
 export enum InputType {
@@ -62,4 +101,8 @@ export enum InputType {
   Textarea = 'TEXTAREA',
   Timeslot = 'TIMESLOT',
   Date = 'DATE'
+}
+
+export enum CompanyKinds {
+  SIRET = 'SIRET', WEBSITE = 'WEBSITE'
 }

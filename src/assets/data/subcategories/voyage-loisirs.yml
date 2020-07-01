@@ -271,6 +271,20 @@
           example: 'Exemple: sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, supplément imprévu"
+          detailInputs:
+            - label: Date du constat
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: "Numéro de réservation (pour faciliter le traitement par l'entreprise)"
+              rank: 2
+              type: TEXT
+              optionnal: true
+            - label: Quel est le problème ?
+              rank: 3
+              type: TEXTAREA
+              placeholder: Quel était le prix initial ? Quel est le prix final ?
+          fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
           consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autres
           consumerActions: !!import/single ../common/actions/defaut.yml

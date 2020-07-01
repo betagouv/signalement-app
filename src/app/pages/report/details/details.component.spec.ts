@@ -3,7 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
-import { DetailInputValue, Report, Step } from '../../../model/Report';
+import { DetailInputValue, DraftReport, Step } from '../../../model/Report';
 import { DetailInput, Subcategory } from '../../../model/Anomaly';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
@@ -16,7 +16,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { AutofocusDirective } from '../../../directives/auto-focus.directive';
+import { genDraftReport, oneBoolean } from '../../../../../test/fixtures.spec';
 
 describe('DetailsComponent', () => {
 
@@ -65,19 +65,18 @@ describe('DetailsComponent', () => {
       declarations: [
         DetailsComponent,
         BreadcrumbComponent,
-        AutofocusDirective,
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule.withRoutes([{ path: ReportPaths.Company, redirectTo: '' }]),
+        RouterTestingModule.withRoutes([{ path: `:category/${ReportPaths.Company}`, redirectTo: '' }]),
         BsDatepickerModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
         NgxLoadingModule,
         NoopAnimationsModule,
         ComponentsModule,
-        PipesModule,
+        PipesModule
       ],
       providers: []
     })
@@ -89,7 +88,7 @@ describe('DetailsComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(new Report()));
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Problem)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -101,7 +100,7 @@ describe('DetailsComponent', () => {
 
     it('should request the user if he is an employee of the company or not', () => {
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h4').textContent).toEqual(`Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler ?`);
+      expect(nativeElement.querySelector('h2').textContent).toEqual(`Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler ?`);
       expect(nativeElement.querySelectorAll('button')[0].textContent.trim()).toEqual('Oui');
       expect(nativeElement.querySelectorAll('button')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
       expect(nativeElement.querySelector('form')).toBeNull();
@@ -112,18 +111,21 @@ describe('DetailsComponent', () => {
       nativeElement.querySelectorAll('button')[0].click();
 
       fixture.detectChanges();
-      expect(nativeElement.querySelector('h4')).toBeNull()
+      expect(nativeElement.querySelector('h2')).toBeNull();
       expect(nativeElement.querySelector('form')).not.toBeNull();
     });
   });
 
   describe('case of default detail inputs', () => {
 
+    const draftReportInProgress = Object.assign(genDraftReport(Step.Problem), {
+      employeeConsumer: oneBoolean(),
+      storedStep: Step.Problem
+    });
+
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(
-        of(Object.assign(new Report(), { employeeConsumer: true }))
-      );
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -160,15 +162,14 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const reportExpected = Object.assign(new Report(), {
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
         detailInputValues: [
           Object.assign(new DetailInputValue(), {label: 'Description', value: 'valeur'}),
           Object.assign(new DetailInputValue(), {label: 'Date du constat', value: anomalyDateFixture})
         ],
-        uploadedFiles: [],
-        employeeConsumer: true
+        uploadedFiles: []
       });
-      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
+      expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Details);
     });
 
   });
@@ -176,7 +177,7 @@ describe('DetailsComponent', () => {
 
   describe('case of report subcategory with only a text detail input', () => {
 
-    const reportWithSubcategory = Object.assign(new Report(), {
+    const draftReportInProgress = Object.assign(genDraftReport(Step.Problem), {
       subcategories: [
         Object.assign(new Subcategory(), {
           detailInputs : [
@@ -184,14 +185,13 @@ describe('DetailsComponent', () => {
           ]
         })
       ],
-      employeeConsumer: true
+      employeeConsumer: oneBoolean(),
+      storedStep: Step.Problem
     });
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(
-        Object.assign(new Report(), reportWithSubcategory))
-      );
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -221,22 +221,20 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const reportExpected = Object.assign(new Report(), {
-        subcategories: reportWithSubcategory.subcategories,
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
         detailInputValues: [
           Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'})
         ],
-        uploadedFiles: [],
-        employeeConsumer: reportWithSubcategory.employeeConsumer
+        uploadedFiles: []
       });
-      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
+      expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Details);
     });
 
   });
 
   describe('case of report subcategory with several detail inputs', () => {
 
-    const reportWithSubcategory = Object.assign(new Report(), {
+    const draftReportInProgress = Object.assign(genDraftReport(Step.Problem), {
       subcategories: [
         Object.assign(new Subcategory(), {
           detailInputs : [
@@ -248,14 +246,13 @@ describe('DetailsComponent', () => {
           ]
         })
       ],
-      employeeConsumer: false
+      employeeConsumer: oneBoolean(),
+      storedStep: Step.Problem
     });
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(
-        Object.assign(new Report(), reportWithSubcategory))
-      );
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -312,8 +309,7 @@ describe('DetailsComponent', () => {
       nativeElement.querySelector('button[type="submit"]').click();
       fixture.detectChanges();
 
-      const reportExpected = Object.assign(new Report(), {
-        subcategories: reportWithSubcategory.subcategories,
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
         detailInputValues: [
           Object.assign(new DetailInputValue(), {label: textDetailInputFixture.label, value: 'valeur'}),
           Object.assign(new DetailInputValue(), {label: dateDetailInputFixture.label, value: anomalyDateFixture}),
@@ -323,10 +319,9 @@ describe('DetailsComponent', () => {
           Object.assign(new DetailInputValue(), {label: textareaDetailInputFixture.label, value: 'ma description'}),
           Object.assign(new DetailInputValue(), {label: checkboxDetailInputFixture.label, value: ['CHECKBOX1', undefined, 'CHECKBOX3']})
         ],
-        uploadedFiles: [],
-        employeeConsumer: reportWithSubcategory.employeeConsumer
+        uploadedFiles: []
       });
-      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Details);
+      expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Details);
     });
 
   });

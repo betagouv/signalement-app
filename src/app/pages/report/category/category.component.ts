@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { Anomaly, Information } from '../../../model/Anomaly';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
@@ -19,7 +19,7 @@ export class CategoryComponent implements OnInit {
   illustrations = Illustrations;
 
   step: Step;
-  report: Report;
+  draftReport: DraftReport;
 
   anomalies: Anomaly[];
   showSecondaryCategories: boolean;
@@ -38,9 +38,9 @@ export class CategoryComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.default.description });
 
     this.step = Step.Category;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
-      .subscribe(report => this.report = report);
+      .subscribe(draftReport => this.draftReport = draftReport);
     this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
     const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
@@ -76,20 +76,20 @@ export class CategoryComponent implements OnInit {
 
   selectAnomaly(anomaly: Anomaly) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
-    this.report = new Report();
-    this.report.category = anomaly.category;
-    this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
+    this.draftReport = new DraftReport();
+    this.draftReport.category = anomaly.category;
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
 
   restoreStoredReport() {
-    this.reportStorageService.changeReportInProgressFromStep(this.report, this.report.storedStep);
-    this.reportRouterService.routeForward(this.report.storedStep);
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.draftReport.storedStep);
+    this.reportRouterService.routeForward(this.draftReport.storedStep);
   }
 
   removeStoredReport() {
-    this.reportStorageService.removeReportInProgressFromStorage();
-    this.report = undefined;
+    this.reportStorageService.removeReportInProgress();
+    this.draftReport = undefined;
   }
 
   scrollToElement($element): void {
@@ -99,16 +99,16 @@ export class CategoryComponent implements OnInit {
 
 
 export const Illustrations = [
-  { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'picture-problem.svg' },
-  { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'picture-alert.svg' },
-  { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'picture-pro.svg' },
-  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'picture-inspect.svg' },
-]
+  { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'illustrations/consumer.png' },
+  { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'illustrations/report.png' },
+  { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'illustrations/company.png' },
+  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'illustrations/dgccrf.png' },
+];
 
 @Component({
   selector: 'app-illustration-card',
   template: `
-    <div class="card" [ngClass]="firstCard ?'first-card' : lastCard ? 'last-card' : ''">
+    <div class="card d-block" [ngClass]="firstCard ?'first-card' : lastCard ? 'last-card' : ''">
       <img src="/assets/images/{{illustration.picture}}" class="card-img-top" alt="Illustration" />
       <div class="card-body">
         <div class="card-title" [innerHTML]="illustration.title"></div>

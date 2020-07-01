@@ -1,46 +1,67 @@
 ---
 list:
+  - category: COVID-19 (coronavirus)
+    categoryId: C19
+    path: coronavirus
+    description: gel hydroalcoolique, masque, arnaque liée au COVID-19, distanciation physique...
+    rank: 1
+    sprite: category-covid
+    companyKind: SIRET
+    subcategories: !!import/single subcategories/coronavirus.yml
   - category: Café / Restaurant
     categoryId: CR
     path: cafe-restaurant
     description: bar, cafeteria, food truck...
     rank: 9
-    icon: icon_rest.png
+    sprite: category-restaurant
+    companyKind: SIRET
     subcategories: !!import/single subcategories/cafe-restaurant.yml
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
     description: supermarché, boulangerie, magasin de jouet...
-    rank: 10
-    icon: icon_store.png
+    rank: 2
+    sprite: category-store
+    companyKind: SIRET
     subcategories: !!import/single subcategories/achat-magasin.yml
   - category: Services aux particuliers
     categoryId: SERV
     path: services-aux-particuliers
     description: coiffeur, pressing, esthéticienne, aide à la personne...
     rank: 11
-    icon: icon_service.png
+    sprite: category-service
+    companyKind: SIRET
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
-  - category: Téléphonie / Eau-Gaz-Electricité
-    categoryId: TEL
-    path: telephonie-eau-gaz-electricite
-    description: forfait téléphone, fournisseur d'accès, contrat gaz...
+  - category: Eau / Gaz / Electricité
+    categoryId: ELEC
+    path: eau-gaz-electricite
+    description: contrat et facture eau, gaz et électricité...
     rank: 12
-    icon: icon_tel.png
-    subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
+    sprite: category-energy
+    companyKind: SIRET
+    subcategories: !!import/single subcategories/eau-gaz-electricite.yml
+  - category: Téléphonie / Internet / médias
+    categoryId: TEL
+    path: tel-internet-media
+    description: fournisseur d'accès, abonnement télé...
+    rank: 13
+    sprite: category-internet
+    companyKind: SIRET
+    subcategories: !!import/single subcategories/telephonie-media.yml
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: banque-assurance-mutuelle
     description: crédit, assurance
-    rank: 13
-    icon: icon_bank.png
+    rank: 14
+    sprite: category-bank
+    companyKind: SIRET
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
   - category: Intoxication alimentaire
     categoryId: INTOX
     path: intoxication-alimentaire
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
-    rank: 14
-    icon: icon_disease.png
+    rank: 15
+    sprite: category-disease
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
       content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
@@ -53,14 +74,13 @@ list:
     description: textile, jouet, meuble...
     hidden: true
     rank: 110
-    icon: icon_material.png
     subcategories: !!import/single subcategories/produits-objets.yml
   - category: Achat sur internet
     categoryId: INTERNET
     path: achat-sur-internet
-    description: Vous avez passé commande sur internet, votre problème concerne un site web
-    rank: 16
-    icon: email-24px.svg
+    description: Vous avez passé commande sur internet, votre problème concerne un site web.
+    rank: 18
+    sprite: category-ecommerce
     information:
       title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
       content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
@@ -77,29 +97,33 @@ list:
     categoryId: TRAV
     path: travaux-renovation
     description: dépannage, plombier, couvreur, pose de panneaux...
-    rank: 17
-    icon: icon_craft.png
+    rank: 107
+    sprite: category-craft
+    companyKind: SIRET
     subcategories: !!import/single subcategories/travaux-renovation.yml
   - category: Voyage / Loisirs
     categoryId: VOY
     path: voyage-loisirs
-    description: voyage organisé, camping, concert, sport, billets d''avion, taxi
-    rank: 18
-    icon: icon_hobbies.png
+    description: voyage organisé, camping, concert, sport, avion, train, taxi
+    rank: 16
+    sprite: category-hobbies
+    companyKind: SIRET
     subcategories: !!import/single subcategories/voyage-loisirs.yml
   - category: Immobilier
     categoryId: IMM
     path: immobilier
     description: location, agence immobiliere, syndicat de copropriété...
     rank: 105
-    icon: icon_real_estate.png
+    sprite: category-real-estate
+    companyKind: SIRET
     subcategories: !!import/single subcategories/immobilier.yml
   - category: Secteur de la santé
     categoryId: SANT
     path: sante
     description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
-    rank: 106
-    icon: icon_health.png
+    rank: 3
+    sprite: category-health
+    companyKind: SIRET
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
   - category: Voiture / Véhicule
@@ -107,7 +131,8 @@ list:
     path: voiture-vehicule
     description: vente et réparation de voiture, location, auto-école...
     rank: 107
-    icon: icon_transport.png
+    sprite: category-transport
+    companyKind: SIRET
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories: !!import/single subcategories/voiture-vehicule.yml
   - category: Animaux
@@ -115,14 +140,16 @@ list:
     path: animaux
     description: vétérinaire, aliment pour animaux, service de garde...
     rank: 108
-    icon: icon_pet.png
+    sprite: category-pet
+    companyKind: SIRET
     subcategories: !!import/single subcategories/animaux.yml
   - category: Démarches administratives
     categoryId: ADM
     path: demarches-administratives
     description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
     rank: 109
-    icon: icon_marianne.png
+    sprite: category-admin
+    companyKind: SIRET
     subcategories: !!import/single subcategories/demarches-administratives.yml
   - category: Travail au noir
     categoryId: TNOIR

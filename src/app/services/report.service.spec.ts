@@ -3,10 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { ReportService } from './report.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ServiceUtils } from './service.utils';
-import { DetailInputValue, Report } from '../model/Report';
+import { DetailInputValue, DraftReport } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
-import { Company } from '../model/Company';
+import { CompanySearchResult } from '../model/CompanySearchResult';
 import { Subcategory } from '../model/Anomaly';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
@@ -77,7 +77,7 @@ describe('ReportService', () => {
       consumer.lastName = 'lastName';
       consumer.firstName = 'firstName';
       consumer.email = 'email@mail.fr';
-      const company = new Company();
+      const company = new CompanySearchResult();
       company.name = 'companyName';
       company.line1 = 'line 1';
       company.line2 = 'line 2';
@@ -85,15 +85,15 @@ describe('ReportService', () => {
       const detailInputValue = new DetailInputValue();
       detailInputValue.label = 'mon label';
       detailInputValue.value = 'ma value';
-      const report = new Report();
-      report.uploadedFiles = [anomalyFile];
-      report.category = 'category';
-      report.subcategories = [subcategory1, subcategory2];
-      report.consumer = consumer;
-      report.company = company;
-      report.detailInputValues = [detailInputValue];
+      const draftReport = new DraftReport();
+      draftReport.uploadedFiles = [anomalyFile];
+      draftReport.category = 'category';
+      draftReport.subcategories = [subcategory1, subcategory2];
+      draftReport.consumer = consumer;
+      draftReport.draftCompany = company;
+      draftReport.detailInputValues = [detailInputValue];
 
-      reportService.createReport(report).subscribe(result => {
+      reportService.createReport(draftReport).subscribe(result => {
           done();
         }
       );
