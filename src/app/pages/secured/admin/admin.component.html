@@ -32,6 +32,25 @@
       </div>
       <div class="notification success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>
     </form>
+    <div class="row justify-content-center mt-3">
+      <div class="col-8">
+        <span class="link pointer" (click)="showPendingDGCCRF()" *ngIf="!pendingDGCCRF">Afficher les invitations en attente</span>
+        <table class="table table-sm" *ngIf="pendingDGCCRF">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Date d'invitation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let invitation of pendingDGCCRF">
+              <td>{{invitation.email}}</td>
+              <td>{{invitation.tokenCreation | date: "mediumDate"}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
   <ngx-loading [show]="loading"></ngx-loading>
 </section>

@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   emailCtrl: FormControl;
 
   loading: boolean;
+  pendingDGCCRF = null;
   showSuccess = false;
   showErrors = false;
 
@@ -38,6 +39,16 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  showPendingDGCCRF() {
+    this.loading = true;
+    this.accountService.listDGCCRFInvitations().subscribe(
+      pendingDGCCRF => {
+        this.loading = false;
+        this.pendingDGCCRF = pendingDGCCRF;
+      }
+    );
+  }
+
   submitForm() {
     this.showSuccess = false;
     this.loading = true;
@@ -49,6 +60,7 @@ export class AdminComponent implements OnInit {
           .subscribe(() => {
             this.loading = false;
             this.showSuccess = true;
+            this.pendingDGCCRF = null;
             this.emailCtrl.reset();
           });
     } else {
