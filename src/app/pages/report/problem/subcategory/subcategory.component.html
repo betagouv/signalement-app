@@ -1,14 +1,14 @@
-<div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''">
+<form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+  <div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''" #formContent>
 
-  <div *ngIf="subcategoryDescription" class="row">
-    <div class="col-12">
-      <p [innerHTML]="subcategoryDescription"></p>
+    <div *ngIf="subcategoryDescription" class="row">
+      <div class="col-12">
+        <p [innerHTML]="subcategoryDescription"></p>
+      </div>
     </div>
-  </div>
 
-  <h2 class="mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
+    <h2 class="mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
 
-  <form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
     <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
       <div class="row pb-2 pt-2">
         <div class="col col-radio z-0" *ngIf="subcategoryForm.contains(subcategoryName)">
@@ -24,12 +24,14 @@
         </div>
       </div>
     </div>
-    <hr *ngIf="subcategoryForm.valid"/>
-    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory() && subcategoryForm.valid">
+  </div>
+  <ng-container *ngIf="subcategoryForm.valid">
+    <hr/>
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory()">
       Continuer
     </button>
-  </form>
-</div>
+  </ng-container>
+</form>
 <app-subcategory *ngIf="hasSubSubcategory()"
                  [subcategoriesTitle]="subcategorySelected.subcategoriesTitle"
                  [subcategories]="subcategorySelected.subcategories"

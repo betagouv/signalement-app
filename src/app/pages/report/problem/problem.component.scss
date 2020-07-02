@@ -4,10 +4,6 @@
 
 section {
 
-  @media #{$smaller-than-tablet} {
-    margin-top: 80px;
-  }
-
   .withSiblingSubcategories {
 
     label, h2 {

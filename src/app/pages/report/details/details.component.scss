@@ -3,10 +3,6 @@
 
 section {
 
-  @media #{$smaller-than-tablet} {
-    margin-top: 108px;
-  }
-
   label > img {
     height: 30px;
     vertical-align: top;

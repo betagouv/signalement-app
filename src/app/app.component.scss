@@ -8,6 +8,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  .content {
+    @media #{$smaller-than-desktop} {
+      padding-top: 50px;
+    }
+  }
+
   .section {
     padding: 3em 0;
   }

@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -10,12 +9,12 @@ import {
   PLATFORM_ID,
   Renderer2,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { Subcategory } from '../../../../model/Anomaly';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
-import { DomSanitizer } from '@angular/platform-browser';
-import { mobileFooterHeight, mobileHeaderHeight, mobileMaxWidth } from '../../../../utils';
+import Utils from '../../../../utils';
 
 declare var jQuery: any;
 
@@ -24,7 +23,7 @@ declare var jQuery: any;
   templateUrl: './subcategory.component.html',
   styleUrls: ['./subcategory.component.scss'],
 })
-export class SubcategoryComponent implements OnChanges, AfterViewInit {
+export class SubcategoryComponent implements OnChanges {
 
   @Input() subcategories: Subcategory[];
   @Input() subcategoriesSelected: Subcategory[];
@@ -32,6 +31,9 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
   @Input() subcategoryDescription: string;
   @Input() subcategoryName: string;
   @Input() level: number;
+
+  @ViewChild('formContent', {static: false})
+  private formContent: ElementRef;
 
   subcategoryForm: FormGroup;
   subcategoryTitleCtrl: FormControl;
@@ -44,37 +46,27 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
               private renderer: Renderer2,
-              public elementRef: ElementRef,
-              private sanitizer: DomSanitizer) { }
+              public elementRef: ElementRef) { }
 
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.scrollToElementIfHidden();
-    }, 500);
-  }
-
-  isSmallerThanPhablet() {
-    return isPlatformBrowser(this.platformId) && window && window.innerWidth <= mobileMaxWidth;
-  }
-
-  scrollToElementIfHidden() {
-    if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory()) {
-      const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      if (this.isSmallerThanPhablet() && rect.height < window.innerHeight - mobileHeaderHeight && rect.bottom <= jQuery( document ).height() - mobileFooterHeight) {
-       this.renderer.setStyle(this.elementRef.nativeElement.children[0], 'margin-bottom', `${window.innerHeight - rect.height - mobileHeaderHeight}px`);
-      }
-      if (rect.top > 1) {
-        jQuery('html, body').animate({
-          scrollTop: this.isSmallerThanPhablet() ? this.elementRef.nativeElement.offsetTop - mobileHeaderHeight - 40 : this.elementRef.nativeElement.offsetTop
-        }, 1000, 'linear');
-      }
-    }
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['subcategoryName']) {
       this.initSubcategoryForm();
+      setTimeout(() => {
+        this.scrollToElement();
+      }, 500);
+    }
+  }
+
+  scrollToElement() {
+    if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory() && this.level > 1) {
+      const rect = this.elementRef.nativeElement.getBoundingClientRect();
+      if (Utils.isSmallerThanPhablet(this.platformId) && rect.height < window.innerHeight) {
+       this.renderer.setStyle(this.elementRef.nativeElement.children[0], 'margin-bottom', `${window.innerHeight - rect.height - 110}px`);
+      }
+      jQuery('html, body').animate({
+        scrollTop: this.elementRef.nativeElement.offsetTop - 110
+      }, 1000, 'linear');
     }
   }
 
@@ -94,11 +86,17 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
   selectSubcategory(subcategory: Subcategory) {
     this.subcategorySelected = subcategory;
     this.subcategoriesSelected = [];
-
     if (this.hasSubSubcategory()) {
       this.renderer.removeStyle(this.elementRef.nativeElement.children[0], 'margin-bottom');
+    } else {
+      const rect = this.formContent.nativeElement.getBoundingClientRect();
+      const submitButtonOffset = 145;
+      if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
+        jQuery('html, body').animate({
+          scrollTop: this.elementRef.nativeElement.offsetTop + rect.height + submitButtonOffset - window.innerHeight
+        }, 1000, 'linear');
+      }
     }
-
   }
 
   submitSubcategoryForm() {
@@ -119,7 +117,6 @@ export class SubcategoryComponent implements OnChanges, AfterViewInit {
 
   onSelectSubSubcategories(subSubcategories: Subcategory[]) {
     this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value), ...subSubcategories]);
-
   }
 
 }
