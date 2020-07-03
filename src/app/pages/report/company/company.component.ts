@@ -60,7 +60,7 @@ export class CompanyComponent implements OnInit {
   siretCtrl: FormControl;
   companySearchBySiretResult: CompanySearchResult;
 
-  selectedCompany: DraftCompany;
+  selectedCompany: CompanySearchResult;
 
   showErrorsBySiret: boolean;
   searchBySiretWarning: string;
@@ -254,7 +254,7 @@ export class CompanyComponent implements OnInit {
 
   submitCompany(draftCompany?: DraftCompany) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
-    this.draftReport.draftCompany = draftCompany || this.selectedCompany;
+    this.draftReport.draftCompany = draftCompany || this.selectedCompany.draftCompany;
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
