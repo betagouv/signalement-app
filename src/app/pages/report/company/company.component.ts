@@ -139,6 +139,7 @@ export class CompanyComponent implements OnInit {
     this.companySearchResults = [];
     this.searchWarning = '';
     this.searchError = '';
+    this.selectedCompany = undefined;
   }
 
   searchCompany() {
@@ -239,24 +240,26 @@ export class CompanyComponent implements OnInit {
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
-  selectCompanyFromResults(companySearchResult: CompanySearchResult) {
-    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.selectCompany(companySearchResult.draftCompany);
+  selectCompany() {
+    this.analyticsService.trackEvent(EventCategories.report, CompanySearchEventActions.select, this.identificationKind);
+    const element = (this.identificationKind === IdentificationKinds.Name ? this.identResult : this.identBySiretResult).nativeElement
+    const rect = element.getBoundingClientRect();
+    const submitButtonOffset = 145;
+    if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
+      jQuery('html, body').animate({
+        scrollTop: element.offsetTop + rect.height + submitButtonOffset - window.innerHeight
+      }, 1000, 'linear');
+    }
   }
 
-  selectCompany(draftCompany: DraftCompany) {
+  submitCompany(draftCompany?: DraftCompany) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
-    this.draftReport.draftCompany = draftCompany;
+    this.draftReport.draftCompany = draftCompany || this.selectedCompany;
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
-  }
-
-  submitSelectedCompany() {
-    this.selectCompany(this.selectedCompany);
-    //TODO
   }
 
   initSearchBySiret() {
@@ -329,8 +332,8 @@ export class CompanyComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => {
         const rect = $element.getBoundingClientRect();
-        if (Utils.isSmallerThanPhablet(this.platformId) && rect.height < window.innerHeight) {
-          this.renderer.setStyle($element, 'margin-bottom', `${window.innerHeight - rect.height - 60}px`);
+        if (Utils.isSmallerThanDesktop(this.platformId) && rect.height < window.innerHeight) {
+          this.renderer.setStyle($element, 'margin-bottom', `${window.innerHeight - rect.height - 110}px`);
         }
         jQuery('html, body').animate({
           scrollTop: $element.offsetTop - 110

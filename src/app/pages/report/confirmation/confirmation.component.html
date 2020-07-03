@@ -5,76 +5,77 @@
       <h2>
         Récapitulatif de votre problème
       </h2>
-      <p class="note">
+      <p class="text-warning">
         Vérifiez  votre signalement avant de l’envoyer {{draftReport.employeeConsumer ? '' : 'à l\'entreprise et ' }}à la répression des fraudes.
       </p>
       <div class="text-break">
         <h3>Problème</h3>
-        <div class="row">
-          <div class="col-12">
-            {{draftReport.category}}
+        <div>
+          {{draftReport.category}}
+          <br />
+          <ng-container *ngFor="let subcategory of draftReport.subcategories">
+            {{subcategory.title}}
             <br />
-            <ng-container *ngFor="let subcategory of draftReport.subcategories">
-              {{subcategory.title}}
-              <br />
-            </ng-container>
-          </div>
+          </ng-container>
+        </div>
+        <div class="pointer link" (click)="goToStep(steps.Problem)">
+          <i class="material-icons">edit</i> Modifier
         </div>
         <hr />
         <h3>Description</h3>
-        <div class="row">
-          <div class="col-12">
-            <div class="flex" *ngFor="let detailInputValue of draftReport.detailInputValues">
-              <span [innerHTML]="detailInputValue.renderedLabel"></span>
-              &nbsp;<span [innerHTML]="detailInputValue.renderedValue"></span>
-            </div>
-            <div *ngIf="draftReport.uploadedFiles && draftReport.uploadedFiles.length;">
-              Pièce(s) jointe(s) :
-              <div class="col-12">
-                <ul class="filename">
-                  <li *ngFor="let uploadedFile of draftReport.uploadedFiles">
-                    <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                      {{uploadedFile.filename}}
-                    </a>
-                  </li>
-                </ul>
-              </div>
+        <div>
+          <div class="flex" *ngFor="let detailInputValue of draftReport.detailInputValues">
+            <span [innerHTML]="detailInputValue.renderedLabel"></span>
+            &nbsp;<span [innerHTML]="detailInputValue.renderedValue"></span>
+          </div>
+          <div *ngIf="draftReport.uploadedFiles && draftReport.uploadedFiles.length;">
+            Pièce(s) jointe(s) :
+            <div class="col-12">
+              <ul class="filename">
+                <li *ngFor="let uploadedFile of draftReport.uploadedFiles">
+                  <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                    {{uploadedFile.filename}}
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
+        <div class="pointer link" (click)="goToStep(steps.Details)">
+          <i class="material-icons">edit</i> Modifier
         </div>
         <hr />
         <h3>Entreprise</h3>
-        <div class="row" *ngIf="draftReport.draftCompany.name">
-          <div class="col-12">
-            Nom : <strong>{{draftReport.draftCompany.name}}<br /></strong>
-            Adresse : {{draftReport.draftCompany.address}}
-          </div>
+        <div *ngIf="draftReport.draftCompany.name">
+          Nom : <strong>{{draftReport.draftCompany.name}}<br /></strong>
+          Adresse : {{draftReport.draftCompany.address}}
         </div>
-        <div class="row" *ngIf="draftReport.draftCompany.siret">
-          <div class="col-12">
-            SIRET : {{draftReport.draftCompany.siret}}
-          </div>
+        <div *ngIf="draftReport.draftCompany.siret">
+          SIRET : {{draftReport.draftCompany.siret}}
         </div>
-        <div class="row" *ngIf="draftReport.draftCompany.website">
-          <div class="col-12">
-            Site internet : {{draftReport.draftCompany.website.url}}
-          </div>
+        <div *ngIf="draftReport.draftCompany.website">
+          Site internet : {{draftReport.draftCompany.website.url}}
+        </div>
+        <div class="pointer link" (click)="goToStep(steps.Company)">
+          <i class="material-icons">edit</i> Modifier
         </div>
         <hr />
         <h3>Consommateur</h3>
-        <div class="row">
-          <div class="col-12">
-            Nom : {{draftReport.consumer.lastName}}
+        <div>
+          Nom : {{draftReport.consumer.lastName}}
+          <br />
+          Prénom : {{draftReport.consumer.firstName}}
+          <br />
+          Email : {{draftReport.consumer.email}}
+          <ng-container *ngIf="!draftReport.employeeConsumer">
             <br />
-            Prénom : {{draftReport.consumer.firstName}}
-            <br />
-            Email : {{draftReport.consumer.email}}
-            <ng-container *ngIf="!draftReport.employeeConsumer">
-              <br />
-              Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}
-            </ng-container>
-          </div>
+            Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}
+          </ng-container>
         </div>
+        <div class="pointer link" (click)="goToStep(steps.Consumer)">
+          <i class="material-icons">edit</i> Modifier
+        </div>
+        <hr/>
       </div>
 
       <div class="notification error mt-3" *ngIf="loadingError">

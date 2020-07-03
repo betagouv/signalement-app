@@ -9,8 +9,8 @@ export default class Utils {
     $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   }
 
-  static isSmallerThanPhablet(platformId) {
-    return isPlatformBrowser(platformId) && window && window.innerWidth <= mobileMaxWidth;
+  static isSmallerThanDesktop(platformId) {
+    return isPlatformBrowser(platformId) && window && window.innerWidth < desktopMinWidth;
   }
 }
 
@@ -24,4 +24,4 @@ export enum SVETestingVersions {
   Test3_Sentence5 = 'Test3_Sentence5'
 }
 
-export const mobileMaxWidth = 575;
+export const desktopMinWidth = 992;

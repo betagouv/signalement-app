@@ -19,6 +19,8 @@ import { ComponentsModule, NgxLoadingConfig } from '../../components/components.
 import { PipesModule } from '../../pipes/pipes.module';
 import anomalies from '../../../assets/data/anomalies.json';
 import { ReportPaths } from '../../services/report-router.service';
+import { AccountMenuComponent } from '../header/account-menu/account-menu.component';
+import { HeaderModule } from '../header/header.module';
 
 defineLocale('fr', frLocale);
 
@@ -82,6 +84,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     CompanyComponent,
     ConfirmationComponent,
     AcknowledgmentComponent,
+    AccountMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -94,7 +97,8 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     RouterModule.forChild(routes),
     CarouselModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    HeaderModule
   ],
   exports: [
     RouterModule,

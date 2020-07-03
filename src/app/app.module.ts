@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './pages/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
 import { RouterModule } from '@angular/router';
@@ -18,7 +17,6 @@ import localeFr from '@angular/common/locales/fr';
 import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
-import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 import { NotFoundComponent } from './pages/static/notfound/notfound.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { AccountModule } from './pages/account/account.module';
@@ -33,6 +31,7 @@ import { SVETestingScope, SVETestingVersions } from './utils';
 import { AppRoleModule } from './directives/app-role/app-role.module';
 import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 import { SubscriptionModule } from './pages/subscription/subscription.module';
+import { HeaderModule } from './pages/header/header.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -60,10 +59,8 @@ class ErrorLogger extends ErrorHandler {
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
         FooterComponent,
         StatsComponent,
-        AccountMenuComponent,
         NotFoundComponent,
     ],
     imports: [
@@ -81,6 +78,7 @@ class ErrorLogger extends ErrorHandler {
             scrollPositionRestoration: 'top',
             anchorScrolling: 'enabled',
         }),
+        HeaderModule,
         ReportModule,
         ReportsModule,
         BrowserModule,
@@ -123,7 +121,6 @@ class ErrorLogger extends ErrorHandler {
         AppPermissionModule,
     ],
     exports: [
-        HeaderComponent,
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'fr' },

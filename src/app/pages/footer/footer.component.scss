@@ -4,9 +4,10 @@
 .footer {
   color: $white;
 
-  @media #{$smaller-than-phablet} {
+  @media #{$smaller-than-desktop} {
     position: absolute;
     bottom: -192px;
+    width: 100%;
   }
 
   .container {
@@ -19,7 +20,7 @@
 
     font-weight: bold;
 
-    @media #{$larger-than-phablet} {
+    @media #{$larger-than-desktop} {
       font-size: 1.6rem;
     }
   }
@@ -66,7 +67,7 @@
     }
 
     li {
-      @media #{$smaller-than-phablet} {
+      @media #{$smaller-than-desktop} {
         font-size: 14px;
         line-height: 18px;
 

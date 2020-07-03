@@ -36,7 +36,7 @@
         </div>
       </div>
       <hr />
-      <button type="submit" class="btn btn-lg btn-primary" (click)="selectCompany(draftReport.draftCompany)">
+      <button type="submit" class="btn btn-lg btn-primary" (click)="submitCompany(draftReport.draftCompany)">
         Continuer
       </button>
     </ng-container>
@@ -179,7 +179,7 @@
                 <div *ngFor="let companySearchResult of companySearchResults; let companyIndex = index" [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
                   <div class="row mb-3">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult"/>
+                      <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany()"/>
                     </div>
                     <label class="col pointer" for="company_{{companyIndex}}">
                       <strong *ngIf="companySearchResult.line1">{{companySearchResult.line1}}<br /></strong>
@@ -205,7 +205,7 @@
 
                 <hr *ngIf="selectedCompany"/>
 
-                <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitSelectedCompany()">
+                <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
                   Continuer
                 </button>
               </div>
@@ -335,7 +335,7 @@
                 <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchBySiretResult)">
                   <div class="row mb-3">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_siret" [value]="companySearchBySiretResult"/>
+                      <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_siret" [value]="companySearchBySiretResult" (click)="selectCompany()"/>
                     </div>
                     <label class="col pointer" for="company_siret">
                       <strong *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}<br /></strong>
@@ -352,7 +352,7 @@
 
                 <hr *ngIf="selectedCompany"/>
 
-                <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitSelectedCompany()">
+                <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
                   Continuer
                 </button>
 
@@ -382,7 +382,7 @@
               <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary" (click)="selectCompany({})">
+            <button type="button" class="btn btn-lg btn-primary" (click)="submitCompany()">
               Continuer
             </button>
 
