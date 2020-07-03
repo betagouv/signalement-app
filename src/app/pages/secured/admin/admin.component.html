@@ -34,7 +34,10 @@
     </form>
     <div class="row justify-content-center mt-3">
       <div class="col-8">
-        <span class="link pointer" (click)="showPendingDGCCRF()" *ngIf="!pendingDGCCRF">Afficher les invitations en attente</span>
+        <ul class="list-group list-group-horizontal mb-3">
+          <li class="list-group-item" (click)="!pendingDGCCRF && showPendingDGCCRF()" [ngClass]="pendingDGCCRF ? 'active' : 'pointer'">Invitations en attente</li>
+          <li class="list-group-item" (click)="!usersDGCCRF && showUsersDGCCRF()" [ngClass]="usersDGCCRF? 'active' : 'pointer'">Tous les utilisateurs</li>
+        </ul>
         <table class="table table-sm" *ngIf="pendingDGCCRF">
           <thead>
             <tr>
@@ -46,6 +49,22 @@
             <tr *ngFor="let invitation of pendingDGCCRF">
               <td>{{invitation.email}}</td>
               <td>{{invitation.tokenCreation | date: "mediumDate"}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-sm" *ngIf="usersDGCCRF">
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of usersDGCCRF">
+              <td>{{user.firstName}}</td>
+              <td>{{user.lastName}}</td>
+              <td>{{user.email}}</td>
             </tr>
           </tbody>
         </table>

@@ -87,4 +87,14 @@ export class AccountService {
       })
     );
   }
+  listDGCCRFUsers() {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<User[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'dgccrf', 'users']),
+          headers
+        );
+      })
+    );
+  }
 }
