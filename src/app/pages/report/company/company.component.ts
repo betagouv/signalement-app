@@ -87,7 +87,6 @@ export class CompanyComponent implements OnInit {
       .subscribe(report => {
         if (report) {
           this.draftReport = report;
-          console.log('report', report)
           this.checkExistingCompanyCompliance();
           if (this.draftReport.companyKind === CompanyKinds.SIRET) {
             this.initSearchBySiretForm();
