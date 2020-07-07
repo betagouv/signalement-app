@@ -2,7 +2,7 @@
 <section class="section section-white" *ngIf="draftReport">
   <div class="container max-width">
     <div class="pb-sm-5 employeeConsumer" *ngIf="draftReport.employeeConsumer === undefined; else detailsFormTemplate">
-      <h2 class="pt-sm-5">Travaillez-vous dans l'entreprise que vous souhaitez signaler&#160;?</h2>
+      <h2 class="pt-sm-5">Travaillez-vous dans l'entreprise que vous souhaitez signaler ?</h2>
       <div class="pt-2 pt-sm-3">
         <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
           Oui
