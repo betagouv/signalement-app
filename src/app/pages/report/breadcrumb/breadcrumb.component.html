@@ -6,7 +6,7 @@
       </div>
       <div class="col-12 col-sm-11">
         <div *ngIf="draftReport">
-          <h1 *ngIf="anomaly?.breadcrumbTitle; else defautBreadcrumbTitle">{{anomaly?.breadcrumbTitle}}</h1>
+          <h1 *ngIf="getAnomaly()?.breadcrumbTitle; else defautBreadcrumbTitle">{{getAnomaly()?.breadcrumbTitle}}</h1>
           <ng-template #defautBreadcrumbTitle>
             <h1>Vous signalez un problème {{precedeCategory()}}<strong>{{draftReport.category}}</strong></h1>
           </ng-template>
