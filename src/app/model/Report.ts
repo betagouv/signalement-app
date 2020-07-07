@@ -1,5 +1,5 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, Subcategory } from './Anomaly';
+import { CompanyKinds, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
@@ -48,7 +48,7 @@ export const StatusColor = new Map<string, string>([
   [ReportStatus.ClosedForPro, '#daf5e7'],
   [ReportStatus.Ignored, '#c9d3df'],
   [ReportStatus.NotConcerned, '#c9d3df'],
-])
+]);
 
 export class DraftReport {
   category: string;
@@ -77,6 +77,7 @@ export class Report {
   id: string;
   category: string;
   subcategories: Subcategory[];
+  tags: Tag[];
   company: Company;
   website: Website;
   detailInputValues: DetailInputValue[];
