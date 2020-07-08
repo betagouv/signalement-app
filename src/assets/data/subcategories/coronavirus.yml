@@ -9,7 +9,7 @@
                       <li>4,4€ pour 300 ml</li>
                       <li>13,19€ pour un litre</li>
                     </ul>
-                  Il existe des exceptions à ces prix en fonction par exemple du type de contenant. 
+                  Il existe des exceptions à ces prix en fonction par exemple du type de contenant.
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -24,7 +24,7 @@
           rank: 3
           type: TEXT
           optionnal: true
-      fileLabel: Photo du prix et du produit si possible     
+      fileLabel: Photo du prix et du produit si possible
     - title: Masque
       description: "Le prix de certains masques est réglementé :
                     <ul>
@@ -42,6 +42,8 @@
 - title: Problème / abus avec un site de vente en ligne
   example: "Exemple : site de livraison de courses à domicile"
   companyKind: 'WEBSITE'
+  tags:
+    - Internet
   subcategories:
     - title: Le prix de la livraison a augmenté
       detailInputs:
