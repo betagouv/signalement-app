@@ -5,17 +5,14 @@
             [backButton]="siretUrlParam !== null">
   </app-banner>
 
-  <section class="section section-white position-relative" *appRole="[roles.Admin, roles.DGCCRF]">
-
-    <div class="filters">
-      <form (ngSubmit)="submitFilters()">
-        <div class="row form-group">
-          <div class="col-2 text-right">
+  <div class="filters">
+    <form (ngSubmit)="submitFilters()" class="form-horizontal">
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <div class="form-group">
             <label>
               Département(s)
             </label>
-          </div>
-          <div class="col-4 text-left">
             <div class="btn-group" dropdown>
               <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" aria-controls="dropdown-basic">
                 {{reportFilter.areaLabel ? reportFilter.areaLabel : 'Tous les départements'}} <span class="caret"></span>
@@ -42,46 +39,29 @@
               </ul>
             </div>
           </div>
-          <div class="col-2 text-right">
+          <div class="form-group">
             <label for="period">
               Période
             </label>
-          </div>
-          <div class="col-4 text-left">
             <input type="text"
                    [(ngModel)]="reportFilter.period"
                    name="period"
                    id="period"
+                   class="form-control"
                    placeholder="Daterangepicker"
                    placeholder="Période sélectionnée"
                    bsDaterangepicker
                    autocomplete="off"
                    [bsConfig]="{
-                     containerClass: 'theme-default',
-                     rangeInputFormat: 'DD MMMM YYYY'
-                   }" />
+                       containerClass: 'theme-default',
+                       rangeInputFormat: 'DD MMMM YYYY'
+                     }" />
           </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-2 text-right">
-            <label for="hasCompanyFilter">
-              Entreprise identifiée ?
-            </label>
-          </div>
-          <div class="col-4 text-left">
-            <select [(ngModel)]="reportFilter.hasCompany" id="hasCompanyFilter" name="hasCompany" [class]="reportFilter.hasCompany ? 'selected' : ''">
-              <option [ngValue]="undefined" selected>Indifférent</option>
-              <option value="true">Oui</option>
-              <option value="false">Non</option>
-            </select>
-          </div>
-          <div class="col-2 text-right">
+          <div class="form-group">
             <label for="statusFilter">
               Statut
             </label>
-          </div>
-          <div class="col-4 text-left">
-            <select [(ngModel)]="reportFilter.status" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
+            <select [(ngModel)]="reportFilter.status" id="statusFilter" name="status" class="form-control" [ngClass]="reportFilter.status ? 'selected' : ''">
               <option [ngValue]="undefined" selected>Tous les statuts</option>
               <option *ngFor="let status of statusList">
                 {{status}}
@@ -89,62 +69,85 @@
             </select>
           </div>
         </div>
-        <div class="row form-group">
-          <div class="col-2 text-right">
+        <div class="col-12 col-sm-4">
+          <div class="form-group">
             <label for="siretFilter">
               SIRET
             </label>
+            <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret" class="form-control"/>
           </div>
-          <div class="col-4 text-left">
-            <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret"/>
-          </div>
-          <div class="col-2 text-right">
-            <label for="detailsFilter">
-              Mots-clés&nbsp;<i class="material-icons md-dark" aria-hidden="true" title="Recherche dans les colonnes problème et description">help_outline</i>
+          <div class="form-group">
+            <label for="hasCompanyFilter">
+              Entreprise identifiée ?
             </label>
+            <select [(ngModel)]="reportFilter.hasCompany" id="hasCompanyFilter" name="hasCompany" class="form-control" [ngClass]="reportFilter.hasCompany ? 'selected' : ''">
+              <option [ngValue]="undefined" selected>Indifférent</option>
+              <option value="true">Oui</option>
+              <option value="false">Non</option>
+            </select>
           </div>
-          <div class="col-4 text-left">
-            <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" />
+          <div class="form-group">
+            <label for="emailFilter">
+              Email conso.
+            </label>
+            <input type="text" [(ngModel)]="reportFilter.email" placeholder="Email consommateur" id="emailFilter" name="email" class="form-control"/>
           </div>
         </div>
-        <div class="row form-group">
-          <div class="col-2 text-right">
+        <div class="col-12 col-sm-4">
+          <div class="form-group">
             <label for="categoryFilter">
               Catégorie
             </label>
-          </div>
-          <div class="col-4 text-left">
-            <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" [class]="reportFilter.category ? 'selected' : ''">
+            <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" class="form-control" [ngClass]="reportFilter.category ? 'selected' : ''">
               <option [ngValue]="undefined" selected>Toutes les catégories</option>
               <option *ngFor="let category of categories">
                 {{category}}
               </option>
             </select>
           </div>
-          <div class="col-2 text-right">
-            <label for="emailFilter">
-              Email conso.
+          <div class="form-group">
+            <label for="tagsFilter">
+              Tags
             </label>
+            <select [(ngModel)]="tagFilterToAdd"
+                    id="tagsFilter"
+                    name="category"
+                    (change)="addTagFilter()"
+                    class="form-control">
+              <option value="" selected>Sélectionner les tags à ajouter</option>
+              <ng-container *ngFor="let tag of tags">
+                <option *ngIf="reportFilter.tags.indexOf(tag) === -1">{{tag}}</option>
+              </ng-container>
+            </select>
+            <div>
+              <span *ngFor="let tag of reportFilter.tags" class="badge badge-pill  badge-success m-1">
+                {{tag}}
+                <i class="material-icons pointer" (click)="removeTagFilter(tag)">close</i>
+              </span>
+            </div>
           </div>
-          <div class="col-4 text-left">
-            <input type="text" [(ngModel)]="reportFilter.email" placeholder="Email consommateur" id="emailFilter" name="email"/>
+          <div class="form-group">
+            <label for="detailsFilter">
+              Mots-clés&nbsp;<i class="material-icons md-dark" aria-hidden="true" title="Recherche dans les colonnes problème et description">help_outline</i>
+            </label>
+            <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" class="form-control"/>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12 text-center">          &nbsp;
-            <button type="submit" class="btn btn-primary">Filtrer les signalements</button>          &nbsp;
-            <a (click)="launchExtraction()" class="pointer">
-              <img alt="Bouton exporter en XLS" title="Exporter en XLS" src="/assets/images/icon_export_xls.png"/>
-            </a>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary mr-3">Filtrer</button>
+          <a (click)="launchExtraction()" class="pointer">
+            <img alt="Bouton exporter en XLS" title="Exporter en XLS" src="/assets/images/icon_export_xls.png"/>
+          </a>
+          <div class="link pointer mt-1" (click)="cancelFilters()">Effacer les filtres</div>
         </div>
-        <div class="row pt-2">
-          <div class="col-12 text-center">
-            <span class="link pointer" (click)="cancelFilters()">Effacer les filtres</span>
-          </div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
+
+  <section class="section section-white position-relative" *appRole="[roles.Admin, roles.DGCCRF]">
+
     <div class="row">
       <div class="col-12 col-lg-6 offset-lg-3 text-center">
         <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"

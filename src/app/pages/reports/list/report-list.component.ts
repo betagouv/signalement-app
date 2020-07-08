@@ -11,7 +11,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles } from '../../../model/AuthUser';
-import { ReportingDateLabel } from '../../../model/Anomaly';
+import { ReportingDateLabel, Tag } from '../../../model/Anomaly';
 import { ConstantService } from '../../../services/constant.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,6 +31,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
   reportStatus = ReportStatus;
   statusColor = StatusColor;
   regions = Regions;
+  tags: Tag[];
+
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
   currentPage: number;
@@ -38,6 +40,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   siretUrlParam: string;
   reportFilter: ReportFilter;
+  tagFilterToAdd: Tag = '';
   reportExtractUrl: string;
   statusList: string[];
   categories: string[];
@@ -90,6 +93,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
         ...oldCategories
       ];
 
+    this.tags = this.anomalyService.getTags();
+
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
@@ -131,7 +136,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
           if (isPlatformBrowser(this.platformId)) {
             window.scroll(
               0,
-              sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 260
+              sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 177
             );
             sessionStorage.removeItem(ReportsScrollYStorageKey);
           }
@@ -210,6 +215,15 @@ export class ReportListComponent implements OnInit, OnDestroy {
       this.reportFilter.areaLabel = `${area.code} - ${area.label}`;
       this.reportFilter.departments = [area];
     }
+  }
+
+  addTagFilter() {
+    this.reportFilter.tags.push(this.tagFilterToAdd);
+    this.tagFilterToAdd = '';
+  }
+
+  removeTagFilter(tag: Tag) {
+    this.reportFilter.tags.splice(this.reportFilter.tags.indexOf(tag), 1);
   }
 
   launchExtraction() {

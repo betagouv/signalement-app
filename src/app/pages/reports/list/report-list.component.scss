@@ -9,16 +9,16 @@ form {
   width: 97% !important;
   max-width: 100%;
 
-  .text-right {
-    padding-right: 0;
-  }
+  .badge {
+    font-size: 10px;
+    padding: 0.25em 1em;
 
-  label {
-    font-size: 16px;
-    line-height: 43px;
-    margin-bottom: 0;
+    .material-icons {
+      font-size: 10px;
+      margin-left: 1em;
+      margin: 0;
+    }
   }
-
 }
 
 .table-responsive {
@@ -129,6 +129,8 @@ form {
 }
 
 .btn-group[dropdown] {
+  display: block;
+
   .dropdown-toggle {
     border-color: $grey;
     background-color: $white;

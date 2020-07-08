@@ -196,9 +196,9 @@ export class ReportService {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
 
-    ['siret', 'status', 'category', 'details', 'email', 'hasCompany'].forEach(filterName => {
-      if (reportFilter[filterName]) {
-        httpParams = httpParams.append(filterName, (reportFilter[filterName] as string).trim());
+    ['siret', 'status', 'category', 'details', 'email', 'hasCompany', 'tags'].forEach(filterName => {
+      if (reportFilter[filterName] && reportFilter[filterName].length) {
+        httpParams = httpParams.append(filterName, (reportFilter[filterName].toString()).trim());
       }
     });
     return this.serviceUtils.getAuthHeaders().pipe(
@@ -229,11 +229,12 @@ export class ReportService {
         if (reportFilter.period && reportFilter.period[1]) {
           params['end'] = moment(reportFilter.period[1]).format('YYYY-MM-DD');
         }
-        ['siret', 'status', 'category', 'details'].forEach(filterName => {
+        ['siret', 'status', 'category', 'details', 'hasCompany'].forEach(filterName => {
           if (reportFilter[filterName]) {
             params[filterName] = (reportFilter[filterName] as string).trim();
           }
         });
+        params['tags'] = (reportFilter.tags || []);
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
           params,

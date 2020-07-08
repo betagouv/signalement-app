@@ -41,7 +41,8 @@ form {
 input,
 input.form-control,
 textarea,
-select {
+select,
+select.form-control {
   width: 100%;
   outline: none;
   padding: 8px 14px;
@@ -51,7 +52,6 @@ select {
   color: #1c1c1c;
   border-radius: 3px;
   border: 1px solid #adb9c9;
-  background: #fff;
   vertical-align: middle;
   position: relative;
 }
