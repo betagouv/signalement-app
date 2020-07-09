@@ -102,7 +102,7 @@ export const Illustrations = [
   { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'illustrations/consumer.png' },
   { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'illustrations/report.png' },
   { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'illustrations/company.png' },
-  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'illustrations/dgccrf.png' },
+  { title: 'La répression des fraudes intervient si c’est nécessaire.', picture: 'illustrations/dgccrf.png' },
 ];
 
 @Component({
