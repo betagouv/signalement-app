@@ -252,6 +252,7 @@ export class ReportService {
       creationDate: new Date(report.creationDate),
       category: report.category,
       subcategories: report.subcategories,
+      tags: report.tags,
       detailInputValues: report.details,
       company: Object.assign(<Company>{
         name: report.companyName,
