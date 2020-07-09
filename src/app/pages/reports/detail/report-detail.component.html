@@ -170,43 +170,29 @@
               </div>
               <div class="pt-1">
                 <small class="text-darker-grey">
-                  <i>{{report.creationDate | date : 'mediumDate'}}</i>
+                  <i>{{report.creationDate | date : 'medium'}}</i>
                 </small>
                 <br />
                 Signalement du consommateur
               </div>
               <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
                 <div class="col-12" *ngFor="let event of events; let eventIndex = index">
-                  <ng-container *ngIf="event.data.details && event.data.details.description; else noDescription">
-                    <div class="pt-2">
-                      <small class="text-darker-grey">
-                        <i>{{event.data.creationDate | date : 'mediumDate'}}</i>
-                      </small>
-                      <ng-template *ngTemplateOutlet="eventUser; context: {$implicit: event}"></ng-template>
-                      <br />
-                      <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
-                        <span class="collapsed-icon">&#43;</span>
-                        <span class="uncollapsed-icon">&#8722;</span>
-                        {{event.data.action.value}}
-                      </a>
-                    </div>
-                    <div class="collapse pl-3 pb-3" id="collapse{{eventIndex}}">
-                      {{event.data.details.description}}
-                    </div>
-                  </ng-container>
-                  <ng-template #noDescription>
-                    <div class="pt-2">
-                      <small class="text-darker-grey">
-                        <i>{{event.data.creationDate | date : 'mediumDate'}}</i>
-                      </small>
-                      <ng-template *ngTemplateOutlet="eventUser; context: {$implicit: event}"></ng-template>
-                      <br />
+                  <div class="pt-2">
+                    <small class="text-darker-grey">
+                      <i>{{event.data.creationDate | date : 'medium'}}</i>
+                    </small>
+                    <br />
+                    <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
+                      <span class="collapsed-icon">&#43;</span>
+                      <span class="uncollapsed-icon">&#8722;</span>
                       {{event.data.action.value}}
-                    </div>
-                  </ng-template>
-                  <ng-template #eventUser let-event>
-                    <small class="text-darker-grey" *ngIf="event.user"> <br />[{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})]</small>
-                  </ng-template>
+                    </a>
+                  </div>
+                  <div class="collapse pl-3" id="collapse{{eventIndex}}">
+                    <small class="text-darker-grey" *ngIf="event.user">[{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})]</small>
+                    <br />
+                    {{event.data.details?.description}}
+                  </div>
                 </div>
               </div>
               <ng-container *appRole="[roles.Pro]">
