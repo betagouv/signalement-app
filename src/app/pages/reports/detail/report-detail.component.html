@@ -164,7 +164,7 @@
               </ng-template>
             </ng-container>
 
-            <ng-container>
+            <ng-container *appRole="[roles.Pro]">
               <div class="text-primary font-weight-bold pt-4">
                 Historique
               </div>
@@ -175,45 +175,24 @@
                 <br />
                 Signalement du consommateur
               </div>
-              <div class="row" *appRole="[roles.Admin, roles.DGCCRF]">
-                <div class="col-12" *ngFor="let event of events; let eventIndex = index">
-                  <div class="pt-2">
-                    <small class="text-darker-grey">
-                      <i>{{event.data.creationDate | date : 'medium'}}</i>
-                    </small>
-                    <br />
-                    <a data-toggle="collapse" class="collapsable collapsed" href="#collapse{{eventIndex}}">
-                      <span class="collapsed-icon">&#43;</span>
-                      <span class="uncollapsed-icon">&#8722;</span>
-                      {{event.data.action.value}}
-                    </a>
-                  </div>
-                  <div class="collapse pl-3" id="collapse{{eventIndex}}">
-                    <small class="text-darker-grey" *ngIf="event.user">[{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})]</small>
-                    <br />
-                    {{event.data.details?.description}}
-                  </div>
-                </div>
+
+              <div class="pt-2" *ngIf="getEvent(eventActionValues.FirstVisit)">
+                <small class="text-darker-grey">
+                  <i>{{getEvent(eventActionValues.FirstVisit).data.creationDate | date : 'mediumDate'}}</i>
+                </small>
+                <br />
+                Première consultation
               </div>
-              <ng-container *appRole="[roles.Pro]">
 
-                <div class="pt-2" *ngIf="getEvent(eventActionValues.FirstVisit)">
-                  <small class="text-darker-grey">
-                    <i>{{getEvent(eventActionValues.FirstVisit).data.creationDate | date : 'mediumDate'}}</i>
-                  </small>
-                  <br />
-                  Première consultation
-                </div>
-
-                <div class="pt-2" *ngIf="getReportResponse()">
-                  <small class="text-darker-grey">
-                    <i>{{getEvent(eventActionValues.ReportResponse).data.creationDate | date : 'mediumDate'}}</i>
-                  </small>
-                  <br />
-                  Réponse au signalement
-                </div>
-              </ng-container>
+              <div class="pt-2" *ngIf="getReportResponse()">
+                <small class="text-darker-grey">
+                  <i>{{getEvent(eventActionValues.ReportResponse).data.creationDate | date : 'mediumDate'}}</i>
+                </small>
+                <br />
+                Réponse au signalement
+              </div>
             </ng-container>
+
           </div>
           <div class="col-12 order-first offset-sm-1 col-sm-8 order-sm-last">
             <div class="float-sm-right">
@@ -582,6 +561,56 @@
             </ng-container>
           </div>
         </div>
+
+        <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+          <hr class="mt-5"/>
+
+          <div class="text-primary font-weight-bold pt-3">
+            Historique du signalement
+          </div>
+          <div class="row pt-1">
+            <div class="col-2">
+              <small class="text-darker-grey">
+                <i>{{report.creationDate | date : 'medium'}}</i>
+              </small>
+            </div>
+            <div class="col-10">
+              Signalement du consommateur
+            </div>
+          </div>
+          <ng-template *ngTemplateOutlet="eventList; context: {$implicit: events, collapseId: 'collapseEvents'}"></ng-template>
+
+          <ng-container *ngIf="report.company.siret">
+            <div class="text-primary font-weight-bold pt-3">
+              Historique de l'entreprise
+            </div>
+            <ng-template *ngTemplateOutlet="eventList; context: {$implicit: companyEvents, collapseId: 'collapseCompanyEvents'}"></ng-template>
+          </ng-container>
+
+          <ng-template #eventList let-events let-collapseId="collapseId">
+            <div class="row pt-2" *ngFor="let event of events; let eventIndex = index">
+              <div class="col-2">
+                <small class="text-darker-grey">
+                  <i>{{event.data.creationDate | date : 'medium'}}</i>
+                </small>
+              </div>
+              <div class="col-10">
+                <a data-toggle="collapse" class="collapsable collapsed" href="#{{collapseId}}{{eventIndex}}">
+                  {{event.data.action.value}}
+                  <i class="material-icons collapsed-icon">keyboard_arrow_right</i>
+                  <i class="material-icons uncollapsed-icon">keyboard_arrow_down</i>
+                </a>
+                <div class="collapse" id="{{collapseId}}{{eventIndex}}">
+                  <small class="text-darker-grey" *ngIf="event.user">{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})</small>
+                  <div>
+                    {{event.data.details?.description}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+
       </ng-container>
 
       <ngx-loading [show]="!report && loading"></ngx-loading>
