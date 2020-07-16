@@ -53,7 +53,7 @@
     "http-status-codes": "^1.4.0",
     "jquery": "^3.5.1",
     "js-yaml": "^3.13.1",
-    "lodash": ">=4.17.13",
+    "lodash": ">=4.17.19",
     "moment": "^2.24.0",
     "ng2-completer": "^3.0.3",
     "ngx-bootstrap": "^5.2.0",
