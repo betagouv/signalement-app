@@ -61,7 +61,7 @@ export class SubcategoryComponent implements OnChanges {
   scrollToElement() {
     if (isPlatformBrowser(this.platformId) && !this.hasSubSubcategory() && this.level > 1) {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      if (Utils.isSmallerThanDesktop(this.platformId) && rect.height < window.innerHeight) {
+      if (Utils.isSmallerThanDesktop(this.platformId) && rect.height < window.innerHeight - 110) {
        this.renderer.setStyle(this.elementRef.nativeElement.children[0], 'margin-bottom', `${window.innerHeight - rect.height - 110}px`);
       }
       jQuery('html, body').animate({
