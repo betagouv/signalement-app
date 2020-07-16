@@ -356,16 +356,10 @@ export class ReportDetailComponent implements OnInit {
           details: this.detailCtrl.value,
           fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
         })
-      ).pipe(
-        switchMap(() => {
-          return this.eventService.getEvents(this.reportId);
-        })
       ).subscribe(
         events => {
-          this.events = events;
-          this.report.uploadedFiles = [...this.report.uploadedFiles, ...this.uploadedFiles.filter(file => file.id)];
-          this.loading = false;
           this.responseSuccess = true;
+          this.loadReport();
           this.actionForm = undefined;
         },
         err => {

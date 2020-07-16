@@ -580,7 +580,7 @@
           </div>
           <ng-template *ngTemplateOutlet="eventList; context: {$implicit: events, collapseId: 'collapseEvents'}"></ng-template>
 
-          <ng-container *ngIf="report.company.siret && companyEvents.length">
+          <ng-container *ngIf="report.company.siret && companyEvents?.length">
             <div class="text-primary font-weight-bold pt-3">
               Historique de l'entreprise
             </div>
