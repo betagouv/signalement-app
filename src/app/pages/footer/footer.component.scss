@@ -11,7 +11,6 @@
   }
 
   .container {
-    display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
   }
@@ -35,7 +34,8 @@
 
     li {
       display: inline;
-      margin-right: 1em;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
     }
 
     .icon {
