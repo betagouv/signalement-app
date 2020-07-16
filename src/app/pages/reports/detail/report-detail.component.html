@@ -580,7 +580,7 @@
           </div>
           <ng-template *ngTemplateOutlet="eventList; context: {$implicit: events, collapseId: 'collapseEvents'}"></ng-template>
 
-          <ng-container *ngIf="report.company.siret">
+          <ng-container *ngIf="report.company.siret && companyEvents.length">
             <div class="text-primary font-weight-bold pt-3">
               Historique de l'entreprise
             </div>
@@ -595,11 +595,14 @@
                 </small>
               </div>
               <div class="col-10">
-                <a data-toggle="collapse" class="collapsable collapsed" href="#{{collapseId}}{{eventIndex}}">
+                <a data-toggle="collapse" class="collapsable collapsed" href="#{{collapseId}}{{eventIndex}}" *ngIf="event.data.details?.description || event.user; else noDetails">
                   {{event.data.action.value}}
                   <i class="material-icons collapsed-icon">keyboard_arrow_right</i>
                   <i class="material-icons uncollapsed-icon">keyboard_arrow_down</i>
                 </a>
+                <ng-template #noDetails>
+                  {{event.data.action.value}}
+                </ng-template>
                 <div class="collapse" id="{{collapseId}}{{eventIndex}}">
                   <small class="text-darker-grey" *ngIf="event.user">{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})</small>
                   <div>
