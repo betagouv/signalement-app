@@ -16,6 +16,9 @@
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="material-icons text-primary">menu</i>
     </button>
+    <div class="d-lg-none" *ngIf="user">
+      <app-account-menu></app-account-menu>
+    </div>
     <div class="collapse navbar-collapse" id="navbarContent" #navbarContent>
       <ul class="navbar-nav ml-lg-auto">
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">

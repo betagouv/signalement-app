@@ -44,12 +44,9 @@
     <div class="text-center container d-lg-none">
 
       <div class="d-block d-lg-none button-pro text-right mb-2">
-        <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user; else userMenu">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user">
           Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
         </button>
-        <ng-template #userMenu>
-          <app-account-menu></app-account-menu>
-        </ng-template>
       </div>
 
       <h1 class="tmb-4 d-none d-md-block">Signaler un problème à la répression des fraudes <br/>en toute transparence avec l'entreprise !</h1>
