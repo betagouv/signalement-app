@@ -12,32 +12,32 @@
           </ng-template>
           <div class="steps" *ngIf="step !== 'Information'">
             <ng-container  *ngIf="getStepNumber(steps.Problem) > 0">
-              <div class="{{getStepClass(steps.Problem)}}" (click)="goToStep(steps.Problem)">
+              <div class="{{getStepClass(steps.Problem)}}" (click)="goToStep(steps.Problem)" [attr.aria-current]="step === steps.Problem">
                 <span class="step-number" [innerHTML]="displayedStep(steps.Problem)"></span>
                 <span class="d-lg-none">Etape {{getStepNumber(steps.Problem)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
                 <span>Le problème</span>
               </div>
               <img src="/assets/images/icon_next.png" alt=""/>
             </ng-container>
-            <div class="{{getStepClass(steps.Details)}}" (click)="goToStep(steps.Details)">
+            <div class="{{getStepClass(steps.Details)}}" (click)="goToStep(steps.Details)" [attr.aria-current]="step === steps.Details">
               <span class="step-number" [innerHTML]="displayedStep(steps.Details)"></span>
               <span class="d-lg-none">Etape {{getStepNumber(steps.Details)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>La description</span>
             </div>
             <img src="/assets/images/icon_next.png" alt=""/>
-            <div class="{{getStepClass(steps.Company)}}" (click)="goToStep(steps.Company)">
+            <div class="{{getStepClass(steps.Company)}}" (click)="goToStep(steps.Company)" [attr.aria-current]="step === steps.Company">
               <span class="step-number" [innerHTML]="displayedStep(steps.Company)"></span>
               <span class="d-lg-none">Etape {{getStepNumber(steps.Company)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>L'entreprise</span>
             </div>
             <img src="/assets/images/icon_next.png" alt=""/>
-            <div class="{{getStepClass(steps.Consumer)}}" (click)="goToStep(steps.Consumer)">
+            <div class="{{getStepClass(steps.Consumer)}}" (click)="goToStep(steps.Consumer)" [attr.aria-current]="step === steps.Consumer">
               <span class="step-number" [innerHTML]="displayedStep(steps.Consumer)"></span>
               <span class="d-lg-none">Etape {{getStepNumber(steps.Consumer)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>Le consommateur</span>
             </div>
             <img src="/assets/images/icon_next.png" alt=""/>
-            <div class="{{getStepClass('Confirmation')}}" (click)="goToStep('Confirmation')">
+            <div class="{{getStepClass('Confirmation')}}" (click)="goToStep('Confirmation')" [attr.aria-current]="step === steps.Confirmation">
               <span class="step-number" [innerHTML]="displayedStep('Confirmation')"></span>
               <span class="d-lg-none">Etape {{getStepNumber(steps.Confirmation)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>Confirmation</span>
