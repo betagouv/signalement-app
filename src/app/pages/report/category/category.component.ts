@@ -8,6 +8,8 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import pages from '../../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
+import { User } from '../../../model/AuthUser';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-category',
@@ -18,6 +20,7 @@ export class CategoryComponent implements OnInit {
 
   illustrations = Illustrations;
 
+  user: User;
   step: Step;
   draftReport: DraftReport;
 
@@ -29,6 +32,7 @@ export class CategoryComponent implements OnInit {
   constructor(private titleService: Title,
               private meta: Meta,
               private anomalyService: AnomalyService,
+              private authenticationService: AuthenticationService,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) { }
@@ -36,6 +40,10 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pages.default.title);
     this.meta.updateTag({ name: 'description', content: pages.default.description });
+
+    this.authenticationService.user.subscribe(user => {
+      this.user = user;
+    });
 
     this.step = Step.Category;
     this.reportStorageService.retrieveReportInProgress()
@@ -102,7 +110,7 @@ export const Illustrations = [
   { title: 'Vous avez rencontré un problème<br/>avec une entreprise&#160;?', picture: 'illustrations/consumer.png' },
   { title: 'Faites un signalement<br/>avec SignalConso.', picture: 'illustrations/report.png' },
   { title: `L'entreprise est prévenue<br/>et peut intervenir.`, picture: 'illustrations/company.png' },
-  { title: 'La répression des fraudes intervient<br/>si c’est nécessaire.', picture: 'illustrations/dgccrf.png' },
+  { title: 'La répression des fraudes intervient si nécessaire.', picture: 'illustrations/dgccrf.png' },
 ];
 
 @Component({

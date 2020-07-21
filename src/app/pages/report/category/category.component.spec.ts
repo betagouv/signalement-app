@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
 import { AlertModule } from 'ngx-bootstrap';
+import { HeaderModule } from '../../header/header.module';
 
 describe('CategoryComponent', () => {
 
@@ -51,6 +52,7 @@ describe('CategoryComponent', () => {
         RouterTestingModule,
         AlertModule.forRoot(),
         Angulartics2RouterlessModule.forRoot(),
+        HeaderModule
       ],
       providers: [
         AnomalyService,
