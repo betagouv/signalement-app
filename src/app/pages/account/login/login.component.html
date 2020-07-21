@@ -8,18 +8,18 @@
           <label for="login">
             Email
           </label>
-          <span *ngIf="showErrors && loginCtrl.hasError('required')" class="text-warning">
+          <div *ngIf="showErrors && loginCtrl.hasError('required')" class="text-warning">
             <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre email.
-          </span>
+          </div>
           <input [formControl]="loginCtrl" type="text" class="form-control" id="login" placeholder="Email">
         </div>
         <div class="form-group">
-          <label for="password" [class]="hasError(passwordCtrl) ? 'error' : ''">
+          <label for="password">
             Mot de passe
           </label>
-          <span *ngIf="showErrors && passwordCtrl.hasError('required')" class="text-warning">
+          <div *ngIf="showErrors && passwordCtrl.hasError('required')" class="text-warning">
             <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre mot de passe.
-          </span>
+          </div>
           <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
         </div>
         <div class="notification error mt-3" *ngIf="authenticationError">

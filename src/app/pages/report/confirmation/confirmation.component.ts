@@ -18,6 +18,7 @@ import { CompanyKinds } from '../../../model/Anomaly';
 export class ConfirmationComponent implements OnInit {
 
   step: Step;
+  steps = Step;
   draftReport: DraftReport;
   companyKinds = CompanyKinds;
 
@@ -79,6 +80,10 @@ export class ConfirmationComponent implements OnInit {
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
+  }
+
+  goToStep(step: string) {
+    this.reportRouterService.routeToStep(Step[step]);
   }
 
 }
