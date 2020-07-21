@@ -42,7 +42,7 @@
               <span class="d-lg-none">Etape {{getStepNumber(steps.Confirmation)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>Confirmation</span>
             </div>
-            <div class="d-lg-none pointer link mt-2" (click)="back()" (keydown.enter)="back()" alt="Retour à l'étape précédente" tabindex="0" *ngIf="getStepNumber(step) > 1">
+            <div class="d-lg-none pointer link text-dark mt-2" (click)="back()" (keydown.enter)="back()" alt="Retour à l'étape précédente" tabindex="0" *ngIf="getStepNumber(step) > 1">
               <i class="material-icons">arrow_back</i>Retour
             </div>
           </div>
