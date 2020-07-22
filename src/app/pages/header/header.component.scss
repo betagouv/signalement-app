@@ -8,22 +8,36 @@ header {
 
     @media #{$smaller-than-desktop} {
       height: 20px;
-      margin: 20px 0 20px 15px;
+      margin: 15px 0 15px 15px;
     }
   }
 
   .brand > img {
     height: 80px;
     margin-left: 40px;
+  }
 
-    @media #{$smaller-than-large-desktop} {
+  @media #{$smaller-than-large-desktop} {
+    .brand > img {
       height: 64px;
       margin-top: 8px;
     }
+  }
 
-    @media #{$smaller-than-desktop} {
+  @media #{$smaller-than-desktop} {
+
+    & {
+      position: fixed;
+      top: 0;
+      z-index: 1;
+      width: 100%;
+      background-color: $white;
+      border-bottom: 1px solid $light-grey;
+    }
+
+    .brand > img {
       height: 36px;
-      margin: 12px 0 12px 22px;
+      margin: 7px 0 7px 22px;
     }
   }
 
@@ -61,20 +75,18 @@ header {
     }
 
     @media #{$smaller-than-desktop} {
-      padding: 10px;
-      background-color: #407CA8;
 
-      .navbar-toggler {
-        color: $white;
-        padding: 0;
-      }
+      position: fixed;
+      right: 0;
+      top: 0;
+      padding: 10px;
+      height: 50px;
 
       .navbar-collapse{
 
         z-index: 2;
 
         .navbar-nav {
-          width: fit-content;
           border: 1px solid rgba(28, 28, 28, 0.15);
           border-radius: 0.25rem;
         }
@@ -89,8 +101,8 @@ header {
         }
 
         .nav-link {
-          font-size: 16px;
-          padding: 4px 24px;
+          font-size: 18px;
+          padding: 10px 24px;
 
           &:hover {
             background-color: $secondary;
@@ -119,10 +131,6 @@ header {
           height: 12px;
           margin-left: 6px;
         }
-      }
-
-      .position-absolute {
-        right: 0px;
       }
     }
   }

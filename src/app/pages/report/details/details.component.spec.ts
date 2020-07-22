@@ -16,8 +16,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
 import { genDraftReport, oneBoolean } from '../../../../../test/fixtures.spec';
 
 describe('DetailsComponent', () => {
@@ -78,16 +76,7 @@ describe('DetailsComponent', () => {
         NgxLoadingModule,
         NoopAnimationsModule,
         ComponentsModule,
-        PipesModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test2 ],
-              scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test2]: 0 }
-            }
-          ]
-        )
+        PipesModule
       ],
       providers: []
     })
@@ -111,7 +100,7 @@ describe('DetailsComponent', () => {
 
     it('should request the user if he is an employee of the company or not', () => {
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h2').textContent).toEqual(`Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler ?`);
+      expect(nativeElement.querySelector('h2').textContent).toEqual(`Travaillez-vous dans l'entreprise que vous souhaitez signaler ?`);
       expect(nativeElement.querySelectorAll('button')[0].textContent.trim()).toEqual('Oui');
       expect(nativeElement.querySelectorAll('button')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
       expect(nativeElement.querySelector('form')).toBeNull();

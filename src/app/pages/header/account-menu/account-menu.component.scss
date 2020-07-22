@@ -20,7 +20,7 @@
 
   background-color: $secondary;
 
-  .item, .dropdown-item {
+  .dropdown-item {
     color: $white;
 
     &:hover {
@@ -29,6 +29,7 @@
   }
 
   .item {
+    color: $white;
     padding: .25rem 1.5rem;
     display: block;
   }
@@ -41,12 +42,10 @@
     height: 29px;
     font-size: 12px;
     padding: 0 16px;
-    margin-top: 0px;
-    margin-right: 10px;
+    margin: 0px;
 
     img {
       height: 12px;
-      margin-left: 6px;
     }
   }
 }

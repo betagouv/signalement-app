@@ -5,6 +5,7 @@ import { CompanySearchResult } from '../src/app/model/CompanySearchResult';
 import { Subcategory } from '../src/app/model/Anomaly';
 import { Company } from '../src/app/model/Company';
 import anomalies from '../src/assets/data/anomalies.json';
+import { PaginatedData } from '../src/app/model/PaginatedData';
 
 const randomstring = require('randomstring');
 
@@ -36,7 +37,7 @@ export function genEmail() {
 export const lastNames = ['Doe', 'Durand', 'Dupont'];
 export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'Fanny', 'Gérard'];
 export const roles = [Roles.Admin, Roles.Pro, Roles.DGCCRF];
-export const status = [ReportStatus.ToProcess, ReportStatus.ClosedForPro];
+export const status = [ReportStatus.InProgress, ReportStatus.ClosedForPro];
 
 export function genUserAccess() {
   return {
@@ -106,6 +107,14 @@ export function genReport() {
     contactAgreement: oneBoolean,
     creationDate: new Date(),
     status: oneOf(status)
+  });
+}
+
+export function genPaginatedReports(length: number) {
+  return Object.assign(new PaginatedData<Report>(), {
+    totalCount: length,
+    hasNextPage: false,
+    entities: [...Array.from(Array(length).keys())].map(a => genReport())
   });
 }
 

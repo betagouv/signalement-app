@@ -45,8 +45,9 @@
   }
 
   &.success {
+    border: none;
     background: $theme-success-bg;
-    border-color: $theme-success-border;
+    color: $green;
   }
 
   &.warning {
@@ -55,8 +56,8 @@
   }
 
   &.error {
-    background-color: $theme-error-bg;
-    border: $theme-error-border;
+    border-color: $theme-border-lighter;
+    border-left: 7px solid $theme-error-border;
   }
 
   &:before {

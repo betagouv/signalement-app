@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   permissions = Permissions;
   user: User;
 
-  navItems = NavItems
+  navItems = NavItems;
   activeItem: NavItems;
 
   constructor(private authenticationService: AuthenticationService,
