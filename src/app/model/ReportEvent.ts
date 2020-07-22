@@ -1,10 +1,6 @@
 export class ReportEvent {
   data: Event;
   user?: EventUser;
-
-  display() {
-    return `Le {{event.data.creationDate | date : constants.DateTimeFormat}} : {{event.data.action.value}}`
-  }
 }
 
 export class Event {

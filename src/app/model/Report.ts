@@ -48,7 +48,7 @@ export const StatusColor = new Map<string, string>([
   [ReportStatus.ClosedForPro, '#daf5e7'],
   [ReportStatus.Ignored, '#c9d3df'],
   [ReportStatus.NotConcerned, '#c9d3df'],
-])
+]);
 
 export class DraftReport {
   category: string;
