@@ -7,7 +7,7 @@
   <div class="container text-center">
     <img src="/assets/images/logo-signalconso-white.svg" class="pb-4 d-none d-lg-inline-block" alt="" />
     <h1>
-      Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
+      Signaler un problème à la répression des fraudes<br/> en toute transparence avec l'entreprise !
     </h1>
   </div>
 </div>
@@ -151,9 +151,9 @@
       </div>
 
       <ng-container *ngIf="!showSecondaryCategories">
-        <div id="all-categories-link" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
+        <button id="all-categories-link" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
           Voir toutes les catégories
-        </div>
+        </button>
       </ng-container>
 
     </div>

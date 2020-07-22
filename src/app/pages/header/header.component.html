@@ -5,7 +5,7 @@
       <img src="/assets/images/logo-signalconso.png" alt="Logo SignalConso / Retour à la page d'accueil" />
     </a>
   </div>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Menu principal">
     <div class="d-none d-lg-block">
       <img src="/assets/images/logo-marianne.png" alt="Logo marianne" />
       <a id="logo" class="navbar-brand brand" routerLink="/">
@@ -13,7 +13,7 @@
       </a>
     </div>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent"
-            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Plier / déplier le menu principal">
       <i class="material-icons text-primary">menu</i>
     </button>
     <div class="d-lg-none" *ngIf="user">
