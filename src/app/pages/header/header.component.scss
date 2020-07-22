@@ -5,6 +5,7 @@ header {
 
   img.gov {
     vertical-align: top;
+    height: 148px;
 
     @media #{$smaller-than-desktop} {
       height: 20px;
@@ -13,13 +14,13 @@ header {
   }
 
   .brand > img {
-    height: 80px;
+    height: 76px;
     margin-left: 40px;
   }
 
   @media #{$smaller-than-large-desktop} {
     .brand > img {
-      height: 64px;
+      height: 50px;
       margin-top: 8px;
     }
   }
@@ -56,7 +57,7 @@ header {
       }
 
       @media #{$smaller-than-large-desktop} {
-        padding: 13px;
+        padding: 9px;
       }
     }
 
