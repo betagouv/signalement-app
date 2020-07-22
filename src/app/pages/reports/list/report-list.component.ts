@@ -79,6 +79,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
     this.siretUrlParam = paramMap.get('siret');
     if (this.siretUrlParam) {
+      this.reportFilter = new ReportFilter();
       this.reportFilter.siret = this.siretUrlParam;
     }
 
@@ -103,7 +104,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   submitFilters() {
-    this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
+    this.location.replaceState(this.router.routerState.snapshot.url.replace(`/siret/${this.siretUrlParam}`, '').split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
     this.initPagination();
     this.reportFilter.siret = this.reportFilter.siret ? this.reportFilter.siret.replace(/\s/g, '') : '';
     this.loadReports(1);

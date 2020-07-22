@@ -1,15 +1,10 @@
 <header role="banner" id="banner" tabindex="-1" #banner>
-  <div class="row d-lg-none mr-0 ml-0">
-    <div class="col-3 text-left">
-      <img id="marianne" src="/assets/images/logo-marianne.png" alt="Logo marianne" />
-    </div>
-    <div class="col-6 text-center">
-      <a class="brand" routerLink="/">
-        <img src="/assets/images/logo-signalconso.png" alt="Retour à la page sommaire" />
-      </a>
-    </div>
+  <div class="d-lg-none">
+    <img id="marianne" src="/assets/images/logo-marianne.png" alt="Logo marianne" />
+    <a class="brand" routerLink="/">
+      <img src="/assets/images/logo-signalconso.png" alt="Retour à la page sommaire" />
+    </a>
   </div>
-
   <nav class="navbar navbar-expand-lg">
     <div class="d-none d-lg-block">
       <img src="/assets/images/logo-marianne.png" alt="Logo marianne" />
@@ -17,10 +12,13 @@
         <img src="/assets/images/logo-signalconso.png" alt="Retour à la page sommaire" />
       </a>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="material-icons">menu</i><span>MENU</span>
+      <i class="material-icons text-primary">menu</i>
     </button>
+    <div class="d-lg-none" *ngIf="user">
+      <app-account-menu></app-account-menu>
+    </div>
     <div class="collapse navbar-collapse" id="navbarContent" #navbarContent>
       <ul class="navbar-nav ml-lg-auto">
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
@@ -66,14 +64,6 @@
           </li>
         </ng-template>
       </ul>
-    </div>
-    <div class="d-block d-lg-none position-absolute">
-      <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user; else userMenu">
-        Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
-      </button>
-      <ng-template #userMenu>
-        <app-account-menu></app-account-menu>
-      </ng-template>
     </div>
   </nav>
 </header>
