@@ -53,6 +53,17 @@ export class EventService {
     );
   }
 
+  getCompanyEvents(siret: string) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<ReportEvent[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', siret, 'events']),
+          headers
+        );
+      })
+    );
+  }
+
   event2eventApi(event: Event, user: User) {
     return {
       reportId: event.reportId,
