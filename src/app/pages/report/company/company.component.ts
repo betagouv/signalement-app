@@ -209,7 +209,7 @@ export class CompanyComponent implements OnInit {
       CompanySearchEventNames.singleResult
     );
     this.companySearchResults = companySearchResult.companies;
-    this.scrollToElement(this.identResult);
+    this.scrollToElement(this.identResult.nativeElement);
   }
 
   treatCaseTooManyResults() {

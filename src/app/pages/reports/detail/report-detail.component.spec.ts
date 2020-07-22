@@ -131,6 +131,7 @@ describe('ReportDetailComponent', () => {
 
         eventService = TestBed.get(EventService);
         spyOn(eventService, 'getEvents').and.returnValue(of([answerEventFixture]));
+        spyOn(eventService, 'getCompanyEvents').and.returnValue(of([]));
 
         fixture = TestBed.createComponent(ReportDetailComponent);
         component = fixture.componentInstance;
