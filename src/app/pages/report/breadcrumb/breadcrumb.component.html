@@ -1,4 +1,4 @@
-<section class="section-small section-lighter-grey pb-sm-3" role="navigation">
+<nav class="section-small section-lighter-grey pb-sm-3" role="navigation">
   <div class="container">
     <div class="row">
       <div class="d-none d-lg-block col-sm-1 text-right">
@@ -12,26 +12,30 @@
           </ng-template>
           <div class="steps" *ngIf="step !== 'Information'">
             <ng-container  *ngIf="getStepNumber(steps.Problem) > 0">
-              <div class="{{getStepClass(steps.Problem)}}" (click)="goToStep(steps.Problem)" [attr.aria-current]="step === steps.Problem">
+              <div class="{{getStepClass(steps.Problem)}}" (click)="goToStep(steps.Problem)"
+                   [attr.aria-current]="step === steps.Problem" [attr.aria-label]="isStepAchieved(steps.Problem) ? 'Etape le problème validée' : ''">
                 <span class="step-number" [innerHTML]="displayedStep(steps.Problem)"></span>
                 <span class="d-lg-none">Etape {{getStepNumber(steps.Problem)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
                 <span>Le problème</span>
               </div>
               <img src="/assets/images/icon_next.png" alt=""/>
             </ng-container>
-            <div class="{{getStepClass(steps.Details)}}" (click)="goToStep(steps.Details)" [attr.aria-current]="step === steps.Details">
+            <div class="{{getStepClass(steps.Details)}}" (click)="goToStep(steps.Details)"
+                 [attr.aria-current]="step === steps.Details" [attr.aria-label]="isStepAchieved(steps.Details) ? 'Etape la description validée' : ''">
               <span class="step-number" [innerHTML]="displayedStep(steps.Details)"></span>
               <span class="d-lg-none">Etape {{getStepNumber(steps.Details)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>La description</span>
             </div>
             <img src="/assets/images/icon_next.png" alt=""/>
-            <div class="{{getStepClass(steps.Company)}}" (click)="goToStep(steps.Company)" [attr.aria-current]="step === steps.Company">
+            <div class="{{getStepClass(steps.Company)}}" (click)="goToStep(steps.Company)"
+                 [attr.aria-current]="step === steps.Company" [attr.aria-label]="isStepAchieved(steps.Company) ? 'Etape l\'entreprise validée' : ''">
               <span class="step-number" [innerHTML]="displayedStep(steps.Company)"></span>
               <span class="d-lg-none">Etape {{getStepNumber(steps.Company)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>L'entreprise</span>
             </div>
             <img src="/assets/images/icon_next.png" alt=""/>
-            <div class="{{getStepClass(steps.Consumer)}}" (click)="goToStep(steps.Consumer)" [attr.aria-current]="step === steps.Consumer">
+            <div class="{{getStepClass(steps.Consumer)}}" (click)="goToStep(steps.Consumer)"
+                 [attr.aria-current]="step === steps.Consumer" [attr.aria-label]="isStepAchieved(steps.Consumer) ? 'Etape le consommateur validée' : ''">
               <span class="step-number" [innerHTML]="displayedStep(steps.Consumer)"></span>
               <span class="d-lg-none">Etape {{getStepNumber(steps.Consumer)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
               <span>Le consommateur</span>
@@ -50,4 +54,4 @@
       </div>
     </div>
   </div>
-</section>
+</nav>

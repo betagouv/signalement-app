@@ -131,31 +131,33 @@
         <hr />
 
         <form *ngIf="subscription">
-          <div class="row">
-            <div class="col-3">
-              <label>
-                <strong>Fréquence d'envoi du mail <span class="error">*</span></strong>
-              </label>
-            </div>
-            <div class="col-sm-7">
-              <div class="row pl-1">
-                <div class="col-2 col-sm-1 text-right pr-1">
-                  <input type="radio" [(ngModel)]="subscription.frequency" value="P1D" id="dailySubscription" name="frequency"/>
+          <fieldset>
+            <div class="row">
+              <div class="col-3">
+                <label>
+                  <strong>Fréquence d'envoi du mail <span class="error">*</span></strong>
+                </label>
+              </div>
+              <div class="col-sm-7">
+                <div class="row pl-1">
+                  <div class="col-2 col-sm-1 text-right pr-1">
+                    <input type="radio" [(ngModel)]="subscription.frequency" value="P1D" id="dailySubscription" name="frequency"/>
+                  </div>
+                  <div class="col-10 col-sm-11 pl-1">
+                    <label for="dailySubscription" class="label-inline pointer">Quotidienne</label>
+                  </div>
                 </div>
-                <div class="col-10 col-sm-11 pl-1">
-                  <label for="dailySubscription" class="label-inline pointer">Quotidienne</label>
+                <div class="row pl-1">
+                  <div class="col-2 col-sm-1 text-right pr-1">
+                    <input type="radio" [(ngModel)]="subscription.frequency" value="P7D" id="weeklySubscription" name="frequency"/>
+                  </div>
+                  <div class="col-10 col-sm-11 pl-1">
+                    <label for="weeklySubscription" class="label-inline pointer">Hebdomadaire</label>
+                  </div>
                 </div>
               </div>
-              <div class="row pl-1">
-                <div class="col-2 col-sm-1 text-right pr-1">
-                  <input type="radio" [(ngModel)]="subscription.frequency" value="P7D" id="weeklySubscription" name="frequency"/>
-                </div>
-                <div class="col-10 col-sm-11 pl-1">
-                  <label for="weeklySubscription" class="label-inline pointer">Hebdomadaire</label>
-                </div>
-              </div>
             </div>
-          </div>
+          </fieldset>
         </form>
 
         <hr />
