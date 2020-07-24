@@ -6,7 +6,6 @@ list:
     description: gel hydroalcoolique, masque, arnaque liée au COVID-19, distanciation physique...
     rank: 1
     icon: icon_virus.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/coronavirus.yml
   - category: Café / Restaurant
     categoryId: CR
@@ -14,7 +13,6 @@ list:
     description: bar, cafeteria, food truck...
     rank: 9
     icon: icon_rest.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/cafe-restaurant.yml
   - category: Achat / Magasin
     categoryId: MAG
@@ -22,7 +20,6 @@ list:
     description: supermarché, boulangerie, magasin de jouet...
     rank: 2
     icon: icon_store.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/achat-magasin.yml
   - category: Services aux particuliers
     categoryId: SERV
@@ -30,7 +27,6 @@ list:
     description: coiffeur, pressing, esthéticienne, aide à la personne...
     rank: 11
     icon: icon_service.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
   - category: Téléphonie / Eau-Gaz-Electricité
     categoryId: TEL
@@ -38,7 +34,6 @@ list:
     description: forfait téléphone, fournisseur d'accès, contrat gaz...
     rank: 12
     icon: icon_tel.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/telephonie-eau-gaz-electricite.yml
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
@@ -46,7 +41,6 @@ list:
     description: crédit, assurance
     rank: 13
     icon: icon_bank.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
   - category: Intoxication alimentaire
     categoryId: INTOX
@@ -81,7 +75,6 @@ list:
     description: dépannage, plombier, couvreur, pose de panneaux...
     rank: 107
     icon: icon_craft.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/travaux-renovation.yml
   - category: Voyage / Loisirs
     categoryId: VOY
@@ -89,7 +82,6 @@ list:
     description: voyage organisé, camping, concert, sport, avion, train, taxi
     rank: 16
     icon: icon_hobbies.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/voyage-loisirs.yml
   - category: Immobilier
     categoryId: IMM
@@ -97,7 +89,6 @@ list:
     description: location, agence immobiliere, syndicat de copropriété...
     rank: 105
     icon: icon_real_estate.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/immobilier.yml
   - category: Secteur de la santé
     categoryId: SANT
@@ -105,7 +96,6 @@ list:
     description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
     rank: 3
     icon: icon_health.png
-    companyKind: SIRET
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
   - category: Voiture / Véhicule
@@ -114,7 +104,6 @@ list:
     description: vente et réparation de voiture, location, auto-école...
     rank: 107
     icon: icon_transport.png
-    companyKind: SIRET
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories: !!import/single subcategories/voiture-vehicule.yml
   - category: Animaux
@@ -123,7 +112,6 @@ list:
     description: vétérinaire, aliment pour animaux, service de garde...
     rank: 108
     icon: icon_pet.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/animaux.yml
   - category: Démarches administratives
     categoryId: ADM
@@ -131,7 +119,6 @@ list:
     description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
     rank: 109
     icon: icon_marianne.png
-    companyKind: SIRET
     subcategories: !!import/single subcategories/demarches-administratives.yml
   - category: Travail au noir
     categoryId: TNOIR
