@@ -1,6 +1,7 @@
 - title: Taxi / VTC
   subcategories:
     - title: Taxi
+      companyKind: 'SIRET'
       example: Les taxis sont reconnaissables avec l'enseigne lumineuse sur le toit. Les voitures qui n'ont pas cette enseigne ne sont pas des "vrais" taxis.
       subcategories:
         - title: Refus de faire la course
@@ -199,6 +200,7 @@
             - title: Autre
               consumerActions: !!import/single ../common/actions/defaut.yml
     - title: VTC (voiture avec chauffeur)
+      companyKind: 'WEBSITE'
       example: Les VTC n'ont pas de signe particulier sur les voitures. Vous devez faire une réservation pour prendre un VTC. La plupart de ces réservations se font sur internet.
       subcategories:
         - title: Une remise ou une offre promotionnelle qui n'est pas appliquée ou qui est mensongère
