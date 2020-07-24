@@ -358,9 +358,9 @@
                       <hr class="d-sm-none" />
 
                       <fieldset class="form__group">
-                        <label class="text-dark-blue">
+                        <div class="text-dark-blue">
                           <strong>Pouvez-vous préciser votre réponse ?</strong>
-                        </label>
+                        </div>
                         <div *ngIf="showErrors && responseTypeCtrl.hasError('required')" class="text-warning">
                           <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
                         </div>
@@ -465,9 +465,9 @@
                     <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
 
                       <fieldset class="form__group">
-                        <label class="text-dark-blue">
+                        <div class="text-dark-blue label">
                           <strong>Pouvez-vous préciser ?</strong>
-                        </label>
+                        </div>
                         <div *ngIf="showErrors && actionTypeCtrl.hasError('required')" class="text-warning">
                           <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
                         </div>
