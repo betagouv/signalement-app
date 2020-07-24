@@ -3,7 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { AsyncFilesService } from '../../../services/asyncfiles.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { AsyncFile } from '../../../model/AsyncFile';
 import { Constants } from '../../../model/Constants';
 

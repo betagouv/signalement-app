@@ -3,9 +3,26 @@
 
 header {
 
+  img.gov {
+    vertical-align: top;
+    height: 148px;
+
+    @media #{$smaller-than-desktop} {
+      height: 20px;
+      margin: 15px 0 15px 15px;
+    }
+  }
+
   .brand > img {
-    height: 55px;
-    margin-left: 20px;
+    height: 76px;
+    margin-left: 40px;
+  }
+
+  @media #{$smaller-than-large-desktop} {
+    .brand > img {
+      height: 50px;
+      margin-top: 8px;
+    }
   }
 
   @media #{$smaller-than-desktop} {
@@ -19,20 +36,14 @@ header {
       border-bottom: 1px solid $light-grey;
     }
 
-    img#marianne {
-      height: 30px;
-      margin: 10px;
-    }
-
     .brand > img {
-      height: 46px;
-      margin: 2px;
+      height: 36px;
+      margin: 7px 0 7px 22px;
     }
   }
 
   .navbar {
-    height: 65px;
-    padding: 10px 22px;
+    padding: 30px;
 
     .nav-link {
       color: $secondary;
@@ -43,6 +54,10 @@ header {
 
       &:focus, &:hover, &.active {
         color: $blue;
+      }
+
+      @media #{$smaller-than-large-desktop} {
+        padding: 9px;
       }
     }
 

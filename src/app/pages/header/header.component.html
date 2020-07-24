@@ -1,19 +1,19 @@
 <header role="banner" id="banner" tabindex="-1" #banner>
   <div class="d-lg-none">
-    <img id="marianne" src="/assets/images/logo-marianne.png" alt="Logo marianne" />
+    <img class="gov" src="/assets/images/logo-marianne.svg" alt="Logo gouvernement" />
     <a class="brand" routerLink="/">
-      <img src="/assets/images/logo-signalconso.png" alt="Logo SignalConso / Retour à la page d'accueil" />
+      <img src="/assets/images/logo-signalconso.svg" alt="Logo SignalConso / Retour à la page d'accueil" />
     </a>
   </div>
   <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Menu principal">
     <div class="d-none d-lg-block">
-      <img src="/assets/images/logo-marianne.png" alt="Logo marianne" />
-      <a id="logo" class="navbar-brand brand" routerLink="/">
-        <img src="/assets/images/logo-signalconso.png" alt="Logo SignalConso / Retour à la page d'accueil" />
+      <img class="gov" src="/assets/images/gouv.svg" alt="Logo Gouvernement - Ministère de l'Economie, des Finances et de la Relance" />
+      <a class="navbar-brand brand" routerLink="/">
+        <img src="/assets/images/logo-signalconso.svg" alt="Logo SignalConso / Retour à la page d'accueil" />
       </a>
     </div>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent"
-            aria-controls="navbarContent" aria-expanded="false" aria-label="Plier / déplier le menu principal">
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Menu principal">
       <i class="material-icons text-primary">menu</i>
     </button>
     <div class="d-lg-none" *ngIf="user">
@@ -30,7 +30,7 @@
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
           <a class="nav-link" routerLink="/comment-ça-marche" [attr.aria-current]="activeItem === navItems.How"
              [ngClass]="activeItem === navItems.How ? 'active' : ''">
-            Comment ça marche ?
+            Comment ça marche ?
           </a>
         </li>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.Pro] else how">
