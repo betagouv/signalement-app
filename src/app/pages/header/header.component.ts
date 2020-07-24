@@ -19,7 +19,6 @@ enum NavItems {
 })
 export class HeaderComponent implements OnInit {
 
-  @ViewChild('banner', {static: false}) banner;
   @ViewChild('navbarContent', {static: false}) navbarContent: ElementRef<any>;
 
   roles = Roles;
@@ -39,9 +38,6 @@ export class HeaderComponent implements OnInit {
     });
 
     this.router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        this.banner.nativeElement.focus();
-      }
       if (event instanceof NavigationEnd) {
         this.activeItem = NavItems[Object.keys(NavItems).find(key => encodeURI(NavItems[key]) === event.url)];
       }

@@ -134,6 +134,12 @@
             </div>
           </div>
 
+          <div class="col-12 text-center" *ngIf="!showSecondaryCategories">
+            <button id="all-categories-link" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
+              Voir toutes les catégories
+            </button>
+          </div>
+
           <ng-container *ngIf="showSecondaryCategories">
             <div class="col-12 col-md-6 col-lg-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
               <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
@@ -151,12 +157,6 @@
           </ng-container>
         </div>
       </div>
-
-      <ng-container *ngIf="!showSecondaryCategories">
-        <button id="all-categories-link" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
-          Voir toutes les catégories
-        </button>
-      </ng-container>
 
     </div>
   </section>
