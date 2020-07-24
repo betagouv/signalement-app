@@ -399,6 +399,7 @@
             - Autre (à préciser)
       fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
 - title: Site/application de livraison de repas
+  companyKind: 'WEBSITE'
   example: 'Exemple : livraison non assurée, promotion non valide'
   subcategories:
     - title: problème avec la livraison
