@@ -37,4 +37,8 @@ export class AppComponent implements OnInit {
     });
   }
 
+  getCurrentNavigation() {
+    return this.router.getCurrentNavigation();
+  }
+
 }
