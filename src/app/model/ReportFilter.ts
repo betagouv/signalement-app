@@ -1,4 +1,5 @@
 import { Department } from './Region';
+import { Tag } from './Anomaly';
 
 export class ReportFilter {
   departments?: Department[];
@@ -10,4 +11,5 @@ export class ReportFilter {
   status?: string;
   details?: string;
   hasCompany?: boolean;
+  tags: Tag[] = [];
 }

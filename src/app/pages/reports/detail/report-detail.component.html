@@ -243,6 +243,9 @@
               <div class="pb-1" *ngFor="let subcategory of report.subcategories">
                 <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
               </div>
+              <div *appRole="[roles.Admin, roles.DGCCRF]">
+                <span *ngFor="let tag of report.tags" class="badge badge-success">{{tag}}</span>
+              </div>
               <h2 class="text-primary pt-4">Détail du signalement</h2>
               <div class="row">
                 <div class="col-12">
