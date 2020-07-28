@@ -7,7 +7,7 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportPaths } from '../../../services/report-router.service';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
@@ -16,7 +16,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { AutofocusDirective } from '../../../directives/auto-focus.directive';
+import { genDraftReport } from '../../../../../test/fixtures.spec';
 
 describe('ProblemComponent', () => {
 
@@ -24,9 +24,6 @@ describe('ProblemComponent', () => {
   let fixture: ComponentFixture<ProblemComponent>;
   let reportStorageService: ReportStorageService;
   let anomalyService: AnomalyService;
-
-  const reportFixture = new Report();
-  reportFixture.category = 'catégorie';
 
   const subcategoriesFixture = [
     Object.assign( new Subcategory(), { title: 'title1', description: 'description1' }),
@@ -42,7 +39,6 @@ describe('ProblemComponent', () => {
   ];
 
   const anomalyFixture = new Anomaly();
-  anomalyFixture.category = reportFixture.category;
   anomalyFixture.subcategories = subcategoriesFixture;
   anomalyFixture.path = 'myPath';
 
@@ -52,7 +48,6 @@ describe('ProblemComponent', () => {
         ProblemComponent,
         SubcategoryComponent,
         BreadcrumbComponent,
-        AutofocusDirective,
       ],
       imports: [
         FormsModule,
@@ -81,46 +76,22 @@ describe('ProblemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('on init', () => {
+  it('should display subcategories', () => {
+    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Category)));
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
 
-    it('shoud request the user if the problem concerns an internet purchase or not', () => {
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(Object.assign(new Report(), reportFixture)));
-      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
-        Object.assign(anomalyFixture, { withInternetPurchase: true })
-      );
+    fixture.detectChanges();
 
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h4').textContent).toEqual('Est-ce que votre problème fait suite à un achat sur internet ?');
-      expect(nativeElement.querySelectorAll('button')[0].textContent).toEqual('Oui');
-      expect(nativeElement.querySelectorAll('button')[1].textContent).toEqual('Non, pas sur internet');
-      expect(nativeElement.querySelector('form')).toBeNull();
-    });
-  });
-
-  describe('when problem does not concern an internet purchase', () => {
-
-    it('should display subcategories', () => {
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(Object.assign(new Report(), reportFixture)));
-      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(
-        Object.assign(anomalyFixture, { withInternetPurchase: false })
-      );
-
-      fixture.detectChanges();
-
-      const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('app-subcategory')).not.toBeNull();
-    });
-
+    const nativeElement = fixture.nativeElement;
+    expect(nativeElement.querySelector('app-subcategory')).not.toBeNull();
   });
 
   describe('when receive subcategories', () => {
 
     it('should change the shared report with a report which contains subcategories', () => {
-      const sharedReportFixture = Object.assign(new Report(), reportFixture, {internetPurchase: false});
-      reportStorageService.changeReportInProgress(sharedReportFixture);
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(sharedReportFixture));
+      const draftReportInProgress = genDraftReport(Step.Category);
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+
       component.anomaly = new Anomaly();
       component.anomaly.subcategories = subcategoriesFixture;
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
@@ -133,12 +104,11 @@ describe('ProblemComponent', () => {
       const subcategoryExpected = new Subcategory();
       subcategoryExpected.title = 'title2';
       subcategoryExpected.description = 'description2';
-      const reportExpected = new Report();
-      reportExpected.internetPurchase = false;
-      reportExpected.category = sharedReportFixture.category;
-      reportExpected.subcategories = [subcategoryExpected];
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
+        subcategories: [subcategoryExpected]
+      });
 
-      expect(changeReportSpy).toHaveBeenCalledWith(reportExpected, Step.Problem);
+      expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
 
     });
   });

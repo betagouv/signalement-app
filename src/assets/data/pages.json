@@ -15,13 +15,21 @@
     "title": "Comment ça marche ? - SignalConso",
     "description": "Vous signalez votre problème en remplissant le formulaire en ligne. Notre équipe contacte l'entreprise afin de l'informer de votre signalement. L'entreprise peut procéder spontanément aux corrections utiles, sans sanction. Votre signalement est enregistré à la répression des fraudes (DGCCRF)."
   },
-  "pro": {
-    "title": "Comment ça marche ? - SignalConso",
-    "description": "Votre entreprise a été signalée ? Comprenez comment consulter le signalement afin de corriger le problème et de répondre au consommateur."
+  "faq": {
+    "title": "Centre d'aide - SignalConso",
+    "description": "Consultez l'aide et les questions fréquentes sur SignalConso"
   },
   "retractation": {
     "title": "Delai de rétractation ? - SignalConso",
     "description": "Comprenez le délai de rétractation et calculez votre date limite de rétractation"
+  },
+  "accessibilite": {
+    "title": "Accessibilité - SignalConso",
+    "description": "Rapport d'accessibilité SignalConso"
+  },
+  "aidealanavigation": {
+    "title": "Aide à la navigation - SignalConso",
+    "description": "Aide à la navigation"
   },
   "cgu": {
     "title": "Conditions générales d'utilisation - SignalConso",
@@ -34,6 +42,10 @@
   "stats": {
     "title": "Statistiques - SignalConso",
     "description": "Consultez les statistiques de SignalConso"
+  },
+  "trackingAndPrivacy": {
+    "title": "Suivi d'audience et vie privée - SignalConso",
+    "description": "Consultez les informations concernant le suivi d'audience et le respect de la vie privée sur SignalConso"
   },
   "accesstoken": {
     "title": "Accès au compte de l'entreprise - SignalConso",
@@ -69,6 +81,24 @@
       "description": "Donnez votre avis sur la réponse de l'entreprise à votre signalement sur SignalConso"
     }
   },
+  "companies": {
+    "myCompanies": {
+      "title": "Entreprises - SignalConso",
+      "description": "Liste des entreprises rattachées à votre espace personnel sur SignalConso"
+    },
+    "companyAccesses": {
+      "title": "Accès au compte de l'entreprise - SignalConso",
+      "description": "Gestion des accès au compte de l'entreprise"
+    },
+    "companyInvitation": {
+      "title": "Accès au compte de l'entreprise - SignalConso",
+      "description": "Ajout d'un accès au compte de l'entreprise"
+    },
+    "companiesAdmin": {
+      "title": "Entreprises - SignalConso",
+      "description": "Suivi des entreprises signalées sur SignalConso"
+    }
+  },
   "secured": {
     "reports": {
       "title": "Suivi des signalements - SignalConso",
@@ -88,21 +118,13 @@
         "description": "Activez votre compte pour accéder à votre espace personnel sur SignalConso"
       }
     },
-    "myCompanies": {
-      "title": "Entreprises - SignalConso",
-      "description": "Liste des entreprises rattachées"
-    },
-    "companyAccesses": {
-      "title": "Accès au compte de l'entreprise - SignalConso",
-      "description": "Gestion des accès au compte de l'entreprise"
-    },
-    "companyInvitation": {
-      "title": "Accès au compte de l'entreprise - SignalConso",
-      "description": "Ajout d'un accès au compte de l'entreprise"
-    },
     "subscriptions": {
       "title": "Abonnements - SignalConso",
       "description": "Abonnez-vous pour recevoir les signalements qui vous concernent"
+    },
+    "downloads": {
+      "title": "Téléchargements - SignalConso",
+      "description": "Mes téléchargements"
     },
     "admin": {
       "title": "Admin - SignalConso",

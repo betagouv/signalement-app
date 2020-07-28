@@ -1,6 +1,24 @@
 @import "../../../../theme/variables";
 @import "../../../../theme/media-queries";
 
+.container {
+  @media #{$smaller-than-desktop} {
+    max-width: 750px;
+  }
+}
+
+h1 {
+  font-size: 1.25rem !important;
+  font-weight: unset !important;
+  line-height: unset !important;
+  color: $darker-grey;
+
+  @media #{$smaller-than-tablet} {
+    font-size: 16px !important;
+    line-height: 21px !important;
+  }
+}
+
 img.back {
 
   vertical-align: top;
@@ -18,6 +36,15 @@ img.back {
   color: $darker-grey;
   padding-top: 1em;
   font-size: 1.1em;
+
+  @media #{$smaller-than-desktop} {
+    padding: 0;
+    font-size: 16px;
+
+    div {
+      padding: 0 !important;
+    }
+  }
 
   img {
     height: 20px;
@@ -76,8 +103,8 @@ img.back {
   }
 
   @media #{$smaller-than-desktop} {
-    img {
-      display: none;
+    img, .step-number, .achieved, .todo {
+      display: none !important;
     }
 
     div {
@@ -88,5 +115,3 @@ img.back {
     }
   }
 }
-
-

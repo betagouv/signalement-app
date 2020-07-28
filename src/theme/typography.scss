@@ -1,12 +1,12 @@
 @import "../theme/media-queries";
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+* {
+  letter-spacing: 0.2px;
+}
+
+h1, h2 {
   font-family: "Evolventa", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 h1 {
@@ -40,6 +40,9 @@ h6 {
 
 @media #{$smaller-than-tablet} {
 
+  * {
+    letter-spacing: 0.1px;
+  }
 
   h1 {
     font-size: 1.4rem !important;

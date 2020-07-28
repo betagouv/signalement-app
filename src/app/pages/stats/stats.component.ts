@@ -82,17 +82,17 @@ export class StatsComponent implements OnInit {
 
   loadMonthlyReportReadByProChart() {
     this.statsService.getMonthlyReportReadByProPercentage().subscribe(monthlyStats => {
-      this.monthlyReportReadByProChart = this.getChartOption(monthlyStats);
+      this.monthlyReportReadByProChart = this.getChartOption(monthlyStats, true);
     });
   }
 
   loadMonthlyReportWithReponseChart() {
     this.statsService.getMonthlyReportWithResponsePercentage().subscribe(monthlyStats => {
-      this.monthlyReportWithResponseChart = this.getChartOption(monthlyStats);
+      this.monthlyReportWithResponseChart = this.getChartOption(monthlyStats, true);
     });
   }
 
-  getChartOption(monthlyStats: MonthlyStat[]): EChartOption {
+  getChartOption(monthlyStats: MonthlyStat[], percentage = false): EChartOption {
     return {
       color: ['#407CA8'],
       xAxis: {
@@ -103,7 +103,10 @@ export class StatsComponent implements OnInit {
         }
       },
       yAxis: {
-        type: 'value'
+        type: 'value',
+        axisLabel: {
+          formatter: (value) => percentage ? `${value}%` : value
+        }
       },
       series: [{
         data: this.getStatsData(monthlyStats),

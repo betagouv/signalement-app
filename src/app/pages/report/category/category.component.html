@@ -1,14 +1,12 @@
-<alert class="text-center" type="danger" dismissible="true" [isOpen]="report && report.retrievedFromStorage" (onClosed)="removeStoredReport()">
-  <h4>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</h4>
-  <button type="submit" class="button-outline warning" (click)="removeStoredReport()" appAutofocus="true">Non</button>
-  <button type="submit" class="button warning ml-4 ml-sm-5" (click)="restoreStoredReport()">Oui</button>
+<alert class="text-center" type="danger" dismissible="true" [isOpen]="draftReport && draftReport.subcategories && !draftReport.lastSubcategory?.information" (onClosed)="removeStoredReport()"><strong>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</strong>
+  <button type="submit" class="button-outline warning ml-2" (click)="removeStoredReport()">Non</button>
+  <button type="submit" class="button warning ml-2" (click)="restoreStoredReport()">Oui</button>
 </alert>
 
 <div class="banner text-center section-small section-primary d-none d-lg-block" role="region">
   <div class="container text-center">
-    <img src="/assets/images/logo-signalconso-white.svg" class="pb-4 d-none d-lg-inline-block" alt="Icônes signaler" />
     <h1>
-      Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
+      Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
     </h1>
   </div>
 </div>
@@ -37,17 +35,19 @@
           Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
         </button>
       </div>
-      <p class="indication">
-        Un signalement ne constitue pas une saisine formelle de la <abbr title="Direction Général de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> au sens de
-        l’<u>article L. 112-8 du code des relations entre le public et l’administration</u>.
-        <br/>Notre plateforme ne propose pas de suivi personnalisé de votre dossier.
-      </p>
     </div>
   </section>
 
   <section class="section section-primary">
 
     <div class="text-center container d-lg-none">
+
+      <div class="d-block d-lg-none button-pro text-right mb-2">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user">
+          Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
+        </button>
+      </div>
+
       <h1 class="tmb-4 d-none d-md-block">Signaler un problème à la répression des fraudes <br/>en toute transparence avec l'entreprise !</h1>
       <h1 class="tmb-4 d-md-none">Signaler un problème à la répression des fraudes en toute transparence avec l'entreprise !</h1>
 
@@ -117,14 +117,14 @@
         <h2 class="mb-0 mb-lg-4">Quel problème avez-vous rencontré&#160;?</h2>
 
         <div class="row">
-          <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of primaryCategoriesOrderByRank()">
+          <div class="col-12 col-md-6 col-lg-4" *ngFor="let category of primaryCategoriesOrderByRank()">
             <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
-                <div class="col-12 col-lg-3 mb-2 text-center">
-                  <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
+                <div class="col-3 mb-2 pr-0 pl-1 pl-lg-2 text-center">
+                  <div class="sprite-category sprite-{{category.sprite}}"></div>
                 </div>
-                <div class="col-12 col-lg-9 pl-lg-0">
-                  <h5 class="mb-0">{{category.category}}</h5>
+                <div class="col-9">
+                  <div class="category-title">{{category.category}}</div>
                   <span class="note">{{category.description}}</span>
                 </div>
               </div>
@@ -132,14 +132,14 @@
           </div>
 
           <ng-container *ngIf="showSecondaryCategories">
-            <div class="col-12 col-sm-6 col-md-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
+            <div class="col-12 col-md-6 col-lg-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
               <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
                 <div class="row">
-                  <div class="col-12 col-lg-3 mb-2 text-center">
-                    <img src="/assets/images/{{category.icon}}" alt="Icône catégorie de problème" *ngIf="category.icon"/>
+                  <div class="col-3 mb-2 pr-0 pl-1 pl-lg-2 text-center">
+                    <div class="sprite-category sprite-{{category.sprite}}"></div>
                   </div>
-                  <div class="col-12 col-lg-9 pl-lg-0">
-                    <h5 class="mb-0">{{category.category}}</h5>
+                  <div class="col-9">
+                    <div class="category-title">{{category.category}}</div>
                     <span class="note">{{category.description}}</span>
                   </div>
                 </div>

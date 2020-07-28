@@ -1,8 +1,9 @@
 @import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
 section {
 
-  h4, h5 {
+  h2 {
     font-weight: bold;
   }
 
@@ -12,5 +13,10 @@ section {
 
   ul.filename {
     padding-left: 1em;
+  }
+
+  h3 {
+    font-weight: bold;
+    color: $darker-grey;
   }
 }

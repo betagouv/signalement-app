@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountMenuComponent } from './account-menu.component';
-import { AppRoleDirective } from '../../../directives/app-role.directive';
-import { AppPermissionDirective } from '../../../directives/app-permission.directive';
+import { AppRoleDirective } from '../../../directives/app-role/app-role.directive';
+import { AppPermissionDirective } from '../../../directives/app-permission/app-permission.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 

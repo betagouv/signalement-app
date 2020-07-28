@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { AppPermissionDirective } from './app-permission.directive';
-import { AppRoleDirective } from './app-role.directive';
+import { AppPermissionDirective } from './app-permission/app-permission.directive';
+import { AppRoleDirective } from './app-role/app-role.directive';
 
 @NgModule({
   declarations: [

@@ -2,15 +2,17 @@
   <i class="material-icons md-24" aria-hidden="true">attach_file</i>
   <span [innerHTML]="label" class="pr-3"></span>
 </label>
-<button type="button" class="btn btn-sm btn-outline-primary d-none d-md-inline-block"(click)="bringFileSelector()">
-  Ajouter
+<div class="note mb-1" *ngIf="note" [innerHTML]="note">
+</div>
+<button type="button" class="btn btn-sm btn-outline-primary d-none d-md-block mt-2"(click)="bringFileSelector()">
+  Ajouter une pièce jointe
 </button>
 <div class="row text-center pt-1">
   <div class="col-12 offset-md-6 col-md-6">
     <table class="table table-sm">
       <tbody>
       <tr *ngFor="let uploadedFile of uploadedFiles">
-        <td class="text-left" style="position: relative" *ngIf="uploadedFile.loading" colspan="2">
+        <td class="text-left position-relative" *ngIf="uploadedFile.loading" colspan="2">
           {{uploadedFile.displayedFilename}}
           <ngx-loading [show]="uploadedFile.loading" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
         </td>
@@ -39,10 +41,10 @@
   Type de fichier invalide. Les extensions acceptées sont : {{ allowedExtensions.join(", ") }}
 </div>
 <div class="row pb-3 d-md-none">
-  <div class="col-12 text-center">
+  <div class="col-12">
     <input type="file" #fileInput class="form-control-file" hidden (change)="selectFile()" accept="{{ getInputAcceptExtensions() }}">
     <button type="button" class="btn btn-sm btn-outline-primary"(click)="bringFileSelector()">
-      Ajouter
+      Ajouter une pièce jointe
     </button>
   </div>
 </div>

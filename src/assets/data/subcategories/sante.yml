@@ -69,7 +69,7 @@
   subcategoriesTitle: 'Quel type de médecine exerce-t-il ?'
   subcategories:
     - title: La médecine dite "conventionnelle"
-      example: 'C''est-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sage-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, nutritionniste, psychiatre, ou autre médecin spécialiste.'
+      example: 'C''est-à-dire qu''il est : médecin généraliste, dentiste, ophtalmologue, sage-femme, infirmier, kinésithérapeute , pédicure-podologue, odontologiste, orthophoniste, orthoptiste, diététicien, psychiatre, ou autre médecin spécialiste.'
       subcategories:
         - title: Les tarifs ne sont pas affichés en salle d'attente
           example: Les tarifs doivent être clairement affichés dans la salle d'attente.
@@ -172,9 +172,9 @@
           example: "Exemple : j'ai mal été soigné"
           information:
             title: Porter une réclamation sur la qualité d’un soin
-            content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
+            content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
     - title: La médecine dite "alternative" ou "douce"
-      example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, diététicien, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute..."
+      example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, nutritionniste, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute..."
       subcategories:
         - title: Les prix ne sont pas affichés ou sont faux
           example: "Les prix doivent être affichés en salle d'attente."
@@ -294,9 +294,9 @@
     - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
       information:
         title: Vous devez contacter la Commissions des Usagers
-        content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hopîtal ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+        content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
     - title: J'ai dû payer un "forfait administratif"
-      example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade.. Ces frais sont interdits.
+      example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade... Ces frais sont interdits.
       detailInputs:
         - label: Date de sortie (ou date de la facture)
           rank: 1
@@ -304,7 +304,7 @@
         - label: Quel est le montant de ces frais ?
           rank: 2
           type: TEXT
-      fileLabel: Merci de joindre si posisble une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
+      fileLabel: Merci de joindre si possible une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
       consumerActions: !!import/single ../common/actions/defaut.yml
     - title: J'ai été facturé pour un supplément que je n'avais pas demandé
       example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
@@ -383,7 +383,7 @@
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre
 - title: Ambulance
   example: "et autre transport sanitaire (exemple : taxi)"
@@ -486,5 +486,5 @@
                 - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance..) pour appuyer votre signalement.
+              fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre

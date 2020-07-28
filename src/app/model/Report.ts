@@ -1,9 +1,9 @@
 import { Consumer } from './Consumer';
-import { Company } from './Company';
-import { Subcategory } from './Anomaly';
+import { CompanyKinds, Subcategory } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
+import { Company, DraftCompany, Website } from './Company';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -20,8 +20,57 @@ export enum Step {
 
 
 export enum ReportStatus {
+  NA = 'NA',
+  EmployeeConsumer = 'Lanceur d\'alerte',
+  InProgress = 'Traitement en cours',
+  Unread = 'Signalement non consulté',
+  UnreadForPro = 'Non consulté',
+  Transmitted = 'Signalement transmis',
+  ToReviewedByPro = 'À répondre',
+  Accepted = 'Promesse action',
   ClosedForPro = 'Clôturé',
-  ToProcess = 'À traiter'
+  Rejected = 'Signalement infondé',
+  Ignored = 'Signalement consulté ignoré',
+  NotConcerned = 'Signalement mal attribué'
+
+}
+
+export const StatusColor = new Map<string, string>([
+  [ReportStatus.NA, '#fff'],
+  [ReportStatus.EmployeeConsumer, '#fff'],
+  [ReportStatus.InProgress, '#FFE49E'],
+  [ReportStatus.Unread, '#c9d3df'],
+  [ReportStatus.UnreadForPro, '#f7d5d2'],
+  [ReportStatus.Transmitted, '#FFE49E'],
+  [ReportStatus.ToReviewedByPro, '#FFE49E'],
+  [ReportStatus.Accepted, '#D6F0FF'],
+  [ReportStatus.Rejected, '#c9d3df'],
+  [ReportStatus.ClosedForPro, '#daf5e7'],
+  [ReportStatus.Ignored, '#c9d3df'],
+  [ReportStatus.NotConcerned, '#c9d3df'],
+]);
+
+export class DraftReport {
+  category: string;
+  subcategories: Subcategory[];
+  draftCompany: DraftCompany;
+  detailInputValues: DetailInputValue[];
+  uploadedFiles: UploadedFile[];
+  consumer: Consumer;
+  employeeConsumer: boolean;
+  contactAgreement: boolean;
+  retrievedFromStorage: boolean;
+  storedStep: Step;
+
+  get companyKind() {
+    return this.lastSubcategory ? this.lastSubcategory.companyKind || CompanyKinds.SIRET : CompanyKinds.SIRET;
+  }
+
+  get lastSubcategory() {
+    if (this.subcategories && this.subcategories.length) {
+      return this.subcategories[this.subcategories.length - 1];
+    }
+  }
 }
 
 export class Report {
@@ -29,15 +78,13 @@ export class Report {
   category: string;
   subcategories: Subcategory[];
   company: Company;
+  website: Website;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
   employeeConsumer: boolean;
   contactAgreement: boolean;
-  internetPurchase: boolean;
-  retrievedFromStorage: boolean;
   creationDate: Date;
-  storedStep: Step;
   status: string;
 
   get consumerUploadedFiles() {

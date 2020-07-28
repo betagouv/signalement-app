@@ -66,8 +66,8 @@
             content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter.
                           <br/> Par exemple, il est autorisé de vendre une bouteille d'eau à 8 euros ou une baguette de pain à 5 euros. C'est au consommateur de bien regarder les prix avant d'acheter.
                           <br/><br/><b>Le saviez-vous ?</b>
-                          <br/> Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
-                          <br/> Par exemple, le prix des livres est réglementé.
+                          <br/> Il existe quelques exceptions à ce principe. Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
+                          <br/> Par exemple, le prix des livres est réglementé. 
                           <br/><br/> Un commerçant n'a pas le droit de vendre à un prix trop bas : il ne peut pas vendre un produit moins cher que ce qu'il lui a coûté. Il existe quelques situations où il a le droit de vendre en dessous du prix d'achat, comme la période des soldes."
         - title: Fausse réduction de prix
           example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale'
@@ -214,7 +214,7 @@
           subcategories:
             - title: Des produits vendus au rayon frais
               example: 'Exemple : viande, poisson, quiche, jambon'
-              subcategoriesTitle: La date est-elle <u>dépassée</u> au moment de la vente ou de l'achat&#160;?
+              subcategoriesTitle: La date est-elle <b>dépassée</b> au moment de la vente ou de l'achat&#160;?
               subcategories:
                 - title: Oui
                   detailTitle: Il est interdit de vendre un produit avec la date limite de consommation (DLC) dépassée.
@@ -274,7 +274,7 @@
                 - Non
                 - Je n'ai pas demandé
               optionnal: true
-            - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https://www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
+            - label: Précisez si possible la publicité concernée. Vous pouvez par exemple récupérer le lien de la publicité sur le site <a href="https&#58;//www.bonial.fr" target="_blank">bonial.fr</a>&#160;?
               rank: 5
               type: TEXT
               placeholder: "Lien vers la publicité"
@@ -392,14 +392,14 @@
                           <br/>La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion. Elle ne s'applique pas pour les achats entre particuliers.
                         outOfScope: true
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
                             example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
                                     <li>présent dès le départ et</li>
                                     <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                                   </ul>"
-                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                            answer: C'est à vous de prouver l'existence du vice caché, avec un rapport d'expertise par exemple.
                               <br/>Vous avez deux ans à partir de la découverte de ce défaut pour faire la demande .
             - title: Occasion
               subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
@@ -465,14 +465,14 @@
                         content: Votre produit n'est plus couvert par la garantie de base, appelée "garantie légale de conformité". La garantie légale de conformité est de 2 ans pour tous les produits neufs et de 6 mois pour tous les produits d'occasion.
                         outOfScope: true
                         actions:
-                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachées\"&#160;?"
+                          - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
                             example: "Un vice caché d'un produit est un défaut :
                                   <ul>
                                     <li>qui rend le produit inutilisable, </li>
                                     <li>présent dès le départ et</li>
                                     <li>que vous ne connaissiez pas quand vous avez acheté le produit.</li>
                                   </ul>"
-                            answer: C'est à vous de prouver l'existence du vice-caché, avec un rapport d'expertise par exemple.
+                            answer: C'est à vous de prouver l'existence du vice caché, avec un rapport d'expertise par exemple.
                               <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
         - title: Autre raison
           example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'

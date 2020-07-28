@@ -15,7 +15,9 @@ export class AnomalyService {
 
   getAnomalies() {
     if (!this.anomalies) {
-      this.anomalies = anomalies.list;
+      this.anomalies = anomalies.list
+        .map(a => Object.assign(new Anomaly(), a))
+        .map(a => Object.assign(a, {subcategories: a.getSubcategoriesData().subcategories}));
     }
     return this.anomalies;
   }
@@ -25,12 +27,16 @@ export class AnomalyService {
       .find(predicate);
   }
 
-  getAnomalyByCategory(category: String) {
+  getAnomalyByCategory(category: string) {
     return this.getAnomalyBy(anomaly => anomaly.category === category);
   }
 
-  getAnomalyByCategoryId(categoryId: String) {
+  getAnomalyByCategoryId(categoryId: string) {
     return this.getAnomalyBy(anomaly => anomaly.categoryId === categoryId);
+  }
+
+  getCategories() {
+    return this.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
   }
 
 }

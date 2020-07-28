@@ -3,50 +3,47 @@
 
 header {
 
-  .beta {
-    background: $light-grey;
-    font-size: 18px;
-    line-height: 24px;
-    height: 40px;
-    padding: 8px 22px;
+  img.gov {
+    vertical-align: top;
+    height: 148px;
 
-    .departments {
-      font-size: 16px;
-      text-align: right;
-      text-decoration-line: underline;
+    @media #{$smaller-than-desktop} {
+      height: 20px;
+      margin: 15px 0 15px 15px;
     }
   }
 
   .brand > img {
-    height: 55px;
-    margin-left: 20px;
+    height: 76px;
+    margin-left: 40px;
+  }
+
+  @media #{$smaller-than-large-desktop} {
+    .brand > img {
+      height: 50px;
+      margin-top: 8px;
+    }
   }
 
   @media #{$smaller-than-desktop} {
 
-    .beta {
-      font-size: 12px;
-      line-height: 20px;
-      height: 20px;
-      padding: 0;
-      text-align: center;
+    & {
+      position: fixed;
+      top: 0;
+      z-index: 1;
       width: 100%;
-    }
-
-    img#marianne {
-      height: 30px;
-      margin: 10px 0px;
+      background-color: $white;
+      border-bottom: 1px solid $light-grey;
     }
 
     .brand > img {
-      height: 50px;
-      margin-left: 0px;
+      height: 36px;
+      margin: 7px 0 7px 22px;
     }
   }
 
   .navbar {
-    height: 65px;
-    padding: 10px 22px;
+    padding: 30px;
 
     .nav-link {
       color: $secondary;
@@ -57,6 +54,10 @@ header {
 
       &:focus, &:hover, &.active {
         color: $blue;
+      }
+
+      @media #{$smaller-than-large-desktop} {
+        padding: 9px;
       }
     }
 
@@ -75,21 +76,18 @@ header {
     }
 
     @media #{$smaller-than-desktop} {
+
+      position: fixed;
+      right: 0;
+      top: 0;
       padding: 10px;
       height: 50px;
-      background-color: #407CA8;
-
-      .navbar-toggler {
-        color: $white;
-        padding: 0;
-      }
 
       .navbar-collapse{
 
         z-index: 2;
 
         .navbar-nav {
-          width: fit-content;
           border: 1px solid rgba(28, 28, 28, 0.15);
           border-radius: 0.25rem;
         }
@@ -104,8 +102,8 @@ header {
         }
 
         .nav-link {
-          font-size: 16px;
-          padding: 4px 24px;
+          font-size: 18px;
+          padding: 10px 24px;
 
           &:hover {
             background-color: $secondary;
@@ -134,10 +132,6 @@ header {
           height: 12px;
           margin-left: 6px;
         }
-      }
-
-      .position-absolute {
-        right: 0px;
       }
     }
   }

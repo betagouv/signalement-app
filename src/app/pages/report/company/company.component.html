@@ -1,247 +1,396 @@
-<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
-<section class="section section-white position-relative">
+<app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
+<section class="section section-white" *ngIf="draftReport">
   <div class="container max-width">
-    <form (submit)="selectCompany(report?.company)" *ngIf="report?.company; else noCompany">
-      <div class="row">
-        <div class="col-12 text-center">
-          <div class="company-card">
-              <strong *ngIf="report.company.line1">{{report.company.line1}}<br /></strong>
-              <strong *ngIf="report.company.line2">{{report.company.line2}}<br /></strong>
-              <span *ngIf="report.company.line3">{{report.company.line3}}<br /></span>
-              <span *ngIf="report.company.line4">{{report.company.line4}}<br /></span>
-              <span *ngIf="report.company.line5">{{report.company.line5}}<br /></span>
-              <span *ngIf="report.company.line6">{{report.company.line6}}<br /></span>
-              <span *ngIf="report.company.line7">{{report.company.line7}}<br /></span>
+
+    <ng-container *ngIf="draftReport.draftCompany; else noCompany">
+      <div class="panel">
+
+        <div class="row mb-2">
+          <div class="col-8">
+            <strong>Entreprise {{draftReport.draftCompany.siret || draftReport.draftCompany.name ? 'identifiée' : 'non identifiée'}}</strong>
+          </div>
+          <div class="col-4 text-right">
+            <span class="link pointer" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier entreprise" tabindex="0">Modifier</span>
+            <i class="material-icons md-18 edit" aria-hidden="true">edit</i>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12 text-right">
-          <!-- TODO a11y span -> btn -->
-          <span class="link pointer" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier entreprise" tabindex="0">Modifier</span>&nbsp;<i class="material-icons md-18 edit" aria-hidden="true">edit</i>
+        <p *ngIf="!draftReport.draftCompany.siret && !draftReport.draftCompany.name">
+          Si vous ne parvenez pas à trouver le SIRET de l'entreprise, vous pouvez continuer votre signalement.
+          <br />Il ne sera pas transmis à l'entreprise qui gère le site internet mais les enquêteurs de la répression des fraudes en seront informés.
+        </p>
+        <div class="row" *ngIf="draftReport.draftCompany.name">
+          <div class="col-12">
+            Nom : <strong>{{draftReport.draftCompany.name}}<br /></strong>
+            Adresse : {{draftReport.draftCompany.address}}
+          </div>
+        </div>
+        <div class="row" *ngIf="draftReport.draftCompany.siret">
+          <div class="col-12">
+            SIRET : {{draftReport.draftCompany.siret}}
+          </div>
+        </div>
+        <div class="row mt-4" *ngIf="draftReport.draftCompany.website">
+          <div class="col-12">
+            Site internet : {{draftReport.draftCompany.website.url}}
+          </div>
         </div>
       </div>
       <hr />
-      <button type="submit" class="btn btn-lg btn-primary">
-        <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
-        Étape suivante : s'identifier
+      <button type="submit" class="btn btn-lg btn-primary" (click)="submitCompany(draftReport.draftCompany)">
+        Continuer
       </button>
-    </form>
+    </ng-container>
 
     <ng-template #noCompany>
 
-      <nav class="nav nav-tabs nav-justified" role="tablist">
-        <a id="firstTab" nga11y-focus class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': !bySiret}" role="tab">Recherche par nom</a>
-        <a class="nav-item nav-link pointer" tabindex="0" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" [ngClass]="{'active': bySiret}" role="tab">Recherche par SIRET</a>
-      </nav>
+      <ng-container *ngIf="websiteForm">
+        <h2 class="mb-4 font-weight-bold">
+          Informations sur l'entreprise
+        </h2>
 
-      <ng-container *ngIf="!bySiret; else searchBySiret" role="tabpanel">
-
-        <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm" *ngIf="searchForm">
-
+        <form [formGroup]="websiteForm" (submit)="submitWebsiteForm()" id="websiteForm">
           <div class="form__group mt-4">
-            <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise <span class="error">*</span>
+            <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) <span class="error">*</span>
             </label>
-            <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean" appAutofocus="true"/>
+            <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
           </div>
-          <div class="form__group">
-            <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
-              Code postal <span class="error">*</span>
-            </label>
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110" />
+
+          <div class="notification error mt-3" *ngIf="showErrors && websiteForm.invalid">
+            <span *ngIf="urlCtrl.hasError('required')">
+              Veuillez renseigner l'url du site.<br />
+            </span>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4" *ngIf="!websiteForm.disabled; else websiteFormDisabled">
+            Continuer
+          </button>
+        </form>
+
+        <ng-template #websiteFormDisabled>
+          <div class="text-right" *ngIf="websiteForm.disabled">
+            <span class="link pointer" (click)="changeWebsite()" aria-label="Modifier adresse du site internet" tabindex="0">Modifier</span>
+            <i class="material-icons md-18 edit" aria-hidden="true">edit</i>
+          </div>
+          <hr />
+        </ng-template>
+      </ng-container>
+
+      <div #searchKind>
+        <ng-container *ngIf="searchBySiretForm && searchForm">
+
+        <h2 class="mb-4 font-weight-bold">
+          Pouvez-vous identifier l'entreprise ?
+        </h2>
+        <div class="note mb-1">
+          SignalConso en a besoin pour la contacter et informer la répression des fraudes.
+        </div>
+
+        <form>
+          <div [ngClass]="getRadioContainerClass(identificationKind, identificationKinds.Name)">
+            <div class="row pb-2 pt-2">
+              <div class="col col-radio">
+                <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Name" id="identByName" (click)="scrollToElement(identSearch)"/>
+              </div>
+              <div class="col">
+                <label for="identByName" class="label-inline pointer">Par son nom et son code postal</label>
               </div>
             </div>
           </div>
-          <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
-            <span *ngIf="searchCtrl.hasError('required')">
-              Veuillez renseigner le nom de l'entreprise.<br />
-            </span>
-            <span *ngIf="searchPostalCodeCtrl.hasError('required')">
-              Veuillez renseigner le code postal.
-            </span>
-            <span *ngIf="searchPostalCodeCtrl.hasError('pattern')">
-              Le code postal doit être composé de 5 chiffres.
-            </span>
-          </div>
-          <hr />
-          <div class="my-5">
-            <button type="submit" class="btn btn-lg btn-primary" id="submitSearchForm">
-              <i class="material-icons md-24" aria-hidden="true">search</i>
-              Rechercher
-            </button>
+
+          <div [ngClass]="getRadioContainerClass(identificationKind, identificationKinds.Siret)">
+            <div class="row pb-2 pt-2">
+              <div class="col col-radio">
+                <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Siret" id="identBySiret" (click)="scrollToElement(identSearch)"/>
+              </div>
+              <div class="col">
+                <label for="identBySiret" class="label-inline pointer">Par son SIRET</label>
+              </div>
+            </div>
           </div>
 
+          <div [ngClass]="getRadioContainerClass(identificationKind, identificationKinds.None)" *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
+            <div class="row pb-2 pt-2">
+              <div class="col col-radio">
+                <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="scrollToElement(identSearch)"/>
+              </div>
+              <div class="col">
+                <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier l'entreprise</label>
+              </div>
+            </div>
+          </div>
+
+          <hr *ngIf="identificationKind"/>
         </form>
 
-        <div *ngIf="companies && companies.length">
+        <div #identSearch>
+          <div *ngIf="identificationKind === identificationKinds.Name">
 
-          <p class="mt-4">
-            Veuillez sélectionner une entreprise dans la liste ci-dessous :
-          </p>
+            <h2 class="mb-4 font-weight-bold">
+              Pouvez-vous préciser ?
+            </h2>
 
-          <p *ngFor="let company of companies" class="company" (click)="selectCompanyFromResults(company)" (keydown.enter)="selectCompanyFromResults(company)" tabindex="0">
-            <strong *ngIf="company.line1">{{company.line1}}<br /></strong>
-            <strong *ngIf="company.line2">{{company.line2}}<br /></strong>
-            <span *ngIf="company.activityLabel">{{company.activityLabel}}<br /></span>
-            <span *ngIf="company.line3">{{company.line3}}<br /></span>
-            <span *ngIf="company.line4">{{company.line4}}<br /></span>
-            <span *ngIf="company.line5">{{company.line5}}<br /></span>
-            <span *ngIf="company.line6">{{company.line6}}<br /></span>
-            <span *ngIf="company.line7">{{company.line7}}<br /></span>
-          </p>
+            <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
 
-          <div class="notification info mt-4">
-            Si l'entreprise ne figure pas dans la liste, vous pouvez modifier votre recherche ou <span class="link" (click)="changeNavTab()" (keydown.enter)="changeNavTab()" tabindex="0">rechercher avec le numéro SIRET de l'entreprise</span>.
+              <div class="form__group mt-4">
+                <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise signalée <span class="error">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean"/>
+              </div>
+              <div class="form__group">
+                <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
+                  Code postal <span class="error">*</span>
+                </label>
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                    <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <small class="form-text text-muted">
+                  Vous pouvez signaler des entreprises privées établies en France uniquement.
+                </small>
+              </div>
+              <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
+                <span *ngIf="searchCtrl.hasError('required')">
+                  Veuillez renseigner le nom de l'entreprise.<br />
+                </span>
+                <span *ngIf="searchPostalCodeCtrl.hasError('required')">
+                  Veuillez renseigner le code postal.
+                </span>
+                <span *ngIf="searchPostalCodeCtrl.hasError('pattern')">
+                  Le code postal doit être composé de 5 chiffres.
+                </span>
+              </div>
+              <button type="submit" class="btn btn-lg btn-outline-primary mt-4" id="submitSearchForm">
+                <i class="material-icons md-24" aria-hidden="true">search</i>
+                Rechercher
+              </button>
+
+              <hr *ngIf="companySearchResults && companySearchResults.length"/>
+            </form>
+
+            <div #identResult>
+              <div *ngIf="companySearchResults && companySearchResults.length" class="mt-5">
+
+                <h2 class="mb-4 font-weight-bold">
+                  Sélectionnez l'entreprise
+                </h2>
+
+                <div *ngFor="let companySearchResult of companySearchResults; let companyIndex = index" [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
+                  <div class="row mb-3">
+                    <div class="col col-radio">
+                      <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany()"/>
+                    </div>
+                    <label class="col pointer" for="company_{{companyIndex}}">
+                      <strong *ngIf="companySearchResult.line1">{{companySearchResult.line1}}<br /></strong>
+                      <strong *ngIf="companySearchResult.line2">{{companySearchResult.line2}}<br /></strong>
+                      <strong *ngIf="companySearchResult.highlight">
+                        <i class="material-icons md-green">check_circle</i>
+                        <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
+                        <br />
+                      </strong>
+                      <span class="text-primary" *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}<br /></span>
+                      <span *ngIf="companySearchResult.line3">{{companySearchResult.line3}}<br /></span>
+                      <span *ngIf="companySearchResult.line4">{{companySearchResult.line4}}<br /></span>
+                      <span *ngIf="companySearchResult.line5">{{companySearchResult.line5}}<br /></span>
+                      <span *ngIf="companySearchResult.line6">{{companySearchResult.line6}}<br /></span>
+                      <span *ngIf="companySearchResult.line7">{{companySearchResult.line7}}<br /></span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="note mt-1">
+                  L’entreprise n’apparaît pas ? Modifiez votre recherche ou  <span class="link" (click)="identificationKind = identificationKinds.Siret" tabindex="0">recherchez avec le numéro SIRET de l'entreprise</span>.
+                </div>
+
+                <hr *ngIf="selectedCompany"/>
+
+                <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
+                  Continuer
+                </button>
+              </div>
+
+              <div class="notification warning mt-4" *ngIf="searchWarning">
+                <p>
+                  {{searchWarning}}
+                </p>
+                Veuillez modifier votre recherche ou <span class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</span>.
+              </div>
+
+              <div class="notification error mt-4" *ngIf="searchError">
+                <p>
+                  {{searchError}}
+                </p>
+                Veuillez réessayer ou <span class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</span>.
+              </div>
+            </div>
+
+
+          </div>
+
+          <div *ngIf="identificationKind === identificationKinds.Siret">
+
+            <h2 class="mb-4 font-weight-bold">
+              Pouvez-vous préciser ?
+            </h2>
+
+            <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm">
+
+              <div class="form__group mt-4">
+                <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
+                  Numéro SIRET de l'entreprise <span class="error">*</span>
+                </label>
+
+                <div class="note mb-1">
+                  Le SIRET est un numéro composé de 14 chiffres identifiant l'entreprise concernée.
+                  <br/>
+                  <a data-toggle="collapse" href="#collapseHow">Comment retrouver un SIRET ?</a>
+                  <ul class="collapse" id="collapseHow">
+                    <li>
+                      <a data-toggle="collapse" href="#collapseDoc">L'entreprise vous a remis un document ?</a>
+                      <div class="collapse" id="collapseDoc">
+                        Vous pourrez probablement retrouver le SIRET sur :
+                        <ul>
+                          <li>
+                            <a data-toggle="collapse" href="#collapseTicket">le ticket de carte bleue</a>
+                            <div class="collapse" id="collapseTicket">
+                              <div class="card card-body">
+                                Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le numéro à 14 chiffres qui se situe en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <a data-toggle="collapse" href="#collapseEstimate">un devis</a>
+                            <div class="collapse" id="collapseEstimate">
+                              <div class="card card-body">
+                                Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <a data-toggle="collapse" href="#collapseContract">un contrat</a>
+                            <div class="collapse" id="collapseContract">
+                              <div class="card card-body">
+                                Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            Tout autre document ou échange avec l'entreprise (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseNoDoc">Vous n’avez pas de documents émanants de l'entreprise ?</a>
+                      <div class="collapse" id="collapseNoDoc">
+                        Faites une recherche en ligne sur :
+                        <ul>
+                          <li><a href="https://www.societe.com" target="_blank" title="societe.com (nouvelle fenêtre)">https://www.societe.com</a></li>
+                          <li><a href="https://www.pagesjaunes.fr" target="_blank" title="pages jaunes (nouvelle fenêtre)">https://www.pagesjaunes.fr</a></li>
+                          <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr" title="infogreffe (nouvelle fenêtre)">https://www.infogreffe.fr</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <a data-toggle="collapse" href="#collapseNotFound">Vous n’avez pas trouvé le numéro SIRET ?</a>
+                      <div class="collapse" id="collapseNotFound">
+                        Utiliser <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank">le formulaire en ligne DGCCRF</a>
+                        <br />Ce formulaire ne nécessite pas le SIRET de l'entreprise.
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010">
+              </div>
+
+              <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">
+                <span *ngIf="siretCtrl.hasError('required')">
+                  Veuillez renseigner le numéro SIRET de l'entreprise.<br />
+                </span>
+                <span *ngIf="siretCtrl.hasError('pattern')">
+                  Le numéro SIRET doit être composé de 14 chiffres.
+                </span>
+              </div>
+              <button type="submit" class="btn btn-lg btn-outline-primary mt-4 mb-4" id="submitSiretForm">
+                <i class="material-icons md-24" aria-hidden="true">search</i>
+                Rechercher
+              </button>
+
+              <hr *ngIf="companySearchBySiretResult"/>
+
+            </form>
+
+            <div #identBySiretResult>
+              <div *ngIf="companySearchBySiretResult">
+
+                <h2 class="mb-4 font-weight-bold">
+                  Sélectionnez l'entreprise
+                </h2>
+
+                <div class="note mb-1">
+                  Si l'entreprise n'est pas celle recherchée, vous pouvez modifier votre recherche.
+                </div>
+
+                <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchBySiretResult)">
+                  <div class="row mb-3">
+                    <div class="col col-radio">
+                      <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_siret" [value]="companySearchBySiretResult" (click)="selectCompany()"/>
+                    </div>
+                    <label class="col pointer" for="company_siret">
+                      <strong *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}<br /></strong>
+                      <strong *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}<br /></strong>
+                      <span class="text-primary" *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}<br /></span>
+                      <span *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}<br /></span>
+                    </label>
+                  </div>
+                </div>
+
+                <hr *ngIf="selectedCompany"/>
+
+                <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
+                  Continuer
+                </button>
+
+              </div>
+
+              <div class="notification warning mt-4" *ngIf="searchBySiretWarning">
+                <p>
+                  {{searchBySiretWarning}}
+                </p>
+                Veuillez modifier votre recherche.
+              </div>
+
+              <div class="notification error mt-4" *ngIf="searchBySiretError">
+                <p>
+                  {{searchBySiretError}}
+                </p>
+                Veuillez réessayer.
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="identificationKind === identificationKinds.None">
+
+            <div class="notification info">
+              Si vous ne parvenez pas à identifier l'entreprise, vous pouvez continuer votre signalement.
+              <br />Il ne sera pas transmis à l'entreprise qui gère le site internet, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
+              <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
+            </div>
+
+            <button type="button" class="btn btn-lg btn-primary" (click)="submitCompany({})">
+              Continuer
+            </button>
+
           </div>
         </div>
 
-        <div class="notification warning mt-4" *ngIf="searchWarning">
-          <p>
-            {{searchWarning}}
-          </p>
-          Veuillez modifier votre recherche ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro SIRET de l'entreprise</span>.
-        </div>
-
-        <div class="notification error mt-4" *ngIf="searchError">
-          <p>
-            {{searchError}}
-          </p>
-          Veuillez réessayer ou <span class="link" (click)="changeNavTab()">rechercher avec le numéro SIRET de l'entreprise</span>.
-        </div>
       </ng-container>
-
-      <ng-template #searchBySiret role="tabpanel">
-
-        <form [formGroup]="searchBySiretForm" (submit)="searchCompanyBySiret()" id="searchBySiretForm" *ngIf="searchBySiretForm">
-
-          <div class="notification">
-            <p>
-              Le SIRET est un numéro composé de 14 chiffres identifiant l'entreprise concernée.
-              Signalconso en a besoin pour la contacter et informer la répression des fraudes.
-            </p>
-            <p>
-              <a data-toggle="collapse" href="#collapseHow">Comment retrouver un SIRET ?</a>
-            </p>
-            <ul class="collapse" id="collapseHow">
-              <li>
-                <a data-toggle="collapse" href="#collapseDoc">L'entreprise vous a remis un document ?</a>
-                <div class="collapse" id="collapseDoc">
-                  Vous pourrez probablement retrouver le SIRET sur :
-                  <ul>
-                    <li>
-                      <a data-toggle="collapse" href="#collapseTicket">le ticket de carte bleue</a>
-                      <div class="collapse" id="collapseTicket">
-                        <div class="card card-body">
-                          Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le numéro à 14 chiffres qui se situe en principe entre l’adresse de l'entreprise et le montant de votre achat.
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <a data-toggle="collapse" href="#collapseEstimate">un devis</a>
-                      <div class="collapse" id="collapseEstimate">
-                        <div class="card card-body">
-                          Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <a data-toggle="collapse" href="#collapseContract">un contrat</a>
-                      <div class="collapse" id="collapseContract">
-                        <div class="card card-body">
-                          Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      Tout autre document ou échange avec l'entreprise (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" href="#collapseNoDoc">Vous n’avez pas de documents émanants de l'entreprise ?</a>
-                <div class="collapse" id="collapseNoDoc">
-                  Faites une recherche en ligne sur :
-                  <ul>
-                    <li><a href="https://www.societe.com" target="_blank" title="societe.com (nouvelle fenêtre)">https://www.societe.com</a></li>
-                    <li><a href="https://www.pagesjaunes.fr" target="_blank" title="pages jaunes (nouvelle fenêtre)">https://www.pagesjaunes.fr</a></li>
-                    <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr" title="infogreffe (nouvelle fenêtre)">https://www.infogreffe.fr</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" href="#collapseNotFound">Vous n’avez pas trouvé le numéro SIRET ?</a>
-                <div class="collapse" id="collapseNotFound">
-                  Utiliser <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank">le formulaire en ligne DGCCRF</a>
-                  <br />Ce formulaire ne nécessite pas le SIRET de l'entreprise.
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="form__group mt-4">
-            <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
-              Numéro SIRET de l'entreprise <span class="error">*</span>
-            </label>
-            <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" appAutofocus="true">
-          </div>
-
-          <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">
-            <span *ngIf="siretCtrl.hasError('required')">
-              Veuillez renseigner le numéro SIRET de l'entreprise.<br />
-            </span>
-            <span *ngIf="siretCtrl.hasError('pattern')">
-              Le numéro SIRET doit être composé de 14 chiffres.
-            </span>
-          </div>
-          <hr />
-          <div class="my-5">
-            <button type="submit" class="btn btn-lg btn-primary" id="submitSiretForm">
-              <i class="material-icons md-24" aria-hidden="true">search</i>
-              Rechercher
-            </button>
-          </div>
-
-        </form>
-
-        <div *ngIf="companyBySiret">
-
-          <p class="mt-4">
-            Veuillez cliquer sur l'entreprise ci-dessous si elle correspond bien à l'entreprise recherché :
-          </p>
-
-          <p class="company" (click)="selectCompanyFromResults(companyBySiret)" (keydown.enter)="selectCompanyFromResults(companyBySiret)" tabindex="0">
-            <strong *ngIf="companyBySiret.line1">{{companyBySiret.line1}}<br /></strong>
-            <strong *ngIf="companyBySiret.line2">{{companyBySiret.line2}}<br /></strong>
-            <span *ngIf="companyBySiret.activityLabel">{{companyBySiret.activityLabel}}<br /></span>
-            <span *ngIf="companyBySiret.line3">{{companyBySiret.line3}}<br /></span>
-            <span *ngIf="companyBySiret.line4">{{companyBySiret.line4}}<br /></span>
-            <span *ngIf="companyBySiret.line5">{{companyBySiret.line5}}<br /></span>
-            <span *ngIf="companyBySiret.line6">{{companyBySiret.line6}}<br /></span>
-            <span *ngIf="companyBySiret.line7">{{companyBySiret.line7}}<br /></span>
-          </p>
-
-          <div class="notification info mt-4">
-            Si l'entreprise n'est pas celle recherchée, vous pouvez modifier votre recherche.
-          </div>
-        </div>
-
-        <div class="notification warning mt-4" *ngIf="searchBySiretWarning">
-          <p>
-            {{searchBySiretWarning}}
-          </p>
-          Veuillez modifier votre recherche.
-        </div>
-
-        <div class="notification error mt-4" *ngIf="searchBySiretError">
-          <p>
-            {{searchBySiretError}}
-          </p>
-          Veuillez réessayer.
-        </div>
-      </ng-template>
+      </div>
     </ng-template>
 
   </div>

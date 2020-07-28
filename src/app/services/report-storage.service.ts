@@ -1,37 +1,53 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DetailInputValue, Report, Step } from '../model/Report';
+import { DetailInputValue, DraftReport, Step } from '../model/Report';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UploadedFile } from '../model/UploadedFile';
+import { Website } from '../model/Company';
+import { switchMap, take, tap } from 'rxjs/operators';
 
-const ReportStorageKey = 'ReportSignalConso';
+export const ReportStorageKey = 'ReportSignalConso';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportStorageService {
 
-  private reportInProgessSource = new BehaviorSubject<Report>(undefined);
-  reportInProgess = this.reportInProgessSource.asObservable();
+  private reportInProgessSource = new BehaviorSubject<DraftReport>(undefined);
+  private reportInProgess = this.reportInProgessSource.asObservable();
 
   constructor(private localStorage: LocalStorage) {
   }
 
-  retrieveReportInProgressFromStorage() {
-    this.localStorage.getItem(ReportStorageKey).subscribe((report: Report) => {
-      if (report) {
-        report.retrievedFromStorage = true;
-        // To force class method to be valuate
-        if (report.detailInputValues) {
-          report.detailInputValues = report.detailInputValues.map(d => Object.assign(new DetailInputValue(), d));
+  private retrieveReportInProgressFromStorage() {
+    return this.localStorage.getItem(ReportStorageKey).pipe(
+      tap(draftReport => {
+        if (draftReport) {
+          draftReport = Object.assign(new DraftReport(), draftReport);
+          // To force class method to be valuate
+          if (draftReport.detailInputValues) {
+            draftReport.detailInputValues = draftReport.detailInputValues.map(d => Object.assign(new DetailInputValue(), d));
+          }
+          if (draftReport.uploadedFiles) {
+            draftReport.uploadedFiles = draftReport.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
+          }
+          if (draftReport.draftCompany && draftReport.draftCompany.website) {
+            draftReport.draftCompany.website = Object.assign(new Website(), draftReport.draftCompany.website);
+          }
+          this.reportInProgessSource.next(draftReport);
         }
-        if (report.uploadedFiles) {
-          report.uploadedFiles = report.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
-        }
-        this.reportInProgessSource.next(report);
-      }
-    });
-    return this.reportInProgess;
+      })
+    );
+  }
+
+  retrieveReportInProgress() {
+    if (!this.reportInProgessSource.getValue()) {
+      return this.retrieveReportInProgressFromStorage().pipe(
+        switchMap(_ => this.reportInProgess.pipe(take(1)))
+      );
+    } else {
+      return this.reportInProgess.pipe(take(1));
+    }
   }
 
   removeReportInProgress() {
@@ -39,25 +55,17 @@ export class ReportStorageService {
     this.reportInProgessSource.next(undefined);
   }
 
-  removeReportInProgressFromStorage() {
-    if (this.reportInProgessSource.getValue()) {
-      this.reportInProgessSource.getValue().retrievedFromStorage = false;
-    }
+  private removeReportInProgressFromStorage() {
     this.localStorage.removeItemSubscribe(ReportStorageKey);
   }
 
-  changeReportInProgressFromStep(report: Report, step: Step) {
-    report.retrievedFromStorage = false;
-    report.storedStep = step;
-    this.reportInProgessSource.next(report);
-    if (step === Step.Category) {
+  changeReportInProgressFromStep(draftReport: DraftReport, step: Step) {
+    draftReport.storedStep = step;
+    this.reportInProgessSource.next(draftReport);
+    if ([Step.Category, Step.Confirmation, Step.Information].indexOf(step) !== -1) {
       this.removeReportInProgressFromStorage();
     } else {
-      this.localStorage.setItemSubscribe(ReportStorageKey, report);
+      this.localStorage.setItemSubscribe(ReportStorageKey, draftReport);
     }
-  }
-
-  changeReportInProgress(report: Report) {
-    this.reportInProgessSource.next(report);
   }
 }

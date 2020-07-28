@@ -9,12 +9,23 @@ import { CompanyActivationComponent } from './company-activation/company-activat
 import { MyCompaniesComponent } from './my-companies/my-companies.component';
 import { CompanyInvitationComponent } from './company-invitation/company-invitation.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { CompaniesAdminComponent } from './companies-admin/companies-admin.component';
+import { AppRoleModule } from '../../directives/app-role/app-role.module';
+import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
+import { BsDatepickerModule, BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
+import { CompanyCardComponent } from './company-card/company-card.component';
+import { Roles } from '../../model/AuthUser';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/activation', component: CompanyActivationComponent },
-  { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard] },
+  { path: 'activation', component: CompanyActivationComponent },
+  { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
+  { path: 'entreprises', component: CompaniesAdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
+  { path: 'entreprises/les-plus-signalees', component: CompaniesAdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
+  { path: 'entreprises/recherche', component: CompaniesAdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
+  { path: 'entreprises/a-activer', component: CompaniesAdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
 ];
 
 @NgModule({
@@ -22,15 +33,22 @@ const routes: Routes = [
     CompanyActivationComponent,
     CompanyAccessesComponent,
     CompanyInvitationComponent,
-    MyCompaniesComponent
+    MyCompaniesComponent,
+    CompaniesAdminComponent,
+    CompanyCardComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    BsDropdownModule.forRoot(),
     ComponentsModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
+    BsDatepickerModule.forRoot(),
+    AppRoleModule,
+    AppPermissionModule,
+    PaginationModule.forRoot(),
   ],
   exports: [
     RouterModule

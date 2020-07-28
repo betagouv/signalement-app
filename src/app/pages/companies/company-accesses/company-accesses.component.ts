@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { CompanyAccess, PendingToken } from '../../../model/CompanyAccess';
+import { CompanyAccess, PendingToken } from '../../../model/Company';
 import { User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { accessLevels } from '../common';
@@ -34,8 +34,8 @@ export class CompanyAccessesComponent implements OnInit {
   showSuccess = false;
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.companyAccesses.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.companyAccesses.description });
+    this.titleService.setTitle(pages.companies.companyAccesses.title);
+    this.meta.updateTag({ name: 'description', content: pages.companies .companyAccesses.description });
 
     const siretParam = this.route.params.pipe(map(p => p.siret));
 

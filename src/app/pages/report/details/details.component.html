@@ -1,14 +1,15 @@
-<app-breadcrumb [step]="step" [report]="report"></app-breadcrumb>
-<section class="section section-white">
+<app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
+<section class="section section-white" *ngIf="draftReport">
   <div class="container max-width">
-
-    <div class="pb-sm-5 pt-sm-5" *ngIf="report.employeeConsumer === undefined; else detailsFormTemplate">
-      <h4 class="text-center">Est-ce que vous travaillez dans l'entreprise que vous souhaitez signaler&#160;?</h4>
-      <div class="text-center pt-2 pt-sm-3 pb-lg-5">
+    <div class="pb-sm-5 employeeConsumer" *ngIf="draftReport.employeeConsumer === undefined; else detailsFormTemplate">
+      <h2 class="pt-sm-5">Travaillez-vous dans l'entreprise que vous souhaitez signaler ?</h2>
+      <div class="pt-2 pt-sm-3">
         <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
           Oui
         </button>
-        <button type="submit" class="btn btn-lg btn-outline-primary ml-3 ml-sm-5 mt-2" appAutofocus="true" (click)="setEmployeeConsumerValue(false)">
+      </div>
+      <div class="pt-2 pt-sm-3">
+        <button type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(false)">
           Non, je n'y travaille pas
         </button>
       </div>
@@ -16,36 +17,16 @@
 
     <ng-template #detailsFormTemplate>
 
-      <div class="row notification info ml-0 md-0">
-        <div class="col-1 pl-0 d-none d-sm-block">
-          <img alt="Icône information" src="/assets/images/picture-observation.svg">
-        </div>
-        <div class="col-12 col-sm-11">
-          <ng-container *ngIf="!report.employeeConsumer else employeeConsumer">
-            <b>Votre description ci-dessous sera lue par l'entreprise et la répression des fraudes.</b>
-            <br />Les pièces jointes seront également lues par l'entreprise.
-            <br /><br/> Si vous souhaitez que l'entreprise ne connaisse pas votre identité,
-            <b>cachez votre nom sur vos pièces jointes et ne citez rien de personnel</b>.
-          </ng-container>
-          <ng-template #employeeConsumer>
-            Votre signalement sera lu <b>uniquement par la répression des fraudes.</b>
-            <br />Rien ne sera communiqué à votre employeur.
-          </ng-template>
-        </div>
+      <div class="row notification success ml-0 md-0" *ngIf="draftReport.lastSubcategory?.detailTitle">
+        <h2 [innerHTML]="draftReport.lastSubcategory.detailTitle"></h2>
       </div>
 
-      <hr />
-
-      <div class="row notification success ml-0 md-0" *ngIf="getReportLastSubcategory()?.detailTitle">
-        <h4 [innerHTML]="getReportLastSubcategory().detailTitle"></h4>
-      </div>
-
-      <div class="row notification note ml-0 md-0" *ngIf="getReportLastSubcategory()?.description">
+      <div class="row notification note ml-0 md-0" *ngIf="draftReport.lastSubcategory?.description">
         <div class="col-1 pl-0 d-none d-sm-block">
           <img alt="Icône information" src="/assets/images/icon_info.png">
         </div>
         <div class="col-12 col-sm-11">
-          <p [innerHTML]="getReportLastSubcategory().description"></p>
+          <p [innerHTML]="draftReport.lastSubcategory.description"></p>
         </div>
       </div>
 
@@ -146,8 +127,15 @@
           </ng-container>
 
           <ng-container *ngIf="detailInput.type === 'TEXTAREA'">
-            <br />
-            <span class="note" [innerHTML]="detailInput.example" *ngIf="detailInput.example"></span>
+            <div class="note mb-1" *ngIf="!draftReport.employeeConsumer">
+              <b>Ce texte sera lu par l'entreprise et la répression des fraudes.</b>
+              Si vous ne souhaitez pas que l'entreprise connaisse votre identité, <b>ne citez rien de personnel</b>.
+            </div>
+            <div class="note mb-1" *ngIf="draftReport.employeeConsumer">
+              Ce texte sera lu <b>uniquement par la répression des fraudes.</b>
+              <br />Rien ne sera communiqué à votre employeur.
+            </div>
+            <div class="note mb-1" [innerHTML]="detailInput.example" *ngIf="detailInput.example"></div>
             <textarea [formControlName]="getFormControlName(detailInput)"
                       [id]="getFormControlId(detailInput)"
                       (blur)="searchKeywords(getFormControl(detailInput))"
@@ -159,12 +147,13 @@
 
         </div>
         <div class="form__group">
-          <app-attachments [label]="this.getReportLastSubcategory()?.fileLabel"
+          <app-attachments [label]="this.draftReport.lastSubcategory?.fileLabel"
                            [uploadedFiles]="uploadedFiles"
-                           [origin]="fileOrigins.Consumer">
+                           [origin]="fileOrigins.Consumer"
+                           [note]="!draftReport.employeeConsumer ? 'Si vous ne souhaitez pas que l\'entreprise connaisse votre identité, <b>cachez votre nom sur vos pièces jointes.</b>' : ''">
           </app-attachments>
-          <div class="note" *ngIf="!report.employeeConsumer">
-            Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective ! 
+          <div class="note" *ngIf="!draftReport.employeeConsumer">
+            Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective !
             <br/> Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).
           </div>
         </div>
@@ -178,8 +167,7 @@
           <span *ngIf="keywordDetected" class="link link-keyword" (click)="goToInformationPage()">Continuez ici</span>
         </div>
         <button type="submit" class="btn btn-lg btn-primary" [disabled]="isUploadingFile()">
-          <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
-          Étape suivante : identifier l'entreprise
+          Continuer
         </button>
       </form>
 

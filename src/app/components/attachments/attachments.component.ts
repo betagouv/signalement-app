@@ -12,6 +12,7 @@ import { fileSizeMax } from '../../pages/report/details/details.component';
 export class AttachmentsComponent implements OnInit {
 
   @Input() label: string;
+  @Input() note: string;
   @Input() uploadedFiles: UploadedFile[];
   @Input() origin: FileOrigin;
 
@@ -46,7 +47,7 @@ export class AttachmentsComponent implements OnInit {
   }
 
   checkExtension(filename: string) {
-    return this.allowedExtensions.includes(filename.split('.').pop().toLowerCase());
+    return this.allowedExtensions.indexOf(filename.split('.').pop().toLowerCase()) != -1;
   }
 
   selectFile() {

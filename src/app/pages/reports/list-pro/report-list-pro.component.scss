@@ -1,0 +1,47 @@
+@import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
+
+.container {
+
+  .item {
+    border-bottom: 1px solid $theme-border-lighter;
+    padding: 0.5em;
+
+    &:not(.item-header):hover {
+      background: $lightest-grey;
+    }
+  }
+
+  .item-header {
+    color: $primary;
+    font-weight: bold;
+  }
+}
+
+.filters {
+
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin: 0 0 2em 0;
+  background-color: $lightest-grey;
+
+  .b-0 {
+    position: absolute;
+    bottom: 0;
+  }
+
+  ul.dropdown-menu {
+    height: 300px;
+    overflow-y: scroll;
+  }
+
+  margin-top: -3em !important;
+
+
+  @media #{$smaller-than-tablet} {
+    & {
+      margin-top: -1em !important;
+      padding: 0.5em;
+    }
+  }
+}

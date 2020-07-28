@@ -30,8 +30,8 @@ export class CompanyInvitationComponent implements OnInit {
   showErrors = false;
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.companyInvitation.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.companyInvitation.description });
+    this.titleService.setTitle(pages.companies.companyInvitation.title);
+    this.meta.updateTag({ name: 'description', content: pages.companies.companyInvitation.description });
     this.initForm();
   }
 
@@ -47,8 +47,8 @@ export class CompanyInvitationComponent implements OnInit {
 
   submitForm() {
     this.showSuccess = false;
-    this.loading = true;
     if (this.invitationForm.valid) {
+      this.loading = true;
       this.companyAccessesService
           .sendInvitation(
             this.route.snapshot.paramMap.get('siret'),

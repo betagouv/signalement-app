@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Report, Step } from '../../../model/Report';
+import { DraftReport, Step } from '../../../model/Report';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -8,6 +8,7 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
+import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-confirmation',
@@ -17,7 +18,9 @@ import { take } from 'rxjs/operators';
 export class ConfirmationComponent implements OnInit {
 
   step: Step;
-  report: Report;
+  steps = Step;
+  draftReport: DraftReport;
+  companyKinds = CompanyKinds;
 
   confirmationForm: FormGroup;
 
@@ -35,11 +38,11 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Confirmation;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
-          this.report = report;
+          this.draftReport = report;
           this.initConfirmationForm();
         } else {
           this.reportRouterService.routeToFirstStep();
@@ -59,17 +62,17 @@ export class ConfirmationComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
-      this.reportService.createReport(this.report)
+      this.reportService.createReport(this.draftReport)
         .subscribe(
         result => {
           this.loading = false;
-          this.reportStorageService.changeReportInProgressFromStep(this.report, this.step);
-          this.reportStorageService.removeReportInProgressFromStorage();
+          this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
           this.reportRouterService.routeForward(this.step);
         },
         error => {
           this.loading = false;
           this.loadingError = true;
+          throw error;
         });
 
     }
@@ -79,10 +82,8 @@ export class ConfirmationComponent implements OnInit {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
-  getReportLastSubcategory() {
-    if (this.report && this.report.subcategories && this.report.subcategories.length) {
-      return this.report.subcategories[this.report.subcategories.length - 1];
-    }
+  goToStep(step: string) {
+    this.reportRouterService.routeToStep(Step[step]);
   }
 
 }
