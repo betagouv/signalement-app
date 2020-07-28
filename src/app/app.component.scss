@@ -8,6 +8,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  .content {
+    @media #{$smaller-than-desktop} {
+      padding-top: 50px;
+    }
+  }
+
   .section {
     padding: 3em 0;
   }
@@ -41,7 +47,7 @@
     margin-right: -15px;
   }
 
-  @media #{$smaller-than-tablet} {
+  @media #{$smaller-than-desktop} {
     .section {
       padding: 1em 0;
     }
@@ -172,4 +178,9 @@
     border: 1px solid #eee;
   }
 
+  .col-radio {
+    max-width: 20px;
+    margin-top: -1px;
+    margin-left: 2px;
+  }
 }

@@ -1,12 +1,9 @@
 <main role="main">
-  <section class="section-small section-primary">
-    <div class="container">
-      <h1 id="title-thanks" class="text-center">Votre signalement a bien été envoyé&#160;!</h1>
-    </div>
-  </section>
   <section class="section section-lighter-grey" *ngIf="draftReport">
     <div class="container max-width">
-
+      <div class="notification success mb-5">
+        <i class="material-icons md-18 attach-icon">check_circle</i> Votre signalement a été envoyé.
+      </div>
       <div class="card" *ngIf="testingSentence()">
         <div class="card-body">
           <div class="row">

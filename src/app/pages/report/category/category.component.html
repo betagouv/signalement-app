@@ -5,7 +5,6 @@
 
 <div class="banner text-center section-small section-primary d-none d-lg-block" role="region">
   <div class="container text-center">
-    <img src="/assets/images/logo-signalconso-white.svg" class="pb-4 d-none d-lg-inline-block" alt="Icônes signaler" />
     <h1>
       Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
     </h1>
@@ -42,6 +41,13 @@
   <section class="section section-primary">
 
     <div class="text-center container d-lg-none">
+
+      <div class="d-block d-lg-none button-pro text-right mb-2">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user">
+          Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
+        </button>
+      </div>
+
       <h1 class="tmb-4 d-none d-md-block">Signaler un problème à la répression des fraudes <br/>en toute transparence avec l'entreprise !</h1>
       <h1 class="tmb-4 d-md-none">Signaler un problème à la répression des fraudes en toute transparence avec l'entreprise !</h1>
 

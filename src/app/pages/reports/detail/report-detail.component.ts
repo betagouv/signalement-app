@@ -3,7 +3,7 @@ import { Report, ReportStatus, StatusColor } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
-import { combineLatest } from 'rxjs';
+import { combineLatest, iif, of } from 'rxjs';
 import { EventService } from '../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -37,6 +37,7 @@ export class ReportDetailComponent implements OnInit {
   loading: boolean;
   loadingError: boolean;
   events: ReportEvent[];
+  companyEvents: ReportEvent[];
 
   bsModalRef: BsModalRef;
   reportIdToDelete: string;
@@ -92,17 +93,23 @@ export class ReportDetailComponent implements OnInit {
   loadReport() {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-          this.reportId = params.get('reportId');
-          return combineLatest([
-            this.reportService.getReport(this.reportId),
-            this.eventService.getEvents(this.reportId)
-          ]);
-        }
-      )
-    ).subscribe(
-      ([report, events]) => {
+        this.reportId = params.get('reportId');
+        return this.reportService.getReport(this.reportId);
+      }),
+      switchMap(report => {
         this.report = report;
-        this.events = events.sort((e1, e2) => (new Date(e1.data.creationDate)).getTime() - (new Date(e2.data.creationDate).getTime()));
+        return combineLatest([
+          this.eventService.getEvents(this.reportId),
+          iif(() => !!this.report.company.siret, this.eventService.getCompanyEvents(this.report.company.siret), of([]))
+        ]);
+      })
+    ).subscribe(
+      ([ events, companyEvents]) => {
+        this.events = events
+          .sort((e1, e2) => (new Date(e1.data.creationDate)).getTime() - (new Date(e2.data.creationDate).getTime()));
+        this.companyEvents = companyEvents
+          .filter(e => e.data.reportId === undefined)
+          .sort((e1, e2) => (new Date(e1.data.creationDate)).getTime() - (new Date(e2.data.creationDate).getTime()));
         this.loading = false;
         this.initConsumerForm();
       },
@@ -349,16 +356,10 @@ export class ReportDetailComponent implements OnInit {
           details: this.detailCtrl.value,
           fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
         })
-      ).pipe(
-        switchMap(() => {
-          return this.eventService.getEvents(this.reportId);
-        })
       ).subscribe(
         events => {
-          this.events = events;
-          this.report.uploadedFiles = [...this.report.uploadedFiles, ...this.uploadedFiles.filter(file => file.id)];
-          this.loading = false;
           this.responseSuccess = true;
+          this.loadReport();
           this.actionForm = undefined;
         },
         err => {

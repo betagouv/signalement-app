@@ -179,6 +179,7 @@ h2 {
     font-weight: bold;
     text-align: center;
     color: $white;
+    max-width: 255px;
   }
 
   .card-img-top {
@@ -262,6 +263,20 @@ h2 {
   h1 {
     font-size: 20px !important;
     line-height: 28px !important;
+  }
+
+  .button-pro {
+    .btn {
+      height: 29px;
+      font-size: 12px;
+      padding: 0 16px;
+      margin-right: 10px;
+
+      img {
+        height: 12px;
+        margin-left: 6px;
+      }
+    }
   }
 }
 

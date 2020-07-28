@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2, ViewChild } from '@angular/core';
 import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,6 +15,10 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftCompany, Website } from '../../../model/Company';
+import { isPlatformBrowser } from '@angular/common';
+import Utils from '../../../utils';
+
+declare var jQuery: any;
 
 export enum IdentificationKinds {
   Name = 'Name', Siret = 'Siret', None = 'None'
@@ -26,6 +30,15 @@ export enum IdentificationKinds {
   styleUrls: ['./company.component.scss']
 })
 export class CompanyComponent implements OnInit {
+
+  @ViewChild('searchKind', {static: false})
+  private searchKind: ElementRef;
+  @ViewChild('identSearch', {static: false})
+  private identSearch: ElementRef;
+  @ViewChild('identResult', {static: false})
+  private identResult: ElementRef;
+  @ViewChild('identBySiretResult', {static: false})
+  private identBySiretResult: ElementRef;
 
   step: Step;
   draftReport: DraftReport;
@@ -47,6 +60,8 @@ export class CompanyComponent implements OnInit {
   siretCtrl: FormControl;
   companySearchBySiretResult: CompanySearchResult;
 
+  selectedCompany: CompanySearchResult;
+
   showErrorsBySiret: boolean;
   searchBySiretWarning: string;
   searchBySiretError: string;
@@ -61,7 +76,9 @@ export class CompanyComponent implements OnInit {
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
-              private analyticsService: AnalyticsService) { }
+              private analyticsService: AnalyticsService,
+              private renderer: Renderer2,
+              public elementRef: ElementRef) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -122,6 +139,7 @@ export class CompanyComponent implements OnInit {
     this.companySearchResults = [];
     this.searchWarning = '';
     this.searchError = '';
+    this.selectedCompany = undefined;
   }
 
   searchCompany() {
@@ -163,6 +181,7 @@ export class CompanyComponent implements OnInit {
       this.showErrors = false;
       this.initSearchForm();
       this.initSearchBySiretForm();
+      this.scrollToElement(this.searchKind.nativeElement);
     }
   }
 
@@ -190,6 +209,7 @@ export class CompanyComponent implements OnInit {
       CompanySearchEventNames.singleResult
     );
     this.companySearchResults = companySearchResult.companies;
+    this.scrollToElement(this.identResult.nativeElement);
   }
 
   treatCaseTooManyResults() {
@@ -208,6 +228,7 @@ export class CompanyComponent implements OnInit {
       CompanySearchEventNames.severalResult
     );
     this.companySearchResults = companySearchResults.companies;
+    this.scrollToElement(this.identResult.nativeElement);
   }
 
   treatCaseError() {
@@ -219,14 +240,21 @@ export class CompanyComponent implements OnInit {
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
-  selectCompanyFromResults(companySearchResult: CompanySearchResult) {
-    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.selectCompany(companySearchResult.draftCompany);
+  selectCompany() {
+    this.analyticsService.trackEvent(EventCategories.report, CompanySearchEventActions.select, this.identificationKind);
+    const element = (this.identificationKind === IdentificationKinds.Name ? this.identResult : this.identBySiretResult).nativeElement
+    const rect = element.getBoundingClientRect();
+    const submitButtonOffset = 145;
+    if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
+      jQuery('html, body').animate({
+        scrollTop: element.offsetTop + rect.height + submitButtonOffset - window.innerHeight
+      }, 1000, 'linear');
+    }
   }
 
-  selectCompany(draftCompany: DraftCompany) {
+  submitCompany(draftCompany?: DraftCompany) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
-    this.draftReport.draftCompany = draftCompany;
+    this.draftReport.draftCompany = draftCompany || this.selectedCompany.draftCompany;
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
@@ -258,6 +286,7 @@ export class CompanyComponent implements OnInit {
             CompanySearchEventNames.singleResult
           );
           this.companySearchBySiretResult = company;
+          this.scrollToElement(this.identBySiretResult.nativeElement);
         } else {
           this.analyticsService.trackEvent(
             EventCategories.companySearch,
@@ -295,8 +324,22 @@ export class CompanyComponent implements OnInit {
     return this.showErrorsBySiret && formControl.errors;
   }
 
-  getIdentificationClass(kind: IdentificationKinds) {
-    return this.identificationKind ? (this.identificationKind === kind ? 'selected' : 'unselected') : '';
+  getRadioContainerClass(input: any, value: any) {
+    return input === value ? 'selected' : '';
+  }
+
+  scrollToElement($element) {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        const rect = $element.getBoundingClientRect();
+        if (Utils.isSmallerThanDesktop(this.platformId) && rect.height < window.innerHeight) {
+          this.renderer.setStyle($element, 'margin-bottom', `${window.innerHeight - rect.height - 110}px`);
+        }
+        jQuery('html, body').animate({
+          scrollTop: $element.offsetTop - 110
+        }, 1000, 'linear');
+      }, 500);
+    }
   }
 
 }
