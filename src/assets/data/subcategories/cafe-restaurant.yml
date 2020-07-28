@@ -7,6 +7,8 @@
       - question: Comment le signaler&#160;?
         answer: Signalez-le sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />de la DGCCRF</a>
 - title: Hygiène
+  tags:
+    - hygiène
   example: 'Exemple : locaux sales, rat, chaîne du froid'
   subcategoriesTitle: 'Vous voulez signaler&#160;:'
   subcategories:
