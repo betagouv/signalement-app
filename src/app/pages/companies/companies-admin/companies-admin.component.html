@@ -69,6 +69,7 @@
 
             <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
               <table class="table">
+                <caption>Liste des entreprises les plus signalées</caption>
                 <thead>
                 <tr>
                   <th>Commune</th>
@@ -102,6 +103,7 @@
           <div *ngSwitchCase="toActivateTab" tabindex="0" role="tabpanel" [id]="toActivateTab.label + '-panel'" [attr.aria-labelledby]="toActivateTab.label + '-tab'">
             <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
               <table class="table">
+                <caption>Liste des entreprises à activer</caption>
                 <thead>
                 <tr>
                   <th *appRole="[roles.Admin]" class="th-checkbox">

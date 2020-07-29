@@ -95,7 +95,7 @@
             Aucun signalement trouvé
           </div>
         </div>
-        <div class="row item pointer" [ngClass]="report.status === reportStatus.UnreadForPro ? 'font-weight-bold' : ''" *ngFor="let report of reports" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
+        <a class="row item pointer" [ngClass]="report.status === reportStatus.UnreadForPro ? 'font-weight-bold' : ''" *ngFor="let report of reports" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
           <div class="col-4 col-sm-3">
             {{report.creationDate | date : 'dd/MM/yyyy' }}
           </div>
@@ -111,7 +111,7 @@
             {{report.contactAgreement ? report.consumer.firstName + ' ' + report.consumer.lastName : 'Signalement anonyme'}}
             <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
           </div>
-        </div>
+        </a>
         <div class="row pt-3" *ngIf="withPagingAndFiltering()">
           <div class="col-12 col-sm-6">
             <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="3" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"

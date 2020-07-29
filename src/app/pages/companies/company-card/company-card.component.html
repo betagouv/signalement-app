@@ -17,18 +17,18 @@
       </dt>
       <dd class="col-sm-9">{{userAccess.companyAddress}}</dd>
     </dl>
-    <div class="row item pointer link" [routerLink]="['/entreprise', 'acces', userAccess.companySiret]" *ngIf="userAccess.level == 'admin'">
+    <a class="row item" [routerLink]="['/entreprise', 'acces', userAccess.companySiret]" *ngIf="userAccess.level == 'admin'">
       <div class="col-12">
         Gérer les accès
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
       </div>
-    </div>
-    <div class="row item pointer link" [routerLink]="['/suivi-des-signalements', user.roleUrlParam, 'siret', userAccess.companySiret]">
+    </a>
+    <a class="row item" [routerLink]="['/suivi-des-signalements', user.roleUrlParam, 'siret', userAccess.companySiret]">
       <div class="col-12">
         Consulter les signalements
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
       </div>
-    </div>
+    </a>
   </div>
   <ng-template #changeAddress>
     <div class="modal-body text-center">

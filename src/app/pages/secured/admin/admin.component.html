@@ -40,6 +40,7 @@
             <li class="list-group-item" (click)="!usersDGCCRF && showUsersDGCCRF()" [ngClass]="usersDGCCRF? 'active' : 'pointer'">Tous les utilisateurs</li>
           </ul>
           <table class="table table-sm" *ngIf="pendingDGCCRF">
+            <caption>Liste des invitations valides non activées</caption>
             <thead>
               <tr>
                 <th>Email</th>
@@ -54,6 +55,7 @@
             </tbody>
           </table>
           <table class="table table-sm" *ngIf="usersDGCCRF">
+            <caption>Liste des comptes DGCCRF activés</caption>
             <thead>
               <tr>
                 <th>Prénom</th>

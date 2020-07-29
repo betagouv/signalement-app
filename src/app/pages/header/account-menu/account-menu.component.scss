@@ -23,8 +23,9 @@
   .dropdown-item {
     color: $white;
 
-    &:hover {
-      background-color: $primary;
+    &:hover, &:focus {
+      background-color: $white;
+      color: $secondary;
     }
   }
 

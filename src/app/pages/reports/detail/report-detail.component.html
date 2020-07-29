@@ -259,6 +259,7 @@
                       {{report.consumerUploadedFiles.length === 1 ? 'Pièce jointe' : 'Pièces jointes'}}
                     </div>
                     <table class="table table-sm">
+                      <caption>Liste des pièces jointes du consommateur</caption>
                       <tbody>
                       <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
                         <td class="text-left pl-2">
@@ -316,6 +317,7 @@
                     {{report.professionalUploadedFiles.length === 1 ? 'Pièce jointe' : 'Pièces jointes' }}
                   </div>
                   <table class="table table-sm">
+                    <caption>Liste des pièces jointes du professionnel</caption>
                     <tbody>
                     <tr *ngFor="let uploadedFile of report.professionalUploadedFiles">
                       <td class="text-left pl-2">
