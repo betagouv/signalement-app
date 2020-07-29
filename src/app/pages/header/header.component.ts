@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Permissions, Roles, User } from '../../model/AuthUser';
-import { NavigationEnd, Router, Scroll } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 enum NavItems {
   Home = '/',
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   permissions = Permissions;
   user: User;
 
-  navItems = NavItems
+  navItems = NavItems;
   activeItem: NavItems;
 
   constructor(private authenticationService: AuthenticationService,
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.router.events.forEach((event) => {
-      if (event instanceof Scroll) {
+      if (event instanceof NavigationStart) {
         this.banner.nativeElement.focus();
       }
       if (event instanceof NavigationEnd) {

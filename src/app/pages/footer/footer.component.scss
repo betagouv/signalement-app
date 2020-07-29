@@ -4,14 +4,24 @@
 .footer {
   color: $white;
 
+  @media #{$smaller-than-desktop} {
+    position: absolute;
+    bottom: -192px;
+    width: 100%;
+  }
+
   .container {
-    display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
   }
 
   .brand {
-    font-size: 1.6rem;
+
+    font-weight: bold;
+
+    @media #{$larger-than-desktop} {
+      font-size: 1.6rem;
+    }
   }
 
   ul {
@@ -21,34 +31,51 @@
 
   .footer__social {
     margin-top: 1em;
-  }
 
-  .footer__social li {
-    display: inline;
-    margin-right: 1em;
-  }
+    li {
+      display: inline;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
 
-  .footer__social .icon {
-    width: 35px;
-    height: 35px;
-    fill: $white;
-    padding-bottom: 0;
+    .icon {
+      width: 35px;
+      height: 35px;
+      fill: $white;
+      padding-bottom: 0;
+    }
+
+    a {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   .footer__links {
     margin: 0;
     margin-top: 1em;
     line-height: 2em;
-  }
 
-  .footer__links h2 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-  }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0.5em;
+    }
 
-  .footer__links a {
-    color: $white;
-    text-decoration: none;
+    a {
+      color: $white;
+      text-decoration: none;
+    }
+
+    li {
+      @media #{$smaller-than-desktop} {
+        font-size: 14px;
+        line-height: 18px;
+
+        &.dgccrf-link {
+          font-size: 12px;
+        }
+      }
+    }
   }
 
   .footer__logo {

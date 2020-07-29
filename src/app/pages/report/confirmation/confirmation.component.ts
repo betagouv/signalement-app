@@ -18,6 +18,7 @@ import { CompanyKinds } from '../../../model/Anomaly';
 export class ConfirmationComponent implements OnInit {
 
   step: Step;
+  steps = Step;
   draftReport: DraftReport;
   companyKinds = CompanyKinds;
 
@@ -37,7 +38,7 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Confirmation;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
@@ -66,7 +67,6 @@ export class ConfirmationComponent implements OnInit {
         result => {
           this.loading = false;
           this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
-          this.reportStorageService.removeReportInProgressFromStorage();
           this.reportRouterService.routeForward(this.step);
         },
         error => {
@@ -82,10 +82,8 @@ export class ConfirmationComponent implements OnInit {
     return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
   }
 
-  getReportLastSubcategory() {
-    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
-      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
-    }
+  goToStep(step: string) {
+    this.reportRouterService.routeToStep(Step[step]);
   }
 
 }

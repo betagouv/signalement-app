@@ -20,53 +20,56 @@ export enum ReportPaths {
 })
 export class ReportRouterService {
 
-  draftReport: DraftReport;
-
   constructor(private anomalyService: AnomalyService,
               private reportStorageService: ReportStorageService,
               private router: Router) {
-
-    this.reportStorageService.retrieveReportInProgressFromStorage().subscribe(draftReport => {
-      this.draftReport = draftReport;
-    });
-
   }
 
   routeForward(currentStep: Step) {
-    this.router.navigate(
-      this.getRouteFromStep(this.nextStep(currentStep))
+    this.reportStorageService.retrieveReportInProgress().subscribe(
+      draftReport => {
+        this.router.navigate(this.getRouteFromStep(this.nextStep(currentStep, draftReport), draftReport));
+      }
     );
   }
 
   routeBackward(currentStep: Step) {
-    this.router.navigate(
-      this.getRouteFromStep(this.previousStep(currentStep))
+    this.reportStorageService.retrieveReportInProgress().subscribe(
+      draftReport => {
+        this.router.navigate(this.getRouteFromStep(this.previousStep(currentStep, draftReport), draftReport));
+      }
     );
   }
 
   routeToFirstStep() {
-    this.router.navigate(
-      this.getRouteFromStep(Step.Category)
+    this.reportStorageService.retrieveReportInProgress().subscribe(
+      draftReport => {
+        this.router.navigate(this.getRouteFromStep(Step.Category, draftReport));
+      }
     );
   }
 
   routeToStep(step: Step) {
-   this.router.navigate(this.getRouteFromStep(step));
+    this.reportStorageService.retrieveReportInProgress().subscribe(
+      draftReport => {
+        this.router.navigate(this.getRouteFromStep(step, draftReport));
+      }
+    );
   }
 
-  private getRouteFromStep(step: Step) {
+  private getRouteFromStep(step: Step, draftReport: DraftReport) {
     const route = [];
-    if (step !== Step.Category && this.anomalyService.getAnomalyByCategory(this.draftReport.category)) {
-      route.push(this.anomalyService.getAnomalyByCategory(this.draftReport.category).path);
+    if (step !== Step.Category && this.anomalyService.getAnomalyByCategory(draftReport.category)) {
+      route.push(this.anomalyService.getAnomalyByCategory(draftReport.category).path);
     }
     route.push(ReportPaths[step]);
     return route;
   }
 
-  nextStep(currentStep: Step) {
+  private nextStep(currentStep: Step, draftReport: DraftReport) {
     switch (currentStep) {
       case Step.Category:
-        const anomaly = this.anomalyService.getAnomalyByCategory(this.draftReport.category);
+        const anomaly = this.anomalyService.getAnomalyByCategory(draftReport.category);
         if (anomaly.information) {
           return Step.Information;
         } else if (anomaly.subcategories && anomaly.subcategories.length) {
@@ -75,7 +78,7 @@ export class ReportRouterService {
           return Step.Details;
         }
       case Step.Problem:
-        if (this.isReportLastSubcategoryInformation()) {
+        if (draftReport.lastSubcategory.information) {
           return Step.Information;
         } else {
           return Step.Details;
@@ -93,18 +96,18 @@ export class ReportRouterService {
     }
   }
 
-  previousStep(currentStep: Step) {
+  private previousStep(currentStep: Step, draftReport: DraftReport) {
     switch (currentStep) {
       case Step.Problem:
         return Step.Category;
       case Step.Details:
-        if (this.draftReport.subcategories) {
+        if (draftReport.subcategories) {
           return Step.Problem;
         } else {
           return Step.Category;
         }
       case Step.Information:
-        if (this.draftReport && this.draftReport.subcategories) {
+        if (draftReport && draftReport.subcategories) {
           return Step.Problem;
         } else {
           return Step.Category;
@@ -118,11 +121,5 @@ export class ReportRouterService {
       default:
         return Step.Category;
     }
-  }
-
-  isReportLastSubcategoryInformation() {
-    return this.draftReport
-      && this.draftReport.subcategories && this.draftReport.subcategories.length
-      && this.draftReport.subcategories[this.draftReport.subcategories.length - 1].information;
   }
 }

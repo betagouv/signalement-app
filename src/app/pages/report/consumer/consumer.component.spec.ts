@@ -9,9 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { AutofocusDirective } from '../../../directives/auto-focus.directive';
-import { genConsumer, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
-import { CompanyKinds } from '../../../model/Anomaly';
+import { genConsumer, genDraftReport } from '../../../../../test/fixtures.spec';
+import { of } from 'rxjs';
 
 describe('ConsumerComponent', () => {
 
@@ -24,13 +23,12 @@ describe('ConsumerComponent', () => {
       declarations: [
         ConsumerComponent,
         BreadcrumbComponent,
-        AutofocusDirective,
       ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule.withRoutes([{ path: ReportPaths.Confirmation, redirectTo: '' }]),
+        RouterTestingModule.withRoutes([{ path: `:category/${ReportPaths.Confirmation}`, redirectTo: '' }]),
         Angulartics2RouterlessModule.forRoot(),
       ],
       providers: [
@@ -44,14 +42,13 @@ describe('ConsumerComponent', () => {
 
   describe('case of company report when the consumer is not an employee', () => {
 
-    const draftReport = Object.assign(genDraftReport(), {
-      consumer: undefined,
-      employeeConsumer : false
-    });
+    const draftReportInProgress = Object.assign(genDraftReport(Step.Company), { employeeConsumer : false });
+    let retrieveReportSpy;
 
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(Object.assign(new DraftReport(), draftReport));
+      retrieveReportSpy = spyOn(reportStorageService, 'retrieveReportInProgress')
+        .and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
       fixture = TestBed.createComponent(ConsumerComponent);
       component = fixture.componentInstance;
@@ -61,7 +58,6 @@ describe('ConsumerComponent', () => {
     it('should create', () => {
       expect(component).toBeTruthy();
     });
-
 
     describe('ngOnInit function', () => {
 
@@ -78,13 +74,6 @@ describe('ConsumerComponent', () => {
         expect(component.consumerForm.controls['contactAgreement']).toEqual(component.contactAgreementCtrl);
       });
 
-      it('should not define contactAgreement form controls when the consumer is an employee', () => {
-        expect(component.consumerForm.controls['firstName']).toEqual(component.firstNameCtrl);
-        expect(component.consumerForm.controls['lastName']).toEqual(component.lastNameCtrl);
-        expect(component.consumerForm.controls['email']).toEqual(component.emailCtrl);
-        expect(component.consumerForm.controls['contactAgreement']).toEqual(component.contactAgreementCtrl);
-      });
-
       it('should initialize the inputs with empty values when there is no initial value', () => {
         const nativeElement = fixture.nativeElement;
         expect(nativeElement.querySelector('input[formControlName="firstName"]').value).toEqual('');
@@ -95,11 +84,8 @@ describe('ConsumerComponent', () => {
       });
 
       it('should initialize the details inputs with initial value when it exists', () => {
-        const draftReportWithConsumer = Object.assign(genDraftReport(), {
-          consumer: genConsumer(),
-          contactAgreement: true
-        });
-        reportStorageService.changeReportInProgress(draftReportWithConsumer);
+        const draftReportWithConsumer = Object.assign(genDraftReport(Step.Consumer), { employeeConsumer : false });
+        retrieveReportSpy.and.returnValue(of(Object.assign(new DraftReport(), draftReportWithConsumer)));
 
         component.ngOnInit();
         fixture.detectChanges();
@@ -148,10 +134,9 @@ describe('ConsumerComponent', () => {
         nativeElement.querySelector('button#submitConsumerForm').click();
         fixture.detectChanges();
 
-        const draftReportExpected = Object.assign(new DraftReport(), draftReport, {
+        const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
           consumer: consumer,
-          contactAgreement: true,
-          employeeConsumer: false
+          contactAgreement: true
         });
 
         expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Consumer);
@@ -160,32 +145,13 @@ describe('ConsumerComponent', () => {
     });
   });
 
-  describe('case of website report when the consumer is not an employee', () => {
-    beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(Object.assign(genDraftReport(), {
-        subcategories: Object.assign(genSubcategory(), {companyKind: CompanyKinds.WEBSITE}),
-        employeeConsumer: false
-      }));
-
-      fixture = TestBed.createComponent(ConsumerComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it('should define all form controls except contactAgreement', () => {
-      expect(component.consumerForm.controls['firstName']).toEqual(component.firstNameCtrl);
-      expect(component.consumerForm.controls['lastName']).toEqual(component.lastNameCtrl);
-      expect(component.consumerForm.controls['email']).toEqual(component.emailCtrl);
-      expect(component.consumerForm.contains('contactAgreement')).toBeFalsy();
-    });
-
-  });
-
   describe('case of the consumer is an employee', () => {
+
+    const draftReportInProgress = Object.assign(genDraftReport(Step.Company), {employeeConsumer: true});
+
     beforeEach(() => {
       reportStorageService = TestBed.get(ReportStorageService);
-      reportStorageService.changeReportInProgress(Object.assign(genDraftReport(), { employeeConsumer : true }));
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
       fixture = TestBed.createComponent(ConsumerComponent);
       component = fixture.componentInstance;

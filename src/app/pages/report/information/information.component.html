@@ -3,14 +3,14 @@
     <div class="container max-width">
       <ng-container *ngIf="informationToDisplay">
         <h2 class="text-center">Emmh, nous ne pouvons pas traiter votre signalement.</h2>
-        <div class="bg-white m-4 p-4">
+        <div class="bg-white mb-4 m-sm-4 p-2 p-sm-4">
           <p *ngIf="informationToDisplay.outOfScope">
             Nous ne doutons pas que vous ayez réellement rencontré un problème mais... il ne s’agit pas d’une fraude.
           </p>
-          <p tabindex="-1" id="titleInformation" [innerHTML]="informationToDisplay.title">
+          <p id="titleInformation" [innerHTML]="informationToDisplay.title">
           </p>
           <p *ngIf="informationToDisplay.content" [innerHTML]="informationToDisplay.content"></p>
-  
+
           <div *ngIf="informationToDisplay.actions">
             <div class="collapse-container" *ngFor="let action of informationToDisplay.actions; let index = index">
               <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapseAction_{{index}}">
@@ -30,8 +30,8 @@
             <hr />
           </div>
         </div>
-  
-        <div class="bg-white m-4 p-4">
+
+        <div class="bg-white mb-4 m-sm-4 p-2 p-sm-4">
           <div class="text-center" *ngIf="!ratingSuccess; else ratingSuccessTpl">
             <p>Est-ce que cette information vous a été utile ?</p>
             <button type="button" class="btn btn-outline-primary mr-3" (click)="rateInformation(true)" title="oui">
@@ -56,7 +56,7 @@
 
     <div class="text-center">
       <button class="btn btn-lg btn-primary" (click)="newReport()">
-        Retourner à l'accueil<img src="/assets/images/icon-home.svg" alt="Icône accueil" />
+        Retourner à l'accueil<img src="/assets/images/icon_home.svg" alt="Icône accueil" />
       </button>
     </div>
 

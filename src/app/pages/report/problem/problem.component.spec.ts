@@ -16,9 +16,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { AutofocusDirective } from '../../../directives/auto-focus.directive';
-import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
+import { genDraftReport } from '../../../../../test/fixtures.spec';
 
 describe('ProblemComponent', () => {
 
@@ -26,9 +24,6 @@ describe('ProblemComponent', () => {
   let fixture: ComponentFixture<ProblemComponent>;
   let reportStorageService: ReportStorageService;
   let anomalyService: AnomalyService;
-
-  const draftReportFixture = new DraftReport();
-  draftReportFixture.category = 'catégorie';
 
   const subcategoriesFixture = [
     Object.assign( new Subcategory(), { title: 'title1', description: 'description1' }),
@@ -44,7 +39,6 @@ describe('ProblemComponent', () => {
   ];
 
   const anomalyFixture = new Anomaly();
-  anomalyFixture.category = draftReportFixture.category;
   anomalyFixture.subcategories = subcategoriesFixture;
   anomalyFixture.path = 'myPath';
 
@@ -54,7 +48,6 @@ describe('ProblemComponent', () => {
         ProblemComponent,
         SubcategoryComponent,
         BreadcrumbComponent,
-        AutofocusDirective,
       ],
       imports: [
         FormsModule,
@@ -65,15 +58,6 @@ describe('ProblemComponent', () => {
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test1 ],
-              scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test1]: 0 }
-            }
-          ]
-        )
       ],
       providers: []
     })
@@ -93,9 +77,7 @@ describe('ProblemComponent', () => {
   });
 
   it('should display subcategories', () => {
-    spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(
-      of(Object.assign(new DraftReport(), draftReportFixture))
-    );
+    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Category)));
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
 
     fixture.detectChanges();
@@ -107,9 +89,9 @@ describe('ProblemComponent', () => {
   describe('when receive subcategories', () => {
 
     it('should change the shared report with a report which contains subcategories', () => {
-      const sharedReportFixture = Object.assign(new DraftReport(), draftReportFixture);
-      reportStorageService.changeReportInProgress(sharedReportFixture);
-      spyOn(reportStorageService, 'retrieveReportInProgressFromStorage').and.returnValue(of(sharedReportFixture));
+      const draftReportInProgress = genDraftReport(Step.Category);
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+
       component.anomaly = new Anomaly();
       component.anomaly.subcategories = subcategoriesFixture;
       spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
@@ -122,9 +104,9 @@ describe('ProblemComponent', () => {
       const subcategoryExpected = new Subcategory();
       subcategoryExpected.title = 'title2';
       subcategoryExpected.description = 'description2';
-      const draftReportExpected = new DraftReport();
-      draftReportExpected.category = sharedReportFixture.category;
-      draftReportExpected.subcategories = [subcategoryExpected];
+      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
+        subcategories: [subcategoryExpected]
+      });
 
       expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
 

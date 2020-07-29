@@ -1,24 +1,46 @@
 <main role="main">
-  <section class="section-small section-primary">
-    <div class="container">
-      <h1 id="title-thanks" class="text-center" tabindex="-1">Votre signalement a bien été envoyé&#160;!</h1>
-    </div>
-  </section>
-  <section class="section section-lighter-grey">
+  <section class="section section-lighter-grey" *ngIf="draftReport">
     <div class="container max-width">
-      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
+      <div class="notification success mb-5">
+        <i class="material-icons md-18 attach-icon">check_circle</i> Votre signalement a été envoyé.
+      </div>
+      <div class="card" *ngIf="testingSentence()">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3 p-0">
+              <img src="/assets/images/illustrations/dgccrf.png" alt="Illustration" />
+            </div>
+            <div class="col-9 d-sm-none">
+              <h2>{{testingSentence()}}</h2>
+            </div>
+            <div class="col-12 col-sm-9">
+              <h2 class="d-none d-sm-block">{{testingSentence()}}</h2>
+              <button class="btn btn-lg btn-primary float-sm-right" (click)="requestAdditionnalInfos()" *ngIf="!infosRequested">
+                Poursuivre
+              </button>
+              <p *ngIf="infosRequested">
+                Désolé, nous ne sommes pas encore prêts !
+                <br />
+                Nous sommes en train de finir de développer cette possibilité, mais merci de nous avoir fait part de votre intérêt !
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-3">
-                <img src="/assets/images/picture-problem.svg" alt="Illustration" />
+              <div class="col-3 p-0">
+                <img src="/assets/images/illustrations/consumer.png" alt="Illustration" />
               </div>
               <div class="col-9 d-sm-none">
                 <h2>Comment me faire rembourser ou dédommager ?</h2>
               </div>
               <div class="col-12 col-sm-9">
                 <h2 class="d-none d-sm-block">Comment me faire rembourser ou dédommager ?</h2>
-                <div class="collapse-container" *ngFor="let consumerActionGroup of getReportLastSubcategory().consumerActions; let index = index">
+                <div class="collapse-container" *ngFor="let consumerActionGroup of draftReport.lastSubcategory.consumerActions; let index = index">
                   <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse{{index}}">
                     <button type="button" class="btn">{{index + 1}}</button>
                     <button type="button" class="btn link">
@@ -46,17 +68,17 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-3">
-              <img src="/assets/images/picture-pro.svg" alt="Illustration" />
+            <div class="col-3 p-0">
+              <img src="/assets/images/illustrations/company.png" alt="Illustration" />
             </div>
             <div class="col-9 d-sm-none">
               <h2>Que va-t-il se passer pour l'entreprise ?</h2>
             </div>
             <div class="col-12 col-sm-9">
               <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
-              <ng-container *ngIf="!draftReport?.employeeConsumer; else employeeConsumer">
+              <ng-container *ngIf="!draftReport.employeeConsumer; else employeeConsumer">
                 <ng-container *ngIf="draftReport.draftCompany.siret; else noSiret">
-                  <ng-container *ngIf="draftReport?.contactAgreement; else noContactAgreement">
+                  <ng-container *ngIf="draftReport.contactAgreement; else noContactAgreement">
                     <p>
                       L'entreprise recevra votre signalement.
                       Elle aura la possibilité de corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
@@ -102,12 +124,12 @@
           </div>
         </div>
       </div>
-      <ng-container *ngIf="getReportLastSubcategory()?.consumerActions">
+      <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-3">
-                <img src="/assets/images/picture-help.svg" alt="Illustration" />
+              <div class="col-3 p-0">
+                <img src="/assets/images/illustrations/contact.png" alt="Illustration" />
               </div>
               <div class="col-9 d-sm-none">
                 <h2>Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
@@ -138,7 +160,7 @@
 
     <div class="text-center">
       <button class="btn btn-lg btn-primary" (click)="newReport()">
-        Retourner à l'accueil<img src="/assets/images/icon-home.svg" alt="Icône accueil" />
+        Retourner à l'accueil<img src="/assets/images/icon_home.svg" alt="Icône accueil" />
       </button>
     </div>
   </section>

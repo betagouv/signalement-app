@@ -6,7 +6,6 @@ import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
-import { CompanyKinds } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-consumer',
@@ -33,7 +32,7 @@ export class ConsumerComponent implements OnInit {
 
   ngOnInit() {
     this.step = Step.Consumer;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
@@ -58,7 +57,7 @@ export class ConsumerComponent implements OnInit {
       email: this.emailCtrl
     });
 
-    if (this.draftReport.employeeConsumer || this.draftReport.companyKind !== CompanyKinds.SIRET) {
+    if (this.draftReport.employeeConsumer) {
       this.contactAgreementCtrl = this.formBuilder.control(false);
     } else {
       this.contactAgreementCtrl = this.formBuilder.control(this.draftReport.contactAgreement, Validators.required);

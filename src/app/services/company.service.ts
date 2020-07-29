@@ -355,6 +355,42 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bmatmut\b/i,
+      results: [
+        {
+          "siret": "77570148500101",
+          "nom_raison_sociale": "MATMUT MUTUALITE",
+          "l1_normalisee": "MATMUT MUTUALITE",
+          "l2_normalisee": null,
+          "l3_normalisee": null,
+          "l4_normalisee": "66 RUE DE SOTTEVILLE",
+          "l5_normalisee": null,
+          "l6_normalisee": "76100 ROUEN",
+          "code_postal": "76100",
+          "libelle_activite_principale": "Autres assurances",
+          "highlight": "Pour tout problème avec la Matmut, peu importe votre lieu d'habitation"
+        }
+      ]
+    },
+    {
+      query: /\bsncf\b/i,
+      results: [
+        {
+          "siret": "39284731500067",
+          "nom_raison_sociale": "SNCF VOYAGES DEVELOPPEMENT",
+          "l1_normalisee": "SNCF VOYAGES DEVELOPPEMENT",
+          "l2_normalisee": "CNIT 1",
+          "l3_normalisee": null,
+          "l4_normalisee": "2 PLACE DE LA DEFENSE",
+          "l5_normalisee": null,
+          "l6_normalisee": "92400 COURBEVOIE",
+          "code_postal": "92400",
+          "libelle_activite_principale": "SNCF",
+          "highlight": "Pour tout problème avec la SNCF, peu importe votre lieu d'habitation"
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {

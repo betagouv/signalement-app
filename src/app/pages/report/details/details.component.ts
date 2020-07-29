@@ -14,8 +14,6 @@ import { isDefined } from '@angular/compiler/src/util';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { Keyword } from '../../../model/Keyword';
-import { AbTestsService } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
 
 export const fileSizeMax = 5000000;
 
@@ -69,13 +67,12 @@ export class DetailsComponent implements OnInit {
               private fileUploaderService: FileUploaderService,
               private localeService: BsLocaleService,
               private keywordService: KeywordService,
-              private anomalyService: AnomalyService,
-              private abTestsService: AbTestsService) {
+              private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
     this.step = Step.Details;
-    this.reportStorageService.retrieveReportInProgressFromStorage()
+    this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(report => {
         if (report) {
@@ -93,17 +90,11 @@ export class DetailsComponent implements OnInit {
     this.searchKeywords();
 
     this.maxDate = new Date();
-
-    if (this.abTestsService.getVersion(SVETestingScope) === SVETestingVersions.Test2) {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.requestUserToContinueReportOnDetailsStep);
-    } else {
-      this.continueReport = true;
-    }
   }
 
   initDetailInputs() {
-    if (this.getReportLastSubcategory() && this.getReportLastSubcategory().detailInputs) {
-      this.detailInputs = this.getReportLastSubcategory().detailInputs;
+    if (this.draftReport.lastSubcategory && this.draftReport.lastSubcategory.detailInputs) {
+      this.detailInputs = this.draftReport.lastSubcategory.detailInputs;
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
     }
@@ -272,7 +263,6 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetailsForm() {
-
     if (!this.detailsForm.valid) {
       this.showErrors = true;
     } else {
@@ -306,7 +296,10 @@ export class DetailsComponent implements OnInit {
 
   searchKeywords(formControl: AbstractControl = this.descriptionCtrl) {
     if (formControl && this.draftReport.category) {
-      const res = this.keywordService.search(formControl.value, this.anomalyService.getAnomalyByCategory(this.draftReport.category).categoryId);
+      const res = this.keywordService.search(
+        formControl.value,
+        this.anomalyService.getAnomalyByCategory(this.draftReport.category).categoryId
+      );
       if (!res) {
         this.keywordDetected = null;
       } else {
@@ -338,12 +331,6 @@ export class DetailsComponent implements OnInit {
 
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
-  }
-
-  getReportLastSubcategory() {
-    if (this.draftReport && this.draftReport.subcategories && this.draftReport.subcategories.length) {
-      return this.draftReport.subcategories[this.draftReport.subcategories.length - 1];
-    }
   }
 
   isRadioInputPrecisionRequired(detailInput: DetailInput, option: string) {
@@ -408,16 +395,6 @@ export class DetailsComponent implements OnInit {
   setEmployeeConsumerValue(value: boolean) {
     this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
     this.draftReport.employeeConsumer = value;
-  }
-
-
-  setContinueReportValue(value: boolean) {
-    this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.continueReportOnDetailsStep : ReportEventActions.stopReportBeforeDetailsStep);
-    if (!value) {
-      window.location.href = 'https://www.economie.gouv.fr/dgccrf';
-    } else {
-      this.continueReport = true;
-    }
   }
 }
 
