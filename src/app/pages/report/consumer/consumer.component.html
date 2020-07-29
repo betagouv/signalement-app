@@ -34,21 +34,21 @@
           <div class="row">
             <div class="col-12 col-sm-6 mb-3">
               <label for="fname" [class]="hasError(firstNameCtrl) ? 'error' : ''">
-                Votre prénom <span class="error">*</span>
+                Votre prénom (obligatoire)
               </label>
               <input type="text" formControlName="firstName" id="fname" name="fname" autocomplete="given-name">
             </div>
 
             <div class="col-12 col-sm-6 mb-3">
               <label for="lname" [class]="hasError(lastNameCtrl) ? 'error' : ''">
-                Votre nom <span class="error">*</span>
+                Votre nom (obligatoire)
               </label>
               <input type="text" formControlName="lastName" id="lname" name="lname" autocomplete="family-name">
             </div>
 
             <div class="col-12 col-sm-6 mb-4">
               <label for="email" [class]="hasError(emailCtrl) ? 'error' : ''">
-                Votre email <span class="error">*</span>
+                Votre email (obligatoire)
               </label>
               <input type="email" formControlName="email" id="email" name="email" autocomplete="email" />
             </div>

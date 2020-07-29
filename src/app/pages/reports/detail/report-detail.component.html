@@ -51,17 +51,17 @@
                       <div class="form__group">
                         <div class="row">
                           <div class="col-12 col-sm-6">
-                            <label for="firstName"> Prénom <span class="error">*</span></label>
+                            <label for="firstName"> Prénom (obligatoire)</label>
                             <input type="text" formControlName="firstName" id="firstName">
                           </div>
                           <div class="col-12 col-sm-6">
-                            <label for="lastName">Nom <span class="error">*</span></label>
+                            <label for="lastName">Nom (obligatoire)</label>
                             <input type="text" formControlName="lastName" id="lastName">
                           </div>
                         </div>
                       </div>
                       <div class="form__group">
-                        <label for="email">Email <span class="error">*</span></label>
+                        <label for="email">Email (obligatoire)</label>
                         <input type="email" formControlName="email" id="email"/>
                       </div>
                       <div class="form__group" *ngIf="consumerForm.contains('contactAgreement')">

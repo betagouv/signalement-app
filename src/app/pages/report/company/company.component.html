@@ -51,7 +51,7 @@
 
           <form [formGroup]="websiteForm" (submit)="submitWebsiteForm()" id="websiteForm">
             <div class="form__group mt-4">
-              <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) <span class="error">*</span>
+              <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) (obligatoire)
               </label>
               <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
             </div>
@@ -134,22 +134,23 @@
               <form [formGroup]="searchForm" (submit)="searchCompany()" id="searchForm">
 
                 <div class="form__group mt-4">
-                  <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise signalée <span class="error">*</span>
+                  <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise signalée (obligatoire)
                   </label>
                   <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean"/>
                 </div>
                 <div class="form__group">
                   <label for="searchPostalCodeInput"[class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
-                    Code postal <span class="error">*</span>
+                    Code postal (obligatoire)
                   </label>
                   <div class="row">
                     <div class="col-12 col-sm-6">
-                      <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110" />
+                      <input type="text" class="form-control" formControlName="searchPostalCode" name="searchPostalCode" id="searchPostalCodeInput" placeholder="ex : 41110"
+                             aria-describedby="postalCode-description"/>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <small class="form-text text-muted">
+                  <small class="form-text text-muted" id="postalCode-description">
                     Vous pouvez signaler des entreprises privées établies en France uniquement.
                   </small>
                 </div>
@@ -243,10 +244,10 @@
 
                 <div class="form__group mt-4">
                   <label for="siret" [class]="hasErrorBySiret(siretCtrl) ? 'error' : ''">
-                    Numéro SIRET de l'entreprise <span class="error">*</span>
+                    Numéro SIRET de l'entreprise (obligatoire)
                   </label>
 
-                  <div class="note mb-1">
+                  <div class="note mb-1" id="siret-description">
                     Le SIRET est un numéro composé de 14 chiffres identifiant l'entreprise concernée.
                     <br/>
                     <a data-toggle="collapse" href="#collapseHow">Comment retrouver un SIRET ?</a>
@@ -306,7 +307,7 @@
                       </li>
                     </ul>
                   </div>
-                  <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010">
+                  <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" aria-describedby="siret-description">
                 </div>
 
                 <div class="notification error mt-3" *ngIf="showErrorsBySiret && searchBySiretForm.invalid">

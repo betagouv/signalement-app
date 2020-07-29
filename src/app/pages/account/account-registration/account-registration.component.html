@@ -33,7 +33,7 @@
               </div>
               <div class="form-group">
                 <label for="firstName">
-                  Prénom&nbsp;<span class="error">*</span>
+                  Prénom (obligatoire)
                 </label>
                 <div *ngIf="showErrors && firstNameCtrl.hasError('required')" class="text-warning">
                   <i class="material-icons md-18">warning</i> Veuillez renseigner votre prénom.
@@ -42,7 +42,7 @@
               </div>
               <div class="form-group">
                 <label for="lastName">
-                  Nom&nbsp;<span class="error">*</span>
+                  Nom (obligatoire)
                 </label>
                 <div *ngIf="showErrors && lastNameCtrl.hasError('required')" class="text-warning">
                   <i class="material-icons md-18">warning</i> Veuillez renseigner votre nom.
@@ -51,7 +51,7 @@
               </div>
               <div class="form-group">
                 <label for="password">
-                  Mot de passe&nbsp;<span class="error">*</span>
+                  Mot de passe (obligatoire)
                 </label>
                 <div class="note mb-1">
                   Le mot de passe doit avoir 8 caractères minimum.
@@ -66,7 +66,7 @@
               </div>
               <div class="form-group">
                 <label for="confirmPassword">
-                  Confirmer le mot de passe&nbsp;<span class="error">*</span>
+                  Confirmer le mot de passe (obligatoire)
                 </label>
                 <div *ngIf="showErrors && confirmPasswordCtrl.hasError('required')" class="text-warning">
                   <i class="material-icons md-18">warning</i> Veuillez confirmer votre mot de passe.
