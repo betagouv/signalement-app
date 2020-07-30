@@ -9,6 +9,8 @@
 - title: Hygiène
   companyKind: 'SIRET
   example: 'Exemple : locaux sales, rat, chaîne du froid'
+  tags:
+    - hygiène
   subcategoriesTitle: 'Vous voulez signaler&#160;:'
   subcategories:
     - title: J'ai vu un animal (nuisible)

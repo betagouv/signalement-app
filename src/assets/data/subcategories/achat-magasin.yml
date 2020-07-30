@@ -92,6 +92,8 @@
               rank: 3
               type: TEXTAREA
     - title: Hygiène
+      tags:
+        - hygiène
       example: 'Exemple : magasin sale, produit pas au frais, mauvaises odeurs'
       subcategories:  
         - title: Hygiène des locaux et du matériel
