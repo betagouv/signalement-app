@@ -74,7 +74,18 @@ list:
     description: Vous avez passé commande sur internet, votre problème concerne un site web.
     rank: 18
     sprite: category-ecommerce
-    subcategories: !!import/single subcategories/internet.yml
+    information:
+      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
+      content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
+      actions:
+        - question: Un problème avec un commerçant&#160;?
+          example: 'Exemples : colis non reçu, pas de nouvelle de votre commande'
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+        - question: Un spam que vous avez reçu&#160;?
+          answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
+        - question: Un contenu qui vous semble inapproprié&#160;?
+          example: 'Exemples : trafic illicite, pédopornographie'
+          answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
   - category: Travaux / Rénovation
     categoryId: TRAV
     path: travaux-renovation
