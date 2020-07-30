@@ -142,7 +142,11 @@
                       rows="3"
                       maxlength="500"
                       placeholder="500 caractères maximum">
-          </textarea>
+            </textarea>
+
+            <div class="note">
+              Nombre de caractères restants : {{500 - (detailsForm.controls[getFormControlName(detailInput)].value || '').length}}
+            </div>
           </ng-container>
 
         </div>

@@ -53,7 +53,7 @@ export class WithSubcategories {
 
   getInternetSubcategoriesData() {
     return {
-      subcategoriesTitle: 'Est-ce que votre problème fait suite à un achat sur internet ?',
+      subcategoriesTitle: 'Est-ce que votre problème fait suite à un achat sur internet ?',
       subcategories: [
         Object.assign(new Subcategory(), this,
           {
