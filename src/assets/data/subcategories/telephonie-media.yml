@@ -9,7 +9,7 @@
           subcategories:
             - title: Augmentation du débit ou des données disponibles
               example: 'Exemple : passage de 20 Go à 40 Go pour 5 euros de plus'
-              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
+              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
               subcategories:
                 - title: Oui, j'ai été prévenu par email ou courrier
                   information: !!import/single ../common/info/tel.yml
@@ -19,7 +19,7 @@
                   consumerActions: !!import/single ../common/actions/telephonie-internet.yml
             - title: Modification concernant les sms, mms ou appels
               example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
-              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
+              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
               subcategories:
                 - title: Oui, j'ai été prévenu par email ou courrier
                   information: !!import/single ../common/info/tel.yml

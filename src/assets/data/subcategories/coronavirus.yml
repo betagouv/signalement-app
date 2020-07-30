@@ -20,7 +20,7 @@
           type: TEXTAREA
           optionnal: true
           placeholder: Volume, marque ...
-        - label : Quel est le prix de vente ?
+        - label : Quel est le prix de vente ?
           rank: 3
           type: TEXT
           optionnal: true
@@ -51,7 +51,7 @@
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Quel est le problème avec le prix de la livraison ?
+        - label: Quel est le problème avec le prix de la livraison ?
           rank: 2
           type: TEXTAREA
     - title: Autre problème de prix
@@ -60,7 +60,7 @@
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Quel est le problème ?
+        - label: Quel est le problème ?
           rank: 2
           type: TEXTAREA
     - title: Problème avec un produit livré
@@ -69,7 +69,7 @@
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Quel est le problème ?
+        - label: Quel est le problème ?
           rank: 2
           type: TEXTAREA
       fileLabel: Photo du produit si possible
