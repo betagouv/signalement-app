@@ -1,5 +1,5 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, Subcategory } from './Anomaly';
+import { CompanyKinds, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
@@ -77,6 +77,7 @@ export class Report {
   id: string;
   category: string;
   subcategories: Subcategory[];
+  tags: Tag[];
   company: Company;
   website: Website;
   detailInputValues: DetailInputValue[];

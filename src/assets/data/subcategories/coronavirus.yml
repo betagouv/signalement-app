@@ -42,6 +42,8 @@
 - title: Problème / abus avec un site de vente en ligne
   example: "Exemple : site de livraison de courses à domicile"
   companyKind: 'WEBSITE'
+  tags:
+    - Internet
   subcategories:
     - title: Le prix de la livraison a augmenté
       detailInputs:
