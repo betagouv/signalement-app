@@ -18,11 +18,12 @@ import { NotFoundComponent } from './pages/static/notfound/notfound.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { Angulartics2Module } from 'angulartics2';
 import { UnavailableComponent } from './pages/static/unavailable/unavailable.component';
-import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { ComponentsModule, NgxLoadingConfig } from './components/components.module';
 import { environment } from '../environments/environment';
-import { HeaderComponent } from './pages/header/header.component';
+import { HeaderModule } from './pages/header/header.module';
+import { AppRoleModule } from './directives/app-role/app-role.module';
+import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -50,11 +51,9 @@ class ErrorLogger extends ErrorHandler {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FooterComponent,
     UnavailableComponent,
     StatsComponent,
-    AccountMenuComponent,
     NotFoundComponent,
   ],
   imports: [
@@ -76,7 +75,10 @@ class ErrorLogger extends ErrorHandler {
     BsDropdownModule.forRoot(),
     TooltipModule,
     Angulartics2Module.forRoot(),
-    ComponentsModule
+    ComponentsModule,
+    HeaderModule,
+    AppRoleModule,
+    AppPermissionModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
