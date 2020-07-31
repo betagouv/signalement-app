@@ -21,7 +21,6 @@ import { UnavailableComponent } from './pages/static/unavailable/unavailable.com
 import { AccountMenuComponent } from './pages/header/account-menu/account-menu.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { ComponentsModule, NgxLoadingConfig } from './components/components.module';
-import { DirectivesModule } from './directives/directives.module';
 import { environment } from '../environments/environment';
 import { HeaderComponent } from './pages/header/header.component';
 
@@ -77,8 +76,7 @@ class ErrorLogger extends ErrorHandler {
     BsDropdownModule.forRoot(),
     TooltipModule,
     Angulartics2Module.forRoot(),
-    ComponentsModule,
-    DirectivesModule
+    ComponentsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
