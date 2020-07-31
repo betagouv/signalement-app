@@ -6,7 +6,6 @@ list:
     description: gel hydroalcoolique, masque, arnaque liée au COVID-19, distanciation physique...
     rank: 1
     sprite: category-covid
-    companyKind: SIRET
     subcategories: !!import/single subcategories/coronavirus.yml
   - category: Café / Restaurant
     categoryId: CR
@@ -14,7 +13,6 @@ list:
     description: bar, cafeteria, food truck...
     rank: 9
     sprite: category-restaurant
-    companyKind: SIRET
     subcategories: !!import/single subcategories/cafe-restaurant.yml
   - category: Achat / Magasin
     categoryId: MAG
@@ -22,7 +20,6 @@ list:
     description: supermarché, boulangerie, magasin de jouet...
     rank: 2
     sprite: category-store
-    companyKind: SIRET
     subcategories: !!import/single subcategories/achat-magasin.yml
   - category: Services aux particuliers
     categoryId: SERV
@@ -30,7 +27,6 @@ list:
     description: coiffeur, pressing, esthéticienne, aide à la personne...
     rank: 11
     sprite: category-service
-    companyKind: SIRET
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
   - category: Eau / Gaz / Electricité
     categoryId: ELEC
@@ -38,7 +34,6 @@ list:
     description: contrat et facture eau, gaz et électricité...
     rank: 12
     sprite: category-energy
-    companyKind: SIRET
     subcategories: !!import/single subcategories/eau-gaz-electricite.yml
   - category: Téléphonie / Internet / médias
     categoryId: TEL
@@ -46,7 +41,6 @@ list:
     description: fournisseur d'accès, abonnement télé...
     rank: 13
     sprite: category-internet
-    companyKind: SIRET
     subcategories: !!import/single subcategories/telephonie-media.yml
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
@@ -54,7 +48,6 @@ list:
     description: crédit, assurance
     rank: 14
     sprite: category-bank
-    companyKind: SIRET
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
   - category: Intoxication alimentaire
     categoryId: INTOX
@@ -82,16 +75,16 @@ list:
     rank: 18
     sprite: category-ecommerce
     information:
-      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
+      title: Ces signalements ne sont <b>pas encore disponibles</b>, mais nous y travaillons activement !
       content: Dans certains cas, d'autres services de signalement existent déjà et pourraient correspondre au problème que vous souhaitez signaler.
       actions:
         - question: Un problème avec un commerçant&#160;?
-          example: 'Exemples : colis non reçu, pas de nouvelle de votre commande'
+          example: 'Exemples : colis non reçu, pas de nouvelle de votre commande'
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
         - question: Un spam que vous avez reçu&#160;?
           answer: Signaler sur Signal-Spam<br><a href="http://www.signal-spam.fr" target="_blank">http://www.signal-spam.fr</a>
         - question: Un contenu qui vous semble inapproprié&#160;?
-          example: 'Exemples : trafic illicite, pédopornographie'
+          example: 'Exemples : trafic illicite, pédopornographie'
           answer: Signaler sur Internet-Signalement<br><a href="https://www.internet-signalement.gouv.fr" target="_blank">https://www.internet-signalement.gouv.fr</a>
   - category: Travaux / Rénovation
     categoryId: TRAV
@@ -99,7 +92,6 @@ list:
     description: dépannage, plombier, couvreur, pose de panneaux...
     rank: 107
     sprite: category-craft
-    companyKind: SIRET
     subcategories: !!import/single subcategories/travaux-renovation.yml
   - category: Voyage / Loisirs
     categoryId: VOY
@@ -107,7 +99,6 @@ list:
     description: voyage organisé, camping, concert, sport, avion, train, taxi
     rank: 16
     sprite: category-hobbies
-    companyKind: SIRET
     subcategories: !!import/single subcategories/voyage-loisirs.yml
   - category: Immobilier
     categoryId: IMM
@@ -115,7 +106,6 @@ list:
     description: location, agence immobiliere, syndicat de copropriété...
     rank: 105
     sprite: category-real-estate
-    companyKind: SIRET
     subcategories: !!import/single subcategories/immobilier.yml
   - category: Secteur de la santé
     categoryId: SANT
@@ -123,7 +113,6 @@ list:
     description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
     rank: 3
     sprite: category-health
-    companyKind: SIRET
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
   - category: Voiture / Véhicule
@@ -132,7 +121,6 @@ list:
     description: vente et réparation de voiture, location, auto-école...
     rank: 107
     sprite: category-transport
-    companyKind: SIRET
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories: !!import/single subcategories/voiture-vehicule.yml
   - category: Animaux
@@ -141,7 +129,6 @@ list:
     description: vétérinaire, aliment pour animaux, service de garde...
     rank: 108
     sprite: category-pet
-    companyKind: SIRET
     subcategories: !!import/single subcategories/animaux.yml
   - category: Démarches administratives
     categoryId: ADM
@@ -149,7 +136,6 @@ list:
     description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
     rank: 109
     sprite: category-admin
-    companyKind: SIRET
     subcategories: !!import/single subcategories/demarches-administratives.yml
   - category: Travail au noir
     categoryId: TNOIR

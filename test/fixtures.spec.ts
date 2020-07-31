@@ -146,6 +146,7 @@ export function genCompany() {
 
 export function genSubcategory() {
   return Object.assign(new Subcategory(), {
-    title: randomstring.generate()
+    title: randomstring.generate(),
+    tags: oneOf([null, [randomstring.generate()], [randomstring.generate(), randomstring.generate()]])
   });
 }
