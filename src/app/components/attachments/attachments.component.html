@@ -10,7 +10,7 @@
 <div class="row text-center pt-1">
   <div class="col-12 offset-md-6 col-md-6">
     <table class="table table-sm" role="presentation">
-      <caption>Liste des pièces jointes</caption>
+      <caption *ngIf="uploadedFiles.length" class="sr-only">Liste des pièces jointes</caption>
       <tbody>
       <tr *ngFor="let uploadedFile of uploadedFiles">
         <td class="text-left position-relative" *ngIf="uploadedFile.loading" colspan="2">
