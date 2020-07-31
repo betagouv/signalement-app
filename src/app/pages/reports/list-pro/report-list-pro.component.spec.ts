@@ -100,7 +100,7 @@ describe('ReportListProComponent', () => {
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(3);
+    expect(nativeElement.querySelectorAll('a.item').length).toEqual(3);
   });
 
   it ('should display report list with filters when pro has only one access and more than 10 reports', () => {
@@ -111,7 +111,7 @@ describe('ReportListProComponent', () => {
 
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelector('form')).not.toBeNull();
-    expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(11);
+    expect(nativeElement.querySelectorAll('a.item').length).toEqual(11);
   });
 
   it ('should display company list when pro has several accesses and should not load reports yet', () => {
@@ -123,7 +123,7 @@ describe('ReportListProComponent', () => {
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelector('h2').innerText).toEqual('Veuillez sélectionner une entreprise');
     expect(nativeElement.querySelector('form')).toBeNull();
-    expect(nativeElement.querySelectorAll('div.row.item.pointer').length).toEqual(2);
+    expect(nativeElement.querySelectorAll('a.item').length).toEqual(2);
     expect(getReportsSpy).not.toHaveBeenCalled();
   });
 

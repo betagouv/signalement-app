@@ -256,4 +256,12 @@ export class CompaniesAdminComponent implements OnInit {
       this.location.go('entreprises/les-plus-signalees', `page_number=${pageEvent.page}`);
     }
   }
+
+  previousTab() {
+    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) - 1];
+  }
+
+  nextTab() {
+    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) + 1];
+  }
 }
