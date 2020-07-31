@@ -9,21 +9,23 @@
 
     <h2 class="mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
 
-    <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
-      <div class="row pb-2 pt-2">
-        <div class="col col-radio z-0" *ngIf="subcategoryForm.contains(subcategoryName)">
-          <input type="radio"
-                 [formControlName]="subcategoryName"
-                 [value]="subcategory.title"
-                 id="radio-{{level}}-{{subcategory.title}}"
-                 (click)="selectSubcategory(subcategory)"/>
-        </div>
-        <div class="col">
-          <label class="d-block mb-0 pointer" for="radio-{{level}}-{{subcategory.title}}">{{subcategory.title}}</label>
-          <div class="note" [innerHTML]="subcategory.example" *ngIf="subcategory.example"></div>
+    <fieldset>
+      <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
+        <div class="row pb-2 pt-2">
+          <div class="col col-radio z-0" *ngIf="subcategoryForm.contains(subcategoryName)">
+            <input type="radio"
+                   [formControlName]="subcategoryName"
+                   [value]="subcategory.title"
+                   id="radio-{{level}}-{{subcategory.title}}"
+                   (click)="selectSubcategory(subcategory)"/>
+          </div>
+          <div class="col">
+            <label class="d-block mb-0 pointer" for="radio-{{level}}-{{subcategory.title}}">{{subcategory.title}}</label>
+            <div class="note" [innerHTML]="subcategory.example" *ngIf="subcategory.example"></div>
+          </div>
         </div>
       </div>
-    </div>
+    </fieldset>
   </div>
   <ng-container *ngIf="subcategoryForm.valid">
     <hr/>

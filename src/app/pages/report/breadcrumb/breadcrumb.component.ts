@@ -25,15 +25,15 @@ export class BreadcrumbComponent {
   }
 
   getStepClass(step: string) {
-    return (this.step === Step[step]) ? 'current' : this.isStepAchieved(Step[step]) ? 'achieved' : 'todo';
+    return (this.step === Step[step]) ? 'current' : this.isStepAchieved(step) ? 'achieved' : 'todo';
   }
 
-  isStepAchieved(step: Step) {
-    return this.getStepNumber(this.step) > this.getStepNumber(step);
+  isStepAchieved(step: string) {
+    return this.getStepNumber(Step[this.step]) > this.getStepNumber(Step[step]);
   }
 
   displayedStep(step: string) {
-    if (this.isStepAchieved(Step[step])) {
+    if (this.isStepAchieved(step)) {
       return '&#10003';
     } else {
       return this.getStepNumber(Step[step]);
@@ -41,7 +41,7 @@ export class BreadcrumbComponent {
   }
 
   goToStep(step: string) {
-    if (this.isStepAchieved(Step[step])) {
+    if (this.isStepAchieved(step)) {
       this.reportRouterService.routeToStep(Step[step]);
     }
   }

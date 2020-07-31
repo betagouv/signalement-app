@@ -1,19 +1,19 @@
-<header role="banner" id="banner" tabindex="-1" #banner>
+<header role="banner" id="banner">
   <div class="d-lg-none">
     <img class="gov" src="/assets/images/logo-marianne.svg" alt="Logo gouvernement" />
     <a class="brand" routerLink="/">
-      <img src="/assets/images/logo-signalconso.svg" alt="Retour à la page sommaire" />
+      <img src="/assets/images/logo-signalconso.svg" alt="Logo SignalConso / Retour à la page d'accueil" />
     </a>
   </div>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Menu principal">
     <div class="d-none d-lg-block">
-      <img class="gov" src="/assets/images/gouv.svg" alt="Logo marianne"/>
+      <img class="gov" src="/assets/images/gouv.svg" alt="Logo Gouvernement - Ministère de l'Economie, des Finances et de la Relance" />
       <a class="navbar-brand brand" routerLink="/">
-        <img src="/assets/images/logo-signalconso.svg" alt="Retour à la page sommaire" />
+        <img src="/assets/images/logo-signalconso.svg" alt="Logo SignalConso / Retour à la page d'accueil" />
       </a>
     </div>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent"
-            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Menu principal">
       <i class="material-icons text-primary">menu</i>
     </button>
     <div class="d-lg-none" *ngIf="user">
@@ -22,40 +22,40 @@
     <div class="collapse navbar-collapse" id="navbarContent" #navbarContent>
       <ul class="navbar-nav ml-lg-auto">
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-          <a class="nav-link" routerLink="/"
+          <a class="nav-link" routerLink="/" [attr.aria-current]="activeItem === navItems.Home"
              [ngClass]="activeItem === navItems.Home ? 'active' : ''">
             Accueil
           </a>
         </li>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-          <a class="nav-link" routerLink="/comment-ça-marche"
+          <a class="nav-link" routerLink="/comment-ça-marche" [attr.aria-current]="activeItem === navItems.How"
              [ngClass]="activeItem === navItems.How ? 'active' : ''">
             Comment ça marche ?
           </a>
         </li>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.Pro] else how">
-          <a class="nav-link" routerLink="/centre-aide/professionnel"
+          <a class="nav-link" routerLink="/centre-aide/professionnel" [attr.aria-current]="activeItem === navItems.FaqPro"
              [ngClass]="activeItem === navItems.FaqPro || activeItem === navItems.FaqConso ? 'active' : ''">
             Centre d'aide
           </a>
         </li>
         <ng-template #how>
           <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-            <a class="nav-link" routerLink="/centre-aide/consommateur"
+            <a class="nav-link" routerLink="/centre-aide/consommateur" [attr.aria-current]="activeItem === navItems.FaqConso"
                [ngClass]="activeItem === navItems.FaqConso || activeItem === navItems.FaqPro ? 'active' : ''">
               Centre d'aide
             </a>
           </li>
         </ng-template>
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.DGCCRF]">
-          <a class="nav-link" routerLink="/mode-emploi-dgccrf"
+          <a class="nav-link" routerLink="/mode-emploi-dgccrf" [attr.aria-current]="activeItem === navItems.HowDGCCRF"
              [ngClass]="activeItem === navItems.HowDGCCRF ? 'active' : ''">
             Mode d'emploi
           </a>
         </li>
         <li class="nav-item d-none d-lg-block" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *ngIf="!user; else userMenuLg">
           <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']">
-           Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
+           Espace pro<img src="/assets/images/icon-unlock.svg" alt="" />
           </button>
         </li>
         <ng-template #userMenuLg>
