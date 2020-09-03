@@ -29,23 +29,23 @@
     <li class="divider dropdown-divider"></li>
 
     <li role="menuitem"><span class="item font-weight-bold">Signalements</span></li>
-    <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><span [routerLink]="['suivi-des-signalements', user.roleUrlParam]" class="dropdown-item pointer">Suivi des signalements</span></li>
-    <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><span [routerLink]="['entreprises']" class="dropdown-item pointer">Suivi des entreprises</span></li>
-    <li role="menuitem" *appRole="[roles.Pro];"><span [routerLink]="['suivi-des-signalements', user.roleUrlParam]" class="dropdown-item pointer">Suivi de mes signalements</span></li>
-    <li role="menuitem"><span [routerLink]="['mes-telechargements']" class="dropdown-item pointer">Mes exports</span></li>
+    <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><a [routerLink]="['suivi-des-signalements', user.roleUrlParam]" class="dropdown-item">Suivi des signalements</a></li>
+    <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><a [routerLink]="['entreprises']" class="dropdown-item">Suivi des entreprises</a></li>
+    <li role="menuitem" *appRole="[roles.Pro];"><a [routerLink]="['suivi-des-signalements', user.roleUrlParam]" class="dropdown-item">Suivi de mes signalements</a></li>
+    <li role="menuitem"><a [routerLink]="['mes-telechargements']" class="dropdown-item">Mes exports</a></li>
 
     <ng-container *appRole="[roles.Admin]">
       <li class="divider dropdown-divider"></li>
       <li role="menuitem"><span class="item font-weight-bold">Utilisateurs</span></li>
-      <li role="menuitem"><span [routerLink]="['admin/invitation-ccrf']" class="dropdown-item pointer">Inviter un utilisateur DGCCRF</span></li>
+      <li role="menuitem"><a [routerLink]="['admin/invitation-ccrf']" class="dropdown-item">Inviter un utilisateur DGCCRF</a></li>
     </ng-container>
 
     <li class="divider dropdown-divider"></li>
     <li role="menuitem"><span class="item font-weight-bold">Gestion du compte</span></li>
-    <li role="menuitem"><span [routerLink]="['abonnements']" class="dropdown-item pointer" *appPermission="permissions.subscribeReports">Gérer mes abonnements</span></li>
-    <li role="menuitem" *appRole="[roles.Pro]"><span [routerLink]="['mes-entreprises']" class="dropdown-item pointer">Gérer mes entreprises</span></li>
-    <li role="menuitem"><span [routerLink]="['compte/mot-de-passe']" class="dropdown-item pointer">Changer mon mot de passe</span></li>
+    <li role="menuitem"><a [routerLink]="['abonnements']" class="dropdown-item" *appPermission="permissions.subscribeReports">Gérer mes abonnements</a></li>
+    <li role="menuitem" *appRole="[roles.Pro]"><a [routerLink]="['mes-entreprises']" class="dropdown-item">Gérer mes entreprises</a></li>
+    <li role="menuitem"><a [routerLink]="['compte/mot-de-passe']" class="dropdown-item">Changer mon mot de passe</a></li>
     <li class="divider dropdown-divider"></li>
   </ng-template>
-  <li role="menuitem"><span class="dropdown-item pointer" (click)="logout()">Se déconnecter</span></li>
+  <li role="menuitem"><button class="dropdown-item" (click)="logout()">Se déconnecter</button></li>
 </ng-template>

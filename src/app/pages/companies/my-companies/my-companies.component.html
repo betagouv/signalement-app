@@ -1,26 +1,28 @@
 <app-banner title="Mes entreprises"></app-banner>
 
-<section class="section section-white position-relative">
-  <div class="container">
-    <h2 class="text-center mb-4 font-weight-bold" *ngIf="!myAccesses?.length; else companyAccesses">
-      Vous n'avez accès à aucune entreprise
-    </h2>
-    <ng-template  #companyAccesses>
-      <div class="row">
-        <div class="col-12 col-sm-6 mt-3" *ngFor="let access of myAccesses">
-          <app-company-card [userAccess]="access"></app-company-card>
+<main role="main">
+  <section class="section section-white position-relative">
+    <div class="container">
+      <h2 class="text-center mb-4 font-weight-bold" *ngIf="!myAccesses?.length; else companyAccesses">
+        Vous n'avez accès à aucune entreprise
+      </h2>
+      <ng-template  #companyAccesses>
+        <div class="row">
+          <div class="col-12 col-sm-6 mt-3" *ngFor="let access of myAccesses">
+            <app-company-card [userAccess]="access"></app-company-card>
+          </div>
+        </div>
+      </ng-template>
+      <hr/>
+      <div class="row mt-3">
+        <div class="col-12 text-center">
+          <a class="btn btn-primary" [routerLink]="['/entreprise/activation']">
+            Ajouter une entreprise
+          </a>
         </div>
       </div>
-    </ng-template>
-    <hr/>
-    <div class="row mt-3">
-      <div class="col-12 text-center">
-        <a class="btn btn-primary" [routerLink]="['/entreprise/activation']">
-          Ajouter une entreprise
-        </a>
-      </div>
     </div>
-  </div>
-  <ngx-loading [show]="loading"></ngx-loading>
-</section>
+    <ngx-loading [show]="loading"></ngx-loading>
+  </section>
+</main>
 

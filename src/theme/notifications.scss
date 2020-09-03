@@ -51,8 +51,8 @@
   }
 
   &.warning {
-    background: $theme-warning-bg;
-    border-color: $theme-warning-border;
+    border-color: $theme-border-lighter;
+    border-left: 7px solid $theme-warning-border;
   }
 
   &.error {

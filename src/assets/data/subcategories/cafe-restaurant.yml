@@ -7,7 +7,7 @@
       - question: Comment le signaler&#160;?
         answer: Signalez-le sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />de la DGCCRF</a>
 - title: Hygiène
-  companyKind: 'SIRET
+  companyKind: 'SIRET'
   example: 'Exemple : locaux sales, rat, chaîne du froid'
   tags:
     - hygiène
@@ -148,7 +148,7 @@
           optionnal: true
       fileLabel: Si possible, merci de joindre une photo ou un document pour appuyer votre signalement.
 - title: Prix et paiement
-  companyKind: 'SIRET
+  companyKind: 'SIRET'
   example: 'Exemple : refus de la carte bancaire, j''ai payé plus cher que prévu'
   subcategories:
     - title: Il manque certains prix
@@ -267,7 +267,7 @@
             - Autre (à préciser)
     - title: Autres problèmes
 - title: Informations mensongères (sur le menu, la carte ou le site internet)
-  companyKind: 'SIRET
+  companyKind: 'SIRET'
   example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
   subcategories:
     - title: Indisponibilité des produits proposés
@@ -322,7 +322,7 @@
             - Non
       fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
 - title: Service
-  companyKind: 'SIRET
+  companyKind: 'SIRET'
   example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
   subcategories:
     - title: Le personnel est peu aimable
@@ -354,7 +354,7 @@
               type: TEXTAREA
           fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
 - title: Qualité des plats/boissons
-  companyKind: 'SIRET
+  companyKind: 'SIRET'
   example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
   subcategories:
     - title: Les plats ne correspondent pas à la description
