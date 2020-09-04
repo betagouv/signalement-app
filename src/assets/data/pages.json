@@ -27,9 +27,9 @@
     "title": "Accessibilité - SignalConso",
     "description": "Rapport d'accessibilité SignalConso"
   },
-  "aidealanavigation": {
-    "title": "Aide à la navigation - SignalConso",
-    "description": "Aide à la navigation"
+  "sitemap": {
+    "title": "Plan du site - SignalConso",
+    "description": "Plan du site"
   },
   "cgu": {
     "title": "Conditions générales d'utilisation - SignalConso",

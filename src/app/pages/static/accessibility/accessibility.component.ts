@@ -10,8 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AccessibilityComponent implements OnInit {
   constructor(private titleService: Title,
-              private meta: Meta,
-              private route: ActivatedRoute) { }
+              private meta: Meta) { }
   ngOnInit() {
     this.titleService.setTitle(pages.accessibilite.title);
     this.meta.updateTag({ name: 'description', content: pages.accessibilite.description });
