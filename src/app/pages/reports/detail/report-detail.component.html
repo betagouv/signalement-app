@@ -1,7 +1,10 @@
 <app-banner [backButton]="backEnabled()">
   <h1 class="text-center">
     Détail du signalement
-    <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
+    <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]">
+      <i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i>
+      <span class="sr-only">Consulter l'aide</span>
+    </a>
   </h1>
   <h2 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
     {{report?.id}}

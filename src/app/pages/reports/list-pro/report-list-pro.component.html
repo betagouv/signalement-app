@@ -48,7 +48,10 @@
               </div>
               <div class="col-8 col-sm-4">
                 <label for="statusFilter">
-                  Statut <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
+                  Statut <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status">
+                  <i class="material-icons md-24" aria-hidden="true">help_outline</i>
+                  <span class="sr-only">Consulter l'aide</span>
+                </a>
                 </label>
                 <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
                   <option [ngValue]="undefined" selected>Tous les statuts</option>
