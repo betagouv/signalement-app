@@ -215,3 +215,8 @@
               consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autres
       consumerActions: !!import/single ../common/actions/defaut.yml
+ - title: Dépannage
+   subcategoriesTitle: De quel type de travaux s'agit-il ?
+   subcategories:
+    - title : travaux de rénovation énergétique
+    - title: travaux de peinture
