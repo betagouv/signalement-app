@@ -107,7 +107,7 @@
             <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length">attach_file</i>
           </div>
           <div class="col-6 col-sm-4">
-            <span class="badge" [ngStyle]="{'background-color': statusColor.get(report.status)}">
+            <span class="badge" [ngStyle]="{'background-color': statusColor.get(report.status)}" attr.aria-label="statut du signalement">
             {{report.status}}
             </span>
           </div>
