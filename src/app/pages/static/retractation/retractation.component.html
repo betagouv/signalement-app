@@ -17,7 +17,8 @@
                        [(ngModel)]="contractDate" placeholder="Date de départ"
                        name="contractDateInput"
                        bsDatepicker [bsConfig]="{ containerClass: 'theme-default' }"
-                       (bsValueChange)="calculRetractationDeadline($event)"/>
+                       (bsValueChange)="calculRetractationDeadline($event)"
+                       triggers="click keypress">
               </div>
             </div>
             <div class="col-sm-2 d-none d-sm-block text-center pt-4">
