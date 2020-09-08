@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-accessibility',
