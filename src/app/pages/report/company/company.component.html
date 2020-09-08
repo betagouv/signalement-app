@@ -11,7 +11,7 @@
               <strong>Entreprise {{draftReport.draftCompany.siret || draftReport.draftCompany.name ? 'identifiée' : 'non identifiée'}}</strong>
             </div>
             <div class="col-4 text-right">
-              <span class="link pointer" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier entreprise" tabindex="0">Modifier</span>
+              <button class="link" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier entreprise" tabindex="0">Modifier</button>
               <i class="material-icons md-18 edit" aria-hidden="true">edit</i>
             </div>
           </div>
@@ -219,7 +219,7 @@
                   <p>
                     {{searchWarning}}
                   </p>
-                  Veuillez modifier votre recherche ou <span class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</span>.
+                  Veuillez modifier votre recherche ou <button class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</button>.
                 </div>
 
                 <div class="notification error mt-4" *ngIf="searchError">
