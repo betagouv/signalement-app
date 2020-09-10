@@ -5,7 +5,6 @@ import { HowComponent } from './how/how.component';
 import { AboutComponent } from './about/about.component';
 import { RetractationComponent } from './retractation/retractation.component';
 import { AccessibilityComponent } from './accessibility/accessibility.component';
-import { NavigationComponent } from './accessibility/navigation.component';
 import { CguComponent } from './cgu/cgu.component';
 import { BlogComponent } from './blog/blog.component';
 import { MarkdownModule } from 'ngx-markdown';
@@ -15,6 +14,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../../components/components.module';
 import { TrackingAndPrivacyComponent } from './tracking-and-privacy/tracking-and-privacy.component';
 import { FaqComponent } from './faq/faq.component';
+import { SitemapComponent } from './sitemap/sitemap.component';
 
 const routes: Routes = [
   { path: 'comment-ça-marche', component: HowComponent },
@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'centre-aide/professionnel', component: FaqComponent },
   { path: 'qui-sommes-nous', component: AboutComponent },
   { path: 'delai-de-retractation', component: RetractationComponent },
-  // { path: 'accessibilite', component: AccessibilityComponent },
-  // { path: 'aide-a-la-navigation', component: NavigationComponent },
+  { path: 'accessibilite', component: AccessibilityComponent },
+  { path: 'plan-du-site', component: SitemapComponent },
   { path: 'conditions-generales-utilisation', component: CguComponent },
   { path: 'conditions-generales-utilisation/consommateur', component: CguComponent },
   { path: 'conditions-generales-utilisation/professionnel', component: CguComponent },
@@ -41,12 +41,12 @@ const routes: Routes = [
     AboutComponent,
     FaqComponent,
     AccessibilityComponent,
-    NavigationComponent,
+    SitemapComponent,
     CguComponent,
     BlogComponent,
     RetractationComponent,
     ContactComponent,
-    TrackingAndPrivacyComponent
+    TrackingAndPrivacyComponent,
   ],
   imports: [
     CommonModule,
