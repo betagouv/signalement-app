@@ -1,40 +1,39 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { Anomaly } from '../../../model/Anomaly';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
-export class BreadcrumbComponent implements OnInit {
+export class BreadcrumbComponent {
 
   @Input() draftReport: DraftReport;
   @Input() step: Step;
 
-  anomaly: Anomaly;
+  steps = Step;
 
   constructor(private reportRouterService: ReportRouterService,
               private anomalyService: AnomalyService) { }
 
-  ngOnInit() {
+  getAnomaly() {
     if (this.draftReport) {
-      this.anomaly = this.anomalyService.getAnomalyByCategory(this.draftReport.category);
+      return this.anomalyService.getAnomalyByCategory(this.draftReport.category);
     }
   }
 
   getStepClass(step: string) {
-    return (this.step === Step[step]) ? 'current' : this.isStepAchieved(Step[step]) ? 'achieved' : '';
+    return (this.step === Step[step]) ? 'current' : this.isStepAchieved(step) ? 'achieved' : 'todo';
   }
 
-  isStepAchieved(step: Step) {
-    return this.getStepNumber(this.step) > this.getStepNumber(step);
+  isStepAchieved(step: string) {
+    return this.getStepNumber(Step[this.step]) > this.getStepNumber(Step[step]);
   }
 
   displayedStep(step: string) {
-    if (this.isStepAchieved(Step[step])) {
+    if (this.isStepAchieved(step)) {
       return '&#10003';
     } else {
       return this.getStepNumber(Step[step]);
@@ -42,13 +41,14 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   goToStep(step: string) {
-    if (this.isStepAchieved(Step[step])) {
+    if (this.isStepAchieved(step)) {
       this.reportRouterService.routeToStep(Step[step]);
     }
   }
 
   getStepNumber(step: Step) {
-    const initialStep = this.anomaly && this.anomaly.subcategories && this.anomaly.subcategories.length ? 0 : -1;
+    const anomaly = this.getAnomaly();
+    const initialStep = anomaly && anomaly.subcategories && anomaly.subcategories.length ? 0 : -1;
     switch (step) {
       case Step.Problem: {
         return initialStep + 1;
@@ -70,5 +70,14 @@ export class BreadcrumbComponent implements OnInit {
 
   back() {
     this.reportRouterService.routeBackward(this.step);
+  }
+
+  precedeCategory() {
+    const apostropheRequiredLetters = ['a', 'e', 'i', 'o', 'u', 'y', 'h'];
+    if (apostropheRequiredLetters.indexOf(this.draftReport.category[0]) !== -1) {
+      return 'd\'';
+    } else {
+      return 'de ';
+    }
   }
 }

@@ -27,6 +27,10 @@ export class DetailInput {
   optionnal?: boolean;
 }
 
+export class Tag extends String {
+}
+
+
 export class WithSubcategories {
   subcategoriesTitle?: string;
   companyKind?: string;
@@ -49,7 +53,7 @@ export class WithSubcategories {
 
   getInternetSubcategoriesData() {
     return {
-      subcategoriesTitle: 'Est-ce que votre problème fait suite à un achat sur internet ?',
+      subcategoriesTitle: 'Est-ce que votre problème fait suite à un achat sur internet ?',
       subcategories: [
         Object.assign(new Subcategory(), this,
           {
@@ -76,6 +80,7 @@ export class Subcategory extends WithSubcategories {
   fileLabel?: string;
   information?: Information;
   consumerActions?: Information[];
+  tags: Tag[];
 
   getInternetSubcategoriesData() {
     return {...super.getInternetSubcategoriesData(), description: undefined };

@@ -4,6 +4,7 @@ import { Consumer } from '../src/app/model/Consumer';
 import { Subcategory } from '../src/app/model/Anomaly';
 import { Company, CompanySearchResult } from '../src/app/model/Company';
 import anomalies from '../src/assets/data/anomalies.json';
+import { PaginatedData } from '../src/app/model/PaginatedData';
 
 const randomstring = require('randomstring');
 
@@ -35,7 +36,7 @@ export function genEmail() {
 export const lastNames = ['Doe', 'Durand', 'Dupont'];
 export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'Fanny', 'Gérard'];
 export const roles = [Roles.Admin, Roles.Pro, Roles.DGCCRF];
-export const status = [ReportStatus.ToProcess, ReportStatus.ClosedForPro];
+export const status = [ReportStatus.InProgress, ReportStatus.ClosedForPro];
 
 export function genUserAccess() {
   return {
@@ -108,6 +109,14 @@ export function genReport() {
   });
 }
 
+export function genPaginatedReports(length: number) {
+  return Object.assign(new PaginatedData<Report>(), {
+    totalCount: length,
+    hasNextPage: false,
+    entities: [...Array.from(Array(length).keys())].map(a => genReport())
+  });
+}
+
 export function genConsumer() {
   return Object.assign(new Consumer(), {
     firstName: oneOf(firstNames),
@@ -136,6 +145,7 @@ export function genCompany() {
 
 export function genSubcategory() {
   return Object.assign(new Subcategory(), {
-    title: randomstring.generate()
+    title: randomstring.generate(),
+    tags: oneOf([null, [randomstring.generate()], [randomstring.generate(), randomstring.generate()]])
   });
 }

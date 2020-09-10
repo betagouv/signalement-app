@@ -16,8 +16,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
 
 describe('ProblemComponent', () => {
@@ -60,15 +58,6 @@ describe('ProblemComponent', () => {
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test1 ],
-              scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test1]: 0 }
-            }
-          ]
-        )
       ],
       providers: []
     })

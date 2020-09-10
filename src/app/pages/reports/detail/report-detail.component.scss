@@ -1,5 +1,5 @@
-@import "../../../../../theme/variables";
-@import "../../../../../theme/media-queries";
+@import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
 
 :not(.banner) {
   img.back {
@@ -44,21 +44,6 @@ table {
   }
 }
 
-.nav-tabs {
-  border-bottom: 1px solid $blue;
-}
-
-.nav-link {
-  border: 0;
-  color: $blue !important;
-  cursor: pointer;
-
-  &.active {
-    color: $white !important;
-    background-color: $blue;
-  }
-}
-
 input + input {
   margin-top: 0.5em;
 }
@@ -88,4 +73,22 @@ input + input {
   label, h2 {
     color: $darker-grey;
   }
+}
+
+.label-inline {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+
+input[type=radio] {
+  margin-top: 0px;
+}
+
+.form__group + .form__group {
+  margin-top: 1em;
+}
+
+a.collapsable {
+  text-decoration: none;
 }

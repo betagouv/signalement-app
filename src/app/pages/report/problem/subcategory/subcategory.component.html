@@ -1,36 +1,39 @@
-<div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''">
+<form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+  <div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''" #formContent>
 
-  <div *ngIf="subcategoryDescription" class="row">
-    <div class="col-12">
-      <p [innerHTML]="subcategoryDescription"></p>
-    </div>
-  </div>
-
-  <h2 class="text-center mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
-
-  <form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
-    <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
-      <div class="row pb-2 pt-2">
-        <div class="col-2 col-sm-1 text-right pr-1" *ngIf="subcategoryForm.contains(subcategoryName)">
-          <input type="radio"
-                 [formControlName]="subcategoryName"
-                 [value]="subcategory.title"
-                 id="radio-{{level}}-{{subcategory.title}}"
-                 (click)="selectSubcategory(subcategory)"/>
-        </div>
-        <div class="col-10 col-sm-11 pl-1">
-          <label class="d-block mb-0 pointer" for="radio-{{level}}-{{subcategory.title}}">{{subcategory.title}}</label>
-          <div class="note" [innerHTML]="subcategory.example" *ngIf="subcategory.example"></div>
-        </div>
+    <div *ngIf="subcategoryDescription" class="row">
+      <div class="col-12">
+        <p [innerHTML]="subcategoryDescription"></p>
       </div>
     </div>
-    <hr *ngIf="subcategoryForm.valid"/>
-    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory() && subcategoryForm.valid">
-      <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
-      Étape suivante : détailler le problème
+
+    <h2 class="mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
+
+    <fieldset>
+      <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">
+        <div class="row pb-2 pt-2">
+          <div class="col col-radio z-0" *ngIf="subcategoryForm.contains(subcategoryName)">
+            <input type="radio"
+                   [formControlName]="subcategoryName"
+                   [value]="subcategory.title"
+                   id="radio-{{level}}-{{subcategory.title}}"
+                   (click)="selectSubcategory(subcategory)"/>
+          </div>
+          <div class="col">
+            <label class="d-block mb-0 pointer" for="radio-{{level}}-{{subcategory.title}}">{{subcategory.title}}</label>
+            <div class="note" [innerHTML]="subcategory.example" *ngIf="subcategory.example"></div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <ng-container *ngIf="subcategoryForm.valid">
+    <hr/>
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory()">
+      Continuer
     </button>
-  </form>
-</div>
+  </ng-container>
+</form>
 <app-subcategory *ngIf="hasSubSubcategory()"
                  [subcategoriesTitle]="subcategorySelected.subcategoriesTitle"
                  [subcategories]="subcategorySelected.subcategories"

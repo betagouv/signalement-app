@@ -12,6 +12,7 @@ import { fileSizeMax } from '../../pages/report/details/details.component';
 export class AttachmentsComponent implements OnInit {
 
   @Input() label: string;
+  @Input() note: string;
   @Input() uploadedFiles: UploadedFile[];
   @Input() origin: FileOrigin;
 

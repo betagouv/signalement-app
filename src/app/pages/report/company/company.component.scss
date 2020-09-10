@@ -1,45 +1,33 @@
 @import "../../../../theme/variables";
 @import "../../../../theme/media-queries";
 
-.company {
-  border: 1px solid #c9d3df;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  cursor: pointer;
-  transition: all .2s ease-in-out;
+section {
 
-  @media #{$larger-than-tablet} {
-    &:hover {
-      transform: scale(1.1);
-      border-color: $primary;
-    }
-    &:focus {
-      transform: scale(1.1);
-      border-color: $primary;
-    }
-  }
-}
-
-.edit {
-  color: $blue;
-}
-
-hr {
-  margin-bottom: 60px;
-}
-
-.selected {
-  background-color: $light-green;
-  border-radius: $theme-border-more-radius;
-
-  label, h2 {
-    color: $black;
+  .edit {
+    color: $blue;
   }
 
-}
+  hr {
+    margin-bottom: 60px;
+  }
 
-.unselected {
-  label, h2 {
-    color: $darker-grey;
+  .selected {
+    background-color: $light-green;
+    border-radius: $theme-border-more-radius;
+
+    .text-primary {
+      color: $secondary !important;
+    }
+
+    label, h2 {
+      color: $black;
+    }
+
+  }
+
+  .unselected {
+    label, h2 {
+      color: $darker-grey;
+    }
   }
 }

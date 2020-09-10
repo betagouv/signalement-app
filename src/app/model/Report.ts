@@ -1,5 +1,5 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, Subcategory } from './Anomaly';
+import { CompanyKinds, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
@@ -20,9 +20,35 @@ export enum Step {
 
 
 export enum ReportStatus {
+  NA = 'NA',
+  EmployeeConsumer = 'Lanceur d\'alerte',
+  InProgress = 'Traitement en cours',
+  Unread = 'Signalement non consulté',
+  UnreadForPro = 'Non consulté',
+  Transmitted = 'Signalement transmis',
+  ToReviewedByPro = 'À répondre',
+  Accepted = 'Promesse action',
   ClosedForPro = 'Clôturé',
-  ToProcess = 'À traiter'
+  Rejected = 'Signalement infondé',
+  Ignored = 'Signalement consulté ignoré',
+  NotConcerned = 'Signalement mal attribué'
+
 }
+
+export const StatusColor = new Map<string, string>([
+  [ReportStatus.NA, '#fff'],
+  [ReportStatus.EmployeeConsumer, '#fff'],
+  [ReportStatus.InProgress, '#FFE49E'],
+  [ReportStatus.Unread, '#c9d3df'],
+  [ReportStatus.UnreadForPro, '#f7d5d2'],
+  [ReportStatus.Transmitted, '#FFE49E'],
+  [ReportStatus.ToReviewedByPro, '#FFE49E'],
+  [ReportStatus.Accepted, '#D6F0FF'],
+  [ReportStatus.Rejected, '#c9d3df'],
+  [ReportStatus.ClosedForPro, '#daf5e7'],
+  [ReportStatus.Ignored, '#c9d3df'],
+  [ReportStatus.NotConcerned, '#c9d3df'],
+]);
 
 export class DraftReport {
   category: string;
@@ -51,6 +77,7 @@ export class Report {
   id: string;
   category: string;
   subcategories: Subcategory[];
+  tags: Tag[];
   company: Company;
   website: Website;
   detailInputValues: DetailInputValue[];

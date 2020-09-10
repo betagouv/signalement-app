@@ -28,4 +28,8 @@ export class CguComponent implements OnInit {
     });
   }
 
+  changeTab() {
+    this.isCguConso = !this.isCguConso;
+  }
+
 }

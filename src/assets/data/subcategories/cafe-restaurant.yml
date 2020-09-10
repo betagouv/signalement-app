@@ -7,7 +7,10 @@
       - question: Comment le signaler&#160;?
         answer: Signalez-le sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />de la DGCCRF</a>
 - title: Hygiène
-  example: 'Exemple : locaux sales, rat, chaîne du froid'
+  companyKind: 'SIRET'
+  example: 'Exemple : locaux sales, rat, chaîne du froid'
+  tags:
+    - hygiène
   subcategoriesTitle: 'Vous voulez signaler&#160;:'
   subcategories:
     - title: J'ai vu un animal (nuisible)
@@ -145,7 +148,8 @@
           optionnal: true
       fileLabel: Si possible, merci de joindre une photo ou un document pour appuyer votre signalement.
 - title: Prix et paiement
-  example: 'Exemple : refus de la carte bancaire, j''ai payé plus cher que prévu'
+  companyKind: 'SIRET'
+  example: 'Exemple : refus de la carte bancaire, j''ai payé plus cher que prévu'
   subcategories:
     - title: Il manque certains prix
       example: 'Exemple : absence de prix sur la carte des vins'
@@ -263,7 +267,8 @@
             - Autre (à préciser)
     - title: Autres problèmes
 - title: Informations mensongères (sur le menu, la carte ou le site internet)
-  example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
+  companyKind: 'SIRET'
+  example: 'Exemple : mention "fait maison" pas respectée, les vins les moins chers ne sont pas disponibles'
   subcategories:
     - title: Indisponibilité des produits proposés
       detailInputs:
@@ -317,7 +322,8 @@
             - Non
       fileLabel: Merci de joindre une photo de la publicité, du menu, de la vitrine afin d'apporter des preuves pour appuyer votre signalement.
 - title: Service
-  example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
+  companyKind: 'SIRET'
+  example: 'Exemple : chien refusé, personnel peu aimable, refus de nous donner une table car nous avions une poussette'
   subcategories:
     - title: Le personnel est peu aimable
       example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
@@ -348,7 +354,8 @@
               type: TEXTAREA
           fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
 - title: Qualité des plats/boissons
-  example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
+  companyKind: 'SIRET'
+  example: 'Exemple : plat pas frais, produit surgelé, produit périmé'
   subcategories:
     - title: Les plats ne correspondent pas à la description
       example: 'Exemple : Produit industriel vendu sous la mention "fait maison"'
@@ -398,3 +405,12 @@
             - Insecte dans un plat
             - Autre (à préciser)
       fileLabel: Merci de joindre si possible une photo ou votre facture afin d'appuyer votre signalement.
+- title: Site/application de livraison de repas
+  companyKind: 'WEBSITE'
+  example: 'Exemple : livraison non assurée, promotion non valide'
+  subcategories:
+    - title: problème avec la livraison
+    - title: problème avec le service client
+    - title: problème avec une promotion, un parrainage
+    - title: autre
+      example: "Les problèmes d'hygiène ou de qualité des plats doivent être renseignées dans les catégories précédentes"

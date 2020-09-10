@@ -1,28 +1,22 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { ReportService } from '../../../../services/report.service';
-import { DetailInputValue, Report, ReportStatus } from '../../../../model/Report';
-import { UploadedFile } from '../../../../model/UploadedFile';
-import { FileUploaderService } from '../../../../services/file-uploader.service';
+import { ReportService } from '../../../services/report.service';
+import { DetailInputValue, Report, ReportStatus, StatusColor } from '../../../model/Report';
+import { UploadedFile } from '../../../model/UploadedFile';
+import { FileUploaderService } from '../../../services/file-uploader.service';
 import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { ReportFilter } from '../../../../model/ReportFilter';
-import { combineLatest, iif, of, Subscription } from 'rxjs';
+import { ReportFilter } from '../../../model/ReportFilter';
+import { Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../../assets/data/pages.json';
+import pages from '../../../../assets/data/pages.json';
 import { isPlatformBrowser, Location } from '@angular/common';
-import { Permissions, Roles, User } from '../../../../model/AuthUser';
-import { ReportingDateLabel } from '../../../../model/Anomaly';
-import { ConstantService } from '../../../../services/constant.service';
-import { AnomalyService } from '../../../../services/anomaly.service';
+import { Permissions, Roles } from '../../../model/AuthUser';
+import { ReportingDateLabel, Tag } from '../../../model/Anomaly';
+import { ConstantService } from '../../../services/constant.service';
+import { AnomalyService } from '../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { mergeMap, take } from 'rxjs/operators';
-import { AuthenticationService } from '../../../../services/authentication.service';
-import { Department, Region, Regions } from '../../../../model/Region';
-import oldCategories from '../../../../../assets/data/old-categories.json';
-import { AccountService } from '../../../../services/account.service';
-import { EventService } from '../../../../services/event.service';
-import { UserAccess } from '../../../../model/Company';
-import { CompanyAccessesService } from '../../../../services/companyaccesses.service';
+import { Department, Region, Regions } from '../../../model/Region';
+import oldCategories from '../../../../assets/data/old-categories.json';
 
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 
@@ -32,12 +26,13 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
   styleUrls: ['./report-list.component.scss']
 })
 export class ReportListComponent implements OnInit, OnDestroy {
-  user: User;
-  userAccesses: UserAccess[];
   permissions = Permissions;
   roles = Roles;
   reportStatus = ReportStatus;
+  statusColor = StatusColor;
   regions = Regions;
+  tags: Tag[];
+
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
   currentPage: number;
@@ -45,6 +40,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   siretUrlParam: string;
   reportFilter: ReportFilter;
+  tagFilterToAdd: Tag = '';
   reportExtractUrl: string;
   statusList: string[];
   categories: string[];
@@ -58,13 +54,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
               private meta: Meta,
-              private authenticationService: AuthenticationService,
               private anomalyService: AnomalyService,
               private reportService: ReportService,
               private constantService: ConstantService,
-              private accountService: AccountService,
-              private eventService: EventService,
-              private companyAccessesService: CompanyAccessesService,
               private fileUploaderService: FileUploaderService,
               private localeService: BsLocaleService,
               private modalService: BsModalService,
@@ -78,53 +70,32 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
     this.localeService.use('fr');
 
-    this.reportFilter = {
-      period: []
-    };
+    const queryParamMap = this.route.snapshot.queryParamMap;
+    const paramMap = this.route.snapshot.paramMap;
 
-    this.loading = true;
-    this.loadingError = false;
-    this.authenticationService.user.pipe(
-      take(1),
-      mergeMap(user => {
-        this.user = user;
-        return combineLatest([
-          this.constantService.getReportStatusList(),
-          this.route.paramMap,
-          this.route.queryParamMap,
-          iif(() => user && user.role === Roles.Pro, this.companyAccessesService.myAccesses(user), of([]))
-        ]);
-      })
-    ).subscribe(
-      ([statusList, params, queryParams, userAccesses]) => {
+    this.constantService.getReportStatusList().subscribe(
+      statusList => this.statusList = statusList
+    );
 
-        this.reportFilter = this.reportService.currentReportFilter;
-        this.itemsPerPage = Number(queryParams.get('per_page')) || 20;
+    this.reportFilter = this.reportService.currentReportFilter;
+    this.itemsPerPage = Number(queryParamMap.get('per_page')) || 20;
 
-        this.siretUrlParam = params.get('siret');
-        if (this.siretUrlParam || this.user.role === Roles.Pro) {
-          this.reportFilter.siret = this.siretUrlParam;
-        }
+    this.siretUrlParam = paramMap.get('siret');
+    if (this.siretUrlParam) {
+      this.reportFilter = new ReportFilter();
+      this.reportFilter.siret = this.siretUrlParam;
+    }
 
-        this.userAccesses = userAccesses;
-        this.statusList = statusList;
-
-        if (this.user.role !== Roles.Pro || this.userAccesses.length === 1 || this.reportFilter.siret) {
-          this.loadReports(Number(queryParams.get('page_number') || 1));
-        } else {
-          this.loading = false;
-        }
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
+    this.loadReports(Number(queryParamMap.get('page_number') || 1));
 
     this.categories =
       [
         ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
         ...oldCategories
       ];
+
+    this.tags = this.anomalyService.getTags();
+
     this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
@@ -138,18 +109,14 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   submitFilters() {
-    this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
+    this.location.replaceState(this.router.routerState.snapshot.url.replace(`/siret/${this.siretUrlParam}`, '').split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
     this.initPagination();
     this.reportFilter.siret = this.reportFilter.siret ? this.reportFilter.siret.replace(/\s/g, '') : '';
     this.loadReports(1);
   }
 
   cancelFilters() {
-    if (this.user.role === Roles.Pro) {
-      this.reportFilter = Object.assign(new ReportFilter(), { siret: this.reportFilter.siret });
-    } else {
-      this.reportFilter = new ReportFilter();
-    }
+    this.reportFilter = new ReportFilter();
     this.submitFilters();
   }
 
@@ -167,10 +134,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.totalCount = result.totalCount;
         setTimeout(() => {
           this.currentPage = page;
-          if (isPlatformBrowser(this.platformId) && this.user && this.user.role !== Roles.Pro) {
+          if (isPlatformBrowser(this.platformId)) {
             window.scroll(
               0,
-              sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 260
+              sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 177
             );
             sessionStorage.removeItem(ReportsScrollYStorageKey);
           }
@@ -202,7 +169,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   changePage(pageEvent: {page: number, itemPerPage: number}) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
-      this.location.go('suivi-des-signalements', `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
+      this.location.go(this.router.routerState.snapshot.url.split('?')[0], `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
     }
   }
 
@@ -211,10 +178,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   displayReport(report: Report) {
-    this.router.navigate(['suivi-des-signalements', 'report', report.id]);
-    if (isPlatformBrowser(this.platformId && window.scrollY)) {
+    if (isPlatformBrowser(this.platformId) && window.scrollY) {
       sessionStorage.setItem(ReportsScrollYStorageKey, window.scrollY.toString());
     }
+    this.router.navigate(['suivi-des-signalements', 'report', report.id]);
   }
 
   updateReportOnModalHide() {
@@ -238,18 +205,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
       });
   }
 
-  getReportCssClass(status: string) {
-    if (status) {
-      return `status-${status.toLowerCase()
-        .replace(/[àáâãäå]/g, 'a')
-        .replace(/[éèêë]/g, 'e')
-        .replace(/['']/g, '')
-        .split(' ').join('-')}`;
-    } else {
-      return '';
-    }
-  }
-
   selectArea(area?: Region | Department) {
     if (!area) {
       this.reportFilter.areaLabel = undefined;
@@ -261,6 +216,15 @@ export class ReportListComponent implements OnInit, OnDestroy {
       this.reportFilter.areaLabel = `${area.code} - ${area.label}`;
       this.reportFilter.departments = [area];
     }
+  }
+
+  addTagFilter() {
+    this.reportFilter.tags.push(this.tagFilterToAdd);
+    this.tagFilterToAdd = '';
+  }
+
+  removeTagFilter(tag: Tag) {
+    this.reportFilter.tags.splice(this.reportFilter.tags.indexOf(tag), 1);
   }
 
   launchExtraction() {

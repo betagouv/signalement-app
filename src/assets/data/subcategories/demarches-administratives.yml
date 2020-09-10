@@ -11,9 +11,9 @@
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
 - title: Autre
-  subcategoriesTitle: Que voulez-vous signaler ?
+  subcategoriesTitle: Que voulez-vous signaler ?
   subcategories:
-    - title: Une administration 
+    - title: Une administration
       example: 'Exemple : ma mairie, mon centre des impôts'
       information: !!import/single ../common/info/administration.yml
     - title: Une entreprise privée

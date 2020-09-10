@@ -1,100 +1,7 @@
 <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
-<section class="section section-white" *ngIf="draftReport">
-  <div class="container max-width">
-
-    <ng-container *ngIf="!continueReport">
-      <div class="notification">
-        Avec SignalConso, vous signalez un problème à la fois la répression des fraudes <strong>et à l'entreprise concernée</strong> (tout en conservant votre anonymat si vous le souhaitez).
-        <br />La raison ?
-        <br />Permettre aux entreprises de corriger le problème directement.
-        <br />La majorité des entreprises ont à cœur la satisfaction de leurs clients et seront attentives à vos signalements..
-      </div>
-      <h2 class="text-center mt-5 mb-4 font-weight-bold">Que souhaitez-vous faire ?</h2>
-
-      <form>
-        <div class="form__group" [ngClass]="stopReportChoice === true ? 'withSiblingSubcategories' : ''">
-          <div class="row pb-2 pt-2" [ngClass]="stopReportChoice === false ? 'subcategorySelected' : ''">
-            <div class="col-2 col-sm-1 text-right pr-1">
-              <input type="radio" [(ngModel)]="stopReportChoice" [value]="false" id="continue" name="stopReportChoice"/>
-            </div>
-            <div class="col-10 col-sm-11 pl-1">
-              <label for="continue" class="label-inline pointer">
-                J'ai compris et je souhaite utiliser SignalConso
-              </label>
-            </div>
-          </div>
-          <div class="row pb-2 pt-2" [ngClass]="stopReportChoice === true ? 'subcategorySelected' : ''">
-            <div class="col-2 col-sm-1 text-right pr-1">
-              <input type="radio" [(ngModel)]="stopReportChoice" [value]="true" id="stop" name="stopReportChoice"/>
-            </div>
-            <div class="col-10 col-sm-11 pl-1">
-              <label for="stop" class="label-inline pointer">
-                Je ne veux pas que l'entreprise soit au courant et je veux écrire seulement à la répression des fraudes
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form__group" *ngIf="stopReportChoice">
-          <hr />
-          <h2 class="text-center mb-4 font-weight-bold">Pouvez-vous préciser pourquoi ?</h2>
-          <div class="row pb-2 pt-2" [ngClass]="stopReportCause === stopReportCauses.Fear ? 'subcategorySelected' : ''">
-            <div class="col-2 col-sm-1 text-right pr-1">
-              <input type="radio" [(ngModel)]="stopReportCause" [value]="stopReportCauses.Fear" name="stopReportCause" id="fear"/>
-            </div>
-            <div class="col-10 col-sm-11 pl-1">
-              <label class="label-inline pointer" for="fear">
-                J'ai peur de représailles
-              </label>
-            </div>
-          </div>
-          <div class="row pb-2 pt-2" [ngClass]="stopReportCause === stopReportCauses.Penalty ? 'subcategorySelected' : ''">
-            <div class="col-2 col-sm-1 text-right pr-1">
-              <input type="radio" [(ngModel)]="stopReportCause" [value]="stopReportCauses.Penalty" name="stopReportCause" id="penalty"/>
-            </div>
-            <div class="col-10 col-sm-11 pl-1">
-              <label class="label-inline pointer" for="penalty">
-                Je veux seulement qu'elle soit sanctionnée
-              </label>
-            </div>
-          </div>
-          <div class="row pb-2 pt-2" [ngClass]="stopReportCause === stopReportCauses.Others ? 'subcategorySelected' : ''">
-            <div class="col-2 col-sm-1 text-right pr-1">
-              <input type="radio" [(ngModel)]="stopReportCause" [value]="stopReportCauses.Others" name="stopReportCause" id="other"/>
-            </div>
-            <div class="col-10 col-sm-11 pl-1">
-              <label class="label-inline pointer" for="other">
-                Autre (préciser)
-              </label>
-              <div class="row" *ngIf="stopReportCause === stopReportCauses.Others">
-                <div class="col-12">
-                  <input type="text" [(ngModel)]="stopReportOtherCauseDetail" placeholder="Précisez ..." name="stopReportOtherCauseDetail">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <ng-container *ngIf="stopReportCause">
-            <hr />
-            <button type="button" class="btn btn-lg btn-primary" (click)="handleStopReportChoice()">
-              <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
-              Poursuivre
-            </button>
-          </ng-container>
-        </div>
-
-        <div *ngIf="stopReportChoice !== undefined && !stopReportChoice">
-          <hr />
-          <button type="button" class="btn btn-lg btn-primary" (click)="handleStopReportChoice()">
-            <i class="material-icons md-24 d-none d-sm-inline-block" aria-hidden="true">play_arrow</i>
-            Poursuivre
-          </button>
-        </div>
-      </form>
-
-    </ng-container>
-
-    <ng-container *ngIf="continueReport">
+<main role="main">
+  <section class="section section-white" *ngIf="draftReport">
+    <div class="container max-width">
       <app-subcategory
         [subcategoriesTitle]="anomaly?.subcategoriesTitle"
         [subcategoryName]="anomaly?.category"
@@ -103,6 +10,6 @@
         [level]="1"
         (select)="onSelectSubcategories($event)">
       </app-subcategory>
-    </ng-container>
-  </div>
-</section>
+    </div>
+  </section>
+</main>

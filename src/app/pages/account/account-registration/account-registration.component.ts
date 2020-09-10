@@ -7,6 +7,7 @@ import {
   AccountEventNames,
   ActionResultNames,
   AnalyticsService,
+  AuthenticationEventActions,
   EventCategories,
 } from '../../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +17,7 @@ import { AccountService } from '../../../services/account.service';
 import HttpStatusCodes from 'http-status-codes';
 import { combineLatest, iif } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-registration',
@@ -30,19 +32,15 @@ export class AccountRegistrationComponent implements OnInit {
   activationForm: FormGroup;
   firstNameCtrl: FormControl;
   lastNameCtrl: FormControl;
-  emailCtrl: FormControl;
   passwordCtrl: FormControl;
   confirmPasswordCtrl: FormControl;
   gcuAgreementCtrl: FormControl;
 
   showErrors: boolean;
-  showSuccess: boolean;
   loading: boolean;
   loadingError = false;
   conflictError = false;
   tokenError = false;
-
-  mayEditEmail = false;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -81,11 +79,6 @@ export class AccountRegistrationComponent implements OnInit {
           } else {
             this.initForm();
             this.tokenInfo = <TokenInfo>tokenInfo;
-            this.mayEditEmail = (this.tokenInfo.emailedTo === undefined);
-            if (!this.mayEditEmail) {
-              this.activationForm.controls.email.clearValidators();
-              this.activationForm.controls.email.updateValueAndValidity();
-            }
           }
         },
         (err) => {
@@ -111,7 +104,6 @@ export class AccountRegistrationComponent implements OnInit {
 
     this.firstNameCtrl = this.formBuilder.control('', Validators.required);
     this.lastNameCtrl = this.formBuilder.control('', Validators.required);
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
     this.passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(8)]);
     this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
     this.gcuAgreementCtrl = this.formBuilder.control('', Validators.requiredTrue);
@@ -119,7 +111,6 @@ export class AccountRegistrationComponent implements OnInit {
     this.activationForm = this.formBuilder.group({
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
-      email: this.emailCtrl,
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl,
       gcuAgreement: this.gcuAgreementCtrl,
@@ -128,7 +119,6 @@ export class AccountRegistrationComponent implements OnInit {
 
   submitForm() {
     this.showErrors = false;
-    this.showSuccess = false;
     this.loadingError = false;
     this.conflictError = false;
     if (!this.activationForm.valid) {
@@ -139,16 +129,23 @@ export class AccountRegistrationComponent implements OnInit {
         <User>{
           firstName: this.firstNameCtrl.value,
           lastName: this.lastNameCtrl.value,
-          email: this.emailCtrl.value,
+          email: this.tokenInfo.emailedTo,
           password: this.passwordCtrl.value
         },
         this.tokenInfo.token,
         this.tokenInfo.companySiret
+      ).pipe(
+        switchMap(
+          () => {
+            this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.registerUser, ActionResultNames.success);
+            return this.authenticationService.login(this.tokenInfo.emailedTo, this.passwordCtrl.value);
+          }
+        )
       ).subscribe(
-        () => {
-          this.loading = false;
-          this.analyticsService.trackEvent(EventCategories.account, AccountEventActions.registerUser, ActionResultNames.success);
-          this.showSuccess = true;
+        user => {
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
+          this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
+          this.router.navigate(['suivi-des-signalements', user.roleUrlParam]);
         },
         error => {
           this.loading = false;

@@ -3,15 +3,15 @@ import { TestBed } from '@angular/core/testing';
 import { ReportService } from './report.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ServiceUtils } from './service.utils';
-import { DetailInputValue, DraftReport } from '../model/Report';
+import { DetailInputValue, Step } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { Consumer } from '../model/Consumer';
-import { Subcategory } from '../model/Anomaly';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import { of } from 'rxjs';
 import { Department, Region } from '../model/Region';
 import { CompanySearchResult } from '../model/Company';
+import { genDraftReport, genSubcategory } from '../../../test/fixtures.spec';
 
 describe('ReportService', () => {
 
@@ -69,10 +69,8 @@ describe('ReportService', () => {
         id: '856cdf46-a8c2-436d-a34c-bb303ff108a6',
         filename: 'anomaly.jpg'
       });
-      const subcategory1 = new Subcategory();
-      subcategory1.title = 'sous catégorie 1';
-      const subcategory2 = new Subcategory();
-      subcategory2.title = 'sous catégorie 2';
+      const subcategory1 = genSubcategory();
+      const subcategory2 = genSubcategory();
       const consumer = new Consumer();
       consumer.lastName = 'lastName';
       consumer.firstName = 'firstName';
@@ -81,15 +79,14 @@ describe('ReportService', () => {
         name: 'companyName',
         address: 'line 1 - line 2 - line 4'
       };
+
       const detailInputValue = new DetailInputValue();
       detailInputValue.label = 'mon label';
       detailInputValue.value = 'ma value';
-      const draftReport = new DraftReport();
+
+      const draftReport = genDraftReport(Step.Confirmation);
       draftReport.uploadedFiles = [anomalyFile];
-      draftReport.category = 'category';
       draftReport.subcategories = [subcategory1, subcategory2];
-      draftReport.consumer = consumer;
-      draftReport.draftCompany = company;
       draftReport.detailInputValues = [detailInputValue];
 
       reportService.createReport(draftReport).subscribe(result => {
@@ -101,13 +98,14 @@ describe('ReportService', () => {
       reportRequest.flush({});
 
       httpMock.verify();
-      expect(reportRequest.request.body['category']).toBe('category');
+      expect(reportRequest.request.body['category']).toBe(draftReport.category);
       expect(reportRequest.request.body['subcategories']).toEqual([subcategory1.title, subcategory2.title]);
-      expect(reportRequest.request.body['companyName']).toBe('companyName');
-      expect(reportRequest.request.body['companyAddress']).toBe('line 1 - line 2 - line 4');
-      expect(reportRequest.request.body['lastName']).toBe('lastName');
-      expect(reportRequest.request.body['lastName']).toBe('lastName');
-      expect(reportRequest.request.body['email']).toBe('email@mail.fr');
+      expect(reportRequest.request.body['tags']).toEqual([...(subcategory1.tags || []), ...(subcategory2.tags || [])]);
+      expect(reportRequest.request.body['companyName']).toBe(draftReport.draftCompany.name);
+      expect(reportRequest.request.body['companyAddress']).toBe(draftReport.draftCompany.address);
+      expect(reportRequest.request.body['firstName']).toBe(draftReport.consumer.firstName);
+      expect(reportRequest.request.body['lastName']).toBe(draftReport.consumer.lastName);
+      expect(reportRequest.request.body['email']).toBe(draftReport.consumer.email);
       expect(reportRequest.request.body['details']).toEqual([{label: 'mon label :', value: 'ma value'}]);
     });
 

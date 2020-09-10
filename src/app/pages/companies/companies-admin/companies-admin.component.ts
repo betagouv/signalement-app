@@ -3,7 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
 import { isPlatformBrowser, Location } from '@angular/common';
 import pages from '../../../../assets/data/pages.json';
-import { Roles } from '../../../model/AuthUser';
+import { Roles, User } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -38,6 +38,7 @@ export class CompaniesAdminComponent implements OnInit {
   companies: Company[];
   maxCompanyResult = MaxCompanyResult;
 
+  user: User;
   roles = Roles;
   totalCount: number;
   currentPage: number;
@@ -76,6 +77,7 @@ export class CompaniesAdminComponent implements OnInit {
 
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       .subscribe(([url, user]) => {
+        this.user = user;
         this.navTabs = {
           [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
           [this.roles.DGCCRF]: [this.mostReportedTab]
@@ -253,5 +255,13 @@ export class CompaniesAdminComponent implements OnInit {
       this.loadReports(pageEvent.page);
       this.location.go('entreprises/les-plus-signalees', `page_number=${pageEvent.page}`);
     }
+  }
+
+  previousTab() {
+    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) - 1];
+  }
+
+  nextTab() {
+    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) + 1];
   }
 }
