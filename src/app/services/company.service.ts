@@ -24,15 +24,9 @@ class RawCompanyService {
     );
   }
 
-  // TODO change API
   searchCompaniesBySiret(siret: string) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
     return this.http.get<CompanySearchResult>(
-      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', siret]),
-      {
-        params: httpParams
-      }
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', siret]),
     );
   }
 

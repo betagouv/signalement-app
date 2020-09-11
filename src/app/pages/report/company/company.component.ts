@@ -280,6 +280,7 @@ export class CompanyComponent implements OnInit {
       this.initSearchBySiret();
       this.loading = true;
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchBySiret, this.siretCtrl.value);
+
       this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
@@ -289,7 +290,7 @@ export class CompanyComponent implements OnInit {
             CompanySearchEventActions.searchBySiret,
             CompanySearchEventNames.singleResult
           );
-          this.companySearchBySiretResult = company[0];
+          this.companySearchBySiretResult = company;
           this.scrollToElement(this.identBySiretResult.nativeElement);
         } else {
           this.analyticsService.trackEvent(
