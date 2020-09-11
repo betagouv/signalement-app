@@ -27,7 +27,7 @@ import { ReportsModule } from './pages/reports/reports.module';
 import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
 import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from './utils';
+import { CompanyAPITestingScope, SVETestingVersions } from './utils';
 import { AppRoleModule } from './directives/app-role/app-role.module';
 import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 import { SubscriptionModule } from './pages/subscription/subscription.module';
@@ -96,23 +96,15 @@ class ErrorLogger extends ErrorHandler {
             [
                 {
                     versions: [
-                        SVETestingVersions.NoTest,
-                        SVETestingVersions.Test3_Sentence1,
-                        SVETestingVersions.Test3_Sentence2,
-                        SVETestingVersions.Test3_Sentence3,
-                        SVETestingVersions.Test3_Sentence4,
-                        SVETestingVersions.Test3_Sentence5,
+                        SVETestingVersions.EntrepriseAPI,
+                        SVETestingVersions.SignalConsoAPI
                     ],
-                    versionForCrawlers: SVETestingVersions.NoTest,
-                    scope: SVETestingScope,
+                    versionForCrawlers: SVETestingVersions.EntrepriseAPI,
+                    scope: CompanyAPITestingScope,
                     expiration: 5,
                     weights: {
-                        NoTest: 49,
-                        Test3_Sentence1: 10,
-                        Test3_Sentence2: 10,
-                        Test3_Sentence3: 10,
-                        Test3_Sentence4: 10,
-                        Test3_Sentence5: 10,
+                      EntrepriseAPI: 49,
+                      SignalConsoAPI: 50
                     },
                 },
             ],
