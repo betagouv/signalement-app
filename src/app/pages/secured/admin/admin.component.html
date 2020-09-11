@@ -1,4 +1,4 @@
-<app-banner title="Inviter d'un utilisateur DGCCRF" [backButton]="true"></app-banner>
+<app-banner title="Inviter un utilisateur DGCCRF" [backButton]="true"></app-banner>
 
 <main role="main">
   <section class="section section-white position-relative">
@@ -30,6 +30,9 @@
           <span *ngIf="emailCtrl.hasError('email')">
               Veuillez renseigner une adresse email valide.<br/>
           </span>
+        </div>
+        <div class="notification error mt-3" *ngIf="emailRejectedError != null">
+          {{emailRejectedError}}
         </div>
         <div class="notification success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>
       </form>

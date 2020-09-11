@@ -13,15 +13,13 @@
           <h3>Problème</h3>
           <div>
             {{draftReport.category}}
-            <br />
-            <ng-container *ngFor="let subcategory of draftReport.subcategories">
-              {{subcategory.title}}
-              <br />
-            </ng-container>
           </div>
-          <div class="pointer link" (click)="goToStep(steps.Problem)">
-            <i class="material-icons">edit</i> Modifier
+          <div *ngFor="let subcategory of draftReport.subcategories">
+            {{subcategory.title}}
           </div>
+          <button class="link" (click)="goToStep(steps.Problem)">
+            <i class="material-icons" aria-hidden="true">edit</i> Modifier
+          </button>
           <hr />
           <h3>Description</h3>
           <div>
@@ -42,45 +40,50 @@
               </div>
             </div>
           </div>
-          <div class="pointer link" (click)="goToStep(steps.Details)">
-            <i class="material-icons">edit</i> Modifier
-          </div>
+          <button class="link" (click)="goToStep(steps.Details)">
+            <i class="material-icons" aria-hidden="true">edit</i> Modifier
+          </button>
           <hr />
           <h3>Entreprise</h3>
-          <div *ngIf="draftReport.draftCompany.name">
-            Nom : <strong>{{draftReport.draftCompany.name}}<br /></strong>
-            Adresse : {{draftReport.draftCompany.address}}
-          </div>
+          <ng-container *ngIf="draftReport.draftCompany.name">
+            <div>
+              Nom : <strong>{{draftReport.draftCompany.name}}</strong>
+            </div>
+            <div>
+              Adresse : {{draftReport.draftCompany.address}}
+            </div>
+          </ng-container>
           <div *ngIf="draftReport.draftCompany.siret">
             SIRET : {{draftReport.draftCompany.siret}}
           </div>
           <div *ngIf="draftReport.draftCompany.website">
             Site internet : {{draftReport.draftCompany.website.url}}
           </div>
-          <div class="pointer link" (click)="goToStep(steps.Company)">
-            <i class="material-icons">edit</i> Modifier
-          </div>
+          <button class="link" (click)="goToStep(steps.Company)">
+            <i class="material-icons" aria-hidden="true">edit</i> Modifier
+          </button>
           <hr />
           <h3>Consommateur</h3>
           <div>
             Nom : {{draftReport.consumer.lastName}}
-            <br />
+          </div>
+          <div>
             Prénom : {{draftReport.consumer.firstName}}
-            <br />
+          </div>
+          <div>
             Email : {{draftReport.consumer.email}}
-            <ng-container *ngIf="!draftReport.employeeConsumer">
-              <br />
-              Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}
-            </ng-container>
           </div>
-          <div class="pointer link" (click)="goToStep(steps.Consumer)">
-            <i class="material-icons">edit</i> Modifier
+          <div *ngIf="!draftReport.employeeConsumer">
+            Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}
           </div>
+          <button class="link" (click)="goToStep(steps.Consumer)">
+            <i class="material-icons" aria-hidden="true">edit</i> Modifier
+          </button>
           <hr/>
         </div>
 
         <div class="notification error mt-3" *ngIf="loadingError">
-            Une erreur technique s'est produite lors de l'envoi, veuillez réessayer ultérieurement.<br />
+            Une erreur technique s'est produite lors de l'envoi, veuillez réessayer ultérieurement.
         </div>
 
         <button type="submit" class="btn btn-lg btn-primary">
