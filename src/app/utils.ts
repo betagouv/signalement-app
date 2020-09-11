@@ -15,7 +15,7 @@ export default class Utils {
 }
 
 export const CompanyAPITestingScope = 'TestCompanyAPI';
-export enum SVETestingVersions {
+export enum CompanyTestingVersions {
   EntrepriseAPI = 'EntrepriseAPI',
   SignalConsoAPI = 'SignalConsoAPI'
 }

@@ -15,7 +15,8 @@ import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { CompanySearchResult, DraftCompany, Website } from '../../../model/Company';
 import { isPlatformBrowser } from '@angular/common';
-import Utils from '../../../utils';
+import Utils, { CompanyAPITestingScope } from '../../../utils';
+import { AbTestsService } from 'angular-ab-tests';
 
 declare var jQuery: any;
 
@@ -77,7 +78,7 @@ export class CompanyComponent implements OnInit {
               private companyService: CompanyService,
               private analyticsService: AnalyticsService,
               private renderer: Renderer2,
-              public elementRef: ElementRef) { }
+              private abTestsService: AbTestsService) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -120,7 +121,8 @@ export class CompanyComponent implements OnInit {
 
   initWebsiteForm() {
     this.urlCtrl = this.formBuilder.control(
-      this.draftReport.draftCompany && this.draftReport.draftCompany.website ? this.draftReport.draftCompany.website.url : '', Validators.required
+      this.draftReport.draftCompany && this.draftReport.draftCompany.website ?
+        this.draftReport.draftCompany.website.url : '', Validators.required
     );
     this.websiteForm = this.formBuilder.group({
       url: this.urlCtrl
@@ -151,15 +153,14 @@ export class CompanyComponent implements OnInit {
         EventCategories.companySearch,
         CompanySearchEventActions.search,
         this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
+      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value,
+        this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
         companySearchResults => {
           this.loading = false;
           if (companySearchResults.length === 0) {
             this.treatCaseNoResult();
           } else if (companySearchResults.length === 1) {
             this.treatCaseSingleResult(companySearchResults[0]);
-          } else if (companySearchResults.length > MaxCompanyResult) {
-            this.treatCaseTooManyResults();
           } else {
             this.treatCaseSeveralResults(companySearchResults);
           }
@@ -211,15 +212,6 @@ export class CompanyComponent implements OnInit {
     this.scrollToElement(this.identResult.nativeElement);
   }
 
-  treatCaseTooManyResults() {
-    this.analyticsService.trackEvent(
-      EventCategories.companySearch,
-      CompanySearchEventActions.search,
-      CompanySearchEventNames.tooManyResults
-    );
-    this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
-  }
-
   treatCaseSeveralResults(companySearchResults: CompanySearchResult[]) {
     this.analyticsService.trackEvent(
       EventCategories.companySearch,
@@ -239,14 +231,9 @@ export class CompanyComponent implements OnInit {
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
-  selectCompanyFromResults(companySearchResult: CompanySearchResult) {
-    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select);
-    this.selectCompany(companySearchResult);
-  }
-
   selectCompany(draftCompany: DraftCompany) {
-    this.analyticsService.trackEvent(EventCategories.report, CompanySearchEventActions.select, this.identificationKind);
-    const element = (this.identificationKind === IdentificationKinds.Name ? this.identResult : this.identBySiretResult).nativeElement
+    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select, this.identificationKind);
+    const element = (this.identificationKind === IdentificationKinds.Name ? this.identResult : this.identBySiretResult).nativeElement;
     const rect = element.getBoundingClientRect();
     const submitButtonOffset = 145;
     if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
@@ -281,7 +268,7 @@ export class CompanyComponent implements OnInit {
       this.loading = true;
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchBySiret, this.siretCtrl.value);
 
-      this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
+      this.companyService.searchCompaniesBySiret(this.siretCtrl.value, this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
       company => {
         this.loading = false;
         if (company) {

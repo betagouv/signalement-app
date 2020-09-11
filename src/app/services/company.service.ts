@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Company, CompanySearchResult } from '../model/Company';
+import { CompanyTestingVersions } from '../utils';
 
 export const MaxCompanyResult = 20;
 
@@ -12,22 +13,97 @@ class RawCompanyService {
   constructor(protected http: HttpClient,
     protected serviceUtils: ServiceUtils) {}
 
-  searchCompanies(search: string, searchPostalCode: string) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
-    httpParams = httpParams.append('q', search);
-    return this.http.get<CompanySearchResult[]>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
-      {
-        params: httpParams
-      }
-    );
+  searchCompanies(search: string, searchPostalCode: string, companyTestingVersions: string) {
+    if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
+      let httpParams = new HttpParams();
+      httpParams = httpParams.append('postalCode', searchPostalCode.toString());
+      httpParams = httpParams.append('q', search);
+      return this.http.get<CompanySearchResult[]>(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
+        {
+          params: httpParams
+        }
+      );
+    } else {
+      let httpParams = new HttpParams();
+      httpParams = httpParams.append('code_postal', searchPostalCode.toString());
+      httpParams = httpParams.append('per_page', MaxCompanyResult.toString());
+      return this.http.get<any>(
+        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]),
+        {
+          params: httpParams
+        }
+      ).pipe(
+        map(result => {
+          if (result.etablissement) {
+            return result.etablissement.map(etab => (<CompanySearchResult>{
+                siret: etab.siret,
+                name: etab.nom_raison_sociale,
+                brand: etab.enseigne,
+                address: this.getAddressFromEtablissement(etab),
+                postalCode: etab.code_postal,
+                activityLabel: etab.libelle_activite_principale
+              }
+            ));
+          }
+        }),
+        catchError(err => {
+          if (err.status === 404) {
+            return of([]);
+          } else {
+            return throwError(err);
+          }
+        })
+      );
+    }
   }
 
-  searchCompaniesBySiret(siret: string) {
-    return this.http.get<CompanySearchResult>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', siret]),
-    );
+  getAddressFromEtablissement(etablissement) {
+    let address = '';
+    const addressAttibutes = ['l3_normalisee', 'l4_normalisee', 'l5_normalisee', 'l6_normalisee', 'l7_normalisee'];
+    for (const attribute of addressAttibutes) {
+      if (etablissement[attribute]) {
+        address = address.concat(`${etablissement[attribute]} - `);
+      }
+    }
+    return address.substring(0, address.length - 3);
+  }
+
+  searchCompaniesBySiret(siret: string, companyTestingVersions: string) {
+    if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
+      return this.http.get<CompanySearchResult>(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', siret]),
+      );
+    } else {
+      let httpParams = new HttpParams();
+      httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
+      return this.http.get<any>(
+        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', siret]),
+        {
+          params: httpParams
+        }
+      ).pipe(
+        map(result => {
+          if (result.etablissement) {
+            return <CompanySearchResult>{
+              siret: result.etablissement.siret,
+              name: result.etablissement.nom_raison_sociale,
+              brand: result.etablissement.enseigne,
+              address: this.getAddressFromEtablissement(result.etablissement),
+              postalCode: result.etablissement.code_postal,
+              activityLabel: result.etablissement.libelle_activite_principale
+            };
+          }
+        }),
+        catchError(err => {
+          if (err.status === 404) {
+            return of(undefined);
+          } else {
+            return throwError(err);
+          }
+        })
+      );
+    }
   }
 
   searchRegisterCompanies(search: string) {
@@ -328,17 +404,17 @@ export class CompanyService extends RawCompanyService {
       query: /\bmatmut\b/i,
       results: [
         {
-          "siret": "77570148500101",
-          "nom_raison_sociale": "MATMUT MUTUALITE",
-          "l1_normalisee": "MATMUT MUTUALITE",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": "66 RUE DE SOTTEVILLE",
-          "l5_normalisee": null,
-          "l6_normalisee": "76100 ROUEN",
-          "code_postal": "76100",
-          "libelle_activite_principale": "Autres assurances",
-          "highlight": "Pour tout problème avec la Matmut, peu importe votre lieu d'habitation"
+          'siret': '77570148500101',
+          'nom_raison_sociale': 'MATMUT MUTUALITE',
+          'l1_normalisee': 'MATMUT MUTUALITE',
+          'l2_normalisee': null,
+          'l3_normalisee': null,
+          'l4_normalisee': '66 RUE DE SOTTEVILLE',
+          'l5_normalisee': null,
+          'l6_normalisee': '76100 ROUEN',
+          'code_postal': '76100',
+          'libelle_activite_principale': 'Autres assurances',
+          'highlight': 'Pour tout problème avec la Matmut, peu importe votre lieu d\'habitation'
         }
       ]
     },
@@ -346,25 +422,25 @@ export class CompanyService extends RawCompanyService {
       query: /\bsncf\b/i,
       results: [
         {
-          "siret": "39284731500067",
-          "nom_raison_sociale": "SNCF VOYAGES DEVELOPPEMENT",
-          "l1_normalisee": "SNCF VOYAGES DEVELOPPEMENT",
-          "l2_normalisee": "CNIT 1",
-          "l3_normalisee": null,
-          "l4_normalisee": "2 PLACE DE LA DEFENSE",
-          "l5_normalisee": null,
-          "l6_normalisee": "92400 COURBEVOIE",
-          "code_postal": "92400",
-          "libelle_activite_principale": "SNCF",
-          "highlight": "Pour tout problème avec la SNCF, peu importe votre lieu d'habitation"
+          'siret': '39284731500067',
+          'nom_raison_sociale': 'SNCF VOYAGES DEVELOPPEMENT',
+          'l1_normalisee': 'SNCF VOYAGES DEVELOPPEMENT',
+          'l2_normalisee': 'CNIT 1',
+          'l3_normalisee': null,
+          'l4_normalisee': '2 PLACE DE LA DEFENSE',
+          'l5_normalisee': null,
+          'l6_normalisee': '92400 COURBEVOIE',
+          'code_postal': '92400',
+          'libelle_activite_principale': 'SNCF',
+          'highlight': 'Pour tout problème avec la SNCF, peu importe votre lieu d\'habitation'
         }
       ]
     },
   ];
 
-  searchCompanies(search: string, searchPostalCode: string) {
+  searchCompanies(search: string, searchPostalCode: string, companyTestingVersions: string) {
     const match = this.searchHooks.find(hook => hook.query.test(search));
-    return super.searchCompanies(search, searchPostalCode).pipe(
+    return super.searchCompanies(search, searchPostalCode, companyTestingVersions).pipe(
       map(results => {
         if (match !== undefined) {
           const matches = [this.hookToSearchResult(match)];
@@ -380,11 +456,11 @@ export class CompanyService extends RawCompanyService {
     );
   }
 
-  searchCompaniesBySiret(siret: string) {
+  searchCompaniesBySiret(siret: string, companyTestingVersions: string) {
     if (siret === this.DGCCRF_DATA.siret) {
       return of(this.hookToSearchResult(this.DGCCRF_DATA));
     } else {
-      return super.searchCompaniesBySiret(siret);
+      return super.searchCompaniesBySiret(siret, companyTestingVersions);
     }
   }
 
