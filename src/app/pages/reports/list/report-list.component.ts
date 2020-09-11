@@ -41,7 +41,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
   siretUrlParam: string;
   reportFilter: ReportFilter;
   tagFilterToAdd: Tag = '';
-  reportExtractUrl: string;
   statusList: string[];
   categories: string[];
 
@@ -66,8 +65,8 @@ export class ReportListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.reports.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
+    this.titleService.setTitle(pages.reports.list.title);
+    this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
 
     const queryParamMap = this.route.snapshot.queryParamMap;

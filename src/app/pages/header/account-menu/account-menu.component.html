@@ -1,17 +1,18 @@
-<div class="btn-group d-none d-lg-block" dropdown placement="bottom right">
-  <button id="button-avatar" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle">
+<div class="btn-group d-none d-lg-block dropdown">
+  <button id="button-avatar" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Compte
   </button>
-  <ul id="dropdown-account" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+  <ul id="dropdown-account" class="dropdown-menu dropdown-menu-right"
       role="menu" aria-labelledby="button-avatar">
     <template [ngTemplateOutlet]="dropdownMenuContent"></template>
   </ul>
 </div>
-<div class="btn-group d-lg-none" dropdown placement="bottom right">
-  <button id="button-avatar-sm" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle">
-    <i class="material-icons">person</i>
+<div class="btn-group d-lg-none dropdown">
+  <button id="button-avatar-sm" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="material-icons" aria-hidden="true">person</i>
+    <span class="sr-only">Compte</span>
   </button>
-  <ul id="dropdown-account-sm" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+  <ul id="dropdown-account-sm" class="dropdown-menu dropdown-menu-right"
       role="menu" aria-labelledby="button-avatar">
     <template [ngTemplateOutlet]="dropdownMenuContent"></template>
   </ul>
@@ -25,7 +26,7 @@
     <li class="divider dropdown-divider"></li>
   </ng-container>
   <ng-template #activatedRole>
-    <li role="menuitem"><span class="item font-weight-bold">{{ user.firstName + " " + user.lastName }}</span></li>
+    <li role="menuitem"><span class="item font-weight-bold">{{ user?.firstName + " " + user?.lastName }}</span></li>
     <li class="divider dropdown-divider"></li>
 
     <li role="menuitem"><span class="item font-weight-bold">Signalements</span></li>

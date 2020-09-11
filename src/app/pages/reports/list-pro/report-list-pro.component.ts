@@ -31,7 +31,6 @@ export class ReportListProComponent implements OnInit {
   itemsPerPage = 20;
 
   reportFilter: ReportFilter;
-  reportExtractUrl: string;
   statusList: string[];
 
   loading: boolean;
@@ -52,8 +51,8 @@ export class ReportListProComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.reports.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
+    this.titleService.setTitle(pages.reports.list.title);
+    this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
 
     const queryParamMap = this.route.snapshot.queryParamMap;

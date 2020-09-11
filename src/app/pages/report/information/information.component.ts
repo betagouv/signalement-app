@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { RatingService } from '../../../services/rating.service';
 import { of } from 'rxjs';
+import pages from '../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-information',
@@ -38,6 +39,9 @@ export class InformationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.step = Step.Information;
 
+    this.titleService.setTitle(pages.report.information.title);
+    this.meta.updateTag({ name: 'description', content: pages.report.information.description });
+
     this.activatedRoute.url.pipe(
       take(1),
       switchMap(url => {
@@ -61,8 +65,6 @@ export class InformationComponent implements OnInit, OnDestroy {
 
   initFromAnomaly(anomaly: Anomaly) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCategory, anomaly.category);
-    this.titleService.setTitle(`${anomaly.category} - SignalConso`);
-    this.meta.updateTag({ name: 'description', content: anomaly.description });
     return Object.assign(new DraftReport(), {category: anomaly.category});
   }
 
