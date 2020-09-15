@@ -21,7 +21,15 @@
           </p>
           <div class="row" *ngIf="draftReport.draftCompany.name">
             <div class="col-12">
-              <div>Nom : <strong>{{draftReport.draftCompany.name}}</strong></div>
+              <div>
+                Nom :
+                <strong>
+                  {{draftReport.draftCompany.name}}
+                  <ng-container *ngIf="draftReport.draftCompany.brand">
+                    - {{draftReport.draftCompany.brand}}
+                  </ng-container>
+                </strong>
+              </div>
               <div>Adresse : {{draftReport.draftCompany.address}}</div>
             </div>
           </div>
