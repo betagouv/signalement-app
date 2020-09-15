@@ -5,13 +5,14 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
 import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('ConfirmationComponent', () => {
 
@@ -31,10 +32,11 @@ describe('ConfirmationComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         NgxLoadingModule,
-        Angulartics2RouterlessModule.forRoot(),
         PipesModule
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

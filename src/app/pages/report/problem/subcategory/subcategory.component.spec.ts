@@ -2,13 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubcategoryComponent } from './subcategory.component';
 import { Subcategory } from '../../../../model/Anomaly';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SimpleChange } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentsModule } from '../../../../components/components.module';
 import { PipesModule } from '../../../../pipes/pipes.module';
+import { AnalyticsService } from '../../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../../test/mocks';
 
 describe('SubcategoryComponent', () => {
 
@@ -37,10 +38,12 @@ describe('SubcategoryComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        Angulartics2RouterlessModule.forRoot(),
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule,
+      ],
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
     })
     .compileComponents();

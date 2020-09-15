@@ -71,14 +71,6 @@ describe('ReportService', () => {
       });
       const subcategory1 = genSubcategory();
       const subcategory2 = genSubcategory();
-      const consumer = new Consumer();
-      consumer.lastName = 'lastName';
-      consumer.firstName = 'firstName';
-      consumer.email = 'email@mail.fr';
-      const company = <CompanySearchResult> {
-        name: 'companyName',
-        address: 'line 1 - line 2 - line 4'
-      };
 
       const detailInputValue = new DetailInputValue();
       detailInputValue.label = 'mon label';
@@ -102,7 +94,7 @@ describe('ReportService', () => {
       expect(reportRequest.request.body['subcategories']).toEqual([subcategory1.title, subcategory2.title]);
       expect(reportRequest.request.body['tags']).toEqual([...(subcategory1.tags || []), ...(subcategory2.tags || [])]);
       expect(reportRequest.request.body['companyName']).toBe(draftReport.draftCompany.name);
-      expect(reportRequest.request.body['companyAddress']).toBe(draftReport.draftCompany.address);
+      expect(reportRequest.request.body['companyAddress']).toBe(draftReport.draftCompany.name + ' - ' + draftReport.draftCompany.address);
       expect(reportRequest.request.body['firstName']).toBe(draftReport.consumer.firstName);
       expect(reportRequest.request.body['lastName']).toBe(draftReport.consumer.lastName);
       expect(reportRequest.request.body['email']).toBe(draftReport.consumer.email);

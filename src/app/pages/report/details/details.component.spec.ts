@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { DetailInputValue, DraftReport, Step } from '../../../model/Report';
 import { DetailInput, Subcategory } from '../../../model/Anomaly';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -17,6 +16,8 @@ import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
 import { genDraftReport, oneBoolean } from '../../../../../test/fixtures.spec';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('DetailsComponent', () => {
 
@@ -72,13 +73,14 @@ describe('DetailsComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: `:category/${ReportPaths.Company}`, redirectTo: '' }]),
         BsDatepickerModule.forRoot(),
-        Angulartics2RouterlessModule.forRoot(),
         NgxLoadingModule,
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

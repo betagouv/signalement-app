@@ -15,7 +15,6 @@ export class AnalyticsService {
   }
 
   trackEvent(category, action, name?, value?) {
-    console.log('this.abTestsService.getVersion(CompanyAPITestingScope)', this.abTestsService.getVersion(CompanyAPITestingScope))
     if (isPlatformBrowser(this.platformId)) {
       this.angulartics2.eventTrack.next({
         action: this.abTestsService.getVersion(CompanyAPITestingScope) === CompanyTestingVersions.SignalConsoAPI ? `${action} - API SignalConso` : action,

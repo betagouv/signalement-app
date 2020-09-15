@@ -7,7 +7,8 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
 import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('AcknoledgmentComponent', () => {
 
@@ -21,9 +22,10 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        Angulartics2RouterlessModule.forRoot(),
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
     .compileComponents();
   }));
