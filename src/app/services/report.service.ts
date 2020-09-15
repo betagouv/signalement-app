@@ -50,7 +50,9 @@ export class ReportService {
             };
           }),
         companyName: draftReport.draftCompany.name,
-        companyAddress: draftReport.draftCompany.address,
+        companyAddress: [draftReport.draftCompany.name, draftReport.draftCompany.brand, draftReport.draftCompany.address]
+          .filter(a => a && a.length)
+          .reduce((a1, a2) => `${a1} - ${a2}`, ''),
         companyPostalCode: draftReport.draftCompany.postalCode,
         companySiret: draftReport.draftCompany.siret,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
