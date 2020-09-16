@@ -230,9 +230,10 @@ export class ReportDetailComponent implements OnInit {
       .pipe(
         tap(report => {
           this.report.status = report.status;
-          this.report.company.siret = company.siret;
-          this.report.company.name = company.name;
-          this.report.company.address = company.address;
+          this.report.company.siret = report.company.siret;
+          this.report.company.name = report.company.name;
+          this.report.company.brand = report.company.brand;
+          this.report.company.address = report.company.address;
         }),
         switchMap(_ => this.eventService.getEvents(this.reportId))
       )
