@@ -68,6 +68,9 @@
               <div *ngIf="urlCtrl.hasError('required')">
                 Veuillez renseigner l'url du site.
               </div>
+              <div *ngIf="urlCtrl.hasError('pattern')">
+                Veuillez saisir une url valide (exemple : https://signal.conso.gouv.fr/)
+              </div>
             </div>
             <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4" *ngIf="!websiteForm.disabled; else websiteFormDisabled">
               Continuer

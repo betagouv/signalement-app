@@ -121,8 +121,11 @@ export class CompanyComponent implements OnInit {
 
   initWebsiteForm() {
     this.urlCtrl = this.formBuilder.control(
-      this.draftReport.draftCompany && this.draftReport.draftCompany.website ?
-        this.draftReport.draftCompany.website.url : '', Validators.required
+      this.draftReport.draftCompany && this.draftReport.draftCompany.website ? this.draftReport.draftCompany.website.url : '',
+      Validators.compose([
+        Validators.required,
+        Validators.pattern('^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$')
+      ])
     );
     this.websiteForm = this.formBuilder.group({
       url: this.urlCtrl
