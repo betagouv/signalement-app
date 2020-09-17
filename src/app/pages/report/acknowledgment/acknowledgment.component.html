@@ -4,29 +4,6 @@
       <div class="notification success mb-5">
         <i class="material-icons md-18 attach-icon">check_circle</i> Votre signalement a été envoyé.
       </div>
-      <div class="card" *ngIf="testingSentence()">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-3 p-0">
-              <img src="/assets/images/illustrations/dgccrf.png" alt="" />
-            </div>
-            <div class="col-9 d-sm-none">
-              <h2>{{testingSentence()}}</h2>
-            </div>
-            <div class="col-12 col-sm-9">
-              <h2 class="d-none d-sm-block">{{testingSentence()}}</h2>
-              <button class="btn btn-lg btn-primary float-sm-right" (click)="requestAdditionnalInfos()" *ngIf="!infosRequested">
-                Poursuivre
-              </button>
-              <p *ngIf="infosRequested">
-                Désolé, nous ne sommes pas encore prêts !
-                <br />
-                Nous sommes en train de finir de développer cette possibilité, mais merci de nous avoir fait part de votre intérêt !
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
         <div class="card">

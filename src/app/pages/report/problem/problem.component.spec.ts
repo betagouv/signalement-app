@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -17,6 +16,8 @@ import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('ProblemComponent', () => {
 
@@ -54,12 +55,13 @@ describe('ProblemComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: `myPath/${ReportPaths.Details}`, redirectTo: '' }]),
-        Angulartics2RouterlessModule.forRoot(),
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule,
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { CompanySearchResult, CompanySearchResults } from '../model/CompanySearchResult';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { Company } from '../model/Company';
+import { Company, CompanySearchResult } from '../model/Company';
+import { CompanyTestingVersions } from '../utils';
 
 export const MaxCompanyResult = 20;
 
@@ -13,52 +13,97 @@ class RawCompanyService {
   constructor(protected http: HttpClient,
     protected serviceUtils: ServiceUtils) {}
 
-  searchCompanies(search: string, searchPostalCode: string) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('code_postal', searchPostalCode.toString());
-    httpParams = httpParams.append('per_page', MaxCompanyResult.toString());
-    return this.http.get<CompanySearchResults>(
-      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]),
-      {
-        params: httpParams
-      }
-    ).pipe(
-      map(result => Object.assign(new CompanySearchResults(), result)),
-      catchError(err => {
-        if (err.status === 404) {
-          return of(Object.assign(new CompanySearchResults(), {
-            total: 0,
-            companies: []
-          }));
-        } else {
-          return throwError(err);
+  searchCompanies(search: string, searchPostalCode: string, companyTestingVersions: string) {
+    if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
+      let httpParams = new HttpParams();
+      httpParams = httpParams.append('postalCode', searchPostalCode.toString());
+      httpParams = httpParams.append('q', search);
+      return this.http.get<CompanySearchResult[]>(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
+        {
+          params: httpParams
         }
-      })
-    );
+      );
+    } else {
+      let httpParams = new HttpParams();
+      httpParams = httpParams.append('code_postal', searchPostalCode.toString());
+      httpParams = httpParams.append('per_page', MaxCompanyResult.toString());
+      return this.http.get<any>(
+        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]),
+        {
+          params: httpParams
+        }
+      ).pipe(
+        map(result => {
+          if (result.etablissement) {
+            return result.etablissement.map(etab => (<CompanySearchResult>{
+                siret: etab.siret,
+                name: etab.nom_raison_sociale,
+                brand: etab.enseigne,
+                address: this.getAddressFromEtablissement(etab),
+                postalCode: etab.code_postal,
+                activityLabel: etab.libelle_activite_principale
+              }
+            ));
+          }
+        }),
+        catchError(err => {
+          if (err.status === 404) {
+            return of([]);
+          } else {
+            return throwError(err);
+          }
+        })
+      );
+    }
   }
 
-  searchCompaniesBySiret(siret: string) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
-    return this.http.get<CompanySearchResults>(
-      this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', siret]),
-      {
-        params: httpParams
+  getAddressFromEtablissement(etablissement) {
+    let address = '';
+    const addressAttibutes = ['l3_normalisee', 'l4_normalisee', 'l5_normalisee', 'l6_normalisee', 'l7_normalisee'];
+    for (const attribute of addressAttibutes) {
+      if (etablissement[attribute]) {
+        address = address.concat(`${etablissement[attribute]} - `);
       }
-    ).pipe(
-      map(result => {
-        if (result['etablissement'] && result['etablissement']['code_postal']) {
-          return Object.assign(new CompanySearchResult(), result['etablissement']);
+    }
+    return address.substring(0, address.length - 3);
+  }
+
+  searchCompaniesBySiret(siret: string, companyTestingVersions: string) {
+    if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
+      return this.http.get<CompanySearchResult>(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', siret]),
+      );
+    } else {
+      let httpParams = new HttpParams();
+      httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
+      return this.http.get<any>(
+        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', siret]),
+        {
+          params: httpParams
         }
-      }),
-      catchError(err => {
-        if (err.status === 404) {
-          return of(undefined);
-        } else {
-          return throwError(err);
-        }
-      })
-    );
+      ).pipe(
+        map(result => {
+          if (result.etablissement) {
+            return <CompanySearchResult>{
+              siret: result.etablissement.siret,
+              name: result.etablissement.nom_raison_sociale,
+              brand: result.etablissement.enseigne,
+              address: this.getAddressFromEtablissement(result.etablissement),
+              postalCode: result.etablissement.code_postal,
+              activityLabel: result.etablissement.libelle_activite_principale
+            };
+          }
+        }),
+        catchError(err => {
+          if (err.status === 404) {
+            return of(undefined);
+          } else {
+            return throwError(err);
+          }
+        })
+      );
+    }
   }
 
   searchRegisterCompanies(search: string) {
@@ -67,7 +112,7 @@ class RawCompanyService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<Company[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', 'registered']),
           Object.assign(headers, { params: httpParams })
         );
       })
@@ -287,17 +332,17 @@ export class CompanyService extends RawCompanyService {
       query: /\bcanal\+?\b/i,
       results: [
         {
-          "siret": "42062477700108",
-          "nom_raison_sociale": "GROUPE CANAL+ SA",
-          "l1_normalisee": "GROUPE CANAL+ SA",
-          "l2_normalisee": "CANAL",
-          "l3_normalisee": null,
-          "l4_normalisee": "1 PLACE DU SPECTACLE",
-          "l5_normalisee": null,
-          "l6_normalisee": "92130 ISSY-LES-MOULINEAUX",
-          "code_postal": "92130",
-          "libelle_activite_principale": "Activités des sociétés holding",
-          "highlight": "Pour tout ce qui concerne Canal+ et ses différents services"
+          'siret': '42062477700108',
+          'nom_raison_sociale': 'GROUPE CANAL+ SA',
+          'l1_normalisee': 'GROUPE CANAL+ SA',
+          'l2_normalisee': 'CANAL',
+          'l3_normalisee': null,
+          'l4_normalisee': '1 PLACE DU SPECTACLE',
+          'l5_normalisee': null,
+          'l6_normalisee': '92130 ISSY-LES-MOULINEAUX',
+          'code_postal': '92130',
+          'libelle_activite_principale': 'Activités des sociétés holding',
+          'highlight': 'Pour tout ce qui concerne Canal+ et ses différents services'
         }
       ]
     },
@@ -305,17 +350,17 @@ export class CompanyService extends RawCompanyService {
       query: /\bbooking(\.com)?\b/i,
       results: [
         {
-          "siret": "84455159800015",
-          "nom_raison_sociale": "PMDE BOOKING.COM BV",
-          "l1_normalisee": "BOOKING.COM",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": null,
-          "l5_normalisee": null,
-          "l6_normalisee": null,
-          "code_postal": null,
-          "libelle_activite_principale": "Activités des sièges sociaux",
-          "highlight": "Pour un problème relatif à une réservation sur le site Booking.com",
+          'siret': '84455159800015',
+          'nom_raison_sociale': 'PMDE BOOKING.COM BV',
+          'l1_normalisee': 'BOOKING.COM',
+          'l2_normalisee': null,
+          'l3_normalisee': null,
+          'l4_normalisee': null,
+          'l5_normalisee': null,
+          'l6_normalisee': null,
+          'code_postal': null,
+          'libelle_activite_principale': 'Activités des sièges sociaux',
+          'highlight': 'Pour un problème relatif à une réservation sur le site Booking.com',
         }
       ]
     },
@@ -323,17 +368,17 @@ export class CompanyService extends RawCompanyService {
       query: /\bpaypal(\.com)?\b/i,
       results: [
         {
-          "siret": "82501514200011",
-          "nom_raison_sociale": "PAYPAL EUROPE ET CIE SCA",
-          "l1_normalisee": "PAYPAL EUROPE ET CIE SCA",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": null,
-          "l5_normalisee": null,
-          "l6_normalisee": null,
-          "code_postal": null,
-          "libelle_activite_principale": "Conseil pour les affaires et autres conseils de gestion",
-          "highlight": "Pour un problème relatif au service PayPal",
+          'siret': '82501514200011',
+          'nom_raison_sociale': 'PAYPAL EUROPE ET CIE SCA',
+          'l1_normalisee': 'PAYPAL EUROPE ET CIE SCA',
+          'l2_normalisee': null,
+          'l3_normalisee': null,
+          'l4_normalisee': null,
+          'l5_normalisee': null,
+          'l6_normalisee': null,
+          'code_postal': null,
+          'libelle_activite_principale': 'Conseil pour les affaires et autres conseils de gestion',
+          'highlight': 'Pour un problème relatif au service PayPal',
         }
       ]
     },
@@ -341,17 +386,17 @@ export class CompanyService extends RawCompanyService {
       query: /\bengie\b/i,
       results: [
         {
-          "siret": "54210765113030",
-          "nom_raison_sociale": "ENGIE",
-          "l1_normalisee": "ENGIE",
-          "l2_normalisee": "ENGIE",
-          "l3_normalisee": null,
-          "l4_normalisee": "1 PLACE SAMUEL DE CHAMPLAIN",
-          "l5_normalisee": null,
-          "l6_normalisee": "92400 COURBEVOIE",
-          "code_postal": "92400",
-          "libelle_activite_principale": "Commerce de combustibles gazeux par conduites",
-          "highlight": "Pour tout problème avec Engie, peu importe votre lieu d'habitation"
+          'siret': '54210765113030',
+          'nom_raison_sociale': 'ENGIE',
+          'l1_normalisee': 'ENGIE',
+          'l2_normalisee': 'ENGIE',
+          'l3_normalisee': null,
+          'l4_normalisee': '1 PLACE SAMUEL DE CHAMPLAIN',
+          'l5_normalisee': null,
+          'l6_normalisee': '92400 COURBEVOIE',
+          'code_postal': '92400',
+          'libelle_activite_principale': 'Commerce de combustibles gazeux par conduites',
+          'highlight': 'Pour tout problème avec Engie, peu importe votre lieu d\'habitation'
         }
       ]
     },
@@ -359,17 +404,17 @@ export class CompanyService extends RawCompanyService {
       query: /\bmatmut\b/i,
       results: [
         {
-          "siret": "77570148500101",
-          "nom_raison_sociale": "MATMUT MUTUALITE",
-          "l1_normalisee": "MATMUT MUTUALITE",
-          "l2_normalisee": null,
-          "l3_normalisee": null,
-          "l4_normalisee": "66 RUE DE SOTTEVILLE",
-          "l5_normalisee": null,
-          "l6_normalisee": "76100 ROUEN",
-          "code_postal": "76100",
-          "libelle_activite_principale": "Autres assurances",
-          "highlight": "Pour tout problème avec la Matmut, peu importe votre lieu d'habitation"
+          'siret': '77570148500101',
+          'nom_raison_sociale': 'MATMUT MUTUALITE',
+          'l1_normalisee': 'MATMUT MUTUALITE',
+          'l2_normalisee': null,
+          'l3_normalisee': null,
+          'l4_normalisee': '66 RUE DE SOTTEVILLE',
+          'l5_normalisee': null,
+          'l6_normalisee': '76100 ROUEN',
+          'code_postal': '76100',
+          'libelle_activite_principale': 'Autres assurances',
+          'highlight': 'Pour tout problème avec la Matmut, peu importe votre lieu d\'habitation'
         }
       ]
     },
@@ -377,49 +422,65 @@ export class CompanyService extends RawCompanyService {
       query: /\bsncf\b/i,
       results: [
         {
-          "siret": "39284731500067",
-          "nom_raison_sociale": "SNCF VOYAGES DEVELOPPEMENT",
-          "l1_normalisee": "SNCF VOYAGES DEVELOPPEMENT",
-          "l2_normalisee": "CNIT 1",
-          "l3_normalisee": null,
-          "l4_normalisee": "2 PLACE DE LA DEFENSE",
-          "l5_normalisee": null,
-          "l6_normalisee": "92400 COURBEVOIE",
-          "code_postal": "92400",
-          "libelle_activite_principale": "SNCF",
-          "highlight": "Pour tout problème avec la SNCF, peu importe votre lieu d'habitation"
+          'siret': '39284731500067',
+          'nom_raison_sociale': 'SNCF VOYAGES DEVELOPPEMENT',
+          'l1_normalisee': 'SNCF VOYAGES DEVELOPPEMENT',
+          'l2_normalisee': 'CNIT 1',
+          'l3_normalisee': null,
+          'l4_normalisee': '2 PLACE DE LA DEFENSE',
+          'l5_normalisee': null,
+          'l6_normalisee': '92400 COURBEVOIE',
+          'code_postal': '92400',
+          'libelle_activite_principale': 'SNCF',
+          'highlight': 'Pour tout problème avec la SNCF, peu importe votre lieu d\'habitation'
         }
       ]
     },
   ];
 
-  searchCompanies(search: string, searchPostalCode: string) {
+  searchCompanies(search: string, searchPostalCode: string, companyTestingVersions: string) {
     const match = this.searchHooks.find(hook => hook.query.test(search));
-    return super.searchCompanies(search, searchPostalCode).pipe(
+    return super.searchCompanies(search, searchPostalCode, companyTestingVersions).pipe(
       map(results => {
         if (match !== undefined) {
-          const matches = Object.assign(new CompanySearchResults(), {
-            total: match.results.length,
-            etablissement: match.results
-          });
-          matches.companies.filter(c => !c.highlight).forEach(c => c.highlight = 'Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)');
-          results.companies = [
-            ...matches.companies,
-            ...results.companies.filter(c =>
+          const matches = [this.hookToSearchResult(match)];
+          matches.filter(c => !c.highlight).forEach(c => c.highlight = 'Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)');
+          results = [
+            ...matches,
+            ...results.filter(c =>
               !match.results.find(r => r.siret === c.siret)
             )];
-          results.total = results.companies.length;
         }
         return results;
       })
     );
   }
 
-  searchCompaniesBySiret(siret: string) {
+  searchCompaniesBySiret(siret: string, companyTestingVersions: string) {
     if (siret === this.DGCCRF_DATA.siret) {
-      return of(Object.assign(new CompanySearchResult(), this.DGCCRF_DATA));
+      return of(this.hookToSearchResult(this.DGCCRF_DATA));
     } else {
-      return super.searchCompaniesBySiret(siret);
+      return super.searchCompaniesBySiret(siret, companyTestingVersions);
     }
+  }
+
+  hookToSearchResult(hook) {
+    return <CompanySearchResult> {
+      name: hook.name,
+      address: this.getHookAddress(hook),
+      postalCode: hook.postalCode,
+      siret: hook.siret,
+    };
+  }
+
+  getHookAddress(hook) {
+    let address = '';
+    const addressAttibutes = ['line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7'];
+    for (const attribute of addressAttibutes) {
+      if (hook[attribute]) {
+        address = address.concat(`${hook[attribute]} - `);
+      }
+    }
+    return address.substring(0, address.length - 3);
   }
 }

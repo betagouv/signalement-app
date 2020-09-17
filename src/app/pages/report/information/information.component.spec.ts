@@ -4,7 +4,6 @@ import { InformationComponent } from './information.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { Anomaly, Information } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { Step } from '../../../model/Report';
@@ -13,6 +12,8 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { NgxLoadingModule } from 'ngx-loading';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
 import { of } from 'rxjs';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('InformationComponent', () => {
 
@@ -31,12 +32,12 @@ describe('InformationComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        Angulartics2RouterlessModule.forRoot(),
         NgxLoadingModule,
       ],
       providers: [
         ReportStorageService,
         AnomalyService,
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
