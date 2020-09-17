@@ -4,13 +4,14 @@ import { ConsumerComponent } from './consumer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DraftReport, Step } from '../../../model/Report';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { genConsumer, genDraftReport } from '../../../../../test/fixtures.spec';
 import { of } from 'rxjs';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('ConsumerComponent', () => {
 
@@ -29,10 +30,10 @@ describe('ConsumerComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: `:category/${ReportPaths.Confirmation}`, redirectTo: '' }]),
-        Angulartics2RouterlessModule.forRoot(),
       ],
       providers: [
         ReportStorageService,
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
     })
       .overrideTemplate(BreadcrumbComponent, '')

@@ -21,7 +21,15 @@
           </p>
           <div class="row" *ngIf="draftReport.draftCompany.name">
             <div class="col-12">
-              <div>Nom : <strong>{{draftReport.draftCompany.name}}</strong></div>
+              <div>
+                Nom :
+                <strong>
+                  {{draftReport.draftCompany.name}}
+                  <ng-container *ngIf="draftReport.draftCompany.brand">
+                    - {{draftReport.draftCompany.brand}}
+                  </ng-container>
+                </strong>
+              </div>
               <div>Adresse : {{draftReport.draftCompany.address}}</div>
             </div>
           </div>
@@ -184,21 +192,19 @@
                     <div *ngFor="let companySearchResult of companySearchResults; let companyIndex = index" [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
                       <div class="row mb-3">
                         <div class="col col-radio">
-                          <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany()"/>
+                          <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany(draftReport.draftCompany)"/>
                         </div>
                         <label class="col pointer" for="company_{{companyIndex}}">
-                          <div class="font-weight-bold" *ngIf="companySearchResult.line1">{{companySearchResult.line1}}</div>
-                          <div class="font-weight-bold" *ngIf="companySearchResult.line2">{{companySearchResult.line2}}</div>
-                            <div class="font-weight-bold" *ngIf="companySearchResult.highlight">
-                              <i class="material-icons md-green">check_circle</i>
-                              <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
-                            </div>
+                          <div class="font-weight-bold" *ngIf="companySearchResult.name">{{companySearchResult.name}}</div>
+                          <div class="font-weight-bold" *ngIf="companySearchResult.brand">{{companySearchResult.brand}}</div>
+                          <div class="font-weight-bold" *ngIf="companySearchResult.highlight">
+                            <i class="material-icons md-green">check_circle</i>
+                            <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
+                          </div>
                           <div class="text-primary" *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}</div>
-                          <div *ngIf="companySearchResult.line3">{{companySearchResult.line3}}</div>
-                          <div *ngIf="companySearchResult.line4">{{companySearchResult.line4}}</div>
-                          <div *ngIf="companySearchResult.line5">{{companySearchResult.line5}}</div>
-                          <div *ngIf="companySearchResult.line6">{{companySearchResult.line6}}</div>
-                          <div *ngIf="companySearchResult.line7">{{companySearchResult.line7}}</div>
+                          <div *ngIf="companySearchResult.address">
+                            <div *ngFor="let line of companySearchResult.address.split(' - ')">{{line}}</div>
+                          </div>
                         </label>
                       </div>
                     </div>
@@ -355,17 +361,15 @@
                     <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchBySiretResult)">
                     <div class="row mb-3">
                       <div class="col col-radio">
-                        <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_siret" [value]="companySearchBySiretResult" (click)="selectCompany()"/>
+                        <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_siret" [value]="companySearchBySiretResult" (click)="selectCompany(draftReport.draftCompany)"/>
                       </div>
                       <label class="col pointer" for="company_siret">
-                        <div class="font-weight-bold" *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}</div>
-                        <div class="font-weight-bold" *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}</div>
+                        <div class="font-weight-bold" *ngIf="companySearchBySiretResult.name">{{companySearchBySiretResult.name}}</div>
+                        <div class="font-weight-bold" *ngIf="companySearchBySiretResult.brand">{{companySearchBySiretResult.brand}}</div>
                         <div class="text-primary" *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}</div>
-                        <div *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}</div>
-                        <div *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}</div>
-                        <div *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}</div>
-                        <div *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}</div>
-                        <div *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}</div>
+                        <div *ngIf="companySearchBySiretResult.address">
+                          <div *ngFor="let line of companySearchBySiretResult.address.split(' - ')">{{line}}</div>
+                        </div>
                       </label>
                     </div>
                   </div>
