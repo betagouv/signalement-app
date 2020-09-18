@@ -49,6 +49,7 @@ list:
     rank: 14
     sprite: category-bank
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
+    subcategoriestitle: Il s'agit d'un problème principalement lié à  
   - category: Intoxication alimentaire
     categoryId: INTOX
     path: intoxication-alimentaire
