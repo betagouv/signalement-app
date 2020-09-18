@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CollapsableTextComponent } from './collapsable-text.component';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { AnalyticsService } from '../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../test/mocks';
 
 describe('CollapsableTextComponent', () => {
   let component: CollapsableTextComponent;
@@ -14,10 +15,10 @@ describe('CollapsableTextComponent', () => {
         CollapsableTextComponent,
         TruncatePipe,
       ],
-      imports: [
-        Angulartics2RouterlessModule.forRoot(),
-      ],
-      providers: []
+      imports: [],
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
     .compileComponents();
   }));

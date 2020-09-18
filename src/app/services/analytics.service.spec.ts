@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AnalyticsService } from './analytics.service';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { MockAnalyticsService } from '../../../test/mocks';
 
 describe('AnalyticsService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      Angulartics2RouterlessModule.forRoot(),
-    ],
-    providers: []
+    imports: [],
+    providers: [
+      {provide: AnalyticsService, useClass: MockAnalyticsService}
+    ]
   }));
 
   it('should be created', () => {

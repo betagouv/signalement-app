@@ -147,13 +147,12 @@
                       </div>
                       <div *ngIf="companySearchBySiretResult.siret">
                         <div class="company">
-                          <div class="font-weight-bold" *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}</div>
-                          <div class="font-weight-bold" *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}</div>
-                          <div *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}</div>
-                          <div *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}</div>
-                          <div *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}</div>
-                          <div *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}</div>
-                          <div *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}</div>
+                          <div class="font-weight-bold" *ngIf="companySearchBySiretResult.name">{{companySearchBySiretResult.name}}</div>
+                          <div class="font-weight-bold" *ngIf="companySearchBySiretResult.brand">{{companySearchBySiretResult.brand}}</div>
+                          <div class="text-primary" *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}</div>
+                          <div *ngIf="companySearchBySiretResult.address">
+                            <div *ngFor="let line of companySearchBySiretResult.address.split(' - ')">{{line}}</div>
+                          </div>
                         </div>
 
                         <div class="notification error" *ngIf="loadingError">

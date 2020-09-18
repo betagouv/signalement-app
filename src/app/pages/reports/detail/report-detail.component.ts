@@ -8,7 +8,6 @@ import { EventService } from '../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
-import { CompanySearchResult } from '../../../model/CompanySearchResult';
 import { switchMap, tap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -16,8 +15,10 @@ import { isPlatformBrowser, PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../model/Consumer';
 import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../model/ReportEvent';
 import { HttpResponse } from '@angular/common/http';
+import { CompanySearchResult } from '../../../model/Company';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
+import { CompanyTestingVersions } from '../../../utils';
 
 @Component({
   selector: 'app-report-detail',
@@ -211,10 +212,10 @@ export class ReportDetailComponent implements OnInit {
   submitCompanySiretForm() {
     this.loading = true;
     this.loadingError = false;
-    this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
+    this.companyService.searchCompaniesBySiret(this.siretCtrl.value, CompanyTestingVersions.SignalConsoAPI).subscribe(
       company => {
         this.loading = false;
-        this.companySearchBySiretResult = company ? company : new CompanySearchResult();
+        this.companySearchBySiretResult = company;
       },
       err => {
         this.loading = false;
@@ -229,9 +230,10 @@ export class ReportDetailComponent implements OnInit {
       .pipe(
         tap(report => {
           this.report.status = report.status;
-          this.report.company.siret = company.siret;
-          this.report.company.name = company.name;
-          this.report.company.address = company.address;
+          this.report.company.siret = report.company.siret;
+          this.report.company.name = report.company.name;
+          this.report.company.brand = report.company.brand;
+          this.report.company.address = report.company.address;
         }),
         switchMap(_ => this.eventService.getEvents(this.reportId))
       )
