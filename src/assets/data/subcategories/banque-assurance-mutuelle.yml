@@ -31,6 +31,7 @@
     - title: Autre
       consumerActions: !!import/single ../common/actions/defaut.yml
 - title: Assurance maladie (sécurité sociale)
+  companyKind: 'WEBSITE'
   information:
     title: Vous ne pouvez pas utiliser SignalConso pour signaler un problème avec l'assurance maladie.
-    content: "Si vous souhaitez faire une réclamation, vous devez utiliser contacter directement votre caisse d'assurance maladie. Il existe également un médiateur. Renseignez-vous auprès de votre caisse ou sur le site www.ameli.fr"
+    content: "Si vous souhaitez faire une réclamation, vous devez contacter directement votre caisse d'assurance maladie. Il existe également un médiateur. Renseignez-vous auprès de votre caisse ou sur le site <a href='www.ameli.fr' target='_blank' />www.ameli.fr</a>"
