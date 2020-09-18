@@ -4,8 +4,9 @@ import { PasswordChangeComponent } from './password-change.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { ComponentsModule } from '../../../components/components.module';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('PasswordComponent', () => {
   let component: PasswordChangeComponent;
@@ -19,10 +20,11 @@ describe('PasswordComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule,
-        Angulartics2RouterlessModule.forRoot(),
         ComponentsModule
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
     .compileComponents();
   }));

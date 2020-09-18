@@ -1,5 +1,4 @@
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2, ViewChild } from '@angular/core';
-import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -14,9 +13,10 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
-import { DraftCompany, Website } from '../../../model/Company';
+import { CompanySearchResult, DraftCompany, Website } from '../../../model/Company';
 import { isPlatformBrowser } from '@angular/common';
-import Utils from '../../../utils';
+import Utils, { CompanyAPITestingScope } from '../../../utils';
+import { AbTestsService } from 'angular-ab-tests';
 
 declare var jQuery: any;
 
@@ -78,7 +78,7 @@ export class CompanyComponent implements OnInit {
               private companyService: CompanyService,
               private analyticsService: AnalyticsService,
               private renderer: Renderer2,
-              public elementRef: ElementRef) { }
+              private abTestsService: AbTestsService) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -121,7 +121,11 @@ export class CompanyComponent implements OnInit {
 
   initWebsiteForm() {
     this.urlCtrl = this.formBuilder.control(
-      this.draftReport.draftCompany && this.draftReport.draftCompany.website ? this.draftReport.draftCompany.website.url : '', Validators.required
+      this.draftReport.draftCompany && this.draftReport.draftCompany.website ? this.draftReport.draftCompany.website.url : '',
+      Validators.compose([
+        Validators.required,
+        Validators.pattern('^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$')
+      ])
     );
     this.websiteForm = this.formBuilder.group({
       url: this.urlCtrl
@@ -152,15 +156,14 @@ export class CompanyComponent implements OnInit {
         EventCategories.companySearch,
         CompanySearchEventActions.search,
         this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
+      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value,
+        this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
         companySearchResults => {
           this.loading = false;
-          if (companySearchResults.total === 0) {
+          if (companySearchResults.length === 0) {
             this.treatCaseNoResult();
-          } else if (companySearchResults.total === 1) {
-            this.treatCaseSingleResult(companySearchResults);
-          } else if (companySearchResults.total > MaxCompanyResult) {
-            this.treatCaseTooManyResults();
+          } else if (companySearchResults.length === 1) {
+            this.treatCaseSingleResult(companySearchResults[0]);
           } else {
             this.treatCaseSeveralResults(companySearchResults);
           }
@@ -202,32 +205,23 @@ export class CompanyComponent implements OnInit {
     this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
   }
 
-  treatCaseSingleResult(companySearchResult: CompanySearchResults) {
+  treatCaseSingleResult(companySearchResult: CompanySearchResult) {
     this.analyticsService.trackEvent(
       EventCategories.companySearch,
       CompanySearchEventActions.search,
       CompanySearchEventNames.singleResult
     );
-    this.companySearchResults = companySearchResult.companies;
+    this.companySearchResults = [companySearchResult];
     this.scrollToElement(this.identResult.nativeElement);
   }
 
-  treatCaseTooManyResults() {
-    this.analyticsService.trackEvent(
-      EventCategories.companySearch,
-      CompanySearchEventActions.search,
-      CompanySearchEventNames.tooManyResults
-    );
-    this.searchWarning = 'Il y a trop d\'établissement correspondant à la recherche.';
-  }
-
-  treatCaseSeveralResults(companySearchResults: CompanySearchResults) {
+  treatCaseSeveralResults(companySearchResults: CompanySearchResult[]) {
     this.analyticsService.trackEvent(
       EventCategories.companySearch,
       CompanySearchEventActions.search,
       CompanySearchEventNames.severalResult
     );
-    this.companySearchResults = companySearchResults.companies;
+    this.companySearchResults = companySearchResults;
     this.scrollToElement(this.identResult.nativeElement);
   }
 
@@ -240,9 +234,9 @@ export class CompanyComponent implements OnInit {
     this.searchError = 'Une erreur technique s\'est produite.';
   }
 
-  selectCompany() {
-    this.analyticsService.trackEvent(EventCategories.report, CompanySearchEventActions.select, this.identificationKind);
-    const element = (this.identificationKind === IdentificationKinds.Name ? this.identResult : this.identBySiretResult).nativeElement
+  selectCompany(draftCompany: DraftCompany) {
+    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select, this.identificationKind);
+    const element = (this.identificationKind === IdentificationKinds.Name ? this.identResult : this.identBySiretResult).nativeElement;
     const rect = element.getBoundingClientRect();
     const submitButtonOffset = 145;
     if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
@@ -254,7 +248,7 @@ export class CompanyComponent implements OnInit {
 
   submitCompany(draftCompany?: DraftCompany) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
-    this.draftReport.draftCompany = draftCompany || this.selectedCompany.draftCompany;
+    this.draftReport.draftCompany = draftCompany || this.selectedCompany;
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
@@ -276,7 +270,8 @@ export class CompanyComponent implements OnInit {
       this.initSearchBySiret();
       this.loading = true;
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchBySiret, this.siretCtrl.value);
-      this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
+
+      this.companyService.searchCompaniesBySiret(this.siretCtrl.value, this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
       company => {
         this.loading = false;
         if (company) {

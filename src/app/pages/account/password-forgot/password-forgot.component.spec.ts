@@ -4,9 +4,10 @@ import { PasswordForgotComponent } from './password-forgot.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('ForgetPasswordComponent', () => {
   let component: PasswordForgotComponent;
@@ -21,10 +22,11 @@ describe('ForgetPasswordComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         NgxLoadingModule,
-        Angulartics2RouterlessModule.forRoot(),
         ComponentsModule
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
       .compileComponents();
   }));

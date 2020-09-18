@@ -1,6 +1,7 @@
 export interface DraftCompany {
   siret?: string;
   name?: string;
+  brand?: string;
   address?: string;
   postalCode?: string;
   website?: Website;
@@ -9,6 +10,11 @@ export interface DraftCompany {
 export interface Company extends DraftCompany {
   id: string;
   creationDate: Date;
+}
+
+export interface CompanySearchResult extends DraftCompany {
+  highlight: string;
+  activityLabel: string;
 }
 
 export interface CompanyAccess {
