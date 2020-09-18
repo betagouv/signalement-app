@@ -15,7 +15,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { genDraftReport } from '../../../../../test/fixtures.spec';
+import { genDraftReport, genInformation, genSubcategory } from '../../../../../test/fixtures.spec';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 
@@ -27,16 +27,18 @@ describe('ProblemComponent', () => {
   let anomalyService: AnomalyService;
 
   const subcategoriesFixture = [
-    Object.assign( new Subcategory(), { title: 'title1', description: 'description1' }),
-    Object.assign( new Subcategory(), { title: 'title2', description: 'description2' }),
-    Object.assign( new Subcategory(), {
-      title: 'title3',
-      description: 'description3',
+    genSubcategory(),
+    <Subcategory>{
+      ...genSubcategory(),
+      consumerActions: [genInformation()]
+    },
+    <Subcategory>{
+      ...genSubcategory(),
       subcategories: [
-        Object.assign( new Subcategory(), { title: 'title31', description: 'description31' }),
-        Object.assign( new Subcategory(), { title: 'title32', description: 'description32' })
-        ]
-    }),
+        genSubcategory(),
+        genSubcategory()
+      ]
+    }
   ];
 
   const anomalyFixture = new Anomaly();
@@ -90,7 +92,7 @@ describe('ProblemComponent', () => {
 
   describe('when receive subcategories', () => {
 
-    it('should change the shared report with a report which contains subcategories', () => {
+    it('should update the shared report when the report does not concern a contractual report', () => {
       const draftReportInProgress = genDraftReport(Step.Category);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
@@ -101,16 +103,33 @@ describe('ProblemComponent', () => {
 
       fixture.detectChanges();
 
-      component.onSelectSubcategories([subcategoriesFixture[1]]);
+      component.onSelectSubcategories([subcategoriesFixture[0]]);
 
-      const subcategoryExpected = new Subcategory();
-      subcategoryExpected.title = 'title2';
-      subcategoryExpected.description = 'description2';
       const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
-        subcategories: [subcategoryExpected]
+        subcategories: [subcategoriesFixture[0]]
       });
 
       expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
+
+    });
+
+    it('should display a specific message when the report concerns a contractual report', () => {
+      const draftReportInProgress = genDraftReport(Step.Category);
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+
+      component.anomaly = new Anomaly();
+      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+
+      fixture.detectChanges();
+
+      component.onSelectSubcategories([subcategoriesFixture[1]]);
+
+      fixture.detectChanges();
+
+      const nativeElement = fixture.nativeElement;
+      expect(changeReportSpy).not.toHaveBeenCalled();
+      expect(nativeElement.querySelector('#contractualDisputeMessage')).not.toBeNull();
 
     });
   });

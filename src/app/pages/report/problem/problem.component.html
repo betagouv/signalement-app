@@ -2,14 +2,60 @@
 <main role="main">
   <section class="section section-white" *ngIf="draftReport">
     <div class="container max-width">
-      <app-subcategory
-        [subcategoriesTitle]="anomaly?.subcategoriesTitle"
-        [subcategoryName]="anomaly?.category"
-        [subcategories]="anomaly?.subcategories"
-        [subcategoriesSelected]="draftReport.subcategories"
-        [level]="1"
-        (select)="onSelectSubcategories($event)">
-      </app-subcategory>
+      <div id="contractualDisputeMessage" *ngIf="showContractualDisputeMessage; else subcategories">
+
+        <div class="notification success d-flex">
+          <i class="material-icons p-1" aria-hidden="true">chat_bubble_outline</i>
+          <div>
+            Ce problème est un <strong>litige entre l’entreprise et vous.</strong>
+          </div>
+
+        </div>
+
+        <h2 class="pt-3 pb-3">Pourquoi faire un signalement ?</h2>
+
+        <ul>
+          <li>
+            <strong>
+              Pour augmenter vos chances de vous faire rembourser :
+            </strong>
+            50% des litiges sont résolus grâce à SignalConso.
+          </li>
+          <li>
+            <strong>
+              Pour lancer les bonnes démarches :
+            </strong>
+            SignalConso vous guide dans la marche à suivre.
+          </li>
+          <li>
+            <strong>
+              Pour l’acte citoyen :
+            </strong>
+            les enquêteurs de la Répression des Fraudes ne sont pas à même de résoudre votre cas personnel, mais pourront lancer une enquête auprès de l’entreprise.
+          </li>
+          <li>
+            TODO : le DGCCRF ne résoud pas les problèmes individiduels (mais le dire mieux que ça)
+          </li>
+        </ul>
+
+        <hr/>
+
+        <button type="button" class="btn btn-lg btn-primary" (click)="continue()">
+          Continuer
+        </button>
+
+      </div>
+
+      <ng-template #subcategories>
+        <app-subcategory
+          [subcategoriesTitle]="anomaly?.subcategoriesTitle"
+          [subcategoryName]="anomaly?.category"
+          [subcategories]="anomaly?.subcategories"
+          [subcategoriesSelected]="draftReport.subcategories"
+          [level]="1"
+          (select)="onSelectSubcategories($event)">
+        </app-subcategory>
+      </ng-template>
     </div>
   </section>
 </main>

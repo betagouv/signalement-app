@@ -71,6 +71,10 @@ export class DraftReport {
       return this.subcategories[this.subcategories.length - 1];
     }
   }
+
+  isContractualDispute() {
+    return this.subcategories && this.subcategories[this.subcategories.length - 1].consumerActions;
+  }
 }
 
 export class Report {

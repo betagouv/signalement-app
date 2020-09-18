@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
@@ -9,6 +9,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-problem',
@@ -21,9 +22,10 @@ export class ProblemComponent implements OnInit {
   draftReport: DraftReport;
   anomaly: Anomaly;
 
-  showErrors: boolean;
+  showContractualDisputeMessage = false;
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
@@ -79,9 +81,20 @@ export class ProblemComponent implements OnInit {
     this.analyticsService.trackEvent(
       EventCategories.report,
       ReportEventActions.contactualReport,
-      subcategories[subcategories.length - 1].consumerActions ? 'Oui' : 'Non'
+      this.draftReport.isContractualDispute() ? 'Oui' : 'Non'
     );
     this.draftReport.subcategories = subcategories;
+    if (this.draftReport.isContractualDispute()) {
+      if (isPlatformBrowser(this.platformId)) {
+        window.scroll(0, 0);
+      }
+      this.showContractualDisputeMessage = true;
+    } else {
+      this.continue();
+    }
+  }
+
+  continue() {
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
