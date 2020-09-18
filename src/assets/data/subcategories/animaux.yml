@@ -4,8 +4,8 @@
 - title: Soins
   example: 'Exemple : vétérinaire, toiletteur'
   consumerActions: !!import/single ../common/actions/animaux.yml
-- title: Garde
-  example: 'Exemple : pension, site de petsitter'
+- title: Garde d'animaux
+  example: 'Exemple : pension, site internet de petsitter'
   consumerActions: !!import/single ../common/actions/animaux.yml
 - title: Vendeur d'animaux
   consumerActions: !!import/single ../common/actions/animaux.yml
