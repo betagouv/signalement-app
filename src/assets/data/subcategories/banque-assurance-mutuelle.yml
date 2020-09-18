@@ -1,14 +1,33 @@
-- title: Frais bancaires
-  example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir'
-  consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Contrat
-  example: 'Exemple : contrat de crédit'
-  consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Publicité
-  example: 'Exemple : publicité pour un crédit non conforme'
-  consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Service client
-  example: 'Exemple : service client injoignable'
-  consumerActions: !!import/single ../common/actions/defaut.yml
-- title: Autre
-  consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Banque
+  companyKind: 'WEBSITE'
+  subcategories: 
+    - title: Frais bancaires
+      example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Contrat
+      example: 'Exemple : contrat de crédit non conforme'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Publicité
+      example: 'Exemple : publicité pour un crédit non conforme'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Service client
+      example: 'Exemple : service client injoignable'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
+      consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Assurance / Mutuelle
+  companyKind: 'WEBSITE'
+  subcategories: 
+    - title: Contrat
+      example: 'Exemple : contrat non respecté, échéancier non reçu'
+    - title: Remboursement / dédommagement 
+      example: 'Exemple : remboursement non reçu'
+    - title: Publicité
+      example: 'Exemple : publicité trompeuse'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Service client
+      example: 'Exemple : service client injoignable'
+      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
+      consumerActions: !!import/single ../common/actions/defaut.yml
+- title: Assurance maladie (sécurité sociale)
