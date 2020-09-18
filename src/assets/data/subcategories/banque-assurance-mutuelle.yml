@@ -1,4 +1,5 @@
 - title: Banque
+  example: 'Exemple : banque classique, banque en ligne'
   companyKind: 'WEBSITE'
   subcategories: 
     - title: Frais bancaires
