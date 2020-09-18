@@ -45,11 +45,11 @@ list:
   - category: Banque / Assurance / Mutuelle
     categoryId: BAQ
     path: banque-assurance-mutuelle
-    description: crédit, assurance
+    description: banque en ligne, crédit, assurance auto...
     rank: 14
     sprite: category-bank
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
-    subcategoriestitle: Il s'agit d'un problème principalement lié à  
+    subcategoriesTitle: Il s'agit d'un problème principalement lié à  
   - category: Intoxication alimentaire
     categoryId: INTOX
     path: intoxication-alimentaire
