@@ -54,6 +54,7 @@ export class ReportService {
         companyPostalCode: draftReport.draftCompany.postalCode,
         companySiret: draftReport.draftCompany.siret,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
+        contractualDispute: draftReport.isContractualDispute()
       },
     );
   }
