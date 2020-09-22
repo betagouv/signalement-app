@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, filter, map, mergeMap } from 'rxjs/operators';
 import { Company, CompanySearchResult } from '../model/Company';
 import { CompanyTestingVersions } from '../utils';
 
@@ -73,6 +73,12 @@ class RawCompanyService {
     if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
       return this.http.get<CompanySearchResult>(
         this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', siret]),
+      ).pipe(
+        map(result => {
+          if (result && result.postalCode) {
+            return result;
+          }
+        })
       );
     } else {
       let httpParams = new HttpParams();
@@ -84,7 +90,7 @@ class RawCompanyService {
         }
       ).pipe(
         map(result => {
-          if (result.etablissement) {
+          if (result.etablissement && result.etablissement.code_postal) {
             return <CompanySearchResult>{
               siret: result.etablissement.siret,
               name: result.etablissement.nom_raison_sociale,
