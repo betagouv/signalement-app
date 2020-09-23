@@ -1,6 +1,12 @@
 - title: un achat sur internet ou un site de vente en ligne
   companyKind: WEBSITE
+  subcategories:
+    title : Le site internet en lui-même
+    example: 'Exemple : publicité trompeuse, absence de mentions obligatoires, service client injoignable'
+    title : Une commande effectuée
+    example: 'Exemple : commande jamais livrée, produit non conforme'
 - title: un magasin / commerce physique
+  example: 'Exemple : grande surface, épicerie, stand dans un marché, boulangerie'
   companyKind: SIRET
   subcategories:
     - title: Un problème qui concerne le magasin de façon générale
