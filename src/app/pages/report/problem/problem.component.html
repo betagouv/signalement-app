@@ -4,12 +4,12 @@
     <div class="container max-width">
       <div id="contractualDisputeMessage" *ngIf="showContractualDisputeMessage; else subcategories">
 
-        <div class="notification success d-flex">
-          <i class="material-icons p-1" aria-hidden="true">chat_bubble_outline</i>
-          <div>
-            Ce problème est un <strong>litige entre l’entreprise et vous.</strong>
-          </div>
-
+        <div class="notification info">
+          <strong>Ce problème est un litige : </strong>
+          un problème individuel entre l’entreprise et vous.
+          <p class="m-0">
+            La répression des fraudes ne s’occupe pas directement des problèmes individuels.
+          </p>
         </div>
 
         <h2 class="pt-3 pb-3">Pourquoi faire un signalement ?</h2>
@@ -23,18 +23,15 @@
           </li>
           <li>
             <strong>
-              Pour lancer les bonnes démarches :
-            </strong>
-            SignalConso vous guide dans la marche à suivre.
-          </li>
-          <li>
-            <strong>
               Pour l’acte citoyen :
             </strong>
             les enquêteurs de la Répression des Fraudes ne sont pas à même de résoudre votre cas personnel, mais pourront lancer une enquête auprès de l’entreprise.
           </li>
           <li>
-            TODO : le DGCCRF ne résoud pas les problèmes individiduels (mais le dire mieux que ça)
+            <strong>
+              Pour faire les bonnes démarches :
+            </strong>
+            SignalConso vous guide dans la marche à suivre pour obtenir réparation.
           </li>
         </ul>
 
