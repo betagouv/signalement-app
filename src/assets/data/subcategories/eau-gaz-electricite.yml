@@ -24,7 +24,7 @@
                   rank: 2
                   type: TEXTAREA
               fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
-              consumerActions: !!import/single ../common/actions/eau.yml
+              consumerActionsId: e828bbf3-0bc2-401f-b0c5-bd2e60c5dcbd
         - title: Je ne suis pas d'accord avec la consommation indiquée sur ma facture
           information:
             title: Vous devez demander à faire vérifier le compteur.
@@ -42,9 +42,9 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-          consumerActions: !!import/single ../common/actions/eau.yml
+          consumerActionsId: e828bbf3-0bc2-401f-b0c5-bd2e60c5dcbd
         - title: Autres
-          consumerActions: !!import/single ../common/actions/eau.yml
+          consumerActionsId: e828bbf3-0bc2-401f-b0c5-bd2e60c5dcbd
     - title: Coupure de l'eau pour impayé
       example: Mon débit d'eau a été réduit car je ne peux payer ma facture
       detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
@@ -58,7 +58,7 @@
           rank: 2
           type: DATE
       fileLabel: Joindre une copie du contrat / règlement.
-      consumerActions: !!import/single ../common/actions/eau.yml
+      consumerActionsId: e828bbf3-0bc2-401f-b0c5-bd2e60c5dcbd
     - title: Dégâts / travaux sur les canalisations
       example: 'Exemple : fuite d''eau avant compteur'
       information:
@@ -124,7 +124,7 @@
           rank: 6
           type: TEXTAREA
       fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
-      consumerActions: !!import/single ../common/actions/energie.yml
+      consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
     - title: Publicité mensongère ou trompeuse
       example: 'Exemple : publicité "offre verte" mensongère'
       detailInputs:
@@ -160,7 +160,7 @@
             - Oui
             - Non
       fileLabel: Photo(s) si possible
-      consumerActions: !!import/single ../common/actions/energie.yml
+      consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
     - title: Contrat
       example: 'Exemple : reconduction de contrat, clause abusive'
       subcategories:
@@ -190,7 +190,7 @@
                         - label: Précisez comment et à qui vous avez fait la demande
                           rank: 3
                           type: TEXTAREA
-                      consumerActions: !!import/single ../common/actions/energie.yml
+                      consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
                     - title: Non
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -218,7 +218,7 @@
                             - label: Précisez comment et à qui vous avez fait la demande
                               rank: 3
                               type: TEXTAREA
-                          consumerActions: !!import/single ../common/actions/energie.yml
+                          consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
                         - title: Non
                           information:
                             title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -230,7 +230,7 @@
                         content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
                         outOfScope: true
                     - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
-                      consumerActions: !!import/single ../common/actions/energie.yml
+                      consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
             - title: Dans une boutique
               information:
                 title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -246,10 +246,10 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-          consumerActions: !!import/single ../common/actions/energie.yml
+          consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
         - title: Autres
-          consumerActions: !!import/single ../common/actions/energie.yml
+          consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
     - title: Facturation
-      consumerActions: !!import/single ../common/actions/energie.yml
+      consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc
 - title: Autres (Fioul / GPL / granulés de bois...)
-  consumerActions: !!import/single ../common/actions/energie.yml
+  consumerActionsId: 8f445dc3-58ed-4deb-9f20-a5b018d707fc

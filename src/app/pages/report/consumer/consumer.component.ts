@@ -61,7 +61,7 @@ export class ConsumerComponent implements OnInit {
       this.contactAgreementCtrl = this.formBuilder.control(false);
     } else {
       this.contactAgreementCtrl = this.formBuilder.control(
-        this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.isContractualDispute() ? true : undefined,
+        this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.consumerActionsId ? true : undefined,
         Validators.required
       );
       this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);

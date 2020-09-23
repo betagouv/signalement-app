@@ -79,7 +79,7 @@ export class Subcategory extends WithSubcategories {
   detailInputs?: DetailInput[];
   fileLabel?: string;
   information?: Information;
-  consumerActions?: Information[];
+  consumerActionsId?: String;
   tags: Tag[];
 
   getInternetSubcategoriesData() {

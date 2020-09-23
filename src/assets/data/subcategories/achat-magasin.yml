@@ -67,7 +67,7 @@
                           <br/> Par exemple, il est autorisé de vendre une bouteille d'eau à 8 euros ou une baguette de pain à 5 euros. C'est au consommateur de bien regarder les prix avant d'acheter.
                           <br/><br/><b>Le saviez-vous ?</b>
                           <br/> Il existe quelques exceptions à ce principe. Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
-                          <br/> Par exemple, le prix des livres est réglementé. 
+                          <br/> Par exemple, le prix des livres est réglementé.
                           <br/><br/> Un commerçant n'a pas le droit de vendre à un prix trop bas : il ne peut pas vendre un produit moins cher que ce qu'il lui a coûté. Il existe quelques situations où il a le droit de vendre en dessous du prix d'achat, comme la période des soldes."
         - title: Fausse réduction de prix
           example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale'
@@ -95,7 +95,7 @@
       tags:
         - hygiène
       example: 'Exemple : magasin sale, produit pas au frais, mauvaises odeurs'
-      subcategories:  
+      subcategories:
         - title: Hygiène des locaux et du matériel
           detailInputs:
             - label: Quel endroit est concerné&#160;?
@@ -357,7 +357,7 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
-                  consumerActions: !!import/single ../common/actions/garantie.yml
+                  consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                 - title: Il y a plus de 2 ans
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -386,7 +386,7 @@
                               rank: 5
                               type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                          consumerActions: !!import/single ../common/actions/garantie.yml
+                          consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -431,7 +431,7 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
-                  consumerActions: !!import/single ../common/actions/garantie.yml
+                  consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                 - title: Il y a plus de 6 mois
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -460,7 +460,7 @@
                               rank: 5
                               type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                          consumerActions: !!import/single ../common/actions/garantie.yml
+                          consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -482,7 +482,7 @@
           subcategories:
             - title: Oui
               description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-              consumerActions: !!import/single ../common/actions/garantie.yml
+              consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
             - title: Non
               information:
                 title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.
@@ -544,7 +544,7 @@
             - title: Le commerçant a réfusé de me faire une détaxe alors que je vis à l'étranger
               information:
                     title: Le commerçant a le droit de refuser de faire une détaxe sur vos achats.
-                    content: La vente en détaxe est une exonération de la taxe sur la valeur ajoutée (TVA) sur le prix de biens achetés par des personnes de passage en France, soumise à conditions. 
+                    content: La vente en détaxe est une exonération de la taxe sur la valeur ajoutée (TVA) sur le prix de biens achetés par des personnes de passage en France, soumise à conditions.
                       <br /> Le commerçant est libre d'appliquer la détaxe, qui est facultative. L'acheteur ne peut pas l'exiger du vendeur.
                       Retrouvez plus d'information sur le site <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F20558" target="_blank">service-public.fr</a>
                     outOfScope: true
@@ -557,7 +557,7 @@
           example: "Exemple : sac en plastique, éclairage de nuit "
         - title: Problème de voisinage
           example: "Exemple : bruit, odeur, voiture mal garée"
-        - title: Autre  
+        - title: Autre
 - title: Un problème avec un produit en particulier
   example: "Exemple : il manque des informations sur l'emballage, le produit est douteux"
   subcategories:

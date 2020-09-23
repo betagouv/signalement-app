@@ -81,10 +81,10 @@ export class ProblemComponent implements OnInit {
     this.analyticsService.trackEvent(
       EventCategories.report,
       ReportEventActions.contactualReport,
-      this.draftReport.isContractualDispute() ? 'Oui' : 'Non'
+      this.draftReport.consumerActionsId ? 'Oui' : 'Non'
     );
     this.draftReport.subcategories = subcategories;
-    if (this.draftReport.isContractualDispute()) {
+    if (this.draftReport.consumerActionsId) {
       if (isPlatformBrowser(this.platformId)) {
         window.scroll(0, 0);
       }

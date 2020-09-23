@@ -62,7 +62,7 @@
             </div>
             <div class="col">
               <label for="contactAgreementFalse" class="label-inline pointer">
-                <ng-container *ngIf="!draftReport.isContractualDispute() else contractualDisputeAnonymous">
+                <ng-container *ngIf="!draftReport.consumerActionsId else contractualDisputeAnonymous">
                   <strong>Je ne partage pas</strong> mes coordonnées avec l'entreprise. Seule la répression des fraudes pourra en prendre connaissance
                 </ng-container>
                 <ng-template #contractualDisputeAnonymous>
@@ -77,7 +77,7 @@
             </div>
             <div class="col">
               <label for="contactAgreementTrue" class="label-inline pointer">
-                <ng-container *ngIf="!draftReport.isContractualDispute() else contractualDispute">
+                <ng-container *ngIf="!draftReport.consumerActionsId else contractualDispute">
                   <strong>Je partage</strong> mes coordonnées avec l'entreprise afin qu'on puisse me contacter dans le cadre de mon signalement (<b>uniquement</b>).
                 </ng-container>
                 <ng-template #contractualDispute>

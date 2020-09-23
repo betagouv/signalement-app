@@ -86,7 +86,7 @@
         - label: Description
           rank: 4
           type: TEXTAREA
-      consumerActions: !!import/single ../common/actions/magasin.yml
+      consumerActionsId: 88e0e48c-cf19-41ae-8c34-45e09b01d916
 - title: Produit dangereux
   example: 'Exemple : jouet qui prend feu, allergie, intoxication'
   information:

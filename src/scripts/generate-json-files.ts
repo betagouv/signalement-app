@@ -6,6 +6,10 @@ const files = [
   {
     input: 'anomalies.yml',
     output: 'anomalies.json'
+  },
+  {
+    input: 'consumer-actions.yml',
+    output: 'consumer-actions.json'
   }
 ];
 

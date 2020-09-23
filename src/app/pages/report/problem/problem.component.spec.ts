@@ -19,6 +19,8 @@ import { genDraftReport, genInformation, genSubcategory } from '../../../../../t
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 
+const randomstring = require('randomstring');
+
 describe('ProblemComponent', () => {
 
   let component: ProblemComponent;
@@ -30,7 +32,7 @@ describe('ProblemComponent', () => {
     genSubcategory(),
     <Subcategory>{
       ...genSubcategory(),
-      consumerActions: [genInformation()]
+      consumerActionsId: randomstring.generate()
     },
     <Subcategory>{
       ...genSubcategory(),

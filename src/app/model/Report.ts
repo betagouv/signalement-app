@@ -72,9 +72,10 @@ export class DraftReport {
     }
   }
 
-  isContractualDispute() {
-    return Boolean(this.subcategories && this.subcategories[this.subcategories.length - 1]
-      && this.subcategories[this.subcategories.length - 1].consumerActions);
+  get consumerActionsId() {
+    if (this.subcategories && this.subcategories[this.subcategories.length - 1]) {
+      return this.subcategories[this.subcategories.length - 1].consumerActionsId;
+    }
   }
 }
 

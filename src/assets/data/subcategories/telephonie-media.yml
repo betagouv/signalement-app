@@ -14,9 +14,9 @@
                 - title: Oui, j'ai été prévenu par email ou courrier
                   information: !!import/single ../common/info/tel.yml
                 - title: Non, j'ai reçu seulement un sms
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
                 - title: Non, je n'ai rien reçu du tout
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
             - title: Modification concernant les sms, mms ou appels
               example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
               subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
@@ -24,9 +24,9 @@
                 - title: Oui, j'ai été prévenu par email ou courrier
                   information: !!import/single ../common/info/tel.yml
                 - title: Non, j'ai reçu seulement un sms
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
                 - title: Non, je n'ai rien reçu du tout
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
             - title: Rajout d'une option payante
               example: 'Exemple : chaine télé supplémentaire, option cyber-sécurité, option livre audio, option musique...'
               subcategoriesTitle: Quel est le type d'option ?
@@ -37,7 +37,7 @@
                     - title: Oui, j'ai été prévenu par email ou courrier
                       information: !!import/single ../common/info/tel.yml
                     - title: Non, je n'ai rien reçu
-                      consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                      consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
                       detailInputs:
                         - label: Date du début de l'option (vous pouvez préciser le premier mois facturé)
                           rank: 1
@@ -47,7 +47,7 @@
                           type: TEXT
                           placeholder: "Indiquez l'intitulé figurant la facture"
                 - title: option liée à la musique, des livres, une chaine télé, un anti-virus
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
                   detailInputs:
                     - label: A partir de quand cette option va-t-elle être payante ?
                       rank: 1
@@ -73,15 +73,15 @@
                       type: DATE
                       optionnal: true
             - title: Le lien pour refuser l'augmentation de mon forfait ne fonctionne pas
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
         - title: Autre problème de facturation ou de contrat
           subcategories:
             - title: Utilisation de mon forfait à l'étranger
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
             - title: Autre
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
@@ -90,13 +90,13 @@
     - title: Résiliation / changement d'opérateur
       subcategories:
         - title: Frais de résiliation
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
         - title: Restitution du matériel
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
         - title: Mon ancien opérateur continue de me prélever
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
     - title: Appels, sms ou email indésirables
       example: 'Exemple : spams, appel incessant, raoppel vers un numéro payant'
       subcategories:
@@ -119,9 +119,9 @@
       subcategories:
         - title: Qualité du service client
           example: 'Exemple : pas de réponse du service client, service client payant'
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
         - title: Téléphone acheté avec le forfait
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          consumerActionsId: f76d69ea-803d-49db-b9e8-b76b2b615b9e
 - title: Abonnement télévision
 - title: Abonnement presse
 - title: Autres
