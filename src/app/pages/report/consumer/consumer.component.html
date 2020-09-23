@@ -5,7 +5,7 @@
       <ng-container *ngIf="draftReport.employeeConsumer">
         <div class="notification info mb-4">
           <p>
-            <strong>Vous avez déclaré être employé de l’entreprise.</strong>
+            <strong>Vous déclarez travailler dans l'entreprise que vous allez signaler.</strong>
           </p>
           <p>
             Votre signalement sera lu <b>uniquement par la répression des fraudes</b>.
@@ -56,37 +56,53 @@
         </div>
 
         <fieldset class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
-          <div class="row mb-4">
-            <div class="col col-radio">
-              <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
+          <ng-container *ngIf="!draftReport.consumerActionsId else contractualDispute">
+            <div class="row mb-4">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementFalse" class="label-inline pointer">
+                  <strong>Je ne partage pas</strong> mes coordonnées avec l'entreprise. Seule la répression des fraudes pourra en prendre connaissance.
+                </label>
+              </div>
             </div>
-            <div class="col">
-              <label for="contactAgreementFalse" class="label-inline pointer">
-                <ng-container *ngIf="!draftReport.consumerActionsId else contractualDisputeAnonymous">
-                  <strong>Je ne partage pas</strong> mes coordonnées avec l'entreprise. Seule la répression des fraudes pourra en prendre connaissance
-                </ng-container>
-                <ng-template #contractualDisputeAnonymous>
-                  <strong>Je fais un signalement anonyme. </strong> L’entreprise ne pourra pas me contacter pour résoudre mon litige.
-                </ng-template>
-              </label>
+            <div class="row">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementTrue" class="label-inline pointer">
+                  <strong>Je partage</strong> mes coordonnées avec l'entreprise afin qu'elle puisse me contacter dans le cadre de mon signalement (<b>uniquement</b>).
+                  <span class="font-weight-light">J'ai conscience que la répression des fraudes n'aura pas accès à ces échanges éventuels et ne pourra donc pas les contrôler.</span>
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col col-radio">
-              <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
+          </ng-container>
+          <ng-template #contractualDispute>
+            <div class="row mb-4">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementDisputeTrue"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementDisputeTrue" class="label-inline pointer">
+                  <strong>J’autorise l’entreprise à me contacter directement pour résoudre mon litige. </strong>
+                  La répression des fraudes n'aura pas accès à ces échanges éventuels.
+                </label>
+              </div>
             </div>
-            <div class="col">
-              <label for="contactAgreementTrue" class="label-inline pointer">
-                <ng-container *ngIf="!draftReport.consumerActionsId else contractualDispute">
-                  <strong>Je partage</strong> mes coordonnées avec l'entreprise afin qu'on puisse me contacter dans le cadre de mon signalement (<b>uniquement</b>).
-                </ng-container>
-                <ng-template #contractualDispute>
-                  <strong>J’autorise l’entreprise à me contacter pour résoudre mon litige. </strong>
-                </ng-template>
-                <span class="font-weight-light">J'ai conscience que la répression des fraudes n'aura pas accès à ces échanges éventuels et ne pourra pas les contrôler</span>
-              </label>
+            <div class="row">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementDisputeFalse"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementFalse" class="label-inline pointer">
+                  <strong>Je n'autorise pas le partage de mes coordonnées à l'entreprise. </strong>
+                  J'ai conscience que l’entreprise ne pourra pas me contacter pour résoudre mon litige.
+                </label>
+              </div>
             </div>
-          </div>
+          </ng-template>
         </fieldset>
 
         <div class="notification error mt-3" *ngIf="showErrors && consumerForm.invalid">
