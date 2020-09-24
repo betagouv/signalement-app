@@ -73,7 +73,7 @@ export class DraftReport {
   }
 
   get consumerActionsId() {
-    if (this.subcategories && this.subcategories[this.subcategories.length - 1]) {
+    if (!this.employeeConsumer && this.subcategories && this.subcategories[this.subcategories.length - 1]) {
       return this.subcategories[this.subcategories.length - 1].consumerActionsId;
     }
   }

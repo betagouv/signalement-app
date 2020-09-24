@@ -11,6 +11,10 @@ import { switchMap, take } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 
+enum ProblemSteps {
+  Subcategories, EmployeeConsumer, ContractualDispute, Next
+}
+
 @Component({
   selector: 'app-problem',
   templateUrl: './problem.component.html',
@@ -21,8 +25,8 @@ export class ProblemComponent implements OnInit {
   step: Step;
   draftReport: DraftReport;
   anomaly: Anomaly;
-
-  showContractualDisputeMessage = false;
+  problemStep = ProblemSteps.Subcategories;
+  problemSteps = ProblemSteps;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -84,19 +88,40 @@ export class ProblemComponent implements OnInit {
       this.draftReport.consumerActionsId ? 'Oui' : 'Non'
     );
     this.draftReport.subcategories = subcategories;
-    if (this.draftReport.consumerActionsId) {
-      if (isPlatformBrowser(this.platformId)) {
-        window.scroll(0, 0);
+    this.continue();
+  }
+
+  continue(value?) {
+    switch (this.problemStep) {
+      case ProblemSteps.Subcategories: {
+        this.problemStep = ProblemSteps.EmployeeConsumer;
+        this.scollTop();
+        break;
       }
-      this.showContractualDisputeMessage = true;
-    } else {
-      this.continue();
+      case ProblemSteps.EmployeeConsumer: {
+        this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
+        this.draftReport.employeeConsumer = value;
+        if (this.draftReport.consumerActionsId) {
+          this.problemStep = ProblemSteps.ContractualDispute;
+          this.scollTop();
+        } else {
+          this.problemStep = ProblemSteps.Next;
+          this.continue();
+        }
+        break;
+      }
+      default: {
+        this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
+        this.reportRouterService.routeForward(this.step);
+        break;
+      }
     }
   }
 
-  continue() {
-    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
-    this.reportRouterService.routeForward(this.step);
+  scollTop() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0, 0);
+    }
   }
 }
 
