@@ -28,6 +28,7 @@ list:
     description: coiffeur, pressing, aide à la personne, déménageur, formation...
     rank: 12
     sprite: category-service
+    subcategoriesTitle: Votre problème concerne
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
   - category: Eau / Gaz / Electricité
     categoryId: ELEC
