@@ -10,8 +10,8 @@ list:
   - category: Café / Restaurant
     categoryId: CR
     path: cafe-restaurant
-    description: bar, cafeteria, food truck...
-    rank: 9
+    description: bar, cafeteria, food truck, application pour se faire livrer un repas...
+    rank: 5
     sprite: category-restaurant
     subcategories: !!import/single subcategories/cafe-restaurant.yml
   - category: Achat / Magasin
@@ -25,15 +25,15 @@ list:
   - category: Services aux particuliers
     categoryId: SERV
     path: services-aux-particuliers
-    description: coiffeur, pressing, esthéticienne, aide à la personne...
-    rank: 11
+    description: coiffeur, pressing, aide à la personne, déménageur, formation...
+    rank: 12
     sprite: category-service
     subcategories: !!import/single subcategories/services-aux-particuliers.yml
   - category: Eau / Gaz / Electricité
     categoryId: ELEC
     path: eau-gaz-electricite
     description: contrat et facture eau, gaz et électricité...
-    rank: 12
+    rank: 7
     sprite: category-energy
     subcategories: !!import/single subcategories/eau-gaz-electricite.yml
   - category: Téléphonie / Internet / médias
@@ -47,7 +47,7 @@ list:
     categoryId: BAQ
     path: banque-assurance-mutuelle
     description: banque en ligne, crédit, assurance auto...
-    rank: 14
+    rank: 4
     sprite: category-bank
     subcategories: !!import/single subcategories/banque-assurance-mutuelle.yml
     subcategoriesTitle: Il s'agit d'un problème principalement lié à
@@ -55,7 +55,7 @@ list:
     categoryId: INTOX
     path: intoxication-alimentaire
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
-    rank: 15
+    rank: 9
     sprite: category-disease
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
@@ -80,14 +80,14 @@ list:
   - category: Travaux / Rénovation
     categoryId: TRAV
     path: travaux-renovation
-    description: dépannage, plombier, couvreur, pose de panneaux...
-    rank: 107
+    description: dépannage, plombier, rénovation énergétique, site de devis travaux ...
+    rank: 14
     sprite: category-craft
     subcategories: !!import/single subcategories/travaux-renovation.yml
   - category: Voyage / Loisirs
     categoryId: VOY
     path: voyage-loisirs
-    description: voyage organisé, camping, concert, sport, avion, train, taxi
+    description: voyage organisé, camping, concert, sport, billet d'avion, taxi, comparateur de prix des vols...
     rank: 16
     sprite: category-hobbies
     subcategories: !!import/single subcategories/voyage-loisirs.yml
@@ -95,14 +95,14 @@ list:
     categoryId: IMM
     path: immobilier
     description: location, agence immobiliere, syndicat de copropriété...
-    rank: 105
+    rank: 8
     sprite: category-real-estate
     subcategories: !!import/single subcategories/immobilier.yml
   - category: Secteur de la santé
     categoryId: SANT
     path: sante
-    description: dentiste, opticien, produits de pharmacie (pansement, médicament, thermomètre...), clinique
-    rank: 3
+    description: dentiste, opticien, produits de pharmacie, clinique, site de téléconsultation...
+    rank: 11
     sprite: category-health
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
@@ -110,22 +110,22 @@ list:
     categoryId: VEH
     path: voiture-vehicule
     description: vente et réparation de voiture, location, auto-école...
-    rank: 107
+    rank: 15
     sprite: category-transport
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
     subcategories: !!import/single subcategories/voiture-vehicule.yml
   - category: Animaux
     categoryId: ANI
     path: animaux
-    description: vétérinaire, aliment pour animaux, service de garde...
-    rank: 108
+    description: vétérinaire, aliment pour animaux, site pour trouver un pet-sitter...
+    rank: 3
     sprite: category-pet
     subcategories: !!import/single subcategories/animaux.yml
   - category: Démarches administratives
     categoryId: ADM
     path: demarches-administratives
-    description: accessibilité, acte de naissance, calendrier des numéros utiles de la ville...
-    rank: 109
+    description: faux courrier administratif, achat d'acte de naissance, calendrier des numéros utiles de la ville...
+    rank: 6
     sprite: category-admin
     subcategories: !!import/single subcategories/demarches-administratives.yml
   - category: Travail au noir
