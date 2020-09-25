@@ -9,7 +9,7 @@
         <li>Par lettre recommandée avec AR</li>
         <li>Je mets toutes les documents justificatifs</li>
         <li>Je peux trouver <a href="https://www.inc-conso.fr/content/lettres-types-pour-regler-vos-litiges" target="_blank">
-        une lettre-type </a> pour expliquer mon problème </li>    
+        une lettre-type </a> pour expliquer mon problème </li>
         <li>Je garde une copie du courrier et la preuve de l'envoi</li>
         </ul>
     - question: Pourquoi&#160;?
@@ -20,10 +20,10 @@
       answer: 2 mois après avoir envoyé mon courrier, et que je n’ai pas eu de réponse ou que la réponse ne me satisfait pas
     - question: Qui&#160;?
       answer: L'entreprise a l’obligation de communiquer le nom du médiateur qu'elle a choisit. Les coordonnées du médiateur sont normalement écrites sur le site internet de l'entreprise ou  sur le contrat, bon de commande...
-        <br />        
+        <br />
         Par exemple, il existe le <a href="https://www.energie-mediateur.fr/" target="_blank"> médiateur de l'énergie </a>, le <a href="https://mediateur.edf.fr/home" target="_blank">
         médiateur d'EDF </a> et le <a href="https://www.mediateur-engie.com/" target="_blank"> médiateur d'ENGIE </a> <br/>
-        Je peux aussi consulter la 
+        Je peux aussi consulter la
         <a href="https://www.economie.gouv.fr/mediation-conso/mediateurs-references" target="_blank">
         liste officielle des médiateurs
         </a> <br/>
@@ -47,6 +47,10 @@
     - question: Combien ça coûte&#160;?
       answer: C’est gratuit !
 - title: Je vais en justice, c'est-à-dire que je demande un procès au tribunal d’instance
+  content: <p class="text-warning">
+    <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i>
+    Attention, il est obligatoire d'avoir fait l'étape 2 (médiateur) ou l'étape 3 (conciliateur) avant de saisir le tribunal pour  un litige inférieur à 5 000 euros</i>
+    </p>
   actions:
     - question: Quand&#160;?
       answer: Lorsque je n'ai pas trouvé de solution avec le médiateur ou le conciliateur

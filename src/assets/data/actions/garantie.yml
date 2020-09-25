@@ -44,6 +44,10 @@
     - question: Combien ça coûte&#160;?
       answer: C’est gratuit !
 - title: Je vais au tribunal d’instance
+  content: <p class="text-warning">
+    <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i>
+    Attention, il est obligatoire d'avoir fait l'étape 2 (médiateur) ou l'étape 3 (conciliateur) avant de saisir le tribunal pour  un litige inférieur à 5 000 euros</i>
+    </p>
   actions:
     - question: Quand&#160;?
       answer: Lorsque la médiation ou la conciliation ont échoué
