@@ -1,5 +1,14 @@
 - title: un site internet (ou une application mobile) lié aux services pour les particuliers
   companyKind: WEBSITE
+  subcategories:
+  subcategoriesTitle: Ce site concerne quel secteur ?
+    - title: Bien-être
+      example: "Exemple : réservation d'un coiffeur, d'un massage"
+    - title: Vie quotidienne et aide à domicile
+      example: "Exemple : site pour trouver une nounou, site pour du ménage à domicile"
+    - title: Formation en ligne
+    - title: Autre
+      example: 'Exemple : site de petites rencontres'
 - title: une entreprise physique
   companyKind: SIRET
   subcategories:
