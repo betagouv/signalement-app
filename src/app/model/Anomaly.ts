@@ -83,7 +83,11 @@ export class Subcategory extends WithSubcategories {
   tags: Tag[];
 
   getInternetSubcategoriesData() {
-    return {...super.getInternetSubcategoriesData(), description: undefined };
+    if (this.information) {
+      return undefined;
+    } else {
+      return {...super.getInternetSubcategoriesData(), description: undefined };
+    }
   }
 }
 
