@@ -1,7 +1,7 @@
 - title: Taxi / VTC
   subcategories:
     - title: Taxi
-      companyKind: 'SIRET'
+      companyKind: SIRET
       example: Les taxis sont reconnaissables avec l'enseigne lumineuse sur le toit. Les voitures qui n'ont pas cette enseigne ne sont pas des "vrais" taxis.
       subcategories:
         - title: Refus de faire la course
@@ -606,13 +606,13 @@
           consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Contrat non respecté
           consumerActions: !!import/single ../common/actions/tourisme.yml
-    - title: Autre     
+    - title: Autre
       subcategories:
         - title: Equipement
           consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Compléments alimentaires
           consumerActions: !!import/single ../common/actions/tourisme.yml
-        - title: Problème d'hygiène 
+        - title: Problème d'hygiène
           consumerActions: !!import/single ../common/actions/tourisme.yml
         - title: Problème d'accessibilité
           information: !!import/single ../common/info/accessibilite.yml
