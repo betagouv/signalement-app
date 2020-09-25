@@ -17,7 +17,7 @@ list:
   - category: Achat / Magasin
     categoryId: MAG
     path: achat-magasin
-    description: supermarché, boulangerie, magasin de jouet...
+    description: supermarché, boulangerie, magasin de jouet, achat en ligne...
     rank: 2
     sprite: category-store
     subcategoriesTitle: Votre problème concerne
@@ -71,11 +71,11 @@ list:
     hidden: true
     rank: 110
     subcategories: !!import/single subcategories/produits-objets.yml
-  - category: Achat sur internet
+  - category: Internet
     categoryId: INTERNET
     path: achat-sur-internet
-    description: Vous avez passé commande sur internet, votre problème concerne un site web.
-    rank: 18
+    description: Réseaux sociaux, fishing, escroquerie par email, contenu d'un site web inapproprié...
+    rank: 9
     sprite: category-ecommerce
     subcategories: !!import/single subcategories/internet.yml
   - category: Travaux / Rénovation
