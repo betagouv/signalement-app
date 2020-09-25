@@ -488,3 +488,6 @@
                   type: TEXTAREA
               fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre
+- title: Un site internet lié au secteur de la santé
+  example: 'Exemple : site de téléconsultation avec un médecin'
+  companyKind: 'WEBSITE'
