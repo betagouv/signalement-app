@@ -14,8 +14,6 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   step: Step;
   draftReport: DraftReport;
 
-  infosRequested = false;
-
   constructor(private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService) { }
 

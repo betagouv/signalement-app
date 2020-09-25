@@ -12,7 +12,6 @@ export class Information {
   title?: string;
   content?: string;
   actions?: Action[];
-  reference?: string;
   outOfScope?: boolean;
 }
 

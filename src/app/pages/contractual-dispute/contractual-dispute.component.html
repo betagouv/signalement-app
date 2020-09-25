@@ -1,0 +1,30 @@
+<app-banner title="Résoudre un problème individuel (litige) avec une entreprise"></app-banner>
+
+<main role="main">
+  <section class="section section-lightest-grey">
+    <div class="container max-width">
+
+      <ng-container *ngFor="let consumerAction of consumerActions; let step = index">
+        <div class="card" id="action_{{step}}" *ngIf="step === currentStep" id="step_{{step}}">
+          <div class="card-body">
+            <h2 class="mb-3">Etape {{currentStep + 1}} - {{consumerActions[step].title}}</h2>
+
+            <div *ngFor="let action of consumerActions[step].actions">
+              <h3 [innerHTML]="action.question"></h3>
+              <p [innerHTML]="action.answer"></p>
+            </div>
+
+            <hr *ngIf="consumerActions[step + 1]"/>
+
+            <button class="btn btn-primary" *ngIf="consumerActions[step + 1]" (click)="continue()">J'ai déjà effectué cette démarche</button>
+            <div class="pt-3" *ngIf="consumerActions[step - 1]">
+              <button class="link" (click)="back()">
+                <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</main>
