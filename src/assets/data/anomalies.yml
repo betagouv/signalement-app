@@ -37,10 +37,10 @@ list:
     rank: 7
     sprite: category-energy
     subcategories: !!import/single subcategories/eau-gaz-electricite.yml
-  - category: Téléphonie / Internet / médias
+  - category: Téléphonie / Fournisseur d'accès internet / médias
     categoryId: TEL
     path: tel-internet-media
-    description: fournisseur d'accès, abonnement télé...
+    description: forfait internet, abonnement de streaming, téléphone ...
     rank: 13
     sprite: category-internet
     subcategories: !!import/single subcategories/telephonie-media.yml
@@ -88,7 +88,7 @@ list:
   - category: Voyage / Loisirs
     categoryId: VOY
     path: voyage-loisirs
-    description: voyage organisé, camping, concert, sport, billet d'avion, taxi, comparateur de prix des vols...
+    description: hôtel, billet d'avion, taxi, comparateur de prix, concert, salle de sport, jeux en ligne...
     rank: 16
     sprite: category-hobbies
     subcategories: !!import/single subcategories/voyage-loisirs.yml
