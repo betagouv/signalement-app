@@ -150,7 +150,8 @@ export class CompanyService extends RawCompanyService {
     name: 'DIRECTION GENERALE DE LA CONCURRENCE, DE LA CONSOMMATION ET DE LA REPRESSION DES FRAUDES',
     address: 'TELEDOC 071 - 59 BD VINCENT AURIOL - 75013 PARIS 13',
     postalCode: '75013',
-    activityLabel: 'Administration publique (tutelle) des activités économiques'
+    activityLabel: 'Administration publique (tutelle) des activités économiques',
+    highlight: null
   };
 
   private searchHooks = [
@@ -162,7 +163,8 @@ export class CompanyService extends RawCompanyService {
           name: 'ORANGE',
           address: 'BAT A - 1 AVENUE DU PDT NELSON MANDELA - 94110 ARCUEIL',
           postalCode: '94110',
-          activityLabel: 'Commerce de détail de matériels de télécommunication en magasin spécialisé'
+          activityLabel: 'Commerce de détail de matériels de télécommunication en magasin spécialisé',
+          highlight: null
         }
       ]
     },
@@ -175,7 +177,8 @@ export class CompanyService extends RawCompanyService {
           brand: 'SFR',
           address: '16 RUE DU GENERAL DE BOISSIEU - 75015 PARIS 15',
           postalCode: '75015',
-          activityLabel: 'Télécommunications sans fil'
+          activityLabel: 'Télécommunications sans fil',
+          highlight: null
         }
       ]
     },
@@ -187,7 +190,8 @@ export class CompanyService extends RawCompanyService {
           name: 'BOUYGUES TELECOM',
           address: '13 A 15 - 13 AVENUE DU MARECHAL JUIN - 92360 MEUDON',
           postalCode: '92360',
-          activityLabel: 'Autres activités informatiques'
+          activityLabel: 'Autres activités informatiques',
+          highlight: null
         }
       ]
     },
@@ -199,14 +203,16 @@ export class CompanyService extends RawCompanyService {
           name: 'FREE MOBILE',
           address: '16 RUE DE LA VILLE L EVEQUE - 75008 PARIS 8',
           postalCode: '75008',
-          activityLabel: 'Télécommunications sans fil'
+          activityLabel: 'Télécommunications sans fil',
+          highlight: null
         },
         {
           siret: '42193886100034',
           name: 'FREE',
           address: '8 RUE DE LA VILLE L EVEQUE - 75008 PARIS 8',
           postalCode: '75008',
-          activityLabel: 'Télécommunications filaires'
+          activityLabel: 'Télécommunications filaires',
+          highlight: null
         }
       ]
     },
