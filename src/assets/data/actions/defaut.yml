@@ -1,8 +1,8 @@
-- title: J'écris un courrier à l'entreprise pour demander à résoudre mon problème
+- title: J'écris un courrier à l'entreprise pour demander à résoudre mon problème.
   actions:
     - question: Quand&#160;?
       answer: Le plus tôt possible. <br/>Vous pouvez attendre de voir si l'entreprise vous répond avec SignalConso.
-    - question: A qui&#160;?
+    - question: À qui&#160;?
       answer: Auprès du service client de l'entreprise
     - question: Comment&#160;?
       answer: <ul>
@@ -17,16 +17,16 @@
 - title: Je contacte un médiateur de la consommation, c’est-à-dire une personne chargée de régler les problèmes des consommateurs avec les entreprises.
   actions:
     - question: Quand&#160;?
-      answer: 2 mois après avoir envoyé mon courrier, et que je n’ai pas eu de réponse ou que la réponse ne me satisfait pas
+      answer: 2 mois après avoir envoyé mon courrier, si je n’ai pas eu de réponse ou si la réponse ne me satisfait pas
     - question: Qui&#160;?
-      answer: L'entreprise a l’obligation de communiquer le nom du médiateur qu'elle a choisit. Les coordonnées du médiateur sont normalement écrites sur le site internet de l'entreprise ou  sur le contrat, bon de commande...
+      answer: L'entreprise a l’obligation de communiquer le nom du médiateur qu'elle a choisi. Les coordonnées du médiateur sont normalement écrites sur le site internet de l'entreprise ou  sur le contrat, bon de commande...
         <br />
         Je peux aussi consulter la <a href="https://www.economie.gouv.fr/mediation-conso/mediateurs-references" target="_blank">
         liste officielle des médiateurs.</a> <br/>
     - question: Comment&#160;?
       answer: Je remplis le formulaire sur le site internet du médiateur.
     - question: Pourquoi&#160;?
-      answer: Le médiateur va m’aider à trouver un arrangement avec l'entreprise
+      answer: Le médiateur va m’aider à trouver un arrangement avec l'entreprise. 
     - question: Combien ça coûte&#160;?
       answer: C’est gratuit !
 - title: Je contacte un conciliateur, c’est-à-dire une personne qui m’aide à trouver une solution avec l'entreprise.
@@ -37,12 +37,12 @@
       answer: Je contacte le conciliateur le plus proche de chez moi. Je le cherche sur le site
         <a href="https://www.conciliateurs.fr/Trouver-une-permanence" target="_blank">
           conciliateurs.fr
-        </a>
+        </a>. 
     - question: Pourquoi&#160;?
-      answer: Pour instaurer le dialogue avec l'entreprise et trouver un arrangement.
+      answer: Le conciliateur va m'aider à instaurer le dialogue avec l'entreprise et à trouver un arrangement.
     - question: Combien ça coûte&#160;?
       answer: C’est gratuit !
-- title: Je vais en justice, c'est-à-dire que je demande un procès au tribunal d’instance
+- title: Je vais en justice, c'est-à-dire que je demande un procès au tribunal d’instance. 
   content: <p class="text-warning">
     <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i>
     Attention, il est obligatoire d'avoir fait l'étape 2 (médiateur) ou l'étape 3 (conciliateur) avant de saisir le tribunal pour  un litige inférieur à 5 000 euros</i>
@@ -54,9 +54,9 @@
       answer: Je fais une déclaration au Tribunal d’Instance à l’aide du
         <a href="https://www.formulaires.modernisation.gouv.fr/gf/cerfa_11764.do" target="_blank">
         formulaire CERFA n°11764*09
-        </a>
+        </a>. 
     - question: Pourquoi&#160;?
-      answer: Pour que le juge du tribunal décide qui est en tord et quelles solutions doivent être mises en place.
+      answer: Pour que le juge du tribunal décide qui est en tort et quelles solutions doivent être mises en place.
     - question: Combien ça coûte&#160;?
       answer: Aller au tribunal est gratuit mais des frais peuvent se rajouter au cours de la procédure  (frais d'avocat, frais d'expertise...).
 
