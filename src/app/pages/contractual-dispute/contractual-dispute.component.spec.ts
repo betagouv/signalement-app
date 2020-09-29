@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContractualDisputeComponent } from './contractual-dispute.component';
+import { ComponentsModule } from '../../components/components.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ContractualDisputeComponent', () => {
   let component: ContractualDisputeComponent;
@@ -8,7 +10,11 @@ describe('ContractualDisputeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContractualDisputeComponent ]
+      declarations: [ ContractualDisputeComponent ],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'not-found', redirectTo: '' }]),
+        ComponentsModule
+      ]
     })
     .compileComponents();
   }));
