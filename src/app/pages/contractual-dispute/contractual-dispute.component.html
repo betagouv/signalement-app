@@ -7,7 +7,7 @@
       <ng-container *ngFor="let consumerAction of consumerActions; let step = index">
         <div class="card" id="action_{{step}}" *ngIf="step === currentStep" id="step_{{step}}">
           <div class="card-body">
-            <h2 class="mb-3">Etape {{currentStep + 1}} - {{consumerAction.title}}</h2>
+            <h2 class="mb-3">Étape {{currentStep + 1}} - {{consumerAction.title}}</h2>
 
             <p [innerHTML]="consumerAction.content"></p>
 
