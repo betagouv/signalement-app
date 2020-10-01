@@ -19,7 +19,7 @@
           rank: 2
           type: TEXTAREA
           optionnal: true
-          placeholder: Volume, marque ...
+          placeholder: Volume, marque...
         - label : Quel est le prix de vente ?
           rank: 3
           type: TEXT

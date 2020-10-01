@@ -40,7 +40,7 @@ list:
   - category: Téléphonie / Fournisseur d'accès internet / médias
     categoryId: TEL
     path: tel-internet-media
-    description: forfait internet, abonnement de streaming, téléphone ...
+    description: forfait internet, abonnement de streaming, téléphone...
     rank: 13
     sprite: category-internet
     subcategories: !!import/single subcategories/telephonie-media.yml
@@ -74,14 +74,14 @@ list:
   - category: Internet
     categoryId: INTERNET
     path: achat-sur-internet
-    description: Réseaux sociaux, fishing, escroquerie par email, contenu d'un site web inapproprié...
+    description: réseaux sociaux, fishing, escroquerie par email, contenu d'un site web inapproprié...
     rank: 9
     sprite: category-ecommerce
     subcategories: !!import/single subcategories/internet.yml
   - category: Travaux / Rénovation
     categoryId: TRAV
     path: travaux-renovation
-    description: dépannage, plombier, rénovation énergétique, site de devis travaux ...
+    description: dépannage, plombier, rénovation énergétique, site de devis travaux...
     rank: 14
     sprite: category-craft
     subcategories: !!import/single subcategories/travaux-renovation.yml
