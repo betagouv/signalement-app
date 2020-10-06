@@ -28,9 +28,23 @@
             <hr/>
 
             <a class="lead show" data-toggle="collapse" href="#collapse1-2" id="collapse1-2-toggle" aria-expanded="false" aria-controls="collapse1-2">
-              <h3>Comment ?</h3>
+              <h3>À qui ?</h3>
             </a>
             <div class="collapse" id="collapse1-2" aria-labelledby="collapse1-2-toggle" role="region">
+              <p>
+                Auprès du service client de l’entreprise.
+              </p>
+              <p>
+                Je peux trouver l’adresse du service client de l’entreprise dans mon contrat, sur son site internet ou dans les conditions générales de vente.
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse1-3" id="collapse1-3-toggle" aria-expanded="false" aria-controls="collapse1-3">
+              <h3>Comment ?</h3>
+            </a>
+            <div class="collapse" id="collapse1-3" aria-labelledby="collapse1-3-toggle" role="region">
               <p>En envoyant une lettre recommandée avec accusé de réception, en y joignant les deux documents ci-joint :</p>
               <ul>
                 <li>
@@ -47,10 +61,10 @@
 
             <hr/>
 
-            <a class="lead show" data-toggle="collapse" href="#collapse1-3" id="collapse1-3-toggle" aria-expanded="false" aria-controls="collapse1-3">
+            <a class="lead show" data-toggle="collapse" href="#collapse1-4" id="collapse1-4-toggle" aria-expanded="false" aria-controls="collapse1-4">
               <h3>Pourquoi ?</h3>
             </a>
-            <div class="collapse" id="collapse1-3" aria-labelledby="collapse1-3-toggle" role="region">
+            <div class="collapse" id="collapse1-4" aria-labelledby="collapse1-4-toggle" role="region">
               <p>Ce courrier est la preuve de ma démarche. Il est obligatoire pour entamer d’autres démarches par la suite.</p>
             </div>
 
@@ -132,7 +146,7 @@
               <p>
                 Je contacte le conciliateur le plus proche de chez moi.
                 <br />
-                Je le cherche sur le site conciliateurs.fr.
+                Je le cherche sur le site <a href="https://www.conciliateurs.fr/" target="_blank" title="Nouvelle fenêtre">conciliateurs.fr</a>.
                 <br />
                 Il va m’aider à trouver une solution avec l’entreprise.
                 <br />
@@ -163,7 +177,7 @@
 
             <p class="text-warning">
               <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i>
-              Attention, il est obligatoire d’avoir fait l’étape 2 (médiateur ou conciliateur) avant de saisir le tribunal pour un litige inférieur à 5 000 euros
+              Attention, il est obligatoire d’avoir fait <a class="text-danger" (click)="back()">la démarche n°2 (médiateur ou conciliateur)</a> avant de saisir le tribunal pour un litige inférieur à 5 000 euros
             </p>
 
             <a class="lead show" data-toggle="collapse" href="#collapse3-1" id="collapse3-1-toggle" aria-expanded="false" aria-controls="collapse3-1">
