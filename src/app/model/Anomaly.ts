@@ -1,7 +1,7 @@
 export const ReportingDateLabel = 'Date du constat';
 export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
-export const ContractualDisputeTag = 'Litige contractuel';
+export const ContractualDisputeTag = <Tag>'Litige contractuel';
 
 export class Action {
   question: string;

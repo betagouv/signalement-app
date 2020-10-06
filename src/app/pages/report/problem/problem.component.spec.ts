@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Anomaly, Subcategory } from '../../../model/Anomaly';
+import { Anomaly, ContractualDisputeTag, Subcategory, Tag } from '../../../model/Anomaly';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -30,7 +30,10 @@ describe('ProblemComponent', () => {
 
   const subcategoriesFixture = [
     genSubcategory(),
-    genSubcategory(),
+    <Subcategory>{
+      ...genSubcategory(),
+      tags: [ContractualDisputeTag]
+    },
     <Subcategory>{
       ...genSubcategory(),
       subcategories: [

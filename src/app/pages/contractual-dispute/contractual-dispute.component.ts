@@ -1,9 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
-import consumerActionsList from '../../../assets/data/consumer-actions.json';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Information } from '../../model/Anomaly';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
