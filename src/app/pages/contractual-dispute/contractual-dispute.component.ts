@@ -9,35 +9,19 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-contractual-dispute',
   templateUrl: './contractual-dispute.component.html',
-  styleUrls: ['./contractual-dispute.component.css']
+  styleUrls: ['./contractual-dispute.component.scss']
 })
 export class ContractualDisputeComponent implements OnInit {
 
-  consumerActions: Information[];
-  currentStep = 0;
+  currentStep = 1;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private titleService: Title,
-              private meta: Meta,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private meta: Meta) { }
 
   ngOnInit() {
     this.titleService.setTitle(pages.contractualDispute.title);
     this.meta.updateTag({ name: 'description', content: pages.contractualDispute.description });
-
-    this.activatedRoute.paramMap.subscribe(
-      paramMap => {
-        const consumerActionsItem = consumerActionsList.list.filter(a => a.consumerActionsId === paramMap.get('consumerActionsId'))[0];
-
-        if (consumerActionsItem) {
-          this.consumerActions = consumerActionsItem.consumerActions;
-        } else {
-          this.router.navigate(['not-found']);
-        }
-      }
-    );
-
   }
 
   continue() {

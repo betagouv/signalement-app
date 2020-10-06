@@ -1,0 +1,36 @@
+@import "../../../theme/variables";
+
+.card {
+
+  img {
+    width: 100%;
+  }
+
+  h2 {
+    position: relative;
+    display: inline-block;
+    color: $secondary;
+
+    margin-bottom: 1.25em;
+
+    &:before {
+      content: '';
+      width: 80px;
+      height: 7px;
+      position: absolute;
+      bottom: -14px;
+      background: $secondary;
+    }
+  }
+
+  & + .card {
+    margin-top: 1em;
+  }
+}
+
+.subtitle {
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+}

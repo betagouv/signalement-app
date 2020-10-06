@@ -6,7 +6,7 @@ import { ComponentsModule } from '../../components/components.module';
 
 
 const routes: Routes = [
-  { path: 'litige/:consumerActionsId', component: ContractualDisputeComponent }
+  { path: 'litige', component: ContractualDisputeComponent }
 ];
 
 @NgModule({

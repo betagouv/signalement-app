@@ -2,31 +2,247 @@
 
 <main role="main">
   <section class="section section-lightest-grey">
-    <div class="container max-width">
+    <div class="container max-width" [ngSwitch]="currentStep">
 
-      <ng-container *ngFor="let consumerAction of consumerActions; let step = index">
-        <div class="card" id="action_{{step}}" *ngIf="step === currentStep" id="step_{{step}}">
+      <ng-container *ngSwitchCase="1">
+        <div class="card">
           <div class="card-body">
-            <h2 class="mb-3">Étape {{currentStep + 1}} - {{consumerAction.title}}</h2>
+            <h2 class="mb-3">Démarche n°1</h2>
 
-            <p [innerHTML]="consumerAction.content"></p>
-
-            <div *ngFor="let action of consumerAction.actions">
-              <h3 [innerHTML]="action.question"></h3>
-              <p [innerHTML]="action.answer"></p>
+            <div class="subtitle">
+              J’écris un courrier à l’entreprise pour demander à résoudre mon problème.
             </div>
 
-            <hr *ngIf="consumerActions[step + 1]"/>
-
-            <button class="btn btn-primary" *ngIf="consumerActions[step + 1]" (click)="continue()">J'ai déjà effectué cette démarche</button>
-            <div class="pt-3" *ngIf="consumerActions[step - 1]">
-              <button class="link" (click)="back()">
-                <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
-              </button>
+            <a class="lead show" data-toggle="collapse" href="#collapse1-1" id="collapse1-1-toggle" aria-expanded="false" aria-controls="collapse1-1">
+              <h3>Quand ?</h3>
+            </a>
+            <div class="collapse" id="collapse1-1" aria-labelledby="collapse1-1-toggle" role="region">
+              <p>
+                Le plus tôt possible (conseillé).
+              </p>
+              <p>
+                Je peux aussi attendre de voir si l’entreprise me répond avec SignalConso.
+              </p>
             </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse1-2" id="collapse1-2-toggle" aria-expanded="false" aria-controls="collapse1-2">
+              <h3>Comment ?</h3>
+            </a>
+            <div class="collapse" id="collapse1-2" aria-labelledby="collapse1-2-toggle" role="region">
+              <p>En envoyant une lettre recommandée avec accusé de réception, en y joignant les deux documents ci-joint :</p>
+              <ul>
+                <li>
+                  <a href="/assets/docs/ModeleLettreLitige.txt" target="_blank" title="Ouverture de la lettre type (nouvelle fenêtre)">
+                    une lettre type à compléter (zones entre [])
+                  </a>
+                </li>
+                <li>mon signalement au format PDF</li>
+              </ul>
+              <p>
+                Je garde une copie du courrier et la preuve de l’envoi.
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse1-3" id="collapse1-3-toggle" aria-expanded="false" aria-controls="collapse1-3">
+              <h3>Pourquoi ?</h3>
+            </a>
+            <div class="collapse" id="collapse1-3" aria-labelledby="collapse1-3-toggle" role="region">
+              <p>Ce courrier est la preuve de ma démarche. Il est obligatoire pour entamer d’autres démarches par la suite.</p>
+            </div>
+
+            <hr/>
+
+            <button class="btn btn-primary" (click)="continue()">J'ai déjà effectué cette démarche</button>
           </div>
         </div>
       </ng-container>
+
+      <ng-container *ngSwitchCase="2">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="mb-3">Démarche n°2</h2>
+
+            <div class="subtitle">
+              Je contacte un médiateur de la consommation, c’est-à-dire une personne chargée de régler les problèmes des consommateurs avec les entreprises.
+            </div>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse2-1" id="collapse2-1-toggle" aria-expanded="false" aria-controls="collapse2-1">
+              <h3>Quand ?</h3>
+            </a>
+            <div class="collapse" id="collapse2-1" aria-labelledby="collapse2-1-toggle" role="region">
+              <p>
+                Deux mois après avoir envoyé mon courrier, si je n’ai pas eu de réponse ou si la réponse ne me satisfait pas.
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse2-2" id="collapse2-2-toggle" aria-expanded="false" aria-controls="collapse2-2">
+              <h3>Qui ?</h3>
+            </a>
+            <div class="collapse" id="collapse2-2" aria-labelledby="collapse2-2-toggle" role="region">
+              <p>
+                L’entreprise a l’obligation de communiquer le nom du médiateur qu’elle a choisi. Les coordonnées du médiateur sont normalement écrites sur le site internet de l’entreprise ou sur le contrat, bon de commande…
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse2-3" id="collapse2-3-toggle" aria-expanded="false" aria-controls="collapse2-3">
+              <h3>Comment ?</h3>
+            </a>
+            <div class="collapse" id="collapse2-3" aria-labelledby="collapse2-3-toggle" role="region">
+              <p>
+                Je remplis le formulaire sur le site internet du médiateur.
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse2-4" id="collapse2-4-toggle" aria-expanded="false" aria-controls="collapse2-4">
+              <h3>Pourquoi ?</h3>
+            </a>
+            <div class="collapse" id="collapse2-4" aria-labelledby="collapse2-4-toggle" role="region">
+              <p>
+                Le médiateur va m’aider à trouver un arrangement avec l’entreprise.
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse2-5" id="collapse2-5-toggle" aria-expanded="false" aria-controls="collapse2-5">
+              <h3>Combien ça coûte ?</h3>
+            </a>
+            <div class="collapse" id="collapse2-5" aria-labelledby="collapse2-5-toggle" role="region">
+              <p>
+                C’est gratuit !
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse2-6" id="collapse2-6-toggle" aria-expanded="false" aria-controls="collapse2-6">
+              <h3>Comment faire si je ne trouve pas le nom du médiateur ?</h3>
+            </a>
+            <div class="collapse" id="collapse2-6" aria-labelledby="collapse2-6-toggle" role="region">
+              <p>
+                Je contacte le conciliateur le plus proche de chez moi.
+                <br />
+                Je le cherche sur le site conciliateurs.fr.
+                <br />
+                Il va m’aider à trouver une solution avec l’entreprise.
+                <br />
+                C’est gratuit !
+              </p>
+            </div>
+
+            <hr/>
+
+            <button class="btn btn-primary" (click)="continue()">J'ai déjà effectué cette démarche</button>
+          </div>
+        </div>
+        <div class="pt-3">
+          <button class="link" (click)="back()">
+            <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="3">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="mb-3">Démarche n°3</h2>
+
+            <div class="subtitle">
+              Je vais en justice, c’est-à-dire que je demande un procès au tribunal.
+            </div>
+
+            <p class="text-warning">
+              <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i>
+              Attention, il est obligatoire d’avoir fait l’étape 2 (médiateur ou conciliateur) avant de saisir le tribunal pour un litige inférieur à 5 000 euros
+            </p>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse3-1" id="collapse3-1-toggle" aria-expanded="false" aria-controls="collapse3-1">
+              <h3>Quand ?</h3>
+            </a>
+            <div class="collapse" id="collapse3-1" aria-labelledby="collapse3-1-toggle" role="region">
+              <p>
+                Lorsque je n’ai pas trouvé de solution avec le médiateur ou le conciliateur.
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse3-2" id="collapse3-2-toggle" aria-expanded="false" aria-controls="collapse3-2">
+              <h3>Comment ?</h3>
+            </a>
+            <div class="collapse" id="collapse3-2" aria-labelledby="collapse3-2-toggle" role="region">
+              <p>
+                En consultant la page
+                <a href="https://www.service-public.fr/particuliers/vosdroits/F35125" target="_blank" title="Service public - vos droits (nouvelle fenêtre)">
+                  https://www.service-public.fr/particuliers/vosdroits/F35125
+                </a>
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse3-3" id="collapse3-3-toggle" aria-expanded="false" aria-controls="collapse3-3">
+              <h3>Pourquoi ?</h3>
+            </a>
+            <div class="collapse" id="collapse3-3" aria-labelledby="collapse3-3-toggle" role="region">
+              <p>
+                Pour que le juge du tribunal décide qui est en tort et quelles solutions doivent être mises en place.
+              </p>
+            </div>
+
+            <hr/>
+
+            <a class="lead show" data-toggle="collapse" href="#collapse3-4" id="collapse3-4-toggle" aria-expanded="false" aria-controls="collapse3-4">
+              <h3>Combien ça coûte ?</h3>
+            </a>
+            <div class="collapse" id="collapse3-4" aria-labelledby="collapse3-4-toggle" role="region">
+              <p>
+                Aller au tribunal est gratuit mais des frais peuvent se rajouter au cours de la procédure (frais d’avocat, frais d’expertise…).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3">
+          <button class="link" (click)="back()">
+            <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
+          </button>
+        </div>
+      </ng-container>
+
+      <div class="notification info">
+
+        <a class="lead show" data-toggle="collapse" href="#collapseAsso" id="collapseAsso-toggle" aria-expanded="false" aria-controls="collapseAsso">
+          <span class="subtitle font-weight-normal">Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</span>
+        </a>
+        <div class="collapse" id="collapseAsso" aria-labelledby="collapseAsso-toggle" role="region">
+          <p>
+            Une association de consommateur pourra vous aider à écrire les courriers de réclamation ou de mise en demeure,
+            contacter l'entreprise directement, vous aider à saisir la justice.
+          </p>
+          <p>
+            Pour bénéficier de leur aide, vous devez payer une somme, appelée "adhésion".
+            Pour connaître le prix de cette adhésion, vous pouvez les contacter directement.
+            En fonction de votre situation, certaines associations peuvent baisser le prix de l'adhésion.
+          </p>
+          <p>
+            Liste des associations de consommateurs officielles :
+            <a href="https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales" target="_blank">
+              https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </main>
