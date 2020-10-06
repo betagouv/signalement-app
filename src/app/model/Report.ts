@@ -77,7 +77,7 @@ export class DraftReport {
   }
 
   get isContractualDispute() {
-    return this.tags.indexOf(ContractualDisputeTag) !== -1;
+    return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
 }
 
