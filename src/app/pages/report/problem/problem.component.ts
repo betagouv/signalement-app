@@ -85,7 +85,7 @@ export class ProblemComponent implements OnInit {
     this.analyticsService.trackEvent(
       EventCategories.report,
       ReportEventActions.contactualReport,
-      this.draftReport.consumerActionsId ? 'Oui' : 'Non'
+      this.draftReport.isContractualDispute ? 'Oui' : 'Non'
     );
     this.draftReport.subcategories = subcategories;
     this.continue();
@@ -101,7 +101,7 @@ export class ProblemComponent implements OnInit {
       case ProblemSteps.EmployeeConsumer: {
         this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
         this.draftReport.employeeConsumer = value;
-        if (this.draftReport.consumerActionsId) {
+        if (this.draftReport.isContractualDispute) {
           this.problemStep = ProblemSteps.ContractualDispute;
           this.scollTop();
         } else {

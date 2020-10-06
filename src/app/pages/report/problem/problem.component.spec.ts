@@ -30,10 +30,7 @@ describe('ProblemComponent', () => {
 
   const subcategoriesFixture = [
     genSubcategory(),
-    <Subcategory>{
-      ...genSubcategory(),
-      consumerActionsId: randomstring.generate()
-    },
+    genSubcategory(),
     <Subcategory>{
       ...genSubcategory(),
       subcategories: [

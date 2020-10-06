@@ -1,5 +1,6 @@
 - title: Courrier / société qui se fait passer pour l'administration
-  consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+  tags:
+    - Litige contractuel
 - title: Site internet pour obtenir un document administratif (casier, acte de naissance, vignette crit'air)
   subcategoriesTitle: A qui appartient ce site internet&#160;?
   subcategories:
@@ -8,7 +9,8 @@
       information: !!import/single ../common/info/administration.yml
     - title: A une entreprise
       example: "Un site avec une Marianne ou un drapeau tricolore n'appartient pas forcément à l'Etat. Ces entreprises entretiennent une confusion pour tromper les consommateurs."
-      consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+      tags:
+        - Litige contractuel
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
 - title: Autre
   subcategoriesTitle: Que voulez-vous signaler ?
@@ -17,4 +19,5 @@
       example: 'Exemple : ma mairie, mon centre des impôts'
       information: !!import/single ../common/info/administration.yml
     - title: Une entreprise privée
-      consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+      tags:
+        - Litige contractuel

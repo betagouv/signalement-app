@@ -1,13 +1,18 @@
 - title: Alimentation / Matériel pour animaux
   example: 'Exemple : jouet, cage, laisse, croquettes'
-  consumerActionsId: defb6d31-9900-4a5c-8e6e-241b453eaaa9
+  tags:
+    - Litige contractuel
 - title: Soins
   example: 'Exemple : vétérinaire, toiletteur'
-  consumerActionsId: defb6d31-9900-4a5c-8e6e-241b453eaaa9
+  tags:
+    - Litige contractuel
 - title: Garde
   example: 'Exemple : pension, site de petsitter'
-  consumerActionsId: defb6d31-9900-4a5c-8e6e-241b453eaaa9
+  tags:
+    - Litige contractuel
 - title: Vendeur d'animaux
-  consumerActionsId: defb6d31-9900-4a5c-8e6e-241b453eaaa9
+  tags:
+    - Litige contractuel
 - title: Autre
-  consumerActionsId: defb6d31-9900-4a5c-8e6e-241b453eaaa9
+  tags:
+    - Litige contractuel

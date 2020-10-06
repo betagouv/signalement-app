@@ -327,6 +327,8 @@
       subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
       subcategories:
         - title: Il présente un défaut ou il ne marche plus
+          tags:
+            - Litige contractuel
           subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
           subcategories:
             - title: Neuf
@@ -357,7 +359,6 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
-                  consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                 - title: Il y a plus de 2 ans
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -386,7 +387,6 @@
                               rank: 5
                               type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                          consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -431,7 +431,6 @@
                       rank: 5
                       type: TEXTAREA
                   fileLabel: Preuve d'achat / publicité / offre de vente
-                  consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                 - title: Il y a plus de 6 mois
                   subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                   subcategories:
@@ -460,7 +459,6 @@
                               rank: 5
                               type: TEXT
                           fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                          consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
                     - title: Non
                       information:
                         title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -478,11 +476,12 @@
                               <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
         - title: Autre raison
           example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
+          tags:
+            - Litige contractuel
           subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation. Vous êtes-vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
           subcategories:
             - title: Oui
               description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-              consumerActionsId: 4a3ee5a0-5797-4813-9617-e9e999a37ffb
             - title: Non
               information:
                 title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.

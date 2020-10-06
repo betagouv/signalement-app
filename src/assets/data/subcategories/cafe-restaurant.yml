@@ -166,6 +166,8 @@
           placeholder: 'absence de carte des vins, absence des prix à l''extérieur du restaurant'
       fileLabel: Merci de joindre si possible des éléments pour appuyer votre signalement (photo du menu, photo de la vitrine...)
     - title: J'ai payé plus cher que le prix affiché
+      tags:
+        - Litige contractuel
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -192,7 +194,6 @@
             - Autre (à préciser)
             - Non, aucune raison
       fileLabel: Merci de joindre une photo du menu, du site, de votre ticket afin d'appuyer votre signalement.
-      consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
     - title: Je trouve que les prix sont très chers
       example: 'Exemple : le prix du menu est très cher pour la qualité'
       information:

@@ -1,14 +1,19 @@
 - title: Frais bancaires
   example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir'
-  consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+  tags:
+    - Litige contractuel
 - title: Contrat
   example: 'Exemple : contrat de crédit'
-  consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+  tags:
+    - Litige contractuel
 - title: Publicité
   example: 'Exemple : publicité pour un crédit non conforme'
-  consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+  tags:
+    - Litige contractuel
 - title: Service client
   example: 'Exemple : service client injoignable'
-  consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+  tags:
+    - Litige contractuel
 - title: Autre
-  consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+  tags:
+    - Litige contractuel

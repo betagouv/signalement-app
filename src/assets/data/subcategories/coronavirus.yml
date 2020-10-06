@@ -46,7 +46,8 @@
     - Internet
   subcategories:
     - title: Le prix de la livraison a augmenté
-      consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
+      tags:
+        - Litige contractuel
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -56,7 +57,6 @@
           rank: 2
           type: TEXTAREA
     - title: Autre problème de prix
-      consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -66,7 +66,6 @@
           rank: 2
           type: TEXTAREA
     - title: Problème avec un produit livré
-      consumerActionsId: 79395994-e5a7-40fb-8c1e-7eae84f9b13a
       detailInputs:
         - label: Date du constat
           rank: 1
