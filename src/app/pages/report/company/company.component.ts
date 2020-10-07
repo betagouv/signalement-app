@@ -71,6 +71,8 @@ export class CompanyComponent implements OnInit {
   identificationKinds = IdentificationKinds;
   identificationKind: IdentificationKinds;
 
+  changeDraftCompany = false;
+
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
@@ -252,6 +254,7 @@ export class CompanyComponent implements OnInit {
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
+    this.changeDraftCompany = false;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
@@ -304,7 +307,7 @@ export class CompanyComponent implements OnInit {
   }
 
   changeCompany() {
-    this.draftReport.draftCompany = undefined;
+    this.changeDraftCompany = true;
     this.companySearchResults = [];
     this.companySearchBySiretResult = undefined;
     this.showErrors = false;

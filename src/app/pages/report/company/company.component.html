@@ -3,7 +3,7 @@
   <section class="section section-white" *ngIf="draftReport">
     <div class="container max-width">
 
-      <ng-container *ngIf="draftReport.draftCompany; else noCompany">
+      <ng-container *ngIf="draftReport.draftCompany && !changeDraftCompany; else noCompany">
         <div class="panel">
 
           <div class="row mb-2">
