@@ -59,6 +59,13 @@ export class AuthenticationService {
     );
   }
 
+  validateEmail(token: String) {
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'validate-email']),
+      JSON.stringify({ token }), this.serviceUtils.getHttpHeaders()
+    );
+  }
+
   logout() {
     this.localStorage.removeItemSubscribe(AuthUserStorageKey);
     this.userSource.next(undefined);

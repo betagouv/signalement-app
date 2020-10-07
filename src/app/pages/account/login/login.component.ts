@@ -68,8 +68,11 @@ export class LoginComponent implements OnInit {
         error => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-          this.authenticationError = (error.status === HttpStatusCodes.FORBIDDEN) ?
-            "Compte bloqué (trop de tentatives, veuillez réessayer dans 30 minutes)" : "Échec de l'authentification.";
+          const errorMapping = new Map([
+            [HttpStatusCodes.FORBIDDEN, "Compte bloqué (trop de tentatives, veuillez réessayer dans 30 minutes)"],
+            [HttpStatusCodes.LOCKED, "Votre adresse email doit être validée, un e-mail vient de vous être envoyé avec un lien à cet effet."]
+          ]);
+          this.authenticationError = errorMapping.get(error.status) || "Échec de l'authentification.";
         }
       );
     }
