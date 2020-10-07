@@ -53,7 +53,7 @@
                   rank: 7
                   type: TEXTAREA
             - title: Il manque des prix / les prix sont illisibles
-              description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligés de les demander.'
+              description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligé de les demander.'
               detailInputs:
                 - label: Veuillez préciser
                   rank: 1
@@ -70,7 +70,7 @@
                   example: Précisez si possible le rayon concerné
                   rank: 3
                   type: TEXTAREA
-            - title: Les prix sont plus chers qu'ailleurs
+            - title: Les prix sont plus élevés qu'ailleurs
               information:
                 title: Les commerçants ont le droit de choisir leurs prix.
                 outOfScope: true
@@ -148,17 +148,17 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Hygiène du personnel
-              example: 'Exemple : tenue sale ou pas adaptée'
+              example: 'Exemple : tenue sale ou inadaptée'
               subcategories:
-                - title: Tenue de travail pas adaptée
+                - title: Tenue de travail inadaptée
                   subcategories:
                     - title: Pas de gants ou pas de coiffe
                       information:
                         title: Cet incident ne doit pas nécessairement être signalé.
                         content: |-
-                          La loi précise que les personnes qui travaillent dans un endroit, où sont manipulés des aliments, doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
+                          La loi précise que les personnes qui travaillent dans un endroit où sont manipulés des aliments doivent respecter un niveau élevé de propreté personnelle et doivent porter des tenues adaptées et propres.
                           Les commerçants peuvent choisir de faire porter des gants ou une coiffe (charlotte, calot...) à leur personnel, à condition que ceux-ci soient propres et en bon état.<br />Cependant, le lavage des mains peut être suffisant pour éviter les contaminations.
-                    - title: Autres problème sur la tenue de travail
+                    - title: Autre problème sur la tenue de travail
                 - title: Tenue sale
                 - title: Mauvaises pratiques d'hygiène
                   example: 'Exemple : personne qui fume dans un local de production'
@@ -258,7 +258,7 @@
               subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
               subcategories: !!import/single ../common/date.yml
         - title: Publicité
-          example: 'Exemple : publicité trompeuse, produit du catalogue pas disponible'
+          example: 'Exemple : publicité trompeuse, produit du catalogue indisponible'
           subcategories:
             - title: Indisponibilité des produits en publicité
               detailInputs:
@@ -364,7 +364,7 @@
                             - Vendeur
                             - Accueil magasin
                             - Service client (téléphone, mail, courrier)
-                        - label: Pour quelle raison le commerçant ne veut pas vous reprendre le produit&#160;?
+                        - label: Pour quelle raison le commerçant ne veut-il pas vous reprendre le produit&#160;?
                           rank: 5
                           type: TEXTAREA
                       fileLabel: Preuve d'achat / publicité / offre de vente
@@ -438,7 +438,7 @@
                             - Vendeur
                             - Accueil magasin
                             - Service client (téléphone, mail, courrier)
-                        - label: Pour quelle raison le commerçant ne veut pas vous reprendre  le produit&#160;?
+                        - label: Pour quelle raison le commerçant ne veut-il pas vous reprendre le produit&#160;?
                           rank: 5
                           type: TEXTAREA
                       fileLabel: Preuve d'achat / publicité / offre de vente
@@ -504,7 +504,7 @@
           example: 'Exemple : refus de la carte bancaire'
           subcategories:
             - title: Le commerçant refuse que je paie en espèces
-              subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payez en espèces&#160;?
+              subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payiez en espèces&#160;?
               subcategories:
                 - title: Il refuse les espèces d'une façon générale
                   description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
