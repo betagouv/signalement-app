@@ -47,7 +47,9 @@ export enum ReportEventActions {
   validateDetails = 'Validation de la description',
   validateCompany = 'Validation de l\'établissement',
   validateConsumer = 'Validation du consommateur',
-  validateConfirmation = 'Envoi d\'un signalement',
+  validateConfirmation = 'Validation de l\'envoi d\'un signalement',
+  reportSendSuccess = 'Envoi d\'un signalement',
+  reportSendFail = 'Echec de l\'envoi d\'un signalement',
   keywordsDetection = 'Mots-clés détectés',
   informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés',
   contactualReport = 'Litige contractuel'
