@@ -66,11 +66,13 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
         result => {
           this.loading = false;
+          this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendSuccess);
           this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
           this.reportRouterService.routeForward(this.step);
         },
         error => {
           this.loading = false;
+          this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendFail);
           this.loadingError = true;
           throw error;
         });

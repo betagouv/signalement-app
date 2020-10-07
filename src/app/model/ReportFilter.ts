@@ -12,4 +12,12 @@ export class ReportFilter {
   details?: string;
   hasCompany?: boolean;
   tags: Tag[] = [];
+
+  set hasCompanyStr(value: string) {
+    this.hasCompany = value ? value === 'true' : undefined;
+  }
+
+  get hasCompanyStr() {
+    return this.hasCompany !== undefined ? this.hasCompany.toString() : undefined;
+  }
 }
