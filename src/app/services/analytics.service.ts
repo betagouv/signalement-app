@@ -61,7 +61,8 @@ export enum CompanySearchEventActions {
 }
 
 export enum ContractualDisputeActions {
-  consult = 'Consultation'
+  consult = 'Consultation',
+  downloadTemplate = 'Téléchargement lettre type'
 }
 
 export enum ContractualDisputeNames {

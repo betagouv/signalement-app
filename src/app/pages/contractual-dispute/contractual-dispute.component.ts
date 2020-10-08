@@ -53,4 +53,9 @@ export class ContractualDisputeComponent implements OnInit {
     );
   }
 
+  downloadDocumentTemplate() {
+    this.analyticsService.trackEvent(
+      EventCategories.contractualDispute, ContractualDisputeActions.downloadTemplate);
+  }
+
 }
