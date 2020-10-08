@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
+import { User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'email-validation',
@@ -13,6 +14,7 @@ export class EmailValidationComponent implements OnInit {
   constructor(private titleService: Title,
               private meta: Meta,
               private authenticationService: AuthenticationService,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   loading = false;
@@ -29,8 +31,9 @@ export class EmailValidationComponent implements OnInit {
     this.loading = true;
     this.authenticationService.validateEmail(token)
     .subscribe(
-      () => {
+      (user: User) => {
         this.loading = false;
+        this.router.navigate(['suivi-des-signalements', user.roleUrlParam]);
       },
       error => {
         this.loading = false;

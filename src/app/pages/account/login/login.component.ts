@@ -3,6 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import HttpStatusCodes from 'http-status-codes';
 import pages from '../../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.loading = true;
       this.authenticationService.login(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
-        user => {
+        (user: User) => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
