@@ -23,12 +23,21 @@
     }
   }
 
+  h3 {
+    font-weight: bold;
+  }
+
   & + .card {
     margin-top: 1em;
+  }
+
+  p {
+   margin-bottom: 0.5rem;
   }
 }
 
 .subtitle {
+  color: $secondary;
   font-weight: bold;
   font-size: 20px;
   padding-top: 0.5em;
