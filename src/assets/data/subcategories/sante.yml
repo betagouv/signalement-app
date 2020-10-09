@@ -75,6 +75,7 @@
       subcategories:
         - title: Les tarifs ne sont pas affichés en salle d'attente
           example: Les tarifs doivent être clairement affichés dans la salle d'attente.
+          companyKind: SIRET
           detailInputs:
             - label: Date de constat
               rank: 1

@@ -4,6 +4,7 @@
     title: Revenez en arrière et utilisez plutôt la catégorie spécifique à votre commande :)
     content: Un billet d'avion ? Utilisez la catégorie "voyage /loisirs" <br> Un livre commandé en ligne mais non reçu ? Utilisez la catégorie "achat/magasin"
 - title: Un problème avec un store (vente d'applications mobiles)
+  companyKind: SIRET
 - title: Un problème de harcèlement ou de chantage en ligne
   example: "Exemple : email d'un hackeur vous demandant de l'argent"
   information:

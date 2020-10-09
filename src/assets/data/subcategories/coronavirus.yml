@@ -39,6 +39,7 @@
     content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter les services de police.
           <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
 - title: Problème avec les règles d'hygiène ou de distanciation physique
+  companyKind: SIRET
 - title: Problème / abus avec un site de vente en ligne
   example: "Exemple : site de livraison de courses à domicile"
   companyKind: 'WEBSITE'
