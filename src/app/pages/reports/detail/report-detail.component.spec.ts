@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReportDetailComponent } from './report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoleDirective } from '../../../directives/app-role/app-role.directive';
 import { AppPermissionDirective } from '../../../directives/app-permission/app-permission.directive';
@@ -18,6 +17,7 @@ import { EventActionValues, ReportEvent } from '../../../model/ReportEvent';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { genReport } from '../../../../../test/fixtures.spec';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 describe('ReportDetailComponent', () => {
 

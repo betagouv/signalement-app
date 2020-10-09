@@ -5,7 +5,7 @@ import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
 import { HeaderComponent } from './header.component';
 import { AccountMenuComponent } from './account-menu/account-menu.component';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [

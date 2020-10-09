@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BsDatepickerModule, BsDropdownModule, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesAdminComponent } from './companies-admin.component';
 import { AppRoleDirective } from '../../../directives/app-role/app-role.directive';
@@ -12,6 +11,11 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { of } from 'rxjs';
 import { User } from '../../../model/AuthUser';
 import { AppPermissionDirective } from '../../../directives/app-permission/app-permission.directive';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 describe('CompaniesAdminComponent', () => {
 

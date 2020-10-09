@@ -8,10 +8,10 @@ import { Anomaly } from '../../../model/Anomaly';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
-import { AlertModule } from 'ngx-bootstrap';
 import { HeaderModule } from '../../header/header.module';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 describe('CategoryComponent', () => {
 

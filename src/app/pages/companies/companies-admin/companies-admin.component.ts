@@ -16,7 +16,8 @@ import { take } from 'rxjs/operators';
 
 import * as lodash from 'lodash';
 import { HttpResponse } from '@angular/common/http';
-import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import moment from 'moment';
 
 @Component({

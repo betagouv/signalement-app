@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BsDatepickerModule, BsDropdownModule, defineLocale, frLocale, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportListComponent } from './report-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +18,12 @@ import { ConstantService } from '../../../services/constant.service';
 import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { genPaginatedReports, genUser } from '../../../../../test/fixtures.spec';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;

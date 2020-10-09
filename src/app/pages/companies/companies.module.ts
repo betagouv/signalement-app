@@ -12,9 +12,11 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesAdminComponent } from './companies-admin/companies-admin.component';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
-import { BsDatepickerModule, BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
 import { CompanyCardComponent } from './company-card/company-card.component';
 import { Roles } from '../../model/AuthUser';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
