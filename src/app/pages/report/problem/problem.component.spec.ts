@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Anomaly, Subcategory } from '../../../model/Anomaly';
+import { Anomaly, ContractualDisputeTag, Subcategory, Tag } from '../../../model/Anomaly';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -15,9 +15,11 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
-import { genDraftReport } from '../../../../../test/fixtures.spec';
+import { genDraftReport, genInformation, genSubcategory } from '../../../../../test/fixtures.spec';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+
+const randomstring = require('randomstring');
 
 describe('ProblemComponent', () => {
 
@@ -27,21 +29,25 @@ describe('ProblemComponent', () => {
   let anomalyService: AnomalyService;
 
   const subcategoriesFixture = [
-    Object.assign( new Subcategory(), { title: 'title1', description: 'description1' }),
-    Object.assign( new Subcategory(), { title: 'title2', description: 'description2' }),
-    Object.assign( new Subcategory(), {
-      title: 'title3',
-      description: 'description3',
+    genSubcategory(),
+    <Subcategory>{
+      ...genSubcategory(),
+      tags: [ContractualDisputeTag]
+    },
+    <Subcategory>{
+      ...genSubcategory(),
       subcategories: [
-        Object.assign( new Subcategory(), { title: 'title31', description: 'description31' }),
-        Object.assign( new Subcategory(), { title: 'title32', description: 'description32' })
-        ]
-    }),
+        genSubcategory(),
+        genSubcategory()
+      ]
+    }
   ];
 
   const anomalyFixture = new Anomaly();
   anomalyFixture.subcategories = subcategoriesFixture;
   anomalyFixture.path = 'myPath';
+
+  const draftReportInProgress = genDraftReport(Step.Category);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -72,6 +78,8 @@ describe('ProblemComponent', () => {
     reportStorageService = TestBed.get(ReportStorageService);
     fixture = TestBed.createComponent(ProblemComponent);
     component = fixture.componentInstance;
+
+    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
   });
 
   it('should create', () => {
@@ -79,39 +87,127 @@ describe('ProblemComponent', () => {
   });
 
   it('should display subcategories', () => {
-    spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Category)));
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
-
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelector('app-subcategory')).not.toBeNull();
   });
 
-  describe('when receive subcategories', () => {
+  it('should request the user if he is an employee of the company or not when receive subcategories', () => {
 
-    it('should change the shared report with a report which contains subcategories', () => {
-      const draftReportInProgress = genDraftReport(Step.Category);
-      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+    component.anomaly = new Anomaly();
+    component.anomaly.subcategories = subcategoriesFixture;
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+    fixture.detectChanges();
 
-      component.anomaly = new Anomaly();
-      component.anomaly.subcategories = subcategoriesFixture;
-      spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
-      const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+    component.onSelectSubcategories([subcategoriesFixture[0]]);
+    fixture.detectChanges();
 
-      fixture.detectChanges();
-
-      component.onSelectSubcategories([subcategoriesFixture[1]]);
-
-      const subcategoryExpected = new Subcategory();
-      subcategoryExpected.title = 'title2';
-      subcategoryExpected.description = 'description2';
-      const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
-        subcategories: [subcategoryExpected]
-      });
-
-      expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
-
-    });
+    const nativeElement = fixture.nativeElement;
+    expect(nativeElement.querySelector('h2').textContent).toEqual(`Travaillez-vous dans l'entreprise que vous souhaitez signaler ?`);
+    expect(nativeElement.querySelectorAll('button')[0].textContent.trim()).toEqual('Oui');
+    expect(nativeElement.querySelectorAll('button')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
+    expect(nativeElement.querySelector('form')).toBeNull();
   });
+
+  it('should update the shared report when the user is an employee', () => {
+
+    const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+
+    component.anomaly = new Anomaly();
+    component.anomaly.subcategories = subcategoriesFixture;
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+    fixture.detectChanges();
+
+    component.onSelectSubcategories([subcategoriesFixture[0]]);
+    fixture.detectChanges();
+
+    const nativeElement = fixture.nativeElement;
+    nativeElement.querySelectorAll('button')[0].click();
+    fixture.detectChanges();
+
+    const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
+      subcategories: [subcategoriesFixture[0]],
+      employeeConsumer: true
+    });
+
+    expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
+
+  });
+
+  it('should update the shared report when the user is not employee and report does not concern a contractual report', () => {
+
+    const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+
+    component.anomaly = new Anomaly();
+    component.anomaly.subcategories = subcategoriesFixture;
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+    fixture.detectChanges();
+
+    component.onSelectSubcategories([subcategoriesFixture[0]]);
+    fixture.detectChanges();
+
+    const nativeElement = fixture.nativeElement;
+    nativeElement.querySelectorAll('button')[1].click();
+    fixture.detectChanges();
+
+    const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
+      subcategories: [subcategoriesFixture[0]],
+      employeeConsumer: false
+    });
+
+    expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
+
+  });
+
+  it('should display specific message when the user is not employee and report concerns a contractual report', () => {
+
+    const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+
+    component.anomaly = new Anomaly();
+    component.anomaly.subcategories = subcategoriesFixture;
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+    fixture.detectChanges();
+
+    component.onSelectSubcategories([subcategoriesFixture[1]]);
+    fixture.detectChanges();
+
+    const nativeElement = fixture.nativeElement;
+    nativeElement.querySelectorAll('button')[1].click();
+    fixture.detectChanges();
+
+    expect(changeReportSpy).not.toHaveBeenCalled();
+    expect(nativeElement.querySelector('#contractualDisputeMessage')).not.toBeNull();
+
+  });
+
+  it('should update the shared report when the contractual message is submitted', () => {
+
+    const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+
+    component.anomaly = new Anomaly();
+    component.anomaly.subcategories = subcategoriesFixture;
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+    fixture.detectChanges();
+
+    component.onSelectSubcategories([subcategoriesFixture[1]]);
+    fixture.detectChanges();
+
+    const nativeElement = fixture.nativeElement;
+    nativeElement.querySelectorAll('button')[1].click();
+    fixture.detectChanges();
+
+    nativeElement.querySelectorAll('button')[0].click();
+    fixture.detectChanges();
+
+    const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
+      subcategories: [subcategoriesFixture[1]],
+      employeeConsumer: false
+    });
+
+    expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
+
+  });
+
 });

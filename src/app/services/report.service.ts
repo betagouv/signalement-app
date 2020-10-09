@@ -34,7 +34,7 @@ export class ReportService {
         category: draftReport.category,
         subcategories: !draftReport.subcategories ? [] : draftReport.subcategories
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
-        tags: !draftReport.subcategories ? [] : [].concat(...draftReport.subcategories.map(subcategory => subcategory.tags || [])),
+        tags: draftReport.tags,
         firstName: draftReport.consumer.firstName,
         lastName: draftReport.consumer.lastName,
         email: draftReport.consumer.email,
@@ -53,7 +53,7 @@ export class ReportService {
         companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
         companySiret: draftReport.draftCompany.siret,
-        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
+        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined
       },
     );
   }

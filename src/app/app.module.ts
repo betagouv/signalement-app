@@ -32,6 +32,7 @@ import { AppRoleModule } from './directives/app-role/app-role.module';
 import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 import { SubscriptionModule } from './pages/subscription/subscription.module';
 import { HeaderModule } from './pages/header/header.module';
+import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -111,6 +112,7 @@ class ErrorLogger extends ErrorHandler {
         ),
         AppRoleModule,
         AppPermissionModule,
+        ContractualDisputeModule
     ],
     exports: [
     ],

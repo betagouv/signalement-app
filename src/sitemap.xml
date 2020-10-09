@@ -106,6 +106,11 @@
   </url>
 
   <url>
+    <loc>https://signal.conso.gouv.fr/litige</loc>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
     <loc>https://signal.conso.gouv.fr/delai-de-retractation</loc>
     <priority>0.3</priority>
   </url>

@@ -17,6 +17,11 @@
 }
 
 :host ::ng-deep {
+
+  h1 {
+    line-height: 30px !important;
+  }
+
   h1, h2 {
     margin: 0 0.5em;
   }
