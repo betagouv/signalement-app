@@ -60,8 +60,6 @@ const routes: Routes = [
     RouterModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class StaticModule { }

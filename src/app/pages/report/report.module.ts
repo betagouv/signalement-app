@@ -76,16 +76,6 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     AcknowledgmentComponent,
     SubcategoryComponent,
   ],
-  entryComponents: [
-    CategoryComponent,
-    InformationComponent,
-    ProblemComponent,
-    DetailsComponent,
-    ConsumerComponent,
-    CompanyComponent,
-    ConfirmationComponent,
-    AcknowledgmentComponent,
-  ],
   imports: [
     CommonModule,
     FormsModule,
