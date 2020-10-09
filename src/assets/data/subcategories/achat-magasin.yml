@@ -335,6 +335,8 @@
               fileLabel: Photo(s) si possible
         - title: Remboursement / garantie
           example: 'Exemple : le magasin refuse de me reprendre un article'
+          tags:
+            - Litige contractuel
           subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
           subcategories:
             - title: Il présente un défaut ou il ne marche plus
@@ -368,7 +370,6 @@
                           rank: 5
                           type: TEXTAREA
                       fileLabel: Preuve d'achat / publicité / offre de vente
-                      consumerActions: !!import/single ../common/actions/garantie.yml
                     - title: Il y a plus de 2 ans
                       subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                       subcategories:
@@ -397,7 +398,6 @@
                                   rank: 5
                                   type: TEXT
                               fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                              consumerActions: !!import/single ../common/actions/garantie.yml
                         - title: Non
                           information:
                             title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -442,7 +442,6 @@
                           rank: 5
                           type: TEXTAREA
                       fileLabel: Preuve d'achat / publicité / offre de vente
-                      consumerActions: !!import/single ../common/actions/garantie.yml
                     - title: Il y a plus de 6 mois
                       subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                       subcategories:
@@ -471,7 +470,6 @@
                                   rank: 5
                                   type: TEXT
                               fileLabel: Contrat de garantie / publicité de l'offre de vente / document se référant à la garantie
-                              consumerActions: !!import/single ../common/actions/garantie.yml
                         - title: Non
                           information:
                             title: <b>Votre produit n'est plus couvert par la garantie.</b>
@@ -493,7 +491,6 @@
               subcategories:
                 - title: Oui
                   description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
-                  consumerActions: !!import/single ../common/actions/garantie.yml
                 - title: Non
                   information:
                     title: Vous ne pouvez pas exiger le remboursement, l'échange ou l'annulation gratuite de votre contrat.

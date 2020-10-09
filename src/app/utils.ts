@@ -14,14 +14,10 @@ export default class Utils {
   }
 }
 
-export const SVETestingScope = 'TestSVE';
-export enum SVETestingVersions {
-  NoTest = 'NoTest',
-  Test3_Sentence1 = 'Test3_Sentence1',
-  Test3_Sentence2 = 'Test3_Sentence2',
-  Test3_Sentence3 = 'Test3_Sentence3',
-  Test3_Sentence4 = 'Test3_Sentence4',
-  Test3_Sentence5 = 'Test3_Sentence5'
+export const CompanyAPITestingScope = 'TestCompanyAPI';
+export enum CompanyTestingVersions {
+  EntrepriseAPI = 'EntrepriseAPI',
+  SignalConsoAPI = 'SignalConsoAPI'
 }
 
 export const desktopMinWidth = 992;

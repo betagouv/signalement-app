@@ -6,12 +6,12 @@
   .alert.alert-danger.alert-dismissible {
     color: $black;
     position: fixed;
-    top: 0;
+    top: 1px;
     z-index: 100;
     width: 94%;
     left: 3%;
-    background-color: $theme-error-bg;
-    border: none;
+    background-color: $white;
+    border: $warning 3px solid;
   }
 }
 
@@ -154,6 +154,8 @@ h2 {
   text-decoration: underline;
   padding: 1em;
   transition: all .2s ease-in-out;
+  border: none;
+  background: none;
 
   &:hover{
     transform: scale(1.1);

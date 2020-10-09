@@ -27,11 +27,12 @@ import { ReportsModule } from './pages/reports/reports.module';
 import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
 import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from './utils';
+import { CompanyAPITestingScope, CompanyTestingVersions } from './utils';
 import { AppRoleModule } from './directives/app-role/app-role.module';
 import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 import { SubscriptionModule } from './pages/subscription/subscription.module';
 import { HeaderModule } from './pages/header/header.module';
+import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -96,29 +97,22 @@ class ErrorLogger extends ErrorHandler {
             [
                 {
                     versions: [
-                        SVETestingVersions.NoTest,
-                        SVETestingVersions.Test3_Sentence1,
-                        SVETestingVersions.Test3_Sentence2,
-                        SVETestingVersions.Test3_Sentence3,
-                        SVETestingVersions.Test3_Sentence4,
-                        SVETestingVersions.Test3_Sentence5,
+                        CompanyTestingVersions.EntrepriseAPI,
+                        CompanyTestingVersions.SignalConsoAPI
                     ],
-                    versionForCrawlers: SVETestingVersions.NoTest,
-                    scope: SVETestingScope,
+                    versionForCrawlers: CompanyTestingVersions.EntrepriseAPI,
+                    scope: CompanyAPITestingScope,
                     expiration: 5,
                     weights: {
-                        NoTest: 49,
-                        Test3_Sentence1: 10,
-                        Test3_Sentence2: 10,
-                        Test3_Sentence3: 10,
-                        Test3_Sentence4: 10,
-                        Test3_Sentence5: 10,
+                      EntrepriseAPI: 49,
+                      SignalConsoAPI: 49
                     },
                 },
             ],
         ),
         AppRoleModule,
         AppPermissionModule,
+        ContractualDisputeModule
     ],
     exports: [
     ],

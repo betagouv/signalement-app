@@ -1,12 +1,15 @@
-<alert class="text-center" type="danger" dismissible="true" [isOpen]="draftReport && draftReport.subcategories && !draftReport.lastSubcategory?.information" (onClosed)="removeStoredReport()"><strong>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</strong>
-  <button type="submit" class="button-outline warning ml-2" (click)="removeStoredReport()">Non</button>
-  <button type="submit" class="button warning ml-2" (click)="restoreStoredReport()">Oui</button>
+<alert class="text-center" type="danger" dismissible="true" [isOpen]="draftReport && draftReport.subcategories && !draftReport.lastSubcategory?.information" (onClosed)="removeStoredReport()">
+  <strong>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</strong>
+  <div>
+    <button type="submit" class="button-outline warning ml-2" (click)="removeStoredReport()">Non</button>
+    <button type="submit" class="button warning ml-2" (click)="restoreStoredReport()">Oui</button>
+  </div>
 </alert>
 
 <div class="banner text-center section-small section-primary d-none d-lg-block" role="region">
   <div class="container text-center">
     <h1>
-      Signaler un problème à la répression des fraudes<br> en toute transparence avec l'entreprise !
+      Signaler un problème à la répression des fraudes<br/> en toute transparence avec l'entreprise !
     </h1>
   </div>
 </div>
@@ -32,7 +35,7 @@
       </div>
       <div class="text-center pt-5">
         <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
-          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" />
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="" />
         </button>
       </div>
     </div>
@@ -44,39 +47,45 @@
 
       <div class="d-block d-lg-none button-pro text-right mb-2">
         <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user">
-          Espace pro<img src="/assets/images/icon-unlock.svg" alt="Icône déverrouiller" />
+          Espace pro<img src="/assets/images/icon-unlock.svg" alt="" />
         </button>
       </div>
 
       <h1 class="tmb-4 d-none d-md-block">Signaler un problème à la répression des fraudes <br/>en toute transparence avec l'entreprise !</h1>
       <h1 class="tmb-4 d-md-none">Signaler un problème à la répression des fraudes en toute transparence avec l'entreprise !</h1>
 
-      <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
+      <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000" role="region" aria-roledescription="carousel" aria-label="Comment ça marche ?">
+        <div class="carousel-inner" id="carousel-inner" aria-live=polite	>
+          <div class="carousel-item active" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[0].title}}">
             <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[1].title}}">
             <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[2].title}}">
             <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[3].title}}">
             <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
           </div>
         </div>
-        <ol class="carousel-indicators">
+        <ol class="carousel-indicators" aria-hidden="true">
           <li data-target="#carousel" data-slide-to="0" class="active"></li>
           <li data-target="#carousel" data-slide-to="1"></li>
           <li data-target="#carousel" data-slide-to="2"></li>
           <li data-target="#carousel" data-slide-to="3"></li>
         </ol>
+        <div aria-controls="carousel-inner" class="sr-only">
+          <button data-target="#carousel" data-slide-to="0">Navigation vers le slide 1</button>
+          <button data-target="#carousel" data-slide-to="1">Navigation vers le slide 2</button>
+          <button data-target="#carousel" data-slide-to="2">Navigation vers le slide 3</button>
+          <button data-target="#carousel" data-slide-to="3">Navigation vers le slide 4</button>
+        </div>
       </div>
 
-      <div id="carousel-md" class="carousel slide d-none d-md-block" data-ride="carousel" data-interval="30000">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
+      <div id="carousel-md" class="carousel slide d-none d-md-block" data-ride="carousel" data-interval="30000" role="region" aria-roledescription="carousel" aria-label="Comment ça marche ?">
+        <div class="carousel-inner" id="carousel-inner-md" aria-live=polite	>
+          <div class="carousel-item active" role="group" aria-roledescription="slide" attr.aria-label="1: {{illustrations[0].title}} - 2: {{illustrations[1].title}}">
             <div class="row">
               <div class="col-6">
                 <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
@@ -86,21 +95,25 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="3: {{illustrations[0].title}} - 4: {{illustrations[1].title}}">
             <div class="row">
               <div class="col-6">
-                <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
+                <app-illustration-card [illustration]="illustrations[2]" titleId="title-2"></app-illustration-card>
               </div>
               <div class="col-6">
-                <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
+                <app-illustration-card [illustration]="illustrations[3]" titleId="title-3"></app-illustration-card>
               </div>
             </div>
           </div>
         </div>
-        <ol class="carousel-indicators">
+        <ol class="carousel-indicators" aria-hidden="true">
           <li data-target="#carousel-md" data-slide-to="0" class="active"></li>
           <li data-target="#carousel-md" data-slide-to="1"></li>
         </ol>
+        <div aria-controls="carousel-inner-md" class="sr-only">
+          <button data-target="#carousel" data-slide-to="0">Navigation vers les slides 1 et 2</button>
+          <button data-target="#carousel" data-slide-to="1">Navigation vers les slides 3 et 4</button>
+        </div>
       </div>
     </div>
 
@@ -108,7 +121,7 @@
 
       <div class="text-center mt-4 mb-4">
         <button type="button" class="btn btn-warning d-lg-none" (click)="scrollToElement(categoryList)">
-          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="Icône attention" class="d-none d-sm-inline-block" />
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="" class="d-none d-sm-inline-block" />
         </button>
       </div>
 

@@ -1,5 +1,8 @@
-<app-header></app-header>
-<div class="content">
+<a [routerLink]="getCurrentNavigation()" fragment="content" class="sr-only sr-only-focusable">Aller au contenu</a>
+<div #header tabindex="-1">
+  <app-header></app-header>
+</div>
+<div class="content" #content tabindex="-1">
   <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

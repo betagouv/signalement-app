@@ -1,6 +1,7 @@
 export const ReportingDateLabel = 'Date du constat';
 export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
+export const ContractualDisputeTag = <Tag>'Litige contractuel';
 
 export class Action {
   question: string;
@@ -12,7 +13,6 @@ export class Information {
   title?: string;
   content?: string;
   actions?: Action[];
-  reference?: string;
   outOfScope?: boolean;
 }
 
@@ -79,7 +79,6 @@ export class Subcategory extends WithSubcategories {
   detailInputs?: DetailInput[];
   fileLabel?: string;
   information?: Information;
-  consumerActions?: Information[];
   tags: Tag[];
 
   getInternetSubcategoriesData() {

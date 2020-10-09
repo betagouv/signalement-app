@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { DetailInputValue, DraftReport, Report } from '../model/Report';
-import { CompanySearchResult } from '../model/CompanySearchResult';
 import { of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
@@ -11,7 +10,7 @@ import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import moment from 'moment';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
-import { Company, Website } from '../model/Company';
+import { Company, CompanySearchResult, DraftCompany, Website } from '../model/Company';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +34,7 @@ export class ReportService {
         category: draftReport.category,
         subcategories: !draftReport.subcategories ? [] : draftReport.subcategories
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
-        tags: !draftReport.subcategories ? [] : [].concat(...draftReport.subcategories.map(subcategory => subcategory.tags || [])),
+        tags: draftReport.tags,
         firstName: draftReport.consumer.firstName,
         lastName: draftReport.consumer.lastName,
         email: draftReport.consumer.email,
@@ -51,10 +50,10 @@ export class ReportService {
             };
           }),
         companyName: draftReport.draftCompany.name,
-        companyAddress: draftReport.draftCompany.address,
+        companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
         companySiret: draftReport.draftCompany.siret,
-        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
+        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined
       },
     );
   }
@@ -73,17 +72,18 @@ export class ReportService {
   updateReportCompany(reportId: string, companySearchResult: CompanySearchResult) {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.post<Report> (
+        return this.http.post (
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'company']),
           {
             name: companySearchResult.name,
-            address: companySearchResult.address,
+            address: this.getDraftCompanyFullAddress(companySearchResult),
             postalCode: companySearchResult.postalCode,
             siret: companySearchResult.siret,
           },
           headers
         );
       }),
+      mergeMap(report => of(this.reportApi2report({ report })))
     );
   }
 
@@ -196,11 +196,15 @@ export class ReportService {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
 
-    ['siret', 'status', 'category', 'details', 'email', 'hasCompany', 'tags'].forEach(filterName => {
+    ['siret', 'status', 'category', 'details', 'email', 'tags'].forEach(filterName => {
       if (reportFilter[filterName] && reportFilter[filterName].length) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName].toString()).trim());
       }
     });
+
+    if (reportFilter.hasCompanyStr) {
+      httpParams = httpParams.append('hasCompany', reportFilter.hasCompanyStr);
+    }
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<PaginatedData<any>>(
@@ -229,11 +233,12 @@ export class ReportService {
         if (reportFilter.period && reportFilter.period[1]) {
           params['end'] = moment(reportFilter.period[1]).format('YYYY-MM-DD');
         }
-        ['siret', 'status', 'category', 'details', 'hasCompany'].forEach(filterName => {
+        ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
           if (reportFilter[filterName]) {
             params[filterName] = (reportFilter[filterName] as string).trim();
           }
         });
+        params['hasCompany'] = reportFilter.hasCompany;
         params['tags'] = (reportFilter.tags || []);
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
@@ -244,7 +249,7 @@ export class ReportService {
     );
   }
 
-  private reportApi2report(reportWithFiles: {report: any, files: UploadedFile[]}) {
+  private reportApi2report(reportWithFiles: {report: any, files?: UploadedFile[]}) {
     const report = reportWithFiles.report;
     const files = reportWithFiles.files;
     return Object.assign(new Report(), {
@@ -268,9 +273,15 @@ export class ReportService {
       website: Object.assign(new Website(), {url: report.websiteURL}),
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
-      uploadedFiles: files.map(f => Object.assign(new UploadedFile(), f)),
+      uploadedFiles: files ? files.map(f => Object.assign(new UploadedFile(), f)) : [],
       status: report.status
     });
+  }
+
+  private getDraftCompanyFullAddress(draftCompany: DraftCompany) {
+    return [draftCompany.name, draftCompany.brand, draftCompany.address]
+      .filter(a => a && a.length)
+      .join(' - ');
   }
 }
 

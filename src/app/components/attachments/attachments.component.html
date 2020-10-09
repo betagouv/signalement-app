@@ -1,7 +1,7 @@
-<label>
+<h3 class="label">
   <i class="material-icons md-24" aria-hidden="true">attach_file</i>
   <span [innerHTML]="label" class="pr-3"></span>
-</label>
+</h3>
 <div class="note mb-1" *ngIf="note" [innerHTML]="note">
 </div>
 <button type="button" class="btn btn-sm btn-outline-primary d-none d-md-block mt-2"(click)="bringFileSelector()">
@@ -9,7 +9,8 @@
 </button>
 <div class="row text-center pt-1">
   <div class="col-12 offset-md-6 col-md-6">
-    <table class="table table-sm">
+    <table class="table table-sm" role="presentation">
+      <caption *ngIf="uploadedFiles.length" class="sr-only">Liste des pièces jointes</caption>
       <tbody>
       <tr *ngFor="let uploadedFile of uploadedFiles">
         <td class="text-left position-relative" *ngIf="uploadedFile.loading" colspan="2">

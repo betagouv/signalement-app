@@ -46,7 +46,6 @@ export class CompaniesAdminComponent implements OnInit {
   lines: NbReportsGroupByCompany[];
   companiesToActivate: CompanyToActivate[];
   allCompaniesToActivate: CompanyToActivate[];
-  companiesToActivateFilter: {tokenCreation?: Date, lastNotice?: Date} = {};
 
   showErrors: boolean;
   loading: boolean;
@@ -208,15 +207,6 @@ export class CompaniesAdminComponent implements OnInit {
     );
   }
 
-  filterCompaniesToActivate(tokenCreation: Date, lastNotice: Date) {
-    if (this.allCompaniesToActivate) {
-      this.companiesToActivate = this.allCompaniesToActivate.filter(companyToActivate => {
-        return (!tokenCreation || moment(companyToActivate.tokenCreation).isSame(moment(tokenCreation), 'day')) &&
-          (!lastNotice || moment(companyToActivate.lastNotice).isSame(moment(lastNotice), 'day'));
-      });
-    }
-  }
-
   downloadActivationDocuments() {
     if (isPlatformBrowser(this.platformId)) {
       this.companyAccessesService.downloadActivationDocuments(this.checkedCompaniesUuids).subscribe(response => {
@@ -255,5 +245,13 @@ export class CompaniesAdminComponent implements OnInit {
       this.loadReports(pageEvent.page);
       this.location.go('entreprises/les-plus-signalees', `page_number=${pageEvent.page}`);
     }
+  }
+
+  previousTab() {
+    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) - 1];
+  }
+
+  nextTab() {
+    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) + 1];
   }
 }

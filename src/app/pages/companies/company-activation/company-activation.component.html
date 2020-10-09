@@ -20,31 +20,31 @@
                 <label for="login">
                   SIRET de votre entreprise
                 </label>
-                <div class="note mb-1">
+                <div class="note mb-1" id="siret-description">
                   Il doit correspondre à la raison sociale indiquée sur le courrier.
                 </div>
-                <span *ngIf="showErrors && siretCtrl.hasError('required')" class="text-warning">
+                <div *ngIf="showErrors && siretCtrl.hasError('required')" class="text-warning">
                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre SIRET.
-                </span>
-                <span *ngIf="showErrors && siretCtrl.hasError('pattern')" class="text-warning">
+                </div>
+                <div *ngIf="showErrors && siretCtrl.hasError('pattern')" class="text-warning">
                    <i class="material-icons md-18">error_outline</i> Le SIRET doit comporter 14 chiffres.
-                </span>
-                <input [formControl]="siretCtrl" type="text" class="form-control" id="login" placeholder="14 caractères de votre SIRET">
+                </div>
+                <input [formControl]="siretCtrl" type="text" class="form-control" id="login" placeholder="14 caractères de votre SIRET" aria-describedby="siret-description">
               </div>
               <div class="form-group">
                 <label for="password">
                   Code d'activation
                 </label>
-                <div class="note mb-1">
+                <div class="note mb-1" id="code-description">
                   Code à 6 chiffres indiqué sur le courrier.
                 </div>
-                <span *ngIf="showErrors && codeCtrl.hasError('required')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre code d'activation.<br />
-                </span>
-                <span *ngIf="showErrors && codeCtrl.hasError('pattern')" class="text-warning">
+                <div *ngIf="showErrors && codeCtrl.hasError('required')" class="text-warning">
+                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre code d'activation.
+                </div>
+                <div *ngIf="showErrors && codeCtrl.hasError('pattern')" class="text-warning">
                    <i class="material-icons md-18">error_outline</i> Le code doit comporter 6 chiffres.
-                </span>
-                <input [formControl]="codeCtrl" type="password" class="form-control" id="password" placeholder="Code d'activation à 6 chiffres">
+                </div>
+                <input [formControl]="codeCtrl" type="password" class="form-control" id="password" placeholder="Code d'activation à 6 chiffres" aria-describedby="code-description">
               </div>
               <div class="form-group">
                 <label for="email">
@@ -53,12 +53,12 @@
                 <div class="note mb-1">
                   Adresse email de votre choix.
                 </div>
-                <span *ngIf="showErrors && emailCtrl.hasError('required')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre adresse email.<br />
-                </span>
-                <span *ngIf="showErrors && emailCtrl.hasError('email')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner une adresse email valide.<br />
-                </span>
+                <div *ngIf="showErrors && emailCtrl.hasError('required')" class="text-warning">
+                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre adresse email.
+                </div>
+                <div *ngIf="showErrors && emailCtrl.hasError('email')" class="text-warning">
+                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner une adresse email valide.
+                </div>
                 <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" />
               </div>
               <div class="notification error" *ngIf="activationError ">

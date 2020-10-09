@@ -5,20 +5,23 @@
 
     <section class="section section-lightest-grey">
       <div class="container position-relative bg-white pb-3">
-        <nav class="nav nav-tabs nav-justified mb-3">
-          <a class="nav-item nav-link" *ngFor="let navTab of navTabs" [ngClass]="navTab === currentNavTab ? 'active' : ''" [routerLink]="navTab.link">
+        <nav class="nav nav-tabs nav-justified mb-3" role="tablist" aria-label="Type d'entreprise">
+          <button class="nav-item nav-link" *ngFor="let navTab of navTabs" [ngClass]="navTab === currentNavTab ? 'active' : ''" [routerLink]="navTab.link"
+                  role="tab" [attr.aria-selected]="navTab === currentNavTab" [attr.aria-controls]="currentNavTab.label + '-panel'" [id]="currentNavTab.label + '-tab'"
+                  [tabIndex]="navTab === currentNavTab ? 0 : -1"
+                  (keydown.arrowRight)="nextTab()" (keydown.arrowLeft)="previousTab()">
             {{navTab.label}}
-          </a>
+          </button>
         </nav>
 
         <ng-container [ngSwitch]="currentNavTab">
 
-          <ng-container *ngSwitchCase="searchTab">
+          <div *ngSwitchCase="searchTab" tabindex="0" role="tabpanel" [id]="searchTab.label + '-panel'" [attr.aria-labelledby]="searchTab.label + '-tab'">
             <form [formGroup]="searchForm" (ngSubmit)="submitSearchForm()">
               <div class="form-group">
                 <div class="control-label">
                   <label for="search">
-                    Recherche par SIRET / Nom / Référence de courrier<span class="error">*</span>
+                    Recherche par SIRET / Nom / Référence de courrier (obligatoire)
                   </label>
                 </div>
                 <div>
@@ -60,12 +63,13 @@
                 </ng-template>
               </div>
             </ng-container>
-          </ng-container>
+          </div>
 
-          <ng-container *ngSwitchCase="mostReportedTab">
+          <div *ngSwitchCase="mostReportedTab" tabindex="0" role="tabpanel" [id]="mostReportedTab.label + '-panel'" [attr.aria-labelledby]="mostReportedTab.label + '-tab'">
 
             <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
               <table class="table">
+                <caption class="sr-only">Liste des entreprises les plus signalées</caption>
                 <thead>
                 <tr>
                   <th>Commune</th>
@@ -94,11 +98,12 @@
             <pagination *appRole="[roles.Admin, roles.DGCCRF]" [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
                         [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
             </pagination>
-          </ng-container>
+          </div>
 
-          <ng-container *ngSwitchCase="toActivateTab">
+          <div *ngSwitchCase="toActivateTab" tabindex="0" role="tabpanel" [id]="toActivateTab.label + '-panel'" [attr.aria-labelledby]="toActivateTab.label + '-tab'">
             <div class="table-responsive" *appRole="[roles.Admin, roles.DGCCRF]">
               <table class="table">
+                <caption class="sr-only">Liste des entreprises à activer</caption>
                 <thead>
                 <tr>
                   <th *appRole="[roles.Admin]" class="th-checkbox">
@@ -120,26 +125,8 @@
                   </th>
                   <th>Entreprise</th>
                   <th class="th-address">Adresse</th>
-                  <th class="th-date text-center">
-                    <input type="text"
-                           id="creationDateInput"
-                           placeholder="Date de création"
-                           [(ngModel)]="companiesToActivateFilter.tokenCreation"
-                           (bsValueChange)="filterCompaniesToActivate($event, companiesToActivateFilter.lastNotice)"
-                           bsDatepicker
-                           autocomplete="off"
-                           [bsConfig]="{ containerClass: 'theme-default' }">
-                  </th>
-                  <th class="th-date text-center">
-                    <input type="text"
-                           id="noticeDateInput"
-                           placeholder="Date du courrier"
-                           [(ngModel)]="companiesToActivateFilter.lastNotice"
-                           (bsValueChange)="filterCompaniesToActivate(companiesToActivateFilter.tokenCreation, $event)"
-                           bsDatepicker
-                           autocomplete="off"
-                           [bsConfig]="{ containerClass: 'theme-default' }">
-                  </th>
+                  <th class="th-date text-center">Date de création</th>
+                  <th class="th-date text-center">Relance</th>
                   <ng-template #confirmLettersSendingTpl>
                     <div class="modal-body text-center">
                       <p>Confirmez-vous l'envoi des courriers pour les entreprises sélectionnés ?</p>
@@ -173,12 +160,12 @@
                     <small *ngFor="let line of toActivate.company.address.split(' - ')">{{line}}<br /></small>
                   </td>
                   <td class="text-center">{{toActivate.tokenCreation | date : 'dd/MM/yyyy'}}</td>
-                  <td class="text-center">{{toActivate.lastNotice | date : 'dd/MM/yyyy'}}</td>
+                  <td class="text-center">{{(toActivate.lastNotice === null) ? "" : "✓"}}</td>
                 </tr>
                 </tbody>
               </table>
             </div>
-          </ng-container>
+          </div>
         </ng-container>
         <ngx-loading [show]="loading"></ngx-loading>
       </div>

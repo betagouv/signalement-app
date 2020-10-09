@@ -17,14 +17,15 @@
                        [(ngModel)]="contractDate" placeholder="Date de départ"
                        name="contractDateInput"
                        bsDatepicker [bsConfig]="{ containerClass: 'theme-default' }"
-                       (bsValueChange)="calculRetractationDeadline($event)"/>
+                       (bsValueChange)="calculRetractationDeadline($event)"
+                       triggers="click keypress">
               </div>
             </div>
             <div class="col-sm-2 d-none d-sm-block text-center pt-4">
-              <img src="/assets/images/icon_arrow_right.png" alt="Icône flêche vers la droite"/>
+              <img src="/assets/images/icon_arrow_right.png" alt=""/>
             </div>
             <div class="col-12 d-sm-none text-center p-3">
-              <img src="/assets/images/icon_arrow_down.png" alt="Icône flêche descendante"/>
+              <img src="/assets/images/icon_arrow_down.png" alt=""/>
             </div>
             <div class="col-12 col-sm-5">
               <div class="form__group">
@@ -42,6 +43,7 @@
 
       <h2>Quelle est la date de départ à prendre en compte&#160;?</h2>
       <table cellpadding="5" class="text-center">
+        <caption class="sr-only">Date à prendre en compte en fonction du type de contrat</caption>
         <thead>
           <tr>
             <td>Type de contrat</td>
