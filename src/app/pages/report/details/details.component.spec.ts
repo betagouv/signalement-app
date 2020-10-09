@@ -90,7 +90,7 @@ describe('DetailsComponent', () => {
   describe('on init', () => {
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Problem)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -116,7 +116,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -182,7 +182,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -243,7 +243,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;

@@ -64,11 +64,11 @@ describe('ReportListProComponent', () => {
   const proUser = genUser(Roles.Pro);
 
   beforeEach(() => {
-    companyAccessesService = TestBed.get(CompanyAccessesService);
+    companyAccessesService = TestBed.inject(CompanyAccessesService);
     defineLocale('fr', frLocale);
-    reportService = TestBed.get(ReportService);
-    constantService = TestBed.get(ConstantService);
-    authenticationService = TestBed.get(AuthenticationService);
+    reportService = TestBed.inject(ReportService);
+    constantService = TestBed.inject(ConstantService);
+    authenticationService = TestBed.inject(AuthenticationService);
     authenticationService.user = of(proUser);
     fixture = TestBed.createComponent(ReportListProComponent);
     component = fixture.componentInstance;

@@ -63,19 +63,19 @@ describe('ReportDetailComponent', () => {
   describe('for a professional user', () => {
 
     beforeEach(() => {
-      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService = TestBed.inject(AuthenticationService);
       authenticationService.user = of(Object.assign(new User(), {role: 'Professionnel'}));
     });
 
     describe('when no answer has been sent and the report is not closed', () => {
 
       beforeEach(() => {
-        reportService = TestBed.get(ReportService);
+        reportService = TestBed.inject(ReportService);
         spyOn(reportService, 'getReport').and.returnValue(of(
           Object.assign(genReport(), {status: ReportStatus.ToReviewedByPro})
         ));
 
-        eventService = TestBed.get(EventService);
+        eventService = TestBed.inject(EventService);
         spyOn(eventService, 'getEvents').and.returnValue(of([]));
 
         fixture = TestBed.createComponent(ReportDetailComponent);
@@ -102,12 +102,12 @@ describe('ReportDetailComponent', () => {
     describe('when no answer has been sent and the report is closed', () => {
 
       beforeEach(() => {
-        reportService = TestBed.get(ReportService);
+        reportService = TestBed.inject(ReportService);
         spyOn(reportService, 'getReport').and.returnValue(of(
           Object.assign(genReport(), {status: ReportStatus.ClosedForPro})
         ));
 
-        eventService = TestBed.get(EventService);
+        eventService = TestBed.inject(EventService);
         spyOn(eventService, 'getEvents').and.returnValue(of([]));
 
         fixture = TestBed.createComponent(ReportDetailComponent);
@@ -126,10 +126,10 @@ describe('ReportDetailComponent', () => {
     describe('when an answer has already been sent', () => {
 
       beforeEach(() => {
-        reportService = TestBed.get(ReportService);
+        reportService = TestBed.inject(ReportService);
         spyOn(reportService, 'getReport').and.returnValue(of(genReport()));
 
-        eventService = TestBed.get(EventService);
+        eventService = TestBed.inject(EventService);
         spyOn(eventService, 'getEvents').and.returnValue(of([answerEventFixture]));
         spyOn(eventService, 'getCompanyEvents').and.returnValue(of([]));
 

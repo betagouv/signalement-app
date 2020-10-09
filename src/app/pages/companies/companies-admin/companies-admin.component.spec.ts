@@ -49,7 +49,7 @@ describe('CompaniesAdminComponent', () => {
   }));
 
   beforeEach(() => {
-    authenticationService = TestBed.get(AuthenticationService);
+    authenticationService = TestBed.inject(AuthenticationService);
     authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
     fixture = TestBed.createComponent(CompaniesAdminComponent);
     component = fixture.componentInstance;

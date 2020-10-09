@@ -24,6 +24,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
@@ -43,6 +44,7 @@ describe('ReportListComponent', () => {
         AppPermissionDirective,
       ],
       imports: [
+        BrowserAnimationsModule,
         PaginationModule.forRoot(),
         TooltipModule.forRoot(),
         BsDropdownModule.forRoot(),
@@ -62,13 +64,13 @@ describe('ReportListComponent', () => {
   }));
 
   beforeEach(() => {
-    companyAccessesService = TestBed.get(CompanyAccessesService);
+    companyAccessesService = TestBed.inject(CompanyAccessesService);
 
     const adminUser = genUser(Roles.Admin);
     defineLocale('fr', frLocale);
-    reportService = TestBed.get(ReportService);
-    constantService = TestBed.get(ConstantService);
-    authenticationService = TestBed.get(AuthenticationService);
+    reportService = TestBed.inject(ReportService);
+    constantService = TestBed.inject(ConstantService);
+    authenticationService = TestBed.inject(AuthenticationService);
     authenticationService.user = of(adminUser);
     fixture = TestBed.createComponent(ReportListComponent);
     component = fixture.componentInstance;

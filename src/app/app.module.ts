@@ -33,6 +33,7 @@ import { AppPermissionModule } from './directives/app-permission/app-permission.
 import { SubscriptionModule } from './pages/subscription/subscription.module';
 import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
+import * as echarts from 'echarts';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -69,7 +70,7 @@ class ErrorLogger extends ErrorHandler {
         NgtUniversalModule,
         TransferHttpCacheModule,
         HttpClientModule,
-        NgxEchartsModule,
+        NgxEchartsModule.forRoot({ echarts }),
         NgxLoadingModule.forRoot(NgxLoadingConfig),
         RouterModule.forRoot([
             { path: 'stats', component: StatsComponent },

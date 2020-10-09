@@ -62,10 +62,10 @@ describe('CategoryComponent', () => {
   }));
 
   beforeEach(() => {
-    location = TestBed.get(Location);
-    router = TestBed.get(Router);
-    anomalyService = TestBed.get(AnomalyService);
-    reportRouterService = TestBed.get(ReportRouterService);
+    location = TestBed.inject(Location);
+    router = TestBed.inject(Router);
+    anomalyService = TestBed.inject(AnomalyService);
+    reportRouterService = TestBed.inject(ReportRouterService);
     spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
 
     fixture = TestBed.createComponent(CategoryComponent);
