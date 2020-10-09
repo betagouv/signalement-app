@@ -40,7 +40,7 @@ list:
   - category: Téléphonie / Fournisseur d'accès internet / médias
     categoryId: TEL
     path: tel-internet-media
-    description: forfait internet, abonnement de streaming, téléphone...
+    description: forfait internet, abonnement de musique ou de vidéo en ligne, téléphone...
     rank: 7
     sprite: category-internet
     subcategories: !!import/single subcategories/telephonie-media.yml
@@ -73,7 +73,7 @@ list:
   - category: Internet (hors achats)
     categoryId: INTERNET
     path: internet
-    description: réseaux sociaux, fishing, escroquerie par email, contenu d'un site web inapproprié...
+    description: réseaux sociaux, phishing, escroquerie par email, contenu d'un site web inapproprié...
     rank: 18
     sprite: category-ecommerce
     subcategories: !!import/single subcategories/internet.yml
@@ -117,7 +117,7 @@ list:
   - category: Animaux
     categoryId: ANI
     path: animaux
-    description: vétérinaire, aliment pour animaux, site pour trouver un pet-sitter...
+    description: vétérinaire, aliment pour animaux, site internet de garde d'animaux...
     rank: 14
     sprite: category-pet
     subcategories: !!import/single subcategories/animaux.yml
