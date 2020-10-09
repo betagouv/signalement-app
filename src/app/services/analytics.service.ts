@@ -33,7 +33,8 @@ export enum EventCategories {
   companySearch = 'Identification de l\'établissement',
   authentication = 'Authentification',
   account = 'Compte utilisateur',
-  companyAccess = 'Accès de l\'entreprise'
+  companyAccess = 'Accès de l\'entreprise',
+  contractualDispute = 'Litige contractuel'
 }
 
 export enum ReportEventActions {
@@ -59,6 +60,15 @@ export enum CompanySearchEventActions {
   search = 'Recherche',
   select = 'Sélection dans la liste de résultats',
   searchBySiret = 'Recherche par SIRET'
+}
+
+export enum ContractualDisputeActions {
+  consult = 'Consultation',
+  downloadTemplate = 'Téléchargement lettre type'
+}
+
+export enum ContractualDisputeNames {
+  step = 'Démarche'
 }
 
 export enum CompanySearchEventNames {
