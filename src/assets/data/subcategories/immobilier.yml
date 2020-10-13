@@ -18,7 +18,7 @@
                 - Litige contractuel
             - title: Demande d'un document interdit pour le dossier de location
               example: 'Exemple : relevé bancaire, photocopie de la carte vitale'
-            - title: Autres
+            - title: Autre
               tags:
                 - Litige contractuel
         - title: Je cherche à acheter
@@ -65,7 +65,7 @@
               example: 'Exemple : clause abusive dans le contrat'
             - title: Honoraires
             - title: Assurance loyer impayé
-            - title: Autres
+            - title: Autre
         - title: Vente de mon bien
           subcategories:
             - title: Mise en vente sans mandat
@@ -102,7 +102,7 @@
   subcategories:
     - title: Facturation
       example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévus'
-      subcategoriesTitle: 'Le détail des frais est marqué dans le contrat de syndic. Avant de faire un signalement, veuiller vérifier ce contrat au chapitre 7. Si vous ne l''avez pas, demandez le à votre syndic. Ce document est obligatoire et gratuit.'
+      subcategoriesTitle: 'Le détail des frais est marqué dans le contrat de syndic. Avant de faire un signalement, veuillez vérifier ce contrat au chapitre 7. Si vous ne l''avez pas, demandez le à votre syndic. Ce document est obligatoire et gratuit.'
       subcategories:
         - title: J'ai pris connaissance de mon contrat de syndic.
           tags:
@@ -111,7 +111,7 @@
             - title: Les frais sont plus chers que dans le contrat
             - title: Les frais ne correspondent à aucune des prestations dites "prestations particulières".
             - title: Les frais sont normalement déjà inclus dans le socle général (forfait)
-            - title: Autres
+            - title: Autre
     - title: Contrat de syndic
       example: 'Exemple : clause abusive dans le contrat'
     - title: Documents à disposition des copropriétaires

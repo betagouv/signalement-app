@@ -130,7 +130,7 @@
         <h2 class="mb-0 mb-lg-4">Quel problème avez-vous rencontré&#160;?</h2>
 
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-4" *ngFor="let category of primaryCategoriesOrderByRank()">
+          <div class="col-12 col-md-6 col-lg-4" *ngFor="let category of getCategoriesOrderByRank()">
             <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
               <div class="row">
                 <div class="col-3 mb-2 pr-0 pl-1 pl-lg-2 text-center">
@@ -144,27 +144,6 @@
             </div>
           </div>
 
-          <div class="col-12 text-center" *ngIf="!showSecondaryCategories">
-            <button id="all-categories-link" (click)="toggleSecondaryCategories()" (keydown.enter)="toggleSecondaryCategories()" tabindex="0">
-              Voir toutes les catégories
-            </button>
-          </div>
-
-          <ng-container *ngIf="showSecondaryCategories">
-            <div class="col-12 col-md-6 col-lg-4" *ngFor="let category of secondaryCategoriesOrderByRank()">
-              <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
-                <div class="row">
-                  <div class="col-3 mb-2 pr-0 pl-1 pl-lg-2 text-center">
-                    <div class="sprite-category sprite-{{category.sprite}}"></div>
-                  </div>
-                  <div class="col-9">
-                    <div class="category-title">{{category.category}}</div>
-                    <span class="note">{{category.description}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-container>
         </div>
       </div>
 

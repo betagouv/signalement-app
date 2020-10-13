@@ -1,19 +1,39 @@
-- title: Frais bancaires
-  example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir'
+- title: Banque
+  example: 'Exemple : banque classique, banque en ligne'
   tags:
     - Litige contractuel
-- title: Contrat
-  example: 'Exemple : contrat de crédit'
-  tags:
-    - Litige contractuel
-- title: Publicité
-  example: 'Exemple : publicité pour un crédit non conforme'
-  tags:
-    - Litige contractuel
-- title: Service client
-  example: 'Exemple : service client injoignable'
-  tags:
-    - Litige contractuel
-- title: Autre
-  tags:
-    - Litige contractuel
+  companyKind: 'WEBSITE'
+  subcategories:
+    - title: Frais bancaires
+      example: 'Exemple : prix non affiché, augmentation des frais bancaires sans prévenir'
+    - title: Contrat
+      example: 'Exemple : contrat de crédit non conforme'
+    - title: Publicité
+      example: 'Exemple : publicité pour un crédit non conforme'
+    - title: Service client
+      example: 'Exemple : service client injoignable'
+    - title: Autre
+- title: Assurance / mutuelle
+  companyKind: 'WEBSITE'
+  subcategories:
+    - title: Contrat
+      example: 'Exemple : contrat non respecté, échéancier non reçu'
+    - title: Remboursement / dédommagement
+      example: 'Exemple : remboursement non reçu'
+    - title: Publicité
+      example: 'Exemple : publicité trompeuse'
+      tags:
+        - Litige contractuel
+    - title: Service client
+      example: 'Exemple : service client injoignable'
+      tags:
+        - Litige contractuel
+    - title: Autre
+      tags:
+        - Litige contractuel
+- title: Assurance maladie (sécurité sociale)
+  companyKind: 'WEBSITE'
+  information:
+    title: Vous ne pouvez pas utiliser SignalConso pour signaler un problème avec l'assurance maladie.
+    content: "Si vous souhaitez faire une réclamation, vous devez contacter directement votre caisse d'assurance maladie. Il existe également un médiateur. Renseignez-vous auprès de votre caisse ou sur le site <a href='https://www.ameli.fr' target='_blank' />www.ameli.fr</a>"
+
