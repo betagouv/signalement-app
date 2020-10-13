@@ -17,7 +17,7 @@ export class EmailValidationComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) { }
 
-  loading = false;
+  loading = true;
   hasError = false;
   token: String;
 
