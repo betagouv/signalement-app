@@ -13,7 +13,7 @@
     - title: Service client
       example: 'Exemple : service client injoignable'
     - title: Autre
-- title: Assurance / Mutuelle
+- title: Assurance / mutuelle
   companyKind: 'WEBSITE'
   subcategories:
     - title: Contrat

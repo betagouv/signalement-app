@@ -274,7 +274,7 @@
                     - Publicité sur internet
                     - Spot radio (à préciser)
                     - Spot télé (à préciser)
-                    - Autres (à préciser)
+                    - Autre (à préciser)
                 - label: Quel est le produit que vous vouliez&#160;?
                   rank: 3
                   type: TEXT
@@ -520,7 +520,7 @@
                     outOfScope: true
                 - title: Autres
             - title: Le commerçant refuse que je paie par carte bancaire ou chèque
-              subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque/carte bancaire&#160;?
+              subcategoriesTitle: Pour quelle raison le commerçant a-t-il refusé votre chèque / carte bancaire&#160;?
               subcategories:
                 - title: Il exige un minimum d'achat
                   subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?

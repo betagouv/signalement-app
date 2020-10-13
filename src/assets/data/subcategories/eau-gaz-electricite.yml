@@ -45,7 +45,7 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-        - title: Autres
+        - title: Autre
           tags:
             - Litige contractuel
     - title: Coupure de l'eau pour impayé
@@ -84,7 +84,7 @@
           type: RADIO
           options:
             - malfaçons sur la pose de la fosse septique
-            - le bureau d'étude impose une marque/modèle en particulier
+            - le bureau d'étude impose une marque / modèle en particulier
             - autre (à préciser)
         - label: Décrivez nous plus en détails ce qui s'est passé
           rank: 3
@@ -247,8 +247,8 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-        - title: Autres
+        - title: Autre
     - title: Facturation
-- title: Autres (Fioul / GPL / granulés de bois...)
+- title: Autre (Fioul / GPL / granulés de bois...)
   tags:
     - Litige contractuel

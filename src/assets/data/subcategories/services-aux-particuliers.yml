@@ -157,7 +157,7 @@
             information: !!import/single ../common/info/amabilite.yml
           - title: Le personnel ne dispose pas des diplômes requis
           - title: Autre
-  - title: Autres types d'entreprises de service
+  - title: Autre type d'entreprise de service
     example: 'Exemple : déménageur, agence de rencontre, organisme de formation. Pour la livraison de repas à domicile, choisir la catégorie Café / Restaurant'
     subcategories:
       - title: Déménageur

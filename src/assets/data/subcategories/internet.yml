@@ -2,7 +2,7 @@
   example: 'Exemple : colis non reçu'
   information:
     title: Revenez en arrière et utilisez plutôt la catégorie spécifique à votre commande :)
-    content: Un billet d'avion ? Utilisez la catégorie "voyage /loisirs" <br> Un livre commandé en ligne mais non reçu ? Utilisez la catégorie "achat/magasin"
+    content: Un billet d'avion ? Utilisez la catégorie "Voyage / Loisirs" <br> Un livre commandé en ligne mais non reçu ? Utilisez la catégorie "Achat / Magasin"
 - title: Un problème avec un store (vente d'applications mobiles)
   companyKind: SIRET
 - title: Un problème de harcèlement ou de chantage en ligne

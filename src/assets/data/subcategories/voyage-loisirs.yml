@@ -12,7 +12,7 @@
           subcategories:
             - title: Trajet trop court ou pas assez rentable
             - title: Présence de mon chien
-            - title: Mes bagages/objets ne rentrent pas dans le coffre
+            - title: Mes bagages / objets ne rentrent pas dans le coffre
             - title: Etat d'ébriété ou de violence
             - title: Borne taxi à proximité
             - title: Autre
@@ -101,7 +101,7 @@
                   rank: 4
                   type: TEXT
               filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
-            - title: Le taxi a fait un tarif de nuit/week-end alors que ce n'était pas le cas
+            - title: Le taxi a fait un tarif de nuit / week-end alors que ce n'était pas le cas
               detailInputs:
                 - label: Date de la course
                   rank: 1
@@ -283,7 +283,7 @@
               type: TEXTAREA
               placeholder: Quel était le prix initial ? Quel est le prix final ?
           fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
-        - title: Autres
+        - title: Autre
           tags:
             - Litige contractuel
     - title: Informations concernant le logement / Publicité
@@ -321,12 +321,12 @@
               type: TIMESLOT
               optionnal: true
     - title: Qualité de la chambre / de l'hébergement
-      example: 'Exemple : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna.'
+      example: 'Exemple : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna'
       tags:
         - Litige contractuel
       subcategories:
         - title: L'hébergement ne correspond pas à ce qui m'a été vendu
-          example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'est demandé"
+          example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'a été demandé"
         - title: Problème d'hygiène ou de propreté
           example: 'Exemple : chambre sale, sauna sale, puces de lit'
           information:
@@ -523,7 +523,7 @@
       subcategories:
         - title: Annulation
         - title: Bagage
-        - title: Autres
+        - title: Autre
     - title: Abonnement de transport
       example: "Exemple : TGV max, pass Navigo"
       tags:
@@ -710,5 +710,5 @@
   subcategories:
     - title: Abonnement
       example: "Exemple : abonnement magazine"
-    - title: Coffrets cadeaux et box
+    - title: Coffret cadeau / box
     - title: Autre

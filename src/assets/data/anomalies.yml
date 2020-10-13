@@ -10,7 +10,7 @@ list:
   - category: Café / Restaurant
     categoryId: CR
     path: cafe-restaurant
-    description: bar, cafeteria, food truck, application pour se faire livrer un repas...
+    description: bar, cafétéria, food truck, application pour se faire livrer un repas...
     rank: 4
     sprite: category-restaurant
     subcategories: !!import/single subcategories/cafe-restaurant.yml
