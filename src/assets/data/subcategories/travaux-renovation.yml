@@ -166,7 +166,7 @@
                 <br />Vous n’avez pas à vous justifier auprès du commerçant.
                 <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
             - title: Au lieu habituel d'activité du professionnel
-              information: 
+              information:
                 title: Vous ne pouvez plus vous retracter
                 content: Il n'y a pas de délai de retractation pour votre cas.
                 outOfScope: true
@@ -174,7 +174,7 @@
               subcategoriesTitle: Avez-vous un crédit affecté ?
               subcategories:
                 - title: Non
-                  information: 
+                  information:
                     title: Vous ne pouvez plus vous retracter
                     content: Il n'y a pas de délai de retractation pour votre cas.
                     outOfScope: true
@@ -215,8 +215,8 @@
               consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Autres
       consumerActions: !!import/single ../common/actions/defaut.yml
- - title: Dépannage
-   subcategoriesTitle: De quel type de travaux s'agit-il ?
-   subcategories:
+- title: Dépannage
+  subcategoriesTitle: De quel type de travaux s'agit-il ?
+  subcategories:
     - title : travaux de rénovation énergétique
     - title: travaux de peinture
