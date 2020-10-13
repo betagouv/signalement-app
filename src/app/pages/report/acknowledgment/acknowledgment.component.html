@@ -2,47 +2,10 @@
   <section class="section section-lighter-grey" *ngIf="draftReport">
     <div class="container max-width">
       <div class="notification success mb-5">
-        <i class="material-icons md-18 attach-icon">check_circle</i> Votre signalement a été envoyé.
+        <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> Votre signalement a été envoyé.
       </div>
 
-      <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3 p-0">
-                <img src="/assets/images/illustrations/consumer.png" alt="" />
-              </div>
-              <div class="col-9 d-sm-none">
-                <h2>Comment me faire rembourser ou dédommager ?</h2>
-              </div>
-              <div class="col-12 col-sm-9">
-                <h2 class="d-none d-sm-block">Comment me faire rembourser ou dédommager ?</h2>
-                <div class="collapse-container" *ngFor="let consumerActionGroup of draftReport.lastSubcategory.consumerActions; let index = index">
-                  <a class="btn-group collapsed" role="group" data-toggle="collapse" href="#collapse{{index}}">
-                    <button type="button" class="btn">{{index + 1}}</button>
-                    <button type="button" class="btn link">
-                      {{consumerActionGroup.title}}
-                    </button>
-                    <button type="button" class="btn">
-                      <i class="material-icons md-24 down">keyboard_arrow_down</i>
-                      <i class="material-icons md-24 up">keyboard_arrow_up</i>
-                    </button>
-                  </a>
-                  <div class="collapse" id="collapse{{index}}">
-                    <table class="table table-bordered no-hover collapse-content" cellpadding="2">
-                      <tr *ngFor="let consumerAction of consumerActionGroup.actions">
-                        <td [innerHTML]="consumerAction.question"></td>
-                        <td [innerHTML]="consumerAction.answer"></td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      <div class="card">
+      <div class="card" *ngIf="!draftReport.isContractualDispute; else contractualDispute">
         <div class="card-body">
           <div class="row">
             <div class="col-3 p-0">
@@ -101,38 +64,26 @@
           </div>
         </div>
       </div>
-      <ng-container *ngIf="draftReport.lastSubcategory?.consumerActions">
+
+      <ng-template #contractualDispute>
         <div class="card">
           <div class="card-body">
-            <div class="row">
-              <div class="col-3 p-0">
-                <img src="/assets/images/illustrations/contact.png" alt="" />
-              </div>
-              <div class="col-9 d-sm-none">
-                <h2>Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
-              </div>
-              <div class="col-12 col-sm-9">
-                <h2 class="d-none d-sm-block">Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.</h2>
-                <p>
-                  Une association de consommateur pourra vous aider à écrire les courriers de réclamation ou de mise en demeure,
-                  contacter l'entreprise directement, vous aider à saisir la justice.
-                </p>
-                <p>
-                  Pour bénéficier de leur aide, vous devez payer une somme, appelée "adhésion".
-                  Pour connaître le prix de cette adhésion, vous pouvez les contacter directement.
-                  En fonction de votre situation, certaines associations peuvent baisser le prix de l'adhésion.
-                </p>
-                <p>
-                  Liste des associations de consommateurs officielles :
-                  <a href="https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales" target="_blank">
-                    https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales
-                  </a>
-                </p>
-              </div>
-            </div>
+            <h2 class="mb-4">Que va-t-il se passer maintenant ? </h2>
+            <p>
+              <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i> La répression des fraudes ne gère pas directement les problèmes individuels (litiges) entre un consommateur et une entreprise.
+            </p>
+            <p>
+              <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> L’entreprise a deux mois pour prendre connaissance du signalement.
+            </p>
+            <p>
+              <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> La répression des fraudes pourra ouvrir une enquête auprès de l'établissement si de nombreux consommateurs sont concernés ou si la pratique est particulièrement grave.
+            </p>
+            <p>
+              <i class="material-icons md-18 attach-icon" aria-hidden="true">mail_outline</i> Vous allez recevoir un mail avec les démarches que SignalConso vous invite à commencer en parallèle.
+            </p>
           </div>
         </div>
-      </ng-container>
+      </ng-template>
     </div>
 
     <div class="text-center">

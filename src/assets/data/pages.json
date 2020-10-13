@@ -137,6 +137,10 @@
       "description": "Suivi des entreprises signalées sur SignalConso"
     }
   },
+  "contractualDispute": {
+    "title": "Résolution d'un problème individuel (litige) - SignalConso",
+    "description": "Démarches conseillées par SignalConso pour résoudre un problème individuel (litige) avec une entreprise "
+  },
   "secured": {
     "dgccrf": {
       "title": "Mode d'emploi DGCCRF - SignalConso",

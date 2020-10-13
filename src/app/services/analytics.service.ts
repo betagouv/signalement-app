@@ -33,7 +33,8 @@ export enum EventCategories {
   companySearch = 'Identification de l\'établissement',
   authentication = 'Authentification',
   account = 'Compte utilisateur',
-  companyAccess = 'Accès de l\'entreprise'
+  companyAccess = 'Accès de l\'entreprise',
+  contractualDispute = 'Litige contractuel'
 }
 
 export enum ReportEventActions {
@@ -47,7 +48,9 @@ export enum ReportEventActions {
   validateDetails = 'Validation de la description',
   validateCompany = 'Validation de l\'établissement',
   validateConsumer = 'Validation du consommateur',
-  validateConfirmation = 'Envoi d\'un signalement',
+  validateConfirmation = 'Validation de l\'envoi d\'un signalement',
+  reportSendSuccess = 'Envoi d\'un signalement',
+  reportSendFail = 'Echec de l\'envoi d\'un signalement',
   keywordsDetection = 'Mots-clés détectés',
   informationFromKeywordsDetection = 'Consultation du détail d\'un message d\'information suite à la détection de mots-clés',
   contactualReport = 'Litige contractuel'
@@ -57,6 +60,15 @@ export enum CompanySearchEventActions {
   search = 'Recherche',
   select = 'Sélection dans la liste de résultats',
   searchBySiret = 'Recherche par SIRET'
+}
+
+export enum ContractualDisputeActions {
+  consult = 'Consultation',
+  downloadTemplate = 'Téléchargement lettre type'
+}
+
+export enum ContractualDisputeNames {
+  step = 'Démarche'
 }
 
 export enum CompanySearchEventNames {

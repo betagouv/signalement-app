@@ -100,19 +100,8 @@ describe('DetailsComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should request the user if he is an employee of the company or not', () => {
+    it('should display the details form', () => {
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h2').textContent).toEqual(`Travaillez-vous dans l'entreprise que vous souhaitez signaler ?`);
-      expect(nativeElement.querySelectorAll('button')[0].textContent.trim()).toEqual('Oui');
-      expect(nativeElement.querySelectorAll('button')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
-      expect(nativeElement.querySelector('form')).toBeNull();
-    });
-
-    it('should hide the question and display the details form when the user answers', () => {
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelectorAll('button')[0].click();
-
-      fixture.detectChanges();
       expect(nativeElement.querySelector('h2')).toBeNull();
       expect(nativeElement.querySelector('form')).not.toBeNull();
     });

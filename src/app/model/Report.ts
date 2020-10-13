@@ -1,5 +1,5 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, Subcategory, Tag } from './Anomaly';
+import { CompanyKinds, ContractualDisputeTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
@@ -70,6 +70,14 @@ export class DraftReport {
     if (this.subcategories && this.subcategories.length) {
       return this.subcategories[this.subcategories.length - 1];
     }
+  }
+
+  get tags() {
+    return !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
+  }
+
+  get isContractualDispute() {
+    return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
 }
 
