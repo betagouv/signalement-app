@@ -68,8 +68,8 @@
     "zone.js": "~0.11.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.901.12",
-    "@angular/language-service": "^9.1.12",
+    "@angular-devkit/build-angular": "~0.803.29",
+    "@angular/language-service": "^8.2.6",
     "@types/echarts": "^4.8.0",
     "@types/jasmine": "~3.5.14",
     "@types/jasminewd2": "~2.0.8",
