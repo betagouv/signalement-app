@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryComponent, IllustrationCardComponent } from './category.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { Anomaly } from '../../../model/Anomaly';
 import { Location } from '@angular/common';
@@ -11,6 +10,8 @@ import { Router } from '@angular/router';
 import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
 import { AlertModule } from 'ngx-bootstrap';
 import { HeaderModule } from '../../header/header.module';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('CategoryComponent', () => {
 
@@ -35,10 +36,7 @@ describe('CategoryComponent', () => {
       content: 'contenu'
     }
   });
-  const secondaryAnomaly = Object.assign(new Anomaly(), {
-    rank: 100
-  });
-  const anomaliesFixture = [primaryAnomaly1, primaryAnomalyWithInformation, secondaryAnomaly];
+  const anomaliesFixture = [primaryAnomaly1, primaryAnomalyWithInformation];
 
 
   beforeEach(async(() => {
@@ -51,11 +49,11 @@ describe('CategoryComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         AlertModule.forRoot(),
-        Angulartics2RouterlessModule.forRoot(),
         HeaderModule
       ],
       providers: [
         AnomalyService,
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
     }).compileComponents();
   }));

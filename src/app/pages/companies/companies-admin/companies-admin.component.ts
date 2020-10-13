@@ -46,7 +46,6 @@ export class CompaniesAdminComponent implements OnInit {
   lines: NbReportsGroupByCompany[];
   companiesToActivate: CompanyToActivate[];
   allCompaniesToActivate: CompanyToActivate[];
-  companiesToActivateFilter: {tokenCreation?: Date, lastNotice?: Date} = {};
 
   showErrors: boolean;
   loading: boolean;
@@ -206,15 +205,6 @@ export class CompaniesAdminComponent implements OnInit {
         this.loadingError = true;
       }
     );
-  }
-
-  filterCompaniesToActivate(tokenCreation: Date, lastNotice: Date) {
-    if (this.allCompaniesToActivate) {
-      this.companiesToActivate = this.allCompaniesToActivate.filter(companyToActivate => {
-        return (!tokenCreation || moment(companyToActivate.tokenCreation).isSame(moment(tokenCreation), 'day')) &&
-          (!lastNotice || moment(companyToActivate.lastNotice).isSame(moment(lastNotice), 'day'));
-      });
-    }
   }
 
   downloadActivationDocuments() {

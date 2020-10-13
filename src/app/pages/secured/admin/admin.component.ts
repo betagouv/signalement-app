@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit {
   pendingDGCCRF = null;
   showSuccess = false;
   showErrors = false;
+  emailRejectedError = null;
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.admin.title);
@@ -65,6 +66,7 @@ export class AdminComponent implements OnInit {
   }
 
   submitForm() {
+    this.emailRejectedError = null;
     this.showSuccess = false;
     this.loading = true;
     if (this.invitationForm.valid) {
@@ -78,6 +80,9 @@ export class AdminComponent implements OnInit {
             this.pendingDGCCRF = null;
             this.usersDGCCRF = null;
             this.emailCtrl.reset();
+          }, (err) => {
+            this.loading = false;
+            this.emailRejectedError = err.error;
           });
     } else {
       this.showErrors = true;

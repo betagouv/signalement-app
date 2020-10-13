@@ -26,6 +26,11 @@
   </url>
 
   <url>
+    <loc>https://signal.conso.gouv.fr/comment-ça-marche</loc>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
     <loc>https://signal.conso.gouv.fr/qui-sommes-nous</loc>
     <priority>0.5</priority>
   </url>
@@ -46,7 +51,12 @@
   </url>
 
   <url>
-    <loc>https://signal.conso.gouv.fr/telephonie-eau-gaz-electricite</loc>
+    <loc>https://signal.conso.gouv.fr/eau-gaz-electricite</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/tel-internet-media</loc>
     <priority>0.4</priority>
   </url>
 
@@ -93,6 +103,11 @@
   <url>
     <loc>https://signal.conso.gouv.fr/demarches-administratives</loc>
     <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://signal.conso.gouv.fr/litige</loc>
+    <priority>0.3</priority>
   </url>
 
   <url>

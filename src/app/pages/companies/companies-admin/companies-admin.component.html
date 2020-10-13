@@ -125,26 +125,8 @@
                   </th>
                   <th>Entreprise</th>
                   <th class="th-address">Adresse</th>
-                  <th class="th-date text-center">
-                    <input type="text"
-                           id="creationDateInput"
-                           placeholder="Date de création"
-                           [(ngModel)]="companiesToActivateFilter.tokenCreation"
-                           (bsValueChange)="filterCompaniesToActivate($event, companiesToActivateFilter.lastNotice)"
-                           bsDatepicker
-                           autocomplete="off"
-                           [bsConfig]="{ containerClass: 'theme-default' }">
-                  </th>
-                  <th class="th-date text-center">
-                    <input type="text"
-                           id="noticeDateInput"
-                           placeholder="Date du courrier"
-                           [(ngModel)]="companiesToActivateFilter.lastNotice"
-                           (bsValueChange)="filterCompaniesToActivate(companiesToActivateFilter.tokenCreation, $event)"
-                           bsDatepicker
-                           autocomplete="off"
-                           [bsConfig]="{ containerClass: 'theme-default' }">
-                  </th>
+                  <th class="th-date text-center">Date de création</th>
+                  <th class="th-date text-center">Relance</th>
                   <ng-template #confirmLettersSendingTpl>
                     <div class="modal-body text-center">
                       <p>Confirmez-vous l'envoi des courriers pour les entreprises sélectionnés ?</p>
@@ -178,7 +160,7 @@
                     <small *ngFor="let line of toActivate.company.address.split(' - ')">{{line}}<br /></small>
                   </td>
                   <td class="text-center">{{toActivate.tokenCreation | date : 'dd/MM/yyyy'}}</td>
-                  <td class="text-center">{{toActivate.lastNotice | date : 'dd/MM/yyyy'}}</td>
+                  <td class="text-center">{{(toActivate.lastNotice === null) ? "" : "✓"}}</td>
                 </tr>
                 </tbody>
               </table>

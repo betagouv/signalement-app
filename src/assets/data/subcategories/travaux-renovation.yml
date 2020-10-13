@@ -1,5 +1,7 @@
 - title: Dépannage
   example: 'Vous faites appel à un professionnel dans l''urgence à votre domicile (par exemple : vous avez perdu votre clef d''appartement et vous contactez un serrurier pour qu''il vienne vous l''ouvrir, vous appelez un plombier suite à l''explosion de votre canalisation)'
+  tags:
+    - Litige contractuel
   subcategories:
     - title: Prix
       subcategories:
@@ -10,14 +12,11 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Prix final non conforme au prix annoncé
-          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Publicité et pratique du professionnel
       example: "Exemple : information trompeuse ou mensongère, absence d'information, contrainte"
       subcategories:
         - title: Absence d'information ou information incomplète
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -46,7 +45,6 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Contrainte du professionnel
           detailInputs:
             - label: Précisez les informations sur le contexte
@@ -61,23 +59,20 @@
               rank: 3
               type: TIMESLOT
               optionnal: true
-          consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: Autres
-          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Autre
     - title: Prestation
       subcategories:
         - title: Malfaçon
           example: Constat d'un défaut résultant d'une mauvaise exécution des travaux
           description: Le constat résulte d'une mauvaise exécution des travaux, vous pouvez faire jouer votre garantie !
-          consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: Autres
-          consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: Autres
-      consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Autre
+    - title: Autre
 - title: Travaux / rénovation
   subcategories:
     - title: Prix
       example: "Exemple : prix non affiché, devis non respecté"
+      tags:
+        - Litige contractuel
       subcategories:
         - title: Prix exagéré / élevé
           information:
@@ -86,14 +81,13 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix final non conforme au prix annoncé
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Prix non affiché
-          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: Publicité et pratique du professionnel
       example: "Exemple : information trompeuse ou mensongère"
+      tags:
+        - Litige contractuel
       subcategories:
         - title: Absence d'information ou information incomplète
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -122,7 +116,6 @@
               rank: 5
               type: TIMESLOT
               optionnal: true
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Contrainte du professionnel
           detailInputs:
             - label: Précisez les informations sur le contexte
@@ -137,9 +130,7 @@
               rank: 3
               type: TIMESLOT
               optionnal: true
-          consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: Autres
-          consumerActions: !!import/single ../common/actions/defaut.yml
+        - title: Autre
     - title: Prestation
       example: "Exemple : malfaçons sur le chantier, travaux commencés mais jamais terminés"
       subcategories:
@@ -147,7 +138,8 @@
           example: Constat d'un défaut résultant d'une mauvaise exécution des travaux
           description: Le constat résulte d'une mauvaise exécution des travaux, vous pouvez faire jouer votre garantie !
         - title: Les travaux ne sont toujours pas terminés
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          tags:
+            - Litige contractuel
     - title: Contrat
       example: "Exemple : contrat non respecté, délai de rétractation, clause abusive"
       subcategories:
@@ -183,13 +175,18 @@
                     <br />Vous n’avez pas à vous justifier auprès du commerçant.
                     <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
         - title: Contrat non respecté
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          tags:
+            - Litige contractuel
         - title: Clause abusive
           example: Vous souhaitez dénoncer une clause qui vous est particulièrement défavorable
-          consumerActions: !!import/single ../common/actions/defaut.yml
-        - title: Autres
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          tags:
+            - Litige contractuel
+        - title: Autre
+          tags:
+            - Litige contractuel
     - title: Crédits / garanties
+      tags:
+        - Litige contractuel
       subcategories:
         - title: Crédit financé pour vos travaux
           example: Crédit affecté au contrat de travaux / rénovation
@@ -197,24 +194,18 @@
             - title: Absence d'informations
               subcategories:
                 - title: Avant la souscription
-                  consumerActions: !!import/single ../common/actions/defaut.yml
                 - title: Vous ne saviez pas que vous vous engagiez
-                  consumerActions: !!import/single ../common/actions/defaut.yml
-            - title: Autres
-              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Autre
         - title: Garanties
           description: Vous trouverez des informations sur la garantie qui s'applique dans votre cas sur <a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales" target="_blank">https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales</a>
           subcategories:
             - title: Garantie de parfait achèvement
-              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Garantie biennale
-              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Garantie décennale
-              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Responsabilité contractuelle de droit commun
-              consumerActions: !!import/single ../common/actions/defaut.yml
-    - title: Autres
-      consumerActions: !!import/single ../common/actions/defaut.yml
+    - title: Autre
+      tags:
+        - Litige contractuel
 - title: Dépannage
   subcategoriesTitle: De quel type de travaux s'agit-il ?
   subcategories:

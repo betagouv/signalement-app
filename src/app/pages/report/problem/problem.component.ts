@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Anomaly, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
@@ -9,6 +9,11 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
+
+enum ProblemSteps {
+  Subcategories, EmployeeConsumer, ContractualDispute, Next
+}
 
 @Component({
   selector: 'app-problem',
@@ -20,10 +25,11 @@ export class ProblemComponent implements OnInit {
   step: Step;
   draftReport: DraftReport;
   anomaly: Anomaly;
+  problemStep = ProblemSteps.Subcategories;
+  problemSteps = ProblemSteps;
 
-  showErrors: boolean;
-
-  constructor(public formBuilder: FormBuilder,
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              public formBuilder: FormBuilder,
               private anomalyService: AnomalyService,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
@@ -79,11 +85,43 @@ export class ProblemComponent implements OnInit {
     this.analyticsService.trackEvent(
       EventCategories.report,
       ReportEventActions.contactualReport,
-      subcategories[subcategories.length - 1].consumerActions ? 'Oui' : 'Non'
+      this.draftReport.isContractualDispute ? 'Oui' : 'Non'
     );
     this.draftReport.subcategories = subcategories;
-    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
-    this.reportRouterService.routeForward(this.step);
+    this.continue();
+  }
+
+  continue(value?) {
+    switch (this.problemStep) {
+      case ProblemSteps.Subcategories: {
+        this.problemStep = ProblemSteps.EmployeeConsumer;
+        this.scollTop();
+        break;
+      }
+      case ProblemSteps.EmployeeConsumer: {
+        this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
+        this.draftReport.employeeConsumer = value;
+        if (this.draftReport.isContractualDispute) {
+          this.problemStep = ProblemSteps.ContractualDispute;
+          this.scollTop();
+        } else {
+          this.problemStep = ProblemSteps.Next;
+          this.continue();
+        }
+        break;
+      }
+      default: {
+        this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
+        this.reportRouterService.routeForward(this.step);
+        break;
+      }
+    }
+  }
+
+  scollTop() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0, 0);
+    }
   }
 }
 

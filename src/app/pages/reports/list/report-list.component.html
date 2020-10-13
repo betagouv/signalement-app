@@ -58,7 +58,8 @@
                      [bsConfig]="{
                          containerClass: 'theme-default',
                          rangeInputFormat: 'DD MMMM YYYY'
-                       }" />
+                       }"
+                     triggers="click keypress"/>
             </div>
             <div class="form-group">
               <label for="statusFilter">
@@ -83,7 +84,7 @@
               <label for="hasCompanyFilter">
                 Entreprise identifiée ?
               </label>
-              <select [(ngModel)]="reportFilter.hasCompany" id="hasCompanyFilter" name="hasCompany" class="form-control" [ngClass]="reportFilter.hasCompany ? 'selected' : ''">
+              <select [(ngModel)]="reportFilter.hasCompanyStr" id="hasCompanyFilter" name="hasCompany" class="form-control" [ngClass]="reportFilter.hasCompany ? 'selected' : ''">
                 <option [ngValue]="undefined" selected>Indifférent</option>
                 <option value="true">Oui</option>
                 <option value="false">Non</option>

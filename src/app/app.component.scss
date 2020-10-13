@@ -87,6 +87,8 @@ a:focus {
     color: $primary;
     cursor: pointer;
     text-decoration: none;
+    background: none;
+    border: none;
 
     &:hover {
       color: $secondary;

@@ -65,6 +65,8 @@
             title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
     - title: Informations trompeuses ou fausses
       example: 'Exemple : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas '
+      tags:
+        - Litige contractuel
       detailInputs:
         - label: Quel est le type de produit&#160;?
           rank: 1
@@ -86,7 +88,6 @@
         - label: Description
           rank: 4
           type: TEXTAREA
-      consumerActions: !!import/single ../common/actions/magasin.yml
 - title: Produit dangereux
   example: 'Exemple : jouet qui prend feu, allergie, intoxication'
   information:

@@ -7,9 +7,8 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
 import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
-import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
 
 describe('AcknoledgmentComponent', () => {
 
@@ -23,18 +22,10 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test3_Sentence1 ],
-              scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test3_Sentence1]: 0 }
-            }
-          ]
-        ),
-        Angulartics2RouterlessModule.forRoot(),
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
     .compileComponents();
   }));

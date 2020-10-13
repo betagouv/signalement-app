@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
+import { Meta, Title } from '@angular/platform-browser';
+import pages from '../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
-export class BreadcrumbComponent {
+export class BreadcrumbComponent implements OnInit {
 
   @Input() draftReport: DraftReport;
   @Input() step: Step;
@@ -16,7 +18,16 @@ export class BreadcrumbComponent {
   steps = Step;
 
   constructor(private reportRouterService: ReportRouterService,
-              private anomalyService: AnomalyService) { }
+              private anomalyService: AnomalyService,
+              private titleService: Title,
+              private meta: Meta) { }
+
+  ngOnInit() {
+    if (pages.report[this.step.toLowerCase()]) {
+      this.titleService.setTitle(`Étape ${this.getStepNumber(this.step)} : ${pages.report[this.step.toLowerCase()].title}`);
+      this.meta.updateTag({ name: 'description', content: pages.report[this.step.toLowerCase()].title });
+    }
+  }
 
   getAnomaly() {
     if (this.draftReport) {
