@@ -59,14 +59,14 @@
               rank: 3
               type: TIMESLOT
               optionnal: true
-        - title: Autres
+        - title: Autre
     - title: Prestation
       subcategories:
         - title: Malfaçon
           example: Constat d'un défaut résultant d'une mauvaise exécution des travaux
           description: Le constat résulte d'une mauvaise exécution des travaux, vous pouvez faire jouer votre garantie !
-        - title: Autres
-    - title: Autres
+        - title: Autre
+    - title: Autre
 - title: Travaux / rénovation
   subcategories:
     - title: Prix
@@ -130,7 +130,7 @@
               rank: 3
               type: TIMESLOT
               optionnal: true
-        - title: Autres
+        - title: Autre
     - title: Prestation
       example: "Exemple : malfaçons sur le chantier, travaux commencés mais jamais terminés"
       subcategories:
@@ -181,7 +181,7 @@
           example: Vous souhaitez dénoncer une clause qui vous est particulièrement défavorable
           tags:
             - Litige contractuel
-        - title: Autres
+        - title: Autre
           tags:
             - Litige contractuel
     - title: Crédits / garanties
@@ -195,7 +195,7 @@
               subcategories:
                 - title: Avant la souscription
                 - title: Vous ne saviez pas que vous vous engagiez
-            - title: Autres
+            - title: Autre
         - title: Garanties
           description: Vous trouverez des informations sur la garantie qui s'applique dans votre cas sur <a href="https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales" target="_blank">https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/Les-garanties-legales</a>
           subcategories:
@@ -203,6 +203,6 @@
             - title: Garantie biennale
             - title: Garantie décennale
             - title: Responsabilité contractuelle de droit commun
-    - title: Autres
+    - title: Autre
       tags:
         - Litige contractuel

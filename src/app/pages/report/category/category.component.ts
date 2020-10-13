@@ -25,7 +25,6 @@ export class CategoryComponent implements OnInit {
   draftReport: DraftReport;
 
   anomalies: Anomaly[];
-  showSecondaryCategories: boolean;
 
   internetInformation: Information;
 
@@ -49,7 +48,6 @@ export class CategoryComponent implements OnInit {
     this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(draftReport => this.draftReport = draftReport);
-    this.showSecondaryCategories = false;
     this.anomalies = this.anomalyService.getAnomalies();
     const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
     if (anomaly) {
@@ -57,29 +55,12 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  primaryCategoriesOrderByRank() {
+  getCategoriesOrderByRank() {
     if (this.anomalies) {
       return this.anomalies
-        .filter(a => a.rank < 100)
-        .sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
-    }
-  }
-
-  secondaryCategoriesOrderByRank() {
-    if (this.anomalies) {
-      return this.anomalies
-        .filter(a => a.rank >= 100)
         .filter(a => !a.hidden)
         .sort((a1, a2) => a1.rank > a2.rank ? 1 : a1.rank === a2.rank ? 0 : -1);
     }
-  }
-
-  toggleSecondaryCategories() {
-    this.showSecondaryCategories = !this.showSecondaryCategories;
-    if (this.showSecondaryCategories) {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.secondaryCategories);
-    }
-
   }
 
   selectAnomaly(anomaly: Anomaly) {

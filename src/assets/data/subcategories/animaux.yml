@@ -6,8 +6,8 @@
   example: 'Exemple : vétérinaire, toiletteur'
   tags:
     - Litige contractuel
-- title: Garde
-  example: 'Exemple : pension, site de petsitter'
+- title: Garde d'animaux
+  example: 'Exemple : pension, site internet de garde d''animaux'
   tags:
     - Litige contractuel
 - title: Vendeur d'animaux
