@@ -3,6 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import HttpStatusCodes from 'http-status-codes';
 import pages from '../../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.loading = true;
       this.authenticationService.login(this.loginCtrl.value, this.passwordCtrl.value).subscribe(
-        user => {
+        (user: User) => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.success, user.id);
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.role, user.role );
@@ -68,8 +69,11 @@ export class LoginComponent implements OnInit {
         error => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.authentication, AuthenticationEventActions.fail);
-          this.authenticationError = (error.status === HttpStatusCodes.FORBIDDEN) ?
-            "Compte bloqué (trop de tentatives, veuillez réessayer dans 30 minutes)" : "Échec de l'authentification.";
+          const errorMapping = new Map([
+            [HttpStatusCodes.FORBIDDEN, "Compte bloqué (trop de tentatives, veuillez réessayer dans 30 minutes)"],
+            [HttpStatusCodes.LOCKED, "Votre adresse email doit être validée, un e-mail vient de vous être envoyé avec un lien à cet effet."]
+          ]);
+          this.authenticationError = errorMapping.get(error.status) || "Échec de l'authentification.";
         }
       );
     }

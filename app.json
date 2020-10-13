@@ -4,7 +4,7 @@
   },
   "env": {
     "API_BASE_URL": {
-      "value": "https://signalement-api-pr-540.herokuapp.com"
+      "value": "https://signalement-api-pr-544.herokuapp.com"
     }
   },
   "formation": {
