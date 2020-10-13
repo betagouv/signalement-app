@@ -8,14 +8,13 @@
       "node"
     ]
   },
-  "exclude": [
-    "../test/test.ts",
-    "**/*.spec.ts"
-  ],
   "angularCompilerOptions": {
     "entryModule": "app/app.server.module#AppServerModule"
   },
+  "files": [
+    "main.server.ts"
+  ],
   "include": [
-    "**/*.ts"
+    "**/*.d.ts"
   ]
 }
