@@ -60,6 +60,10 @@
       "title": "Authentification - SignalConso",
       "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso"
     },
+    "emailValidation": {
+      "title": "Validation email - SignalConso",
+      "description": "Validation de votre email utilisateur sur SignalConso"
+    },
     "activation": {
       "title": "Activation de l'espace entreprise - SignalConso",
       "description": "Activez votre espace entreprise sur SignalConso"
