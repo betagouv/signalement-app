@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { AbTestsServerModule } from 'angular-ab-tests';
+import { AbTestsServerModule, CrawlerDetector } from 'angular-ab-tests';
 import { CookiesService } from 'ngx-utils-cookies-port';
 
 @NgModule({
@@ -19,7 +19,8 @@ import { CookiesService } from 'ngx-utils-cookies-port';
     AbTestsServerModule,
   ],
   providers: [
-    CookiesService
+    CookiesService,
+    CrawlerDetector
   ]
 })
 export class AppServerModule {
