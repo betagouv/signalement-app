@@ -370,6 +370,53 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bedf\b/i,
+      results: [
+        {
+          siret: '55208131766522',
+          name: 'ELECTRICITE DE FRANCE',
+          address: '22 AVENUE DE WAGRAM - 75008 PARIS 8',
+          postalCode: '75008',
+          activityLabel: 'Production d\'électricité',
+          highlight: 'Pour tout problème avec EDF, peu importe votre lieu d\'habitation'
+        }
+      ]
+    },
+    {
+      query: /\beurostar\b/i,
+      results: [
+        {
+          siret: '84535345700011',
+          name: 'EUROSTAR FRANCE SAS',
+          address: '5 RUE DU DELTA - 75009 PARIS 9',
+          postalCode: '75009',
+          activityLabel: 'Transports urbains et suburbains de voyageurs',
+          highlight: 'Pour tout problème avec Eurostar, peu importe votre lieu d\'habitation'
+        }
+      ]
+    },
+    {
+      query: /\bveolia\b/i,
+      results: [
+        {
+          siret: '40321003200104',
+          name: 'VEOLIA ENVIRONNEMENT',
+          address: '21 RUE LA BOETIE - 75008 PARIS 8',
+          postalCode: '75008',
+          activityLabel: 'Activités des sièges sociaux',
+          highlight: 'Pour tout problème avec Veolia Environnement, peu importe votre lieu d\'habitation'
+        },
+        {
+          siret: '57202552610945',
+          name: 'VEOLIA EAU - COMPAGNIE GENERALE DES EAUX',
+          address: '21 RUE LA BOETIE - 75008 PARIS 8',
+          postalCode: '75008',
+          activityLabel: 'Captage, traitement et distribution d\'eau',
+          highlight: 'Pour tout problème avec Veolia Eau, peu importe votre lieu d\'habitation'
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string, companyTestingVersions: string) {
