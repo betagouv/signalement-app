@@ -60,6 +60,10 @@
       "title": "Authentification - SignalConso",
       "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso"
     },
+    "emailValidation": {
+      "title": "Validation email - SignalConso",
+      "description": "Validation de votre email utilisateur sur SignalConso"
+    },
     "activation": {
       "title": "Activation de l'espace entreprise - SignalConso",
       "description": "Activez votre espace entreprise sur SignalConso"
@@ -132,6 +136,10 @@
       "title": "Entreprises - SignalConso",
       "description": "Suivi des entreprises signalées sur SignalConso"
     }
+  },
+  "contractualDispute": {
+    "title": "Résolution d'un problème individuel (litige) - SignalConso",
+    "description": "Démarches conseillées par SignalConso pour résoudre un problème individuel (litige) avec une entreprise "
   },
   "secured": {
     "dgccrf": {

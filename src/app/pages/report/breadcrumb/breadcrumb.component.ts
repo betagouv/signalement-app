@@ -24,7 +24,7 @@ export class BreadcrumbComponent implements OnInit {
 
   ngOnInit() {
     if (pages.report[this.step.toLowerCase()]) {
-      this.titleService.setTitle(`Etape ${this.getStepNumber(this.step)} : ${pages.report[this.step.toLowerCase()].title}`);
+      this.titleService.setTitle(`Étape ${this.getStepNumber(this.step)} : ${pages.report[this.step.toLowerCase()].title}`);
       this.meta.updateTag({ name: 'description', content: pages.report[this.step.toLowerCase()].title });
     }
   }

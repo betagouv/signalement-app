@@ -36,10 +36,7 @@ describe('CategoryComponent', () => {
       content: 'contenu'
     }
   });
-  const secondaryAnomaly = Object.assign(new Anomaly(), {
-    rank: 100
-  });
-  const anomaliesFixture = [primaryAnomaly1, primaryAnomalyWithInformation, secondaryAnomaly];
+  const anomaliesFixture = [primaryAnomaly1, primaryAnomalyWithInformation];
 
 
   beforeEach(async(() => {
