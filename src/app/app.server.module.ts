@@ -2,10 +2,10 @@ import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 import { NgModule } from '@angular/core';
 import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
-import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AbTestsServerModule } from 'angular-ab-tests';
+import { CookiesService } from 'ngx-utils-cookies-port';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -15,10 +15,12 @@ import { AbTestsServerModule } from 'angular-ab-tests';
     AppModule,
     ServerModule,
     NoopAnimationsModule,
-    ModuleMapLoaderModule,
     ServerTransferStateModule,
-    AbTestsServerModule
+    AbTestsServerModule,
   ],
+  providers: [
+    CookiesService
+  ]
 })
 export class AppServerModule {
 }

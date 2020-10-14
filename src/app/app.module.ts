@@ -73,12 +73,13 @@ class ErrorLogger extends ErrorHandler {
         NgxEchartsModule.forRoot({ echarts }),
         NgxLoadingModule.forRoot(NgxLoadingConfig),
         RouterModule.forRoot([
-            { path: 'stats', component: StatsComponent },
-            { path: 'not-found', component: NotFoundComponent },
-            { path: '**', component: NotFoundComponent },
+          { path: 'stats', component: StatsComponent },
+          { path: 'not-found', component: NotFoundComponent },
+          { path: '**', component: NotFoundComponent },
         ], {
-            scrollPositionRestoration: 'top',
-            anchorScrolling: 'enabled',
+          scrollPositionRestoration: 'top',
+          anchorScrolling: 'enabled',
+          initialNavigation: 'enabled'
         }),
         HeaderModule,
         ReportModule,
