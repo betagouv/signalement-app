@@ -45,18 +45,26 @@ export class AuthenticationService {
       this.serviceUtils.getUrl(Api.Report, ['api', 'authenticate']),
       JSON.stringify({ login, password }), this.serviceUtils.getHttpHeaders()
     )
-    .pipe(
-      map(authUser => {
-        if (authUser.token) {
-          const user = Object.assign(new User(), authUser.user);
-          this.userSource.next(user);
-          this.localStorage.setItemSubscribe(AuthUserStorageKey, authUser);
-          return user;
-        } else {
-          throw Error('Unauthenticated');
-        }
-      })
-    );
+    .pipe(map(this.handleAuthUser.bind(this)));
+  }
+
+  validateEmail(token: String) {
+    return this.http.post(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'validate-email']),
+      JSON.stringify({ token }), this.serviceUtils.getHttpHeaders()
+    )
+    .pipe(map(this.handleAuthUser.bind(this)));
+  }
+
+  private handleAuthUser(authUser: AuthUser): User {
+    if (authUser.token) {
+      const user = Object.assign(new User(), authUser.user);
+      this.userSource.next(user);
+      this.localStorage.setItemSubscribe(AuthUserStorageKey, authUser);
+      return user;
+    } else {
+      throw Error('Unauthenticated');
+    }
   }
 
   logout() {

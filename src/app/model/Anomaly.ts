@@ -53,7 +53,7 @@ export class WithSubcategories {
 
   getInternetSubcategoriesData() {
     return {
-      subcategoriesTitle: 'Est-ce que votre problème fait suite à un achat sur internet ?',
+      subcategoriesTitle: 'Est-ce que votre problème concerne une entreprise sur internet ?',
       subcategories: [
         Object.assign(new Subcategory(), this,
           {
@@ -82,7 +82,11 @@ export class Subcategory extends WithSubcategories {
   tags: Tag[];
 
   getInternetSubcategoriesData() {
-    return {...super.getInternetSubcategoriesData(), description: undefined };
+    if (this.information) {
+      return undefined;
+    } else {
+      return {...super.getInternetSubcategoriesData(), description: undefined };
+    }
   }
 }
 

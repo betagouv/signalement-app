@@ -7,6 +7,7 @@ import { PasswordForgotComponent } from './password-forgot/password-forgot.compo
 import { NgxLoadingModule } from 'ngx-loading';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { AccountRegistrationComponent } from './account-registration/account-registration.component';
+import { EmailValidationComponent } from './email-validation/email-validation.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { AuthGuard } from '../../guards/auth.guard';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'login', redirectTo: 'dgccrf' },
   { path: 'connexion', component: LoginComponent },
   { path: 'dgccrf', component: LoginComponent },
+  { path: 'connexion/validation-email', component: EmailValidationComponent },
   { path: 'connexion/perte-mot-de-passe', component: PasswordForgotComponent },
   { path: 'connexion/perte-mot-de-passe/dgccrf', component: PasswordForgotComponent },
   { path: 'connexion/nouveau-mot-de-passe/:token', component: PasswordResetComponent },
@@ -34,6 +36,7 @@ const routes: Routes = [
     PasswordResetComponent,
     AccountRegistrationComponent,
     PasswordChangeComponent,
+    EmailValidationComponent,
   ],
   imports: [
     CommonModule,
