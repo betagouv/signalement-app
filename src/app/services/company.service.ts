@@ -112,6 +112,12 @@ class RawCompanyService {
     }
   }
 
+  searchCompaniesByUrl(url: string) {
+    return this.http.get<CompanySearchResult[]>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', url]),
+    );
+  }
+
   searchRegisterCompanies(search: string) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('q', search);

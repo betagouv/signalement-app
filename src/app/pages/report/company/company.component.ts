@@ -1,13 +1,7 @@
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2, ViewChild } from '@angular/core';
-import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
+import { CompanyService } from '../../../services/company.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  AnalyticsService,
-  CompanySearchEventActions,
-  CompanySearchEventNames,
-  EventCategories,
-  ReportEventActions,
-} from '../../../services/analytics.service';
+import { AnalyticsService, CompanySearchEventActions, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
@@ -21,7 +15,7 @@ import { AbTestsService } from 'angular-ab-tests';
 declare var jQuery: any;
 
 export enum IdentificationKinds {
-  Name = 'Name', Siret = 'Siret', None = 'None'
+  Name = 'Name', Siret = 'Siret', None = 'None', Url = 'Url'
 }
 
 @Component({
@@ -35,6 +29,8 @@ export class CompanyComponent implements OnInit {
   private searchKind: ElementRef;
   @ViewChild('identSearch', {static: false})
   private identSearch: ElementRef;
+  @ViewChild('identByUrlResult', {static: false})
+  private identByUrlResult: ElementRef;
   @ViewChild('identResult', {static: false})
   private identResult: ElementRef;
   @ViewChild('identBySiretResult', {static: false})
@@ -46,12 +42,12 @@ export class CompanyComponent implements OnInit {
 
   websiteForm: FormGroup;
   urlCtrl: FormControl;
+  companySearchByUrlResults: CompanySearchResult[];
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
   searchPostalCodeCtrl: FormControl;
   companySearchResults: CompanySearchResult[];
-
   showErrors: boolean;
   searchWarning: string;
   searchError: string;
@@ -59,12 +55,11 @@ export class CompanyComponent implements OnInit {
   searchBySiretForm: FormGroup;
   siretCtrl: FormControl;
   companySearchBySiretResult: CompanySearchResult;
-
-  selectedCompany: CompanySearchResult;
-
   showErrorsBySiret: boolean;
   searchBySiretWarning: string;
   searchBySiretError: string;
+
+  selectedCompany: CompanySearchResult;
 
   loading: boolean;
 
@@ -94,6 +89,7 @@ export class CompanyComponent implements OnInit {
             this.initSearchBySiretForm();
             this.initSearchForm();
           } else if (this.draftReport.companyKind === CompanyKinds.WEBSITE) {
+            this.identificationKind = IdentificationKinds.Url;
             this.initWebsiteForm();
           }
         } else {
@@ -148,6 +144,11 @@ export class CompanyComponent implements OnInit {
     this.selectedCompany = undefined;
   }
 
+  initSearchByUrl() {
+    this.companySearchByUrlResults = [];
+    this.selectedCompany = undefined;
+  }
+
   searchCompany() {
     if (!this.searchForm.valid) {
       this.showErrors = true;
@@ -163,31 +164,55 @@ export class CompanyComponent implements OnInit {
         companySearchResults => {
           this.loading = false;
           if (companySearchResults.length === 0) {
-            this.treatCaseNoResult();
-          } else if (companySearchResults.length === 1) {
-            this.treatCaseSingleResult(companySearchResults[0]);
+            this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
           } else {
-            this.treatCaseSeveralResults(companySearchResults);
+            this.companySearchResults = companySearchResults;
+            this.scrollToElement(this.identSearch.nativeElement);
           }
         },
         () => {
           this.loading = false;
-          this.treatCaseError();
+          this.searchError = 'Une erreur technique s\'est produite.';
         }
       );
     }
   }
 
   submitWebsiteForm() {
+    this.showErrors = false;
     if (!this.websiteForm.valid) {
       this.showErrors = true;
     } else {
-      this.websiteForm.disable();
-      this.showErrors = false;
-      this.initSearchForm();
-      this.initSearchBySiretForm();
-      this.scrollToElement(this.searchKind.nativeElement);
+
+      this.loading = true;
+      this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByUrl, this.urlCtrl.value);
+
+      this.companyService.searchCompaniesByUrl(this.urlCtrl.value).subscribe(
+        companySearchResults => {
+          this.loading = false;
+          if (companySearchResults.length === 0) {
+            this.identWithWebsite();
+          } else {
+            this.companySearchByUrlResults = companySearchResults;
+            this.scrollToElement(this.identByUrlResult.nativeElement);
+          }
+        },
+        () => {
+          this.loading = false;
+          this.searchError = 'Une erreur technique s\'est produite.';
+        }
+      );
+
     }
+  }
+
+  identWithWebsite() {
+    this.websiteForm.disable();
+    this.showErrors = false;
+    this.companySearchByUrlResults = undefined;
+    this.initSearchForm();
+    this.initSearchBySiretForm();
+    this.scrollToElement(this.searchKind.nativeElement);
   }
 
   changeWebsite() {
@@ -196,49 +221,16 @@ export class CompanyComponent implements OnInit {
     this.searchForm = undefined;
     this.searchBySiretForm = undefined;
     this.identificationKind = undefined;
-  }
-
-  treatCaseNoResult() {
-    this.analyticsService.trackEvent(
-      EventCategories.companySearch,
-      CompanySearchEventActions.search,
-      CompanySearchEventNames.noResult
-    );
-    this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
-  }
-
-  treatCaseSingleResult(companySearchResult: CompanySearchResult) {
-    this.analyticsService.trackEvent(
-      EventCategories.companySearch,
-      CompanySearchEventActions.search,
-      CompanySearchEventNames.singleResult
-    );
-    this.companySearchResults = [companySearchResult];
-    this.scrollToElement(this.identResult.nativeElement);
-  }
-
-  treatCaseSeveralResults(companySearchResults: CompanySearchResult[]) {
-    this.analyticsService.trackEvent(
-      EventCategories.companySearch,
-      CompanySearchEventActions.search,
-      CompanySearchEventNames.severalResult
-    );
-    this.companySearchResults = companySearchResults;
-    this.scrollToElement(this.identResult.nativeElement);
-  }
-
-  treatCaseError() {
-    this.analyticsService.trackEvent(
-      EventCategories.companySearch,
-      CompanySearchEventActions.search,
-      CompanySearchEventNames.error
-    );
-    this.searchError = 'Une erreur technique s\'est produite.';
+    this.identificationKind = IdentificationKinds.Url;
+    this.initSearchByUrl();
   }
 
   selectCompany(draftCompany: DraftCompany) {
+    if (this.identificationKind === IdentificationKinds.Url) {
+      this.websiteForm.disable();
+    }
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select, this.identificationKind);
-    const element = (this.identificationKind === IdentificationKinds.Name ? this.identResult : this.identBySiretResult).nativeElement;
+    const element = this.getIdentResultElement();
     const rect = element.getBoundingClientRect();
     const submitButtonOffset = 145;
     if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
@@ -278,29 +270,14 @@ export class CompanyComponent implements OnInit {
       company => {
         this.loading = false;
         if (company) {
-          this.analyticsService.trackEvent(
-            EventCategories.companySearch,
-            CompanySearchEventActions.searchBySiret,
-            CompanySearchEventNames.singleResult
-          );
           this.companySearchBySiretResult = company;
           this.scrollToElement(this.identBySiretResult.nativeElement);
         } else {
-          this.analyticsService.trackEvent(
-            EventCategories.companySearch,
-            CompanySearchEventActions.searchBySiret,
-            CompanySearchEventNames.noResult
-          );
           this.searchBySiretWarning = 'Aucun établissement ne correspond à la recherche.';
         }
       },
         () => {
           this.loading = false;
-          this.analyticsService.trackEvent(
-            EventCategories.companySearch,
-            CompanySearchEventActions.searchBySiret,
-            CompanySearchEventNames.error
-          );
           this.searchBySiretError = 'Une erreur technique s\'est produite.';
       });
     }
@@ -340,4 +317,18 @@ export class CompanyComponent implements OnInit {
     }
   }
 
+  getIdentResultElement() {
+    switch (this.identificationKind) {
+      case IdentificationKinds.Url: {
+        return this.identByUrlResult.nativeElement;
+      }
+      case IdentificationKinds.Name: {
+        return this.identResult.nativeElement;
+      }
+      case IdentificationKinds.Siret: {
+        return this.identBySiretResult.nativeElement;
+      }
+
+    }
+  }
 }

@@ -61,7 +61,7 @@
             <div class="form__group mt-4">
               <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) (obligatoire)
               </label>
-              <input type="text" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
+              <input type="url" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
             </div>
 
             <div class="notification error mt-3" *ngIf="showErrors && websiteForm.invalid">
@@ -85,6 +85,49 @@
             <hr />
           </ng-template>
         </ng-container>
+
+
+        <div #identByUrlResult>
+          <div *ngIf="companySearchByUrlResults && companySearchByUrlResults.length" class="mt-5">
+
+            <h2 class="mb-4 font-weight-bold">
+              Sélectionnez l'entreprise
+            </h2>
+
+            <fieldset>
+              <ng-container *ngFor="let companySearchResult of companySearchByUrlResults; let companyIndex = index">
+                <ng-container *ngTemplateOutlet="companySearchResultTpl; context: {companySearchResult: companySearchResult, companyIndex: companyIndex}"></ng-container>
+              </ng-container>
+            </fieldset>
+
+            <div class="note mt-1">
+              L’entreprise n’apparaît pas ?
+            </div>
+            <div>
+              Modifiez l'adresse du site internet ou<button class="link" (click)="identWithWebsite()">identifier directement l'entreprise.</button>
+            </div>
+
+            <hr *ngIf="selectedCompany"/>
+
+            <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
+              Continuer
+            </button>
+          </div>
+
+          <div class="notification warning mt-4" *ngIf="searchWarning">
+            <p>
+              {{searchWarning}}
+            </p>
+            Veuillez modifier votre recherche ou <button class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</button>.
+          </div>
+
+          <div class="notification error mt-4" *ngIf="searchError">
+            <p>
+              {{searchError}}
+            </p>
+            Veuillez réessayer ou <span class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</span>.
+          </div>
+        </div>
 
         <div #searchKind>
           <ng-container *ngIf="searchBySiretForm && searchForm">
@@ -192,25 +235,9 @@
                   </h2>
 
                   <fieldset>
-                    <div *ngFor="let companySearchResult of companySearchResults; let companyIndex = index" [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
-                      <div class="row mb-3">
-                        <div class="col col-radio">
-                          <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany(draftReport.draftCompany)"/>
-                        </div>
-                        <label class="col pointer" for="company_{{companyIndex}}">
-                          <div class="font-weight-bold" *ngIf="companySearchResult.name">{{companySearchResult.name}}</div>
-                          <div class="font-weight-bold" *ngIf="companySearchResult.brand">{{companySearchResult.brand}}</div>
-                          <div class="font-weight-bold" *ngIf="companySearchResult.highlight">
-                            <i class="material-icons md-green">check_circle</i>
-                            <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
-                          </div>
-                          <div class="text-primary" *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}</div>
-                          <div *ngIf="companySearchResult.address">
-                            <div *ngFor="let line of companySearchResult.address.split(' - ')">{{line}}</div>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
+                    <ng-container *ngFor="let companySearchResult of companySearchResults; let companyIndex = index">
+                      <ng-container *ngTemplateOutlet="companySearchResultTpl; context: {companySearchResult: companySearchResult, companyIndex: companyIndex}"></ng-container>
+                    </ng-container>
                   </fieldset>
 
                   <div class="note mt-1">
@@ -238,7 +265,6 @@
                   Veuillez réessayer ou <span class="link" (click)="identificationKind = identificationKinds.Siret">rechercher avec le numéro SIRET de l'entreprise</span>.
                 </div>
               </div>
-
 
             </div>
 
@@ -361,21 +387,7 @@
                   </div>
 
                   <fieldset>
-                    <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchBySiretResult)">
-                    <div class="row mb-3">
-                      <div class="col col-radio">
-                        <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_siret" [value]="companySearchBySiretResult" (click)="selectCompany(draftReport.draftCompany)"/>
-                      </div>
-                      <label class="col pointer" for="company_siret">
-                        <div class="font-weight-bold" *ngIf="companySearchBySiretResult.name">{{companySearchBySiretResult.name}}</div>
-                        <div class="font-weight-bold" *ngIf="companySearchBySiretResult.brand">{{companySearchBySiretResult.brand}}</div>
-                        <div class="text-primary" *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}</div>
-                        <div *ngIf="companySearchBySiretResult.address">
-                          <div *ngFor="let line of companySearchBySiretResult.address.split(' - ')">{{line}}</div>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
+                    <ng-container *ngTemplateOutlet="companySearchResultTpl; context: {companySearchResult: companySearchBySiretResult, companyIndex: 0}"></ng-container>
                   </fieldset>
 
                   <hr *ngIf="selectedCompany"/>
@@ -424,6 +436,29 @@
     </div>
 
     <ngx-loading [show]="loading"></ngx-loading>
+
+    <ng-template #companySearchResultTpl let-companySearchResult="companySearchResult" let-companyIndex="companyIndex">
+      <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
+        <div class="row mb-3">
+          <div class="col col-radio">
+            <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany(draftReport.draftCompany)"/>
+          </div>
+          <label class="col pointer" for="company_{{companyIndex}}">
+            <div class="font-weight-bold" *ngIf="companySearchResult.name">{{companySearchResult.name}}</div>
+            <div class="font-weight-bold" *ngIf="companySearchResult.brand">{{companySearchResult.brand}}</div>
+            <div class="font-weight-bold" *ngIf="companySearchResult.highlight">
+              <i class="material-icons md-green">check_circle</i>
+              <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
+            </div>
+            <div class="text-primary" *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}</div>
+            <div *ngIf="companySearchResult.address">
+              <div *ngFor="let line of companySearchResult.address.split(' - ')">{{line}}</div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </ng-template>
+
 
   </section>
 </main>
