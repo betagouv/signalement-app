@@ -68,6 +68,8 @@ export class CompanyComponent implements OnInit {
 
   changeDraftCompany = false;
 
+  UrlPattern = '^(http|https):\\/\\/(www\\.)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,10}(:[0-9]{1,5})?(\\/.*)?$';
+
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
@@ -122,7 +124,7 @@ export class CompanyComponent implements OnInit {
       this.draftReport.draftCompany && this.draftReport.draftCompany.website ? this.draftReport.draftCompany.website.url : '',
       Validators.compose([
         Validators.required,
-        Validators.pattern('^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$')
+        Validators.pattern(this.UrlPattern)
       ])
     );
     this.websiteForm = this.formBuilder.group({
