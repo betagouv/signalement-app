@@ -32,7 +32,7 @@ export class SubcategoryComponent implements OnChanges {
   @Input() subcategoryName: string;
   @Input() level: number;
 
-  @ViewChild('formContent', {static: false})
+  @ViewChild('formContent')
   private formContent: ElementRef;
 
   subcategoryForm: FormGroup;

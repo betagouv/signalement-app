@@ -25,8 +25,6 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     BannerComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class ComponentsModule { }

@@ -31,7 +31,7 @@ describe('AcknoledgmentComponent', () => {
   }));
 
   beforeEach(() => {
-    reportStorageService = TestBed.get(ReportStorageService);
+    reportStorageService = TestBed.inject(ReportStorageService);
     spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Confirmation)));
 
     fixture = TestBed.createComponent(AcknowledgmentComponent);

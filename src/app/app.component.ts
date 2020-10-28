@@ -10,8 +10,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('header', {static: false}) header;
-  @ViewChild('content', {static: false}) content;
+  @ViewChild('header') header;
+  @ViewChild('content') content;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private injector: Injector,

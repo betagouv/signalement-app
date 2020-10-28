@@ -17,8 +17,6 @@ import { MiddleCropPipe } from './middlecrop.pipe';
     MiddleCropPipe,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class PipesModule { }

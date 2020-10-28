@@ -11,7 +11,7 @@ describe('CityData', () => {
   }));
 
   it('should be created', () => {
-    const service: AddressService = TestBed.get(AddressService);
+    const service: AddressService = TestBed.inject(AddressService);
     expect(service).toBeTruthy();
   });
 });
