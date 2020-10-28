@@ -94,7 +94,7 @@
                   rank: 3
                   type: RADIO
                   options:
-                    - Oui, je l'avais réservé à l'avance
+                    - Oui, je l'avais réservé
                     - Oui, je l'ai commandé juste avant de le prendre
                     - Non, il m'a pris en charge sur une place de taxi ou dans la rue
                 - label: Quel était le montant indiqué dès le départ ?
@@ -156,7 +156,7 @@
                 - title: Oui
                   information:
                     title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
-                    content: A la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
+                    content: À la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
                     outOfScope: true
                 - title: Non
                   detailInputs:
