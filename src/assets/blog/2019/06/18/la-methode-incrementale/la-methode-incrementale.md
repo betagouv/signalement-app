@@ -6,7 +6,7 @@
  
 Partant d’une proposition crédible afin de résoudre un problème de politique publique, le projet **commence par une simple idée**. L’outil est-il techniquement réalisable ? Des citoyens ont-ils besoin de l’utiliser ? Les réponses à ces questions sont essentielles avant d’engager plus d’argent dans la Startup après ses 6 mois d’existence. 
 
-Une solution imparfaite (béta) est **testée sur un échantillon d’individus**. A l’origine, SignalConso était un formulaire en ligne. Les retours positifs des utilisateurs ont permis d’améliorer notre service et de le transformer en site web. Au début de l’aventure, les **tâches sont exécutées manuellement** par l’équipe dédiée **avant l’automatisation** du produit. 
+Une solution imparfaite (béta) est **testée sur un échantillon d’individus**. Àl’origine, SignalConso était un formulaire en ligne. Les retours positifs des utilisateurs ont permis d’améliorer notre service et de le transformer en site web. Au début de l’aventure, les **tâches sont exécutées manuellement** par l’équipe dédiée **avant l’automatisation** du produit. 
 
 Par exemple, les Chargés de déploiement de SignalConso ont transmis, individuellement, par téléphone, les signalements des consommateurs aux professionnels signalés. **Cet échange direct avec les usagers**, toujours au centre de la création du service, a **confirmé l’impact positif de SignalConso**. Nos développeurs ont donc amélioré notre plateforme : les professionnels peuvent désormais créer un compte en ligne pour traiter leurs signalements.  
 

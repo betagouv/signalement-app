@@ -325,7 +325,7 @@
           rank: 3
           type: TEXT
           optionnal: true
-        - label: A propos de quoi est-ce trompeur&#160;?
+        - label: Àpropos de quoi est-ce trompeur&#160;?
           rank: 4
           type: RADIO
           options:

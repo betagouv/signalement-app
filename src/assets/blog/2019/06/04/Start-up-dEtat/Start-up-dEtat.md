@@ -2,7 +2,7 @@
 
 # Une Startup d’Etat, c’est quoi ? 
 
-Une Startup d’État est une **équipe dédiée** et **autonome** qui développe une solution à un **problème de politique publique** ; elle est financée par l’administration porteuse de cette politique. SignalConso est ainsi sponsorisé par le **Ministère de l’Economie** pour améliorer la procédure de dépôt des plaintes en ligne auprès de **la DGCCRF** (Répression des Fraudes). 
+Une Startup d’État est une **équipe dédiée** et **autonome** qui développe une solution à un **problème de politique publique** ; elle est financée par l’administration porteuse de cette politique. SignalConso est ainsi sponsorisé par le **ministère de l’Economie** pour améliorer la procédure de dépôt des plaintes en ligne auprès de **la DGCCRF** (Répression des Fraudes). 
 
 Une fois le besoin identifié, un appel est lancé à un responsable de l’administration concernée. Ce dernier connait parfaitement les problèmes rencontrés par les agents sur le terrain et peut ainsi créer un **outil numérique efficace**. Chez SignalConso, **Magali est une inspectrice des fraudes** ; sa vision de la plateforme s’articule entre les attentes des consommateurs victimes d’une fraude et celles des inspecteurs qui ont besoin de signalements qualifiés pour leurs enquêtes. 
 

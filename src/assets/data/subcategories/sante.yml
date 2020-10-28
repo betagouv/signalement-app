@@ -9,7 +9,7 @@
       subcategories:
         - title: Un médicament
           information:
-            title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la santé.
+            title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la Santé.
             content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank">signalement.social-sante.gouv.fr</a>
         - title: Un objet de santé
           example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
@@ -170,9 +170,9 @@
           example: "Exemple : j'ai mal été soigné"
           information:
             title: Porter une réclamation sur la qualité d’un soin
-            content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intêrets, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
+            content: Si vous estimez avoir mal été soigné, il existe différentes procédures. <br><br> Par exemple, vous pouvez déposer une plainte contre votre médecin auprès du Conseil Départemental de son Ordre. <br> Si vous souhaitez des dommages et intérêts, vous pouvez saisir la commission de conciliation et d’indemnisation des accidents médicaux (CCI) <br><br> Si vous avez été soigné dans un hôpital ou une clinique, vous pouvez écrire à la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du secrétariat pour la contacter. <br> <br> Retrouvez les différentes possibilités de régler votre problème sur ce <a href="https://solidarites-sante.gouv.fr/soins-et-maladies/signalement-sante-gouv-fr/ou-s-adresser-pour-effectuer-une-reclamation" target="_blank">lien</a>
     - title: La médecine dite "alternative" ou "douce"
-      example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, nutritionniste, chyropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute..."
+      example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, nutritionniste, chiropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute..."
       subcategories:
         - title: Les prix ne sont pas affichés ou sont faux
           example: "Les prix doivent être affichés en salle d'attente."
@@ -212,7 +212,7 @@
                 answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
             outOfScope: true
         - title: Je n'ai pas reçu de note (facture, ticket)
-          example: "A partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
+          example: "Àpartir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
           detailInputs:
             - label: Date de visite
               rank: 1
@@ -240,7 +240,7 @@
                 - la durée du soin
                 - une offre promotionnelle, une réduction de prix
                 - le résultat attendu / promis
-                - les labels (bio, vegan...) utilisés
+                - les labels (bio, végan...) utilisés
                 - le diplôme du praticien
                 - des informations médicales fausses
                 - autre (à préciser)
@@ -288,7 +288,7 @@
     - title: J'ai subi un mauvais traitement ou j'ai été mal soigné
       information:
         title: Vous devez contacter la Commissions des Usagers
-        content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du sécrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
+        content: Si vous estimez avoir été mal soigné ou mal traité, il est possible de saisir la Commission des Usagers. Elle est présente dans chaque hôpital ou clinique. Renseignez-vous auprès du secrétariat pour la contacter. Plus de renseignements sur cette page <br><a href="https://www.service-public.fr/particuliers/vosdroits/F10256" target="_blank">https://www.service-public.fr/particuliers/vosdroits/F10256</a>
     - title: J'ai dû payer un "forfait administratif"
       example: Les forfaits administratifs sont souvent aux alentours de 10 euros. Ils sont justifiés par des frais de photocopies, la prise de contact avec la mutuelle, l'appel du taxi pour reconduire un malade... Ces frais sont interdits.
       detailInputs:
@@ -300,7 +300,7 @@
           type: TEXT
       fileLabel: Merci de joindre si possible une photo de la facture ou du panneau d'affichage des prix pour appuyer votre signalement.
     - title: J'ai été facturé pour un supplément que je n'avais pas demandé
-      example: 'Exemple : supplément "chambre seule" au prextexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
+      example: 'Exemple : supplément "chambre seule" au prétexte qu''elles étaient toutes occupées, supplément "télévision" alors que je n''ai pas demandé à avoir la télévision'
       detailInputs:
         - label: Date de sortie (ou date de la facture)
           rank: 1
@@ -439,7 +439,7 @@
         - label: Date de constat
           rank: 1
           type: DATE
-        - label: A propos de quoi est-ce trompeur ?
+        - label: Àpropos de quoi est-ce trompeur ?
           rank: 2
           type: CHECKBOX
           options:
