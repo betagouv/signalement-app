@@ -8,13 +8,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReportListProComponent } from './list-pro/report-list-pro.component';
 import { ReportListComponent } from './list/report-list.component';
 import { AuthGuard } from '../../guards/auth.guard';
-import { BsDatepickerModule, BsDropdownModule, TooltipModule } from 'ngx-bootstrap';
 import { ReportDetailComponent } from './detail/report-detail.component';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PipesModule } from '../../pipes/pipes.module';
 import { Roles } from '../../model/AuthUser';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },

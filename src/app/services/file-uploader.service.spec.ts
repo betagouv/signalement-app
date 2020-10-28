@@ -11,7 +11,7 @@ describe('FileUploaderService', () => {
   }));
 
   it('should be created', () => {
-    const service: FileUploaderService = TestBed.get(FileUploaderService);
+    const service: FileUploaderService = TestBed.inject(FileUploaderService);
     expect(service).toBeTruthy();
   });
 });

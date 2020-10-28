@@ -20,7 +20,7 @@
                   tags:
                     - Litige contractuel
             - title: Modification concernant les sms, mms ou appels
-              example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
+              example: 'Exemple : les appels deviennent illimités pour 2 euros de plus'
               subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
               subcategories:
                 - title: Oui, j'ai été prévenu par email ou courrier
@@ -55,7 +55,7 @@
                   tags:
                     - Litige contractuel
                   detailInputs:
-                    - label: A partir de quand cette option va-t-elle être payante ?
+                    - label: À partir de quand cette option va-t-elle être payante ?
                       rank: 1
                       type: DATE
                     - label: Quel est le nom de cette option ?
@@ -103,7 +103,7 @@
         - title: Restitution du matériel
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
         - title: Mon ancien opérateur continue de me prélever
-    - title: Appels, sms ou email indésirables
+    - title: Appels, sms ou emails indésirables
       example: 'Exemple : spams, appel incessant, raoppel vers un numéro payant'
       subcategories:
         - title: Je reçois des appels indésirables alors que je suis sur BlocTel

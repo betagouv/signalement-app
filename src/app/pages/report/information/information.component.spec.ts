@@ -46,8 +46,8 @@ describe('InformationComponent', () => {
   }));
 
   beforeEach(() => {
-    anomalyService = TestBed.get(AnomalyService);
-    reportStorageService = TestBed.get(ReportStorageService);
+    anomalyService = TestBed.inject(AnomalyService);
+    reportStorageService = TestBed.inject(ReportStorageService);
     spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Category)));
 
     fixture = TestBed.createComponent(InformationComponent);

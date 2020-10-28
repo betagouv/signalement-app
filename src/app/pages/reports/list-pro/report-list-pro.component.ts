@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { UserAccess } from '../../../model/Company';
 import { Report, ReportStatus, StatusColor } from '../../../model/Report';
 import { ReportFilter } from '../../../model/ReportFilter';
-import { BsLocaleService } from 'ngx-bootstrap';
 import { combineLatest } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -13,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { mergeMap, take } from 'rxjs/operators';
 import pages from '../../../../assets/data/pages.json';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-report-list-pro',

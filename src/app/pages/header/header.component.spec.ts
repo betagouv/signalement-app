@@ -36,7 +36,7 @@ describe('HeaderComponent', () => {
   describe('for a not authenticated user', () => {
 
     beforeEach(() => {
-      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService = TestBed.inject(AuthenticationService);
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -52,7 +52,7 @@ describe('HeaderComponent', () => {
   describe('for a DGCCRF user', () => {
 
     beforeEach(() => {
-      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService = TestBed.inject(AuthenticationService);
       authenticationService.user = of(Object.assign(new User(), { role: 'DGCCRF' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
@@ -70,7 +70,7 @@ describe('HeaderComponent', () => {
   describe('for a professional user', () => {
 
     beforeEach(() => {
-      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService = TestBed.inject(AuthenticationService);
       authenticationService.user = of(Object.assign(new User(), { role: 'Professionnel' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
@@ -88,7 +88,7 @@ describe('HeaderComponent', () => {
   describe('for an admin user', () => {
 
     beforeEach(() => {
-      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService = TestBed.inject(AuthenticationService);
       authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;

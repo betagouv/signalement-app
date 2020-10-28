@@ -9,12 +9,12 @@ import { CguComponent } from './cgu/cgu.component';
 import { BlogComponent } from './blog/blog.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
-import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import { ComponentsModule } from '../../components/components.module';
 import { TrackingAndPrivacyComponent } from './tracking-and-privacy/tracking-and-privacy.component';
 import { FaqComponent } from './faq/faq.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 const routes: Routes = [
   { path: 'comment-ça-marche', component: HowComponent },
@@ -60,8 +60,6 @@ const routes: Routes = [
     RouterModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class StaticModule { }

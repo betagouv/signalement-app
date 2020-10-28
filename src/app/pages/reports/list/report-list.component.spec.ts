@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BsDatepickerModule, BsDropdownModule, defineLocale, frLocale, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportListComponent } from './report-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +18,13 @@ import { ConstantService } from '../../../services/constant.service';
 import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { genPaginatedReports, genUser } from '../../../../../test/fixtures.spec';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
@@ -38,6 +44,7 @@ describe('ReportListComponent', () => {
         AppPermissionDirective,
       ],
       imports: [
+        BrowserAnimationsModule,
         PaginationModule.forRoot(),
         TooltipModule.forRoot(),
         BsDropdownModule.forRoot(),
@@ -57,13 +64,13 @@ describe('ReportListComponent', () => {
   }));
 
   beforeEach(() => {
-    companyAccessesService = TestBed.get(CompanyAccessesService);
+    companyAccessesService = TestBed.inject(CompanyAccessesService);
 
     const adminUser = genUser(Roles.Admin);
     defineLocale('fr', frLocale);
-    reportService = TestBed.get(ReportService);
-    constantService = TestBed.get(ConstantService);
-    authenticationService = TestBed.get(AuthenticationService);
+    reportService = TestBed.inject(ReportService);
+    constantService = TestBed.inject(ConstantService);
+    authenticationService = TestBed.inject(AuthenticationService);
     authenticationService.user = of(adminUser);
     fixture = TestBed.createComponent(ReportListComponent);
     component = fixture.componentInstance;

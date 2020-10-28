@@ -32,7 +32,7 @@ let service: KeywordService;
 describe('KeywordServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.get(KeywordService);
+    service = TestBed.inject(KeywordService);
     service.setKeywords(data);
   });
 
@@ -42,7 +42,7 @@ describe('KeywordServiceService', () => {
 
   it('should found a keyword on a category to be filtered', () => {
 
-    const keywordService: KeywordService = TestBed.get(KeywordService);
+    const keywordService: KeywordService = TestBed.inject(KeywordService);
 
     const expected = {
       keyword: data.list[0],
@@ -59,7 +59,7 @@ describe('KeywordServiceService', () => {
 
   it('should not found a keyword on a category not to be filtered', () => {
 
-    const keywordService: KeywordService = TestBed.get(KeywordService);
+    const keywordService: KeywordService = TestBed.inject(KeywordService);
 
     const res = keywordService.search('j\'ai été témoin d\'un travail d\'esclave', 'TEL');
 
@@ -68,7 +68,7 @@ describe('KeywordServiceService', () => {
 
   it('should found multiple keywords', () => {
 
-    const keywordService: KeywordService = TestBed.get(KeywordService);
+    const keywordService: KeywordService = TestBed.inject(KeywordService);
 
     const expected = {
       keyword: data.list[0],
@@ -88,7 +88,7 @@ describe('KeywordServiceService', () => {
 
   it('should not found a keyword', () => {
 
-    const keywordService: KeywordService = TestBed.get(KeywordService);
+    const keywordService: KeywordService = TestBed.inject(KeywordService);
     keywordService.setKeywords(data);
 
     expect(keywordService.search('Je viens faire un signalement sur l\'hygiène d\'un restaurant', 'CR')).toBeNull();

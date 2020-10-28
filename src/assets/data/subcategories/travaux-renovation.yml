@@ -149,18 +149,18 @@
           subcategories:
             - title: À votre domicile
               example: Un démarcheur est venu chez vous
-              description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+              description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez demandé à faire démarrer votre contrat immédiatement
                 <br />Vous n’avez pas à vous justifier auprès du commerçant.
                 <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
             - title: À distance
               example: 'Exemple : sur internet'
-              description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+              description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez demandé à faire démarrer votre contrat immédiatement
                 <br />Vous n’avez pas à vous justifier auprès du commerçant.
                 <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
             - title: Au lieu habituel d'activité du professionnel
               information:
                 title: Vous ne pouvez plus vous retracter
-                content: Il n'y a pas de délai de retractation pour votre cas.
+                content: Il n'y a pas de délai de rétractation pour votre cas.
                 outOfScope: true
             - title: Sur un stand dans une foire ou salon
               subcategoriesTitle: Avez-vous un crédit affecté ?
@@ -168,10 +168,10 @@
                 - title: Non
                   information:
                     title: Vous ne pouvez plus vous retracter
-                    content: Il n'y a pas de délai de retractation pour votre cas.
+                    content: Il n'y a pas de délai de rétractation pour votre cas.
                     outOfScope: true
                 - title: Oui
-                  description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+                  description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez demandé à faire démarrer votre contrat immédiatement
                     <br />Vous n’avez pas à vous justifier auprès du commerçant.
                     <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
         - title: Contrat non respecté

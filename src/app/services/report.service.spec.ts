@@ -40,9 +40,9 @@ describe('ReportService', () => {
   }));
 
   beforeEach(() => {
-    reportService = TestBed.get(ReportService);
-    serviceUtils = TestBed.get(ServiceUtils);
-    httpMock = TestBed.get(HttpTestingController);
+    reportService = TestBed.inject(ReportService);
+    serviceUtils = TestBed.inject(ServiceUtils);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe('ReportService', () => {
   });
 
   it('should be created', () => {
-    const service: ReportService = TestBed.get(ReportService);
+    const service: ReportService = TestBed.inject(ReportService);
     expect(service).toBeTruthy();
   });
 

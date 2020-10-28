@@ -47,7 +47,7 @@ describe('ConsumerComponent', () => {
     let retrieveReportSpy;
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       retrieveReportSpy = spyOn(reportStorageService, 'retrieveReportInProgress')
         .and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
@@ -151,7 +151,7 @@ describe('ConsumerComponent', () => {
     const draftReportInProgress = Object.assign(genDraftReport(Step.Company), {employeeConsumer: true});
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
       fixture = TestBed.createComponent(ConsumerComponent);

@@ -24,7 +24,7 @@
         - title: Je cherche à acheter
           subcategories:
             - title: Diffusion d'annonces de biens non disponibles à la vente (en vitrine ou sur internet)
-              example: 'Exemple : la maison affiché en vitrine est en fait déjà vendue'
+              example: 'Exemple : la maison affichée en vitrine est en fait déjà vendue'
             - title: Honoraires de vente non affichés ou différents de ceux affichés (en vitrine ou sur internet)
               tags:
                 - Litige contractuel
@@ -101,7 +101,7 @@
 - title: Syndic de copropriété
   subcategories:
     - title: Facturation
-      example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévus'
+      example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévu'
       subcategoriesTitle: 'Le détail des frais est marqué dans le contrat de syndic. Avant de faire un signalement, veuillez vérifier ce contrat au chapitre 7. Si vous ne l''avez pas, demandez le à votre syndic. Ce document est obligatoire et gratuit.'
       subcategories:
         - title: J'ai pris connaissance de mon contrat de syndic.

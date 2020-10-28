@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { DetailInputValue, DraftReport, Step } from '../../../model/Report';
 import { DetailInput, Subcategory } from '../../../model/Anomaly';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
@@ -18,6 +17,8 @@ import { of } from 'rxjs';
 import { genDraftReport, oneBoolean } from '../../../../../test/fixtures.spec';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('DetailsComponent', () => {
 
@@ -89,7 +90,7 @@ describe('DetailsComponent', () => {
   describe('on init', () => {
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Problem)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -115,7 +116,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -181,7 +182,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -242,7 +243,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
