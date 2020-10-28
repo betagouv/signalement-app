@@ -156,7 +156,7 @@
                 - title: Oui
                   information:
                     title: Si c'est indiqué, un chauffeur de taxi a le droit de refuser les chèques.
-                    content: Àla différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
+                    content: À la différence de la carte bancaire, un taxi a le droit de refuser les chèques.<br> Il doit l'afficher sur la voiture.
                     outOfScope: true
                 - title: Non
                   detailInputs:

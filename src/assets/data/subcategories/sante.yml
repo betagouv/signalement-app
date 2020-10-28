@@ -212,7 +212,7 @@
                 answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
             outOfScope: true
         - title: Je n'ai pas reçu de note (facture, ticket)
-          example: "Àpartir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
+          example: "À partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
           detailInputs:
             - label: Date de visite
               rank: 1
@@ -439,7 +439,7 @@
         - label: Date de constat
           rank: 1
           type: DATE
-        - label: Àpropos de quoi est-ce trompeur ?
+        - label: À propos de quoi est-ce trompeur ?
           rank: 2
           type: CHECKBOX
           options:

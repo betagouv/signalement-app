@@ -55,7 +55,7 @@
                   tags:
                     - Litige contractuel
                   detailInputs:
-                    - label: Àpartir de quand cette option va-t-elle être payante ?
+                    - label: À partir de quand cette option va-t-elle être payante ?
                       rank: 1
                       type: DATE
                     - label: Quel est le nom de cette option ?
