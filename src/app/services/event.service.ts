@@ -18,7 +18,7 @@ export class EventService {
 
   createEvent(event: Event) {
     return combineLatest([
-      this.authenticationService.user,
+      this.authenticationService.getUser(),
       this.serviceUtils.getAuthHeaders()
     ]).pipe(
       mergeMap(([user, headers]) => {

@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
             this.router.navigate(['connexion']);
           }
         }),
-        switchMap( _ => this.authenticationService.user),
+        switchMap( _ => this.authenticationService.getUser()),
         map(user => {
           if (route.data.expectedRoles && route.data.expectedRoles.indexOf(user.role) === -1) {
             this.router.navigate(['not-found']);

@@ -37,7 +37,7 @@ export class StatsComponent implements OnInit {
     this.titleService.setTitle(pages.stats.title);
     this.meta.updateTag({ name: 'description', content: pages.stats.description });
 
-    this.authenticationService.user
+    this.authenticationService.getUser()
       .pipe(take(1))
       .subscribe(user => {
         if (user && user.role === this.roles.Admin) {

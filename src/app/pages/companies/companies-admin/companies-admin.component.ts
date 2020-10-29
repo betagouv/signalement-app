@@ -75,7 +75,7 @@ export class CompaniesAdminComponent implements OnInit {
     this.titleService.setTitle(pages.companies.companiesAdmin.title);
     this.meta.updateTag({ name: 'description', content: pages.companies.companiesAdmin.description });
 
-    combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
+    combineLatest([this.route.url, this.authenticationService.getUser()]).pipe(take(1))
       .subscribe(([url, user]) => {
         this.user = user;
         this.navTabs = {

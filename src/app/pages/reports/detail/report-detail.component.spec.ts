@@ -64,7 +64,7 @@ describe('ReportDetailComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.user = of(Object.assign(new User(), {role: 'Professionnel'}));
+      authenticationService.getUser() = of(Object.assign(new User(), {role: 'Professionnel'}));
     });
 
     describe('when no answer has been sent and the report is not closed', () => {

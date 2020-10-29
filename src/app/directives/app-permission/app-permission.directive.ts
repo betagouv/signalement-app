@@ -16,7 +16,7 @@ export class AppPermissionDirective implements OnInit {
 
 
   ngOnInit() {
-    this.authenticationService.user.subscribe(
+    this.authenticationService.getUser().subscribe(
       user => {
         this.viewContainer.clear();
         if (this.templateRef && this.hasPermission(user, this.appPermission)) {

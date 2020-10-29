@@ -71,7 +71,7 @@ describe('ReportListComponent', () => {
     reportService = TestBed.inject(ReportService);
     constantService = TestBed.inject(ConstantService);
     authenticationService = TestBed.inject(AuthenticationService);
-    authenticationService.user = of(adminUser);
+    authenticationService.getUser() = of(adminUser);
     fixture = TestBed.createComponent(ReportListComponent);
     component = fixture.componentInstance;
 

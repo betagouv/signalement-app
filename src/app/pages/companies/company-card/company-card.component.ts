@@ -36,7 +36,7 @@ export class CompanyCardComponent implements OnInit {
               private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.authenticationService.user.subscribe(user => this.user = user);
+    this.authenticationService.getUser().subscribe(user => this.user = user);
 
     this.initCompanyAddressForm();
   }

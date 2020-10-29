@@ -19,7 +19,7 @@ export class AccountMenuComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.authenticationService.user.subscribe(user => {
+    this.authenticationService.getUser().subscribe(user => {
       this.user = user;
     });
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthUser, TokenInfo, User } from '../model/AuthUser';
 import { Api, AuthUserStorageKey, ServiceUtils, TokenInfoStorageKey } from './service.utils';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { BehaviorSubject } from 'rxjs';
@@ -13,18 +13,34 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthenticationService {
 
   private userSource = new BehaviorSubject<User>(undefined);
-  user = this.userSource.asObservable();
+  private user = this.userSource.asObservable();
 
   jwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient,
               private serviceUtils: ServiceUtils,
-              private localStorage: LocalStorage) {
-    this.localStorage.getItem(AuthUserStorageKey).subscribe(authUser => {
-      if (authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token)) {
-        this.userSource.next(Object.assign(new User(), authUser.user));
-      }
-    });
+              private localStorage: LocalStorage) {}
+
+  private loadUser() {
+    return this.localStorage.getItem(AuthUserStorageKey).pipe(
+      tap(
+        authUser => {
+          if (authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token)) {
+            this.userSource.next(Object.assign(new User(), authUser.user));
+          }
+        }
+      )
+    );
+  }
+
+  getUser() {
+    if (!this.userSource.getValue()) {
+      return this.loadUser().pipe(
+        switchMap(_ => this.user)
+      );
+    } else {
+      return this.user;
+    }
   }
 
   async getStoredTokenInfo() {

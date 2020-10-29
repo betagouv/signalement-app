@@ -67,7 +67,7 @@ export class ReportListProComponent implements OnInit {
 
     this.loading = true;
     this.loadingError = false;
-    this.authenticationService.user.pipe(
+    this.authenticationService.getUser().pipe(
       take(1),
       mergeMap(user => {
         return combineLatest([

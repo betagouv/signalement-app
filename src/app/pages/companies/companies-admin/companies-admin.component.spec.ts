@@ -50,7 +50,7 @@ describe('CompaniesAdminComponent', () => {
 
   beforeEach(() => {
     authenticationService = TestBed.inject(AuthenticationService);
-    authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
+    authenticationService.getUser() = of(Object.assign(new User(), { role: 'Admin' }));
     fixture = TestBed.createComponent(CompaniesAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

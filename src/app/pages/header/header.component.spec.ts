@@ -53,7 +53,7 @@ describe('HeaderComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.user = of(Object.assign(new User(), { role: 'DGCCRF' }));
+      authenticationService.getUser() = of(Object.assign(new User(), { role: 'DGCCRF' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -71,7 +71,7 @@ describe('HeaderComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.user = of(Object.assign(new User(), { role: 'Professionnel' }));
+      authenticationService.getUser() = of(Object.assign(new User(), { role: 'Professionnel' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -89,7 +89,7 @@ describe('HeaderComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
+      authenticationService.getUser() = of(Object.assign(new User(), { role: 'Admin' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();

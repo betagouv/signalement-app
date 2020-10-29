@@ -135,7 +135,7 @@ describe('StatsComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
+      authenticationService.getUser() = of(Object.assign(new User(), { role: 'Admin' }));
     });
 
     it('on init it should load the public and admins global stats', () => {

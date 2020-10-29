@@ -69,7 +69,7 @@ describe('ReportListProComponent', () => {
     reportService = TestBed.inject(ReportService);
     constantService = TestBed.inject(ConstantService);
     authenticationService = TestBed.inject(AuthenticationService);
-    authenticationService.user = of(proUser);
+    authenticationService.getUser() = of(proUser);
     fixture = TestBed.createComponent(ReportListProComponent);
     component = fixture.componentInstance;
 

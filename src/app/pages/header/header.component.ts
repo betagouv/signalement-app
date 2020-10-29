@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.user.subscribe(user => {
+    this.authenticationService.getUser().subscribe(user => {
       this.user = user;
     });
 

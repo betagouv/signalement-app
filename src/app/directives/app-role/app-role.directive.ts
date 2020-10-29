@@ -16,7 +16,7 @@ export class AppRoleDirective implements OnInit {
 
 
   ngOnInit() {
-    this.authenticationService.user.subscribe(
+    this.authenticationService.getUser().subscribe(
       user => {
         this.viewContainer.clear();
         if (this.templateRef && this.hasRole(user, this.appRole)) {

@@ -36,7 +36,7 @@ export class CompanyAccessesComponent implements OnInit {
   ngOnInit() {
     const siretParam = this.route.params.pipe(map(p => p.siret));
 
-    this.authenticationService.user.subscribe(user => {
+    this.authenticationService.getUser().subscribe(user => {
       this.user = user;
     });
 

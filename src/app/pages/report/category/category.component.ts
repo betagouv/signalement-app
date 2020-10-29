@@ -40,7 +40,7 @@ export class CategoryComponent implements OnInit {
     this.titleService.setTitle(pages.default.title);
     this.meta.updateTag({ name: 'description', content: pages.default.description });
 
-    this.authenticationService.user.subscribe(user => {
+    this.authenticationService.getUser().subscribe(user => {
       this.user = user;
     });
 
