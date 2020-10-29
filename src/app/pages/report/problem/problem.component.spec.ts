@@ -74,8 +74,8 @@ describe('ProblemComponent', () => {
   }));
 
   beforeEach(() => {
-    anomalyService = TestBed.get(AnomalyService);
-    reportStorageService = TestBed.get(ReportStorageService);
+    anomalyService = TestBed.inject(AnomalyService);
+    reportStorageService = TestBed.inject(ReportStorageService);
     fixture = TestBed.createComponent(ProblemComponent);
     component = fixture.componentInstance;
 

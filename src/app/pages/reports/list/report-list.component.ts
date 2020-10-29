@@ -4,7 +4,6 @@ import { DetailInputValue, Report, ReportStatus, StatusColor } from '../../../mo
 import { UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import moment from 'moment';
-import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ReportFilter } from '../../../model/ReportFilter';
 import { Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
@@ -17,6 +16,8 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Department, Region, Regions } from '../../../model/Region';
 import oldCategories from '../../../../assets/data/old-categories.json';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
 

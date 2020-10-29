@@ -25,15 +25,15 @@ export enum IdentificationKinds {
 })
 export class CompanyComponent implements OnInit {
 
-  @ViewChild('searchKind', {static: false})
+  @ViewChild('searchKind')
   private searchKind: ElementRef;
-  @ViewChild('identSearch', {static: false})
+  @ViewChild('identSearch')
   private identSearch: ElementRef;
-  @ViewChild('identByUrlResult', {static: false})
+  @ViewChild('identByUrlResult')
   private identByUrlResult: ElementRef;
-  @ViewChild('identResult', {static: false})
+  @ViewChild('identResult')
   private identResult: ElementRef;
-  @ViewChild('identBySiretResult', {static: false})
+  @ViewChild('identBySiretResult')
   private identBySiretResult: ElementRef;
 
   step: Step;

@@ -6,7 +6,7 @@ import { AppPermissionDirective } from '../../../directives/app-permission/app-p
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 describe('CompanyCardComponent', () => {
   let component: CompanyCardComponent;

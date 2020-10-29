@@ -18,7 +18,7 @@ import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { StaticModule } from './pages/static/static.module';
 import { NotFoundComponent } from './pages/static/notfound/notfound.component';
-import { TooltipModule } from 'ngx-bootstrap';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AccountModule } from './pages/account/account.module';
 import { CompaniesModule } from './pages/companies/companies.module';
 import { Angulartics2Module } from 'angulartics2';
@@ -33,6 +33,7 @@ import { AppPermissionModule } from './directives/app-permission/app-permission.
 import { SubscriptionModule } from './pages/subscription/subscription.module';
 import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
+import * as echarts from 'echarts';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -69,15 +70,16 @@ class ErrorLogger extends ErrorHandler {
         NgtUniversalModule,
         TransferHttpCacheModule,
         HttpClientModule,
-        NgxEchartsModule,
+        NgxEchartsModule.forRoot({ echarts }),
         NgxLoadingModule.forRoot(NgxLoadingConfig),
         RouterModule.forRoot([
-            { path: 'stats', component: StatsComponent },
-            { path: 'not-found', component: NotFoundComponent },
-            { path: '**', component: NotFoundComponent },
+          { path: 'stats', component: StatsComponent },
+          { path: 'not-found', component: NotFoundComponent },
+          { path: '**', component: NotFoundComponent },
         ], {
-            scrollPositionRestoration: 'top',
-            anchorScrolling: 'enabled',
+          scrollPositionRestoration: 'top',
+          anchorScrolling: 'enabled',
+          initialNavigation: 'enabled'
         }),
         HeaderModule,
         ReportModule,

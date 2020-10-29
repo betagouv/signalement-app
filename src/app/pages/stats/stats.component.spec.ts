@@ -11,6 +11,7 @@ import { AppRoleDirective } from '../../directives/app-role/app-role.directive';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import { ComponentsModule } from '../../components/components.module';
+import * as echarts from 'echarts';
 
 describe('StatsComponent', () => {
   let component: StatsComponent;
@@ -36,7 +37,7 @@ describe('StatsComponent', () => {
       ],
       imports: [
         HttpClientModule,
-        NgxEchartsModule,
+        NgxEchartsModule.forRoot({ echarts }),
         NgxLoadingModule,
         ComponentsModule
       ]
@@ -45,7 +46,7 @@ describe('StatsComponent', () => {
   }));
 
   beforeEach(() => {
-    statsService = TestBed.get(StatsService);
+    statsService = TestBed.inject(StatsService);
     spyOn(statsService, 'getReportCount').and.returnValue(of(reportCount));
     spyOn(statsService, 'getReportReadByProPercentage').and.returnValue(of(reportReadByProPercentage));
     spyOn(statsService, 'getReportWithResponsePercentage').and.returnValue(of(reportWithResponseCount));
@@ -133,7 +134,7 @@ describe('StatsComponent', () => {
   describe('for a professional user', () => {
 
     beforeEach(() => {
-      authenticationService = TestBed.get(AuthenticationService);
+      authenticationService = TestBed.inject(AuthenticationService);
       authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
     });
 

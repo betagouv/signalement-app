@@ -259,8 +259,8 @@ describe('CompanyService', () => {
   }));
 
   beforeEach(() => {
-    httpMock = TestBed.get(HttpTestingController);
-    companyService = TestBed.get(CompanyService);
+    httpMock = TestBed.inject(HttpTestingController);
+    companyService = TestBed.inject(CompanyService);
   });
 
   it('should be created', () => {

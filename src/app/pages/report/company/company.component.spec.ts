@@ -59,8 +59,8 @@ describe('CompanyComponent', () => {
   }));
 
   beforeEach(() => {
-    companyService = TestBed.get(CompanyService);
-    reportStorageService = TestBed.get(ReportStorageService);
+    companyService = TestBed.inject(CompanyService);
+    reportStorageService = TestBed.inject(ReportStorageService);
   });
 
   describe('case of searching company with SIRET', () => {

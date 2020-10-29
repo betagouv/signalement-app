@@ -25,7 +25,7 @@ Mais également plusieurs signalements de consommateurs au sujet d’un
 même professionnel peuvent alerter la répression des fraudes. Par exemple,
 l’indisponibilité en magasin de couches culottes pourtant présentées à un prix
 défiant toute concurrence dans le catalogue client a été signalée par des
-consommateurs à plusieurs jours d’intervalle. A priori, cette indisponibilité
+consommateurs à plusieurs jours d’intervalle. À priori, cette indisponibilité
 est répétée et les signalements à ce sujet sont autant d’indices permettant aux
 enquêteurs de déclencher une enquête.  
 
