@@ -18,6 +18,8 @@ import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { genReport } from '../../../../../test/fixtures.spec';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { AuthUserStorageKey } from '../../../services/service.utils';
 
 describe('ReportDetailComponent', () => {
 
@@ -27,6 +29,7 @@ describe('ReportDetailComponent', () => {
   let authenticationService: AuthenticationService;
   let reportService: ReportService;
   let eventService: EventService;
+  let localStorage: LocalStorage;
 
   const answerEventFixture = Object.assign(new ReportEvent(), {
     data: {
@@ -64,7 +67,8 @@ describe('ReportDetailComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.getUser() = of(Object.assign(new User(), {role: 'Professionnel'}));
+      localStorage = TestBed.inject(LocalStorage);
+      localStorage.setItemSubscribe(AuthUserStorageKey, Object.assign(new User(), {role: 'Professionnel'}));
     });
 
     describe('when no answer has been sent and the report is not closed', () => {

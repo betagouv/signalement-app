@@ -16,12 +16,15 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { AuthUserStorageKey } from '../../../services/service.utils';
 
 describe('CompaniesAdminComponent', () => {
 
   let component: CompaniesAdminComponent;
   let fixture: ComponentFixture<CompaniesAdminComponent>;
   let authenticationService: AuthenticationService;
+  let localStorage: LocalStorage;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -50,7 +53,8 @@ describe('CompaniesAdminComponent', () => {
 
   beforeEach(() => {
     authenticationService = TestBed.inject(AuthenticationService);
-    authenticationService.getUser() = of(Object.assign(new User(), { role: 'Admin' }));
+    localStorage = TestBed.inject(LocalStorage);
+    localStorage.setItemSubscribe(AuthUserStorageKey, (Object.assign(new User(), { role: 'Admin' })));
     fixture = TestBed.createComponent(CompaniesAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

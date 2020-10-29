@@ -24,6 +24,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { AuthUserStorageKey } from '../../../services/service.utils';
 
 describe('ReportListProComponent', () => {
   let component: ReportListProComponent;
@@ -33,6 +35,7 @@ describe('ReportListProComponent', () => {
   let companyAccessesService: CompanyAccessesService;
   let constantService: ConstantService;
   let reportService: ReportService;
+  let localStorage: LocalStorage;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -69,7 +72,8 @@ describe('ReportListProComponent', () => {
     reportService = TestBed.inject(ReportService);
     constantService = TestBed.inject(ConstantService);
     authenticationService = TestBed.inject(AuthenticationService);
-    authenticationService.getUser() = of(proUser);
+    localStorage = TestBed.inject(LocalStorage);
+    localStorage.setItemSubscribe(AuthUserStorageKey, proUser);
     fixture = TestBed.createComponent(ReportListProComponent);
     component = fixture.componentInstance;
 

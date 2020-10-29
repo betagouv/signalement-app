@@ -9,12 +9,15 @@ import { AccountMenuComponent } from './account-menu/account-menu.component';
 import { AuthenticationService } from '../../services/authentication.service';
 import { of } from 'rxjs';
 import { User } from '../../model/AuthUser';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { AuthUserStorageKey } from '../../services/service.utils';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
   let authenticationService: AuthenticationService;
+  let localStorage: LocalStorage;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -53,7 +56,8 @@ describe('HeaderComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.getUser() = of(Object.assign(new User(), { role: 'DGCCRF' }));
+      localStorage = TestBed.inject(LocalStorage);
+      localStorage.setItemSubscribe(AuthUserStorageKey, Object.assign(new User(), { role: 'DGCCRF' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -71,7 +75,8 @@ describe('HeaderComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.getUser() = of(Object.assign(new User(), { role: 'Professionnel' }));
+      localStorage = TestBed.inject(LocalStorage);
+      localStorage.setItemSubscribe(AuthUserStorageKey, Object.assign(new User(), { role: 'Professionnel' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -89,7 +94,8 @@ describe('HeaderComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.getUser() = of(Object.assign(new User(), { role: 'Admin' }));
+      localStorage = TestBed.inject(LocalStorage);
+      localStorage.setItemSubscribe(AuthUserStorageKey, Object.assign(new User(), { role: 'Admin' }));
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();

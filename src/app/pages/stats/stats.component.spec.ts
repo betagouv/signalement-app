@@ -12,12 +12,15 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import { ComponentsModule } from '../../components/components.module';
 import * as echarts from 'echarts';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { AuthUserStorageKey } from '../../services/service.utils';
 
 describe('StatsComponent', () => {
   let component: StatsComponent;
   let fixture: ComponentFixture<StatsComponent>;
   let statsService: StatsService;
   let authenticationService: AuthenticationService;
+  let localStorage: LocalStorage;
 
   const reportCount = Object.assign(new SimpleStat(), { value: 53 });
   const reportReadByProPercentage = Object.assign(new SimpleStat(), { value: 12.5 });
@@ -135,7 +138,8 @@ describe('StatsComponent', () => {
 
     beforeEach(() => {
       authenticationService = TestBed.inject(AuthenticationService);
-      authenticationService.getUser() = of(Object.assign(new User(), { role: 'Admin' }));
+      localStorage = TestBed.inject(LocalStorage);
+      localStorage.setItemSubscribe(AuthUserStorageKey, Object.assign(new User(), { role: 'Admin' }));
     });
 
     it('on init it should load the public and admins global stats', () => {
