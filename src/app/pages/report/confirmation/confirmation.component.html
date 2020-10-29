@@ -65,6 +65,9 @@
           <div *ngIf="draftReport.draftCompany.website">
             Site internet : {{draftReport.draftCompany.website.url}}
           </div>
+          <div *ngIf="draftReport.vendor">
+            Nom du vendeur : {{draftReport.vendor}}
+          </div>
           <button class="link" (click)="goToStep(steps.Company)">
             <i class="material-icons" aria-hidden="true">edit</i> Modifier
           </button>

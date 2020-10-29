@@ -43,6 +43,11 @@
               Site internet : {{draftReport.draftCompany.website.url}}
             </div>
           </div>
+          <div class="row" *ngIf="draftReport.vendor">
+            <div class="col-12">
+              Nom du vendeur : {{draftReport.vendor}}
+            </div>
+          </div>
         </div>
         <hr />
         <button type="submit" class="btn btn-lg btn-primary" (click)="submitCompany(draftReport.draftCompany)">
@@ -108,6 +113,21 @@
             </div>
 
             <hr *ngIf="selectedCompany"/>
+
+            <ng-container *ngIf="selectedCompany?.kind === websiteKinds.Marketplace">
+
+              <div class="notification info">
+                L'entreprise sélectionnée est une place de marché (marketplace), c'est à dire qu'elle propose des produits vendus par des tiers.
+              </div>
+              <h2 class="mb-4 font-weight-bold">
+                Pouvez-vous identifier le vendeur ?
+              </h2>
+              <form>
+                <label for="websiteVendor">Nom du vendeur</label>
+                <input [formControl]="vendorCtrl" id="websiteVendor" name="websiteVendor">
+                <hr />
+              </form>
+            </ng-container>
 
             <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
               Continuer
@@ -441,7 +461,7 @@
       <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
         <div class="row mb-3">
           <div class="col col-radio">
-            <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany(draftReport.draftCompany)"/>
+            <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany()"/>
           </div>
           <label class="col pointer" for="company_{{companyIndex}}">
             <div class="font-weight-bold" *ngIf="companySearchResult.name">{{companySearchResult.name}}</div>

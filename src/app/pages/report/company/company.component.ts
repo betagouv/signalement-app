@@ -7,7 +7,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
-import { CompanySearchResult, DraftCompany, Website } from '../../../model/Company';
+import { CompanySearchResult, DraftCompany, Website, WebsiteKinds } from '../../../model/Company';
 import { isPlatformBrowser } from '@angular/common';
 import Utils, { CompanyAPITestingScope } from '../../../utils';
 import { AbTestsService } from 'angular-ab-tests';
@@ -43,6 +43,7 @@ export class CompanyComponent implements OnInit {
   websiteForm: FormGroup;
   urlCtrl: FormControl;
   companySearchByUrlResults: CompanySearchResult[];
+  vendorCtrl: FormControl;
 
   searchForm: FormGroup;
   searchCtrl: FormControl;
@@ -65,6 +66,7 @@ export class CompanyComponent implements OnInit {
 
   identificationKinds = IdentificationKinds;
   identificationKind: IdentificationKinds;
+  websiteKinds = WebsiteKinds;
 
   changeDraftCompany = false;
 
@@ -130,6 +132,8 @@ export class CompanyComponent implements OnInit {
     this.websiteForm = this.formBuilder.group({
       url: this.urlCtrl
     });
+
+    this.vendorCtrl = this.formBuilder.control(this.draftReport.vendor);
   }
 
   initSearchBySiretForm() {
@@ -149,6 +153,7 @@ export class CompanyComponent implements OnInit {
   initSearchByUrl() {
     this.companySearchByUrlResults = [];
     this.selectedCompany = undefined;
+    this.vendorCtrl.setValue(undefined);
   }
 
   searchCompany() {
@@ -185,7 +190,7 @@ export class CompanyComponent implements OnInit {
     if (!this.websiteForm.valid) {
       this.showErrors = true;
     } else {
-
+      this.initSearchByUrl();
       this.loading = true;
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByUrl, this.urlCtrl.value);
 
@@ -227,7 +232,7 @@ export class CompanyComponent implements OnInit {
     this.initSearchByUrl();
   }
 
-  selectCompany(draftCompany: DraftCompany) {
+  selectCompany() {
     if (this.identificationKind === IdentificationKinds.Url) {
       this.websiteForm.disable();
     }
@@ -248,6 +253,7 @@ export class CompanyComponent implements OnInit {
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
+    this.draftReport.vendor = this.vendorCtrl?.value;
     this.changeDraftCompany = false;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);

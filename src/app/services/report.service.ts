@@ -53,7 +53,8 @@ export class ReportService {
         companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
         companySiret: draftReport.draftCompany.siret,
-        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined
+        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
+        vendor: draftReport.vendor
       },
     );
   }

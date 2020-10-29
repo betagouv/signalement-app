@@ -15,6 +15,7 @@ export interface Company extends DraftCompany {
 export interface CompanySearchResult extends DraftCompany {
   highlight: string;
   activityLabel: string;
+  kind?: WebsiteKinds;
 }
 
 export interface CompanyAccess {
@@ -55,4 +56,8 @@ export class Website {
       .replace('www.', '')
       .split(/[/?#]/)[0] : this.url;
   }
+}
+
+export enum WebsiteKinds {
+  Default = 'DEFAULT', Marketplace = 'MARKETPLACE'
 }
