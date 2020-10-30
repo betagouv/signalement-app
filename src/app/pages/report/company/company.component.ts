@@ -174,7 +174,7 @@ export class CompanyComponent implements OnInit {
             this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
           } else {
             this.companySearchResults = companySearchResults;
-            this.scrollToElement(this.identSearch.nativeElement);
+            this.scrollToElement(this.identResult.nativeElement);
           }
         },
         () => {
@@ -237,14 +237,15 @@ export class CompanyComponent implements OnInit {
       this.websiteForm.disable();
     }
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select, this.identificationKind);
-    const element = this.getIdentResultElement();
-    const rect = element.getBoundingClientRect();
-    const submitButtonOffset = 145;
-    if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
-      jQuery('html, body').animate({
-        scrollTop: element.offsetTop + rect.height + submitButtonOffset - window.innerHeight
-      }, 1000, 'linear');
-    }
+    setTimeout(() => {
+      const element = this.getIdentResultElement();
+      const rect = element.getBoundingClientRect();
+      if (isPlatformBrowser(this.platformId) && rect.bottom + 110 > window.innerHeight) {
+        jQuery('html, body').animate({
+          scrollTop: element.offsetTop + rect.height + 110 - window.innerHeight
+        }, 1000, 'linear');
+      }
+    }, 100);
   }
 
   submitCompany(draftCompany?: DraftCompany) {
