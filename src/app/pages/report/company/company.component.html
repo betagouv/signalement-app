@@ -123,7 +123,10 @@
                 Pouvez-vous identifier le vendeur ?
               </h2>
               <form>
-                <label for="websiteVendor">Nom du vendeur</label>
+                <label for="websiteVendor">Nom du vendeur tiers</label>
+                <div class="note mb-1">
+                  Uniquement si le produit n'est pas vendu par {{selectedCompany.name}}
+                </div>
                 <input [formControl]="vendorCtrl" id="websiteVendor" name="websiteVendor">
                 <hr />
               </form>
