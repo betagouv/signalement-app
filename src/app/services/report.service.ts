@@ -195,8 +195,11 @@ export class ReportService {
     if (reportFilter.period && reportFilter.period[1]) {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
+    reportFilter.tags?.forEach(tag => {
+      httpParams = httpParams.append('tags', tag.toString());
+    });
 
-    ['siret', 'status', 'category', 'details', 'email', 'tags'].forEach(filterName => {
+    ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
       if (reportFilter[filterName] && reportFilter[filterName].length) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName].toString()).trim());
       }
