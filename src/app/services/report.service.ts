@@ -272,6 +272,7 @@ export class ReportService {
         email: report.email
       }),
       website: Object.assign(new Website(), {url: report.websiteURL}),
+      vendor: report.vendor,
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
       uploadedFiles: files ? files.map(f => Object.assign(new UploadedFile(), f)) : [],
