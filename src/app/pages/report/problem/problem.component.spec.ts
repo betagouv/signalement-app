@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Anomaly, ContractualDisputeTag, Subcategory, Tag } from '../../../model/Anomaly';
+import { Anomaly, ContractualDisputeTag, Subcategory } from '../../../model/Anomaly';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -18,6 +17,9 @@ import { of } from 'rxjs';
 import { genDraftReport, genInformation, genSubcategory } from '../../../../../test/fixtures.spec';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { DetailsComponent } from '../details/details.component';
+import { InformationComponent } from '../information/information.component';
+import { Router } from '@angular/router';
 
 const randomstring = require('randomstring');
 
@@ -27,20 +29,16 @@ describe('ProblemComponent', () => {
   let fixture: ComponentFixture<ProblemComponent>;
   let reportStorageService: ReportStorageService;
   let anomalyService: AnomalyService;
+  let router: Router;
+
+  const simpleSubcategoryFixture = genSubcategory();
+  const contractualDisputeSubcategoryFixture = <Subcategory>{ ...genSubcategory(), tags: [ContractualDisputeTag] };
+  const infoSubcategoryFixture = <Subcategory>{ ...genSubcategory(), information: genInformation() };
 
   const subcategoriesFixture = [
-    genSubcategory(),
-    <Subcategory>{
-      ...genSubcategory(),
-      tags: [ContractualDisputeTag]
-    },
-    <Subcategory>{
-      ...genSubcategory(),
-      subcategories: [
-        genSubcategory(),
-        genSubcategory()
-      ]
-    }
+    simpleSubcategoryFixture,
+    contractualDisputeSubcategoryFixture,
+    infoSubcategoryFixture
   ];
 
   const anomalyFixture = new Anomaly();
@@ -60,7 +58,10 @@ describe('ProblemComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule.withRoutes([{ path: `myPath/${ReportPaths.Details}`, redirectTo: '' }]),
+        RouterTestingModule.withRoutes([
+          { path: `${anomalyFixture.path}/${ReportPaths.Details}`, component: DetailsComponent },
+          { path: `${anomalyFixture.path}/${ReportPaths.Information}`, component: InformationComponent }
+        ]),
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule,
@@ -74,6 +75,7 @@ describe('ProblemComponent', () => {
   }));
 
   beforeEach(() => {
+    router = TestBed.inject(Router);
     anomalyService = TestBed.inject(AnomalyService);
     reportStorageService = TestBed.inject(ReportStorageService);
     fixture = TestBed.createComponent(ProblemComponent);
@@ -94,6 +96,20 @@ describe('ProblemComponent', () => {
     expect(nativeElement.querySelector('app-subcategory')).not.toBeNull();
   });
 
+  it('should route to information page when receive subcategories ending with information', () => {
+
+    component.anomaly = new Anomaly();
+    component.anomaly.subcategories = subcategoriesFixture;
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+    const routerSpy = spyOn(router, 'navigate');
+    fixture.detectChanges();
+
+    component.onSelectSubcategories([infoSubcategoryFixture]);
+    fixture.detectChanges();
+
+    expect(routerSpy).toHaveBeenCalledWith([anomalyFixture.path, ReportPaths.Information]);
+  });
+
   it('should request the user if he is an employee of the company or not when receive subcategories', () => {
 
     component.anomaly = new Anomaly();
@@ -101,7 +117,7 @@ describe('ProblemComponent', () => {
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
-    component.onSelectSubcategories([subcategoriesFixture[0]]);
+    component.onSelectSubcategories([simpleSubcategoryFixture]);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
@@ -120,7 +136,7 @@ describe('ProblemComponent', () => {
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
-    component.onSelectSubcategories([subcategoriesFixture[0]]);
+    component.onSelectSubcategories([simpleSubcategoryFixture]);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
@@ -128,7 +144,7 @@ describe('ProblemComponent', () => {
     fixture.detectChanges();
 
     const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
-      subcategories: [subcategoriesFixture[0]],
+      subcategories: [simpleSubcategoryFixture],
       employeeConsumer: true
     });
 
@@ -145,7 +161,7 @@ describe('ProblemComponent', () => {
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
-    component.onSelectSubcategories([subcategoriesFixture[0]]);
+    component.onSelectSubcategories([simpleSubcategoryFixture]);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
@@ -153,7 +169,7 @@ describe('ProblemComponent', () => {
     fixture.detectChanges();
 
     const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
-      subcategories: [subcategoriesFixture[0]],
+      subcategories: [simpleSubcategoryFixture],
       employeeConsumer: false
     });
 
@@ -170,7 +186,7 @@ describe('ProblemComponent', () => {
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
-    component.onSelectSubcategories([subcategoriesFixture[1]]);
+    component.onSelectSubcategories([contractualDisputeSubcategoryFixture]);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
@@ -191,7 +207,7 @@ describe('ProblemComponent', () => {
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
-    component.onSelectSubcategories([subcategoriesFixture[1]]);
+    component.onSelectSubcategories([contractualDisputeSubcategoryFixture]);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
@@ -202,7 +218,7 @@ describe('ProblemComponent', () => {
     fixture.detectChanges();
 
     const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
-      subcategories: [subcategoriesFixture[1]],
+      subcategories: [contractualDisputeSubcategoryFixture],
       employeeConsumer: false
     });
 

@@ -53,7 +53,8 @@ export class ReportService {
         companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
         companySiret: draftReport.draftCompany.siret,
-        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined
+        websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
+        vendor: draftReport.vendor
       },
     );
   }
@@ -195,8 +196,11 @@ export class ReportService {
     if (reportFilter.period && reportFilter.period[1]) {
       httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
     }
+    reportFilter.tags?.forEach(tag => {
+      httpParams = httpParams.append('tags', tag.toString());
+    });
 
-    ['siret', 'status', 'category', 'details', 'email', 'tags'].forEach(filterName => {
+    ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
       if (reportFilter[filterName] && reportFilter[filterName].length) {
         httpParams = httpParams.append(filterName, (reportFilter[filterName].toString()).trim());
       }
@@ -271,6 +275,7 @@ export class ReportService {
         email: report.email
       }),
       website: Object.assign(new Website(), {url: report.websiteURL}),
+      vendor: report.vendor,
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
       uploadedFiles: files ? files.map(f => Object.assign(new UploadedFile(), f)) : [],

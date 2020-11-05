@@ -1,5 +1,5 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, ContractualDisputeTag, Subcategory, Tag } from './Anomaly';
+import { CompanyKinds, ContractualDisputeTag, InternetTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
@@ -61,6 +61,7 @@ export class DraftReport {
   contactAgreement: boolean;
   retrievedFromStorage: boolean;
   storedStep: Step;
+  vendor: string;
 
   get companyKind() {
     return this.lastSubcategory ? this.lastSubcategory.companyKind || CompanyKinds.SIRET : CompanyKinds.SIRET;
@@ -73,7 +74,11 @@ export class DraftReport {
   }
 
   get tags() {
-    return !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
+    const tags = !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
+    if (this.companyKind === CompanyKinds.WEBSITE) {
+      tags.push(InternetTag);
+    }
+    return tags;
   }
 
   get isContractualDispute() {
@@ -88,6 +93,7 @@ export class Report {
   tags: Tag[];
   company: Company;
   website: Website;
+  vendor: string;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;

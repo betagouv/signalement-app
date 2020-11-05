@@ -16,7 +16,7 @@
                 Département(s)
               </label>
               <div class="btn-group" dropdown>
-                <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" aria-controls="dropdown-basic">
+                <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" aria-controls="dropdown-basic" [ngClass]='{selected: reportFilter.departments}'>
                   {{reportFilter.areaLabel ? reportFilter.areaLabel : 'Tous les départements'}} <span class="caret"></span>
                 </button>
                 <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -50,6 +50,7 @@
                      name="period"
                      id="period"
                      class="form-control"
+                     [ngClass]="{selected: reportFilter.period}"
                      placeholder="Daterangepicker"
                      placeholder="Période sélectionnée"
                      bsDaterangepicker
@@ -65,7 +66,7 @@
               <label for="statusFilter">
                 Statut
               </label>
-              <select [(ngModel)]="reportFilter.status" id="statusFilter" name="status" class="form-control" [ngClass]="reportFilter.status ? 'selected' : ''">
+              <select [(ngModel)]="reportFilter.status" id="statusFilter" name="status" class="form-control" [ngClass]="{selected: reportFilter.status}">
                 <option [ngValue]="undefined" selected>Tous les statuts</option>
                 <option *ngFor="let status of statusList">
                   {{status}}
@@ -78,13 +79,13 @@
               <label for="siretFilter">
                 SIRET
               </label>
-              <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret" class="form-control"/>
+              <input type="text" [(ngModel)]="reportFilter.siret" placeholder="SIRET" id="siretFilter" name="siret" class="form-control" [ngClass]="{selected: reportFilter.siret}"/>
             </div>
             <div class="form-group">
               <label for="hasCompanyFilter">
                 Entreprise identifiée ?
               </label>
-              <select [(ngModel)]="reportFilter.hasCompanyStr" id="hasCompanyFilter" name="hasCompany" class="form-control" [ngClass]="reportFilter.hasCompany ? 'selected' : ''">
+              <select [(ngModel)]="reportFilter.hasCompanyStr" id="hasCompanyFilter" name="hasCompany" class="form-control" [ngClass]="{selected: reportFilter.hasCompany !== undefined}">
                 <option [ngValue]="undefined" selected>Indifférent</option>
                 <option value="true">Oui</option>
                 <option value="false">Non</option>
@@ -94,7 +95,7 @@
               <label for="emailFilter">
                 Email conso.
               </label>
-              <input type="text" [(ngModel)]="reportFilter.email" placeholder="Email consommateur" id="emailFilter" name="email" class="form-control"/>
+              <input type="text" [(ngModel)]="reportFilter.email" placeholder="Email consommateur" id="emailFilter" name="email" class="form-control" [ngClass]="{selected: reportFilter.email}"/>
             </div>
           </div>
           <div class="col-12 col-sm-4">
@@ -102,7 +103,7 @@
               <label for="categoryFilter">
                 Catégorie
               </label>
-              <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" class="form-control" [ngClass]="reportFilter.category ? 'selected' : ''">
+              <select [(ngModel)]="reportFilter.category" id="categoryFilter" name="category" class="form-control" [ngClass]="{selected: reportFilter.category}">
                 <option [ngValue]="undefined" selected>Toutes les catégories</option>
                 <option *ngFor="let category of categories">
                   {{category}}
@@ -134,7 +135,7 @@
               <label for="detailsFilter">
                 Mots-clés&nbsp;<i class="material-icons md-dark" aria-hidden="true" title="Recherche dans les colonnes problème et description">help_outline</i>
               </label>
-              <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" class="form-control"/>
+              <input type="text" [(ngModel)]="reportFilter.details" id="detailsFilter" name="details" class="form-control" [ngClass]="{selected: reportFilter.details}"/>
             </div>
           </div>
         </div>
@@ -153,7 +154,10 @@
     <section class="section section-white position-relative" *appRole="[roles.Admin, roles.DGCCRF]">
 
       <div class="row">
-        <div class="col-12 col-lg-6 offset-lg-3 text-center">
+        <div class="col-12 col-lg-3 text-center text-lg-left">
+          <span class="ml-lg-4">Nombre de signalements : {{totalCount}}</span>
+        </div>
+        <div class="col-12 col-lg-6 text-center">
           <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="5" [itemsPerPage]="itemsPerPage" (pageChanged)="changePage($event)"
                       [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" class="justify-content-center">
           </pagination>

@@ -59,7 +59,8 @@ export enum ReportEventActions {
 export enum CompanySearchEventActions {
   search = 'Recherche',
   select = 'Sélection dans la liste de résultats',
-  searchBySiret = 'Recherche par SIRET'
+  searchBySiret = 'Recherche par SIRET',
+  searchByUrl = 'Recherche par URL'
 }
 
 export enum ContractualDisputeActions {
@@ -69,13 +70,6 @@ export enum ContractualDisputeActions {
 
 export enum ContractualDisputeNames {
   step = 'Démarche'
-}
-
-export enum CompanySearchEventNames {
-  noResult = 'Aucun résultat',
-  severalResult = 'Plusieurs résultats',
-  singleResult = 'Un seul résultat',
-  error = 'Erreur technique'
 }
 
 export enum AuthenticationEventActions {

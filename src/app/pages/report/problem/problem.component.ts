@@ -94,8 +94,13 @@ export class ProblemComponent implements OnInit {
   continue(value?) {
     switch (this.problemStep) {
       case ProblemSteps.Subcategories: {
-        this.problemStep = ProblemSteps.EmployeeConsumer;
-        this.scollTop();
+        if (this.draftReport.lastSubcategory.information) {
+          this.problemStep = ProblemSteps.Next;
+          this.continue();
+        } else {
+          this.problemStep = ProblemSteps.EmployeeConsumer;
+          this.scollTop();
+        }
         break;
       }
       case ProblemSteps.EmployeeConsumer: {

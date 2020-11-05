@@ -106,8 +106,7 @@ class ErrorLogger extends ErrorHandler {
                     scope: CompanyAPITestingScope,
                     expiration: 5,
                     weights: {
-                      EntrepriseAPI: 49,
-                      SignalConsoAPI: 49
+                      EntrepriseAPI: 50
                     },
                 },
             ],

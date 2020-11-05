@@ -25,7 +25,7 @@ list:
   - category: Services aux particuliers
     categoryId: SERV
     path: services-aux-particuliers
-    description: coiffeur, pressing, aide à la personne, déménageur, formation...
+    description: coiffeur, pressing, aide à la personne, déménageur, formation, maison de retraite...
     rank: 5
     sprite: category-service
     subcategoriesTitle: Votre problème concerne
