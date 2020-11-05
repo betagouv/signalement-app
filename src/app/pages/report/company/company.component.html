@@ -159,7 +159,7 @@
             Pouvez-vous identifier l'entreprise ?
           </h2>
           <div class="note mb-1">
-            SignalConso en a besoin pour la contacter et informer la répression des fraudes.
+            SignalConso en a besoin pour <ng-container *ngIf="!draftReport.employeeConsumer">la contacter et </ng-container>informer la répression des fraudes.
           </div>
 
           <form>
