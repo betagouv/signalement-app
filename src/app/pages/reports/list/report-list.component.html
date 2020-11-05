@@ -85,7 +85,7 @@
               <label for="hasCompanyFilter">
                 Entreprise identifiée ?
               </label>
-              <select [(ngModel)]="reportFilter.hasCompanyStr" id="hasCompanyFilter" name="hasCompany" class="form-control" [ngClass]="{selected: reportFilter.hasCompany}">
+              <select [(ngModel)]="reportFilter.hasCompanyStr" id="hasCompanyFilter" name="hasCompany" class="form-control" [ngClass]="{selected: reportFilter.hasCompany !== undefined}">
                 <option [ngValue]="undefined" selected>Indifférent</option>
                 <option value="true">Oui</option>
                 <option value="false">Non</option>
