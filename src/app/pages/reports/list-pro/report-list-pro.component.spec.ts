@@ -25,6 +25,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 
+
 describe('ReportListProComponent', () => {
   let component: ReportListProComponent;
   let fixture: ComponentFixture<ReportListProComponent>;

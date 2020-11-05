@@ -61,6 +61,7 @@ export class DraftReport {
   contactAgreement: boolean;
   retrievedFromStorage: boolean;
   storedStep: Step;
+  vendor: string;
 
   get companyKind() {
     return this.lastSubcategory ? this.lastSubcategory.companyKind || CompanyKinds.SIRET : CompanyKinds.SIRET;
@@ -92,6 +93,7 @@ export class Report {
   tags: Tag[];
   company: Company;
   website: Website;
+  vendor: string;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;

@@ -125,6 +125,14 @@
                 <div *ngIf="report.website.url">
                   {{report.website.url}}
                 </div>
+                <ng-container *ngIf="report.vendor">
+                  <div class="text-primary font-weight-bold pt-3">
+                    Vendeur
+                  </div>
+                  <div>
+                    <strong>{{report.vendor}}</strong>
+                  </div>
+                </ng-container>
 
                 <ng-template #companySearch>
                   <div class="modal-body text-center">
