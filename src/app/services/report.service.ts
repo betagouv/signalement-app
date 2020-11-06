@@ -53,6 +53,7 @@ export class ReportService {
         companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
         companySiret: draftReport.draftCompany.siret,
+        companyActivityCode: draftReport.draftCompany.activityCode,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
         vendor: draftReport.vendor
       },
@@ -80,6 +81,7 @@ export class ReportService {
             address: this.getDraftCompanyFullAddress(companySearchResult),
             postalCode: companySearchResult.postalCode,
             siret: companySearchResult.siret,
+            activityCode: companySearchResult.activityCode,
           },
           headers
         );
@@ -267,7 +269,7 @@ export class ReportService {
         name: report.companyName,
         siret: report.companySiret,
         address: report.companyAddress,
-        postalCode: report.companyPostalCode
+        postalCode: report.companyPostalCode,
       }),
       consumer: Object.assign(new Consumer(), {
         firstName: report.firstName,
