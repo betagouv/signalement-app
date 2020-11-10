@@ -5,6 +5,7 @@ export interface DraftCompany {
   address?: string;
   postalCode?: string;
   website?: Website;
+  activityCode?: string;
 }
 
 export interface Company extends DraftCompany {
@@ -14,6 +15,7 @@ export interface Company extends DraftCompany {
 
 export interface CompanySearchResult extends DraftCompany {
   highlight: string;
+  activityCode: string;
   activityLabel: string;
   kind?: WebsiteKinds;
 }
