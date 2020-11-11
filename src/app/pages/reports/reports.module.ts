@@ -15,6 +15,7 @@ import { AppPermissionModule } from '../../directives/app-permission/app-permiss
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PipesModule } from '../../pipes/pipes.module';
 import { Roles } from '../../model/AuthUser';
+import { ReportListSearchComponent } from './list/search/report-list-search.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
     ReportListProComponent,
     ReportListComponent,
     ReportDetailComponent,
+    ReportListSearchComponent,
   ],
   imports: [
     CommonModule,

@@ -38,6 +38,10 @@ form {
 
 }
 
+.input-invisible {
+  @extend %input-invisible;
+}
+
 input,
 input.form-control,
 textarea,

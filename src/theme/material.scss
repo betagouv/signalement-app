@@ -1,0 +1,61 @@
+@include mat-core();
+
+@function generateCustomPalette($color) {
+  @return (
+    50: lighten($color, 45),
+    100: lighten($color, 36),
+    200: lighten($color, 27),
+    300: lighten($color, 18),
+    400: lighten($color, 9),
+    500: darken($color, 0),
+    600: darken($color, 9),
+    700: darken($color, 18),
+    800: darken($color, 27),
+    900: darken($color, 36),
+    A100: saturate($color, 20),
+    A200: saturate($color, 24),
+    A400: saturate($color, 28),
+    A700: saturate($color, 32),
+    contrast: (
+      50: $black-87-opacity,
+      100: $black-87-opacity,
+      200: $black-87-opacity,
+      300: $black-87-opacity,
+      400: $black-87-opacity,
+      500: white,
+      600: white,
+      700: white,
+      800: $white-87-opacity,
+      900: $white-87-opacity,
+      A100: $black-87-opacity,
+      A200: white,
+      A400: white,
+      A700: white,
+    )
+  );
+}
+
+$app-primary: mat-palette(generateCustomPalette($theme-primary));
+$app-accent: mat-palette($mat-amber, A200, A100, A400);
+$app-warn: mat-palette($mat-red);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+@include angular-material-theme($app-theme);
+
+// Fix conflicts with bootstrap _reset.scss
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.mat-radio-label {
+  margin-bottom: 0;
+}
+
+.mat-button-base {
+  outline: none !important;
+}
+
+.mat-option-dense {
+  height: 38px !important;
+  font-size: 14px !important;
+}

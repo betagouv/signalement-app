@@ -5,7 +5,9 @@
               [backButton]="siretUrlParam !== null">
   </app-banner>
 
-  <main role="main">
+  <main class="container" role="main">
+
+    <app-report-list-search></app-report-list-search>
 
     <div class="filters">
       <form (ngSubmit)="submitFilters()" class="form-horizontal">
