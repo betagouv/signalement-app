@@ -1,0 +1,84 @@
+@import 'src/theme/variables';
+@import '~@angular/material/theming';
+
+.search-dialog {
+  @include mat-elevation(5);
+  position: absolute;
+  background: white;
+  z-index: 2;
+  top: 100%;
+  overflow: hidden;
+  padding: spacing(2);
+  border-radius: $theme-border-radius;
+}
+
+.panel-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.select-optgroup {
+  font-weight: 500;
+  color: $theme-dark-text;
+  cursor: pointer !important;
+
+  &:hover {
+    background: $theme-background-hover;
+  }
+
+  &:not(:first-of-type) {
+    border-top: 1px solid $theme-divider;
+  }
+}
+
+.form {
+  width: 100%;
+
+  td {
+    padding-top: 0 !important;
+    padding-bottom: spacing(2);
+
+    &:first-of-type {
+      padding-right: spacing(3);
+      width: 0;
+    }
+
+    &:last-of-type {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  label {
+    color: $theme-color-text-secondary;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .form-control {
+    @extend %input-invisible;
+    border-radius: 0;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid $theme-divider;
+    width: 100%;
+    padding: 2px 0 2px 0;
+    height: auto;
+
+    &:focus {
+      border-bottom-color: $primary;
+    }
+  }
+}
+
+.actions {
+  text-align: right;
+  margin-top: spacing(1);
+
+  > *:not(:first-child) {
+    margin-left: spacing(1);
+  }
+}
