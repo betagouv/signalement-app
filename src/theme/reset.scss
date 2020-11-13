@@ -1,0 +1,8 @@
+.tooltip:before {
+  content: none;
+}
+
+.tooltip-inner {
+  background: rgba(97, 97, 97, .9) !important;
+  border-radius: 2px !important;
+}

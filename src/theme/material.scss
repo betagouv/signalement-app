@@ -41,6 +41,16 @@ $app-warn: mat-palette($mat-red);
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
 
+.mat-cell:not(:first-of-type),
+.mat-header-cell:not(:first-of-type) {
+  padding-left: spacing(.5) !important;
+}
+
+.mat-cell:not(:last-of-type),
+.mat-header-cell:not(:last-of-type) {
+  padding-right: spacing(.5) !important;
+}
+
 // Fix conflicts with bootstrap _reset.scss
 
 .mat-radio-button ~ .mat-radio-button {
@@ -52,6 +62,7 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 }
 
 .mat-button-base {
+  border-radius: 20px !important;
   outline: none !important;
 }
 
@@ -59,3 +70,4 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
   height: 38px !important;
   font-size: 14px !important;
 }
+

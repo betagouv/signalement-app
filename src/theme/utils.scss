@@ -17,3 +17,39 @@
 .txt-disabled {
   color: $theme-color-text-disabled;
 }
+
+.txt-bold {
+  font-weight: bold;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.truncate {
+  @extend %truncate;
+}
+
+.txt-success {
+  color: $color-success;
+}
+
+.txt-error {
+  color: $color-error;
+}
+
+.txt-warning {
+  color: $color-warning;
+}
+
+.txt-info {
+  color: $color-info;
+}
+
+.va-middle {
+  vertical-align: middle;
+}
+
+.txt-right {
+  text-align: right;
+}
