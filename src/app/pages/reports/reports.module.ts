@@ -51,6 +51,7 @@ const routes: Routes = [
     PipesModule,
     AppRoleModule,
     AppPermissionModule,
+    SelectDepartmentsModule,
   ]
 })
 export class ReportsModule { }
