@@ -152,7 +152,7 @@ export class ReportListDatatableComponent implements OnInit {
   readonly statusIcon = reportStatusIcon;
 
   displayedColumns = [];
-  
+
   ngOnInit() {
     this.displayedColumns = this.getRoleColmumns();
   }
