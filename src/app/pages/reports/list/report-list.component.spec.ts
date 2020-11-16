@@ -26,6 +26,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;

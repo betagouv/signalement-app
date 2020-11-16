@@ -14,6 +14,8 @@ import { AppPermissionModule } from '../../directives/app-permission/app-permiss
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PipesModule } from '../../pipes/pipes.module';
 import { Roles } from '../../model/AuthUser';
+import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
+import { ReportListModule } from './list/report-list.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
