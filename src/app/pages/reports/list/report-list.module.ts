@@ -7,15 +7,15 @@ import { BsDatepickerModule, TooltipModule } from 'ngx-bootstrap';
 import { AppRoleModule } from '../../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../../directives/app-permission/app-permission.module';
 import { PipesModule } from '../../../pipes/pipes.module';
-import { ReportListSearchComponent } from './search/report-list-search.component';
 import { ReportListDatatableComponent } from './datatable/report-list-datatable.component';
 import { SelectDepartmentsModule } from './select-departments/select-departments.module';
 import { RouterModule } from '@angular/router';
+import { ReportListFiltersComponent } from './filters/report-list-filters.component';
 
 @NgModule({
   declarations: [
     ReportListComponent,
-    ReportListSearchComponent,
+    ReportListFiltersComponent,
     ReportListDatatableComponent,
   ],
   exports: [

@@ -10,6 +10,7 @@ import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, Website } from '../model/Company';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +27,11 @@ export class ReportService {
 
   private _currentReportFilter = {};
 
-  private static reportFilterToQueryString = (r: ReportFilter): { [key in keyof ReportFilter]: any } => ({
+  private reportFilterToQueryString = (r: ReportFilter): { [key in keyof ReportFilter]: any } => ({
     ...r,
     ...(r.departments ? { departments: r.departments.join(',') } : {}),
-    // ...((r.period && r.period[0]) ? { start: moment(r.period[0]).format('YYYY-MM-DD') } : {}),
-    // ...((r.period && r.period[1]) ? { end: moment(r.period[1]).format('YYYY-MM-DD') } : {}),
+    ...((r.period && r.period[0]) ? { start: moment(r.period[0]).format('YYYY-MM-DD') } : {}),
+    ...((r.period && r.period[1]) ? { end: moment(r.period[1]).format('YYYY-MM-DD') } : {}),
   });
 
   createReport(draftReport: DraftReport) {
@@ -179,27 +180,16 @@ export class ReportService {
           Object.assign(headers, { params: httpParams })
         );
       }),
-      // mergeMap(paginatedData => {
-      //   return of(Object.assign(new PaginatedData<Report>(), {
-      //     totalCount: paginatedData.totalCount,
-      //     hasNextPage: paginatedData.hasNextPage,
-      //     entities: paginatedData.entities
-      //   }));
-      // })
     );
   }
 
   getReports(report: ReportFilter = {}) {
     this._currentReportFilter = report;
     return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        const pp = this.serviceUtils.objectToHttpParams(ReportService.reportFilterToQueryString(report));
-        console.log('getReports', report, '=>', this.serviceUtils.objectToHttpParams(report), '==>', pp);
-        return this.http.get<PaginatedData<any>>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-          { ...headers, params: pp },
-        );
-      }),
+      mergeMap(headers => this.http.get<PaginatedData<any>>(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
+        { ...headers, params: this.serviceUtils.objectToHttpParams(this.reportFilterToQueryString(report)) },
+      )),
       mergeMap(paginatedData => of({
         ...paginatedData,
         entities: paginatedData.entities.map(entity => this.reportApi2report(entity))
