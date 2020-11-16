@@ -2,6 +2,11 @@ import { Tag } from './Anomaly';
 
 export interface ReportFilter {
   readonly departments?: string[];
+  /**
+   * @deprecated
+   * This variable is supposed to contain 'start and 'end' variables.
+   * It is used for convenience purpose in the view and could be remove soon.
+   */
   readonly period?: string[];
   readonly tags?: Tag[];
   start?: string;

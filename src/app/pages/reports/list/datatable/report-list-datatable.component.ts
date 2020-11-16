@@ -135,7 +135,7 @@ export class ReportListDatatableComponent implements OnInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  @Input() data: any[];
+  @Input() data: Report[];
 
   @Input() total: number;
 

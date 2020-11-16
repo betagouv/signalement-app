@@ -67,6 +67,7 @@ import { ReportService } from '../../../../services/report.service';
           <tr>
             <td><label for="rls-period">Période</label></td>
             <td>
+<!--              TODO(Alex) Wait for Angular 10-->
 <!--              <mat-form-field appearance="fill" id="rls-period">-->
 <!--                <mat-label>Enter a date range</mat-label>-->
 <!--                <mat-date-range-input [rangePicker]="picker">-->
