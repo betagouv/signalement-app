@@ -1,6 +1,14 @@
 @import 'src/theme/variables';
 @import '~@angular/material/theming';
 
+.search-input {
+  display: flex;
+  align-items: center;
+  padding: 0 spacing(1) 0 spacing(2);
+  border-bottom: 1px solid $theme-divider;
+  position: relative;
+}
+
 .search-dialog {
   @include mat-elevation(5);
   position: absolute;

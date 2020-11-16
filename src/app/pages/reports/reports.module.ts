@@ -14,7 +14,6 @@ import { AppPermissionModule } from '../../directives/app-permission/app-permiss
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PipesModule } from '../../pipes/pipes.module';
 import { Roles } from '../../model/AuthUser';
-import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -23,7 +22,7 @@ import { ReportListModule } from './list/report-list.module';
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
   { path: 'suivi-des-signalements', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
-  { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
+  { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
   { path: 'suivi-des-signalements/admin', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
   { path: 'suivi-des-signalements/dgccrf', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
   { path: 'suivi-des-signalements/pro/siret/:siret', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },

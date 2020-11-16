@@ -63,7 +63,6 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
   onChangeCallback: (_: any) => void = (_: any) => {
   };
 
-
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
@@ -108,6 +107,6 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
 
   private removeAllDepartments = (region?: Region) => {
     const departments = region ? region.departments.map(_ => _.code) : this.departments;
-    this.value = this.safeDepartmentInputValue.filter(dep => !departments.includes(dep));
+    this.value = this.safeDepartmentInputValue.filter(_ => !departments.includes(_));
   };
 }

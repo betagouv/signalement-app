@@ -1,17 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { DetailInputValue, Report, reportStatusColor, reportStatusIcon } from '../../../../model/Report';
 import { Roles } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { PageEvent } from '@angular/material/paginator';
+import { PaginatedData } from '../../../../model/PaginatedData';
 
 @Component({
   selector: 'app-report-list-datatable',
   template: `
     <div class="table-container">
-      <table mat-table [dataSource]="data">
+      <table mat-table [dataSource]="reports.entities">
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Entreprise</th>
@@ -118,7 +118,7 @@ import { MatSort } from '@angular/material/sort';
       </table>
     </div>
     <mat-paginator (page)="onChange($event)"
-                   [length]="total"
+                   [length]="reports.totalCount"
                    [pageSize]="pageSize"
                    [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   `,
@@ -131,13 +131,7 @@ export class ReportListDatatableComponent implements OnInit {
   ) {
   }
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
-  @Input() data: Report[];
-
-  @Input() total: number;
+  @Input() reports: PaginatedData<Report>;
 
   @Input() pageSize: number;
 
@@ -154,10 +148,10 @@ export class ReportListDatatableComponent implements OnInit {
   displayedColumns = [];
 
   ngOnInit() {
-    this.displayedColumns = this.getRoleColmumns();
+    this.displayedColumns = this.getRoleColumns();
   }
 
-  private getRoleColmumns = (): string[] => {
+  private getRoleColumns = (): string[] => {
     switch (this.userRole) {
       case Roles.DGCCRF:
         return [

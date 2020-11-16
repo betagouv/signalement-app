@@ -1,17 +1,11 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
-import moment from 'moment';
 import { ReportFilter } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import { Permissions, Roles } from '../../../model/AuthUser';
-import { Tag } from '../../../model/Anomaly';
-import { ConstantService } from '../../../services/constant.service';
-import { AnomalyService } from '../../../services/anomaly.service';
+import { Roles } from '../../../model/AuthUser';
 import { ActivatedRoute, Router } from '@angular/router';
-import oldCategories from '../../../../assets/data/old-categories.json';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PaginatedData } from '../../../model/PaginatedData';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -26,35 +20,23 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class ReportListComponent implements OnInit {
 
-  permissions = Permissions;
   roles = Roles;
-  tags: Tag[];
 
-  reportsByDate: {date: string, reports: Array<Report>}[];
-  totalCount: number;
   readonly defaultPageSize = 10;
-  page = 1;
-
-  siretUrlParam: string;
-  statusList: string[];
-  categories: string[];
 
   loading: boolean;
   loadingError: boolean;
   searchForm: FormGroup;
-  data: Report[] = [];
+  reports: PaginatedData<Report>;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
     private authenticationService: AuthenticationService,
     private titleService: Title,
     private meta: Meta,
     private fb: FormBuilder,
-    private anomalyService: AnomalyService,
     private activatedRoute: ActivatedRoute,
     private reportService: ReportService,
-    private constantService: ConstantService,
     private localeService: BsLocaleService,
-    private modalService: BsModalService,
     private router: Router,
   ) {
   }
@@ -64,17 +46,6 @@ export class ReportListComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
     this.initAndBuildForm();
-
-    this.constantService.getReportStatusList().subscribe(
-      statusList => this.statusList = statusList
-    );
-
-    this.categories = [
-      ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
-      ...oldCategories
-    ];
-
-    this.tags = this.anomalyService.getTags();
   }
 
   private initAndBuildForm = (): void => {
@@ -127,7 +98,7 @@ export class ReportListComponent implements OnInit {
 
   onFiltersUpdate(): void {
     this.patchValue({ ...this.searchFormValue, offset: 0 });
-    this.data = [];
+    // this.reports.entities = [];
     this.search();
   }
 
@@ -149,36 +120,23 @@ export class ReportListComponent implements OnInit {
   }
 
   search = () => {
+    // Avoid polluting the querystring
     const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
     this.updateQueryString(cleanedReport);
     this.loading = true;
     this.loadingError = false;
     this.reportService.getReports(cleanedReport).subscribe((result: PaginatedData<Report>) => {
       this.loading = false;
-      this.data = result.entities;
-      this.totalCount = result.totalCount;
+      this.reports = result;
     }, err => {
       this.loading = false;
       this.loadingError = true;
     });
   };
 
-  updateReport(reportId: string) {
-    this.reportService.getReport(reportId).subscribe(
-      report => {
-        const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
-            return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
-          }).reports;
-          reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
-        },
-      err => {
-        this.search();
-      });
-  }
-
   launchExtraction() {
     this.reportService.launchExtraction(this.searchFormValue).subscribe(() => {
-      // TODO(Alex) Pop un toast avec rediretion
+      // TODO(Alex) Pop toast with redirection button
       this.router.navigate(['mes-telechargements']);
     });
   }

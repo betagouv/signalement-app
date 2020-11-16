@@ -14,7 +14,7 @@ import { ReportService } from '../../../../services/report.service';
 @Component({
   selector: 'app-report-list-search',
   template: `
-    <div class="search-input-group" [formGroup]="searchForm">
+    <div class="search-input" [formGroup]="searchForm">
       <input formControlName="details" (keyup.enter)="search()" class="input-invisible"
              placeholder="Rechercher dans les colonnes problème et description...">
 

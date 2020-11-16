@@ -1,7 +1,5 @@
 <app-banner title="Suivi des signalements"
-            [subTitle]="searchFormValue.siret ? 'SIRET ' + searchFormValue.siret : ''"
-            [backButton]="siretUrlParam !== null">
-</app-banner>
+            [subTitle]="searchFormValue.siret ? 'SIRET ' + searchFormValue.siret : ''"></app-banner>
 
 <app-page>
     <app-panel [loading]="loading" *appRole="[roles.Admin, roles.DGCCRF]">
@@ -13,8 +11,7 @@
     </app-report-list-search>
 
     <app-report-list-datatable
-      [data]="data"
-      [total]="totalCount"
+      [reports]="reports"
       [pageSize]="searchFormValue.limit"
       [userRole]="(authenticationService.user | async).role"
       (paginationChanged)="onPaginationChange($event)">

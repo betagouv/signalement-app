@@ -57,7 +57,6 @@ export class ServiceUtils {
     return Object.entries(obj).reduce((acc, [key, val]) => ({
       ...acc,
       ...(val ? { [key]: `${val}`.trim() } : {})
-      // [key]: `${Array.isArray(val) ? val.join(',') : val}`
     }), {}) as { [key in keyof T]: string | string[] };
   }
 

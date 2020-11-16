@@ -112,11 +112,11 @@ export class ReportListProComponent implements OnInit {
   loadReports(page: number) {
     this.loading = true;
     this.loadingError = false;
-    this.reportService.getReports(
-      // (page - 1) * this.itemsPerPage,
-      // this.itemsPerPage,
-      this.reportFilter,
-    ).subscribe(
+    this.reportService.getReports({
+      ...this.reportFilter,
+      offset: (page - 1) * this.itemsPerPage,
+      limit: this.itemsPerPage,
+    }).subscribe(
       result => {
         this.loading = false;
         this.reports = result.entities;
@@ -153,6 +153,6 @@ export class ReportListProComponent implements OnInit {
   }
 
   hasFilter() {
-    return this.reportFilter && (this.reportFilter.start || this.reportFilter.end || this.reportFilter.status);
+    return this.reportFilter && (this.reportFilter.period || this.reportFilter.status);
   }
 }
