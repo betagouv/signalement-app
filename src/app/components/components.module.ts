@@ -5,43 +5,13 @@ import { CommonModule } from '@angular/common';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BannerComponent } from './banner/banner.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDatepickerModule,
-  MatIconModule,
-  MatInputModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatPseudoCheckboxModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatTableModule,
-  MatTooltipModule
-} from '@angular/material';
 import { PanelModule } from './panel/panel.module';
 import { PageModule } from './page/page.module';
+import { MaterialModule } from './material.module';
+import { FenderModule } from './fender/fender.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
-const matModules = [
-  MatFormFieldModule,
-  MatInputModule,
-  MatSelectModule,
-  MatRadioModule,
-  MatIconModule,
-  MatTooltipModule,
-  MatButtonModule,
-  MatTableModule,
-  MatPaginatorModule,
-  MatCheckboxModule,
-  MatPseudoCheckboxModule,
-  MatRippleModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-];
 
 @NgModule({
   declarations: [
@@ -52,6 +22,7 @@ const matModules = [
   imports: [
     CommonModule,
     PipesModule,
+    FenderModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
   ],
   exports: [
@@ -60,11 +31,9 @@ const matModules = [
     BannerComponent,
     PanelModule,
     PageModule,
-    ...matModules,
+    MaterialModule,
   ],
   providers: [
-    MatDatepickerModule,
-    MatNativeDateModule,
   ],
   entryComponents: [
   ]
