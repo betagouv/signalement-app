@@ -5,12 +5,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ServiceUtils } from './service.utils';
 import { DetailInputValue, Step } from '../model/Report';
 import { environment } from '../../environments/environment';
-import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
 import { of } from 'rxjs';
 import { Department, Region } from '../model/Region';
-import { CompanySearchResult } from '../model/Company';
 import { genDraftReport, genSubcategory } from '../../../test/fixtures.spec';
 
 describe('ReportService', () => {
@@ -106,12 +104,13 @@ describe('ReportService', () => {
 
     it('should not pass a departments http param when there are no area report filter', (done) => {
 
-      const reportFilter = new ReportFilter();
-      reportFilter.period = [new Date(), new Date()];
-      const offset = 0;
-      const limit = 10;
+      const reportFilter: ReportFilter = {
+        period: [new Date().toISOString(), new Date().toISOString()],
+        offset: 0,
+        limit: 10,
+      };
 
-      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+      reportService.getReports(reportFilter).subscribe(result => {
           done();
         }
       );
@@ -123,8 +122,8 @@ describe('ReportService', () => {
         entities: []
       });
 
-      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
       expect(getReportRequest.request.params.get('departments')).toBeNull();
 
       httpMock.verify();
@@ -132,13 +131,14 @@ describe('ReportService', () => {
 
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
-      const reportFilter = new ReportFilter();
-      reportFilter.departments = regionFixture.departments;
-      reportFilter.period = [new Date(), new Date()];
-      const offset = 0;
-      const limit = 10;
+      const reportFilter: ReportFilter = {
+        departments: regionFixture.departments.map(_ => _.code),
+        period: [new Date().toISOString(), new Date().toISOString()],
+        offset: 0,
+        limit: 10,
+      };
 
-      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+      reportService.getReports(reportFilter).subscribe(result => {
           done();
         }
       );
@@ -150,8 +150,8 @@ describe('ReportService', () => {
         entities: []
       });
 
-      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
       expect(getReportRequest.request.params.get('departments')).toEqual(`${dept1Fixture.code},${dept2Fixture.code}`);
 
       httpMock.verify();
@@ -159,13 +159,15 @@ describe('ReportService', () => {
 
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
-      const reportFilter = new ReportFilter();
-      reportFilter.departments = [dept2Fixture];
-      reportFilter.period = [new Date(), new Date()];
-      const offset = 0;
-      const limit = 10;
+      const reportFilter: ReportFilter = {
 
-      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+        departments: [dept2Fixture.code],
+        period: [new Date().toString(), new Date().toString()],
+        offset: 0,
+        limit: 10,
+      };
+
+      reportService.getReports(reportFilter).subscribe(result => {
           done();
         }
       );
@@ -177,8 +179,8 @@ describe('ReportService', () => {
         entities: []
       });
 
-      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
       expect(getReportRequest.request.params.get('departments')).toEqual(`${dept2Fixture.code}`);
 
       httpMock.verify();
