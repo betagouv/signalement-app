@@ -1,8 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
 import moment from 'moment';
-import { BsLocaleService, BsModalService } from 'ngx-bootstrap';
 import { ReportFilter } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
@@ -12,13 +11,13 @@ import { ConstantService } from '../../../services/constant.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import oldCategories from '../../../../assets/data/old-categories.json';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PaginatedData } from '../../../model/PaginatedData';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Utils from '../../../utils';
-import { PageEvent } from '@angular/material';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-report-list',

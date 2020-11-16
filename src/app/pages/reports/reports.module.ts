@@ -15,53 +15,20 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PipesModule } from '../../pipes/pipes.module';
 import { Roles } from '../../model/AuthUser';
 import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
-import { ReportListModule } from './list/report-list.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { ReportListSearchComponent } from './list/search/report-list-search.component';
-import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
 import { ReportListModule } from './list/report-list.module';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
   { path: 'suivi-des-signalements', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
-  {
-    path: 'suivi-des-signalements/pro',
-    component: ReportListProComponent,
-    canActivate: [AuthGuard],
-    data: { expectedRoles: [Roles.Admin] }
-  },
-  {
-    path: 'suivi-des-signalements/admin',
-    component: ReportListComponent,
-    canActivate: [AuthGuard],
-    data: { expectedRoles: [Roles.Admin] }
-  },
-  {
-    path: 'suivi-des-signalements/dgccrf',
-    component: ReportListComponent,
-    canActivate: [AuthGuard],
-    data: { expectedRoles: [Roles.DGCCRF] }
-  },
-  {
-    path: 'suivi-des-signalements/pro/siret/:siret',
-    component: ReportListProComponent,
-    canActivate: [AuthGuard],
-    data: { expectedRoles: [Roles.Pro] }
-  },
-  {
-    path: 'suivi-des-signalements/admin/siret/:siret',
-    component: ReportListComponent,
-    canActivate: [AuthGuard],
-    data: { expectedRoles: [Roles.Admin] }
-  },
-  {
-    path: 'suivi-des-signalements/dgccrf/siret/:siret',
-    component: ReportListComponent,
-    canActivate: [AuthGuard],
-    data: { expectedRoles: [Roles.DGCCRF] }
-  },
+  { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
+  { path: 'suivi-des-signalements/admin', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
+  { path: 'suivi-des-signalements/dgccrf', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
+  { path: 'suivi-des-signalements/pro/siret/:siret', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
+  { path: 'suivi-des-signalements/admin/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
+  { path: 'suivi-des-signalements/dgccrf/siret/:siret', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
 ];
 
@@ -86,7 +53,6 @@ const routes: Routes = [
     PipesModule,
     AppRoleModule,
     AppPermissionModule,
-    SelectDepartmentsModule,
   ]
 })
 export class ReportsModule { }

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
 import { DetailInputValue, Report, reportStatusColor, reportStatusIcon } from '../../../../model/Report';
 import { Roles } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
-import { PageEvent } from '@angular/material/paginator/typings/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-report-list-datatable',

@@ -2,7 +2,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import Utils from '../../../../utils';
 import { Region, Regions } from '../../../../model/Region';
-import { MatPseudoCheckboxState } from '@angular/material';
+import { MatPseudoCheckboxState } from '@angular/material/core';
 
 @Component({
   selector: 'app-select-departments',
