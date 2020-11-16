@@ -1,43 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import oldCategories from '../../../../../assets/data/old-categories.json';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ReportFilter } from '../../../../model/ReportFilter';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import Utils from '../../../../utils';
 import { AnomalyService } from '../../../../services/anomaly.service';
 import { Tag } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
-import { Region, Regions } from '../../../../model/Region';
+import { Regions } from '../../../../model/Region';
+import { ReportFilter } from '../../../../model/ReportFilter';
+import { reportStatusColor, reportStatusIcon } from '../../../../model/Report';
+import { ReportService } from '../../../../services/report.service';
 
 @Component({
   selector: 'app-report-list-search',
   template: `
-    <div class="input-group relative">
-      {{filterForm.value|json}}
-      <input [formControl]="searchInput" (keyup)="onKey($event)" type="text" class="form-control" placeholder="Rechercher signalements...">
-      <div class="input-group-append">
-        <div class="input-group-text" (click)="openPanel()">
-          <span class="material-icons">arrow_drop_down</span>
-        </div>
+    <div class="search-input-group" [formGroup]="searchForm">
+      <input formControlName="details" (keyup.enter)="search()" class="input-invisible"
+             placeholder="Rechercher dans les colonnes problème et description...">
+
+      <div class="txt-secondary nowrap">
+        <button mat-icon-button (click)="extracted.emit()" matTooltip="Exporter en XLS">
+          <mat-icon>get_app</mat-icon>
+        </button>
+        <button mat-icon-button (click)="cleared.emit()">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <button mat-icon-button (click)="openPanel()">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
       </div>
 
       <div *ngIf="isPanelOpen" class="panel-backdrop" (click)="closePanel()"></div>
-      <div class="search-dialog" [@togglePanel]="isPanelOpen ? 'open' : 'closed'" [formGroup]="filterForm">
+      <div class="search-dialog" [@togglePanel]="isPanelOpen ? 'open' : 'closed'">
         <table class="form">
           <tr>
             <td><label for="rls-departments">Département(s)</label></td>
             <td>
-              <mat-select formControlName="departments" id="rls-departments" class="form-control" multiple>
-                <mat-option class="select-option-group">Tous les départements</mat-option>
-                <ng-container *ngFor="let region of regions">
-                  <mat-option disabled class="select-optgroup" (click)="toggleRegion(region)">{{region.label}}</mat-option>
-                  <mat-option class="mat-option-dense" *ngFor="let dep of region.departments" [value]="dep.code">
-                    ({{dep.code}}) {{dep.label}}
-                  </mat-option>
-                </ng-container>
-              </mat-select>
+              <app-select-departments formControlName="departments" id="rls-departments" class="form-control"></app-select-departments>
             </td>
           </tr>
           <tr>
@@ -56,23 +55,36 @@ import { Region, Regions } from '../../../../model/Region';
             <td><label for="rls-statut">Statut</label></td>
             <td>
               <mat-select formControlName="status" id="rls-statut" class="form-control">
+                <mat-select-trigger>{{searchForm.get('status').value}}</mat-select-trigger>
                 <mat-option value="undefined" selected>Tous les statuts</mat-option>
-                <mat-option *ngFor="let _ of statusList" [value]="_">{{_}}</mat-option>
+                <mat-option *ngFor="let _ of statusList" [value]="_">
+                  <mat-icon aria-hidden [ngStyle]="{'color': statusColor[_]}">{{statusIcon[_]}}</mat-icon>
+                  {{_}}
+                </mat-option>
               </mat-select>
             </td>
           </tr>
           <tr>
             <td><label for="rls-period">Période</label></td>
             <td>
-              <input
-                id="rls-period"
-                class="form-control"
-                formControlName="period"
-                bsDaterangepicker
-                autocomplete="off"
-                [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
-                triggers="click keypress"
-              />
+              <mat-form-field appearance="fill" id="rls-period">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate formControlName="start" placeholder="Début">
+                  <input matEndDate formControlName="end" placeholder="Fin">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+<!--              <input-->
+<!--                id="rls-period"-->
+<!--                class="form-control"-->
+<!--                formControlName="period"-->
+<!--                bsDaterangepicker-->
+<!--                autocomplete="off"-->
+<!--                [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"-->
+<!--                triggers="click keypress"-->
+<!--              />-->
             </td>
           </tr>
           <tr>
@@ -95,18 +107,6 @@ import { Region, Regions } from '../../../../model/Region';
             </td>
           </tr>
           <tr>
-            <td>
-              <label for="rls-details">Mots-clés</label>
-              &nbsp;&nbsp;
-              <mat-icon class="txt-disabled" aria-hidden="true" matTooltip="Recherche dans les colonnes problème et description">
-                help_outline
-              </mat-icon>
-            </td>
-            <td>
-              <input id="rls-details" formControlName="details" class="form-control"/>
-            </td>
-          </tr>
-          <tr>
             <td><label>Entreprise identifiée ?</label></td>
             <td>
               <mat-radio-group formControlName="hasCompany">
@@ -120,7 +120,7 @@ import { Region, Regions } from '../../../../model/Region';
 
         <div class="actions">
           <button color="primary" mat-button (click)="closePanel()">Fermer</button>
-          <button color="primary" mat-raised-button>Rechercher</button>
+          <button color="primary" mat-raised-button (click)="search()">Rechercher</button>
         </div>
       </div>
     </div>
@@ -134,6 +134,7 @@ import { Region, Regions } from '../../../../model/Region';
       state('closed', style({
         opacity: 0,
         height: 0,
+        'z-index': -1,
       })),
       transition('open => closed', [animate('160ms')]),
       transition('closed => open', [animate('160ms')]),
@@ -144,18 +145,26 @@ export class ReportListSearchComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
     private anomalyService: AnomalyService,
     private router: Router,
+    private reportService: ReportService,
     private constantService: ConstantService,
   ) {
   }
 
-  filterForm: FormGroup;
+  @Input() searchForm: FormGroup;
 
-  isPanelOpen = true;
+  @Output() searched = new EventEmitter<ReportFilter>();
 
-  searchInput = new FormControl();
+  @Output() cleared = new EventEmitter();
+
+  @Output() extracted = new EventEmitter();
+
+  readonly statusIcon = reportStatusIcon;
+
+  readonly statusColor = reportStatusColor;
+
+  isPanelOpen = false;
 
   tags: Tag[];
 
@@ -165,8 +174,9 @@ export class ReportListSearchComponent implements OnInit {
 
   regions = Regions;
 
+  departments = this.regions.flatMap(_ => _.departments).map(_ => _.code);
+
   ngOnInit() {
-    this.buildForm();
     this.tags = this.anomalyService.getTags();
     this.constantService.getReportStatusList().subscribe(_ => this.statusList = _);
     this.categories = [
@@ -175,76 +185,8 @@ export class ReportListSearchComponent implements OnInit {
     ];
   }
 
-  buildForm = () => {
-    const initialValues: ReportFilter = {
-      tags: [],
-      departments: [],
-      details: undefined,
-      period: undefined,
-      siret: undefined,
-      status: undefined,
-      hasCompany: undefined,
-      email: undefined,
-      category: undefined,
-      hasCompanyStr: '',
-    };
-    try {
-      this.filterForm = this.fb.group({...initialValues, ...this.activatedRoute.snapshot.queryParams});
-    } catch (e) {
-      // Prevent error thrown by Angular when queryParams are wrong
-      this.filterForm = this.fb.group(initialValues);
-      console.warn('Query params seem invalid', e);
-    }
-    this.search(initialValues);
-    this.filterForm.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged(),
-    ).subscribe(this.search);
-  };
-
-  search = (report: ReportFilter) => {
-    const cleanedReport = Utils.cleanObject(report) as ReportFilter | undefined;
-    if (cleanedReport) {
-      this.updateSearchForm(cleanedReport);
-      this.updateQueryString(cleanedReport);
-    }
-  };
-
-  allDepartmentsSelected = (r: Region) => r.departments.every(_ => this.safeDepartementInputValue.includes(_));
-  allDeparmentsUnselected = (r: Region) => r.departments.every(_ => this.safeDepartementInputValue.includes(_));
-  someDepartmentsSelected = (r: Region) => this.safeDepartementInputValue.some(_ => r.departments.includes(_));
-
-  toggleRegion = (region: Region) => {
-    const departments = region.departments.map(_ => _.code);
-    if (departments.every(_ => this.safeDepartementInputValue.includes(_))) {
-      this.removeRegion(region);
-    } else if (this.safeDepartementInputValue.some(_ => departments.includes(_))) {
-      this.selectRegion(region);
-    } else {
-      this.selectRegion(region);
-    }
-  };
-
-  get safeDepartementInputValue() {
-    return this.filterForm.get('departments').value || [];
-  }
-
-  private selectRegion = (region: Region) => {
-    this.filterForm.get('departments')
-      .patchValue(Utils.uniqueValues([...this.safeDepartementInputValue, ...region.departments.map(_ => _.code)]));
-  };
-
-  private removeRegion = (region: Region) => {
-    const departments = region.departments.map(_ => _.code);
-    this.filterForm
-      .get('departments')
-      .patchValue(this.safeDepartementInputValue.filter(dep => !departments.includes(dep)));
-  };
-
-  onKey(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.filterForm.patchValue(JSON.parse(this.searchInput.value));
-    }
+  get safeDepartmentInputValue() {
+    return this.searchForm.get('departments').value || [];
   }
 
   openPanel() {
@@ -259,15 +201,8 @@ export class ReportListSearchComponent implements OnInit {
     }
   }
 
-  updateSearchForm = (values: ReportFilter) => {
-    this.searchInput.patchValue(
-      JSON.stringify(values)
-      // .filter(([key, value]) => value !== undefined && value !== '')
-      // .reduce((acc, [key, value]) => `${acc} ${key}:(${value})`, '')
-    );
-  };
-
-  updateQueryString = (values: ReportFilter) => {
-    this.router.navigate([], {queryParams: values, state: {}});
-  };
+  search() {
+    this.searched.emit();
+    this.closePanel();
+  }
 }

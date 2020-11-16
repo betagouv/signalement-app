@@ -18,6 +18,7 @@ import { ConstantService } from '../../../services/constant.service';
 import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { genPaginatedReports, genUser } from '../../../../../test/fixtures.spec';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -56,6 +57,7 @@ describe('ReportListComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule,
         PipesModule,
+        BrowserAnimationsModule,
         ComponentsModule
       ],
       providers: []

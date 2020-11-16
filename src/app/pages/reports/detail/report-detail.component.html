@@ -29,7 +29,7 @@
           <div class="row">
             <div class="col-12 order-last col-sm-3 order-sm-first">
 
-              <div class="badge d-none d-sm-inline-block" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
+              <div class="badge d-none d-sm-inline-block" [ngStyle]="{'background-color': statusColor[report.status]}">{{report.status}}</div>
 
               <hr class="d-sm-none" />
 
@@ -250,7 +250,7 @@
                   </ng-template>
                 </ng-container>
               </div>
-              <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
+              <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor[report.status]}">{{report.status}}</div>
               <ng-container>
                 <h2 class="text-primary">Type de signalement</h2>
                 <div class="text-darker-grey pb-2">

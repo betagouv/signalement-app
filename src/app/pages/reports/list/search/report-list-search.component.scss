@@ -21,20 +21,6 @@
   z-index: 1;
 }
 
-.select-optgroup {
-  font-weight: 500;
-  color: $theme-dark-text;
-  cursor: pointer !important;
-
-  &:hover {
-    background: $theme-background-hover;
-  }
-
-  &:not(:first-of-type) {
-    border-top: 1px solid $theme-divider;
-  }
-}
-
 .form {
   width: 100%;
 

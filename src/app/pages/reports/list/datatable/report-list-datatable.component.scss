@@ -1,0 +1,41 @@
+@import "../../../../../theme/variables";
+
+.table-container {
+  overflow-x: scroll;
+
+  table {
+    table-layout: fixed;
+    min-width: 100%;
+
+    tbody {
+      tr {
+        &:hover {
+          background: $theme-background-hover;
+        }
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      @extend %truncate;
+    }
+  }
+}
+
+.mat-cell.mat-column-name {
+  max-width: 220px;
+  font-weight: bold;
+}
+
+.mat-cell.mat-column-description {
+  max-width: 300px;
+  color: $theme-color-text-secondary;
+}
+
+.mat-cell.mat-column-files {
+  max-width: 100px;
+}
+
+.mat-cell.mat-column-category {
+  max-width: 190px;
+}
