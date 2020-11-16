@@ -8,7 +8,6 @@ import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
-import moment from 'moment';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, Website } from '../model/Company';
 
@@ -159,7 +158,7 @@ export class ReportService {
       mergeMap(headers => {
         return this.http.get(
           `${this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'download'])}`,
-          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+          { ...headers, responseType: 'blob', observe: 'response' },
         );
       })
     );

@@ -125,7 +125,7 @@ import { ReportService } from '../../../../services/report.service';
       </div>
     </div>
   `,
-  styleUrls: ['./report-list-search.component.scss'],
+  styleUrls: ['./report-list-filters.component.scss'],
   animations: [
     trigger('togglePanel', [
       state('open', style({
@@ -141,7 +141,7 @@ import { ReportService } from '../../../../services/report.service';
     ]),
   ]
 })
-export class ReportListSearchComponent implements OnInit {
+export class ReportListFiltersComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
@@ -183,10 +183,6 @@ export class ReportListSearchComponent implements OnInit {
       ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
       ...oldCategories
     ];
-  }
-
-  get safeDepartmentInputValue() {
-    return this.searchForm.get('departments').value || [];
   }
 
   openPanel() {
