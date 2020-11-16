@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
@@ -20,12 +20,12 @@ import { PageEvent } from '@angular/material/paginator/typings/paginator';
           </td>
         </ng-container>
 
-        <ng-container *appRole="[roles.DGCCRF]" matColumnDef="postalCode">
+        <ng-container matColumnDef="postalCode">
           <th mat-header-cell *matHeaderCellDef>Commune</th>
           <td mat-cell *matCellDef="let _">{{_.company.postalCode}}</td>
         </ng-container>
 
-        <ng-container *appRole="[roles.DGCCRF]" matColumnDef="siret">
+        <ng-container matColumnDef="siret">
           <th mat-header-cell *matHeaderCellDef>SIRET</th>
           <td mat-cell *matCellDef="let _">{{_.company.siret}}</td>
         </ng-container>
@@ -66,12 +66,12 @@ import { PageEvent } from '@angular/material/paginator/typings/paginator';
           </td>
         </ng-container>
 
-        <ng-container *appRole="[roles.DGCCRF]" matColumnDef="date">
+        <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef>Date du constat</th>
           <td mat-cell *matCellDef="let _">{{getReportingDate(_)}}</td>
         </ng-container>
 
-        <ng-container *appRole="[roles.Admin]" matColumnDef="consumer">
+        <ng-container matColumnDef="consumer">
           <th mat-header-cell *matHeaderCellDef>Consommateur</th>
           <td mat-cell *matCellDef="let _">
             <span [ngClass]="_.contactAgreement ? 'txt-success' : 'txt-error'"
@@ -124,7 +124,7 @@ import { PageEvent } from '@angular/material/paginator/typings/paginator';
   `,
   styleUrls: ['./report-list-datatable.component.scss'],
 })
-export class ReportListDatatableComponent {
+export class ReportListDatatableComponent implements OnInit {
 
   constructor(
     private fileUploaderService: FileUploaderService,
@@ -141,6 +141,8 @@ export class ReportListDatatableComponent {
 
   @Input() pageSize: number;
 
+  @Input() userRole: Roles;
+
   @Output() paginationChanged: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
   readonly roles = Roles;
@@ -149,18 +151,41 @@ export class ReportListDatatableComponent {
 
   readonly statusIcon = reportStatusIcon;
 
-  readonly displayedColumns = [
-    'status',
-    'name',
-    'postalCode',
-    'category',
-    'description',
-    'date',
-    'siret',
-    'consumer',
-    'files',
-    'actions',
-  ];
+  displayedColumns = [];
+  
+  ngOnInit() {
+    this.displayedColumns = this.getRoleColmumns();
+  }
+
+  private getRoleColmumns = (): string[] => {
+    switch (this.userRole) {
+      case Roles.DGCCRF:
+        return [
+          'status',
+          'name',
+          'postalCode',
+          'category',
+          'description',
+          'date',
+          'siret',
+          'files',
+          'actions',
+        ];
+      case Roles.Admin:
+        return [
+          'status',
+          'name',
+          'postalCode',
+          'category',
+          'description',
+          'consumer',
+          'files',
+          'actions',
+        ];
+      default:
+        return [];
+    }
+  };
 
   onChange($event: PageEvent) {
     this.paginationChanged.emit($event);
@@ -229,13 +254,4 @@ export class ReportListDatatableComponent {
   getReportingDate(report: Report) {
     return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
   }
-
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  //
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
 }

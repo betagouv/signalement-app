@@ -18,6 +18,7 @@ import { PaginatedData } from '../../../model/PaginatedData';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Utils from '../../../utils';
 import { PageEvent } from '@angular/material';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-report-list',
@@ -48,6 +49,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   data: any[] = [];
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+    private authenticationService: AuthenticationService,
     private titleService: Title,
     private meta: Meta,
     private fb: FormBuilder,
@@ -90,8 +92,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
       tags: [],
       departments: [],
       details: undefined,
-      start: undefined,
-      end: undefined,
+      // start: undefined,
+      // end: undefined,
+      period: undefined,
       siret: undefined,
       status: undefined,
       hasCompany: undefined,
