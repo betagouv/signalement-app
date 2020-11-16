@@ -56,7 +56,7 @@ export class ServiceUtils {
   objectToHttpParams<T extends object>(obj: T): { [key in keyof T]: string | string[] } {
     return Object.entries(obj).reduce((acc, [key, val]) => ({
       ...acc,
-      ...(val ? { [key]: val } : {})
+      ...(val ? { [key]: `${val}`.trim() } : {})
       // [key]: `${Array.isArray(val) ? val.join(',') : val}`
     }), {}) as { [key in keyof T]: string | string[] };
   }

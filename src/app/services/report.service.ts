@@ -27,13 +27,6 @@ export class ReportService {
 
   private _currentReportFilter = {};
 
-  private reportFilterToQueryString = (r: ReportFilter): { [key in keyof ReportFilter]: any } => ({
-    ...r,
-    ...(r.departments ? { departments: r.departments.join(',') } : {}),
-    ...((r.period && r.period[0]) ? { start: moment(r.period[0]).format('YYYY-MM-DD') } : {}),
-    ...((r.period && r.period[1]) ? { end: moment(r.period[1]).format('YYYY-MM-DD') } : {}),
-  });
-
   createReport(draftReport: DraftReport) {
     return this.http.post(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
@@ -188,7 +181,7 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.get<PaginatedData<any>>(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-        { ...headers, params: this.serviceUtils.objectToHttpParams(this.reportFilterToQueryString(report)) },
+        { ...headers, params: this.serviceUtils.objectToHttpParams(this.reportFilter2QueryString(report)) },
       )),
       mergeMap(paginatedData => of({
         ...paginatedData,
@@ -197,32 +190,22 @@ export class ReportService {
     );
   }
 
-  launchExtraction(reportFilter: ReportFilter) {
+  launchExtraction(report: ReportFilter) {
     return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        const params = {};
-        params['departments'] = (reportFilter.departments || []);
-        // if (reportFilter.period && reportFilter.period[0]) {
-        //   params['start'] = moment(reportFilter.period[0]).format('YYYY-MM-DD');
-        // }
-        // if (reportFilter.period && reportFilter.period[1]) {
-        //   params['end'] = moment(reportFilter.period[1]).format('YYYY-MM-DD');
-        // }
-        ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
-          if (reportFilter[filterName]) {
-            params[filterName] = (reportFilter[filterName] as string).trim();
-          }
-        });
-        params['hasCompany'] = reportFilter.hasCompany;
-        params['tags'] = (reportFilter.tags || []);
-        return this.http.post(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
-          params,
-          headers
-        );
-      })
+      mergeMap(headers => this.http.post(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
+        { ...headers, params: this.serviceUtils.objectToHttpParams(this.reportFilter2QueryString(report)) },
+        headers
+      ))
     );
   }
+
+  private reportFilter2QueryString = (r: ReportFilter): { [key in keyof ReportFilter]: any } => ({
+    ...r,
+    ...(r.departments ? { departments: r.departments.join(',') } : {}),
+    ...((r.period && r.period[0]) ? { start: moment(r.period[0]).format('YYYY-MM-DD') } : {}),
+    ...((r.period && r.period[1]) ? { end: moment(r.period[1]).format('YYYY-MM-DD') } : {}),
+  });
 
   private reportApi2report(reportWithFiles: {report: any, files?: UploadedFile[]}) {
     const report = reportWithFiles.report;
