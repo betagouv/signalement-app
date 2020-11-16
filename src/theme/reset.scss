@@ -1,8 +1,13 @@
-.tooltip:before {
-  content: none;
+.tooltip-arrow {
+  display: none !important;
 }
 
 .tooltip-inner {
-  background: rgba(97, 97, 97, .9) !important;
-  border-radius: 2px !important;
+  content: none;
+  background: rgba(97,97,97,.9);
+  border-radius: 3px;
+  font-size: 10px;
+}
+.tootip {
+  opacity: 1 !important;
 }

@@ -76,8 +76,8 @@ class ErrorLogger extends ErrorHandler {
             { path: 'not-found', component: NotFoundComponent },
             { path: '**', component: NotFoundComponent },
         ], {
-            scrollPositionRestoration: 'top',
-            anchorScrolling: 'enabled',
+            // scrollPositionRestoration: 'top',
+            // anchorScrolling: 'enabled',
         }),
         HeaderModule,
         ReportModule,

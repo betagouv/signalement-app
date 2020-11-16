@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { UserAccess } from '../../../model/Company';
-import { Report, ReportStatus, StatusColor } from '../../../model/Report';
+import { Report, ReportStatus, reportStatusColor } from '../../../model/Report';
 import { ReportFilter } from '../../../model/ReportFilter';
 import { BsLocaleService } from 'ngx-bootstrap';
 import { combineLatest } from 'rxjs';
@@ -22,7 +22,7 @@ import pages from '../../../../assets/data/pages.json';
 export class ReportListProComponent implements OnInit {
 
   reportStatus = ReportStatus;
-  statusColor = StatusColor;
+  statusColor = reportStatusColor;
 
   userAccesses: UserAccess[];
   reports: Report[];
@@ -105,7 +105,7 @@ export class ReportListProComponent implements OnInit {
   }
 
   cancelFilters() {
-    this.reportFilter = Object.assign(new ReportFilter(), { siret: this.reportFilter.siret });
+    this.reportFilter = { siret: this.reportFilter.siret };
     this.submitFilters();
   }
 
@@ -113,9 +113,9 @@ export class ReportListProComponent implements OnInit {
     this.loading = true;
     this.loadingError = false;
     this.reportService.getReports(
-      (page - 1) * this.itemsPerPage,
-      this.itemsPerPage,
-      Object.assign(new ReportFilter(), this.reportFilter)
+      // (page - 1) * this.itemsPerPage,
+      // this.itemsPerPage,
+      this.reportFilter,
     ).subscribe(
       result => {
         this.loading = false;
@@ -153,6 +153,6 @@ export class ReportListProComponent implements OnInit {
   }
 
   hasFilter() {
-    return this.reportFilter && (this.reportFilter.period || this.reportFilter.status);
+    return this.reportFilter && (this.reportFilter.start || this.reportFilter.end || this.reportFilter.status);
   }
 }

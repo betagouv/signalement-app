@@ -1,24 +1,22 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
-import { DetailInputValue, Report, ReportStatus, StatusColor } from '../../../model/Report';
-import { UploadedFile } from '../../../model/UploadedFile';
-import { FileUploaderService } from '../../../services/file-uploader.service';
+import { Report } from '../../../model/Report';
 import moment from 'moment';
 import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ReportFilter } from '../../../model/ReportFilter';
 import { Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import { isPlatformBrowser, Location } from '@angular/common';
 import { Permissions, Roles } from '../../../model/AuthUser';
-import { ReportingDateLabel, Tag } from '../../../model/Anomaly';
+import { Tag } from '../../../model/Anomaly';
 import { ConstantService } from '../../../services/constant.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Department, Region, Regions } from '../../../model/Region';
 import oldCategories from '../../../../assets/data/old-categories.json';
-
-const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
+import { PaginatedData } from '../../../model/PaginatedData';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import Utils from '../../../utils';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-report-list',
@@ -26,21 +24,17 @@ const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
   styleUrls: ['./report-list.component.scss']
 })
 export class ReportListComponent implements OnInit, OnDestroy {
+
   permissions = Permissions;
   roles = Roles;
-  reportStatus = ReportStatus;
-  statusColor = StatusColor;
-  regions = Regions;
   tags: Tag[];
 
   reportsByDate: {date: string, reports: Array<Report>}[];
   totalCount: number;
-  currentPage: number;
-  itemsPerPage = 20;
+  readonly defaultPageSize = 10;
+  page = 1;
 
   siretUrlParam: string;
-  reportFilter: ReportFilter;
-  tagFilterToAdd: Tag = '';
   statusList: string[];
   categories: string[];
 
@@ -49,49 +43,37 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   loading: boolean;
   loadingError: boolean;
+  searchForm: FormGroup;
+  data: any[] = [];
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private titleService: Title,
-              private meta: Meta,
-              private anomalyService: AnomalyService,
-              private reportService: ReportService,
-              private constantService: ConstantService,
-              private fileUploaderService: FileUploaderService,
-              private localeService: BsLocaleService,
-              private modalService: BsModalService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) {
+    private titleService: Title,
+    private meta: Meta,
+    private fb: FormBuilder,
+    private anomalyService: AnomalyService,
+    private activatedRoute: ActivatedRoute,
+    private reportService: ReportService,
+    private constantService: ConstantService,
+    private localeService: BsLocaleService,
+    private modalService: BsModalService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit() {
     this.titleService.setTitle(pages.reports.list.title);
     this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
-
-    const queryParamMap = this.route.snapshot.queryParamMap;
-    const paramMap = this.route.snapshot.paramMap;
+    this.initForm();
 
     this.constantService.getReportStatusList().subscribe(
       statusList => this.statusList = statusList
     );
 
-    this.reportFilter = this.reportService.currentReportFilter;
-    this.itemsPerPage = Number(queryParamMap.get('per_page')) || 20;
-
-    this.siretUrlParam = paramMap.get('siret');
-    if (this.siretUrlParam) {
-      this.reportFilter = new ReportFilter();
-      this.reportFilter.siret = this.siretUrlParam;
-    }
-
-    this.loadReports(Number(queryParamMap.get('page_number') || 1));
-
-    this.categories =
-      [
-        ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
-        ...oldCategories
-      ];
+    this.categories = [
+      ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
+      ...oldCategories
+    ];
 
     this.tags = this.anomalyService.getTags();
 
@@ -102,86 +84,96 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.modalOnHideSubscription.unsubscribe();
   }
 
-  initPagination() {
-    this.totalCount = 0;
-    this.currentPage = 1;
+  private initForm = (): void => {
+    const initialValues: ReportFilter = {
+      tags: [],
+      departments: [],
+      details: undefined,
+      start: undefined,
+      end: undefined,
+      siret: undefined,
+      status: undefined,
+      hasCompany: undefined,
+      email: undefined,
+      category: undefined,
+      offset: 0,
+      limit: this.defaultPageSize,
+    };
+    const formValues = {
+      ...initialValues,
+      ...this.reportService.currentReportFilter,
+      ...this.activatedRoute.snapshot.queryParams,
+    };
+    try {
+      this.buildForm(formValues);
+    } catch (e) {
+      // Prevent error thrown by Angular when queryParams are wrong
+      this.buildForm(initialValues);
+      console.warn('Query params seem invalid', this.activatedRoute.snapshot.queryParams, e);
+    }
+    this.search();
+  };
+
+  private buildForm = (filters: ReportFilter): void => {
+    this.searchForm = this.fb.group({
+      ...filters,
+      tags: [filters.tags],
+      departments: [filters.departments],
+    });
+  };
+
+  onPaginationChange(event: PageEvent) {
+    console.log(event);
+    this.patchValue({
+      offset: event.pageIndex * event.pageSize,
+      limit: event.pageSize,
+    });
+    this.search();
   }
 
-  submitFilters() {
-    this.location.replaceState(this.router.routerState.snapshot.url.replace(`/siret/${this.siretUrlParam}`, '').split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
-    this.initPagination();
-    this.reportFilter.siret = this.reportFilter.siret ? this.reportFilter.siret.replace(/\s/g, '') : '';
-    this.loadReports(1);
+  private patchValue = (form: Partial<ReportFilter>) => {
+    this.searchForm.patchValue(form);
+  };
+
+  onFiltersUpdate(): void {
+    this.patchValue({ ...this.searchFormValue, offset: 0 });
+    this.data = [];
+    this.search();
   }
 
-  cancelFilters() {
-    this.reportFilter = new ReportFilter();
-    this.submitFilters();
+  private updateQueryString = (values: ReportFilter) => {
+    this.router.navigate([], { queryParams: values });
+  };
+
+  get searchFormValue(): ReportFilter {
+    return this.searchForm.value;
   }
 
-  loadReports(page: number) {
+  onClearFilters(): void {
+    this.searchForm.reset();
+    this.searchForm.patchValue({
+      offset: 0,
+      limit: this.defaultPageSize
+    });
+    this.search();
+  }
+
+  search = () => {
+    const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
+    console.log('report ?', this.searchFormValue);
+    this.updateQueryString(cleanedReport);
     this.loading = true;
     this.loadingError = false;
-    this.reportService.getReports(
-      (page - 1) * this.itemsPerPage,
-      this.itemsPerPage,
-      Object.assign(new ReportFilter(), this.reportFilter)
-    ).subscribe(
-      result => {
-        this.loading = false;
-        this.groupReportsByDate(result.entities);
-        this.totalCount = result.totalCount;
-        setTimeout(() => {
-          this.currentPage = page;
-          if (isPlatformBrowser(this.platformId)) {
-            window.scroll(
-              0,
-              sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 177
-            );
-            sessionStorage.removeItem(ReportsScrollYStorageKey);
-          }
-        }, 1);
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
-  }
-
-  groupReportsByDate(reports: Report[]) {
-    this.reportsByDate = [];
-    const distinctDates = reports
-      .map(e => moment(e.creationDate).format('DD/MM/YYYY'))
-      .filter((date, index, self) => self.indexOf(date) === index);
-    distinctDates.forEach(date => {
-      this.reportsByDate.push(
-        {
-          date: date,
-          reports: reports
-            .filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
-            .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
-        });
+    this.reportService.getReports(cleanedReport).subscribe((result: PaginatedData<Report>) => {
+      this.loading = false;
+      this.data = result.entities;
+      this.totalCount = result.totalCount;
+    }, err => {
+      console.error(err);
+      this.loading = false;
+      this.loadingError = true;
     });
-
-  }
-
-  changePage(pageEvent: {page: number, itemPerPage: number}) {
-    if (this.currentPage !== pageEvent.page) {
-      this.loadReports(pageEvent.page);
-      this.location.go(this.router.routerState.snapshot.url.split('?')[0], `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
-    }
-  }
-
-  getFileDownloadUrl(uploadedFile: UploadedFile) {
-    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
-  }
-
-  displayReport(report: Report) {
-    if (isPlatformBrowser(this.platformId) && window.scrollY) {
-      sessionStorage.setItem(ReportsScrollYStorageKey, window.scrollY.toString());
-    }
-    this.router.navigate(['suivi-des-signalements', 'report', report.id]);
-  }
+  };
 
   updateReportOnModalHide() {
     return this.modalService.onHide.subscribe(reason => {
@@ -200,94 +192,14 @@ export class ReportListComponent implements OnInit, OnDestroy {
           reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
         },
       err => {
-        this.loadReports(this.currentPage);
+        this.search();
       });
   }
 
-  selectArea(area?: Region | Department) {
-    if (!area) {
-      this.reportFilter.areaLabel = undefined;
-      this.reportFilter.departments = [];
-    } else if (area instanceof Region) {
-      this.reportFilter.areaLabel = area.label;
-      this.reportFilter.departments = area.departments;
-    } else {
-      this.reportFilter.areaLabel = `${area.code} - ${area.label}`;
-      this.reportFilter.departments = [area];
-    }
-  }
-
-  addTagFilter() {
-    this.reportFilter.tags.push(this.tagFilterToAdd);
-    this.tagFilterToAdd = '';
-  }
-
-  removeTagFilter(tag: Tag) {
-    this.reportFilter.tags.splice(this.reportFilter.tags.indexOf(tag), 1);
-  }
-
   launchExtraction() {
-    this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
+    this.reportService.launchExtraction(this.searchFormValue).subscribe(() => {
+      // TODO(Alex) Pop un toast avec rediretion
       this.router.navigate(['mes-telechargements']);
     });
-  }
-
-  getReportingDate(report: Report) {
-    return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
-  }
-
-  getDetailContent(detailInputValues: DetailInputValue[]) {
-    const MAX_CHAR_DETAILS = 40;
-
-    function getLines(str: String, maxLength: Number) {
-      function helper(_strings, currentLine, _nbWords) {
-        if (!_strings || !_strings.length) {
-          return _nbWords;
-        }
-        if (_nbWords >= _strings.length) {
-          return _nbWords;
-        } else {
-          const newLine = currentLine + ' ' + _strings[_nbWords];
-          if (newLine.length > maxLength) {
-            return _nbWords;
-          } else {
-            return helper(_strings, newLine, _nbWords + 1);
-          }
-        }
-      }
-      const strings = str.split(' ');
-      const nbWords = helper(str.split(' '), '', 0);
-
-      const lines = strings.reduce((prev, curr, index) => index < nbWords
-        ? {...prev, line: prev.line + curr + ' '}
-        : {...prev, rest: prev.rest + curr + ' '}
-      , {line: '', rest: ''});
-
-      return { line: lines.line.trim(), rest: lines.rest.trim() };
-    }
-
-    let firstLine = '';
-    let secondLine = '';
-    let hasNext = false;
-
-    if (detailInputValues && detailInputValues.length) {
-      if (detailInputValues.length > 2) {
-        hasNext = true;
-      }
-
-      let lines = getLines(detailInputValues[0].label + ' ' + detailInputValues[0].value, MAX_CHAR_DETAILS);
-      firstLine = lines.line;
-
-      if (lines.rest) {
-        lines = getLines(lines.rest, MAX_CHAR_DETAILS);
-        secondLine = lines.rest ? lines.line.slice(0, -3) + '...' : lines.line;
-
-      } else if (detailInputValues.length > 1) {
-        lines = getLines(detailInputValues[1].label + ' ' + detailInputValues[1].value, MAX_CHAR_DETAILS);
-        secondLine = lines.rest ? lines.line.slice(0, -3) + '...' : lines.line;
-      }
-
-      return {firstLine, secondLine, hasNext };
-    }
   }
 }

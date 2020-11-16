@@ -17,15 +17,22 @@ import { Company, CompanySearchResult, DraftCompany, Website } from '../model/Co
 })
 export class ReportService {
 
-  private _currentReportFilter = new ReportFilter();
-
   get currentReportFilter() {
     return this._currentReportFilter;
   }
 
   constructor(private http: HttpClient,
-              private serviceUtils: ServiceUtils) {
+    private serviceUtils: ServiceUtils) {
   }
+
+  private _currentReportFilter = {};
+
+  private static reportFilterToQueryString = (r: ReportFilter): { [key in keyof ReportFilter]: any } => ({
+    ...r,
+    ...(r.departments ? { departments: r.departments.join(',') } : {}),
+    // ...((r.period && r.period[0]) ? { start: moment(r.period[0]).format('YYYY-MM-DD') } : {}),
+    // ...((r.period && r.period[1]) ? { end: moment(r.period[1]).format('YYYY-MM-DD') } : {}),
+  });
 
   createReport(draftReport: DraftReport) {
     return this.http.post(
@@ -170,55 +177,31 @@ export class ReportService {
           Object.assign(headers, { params: httpParams })
         );
       }),
-      mergeMap(paginatedData => {
-        return of(Object.assign(new PaginatedData<Report>(), {
-          totalCount: paginatedData.totalCount,
-          hasNextPage: paginatedData.hasNextPage,
-          entities: paginatedData.entities
-        }));
-      })
+      // mergeMap(paginatedData => {
+      //   return of(Object.assign(new PaginatedData<Report>(), {
+      //     totalCount: paginatedData.totalCount,
+      //     hasNextPage: paginatedData.hasNextPage,
+      //     entities: paginatedData.entities
+      //   }));
+      // })
     );
-
   }
 
-  getReports(offset: number, limit: number, reportFilter: ReportFilter) {
-    this._currentReportFilter = reportFilter;
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('offset', offset.toString());
-    httpParams = httpParams.append('limit', limit.toString());
-    if (reportFilter.departments && reportFilter.departments.length) {
-      httpParams = httpParams.append('departments', reportFilter.departments.map(d => d.code).join(','));
-    }
-    if (reportFilter.period && reportFilter.period[0]) {
-      httpParams = httpParams.append('start', moment(reportFilter.period[0]).format('YYYY-MM-DD'));
-    }
-    if (reportFilter.period && reportFilter.period[1]) {
-      httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
-    }
-
-    ['siret', 'status', 'category', 'details', 'email', 'tags'].forEach(filterName => {
-      if (reportFilter[filterName] && reportFilter[filterName].length) {
-        httpParams = httpParams.append(filterName, (reportFilter[filterName].toString()).trim());
-      }
-    });
-
-    if (reportFilter.hasCompanyStr) {
-      httpParams = httpParams.append('hasCompany', reportFilter.hasCompanyStr);
-    }
+  getReports(report: ReportFilter = {}) {
+    this._currentReportFilter = report;
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
+        const pp = this.serviceUtils.objectToHttpParams(ReportService.reportFilterToQueryString(report));
+        console.log('getReports', report, '=>', this.serviceUtils.objectToHttpParams(report), '==>', pp);
         return this.http.get<PaginatedData<any>>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-          Object.assign(headers, { params: httpParams })
+          { ...headers, params: pp },
         );
       }),
-      mergeMap(paginatedData => {
-        return of(Object.assign(new PaginatedData<Report>(), {
-          totalCount: paginatedData.totalCount,
-          hasNextPage: paginatedData.hasNextPage,
-          entities: paginatedData.entities.map(entity => this.reportApi2report(entity))
-        }));
-      })
+      mergeMap(paginatedData => of({
+        ...paginatedData,
+        entities: paginatedData.entities.map(entity => this.reportApi2report(entity))
+      }))
     );
   }
 
@@ -226,13 +209,13 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         const params = {};
-        params['departments'] = (reportFilter.departments || []).map(d => d.code);
-        if (reportFilter.period && reportFilter.period[0]) {
-          params['start'] = moment(reportFilter.period[0]).format('YYYY-MM-DD');
-        }
-        if (reportFilter.period && reportFilter.period[1]) {
-          params['end'] = moment(reportFilter.period[1]).format('YYYY-MM-DD');
-        }
+        params['departments'] = (reportFilter.departments || []);
+        // if (reportFilter.period && reportFilter.period[0]) {
+        //   params['start'] = moment(reportFilter.period[0]).format('YYYY-MM-DD');
+        // }
+        // if (reportFilter.period && reportFilter.period[1]) {
+        //   params['end'] = moment(reportFilter.period[1]).format('YYYY-MM-DD');
+        // }
         ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
           if (reportFilter[filterName]) {
             params[filterName] = (reportFilter[filterName] as string).trim();
