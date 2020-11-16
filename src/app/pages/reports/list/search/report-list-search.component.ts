@@ -67,24 +67,24 @@ import { ReportService } from '../../../../services/report.service';
           <tr>
             <td><label for="rls-period">Période</label></td>
             <td>
-              <mat-form-field appearance="fill" id="rls-period">
-                <mat-label>Enter a date range</mat-label>
-                <mat-date-range-input [rangePicker]="picker">
-                  <input matStartDate formControlName="start" placeholder="Début">
-                  <input matEndDate formControlName="end" placeholder="Fin">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-              </mat-form-field>
-<!--              <input-->
-<!--                id="rls-period"-->
-<!--                class="form-control"-->
-<!--                formControlName="period"-->
-<!--                bsDaterangepicker-->
-<!--                autocomplete="off"-->
-<!--                [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"-->
-<!--                triggers="click keypress"-->
-<!--              />-->
+<!--              <mat-form-field appearance="fill" id="rls-period">-->
+<!--                <mat-label>Enter a date range</mat-label>-->
+<!--                <mat-date-range-input [rangePicker]="picker">-->
+<!--                  <input matStartDate formControlName="start" placeholder="Début">-->
+<!--                  <input matEndDate formControlName="end" placeholder="Fin">-->
+<!--                </mat-date-range-input>-->
+<!--                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--                <mat-date-range-picker #picker></mat-date-range-picker>-->
+<!--              </mat-form-field>-->
+              <input
+                id="rls-period"
+                class="form-control"
+                formControlName="period"
+                bsDaterangepicker
+                autocomplete="off"
+                [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
+                triggers="click keypress"
+              />
             </td>
           </tr>
           <tr>
