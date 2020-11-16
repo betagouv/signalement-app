@@ -2,8 +2,8 @@ import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core
 import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
 import moment from 'moment';
+import { BsLocaleService, BsModalService } from 'ngx-bootstrap';
 import { ReportFilter } from '../../../model/ReportFilter';
-import { Subscription } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { Permissions, Roles } from '../../../model/AuthUser';
@@ -25,7 +25,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
   templateUrl: './report-list.component.html',
   styleUrls: ['./report-list.component.scss']
 })
-export class ReportListComponent implements OnInit, OnDestroy {
+export class ReportListComponent implements OnInit {
 
   permissions = Permissions;
   roles = Roles;
@@ -40,13 +40,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
   statusList: string[];
   categories: string[];
 
-  modalRef: BsModalRef;
-  modalOnHideSubscription: Subscription;
-
   loading: boolean;
   loadingError: boolean;
   searchForm: FormGroup;
-  data: any[] = [];
+  data: Report[] = [];
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
     private authenticationService: AuthenticationService,
@@ -67,7 +64,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.titleService.setTitle(pages.reports.list.title);
     this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
-    this.initForm();
+    this.initAndBuildForm();
 
     this.constantService.getReportStatusList().subscribe(
       statusList => this.statusList = statusList
@@ -79,21 +76,13 @@ export class ReportListComponent implements OnInit, OnDestroy {
     ];
 
     this.tags = this.anomalyService.getTags();
-
-    this.modalOnHideSubscription = this.updateReportOnModalHide();
   }
 
-  ngOnDestroy() {
-    this.modalOnHideSubscription.unsubscribe();
-  }
-
-  private initForm = (): void => {
+  private initAndBuildForm = (): void => {
     const initialValues: ReportFilter = {
       tags: [],
       departments: [],
       details: undefined,
-      // start: undefined,
-      // end: undefined,
       period: undefined,
       siret: undefined,
       status: undefined,
@@ -113,7 +102,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
     } catch (e) {
       // Prevent error thrown by Angular when queryParams are wrong
       this.buildForm(initialValues);
-      console.warn('Query params seem invalid', this.activatedRoute.snapshot.queryParams, e);
     }
     this.search();
   };
@@ -127,7 +115,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
   };
 
   onPaginationChange(event: PageEvent) {
-    console.log(event);
     this.patchValue({
       offset: event.pageIndex * event.pageSize,
       limit: event.pageSize,
@@ -164,7 +151,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
 
   search = () => {
     const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
-    console.log('report ?', this.searchFormValue);
     this.updateQueryString(cleanedReport);
     this.loading = true;
     this.loadingError = false;
@@ -173,19 +159,10 @@ export class ReportListComponent implements OnInit, OnDestroy {
       this.data = result.entities;
       this.totalCount = result.totalCount;
     }, err => {
-      console.error(err);
       this.loading = false;
       this.loadingError = true;
     });
   };
-
-  updateReportOnModalHide() {
-    return this.modalService.onHide.subscribe(reason => {
-      if (!reason && this.modalRef && this.modalRef.content && this.modalRef.content.reportId) {
-        this.updateReport(this.modalRef.content.reportId);
-      }
-    });
-  }
 
   updateReport(reportId: string) {
     this.reportService.getReport(reportId).subscribe(
