@@ -1,7 +1,7 @@
 @import "../../../theme/variables";
 
-:host ::ng-deep {
-  max-width: 992px;
+:host {
+  max-width: 990px;
   display: block;
   margin: 0 auto;
   padding: spacing(2);

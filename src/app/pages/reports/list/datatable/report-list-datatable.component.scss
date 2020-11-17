@@ -7,11 +7,12 @@
     table-layout: fixed;
     min-width: 100%;
 
-    tbody {
-      tr {
-        &:hover {
-          background: $theme-background-hover;
-        }
+    .tr {
+      color: red !important;
+
+      &:hover {
+        cursor: pointer;
+        background: whitesmoke;
       }
     }
 

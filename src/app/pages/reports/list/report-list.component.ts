@@ -77,10 +77,11 @@ export class ReportListComponent implements OnInit {
   };
 
   private buildForm = (filters: ReportFilter): void => {
+    const buildArrayInput = (_: string | string[]): string[][] => [Array.isArray(_) ? _ : [_]];
     this.searchForm = this.fb.group({
       ...filters,
-      tags: [filters.tags],
-      departments: [filters.departments],
+      departments: buildArrayInput(filters.departments),
+      tags: buildArrayInput(filters.tags),
     });
   };
 

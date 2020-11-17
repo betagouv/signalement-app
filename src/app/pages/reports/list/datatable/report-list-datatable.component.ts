@@ -17,6 +17,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
           <th mat-header-cell *matHeaderCellDef>Entreprise</th>
           <td mat-cell *matCellDef="let _" [matTooltip]="_.company.address">
             {{_.company.name}}
+            <span *ngIf="_.website">{{_.website.url}}</span>
           </td>
         </ng-container>
 
@@ -33,7 +34,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef>Problème</th>
           <td mat-cell *matCellDef="let _">
-            <div [tooltip]="subcategoriesTooltip" class="truncate td-category">
+            <div [tooltip]="subcategoriesTooltip" class="text-truncate td-category">
               {{_.category}}
             </div>
             <ng-template #subcategoriesTooltip>
@@ -99,13 +100,13 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>Statut</th>
           <td mat-cell *matCellDef="let _" [ngStyle]="{'color': statusColor[_.status]}">
-            <mat-icon [matTooltip]="_.status" class="va-middle">{{statusIcon[_.status] || ''}}</mat-icon>
+            <mat-icon [matTooltip]="_.status" class="align-middle">{{statusIcon[_.status] || ''}}</mat-icon>
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="actions">
+        <ng-container matColumnDef="actions" stickyEnd>
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let _" class="txt-right">
+          <td mat-cell *matCellDef="let _" class="text-right">
             <a mat-icon-button color="primary" [routerLink]="['/suivi-des-signalements', 'report', _.id]" target="_blank"
                (click)="$event.stopPropagation()">
               <mat-icon>open_in_new</mat-icon>
@@ -114,7 +115,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let _; columns: displayedColumns;" [routerLink]="['/suivi-des-signalements', 'report', _.id]"></tr>
+        <tr class="tr" mat-row *matRowDef="let _; columns: displayedColumns;" [routerLink]="['/suivi-des-signalements', 'report', _.id]"></tr>
       </table>
     </div>
     <mat-paginator (page)="onChange($event)"

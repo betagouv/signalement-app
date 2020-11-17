@@ -18,7 +18,7 @@ import { ReportService } from '../../../../services/report.service';
       <input formControlName="details" (keyup.enter)="search()" class="input-invisible"
              placeholder="Rechercher dans les colonnes problème et description...">
 
-      <div class="txt-secondary nowrap">
+      <div class="txt-secondary text-nowrap">
         <button mat-icon-button (click)="extracted.emit()" matTooltip="Exporter en XLS">
           <mat-icon>get_app</mat-icon>
         </button>
@@ -56,7 +56,7 @@ import { ReportService } from '../../../../services/report.service';
             <td>
               <mat-select formControlName="status" id="rls-statut" class="form-control">
                 <mat-select-trigger>{{searchForm.get('status').value}}</mat-select-trigger>
-                <mat-option value="undefined" selected>Tous les statuts</mat-option>
+                <mat-option selected>Tous les statuts</mat-option>
                 <mat-option *ngFor="let _ of statusList" [value]="_">
                   <mat-icon aria-hidden [ngStyle]="{'color': statusColor[_]}">{{statusIcon[_]}}</mat-icon>
                   {{_}}
@@ -103,7 +103,7 @@ import { ReportService } from '../../../../services/report.service';
             <td>
               <mat-select formControlName="category" id="rls-category" class="form-control">
                 <mat-option>Toutes les catégories</mat-option>
-                <mat-option *ngFor="let _ of categories" value="_">{{_}}</mat-option>
+                <mat-option *ngFor="let _ of categories" [value]="_">{{_}}</mat-option>
               </mat-select>
             </td>
           </tr>
@@ -145,10 +145,8 @@ import { ReportService } from '../../../../services/report.service';
 export class ReportListFiltersComponent implements OnInit {
 
   constructor(
-    private fb: FormBuilder,
     private anomalyService: AnomalyService,
     private router: Router,
-    private reportService: ReportService,
     private constantService: ConstantService,
   ) {
   }

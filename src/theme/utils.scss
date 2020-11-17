@@ -2,14 +2,6 @@
   width: 100%;
 }
 
-.relative {
-  position: relative;
-}
-
-.block {
-  display: block;
-}
-
 .txt-secondary {
   color: $theme-color-text-secondary;
 }
@@ -18,38 +10,19 @@
   color: $theme-color-text-disabled;
 }
 
-.txt-bold {
-  font-weight: bold;
-}
-
-.nowrap {
-  white-space: nowrap;
-}
-
-.truncate {
-  @extend %truncate;
-}
-
 .txt-success {
-  color: $color-success;
+  color: $theme-success-border;
 }
 
 .txt-error {
-  color: $color-error;
+  color: $theme-error-border;
 }
 
 .txt-warning {
-  color: $color-warning;
+  color: $theme-warning-border;
 }
 
 .txt-info {
-  color: $color-info;
+  color: $theme-info-border;
 }
 
-.va-middle {
-  vertical-align: middle;
-}
-
-.txt-right {
-  text-align: right;
-}
