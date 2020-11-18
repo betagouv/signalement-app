@@ -41,6 +41,10 @@ $app-warn: mat-palette($mat-red);
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
 
+@include angular-material-typography(mat-typography-config(
+  $font-family: 'Source Sans Pro'
+));
+
 .mat-cell:not(:first-of-type),
 .mat-header-cell:not(:first-of-type) {
   padding-left: spacing(.5) !important;
