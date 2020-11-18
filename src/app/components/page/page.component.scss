@@ -1,8 +1,12 @@
 @import "../../../theme/variables";
 
 :host {
-  max-width: 990px;
+  max-width: 1022px - spacing(4);
   display: block;
   margin: 0 auto;
   padding: spacing(2);
+
+  &.large {
+    max-width: 1438px - spacing(4);
+  }
 }

@@ -1,11 +1,13 @@
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-page',
   template: `
     <ng-content></ng-content>
   `,
+  host: { '[class.large]': 'large', },
   styleUrls: ['./page.component.scss'],
   animations: [
     trigger('animation', [
@@ -28,5 +30,23 @@ export class PageComponent {
     return this.animated;
   }
 
-  @Input() animated = true;
+  private _animated: boolean;
+  @Input()
+  get animated() {
+    return this._animated;
+  }
+
+  set animated(value: any) {
+    this._animated = coerceBooleanProperty(value);
+  }
+
+  private _large: boolean;
+  @Input()
+  get large() {
+    return this._large;
+  }
+
+  set large(value: any) {
+    this._large = coerceBooleanProperty(value);
+  }
 }
