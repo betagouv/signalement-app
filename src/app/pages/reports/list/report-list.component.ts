@@ -90,10 +90,9 @@ export class ReportListComponent implements OnInit {
       departments: buildArrayInput(filters.departments),
       tags: buildArrayInput(filters.tags),
     });
-    merge(...this.formControlNamesWithAutomaticRefresh.map(_ => this.searchForm.get(_).valueChanges)).pipe(
-      debounceTime(800),
-      distinctUntilChanged(),
-    ).subscribe(this.search);
+    merge(...this.formControlNamesWithAutomaticRefresh.map(_ => this.searchForm.get(_).valueChanges))
+      .pipe(debounceTime(800), distinctUntilChanged())
+      .subscribe(this.search);
   };
 
   onPaginationChange(event: PageEvent) {
