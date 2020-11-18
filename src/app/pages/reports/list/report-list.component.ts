@@ -12,6 +12,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import Utils from '../../../utils';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { PageEvent } from '@angular/material/paginator';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-report-list',
@@ -23,6 +25,11 @@ export class ReportListComponent implements OnInit {
   roles = Roles;
 
   readonly defaultPageSize = 10;
+
+  readonly formControlNamesWithAutomaticRefresh = [
+    'departments',
+    'period',
+  ];
 
   loading: boolean;
   loadingError: boolean;
@@ -83,6 +90,10 @@ export class ReportListComponent implements OnInit {
       departments: buildArrayInput(filters.departments),
       tags: buildArrayInput(filters.tags),
     });
+    merge(...this.formControlNamesWithAutomaticRefresh.map(_ => this.searchForm.get(_).valueChanges)).pipe(
+      debounceTime(800),
+      distinctUntilChanged(),
+    ).subscribe(this.search);
   };
 
   onPaginationChange(event: PageEvent) {
@@ -99,7 +110,6 @@ export class ReportListComponent implements OnInit {
 
   onFiltersUpdate(): void {
     this.patchValue({ ...this.searchFormValue, offset: 0 });
-    // this.reports.entities = [];
     this.search();
   }
 

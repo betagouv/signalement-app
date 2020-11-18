@@ -73,7 +73,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
               <mat-icon class="align-middle txt-disabled" matTooltip="Recherche dans les colonnes problème et description">help_outline</mat-icon>
             </td>
             <td>
-              <input id="details" class="form-control" formControlName="details" (keyup.enter)="search()">
+              <input id="details" class="form-control" formControlName="details">
             </td>
           </tr>
           <tr>
