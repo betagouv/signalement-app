@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileUploaderService } from '../../../../services/file-uploader.service';
 import { UploadedFile } from '../../../../model/UploadedFile';
-import { DetailInputValue, Report, reportStatusColor, reportStatusIcon } from '../../../../model/Report';
+import { DetailInputValue, Report } from '../../../../model/Report';
 import { Roles } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { PageEvent } from '@angular/material/paginator';
@@ -23,7 +23,10 @@ import { PaginatedData } from '../../../../model/PaginatedData';
 
         <ng-container matColumnDef="postalCode">
           <th mat-header-cell *matHeaderCellDef>Commune</th>
-          <td mat-cell *matCellDef="let _">{{_.company.postalCode}}</td>
+          <td mat-cell *matCellDef="let _">
+            <span>{{_.company.postalCode | slice : 0 : 2}}</span><!--
+            --><span class="txt-disabled">{{_.company.postalCode | slice : 2 : 5}}</span>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="siret">
