@@ -13,14 +13,25 @@ import { ReportFilter } from '../../../../model/ReportFilter';
   selector: 'app-report-list-search',
   template: `
     <div class="search-input" [formGroup]="searchForm">
-      <input formControlName="details" (keyup.enter)="search()" class="input-invisible"
-             placeholder="Rechercher dans les colonnes problème et description...">
+      <app-select-departments placeholder="Département(s)" formControlName="departments" id="rls-departments"
+                              class="form-control"></app-select-departments>
+      &nbsp;&nbsp;
+      <input
+        id="rls-period"
+        class="form-control"
+        formControlName="period"
+        bsDaterangepicker
+        autocomplete="off"
+        placeholder="Période sélectionnée"
+        [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
+        triggers="click keypress"
+      />
 
       <div class="txt-secondary text-nowrap">
         <button mat-icon-button (click)="extracted.emit()" matTooltip="Exporter en XLS">
           <mat-icon>get_app</mat-icon>
         </button>
-        <button mat-icon-button (click)="cleared.emit()">
+        <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="cleared.emit()">
           <mat-icon>clear</mat-icon>
         </button>
         <button mat-raised-button [disabled]="isPanelOpen" color="primary" (click)="openPanel()">
@@ -31,12 +42,6 @@ import { ReportFilter } from '../../../../model/ReportFilter';
       <div *ngIf="isPanelOpen" class="panel-backdrop" (click)="closePanel()"></div>
       <div class="search-dialog" [@togglePanel]="isPanelOpen ? 'open' : 'closed'">
         <table class="form">
-          <tr>
-            <td><label for="rls-departments">Département(s)</label></td>
-            <td>
-              <app-select-departments formControlName="departments" id="rls-departments" class="form-control"></app-select-departments>
-            </td>
-          </tr>
           <tr>
             <td><label for="rls-siret">SIRET</label></td>
             <td>
@@ -62,27 +67,13 @@ import { ReportFilter } from '../../../../model/ReportFilter';
             </td>
           </tr>
           <tr>
-            <td><label for="rls-period">Période</label></td>
             <td>
-<!--              TODO(Alex) Wait for Angular 10-->
-<!--              <mat-form-field appearance="fill" id="rls-period">-->
-<!--                <mat-label>Enter a date range</mat-label>-->
-<!--                <mat-date-range-input [rangePicker]="picker">-->
-<!--                  <input matStartDate formControlName="start" placeholder="Début">-->
-<!--                  <input matEndDate formControlName="end" placeholder="Fin">-->
-<!--                </mat-date-range-input>-->
-<!--                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-<!--                <mat-date-range-picker #picker></mat-date-range-picker>-->
-<!--              </mat-form-field>-->
-              <input
-                id="rls-period"
-                class="form-control"
-                formControlName="period"
-                bsDaterangepicker
-                autocomplete="off"
-                [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
-                triggers="click keypress"
-              />
+              <label class="align-middle" for="rls-details">Mots-clés</label>
+              &nbsp;
+              <mat-icon class="align-middle txt-disabled" matTooltip="Recherche dans les colonnes problème et description">help_outline</mat-icon>
+            </td>
+            <td>
+              <input id="details" class="form-control" formControlName="details" (keyup.enter)="search()">
             </td>
           </tr>
           <tr>

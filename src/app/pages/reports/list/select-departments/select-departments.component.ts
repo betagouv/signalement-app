@@ -7,7 +7,7 @@ import { MatPseudoCheckboxState } from '@angular/material/core';
 @Component({
   selector: 'app-select-departments',
   template: `
-    <mat-select id="rls-departments" multiple [(ngModel)]="value" (ngModelChange)="onChangeCallback(this.value)" [disabled]="disabled">
+    <mat-select id="rls-departments" [placeholder]="placeholder" multiple [(ngModel)]="value" (ngModelChange)="onChangeCallback(this.value)" [disabled]="disabled">
       <div class="mat-option select-optgroup" matRipple (click)="toggleAllDepartments()">
         <mat-pseudo-checkbox [state]="getDepartmentsCheckboxState()" class="mat-option-pseudo-checkbox"></mat-pseudo-checkbox>
         Tous les départements
@@ -36,7 +36,9 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
   constructor() {
   }
 
-  @Input() disabled: boolean;
+  @Input() disabled?: boolean;
+
+  @Input() placeholder?: string;
 
   readonly regions = Regions;
 
