@@ -8,7 +8,6 @@ import { Tag } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { Regions } from '../../../../model/Region';
 import { ReportFilter } from '../../../../model/ReportFilter';
-import { reportStatusColor, reportStatusIcon } from '../../../../model/Report';
 
 @Component({
   selector: 'app-report-list-search',
@@ -56,9 +55,8 @@ import { reportStatusColor, reportStatusIcon } from '../../../../model/Report';
               <mat-select formControlName="status" id="rls-statut" class="form-control">
                 <mat-select-trigger>{{searchForm.get('status').value}}</mat-select-trigger>
                 <mat-option selected>Tous les statuts</mat-option>
-                <mat-option *ngFor="let _ of statusList" [value]="_">
-                  <mat-icon aria-hidden [ngStyle]="{'color': statusColor[_]}">{{statusIcon[_]}}</mat-icon>
-                  {{_}}
+                <mat-option *ngFor="let _ of statusList" [value]="_" class="mat-option-dense">
+                  <app-label-status [status]="_">{{_}}</app-label-status>
                 </mat-option>
               </mat-select>
             </td>
@@ -157,10 +155,6 @@ export class ReportListFiltersComponent implements OnInit {
   @Output() cleared = new EventEmitter();
 
   @Output() extracted = new EventEmitter();
-
-  readonly statusIcon = reportStatusIcon;
-
-  readonly statusColor = reportStatusColor;
 
   isPanelOpen = false;
 

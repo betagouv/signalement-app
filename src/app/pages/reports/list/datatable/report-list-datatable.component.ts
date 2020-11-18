@@ -16,7 +16,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Entreprise</th>
           <td mat-cell *matCellDef="let _" [matTooltip]="_.company.address" class="padding0_0_">
-            <div class="td-name_label">{{_.company.name}}</div>
+            <span class="td-name_label">{{_.company.name}}</span><br/>
             <span *ngIf="_.website" class="td-name_website">{{_.website.hostname}}</span>
           </td>
         </ng-container>
@@ -86,22 +86,21 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         <ng-container matColumnDef="files">
           <th mat-header-cell *matHeaderCellDef>Pièces jointes</th>
           <td mat-cell *matCellDef="let _">
-            <div class="td-content">
-              <a *ngFor="let f of _.consumerUploadedFiles"
-                 [href]="getFileUrl(f)" target="_blank"
-                 (click)="$event.stopPropagation()"
-                 [matTooltip]="f.filename"
-                 class="txt-secondary">
-                <mat-icon>insert_drive_file</mat-icon>
-              </a>
-            </div>
+            <a *ngFor="let f of _.consumerUploadedFiles"
+               [href]="getFileUrl(f)" target="_blank"
+               (click)="$event.stopPropagation()"
+               [matTooltip]="f.filename"
+               class="txt-secondary">
+              <mat-icon>insert_drive_file</mat-icon>
+            </a>
+            &nbsp;
           </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>Statut</th>
-          <td mat-cell *matCellDef="let _" [ngStyle]="{'color': statusColor[_.status]}">
-            <mat-icon [matTooltip]="_.status" class="align-middle">{{statusIcon[_.status] || ''}}</mat-icon>
+          <td mat-cell *matCellDef="let _">
+            <app-label-status [status]="_.status"></app-label-status>
           </td>
         </ng-container>
 
@@ -143,10 +142,6 @@ export class ReportListDatatableComponent implements OnInit {
 
   readonly roles = Roles;
 
-  readonly statusColor = reportStatusColor;
-
-  readonly statusIcon = reportStatusIcon;
-
   displayedColumns = [];
 
   ngOnInit() {
@@ -157,25 +152,25 @@ export class ReportListDatatableComponent implements OnInit {
     switch (this.userRole) {
       case Roles.DGCCRF:
         return [
-          'status',
-          'name',
           'postalCode',
+          'name',
           'category',
           'description',
           'date',
           'siret',
           'files',
+          'status',
           'actions',
         ];
       case Roles.Admin:
         return [
-          'status',
-          'name',
           'postalCode',
+          'name',
           'category',
           'description',
           'consumer',
           'files',
+          'status',
           'actions',
         ];
       default:

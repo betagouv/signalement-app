@@ -36,18 +36,18 @@ export enum ReportStatus {
 }
 
 export const reportStatusColor = {
-  [ReportStatus.NA]: '#c7c7c7',
-  [ReportStatus.EmployeeConsumer]: '#0288d1',
-  [ReportStatus.InProgress]: '#FF8000',
-  [ReportStatus.Unread]: '#5f6368',
-  [ReportStatus.UnreadForPro]: '#5f6368',
-  [ReportStatus.Transmitted]: '#0288d1',
-  [ReportStatus.ToReviewedByPro]: '#FF8000',
-  [ReportStatus.Accepted]: '#00c616',
-  [ReportStatus.Rejected]: '#0288d1',
-  [ReportStatus.ClosedForPro]: '#0288d1',
-  [ReportStatus.Ignored]: '#dd2c00',
-  [ReportStatus.NotConcerned]: '#5f6368',
+  [ReportStatus.NA]: '#fff',
+  [ReportStatus.EmployeeConsumer]: '#fff',
+  [ReportStatus.InProgress]: '#FFE49E',
+  [ReportStatus.Unread]: '#c9d3df',
+  [ReportStatus.UnreadForPro]: '#f7d5d2',
+  [ReportStatus.Transmitted]: '#FFE49E',
+  [ReportStatus.ToReviewedByPro]: '#FFE49E',
+  [ReportStatus.Accepted]: '#D6F0FF',
+  [ReportStatus.Rejected]: '#c9d3df',
+  [ReportStatus.ClosedForPro]: '#daf5e7',
+  [ReportStatus.Ignored]: '#c9d3df',
+  [ReportStatus.NotConcerned]: '#c9d3df',
 };
 
 export const reportStatusIcon = {
