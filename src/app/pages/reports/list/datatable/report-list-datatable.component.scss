@@ -25,12 +25,24 @@
 
 .mat-cell.mat-column-name {
   max-width: 220px;
+}
+
+.td-name_label {
   font-weight: bold;
+  line-height: 1;
+  margin-bottom: -2px;
+}
+
+.td-name_website {
+  line-height: 1;
+  font-size: $font-size-small;
+  color: $theme-color-text-secondary;
 }
 
 .mat-cell.mat-column-description {
   max-width: 300px;
   color: $theme-color-text-secondary;
+  line-height: 1.2;
 }
 
 .mat-cell.mat-column-files {

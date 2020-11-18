@@ -15,9 +15,9 @@ import { PaginatedData } from '../../../../model/PaginatedData';
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Entreprise</th>
-          <td mat-cell *matCellDef="let _" [matTooltip]="_.company.address">
-            {{_.company.name}}
-            <span *ngIf="_.website">{{_.website.url}}</span>
+          <td mat-cell *matCellDef="let _" [matTooltip]="_.company.address" class="padding0_0_">
+            <div class="td-name_label">{{_.company.name}}</div>
+            <span *ngIf="_.website" class="td-name_website">{{_.website.hostname}}</span>
           </td>
         </ng-container>
 
@@ -50,10 +50,11 @@ import { PaginatedData } from '../../../../model/PaginatedData';
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Description</th>
-          <td mat-cell *matCellDef="let _">
+          <td mat-cell *matCellDef="let _" class="padding0_0_">
             <span [tooltip]="detailsTooltip">
               <ng-container *ngIf="getDetailContent(_.detailInputValues); let detail">
-                {{detail.firstLine}} [...] {{detail.secondLine}}
+                {{detail.firstLine}}...<br/>
+                {{detail.secondLine}}
               </ng-container>
             </span>
             <ng-template #detailsTooltip>
