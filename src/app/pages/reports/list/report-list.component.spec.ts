@@ -25,6 +25,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReportListModule } from './report-list.module';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
@@ -38,7 +39,6 @@ describe('ReportListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ReportListComponent,
         ReportDetailComponent,
         AppRoleDirective,
         AppPermissionDirective,
@@ -57,7 +57,8 @@ describe('ReportListComponent', () => {
         RouterTestingModule,
         PipesModule,
         BrowserAnimationsModule,
-        ComponentsModule
+        ComponentsModule,
+        ReportListModule,
       ],
       providers: []
     })
@@ -85,7 +86,7 @@ describe('ReportListComponent', () => {
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelector('form')).not.toBeNull();
-    expect(nativeElement.querySelectorAll('tr.pointer').length).toEqual(3);
+    expect(nativeElement.querySelector('.search-input')).not.toBeNull();
+    expect(nativeElement.querySelectorAll('.table-container tbody tr').length).toEqual(3);
   });
 });

@@ -200,12 +200,15 @@ export class ReportService {
     );
   }
 
-  private reportFilter2QueryString = (r: ReportFilter): { [key in keyof ReportFilter]: any } => ({
-    ...r,
-    ...(r.departments ? { departments: r.departments.join(',') } : {}),
-    ...((r.period && r.period[0]) ? { start: moment(r.period[0]).format('YYYY-MM-DD') } : {}),
-    ...((r.period && r.period[1]) ? { end: moment(r.period[1]).format('YYYY-MM-DD') } : {}),
-  });
+  private reportFilter2QueryString = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
+    const { period, ...r } = report;
+    return {
+      ...r,
+      ...(r.departments ? { departments: r.departments.join(',') } : {}),
+      ...((period && period[0]) ? { start: moment(period[0]).format('YYYY-MM-DD') } : {}),
+      ...((period && period[1]) ? { end: moment(period[1]).format('YYYY-MM-DD') } : {}),
+    };
+  };
 
   private reportApi2report(reportWithFiles: {report: any, files?: UploadedFile[]}) {
     const report = reportWithFiles.report;

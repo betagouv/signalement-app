@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import oldCategories from '../../../../../assets/data/old-categories.json';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -9,7 +9,6 @@ import { ConstantService } from '../../../../services/constant.service';
 import { Regions } from '../../../../model/Region';
 import { ReportFilter } from '../../../../model/ReportFilter';
 import { reportStatusColor, reportStatusIcon } from '../../../../model/Report';
-import { ReportService } from '../../../../services/report.service';
 
 @Component({
   selector: 'app-report-list-search',
