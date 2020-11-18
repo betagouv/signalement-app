@@ -23,8 +23,8 @@ import { ReportFilter } from '../../../../model/ReportFilter';
         <button mat-icon-button (click)="cleared.emit()">
           <mat-icon>clear</mat-icon>
         </button>
-        <button mat-icon-button (click)="openPanel()">
-          <mat-icon>arrow_drop_down</mat-icon>
+        <button mat-raised-button [disabled]="isPanelOpen" color="primary" (click)="openPanel()">
+          Filtres avancés
         </button>
       </div>
 
