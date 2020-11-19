@@ -18,7 +18,6 @@ import { AbTestsModule } from 'angular-ab-tests';
 import { CompanyAPITestingScope, CompanyTestingVersions } from '../../../utils';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
-import { CompanySearchResult } from '../../../model/Company';
 
 describe('CompanyComponent', () => {
 
@@ -83,8 +82,8 @@ describe('CompanyComponent', () => {
       expect(component.searchForm).toBeDefined();
       expect(component.searchForm.controls['search']).toBeDefined();
       expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
-      expect(component.searchBySiretForm).toBeDefined();
-      expect(component.searchBySiretForm.controls['siret']).toBeDefined();
+      expect(component.searchByIdentityForm).toBeDefined();
+      expect(component.searchByIdentityForm.controls['siret']).toBeDefined();
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
     });
 
@@ -94,16 +93,16 @@ describe('CompanyComponent', () => {
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
-      expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+      expect(nativeElement.querySelector('form#searchByIdentityForm')).toBeNull();
     });
 
-    it('should enable to display the searchBySiret form for identification by siret', () => {
+    it('should enable to display the searchByIdentityForm form for identification by siret', () => {
       const nativeElement = fixture.nativeElement;
-      component.identificationKind = IdentificationKinds.Siret;
+      component.identificationKind = IdentificationKinds.Identity;
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
-      expect(nativeElement.querySelector('form#searchBySiretForm')).not.toBeNull();
+      expect(nativeElement.querySelector('form#searchByIdentityForm')).not.toBeNull();
     });
 
     describe('search companies', () => {
@@ -145,32 +144,32 @@ describe('CompanyComponent', () => {
     describe('search by siret', () => {
 
       it('should display errors when occurs', () => {
-        component.identificationKind = IdentificationKinds.Siret;
+        component.identificationKind = IdentificationKinds.Identity;
         fixture.detectChanges();
 
         const nativeElement = fixture.nativeElement;
-        component.siretCtrl.setValue('123');
+        component.identityCtrl.setValue(undefined);
         nativeElement.querySelector('button#submitSiretForm').click();
         fixture.detectChanges();
 
-        expect(component.showErrorsBySiret).toBeTruthy();
+        expect(component.showErrorsByIdentity).toBeTruthy();
         expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
       });
 
       it('should display the company found by siret when existed', () => {
 
         const companyBySiret = genCompanySearchResult();
-        spyOn(companyService, 'searchCompaniesBySiret').and.returnValue(of(companyBySiret));
+        spyOn(companyService, 'searchCompaniesByIdentity').and.returnValue(of([companyBySiret]));
 
-        component.identificationKind = IdentificationKinds.Siret;
+        component.identificationKind = IdentificationKinds.Identity;
         fixture.detectChanges();
 
         const nativeElement = fixture.nativeElement;
-        component.siretCtrl.setValue(genSiret());
+        component.identityCtrl.setValue(genSiret());
         nativeElement.querySelector('button#submitSiretForm').click();
         fixture.detectChanges();
 
-        expect(component.companySearchBySiretResult).toEqual(companyBySiret);
+        expect(component.companySearchByIdentityResults).toEqual([companyBySiret]);
         expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(1);
 
       });
@@ -198,7 +197,7 @@ describe('CompanyComponent', () => {
       const nativeElement = fixture.nativeElement;
       expect(component.websiteForm).toBeDefined();
       expect(component.searchForm).not.toBeDefined();
-      expect(component.searchBySiretForm).not.toBeDefined();
+      expect(component.searchByIdentityForm).not.toBeDefined();
       expect(component.websiteForm.controls['url']).toBeDefined();
       expect(nativeElement.querySelector('form#websiteForm')).not.toBeNull();
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
@@ -219,8 +218,8 @@ describe('CompanyComponent', () => {
       expect(component.searchForm).toBeDefined();
       expect(component.searchForm.controls['search']).toBeDefined();
       expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
-      expect(component.searchBySiretForm).toBeDefined();
-      expect(component.searchBySiretForm.controls['siret']).toBeDefined();
+      expect(component.searchByIdentityForm).toBeDefined();
+      expect(component.searchByIdentityForm.controls['siret']).toBeDefined();
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
     });
 
@@ -237,7 +236,7 @@ describe('CompanyComponent', () => {
 
       expect(component.urlCtrl.value).toBe('http://monsite.com');
       expect(component.searchForm).toBeUndefined();
-      expect(component.searchBySiretForm).toBeUndefined();
+      expect(component.searchByIdentityForm).toBeUndefined();
       expect(component.companySearchByUrlResults).toEqual(companySearchResults);
       expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(companySearchResults.length);
     });
