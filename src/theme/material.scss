@@ -1,5 +1,3 @@
-@include mat-core();
-
 @function generateCustomPalette($color) {
   @return (
     50: lighten($color, 45),
@@ -36,29 +34,35 @@
 }
 
 $app-primary: mat-palette(generateCustomPalette($theme-primary));
-$app-accent: mat-palette($mat-amber, A200, A100, A400);
 $app-warn: mat-palette($mat-red);
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+$app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
 @include angular-material-theme($app-theme);
 
-@include angular-material-typography(mat-typography-config(
-  $font-family: 'Source Sans Pro'
+@include mat-core(mat-typography-config(
+  $font-family: '"Source Sans Pro", "Helvetica Neue", sans-serif',
+  $title: mat-typography-level(1.25rem, 32px, 500),
+  $subheading-2: mat-typography-level(1.125rem, 30px, 400),
+  $subheading-1: mat-typography-level(1.1rem, 26px, 400),
+  $body-2: mat-typography-level(1rem, 26px, 500),
+  $body-1: mat-typography-level(1rem, 22px, 400),
+  $caption: mat-typography-level(0.875rem, 22px, 400),
+  $button: mat-typography-level(1rem, 16px, 500),
 ));
 
 .mat-cell:not(:first-of-type),
 .mat-header-cell:not(:first-of-type) {
-  padding-left: spacing(.5) !important;
+  padding-left: spacing(.75) !important;
 }
 
 .mat-cell:not(:last-of-type),
 .mat-header-cell:not(:last-of-type) {
-  padding-right: spacing(.5) !important;
+  padding-right: spacing(.75) !important;
 }
 
 // Fix conflicts with bootstrap _reset.scss
 
 .mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+  margin-left: spacing(2);
 }
 
 .mat-radio-label {
@@ -72,9 +76,5 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 .mat-option-dense {
   height: 38px !important;
-  font-size: 14px !important;
-}
-
-.mat-header-cell {
-  font-size: $font-size-normal;
+  font-size: 1rem !important;
 }

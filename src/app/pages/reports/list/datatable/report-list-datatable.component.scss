@@ -34,12 +34,12 @@
 }
 
 .td-name_website {
-  font-size: $font-size-small;
+  font-size: 0.875rem;
   color: $theme-color-text-secondary;
 }
 
 .mat-cell.mat-column-postalCode {
-  max-width: 64px;
+  max-width: 76px;
 }
 
 .mat-cell.mat-column-consumer {
@@ -50,6 +50,7 @@
   max-width: 260px;
   color: $theme-color-text-secondary;
   line-height: 1.2;
+  font-size: 0.875rem;
 }
 
 .mat-cell.mat-column-files {
