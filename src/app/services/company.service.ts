@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { catchError, filter, map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { Company, CompanySearchResult } from '../model/Company';
-import { CompanyTestingVersions } from '../utils';
 
 export const MaxCompanyResult = 20;
 
@@ -13,99 +12,24 @@ class RawCompanyService {
   constructor(protected http: HttpClient,
     protected serviceUtils: ServiceUtils) {}
 
-  searchCompanies(search: string, searchPostalCode: string, companyTestingVersions: string) {
-    if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
-      let httpParams = new HttpParams();
-      httpParams = httpParams.append('postalCode', searchPostalCode.toString());
-      httpParams = httpParams.append('q', search);
-      return this.http.get<CompanySearchResult[]>(
-        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
-        {
-          params: httpParams
-        }
-      );
-    } else {
-      let httpParams = new HttpParams();
-      httpParams = httpParams.append('code_postal', searchPostalCode.toString());
-      httpParams = httpParams.append('per_page', MaxCompanyResult.toString());
-      return this.http.get<any>(
-        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'full_text', search]),
-        {
-          params: httpParams
-        }
-      ).pipe(
-        map(result => {
-          if (result.etablissement) {
-            return result.etablissement.map(etab => (<CompanySearchResult>{
-                siret: etab.siret,
-                name: etab.nom_raison_sociale,
-                brand: etab.enseigne,
-                address: this.getAddressFromEtablissement(etab),
-                postalCode: etab.code_postal,
-                activityLabel: etab.libelle_activite_principale
-              }
-            ));
-          }
-        }),
-        catchError(err => {
-          if (err.status === 404) {
-            return of([]);
-          } else {
-            return throwError(err);
-          }
-        })
-      );
-    }
-  }
-
-  getAddressFromEtablissement(etablissement) {
-    let address = '';
-    const addressAttibutes = ['l3_normalisee', 'l4_normalisee', 'l5_normalisee', 'l6_normalisee', 'l7_normalisee'];
-    for (const attribute of addressAttibutes) {
-      if (etablissement[attribute]) {
-        address = address.concat(`${etablissement[attribute]} - `);
+  searchCompanies(search: string, searchPostalCode: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
+    httpParams = httpParams.append('q', search);
+    return this.http.get<CompanySearchResult[]>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
+      {
+        params: httpParams
       }
-    }
-    return address.substring(0, address.length - 3);
+    );
   }
 
-  searchCompaniesByIdentity(identity: string, companyTestingVersions: string) {
-    if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
-      return this.http.get<CompanySearchResult[]>(
-        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', identity]),
-      ).pipe(
-        map(companies => companies.filter(company => company.postalCode))
-      );
-    } else {
-      let httpParams = new HttpParams();
-      httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
-      return this.http.get<any>(
-        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', identity]),
-        {
-          params: httpParams
-        }
-      ).pipe(
-        map(result => {
-          if (result.etablissement && result.etablissement.code_postal) {
-            return [<CompanySearchResult>{
-              siret: result.etablissement.siret,
-              name: result.etablissement.nom_raison_sociale,
-              brand: result.etablissement.enseigne,
-              address: this.getAddressFromEtablissement(result.etablissement),
-              postalCode: result.etablissement.code_postal,
-              activityLabel: result.etablissement.libelle_activite_principale
-            }];
-          }
-        }),
-        catchError(err => {
-          if (err.status === 404) {
-            return of(undefined);
-          } else {
-            return throwError(err);
-          }
-        })
-      );
-    }
+  searchCompaniesByIdentity(identity: string) {
+    return this.http.get<CompanySearchResult[]>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', identity]),
+    ).pipe(
+      map(companies => companies.filter(company => company.postalCode))
+    );
   }
 
   searchCompaniesByUrl(url: string) {
@@ -154,7 +78,7 @@ export class CompanyService extends RawCompanyService {
       super(http, serviceUtils);
     }
 
-  private DGCCRF_DATA = {
+  private DGCCRF_DATA = <CompanySearchResult> {
     siret: '12002503600035',
     name: 'DIRECTION GENERALE DE LA CONCURRENCE, DE LA CONSOMMATION ET DE LA REPRESSION DES FRAUDES',
     address: 'TELEDOC 071 - 59 BD VINCENT AURIOL - 75013 PARIS 13',
@@ -167,7 +91,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\borange\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '38012986645100',
           name: 'ORANGE',
           address: 'BAT A - 1 AVENUE DU PDT NELSON MANDELA - 94110 ARCUEIL',
@@ -180,7 +104,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bsfr\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '34305956400959',
           name: 'SOCIETE FRANCAISE DU RADIOTELEPHONE - SFR',
           brand: 'SFR',
@@ -194,7 +118,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bbouygues?\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '39748093003464',
           name: 'BOUYGUES TELECOM',
           address: '13 A 15 - 13 AVENUE DU MARECHAL JUIN - 92360 MEUDON',
@@ -207,7 +131,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bfree\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '49924713800021',
           name: 'FREE MOBILE',
           address: '16 RUE DE LA VILLE L EVEQUE - 75008 PARIS 8',
@@ -215,7 +139,7 @@ export class CompanyService extends RawCompanyService {
           activityLabel: 'Télécommunications sans fil',
           highlight: null
         },
-        {
+        <CompanySearchResult> {
           siret: '42193886100034',
           name: 'FREE',
           address: '8 RUE DE LA VILLE L EVEQUE - 75008 PARIS 8',
@@ -228,7 +152,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\beni\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '45122569200024',
           name: 'ENI GAS & POWER FRANCE',
           brand: 'ENI',
@@ -242,7 +166,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bamazone?\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '48777332700027',
           name: 'AMAZON EU SARL',
           brand: 'AMAZON EU SARL SUCCURSALE FRANCAISE',
@@ -256,7 +180,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bmaif\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '77570970201646',
           name: 'MUTUELLE ASSURANCE INSTITUTEUR FRANCE',
           brand: 'MAIF',
@@ -270,7 +194,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bgrdf\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '44478651100022',
           name: 'GRDF',
           address: 'TSA 60800 - 6 RUE CONDORCET - 75009 PARIS 9',
@@ -283,7 +207,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\b(erdf)|([ée]n[ée]dis?)\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '44460844213631',
           name: 'ENEDIS',
           address: '34 PLACE DES COROLLES - 92400 COURBEVOIE',
@@ -296,7 +220,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bcanal\+?\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '42062477700108',
           name: 'GROUPE CANAL+ SA',
           brand: 'CANAL',
@@ -310,7 +234,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bbooking(\.com)?\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '84455159800015',
           name: 'PMDE BOOKING.COM BV',
           brand: 'BOOKING.COM',
@@ -324,7 +248,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bpaypal(\.com)?\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '82501514200011',
           name: 'PAYPAL EUROPE ET CIE SCA',
           address: null,
@@ -337,7 +261,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bengie\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '54210765113030',
           name: 'ENGIE',
           address: '1 PLACE SAMUEL DE CHAMPLAIN - 92400 COURBEVOIE',
@@ -350,7 +274,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bmatmut\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '77570148500101',
           name: 'MATMUT MUTUALITE',
           address: '66 RUE DE SOTTEVILLE - 76100 ROUEN',
@@ -363,7 +287,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bsncf\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '39284731500067',
           name: 'SNCF VOYAGES DEVELOPPEMENT',
           address: 'CNIT 1 - 2 PLACE DE LA DEFENSE - 92400 COURBEVOIE',
@@ -376,7 +300,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bedf\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '55208131766522',
           name: 'ELECTRICITE DE FRANCE',
           address: '22 AVENUE DE WAGRAM - 75008 PARIS 8',
@@ -389,7 +313,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\beurostar\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '84535345700011',
           name: 'EUROSTAR FRANCE SAS',
           address: '5 RUE DU DELTA - 75009 PARIS 9',
@@ -402,7 +326,7 @@ export class CompanyService extends RawCompanyService {
     {
       query: /\bveolia\b/i,
       results: [
-        {
+        <CompanySearchResult> {
           siret: '40321003200104',
           name: 'VEOLIA ENVIRONNEMENT',
           address: '21 RUE LA BOETIE - 75008 PARIS 8',
@@ -410,7 +334,7 @@ export class CompanyService extends RawCompanyService {
           activityLabel: 'Activités des sièges sociaux',
           highlight: 'Pour tout problème avec Veolia Environnement, peu importe votre lieu d\'habitation'
         },
-        {
+        <CompanySearchResult> {
           siret: '57202552610945',
           name: 'VEOLIA EAU - COMPAGNIE GENERALE DES EAUX',
           address: '21 RUE LA BOETIE - 75008 PARIS 8',
@@ -422,9 +346,9 @@ export class CompanyService extends RawCompanyService {
     },
   ];
 
-  searchCompanies(search: string, searchPostalCode: string, companyTestingVersions: string) {
+  searchCompanies(search: string, searchPostalCode: string) {
     const match = this.searchHooks.find(hook => hook.query.test(search));
-    return super.searchCompanies(search, searchPostalCode, companyTestingVersions).pipe(
+    return super.searchCompanies(search, searchPostalCode).pipe(
       map(results => {
         if (match && match.results) {
           const matches = match.results;
@@ -440,11 +364,11 @@ export class CompanyService extends RawCompanyService {
     );
   }
 
-  searchCompaniesByIdentity(identity: string, companyTestingVersions: string) {
+  searchCompaniesByIdentity(identity: string) {
     if (identity === this.DGCCRF_DATA.siret) {
       return of([this.DGCCRF_DATA]);
     } else {
-      return super.searchCompaniesByIdentity(identity, companyTestingVersions);
+      return super.searchCompaniesByIdentity(identity);
     }
   }
 }
