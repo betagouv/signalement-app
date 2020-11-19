@@ -69,36 +69,32 @@ class RawCompanyService {
     return address.substring(0, address.length - 3);
   }
 
-  searchCompaniesBySiret(siret: string, companyTestingVersions: string) {
+  searchCompaniesByIdentity(identity: string, companyTestingVersions: string) {
     if (companyTestingVersions === CompanyTestingVersions.SignalConsoAPI) {
-      return this.http.get<CompanySearchResult>(
-        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', siret]),
+      return this.http.get<CompanySearchResult[]>(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', identity]),
       ).pipe(
-        map(result => {
-          if (result && result.postalCode) {
-            return result;
-          }
-        })
+        map(companies => companies.filter(company => company.postalCode))
       );
     } else {
       let httpParams = new HttpParams();
       httpParams = httpParams.append('maxCount', MaxCompanyResult.toString());
       return this.http.get<any>(
-        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', siret]),
+        this.serviceUtils.getUrl(Api.Company, ['api', 'sirene', 'v1', 'siret', identity]),
         {
           params: httpParams
         }
       ).pipe(
         map(result => {
           if (result.etablissement && result.etablissement.code_postal) {
-            return <CompanySearchResult>{
+            return [<CompanySearchResult>{
               siret: result.etablissement.siret,
               name: result.etablissement.nom_raison_sociale,
               brand: result.etablissement.enseigne,
               address: this.getAddressFromEtablissement(result.etablissement),
               postalCode: result.etablissement.code_postal,
               activityLabel: result.etablissement.libelle_activite_principale
-            };
+            }];
           }
         }),
         catchError(err => {
@@ -444,11 +440,11 @@ export class CompanyService extends RawCompanyService {
     );
   }
 
-  searchCompaniesBySiret(siret: string, companyTestingVersions: string) {
-    if (siret === this.DGCCRF_DATA.siret) {
-      return of(this.DGCCRF_DATA);
+  searchCompaniesByIdentity(identity: string, companyTestingVersions: string) {
+    if (identity === this.DGCCRF_DATA.siret) {
+      return of([this.DGCCRF_DATA]);
     } else {
-      return super.searchCompaniesBySiret(siret, companyTestingVersions);
+      return super.searchCompaniesByIdentity(identity, companyTestingVersions);
     }
   }
 }
