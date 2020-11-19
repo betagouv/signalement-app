@@ -181,7 +181,10 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.get<PaginatedData<any>>(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-        { ...headers, params: this.serviceUtils.objectToHttpParams(this.reportFilter2QueryString(report)) },
+        {
+          ...headers,
+          params: this.serviceUtils.objectToHttpParams(this.reportFilter2QueryString(report))
+        },
       )),
       mergeMap(paginatedData => of({
         ...paginatedData,
@@ -194,7 +197,7 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.post(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
-        { ...headers, params: this.serviceUtils.objectToHttpParams(this.reportFilter2QueryString(report)) },
+        this.reportFilter2Body(report),
         headers
       ))
     );
@@ -205,12 +208,28 @@ export class ReportService {
     return {
       ...r,
       ...(r.departments ? { departments: r.departments.join(',') } : {}),
-      ...((period && period[0]) ? { start: moment(period[0]).format('YYYY-MM-DD') } : {}),
-      ...((period && period[1]) ? { end: moment(period[1]).format('YYYY-MM-DD') } : {}),
+      ...((period && period[0]) ? { start: this.mapDate(period[0]) } : {}),
+      ...((period && period[1]) ? { end: this.mapDate(period[1]) } : {}),
     };
   };
 
-  private reportApi2report(reportWithFiles: {report: any, files?: UploadedFile[]}) {
+  private reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
+    const { period, offset, departments, tags, limit, ...rest } = report;
+    return {
+      ...Object.entries(rest).reduce((acc, [key, val]) => ({
+        ...acc,
+        ...((val !== undefined && val !== null) ? { [key]: `${val}`.trim() } : {}),
+      }), {}),
+      departments: departments || [],
+      tags: tags || [],
+      ...((period && period[0]) ? { start: this.mapDate(period[0]) } : {}),
+      ...((period && period[1]) ? { end: this.mapDate(period[1]) } : {}),
+    };
+  };
+
+  private mapDate = (date: string): string => moment(date).format('YYYY-MM-DD');
+
+  private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}) => {
     const report = reportWithFiles.report;
     const files = reportWithFiles.files;
     return Object.assign(new Report(), {
@@ -231,7 +250,7 @@ export class ReportService {
         lastName: report.lastName,
         email: report.email
       }),
-      website: Object.assign(new Website(), {url: report.websiteURL}),
+      website: Object.assign(new Website(), { url: report.websiteURL }),
       vendor: report.vendor,
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
