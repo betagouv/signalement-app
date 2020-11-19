@@ -22,7 +22,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         </ng-container>
 
         <ng-container matColumnDef="postalCode">
-          <th mat-header-cell *matHeaderCellDef>Commune</th>
+          <th mat-header-cell *matHeaderCellDef>CP</th>
           <td mat-cell *matCellDef="let _">
             <span>{{_.company.postalCode | slice : 0 : 2}}</span><!--
             --><span class="txt-disabled">{{_.company.postalCode | slice : 2 : 5}}</span>
@@ -74,6 +74,11 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef>Date du constat</th>
           <td mat-cell *matCellDef="let _">{{getReportingDate(_)}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef>Date de création</th>
+          <td mat-cell *matCellDef="let _">{{_.creationDate  | date : 'dd/MM/yyyy'}}</td>
         </ng-container>
 
         <ng-container matColumnDef="consumer">
@@ -157,12 +162,13 @@ export class ReportListDatatableComponent implements OnInit {
         return [
           'postalCode',
           'name',
+          'siret',
           'category',
+          'createdDate',
           'description',
           'date',
-          'siret',
-          'files',
           'status',
+          'files',
           'actions',
         ];
       case Roles.Admin:
@@ -170,10 +176,11 @@ export class ReportListDatatableComponent implements OnInit {
           'postalCode',
           'name',
           'category',
+          'createdDate',
           'description',
           'consumer',
-          'files',
           'status',
+          'files',
           'actions',
         ];
       default:

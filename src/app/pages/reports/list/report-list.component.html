@@ -1,7 +1,7 @@
 <app-banner title="Suivi des signalements"
             [subTitle]="searchFormValue.siret ? 'SIRET ' + searchFormValue.siret : ''"></app-banner>
 
-<app-page>
+<app-page large>
     <app-panel [loading]="loading" *appRole="[roles.Admin, roles.DGCCRF]">
     <app-report-list-search
       [searchForm]="searchForm"

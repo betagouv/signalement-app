@@ -24,7 +24,7 @@
 }
 
 .mat-cell.mat-column-name {
-  max-width: 220px;
+  max-width: 170px;
   line-height: 1.1;
 }
 
@@ -38,8 +38,16 @@
   color: $theme-color-text-secondary;
 }
 
+.mat-cell.mat-column-postalCode {
+  max-width: 64px;
+}
+
+.mat-cell.mat-column-consumer {
+  max-width: 160px;
+}
+
 .mat-cell.mat-column-description {
-  max-width: 300px;
+  max-width: 260px;
   color: $theme-color-text-secondary;
   line-height: 1.2;
 }
@@ -49,5 +57,5 @@
 }
 
 .mat-cell.mat-column-category {
-  max-width: 190px;
+  max-width: 140px;
 }

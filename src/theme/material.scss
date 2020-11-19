@@ -75,3 +75,6 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
   font-size: 14px !important;
 }
 
+.mat-header-cell {
+  font-size: $font-size-normal;
+}
