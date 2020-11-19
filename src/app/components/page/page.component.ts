@@ -5,9 +5,14 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 @Component({
   selector: 'app-page',
   template: `
-    <ng-content></ng-content>
+    <main role="main">
+      <ng-content></ng-content>
+    </main>
   `,
-  host: { '[class.large]': 'large', },
+  host: {
+    '[class.large]': 'large',
+    '[class.container]': 'true',
+  },
   styleUrls: ['./page.component.scss'],
   animations: [
     trigger('animation', [
