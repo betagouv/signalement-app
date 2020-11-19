@@ -9,8 +9,7 @@ import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { CompanySearchResult, DraftCompany, Website, WebsiteKinds } from '../../../model/Company';
 import { isPlatformBrowser } from '@angular/common';
-import Utils, { CompanyAPITestingScope } from '../../../utils';
-import { AbTestsService } from 'angular-ab-tests';
+import Utils from '../../../utils';
 
 declare var jQuery: any;
 
@@ -78,8 +77,7 @@ export class CompanyComponent implements OnInit {
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
               private analyticsService: AnalyticsService,
-              private renderer: Renderer2,
-              private abTestsService: AbTestsService) { }
+              private renderer: Renderer2) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -166,8 +164,7 @@ export class CompanyComponent implements OnInit {
         EventCategories.companySearch,
         CompanySearchEventActions.search,
         this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value,
-        this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
+      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
         companySearchResults => {
           this.loading = false;
           if (companySearchResults.length === 0) {
@@ -275,7 +272,7 @@ export class CompanyComponent implements OnInit {
       this.loading = true;
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByIdentity, this.identityCtrl.value);
 
-      this.companyService.searchCompaniesByIdentity(this.identityCtrl.value, this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
+      this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
         companySearchResults => {
           this.loading = false;
           if (companySearchResults.length === 0) {

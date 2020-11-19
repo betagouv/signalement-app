@@ -26,8 +26,6 @@ import { ComponentsModule, NgxLoadingConfig } from './components/components.modu
 import { ReportsModule } from './pages/reports/reports.module';
 import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
-import { AbTestsModule } from 'angular-ab-tests';
-import { CompanyAPITestingScope, CompanyTestingVersions } from './utils';
 import { AppRoleModule } from './directives/app-role/app-role.module';
 import { AppPermissionModule } from './directives/app-permission/app-permission.module';
 import { SubscriptionModule } from './pages/subscription/subscription.module';
@@ -95,22 +93,6 @@ class ErrorLogger extends ErrorHandler {
         TooltipModule,
         Angulartics2Module.forRoot(),
         ComponentsModule,
-        AbTestsModule.forRoot(
-            [
-                {
-                    versions: [
-                        CompanyTestingVersions.EntrepriseAPI,
-                        CompanyTestingVersions.SignalConsoAPI
-                    ],
-                    versionForCrawlers: CompanyTestingVersions.EntrepriseAPI,
-                    scope: CompanyAPITestingScope,
-                    expiration: 5,
-                    weights: {
-                      EntrepriseAPI: 50
-                    },
-                },
-            ],
-        ),
         AppRoleModule,
         AppPermissionModule,
         ContractualDisputeModule
