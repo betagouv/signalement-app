@@ -14,8 +14,6 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { genCompanySearchResult, genDraftReport, genSiret, genSubcategory } from '../../../../../test/fixtures.spec';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftReport, Step } from '../../../model/Report';
-import { AbTestsModule } from 'angular-ab-tests';
-import { CompanyAPITestingScope, CompanyTestingVersions } from '../../../utils';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 
@@ -39,15 +37,6 @@ describe('CompanyComponent', () => {
         RouterTestingModule.withRoutes([{ path: ReportPaths.Consumer, redirectTo: '' }]),
         Ng2CompleterModule,
         NgxLoadingModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ CompanyTestingVersions.SignalConsoAPI, CompanyTestingVersions.EntrepriseAPI ],
-              scope: CompanyAPITestingScope,
-              weights: { [CompanyTestingVersions.SignalConsoAPI]: 99, [CompanyTestingVersions.EntrepriseAPI]: 0 }
-            }
-          ]
-        ),
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

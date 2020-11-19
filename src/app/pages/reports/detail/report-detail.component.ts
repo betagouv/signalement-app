@@ -18,7 +18,6 @@ import { HttpResponse } from '@angular/common/http';
 import { CompanySearchResult } from '../../../model/Company';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import { CompanyTestingVersions } from '../../../utils';
 
 @Component({
   selector: 'app-report-detail',
@@ -212,10 +211,10 @@ export class ReportDetailComponent implements OnInit {
   submitCompanySiretForm() {
     this.loading = true;
     this.loadingError = false;
-    this.companyService.searchCompaniesByIdentity(this.siretCtrl.value, CompanyTestingVersions.SignalConsoAPI).subscribe(
+    this.companyService.searchCompaniesByIdentity(this.siretCtrl.value).subscribe(
       company => {
         this.loading = false;
-        this.companySearchBySiretResult = company;
+        this.companySearchBySiretResult = company[0];
       },
       err => {
         this.loading = false;

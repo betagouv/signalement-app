@@ -1,8 +1,6 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Angulartics2 } from 'angulartics2';
 import { isPlatformBrowser } from '@angular/common';
-import { AbTestsService } from 'angular-ab-tests';
-import { CompanyAPITestingScope, CompanyTestingVersions } from '../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +8,13 @@ import { CompanyAPITestingScope, CompanyTestingVersions } from '../utils';
 export class AnalyticsService {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private angulartics2: Angulartics2,
-              private abTestsService: AbTestsService) {
+              private angulartics2: Angulartics2) {
   }
 
   trackEvent(category, action, name?, value?) {
     if (isPlatformBrowser(this.platformId)) {
       this.angulartics2.eventTrack.next({
-        action: this.abTestsService.getVersion(CompanyAPITestingScope) === CompanyTestingVersions.SignalConsoAPI ? `${action} - API SignalConso` : action,
+        action,
         properties: {
           category,
           name,

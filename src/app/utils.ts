@@ -14,10 +14,4 @@ export default class Utils {
   }
 }
 
-export const CompanyAPITestingScope = 'TestCompanyAPI';
-export enum CompanyTestingVersions {
-  EntrepriseAPI = 'EntrepriseAPI',
-  SignalConsoAPI = 'SignalConsoAPI'
-}
-
 export const desktopMinWidth = 992;
