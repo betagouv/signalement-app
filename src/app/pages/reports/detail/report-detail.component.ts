@@ -212,7 +212,7 @@ export class ReportDetailComponent implements OnInit {
   submitCompanySiretForm() {
     this.loading = true;
     this.loadingError = false;
-    this.companyService.searchCompaniesBySiret(this.siretCtrl.value, CompanyTestingVersions.SignalConsoAPI).subscribe(
+    this.companyService.searchCompaniesByIdentity(this.siretCtrl.value, CompanyTestingVersions.SignalConsoAPI).subscribe(
       company => {
         this.loading = false;
         this.companySearchBySiretResult = company;
