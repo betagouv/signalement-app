@@ -12,13 +12,14 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
 import { AuthGuard } from '../../guards/auth.guard';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { UnavailableComponent } from '../static/unavailable/unavailable.component';
 
 defineLocale('fr', frLocale);
 
 const routes: Routes = [
   { path: 'login', redirectTo: 'dgccrf' },
-  { path: 'connexion', component: LoginComponent },
-  { path: 'dgccrf', component: LoginComponent },
+  { path: 'connexion', component: UnavailableComponent },
+  { path: 'dgccrf', component: UnavailableComponent },
   { path: 'connexion/validation-email', component: EmailValidationComponent },
   { path: 'connexion/perte-mot-de-passe', component: PasswordForgotComponent },
   { path: 'connexion/perte-mot-de-passe/dgccrf', component: PasswordForgotComponent },
