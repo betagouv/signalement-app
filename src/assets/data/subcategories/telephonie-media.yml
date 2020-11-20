@@ -104,7 +104,7 @@
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
         - title: Mon ancien opérateur continue de me prélever
     - title: Appels, sms ou emails indésirables
-      example: 'Exemple : spams, appel incessant, raoppel vers un numéro payant'
+      example: 'Exemple : spams, appel incessant, rappel vers un numéro payant'
       subcategories:
         - title: Je reçois des appels indésirables alors que je suis sur BlocTel
         - title: J'ai répondu à un sms ou j'ai rappelé un numéro qui était payant sans le savoir
