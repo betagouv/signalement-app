@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BannerComponent } from './banner/banner.component';
+import { CompanySearchResultsModule } from './company-search-results/company-search-results.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -18,11 +19,13 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     CommonModule,
     PipesModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
+    CompanySearchResultsModule
   ],
   exports: [
     CollapsableTextComponent,
     AttachmentsComponent,
     BannerComponent,
+    CompanySearchResultsModule
   ],
   providers: [
   ]

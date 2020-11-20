@@ -5,7 +5,7 @@ import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { combineLatest, iif, of } from 'rxjs';
 import { EventService } from '../../../services/event.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';;
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
 import { switchMap, tap } from 'rxjs/operators';
@@ -44,9 +44,10 @@ export class ReportDetailComponent implements OnInit {
   bsModalRef: BsModalRef;
   reportIdToDelete: string;
 
-  companySiretForm: FormGroup;
-  siretCtrl: FormControl;
-  companySearchBySiretResult: CompanySearchResult;
+  companyIdentityForm: FormGroup;
+  identityCtrl: FormControl;
+  companySearchByIdentityResults: CompanySearchResult[];
+  seletedCompany: CompanySearchResult;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -127,10 +128,10 @@ export class ReportDetailComponent implements OnInit {
   }
 
   initCompanySiretForm() {
-    this.siretCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{14}')]);
+    this.identityCtrl = this.formBuilder.control('', Validators.required);
 
-    this.companySiretForm = this.formBuilder.group({
-      siret: this.siretCtrl
+    this.companyIdentityForm = this.formBuilder.group({
+      siret: this.identityCtrl
     });
   }
 
@@ -211,10 +212,10 @@ export class ReportDetailComponent implements OnInit {
   submitCompanySiretForm() {
     this.loading = true;
     this.loadingError = false;
-    this.companyService.searchCompaniesByIdentity(this.siretCtrl.value).subscribe(
-      company => {
+    this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
+      companySearchResults => {
         this.loading = false;
-        this.companySearchBySiretResult = company[0];
+        this.companySearchByIdentityResults = companySearchResults;
       },
       err => {
         this.loading = false;
@@ -239,8 +240,8 @@ export class ReportDetailComponent implements OnInit {
       .subscribe(
         events => {
           this.events = events;
-          this.companySearchBySiretResult = undefined;
-          this.siretCtrl.setValue('');
+          this.companySearchByIdentityResults = undefined;
+          this.identityCtrl.setValue('');
           this.bsModalRef.hide();
         },
         err => {

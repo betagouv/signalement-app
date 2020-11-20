@@ -136,42 +136,39 @@
 
                 <ng-template #companySearch>
                   <div class="modal-body text-center">
-                    <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
-                      <input [formControl]="siretCtrl" placeholder="SIRET de l'entreprise" />
+                    <form [formGroup]="companyIdentityForm" (submit)="submitCompanySiretForm()" id="companyForm">
+                      <input [formControl]="identityCtrl" placeholder="SIRET de l'entreprise" id="identity"/>
 
-                      <div class="notification error" *ngIf="!companySearchBySiretResult && loadingError">
+                      <div class="notification error" *ngIf="!companySearchByIdentityResults && loadingError">
                         Une erreur technique s'est produite
                       </div>
 
                       <hr />
-                      <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companySiretForm.invalid">
+                      <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyIdentityForm.invalid">
                         Rechercher
                       </button>
                     </form>
-                    <div *ngIf="companySearchBySiretResult">
+                    <div *ngIf="companySearchByIdentityResults">
                       <hr />
-                      <div *ngIf="!companySearchBySiretResult.siret">
+                      <div *ngIf="!companySearchByIdentityResults.length">
                         Aucun établissement trouvé
                       </div>
-                      <div *ngIf="companySearchBySiretResult.siret">
-                        <div class="company">
-                          <div class="font-weight-bold" *ngIf="companySearchBySiretResult.name">{{companySearchBySiretResult.name}}</div>
-                          <div class="font-weight-bold" *ngIf="companySearchBySiretResult.brand">{{companySearchBySiretResult.brand}}</div>
-                          <div class="text-primary" *ngIf="companySearchBySiretResult.activityLabel">{{companySearchBySiretResult.activityLabel}}</div>
-                          <div *ngIf="companySearchBySiretResult.address">
-                            <div *ngFor="let line of companySearchBySiretResult.address.split(' - ')">{{line}}</div>
-                          </div>
-                        </div>
 
-                        <div class="notification error" *ngIf="loadingError">
-                          Une erreur technique s'est produite
-                        </div>
+                      <div *ngIf="companySearchByIdentityResults.length">
+                        <app-company-search-results [companySearchResults]="companySearchByIdentityResults" (select)="seletedCompany = $event"></app-company-search-results>
 
-                        <hr />
-                        <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" (click)="changeCompany(companySearchBySiretResult)">Valider</button>
+                        <ng-container *ngIf="seletedCompany">
+                          <hr />
+                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
+                          &nbsp;
+                          <button type="button" class="btn btn-primary" (click)="changeCompany(seletedCompany)">Valider</button>
+                        </ng-container>
                       </div>
+
+                      <div class="notification error" *ngIf="loadingError">
+                        Une erreur technique s'est produite
+                      </div>
+
                     </div>
                   </div>
                 </ng-template>
