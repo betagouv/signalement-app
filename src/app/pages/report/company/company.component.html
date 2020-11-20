@@ -99,11 +99,7 @@
               Sélectionnez l'entreprise
             </h2>
 
-            <fieldset>
-              <ng-container *ngFor="let companySearchResult of companySearchByUrlResults; let companyIndex = index">
-                <ng-container *ngTemplateOutlet="companySearchResultTpl; context: {companySearchResult: companySearchResult, companyIndex: companyIndex}"></ng-container>
-              </ng-container>
-            </fieldset>
+            <app-company-search-results [companySearchResults]="companySearchByUrlResults" (select)="selectCompany($event)"></app-company-search-results>
 
             <div class="note mt-1">
               L’entreprise n’apparaît pas ?
@@ -181,7 +177,7 @@
                       <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Identity" id="identByIdentity" (click)="scrollToElement(identSearch)"/>
                     </div>
                     <div class="col">
-                      <label for="identByIdentity" class="label-inline pointer">Par son SIRET</label>
+                      <label for="identByIdentity" class="label-inline pointer">Par son SIRET / SIREN / RCS</label>
                     </div>
                   </div>
                 </div>
@@ -257,11 +253,7 @@
                       Sélectionnez l'entreprise
                     </h2>
 
-                    <fieldset>
-                      <ng-container *ngFor="let companySearchResult of companySearchResults; let companyIndex = index">
-                        <ng-container *ngTemplateOutlet="companySearchResultTpl; context: {companySearchResult: companySearchResult, companyIndex: companyIndex}"></ng-container>
-                      </ng-container>
-                    </fieldset>
+                    <app-company-search-results [companySearchResults]="companySearchResults" (select)="selectCompany($event)"></app-company-search-results>
 
                     <div class="note mt-1">
                       L’entreprise n’apparaît pas ? Modifiez votre recherche ou  <span class="link" (click)="identificationKind = identificationKinds.Identity" tabindex="0">recherchez avec le numéro SIRET de l'entreprise</span>.
@@ -300,8 +292,8 @@
                 <form [formGroup]="searchByIdentityForm" (submit)="searchCompanyByIdentity()" id="searchByIdentityForm">
 
                   <div class="form__group mt-4">
-                    <label for="siret" [class]="hasErrorByIdentity(identityCtrl) ? 'error' : ''">
-                      Numéro SIRET de l'entreprise (obligatoire)
+                    <label for="identity" [class]="hasErrorByIdentity(identityCtrl) ? 'error' : ''">
+                      Numéro SIRET / SIREN / RCS de l'entreprise (obligatoire)
                     </label>
 
                     <div class="note mb-1" id="siret-description">
@@ -378,7 +370,7 @@
                         </li>
                       </ul>
                     </div>
-                    <input formControlName="siret" type="text" id="siret" placeholder="Ex: 83350861700010" aria-describedby="siret-description">
+                    <input [formControl]="identityCtrl" type="text" id="identity" placeholder="Ex: 83350861700010" aria-describedby="siret-description">
                   </div>
 
                   <div class="notification error mt-3" *ngIf="showErrorsByIdentity && searchByIdentityForm.invalid">
@@ -409,11 +401,7 @@
                       Si l'entreprise n'est pas celle recherchée, vous pouvez modifier votre recherche.
                     </div>
 
-                    <fieldset>
-                      <ng-container *ngFor="let companySearchResult of companySearchByIdentityResults; let companyIndex = index">
-                        <ng-container *ngTemplateOutlet="companySearchResultTpl; context: {companySearchResult: companySearchResult, companyIndex: companyIndex}"></ng-container>
-                      </ng-container>
-                    </fieldset>
+                    <app-company-search-results [companySearchResults]="companySearchByIdentityResults" (select)="selectCompany($event)"></app-company-search-results>
 
                     <hr *ngIf="selectedCompany"/>
 
@@ -461,32 +449,6 @@
     </div>
 
     <ngx-loading [show]="loading"></ngx-loading>
-
-    <ng-template #companySearchResultTpl let-companySearchResult="companySearchResult" let-companyIndex="companyIndex">
-      <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
-        <div class="row mb-3">
-          <div class="col col-radio">
-            <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany()"/>
-          </div>
-          <label class="col pointer" for="company_{{companyIndex}}">
-            <div class="font-weight-bold" *ngIf="companySearchResult.name">{{companySearchResult.name}}</div>
-            <div class="font-weight-bold" *ngIf="companySearchResult.brand">{{companySearchResult.brand}}</div>
-            <div class="font-weight-bold" *ngIf="companySearchResult.highlight">
-              <i class="material-icons md-green">check_circle</i>
-              <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
-            </div>
-            <div class="font-weight-boldtext-success " *ngIf="companySearchResult.isHeadOffice">
-              <span class="text-success">Siège social</span>
-            </div>
-            <div class="text-primary" *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}</div>
-            <div *ngIf="companySearchResult.address">
-              <div *ngFor="let line of companySearchResult.address.split(' - ')">{{line}}</div>
-            </div>
-          </label>
-        </div>
-      </div>
-    </ng-template>
-
 
   </section>
 </main>

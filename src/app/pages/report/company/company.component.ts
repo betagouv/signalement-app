@@ -137,7 +137,7 @@ export class CompanyComponent implements OnInit {
   initSearchByIdentityForm() {
     this.identityCtrl = this.formBuilder.control('', Validators.required);
     this.searchByIdentityForm = this.formBuilder.group({
-      siret: this.identityCtrl,
+      identity: this.identityCtrl,
     });
   }
 
@@ -229,7 +229,8 @@ export class CompanyComponent implements OnInit {
     this.initSearchByUrl();
   }
 
-  selectCompany() {
+  selectCompany(companySearchResult: CompanySearchResult) {
+    this.selectedCompany = companySearchResult;
     if (this.identificationKind === IdentificationKinds.Url) {
       this.websiteForm.disable();
     }
@@ -267,7 +268,6 @@ export class CompanyComponent implements OnInit {
     if (!this.searchByIdentityForm.valid) {
       this.showErrorsByIdentity = true;
     } else {
-      this.identityCtrl.setValue((this.identityCtrl.value as string).replace(/\s/g, ''));
       this.initSearchByIdentity();
       this.loading = true;
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByIdentity, this.identityCtrl.value);
