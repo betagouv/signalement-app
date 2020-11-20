@@ -4,6 +4,9 @@
       <div class="notification success mb-5">
         <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> Votre signalement a été envoyé.
       </div>
+      <div class="notification warning mb-5">
+        Malheureusement, un souci technique temporaire nous empêche de vous faire parvenir l’accusé de réception par email. Merci de votre compréhension.
+      </div>
 
       <div class="card" *ngIf="!draftReport.isContractualDispute; else contractualDispute">
         <div class="card-body">

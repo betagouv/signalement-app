@@ -17,11 +17,12 @@ import { Roles } from '../../model/AuthUser';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { UnavailableComponent } from '../static/unavailable/unavailable.component';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] },
-  { path: 'entreprise/activation', component: CompanyActivationComponent },
+  { path: 'entreprise/activation', component: UnavailableComponent },
   { path: 'activation', component: CompanyActivationComponent },
   { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
   { path: 'entreprises', component: CompaniesAdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
