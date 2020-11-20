@@ -16,6 +16,7 @@ import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('CompanyComponent', () => {
 
@@ -37,6 +38,7 @@ describe('CompanyComponent', () => {
         RouterTestingModule.withRoutes([{ path: ReportPaths.Consumer, redirectTo: '' }]),
         Ng2CompleterModule,
         NgxLoadingModule,
+        ComponentsModule
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}
@@ -72,7 +74,7 @@ describe('CompanyComponent', () => {
       expect(component.searchForm.controls['search']).toBeDefined();
       expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
       expect(component.searchByIdentityForm).toBeDefined();
-      expect(component.searchByIdentityForm.controls['siret']).toBeDefined();
+      expect(component.searchByIdentityForm.controls['identity']).toBeDefined();
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
     });
 
@@ -208,7 +210,7 @@ describe('CompanyComponent', () => {
       expect(component.searchForm.controls['search']).toBeDefined();
       expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
       expect(component.searchByIdentityForm).toBeDefined();
-      expect(component.searchByIdentityForm.controls['siret']).toBeDefined();
+      expect(component.searchByIdentityForm.controls['identity']).toBeDefined();
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
     });
 
