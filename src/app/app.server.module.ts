@@ -4,7 +4,6 @@ import { Inject, Injectable, NgModule } from '@angular/core';
 import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { AbTestsServerModule, CrawlerDetector } from 'angular-ab-tests';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 
 
@@ -52,14 +51,7 @@ export class ServerCrawlerDetectorService {
     ServerModule,
     NoopAnimationsModule,
     ServerTransferStateModule,
-    AbTestsServerModule,
   ],
-  providers: [
-    {
-      provide: CrawlerDetector,
-      useClass: ServerCrawlerDetectorService,
-    }
-  ]
 })
 export class AppServerModule {
 }

@@ -17,6 +17,7 @@ export interface CompanySearchResult extends DraftCompany {
   highlight: string;
   activityCode: string;
   activityLabel: string;
+  isHeadOffice: boolean;
   kind?: WebsiteKinds;
 }
 
