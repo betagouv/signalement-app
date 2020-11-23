@@ -1,8 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanySearchResult } from '../../model/Company';
 import { CompanyService } from '../../services/company.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+@Directive({
+  selector: '[appCompanySearchDialog]',
+  host: {
+    '(click)': 'openDialog()'
+  },
+})
+export class CompanySearchDialogDirective {
+
+  constructor(public dialog: MatDialog) {
+  }
+
+  @Input() appCompanySearchDialog: boolean;
+
+  openDialog(): void {
+    this.dialog.open(CompanySearchDialogComponent, { width: '500px', });
+  }
+}
 
 @Component({
   selector: 'app-company-search-dialog',
