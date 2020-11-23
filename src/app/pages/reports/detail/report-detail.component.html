@@ -112,9 +112,9 @@
               <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
                 <div class="text-primary font-weight-bold pt-3">
                   Entreprise
-                  <app-company-search-action>
+                  <app-company-search-action *appPermission="permissions.updateReport">
                     <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true"
-                       title="Détail du signalement" *appPermission="permissions.updateReport">
+                       title="Détail du signalement">
                       edit
                     </i>
                   </app-company-search-action>
