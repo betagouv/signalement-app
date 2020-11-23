@@ -6,8 +6,6 @@ import { CompanySearchDialogComponent } from './company-search-dialog.component'
 import { CompanySearchActionComponent } from './company-search-action.component';
 import { MaterialModule } from '../material.module';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { BtnLoadingModule } from '../btn-loading/btn-loading.module';
-import { AlertModule } from '../alert/alert.module';
 
 
 @NgModule({
@@ -22,13 +20,11 @@ import { AlertModule } from '../alert/alert.module';
     CompanySearchActionComponent,
   ],
   imports: [
-    AlertModule,
     MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    BtnLoadingModule,
     MaterialModule,
   ],
 })
