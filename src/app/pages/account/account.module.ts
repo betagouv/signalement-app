@@ -18,8 +18,8 @@ defineLocale('fr', frLocale);
 
 const routes: Routes = [
   { path: 'login', redirectTo: 'dgccrf' },
-  { path: 'connexion', component: UnavailableComponent },
-  { path: 'dgccrf', component: UnavailableComponent },
+  { path: 'connexion', component: LoginComponent },
+  { path: 'dgccrf', component: LoginComponent },
   { path: 'connexion/validation-email', component: EmailValidationComponent },
   { path: 'connexion/perte-mot-de-passe', component: PasswordForgotComponent },
   { path: 'connexion/perte-mot-de-passe/dgccrf', component: PasswordForgotComponent },
