@@ -3,7 +3,7 @@ import { CompanyKinds, ContractualDisputeTag, InternetTag, Subcategory, Tag } fr
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
-import { Company, DraftCompany, Website } from './Company';
+import { Company, DraftCompany, WebsiteURL } from './Company';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -107,7 +107,7 @@ export class Report {
   subcategories: Subcategory[];
   tags: Tag[];
   company: Company;
-  website: Website;
+  website: WebsiteURL;
   vendor: string;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
