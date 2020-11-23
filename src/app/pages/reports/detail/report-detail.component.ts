@@ -44,11 +44,6 @@ export class ReportDetailComponent implements OnInit {
   bsModalRef: BsModalRef;
   reportIdToDelete: string;
 
-  companyIdentityForm: FormGroup;
-  identityCtrl: FormControl;
-  companySearchByIdentityResults: CompanySearchResult[];
-  seletedCompany: CompanySearchResult;
-
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
   lastNameCtrl: FormControl;
@@ -95,7 +90,6 @@ export class ReportDetailComponent implements OnInit {
     });
 
     this.loadReport();
-    this.initCompanySiretForm();
   }
 
   loadReport() {
@@ -125,14 +119,6 @@ export class ReportDetailComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
-  }
-
-  initCompanySiretForm() {
-    this.identityCtrl = this.formBuilder.control('', Validators.required);
-
-    this.companyIdentityForm = this.formBuilder.group({
-      siret: this.identityCtrl
-    });
   }
 
   initConsumerForm() {
@@ -209,20 +195,6 @@ export class ReportDetailComponent implements OnInit {
     }
   }
 
-  submitCompanySiretForm() {
-    this.loading = true;
-    this.loadingError = false;
-    this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
-      companySearchResults => {
-        this.loading = false;
-        this.companySearchByIdentityResults = companySearchResults;
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
-  }
-
   changeCompany(company: CompanySearchResult) {
     this.loading = true;
     this.loadingError = false;
@@ -240,8 +212,6 @@ export class ReportDetailComponent implements OnInit {
       .subscribe(
         events => {
           this.events = events;
-          this.companySearchByIdentityResults = undefined;
-          this.identityCtrl.setValue('');
           this.bsModalRef.hide();
         },
         err => {
