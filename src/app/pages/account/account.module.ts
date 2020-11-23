@@ -26,8 +26,8 @@ const routes: Routes = [
   { path: 'connexion/nouveau-mot-de-passe/:token', component: PasswordResetComponent },
   { path: 'compte/inscription', component: AccountRegistrationComponent },
   { path: 'compte/mot-de-passe', component: PasswordChangeComponent, canActivate: [AuthGuard] },
-  { path: 'entreprise/rejoindre/:siret', component: UnavailableComponent },
-  { path: 'dgccrf/rejoindre', component: UnavailableComponent },
+  { path: 'entreprise/rejoindre/:siret', component: AccountRegistrationComponent },
+  { path: 'dgccrf/rejoindre', component: AccountRegistrationComponent },
 ];
 
 @NgModule({
