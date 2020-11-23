@@ -10,6 +10,8 @@ import { PageModule } from './page/page.module';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
 import { LabelStatusModule } from './label-status/label-status.module';
+import { BtnLoadingModule } from './btn-loading/btn-loading.module';
+import { AlertModule } from './alert/alert.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -31,10 +33,12 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     CollapsableTextComponent,
     AttachmentsComponent,
     BannerComponent,
-    CompanySearchResultsModule
+    CompanySearchResultsModule,
     PanelModule,
     PageModule,
     MaterialModule,
+    BtnLoadingModule,
+    AlertModule
   ],
   providers: [
   ]

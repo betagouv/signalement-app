@@ -78,3 +78,7 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   height: 38px !important;
   font-size: 1rem !important;
 }
+
+.mat-dialog-container {
+  position: relative;
+}
