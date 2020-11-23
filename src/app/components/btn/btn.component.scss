@@ -1,0 +1,27 @@
+@import "src/theme/variables";
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 6px;
+  color: $primary;
+
+  &.-loading {
+  }
+
+  &.-error {
+    border-color: transparentize($theme-error-border, .80);
+    background: transparentize($theme-error-border, .95);
+    color: $theme-error-border;
+  }
+
+  &.-success {
+    border-color: transparentize($theme-success-border, .80);
+    background: transparentize($theme-success-border, .95);
+    color: $theme-success-border;
+  }
+
+  .app-btn-icon {
+    color: $theme-color-text-secondary;
+  }
+}
