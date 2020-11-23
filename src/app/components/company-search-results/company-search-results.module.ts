@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanySearchResultsComponent } from './company-search-results.component';
-import { CompanySearchDialogComponent } from './company-search-dialog.component';
-import { CompanySearchActionComponent } from './company-search-action.component';
+import { CompanySearchDialogComponent, CompanySearchDialogDirective } from './company-search-dialog.component';
 import { MaterialModule } from '../material.module';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -12,12 +11,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   declarations: [
     CompanySearchResultsComponent,
     CompanySearchDialogComponent,
-    CompanySearchActionComponent,
+    CompanySearchDialogDirective,
   ],
   exports: [
     CompanySearchResultsComponent,
     CompanySearchDialogComponent,
-    CompanySearchActionComponent,
+    CompanySearchDialogDirective,
   ],
   imports: [
     MatProgressBarModule,
