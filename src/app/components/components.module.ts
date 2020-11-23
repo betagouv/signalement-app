@@ -12,8 +12,6 @@ import { CommonModule } from '@angular/common';
 import { BadgeStatusModule } from './label-status/badge-status.module';
 import { BadgeModule } from './badge/badge.module';
 import { LabelStatusModule } from './label-status/label-status.module';
-import { BtnLoadingModule } from './btn-loading/btn-loading.module';
-import { AlertModule } from './alert/alert.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -39,8 +37,6 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     PanelModule,
     PageModule,
     MaterialModule,
-    BtnLoadingModule,
-    AlertModule
   ],
   providers: [
   ]
