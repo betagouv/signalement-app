@@ -12,7 +12,6 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
 import { AuthGuard } from '../../guards/auth.guard';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
-import { UnavailableComponent } from '../static/unavailable/unavailable.component';
 
 defineLocale('fr', frLocale);
 
@@ -26,8 +25,8 @@ const routes: Routes = [
   { path: 'connexion/nouveau-mot-de-passe/:token', component: PasswordResetComponent },
   { path: 'compte/inscription', component: AccountRegistrationComponent },
   { path: 'compte/mot-de-passe', component: PasswordChangeComponent, canActivate: [AuthGuard] },
-  { path: 'entreprise/rejoindre/:siret', component: UnavailableComponent },
-  { path: 'dgccrf/rejoindre', component: UnavailableComponent },
+  { path: 'entreprise/rejoindre/:siret', component: AccountRegistrationComponent },
+  { path: 'dgccrf/rejoindre', component: AccountRegistrationComponent },
 ];
 
 @NgModule({
