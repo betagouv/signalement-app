@@ -1,0 +1,17 @@
+import { ApiWebsite, ApiWebsiteWithCompany } from '../model/ApiWebsite';
+import { Id } from '../model/Common';
+import { ApiClient } from '../ApiClient';
+
+export class WebsiteClient {
+
+  constructor(private client: ApiClient) {
+  }
+
+  readonly list = (): Promise<ApiWebsiteWithCompany[]> => {
+    return this.client.get<ApiWebsiteWithCompany[]>(`/websites`);
+  };
+
+  readonly update = (id: Id, website: Partial<ApiWebsite>): Promise<ApiWebsiteWithCompany> => {
+    return this.client.put<ApiWebsiteWithCompany>(`/websites/${id}`, { body: website });
+  };
+}
