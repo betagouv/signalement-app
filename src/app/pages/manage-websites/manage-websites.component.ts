@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WebsiteService } from '../../services/website.service';
-import { Website, WebsiteKind, WebsiteWithCompany } from '../../model/Website';
+import { ApiWebsite, ApiWebsiteKind, ApiWebsiteWithCompany } from '../../api-sdk/model/ApiWebsite';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,7 +13,7 @@ import { MatSelectChange } from '@angular/material/select';
     <app-banner title="Modération des site webs"></app-banner>
 
     <app-page>
-      <app-panel [loading]="fetching">
+      <app-panel [loading]="websiteService.fetching">
         <app-panel-header>
           <mat-select placeholder="Statut" class="select-status form-control form-control-material" multiple
                       (selectionChange)="applyFilter($event)">
@@ -21,7 +21,7 @@ import { MatSelectChange } from '@angular/material/select';
             <mat-option [value]="websitesKind.PENDING">Non Validé</mat-option>
           </mat-select>
         </app-panel-header>
-        <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
+        <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="host" matSortDirection="desc">
           <ng-container matColumnDef="creationDate">
             <th mat-sort-header mat-header-cell *matHeaderCellDef>Date</th>
             <td mat-cell *matCellDef="let _">
@@ -68,7 +68,7 @@ import { MatSelectChange } from '@angular/material/select';
 export class ManageWebsitesComponent implements OnInit {
 
   constructor(
-    private websiteService: WebsiteService,
+    public websiteService: WebsiteService,
   ) {
   }
 
@@ -82,31 +82,23 @@ export class ManageWebsitesComponent implements OnInit {
     'kind',
   ];
 
-  readonly websitesKind = WebsiteKind;
+  readonly websitesKind = ApiWebsiteKind;
 
-  dataSource: MatTableDataSource<WebsiteWithCompany>;
-
-  fetching = false;
-
-  readonly updading = new Set<string>();
-  readonly errors = new Set<string>();
+  dataSource: MatTableDataSource<ApiWebsiteWithCompany>;
 
   ngOnInit(): void {
     this.fetchWebsites();
   }
 
   private fetchWebsites = (): void => {
-    this.fetching = true;
     this.websiteService.list().subscribe(websites => {
-      this.dataSource = new MatTableDataSource(websites.filter(_ => [WebsiteKind.PENDING, WebsiteKind.DEFAULT].includes(_.kind)));
+      this.dataSource = new MatTableDataSource(websites.filter(_ => [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT].includes(_.kind)));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       // @ts-ignore Typing issue from Angular that do not expect filter to be different than a string
-      this.dataSource.filterPredicate = (data: WebsiteWithCompany, filter: WebsiteKind[]) => filter.includes(data.kind);
+      this.dataSource.filterPredicate = (data: ApiWebsiteWithCompany, filter: ApiWebsiteKind[]) => filter.includes(data.kind);
     }, err => {
       console.error(err);
-    }, () => {
-      this.fetching = false;
     });
   };
 
@@ -114,31 +106,18 @@ export class ManageWebsitesComponent implements OnInit {
     this.dataSource.filter = event.value;
   };
 
-  toggleWebsiteKind = (id: string, kind: WebsiteKind): void => {
-    this.updading.delete(id);
-    this.errors.delete(id);
-    this.updading.add(id);
-    this.websiteService.update(id, { kind: (kind === WebsiteKind.DEFAULT) ? WebsiteKind.PENDING : WebsiteKind.DEFAULT }).subscribe(
-      updatedWebsite => {
-        // TODO(Alex) Should use a state manager like ngrx to handle it globally
-        this.dataSource.data = this.dataSource.data.map((_: WebsiteWithCompany) => _.id === id ? updatedWebsite : _);
-      },
-      error => {
-        console.error(error);
-      },
-      () => {
-        this.updading.delete(id);
-      });
+  toggleWebsiteKind = (id: string, kind: ApiWebsiteKind): void => {
+    this.websiteService.update(id, { kind: (kind === ApiWebsiteKind.DEFAULT) ? ApiWebsiteKind.PENDING : ApiWebsiteKind.DEFAULT }).subscribe();
   };
 
-  getButtonState = (website: Website): BtnState => {
-    if (this.updading.has(website.id)) {
+  getButtonState = (website: ApiWebsite): BtnState => {
+    if (this.websiteService.updating(website.id)) {
       return 'loading';
     }
-    if (this.errors.has(website.id)) {
+    if (this.websiteService.updateError(website.id)) {
       return 'error';
     }
-    if (website.kind === WebsiteKind.DEFAULT) {
+    if (website.kind === ApiWebsiteKind.DEFAULT) {
       return 'success';
     }
   };
