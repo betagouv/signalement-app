@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BtnState } from '../../components/btn/btn.component';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-manage-websites',
@@ -13,6 +14,12 @@ import { BtnState } from '../../components/btn/btn.component';
 
     <app-page>
       <app-panel>
+        <app-panel-header>
+          <mat-select placeholder="Statut" class="select-status form-control form-control-material" multiple (selectionChange)="applyFilter($event)">
+            <mat-option [value]="websitesKind.DEFAULT">Validé</mat-option>
+            <mat-option [value]="websitesKind.PENDING">Non Validé</mat-option>
+          </mat-select>
+        </app-panel-header>
         <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
           <ng-container matColumnDef="creationDate">
             <th mat-sort-header mat-header-cell *matHeaderCellDef>Date</th>
@@ -40,9 +47,11 @@ import { BtnState } from '../../components/btn/btn.component';
           <ng-container matColumnDef="company">
             <th mat-sort-header mat-header-cell *matHeaderCellDef>Entreprise</th>
             <td mat-cell *matCellDef="let _">
-              <span class="font-weight-bold">{{_.company?.name}}</span>
-              &nbsp;
-              <span class="txt-secondary">{{_.company?.siret}}</span>
+              <button app-btn icon="edit" appCompanySearchDialog>
+                <span class="font-weight-bold">{{_.company?.name}}</span>
+                &nbsp;
+                <span class="siret">{{_.company?.siret}}</span>
+              </button>
             </td>
           </ng-container>
 
@@ -80,12 +89,22 @@ export class ManageWebsitesComponent implements OnInit {
   readonly errors = new Set<string>();
 
   ngOnInit(): void {
+    this.fetchWebsites();
+  }
+
+  private fetchWebsites = (): void => {
     this.websiteService.list().subscribe(websites => {
       this.dataSource = new MatTableDataSource(websites.filter(_ => [WebsiteKind.PENDING, WebsiteKind.DEFAULT].includes(_.kind)));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      // @ts-ignore Typing issue from Angular that do not expect filter to be different than a string
+      this.dataSource.filterPredicate = (data: WebsiteWithCompany, filter: WebsiteKind[]) => filter.includes(data.kind);
     });
-  }
+  };
+
+  applyFilter = (event: MatSelectChange): void => {
+    this.dataSource.filter = event.value;
+  };
 
   toggleWebsiteKind = (id: string, kind: WebsiteKind): void => {
     this.loadings.delete(id);
