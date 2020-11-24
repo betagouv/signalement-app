@@ -1,1 +1,11 @@
 @import "src/theme/variables";
+
+.siret {
+  font-weight: normal;
+  color: $theme-color-text-secondary;
+}
+
+.select-status {
+  margin-left: auto;
+  max-width: 200px;
+}

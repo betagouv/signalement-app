@@ -30,6 +30,10 @@ export type BtnState = 'loading' | 'error' | 'success';
     </ng-container>
     &nbsp;
     <ng-content></ng-content>
+    <ng-container *ngIf="iconAfter">
+      &nbsp;
+      <mat-icon class="app-btn-icon">{{iconAfter}}</mat-icon>
+    </ng-container>
     <span matRipple class="mat-button-ripple" [matRippleTrigger]="elementRef.nativeElement"></span>
     <span class="mat-button-focus-overlay"></span>
   `,
@@ -45,6 +49,8 @@ export class BtnComponent {
 
   @Input() icon: string;
 
+  @Input() iconAfter?: string;
+
   @Input() iconError?: string;
 
   @Input() iconSuccess?: string;
@@ -52,7 +58,7 @@ export class BtnComponent {
   @Input() state?: BtnState;
 
   private _disabled = false;
-
+  @Input()
   get disabled() {
     return this._disabled;
   }
