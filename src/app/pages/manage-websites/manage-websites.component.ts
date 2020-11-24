@@ -13,9 +13,10 @@ import { MatSelectChange } from '@angular/material/select';
     <app-banner title="Modération des site webs"></app-banner>
 
     <app-page>
-      <app-panel>
+      <app-panel [loading]="fetching">
         <app-panel-header>
-          <mat-select placeholder="Statut" class="select-status form-control form-control-material" multiple (selectionChange)="applyFilter($event)">
+          <mat-select placeholder="Statut" class="select-status form-control form-control-material" multiple
+                      (selectionChange)="applyFilter($event)">
             <mat-option [value]="websitesKind.DEFAULT">Validé</mat-option>
             <mat-option [value]="websitesKind.PENDING">Non Validé</mat-option>
           </mat-select>
@@ -85,7 +86,9 @@ export class ManageWebsitesComponent implements OnInit {
 
   dataSource: MatTableDataSource<WebsiteWithCompany>;
 
-  readonly loadings = new Set<string>();
+  fetching = false;
+
+  readonly updading = new Set<string>();
   readonly errors = new Set<string>();
 
   ngOnInit(): void {
@@ -93,12 +96,17 @@ export class ManageWebsitesComponent implements OnInit {
   }
 
   private fetchWebsites = (): void => {
+    this.fetching = true;
     this.websiteService.list().subscribe(websites => {
       this.dataSource = new MatTableDataSource(websites.filter(_ => [WebsiteKind.PENDING, WebsiteKind.DEFAULT].includes(_.kind)));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       // @ts-ignore Typing issue from Angular that do not expect filter to be different than a string
       this.dataSource.filterPredicate = (data: WebsiteWithCompany, filter: WebsiteKind[]) => filter.includes(data.kind);
+    }, err => {
+      console.error(err);
+    }, () => {
+      this.fetching = false;
     });
   };
 
@@ -107,9 +115,9 @@ export class ManageWebsitesComponent implements OnInit {
   };
 
   toggleWebsiteKind = (id: string, kind: WebsiteKind): void => {
-    this.loadings.delete(id);
+    this.updading.delete(id);
     this.errors.delete(id);
-    this.loadings.add(id);
+    this.updading.add(id);
     this.websiteService.update(id, { kind: (kind === WebsiteKind.DEFAULT) ? WebsiteKind.PENDING : WebsiteKind.DEFAULT }).subscribe(
       updatedWebsite => {
         // TODO(Alex) Should use a state manager like ngrx to handle it globally
@@ -119,12 +127,12 @@ export class ManageWebsitesComponent implements OnInit {
         console.error(error);
       },
       () => {
-        this.loadings.delete(id);
+        this.updading.delete(id);
       });
   };
 
   getButtonState = (website: Website): BtnState => {
-    if (this.loadings.has(website.id)) {
+    if (this.updading.has(website.id)) {
       return 'loading';
     }
     if (this.errors.has(website.id)) {
