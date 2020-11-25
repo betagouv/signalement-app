@@ -1,0 +1,1381 @@
+[
+  {
+    "nom": "Afghanistan",
+    "nom_alpha": "Afghanistan",
+    "code": "AFG",
+    "article": "l'",
+    "nom_long": "République islamique d'Afghanistan"
+  },
+  {
+    "nom": "Afrique du Sud",
+    "nom_alpha": "Afrique du Sud",
+    "code": "ZAF",
+    "article": "l'",
+    "nom_long": "République d'Afrique du Sud"
+  },
+  {
+    "nom": "Albanie",
+    "nom_alpha": "Albanie",
+    "code": "ALB",
+    "article": "l'",
+    "nom_long": "République d'Albanie"
+  },
+  {
+    "nom": "Algérie",
+    "nom_alpha": "Algérie",
+    "code": "DZA",
+    "article": "l'",
+    "nom_long": "République algérienne démocratique et populaire"
+  },
+  {
+    "nom": "Allemagne",
+    "nom_alpha": "Allemagne",
+    "code": "DEU",
+    "article": "l'",
+    "nom_long": "République fédérale d'Allemagne"
+  },
+  {
+    "nom": "Andorre",
+    "nom_alpha": "Andorre",
+    "code": "AND",
+    "article": "l'",
+    "nom_long": "Principauté d'Andorre"
+  },
+  {
+    "nom": "Angola",
+    "nom_alpha": "Angola",
+    "code": "AGO",
+    "article": "l'",
+    "nom_long": "République d'Angola"
+  },
+  {
+    "nom": "Antigua-et-Barbuda",
+    "nom_alpha": "Antigua-et-Barbuda",
+    "code": "ATG",
+    "article": "",
+    "nom_long": "Antigua-et-Barbuda"
+  },
+  {
+    "nom": "Arabie saoudite",
+    "nom_alpha": "Arabie saoudite",
+    "code": "SAU",
+    "article": "l'",
+    "nom_long": "Royaume d'Arabie saoudite"
+  },
+  {
+    "nom": "Argentine",
+    "nom_alpha": "Argentine",
+    "code": "ARG",
+    "article": "l'",
+    "nom_long": "République argentine"
+  },
+  {
+    "nom": "Arménie",
+    "nom_alpha": "Arménie",
+    "code": "ARM",
+    "article": "l'",
+    "nom_long": "République d'Arménie"
+  },
+  {
+    "nom": "Australie",
+    "nom_alpha": "Australie",
+    "code": "AUS",
+    "article": "l'",
+    "nom_long": "Commonwealth d'Australie"
+  },
+  {
+    "nom": "Autriche",
+    "nom_alpha": "Autriche",
+    "code": "AUT",
+    "article": "l'",
+    "nom_long": "République d'Autriche"
+  },
+  {
+    "nom": "Azerbaïdjan",
+    "nom_alpha": "Azerbaïdjan",
+    "code": "AZE",
+    "article": "l'",
+    "nom_long": "République d'Azerbaïdjan"
+  },
+  {
+    "nom": "Bahamas",
+    "nom_alpha": "Bahamas",
+    "code": "BHS",
+    "article": "les",
+    "nom_long": "Commonwealth des Bahamas"
+  },
+  {
+    "nom": "Bahreïn",
+    "nom_alpha": "Bahreïn",
+    "code": "BHR",
+    "article": "",
+    "nom_long": "Royaume de Bahreïn"
+  },
+  {
+    "nom": "Bangladesh",
+    "nom_alpha": "Bangladesh",
+    "code": "BGD",
+    "article": "l'",
+    "nom_long": "République populaire du Bangladesh"
+  },
+  {
+    "nom": "Barbade",
+    "nom_alpha": "Barbade",
+    "code": "BRB",
+    "article": "la",
+    "nom_long": "Barbade"
+  },
+  {
+    "nom": "Belgique",
+    "nom_alpha": "Belgique",
+    "code": "BEL",
+    "article": "la",
+    "nom_long": "Royaume de Belgique"
+  },
+  {
+    "nom": "Bélize",
+    "nom_alpha": "Bélize",
+    "code": "BLZ",
+    "article": "le",
+    "nom_long": "Bélize"
+  },
+  {
+    "nom": "Bénin",
+    "nom_alpha": "Bénin",
+    "code": "BEN",
+    "article": "le",
+    "nom_long": "République du Bénin"
+  },
+  {
+    "nom": "Bhoutan",
+    "nom_alpha": "Bhoutan",
+    "code": "BTN",
+    "article": "le",
+    "nom_long": "Royaume du Bhoutan"
+  },
+  {
+    "nom": "Biélorussie",
+    "nom_alpha": "Biélorussie",
+    "code": "BLR",
+    "article": "la",
+    "nom_long": "République de Biélorussie"
+  },
+  {
+    "nom": "Birmanie",
+    "nom_alpha": "Birmanie",
+    "code": "MMR",
+    "article": "la",
+    "nom_long": "République de l'Union de Birmanie"
+  },
+  {
+    "nom": "Bolivie",
+    "nom_alpha": "Bolivie",
+    "code": "BOL",
+    "article": "la",
+    "nom_long": "État plurinational de Bolivie"
+  },
+  {
+    "nom": "Bosnie-Herzégovine",
+    "nom_alpha": "Bosnie-Herzégovine",
+    "code": "BIH",
+    "article": "la",
+    "nom_long": "Bosnie-Herzégovine"
+  },
+  {
+    "nom": "Botswana",
+    "nom_alpha": "Botswana",
+    "code": "BWA",
+    "article": "le",
+    "nom_long": "République du Botswana"
+  },
+  {
+    "nom": "Brésil",
+    "nom_alpha": "Brésil",
+    "code": "BRA",
+    "article": "le",
+    "nom_long": "République fédérative du Brésil"
+  },
+  {
+    "nom": "Brunei",
+    "nom_alpha": "Brunei",
+    "code": "BRN",
+    "article": "le",
+    "nom_long": "Brunei Darussalam"
+  },
+  {
+    "nom": "Bulgarie",
+    "nom_alpha": "Bulgarie",
+    "code": "BGR",
+    "article": "la",
+    "nom_long": "République de Bulgarie"
+  },
+  {
+    "nom": "Burkina",
+    "nom_alpha": "Burkina",
+    "code": "BFA",
+    "article": "le",
+    "nom_long": "Burkina Faso"
+  },
+  {
+    "nom": "Burundi",
+    "nom_alpha": "Burundi",
+    "code": "BDI",
+    "article": "le",
+    "nom_long": "République du Burundi"
+  },
+  {
+    "nom": "Cambodge",
+    "nom_alpha": "Cambodge",
+    "code": "KHM",
+    "article": "le",
+    "nom_long": "Royaume du Cambodge"
+  },
+  {
+    "nom": "Cameroun",
+    "nom_alpha": "Cameroun",
+    "code": "CMR",
+    "article": "le",
+    "nom_long": "République du Cameroun"
+  },
+  {
+    "nom": "Canada",
+    "nom_alpha": "Canada",
+    "code": "CAN",
+    "article": "le",
+    "nom_long": "Canada"
+  },
+  {
+    "nom": "Cap-Vert",
+    "nom_alpha": "Cap-Vert",
+    "code": "CPV",
+    "article": "le",
+    "nom_long": "République du Cap-Vert"
+  },
+  {
+    "nom": "Centrafrique",
+    "nom_alpha": "Centrafrique",
+    "code": "CAF",
+    "article": "la",
+    "nom_long": "République centrafricaine"
+  },
+  {
+    "nom": "Chili",
+    "nom_alpha": "Chili",
+    "code": "CHL",
+    "article": "le",
+    "nom_long": "République du Chili"
+  },
+  {
+    "nom": "Chine",
+    "nom_alpha": "Chine",
+    "code": "CHN",
+    "article": "la",
+    "nom_long": "République populaire de Chine"
+  },
+  {
+    "nom": "Chypre",
+    "nom_alpha": "Chypre",
+    "code": "CYP",
+    "article": "",
+    "nom_long": "République de Chypre"
+  },
+  {
+    "nom": "Colombie",
+    "nom_alpha": "Colombie",
+    "code": "COL",
+    "article": "la",
+    "nom_long": "République de Colombie"
+  },
+  {
+    "nom": "Comores",
+    "nom_alpha": "Comores",
+    "code": "COM",
+    "article": "les",
+    "nom_long": "Union des Comores"
+  },
+  {
+    "nom": "Congo",
+    "nom_alpha": "Congo",
+    "code": "COG",
+    "article": "le",
+    "nom_long": "République du Congo"
+  },
+  {
+    "nom": "République démocratique du Congo",
+    "nom_alpha": "Congo (République démocratique du)",
+    "code": "COD",
+    "article": "la",
+    "nom_long": "République démocratique du Congo"
+  },
+  {
+    "nom": "Îles Cook",
+    "nom_alpha": "Cook (Îles)",
+    "code": "COK",
+    "article": "les",
+    "nom_long": "Îles Cook"
+  },
+  {
+    "nom": "Corée du Nord",
+    "nom_alpha": "Corée du Nord",
+    "code": "PRK",
+    "article": "la",
+    "nom_long": "République populaire démocratique de Corée"
+  },
+  {
+    "nom": "Corée du Sud",
+    "nom_alpha": "Corée du Sud",
+    "code": "KOR",
+    "article": "la",
+    "nom_long": "République de Corée"
+  },
+  {
+    "nom": "Costa Rica",
+    "nom_alpha": "Costa Rica",
+    "code": "CRI",
+    "article": "le",
+    "nom_long": "République du Costa Rica"
+  },
+  {
+    "nom": "Côte d'Ivoire",
+    "nom_alpha": "Côte d'Ivoire",
+    "code": "CIV",
+    "article": "la",
+    "nom_long": "République de Côte d'Ivoire"
+  },
+  {
+    "nom": "Croatie",
+    "nom_alpha": "Croatie",
+    "code": "HRV",
+    "article": "la",
+    "nom_long": "République de Croatie"
+  },
+  {
+    "nom": "Cuba",
+    "nom_alpha": "Cuba",
+    "code": "CUB",
+    "article": "",
+    "nom_long": "République de Cuba"
+  },
+  {
+    "nom": "Danemark",
+    "nom_alpha": "Danemark",
+    "code": "DNK",
+    "article": "le",
+    "nom_long": "Royaume du Danemark"
+  },
+  {
+    "nom": "Djibouti",
+    "nom_alpha": "Djibouti",
+    "code": "DJI",
+    "article": "le",
+    "nom_long": "République de Djibouti"
+  },
+  {
+    "nom": "République dominicaine",
+    "nom_alpha": "Dominicaine (République)",
+    "code": "DOM",
+    "article": "la",
+    "nom_long": "République dominicaine"
+  },
+  {
+    "nom": "Dominique",
+    "nom_alpha": "Dominique",
+    "code": "DMA",
+    "article": "la",
+    "nom_long": "Commonwealth de la Dominique"
+  },
+  {
+    "nom": "Égypte",
+    "nom_alpha": "Égypte",
+    "code": "EGY",
+    "article": "l'",
+    "nom_long": "République arabe d'Égypte"
+  },
+  {
+    "nom": "Émirats arabes unis",
+    "nom_alpha": "Émirats arabes unis",
+    "code": "ARE",
+    "article": "les",
+    "nom_long": "Émirats arabes unis"
+  },
+  {
+    "nom": "Équateur",
+    "nom_alpha": "Équateur",
+    "code": "ECU",
+    "article": "l'",
+    "nom_long": "République d'Équateur"
+  },
+  {
+    "nom": "Érythrée",
+    "nom_alpha": "Érythrée",
+    "code": "ERI",
+    "article": "l'",
+    "nom_long": "État d'Érythrée"
+  },
+  {
+    "nom": "Espagne",
+    "nom_alpha": "Espagne",
+    "code": "ESP",
+    "article": "l'",
+    "nom_long": "Royaume d'Espagne"
+  },
+  {
+    "nom": "Estonie",
+    "nom_alpha": "Estonie",
+    "code": "EST",
+    "article": "l'",
+    "nom_long": "République d'Estonie"
+  },
+  {
+    "nom": "Eswatini",
+    "nom_alpha": "Eswatini",
+    "code": "SWZ",
+    "article": "le",
+    "nom_long": "Royaume d'Eswatini"
+  },
+  {
+    "nom": "États-Unis",
+    "nom_alpha": "États-Unis",
+    "code": "USA",
+    "article": "les",
+    "nom_long": "États-Unis d'Amérique"
+  },
+  {
+    "nom": "Éthiopie",
+    "nom_alpha": "Éthiopie",
+    "code": "ETH",
+    "article": "l'",
+    "nom_long": "République démocratique fédérale d'Éthiopie"
+  },
+  {
+    "nom": "Fidji",
+    "nom_alpha": "Fidji",
+    "code": "FJI",
+    "article": "les",
+    "nom_long": "République des Fidji"
+  },
+  {
+    "nom": "Finlande",
+    "nom_alpha": "Finlande",
+    "code": "FIN",
+    "article": "la",
+    "nom_long": "République de Finlande"
+  },
+  {
+    "nom": "France",
+    "nom_alpha": "France",
+    "code": "FRA",
+    "article": "la",
+    "nom_long": "République française"
+  },
+  {
+    "nom": "Gabon",
+    "nom_alpha": "Gabon",
+    "code": "GAB",
+    "article": "le",
+    "nom_long": "République gabonaise"
+  },
+  {
+    "nom": "Gambie",
+    "nom_alpha": "Gambie",
+    "code": "GMB",
+    "article": "la",
+    "nom_long": "République de Gambie"
+  },
+  {
+    "nom": "Géorgie",
+    "nom_alpha": "Géorgie",
+    "code": "GEO",
+    "article": "la",
+    "nom_long": "Géorgie"
+  },
+  {
+    "nom": "Ghana",
+    "nom_alpha": "Ghana",
+    "code": "GHA",
+    "article": "le",
+    "nom_long": "République du Ghana"
+  },
+  {
+    "nom": "Grèce",
+    "nom_alpha": "Grèce",
+    "code": "GRC",
+    "article": "la",
+    "nom_long": "République hellénique"
+  },
+  {
+    "nom": "Grenade",
+    "nom_alpha": "Grenade",
+    "code": "GRD",
+    "article": "la",
+    "nom_long": "Grenade"
+  },
+  {
+    "nom": "Guatémala",
+    "nom_alpha": "Guatémala",
+    "code": "GTM",
+    "article": "le",
+    "nom_long": "République du Guatémala"
+  },
+  {
+    "nom": "Guinée",
+    "nom_alpha": "Guinée",
+    "code": "GIN",
+    "article": "la",
+    "nom_long": "République de Guinée"
+  },
+  {
+    "nom": "Guinée équatoriale",
+    "nom_alpha": "Guinée équatoriale",
+    "code": "GNQ",
+    "article": "la",
+    "nom_long": "République de Guinée équatoriale"
+  },
+  {
+    "nom": "Guinée-Bissao",
+    "nom_alpha": "Guinée-Bissao",
+    "code": "GNB",
+    "article": "la",
+    "nom_long": "République de Guinée-Bissao"
+  },
+  {
+    "nom": "Guyana",
+    "nom_alpha": "Guyana",
+    "code": "GUY",
+    "article": "le",
+    "nom_long": "République coopérative du Guyana"
+  },
+  {
+    "nom": "Haïti",
+    "nom_alpha": "Haïti",
+    "code": "HTI",
+    "article": "",
+    "nom_long": "République d'Haïti"
+  },
+  {
+    "nom": "Honduras",
+    "nom_alpha": "Honduras",
+    "code": "HND",
+    "article": "le",
+    "nom_long": "République du Honduras"
+  },
+  {
+    "nom": "Hongrie",
+    "nom_alpha": "Hongrie",
+    "code": "HUN",
+    "article": "la",
+    "nom_long": "Hongrie"
+  },
+  {
+    "nom": "Inde",
+    "nom_alpha": "Inde",
+    "code": "IND",
+    "article": "l'",
+    "nom_long": "République de l'Inde"
+  },
+  {
+    "nom": "Indonésie",
+    "nom_alpha": "Indonésie",
+    "code": "IDN",
+    "article": "l'",
+    "nom_long": "République d'Indonésie"
+  },
+  {
+    "nom": "Irak",
+    "nom_alpha": "Irak",
+    "code": "IRQ",
+    "article": "l'",
+    "nom_long": "République d'Irak"
+  },
+  {
+    "nom": "Iran",
+    "nom_alpha": "Iran",
+    "code": "IRN",
+    "article": "l'",
+    "nom_long": "République islamique d'Iran"
+  },
+  {
+    "nom": "Irlande",
+    "nom_alpha": "Irlande",
+    "code": "IRL",
+    "article": "l'",
+    "nom_long": "Irlande"
+  },
+  {
+    "nom": "Islande",
+    "nom_alpha": "Islande",
+    "code": "ISL",
+    "article": "l'",
+    "nom_long": "République d'Islande"
+  },
+  {
+    "nom": "Israël",
+    "nom_alpha": "Israël",
+    "code": "ISR",
+    "article": "",
+    "nom_long": "État d'Israël"
+  },
+  {
+    "nom": "Italie",
+    "nom_alpha": "Italie",
+    "code": "ITA",
+    "article": "l'",
+    "nom_long": "République italienne"
+  },
+  {
+    "nom": "Jamaïque",
+    "nom_alpha": "Jamaïque",
+    "code": "JAM",
+    "article": "la",
+    "nom_long": "Jamaïque"
+  },
+  {
+    "nom": "Japon",
+    "nom_alpha": "Japon",
+    "code": "JPN",
+    "article": "le",
+    "nom_long": "Japon"
+  },
+  {
+    "nom": "Jordanie",
+    "nom_alpha": "Jordanie",
+    "code": "JOR",
+    "article": "la",
+    "nom_long": "Royaume hachémite de Jordanie"
+  },
+  {
+    "nom": "Kazakhstan",
+    "nom_alpha": "Kazakhstan",
+    "code": "KAZ",
+    "article": "le",
+    "nom_long": "République du Kazakhstan"
+  },
+  {
+    "nom": "Kénya",
+    "nom_alpha": "Kénya",
+    "code": "KEN",
+    "article": "le",
+    "nom_long": "République du Kénya"
+  },
+  {
+    "nom": "Kirghizstan",
+    "nom_alpha": "Kirghizstan",
+    "code": "KGZ",
+    "article": "le",
+    "nom_long": "République kirghize"
+  },
+  {
+    "nom": "Kiribati",
+    "nom_alpha": "Kiribati",
+    "code": "KIR",
+    "article": "les",
+    "nom_long": "République des Kiribati"
+  },
+  {
+    "nom": "Kosovo",
+    "nom_alpha": "Kosovo",
+    "code": "KOS",
+    "article": "le",
+    "nom_long": "République du Kosovo"
+  },
+  {
+    "nom": "Koweït",
+    "nom_alpha": "Koweït",
+    "code": "KWT",
+    "article": "le",
+    "nom_long": "État du Koweït"
+  },
+  {
+    "nom": "Laos",
+    "nom_alpha": "Laos",
+    "code": "LAO",
+    "article": "le",
+    "nom_long": "République démocratique populaire lao"
+  },
+  {
+    "nom": "Lésotho",
+    "nom_alpha": "Lésotho",
+    "code": "LSO",
+    "article": "le",
+    "nom_long": "Royaume du Lesotho"
+  },
+  {
+    "nom": "Lettonie",
+    "nom_alpha": "Lettonie",
+    "code": "LVA",
+    "article": "la",
+    "nom_long": "République de Lettonie"
+  },
+  {
+    "nom": "Liban",
+    "nom_alpha": "Liban",
+    "code": "LBN",
+    "article": "le",
+    "nom_long": "République libanaise"
+  },
+  {
+    "nom": "Libéria",
+    "nom_alpha": "Libéria",
+    "code": "LBR",
+    "article": "le",
+    "nom_long": "République du Libéria"
+  },
+  {
+    "nom": "Libye",
+    "nom_alpha": "Libye",
+    "code": "LBY",
+    "article": "la",
+    "nom_long": "État de Libye"
+  },
+  {
+    "nom": "Liechtenstein",
+    "nom_alpha": "Liechtenstein",
+    "code": "LIE",
+    "article": "le",
+    "nom_long": "Principauté du Liechtenstein"
+  },
+  {
+    "nom": "Lituanie",
+    "nom_alpha": "Lituanie",
+    "code": "LTU",
+    "article": "la",
+    "nom_long": "République de Lituanie"
+  },
+  {
+    "nom": "Luxembourg",
+    "nom_alpha": "Luxembourg",
+    "code": "LUX",
+    "article": "le",
+    "nom_long": "Grand-Duché de Luxembourg"
+  },
+  {
+    "nom": "Macédoine du Nord",
+    "nom_alpha": "Macédoine du Nord",
+    "code": "MKD",
+    "article": "l'",
+    "nom_long": "République de Macédoine du Nord"
+  },
+  {
+    "nom": "Madagascar",
+    "nom_alpha": "Madagascar",
+    "code": "MDG",
+    "article": "",
+    "nom_long": "République de Madagascar"
+  },
+  {
+    "nom": "Malaisie",
+    "nom_alpha": "Malaisie",
+    "code": "MYS",
+    "article": "la",
+    "nom_long": "Malaisie"
+  },
+  {
+    "nom": "Malawi",
+    "nom_alpha": "Malawi",
+    "code": "MWI",
+    "article": "le",
+    "nom_long": "République du Malawi"
+  },
+  {
+    "nom": "Maldives",
+    "nom_alpha": "Maldives",
+    "code": "MDV",
+    "article": "les",
+    "nom_long": "République des Maldives"
+  },
+  {
+    "nom": "Mali",
+    "nom_alpha": "Mali",
+    "code": "MLI",
+    "article": "le",
+    "nom_long": "République du Mali"
+  },
+  {
+    "nom": "Malte",
+    "nom_alpha": "Malte",
+    "code": "MLT",
+    "article": "",
+    "nom_long": "République de Malte"
+  },
+  {
+    "nom": "Maroc",
+    "nom_alpha": "Maroc",
+    "code": "MAR",
+    "article": "le",
+    "nom_long": "Royaume du Maroc"
+  },
+  {
+    "nom": "Îles Marshall",
+    "nom_alpha": "Marshall (Îles)",
+    "code": "MHL",
+    "article": "les",
+    "nom_long": "République des Îles Marshall"
+  },
+  {
+    "nom": "Maurice",
+    "nom_alpha": "Maurice",
+    "code": "MUS",
+    "article": "",
+    "nom_long": "République de Maurice"
+  },
+  {
+    "nom": "Mauritanie",
+    "nom_alpha": "Mauritanie",
+    "code": "MRT",
+    "article": "la",
+    "nom_long": "République islamique de Mauritanie"
+  },
+  {
+    "nom": "Mexique",
+    "nom_alpha": "Mexique",
+    "code": "MEX",
+    "article": "le",
+    "nom_long": "États-Unis du Mexique"
+  },
+  {
+    "nom": "Micronésie",
+    "nom_alpha": "Micronésie",
+    "code": "FSM",
+    "article": "la",
+    "nom_long": "États fédérés de Micronésie"
+  },
+  {
+    "nom": "Moldavie",
+    "nom_alpha": "Moldavie",
+    "code": "MDA",
+    "article": "la",
+    "nom_long": "République de Moldavie"
+  },
+  {
+    "nom": "Monaco",
+    "nom_alpha": "Monaco",
+    "code": "MCO",
+    "article": "",
+    "nom_long": "Principauté de Monaco"
+  },
+  {
+    "nom": "Mongolie",
+    "nom_alpha": "Mongolie",
+    "code": "MNG",
+    "article": "la",
+    "nom_long": "Mongolie"
+  },
+  {
+    "nom": "Monténégro",
+    "nom_alpha": "Monténégro",
+    "code": "MNE",
+    "article": "le",
+    "nom_long": "Monténégro"
+  },
+  {
+    "nom": "Mozambique",
+    "nom_alpha": "Mozambique",
+    "code": "MOZ",
+    "article": "le",
+    "nom_long": "République du Mozambique"
+  },
+  {
+    "nom": "Namibie",
+    "nom_alpha": "Namibie",
+    "code": "NAM",
+    "article": "la",
+    "nom_long": "République de Namibie"
+  },
+  {
+    "nom": "Nauru",
+    "nom_alpha": "Nauru",
+    "code": "NRU",
+    "article": "",
+    "nom_long": "République de Nauru"
+  },
+  {
+    "nom": "Népal",
+    "nom_alpha": "Népal",
+    "code": "NPL",
+    "article": "le",
+    "nom_long": "République démocratique fédérale du Népal"
+  },
+  {
+    "nom": "Nicaragua",
+    "nom_alpha": "Nicaragua",
+    "code": "NIC",
+    "article": "le",
+    "nom_long": "République du Nicaragua"
+  },
+  {
+    "nom": "Niger",
+    "nom_alpha": "Niger",
+    "code": "NER",
+    "article": "le",
+    "nom_long": "République du Niger"
+  },
+  {
+    "nom": "Nigéria",
+    "nom_alpha": "Nigéria",
+    "code": "NGA",
+    "article": "le",
+    "nom_long": "République fédérale du Nigéria"
+  },
+  {
+    "nom": "Niue",
+    "nom_alpha": "Niue",
+    "code": "NIU",
+    "article": "",
+    "nom_long": "Niue"
+  },
+  {
+    "nom": "Norvège",
+    "nom_alpha": "Norvège",
+    "code": "NOR",
+    "article": "la",
+    "nom_long": "Royaume de Norvège"
+  },
+  {
+    "nom": "Nouvelle-Zélande",
+    "nom_alpha": "Nouvelle-Zélande",
+    "code": "NZL",
+    "article": "la",
+    "nom_long": "Nouvelle-Zélande"
+  },
+  {
+    "nom": "Oman",
+    "nom_alpha": "Oman",
+    "code": "OMN",
+    "article": "",
+    "nom_long": "Sultanat d'Oman"
+  },
+  {
+    "nom": "Ouganda",
+    "nom_alpha": "Ouganda",
+    "code": "UGA",
+    "article": "l'",
+    "nom_long": "République d'Ouganda"
+  },
+  {
+    "nom": "Ouzbékistan",
+    "nom_alpha": "Ouzbékistan",
+    "code": "UZB",
+    "article": "l'",
+    "nom_long": "République d'Ouzbékistan"
+  },
+  {
+    "nom": "Pakistan",
+    "nom_alpha": "Pakistan",
+    "code": "PAK",
+    "article": "le",
+    "nom_long": "République islamique du Pakistan"
+  },
+  {
+    "nom": "Palaos",
+    "nom_alpha": "Palaos",
+    "code": "PLW",
+    "article": "les",
+    "nom_long": "République des Palaos"
+  },
+  {
+    "nom": "Panama",
+    "nom_alpha": "Panama",
+    "code": "PAN",
+    "article": "le",
+    "nom_long": "République du Panama"
+  },
+  {
+    "nom": "Papouasie-Nouvelle-Guinée",
+    "nom_alpha": "Papouasie-Nouvelle-Guinée",
+    "code": "PNG",
+    "article": "la",
+    "nom_long": "État indépendant de Papouasie-Nouvelle-Guinée"
+  },
+  {
+    "nom": "Paraguay",
+    "nom_alpha": "Paraguay",
+    "code": "PRY",
+    "article": "le",
+    "nom_long": "République du Paraguay"
+  },
+  {
+    "nom": "Pays-Bas",
+    "nom_alpha": "Pays-Bas",
+    "code": "NLD",
+    "article": "les",
+    "nom_long": "Royaume des Pays-Bas"
+  },
+  {
+    "nom": "Pérou",
+    "nom_alpha": "Pérou",
+    "code": "PER",
+    "article": "le",
+    "nom_long": "République du Pérou"
+  },
+  {
+    "nom": "Philippines",
+    "nom_alpha": "Philippines",
+    "code": "PHL",
+    "article": "les",
+    "nom_long": "République des Philippines"
+  },
+  {
+    "nom": "Pologne",
+    "nom_alpha": "Pologne",
+    "code": "POL",
+    "article": "la",
+    "nom_long": "République de Pologne"
+  },
+  {
+    "nom": "Portugal",
+    "nom_alpha": "Portugal",
+    "code": "PRT",
+    "article": "le",
+    "nom_long": "République portugaise"
+  },
+  {
+    "nom": "Qatar",
+    "nom_alpha": "Qatar",
+    "code": "QAT",
+    "article": "le",
+    "nom_long": "État du Qatar"
+  },
+  {
+    "nom": "Roumanie",
+    "nom_alpha": "Roumanie",
+    "code": "ROU",
+    "article": "la",
+    "nom_long": "Roumanie"
+  },
+  {
+    "nom": "Royaume-Uni",
+    "nom_alpha": "Royaume-Uni",
+    "code": "GBR",
+    "article": "le",
+    "nom_long": "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord"
+  },
+  {
+    "nom": "Russie",
+    "nom_alpha": "Russie",
+    "code": "RUS",
+    "article": "la",
+    "nom_long": "Fédération de Russie"
+  },
+  {
+    "nom": "Rwanda",
+    "nom_alpha": "Rwanda",
+    "code": "RWA",
+    "article": "le",
+    "nom_long": "République du Rwanda"
+  },
+  {
+    "nom": "Saint-Christophe-et-Niévès",
+    "nom_alpha": "Saint-Christophe-et-Niévès",
+    "code": "KNA",
+    "article": "",
+    "nom_long": "Fédération de Saint-Christophe-et-Niévès"
+  },
+  {
+    "nom": "Sainte-Lucie",
+    "nom_alpha": "Sainte-Lucie",
+    "code": "LCA",
+    "article": "",
+    "nom_long": "Sainte-Lucie"
+  },
+  {
+    "nom": "Saint-Marin",
+    "nom_alpha": "Saint-Marin",
+    "code": "SMR",
+    "article": "",
+    "nom_long": "République de Saint-Marin"
+  },
+  {
+    "nom": "Saint-Vincent-et-les-Grenadines",
+    "nom_alpha": "Saint-Vincent-et-les-Grenadines",
+    "code": "VCT",
+    "article": "",
+    "nom_long": "Saint-Vincent-et-les-Grenadines"
+  },
+  {
+    "nom": "Salomon",
+    "nom_alpha": "Salomon",
+    "code": "SLB",
+    "article": "les",
+    "nom_long": "Îles Salomon"
+  },
+  {
+    "nom": "Salvador",
+    "nom_alpha": "Salvador",
+    "code": "SLV",
+    "article": "le",
+    "nom_long": "République du Salvador"
+  },
+  {
+    "nom": "Samoa",
+    "nom_alpha": "Samoa",
+    "code": "WSM",
+    "article": "les",
+    "nom_long": "État indépendant des Samoa"
+  },
+  {
+    "nom": "Sao Tomé-et-Principe",
+    "nom_alpha": "Sao Tomé-et-Principe",
+    "code": "STP",
+    "article": "",
+    "nom_long": "République démocratique de Sao Tomé-et-Principe"
+  },
+  {
+    "nom": "Sénégal",
+    "nom_alpha": "Sénégal",
+    "code": "SEN",
+    "article": "le",
+    "nom_long": "République du Sénégal"
+  },
+  {
+    "nom": "Serbie",
+    "nom_alpha": "Serbie",
+    "code": "SRB",
+    "article": "la",
+    "nom_long": "République de Serbie"
+  },
+  {
+    "nom": "Seychelles",
+    "nom_alpha": "Seychelles",
+    "code": "SYC",
+    "article": "les",
+    "nom_long": "République des Seychelles"
+  },
+  {
+    "nom": "Sierra Leone",
+    "nom_alpha": "Sierra Leone",
+    "code": "SLE",
+    "article": "la",
+    "nom_long": "République de Sierra Leone"
+  },
+  {
+    "nom": "Singapour",
+    "nom_alpha": "Singapour",
+    "code": "SGP",
+    "article": "",
+    "nom_long": "République de Singapour"
+  },
+  {
+    "nom": "Slovaquie",
+    "nom_alpha": "Slovaquie",
+    "code": "SVK",
+    "article": "la",
+    "nom_long": "République slovaque"
+  },
+  {
+    "nom": "Slovénie",
+    "nom_alpha": "Slovénie",
+    "code": "SVN",
+    "article": "la",
+    "nom_long": "République de Slovénie"
+  },
+  {
+    "nom": "Somalie",
+    "nom_alpha": "Somalie",
+    "code": "SOM",
+    "article": "la",
+    "nom_long": "République fédérale de Somalie"
+  },
+  {
+    "nom": "Soudan",
+    "nom_alpha": "Soudan",
+    "code": "SDN",
+    "article": "le",
+    "nom_long": "République du Soudan"
+  },
+  {
+    "nom": "Soudan du Sud",
+    "nom_alpha": "Soudan du Sud",
+    "code": "SDS",
+    "article": "le",
+    "nom_long": "République du Soudan du Sud"
+  },
+  {
+    "nom": "Sri Lanka",
+    "nom_alpha": "Sri Lanka",
+    "code": "LKA",
+    "article": "le",
+    "nom_long": "République démocratique socialiste du Sri Lanka"
+  },
+  {
+    "nom": "Suède",
+    "nom_alpha": "Suède",
+    "code": "SWE",
+    "article": "la",
+    "nom_long": "Royaume de Suède"
+  },
+  {
+    "nom": "Suisse",
+    "nom_alpha": "Suisse",
+    "code": "CHE",
+    "article": "la",
+    "nom_long": "Confédération suisse"
+  },
+  {
+    "nom": "Suriname",
+    "nom_alpha": "Suriname",
+    "code": "SUR",
+    "article": "le",
+    "nom_long": "République du Suriname"
+  },
+  {
+    "nom": "Syrie",
+    "nom_alpha": "Syrie",
+    "code": "SYR",
+    "article": "la",
+    "nom_long": "République arabe syrienne"
+  },
+  {
+    "nom": "Tadjikistan",
+    "nom_alpha": "Tadjikistan",
+    "code": "TJK",
+    "article": "le",
+    "nom_long": "République du Tadjikistan"
+  },
+  {
+    "nom": "Tanzanie",
+    "nom_alpha": "Tanzanie",
+    "code": "TZA",
+    "article": "la",
+    "nom_long": "République unie de Tanzanie"
+  },
+  {
+    "nom": "Tchad",
+    "nom_alpha": "Tchad",
+    "code": "TCD",
+    "article": "le",
+    "nom_long": "République du Tchad"
+  },
+  {
+    "nom": "Tchéquie",
+    "nom_alpha": "Tchéquie",
+    "code": "CZE",
+    "article": "la",
+    "nom_long": "République tchèque"
+  },
+  {
+    "nom": "Thaïlande",
+    "nom_alpha": "Thaïlande",
+    "code": "THA",
+    "article": "la",
+    "nom_long": "Royaume de Thaïlande"
+  },
+  {
+    "nom": "Timor oriental",
+    "nom_alpha": "Timor oriental",
+    "code": "TLS",
+    "article": "le",
+    "nom_long": "République démocratique du Timor oriental"
+  },
+  {
+    "nom": "Togo",
+    "nom_alpha": "Togo",
+    "code": "TGO",
+    "article": "le",
+    "nom_long": "République togolaise"
+  },
+  {
+    "nom": "Tonga",
+    "nom_alpha": "Tonga",
+    "code": "TON",
+    "article": "les",
+    "nom_long": "Royaume des Tonga"
+  },
+  {
+    "nom": "Trinité-et-Tobago",
+    "nom_alpha": "Trinité-et-Tobago",
+    "code": "TTO",
+    "article": "la",
+    "nom_long": "République de Trinité-et-Tobago"
+  },
+  {
+    "nom": "Tunisie",
+    "nom_alpha": "Tunisie",
+    "code": "TUN",
+    "article": "la",
+    "nom_long": "République tunisienne"
+  },
+  {
+    "nom": "Turkménistan",
+    "nom_alpha": "Turkménistan",
+    "code": "TKM",
+    "article": "le",
+    "nom_long": "Turkménistan"
+  },
+  {
+    "nom": "Turquie",
+    "nom_alpha": "Turquie",
+    "code": "TUR",
+    "article": "la",
+    "nom_long": "République de Turquie"
+  },
+  {
+    "nom": "Tuvalu",
+    "nom_alpha": "Tuvalu",
+    "code": "TUV",
+    "article": "les",
+    "nom_long": "Tuvalu"
+  },
+  {
+    "nom": "Ukraine",
+    "nom_alpha": "Ukraine",
+    "code": "UKR",
+    "article": "l'",
+    "nom_long": "Ukraine"
+  },
+  {
+    "nom": "Uruguay",
+    "nom_alpha": "Uruguay",
+    "code": "URY",
+    "article": "l'",
+    "nom_long": "République orientale de l'Uruguay"
+  },
+  {
+    "nom": "Vanuatu",
+    "nom_alpha": "Vanuatu",
+    "code": "VUT",
+    "article": "le",
+    "nom_long": "République du Vanuatu"
+  },
+  {
+    "nom": "Vatican",
+    "nom_alpha": "Vatican",
+    "code": "VAT",
+    "article": "le",
+    "nom_long": "Vatican (Saint-Siège)"
+  },
+  {
+    "nom": "Vénézuéla",
+    "nom_alpha": "Vénézuéla",
+    "code": "VEN",
+    "article": "le",
+    "nom_long": "République bolivarienne du Vénézuéla"
+  },
+  {
+    "nom": "Vietnam",
+    "nom_alpha": "Vietnam",
+    "code": "VNM",
+    "article": "le",
+    "nom_long": "République socialiste du Vietnam"
+  },
+  {
+    "nom": "Yémen",
+    "nom_alpha": "Yémen",
+    "code": "YEM",
+    "article": "le",
+    "nom_long": "République du Yémen"
+  },
+  {
+    "nom": "Zambie",
+    "nom_alpha": "Zambie",
+    "code": "ZMB",
+    "article": "la",
+    "nom_long": "République de Zambie"
+  },
+  {
+    "nom": "Zimbabwé",
+    "nom_alpha": "Zimbabwé",
+    "code": "ZWE",
+    "article": "le",
+    "nom_long": "République du Zimbabwé"
+  }
+]

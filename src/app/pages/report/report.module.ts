@@ -22,6 +22,7 @@ import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 defineLocale('fr', frLocale);
 
@@ -87,7 +88,8 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     RouterModule.forChild(routes),
     CarouselModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    TypeaheadModule.forRoot(),
   ],
   exports: [
     RouterModule,
