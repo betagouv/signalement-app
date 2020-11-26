@@ -8,16 +8,16 @@ import {
   Renderer2,
   ViewContainerRef
 } from '@angular/core';
-import { BtnLoadingComponent } from './btn-loading.component';
+import { LoadingComponent } from './loading.component';
 
 @Directive({
-  selector: '[appBtnLoading]'
+  selector: '[appLoading]'
 })
-export class BtnLoadingDirective implements OnChanges {
+export class LoadingDirective implements OnChanges {
 
-  @Input() appBtnLoading: false;
+  @Input() appLoading: false;
 
-  loaderRef: ComponentRef<BtnLoadingComponent>;
+  loaderRef: ComponentRef<LoadingComponent>;
 
   constructor(private el: ElementRef,
     private cfResolver: ComponentFactoryResolver,
@@ -26,7 +26,7 @@ export class BtnLoadingDirective implements OnChanges {
   }
 
   ngOnChanges() {
-    if (this.appBtnLoading) {
+    if (this.appLoading) {
       this.el.nativeElement.disabled = true;
       this.el.nativeElement.style.setProperty('color', 'transparent', 'important');
       this.el.nativeElement.style.setProperty('position', 'relative', 'important');
@@ -53,7 +53,7 @@ export class BtnLoadingDirective implements OnChanges {
   }
 
   private initializeProgress(): void {
-    const factory = this.cfResolver.resolveComponentFactory(BtnLoadingComponent);
+    const factory = this.cfResolver.resolveComponentFactory(LoadingComponent);
     this.loaderRef = this.vcRef.createComponent(factory);
     this.renderer.appendChild(this.vcRef.element.nativeElement, this.loaderRef.location.nativeElement);
   }

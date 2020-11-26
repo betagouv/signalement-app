@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-btn-loading',
+  selector: 'app-loading',
   template: `
     <mat-progress-spinner
       mode="indeterminate"
@@ -11,8 +11,8 @@ import {Component} from '@angular/core';
       [style.width.px]="size">
     </mat-progress-spinner>
   `,
-  styleUrls: ['./btn-loading.component.scss']
+  styleUrls: ['./loading.component.scss']
 })
-export class BtnLoadingComponent {
+export class LoadingComponent {
   readonly size = 24;
 }
