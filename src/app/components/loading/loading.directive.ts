@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
@@ -14,7 +13,7 @@ import { BtnLoadingComponent } from './btn-loading.component';
 @Directive({
   selector: '[appBtnLoading]'
 })
-export class BtnLoadingDirective implements OnChanges, AfterViewInit {
+export class BtnLoadingDirective implements OnChanges {
 
   @Input() appBtnLoading: false;
 
@@ -24,17 +23,13 @@ export class BtnLoadingDirective implements OnChanges, AfterViewInit {
     private cfResolver: ComponentFactoryResolver,
     private vcRef: ViewContainerRef,
     private renderer: Renderer2) {
-    console.log('DIRECTIVEE');
-  }
-
-  ngAfterViewInit() {
-    this.showLoader();
   }
 
   ngOnChanges() {
     if (this.appBtnLoading) {
       this.el.nativeElement.disabled = true;
       this.el.nativeElement.style.setProperty('color', 'transparent', 'important');
+      this.el.nativeElement.style.setProperty('position', 'relative', 'important');
       this.showLoader();
     } else {
       this.el.nativeElement.style.color = '';
@@ -44,7 +39,6 @@ export class BtnLoadingDirective implements OnChanges, AfterViewInit {
   }
 
   showLoader(): void {
-    console.log('SHOW');
     if (!this.loaderRef) {
       this.initializeProgress();
     }
@@ -52,7 +46,6 @@ export class BtnLoadingDirective implements OnChanges, AfterViewInit {
   }
 
   hideLoader(): void {
-    console.log('HiDE');
     if (!this.loaderRef) {
       return;
     }
