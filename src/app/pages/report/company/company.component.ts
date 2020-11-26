@@ -63,7 +63,7 @@ export class CompanyComponent implements OnInit {
   foreignForm: FormGroup;
   nameCtrl: FormControl;
   countryCtrl: FormControl;
-  countries = countries.map(country => country.nom).filter(name => name.toUpperCase() !== 'FRANCE');
+  countries = countries.map(country => country.nom.toUpperCase()).filter(name => name !== 'FRANCE');
 
   selectedCompany: CompanySearchResult;
 
@@ -215,9 +215,7 @@ export class CompanyComponent implements OnInit {
         companySearchResults => {
           this.loading = false;
           if (companySearchResults.length === 0) {
-            this.websiteForm.disable();
-            this.initDefaultForms();
-            this.scrollToElement(this.searchKind.nativeElement);
+            this.initDefaultIdent();
           } else {
             this.companySearchByUrlResults = companySearchResults;
             this.scrollToElement(this.identByUrlResult.nativeElement);
@@ -236,6 +234,14 @@ export class CompanyComponent implements OnInit {
     this.initSearchForm();
     this.initSearchByIdentityForm();
     this.initForeignForm();
+  }
+
+  initDefaultIdent() {
+    this.websiteForm.disable();
+    this.showErrors = false;
+    this.companySearchByUrlResults = undefined;
+    this.initDefaultForms();
+    this.scrollToElement(this.searchKind.nativeElement);
   }
 
   changeWebsite() {
@@ -271,6 +277,10 @@ export class CompanyComponent implements OnInit {
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
+    if (this.identificationKind === IdentificationKinds.Foreign) {
+      this.draftReport.draftCompany.name = this.nameCtrl.value;
+      this.draftReport.draftCompany.country = this.countryCtrl.value;
+    }
     this.draftReport.vendor = this.vendorCtrl?.value;
     this.changeDraftCompany = false;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
@@ -295,7 +305,8 @@ export class CompanyComponent implements OnInit {
             this.scrollToElement(this.identByIdentityResult.nativeElement);
           }
         },
-        () => {
+        err => {
+          console.log('err', err)
           this.loading = false;
           this.searchByIdentityError = 'Une erreur technique s\'est produite.';
         });

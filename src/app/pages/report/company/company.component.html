@@ -30,7 +30,12 @@
                   </ng-container>
                 </strong>
               </div>
-              <div>Adresse : {{draftReport.draftCompany.address}}</div>
+              <div *ngIf="draftReport.draftCompany.address">
+                Adresse : {{draftReport.draftCompany.address}}
+              </div>
+              <div *ngIf="draftReport.isForeignCompany">
+                Pays : {{draftReport.draftCompany.country}}
+              </div>
             </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.siret">
@@ -105,7 +110,7 @@
               L’entreprise n’apparaît pas ?
             </div>
             <div>
-              Modifiez l'adresse du site internet ou<button class="link" (click)="identWithWebsite()">identifier directement l'entreprise.</button>
+              Modifiez l'adresse du site internet ou<button class="link" (click)="initDefaultIdent()">identifier directement l'entreprise.</button>
             </div>
 
             <hr *ngIf="selectedCompany"/>
@@ -532,7 +537,7 @@
                   Pouvez-vous préciser ?
                 </h2>
 
-                <form [formGroup]="searchForm" (submit)="searchCompany()" id="foreignForm">
+                <form [formGroup]="searchForm" (submit)="submitCompany({})" id="foreignForm">
 
                   <div class="form__group mt-4">
                     <label for="nameInput" [class]="hasError(nameCtrl) ? 'error' : ''">
@@ -541,7 +546,7 @@
                     <input type="text" class="form-control" [formControl]="nameCtrl" id="nameInput" placeholder="ex : boulangerie Petit Jean"/>
                   </div>
                   <div class="form__group">
-                    <label for="countryInput" [class]="hasError(searchPostalCodeCtrl) ? 'error' : ''">
+                    <label for="countryInput" [class]="hasError(countryCtrl) ? 'error' : ''">
                       Pays (obligatoire)
                     </label>
                     <div class="row">
