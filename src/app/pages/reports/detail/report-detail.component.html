@@ -29,7 +29,7 @@
           <div class="row">
             <div class="col-12 order-last col-sm-3 order-sm-first">
 
-              <div class="badge d-none d-sm-inline-block" [ngStyle]="{'background-color': statusColor[report.status]}">{{report.status}}</div>
+              <app-badge-status [status]="report.status"></app-badge-status>
 
               <hr class="d-sm-none" />
 
@@ -263,13 +263,13 @@
                   <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
                 </div>
                 <div *appRole="[roles.Admin, roles.DGCCRF]">
-                  <span *ngFor="let tag of report.tags" class="badge badge-success">{{tag}}</span>
+                  <app-badge *ngFor="let tag of report.tags" type="success">{{tag}}</app-badge>
                 </div>
                 <h2 class="text-primary pt-4">Détail du signalement</h2>
                 <div class="row">
                   <div class="col-12">
                     <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
-                      <span class="text-dark-blue font-weight-bold"[innerHTML]="detailInputValue.label"></span>
+                      <span class="text-dark-blue font-weight-bold" [innerHTML]="detailInputValue.label"></span>
                       &nbsp;<span [innerHTML]="detailInputValue.value"></span>
                     </div>
                   </div>

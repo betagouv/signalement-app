@@ -3,12 +3,10 @@ import { ReportStatus, reportStatusColor } from '../../model/Report';
 
 @Component({
   selector: 'app-badge-status[status]',
-  styleUrls: ['./badge-status.component.scss'],
-  host: {
-    '[style.background-color]': 'statusColor[status]',
-  },
   template: `
-    {{status}}
+    <app-badge style="background-color: {{statusColor[status]}}">
+      {{status}}
+    </app-badge>
   `
 })
 export class BadgeStatusComponent {
