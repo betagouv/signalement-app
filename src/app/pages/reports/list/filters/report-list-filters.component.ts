@@ -61,7 +61,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
                 <mat-select-trigger>{{searchForm.get('status').value}}</mat-select-trigger>
                 <mat-option selected>Tous les statuts</mat-option>
                 <mat-option *ngFor="let _ of statusList" [value]="_" class="mat-option-dense">
-                  <app-label-status [status]="_">{{_}}</app-label-status>
+                  <app-badge-status [status]="_">{{_}}</app-badge-status>
                 </mat-option>
               </mat-select>
             </td>

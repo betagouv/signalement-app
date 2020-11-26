@@ -8,7 +8,7 @@ import { PanelModule } from './panel/panel.module';
 import { PageModule } from './page/page.module';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
-import { LabelStatusModule } from './label-status/label-status.module';
+import { BadgeStatusModule } from './label-status/badge-status.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -25,7 +25,7 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     NgxLoadingModule.forRoot(NgxLoadingConfig),
   ],
   exports: [
-    LabelStatusModule,
+    BadgeStatusModule,
     CollapsableTextComponent,
     AttachmentsComponent,
     BannerComponent,

@@ -108,7 +108,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>Statut</th>
           <td mat-cell *matCellDef="let _">
-            <app-label-status [status]="_.status"></app-label-status>
+            <app-badge-status [status]="_.status"></app-badge-status>
           </td>
         </ng-container>
 
