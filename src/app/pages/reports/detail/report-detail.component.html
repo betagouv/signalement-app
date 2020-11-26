@@ -112,12 +112,14 @@
               <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
                 <div class="text-primary font-weight-bold pt-3">
                   Entreprise
-                  <app-company-search-action *appPermission="permissions.updateReport">
-                    <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true"
-                       title="Détail du signalement">
-                      edit
-                    </i>
-                  </app-company-search-action>
+                  <mat-icon
+                    *appPermission="permissions.updateReport"
+                    appCompanySearchDialog
+                    (companySelected)="changeCompany($event)"
+                    class="md-18 pl-1 pb-1 pointer" aria-hidden="true" color="primary"
+                    title="Détail du signalement">
+                    edit
+                  </mat-icon>
                 </div>
                 <div>
                   <strong>{{report.company?.siret}}</strong>
