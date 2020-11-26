@@ -85,6 +85,11 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   position: relative;
 }
 
-.button_icon {
-  margin-right: spacing(1);
+.mat-dialog-title {
+  margin-bottom: spacing(1) !important;
+}
+
+.mat-dialog-actions {
+  margin-top: spacing(2) !important;
+  margin-right: spacing(-2) !important;
 }

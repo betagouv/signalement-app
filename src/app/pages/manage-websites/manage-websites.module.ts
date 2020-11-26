@@ -12,6 +12,7 @@ import { ManageWebsitesComponent } from './manage-websites.component';
 import { CompanySearchResultsModule } from '../../components/company-search-results/company-search-results.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ManageWebsitesCardComponent } from './manage-websites-card.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ManageWebsitesComponent,
+    ManageWebsitesCardComponent,
   ],
   imports: [
     CommonModule,

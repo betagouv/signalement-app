@@ -13,6 +13,8 @@ import { BadgeStatusModule } from './label-status/badge-status.module';
 import { BadgeModule } from './badge/badge.module';
 import { LabelStatusModule } from './label-status/label-status.module';
 import { BtnModule } from './btn/btn.module';
+import { ConfirmModule } from './confirm/confirm.module';
+import { BtnLoadingModule } from './btn-loading/btn-loading.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -38,6 +40,8 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     PageModule,
     BtnModule,
     MaterialModule,
+    ConfirmModule,
+    BtnLoadingModule,
   ],
   providers: [
   ]

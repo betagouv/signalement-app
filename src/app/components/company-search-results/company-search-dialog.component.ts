@@ -1,4 +1,4 @@
-import { Component, Directive, Input } from '@angular/core';
+import { Component, Directive, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanySearchResult } from '../../model/Company';
 import { CompanyService } from '../../services/company.service';
@@ -17,8 +17,11 @@ export class CompanySearchDialogDirective {
 
   @Input() appCompanySearchDialog: boolean;
 
+  @Output() companySelected = new EventEmitter<CompanySearchResult>();
+
   openDialog(): void {
-    this.dialog.open(CompanySearchDialogComponent, { width: '500px', });
+    const ref = this.dialog.open(CompanySearchDialogComponent, { width: '500px', });
+    ref.componentInstance.companySelected = this.companySelected;
   }
 }
 
@@ -71,7 +74,7 @@ export class CompanySearchDialogComponent {
   ) {
   }
 
-  selectedCompany: CompanySearchResult;
+  @Output() companySelected = new EventEmitter<CompanySearchResult>();
 
   results: CompanySearchResult[];
 
@@ -82,8 +85,10 @@ export class CompanySearchDialogComponent {
   identityCtrl: FormControl = this.formBuilder.control('', [Validators.required, Validators.pattern(/^(\d{9}|\d{14})$/)]);
 
   onSelect = ($event: CompanySearchResult) => {
-    this.selectedCompany = $event;
-    setTimeout(() => this.dialogRef.close(this.selectedCompany), 300);
+    setTimeout(() => {
+      this.companySelected.emit($event);
+      this.dialogRef.close();
+    }, 300);
   };
 
   submitCompanySiretForm() {
