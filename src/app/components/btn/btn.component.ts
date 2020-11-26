@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type BtnState = 'loading' | 'error' | 'success';
@@ -9,6 +9,7 @@ export type BtnState = 'loading' | 'error' | 'success';
   host: {
     '[class]': '"-" + state',
     '[attr.disabled]': 'disabled || null',
+    '[class.-dense]': 'dense',
     '[class.mat-button-disabled]': 'disabled',
     'class': 'mat-stroked-button mat-button-base'
   },
@@ -17,7 +18,7 @@ export type BtnState = 'loading' | 'error' | 'success';
       <mat-progress-spinner
         *ngSwitchCase="'loading'"
         mode="indeterminate"
-        strokeWidth="4"
+        strokeWidth="3"
         [diameter]="size"
         [style.height.px]="size"
         [style.width.px]="size">
@@ -28,34 +29,36 @@ export type BtnState = 'loading' | 'error' | 'success';
         <mat-icon *ngIf="icon" class="app-btn-icon">{{icon}}</mat-icon>
       </ng-container>
     </ng-container>
-    &nbsp;
-    <ng-content></ng-content>
-    <ng-container *ngIf="iconAfter">
-      &nbsp;
-      <mat-icon class="app-btn-icon">{{iconAfter}}</mat-icon>
-    </ng-container>
+    <div class="app-btn-content">
+      <ng-content></ng-content>
+    </div>
+    <mat-icon *ngIf="showDeleteBtn" class="app-btn-icon">{{iconDelete || 'delete'}}</mat-icon>
     <span matRipple class="mat-button-ripple" [matRippleTrigger]="elementRef.nativeElement"></span>
     <span class="mat-button-focus-overlay"></span>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./btn.component.scss']
+  styleUrls: ['./btn.component.scss',]
 })
-export class BtnComponent {
+export class BtnComponent implements OnInit {
 
   constructor(public elementRef: ElementRef) {
   }
 
-  readonly size = 24;
+  get size() {
+    return this.dense ? 20 : 24;
+  }
 
   @Input() icon: string;
 
-  @Input() iconAfter?: string;
+  @Input() iconDelete?: string;
 
   @Input() iconError?: string;
 
   @Input() iconSuccess?: string;
 
   @Input() state?: BtnState;
+
+  @Output() deleted = new EventEmitter<void>();
 
   private _disabled = false;
   @Input()
@@ -65,5 +68,21 @@ export class BtnComponent {
 
   set disabled(value: any) {
     this._disabled = coerceBooleanProperty(value);
+  }
+
+  private _dense = false;
+  @Input()
+  get dense() {
+    return this._dense;
+  }
+
+  set dense(value: any) {
+    this._dense = coerceBooleanProperty(value);
+  }
+
+  showDeleteBtn = false;
+
+  ngOnInit() {
+    this.showDeleteBtn = this.deleted.observers.length > 0;
   }
 }
