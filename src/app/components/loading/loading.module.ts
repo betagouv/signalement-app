@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BtnLoadingComponent } from './btn-loading.component';
-import { BtnLoadingDirective } from './btn-loading.directive';
+import { LoadingComponent } from './loading.component';
+import { LoadingDirective } from './loading.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   exports: [
-    BtnLoadingDirective,
-    BtnLoadingComponent,
+    LoadingDirective,
+    LoadingComponent,
   ],
   declarations: [
-    BtnLoadingDirective,
-    BtnLoadingComponent,
+    LoadingDirective,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
   ],
-  entryComponents: [BtnLoadingComponent]
+  entryComponents: [LoadingComponent]
 })
-export class BtnLoadingModule {
+export class LoadingModule {
 }
