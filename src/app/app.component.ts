@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (!this.activatedRoute.snapshot.fragment) {

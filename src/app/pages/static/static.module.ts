@@ -16,6 +16,7 @@ import { FaqComponent } from './faq/faq.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UnavailableComponent } from './unavailable/unavailable.component';
+import { MemberComponent } from './about/member.component';
 
 const routes: Routes = [
   { path: 'comment-ça-marche', component: HowComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    MemberComponent,
     HowComponent,
     AboutComponent,
     FaqComponent,

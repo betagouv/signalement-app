@@ -1,4 +1,3 @@
-@import "../theme/variables";
 
 form {
 
@@ -36,6 +35,10 @@ form {
     color: $red;
   }
 
+}
+
+.input-invisible {
+  @extend %input-invisible;
 }
 
 input,

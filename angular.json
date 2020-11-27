@@ -29,8 +29,7 @@
             ],
             "styles": [
               "src/theme/main.scss",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "src/theme/fonts/iconfont/material-icons.css"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
@@ -95,8 +94,7 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "src/theme/fonts/iconfont/material-icons.css"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ]
           }
         },
