@@ -109,12 +109,12 @@ export function genReport() {
   });
 }
 
-export function genPaginatedReports(length: number) {
-  return Object.assign(new PaginatedData<Report>(), {
+export function genPaginatedReports(length: number): PaginatedData<Report> {
+  return {
     totalCount: length,
     hasNextPage: false,
     entities: [...Array.from(Array(length).keys())].map(a => genReport())
-  });
+  };
 }
 
 export function genConsumer() {

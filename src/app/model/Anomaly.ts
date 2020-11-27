@@ -28,9 +28,7 @@ export class DetailInput {
   optionnal?: boolean;
 }
 
-export class Tag extends String {
-}
-
+export type Tag = string;
 
 export class WithSubcategories {
   subcategoriesTitle?: string;

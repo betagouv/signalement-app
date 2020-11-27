@@ -17,6 +17,7 @@ import { Roles } from '../../model/AuthUser';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ReportListModule } from './list/report-list.module';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -34,10 +35,10 @@ const routes: Routes = [
   declarations: [
     ConsumerReviewComponent,
     ReportListProComponent,
-    ReportListComponent,
     ReportDetailComponent,
   ],
   imports: [
+    ReportListModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
