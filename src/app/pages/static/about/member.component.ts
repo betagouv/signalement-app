@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       <div class="team-member-name">{{name}}</div>
       <div class="team-member-role">
         {{role}}<br/>
-        <span *ngIf="!dgccre">&nbsp;</span>
-        <ng-container *ngIf="dgccre">
+        <span *ngIf="!dgccrf">&nbsp;</span>
+        <ng-container *ngIf="dgccrf">
           Inspecteur <abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>
         </ng-container>
       </div>
@@ -25,6 +25,6 @@ export class MemberComponent {
   @Input() name: string;
   @Input() role: string;
   @Input() avatar: string;
-  @Input() dgccre: boolean;
+  @Input() dgccrf: boolean;
   @Input() disabled: boolean;
 }
