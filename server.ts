@@ -44,7 +44,7 @@ export function app() {
        script-src 'self' stats.data.gouv.fr sentry.data.gouv.fr entreprise.data.gouv.fr 'sha256-WWHGLj0eoGsKPEGMnTqjS4sH0zDInMRPKN098NNWH4E='; \
        img-src 'self' *.data.gouv.fr data: *.numerique.gouv.fr; \
        frame-src 'self' stats.data.gouv.fr *.youtube-nocookie.com; \
-       style-src 'self' *.googleapis.com;`);
+       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;`);
       return next();
     });
   }
