@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { UserAccess } from '../../../model/Company';
-import { Report, ReportStatus, StatusColor } from '../../../model/Report';
+import { Report, ReportStatus, reportStatusColor } from '../../../model/Report';
 import { ReportFilter } from '../../../model/ReportFilter';
 import { combineLatest } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
@@ -22,7 +22,7 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 export class ReportListProComponent implements OnInit {
 
   reportStatus = ReportStatus;
-  statusColor = StatusColor;
+  statusColor = reportStatusColor;
 
   userAccesses: UserAccess[];
   reports: Report[];
@@ -105,18 +105,18 @@ export class ReportListProComponent implements OnInit {
   }
 
   cancelFilters() {
-    this.reportFilter = Object.assign(new ReportFilter(), { siret: this.reportFilter.siret });
+    this.reportFilter = { siret: this.reportFilter.siret };
     this.submitFilters();
   }
 
   loadReports(page: number) {
     this.loading = true;
     this.loadingError = false;
-    this.reportService.getReports(
-      (page - 1) * this.itemsPerPage,
-      this.itemsPerPage,
-      Object.assign(new ReportFilter(), this.reportFilter)
-    ).subscribe(
+    this.reportService.getReports({
+      ...this.reportFilter,
+      offset: (page - 1) * this.itemsPerPage,
+      limit: this.itemsPerPage,
+    }).subscribe(
       result => {
         this.loading = false;
         this.reports = result.entities;

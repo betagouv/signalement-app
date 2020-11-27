@@ -1,0 +1,36 @@
+@import "src/theme/variables";
+
+:host {
+  border-radius: 4px;
+  padding: 2px 12px;
+  font-weight: bold;
+  border: 1px solid $theme-divider;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+  display: inline-block;
+
+  &.-error {
+    background: transparentize($theme-error-border, .9);
+    color: $theme-error-border;
+    border-color: transparentize($theme-error-border, .80);
+  }
+
+  &.-warning {
+    background: transparentize($theme-warning-border, .9);
+    color: $theme-warning-border;
+    border-color: transparentize($theme-warning-border, .80);
+  }
+
+  &.-success {
+    background: transparentize($theme-success-border, .9);
+    color: $theme-success-border;
+    border-color: transparentize($theme-success-border, .80);
+  }
+
+  &.-info {
+    background: transparentize($theme-info-border, .9);
+    color: $theme-info-border;
+    border-color: transparentize($theme-info-border, .80);
+  }
+}

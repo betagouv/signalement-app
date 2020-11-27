@@ -8,24 +8,24 @@ import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter } from '../model/ReportFilter';
-import moment from 'moment';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, Website } from '../model/Company';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReportService {
 
-  private _currentReportFilter = new ReportFilter();
-
   get currentReportFilter() {
     return this._currentReportFilter;
   }
 
   constructor(private http: HttpClient,
-              private serviceUtils: ServiceUtils) {
+    private serviceUtils: ServiceUtils) {
   }
+
+  private _currentReportFilter = {};
 
   createReport(draftReport: DraftReport) {
     return this.http.post(
@@ -155,7 +155,7 @@ export class ReportService {
       mergeMap(headers => {
         return this.http.get(
           `${this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'download'])}`,
-          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+          { ...headers, responseType: 'blob', observe: 'response' },
         );
       })
     );
@@ -173,89 +173,63 @@ export class ReportService {
           Object.assign(headers, { params: httpParams })
         );
       }),
-      mergeMap(paginatedData => {
-        return of(Object.assign(new PaginatedData<Report>(), {
-          totalCount: paginatedData.totalCount,
-          hasNextPage: paginatedData.hasNextPage,
-          entities: paginatedData.entities
-        }));
-      })
     );
-
   }
 
-  getReports(offset: number, limit: number, reportFilter: ReportFilter) {
-    this._currentReportFilter = reportFilter;
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('offset', offset.toString());
-    httpParams = httpParams.append('limit', limit.toString());
-    if (reportFilter.departments && reportFilter.departments.length) {
-      httpParams = httpParams.append('departments', reportFilter.departments.map(d => d.code).join(','));
-    }
-    if (reportFilter.period && reportFilter.period[0]) {
-      httpParams = httpParams.append('start', moment(reportFilter.period[0]).format('YYYY-MM-DD'));
-    }
-    if (reportFilter.period && reportFilter.period[1]) {
-      httpParams = httpParams.append('end', moment(reportFilter.period[1]).format('YYYY-MM-DD'));
-    }
-    reportFilter.tags?.forEach(tag => {
-      httpParams = httpParams.append('tags', tag.toString());
-    });
-
-    ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
-      if (reportFilter[filterName] && reportFilter[filterName].length) {
-        httpParams = httpParams.append(filterName, (reportFilter[filterName].toString()).trim());
-      }
-    });
-
-    if (reportFilter.hasCompanyStr) {
-      httpParams = httpParams.append('hasCompany', reportFilter.hasCompanyStr);
-    }
+  getReports(report: ReportFilter = {}) {
+    this._currentReportFilter = report;
     return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<PaginatedData<any>>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
-          Object.assign(headers, { params: httpParams })
-        );
-      }),
-      mergeMap(paginatedData => {
-        return of(Object.assign(new PaginatedData<Report>(), {
-          totalCount: paginatedData.totalCount,
-          hasNextPage: paginatedData.hasNextPage,
-          entities: paginatedData.entities.map(entity => this.reportApi2report(entity))
-        }));
-      })
+      mergeMap(headers => this.http.get<PaginatedData<any>>(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
+        {
+          ...headers,
+          params: this.serviceUtils.objectToHttpParams(this.reportFilter2QueryString(report))
+        },
+      )),
+      mergeMap(paginatedData => of({
+        ...paginatedData,
+        entities: paginatedData.entities.map(entity => this.reportApi2report(entity))
+      }))
     );
   }
 
-  launchExtraction(reportFilter: ReportFilter) {
+  launchExtraction(report: ReportFilter) {
     return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        const params = {};
-        params['departments'] = (reportFilter.departments || []).map(d => d.code);
-        if (reportFilter.period && reportFilter.period[0]) {
-          params['start'] = moment(reportFilter.period[0]).format('YYYY-MM-DD');
-        }
-        if (reportFilter.period && reportFilter.period[1]) {
-          params['end'] = moment(reportFilter.period[1]).format('YYYY-MM-DD');
-        }
-        ['siret', 'status', 'category', 'details', 'email'].forEach(filterName => {
-          if (reportFilter[filterName]) {
-            params[filterName] = (reportFilter[filterName] as string).trim();
-          }
-        });
-        params['hasCompany'] = reportFilter.hasCompany;
-        params['tags'] = (reportFilter.tags || []);
-        return this.http.post(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
-          params,
-          headers
-        );
-      })
+      mergeMap(headers => this.http.post(
+        this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
+        this.reportFilter2Body(report),
+        headers
+      ))
     );
   }
 
-  private reportApi2report(reportWithFiles: {report: any, files?: UploadedFile[]}) {
+  private reportFilter2QueryString = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
+    const { period, ...r } = report;
+    return {
+      ...r,
+      ...(r.departments ? { departments: r.departments.join(',') } : {}),
+      ...((period && period[0]) ? { start: this.mapDate(period[0]) } : {}),
+      ...((period && period[1]) ? { end: this.mapDate(period[1]) } : {}),
+    };
+  };
+
+  private reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
+    const { period, offset, departments, tags, limit, ...rest } = report;
+    return {
+      ...Object.entries(rest).reduce((acc, [key, val]) => ({
+        ...acc,
+        ...((val !== undefined && val !== null) ? { [key]: `${val}`.trim() } : {}),
+      }), {}),
+      departments: departments || [],
+      tags: tags || [],
+      ...((period && period[0]) ? { start: this.mapDate(period[0]) } : {}),
+      ...((period && period[1]) ? { end: this.mapDate(period[1]) } : {}),
+    };
+  };
+
+  private mapDate = (date: string): string => moment(date).format('YYYY-MM-DD');
+
+  private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}) => {
     const report = reportWithFiles.report;
     const files = reportWithFiles.files;
     return Object.assign(new Report(), {
@@ -276,7 +250,7 @@ export class ReportService {
         lastName: report.lastName,
         email: report.email
       }),
-      website: Object.assign(new Website(), {url: report.websiteURL}),
+      website: Object.assign(new Website(), { url: report.websiteURL }),
       vendor: report.vendor,
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
