@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ServiceUtils } from './service.utils';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteWithCompany } from '../api-sdk/model/ApiWebsite';
+import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../api-sdk/model/ApiWebsite';
 import { Id } from '../api-sdk/model/Common';
 
 @Injectable({
@@ -107,6 +107,25 @@ export class WebsiteService {
     this._updateError.delete(id);
     return this.utils.getReportApiSdk().pipe(
       mergeMap(api => api.website.update(id, website)),
+      map((updatedWebsite: ApiWebsiteWithCompany) => {
+        this.source.next(this.source.value.map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
+        this._updating.delete(id);
+        return updatedWebsite;
+      }),
+      catchError(err => {
+        console.error(err);
+        this._updating.delete(id);
+        this._updateError.add(id);
+        return throwError(err);
+      }),
+    );
+  };
+
+  readonly updateCompany = (id: Id, website: ApiWebsiteUpdateCompany): Observable<ApiWebsiteWithCompany> => {
+    this._updating.add(id);
+    this._updateError.delete(id);
+    return this.utils.getReportApiSdk().pipe(
+      mergeMap(api => api.website.updateCompany(id, website)),
       map((updatedWebsite: ApiWebsiteWithCompany) => {
         this.source.next(this.source.value.map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
         this._updating.delete(id);
