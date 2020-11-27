@@ -263,7 +263,7 @@
                   <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
                 </div>
                 <div *appRole="[roles.Admin, roles.DGCCRF]">
-                  <app-badge *ngFor="let tag of report.tags" type="success">{{tag}}</app-badge>
+                  <app-badge *ngFor="let tag of report.tags">{{tag}}</app-badge>
                 </div>
                 <h2 class="text-primary pt-4">Détail du signalement</h2>
                 <div class="row">
