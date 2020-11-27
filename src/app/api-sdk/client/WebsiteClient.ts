@@ -1,7 +1,6 @@
-import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteWithCompany } from '../model/ApiWebsite';
+import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../model/ApiWebsite';
 import { Id } from '../model/Common';
 import { ApiClient } from '../ApiClient';
-import { DraftCompany } from '../../model/Company';
 
 export class WebsiteClient {
 
@@ -14,6 +13,10 @@ export class WebsiteClient {
 
   readonly update = (id: Id, website: Partial<ApiWebsite>): Promise<ApiWebsiteWithCompany> => {
     return this.client.put<ApiWebsiteWithCompany>(`/websites/${id}`, { body: website });
+  };
+
+  readonly updateCompany = (id: Id, website: ApiWebsiteUpdateCompany): Promise<ApiWebsiteWithCompany> => {
+    return this.client.put<ApiWebsiteWithCompany>(`/websites/${id}/company`, { body: website });
   };
 
   readonly create = (website: ApiWebsiteCreate): Promise<ApiWebsiteWithCompany> => {

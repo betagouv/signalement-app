@@ -1,4 +1,4 @@
-import { Company, WebsiteURL } from '../../model/Company';
+import { Company } from '../../model/Company';
 import { Id } from './Common';
 
 export enum ApiWebsiteKind {
@@ -16,13 +16,16 @@ export interface ApiWebsite {
   kind: ApiWebsiteKind;
 }
 
-export interface ApiWebsiteCreate {
-  host: string;
+export interface ApiWebsiteUpdateCompany {
   companySiret: string;
   companyName: string;
   companyAddress?: string;
   companyPostalCode?: string;
   companyActivityCode?: string;
+}
+
+export interface ApiWebsiteCreate extends ApiWebsiteUpdateCompany {
+  host: string;
 }
 
 export interface ApiWebsiteWithCompany extends ApiWebsite {
