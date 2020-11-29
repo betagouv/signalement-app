@@ -5,20 +5,32 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BtnState } from '../../components/btn/btn.component';
-import { MatSelectChange } from '@angular/material/select';
 import { CompanySearchResult } from '../../model/Company';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
+interface Form {
+  host?: string;
+  kind?: ApiWebsiteKind[];
+}
 
 @Component({
   selector: 'app-manage-websites',
   template: `
     <app-banner title="Modération des site webs"></app-banner>
 
-    <button mat-stroked-button></button>
     <app-page>
-      <app-panel [loading]="websiteService.fetching">
+      <app-panel [loading]="websiteService.fetching" [formGroup]="form">
         <app-panel-header>
+          <input
+            class="form-control form-control-material"
+            formControlName="host"
+            placeholder="Host"
+          />
+          &nbsp;&nbsp;
           <mat-select placeholder="Statut" class="select-status form-control form-control-material" multiple
-                      (selectionChange)="applyFilter($event)">
+                      formControlName="kind">
             <mat-option [value]="websitesKind.DEFAULT">Validé</mat-option>
             <mat-option [value]="websitesKind.PENDING">Non Validé</mat-option>
           </mat-select>
@@ -72,12 +84,10 @@ import { CompanySearchResult } from '../../model/Company';
 export class ManageWebsitesComponent implements OnInit {
 
   constructor(
+    private fb: FormBuilder,
     public websiteService: WebsiteService,
   ) {
   }
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   readonly columns = [
     'host',
@@ -86,28 +96,47 @@ export class ManageWebsitesComponent implements OnInit {
     'kind',
   ];
 
+  form: FormGroup;
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   readonly websitesKind = ApiWebsiteKind;
 
   dataSource: MatTableDataSource<ApiWebsiteWithCompany>;
 
   ngOnInit(): void {
+    this.initForm();
     this.fetchWebsites();
   }
 
-  private fetchWebsites = (): void => {
-    this.websiteService.list().subscribe(websites => {
-      this.dataSource = new MatTableDataSource(websites.filter(_ => [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT].includes(_.kind)));
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      // @ts-ignore Typing issue from Angular that do not expect filter to be different than a string
-      this.dataSource.filterPredicate = (data: ApiWebsiteWithCompany, filter: ApiWebsiteKind[]) => filter.includes(data.kind);
-    }, err => {
-      console.error(err);
+  private initForm = (): void => {
+    this.form = this.fb.group({
+      host: '',
+      kind: [['']],
     });
   };
 
-  applyFilter = (event: MatSelectChange): void => {
-    this.dataSource.filter = event.value;
+  private fetchWebsites = (): void => {
+    combineLatest([
+      this.websiteService.list(),
+      this.form.valueChanges.pipe(startWith(undefined)),
+    ]).pipe(
+      map(([websites, form]: [ApiWebsiteWithCompany[], Form]) => {
+        const kinds = (form?.kind && form?.kind.filter((_: string) => _ !== '').length > 0)
+          ? form.kind
+          : [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT];
+        return websites
+          .filter(_ => kinds.includes(_.kind))
+          .filter(_ => !form?.host || _.host.includes(form.host));
+      }),
+      map(_ => {
+        this.dataSource = new MatTableDataSource(_);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+    ).subscribe();
   };
 
   toggleWebsiteKind = (id: string, kind: ApiWebsiteKind): void => {
