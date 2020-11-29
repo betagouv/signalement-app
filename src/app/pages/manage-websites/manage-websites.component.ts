@@ -123,20 +123,23 @@ export class ManageWebsitesComponent implements OnInit {
       this.websiteService.list(),
       this.form.valueChanges.pipe(startWith(undefined)),
     ]).pipe(
-      map(([websites, form]: [ApiWebsiteWithCompany[], Form]) => {
-        const kinds = (form?.kind && form?.kind.filter((_: string) => _ !== '').length > 0)
-          ? form.kind
-          : [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT];
-        return websites
-          .filter(_ => kinds.includes(_.kind))
-          .filter(_ => !form?.host || _.host.includes(form.host));
-      }),
-      map(_ => {
-        this.dataSource = new MatTableDataSource(_);
-        this.dataSource.paginator = this.paginator ?? null;
-        this.dataSource.sort = this.sort ?? null;
-      })
+      map(this.filterWebsites),
+      map(this.initializeDatatable)
     ).subscribe();
+  };
+
+  private filterWebsites = ([websites, form]: [ApiWebsiteWithCompany[], Form]): ApiWebsiteWithCompany[] => {
+    const isKindSelected = (form?.kind && form?.kind.filter((_: string) => _ !== '').length > 0);
+    const kinds = isKindSelected ? form.kind! : [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT];
+    return websites
+      .filter(_ => kinds.includes(_.kind))
+      .filter(_ => !form?.host || _.host.includes(form.host));
+  }
+
+  private initializeDatatable = (websites: ApiWebsiteWithCompany[]): void => {
+    this.dataSource = new MatTableDataSource(websites);
+    this.dataSource.paginator = this.paginator ?? null;
+    this.dataSource.sort = this.sort ?? null;
   };
 
   toggleWebsiteKind = (id: string, kind: ApiWebsiteKind): void => {
