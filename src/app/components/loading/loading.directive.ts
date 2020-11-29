@@ -15,9 +15,9 @@ import { LoadingComponent } from './loading.component';
 })
 export class LoadingDirective implements OnChanges {
 
-  @Input() appLoading: false;
+  @Input() appLoading = false;
 
-  loaderRef: ComponentRef<LoadingComponent>;
+  loaderRef?: ComponentRef<LoadingComponent>;
 
   constructor(private el: ElementRef,
     private cfResolver: ComponentFactoryResolver,
@@ -40,7 +40,9 @@ export class LoadingDirective implements OnChanges {
 
   showLoader(): void {
     if (!this.loaderRef) {
-      this.initializeProgress();
+      const factory = this.cfResolver.resolveComponentFactory(LoadingComponent);
+      this.loaderRef = this.vcRef.createComponent(factory);
+      this.renderer.appendChild(this.vcRef.element.nativeElement, this.loaderRef.location.nativeElement);
     }
     this.loaderRef.location.nativeElement.style.visibility = 'visible';
   }
@@ -50,11 +52,5 @@ export class LoadingDirective implements OnChanges {
       return;
     }
     this.loaderRef.location.nativeElement.style.visibility = 'hidden';
-  }
-
-  private initializeProgress(): void {
-    const factory = this.cfResolver.resolveComponentFactory(LoadingComponent);
-    this.loaderRef = this.vcRef.createComponent(factory);
-    this.renderer.appendChild(this.vcRef.element.nativeElement, this.loaderRef.location.nativeElement);
   }
 }

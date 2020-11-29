@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-export type BtnState = 'loading' | 'error' | 'success';
+export type BtnState = 'loading' | 'error' | 'success' | 'default';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -48,7 +48,7 @@ export class BtnComponent implements OnInit {
     return this.dense ? 20 : 24;
   }
 
-  @Input() icon: string;
+  @Input() icon?: string;
 
   @Input() iconDelete?: string;
 
