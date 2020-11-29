@@ -19,7 +19,6 @@ import { ReportFilter } from '../../../../model/ReportFilter';
       </app-select-departments>
       &nbsp;&nbsp;
       <input
-        id="rls-period"
         class="form-control form-control-material"
         formControlName="period"
         bsDaterangepicker
