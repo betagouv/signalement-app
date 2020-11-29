@@ -15,7 +15,7 @@ export class WebsiteService {
   ) {
   }
 
-  private source: BehaviorSubject<ApiWebsiteWithCompany[] | undefined> = new BehaviorSubject(undefined);
+  private source = new BehaviorSubject<ApiWebsiteWithCompany[] | undefined>(undefined);
 
   private _creating = false;
   get creating() {
@@ -65,7 +65,7 @@ export class WebsiteService {
       mergeMap(api => api.website.create(website)),
       map((createdWebsite => {
         this._creating = false;
-        this.source.next([...this.source.value, createdWebsite]);
+        this.source.next([...(this.source.value ?? []), createdWebsite]);
         return createdWebsite;
       })),
       catchError(err => {
@@ -79,7 +79,7 @@ export class WebsiteService {
 
   readonly list = ({ force = true, clean = true }: {force?: boolean, clean?: boolean} = {}): Observable<ApiWebsiteWithCompany[]> => {
     if (this.source.value && !force) {
-      return this.source.asObservable();
+      return this.source.asObservable() as Observable<ApiWebsiteWithCompany[]>;
     }
     if (clean) {
       this.source.next(undefined);
@@ -91,7 +91,7 @@ export class WebsiteService {
       mergeMap((websites: ApiWebsiteWithCompany[]) => {
         this._fetching = false;
         this.source.next(websites);
-        return this.source.asObservable();
+        return this.source.asObservable() as Observable<ApiWebsiteWithCompany[]>;
       }),
       catchError(err => {
         console.error(err);
@@ -108,7 +108,7 @@ export class WebsiteService {
     return this.utils.getReportApiSdk().pipe(
       mergeMap(api => api.website.update(id, website)),
       map((updatedWebsite: ApiWebsiteWithCompany) => {
-        this.source.next(this.source.value.map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
+        this.source.next((this.source.value ?? []).map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
         this._updating.delete(id);
         return updatedWebsite;
       }),
@@ -127,7 +127,7 @@ export class WebsiteService {
     return this.utils.getReportApiSdk().pipe(
       mergeMap(api => api.website.updateCompany(id, website)),
       map((updatedWebsite: ApiWebsiteWithCompany) => {
-        this.source.next(this.source.value.map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
+        this.source.next((this.source.value ?? []).map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
         this._updating.delete(id);
         return updatedWebsite;
       }),
@@ -146,7 +146,7 @@ export class WebsiteService {
     return this.utils.getReportApiSdk().pipe(
       mergeMap(api => api.website.remove(id)),
       map(() => {
-        this.source.next(this.source.value.filter((_: ApiWebsiteWithCompany) => _.id !== id));
+        this.source.next((this.source.value ?? []).filter((_: ApiWebsiteWithCompany) => _.id !== id));
         this._deleting.delete(id);
       }),
       catchError(err => {

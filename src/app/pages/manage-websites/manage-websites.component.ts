@@ -96,15 +96,15 @@ export class ManageWebsitesComponent implements OnInit {
     'kind',
   ];
 
-  form: FormGroup;
+  form!: FormGroup;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator?: MatPaginator;
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort?: MatSort;
 
   readonly websitesKind = ApiWebsiteKind;
 
-  dataSource: MatTableDataSource<ApiWebsiteWithCompany>;
+  dataSource?: MatTableDataSource<ApiWebsiteWithCompany>;
 
   ngOnInit(): void {
     this.initForm();
@@ -133,8 +133,8 @@ export class ManageWebsitesComponent implements OnInit {
       }),
       map(_ => {
         this.dataSource = new MatTableDataSource(_);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator ?? null;
+        this.dataSource.sort = this.sort ?? null;
       })
     ).subscribe();
   };
@@ -154,14 +154,15 @@ export class ManageWebsitesComponent implements OnInit {
     if (website.kind === ApiWebsiteKind.DEFAULT) {
       return 'success';
     }
+    return 'default';
   };
 
   updateCompany = (website: ApiWebsiteWithCompany, $event: CompanySearchResult): void => {
     this.websiteService.updateCompany(website.id, {
-      companyName: $event.name,
+      companyName: $event.name!,
       companyAddress: $event.address,
       companyPostalCode: $event.postalCode,
-      companySiret: $event.siret,
+      companySiret: $event.siret!,
       companyActivityCode: $event.activityCode,
     }).subscribe();
   };

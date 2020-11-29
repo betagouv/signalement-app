@@ -1,9 +1,8 @@
-import { Headers } from 'request';
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
 export interface RequestOption {
   qs?: any;
-  headers?: Headers;
+  headers?: any;
   body?: any;
   timeout?: number;
 }
@@ -31,7 +30,7 @@ export class ApiClient {
     });
     this.mapError = mapError ?? ((_: AxiosError) => {
       console.error(_);
-      return Promise.reject(_.response.data);
+      return Promise.reject(_.response?.data);
     });
     this.mapData = mapData ?? ((_: AxiosResponse) => _.data);
   }
@@ -47,7 +46,7 @@ export class ApiClient {
   };
 
   readonly post = <T = any>(uri: string, options?: RequestOption): Promise<T> => {
-    return this.http.post(uri, options.body, options)
+    return this.http.post(uri, options?.body, options)
       .then(this.mapData)
       .catch(this.mapError);
   };
@@ -59,7 +58,7 @@ export class ApiClient {
   };
 
   readonly put = <T = any>(uri: string, options?: RequestOption): Promise<T> => {
-    return this.http.put(uri, options.body, options)
+    return this.http.put(uri, options?.body, options)
       .then(this.mapData)
       .catch(this.mapError);
   };
