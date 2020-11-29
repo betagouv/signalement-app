@@ -85,8 +85,9 @@ describe('ReportListComponent', () => {
 
     fixture.detectChanges();
 
+
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelector('.search-input')).not.toBeNull();
+    expect(nativeElement.querySelector('app-report-list-search')).not.toBeNull();
     expect(nativeElement.querySelectorAll('.table-container tbody tr').length).toEqual(3);
   });
 });
