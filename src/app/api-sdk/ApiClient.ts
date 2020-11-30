@@ -26,7 +26,7 @@ export class ApiClient {
   }: HttpClientParams) {
     this.http = axios.create({
       baseURL: baseUrl,
-      headers: { Connection: 'keep-alive', ...headers, },
+      headers: { ...headers, },
     });
     this.mapError = mapError ?? ((_: AxiosError) => {
       console.error(_);
