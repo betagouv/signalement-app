@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -11,7 +11,8 @@ import {Component} from '@angular/core';
       [style.width.px]="size">
     </mat-progress-spinner>
   `,
-  styleUrls: ['./loading.component.scss']
+  styleUrls: ['./loading.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadingComponent {
   readonly size = 24;

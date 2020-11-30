@@ -10,8 +10,6 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { Roles } from '../../model/AuthUser';
 import { ManageWebsitesComponent } from './manage-websites.component';
 import { CompanySearchResultsModule } from '../../components/company-search-results/company-search-results.module';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const routes: Routes = [
   {
@@ -31,13 +29,11 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    MatPaginatorModule,
     ComponentsModule,
     PipesModule,
     AppRoleModule,
     AppPermissionModule,
     CompanySearchResultsModule,
-    MatProgressBarModule,
   ]
 })
 export class ManageWebsitesModule {
