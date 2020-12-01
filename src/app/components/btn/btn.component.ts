@@ -6,6 +6,8 @@ export type BtnState = 'loading' | 'error' | 'success' | 'default';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'button[app-btn]',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./btn.component.scss',],
   host: {
     '[class]': '"-" + state',
     '[attr.disabled]': 'disabled || null',
@@ -19,9 +21,9 @@ export type BtnState = 'loading' | 'error' | 'success' | 'default';
         *ngSwitchCase="'loading'"
         mode="indeterminate"
         strokeWidth="3"
-        [diameter]="size"
-        [style.height.px]="size"
-        [style.width.px]="size">
+        [diameter]="spinnerSize"
+        [style.height.px]="spinnerSize"
+        [style.width.px]="spinnerSize">
       </mat-progress-spinner>
       <mat-icon *ngSwitchCase="'error'">{{iconError || 'error'}}</mat-icon>
       <mat-icon *ngSwitchCase="'success'">{{iconSuccess || 'check_circle'}}</mat-icon>
@@ -35,16 +37,14 @@ export type BtnState = 'loading' | 'error' | 'success' | 'default';
     <mat-icon *ngIf="showDeleteBtn" class="app-btn-icon">{{iconDelete || 'delete'}}</mat-icon>
     <span matRipple class="mat-button-ripple" [matRippleTrigger]="elementRef.nativeElement"></span>
     <span class="mat-button-focus-overlay"></span>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./btn.component.scss',]
+  `
 })
 export class BtnComponent implements OnInit {
 
   constructor(public elementRef: ElementRef) {
   }
 
-  get size() {
+  get spinnerSize() {
     return this.dense ? 20 : 24;
   }
 
