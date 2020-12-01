@@ -37,7 +37,6 @@
                        [(ngModel)]="reportFilter.period"
                        name="period"
                        id="period"
-                       placeholder="Daterangepicker"
                        placeholder="Période sélectionnée"
                        bsDaterangepicker
                        autocomplete="off"
@@ -107,7 +106,7 @@
             <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length">attach_file</i>
           </div>
           <div class="col-6 col-sm-4">
-            <span class="badge" [ngStyle]="{'background-color': statusColor.get(report.status)}" attr.aria-label="statut du signalement">
+            <span class="badge" [ngStyle]="{'background-color': statusColor[report.status]}" attr.aria-label="statut du signalement">
             {{report.status}}
             </span>
           </div>

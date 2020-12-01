@@ -12,6 +12,15 @@ export default class Utils {
   static isSmallerThanDesktop(platformId) {
     return isPlatformBrowser(platformId) && window && window.innerWidth < desktopMinWidth;
   }
+
+  static cleanObject = <T extends object>(obj: T): Partial<T> | undefined => {
+    const cleanedObj = Object.entries(obj)
+      .filter(([, _]) => _ !== undefined && _ !== null && _ !== '' && (!Array.isArray(_) || !!_.filter(v => v !== undefined).length))
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+    return Object.keys(cleanedObj).length > 0 ? cleanedObj : undefined;
+  };
+
+  static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 }
 
 export const desktopMinWidth = 992;
