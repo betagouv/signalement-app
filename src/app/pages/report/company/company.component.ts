@@ -9,13 +9,12 @@ import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { CompanySearchResult, DraftCompany, Website, WebsiteKinds } from '../../../model/Company';
 import { isPlatformBrowser } from '@angular/common';
-import Utils, { CompanyAPITestingScope } from '../../../utils';
-import { AbTestsService } from 'angular-ab-tests';
+import Utils from '../../../utils';
 
 declare var jQuery: any;
 
 export enum IdentificationKinds {
-  Name = 'Name', Siret = 'Siret', None = 'None', Url = 'Url'
+  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url'
 }
 
 @Component({
@@ -33,8 +32,8 @@ export class CompanyComponent implements OnInit {
   private identByUrlResult: ElementRef;
   @ViewChild('identResult')
   private identResult: ElementRef;
-  @ViewChild('identBySiretResult')
-  private identBySiretResult: ElementRef;
+  @ViewChild('identByIdentityResult')
+  private identByIdentityResult: ElementRef;
 
   step: Step;
   draftReport: DraftReport;
@@ -53,12 +52,12 @@ export class CompanyComponent implements OnInit {
   searchWarning: string;
   searchError: string;
 
-  searchBySiretForm: FormGroup;
-  siretCtrl: FormControl;
-  companySearchBySiretResult: CompanySearchResult;
-  showErrorsBySiret: boolean;
-  searchBySiretWarning: string;
-  searchBySiretError: string;
+  searchByIdentityForm: FormGroup;
+  identityCtrl: FormControl;
+  companySearchByIdentityResults: CompanySearchResult[];
+  showErrorsByIdentity: boolean;
+  searchByIdentityWarning: string;
+  searchByIdentityError: string;
 
   selectedCompany: CompanySearchResult;
 
@@ -78,8 +77,7 @@ export class CompanyComponent implements OnInit {
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
               private analyticsService: AnalyticsService,
-              private renderer: Renderer2,
-              private abTestsService: AbTestsService) { }
+              private renderer: Renderer2) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -90,7 +88,7 @@ export class CompanyComponent implements OnInit {
           this.draftReport = report;
           this.checkExistingCompanyCompliance();
           if (this.draftReport.companyKind === CompanyKinds.SIRET) {
-            this.initSearchBySiretForm();
+            this.initSearchByIdentityForm();
             this.initSearchForm();
           } else if (this.draftReport.companyKind === CompanyKinds.WEBSITE) {
             this.identificationKind = IdentificationKinds.Url;
@@ -136,10 +134,10 @@ export class CompanyComponent implements OnInit {
     this.vendorCtrl = this.formBuilder.control(this.draftReport.vendor);
   }
 
-  initSearchBySiretForm() {
-    this.siretCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{14}')]));
-    this.searchBySiretForm = this.formBuilder.group({
-      siret: this.siretCtrl,
+  initSearchByIdentityForm() {
+    this.identityCtrl = this.formBuilder.control('', Validators.required);
+    this.searchByIdentityForm = this.formBuilder.group({
+      identity: this.identityCtrl,
     });
   }
 
@@ -166,8 +164,7 @@ export class CompanyComponent implements OnInit {
         EventCategories.companySearch,
         CompanySearchEventActions.search,
         this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value,
-        this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
+      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
         companySearchResults => {
           this.loading = false;
           if (companySearchResults.length === 0) {
@@ -218,7 +215,7 @@ export class CompanyComponent implements OnInit {
     this.showErrors = false;
     this.companySearchByUrlResults = undefined;
     this.initSearchForm();
-    this.initSearchBySiretForm();
+    this.initSearchByIdentityForm();
     this.scrollToElement(this.searchKind.nativeElement);
   }
 
@@ -226,13 +223,14 @@ export class CompanyComponent implements OnInit {
     this.websiteForm.enable();
     this.showErrors = false;
     this.searchForm = undefined;
-    this.searchBySiretForm = undefined;
+    this.searchByIdentityForm = undefined;
     this.identificationKind = undefined;
     this.identificationKind = IdentificationKinds.Url;
     this.initSearchByUrl();
   }
 
-  selectCompany() {
+  selectCompany(companySearchResult: CompanySearchResult) {
+    this.selectedCompany = companySearchResult;
     if (this.identificationKind === IdentificationKinds.Url) {
       this.websiteForm.disable();
     }
@@ -260,52 +258,51 @@ export class CompanyComponent implements OnInit {
     this.reportRouterService.routeForward(this.step);
   }
 
-  initSearchBySiret() {
-    this.companySearchBySiretResult = undefined;
-    this.searchBySiretWarning = '';
-    this.searchBySiretError = '';
+  initSearchByIdentity() {
+    this.companySearchByIdentityResults = undefined;
+    this.searchByIdentityWarning = '';
+    this.searchByIdentityError = '';
   }
 
-  searchCompanyBySiret() {
-    this.siretCtrl.setValue((this.siretCtrl.value as string).replace(/\s/g, ''));
-    if (!this.searchBySiretForm.valid) {
-      this.showErrorsBySiret = true;
+  searchCompanyByIdentity() {
+    if (!this.searchByIdentityForm.valid) {
+      this.showErrorsByIdentity = true;
     } else {
-      this.initSearchBySiret();
+      this.initSearchByIdentity();
       this.loading = true;
-      this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchBySiret, this.siretCtrl.value);
+      this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByIdentity, this.identityCtrl.value);
 
-      this.companyService.searchCompaniesBySiret(this.siretCtrl.value, this.abTestsService.getVersion(CompanyAPITestingScope)).subscribe(
-      company => {
-        this.loading = false;
-        if (company) {
-          this.companySearchBySiretResult = company;
-          this.scrollToElement(this.identBySiretResult.nativeElement);
-        } else {
-          this.searchBySiretWarning = 'Aucun établissement ne correspond à la recherche.';
-        }
-      },
+      this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
+        companySearchResults => {
+          this.loading = false;
+          if (companySearchResults.length === 0) {
+            this.searchByIdentityWarning = 'Aucun établissement ne correspond à la recherche.';
+          } else {
+            this.companySearchByIdentityResults = companySearchResults;
+            this.scrollToElement(this.identByIdentityResult.nativeElement);
+          }
+        },
         () => {
           this.loading = false;
-          this.searchBySiretError = 'Une erreur technique s\'est produite.';
-      });
+          this.searchByIdentityError = 'Une erreur technique s\'est produite.';
+        });
     }
   }
 
   changeCompany() {
     this.changeDraftCompany = true;
     this.companySearchResults = [];
-    this.companySearchBySiretResult = undefined;
+    this.companySearchByIdentityResults = undefined;
     this.showErrors = false;
-    this.showErrorsBySiret = false;
+    this.showErrorsByIdentity = false;
   }
 
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
   }
 
-  hasErrorBySiret(formControl: FormControl) {
-    return this.showErrorsBySiret && formControl.errors;
+  hasErrorByIdentity(formControl: FormControl) {
+    return this.showErrorsByIdentity && formControl.errors;
   }
 
   getRadioContainerClass(input: any, value: any) {
@@ -334,8 +331,8 @@ export class CompanyComponent implements OnInit {
       case IdentificationKinds.Name: {
         return this.identResult.nativeElement;
       }
-      case IdentificationKinds.Siret: {
-        return this.identBySiretResult.nativeElement;
+      case IdentificationKinds.Identity: {
+        return this.identByIdentityResult.nativeElement;
       }
 
     }

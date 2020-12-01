@@ -23,7 +23,9 @@
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
       </div>
     </a>
-    <a class="row item" [routerLink]="['/suivi-des-signalements', user.roleUrlParam, 'siret', userAccess.companySiret]">
+    <a class="row item"
+       [routerLink]="['/suivi-des-signalements', user.roleUrlParam]"
+       [queryParams]="{siret: userAccess.companySiret}">
       <div class="col-12">
         Consulter les signalements
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>

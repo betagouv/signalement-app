@@ -113,7 +113,7 @@ export class ReportListComponent implements OnInit {
   }
 
   private updateQueryString = (values: ReportFilter) => {
-    this.router.navigate([], { queryParams: values });
+    this.router.navigate([], { queryParams: values, replaceUrl: true });
   };
 
   get searchFormValue(): ReportFilter {
