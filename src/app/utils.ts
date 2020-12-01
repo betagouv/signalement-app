@@ -23,10 +23,4 @@ export default class Utils {
   static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 }
 
-export const CompanyAPITestingScope = 'TestCompanyAPI';
-export enum CompanyTestingVersions {
-  EntrepriseAPI = 'EntrepriseAPI',
-  SignalConsoAPI = 'SignalConsoAPI'
-}
-
 export const desktopMinWidth = 992;
