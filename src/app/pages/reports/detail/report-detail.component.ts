@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
-import { Report, ReportStatus, StatusColor } from '../../../model/Report';
+import { Report, ReportStatus, reportStatusColor } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
@@ -31,7 +31,7 @@ export class ReportDetailComponent implements OnInit {
   eventActionValues = EventActionValues;
   permissions = Permissions;
   roles = Roles;
-  statusColor = StatusColor;
+  statusColor = reportStatusColor;
 
   report: Report;
 

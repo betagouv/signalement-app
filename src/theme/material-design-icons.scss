@@ -1,9 +1,8 @@
-@import "variables";
-
-.material-icons {
+.material-icons:not(.mat-icon) {
   vertical-align: middle;
   margin-bottom: 0.15rem;
 }
+
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.80); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
