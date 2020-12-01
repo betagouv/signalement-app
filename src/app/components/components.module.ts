@@ -4,6 +4,7 @@ import { CollapsableTextComponent } from './collapsable-text/collapsable-text.co
 import { PipesModule } from '../pipes/pipes.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BannerComponent } from './banner/banner.component';
+import { CompanySearchResultsModule } from './company-search-results/company-search-results.module';
 import { PanelModule } from './panel/panel.module';
 import { PageModule } from './page/page.module';
 import { MaterialModule } from './material.module';
@@ -32,6 +33,7 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     CollapsableTextComponent,
     AttachmentsComponent,
     BannerComponent,
+    CompanySearchResultsModule,
     PanelModule,
     PageModule,
     MaterialModule,
