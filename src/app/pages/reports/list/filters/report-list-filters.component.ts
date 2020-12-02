@@ -99,8 +99,8 @@ import { ReportFilter } from '../../../../model/ReportFilter';
             <td><label>Entreprise identifiée ?</label></td>
             <td>
               <mat-radio-group formControlName="hasCompany">
-                <mat-radio-button value="true">Oui</mat-radio-button>
-                <mat-radio-button value="false">Non</mat-radio-button>
+                <mat-radio-button [value]="true">Oui</mat-radio-button>
+                <mat-radio-button [value]="false">Non</mat-radio-button>
                 <mat-radio-button>Indifférent</mat-radio-button>
               </mat-radio-group>
             </td>

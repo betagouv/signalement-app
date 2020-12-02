@@ -72,24 +72,31 @@ export class ReportListComponent implements OnInit {
     const formValues = {
       ...initialValues,
       ...this.reportService.currentReportFilter,
-      ...this.activatedRoute.snapshot.queryParams,
+      ...this.getQueryString(),
     };
     try {
       this.buildForm(formValues);
     } catch (e) {
       // Prevent error thrown by Angular when queryParams are wrong
+      console.error('[ReportListComponent] Cannot build form from querystring', e);
       this.buildForm(initialValues);
     }
     this.search();
   };
 
+  private getQueryString = (): { [key in keyof ReportFilter]: any } => {
+    const qs = this.activatedRoute.snapshot.queryParams;
+    const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+    return {
+      ...this.activatedRoute.snapshot.queryParams,
+      hasCompany: parseBooleanOption(qs.hasCompany),
+      period: (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])],
+    };
+  };
+
   private buildForm = (filters: ReportFilter): void => {
-    const buildArrayInput = (_: string | string[]): string[][] => [Array.isArray(_) ? _ : [_]];
-    this.searchForm = this.fb.group({
-      ...filters,
-      departments: buildArrayInput(filters.departments),
-      tags: buildArrayInput(filters.tags),
-    });
+    const wrapValuesInArray = (o: object) => Object.entries(o).reduce((acc, [k, v]) => ({ ...acc, [k]: [v] }), {});
+    this.searchForm = this.fb.group(wrapValuesInArray(filters));
     merge(...this.formControlNamesWithAutomaticRefresh.map(_ => this.searchForm.get(_).valueChanges))
       .pipe(debounceTime(800), distinctUntilChanged())
       .subscribe(this.search);
