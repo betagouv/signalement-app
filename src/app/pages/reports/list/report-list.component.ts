@@ -74,7 +74,6 @@ export class ReportListComponent implements OnInit {
       ...this.reportService.currentReportFilter,
       ...this.getQueryString(),
     };
-    console.log('build form==', formValues);
     try {
       this.buildForm(formValues);
     } catch (e) {
@@ -87,23 +86,17 @@ export class ReportListComponent implements OnInit {
 
   private getQueryString = (): { [key in keyof ReportFilter]: any } => {
     const qs = this.activatedRoute.snapshot.queryParams;
-    console.log('getqs QS? ', qs);
-    console.log('date', (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])]);
+    const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
     return {
       ...this.activatedRoute.snapshot.queryParams,
-      hasCompany: ({ 'true': true, 'false': false, })[qs.hasCompany],
-      period: [new Date(), new Date()],
-      // period: (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])],
+      hasCompany: parseBooleanOption(qs.hasCompany),
+      period: (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])],
     };
   };
 
   private buildForm = (filters: ReportFilter): void => {
-    const buildArrayInput = (_: string | string[]): string[][] => [Array.isArray(_) ? _ : [_]];
-    this.searchForm = this.fb.group({
-      ...filters,
-      departments: buildArrayInput(filters.departments),
-      tags: buildArrayInput(filters.tags),
-    });
+    const wrapValuesInArray = (o: object) => Object.entries(o).reduce((acc, [k, v]) => ({ ...acc, [k]: [v] }), {});
+    this.searchForm = this.fb.group(wrapValuesInArray(filters));
     merge(...this.formControlNamesWithAutomaticRefresh.map(_ => this.searchForm.get(_).valueChanges))
       .pipe(debounceTime(800), distinctUntilChanged())
       .subscribe(this.search);
@@ -127,7 +120,6 @@ export class ReportListComponent implements OnInit {
   }
 
   private updateQueryString = (values: ReportFilter) => {
-    console.log('updateQueryString', values);
     this.router.navigate([], { queryParams: values, replaceUrl: true });
   };
 
