@@ -42,7 +42,6 @@
     "@sentry/node": "^5.25.0",
     "angular-ab-tests": "^1.3.1",
     "angulartics2": "^9.1.0",
-    "axios": "^0.21.0",
     "bootstrap": "^4.5.2",
     "caniuse-lite": "^1.0.30001146",
     "core-js": "^3.6.5",
