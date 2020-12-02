@@ -52,6 +52,7 @@ export class ReportService {
         companyName: draftReport.draftCompany.name,
         companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
+        companyCountry: draftReport.draftCompany.country,
         companySiret: draftReport.draftCompany.siret,
         companyActivityCode: draftReport.draftCompany.activityCode,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
@@ -244,6 +245,7 @@ export class ReportService {
         siret: report.companySiret,
         address: report.companyAddress,
         postalCode: report.companyPostalCode,
+        country: report.companyCountry,
       }),
       consumer: Object.assign(new Consumer(), {
         firstName: report.firstName,
