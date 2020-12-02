@@ -9,6 +9,7 @@ import { CompanySearchResult } from '../../model/Company';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ApiError } from '../../api-sdk/ApiClient';
 
 interface Form {
   host?: string;

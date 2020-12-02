@@ -4,6 +4,8 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../api-sdk/model/ApiWebsite';
 import { Id } from '../api-sdk/model/Common';
+import { ApiError } from '../api-sdk/ApiClient';
+import { Index } from '../model/Common';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class WebsiteService {
     return this._creating;
   }
 
-  private _creatingError = false;
+  private _creatingError?: ApiError;
   get creatingError() {
     return this._creatingError;
   }
@@ -32,7 +34,7 @@ export class WebsiteService {
     return this._fetching;
   }
 
-  private _fetchError = false;
+  private _fetchError?: ApiError;
   get fetchError() {
     return this._fetchError;
   }
@@ -42,9 +44,9 @@ export class WebsiteService {
     return this._updating.has(id);
   };
 
-  private _updateError = new Set<string>();
-  updateError = (id: string) => {
-    return this._updateError.has(id);
+  private _updateError: Index<ApiError> = {};
+  updateError = (id: string): ApiError => {
+    return this._updateError[id];
   };
 
 
@@ -53,14 +55,14 @@ export class WebsiteService {
     return this._deleting.has(id);
   };
 
-  private _deleteError = new Set<string>();
-  deleteError = (id: string) => {
-    return this._deleteError.has(id);
+  private _deleteError: Index<ApiError> = {};
+  deleteError = (id: string): ApiError => {
+    return this._deleteError[id];
   };
 
   readonly create = (website: ApiWebsiteCreate): Observable<ApiWebsiteWithCompany> => {
     this._creating = true;
-    this._creatingError = false;
+    this._creatingError = undefined;
     return this.utils.getReportApiSdk().pipe(
       mergeMap(api => api.website.create(website)),
       map((createdWebsite => {
@@ -68,10 +70,9 @@ export class WebsiteService {
         this.source.next([...(this.source.value ?? []), createdWebsite]);
         return createdWebsite;
       })),
-      catchError(err => {
-        console.error(err);
+      catchError((err: ApiError) => {
         this._creating = false;
-        this._creatingError = true;
+        this._creatingError = err;
         return throwError(err);
       }),
     );
@@ -84,75 +85,83 @@ export class WebsiteService {
     if (clean) {
       this.source.next(undefined);
     }
-    this._fetching = true;
-    this._fetchError = false;
     return this.utils.getReportApiSdk().pipe(
+      map(_ => {
+        this._fetching = true;
+        this._fetchError = undefined;
+        return _;
+      }),
       mergeMap(api => api.website.list()),
       mergeMap((websites: ApiWebsiteWithCompany[]) => {
         this._fetching = false;
         this.source.next(websites);
         return this.source.asObservable() as Observable<ApiWebsiteWithCompany[]>;
       }),
-      catchError(err => {
-        console.error(err);
+      catchError((err: ApiError) => {
         this._fetching = false;
-        this._fetchError = true;
+        this._fetchError = err;
         return throwError(err);
       }),
     );
   }
 
   readonly update = (id: Id, website: Partial<ApiWebsite>): Observable<ApiWebsiteWithCompany> => {
-    this._updating.add(id);
-    this._updateError.delete(id);
     return this.utils.getReportApiSdk().pipe(
+      map(_ => {
+        this._updating.add(id);
+        delete this._updateError[id];
+        return _;
+      }),
       mergeMap(api => api.website.update(id, website)),
       map((updatedWebsite: ApiWebsiteWithCompany) => {
         this.source.next((this.source.value ?? []).map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
         this._updating.delete(id);
         return updatedWebsite;
       }),
-      catchError(err => {
-        console.error(err);
+      catchError((err: ApiError) => {
         this._updating.delete(id);
-        this._updateError.add(id);
+        this._updateError[id] = err;
         return throwError(err);
       }),
     );
   };
 
   readonly updateCompany = (id: Id, website: ApiWebsiteUpdateCompany): Observable<ApiWebsiteWithCompany> => {
-    this._updating.add(id);
-    this._updateError.delete(id);
     return this.utils.getReportApiSdk().pipe(
+      map(_ => {
+        this._updating.add(id);
+        delete this._updateError[id];
+        return _;
+      }),
       mergeMap(api => api.website.updateCompany(id, website)),
       map((updatedWebsite: ApiWebsiteWithCompany) => {
         this.source.next((this.source.value ?? []).map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
         this._updating.delete(id);
         return updatedWebsite;
       }),
-      catchError(err => {
-        console.error(err);
+      catchError((err: ApiError) => {
         this._updating.delete(id);
-        this._updateError.add(id);
+        this._updateError[id] = err;
         return throwError(err);
       }),
     );
   };
 
   readonly remove = (id: Id): Observable<void> => {
-    this._deleting.add(id);
-    this._deleteError.delete(id);
     return this.utils.getReportApiSdk().pipe(
+      map(_ => {
+        this._deleting.add(id);
+        delete this._deleteError[id];
+        return _;
+      }),
       mergeMap(api => api.website.remove(id)),
       map(() => {
         this.source.next((this.source.value ?? []).filter((_: ApiWebsiteWithCompany) => _.id !== id));
         this._deleting.delete(id);
       }),
-      catchError(err => {
-        console.error(err);
+      catchError((err: ApiError) => {
         this._deleting.delete(id);
-        this._deleteError.add(id);
+        this._deleteError[id] = err;
         return throwError(err);
       }),
     );
