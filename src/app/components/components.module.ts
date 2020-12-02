@@ -11,7 +11,6 @@ import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
 import { BadgeStatusModule } from './label-status/badge-status.module';
 import { BadgeModule } from './badge/badge.module';
-import { CompanySearchResultsModule } from './company-search-results/company-search-results.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 

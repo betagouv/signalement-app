@@ -80,7 +80,7 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
     });
 
-    it('should enable to display the search form for identication by name', () => {
+    it('should enable to display the search form for identification by name', () => {
       const nativeElement = fixture.nativeElement;
       component.identificationKind = IdentificationKinds.Name;
       fixture.detectChanges();
@@ -89,7 +89,7 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelector('form#searchByIdentityForm')).toBeNull();
     });
 
-    it('should enable to display the searchByIdentityForm form for identification by siret', () => {
+    it('should enable to display the form for identification by identity', () => {
       const nativeElement = fixture.nativeElement;
       component.identificationKind = IdentificationKinds.Identity;
       fixture.detectChanges();
@@ -98,7 +98,7 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelector('form#searchByIdentityForm')).not.toBeNull();
     });
 
-    describe('search companies', () => {
+    describe('search companies by name and postal code', () => {
 
       beforeEach(() => {
         component.searchCtrl.setValue('Mon entreprise dans ma ville');
@@ -134,7 +134,7 @@ describe('CompanyComponent', () => {
       });
     });
 
-    describe('search by siret', () => {
+    describe('search companies by siret', () => {
 
       it('should display errors when occurs', () => {
         component.identificationKind = IdentificationKinds.Identity;
@@ -213,7 +213,7 @@ describe('CompanyComponent', () => {
       expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
       expect(component.searchByIdentityForm).toBeDefined();
       expect(component.searchByIdentityForm.controls['identity']).toBeDefined();
-      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(4);
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
     });
 
     it('should display results when company found', () => {
@@ -232,6 +232,27 @@ describe('CompanyComponent', () => {
       expect(component.searchByIdentityForm).toBeUndefined();
       expect(component.companySearchByUrlResults).toEqual(companySearchResults);
       expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(companySearchResults.length);
+    });
+
+    describe('user unavailable to identify company', () => {
+
+      it('should ask the user whether the company is abroad or not', () => {
+
+        spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of([]));
+
+        const nativeElement = fixture.nativeElement;
+        nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
+        nativeElement.querySelector('form#websiteForm #urlInput').dispatchEvent(new Event('input'));
+        nativeElement.querySelectorAll('form#websiteForm button')[0].click();
+        fixture.detectChanges();
+
+        component.identificationKind = IdentificationKinds.None;
+        fixture.detectChanges();
+
+        expect(nativeElement.querySelectorAll('input[type="radio"][name="isForeignCompany"]').length).toBe(2);
+
+      });
+
     });
 
   });

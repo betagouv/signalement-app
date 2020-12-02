@@ -33,7 +33,7 @@
               <div *ngIf="draftReport.draftCompany.address">
                 Adresse : {{draftReport.draftCompany.address}}
               </div>
-              <div *ngIf="draftReport.isForeignCompany">
+              <div *ngIf="draftReport.draftCompany | isForeign">
                 Pays : {{draftReport.draftCompany.country}}
               </div>
             </div>
@@ -165,10 +165,10 @@
 
             <form>
               <fieldset>
-                <div [ngClass]="getRadioContainerClass(identificationKind, identificationKinds.Name)">
+                <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.Name)">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Name" id="identByName" (click)="scrollToElement(identSearch)"/>
+                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Name" id="identByName" (click)="selectIdentificationKind(identificationKinds.Name)"/>
                     </div>
                     <div class="col">
                       <label for="identByName" class="label-inline pointer">Par son nom et son code postal</label>
@@ -176,10 +176,10 @@
                   </div>
                 </div>
 
-                <div [ngClass]="getRadioContainerClass(identificationKind, identificationKinds.Identity)">
+                <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.Identity)">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Identity" id="identByIdentity" (click)="scrollToElement(identSearch)"/>
+                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Identity" id="identByIdentity" (click)="selectIdentificationKind(identificationKinds.Identity)"/>
                     </div>
                     <div class="col">
                       <label for="identByIdentity" class="label-inline pointer">Par son SIRET / SIREN / RCS</label>
@@ -187,21 +187,10 @@
                   </div>
                 </div>
 
-                <div [ngClass]="getRadioContainerClass(identificationKind, identificationKinds.Foreign)" *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
+                <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.None)" *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Foreign" id="foreignIdent" (click)="scrollToElement(identSearch)"/>
-                    </div>
-                    <div class="col">
-                      <label for="foreignIdent" class="label-inline pointer">Par son nom et son pays (entreprise étrangère)</label>
-                    </div>
-                  </div>
-                </div>
-
-                <div [ngClass]="getRadioContainerClass(identificationKind, identificationKinds.None)" *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
-                  <div class="row pb-2 pt-2">
-                    <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="scrollToElement(identSearch)"/>
+                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="selectIdentificationKind(identificationKinds.None)"/>
                     </div>
                     <div class="col">
                       <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier l'entreprise</label>
@@ -249,11 +238,11 @@
                       Veuillez renseigner le nom de l'entreprise.
                     </div>
                     <span *ngIf="searchPostalCodeCtrl.hasError('required')">
-                    Veuillez renseigner le code postal.
-                  </span>
+                      Veuillez renseigner le code postal.
+                    </span>
                     <span *ngIf="searchPostalCodeCtrl.hasError('pattern')">
-                    Le code postal doit être composé de 5 chiffres.
-                  </span>
+                      Le code postal doit être composé de 5 chiffres.
+                    </span>
                   </div>
                   <button type="submit" class="btn btn-lg btn-outline-primary mt-4" id="submitSearchForm">
                     <i class="material-icons md-24" aria-hidden="true">search</i>
@@ -531,60 +520,9 @@
                 </div>
               </div>
 
-              <div  *ngSwitchCase="identificationKinds.Foreign">
+              <div *ngSwitchCase="identificationKinds.None">
 
-                <h2 class="mb-4 font-weight-bold">
-                  Pouvez-vous préciser ?
-                </h2>
-
-                <form [formGroup]="searchForm" (submit)="submitCompany({})" id="foreignForm">
-
-                  <div class="form__group mt-4">
-                    <label for="nameInput" [class]="hasError(nameCtrl) ? 'error' : ''">
-                      Nom ou enseigne de l'entreprise signalée (obligatoire)
-                    </label>
-                    <input type="text" class="form-control" [formControl]="nameCtrl" id="nameInput" placeholder="ex : boulangerie Petit Jean"/>
-                  </div>
-                  <div class="form__group">
-                    <label for="countryInput" [class]="hasError(countryCtrl) ? 'error' : ''">
-                      Pays (obligatoire)
-                    </label>
-                    <div class="row">
-                      <div class="col-12 col-sm-6">
-                        <input type="text" class="form-control" [formControl]="countryCtrl" [typeahead]="countries" id="countryInput" placeholder="ex : Italie"/>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="notification error mt-4" *ngIf="showErrors && foreignForm.invalid">
-                    <div *ngIf="nameCtrl.hasError('required')">
-                      Veuillez renseigner le nom de l'entreprise.
-                    </div>
-                    <span *ngIf="countryCtrl.hasError('required')">
-                    Veuillez renseigner le pays.
-                  </span>
-                  </div>
-
-                  <hr/>
-
-                  <button type="submit" class="btn btn-lg btn-primary">
-                    Continuer
-                  </button>
-
-                </form>
-
-              </div>
-
-              <div  *ngSwitchCase="identificationKinds.None">
-
-                <div class="notification info">
-                  Si vous ne parvenez pas à identifier l'entreprise, vous pouvez continuer votre signalement.
-                  <br />Il ne sera pas transmis à l'entreprise qui gère le site internet, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
-                  <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
-                </div>
-
-                <button type="button" class="btn btn-lg btn-primary" (click)="submitCompany({})">
-                  Continuer
-                </button>
+                <app-foreign-form (complete)="submitCompany($event)"></app-foreign-form>
 
               </div>
             </div>

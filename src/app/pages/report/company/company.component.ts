@@ -10,12 +10,12 @@ import { CompanyKinds } from '../../../model/Anomaly';
 import { CompanySearchResult, DraftCompany, Website, WebsiteKinds } from '../../../model/Company';
 import { isPlatformBrowser } from '@angular/common';
 import Utils from '../../../utils';
-import countries from '../../../../assets/data/countries.json';
+import { RendererService } from '../../../services/renderer.service';
 
 declare var jQuery: any;
 
 export enum IdentificationKinds {
-  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url', Foreign = 'Foreign'
+  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url'
 }
 
 @Component({
@@ -60,11 +60,6 @@ export class CompanyComponent implements OnInit {
   searchByIdentityWarning: string;
   searchByIdentityError: string;
 
-  foreignForm: FormGroup;
-  nameCtrl: FormControl;
-  countryCtrl: FormControl;
-  countries = countries.map(country => country.nom.toUpperCase()).filter(name => name !== 'FRANCE');
-
   selectedCompany: CompanySearchResult;
 
   loading: boolean;
@@ -83,7 +78,7 @@ export class CompanyComponent implements OnInit {
               private reportRouterService: ReportRouterService,
               private companyService: CompanyService,
               private analyticsService: AnalyticsService,
-              private renderer: Renderer2) { }
+              private rendererService: RendererService) { }
 
   ngOnInit() {
     this.step = Step.Company;
@@ -146,15 +141,6 @@ export class CompanyComponent implements OnInit {
     });
   }
 
-  initForeignForm() {
-    this.nameCtrl = this.formBuilder.control('', Validators.required);
-    this.countryCtrl = this.formBuilder.control('', Validators.required);
-    this.foreignForm = this.formBuilder.group({
-      name: this.nameCtrl,
-      country: this.countryCtrl,
-    });
-  }
-
   initSearch() {
     this.companySearchResults = [];
     this.searchWarning = '';
@@ -191,7 +177,7 @@ export class CompanyComponent implements OnInit {
             this.searchWarning = 'Aucun établissement ne correspond à la recherche.';
           } else {
             this.companySearchResults = companySearchResults;
-            this.scrollToElement(this.identResult.nativeElement);
+            this.rendererService.scrollToElement(this.identResult.nativeElement);
           }
         },
         () => {
@@ -218,7 +204,7 @@ export class CompanyComponent implements OnInit {
             this.initDefaultIdent();
           } else {
             this.companySearchByUrlResults = companySearchResults;
-            this.scrollToElement(this.identByUrlResult.nativeElement);
+            this.rendererService.scrollToElement(this.identByUrlResult.nativeElement);
           }
         },
         () => {
@@ -233,7 +219,6 @@ export class CompanyComponent implements OnInit {
   initDefaultForms() {
     this.initSearchForm();
     this.initSearchByIdentityForm();
-    this.initForeignForm();
   }
 
   initDefaultIdent() {
@@ -241,7 +226,7 @@ export class CompanyComponent implements OnInit {
     this.showErrors = false;
     this.companySearchByUrlResults = undefined;
     this.initDefaultForms();
-    this.scrollToElement(this.searchKind.nativeElement);
+    this.rendererService.scrollToElement(this.searchKind.nativeElement);
   }
 
   changeWebsite() {
@@ -249,7 +234,6 @@ export class CompanyComponent implements OnInit {
     this.showErrors = false;
     this.searchForm = undefined;
     this.searchByIdentityForm = undefined;
-    this.foreignForm = undefined;
     this.identificationKind = IdentificationKinds.Url;
     this.initSearchByUrl();
   }
@@ -277,10 +261,6 @@ export class CompanyComponent implements OnInit {
     if (this.urlCtrl) {
       this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
     }
-    if (this.identificationKind === IdentificationKinds.Foreign) {
-      this.draftReport.draftCompany.name = this.nameCtrl.value;
-      this.draftReport.draftCompany.country = this.countryCtrl.value;
-    }
     this.draftReport.vendor = this.vendorCtrl?.value;
     this.changeDraftCompany = false;
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
@@ -302,11 +282,10 @@ export class CompanyComponent implements OnInit {
             this.searchByIdentityWarning = 'Aucun établissement ne correspond à la recherche.';
           } else {
             this.companySearchByIdentityResults = companySearchResults;
-            this.scrollToElement(this.identByIdentityResult.nativeElement);
+            this.rendererService.scrollToElement(this.identByIdentityResult.nativeElement);
           }
         },
         err => {
-          console.log('err', err)
           this.loading = false;
           this.searchByIdentityError = 'Une erreur technique s\'est produite.';
         });
@@ -329,22 +308,8 @@ export class CompanyComponent implements OnInit {
     return this.showErrorsByIdentity && formControl.errors;
   }
 
-  getRadioContainerClass(input: any, value: any) {
-    return input === value ? 'selected' : '';
-  }
-
-  scrollToElement($element) {
-    if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => {
-        const rect = $element.getBoundingClientRect();
-        if (Utils.isSmallerThanDesktop(this.platformId) && rect.height < window.innerHeight) {
-          this.renderer.setStyle($element, 'margin-bottom', `${window.innerHeight - rect.height - 110}px`);
-        }
-        jQuery('html, body').animate({
-          scrollTop: $element.offsetTop - 110
-        }, 1000, 'linear');
-      }, 500);
-    }
+  selectIdentificationKind(identificationKind: IdentificationKinds) {
+    this.rendererService.scrollToElement(this.identSearch.nativeElement);
   }
 
   getIdentResultElement() {

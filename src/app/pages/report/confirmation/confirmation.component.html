@@ -58,7 +58,7 @@
             <div *ngIf="draftReport.draftCompany.address">
               Adresse : {{draftReport.draftCompany.address}}
             </div>
-            <div *ngIf="draftReport.isForeignCompany">
+            <div *ngIf="draftReport.draftCompany | isForeign">
               Pays : {{draftReport.draftCompany.country}}
             </div>
           </ng-container>

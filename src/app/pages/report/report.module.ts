@@ -23,6 +23,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { ForeignFormComponent } from './company/forms/foreign-form.component';
 
 defineLocale('fr', frLocale);
 
@@ -76,6 +77,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     InformationComponent,
     AcknowledgmentComponent,
     SubcategoryComponent,
+    ForeignFormComponent,
   ],
   imports: [
     CommonModule,

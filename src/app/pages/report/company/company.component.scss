@@ -11,20 +11,6 @@ section {
     margin-bottom: 60px;
   }
 
-  .selected {
-    background-color: $light-green;
-    border-radius: $theme-border-more-radius;
-
-    .text-primary {
-      color: $secondary !important;
-    }
-
-    label, h2 {
-      color: $black;
-    }
-
-  }
-
   .unselected {
     label, h2 {
       color: $darker-grey;

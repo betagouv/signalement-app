@@ -10,17 +10,3 @@
 .col {
   text-align: left;
 }
-
-.selected {
-  background-color: $light-green;
-  border-radius: $theme-border-more-radius;
-
-  .text-primary {
-    color: $secondary !important;
-  }
-
-  label, h2 {
-    color: $black;
-  }
-
-}

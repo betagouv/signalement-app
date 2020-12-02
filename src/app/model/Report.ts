@@ -99,10 +99,6 @@ export class DraftReport {
   get isContractualDispute() {
     return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
-
-  get isForeignCompany() {
-    return this.draftCompany && this.draftCompany.country !== undefined;
-  }
 }
 
 export class Report {

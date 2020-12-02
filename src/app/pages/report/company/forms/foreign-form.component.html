@@ -1,0 +1,76 @@
+<form [formGroup]="foreignForm" (submit)="submitForeignForm()" id="foreignForm" *ngIf="foreignForm">
+  <h2 class="mb-4 font-weight-bold">
+    Est-ce que l'entreprise est en France ?
+  </h2>
+
+  <div [ngClass]="rendererService.getRadioContainerClass(isForeignCtrl.value, false)">
+    <div class="row pb-2 pt-2">
+      <div class="col col-radio">
+        <input type="radio" [formControl]="isForeignCtrl" name="isForeignCompany" [value]="false" id="frenchCompany"/>
+      </div>
+      <div class="col">
+        <label for="frenchCompany" class="label-inline pointer">Oui</label>
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="rendererService.getRadioContainerClass(isForeignCtrl.value, true)">
+    <div class="row pb-2 pt-2">
+      <div class="col col-radio">
+        <input type="radio" [formControl]="isForeignCtrl" name="isForeignCompany" [value]="true" id="foreignCompany" (click)="rendererService.scrollToElement(foreignInputs)"/>
+      </div>
+      <div class="col">
+        <label for="foreignCompany" class="label-inline pointer">Non, elle est à l'étranger</label>
+      </div>
+    </div>
+  </div>
+
+  <div #foreignInputs>
+    <ng-container *ngIf="isForeignCtrl.value">
+      <hr />
+
+      <h2 class="mb-4 font-weight-bold">
+        Pouvez-vous préciser ?
+      </h2>
+
+      <div class="form__group mt-4">
+        <label for="nameInput" [class]="foreignForm.hasError('required') && nameCtrl.value === undefined ? 'error' : ''">
+          Nom ou enseigne de l'entreprise signalée (obligatoire)
+        </label>
+        <input type="text" class="form-control" [formControl]="nameCtrl" id="nameInput" placeholder="ex : boulangerie Petit Jean"/>
+      </div>
+      <div class="form__group">
+        <label for="countryInput" [class]="foreignForm.hasError('required') && countryCtrl.value === undefined ? 'error' : ''">
+          Pays (obligatoire)
+        </label>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <input type="text" class="form-control" [formControl]="countryCtrl" [typeahead]="countries" id="countryInput" placeholder="ex : Italie"/>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="isForeignCtrl.value !== ''">
+    <div class="notification error mt-4" *ngIf="showErrors && foreignForm.invalid">
+      <div *ngIf="foreignForm.hasError('required')">
+        Veuillez renseigner le nom et le pays de l'entreprise.
+      </div>
+    </div>
+
+    <hr/>
+
+    <button type="submit" class="btn btn-lg btn-primary">
+      Continuer
+    </button>
+  </ng-container>
+
+  <div class="notification info">
+    TEXTE A CONSERVER ???
+    <br />
+    Si vous ne parvenez pas à identifier l'entreprise, vous pouvez continuer votre signalement.
+    <br />Il ne sera pas transmis à l'entreprise qui gère le site internet, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
+    <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
+  </div>
+</form>
