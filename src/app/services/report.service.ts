@@ -194,6 +194,7 @@ export class ReportService {
   }
 
   launchExtraction(report: ReportFilter) {
+    console.log('START', report, this.reportFilter2Body(report));
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.post(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
@@ -216,10 +217,7 @@ export class ReportService {
   private reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
     const { period, offset, departments, tags, limit, ...rest } = report;
     return {
-      ...Object.entries(rest).reduce((acc, [key, val]) => ({
-        ...acc,
-        ...((val !== undefined && val !== null) ? { [key]: `${val}`.trim() } : {}),
-      }), {}),
+      ...rest,
       departments: departments || [],
       tags: tags || [],
       ...((period && period[0]) ? { start: this.mapDate(period[0]) } : {}),

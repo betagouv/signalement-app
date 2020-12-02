@@ -72,15 +72,29 @@ export class ReportListComponent implements OnInit {
     const formValues = {
       ...initialValues,
       ...this.reportService.currentReportFilter,
-      ...this.activatedRoute.snapshot.queryParams,
+      ...this.getQueryString(),
     };
+    console.log('build form==', formValues);
     try {
       this.buildForm(formValues);
     } catch (e) {
       // Prevent error thrown by Angular when queryParams are wrong
+      console.error('[ReportListComponent] Cannot build form from querystring', e);
       this.buildForm(initialValues);
     }
     this.search();
+  };
+
+  private getQueryString = (): { [key in keyof ReportFilter]: any } => {
+    const qs = this.activatedRoute.snapshot.queryParams;
+    console.log('getqs QS? ', qs);
+    console.log('date', (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])]);
+    return {
+      ...this.activatedRoute.snapshot.queryParams,
+      hasCompany: ({ 'true': true, 'false': false, })[qs.hasCompany],
+      period: [new Date(), new Date()],
+      // period: (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])],
+    };
   };
 
   private buildForm = (filters: ReportFilter): void => {
@@ -113,6 +127,7 @@ export class ReportListComponent implements OnInit {
   }
 
   private updateQueryString = (values: ReportFilter) => {
+    console.log('updateQueryString', values);
     this.router.navigate([], { queryParams: values, replaceUrl: true });
   };
 
