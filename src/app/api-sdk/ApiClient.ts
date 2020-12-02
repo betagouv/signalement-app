@@ -24,13 +24,11 @@ type StatusCode =
   500 |
   504;
 
-
 export class ApiError extends Error {
   constructor(public code: StatusCode, public message: string, public error?: Error) {
     super(message);
   }
 }
-
 
 export type Method = 'POST' | 'GET' | 'PUT' | 'DELETE';
 
