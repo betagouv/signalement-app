@@ -4,8 +4,8 @@ import { DraftCompany } from '../model/Company';
 @Pipe({
   name: 'isForeign'
 })
-export class DraftCompanyPipe implements PipeTransform {
+export class IsForeignPipe implements PipeTransform {
   transform(draftCompany: DraftCompany) {
-    return draftCompany && draftCompany.country !== undefined;
+    return draftCompany && draftCompany.country !== undefined && draftCompany.country !== 'France';
   }
 }

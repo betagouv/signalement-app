@@ -13,6 +13,7 @@ import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('ConfirmationComponent', () => {
 
@@ -32,7 +33,8 @@ describe('ConfirmationComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         NgxLoadingModule,
-        PipesModule
+        PipesModule,
+        ComponentsModule
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

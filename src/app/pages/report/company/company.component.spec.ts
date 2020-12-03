@@ -18,6 +18,7 @@ import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 import { ComponentsModule } from '../../../components/components.module';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { ForeignFormComponent } from './forms/foreign-form.component';
 
 describe('CompanyComponent', () => {
 
@@ -31,6 +32,7 @@ describe('CompanyComponent', () => {
       declarations: [
         CompanyComponent,
         BreadcrumbComponent,
+        ForeignFormComponent
       ],
       imports: [
         FormsModule,

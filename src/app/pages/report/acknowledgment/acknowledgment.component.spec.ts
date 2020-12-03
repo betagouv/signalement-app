@@ -9,6 +9,7 @@ import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { ComponentsModule } from '../../../components/components.module';
 
 describe('AcknoledgmentComponent', () => {
 
@@ -22,6 +23,7 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
+        ComponentsModule
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

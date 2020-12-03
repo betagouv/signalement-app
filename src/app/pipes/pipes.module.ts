@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { TruncatePipe } from '../pipes/truncate.pipe';
 import { PrecedeByPipe } from './precede-by.pipe';
 import { MiddleCropPipe } from './middlecrop.pipe';
-import { DraftCompanyPipe } from './company.pipe';
+import { IsForeignPipe } from './company.pipe';
 
 @NgModule({
   declarations: [
     PrecedeByPipe,
     TruncatePipe,
     MiddleCropPipe,
-    DraftCompanyPipe,
+    IsForeignPipe,
   ],
   imports: [
   ],
@@ -17,7 +17,7 @@ import { DraftCompanyPipe } from './company.pipe';
     PrecedeByPipe,
     TruncatePipe,
     MiddleCropPipe,
-    DraftCompanyPipe,
+    IsForeignPipe,
   ],
   providers: [
   ]
