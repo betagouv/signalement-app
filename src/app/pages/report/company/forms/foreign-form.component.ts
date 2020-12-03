@@ -2,7 +2,6 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import countries from '../../../../../assets/data/countries.json';
 import { RendererService } from '../../../../services/renderer.service';
-import { Subcategory } from '../../../../model/Anomaly';
 import { DraftCompany } from '../../../../model/Company';
 
 export const foreignFormValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
@@ -29,7 +28,7 @@ export class ForeignFormComponent implements OnInit {
   isForeignCtrl: FormControl;
   nameCtrl: FormControl;
   countryCtrl: FormControl;
-  countries = countries.map(country => country.nom.toUpperCase()).filter(name => name !== 'FRANCE');
+  countries = countries.map(country => country.name).filter(name => name !== 'France');
 
   showErrors: boolean;
 

@@ -122,6 +122,9 @@
                   <strong>{{report.company?.siret}}</strong>
                 </div>
                 <div *ngFor="let line of report.company.address?.split(' - ')">{{line}}</div>
+                <div *ngIf="report.company | isForeign">
+                  {{report.company.country}}
+                </div>
                 <div *ngIf="report.website.url">
                   {{report.website.url}}
                 </div>

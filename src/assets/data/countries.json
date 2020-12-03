@@ -1,1378 +1,1409 @@
 [
   {
-    "nom": "Afghanistan",
+    "name": "Afghanistan",
     "nom_alpha": "Afghanistan",
     "code": "AFG",
     "article": "l'",
     "nom_long": "République islamique d'Afghanistan"
   },
   {
-    "nom": "Afrique du Sud",
+    "name": "Afrique du Sud",
     "nom_alpha": "Afrique du Sud",
     "code": "ZAF",
     "article": "l'",
     "nom_long": "République d'Afrique du Sud"
   },
   {
-    "nom": "Albanie",
+    "name": "Albanie",
     "nom_alpha": "Albanie",
     "code": "ALB",
     "article": "l'",
     "nom_long": "République d'Albanie"
   },
   {
-    "nom": "Algérie",
+    "name": "Algérie",
     "nom_alpha": "Algérie",
     "code": "DZA",
     "article": "l'",
     "nom_long": "République algérienne démocratique et populaire"
   },
   {
-    "nom": "Allemagne",
+    "name": "Allemagne",
     "nom_alpha": "Allemagne",
     "code": "DEU",
     "article": "l'",
-    "nom_long": "République fédérale d'Allemagne"
+    "nom_long": "République fédérale d'Allemagne",
+    "european": true
   },
   {
-    "nom": "Andorre",
+    "name": "Andorre",
     "nom_alpha": "Andorre",
     "code": "AND",
     "article": "l'",
-    "nom_long": "Principauté d'Andorre"
+    "nom_long": "Principauté d'Andorre",
+    "transfer": true
   },
   {
-    "nom": "Angola",
+    "name": "Angola",
     "nom_alpha": "Angola",
     "code": "AGO",
     "article": "l'",
     "nom_long": "République d'Angola"
   },
   {
-    "nom": "Antigua-et-Barbuda",
+    "name": "Antigua-et-Barbuda",
     "nom_alpha": "Antigua-et-Barbuda",
     "code": "ATG",
     "article": "",
     "nom_long": "Antigua-et-Barbuda"
   },
   {
-    "nom": "Arabie saoudite",
+    "name": "Arabie saoudite",
     "nom_alpha": "Arabie saoudite",
     "code": "SAU",
     "article": "l'",
     "nom_long": "Royaume d'Arabie saoudite"
   },
   {
-    "nom": "Argentine",
+    "name": "Argentine",
     "nom_alpha": "Argentine",
     "code": "ARG",
     "article": "l'",
     "nom_long": "République argentine"
   },
   {
-    "nom": "Arménie",
+    "name": "Arménie",
     "nom_alpha": "Arménie",
     "code": "ARM",
     "article": "l'",
     "nom_long": "République d'Arménie"
   },
   {
-    "nom": "Australie",
+    "name": "Australie",
     "nom_alpha": "Australie",
     "code": "AUS",
     "article": "l'",
     "nom_long": "Commonwealth d'Australie"
   },
   {
-    "nom": "Autriche",
+    "name": "Autriche",
     "nom_alpha": "Autriche",
     "code": "AUT",
     "article": "l'",
-    "nom_long": "République d'Autriche"
+    "nom_long": "République d'Autriche",
+    "european": true
   },
   {
-    "nom": "Azerbaïdjan",
+    "name": "Azerbaïdjan",
     "nom_alpha": "Azerbaïdjan",
     "code": "AZE",
     "article": "l'",
     "nom_long": "République d'Azerbaïdjan"
   },
   {
-    "nom": "Bahamas",
+    "name": "Bahamas",
     "nom_alpha": "Bahamas",
     "code": "BHS",
     "article": "les",
     "nom_long": "Commonwealth des Bahamas"
   },
   {
-    "nom": "Bahreïn",
+    "name": "Bahreïn",
     "nom_alpha": "Bahreïn",
     "code": "BHR",
     "article": "",
     "nom_long": "Royaume de Bahreïn"
   },
   {
-    "nom": "Bangladesh",
+    "name": "Bangladesh",
     "nom_alpha": "Bangladesh",
     "code": "BGD",
     "article": "l'",
     "nom_long": "République populaire du Bangladesh"
   },
   {
-    "nom": "Barbade",
+    "name": "Barbade",
     "nom_alpha": "Barbade",
     "code": "BRB",
     "article": "la",
     "nom_long": "Barbade"
   },
   {
-    "nom": "Belgique",
+    "name": "Belgique",
     "nom_alpha": "Belgique",
     "code": "BEL",
     "article": "la",
-    "nom_long": "Royaume de Belgique"
+    "nom_long": "Royaume de Belgique",
+    "european": true
   },
   {
-    "nom": "Bélize",
+    "name": "Bélize",
     "nom_alpha": "Bélize",
     "code": "BLZ",
     "article": "le",
     "nom_long": "Bélize"
   },
   {
-    "nom": "Bénin",
+    "name": "Bénin",
     "nom_alpha": "Bénin",
     "code": "BEN",
     "article": "le",
     "nom_long": "République du Bénin"
   },
   {
-    "nom": "Bhoutan",
+    "name": "Bhoutan",
     "nom_alpha": "Bhoutan",
     "code": "BTN",
     "article": "le",
     "nom_long": "Royaume du Bhoutan"
   },
   {
-    "nom": "Biélorussie",
+    "name": "Biélorussie",
     "nom_alpha": "Biélorussie",
     "code": "BLR",
     "article": "la",
     "nom_long": "République de Biélorussie"
   },
   {
-    "nom": "Birmanie",
+    "name": "Birmanie",
     "nom_alpha": "Birmanie",
     "code": "MMR",
     "article": "la",
     "nom_long": "République de l'Union de Birmanie"
   },
   {
-    "nom": "Bolivie",
+    "name": "Bolivie",
     "nom_alpha": "Bolivie",
     "code": "BOL",
     "article": "la",
     "nom_long": "État plurinational de Bolivie"
   },
   {
-    "nom": "Bosnie-Herzégovine",
+    "name": "Bosnie-Herzégovine",
     "nom_alpha": "Bosnie-Herzégovine",
     "code": "BIH",
     "article": "la",
     "nom_long": "Bosnie-Herzégovine"
   },
   {
-    "nom": "Botswana",
+    "name": "Botswana",
     "nom_alpha": "Botswana",
     "code": "BWA",
     "article": "le",
     "nom_long": "République du Botswana"
   },
   {
-    "nom": "Brésil",
+    "name": "Brésil",
     "nom_alpha": "Brésil",
     "code": "BRA",
     "article": "le",
     "nom_long": "République fédérative du Brésil"
   },
   {
-    "nom": "Brunei",
+    "name": "Brunei",
     "nom_alpha": "Brunei",
     "code": "BRN",
     "article": "le",
     "nom_long": "Brunei Darussalam"
   },
   {
-    "nom": "Bulgarie",
+    "name": "Bulgarie",
     "nom_alpha": "Bulgarie",
     "code": "BGR",
     "article": "la",
-    "nom_long": "République de Bulgarie"
+    "nom_long": "République de Bulgarie",
+    "european": true
   },
   {
-    "nom": "Burkina",
+    "name": "Burkina",
     "nom_alpha": "Burkina",
     "code": "BFA",
     "article": "le",
     "nom_long": "Burkina Faso"
   },
   {
-    "nom": "Burundi",
+    "name": "Burundi",
     "nom_alpha": "Burundi",
     "code": "BDI",
     "article": "le",
     "nom_long": "République du Burundi"
   },
   {
-    "nom": "Cambodge",
+    "name": "Cambodge",
     "nom_alpha": "Cambodge",
     "code": "KHM",
     "article": "le",
     "nom_long": "Royaume du Cambodge"
   },
   {
-    "nom": "Cameroun",
+    "name": "Cameroun",
     "nom_alpha": "Cameroun",
     "code": "CMR",
     "article": "le",
     "nom_long": "République du Cameroun"
   },
   {
-    "nom": "Canada",
+    "name": "Canada",
     "nom_alpha": "Canada",
     "code": "CAN",
     "article": "le",
     "nom_long": "Canada"
   },
   {
-    "nom": "Cap-Vert",
+    "name": "Cap-Vert",
     "nom_alpha": "Cap-Vert",
     "code": "CPV",
     "article": "le",
     "nom_long": "République du Cap-Vert"
   },
   {
-    "nom": "Centrafrique",
+    "name": "Centrafrique",
     "nom_alpha": "Centrafrique",
     "code": "CAF",
     "article": "la",
     "nom_long": "République centrafricaine"
   },
   {
-    "nom": "Chili",
+    "name": "Chili",
     "nom_alpha": "Chili",
     "code": "CHL",
     "article": "le",
     "nom_long": "République du Chili"
   },
   {
-    "nom": "Chine",
+    "name": "Chine",
     "nom_alpha": "Chine",
     "code": "CHN",
     "article": "la",
     "nom_long": "République populaire de Chine"
   },
   {
-    "nom": "Chypre",
+    "name": "Chypre",
     "nom_alpha": "Chypre",
     "code": "CYP",
     "article": "",
-    "nom_long": "République de Chypre"
+    "nom_long": "République de Chypre",
+    "european": true
   },
   {
-    "nom": "Colombie",
+    "name": "Colombie",
     "nom_alpha": "Colombie",
     "code": "COL",
     "article": "la",
     "nom_long": "République de Colombie"
   },
   {
-    "nom": "Comores",
+    "name": "Comores",
     "nom_alpha": "Comores",
     "code": "COM",
     "article": "les",
     "nom_long": "Union des Comores"
   },
   {
-    "nom": "Congo",
+    "name": "Congo",
     "nom_alpha": "Congo",
     "code": "COG",
     "article": "le",
     "nom_long": "République du Congo"
   },
   {
-    "nom": "République démocratique du Congo",
+    "name": "République démocratique du Congo",
     "nom_alpha": "Congo (République démocratique du)",
     "code": "COD",
     "article": "la",
     "nom_long": "République démocratique du Congo"
   },
   {
-    "nom": "Îles Cook",
+    "name": "Îles Cook",
     "nom_alpha": "Cook (Îles)",
     "code": "COK",
     "article": "les",
     "nom_long": "Îles Cook"
   },
   {
-    "nom": "Corée du Nord",
+    "name": "Corée du Nord",
     "nom_alpha": "Corée du Nord",
     "code": "PRK",
     "article": "la",
     "nom_long": "République populaire démocratique de Corée"
   },
   {
-    "nom": "Corée du Sud",
+    "name": "Corée du Sud",
     "nom_alpha": "Corée du Sud",
     "code": "KOR",
     "article": "la",
     "nom_long": "République de Corée"
   },
   {
-    "nom": "Costa Rica",
+    "name": "Costa Rica",
     "nom_alpha": "Costa Rica",
     "code": "CRI",
     "article": "le",
     "nom_long": "République du Costa Rica"
   },
   {
-    "nom": "Côte d'Ivoire",
+    "name": "Côte d'Ivoire",
     "nom_alpha": "Côte d'Ivoire",
     "code": "CIV",
     "article": "la",
     "nom_long": "République de Côte d'Ivoire"
   },
   {
-    "nom": "Croatie",
+    "name": "Croatie",
     "nom_alpha": "Croatie",
     "code": "HRV",
     "article": "la",
-    "nom_long": "République de Croatie"
+    "nom_long": "République de Croatie",
+    "european": true
   },
   {
-    "nom": "Cuba",
+    "name": "Cuba",
     "nom_alpha": "Cuba",
     "code": "CUB",
     "article": "",
     "nom_long": "République de Cuba"
   },
   {
-    "nom": "Danemark",
+    "name": "Danemark",
     "nom_alpha": "Danemark",
     "code": "DNK",
     "article": "le",
-    "nom_long": "Royaume du Danemark"
+    "nom_long": "Royaume du Danemark",
+    "european": true
   },
   {
-    "nom": "Djibouti",
+    "name": "Djibouti",
     "nom_alpha": "Djibouti",
     "code": "DJI",
     "article": "le",
     "nom_long": "République de Djibouti"
   },
   {
-    "nom": "République dominicaine",
+    "name": "République dominicaine",
     "nom_alpha": "Dominicaine (République)",
     "code": "DOM",
     "article": "la",
     "nom_long": "République dominicaine"
   },
   {
-    "nom": "Dominique",
+    "name": "Dominique",
     "nom_alpha": "Dominique",
     "code": "DMA",
     "article": "la",
     "nom_long": "Commonwealth de la Dominique"
   },
   {
-    "nom": "Égypte",
+    "name": "Égypte",
     "nom_alpha": "Égypte",
     "code": "EGY",
     "article": "l'",
     "nom_long": "République arabe d'Égypte"
   },
   {
-    "nom": "Émirats arabes unis",
+    "name": "Émirats arabes unis",
     "nom_alpha": "Émirats arabes unis",
     "code": "ARE",
     "article": "les",
     "nom_long": "Émirats arabes unis"
   },
   {
-    "nom": "Équateur",
+    "name": "Équateur",
     "nom_alpha": "Équateur",
     "code": "ECU",
     "article": "l'",
     "nom_long": "République d'Équateur"
   },
   {
-    "nom": "Érythrée",
+    "name": "Érythrée",
     "nom_alpha": "Érythrée",
     "code": "ERI",
     "article": "l'",
     "nom_long": "État d'Érythrée"
   },
   {
-    "nom": "Espagne",
+    "name": "Espagne",
     "nom_alpha": "Espagne",
     "code": "ESP",
     "article": "l'",
-    "nom_long": "Royaume d'Espagne"
+    "nom_long": "Royaume d'Espagne",
+    "european": true
   },
   {
-    "nom": "Estonie",
+    "name": "Estonie",
     "nom_alpha": "Estonie",
     "code": "EST",
     "article": "l'",
-    "nom_long": "République d'Estonie"
+    "nom_long": "République d'Estonie",
+    "european": true
   },
   {
-    "nom": "Eswatini",
+    "name": "Eswatini",
     "nom_alpha": "Eswatini",
     "code": "SWZ",
     "article": "le",
     "nom_long": "Royaume d'Eswatini"
   },
   {
-    "nom": "États-Unis",
+    "name": "États-Unis",
     "nom_alpha": "États-Unis",
     "code": "USA",
     "article": "les",
     "nom_long": "États-Unis d'Amérique"
   },
   {
-    "nom": "Éthiopie",
+    "name": "Éthiopie",
     "nom_alpha": "Éthiopie",
     "code": "ETH",
     "article": "l'",
     "nom_long": "République démocratique fédérale d'Éthiopie"
   },
   {
-    "nom": "Fidji",
+    "name": "Fidji",
     "nom_alpha": "Fidji",
     "code": "FJI",
     "article": "les",
     "nom_long": "République des Fidji"
   },
   {
-    "nom": "Finlande",
+    "name": "Finlande",
     "nom_alpha": "Finlande",
     "code": "FIN",
     "article": "la",
-    "nom_long": "République de Finlande"
+    "nom_long": "République de Finlande",
+    "european": true
   },
   {
-    "nom": "France",
+    "name": "France",
     "nom_alpha": "France",
     "code": "FRA",
     "article": "la",
-    "nom_long": "République française"
+    "nom_long": "République française",
+    "european": true
   },
   {
-    "nom": "Gabon",
+    "name": "Gabon",
     "nom_alpha": "Gabon",
     "code": "GAB",
     "article": "le",
     "nom_long": "République gabonaise"
   },
   {
-    "nom": "Gambie",
+    "name": "Gambie",
     "nom_alpha": "Gambie",
     "code": "GMB",
     "article": "la",
     "nom_long": "République de Gambie"
   },
   {
-    "nom": "Géorgie",
+    "name": "Géorgie",
     "nom_alpha": "Géorgie",
     "code": "GEO",
     "article": "la",
     "nom_long": "Géorgie"
   },
   {
-    "nom": "Ghana",
+    "name": "Ghana",
     "nom_alpha": "Ghana",
     "code": "GHA",
     "article": "le",
     "nom_long": "République du Ghana"
   },
   {
-    "nom": "Grèce",
+    "name": "Grèce",
     "nom_alpha": "Grèce",
     "code": "GRC",
     "article": "la",
-    "nom_long": "République hellénique"
+    "nom_long": "République hellénique",
+    "european": true
   },
   {
-    "nom": "Grenade",
+    "name": "Grenade",
     "nom_alpha": "Grenade",
     "code": "GRD",
     "article": "la",
     "nom_long": "Grenade"
   },
   {
-    "nom": "Guatémala",
+    "name": "Guatémala",
     "nom_alpha": "Guatémala",
     "code": "GTM",
     "article": "le",
     "nom_long": "République du Guatémala"
   },
   {
-    "nom": "Guinée",
+    "name": "Guinée",
     "nom_alpha": "Guinée",
     "code": "GIN",
     "article": "la",
     "nom_long": "République de Guinée"
   },
   {
-    "nom": "Guinée équatoriale",
+    "name": "Guinée équatoriale",
     "nom_alpha": "Guinée équatoriale",
     "code": "GNQ",
     "article": "la",
     "nom_long": "République de Guinée équatoriale"
   },
   {
-    "nom": "Guinée-Bissao",
+    "name": "Guinée-Bissao",
     "nom_alpha": "Guinée-Bissao",
     "code": "GNB",
     "article": "la",
     "nom_long": "République de Guinée-Bissao"
   },
   {
-    "nom": "Guyana",
+    "name": "Guyana",
     "nom_alpha": "Guyana",
     "code": "GUY",
     "article": "le",
     "nom_long": "République coopérative du Guyana"
   },
   {
-    "nom": "Haïti",
+    "name": "Haïti",
     "nom_alpha": "Haïti",
     "code": "HTI",
     "article": "",
     "nom_long": "République d'Haïti"
   },
   {
-    "nom": "Honduras",
+    "name": "Honduras",
     "nom_alpha": "Honduras",
     "code": "HND",
     "article": "le",
     "nom_long": "République du Honduras"
   },
   {
-    "nom": "Hongrie",
+    "name": "Hongrie",
     "nom_alpha": "Hongrie",
     "code": "HUN",
     "article": "la",
-    "nom_long": "Hongrie"
+    "nom_long": "Hongrie",
+    "european": true
   },
   {
-    "nom": "Inde",
+    "name": "Inde",
     "nom_alpha": "Inde",
     "code": "IND",
     "article": "l'",
     "nom_long": "République de l'Inde"
   },
   {
-    "nom": "Indonésie",
+    "name": "Indonésie",
     "nom_alpha": "Indonésie",
     "code": "IDN",
     "article": "l'",
     "nom_long": "République d'Indonésie"
   },
   {
-    "nom": "Irak",
+    "name": "Irak",
     "nom_alpha": "Irak",
     "code": "IRQ",
     "article": "l'",
     "nom_long": "République d'Irak"
   },
   {
-    "nom": "Iran",
+    "name": "Iran",
     "nom_alpha": "Iran",
     "code": "IRN",
     "article": "l'",
     "nom_long": "République islamique d'Iran"
   },
   {
-    "nom": "Irlande",
+    "name": "Irlande",
     "nom_alpha": "Irlande",
     "code": "IRL",
     "article": "l'",
-    "nom_long": "Irlande"
+    "nom_long": "Irlande",
+    "european": true
   },
   {
-    "nom": "Islande",
+    "name": "Islande",
     "nom_alpha": "Islande",
     "code": "ISL",
     "article": "l'",
-    "nom_long": "République d'Islande"
+    "nom_long": "République d'Islande",
+    "european": true
   },
   {
-    "nom": "Israël",
+    "name": "Israël",
     "nom_alpha": "Israël",
     "code": "ISR",
     "article": "",
     "nom_long": "État d'Israël"
   },
   {
-    "nom": "Italie",
+    "name": "Italie",
     "nom_alpha": "Italie",
     "code": "ITA",
     "article": "l'",
-    "nom_long": "République italienne"
+    "nom_long": "République italienne",
+    "european": true
   },
   {
-    "nom": "Jamaïque",
+    "name": "Jamaïque",
     "nom_alpha": "Jamaïque",
     "code": "JAM",
     "article": "la",
     "nom_long": "Jamaïque"
   },
   {
-    "nom": "Japon",
+    "name": "Japon",
     "nom_alpha": "Japon",
     "code": "JPN",
     "article": "le",
     "nom_long": "Japon"
   },
   {
-    "nom": "Jordanie",
+    "name": "Jordanie",
     "nom_alpha": "Jordanie",
     "code": "JOR",
     "article": "la",
     "nom_long": "Royaume hachémite de Jordanie"
   },
   {
-    "nom": "Kazakhstan",
+    "name": "Kazakhstan",
     "nom_alpha": "Kazakhstan",
     "code": "KAZ",
     "article": "le",
     "nom_long": "République du Kazakhstan"
   },
   {
-    "nom": "Kénya",
+    "name": "Kénya",
     "nom_alpha": "Kénya",
     "code": "KEN",
     "article": "le",
     "nom_long": "République du Kénya"
   },
   {
-    "nom": "Kirghizstan",
+    "name": "Kirghizstan",
     "nom_alpha": "Kirghizstan",
     "code": "KGZ",
     "article": "le",
     "nom_long": "République kirghize"
   },
   {
-    "nom": "Kiribati",
+    "name": "Kiribati",
     "nom_alpha": "Kiribati",
     "code": "KIR",
     "article": "les",
     "nom_long": "République des Kiribati"
   },
   {
-    "nom": "Kosovo",
+    "name": "Kosovo",
     "nom_alpha": "Kosovo",
     "code": "KOS",
     "article": "le",
     "nom_long": "République du Kosovo"
   },
   {
-    "nom": "Koweït",
+    "name": "Koweït",
     "nom_alpha": "Koweït",
     "code": "KWT",
     "article": "le",
     "nom_long": "État du Koweït"
   },
   {
-    "nom": "Laos",
+    "name": "Laos",
     "nom_alpha": "Laos",
     "code": "LAO",
     "article": "le",
     "nom_long": "République démocratique populaire lao"
   },
   {
-    "nom": "Lésotho",
+    "name": "Lésotho",
     "nom_alpha": "Lésotho",
     "code": "LSO",
     "article": "le",
     "nom_long": "Royaume du Lesotho"
   },
   {
-    "nom": "Lettonie",
+    "name": "Lettonie",
     "nom_alpha": "Lettonie",
     "code": "LVA",
     "article": "la",
-    "nom_long": "République de Lettonie"
+    "nom_long": "République de Lettonie",
+    "european": true
   },
   {
-    "nom": "Liban",
+    "name": "Liban",
     "nom_alpha": "Liban",
     "code": "LBN",
     "article": "le",
     "nom_long": "République libanaise"
   },
   {
-    "nom": "Libéria",
+    "name": "Libéria",
     "nom_alpha": "Libéria",
     "code": "LBR",
     "article": "le",
     "nom_long": "République du Libéria"
   },
   {
-    "nom": "Libye",
+    "name": "Libye",
     "nom_alpha": "Libye",
     "code": "LBY",
     "article": "la",
     "nom_long": "État de Libye"
   },
   {
-    "nom": "Liechtenstein",
+    "name": "Liechtenstein",
     "nom_alpha": "Liechtenstein",
     "code": "LIE",
     "article": "le",
     "nom_long": "Principauté du Liechtenstein"
   },
   {
-    "nom": "Lituanie",
+    "name": "Lituanie",
     "nom_alpha": "Lituanie",
     "code": "LTU",
     "article": "la",
-    "nom_long": "République de Lituanie"
+    "nom_long": "République de Lituanie",
+    "european": true
   },
   {
-    "nom": "Luxembourg",
+    "name": "Luxembourg",
     "nom_alpha": "Luxembourg",
     "code": "LUX",
     "article": "le",
-    "nom_long": "Grand-Duché de Luxembourg"
+    "nom_long": "Grand-Duché de Luxembourg",
+    "european": true
   },
   {
-    "nom": "Macédoine du Nord",
+    "name": "Macédoine du Nord",
     "nom_alpha": "Macédoine du Nord",
     "code": "MKD",
     "article": "l'",
     "nom_long": "République de Macédoine du Nord"
   },
   {
-    "nom": "Madagascar",
+    "name": "Madagascar",
     "nom_alpha": "Madagascar",
     "code": "MDG",
     "article": "",
     "nom_long": "République de Madagascar"
   },
   {
-    "nom": "Malaisie",
+    "name": "Malaisie",
     "nom_alpha": "Malaisie",
     "code": "MYS",
     "article": "la",
     "nom_long": "Malaisie"
   },
   {
-    "nom": "Malawi",
+    "name": "Malawi",
     "nom_alpha": "Malawi",
     "code": "MWI",
     "article": "le",
     "nom_long": "République du Malawi"
   },
   {
-    "nom": "Maldives",
+    "name": "Maldives",
     "nom_alpha": "Maldives",
     "code": "MDV",
     "article": "les",
     "nom_long": "République des Maldives"
   },
   {
-    "nom": "Mali",
+    "name": "Mali",
     "nom_alpha": "Mali",
     "code": "MLI",
     "article": "le",
     "nom_long": "République du Mali"
   },
   {
-    "nom": "Malte",
+    "name": "Malte",
     "nom_alpha": "Malte",
     "code": "MLT",
     "article": "",
-    "nom_long": "République de Malte"
+    "nom_long": "République de Malte",
+    "european": true
   },
   {
-    "nom": "Maroc",
+    "name": "Maroc",
     "nom_alpha": "Maroc",
     "code": "MAR",
     "article": "le",
     "nom_long": "Royaume du Maroc"
   },
   {
-    "nom": "Îles Marshall",
+    "name": "Îles Marshall",
     "nom_alpha": "Marshall (Îles)",
     "code": "MHL",
     "article": "les",
     "nom_long": "République des Îles Marshall"
   },
   {
-    "nom": "Maurice",
+    "name": "Maurice",
     "nom_alpha": "Maurice",
     "code": "MUS",
     "article": "",
     "nom_long": "République de Maurice"
   },
   {
-    "nom": "Mauritanie",
+    "name": "Mauritanie",
     "nom_alpha": "Mauritanie",
     "code": "MRT",
     "article": "la",
     "nom_long": "République islamique de Mauritanie"
   },
   {
-    "nom": "Mexique",
+    "name": "Mexique",
     "nom_alpha": "Mexique",
     "code": "MEX",
     "article": "le",
     "nom_long": "États-Unis du Mexique"
   },
   {
-    "nom": "Micronésie",
+    "name": "Micronésie",
     "nom_alpha": "Micronésie",
     "code": "FSM",
     "article": "la",
     "nom_long": "États fédérés de Micronésie"
   },
   {
-    "nom": "Moldavie",
+    "name": "Moldavie",
     "nom_alpha": "Moldavie",
     "code": "MDA",
     "article": "la",
     "nom_long": "République de Moldavie"
   },
   {
-    "nom": "Monaco",
+    "name": "Monaco",
     "nom_alpha": "Monaco",
     "code": "MCO",
     "article": "",
     "nom_long": "Principauté de Monaco"
   },
   {
-    "nom": "Mongolie",
+    "name": "Mongolie",
     "nom_alpha": "Mongolie",
     "code": "MNG",
     "article": "la",
     "nom_long": "Mongolie"
   },
   {
-    "nom": "Monténégro",
+    "name": "Monténégro",
     "nom_alpha": "Monténégro",
     "code": "MNE",
     "article": "le",
     "nom_long": "Monténégro"
   },
   {
-    "nom": "Mozambique",
+    "name": "Mozambique",
     "nom_alpha": "Mozambique",
     "code": "MOZ",
     "article": "le",
     "nom_long": "République du Mozambique"
   },
   {
-    "nom": "Namibie",
+    "name": "Namibie",
     "nom_alpha": "Namibie",
     "code": "NAM",
     "article": "la",
     "nom_long": "République de Namibie"
   },
   {
-    "nom": "Nauru",
+    "name": "Nauru",
     "nom_alpha": "Nauru",
     "code": "NRU",
     "article": "",
     "nom_long": "République de Nauru"
   },
   {
-    "nom": "Népal",
+    "name": "Népal",
     "nom_alpha": "Népal",
     "code": "NPL",
     "article": "le",
     "nom_long": "République démocratique fédérale du Népal"
   },
   {
-    "nom": "Nicaragua",
+    "name": "Nicaragua",
     "nom_alpha": "Nicaragua",
     "code": "NIC",
     "article": "le",
     "nom_long": "République du Nicaragua"
   },
   {
-    "nom": "Niger",
+    "name": "Niger",
     "nom_alpha": "Niger",
     "code": "NER",
     "article": "le",
     "nom_long": "République du Niger"
   },
   {
-    "nom": "Nigéria",
+    "name": "Nigéria",
     "nom_alpha": "Nigéria",
     "code": "NGA",
     "article": "le",
     "nom_long": "République fédérale du Nigéria"
   },
   {
-    "nom": "Niue",
+    "name": "Niue",
     "nom_alpha": "Niue",
     "code": "NIU",
     "article": "",
     "nom_long": "Niue"
   },
   {
-    "nom": "Norvège",
+    "name": "Norvège",
     "nom_alpha": "Norvège",
     "code": "NOR",
     "article": "la",
-    "nom_long": "Royaume de Norvège"
+    "nom_long": "Royaume de Norvège",
+    "european": true
   },
   {
-    "nom": "Nouvelle-Zélande",
+    "name": "Nouvelle-Zélande",
     "nom_alpha": "Nouvelle-Zélande",
     "code": "NZL",
     "article": "la",
     "nom_long": "Nouvelle-Zélande"
   },
   {
-    "nom": "Oman",
+    "name": "Oman",
     "nom_alpha": "Oman",
     "code": "OMN",
     "article": "",
     "nom_long": "Sultanat d'Oman"
   },
   {
-    "nom": "Ouganda",
+    "name": "Ouganda",
     "nom_alpha": "Ouganda",
     "code": "UGA",
     "article": "l'",
     "nom_long": "République d'Ouganda"
   },
   {
-    "nom": "Ouzbékistan",
+    "name": "Ouzbékistan",
     "nom_alpha": "Ouzbékistan",
     "code": "UZB",
     "article": "l'",
     "nom_long": "République d'Ouzbékistan"
   },
   {
-    "nom": "Pakistan",
+    "name": "Pakistan",
     "nom_alpha": "Pakistan",
     "code": "PAK",
     "article": "le",
     "nom_long": "République islamique du Pakistan"
   },
   {
-    "nom": "Palaos",
+    "name": "Palaos",
     "nom_alpha": "Palaos",
     "code": "PLW",
     "article": "les",
     "nom_long": "République des Palaos"
   },
   {
-    "nom": "Panama",
+    "name": "Panama",
     "nom_alpha": "Panama",
     "code": "PAN",
     "article": "le",
     "nom_long": "République du Panama"
   },
   {
-    "nom": "Papouasie-Nouvelle-Guinée",
+    "name": "Papouasie-Nouvelle-Guinée",
     "nom_alpha": "Papouasie-Nouvelle-Guinée",
     "code": "PNG",
     "article": "la",
     "nom_long": "État indépendant de Papouasie-Nouvelle-Guinée"
   },
   {
-    "nom": "Paraguay",
+    "name": "Paraguay",
     "nom_alpha": "Paraguay",
     "code": "PRY",
     "article": "le",
     "nom_long": "République du Paraguay"
   },
   {
-    "nom": "Pays-Bas",
+    "name": "Pays-Bas",
     "nom_alpha": "Pays-Bas",
     "code": "NLD",
     "article": "les",
-    "nom_long": "Royaume des Pays-Bas"
+    "nom_long": "Royaume des Pays-Bas",
+    "european": true
   },
   {
-    "nom": "Pérou",
+    "name": "Pérou",
     "nom_alpha": "Pérou",
     "code": "PER",
     "article": "le",
     "nom_long": "République du Pérou"
   },
   {
-    "nom": "Philippines",
+    "name": "Philippines",
     "nom_alpha": "Philippines",
     "code": "PHL",
     "article": "les",
     "nom_long": "République des Philippines"
   },
   {
-    "nom": "Pologne",
+    "name": "Pologne",
     "nom_alpha": "Pologne",
     "code": "POL",
     "article": "la",
-    "nom_long": "République de Pologne"
+    "nom_long": "République de Pologne",
+    "european": true
   },
   {
-    "nom": "Portugal",
+    "name": "Portugal",
     "nom_alpha": "Portugal",
     "code": "PRT",
     "article": "le",
-    "nom_long": "République portugaise"
+    "nom_long": "République portugaise",
+    "european": true
   },
   {
-    "nom": "Qatar",
+    "name": "Qatar",
     "nom_alpha": "Qatar",
     "code": "QAT",
     "article": "le",
     "nom_long": "État du Qatar"
   },
   {
-    "nom": "Roumanie",
+    "name": "Roumanie",
     "nom_alpha": "Roumanie",
     "code": "ROU",
     "article": "la",
-    "nom_long": "Roumanie"
+    "nom_long": "Roumanie",
+    "european": true
   },
   {
-    "nom": "Royaume-Uni",
+    "name": "Royaume-Uni",
     "nom_alpha": "Royaume-Uni",
     "code": "GBR",
     "article": "le",
     "nom_long": "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord"
   },
   {
-    "nom": "Russie",
+    "name": "Russie",
     "nom_alpha": "Russie",
     "code": "RUS",
     "article": "la",
     "nom_long": "Fédération de Russie"
   },
   {
-    "nom": "Rwanda",
+    "name": "Rwanda",
     "nom_alpha": "Rwanda",
     "code": "RWA",
     "article": "le",
     "nom_long": "République du Rwanda"
   },
   {
-    "nom": "Saint-Christophe-et-Niévès",
+    "name": "Saint-Christophe-et-Niévès",
     "nom_alpha": "Saint-Christophe-et-Niévès",
     "code": "KNA",
     "article": "",
     "nom_long": "Fédération de Saint-Christophe-et-Niévès"
   },
   {
-    "nom": "Sainte-Lucie",
+    "name": "Sainte-Lucie",
     "nom_alpha": "Sainte-Lucie",
     "code": "LCA",
     "article": "",
     "nom_long": "Sainte-Lucie"
   },
   {
-    "nom": "Saint-Marin",
+    "name": "Saint-Marin",
     "nom_alpha": "Saint-Marin",
     "code": "SMR",
     "article": "",
     "nom_long": "République de Saint-Marin"
   },
   {
-    "nom": "Saint-Vincent-et-les-Grenadines",
+    "name": "Saint-Vincent-et-les-Grenadines",
     "nom_alpha": "Saint-Vincent-et-les-Grenadines",
     "code": "VCT",
     "article": "",
     "nom_long": "Saint-Vincent-et-les-Grenadines"
   },
   {
-    "nom": "Salomon",
+    "name": "Salomon",
     "nom_alpha": "Salomon",
     "code": "SLB",
     "article": "les",
     "nom_long": "Îles Salomon"
   },
   {
-    "nom": "Salvador",
+    "name": "Salvador",
     "nom_alpha": "Salvador",
     "code": "SLV",
     "article": "le",
     "nom_long": "République du Salvador"
   },
   {
-    "nom": "Samoa",
+    "name": "Samoa",
     "nom_alpha": "Samoa",
     "code": "WSM",
     "article": "les",
     "nom_long": "État indépendant des Samoa"
   },
   {
-    "nom": "Sao Tomé-et-Principe",
+    "name": "Sao Tomé-et-Principe",
     "nom_alpha": "Sao Tomé-et-Principe",
     "code": "STP",
     "article": "",
     "nom_long": "République démocratique de Sao Tomé-et-Principe"
   },
   {
-    "nom": "Sénégal",
+    "name": "Sénégal",
     "nom_alpha": "Sénégal",
     "code": "SEN",
     "article": "le",
     "nom_long": "République du Sénégal"
   },
   {
-    "nom": "Serbie",
+    "name": "Serbie",
     "nom_alpha": "Serbie",
     "code": "SRB",
     "article": "la",
     "nom_long": "République de Serbie"
   },
   {
-    "nom": "Seychelles",
+    "name": "Seychelles",
     "nom_alpha": "Seychelles",
     "code": "SYC",
     "article": "les",
     "nom_long": "République des Seychelles"
   },
   {
-    "nom": "Sierra Leone",
+    "name": "Sierra Leone",
     "nom_alpha": "Sierra Leone",
     "code": "SLE",
     "article": "la",
     "nom_long": "République de Sierra Leone"
   },
   {
-    "nom": "Singapour",
+    "name": "Singapour",
     "nom_alpha": "Singapour",
     "code": "SGP",
     "article": "",
     "nom_long": "République de Singapour"
   },
   {
-    "nom": "Slovaquie",
+    "name": "Slovaquie",
     "nom_alpha": "Slovaquie",
     "code": "SVK",
     "article": "la",
-    "nom_long": "République slovaque"
+    "nom_long": "République slovaque",
+    "european": true
   },
   {
-    "nom": "Slovénie",
+    "name": "Slovénie",
     "nom_alpha": "Slovénie",
     "code": "SVN",
     "article": "la",
-    "nom_long": "République de Slovénie"
+    "nom_long": "République de Slovénie",
+    "european": true
   },
   {
-    "nom": "Somalie",
+    "name": "Somalie",
     "nom_alpha": "Somalie",
     "code": "SOM",
     "article": "la",
     "nom_long": "République fédérale de Somalie"
   },
   {
-    "nom": "Soudan",
+    "name": "Soudan",
     "nom_alpha": "Soudan",
     "code": "SDN",
     "article": "le",
     "nom_long": "République du Soudan"
   },
   {
-    "nom": "Soudan du Sud",
+    "name": "Soudan du Sud",
     "nom_alpha": "Soudan du Sud",
     "code": "SDS",
     "article": "le",
     "nom_long": "République du Soudan du Sud"
   },
   {
-    "nom": "Sri Lanka",
+    "name": "Sri Lanka",
     "nom_alpha": "Sri Lanka",
     "code": "LKA",
     "article": "le",
     "nom_long": "République démocratique socialiste du Sri Lanka"
   },
   {
-    "nom": "Suède",
+    "name": "Suède",
     "nom_alpha": "Suède",
     "code": "SWE",
     "article": "la",
-    "nom_long": "Royaume de Suède"
+    "nom_long": "Royaume de Suède",
+    "european": true
   },
   {
-    "nom": "Suisse",
+    "name": "Suisse",
     "nom_alpha": "Suisse",
     "code": "CHE",
     "article": "la",
-    "nom_long": "Confédération suisse"
+    "nom_long": "Confédération suisse",
+    "transfer": true
   },
   {
-    "nom": "Suriname",
+    "name": "Suriname",
     "nom_alpha": "Suriname",
     "code": "SUR",
     "article": "le",
     "nom_long": "République du Suriname"
   },
   {
-    "nom": "Syrie",
+    "name": "Syrie",
     "nom_alpha": "Syrie",
     "code": "SYR",
     "article": "la",
     "nom_long": "République arabe syrienne"
   },
   {
-    "nom": "Tadjikistan",
+    "name": "Tadjikistan",
     "nom_alpha": "Tadjikistan",
     "code": "TJK",
     "article": "le",
     "nom_long": "République du Tadjikistan"
   },
   {
-    "nom": "Tanzanie",
+    "name": "Tanzanie",
     "nom_alpha": "Tanzanie",
     "code": "TZA",
     "article": "la",
     "nom_long": "République unie de Tanzanie"
   },
   {
-    "nom": "Tchad",
+    "name": "Tchad",
     "nom_alpha": "Tchad",
     "code": "TCD",
     "article": "le",
     "nom_long": "République du Tchad"
   },
   {
-    "nom": "Tchéquie",
+    "name": "Tchéquie",
     "nom_alpha": "Tchéquie",
     "code": "CZE",
     "article": "la",
-    "nom_long": "République tchèque"
+    "nom_long": "République tchèque",
+    "european": true
   },
   {
-    "nom": "Thaïlande",
+    "name": "Thaïlande",
     "nom_alpha": "Thaïlande",
     "code": "THA",
     "article": "la",
     "nom_long": "Royaume de Thaïlande"
   },
   {
-    "nom": "Timor oriental",
+    "name": "Timor oriental",
     "nom_alpha": "Timor oriental",
     "code": "TLS",
     "article": "le",
     "nom_long": "République démocratique du Timor oriental"
   },
   {
-    "nom": "Togo",
+    "name": "Togo",
     "nom_alpha": "Togo",
     "code": "TGO",
     "article": "le",
     "nom_long": "République togolaise"
   },
   {
-    "nom": "Tonga",
+    "name": "Tonga",
     "nom_alpha": "Tonga",
     "code": "TON",
     "article": "les",
     "nom_long": "Royaume des Tonga"
   },
   {
-    "nom": "Trinité-et-Tobago",
+    "name": "Trinité-et-Tobago",
     "nom_alpha": "Trinité-et-Tobago",
     "code": "TTO",
     "article": "la",
     "nom_long": "République de Trinité-et-Tobago"
   },
   {
-    "nom": "Tunisie",
+    "name": "Tunisie",
     "nom_alpha": "Tunisie",
     "code": "TUN",
     "article": "la",
     "nom_long": "République tunisienne"
   },
   {
-    "nom": "Turkménistan",
+    "name": "Turkménistan",
     "nom_alpha": "Turkménistan",
     "code": "TKM",
     "article": "le",
     "nom_long": "Turkménistan"
   },
   {
-    "nom": "Turquie",
+    "name": "Turquie",
     "nom_alpha": "Turquie",
     "code": "TUR",
     "article": "la",
     "nom_long": "République de Turquie"
   },
   {
-    "nom": "Tuvalu",
+    "name": "Tuvalu",
     "nom_alpha": "Tuvalu",
     "code": "TUV",
     "article": "les",
     "nom_long": "Tuvalu"
   },
   {
-    "nom": "Ukraine",
+    "name": "Ukraine",
     "nom_alpha": "Ukraine",
     "code": "UKR",
     "article": "l'",
     "nom_long": "Ukraine"
   },
   {
-    "nom": "Uruguay",
+    "name": "Uruguay",
     "nom_alpha": "Uruguay",
     "code": "URY",
     "article": "l'",
     "nom_long": "République orientale de l'Uruguay"
   },
   {
-    "nom": "Vanuatu",
+    "name": "Vanuatu",
     "nom_alpha": "Vanuatu",
     "code": "VUT",
     "article": "le",
     "nom_long": "République du Vanuatu"
   },
   {
-    "nom": "Vatican",
+    "name": "Vatican",
     "nom_alpha": "Vatican",
     "code": "VAT",
     "article": "le",
     "nom_long": "Vatican (Saint-Siège)"
   },
   {
-    "nom": "Vénézuéla",
+    "name": "Vénézuéla",
     "nom_alpha": "Vénézuéla",
     "code": "VEN",
     "article": "le",
     "nom_long": "République bolivarienne du Vénézuéla"
   },
   {
-    "nom": "Vietnam",
+    "name": "Vietnam",
     "nom_alpha": "Vietnam",
     "code": "VNM",
     "article": "le",
     "nom_long": "République socialiste du Vietnam"
   },
   {
-    "nom": "Yémen",
+    "name": "Yémen",
     "nom_alpha": "Yémen",
     "code": "YEM",
     "article": "le",
     "nom_long": "République du Yémen"
   },
   {
-    "nom": "Zambie",
+    "name": "Zambie",
     "nom_alpha": "Zambie",
     "code": "ZMB",
     "article": "la",
     "nom_long": "République de Zambie"
   },
   {
-    "nom": "Zimbabwé",
+    "name": "Zimbabwé",
     "nom_alpha": "Zimbabwé",
     "code": "ZWE",
     "article": "le",
