@@ -50,14 +50,14 @@ export class WebsiteService {
   };
 
 
-  private _deleting = new Set<string>();
-  deleting = (id: string) => {
-    return this._deleting.has(id);
+  private _removing = new Set<string>();
+  removing = (id: string) => {
+    return this._removing.has(id);
   };
 
-  private _deleteError: Index<ApiError> = {};
+  private _removeError: Index<ApiError> = {};
   deleteError = (id: string): ApiError => {
-    return this._deleteError[id];
+    return this._removeError[id];
   };
 
   readonly create = (website: ApiWebsiteCreate): Observable<ApiWebsiteWithCompany> => {
@@ -150,18 +150,18 @@ export class WebsiteService {
   readonly remove = (id: Id): Observable<void> => {
     return this.utils.getReportApiSdk().pipe(
       map(_ => {
-        this._deleting.add(id);
-        delete this._deleteError[id];
+        this._removing.add(id);
+        delete this._removeError[id];
         return _;
       }),
       mergeMap(api => api.website.remove(id)),
       map(() => {
         this.source.next((this.source.value ?? []).filter((_: ApiWebsiteWithCompany) => _.id !== id));
-        this._deleting.delete(id);
+        this._removing.delete(id);
       }),
       catchError((err: ApiError) => {
-        this._deleting.delete(id);
-        this._deleteError[id] = err;
+        this._removing.delete(id);
+        this._removeError[id] = err;
         return throwError(err);
       }),
     );

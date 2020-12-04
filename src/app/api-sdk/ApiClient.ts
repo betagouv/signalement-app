@@ -40,13 +40,13 @@ export class ApiClient {
     mapData,
     mapError,
   }: ApiClientParams) {
-    const mapResponse = (_: Response) => {
-      switch (_.status) {
+    const mapResponse = (res: Response) => {
+      switch (res.status) {
         case 200:
-          return _.json();
+          return res.json().catch(() => res.text()).catch(() => res);
         default: {
-          console.error('[ApiClient]', _);
-          throw new ApiError(_.status as StatusCode, _.statusText);
+          console.error('[ApiClient]', res);
+          throw new ApiError(res.status as StatusCode, res.statusText);
         }
       }
     };

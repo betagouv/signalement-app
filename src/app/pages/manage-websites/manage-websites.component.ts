@@ -9,7 +9,7 @@ import { CompanySearchResult } from '../../model/Company';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { ApiError } from '../../api-sdk/ApiClient';
+import { Id } from '../../api-sdk/model/Common';
 
 interface Form {
   host?: string;
@@ -58,6 +58,12 @@ interface Form {
             <td mat-cell *matCellDef="let _" class="text-right">
               <button app-btn [state]="getButtonState(_)" icon="check_circle_outline" (click)="toggleWebsiteKind(_.id, _.kind)">
                 {{_.kind === websitesKind.DEFAULT ? 'Validé' : 'Valider'}}
+              </button>
+
+              <button mat-icon-button color="primary"
+                      (click)="remove(_.id)"
+                      [appLoading]="websiteService.removing(_.id)">
+                <mat-icon>delete</mat-icon>
               </button>
             </td>
           </ng-container>
@@ -170,4 +176,6 @@ export class ManageWebsitesComponent implements OnInit {
       companyActivityCode: $event.activityCode,
     }).subscribe();
   };
+
+  remove = (id: Id) => this.websiteService.remove(id).subscribe();
 }
