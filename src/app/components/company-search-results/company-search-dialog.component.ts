@@ -56,7 +56,7 @@ export class CompanySearchDialogDirective {
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Fermer</button>
+      <button mat-button mat-dialog-close color="primary">Fermer</button>
       <button [disabled]="loading" mat-raised-button color="primary" [disabled]="identityCtrl.invalid"
               (click)="submitCompanySiretForm()">
         Rechercher

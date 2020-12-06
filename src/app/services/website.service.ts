@@ -40,25 +40,22 @@ export class WebsiteService {
   }
 
   private _updating = new Set<string>();
-  updating = (id: string) => {
-    return this._updating.has(id);
-  };
+  updating = (id: string) => this._updating.has(id);
 
   private _updateError: Index<ApiError> = {};
-  updateError = (id: string): ApiError => {
-    return this._updateError[id];
-  };
+  updateError = (id: string): ApiError => this._updateError[id];
 
+  private _updateCompanyError: Index<ApiError> = {};
+  updateCompanyError = (id: string): ApiError => this._updateCompanyError[id];
+
+  private _updatingCompany = new Set<string>();
+  updatingCompany = (id: string) => this._updatingCompany.has(id);
 
   private _removing = new Set<string>();
-  removing = (id: string) => {
-    return this._removing.has(id);
-  };
+  removing = (id: string) => this._removing.has(id);
 
   private _removeError: Index<ApiError> = {};
-  deleteError = (id: string): ApiError => {
-    return this._removeError[id];
-  };
+  removeError = (id: string): ApiError => this._removeError[id];
 
   readonly create = (website: ApiWebsiteCreate): Observable<ApiWebsiteWithCompany> => {
     this._creating = true;
@@ -129,19 +126,19 @@ export class WebsiteService {
   readonly updateCompany = (id: Id, website: ApiWebsiteUpdateCompany): Observable<ApiWebsiteWithCompany> => {
     return this.utils.getReportApiSdk().pipe(
       map(_ => {
-        this._updating.add(id);
-        delete this._updateError[id];
+        this._updatingCompany.add(id);
+        delete this._updateCompanyError[id];
         return _;
       }),
       mergeMap(api => api.website.updateCompany(id, website)),
       map((updatedWebsite: ApiWebsiteWithCompany) => {
         this.source.next((this.source.value ?? []).map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
-        this._updating.delete(id);
+        this._updatingCompany.delete(id);
         return updatedWebsite;
       }),
       catchError((err: ApiError) => {
-        this._updating.delete(id);
-        this._updateError[id] = err;
+        this._updatingCompany.delete(id);
+        this._updateCompanyError[id] = err;
         return throwError(err);
       }),
     );

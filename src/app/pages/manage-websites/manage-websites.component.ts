@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { WebsiteService } from '../../services/website.service';
 import { ApiWebsite, ApiWebsiteKind, ApiWebsiteWithCompany } from '../../api-sdk/model/ApiWebsite';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +10,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Id } from '../../api-sdk/model/Common';
+import { Index } from '../../model/Common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../components/confirm/confirm.component';
 
 interface Form {
   host?: string;
@@ -18,6 +21,7 @@ interface Form {
 
 @Component({
   selector: 'app-manage-websites',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-banner title="Modération des site webs"></app-banner>
 
@@ -56,7 +60,12 @@ interface Form {
           <ng-container matColumnDef="kind">
             <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let _" class="text-right">
-              <button app-btn [state]="getButtonState(_)" icon="check_circle_outline" (click)="toggleWebsiteKind(_.id, _.kind)">
+              <button
+                app-btn icon="check_circle_outline"
+                [loading]="this.websiteService.updating(_.id)"
+                [error]="this.websiteService.updateError(_.id)"
+                [success]="_.kind === websitesKind.DEFAULT"
+                (click)="toggleWebsiteKind(_)">
                 {{_.kind === websitesKind.DEFAULT ? 'Validé' : 'Valider'}}
               </button>
 
@@ -71,7 +80,13 @@ interface Form {
           <ng-container matColumnDef="company">
             <th mat-sort-header mat-header-cell *matHeaderCellDef>Entreprise</th>
             <td mat-cell *matCellDef="let _">
-              <button app-btn icon="edit" appCompanySearchDialog (companySelected)="updateCompany(_, $event)">
+              <button
+                app-btn icon="edit"
+                [loading]="websiteService.updatingCompany(_.id)"
+                [error]="!!websiteService.updateCompanyError(_.id)"
+                [matTooltip]="websiteService.updateCompanyError(_.id) && 'L\\'entreprise est déjà associée à cette URL'"
+                appCompanySearchDialog (companySelected)="updateCompany(_, $event)"
+              >
                 <span class="font-weight-bold">{{_.company?.name}}</span>
                 &nbsp;
                 <span class="siret">{{_.company?.siret}}</span>
@@ -93,6 +108,7 @@ export class ManageWebsitesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public websiteService: WebsiteService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -113,6 +129,8 @@ export class ManageWebsitesComponent implements OnInit {
 
   dataSource?: MatTableDataSource<ApiWebsiteWithCompany>;
 
+  websitesHostIndex: Index<ApiWebsiteWithCompany[]> = {};
+
   ngOnInit(): void {
     this.initForm();
     this.fetchWebsites();
@@ -127,11 +145,12 @@ export class ManageWebsitesComponent implements OnInit {
 
   private fetchWebsites = (): void => {
     combineLatest([
-      this.websiteService.list(),
+      this.websiteService.list({ clean: false }),
       this.form.valueChanges.pipe(startWith(undefined)),
     ]).pipe(
       map(this.filterWebsites),
-      map(this.initializeDatatable)
+      map(this.initializeDatatable),
+      map(this.initIndex),
     ).subscribe();
   };
 
@@ -139,19 +158,49 @@ export class ManageWebsitesComponent implements OnInit {
     const isKindSelected = (form?.kind && form?.kind.filter((_: string) => _ !== '').length > 0);
     const kinds = isKindSelected ? form.kind! : [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT];
     return websites
-      .filter(_ => kinds.includes(_.kind))
+      ?.filter(_ => kinds.includes(_.kind))
       .filter(_ => !form?.host || _.host.includes(form.host));
   }
 
-  private initializeDatatable = (websites: ApiWebsiteWithCompany[]): void => {
+  private initializeDatatable = (websites: ApiWebsiteWithCompany[]): ApiWebsiteWithCompany[] => {
     this.dataSource = new MatTableDataSource(websites);
     this.dataSource.paginator = this.paginator ?? null;
     this.dataSource.sort = this.sort ?? null;
+    return websites;
   };
 
-  toggleWebsiteKind = (id: string, kind: ApiWebsiteKind): void => {
-    const toggledKind = (kind === ApiWebsiteKind.DEFAULT) ? ApiWebsiteKind.PENDING : ApiWebsiteKind.DEFAULT;
-    this.websiteService.update(id, { kind: toggledKind }).subscribe();
+  private initIndex = (websites: ApiWebsiteWithCompany[]) => {
+    this.websitesHostIndex = websites.reduce(
+      (acc: Index<ApiWebsiteWithCompany[]>, website) => ({
+        ...acc,
+        [website.host]: (acc[website.host] ? [...acc[website.host], website] : [website])
+      }),
+      {}
+    );
+  };
+
+  getAlreadyValidatedWebsite = (host: string): ApiWebsiteWithCompany | undefined => {
+    return this.websitesHostIndex[host]?.find(_ => _.kind === ApiWebsiteKind.DEFAULT);
+  };
+
+  toggleWebsiteKind = (website: ApiWebsiteWithCompany): void => {
+    const toggle = () => {
+      const toggledKind = (website.kind === ApiWebsiteKind.DEFAULT) ? ApiWebsiteKind.PENDING : ApiWebsiteKind.DEFAULT;
+      this.websiteService.update(website.id, { kind: toggledKind }).subscribe(this.fetchWebsites);
+    };
+    const alreadyValidated = this.getAlreadyValidatedWebsite(website.host);
+    if (website.kind === ApiWebsiteKind.PENDING && !!alreadyValidated) {
+      const ref = this.dialog.open(ConfirmDialogComponent).componentInstance;
+      ref.title = 'Remplacer le site web assigné ?';
+      ref.content = `
+        L'entreprise <b>${alreadyValidated.company.name}</b> est déjà assginée au site <b>${website.host}</b>.<br/>
+        L'entreprise <b>${website.company.name}</b> sera assignée à la place.
+      `;
+      ref.confirmed = new EventEmitter<void>();
+      ref.confirmed.subscribe(toggle);
+    } else {
+      toggle();
+    }
   };
 
   getButtonState = (website: ApiWebsite): BtnState => {

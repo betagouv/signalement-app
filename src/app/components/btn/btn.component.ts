@@ -9,14 +9,14 @@ export type BtnState = 'loading' | 'error' | 'success' | 'default';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./btn.component.scss',],
   host: {
-    '[class]': '"-" + state',
+    '[class]': '"-" + getState()',
     '[attr.disabled]': 'disabled || null',
     '[class.-dense]': 'dense',
     '[class.mat-button-disabled]': 'disabled',
     'class': 'mat-stroked-button mat-button-base'
   },
   template: `
-    <ng-container [ngSwitch]="state">
+    <ng-container [ngSwitch]="getState()">
       <mat-progress-spinner
         *ngSwitchCase="'loading'"
         mode="indeterminate"
@@ -48,6 +48,12 @@ export class BtnComponent implements OnInit {
     return this.dense ? 20 : 24;
   }
 
+  @Input() error?: boolean;
+
+  @Input() success?: boolean;
+
+  @Input() loading: boolean;
+
   @Input() icon?: string;
 
   @Input() iconDelete?: string;
@@ -56,7 +62,18 @@ export class BtnComponent implements OnInit {
 
   @Input() iconSuccess?: string;
 
-  @Input() state?: BtnState;
+  getState = (): BtnState => {
+    if (this.loading) {
+      return 'loading';
+    }
+    if (this.error) {
+      return 'error';
+    }
+    if (this.success) {
+      return 'success';
+    }
+    return 'default';
+  };
 
   @Output() deleted = new EventEmitter<void>();
 
