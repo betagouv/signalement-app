@@ -42,6 +42,7 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     ConfirmModule,
     BadgeModule,
     LoadingModule,
+    BadgeStatusModule,
   ],
   providers: [
   ]

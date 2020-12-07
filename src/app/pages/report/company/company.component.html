@@ -177,7 +177,7 @@
                       <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Identity" id="identByIdentity" (click)="scrollToElement(identSearch)"/>
                     </div>
                     <div class="col">
-                      <label for="identByIdentity" class="label-inline pointer">Par son SIRET / SIREN / RCS</label>
+                      <label for="identByIdentity" class="label-inline pointer">Par son SIRET ou SIREN ou RCS</label>
                     </div>
                   </div>
                 </div>
@@ -256,7 +256,7 @@
                     <app-company-search-results [companySearchResults]="companySearchResults" (select)="selectCompany($event)"></app-company-search-results>
 
                     <div class="note mt-1">
-                      L’entreprise n’apparaît pas ? Modifiez votre recherche ou  <span class="link" (click)="identificationKind = identificationKinds.Identity" tabindex="0">recherchez avec le numéro SIRET de l'entreprise</span>.
+                      L’entreprise n’apparaît pas ? Modifiez votre recherche ou  <span class="link" (click)="identificationKind = identificationKinds.Identity" tabindex="0">recherchez avec les identifiants de l'entreprise</span>.
                     </div>
 
                     <hr *ngIf="selectedCompany"/>
@@ -270,14 +270,14 @@
                     <p>
                       {{searchWarning}}
                     </p>
-                    Veuillez modifier votre recherche ou <button class="link" (click)="identificationKind = identificationKinds.Identity">rechercher avec le numéro SIRET de l'entreprise</button>.
+                    Veuillez modifier votre recherche ou <button class="link" (click)="identificationKind = identificationKinds.Identity">rechercher avec les identifiants de l'entreprise</button>.
                   </div>
 
                   <div class="notification error mt-4" *ngIf="searchError">
                     <p>
                       {{searchError}}
                     </p>
-                    Veuillez réessayer ou <span class="link" (click)="identificationKind = identificationKinds.Identity">rechercher avec le numéro SIRET de l'entreprise</span>.
+                    Veuillez réessayer ou <span class="link" (click)="identificationKind = identificationKinds.Identity">rechercher avec les identifiants de l'entreprise</span>.
                   </div>
                 </div>
 
@@ -293,18 +293,26 @@
 
                   <div class="form__group mt-4">
                     <label for="identity" [class]="hasErrorByIdentity(identityCtrl) ? 'error' : ''">
-                      Numéro SIRET / SIREN / RCS de l'entreprise (obligatoire)
+                      Numéro SIRET ou SIREN ou RCS de l'entreprise (obligatoire)
                     </label>
 
                     <div class="note mb-1" id="siret-description">
-                      Le SIRET est un numéro composé de 14 chiffres identifiant l'entreprise concernée.
+                      SIRET, SIREN et RCS sont des identifiants de l'entreprise.
+                      <br/>Le SIRET est composé de 14 chiffres, le SIREN est composé de 9 chiffres.
+                      <br/>Le RCS est composé de :
+                        <ul>
+                          <li>la mention "RCS"</li>
+                          <li>le nom de la ville d'immatriculation</li>
+                          <li>une lettre (A ou B)</li>
+                          <li>le numéro SIREN</li>
+                        </ul>
                       <br/>
 
 
                       <ng-container *ngIf="this.draftReport.companyKind === companyKinds.SIRET">
 
                         <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
-                          Comment retrouver un SIRET (cas normal) ?
+                          Comment retrouver ces identifiants ?
                         </a>
                         <ul class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
                           <li>
@@ -312,7 +320,7 @@
                               L'entreprise vous a remis un document ?
                             </a>
                             <div class="collapse" id="collapseDoc" aria-labelledby="collapseDoc-toggle" role="region">
-                              Vous pourrez probablement retrouver le SIRET sur :
+                              Vous pourrez probablement retrouver l'un de ces identifiants sur :
                               <ul>
                                 <li>
                                   <a data-toggle="collapse" href="#collapseTicket" id="collapseTicket-toggle" aria-expanded="false" aria-controls="collapseTicket">
@@ -320,7 +328,7 @@
                                   </a>
                                   <div class="collapse" id="collapseTicket" aria-labelledby="collapseTicket-toggle" role="region">
                                     <div class="card card-body">
-                                      Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le numéro à 14 chiffres qui se situe en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                                      Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse de l'entreprise et le montant de votre achat.
                                     </div>
                                   </div>
                                 </li>
@@ -330,7 +338,7 @@
                                   </a>
                                   <div class="collapse" id="collapseEstimate" aria-labelledby="collapseEstimate-toggle" role="region">
                                     <div class="card card-body">
-                                      Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
                                     </div>
                                   </div>
                                 </li>
@@ -340,7 +348,7 @@
                                   </a>
                                   <div class="collapse" id="collapseContract" aria-labelledby="collapseContract-toggle" role="region">
                                     <div class="card card-body">
-                                      Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
                                     </div>
                                   </div>
                                 </li>
@@ -365,11 +373,11 @@
                           </li>
                           <li>
                             <a data-toggle="collapse" href="#collapseNotFound" id="collapseNotFound-toggle" aria-expanded="false" aria-controls="collapseNotFound">
-                              Vous n’avez pas trouvé le numéro SIRET ?
+                              Vous n’avez pas trouvé d'identifiant ?
                             </a>
                             <div class="collapse" id="collapseNotFound" aria-labelledby="collapseNotFound-toggle" role="region">
-                              Utiliser <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank" title="economie.gouv.fr (nouvelle fenêtre)">le formulaire en ligne DGCCRF</a>
-                              <br />Ce formulaire ne nécessite pas le SIRET de l'entreprise.
+                              Utilisez <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank" title="economie.gouv.fr (nouvelle fenêtre)">le formulaire en ligne DGCCRF</a>
+                              <br />Ce formulaire ne nécessite pas d'identifiant de l'entreprise.
                             </div>
                           </li>
                         </ul>
@@ -377,7 +385,7 @@
 
                       <ng-container *ngIf="this.draftReport.companyKind === companyKinds.WEBSITE">
                         <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
-                          Comment retrouver un SIRET (cas ecommerce)?
+                          Comment retrouver ces identifiants ?
                         </a>
                         <ul class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
                           <li>
@@ -385,15 +393,15 @@
                               L'entreprise vous a remis un document ?
                             </a>
                             <div class="collapse" id="collapseDoc" aria-labelledby="collapseDoc-toggle" role="region">
-                              Vous pourrez probablement retrouver le SIRET sur :
+                              Vous pourrez probablement retrouver l'un de ces identifiants sur :
                               <ul>
                                 <li>
                                   <a data-toggle="collapse" href="#collapseTicket" id="collapseTicket-toggle" aria-expanded="false" aria-controls="collapseTicket">
-                                    le ticket de carte bleue
+                                    une facture
                                   </a>
                                   <div class="collapse" id="collapseTicket" aria-labelledby="collapseTicket-toggle" role="region">
                                     <div class="card card-body">
-                                      Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le numéro à 14 chiffres qui se situe en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                                      Il y a plusieurs données chiffrées sur cette facture mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse de l'entreprise et le montant de votre achat.
                                     </div>
                                   </div>
                                 </li>
@@ -403,7 +411,7 @@
                                   </a>
                                   <div class="collapse" id="collapseEstimate" aria-labelledby="collapseEstimate-toggle" role="region">
                                     <div class="card card-body">
-                                      Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
                                     </div>
                                   </div>
                                 </li>
@@ -413,7 +421,7 @@
                                   </a>
                                   <div class="collapse" id="collapseContract" aria-labelledby="collapseContract-toggle" role="region">
                                     <div class="card card-body">
-                                      Vous trouverez le plus souvent le numéro à 14 chiffres en dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
                                     </div>
                                   </div>
                                 </li>
@@ -425,24 +433,26 @@
                           </li>
                           <li>
                             <a data-toggle="collapse" href="#collapseNoDoc" id="collapseNoDoc-toggle" aria-expanded="false" aria-controls="collapseNoDoc">
-                              Vous n’avez pas de documents émanants de l'entreprise ?
+                              Vous n’avez pas de document émanant de l'entreprise ?
                             </a>
                             <div class="collapse" id="collapseNoDoc" aria-labelledby="collapseNoDoc-toggle" role="region">
-                              Faites une recherche en ligne sur :
+                              Rendez-vous sur le site internet dans l'une des rubriques suivantes :
                               <ul>
-                                <li><a href="https://www.societe.com" target="_blank" title="societe.com (nouvelle fenêtre)">https://www.societe.com</a></li>
-                                <li><a href="https://www.pagesjaunes.fr" target="_blank" title="pages jaunes (nouvelle fenêtre)">https://www.pagesjaunes.fr</a></li>
-                                <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr" title="infogreffe (nouvelle fenêtre)">https://www.infogreffe.fr</a></li>
+                                <li>les mentions légales</li>
+                                <li>les Conditions Générales de Vente (CGV)</li>
+                                <li>les conditions d'utilisation</li>
                               </ul>
+                              Dans la plupart des cas, vous trouverez l'accès à ces rubriques tout en bas de la page d'accueil du site.
+                              <br />Sur l'une de ces pages, vous devriez trouver le nom de la société éditrice du site ainsi que son RCS et/ou l'un des numéros suivants : SIRET (14 chiffres) ou SIREN (9 chiffres).
+                              <br />Attention, il est possible que deux sociétés différentes soient mentionnées sur ces pages. L'une d'elle correspond à l'hébergeur du site. Ce n'est pas l'identifiant de cet hébergeur que l'on cherche.
                             </div>
                           </li>
                           <li>
                             <a data-toggle="collapse" href="#collapseNotFound" id="collapseNotFound-toggle" aria-expanded="false" aria-controls="collapseNotFound">
-                              Vous n’avez pas trouvé le numéro SIRET ?
+                              Vous n’avez pas trouvé d'identifiant ?
                             </a>
                             <div class="collapse" id="collapseNotFound" aria-labelledby="collapseNotFound-toggle" role="region">
-                              Utiliser <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank" title="economie.gouv.fr (nouvelle fenêtre)">le formulaire en ligne DGCCRF</a>
-                              <br />Ce formulaire ne nécessite pas le SIRET de l'entreprise.
+                              Sélectionner l'option <b>Je ne peux pas identifier l'entreprise</b> plus haut.
                             </div>
                           </li>
                         </ul>
