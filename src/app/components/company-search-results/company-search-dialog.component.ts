@@ -15,7 +15,7 @@ export class CompanySearchDialogDirective {
   constructor(public dialog: MatDialog) {
   }
 
-  @Input() appCompanySearchDialog: boolean;
+  @Input() appCompanySearchDialog = true;
 
   @Output() companySelected = new EventEmitter<CompanySearchResult>();
 
@@ -32,23 +32,21 @@ export class CompanySearchDialogDirective {
     <h2 mat-dialog-title>Rechercher une entreprise</h2>
 
     <mat-form-field class="d-block">
-      <mat-label>SIREN/SIRET</mat-label>
+      <mat-label>SIREN, SIRET ou RCS</mat-label>
       <input matInput [formControl]="identityCtrl">
       <button matSuffix mat-icon-button (click)="clear()">
         <mat-icon>clear</mat-icon>
       </button>
-      <mat-error *ngIf="identityCtrl.invalid && (identityCtrl.dirty || identityCtrl.touched)">
-        Numéro de SIREN ou SIRET invalide (respectivement 9 ou 14 chiffres)
-      </mat-error>
-      <mat-error *ngIf="!results && loadingError">
-        Une erreur technique s'est produite
-      </mat-error>
     </mat-form-field>
 
+    <mat-error *ngIf="results?.length === 0">
+      Aucun établissement trouvé
+    </mat-error>
+    <mat-error *ngIf="!results && loadingError">
+      Une erreur technique s'est produite
+    </mat-error>
+
     <mat-dialog-content *ngIf="results">
-      <div *ngIf="!results.length">
-        Aucun établissement trouvé
-      </div>
       <app-company-search-results
         *ngIf="results.length" [companySearchResults]="results"
         (select)="onSelect($event)">
@@ -76,13 +74,13 @@ export class CompanySearchDialogComponent {
 
   @Output() companySelected = new EventEmitter<CompanySearchResult>();
 
-  results: CompanySearchResult[];
+  results?: CompanySearchResult[];
 
   loadingError = false;
 
   loading = false;
 
-  identityCtrl: FormControl = this.formBuilder.control('', [Validators.required, Validators.pattern(/^(\d{9}|\d{14})$/)]);
+  identityCtrl: FormControl = this.formBuilder.control('', [Validators.required]);
 
   onSelect = ($event: CompanySearchResult) => {
     setTimeout(() => {

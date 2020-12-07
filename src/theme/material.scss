@@ -93,3 +93,9 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   margin-top: spacing(2) !important;
   margin-right: spacing(-2) !important;
 }
+
+.mat-raised-button.mat-primary[disabled] {
+  opacity: 0.65;
+  background: $primary;
+  color: white;
+}

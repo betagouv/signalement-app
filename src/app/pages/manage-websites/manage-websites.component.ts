@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { WebsiteService } from '../../services/website.service';
-import { ApiWebsite, ApiWebsiteKind, ApiWebsiteWithCompany } from '../../api-sdk/model/ApiWebsite';
+import { ApiWebsiteKind, ApiWebsiteWithCompany } from '../../api-sdk/model/ApiWebsite';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { BtnState } from '../../components/btn/btn.component';
 import { CompanySearchResult } from '../../model/Company';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Id } from '../../api-sdk/model/Common';
 import { Index } from '../../model/Common';
@@ -61,6 +60,7 @@ interface Form {
             <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let _" class="text-right">
               <button
+                class="align-middle"
                 app-btn icon="check_circle_outline"
                 [loading]="this.websiteService.updating(_.id)"
                 [error]="this.websiteService.updateError(_.id)"
@@ -69,7 +69,7 @@ interface Form {
                 {{_.kind === websitesKind.DEFAULT ? 'Validé' : 'Valider'}}
               </button>
 
-              <button mat-icon-button color="primary"
+              <button mat-icon-button color="primary" class="align-middle"
                       (click)="remove(_.id)"
                       [appLoading]="websiteService.removing(_.id)">
                 <mat-icon>delete</mat-icon>
@@ -190,30 +190,21 @@ export class ManageWebsitesComponent implements OnInit {
     };
     const alreadyValidated = this.getAlreadyValidatedWebsite(website.host);
     if (website.kind === ApiWebsiteKind.PENDING && !!alreadyValidated) {
-      const ref = this.dialog.open(ConfirmDialogComponent).componentInstance;
-      ref.title = 'Remplacer le site web assigné ?';
-      ref.content = `
-        L'entreprise <b>${alreadyValidated.company.name}</b> est déjà assginée au site <b>${website.host}</b>.<br/>
-        L'entreprise <b>${website.company.name}</b> sera assignée à la place.
-      `;
-      ref.confirmed = new EventEmitter<void>();
-      ref.confirmed.subscribe(toggle);
+      this.openDialog(alreadyValidated, website).subscribe(toggle);
     } else {
       toggle();
     }
   };
 
-  getButtonState = (website: ApiWebsite): BtnState => {
-    if (this.websiteService.updating(website.id)) {
-      return 'loading';
-    }
-    if (this.websiteService.updateError(website.id)) {
-      return 'error';
-    }
-    if (website.kind === ApiWebsiteKind.DEFAULT) {
-      return 'success';
-    }
-    return 'default';
+  private openDialog = (oldWebsite: ApiWebsiteWithCompany, newWebsite: ApiWebsiteWithCompany): Observable<void> => {
+    const ref = this.dialog.open(ConfirmDialogComponent, { width: '440px', }).componentInstance;
+    ref.title = 'Remplacer le site web assigné ?';
+    ref.content = `
+      L'entreprise <b>${oldWebsite.company.name}</b> est déjà assginée au site <b>${newWebsite.host}</b>.<br/>
+      L'entreprise <b>${newWebsite.company.name}</b> sera assignée à la place.
+    `;
+    ref.confirmed = new EventEmitter<void>();
+    return ref.confirmed;
   };
 
   updateCompany = (website: ApiWebsiteWithCompany, $event: CompanySearchResult): void => {
