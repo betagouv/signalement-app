@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { WebsiteService } from '../../services/website.service';
 import { ApiWebsiteKind, ApiWebsiteWithCompany } from '../../api-sdk/model/ApiWebsite';
 import { MatTableDataSource } from '@angular/material/table';
@@ -42,22 +42,22 @@ interface Form {
 
         <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
           <ng-container matColumnDef="creationDate">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let _">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-date">Date</th>
+            <td mat-cell *matCellDef="let _" class="td-date">
               {{_.creationDate | date}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="host">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef>Host</th>
-            <td mat-cell *matCellDef="let _">
+            <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Host</th>
+            <td class="td-host" mat-cell *matCellDef="let _">
               <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="kind">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let _" class="text-right">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-actions"></th>
+            <td mat-cell *matCellDef="let _" class="td-actions">
               <button
                 class="align-middle"
                 app-btn icon="check_circle_outline"
@@ -86,7 +86,7 @@ interface Form {
                 [matTooltip]="websiteService.updateCompanyError(_.id) && 'L\\'entreprise est déjà associée à cette URL'"
                 appCompanySearchDialog (companySelected)="updateCompany(_, $event)"
               >
-                <span class="font-weight-bold">{{_.company?.name}}</span>
+                <span class="company-name">{{_.company?.name}}</span>
                 &nbsp;
                 <span class="siret">{{_.company?.siret}}</span>
               </button>
