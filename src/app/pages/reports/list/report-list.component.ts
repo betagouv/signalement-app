@@ -87,8 +87,11 @@ export class ReportListComponent implements OnInit {
   private getQueryString = (): { [key in keyof ReportFilter]: any } => {
     const qs = this.activatedRoute.snapshot.queryParams;
     const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+    const wrapInArrayIfNot = (value: string[] | string) => Array.isArray(value) ? value : [value];
+    const multiSelectProperties: (keyof ReportFilter)[] = ['tags', 'departments'];
     return {
-      ...this.activatedRoute.snapshot.queryParams,
+      ...qs,
+      ...(multiSelectProperties.reduce((acc, _) => ({ ...acc, [_]: wrapInArrayIfNot(qs[_]) }), {})),
       hasCompany: parseBooleanOption(qs.hasCompany),
       period: (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])],
     };
