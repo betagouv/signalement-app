@@ -1,3 +1,5 @@
+@import "src/theme/variables";
+
 @function generateCustomPalette($color) {
   @return (
     50: lighten($color, 45),
@@ -40,13 +42,13 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
 
 @include mat-core(mat-typography-config(
   $font-family: '"Source Sans Pro", "Helvetica Neue", sans-serif',
-  $title: mat-typography-level(1.25rem, 32px, 500),
+  $title: mat-typography-level(1.25rem, 32px, 700),
   $subheading-2: mat-typography-level(1.125rem, 30px, 400),
   $subheading-1: mat-typography-level(1.1rem, 26px, 400),
-  $body-2: mat-typography-level(1rem, 26px, 500),
+  $body-2: mat-typography-level(1rem, 26px, 700),
   $body-1: mat-typography-level(1rem, 22px, 400),
   $caption: mat-typography-level(0.875rem, 22px, 400),
-  $button: mat-typography-level(1rem, 16px, 500),
+  $button: mat-typography-level(1rem, 16px, 700),
 ));
 
 .mat-cell:not(:first-of-type),
@@ -77,4 +79,23 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
 .mat-option-dense {
   height: 38px !important;
   font-size: 1rem !important;
+}
+
+.mat-dialog-container {
+  position: relative;
+}
+
+.mat-dialog-title {
+  margin-bottom: spacing(1) !important;
+}
+
+.mat-dialog-actions {
+  margin-top: spacing(2) !important;
+  margin-right: spacing(-2) !important;
+}
+
+.mat-raised-button.mat-primary[disabled] {
+  opacity: 0.65;
+  background: $primary;
+  color: white;
 }

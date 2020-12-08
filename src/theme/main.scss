@@ -1,4 +1,7 @@
 @import "variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "material-design-icons";
+@import "material";
 @import "body";
 @import "buttons";
 @import "datepicker";
@@ -10,8 +13,5 @@
 @import "table";
 @import "typography";
 @import "utils";
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "material-design-icons";
-@import "material";
 @import "reset";
 

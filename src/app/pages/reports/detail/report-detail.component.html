@@ -112,11 +112,14 @@
               <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
                 <div class="text-primary font-weight-bold pt-3">
                   Entreprise
-                  <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
-                     (click)="openModal(companySearch)"
-                     *appPermission="permissions.updateReport">
+                  <mat-icon
+                    *appPermission="permissions.updateReport"
+                    appCompanySearchDialog
+                    (companySelected)="changeCompany($event)"
+                    class="md-18 pl-1 pb-1 pointer" aria-hidden="true" color="primary"
+                    title="Détail du signalement">
                     edit
-                  </i>
+                  </mat-icon>
                 </div>
                 <div>
                   <strong>{{report.company?.siret}}</strong>
@@ -134,44 +137,6 @@
                   </div>
                 </ng-container>
 
-                <ng-template #companySearch>
-                  <div class="modal-body text-center">
-                    <form [formGroup]="companyIdentityForm" (submit)="submitCompanySiretForm()" id="companyForm">
-                      <input [formControl]="identityCtrl" placeholder="SIRET de l'entreprise" id="identity"/>
-
-                      <div class="notification error" *ngIf="!companySearchByIdentityResults && loadingError">
-                        Une erreur technique s'est produite
-                      </div>
-
-                      <hr />
-                      <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companyIdentityForm.invalid">
-                        Rechercher
-                      </button>
-                    </form>
-                    <div *ngIf="companySearchByIdentityResults">
-                      <hr />
-                      <div *ngIf="!companySearchByIdentityResults.length">
-                        Aucun établissement trouvé
-                      </div>
-
-                      <div *ngIf="companySearchByIdentityResults.length">
-                        <app-company-search-results [companySearchResults]="companySearchByIdentityResults" (select)="seletedCompany = $event"></app-company-search-results>
-
-                        <ng-container *ngIf="seletedCompany">
-                          <hr />
-                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                          &nbsp;
-                          <button type="button" class="btn btn-primary" (click)="changeCompany(seletedCompany)">Valider</button>
-                        </ng-container>
-                      </div>
-
-                      <div class="notification error" *ngIf="loadingError">
-                        Une erreur technique s'est produite
-                      </div>
-
-                    </div>
-                  </div>
-                </ng-template>
               </ng-container>
 
               <ng-container *appRole="[roles.Pro]">
