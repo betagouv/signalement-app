@@ -1,11 +1,10 @@
 @import 'src/theme/variables';
 @import '~@angular/material/theming';
 
-.search-input {
+:host {
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 2px spacing(1) 3px spacing(2);
-  border-bottom: 1px solid $theme-divider;
   position: relative;
 }
 
@@ -51,20 +50,6 @@
     color: $theme-color-text-secondary;
     margin: 0;
     white-space: nowrap;
-  }
-}
-
-.form-control {
-  @extend %input-invisible;
-  border-radius: 0;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid $theme-divider;
-  width: 100%;
-  padding: 2px 0 2px 0;
-  height: 30px;
-
-  &:focus {
-    border-bottom-color: $primary;
   }
 }
 

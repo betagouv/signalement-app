@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { DetailInputValue, DraftReport, Step } from '../model/Report';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UploadedFile } from '../model/UploadedFile';
-import { Website } from '../model/Company';
+import { WebsiteURL } from '../model/Company';
 import { switchMap, take, tap } from 'rxjs/operators';
 
 export const ReportStorageKey = 'ReportSignalConso';
@@ -32,7 +32,7 @@ export class ReportStorageService {
             draftReport.uploadedFiles = draftReport.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
           }
           if (draftReport.draftCompany && draftReport.draftCompany.website) {
-            draftReport.draftCompany.website = Object.assign(new Website(), draftReport.draftCompany.website);
+            draftReport.draftCompany.website = Object.assign(new WebsiteURL(), draftReport.draftCompany.website);
           }
           this.reportInProgessSource.next(draftReport);
         }

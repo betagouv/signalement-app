@@ -64,7 +64,7 @@ $theme-color-text-secondary: rgba(black, 0.54);
   @return $multiplier * $padding;
 }
 
-%input-invisible {
+@mixin input-invisible {
   border: none;
   background: none;
   box-shadow: none;

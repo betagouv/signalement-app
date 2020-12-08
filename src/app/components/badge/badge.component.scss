@@ -8,7 +8,9 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.75rem;
-  display: inline-block;
+  display: inline-flex;
+  height: 24px;
+  align-items: center;
 
   &.-error {
     background: transparentize($theme-error-border, .9);
