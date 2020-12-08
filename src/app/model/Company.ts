@@ -5,7 +5,7 @@ export interface DraftCompany {
   address?: string;
   postalCode?: string;
   country?: string;
-  website?: Website;
+  website?: WebsiteURL;
   activityCode?: string;
 }
 
@@ -50,7 +50,7 @@ export interface CompanyToActivate {
   tokenCreation: Date;
 }
 
-export class Website {
+export class WebsiteURL {
   url: string;
 
   get hostname() {

@@ -11,6 +11,9 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule, MatPseudoCheckboxModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Injectable()
 export class MatPaginatorIntlFr extends MatPaginatorIntl {
@@ -37,6 +40,9 @@ export class MatPaginatorIntlFr extends MatPaginatorIntl {
     MatRippleModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
+    MatSortModule,
+    MatDialogModule,
   ],
   providers: [
     MatDatepickerModule,

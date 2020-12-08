@@ -12,13 +12,14 @@ import { ReportFilter } from '../../../../model/ReportFilter';
 @Component({
   selector: 'app-report-list-search',
   template: `
-    <div class="search-input" [formGroup]="searchForm">
-      <app-select-departments placeholder="Département(s)" formControlName="departments" id="rls-departments"
-                              class="form-control"></app-select-departments>
+    <ng-container [formGroup]="searchForm">
+      <app-select-departments
+        placeholder="Département(s)" formControlName="departments" id="rls-departments"
+        class="form-control form-control-material">
+      </app-select-departments>
       &nbsp;&nbsp;
       <input
-        id="rls-period"
-        class="form-control"
+        class="form-control form-control-material"
         formControlName="period"
         bsDaterangepicker
         autocomplete="off"
@@ -45,19 +46,19 @@ import { ReportFilter } from '../../../../model/ReportFilter';
           <tr>
             <td><label for="rls-siret">SIRET</label></td>
             <td>
-              <input formControlName="siret" id="rls-siret" class="form-control">
+              <input formControlName="siret" id="rls-siret" class="form-control form-control-material">
             </td>
           </tr>
           <tr>
             <td><label for="rls-email">Email conso.</label></td>
             <td>
-              <input formControlName="email" id="rls-email" class="form-control">
+              <input formControlName="email" id="rls-email" class="form-control form-control-material">
             </td>
           </tr>
           <tr>
             <td><label for="rls-statut">Statut</label></td>
             <td>
-              <mat-select formControlName="status" id="rls-statut" class="form-control">
+              <mat-select formControlName="status" id="rls-statut" class="form-control form-control-material">
                 <mat-select-trigger>{{searchForm.get('status').value}}</mat-select-trigger>
                 <mat-option selected>Tous les statuts</mat-option>
                 <mat-option *ngFor="let _ of statusList" [value]="_" class="mat-option-dense">
@@ -70,16 +71,17 @@ import { ReportFilter } from '../../../../model/ReportFilter';
             <td>
               <label class="align-middle" for="rls-details">Mots-clés</label>
               &nbsp;
-              <mat-icon class="align-middle txt-disabled" matTooltip="Recherche dans les colonnes problème et description">help_outline</mat-icon>
+              <mat-icon class="align-middle txt-disabled" matTooltip="Recherche dans les colonnes problème et description">help_outline
+              </mat-icon>
             </td>
             <td>
-              <input id="details" class="form-control" formControlName="details">
+              <input id="details" class="form-control form-control-material" formControlName="details">
             </td>
           </tr>
           <tr>
             <td><label>Tags</label></td>
             <td>
-              <mat-select formControlName="tags" class="form-control" multiple>
+              <mat-select formControlName="tags" class="form-control form-control-material" multiple>
                 <mat-option *ngFor="let _ of tags" [value]="_">{{_}}</mat-option>
               </mat-select>
             </td>
@@ -89,7 +91,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
               <label for="rls-category">Catégorie</label>
             </td>
             <td>
-              <mat-select formControlName="category" id="rls-category" class="form-control">
+              <mat-select formControlName="category" id="rls-category" class="form-control form-control-material">
                 <mat-option>Toutes les catégories</mat-option>
                 <mat-option *ngFor="let _ of categories" [value]="_">{{_}}</mat-option>
               </mat-select>
@@ -112,7 +114,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
           <button color="primary" mat-raised-button (click)="search()">Rechercher</button>
         </div>
       </div>
-    </div>
+    </ng-container>
   `,
   styleUrls: ['./report-list-filters.component.scss'],
   animations: [

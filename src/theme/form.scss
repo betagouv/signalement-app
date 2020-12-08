@@ -38,7 +38,7 @@ form {
 }
 
 .input-invisible {
-  @extend %input-invisible;
+  @include input-invisible;
 }
 
 input,
@@ -58,6 +58,21 @@ select.form-control {
   background: #fff;
   vertical-align: middle;
   position: relative;
+}
+
+input.form-control.form-control-material,
+.form-control.form-control-material {
+  @include input-invisible;
+  border-radius: 0;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid $theme-divider;
+  width: 100%;
+  padding: 2px 0 2px 0;
+  height: 30px;
+
+  &:focus {
+    border-bottom-color: $primary;
+  }
 }
 
 input:focus,

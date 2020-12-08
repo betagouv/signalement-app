@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { map } from 'rxjs/operators';
+import { ApiSdk } from '../api-sdk/ApiSdk';
+import { Observable } from 'rxjs';
+import { ApiClient } from '../api-sdk/ApiClient';
 
 export const AuthUserStorageKey = 'AuthUserSignalConso';
 export const TokenInfoStorageKey = 'TokenInfoSignalConso';
@@ -34,12 +37,19 @@ export class ServiceUtils {
       map(authUser => {
         const httpHeaders = this.getHttpHeaders();
         if (authUser) {
-          Object.assign(httpHeaders.headers, { 'X-Auth-Token': authUser.token});
+          Object.assign(httpHeaders.headers, { 'X-Auth-Token': authUser.token });
         }
         return httpHeaders;
       })
     );
   }
+
+  getReportApiSdk = (): Observable<ApiSdk> => {
+    return this.getAuthHeaders().pipe(map(headers => {
+      const httpClient = new ApiClient({ headers: headers.headers, baseUrl: environment[Api.Report] + '/api' });
+      return new ApiSdk(httpClient);
+    }));
+  };
 
   getAuthHttpParam() {
     return this.localStorage.getItem(AuthUserStorageKey).pipe(

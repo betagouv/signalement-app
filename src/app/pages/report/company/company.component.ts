@@ -7,7 +7,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
-import { CompanySearchResult, DraftCompany, Website, WebsiteKinds } from '../../../model/Company';
+import { CompanySearchResult, DraftCompany, WebsiteURL, WebsiteKinds } from '../../../model/Company';
 import { isPlatformBrowser } from '@angular/common';
 import Utils from '../../../utils';
 import { RendererService } from '../../../services/renderer.service';
@@ -259,7 +259,7 @@ export class CompanyComponent implements OnInit {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
     this.draftReport.draftCompany = draftCompany || this.selectedCompany;
     if (this.urlCtrl) {
-      this.draftReport.draftCompany.website = Object.assign(new Website(), { url: this.urlCtrl.value });
+      this.draftReport.draftCompany.website = Object.assign(new WebsiteURL(), { url: this.urlCtrl.value });
     }
     this.draftReport.vendor = this.vendorCtrl?.value;
     this.changeDraftCompany = false;
