@@ -303,19 +303,24 @@
                     </label>
 
                     <div class="note mb-1" id="siret-description">
-                      SIRET, SIREN et RCS sont des identifiants de l'entreprise.
-                      <br/>Le SIRET est composé de 14 chiffres, le SIREN est composé de 9 chiffres.
-                      <br/>Le RCS est composé de :
-                        <ul>
-                          <li>la mention "RCS"</li>
-                          <li>le nom de la ville d'immatriculation</li>
-                          <li>une lettre (A ou B)</li>
-                          <li>le numéro SIREN</li>
-                        </ul>
-                      <br/>
+                      <a data-toggle="collapse" href="#collapseWhat" id="collapseWhat-toggle" aria-expanded="false" aria-controls="collapseWhat">
+                        A quoi correspondent ces identifiants ?
+                      </a>
+                      <div class="collapse" id="collapseWhat" aria-labelledby="collapseWhat-toggle" role="region">
+                        SIRET, SIREN et RCS sont des identifiants de l'entreprise.
+                        <br/>Le SIRET est composé de 14 chiffres, le SIREN est composé de 9 chiffres.
+                        <br/>Le RCS est composé de :
+                          <ul>
+                            <li>la mention "RCS"</li>
+                            <li>le nom de la ville d'immatriculation</li>
+                            <li>une lettre (A ou B)</li>
+                            <li>le numéro SIREN</li>
+                          </ul>
+                        <br/>
+                      </div>
 
 
-                      <ng-container *ngIf="this.draftReport.companyKind === companyKinds.SIRET">
+                      <div *ngIf="this.draftReport.companyKind === companyKinds.SIRET">
 
                         <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
                           Comment retrouver ces identifiants ?
@@ -387,9 +392,9 @@
                             </div>
                           </li>
                         </ul>
-                      </ng-container>
+                      </div>
 
-                      <ng-container *ngIf="this.draftReport.companyKind === companyKinds.WEBSITE">
+                      <div *ngIf="this.draftReport.companyKind === companyKinds.WEBSITE">
                         <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
                           Comment retrouver ces identifiants ?
                         </a>
@@ -462,7 +467,7 @@
                             </div>
                           </li>
                         </ul>
-                      </ng-container>
+                      </div>
                     </div>
                     <input [formControl]="identityCtrl" type="text" id="identity" placeholder="Ex: 83350861700010" aria-describedby="siret-description">
                   </div>

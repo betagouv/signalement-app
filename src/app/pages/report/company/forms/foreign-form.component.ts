@@ -28,7 +28,7 @@ export class ForeignFormComponent implements OnInit {
   isForeignCtrl: FormControl;
   nameCtrl: FormControl;
   countryCtrl: FormControl;
-  countries = countries.map(country => country.name).filter(name => name !== 'France');
+  countries: string[] = countries.map(country => country.name).filter(name => name !== 'France');
 
   showErrors: boolean;
 
@@ -63,6 +63,12 @@ export class ForeignFormComponent implements OnInit {
       } else {
         this.complete.emit({});
       }
+    }
+  }
+
+  countryTypeaheadOnBlur() {
+    if (this.countries.indexOf(this.countryCtrl.value) === -1) {
+      this.countryCtrl.reset();
     }
   }
 

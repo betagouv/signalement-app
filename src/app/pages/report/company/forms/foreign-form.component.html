@@ -43,9 +43,24 @@
         <label for="countryInput" [class]="foreignForm.hasError('required') && countryCtrl.value === undefined ? 'error' : ''">
           Pays (obligatoire)
         </label>
+        <div class="note mb-1">
+          <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
+            Comment retrouver le pays d'une entreprise ?
+          </a>
+          <div class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
+            Rendez-vous sur le site internet de l'entreprise, dans l'une des rubriques suivantes :
+            <ul>
+              <li>les mentions légales</li>
+              <li>les Conditions Générales de Vente (CGV)</li>
+              <li>les conditions d'utilisation</li>
+            </ul>
+            Dans la plupart des cas, vous trouverez l'accès à ces rubriques tout en bas de la page d'accueil du site.
+            <br/> L'adresse de l'entreprise devrait être indiquée dans l'une de ces rubriques.
+          </div>
+        </div>
         <div class="row">
           <div class="col-12 col-sm-6">
-            <input type="text" class="form-control" [formControl]="countryCtrl" [typeahead]="countries" id="countryInput" placeholder="ex : Italie"/>
+            <input type="text" class="form-control" [formControl]="countryCtrl" [typeahead]="countries" (typeaheadOnBlur)="countryTypeaheadOnBlur()" id="countryInput" placeholder="ex : Italie"/>
           </div>
         </div>
       </div>
@@ -65,25 +80,10 @@
       Continuer
     </button>
   </ng-container>
-  <div class="note mb-1">
-    <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
-      Comment retrouver le pays d'une entreprise ?
-    </a>
-    <div class="collapse" id="collapseHow">
-      Rendez-vous sur le site internet de l'entreprise, dans l'une des rubriques suivantes : 
-      <ul>
-        <li>les mentions légales</li>
-        <li>les Conditions Générales de Vente (CGV)</li>
-        <li>les conditions d'utilisation</li>
-      </ul>
-      Dans la plupart des cas, vous trouverez l'accès à ces rubriques tout en bas de la page d'accueil du site.
-      <br/> L'adresse de l'entreprise devrait être indiquée dans l'une de ces rubriques. 
-    </div>
-  </div>
   <div class="notification info">
     Si vous ne parvenez pas à identifier l'entreprise, vous pouvez continuer votre signalement.
     <br />Il ne sera pas transmis à l'entreprise qui gère le site internet, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
-    <br />Si l'entreprise est étrangère, nous vous indiquerons à la fin de votre signalement la marche à suivre. 
+    <br />Si l'entreprise est étrangère, nous vous indiquerons à la fin de votre signalement la marche à suivre.
     <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
   </div>
 </form>
