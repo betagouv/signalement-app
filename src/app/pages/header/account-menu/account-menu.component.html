@@ -33,6 +33,7 @@
     <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><a [routerLink]="['suivi-des-signalements', user.roleUrlParam]" class="dropdown-item">Suivi des signalements</a></li>
     <li role="menuitem" *appRole="[roles.Admin, roles.DGCCRF];"><a [routerLink]="['entreprises']" class="dropdown-item">Suivi des entreprises</a></li>
     <li role="menuitem" *appRole="[roles.Pro];"><a [routerLink]="['suivi-des-signalements', user.roleUrlParam]" class="dropdown-item">Suivi de mes signalements</a></li>
+    <li role="menuitem" *appRole="[roles.Admin];"><a [routerLink]="['moderation-url-entreprises']" class="dropdown-item">Modération des sites webs</a></li>
     <li role="menuitem"><a [routerLink]="['mes-telechargements']" class="dropdown-item">Mes exports</a></li>
 
     <ng-container *appRole="[roles.Admin]">

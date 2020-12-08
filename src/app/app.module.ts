@@ -4,7 +4,6 @@ import { TransferHttpCacheModule } from '@nguniversal/common';
 import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
@@ -32,6 +31,7 @@ import { SubscriptionModule } from './pages/subscription/subscription.module';
 import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 import * as echarts from 'echarts';
+import { ManageWebsitesModule } from './pages/manage-websites/manage-websites.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -79,19 +79,20 @@ class ErrorLogger extends ErrorHandler {
           anchorScrolling: 'enabled',
           initialNavigation: 'enabled'
         }),
-        HeaderModule,
-        ReportModule,
-        ReportsModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        AccountModule,
-        CompaniesModule,
-        SecuredModule,
-        SubscriptionModule,
-        StaticModule,
-        BsDropdownModule.forRoot(),
-        TooltipModule,
-        Angulartics2Module.forRoot(),
+      HeaderModule,
+      ReportModule,
+      ReportsModule,
+      ManageWebsitesModule,
+      BrowserModule,
+      BrowserAnimationsModule,
+      AccountModule,
+      CompaniesModule,
+      SecuredModule,
+      SubscriptionModule,
+      StaticModule,
+      BsDropdownModule.forRoot(),
+      TooltipModule,
+      Angulartics2Module.forRoot(),
         ComponentsModule,
         AppRoleModule,
         AppPermissionModule,
