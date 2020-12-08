@@ -1,5 +1,5 @@
 import { Company } from '../../model/Company';
-import { Id } from './Common';
+import { Entity, Id } from './Common';
 
 export enum ApiWebsiteKind {
   DEFAULT = 'DEFAULT',
@@ -8,8 +8,7 @@ export enum ApiWebsiteKind {
   EXCLUSIVE = 'EXCLUSIVE',
 }
 
-export interface ApiWebsite {
-  id: Id;
+export interface ApiWebsite extends Entity {
   creationDate: Date;
   host: string;
   companyId: Id;
