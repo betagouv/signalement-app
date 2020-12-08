@@ -67,7 +67,7 @@ export class ForeignFormComponent implements OnInit {
   }
 
   countryTypeaheadOnBlur() {
-    if (this.countries.indexOf(name => name === this.countryCtrl.value) === -1) {
+    if (this.countries.indexOf(this.countryCtrl.value) === -1) {
       this.countryCtrl.reset();
     }
   }
