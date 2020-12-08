@@ -20,7 +20,6 @@ interface Form {
 
 @Component({
   selector: 'app-manage-websites',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-banner title="Modération des site webs"></app-banner>
 
