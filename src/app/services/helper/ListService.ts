@@ -8,7 +8,7 @@ export abstract class ListService<T extends Entity> {
 
   constructor(
     protected utils: ServiceUtils,
-    protected listMethod: () => Observable<T[]>) {
+    protected listMethod: (...args: any[]) => Observable<T[]>) {
   }
 
   protected source = new BehaviorSubject<T[] | undefined>(undefined);
@@ -23,19 +23,20 @@ export abstract class ListService<T extends Entity> {
     return this._fetchError;
   }
 
-  readonly list = ({ force = true, clean = true }: {force?: boolean, clean?: boolean} = {}): Observable<T[]> => {
+  readonly list = ({ force = true, clean = true }: {force?: boolean, clean?: boolean} = {}, ...args: any[]): Observable<T[]> => {
     if (this.source.value && !force) {
       return this.source.asObservable() as Observable<T[]>;
     }
     if (clean) {
       this.source.next(undefined);
     }
-    return this.listMethod().pipe(
+    return new Observable(_ => _.next()).pipe(
       map(_ => {
         this._fetching = true;
         this._fetchError = undefined;
         return _;
       }),
+      mergeMap(() => this.listMethod(...args)),
       mergeMap((websites: T[]) => {
         this._fetching = false;
         this.source.next(websites);

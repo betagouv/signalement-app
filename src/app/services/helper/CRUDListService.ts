@@ -7,7 +7,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ListService } from './ListService';
 
 interface CRUDListMethods<T extends Entity, C = Partial<T>, U = Partial<T>> {
-  list: () => Observable<T[]>;
+  list: (...args: any[]) => Observable<T[]>;
   create?: (c: C) => Observable<T>;
   update?: (id: Id, u: U) => Observable<T>;
   remove?: (id: Id) => Observable<void>;
