@@ -26,8 +26,8 @@ export class ReportListComponent implements OnInit {
 
   readonly defaultPageSize = 10;
 
-  readonly formControlNamesWithAutomaticRefresh = [
-    'countries',
+  readonly formControlNamesWithAutomaticRefresh: (keyof ReportFilter)[] = [
+    'companyCountries',
     'departments',
     'period',
   ];
@@ -60,7 +60,7 @@ export class ReportListComponent implements OnInit {
     const initialValues: ReportFilter = {
       tags: [],
       departments: [],
-      countries: [],
+      companyCountries: [],
       details: undefined,
       period: undefined,
       siret: undefined,
@@ -80,7 +80,7 @@ export class ReportListComponent implements OnInit {
       this.buildForm(formValues);
     } catch (e) {
       // Prevent error thrown by Angular when queryParams are wrong
-      console.error('[ReportListComponent] Cannot build form from querystring', e);
+      console.error('[ReportListComponent] Cannot build form from querystring', e, formValues);
       this.buildForm(initialValues);
     }
     this.search();

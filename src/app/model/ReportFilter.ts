@@ -9,7 +9,7 @@ export interface ReportFilter {
    */
   readonly period?: string[];
   readonly tags?: Tag[];
-  readonly countries?: string[];
+  readonly companyCountries?: string[];
   start?: string;
   end?: string;
   email?: string;

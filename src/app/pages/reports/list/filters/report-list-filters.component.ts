@@ -14,7 +14,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
     <ng-container [formGroup]="searchForm">
 
       <input class="form-control form-control-material"
-             formControlName="countries"
+             formControlName="companyCountries"
              appCountryDialog
              readonly
       />
