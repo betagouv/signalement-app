@@ -25,12 +25,12 @@ const initialForm: Form = {
     <h2 mat-dialog-title>Selectionner des pays</h2>
 
     <ng-container [formGroup]="form">
-      <div class="filters">
-        <input matInput type="text" formControlName="name" placeholder="Rechercher..." class="input-invisible">
-        <button mat-button matSuffix mat-icon-button (click)="filterName=''">
+      <mat-form-field floatLabel="never" class="fullwidth">
+        <input matInput type="text" formControlName="name" placeholder="Rechercher...">
+        <button mat-button matSuffix mat-icon-button (click)="filterName = ''">
           <mat-icon>close</mat-icon>
         </button>
-      </div>
+      </mat-form-field>
 
       <mat-radio-group class="radio-group" formControlName="group">
         <mat-radio-button value="all">Tous</mat-radio-button>

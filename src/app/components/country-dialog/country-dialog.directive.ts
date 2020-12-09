@@ -1,7 +1,7 @@
 import { Directive, ElementRef, forwardRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CountryDialogComponent } from './country-dialog.component';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
 @Directive({
@@ -15,7 +15,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     multi: true
   }],
 })
-export class CountryDialogDirective {
+export class CountryDialogDirective implements ControlValueAccessor {
 
   constructor(private el: ElementRef, public dialog: MatDialog) {
   }
@@ -30,16 +30,6 @@ export class CountryDialogDirective {
 
   private innerValue: string[];
 
-  public onChange: any = (_) => {
-  };
-
-  public onTouched: any = () => {
-  };
-
-  get value(): string[] {
-    return this.innerValue;
-  }
-
   set value(countries: string[]) {
     if (countries !== this.innerValue) {
       this.innerValue = countries;
@@ -53,13 +43,15 @@ export class CountryDialogDirective {
     this.innerValue = countries;
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
+  registerOnChange = (fn: any) => this.onChange = fn;
 
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
+  registerOnTouched = (fn: any) => this.onTouched = fn;
+
+  public onChange: any = (_: string[]): void => {
+  };
+
+  public onTouched: any = (): void => {
+  };
 
   private manuallyReflectChangeOnHostInput = (countries?: string[]) => {
     // I expected it to be automatically done by formControlName directive,
