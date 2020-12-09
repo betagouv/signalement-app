@@ -27,6 +27,7 @@ export class ReportListComponent implements OnInit {
   readonly defaultPageSize = 10;
 
   readonly formControlNamesWithAutomaticRefresh = [
+    'countries',
     'departments',
     'period',
   ];
@@ -59,6 +60,7 @@ export class ReportListComponent implements OnInit {
     const initialValues: ReportFilter = {
       tags: [],
       departments: [],
+      countries: [],
       details: undefined,
       period: undefined,
       siret: undefined,
