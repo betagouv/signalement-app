@@ -6,7 +6,7 @@ import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCo
 import { Id } from '../api-sdk/model/Common';
 import { ApiError } from '../api-sdk/ApiClient';
 import { Index } from '../model/Common';
-import { CRUDListService } from './CRUDListService';
+import { CRUDListService } from './helper/CRUDListService';
 
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,13 @@
-import { Entity, Id } from '../api-sdk/model/Common';
+import { Entity, Id } from '../../api-sdk/model/Common';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { ServiceUtils } from './service.utils';
-import { ApiError } from '../api-sdk/ApiClient';
-import { Index } from '../model/Common';
+import { ServiceUtils } from '../service.utils';
+import { ApiError } from '../../api-sdk/ApiClient';
+import { Index } from '../../model/Common';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { ListService } from './ListService';
 
 interface CRUDListMethods<T extends Entity, C = Partial<T>, U = Partial<T>> {
-  list?: () => Observable<T[]>;
+  list: () => Observable<T[]>;
   create?: (c: C) => Observable<T>;
   update?: (id: Id, u: U) => Observable<T>;
   remove?: (id: Id) => Observable<void>;
@@ -18,11 +19,12 @@ export class CRUDListServiceNotImplementedError extends Error {
   }
 }
 
-export abstract class CRUDListService<T extends Entity, C, U> {
+export abstract class CRUDListService<T extends Entity, C, U> extends ListService<T> {
 
   constructor(
     protected utils: ServiceUtils,
     protected methods: CRUDListMethods<T, C, U>) {
+    super(utils, methods.list);
   }
 
   protected source = new BehaviorSubject<T[] | undefined>(undefined);
@@ -35,16 +37,6 @@ export abstract class CRUDListService<T extends Entity, C, U> {
   protected _creatingError?: ApiError;
   get creatingError() {
     return this._creatingError;
-  }
-
-  protected _fetching = false;
-  get fetching() {
-    return this._fetching;
-  }
-
-  protected _fetchError?: ApiError;
-  get fetchError() {
-    return this._fetchError;
   }
 
   protected _updating = new Set<string>();
@@ -78,35 +70,6 @@ export abstract class CRUDListService<T extends Entity, C, U> {
       catchError((err: ApiError) => {
         this._creating = false;
         this._creatingError = err;
-        return throwError(err);
-      }),
-    );
-  };
-
-  readonly list = ({ force = true, clean = true }: {force?: boolean, clean?: boolean} = {}): Observable<T[]> => {
-    if (!this.methods.list) {
-      throw new CRUDListServiceNotImplementedError(`list`);
-    }
-    if (this.source.value && !force) {
-      return this.source.asObservable() as Observable<T[]>;
-    }
-    if (clean) {
-      this.source.next(undefined);
-    }
-    return this.methods.list().pipe(
-      map(_ => {
-        this._fetching = true;
-        this._fetchError = undefined;
-        return _;
-      }),
-      mergeMap((websites: T[]) => {
-        this._fetching = false;
-        this.source.next(websites);
-        return this.source.asObservable() as Observable<T[]>;
-      }),
-      catchError((err: ApiError) => {
-        this._fetching = false;
-        this._fetchError = err;
         return throwError(err);
       }),
     );
