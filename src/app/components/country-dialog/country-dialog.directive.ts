@@ -21,7 +21,9 @@ export class CountryDialogDirective {
   }
 
   openDialog(): void {
-    const ref = this.dialog.open(CountryDialogComponent).componentInstance;
+    const ref = this.dialog.open(CountryDialogComponent, {
+      width: '500px',
+    }).componentInstance;
     ref.values = this.innerValue;
     ref.changed.subscribe(values => this.value = values);
   }

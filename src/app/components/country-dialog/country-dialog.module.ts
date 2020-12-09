@@ -8,8 +8,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CountryDialogComponent } from './country-dialog.component';
 import { CountryDialogDirective } from './country-dialog.directive';
 import { CountryInputComponent } from './country-input.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   exports: [
@@ -23,6 +27,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CountryInputComponent,
   ],
   imports: [
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatInputModule,
     FormsModule,
     MatCheckboxModule,
     MatDialogModule,
@@ -31,6 +38,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatIconModule,
     MatRippleModule,
+    MatDividerModule,
+    MatRadioModule,
   ],
 })
 export class CountryDialogModule {
