@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import countries from '../../../../../assets/data/countries.json';
 import { RendererService } from '../../../../services/renderer.service';
@@ -13,15 +13,16 @@ export const foreignFormValidator: ValidatorFn = (control: FormGroup): Validatio
 };
 
 @Component({
-  selector: 'app-foreign-form',
-  templateUrl: './foreign-form.component.html',
-  styleUrls: ['./foreign-form.component.scss']
+  selector: 'app-company-foreign-country',
+  templateUrl: './foreign-country.component.html',
+  styleUrls: ['./foreign-country.component.scss']
 })
-export class ForeignFormComponent implements OnInit {
+export class ForeignCountryComponent implements OnInit {
 
   @ViewChild('foreignInputs')
   private foreignInputs: ElementRef;
 
+  @Input() forceForeign;
   @Output() complete = new EventEmitter<DraftCompany>();
 
   foreignForm: FormGroup;
@@ -40,7 +41,7 @@ export class ForeignFormComponent implements OnInit {
   }
 
   initForeignForm() {
-    this.isForeignCtrl = this.formBuilder.control('', Validators.required);
+    this.isForeignCtrl = this.formBuilder.control(this.forceForeign ? true : '', Validators.required);
     this.nameCtrl = this.formBuilder.control('');
     this.countryCtrl = this.formBuilder.control('');
     this.foreignForm = this.formBuilder.group({

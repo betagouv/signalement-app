@@ -30,6 +30,19 @@ export class RendererService {
     }
   }
 
+  scrollToElementEnd($element) {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        const rect = $element.getBoundingClientRect();
+        if (isPlatformBrowser(this.platformId) && rect.bottom + 110 > window.innerHeight) {
+          jQuery('html, body').animate({
+            scrollTop: $element.offsetTop + rect.height + 110 - window.innerHeight
+          }, 1000, 'linear');
+        }
+      }, 100);
+    }
+  }
+
   getRadioContainerClass(input: any, value: any) {
     return input === value ? 'selected' : '';
   }
