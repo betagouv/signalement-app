@@ -40,62 +40,64 @@ interface Form {
         </app-panel-header>
 
 
-        <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
-          <ng-container matColumnDef="creationDate">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-date">Date</th>
-            <td mat-cell *matCellDef="let _" class="td-date">
-              {{_.creationDate | date}}
-            </td>
-          </ng-container>
+        <div class="table-overflow">
+          <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
+            <ng-container matColumnDef="creationDate">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-date">Date</th>
+              <td mat-cell *matCellDef="let _" class="td-date">
+                {{_.creationDate | date}}
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="host">
-            <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Host</th>
-            <td class="td-host" mat-cell *matCellDef="let _">
-              <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="host">
+              <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Host</th>
+              <td class="td-host" mat-cell *matCellDef="let _">
+                <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="kind">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-actions"></th>
-            <td mat-cell *matCellDef="let _" class="td-actions">
-              <button
-                class="align-middle"
-                app-btn icon="check_circle_outline"
-                [loading]="this.websiteService.updating(_.id)"
-                [error]="this.websiteService.updateError(_.id)"
-                [success]="_.kind === websitesKind.DEFAULT"
-                (click)="toggleWebsiteKind(_)">
-                {{_.kind === websitesKind.DEFAULT ? 'Validé' : 'Valider'}}
-              </button>
+            <ng-container matColumnDef="kind">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-actions"></th>
+              <td mat-cell *matCellDef="let _" class="td-actions">
+                <button
+                  class="align-middle"
+                  app-btn icon="check_circle_outline"
+                  [loading]="this.websiteService.updating(_.id)"
+                  [error]="this.websiteService.updateError(_.id)"
+                  [success]="_.kind === websitesKind.DEFAULT"
+                  (click)="toggleWebsiteKind(_)">
+                  {{_.kind === websitesKind.DEFAULT ? 'Validé' : 'Valider'}}
+                </button>
 
-              <button mat-icon-button color="primary" class="align-middle"
-                      (click)="remove(_.id)"
-                      [appLoading]="websiteService.removing(_.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
+                <button mat-icon-button color="primary" class="align-middle"
+                        (click)="remove(_.id)"
+                        [appLoading]="websiteService.removing(_.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="company">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef>Entreprise</th>
-            <td mat-cell *matCellDef="let _">
-              <button
-                app-btn icon="edit"
-                [loading]="websiteService.updatingCompany(_.id)"
-                [error]="!!websiteService.updateCompanyError(_.id)"
-                [matTooltip]="websiteService.updateCompanyError(_.id) && 'L\\'entreprise est déjà associée à cette URL'"
-                appCompanySearchDialog (companySelected)="updateCompany(_, $event)"
-              >
-                <span class="company-name">{{_.company?.name}}</span>
-                &nbsp;
-                <span class="siret">{{_.company?.siret}}</span>
-              </button>
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="company">
+              <th class="td-company" mat-sort-header mat-header-cell *matHeaderCellDef>Entreprise</th>
+              <td class="td-company" mat-cell *matCellDef="let _">
+                <button
+                  app-btn icon="edit"
+                  [loading]="websiteService.updatingCompany(_.id)"
+                  [error]="!!websiteService.updateCompanyError(_.id)"
+                  [matTooltip]="websiteService.updateCompanyError(_.id) && 'L\\'entreprise est déjà associée à cette URL'"
+                  appCompanySearchDialog (companySelected)="updateCompany(_, $event)"
+                >
+                  <span class="company-name">{{_.company?.name}}</span>
+                  &nbsp;
+                  <div (click)="$event.stopImmediatePropagation()" class="siret">{{_.company?.siret}}</div>
+                </button>
+              </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="columns"></tr>
-          <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-        </table>
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+          </table>
+        </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" pageSize="25"></mat-paginator>
       </app-panel>
     </app-page>
