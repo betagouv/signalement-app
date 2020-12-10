@@ -8,10 +8,10 @@ import { IdentificationKinds } from '../company.component';
 
 @Component({
   selector: 'app-company-search-by-name-component',
-  templateUrl: './search-by-name.component.html',
-  styleUrls: ['./search-by-name.component.scss']
+  templateUrl: './company-search-by-name.component.html',
+  styleUrls: ['./company-search-by-name.component.scss']
 })
-export class SearchByNameComponent implements OnInit {
+export class CompanySearchByNameComponent implements OnInit {
 
   @ViewChild('identResult')
   private identResult: ElementRef;

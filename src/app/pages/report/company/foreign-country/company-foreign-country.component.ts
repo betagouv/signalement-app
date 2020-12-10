@@ -14,10 +14,10 @@ export const foreignFormValidator: ValidatorFn = (control: FormGroup): Validatio
 
 @Component({
   selector: 'app-company-foreign-country',
-  templateUrl: './foreign-country.component.html',
-  styleUrls: ['./foreign-country.component.scss']
+  templateUrl: './company-foreign-country.component.html',
+  styleUrls: ['./company-foreign-country.component.scss']
 })
-export class ForeignCountryComponent implements OnInit {
+export class CompanyForeignCountryComponent implements OnInit {
 
   @ViewChild('foreignInputs')
   private foreignInputs: ElementRef;

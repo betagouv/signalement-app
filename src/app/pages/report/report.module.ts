@@ -23,9 +23,9 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { ForeignCountryComponent } from './company/foreign-country/foreign-country.component';
-import { SearchByNameComponent } from './company/search-by-name-component/search-by-name.component';
-import { SearchByIdentityComponent } from './company/search-by-identity/search-by-identity.component';
+import { CompanyForeignCountryComponent } from './company/foreign-country/company-foreign-country.component';
+import { CompanySearchByNameComponent } from './company/search-by-name-component/company-search-by-name.component';
+import { CompanySearchByIdentityComponent } from './company/search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './company/search-by-website/company-search-by-website.component';
 
 defineLocale('fr', frLocale);
@@ -80,9 +80,9 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     InformationComponent,
     AcknowledgmentComponent,
     SubcategoryComponent,
-    ForeignCountryComponent,
-    SearchByNameComponent,
-    SearchByIdentityComponent,
+    CompanyForeignCountryComponent,
+    CompanySearchByNameComponent,
+    CompanySearchByIdentityComponent,
     CompanySearchByWebsiteComponent,
   ],
   imports: [

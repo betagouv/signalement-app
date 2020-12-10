@@ -11,14 +11,17 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { genCompanySearchResult, genDraftReport, genSiret, genSubcategory } from '../../../../../test/fixtures.spec';
+import { genCompanySearchResult, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 import { ComponentsModule } from '../../../components/components.module';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { ForeignCountryComponent } from './foreign-country/foreign-country.component';
+import { CompanyForeignCountryComponent } from './foreign-country/company-foreign-country.component';
+import { CompanySearchByNameComponent } from './search-by-name-component/company-search-by-name.component';
+import { CompanySearchByIdentityComponent } from './search-by-identity/company-search-by-identity.component';
+import { CompanySearchByWebsiteComponent } from './search-by-website/company-search-by-website.component';
 
 describe('CompanyComponent', () => {
 
@@ -32,7 +35,10 @@ describe('CompanyComponent', () => {
       declarations: [
         CompanyComponent,
         BreadcrumbComponent,
-        ForeignCountryComponent
+        CompanyForeignCountryComponent,
+        CompanySearchByNameComponent,
+        CompanySearchByIdentityComponent,
+        CompanySearchByWebsiteComponent
       ],
       imports: [
         FormsModule,
@@ -71,14 +77,10 @@ describe('CompanyComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should initialize forms and display radios', () => {
+    it('should display radios for identification choice', () => {
 
       const nativeElement = fixture.nativeElement;
-      expect(component.searchForm).toBeDefined();
-      expect(component.searchForm.controls['search']).toBeDefined();
-      expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
-      expect(component.searchByIdentityForm).toBeDefined();
-      expect(component.searchByIdentityForm.controls['identity']).toBeDefined();
+      expect(nativeElement.querySelectorAll('form').length).toBe(1);
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
     });
 
@@ -100,76 +102,7 @@ describe('CompanyComponent', () => {
       expect(nativeElement.querySelector('form#searchByIdentityForm')).not.toBeNull();
     });
 
-    describe('search companies by name and postal code', () => {
 
-      beforeEach(() => {
-        component.searchCtrl.setValue('Mon entreprise dans ma ville');
-        component.searchPostalCodeCtrl.setValue('87270');
-        component.identificationKind = IdentificationKinds.Name;
-        fixture.detectChanges();
-      });
-
-      it('should ', () => {
-        component.companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
-        const newCompanySearchResults = [genCompanySearchResult()];
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(newCompanySearchResults));
-
-        const nativeElement = fixture.nativeElement;
-        nativeElement.querySelector('button#submitSearchForm').click();
-        fixture.detectChanges();
-
-        expect(component.companySearchResults).toEqual(newCompanySearchResults);
-      });
-
-      it('should erase previous results and display the company list when results have been found', () => {
-        component.companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
-        const newCompanySearchResults = [genCompanySearchResult()];
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(newCompanySearchResults));
-
-        const nativeElement = fixture.nativeElement;
-        nativeElement.querySelector('button#submitSearchForm').click();
-        fixture.detectChanges();
-
-        expect(component.companySearchResults).toEqual(newCompanySearchResults);
-        expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(newCompanySearchResults.length);
-
-      });
-    });
-
-    describe('search companies by siret', () => {
-
-      it('should display errors when occurs', () => {
-        component.identificationKind = IdentificationKinds.Identity;
-        fixture.detectChanges();
-
-        const nativeElement = fixture.nativeElement;
-        component.identityCtrl.setValue(undefined);
-        nativeElement.querySelector('button#submitSiretForm').click();
-        fixture.detectChanges();
-
-        expect(component.showErrorsByIdentity).toBeTruthy();
-        expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
-      });
-
-      it('should display the company found by siret when existed', () => {
-
-        const companyBySiret = genCompanySearchResult();
-        spyOn(companyService, 'searchCompaniesByIdentity').and.returnValue(of([companyBySiret]));
-
-        component.identificationKind = IdentificationKinds.Identity;
-        fixture.detectChanges();
-
-        const nativeElement = fixture.nativeElement;
-        component.identityCtrl.setValue(genSiret());
-        nativeElement.querySelector('button#submitSiretForm').click();
-        fixture.detectChanges();
-
-        expect(component.companySearchByIdentityResults).toEqual([companyBySiret]);
-        expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(1);
-
-      });
-
-    });
   });
 
   describe('case of searching company with WEBSITE', () => {
@@ -190,16 +123,14 @@ describe('CompanyComponent', () => {
 
     it('should initialize website form with a single input and display it', () => {
       const nativeElement = fixture.nativeElement;
-      expect(component.websiteForm).toBeDefined();
-      expect(component.searchForm).not.toBeDefined();
-      expect(component.searchByIdentityForm).not.toBeDefined();
-      expect(component.websiteForm.controls['url']).toBeDefined();
       expect(nativeElement.querySelector('form#websiteForm')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('input[type="url"][name="url"]').length).not.toBeNull();
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
       expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+
     });
 
-    it('should initialize others forms and display radios for identification choice when no company found', () => {
+    it('should display radios for identification choice when no company found', () => {
 
       spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of([]));
 
@@ -209,12 +140,6 @@ describe('CompanyComponent', () => {
       nativeElement.querySelectorAll('form#websiteForm button')[0].click();
       fixture.detectChanges();
 
-      expect(component.urlCtrl.value).toBe('http://monsite.com');
-      expect(component.searchForm).toBeDefined();
-      expect(component.searchForm.controls['search']).toBeDefined();
-      expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
-      expect(component.searchByIdentityForm).toBeDefined();
-      expect(component.searchByIdentityForm.controls['identity']).toBeDefined();
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
     });
 
@@ -229,10 +154,6 @@ describe('CompanyComponent', () => {
       nativeElement.querySelectorAll('form#websiteForm button')[0].click();
       fixture.detectChanges();
 
-      expect(component.urlCtrl.value).toBe('http://monsite.com');
-      expect(component.searchForm).toBeUndefined();
-      expect(component.searchByIdentityForm).toBeUndefined();
-      expect(component.companySearchByUrlResults).toEqual(companySearchResults);
       expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(companySearchResults.length);
     });
 
@@ -259,3 +180,4 @@ describe('CompanyComponent', () => {
 
   });
 });
+

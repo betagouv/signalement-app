@@ -9,10 +9,10 @@ import { CompanyKinds } from '../../../../model/Anomaly';
 
 @Component({
   selector: 'app-company-search-by-identity',
-  templateUrl: './search-by-identity.component.html',
-  styleUrls: ['./search-by-identity.component.scss']
+  templateUrl: './company-search-by-identity.component.html',
+  styleUrls: ['./company-search-by-identity.component.scss']
 })
-export class SearchByIdentityComponent implements OnInit {
+export class CompanySearchByIdentityComponent implements OnInit {
 
   @ViewChild('identByIdentityResult')
   private identByIdentityResult: ElementRef;
