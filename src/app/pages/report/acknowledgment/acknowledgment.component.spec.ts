@@ -10,6 +10,7 @@ import { of } from 'rxjs';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 import { ComponentsModule } from '../../../components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 describe('AcknoledgmentComponent', () => {
 
@@ -23,7 +24,8 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        ComponentsModule
+        ComponentsModule,
+        PipesModule,
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

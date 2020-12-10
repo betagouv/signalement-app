@@ -6,6 +6,10 @@
   display: flex;
   align-items: center;
   position: relative;
+
+  .form-control {
+    margin-right: spacing(1);
+  }
 }
 
 .search-dialog {

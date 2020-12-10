@@ -215,7 +215,6 @@ export class ReportDetailComponent implements OnInit {
           this.bsModalRef.hide();
         },
         err => {
-          console.log('err', err);
           this.loading = false;
           this.loadingError = true;
         });

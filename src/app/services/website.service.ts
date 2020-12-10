@@ -60,7 +60,7 @@ export class WebsiteService {
   readonly create = (website: ApiWebsiteCreate): Observable<ApiWebsiteWithCompany> => {
     this._creating = true;
     this._creatingError = undefined;
-    return this.utils.getReportApiSdk().pipe(
+    return this.utils.getSecuredReportApiSdk.pipe(
       mergeMap(api => api.website.create(website)),
       map((createdWebsite => {
         this._creating = false;
@@ -82,7 +82,7 @@ export class WebsiteService {
     if (clean) {
       this.source.next(undefined);
     }
-    return this.utils.getReportApiSdk().pipe(
+    return this.utils.getSecuredReportApiSdk.pipe(
       map(_ => {
         this._fetching = true;
         this._fetchError = undefined;
@@ -103,7 +103,7 @@ export class WebsiteService {
   }
 
   readonly update = (id: Id, website: Partial<ApiWebsite>): Observable<ApiWebsiteWithCompany> => {
-    return this.utils.getReportApiSdk().pipe(
+    return this.utils.getSecuredReportApiSdk.pipe(
       map(_ => {
         this._updating.add(id);
         delete this._updateError[id];
@@ -124,7 +124,7 @@ export class WebsiteService {
   };
 
   readonly updateCompany = (id: Id, website: ApiWebsiteUpdateCompany): Observable<ApiWebsiteWithCompany> => {
-    return this.utils.getReportApiSdk().pipe(
+    return this.utils.getSecuredReportApiSdk.pipe(
       map(_ => {
         this._updatingCompany.add(id);
         delete this._updateCompanyError[id];
@@ -145,7 +145,7 @@ export class WebsiteService {
   };
 
   readonly remove = (id: Id): Observable<void> => {
-    return this.utils.getReportApiSdk().pipe(
+    return this.utils.getSecuredReportApiSdk.pipe(
       map(_ => {
         this._removing.add(id);
         delete this._removeError[id];

@@ -3,8 +3,8 @@ import { environment } from '../../environments/environment';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { map } from 'rxjs/operators';
 import { ApiSdk } from '../api-sdk/ApiSdk';
-import { Observable } from 'rxjs';
 import { ApiClient } from '../api-sdk/ApiClient';
+import { ApiSdkSecured } from '../api-sdk/ApiSdkSecured';
 
 export const AuthUserStorageKey = 'AuthUserSignalConso';
 export const TokenInfoStorageKey = 'TokenInfoSignalConso';
@@ -44,12 +44,12 @@ export class ServiceUtils {
     );
   }
 
-  getReportApiSdk = (): Observable<ApiSdk> => {
-    return this.getAuthHeaders().pipe(map(headers => {
-      const httpClient = new ApiClient({ headers: headers.headers, baseUrl: environment[Api.Report] + '/api' });
-      return new ApiSdk(httpClient);
-    }));
-  };
+  readonly getSecuredReportApiSdk = this.getAuthHeaders().pipe(map(headers => {
+    const httpClient = new ApiClient({ headers: headers.headers, baseUrl: environment[Api.Report] + '/api' });
+    return new ApiSdkSecured(httpClient);
+  }));
+
+  readonly getReportApiSdk = new ApiSdk(new ApiClient({ baseUrl: environment[Api.Report] + '/api' }));
 
   getAuthHttpParam() {
     return this.localStorage.getItem(AuthUserStorageKey).pipe(
