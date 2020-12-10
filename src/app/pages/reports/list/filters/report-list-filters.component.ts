@@ -13,15 +13,6 @@ import { ReportFilter } from '../../../../model/ReportFilter';
   template: `
     <ng-container [formGroup]="searchForm">
 
-      <input
-        class="form-control form-control-material"
-        formControlName="companyCountries"
-        appCountryDialog
-        readonly
-        style="cursor: pointer"
-        placeholder="Pays"
-      />
-
       <app-select-departments
         placeholder="Département(s)" formControlName="departments" id="rls-departments"
         class="form-control form-control-material">
@@ -103,6 +94,21 @@ import { ReportFilter } from '../../../../model/ReportFilter';
                 <mat-option>Toutes les catégories</mat-option>
                 <mat-option *ngFor="let _ of categories" [value]="_">{{_}}</mat-option>
               </mat-select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="rls-country">Pays étrangers</label>
+            </td>
+            <td>
+              <input
+                id="rls-country"
+                class="form-control form-control-material"
+                formControlName="companyCountries"
+                appCountryDialog
+                readonly
+                style="cursor: pointer"
+              />
             </td>
           </tr>
           <tr>
