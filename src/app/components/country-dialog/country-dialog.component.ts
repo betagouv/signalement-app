@@ -22,7 +22,7 @@ const initialForm: Form = {
     <mat-progress-bar *ngIf="constantService.fetchingCountries" mode="indeterminate" class="app-mat-dialog-progress">
     </mat-progress-bar>
 
-    <h2 mat-dialog-title>Sélection des pays étranger</h2>
+    <h2 mat-dialog-title>Sélection des pays étrangers</h2>
 
     <ng-container [formGroup]="form">
       <mat-form-field floatLabel="never" class="fullwidth">
@@ -34,7 +34,7 @@ const initialForm: Form = {
 
       <mat-radio-group class="radio-group" formControlName="group">
         <mat-radio-button value="all">Tous <span class="txt-secondary">({{currentValues.size}} pays sélectionnés)</span></mat-radio-button>
-        <mat-radio-button value="european">Pays européen uniquement</mat-radio-button>
+        <mat-radio-button value="european">Pays européens (UE) uniquement</mat-radio-button>
         <mat-radio-button value="transfer">Pays avec accord uniquement</mat-radio-button>
       </mat-radio-group>
     </ng-container>
