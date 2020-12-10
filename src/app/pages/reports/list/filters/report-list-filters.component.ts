@@ -13,10 +13,13 @@ import { ReportFilter } from '../../../../model/ReportFilter';
   template: `
     <ng-container [formGroup]="searchForm">
 
-      <input class="form-control form-control-material"
-             formControlName="companyCountries"
-             appCountryDialog
-             readonly
+      <input
+        class="form-control form-control-material"
+        formControlName="companyCountries"
+        appCountryDialog
+        readonly
+        style="cursor: pointer"
+        placeholder="Pays"
       />
 
       <app-select-departments

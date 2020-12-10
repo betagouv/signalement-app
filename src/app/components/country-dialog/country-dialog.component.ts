@@ -33,7 +33,7 @@ const initialForm: Form = {
       </mat-form-field>
 
       <mat-radio-group class="radio-group" formControlName="group">
-        <mat-radio-button value="all">Tous</mat-radio-button>
+        <mat-radio-button value="all">Tous <span class="txt-secondary">({{currentValues.size}} pays sélectionnés)</span></mat-radio-button>
         <mat-radio-button value="european">Pays européen uniquement</mat-radio-button>
         <mat-radio-button value="transfer">Pays avec accord uniquement</mat-radio-button>
       </mat-radio-group>
@@ -41,6 +41,10 @@ const initialForm: Form = {
 
     <mat-dialog-content class="content">
       <ng-container *ngIf="countries$ | async as countries">
+        <mat-checkbox [checked]="!!allSelected(countries)" [indeterminate]="!allUnSelected(countries) && !allSelected(countries)"
+                      (change)="toggleAll(countries)" class="cb-all">
+          <span class="font-weight-bold">Tout sélectionner <span class="txt-secondary">({{countries.length}} pays)</span></span>
+        </mat-checkbox>
         <div *ngFor="let country of countries">
           <mat-checkbox [value]="country.name" [checked]="currentValues.has(country.name)" (change)="update($event)" ngDefaultControl>
             {{country.name}}
@@ -80,7 +84,7 @@ export class CountryDialogComponent {
 
   filterName: string;
 
-  form = this.fb.group(initialForm);
+  readonly form = this.fb.group(initialForm);
 
   private filters = ([countries, form]: [Country[], Form]) => {
     return countries.filter(_ =>
@@ -90,13 +94,21 @@ export class CountryDialogComponent {
     );
   };
 
-  countries$ = combineLatest([
+  readonly countries$ = combineLatest([
     this.constantService.getCountries(),
     this.form.valueChanges.pipe(startWith(initialForm)),
   ]).pipe(
     distinctUntilChanged(),
     map(this.filters),
   );
+
+  readonly allSelected = (countries: Country[]) => countries.every(_ => this.currentValues.has(_.name));
+  readonly allUnSelected = (countries: Country[]) => !countries.find(_ => this.currentValues.has(_.name));
+
+  readonly toggleAll = (countries: Country[]) => {
+    const action = this.allUnSelected(countries) ? 'add' : 'delete';
+    countries.forEach(_ => this.currentValues[action](_.name));
+  };
 
   readonly update = (event: MatCheckboxChange) => {
     this.currentValues[event.checked ? 'add' : 'delete'](event.source.value);
