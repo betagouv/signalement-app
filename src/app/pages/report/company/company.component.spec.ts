@@ -22,6 +22,7 @@ import { CompanyForeignCountryComponent } from './foreign-country/company-foreig
 import { CompanySearchByNameComponent } from './search-by-name-component/company-search-by-name.component';
 import { CompanySearchByIdentityComponent } from './search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './search-by-website/company-search-by-website.component';
+import { ConstantService } from '../../../services/constant.service';
 
 describe('CompanyComponent', () => {
 
@@ -29,6 +30,7 @@ describe('CompanyComponent', () => {
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
   let reportStorageService: ReportStorageService;
+  let constantService: ConstantService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -61,6 +63,7 @@ describe('CompanyComponent', () => {
   beforeEach(() => {
     companyService = TestBed.inject(CompanyService);
     reportStorageService = TestBed.inject(ReportStorageService);
+    constantService = TestBed.inject(ConstantService);
   });
 
   describe('case of searching company with SIRET', () => {
@@ -162,6 +165,7 @@ describe('CompanyComponent', () => {
       it('should ask the user whether the company is abroad or not', () => {
 
         spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of([]));
+        spyOn(constantService, 'getCountries').and.returnValue(of([{'code': 'AFG', 'name': 'Afghanistan', 'european': false, 'transfer': false}]));
 
         const nativeElement = fixture.nativeElement;
         nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
