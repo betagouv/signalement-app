@@ -25,7 +25,7 @@ export interface ReportFilter {
 
 export interface ReportFilterQuerystring {
   readonly departments?: string;
-  readonly tags?: string[];
+  readonly tags?: string | string[];
   readonly companyCountries?: string;
   start?: string;
   end?: string;
@@ -35,15 +35,17 @@ export interface ReportFilterQuerystring {
   status?: string;
   details?: string;
   hasCompany?: string;
-  offset?: number;
-  limit?: number;
+  offset?: string;
+  limit?: string;
 }
 
 export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuerystring => {
   try {
-    const { period, companyCountries, departments, hasCompany, ...r } = report;
+    const { period, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
     return {
       ...r,
+      offset: offset + '',
+      limit: limit + '',
       ...(hasCompany !== undefined &&  {hasCompany: '' + hasCompany}),
       ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
       ...(departments ? { departments: departments.join(',') } : {}),

@@ -55,14 +55,28 @@ export class ReportListComponent implements OnInit {
     this.initAndBuildForm();
   }
 
-  readonly getFormFromQueryString = (qs: ReportFilterQuerystring): { [key in keyof ReportFilter]: any } => {
+  readonly getFormFromQueryString = (qs: ReportFilterQuerystring): ReportFilter => {
     try {
       const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+      const {
+        offset,
+        limit,
+        tags,
+        departments,
+        companyCountries,
+        hasCompany,
+        start,
+        end,
+      } = qs;
       return {
         ...qs,
-        departments: qs.departments?.split(','),
-        hasCompany: parseBooleanOption(qs.hasCompany),
-        period: (qs.start && qs.end) && [new Date(qs.start), new Date(qs.end)],
+        offset: +offset,
+        limit: +limit,
+        tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
+        departments: departments?.split(','),
+        companyCountries: companyCountries?.split(','),
+        hasCompany: parseBooleanOption(hasCompany),
+        period: (start && end) && [new Date(start).toString(), new Date(end).toString()],
       };
     } catch (e) {
       console.error('Caught error on "reportFilterFromQueryString"', qs, e);
@@ -98,19 +112,6 @@ export class ReportListComponent implements OnInit {
       this.buildForm(initialValues);
     }
     this.search();
-  };
-
-  private getQueryString = (): { [key in keyof ReportFilter]: any } => {
-    const qs = this.activatedRoute.snapshot.queryParams;
-    const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
-    const wrapInArrayIfNot = (value: string[] | string) => Array.isArray(value) ? value : [value];
-    const multiSelectProperties: (keyof ReportFilter)[] = ['tags', 'departments'];
-    return {
-      ...qs,
-      ...(multiSelectProperties.reduce((acc, _) => ({ ...acc, [_]: wrapInArrayIfNot(qs[_]) }), {})),
-      hasCompany: parseBooleanOption(qs.hasCompany),
-      period: (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])],
-    };
   };
 
   private buildForm = (filters: ReportFilter): void => {
