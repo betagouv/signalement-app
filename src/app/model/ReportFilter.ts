@@ -44,8 +44,8 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
     const { period, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
     return {
       ...r,
-      offset: offset + '',
-      limit: limit + '',
+      offset: offset ? offset + '' : undefined,
+      limit: limit ? limit + '' : undefined,
       ...(hasCompany !== undefined &&  {hasCompany: '' + hasCompany}),
       ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
       ...(departments ? { departments: departments.join(',') } : {}),
