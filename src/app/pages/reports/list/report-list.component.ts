@@ -70,8 +70,8 @@ export class ReportListComponent implements OnInit {
       } = qs;
       return {
         ...qs,
-        offset: +offset,
-        limit: +limit,
+        offset: +offset ?? 0,
+        limit: +limit ?? this.defaultPageSize,
         tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
         departments: departments?.split(','),
         companyCountries: companyCountries?.split(','),
