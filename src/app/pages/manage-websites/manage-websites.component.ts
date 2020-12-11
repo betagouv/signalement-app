@@ -12,6 +12,8 @@ import { Id } from '../../api-sdk/model/Common';
 import { Index } from '../../model/Common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../components/confirm/confirm.component';
+import pages from '../../../assets/data/pages.json';
+import { Meta, Title } from '@angular/platform-browser';
 
 interface Form {
   host?: string;
@@ -40,62 +42,64 @@ interface Form {
         </app-panel-header>
 
 
-        <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
-          <ng-container matColumnDef="creationDate">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-date">Date</th>
-            <td mat-cell *matCellDef="let _" class="td-date">
-              {{_.creationDate | date}}
-            </td>
-          </ng-container>
+        <div class="table-overflow">
+          <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
+            <ng-container matColumnDef="creationDate">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-date">Date</th>
+              <td mat-cell *matCellDef="let _" class="td-date">
+                {{_.creationDate | date}}
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="host">
-            <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Host</th>
-            <td class="td-host" mat-cell *matCellDef="let _">
-              <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="host">
+              <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Host</th>
+              <td class="td-host" mat-cell *matCellDef="let _">
+                <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="kind">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-actions"></th>
-            <td mat-cell *matCellDef="let _" class="td-actions">
-              <button
-                class="align-middle"
-                app-btn icon="check_circle_outline"
-                [loading]="this.websiteService.updating(_.id)"
-                [error]="this.websiteService.updateError(_.id)"
-                [success]="_.kind === websitesKind.DEFAULT"
-                (click)="toggleWebsiteKind(_)">
-                {{_.kind === websitesKind.DEFAULT ? 'Validé' : 'Valider'}}
-              </button>
+            <ng-container matColumnDef="kind">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-actions"></th>
+              <td mat-cell *matCellDef="let _" class="td-actions">
+                <button
+                  class="align-middle"
+                  app-btn icon="check_circle_outline"
+                  [loading]="this.websiteService.updating(_.id)"
+                  [error]="this.websiteService.updateError(_.id)"
+                  [success]="_.kind === websitesKind.DEFAULT"
+                  (click)="toggleWebsiteKind(_)">
+                  {{_.kind === websitesKind.DEFAULT ? 'Validé' : 'Valider'}}
+                </button>
 
-              <button mat-icon-button color="primary" class="align-middle"
-                      (click)="remove(_.id)"
-                      [appLoading]="websiteService.removing(_.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
+                <button mat-icon-button color="primary" class="align-middle"
+                        (click)="remove(_.id)"
+                        [appLoading]="websiteService.removing(_.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="company">
-            <th mat-sort-header mat-header-cell *matHeaderCellDef>Entreprise</th>
-            <td mat-cell *matCellDef="let _">
-              <button
-                app-btn icon="edit"
-                [loading]="websiteService.updatingCompany(_.id)"
-                [error]="!!websiteService.updateCompanyError(_.id)"
-                [matTooltip]="websiteService.updateCompanyError(_.id) && 'L\\'entreprise est déjà associée à cette URL'"
-                appCompanySearchDialog (companySelected)="updateCompany(_, $event)"
-              >
-                <span class="company-name">{{_.company?.name}}</span>
-                &nbsp;
-                <span class="siret">{{_.company?.siret}}</span>
-              </button>
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="company">
+              <th class="td-company" mat-sort-header mat-header-cell *matHeaderCellDef>Entreprise</th>
+              <td class="td-company" mat-cell *matCellDef="let _">
+                <button
+                  app-btn icon="edit"
+                  [loading]="websiteService.updatingCompany(_.id)"
+                  [error]="!!websiteService.updateCompanyError(_.id)"
+                  [matTooltip]="websiteService.updateCompanyError(_.id) && 'L\\'entreprise est déjà associée à cette URL'"
+                  appCompanySearchDialog (companySelected)="updateCompany(_, $event)"
+                >
+                  <span class="company-name">{{_.company?.name}}</span>
+                  &nbsp;
+                  <div (click)="$event.stopImmediatePropagation()" class="siret">{{_.company?.siret}}</div>
+                </button>
+              </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="columns"></tr>
-          <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-        </table>
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+          </table>
+        </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" pageSize="25"></mat-paginator>
       </app-panel>
     </app-page>
@@ -106,6 +110,8 @@ export class ManageWebsitesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private titleService: Title,
+    private meta: Meta,
     public websiteService: WebsiteService,
     private dialog: MatDialog
   ) {
@@ -131,6 +137,8 @@ export class ManageWebsitesComponent implements OnInit {
   websitesHostIndex: Index<ApiWebsiteWithCompany[]> = {};
 
   ngOnInit(): void {
+    this.titleService.setTitle(pages.websites.title);
+    this.meta.updateTag({ name: 'description', content: pages.websites.description });
     this.initForm();
     this.fetchWebsites();
   }
@@ -145,7 +153,7 @@ export class ManageWebsitesComponent implements OnInit {
   private fetchWebsites = (): void => {
     combineLatest([
       this.websiteService.list({ clean: false }),
-      this.form.valueChanges.pipe(startWith(undefined)),
+      this.form.valueChanges.pipe(startWith(undefined))
     ]).pipe(
       map(this.filterWebsites),
       map(this.initializeDatatable),
@@ -153,13 +161,14 @@ export class ManageWebsitesComponent implements OnInit {
     ).subscribe();
   };
 
-  private filterWebsites = ([websites, form]: [ApiWebsiteWithCompany[], Form]): ApiWebsiteWithCompany[] => {
+  private filterWebsites = ([websites, dontUseBecauseUndefined]: [ApiWebsiteWithCompany[], Form | undefined]): ApiWebsiteWithCompany[] => {
+    const form: Form = this.form.value;
     const isKindSelected = (form?.kind && form?.kind.filter((_: string) => _ !== '').length > 0);
     const kinds = isKindSelected ? form.kind! : [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT];
     return websites
       ?.filter(_ => kinds.includes(_.kind))
       .filter(_ => !form?.host || _.host.includes(form.host));
-  }
+  };
 
   private initializeDatatable = (websites: ApiWebsiteWithCompany[]): ApiWebsiteWithCompany[] => {
     this.dataSource = new MatTableDataSource(websites);
@@ -199,7 +208,7 @@ export class ManageWebsitesComponent implements OnInit {
     const ref = this.dialog.open(ConfirmDialogComponent, { width: '440px', }).componentInstance;
     ref.title = 'Remplacer le site web assigné ?';
     ref.content = `
-      L'entreprise <b>${oldWebsite.company.name}</b> est déjà assginée au site <b>${newWebsite.host}</b>.<br/>
+      L'entreprise <b>${oldWebsite.company.name}</b> est déjà assignée au site <b>${newWebsite.host}</b>.<br/>
       L'entreprise <b>${newWebsite.company.name}</b> sera assignée à la place.
     `;
     ref.confirmed = new EventEmitter<void>();

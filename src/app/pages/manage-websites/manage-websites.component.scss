@@ -4,6 +4,8 @@
 .siret {
   font-weight: normal;
   color: $theme-color-text-secondary;
+  cursor: text;
+  user-select: text;
 }
 
 .select-status {
@@ -39,4 +41,8 @@ table {
 
 .td-host {
   width: 240px;
+}
+
+.td-company {
+  min-width: 100px;
 }
