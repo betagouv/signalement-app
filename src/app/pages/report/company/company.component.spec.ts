@@ -172,7 +172,7 @@ describe('CompanyComponent', () => {
         component.identificationKind = IdentificationKinds.None;
         fixture.detectChanges();
 
-        expect(nativeElement.querySelectorAll('input[type="radio"][name="isForeignCompany"]').length).toBe(2);
+        expect(nativeElement.querySelectorAll('input[type="radio"][name="isForeignCompany"]').length).toBe(3);
 
       });
 
