@@ -9,7 +9,7 @@ export const foreignFormValidator: ValidatorFn = (control: FormGroup): Validatio
   const name = control.get('name');
   const country = control.get('country');
 
-  return isForeign.value && (!name.value || !country.value) ? { required: true } : null;
+  return isForeign.value === IsForeignValues.true && (!name.value || !country.value) ? { required: true } : null;
 };
 
 export enum IsForeignValues {'true', 'false', 'unknown'}

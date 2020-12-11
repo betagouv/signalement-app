@@ -5,7 +5,7 @@
         <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> Votre signalement a été envoyé.
       </div>
 
-      <div class="card" *ngIf="!draftReport.isContractualDispute; else contractualDispute">
+      <div class="card" *ngIf="!draftReport.isContractualDispute || (draftReport.draftCompany | isForeign); else contractualDispute">
         <div class="card-body">
           <div class="row">
             <div class="col-3 p-0">
@@ -43,7 +43,7 @@
                 </ng-container>
                 <ng-template #foreignCountryTpl>
                   <p>
-                    Vous avez indiqué que l’entreprise qui gère le site internet est une entreprise étrangère ({{draftReport.draftCompany.country}}).
+                    Vous avez indiqué que l’entreprise est une entreprise étrangère ({{draftReport.draftCompany.country}}).
                   </p>
                   <p>
                     Votre signalement ne sera pas transmis à cette entreprise.
@@ -59,7 +59,7 @@
                     Nous vous invitons à faire votre signalement auprès d'econsumer.gov afin d’aider les autorités internationales à lutter contre la fraude.
                     <a href="https://www.econsumer.gov/fr">https://www.econsumer.gov/fr</a>
                   </p>
-                  <ng-container *ngIf="draftReport.isContractualDispute">
+                  <ng-container *ngIf="draftReport.isContractualDispute && draftReport.draftCompany.website">
                     <p>
                       Vous avez payé avec votre carte bancaire ?
                     </p>
@@ -74,7 +74,7 @@
                     Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
                   </p>
                   <p>
-                    Il ne pourra en revanche pas être transmis à l'entreprise qui gère le site internet signalé, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
+                    Il ne pourra en revanche pas être transmis à l'entreprise signalée, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
                     Dans ce cas, vous recevrez une notification.
                   </p>
                 </ng-template>
