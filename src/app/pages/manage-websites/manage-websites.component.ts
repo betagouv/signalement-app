@@ -208,7 +208,7 @@ export class ManageWebsitesComponent implements OnInit {
     const ref = this.dialog.open(ConfirmDialogComponent, { width: '440px', }).componentInstance;
     ref.title = 'Remplacer le site web assigné ?';
     ref.content = `
-      L'entreprise <b>${oldWebsite.company.name}</b> est déjà assginée au site <b>${newWebsite.host}</b>.<br/>
+      L'entreprise <b>${oldWebsite.company.name}</b> est déjà assignée au site <b>${newWebsite.host}</b>.<br/>
       L'entreprise <b>${newWebsite.company.name}</b> sera assignée à la place.
     `;
     ref.confirmed = new EventEmitter<void>();
