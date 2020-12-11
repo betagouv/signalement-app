@@ -1,8 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import countries from '../../../../../assets/data/countries.json';
 import { RendererService } from '../../../../services/renderer.service';
 import { DraftCompany } from '../../../../model/Company';
+import { ConstantService } from '../../../../services/constant.service';
 
 export const foreignFormValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const isForeign = control.get('isForeign');
@@ -33,16 +33,21 @@ export class CompanyForeignCountryComponent implements OnInit {
   isForeignCtrl: FormControl;
   nameCtrl: FormControl;
   countryCtrl: FormControl;
-  countries: string[] = countries.map(country => country.name).filter(name => name !== 'France');
+  countries: string[];
   isForeignValues = IsForeignValues;
 
   showErrors: boolean;
 
   constructor(public formBuilder: FormBuilder,
+              private constantService: ConstantService,
               private rendererService: RendererService) { }
 
   ngOnInit(): void {
     this.initForeignForm();
+    this.constantService.getCountries()
+      .subscribe(
+      countries => this.countries = countries.map(country => country.name).filter(name => name !== 'France')
+      );
   }
 
   initForeignForm() {
