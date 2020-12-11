@@ -12,6 +12,8 @@ import { Id } from '../../api-sdk/model/Common';
 import { Index } from '../../model/Common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../components/confirm/confirm.component';
+import pages from '../../../assets/data/pages.json';
+import { Meta, Title } from '@angular/platform-browser';
 
 interface Form {
   host?: string;
@@ -108,6 +110,8 @@ export class ManageWebsitesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private titleService: Title,
+    private meta: Meta,
     public websiteService: WebsiteService,
     private dialog: MatDialog
   ) {
@@ -133,6 +137,8 @@ export class ManageWebsitesComponent implements OnInit {
   websitesHostIndex: Index<ApiWebsiteWithCompany[]> = {};
 
   ngOnInit(): void {
+    this.titleService.setTitle(pages.websites.title);
+    this.meta.updateTag({ name: 'description', content: pages.websites.description });
     this.initForm();
     this.fetchWebsites();
   }
@@ -147,7 +153,7 @@ export class ManageWebsitesComponent implements OnInit {
   private fetchWebsites = (): void => {
     combineLatest([
       this.websiteService.list({ clean: false }),
-      this.form.valueChanges.pipe(startWith(undefined)),
+      this.form.valueChanges.pipe(startWith(undefined))
     ]).pipe(
       map(this.filterWebsites),
       map(this.initializeDatatable),
@@ -155,13 +161,14 @@ export class ManageWebsitesComponent implements OnInit {
     ).subscribe();
   };
 
-  private filterWebsites = ([websites, form]: [ApiWebsiteWithCompany[], Form]): ApiWebsiteWithCompany[] => {
+  private filterWebsites = ([websites, dontUseBecauseUndefined]: [ApiWebsiteWithCompany[], Form | undefined]): ApiWebsiteWithCompany[] => {
+    const form: Form = this.form.value;
     const isKindSelected = (form?.kind && form?.kind.filter((_: string) => _ !== '').length > 0);
     const kinds = isKindSelected ? form.kind! : [ApiWebsiteKind.PENDING, ApiWebsiteKind.DEFAULT];
     return websites
       ?.filter(_ => kinds.includes(_.kind))
       .filter(_ => !form?.host || _.host.includes(form.host));
-  }
+  };
 
   private initializeDatatable = (websites: ApiWebsiteWithCompany[]): ApiWebsiteWithCompany[] => {
     this.dataSource = new MatTableDataSource(websites);
