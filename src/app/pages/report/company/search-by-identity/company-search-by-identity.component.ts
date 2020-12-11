@@ -10,7 +10,7 @@ import { CompanyKinds } from '../../../../model/Anomaly';
 @Component({
   selector: 'app-company-search-by-identity',
   templateUrl: './company-search-by-identity.component.html',
-  styleUrls: ['./company-search-by-identity.component.scss']
+  styleUrls: ['./company-search-by-identity.component.scss', '../company.component.scss']
 })
 export class CompanySearchByIdentityComponent implements OnInit {
 

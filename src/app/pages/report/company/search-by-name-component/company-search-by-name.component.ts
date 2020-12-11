@@ -9,7 +9,7 @@ import { IdentificationKinds } from '../company.component';
 @Component({
   selector: 'app-company-search-by-name-component',
   templateUrl: './company-search-by-name.component.html',
-  styleUrls: ['./company-search-by-name.component.scss']
+  styleUrls: ['./company-search-by-name.component.scss', '../company.component.scss']
 })
 export class CompanySearchByNameComponent implements OnInit {
 

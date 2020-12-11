@@ -17,7 +17,7 @@ export enum IsForeignValues {'true', 'false', 'unknown'}
 @Component({
   selector: 'app-company-foreign-country',
   templateUrl: './company-foreign-country.component.html',
-  styleUrls: ['./company-foreign-country.component.scss']
+  styleUrls: ['./company-foreign-country.component.scss', '../company.component.scss']
 })
 export class CompanyForeignCountryComponent implements OnInit {
 
