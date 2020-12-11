@@ -24,22 +24,26 @@ export class RendererService {
           this.renderer.setStyle($element, 'margin-bottom', `${window.innerHeight - rect.height - 110}px`);
         }
         jQuery('html, body').animate({
-          scrollTop: $element.offsetTop - 110
+          scrollTop: this.offsetTop($element) - 50
         }, 1000, 'linear');
       }, 500);
     }
+  }
+
+  offsetTop($element) {
+    return $element.offsetTop + ($element.offsetParent ? this.offsetTop($element.offsetParent) : 0);
   }
 
   scrollToElementEnd($element) {
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => {
         const rect = $element.getBoundingClientRect();
-        if (isPlatformBrowser(this.platformId) && rect.bottom + 110 > window.innerHeight) {
+        if (rect.bottom + 110 > window.innerHeight) {
           jQuery('html, body').animate({
-            scrollTop: $element.offsetTop + rect.height + 110 - window.innerHeight
+            scrollTop: this.offsetTop($element) + rect.height + 110 - window.innerHeight
           }, 1000, 'linear');
         }
-      }, 100);
+      }, 500);
     }
   }
 

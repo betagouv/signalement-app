@@ -44,12 +44,12 @@
     <i class="material-icons md-24" aria-hidden="true">search</i>
     Rechercher
   </button>
-
-  <hr *ngIf="companySearchResults && companySearchResults.length"/>
 </form>
 
 <div #identResult>
   <div *ngIf="companySearchResults && companySearchResults.length" class="mt-5">
+
+    <hr />
 
     <h2 class="mb-4 font-weight-bold">
       Sélectionnez l'entreprise

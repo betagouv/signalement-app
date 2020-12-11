@@ -87,7 +87,7 @@
                 <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.Name)">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Name" id="identByName" (click)="selectIdentificationKind(identificationKinds.Name)"/>
+                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Name" id="identByName" (click)="rendererService.scrollToElement(identSearch)"/>
                     </div>
                     <div class="col">
                       <label for="identByName" class="label-inline pointer">Par son nom et son code postal</label>
@@ -98,7 +98,7 @@
                 <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.Identity)">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Identity" id="identByIdentity" (click)="selectIdentificationKind(identificationKinds.Identity)"/>
+                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Identity" id="identByIdentity" (click)="rendererService.scrollToElement(identSearch)"/>
                     </div>
                     <div class="col">
                       <label for="identByIdentity" class="label-inline pointer">Par son SIRET ou SIREN ou RCS</label>
@@ -109,36 +109,40 @@
                 <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.None)" *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
-                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="selectIdentificationKind(identificationKinds.None)"/>
+                      <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="rendererService.scrollToElement(identSearch)"/>
                     </div>
                     <div class="col">
                       <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier l'entreprise</label>
                     </div>
                   </div>
                 </div>
-              </fieldset>
 
-              <hr *ngIf="identificationKind"/>
+              </fieldset>
             </form>
 
-            <div #identSearch [ngSwitch]="identificationKind">
+            <div #identSearch>
 
-              <div  *ngSwitchCase="identificationKinds.Name">
-                <app-company-search-by-name-component (complete)="submitCompany($event)"
-                                                      (loading)="loading = $event"
-                                                      (changeIdentificationKind)="identificationKind = $event">
-                </app-company-search-by-name-component>
-              </div>
+              <hr *ngIf="identificationKind"/>
 
-              <div  *ngSwitchCase="identificationKinds.Identity">
-                <app-company-search-by-identity (complete)="submitCompany($event)"
-                                                (loading)="loading = $event">
-                </app-company-search-by-identity>
-              </div>
+              <ng-container [ngSwitch]="identificationKind">
 
-              <div *ngSwitchCase="identificationKinds.None">
-                <app-company-foreign-country (complete)="submitCompany($event)"></app-company-foreign-country>
-              </div>
+                <div  *ngSwitchCase="identificationKinds.Name">
+                  <app-company-search-by-name-component (complete)="submitCompany($event)"
+                                                        (loading)="loading = $event"
+                                                        (changeIdentificationKind)="identificationKind = $event">
+                  </app-company-search-by-name-component>
+                </div>
+
+                <div  *ngSwitchCase="identificationKinds.Identity">
+                  <app-company-search-by-identity (complete)="submitCompany($event)"
+                                                  (loading)="loading = $event">
+                  </app-company-search-by-identity>
+                </div>
+
+                <div *ngSwitchCase="identificationKinds.None">
+                  <app-company-foreign-country (complete)="submitCompany($event)"></app-company-foreign-country>
+                </div>
+              </ng-container>
             </div>
           </ng-container>
 

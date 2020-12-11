@@ -12,6 +12,8 @@ export const foreignFormValidator: ValidatorFn = (control: FormGroup): Validatio
   return isForeign.value && (!name.value || !country.value) ? { required: true } : null;
 };
 
+export enum IsForeignValues {'true', 'false', 'unknown'}
+
 @Component({
   selector: 'app-company-foreign-country',
   templateUrl: './company-foreign-country.component.html',
@@ -19,8 +21,10 @@ export const foreignFormValidator: ValidatorFn = (control: FormGroup): Validatio
 })
 export class CompanyForeignCountryComponent implements OnInit {
 
-  @ViewChild('foreignInputs')
-  private foreignInputs: ElementRef;
+  @ViewChild('foreignFormElt')
+  private foreignFormElt: ElementRef;
+  @ViewChild('foreignInputsElt')
+  private foreignInputsElt: ElementRef;
 
   @Input() forceForeign;
   @Output() complete = new EventEmitter<DraftCompany>();
@@ -30,6 +34,7 @@ export class CompanyForeignCountryComponent implements OnInit {
   nameCtrl: FormControl;
   countryCtrl: FormControl;
   countries: string[] = countries.map(country => country.name).filter(name => name !== 'France');
+  isForeignValues = IsForeignValues;
 
   showErrors: boolean;
 
@@ -41,7 +46,7 @@ export class CompanyForeignCountryComponent implements OnInit {
   }
 
   initForeignForm() {
-    this.isForeignCtrl = this.formBuilder.control(this.forceForeign ? true : '', Validators.required);
+    this.isForeignCtrl = this.formBuilder.control(this.forceForeign ? IsForeignValues.true : '', Validators.required);
     this.nameCtrl = this.formBuilder.control('');
     this.countryCtrl = this.formBuilder.control('');
     this.foreignForm = this.formBuilder.group({
@@ -56,7 +61,7 @@ export class CompanyForeignCountryComponent implements OnInit {
     if (!this.foreignForm.valid) {
       this.showErrors = true;
     } else {
-      if (this.isForeignCtrl.value) {
+      if (this.isForeignCtrl.value === IsForeignValues.true) {
         this.complete.emit({
           name: this.nameCtrl.value,
           country: this.countryCtrl.value

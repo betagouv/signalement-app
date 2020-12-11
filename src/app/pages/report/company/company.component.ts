@@ -99,8 +99,4 @@ export class CompanyComponent implements OnInit {
   changeCompany() {
     this.changeDraftCompany = true;
   }
-
-  selectIdentificationKind(identificationKind: IdentificationKinds) {
-    this.rendererService.scrollToElement(this.identSearch.nativeElement);
-  }
 }

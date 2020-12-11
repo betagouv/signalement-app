@@ -191,13 +191,12 @@
     <i class="material-icons md-24" aria-hidden="true">search</i>
     Rechercher
   </button>
-
-  <hr *ngIf="companySearchByIdentityResults"/>
-
 </form>
 
 <div #identByIdentityResult>
   <div *ngIf="companySearchByIdentityResults?.length">
+
+    <hr />
 
     <h2 class="mb-4 font-weight-bold">
       Sélectionnez l'entreprise
