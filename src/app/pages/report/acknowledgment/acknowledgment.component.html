@@ -5,7 +5,7 @@
         <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> Votre signalement a été envoyé.
       </div>
 
-      <div class="card" *ngIf="!draftReport.isContractualDispute; else contractualDispute">
+      <div class="card" *ngIf="!draftReport.isContractualDispute || (draftReport.draftCompany | isForeign); else contractualDispute">
         <div class="card-body">
           <div class="row">
             <div class="col-3 p-0">
