@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
-import { ReportFilter } from '../../../model/ReportFilter';
+import { ReportFilter, reportFilter2QueryString, ReportFilterQuerystring } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { Roles } from '../../../model/AuthUser';
@@ -27,7 +27,6 @@ export class ReportListComponent implements OnInit {
   readonly defaultPageSize = 10;
 
   readonly formControlNamesWithAutomaticRefresh: (keyof ReportFilter)[] = [
-    'companyCountries',
     'departments',
     'period',
   ];
@@ -56,6 +55,21 @@ export class ReportListComponent implements OnInit {
     this.initAndBuildForm();
   }
 
+  readonly getFormFromQueryString = (qs: ReportFilterQuerystring): { [key in keyof ReportFilter]: any } => {
+    try {
+      const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+      return {
+        ...qs,
+        departments: qs.departments?.split(','),
+        hasCompany: parseBooleanOption(qs.hasCompany),
+        period: (qs.start && qs.end) && [new Date(qs.start), new Date(qs.end)],
+      };
+    } catch (e) {
+      console.error('Caught error on "reportFilterFromQueryString"', qs, e);
+      return {};
+    }
+  };
+
   private initAndBuildForm = (): void => {
     const initialValues: ReportFilter = {
       tags: [],
@@ -74,7 +88,7 @@ export class ReportListComponent implements OnInit {
     const formValues = {
       ...initialValues,
       ...this.reportService.currentReportFilter,
-      ...this.getQueryString(),
+      ...this.getFormFromQueryString(this.activatedRoute.snapshot.queryParams),
     };
     try {
       this.buildForm(formValues);
@@ -122,7 +136,7 @@ export class ReportListComponent implements OnInit {
   }
 
   private updateQueryString = (values: ReportFilter) => {
-    this.router.navigate([], { queryParams: values, replaceUrl: true });
+    this.router.navigate([], { queryParams: reportFilter2QueryString(values), replaceUrl: true });
   };
 
   get searchFormValue(): ReportFilter {

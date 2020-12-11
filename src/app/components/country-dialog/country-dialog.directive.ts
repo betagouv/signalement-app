@@ -56,6 +56,6 @@ export class CountryDialogDirective implements ControlValueAccessor {
   private manuallyReflectChangeOnHostInput = (countries?: string[]) => {
     // I expected it to be automatically done by formControlName directive,
     // but it has to be done manually.
-    this.el.nativeElement.value = (countries || []).join(', ');
+    this.el.nativeElement.value = Array.isArray(countries) ? countries.join(', ') : countries;
   };
 }

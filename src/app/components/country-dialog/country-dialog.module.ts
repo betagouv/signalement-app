@@ -7,7 +7,6 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CountryDialogComponent } from './country-dialog.component';
 import { CountryDialogDirective } from './country-dialog.directive';
-import { CountryInputComponent } from './country-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -19,12 +18,10 @@ import { MatRadioModule } from '@angular/material/radio';
   exports: [
     CountryDialogComponent,
     CountryDialogDirective,
-    CountryInputComponent,
   ],
   declarations: [
     CountryDialogComponent,
     CountryDialogDirective,
-    CountryInputComponent,
   ],
   imports: [
     ReactiveFormsModule,

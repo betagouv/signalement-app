@@ -22,7 +22,7 @@ const initialForm: Form = {
     <mat-progress-bar *ngIf="constantService.fetchingCountries" mode="indeterminate" class="app-mat-dialog-progress">
     </mat-progress-bar>
 
-    <h2 mat-dialog-title>Selectionner des pays</h2>
+    <h2 mat-dialog-title>Sélection des pays étrangers</h2>
 
     <ng-container [formGroup]="form">
       <mat-form-field floatLabel="never" class="fullwidth">
@@ -34,7 +34,7 @@ const initialForm: Form = {
 
       <mat-radio-group class="radio-group" formControlName="group">
         <mat-radio-button value="all">Tous <span class="txt-secondary">({{currentValues.size}} pays sélectionnés)</span></mat-radio-button>
-        <mat-radio-button value="european">Pays européen uniquement</mat-radio-button>
+        <mat-radio-button value="european">Pays européens (UE) uniquement</mat-radio-button>
         <mat-radio-button value="transfer">Pays avec accord uniquement</mat-radio-button>
       </mat-radio-group>
     </ng-container>
@@ -46,7 +46,7 @@ const initialForm: Form = {
           <span class="font-weight-bold">Tout sélectionner <span class="txt-secondary">({{countries.length}} pays)</span></span>
         </mat-checkbox>
         <div *ngFor="let country of countries">
-          <mat-checkbox [value]="country.name" [checked]="currentValues.has(country.name)" (change)="update($event)" ngDefaultControl>
+          <mat-checkbox [value]="country.code" [checked]="currentValues.has(country.code)" (change)="update($event)" ngDefaultControl>
             {{country.name}}
           </mat-checkbox>
         </div>
@@ -88,7 +88,8 @@ export class CountryDialogComponent {
 
   private filters = ([countries, form]: [Country[], Form]) => {
     return countries.filter(_ =>
-      _.name.toLowerCase().indexOf(form.name.toLowerCase()) !== -1
+      _.name !== 'France'
+      && _.name.toLowerCase().indexOf(form.name.toLowerCase()) !== -1
       && (form.group === 'european' ? _.european === true : true)
       && (form.group === 'transfer' ? _.transfer === true : true)
     );
@@ -102,12 +103,12 @@ export class CountryDialogComponent {
     map(this.filters),
   );
 
-  readonly allSelected = (countries: Country[]) => countries.every(_ => this.currentValues.has(_.name));
-  readonly allUnSelected = (countries: Country[]) => !countries.find(_ => this.currentValues.has(_.name));
+  readonly allSelected = (countries: Country[]) => countries.every(_ => this.currentValues.has(_.code));
+  readonly allUnSelected = (countries: Country[]) => !countries.find(_ => this.currentValues.has(_.code));
 
   readonly toggleAll = (countries: Country[]) => {
     const action = this.allUnSelected(countries) ? 'add' : 'delete';
-    countries.forEach(_ => this.currentValues[action](_.name));
+    countries.forEach(_ => this.currentValues[action](_.code));
   };
 
   readonly update = (event: MatCheckboxChange) => {
