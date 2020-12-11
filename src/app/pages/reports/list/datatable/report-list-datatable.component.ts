@@ -10,7 +10,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
 @Component({
   selector: 'app-report-list-datatable',
   template: `
-    <div class="table-container">
+    <div class="table-overflow">
       <table mat-table [dataSource]="reports.entities">
 
         <ng-container matColumnDef="name">

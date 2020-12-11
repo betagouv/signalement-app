@@ -123,6 +123,10 @@
       "description": "Donnez votre avis sur la réponse de l'entreprise à votre signalement sur SignalConso"
     }
   },
+  "websites": {
+    "title": "Modéreration des sites webs - SignalConso",
+    "description": "Modérer les sites webs suggérés"
+  },
   "companies": {
     "myCompanies": {
       "title": "Mes entreprises - SignalConso",
