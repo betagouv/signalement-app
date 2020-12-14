@@ -50,9 +50,15 @@
                   </p>
                   <p *ngIf="foreignCountry?.european">
                     Nous vous invitons à faire votre signalement directement auprès du Centre Européen des Consommateurs. Il vous apportera une assistance pour régler votre problème.
-                    <a href="https://www.europe-consommateurs.eu/fr/une-question-une-reclamation" target="_blank">https://www.europe-consommateurs.eu/fr/une-question-une-reclamation</a>
+                    <a href="https://www.europe-consommateurs.eu/fr/une-question-une-reclamation" target="_blank" title="europe-consommateurs.eu (nouvelle fenêtre)">
+                      https://www.europe-consommateurs.eu/fr/une-question-une-reclamation
+                    </a>
                   </p>
-                  <p *ngIf="foreignCountry?.transfer">
+                  <p *ngIf="foreignCountry?.transfer && foreignCountry?.code === 'AND'">
+                    Nous vous invitons à faire votre signalement directement auprès du service du commerce et de la consommation d’Andorre :
+                    <a href="https://www.comerc.ad/reclamacions/?id=fr" target="_blank" title="comerc.ad (nouvelle fenêtre)">https://www.comerc.ad/reclamacions/?id=fr</a>
+                  </p>
+                  <p *ngIf="foreignCountry?.transfer && foreignCountry?.code !== 'AND'">
                     Par contre les enquêteurs de la répression des fraudes vont le transférer aux autorités compétentes de ce pays.
                   </p>
                   <p *ngIf="!foreignCountry?.european && !foreignCountry?.transfer">
