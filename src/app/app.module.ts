@@ -27,6 +27,7 @@ import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 import * as echarts from 'echarts';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { CompaniesModule } from './pages/companies/companies.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -86,6 +87,7 @@ class ErrorLogger extends ErrorHandler {
       AppRoleModule,
       AppPermissionModule,
       ContractualDisputeModule,
+      CompaniesModule,
     ],
     exports: [
     ],
