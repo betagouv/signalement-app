@@ -1,0 +1,47 @@
+<mat-progress-bar *ngIf="constantService.fetchingCountries" mode="indeterminate" class="app-mat-dialog-progress">
+</mat-progress-bar>
+
+<h2 mat-dialog-title>Sélection des pays étrangers</h2>
+
+<ng-container [formGroup]="form">
+  <mat-form-field floatLabel="never" class="fullwidth">
+    <input matInput type="text" formControlName="name" placeholder="Rechercher...">
+    <button mat-button matSuffix mat-icon-button (click)="filterName = ''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-radio-group class="radio-group" formControlName="group">
+    <mat-radio-button value="all">Tous <span class="txt-secondary">({{currentValues.size}} pays sélectionnés)</span>
+    </mat-radio-button>
+    <mat-radio-button value="european">Pays européens (UE) uniquement</mat-radio-button>
+    <mat-radio-button value="transfer">Pays avec accord uniquement</mat-radio-button>
+  </mat-radio-group>
+</ng-container>
+
+<mat-dialog-content class="content">
+  <ng-container *ngIf="countries$ | async as countries">
+    <mat-checkbox [checked]="!!allSelected(countries)"
+                  [indeterminate]="!allUnSelected(countries) && !allSelected(countries)"
+                  (change)="toggleAll(countries)" class="cb-all">
+      <span class="font-weight-bold">Tout sélectionner <span class="txt-secondary">({{countries.length}}
+        pays)</span></span>
+    </mat-checkbox>
+    <div *ngFor="let country of countries">
+      <mat-checkbox [value]="country.code" [checked]="currentValues.has(country.code)" (change)="update($event)"
+                    ngDefaultControl>
+        {{country.name}}
+      </mat-checkbox>
+    </div>
+    <div *ngIf="countries.length === 0" class="no-countries">
+      Aucun pays ne correspond à votre recherche
+    </div>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="primary">Annuler</button>
+  <button mat-button mat-dialog-close color="primary" (click)="save()">
+    Confirmer
+  </button>
+</mat-dialog-actions>

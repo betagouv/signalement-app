@@ -7,10 +7,10 @@ import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
-import { ReportFilter } from '../model/ReportFilter';
+import { ReportFilter, reportFilter2QueryString } from '../model/ReportFilter';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from '../model/Company';
-import moment from 'moment';
+import Utils from '../utils';
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +52,7 @@ export class ReportService {
         companyName: draftReport.draftCompany.name,
         companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
+        companyCountry: draftReport.draftCompany.country,
         companySiret: draftReport.draftCompany.siret,
         companyActivityCode: draftReport.draftCompany.activityCode,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
@@ -183,7 +184,7 @@ export class ReportService {
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
         {
           ...headers,
-          params: this.serviceUtils.objectToHttpParams(this.reportFilter2QueryString(report))
+          params: this.serviceUtils.objectToHttpParams(reportFilter2QueryString(report))
         },
       )),
       mergeMap(paginatedData => of({
@@ -194,7 +195,6 @@ export class ReportService {
   }
 
   launchExtraction(report: ReportFilter) {
-    console.log('START', report, this.reportFilter2Body(report));
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.post(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
@@ -204,28 +204,16 @@ export class ReportService {
     );
   }
 
-  private reportFilter2QueryString = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
-    const { period, ...r } = report;
-    return {
-      ...r,
-      ...(r.departments ? { departments: r.departments.join(',') } : {}),
-      ...((period && period[0]) ? { start: this.mapDate(period[0]) } : {}),
-      ...((period && period[1]) ? { end: this.mapDate(period[1]) } : {}),
-    };
-  };
-
   private reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
     const { period, offset, departments, tags, limit, ...rest } = report;
     return {
       ...rest,
       departments: departments || [],
       tags: tags || [],
-      ...((period && period[0]) ? { start: this.mapDate(period[0]) } : {}),
-      ...((period && period[1]) ? { end: this.mapDate(period[1]) } : {}),
+      ...((period && period[0]) ? { start: Utils.mapDate(period[0]) } : {}),
+      ...((period && period[1]) ? { end: Utils.mapDate(period[1]) } : {}),
     };
   };
-
-  private mapDate = (date: string): string => moment(date).format('YYYY-MM-DD');
 
   private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}) => {
     const report = reportWithFiles.report;
@@ -242,6 +230,7 @@ export class ReportService {
         siret: report.companySiret,
         address: report.companyAddress,
         postalCode: report.companyPostalCode,
+        country: report.companyCountry,
       }),
       consumer: Object.assign(new Consumer(), {
         firstName: report.firstName,

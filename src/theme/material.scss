@@ -61,6 +61,14 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   padding-right: spacing(.75) !important;
 }
 
+.app-mat-dialog-progress {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+
 // Fix conflicts with bootstrap _reset.scss
 
 .mat-radio-button ~ .mat-radio-button {
@@ -90,7 +98,7 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
 }
 
 .mat-dialog-actions {
-  margin-top: spacing(2) !important;
+  margin-top: 0 !important;
   margin-right: spacing(-2) !important;
 }
 

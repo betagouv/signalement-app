@@ -55,8 +55,11 @@
                 </ng-container>
               </strong>
             </div>
-            <div>
+            <div *ngIf="draftReport.draftCompany.address">
               Adresse : {{draftReport.draftCompany.address}}
+            </div>
+            <div *ngIf="draftReport.draftCompany | isForeign">
+              Pays : {{draftReport.draftCompany.country}}
             </div>
           </ng-container>
           <div *ngIf="draftReport.draftCompany.siret">

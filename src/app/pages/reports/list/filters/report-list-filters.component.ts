@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import oldCategories from '../../../../../assets/data/old-categories.json';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AnomalyService } from '../../../../services/anomaly.service';
-import { Tag } from '../../../../model/Anomaly';
 import { ConstantService } from '../../../../services/constant.service';
 import { Regions } from '../../../../model/Region';
 import { ReportFilter } from '../../../../model/ReportFilter';
@@ -13,11 +12,11 @@ import { ReportFilter } from '../../../../model/ReportFilter';
   selector: 'app-report-list-search',
   template: `
     <ng-container [formGroup]="searchForm">
+
       <app-select-departments
         placeholder="Département(s)" formControlName="departments" id="rls-departments"
         class="form-control form-control-material">
       </app-select-departments>
-      &nbsp;&nbsp;
       <input
         class="form-control form-control-material"
         formControlName="period"
@@ -61,7 +60,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
               <mat-select formControlName="status" id="rls-statut" class="form-control form-control-material">
                 <mat-select-trigger>{{searchForm.get('status').value}}</mat-select-trigger>
                 <mat-option selected>Tous les statuts</mat-option>
-                <mat-option *ngFor="let _ of statusList" [value]="_" class="mat-option-dense">
+                <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">
                   <app-badge-status [status]="_">{{_}}</app-badge-status>
                 </mat-option>
               </mat-select>
@@ -95,6 +94,21 @@ import { ReportFilter } from '../../../../model/ReportFilter';
                 <mat-option>Toutes les catégories</mat-option>
                 <mat-option *ngFor="let _ of categories" [value]="_">{{_}}</mat-option>
               </mat-select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="rls-country">Pays étrangers</label>
+            </td>
+            <td>
+              <input
+                id="rls-country"
+                class="form-control form-control-material"
+                formControlName="companyCountries"
+                appCountryDialog
+                readonly
+                style="cursor: pointer"
+              />
             </td>
           </tr>
           <tr>
@@ -151,9 +165,9 @@ export class ReportListFiltersComponent implements OnInit {
 
   isPanelOpen = false;
 
-  tags: Tag[];
+  tags = this.anomalyService.getTags();
 
-  statusList: string[];
+  statusList$ = this.constantService.getReportStatusList();
 
   categories: string[];
 
@@ -162,8 +176,6 @@ export class ReportListFiltersComponent implements OnInit {
   departments = this.regions.flatMap(_ => _.departments).map(_ => _.code);
 
   ngOnInit() {
-    this.tags = this.anomalyService.getTags();
-    this.constantService.getReportStatusList().subscribe(_ => this.statusList = _);
     this.categories = [
       ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
       ...oldCategories

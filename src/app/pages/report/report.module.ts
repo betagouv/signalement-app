@@ -22,6 +22,11 @@ import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { CompanyForeignCountryComponent } from './company/foreign-country/company-foreign-country.component';
+import { CompanySearchByNameComponent } from './company/search-by-name-component/company-search-by-name.component';
+import { CompanySearchByIdentityComponent } from './company/search-by-identity/company-search-by-identity.component';
+import { CompanySearchByWebsiteComponent } from './company/search-by-website/company-search-by-website.component';
 
 defineLocale('fr', frLocale);
 
@@ -75,6 +80,10 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     InformationComponent,
     AcknowledgmentComponent,
     SubcategoryComponent,
+    CompanyForeignCountryComponent,
+    CompanySearchByNameComponent,
+    CompanySearchByIdentityComponent,
+    CompanySearchByWebsiteComponent,
   ],
   imports: [
     CommonModule,
@@ -87,7 +96,8 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     RouterModule.forChild(routes),
     CarouselModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    TypeaheadModule.forRoot(),
   ],
   exports: [
     RouterModule,
