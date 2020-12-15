@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';

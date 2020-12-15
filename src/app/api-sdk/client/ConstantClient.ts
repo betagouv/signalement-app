@@ -1,5 +1,4 @@
 import { ApiClient } from '../ApiClient';
-import { Country } from '../model/Country';
 
 export class ConstantClient {
 

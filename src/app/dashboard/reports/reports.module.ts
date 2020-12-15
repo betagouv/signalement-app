@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxLoadingModule } from 'ngx-loading';
-import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
+import { ComponentsModule } from '../../components/components.module';
 import { ConsumerReviewComponent } from './consumer-review/consumer-review.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReportListProComponent } from './list-pro/report-list-pro.component';

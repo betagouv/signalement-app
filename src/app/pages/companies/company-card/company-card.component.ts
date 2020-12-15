@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Company, UserAccess } from '../../../model/Company';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';;
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
 import { Permissions, User } from '../../../model/AuthUser';

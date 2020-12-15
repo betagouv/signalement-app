@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
+import { ComponentsModule } from '../../components/components.module';
 import { MyCompaniesComponent } from './my-companies/my-companies.component';
-import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesAdminComponent } from './companies-admin/companies-admin.component';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';

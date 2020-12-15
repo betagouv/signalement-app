@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxLoadingModule } from 'ngx-loading';
-import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
+import { ComponentsModule } from '../../components/components.module';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 import { SubscriptionListComponent } from './subscription-list/subscription-list.component';
 import { Roles } from '../../model/AuthUser';

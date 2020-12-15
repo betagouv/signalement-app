@@ -1,5 +1,4 @@
 import { Compiler, FactoryProvider, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, ROUTES, Routes } from '@angular/router';
 import { CategoryComponent, IllustrationCardComponent } from './category/category.component';
 import { InformationComponent } from './information/information.component';
@@ -11,10 +10,9 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
-import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
+import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 import anomalies from '../../../assets/data/anomalies.json';
 import { ReportPaths } from '../../services/report-router.service';
