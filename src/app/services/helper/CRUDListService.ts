@@ -62,10 +62,10 @@ export abstract class CRUDListService<T extends Entity, C, U> extends ListServic
         return _;
       }),
       mergeMap(() => this.methods.create(data)),
-      map((createdWebsite => {
+      map((created => {
         this._creating = false;
-        this.source.next([...(this.source.value ?? []), createdWebsite]);
-        return createdWebsite;
+        this.source.next([...(this.source.value ?? []), created]);
+        return created;
       })),
       catchError((err: ApiError) => {
         this._creating = false;
@@ -86,10 +86,10 @@ export abstract class CRUDListService<T extends Entity, C, U> extends ListServic
         return _;
       }),
       mergeMap(() => this.methods.update(id, data)),
-      map((updatedWebsite: T) => {
-        this.source.next((this.source.value ?? []).map((_: T) => _.id === id ? updatedWebsite : _));
+      map((updated: T) => {
+        this.source.next((this.source.value ?? []).map((_: T) => _.id === id ? updated : _));
         this._updating.delete(id);
-        return updatedWebsite;
+        return updated;
       }),
       catchError((err: ApiError) => {
         this._updating.delete(id);

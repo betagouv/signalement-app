@@ -37,9 +37,9 @@ export abstract class ListService<T extends Entity> {
         return _;
       }),
       mergeMap(() => this.listMethod(...args)),
-      mergeMap((websites: T[]) => {
+      mergeMap((data: T[]) => {
         this._fetching = false;
-        this.source.next(websites);
+        this.source.next(data);
         return this.source.asObservable() as Observable<T[]>;
       }),
       catchError((err: ApiError) => {
