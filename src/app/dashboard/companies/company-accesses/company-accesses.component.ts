@@ -8,7 +8,7 @@ import { CompanyAccess, PendingToken } from '../../../model/Company';
 import { User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { accessLevels } from 'src/app/dashboard/companies/common';
+import { accessLevels } from '../common';
 
 @Component({
   selector: 'app-company-accesses',
