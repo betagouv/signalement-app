@@ -7,7 +7,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { Roles } from '../model/AuthUser';
 import { ManageWebsitesModule } from './manage-websites/manage-websites.module';
 import { AdminComponent } from './admin/admin.component';
-import { CompaniesModule } from './companies/companies.module';
+import { DashboardCompaniesModule } from './companies/dashboard-companies.module';
 import { DGCCRFComponent } from './dgccrf/dgccrf.component';
 import { AsyncFilesComponent } from './downloads/asyncfiles.component';
 import { ComponentsModule } from '../components/components.module';
@@ -35,7 +35,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     ComponentsModule,
-    CompaniesModule,
+    DashboardCompaniesModule,
     SubscriptionModule,
     ReportsModule,
     ModalModule.forRoot(),

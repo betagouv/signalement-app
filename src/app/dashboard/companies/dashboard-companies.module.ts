@@ -12,8 +12,12 @@ import { Roles } from '../../model/AuthUser';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { CompanyInvitationComponent } from './company-invitation/company-invitation.component';
+import { CompanyAccessesComponent } from './company-accesses/company-accesses.component';
 
 const routes: Routes = [
+  { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
+  { path: 'entreprise/acces/:siret/invitation', component: CompanyInvitationComponent, canActivate: [AuthGuard] },
   { path: 'mes-entreprises', component: MyCompaniesComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
   { path: 'entreprises', component: CompaniesAdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
   { path: 'entreprises/les-plus-signalees', component: CompaniesAdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
@@ -23,9 +27,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    CompanyAccessesComponent,
+    CompanyInvitationComponent,
     MyCompaniesComponent,
-    CompanyCardComponent,
     CompaniesAdminComponent,
+    CompanyCardComponent,
   ],
   imports: [
     FormsModule,
@@ -45,4 +51,5 @@ const routes: Routes = [
     AuthGuard
   ],
 })
-export class CompaniesModule { }
+export class DashboardCompaniesModule {
+}
