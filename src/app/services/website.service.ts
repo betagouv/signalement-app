@@ -15,10 +15,10 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
 
   constructor(protected utils: ServiceUtils,) {
     super(utils, {
-      list: () => utils.getReportApiSdk().pipe(mergeMap(api => api.website.list())),
-      create: (c: ApiWebsiteCreate) => utils.getReportApiSdk().pipe(mergeMap(api => api.website.create(c))),
-      update: (id: Id, u: Partial<ApiWebsite>) => utils.getReportApiSdk().pipe(mergeMap(api => api.website.update(id, u))),
-      remove: (id: Id) => utils.getReportApiSdk().pipe(mergeMap(api => api.website.remove(id))),
+      list: () => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.website.list())),
+      create: (c: ApiWebsiteCreate) => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.website.create(c))),
+      update: (id: Id, u: Partial<ApiWebsite>) => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.website.update(id, u))),
+      remove: (id: Id) => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.website.remove(id))),
     });
   }
 
