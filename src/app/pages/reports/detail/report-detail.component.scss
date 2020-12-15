@@ -60,15 +60,6 @@ input + input {
   vertical-align: top;
 }
 
-.selected {
-  background-color: $light-green;
-  border-radius: $theme-border-more-radius;
-
-  label, h2 {
-    color: $black;
-  }
-}
-
 .not-selected {
   label, h2 {
     color: $darker-grey;

@@ -6,6 +6,10 @@
   display: flex;
   align-items: center;
   position: relative;
+
+  .form-control {
+    margin-right: spacing(1);
+  }
 }
 
 .search-dialog {
@@ -50,6 +54,7 @@
     color: $theme-color-text-secondary;
     margin: 0;
     white-space: nowrap;
+    display: inline;
   }
 }
 

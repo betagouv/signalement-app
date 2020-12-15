@@ -1,4 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
+import moment from 'moment';
 
 export default class Utils {
   static textOverflowMiddleCropping(text: string, limit: number) {
@@ -19,6 +20,8 @@ export default class Utils {
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
     return Object.keys(cleanedObj).length > 0 ? cleanedObj : undefined;
   };
+
+  static mapDate = (date: string): string => moment(date).format('YYYY-MM-DD');
 
   static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 }

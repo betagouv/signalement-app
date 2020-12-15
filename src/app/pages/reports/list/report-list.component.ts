@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
-import { ReportFilter } from '../../../model/ReportFilter';
+import { ReportFilter, reportFilter2QueryString, ReportFilterQuerystring } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { Roles } from '../../../model/AuthUser';
@@ -26,7 +26,7 @@ export class ReportListComponent implements OnInit {
 
   readonly defaultPageSize = 10;
 
-  readonly formControlNamesWithAutomaticRefresh = [
+  readonly formControlNamesWithAutomaticRefresh: (keyof ReportFilter)[] = [
     'departments',
     'period',
   ];
@@ -55,10 +55,40 @@ export class ReportListComponent implements OnInit {
     this.initAndBuildForm();
   }
 
+  readonly getFormFromQueryString = (qs: ReportFilterQuerystring): ReportFilter => {
+    try {
+      const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+      const {
+        offset,
+        limit,
+        tags,
+        departments,
+        companyCountries,
+        hasCompany,
+        start,
+        end,
+      } = qs;
+      return {
+        ...qs,
+        offset: +offset ?? 0,
+        limit: +limit ?? this.defaultPageSize,
+        tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
+        departments: departments?.split(','),
+        companyCountries: companyCountries?.split(','),
+        hasCompany: parseBooleanOption(hasCompany),
+        period: (start && end) && [new Date(start).toString(), new Date(end).toString()],
+      };
+    } catch (e) {
+      console.error('Caught error on "reportFilterFromQueryString"', qs, e);
+      return {};
+    }
+  };
+
   private initAndBuildForm = (): void => {
     const initialValues: ReportFilter = {
       tags: [],
       departments: [],
+      companyCountries: [],
       details: undefined,
       period: undefined,
       siret: undefined,
@@ -72,29 +102,16 @@ export class ReportListComponent implements OnInit {
     const formValues = {
       ...initialValues,
       ...this.reportService.currentReportFilter,
-      ...this.getQueryString(),
+      ...this.getFormFromQueryString(this.activatedRoute.snapshot.queryParams),
     };
     try {
       this.buildForm(formValues);
     } catch (e) {
       // Prevent error thrown by Angular when queryParams are wrong
-      console.error('[ReportListComponent] Cannot build form from querystring', e);
+      console.error('[ReportListComponent] Cannot build form from querystring', e, formValues);
       this.buildForm(initialValues);
     }
     this.search();
-  };
-
-  private getQueryString = (): { [key in keyof ReportFilter]: any } => {
-    const qs = this.activatedRoute.snapshot.queryParams;
-    const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
-    const wrapInArrayIfNot = (value: string[] | string) => Array.isArray(value) ? value : [value];
-    const multiSelectProperties: (keyof ReportFilter)[] = ['tags', 'departments'];
-    return {
-      ...qs,
-      ...(multiSelectProperties.reduce((acc, _) => ({ ...acc, [_]: wrapInArrayIfNot(qs[_]) }), {})),
-      hasCompany: parseBooleanOption(qs.hasCompany),
-      period: (qs.period) && [new Date(qs.period[0]), new Date(qs.period[1])],
-    };
   };
 
   private buildForm = (filters: ReportFilter): void => {
@@ -123,7 +140,7 @@ export class ReportListComponent implements OnInit {
   }
 
   private updateQueryString = (values: ReportFilter) => {
-    this.router.navigate([], { queryParams: values, replaceUrl: true });
+    this.router.navigate([], { queryParams: reportFilter2QueryString(values), replaceUrl: true });
   };
 
   get searchFormValue(): ReportFilter {

@@ -1,0 +1,77 @@
+<ng-container *ngIf="websiteForm">
+  <h2 class="mb-4 font-weight-bold">
+    Informations sur l'entreprise
+  </h2>
+
+  <form [formGroup]="websiteForm" (submit)="searchCompanyByWebsite()" id="websiteForm">
+    <div class="form__group mt-4">
+      <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) (obligatoire)
+      </label>
+      <input type="url" [pattern]="UrlPattern" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
+    </div>
+
+    <div class="notification error mt-3" *ngIf="showErrors && websiteForm.invalid">
+      <div *ngIf="urlCtrl.hasError('required')">
+        Veuillez renseigner l'url du site.
+      </div>
+      <div *ngIf="urlCtrl.hasError('pattern')">
+        Veuillez saisir une url valide (exemple : https://www.site.fr)
+      </div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4" *ngIf="!websiteForm.disabled; else websiteFormDisabled">
+      Continuer
+    </button>
+  </form>
+
+  <ng-template #websiteFormDisabled>
+    <div class="text-right" *ngIf="websiteForm.disabled">
+      <button class="link" (click)="changeWebsite()" aria-label="Modifier adresse du site internet">Modifier</button>
+      <i class="material-icons md-18 edit" aria-hidden="true">edit</i>
+    </div>
+  </ng-template>
+</ng-container>
+
+
+<div #identByUrlResult>
+  <div *ngIf="companySearchByUrlResults && companySearchByUrlResults.length" class="mt-5">
+
+    <hr/>
+
+    <h2 class="mb-4 font-weight-bold">
+      Sélectionnez l'entreprise
+    </h2>
+
+    <app-company-search-results [companySearchResults]="companySearchByUrlResults" (select)="selectCompany($event)"></app-company-search-results>
+
+    <div class="note mt-1">
+      L’entreprise n’apparaît pas ?
+    </div>
+    <div>
+      Modifiez l'adresse du site internet ou<button class="link" (click)="this.submitWebsiteOnly()">identifier directement l'entreprise.</button>
+    </div>
+
+    <hr *ngIf="selectedCompany"/>
+
+    <ng-container *ngIf="selectedCompany?.kind === websiteKinds.Marketplace">
+
+      <div class="notification info">
+        L'entreprise sélectionnée est une place de marché (marketplace), c'est à dire qu'elle propose des produits vendus par des tiers.
+      </div>
+      <h2 class="mb-4 font-weight-bold">
+        Pouvez-vous identifier le vendeur ?
+      </h2>
+      <form>
+        <label for="websiteVendor">Nom du vendeur tiers</label>
+        <div class="note mb-1">
+          Uniquement si le vendeur n'est pas {{selectedCompany.name}}
+        </div>
+        <input [formControl]="vendorCtrl" id="websiteVendor" name="websiteVendor">
+        <hr />
+      </form>
+    </ng-container>
+
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
+      Continuer
+    </button>
+  </div>
+</div>
