@@ -6,6 +6,7 @@ import { AppPermissionModule } from '../../directives/app-permission/app-permiss
 import { HeaderComponent } from './header.component';
 import { AccountMenuComponent } from './account-menu/account-menu.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AccountMenuComponent,
   ],
   imports: [
-    CommonModule,
+    ComponentsModule,
     RouterModule,
     AppRoleModule,
     AppPermissionModule,

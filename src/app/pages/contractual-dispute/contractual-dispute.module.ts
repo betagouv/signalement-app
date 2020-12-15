@@ -12,7 +12,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [ContractualDisputeComponent],
   imports: [
-    CommonModule,
     RouterModule.forChild(routes),
     ComponentsModule
   ]

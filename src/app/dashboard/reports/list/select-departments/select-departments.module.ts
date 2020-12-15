@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SelectDepartmentsComponent
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,

@@ -86,12 +86,10 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     CompanySearchByWebsiteComponent,
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     AlertModule.forRoot(),
-    NgxLoadingModule.forRoot(NgxLoadingConfig),
     Ng2CompleterModule,
     RouterModule.forChild(routes),
     CarouselModule,

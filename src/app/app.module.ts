@@ -60,12 +60,10 @@ class ErrorLogger extends ErrorHandler {
       NotFoundComponent,
     ],
     imports: [
-      CommonModule,
       NgtUniversalModule,
       TransferHttpCacheModule,
       HttpClientModule,
       NgxEchartsModule.forRoot({ echarts }),
-      NgxLoadingModule.forRoot(NgxLoadingConfig),
       RouterModule.forRoot([
         { path: 'stats', component: StatsComponent },
         { path: 'not-found', component: NotFoundComponent },

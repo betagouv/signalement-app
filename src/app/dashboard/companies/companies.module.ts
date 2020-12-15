@@ -30,13 +30,11 @@ const routes: Routes = [
     CompaniesAdminComponent,
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     BsDropdownModule.forRoot(),
     ComponentsModule,
-    NgxLoadingModule.forRoot(NgxLoadingConfig),
     BsDatepickerModule.forRoot(),
     AppRoleModule,
     AppPermissionModule,

@@ -28,13 +28,11 @@ const routes: Routes = [
     CompanyInvitationComponent,
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     BsDropdownModule.forRoot(),
     ComponentsModule,
-    NgxLoadingModule.forRoot(NgxLoadingConfig),
     BsDatepickerModule.forRoot(),
     AppRoleModule,
     AppPermissionModule,

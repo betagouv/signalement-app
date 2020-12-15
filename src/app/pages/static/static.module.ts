@@ -53,7 +53,6 @@ const routes: Routes = [
     UnavailableComponent
   ],
   imports: [
-    CommonModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
     RouterModule.forChild(routes),

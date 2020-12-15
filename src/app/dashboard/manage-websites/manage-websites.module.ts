@@ -25,7 +25,6 @@ const routes: Routes = [
     ManageWebsitesComponent,
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),

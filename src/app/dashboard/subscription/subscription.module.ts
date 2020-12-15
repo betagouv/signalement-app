@@ -22,11 +22,9 @@ const routes: Routes = [
     SubscriptionListComponent
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    NgxLoadingModule.forRoot(NgxLoadingConfig),
     ComponentsModule,
   ]
 })

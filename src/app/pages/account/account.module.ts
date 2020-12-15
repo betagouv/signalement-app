@@ -35,7 +35,6 @@ const routes: Routes = [
     EmailValidationComponent,
   ],
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
