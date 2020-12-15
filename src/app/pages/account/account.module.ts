@@ -8,8 +8,6 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { AccountRegistrationComponent } from './account-registration/account-registration.component';
 import { EmailValidationComponent } from './email-validation/email-validation.component';
-import { PasswordChangeComponent } from './password-change/password-change.component';
-import { AuthGuard } from '../../guards/auth.guard';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 
@@ -24,7 +22,6 @@ const routes: Routes = [
   { path: 'connexion/perte-mot-de-passe/dgccrf', component: PasswordForgotComponent },
   { path: 'connexion/nouveau-mot-de-passe/:token', component: PasswordResetComponent },
   { path: 'compte/inscription', component: AccountRegistrationComponent },
-  { path: 'compte/mot-de-passe', component: PasswordChangeComponent, canActivate: [AuthGuard] },
   { path: 'entreprise/rejoindre/:siret', component: AccountRegistrationComponent },
   { path: 'dgccrf/rejoindre', component: AccountRegistrationComponent },
 ];
@@ -35,7 +32,6 @@ const routes: Routes = [
     PasswordForgotComponent,
     PasswordResetComponent,
     AccountRegistrationComponent,
-    PasswordChangeComponent,
     EmailValidationComponent,
   ],
   imports: [
