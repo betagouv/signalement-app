@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { ReportsModule } from './reports/reports.module';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { Roles } from '../model/AuthUser';
 import { ManageWebsitesModule } from './manage-websites/manage-websites.module';
@@ -13,6 +13,8 @@ import { AsyncFilesComponent } from './downloads/asyncfiles.component';
 import { ComponentsModule } from '../components/components.module';
 import { ReportListProComponent } from './reports/list-pro/report-list-pro.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 const routes: Routes = [
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
@@ -28,15 +30,17 @@ const routes: Routes = [
     DGCCRFComponent,
     AdminComponent,
     AsyncFilesComponent,
-    ReportListProComponent,
     PasswordChangeComponent,
   ],
   imports: [
+    RouterModule.forChild(routes),
     ComponentsModule,
     CompaniesModule,
     SubscriptionModule,
     ReportsModule,
     ManageWebsitesModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [],
   providers: [],

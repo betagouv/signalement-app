@@ -27,6 +27,7 @@ import { AppPermissionModule } from './directives/app-permission/app-permission.
 import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 import * as echarts from 'echarts';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -53,10 +54,10 @@ class ErrorLogger extends ErrorHandler {
 
 @NgModule({
     declarations: [
-        AppComponent,
-        FooterComponent,
-        StatsComponent,
-        NotFoundComponent,
+      AppComponent,
+      FooterComponent,
+      StatsComponent,
+      NotFoundComponent,
     ],
     imports: [
       CommonModule,
@@ -86,6 +87,7 @@ class ErrorLogger extends ErrorHandler {
       ComponentsModule,
       AppRoleModule,
       AppPermissionModule,
+      DashboardModule,
       ContractualDisputeModule,
     ],
     exports: [
