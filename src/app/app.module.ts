@@ -64,6 +64,7 @@ class ErrorLogger extends ErrorHandler {
       HttpClientModule,
       NgxEchartsModule.forRoot({ echarts }),
       RouterModule.forRoot([
+        { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(_ => _.DashboardModule) },
         { path: 'stats', component: StatsComponent },
         { path: 'not-found', component: NotFoundComponent },
         { path: '**', component: NotFoundComponent },
@@ -84,7 +85,6 @@ class ErrorLogger extends ErrorHandler {
       ComponentsModule,
       AppRoleModule,
       AppPermissionModule,
-      DashboardModule,
       ContractualDisputeModule,
     ],
     exports: [
