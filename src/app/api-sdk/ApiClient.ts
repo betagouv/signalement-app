@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 export interface RequestOption {
   qs?: any;
   headers?: any;
