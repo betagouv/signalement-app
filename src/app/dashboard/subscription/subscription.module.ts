@@ -6,6 +6,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 import { SubscriptionListComponent } from './subscription-list/subscription-list.component';
 import { Roles } from '../../model/AuthUser';
+import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    SharedModule,
     ComponentsModule,
   ]
 })

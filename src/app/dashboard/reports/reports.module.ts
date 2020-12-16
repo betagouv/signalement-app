@@ -16,6 +16,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportListModule } from './list/report-list.module';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
     ComponentsModule,
     PipesModule,
     AppRoleModule,
+    SharedModule,
     AppPermissionModule,
   ]
 })

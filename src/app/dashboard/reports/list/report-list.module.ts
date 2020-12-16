@@ -13,6 +13,7 @@ import { ReportListFiltersComponent } from './filters/report-list-filters.compon
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CountryDialogModule } from '../../../components/country-dialog/country-dialog.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CountryDialogModule } from '../../../components/country-dialog/country-
     AppPermissionModule,
     SelectDepartmentsModule,
     CountryDialogModule,
+    SharedModule,
   ]
 })
 export class ReportListModule {

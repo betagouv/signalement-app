@@ -11,7 +11,7 @@ import { map, startWith } from 'rxjs/operators';
 import { Id } from '../../api-sdk/model/Common';
 import { Index } from '../../model/Common';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../../components/confirm/confirm.component';
+import { ConfirmDialogComponent } from '../shared/confirm/confirm.component';
 import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 

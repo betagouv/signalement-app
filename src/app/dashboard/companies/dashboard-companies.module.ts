@@ -14,6 +14,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CompanyInvitationComponent } from './company-invitation/company-invitation.component';
 import { CompanyAccessesComponent } from './company-accesses/company-accesses.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
@@ -43,6 +44,7 @@ const routes: Routes = [
     AppRoleModule,
     AppPermissionModule,
     PaginationModule.forRoot(),
+    SharedModule,
   ],
   exports: [
     RouterModule

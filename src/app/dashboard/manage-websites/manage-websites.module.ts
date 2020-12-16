@@ -9,6 +9,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { Roles } from '../../model/AuthUser';
 import { ManageWebsitesComponent } from './manage-websites.component';
 import { CompanySearchResultsModule } from '../../components/company-search-results/company-search-results.module';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     PipesModule,
     AppRoleModule,
     AppPermissionModule,
+    SharedModule,
     CompanySearchResultsModule,
   ]
 })

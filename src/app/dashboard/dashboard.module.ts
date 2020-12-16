@@ -15,6 +15,7 @@ import { ReportListProComponent } from './reports/list-pro/report-list-pro.compo
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
@@ -42,6 +43,7 @@ const routes: Routes = [
     ManageWebsitesModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedModule,
   ],
   exports: [],
   providers: [],
