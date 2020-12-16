@@ -1,0 +1,14 @@
+@import 'src/theme/variables';
+
+.select-optgroup {
+  font-weight: 500;
+  cursor: pointer !important;
+
+  &:hover {
+    background: $theme-background-hover;
+  }
+
+  &:not(:first-of-type) {
+    border-top: 1px solid $theme-divider;
+  }
+}

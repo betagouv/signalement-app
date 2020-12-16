@@ -10,8 +10,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('header', {static: false}) header;
-  @ViewChild('content', {static: false}) content;
+  @ViewChild('header') header;
+  @ViewChild('content') content;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private injector: Injector,
@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (!this.activatedRoute.snapshot.fragment) {
@@ -38,7 +37,7 @@ export class AppComponent implements OnInit {
   }
 
   getCurrentNavigation() {
-    return this.router.getCurrentNavigation();
+    return this.router.url;
   }
 
 }

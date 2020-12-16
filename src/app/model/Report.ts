@@ -1,9 +1,9 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, Subcategory, Tag } from './Anomaly';
+import { CompanyKinds, ContractualDisputeTag, InternetTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
-import { Company, DraftCompany, Website } from './Company';
+import { Company, DraftCompany, WebsiteURL } from './Company';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -35,20 +35,35 @@ export enum ReportStatus {
 
 }
 
-export const StatusColor = new Map<string, string>([
-  [ReportStatus.NA, '#fff'],
-  [ReportStatus.EmployeeConsumer, '#fff'],
-  [ReportStatus.InProgress, '#FFE49E'],
-  [ReportStatus.Unread, '#c9d3df'],
-  [ReportStatus.UnreadForPro, '#f7d5d2'],
-  [ReportStatus.Transmitted, '#FFE49E'],
-  [ReportStatus.ToReviewedByPro, '#FFE49E'],
-  [ReportStatus.Accepted, '#D6F0FF'],
-  [ReportStatus.Rejected, '#c9d3df'],
-  [ReportStatus.ClosedForPro, '#daf5e7'],
-  [ReportStatus.Ignored, '#c9d3df'],
-  [ReportStatus.NotConcerned, '#c9d3df'],
-]);
+export const reportStatusColor = {
+  [ReportStatus.NA]: '#fff',
+  [ReportStatus.EmployeeConsumer]: '#fff',
+  [ReportStatus.InProgress]: '#FFE49E',
+  [ReportStatus.Unread]: '#c9d3df',
+  [ReportStatus.UnreadForPro]: '#f7d5d2',
+  [ReportStatus.Transmitted]: '#FFE49E',
+  [ReportStatus.ToReviewedByPro]: '#FFE49E',
+  [ReportStatus.Accepted]: '#D6F0FF',
+  [ReportStatus.Rejected]: '#c9d3df',
+  [ReportStatus.ClosedForPro]: '#daf5e7',
+  [ReportStatus.Ignored]: '#c9d3df',
+  [ReportStatus.NotConcerned]: '#c9d3df',
+};
+
+export const reportStatusIcon = {
+  [ReportStatus.NA]: '',
+  [ReportStatus.EmployeeConsumer]: 'admin_panel_settings',
+  [ReportStatus.InProgress]: 'pending',
+  [ReportStatus.Unread]: 'mark_email_unread',
+  [ReportStatus.UnreadForPro]: 'mark_email_unread',
+  [ReportStatus.Transmitted]: 'mark_email_read',
+  [ReportStatus.ToReviewedByPro]: 'query_builder',
+  [ReportStatus.Accepted]: 'check_circle',
+  [ReportStatus.Rejected]: 'help',
+  [ReportStatus.ClosedForPro]: 'archive',
+  [ReportStatus.Ignored]: 'block',
+  [ReportStatus.NotConcerned]: 'delete',
+};
 
 export class DraftReport {
   category: string;
@@ -61,6 +76,7 @@ export class DraftReport {
   contactAgreement: boolean;
   retrievedFromStorage: boolean;
   storedStep: Step;
+  vendor: string;
 
   get companyKind() {
     return this.lastSubcategory ? this.lastSubcategory.companyKind || CompanyKinds.SIRET : CompanyKinds.SIRET;
@@ -71,6 +87,18 @@ export class DraftReport {
       return this.subcategories[this.subcategories.length - 1];
     }
   }
+
+  get tags() {
+    const tags = !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
+    if (this.companyKind === CompanyKinds.WEBSITE) {
+      tags.push(InternetTag);
+    }
+    return tags;
+  }
+
+  get isContractualDispute() {
+    return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
+  }
 }
 
 export class Report {
@@ -79,7 +107,8 @@ export class Report {
   subcategories: Subcategory[];
   tags: Tag[];
   company: Company;
-  website: Website;
+  website: WebsiteURL;
+  vendor: string;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;

@@ -8,7 +8,7 @@ Le projet est avant tout **centré sur les utilisateurs et leur emploi du produi
 
 L’autre point d’amélioration de politique publique, réside dans le **perfectionnement du travail quotidien des agents** qui suggèrent de nouvelles solutions numériques. Avec SignalConso, les inspecteurs des Fraudes souhaitent **obtenir des signalements plus précis** pour diriger leurs enquêtes et cibler les infractions particulièrement graves et répétitives. 
 
-Pour relever tous ces défis, une proposition crédible est proposée, en **rupture avec les méthodes de développement de projet traditionnelles**. Cette initiative originale est soutenue par le directeur de l’organisme public qui sponsorise la Startup d’Etat. Il s’agit du Ministère de l’Economie et de la DGCCRF dans le cas de SignalConso. **L’autonomie de l’équipe dédiée est protégée et les interférences avec les autres services limitées**. 
+Pour relever tous ces défis, une proposition crédible est proposée, en **rupture avec les méthodes de développement de projet traditionnelles**. Cette initiative originale est soutenue par le directeur de l’organisme public qui sponsorise la Startup d’Etat. Il s’agit du ministère de l’Economie et de la DGCCRF dans le cas de SignalConso. **L’autonomie de l’équipe dédiée est protégée et les interférences avec les autres services limitées**. 
 
 Ce soutien garantie une certaine **souplesse dans l’utilisation des outils de l’administration**. Par exemple, un **site web expérimental sous le label de l’administration** peut être lancé. Encore un peu frileux, il doit toujours sortir avec son bandeau « Beta ». 
 

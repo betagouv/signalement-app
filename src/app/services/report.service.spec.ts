@@ -38,9 +38,9 @@ describe('ReportService', () => {
   }));
 
   beforeEach(() => {
-    reportService = TestBed.get(ReportService);
-    serviceUtils = TestBed.get(ServiceUtils);
-    httpMock = TestBed.get(HttpTestingController);
+    reportService = TestBed.inject(ReportService);
+    serviceUtils = TestBed.inject(ServiceUtils);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   beforeEach(() => {
@@ -54,7 +54,7 @@ describe('ReportService', () => {
   });
 
   it('should be created', () => {
-    const service: ReportService = TestBed.get(ReportService);
+    const service: ReportService = TestBed.inject(ReportService);
     expect(service).toBeTruthy();
   });
 
@@ -92,7 +92,7 @@ describe('ReportService', () => {
       expect(reportRequest.request.body['subcategories']).toEqual([subcategory1.title, subcategory2.title]);
       expect(reportRequest.request.body['tags']).toEqual([...(subcategory1.tags || []), ...(subcategory2.tags || [])]);
       expect(reportRequest.request.body['companyName']).toBe(draftReport.draftCompany.name);
-      expect(reportRequest.request.body['companyAddress']).toBe(draftReport.draftCompany.address);
+      expect(reportRequest.request.body['companyAddress']).toBe(draftReport.draftCompany.name + ' - ' + draftReport.draftCompany.address);
       expect(reportRequest.request.body['firstName']).toBe(draftReport.consumer.firstName);
       expect(reportRequest.request.body['lastName']).toBe(draftReport.consumer.lastName);
       expect(reportRequest.request.body['email']).toBe(draftReport.consumer.email);
@@ -104,12 +104,13 @@ describe('ReportService', () => {
 
     it('should not pass a departments http param when there are no area report filter', (done) => {
 
-      const reportFilter = new ReportFilter();
-      reportFilter.period = [new Date(), new Date()];
-      const offset = 0;
-      const limit = 10;
+      const reportFilter: ReportFilter = {
+        period: [new Date().toISOString(), new Date().toISOString()],
+        offset: 0,
+        limit: 10,
+      };
 
-      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+      reportService.getReports(reportFilter).subscribe(result => {
           done();
         }
       );
@@ -121,8 +122,8 @@ describe('ReportService', () => {
         entities: []
       });
 
-      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
       expect(getReportRequest.request.params.get('departments')).toBeNull();
 
       httpMock.verify();
@@ -130,13 +131,14 @@ describe('ReportService', () => {
 
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
-      const reportFilter = new ReportFilter();
-      reportFilter.departments = regionFixture.departments;
-      reportFilter.period = [new Date(), new Date()];
-      const offset = 0;
-      const limit = 10;
+      const reportFilter: ReportFilter = {
+        departments: regionFixture.departments.map(_ => _.code),
+        period: [new Date().toISOString(), new Date().toISOString()],
+        offset: 0,
+        limit: 10,
+      };
 
-      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+      reportService.getReports(reportFilter).subscribe(result => {
           done();
         }
       );
@@ -148,8 +150,8 @@ describe('ReportService', () => {
         entities: []
       });
 
-      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
       expect(getReportRequest.request.params.get('departments')).toEqual(`${dept1Fixture.code},${dept2Fixture.code}`);
 
       httpMock.verify();
@@ -157,13 +159,15 @@ describe('ReportService', () => {
 
     it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
 
-      const reportFilter = new ReportFilter();
-      reportFilter.departments = [dept2Fixture];
-      reportFilter.period = [new Date(), new Date()];
-      const offset = 0;
-      const limit = 10;
+      const reportFilter: ReportFilter = {
 
-      reportService.getReports(offset, limit, reportFilter).subscribe(result => {
+        departments: [dept2Fixture.code],
+        period: [new Date().toString(), new Date().toString()],
+        offset: 0,
+        limit: 10,
+      };
+
+      reportService.getReports(reportFilter).subscribe(result => {
           done();
         }
       );
@@ -175,8 +179,8 @@ describe('ReportService', () => {
         entities: []
       });
 
-      expect(getReportRequest.request.params.get('offset')).toEqual(offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(limit.toString());
+      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
+      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
       expect(getReportRequest.request.params.get('departments')).toEqual(`${dept2Fixture.code}`);
 
       httpMock.verify();

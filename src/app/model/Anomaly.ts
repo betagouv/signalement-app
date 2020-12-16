@@ -1,6 +1,8 @@
 export const ReportingDateLabel = 'Date du constat';
 export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
+export const ContractualDisputeTag = <Tag>'Litige contractuel';
+export const InternetTag = <Tag>'Internet';
 
 export class Action {
   question: string;
@@ -12,7 +14,6 @@ export class Information {
   title?: string;
   content?: string;
   actions?: Action[];
-  reference?: string;
   outOfScope?: boolean;
 }
 
@@ -27,9 +28,7 @@ export class DetailInput {
   optionnal?: boolean;
 }
 
-export class Tag extends String {
-}
-
+export type Tag = string;
 
 export class WithSubcategories {
   subcategoriesTitle?: string;
@@ -53,7 +52,7 @@ export class WithSubcategories {
 
   getInternetSubcategoriesData() {
     return {
-      subcategoriesTitle: 'Est-ce que votre problème fait suite à un achat sur internet ?',
+      subcategoriesTitle: 'Est-ce que votre problème concerne une entreprise sur internet ?',
       subcategories: [
         Object.assign(new Subcategory(), this,
           {
@@ -79,11 +78,14 @@ export class Subcategory extends WithSubcategories {
   detailInputs?: DetailInput[];
   fileLabel?: string;
   information?: Information;
-  consumerActions?: Information[];
   tags: Tag[];
 
   getInternetSubcategoriesData() {
-    return {...super.getInternetSubcategoriesData(), description: undefined };
+    if (this.information) {
+      return undefined;
+    } else {
+      return {...super.getInternetSubcategoriesData(), description: undefined };
+    }
   }
 }
 

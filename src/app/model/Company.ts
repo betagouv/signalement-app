@@ -1,14 +1,25 @@
 export interface DraftCompany {
   siret?: string;
   name?: string;
+  brand?: string;
   address?: string;
   postalCode?: string;
-  website?: Website;
+  country?: string;
+  website?: WebsiteURL;
+  activityCode?: string;
 }
 
 export interface Company extends DraftCompany {
   id: string;
   creationDate: Date;
+}
+
+export interface CompanySearchResult extends DraftCompany {
+  highlight: string;
+  activityCode: string;
+  activityLabel: string;
+  isHeadOffice: boolean;
+  kind?: WebsiteKinds;
 }
 
 export interface CompanyAccess {
@@ -39,7 +50,7 @@ export interface CompanyToActivate {
   tokenCreation: Date;
 }
 
-export class Website {
+export class WebsiteURL {
   url: string;
 
   get hostname() {
@@ -49,4 +60,8 @@ export class Website {
       .replace('www.', '')
       .split(/[/?#]/)[0] : this.url;
   }
+}
+
+export enum WebsiteKinds {
+  Default = 'DEFAULT', Marketplace = 'MARKETPLACE'
 }

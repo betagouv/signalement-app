@@ -8,7 +8,7 @@ import { CompanyAccess, PendingToken } from '../../../model/Company';
 import { User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { accessLevels } from '../common';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-company-accesses',
@@ -22,7 +22,7 @@ export class CompanyAccessesComponent implements OnInit {
               private companyAccessesService: CompanyAccessesService,
               private modalService: BsModalService,
               private route: ActivatedRoute) { }
-  
+
   bsModalRef: BsModalRef;
   siret: string;
   user: User;
@@ -34,9 +34,6 @@ export class CompanyAccessesComponent implements OnInit {
   showSuccess = false;
 
   ngOnInit() {
-    this.titleService.setTitle(pages.companies.companyAccesses.title);
-    this.meta.updateTag({ name: 'description', content: pages.companies .companyAccesses.description });
-
     const siretParam = this.route.params.pipe(map(p => p.siret));
 
     this.authenticationService.user.subscribe(user => {
@@ -45,6 +42,8 @@ export class CompanyAccessesComponent implements OnInit {
 
     siretParam.subscribe(siret => {
       this.siret = siret;
+      this.titleService.setTitle(`Entreprise ${this.siret} - ${pages.companies.companyAccesses.title}`);
+      this.meta.updateTag({ name: 'description', content: pages.companies.companyAccesses.description });
       this.refreshAccesses();
       this.refreshPendingTokens();
     });

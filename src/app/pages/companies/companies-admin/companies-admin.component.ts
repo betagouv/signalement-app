@@ -16,7 +16,8 @@ import { take } from 'rxjs/operators';
 
 import * as lodash from 'lodash';
 import { HttpResponse } from '@angular/common/http';
-import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import moment from 'moment';
 
 @Component({
@@ -46,7 +47,6 @@ export class CompaniesAdminComponent implements OnInit {
   lines: NbReportsGroupByCompany[];
   companiesToActivate: CompanyToActivate[];
   allCompaniesToActivate: CompanyToActivate[];
-  companiesToActivateFilter: {tokenCreation?: Date, lastNotice?: Date} = {};
 
   showErrors: boolean;
   loading: boolean;
@@ -206,15 +206,6 @@ export class CompaniesAdminComponent implements OnInit {
         this.loadingError = true;
       }
     );
-  }
-
-  filterCompaniesToActivate(tokenCreation: Date, lastNotice: Date) {
-    if (this.allCompaniesToActivate) {
-      this.companiesToActivate = this.allCompaniesToActivate.filter(companyToActivate => {
-        return (!tokenCreation || moment(companyToActivate.tokenCreation).isSame(moment(tokenCreation), 'day')) &&
-          (!lastNotice || moment(companyToActivate.lastNotice).isSame(moment(lastNotice), 'day'));
-      });
-    }
   }
 
   downloadActivationDocuments() {

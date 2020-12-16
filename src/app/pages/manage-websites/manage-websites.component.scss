@@ -1,0 +1,48 @@
+@import "src/theme/variables";
+@import "~bootstrap/scss/mixins";
+
+.siret {
+  font-weight: normal;
+  color: $theme-color-text-secondary;
+  cursor: text;
+  user-select: text;
+}
+
+.select-status {
+  margin-left: auto;
+  max-width: 200px;
+}
+
+table {
+  table-layout: fixed;
+  min-width: 100%;
+  @include text-truncate;
+
+  td {
+    @include text-truncate;
+  }
+}
+
+.td-date {
+  width: 90px;
+  color: $theme-color-text-secondary;
+}
+
+.company-name {
+  @include text-truncate;
+  font-weight: bold;
+  max-width: 200px;
+}
+
+.td-actions {
+  width: 190px;
+  text-align: right;
+}
+
+.td-host {
+  width: 240px;
+}
+
+.td-company {
+  min-width: 100px;
+}

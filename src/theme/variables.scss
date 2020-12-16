@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 $blue: #407e99;
 $light-blue: #2A8194;
 $dark-blue: #1f2b50;
@@ -40,6 +42,7 @@ $theme-background-white: $white;
 $theme-background-grey: $lighter-grey;
 $theme-background-color: $dark-blue;
 $theme-background-dark: $black;
+$theme-background-hover: rgba(0, 0, 0, 0.04);
 $theme-box-shadow: 0 1px 2px rgba(201, 211, 223, 0.2);
 $theme-label-text: $darker-grey;
 $theme-light-text: $white;
@@ -52,3 +55,29 @@ $theme-error-border: $red;
 $theme-error-bg: $light-red;
 $theme-info-border: $blue;
 $theme-info-bg: $lighter-blue;
+$theme-divider: rgba(black, 0.12);
+$theme-color-text-disabled: rgba(black, 0.38);
+$theme-color-text-secondary: rgba(black, 0.54);
+
+@function spacing($multiplier: 1) {
+  $padding: 8px;
+  @return $multiplier * $padding;
+}
+
+@mixin input-invisible {
+  border: none;
+  background: none;
+  box-shadow: none;
+  padding-right: 0;
+  padding-left: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+%truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

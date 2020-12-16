@@ -87,6 +87,8 @@ a:focus {
     color: $primary;
     cursor: pointer;
     text-decoration: none;
+    background: none;
+    border: none;
 
     &:hover {
       color: $secondary;
@@ -192,5 +194,19 @@ a:focus {
     max-width: 20px;
     margin-top: -1px;
     margin-left: 2px;
+  }
+
+  div.selected {
+    background-color: $light-green;
+    border-radius: $theme-border-more-radius;
+
+    .text-primary {
+      color: $secondary !important;
+    }
+
+    label, h2 {
+      color: $black;
+    }
+
   }
 }

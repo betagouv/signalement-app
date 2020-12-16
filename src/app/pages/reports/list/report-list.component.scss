@@ -19,6 +19,10 @@ form {
       margin: 0;
     }
   }
+
+  .selected {
+    border: 2px solid $green !important;
+  }
 }
 
 .table-responsive {

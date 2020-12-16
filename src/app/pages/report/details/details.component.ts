@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DetailInputValue, DraftReport, PrecisionKeyword, Step } from '../../../model/Report';
-import { BsLocaleService } from 'ngx-bootstrap';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';;
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
@@ -57,8 +57,6 @@ export class DetailsComponent implements OnInit {
 
   maxDate: Date;
   fileOrigins = FileOrigin;
-
-  continueReport: boolean;
 
   constructor(public formBuilder: FormBuilder,
               private reportStorageService: ReportStorageService,
@@ -390,11 +388,6 @@ export class DetailsComponent implements OnInit {
     if (this.draftReport.detailInputValues) {
       return this.draftReport.detailInputValues.find(inputValue => inputValue.label === detailInput.label);
     }
-  }
-
-  setEmployeeConsumerValue(value: boolean) {
-    this.analyticsService.trackEvent(EventCategories.report, value ? ReportEventActions.employee : ReportEventActions.notEmployee);
-    this.draftReport.employeeConsumer = value;
   }
 }
 

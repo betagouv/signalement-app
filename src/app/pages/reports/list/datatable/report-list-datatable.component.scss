@@ -1,0 +1,61 @@
+@import "src/theme/variables";
+
+.table-overflow {
+
+  table {
+    table-layout: fixed;
+    min-width: 100%;
+
+    .tr {
+      color: red !important;
+
+      &:hover {
+        cursor: pointer;
+        background: whitesmoke;
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      @extend %truncate;
+    }
+  }
+}
+
+.mat-cell.mat-column-name {
+  max-width: 170px;
+  line-height: 1.1;
+}
+
+.td-name_label {
+  font-weight: bold;
+  margin-bottom: -2px;
+}
+
+.td-name_website {
+  font-size: 0.875rem;
+  color: $theme-color-text-secondary;
+}
+
+.mat-cell.mat-column-postalCode {
+  max-width: 76px;
+}
+
+.mat-cell.mat-column-consumer {
+  max-width: 160px;
+}
+
+.mat-cell.mat-column-description {
+  max-width: 260px;
+  color: $theme-color-text-secondary;
+  line-height: 1.2;
+  font-size: 0.875rem;
+}
+
+.mat-cell.mat-column-files {
+  max-width: 100px;
+}
+
+.mat-cell.mat-column-category {
+  max-width: 140px;
+}

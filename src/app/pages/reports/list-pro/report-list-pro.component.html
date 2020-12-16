@@ -37,18 +37,21 @@
                        [(ngModel)]="reportFilter.period"
                        name="period"
                        id="period"
-                       placeholder="Daterangepicker"
                        placeholder="Période sélectionnée"
                        bsDaterangepicker
                        autocomplete="off"
                        [bsConfig]="{
                          containerClass: 'theme-default',
                          rangeInputFormat: 'DD MMMM YYYY'
-                       }" />
+                       }"
+                       triggers="click keypress"/>
               </div>
               <div class="col-8 col-sm-4">
                 <label for="statusFilter">
-                  Statut <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status" ><i class="material-icons md-24" aria-hidden="true">help_outline</i></a>
+                  Statut <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status">
+                  <i class="material-icons md-24" aria-hidden="true">help_outline</i>
+                  <span class="sr-only">Consulter l'aide</span>
+                </a>
                 </label>
                 <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
                   <option [ngValue]="undefined" selected>Tous les statuts</option>
@@ -103,7 +106,7 @@
             <i class="material-icons md-18 attach-icon" aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length">attach_file</i>
           </div>
           <div class="col-6 col-sm-4">
-            <span class="badge" [ngStyle]="{'background-color': statusColor.get(report.status)}">
+            <span class="badge" [ngStyle]="{'background-color': statusColor[report.status]}" attr.aria-label="statut du signalement">
             {{report.status}}
             </span>
           </div>

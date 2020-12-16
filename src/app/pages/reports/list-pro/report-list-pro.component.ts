@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { UserAccess } from '../../../model/Company';
-import { Report, ReportStatus, StatusColor } from '../../../model/Report';
+import { Report, ReportStatus, reportStatusColor } from '../../../model/Report';
 import { ReportFilter } from '../../../model/ReportFilter';
-import { BsLocaleService } from 'ngx-bootstrap';
 import { combineLatest } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -13,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { mergeMap, take } from 'rxjs/operators';
 import pages from '../../../../assets/data/pages.json';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-report-list-pro',
@@ -22,7 +22,7 @@ import pages from '../../../../assets/data/pages.json';
 export class ReportListProComponent implements OnInit {
 
   reportStatus = ReportStatus;
-  statusColor = StatusColor;
+  statusColor = reportStatusColor;
 
   userAccesses: UserAccess[];
   reports: Report[];
@@ -31,7 +31,6 @@ export class ReportListProComponent implements OnInit {
   itemsPerPage = 20;
 
   reportFilter: ReportFilter;
-  reportExtractUrl: string;
   statusList: string[];
 
   loading: boolean;
@@ -52,8 +51,8 @@ export class ReportListProComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.reports.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
+    this.titleService.setTitle(pages.reports.list.title);
+    this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
 
     const queryParamMap = this.route.snapshot.queryParamMap;
@@ -100,24 +99,24 @@ export class ReportListProComponent implements OnInit {
   submitFilters() {
     this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
     this.initPagination();
-    this.reportFilter.siret = this.reportFilter.siret ? this.reportFilter.siret.replace(/\s/g, '') : '';
+    this.reportFilter.siret = this.reportFilter.siret?.replace(/\s/g, '');
     this.loadReports(1);
     this.withFiltering = true;
   }
 
   cancelFilters() {
-    this.reportFilter = Object.assign(new ReportFilter(), { siret: this.reportFilter.siret });
+    this.reportFilter = { siret: this.reportFilter.siret };
     this.submitFilters();
   }
 
   loadReports(page: number) {
     this.loading = true;
     this.loadingError = false;
-    this.reportService.getReports(
-      (page - 1) * this.itemsPerPage,
-      this.itemsPerPage,
-      Object.assign(new ReportFilter(), this.reportFilter)
-    ).subscribe(
+    this.reportService.getReports({
+      ...this.reportFilter,
+      offset: (page - 1) * this.itemsPerPage,
+      limit: this.itemsPerPage,
+    }).subscribe(
       result => {
         this.loading = false;
         this.reports = result.entities;

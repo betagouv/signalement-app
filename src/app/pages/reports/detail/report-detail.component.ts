@@ -1,14 +1,13 @@
 import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
-import { Report, ReportStatus, StatusColor } from '../../../model/Report';
+import { Report, ReportStatus, reportStatusColor } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { combineLatest, iif, of } from 'rxjs';
 import { EventService } from '../../../services/event.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
-import { CompanySearchResult } from '../../../model/CompanySearchResult';
 import { switchMap, tap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -16,6 +15,9 @@ import { isPlatformBrowser, PlatformLocation } from '@angular/common';
 import { Consumer } from '../../../model/Consumer';
 import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../model/ReportEvent';
 import { HttpResponse } from '@angular/common/http';
+import { CompanySearchResult } from '../../../model/Company';
+import { Meta, Title } from '@angular/platform-browser';
+import pages from '../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-report-detail',
@@ -29,7 +31,7 @@ export class ReportDetailComponent implements OnInit {
   eventActionValues = EventActionValues;
   permissions = Permissions;
   roles = Roles;
-  statusColor = StatusColor;
+  statusColor = reportStatusColor;
 
   report: Report;
 
@@ -41,10 +43,6 @@ export class ReportDetailComponent implements OnInit {
 
   bsModalRef: BsModalRef;
   reportIdToDelete: string;
-
-  companySiretForm: FormGroup;
-  siretCtrl: FormControl;
-  companySearchBySiretResult: CompanySearchResult;
 
   consumerForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -66,6 +64,8 @@ export class ReportDetailComponent implements OnInit {
   detailCtrl: FormControl;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+              private titleService: Title,
+              private meta: Meta,
               public formBuilder: FormBuilder,
               private reportService: ReportService,
               private eventService: EventService,
@@ -76,7 +76,10 @@ export class ReportDetailComponent implements OnInit {
               private router: Router,
               private platformLocation: PlatformLocation) { }
 
+
   ngOnInit() {
+    this.titleService.setTitle(pages.reports.detail.title);
+    this.meta.updateTag({ name: 'description', content: pages.reports.detail.description });
 
     this.loading = true;
     this.loadingError = false;
@@ -87,7 +90,6 @@ export class ReportDetailComponent implements OnInit {
     });
 
     this.loadReport();
-    this.initCompanySiretForm();
   }
 
   loadReport() {
@@ -117,14 +119,6 @@ export class ReportDetailComponent implements OnInit {
         this.loading = false;
         this.loadingError = true;
       });
-  }
-
-  initCompanySiretForm() {
-    this.siretCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{14}')]);
-
-    this.companySiretForm = this.formBuilder.group({
-      siret: this.siretCtrl
-    });
   }
 
   initConsumerForm() {
@@ -201,20 +195,6 @@ export class ReportDetailComponent implements OnInit {
     }
   }
 
-  submitCompanySiretForm() {
-    this.loading = true;
-    this.loadingError = false;
-    this.companyService.searchCompaniesBySiret(this.siretCtrl.value).subscribe(
-      company => {
-        this.loading = false;
-        this.companySearchBySiretResult = company ? company : new CompanySearchResult();
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
-  }
-
   changeCompany(company: CompanySearchResult) {
     this.loading = true;
     this.loadingError = false;
@@ -222,21 +202,19 @@ export class ReportDetailComponent implements OnInit {
       .pipe(
         tap(report => {
           this.report.status = report.status;
-          this.report.company.siret = company.siret;
-          this.report.company.name = company.name;
-          this.report.company.address = company.address;
+          this.report.company.siret = report.company.siret;
+          this.report.company.name = report.company.name;
+          this.report.company.brand = report.company.brand;
+          this.report.company.address = report.company.address;
         }),
         switchMap(_ => this.eventService.getEvents(this.reportId))
       )
       .subscribe(
         events => {
           this.events = events;
-          this.companySearchBySiretResult = undefined;
-          this.siretCtrl.setValue('');
           this.bsModalRef.hide();
         },
         err => {
-          console.log('err', err);
           this.loading = false;
           this.loadingError = true;
         });

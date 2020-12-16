@@ -10,8 +10,6 @@ import { AnomalyService } from '../../../services/anomaly.service';
 })
 export class ContactComponent implements OnInit {
 
-  internetInformation;
-
   constructor(private titleService: Title,
               private meta: Meta,
               private anomalyService: AnomalyService) { }
@@ -19,9 +17,6 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pages.contact.title);
     this.meta.updateTag({ name: 'description', content: pages.contact.description });
-
-    this.internetInformation = this.anomalyService.getAnomalyByCategoryId('INTERNET').information;
-
   }
 
 }

@@ -16,7 +16,7 @@ describe('ConstantService', () => {
   }));
 
   it('should be created', () => {
-    const service: ConstantService = TestBed.get(ConstantService);
+    const service: ConstantService = TestBed.inject(ConstantService);
     expect(service).toBeTruthy();
   });
 });

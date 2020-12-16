@@ -1,4 +1,4 @@
-- title: Téléphonie / Internet
+- title: Téléphonie / internet
   subcategories:
     - title: 'Mon forfait : prix, contrat et facture'
       example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
@@ -14,19 +14,23 @@
                 - title: Oui, j'ai été prévenu par email ou courrier
                   information: !!import/single ../common/info/tel.yml
                 - title: Non, j'ai reçu seulement un sms
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  tags:
+                    - Litige contractuel
                 - title: Non, je n'ai rien reçu du tout
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  tags:
+                    - Litige contractuel
             - title: Modification concernant les sms, mms ou appels
-              example: 'Exemple : les appel deviennent illimités pour 2 euros de plus'
+              example: 'Exemple : les appels deviennent illimités pour 2 euros de plus'
               subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
               subcategories:
                 - title: Oui, j'ai été prévenu par email ou courrier
                   information: !!import/single ../common/info/tel.yml
                 - title: Non, j'ai reçu seulement un sms
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  tags:
+                    - Litige contractuel
                 - title: Non, je n'ai rien reçu du tout
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  tags:
+                    - Litige contractuel
             - title: Rajout d'une option payante
               example: 'Exemple : chaine télé supplémentaire, option cyber-sécurité, option livre audio, option musique...'
               subcategoriesTitle: Quel est le type d'option ?
@@ -37,7 +41,8 @@
                     - title: Oui, j'ai été prévenu par email ou courrier
                       information: !!import/single ../common/info/tel.yml
                     - title: Non, je n'ai rien reçu
-                      consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                      tags:
+                        - Litige contractuel
                       detailInputs:
                         - label: Date du début de l'option (vous pouvez préciser le premier mois facturé)
                           rank: 1
@@ -47,9 +52,10 @@
                           type: TEXT
                           placeholder: "Indiquez l'intitulé figurant la facture"
                 - title: option liée à la musique, des livres, une chaine télé, un anti-virus
-                  consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+                  tags:
+                    - Litige contractuel
                   detailInputs:
-                    - label: A partir de quand cette option va-t-elle être payante ?
+                    - label: À partir de quand cette option va-t-elle être payante ?
                       rank: 1
                       type: DATE
                     - label: Quel est le nom de cette option ?
@@ -73,32 +79,32 @@
                       type: DATE
                       optionnal: true
             - title: Le lien pour refuser l'augmentation de mon forfait ne fonctionne pas
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+              tags:
+                - Litige contractuel
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
+          tags:
+            - Litige contractuel
         - title: Autre problème de facturation ou de contrat
+          tags:
+            - Litige contractuel
           subcategories:
             - title: Utilisation de mon forfait à l'étranger
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
             - title: Autre
-              consumerActions: !!import/single ../common/actions/telephonie-internet.yml
     - title: Qualité du réseau
       example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
         title: La qualité du réseau est mauvaise
         content: Les problèmes de réseau ou d'éligibilité ne peuvent pas être signalés sur SignalConso. <br> Vous devez les signaler à l'ARCEP (Autorité de régulation des communications électroniques, des postes et de la distribution de la presse) sur leur site dédié  <a href="https://jalerte.arcep.fr/" target="_blank" /> J'alerte l'Arcep </a>
     - title: Résiliation / changement d'opérateur
+      tags:
+        - Litige contractuel
       subcategories:
         - title: Frais de résiliation
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Restitution du matériel
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Mon ancien opérateur continue de me prélever
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
-    - title: Appels, sms ou email indésirables
-      example: 'Exemple : spams, appel incessant, raoppel vers un numéro payant'
+    - title: Appels, sms ou emails indésirables
+      example: 'Exemple : spams, appel incessant, rappel vers un numéro payant'
       subcategories:
         - title: Je reçois des appels indésirables alors que je suis sur BlocTel
         - title: J'ai répondu à un sms ou j'ai rappelé un numéro qui était payant sans le savoir
@@ -114,14 +120,14 @@
                   <br>Les numéros peu surtaxés (maximum 50 centimes l'appel) et les services de renseignements (numéro commençant par 118) ne sont pas compris dans ce blocage.
         - title: Je reçois des spams dans mes emails
         - title: J'ai eu un problème avec un démarcheur téléphonique
-    - title: Autres
+    - title: Autre
       example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
+      tags:
+        - Litige contractuel
       subcategories:
         - title: Qualité du service client
           example: 'Exemple : pas de réponse du service client, service client payant'
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
         - title: Téléphone acheté avec le forfait
-          consumerActions: !!import/single ../common/actions/telephonie-internet.yml
 - title: Abonnement télévision
 - title: Abonnement presse
-- title: Autres
+- title: Autre

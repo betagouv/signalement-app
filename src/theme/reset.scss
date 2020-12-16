@@ -1,0 +1,14 @@
+// Match @angular/material style.
+.tooltip-arrow {
+  display: none !important;
+}
+
+.tooltip-inner {
+  content: none;
+  background: rgba(97, 97, 97, .9);
+  border-radius: 3px;
+  font-size: 12px;
+}
+.tootip {
+  opacity: 1 !important;
+}

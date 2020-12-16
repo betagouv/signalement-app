@@ -1,294 +1,180 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
-import { DetailInputValue, Report, ReportStatus, StatusColor } from '../../../model/Report';
-import { UploadedFile } from '../../../model/UploadedFile';
-import { FileUploaderService } from '../../../services/file-uploader.service';
-import moment from 'moment';
-import { BsLocaleService, BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { ReportFilter } from '../../../model/ReportFilter';
-import { Subscription } from 'rxjs';
+import { Report } from '../../../model/Report';
+import { ReportFilter, reportFilter2QueryString, ReportFilterQuerystring } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
-import { isPlatformBrowser, Location } from '@angular/common';
-import { Permissions, Roles } from '../../../model/AuthUser';
-import { ReportingDateLabel, Tag } from '../../../model/Anomaly';
-import { ConstantService } from '../../../services/constant.service';
-import { AnomalyService } from '../../../services/anomaly.service';
+import { Roles } from '../../../model/AuthUser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Department, Region, Regions } from '../../../model/Region';
-import oldCategories from '../../../../assets/data/old-categories.json';
-
-const ReportsScrollYStorageKey = 'ReportsScrollYStorageKey';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { PaginatedData } from '../../../model/PaginatedData';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import Utils from '../../../utils';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { PageEvent } from '@angular/material/paginator';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
   styleUrls: ['./report-list.component.scss']
 })
-export class ReportListComponent implements OnInit, OnDestroy {
-  permissions = Permissions;
+export class ReportListComponent implements OnInit {
+
   roles = Roles;
-  reportStatus = ReportStatus;
-  statusColor = StatusColor;
-  regions = Regions;
-  tags: Tag[];
 
-  reportsByDate: {date: string, reports: Array<Report>}[];
-  totalCount: number;
-  currentPage: number;
-  itemsPerPage = 20;
+  readonly defaultPageSize = 10;
 
-  siretUrlParam: string;
-  reportFilter: ReportFilter;
-  tagFilterToAdd: Tag = '';
-  reportExtractUrl: string;
-  statusList: string[];
-  categories: string[];
-
-  modalRef: BsModalRef;
-  modalOnHideSubscription: Subscription;
+  readonly formControlNamesWithAutomaticRefresh: (keyof ReportFilter)[] = [
+    'departments',
+    'period',
+  ];
 
   loading: boolean;
   loadingError: boolean;
+  searchForm: FormGroup;
+  reports: PaginatedData<Report>;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private titleService: Title,
-              private meta: Meta,
-              private anomalyService: AnomalyService,
-              private reportService: ReportService,
-              private constantService: ConstantService,
-              private fileUploaderService: FileUploaderService,
-              private localeService: BsLocaleService,
-              private modalService: BsModalService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) {
+    private authenticationService: AuthenticationService,
+    private titleService: Title,
+    private meta: Meta,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private reportService: ReportService,
+    private localeService: BsLocaleService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.reports.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.reports.description });
+    this.titleService.setTitle(pages.reports.list.title);
+    this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
+    this.initAndBuildForm();
+  }
 
-    const queryParamMap = this.route.snapshot.queryParamMap;
-    const paramMap = this.route.snapshot.paramMap;
-
-    this.constantService.getReportStatusList().subscribe(
-      statusList => this.statusList = statusList
-    );
-
-    this.reportFilter = this.reportService.currentReportFilter;
-    this.itemsPerPage = Number(queryParamMap.get('per_page')) || 20;
-
-    this.siretUrlParam = paramMap.get('siret');
-    if (this.siretUrlParam) {
-      this.reportFilter = new ReportFilter();
-      this.reportFilter.siret = this.siretUrlParam;
+  readonly getFormFromQueryString = (qs: ReportFilterQuerystring): ReportFilter => {
+    try {
+      const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+      const {
+        offset,
+        limit,
+        tags,
+        departments,
+        companyCountries,
+        hasCompany,
+        start,
+        end,
+      } = qs;
+      return {
+        ...qs,
+        offset: +offset ?? 0,
+        limit: +limit ?? this.defaultPageSize,
+        tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
+        departments: departments?.split(','),
+        companyCountries: companyCountries?.split(','),
+        hasCompany: parseBooleanOption(hasCompany),
+        period: (start && end) && [new Date(start).toString(), new Date(end).toString()],
+      };
+    } catch (e) {
+      console.error('Caught error on "reportFilterFromQueryString"', qs, e);
+      return {};
     }
+  };
 
-    this.loadReports(Number(queryParamMap.get('page_number') || 1));
+  private initAndBuildForm = (): void => {
+    const initialValues: ReportFilter = {
+      tags: [],
+      departments: [],
+      companyCountries: [],
+      details: undefined,
+      period: undefined,
+      siret: undefined,
+      status: undefined,
+      hasCompany: undefined,
+      email: undefined,
+      category: undefined,
+      offset: 0,
+      limit: this.defaultPageSize,
+    };
+    const formValues = {
+      ...initialValues,
+      ...this.reportService.currentReportFilter,
+      ...this.getFormFromQueryString(this.activatedRoute.snapshot.queryParams),
+    };
+    try {
+      this.buildForm(formValues);
+    } catch (e) {
+      // Prevent error thrown by Angular when queryParams are wrong
+      console.error('[ReportListComponent] Cannot build form from querystring', e, formValues);
+      this.buildForm(initialValues);
+    }
+    this.search();
+  };
 
-    this.categories =
-      [
-        ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
-        ...oldCategories
-      ];
+  private buildForm = (filters: ReportFilter): void => {
+    const wrapValuesInArray = (o: object) => Object.entries(o).reduce((acc, [k, v]) => ({ ...acc, [k]: [v] }), {});
+    this.searchForm = this.fb.group(wrapValuesInArray(filters));
+    merge(...this.formControlNamesWithAutomaticRefresh.map(_ => this.searchForm.get(_).valueChanges))
+      .pipe(debounceTime(800), distinctUntilChanged())
+      .subscribe(this.search);
+  };
 
-    this.tags = this.anomalyService.getTags();
-
-    this.modalOnHideSubscription = this.updateReportOnModalHide();
+  onPaginationChange(event: PageEvent) {
+    this.patchValue({
+      offset: event.pageIndex * event.pageSize,
+      limit: event.pageSize,
+    });
+    this.search();
   }
 
-  ngOnDestroy() {
-    this.modalOnHideSubscription.unsubscribe();
+  private patchValue = (form: Partial<ReportFilter>) => {
+    this.searchForm.patchValue(form);
+  };
+
+  onFiltersUpdate(): void {
+    this.patchValue({ ...this.searchFormValue, offset: 0 });
+    this.search();
   }
 
-  initPagination() {
-    this.totalCount = 0;
-    this.currentPage = 1;
+  private updateQueryString = (values: ReportFilter) => {
+    this.router.navigate([], { queryParams: reportFilter2QueryString(values), replaceUrl: true });
+  };
+
+  get searchFormValue(): ReportFilter {
+    return this.searchForm.value;
   }
 
-  submitFilters() {
-    this.location.replaceState(this.router.routerState.snapshot.url.replace(`/siret/${this.siretUrlParam}`, '').split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
-    this.initPagination();
-    this.reportFilter.siret = this.reportFilter.siret ? this.reportFilter.siret.replace(/\s/g, '') : '';
-    this.loadReports(1);
+  onClearFilters(): void {
+    this.searchForm.reset();
+    this.searchForm.patchValue({
+      offset: 0,
+      limit: this.defaultPageSize
+    });
+    this.search();
   }
 
-  cancelFilters() {
-    this.reportFilter = new ReportFilter();
-    this.submitFilters();
-  }
-
-  loadReports(page: number) {
+  search = () => {
+    // Avoid polluting the querystring
+    const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
+    this.updateQueryString(cleanedReport);
     this.loading = true;
     this.loadingError = false;
-    this.reportService.getReports(
-      (page - 1) * this.itemsPerPage,
-      this.itemsPerPage,
-      Object.assign(new ReportFilter(), this.reportFilter)
-    ).subscribe(
-      result => {
-        this.loading = false;
-        this.groupReportsByDate(result.entities);
-        this.totalCount = result.totalCount;
-        setTimeout(() => {
-          this.currentPage = page;
-          if (isPlatformBrowser(this.platformId)) {
-            window.scroll(
-              0,
-              sessionStorage.getItem(ReportsScrollYStorageKey) ? Number(sessionStorage.getItem(ReportsScrollYStorageKey)) : 177
-            );
-            sessionStorage.removeItem(ReportsScrollYStorageKey);
-          }
-        }, 1);
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
-  }
-
-  groupReportsByDate(reports: Report[]) {
-    this.reportsByDate = [];
-    const distinctDates = reports
-      .map(e => moment(e.creationDate).format('DD/MM/YYYY'))
-      .filter((date, index, self) => self.indexOf(date) === index);
-    distinctDates.forEach(date => {
-      this.reportsByDate.push(
-        {
-          date: date,
-          reports: reports
-            .filter(e => moment(e.creationDate).format('DD/MM/YYYY') === date)
-            .sort((e1, e2) => e2.creationDate.getTime() - e1.creationDate.getTime())
-        });
+    this.reportService.getReports(cleanedReport).subscribe((result: PaginatedData<Report>) => {
+      this.loading = false;
+      this.reports = result;
+    }, err => {
+      this.loading = false;
+      this.loadingError = true;
     });
-
-  }
-
-  changePage(pageEvent: {page: number, itemPerPage: number}) {
-    if (this.currentPage !== pageEvent.page) {
-      this.loadReports(pageEvent.page);
-      this.location.go(this.router.routerState.snapshot.url.split('?')[0], `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
-    }
-  }
-
-  getFileDownloadUrl(uploadedFile: UploadedFile) {
-    return this.fileUploaderService.getFileDownloadUrl(uploadedFile);
-  }
-
-  displayReport(report: Report) {
-    if (isPlatformBrowser(this.platformId) && window.scrollY) {
-      sessionStorage.setItem(ReportsScrollYStorageKey, window.scrollY.toString());
-    }
-    this.router.navigate(['suivi-des-signalements', 'report', report.id]);
-  }
-
-  updateReportOnModalHide() {
-    return this.modalService.onHide.subscribe(reason => {
-      if (!reason && this.modalRef && this.modalRef.content && this.modalRef.content.reportId) {
-        this.updateReport(this.modalRef.content.reportId);
-      }
-    });
-  }
-
-  updateReport(reportId: string) {
-    this.reportService.getReport(reportId).subscribe(
-      report => {
-        const reportsByDateToUpload = this.reportsByDate.find(reportsByDate => {
-            return reportsByDate.date === moment(report.creationDate).format('DD/MM/YYYY');
-          }).reports;
-          reportsByDateToUpload.splice(reportsByDateToUpload.findIndex(r => r.id === report.id), 1, report);
-        },
-      err => {
-        this.loadReports(this.currentPage);
-      });
-  }
-
-  selectArea(area?: Region | Department) {
-    if (!area) {
-      this.reportFilter.areaLabel = undefined;
-      this.reportFilter.departments = [];
-    } else if (area instanceof Region) {
-      this.reportFilter.areaLabel = area.label;
-      this.reportFilter.departments = area.departments;
-    } else {
-      this.reportFilter.areaLabel = `${area.code} - ${area.label}`;
-      this.reportFilter.departments = [area];
-    }
-  }
-
-  addTagFilter() {
-    this.reportFilter.tags.push(this.tagFilterToAdd);
-    this.tagFilterToAdd = '';
-  }
-
-  removeTagFilter(tag: Tag) {
-    this.reportFilter.tags.splice(this.reportFilter.tags.indexOf(tag), 1);
-  }
+  };
 
   launchExtraction() {
-    this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
+    this.reportService.launchExtraction(this.searchFormValue).subscribe(() => {
+      // TODO(Alex) Pop toast with redirection button
       this.router.navigate(['mes-telechargements']);
     });
-  }
-
-  getReportingDate(report: Report) {
-    return report.detailInputValues.filter(d => d.label.indexOf(ReportingDateLabel) !== -1).map(d => d.value);
-  }
-
-  getDetailContent(detailInputValues: DetailInputValue[]) {
-    const MAX_CHAR_DETAILS = 40;
-
-    function getLines(str: String, maxLength: Number) {
-      function helper(_strings, currentLine, _nbWords) {
-        if (!_strings || !_strings.length) {
-          return _nbWords;
-        }
-        if (_nbWords >= _strings.length) {
-          return _nbWords;
-        } else {
-          const newLine = currentLine + ' ' + _strings[_nbWords];
-          if (newLine.length > maxLength) {
-            return _nbWords;
-          } else {
-            return helper(_strings, newLine, _nbWords + 1);
-          }
-        }
-      }
-      const strings = str.split(' ');
-      const nbWords = helper(str.split(' '), '', 0);
-
-      const lines = strings.reduce((prev, curr, index) => index < nbWords
-        ? {...prev, line: prev.line + curr + ' '}
-        : {...prev, rest: prev.rest + curr + ' '}
-      , {line: '', rest: ''});
-
-      return { line: lines.line.trim(), rest: lines.rest.trim() };
-    }
-
-    let firstLine = '';
-    let secondLine = '';
-    let hasNext = false;
-
-    if (detailInputValues && detailInputValues.length) {
-      if (detailInputValues.length > 2) {
-        hasNext = true;
-      }
-
-      let lines = getLines(detailInputValues[0].label + ' ' + detailInputValues[0].value, MAX_CHAR_DETAILS);
-      firstLine = lines.line;
-
-      if (lines.rest) {
-        lines = getLines(lines.rest, MAX_CHAR_DETAILS);
-        secondLine = lines.rest ? lines.line.slice(0, -3) + '...' : lines.line;
-
-      } else if (detailInputValues.length > 1) {
-        lines = getLines(detailInputValues[1].label + ' ' + detailInputValues[1].value, MAX_CHAR_DETAILS);
-        secondLine = lines.rest ? lines.line.slice(0, -3) + '...' : lines.line;
-      }
-
-      return {firstLine, secondLine, hasNext };
-    }
   }
 }

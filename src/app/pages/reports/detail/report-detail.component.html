@@ -1,7 +1,10 @@
 <app-banner [backButton]="backEnabled()">
   <h1 class="text-center">
     Détail du signalement
-    <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]"><i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i></a>
+    <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="le-detail" *appRole="[roles.Pro]">
+      <i class="material-icons md-24 md-light" aria-hidden="true">help_outline</i>
+      <span class="sr-only">Consulter l'aide</span>
+    </a>
   </h1>
   <h2 class="text-center" *appRole="[roles.Admin, roles.DGCCRF]">
     {{report?.id}}
@@ -12,7 +15,7 @@
   <section class="section section-white position-relative pb-0">
     <div class="container">
       <div class="notification success mb-5" *ngIf="responseSuccess">
-        <i class="material-icons md-18 attach-icon">check_circle</i>
+        <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i>
         <span  *appRole="[roles.Pro]">Votre réponse a été envoyée au consommateur. Elle sera aussi consultable par la DGCCRF.</span>
         <span *appRole="[roles.Admin, roles.DGCCRF]">Votre saisie a bien été prise en compte, nous vous en remercions.</span>
       </div>
@@ -26,7 +29,7 @@
           <div class="row">
             <div class="col-12 order-last col-sm-3 order-sm-first">
 
-              <div class="badge d-none d-sm-inline-block" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
+              <app-badge-status [status]="report.status"></app-badge-status>
 
               <hr class="d-sm-none" />
 
@@ -42,7 +45,8 @@
                 <div class="text-darker-grey" *ngIf="!report.contactAgreement;">Le consommateur souhaite rester anonyme</div>
                 <div>
                   <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
-                  <br />
+                </div>
+                <div>
                   {{report.consumer.email}}
                 </div>
                 <ng-template #updateConsumer>
@@ -78,7 +82,7 @@
                       </div>
 
                       <div class="notification error" *ngIf="loadingError">
-                        Une erreur technique s'est produite<br />
+                        Une erreur technique s'est produite
                       </div>
 
                       <hr />
@@ -99,70 +103,43 @@
                 <div *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur souhaite rester anonyme</div>
                 <ng-template #contactAgreement>
                   <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
-                  <br />
-                  {{report.consumer.email}}
+                  <div>
+                    {{report.consumer.email}}
+                  </div>
                 </ng-template>
               </ng-container>
 
               <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
                 <div class="text-primary font-weight-bold pt-3">
                   Entreprise
-                  <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
-                     (click)="openModal(companySearch)"
-                     *appPermission="permissions.updateReport">
+                  <mat-icon
+                    *appPermission="permissions.updateReport"
+                    appCompanySearchDialog
+                    (companySelected)="changeCompany($event)"
+                    class="md-18 pl-1 pb-1 pointer" aria-hidden="true" color="primary"
+                    title="Détail du signalement">
                     edit
-                  </i>
+                  </mat-icon>
                 </div>
                 <div>
                   <strong>{{report.company?.siret}}</strong>
                 </div>
                 <div *ngFor="let line of report.company.address?.split(' - ')">{{line}}</div>
+                <div *ngIf="report.company | isForeign">
+                  {{report.company.country}}
+                </div>
                 <div *ngIf="report.website.url">
                   {{report.website.url}}
                 </div>
-
-                <ng-template #companySearch>
-                  <div class="modal-body text-center">
-                    <form [formGroup]="companySiretForm" (submit)="submitCompanySiretForm()" id="companyForm">
-                      <input [formControl]="siretCtrl" placeholder="SIRET de l'entreprise" />
-
-                      <div class="notification error" *ngIf="!companySearchBySiretResult && loadingError">
-                        Une erreur technique s'est produite<br />
-                      </div>
-
-                      <hr />
-                      <button type="submit" class="btn btn-primary mt-2" id="submitCompanyForm" [disabled]="companySiretForm.invalid">
-                        Rechercher
-                      </button>
-                    </form>
-                    <div *ngIf="companySearchBySiretResult">
-                      <hr />
-                      <div *ngIf="!companySearchBySiretResult.siret">
-                        Aucun établissement trouvé
-                      </div>
-                      <div *ngIf="companySearchBySiretResult.siret">
-                        <p class="company">
-                          <strong *ngIf="companySearchBySiretResult.line1">{{companySearchBySiretResult.line1}}<br /></strong>
-                          <strong *ngIf="companySearchBySiretResult.line2">{{companySearchBySiretResult.line2}}<br /></strong>
-                          <span *ngIf="companySearchBySiretResult.line3">{{companySearchBySiretResult.line3}}<br /></span>
-                          <span *ngIf="companySearchBySiretResult.line4">{{companySearchBySiretResult.line4}}<br /></span>
-                          <span *ngIf="companySearchBySiretResult.line5">{{companySearchBySiretResult.line5}}<br /></span>
-                          <span *ngIf="companySearchBySiretResult.line6">{{companySearchBySiretResult.line6}}<br /></span>
-                          <span *ngIf="companySearchBySiretResult.line7">{{companySearchBySiretResult.line7}}<br /></span>
-                        </p>
-
-                        <div class="notification error" *ngIf="loadingError">
-                          Une erreur technique s'est produite<br />
-                        </div>
-
-                        <hr />
-                        <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" (click)="changeCompany(companySearchBySiretResult)">Valider</button>
-                      </div>
-                    </div>
+                <ng-container *ngIf="report.vendor">
+                  <div class="text-primary font-weight-bold pt-3">
+                    Vendeur
                   </div>
-                </ng-template>
+                  <div>
+                    <strong>{{report.vendor}}</strong>
+                  </div>
+                </ng-container>
+
               </ng-container>
 
               <ng-container *appRole="[roles.Pro]">
@@ -173,7 +150,8 @@
                   <small class="text-darker-grey">
                     <i>{{report.creationDate | date : 'medium'}}</i>
                   </small>
-                  <br />
+                </div>
+                <div>
                   Signalement du consommateur
                 </div>
 
@@ -181,7 +159,8 @@
                   <small class="text-darker-grey">
                     <i>{{getEvent(eventActionValues.FirstVisit).data.creationDate | date : 'mediumDate'}}</i>
                   </small>
-                  <br />
+                </div>
+                <div>
                   Première consultation
                 </div>
 
@@ -189,7 +168,8 @@
                   <small class="text-darker-grey">
                     <i>{{getEvent(eventActionValues.ReportResponse).data.creationDate | date : 'mediumDate'}}</i>
                   </small>
-                  <br />
+                </div>
+                <div>
                   Réponse au signalement
                 </div>
               </ng-container>
@@ -198,17 +178,20 @@
             <div class="col-12 order-first offset-sm-1 col-sm-8 order-sm-last">
               <div class="float-sm-right">
                 <button *appRole="[roles.Admin, roles.DGCCRF];" type="button" class="btn btn-icon btn-secondary mb-2" (click)="downloadReport()">
-                  <i class="material-icons">picture_as_pdf</i>
+                  <i class="material-icons" aria-hidden="true">picture_as_pdf</i>
+                  <span class="sr-only">Télécharger le signalement</span>
                 </button>
                 <ng-container *appPermission="permissions.deleteReport">
                   <button type="submit" class="btn btn-danger btn-icon ml-2 mb-2" (click)="openModal(delete)">
-                    <i class="material-icons">delete</i>
+                    <i class="material-icons" aria-hidden="true">delete</i>
+                    <span class="sr-only">Supprimer le signalement</span>
                   </button>
                   <ng-template #delete>
                     <div class="modal-body text-center" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length; else noFiles">
                       Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
-                      <br />
-                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
+                      <div>
+                        <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
+                      </div>
                     </div>
                     <ng-template #noFiles>
                       <div class="modal-body text-center">
@@ -220,7 +203,7 @@
                         <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
 
                         <div class="notification error" *ngIf="loadingError">
-                          Une erreur technique s'est produite<br />
+                          Une erreur technique s'est produite
                         </div>
 
                         <hr />
@@ -232,7 +215,7 @@
                   </ng-template>
                 </ng-container>
               </div>
-              <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor.get(report.status)}">{{report.status}}</div>
+              <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor[report.status]}">{{report.status}}</div>
               <ng-container>
                 <h2 class="text-primary">Type de signalement</h2>
                 <div class="text-darker-grey pb-2">
@@ -245,13 +228,13 @@
                   <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
                 </div>
                 <div *appRole="[roles.Admin, roles.DGCCRF]">
-                  <span *ngFor="let tag of report.tags" class="badge badge-success">{{tag}}</span>
+                  <app-badge *ngFor="let tag of report.tags">{{tag}}</app-badge>
                 </div>
                 <h2 class="text-primary pt-4">Détail du signalement</h2>
                 <div class="row">
                   <div class="col-12">
                     <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
-                      <span class="text-dark-blue font-weight-bold"[innerHTML]="detailInputValue.label"></span>
+                      <span class="text-dark-blue font-weight-bold" [innerHTML]="detailInputValue.label"></span>
                       &nbsp;<span [innerHTML]="detailInputValue.value"></span>
                     </div>
                   </div>
@@ -367,7 +350,7 @@
                           <strong>Pouvez-vous préciser votre réponse ?</strong>
                         </div>
                         <div *ngIf="showErrors && responseTypeCtrl.hasError('required')" class="text-warning">
-                          <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
+                          <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez sélectionner l'un des choix.
                         </div>
                         <div [class]="getTypeClass(reportResponseTypes.Accepted)">
                           <div class="row pb-1 pt-1">
@@ -412,7 +395,7 @@
                           Nous vous demandons de rester courtois dans votre réponse. Les menaces et insultes n'ont pas leur place dans SignalConso !
                         </div>
                         <div *ngIf="showErrors && responseConsumerDetailsCtrl.hasError('required')" class="text-warning">
-                          <i class="material-icons md-18">warning</i> Veuillez saisir votre réponse.<br />
+                          <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez saisir votre réponse.
                         </div>
                         <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3"></textarea>
                       </div>
@@ -435,7 +418,7 @@
                       </div>
 
                       <div class="notification error" *ngIf="loadingError">
-                        Une erreur technique s'est produite<br />
+                        Une erreur technique s'est produite
                       </div>
 
                       <div class="mt-4">
@@ -474,7 +457,7 @@
                           <strong>Pouvez-vous préciser ?</strong>
                         </div>
                         <div *ngIf="showErrors && actionTypeCtrl.hasError('required')" class="text-warning">
-                          <i class="material-icons md-18">warning</i> Veuillez sélectionner l'un des choix.<br />
+                          <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez sélectionner l'un des choix.
                         </div>
                         <div [class]="getTypeClass(eventActionValues.Comment)">
                           <div class="row pb-1 pt-1">
@@ -549,7 +532,7 @@
                         </div>
 
                         <div class="notification error" *ngIf="loadingError">
-                          Une erreur technique s'est produite<br />
+                          Une erreur technique s'est produite
                         </div>
 
                         <div class="mt-4">

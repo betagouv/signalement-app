@@ -19,7 +19,7 @@ enum NavItems {
 })
 export class HeaderComponent implements OnInit {
 
-  @ViewChild('navbarContent', {static: false}) navbarContent: ElementRef<any>;
+  @ViewChild('navbarContent') navbarContent: ElementRef<any>;
 
   roles = Roles;
   permissions = Permissions;

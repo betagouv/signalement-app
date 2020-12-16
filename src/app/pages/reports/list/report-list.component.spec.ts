@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BsDatepickerModule, BsDropdownModule, defineLocale, frLocale, ModalModule, PaginationModule, TooltipModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportListComponent } from './report-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +18,14 @@ import { ConstantService } from '../../../services/constant.service';
 import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
 import { genPaginatedReports, genUser } from '../../../../../test/fixtures.spec';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReportListModule } from './report-list.module';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
@@ -32,12 +39,12 @@ describe('ReportListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ReportListComponent,
         ReportDetailComponent,
         AppRoleDirective,
         AppPermissionDirective,
       ],
       imports: [
+        BrowserAnimationsModule,
         PaginationModule.forRoot(),
         TooltipModule.forRoot(),
         BsDropdownModule.forRoot(),
@@ -49,7 +56,9 @@ describe('ReportListComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule,
         PipesModule,
-        ComponentsModule
+        BrowserAnimationsModule,
+        ComponentsModule,
+        ReportListModule,
       ],
       providers: []
     })
@@ -57,13 +66,13 @@ describe('ReportListComponent', () => {
   }));
 
   beforeEach(() => {
-    companyAccessesService = TestBed.get(CompanyAccessesService);
+    companyAccessesService = TestBed.inject(CompanyAccessesService);
 
     const adminUser = genUser(Roles.Admin);
     defineLocale('fr', frLocale);
-    reportService = TestBed.get(ReportService);
-    constantService = TestBed.get(ConstantService);
-    authenticationService = TestBed.get(AuthenticationService);
+    reportService = TestBed.inject(ReportService);
+    constantService = TestBed.inject(ConstantService);
+    authenticationService = TestBed.inject(AuthenticationService);
     authenticationService.user = of(adminUser);
     fixture = TestBed.createComponent(ReportListComponent);
     component = fixture.componentInstance;
@@ -77,7 +86,7 @@ describe('ReportListComponent', () => {
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelector('form')).not.toBeNull();
-    expect(nativeElement.querySelectorAll('tr.pointer').length).toEqual(3);
+    expect(nativeElement.querySelector('app-report-list-search')).not.toBeNull();
+    expect(nativeElement.querySelectorAll('table tbody tr').length).toEqual(3);
   });
 });

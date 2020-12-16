@@ -11,7 +11,6 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AlertModule, BsDatepickerModule, CarouselModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { NgxLoadingModule } from 'ngx-loading';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
@@ -19,6 +18,15 @@ import { ComponentsModule, NgxLoadingConfig } from '../../components/components.
 import { PipesModule } from '../../pipes/pipes.module';
 import anomalies from '../../../assets/data/anomalies.json';
 import { ReportPaths } from '../../services/report-router.service';
+import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { CompanyForeignCountryComponent } from './company/foreign-country/company-foreign-country.component';
+import { CompanySearchByNameComponent } from './company/search-by-name-component/company-search-by-name.component';
+import { CompanySearchByIdentityComponent } from './company/search-by-identity/company-search-by-identity.component';
+import { CompanySearchByWebsiteComponent } from './company/search-by-website/company-search-by-website.component';
 
 defineLocale('fr', frLocale);
 
@@ -72,16 +80,10 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     InformationComponent,
     AcknowledgmentComponent,
     SubcategoryComponent,
-  ],
-  entryComponents: [
-    CategoryComponent,
-    InformationComponent,
-    ProblemComponent,
-    DetailsComponent,
-    ConsumerComponent,
-    CompanyComponent,
-    ConfirmationComponent,
-    AcknowledgmentComponent,
+    CompanyForeignCountryComponent,
+    CompanySearchByNameComponent,
+    CompanySearchByIdentityComponent,
+    CompanySearchByWebsiteComponent,
   ],
   imports: [
     CommonModule,
@@ -94,7 +96,8 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     RouterModule.forChild(routes),
     CarouselModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    TypeaheadModule.forRoot(),
   ],
   exports: [
     RouterModule,
