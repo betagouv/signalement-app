@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanySearchResultsComponent } from './company-search-results.component';
 import { CompanySearchDialogComponent, CompanySearchDialogDirective } from './company-search-dialog.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -21,12 +26,11 @@ import { CompanySearchDialogComponent, CompanySearchDialogDirective } from './co
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    // MatProgressBarModule,
-    // AppMaterialModule,
-    // MatDialogModule,
-    // MatButtonModule,
-    // MatIconModule,
-    // MatInputModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
   ],
 })
 export class CompanySearchResultsModule { }
