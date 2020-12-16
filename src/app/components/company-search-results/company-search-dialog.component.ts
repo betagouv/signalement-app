@@ -15,13 +15,14 @@ export class CompanySearchDialogDirective {
   constructor(public dialog: MatDialog) {
   }
 
-  @Input() appCompanySearchDialog = true;
+  @Input() appCompanySearchDialog?: string;
 
   @Output() companySelected = new EventEmitter<CompanySearchResult>();
 
   openDialog(): void {
     const ref = this.dialog.open(CompanySearchDialogComponent, { width: '500px', });
     ref.componentInstance.companySelected = this.companySelected;
+    ref.componentInstance.value = this.appCompanySearchDialog;
   }
 }
 
@@ -72,6 +73,21 @@ export class CompanySearchDialogComponent {
   ) {
   }
 
+  private _value?: string;
+
+  @Input()
+  get value(): string {
+    return this._value;
+  }
+
+  set value(value: string) {
+    if (value) {
+      this.identityCtrl.setValue(value);
+      this.search(value);
+    }
+    this._value = value;
+  }
+
   @Output() companySelected = new EventEmitter<CompanySearchResult>();
 
   results?: CompanySearchResult[];
@@ -80,19 +96,19 @@ export class CompanySearchDialogComponent {
 
   loading = false;
 
-  identityCtrl: FormControl = this.formBuilder.control('', [Validators.required]);
+  readonly identityCtrl: FormControl = this.formBuilder.control('', [Validators.required]);
 
-  onSelect = ($event: CompanySearchResult) => {
+  readonly onSelect = ($event: CompanySearchResult) => {
     setTimeout(() => {
       this.companySelected.emit($event);
       this.dialogRef.close();
     }, 300);
   };
 
-  submitCompanySiretForm() {
+  readonly search = (value: string) => {
     this.loading = true;
     this.loadingError = false;
-    this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
+    this.companyService.searchCompaniesByIdentity(value).subscribe(
       companySearchResults => {
         this.results = companySearchResults;
       },
@@ -103,10 +119,12 @@ export class CompanySearchDialogComponent {
       () => {
         this.loading = false;
       });
-  }
+  };
 
-  clear() {
+  readonly submitCompanySiretForm = () => this.search(this.identityCtrl.value);
+
+  readonly clear = () => {
     this.results = undefined;
     this.identityCtrl.setValue('');
-  }
+  };
 }
