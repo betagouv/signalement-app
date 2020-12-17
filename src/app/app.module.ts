@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { StatsComponent } from './pages/stats/stats.component';
-import { NgxEchartsModule } from 'ngx-echarts';
 import { ReportModule } from './pages/report/report.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
@@ -30,7 +28,6 @@ import { AppPermissionModule } from './directives/app-permission/app-permission.
 import { SubscriptionModule } from './pages/subscription/subscription.module';
 import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
-import * as echarts from 'echarts';
 import { ManageWebsitesModule } from './pages/manage-websites/manage-websites.module';
 
 registerLocaleData(localeFr, 'fr');
@@ -60,7 +57,6 @@ class ErrorLogger extends ErrorHandler {
     declarations: [
         AppComponent,
         FooterComponent,
-        StatsComponent,
         NotFoundComponent,
     ],
     imports: [
@@ -68,10 +64,9 @@ class ErrorLogger extends ErrorHandler {
         NgtUniversalModule,
         TransferHttpCacheModule,
         HttpClientModule,
-        NgxEchartsModule.forRoot({ echarts }),
         NgxLoadingModule.forRoot(NgxLoadingConfig),
         RouterModule.forRoot([
-          { path: 'stats', component: StatsComponent },
+          { path: '', loadChildren: () => import('./pages/stats/stats.module').then(_ => _.StatsModule) },
           { path: 'not-found', component: NotFoundComponent },
           { path: '**', component: NotFoundComponent },
         ], {
@@ -93,7 +88,7 @@ class ErrorLogger extends ErrorHandler {
       BsDropdownModule.forRoot(),
       TooltipModule,
       Angulartics2Module.forRoot(),
-        ComponentsModule,
+      ComponentsModule,
         AppRoleModule,
         AppPermissionModule,
         ContractualDisputeModule
