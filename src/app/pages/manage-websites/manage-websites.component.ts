@@ -23,7 +23,7 @@ interface Form {
 @Component({
   selector: 'app-manage-websites',
   template: `
-    <app-banner title="Modération des site webs"></app-banner>
+    <app-banner title="Modération des sites webs"></app-banner>
 
     <app-page>
       <app-panel [loading]="websiteService.fetching" [formGroup]="form">
