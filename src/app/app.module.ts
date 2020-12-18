@@ -9,26 +9,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './pages/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { ReportModule } from './pages/report/report.module';
-import { NgxLoadingModule } from 'ngx-loading';
 import localeFr from '@angular/common/locales/fr';
-import { SecuredModule } from './pages/secured/secured.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { StaticModule } from './pages/static/static.module';
 import { NotFoundComponent } from './pages/static/notfound/notfound.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AccountModule } from './pages/account/account.module';
-import { CompaniesModule } from './pages/companies/companies.module';
 import { Angulartics2Module } from 'angulartics2';
 import { ComponentsModule, NgxLoadingConfig } from './components/components.module';
-import { ReportsModule } from './pages/reports/reports.module';
 import { environment } from '../environments/environment';
 import * as SentryBrowser from '@sentry/browser';
 import { AppRoleModule } from './directives/app-role/app-role.module';
 import { AppPermissionModule } from './directives/app-permission/app-permission.module';
-import { SubscriptionModule } from './pages/subscription/subscription.module';
 import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
-import { ManageWebsitesModule } from './pages/manage-websites/manage-websites.module';
+import { NgxLoadingModule } from 'ngx-loading';
+import { CompaniesModule } from './pages/companies/companies.module';
+import { SubscriptionModule } from './dashboard/subscription/subscription.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -66,6 +62,7 @@ class ErrorLogger extends ErrorHandler {
         HttpClientModule,
         NgxLoadingModule.forRoot(NgxLoadingConfig),
         RouterModule.forRoot([
+          { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(_ => _.DashboardModule) },
           { path: '', loadChildren: () => import('./pages/stats/stats.module').then(_ => _.StatsModule) },
           { path: '', loadChildren: () => import('./pages/static/static.module').then(_ => _.StaticModule) },
           { path: 'not-found', component: NotFoundComponent },
@@ -77,13 +74,10 @@ class ErrorLogger extends ErrorHandler {
         }),
       HeaderModule,
       ReportModule,
-      ReportsModule,
-      ManageWebsitesModule,
       BrowserModule,
       BrowserAnimationsModule,
       AccountModule,
       CompaniesModule,
-      SecuredModule,
       SubscriptionModule,
       BsDropdownModule.forRoot(),
       TooltipModule,

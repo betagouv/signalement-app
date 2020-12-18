@@ -2,13 +2,7 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { isPlatformBrowser } from '@angular/common';
-import {
-  AccountEventActions,
-  ActionResultNames,
-  AnalyticsService,
-  ContractualDisputeActions, ContractualDisputeNames,
-  EventCategories,
-} from '../../services/analytics.service';
+import { AnalyticsService, ContractualDisputeActions, ContractualDisputeNames, EventCategories, } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-contractual-dispute',

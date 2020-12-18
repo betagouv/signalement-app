@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HowComponent } from './how/how.component';
 import { AboutComponent } from './about/about.component';
@@ -53,7 +52,6 @@ const routes: Routes = [
     UnavailableComponent
   ],
   imports: [
-    CommonModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
     RouterModule.forChild(routes),
