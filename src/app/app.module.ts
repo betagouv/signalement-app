@@ -83,9 +83,9 @@ class ErrorLogger extends ErrorHandler {
       TooltipModule,
       Angulartics2Module.forRoot(),
       ComponentsModule,
-        AppRoleModule,
-        AppPermissionModule,
-        ContractualDisputeModule
+      AppRoleModule,
+      AppPermissionModule,
+      ContractualDisputeModule
     ],
     exports: [
     ],
