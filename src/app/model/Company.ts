@@ -4,6 +4,7 @@ export interface DraftCompany {
   brand?: string;
   address?: string;
   postalCode?: string;
+  country?: string;
   website?: WebsiteURL;
   activityCode?: string;
 }

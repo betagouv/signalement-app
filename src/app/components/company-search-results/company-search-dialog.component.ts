@@ -28,7 +28,7 @@ export class CompanySearchDialogDirective {
 @Component({
   selector: 'app-company-search-dialog',
   template: `
-    <mat-progress-bar *ngIf="loading" mode="indeterminate" class="progress"></mat-progress-bar>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate" class="app-mat-dialog-progress"></mat-progress-bar>
     <h2 mat-dialog-title>Rechercher une entreprise</h2>
 
     <mat-form-field class="d-block">

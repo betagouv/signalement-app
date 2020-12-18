@@ -1,4 +1,5 @@
 import { Tag } from './Anomaly';
+import Utils from '../utils';
 
 export interface ReportFilter {
   readonly departments?: string[];
@@ -9,6 +10,7 @@ export interface ReportFilter {
    */
   readonly period?: string[];
   readonly tags?: Tag[];
+  readonly companyCountries?: string[];
   start?: string;
   end?: string;
   email?: string;
@@ -20,3 +22,39 @@ export interface ReportFilter {
   offset?: number;
   limit?: number;
 }
+
+export interface ReportFilterQuerystring {
+  readonly departments?: string;
+  readonly tags?: string | string[];
+  readonly companyCountries?: string;
+  start?: string;
+  end?: string;
+  email?: string;
+  siret?: string;
+  category?: string;
+  status?: string;
+  details?: string;
+  hasCompany?: string;
+  offset?: string;
+  limit?: string;
+}
+
+export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuerystring => {
+  try {
+    const { period, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
+    return {
+      ...r,
+      offset: offset ? offset + '' : '0',
+      limit: limit ? limit + '' : '10',
+      ...(hasCompany !== undefined &&  {hasCompany: '' + hasCompany}),
+      ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
+      ...(departments ? { departments: departments.join(',') } : {}),
+      ...((period && period[0]) ? { start: Utils.mapDate(period[0]) } : {}),
+      ...((period && period[1]) ? { end: Utils.mapDate(period[1]) } : {}),
+    };
+  } catch (e) {
+    console.error('Caught error on "reportFilter2QueryString"', report, e);
+    return {};
+  }
+};
+
