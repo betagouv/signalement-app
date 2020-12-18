@@ -23,7 +23,7 @@ interface Form {
 @Component({
   selector: 'app-manage-websites',
   template: `
-    <app-banner title="Modération des site webs"></app-banner>
+    <app-banner title="Modération des sites webs"></app-banner>
 
     <app-page>
       <app-panel [loading]="websiteService.fetching" [formGroup]="form">
@@ -87,7 +87,8 @@ interface Form {
                   [loading]="websiteService.updatingCompany(_.id)"
                   [error]="!!websiteService.updateCompanyError(_.id)"
                   [matTooltip]="websiteService.updateCompanyError(_.id) && 'L\\'entreprise est déjà associée à cette URL'"
-                  appCompanySearchDialog (companySelected)="updateCompany(_, $event)"
+                  [appCompanySearchDialog]="_.company?.siret"
+                  (companySelected)="updateCompany(_, $event)"
                 >
                   <span class="company-name">{{_.company?.name}}</span>
                   &nbsp;
@@ -216,13 +217,19 @@ export class ManageWebsitesComponent implements OnInit {
   };
 
   updateCompany = (website: ApiWebsiteWithCompany, $event: CompanySearchResult): void => {
-    this.websiteService.updateCompany(website.id, {
-      companyName: $event.name!,
-      companyAddress: $event.address,
-      companyPostalCode: $event.postalCode,
-      companySiret: $event.siret!,
-      companyActivityCode: $event.activityCode,
-    }).subscribe();
+    if ($event.siret === website.company.siret) {
+      if (website.kind !== ApiWebsiteKind.DEFAULT) {
+        this.websiteService.update(website.id, { kind: ApiWebsiteKind.DEFAULT }).subscribe(this.fetchWebsites);
+      }
+    } else {
+      this.websiteService.updateCompany(website.id, {
+        companyName: $event.name!,
+        companyAddress: $event.address,
+        companyPostalCode: $event.postalCode,
+        companySiret: $event.siret!,
+        companyActivityCode: $event.activityCode,
+      }).subscribe();
+    }
   };
 
   remove = (id: Id) => this.websiteService.remove(id).subscribe();
