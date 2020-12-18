@@ -72,6 +72,7 @@ class ErrorLogger extends ErrorHandler {
         NgxLoadingModule.forRoot(NgxLoadingConfig),
         RouterModule.forRoot([
           { path: 'stats', component: StatsComponent },
+          { path: '', loadChildren: () => import('./pages/static/static.module').then(_ => _.StaticModule) },
           { path: 'not-found', component: NotFoundComponent },
           { path: '**', component: NotFoundComponent },
         ], {
@@ -89,7 +90,6 @@ class ErrorLogger extends ErrorHandler {
       CompaniesModule,
       SecuredModule,
       SubscriptionModule,
-      StaticModule,
       BsDropdownModule.forRoot(),
       TooltipModule,
       Angulartics2Module.forRoot(),

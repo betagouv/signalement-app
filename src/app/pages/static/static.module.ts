@@ -61,7 +61,6 @@ const routes: Routes = [
     ComponentsModule,
   ],
   exports: [
-    RouterModule,
   ],
   providers: [
   ]
