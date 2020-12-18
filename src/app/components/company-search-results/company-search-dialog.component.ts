@@ -34,7 +34,7 @@ export class CompanySearchDialogDirective {
 
     <mat-form-field class="d-block">
       <mat-label>SIREN, SIRET ou RCS</mat-label>
-      <input matInput [formControl]="identityCtrl">
+      <input autofocus matInput [formControl]="identityCtrl">
       <button matSuffix mat-icon-button (click)="clear()">
         <mat-icon>clear</mat-icon>
       </button>
@@ -73,19 +73,11 @@ export class CompanySearchDialogComponent {
   ) {
   }
 
-  private _value?: string;
-
-  @Input()
-  get value(): string {
-    return this._value;
-  }
-
   set value(value: string) {
     if (value) {
       this.identityCtrl.setValue(value);
-      this.search(value);
+      this.submitCompanySiretForm();
     }
-    this._value = value;
   }
 
   @Output() companySelected = new EventEmitter<CompanySearchResult>();
@@ -105,10 +97,10 @@ export class CompanySearchDialogComponent {
     }, 300);
   };
 
-  readonly search = (value: string) => {
+  readonly submitCompanySiretForm = () => {
     this.loading = true;
     this.loadingError = false;
-    this.companyService.searchCompaniesByIdentity(value).subscribe(
+    this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
       companySearchResults => {
         this.results = companySearchResults;
       },
@@ -120,8 +112,6 @@ export class CompanySearchDialogComponent {
         this.loading = false;
       });
   };
-
-  readonly submitCompanySiretForm = () => this.search(this.identityCtrl.value);
 
   readonly clear = () => {
     this.results = undefined;
