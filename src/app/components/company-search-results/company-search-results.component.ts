@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Company, CompanySearchResult } from '../../model/Company';
+import { CompanySearchResult } from '../../model/Company';
 
 @Component({
   selector: 'app-company-search-results',

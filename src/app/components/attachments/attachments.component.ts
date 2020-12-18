@@ -20,7 +20,7 @@ export class AttachmentsComponent implements OnInit {
 
   tooLargeFilename: string;
   invalidFileExtension = false;
-  allowedExtensions = ['jpg', 'jpeg', 'pdf', 'png', 'gif', 'doc', 'docx', 'odt'];
+  allowedExtensions = ['jpg', 'jpeg', 'pdf', 'png', 'gif', 'docx', 'odt'];
 
   constructor(private fileUploaderService: FileUploaderService) { }
 

@@ -1,11 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  CompanySearchResult,
-  DraftCompany,
-  WebsiteKinds,
-  WebsiteURL,
-} from '../../../../model/Company';
+import { CompanySearchResult, DraftCompany, WebsiteKinds, WebsiteURL, } from '../../../../model/Company';
 import { CompanyService } from '../../../../services/company.service';
 import { RendererService } from '../../../../services/renderer.service';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
