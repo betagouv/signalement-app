@@ -62,8 +62,8 @@ class ErrorLogger extends ErrorHandler {
         HttpClientModule,
         NgxLoadingModule.forRoot(NgxLoadingConfig),
         RouterModule.forRoot([
-          { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(_ => _.DashboardModule) },
           { path: '', loadChildren: () => import('./pages/stats/stats.module').then(_ => _.StatsModule) },
+          { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(_ => _.DashboardModule) },
           { path: '', loadChildren: () => import('./pages/static/static.module').then(_ => _.StaticModule) },
           { path: 'not-found', component: NotFoundComponent },
           { path: '**', component: NotFoundComponent },
