@@ -1,4 +1,4 @@
-<alert class="text-center" type="danger" dismissible="true" [isOpen]="draftReport && draftReport.subcategories && !draftReport.lastSubcategory?.information" (onClosed)="removeStoredReport()">
+<alert class="text-center" type="danger" dismissible="true" [isOpen]="isAlertOpen()" (onClosed)="removeStoredReport()">
   <strong>Vous avez déjà commencé un signalement, souhaitez-vous le finaliser pour l'envoyer à l'entreprise ?</strong>
   <div>
     <button type="submit" class="button-outline warning ml-2" (click)="removeStoredReport()">Non</button>

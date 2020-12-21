@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Anomaly, Subcategory } from '../../../model/Anomaly';
+import { Anomaly, instanceOfSubcategoryInformation, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
 import { DraftReport, Step } from '../../../model/Report';
@@ -94,7 +94,7 @@ export class ProblemComponent implements OnInit {
   continue(value?) {
     switch (this.problemStep) {
       case ProblemSteps.Subcategories: {
-        if (this.draftReport.lastSubcategory.information) {
+        if (instanceOfSubcategoryInformation(this.draftReport.lastSubcategory)) {
           this.problemStep = ProblemSteps.Next;
           this.continue();
         } else {

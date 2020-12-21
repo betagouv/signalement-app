@@ -177,7 +177,7 @@ export class ReportListFiltersComponent implements OnInit {
 
   ngOnInit() {
     this.categories = [
-      ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
+      ...this.anomalyService.anomalies.filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
       ...oldCategories
     ];
   }
