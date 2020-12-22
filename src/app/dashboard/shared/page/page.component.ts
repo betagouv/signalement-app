@@ -16,11 +16,11 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrls: ['./page.component.scss'],
   animations: [
     trigger('animation', [
-      transition(':enter', [
+      transition('void => true', [
         style({ opacity: 0, transform: 'translate3d(0, 40px, 0)' }),
         animate('360ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'translate3d(0, 0, 0)' }))
       ]),
-      transition(':leave', [
+      transition('true => void', [
         animate('360ms cubic-bezier(0.35, 0, 0.25, 1)', style({
           opacity: 0,
           transform: 'translate3d(0, 40px 0)'

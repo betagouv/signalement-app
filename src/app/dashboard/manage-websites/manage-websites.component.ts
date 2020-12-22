@@ -23,9 +23,23 @@ interface Form {
 @Component({
   selector: 'app-manage-websites',
   template: `
-    <app-banner title="Modération des sites webs"></app-banner>
+    <app-banner title="Suivi des sites internet"></app-banner>
 
-    <app-page>
+    <app-page animated="false">
+      <div class="container position-relative bg-white">
+        <nav class="nav nav-tabs nav-justified" role="tablist" aria-label="Type de site internet">
+          <button class="nav-item nav-link active" [routerLink]="['/moderation-url-entreprises']"
+                  role="tab"
+                  tabIndex="0">
+            Associations sites / entreprises
+          </button>
+          <button class="nav-item nav-link" [routerLink]="['/sites-internet','non-identifies']"
+                  role="tab" attr.aria-selected="true" attr.aria-controls="panel1" id="tab1"
+                  tabIndex="1">
+            Sites non identifiés
+          </button>
+        </nav>
+      </div>
       <app-panel [loading]="websiteService.fetching" [formGroup]="form">
         <app-panel-header>
           <input

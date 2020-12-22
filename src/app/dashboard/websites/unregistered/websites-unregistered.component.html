@@ -1,0 +1,47 @@
+<app-banner title="Suivi des sites internet"></app-banner>
+
+<app-page animated="false">
+  <div class="container position-relative bg-white">
+    <nav class="nav nav-tabs nav-justified" role="tablist" aria-label="Type de site internet">
+      <button class="nav-item nav-link" [routerLink]="['/moderation-url-entreprises']"
+              role="tab"
+              tabIndex="0">
+        Associations sites / entreprises
+      </button>
+      <button class="nav-item nav-link active" [routerLink]="['/sites-internet','non-identifies']"
+              role="tab" attr.aria-selected="true" attr.aria-controls="panel1" id="tab1"
+              tabIndex="1">
+        Sites non identifiés
+      </button>
+    </nav>
+  </div>
+  <app-panel [loading]="websiteService.fetchingUnregistered">
+    <app-panel-header>
+      <input class="form-control form-control-material host-form-control" placeholder="Nom d'hôte" #hostInput/>
+    </app-panel-header>
+    <table mat-table [dataSource]="dataSource" matSort class="fullwidth" matSortActive="count" matSortDirection="desc">
+
+
+      <ng-container matColumnDef="count">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Nombre de signalements</th>
+        <td class="td-count text-center" mat-cell *matCellDef="let _">
+          {{_.count}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="host">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Nom d'hôte</th>
+        <td mat-cell *matCellDef="let _">
+          {{_.host}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+  </app-panel>
+
+  <div class="notification error" *ngIf="websiteService.fetchUnregisteredError">
+    Une erreur technique s'est produite
+  </div>
+</app-page>
