@@ -40,7 +40,7 @@ describe('UnregisteredComponent', () => {
 
   it('should list unregistered websites in a datatable', () => {
 
-    spyOn(websiteService, 'listUnregistered').and.returnValue(of([{ host: 'host1.fr', count: 1}, { host: 'host2.fr', count: 2}]));
+    spyOn(websiteService, 'listUnregistered').and.callFake(() => of([{ host: 'host1.fr', count: 1}, { host: 'host2.fr', count: 2}]));
 
     component.ngOnInit();
     fixture.detectChanges();
