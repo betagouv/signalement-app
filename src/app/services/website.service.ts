@@ -8,6 +8,7 @@ import { ApiError } from '../api-sdk/ApiClient';
 import { Index } from '../model/Common';
 import { CRUDListService } from './helper/CRUDListService';
 import { HostWithReportCount } from '../model/Website';
+import format from 'date-fns/format';
 
 @Injectable({
   providedIn: 'root'
@@ -60,13 +61,16 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
     return this._fetchUnregisteredError;
   }
 
-  readonly listUnregistered = (): Observable<HostWithReportCount[]> => {
+  readonly listUnregistered = (start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
     return this.utils.getSecuredReportApiSdk.pipe(
       tap(_ => {
         this._fetchingUnregistered = true;
         this._fetchUnregisteredError = undefined;
       }),
-      mergeMap(api => api.website.listUnregistered()),
+      mergeMap(api => api.website.listUnregistered(
+        start ? format(start, 'yyyy-MM-dd') : null,
+        end ? format(end, 'yyyy-MM-dd') : null)
+      ),
       map(results => results.map (_ => ({
         host: _.host,
         count: _.count

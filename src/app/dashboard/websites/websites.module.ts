@@ -5,6 +5,7 @@ import { AuthGuard } from '../../guards/auth.guard';
 import { Roles } from '../../model/AuthUser';
 import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../shared/shared.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 /* tslint:disable:max-line-length */
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule,
     SharedModule,
+    BsDatepickerModule.forRoot(),
   ]
 })
 export class WebsitesModule { }

@@ -17,7 +17,17 @@
   </div>
   <app-panel [loading]="websiteService.fetchingUnregistered">
     <app-panel-header>
-      <input class="form-control form-control-material host-form-control" placeholder="Nom d'hôte" #hostInput/>
+      <input class="form-control form-control-material host-form-control" placeholder="Nom d'hôte" #hostFilter/>
+      <input
+        class="form-control form-control-material"
+        [(bsValue)]="periodFilter"
+        bsDaterangepicker
+        autocomplete="off"
+        placeholder="Période sélectionnée"
+        [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
+        triggers="click keypress"
+        (bsValueChange)="fetchUnregisteredWebsites()"
+      />
     </app-panel-header>
     <table mat-table [dataSource]="dataSource" matSort class="fullwidth" matSortActive="count" matSortDirection="desc">
 
