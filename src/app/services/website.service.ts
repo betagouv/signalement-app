@@ -61,13 +61,14 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
     return this._fetchUnregisteredError;
   }
 
-  readonly listUnregistered = (start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
+  readonly listUnregistered = (q?: string, start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
     return this.utils.getSecuredReportApiSdk.pipe(
       tap(_ => {
         this._fetchingUnregistered = true;
         this._fetchUnregisteredError = undefined;
       }),
       mergeMap(api => api.website.listUnregistered(
+        q,
         start ? format(start, 'yyyy-MM-dd') : null,
         end ? format(end, 'yyyy-MM-dd') : null)
       ),

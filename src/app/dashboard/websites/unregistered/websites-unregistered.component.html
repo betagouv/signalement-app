@@ -17,7 +17,7 @@
   </div>
   <app-panel [loading]="websiteService.fetchingUnregistered">
     <app-panel-header>
-      <input class="form-control form-control-material host-form-control" placeholder="Nom d'hôte" #hostFilter/>
+      <input [(ngModel)]="hostFilter" class="form-control form-control-material host-form-control" placeholder="Nom d'hôte" (keydown.enter)="fetchUnregisteredWebsites()"/>
       <input
         class="form-control form-control-material"
         [(bsValue)]="periodFilter"
