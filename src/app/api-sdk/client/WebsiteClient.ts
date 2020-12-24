@@ -15,6 +15,10 @@ export class WebsiteClient {
     return this.client.get<ApiHostWithReportCount[]>(`/websites/unregistered`, { qs: { q, start, end } });
   };
 
+  readonly extractUnregistered = (q?: string, start?: string, end?: string): Promise<ApiHostWithReportCount[]> => {
+    return this.client.get<ApiHostWithReportCount[]>(`/websites/unregistered/extract`, { qs: { q, start, end } });
+  };
+
   readonly update = (id: Id, website: Partial<ApiWebsite>): Promise<ApiWebsiteWithCompany> => {
     return this.client.put<ApiWebsiteWithCompany>(`/websites/${id}`, { body: website });
   };

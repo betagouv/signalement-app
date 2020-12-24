@@ -17,7 +17,7 @@
   </div>
   <app-panel [loading]="websiteService.fetchingUnregistered">
     <app-panel-header>
-      <input [(ngModel)]="hostFilter" class="form-control form-control-material host-form-control" placeholder="Nom d'hôte" (keydown.enter)="fetchUnregisteredWebsites()"/>
+      <input [(ngModel)]="hostFilter" class="form-control form-control-material host-form-control" placeholder="Nom de l'hôte" (keydown.enter)="fetchUnregisteredWebsites()"/>
       <input
         class="form-control form-control-material"
         [(bsValue)]="periodFilter"
@@ -28,6 +28,12 @@
         triggers="click keypress"
         (bsValueChange)="fetchUnregisteredWebsites()"
       />
+      <button mat-icon-button (click)="extract()" matTooltip="Exporter en XLS">
+        <mat-icon>get_app</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="clearFilters()">
+        <mat-icon>clear</mat-icon>
+      </button>
     </app-panel-header>
     <table mat-table [dataSource]="dataSource" matSort class="fullwidth" matSortActive="count" matSortDirection="desc">
 
@@ -40,7 +46,7 @@
       </ng-container>
 
       <ng-container matColumnDef="host">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef>Nom d'hôte</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Nom de l'hôte</th>
         <td mat-cell *matCellDef="let _">
           {{_.host}}
         </td>

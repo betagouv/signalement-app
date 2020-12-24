@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { tap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-unregistered',
@@ -32,6 +33,7 @@ export class WebsitesUnregisteredComponent implements OnInit {
   constructor(private titleService: Title,
               private meta: Meta,
               private localeService: BsLocaleService,
+              private router: Router,
               public websiteService: WebsiteService) { }
 
   ngOnInit() {
@@ -55,6 +57,22 @@ export class WebsitesUnregisteredComponent implements OnInit {
     this.dataSource = new MatTableDataSource(hosts);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  clearFilters() {
+    this.periodFilter = undefined;
+    this.hostFilter = undefined;
+    this.fetchUnregisteredWebsites();
+  }
+
+  extract() {
+    this.websiteService.extractUnregistered(
+      this.hostFilter ?? null,
+      (this.periodFilter && this.periodFilter[0]) ?? null,
+      (this.periodFilter && this.periodFilter[1]) ?? null
+    ).subscribe(() => {
+      this.router.navigate(['mes-telechargements']);
+    });
   }
 
 }

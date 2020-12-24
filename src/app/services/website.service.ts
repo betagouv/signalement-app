@@ -88,4 +88,15 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
       })
     );
   }
+
+
+  readonly extractUnregistered = (q?: string, start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
+    return this.utils.getSecuredReportApiSdk.pipe(
+      mergeMap(api => api.website.extractUnregistered(
+        q,
+        start ? format(start, 'yyyy-MM-dd') : null,
+        end ? format(end, 'yyyy-MM-dd') : null)
+      )
+    );
+  }
 }
