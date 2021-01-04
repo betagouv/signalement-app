@@ -20,6 +20,7 @@ export class MatPaginatorIntlFr extends MatPaginatorIntl {
   itemsPerPageLabel = 'Lignes par page';
   nextPageLabel = 'Suivant';
   previousPageLabel = 'Précédent';
+  getRangeLabel = (page: number, pageSize: number, length: number) => `${page} sur ${length}`;
 }
 
 @NgModule({
