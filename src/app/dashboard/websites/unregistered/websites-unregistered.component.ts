@@ -9,6 +9,7 @@ import { tap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
+import { Roles } from '../../../model/AuthUser';
 
 @Component({
   selector: 'app-unregistered',
@@ -19,6 +20,8 @@ export class WebsitesUnregisteredComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  roles = Roles;
 
   hostFilter?: string;
   periodFilter?: Date[];
