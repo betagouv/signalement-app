@@ -47,7 +47,7 @@
       L’entreprise n’apparaît pas ?
     </div>
     <div>
-      Modifiez l'adresse du site internet ou<button class="link" (click)="this.submitWebsiteOnly()">identifier directement l'entreprise.</button>
+      <button class="link p-0" (click)="changeWebsite()" aria-label="Modifier adresse du site internet">Corrigez</button> l'adresse du site internet et relancez votre recherche.
     </div>
 
     <hr *ngIf="selectedCompany"/>
