@@ -65,15 +65,7 @@
                     Nous vous invitons à faire votre signalement auprès d'econsumer.gov afin d’aider les autorités internationales à lutter contre la fraude.
                     <a href="https://www.econsumer.gov/fr">https://www.econsumer.gov/fr</a>
                   </p>
-                  <ng-container *ngIf="draftReport.isContractualDispute && draftReport.draftCompany.website">
-                    <p>
-                      Vous avez payé avec votre carte bancaire ?
-                    </p>
-                    <p>
-                      Grâce à la procédure de charge-back vous pouvez être remboursé gratuitement suite à un achat effectué en ligne :
-                      <a href="https://www.economie.gouv.fr/particuliers/procedure-chargeback">https://www.economie.gouv.fr/particuliers/procedure-chargeback</a>
-                    </p>
-                  </ng-container>
+                  <app-ack-charge-back [draftReport]="draftReport"></app-ack-charge-back>
                 </ng-template>
                 <ng-template #noSiret>
                   <p>
@@ -117,6 +109,7 @@
             <p>
               <i class="material-icons md-18 attach-icon" aria-hidden="true">mail_outline</i> Vous allez recevoir un mail avec les démarches que SignalConso vous invite à commencer en parallèle.
             </p>
+            <app-ack-charge-back [draftReport]="draftReport"></app-ack-charge-back>
           </div>
         </div>
       </ng-template>
