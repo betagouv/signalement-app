@@ -124,8 +124,10 @@
     }
   },
   "websites": {
-    "title": "Modéreration des sites webs - SignalConso",
-    "description": "Modérer les sites webs suggérés",
+    "manage": {
+      "title": "Modéreration des sites webs - SignalConso",
+      "description": "Modérer les sites webs suggérés"
+    },
     "unregistered": {
       "title": "Sites internet non identifiés - SignalConso",
       "description": "Consultez la liste des sites internet signalés qui ne sont pas rattachés à une entreprise"

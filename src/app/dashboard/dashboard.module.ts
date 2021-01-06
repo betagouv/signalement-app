@@ -1,11 +1,9 @@
-/* tslint:disable:max-line-length */
 import { NgModule } from '@angular/core';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { ReportsModule } from './reports/reports.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { Roles } from '../model/AuthUser';
-import { ManageWebsitesModule } from './manage-websites/manage-websites.module';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardCompaniesModule } from './companies/dashboard-companies.module';
 import { DGCCRFComponent } from './dgccrf/dgccrf.component';
@@ -41,7 +39,6 @@ const routes: Routes = [
     SubscriptionModule,
     ReportsModule,
     ModalModule.forRoot(),
-    ManageWebsitesModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule,

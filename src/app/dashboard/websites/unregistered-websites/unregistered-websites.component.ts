@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
 import { Roles } from '../../../model/AuthUser';
 
 @Component({
-  selector: 'app-unregistered',
-  templateUrl: './websites-unregistered.component.html',
-  styleUrls: ['./websites-unregistered.component.scss']
+  selector: 'app-unregistered-websites',
+  templateUrl: './unregistered-websites.component.html',
+  styleUrls: ['./unregistered-websites.component.scss']
 })
-export class WebsitesUnregisteredComponent implements OnInit {
+export class UnregisteredWebsitesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

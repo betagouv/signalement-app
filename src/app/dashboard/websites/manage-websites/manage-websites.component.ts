@@ -1,18 +1,18 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
-import { WebsiteService } from '../../services/website.service';
-import { ApiWebsiteKind, ApiWebsiteWithCompany } from '../../api-sdk/model/ApiWebsite';
+import { WebsiteService } from '../../../services/website.service';
+import { ApiWebsiteKind, ApiWebsiteWithCompany } from '../../../api-sdk/model/ApiWebsite';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { CompanySearchResult } from '../../model/Company';
+import { CompanySearchResult } from '../../../model/Company';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { Id } from '../../api-sdk/model/Common';
-import { Index } from '../../model/Common';
+import { Id } from '../../../api-sdk/model/Common';
+import { Index } from '../../../model/Common';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../shared/confirm/confirm.component';
-import pages from '../../../assets/data/pages.json';
+import { ConfirmDialogComponent } from '../../shared/confirm/confirm.component';
+import pages from '../../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 
 interface Form {
@@ -26,20 +26,7 @@ interface Form {
     <app-banner title="Suivi des sites internet"></app-banner>
 
     <app-page animated="false">
-      <div class="container position-relative bg-white">
-        <nav class="nav nav-tabs nav-justified" role="tablist" aria-label="Type de site internet">
-          <button class="nav-item nav-link active" [routerLink]="['/moderation-url-entreprises']"
-                  role="tab"
-                  tabIndex="0">
-            Associations sites / entreprises
-          </button>
-          <button class="nav-item nav-link" [routerLink]="['/sites-internet','non-identifies']"
-                  role="tab" attr.aria-selected="true" attr.aria-controls="panel1" id="tab1"
-                  tabIndex="1">
-            Sites non identifiés
-          </button>
-        </nav>
-      </div>
+      <app-websites-tabs></app-websites-tabs>
       <app-panel [loading]="websiteService.fetching" [formGroup]="form">
         <app-panel-header>
           <input
@@ -152,8 +139,8 @@ export class ManageWebsitesComponent implements OnInit {
   websitesHostIndex: Index<ApiWebsiteWithCompany[]> = {};
 
   ngOnInit(): void {
-    this.titleService.setTitle(pages.websites.title);
-    this.meta.updateTag({ name: 'description', content: pages.websites.description });
+    this.titleService.setTitle(pages.websites.manage.title);
+    this.meta.updateTag({ name: 'description', content: pages.websites.manage.description });
     this.initForm();
     this.fetchWebsites();
   }

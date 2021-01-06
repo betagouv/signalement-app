@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WebsitesUnregisteredComponent } from './websites-unregistered.component';
+import { UnregisteredWebsitesComponent } from './unregistered-websites.component';
 import { ComponentsModule } from '../../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -10,22 +10,31 @@ import { WebsiteService } from '../../../services/website.service';
 import { addMonths } from 'date-fns';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { WebsitesTabsComponent } from '../websites-tabs/websites-tabs.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { User } from '../../../model/AuthUser';
 
 describe('UnregisteredComponent', () => {
 
-  let component: WebsitesUnregisteredComponent;
-  let fixture: ComponentFixture<WebsitesUnregisteredComponent>;
+  let component: UnregisteredWebsitesComponent;
+  let fixture: ComponentFixture<UnregisteredWebsitesComponent>;
   let websiteService: WebsiteService;
+  let authenticationService: AuthenticationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WebsitesUnregisteredComponent ],
+      declarations: [
+        UnregisteredWebsitesComponent,
+        WebsitesTabsComponent
+      ],
       imports: [
         ComponentsModule,
         SharedModule,
         RouterTestingModule,
         NoopAnimationsModule,
         BsDatepickerModule.forRoot(),
+        HttpClientModule,
       ]
     })
     .compileComponents();
@@ -33,12 +42,14 @@ describe('UnregisteredComponent', () => {
 
   beforeEach(() => {
     defineLocale('fr', frLocale);
+    authenticationService = TestBed.inject(AuthenticationService);
+    authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
     websiteService = TestBed.inject(WebsiteService);
-    fixture = TestBed.createComponent(WebsitesUnregisteredComponent);
+    fixture = TestBed.createComponent(UnregisteredWebsitesComponent);
     component = fixture.componentInstance;
   });
 
-  it('should list unregistered websites in a datatable', () => {
+  it('should list unregistered-websites websites in a datatable', () => {
 
     spyOn(websiteService, 'listUnregistered').and.callFake(() => of([{ host: 'host1.fr', count: 1}, { host: 'host2.fr', count: 2}]));
 
