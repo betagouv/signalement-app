@@ -4,8 +4,7 @@ import { Entity, Id } from './Common';
 export enum ApiWebsiteKind {
   DEFAULT = 'DEFAULT',
   MARKETPLACE = 'MARKETPLACE',
-  PENDING = 'PENDING',
-  EXCLUSIVE = 'EXCLUSIVE',
+  PENDING = 'PENDING'
 }
 
 export interface ApiWebsite extends Entity {
@@ -29,4 +28,9 @@ export interface ApiWebsiteCreate extends ApiWebsiteUpdateCompany {
 
 export interface ApiWebsiteWithCompany extends ApiWebsite {
   company: Company;
+}
+
+export interface ApiHostWithReportCount {
+  host: string;
+  count: number;
 }
