@@ -7,7 +7,7 @@ import { DetailsComponent } from './details/details.component';
 import { CompanyComponent } from './company/company.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
-import { AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
+import { AcknowledgmentChargeBackComponent, AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2CompleterModule } from 'ng2-completer';
@@ -77,6 +77,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     IllustrationCardComponent,
     InformationComponent,
     AcknowledgmentComponent,
+    AcknowledgmentChargeBackComponent,
     SubcategoryComponent,
     CompanyForeignCountryComponent,
     CompanySearchByNameComponent,

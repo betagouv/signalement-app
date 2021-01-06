@@ -13,8 +13,6 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { combineLatest } from 'rxjs';
 import { take } from 'rxjs/operators';
-
-import * as isEqual from 'lodash.isequal';
 import { HttpResponse } from '@angular/common/http';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -82,8 +80,8 @@ export class CompaniesAdminComponent implements OnInit {
           [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
           [this.roles.DGCCRF]: [this.mostReportedTab]
         }[user.role];
-        this.currentNavTab = this.navTabs.find(
-          tab => isEqual(tab.link.slice(1), url.slice(0, 2).map(segment => segment.toString()))
+        this.currentNavTab = this.navTabs.find(tab =>
+          tab.link.reduce((s1, s2) => `${s1}/${s2}`) === url.reduce((s, segment) => `${s}/${segment.toString()}`, '/' )
         );
         if (!this.currentNavTab) {
           this.currentNavTab = this.navTabs[0];

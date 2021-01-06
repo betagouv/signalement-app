@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -48,3 +48,27 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   }
 
 }
+
+
+
+@Component({
+  selector: 'app-ack-charge-back',
+  template: `
+    <ng-container *ngIf="draftReport?.isContractualDispute && draftReport?.draftCompany.website">
+      <p>
+        <strong>Vous avez payé avec votre carte bancaire ?</strong>
+      </p>
+      <p>
+        Grâce à la procédure de charge-back vous pouvez être remboursé gratuitement suite à un achat effectué en ligne :
+        <a href="https://www.economie.gouv.fr/particuliers/procedure-chargeback">https://www.economie.gouv.fr/particuliers/procedure-chargeback</a>
+      </p>
+    </ng-container>
+  `
+})
+export class AcknowledgmentChargeBackComponent {
+
+  @Input() draftReport: DraftReport;
+
+  constructor() { }
+}
+
