@@ -205,4 +205,4 @@
         answer: Si vous trouvez que le plat n'est pas frais ou pas assez chaud, vous pouvez demander que l'on vous remplace le plat.
           <br/>Si votre vin est bouchonné, vous pouvez demander à le changer.
           <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.
-        outOfScope: true
+    outOfScope: true
