@@ -7,6 +7,8 @@
           description: Conditionner l'abonnement du locataire à l'accord écrit du propriétaire est interdit. Refuser la demande d'abonnement d'un locataire car il n'est pas propriétaire est aussi interdit.
         - title: Le distributeur me demande de payer une avance sur ma consommation
           subcategoriesTitle: Quand doit-être remboursée cette avance ?
+          tags:
+            - Litige contractuel
           subcategories:
             - title: Elle sera déduite à ma première facture d'eau
               information:
@@ -23,8 +25,7 @@
                 - label: Décrivez nous plus en détails ce qui s'est passé
                   rank: 2
                   type: TEXTAREA
-              fileLabel: Joindre une copie du contrat ou tout document commerciaux relatif à cette avance.
-              consumerActions: !!import/single ../common/actions/eau.yml
+              fileLabel: Joindre une copie du contrat ou tout document commercial relatif à cette avance.
         - title: Je ne suis pas d'accord avec la consommation indiquée sur ma facture
           information:
             title: Vous devez demander à faire vérifier le compteur.
@@ -33,6 +34,8 @@
               - question: Vous souhaitez obtenir la vérification de votre compteur d’eau&#160;?
                 answer: Vous trouverez un modèle de lettre à envoyer sur le site <br><a href="https://www.inc-conso.fr/content/vous-souhaitez-obtenir-la-verification-de-votre-compteur-deau-en-raison-dune-consommation" target="_blank" />inc-conso.fr</a>
         - title: Une clause du contrat (règlement de service) est abusive, c'est-à-dire qu'elle désavantage fortement le consommateur.
+          tags:
+            - Litige contractuel
           detailInputs:
             - label: Date du constat (ou du contrat)
               rank: 1
@@ -42,15 +45,17 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-          consumerActions: !!import/single ../common/actions/eau.yml
-        - title: Autres
-          consumerActions: !!import/single ../common/actions/eau.yml
+        - title: Autre
+          tags:
+            - Litige contractuel
     - title: Coupure de l'eau pour impayé
       example: Mon débit d'eau a été réduit car je ne peux payer ma facture
+      tags:
+        - Litige contractuel
       detailTitle: Il est interdit de couper ou réduire l'eau en cas d'impayé lorsqu'il s'agit d'une résidence principale.
       description: Les coupures d'eau et les réductions de débit sont interdites en cas de factures impayées, pour les résidences principales et ce toute l'anné. Par contre, vous devrez toujours payer votre facture.
       detailInputs:
-        - label: Date du du contrat
+        - label: Date du contrat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
@@ -58,12 +63,11 @@
           rank: 2
           type: DATE
       fileLabel: Joindre une copie du contrat / règlement.
-      consumerActions: !!import/single ../common/actions/eau.yml
     - title: Dégâts / travaux sur les canalisations
       example: 'Exemple : fuite d''eau avant compteur'
       information:
         title: Le compteur d'eau représente la frontière entre ce qui est à votre charge et ce qui ne l'est pas.
-        content: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez dans bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
+        content: La partie située après votre compteur d'eau est à votre charge. Cela veut dire que les travaux après votre compteur sont à votre charge. Les problèmes sur les canalisations après votre compteur sont également à votre charge. <br> Les canalisations situées avant votre compteur sont des ouvrages publics. Ils relèvent donc de la responsabilité du service des eaux. Le compteur est également à la charge du service des eaux. <br> Cette règle est valable aussi même si les canalisations sont situées dans votre propriété. <br><br> Vous êtes responsable du paiement des fuites d’eau après votre compteur, mais vous pouvez bénéficier d’un droit à un écrêtement dans certains cas. Plus d'information <a href="https://www.economie.gouv.fr/files/files/directions_services/dgccrf/documentation/publications/depliants/guide-eau-15062018.pdf" target="_blank" />ici</a>
         actions:
           - question: Que faire en cas de désaccord&#160;?
             answer: Contactez le service client de votre distributeur. Si vous ne trouvez pas de solution, vous pouvez saisir le médiateur de l'eau<br><a href="https://www.mediation-eau.fr/" target="_blank" />https://www.mediation-eau.fr/</a>
@@ -80,12 +84,14 @@
           type: RADIO
           options:
             - malfaçons sur la pose de la fosse septique
-            - le bureau d'étude impose une marque/modèle en particulier
+            - le bureau d'étude impose une marque / modèle en particulier
             - autre (à préciser)
         - label: Décrivez nous plus en détails ce qui s'est passé
           rank: 3
           type: TEXTAREA
 - title: Gaz / Electricité
+  tags:
+    - Litige contractuel
   subcategories:
     - title: Démarchage à domicile ou par téléphone
       example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif'
@@ -123,8 +129,7 @@
         - label: Décrivez nous plus en détails ce qui s'est passé
           rank: 6
           type: TEXTAREA
-      fileLabel: Si possible, joindre une copie du contrat ou tout document commerciaux
-      consumerActions: !!import/single ../common/actions/energie.yml
+      fileLabel: Si possible, joindre une copie du contrat ou tout document commercial
     - title: Publicité mensongère ou trompeuse
       example: 'Exemple : publicité "offre verte" mensongère'
       detailInputs:
@@ -160,7 +165,6 @@
             - Oui
             - Non
       fileLabel: Photo(s) si possible
-      consumerActions: !!import/single ../common/actions/energie.yml
     - title: Contrat
       example: 'Exemple : reconduction de contrat, clause abusive'
       subcategories:
@@ -172,7 +176,7 @@
               subcategoriesTitle: Ce contrat concerne un logement
               subcategories:
                 - title: Dans lequel vous venez d'emménager
-                  description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez démandé à faire démarrer votre contrat immédiatement
+                  description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation". Ce délai est valable même si vous avez demandé à faire démarrer votre contrat immédiatement
                     <br />Vous n’avez pas à vous justifier auprès du commerçant.
                     <br/><a href="../delai-de-retractation" target="_blank">>> Comment calculer mon délai de retractation</a>
                   subcategoriesTitle: Avez-vous fait votre demande dans ce délai&#160;?
@@ -190,14 +194,13 @@
                         - label: Précisez comment et à qui vous avez fait la demande
                           rank: 3
                           type: TEXTAREA
-                      consumerActions: !!import/single ../common/actions/energie.yml
                     - title: Non
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
                         content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
                         outOfScope: true
                 - title: Un logement que vous occupiez déjà
-                  subcategoriesTitle: Avez-vous demander à faire démarrer votre contrat immédiatement ?
+                  subcategoriesTitle: Avez-vous demandé à faire démarrer votre contrat immédiatement ?
                   subcategories:
                     - title: Non. Le contrat doit démarrer à la fin du délai de retractation.
                       description: Vous avez un délai de 14 jours pour changer d’avis. On appelle ce délai le "délai de rétractation".
@@ -218,7 +221,6 @@
                             - label: Précisez comment et à qui vous avez fait la demande
                               rank: 3
                               type: TEXTAREA
-                          consumerActions: !!import/single ../common/actions/energie.yml
                         - title: Non
                           information:
                             title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -230,7 +232,6 @@
                         content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
                         outOfScope: true
                     - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
-                      consumerActions: !!import/single ../common/actions/energie.yml
             - title: Dans une boutique
               information:
                 title: Vous ne pouvez plus exiger l'annulation de votre contrat.
@@ -246,10 +247,8 @@
               rank: 2
               type: TEXTAREA
           fileLabel: Joindre une copie du contrat / règlement.
-          consumerActions: !!import/single ../common/actions/energie.yml
-        - title: Autres
-          consumerActions: !!import/single ../common/actions/energie.yml
+        - title: Autre
     - title: Facturation
-      consumerActions: !!import/single ../common/actions/energie.yml
-- title: Autres (Fioul / GPL / granulés de bois...)
-  consumerActions: !!import/single ../common/actions/energie.yml
+- title: Autre (Fioul / GPL / granulés de bois...)
+  tags:
+    - Litige contractuel

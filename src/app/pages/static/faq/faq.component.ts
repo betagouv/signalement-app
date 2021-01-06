@@ -32,4 +32,7 @@ export class FaqComponent implements OnInit {
     });
   }
 
+  changeTab() {
+    this.isFaqConso = !this.isFaqConso;
+  }
 }

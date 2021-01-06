@@ -1,0 +1,55 @@
+@import "../../../../theme/variables";
+@import '../../../../../node_modules/@angular/material/core/style/button-common';
+@import "../../../../../node_modules/@angular/material/button/button-base";
+@import "../../../../../node_modules/@angular/material/button/button-theme";
+
+$btn-size: 36px;
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px 0 6px;
+  color: $primary;
+  height: $btn-size;
+  min-width: $btn-size;
+  margin-right: spacing(.5);
+
+  &.-dense {
+    padding-left: 4px;
+    height: 26px;
+    min-width: 26px;
+    font-size: 0.875rem;
+
+    .mat-icon {
+      $size: 20px;
+      font-size: $size !important;
+      height: $size;
+      width: $size;
+    }
+  }
+
+  &.-loading {
+  }
+
+  &.-error {
+    border-color: transparentize($theme-error-border, .80);
+    background: transparentize($theme-error-border, .95);
+    color: $theme-error-border;
+  }
+
+  &.-success {
+    border-color: transparentize($theme-success-border, .80);
+    background: transparentize($theme-success-border, .95);
+    color: $theme-success-border;
+  }
+}
+
+.app-btn-icon {
+  color: $theme-color-text-secondary;
+}
+
+.app-btn-content {
+  padding: 0 spacing(1);
+  display: flex;
+  align-items: center;
+}

@@ -1,101 +1,134 @@
 <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
-<section class="section section-white" role="main" *ngIf="draftReport">
-  <div class="container max-width">
-    <ng-container *ngIf="draftReport.employeeConsumer">
-      <div class="notification info mb-4">
-        <p>
-          <strong>Vous avez déclaré être employé de l’entreprise.</strong>
-        </p>
-        <p>
-          Votre signalement sera lu <b>uniquement par la répression des fraudes</b>.
-        </p>
-        <p>
-          Vos coordonnées sont à destination des enquêteurs uniquement.
-          Ils peuvent être amenés à vous contacter afin de vérifier votre identité et votre signalement.
-        </p>
-        <p>
-          Votre employeur ne sera pas mis au courant de votre signalement.
-        </p>
-        <p>
-          Pendant l'enquête, si les enquêteurs ont besoin de révéler votre identité à la justice ou à votre employeur, ils vous demanderont l'autorisation avant.
-          <b>Vous pourrez refuser.</b>
-        </p>
-      </div>
-      <hr/>
-    </ng-container>
+<main role="main">
+  <section class="section section-white" *ngIf="draftReport">
+    <div class="container max-width">
+      <ng-container *ngIf="draftReport.employeeConsumer">
+        <div class="notification info mb-4">
+          <p>
+            <strong>Vous déclarez travailler dans l'entreprise que vous allez signaler.</strong>
+          </p>
+          <p>
+            Votre signalement sera lu <b>uniquement par la répression des fraudes</b>.
+          </p>
+          <p>
+            Vos coordonnées sont à destination des enquêteurs uniquement.
+            Ils peuvent être amenés à vous contacter afin de vérifier votre identité et votre signalement.
+          </p>
+          <p>
+            Votre employeur ne sera pas mis au courant de votre signalement.
+          </p>
+          <p>
+            Pendant l'enquête, si les enquêteurs ont besoin de révéler votre identité à la justice ou à votre employeur, ils vous demanderont l'autorisation avant.
+            <b>Vous pourrez refuser.</b>
+          </p>
+        </div>
+        <hr/>
+      </ng-container>
 
-    <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
-      <h2 class="mb-4 font-weight-bold">
-        Vos coordonnées nous permettent d'authentifier votre signalement
-      </h2>
+      <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
+        <h2 class="mb-4 font-weight-bold">
+          Vos coordonnées nous permettent d'authentifier votre signalement
+        </h2>
 
-      <div class="mt-4">
-        <div class="row">
-          <div class="col-12 col-sm-6 mb-3">
-            <label for="fname" [class]="hasError(firstNameCtrl) ? 'error' : ''">
-              Votre prénom <span class="error">*</span>
-            </label>
-            <input type="text" formControlName="firstName" id="fname" name="fname" autocomplete="given-name">
-          </div>
+        <div class="mt-4">
+          <div class="row">
+            <div class="col-12 col-sm-6 mb-3">
+              <label for="fname" [class]="hasError(firstNameCtrl) ? 'error' : ''">
+                Votre prénom (obligatoire)
+              </label>
+              <input type="text" formControlName="firstName" id="fname" name="fname" autocomplete="given-name">
+            </div>
 
-          <div class="col-12 col-sm-6 mb-3">
-            <label for="lname" [class]="hasError(lastNameCtrl) ? 'error' : ''">
-              Votre nom <span class="error">*</span>
-            </label>
-            <input type="text" formControlName="lastName" id="lname" name="lname" autocomplete="family-name">
-          </div>
+            <div class="col-12 col-sm-6 mb-3">
+              <label for="lname" [class]="hasError(lastNameCtrl) ? 'error' : ''">
+                Votre nom (obligatoire)
+              </label>
+              <input type="text" formControlName="lastName" id="lname" name="lname" autocomplete="family-name">
+            </div>
 
-          <div class="col-12 col-sm-6 mb-4">
-            <label for="email" [class]="hasError(emailCtrl) ? 'error' : ''">
-              Votre email <span class="error">*</span>
-            </label>
-            <input type="email" formControlName="email" id="email" name="email" autocomplete="email" />
+            <div class="col-12 col-sm-6 mb-4">
+              <label for="email" [class]="hasError(emailCtrl) ? 'error' : ''">
+                Votre email (obligatoire)
+              </label>
+              <input type="email" formControlName="email" id="email" name="email" autocomplete="email" />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
-        <div class="row mb-4">
-          <div class="col col-radio">
-            <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
-          </div>
-          <div class="col">
-            <label for="contactAgreementFalse" class="label-inline pointer"><strong>Je ne partage pas</strong> mes coordonnées avec l'entreprise. Seule la répression des fraudes pourra en prendre connaissance</label>
-          </div>
+        <fieldset class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
+          <ng-container *ngIf="!draftReport.isContractualDispute else contractualDispute">
+            <div class="row mb-4">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementFalse" class="label-inline pointer">
+                  <strong>Je ne partage pas</strong> mes coordonnées avec l'entreprise. Seule la répression des fraudes pourra en prendre connaissance.
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementTrue" class="label-inline pointer">
+                  <strong>Je partage</strong> mes coordonnées avec l'entreprise afin qu'elle puisse me contacter dans le cadre de mon signalement (<b>uniquement</b>).
+                  <span class="font-weight-light">J'ai conscience que la répression des fraudes n'aura pas accès à ces échanges éventuels et ne pourra donc pas les contrôler.</span>
+                </label>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #contractualDispute>
+            <div class="row mb-4">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementDisputeTrue"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementDisputeTrue" class="label-inline pointer">
+                  <strong>J’autorise l’entreprise à me contacter directement pour résoudre mon litige. </strong>
+                  La répression des fraudes n'aura pas accès à ces échanges éventuels.
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-radio">
+                <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementDisputeFalse"/>
+              </div>
+              <div class="col">
+                <label for="contactAgreementDisputeFalse" class="label-inline pointer">
+                  <strong>Je n'autorise pas le partage de mes coordonnées à l'entreprise. </strong>
+                  J'ai conscience que l’entreprise ne pourra pas me contacter pour résoudre mon litige.
+                </label>
+              </div>
+            </div>
+          </ng-template>
+        </fieldset>
+
+        <div class="notification error mt-3" *ngIf="showErrors && consumerForm.invalid">
+          <span *ngIf="firstNameCtrl.hasError('required')">
+            Veuillez renseigner votre prénom.<br />
+          </span>
+          <span *ngIf="lastNameCtrl.hasError('required')">
+            Veuillez renseigner votre nom.<br />
+          </span>
+          <span *ngIf="emailCtrl.hasError('required')">
+            Veuillez renseigner votre email.<br />
+          </span>
+          <span *ngIf="emailCtrl.hasError('email')">
+            Veuillez renseigner une adresse email valide.<br />
+          </span>
+          <span *ngIf="contactAgreementCtrl.hasError('required')">
+            Veuillez indiquer si vous acceptez de transmettre vos coordonnées à l'entreprise.<br />
+          </span>
         </div>
-        <div class="row">
-          <div class="col col-radio">
-            <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementTrue"/>
-          </div>
-          <div class="col">
-            <label for="contactAgreementTrue" class="label-inline pointer"><strong>Je partage</strong> mes coordonnées avec l'entreprise afin qu'on puisse me contacter dans le cadre de mon signalement (<b>uniquement</b>). <span class="font-weight-light">J'ai conscience que la répression des fraudes n'aura pas accès à ces échanges éventuels et ne pourra donc pas les contrôler</span></label>
-          </div>
-        </div>
-      </div>
 
-      <div class="notification error mt-3" *ngIf="showErrors && consumerForm.invalid">
-        <span *ngIf="firstNameCtrl.hasError('required')">
-          Veuillez renseigner votre prénom.<br />
-        </span>
-        <span *ngIf="lastNameCtrl.hasError('required')">
-          Veuillez renseigner votre nom.<br />
-        </span>
-        <span *ngIf="emailCtrl.hasError('required')">
-          Veuillez renseigner votre email.<br />
-        </span>
-        <span *ngIf="emailCtrl.hasError('email')">
-          Veuillez renseigner une adresse email valide.<br />
-        </span>
-        <span *ngIf="contactAgreementCtrl.hasError('required')">
-          Veuillez indiquer si vous acceptez de transmettre vos coordonnées à l'entreprise.<br />
-        </span>
-      </div>
+        <hr />
+        <button type="submit" class="btn btn-lg btn-primary" id="submitConsumerForm">
+          Continuer
+        </button>
 
-      <hr />
-      <button type="submit" class="btn btn-lg btn-primary" id="submitConsumerForm">
-        Continuer
-      </button>
-
-    </form>
-  </div>
-</section>
+      </form>
+    </div>
+  </section>
+</main>

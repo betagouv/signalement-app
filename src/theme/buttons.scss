@@ -96,8 +96,8 @@ a.button-outline.primary {
 
 .button-outline.warning,
 a.button-outline.warning {
-  border-color: #d63626;
-  color: #d63626;
+  border-color: $warning;
+  color: $warning;
 }
 
 .button-outline.warning:hover,
@@ -139,7 +139,7 @@ button.button-outline.large {
 
 .button.warning,
 a.button.warning {
-  background-color: #d63626;
+  background-color: $warning;
   -webkit-box-shadow: 0 -2px inset #ab2b1e;
   box-shadow: 0 -2px inset #ab2b1e;
 }

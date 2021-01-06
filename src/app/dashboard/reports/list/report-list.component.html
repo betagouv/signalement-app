@@ -1,0 +1,23 @@
+<app-banner title="Suivi des signalements"
+            [subTitle]="searchFormValue.siret ? 'SIRET ' + searchFormValue.siret : ''"></app-banner>
+
+<app-page large>
+    <app-panel [loading]="loading" *appRole="[roles.Admin, roles.DGCCRF]">
+      <app-panel-header>
+        <app-report-list-search
+          [searchForm]="searchForm"
+          (extracted)="launchExtraction()"
+          (searched)="onFiltersUpdate()"
+          (cleared)="onClearFilters()">
+        </app-report-list-search>
+      </app-panel-header>
+
+      <app-report-list-datatable
+        *ngIf="reports"
+        [reports]="reports"
+        [pageSize]="searchFormValue.limit"
+        [userRole]="(authenticationService.user | async).role"
+        (paginationChanged)="onPaginationChange($event)">
+      </app-report-list-datatable>
+    </app-panel>
+</app-page>

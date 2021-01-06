@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Permissions, Roles, User } from '../../model/AuthUser';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 enum NavItems {
   Home = '/',
@@ -19,8 +19,7 @@ enum NavItems {
 })
 export class HeaderComponent implements OnInit {
 
-  @ViewChild('banner', {static: false}) banner;
-  @ViewChild('navbarContent', {static: false}) navbarContent: ElementRef<any>;
+  @ViewChild('navbarContent') navbarContent: ElementRef<any>;
 
   roles = Roles;
   permissions = Permissions;
@@ -39,9 +38,6 @@ export class HeaderComponent implements OnInit {
     });
 
     this.router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        this.banner.nativeElement.focus();
-      }
       if (event instanceof NavigationEnd) {
         this.activeItem = NavItems[Object.keys(NavItems).find(key => encodeURI(NavItems[key]) === event.url)];
       }

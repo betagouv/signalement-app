@@ -11,6 +11,10 @@
     "title": "404 Page non trouvée - SignalConso",
     "description": "SignalConso est un service proposé par la DGCCRF (Direction Générale de la Concurrence, de la Consommation et de la Répression des Fraudes) au travers d'une Startup d’État. Il permet à la fois de comprendre ses droits en tant que consommateurs et d’être aidé pour les faire respecter."
   },
+  "unavailable": {
+    "title": "Page en maintenance - SignalConso",
+    "description": "SignalConso est un service proposé par la DGCCRF (Direction Générale de la Concurrence, de la Consommation et de la Répression des Fraudes) au travers d'une Startup d’État. Il permet à la fois de comprendre ses droits en tant que consommateurs et d’être aidé pour les faire respecter."
+  },
   "how": {
     "title": "Comment ça marche ? - SignalConso",
     "description": "Vous signalez votre problème en remplissant le formulaire en ligne. Notre équipe contacte l'entreprise afin de l'informer de votre signalement. L'entreprise peut procéder spontanément aux corrections utiles, sans sanction. Votre signalement est enregistré à la répression des fraudes (DGCCRF)."
@@ -27,9 +31,9 @@
     "title": "Accessibilité - SignalConso",
     "description": "Rapport d'accessibilité SignalConso"
   },
-  "aidealanavigation": {
-    "title": "Aide à la navigation - SignalConso",
-    "description": "Aide à la navigation"
+  "sitemap": {
+    "title": "Plan du site - SignalConso",
+    "description": "Plan du site"
   },
   "cgu": {
     "title": "Conditions générales d'utilisation - SignalConso",
@@ -60,6 +64,10 @@
       "title": "Authentification - SignalConso",
       "description": "Authentifiez-vous et accédez à votre espace personnel sur SignalConso"
     },
+    "emailValidation": {
+      "title": "Validation email - SignalConso",
+      "description": "Validation de votre email utilisateur sur SignalConso"
+    },
     "activation": {
       "title": "Activation de l'espace entreprise - SignalConso",
       "description": "Activez votre espace entreprise sur SignalConso"
@@ -68,27 +76,65 @@
   "login": {
     "forgotPassword": {
       "title": "Mot de passe oublié - SignalConso",
-      "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+      "description": "Réinitialisez le mot de passe d'accès à votre espace personnel sur SignalConso"
     },
     "resetPassword": {
       "title": "Nouveau mot de passe - SignalConso",
-      "description": "Réinitialiser le mot de passe d'accès à votre espace personnel sur SignalConso"
+      "description": "Réinitialisez le mot de passe d'accès à votre espace personnel sur SignalConso"
+    }
+  },
+  "report": {
+    "problem": {
+      "title": "Le problème - SignalConso",
+      "description": "Précisez le problème associé à votre signalement sur SignalConso"
+    },
+    "details": {
+      "title": "La description - SignalConso",
+      "description": "Apportez des détails à votre signalement sur SignalConso"
+    },
+    "company": {
+      "title": "L'entreprise - SignalConso",
+      "description": "Identifiez l'entreprise concernée par votre signalement sur SignalConso"
+    },
+    "consumer": {
+      "title": "Le consommateur - SignalConso",
+      "description": "Renseignez vos coordonnées pour authentifier votre signalement sur SignalConso"
+    },
+    "confirmation": {
+      "title": "Confirmation - SignalConso",
+      "description": "Confirmez votre signalement sur SignalConso"
+    },
+    "information": {
+      "title": "Information - SignalConso",
+      "description": "Page d'information concernant votre signalement sur SignalConso"
     }
   },
   "reports": {
+    "detail": {
+      "title": "Détail du signalement - SignalConso",
+      "description": "Consultez le détail du signalement sur SignalConso"
+    },
+    "list": {
+      "title": "Suivi des signalements - SignalConso",
+      "description": "Consultez les signalements qui vous concernent sur SignalConso"
+    },
     "review": {
       "title": "Donnez votre avis - SignalConso",
       "description": "Donnez votre avis sur la réponse de l'entreprise à votre signalement sur SignalConso"
     }
   },
+  "websites": {
+    "title": "Modéreration des sites webs - SignalConso",
+    "description": "Modérer les sites webs suggérés"
+  },
   "companies": {
     "myCompanies": {
-      "title": "Entreprises - SignalConso",
+      "title": "Mes entreprises - SignalConso",
       "description": "Liste des entreprises rattachées à votre espace personnel sur SignalConso"
     },
     "companyAccesses": {
-      "title": "Accès au compte de l'entreprise - SignalConso",
-      "description": "Gestion des accès au compte de l'entreprise"
+      "title": "Gestion des accès - SignalConso",
+      "description": "Gestion des accès au compte de l'entreprise sur SignalConso"
     },
     "companyInvitation": {
       "title": "Accès au compte de l'entreprise - SignalConso",
@@ -99,11 +145,11 @@
       "description": "Suivi des entreprises signalées sur SignalConso"
     }
   },
+  "contractualDispute": {
+    "title": "Résolution d'un problème individuel (litige) - SignalConso",
+    "description": "Démarches conseillées par SignalConso pour résoudre un problème individuel (litige) avec une entreprise "
+  },
   "secured": {
-    "reports": {
-      "title": "Suivi des signalements - SignalConso",
-      "description": "Consultez les signalements qui vous concernent"
-    },
     "dgccrf": {
       "title": "Mode d'emploi DGCCRF - SignalConso",
       "description": "Mode d'emploi pour le profil back-office DGCCRF"

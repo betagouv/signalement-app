@@ -7,15 +7,18 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { genDraftReport } from '../../../../../test/fixtures.spec';
 import { Step } from '../../../model/Report';
 import { of } from 'rxjs';
-import { AbTestsModule } from 'angular-ab-tests';
-import { SVETestingScope, SVETestingVersions } from '../../../utils';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
+import { ComponentsModule } from '../../../components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
+import { ConstantService } from '../../../services/constant.service';
 
 describe('AcknoledgmentComponent', () => {
 
   let component: AcknowledgmentComponent;
   let fixture: ComponentFixture<AcknowledgmentComponent>;
   let reportStorageService: ReportStorageService;
+  let constantService: ConstantService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -23,25 +26,21 @@ describe('AcknoledgmentComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        AbTestsModule.forRoot(
-          [
-            {
-              versions: [ SVETestingVersions.NoTest, SVETestingVersions.Test3_Sentence1 ],
-              scope: SVETestingScope,
-              weights: { [SVETestingVersions.NoTest]: 99, [SVETestingVersions.Test3_Sentence1]: 0 }
-            }
-          ]
-        ),
-        Angulartics2RouterlessModule.forRoot(),
+        ComponentsModule,
+        PipesModule,
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    reportStorageService = TestBed.get(ReportStorageService);
+    constantService = TestBed.inject(ConstantService);
+    reportStorageService = TestBed.inject(ReportStorageService);
     spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Confirmation)));
+    spyOn(constantService, 'getCountries').and.returnValue(of([{'code': 'AFG', 'name': 'Afghanistan', 'european': false, 'transfer': false}]));
 
     fixture = TestBed.createComponent(AcknowledgmentComponent);
     component = fixture.componentInstance;

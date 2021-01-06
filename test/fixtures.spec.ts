@@ -1,9 +1,8 @@
 import { Roles, User } from '../src/app/model/AuthUser';
 import { DraftReport, Report, ReportStatus, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
-import { CompanySearchResult } from '../src/app/model/CompanySearchResult';
-import { Subcategory } from '../src/app/model/Anomaly';
-import { Company } from '../src/app/model/Company';
+import { Information, Subcategory } from '../src/app/model/Anomaly';
+import { Company, CompanySearchResult } from '../src/app/model/Company';
 import anomalies from '../src/assets/data/anomalies.json';
 import { PaginatedData } from '../src/app/model/PaginatedData';
 
@@ -110,12 +109,12 @@ export function genReport() {
   });
 }
 
-export function genPaginatedReports(length: number) {
-  return Object.assign(new PaginatedData<Report>(), {
+export function genPaginatedReports(length: number): PaginatedData<Report> {
+  return {
     totalCount: length,
     hasNextPage: false,
     entities: [...Array.from(Array(length).keys())].map(a => genReport())
-  });
+  };
 }
 
 export function genConsumer() {
@@ -127,13 +126,14 @@ export function genConsumer() {
 }
 
 export function genCompanySearchResult() {
-  return Object.assign(new CompanySearchResult(), {
+  return <CompanySearchResult>{
     name: randomstring.generate(),
+    address: randomstring.generate() + ' - ' + randomstring.generate(),
     postalCode: randomstring.generate({
       length: 5,
       charset: 'numeric'
     })
-  });
+  };
 }
 
 export function genCompany() {
@@ -145,7 +145,14 @@ export function genCompany() {
 }
 
 export function genSubcategory() {
-  return Object.assign(new Subcategory(), {
+  return <Subcategory>Object.assign(new Subcategory(), {
+    title: randomstring.generate(),
+    tags: oneOf([null, [randomstring.generate()], [randomstring.generate(), randomstring.generate()]])
+  });
+}
+
+export function genInformation() {
+  return <Information>Object.assign(new Information(), {
     title: randomstring.generate()
   });
 }

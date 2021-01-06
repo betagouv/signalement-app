@@ -1,21 +1,7 @@
 <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
-<section class="section section-white" *ngIf="draftReport">
-  <div class="container max-width">
-    <div class="pb-sm-5 employeeConsumer" *ngIf="draftReport.employeeConsumer === undefined; else detailsFormTemplate">
-      <h2 class="pt-sm-5">Travaillez-vous dans l'entreprise que vous souhaitez signaler ?</h2>
-      <div class="pt-2 pt-sm-3">
-        <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(true)">
-          Oui
-        </button>
-      </div>
-      <div class="pt-2 pt-sm-3">
-        <button type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="setEmployeeConsumerValue(false)">
-          Non, je n'y travaille pas
-        </button>
-      </div>
-    </div>
-
-    <ng-template #detailsFormTemplate>
+<main role="main">
+  <section class="section section-white" *ngIf="draftReport">
+    <div class="container max-width">
 
       <div class="row notification success ml-0 md-0" *ngIf="draftReport.lastSubcategory?.detailTitle">
         <h2 [innerHTML]="draftReport.lastSubcategory.detailTitle"></h2>
@@ -23,7 +9,7 @@
 
       <div class="row notification note ml-0 md-0" *ngIf="draftReport.lastSubcategory?.description">
         <div class="col-1 pl-0 d-none d-sm-block">
-          <img alt="Icône information" src="/assets/images/icon_info.png">
+          <img alt="" src="/assets/images/icon_info.png">
         </div>
         <div class="col-12 col-sm-11">
           <p [innerHTML]="draftReport.lastSubcategory.description"></p>
@@ -34,7 +20,7 @@
 
         <div class="form__group" *ngFor="let detailInput of this.detailInputs">
           <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
-            <span [innerHTML]="detailInput.label"></span> <span class="error" *ngIf="!detailInput.optionnal">*</span>
+            <span [innerHTML]="detailInput.label"></span> <span *ngIf="!detailInput.optionnal"> (obligatoire)</span>
           </label>
 
           <div class="row" *ngIf="detailInput.type === 'TEXT'">
@@ -56,7 +42,8 @@
                      bsDatepicker
                      [maxDate]="maxDate"
                      autocomplete="off"
-                     [bsConfig]="{ containerClass: 'theme-default' }">
+                     [bsConfig]="{ containerClass: 'theme-default' }"
+                     triggers="click keypress">
             </div>
           </div>
 
@@ -68,7 +55,8 @@
                      [id]="getFormControlId(detailInput)"
                      bsDatepicker
                      autocomplete="off"
-                     [bsConfig]="{ containerClass: 'theme-default' }">
+                     [bsConfig]="{ containerClass: 'theme-default' }"
+                     triggers="click keypress">
             </div>
           </div>
 
@@ -84,65 +72,79 @@
           </div>
 
           <ng-container *ngIf="detailInput.type === 'RADIO'">
-            <div class="row pb-2 pl-3" *ngFor="let option of detailInput.options">
-              <div class="col-2 col-sm-1 text-right pr-1">
-                <input type="radio"
-                       [formControlName]="getFormControlName(detailInput)"
-                       [value]="option"
-                       [id]="getFormControlId(detailInput, option)"
-                       (change)="initRadioInputPrecision(detailInput, option)"/>
-              </div>
-              <div class="col-10 col-sm-11 pl-1">
-                <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)" [class]="hasRequiredError(detailInput, option) ? 'error' : ''" [innerHTML]="option">
-                </label>
-                <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, option))">
-                  <div class="col-12">
-                    <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
+            <fieldset>
+              <div class="row pb-2 pl-3" *ngFor="let option of detailInput.options">
+                <div class="col-2 col-sm-1 text-right pr-1">
+                  <input type="radio"
+                         [formControlName]="getFormControlName(detailInput)"
+                         [value]="option"
+                         [id]="getFormControlId(detailInput, option)"
+                         (change)="initRadioInputPrecision(detailInput, option)"/>
+                </div>
+                <div class="col-10 col-sm-11 pl-1">
+                  <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, option)" [class]="hasRequiredError(detailInput, option) ? 'error' : ''" [innerHTML]="option">
+                  </label>
+                  <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, option))">
+                    <div class="col-12">
+                      <input type="text" [formControlName]="getFormControlName(detailInput, option)" [id]="getFormControlId(detailInput, option, true)" placeholder="Précisez ...">
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </fieldset>
           </ng-container>
 
           <ng-container *ngIf="detailInput.type === 'CHECKBOX'">
-
-            <div class="row pb-2 pl-3" *ngFor="let precisionControl of getFormControl(detailInput).controls; let i = index">
-              <div class="col-2 col-sm-1 text-right pr-1">
-                <input type="checkbox"
-                       [formControl]="precisionControl"
-                       [id]="getFormControlId(detailInput, detailInput.options[i])"
-                       (change)="initCheckboxInputPrecision(detailInput, i)"/>
-              </div>
-              <div class="col-10 col-sm-11 pl-1">
-                <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, detailInput.options[i])" [class]="hasRequiredError(detailInput, detailInput.options[i]) ? 'error' : ''">
-                  {{detailInput.options[i]}}
-                </label>
-                <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, detailInput.options[i]))">
-                  <div class="col-12">
-                    <input type="text" [formControlName]="getFormControlName(detailInput, detailInput.options[i])" [id]="getFormControlId(detailInput, detailInput.options[i], true)" placeholder="Précisez ...">
+            <fieldset>
+              <div class="row pb-2 pl-3" *ngFor="let precisionControl of getFormControl(detailInput).controls; let i = index">
+                <div class="col-2 col-sm-1 text-right pr-1">
+                  <input type="checkbox"
+                         [formControl]="precisionControl"
+                         [id]="getFormControlId(detailInput, detailInput.options[i])"
+                         (change)="initCheckboxInputPrecision(detailInput, i)"/>
+                </div>
+                <div class="col-10 col-sm-11 pl-1">
+                  <label class="d-block mb-0 pointer" [for]="getFormControlId(detailInput, detailInput.options[i])" [class]="hasRequiredError(detailInput, detailInput.options[i]) ? 'error' : ''">
+                    {{detailInput.options[i]}}
+                  </label>
+                  <div class="row" *ngIf="detailsForm.contains(getFormControlName(detailInput, detailInput.options[i]))">
+                    <div class="col-12">
+                      <input type="text" [formControlName]="getFormControlName(detailInput, detailInput.options[i])" [id]="getFormControlId(detailInput, detailInput.options[i], true)" placeholder="Précisez ...">
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </fieldset>
           </ng-container>
 
           <ng-container *ngIf="detailInput.type === 'TEXTAREA'">
-            <div class="note mb-1" *ngIf="!draftReport.employeeConsumer">
-              <b>Ce texte sera lu par l'entreprise et la répression des fraudes.</b>
-              Si vous ne souhaitez pas que l'entreprise connaisse votre identité, <b>ne citez rien de personnel</b>.
+            <div id="details-description">
+              <div class="note mb-1" *ngIf="!draftReport.employeeConsumer">
+                <b>Ce texte sera lu par l'entreprise et la répression des fraudes.</b>
+                Si vous ne souhaitez pas que l'entreprise connaisse votre identité, <b>ne citez rien de personnel</b>.
+              </div>
+              <div class="note" *ngIf="draftReport.employeeConsumer">
+                <p class="m-0">
+                  Ce texte sera lu <b>uniquement par la répression des fraudes.</b>
+                </p>
+                <p class="mb-1">
+                  Rien ne sera communiqué à votre employeur.
+                </p>
+              </div>
+              <div class="note mb-1" [innerHTML]="detailInput.example" *ngIf="detailInput.example"></div>
             </div>
-            <div class="note mb-1" *ngIf="draftReport.employeeConsumer">
-              Ce texte sera lu <b>uniquement par la répression des fraudes.</b>
-              <br />Rien ne sera communiqué à votre employeur.
-            </div>
-            <div class="note mb-1" [innerHTML]="detailInput.example" *ngIf="detailInput.example"></div>
             <textarea [formControlName]="getFormControlName(detailInput)"
                       [id]="getFormControlId(detailInput)"
                       (blur)="searchKeywords(getFormControl(detailInput))"
                       rows="3"
                       maxlength="500"
-                      placeholder="500 caractères maximum">
-          </textarea>
+                      placeholder="500 caractères maximum"
+                      aria-describedby="details-description">
+            </textarea>
+
+            <div class="note">
+              Nombre de caractères restants : {{500 - (detailsForm.controls[getFormControlName(detailInput)].value || '').length}}
+            </div>
           </ng-container>
 
         </div>
@@ -153,12 +155,12 @@
                            [note]="!draftReport.employeeConsumer ? 'Si vous ne souhaitez pas que l\'entreprise connaisse votre identité, <b>cachez votre nom sur vos pièces jointes.</b>' : ''">
           </app-attachments>
           <div class="note" *ngIf="!draftReport.employeeConsumer">
-            Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective !
-            <br/> Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).
+            <p class="m-0">Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective !</p>
+            <p class="m-0">Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).</p>
           </div>
         </div>
         <div class="notification error" *ngIf="showErrors && detailsForm.invalid">
-          Veuillez renseigner les champs obligatoires.<br />
+          Veuillez renseigner les champs obligatoires.
         </div>
 
         <hr />
@@ -171,6 +173,6 @@
         </button>
       </form>
 
-    </ng-template>
-  </div>
-</section>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,85 @@
+@import "../../../../theme/variables";
+@import "../../../../theme/media-queries";
+
+:not(.banner) {
+  img.back {
+    @media #{$smaller-than-tablet} {
+      height: 20px;
+    }
+  }
+}
+
+img.remove {
+  height: 15px;
+}
+
+.agreement {
+  font-size: 12px;
+}
+
+.collapsable {
+  .collapsed-icon {
+    display: none;
+  }
+  .uncollapsed-icon {
+    display: inline;
+  }
+
+  &.collapsed {
+    .collapsed-icon {
+      display: inline;
+    }
+    .uncollapsed-icon {
+      display: none;
+    }
+  }
+}
+
+table {
+  border: none;
+
+  td {
+    border: none;
+    padding: 0;
+  }
+}
+
+input + input {
+  margin-top: 0.5em;
+}
+
+:host ::ng-deep {
+  .tooltip-inner {
+    max-width: none !important;
+    text-align: left;
+  }
+
+}
+
+.valign-top {
+  vertical-align: top;
+}
+
+.not-selected {
+  label, h2 {
+    color: $darker-grey;
+  }
+}
+
+.label-inline {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+
+input[type=radio] {
+  margin-top: 0px;
+}
+
+.form__group + .form__group {
+  margin-top: 1em;
+}
+
+a.collapsable {
+  text-decoration: none;
+}

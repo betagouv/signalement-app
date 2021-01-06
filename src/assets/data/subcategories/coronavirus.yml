@@ -9,7 +9,7 @@
                       <li>4,4€ pour 300 ml</li>
                       <li>13,19€ pour un litre</li>
                     </ul>
-                  Il existe des exceptions à ces prix en fonction par exemple du type de contenant. 
+                  Il existe des exceptions à ces prix en fonction par exemple du type de contenant.
       detailInputs:
         - label: Date du constat
           rank: 1
@@ -19,12 +19,12 @@
           rank: 2
           type: TEXTAREA
           optionnal: true
-          placeholder: Volume, marque ...
-        - label : Quel est le prix de vente ?
+          placeholder: Volume, marque...
+        - label : Quel est le prix de vente ?
           rank: 3
           type: TEXT
           optionnal: true
-      fileLabel: Photo du prix et du produit si possible     
+      fileLabel: Photo du prix et du produit si possible
     - title: Masque
       description: "Le prix de certains masques est réglementé :
                     <ul>
@@ -39,17 +39,20 @@
     content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter les services de police.
           <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
 - title: Problème avec les règles d'hygiène ou de distanciation physique
+  companyKind: SIRET
 - title: Problème / abus avec un site de vente en ligne
   example: "Exemple : site de livraison de courses à domicile"
   companyKind: 'WEBSITE'
   subcategories:
     - title: Le prix de la livraison a augmenté
+      tags:
+        - Litige contractuel
       detailInputs:
         - label: Date du constat
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Quel est le problème avec le prix de la livraison ?
+        - label: Quel est le problème avec le prix de la livraison ?
           rank: 2
           type: TEXTAREA
     - title: Autre problème de prix
@@ -58,7 +61,7 @@
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Quel est le problème ?
+        - label: Quel est le problème ?
           rank: 2
           type: TEXTAREA
     - title: Problème avec un produit livré
@@ -67,7 +70,7 @@
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: Quel est le problème ?
+        - label: Quel est le problème ?
           rank: 2
           type: TEXTAREA
       fileLabel: Photo du produit si possible

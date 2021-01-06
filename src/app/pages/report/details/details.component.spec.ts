@@ -2,10 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule, defineLocale, frLocale } from 'ngx-bootstrap';
 import { DetailInputValue, DraftReport, Step } from '../../../model/Report';
 import { DetailInput, Subcategory } from '../../../model/Anomaly';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -17,6 +15,10 @@ import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { of } from 'rxjs';
 import { genDraftReport, oneBoolean } from '../../../../../test/fixtures.spec';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
+import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('DetailsComponent', () => {
 
@@ -72,13 +74,14 @@ describe('DetailsComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: `:category/${ReportPaths.Company}`, redirectTo: '' }]),
         BsDatepickerModule.forRoot(),
-        Angulartics2RouterlessModule.forRoot(),
         NgxLoadingModule,
         NoopAnimationsModule,
         ComponentsModule,
         PipesModule
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();
@@ -87,7 +90,7 @@ describe('DetailsComponent', () => {
   describe('on init', () => {
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(genDraftReport(Step.Problem)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -98,19 +101,8 @@ describe('DetailsComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should request the user if he is an employee of the company or not', () => {
+    it('should display the details form', () => {
       const nativeElement = fixture.nativeElement;
-      expect(nativeElement.querySelector('h2').textContent).toEqual(`Travaillez-vous dans l'entreprise que vous souhaitez signaler ?`);
-      expect(nativeElement.querySelectorAll('button')[0].textContent.trim()).toEqual('Oui');
-      expect(nativeElement.querySelectorAll('button')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
-      expect(nativeElement.querySelector('form')).toBeNull();
-    });
-
-    it('should hide the question and display the details form when the user answers', () => {
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelectorAll('button')[0].click();
-
-      fixture.detectChanges();
       expect(nativeElement.querySelector('h2')).toBeNull();
       expect(nativeElement.querySelector('form')).not.toBeNull();
     });
@@ -124,7 +116,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -190,7 +182,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;
@@ -251,7 +243,7 @@ describe('DetailsComponent', () => {
     });
 
     beforeEach(() => {
-      reportStorageService = TestBed.get(ReportStorageService);
+      reportStorageService = TestBed.inject(ReportStorageService);
       spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
       fixture = TestBed.createComponent(DetailsComponent);
       component = fixture.componentInstance;

@@ -1,4 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
+import moment from 'moment';
 
 export default class Utils {
   static textOverflowMiddleCropping(text: string, limit: number) {
@@ -12,16 +13,17 @@ export default class Utils {
   static isSmallerThanDesktop(platformId) {
     return isPlatformBrowser(platformId) && window && window.innerWidth < desktopMinWidth;
   }
-}
 
-export const SVETestingScope = 'TestSVE';
-export enum SVETestingVersions {
-  NoTest = 'NoTest',
-  Test3_Sentence1 = 'Test3_Sentence1',
-  Test3_Sentence2 = 'Test3_Sentence2',
-  Test3_Sentence3 = 'Test3_Sentence3',
-  Test3_Sentence4 = 'Test3_Sentence4',
-  Test3_Sentence5 = 'Test3_Sentence5'
+  static cleanObject = <T extends object>(obj: T): Partial<T> | undefined => {
+    const cleanedObj = Object.entries(obj)
+      .filter(([, _]) => _ !== undefined && _ !== null && _ !== '' && (!Array.isArray(_) || !!_.filter(v => v !== undefined).length))
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+    return Object.keys(cleanedObj).length > 0 ? cleanedObj : undefined;
+  };
+
+  static mapDate = (date: string): string => moment(date).format('YYYY-MM-DD');
+
+  static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 }
 
 export const desktopMinWidth = 992;

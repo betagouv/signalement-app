@@ -7,72 +7,79 @@
         - title: Je cherche une location
           subcategories:
             - title: Diffusion d'annonces de location pour des biens non disponibles (en vitrine ou sur internet)
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Honoraires de location non affichés ou différents de ceux affichés (en vitrine ou sur internet)
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Annonces de location incomplètes ou mensongères (en vitrine ou sur internet)
               example: 'Exemple : loyer annoncé faux, descriptif de l''appartement mensonger'
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Demande d'un document interdit pour le dossier de location
               example: 'Exemple : relevé bancaire, photocopie de la carte vitale'
-            - title: Autres
-              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Autre
+              tags:
+                - Litige contractuel
         - title: Je cherche à acheter
           subcategories:
             - title: Diffusion d'annonces de biens non disponibles à la vente (en vitrine ou sur internet)
-              example: 'Exemple : la maison affiché en vitrine est en fait déjà vendue'
+              example: 'Exemple : la maison affichée en vitrine est en fait déjà vendue'
             - title: Honoraires de vente non affichés ou différents de ceux affichés (en vitrine ou sur internet)
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Annonces de vente incomplètes ou mensongères (en vitrine ou sur internet)
               example: 'Exemple : absence de DPE, descriptif d''un appartement mensonger'
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Problème avec une offre d'achat ou un compromis de vente
               example: 'Exemple : refus de mon offre au prix sans justification'
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Cas particulier d'un chasseur d'appartements
               example: 'Exemple : frais d''étude alors que c''est interdit'
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Cas particulier d'un mandataire indépendant (agent commercial)
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
     - title: J'ai un problème en tant que locataire
       example: 'Exemple : état des lieux, charges, loyer'
+      tags:
+        - Litige contractuel
       subcategories:
         - title: Charges / honoraires
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Loyer
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Etat des lieux / caution
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Bail / contrat de location
           example: 'Exemple : clause abusive dans le contrat'
-          consumerActions: !!import/single ../common/actions/defaut.yml
         - title: Autre
-          consumerActions: !!import/single ../common/actions/defaut.yml
     - title: J'ai un problème en tant que propriétaire
       example: 'Exemple : gestion locative, mise en vente'
       subcategories:
         - title: Gestion locative
+          tags:
+            - Litige contractuel
           subcategories:
             - title: Contrat et mandat
               example: 'Exemple : clause abusive dans le contrat'
-              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Honoraires
-              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Assurance loyer impayé
-              consumerActions: !!import/single ../common/actions/defaut.yml
-            - title: Autres
-              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Autre
         - title: Vente de mon bien
           subcategories:
             - title: Mise en vente sans mandat
               example: 'Exemple : une agence a mis mon bien en vente sans mandat signé '
             - title: Honoraires de vente
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
             - title: Discours trompeur
               example: 'Exemple : L''agent immobilier m''a promis de vendre sous 7 jours'
-              consumerActions: !!import/single ../common/actions/defaut.yml
+              tags:
+                - Litige contractuel
         - title: Autre
-          consumerActions: !!import/single ../common/actions/defaut.yml
+          tags:
+            - Litige contractuel
     - title: Autre
       subcategories:
         - title: Problème d'accessibilité de l'agence
@@ -94,31 +101,33 @@
 - title: Syndic de copropriété
   subcategories:
     - title: Facturation
-      example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévus'
-      subcategoriesTitle: 'Le détail des frais est marqué dans le contrat de syndic. Avant de faire un signalement, veuiller vérifier ce contrat au chapitre 7. Si vous ne l''avez pas, demandez le à votre syndic. Ce document est obligatoire et gratuit.'
+      example: 'Exemple : frais facturés injustifiés ou facturés plus chers que prévu'
+      subcategoriesTitle: 'Le détail des frais est marqué dans le contrat de syndic. Avant de faire un signalement, veuillez vérifier ce contrat au chapitre 7. Si vous ne l''avez pas, demandez le à votre syndic. Ce document est obligatoire et gratuit.'
       subcategories:
         - title: J'ai pris connaissance de mon contrat de syndic.
+          tags:
+            - Litige contractuel
           subcategories:
             - title: Les frais sont plus chers que dans le contrat
-              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Les frais ne correspondent à aucune des prestations dites "prestations particulières".
-              consumerActions: !!import/single ../common/actions/defaut.yml
             - title: Les frais sont normalement déjà inclus dans le socle général (forfait)
-              consumerActions: !!import/single ../common/actions/defaut.yml
-            - title: Autres
-              consumerActions: !!import/single ../common/actions/defaut.yml
+            - title: Autre
     - title: Contrat de syndic
       example: 'Exemple : clause abusive dans le contrat'
     - title: Documents à disposition des copropriétaires
       example: 'Exemple : pas de fiche synthétique de copropriété'
     - title: Gestion des travaux par le syndic
       example: 'Exemple: devis, choix des prestataires'
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      tags:
+        - Litige contractuel
     - title: Absence de réponse du syndic
       example: 'Exemple : aucune réponse malgré des relances'
     - title: Autre
-      consumerActions: !!import/single ../common/actions/defaut.yml
+      tags:
+        - Litige contractuel
 - title: Notaire
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  tags:
+    - Litige contractuel
 - title: Autre
-  consumerActions: !!import/single ../common/actions/defaut.yml
+  tags:
+    - Litige contractuel

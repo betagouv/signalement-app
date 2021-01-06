@@ -1,0 +1,232 @@
+<form [formGroup]="searchByIdentityForm" (submit)="searchCompanyByIdentity()" id="searchByIdentityForm">
+
+  <h2 class="mb-4 font-weight-bold">
+    Pouvez-vous préciser ?
+  </h2>
+
+  <div class="form__group mt-4">
+    <label for="identity" [class]="hasError(identityCtrl) ? 'error' : ''">
+      Numéro SIRET ou SIREN ou RCS de l'entreprise (obligatoire)
+    </label>
+
+    <div class="note mb-1" id="siret-description">
+      <a data-toggle="collapse" href="#collapseWhat" id="collapseWhat-toggle" aria-expanded="false" aria-controls="collapseWhat">
+        A quoi correspondent ces identifiants ?
+      </a>
+      <div class="collapse" id="collapseWhat" aria-labelledby="collapseWhat-toggle" role="region">
+        SIRET, SIREN et RCS sont des identifiants de l'entreprise.
+        <br/>Le SIRET est composé de 14 chiffres, le SIREN est composé de 9 chiffres.
+        <br/>Le RCS est composé de :
+        <ul>
+          <li>la mention "RCS"</li>
+          <li>le nom de la ville d'immatriculation</li>
+          <li>une lettre (A ou B)</li>
+          <li>le numéro SIREN</li>
+        </ul>
+        <br/>
+      </div>
+
+
+      <div *ngIf="this.companyKind === companyKinds.SIRET">
+
+        <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
+          Comment retrouver ces identifiants ?
+        </a>
+        <ul class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
+          <li>
+            <a data-toggle="collapse" href="#collapseDoc" id="collapseDoc-toggle" aria-expanded="false" aria-controls="collapseDoc">
+              L'entreprise vous a remis un document ?
+            </a>
+            <div class="collapse" id="collapseDoc" aria-labelledby="collapseDoc-toggle" role="region">
+              Vous pourrez probablement retrouver l'un de ces identifiants sur :
+              <ul>
+                <li>
+                  <a data-toggle="collapse" href="#collapseTicket" id="collapseTicket-toggle" aria-expanded="false" aria-controls="collapseTicket">
+                    le ticket de carte bleue
+                  </a>
+                  <div class="collapse" id="collapseTicket" aria-labelledby="collapseTicket-toggle" role="region">
+                    <div class="card card-body">
+                      Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a data-toggle="collapse" href="#collapseEstimate" id="collapseEstimate-toggle" aria-expanded="false" aria-controls="collapseEstimate">
+                    un devis
+                  </a>
+                  <div class="collapse" id="collapseEstimate" aria-labelledby="collapseEstimate-toggle" role="region">
+                    <div class="card card-body">
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a data-toggle="collapse" href="#collapseContract" id="collapseContract-toggle" aria-expanded="false" aria-controls="collapseContract">
+                    un contrat
+                  </a>
+                  <div class="collapse" id="collapseContract" aria-labelledby="collapseContract-toggle" role="region">
+                    <div class="card card-body">
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  Tout autre document ou échange avec l'entreprise (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#collapseNoDoc" id="collapseNoDoc-toggle" aria-expanded="false" aria-controls="collapseNoDoc">
+              Vous n’avez pas de documents émanants de l'entreprise ?
+            </a>
+            <div class="collapse" id="collapseNoDoc" aria-labelledby="collapseNoDoc-toggle" role="region">
+              Faites une recherche en ligne sur :
+              <ul>
+                <li><a href="https://www.societe.com" target="_blank" title="societe.com (nouvelle fenêtre)">https://www.societe.com</a></li>
+                <li><a href="https://www.pagesjaunes.fr" target="_blank" title="pages jaunes (nouvelle fenêtre)">https://www.pagesjaunes.fr</a></li>
+                <li><a href="https://www.infogreffe.fr" target="https://www.infogreffe.fr" title="infogreffe (nouvelle fenêtre)">https://www.infogreffe.fr</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#collapseNotFound" id="collapseNotFound-toggle" aria-expanded="false" aria-controls="collapseNotFound">
+              Vous n’avez pas trouvé d'identifiant ?
+            </a>
+            <div class="collapse" id="collapseNotFound" aria-labelledby="collapseNotFound-toggle" role="region">
+              Utilisez <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank" title="economie.gouv.fr (nouvelle fenêtre)">le formulaire en ligne DGCCRF</a>
+              <br />Ce formulaire ne nécessite pas d'identifiant de l'entreprise.
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="this.companyKind === companyKinds.WEBSITE">
+        <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
+          Comment retrouver ces identifiants ?
+        </a>
+        <ul class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
+          <li>
+            <a data-toggle="collapse" href="#collapseDoc" id="collapseDoc-toggle" aria-expanded="false" aria-controls="collapseDoc">
+              L'entreprise vous a remis un document ?
+            </a>
+            <div class="collapse" id="collapseDoc" aria-labelledby="collapseDoc-toggle" role="region">
+              Vous pourrez probablement retrouver l'un de ces identifiants sur :
+              <ul>
+                <li>
+                  <a data-toggle="collapse" href="#collapseTicket" id="collapseTicket-toggle" aria-expanded="false" aria-controls="collapseTicket">
+                    une facture
+                  </a>
+                  <div class="collapse" id="collapseTicket" aria-labelledby="collapseTicket-toggle" role="region">
+                    <div class="card card-body">
+                      Il y a plusieurs données chiffrées sur cette facture mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a data-toggle="collapse" href="#collapseEstimate" id="collapseEstimate-toggle" aria-expanded="false" aria-controls="collapseEstimate">
+                    un devis
+                  </a>
+                  <div class="collapse" id="collapseEstimate" aria-labelledby="collapseEstimate-toggle" role="region">
+                    <div class="card card-body">
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a data-toggle="collapse" href="#collapseContract" id="collapseContract-toggle" aria-expanded="false" aria-controls="collapseContract">
+                    un contrat
+                  </a>
+                  <div class="collapse" id="collapseContract" aria-labelledby="collapseContract-toggle" role="region">
+                    <div class="card card-body">
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  Tout autre document ou échange avec l'entreprise (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#collapseNoDoc" id="collapseNoDoc-toggle" aria-expanded="false" aria-controls="collapseNoDoc">
+              Vous n’avez pas de document émanant de l'entreprise ?
+            </a>
+            <div class="collapse" id="collapseNoDoc" aria-labelledby="collapseNoDoc-toggle" role="region">
+              Rendez-vous sur le site internet dans l'une des rubriques suivantes :
+              <ul>
+                <li>les mentions légales</li>
+                <li>les Conditions Générales de Vente (CGV)</li>
+                <li>les conditions d'utilisation</li>
+              </ul>
+              Dans la plupart des cas, vous trouverez l'accès à ces rubriques tout en bas de la page d'accueil du site.
+              <br />Sur l'une de ces pages, vous devriez trouver le nom de la société éditrice du site ainsi que son RCS et/ou l'un des numéros suivants : SIRET (14 chiffres) ou SIREN (9 chiffres).
+              <br />Attention, il est possible que deux sociétés différentes soient mentionnées sur ces pages. L'une d'elle correspond à l'hébergeur du site. Ce n'est pas l'identifiant de cet hébergeur que l'on cherche.
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#collapseNotFound" id="collapseNotFound-toggle" aria-expanded="false" aria-controls="collapseNotFound">
+              Vous n’avez pas trouvé d'identifiant ?
+            </a>
+            <div class="collapse" id="collapseNotFound" aria-labelledby="collapseNotFound-toggle" role="region">
+              Sélectionner l'option <b>Je ne peux pas identifier l'entreprise</b> plus haut.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <input [formControl]="identityCtrl" type="text" id="identity" placeholder="Ex: 83350861700010" aria-describedby="siret-description">
+  </div>
+
+  <div class="notification error mt-3" *ngIf="showErrorsByIdentity && searchByIdentityForm.invalid">
+    <div *ngIf="identityCtrl.hasError('required')">
+      Veuillez renseigner le numéro SIRET de l'entreprise.
+    </div>
+    <div *ngIf="identityCtrl.hasError('pattern')">
+      Le numéro SIRET doit être composé de 14 chiffres.
+    </div>
+  </div>
+  <button type="submit" class="btn btn-lg btn-outline-primary mt-4 mb-4" id="submitSiretForm">
+    <i class="material-icons md-24" aria-hidden="true">search</i>
+    Rechercher
+  </button>
+</form>
+
+<div #identByIdentityResult>
+  <div *ngIf="companySearchByIdentityResults?.length">
+
+    <hr />
+
+    <h2 class="mb-4 font-weight-bold">
+      Sélectionnez l'entreprise
+    </h2>
+
+    <div class="note mb-1">
+      Si l'entreprise n'est pas celle recherchée, vous pouvez modifier votre recherche.
+    </div>
+
+    <app-company-search-results [companySearchResults]="companySearchByIdentityResults" (select)="selectCompany($event)"></app-company-search-results>
+
+    <hr *ngIf="selectedCompany"/>
+
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
+      Continuer
+    </button>
+
+  </div>
+
+  <div class="notification warning mt-4" *ngIf="searchByIdentityWarning">
+    <p>
+      {{searchByIdentityWarning}}
+    </p>
+    Veuillez modifier votre recherche.
+  </div>
+
+  <div class="notification error mt-4" *ngIf="searchByIdentityError">
+    <p>
+      {{searchByIdentityError}}
+    </p>
+    Veuillez réessayer.
+  </div>
+</div>

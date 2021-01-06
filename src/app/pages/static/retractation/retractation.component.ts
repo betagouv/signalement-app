@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { isUndefined } from 'util';
-import { BsLocaleService } from 'ngx-bootstrap';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 

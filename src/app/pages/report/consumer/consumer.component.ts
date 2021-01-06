@@ -60,7 +60,10 @@ export class ConsumerComponent implements OnInit {
     if (this.draftReport.employeeConsumer) {
       this.contactAgreementCtrl = this.formBuilder.control(false);
     } else {
-      this.contactAgreementCtrl = this.formBuilder.control(this.draftReport.contactAgreement, Validators.required);
+      this.contactAgreementCtrl = this.formBuilder.control(
+        this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.isContractualDispute ? true : undefined,
+        Validators.required
+      );
       this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
     }
   }

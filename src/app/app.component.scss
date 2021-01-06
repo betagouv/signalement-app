@@ -1,6 +1,10 @@
 @import "../theme/variables";
 @import "../theme/media-queries";
 
+a:focus {
+  color:$secondary;
+}
+
 :host ::ng-deep {
 
   font-family: "Source Sans Pro", Arial, sans-serif;
@@ -83,6 +87,8 @@
     color: $primary;
     cursor: pointer;
     text-decoration: none;
+    background: none;
+    border: none;
 
     &:hover {
       color: $secondary;
@@ -130,7 +136,6 @@
     line-height: 25px;
     border-radius: 34px;
     padding: 13px 29px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     @media #{$smaller-than-tablet} {
       border-radius: 25px;
@@ -140,6 +145,10 @@
       margin-left: 16px;
     }
 
+    &:not(:focus) {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
   }
 
   .btn-sm {
@@ -147,7 +156,10 @@
     font-size: inherit;
     line-height: 1.5;
     border-radius: 34px;
-    box-shadow: none;
+
+    &:not(:focus) {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
   }
 
   .btn-icon {
@@ -175,11 +187,26 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 0.5em 2em;
+    border: 1px solid #eee;
   }
 
   .col-radio {
     max-width: 20px;
     margin-top: -1px;
     margin-left: 2px;
+  }
+
+  div.selected {
+    background-color: $light-green;
+    border-radius: $theme-border-more-radius;
+
+    .text-primary {
+      color: $secondary !important;
+    }
+
+    label, h2 {
+      color: $black;
+    }
+
   }
 }

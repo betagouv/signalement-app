@@ -1,12 +1,11 @@
-@import "../theme/variables";
 
 form {
 
   max-width: 750px;
   margin: 0 auto;
 
-  label {
-    font-size: 1.25em;
+  label, .label {
+    font-size: 1.25em !important;
     margin-bottom: 0;
   }
 
@@ -38,10 +37,15 @@ form {
 
 }
 
+.input-invisible {
+  @include input-invisible;
+}
+
 input,
 input.form-control,
 textarea,
-select {
+select,
+select.form-control {
   width: 100%;
   outline: none;
   padding: 8px 14px;
@@ -50,10 +54,25 @@ select {
   height: auto;
   color: #1c1c1c;
   border-radius: 3px;
-  border: 1px solid #adb9c9;
+  border: 1px solid $blue;
   background: #fff;
   vertical-align: middle;
   position: relative;
+}
+
+input.form-control.form-control-material,
+.form-control.form-control-material {
+  @include input-invisible;
+  border-radius: 0;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid $theme-divider;
+  width: 100%;
+  padding: 2px 0 2px 0;
+  height: 30px;
+
+  &:focus {
+    border-bottom-color: $primary;
+  }
 }
 
 input:focus,
@@ -102,12 +121,12 @@ input[type=radio]::before {
 
 input[type=radio]:checked {
   background-color: #fff;
-  border-color: $primary;
+  border-color: $secondary;
   opacity: 1;
 }
 
 input[type=radio]:checked::before {
-  background-color: $primary;
+  background-color: $secondary;
   -webkit-transform: scale(1);
   transform: scale(1);
   -webkit-transition: -webkit-transform 0.2s ease-out;
@@ -131,8 +150,8 @@ input[type="checkbox"] + .label-inline {
 }
 
 input[type="checkbox"]:checked {
-  background-color: $primary;
-  border-color: $primary;
+  background-color: $secondary;
+  border-color: $secondary;
   opacity: 1;
   -webkit-transition: border-color 0.2s ease-in, background-color 0.2s ease-out;
   transition: border-color 0.2s ease-in, background-color 0.2s ease-out;

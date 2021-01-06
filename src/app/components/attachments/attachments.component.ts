@@ -16,11 +16,11 @@ export class AttachmentsComponent implements OnInit {
   @Input() uploadedFiles: UploadedFile[];
   @Input() origin: FileOrigin;
 
-  @ViewChild('fileInput', {static: false}) fileInput;
+  @ViewChild('fileInput') fileInput;
 
   tooLargeFilename: string;
   invalidFileExtension = false;
-  allowedExtensions = ['jpg', 'jpeg', 'pdf', 'png', 'gif', 'doc', 'docx', 'odt'];
+  allowedExtensions = ['jpg', 'jpeg', 'pdf', 'png', 'gif', 'docx', 'odt'];
 
   constructor(private fileUploaderService: FileUploaderService) { }
 

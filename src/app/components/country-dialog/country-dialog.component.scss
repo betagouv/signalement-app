@@ -1,0 +1,27 @@
+@import "src/theme/variables";
+
+.content {
+  border-top: 1px solid $theme-divider;
+  border-bottom: 1px solid $theme-divider;
+  max-height: 300px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+}
+
+.radio-group > mat-radio-button {
+  display: block;
+  margin: 0 0 spacing(1) 0;
+}
+
+.no-countries {
+  color: $theme-color-text-disabled;
+  padding: spacing(1);
+}
+
+.cb-all {
+  margin-top: spacing(1/2);
+  display: block;
+}

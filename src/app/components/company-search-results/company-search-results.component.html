@@ -1,0 +1,24 @@
+<fieldset>
+  <ng-container *ngFor="let companySearchResult of companySearchResults; let companyIndex = index">
+    <div [ngClass]="getRadioContainerClass(selectedCompany, companySearchResult)">
+      <div class="row mb-3">
+        <div class="col col-radio">
+          <input type="radio" [(ngModel)]="selectedCompany" name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult" (click)="selectCompany(companySearchResult)"/>
+        </div>
+        <label class="col pointer" for="company_{{companyIndex}}">
+          <div class="font-weight-bold" *ngIf="companySearchResult.name">{{companySearchResult.name}}</div>
+          <div class="font-weight-bold" *ngIf="companySearchResult.brand">{{companySearchResult.brand}}</div>
+          <div class="font-weight-bold" *ngIf="companySearchResult.highlight">
+            <i class="material-icons md-green">check_circle</i>
+            <small class="text-success font-weight-bold">{{companySearchResult.highlight}}</small>
+          </div>
+          <div class="font-weight-bold text-success" *ngIf="companySearchResult.isHeadOffice">Siège social</div>
+          <div class="text-primary" *ngIf="companySearchResult.activityLabel">{{companySearchResult.activityLabel}}</div>
+          <div *ngIf="companySearchResult.address">
+            <div *ngFor="let line of companySearchResult.address.split(' - ')">{{line}}</div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </ng-container>
+</fieldset>

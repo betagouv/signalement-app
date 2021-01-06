@@ -2,20 +2,27 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanyComponent, IdentificationKinds } from './company.component';
 import { CompanyService } from '../../../services/company.service';
-import { CompanySearchResult, CompanySearchResults } from '../../../model/CompanySearchResult';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
+import { genCompanySearchResult, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftReport, Step } from '../../../model/Report';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { MockAnalyticsService } from '../../../../../test/mocks';
+import { ComponentsModule } from '../../../components/components.module';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { CompanyForeignCountryComponent } from './foreign-country/company-foreign-country.component';
+import { CompanySearchByNameComponent } from './search-by-name-component/company-search-by-name.component';
+import { CompanySearchByIdentityComponent } from './search-by-identity/company-search-by-identity.component';
+import { CompanySearchByWebsiteComponent } from './search-by-website/company-search-by-website.component';
+import { ConstantService } from '../../../services/constant.service';
 
 describe('CompanyComponent', () => {
 
@@ -23,12 +30,17 @@ describe('CompanyComponent', () => {
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: CompanyService;
   let reportStorageService: ReportStorageService;
+  let constantService: ConstantService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         CompanyComponent,
         BreadcrumbComponent,
+        CompanyForeignCountryComponent,
+        CompanySearchByNameComponent,
+        CompanySearchByIdentityComponent,
+        CompanySearchByWebsiteComponent
       ],
       imports: [
         FormsModule,
@@ -37,17 +49,21 @@ describe('CompanyComponent', () => {
         RouterTestingModule.withRoutes([{ path: ReportPaths.Consumer, redirectTo: '' }]),
         Ng2CompleterModule,
         NgxLoadingModule,
-        Angulartics2RouterlessModule.forRoot(),
+        ComponentsModule,
+        TypeaheadModule.forRoot(),
       ],
-      providers: []
+      providers: [
+        {provide: AnalyticsService, useClass: MockAnalyticsService}
+      ]
     })
       .overrideTemplate(BreadcrumbComponent, '')
       .compileComponents();
   }));
 
   beforeEach(() => {
-    companyService = TestBed.get(CompanyService);
-    reportStorageService = TestBed.get(ReportStorageService);
+    companyService = TestBed.inject(CompanyService);
+    reportStorageService = TestBed.inject(ReportStorageService);
+    constantService = TestBed.inject(ConstantService);
   });
 
   describe('case of searching company with SIRET', () => {
@@ -64,168 +80,32 @@ describe('CompanyComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should initialize forms and display radios', () => {
+    it('should display radios for identification choice', () => {
 
       const nativeElement = fixture.nativeElement;
-      expect(component.searchForm).toBeDefined();
-      expect(component.searchForm.controls['search']).toBeDefined();
-      expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
-      expect(component.searchBySiretForm).toBeDefined();
-      expect(component.searchBySiretForm.controls['siret']).toBeDefined();
+      expect(nativeElement.querySelectorAll('form').length).toBe(1);
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(2);
     });
 
-    it('should enable to display the search form for identication by name', () => {
+    it('should enable to display the search form for identification by name', () => {
       const nativeElement = fixture.nativeElement;
       component.identificationKind = IdentificationKinds.Name;
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
-      expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+      expect(nativeElement.querySelector('form#searchByIdentityForm')).toBeNull();
     });
 
-    it('should enable to display the searchBySiret form for identification by siret', () => {
+    it('should enable to display the form for identification by identity', () => {
       const nativeElement = fixture.nativeElement;
-      component.identificationKind = IdentificationKinds.Siret;
+      component.identificationKind = IdentificationKinds.Identity;
       fixture.detectChanges();
 
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
-      expect(nativeElement.querySelector('form#searchBySiretForm')).not.toBeNull();
+      expect(nativeElement.querySelector('form#searchByIdentityForm')).not.toBeNull();
     });
 
-    describe('search companies', () => {
 
-      beforeEach(() => {
-        component.searchCtrl.setValue('Mon entreprise dans ma ville');
-        component.searchPostalCodeCtrl.setValue('87270');
-        component.identificationKind = IdentificationKinds.Name;
-        fixture.detectChanges();
-      });
-
-      it('should initialize previous results', () => {
-        component.companySearchResults =
-          [Object.assign(new CompanySearchResult(), { name: 'C1' }), Object.assign(new CompanySearchResult(), { name: 'C2' })];
-        const companySearchResults = Object.assign(new CompanySearchResults(), {
-          total_results: 0,
-          etablissement: []
-        });
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResults));
-
-        const nativeElement = fixture.nativeElement;
-        nativeElement.querySelector('button#submitSearchForm').click();
-        fixture.detectChanges();
-
-        expect(component.companySearchResults).toEqual([]);
-      });
-
-      it('should display the company list when only one result has been found', () => {
-
-        const companySearchResults = Object.assign(new CompanySearchResults(), {
-          total_results: 1,
-          etablissement: [{
-            l1_normalisee: 'CASINO CARBURANTS',
-            l2_normalisee: null,
-            l3_normalisee: null,
-            l4_normalisee: 'AVENUE DE LIMOGES',
-            l5_normalisee: null,
-            l6_normalisee: '87270 COUZEIX',
-            l7_normalisee: 'FRANCE',
-            enseigne: null,
-            nom_raison_sociale: 'CASINO CARBURANTS',
-            code_postal: '87270'
-          }]
-        });
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResults));
-
-        const nativeElement = fixture.nativeElement;
-        nativeElement.querySelector('button#submitSearchForm').click();
-        fixture.detectChanges();
-
-        expect(component.companySearchResults).toEqual(companySearchResults.companies);
-
-      });
-
-      it('should display the company list when many results have been found', () => {
-
-        const companySearchResults = Object.assign(new CompanySearchResults(), {
-          total_results: 2,
-          etablissement: [
-            {
-              l1_normalisee: 'CASINO CARBURANTS',
-              l2_normalisee: null,
-              l3_normalisee: null,
-              l4_normalisee: 'AVENUE DE LIMOGES',
-              l5_normalisee: null,
-              l6_normalisee: '87270 COUZEIX',
-              l7_normalisee: 'FRANCE',
-              enseigne: null,
-              nom_raison_sociale: 'CASINO CARBURANTS',
-            },
-            {
-              l1_normalisee: 'DISTRIBUTION CASINO FRANCE',
-              l2_normalisee: null,
-              l3_normalisee: null,
-              l4_normalisee: '1 RUE DU DOCTEUR ROBERT PASCAUD',
-              l5_normalisee: null,
-              l6_normalisee: '87270 COUZEIX',
-              l7_normalisee: 'FRANCE',
-              enseigne: null,
-              nom_raison_sociale: 'DISTRIBUTION CASINO FRANCE',
-            }]
-        });
-        spyOn(companyService, 'searchCompanies').and.returnValue(of(companySearchResults));
-
-        const nativeElement = fixture.nativeElement;
-        nativeElement.querySelector('button#submitSearchForm').click();
-        fixture.detectChanges();
-
-        expect(component.companySearchResults).toEqual(companySearchResults.companies);
-      });
-
-    });
-
-    describe('submitting siret form', () => {
-
-      it('should display errors when occurs', () => {
-        component.identificationKind = IdentificationKinds.Siret;
-        fixture.detectChanges();
-
-        const nativeElement = fixture.nativeElement;
-        component.siretCtrl.setValue('123');
-        nativeElement.querySelector('button#submitSiretForm').click();
-        fixture.detectChanges();
-
-        expect(component.showErrorsBySiret).toBeTruthy();
-        expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
-      });
-
-      it('should display the company found by siret when existed', () => {
-
-        const companyBySiret = Object.assign(
-          new CompanySearchResult(),
-          {
-            name: 'Mon entreprise',
-            line1: 'Mon entreprise',
-            line2: 'Mon adresse dans ma ville',
-            postalCode: '87270',
-            siret: '12345678901234'
-          }
-        );
-        spyOn(companyService, 'searchCompaniesBySiret').and.returnValue(of(companyBySiret));
-
-        component.identificationKind = IdentificationKinds.Siret;
-        fixture.detectChanges();
-
-        const nativeElement = fixture.nativeElement;
-        component.siretCtrl.setValue('12345678901234');
-        nativeElement.querySelector('button#submitSiretForm').click();
-        fixture.detectChanges();
-
-        expect(component.companySearchBySiretResult).toEqual(companyBySiret);
-
-      });
-
-    });
   });
 
   describe('case of searching company with WEBSITE', () => {
@@ -246,16 +126,16 @@ describe('CompanyComponent', () => {
 
     it('should initialize website form with a single input and display it', () => {
       const nativeElement = fixture.nativeElement;
-      expect(component.websiteForm).toBeDefined();
-      expect(component.searchForm).not.toBeDefined();
-      expect(component.searchBySiretForm).not.toBeDefined();
-      expect(component.websiteForm.controls['url']).toBeDefined();
       expect(nativeElement.querySelector('form#websiteForm')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('input[type="url"][name="url"]').length).not.toBeNull();
       expect(nativeElement.querySelector('form#searchForm')).toBeNull();
       expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+
     });
 
-    it('should initialize others forms and display radios for identification choice on submitting website form ', () => {
+    it('should display radios for identification choice when no company found', () => {
+
+      spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of([]));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
@@ -263,14 +143,45 @@ describe('CompanyComponent', () => {
       nativeElement.querySelectorAll('form#websiteForm button')[0].click();
       fixture.detectChanges();
 
-      expect(component.urlCtrl.value).toBe('http://monsite.com');
-      expect(component.searchForm).toBeDefined();
-      expect(component.searchForm.controls['search']).toBeDefined();
-      expect(component.searchForm.controls['searchPostalCode']).toBeDefined();
-      expect(component.searchBySiretForm).toBeDefined();
-      expect(component.searchBySiretForm.controls['siret']).toBeDefined();
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
+    });
+
+    it('should display results when company found', () => {
+
+      const companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
+      spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of(companySearchResults));
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
+      nativeElement.querySelector('form#websiteForm #urlInput').dispatchEvent(new Event('input'));
+      nativeElement.querySelectorAll('form#websiteForm button')[0].click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(companySearchResults.length);
+    });
+
+    describe('user unavailable to identify company', () => {
+
+      it('should ask the user whether the company is abroad or not', () => {
+
+        spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of([]));
+        spyOn(constantService, 'getCountries').and.returnValue(of([{'code': 'AFG', 'name': 'Afghanistan', 'european': false, 'transfer': false}]));
+
+        const nativeElement = fixture.nativeElement;
+        nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
+        nativeElement.querySelector('form#websiteForm #urlInput').dispatchEvent(new Event('input'));
+        nativeElement.querySelectorAll('form#websiteForm button')[0].click();
+        fixture.detectChanges();
+
+        component.identificationKind = IdentificationKinds.None;
+        fixture.detectChanges();
+
+        expect(nativeElement.querySelectorAll('input[type="radio"][name="isForeignCompany"]').length).toBe(3);
+
+      });
+
     });
 
   });
 });
+

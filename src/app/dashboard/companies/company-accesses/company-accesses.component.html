@@ -1,0 +1,76 @@
+<app-banner title="Gestion des accès" [backButton]="true"></app-banner>
+
+<main role="main">
+  <section class="section section-white position-relative">
+    <div class="container">
+      <div class="row table-responsive">
+        <table class="table">
+          <caption class="sr-only">Liste des comptes et de leur niveau d'accès aux signalements</caption>
+          <thead>
+            <tr>
+              <th scope="col">Prénom</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Email</th>
+              <th scope="col">Niveau d'accès</th>
+              <th scope="col">Suppression</th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr *ngFor="let access of companyAccesses">
+                <td>{{access.firstName}}</td>
+                <td>{{access.lastName}}</td>
+                <td>{{access.email}}</td>
+                <td>
+                  <select class="form-control" [value]="access.level" *ngIf="access.email != user.email; else currentUserLevel" (change)="updateAccess(access.userId, $event.target.value)">
+                    <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
+                  </select>
+                  <ng-template #currentUserLevel>
+                    {{accessLevels.get(access.level)}}
+                  </ng-template>
+                </td>
+                <td>
+                  <button *ngIf="access.email != user.email; else currentUserDelete" class="btn btn-sm btn-danger" (click)="openModal(removeAccessModal)">Supprimer l'accès</button>
+                  <ng-template #currentUserDelete>
+                    <small class="text-muted text-wrap">
+                      Vous ne pouvez pas supprimer votre propre accès.
+                    </small>
+                  </ng-template>
+                  <ng-template #removeAccessModal>
+                    <div class="modal-body text-center">
+                      <p>Confirmer la suppression de l'accès de l'utilisateur <strong>{{access.firstName}} {{access.lastName}}</strong> ?</p>
+                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-primary" (click)="removeAccess(access.userId);bsModalRef.hide();" >Oui</button>
+                    </div>
+                  </ng-template>
+                </td>
+              </tr>
+              <tr *ngFor="let pendingToken of pendingTokens">
+                <td colspan="2" class="text-center"><small class="text-muted">L'invitation a été envoyée et est en attente d'acceptation.</small></td>
+                <td>{{pendingToken.emailedTo}}</td>
+                <td>{{accessLevels.get(pendingToken.level)}}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
+                </td>
+                <ng-template #removeTokenModal>
+                  <div class="modal-body text-center">
+                    <p>Annuler l'invitation envoyée à <strong>{{pendingToken.emailedTo}}</strong> ?</p>
+                    <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-primary" (click)="removePendingToken(pendingToken.id);bsModalRef.hide();" >Oui</button>
+                  </div>
+                </ng-template>
+              </tr>
+            </tbody>
+        </table>
+        <div class="notification success" *ngIf="showSuccess">Modifications enregistrées !</div>
+      </div>
+      <div class="row">
+        <div class="col text-center mb-1">
+          <a routerLink="./invitation" class="btn btn-primary">Ajouter un utilisateur</a>
+        </div>
+      </div>
+    </div>
+    <ngx-loading [show]="loading"></ngx-loading>
+  </section>
+</main>
