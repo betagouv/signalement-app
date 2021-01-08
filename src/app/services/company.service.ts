@@ -344,6 +344,19 @@ export class CompanyService extends RawCompanyService {
         }
       ]
     },
+    {
+      query: /\bharmonie( )?mutuelle\b/i,
+      results: [
+        <CompanySearchResult> {
+          siret: '53851847300011',
+          name: 'HARMONIE MUTUELLE',
+          address: '143 RUE BLOMET - 75015 PARIS 15',
+          postalCode: '75015',
+          activityLabel: 'Autres assurances',
+          highlight: 'Pour tout problème avec Harmonie Mutuelle, peu importe votre lieu d\'habitation'
+        }
+      ]
+    },
   ];
 
   searchCompanies(search: string, searchPostalCode: string) {
