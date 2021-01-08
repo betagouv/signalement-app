@@ -24,7 +24,12 @@
               "src/assets",
               "src/google53212771ade1a062.html",
               "src/sitemap.xml",
-              "src/robots.txt"
+              "src/robots.txt",
+              {
+                "glob": "**/*",
+                "input": "src/theme/fonts/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "src/theme/main.scss",
