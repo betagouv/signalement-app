@@ -20,6 +20,9 @@ import { MatRippleModule } from '@angular/material/core';
     MatIconModule,
     MatRippleModule,
   ],
+  bootstrap: [
+    BtnComponent
+  ]
 })
 export class BtnModule {
 }

@@ -27,7 +27,7 @@ import { NgxLoadingConfig } from '../../components/components.module';
     LoadingModule,
     MaterialModule,
   ],
-  providers: []
+  providers: [],
 })
 export class SharedModule {
 }
