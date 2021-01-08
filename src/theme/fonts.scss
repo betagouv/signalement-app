@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'Evolventa';
   font-display: auto;
-  src: local('Evolventa'),
+  src: local('Evolventa-Regular'),
+       url('src/assets/fonts/Evolventa/Evolventa-Regular.woff2') format('woff2'),
        url('src/assets/fonts/Evolventa/Evolventa-Regular.woff') format('woff'),
        url('src/assets/fonts/Evolventa/Evolventa-Regular.ttf') format('truetype'),
        url('src/assets/fonts/Evolventa/Evolventa-Regular.eot') format('truetype');
@@ -10,7 +11,8 @@
 @font-face {
   font-family: 'Source Sans Pro';
   font-display: auto;
-  src: local('SourceSansPro'),
+  src: local('SourceSansPro-Regular'),
+       url('src/assets/fonts/SourceSansPro/SourceSansPro-Regular.woff2') format('woff2'),
        url('src/assets/fonts/SourceSansPro/SourceSansPro-Regular.woff') format('woff'),
        url('src/assets/fonts/SourceSansPro/SourceSansPro-Regular.eot') format('truetype'),
        url('src/assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf') format('truetype');
