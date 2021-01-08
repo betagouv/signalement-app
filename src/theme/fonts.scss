@@ -21,8 +21,7 @@
 @font-face {
   font-family: 'Gill Sans';
   font-display: auto;
-  src: local('GillSans'),
-       url('fonts/GillSans/gillsans.woff2') format('woff2'),
+  src: url('fonts/GillSans/gillsans.woff2') format('woff2'),
        url('fonts/GillSans/gillsans.woff') format('woff'),
        url('fonts/GillSans/gillsans.eot') format('truetype'),
        url('fonts/GillSans/gillsans.ttf') format('truetype');
