@@ -48,7 +48,7 @@ export class CategoryComponent implements OnInit {
     this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
       .subscribe(draftReport => this.draftReport = draftReport);
-    this.anomalies = this.anomalyService.anomalies;
+    this.anomalies = this.anomalyService.getAnomalies();
     const anomaly = this.anomalyService.getAnomalyByCategoryId('INTERNET');
     if (anomaly) {
       this.internetInformation = anomaly.information;

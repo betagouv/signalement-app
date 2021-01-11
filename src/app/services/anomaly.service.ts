@@ -7,10 +7,14 @@ import { Anomaly, enrichAnomaly, InternetTag, Subcategory } from '../model/Anoma
 })
 export class AnomalyService {
 
-  constructor(@Inject('anomalies') @Optional() public readonly anomalies: Anomaly[]) {
+  constructor(@Inject('anomalies') @Optional() private readonly anomalies: Anomaly[]) {
     if (!anomalies) {
       this.anomalies = anomaliesJSON.list.map(enrichAnomaly) as Anomaly[];
     }
+  }
+
+  getAnomalies() {
+    return this.anomalies;
   }
 
   getAnomalyBy(predicate: (anomaly: Anomaly) => boolean) {
