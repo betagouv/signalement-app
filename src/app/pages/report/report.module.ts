@@ -25,6 +25,7 @@ import { CompanyForeignCountryComponent } from './company/foreign-country/compan
 import { CompanySearchByNameComponent } from './company/search-by-name-component/company-search-by-name.component';
 import { CompanySearchByIdentityComponent } from './company/search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './company/search-by-website/company-search-by-website.component';
+import { instanceOfSubcategoryInformation } from '../../model/Anomaly';
 
 defineLocale('fr', frLocale);
 
@@ -35,7 +36,7 @@ const routes: Routes = [{ path: '', component: CategoryComponent }];
 export function AnomalyLazyRoutesFactory(compiler: Compiler): Routes {
   return anomalies.list
       .map(anomaly => {
-        if (anomaly.information) {
+        if (instanceOfSubcategoryInformation(anomaly)) {
           return [
             { path: `${anomaly.path}`, component: InformationComponent },
             { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent }

@@ -30,13 +30,13 @@ export class AnomalyService {
     return this.anomalies.filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
   }
 
-  getTags() {
+  getTags(): string[] {
     return [InternetTag].concat(...this.anomalies.map(anomaly => this.collectTags(anomaly)))
       .filter((tag, index, tags) => tags.indexOf(tag) === index)
       .sort((t1, t2) => t1.toString().localeCompare(t2.toString()));
   }
 
-  private collectTags(data: Subcategory | Anomaly) {
+  private collectTags(data: Subcategory | Anomaly): string[] {
     return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => this.collectTags(s)));
   }
 }
