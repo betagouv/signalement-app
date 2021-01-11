@@ -82,37 +82,48 @@ export enum InputType {
   Date = 'DATE'
 }
 
-export const enrichAnomaly = (anomalies: Anomaly): Anomaly => {
-  if (anomalies?.subcategories) {
-    anomalies.subcategories = anomalies.subcategories.map(_ => ({
-      ..._,
-      companyKind: _.companyKind || anomalies.companyKind,
-    }));
-    return anomalies;
-  }
-  if (anomalies && !anomalies.companyKind) {
+const askCompanyKindIfMissing = (anomaly: Category): Category => {
+  if (!anomaly.subcategories && !anomaly.companyKind && !instanceOfSubcategoryInformation(anomaly)) {
     return {
-      ...anomalies,
-      subcategoriesTitle: 'Est-ce que votre problème concerne une entreprise sur internet ?',
+      ...anomaly,
+      description: undefined,
+      subcategoriesTitle: 'Est-ce que votre problème concerne une entreprise sur internet ?',
       subcategories: [
         {
+          ...anomaly,
           title: 'Oui',
           companyKind: CompanyKinds.WEBSITE,
           example: undefined
         }, {
+          ...anomaly,
           title: 'Non, pas sur internet',
           companyKind: CompanyKinds.SIRET,
           example: undefined
         },
       ]
-    };
+    } as Category;
   }
+  return {
+    ...anomaly,
+    subcategories: anomaly.subcategories?.map(_ => ({ ..._, ...askCompanyKindIfMissing(_) })),
+  };
 };
 
-export const instanceOfSubcategoryInput = (_?: SubcategoryBase): _ is SubcategoryInput => {
+const propagateCompanyKinds = (anomaly: Category): Category => {
+  return {
+    ...anomaly,
+    subcategories: anomaly.subcategories
+      ?.map(_ => ({ ..._, companyKind: _.companyKind || anomaly.companyKind, }))
+      ?.map(_ => ({ ..._, ...propagateCompanyKinds(_), }))
+  };
+};
+
+export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly));
+
+export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput => {
   return !!(_ as SubcategoryInput)?.detailInputs;
 };
 
-export const instanceOfSubcategoryInformation = (_?: SubcategoryBase): _ is SubcategoryInformation => {
+export const instanceOfSubcategoryInformation = (_?: Category): _ is SubcategoryInformation => {
   return !!(_ as SubcategoryInformation)?.information;
 };

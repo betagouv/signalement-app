@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import anomalies from '../../assets/data/anomalies.json';
+import { Inject, Injectable, Optional } from '@angular/core';
+import anomaliesJSON from '../../assets/data/anomalies.json';
 import { Anomaly, enrichAnomaly, InternetTag, Subcategory } from '../model/Anomaly';
 
 @Injectable({
@@ -7,7 +7,11 @@ import { Anomaly, enrichAnomaly, InternetTag, Subcategory } from '../model/Anoma
 })
 export class AnomalyService {
 
-  readonly anomalies: Anomaly[] = anomalies.list.map(enrichAnomaly);
+  constructor(@Inject('anomalies') @Optional() public readonly anomalies: Anomaly[]) {
+    if (!anomalies) {
+      this.anomalies = anomaliesJSON.list.map(enrichAnomaly) as Anomaly[];
+    }
+  }
 
   getAnomalyBy(predicate: (anomaly: Anomaly) => boolean) {
     return this.anomalies
@@ -35,5 +39,4 @@ export class AnomalyService {
   private collectTags(data: Subcategory | Anomaly) {
     return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => this.collectTags(s)));
   }
-
 }

@@ -17,16 +17,16 @@ describe('SubcategoryComponent', () => {
   let fixture: ComponentFixture<SubcategoryComponent>;
 
   const subcategoriesFixture = [
-    Object.assign(new Subcategory(), { title: 'title1', description: 'description1' }),
-    Object.assign(new Subcategory(), { title: 'title2', description: 'description2' }),
-    Object.assign(new Subcategory(), {
+    { title: 'title1', description: 'description1' },
+    { title: 'title2', description: 'description2' },
+    {
       title: 'title3',
       description: 'description3',
       subcategories: [
-        Object.assign(new Subcategory(), { title: 'title31', description: 'description31' }),
-        Object.assign(new Subcategory(), { title: 'title32', description: 'description32' })
+        { title: 'title31', description: 'description31' },
+        { title: 'title32', description: 'description32' }
       ]
-    }),
+    },
   ];
 
   beforeEach(async(() => {

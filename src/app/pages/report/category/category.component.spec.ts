@@ -56,6 +56,7 @@ describe('CategoryComponent', () => {
         HeaderModule
       ],
       providers: [
+        { provide: 'anomalies', useValue: anomaliesFixture },
         AnomalyService,
         {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
@@ -67,7 +68,6 @@ describe('CategoryComponent', () => {
     router = TestBed.inject(Router);
     anomalyService = TestBed.inject(AnomalyService);
     reportRouterService = TestBed.inject(ReportRouterService);
-    spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
 
     fixture = TestBed.createComponent(CategoryComponent);
     component = fixture.componentInstance;
