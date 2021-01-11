@@ -2,7 +2,7 @@ import { AnomalyService } from './anomaly.service';
 import { TestBed } from '@angular/core/testing';
 import { Anomaly, enrichAnomaly } from '../model/Anomaly';
 
-const testParsing = (initial: Anomaly[], expected: Anomaly[]) => {
+const testParsing = (initial: Anomaly[], expected: Anomaly[]): void => {
   expect(JSON.parse(JSON.stringify(initial.map(enrichAnomaly)))).toEqual(expected);
 };
 
@@ -257,39 +257,68 @@ describe('enrichAnomaly', () => {
   });
 
   it('should propagate companyKind deeply', () => {
-    const x = {
-      'category': 'Café / Restaurant',
-      'categoryId': 'CR',
-      'path': 'cafe-restaurant',
-      'description': 'bar, cafétéria, food truck, application pour se faire livrer un repas...',
-      'rank': 4,
-      'sprite': 'category-restaurant',
-      'subcategories': [
-        {
+    testParsing([{
+        'category': 'Café / Restaurant',
+        'categoryId': 'CR',
+        'path': 'cafe-restaurant',
+        'description': 'bar, cafétéria, food truck, application pour se faire livrer un repas...',
+        'rank': 4,
+        'sprite': 'category-restaurant',
+        'subcategories': [
+          {
+            'title': 'Hygiène',
+            'companyKind': 'SIRET',
+            'example': 'Exemple : locaux sales, rat, chaîne du froid',
+            'tags': [
+              'hygiène'
+            ],
+            'subcategoriesTitle': 'Vous voulez signaler&#160;:',
+            'subcategories': [
+              {
+                'title': 'Hygiène des locaux et du matériel',
+                'example': 'Exemple : cuisine sale, odeur de poubelle dans ma cour',
+                'subcategories': [
+                  {
+                    'title': 'Je trouve les locaux sales ou dégradés',
+                    'example': 'Exemple : cuisine sale, WC sale',
+                    'detailInputs': [],
+                    'fileLabel': 'Merci de joindre si possible une photo pour appuyer votre signalement.'
+                  },
+                ]
+              },
+            ]
+          },
+        ]
+      }]
+      ,
+      [{
+        'category': 'Café / Restaurant',
+        'categoryId': 'CR',
+        'path': 'cafe-restaurant',
+        'description': 'bar, cafétéria, food truck, application pour se faire livrer un repas...',
+        'rank': 4,
+        'sprite': 'category-restaurant',
+        'subcategories': [{
           'title': 'Hygiène',
           'companyKind': 'SIRET',
           'example': 'Exemple : locaux sales, rat, chaîne du froid',
-          'tags': [
-            'hygiène'
-          ],
+          'tags': ['hygiène'],
           'subcategoriesTitle': 'Vous voulez signaler&#160;:',
-          'subcategories': [
-            {
-              'title': 'Hygiène des locaux et du matériel',
-              'example': 'Exemple : cuisine sale, odeur de poubelle dans ma cour',
-              'subcategories': [
-                {
-                  'title': 'Je trouve les locaux sales ou dégradés',
-                  'example': 'Exemple : cuisine sale, WC sale',
-                  'detailInputs': [{}],
-                  'fileLabel': 'Merci de joindre si possible une photo pour appuyer votre signalement.'
-                },
-              ]
-            },
-          ]
-        },
-      ]
-    };
+          'subcategories': [{
+            'title': 'Hygiène des locaux et du matériel',
+            'example': 'Exemple : cuisine sale, odeur de poubelle dans ma cour',
+            'subcategories': [{
+              'title': 'Je trouve les locaux sales ou dégradés',
+              'example': 'Exemple : cuisine sale, WC sale',
+              'detailInputs': [],
+              'fileLabel': 'Merci de joindre si possible une photo pour appuyer votre signalement.',
+              'companyKind': 'SIRET'
+            }],
+            'companyKind': 'SIRET'
+          }]
+        }]
+      }]
+    );
   });
 });
 
