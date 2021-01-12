@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { NgxLoadingModule } from 'ngx-loading';
-import moment from 'moment';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
@@ -19,6 +18,7 @@ import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { format } from 'date-fns';
 
 describe('DetailsComponent', () => {
 
@@ -255,7 +255,7 @@ describe('DetailsComponent', () => {
       expect(nativeElement.querySelectorAll('input').length).toEqual(8);
       expect(nativeElement.querySelector('input[type="text"]#formControl_1')).not.toBeNull();
       expect(nativeElement.querySelector('input[type="text"]#formControl_2')).not.toBeNull();
-      expect(nativeElement.querySelector('input[type="text"]#formControl_2').value).toEqual(moment(new Date()).format('DD/MM/YYYY'));
+      expect(nativeElement.querySelector('input[type="text"]#formControl_2').value).toEqual(format(new Date(), 'dd/MM/yyyy'));
       expect(nativeElement.querySelector('input[type="radio"]#formControl_3_0')).not.toBeNull();
       expect(nativeElement.querySelector('input[type="radio"]#formControl_3_1')).not.toBeNull();
       expect(nativeElement.querySelector('input[type="checkbox"]#formControl_5_0')).not.toBeNull();

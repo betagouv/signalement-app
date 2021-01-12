@@ -5,7 +5,7 @@ import { MonthlyStat } from '../../model/Statistics';
 import { Roles } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
-import * as moment from 'moment';
+import { duration } from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
 import { take } from 'rxjs/operators';
 
@@ -50,26 +50,26 @@ export class StatsComponent implements OnInit {
 
   loadStatistics() {
     this.statsService.getReportCount().subscribe(simpleStat => {
-      this.reportCount = simpleStat.value;
+      this.reportCount = simpleStat.value as number;
     });
 
     this.statsService.getReportReadByProPercentage().subscribe(simpleStat => {
-      this.reportReadByProPercentage = simpleStat.value;
+      this.reportReadByProPercentage = simpleStat.value as number;
     });
 
     this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
-      this.reportWithResponsePercentage = simpleStat.value;
+      this.reportWithResponsePercentage = simpleStat.value as number;
     });
   }
 
   loadAminStatistics() {
 
     this.statsService.getReportReadByProMedianDelay().subscribe(simpleStat => {
-      this.reportReadByProMedianDelay = moment.duration(simpleStat.value).asDays();
+      this.reportReadByProMedianDelay = duration(simpleStat.value).asDays();
     });
 
     this.statsService.getReportWithResponseMedianDelay().subscribe(simpleStat => {
-      this.reportWithResponseMedianDelay = moment.duration(simpleStat.value).asDays();
+      this.reportWithResponseMedianDelay = duration(simpleStat.value).asDays();
     });
   }
 

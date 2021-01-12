@@ -16,7 +16,7 @@ import { take } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import moment from 'moment';
+import { differenceInMilliseconds, isSameDay } from 'date-fns';
 
 @Component({
   selector: 'app-companies-admin',
@@ -191,10 +191,10 @@ export class CompaniesAdminComponent implements OnInit {
       result => {
         this.loading = false;
         this.allCompaniesToActivate = result.sort((c1, c2) => {
-          if (moment(c1.tokenCreation).isSame(c2.tokenCreation, 'day') && c1.lastNotice) {
-            return c2.lastNotice ? moment(c2.lastNotice).diff(c1.lastNotice) : 1;
+          if (isSameDay(c1.tokenCreation, c2.tokenCreation) && c1.lastNotice) {
+            return c2.lastNotice ? differenceInMilliseconds(c2.lastNotice, c1.lastNotice) : 1;
           } else {
-            return moment(c2.tokenCreation).diff(c1.tokenCreation);
+            return differenceInMilliseconds(c2.tokenCreation, c1.tokenCreation);
           }
         });
         this.companiesToActivate = this.allCompaniesToActivate;

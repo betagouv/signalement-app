@@ -1,5 +1,5 @@
 export class SimpleStat {
-  value: number;
+  value: string | number;
 }
 
 export class MonthlyStat {
