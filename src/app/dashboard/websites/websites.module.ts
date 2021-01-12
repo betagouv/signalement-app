@@ -13,6 +13,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
 import { CompanySearchResultsModule } from '../../components/company-search-results/company-search-results.module';
 import { WebsitesTabsComponent } from './websites-tabs/websites-tabs.component';
+import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
 
 /* tslint:disable:max-line-length */
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
     AppPermissionModule,
     SharedModule,
     CompanySearchResultsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    DashboardCompaniesModule
   ]
 })
 export class WebsitesModule { }
