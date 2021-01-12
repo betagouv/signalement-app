@@ -24,7 +24,6 @@ import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesModule } from './pages/companies/companies.module';
-import { SubscriptionModule } from './dashboard/subscription/subscription.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -78,7 +77,6 @@ class ErrorLogger extends ErrorHandler {
       BrowserAnimationsModule,
       AccountModule,
       CompaniesModule,
-      SubscriptionModule,
       BsDropdownModule.forRoot(),
       TooltipModule,
       Angulartics2Module.forRoot(),
