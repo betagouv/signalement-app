@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { accessLevels } from '../common';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-company-invitation',
@@ -19,43 +19,32 @@ export class CompanyInvitationComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   accessLevels = accessLevels;
-  siret: string;
+  siret?: string;
 
-  invitationForm: FormGroup;
-  emailCtrl: FormControl;
-  levelCtrl: FormControl;
+  readonly invitationForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    level: ['', [Validators.required]],
+  });
 
-  loading: boolean;
+  loading = false;
   showSuccess = false;
   showErrors = false;
 
   ngOnInit() {
-    this.siret = this.route.snapshot.paramMap.get('siret');
-
+    this.siret = this.route.snapshot.paramMap.get('siret') ?? undefined;
     this.titleService.setTitle(`Entreprise ${this.siret} - ${pages.companies.companyInvitation.title}`);
     this.meta.updateTag({ name: 'description', content: pages.companies.companyInvitation.description });
-    this.initForm();
-  }
-
-  initForm() {
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.levelCtrl = this.formBuilder.control('', [Validators.required]);
-
-    this.invitationForm = this.formBuilder.group({
-      email: this.emailCtrl,
-      level: this.levelCtrl,
-    });
   }
 
   submitForm() {
     this.showSuccess = false;
-    if (this.invitationForm.valid) {
+    if (this.invitationForm.valid && this.siret) {
       this.loading = true;
       this.companyAccessesService
           .sendInvitation(
             this.siret,
-            this.emailCtrl.value,
-            this.levelCtrl.value
+            this.invitationForm.get('emailCtrl')!.value,
+            this.invitationForm.get('levelCtrl')!.value
           )
           .subscribe(() => {
             this.loading = false;

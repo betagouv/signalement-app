@@ -3,7 +3,9 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { AccountService } from '../../services/account.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { PendingDGCCRF } from '../../model/PendingDGCCRF';
+import { User } from '../../model/AuthUser';
 
 @Component({
   selector: 'app-admin',
@@ -17,34 +19,26 @@ export class AdminComponent implements OnInit {
               private accountService: AccountService,
               private route: ActivatedRoute) { }
 
-  invitationForm: FormGroup;
-  emailCtrl: FormControl;
+  readonly invitationForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]]
+  });
 
-  loading: boolean;
-  usersDGCCRF = null;
-  pendingDGCCRF = null;
+  loading = false;
+  usersDGCCRF?: User[];
+  pendingDGCCRF?: PendingDGCCRF[];
   showSuccess = false;
   showErrors = false;
-  emailRejectedError = null;
+  emailRejectedError?: string;
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.admin.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.admin.description });
-    this.initForm();
-  }
-
-  initForm() {
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-
-    this.invitationForm = this.formBuilder.group({
-      email: this.emailCtrl
-    });
   }
 
   showPendingDGCCRF() {
     this.loading = true;
-    this.pendingDGCCRF = null;
-    this.usersDGCCRF = null;
+    this.pendingDGCCRF = undefined;
+    this.usersDGCCRF = undefined;
     this.accountService.listDGCCRFInvitations().subscribe(
       pendingDGCCRF => {
         this.loading = false;
@@ -55,8 +49,8 @@ export class AdminComponent implements OnInit {
 
   showUsersDGCCRF() {
     this.loading = true;
-    this.pendingDGCCRF = null;
-    this.usersDGCCRF = null;
+    this.pendingDGCCRF = undefined;
+    this.usersDGCCRF = undefined;
     this.accountService.listDGCCRFUsers().subscribe(
       users => {
         this.loading = false;
@@ -66,20 +60,20 @@ export class AdminComponent implements OnInit {
   }
 
   submitForm() {
-    this.emailRejectedError = null;
+    this.emailRejectedError = undefined;
     this.showSuccess = false;
     this.loading = true;
     if (this.invitationForm.valid) {
       this.accountService
           .sendDGCCRFInvitation(
-            this.emailCtrl.value
+            this.invitationForm.get('email')!.value
           )
           .subscribe(() => {
             this.loading = false;
             this.showSuccess = true;
-            this.pendingDGCCRF = null;
-            this.usersDGCCRF = null;
-            this.emailCtrl.reset();
+            this.pendingDGCCRF = undefined;
+            this.usersDGCCRF = undefined;
+            this.invitationForm.get('email')!.reset();
           }, (err) => {
             this.loading = false;
             this.emailRejectedError = err.error;

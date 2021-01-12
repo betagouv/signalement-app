@@ -25,7 +25,7 @@
                   </label>
                 </div>
                 <div>
-                  <input [formControl]="searchCtrl" type="text" class="form-control" id="search" placeholder="Entreprise recherchée">
+                  <input formControlName="search" type="text" class="form-control" id="search" placeholder="Entreprise recherchée">
                 </div>
               </div>
               <div class="notification error mt-3" *ngIf="loadingError">
@@ -79,7 +79,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngIf="!loading && !lines.length">
+                <tr *ngIf="!loading && !lines?.length">
                   <td colspan="7">
                     <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
                     <span *ngIf="!loadingError">Aucun signalement trouvé</span>
@@ -147,7 +147,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngIf="!loading && !companiesToActivate.length">
+                <tr *ngIf="!loading && !companiesToActivate?.length">
                   <td colspan="7">
                     <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
                     <span *ngIf="!loadingError">Aucune entreprise à activer</span>
@@ -162,7 +162,7 @@
                     <small *ngFor="let line of toActivate.company.address.split(' - ')">{{line}}<br /></small>
                   </td>
                   <td class="text-center">{{toActivate.tokenCreation | date : 'dd/MM/yyyy'}}</td>
-                  <td class="text-center">{{(toActivate.lastNotice === null) ? "" : "✓"}}</td>
+                  <td class="text-center">{{toActivate.lastNotice && "✓"}}</td>
                 </tr>
                 </tbody>
               </table>

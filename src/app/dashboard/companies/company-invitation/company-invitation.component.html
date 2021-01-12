@@ -7,11 +7,11 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <label>Email de l'utilisateur</label>
-            <input type="email" class="form-control" [formControl]="emailCtrl">
+            <input type="email" class="form-control" formControlName="email">
           </div>
           <div class="col-12 col-sm-6">
             <label>Niveau d'accès</label>
-            <select class="form-control" [value]="'member'" [formControl]="levelCtrl">
+            <select class="form-control" [value]="'member'" formControlName="level">
               <option *ngFor="let level of accessLevels | keyvalue" [ngValue]="level.key">{{level.value}}</option>
             </select>
           </div>
@@ -30,13 +30,13 @@
           </div>
         </div>
         <div class="notification error mt-3" *ngIf="showErrors && invitationForm.invalid">
-                <span *ngIf="emailCtrl.hasError('required')">
+                <span *ngIf="invitationForm.get('email').hasError('required')">
                     Veuillez renseigner votre email.<br/>
                 </span>
-          <span *ngIf="emailCtrl.hasError('email')">
+          <span *ngIf="invitationForm.get('email').hasError('email')">
                     Veuillez renseigner une adresse email valide.<br/>
                 </span>
-          <span *ngIf="levelCtrl.hasError('required')">
+          <span *ngIf="invitationForm.get('level').hasError('required')">
                     Sélectionnez le niveau d'accès.<br/>
                 </span>
         </div>

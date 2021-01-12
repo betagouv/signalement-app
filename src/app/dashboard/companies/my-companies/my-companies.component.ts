@@ -18,9 +18,9 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject<void>();
 
-  myAccesses: UserAccess[];
-  user: User;
-  loading: boolean;
+  myAccesses?: UserAccess[];
+  user?: User;
+  loading = false;
 
   constructor(private titleService: Title,
               private meta: Meta,
@@ -33,7 +33,7 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: pages.companies.myCompanies.description });
     this.authenticationService.user
     .pipe(takeUntil(this.unsubscribe))
-    .subscribe(user => {
+    .subscribe((user: User) => {
       this.user = user;
       this.refreshAccesses();
     });
@@ -46,7 +46,7 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
 
   refreshAccesses() {
     this.loading = true;
-    this.companyAccessesService.myAccesses(this.user).subscribe(
+    this.companyAccessesService.myAccesses(this.user!).subscribe(
       accesses => {
         this.loading = false;
         this.myAccesses = accesses;

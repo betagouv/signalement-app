@@ -6,7 +6,7 @@ import pages from '../../../../assets/data/pages.json';
 import { Roles, User } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { Company, CompanyToActivate, UserAccess } from '../../../model/Company';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -25,33 +25,35 @@ import moment from 'moment';
 })
 export class CompaniesAdminComponent implements OnInit {
 
-  searchTab = {link: ['/', 'entreprises', 'recherche'], label: 'Recherche'};
-  mostReportedTab = {link: ['/', 'entreprises', 'les-plus-signalees'], label: 'Les plus signalées'};
-  toActivateTab = {link: ['/', 'entreprises', 'a-activer'], label: 'En attente d\'activation'};
+  readonly searchTab = {link: ['/', 'entreprises', 'recherche'], label: 'Recherche'};
+  readonly mostReportedTab = {link: ['/', 'entreprises', 'les-plus-signalees'], label: 'Les plus signalées'};
+  readonly toActivateTab = {link: ['/', 'entreprises', 'a-activer'], label: 'En attente d\'activation'};
 
-  navTabs: {link: string[], label: string}[];
-  currentNavTab: {link: string[], label: string};
+  navTabs?: {link: string[], label: string}[];
+  currentNavTab?: {link: string[], label: string};
 
-  searchForm: FormGroup;
-  searchCtrl: FormControl;
-  companies: Company[];
+  readonly searchForm = this.formBuilder.group({
+    search: ['', Validators.required]
+  });
+
+  companies?: Company[];
   maxCompanyResult = MaxCompanyResult;
 
-  user: User;
+  user?: User;
   roles = Roles;
-  totalCount: number;
-  currentPage: number;
+  totalCount?: number;
+  currentPage?: number;
   itemsPerPage = 20;
-  lines: NbReportsGroupByCompany[];
-  companiesToActivate: CompanyToActivate[];
-  allCompaniesToActivate: CompanyToActivate[];
+  lines?: NbReportsGroupByCompany[];
+  companiesToActivate?: CompanyToActivate[];
+  allCompaniesToActivate?: CompanyToActivate[];
 
-  showErrors: boolean;
-  loading: boolean;
-  loadingError: boolean;
+  showErrors = false;
+  loading = false;
+  loadingError = false;
 
   checkedCompaniesUuids = new Set<string>();
-  modalRef: BsModalRef;
+  modalRef?: BsModalRef;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -75,38 +77,34 @@ export class CompaniesAdminComponent implements OnInit {
 
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       .subscribe(([url, user]) => {
-        this.user = user;
-        this.navTabs = {
-          [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
-          [this.roles.DGCCRF]: [this.mostReportedTab]
-        }[user.role];
-        this.currentNavTab = this.navTabs.find(tab =>
-          tab.link.reduce((s1, s2) => `${s1}/${s2}`) === url.reduce((s, segment) => `${s}/${segment.toString()}`, '/' )
-        );
-        if (!this.currentNavTab) {
-          this.currentNavTab = this.navTabs[0];
+        this.user = user as User /* TODO Typing issue, user may be unknown */;
+        if (this.user.role === this.roles.Admin || this.user.role === this.roles.DGCCRF) {
+          this.navTabs = {
+            [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
+            [this.roles.DGCCRF]: [this.mostReportedTab]
+          }[this.user.role];
+          this.currentNavTab = this.navTabs.find(tab =>
+            tab.link.reduce((s1, s2) => `${s1}/${s2}`) === url.reduce((s, segment) => `${s}/${segment.toString()}`, '/')
+          );
+
+          if (!this.currentNavTab) {
+            this.currentNavTab = this.navTabs[0];
+          }
+
+          ({
+            [this.searchTab.label]: () => this.bindFormToQueryString(),
+            [this.mostReportedTab.label]: () => this.loadReports(1),
+            [this.toActivateTab.label]: () => this.loadCompaniesToActivate()
+          }[this.currentNavTab.label])();
         }
-
-        ({
-          [this.searchTab.label]: () => this.initSearchForm(),
-          [this.mostReportedTab.label]: () => this.loadReports(1),
-          [this.toActivateTab.label]: () => this.loadCompaniesToActivate()
-        }[this.currentNavTab.label])();
       });
-
   }
 
-  initSearchForm() {
-    this.searchCtrl = this.formBuilder.control('', Validators.required);
-
-    this.searchForm = this.formBuilder.group({
-      search: this.searchCtrl
-    });
-
+  bindFormToQueryString() {
     this.route.queryParams.subscribe(
       queryParams => {
         if (queryParams && queryParams['q']) {
-          this.searchCtrl.setValue(queryParams['q']);
+          this.searchForm.get('search')!.setValue(queryParams['q']);
           this.submitSearchForm();
         }
       }
@@ -117,11 +115,11 @@ export class CompaniesAdminComponent implements OnInit {
     this.loading = true;
     this.loadingError = false;
     this.companies = undefined;
-    if (RegExp(/^[0-9\s]+$/g).test(this.searchCtrl.value)) {
-      this.searchCtrl.setValue((this.searchCtrl.value as string).replace(/\s/g, ''));
+    if (RegExp(/^[0-9\s]+$/g).test(this.searchForm.get('search')!.value)) {
+      this.searchForm.get('search')!.setValue((this.searchForm.get('search')!.value as string).replace(/\s/g, ''));
     }
-    this.location.go('entreprises/recherche', `q=${this.searchCtrl.value}`);
-    this.companyService.searchRegisterCompanies(this.searchCtrl.value).subscribe(
+    this.location.go('entreprises/recherche', `q=${this.searchForm.get('search')!.value}`);
+    this.companyService.searchRegisterCompanies(this.searchForm.get('search')!.value).subscribe(
       result => {
         this.loading = false;
         this.companies = result;
@@ -143,7 +141,7 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   onCompanyChange(company: Company, companyIndex: number) {
-    this.companies.splice(companyIndex, 1, company);
+    this.companies?.splice(companyIndex, 1, company);
   }
 
   loadReports(page: number) {
@@ -176,10 +174,10 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   checkAllCompanies() {
-    if (this.companiesToActivate.length === this.checkedCompaniesUuids.size) {
+    if (this.companiesToActivate?.length === this.checkedCompaniesUuids.size) {
       this.checkedCompaniesUuids.clear();
     } else {
-      this.checkedCompaniesUuids = new Set(this.companiesToActivate.map(toActivate => toActivate.company.id));
+      this.checkedCompaniesUuids = new Set(this.companiesToActivate?.map(toActivate => toActivate.company.id));
     }
   }
 
@@ -209,7 +207,7 @@ export class CompaniesAdminComponent implements OnInit {
   downloadActivationDocuments() {
     if (isPlatformBrowser(this.platformId)) {
       this.companyAccessesService.downloadActivationDocuments(this.checkedCompaniesUuids).subscribe(response => {
-        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
+        const blob = new Blob([(response as HttpResponse<Blob>).body!], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'courriers.pdf';
@@ -230,7 +228,7 @@ export class CompaniesAdminComponent implements OnInit {
     this.companyAccessesService.confirmContactByPostOnCompaniesList(this.checkedCompaniesUuids).subscribe(
       events => {
         this.loading = false;
-        this.modalRef.hide();
+        this.modalRef?.hide();
         this.loadCompaniesToActivate();
       },
       err => {
@@ -247,10 +245,10 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   previousTab() {
-    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) - 1];
+    this.currentNavTab = this.navTabs?.[this.navTabs.indexOf(this.currentNavTab!) - 1];
   }
 
   nextTab() {
-    this.currentNavTab = this.navTabs[this.navTabs.indexOf(this.currentNavTab) + 1];
+    this.currentNavTab = this.navTabs?.[this.navTabs.indexOf(this.currentNavTab!) + 1];
   }
 }
