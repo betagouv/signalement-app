@@ -22,20 +22,24 @@ describe('CategoryComponent', () => {
   let router: Router;
   let reportRouterService: ReportRouterService;
 
-  const primaryAnomaly1 = Object.assign(new Anomaly(), {
+  const primaryAnomaly1: Anomaly = {
     category: 'category1',
     path: 'path1',
-    rank: 1
-  });
-  const primaryAnomalyWithInformation = Object.assign(new Anomaly(), {
+    rank: 1,
+    categoryId: '',
+    subcategories: [],
+  };
+  const primaryAnomalyWithInformation: Anomaly = {
     category: 'category2',
     path: 'path2',
     rank: 2,
+    categoryId: '',
+    subcategories: [],
     information: {
       title: 'titre',
       content: 'contenu'
     }
-  });
+  };
   const anomaliesFixture = [primaryAnomaly1, primaryAnomalyWithInformation];
 
 
@@ -52,6 +56,7 @@ describe('CategoryComponent', () => {
         HeaderModule
       ],
       providers: [
+        { provide: 'anomalies', useValue: anomaliesFixture },
         AnomalyService,
         {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
@@ -63,7 +68,6 @@ describe('CategoryComponent', () => {
     router = TestBed.inject(Router);
     anomalyService = TestBed.inject(AnomalyService);
     reportRouterService = TestBed.inject(ReportRouterService);
-    spyOn(anomalyService, 'getAnomalies').and.returnValue(anomaliesFixture);
 
     fixture = TestBed.createComponent(CategoryComponent);
     component = fixture.componentInstance;

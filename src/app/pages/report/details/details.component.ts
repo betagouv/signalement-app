@@ -6,7 +6,7 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { DescriptionLabel, DetailInput, InputType, ReportingDateLabel } from '../../../model/Anomaly';
+import { DescriptionLabel, DetailInput, InputType, instanceOfSubcategoryInput, ReportingDateLabel } from '../../../model/Anomaly';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -91,34 +91,34 @@ export class DetailsComponent implements OnInit {
   }
 
   initDetailInputs() {
-    if (this.draftReport.lastSubcategory && this.draftReport.lastSubcategory.detailInputs) {
+    if (instanceOfSubcategoryInput(this.draftReport.lastSubcategory)) {
       this.detailInputs = this.draftReport.lastSubcategory.detailInputs;
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
     }
     if (!this.detailInputs.some(input => input.type === InputType.Textarea)) {
-      this.detailInputs.push(Object.assign(new DetailInput(), {
+      this.detailInputs.push({
         label: DescriptionLabel,
         rank: this.detailInputs.length + 1,
         type: InputType.Textarea,
         optionnal: true
-      }));
+      });
     }
   }
 
   getDefaultDetailInputs() {
-    const detailInputs = [];
-    detailInputs.push(Object.assign(new DetailInput(), {
+    const detailInputs: DetailInput[] = [];
+    detailInputs.push({
       label: DescriptionLabel,
       rank: 1,
       type: InputType.Textarea
-    }));
-    detailInputs.push(Object.assign(new DetailInput(), {
+    });
+    detailInputs.push({
       label: ReportingDateLabel,
       rank: 2,
       type: InputType.Date,
       defaultValue: 'SYSDATE'
-    }));
+    });
     return detailInputs;
   }
 

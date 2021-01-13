@@ -239,7 +239,7 @@ export class CompaniesAdminComponent implements OnInit {
       });
   }
 
-  changePage(pageEvent: { page: number, itemPerPage: number }) {
+  changePage(pageEvent: { page: number, itemsPerPage: number }) {
     if (this.currentPage !== pageEvent.page) {
       this.loadReports(pageEvent.page);
       this.location.go('entreprises/les-plus-signalees', `page_number=${pageEvent.page}`);

@@ -145,14 +145,14 @@ export function genCompany() {
 }
 
 export function genSubcategory() {
-  return <Subcategory>Object.assign(new Subcategory(), {
+  return <Subcategory>{
     title: randomstring.generate(),
     tags: oneOf([null, [randomstring.generate()], [randomstring.generate(), randomstring.generate()]])
-  });
+  };
 }
 
 export function genInformation() {
-  return <Information>Object.assign(new Information(), {
+  return <Information>{
     title: randomstring.generate()
-  });
+  };
 }

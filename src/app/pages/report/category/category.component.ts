@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Anomaly, Information } from '../../../model/Anomaly';
+import { Anomaly, Information, instanceOfSubcategoryInformation } from '../../../model/Anomaly';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -82,7 +82,11 @@ export class CategoryComponent implements OnInit {
   }
 
   scrollToElement($element): void {
-    $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+    $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+  }
+
+  isAlertOpen() {
+    return this.draftReport && this.draftReport.subcategories && !instanceOfSubcategoryInformation(this.draftReport.lastSubcategory);
   }
 }
 

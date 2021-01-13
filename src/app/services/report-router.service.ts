@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
 import { DraftReport, Step } from '../model/Report';
 import { ReportStorageService } from './report-storage.service';
+import { instanceOfSubcategoryInformation } from '../model/Anomaly';
 
 export enum ReportPaths {
   Category = '',
@@ -78,7 +79,7 @@ export class ReportRouterService {
           return Step.Details;
         }
       case Step.Problem:
-        if (draftReport.lastSubcategory.information) {
+        if (instanceOfSubcategoryInformation(draftReport.lastSubcategory)) {
           return Step.Information;
         } else {
           return Step.Details;

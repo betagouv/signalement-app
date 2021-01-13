@@ -28,38 +28,38 @@ describe('DetailsComponent', () => {
 
   const anomalyDateFixture = new Date(2018, 1, 2);
 
-  const textDetailInputFixture = Object.assign(new DetailInput(), {
+  const textDetailInputFixture = {
     label: 'texte label',
     rank: 1,
     type: 'TEXT'
-  });
+  };
 
-  const dateDetailInputFixture = Object.assign(new DetailInput(), {
+  const dateDetailInputFixture = {
     label: 'date label',
     rank: 2,
     type: 'DATE',
     defaultValue: 'SYSDATE'
-  });
+  };
 
-  const radioDetailInputFixture = Object.assign(new DetailInput(), {
+  const radioDetailInputFixture = {
     label: 'radio label',
     rank: 3,
     type: 'RADIO',
     options: ['OPTION1', 'OPTION2 (à préciser)']
-  });
+  };
 
-  const checkboxDetailInputFixture = Object.assign(new DetailInput(), {
+  const checkboxDetailInputFixture = {
     label: 'checkbox label',
     rank: 5,
     type: 'CHECKBOX',
     options: ['CHECKBOX1', 'CHECKBOX2 (à préciser)', 'CHECKBOX3']
-  });
+  };
 
-  const textareaDetailInputFixture = Object.assign(new DetailInput(), {
+  const textareaDetailInputFixture = {
     label: 'description',
     rank: 4,
     type: 'TEXTAREA'
-  });
+  };
 
   beforeEach(async(() => {
     defineLocale('fr', frLocale);
@@ -171,11 +171,11 @@ describe('DetailsComponent', () => {
 
     const draftReportInProgress = Object.assign(genDraftReport(Step.Problem), {
       subcategories: [
-        Object.assign(new Subcategory(), {
+        {
           detailInputs : [
             textDetailInputFixture
           ]
-        })
+        }
       ],
       employeeConsumer: oneBoolean(),
       storedStep: Step.Problem
@@ -228,7 +228,7 @@ describe('DetailsComponent', () => {
 
     const draftReportInProgress = Object.assign(genDraftReport(Step.Problem), {
       subcategories: [
-        Object.assign(new Subcategory(), {
+        {
           detailInputs : [
             dateDetailInputFixture,
             textDetailInputFixture,
@@ -236,7 +236,7 @@ describe('DetailsComponent', () => {
             textareaDetailInputFixture,
             checkboxDetailInputFixture
           ]
-        })
+        }
       ],
       employeeConsumer: oneBoolean(),
       storedStep: Step.Problem

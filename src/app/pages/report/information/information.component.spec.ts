@@ -4,7 +4,7 @@ import { InformationComponent } from './information.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Anomaly, Information } from '../../../model/Anomaly';
+import { Anomaly } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { Step } from '../../../model/Report';
 import { RetractationComponent } from '../../static/retractation/retractation.component';
@@ -61,16 +61,22 @@ describe('InformationComponent', () => {
 
   it('should display information when a report refers to anomaly with information', () => {
 
-    const anomalyFixture = new Anomaly();
-    anomalyFixture.information = new Information();
-    anomalyFixture.information.title = 'titre';
-    anomalyFixture.information.content = 'contenu';
+    const anomalyFixture: Anomaly = {
+      categoryId: '',
+      category: '',
+      path: '',
+      subcategories: [],
+      information: {
+        title: 'titre',
+        content: 'contenu',
+      }
+    };
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
 
     component.ngOnInit();
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelectorAll('p')[0].textContent).toEqual(anomalyFixture.information.title);
+    expect(nativeElement.querySelectorAll('p')[0].textContent).toEqual(anomalyFixture.information?.title);
   });
 });

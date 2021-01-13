@@ -41,9 +41,12 @@ describe('ProblemComponent', () => {
     infoSubcategoryFixture
   ];
 
-  const anomalyFixture = new Anomaly();
-  anomalyFixture.subcategories = subcategoriesFixture;
-  anomalyFixture.path = 'myPath';
+  const anomalyFixture: Anomaly = {
+    categoryId: '',
+    category: '',
+    path: 'myPath',
+    subcategories: subcategoriesFixture,
+  };
 
   const draftReportInProgress = genDraftReport(Step.Category);
 
@@ -98,8 +101,7 @@ describe('ProblemComponent', () => {
 
   it('should route to information page when receive subcategories ending with information', () => {
 
-    component.anomaly = new Anomaly();
-    component.anomaly.subcategories = subcategoriesFixture;
+    component.anomaly = anomalyFixture;
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     const routerSpy = spyOn(router, 'navigate');
     fixture.detectChanges();
@@ -112,8 +114,7 @@ describe('ProblemComponent', () => {
 
   it('should request the user if he is an employee of the company or not when receive subcategories', () => {
 
-    component.anomaly = new Anomaly();
-    component.anomaly.subcategories = subcategoriesFixture;
+    component.anomaly = anomalyFixture;
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
@@ -131,8 +132,7 @@ describe('ProblemComponent', () => {
 
     const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
-    component.anomaly = new Anomaly();
-    component.anomaly.subcategories = subcategoriesFixture;
+    component.anomaly = anomalyFixture;
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
@@ -156,8 +156,7 @@ describe('ProblemComponent', () => {
 
     const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
-    component.anomaly = new Anomaly();
-    component.anomaly.subcategories = subcategoriesFixture;
+    component.anomaly = anomalyFixture;
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
@@ -181,8 +180,12 @@ describe('ProblemComponent', () => {
 
     const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
-    component.anomaly = new Anomaly();
-    component.anomaly.subcategories = subcategoriesFixture;
+    component.anomaly = {
+      categoryId: '',
+      category: '',
+      path: '',
+      subcategories: subcategoriesFixture,
+    };
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
@@ -195,15 +198,18 @@ describe('ProblemComponent', () => {
 
     expect(changeReportSpy).not.toHaveBeenCalled();
     expect(nativeElement.querySelector('#contractualDisputeMessage')).not.toBeNull();
-
   });
 
   it('should update the shared report when the contractual message is submitted', () => {
 
     const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
-    component.anomaly = new Anomaly();
-    component.anomaly.subcategories = subcategoriesFixture;
+    component.anomaly = {
+      categoryId: '',
+      category: '',
+      path: '',
+      subcategories: subcategoriesFixture,
+    };
     spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     fixture.detectChanges();
 
@@ -223,7 +229,5 @@ describe('ProblemComponent', () => {
     });
 
     expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
-
   });
-
 });
