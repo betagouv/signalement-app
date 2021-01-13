@@ -1,4 +1,4 @@
-import 'whatwg-fetch';
+import {fetch as fetchPolyfill} from 'whatwg-fetch';
 
 export interface RequestOption {
   qs?: any;
@@ -53,7 +53,7 @@ export class ApiClient {
       }
     };
     this.fetch = (method: Method, url: string, options?: RequestOption) => {
-      return fetch(baseUrl + url, {
+      return fetchPolyfill(baseUrl + url, {
         method,
         headers: { ...headers, ...options?.headers },
         body: options && JSON.stringify(options.body),
