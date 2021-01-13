@@ -29,8 +29,8 @@ export class UnregisteredWebsitesComponent implements OnInit {
   dataSource?: MatTableDataSource<HostWithReportCount>;
 
   readonly columns = [
+    'host',
     'count',
-    'host'
   ];
 
   constructor(private titleService: Title,

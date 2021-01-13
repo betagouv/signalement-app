@@ -43,6 +43,12 @@ import { ReportFilter } from '../../../../model/ReportFilter';
       <div class="search-dialog" [@togglePanel]="isPanelOpen ? 'open' : 'closed'">
         <table class="form">
           <tr>
+            <td><label for="rls-websiteURL">Site internet</label></td>
+            <td>
+              <input formControlName="websiteURL" id="rls-websiteURL" class="form-control form-control-material">
+            </td>
+          </tr>
+          <tr>
             <td><label for="rls-siret">SIRET</label></td>
             <td>
               <input formControlName="siret" id="rls-siret" class="form-control form-control-material">
