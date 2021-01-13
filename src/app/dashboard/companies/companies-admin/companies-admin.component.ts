@@ -6,7 +6,7 @@ import pages from '../../../../assets/data/pages.json';
 import { Roles, User } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { Company, CompanyToActivate, UserAccess } from '../../../model/Company';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -32,8 +32,9 @@ export class CompaniesAdminComponent implements OnInit {
   navTabs?: {link: string[], label: string}[];
   currentNavTab?: {link: string[], label: string};
 
+  readonly searchCtrl = new FormControl('', Validators.required);
   readonly searchForm = this.formBuilder.group({
-    search: ['', Validators.required]
+    search: this.searchCtrl,
   });
 
   companies?: Company[];
@@ -104,7 +105,7 @@ export class CompaniesAdminComponent implements OnInit {
     this.route.queryParams.subscribe(
       queryParams => {
         if (queryParams && queryParams['q']) {
-          this.searchForm.get('search')!.setValue(queryParams['q']);
+          this.searchCtrl.setValue(queryParams['q']);
           this.submitSearchForm();
         }
       }
@@ -115,11 +116,11 @@ export class CompaniesAdminComponent implements OnInit {
     this.loading = true;
     this.loadingError = false;
     this.companies = undefined;
-    if (RegExp(/^[0-9\s]+$/g).test(this.searchForm.get('search')!.value)) {
-      this.searchForm.get('search')!.setValue((this.searchForm.get('search')!.value as string).replace(/\s/g, ''));
+    if (RegExp(/^[0-9\s]+$/g).test(this.searchCtrl.value)) {
+      this.searchCtrl.setValue((this.searchCtrl.value as string).replace(/\s/g, ''));
     }
-    this.location.go('entreprises/recherche', `q=${this.searchForm.get('search')!.value}`);
-    this.companyService.searchRegisterCompanies(this.searchForm.get('search')!.value).subscribe(
+    this.location.go('entreprises/recherche', `q=${this.searchCtrl.value}`);
+    this.companyService.searchRegisterCompanies(this.searchCtrl.value).subscribe(
       result => {
         this.loading = false;
         this.companies = result;

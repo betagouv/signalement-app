@@ -3,7 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { AccountService } from '../../services/account.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PendingDGCCRF } from '../../model/PendingDGCCRF';
 import { User } from '../../model/AuthUser';
 
@@ -19,8 +19,9 @@ export class AdminComponent implements OnInit {
               private accountService: AccountService,
               private route: ActivatedRoute) { }
 
+  readonly emailCtrl = new FormControl('', [Validators.required, Validators.email]);
   readonly invitationForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]]
+    email: this.emailCtrl,
   });
 
   loading = false;
@@ -66,14 +67,14 @@ export class AdminComponent implements OnInit {
     if (this.invitationForm.valid) {
       this.accountService
           .sendDGCCRFInvitation(
-            this.invitationForm.get('email')!.value
+            this.emailCtrl.value
           )
           .subscribe(() => {
             this.loading = false;
             this.showSuccess = true;
             this.pendingDGCCRF = undefined;
             this.usersDGCCRF = undefined;
-            this.invitationForm.get('email')!.reset();
+            this.emailCtrl.reset();
           }, (err) => {
             this.loading = false;
             this.emailRejectedError = err.error;

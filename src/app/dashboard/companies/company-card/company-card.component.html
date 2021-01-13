@@ -36,11 +36,11 @@
     <div class="modal-body text-center">
       <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
         <input [value]="userAccess.companyName" disabled />
-        <input formControlName="line1" placeholder="Ligne 1" id="line1" />
-        <input formControlName="line2" placeholder="Ligne 2" id="line2" />
-        <input formControlName="line3" placeholder="Ligne 3" id="line3" />
-        <input formControlName="postalCode" placeholder="Code postal" id="postalCode" />
-        <input formControlName="city" placeholder="Ville" id="city" />
+        <input [formControlName]="line1Ctrl" placeholder="Ligne 1" id="line1" />
+        <input [formControlName]="line2Ctrl" placeholder="Ligne 2" id="line2" />
+        <input [formControlName]="line3Ctrl" placeholder="Ligne 3" id="line3" />
+        <input [formControlName]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
+        <input [formControlName]="cityCtrl" placeholder="Ville" id="city" />
 
         <div class="notification error" *ngIf="loadingError">
           Une erreur technique s'est produite<br />

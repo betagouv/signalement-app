@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Company, UserAccess } from '../../../model/Company';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
 import { Permissions, User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -21,12 +21,17 @@ export class CompanyCardComponent implements OnInit {
 
   bsModalRef?: BsModalRef;
 
+  readonly line1Ctrl = new FormControl('', Validators.required);
+  readonly line2Ctrl = new FormControl('');
+  readonly line3Ctrl = new FormControl('');
+  readonly postalCodeCtrl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]);
+  readonly cityCtrl = new FormControl('', Validators.required);
   readonly companyAddressForm = this.formBuilder.group({
-    line1: ['', Validators.required],
-    line2: [''],
-    line3: [''],
-    postalCode: ['', [Validators.required, Validators.pattern('[0-9]{5}')]],
-    city: ['', Validators.required],
+    line1: this.line1Ctrl,
+    line2: this.line2Ctrl,
+    line3: this.line3Ctrl,
+    postalCode: this.postalCodeCtrl,
+    city: this.cityCtrl,
   });
 
   loading = false;
@@ -53,12 +58,12 @@ export class CompanyCardComponent implements OnInit {
       this.userAccess.companySiret,
       [
         this.userAccess.companyName,
-        this.companyAddressForm.get('line1')!.value,
-        this.companyAddressForm.get('line2')!.value,
-        this.companyAddressForm.get('line3')!.value,
-        `${this.companyAddressForm.get('postalCode')!.value} ${this.companyAddressForm.get('city')!.value}`
+        this.line1Ctrl.value,
+        this.line2Ctrl.value,
+        this.line3Ctrl.value,
+        `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`
       ].filter(l => l).reduce((prev, curr) => `${prev} - ${curr}`, ''),
-      this.companyAddressForm.get('postalCode')!.value
+      this.postalCodeCtrl.value
     ).subscribe(
       company => {
         this.loading = false;

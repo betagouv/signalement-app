@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { accessLevels } from '../common';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-company-invitation',
@@ -13,17 +13,20 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class CompanyInvitationComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
-              private companyAccessesService: CompanyAccessesService,
-              private route: ActivatedRoute) { }
+    private titleService: Title,
+    private meta: Meta,
+    private companyAccessesService: CompanyAccessesService,
+    private route: ActivatedRoute) {
+  }
 
   accessLevels = accessLevels;
   siret?: string;
 
+  readonly emailCtrl = new FormControl('', [Validators.required, Validators.email]);
+  readonly levelCtrl = new FormControl('', [Validators.required]);
   readonly invitationForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    level: ['', [Validators.required]],
+    email: this.emailCtrl,
+    level: this.levelCtrl,
   });
 
   loading = false;
@@ -43,8 +46,8 @@ export class CompanyInvitationComponent implements OnInit {
       this.companyAccessesService
           .sendInvitation(
             this.siret,
-            this.invitationForm.get('emailCtrl')!.value,
-            this.invitationForm.get('levelCtrl')!.value
+            this.emailCtrl.value,
+            this.levelCtrl.value
           )
           .subscribe(() => {
             this.loading = false;
