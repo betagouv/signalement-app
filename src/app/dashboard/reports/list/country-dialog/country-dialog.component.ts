@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ConstantService } from '../../services/constant.service';
+import { ConstantService } from '../../../../services/constant.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { combineLatest } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
-import { Country } from '../../model/Country';
+import { Country } from '../../../../model/Country';
 
 interface Form {
   group: 'european' | 'transfer' | 'all';

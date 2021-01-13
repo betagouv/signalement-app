@@ -56,7 +56,6 @@
     "jquery": "^3.5.1",
     "js-yaml": "^3.14.0",
     "moment": "^2.29.1",
-    "ng2-completer": "^9.0.1",
     "ngx-bootstrap": "^6.1.0",
     "ngx-echarts": "^5.1.2",
     "ngx-loading": "^8.0.0",

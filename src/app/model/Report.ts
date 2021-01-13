@@ -1,9 +1,9 @@
 import { Consumer } from './Consumer';
 import { CompanyKinds, ContractualDisputeTag, InternetTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
-import moment from 'moment';
 import { isDefined } from '@angular/compiler/src/util';
 import { Company, DraftCompany, WebsiteURL } from './Company';
+import format from 'date-fns/format';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -134,7 +134,7 @@ export class DetailInputValue {
   set value(value: string | Date | Array<string>) {
     this._value = value;
     if (this._value instanceof Date) {
-      this.renderedValue = moment(this._value).format('DD/MM/YYYY');
+      this.renderedValue = format(this._value, 'dd/MM/yyyy');
     } else if (this._value instanceof Array) {
       this.renderedValue = this._value
         .filter(v => isDefined(v))

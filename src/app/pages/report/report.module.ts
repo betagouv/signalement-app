@@ -10,7 +10,6 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentChargeBackComponent, AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Ng2CompleterModule } from 'ng2-completer';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
@@ -90,7 +89,6 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     AlertModule.forRoot(),
-    Ng2CompleterModule,
     RouterModule.forChild(routes),
     CarouselModule,
     ComponentsModule,
