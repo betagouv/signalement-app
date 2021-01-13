@@ -55,7 +55,7 @@ export class ApiClient {
     this.fetch = (method: Method, url: string, options?: RequestOption) => {
       const urlToFetch = new URL(baseUrl + url );
       Object.keys(options?.qs ?? {}).filter(key => options.qs[key]).forEach(key => urlToFetch.searchParams.append(key, options.qs[key]));
-      return fetch(urlToFetch.toString()  , {
+      return fetchPolyfill(urlToFetch.toString()  , {
         method,
         headers: { ...headers, ...options?.headers },
         body: options && JSON.stringify(options.body),
