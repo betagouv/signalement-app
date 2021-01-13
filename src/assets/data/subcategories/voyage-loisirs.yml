@@ -100,7 +100,7 @@
                 - label: Quel était le montant indiqué dès le départ ?
                   rank: 4
                   type: TEXT
-              filelabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
+              fileLabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
             - title: Le taxi a fait un tarif de nuit / week-end alors que ce n'était pas le cas
               detailInputs:
                 - label: Date de la course

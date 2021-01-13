@@ -124,7 +124,7 @@ list:
   - category: Démarches administratives
     categoryId: ADM
     path: demarches-administratives
-    description: faux courrier administratif, achat d'acte de naissance, calendrier des numéros utiles de la ville...
+    description: absence d'information sur le médiateur, faux courrier administratif, achat d'acte de naissance...
     rank: 15
     sprite: category-admin
     subcategories: !!import/single subcategories/demarches-administratives.yml
