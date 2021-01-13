@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { ReportListFiltersComponent } from './filters/report-list-filters.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CountryDialogModule } from '../../../components/country-dialog/country-dialog.module';
+import { CountryDialogModule } from './country-dialog/country-dialog.module';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({

@@ -1,23 +1,68 @@
 export const ReportingDateLabel = 'Date du constat';
 export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
-export const ContractualDisputeTag = <Tag>'Litige contractuel';
-export const InternetTag = <Tag>'Internet';
+export const ContractualDisputeTag = 'Litige contractuel';
+export const InternetTag = 'Internet';
 
-export class Action {
+interface SubcategoryBase extends Category {
+  title: string;
+  description?: string;
+  tags?: Tag[];
+  example?: string;
+}
+
+export interface Anomaly extends Category {
+  category: string;
+  categoryId: string;
+  path: string;
+  description?: string;
+  rank?: number;
+  sprite?: string;
+  hidden?: boolean;
+  information?: Information;
+  breadcrumbTitle?: string;
+}
+
+export type Subcategory = SubcategoryBase | SubcategoryInput | SubcategoryInformation;
+
+export type Tag = string;
+
+export enum CompanyKinds {
+  SIRET = 'SIRET',
+  WEBSITE = 'WEBSITE'
+}
+
+interface Category {
+  subcategoriesTitle?: string;
+  subcategories?: Subcategory[];
+  companyKind?: string;
+}
+
+interface SubcategoryInput extends SubcategoryBase {
+  detailTitle?: string;
+  fileLabel: string;
+  detailInputs?: DetailInput[];
+}
+
+interface SubcategoryInformation extends SubcategoryBase {
+  information: Information;
+}
+
+export interface Information {
+  title?: string;
+  content?: string;
+  actions?: Action[];
+  subTitle?: string;
+  outOfScope?: boolean;
+}
+
+export interface Action {
   question: string;
   example?: string;
   answer: string;
 }
 
-export class Information {
-  title?: string;
-  content?: string;
-  actions?: Action[];
-  outOfScope?: boolean;
-}
-
-export class DetailInput {
+export interface DetailInput {
   label: string;
   rank: number;
   type: string;
@@ -26,79 +71,6 @@ export class DetailInput {
   defaultValue?: string;
   example?: string;
   optionnal?: boolean;
-}
-
-export type Tag = string;
-
-export class WithSubcategories {
-  subcategoriesTitle?: string;
-  companyKind?: string;
-  subcategories: Subcategory[];
-
-  getSubcategoriesData() {
-    if (this.subcategories) {
-      return {
-        subcategoriesTitle: this.subcategoriesTitle,
-        subcategories: this.subcategories.map(s => {
-          s = Object.assign(new Subcategory(), s, { companyKind: s.companyKind || this.companyKind });
-          s = Object.assign(s, s.getSubcategoriesData());
-          return s;
-        })
-      };
-    } else if (!this.companyKind) {
-      return this.getInternetSubcategoriesData();
-    }
-  }
-
-  getInternetSubcategoriesData() {
-    return {
-      subcategoriesTitle: 'Est-ce que votre problème concerne une entreprise sur internet ?',
-      subcategories: [
-        Object.assign(new Subcategory(), this,
-          {
-            title: 'Oui',
-            companyKind: CompanyKinds.WEBSITE,
-            example: undefined
-          }),
-        Object.assign(new Subcategory(), this, {
-          title: 'Non, pas sur internet',
-          companyKind: CompanyKinds.SIRET,
-          example: undefined
-        }),
-      ]
-    };
-  }
-}
-
-export class Subcategory extends WithSubcategories {
-  title: string;
-  description?: string;
-  example?: string;
-  detailTitle?: string;
-  detailInputs?: DetailInput[];
-  fileLabel?: string;
-  information?: Information;
-  tags: Tag[];
-
-  getInternetSubcategoriesData() {
-    if (this.information) {
-      return undefined;
-    } else {
-      return {...super.getInternetSubcategoriesData(), description: undefined };
-    }
-  }
-}
-
-export class Anomaly extends WithSubcategories {
-  category: string;
-  categoryId: string;
-  path: string;
-  hidden?: boolean;
-  description?: string;
-  rank?: number;
-  sprite?: string;
-  information?: Information;
-  breadcrumbTitle?: string;
 }
 
 export enum InputType {
@@ -110,6 +82,48 @@ export enum InputType {
   Date = 'DATE'
 }
 
-export enum CompanyKinds {
-  SIRET = 'SIRET', WEBSITE = 'WEBSITE'
-}
+const askCompanyKindIfMissing = (anomaly: Category): Category => {
+  if (!anomaly.subcategories && !anomaly.companyKind && !instanceOfSubcategoryInformation(anomaly)) {
+    return {
+      ...anomaly,
+      description: undefined,
+      subcategoriesTitle: 'Est-ce que votre problème concerne une entreprise sur internet ?',
+      subcategories: [
+        {
+          ...anomaly,
+          title: 'Oui',
+          companyKind: CompanyKinds.WEBSITE,
+          example: undefined
+        }, {
+          ...anomaly,
+          title: 'Non, pas sur internet',
+          companyKind: CompanyKinds.SIRET,
+          example: undefined
+        },
+      ]
+    } as Category;
+  }
+  return {
+    ...anomaly,
+    subcategories: anomaly.subcategories?.map(_ => ({ ..._, ...askCompanyKindIfMissing(_) })),
+  };
+};
+
+const propagateCompanyKinds = (anomaly: Category): Category => {
+  return {
+    ...anomaly,
+    subcategories: anomaly.subcategories
+      ?.map(_ => ({ ..._, companyKind: _.companyKind || anomaly.companyKind, }))
+      ?.map(_ => ({ ..._, ...propagateCompanyKinds(_), }))
+  };
+};
+
+export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly));
+
+export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput => {
+  return !!(_ as SubcategoryInput)?.detailInputs;
+};
+
+export const instanceOfSubcategoryInformation = (_?: Category): _ is SubcategoryInformation => {
+  return !!(_ as SubcategoryInformation)?.information;
+};

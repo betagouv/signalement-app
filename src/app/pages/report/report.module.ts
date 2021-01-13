@@ -10,7 +10,6 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentChargeBackComponent, AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Ng2CompleterModule } from 'ng2-completer';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
@@ -25,6 +24,7 @@ import { CompanyForeignCountryComponent } from './company/foreign-country/compan
 import { CompanySearchByNameComponent } from './company/search-by-name-component/company-search-by-name.component';
 import { CompanySearchByIdentityComponent } from './company/search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './company/search-by-website/company-search-by-website.component';
+import { instanceOfSubcategoryInformation } from '../../model/Anomaly';
 
 defineLocale('fr', frLocale);
 
@@ -35,7 +35,7 @@ const routes: Routes = [{ path: '', component: CategoryComponent }];
 export function AnomalyLazyRoutesFactory(compiler: Compiler): Routes {
   return anomalies.list
       .map(anomaly => {
-        if (anomaly.information) {
+        if (instanceOfSubcategoryInformation(anomaly)) {
           return [
             { path: `${anomaly.path}`, component: InformationComponent },
             { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent }
@@ -89,7 +89,6 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     AlertModule.forRoot(),
-    Ng2CompleterModule,
     RouterModule.forChild(routes),
     CarouselModule,
     ComponentsModule,

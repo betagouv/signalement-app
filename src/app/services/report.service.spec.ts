@@ -105,7 +105,7 @@ describe('ReportService', () => {
     it('should not pass a departments http param when there are no area report filter', (done) => {
 
       const reportFilter: ReportFilter = {
-        period: [new Date().toISOString(), new Date().toISOString()],
+        period: [new Date().toJSON(), new Date().toJSON()],
         offset: 0,
         limit: 10,
       };
@@ -133,7 +133,7 @@ describe('ReportService', () => {
 
       const reportFilter: ReportFilter = {
         departments: regionFixture.departments.map(_ => _.code),
-        period: [new Date().toISOString(), new Date().toISOString()],
+        period: [new Date().toJSON(), new Date().toJSON()],
         offset: 0,
         limit: 10,
       };
@@ -162,7 +162,7 @@ describe('ReportService', () => {
       const reportFilter: ReportFilter = {
 
         departments: [dept2Fixture.code],
-        period: [new Date().toString(), new Date().toString()],
+        period: [new Date().toJSON(), new Date().toJSON()],
         offset: 0,
         limit: 10,
       };

@@ -1,29 +1,24 @@
-import { Injectable } from '@angular/core';
-import anomalies from '../../assets/data/anomalies.json';
-import { Anomaly, InternetTag, Subcategory } from '../model/Anomaly';
+import { Inject, Injectable, Optional } from '@angular/core';
+import anomaliesJSON from '../../assets/data/anomalies.json';
+import { Anomaly, enrichAnomaly, InternetTag, Subcategory } from '../model/Anomaly';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnomalyService {
 
-  anomalies: Anomaly[];
-
-  constructor() {
-    this.anomalies = this.getAnomalies();
+  constructor(@Inject('anomalies') @Optional() private readonly anomalies: Anomaly[]) {
+    if (!anomalies) {
+      this.anomalies = anomaliesJSON.list.map(enrichAnomaly) as Anomaly[];
+    }
   }
 
   getAnomalies() {
-    if (!this.anomalies) {
-      this.anomalies = anomalies.list
-        .map(a => Object.assign(new Anomaly(), a))
-        .map(a => Object.assign(a, {subcategories: a.getSubcategoriesData().subcategories}));
-    }
     return this.anomalies;
   }
 
-  getAnomalyBy(predicate: (anomaly) => boolean) {
-    return this.getAnomalies()
+  getAnomalyBy(predicate: (anomaly: Anomaly) => boolean) {
+    return this.anomalies
       .find(predicate);
   }
 
@@ -36,17 +31,16 @@ export class AnomalyService {
   }
 
   getCategories() {
-    return this.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
+    return this.anomalies.filter(anomaly => !anomaly.information).map(anomaly => anomaly.category);
   }
 
-  getTags() {
-    return [InternetTag].concat(...this.getAnomalies().map(anomaly => this.collectTags(anomaly)))
+  getTags(): string[] {
+    return [InternetTag].concat(...this.anomalies.map(anomaly => this.collectTags(anomaly)))
       .filter((tag, index, tags) => tags.indexOf(tag) === index)
       .sort((t1, t2) => t1.toString().localeCompare(t2.toString()));
   }
 
-  private collectTags(data: Subcategory | Anomaly) {
+  private collectTags(data: Subcategory | Anomaly): string[] {
     return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => this.collectTags(s)));
   }
-
 }

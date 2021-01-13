@@ -4,7 +4,7 @@
       example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
       subcategories:
         - title: Le prix de mon forfait a été augmenté (ou va être augmenté)
-          example: "Exemple : ajout automatique d'une option payante, augmentation de 2 euros de mon forfait"
+          example: "Exemple : ajout automatique d'une option payante, augmentation du nombre d'heures, augmentation des données disponibles..."
           subcategoriesTitle: Pour quelle raison votre forfait a été augmenté (ou va être augmenté) ?
           subcategories:
             - title: Augmentation du débit ou des données disponibles
@@ -20,7 +20,7 @@
                   tags:
                     - Litige contractuel
             - title: Modification concernant les sms, mms ou appels
-              example: 'Exemple : les appels deviennent illimités pour 2 euros de plus'
+              example: 'Exemple : augmentation du nombre d''heures, augmentation du nombre de sms...'
               subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
               subcategories:
                 - title: Oui, j'ai été prévenu par email ou courrier

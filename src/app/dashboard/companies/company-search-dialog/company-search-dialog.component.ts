@@ -1,7 +1,7 @@
 import { Component, Directive, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CompanySearchResult } from '../../model/Company';
-import { CompanyService } from '../../services/company.service';
+import { CompanySearchResult } from '../../../model/Company';
+import { CompanyService } from '../../../services/company.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Directive({

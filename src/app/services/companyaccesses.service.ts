@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
-import { CompanyAccess, CompanyToActivate, PendingToken, UserAccess } from '../model/Company';
-import { mergeMap } from 'rxjs/operators';
+import { CompanyAccess, PendingToken, UserAccess, WebsiteURL } from '../model/Company';
+import { map, mergeMap } from 'rxjs/operators';
 import { User } from '../model/AuthUser';
+import { ApiCompanyToActivate } from '../api-sdk/model/Company';
+
+import { parseISO } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -101,11 +104,20 @@ export class CompanyAccessesService {
   companiesToActivate() {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.get<CompanyToActivate[]>(
+        return this.http.get<ApiCompanyToActivate[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'to-activate']),
           headers
         );
-      })
+      }),
+      map(results => results.map(result => ({
+        company: {
+          ...result.company,
+          creationDate: parseISO(result.company.creationDate),
+          website: result.company.website ? Object.assign(new WebsiteURL(), { url: result.company.website.url }) : undefined
+        },
+        lastNotice: result.lastNotice ? parseISO(result.lastNotice) : undefined,
+        tokenCreation: parseISO(result.tokenCreation)
+      })))
     );
   }
 

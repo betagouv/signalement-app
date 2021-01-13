@@ -147,7 +147,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngIf="!loading && !companiesToActivate.length">
+                <tr *ngIf="!loading && !companiesToActivate?.length">
                   <td colspan="7">
                     <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
                     <span *ngIf="!loadingError">Aucune entreprise à activer</span>
