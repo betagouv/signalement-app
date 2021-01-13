@@ -73,8 +73,9 @@ h2 {
   }
 
   .sprite-category {
-    background: url("../../../../assets/images/pictos/sprite.png") no-repeat bottom;
+    background-image: url("/sprite.png");
     background-repeat: no-repeat;
+    background-position: bottom;
     display: inline-block;
     width: 72px;
     height: 72px;
