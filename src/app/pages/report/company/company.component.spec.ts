@@ -5,7 +5,6 @@ import { CompanyService } from '../../../services/company.service';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { Ng2CompleterModule } from 'ng2-completer';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -47,7 +46,6 @@ describe('CompanyComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: ReportPaths.Consumer, redirectTo: '' }]),
-        Ng2CompleterModule,
         NgxLoadingModule,
         ComponentsModule,
         TypeaheadModule.forRoot(),
