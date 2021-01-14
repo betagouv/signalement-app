@@ -37,7 +37,7 @@ export class WebsitesTabsComponent implements OnInit {
       .subscribe(([url, user]) => {
         this.navTabs = {
           [Roles.Admin]: [this.manageTab, this.unregisteredTab],
-          [Roles.DGCCRF]: [this.manageTab]
+          [Roles.DGCCRF]: [this.unregisteredTab]
         }[user.role];
         this.currentNavTab = this.navTabs.find(tab =>
           tab.link.reduce((s1, s2) => `${s1}/${s2}`) === url.reduce((s, segment) => `${s}/${segment.toString()}`, '/' )
