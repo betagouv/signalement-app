@@ -26,7 +26,7 @@
           <h2 *ngIf="reportReadByProPercentage">
             <span class="count">{{reportReadByProPercentage.toFixed(0) + "%"}}</span>
             des signalements ont été lus par les entreprises
-            <i class="material-icons" aria-hidden="true"
+            <i class="material-icons help" aria-hidden="true"
                tooltip="Pourquoi pas 100 % ? Car Signalconso est facultatif. L'entreprise est libre de créer un compte et de lire le signalement.">
               help_outline
             </i>
@@ -49,7 +49,7 @@
             En moyenne l'entreprise met
             <span class="count">{{reportReadByProMedianDelay.toFixed(1)}} jours</span>
             pour lire le signalement
-            <i class="material-icons" aria-hidden="true"
+            <i class="material-icons help" aria-hidden="true"
                tooltip="Délai médian entre la création du signalement et la lecture du signalement par l'entreprise concernée">
               help_outline
             </i>
@@ -63,7 +63,7 @@
             Sur l'ensemble des signalements lus,
             <span class="count">{{reportWithResponsePercentage.toFixed(0) + "%"}}</span>
             ont eu une réponse de l'entreprise
-            <i class="material-icons" aria-hidden="true"
+            <i class="material-icons help" aria-hidden="true"
                tooltip="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur.">
               help_outline
             </i>
@@ -86,7 +86,7 @@
             En moyenne une entreprise met
             <span class="count">{{reportWithResponseMedianDelay.toFixed(1)}} jours</span>
             pour répondre au signalement après l'avoir lu
-            <i class="material-icons" aria-hidden="true"
+            <i class="material-icons help" aria-hidden="true"
                tooltip="Délai médian entre la lecture du signalement et la réponse par l'entreprise concernée">
               help_outline
             </i>
