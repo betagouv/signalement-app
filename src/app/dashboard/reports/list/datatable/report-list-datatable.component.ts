@@ -6,6 +6,7 @@ import { Roles } from '../../../../model/AuthUser';
 import { ReportingDateLabel } from '../../../../model/Anomaly';
 import { PageEvent } from '@angular/material/paginator';
 import { PaginatedData } from '../../../../model/PaginatedData';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-report-list-datatable',
@@ -127,6 +128,7 @@ import { PaginatedData } from '../../../../model/PaginatedData';
       </table>
     </div>
     <mat-paginator (page)="onChange($event)"
+                   [pageIndex]="searchForm.get('offset').value / searchForm.get('limit').value"
                    [length]="reports.totalCount"
                    [pageSize]="pageSize"
                    [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
@@ -140,6 +142,8 @@ export class ReportListDatatableComponent implements OnInit {
   ) {
   }
 
+  @Input() searchForm: FormGroup;
+
   @Input() reports: PaginatedData<Report>;
 
   @Input() pageSize: number;
@@ -151,7 +155,7 @@ export class ReportListDatatableComponent implements OnInit {
   readonly roles = Roles;
 
   displayedColumns = [];
-
+  
   ngOnInit() {
     this.displayedColumns = this.getRoleColumns();
   }
