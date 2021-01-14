@@ -29,7 +29,7 @@
         <td class="td-count td-number" mat-cell *matCellDef="let _">
           {{_.count}}
           &nbsp;
-          <a [routerLink]="['/suivi-des-signalements', 'admin']"
+          <a [routerLink]="['/suivi-des-signalements', (authenticationService.user | async).roleUrlParam]"
              [queryParams]="{websiteURL: _.host}" app-btn color="primary" style="text-decoration: none">
             Voir
           </a>
