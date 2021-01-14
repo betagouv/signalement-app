@@ -31,7 +31,7 @@
               Veuillez renseigner une adresse email valide.<br/>
           </span>
         </div>
-        <div class="notification error mt-3" *ngIf="emailRejectedError != null">
+        <div class="notification error mt-3" *ngIf="emailRejectedError">
           {{emailRejectedError}}
         </div>
         <div class="notification success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>

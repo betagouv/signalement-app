@@ -4,7 +4,7 @@ import pages from '../../../../assets/data/pages.json';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { accessLevels } from '../common';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-company-invitation',
@@ -13,43 +13,35 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class CompanyInvitationComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
-              private companyAccessesService: CompanyAccessesService,
-              private route: ActivatedRoute) { }
+    private titleService: Title,
+    private meta: Meta,
+    private companyAccessesService: CompanyAccessesService,
+    private route: ActivatedRoute) {
+  }
 
   accessLevels = accessLevels;
-  siret: string;
+  siret?: string;
 
-  invitationForm: FormGroup;
-  emailCtrl: FormControl;
-  levelCtrl: FormControl;
+  readonly emailCtrl = new FormControl('', [Validators.required, Validators.email]);
+  readonly levelCtrl = new FormControl('', [Validators.required]);
+  readonly invitationForm = this.formBuilder.group({
+    email: this.emailCtrl,
+    level: this.levelCtrl,
+  });
 
-  loading: boolean;
+  loading = false;
   showSuccess = false;
   showErrors = false;
 
   ngOnInit() {
-    this.siret = this.route.snapshot.paramMap.get('siret');
-
+    this.siret = this.route.snapshot.paramMap.get('siret') ?? undefined;
     this.titleService.setTitle(`Entreprise ${this.siret} - ${pages.companies.companyInvitation.title}`);
     this.meta.updateTag({ name: 'description', content: pages.companies.companyInvitation.description });
-    this.initForm();
-  }
-
-  initForm() {
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.levelCtrl = this.formBuilder.control('', [Validators.required]);
-
-    this.invitationForm = this.formBuilder.group({
-      email: this.emailCtrl,
-      level: this.levelCtrl,
-    });
   }
 
   submitForm() {
     this.showSuccess = false;
-    if (this.invitationForm.valid) {
+    if (this.invitationForm.valid && this.siret) {
       this.loading = true;
       this.companyAccessesService
           .sendInvitation(

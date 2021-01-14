@@ -79,7 +79,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngIf="!loading && !lines.length">
+                <tr *ngIf="!loading && !lines?.length">
                   <td colspan="7">
                     <span class="error" *ngIf="loadingError">Une erreur technique s'est produite</span>
                     <span *ngIf="!loadingError">Aucun signalement trouvé</span>
@@ -162,7 +162,7 @@
                     <small *ngFor="let line of toActivate.company.address.split(' - ')">{{line}}<br /></small>
                   </td>
                   <td class="text-center">{{toActivate.tokenCreation | date : 'dd/MM/yyyy'}}</td>
-                  <td class="text-center">{{(toActivate.lastNotice === null) ? "" : "✓"}}</td>
+                  <td class="text-center">{{toActivate.lastNotice && "✓"}}</td>
                 </tr>
                 </tbody>
               </table>
