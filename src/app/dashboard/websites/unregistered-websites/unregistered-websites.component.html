@@ -30,7 +30,7 @@
           {{_.count}}
           &nbsp;
           <a [routerLink]="['/suivi-des-signalements', (authenticationService.user | async).roleUrlParam]"
-             [queryParams]="{websiteURL: _.host}" app-btn color="primary" style="text-decoration: none">
+             [queryParams]="{websiteURL: _.host, start: periodFilter && periodFilter[0], end: periodFilter && periodFilter[1]}" app-btn color="primary" style="text-decoration: none">
             Voir
           </a>
         </td>
