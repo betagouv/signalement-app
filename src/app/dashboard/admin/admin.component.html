@@ -24,10 +24,10 @@
           </div>
         </div>
         <div class="notification error mt-3" *ngIf="showErrors && invitationForm.invalid">
-          <span *ngIf="invitationForm.get('email').hasError('required')">
+          <span *ngIf="emailCtrl.hasError('required')">
               Veuillez renseigner une adresse email.<br/>
           </span>
-          <span *ngIf="invitationForm.get('email').hasError('email')">
+          <span *ngIf="emailCtrl.hasError('email')">
               Veuillez renseigner une adresse email valide.<br/>
           </span>
         </div>
