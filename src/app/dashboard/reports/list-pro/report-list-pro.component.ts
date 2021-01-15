@@ -63,7 +63,7 @@ export class ReportListProComponent implements OnInit {
     );
 
     this.reportFilter = this.reportService.currentReportFilter;
-    this.reportFilter.siret = paramMap.get('siret');
+    this.reportFilter.siret = paramMap.get('siret') ?? queryParamMap.get('siret');
 
     this.loading = true;
     this.loadingError = false;
