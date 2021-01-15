@@ -6,7 +6,7 @@ export class User {
   password: string;
   firstName: string;
   lastName: string;
-  role: string;
+  role: Roles;
   permissions: Permissions[];
 
   get roleUrlParam() {

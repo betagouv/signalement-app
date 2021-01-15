@@ -50,7 +50,8 @@ const routes: Routes = [
     SharedModule,
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    CompanySearchDialogDirective,
   ],
   providers: [
     AuthGuard

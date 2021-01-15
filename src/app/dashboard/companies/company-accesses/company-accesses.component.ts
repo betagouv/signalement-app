@@ -17,26 +17,27 @@ import { accessLevels } from '../common';
 export class CompanyAccessesComponent implements OnInit {
 
   constructor(private titleService: Title,
-              private meta: Meta,
-              private authenticationService: AuthenticationService,
-              private companyAccessesService: CompanyAccessesService,
-              private modalService: BsModalService,
-              private route: ActivatedRoute) { }
+    private meta: Meta,
+    private authenticationService: AuthenticationService,
+    private companyAccessesService: CompanyAccessesService,
+    private modalService: BsModalService,
+    private route: ActivatedRoute) {
+  }
 
-  bsModalRef: BsModalRef;
-  siret: string;
-  user: User;
-  companyAccesses: CompanyAccess[];
-  pendingTokens: PendingToken[];
+  bsModalRef?: BsModalRef;
+  siret?: string;
+  user?: User;
+  companyAccesses?: CompanyAccess[];
+  pendingTokens?: PendingToken[];
   accessLevels = accessLevels;
 
-  loading: boolean;
+  loading = false;
   showSuccess = false;
 
   ngOnInit() {
     const siretParam = this.route.params.pipe(map(p => p.siret));
 
-    this.authenticationService.user.subscribe(user => {
+    this.authenticationService.user.subscribe((user: User) => {
       this.user = user;
     });
 
@@ -55,17 +56,21 @@ export class CompanyAccessesComponent implements OnInit {
 
   refreshAccesses() {
     this.loading = true;
-    this.companyAccessesService.listAccesses(this.siret).subscribe(
-      accesses => {
-        this.loading = false;
-        this.companyAccesses = accesses;
-      }
-    );
+    if (this.siret) {
+      this.companyAccessesService.listAccesses(this.siret).subscribe(
+        accesses => {
+          this.loading = false;
+          this.companyAccesses = accesses;
+        }
+      );
+    } else {
+      console.error('[SignalConso] this.siret is undefined', new Error().stack);
+    }
   }
 
   refreshPendingTokens() {
     this.loading = true;
-    this.companyAccessesService.listPendingTokens(this.siret).subscribe(
+    this.companyAccessesService.listPendingTokens(this.siret!).subscribe(
       pendingTokens => {
         this.loading = false;
         this.pendingTokens = pendingTokens;
@@ -77,7 +82,7 @@ export class CompanyAccessesComponent implements OnInit {
     this.showSuccess = false;
     this.loading = true;
     this.companyAccessesService
-        .updateAccess(this.siret, userId, level)
+      .updateAccess(this.siret!, userId, level)
         .subscribe(() => {
           this.loading = false;
           this.showSuccess = true;
@@ -89,7 +94,7 @@ export class CompanyAccessesComponent implements OnInit {
     this.showSuccess = false;
     this.loading = true;
     this.companyAccessesService
-        .removeAccess(this.siret, userId)
+      .removeAccess(this.siret!, userId)
         .subscribe(() => {
           this.loading = false;
           this.showSuccess = true;
@@ -101,7 +106,7 @@ export class CompanyAccessesComponent implements OnInit {
     this.showSuccess = false;
     this.loading = true;
     this.companyAccessesService
-        .removePendingToken(this.siret, tokenId)
+      .removePendingToken(this.siret!, tokenId)
         .subscribe(() => {
           this.loading = false;
           this.showSuccess = true;

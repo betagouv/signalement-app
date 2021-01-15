@@ -7,6 +7,7 @@ import * as echarts from 'echarts';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 const routes: Routes = [
   { path: 'stats', component: StatsComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule,
     AppRoleModule,
+    TooltipModule.forRoot(),
   ]
 })
 export class StatsModule { }

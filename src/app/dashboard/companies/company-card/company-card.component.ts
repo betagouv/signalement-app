@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Company, UserAccess } from '../../../model/Company';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanyService } from '../../../services/company.service';
 import { Permissions, User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
-
-;
 
 @Component({
   selector: 'app-company-card',
@@ -15,52 +13,42 @@ import { AuthenticationService } from '../../../services/authentication.service'
 })
 export class CompanyCardComponent implements OnInit {
 
-  @Input() userAccess: UserAccess;
+  @Input() userAccess!: UserAccess;
   @Output() change = new EventEmitter<Company>();
 
-  user: User;
-  permissions = Permissions;
+  user?: User;
+  readonly permissions = Permissions;
 
-  bsModalRef: BsModalRef;
-  companyAddressForm: FormGroup;
-  line1Ctrl: FormControl;
-  line2Ctrl: FormControl;
-  line3Ctrl: FormControl;
-  postalCodeCtrl: FormControl;
-  cityCtrl: FormControl;
+  bsModalRef?: BsModalRef;
 
-  loading: boolean;
-  loadingError: boolean;
+  readonly line1Ctrl = new FormControl('', Validators.required);
+  readonly line2Ctrl = new FormControl('');
+  readonly line3Ctrl = new FormControl('');
+  readonly postalCodeCtrl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]);
+  readonly cityCtrl = new FormControl('', Validators.required);
+  readonly companyAddressForm = this.formBuilder.group({
+    line1: this.line1Ctrl,
+    line2: this.line2Ctrl,
+    line3: this.line3Ctrl,
+    postalCode: this.postalCodeCtrl,
+    city: this.cityCtrl,
+  });
+
+  loading = false;
+  loadingError = false;
 
   constructor(private formBuilder: FormBuilder,
-              private modalService: BsModalService,
-              private companyService: CompanyService,
-              private authenticationService: AuthenticationService) { }
+    private modalService: BsModalService,
+    private companyService: CompanyService,
+    private authenticationService: AuthenticationService) {
+  }
 
   ngOnInit() {
-    this.authenticationService.user.subscribe(user => this.user = user);
-
-    this.initCompanyAddressForm();
+    this.authenticationService.user.subscribe((user: User) => this.user = user);
   }
 
   openModal(template: TemplateRef<any>) {
     this.bsModalRef = this.modalService.show(template);
-  }
-
-  initCompanyAddressForm() {
-    this.line1Ctrl = this.formBuilder.control('', Validators.required);
-    this.line2Ctrl = this.formBuilder.control('');
-    this.line3Ctrl = this.formBuilder.control('');
-    this.postalCodeCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{5}')]);
-    this.cityCtrl = this.formBuilder.control('', Validators.required);
-
-    this.companyAddressForm = this.formBuilder.group({
-      line1: this.line1Ctrl,
-      line2: this.line2Ctrl,
-      line3: this.line3Ctrl,
-      postalCode: this.postalCodeCtrl,
-      city: this.cityCtrl,
-    });
   }
 
   submitCompanyAddressForm() {
@@ -80,12 +68,11 @@ export class CompanyCardComponent implements OnInit {
       company => {
         this.loading = false;
         this.change.emit(company);
-        this.bsModalRef.hide();
+        this.bsModalRef!.hide();
       },
       err => {
         this.loading = false;
         this.loadingError = true;
       });
   }
-
 }

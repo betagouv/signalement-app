@@ -15,6 +15,7 @@
       <app-report-list-datatable
         *ngIf="reports"
         [reports]="reports"
+        [searchForm]="searchForm"
         [pageSize]="searchFormValue.limit"
         [userRole]="(authenticationService.user | async).role"
         (paginationChanged)="onPaginationChange($event)">
