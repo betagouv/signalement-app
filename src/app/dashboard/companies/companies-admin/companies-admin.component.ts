@@ -78,7 +78,7 @@ export class CompaniesAdminComponent implements OnInit {
 
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       .subscribe(([url, user]) => {
-        if (this.user && (this.user.role === this.roles.Admin || this.user.role === this.roles.DGCCRF)) {
+        if (user && (user.role === this.roles.Admin || user.role === this.roles.DGCCRF)) {
           this.user = user;
           this.navTabs = {
             [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
