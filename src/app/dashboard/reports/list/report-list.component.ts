@@ -94,6 +94,7 @@ export class ReportListComponent implements OnInit {
       siret: undefined,
       status: undefined,
       hasCompany: undefined,
+      websiteURL: undefined,
       email: undefined,
       category: undefined,
       offset: 0,

@@ -80,6 +80,7 @@ export class AdminComponent implements OnInit {
             this.emailRejectedError = err.error;
           });
     } else {
+      this.loading = false;
       this.showErrors = true;
     }
   }
