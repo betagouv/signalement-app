@@ -27,6 +27,7 @@ export class CompanyCardComponent implements OnInit {
   readonly line3Ctrl = new FormControl('');
   readonly postalCodeCtrl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]);
   readonly cityCtrl = new FormControl('', Validators.required);
+  readonly activationDocumentRequiredCtrl = new FormControl(false);
   readonly companyAddressForm = this.formBuilder.group({
     companyName: this.companyNameCtrl,
     line1: this.line1Ctrl,
@@ -66,7 +67,8 @@ export class CompanyCardComponent implements OnInit {
         this.line3Ctrl.value,
         `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`
       ].filter(l => l).reduce((prev, curr) => `${prev} - ${curr}`),
-      this.postalCodeCtrl.value
+      this.postalCodeCtrl.value,
+      this.activationDocumentRequiredCtrl.value
     ).subscribe(
       company => {
         this.loading = false;
