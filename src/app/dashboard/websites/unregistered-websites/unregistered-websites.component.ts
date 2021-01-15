@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
 import { Roles } from '../../../model/AuthUser';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-unregistered-websites',
@@ -29,14 +30,15 @@ export class UnregisteredWebsitesComponent implements OnInit {
   dataSource?: MatTableDataSource<HostWithReportCount>;
 
   readonly columns = [
+    'host',
     'count',
-    'host'
   ];
 
   constructor(private titleService: Title,
               private meta: Meta,
               private localeService: BsLocaleService,
               private router: Router,
+              public authenticationService: AuthenticationService,
               public websiteService: WebsiteService) { }
 
   ngOnInit() {

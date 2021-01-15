@@ -5,7 +5,7 @@ export type BtnState = 'loading' | 'error' | 'success' | 'default';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'button[app-btn]',
+  selector: 'button[app-btn], a[app-btn]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./btn.component.scss',],
   host: {

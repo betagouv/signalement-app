@@ -24,18 +24,22 @@
     </app-panel-header>
     <table mat-table [dataSource]="dataSource" matSort class="fullwidth" matSortActive="count" matSortDirection="desc">
 
-
       <ng-container matColumnDef="count">
         <th mat-sort-header mat-header-cell *matHeaderCellDef>Nombre de signalements</th>
-        <td class="td-count text-center" mat-cell *matCellDef="let _">
+        <td class="td-count td-number" mat-cell *matCellDef="let _">
           {{_.count}}
+          &nbsp;
+          <a [routerLink]="['/suivi-des-signalements', (authenticationService.user | async).roleUrlParam]"
+             [queryParams]="{websiteURL: _.host, start: periodFilter && periodFilter[0], end: periodFilter && periodFilter[1]}" app-btn color="primary" style="text-decoration: none">
+            Voir
+          </a>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="host">
         <th mat-sort-header mat-header-cell *matHeaderCellDef>Nom du site</th>
         <td mat-cell *matCellDef="let _">
-          {{_.host}}
+          <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
         </td>
       </ng-container>
 
