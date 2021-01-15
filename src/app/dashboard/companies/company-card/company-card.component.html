@@ -35,7 +35,7 @@
   <ng-template #changeAddress>
     <div class="modal-body text-center">
       <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
-        <input [value]="userAccess.companyName" disabled />
+        <input [formControl]="companyNameCtrl" placeholder="Nom de l'entreprise" id="companyName" />
         <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
         <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
         <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
