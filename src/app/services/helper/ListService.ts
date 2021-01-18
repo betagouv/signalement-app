@@ -2,7 +2,7 @@ import { Entity } from '../../api-sdk/model/Common';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ServiceUtils } from '../service.utils';
 import { ApiError } from '../../api-sdk/ApiClient';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 export abstract class ListService<T extends Entity> {
 
@@ -31,10 +31,9 @@ export abstract class ListService<T extends Entity> {
       this.source.next(undefined);
     }
     return new Observable(_ => _.next()).pipe(
-      map(_ => {
+      tap(_ => {
         this._fetching = true;
         this._fetchError = undefined;
-        return _;
       }),
       mergeMap(() => this.listMethod(...args)),
       mergeMap((data: T[]) => {
