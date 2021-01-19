@@ -1,4 +1,4 @@
-import {fetch as fetchPolyfill} from 'whatwg-fetch';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
 export interface RequestOption {
   qs?: any;
@@ -7,15 +7,23 @@ export interface RequestOption {
   timeout?: number;
 }
 
-interface ApiClientParams {
+export interface ApiClientParams {
   baseUrl: string;
   headers?: any;
+  requestInterceptor?: (options?: RequestOption) => Promise<RequestOption> | RequestOption;
   proxy?: string;
   mapData?: (_: any) => any;
   mapError?: (_: any) => never;
 }
 
-type StatusCode =
+export interface ApiClientApi {
+  readonly get: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+  readonly post: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+  readonly delete: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+  readonly put: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+}
+
+export type StatusCode =
   200 |
   301 |
   302 |
@@ -39,6 +47,7 @@ export class ApiClient {
   constructor({
     baseUrl,
     headers,
+    requestInterceptor,
     mapData,
     mapError,
   }: ApiClientParams) {
@@ -52,18 +61,39 @@ export class ApiClient {
         }
       }
     };
-    this.fetch = (method: Method, url: string, options?: RequestOption) => {
-      const urlToFetch = new URL(baseUrl + url );
-      Object.keys(options?.qs ?? {}).filter(key => options.qs[key]).forEach(key => urlToFetch.searchParams.append(key, options.qs[key]));
-      return fetchPolyfill(urlToFetch.toString()  , {
+    this.fetch = async (method: Method, url: string, options?: RequestOption) => {
+      const builtOptions = ApiClient.buildOptions(options, headers, requestInterceptor);
+      const builtUrl = ApiClient.buildUrl(baseUrl, url, options);
+      return fetchPolyfill(builtUrl.toString(), {
         method,
-        headers: { ...headers, ...options?.headers },
-        body: options && JSON.stringify(options.body),
+        headers: builtOptions.headers,
+        body: builtOptions.body,
       }).then(mapResponse)
         .then(mapData ?? (_ => _))
         .catch(mapError ?? Promise.reject.bind(Promise));
     };
   }
+
+  private static readonly buildOptions = (
+    options?: RequestOption,
+    headers?: any,
+    requestInterceptor: (_?: RequestOption) => RequestOption | Promise<RequestOption> = _ => _
+  ): RequestOption => {
+    const interceptedOptions = requestInterceptor(options);
+    return {
+      ...interceptedOptions,
+      headers: { ...headers, ...options?.headers },
+      body: options && JSON.stringify(options.body),
+    };
+  };
+
+  private static readonly buildUrl = (baseUrl: string, url: string, options?: RequestOption): URL => {
+    const urlToFetch = new URL(baseUrl + url);
+    Object.keys(options?.qs ?? {})
+      .filter(key => options.qs[key])
+      .forEach(key => urlToFetch.searchParams.append(key, options.qs[key]));
+    return urlToFetch;
+  };
 
   private readonly fetch: (method: Method, url: string, options: RequestOption) => Promise<any>;
 

@@ -1,16 +1,16 @@
 import { Entity, Id } from '../../api-sdk/model/Common';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { ServiceUtils } from '../service.utils';
+import { ApiSdkService } from '../core/api-sdk.service';
 import { ApiError } from '../../api-sdk/ApiClient';
 import { Index } from '../../model/Common';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ListService } from './ListService';
 
 interface CRUDListMethods<T extends Entity, C = Partial<T>, U = Partial<T>> {
-  list: (...args: any[]) => Observable<T[]>;
-  create?: (c: C) => Observable<T>;
-  update?: (id: Id, u: U) => Observable<T>;
-  remove?: (id: Id) => Observable<void>;
+  list: (...args: any[]) => Observable<T[]> | Promise<T[]>;
+  create?: (c: C) => Observable<T> | Promise<T>;
+  update?: (id: Id, u: U) => Observable<T> | Promise<T>;
+  remove?: (id: Id) => Observable<void> | Promise<void>;
 }
 
 export class CRUDListServiceNotImplementedError extends Error {
@@ -22,9 +22,9 @@ export class CRUDListServiceNotImplementedError extends Error {
 export abstract class CRUDListService<T extends Entity, C, U> extends ListService<T> {
 
   constructor(
-    protected utils: ServiceUtils,
+    protected api: ApiSdkService,
     protected methods: CRUDListMethods<T, C, U>) {
-    super(utils, methods.list);
+    super(api, methods.list);
   }
 
   protected source = new BehaviorSubject<T[] | undefined>(undefined);
