@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ReviewOnReportResponse } from '../../../model/ReportEvent';
@@ -14,43 +14,36 @@ import pages from '../../../../assets/data/pages.json';
 })
 export class ConsumerReviewComponent implements OnInit {
 
-  reportId: string;
+  reportId!: string;
 
-  reviewForm: FormGroup;
-  positiveCtrl: FormControl;
-  detailsCtrl: FormControl;
+  readonly positiveCtrl = this.formBuilder.control('', Validators.required);
+  readonly detailsCtrl = this.formBuilder.control('');
+  readonly reviewForm = this.formBuilder.group({
+    positive: this.positiveCtrl,
+    details: this.detailsCtrl
+  });
 
-  showErrors: boolean;
-  loading: boolean;
-  loadingError: boolean;
-  conflictError: boolean;
-  postSuccess: boolean;
+  showErrors = false;
+  loading = false;
+  loadingError = false;
+  conflictError?: boolean;
+  postSuccess?: boolean;
 
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService,
-              private activatedRoute: ActivatedRoute,
-              private titleService: Title,
-              private meta: Meta) { }
+    private reportService: ReportService,
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title,
+    private meta: Meta) {
+  }
 
   ngOnInit() {
     this.titleService.setTitle(pages.reports.review.title);
     this.meta.updateTag({ name: 'description', content: pages.reports.review.title });
 
     this.activatedRoute.paramMap.subscribe(
-      (params: ParamMap) => this.reportId = params.get('reportId')
+      (params: ParamMap) => this.reportId = params.get('reportId')!
     );
-
     this.postSuccess = false;
-    this.initReviewForm();
-  }
-
-  initReviewForm() {
-    this.positiveCtrl = this.formBuilder.control('', Validators.required);
-    this.detailsCtrl = this.formBuilder.control('');
-    this.reviewForm = this.formBuilder.group({
-      positive: this.positiveCtrl,
-      details: this.detailsCtrl
-    });
   }
 
   submitReviewForm() {

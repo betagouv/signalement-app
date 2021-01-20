@@ -3,8 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { AccountEventActions, AnalyticsService, EventCategories } from '../../services/analytics.service';
 import { Router } from '@angular/router';
-
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 
 @Component({
@@ -14,49 +13,40 @@ import { AccountService } from '../../services/account.service';
 })
 export class PasswordChangeComponent implements OnInit {
 
-  changePasswordForm: FormGroup;
-  oldPasswordCtrl: FormControl;
-  passwordCtrl: FormControl;
-  confirmPasswordCtrl: FormControl;
+  readonly matchingPasswords = (passwordKey: string, confirmPasswordKey: string) => {
+    return (group: FormGroup) => {
+      const password = group.controls[passwordKey];
+      const confirmPassword = group.controls[confirmPasswordKey];
+      if (password.value !== confirmPassword.value) {
+        return { notEquivalent: true };
+      }
+    };
+  };
 
-  showErrors: boolean;
-  showSuccess: boolean;
-  authenticationError: string;
+  readonly oldPasswordCtrl = this.formBuilder.control('', Validators.required);
+  readonly passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(8)]);
+  readonly confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
+  readonly changePasswordForm = this.formBuilder.group({
+    oldPasswordCtrl: this.oldPasswordCtrl,
+    passwordCtrl: this.passwordCtrl,
+    confirmPasswordCtrl: this.confirmPasswordCtrl,
+  }, { validator: this.matchingPasswords('passwordCtrl', 'confirmPasswordCtrl') });
+
+  showErrors = false;
+  showSuccess = false;
+  authenticationError?: string;
 
   constructor(public formBuilder: FormBuilder,
     private titleService: Title,
     private meta: Meta,
     private accountService: AccountService,
     private analyticsService: AnalyticsService,
-    private router: Router) { }
+    private router: Router) {
+  }
 
   ngOnInit() {
     this.titleService.setTitle(pages.secured.account.changePassword.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.account.changePassword.description });
-    this.initForm();
-  }
-
-  initForm() {
-    function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-      return (group: FormGroup) => {
-        const password = group.controls[passwordKey];
-        const confirmPassword = group.controls[confirmPasswordKey];
-
-        if (password.value !== confirmPassword.value) {
-          return { notEquivalent: true };
-        }
-      };
-    }
-
-    this.oldPasswordCtrl = this.formBuilder.control('', Validators.required);
-    this.passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(8)]);
-    this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
-
-    this.changePasswordForm = this.formBuilder.group({
-      oldPasswordCtrl: this.oldPasswordCtrl,
-      passwordCtrl: this.passwordCtrl,
-      confirmPasswordCtrl: this.confirmPasswordCtrl,
-    }, { validator: matchingPasswords('passwordCtrl', 'confirmPasswordCtrl')});
   }
 
   submitForm() {
@@ -85,7 +75,6 @@ export class PasswordChangeComponent implements OnInit {
           } else {
             this.authenticationError = `Echec de la mise à jour du mot de passe`;
           }
-
         }
       );
     }
@@ -96,5 +85,4 @@ export class PasswordChangeComponent implements OnInit {
     this.showErrors = false;
     this.authenticationError = '';
   }
-
 }
