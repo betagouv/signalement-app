@@ -1,14 +1,7 @@
 {
   "compileOnSave": true,
-  "angularCompilerOptions": {
-    "strictTemplates": false,
-    "strictInjectionParameters": false,
-    "strictInputAccessModifiers.": false,
-    "fullTemplateTypeCheck": false
-  },
   "compilerOptions": {
     "baseUrl": "./",
-    "strict": true,
     "incremental": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
