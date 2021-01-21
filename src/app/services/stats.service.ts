@@ -2,19 +2,31 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { MonthlyStat, SimpleStat } from '../model/Statistics';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { iif, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatsService {
 
+  reportCountKey = makeStateKey<SimpleStat>('reportCount');
+
   constructor(private http: HttpClient,
-              private serviceUtils: ServiceUtils) {
+              private serviceUtils: ServiceUtils,
+              private transferState: TransferState) {
   }
 
   getReportCount() {
-    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'count']));
+    return iif(() => this.transferState.hasKey(this.reportCountKey),
+      of(this.transferState.get(this.reportCountKey, 0)).pipe(
+        tap(_ => this.transferState.remove(this.reportCountKey))
+      ),
+      this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'count'])).pipe(
+        tap(reportCount => this.transferState.set(this.reportCountKey, reportCount))
+      )
+    );
   }
 
   getMonthlyReportCount() {
