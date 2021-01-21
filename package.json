@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "npm run prebuild && npm run build:prod",
-    "build:server:prod": "ng run signalement-app:server --prod",
+    "build:server:prod": "ng run signalement-app:server:production",
     "build:browser:prod": "ng build --prod",
     "build:prod": "npm run build:server:prod && npm run build:browser:prod",
     "heroku-postbuild": "echo Skip build on Heroku",
