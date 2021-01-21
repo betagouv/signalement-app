@@ -20,7 +20,7 @@ export class StatsService {
 
   getReportCount() {
     return iif(() => this.transferState.hasKey(this.reportCountKey),
-      of(this.transferState.get(this.reportCountKey, 0)).pipe(
+      of(this.transferState.get(this.reportCountKey, { value: 0 })).pipe(
         tap(_ => this.transferState.remove(this.reportCountKey))
       ),
       this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'count'])).pipe(
