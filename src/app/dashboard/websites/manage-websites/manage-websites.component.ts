@@ -53,7 +53,7 @@ interface Form {
             </ng-container>
 
             <ng-container matColumnDef="host">
-              <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Host</th>
+              <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Site internet</th>
               <td class="td-host" mat-cell *matCellDef="let _">
                 <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
               </td>
