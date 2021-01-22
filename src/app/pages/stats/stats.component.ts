@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { MonthlyStat } from '../../model/Statistics';
@@ -8,6 +8,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { duration } from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
 import { take } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-stats',
@@ -28,7 +29,8 @@ export class StatsComponent implements OnInit {
   monthlyReportReadByProChart: EChartOption;
   monthlyReportWithResponseChart: EChartOption;
 
-  constructor(private statsService: StatsService,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private statsService: StatsService,
               private authenticationService: AuthenticationService,
               private titleService: Title,
               private meta: Meta) { }
@@ -46,6 +48,10 @@ export class StatsComponent implements OnInit {
       });
 
     this.loadStatistics();
+  }
+  
+  renderCharts() {
+    return isPlatformBrowser(this.platformId);
   }
 
   loadStatistics() {
