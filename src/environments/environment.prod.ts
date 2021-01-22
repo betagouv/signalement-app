@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiReportBaseUrl: 'http://localhost:9000',
+  apiReportBaseUrl: '${API_BASE_URL}',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
-  sentryDsn: '',
+  sentryDsn: '${SENTRY_DSN}',
 };
