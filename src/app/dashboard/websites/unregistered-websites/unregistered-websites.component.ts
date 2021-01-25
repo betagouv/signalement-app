@@ -19,8 +19,8 @@ import { AuthenticationService } from '../../../services/authentication.service'
 })
 export class UnregisteredWebsitesComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  @ViewChild(MatSort) sort?: MatSort;
 
   roles = Roles;
 
@@ -50,9 +50,9 @@ export class UnregisteredWebsitesComponent implements OnInit {
 
   fetchUnregisteredWebsites() {
     return this.websiteService.listUnregistered(
-      this.hostFilter ?? null,
-      (this.periodFilter && this.periodFilter[0]) ?? null,
-      (this.periodFilter && this.periodFilter[1]) ?? null
+      this.hostFilter,
+      (this.periodFilter && this.periodFilter[0]),
+      (this.periodFilter && this.periodFilter[1])
     ).pipe(
       tap(hosts => this.initializeDatatable(hosts))
     ).subscribe();
@@ -60,8 +60,8 @@ export class UnregisteredWebsitesComponent implements OnInit {
 
   initializeDatatable(hosts: HostWithReportCount[]) {
     this.dataSource = new MatTableDataSource(hosts);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator ?? null;
+    this.dataSource.sort = this.sort ?? null;
   }
 
   clearFilters() {
@@ -72,12 +72,11 @@ export class UnregisteredWebsitesComponent implements OnInit {
 
   extract() {
     this.websiteService.extractUnregistered(
-      this.hostFilter ?? null,
-      (this.periodFilter && this.periodFilter[0]) ?? null,
-      (this.periodFilter && this.periodFilter[1]) ?? null
+      this.hostFilter,
+      (this.periodFilter && this.periodFilter[0]),
+      (this.periodFilter && this.periodFilter[1])
     ).subscribe(() => {
       this.router.navigate(['mes-telechargements']);
     });
   }
-
 }
