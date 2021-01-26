@@ -28,6 +28,10 @@ table {
   color: $theme-color-text-secondary;
 }
 
+.td-count {
+  width: 100px;
+}
+
 .company-name {
   @include text-truncate;
   font-weight: bold;

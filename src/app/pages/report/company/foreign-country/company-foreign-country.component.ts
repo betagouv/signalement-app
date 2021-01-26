@@ -62,6 +62,9 @@ export class CompanyForeignCountryComponent implements OnInit {
   }
 
   submitForeignForm() {
+    if (this.countryCtrl.value) {
+      this.checkCountryValue();
+    }
     this.showErrors = false;
     if (!this.foreignForm.valid) {
       this.showErrors = true;
@@ -77,7 +80,7 @@ export class CompanyForeignCountryComponent implements OnInit {
     }
   }
 
-  countryTypeaheadOnBlur() {
+  checkCountryValue() {
     if (this.countries.indexOf(this.countryCtrl.value) === -1) {
       this.countryCtrl.reset();
     }

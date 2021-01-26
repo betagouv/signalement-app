@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../assets/data/pages.json';
 import { AsyncFilesService } from '../../services/asyncfiles.service';
@@ -11,7 +11,7 @@ import { Constants } from '../../model/Constants';
   selector: 'app-async',
   templateUrl: './asyncfiles.component.html'
 })
-export class AsyncFilesComponent implements OnInit {
+export class AsyncFilesComponent implements OnInit, OnDestroy {
 
   constructor(public formBuilder: FormBuilder,
               private titleService: Title,
@@ -19,8 +19,8 @@ export class AsyncFilesComponent implements OnInit {
               private asyncFileService: AsyncFilesService,
               private route: ActivatedRoute) { }
 
-  downloads: AsyncFile[];
-  loading: boolean;
+  downloads?: AsyncFile[];
+  loading = false;
   intervalId: any;
   constants = Constants;
 

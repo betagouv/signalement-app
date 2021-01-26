@@ -26,52 +26,52 @@ import pages from '../../../../assets/data/pages.json';
 })
 export class ReportDetailComponent implements OnInit {
 
-  reportId: string;
+  reportId!: string;
 
   eventActionValues = EventActionValues;
   permissions = Permissions;
   roles = Roles;
   statusColor = reportStatusColor;
 
-  report: Report;
+  report?: Report;
 
-  showErrors: boolean;
-  loading: boolean;
-  loadingError: boolean;
-  events: ReportEvent[];
-  companyEvents: ReportEvent[];
+  showErrors = false;
+  loading = false;
+  loadingError = false;
+  events?: ReportEvent[];
+  companyEvents?: ReportEvent[];
 
-  bsModalRef: BsModalRef;
-  reportIdToDelete: string;
+  bsModalRef?: BsModalRef;
+  reportIdToDelete?: string;
 
-  consumerForm: FormGroup;
-  firstNameCtrl: FormControl;
-  lastNameCtrl: FormControl;
-  emailCtrl: FormControl;
-  contactAgreementCtrl: FormControl;
+  consumerForm?: FormGroup;
+  firstNameCtrl?: FormControl;
+  lastNameCtrl?: FormControl;
+  emailCtrl?: FormControl;
+  contactAgreementCtrl?: FormControl;
 
-  responseForm: FormGroup;
-  responseConsumerDetailsCtrl: FormControl;
-  responseDgccrfDetailsCtrl: FormControl;
-  responseTypeCtrl: FormControl;
-  responseSuccess: boolean;
+  responseForm?: FormGroup;
+  responseConsumerDetailsCtrl?: FormControl;
+  responseDgccrfDetailsCtrl?: FormControl;
+  responseTypeCtrl?: FormControl;
+  responseSuccess?: boolean;
   reportResponseTypes = ReportResponseTypes;
   fileOrigins = FileOrigin;
-  uploadedFiles: UploadedFile[];
+  uploadedFiles?: UploadedFile[];
 
-  actionForm: FormGroup;
-  actionTypeCtrl: FormControl;
-  detailCtrl: FormControl;
+  actionForm?: FormGroup;
+  actionTypeCtrl?: FormControl;
+  detailCtrl?: FormControl;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private titleService: Title,
-              private meta: Meta,
-              public formBuilder: FormBuilder,
-              private reportService: ReportService,
-              private eventService: EventService,
-              private fileUploaderService: FileUploaderService,
-              private companyService: CompanyService,
-              private modalService: BsModalService,
+    private titleService: Title,
+    private meta: Meta,
+    public formBuilder: FormBuilder,
+    private reportService: ReportService,
+    private eventService: EventService,
+    private fileUploaderService: FileUploaderService,
+    private companyService: CompanyService,
+    private modalService: BsModalService,
               private route: ActivatedRoute,
               private router: Router,
               private platformLocation: PlatformLocation) { }
@@ -95,14 +95,14 @@ export class ReportDetailComponent implements OnInit {
   loadReport() {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.reportId = params.get('reportId');
+        this.reportId = params.get('reportId')!;
         return this.reportService.getReport(this.reportId);
       }),
       switchMap(report => {
         this.report = report;
         return combineLatest([
           this.eventService.getEvents(this.reportId),
-          iif(() => !!this.report.company.siret, this.eventService.getCompanyEvents(this.report.company.siret), of([]))
+          iif(() => !!this.report?.company.siret, this.eventService.getCompanyEvents(this.report!.company.siret!), of([]))
         ]);
       })
     ).subscribe(
@@ -122,6 +122,10 @@ export class ReportDetailComponent implements OnInit {
   }
 
   initConsumerForm() {
+    if (!this.report) {
+      console.error('[SignalConso] this.report is undefined', new Error().stack);
+      return;
+    }
     this.firstNameCtrl = this.formBuilder.control(this.report.consumer.firstName, Validators.required);
     this.lastNameCtrl = this.formBuilder.control(this.report.consumer.lastName, Validators.required);
     this.emailCtrl = this.formBuilder.control(this.report.consumer.email, [Validators.required, Validators.email]);
@@ -143,7 +147,7 @@ export class ReportDetailComponent implements OnInit {
   }
 
   backEnabled() {
-    return this.platformLocation.getState() && this.platformLocation.getState()['navigationId'] !== 1;
+    return this.platformLocation.getState() && (this.platformLocation.getState() as any)['navigationId'] !== 1;
   }
 
   getFileDownloadUrl(uploadedFile: UploadedFile) {
@@ -158,8 +162,8 @@ export class ReportDetailComponent implements OnInit {
   removeUploadedFile(uploadedFile: UploadedFile) {
     this.fileUploaderService.deleteFile(uploadedFile).subscribe(
       () => {
-        this.bsModalRef.hide();
-        this.report.uploadedFiles.splice(
+        this.bsModalRef?.hide();
+        this.report?.uploadedFiles.splice(
           this.report.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
           1
         );
@@ -172,7 +176,7 @@ export class ReportDetailComponent implements OnInit {
     this.reportService.deleteReport(this.reportId).subscribe(
       () => {
         this.loading = false;
-        this.bsModalRef.hide();
+        this.bsModalRef?.hide();
         this.platformLocation.back();
       },
       err => {
@@ -184,7 +188,7 @@ export class ReportDetailComponent implements OnInit {
   downloadReport() {
     if (isPlatformBrowser(this.platformId)) {
       this.reportService.downloadReport(this.reportId).subscribe(response => {
-        const blob = new Blob([(response as HttpResponse<Blob>).body], { type: 'application/pdf' });
+        const blob = new Blob([(response as HttpResponse<Blob>).body!], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'report.pdf';
@@ -201,6 +205,10 @@ export class ReportDetailComponent implements OnInit {
     this.reportService.updateReportCompany(this.reportId, company)
       .pipe(
         tap(report => {
+          if (!this.report) {
+            console.error('[SignalConso] this.report is undefined', new Error().stack);
+            return;
+          }
           this.report.status = report.status;
           this.report.company.siret = report.company.siret;
           this.report.company.name = report.company.name;
@@ -212,7 +220,7 @@ export class ReportDetailComponent implements OnInit {
       .subscribe(
         events => {
           this.events = events;
-          this.bsModalRef.hide();
+          this.bsModalRef?.hide();
         },
         err => {
           this.loading = false;
@@ -225,11 +233,11 @@ export class ReportDetailComponent implements OnInit {
     this.loadingError = false;
     const consumer = Object.assign(new Consumer(),
       {
-        firstName: this.firstNameCtrl.value,
-        lastName: this.lastNameCtrl.value,
-        email: this.emailCtrl.value
+        firstName: this.firstNameCtrl!.value,
+        lastName: this.lastNameCtrl!.value,
+        email: this.emailCtrl!.value
       });
-    const contactAgreement = this.contactAgreementCtrl.value;
+    const contactAgreement = this.contactAgreementCtrl!.value;
     this.reportService.updateReportConsumer(this.reportId, consumer, contactAgreement)
       .pipe(
         switchMap(() => {
@@ -238,10 +246,10 @@ export class ReportDetailComponent implements OnInit {
       )
       .subscribe(
         events => {
-          this.report.consumer = consumer;
-          this.report.contactAgreement = contactAgreement;
+          this.report!.consumer = consumer;
+          this.report!.contactAgreement = contactAgreement;
           this.events = events;
-          this.bsModalRef.hide();
+          this.bsModalRef?.hide();
         },
         err => {
           this.loading = false;
@@ -291,11 +299,11 @@ export class ReportDetailComponent implements OnInit {
   }
 
   isUploadingFile() {
-    return this.uploadedFiles.find(file => file.loading);
+    return this.uploadedFiles?.find(file => file.loading);
   }
 
   submitProAnswerForm() {
-    if (!this.responseForm.valid) {
+    if (!this.responseForm?.valid) {
       this.showErrors = true;
     } else {
       this.loading = true;
@@ -303,10 +311,10 @@ export class ReportDetailComponent implements OnInit {
       this.reportService.postReportResponse(
         this.reportId,
         Object.assign(new ReportResponse(), {
-          responseType: this.responseTypeCtrl.value,
-          consumerDetails: this.responseConsumerDetailsCtrl.value,
-          dgccrfDetails: this.responseDgccrfDetailsCtrl.value,
-          fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
+          responseType: this.responseTypeCtrl!.value,
+          consumerDetails: this.responseConsumerDetailsCtrl!.value,
+          dgccrfDetails: this.responseDgccrfDetailsCtrl!.value,
+          fileIds: this.uploadedFiles!.filter(file => file.id).map(file => file.id)
         })
       ).subscribe(
         _ => {
@@ -322,7 +330,7 @@ export class ReportDetailComponent implements OnInit {
   }
 
   submitActionForm() {
-    if (!this.actionForm.valid) {
+    if (!this.actionForm?.valid) {
       this.showErrors = true;
     } else {
       this.loading = true;
@@ -330,9 +338,9 @@ export class ReportDetailComponent implements OnInit {
       this.reportService.postReportAction(
         this.reportId,
         Object.assign(new ReportAction(), {
-          actionType: this.actionTypeCtrl.value,
-          details: this.detailCtrl.value,
-          fileIds: this.uploadedFiles.filter(file => file.id).map(file => file.id)
+          actionType: this.actionTypeCtrl!.value,
+          details: this.detailCtrl!.value,
+          fileIds: this.uploadedFiles!.filter(file => file.id).map(file => file.id)
         })
       ).subscribe(
         events => {
@@ -358,7 +366,7 @@ export class ReportDetailComponent implements OnInit {
     }
   }
 
-  getReportResponse(): ReportResponse {
+  getReportResponse(): ReportResponse | undefined {
     const reportResponseEvent = this.getEvent(EventActionValues.ReportResponse);
     if (reportResponseEvent) {
       return reportResponseEvent.data.details as ReportResponse;
@@ -374,6 +382,6 @@ export class ReportDetailComponent implements OnInit {
   }
 
   isClosed() {
-    return this.report.status === ReportStatus.ClosedForPro;
+    return this.report?.status === ReportStatus.ClosedForPro;
   }
 }
