@@ -35,12 +35,22 @@
   <ng-template #changeAddress>
     <div class="modal-body text-center">
       <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
-        <input [value]="userAccess.companyName" disabled />
+        <input [formControl]="companyNameCtrl" placeholder="Nom de l'entreprise" id="companyName" />
         <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
         <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
         <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
         <input [formControl]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
         <input [formControl]="cityCtrl" placeholder="Ville" id="city" />
+        <div class="row text-left pt-3">
+          <div class="col-2 col-sm-1 text-right pr-1">
+            <input type="checkbox" [formControl]="activationDocumentRequiredCtrl" id="activationDocumentRequired"/>
+          </div>
+          <div class="col-10 col-sm-11 pl-1">
+            <label class="d-block mb-0 pointer" for="activationDocumentRequired">
+              Envoyer un nouveau courrier
+            </label>
+          </div>
+        </div>
 
         <div class="notification error" *ngIf="loadingError">
           Une erreur technique s'est produite<br />
