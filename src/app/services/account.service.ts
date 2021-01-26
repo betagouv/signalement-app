@@ -59,8 +59,8 @@ export class AccountService {
       mergeMap(headers => {
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'document', 'activation']),
-          { reportIds : Array.from(reportuuids) },
-          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+          { reportIds: Array.from(reportuuids) },
+          { ...headers, responseType: 'blob', observe: 'response' },
         );
       })
     );
