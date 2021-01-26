@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 export interface RequestOption {
   qs?: any;
@@ -54,10 +54,10 @@ export class ApiClient {
         headers: options?.headers,
         params: options?.qs,
         data: options?.body,
-      }).then(mapData ?? (_ => _))
+      }).then(mapData ?? ((_: AxiosResponse) => _.data))
         .catch(mapError ?? ((_: AxiosError) => {
           console.error('[ApiClient] ' + _);
-          throw new ApiError(+(_?.code || '500'), _.response?.data);
+          throw new ApiError(_.response.status as StatusCode, _.response?.data);
         }));
     };
   }
