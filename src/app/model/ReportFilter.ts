@@ -43,7 +43,7 @@ export interface ReportFilterQuerystring {
 
 export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuerystring => {
   try {
-    const { period, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
+    const { start, end, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
     return {
       ...r,
       offset: offset ? offset + '' : '0',
@@ -51,11 +51,11 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
       ...(hasCompany !== undefined &&  {hasCompany: '' + hasCompany}),
       ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
       ...(departments ? { departments: departments.join(',') } : {}),
-      ...((period && period[0]) ? { start: Utils.mapDate(period[0]) } : {}),
-      ...((period && period[1]) ? { end: Utils.mapDate(period[1]) } : {}),
+      ...((start) ? { start: Utils.mapDate(start) } : {}),
+      ...((end) ? { end: Utils.mapDate(end) } : {}),
     };
   } catch (e) {
-    console.error('Caught error on "reportFilter2QueryString"', report, e);
+    console.error('[SignalConso] Caught error on "reportFilter2QueryString"', report, e);
     return {};
   }
 };

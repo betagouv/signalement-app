@@ -28,7 +28,8 @@ export class ReportListComponent implements OnInit {
 
   readonly formControlNamesWithAutomaticRefresh: (keyof ReportFilter)[] = [
     'departments',
-    'period',
+    'start',
+    'end',
   ];
 
   loading: boolean;
@@ -37,7 +38,7 @@ export class ReportListComponent implements OnInit {
   reports: PaginatedData<Report>;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private titleService: Title,
     private meta: Meta,
     private fb: FormBuilder,
@@ -65,18 +66,16 @@ export class ReportListComponent implements OnInit {
         departments,
         companyCountries,
         hasCompany,
-        start,
-        end,
+        ...restQs
       } = qs;
       return {
-        ...qs,
+        ...restQs,
         offset: +offset ?? 0,
         limit: +limit ?? this.defaultPageSize,
         tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
         departments: departments?.split(','),
         companyCountries: companyCountries?.split(','),
         hasCompany: parseBooleanOption(hasCompany),
-        period: (start && end) && [new Date(start).toString(), new Date(end).toString()],
       };
     } catch (e) {
       console.error('Caught error on "reportFilterFromQueryString"', qs, e);
@@ -90,7 +89,8 @@ export class ReportListComponent implements OnInit {
       departments: [],
       companyCountries: [],
       details: undefined,
-      period: undefined,
+      start: undefined,
+      end: undefined,
       siret: undefined,
       status: undefined,
       hasCompany: undefined,
@@ -161,6 +161,7 @@ export class ReportListComponent implements OnInit {
     // Avoid polluting the querystring
     const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
     this.updateQueryString(cleanedReport);
+    console.log('search', cleanedReport);
     this.loading = true;
     this.loadingError = false;
     this.reportService.getReports(cleanedReport).subscribe((result: PaginatedData<Report>) => {

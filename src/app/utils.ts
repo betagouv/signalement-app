@@ -22,7 +22,7 @@ export default class Utils {
     return Object.keys(cleanedObj).length > 0 ? cleanedObj : undefined;
   };
 
-  static mapDate = (date: string): string => format(parseJSON(date), 'yyyy-MM-dd');
+  static mapDate = (date: string): any => format(parseJSON(date), 'yyyy-MM-dd');
 
   static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 }

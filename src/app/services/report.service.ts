@@ -10,7 +10,6 @@ import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter, reportFilter2QueryString } from '../model/ReportFilter';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from '../model/Company';
-import Utils from '../utils';
 
 @Injectable({
   providedIn: 'root',
@@ -205,13 +204,13 @@ export class ReportService {
   }
 
   private reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
-    const { period, offset, departments, tags, limit, ...rest } = report;
+    const { start, end, offset, departments, tags, limit, ...rest } = report;
     return {
       ...rest,
       departments: departments || [],
       tags: tags || [],
-      ...((period && period[0]) ? { start: Utils.mapDate(period[0]) } : {}),
-      ...((period && period[1]) ? { end: Utils.mapDate(period[1]) } : {}),
+      // ...((period && period[0]) ? { start: Utils.mapDate(period[0]) } : {}),
+      // ...((period && period[1]) ? { end: Utils.mapDate(period[1]) } : {}),
     };
   };
 

@@ -17,15 +17,25 @@ import { ReportFilter } from '../../../../model/ReportFilter';
         placeholder="Département(s)" formControlName="departments" id="rls-departments"
         class="form-control form-control-material">
       </app-select-departments>
-      <input
-        class="form-control form-control-material"
-        formControlName="period"
-        bsDaterangepicker
-        autocomplete="off"
-        placeholder="Période sélectionnée"
-        [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
-        triggers="click keypress"
-      />
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input formControlName="start" matStartDate placeholder="Start date">
+          <input formControlName="end" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+      <!--      <input-->
+      <!--        class="form-control form-control-material"-->
+      <!--        formControlName="period"-->
+      <!--        bsDaterangepicker-->
+      <!--        autocomplete="off"-->
+      <!--        placeholder="Période sélectionnée"-->
+      <!--        [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"-->
+      <!--        triggers="click keypress"-->
+      <!--      />-->
 
       <div class="txt-secondary text-nowrap">
         <button mat-icon-button (click)="extracted.emit()" matTooltip="Exporter en XLS">
