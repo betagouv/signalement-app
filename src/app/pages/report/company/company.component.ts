@@ -97,16 +97,18 @@ export class CompanyComponent implements OnInit {
   }
 
   submitCompany(draftCompany?: DraftCompany & {vendor?: string}) {
-    if (this.changeDraftCompany) {
-      this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
-      this.draftReport.draftCompany = {
-        ...draftCompany,
-        website: this.draftWebsite,
-        phone: this.draftPhone,
-      };
-      this.draftReport.vendor = draftCompany.vendor;
-      this.changeDraftCompany = false;
-    }
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
+    this.draftReport.draftCompany = {
+      ...draftCompany,
+      website: this.draftWebsite,
+      phone: this.draftPhone,
+    };
+    this.draftReport.vendor = draftCompany.vendor;
+    this.changeDraftCompany = false;
+    this.nextStep();
+  }
+
+  nextStep() {
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }
