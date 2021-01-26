@@ -96,8 +96,9 @@
             - title: Date de livraison des produits ou réalisation des travaux non précisée
             - title: Autre
         - title: Démarchage téléphonique
+          companyKind: PHONE
         - title: Information mensongère ou trompeuse
-          subcategories: 
+          subcategories:
             - title: Mise en avant d'un label ou d'un signe de qualité non ou plus détenu
               detailInputs:
                 - label: Qu'est-ce qui est trompeur ou mensonger&#160;?

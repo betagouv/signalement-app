@@ -29,7 +29,8 @@ export type Tag = string;
 
 export enum CompanyKinds {
   SIRET = 'SIRET',
-  WEBSITE = 'WEBSITE'
+  WEBSITE = 'WEBSITE',
+  PHONE = 'PHONE'
 }
 
 interface Category {

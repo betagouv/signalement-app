@@ -56,6 +56,7 @@ export class ReportService {
         companySiret: draftReport.draftCompany.siret,
         companyActivityCode: draftReport.draftCompany.activityCode,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
+        phone: draftReport.draftCompany.phone,
         vendor: draftReport.vendor
       },
     );
@@ -239,6 +240,7 @@ export class ReportService {
       }),
       website: Object.assign(new WebsiteURL(), { url: report.websiteURL }),
       vendor: report.vendor,
+      phone: report.phone,
       contactAgreement: report.contactAgreement,
       employeeConsumer: report.employeeConsumer,
       uploadedFiles: files ? files.map(f => Object.assign(new UploadedFile(), f)) : [],

@@ -22,6 +22,7 @@ import { CompanySearchByNameComponent } from './search-by-name-component/company
 import { CompanySearchByIdentityComponent } from './search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './search-by-website/company-search-by-website.component';
 import { ConstantService } from '../../../services/constant.service';
+import { CompanySearchByPhoneComponent } from './search-by-phone/company-search-by-phone.component';
 
 describe('CompanyComponent', () => {
 
@@ -39,7 +40,8 @@ describe('CompanyComponent', () => {
         CompanyForeignCountryComponent,
         CompanySearchByNameComponent,
         CompanySearchByIdentityComponent,
-        CompanySearchByWebsiteComponent
+        CompanySearchByWebsiteComponent,
+        CompanySearchByPhoneComponent,
       ],
       imports: [
         FormsModule,
@@ -169,6 +171,82 @@ describe('CompanyComponent', () => {
         nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
         nativeElement.querySelector('form#websiteForm #urlInput').dispatchEvent(new Event('input'));
         nativeElement.querySelectorAll('form#websiteForm button')[0].click();
+        fixture.detectChanges();
+
+        component.identificationKind = IdentificationKinds.None;
+        fixture.detectChanges();
+
+        expect(nativeElement.querySelectorAll('input[type="radio"][name="isForeignCompany"]').length).toBe(3);
+
+      });
+
+    });
+
+  });
+
+  describe('case of searching company with PHONE', () => {
+
+    beforeEach(() => {
+      const draftReportInProgress = Object.assign(genDraftReport(Step.Details), {
+        subcategories: [Object.assign(genSubcategory(), { companyKind: CompanyKinds.PHONE })]
+      });
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+      fixture = TestBed.createComponent(CompanyComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('should initialize phone form with a single input and display it', () => {
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelector('form#phoneForm')).not.toBeNull();
+      expect(nativeElement.querySelectorAll('input[type="tel"][name="phone"]').length).not.toBeNull();
+      expect(nativeElement.querySelector('form#searchForm')).toBeNull();
+      expect(nativeElement.querySelector('form#searchBySiretForm')).toBeNull();
+
+    });
+
+    it('should display radios for identification choice when no company found', () => {
+
+      spyOn(companyService, 'searchCompaniesByPhone').and.returnValue(of([]));
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('form#phoneForm #phoneInput').value = '0000000000';
+      nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
+      nativeElement.querySelectorAll('form#phoneForm button')[0].click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
+    });
+
+    it('should display results when company found', () => {
+
+      const companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
+      spyOn(companyService, 'searchCompaniesByPhone').and.returnValue(of(companySearchResults));
+
+      const nativeElement = fixture.nativeElement;
+      nativeElement.querySelector('form#phoneForm #phoneInput').value = '0000000000';
+      nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
+      nativeElement.querySelectorAll('form#phoneForm button')[0].click();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(companySearchResults.length);
+    });
+
+    describe('user unavailable to identify company', () => {
+
+      it('should ask the user whether the company is abroad or not', () => {
+
+        spyOn(companyService, 'searchCompaniesByPhone').and.returnValue(of([]));
+        spyOn(constantService, 'getCountries').and.returnValue(of([{'code': 'AFG', 'name': 'Afghanistan', 'european': false, 'transfer': false}]));
+
+        const nativeElement = fixture.nativeElement;
+        nativeElement.querySelector('form#phoneForm #phoneInput').value = '0000000000';
+        nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
+        nativeElement.querySelectorAll('form#phoneForm button')[0].click();
         fixture.detectChanges();
 
         component.identificationKind = IdentificationKinds.None;

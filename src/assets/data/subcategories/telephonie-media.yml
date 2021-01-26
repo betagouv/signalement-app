@@ -119,6 +119,7 @@
                   <br>Les numéros peu surtaxés (maximum 50 centimes l'appel) et les services de renseignements (numéro commençant par 118) ne sont pas compris dans ce blocage.
         - title: Je reçois des spams dans mes emails
         - title: J'ai eu un problème avec un démarcheur téléphonique
+          companyKind: PHONE
     - title: Autre
       example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
       tags:

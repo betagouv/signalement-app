@@ -35,7 +35,14 @@ class RawCompanyService {
   searchCompaniesByUrl(url: string) {
     return this.http.get<CompanySearchResult[]>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search-url']),
-      { params: {url: url}}
+      { params: { url }}
+    );
+  }
+
+  searchCompaniesByPhone(phone: string) {
+    return this.http.get<CompanySearchResult[]>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search-phone']),
+      { params: { phone }}
     );
   }
 

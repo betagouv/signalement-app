@@ -108,7 +108,8 @@ export class Report {
   tags: Tag[];
   company: Company;
   website: WebsiteURL;
-  vendor: string;
+  vendor?: string;
+  phone?: string;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
