@@ -1,4 +1,4 @@
-import {fetch as fetchPolyfill} from 'whatwg-fetch';
+import axios, { AxiosError } from 'axios';
 
 export interface RequestOption {
   qs?: any;
@@ -42,30 +42,27 @@ export class ApiClient {
     mapData,
     mapError,
   }: ApiClientParams) {
-    const mapResponse = (res: Response) => {
-      switch (res.status) {
-        case 200:
-          return res.json().catch(() => res.text()).catch(() => res);
-        default: {
-          console.error('[ApiClient]', res);
-          throw new ApiError(res.status as StatusCode, res.statusText);
-        }
-      }
-    };
+    const client = axios.create({
+      baseURL: baseUrl,
+      headers: { ...headers, },
+    });
+
     this.fetch = (method: Method, url: string, options?: RequestOption) => {
-      const urlToFetch = new URL(baseUrl + url );
-      Object.keys(options?.qs ?? {}).filter(key => options.qs[key]).forEach(key => urlToFetch.searchParams.append(key, options.qs[key]));
-      return fetchPolyfill(urlToFetch.toString()  , {
+      return client.request({
         method,
-        headers: { ...headers, ...options?.headers },
-        body: options && JSON.stringify(options.body),
-      }).then(mapResponse)
-        .then(mapData ?? (_ => _))
-        .catch(mapError ?? Promise.reject.bind(Promise));
+        url,
+        headers: options?.headers,
+        params: options?.qs,
+        data: options?.body,
+      }).then(mapData ?? (_ => _))
+        .catch(mapError ?? ((_: AxiosError) => {
+          console.error('[ApiClient] ' + _);
+          throw new ApiError(+(_?.code || '500'), _.response?.data);
+        }));
     };
   }
 
-  private readonly fetch: (method: Method, url: string, options: RequestOption) => Promise<any>;
+  private readonly fetch: (method: Method, url: string, options?: RequestOption) => Promise<any>;
 
   readonly get = <T = any>(uri: string, options?: RequestOption): Promise<T> => {
     return this.fetch('GET', uri, options);
