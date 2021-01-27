@@ -17,15 +17,12 @@ import { ReportFilter } from '../../../../model/ReportFilter';
         placeholder="Département(s)" formControlName="departments" id="rls-departments"
         class="form-control form-control-material">
       </app-select-departments>
-      <mat-form-field>
-        <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input formControlName="start" matStartDate placeholder="Start date">
-          <input formControlName="end" matEndDate placeholder="End date">
-        </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
+
+      <mat-date-range-input [rangePicker]="picker" (click)="picker.open()" class="form-control form-control-material">
+        <input formControlName="start" matStartDate placeholder="Start date">
+        <input formControlName="end" matEndDate placeholder="End date">
+      </mat-date-range-input>
+      <mat-date-range-picker #picker></mat-date-range-picker>
 
       <!--      <input-->
       <!--        class="form-control form-control-material"-->
