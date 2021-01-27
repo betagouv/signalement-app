@@ -22,7 +22,14 @@ export default class Utils {
     return Object.keys(cleanedObj).length > 0 ? cleanedObj : undefined;
   };
 
-  static mapDate = (date: string): any => format(parseJSON(date), 'yyyy-MM-dd');
+  static readonly dateToApi = (date: Date): string | undefined => date ? format(parseJSON(date), 'yyyy-MM-dd') : undefined;
+
+  static readonly apiToDate = (date?: string): Date | undefined => {
+    if (date) {
+      const [year, month, day] = date.split('-');
+      return new Date(+year, +month - 1, +day);
+    }
+  };
 
   static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 }

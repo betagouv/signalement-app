@@ -24,7 +24,7 @@ export class ReportService {
     private serviceUtils: ServiceUtils) {
   }
 
-  private _currentReportFilter = {};
+  private _currentReportFilter: ReportFilter = {};
 
   createReport(draftReport: DraftReport) {
     return this.http.post(

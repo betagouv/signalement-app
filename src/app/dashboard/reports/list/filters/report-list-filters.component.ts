@@ -19,8 +19,8 @@ import { ReportFilter } from '../../../../model/ReportFilter';
       </app-select-departments>
 
       <mat-date-range-input [rangePicker]="picker" (click)="picker.open()" class="form-control form-control-material">
-        <input formControlName="start" matStartDate placeholder="Start date">
-        <input formControlName="end" matEndDate placeholder="End date">
+        <input formControlName="start" matStartDate placeholder="Période sélectionnée">
+        <input formControlName="end" matEndDate placeholder="">
       </mat-date-range-input>
       <mat-date-range-picker #picker></mat-date-range-picker>
 
