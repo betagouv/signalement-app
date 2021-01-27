@@ -30,7 +30,6 @@ export class StatsService {
   }
 
   getReportReadByProMedianDelay() {
-    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'read', 'delay']));
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<SimpleStat>(
@@ -50,7 +49,6 @@ export class StatsService {
   }
 
   getReportWithResponseMedianDelay() {
-    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'responsed', 'delay']));
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<SimpleStat>(
@@ -62,4 +60,3 @@ export class StatsService {
   }
 
 }
-
