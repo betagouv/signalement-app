@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnregisteredReportedPhonesComponent } from './unregistered-reportedPhones.component';
 import { ComponentsModule } from '../../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -14,6 +13,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { User } from '../../../model/AuthUser';
 import { ReportedPhoneService } from '../../../services/reported-phone.service';
 import { ReportedPhonesTabsComponent } from '../reported-phones-tabs/reported-phones-tabs.component';
+import { UnregisteredReportedPhonesComponent } from './unregistered-reported-phones.component';
 
 describe('UnregisteredComponent', () => {
 
