@@ -127,7 +127,7 @@ export class CompanyAccessesService {
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'activation-document']),
           { companyIds : Array.from(companyIds) },
-          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+          { ...headers, responseType: 'blob', observe: 'response' }
         );
       })
     );
