@@ -125,12 +125,22 @@
   },
   "websites": {
     "manage": {
-      "title": "Modéreration des sites webs - SignalConso",
+      "title": "Modération des sites webs - SignalConso",
       "description": "Modérer les sites webs suggérés"
     },
     "unregistered": {
       "title": "Sites internet non identifiés - SignalConso",
       "description": "Consultez la liste des sites internet signalés qui ne sont pas rattachés à une entreprise"
+    }
+  },
+  "reportedPhones": {
+    "manage": {
+      "title": "Modération des numéros de téléphone - SignalConso",
+      "description": "Modérer les numéros de téléphones suggérés"
+    },
+    "unregistered": {
+      "title": "Numéro de téléphones non identifiés - SignalConso",
+      "description": "Consultez la liste des numéros de téléphone signalés qui ne sont pas rattachés à une entreprise"
     }
   },
   "companies": {

@@ -76,7 +76,7 @@ export class CompanyComponent implements OnInit {
 
   submitWebsite(draftCompany: DraftCompany & {vendor?: string}) {
     this.draftWebsite = draftCompany.website;
-    if (draftCompany.name) {
+    if (draftCompany.siret) {
       this.submitCompany(draftCompany);
     } else {
       this.requireIdentificationKind = true;
@@ -87,7 +87,7 @@ export class CompanyComponent implements OnInit {
 
   submitPhone(draftCompany: DraftCompany) {
     this.draftPhone = draftCompany.phone;
-    if (draftCompany.name) {
+    if (draftCompany.siret) {
       this.submitCompany(draftCompany);
     } else {
       this.requireIdentificationKind = true;
