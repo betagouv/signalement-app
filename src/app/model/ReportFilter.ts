@@ -75,3 +75,13 @@ export const reportFilterFromQueryString = (report: ReportFilterQuerystring): Re
   }
 };
 
+export const reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
+  const { start, end, offset, departments, tags, limit, ...rest } = report;
+  return {
+    ...rest,
+    departments: departments || [],
+    tags: tags || [],
+    start: Utils.dateToApi(start),
+    end: Utils.dateToApi(end),
+  };
+};

@@ -24,16 +24,6 @@ import { ReportFilter } from '../../../../model/ReportFilter';
       </mat-date-range-input>
       <mat-date-range-picker #picker></mat-date-range-picker>
 
-      <!--      <input-->
-      <!--        class="form-control form-control-material"-->
-      <!--        formControlName="period"-->
-      <!--        bsDaterangepicker-->
-      <!--        autocomplete="off"-->
-      <!--        placeholder="Période sélectionnée"-->
-      <!--        [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"-->
-      <!--        triggers="click keypress"-->
-      <!--      />-->
-
       <div class="txt-secondary text-nowrap">
         <button mat-icon-button (click)="extracted.emit()" matTooltip="Exporter en XLS">
           <mat-icon>get_app</mat-icon>
