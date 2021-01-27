@@ -2,37 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './service.utils';
 import { MonthlyStat, SimpleStat } from '../model/Statistics';
-import { mergeMap, tap } from 'rxjs/operators';
-import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { iif, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatsService {
 
-  reportCountKey = makeStateKey<SimpleStat>('reportCount');
-
   constructor(private http: HttpClient,
-              private serviceUtils: ServiceUtils,
-              private transferState: TransferState) {
+              private serviceUtils: ServiceUtils) {
   }
 
   getReportCount() {
-    return iif(() => this.transferState.hasKey(this.reportCountKey),
-      of(this.transferState.get(this.reportCountKey, { value: 0 })).pipe(
-        tap(_ => {
-          console.log('reportCount from transferState')
-          this.transferState.remove(this.reportCountKey)
-        })
-      ),
-      this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'count'])).pipe(
-        tap(reportCount => {
-          console.log('reportCount from API')
-          this.transferState.set(this.reportCountKey, reportCount)
-        })
-      )
-    );
+    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'count']));
   }
 
   getMonthlyReportCount() {
@@ -48,6 +30,7 @@ export class StatsService {
   }
 
   getReportReadByProMedianDelay() {
+    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'read', 'delay']));
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<SimpleStat>(
@@ -67,6 +50,7 @@ export class StatsService {
   }
 
   getReportWithResponseMedianDelay() {
+    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'responsed', 'delay']));
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<SimpleStat>(
@@ -78,3 +62,4 @@ export class StatsService {
   }
 
 }
+
