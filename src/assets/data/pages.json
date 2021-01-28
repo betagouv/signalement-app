@@ -134,14 +134,8 @@
     }
   },
   "reportedPhones": {
-    "manage": {
-      "title": "Modération des numéros de téléphone - SignalConso",
-      "description": "Modérer les numéros de téléphones suggérés"
-    },
-    "unregistered": {
-      "title": "Numéro de téléphones non identifiés - SignalConso",
-      "description": "Consultez la liste des numéros de téléphone signalés qui ne sont pas rattachés à une entreprise"
-    }
+    "title": "Suivi des numéros de téléphones signalés - SignalConso",
+    "description": "Consultez la liste des numéros de téléphone signalés"
   },
   "companies": {
     "myCompanies": {

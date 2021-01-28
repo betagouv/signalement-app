@@ -1,94 +1,61 @@
 import { Injectable } from '@angular/core';
 import { ServiceUtils } from './service.utils';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, mergeMap, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { ApiReportedPhone, ApiReportedPhoneCreate, ApiReportedPhoneUpdateCompany, ApiReportedPhoneWithCompany } from '../api-sdk/model/ApiReportedPhone';
-import { Id } from '../api-sdk/model/Common';
 import { ApiError } from '../api-sdk/ApiClient';
-import { Index } from '../model/Common';
-import { CRUDListService } from './helper/CRUDListService';
 import { PhoneWithReportCount } from '../model/ReportedPhone';
 import format from 'date-fns/format';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReportedPhoneService extends CRUDListService<ApiReportedPhoneWithCompany, ApiReportedPhoneCreate, Partial<ApiReportedPhone>> {
+export class ReportedPhoneService {
 
-  constructor(protected utils: ServiceUtils) {
-    super(utils, {
-      list: () => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.reportedPhone.list())),
-      update: (id: Id, u: Partial<ApiReportedPhone>) => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.reportedPhone.update(id, u))),
-      remove: (id: Id) => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.reportedPhone.remove(id))),
-    });
+  constructor(private http: HttpClient,
+              private serviceUtils: ServiceUtils) {
   }
 
-  private _updateCompanyError: Index<ApiError> = {};
-  readonly updateCompanyError = (id: string): ApiError => this._updateCompanyError[id];
+  protected source = new BehaviorSubject<PhoneWithReportCount[] | undefined>(undefined);
 
-  private _updatingCompany = new Set<string>();
-  readonly updatingCompany = (id: string) => this._updatingCompany.has(id);
+  private _fetching = false;
+  get fetching() {
+    return this._fetching;
+  }
 
-  readonly updateCompany = (id: Id, reportedPhone: ApiReportedPhoneUpdateCompany): Observable<ApiReportedPhoneWithCompany> => {
-    return this.utils.getSecuredReportApiSdk.pipe(
+  private _fetchError?: ApiError;
+  get fetchError() {
+    return this._fetchError;
+  }
+
+  readonly fetch = (q?: string, start?: Date, end?: Date): Observable<PhoneWithReportCount[]> => {
+    return this.serviceUtils.getSecuredReportApiSdk.pipe(
       tap(_ => {
-        this._updatingCompany.add(id);
-        delete this._updateCompanyError[id];
+        this._fetching = true;
+        this._fetchError = undefined;
       }),
-      mergeMap(api => api.reportedPhone.updateCompany(id, reportedPhone)),
-      map((updatedReportedPhone: ApiReportedPhoneWithCompany) => {
-        this.source.next((this.source.value ?? []).map((_: ApiReportedPhoneWithCompany) => _.id === id ? updatedReportedPhone : _));
-        this._updatingCompany.delete(id);
-        return updatedReportedPhone;
-      }),
-      catchError((err: ApiError) => {
-        this._updatingCompany.delete(id);
-        this._updateCompanyError[id] = err;
-        return throwError(err);
-      }),
-    );
-  };
-
-  protected unregisteredSource = new BehaviorSubject<PhoneWithReportCount[] | undefined>(undefined);
-
-  private _fetchingUnregistered = false;
-  get fetchingUnregistered() {
-    return this._fetchingUnregistered;
-  }
-
-  private _fetchUnregisteredError?: ApiError;
-  get fetchUnregisteredError() {
-    return this._fetchUnregisteredError;
-  }
-
-  readonly listUnregistered = (q?: string, start?: Date, end?: Date): Observable<PhoneWithReportCount[]> => {
-    return this.utils.getSecuredReportApiSdk.pipe(
-      tap(_ => {
-        this._fetchingUnregistered = true;
-        this._fetchUnregisteredError = undefined;
-      }),
-      mergeMap(api => api.reportedPhone.listUnregistered(
+      mergeMap(api => api.reportedPhone.list(
         q,
         start ? format(start, 'yyyy-MM-dd') : null,
         end ? format(end, 'yyyy-MM-dd') : null)
       ),
       tap(r => {
-        this._fetchingUnregistered = false;
-        this.unregisteredSource.next(r);
+        this._fetching = false;
+        this.source.next(r);
       }),
-      mergeMap(_ => this.unregisteredSource.asObservable()),
+      mergeMap(_ => this.source.asObservable()),
       catchError((err: ApiError) => {
-        this._fetchingUnregistered = false;
-        this._fetchUnregisteredError = err;
+        this._fetching = false;
+        this._fetchError = err;
         return throwError(err);
       })
     );
   }
 
 
-  readonly extractUnregistered = (q?: string, start?: Date, end?: Date): Observable<PhoneWithReportCount[]> => {
-    return this.utils.getSecuredReportApiSdk.pipe(
-      mergeMap(api => api.reportedPhone.extractUnregistered(
+  readonly extract = (q?: string, start?: Date, end?: Date): Observable<PhoneWithReportCount[]> => {
+    return this.serviceUtils.getSecuredReportApiSdk.pipe(
+      mergeMap(api => api.reportedPhone.extract(
         q,
         start ? format(start, 'yyyy-MM-dd') : null,
         end ? format(end, 'yyyy-MM-dd') : null)

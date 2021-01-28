@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComponentsModule } from '../../../components/components.module';
-import { SharedModule } from '../../shared/shared.module';
+import { ComponentsModule } from '../../components/components.module';
+import { SharedModule } from '../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
@@ -9,23 +9,23 @@ import { addMonths } from 'date-fns';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthenticationService } from '../../../services/authentication.service';
-import { User } from '../../../model/AuthUser';
-import { ReportedPhoneService } from '../../../services/reported-phone.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { User } from '../../model/AuthUser';
+import { ReportedPhoneService } from '../../services/reported-phone.service';
 import { ReportedPhonesTabsComponent } from '../reported-phones-tabs/reported-phones-tabs.component';
-import { UnregisteredReportedPhonesComponent } from './unregistered-reported-phones.component';
+import { ReportedPhonesComponent } from './reported-phones.component';
 
 describe('UnregisteredComponent', () => {
 
-  let component: UnregisteredReportedPhonesComponent;
-  let fixture: ComponentFixture<UnregisteredReportedPhonesComponent>;
+  let component: ReportedPhonesComponent;
+  let fixture: ComponentFixture<ReportedPhonesComponent>;
   let reportedPhoneService: ReportedPhoneService;
   let authenticationService: AuthenticationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        UnregisteredReportedPhonesComponent,
+        ReportedPhonesComponent,
         ReportedPhonesTabsComponent
       ],
       imports: [
@@ -45,7 +45,7 @@ describe('UnregisteredComponent', () => {
     authenticationService = TestBed.inject(AuthenticationService);
     authenticationService.user = of(Object.assign(new User(), { role: 'Admin' }));
     reportedPhoneService = TestBed.inject(ReportedPhoneService);
-    fixture = TestBed.createComponent(UnregisteredReportedPhonesComponent);
+    fixture = TestBed.createComponent(ReportedPhonesComponent);
     component = fixture.componentInstance;
   });
 

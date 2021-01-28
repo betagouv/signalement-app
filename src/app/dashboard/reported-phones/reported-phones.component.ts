@@ -1,23 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { ReportedPhoneService } from '../../../services/reported-phone.service';
-import pages from '../../../../assets/data/pages.json';
+import { ReportedPhoneService } from '../../services/reported-phone.service';
+import pages from '../../../assets/data/pages.json';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { tap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
-import { Roles } from '../../../model/AuthUser';
-import { AuthenticationService } from '../../../services/authentication.service';
-import { PhoneWithReportCount } from '../../../model/ReportedPhone';
+import { Roles } from '../../model/AuthUser';
+import { AuthenticationService } from '../../services/authentication.service';
+import { PhoneWithReportCount } from '../../model/ReportedPhone';
 
 @Component({
-  selector: 'app-unregistered-reported-phones',
-  templateUrl: './unregistered-reported-phones.component.html',
-  styleUrls: ['./unregistered-reported-phones.component.scss']
+  selector: 'app-reported-phones',
+  templateUrl: './reported-phones.component.html',
+  styleUrls: ['./reported-phones.component.scss']
 })
-export class UnregisteredReportedPhonesComponent implements OnInit {
+export class ReportedPhonesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -31,6 +31,7 @@ export class UnregisteredReportedPhonesComponent implements OnInit {
 
   readonly columns = [
     'phone',
+    'siret',
     'count',
   ];
 
@@ -42,14 +43,14 @@ export class UnregisteredReportedPhonesComponent implements OnInit {
               public reportedPhoneService: ReportedPhoneService) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.reportedPhones.unregistered.title);
-    this.meta.updateTag({ name: 'description', content: pages.reportedPhones.unregistered.description });
+    this.titleService.setTitle(pages.reportedPhones.title);
+    this.meta.updateTag({ name: 'description', content: pages.reportedPhones.description });
     this.localeService.use('fr');
-    this.fetchUnregisteredReportedPhones();
+    this.fetchReportedPhones();
   }
 
-  fetchUnregisteredReportedPhones() {
-    return this.reportedPhoneService.listUnregistered(
+  fetchReportedPhones() {
+    return this.reportedPhoneService.fetch(
       this.phoneFilter ?? null,
       (this.periodFilter && this.periodFilter[0]) ?? null,
       (this.periodFilter && this.periodFilter[1]) ?? null
@@ -67,11 +68,11 @@ export class UnregisteredReportedPhonesComponent implements OnInit {
   clearFilters() {
     this.periodFilter = undefined;
     this.phoneFilter = undefined;
-    this.fetchUnregisteredReportedPhones();
+    this.fetchReportedPhones();
   }
 
   extract() {
-    this.reportedPhoneService.extractUnregistered(
+    this.reportedPhoneService.extract(
       this.phoneFilter ?? null,
       (this.periodFilter && this.periodFilter[0]) ?? null,
       (this.periodFilter && this.periodFilter[1]) ?? null
