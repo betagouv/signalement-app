@@ -18,7 +18,7 @@ export class ApiClientMock implements ApiClientApi {
 
     this.fetch = async <T>(method: Method, url: string, options?: RequestOption): Promise<T> => {
       // @ts-ignore bypass private method
-      const builtOptions = ApiClient.buildOptions(options, headers, requestInterceptor);
+      const builtOptions = await ApiClient.buildOptions(options, headers, requestInterceptor);
       // @ts-ignore bypass private method
       const builtUrl = ApiClient.buildUrl(baseUrl, url, options);
 
