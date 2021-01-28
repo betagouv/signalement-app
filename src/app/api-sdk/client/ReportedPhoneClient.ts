@@ -1,10 +1,4 @@
-import {
-  ApiPhoneWithReportCount,
-  ApiReportedPhone,
-  ApiReportedPhoneUpdateCompany,
-  ApiReportedPhoneWithCompany,
-} from '../model/ApiReportedPhone';
-import { Id } from '../model/Common';
+import { ApiPhoneWithReportCount } from '../model/ApiReportedPhone';
 import { ApiClient } from '../ApiClient';
 
 export class ReportedPhoneClient {

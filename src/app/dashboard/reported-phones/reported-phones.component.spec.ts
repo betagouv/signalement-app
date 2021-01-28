@@ -12,8 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import { ReportedPhoneService } from '../../services/reported-phone.service';
-import { ReportedPhonesTabsComponent } from '../reported-phones-tabs/reported-phones-tabs.component';
 import { ReportedPhonesComponent } from './reported-phones.component';
+import { genPhone, genSiret } from '../../../../test/fixtures.spec';
 
 describe('UnregisteredComponent', () => {
 
@@ -25,8 +25,7 @@ describe('UnregisteredComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ReportedPhonesComponent,
-        ReportedPhonesTabsComponent
+        ReportedPhonesComponent
       ],
       imports: [
         ComponentsModule,
@@ -49,9 +48,9 @@ describe('UnregisteredComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should list unregistered-reportedPhones reportedPhones in a datatable', () => {
+  it('should list reportedPhones in a datatable', () => {
 
-    spyOn(reportedPhoneService, 'listUnregistered').and.callFake(() => of([{ phone: 'phone1.fr', count: 1}, { phone: 'phone2.fr', count: 2}]));
+    spyOn(reportedPhoneService, 'fetch').and.callFake(() => of([{ phone: genPhone(), siret: genSiret(), count: 1}, { phone: genPhone(), count: 2}]));
 
     fixture.detectChanges();
 
@@ -63,7 +62,7 @@ describe('UnregisteredComponent', () => {
 
   it('should request the API on filtering', () => {
 
-    const reportedPhoneServiceSpy = spyOn(reportedPhoneService, 'listUnregistered').and.callFake(() => of([{ phone: 'phone1.fr', count: 1}, { phone: 'phone2.fr', count: 2}]));
+    const reportedPhoneServiceSpy = spyOn(reportedPhoneService, 'fetch').and.callFake(() => of([{ phone: genPhone(), siret: genSiret(), count: 1}, { phone: genPhone(), count: 2}]));
 
     const q = 'phone';
     const start = addMonths(new Date(), -1);
