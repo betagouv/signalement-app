@@ -44,7 +44,7 @@ interface Form {
 
 
         <div class="table-overflow">
-          <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
+          <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="count" matSortDirection="desc">
             <ng-container matColumnDef="creationDate">
               <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-date">Date</th>
               <td mat-cell *matCellDef="let _" class="td-date">
@@ -156,7 +156,7 @@ export class ManageWebsitesComponent implements OnInit {
   private initForm = (): void => {
     this.form = this.fb.group({
       host: '',
-      kind: [['']],
+      kind: [[ApiWebsiteKind.PENDING]],
     });
   };
 
