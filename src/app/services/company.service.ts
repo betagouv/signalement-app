@@ -39,13 +39,6 @@ class RawCompanyService {
     );
   }
 
-  searchCompaniesByPhone(phone: string) {
-    return this.http.get<CompanySearchResult[]>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search-phone']),
-      { params: { phone }}
-    );
-  }
-
   searchRegisterCompanies(search: string) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('q', search);

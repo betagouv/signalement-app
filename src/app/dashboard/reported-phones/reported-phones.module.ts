@@ -11,21 +11,16 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { AppPermissionModule } from '../../directives/app-permission/app-permission.module';
 import { CompanySearchResultsModule } from '../../components/company-search-results/company-search-results.module';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
-import { ManageReportedPhonesComponent } from './manage-reported-phones/manage-reported-phones.component';
-import { UnregisteredReportedPhonesComponent } from './unregistered-reported-phones/unregistered-reported-phones.component';
-import { ReportedPhonesTabsComponent } from './reported-phones-tabs/reported-phones-tabs.component';
+import { ReportedPhonesComponent } from './reported-phones.component';
 
 /* tslint:disable:max-line-length */
 const routes: Routes = [
-  { path: 'moderation-telephones', component: ManageReportedPhonesComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
-  { path: 'telephones/non-identifies', component: UnregisteredReportedPhonesComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
+  { path: 'suivi-des-telephones', component: ReportedPhonesComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
 ];
 
 @NgModule({
   declarations: [
-    UnregisteredReportedPhonesComponent,
-    ManageReportedPhonesComponent,
-    ReportedPhonesTabsComponent
+    ReportedPhonesComponent,
   ],
   imports: [
     FormsModule,

@@ -1,10 +1,9 @@
 <app-banner title="Suivi des téléphones"></app-banner>
 
 <app-page animated="false">
-  <app-reported-phones-tabs></app-reported-phones-tabs>
-  <app-panel [loading]="reportedPhoneService.fetchingUnregistered">
+  <app-panel [loading]="reportedPhoneService.fetching">
     <app-panel-header>
-      <input [(ngModel)]="phoneFilter" class="form-control form-control-material phone-form-control" placeholder="Numéro de téléphone" (keydown.enter)="fetchUnregisteredReportedPhones()"/>
+      <input [(ngModel)]="phoneFilter" class="form-control form-control-material phone-form-control" placeholder="Numéro de téléphone" (keydown.enter)="fetchReportedPhones()"/>
       <input
         class="form-control form-control-material"
         [(bsValue)]="periodFilter"
@@ -13,7 +12,7 @@
         placeholder="Période sélectionnée"
         [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
         triggers="click keypress"
-        (bsValueChange)="fetchUnregisteredReportedPhones()"
+        (bsValueChange)="fetchReportedPhones()"
       />
       <button mat-icon-button (click)="extract()" matTooltip="Exporter en XLS">
         <mat-icon>get_app</mat-icon>
@@ -30,7 +29,7 @@
           {{_.count}}
           &nbsp;
           <a [routerLink]="['/suivi-des-signalements', (authenticationService.user | async).roleUrlParam]"
-             [queryParams]="{phone: _.phone, start: periodFilter && periodFilter[0], end: periodFilter && periodFilter[1]}" app-btn color="primary" style="text-decoration: none">
+             [queryParams]="{phone: _.phone, siret: _.siret, start: periodFilter && periodFilter[0], end: periodFilter && periodFilter[1]}" app-btn color="primary" style="text-decoration: none">
             Voir
           </a>
         </td>
@@ -43,13 +42,20 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="siret">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>SIRET</th>
+        <td mat-cell *matCellDef="let _">
+          {{_.siret}}
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
       <tr mat-row *matRowDef="let row; columns: columns;"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" pageSize="25"></mat-paginator>
   </app-panel>
 
-  <div class="notification error" *ngIf="reportedPhoneService.fetchUnregisteredError">
+  <div class="notification error" *ngIf="reportedPhoneService.fetchError">
     Une erreur technique s'est produite
   </div>
 </app-page>
