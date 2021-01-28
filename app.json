@@ -4,7 +4,11 @@
   },
   "env": {
     "API_BASE_URL": {
+<<<<<<< HEAD
       "value": "https://signalement-api-pr-651.herokuapp.com"
+=======
+      "value": "https://demo-signalement-api.beta.gouv.fr"
+>>>>>>> fixUniversal
     }
   },
   "formation": {
