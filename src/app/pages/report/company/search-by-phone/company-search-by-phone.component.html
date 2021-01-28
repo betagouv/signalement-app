@@ -2,7 +2,7 @@
   Informations sur l'entreprise
 </h2>
 
-<form [formGroup]="phoneForm" (submit)="searchCompanyByPhone()" id="phoneForm">
+<form [formGroup]="phoneForm" (submit)="submitPhone()" id="phoneForm">
   <div class="form__group mt-4">
     <label for="phoneInput" [class]="hasError(phoneCtrl) ? 'error' : ''">Numéro de téléphone (obligatoire)
     </label>
@@ -25,29 +25,3 @@
     <i class="material-icons md-18 edit" aria-hidden="true">edit</i>
   </div>
 </ng-template>
-
-<div #identByPhoneResult>
-  <div *ngIf="companySearchByPhoneResults && companySearchByPhoneResults.length" class="mt-5">
-
-    <hr/>
-
-    <h2 class="mb-4 font-weight-bold">
-      Sélectionnez l'entreprise
-    </h2>
-
-    <app-company-search-results [companySearchResults]="companySearchByPhoneResults" (select)="selectCompany($event)"></app-company-search-results>
-
-    <div class="note mt-1">
-      L’entreprise n’apparaît pas ?
-    </div>
-    <div>
-      <button class="link p-0" (click)="changePhone()" aria-label="Modifier le numéro de téléphone">Corrigez</button> le numéro de téléphone et relancez votre recherche.
-    </div>
-
-    <hr *ngIf="selectedCompany"/>
-
-    <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCompany" (click)="submitCompany()">
-      Continuer
-    </button>
-  </div>
-</div>
