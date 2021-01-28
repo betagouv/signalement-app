@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiSdkService } from './core/api-sdk.service';
 import { catchError, mergeMap, tap } from 'rxjs/operators';
 import { ApiError } from '../api-sdk/ApiClient';
-import { BehaviorSubject, from, iif, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, EMPTY, from, iif, Observable, of, throwError } from 'rxjs';
 import { Country } from '../model/Country';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class ConstantService {
 
   readonly getCountries = () => iif(() => this.source.value !== undefined,
     this.source.asObservable() as Observable<Country[]>,
-    of(_ => _.next()).pipe(
+    EMPTY.pipe(
       tap(_ => {
         // To prevent the damned ExpressionChangedAfterItHasBeenCheckedError
         // https://github.com/angular/angular/issues/17572

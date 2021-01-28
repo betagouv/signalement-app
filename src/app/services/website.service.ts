@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiSdkService } from './core/api-sdk.service';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, of, throwError } from 'rxjs';
 import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../api-sdk/model/ApiWebsite';
 import { Id } from '../api-sdk/model/Common';
 import { ApiError } from '../api-sdk/ApiClient';
@@ -30,7 +30,7 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
   readonly updatingCompany = (id: string) => this._updatingCompany.has(id);
 
   readonly updateCompany = (id: Id, website: ApiWebsiteUpdateCompany): Observable<ApiWebsiteWithCompany> => {
-    return of(_ => _.next()).pipe(
+    return EMPTY.pipe(
       tap(_ => {
         this._updatingCompany.add(id);
         delete this._updateCompanyError[id];
@@ -62,7 +62,7 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
   }
 
   readonly listUnregistered = (q?: string, start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
-    return of(_ => _.next()).pipe(
+    return EMPTY.pipe(
       tap(_ => {
         this._fetchingUnregistered = true;
         this._fetchUnregisteredError = undefined;
@@ -91,7 +91,7 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
 
 
   readonly extractUnregistered = (q?: string, start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
-    return of(_ => _.next()).pipe(
+    return EMPTY.pipe(
       mergeMap(() => this.api.secured.website.extractUnregistered(
         q,
         start ? format(start, 'yyyy-MM-dd') : null,
