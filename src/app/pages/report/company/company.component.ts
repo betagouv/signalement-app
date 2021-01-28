@@ -85,15 +85,11 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  submitPhone(draftCompany: DraftCompany) {
-    this.draftPhone = draftCompany.phone;
-    if (draftCompany.siret) {
-      this.submitCompany(draftCompany);
-    } else {
-      this.requireIdentificationKind = true;
-      this.identificationKind = undefined;
-      this.rendererService.scrollToElement(this.searchKind?.nativeElement);
-    }
+  submitPhone(phone: string) {
+    this.draftPhone = phone;
+    this.requireIdentificationKind = true;
+    this.identificationKind = undefined;
+    this.rendererService.scrollToElement(this.searchKind?.nativeElement);
   }
 
   submitCompany(draftCompany?: DraftCompany & {vendor?: string}) {

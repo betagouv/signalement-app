@@ -76,7 +76,6 @@
 
         <app-company-search-by-phone [draftReport]="draftReport"
                                      (complete)="submitPhone($event)"
-                                     (loading)="loading = $event"
                                      (change)="requireIdentificationKind = false"
                                      *ngIf="draftReport.companyKind === companyKinds.PHONE">
         </app-company-search-by-phone>
@@ -85,7 +84,7 @@
 
           <ng-container *ngIf="requireIdentificationKind">
 
-            <hr *ngIf="draftWebsite"/>
+            <hr *ngIf="draftWebsite || draftPhone"/>
 
             <h2 class="mb-4 font-weight-bold">
               Pouvez-vous identifier l'entreprise ?

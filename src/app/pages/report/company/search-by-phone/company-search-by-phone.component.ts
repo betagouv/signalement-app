@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { DraftCompany } from '../../../../model/Company';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { DraftReport } from '../../../../model/Report';
 
@@ -13,7 +12,7 @@ export class CompanySearchByPhoneComponent implements OnInit {
 
   @Input() draftReport?: DraftReport;
 
-  @Output() complete = new EventEmitter<DraftCompany & {vendor?: string}>();
+  @Output() complete = new EventEmitter<string>();
   @Output() change = new EventEmitter();
 
   readonly phoneCtrl = this.formBuilder.control(this.draftReport?.draftCompany.phone ?? '', Validators.required);
@@ -36,7 +35,7 @@ export class CompanySearchByPhoneComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByPhone, this.phoneCtrl.value);
       this.phoneForm.disable();
-      this.complete.emit({ phone: this.phoneCtrl.value });
+      this.complete.emit(this.phoneCtrl.value);
     }
   }
 
