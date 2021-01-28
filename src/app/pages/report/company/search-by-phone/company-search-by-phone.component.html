@@ -4,12 +4,16 @@
 
 <form [formGroup]="phoneForm" (submit)="searchCompanyByPhone()" id="phoneForm">
   <div class="form__group mt-4">
-    <label for="phoneInput" [class]="hasError(phoneCtrl) ? 'error' : ''">Numéro de téléphone (obligatoire)
+    <label for="phoneInput" [class]="hasError(phoneCtrl) ? 'error' : ''">
+      Numéro de téléphone (obligatoire)
     </label>
     <input type="tel" class="form-control" [formControl]="phoneCtrl" name="phone" id="phoneInput" placeholder="ex : 06........"/>
   </div>
 
   <div class="notification error mt-3" *ngIf="showErrors && phoneForm.invalid">
+    <div *ngIf="phoneCtrl.hasError('validatePhoneNumber')">
+      Numéro invalide, veuillez saisir un numéro à 10 chiffres.
+    </div>
     <div *ngIf="phoneCtrl.hasError('required')">
       Veuillez renseigner le numéro de téléphone.
     </div>

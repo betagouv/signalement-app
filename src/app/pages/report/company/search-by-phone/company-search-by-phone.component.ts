@@ -6,6 +6,7 @@ import { RendererService } from '../../../../services/renderer.service';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { DraftReport } from '../../../../model/Report';
 import { IdentificationKinds } from '../company.component';
+import { CustomValidators } from '../../../../custom-validators';
 
 @Component({
   selector: 'app-company-search-by-phone',
@@ -23,7 +24,10 @@ export class CompanySearchByPhoneComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>();
   @Output() change = new EventEmitter();
 
-  readonly phoneCtrl = this.formBuilder.control(this.draftReport?.draftCompany.phone ?? '', Validators.required);
+  readonly phoneCtrl = this.formBuilder.control(this.draftReport?.draftCompany.phone ?? '', [
+    Validators.required,
+    CustomValidators.validatePhoneNumber
+  ]);
   readonly phoneForm = this.formBuilder.group({
     phone: this.phoneCtrl
   });

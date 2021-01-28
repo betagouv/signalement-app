@@ -25,6 +25,8 @@ export default class Utils {
   static mapDate = (date: string): string => format(parseJSON(date), 'yyyy-MM-dd');
 
   static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
+
+  static sanitizePhoneNumber = (phoneNumber?: string): string => phoneNumber?.replace(/[^0-9]/g, '');
 }
 
 export const desktopMinWidth = 992;
