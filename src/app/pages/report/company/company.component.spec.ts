@@ -184,7 +184,7 @@ describe('CompanyComponent', () => {
 
   });
 
-  describe('case of searching company with PHONE', () => {
+  describe('case of company with PHONE', () => {
 
     beforeEach(() => {
       const draftReportInProgress = Object.assign(genDraftReport(Step.Details), {
@@ -209,9 +209,7 @@ describe('CompanyComponent', () => {
 
     });
 
-    it('should display radios for identification choice when no company found', () => {
-
-      spyOn(companyService, 'searchCompaniesByPhone').and.returnValue(of([]));
+    it('should display radios for identification when phone is submitting', () => {
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('form#phoneForm #phoneInput').value = '0000000000';
@@ -220,42 +218,6 @@ describe('CompanyComponent', () => {
       fixture.detectChanges();
 
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
-    });
-
-    it('should display results when company found', () => {
-
-      const companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
-      spyOn(companyService, 'searchCompaniesByPhone').and.returnValue(of(companySearchResults));
-
-      const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('form#phoneForm #phoneInput').value = '0000000000';
-      nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
-      nativeElement.querySelectorAll('form#phoneForm button')[0].click();
-      fixture.detectChanges();
-
-      expect(nativeElement.querySelectorAll('input[type="radio"][name="companySiret"]').length).toBe(companySearchResults.length);
-    });
-
-    describe('user unavailable to identify company', () => {
-
-      it('should ask the user whether the company is abroad or not', () => {
-
-        spyOn(companyService, 'searchCompaniesByPhone').and.returnValue(of([]));
-        spyOn(constantService, 'getCountries').and.returnValue(of([{'code': 'AFG', 'name': 'Afghanistan', 'european': false, 'transfer': false}]));
-
-        const nativeElement = fixture.nativeElement;
-        nativeElement.querySelector('form#phoneForm #phoneInput').value = '0000000000';
-        nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
-        nativeElement.querySelectorAll('form#phoneForm button')[0].click();
-        fixture.detectChanges();
-
-        component.identificationKind = IdentificationKinds.None;
-        fixture.detectChanges();
-
-        expect(nativeElement.querySelectorAll('input[type="radio"][name="isForeignCompany"]').length).toBe(3);
-
-      });
-
     });
 
   });
