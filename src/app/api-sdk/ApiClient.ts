@@ -1,4 +1,4 @@
-import { fetch as fetchPolyfill } from 'whatwg-fetch';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 export interface RequestOption {
   qs?: any;
@@ -51,28 +51,29 @@ export class ApiClient {
     mapData,
     mapError,
   }: ApiClientParams) {
-    const mapResponse = (res: Response) => {
-      switch (res.status) {
-        case 200:
-          return res.json().catch(() => res.text()).catch(() => res);
-        default: {
-          console.error('[ApiClient]', res);
-          throw new ApiError(res.status as StatusCode, res.statusText);
-        }
-      }
-    };
-    this.fetch = async (method: Method, url: string, options?: RequestOption) => {
+    const client = axios.create({
+      baseURL: baseUrl,
+      headers: { ...headers, },
+    });
+
+    this.fetch = (method: Method, url: string, options?: RequestOption) => {
       const builtOptions = ApiClient.buildOptions(options, headers, requestInterceptor);
-      const builtUrl = ApiClient.buildUrl(baseUrl, url, options);
-      return fetchPolyfill(builtUrl.toString(), {
+      console.log('builtOptions', builtOptions);
+      return client.request({
         method,
-        headers: builtOptions.headers,
-        body: builtOptions.body,
-      }).then(mapResponse)
-        .then(mapData ?? (_ => _))
-        .catch(mapError ?? Promise.reject.bind(Promise));
+        url,
+        headers: builtOptions?.headers,
+        params: options?.qs,
+        data: options?.body,
+      }).then(mapData ?? ((_: AxiosResponse) => _.data))
+        .catch(mapError ?? ((_: AxiosError) => {
+          console.error('[ApiClient] ' + _);
+          throw new ApiError(_.response.status as StatusCode, _.response?.data);
+        }));
     };
   }
+
+  private readonly fetch: (method: Method, url: string, options?: RequestOption) => Promise<any>;
 
   private static readonly buildOptions = (
     options?: RequestOption,
@@ -83,19 +84,8 @@ export class ApiClient {
     return {
       ...interceptedOptions,
       headers: { ...headers, ...options?.headers },
-      body: options && JSON.stringify(options.body),
     };
   };
-
-  private static readonly buildUrl = (baseUrl: string, url: string, options?: RequestOption): URL => {
-    const urlToFetch = new URL(baseUrl + url);
-    Object.keys(options?.qs ?? {})
-      .filter(key => options.qs[key])
-      .forEach(key => urlToFetch.searchParams.append(key, options.qs[key]));
-    return urlToFetch;
-  };
-
-  private readonly fetch: (method: Method, url: string, options: RequestOption) => Promise<any>;
 
   readonly get = <T = any>(uri: string, options?: RequestOption): Promise<T> => {
     return this.fetch('GET', uri, options);

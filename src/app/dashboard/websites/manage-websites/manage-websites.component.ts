@@ -59,6 +59,13 @@ interface Form {
               </td>
             </ng-container>
 
+            <ng-container matColumnDef="count">
+              <th class="td-count td-number" mat-sort-header mat-header-cell *matHeaderCellDef>Signalements</th>
+              <td class="td-count td-number" mat-cell *matCellDef="let _">
+                {{_.count}}
+              </td>
+            </ng-container>
+
             <ng-container matColumnDef="kind">
               <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-actions"></th>
               <td mat-cell *matCellDef="let _" class="td-actions">
@@ -121,6 +128,7 @@ export class ManageWebsitesComponent implements OnInit {
 
   readonly columns = [
     'host',
+    'count',
     'creationDate',
     'company',
     'kind',
@@ -187,6 +195,7 @@ export class ManageWebsitesComponent implements OnInit {
       }),
       {}
     );
+    return websites;
   };
 
   getAlreadyValidatedWebsite = (host: string): ApiWebsiteWithCompany | undefined => {
@@ -229,7 +238,7 @@ export class ManageWebsitesComponent implements OnInit {
         companyPostalCode: $event.postalCode,
         companySiret: $event.siret!,
         companyActivityCode: $event.activityCode,
-      }).subscribe();
+      }).subscribe(this.fetchWebsites/* We want to refresh reports count */);
     }
   };
 

@@ -74,7 +74,7 @@
         </label>
         <div class="row">
           <div class="col-12 col-sm-6">
-            <input type="text" class="form-control" [formControl]="countryCtrl" [typeahead]="countries" (typeaheadOnBlur)="countryTypeaheadOnBlur()" id="countryInput" placeholder="ex : Italie"/>
+            <input type="text" class="form-control" [formControl]="countryCtrl" [typeahead]="countries" (typeaheadOnBlur)="checkCountryValue()" id="countryInput" placeholder="ex : Italie"/>
           </div>
         </div>
       </div>

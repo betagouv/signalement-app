@@ -21,12 +21,15 @@ export class CompanyCardComponent implements OnInit {
 
   bsModalRef?: BsModalRef;
 
+  readonly companyNameCtrl = new FormControl('', Validators.required);
   readonly line1Ctrl = new FormControl('', Validators.required);
   readonly line2Ctrl = new FormControl('');
   readonly line3Ctrl = new FormControl('');
   readonly postalCodeCtrl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]);
   readonly cityCtrl = new FormControl('', Validators.required);
+  readonly activationDocumentRequiredCtrl = new FormControl(false);
   readonly companyAddressForm = this.formBuilder.group({
+    companyName: this.companyNameCtrl,
     line1: this.line1Ctrl,
     line2: this.line2Ctrl,
     line3: this.line3Ctrl,
@@ -45,6 +48,7 @@ export class CompanyCardComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.user.subscribe((user: User) => this.user = user);
+    this.companyNameCtrl.setValue(this.userAccess?.companyAddress.split('-')[0] ?? '');
   }
 
   openModal(template: TemplateRef<any>) {
@@ -57,20 +61,21 @@ export class CompanyCardComponent implements OnInit {
     this.companyService.updateCompanyAddress(
       this.userAccess.companySiret,
       [
-        this.userAccess.companyName,
+        this.companyNameCtrl.value,
         this.line1Ctrl.value,
         this.line2Ctrl.value,
         this.line3Ctrl.value,
         `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`
-      ].filter(l => l).reduce((prev, curr) => `${prev} - ${curr}`, ''),
-      this.postalCodeCtrl.value
+      ].filter(l => l).reduce((prev, curr) => `${prev} - ${curr}`),
+      this.postalCodeCtrl.value,
+      this.activationDocumentRequiredCtrl.value
     ).subscribe(
       company => {
         this.loading = false;
         this.change.emit(company);
         this.bsModalRef!.hide();
       },
-      err => {
+      _ => {
         this.loading = false;
         this.loadingError = true;
       });

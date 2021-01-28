@@ -28,6 +28,7 @@ export interface ApiWebsiteCreate extends ApiWebsiteUpdateCompany {
 
 export interface ApiWebsiteWithCompany extends ApiWebsite {
   company: Company;
+  count?: 0;
 }
 
 export interface ApiHostWithReportCount {
