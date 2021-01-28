@@ -56,9 +56,8 @@ export class ApiClient {
       headers: { ...headers, },
     });
 
-    this.fetch = (method: Method, url: string, options?: RequestOption) => {
-      const builtOptions = ApiClient.buildOptions(options, headers, requestInterceptor);
-      console.log('builtOptions', builtOptions);
+    this.fetch = async (method: Method, url: string, options?: RequestOption) => {
+      const builtOptions = await ApiClient.buildOptions(options, headers, requestInterceptor);
       return client.request({
         method,
         url,
@@ -75,15 +74,15 @@ export class ApiClient {
 
   private readonly fetch: (method: Method, url: string, options?: RequestOption) => Promise<any>;
 
-  private static readonly buildOptions = (
+  private static readonly buildOptions = async (
     options?: RequestOption,
     headers?: any,
     requestInterceptor: (_?: RequestOption) => RequestOption | Promise<RequestOption> = _ => _
-  ): RequestOption => {
-    const interceptedOptions = requestInterceptor(options);
+  ): Promise<RequestOption> => {
+    const interceptedOptions = await requestInterceptor(options);
     return {
       ...interceptedOptions,
-      headers: { ...headers, ...options?.headers },
+      headers: { ...headers, ...interceptedOptions?.headers },
     };
   };
 
