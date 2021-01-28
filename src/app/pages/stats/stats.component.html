@@ -15,7 +15,7 @@
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportChart">
-            <div echarts [options]="monthlyReportChart"></div>
+            <div echarts [options]="monthlyReportChart" *ngIf="renderCharts()"></div>
             <ngx-loading [show]="!monthlyReportChart"></ngx-loading>
           </div>
           <ngx-loading [show]="!reportCount"></ngx-loading>
@@ -37,7 +37,7 @@
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportReadByProChart">
-            <div echarts [options]="monthlyReportReadByProChart"></div>
+            <div echarts [options]="monthlyReportReadByProChart" *ngIf="renderCharts()"></div>
             <ngx-loading [show]="!monthlyReportReadByProChart"></ngx-loading>
           </div>
           <ngx-loading [show]="!reportReadByProPercentage"></ngx-loading>
@@ -74,7 +74,7 @@
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportWithReponseChart">
-            <div echarts [options]="monthlyReportWithResponseChart"></div>
+            <div echarts [options]="monthlyReportWithResponseChart" *ngIf="renderCharts()"></div>
             <ngx-loading [show]="!monthlyReportWithResponseChart"></ngx-loading>
           </div>
           <ngx-loading [show]="!reportWithResponsePercentage"></ngx-loading>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { MonthlyStat } from '../../model/Statistics';
@@ -7,14 +7,18 @@ import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
 import { duration } from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
-import { take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.scss']
 })
-export class StatsComponent implements OnInit {
+export class StatsComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   roles = Roles;
 
@@ -28,7 +32,8 @@ export class StatsComponent implements OnInit {
   monthlyReportReadByProChart: EChartOption;
   monthlyReportWithResponseChart: EChartOption;
 
-  constructor(private statsService: StatsService,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private statsService: StatsService,
               private authenticationService: AuthenticationService,
               private titleService: Title,
               private meta: Meta) { }
@@ -38,7 +43,7 @@ export class StatsComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.stats.description });
 
     this.authenticationService.user
-      .pipe(take(1))
+      .pipe(takeUntil(this.unsubscribe))
       .subscribe(user => {
         if (user && user.role === this.roles.Admin) {
           this.loadAminStatistics();
@@ -46,6 +51,15 @@ export class StatsComponent implements OnInit {
       });
 
     this.loadStatistics();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  renderCharts() {
+    return isPlatformBrowser(this.platformId);
   }
 
   loadStatistics() {
