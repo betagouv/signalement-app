@@ -87,7 +87,7 @@
             <hr *ngIf="draftWebsite || draftPhone"/>
 
             <h2 class="mb-4 font-weight-bold">
-              Pouvez-vous identifier l'entreprise ?
+              Pouvez-vous identifier l'entreprise<span *ngIf="draftReport.companyKind === companyKinds.PHONE"> qui vous a démarché</span> ?
             </h2>
             <div class="note mb-1">
               SignalConso en a besoin pour <ng-container *ngIf="!draftReport.employeeConsumer">la contacter et </ng-container>informer la répression des fraudes.
