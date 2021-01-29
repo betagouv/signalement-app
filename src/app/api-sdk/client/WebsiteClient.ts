@@ -1,10 +1,11 @@
 import { ApiHostWithReportCount, ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../model/ApiWebsite';
 import { Id } from '../model/Common';
 import { ApiClient } from '../ApiClient';
+import { ApiClientApi } from '../ApiClient';
 
 export class WebsiteClient {
 
-  constructor(private client: ApiClient) {
+  constructor(private client: ApiClientApi) {
   }
 
   readonly list = (): Promise<ApiWebsiteWithCompany[]> => {
