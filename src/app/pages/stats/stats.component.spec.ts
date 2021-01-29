@@ -21,7 +21,9 @@ describe('StatsComponent', () => {
 
   const reportCount = Object.assign(new SimpleStat(), { value: 53 });
   const reportReadByProPercentage = Object.assign(new SimpleStat(), { value: 12.5 });
+  const reportForwardedToProPercentage = Object.assign(new SimpleStat(), { value: 56.89 });
   const reportWithResponseCount = Object.assign(new SimpleStat(), { value: 43.89 });
+  const reportWithWebsiteCount = Object.assign(new SimpleStat(), { value: 53.09 });
   const reportReadByProMedianDelay = Object.assign(new SimpleStat(), { value: 'PT25H11M18.691S'});
   const reportWithResponseMedianDelay = Object.assign(new SimpleStat(), { value: 'PT140H12M35.691S'});
 
@@ -49,7 +51,9 @@ describe('StatsComponent', () => {
     statsService = TestBed.inject(StatsService);
     spyOn(statsService, 'getReportCount').and.returnValue(of(reportCount));
     spyOn(statsService, 'getReportReadByProPercentage').and.returnValue(of(reportReadByProPercentage));
+    spyOn(statsService, 'getReportForwardedToProPercentage').and.returnValue(of(reportForwardedToProPercentage));
     spyOn(statsService, 'getReportWithResponsePercentage').and.returnValue(of(reportWithResponseCount));
+    spyOn(statsService, 'getReportWithWebsitePercentage').and.returnValue(of(reportWithWebsiteCount));
     spyOn(statsService, 'getMonthlyReportCount').and.returnValue(of(monthyReportCount));
     spyOn(statsService, 'getReportReadByProMedianDelay').and.returnValue(of(reportReadByProMedianDelay));
     spyOn(statsService, 'getReportWithResponseMedianDelay').and.returnValue(of(reportWithResponseMedianDelay));
@@ -70,7 +74,9 @@ describe('StatsComponent', () => {
 
       expect(component.reportCount).toEqual(53);
       expect(component.reportReadByProPercentage).toEqual(12.5);
+      expect(component.reportForwardedToProPercentage).toEqual(56.89);
       expect(component.reportWithResponsePercentage).toEqual(43.89);
+      expect(component.reportWithWebsitePercentage).toEqual(53.09);
       expect(component.reportWithResponseMedianDelay).toBeUndefined();
       expect(component.reportReadByProMedianDelay).toBeUndefined();
     });

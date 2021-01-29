@@ -21,11 +21,12 @@
                 <td>{{access.lastName}}</td>
                 <td>{{access.email}}</td>
                 <td>
-                  <select class="form-control" [value]="access.level" *ngIf="access.email != user.email; else currentUserLevel" (change)="updateAccess(access.userId, $event.target.value)">
-                    <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
+                  {{access.level}}
+                  <select class="form-control" [value]="access.level">
+                    <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key.toString()">{{level.value}}</option>
                   </select>
                   <ng-template #currentUserLevel>
-                    {{accessLevels.get(access.level)}}
+                    template {{accessLevels.get(access.level)}}
                   </ng-template>
                 </td>
                 <td>
