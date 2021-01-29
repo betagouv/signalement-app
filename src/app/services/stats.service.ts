@@ -21,8 +21,16 @@ export class StatsService {
     return this.http.get<MonthlyStat[]>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'count', 'monthly']));
   }
 
+  getReportForwardedToProPercentage() {
+    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'forwarded', 'percentage']));
+  }
+
   getReportReadByProPercentage() {
     return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'read', 'percentage']));
+  }
+
+  getMonthlyReportForwardedToProPercentage() {
+    return this.http.get<MonthlyStat[]>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'forwarded', 'percentage', 'monthly']));
   }
 
   getMonthlyReportReadByProPercentage() {
@@ -57,6 +65,10 @@ export class StatsService {
         );
       })
     );
+  }
+
+  getReportWithWebsitePercentage() {
+    return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'website', 'percentage']));
   }
 
 }

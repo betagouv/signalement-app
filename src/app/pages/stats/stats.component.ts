@@ -23,12 +23,15 @@ export class StatsComponent implements OnInit, OnDestroy {
   roles = Roles;
 
   reportCount: number;
+  reportForwardedToProPercentage: number;
   reportReadByProPercentage: number;
   reportReadByProMedianDelay: number;
   reportWithResponsePercentage: number;
   reportWithResponseMedianDelay: number;
+  reportWithWebsitePercentage: number;
 
   monthlyReportChart: EChartOption;
+  monthlyReportForwardedToProChart: EChartOption;
   monthlyReportReadByProChart: EChartOption;
   monthlyReportWithResponseChart: EChartOption;
 
@@ -67,12 +70,20 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.reportCount = simpleStat.value as number;
     });
 
+    this.statsService.getReportForwardedToProPercentage().subscribe(simpleStat => {
+      this.reportForwardedToProPercentage = simpleStat.value as number;
+    });
+
     this.statsService.getReportReadByProPercentage().subscribe(simpleStat => {
       this.reportReadByProPercentage = simpleStat.value as number;
     });
 
     this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
       this.reportWithResponsePercentage = simpleStat.value as number;
+    });
+
+    this.statsService.getReportWithWebsitePercentage().subscribe(simpleStat => {
+      this.reportWithWebsitePercentage = simpleStat.value as number;
     });
   }
 
@@ -91,6 +102,12 @@ export class StatsComponent implements OnInit, OnDestroy {
   loadMonthlyReportChart() {
     this.statsService.getMonthlyReportCount().subscribe(monthlyStats => {
       this.monthlyReportChart = this.getChartOption(monthlyStats);
+    });
+  }
+
+  loadMonthlyReportForwardedToProChart() {
+    this.statsService.getMonthlyReportForwardedToProPercentage().subscribe(monthlyStats => {
+      this.monthlyReportForwardedToProChart = this.getChartOption(monthlyStats, true);
     });
   }
 
