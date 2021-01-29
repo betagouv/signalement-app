@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ServiceUtils } from './service.utils';
+import { ApiSdkService } from './core/api-sdk.service';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../api-sdk/model/ApiWebsite';
 import { Id } from '../api-sdk/model/Common';
 import { ApiError } from '../api-sdk/ApiClient';
@@ -15,11 +15,11 @@ import format from 'date-fns/format';
 })
 export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWebsiteCreate, Partial<ApiWebsite>> {
 
-  constructor(protected utils: ServiceUtils) {
-    super(utils, {
-      list: () => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.website.list())),
-      update: (id: Id, u: Partial<ApiWebsite>) => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.website.update(id, u))),
-      remove: (id: Id) => utils.getSecuredReportApiSdk.pipe(mergeMap(api => api.website.remove(id))),
+  constructor(protected api: ApiSdkService) {
+    super(api, {
+      list: () => api.secured.website.list(),
+      update: (id: Id, u: Partial<ApiWebsite>) => api.secured.website.update(id, u),
+      remove: (id: Id) => api.secured.website.remove(id),
     });
   }
 
@@ -30,12 +30,12 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
   readonly updatingCompany = (id: string) => this._updatingCompany.has(id);
 
   readonly updateCompany = (id: Id, website: ApiWebsiteUpdateCompany): Observable<ApiWebsiteWithCompany> => {
-    return this.utils.getSecuredReportApiSdk.pipe(
+    return of(_ => _.next()).pipe(
       tap(_ => {
         this._updatingCompany.add(id);
         delete this._updateCompanyError[id];
       }),
-      mergeMap(api => api.website.updateCompany(id, website)),
+      mergeMap(() => this.api.secured.website.updateCompany(id, website)),
       map((updatedWebsite: ApiWebsiteWithCompany) => {
         this.source.next((this.source.value ?? []).map((_: ApiWebsiteWithCompany) => _.id === id ? updatedWebsite : _));
         this._updatingCompany.delete(id);
@@ -62,17 +62,17 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
   }
 
   readonly listUnregistered = (q?: string, start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
-    return this.utils.getSecuredReportApiSdk.pipe(
+    return of(_ => _.next()).pipe(
       tap(_ => {
         this._fetchingUnregistered = true;
         this._fetchUnregisteredError = undefined;
       }),
-      mergeMap(api => api.website.listUnregistered(
+      mergeMap(() => this.api.secured.website.listUnregistered(
         q,
         start ? format(start, 'yyyy-MM-dd') : null,
         end ? format(end, 'yyyy-MM-dd') : null)
       ),
-      map(results => results.map (_ => ({
+      map(results => results.map(_ => ({
         host: _.host,
         count: _.count
       }))),
@@ -91,8 +91,8 @@ export class WebsiteService extends CRUDListService<ApiWebsiteWithCompany, ApiWe
 
 
   readonly extractUnregistered = (q?: string, start?: Date, end?: Date): Observable<HostWithReportCount[]> => {
-    return this.utils.getSecuredReportApiSdk.pipe(
-      mergeMap(api => api.website.extractUnregistered(
+    return of(_ => _.next()).pipe(
+      mergeMap(() => this.api.secured.website.extractUnregistered(
         q,
         start ? format(start, 'yyyy-MM-dd') : null,
         end ? format(end, 'yyyy-MM-dd') : null)

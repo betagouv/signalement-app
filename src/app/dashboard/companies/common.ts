@@ -1,4 +1,4 @@
-export const accessLevels = new Map([
-    ['member', 'Accès simple'],
-    ['admin', 'Administrateur']
-]);
+export const accessLevels = {
+  member: 'Accès simple',
+  admin: 'Administrateur'
+};

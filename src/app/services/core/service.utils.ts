@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { map } from 'rxjs/operators';
-import { ApiSdk } from '../api-sdk/ApiSdk';
-import { ApiClient } from '../api-sdk/ApiClient';
-import { ApiSdkSecured } from '../api-sdk/ApiSdkSecured';
 
 export const AuthUserStorageKey = 'AuthUserSignalConso';
 export const TokenInfoStorageKey = 'TokenInfoSignalConso';
@@ -16,7 +13,6 @@ export class ServiceUtils {
 
   constructor(private localStorage: LocalStorage) {
   }
-
 
   getUrl(api: Api, urlParams: string[]) {
     urlParams = urlParams.map(p => encodeURIComponent(p));
@@ -44,13 +40,6 @@ export class ServiceUtils {
     );
   }
 
-  readonly getSecuredReportApiSdk = this.getAuthHeaders().pipe(map(headers => {
-    const httpClient = new ApiClient({ headers: headers.headers, baseUrl: environment[Api.Report] + '/api' });
-    return new ApiSdkSecured(httpClient);
-  }));
-
-  readonly getReportApiSdk = new ApiSdk(new ApiClient({ baseUrl: environment[Api.Report] + '/api' }));
-
   getAuthHttpParam() {
     return this.localStorage.getItem(AuthUserStorageKey).pipe(
       map(authUser => {
@@ -73,7 +62,6 @@ export class ServiceUtils {
         : {})
     }), {}) as { [key in keyof T]: string | string[] };
   }
-
 }
 
 

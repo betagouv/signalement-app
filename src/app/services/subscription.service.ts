@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Api, ServiceUtils } from './service.utils';
+import { Api, ServiceUtils } from './core/service.utils';
 import { mergeMap } from 'rxjs/operators';
 import { Subscription } from '../model/Subscription';
 import { Department } from '../model/Region';
@@ -79,7 +79,7 @@ export class SubscriptionService {
       })
     );
   }
-  
+
   subscriptionApiToSubscription(subscriptionApi) {
     return Object.assign(new Subscription(), {
       id: subscriptionApi.id,
