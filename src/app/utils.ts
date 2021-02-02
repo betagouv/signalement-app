@@ -26,7 +26,7 @@ export default class Utils {
 
   static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 
-  static sanitizePhoneNumber = (phoneNumber?: string): string => phoneNumber?.replace(/[^0-9]/g, '');
+  static sanitizePhoneNumber = (phoneNumber?: string): string => phoneNumber?.replace(/[^\+0-9]/g, '');
 }
 
 export const desktopMinWidth = 992;

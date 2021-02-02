@@ -4,6 +4,7 @@ import { AnalyticsService, CompanySearchEventActions, EventCategories } from '..
 import { DraftReport } from '../../../../model/Report';
 import { IdentificationKinds } from '../company.component';
 import { CustomValidators } from '../../../../custom-validators';
+import Utils from '../../../../utils';
 
 @Component({
   selector: 'app-company-search-by-phone',
@@ -40,7 +41,7 @@ export class CompanySearchByPhoneComponent implements OnInit {
     } else {
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByPhone, this.phoneCtrl.value);
       this.phoneForm.disable();
-      this.complete.emit(this.phoneCtrl.value);
+      this.complete.emit(Utils.sanitizePhoneNumber(this.phoneCtrl.value));
     }
   }
 
