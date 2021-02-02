@@ -19,7 +19,7 @@ export class CRUDListServiceNotImplementedError extends Error {
   }
 }
 
-export abstract class CRUDListService<T extends Entity, C, U> extends ListService<T> {
+export abstract class CRUDListService<T extends Entity, C = T, U = T> extends ListService<T> {
 
   constructor(
     protected api: ApiSdkService,
@@ -121,4 +121,6 @@ export abstract class CRUDListService<T extends Entity, C, U> extends ListServic
       }),
     );
   };
+
+  readonly get = (id: Id): T | undefined => this.source.value?.find(_ => _.id === id);
 }

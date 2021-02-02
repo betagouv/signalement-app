@@ -1,68 +1,31 @@
 <app-banner title="Vos abonnements"></app-banner>
 
-<main role="main">
+<app-page>
 
-  <section class="section section-lightest-grey">
-    <div class="container position-relative bg-white pb-3">
+  <div class="notification info">
+    <p>
+      En créant un abonnement, vous recevrez un mail quotidien ou hebdomadaire (au choix) comportant les nouveaux
+      signalements
+      correspondant à votre sélection de critères, qu’ils soient géographiques, thématiques ou par entreprise.
+      <br/>
+      <strong>Ces différents critères peuvent se combiner.</strong>
+    </p>
+    <p>
+      Par exemple, si vous souhaitez recevoir les signalements liés à deux entreprises bancaires et ceux liés au secteur
+      de l'immobilier, il faut créer deux alertes :
+      une avec les deux siret et une avec la catégorie immobilier.
+    </p>
+  </div>
 
-      <div class="table-responsive">
-        <table class="table">
-          <caption class="sr-only">Liste des abonnements</caption>
-          <thead>
-          <tr>
-            <th>Départements</th>
-            <th>Catégories</th>
-            <th>Siret</th>
-            <th>Fréquence</th>
-            <th class="actions"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let subscription of subscriptions" (click)="openSubscription(subscription.id)" class="pointer">
-            <td>
-                <div *ngFor="let dept of subscription.departments">
-                  {{dept.code}} - {{dept.label}}
-                </div>
-              <span *ngIf="!subscription.departments.length">Tous</span>
-            </td>
-            <td>
-              <div *ngFor="let category of subscription.categories">
-                {{category}}
-              </div>
-              <span *ngIf="!subscription.categories.length">Toutes</span>
-            </td>
-            <td>
-              <div *ngFor="let siret of subscription.sirets">
-                {{siret}}
-              </div>
-              <span *ngIf="!subscription.sirets.length">Tous</span>
-            </td>
-            <td>
-              <span *ngIf="subscription.frequency === 'P1D'">Quotidienne</span>
-              <span *ngIf="subscription.frequency === 'P7D'">Hebdomadaire</span>
-            </td>
-            <td (click)="removeSubscription(subscription.id, $event)">
-              <i class="material-icons text-warning">delete</i>
-            </td>
-          </tr>
-          <tr *ngIf="!loading && !subscriptions?.length">
-            <td colspan="4" class="text-center">
-              Vous n'avez aucun abonnement
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="-card-new" matRipple>
+    <mat-icon>add</mat-icon>
+    &nbsp;
+    Ajouter
+  </div>
 
-      <div class="notification error" *ngIf="loadingError">
-        Une erreur technique s'est produite<br />
-      </div>
-
-      <div class="text-center">
-        <button class="btn btn-primary btn-lg" (click)="openSubscription()" id="answerBtn">Ajouter un abonnement</button>
-      </div>
-
-      <ngx-loading [show]="loading"></ngx-loading>
-    </div>
-  </section>
-</main>
+  <app-subscription-card
+    *ngFor="let subscription of subscriptions$ | async"
+    [subscription]="subscription"
+    (remove)="subscriptionService.remove(subscription.id)">
+  </app-subscription-card>
+</app-page>

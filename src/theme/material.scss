@@ -107,3 +107,20 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   background: $primary;
   color: white;
 }
+
+.mat-chip-list {
+}
+
+.mat-chip-list-wrapper .mat-standard-chip {
+  margin: spacing(1/4);
+}
+
+.mat-chip.mat-standard-chip {
+  background: none;
+  border: 1px solid $theme-divider;
+  font-weight: normal;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}

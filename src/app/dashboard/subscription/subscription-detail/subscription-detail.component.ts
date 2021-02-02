@@ -1,94 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from '../../../model/Subscription';
+import { Component, Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { Subscription } from '../../../api-sdk/model/Subscription';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { Department, Departments } from '../../../model/Region';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { PlatformLocation } from '@angular/common';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import oldCategories from '../../../../assets/data/old-categories.json';
+import { ConstantService } from '../../../services/constant.service';
+
+@Directive({
+  selector: '[appSubscriptionDialog]',
+  host: {
+    '(click)': 'openDialog()'
+  },
+})
+export class SubscriptionDialogDirective {
+
+  constructor(public dialog: MatDialog) {
+  }
+
+  @Input() appSubscriptionDialog?: Subscription;
+
+  @Output() submitted = new EventEmitter<Subscription>();
+
+  openDialog(): void {
+    const ref = this.dialog.open(SubscriptionDetailComponent, { width: '500px', });
+    ref.componentInstance.submitted = this.submitted;
+    ref.componentInstance.subscription = this.appSubscriptionDialog;
+  }
+}
 
 @Component({
-  selector: 'app-subscription-detail',
+  selector: 'app-subscription-dialog',
   templateUrl: './subscription-detail.component.html',
   styleUrls: ['./subscription-detail.component.scss']
 })
 export class SubscriptionDetailComponent implements OnInit {
 
+  readonly departments = Departments;
+
+  readonly departmentCtrl = new FormControl('');
+  readonly departmentForm = this.formBuilder.group(this.departmentCtrl);
+  readonly categoryCtrl = new FormControl('');
+  readonly categoryForm = this.formBuilder.group(this.categoryCtrl);
+  readonly siretCtrl = new FormControl('');
+  readonly siretForm = this.formBuilder.group(this.siretCtrl);
+
   categories: string[];
-  departments = Departments;
 
-  subscription: Subscription;
+  constructor(
+    // private dialogRef: MatDialogRef<SubscriptionDialogDirective>,
+    public formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private constantService: ConstantService,
+    public subscriptionService: SubscriptionService,
+    private anomalyService: AnomalyService) {
+  }
 
-  departmentForm: FormGroup;
-  departmentCtrl: FormControl;
+  readonly countries$ = this.constantService.getCountries();
 
-  categoryForm: FormGroup;
-  categoryCtrl: FormControl;
+  @Input() subscription?: Subscription;
 
-  siretForm: FormGroup;
-  siretCtrl: FormControl;
-
-  showErrors: boolean;
-  loading: boolean;
-  loadingError: boolean;
-
-  constructor(public formBuilder: FormBuilder,
-              private route: ActivatedRoute,
-              private subscriptionService: SubscriptionService,
-              private anomalyService: AnomalyService,
-              private platformLocation: PlatformLocation,
-              private router: Router) { }
+  @Output() submitted = new EventEmitter<Subscription>();
 
   ngOnInit() {
-
-    this.loading = true;
-    if (this.route.snapshot.paramMap.get('subscriptionId')) {
-      this.subscriptionService.getSubscription(this.route.snapshot.paramMap.get('subscriptionId')).subscribe(
-        subscription => {
-          this.subscription = subscription;
-          this.loading = false;
-          this.initSubscriptionForms();
-        },
-        err => {
-          this.loading = false;
-          this.loadingError = true;
-        });
-    } else {
-      this.subscription = new Subscription();
-      this.initSubscriptionForms();
-    }
-  }
-
-  initSubscriptionForms() {
     this.categories = this.anomalyService.getCategories();
-
-    this.departmentCtrl = new FormControl('');
-    this.departmentForm = this.formBuilder.group(this.departmentCtrl);
-
-    this.categoryCtrl = new FormControl('');
-    this.categoryForm = this.formBuilder.group(this.categoryCtrl);
-
-    this.siretCtrl = new FormControl('');
-    this.siretForm = this.formBuilder.group(this.siretCtrl);
+    this.categories = [
+      ...this.anomalyService.getAnomalies().filter(anomaly => !anomaly.information).map(anomaly => anomaly.category),
+      ...oldCategories
+    ];
   }
 
-  submitSubscription() {
-    this.loading = true;
-    this.loadingError = false;
-    if (!this.subscription.frequency) {
-      this.showErrors = true;
-    } else {
-      this.subscriptionService.createOrUpdateSubscription(this.subscription).subscribe(
-        subscription => {
-          this.loading = false;
-          this.platformLocation.back();
-        },
-        err => {
-          this.loading = false;
-          this.loadingError = true;
-        });
-    }
-  }
+  readonly submitSubscription = () => {
+
+  };
 
   addToDepartementFilter() {
     const newDepartments = this.departmentCtrl.value.split(',')
@@ -137,7 +123,7 @@ export class SubscriptionDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['abonnements']);
+    // this.dialogRef.close();
   }
 
 }

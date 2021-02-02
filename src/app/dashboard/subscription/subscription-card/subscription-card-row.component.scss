@@ -1,0 +1,57 @@
+@import "src/theme/variables";
+
+:host {
+  //padding: spacing(1);
+  display: block;
+
+  &:last-of-type {
+    .-border {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .-hoverable {
+      background: $theme-background-hover;
+      cursor: pointer;
+    }
+
+    .-border {
+      padding-left: 0;
+    }
+  }
+}
+
+.-root {
+  padding: spacing(1.5) 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.-border {
+  margin-left: spacing(3);
+  background: $theme-divider;
+  height: 1px;
+}
+
+.-icon {
+  color: $theme-color-text-secondary;
+  margin-right: spacing(2);
+  margin-left: spacing(3);
+}
+
+.-label {
+  min-width: 120px;
+  margin-right: spacing(2);
+}
+
+.-edit {
+  margin-left: spacing(2);
+  margin-right: spacing(2);
+  color: $theme-color-text-disabled;
+  align-self: center;
+}
+
+.-content {
+  flex: 1;
+}
