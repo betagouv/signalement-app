@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Api, ServiceUtils } from './service.utils';
+import { Api, ServiceUtils } from './core/service.utils';
 import { CompanyAccess, PendingToken, UserAccess, WebsiteURL } from '../model/Company';
 import { map, mergeMap } from 'rxjs/operators';
 import { User } from '../model/AuthUser';

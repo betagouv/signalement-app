@@ -7,15 +7,23 @@ export interface RequestOption {
   timeout?: number;
 }
 
-interface ApiClientParams {
+export interface ApiClientParams {
   baseUrl: string;
   headers?: any;
+  requestInterceptor?: (options?: RequestOption) => Promise<RequestOption> | RequestOption;
   proxy?: string;
   mapData?: (_: any) => any;
   mapError?: (_: any) => never;
 }
 
-type StatusCode =
+export interface ApiClientApi {
+  readonly get: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+  readonly post: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+  readonly delete: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+  readonly put: <T = any>(uri: string, options?: RequestOption) => Promise<T>;
+}
+
+export type StatusCode =
   200 |
   301 |
   302 |
@@ -39,6 +47,7 @@ export class ApiClient {
   constructor({
     baseUrl,
     headers,
+    requestInterceptor,
     mapData,
     mapError,
   }: ApiClientParams) {
@@ -47,11 +56,12 @@ export class ApiClient {
       headers: { ...headers, },
     });
 
-    this.fetch = (method: Method, url: string, options?: RequestOption) => {
+    this.fetch = async (method: Method, url: string, options?: RequestOption) => {
+      const builtOptions = await ApiClient.buildOptions(options, headers, requestInterceptor);
       return client.request({
         method,
         url,
-        headers: options?.headers,
+        headers: builtOptions?.headers,
         params: options?.qs,
         data: options?.body,
       }).then(mapData ?? ((_: AxiosResponse) => _.data))
@@ -63,6 +73,18 @@ export class ApiClient {
   }
 
   private readonly fetch: (method: Method, url: string, options?: RequestOption) => Promise<any>;
+
+  private static readonly buildOptions = async (
+    options?: RequestOption,
+    headers?: any,
+    requestInterceptor: (_?: RequestOption) => RequestOption | Promise<RequestOption> = _ => _
+  ): Promise<RequestOption> => {
+    const interceptedOptions = await requestInterceptor(options);
+    return {
+      ...interceptedOptions,
+      headers: { ...headers, ...interceptedOptions?.headers },
+    };
+  };
 
   readonly get = <T = any>(uri: string, options?: RequestOption): Promise<T> => {
     return this.fetch('GET', uri, options);

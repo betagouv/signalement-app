@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ReportService } from './report.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ServiceUtils } from './service.utils';
+import { ServiceUtils } from './core/service.utils';
 import { DetailInputValue, Step } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { UploadedFile } from '../model/UploadedFile';
