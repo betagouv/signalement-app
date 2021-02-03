@@ -5,11 +5,11 @@ import { MonthlyStat } from '../../model/Statistics';
 import { Roles } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
-import { duration } from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { Subject } from 'rxjs';
+import { parse } from 'iso8601-duration';
 
 @Component({
   selector: 'app-stats',
@@ -90,11 +90,11 @@ export class StatsComponent implements OnInit, OnDestroy {
   loadAminStatistics() {
 
     this.statsService.getReportReadByProMedianDelay().subscribe(simpleStat => {
-      this.reportReadByProMedianDelay = duration(simpleStat.value).asDays();
+      this.reportReadByProMedianDelay = parse(simpleStat.value as string).hours / 24;
     });
 
     this.statsService.getReportWithResponseMedianDelay().subscribe(simpleStat => {
-      this.reportWithResponseMedianDelay = duration(simpleStat.value).asDays();
+      this.reportWithResponseMedianDelay = parse(simpleStat.value as string).hours / 24;
     });
   }
 

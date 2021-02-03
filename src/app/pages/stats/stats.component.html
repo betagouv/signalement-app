@@ -90,7 +90,7 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <h2 *ngIf="reportWithResponsePercentage">
+          <h2 *ngIf="reportWithResponsePercentage !== undefined">
             Sur l'ensemble des signalements lus,
             <span class="count">{{reportWithResponsePercentage.toFixed(0) + "%"}}</span>
             ont eu une réponse de l'entreprise
@@ -108,12 +108,12 @@
             <div echarts [options]="monthlyReportWithResponseChart" *ngIf="renderCharts()"></div>
             <ngx-loading [show]="!monthlyReportWithResponseChart"></ngx-loading>
           </div>
-          <ngx-loading [show]="!reportWithResponsePercentage"></ngx-loading>
+          <ngx-loading [show]="reportWithResponsePercentage === undefined"></ngx-loading>
         </div>
       </div>
       <div class="card" *appRole="[roles.Admin]">
         <div class="card-body">
-          <h2 *ngIf="reportWithResponseMedianDelay">
+          <h2 *ngIf="reportWithResponseMedianDelay !== undefined">
             En moyenne une entreprise met
             <span class="count">{{reportWithResponseMedianDelay.toFixed(1)}} jours</span>
             pour répondre au signalement après l'avoir lu
@@ -122,7 +122,7 @@
               help_outline
             </i>
           </h2>
-          <ngx-loading [show]="!reportWithResponseMedianDelay"></ngx-loading>
+          <ngx-loading [show]="reportWithResponseMedianDelay === undefined"></ngx-loading>
         </div>
       </div>
       <p class="note pt-2">
