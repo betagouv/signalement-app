@@ -5,11 +5,11 @@ import { MonthlyStat } from '../../model/Statistics';
 import { Roles } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
-import { duration } from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { Subject } from 'rxjs';
+import { parse } from 'iso8601-duration';
 
 @Component({
   selector: 'app-stats',
@@ -23,12 +23,15 @@ export class StatsComponent implements OnInit, OnDestroy {
   roles = Roles;
 
   reportCount: number;
+  reportForwardedToProPercentage: number;
   reportReadByProPercentage: number;
   reportReadByProMedianDelay: number;
   reportWithResponsePercentage: number;
   reportWithResponseMedianDelay: number;
+  reportWithWebsitePercentage: number;
 
   monthlyReportChart: EChartOption;
+  monthlyReportForwardedToProChart: EChartOption;
   monthlyReportReadByProChart: EChartOption;
   monthlyReportWithResponseChart: EChartOption;
 
@@ -67,6 +70,10 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.reportCount = simpleStat.value as number;
     });
 
+    this.statsService.getReportForwardedToProPercentage().subscribe(simpleStat => {
+      this.reportForwardedToProPercentage = simpleStat.value as number;
+    });
+
     this.statsService.getReportReadByProPercentage().subscribe(simpleStat => {
       this.reportReadByProPercentage = simpleStat.value as number;
     });
@@ -74,16 +81,20 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
       this.reportWithResponsePercentage = simpleStat.value as number;
     });
+
+    this.statsService.getReportWithWebsitePercentage().subscribe(simpleStat => {
+      this.reportWithWebsitePercentage = simpleStat.value as number;
+    });
   }
 
   loadAminStatistics() {
 
     this.statsService.getReportReadByProMedianDelay().subscribe(simpleStat => {
-      this.reportReadByProMedianDelay = duration(simpleStat.value).asDays();
+      this.reportReadByProMedianDelay = parse(simpleStat.value as string).hours / 24;
     });
 
     this.statsService.getReportWithResponseMedianDelay().subscribe(simpleStat => {
-      this.reportWithResponseMedianDelay = duration(simpleStat.value).asDays();
+      this.reportWithResponseMedianDelay = parse(simpleStat.value as string).hours / 24;
     });
   }
 
@@ -91,6 +102,12 @@ export class StatsComponent implements OnInit, OnDestroy {
   loadMonthlyReportChart() {
     this.statsService.getMonthlyReportCount().subscribe(monthlyStats => {
       this.monthlyReportChart = this.getChartOption(monthlyStats);
+    });
+  }
+
+  loadMonthlyReportForwardedToProChart() {
+    this.statsService.getMonthlyReportForwardedToProPercentage().subscribe(monthlyStats => {
+      this.monthlyReportForwardedToProChart = this.getChartOption(monthlyStats, true);
     });
   }
 

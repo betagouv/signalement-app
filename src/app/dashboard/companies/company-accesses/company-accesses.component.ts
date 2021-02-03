@@ -59,6 +59,7 @@ export class CompanyAccessesComponent implements OnInit {
     if (this.siret) {
       this.companyAccessesService.listAccesses(this.siret).subscribe(
         accesses => {
+          console.log('accesses', accesses.map(a => accessLevels.get(a.level)));
           this.loading = false;
           this.companyAccesses = accesses;
         }
