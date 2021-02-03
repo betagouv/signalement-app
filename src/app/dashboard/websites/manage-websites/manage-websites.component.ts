@@ -44,7 +44,7 @@ interface Form {
 
 
         <div class="table-overflow">
-          <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="creationDate" matSortDirection="desc">
+          <table mat-table [dataSource]="dataSource" class="fullwidth" matSort matSortActive="count" matSortDirection="desc">
             <ng-container matColumnDef="creationDate">
               <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-date">Date</th>
               <td mat-cell *matCellDef="let _" class="td-date">
@@ -56,6 +56,13 @@ interface Form {
               <th class="td-host" mat-sort-header mat-header-cell *matHeaderCellDef>Site internet</th>
               <td class="td-host" mat-cell *matCellDef="let _">
                 <a target="_blank" href="http://{{_.host}}">{{_.host}}</a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="count">
+              <th class="td-count td-number" mat-sort-header mat-header-cell *matHeaderCellDef>Signalements</th>
+              <td class="td-count td-number" mat-cell *matCellDef="let _">
+                {{_.count}}
               </td>
             </ng-container>
 
@@ -121,6 +128,7 @@ export class ManageWebsitesComponent implements OnInit {
 
   readonly columns = [
     'host',
+    'count',
     'creationDate',
     'company',
     'kind',
@@ -148,7 +156,7 @@ export class ManageWebsitesComponent implements OnInit {
   private initForm = (): void => {
     this.form = this.fb.group({
       host: '',
-      kind: [['']],
+      kind: [[ApiWebsiteKind.PENDING]],
     });
   };
 
@@ -187,6 +195,7 @@ export class ManageWebsitesComponent implements OnInit {
       }),
       {}
     );
+    return websites;
   };
 
   getAlreadyValidatedWebsite = (host: string): ApiWebsiteWithCompany | undefined => {
@@ -229,7 +238,7 @@ export class ManageWebsitesComponent implements OnInit {
         companyPostalCode: $event.postalCode,
         companySiret: $event.siret!,
         companyActivityCode: $event.activityCode,
-      }).subscribe();
+      }).subscribe(this.fetchWebsites/* We want to refresh reports count */);
     }
   };
 

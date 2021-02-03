@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { StatsService } from './stats.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ServiceUtils } from './service.utils';
+import { ServiceUtils } from './core/service.utils';
 
 describe('StatsService', () => {
 

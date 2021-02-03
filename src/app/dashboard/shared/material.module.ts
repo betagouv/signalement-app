@@ -16,7 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Injectable()
-export class MatPaginatorIntlFr extends MatPaginatorIntl {
+export class AppMatPaginatorIntlFr extends MatPaginatorIntl {
   itemsPerPageLabel = 'Lignes par page';
   nextPageLabel = 'Suivant';
   previousPageLabel = 'Précédent';
@@ -60,7 +60,7 @@ export class MatPaginatorIntlFr extends MatPaginatorIntl {
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,
-    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlFr },
+    { provide: MatPaginatorIntl, useClass: AppMatPaginatorIntlFr },
   ],
   entryComponents: []
 })

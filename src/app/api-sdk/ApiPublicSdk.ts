@@ -1,9 +1,9 @@
-import { ApiClient } from './ApiClient';
 import { Country } from './model/Country';
+import { ApiClientApi } from './ApiClient';
 
-export class ApiSdk {
+export class ApiPublicSdk {
 
-  constructor(private client: ApiClient) {
+  constructor(private client: ApiClientApi) {
   }
 
   readonly getCountries = () => this.client.get<Country[]>(`/constants/countries`);

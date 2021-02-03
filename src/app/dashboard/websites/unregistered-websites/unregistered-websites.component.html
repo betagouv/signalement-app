@@ -3,18 +3,15 @@
 <app-page animated="false">
   <app-websites-tabs></app-websites-tabs>
   <app-panel [loading]="websiteService.fetchingUnregistered">
-    <app-panel-header>
-      <input [(ngModel)]="hostFilter" class="form-control form-control-material host-form-control" placeholder="Nom du site" (keydown.enter)="fetchUnregisteredWebsites()"/>
-      <input
-        class="form-control form-control-material"
-        [(bsValue)]="periodFilter"
-        bsDaterangepicker
-        autocomplete="off"
-        placeholder="Période sélectionnée"
-        [bsConfig]="{ containerClass: 'theme-default', rangeInputFormat: 'DD MMMM YYYY' }"
-        triggers="click keypress"
-        (bsValueChange)="fetchUnregisteredWebsites()"
-      />
+    <app-panel-header [formGroup]="form">
+      <input [formControl]="hostCtrl" class="form-control form-control-material host-form-control" placeholder="Nom du site" (keydown.enter)="fetchUnregisteredWebsites()"/>
+
+      <mat-date-range-input [rangePicker]="picker" (click)="picker.open()" class="form-control form-control-material">
+        <input [formControl]="startCtrl" matStartDate placeholder="Période sélectionnée">
+        <input [formControl]="endCtrl" matEndDate placeholder="">
+      </mat-date-range-input>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
       <button mat-icon-button (click)="extract()" matTooltip="Exporter en XLS">
         <mat-icon>get_app</mat-icon>
       </button>

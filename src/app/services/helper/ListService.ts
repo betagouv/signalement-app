@@ -1,14 +1,14 @@
 import { Entity } from '../../api-sdk/model/Common';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { ServiceUtils } from '../service.utils';
+import { ApiSdkService } from '../core/api-sdk.service';
 import { ApiError } from '../../api-sdk/ApiClient';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 export abstract class ListService<T extends Entity> {
 
   constructor(
-    protected utils: ServiceUtils,
-    protected listMethod: (...args: any[]) => Observable<T[]>) {
+    protected api: ApiSdkService,
+    protected listMethod: (...args: any[]) => Observable<T[]> | Promise<T[]>) {
   }
 
   protected source = new BehaviorSubject<T[] | undefined>(undefined);
@@ -31,10 +31,9 @@ export abstract class ListService<T extends Entity> {
       this.source.next(undefined);
     }
     return new Observable(_ => _.next()).pipe(
-      map(_ => {
+      tap(_ => {
         this._fetching = true;
         this._fetchError = undefined;
-        return _;
       }),
       mergeMap(() => this.listMethod(...args)),
       mergeMap((data: T[]) => {

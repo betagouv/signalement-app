@@ -209,7 +209,7 @@ export class CompaniesAdminComponent implements OnInit {
   downloadActivationDocuments() {
     if (isPlatformBrowser(this.platformId)) {
       this.companyAccessesService.downloadActivationDocuments(this.checkedCompaniesUuids).subscribe(response => {
-        const blob = new Blob([(response as HttpResponse<Blob>).body!], { type: 'application/pdf' });
+        const blob = new Blob([(response as unknown as HttpResponse<Blob>).body!], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'courriers.pdf';
