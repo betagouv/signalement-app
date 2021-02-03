@@ -7,10 +7,9 @@ import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
-import { ReportFilter, reportFilter2QueryString } from '../model/ReportFilter';
+import { ReportFilter, reportFilter2Body, reportFilter2QueryString } from '../model/ReportFilter';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from '../model/Company';
-import Utils from '../utils';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +24,7 @@ export class ReportService {
     private serviceUtils: ServiceUtils) {
   }
 
-  private _currentReportFilter = {};
+  private _currentReportFilter: ReportFilter = {};
 
   createReport(draftReport: DraftReport) {
     return this.http.post(
@@ -198,22 +197,11 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.post(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
-        this.reportFilter2Body(report),
+        reportFilter2Body(report),
         headers
       ))
     );
   }
-
-  private reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
-    const { period, offset, departments, tags, limit, ...rest } = report;
-    return {
-      ...rest,
-      departments: departments || [],
-      tags: tags || [],
-      ...((period && period[0]) ? { start: Utils.mapDate(period[0]) } : {}),
-      ...((period && period[1]) ? { end: Utils.mapDate(period[1]) } : {}),
-    };
-  };
 
   private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}) => {
     const report = reportWithFiles.report;

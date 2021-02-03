@@ -5,12 +5,13 @@ import pages from '../../../../assets/data/pages.json';
 import { MatTableDataSource } from '@angular/material/table';
 import { HostWithReportCount } from '../../../model/Website';
 import { MatPaginator } from '@angular/material/paginator';
-import { tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
 import { Roles } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-unregistered-websites',
@@ -19,13 +20,19 @@ import { AuthenticationService } from '../../../services/authentication.service'
 })
 export class UnregisteredWebsitesComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  @ViewChild(MatSort) sort?: MatSort;
 
   roles = Roles;
 
-  hostFilter?: string;
-  periodFilter?: Date[];
+  readonly hostCtrl = new FormControl();
+  readonly startCtrl = new FormControl();
+  readonly endCtrl = new FormControl();
+  readonly form = new FormGroup({
+    host: this.hostCtrl,
+    start: this.startCtrl,
+    end: this.endCtrl,
+  });
 
   dataSource?: MatTableDataSource<HostWithReportCount>;
 
@@ -35,49 +42,44 @@ export class UnregisteredWebsitesComponent implements OnInit {
   ];
 
   constructor(private titleService: Title,
-              private meta: Meta,
-              private localeService: BsLocaleService,
-              private router: Router,
-              public authenticationService: AuthenticationService,
-              public websiteService: WebsiteService) { }
+    private meta: Meta,
+    private localeService: BsLocaleService,
+    private router: Router,
+    public authenticationService: AuthenticationService,
+    public websiteService: WebsiteService) {
+  }
 
   ngOnInit() {
     this.titleService.setTitle(pages.websites.unregistered.title);
     this.meta.updateTag({ name: 'description', content: pages.websites.unregistered.description });
     this.localeService.use('fr');
+    this.form.valueChanges
+      .pipe(debounceTime(800), distinctUntilChanged())
+      .subscribe(this.fetchUnregisteredWebsites);
     this.fetchUnregisteredWebsites();
   }
 
-  fetchUnregisteredWebsites() {
-    return this.websiteService.listUnregistered(
-      this.hostFilter ?? null,
-      (this.periodFilter && this.periodFilter[0]) ?? null,
-      (this.periodFilter && this.periodFilter[1]) ?? null
-    ).pipe(
-      tap(hosts => this.initializeDatatable(hosts))
-    ).subscribe();
-  }
+  fetchUnregisteredWebsites = ({ host, start, end }: {host?: string, start?: Date, end?: Date} = {}) => {
+    return this.websiteService.listUnregistered(host, start, end)
+      .pipe(tap(this.initializeDatatable))
+      .subscribe();
+  };
 
-  initializeDatatable(hosts: HostWithReportCount[]) {
+  initializeDatatable = (hosts: HostWithReportCount[]) => {
     this.dataSource = new MatTableDataSource(hosts);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
+  };
 
   clearFilters() {
-    this.periodFilter = undefined;
-    this.hostFilter = undefined;
+    this.form.reset();
     this.fetchUnregisteredWebsites();
   }
 
   extract() {
-    this.websiteService.extractUnregistered(
-      this.hostFilter ?? null,
-      (this.periodFilter && this.periodFilter[0]) ?? null,
-      (this.periodFilter && this.periodFilter[1]) ?? null
-    ).subscribe(() => {
+    const { host, start, end } = this.form.value;
+    this.websiteService.extractUnregistered(host, start, end).subscribe(() => {
       this.router.navigate(['mes-telechargements']);
     });
   }
-
 }
