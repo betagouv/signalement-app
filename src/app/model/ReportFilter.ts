@@ -3,16 +3,10 @@ import Utils from '../utils';
 
 export interface ReportFilter {
   readonly departments?: string[];
-  /**
-   * @deprecated
-   * This variable is supposed to contain 'start and 'end' variables.
-   * It is used for convenience purpose in the view and could be remove soon.
-   */
-  readonly period?: string[];
   readonly tags?: Tag[];
   readonly companyCountries?: string[];
-  start?: string;
-  end?: string;
+  start?: Date;
+  end?: Date;
   email?: string;
   websiteURL?: string;
   siret?: string;
@@ -43,20 +37,51 @@ export interface ReportFilterQuerystring {
 
 export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuerystring => {
   try {
-    const { period, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
+    const { start, end, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
     return {
       ...r,
       offset: offset ? offset + '' : '0',
       limit: limit ? limit + '' : '10',
-      ...(hasCompany !== undefined &&  {hasCompany: '' + hasCompany}),
+      ...(hasCompany !== undefined && { hasCompany: '' + hasCompany }),
       ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
       ...(departments ? { departments: departments.join(',') } : {}),
-      ...((period && period[0]) ? { start: Utils.mapDate(period[0]) } : {}),
-      ...((period && period[1]) ? { end: Utils.mapDate(period[1]) } : {}),
+      ...((start) ? { start: Utils.dateToApi(start) } : {}),
+      ...((end) ? { end: Utils.dateToApi(end) } : {}),
     };
   } catch (e) {
-    console.error('Caught error on "reportFilter2QueryString"', report, e);
+    console.error('[SignalConso] Caught error on "reportFilter2QueryString"', report, e);
     return {};
   }
 };
 
+export const reportFilterFromQueryString = (report: ReportFilterQuerystring): ReportFilter => {
+  try {
+    const { start, end, companyCountries, departments, hasCompany, offset, limit, tags, ...r } = report;
+    const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+    return {
+      ...r,
+      offset: +offset,
+      limit: +limit,
+      hasCompany: parseBooleanOption(hasCompany),
+      tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
+      companyCountries: companyCountries?.split(','),
+      departments: departments?.split(','),
+      start: Utils.apiToDate(start),
+      end: Utils.apiToDate(end),
+    };
+  } catch (e) {
+    console.error('[SignalConso] Caught error on "reportFilter2QueryString"', report, e);
+    return {};
+  }
+};
+
+export const reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
+  const { start, end, offset, departments, tags, limit, ...rest } = report;
+  return {
+    ...rest,
+    departments: departments || [],
+    tags: tags || [],
+    start: Utils.dateToApi(start),
+    end: Utils.dateToApi(end),
+  };
+};

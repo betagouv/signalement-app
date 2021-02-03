@@ -153,6 +153,6 @@ export class ReportListProComponent implements OnInit {
   }
 
   hasFilter() {
-    return this.reportFilter && (this.reportFilter.period || this.reportFilter.status);
+    return this.reportFilter && (this.reportFilter.start || this.reportFilter.end || this.reportFilter.status);
   }
 }
