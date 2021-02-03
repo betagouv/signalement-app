@@ -69,8 +69,11 @@ describe('UnregisteredComponent', () => {
     const start = addMonths(new Date(), -1);
     const end = new Date();
 
-    component.hostFilter = q;
-    component.periodFilter = [start, end];
+    component.form.setValue({
+      host: q,
+      start,
+      end
+    });
     fixture.detectChanges();
 
     expect(websiteServiceSpy).toHaveBeenCalledWith('host', start, end);
