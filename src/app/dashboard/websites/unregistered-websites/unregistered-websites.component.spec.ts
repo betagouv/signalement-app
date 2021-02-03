@@ -8,12 +8,17 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { WebsiteService } from '../../../services/website.service';
 import { addMonths } from 'date-fns';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { WebsitesTabsComponent } from '../websites-tabs/websites-tabs.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { User } from '../../../model/AuthUser';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { AppMatPaginatorIntlFr } from '../../shared/material.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('UnregisteredComponent', () => {
 
@@ -31,10 +36,17 @@ describe('UnregisteredComponent', () => {
       imports: [
         ComponentsModule,
         SharedModule,
+        BsDatepickerModule.forRoot(),
         RouterTestingModule,
         NoopAnimationsModule,
-        BsDatepickerModule.forRoot(),
         HttpClientModule,
+        MatNativeDateModule,
+        MatProgressBarModule,
+        ReactiveFormsModule,
+      ],
+      providers: [
+        MatNativeDateModule,
+        { provide: MatPaginatorIntl, useClass: AppMatPaginatorIntlFr },
       ]
     })
     .compileComponents();
@@ -61,9 +73,12 @@ describe('UnregisteredComponent', () => {
 
   });
 
-  it('should request the API on filtering', () => {
+  it('should request the API on filtering', (done) => {
 
-    const websiteServiceSpy = spyOn(websiteService, 'listUnregistered').and.callFake(() => of([{ host: 'host1.fr', count: 1}, { host: 'host2.fr', count: 2}]));
+    const websiteServiceSpy = spyOn(websiteService, 'listUnregistered').and.callFake(() => of([
+      { host: 'host1.fr', count: 1 },
+      { host: 'host2.fr', count: 2 }
+    ]));
 
     const q = 'host';
     const start = addMonths(new Date(), -1);
@@ -71,12 +86,13 @@ describe('UnregisteredComponent', () => {
 
     component.form.setValue({
       host: q,
-      start,
-      end
+      start: start,
+      end: end,
     });
     fixture.detectChanges();
-
-    expect(websiteServiceSpy).toHaveBeenCalledWith('host', start, end);
-
+    setTimeout(() => {
+      expect(websiteServiceSpy).toHaveBeenCalledWith('host', start, end);
+      done();
+    }, 1000);
   });
 });
