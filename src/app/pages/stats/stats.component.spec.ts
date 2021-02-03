@@ -151,8 +151,8 @@ describe('StatsComponent', () => {
       expect(component.reportCount).toEqual(53);
       expect(component.reportReadByProPercentage).toEqual(12.5);
       expect(component.reportWithResponsePercentage).toEqual(43.89);
-      expect(component.reportWithResponseMedianDelay).toEqual(5.842079756944444);
-      expect(component.reportReadByProMedianDelay).toEqual(1.049521886574074);
+      expect(component.reportWithResponseMedianDelay).toEqual(5.833333333333333);
+      expect(component.reportReadByProMedianDelay).toEqual(1.0416666666666667);
     });
 
   });
