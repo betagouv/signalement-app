@@ -20,8 +20,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class UnregisteredWebsitesComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  @ViewChild(MatSort) sort?: MatSort;
 
   roles = Roles;
 
