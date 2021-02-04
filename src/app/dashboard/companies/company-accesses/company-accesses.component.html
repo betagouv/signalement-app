@@ -25,7 +25,7 @@
                     <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
                   </select>
                   <ng-template #currentUserLevel>
-                    {{accessLevels.get(access.level)}}
+                    {{accessLevels[access.level]}}
                   </ng-template>
                 </td>
                 <td>
