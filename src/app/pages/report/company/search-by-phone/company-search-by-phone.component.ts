@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { DraftReport } from '../../../../model/Report';
-import { IdentificationKinds } from '../company.component';
 import { CustomValidators } from '../../../../custom-validators';
 import Utils from '../../../../utils';
 
@@ -18,13 +17,8 @@ export class CompanySearchByPhoneComponent implements OnInit {
   @Output() complete = new EventEmitter<string>();
   @Output() change = new EventEmitter();
 
-  readonly phoneCtrl = this.formBuilder.control(this.draftReport?.draftCompany.phone ?? '', [
-    Validators.required,
-    CustomValidators.validatePhoneNumber
-  ]);
-  readonly phoneForm = this.formBuilder.group({
-    phone: this.phoneCtrl
-  });
+  phoneCtrl: FormControl;
+  phoneForm: FormGroup;
 
   showErrors = false;
 
@@ -32,6 +26,14 @@ export class CompanySearchByPhoneComponent implements OnInit {
               private analyticsService: AnalyticsService) { }
 
   ngOnInit(): void {
+
+    this.phoneCtrl  = this.formBuilder.control(this.draftReport?.draftCompany.phone ?? '', [
+      Validators.required,
+      CustomValidators.validatePhoneNumber
+    ]);
+    this.phoneForm = this.formBuilder.group({
+      phone: this.phoneCtrl
+    });
   }
 
   submitPhone() {
