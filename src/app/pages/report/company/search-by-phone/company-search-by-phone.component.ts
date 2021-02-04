@@ -27,7 +27,7 @@ export class CompanySearchByPhoneComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.phoneCtrl  = this.formBuilder.control(this.draftReport?.draftCompany.phone ?? '', [
+    this.phoneCtrl  = this.formBuilder.control(this.draftReport?.draftCompany?.phone ?? '', [
       Validators.required,
       CustomValidators.validatePhoneNumber
     ]);
