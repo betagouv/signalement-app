@@ -125,7 +125,7 @@
           rank: 5
           type: TEXTAREA
       fileLabel: Si possible, joindre une copie du contrat ou tout document commercial
-    - title: Démarchage par téléphone
+    - title: Démarchage téléphonique
       companyKind: PHONE
       detailInputs:
         - label: Date de l'appel

@@ -488,7 +488,7 @@
 - title: Un site internet lié au secteur de la santé
   example: 'Exemple : site de téléconsultation avec un médecin'
   companyKind: 'WEBSITE'
-- title: Démarchage par téléphone
+- title: Démarchage téléphonique
   companyKind: PHONE
   detailInputs:
     - label: Date de l'appel

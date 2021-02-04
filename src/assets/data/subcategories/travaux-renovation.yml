@@ -95,7 +95,7 @@
             - title: Prix indiqué de manière globale et non détaillée
             - title: Date de livraison des produits ou réalisation des travaux non précisée
             - title: Autre
-        - title: Démarchage par téléphone
+        - title: Démarchage téléphonique
           companyKind: PHONE
           detailInputs:
             - label: Date de l'appel
