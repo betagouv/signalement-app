@@ -212,7 +212,7 @@ describe('CompanyComponent', () => {
     it('should display radios for identification when phone is submitting', () => {
 
       const nativeElement = fixture.nativeElement;
-      nativeElement.querySelector('form#phoneForm #phoneInput').value = '0000000000';
+      nativeElement.querySelector('form#phoneForm #phoneInput').value = '0555555555';
       nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
       nativeElement.querySelectorAll('form#phoneForm button')[0].click();
       fixture.detectChanges();
