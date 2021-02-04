@@ -120,6 +120,20 @@
         - title: Je reçois des spams dans mes emails
         - title: J'ai eu un problème avec un démarcheur téléphonique
           companyKind: PHONE
+          detailInputs:
+            - label: Date de l'appel
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Est-ce que le vendeur s'est fait passer pour une autre entreprise&#160;?
+              rank: 2
+              type: RADIO
+              options:
+                - Non
+                - Oui (à préciser)
+            - label: Décrivez nous plus en détails ce qui s'est passé
+              rank: 3
+              type: TEXTAREA
     - title: Autre
       example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
       tags:

@@ -95,8 +95,22 @@
             - title: Prix indiqué de manière globale et non détaillée
             - title: Date de livraison des produits ou réalisation des travaux non précisée
             - title: Autre
-        - title: Démarchage téléphonique
+        - title: Démarchage par téléphone
           companyKind: PHONE
+          detailInputs:
+            - label: Date de l'appel
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Est-ce que le vendeur s'est fait passer pour une autre entreprise&#160;?
+              rank: 2
+              type: RADIO
+              options:
+                - Non
+                - Oui (à préciser)
+            - label: Décrivez nous plus en détails ce qui s'est passé
+              rank: 3
+              type: TEXTAREA
         - title: Information mensongère ou trompeuse
           subcategories:
             - title: Mise en avant d'un label ou d'un signe de qualité non ou plus détenu
