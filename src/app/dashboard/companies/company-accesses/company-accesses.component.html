@@ -25,7 +25,7 @@
                     <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
                   </select>
                   <ng-template #currentUserLevel>
-                    {{accessLevels[access.level]}}
+                    {{accessLevels.get(access.level)}}
                   </ng-template>
                 </td>
                 <td>
@@ -48,7 +48,7 @@
               <tr *ngFor="let pendingToken of pendingTokens">
                 <td colspan="2" class="text-center"><small class="text-muted">L'invitation a été envoyée et est en attente d'acceptation.</small></td>
                 <td>{{pendingToken.emailedTo}}</td>
-                <td>{{accessLevels.get(pendingToken.level)}}</td>
+                <td>{{accessLevels[pendingToken.level]}}</td>
                 <td>
                     <button class="btn btn-sm btn-danger" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
                 </td>
