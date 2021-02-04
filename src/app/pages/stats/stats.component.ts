@@ -1,34 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { MonthlyStat } from '../../model/Statistics';
 import { Roles } from '../../model/AuthUser';
 import pages from '../../../assets/data/pages.json';
 import { Meta, Title } from '@angular/platform-browser';
-import { duration } from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
-import { take } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
+import { parse } from 'iso8601-duration';
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.scss']
 })
-export class StatsComponent implements OnInit {
+export class StatsComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
 
   roles = Roles;
 
   reportCount: number;
+  reportForwardedToProPercentage: number;
   reportReadByProPercentage: number;
   reportReadByProMedianDelay: number;
   reportWithResponsePercentage: number;
   reportWithResponseMedianDelay: number;
+  reportWithWebsitePercentage: number;
 
   monthlyReportChart: EChartOption;
+  monthlyReportForwardedToProChart: EChartOption;
   monthlyReportReadByProChart: EChartOption;
   monthlyReportWithResponseChart: EChartOption;
 
-  constructor(private statsService: StatsService,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private statsService: StatsService,
               private authenticationService: AuthenticationService,
               private titleService: Title,
               private meta: Meta) { }
@@ -38,7 +46,7 @@ export class StatsComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.stats.description });
 
     this.authenticationService.user
-      .pipe(take(1))
+      .pipe(takeUntil(this.unsubscribe))
       .subscribe(user => {
         if (user && user.role === this.roles.Admin) {
           this.loadAminStatistics();
@@ -48,9 +56,22 @@ export class StatsComponent implements OnInit {
     this.loadStatistics();
   }
 
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  renderCharts() {
+    return isPlatformBrowser(this.platformId);
+  }
+
   loadStatistics() {
     this.statsService.getReportCount().subscribe(simpleStat => {
       this.reportCount = simpleStat.value as number;
+    });
+
+    this.statsService.getReportForwardedToProPercentage().subscribe(simpleStat => {
+      this.reportForwardedToProPercentage = simpleStat.value as number;
     });
 
     this.statsService.getReportReadByProPercentage().subscribe(simpleStat => {
@@ -60,16 +81,20 @@ export class StatsComponent implements OnInit {
     this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
       this.reportWithResponsePercentage = simpleStat.value as number;
     });
+
+    this.statsService.getReportWithWebsitePercentage().subscribe(simpleStat => {
+      this.reportWithWebsitePercentage = simpleStat.value as number;
+    });
   }
 
   loadAminStatistics() {
 
     this.statsService.getReportReadByProMedianDelay().subscribe(simpleStat => {
-      this.reportReadByProMedianDelay = duration(simpleStat.value).asDays();
+      this.reportReadByProMedianDelay = parse(simpleStat.value as string).hours / 24;
     });
 
     this.statsService.getReportWithResponseMedianDelay().subscribe(simpleStat => {
-      this.reportWithResponseMedianDelay = duration(simpleStat.value).asDays();
+      this.reportWithResponseMedianDelay = parse(simpleStat.value as string).hours / 24;
     });
   }
 
@@ -77,6 +102,12 @@ export class StatsComponent implements OnInit {
   loadMonthlyReportChart() {
     this.statsService.getMonthlyReportCount().subscribe(monthlyStats => {
       this.monthlyReportChart = this.getChartOption(monthlyStats);
+    });
+  }
+
+  loadMonthlyReportForwardedToProChart() {
+    this.statsService.getMonthlyReportForwardedToProPercentage().subscribe(monthlyStats => {
+      this.monthlyReportForwardedToProChart = this.getChartOption(monthlyStats, true);
     });
   }
 

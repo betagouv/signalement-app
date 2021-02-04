@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
-import { ReportFilter, reportFilter2QueryString, ReportFilterQuerystring } from '../../../model/ReportFilter';
+import { ReportFilter, reportFilter2QueryString, reportFilterFromQueryString } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
 import pages from '../../../../assets/data/pages.json';
 import { Roles } from '../../../model/AuthUser';
@@ -28,7 +28,8 @@ export class ReportListComponent implements OnInit {
 
   readonly formControlNamesWithAutomaticRefresh: (keyof ReportFilter)[] = [
     'departments',
-    'period',
+    'start',
+    'end',
   ];
 
   loading: boolean;
@@ -37,7 +38,7 @@ export class ReportListComponent implements OnInit {
   reports: PaginatedData<Report>;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private titleService: Title,
     private meta: Meta,
     private fb: FormBuilder,
@@ -55,28 +56,12 @@ export class ReportListComponent implements OnInit {
     this.initAndBuildForm();
   }
 
-  readonly getFormFromQueryString = (qs: ReportFilterQuerystring): ReportFilter => {
+  readonly getFormFromQueryString = (qs: ReportFilter): ReportFilter => {
     try {
-      const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
-      const {
-        offset,
-        limit,
-        tags,
-        departments,
-        companyCountries,
-        hasCompany,
-        start,
-        end,
-      } = qs;
       return {
         ...qs,
-        offset: +offset ?? 0,
-        limit: +limit ?? this.defaultPageSize,
-        tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
-        departments: departments?.split(','),
-        companyCountries: companyCountries?.split(','),
-        hasCompany: parseBooleanOption(hasCompany),
-        period: (start && end) && [new Date(start).toString(), new Date(end).toString()],
+        offset: +qs.offset ?? 0,
+        limit: +qs.limit ?? this.defaultPageSize,
       };
     } catch (e) {
       console.error('Caught error on "reportFilterFromQueryString"', qs, e);
@@ -90,7 +75,8 @@ export class ReportListComponent implements OnInit {
       departments: [],
       companyCountries: [],
       details: undefined,
-      period: undefined,
+      start: undefined,
+      end: undefined,
       siret: undefined,
       status: undefined,
       hasCompany: undefined,
@@ -104,7 +90,7 @@ export class ReportListComponent implements OnInit {
     const formValues = {
       ...initialValues,
       ...this.reportService.currentReportFilter,
-      ...this.getFormFromQueryString(this.activatedRoute.snapshot.queryParams),
+      ...this.getFormFromQueryString(reportFilterFromQueryString(this.activatedRoute.snapshot.queryParams)),
     };
     try {
       this.buildForm(formValues);

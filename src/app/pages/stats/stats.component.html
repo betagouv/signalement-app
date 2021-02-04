@@ -15,7 +15,7 @@
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportChart">
-            <div echarts [options]="monthlyReportChart"></div>
+            <div echarts [options]="monthlyReportChart" *ngIf="renderCharts()"></div>
             <ngx-loading [show]="!monthlyReportChart"></ngx-loading>
           </div>
           <ngx-loading [show]="!reportCount"></ngx-loading>
@@ -23,9 +23,40 @@
       </div>
       <div class="card">
         <div class="card-body">
+          <h2 *ngIf="reportWithWebsitePercentage">
+            <span class="count">{{reportWithWebsitePercentage.toFixed(0) + "%"}}</span>
+            des signalements concernent le ecommerce
+          </h2>
+          <ngx-loading [show]="!reportWithWebsitePercentage"></ngx-loading>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h2 *ngIf="reportForwardedToProPercentage">
+            <span class="count">{{reportForwardedToProPercentage.toFixed(0) + "%"}}</span>
+            des signalements ont été transmis à l'entreprise signalée
+            <i class="material-icons help" aria-hidden="true"
+               tooltip="Pourquoi pas 100 % ? Car dans certaines cas (achat en ligne...) les entreprises n'ont pas pu être identifiées par le consommateur">
+              help_outline
+            </i>
+          </h2>
+          <div class="text-right">
+            <a (click)="loadMonthlyReportForwardedToProChart()" data-toggle="collapse" href="#collapseMonthlyReportForwardedToProChart" class="collapsed">
+              Consulter les statistiques mensuelles
+            </a>
+          </div>
+          <div class="collapse" id="collapseMonthlyReportForwardedToProChart">
+            <div echarts [options]="monthlyReportForwardedToProChart" *ngIf="renderCharts()"></div>
+            <ngx-loading [show]="!monthlyReportForwardedToProChart"></ngx-loading>
+          </div>
+          <ngx-loading [show]="!reportForwardedToProPercentage"></ngx-loading>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
           <h2 *ngIf="reportReadByProPercentage">
             <span class="count">{{reportReadByProPercentage.toFixed(0) + "%"}}</span>
-            des signalements ont été lus par les entreprises
+            des signalements transmis ont été lus par les entreprises
             <i class="material-icons help" aria-hidden="true"
                tooltip="Pourquoi pas 100 % ? Car Signalconso est facultatif. L'entreprise est libre de créer un compte et de lire le signalement.">
               help_outline
@@ -37,7 +68,7 @@
             </a>
           </div>
           <div class="collapse" id="collapseMonthlyReportReadByProChart">
-            <div echarts [options]="monthlyReportReadByProChart"></div>
+            <div echarts [options]="monthlyReportReadByProChart" *ngIf="renderCharts()"></div>
             <ngx-loading [show]="!monthlyReportReadByProChart"></ngx-loading>
           </div>
           <ngx-loading [show]="!reportReadByProPercentage"></ngx-loading>
@@ -59,7 +90,7 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <h2 *ngIf="reportWithResponsePercentage">
+          <h2 *ngIf="reportWithResponsePercentage !== undefined">
             Sur l'ensemble des signalements lus,
             <span class="count">{{reportWithResponsePercentage.toFixed(0) + "%"}}</span>
             ont eu une réponse de l'entreprise
@@ -69,20 +100,20 @@
             </i>
           </h2>
           <div class="text-right">
-            <a (click)="loadMonthlyReportWithReponseChart()" data-toggle="collapse" href="#collapseMonthlyReportWithReponseChart" class="collapsed">
+            <a (click)="loadMonthlyReportWithReponseChart()" data-toggle="collapse" href="#collapseMonthlyReportWithResponseChart" class="collapsed">
                Consulter les statistiques mensuelles
             </a>
           </div>
-          <div class="collapse" id="collapseMonthlyReportWithReponseChart">
-            <div echarts [options]="monthlyReportWithResponseChart"></div>
+          <div class="collapse" id="collapseMonthlyReportWithResponseChart">
+            <div echarts [options]="monthlyReportWithResponseChart" *ngIf="renderCharts()"></div>
             <ngx-loading [show]="!monthlyReportWithResponseChart"></ngx-loading>
           </div>
-          <ngx-loading [show]="!reportWithResponsePercentage"></ngx-loading>
+          <ngx-loading [show]="reportWithResponsePercentage === undefined"></ngx-loading>
         </div>
       </div>
       <div class="card" *appRole="[roles.Admin]">
         <div class="card-body">
-          <h2 *ngIf="reportWithResponseMedianDelay">
+          <h2 *ngIf="reportWithResponseMedianDelay !== undefined">
             En moyenne une entreprise met
             <span class="count">{{reportWithResponseMedianDelay.toFixed(1)}} jours</span>
             pour répondre au signalement après l'avoir lu
@@ -91,7 +122,7 @@
               help_outline
             </i>
           </h2>
-          <ngx-loading [show]="!reportWithResponseMedianDelay"></ngx-loading>
+          <ngx-loading [show]="reportWithResponseMedianDelay === undefined"></ngx-loading>
         </div>
       </div>
       <p class="note pt-2">

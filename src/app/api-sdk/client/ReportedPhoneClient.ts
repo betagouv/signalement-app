@@ -1,9 +1,9 @@
 import { ApiPhoneWithReportCount } from '../model/ApiReportedPhone';
-import { ApiClient } from '../ApiClient';
+import { ApiClient, ApiClientApi } from '../ApiClient';
 
 export class ReportedPhoneClient {
 
-  constructor(private client: ApiClient) {
+  constructor(private client: ApiClientApi) {
   }
 
   readonly list = (q?: string, start?: string, end?: string): Promise<ApiPhoneWithReportCount[]> => {

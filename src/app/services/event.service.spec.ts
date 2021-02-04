@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { EventService } from './event.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ServiceUtils } from './service.utils';
+import { ServiceUtils } from './core/service.utils';
 
 describe('EventService', () => {
   beforeEach(() => TestBed.configureTestingModule({

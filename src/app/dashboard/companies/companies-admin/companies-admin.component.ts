@@ -5,7 +5,7 @@ import { isPlatformBrowser, Location } from '@angular/common';
 import pages from '../../../../assets/data/pages.json';
 import { Roles, User } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
 import { Company, CompanyToActivate, UserAccess } from '../../../model/Company';
@@ -77,13 +77,14 @@ export class CompaniesAdminComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.companies.companiesAdmin.description });
 
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
-      .subscribe(([url, user]) => {
+      // @ts-ignore TODO check why user is of type unknown
+      .subscribe(([url, user]: [UrlSegment[], User]) => {
         if (user && (user.role === this.roles.Admin || user.role === this.roles.DGCCRF)) {
           this.user = user;
           this.navTabs = {
             [this.roles.Admin]: [this.searchTab, this.mostReportedTab, this.toActivateTab],
             [this.roles.DGCCRF]: [this.mostReportedTab]
-          }[this.user.role];
+          }[user.role];
           this.currentNavTab = this.navTabs.find(tab =>
             tab.link.reduce((s1, s2) => `${s1}/${s2}`) === url.reduce((s, segment) => `${s}/${segment.toString()}`, '/')
           );
@@ -208,7 +209,7 @@ export class CompaniesAdminComponent implements OnInit {
   downloadActivationDocuments() {
     if (isPlatformBrowser(this.platformId)) {
       this.companyAccessesService.downloadActivationDocuments(this.checkedCompaniesUuids).subscribe(response => {
-        const blob = new Blob([(response as HttpResponse<Blob>).body!], { type: 'application/pdf' });
+        const blob = new Blob([(response as unknown as HttpResponse<Blob>).body!], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'courriers.pdf';

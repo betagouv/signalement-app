@@ -158,23 +158,27 @@
                   Signalement du consommateur
                 </div>
 
-                <div class="pt-2" *ngIf="getEvent(eventActionValues.FirstVisit)">
-                  <small class="text-darker-grey">
-                    <i>{{getEvent(eventActionValues.FirstVisit).data.creationDate | date : 'mediumDate'}}</i>
-                  </small>
-                </div>
-                <div>
-                  Première consultation
-                </div>
+                <ng-container *ngIf="getEvent(eventActionValues.FirstVisit)">
+                  <div class="pt-2">
+                    <small class="text-darker-grey">
+                      <i>{{getEvent(eventActionValues.FirstVisit).data.creationDate | date : 'mediumDate'}}</i>
+                    </small>
+                  </div>
+                  <div>
+                    Première consultation
+                  </div>
+                </ng-container>
 
-                <div class="pt-2" *ngIf="getReportResponse()">
-                  <small class="text-darker-grey">
-                    <i>{{getEvent(eventActionValues.ReportResponse).data.creationDate | date : 'mediumDate'}}</i>
-                  </small>
-                </div>
-                <div>
-                  Réponse au signalement
-                </div>
+                <ng-container *ngIf="getReportResponse()">
+                  <div class="pt-2">
+                    <small class="text-darker-grey">
+                      <i>{{getEvent(eventActionValues.ReportResponse).data.creationDate | date : 'mediumDate'}}</i>
+                    </small>
+                  </div>
+                  <div>
+                    Réponse au signalement
+                  </div>
+                </ng-container>
               </ng-container>
 
             </div>

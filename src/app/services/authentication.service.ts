@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthUser, TokenInfo, User } from '../model/AuthUser';
-import { Api, AuthUserStorageKey, ServiceUtils, TokenInfoStorageKey } from './service.utils';
+import { Api, AuthUserStorageKey, ServiceUtils, TokenInfoStorageKey } from './core/service.utils';
 import { map, mergeMap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';

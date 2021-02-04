@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ServiceUtils } from './service.utils';
 import { catchError, mergeMap, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, from, Observable, of, throwError } from 'rxjs';
 import { ApiError } from '../api-sdk/ApiClient';
 import { PhoneWithReportCount } from '../model/ReportedPhone';
 import format from 'date-fns/format';
-import { HttpClient } from '@angular/common/http';
+import { ApiSdkService } from './core/api-sdk.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportedPhoneService {
 
-  constructor(private http: HttpClient,
-              private serviceUtils: ServiceUtils) {
+  constructor(protected api: ApiSdkService) {
   }
 
   protected source = new BehaviorSubject<PhoneWithReportCount[] | undefined>(undefined);
@@ -29,12 +27,12 @@ export class ReportedPhoneService {
   }
 
   readonly fetch = (q?: string, start?: Date, end?: Date): Observable<PhoneWithReportCount[]> => {
-    return this.serviceUtils.getSecuredReportApiSdk.pipe(
+    return of(_ => _.next()).pipe(
       tap(_ => {
         this._fetching = true;
         this._fetchError = undefined;
       }),
-      mergeMap(api => api.reportedPhone.list(
+      mergeMap(_ => this.api.secured.reportedPhone.list(
         q,
         start ? format(start, 'yyyy-MM-dd') : null,
         end ? format(end, 'yyyy-MM-dd') : null)
@@ -54,12 +52,12 @@ export class ReportedPhoneService {
 
 
   readonly extract = (q?: string, start?: Date, end?: Date): Observable<PhoneWithReportCount[]> => {
-    return this.serviceUtils.getSecuredReportApiSdk.pipe(
-      mergeMap(api => api.reportedPhone.extract(
+    return from(
+        this.api.secured.reportedPhone.extract(
         q,
         start ? format(start, 'yyyy-MM-dd') : null,
-        end ? format(end, 'yyyy-MM-dd') : null)
-      )
-    );
+        end ? format(end, 'yyyy-MM-dd') : null
+        )
+      );
   }
 }

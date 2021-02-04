@@ -30,21 +30,14 @@
           <div class="container max-width">
             <div class="row form-group">
               <div class="col-12 col-sm-6">
-                <label for="period">
+                <label for="input-start">
                   Période
                 </label>
-                <input type="text"
-                       [(ngModel)]="reportFilter.period"
-                       name="period"
-                       id="period"
-                       placeholder="Période sélectionnée"
-                       bsDaterangepicker
-                       autocomplete="off"
-                       [bsConfig]="{
-                         containerClass: 'theme-default',
-                         rangeInputFormat: 'DD MMMM YYYY'
-                       }"
-                       triggers="click keypress"/>
+                <mat-date-range-input [rangePicker]="picker" (click)="picker.open()" class="form-control">
+                  <input [(ngModel)]="reportFilter.start" name="start" matStartDate placeholder="Période sélectionnée" id="input-start">
+                  <input [(ngModel)]="reportFilter.end" name="end" matEndDate placeholder="">
+                </mat-date-range-input>
+                <mat-date-range-picker #picker></mat-date-range-picker>
               </div>
               <div class="col-8 col-sm-4">
                 <label for="statusFilter">
@@ -53,7 +46,7 @@
                   <span class="sr-only">Consulter l'aide</span>
                 </a>
                 </label>
-                <select [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
+                <select class="form-control" [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter" name="status" [class]="reportFilter.status ? 'selected' : ''">
                   <option [ngValue]="undefined" selected>Tous les statuts</option>
                   <option *ngFor="let status of statusList">
                     {{status}}

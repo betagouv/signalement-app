@@ -1,3 +1,5 @@
+import { ApiWebsiteKind } from '../api-sdk/model/ApiWebsite';
+
 export interface DraftCompany {
   siret?: string;
   name?: string;
@@ -20,7 +22,7 @@ export interface CompanySearchResult extends DraftCompany {
   activityCode: string;
   activityLabel: string;
   isHeadOffice: boolean;
-  kind?: WebsiteKinds;
+  kind?: ApiWebsiteKind;
 }
 
 export interface CompanyAccess {
@@ -61,8 +63,4 @@ export class WebsiteURL {
       .replace('www.', '')
       .split(/[/?#]/)[0] : this.url;
   }
-}
-
-export enum WebsiteKinds {
-  Default = 'DEFAULT', Marketplace = 'MARKETPLACE'
 }

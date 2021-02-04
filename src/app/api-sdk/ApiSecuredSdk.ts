@@ -1,10 +1,10 @@
 import { WebsiteClient } from './client/WebsiteClient';
-import { ApiClient } from './ApiClient';
 import { ConstantClient } from './client/ConstantClient';
 import { ReportedPhoneClient } from './client/ReportedPhoneClient';
+import { ApiClientApi } from './ApiClient';
 
-export class ApiSdkSecured {
-  constructor(private client: ApiClient) {
+export class ApiSecuredSdk {
+  constructor(private client: ApiClientApi) {
   }
 
   readonly website = new WebsiteClient(this.client);

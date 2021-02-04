@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Api, ServiceUtils } from './service.utils';
+import { Api, ServiceUtils } from './core/service.utils';
 import { AuthenticationService } from './authentication.service';
 import { map, mergeMap } from 'rxjs/operators';
 import { User } from '../model/AuthUser';
@@ -59,8 +59,8 @@ export class AccountService {
       mergeMap(headers => {
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'document', 'activation']),
-          { reportIds : Array.from(reportuuids) },
-          Object.assign(headers, {responseType: 'blob', observe: 'response' })
+          { reportIds: Array.from(reportuuids) },
+          { ...headers, responseType: 'blob', observe: 'response' },
         );
       })
     );

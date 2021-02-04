@@ -1,11 +1,12 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CompanySearchResult, DraftCompany, WebsiteKinds, WebsiteURL, } from '../../../../model/Company';
+import { CompanySearchResult, DraftCompany, WebsiteURL, } from '../../../../model/Company';
 import { CompanyService } from '../../../../services/company.service';
 import { RendererService } from '../../../../services/renderer.service';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { DraftReport } from '../../../../model/Report';
 import { IdentificationKinds } from '../company.component';
+import { ApiWebsiteKind } from '../../../../api-sdk/model/ApiWebsite';
 
 @Component({
   selector: 'app-company-search-by-website',
@@ -23,7 +24,7 @@ export class CompanySearchByWebsiteComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>();
   @Output() change = new EventEmitter();
 
-  websiteKinds = WebsiteKinds;
+  websiteKinds = ApiWebsiteKind;
 
   websiteForm: FormGroup;
   urlCtrl: FormControl;
