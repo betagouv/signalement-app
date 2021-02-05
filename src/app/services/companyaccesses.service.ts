@@ -113,7 +113,7 @@ export class CompanyAccessesService {
         company: {
           ...result.company,
           creationDate: parseISO(result.company.creationDate),
-          website: result.company.website ? Object.assign(new WebsiteURL(), { url: result.company.website.url }) : undefined
+          website: result.company.website ? { url: result.company.website.url } : undefined
         },
         lastNotice: result.lastNotice ? parseISO(result.lastNotice) : undefined,
         tokenCreation: parseISO(result.tokenCreation)

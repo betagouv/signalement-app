@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../services/analytics.service';
 
 @Component({
@@ -6,20 +6,17 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../ser
   templateUrl: './collapsable-text.component.html',
   styleUrls: ['./collapsable-text.component.css']
 })
-export class CollapsableTextComponent implements OnInit {
+export class CollapsableTextComponent {
 
-  @Input() title: string;
-  @Input() content: string;
-  isCollapsed: boolean;
+  @Input() title?: string;
+  @Input() content?: string;
+  isCollapsed = true;
 
-  constructor(private analyticsService: AnalyticsService) { }
-
-  ngOnInit() {
-    this.isCollapsed = true;
+  constructor(private analyticsService: AnalyticsService) {
   }
 
   isTruncable() {
-    return this.content.length > 100;
+    return this.content && this.content.length > 100;
   }
 
   collapse() {

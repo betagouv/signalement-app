@@ -53,16 +53,8 @@ export interface CompanyToActivate {
   tokenCreation: Date;
 }
 
-export class WebsiteURL {
+export interface WebsiteURL {
   url: string;
-
-  get hostname() {
-    return this.url ? this.url
-      .replace('http://', '')
-      .replace('https://', '')
-      .replace('www.', '')
-      .split(/[/?#]/)[0] : this.url;
-  }
 }
 
 export const isGovernmentCompany = (_?: DraftCompany): boolean => _.activityCode?.startsWith('84.');
