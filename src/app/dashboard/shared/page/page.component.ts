@@ -35,7 +35,7 @@ export class PageComponent {
     return this.animated;
   }
 
-  private _animated = true;
+  private _animated = false;
   @Input()
   get animated() {
     return this._animated;

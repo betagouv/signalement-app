@@ -3,7 +3,7 @@
             [backButton]="reportFilter.siret">
 </app-banner>
 
-<app-page>
+<app-page class="max-width">
   <form (ngSubmit)="submitFilters()" *ngIf="withPagingAndFiltering()">
     <div class="row form-group">
       <div class="col-12 col-sm-6">
@@ -38,16 +38,21 @@
     <strong>votre signalement</strong>.
   </div>
 
-  <app-panel>
+  <button mat-raised-button color="primary" type="button" (click)="launchExtraction()" class="-btn-extract">
+    <mat-icon>download</mat-icon>
+    Exporter (XLS)
+  </button>
+
+  <app-panel *ngIf="withPagingAndFiltering()">
     <app-panel-header>
-      <ng-container *ngIf="withFiltering">
+      <ng-container>
         <mat-date-range-input [rangePicker]="picker" (click)="picker.open()" class="form-control form-control-material">
           <input [(ngModel)]="reportFilter.start" name="start" matStartDate placeholder="Période sélectionnée"
                  id="input-start">
           <input [(ngModel)]="reportFilter.end" name="end" matEndDate placeholder="">
         </mat-date-range-input>
         <mat-date-range-picker #picker></mat-date-range-picker>
-
+        &nbsp;&nbsp;
         <mat-select [(ngModel)]="reportFilter.status" id="rls-statut" class="form-control form-control-material">
           <!--        <mat-select-trigger>{{reportFilter.status}}</mat-select-trigger>-->
           <mat-option [value]="undefined" selected>Tous les statuts</mat-option>
@@ -58,11 +63,8 @@
       </ng-container>
 
       <div class="txt-secondary text-nowrap">
-        <button mat-icon-button matTooltip="Supprimer tous les filtres" *ngIf="withFiltering" (click)="cancelFilters()">
+        <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="cancelFilters()">
           <mat-icon>clear</mat-icon>
-        </button>
-        <button mat-raised-button color="primary" type="button" (click)="launchExtraction()">
-          Exporter (XLS)
         </button>
       </div>
 
@@ -133,10 +135,6 @@
       <!--                    lastText="&raquo;" class="justify-content-center">-->
       <!--        </pagination>-->
     </div>
-    <div class="col-12 col-sm-6 text-center text-sm-right">
-      <button type="button" class="btn btn-outline-success btn-sm" (click)="launchExtraction()">
-        Exporter (XLS)
-      </button>
-    </div>
+
   </div>
 </app-page>
