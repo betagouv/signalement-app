@@ -10,7 +10,7 @@ import { DraftCompany, WebsiteURL } from '../../../model/Company';
 import { RendererService } from '../../../services/renderer.service';
 
 export enum IdentificationKinds {
-  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url'
+  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url', Phone = 'Phone'
 }
 
 @Component({
@@ -21,22 +21,23 @@ export enum IdentificationKinds {
 export class CompanyComponent implements OnInit {
 
   @ViewChild('searchKind')
-  private searchKind: ElementRef;
+  private searchKind?: ElementRef;
   @ViewChild('identSearch')
-  private identSearch: ElementRef;
+  private identSearch?: ElementRef;
 
-  step: Step;
-  draftReport: DraftReport;
-  companyKinds = CompanyKinds;
+  readonly step = Step.Company;
+  draftReport?: DraftReport;
+  readonly companyKinds = CompanyKinds;
 
-  identificationKinds = IdentificationKinds;
-  identificationKind: IdentificationKinds;
+  readonly identificationKinds = IdentificationKinds;
+  identificationKind?: IdentificationKinds;
 
   changeDraftCompany = false;
-  draftWebsite: WebsiteURL;
-  requireIdentificationKind: boolean;
+  draftWebsite?: WebsiteURL;
+  draftPhone?: string;
+  requireIdentificationKind = false;
 
-  loading: boolean;
+  loading = false;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
@@ -46,14 +47,13 @@ export class CompanyComponent implements OnInit {
               private rendererService: RendererService) { }
 
   ngOnInit() {
-    this.step = Step.Company;
     this.reportStorageService.retrieveReportInProgress()
       .pipe(take(1))
-      .subscribe(report => {
+      .subscribe((report: DraftReport) => {
         if (report) {
           this.draftReport = report;
           this.checkExistingCompanyCompliance();
-          if (this.draftReport.companyKind === CompanyKinds.WEBSITE) {
+          if ([CompanyKinds.WEBSITE.valueOf(), CompanyKinds.PHONE.valueOf()].indexOf(this.draftReport?.companyKind) !== -1) {
             this.requireIdentificationKind = false;
           } else {
             this.requireIdentificationKind = true;
@@ -65,10 +65,10 @@ export class CompanyComponent implements OnInit {
   }
 
   checkExistingCompanyCompliance() {
-    const draftCompany = this.draftReport.draftCompany;
+    const draftCompany = this.draftReport?.draftCompany;
     if (draftCompany) {
-      if ((this.draftReport.companyKind === CompanyKinds.SIRET && draftCompany.website) ||
-        (this.draftReport.companyKind === CompanyKinds.WEBSITE && !draftCompany.website)) {
+      if ((this.draftReport?.companyKind === CompanyKinds.SIRET && draftCompany.website) ||
+        (this.draftReport?.companyKind === CompanyKinds.WEBSITE && !draftCompany.website)) {
         this.draftReport.draftCompany = undefined;
       }
     }
@@ -76,22 +76,35 @@ export class CompanyComponent implements OnInit {
 
   submitWebsite(draftCompany: DraftCompany & {vendor?: string}) {
     this.draftWebsite = draftCompany.website;
-    if (draftCompany.name) {
+    if (draftCompany.siret) {
       this.submitCompany(draftCompany);
     } else {
       this.requireIdentificationKind = true;
-      this.rendererService.scrollToElement(this.searchKind.nativeElement);
+      this.identificationKind = undefined;
+      this.rendererService.scrollToElement(this.searchKind?.nativeElement);
     }
+  }
+
+  submitPhone(phone: string) {
+    this.draftPhone = phone;
+    this.requireIdentificationKind = true;
+    this.identificationKind = undefined;
+    this.rendererService.scrollToElement(this.searchKind?.nativeElement);
   }
 
   submitCompany(draftCompany?: DraftCompany & {vendor?: string}) {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
     this.draftReport.draftCompany = {
       ...draftCompany,
-      website: this.draftWebsite
+      website: this.draftWebsite,
+      phone: this.draftPhone,
     };
     this.draftReport.vendor = draftCompany.vendor;
     this.changeDraftCompany = false;
+    this.nextStep();
+  }
+
+  nextStep() {
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
   }

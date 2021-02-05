@@ -8,7 +8,30 @@
     - title: Contrat
       example: 'Exemple : contrat de crédit non conforme'
     - title: Publicité
-      example: 'Exemple : publicité pour un crédit non conforme'
+      example: 'Exemple : publicité pour un crédit non conforme, démarchage téléphonique'
+      tags:
+        - Litige contractuel
+      subcategories:
+      - title: Démarchage téléphonique
+        companyKind: PHONE
+        detailInputs:
+          - label: Date de l'appel
+            rank: 1
+            type: DATE
+            defaultValue: SYSDATE
+          - label: Est-ce que le vendeur s'est fait passer pour une autre entreprise&#160;?
+            rank: 2
+            type: RADIO
+            options:
+              - Non
+              - Oui (à préciser)
+          - label: Décrivez nous plus en détails ce qui s'est passé
+            rank: 3
+            type: TEXTAREA
+      - title: Problème avec un site internet
+        companyKind: WEBSITE
+      - title: Autre
+        companyKind: SIRET
     - title: Service client
       example: 'Exemple : service client injoignable'
     - title: Autre
@@ -19,9 +42,30 @@
     - title: Remboursement / dédommagement
       example: 'Exemple : remboursement non reçu'
     - title: Publicité
-      example: 'Exemple : publicité trompeuse'
+      example: 'Exemple : publicité trompeuse, démarchage téléphonique'
       tags:
         - Litige contractuel
+      subcategories:
+        - title: Démarchage téléphonique
+          companyKind: PHONE
+          detailInputs:
+            - label: Date de l'appel
+              rank: 1
+              type: DATE
+              defaultValue: SYSDATE
+            - label: Est-ce que le vendeur s'est fait passer pour une autre entreprise&#160;?
+              rank: 2
+              type: RADIO
+              options:
+                - Non
+                - Oui (à préciser)
+            - label: Décrivez nous plus en détails ce qui s'est passé
+              rank: 3
+              type: TEXTAREA
+        - title: Problème avec un site internet
+          companyKind: WEBSITE
+        - title: Autre
+          companyKind: SIRET
     - title: Service client
       example: 'Exemple : service client injoignable'
       tags:

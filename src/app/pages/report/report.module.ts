@@ -25,6 +25,7 @@ import { CompanySearchByNameComponent } from './company/search-by-name-component
 import { CompanySearchByIdentityComponent } from './company/search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './company/search-by-website/company-search-by-website.component';
 import { instanceOfSubcategoryInformation } from '../../model/Anomaly';
+import { CompanySearchByPhoneComponent } from './company/search-by-phone/company-search-by-phone.component';
 
 defineLocale('fr', frLocale);
 
@@ -83,6 +84,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     CompanySearchByNameComponent,
     CompanySearchByIdentityComponent,
     CompanySearchByWebsiteComponent,
+    CompanySearchByPhoneComponent,
   ],
   imports: [
     FormsModule,

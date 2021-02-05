@@ -125,13 +125,17 @@
   },
   "websites": {
     "manage": {
-      "title": "Modéreration des sites webs - SignalConso",
+      "title": "Modération des sites webs - SignalConso",
       "description": "Modérer les sites webs suggérés"
     },
     "unregistered": {
       "title": "Sites internet non identifiés - SignalConso",
       "description": "Consultez la liste des sites internet signalés qui ne sont pas rattachés à une entreprise"
     }
+  },
+  "reportedPhones": {
+    "title": "Suivi des numéros de téléphones signalés - SignalConso",
+    "description": "Consultez la liste des numéros de téléphone signalés"
   },
   "companies": {
     "myCompanies": {

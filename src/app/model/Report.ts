@@ -109,6 +109,7 @@ export class Report {
   company: Company;
   website: WebsiteURL;
   vendor: string;
+  phone: string;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;

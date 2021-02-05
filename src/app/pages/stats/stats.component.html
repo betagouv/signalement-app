@@ -23,15 +23,6 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <h2 *ngIf="reportWithWebsitePercentage">
-            <span class="count">{{reportWithWebsitePercentage.toFixed(0) + "%"}}</span>
-            des signalements concernent le ecommerce
-          </h2>
-          <ngx-loading [show]="!reportWithWebsitePercentage"></ngx-loading>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
           <h2 *ngIf="reportForwardedToProPercentage">
             <span class="count">{{reportForwardedToProPercentage.toFixed(0) + "%"}}</span>
             des signalements ont été transmis à l'entreprise signalée
@@ -123,6 +114,15 @@
             </i>
           </h2>
           <ngx-loading [show]="reportWithResponseMedianDelay === undefined"></ngx-loading>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h2 *ngIf="reportWithWebsitePercentage">
+            <span class="count">{{reportWithWebsitePercentage.toFixed(0) + "%"}}</span>
+            des signalements déposés depuis le début de SignalConso concernent une entreprise sur internet
+          </h2>
+          <ngx-loading [show]="!reportWithWebsitePercentage"></ngx-loading>
         </div>
       </div>
       <p class="note pt-2">

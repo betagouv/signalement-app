@@ -8,6 +8,7 @@ export interface DraftCompany {
   postalCode?: string;
   country?: string;
   website?: WebsiteURL;
+  phone?: string;
   activityCode?: string;
 }
 

@@ -9,6 +9,7 @@ export interface ReportFilter {
   end?: Date;
   email?: string;
   websiteURL?: string;
+  phone?: string;
   siret?: string;
   category?: string;
   status?: string;
@@ -26,6 +27,7 @@ export interface ReportFilterQuerystring {
   end?: string;
   email?: string;
   websiteURL?: string;
+  phone?: string;
   siret?: string;
   category?: string;
   status?: string;
