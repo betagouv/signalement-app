@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CompanySearchResult } from '../../model/Company';
+import { CompanySearchResult, isGovernmentCompany } from '../../model/Company';
 
 @Component({
   selector: 'app-company-search-results',
@@ -14,16 +14,29 @@ export class CompanySearchResultsComponent implements OnInit {
 
   selectedCompany: CompanySearchResult;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  getRadioContainerClass(input: any, value: any) {
+  readonly isDisabled = isGovernmentCompany;
+
+  readonly existsDisabled = () => !!this.companySearchResults.find(this.isDisabled);
+
+  getRadioContainerClass(input: CompanySearchResult, value: CompanySearchResult) {
+    if (this.isDisabled(value)) {
+      return '-disabled';
+    }
     return input === value ? 'selected' : '';
   }
 
-  selectCompany(companySearchResult: CompanySearchResult) {
+  selectCompany(event: any, companySearchResult: CompanySearchResult) {
+    if (this.isDisabled(companySearchResult)) {
+      event.stopPropagation();
+      event.preventDefault();
+      return;
+    }
     this.select.emit(companySearchResult);
   }
 }
