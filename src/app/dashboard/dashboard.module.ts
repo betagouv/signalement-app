@@ -13,6 +13,7 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { WebsitesModule } from './websites/websites.module';
+import { ReportedPhonesModule } from './reported-phones/reported-phones.module';
 
 const routes: Routes = [
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
@@ -37,7 +38,8 @@ const routes: Routes = [
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    WebsitesModule
+    WebsitesModule,
+    ReportedPhonesModule
   ],
   exports: [],
   providers: [],

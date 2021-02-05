@@ -23,6 +23,13 @@ export function genSiret() {
   });
 }
 
+export function genPhone() {
+  return randomstring.generate({
+    length: 10,
+    charset: 'numeric'
+  });
+}
+
 export function genEmail() {
   return randomstring.generate({
     length: 10,
