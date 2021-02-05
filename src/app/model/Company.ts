@@ -63,3 +63,5 @@ export class WebsiteURL {
       .split(/[/?#]/)[0] : this.url;
   }
 }
+
+export const isGovernmentCompany = (_: DraftCompany): boolean => _.activityCode.startsWith('84.');
