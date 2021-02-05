@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { UserAccess } from '../../../model/Company';
-import { Report, ReportStatus, reportStatusColor } from '../../../model/Report';
+import { Report, ReportStatus } from '../../../model/Report';
 import { ReportFilter } from '../../../model/ReportFilter';
-import { combineLatest } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ReportService } from '../../../services/report.service';
@@ -10,7 +8,6 @@ import { ConstantService } from '../../../services/constant.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { mergeMap, take } from 'rxjs/operators';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
@@ -21,33 +18,41 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 })
 export class ReportListProComponent implements OnInit {
 
-  reportStatus = ReportStatus;
-  statusColor = reportStatusColor;
+  readonly displayedColumns = [
+    'creationDate',
+    'consumerUploadedFiles',
+    'status',
+    'consumer',
+  ];
 
-  userAccesses: UserAccess[];
-  reports: Report[];
-  totalCount: number;
-  currentPage: number;
+  readonly reportStatus = ReportStatus;
+
+  reports?: Report[];
+
+  totalCount?: number;
+
+  currentPage?: number;
+
   itemsPerPage = 20;
 
-  reportFilter: ReportFilter;
-  statusList: string[];
+  reportFilter?: ReportFilter;
+  readonly statusList$ = this.constantService.getReportStatusList();
 
-  loading: boolean;
-  loadingError: boolean;
-  withFiltering: boolean;
+  loading = false;
+  loadingError = false;
+  withFiltering = false;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private titleService: Title,
-              private meta: Meta,
-              private authenticationService: AuthenticationService,
-              private reportService: ReportService,
-              private constantService: ConstantService,
-              private companyAccessesService: CompanyAccessesService,
-              private localeService: BsLocaleService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) {
+    private titleService: Title,
+    private meta: Meta,
+    private authenticationService: AuthenticationService,
+    private reportService: ReportService,
+    private constantService: ConstantService,
+    private companyAccessesService: CompanyAccessesService,
+    private localeService: BsLocaleService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location) {
   }
 
   ngOnInit() {
@@ -58,37 +63,10 @@ export class ReportListProComponent implements OnInit {
     const queryParamMap = this.route.snapshot.queryParamMap;
     const paramMap = this.route.snapshot.paramMap;
 
-    this.constantService.getReportStatusList().subscribe(
-      statusList => this.statusList = statusList
-    );
-
     this.reportFilter = this.reportService.currentReportFilter;
-    this.reportFilter.siret = paramMap.get('siret') ?? queryParamMap.get('siret');
+    this.reportFilter.siret = paramMap.get('siret') ?? queryParamMap.get('siret') ?? undefined;
 
-    this.loading = true;
-    this.loadingError = false;
-    this.authenticationService.user.pipe(
-      take(1),
-      mergeMap(user => {
-        return combineLatest([
-          this.companyAccessesService.myAccesses(user)
-        ]);
-      })
-    ).subscribe(
-      ([userAccesses]) => {
-
-        this.userAccesses = userAccesses;
-
-        if (this.userAccesses.length === 1 || this.reportFilter.siret) {
-          this.loadReports(Number(queryParamMap.get('page_number') || 1));
-        } else {
-          this.loading = false;
-        }
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
+    this.loadReports(+(queryParamMap.get('page_number') || '1'));
   }
 
   initPagination() {
@@ -99,13 +77,15 @@ export class ReportListProComponent implements OnInit {
   submitFilters() {
     this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
     this.initPagination();
-    this.reportFilter.siret = this.reportFilter.siret?.replace(/\s/g, '');
+    if (this.reportFilter) {
+      this.reportFilter.siret = this.reportFilter.siret?.replace(/\s/g, '');
+    }
     this.loadReports(1);
     this.withFiltering = true;
   }
 
   cancelFilters() {
-    this.reportFilter = { siret: this.reportFilter.siret };
+    this.reportFilter = { siret: this.reportFilter?.siret };
     this.submitFilters();
   }
 
@@ -116,19 +96,16 @@ export class ReportListProComponent implements OnInit {
       ...this.reportFilter,
       offset: (page - 1) * this.itemsPerPage,
       limit: this.itemsPerPage,
-    }).subscribe(
-      result => {
-        this.loading = false;
-        this.reports = result.entities;
-        this.totalCount = result.totalCount;
-        setTimeout(() => {
-          this.currentPage = page;
-        }, 1);
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
+    }).subscribe(result => {
+      console.log(result);
+      this.loading = false;
+      this.reports = result.entities;
+      this.totalCount = result.totalCount;
+      this.currentPage = page;
+    }, err => {
+      this.loading = false;
+      this.loadingError = true;
+    });
   }
 
   changePage(pageEvent: {page: number, itemPerPage: number}) {
@@ -139,9 +116,11 @@ export class ReportListProComponent implements OnInit {
   }
 
   launchExtraction() {
-    this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
-      this.router.navigate(['mes-telechargements']);
-    });
+    if (this.reportFilter) {
+      this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
+        this.router.navigate(['mes-telechargements']);
+      });
+    }
   }
 
   isFirstVisit() {
@@ -149,7 +128,7 @@ export class ReportListProComponent implements OnInit {
   }
 
   withPagingAndFiltering() {
-    return this.totalCount > 10 || this.withFiltering;
+    return this.totalCount && this.totalCount > 0 || this.withFiltering;
   }
 
   hasFilter() {

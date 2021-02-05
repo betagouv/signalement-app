@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
 import { DetailInputValue, DraftReport, Report } from '../model/Report';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
@@ -183,7 +183,7 @@ export class ReportService {
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
         {
           ...headers,
-          params: this.serviceUtils.objectToHttpParams(reportFilter2QueryString(report))
+          params: this.serviceUtils.objectToHttpParams(reportFilter2QueryString(report)) as any
         },
       )),
       mergeMap(paginatedData => of({

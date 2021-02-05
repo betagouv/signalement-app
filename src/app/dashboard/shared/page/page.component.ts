@@ -35,7 +35,7 @@ export class PageComponent {
     return this.animated;
   }
 
-  private _animated: boolean;
+  private _animated = true;
   @Input()
   get animated() {
     return this._animated;
@@ -45,7 +45,7 @@ export class PageComponent {
     this._animated = coerceBooleanProperty(value);
   }
 
-  private _large: boolean;
+  private _large = false;
   @Input()
   get large() {
     return this._large;
