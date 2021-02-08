@@ -22,7 +22,7 @@ export default class Utils {
     return Object.keys(cleanedObj).length > 0 ? cleanedObj : {};
   };
 
-  static readonly dateToApi = (date: Date): string | undefined => date ? format(parseJSON(date), 'yyyy-MM-dd') : undefined;
+  static readonly dateToApi = (date?: Date): string | undefined => date ? format(parseJSON(date), 'yyyy-MM-dd') : undefined;
 
   static readonly apiToDate = (date?: string): Date | undefined => {
     if (date) {

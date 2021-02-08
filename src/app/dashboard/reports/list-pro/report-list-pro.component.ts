@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageEvent } from '@angular/material/paginator';
-import { debounceTime, distinctUntilChanged, map, mergeMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, mergeMap, share, shareReplay, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginatedData } from '../../../model/PaginatedData';
 import Utils from '../../../utils';
@@ -44,6 +44,7 @@ export class ReportListProComponent implements OnInit {
     'consumerUploadedFiles',
     'status',
     'consumer',
+    'actions',
   ];
 
   readonly defaultPageSize = 10;
@@ -75,13 +76,17 @@ export class ReportListProComponent implements OnInit {
 
   readonly statusList$ = this.constantService.getReportStatusList();
 
-  readonly companies$ = this.authenticationService.user.pipe(mergeMap(this.companyAccessesService.myAccesses));
-
-  companies?: UserAccess[];
+  readonly companies$ = this.authenticationService.user.pipe(mergeMap(this.companyAccessesService.myAccesses), shareReplay());
 
   loading = false;
 
   loadingError = false;
+
+  readonly hasMultiplesCompanies$ = this.companies$.pipe(map(companies => companies.length > 1));
+
+  readonly getDisplayedColumns = this.hasMultiplesCompanies$.pipe(map(hasMultiple => hasMultiple
+    ? this.columns
+    : this.columns.filter(_ => _ !== 'siret')));
 
   ngOnInit() {
     this.titleService.setTitle(pages.reports.list.title);
@@ -89,10 +94,6 @@ export class ReportListProComponent implements OnInit {
     this.localeService.use('fr');
 
     const initialValues = this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams));
-
-    console.log(this.route.snapshot.queryParams);
-    console.log(this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams)));
-    this.companies$.subscribe(_ => this.companies = _);
 
     this.initForm(initialValues).valueChanges.pipe(
       debounceTime(10),
@@ -104,11 +105,6 @@ export class ReportListProComponent implements OnInit {
       this.showFilters = this.reports.length > this.maxReportsBeforeShowFilters || this.hasFilters();
     });
   }
-
-  readonly getDisplayedColumns = this.companies$.pipe(map(companies => companies.length > 1
-    ? this.columns
-    : this.columns.filter(_ => _ !== 'siret')
-  ));
 
   readonly fetchReports = async (filters: ReportFiltersPro) => {
     this.loading = true;
@@ -161,6 +157,6 @@ export class ReportListProComponent implements OnInit {
 
   readonly hasFilters = () => {
     const { limit, offset, ...values } = this.form.value;
-    return !Object.values(values).every(_ => _ === '' || _ === undefined || _ === null);
+    return !Object.values(values).every(_ => _ === '' || _ === undefined || _ === null) || offset > 0;
   };
 }

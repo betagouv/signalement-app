@@ -42,7 +42,7 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
       ...r,
       offset: offset ? offset + '' : '0',
       limit: limit ? limit + '' : '10',
-      ...(hasCompany !== undefined && { hasCompany: '' + hasCompany }),
+      ...(hasCompany !== undefined && { hasCompany: '' + hasCompany }) as any,
       ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
       ...(departments ? { departments: departments.join(',') } : {}),
       ...((start) ? { start: Utils.dateToApi(start) } : {}),
@@ -57,7 +57,7 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
 export const reportFilterFromQueryString = (report: ReportFilterQuerystring): ReportFilter => {
   try {
     const { start, end, companyCountries, departments, hasCompany, offset, limit, tags, ...r } = report;
-    const parseBooleanOption = (_: 'true' | 'false'): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+    const parseBooleanOption = (_?: 'true' | 'false'): boolean | undefined => ({ 'true': true, 'false': false, })[_!];
     return {
       ...r,
       offset: +(offset || '0'),
