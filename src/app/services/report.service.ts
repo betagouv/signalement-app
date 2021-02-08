@@ -176,7 +176,7 @@ export class ReportService {
     );
   }
 
-  getReports(report: ReportFilter = {}) {
+  readonly getReports = (report: ReportFilter = {}): Observable<PaginatedData<Report>> => {
     this._currentReportFilter = report;
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.get<PaginatedData<any>>(

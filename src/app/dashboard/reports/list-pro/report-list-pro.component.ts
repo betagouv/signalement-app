@@ -1,15 +1,22 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Report, ReportStatus } from '../../../model/Report';
-import { ReportFilter } from '../../../model/ReportFilter';
+import { ReportFilter, reportFilter2QueryString, reportFilterFromQueryString } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ReportService } from '../../../services/report.service';
 import { ConstantService } from '../../../services/constant.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { PageEvent } from '@angular/material/paginator';
+import { debounceTime, distinctUntilChanged, map, mergeMap, tap } from 'rxjs/operators';
+import { FormControl, FormGroup } from '@angular/forms';
+import { PaginatedData } from '../../../model/PaginatedData';
+import Utils from '../../../utils';
+import { UserAccess } from '../../../model/Company';
+
+type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siret' | 'status' | 'offset' | 'limit'>;
 
 @Component({
   selector: 'app-report-list-pro',
@@ -18,31 +25,8 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 })
 export class ReportListProComponent implements OnInit {
 
-  readonly displayedColumns = [
-    'creationDate',
-    'consumerUploadedFiles',
-    'status',
-    'consumer',
-  ];
-
-  readonly reportStatus = ReportStatus;
-
-  reports?: Report[];
-
-  totalCount?: number;
-
-  currentPage?: number;
-
-  itemsPerPage = 20;
-
-  reportFilter?: ReportFilter;
-  readonly statusList$ = this.constantService.getReportStatusList();
-
-  loading = false;
-  loadingError = false;
-  withFiltering = false;
-
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
+  constructor(
+    @Inject(PLATFORM_ID) protected platformId: Object,
     private titleService: Title,
     private meta: Meta,
     private authenticationService: AuthenticationService,
@@ -51,87 +35,132 @@ export class ReportListProComponent implements OnInit {
     private companyAccessesService: CompanyAccessesService,
     private localeService: BsLocaleService,
     private router: Router,
-    private route: ActivatedRoute,
-    private location: Location) {
+    private route: ActivatedRoute) {
   }
+
+  readonly columns = [
+    'siret',
+    'creationDate',
+    'consumerUploadedFiles',
+    'status',
+    'consumer',
+  ];
+
+  readonly defaultPageSize = 10;
+
+  readonly maxReportsBeforeShowFilters = 9;
+
+  readonly startCtrl = new FormControl('');
+  readonly endCtrl = new FormControl('');
+  readonly siretCtrl = new FormControl('');
+  readonly statusCtrl = new FormControl('');
+  readonly offsetCtrl = new FormControl(0);
+  readonly limitCtrl = new FormControl(10);
+  readonly form = new FormGroup({
+    start: this.startCtrl,
+    end: this.endCtrl,
+    siret: this.siretCtrl,
+    status: this.statusCtrl,
+    offset: this.offsetCtrl,
+    limit: this.limitCtrl,
+  });
+
+  readonly reportStatus = ReportStatus;
+
+  showFilters = false;
+
+  reports?: Report[];
+
+  totalCount?: number;
+
+  readonly statusList$ = this.constantService.getReportStatusList();
+
+  readonly companies$ = this.authenticationService.user.pipe(mergeMap(this.companyAccessesService.myAccesses));
+
+  companies?: UserAccess[];
+
+  loading = false;
+
+  loadingError = false;
 
   ngOnInit() {
     this.titleService.setTitle(pages.reports.list.title);
     this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
 
-    const queryParamMap = this.route.snapshot.queryParamMap;
-    const paramMap = this.route.snapshot.paramMap;
+    const initialValues = this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams));
 
-    this.reportFilter = this.reportService.currentReportFilter;
-    this.reportFilter.siret = paramMap.get('siret') ?? queryParamMap.get('siret') ?? undefined;
+    console.log(this.route.snapshot.queryParams);
+    console.log(this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams)));
+    this.companies$.subscribe(_ => this.companies = _);
 
-    this.loadReports(+(queryParamMap.get('page_number') || '1'));
-  }
+    this.initForm(initialValues).valueChanges.pipe(
+      debounceTime(10),
+      distinctUntilChanged(),
+      tap(this.updateQueryString)
+    ).subscribe(this.fetchReports);
 
-  initPagination() {
-    this.totalCount = 0;
-    this.currentPage = 1;
-  }
-
-  submitFilters() {
-    this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
-    this.initPagination();
-    if (this.reportFilter) {
-      this.reportFilter.siret = this.reportFilter.siret?.replace(/\s/g, '');
-    }
-    this.loadReports(1);
-    this.withFiltering = true;
-  }
-
-  cancelFilters() {
-    this.reportFilter = { siret: this.reportFilter?.siret };
-    this.submitFilters();
-  }
-
-  loadReports(page: number) {
-    this.loading = true;
-    this.loadingError = false;
-    this.reportService.getReports({
-      ...this.reportFilter,
-      offset: (page - 1) * this.itemsPerPage,
-      limit: this.itemsPerPage,
-    }).subscribe(result => {
-      console.log(result);
-      this.loading = false;
-      this.reports = result.entities;
-      this.totalCount = result.totalCount;
-      this.currentPage = page;
-    }, err => {
-      this.loading = false;
-      this.loadingError = true;
+    this.fetchReports(this.form.value).then(() => {
+      this.showFilters = this.reports.length > this.maxReportsBeforeShowFilters || this.hasFilters();
     });
   }
 
-  changePage(pageEvent: {page: number, itemPerPage: number}) {
-    if (this.currentPage !== pageEvent.page) {
-      this.loadReports(pageEvent.page);
-      this.location.go('suivi-des-signalements/pro', `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
+  readonly getDisplayedColumns = this.companies$.pipe(map(companies => companies.length > 1
+    ? this.columns
+    : this.columns.filter(_ => _ !== 'siret')
+  ));
+
+  readonly fetchReports = async (filters: ReportFiltersPro) => {
+    this.loading = true;
+    this.loadingError = false;
+    await this.reportService.getReports(filters).toPromise().then((result: PaginatedData<Report>) => {
+      this.loading = false;
+      this.reports = result.entities;
+      this.totalCount = result.totalCount;
+    }).catch(err => {
+      this.loading = false;
+      this.loadingError = true;
+      throw err;
+    });
+  };
+
+  readonly getFormFromQueryString = (qs: ReportFiltersPro): ReportFiltersPro => {
+    try {
+      const { start, end, siret, status, offset, limit } = qs;
+      return { start, end, siret, status, offset: offset ?? 0, limit: limit ?? this.defaultPageSize, };
+    } catch (e) {
+      console.error('Caught error on "reportFilterFromQueryString"', qs, e);
+      return {};
     }
-  }
+  };
 
-  launchExtraction() {
-    if (this.reportFilter) {
-      this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
-        this.router.navigate(['mes-telechargements']);
-      });
-    }
-  }
+  readonly initForm = (filters: ReportFilter): FormGroup => {
+    const cleanedFilters = Utils.cleanObject(filters);
+    this.form.patchValue(cleanedFilters);
+    return this.form;
+  };
 
-  isFirstVisit() {
-    return this.reports && this.reports.length === 1 && this.reports[0].status === ReportStatus.UnreadForPro;
-  }
+  readonly changePage = ($event: PageEvent) => {
+    this.form.patchValue({
+      offset: $event.pageIndex * $event.pageSize,
+      limit: $event.pageSize,
+    });
+  };
 
-  withPagingAndFiltering() {
-    return this.totalCount && this.totalCount > 0 || this.withFiltering;
-  }
+  readonly launchExtraction = () => {
+    this.reportService.launchExtraction(this.form.value).subscribe(res => {
+      this.router.navigate(['mes-telechargements']);
+    });
+  };
 
-  hasFilter() {
-    return this.reportFilter && (this.reportFilter.start || this.reportFilter.end || this.reportFilter.status);
-  }
+  private updateQueryString = (values: ReportFiltersPro) => {
+    this.router.navigate([], { queryParams: reportFilter2QueryString(values), replaceUrl: true });
+  };
+
+  readonly isFirstVisit = () => this.reports?.length === 1 && this.reports[0].status === ReportStatus.UnreadForPro;
+
+  readonly hasFilters = () => {
+    const { limit, offset, ...values } = this.form.value;
+    return !Object.values(values).every(_ => _ === '' || _ === undefined || _ === null);
+  };
 }

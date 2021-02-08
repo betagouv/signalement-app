@@ -17,7 +17,7 @@ export class CompanyAccessesService {
               private serviceUtils: ServiceUtils) {
   }
 
-  myAccesses(user: User) {
+  myAccesses = (user: User) => {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<UserAccess[]>(

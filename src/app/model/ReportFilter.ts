@@ -30,7 +30,7 @@ export interface ReportFilterQuerystring {
   category?: string;
   status?: string;
   details?: string;
-  hasCompany?: string;
+  hasCompany?: 'true' | 'false';
   offset?: string;
   limit?: string;
 }
@@ -57,11 +57,11 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
 export const reportFilterFromQueryString = (report: ReportFilterQuerystring): ReportFilter => {
   try {
     const { start, end, companyCountries, departments, hasCompany, offset, limit, tags, ...r } = report;
-    const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+    const parseBooleanOption = (_: 'true' | 'false'): boolean | undefined => ({ 'true': true, 'false': false, })[_];
     return {
       ...r,
-      offset: +offset,
-      limit: +limit,
+      offset: +(offset || '0'),
+      limit: +(limit || '10'),
       hasCompany: parseBooleanOption(hasCompany),
       tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
       companyCountries: companyCountries?.split(','),

@@ -1,140 +1,152 @@
 <app-banner title="Suivi des signalements"
-            [subTitle]="reportFilter.siret ? 'SIRET ' + reportFilter.siret : ''"
-            [backButton]="reportFilter.siret">
+            [subTitle]="siretCtrl.value ? 'SIRET ' + siretCtrl.value : ''"
+            [backButton]="siretCtrl.value">
 </app-banner>
 
 <app-page class="max-width">
-  <form (ngSubmit)="submitFilters()" *ngIf="withPagingAndFiltering()">
-    <div class="row form-group">
-      <div class="col-12 col-sm-6">
-        <label for="input-start">
-          Période
-        </label>
-
-      </div>
-      <div class="col-8 col-sm-4">
-        <label for="statusFilter">
-          Statut <a [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status">
-          <i class="material-icons md-24" aria-hidden="true">help_outline</i>
-          <span class="sr-only">Consulter l'aide</span>
-        </a>
-        </label>
-        <select class="form-control" [(ngModel)]="reportFilter.status" placeholder="Statut" id="statusFilter"
-                name="status" [class]="reportFilter.status ? 'selected' : ''">
-          <option [ngValue]="undefined" selected>Tous les statuts</option>
-          <option *ngFor="let status of statusList$ | async">
-            {{status}}
-          </option>
-        </select>
-      </div>
-      <div class="col-4 col-sm-2">
-        <button type="submit" class="btn btn-outline-secondary btn-sm b-0">Filtrer</button>
-      </div>
-    </div>
-  </form>
-
   <div class="notification success mb-5" *ngIf="isFirstVisit()">
     <i class="material-icons md-18 attach-icon">check_circle</i> Votre compte est bien activé, vous pouvez consulter
     <strong>votre signalement</strong>.
   </div>
 
-  <button mat-raised-button color="primary" type="button" (click)="launchExtraction()" class="-btn-extract">
-    <mat-icon>download</mat-icon>
-    Exporter (XLS)
-  </button>
+  <div class="-header">
+    <a mat-raised-button type="button" [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status">
+      <mat-icon class="mat-button_icon -before">help</mat-icon>
+      Aide
+      <mat-icon class="mat-button_icon -after txt-disabled">open_in_new</mat-icon>
+    </a>
 
-  <app-panel *ngIf="withPagingAndFiltering()">
-    <app-panel-header>
-      <ng-container>
-        <mat-date-range-input [rangePicker]="picker" (click)="picker.open()" class="form-control form-control-material">
-          <input [(ngModel)]="reportFilter.start" name="start" matStartDate placeholder="Période sélectionnée"
-                 id="input-start">
-          <input [(ngModel)]="reportFilter.end" name="end" matEndDate placeholder="">
-        </mat-date-range-input>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-        &nbsp;&nbsp;
-        <mat-select [(ngModel)]="reportFilter.status" id="rls-statut" class="form-control form-control-material">
-          <!--        <mat-select-trigger>{{reportFilter.status}}</mat-select-trigger>-->
-          <mat-option [value]="undefined" selected>Tous les statuts</mat-option>
-          <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">
-            <app-badge-status [status]="_">{{_}}</app-badge-status>
-          </mat-option>
-        </mat-select>
+    <button mat-raised-button color="primary" type="button" (click)="launchExtraction()" *ngIf="companies?.length > 0">
+      <mat-icon class="mat-button_icon -before">get_app</mat-icon>
+      Exporter (XLS)
+    </button>
+  </div>
+
+  <app-panel [loading]="loading">
+
+    <app-fender
+      type="error"
+      class="-fender"
+      *ngIf="loadingError; else noError"
+      icon="mood_bad">
+    </app-fender>
+
+    <ng-template #noError>
+      <ng-container *ngIf="companies?.length > 0; else noAccess">
+        <app-panel-header class="-filters" [formGroup]="form" *ngIf="showFilters">
+          <ng-container>
+            <mat-date-range-input [rangePicker]="picker" (click)="picker.open()"
+                                  class="form-control form-control-material">
+              <input formControlName="start" name="start" matStartDate placeholder="Période"
+                     id="input-start">
+              <input formControlName="end" name="end" matEndDate placeholder="">
+            </mat-date-range-input>
+            <mat-select formControlName="status" class="form-control form-control-material" placeholder="Statut">
+              <mat-option [value]="undefined" selected class="mat-option-dense">Tous les statuts</mat-option>
+              <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">
+                <app-badge-status [status]="_">{{_}}</app-badge-status>
+              </mat-option>
+            </mat-select>
+            <mat-select formControlName="siret" class="form-control form-control-material" placeholder="SIRET">
+              <mat-option [value]="undefined" selected class="mat-option-dense">Tous les entreprises</mat-option>
+              <mat-option *ngFor="let _ of companies" [value]="_.companySiret" class="mat-option-dense">
+                {{_.companyName}}
+              </mat-option>
+            </mat-select>
+          </ng-container>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <div class="txt-secondary text-nowrap">
+            <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="form.reset()">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+        </app-panel-header>
+
+        <div class="table-overflow" *ngIf="reports?.length > 0">
+          <table mat-table [dataSource]="reports" class="fullwidth">
+
+            <ng-container matColumnDef="siret">
+              <th mat-header-cell *matHeaderCellDef>Entreprise</th>
+              <td mat-cell *matCellDef="let _" class="-td-company">
+                <div>{{_.company?.siret}}</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="creationDate">
+              <th mat-header-cell *matHeaderCellDef>Date de réception</th>
+              <td mat-cell *matCellDef="let _">
+                {{_.creationDate | date : 'dd/MM/yyyy' }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="consumerUploadedFiles">
+              <th mat-header-cell *matHeaderCellDef>PJ</th>
+              <td mat-cell *matCellDef="let _">
+                <mat-icon aria-hidden="true" title="Pièces jointes" *ngIf="_.consumerUploadedFiles.length"
+                          class="txt-secondary align-middle">
+                  attach_file
+                </mat-icon>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Statut</th>
+              <td mat-cell *matCellDef="let _">
+                <app-badge-status [status]="_.status"></app-badge-status>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="consumer">
+              <th mat-header-cell *matHeaderCellDef>Consommateur</th>
+              <td mat-cell *matCellDef="let _">
+                {{_.contactAgreement ? _.consumer.firstName + ' ' + _.consumer.lastName : 'Signalement anonyme'}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let _">
+                <mat-icon class="text-right align-middle txt-secondary" aria-hidden="true"
+                          title="Détail du signalement">
+                  keyboard_arrow_right
+                </mat-icon>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns | async"></tr>
+            <tr class="tr hoverable" mat-row *matRowDef="let _; columns: getDisplayedColumns | async;"
+                [ngClass]="_.status === reportStatus.UnreadForPro ? 'font-weight-bold' : ''"
+                [routerLink]="['/suivi-des-signalements', 'report', _.id]"></tr>
+          </table>
+        </div>
+
+        <app-fender
+          class="-fender"
+          *ngIf="!loading && reports?.length === 0"
+          icon="content_paste"
+          title="Aucun signalement">
+          <button mat-raised-button color="primary" *ngIf="hasFilters()" (click)="form.reset()">
+            <mat-icon class="mat-button_icon">clear</mat-icon>
+            Supprimer les filtres
+          </button>
+        </app-fender>
       </ng-container>
+    </ng-template>
 
-      <div class="txt-secondary text-nowrap">
-        <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="cancelFilters()">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </div>
+    <ng-template #noAccess>
+      <app-fender
+        class="-fender"
+        icon="business"
+        title="Vous n'avez accès à aucune entreprise">
+      </app-fender>
+    </ng-template>
 
-    </app-panel-header>
-
-    <div class="table-overflow">
-      <table mat-table [dataSource]="reports" class="fullwidth">
-        <ng-container matColumnDef="creationDate">
-          <th mat-header-cell *matHeaderCellDef>Date de réception</th>
-          <td mat-cell *matCellDef="let _">
-            {{_.creationDate | date : 'dd/MM/yyyy' }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="consumerUploadedFiles">
-          <th mat-header-cell *matHeaderCellDef>PJ</th>
-          <td mat-cell *matCellDef="let _">
-            <mat-icon aria-hidden="true" title="Pièces jointes" *ngIf="_.consumerUploadedFiles.length">
-              attach_file
-            </mat-icon>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>Statut</th>
-          <td mat-cell *matCellDef="let _">
-            <app-badge-status [status]="_.status"></app-badge-status>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="consumer">
-          <th mat-header-cell *matHeaderCellDef>Consommateur</th>
-          <td mat-cell *matCellDef="let _">
-            {{_.contactAgreement ? _.consumer.firstName + ' ' + _.consumer.lastName : 'Signalement anonyme'}}
-            <mat-icon class="float-right txt-secondary" aria-hidden="true" title="Détail du signalement">
-              keyboard_arrow_right
-            </mat-icon>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="tr hoverable" mat-row *matRowDef="let _; columns: displayedColumns;"
-            [ngClass]="_.status === reportStatus.UnreadForPro ? 'font-weight-bold' : ''"
-            [routerLink]="['/suivi-des-signalements', 'report', _.id]"></tr>
-      </table>
-    </div>
-    <mat-paginator *ngIf="withPagingAndFiltering()"
+    <mat-paginator *ngIf="showFilters"
                    (page)="changePage($event)"
-                   [pageIndex]="currentPage"
+                   [pageIndex]="offsetCtrl.value / limitCtrl.value"
                    [length]="totalCount"
-                   [pageSize]="itemsPerPage"
+                   [pageSize]="limitCtrl.value"
                    [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </app-panel>
-
-  <div class="notification error" *ngIf="loadingError">
-    Une erreur technique s'est produite
-  </div>
-
-  <div class="col-12 text-center">
-    Aucun signalement trouvé
-  </div>
-
-  <div class="row pt-3" *ngIf="withPagingAndFiltering()">
-    <div class="col-12 col-sm-6">
-      <!--        <pagination [boundaryLinks]="true" [totalItems]="totalCount" [maxSize]="3" [itemsPerPage]="itemsPerPage"-->
-      <!--                    (pageChanged)="changePage($event)"-->
-      <!--                    [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"-->
-      <!--                    lastText="&raquo;" class="justify-content-center">-->
-      <!--        </pagination>-->
-    </div>
-
-  </div>
 </app-page>

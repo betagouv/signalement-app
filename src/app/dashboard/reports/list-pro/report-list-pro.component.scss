@@ -6,3 +6,26 @@
   margin-left: auto;
   display: block;
 }
+
+.-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: spacing(2);
+
+  > * {
+    margin-left: spacing(1);
+  }
+}
+
+.-filters > * {
+  margin-right: spacing();
+}
+
+.-td-company {
+  font-weight: bold;
+}
+
+.-fender {
+  border-bottom: 1px solid $theme-divider;
+}
+
