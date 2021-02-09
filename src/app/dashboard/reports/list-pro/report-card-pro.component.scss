@@ -1,0 +1,50 @@
+@import "src/theme/variables";
+
+:host {
+  display: block;
+}
+
+.-root {
+  display: flex;
+  align-items: center;
+  padding: spacing(1) spacing(2);
+  border-bottom: 1px solid $theme-divider;
+}
+
+.-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: spacing(1.5);
+}
+.-body {
+  flex: 1;
+}
+
+.-title {
+  font-weight: bold;
+  font-size: 1.125rem;
+  margin: 0 spacing(2);
+}
+
+.-attachment {
+  margin-left: spacing(1);
+}
+
+.-row {
+  display: flex;
+  align-items: center;
+  margin: spacing(1) 0;
+}
+
+.-row_icon {
+  color: $theme-color-text-secondary;
+  margin-right: spacing(2);
+}
+
+.-row_label {
+  font-weight: bold;
+  font-size: 0.875rem;
+  margin-right: spacing(1);
+  width: 120px;
+  color: $theme-color-text-secondary;
+}
