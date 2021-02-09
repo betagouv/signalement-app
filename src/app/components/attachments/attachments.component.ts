@@ -11,11 +11,22 @@ import { fileSizeMax } from '../../pages/report/details/details.component';
 })
 export class AttachmentsComponent {
 
-  @Input() private _label?: string;
+  private _label?: string;
+  private _uploadedFiles?: UploadedFile[];
+
   @Input() note?: string;
-  @Input() private _uploadedFiles?: UploadedFile[];
   @Input() origin?: FileOrigin;
   @ViewChild('fileInput') fileInput?: ElementRef;
+
+  @Input()
+  set uploadedFiles(value: UploadedFile[]) {
+    this._uploadedFiles = value;
+  }
+
+  @Input()
+  set label(value: string) {
+    this._label = value;
+  }
 
   get label(): string {
     return this._label || 'Pièces jointes';
