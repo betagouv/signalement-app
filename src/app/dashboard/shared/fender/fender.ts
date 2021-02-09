@@ -8,7 +8,7 @@ export type FenderType = 'loading' | 'error' | 'empty' | 'success';
 @Component({
   selector: 'app-fender',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./fender.scss'],
+  styleUrls: ['./fender.component.scss'],
   host: {
     '[class.clr-success]': 'type == "success"',
     '[class.clr-error]': 'type == "error"',
@@ -39,7 +39,12 @@ export class FenderComponent {
 
   @Input() icon?: string;
 
-  @Input() private _title?: string;
+  private _title?: string;
+
+  @Input()
+  set title(value: string) {
+    this._title = value;
+  }
 
   get title(): string {
     if (this._title !== undefined) {
