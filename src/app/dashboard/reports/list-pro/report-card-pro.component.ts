@@ -11,29 +11,22 @@ import { Report } from '../../../model/Report';
     <div class="-root" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
       <div class="-body">
         <div class="-head">
-          <app-badge-status [status]="report.status"></app-badge-status>
-          <div class="-title" *ngIf="!hideCompany">{{report.company?.siret}}</div>
-          <mat-icon aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length" class="-attachment txt-secondary">
-            attach_file
-          </mat-icon>
+          <span class="-company"><span class="-siret">{{report.company?.siret}}</span></span>
+          <mat-icon class="-icon-small -icon-dash">remove</mat-icon>
+          <mat-icon class="-icon-small txt-disabled">location_on</mat-icon>
+          <span class="-location">{{report.company?.postalCode}}</span>
         </div>
-        <div class="-row" *ngIf="!hideCompany">
-          <mat-icon class="-row_icon">location_on</mat-icon>
-          <div class="-row_label">Code postal</div>
-          {{report.company?.postalCode}}
-        </div>
-        <div class="-row">
-          <mat-icon class="-row_icon">event</mat-icon>
-          <div class="-row_label">Date de réception</div>
-          {{report.creationDate | date : 'dd/MM/yyyy' }}
-        </div>
-        <div class="-row">
-          <mat-icon class="-row_icon">person</mat-icon>
-          <div class="-row_label">Consommateur</div>
-          {{report.contactAgreement ? report.consumer.firstName + ' ' + report.consumer.lastName : 'Signalement anonyme'}}
-        </div>
+        <app-badge-status [status]="report.status"></app-badge-status>
+        &nbsp;
+        &nbsp;
+        <span class="-consumer">
+          par {{report.contactAgreement ? report.consumer.firstName + ' ' + report.consumer.lastName : 'Signalement anonyme'}}
+        </span>
       </div>
-      <mat-icon>keyboard_arrow_right</mat-icon>
+      <mat-icon aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length" class="-attachment">
+        attach_file
+      </mat-icon>
+      <span class="-date">{{report.creationDate | date : 'dd/MM/yyyy' }}</span>
     </div>
   `
 })

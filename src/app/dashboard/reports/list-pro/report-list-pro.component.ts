@@ -46,12 +46,14 @@ export class ReportListProComponent implements OnInit {
     'actions',
   ];
 
+  readonly isMobileSize = () => window.innerWidth < 600;
+
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.mobileMode = window.innerWidth < 600;
+    this.mobileMode = this.isMobileSize();
   }
 
-  mobileMode: boolean;
+  mobileMode = this.isMobileSize();
 
   /** @deprecated Can be removed once it's outdated */
   readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 3, 1).getTime();

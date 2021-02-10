@@ -14,37 +14,47 @@
 .-head {
   display: flex;
   align-items: center;
-  margin-bottom: spacing(1.5);
 }
+
 .-body {
   flex: 1;
 }
 
-.-title {
-  font-weight: bold;
+.-icon-small {
+  font-size: 16px;
+  height: 20px;
+  text-align: center;
+  width: 20px;
+  line-height: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.-company {
   font-size: 1.125rem;
-  margin: 0 spacing(2);
+}
+
+.-siret {
+  font-weight: bold;
+}
+
+.-location {
+  font-size: 1.125rem;
+  color: $theme-color-text-secondary;
+}
+
+.-date {
+  color: $theme-color-text-disabled;
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+.-consumer {
+  color: $theme-color-text-secondary;
 }
 
 .-attachment {
-  margin-left: spacing(1);
-}
-
-.-row {
-  display: flex;
-  align-items: center;
-  margin: spacing(1) 0;
-}
-
-.-row_icon {
-  color: $theme-color-text-secondary;
-  margin-right: spacing(2);
-}
-
-.-row_label {
-  font-weight: bold;
-  font-size: 0.875rem;
-  margin-right: spacing(1);
-  width: 120px;
+  margin: 0 spacing(4) 0 spacing(1);
   color: $theme-color-text-secondary;
 }

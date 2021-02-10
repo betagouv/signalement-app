@@ -17,8 +17,8 @@
     </button>
   </div>
 
-  <app-panel>
-    <app-alert type="success" *ngIf="isFirstVisit()">
+  <app-panel *ngIf="isFirstVisit()">
+    <app-alert type="success">
       Votre compte est bien activé, vous pouvez consulter <strong>votre signalement</strong>.
       <button mat-button app-alert-close>Fermer</button>
     </app-alert>
