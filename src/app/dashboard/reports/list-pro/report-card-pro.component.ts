@@ -10,8 +10,8 @@ import { Report } from '../../../model/Report';
   template: `
     <div class="-root" [routerLink]="['/suivi-des-signalements', 'report', report.id]">
       <div class="-body">
-        <div class="-head">
-          <span class="-company"><span class="-siret">{{report.company?.siret}}</span></span>
+        <div class="-head" *ngIf="!hideCompany">
+          <span class="-company">{{report.company?.siret}}</span>
           <mat-icon class="-icon-small -icon-dash">remove</mat-icon>
           <mat-icon class="-icon-small txt-disabled">location_on</mat-icon>
           <span class="-location">{{report.company?.postalCode}}</span>

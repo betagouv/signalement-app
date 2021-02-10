@@ -93,7 +93,7 @@ describe('ReportListProComponent', () => {
     expect(component.maxReportsBeforeShowFilters).toBeLessThanOrEqual(Math.min(...component.pagesOptions));
   });
 
-  it ('should display a specific message when pro has no accessess and should not load reports', () => {
+  it('should display a specific message when pro has no accesses and should not load reports', () => {
     spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([]));
     const getReportsSpy = spyOn(reportService, 'getReports');
 
@@ -119,7 +119,7 @@ describe('ReportListProComponent', () => {
     expect(nativeElement.querySelector('.mat-column-siret')).toBeNull();
   }));
 
-  it ('should display report list with filters when pro has only one access and more than 10 reports', () => {
+  it('should display report list with filters when pro has only one access and more than 10 reports', () => {
     spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess()]));
     spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(11)));
     const fixture = TestBed.createComponent(ReportListProComponent);
