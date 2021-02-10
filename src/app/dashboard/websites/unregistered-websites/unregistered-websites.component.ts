@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Roles } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'app-unregistered-websites',
@@ -58,6 +59,8 @@ export class UnregisteredWebsitesComponent implements OnInit {
       .subscribe(this.fetchUnregisteredWebsites);
     this.fetchUnregisteredWebsites();
   }
+
+  readonly dateToApi = Utils.dateToApi;
 
   fetchUnregisteredWebsites = ({ host, start, end }: {host?: string, start?: Date, end?: Date} = {}) => {
     return this.websiteService.listUnregistered(host, start, end)

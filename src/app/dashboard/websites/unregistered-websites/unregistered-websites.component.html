@@ -12,12 +12,14 @@
       </mat-date-range-input>
       <mat-date-range-picker #picker></mat-date-range-picker>
 
-      <button mat-icon-button (click)="extract()" matTooltip="Exporter en XLS">
-        <mat-icon>get_app</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="clearFilters()">
-        <mat-icon>clear</mat-icon>
-      </button>
+      <div class="txt-secondary text-nowrap">
+        <button mat-icon-button (click)="extract()" matTooltip="Exporter en XLS">
+          <mat-icon>get_app</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="clearFilters()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
     </app-panel-header>
     <table mat-table [dataSource]="dataSource" matSort class="fullwidth" matSortActive="count" matSortDirection="desc">
 
@@ -27,7 +29,7 @@
           {{_.count}}
           &nbsp;
           <a [routerLink]="['/suivi-des-signalements', (authenticationService.user | async).roleUrlParam]"
-             [queryParams]="{websiteURL: _.host, start: periodFilter && periodFilter[0], end: periodFilter && periodFilter[1]}" app-btn color="primary" style="text-decoration: none">
+             [queryParams]="{websiteURL: _.host, start: dateToApi(startCtrl.value), end: dateToApi(endCtrl.value)}" app-btn color="primary" style="text-decoration: none">
             Voir
           </a>
         </td>
