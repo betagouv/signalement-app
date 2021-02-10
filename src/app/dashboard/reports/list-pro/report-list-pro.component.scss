@@ -17,7 +17,17 @@
   }
 }
 
-.-filters > * {
+.-filters {
+  flex-wrap: wrap;
+  padding-top: spacing(1/4);
+  padding-bottom: spacing(1/4);
+}
+
+.-filter {
+  flex: 1;
+  width: auto;
+  min-width: 170px;
+  margin: spacing(1/4) 0;
   margin-right: spacing();
 }
 

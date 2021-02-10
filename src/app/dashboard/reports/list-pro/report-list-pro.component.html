@@ -16,55 +16,77 @@
       <mat-icon class="mat-button_icon -after txt-disabled">open_in_new</mat-icon>
     </a>
 
-    <button mat-raised-button color="primary" type="button" (click)="launchExtraction()" *ngIf="(companies$ | async)?.length > 0">
+    <button mat-raised-button color="primary" type="button" (click)="launchExtraction()" *ngIf="showFilters">
       <mat-icon class="mat-button_icon -before">get_app</mat-icon>
       Exporter (XLS)
     </button>
   </div>
+
+  <app-panel>
+    <app-alert *ngIf="showNewFeatureIndicator" type="info" id="alert-new-report-list-pro-siret">
+      Votre interface a changé ! Vous pouvez désormais consulter les signalement de vos filiales ayant le même SIREN.
+      <button mat-button app-alert-close>Fermer</button>
+    </app-alert>
+  </app-panel>
 
   <app-panel [loading]="loading">
 
     <app-fender
       type="error"
       class="-fender"
-      *ngIf="loadingError; else noError"
-      icon="mood_bad">
+      *ngIf="loadingError || loadingAccessError; else noError">
     </app-fender>
 
     <ng-template #noError>
-      <ng-container *ngIf="(companies$ | async)?.length > 0; else noAccess">
-        <app-panel-header class="-filters" [formGroup]="form" *ngIf="showFilters">
+      <ng-container *ngIf="(hasCompanies$ | async); else noAccess">
+        <app-panel-header class="-filters" [formGroup]="form" *ngIf="showFilters || (hasMultiplesCompanies$ | async)">
           <ng-container>
-            <mat-date-range-input [rangePicker]="picker" (click)="picker.open()"
-                                  class="form-control form-control-material">
+            <mat-date-range-input *ngIf="showFilters" [rangePicker]="picker" (click)="picker.open()"
+                                  class="form-control form-control-material -filter">
               <input formControlName="start" name="start" matStartDate placeholder="Période"
                      id="input-start">
               <input formControlName="end" name="end" matEndDate placeholder="">
             </mat-date-range-input>
-            <mat-select formControlName="status" class="form-control form-control-material" placeholder="Statut">
+            <mat-select *ngIf="showFilters" formControlName="status" class="form-control form-control-material -filter"
+                        placeholder="Statut">
               <mat-option [value]="undefined" selected class="mat-option-dense">Tous les statuts</mat-option>
               <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">
                 <app-badge-status [status]="_">{{_}}</app-badge-status>
               </mat-option>
             </mat-select>
-            <mat-select *ngIf="hasMultiplesCompanies$ | async" formControlName="siret" class="form-control form-control-material" placeholder="SIRET">
+            <mat-select *ngIf="hasMultiplesCompanies$ | async" formControlName="siret"
+                        class="form-control form-control-material -filter" placeholder="SIRET">
               <mat-option [value]="undefined" selected class="mat-option-dense">Tous les entreprises</mat-option>
-              <mat-option *ngFor="let _ of companies" [value]="_.companySiret" class="mat-option-dense">
-                {{_.companyName}}
+              <mat-option *ngFor="let _ of companies$ | async" [value]="_.companySiret" class="mat-option-dense">
+                {{_.companySiret}}
               </mat-option>
             </mat-select>
           </ng-container>
           <mat-date-range-picker #picker></mat-date-range-picker>
 
           <div class="txt-secondary text-nowrap">
-            <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="form.reset()">
+            <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="resetFilters()">
               <mat-icon>clear</mat-icon>
             </button>
           </div>
         </app-panel-header>
 
-        <div class="table-overflow" *ngIf="reports?.length > 0">
+        <div *ngIf="mobileMode">
+          <app-report-card
+            *ngFor="let report of reports"
+            [report]="report"
+            [hideCompany]="!(hasMultiplesCompanies$ | async)"></app-report-card>
+        </div>
+
+        <div class="table-overflow" *ngIf="!mobileMode && reports?.length > 0">
           <table mat-table [dataSource]="reports" class="fullwidth">
+
+            <ng-container matColumnDef="postalCode">
+              <th mat-header-cell *matHeaderCellDef>CP</th>
+              <td mat-cell *matCellDef="let _">
+                <div>{{_.company?.postalCode}}</div>
+              </td>
+            </ng-container>
 
             <ng-container matColumnDef="siret">
               <th mat-header-cell *matHeaderCellDef>Entreprise</th>
@@ -126,7 +148,7 @@
           *ngIf="!loading && reports?.length === 0"
           icon="content_paste"
           title="Aucun signalement">
-          <button mat-raised-button color="primary" *ngIf="hasFilters()" (click)="form.reset()">
+          <button mat-raised-button color="primary" *ngIf="hasFilters()" (click)="resetFilters()">
             <mat-icon class="mat-button_icon">clear</mat-icon>
             Supprimer les filtres
           </button>
@@ -147,6 +169,6 @@
                    [pageIndex]="offsetCtrl.value / limitCtrl.value"
                    [length]="totalCount"
                    [pageSize]="limitCtrl.value"
-                   [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                   [pageSizeOptions]="pagesOptions"></mat-paginator>
   </app-panel>
 </app-page>

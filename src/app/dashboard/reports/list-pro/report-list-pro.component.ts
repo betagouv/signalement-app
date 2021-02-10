@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Report, ReportStatus } from '../../../model/Report';
 import { ReportFilter, reportFilter2QueryString, reportFilterFromQueryString } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
-import { AuthenticationService } from '../../../services/authentication.service';
 import { ReportService } from '../../../services/report.service';
 import { ConstantService } from '../../../services/constant.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
@@ -10,11 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageEvent } from '@angular/material/paginator';
-import { debounceTime, distinctUntilChanged, map, mergeMap, share, shareReplay, tap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginatedData } from '../../../model/PaginatedData';
 import Utils from '../../../utils';
-import { UserAccess } from '../../../model/Company';
+import { EMPTY } from 'rxjs';
 
 type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siret' | 'status' | 'offset' | 'limit'>;
 
@@ -29,7 +28,6 @@ export class ReportListProComponent implements OnInit {
     @Inject(PLATFORM_ID) protected platformId: Object,
     private titleService: Title,
     private meta: Meta,
-    private authenticationService: AuthenticationService,
     private reportService: ReportService,
     private constantService: ConstantService,
     private companyAccessesService: CompanyAccessesService,
@@ -39,6 +37,7 @@ export class ReportListProComponent implements OnInit {
   }
 
   readonly columns = [
+    'postalCode',
     'siret',
     'creationDate',
     'consumerUploadedFiles',
@@ -47,16 +46,28 @@ export class ReportListProComponent implements OnInit {
     'actions',
   ];
 
-  readonly defaultPageSize = 10;
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.mobileMode = window.innerWidth < 600;
+  }
 
-  readonly maxReportsBeforeShowFilters = 9;
+  mobileMode: boolean;
+
+  /** @deprecated Can be removed once it's outdated */
+  readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 3, 1).getTime();
+
+  readonly maxReportsBeforeShowFilters = 10;
+
+  readonly defaultPageSize = this.maxReportsBeforeShowFilters;
+
+  readonly pagesOptions = [this.maxReportsBeforeShowFilters, this.maxReportsBeforeShowFilters * 2, this.maxReportsBeforeShowFilters * 10];
 
   readonly startCtrl = new FormControl('');
   readonly endCtrl = new FormControl('');
   readonly siretCtrl = new FormControl('');
   readonly statusCtrl = new FormControl('');
   readonly offsetCtrl = new FormControl(0);
-  readonly limitCtrl = new FormControl(10);
+  readonly limitCtrl = new FormControl(this.defaultPageSize);
   readonly form = new FormGroup({
     start: this.startCtrl,
     end: this.endCtrl,
@@ -76,48 +87,71 @@ export class ReportListProComponent implements OnInit {
 
   readonly statusList$ = this.constantService.getReportStatusList();
 
-  readonly companies$ = this.authenticationService.user.pipe(mergeMap(this.companyAccessesService.myAccesses), shareReplay());
+  readonly companies$ = this.companyAccessesService.myAccesses().pipe(
+    shareReplay(),
+    catchError(err => {
+      this.loadingAccessError = true;
+      return [];
+    })
+  );
 
   loading = false;
 
   loadingError = false;
 
-  readonly hasMultiplesCompanies$ = this.companies$.pipe(map(companies => companies.length > 1));
+  loadingAccessError = false;
+
+  readonly hasCompanies$ = this.companies$.pipe(map(_ => _.length > 0));
+
+  readonly hasMultiplesCompanies$ = this.companies$.pipe(map(_ => _.length > 1));
 
   readonly getDisplayedColumns = this.hasMultiplesCompanies$.pipe(map(hasMultiple => hasMultiple
     ? this.columns
-    : this.columns.filter(_ => _ !== 'siret')));
+    : this.columns.filter(_ => _ !== 'siret' && _ !== 'postalCode')));
 
   ngOnInit() {
     this.titleService.setTitle(pages.reports.list.title);
     this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
 
-    const initialValues = this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams));
+    const initialValues = {
+      offset: 0,
+      limit: this.defaultPageSize,
+      ...this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams)),
+    };
 
     this.initForm(initialValues).valueChanges.pipe(
       debounceTime(10),
       distinctUntilChanged(),
-      tap(this.updateQueryString)
-    ).subscribe(this.fetchReports);
+      tap(this.updateQueryString),
+      mergeMap(this.fetchReports),
+    ).subscribe();
 
-    this.fetchReports(this.form.value).then(() => {
-      this.showFilters = this.reports.length > this.maxReportsBeforeShowFilters || this.hasFilters();
-    });
+    this.hasCompanies$.pipe(mergeMap(hasCompanies => {
+      if (!hasCompanies) {
+        return EMPTY;
+      }
+      return this.fetchReports(this.form.value).pipe(tap(() => {
+        this.showFilters = this.totalCount > this.maxReportsBeforeShowFilters || this.hasFilters();
+      }));
+    })).subscribe();
   }
 
-  readonly fetchReports = async (filters: ReportFiltersPro) => {
+  readonly fetchReports = (filters: ReportFiltersPro) => {
     this.loading = true;
     this.loadingError = false;
-    await this.reportService.getReports(filters).toPromise().then((result: PaginatedData<Report>) => {
-      this.loading = false;
-      this.reports = result.entities;
-      this.totalCount = result.totalCount;
-    }).catch(err => {
-      this.loading = false;
-      this.loadingError = true;
-      throw err;
-    });
+    return this.reportService.getReports(filters).pipe(
+      tap((result: PaginatedData<Report>) => {
+        this.loading = false;
+        this.reports = result.entities;
+        this.totalCount = result.totalCount;
+      }),
+      catchError(err => {
+        this.loading = false;
+        this.loadingError = true;
+        throw err;
+      })
+    );
   };
 
   readonly getFormFromQueryString = (qs: ReportFiltersPro): ReportFiltersPro => {
@@ -125,7 +159,6 @@ export class ReportListProComponent implements OnInit {
       const { start, end, siret, status, offset, limit } = qs;
       return { start, end, siret, status, offset: offset ?? 0, limit: limit ?? this.defaultPageSize, };
     } catch (e) {
-      console.error('Caught error on "reportFilterFromQueryString"', qs, e);
       return {};
     }
   };
@@ -158,5 +191,12 @@ export class ReportListProComponent implements OnInit {
   readonly hasFilters = () => {
     const { limit, offset, ...values } = this.form.value;
     return !Object.values(values).every(_ => _ === '' || _ === undefined || _ === null) || offset > 0;
+  };
+
+  readonly resetFilters = () => {
+    this.form.reset({
+      offset: 0,
+      limit: this.defaultPageSize,
+    });
   };
 }

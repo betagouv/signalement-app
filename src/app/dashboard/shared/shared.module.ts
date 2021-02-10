@@ -10,6 +10,7 @@ import { LoadingModule } from './loading/loading.module';
 import { MaterialModule } from './material.module';
 import { NgxLoadingConfig } from '../../components/components.module';
 import { FenderModule } from './fender/fender';
+import { AlertModule } from './alert/alert';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { FenderModule } from './fender/fender';
     LoadingModule,
     MaterialModule,
     FenderModule,
+    AlertModule,
   ],
   providers: [],
 })

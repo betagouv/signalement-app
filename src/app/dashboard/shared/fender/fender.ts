@@ -20,7 +20,7 @@ export type FenderType = 'loading' | 'error' | 'empty' | 'success';
       </div>
       <div *ngIf="!icon" [ngSwitch]="type">
         <mat-icon class="-ico" *ngSwitchCase="'empty'">do_not_disturb</mat-icon>
-        <mat-icon class="-ico" *ngSwitchCase="'error'">error</mat-icon>
+        <mat-icon class="-ico" *ngSwitchCase="'error'">mood_bad</mat-icon>
         <mat-icon class="-ico" *ngSwitchCase="'success'">check_circle</mat-icon>
         <mat-progress-spinner *ngSwitchCase="'loading'" mode="indeterminate"></mat-progress-spinner>
       </div>

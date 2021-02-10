@@ -18,7 +18,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportListModule } from './list/report-list.module';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
-import { CommonModule } from '@angular/common';
+import { ReportCardProComponent } from './list-pro/report-card-pro.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -35,9 +35,9 @@ const routes: Routes = [
     ConsumerReviewComponent,
     ReportListProComponent,
     ReportDetailComponent,
+    ReportCardProComponent,
   ],
   imports: [
-    CommonModule,
     ReportListModule,
     FormsModule,
     ReactiveFormsModule,
