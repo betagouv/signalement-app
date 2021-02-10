@@ -13,7 +13,7 @@ import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareRep
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginatedData } from '../../../model/PaginatedData';
 import Utils from '../../../utils';
-import { EMPTY } from 'rxjs';
+import { EMPTY, pipe } from 'rxjs';
 
 type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siret' | 'status' | 'offset' | 'limit'>;
 
@@ -138,9 +138,10 @@ export class ReportListProComponent implements OnInit {
   }
 
   readonly fetchReports = (filters: ReportFiltersPro) => {
+    const cleanedFilters = Utils.cleanObject(filters);
     this.loading = true;
     this.loadingError = false;
-    return this.reportService.getReports(filters).pipe(
+    return this.reportService.getReports(cleanedFilters).pipe(
       tap((result: PaginatedData<Report>) => {
         this.loading = false;
         this.reports = result.entities;

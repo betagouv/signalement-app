@@ -16,10 +16,9 @@ export default class Utils {
   }
 
   static cleanObject = <T extends object>(obj: T): Partial<T> => {
-    const cleanedObj = Object.entries(obj)
+    return Object.entries(obj)
       .filter(([, _]) => _ !== undefined && _ !== null && _ !== '' && (!Array.isArray(_) || !!_.filter(v => v !== undefined).length))
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-    return Object.keys(cleanedObj).length > 0 ? cleanedObj : {};
   };
 
   static readonly dateToApi = (date?: Date): string | undefined => date ? format(parseJSON(date), 'yyyy-MM-dd') : undefined;
