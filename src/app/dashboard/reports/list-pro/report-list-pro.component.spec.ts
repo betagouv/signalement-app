@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportDetailComponent } from '../detail/report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -8,12 +8,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { ComponentsModule } from '../../../components/components.module';
 import { of } from 'rxjs';
-import { Roles } from '../../../model/AuthUser';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ConstantService } from '../../../services/constant.service';
 import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
-import { genPaginatedReports, genUser, genUserAccess } from '../../../../../test/fixtures.spec';
+import { genPaginatedReports, genUserAccess } from '../../../../../test/fixtures.spec';
 import { ReportListProComponent } from './report-list-pro.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -94,7 +93,6 @@ describe('ReportListProComponent', () => {
     expect(component.maxReportsBeforeShowFilters).toBeLessThanOrEqual(Math.min(...component.pagesOptions));
   });
 
-
   it ('should display a specific message when pro has no accessess and should not load reports', () => {
     spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([]));
     const getReportsSpy = spyOn(reportService, 'getReports');
@@ -108,7 +106,7 @@ describe('ReportListProComponent', () => {
     expect(getReportsSpy).not.toHaveBeenCalled();
   });
 
-  it('should display reports list without filters when pro has only one access and less than 10 reports', (() => {
+  it('should display reports list without filters and information when pro has only one access and less than 10 reports', (() => {
     spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess()]));
     spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(3)));
     const fixture = TestBed.createComponent(ReportListProComponent);
@@ -117,6 +115,8 @@ describe('ReportListProComponent', () => {
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelectorAll('tr.tr.hoverable').length).toEqual(3);
     expect(nativeElement.querySelector('[formcontrolname=siret]')).toBeNull();
+    expect(nativeElement.querySelector('.mat-column-postalCode')).toBeNull();
+    expect(nativeElement.querySelector('.mat-column-siret')).toBeNull();
   }));
 
   it ('should display report list with filters when pro has only one access and more than 10 reports', () => {
@@ -141,6 +141,8 @@ describe('ReportListProComponent', () => {
     expect(nativeElement.querySelector('[formcontrolname=start]')).toBeNull();
     expect(nativeElement.querySelector('[formcontrolname=siret]')).not.toBeNull();
     expect(nativeElement.querySelectorAll('tr.tr.hoverable').length).toEqual(3);
+    expect(nativeElement.querySelector('.mat-column-postalCode')).not.toBeNull();
+    expect(nativeElement.querySelector('.mat-column-siret')).not.toBeNull();
   });
 
   it('should display siret and filters form when pro has several accesses and more than 11 companies', () => {

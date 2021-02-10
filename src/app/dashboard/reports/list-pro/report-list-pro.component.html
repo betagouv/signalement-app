@@ -4,11 +4,6 @@
 </app-banner>
 
 <app-page class="max-width">
-  <div class="notification success mb-5" *ngIf="isFirstVisit()">
-    <i class="material-icons md-18 attach-icon">check_circle</i> Votre compte est bien activé, vous pouvez consulter
-    <strong>votre signalement</strong>.
-  </div>
-
   <div class="-header">
     <a mat-raised-button type="button" [routerLink]="['/comment-ça-marche/professionnel']" fragment="les-status">
       <mat-icon class="mat-button_icon -before">help</mat-icon>
@@ -21,6 +16,13 @@
       Exporter (XLS)
     </button>
   </div>
+
+  <app-panel>
+    <app-alert type="success" *ngIf="isFirstVisit()">
+      Votre compte est bien activé, vous pouvez consulter <strong>votre signalement</strong>.
+      <button mat-button app-alert-close>Fermer</button>
+    </app-alert>
+  </app-panel>
 
   <app-panel>
     <app-alert *ngIf="showNewFeatureIndicator" type="info" id="alert-new-report-list-pro-siret">
