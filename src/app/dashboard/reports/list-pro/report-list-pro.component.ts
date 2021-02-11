@@ -9,11 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageEvent } from '@angular/material/paginator';
-import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
+import { catchError, debounceTime, delay, distinctUntilChanged, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginatedData } from '../../../model/PaginatedData';
 import Utils from '../../../utils';
-import { EMPTY, pipe } from 'rxjs';
+import { EMPTY, Observable, pipe } from 'rxjs';
 
 type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siret' | 'status' | 'offset' | 'limit'>;
 
@@ -89,9 +89,19 @@ export class ReportListProComponent implements OnInit {
 
   readonly statusList$ = this.constantService.getReportStatusList();
 
-  readonly companies$ = this.companyAccessesService.myAccesses().pipe(
+  loadingCompanies = false;
+
+  readonly companies$ = new Observable(_ => _.next()).pipe(
+    tap(() => {
+      this.loadingCompanies = true;
+    }),
+    mergeMap(() => this.companyAccessesService.myAccesses()),
+    tap(() => {
+      this.loadingCompanies = false;
+    }),
     shareReplay(),
     catchError(err => {
+      this.loadingCompanies = false;
       this.loadingAccessError = true;
       return [];
     })
