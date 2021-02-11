@@ -6,7 +6,7 @@ import { CompanySearchResult, isGovernmentCompany } from '../../model/Company';
   templateUrl: './company-search-results.component.html',
   styleUrls: ['./company-search-results.component.scss']
 })
-export class CompanySearchResultsComponent implements OnInit {
+export class CompanySearchResultsComponent {
 
   @Input() companySearchResults: CompanySearchResult[];
 
@@ -15,9 +15,6 @@ export class CompanySearchResultsComponent implements OnInit {
   selectedCompany: CompanySearchResult;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   readonly isDisabled = isGovernmentCompany;
@@ -29,14 +26,5 @@ export class CompanySearchResultsComponent implements OnInit {
       return '-disabled';
     }
     return input === value ? 'selected' : '';
-  }
-
-  selectCompany(event: any, companySearchResult: CompanySearchResult) {
-    if (this.isDisabled(companySearchResult)) {
-      event.stopPropagation();
-      event.preventDefault();
-      return;
-    }
-    this.select.emit(companySearchResult);
   }
 }

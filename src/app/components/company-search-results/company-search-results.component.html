@@ -9,7 +9,7 @@
         <div class="col col-radio">
           <input [disabled]="isDisabled(companySearchResult)" type="radio" class="-input" [(ngModel)]="selectedCompany"
                  name="companySiret" id="company_{{companyIndex}}" [value]="companySearchResult"
-                 (click)="selectCompany($event, companySearchResult)"/>
+                 (click)="select.emit(companySearchResult)"/>
         </div>
         <label class="col pointer" for="company_{{companyIndex}}">
           <div class="font-weight-bold" *ngIf="companySearchResult.name">{{companySearchResult.name}}</div>
@@ -21,7 +21,7 @@
           <div *ngIf="companySearchResult.isHeadOffice" class="font-weight-bold text-success">Siège social</div>
 
           <div *ngIf="isDisabled(companySearchResult)" class="txt-error font-weight-bold">
-            <i class="material-icons" style="font-size:1rem">error</i>
+            <i class="material-icons md-18">error</i>
             {{companySearchResult.activityLabel || 'Administration publique'}}
           </div>
           <div class="text-primary" *ngIf="!isDisabled(companySearchResult) && companySearchResult.activityLabel">
