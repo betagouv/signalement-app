@@ -22,7 +22,7 @@ export class CompanySearchResultsComponent implements OnInit {
 
   readonly isDisabled = isGovernmentCompany;
 
-  readonly existsDisabled = () => !!this.companySearchResults.find(this.isDisabled);
+  readonly existsDisabled = () => !!this.companySearchResults?.find(this.isDisabled);
 
   getRadioContainerClass(input: CompanySearchResult, value: CompanySearchResult) {
     if (this.isDisabled(value)) {

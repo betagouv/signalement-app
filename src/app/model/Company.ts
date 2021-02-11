@@ -65,4 +65,4 @@ export class WebsiteURL {
   }
 }
 
-export const isGovernmentCompany = (_: DraftCompany): boolean => _.activityCode.startsWith('84.');
+export const isGovernmentCompany = (_?: DraftCompany): boolean => _.activityCode?.startsWith('84.');
