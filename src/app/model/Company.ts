@@ -39,6 +39,12 @@ export interface UserAccess {
   level: string;
 }
 
+export interface ViewableCompany {
+  siret: string;
+  postalCode?: string;
+  closed: boolean;
+}
+
 export interface PendingToken {
   id: string;
   level: string;

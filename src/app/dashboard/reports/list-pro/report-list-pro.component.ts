@@ -9,11 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageEvent } from '@angular/material/paginator';
-import { catchError, debounceTime, delay, distinctUntilChanged, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginatedData } from '../../../model/PaginatedData';
 import Utils from '../../../utils';
-import { EMPTY, Observable, pipe } from 'rxjs';
+import { combineLatest, EMPTY, Observable } from 'rxjs';
+import { ViewableCompany } from '../../../model/Company';
 
 type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siret' | 'status' | 'offset' | 'limit'>;
 
@@ -66,7 +67,7 @@ export class ReportListProComponent implements OnInit {
 
   readonly startCtrl = new FormControl('');
   readonly endCtrl = new FormControl('');
-  readonly siretCtrl = new FormControl('');
+  readonly siretCtrl = new FormControl([]);
   readonly statusCtrl = new FormControl('');
   readonly offsetCtrl = new FormControl(0);
   readonly limitCtrl = new FormControl(this.defaultPageSize);
@@ -91,11 +92,11 @@ export class ReportListProComponent implements OnInit {
 
   loadingCompanies = false;
 
-  readonly companies$ = new Observable(_ => _.next()).pipe(
+  readonly companies$: Observable<ViewableCompany[]> = new Observable(_ => _.next()).pipe(
     tap(() => {
       this.loadingCompanies = true;
     }),
-    mergeMap(() => this.companyAccessesService.myAccesses()),
+    mergeMap(() => this.companyAccessesService.viewableCompanies()),
     tap(() => {
       this.loadingCompanies = false;
     }),
@@ -148,6 +149,26 @@ export class ReportListProComponent implements OnInit {
       }));
     })).subscribe();
   }
+
+  readonly allSiretCheckboxStatus$ = combineLatest([this.siretCtrl.valueChanges as Observable<string[]>, this.companies$])
+    .pipe(map(([values, companies]) => {
+      if ((values.length || []) === companies.length) {
+        return 'checked';
+      }
+      if (values.length === 0) {
+        return 'unchecked';
+      }
+      return 'indeterminate';
+    }));
+
+
+  readonly toggleAllSirets = () => {
+    if ((this.siretCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
+      this.companies$.subscribe(c => this.siretCtrl.setValue(c.map(_ => _.siret)));
+    } else {
+      this.siretCtrl.setValue([]);
+    }
+  };
 
   readonly fetchReports = (filters: ReportFiltersPro) => {
     const cleanedFilters = Utils.cleanObject(filters);

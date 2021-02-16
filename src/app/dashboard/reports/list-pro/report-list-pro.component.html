@@ -1,6 +1,4 @@
-<app-banner title="Suivi des signalements"
-            [subTitle]="siretCtrl.value ? 'SIRET ' + siretCtrl.value : ''"
-            [backButton]="siretCtrl.value">
+<app-banner title="Suivi des signalements">
 </app-banner>
 
 <app-page class="max-width">
@@ -44,22 +42,32 @@
         <ng-container>
           <mat-date-range-input *ngIf="showFilters" [rangePicker]="picker" (click)="picker.open()"
                                 class="form-control form-control-material -filter">
-            <input formControlName="start" name="start" matStartDate placeholder="Période"
-                   id="input-start">
-            <input formControlName="end" name="end" matEndDate placeholder="">
+            <input [formControl]="startCtrl" name="start" matStartDate placeholder="Période" id="input-start">
+            <input [formControl]="endCtrl" name="end" matEndDate placeholder="">
           </mat-date-range-input>
-          <mat-select *ngIf="showFilters" formControlName="status" class="form-control form-control-material -filter"
+          <mat-select *ngIf="showFilters" [formControl]="statusCtrl" class="form-control form-control-material -filter"
                       placeholder="Statut">
             <mat-option [value]="undefined" selected class="mat-option-dense">Tous les statuts</mat-option>
             <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">
               <app-badge-status [status]="_">{{_}}</app-badge-status>
             </mat-option>
           </mat-select>
-          <mat-select *ngIf="hasMultiplesCompanies$ | async" formControlName="siret"
+          <mat-select *ngIf="hasMultiplesCompanies$ | async" [formControl]="siretCtrl" multiple
                       class="form-control form-control-material -filter" placeholder="SIRET">
-            <mat-option [value]="undefined" selected class="mat-option-dense">Tous les entreprises</mat-option>
-            <mat-option *ngFor="let _ of companies$ | async" [value]="_.companySiret" class="mat-option-dense">
-              {{_.companySiret}}
+            <mat-select-trigger>{{siretCtrl.value}}</mat-select-trigger>
+            <div class="mat-option select-optgroup" matRipple (click)="toggleAllSirets()">
+              <mat-pseudo-checkbox [state]="allSiretCheckboxStatus$ | async" class="mat-option-pseudo-checkbox"></mat-pseudo-checkbox>
+              Tous les SIRETs
+            </div>
+            <mat-option *ngFor="let _ of companies$ | async" [value]="_.siret" class="mat-option-dense">
+              <span class="txt-secondary">{{_.siret | slice:0:9}}</span><!--
+              --><span class="font-weight-bold">{{_.siret | slice:9:14}}</span>
+              <span class="txt-disabled">
+                <mat-icon style="margin-right: 0; margin-left: 8px">location_on</mat-icon>
+                <span>{{_.postalCode | slice:0:2}}</span>
+                <span>&nbsp;</span>
+                <span>{{_.postalCode | slice:2:5}}</span>
+              </span>
             </mat-option>
           </mat-select>
         </ng-container>
@@ -156,7 +164,7 @@
       </app-fender>
     </ng-container>
 
-    <app-fender *ngIf="!loadingCompanies && !(hasCompanies$ | async)"
+    <app-fender *ngIf="!loadingError && !loadingAccessError && !loadingCompanies && !(hasCompanies$ | async)"
                 class="-fender"
                 icon="business"
                 title="Vous n'avez accès à aucune entreprise">
