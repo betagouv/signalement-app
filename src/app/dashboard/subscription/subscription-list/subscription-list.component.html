@@ -23,8 +23,7 @@
   </div>
 
   <app-subscription-card
-    *ngFor="let subscription of subscriptions$ | async"
-    [subscription]="subscription"
-    (remove)="remove(subscription.id)">
+    *ngFor="let subscription of subscriptions$ | async; trackBy: trackBy"
+    [subscription]="subscription">
   </app-subscription-card>
 </app-page>

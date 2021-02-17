@@ -14,6 +14,7 @@ import { SubscriptionListItemComponent } from './list/subscription-list-item.com
 import { CountryDialogModule } from '../reports/list/country-dialog/country-dialog.module';
 import { MaterialModule } from '../shared/material.module';
 import { SubscriptionCardRowComponent } from './subscription-card/subscription-card-row.component';
+import { SelectCategoriesDialogComponent } from './subscription-card/select-categories-dialog.component';
 
 const routes: Routes = [
   { path: 'abonnements', component: SubscriptionListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
@@ -24,6 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    SelectCategoriesDialogComponent,
     SubscriptionDialogDirective,
     SubscriptionDetailComponent,
     SubscriptionListComponent,

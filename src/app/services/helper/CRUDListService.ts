@@ -19,7 +19,7 @@ export class CRUDListServiceNotImplementedError extends Error {
   }
 }
 
-export abstract class CRUDListService<T extends Entity, C = T, U = T> extends ListService<T> {
+export abstract class CRUDListService<T extends Entity, C = Partial<T>, U = Partial<T>> extends ListService<T> {
 
   constructor(
     protected api: ApiSdkService,
