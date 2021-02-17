@@ -59,6 +59,10 @@
               <mat-pseudo-checkbox [state]="allSiretCheckboxStatus$ | async" class="mat-option-pseudo-checkbox"></mat-pseudo-checkbox>
               Tous les SIRETs
             </div>
+            <div class="mat-option select-optgroup" matRipple (click)="toggleAllMyAccesses()">
+              <mat-pseudo-checkbox [state]="allMyAccessesCheckboxStatus$ | async" class="mat-option-pseudo-checkbox"></mat-pseudo-checkbox>
+              Tous mes accès
+            </div>
             <mat-option *ngFor="let _ of companies$ | async" [value]="_.siret" class="mat-option-dense">
               <span class="txt-secondary">{{_.siret | slice:0:9}}</span><!--
               --><span class="font-weight-bold">{{_.siret | slice:9:14}}</span>

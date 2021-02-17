@@ -92,6 +92,8 @@ export class ReportListProComponent implements OnInit {
 
   loadingCompanies = false;
 
+  readonly myCompanies$ = this.companyAccessesService.myAccesses();
+
   readonly companies$: Observable<ViewableCompany[]> = new Observable(_ => _.next()).pipe(
     tap(() => {
       this.loadingCompanies = true;
@@ -133,12 +135,14 @@ export class ReportListProComponent implements OnInit {
       ...this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams)),
     };
 
-    this.initForm(initialValues).valueChanges.pipe(
-      debounceTime(10),
-      distinctUntilChanged(),
-      tap(this.updateQueryString),
-      mergeMap(this.fetchReports),
-    ).subscribe();
+    this.myCompanies$
+      .pipe(
+        mergeMap(myCompanies => this.initForm({ ...initialValues, siret: myCompanies.map(_ => _.companySiret) }).valueChanges),
+        debounceTime(10),
+        distinctUntilChanged(),
+        tap(this.updateQueryString),
+        mergeMap(this.fetchReports),
+      ).subscribe();
 
     this.hasCompanies$.pipe(mergeMap(hasCompanies => {
       if (!hasCompanies) {
@@ -150,9 +154,12 @@ export class ReportListProComponent implements OnInit {
     })).subscribe();
   }
 
-  readonly allSiretCheckboxStatus$ = combineLatest([this.siretCtrl.valueChanges as Observable<string[]>, this.companies$])
+  readonly allSiretCheckboxStatus$ = combineLatest([
+    this.siretCtrl.valueChanges.pipe(map(_ => _ || [])) as Observable<string[]>,
+    this.companies$
+  ])
     .pipe(map(([values, companies]) => {
-      if ((values.length || []) === companies.length) {
+      if (values.length === companies.length) {
         return 'checked';
       }
       if (values.length === 0) {
@@ -165,6 +172,29 @@ export class ReportListProComponent implements OnInit {
   readonly toggleAllSirets = () => {
     if ((this.siretCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
       this.companies$.subscribe(c => this.siretCtrl.setValue(c.map(_ => _.siret)));
+    } else {
+      this.siretCtrl.setValue([]);
+    }
+  };
+
+  readonly allMyAccessesCheckboxStatus$ = combineLatest([
+    this.siretCtrl.valueChanges.pipe(map(_ => _ || [])) as Observable<string[]>,
+    this.myCompanies$
+  ])
+    .pipe(map(([values, companies]) => {
+      if (values.length === companies.length) {
+        return 'checked';
+      }
+      if (values.length === 0) {
+        return 'unchecked';
+      }
+      return 'indeterminate';
+    }));
+
+
+  readonly toggleAllMyAccesses = () => {
+    if ((this.siretCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
+      this.myCompanies$.subscribe(c => this.siretCtrl.setValue(c.map(_ => _.companySiret)));
     } else {
       this.siretCtrl.setValue([]);
     }
