@@ -3,10 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { ApiSubscription } from '../../../api-sdk/model/ApiSubscription';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Country } from '../../../api-sdk/model/Country';
-import { SelectCategoriesDialogComponent } from './select-categories-dialog.component';
+import { SelectDialogComponent } from './select-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SubscriptionService } from '../../../services/subscription.service';
-import { SelectTagsDialogComponent } from './select-tags-dialog.component';
+import { AnomalyService } from '../../../services/anomaly.service';
+import { SelectDepartmentsDialogComponent } from './select-departments.component';
 
 export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
@@ -35,48 +36,47 @@ export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
       <app-subscription-card-row icon="flag" label="Pays étranger" hoverable appCountryDialog [initialCountries]="countries"
                                  (countriesChanged)="updateCountry($event)">
-        <mat-chip-list *ngIf="subscription.countries.length">
-          <mat-chip *ngFor="let _ of subscription.countries">
+        <div *ngIf="subscription.countries.length">
+          <div class="-chip" *ngFor="let _ of subscription.countries">
             {{_.name}}
-          </mat-chip>
-        </mat-chip-list>
+          </div>
+        </div>
         <span *ngIf="!subscription.countries.length">Tous</span>
       </app-subscription-card-row>
 
-      <app-subscription-card-row icon="location_on" label="Départements" hoverable>
-        <mat-chip-list *ngIf="subscription.departments.length">
-          <mat-chip *ngFor="let _ of subscription.departments">
-            {{_.code}} - {{_.label}}
-          </mat-chip>
-        </mat-chip-list>
+      <app-subscription-card-row icon="location_on" label="Départements" hoverable (click)="openDepartmentsDialog()">
+        <div class="-chip" *ngFor="let _ of subscription.departments">
+          {{_.code}} - {{_.label}}
+        </div>
         <span *ngIf="!subscription.departments.length">Tous</span>
       </app-subscription-card-row>
 
-      <app-subscription-card-row icon="dashboard" label="Catégories" hoverable (click)="openCategoriesDialog()">
-        <mat-chip-list *ngIf="subscription.categories.length">
-          <mat-chip *ngFor="let _ of subscription.categories">
+      <app-subscription-card-row icon="dashboard" label="Catégories" hoverable
+                                 (click)="openDialog(anomalyService.getCategories(), 'categories')">
+        <div *ngIf="subscription.categories.length">
+          <div class="-chip" *ngFor="let _ of subscription.categories">
             {{_}}
-          </mat-chip>
-        </mat-chip-list>
+          </div>
+        </div>
         <span *ngIf="!subscription.categories.length">Toutes</span>
       </app-subscription-card-row>
 
       <app-subscription-card-row icon="business" label="SIRET" hoverable>
-        <mat-chip-list *ngIf="subscription.sirets.length">
-          <mat-chip *ngFor="let _ of subscription.sirets">
+        <div *ngIf="subscription.sirets.length">
+          <div class="-chip" *ngFor="let _ of subscription.sirets">
             {{_}}
-          </mat-chip>
-        </mat-chip-list>
+          </div>
+        </div>
         <span *ngIf="!subscription.sirets.length">Tous</span>
       </app-subscription-card-row>
 
-      <app-subscription-card-row icon="label" label="Tags" hoverable (click)="openTagsDialog()">
-        <mat-chip-list *ngIf="subscription.tags.length">
-          <mat-chip *ngFor="let _ of subscription.tags">
+      <app-subscription-card-row icon="label" label="Tags" hoverable (click)="openDialog(anomalyService.getTags(), 'tags')">
+        <div *ngIf="subscription.tags.length">
+          <div class="-chip" *ngFor="let _ of subscription.tags">
             {{_}}
-          </mat-chip>
-        </mat-chip-list>
-        <span *ngIf="!subscription.tags.length">Tous</span>      </app-subscription-card-row>
+          </div>
+        </div>
+        <span *ngIf="!subscription.tags.length">Tous</span></app-subscription-card-row>
     </app-panel>
   `,
   styleUrls: ['./subscription-card.component.scss'],
@@ -98,6 +98,7 @@ export class SubscriptionCardComponent {
   constructor(
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
+    public anomalyService: AnomalyService,
     public subscriptionService: SubscriptionService,
   ) {
   }
@@ -114,16 +115,16 @@ export class SubscriptionCardComponent {
 
   readonly remove = () => this.subscriptionService.remove(this.subscription.id).subscribe();
 
-  readonly openCategoriesDialog = (): void => {
-    const ref = this.dialog.open(SelectCategoriesDialogComponent).componentInstance;
-    ref.initialValues = this.subscription.categories;
-    ref.changed.subscribe(categories => this.update({ categories }));
+  readonly openDialog = (options: string[], updatedProperty: 'tags' | 'categories') => {
+    const ref = this.dialog.open(SelectDialogComponent).componentInstance;
+    ref.options = options;
+    ref.initialValues = this.subscription[updatedProperty];
+    ref.changed.subscribe(_ => this.update({ [updatedProperty]: _ }));
   };
-
-  readonly openTagsDialog = (): void => {
-    const ref = this.dialog.open(SelectTagsDialogComponent).componentInstance;
-    ref.initialValues = this.subscription.tags;
-    ref.changed.subscribe(tags => this.update({ tags }));
+  readonly openDepartmentsDialog = () => {
+    const ref = this.dialog.open(SelectDepartmentsDialogComponent).componentInstance;
+    ref.initialValues = this.subscription.departments;
+    ref.changed.subscribe(departments => this.update({ departments }));
   };
 
   readonly update = (update: Partial<ApiSubscription>) => {

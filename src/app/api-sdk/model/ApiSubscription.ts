@@ -1,4 +1,5 @@
 import { Department } from '../../model/Region';
+import { Country } from './Country';
 
 export type ApiSubscriptionFrequency = 'P7D' | 'P1D';
 
@@ -8,7 +9,7 @@ export interface ApiSubscription {
   categories: string[];
   sirets: string[];
   frequency: ApiSubscriptionFrequency;
-  countries: string[];
+  countries: Country[];
   tags: string[];
 }
 
@@ -17,6 +18,6 @@ export interface ApiSubscriptionCreate {
   categories: string[];
   sirets: string[];
   frequency: ApiSubscriptionFrequency;
-  countries: string[];
+  countries: Country[];
   tags: string[];
 }

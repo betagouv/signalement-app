@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AnomalyService } from '../../../services/anomaly.service';
 
 @Component({
-  selector: 'app-select-categories',
+  selector: 'app-select-dialog',
   template: `
     <h2 mat-dialog-title>Sélectionner des catégories</h2>
 
     <mat-dialog-content>
-      <div *ngFor="let c of categories">
+      <div *ngFor="let c of options">
         <mat-checkbox [value]="c" [checked]="checked(c)" (change)="toggle(c)">
           {{c}}
         </mat-checkbox>
@@ -23,9 +22,9 @@ import { AnomalyService } from '../../../services/anomaly.service';
     </mat-dialog-actions>
   `,
 })
-export class SelectCategoriesDialogComponent {
-  constructor(private anomalyService: AnomalyService,) {
-  }
+export class SelectDialogComponent {
+
+  @Input() options: string[];
 
   @Input()
   set initialValues(value: string[]) {
@@ -39,8 +38,6 @@ export class SelectCategoriesDialogComponent {
   readonly checked = (c: string) => this.currentValues.has(c);
 
   readonly toggle = (c: string) => this.checked(c) ? this.currentValues.delete(c) : this.currentValues.add(c);
-
-  readonly categories = this.anomalyService.getCategories();
 
   readonly update = () => this.changed.emit([...this.currentValues]);
 }

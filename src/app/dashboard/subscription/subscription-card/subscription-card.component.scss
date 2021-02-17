@@ -29,3 +29,14 @@
   font-weight: bold;
   text-align: right;
 }
+
+.-chip {
+  padding: 7px 12px;
+  display: inline-flex;
+  border: 1px solid $theme-divider;
+  min-height: 32px;
+  margin: 4px;
+  height: 1px;
+  align-items: center;
+  border-radius: 32px;
+}
