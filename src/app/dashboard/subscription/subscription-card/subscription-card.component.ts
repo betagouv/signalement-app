@@ -6,6 +6,7 @@ import { Country } from '../../../api-sdk/model/Country';
 import { SelectCategoriesDialogComponent } from './select-categories-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SubscriptionService } from '../../../services/subscription.service';
+import { SelectTagsDialogComponent } from './select-tags-dialog.component';
 
 export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
@@ -69,9 +70,13 @@ export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
         <span *ngIf="!subscription.sirets.length">Tous</span>
       </app-subscription-card-row>
 
-      <app-subscription-card-row icon="label" label="Tags" hoverable>
-        <span>Tous</span>
-      </app-subscription-card-row>
+      <app-subscription-card-row icon="label" label="Tags" hoverable (click)="openTagsDialog()">
+        <mat-chip-list *ngIf="subscription.tags.length">
+          <mat-chip *ngFor="let _ of subscription.tags">
+            {{_}}
+          </mat-chip>
+        </mat-chip-list>
+        <span *ngIf="!subscription.tags.length">Tous</span>      </app-subscription-card-row>
     </app-panel>
   `,
   styleUrls: ['./subscription-card.component.scss'],
@@ -109,11 +114,17 @@ export class SubscriptionCardComponent {
 
   readonly remove = () => this.subscriptionService.remove(this.subscription.id).subscribe();
 
-  openCategoriesDialog(): void {
+  readonly openCategoriesDialog = (): void => {
     const ref = this.dialog.open(SelectCategoriesDialogComponent).componentInstance;
     ref.initialValues = this.subscription.categories;
     ref.changed.subscribe(categories => this.update({ categories }));
-  }
+  };
+
+  readonly openTagsDialog = (): void => {
+    const ref = this.dialog.open(SelectTagsDialogComponent).componentInstance;
+    ref.initialValues = this.subscription.tags;
+    ref.changed.subscribe(tags => this.update({ tags }));
+  };
 
   readonly update = (update: Partial<ApiSubscription>) => {
     this.subscriptionService.update(this.subscription.id, update).subscribe();
