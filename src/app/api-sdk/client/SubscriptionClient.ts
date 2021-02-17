@@ -1,16 +1,16 @@
 import { Id } from '../model/Common';
 import { ApiClientApi } from '../ApiClient';
-import { Subscription } from '../model/Subscription';
+import { ApiSubscription, ApiSubscriptionCreate } from '../model/ApiSubscription';
 import { Department } from '../../model/Region';
 
-const fromApi = (api: any): Subscription => ({
+const fromApi = (api: any): ApiSubscription => ({
   ...api,
   departments: api.departments.map(Department.fromCode),
 });
 
-const toApi = (subscription: Partial<Subscription>): any => ({
+const toApi = (subscription: Partial<ApiSubscription>): any => ({
   ...subscription,
-  departments: subscription.departments.map(_ => _.code),
+  departments: subscription.departments?.map(_ => _.code),
 });
 
 export class SubscriptionClient {
@@ -18,20 +18,20 @@ export class SubscriptionClient {
   constructor(private client: ApiClientApi) {
   }
 
-  readonly list = (): Promise<Subscription[]> => {
-    return this.client.get<Subscription[]>(`/subscriptions`).then(_ => _.map(fromApi));
+  readonly list = (): Promise<ApiSubscription[]> => {
+    return this.client.get<ApiSubscription[]>(`/subscriptions`).then(_ => _.map(fromApi));
   };
 
   readonly get = (id: Id) => {
-    return this.client.get<Subscription>(`/subscriptions/${id}`).then(fromApi);
+    return this.client.get<ApiSubscription>(`/subscriptions/${id}`).then(fromApi);
   };
 
-  readonly create = (body: Subscription) => {
-    return this.client.put<Subscription>(`/subscriptions`, { body: toApi(body) }).then(fromApi);
+  readonly create = (body: ApiSubscriptionCreate) => {
+    return this.client.post<ApiSubscription>(`/subscriptions`, { body: toApi(body) }).then(fromApi);
   };
 
-  readonly update = (id: Id, body: Partial<Subscription>) => {
-    return this.client.put<Subscription>(`/subscriptions/${id}`, { body: toApi(body) }).then(fromApi);
+  readonly update = (id: Id, body: Partial<ApiSubscription>) => {
+    return this.client.put<ApiSubscription>(`/subscriptions/${id}`, { body: toApi(body) }).then(fromApi);
   };
 
   readonly remove = (id: Id) => {

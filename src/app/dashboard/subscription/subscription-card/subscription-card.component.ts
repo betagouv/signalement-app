@@ -1,9 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Subscription } from '../../../api-sdk/model/Subscription';
+import { ApiSubscription } from '../../../api-sdk/model/ApiSubscription';
+import { animate, style, transition, trigger } from '@angular/animations';
+
+export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
 @Component({
-  selector: 'app-subscription-card',
+  selector: 'app-subscription-card[subscription]',
   template: `
     <div class="-header">
       <h3 class="-title">Abonnement</h3>
@@ -55,14 +58,28 @@ import { Subscription } from '../../../api-sdk/model/Subscription';
       <span>Tous</span>
     </app-subscription-card-row>
   `,
-  styleUrls: ['./subscription-card.component.scss']
+  styleUrls: ['./subscription-card.component.scss'],
+  animations: [
+    trigger('appear', [
+      transition(':enter', [
+        style({ 'will-change': 'height', opacity: 0, height: '0', margin: 0 }),
+        animate(`${animation}`, style({ opacity: 1, height: '*', margin: '*' }))
+      ]),
+      transition(':leave', [
+        style({ 'will-change': 'height', opacity: 1, height: '*', margin: '*' }),
+        animate(`${animation}`, style({ opacity: 0, height: 0, margin: 0 }))
+      ]),
+    ]),
+  ],
 })
 export class SubscriptionCardComponent {
 
   constructor(public formBuilder: FormBuilder) {
   }
 
-  @Input() subscription: Subscription;
+  @HostBinding('@appear') animation = true;
 
-  @Output() remove = new EventEmitter<Subscription>();
+  @Input() subscription!: ApiSubscription;
+
+  @Output() remove = new EventEmitter<ApiSubscription>();
 }

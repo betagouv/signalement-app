@@ -17,7 +17,7 @@
     </p>
   </div>
 
-  <div class="-card-new" matRipple>
+  <div class="-card-new" matRipple (click)="create()">
     <mat-icon>add</mat-icon>
     &nbsp;Ajouter
   </div>
@@ -25,6 +25,6 @@
   <app-subscription-card
     *ngFor="let subscription of subscriptions$ | async"
     [subscription]="subscription"
-    (remove)="subscriptionService.remove(subscription.id)">
+    (remove)="remove(subscription.id)">
   </app-subscription-card>
 </app-page>

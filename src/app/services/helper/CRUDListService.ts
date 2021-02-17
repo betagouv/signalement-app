@@ -51,7 +51,7 @@ export abstract class CRUDListService<T extends Entity, C = T, U = T> extends Li
   protected _removeError: Index<ApiError> = {};
   readonly removeError = (id: Id): ApiError => this._removeError[id];
 
-  readonly create = (data: C): Observable<T> => {
+  readonly create = (data: C, insertBefore = false): Observable<T> => {
     if (!this.methods.create) {
       throw new CRUDListServiceNotImplementedError(`create`);
     }
@@ -61,10 +61,13 @@ export abstract class CRUDListService<T extends Entity, C = T, U = T> extends Li
         this._creatingError = undefined;
         return _;
       }),
-      mergeMap(() => this.methods.create(data)),
+      mergeMap(() => this.methods.create!(data)),
       map((created => {
         this._creating = false;
-        this.source.next([...(this.source.value ?? []), created]);
+        this.source.next(insertBefore
+          ? [created, ...(this.source.value ?? [])]
+          : [...(this.source.value ?? []), created]
+        );
         return created;
       })),
       catchError((err: ApiError) => {
@@ -85,7 +88,7 @@ export abstract class CRUDListService<T extends Entity, C = T, U = T> extends Li
         delete this._updateError[id];
         return _;
       }),
-      mergeMap(() => this.methods.update(id, data)),
+      mergeMap(() => this.methods.update!(id, data)),
       map((updated: T) => {
         this.source.next((this.source.value ?? []).map((_: T) => _.id === id ? updated : _));
         this._updating.delete(id);
@@ -109,7 +112,7 @@ export abstract class CRUDListService<T extends Entity, C = T, U = T> extends Li
         delete this._removeError[id];
         return _;
       }),
-      mergeMap(() => this.methods.remove(id)),
+      mergeMap(() => this.methods.remove!(id)),
       map(() => {
         this.source.next((this.source.value ?? []).filter((_: T) => _.id !== id));
         this._removing.delete(id);

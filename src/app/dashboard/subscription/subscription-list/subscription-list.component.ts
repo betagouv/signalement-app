@@ -3,6 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { SubscriptionService } from '../../../services/subscription.service';
 import pages from '../../../../assets/data/pages.json';
 import { Router } from '@angular/router';
+import { Id } from '../../../api-sdk/model/Common';
 
 @Component({
   selector: 'app-subscription-list',
@@ -26,4 +27,17 @@ export class SubscriptionListComponent {
   redirectSubscription(subscriptionId?: string) {
     this.router.navigate(['abonnements', subscriptionId ? subscriptionId : 'nouveau']);
   }
+
+  readonly create = () => {
+    this.subscriptionService.create({
+      categories: [],
+      departments: [],
+      sirets: [],
+      tags: [],
+      countries: [],
+      frequency: 'P7D'
+    }, true).subscribe();
+  };
+
+  readonly remove = (id: Id) => this.subscriptionService.remove(id).subscribe();
 }

@@ -1,7 +1,7 @@
 import { Component, Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Subscription } from '../../../api-sdk/model/Subscription';
+import { ApiSubscription } from '../../../api-sdk/model/ApiSubscription';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { Department, Departments } from '../../../model/Region';
 import { AnomalyService } from '../../../services/anomaly.service';
@@ -20,9 +20,9 @@ export class SubscriptionDialogDirective {
   constructor(public dialog: MatDialog) {
   }
 
-  @Input() appSubscriptionDialog?: Subscription;
+  @Input() appSubscriptionDialog?: ApiSubscription;
 
-  @Output() submitted = new EventEmitter<Subscription>();
+  @Output() submitted = new EventEmitter<ApiSubscription>();
 
   openDialog(): void {
     const ref = this.dialog.open(SubscriptionDetailComponent, { width: '500px', });
@@ -60,9 +60,9 @@ export class SubscriptionDetailComponent implements OnInit {
 
   readonly countries$ = this.constantService.getCountries();
 
-  @Input() subscription?: Subscription;
+  @Input() subscription?: ApiSubscription;
 
-  @Output() submitted = new EventEmitter<Subscription>();
+  @Output() submitted = new EventEmitter<ApiSubscription>();
 
   ngOnInit() {
     this.categories = this.anomalyService.getCategories();
