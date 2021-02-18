@@ -10,3 +10,11 @@
 .col {
   text-align: left;
 }
+
+.-disabled {
+  opacity: .64;
+
+  input, label {
+    cursor: not-allowed;
+  }
+}
