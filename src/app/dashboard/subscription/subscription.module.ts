@@ -16,12 +16,12 @@ import { MaterialModule } from '../shared/material.module';
 import { SubscriptionCardRowComponent } from './subscription-card/subscription-card-row.component';
 import { SelectDialogComponent } from './subscription-card/select-dialog.component';
 import { SelectDepartmentsDialogComponent } from './subscription-card/select-departments.component';
+import { CompanySearchDialogModule } from '../companies/company-search-dialog/company-search-dialog.component';
 
 const routes: Routes = [
   { path: 'abonnements', component: SubscriptionListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
   { path: 'abonnements/nouveau', component: SubscriptionDetailComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
   { path: 'abonnements/:subscriptionId', component: SubscriptionDetailComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin, Roles.DGCCRF] } },
-
 ];
 
 @NgModule({
@@ -36,6 +36,7 @@ const routes: Routes = [
     SubscriptionCardRowComponent,
   ],
   imports: [
+    CompanySearchDialogModule,
     CountryDialogModule,
     PanelModule,
     SelectDepartmentsModule,

@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { SelectDepartmentsDialogComponent } from './select-departments.component';
+import { CompanySearchDialogComponent } from '../../companies/company-search-dialog/company-search-dialog.component';
+import { CompanySearchResult } from '../../../model/Company';
 
 export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
@@ -61,13 +63,17 @@ export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
         <span *ngIf="!subscription.categories.length">Toutes</span>
       </app-subscription-card-row>
 
-      <app-subscription-card-row icon="business" label="SIRET" hoverable>
-        <div *ngIf="subscription.sirets.length">
-          <div class="-chip" *ngFor="let _ of subscription.sirets">
+      <app-subscription-card-row icon="business" label="Entreprises">
+        <span *ngIf="!subscription.sirets.length">Toutes</span>&nbsp;
+        <mat-chip-list style="display: inline-block; vertical-align: middle">
+          <mat-chip *ngFor="let _ of subscription.sirets" [removable]="true" (removed)="removeCompany(_)">
             {{_}}
-          </div>
-        </div>
-        <span *ngIf="!subscription.sirets.length">Tous</span>
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+          </mat-chip>
+          <mat-chip (click)="openCompaniesDialog()">
+            <mat-icon>add</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
       </app-subscription-card-row>
 
       <app-subscription-card-row icon="label" label="Tags" hoverable (click)="openDialog(anomalyService.getTags(), 'tags')">
@@ -121,6 +127,16 @@ export class SubscriptionCardComponent {
     ref.initialValues = this.subscription[updatedProperty];
     ref.changed.subscribe(_ => this.update({ [updatedProperty]: _ }));
   };
+
+  readonly openCompaniesDialog = () => {
+    const ref = this.dialog.open(CompanySearchDialogComponent).componentInstance;
+    ref.companySelected.subscribe((c: CompanySearchResult) => {
+      if (!this.subscription.sirets.find(_ => _ === c.siret)) {
+        this.update({ sirets: [...this.subscription.sirets, c.siret] });
+      }
+    });
+  };
+
   readonly openDepartmentsDialog = () => {
     const ref = this.dialog.open(SelectDepartmentsDialogComponent).componentInstance;
     ref.initialValues = this.subscription.departments;
@@ -129,5 +145,9 @@ export class SubscriptionCardComponent {
 
   readonly update = (update: Partial<ApiSubscription>) => {
     this.subscriptionService.update(this.subscription.id, update).subscribe();
+  };
+
+  readonly removeCompany = (siret: string) => {
+    this.update({ sirets: this.subscription.sirets.filter(_ => _ !== siret) });
   };
 }
