@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CompanySearchResult } from '../../model/Company';
+import { CompanySearchResult, isGovernmentCompany } from '../../model/Company';
 
 @Component({
   selector: 'app-company-search-results',
   templateUrl: './company-search-results.component.html',
   styleUrls: ['./company-search-results.component.scss']
 })
-export class CompanySearchResultsComponent implements OnInit {
+export class CompanySearchResultsComponent {
 
   @Input() companySearchResults: CompanySearchResult[];
 
@@ -14,16 +14,17 @@ export class CompanySearchResultsComponent implements OnInit {
 
   selectedCompany: CompanySearchResult;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
   }
 
-  getRadioContainerClass(input: any, value: any) {
+  readonly isDisabled = isGovernmentCompany;
+
+  readonly existsDisabled = () => !!this.companySearchResults?.find(this.isDisabled);
+
+  getRadioContainerClass(input: CompanySearchResult, value: CompanySearchResult) {
+    if (this.isDisabled(value)) {
+      return '-disabled';
+    }
     return input === value ? 'selected' : '';
-  }
-
-  selectCompany(companySearchResult: CompanySearchResult) {
-    this.select.emit(companySearchResult);
   }
 }
