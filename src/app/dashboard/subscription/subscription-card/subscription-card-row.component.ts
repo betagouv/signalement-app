@@ -5,12 +5,14 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   selector: 'app-subscription-card-row',
   template: `
     <div class="-root" [ngClass]="hoverable ? '-hoverable': ''">
-      <mat-icon class="-icon">{{icon}}</mat-icon>
-      <div class="-label">{{label}}</div>
-      <div class="-content">
-        <ng-content></ng-content>
+      <div class="-body">
+        <mat-icon class="-icon">{{icon}}</mat-icon>
+        <div class="-label">{{label}}</div>
+        <div class="-content">
+          <ng-content></ng-content>
+        </div>
       </div>
-      <mat-icon class="-edit">navigate_next</mat-icon>
+      <mat-icon *ngIf="hoverable" class="-edit">navigate_next</mat-icon>
     </div>
     <div class="-border"></div>
   `,

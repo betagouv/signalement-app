@@ -4,7 +4,7 @@
   display: block;
   margin: 0 auto;
   padding: spacing(2);
-  width: 1140px;
+  max-width: 1140px;
 
   &.-small {
     max-width: 760px;

@@ -108,6 +108,16 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   color: white;
 }
 
+.mat-chip-nohover {
+  &:hover {
+    background: transparent !important;
+  }
+
+  &:after {
+    content: none !important;
+  }
+}
+
 .mat-chip-list {
 }
 
