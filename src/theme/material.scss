@@ -112,13 +112,9 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   &:hover {
     background: transparent !important;
   }
-
   &:after {
     content: none !important;
   }
-}
-
-.mat-chip-list {
 }
 
 .mat-chip-list-wrapper .mat-standard-chip {

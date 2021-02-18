@@ -9,7 +9,7 @@ import { ConfirmModule } from './confirm/confirm.module';
 import { LoadingModule } from './loading/loading.module';
 import { MaterialModule } from './material.module';
 import { NgxLoadingConfig } from '../../components/components.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConfirmModule,
     LoadingModule,
     MaterialModule,
+    FormsModule,
     ReactiveFormsModule,
   ],
   providers: [],
