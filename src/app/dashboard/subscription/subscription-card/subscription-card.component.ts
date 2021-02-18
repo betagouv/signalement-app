@@ -10,6 +10,7 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { SelectDepartmentsDialogComponent } from './select-departments.component';
 import { CompanySearchDialogComponent } from '../../companies/company-search-dialog/company-search-dialog.component';
 import { CompanySearchResult } from '../../../model/Company';
+import { MatSelectChange } from '@angular/material/select';
 
 export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
 
@@ -22,7 +23,8 @@ export const animation = `280ms cubic-bezier(0.35, 0, 0.25, 1)`;
         <button mat-button style="display: none"></button>
         <div class="-select form-control">
           <span>Fréquence</span>
-          <mat-select class="-select_input" [(ngModel)]="subscription.frequency" placeholder="Fréquence">
+          <mat-select class="-select_input" [value]="subscription.frequency" (selectionChange)="updateFrequency($event)"
+                      placeholder="Fréquence">
             <mat-option value="P1D">Quotidienne</mat-option>
             <mat-option value="P7D">Hebdomadaire</mat-option>
           </mat-select>
@@ -117,9 +119,9 @@ export class SubscriptionCardComponent {
     return this.subscription.countries.map(_ => _.name);
   }
 
-  readonly updateCountry = (countries: Country[]) => this.update({ countries });
-
   readonly remove = () => this.subscriptionService.remove(this.subscription.id).subscribe();
+
+  readonly update = (update: Partial<ApiSubscription>) => this.subscriptionService.update(this.subscription.id, update).subscribe();
 
   readonly openDialog = (options: string[], updatedProperty: 'tags' | 'categories') => {
     const ref = this.dialog.open(SelectDialogComponent).componentInstance;
@@ -143,11 +145,9 @@ export class SubscriptionCardComponent {
     ref.changed.subscribe(departments => this.update({ departments }));
   };
 
-  readonly update = (update: Partial<ApiSubscription>) => {
-    this.subscriptionService.update(this.subscription.id, update).subscribe();
-  };
+  readonly updateCountry = (countries: Country[]) => this.update({ countries });
 
-  readonly removeCompany = (siret: string) => {
-    this.update({ sirets: this.subscription.sirets.filter(_ => _ !== siret) });
-  };
+  readonly removeCompany = (siret: string) => this.update({ sirets: this.subscription.sirets.filter(_ => _ !== siret) });
+
+  readonly updateFrequency = (frequency: MatSelectChange) => this.update({ frequency: frequency.value });
 }
