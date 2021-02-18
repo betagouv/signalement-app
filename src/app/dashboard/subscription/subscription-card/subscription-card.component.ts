@@ -120,7 +120,7 @@ export class SubscriptionCardComponent {
   @Input() subscription!: ApiSubscription;
 
   get countries(): string[] {
-    return this.subscription.countries.map(_ => _.name);
+    return this.subscription.countries.map(_ => _.code);
   }
 
   readonly remove = () => this.subscriptionService.remove(this.subscription.id).subscribe();
