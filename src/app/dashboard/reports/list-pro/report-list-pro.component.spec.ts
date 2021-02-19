@@ -45,15 +45,10 @@ describe('ReportListProComponent', () => {
       imports: [
         BrowserAnimationsModule,
         SharedModule,
-        PaginationModule.forRoot(),
-        TooltipModule.forRoot(),
-        BsDropdownModule.forRoot(),
         HttpClientTestingModule,
         NgxLoadingModule,
         ModalModule.forRoot(),
         BsDatepickerModule.forRoot(),
-        FormsModule,
-        ReactiveFormsModule,
         RouterTestingModule,
         PipesModule,
         ComponentsModule,
@@ -157,7 +152,7 @@ describe('ReportListProComponent', () => {
     expect(nativeElement.querySelectorAll('tr.tr.hoverable').length).toEqual(22);
   });
 
-  it('should paginate correctly', () => {
+  fit('should paginate correctly', () => {
     spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(), genUserAccess()]));
     const getReportsSpy = spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(22)));
 

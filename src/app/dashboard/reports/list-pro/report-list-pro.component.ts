@@ -56,7 +56,7 @@ export class ReportListProComponent implements OnInit {
 
   mobileMode = this.isMobileSize();
 
-  /** @deprecated Can be removed once it's outdated */
+  /** @todo Can be removed once it's outdated */
   readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 3, 1).getTime();
 
   readonly maxReportsBeforeShowFilters = 10;
@@ -154,9 +154,9 @@ export class ReportListProComponent implements OnInit {
     })).subscribe();
   }
 
-  readonly allSiretCheckboxStatus$ = combineLatest([
+  readonly checkBoxStatus$ = (companies$: Observable<any[]>) => combineLatest([
     this.siretCtrl.valueChanges.pipe(map(_ => _ || [])) as Observable<string[]>,
-    this.companies$
+    companies$
   ])
     .pipe(map(([values, companies]) => {
       if (values.length === companies.length) {
@@ -168,6 +168,9 @@ export class ReportListProComponent implements OnInit {
       return 'indeterminate';
     }));
 
+  readonly allSiretCheckboxStatus$ = this.checkBoxStatus$(this.companies$);
+
+  readonly allMyAccessesCheckboxStatus$ = this.checkBoxStatus$(this.myCompanies$);
 
   readonly toggleAllSirets = () => {
     if ((this.siretCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
@@ -177,22 +180,7 @@ export class ReportListProComponent implements OnInit {
     }
   };
 
-  readonly allMyAccessesCheckboxStatus$ = combineLatest([
-    this.siretCtrl.valueChanges.pipe(map(_ => _ || [])) as Observable<string[]>,
-    this.myCompanies$
-  ])
-    .pipe(map(([values, companies]) => {
-      if (values.length === companies.length) {
-        return 'checked';
-      }
-      if (values.length === 0) {
-        return 'unchecked';
-      }
-      return 'indeterminate';
-    }));
-
-
-  readonly toggleAllMyAccesses = () => {
+  readonly toggleAllMyAccessesSirets = () => {
     if ((this.siretCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
       this.myCompanies$.subscribe(c => this.siretCtrl.setValue(c.map(_ => _.companySiret)));
     } else {
