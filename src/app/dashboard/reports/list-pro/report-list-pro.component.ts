@@ -9,14 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageEvent } from '@angular/material/paginator';
-import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, startWith, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginatedData } from '../../../model/PaginatedData';
 import Utils from '../../../utils';
 import { combineLatest, EMPTY, Observable } from 'rxjs';
 import { ViewableCompany } from '../../../model/Company';
 
-type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siret' | 'status' | 'offset' | 'limit'>;
+type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siretSirenList' | 'status' | 'offset' | 'limit'>;
 
 @Component({
   selector: 'app-report-list-pro',
@@ -67,14 +67,16 @@ export class ReportListProComponent implements OnInit {
 
   readonly startCtrl = new FormControl('');
   readonly endCtrl = new FormControl('');
-  readonly siretCtrl = new FormControl([]);
+  readonly departmentsCtrl = new FormControl([]);
+  readonly siretSirenListCtrl = new FormControl([]);
   readonly statusCtrl = new FormControl('');
   readonly offsetCtrl = new FormControl(0);
   readonly limitCtrl = new FormControl(this.defaultPageSize);
   readonly form = new FormGroup({
     start: this.startCtrl,
     end: this.endCtrl,
-    siret: this.siretCtrl,
+    departments: this.departmentsCtrl,
+    siretSirenList: this.siretSirenListCtrl,
     status: this.statusCtrl,
     offset: this.offsetCtrl,
     limit: this.limitCtrl,
@@ -120,6 +122,14 @@ export class ReportListProComponent implements OnInit {
 
   readonly hasMultiplesCompanies$ = this.companies$.pipe(map(_ => _.length > 1));
 
+  readonly companiesBySelectedDepartments$ = combineLatest([
+    this.departmentsCtrl.valueChanges.pipe(startWith([]), map(_ => _ || [])) as Observable<string[]>,
+    this.companies$
+  ]).pipe(map(([departments, companies]) => departments.length > 0
+    ? companies.filter(company => departments.find(_ => _ === company.postalCode.substr(0, 2)))
+    : companies
+  ));
+
   readonly getDisplayedColumns = this.hasMultiplesCompanies$.pipe(map(hasMultiple => hasMultiple
     ? this.columns
     : this.columns.filter(_ => _ !== 'siret' && _ !== 'postalCode')));
@@ -137,7 +147,7 @@ export class ReportListProComponent implements OnInit {
 
     this.myCompanies$
       .pipe(
-        mergeMap(myCompanies => this.initForm({ ...initialValues, siret: myCompanies.map(_ => _.companySiret) }).valueChanges),
+        mergeMap(myCompanies => this.initForm({ ...initialValues, siretSirenList: myCompanies.map(_ => _.companySiret) }).valueChanges),
         debounceTime(10),
         distinctUntilChanged(),
         tap(this.updateQueryString),
@@ -155,7 +165,7 @@ export class ReportListProComponent implements OnInit {
   }
 
   readonly checkBoxStatus$ = (companies$: Observable<any[]>) => combineLatest([
-    this.siretCtrl.valueChanges.pipe(map(_ => _ || [])) as Observable<string[]>,
+    this.siretSirenListCtrl.valueChanges.pipe(map(_ => _ || [])) as Observable<string[]>,
     companies$
   ])
     .pipe(map(([values, companies]) => {
@@ -173,18 +183,18 @@ export class ReportListProComponent implements OnInit {
   readonly allMyAccessesCheckboxStatus$ = this.checkBoxStatus$(this.myCompanies$);
 
   readonly toggleAllSirets = () => {
-    if ((this.siretCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
-      this.companies$.subscribe(c => this.siretCtrl.setValue(c.map(_ => _.siret)));
+    if ((this.siretSirenListCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
+      this.companies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.siret)));
     } else {
-      this.siretCtrl.setValue([]);
+      this.siretSirenListCtrl.setValue([]);
     }
   };
 
   readonly toggleAllMyAccessesSirets = () => {
-    if ((this.siretCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
-      this.myCompanies$.subscribe(c => this.siretCtrl.setValue(c.map(_ => _.companySiret)));
+    if ((this.siretSirenListCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
+      this.myCompanies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.companySiret)));
     } else {
-      this.siretCtrl.setValue([]);
+      this.siretSirenListCtrl.setValue([]);
     }
   };
 
@@ -208,8 +218,8 @@ export class ReportListProComponent implements OnInit {
 
   readonly getFormFromQueryString = (qs: ReportFiltersPro): ReportFiltersPro => {
     try {
-      const { start, end, siret, status, offset, limit } = qs;
-      return { start, end, siret, status, offset: offset ?? 0, limit: limit ?? this.defaultPageSize, };
+      const { start, end, siretSirenList, status, offset, limit } = qs;
+      return { start, end, siretSirenList, status, offset: offset ?? 0, limit: limit ?? this.defaultPageSize, };
     } catch (e) {
       return {};
     }

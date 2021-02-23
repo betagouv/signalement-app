@@ -19,6 +19,7 @@ import { ReportListModule } from './list/report-list.module';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
 import { ReportCardProComponent } from './list-pro/report-card-pro.component';
+import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
     ReportCardProComponent,
   ],
   imports: [
+    SelectDepartmentsModule,
     ReportListModule,
     FormsModule,
     ReactiveFormsModule,

@@ -5,11 +5,11 @@ export interface ReportFilter {
   readonly departments?: string[];
   readonly tags?: Tag[];
   readonly companyCountries?: string[];
+  readonly siretSirenList?: string[];
   start?: Date;
   end?: Date;
   email?: string;
   websiteURL?: string;
-  siret?: string[];
   category?: string;
   status?: string;
   details?: string;
@@ -22,11 +22,11 @@ export interface ReportFilterQuerystring {
   readonly departments?: string;
   readonly tags?: string | string[];
   readonly companyCountries?: string;
+  readonly siretSirenList?: string[];
   start?: string;
   end?: string;
   email?: string;
   websiteURL?: string;
-  siret?: string[];
   category?: string;
   status?: string;
   details?: string;
@@ -79,6 +79,7 @@ export const reportFilter2Body = (report: ReportFilter): { [key in keyof ReportF
   const { start, end, offset, departments, tags, limit, ...rest } = report;
   return {
     ...rest,
+    siretSirenList: report.siretSirenList ? [report.siretSirenList] : [],
     departments: departments || [],
     tags: tags || [],
     start: Utils.dateToApi(start),

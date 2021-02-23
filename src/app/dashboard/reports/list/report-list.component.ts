@@ -77,7 +77,7 @@ export class ReportListComponent implements OnInit {
       details: undefined,
       start: undefined,
       end: undefined,
-      siret: undefined,
+      siretSirenList: [],
       status: undefined,
       hasCompany: undefined,
       websiteURL: undefined,
