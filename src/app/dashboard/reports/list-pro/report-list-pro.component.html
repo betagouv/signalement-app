@@ -22,8 +22,8 @@
     </app-alert>
   </app-panel>
 
-  <app-panel>
-    <app-alert *ngIf="showNewFeatureIndicator" type="info" id="alert-new-report-list-pro-siret">
+  <app-panel *ngIf="showNewFeatureIndicator">
+    <app-alert type="info" id="alert-new-report-list-pro-siret">
       Votre compte a changé ! Vous pouvez désormais consulter les signalement de vos filiales ayant le même SIREN.
       <button mat-button app-alert-close>Fermer</button>
     </app-alert>
@@ -40,18 +40,6 @@
     <ng-container *ngIf="!loadingCompanies && (hasCompanies$ | async)">
       <app-panel-header class="-filters" [formGroup]="form" *ngIf="showFilters || (hasMultiplesCompanies$ | async)">
         <ng-container>
-          <mat-date-range-input *ngIf="showFilters" [rangePicker]="picker" (click)="picker.open()"
-                                class="form-control form-control-material -filter">
-            <input [formControl]="startCtrl" name="start" matStartDate placeholder="Période" id="input-start">
-            <input [formControl]="endCtrl" name="end" matEndDate placeholder="">
-          </mat-date-range-input>
-          <mat-select *ngIf="showFilters" [formControl]="statusCtrl" class="form-control form-control-material -filter"
-                      placeholder="Statut">
-            <mat-option [value]="undefined" selected class="mat-option-dense">Tous les statuts</mat-option>
-            <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">
-              <app-badge-status [status]="_">{{_}}</app-badge-status>
-            </mat-option>
-          </mat-select>
 
           <app-select-departments
             *ngIf="hasMultiplesCompanies$ | async"
@@ -81,6 +69,21 @@
               </span>
             </mat-option>
           </mat-select>
+
+          <mat-date-range-input *ngIf="showFilters" [rangePicker]="picker" (click)="picker.open()"
+                                class="form-control form-control-material -filter">
+            <input [formControl]="startCtrl" name="start" matStartDate placeholder="Période" id="input-start">
+            <input [formControl]="endCtrl" name="end" matEndDate placeholder="">
+          </mat-date-range-input>
+
+          <mat-select *ngIf="showFilters" [formControl]="statusCtrl" class="form-control form-control-material -filter"
+                      placeholder="Statut">
+            <mat-option [value]="undefined" selected class="mat-option-dense">Tous les statuts</mat-option>
+            <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">
+              <app-badge-status [status]="_">{{_}}</app-badge-status>
+            </mat-option>
+          </mat-select>
+
         </ng-container>
         <mat-date-range-picker #picker></mat-date-range-picker>
 
@@ -109,7 +112,7 @@
           </ng-container>
 
           <ng-container matColumnDef="siret">
-            <th mat-header-cell *matHeaderCellDef>Entreprise</th>
+            <th mat-header-cell *matHeaderCellDef>SIRET</th>
             <td mat-cell *matCellDef="let _" class="-td-company">
               <div>{{_.company?.siret}}</div>
             </td>
