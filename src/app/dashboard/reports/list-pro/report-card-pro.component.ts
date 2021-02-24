@@ -16,17 +16,17 @@ import { Report } from '../../../model/Report';
           <mat-icon class="-icon-small txt-disabled">location_on</mat-icon>
           <span class="-location">{{report.company?.postalCode}}</span>
         </div>
-        <app-badge-status [status]="report.status"></app-badge-status>
-        &nbsp;
-        &nbsp;
         <span class="-consumer">
-          par {{report.contactAgreement ? report.consumer.firstName + ' ' + report.consumer.lastName : 'Signalement anonyme'}}
+          Le {{report.creationDate | date : 'dd/MM/yyyy' }}<br/>
+          {{report.contactAgreement ? ' par ' + report.consumer.firstName + ' ' + report.consumer.lastName : '(Signalement anonyme)'}}
         </span>
       </div>
       <mat-icon aria-hidden="true" title="Pièces jointes" *ngIf="report.consumerUploadedFiles.length" class="-attachment">
         attach_file
       </mat-icon>
-      <span class="-date">{{report.creationDate | date : 'dd/MM/yyyy' }}</span>
+      <app-badge-status [status]="report.status"></app-badge-status>
+
+      <!--      <span class="-date"></span>-->
     </div>
   `
 })
