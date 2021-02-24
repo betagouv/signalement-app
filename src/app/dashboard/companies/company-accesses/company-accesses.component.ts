@@ -5,10 +5,12 @@ import { CompanyAccessesService } from '../../../services/companyaccesses.servic
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { CompanyAccess, PendingToken } from '../../../model/Company';
-import { User } from '../../../model/AuthUser.js';
+import { Roles, User } from '../../../model/AuthUser.js';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { accessLevels } from '../common';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { CompanyService } from '../../../services/company.service';
 
 @Component({
   selector: 'app-company-accesses',
@@ -17,11 +19,13 @@ import { accessLevels } from '../common';
 export class CompanyAccessesComponent implements OnInit {
 
   constructor(private titleService: Title,
-    private meta: Meta,
-    private authenticationService: AuthenticationService,
-    private companyAccessesService: CompanyAccessesService,
-    private modalService: BsModalService,
-    private route: ActivatedRoute) {
+              private meta: Meta,
+              private authenticationService: AuthenticationService,
+              private companyAccessesService: CompanyAccessesService,
+              private companyService: CompanyService,
+              private modalService: BsModalService,
+              private localeService: BsLocaleService,
+              private route: ActivatedRoute) {
   }
 
   bsModalRef?: BsModalRef;
@@ -30,11 +34,15 @@ export class CompanyAccessesComponent implements OnInit {
   companyAccesses?: CompanyAccess[];
   pendingTokens?: PendingToken[];
   accessLevels = accessLevels;
+  roles = Roles;
 
   loading = false;
   showSuccess = false;
 
+  returnedDate: Date;
+
   ngOnInit() {
+    this.localeService.use('fr');
     const siretParam = this.route.params.pipe(map(p => p.siret));
 
     this.authenticationService.user.subscribe((user: User) => {
@@ -112,5 +120,16 @@ export class CompanyAccessesComponent implements OnInit {
           this.showSuccess = true;
           this.refreshPendingTokens();
         });
+  }
+
+  submitReturnedDoc() {
+    this.showSuccess = false;
+    this.loading = true;
+    this.companyService
+      .saveUndeliveredDocument(this.siret, this.returnedDate)
+      .subscribe(() => {
+        this.loading = false;
+        this.showSuccess = true;
+      });
   }
 }
