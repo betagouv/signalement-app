@@ -58,10 +58,11 @@ export class ReportListComponent implements OnInit {
 
   readonly getFormFromQueryString = (qs: ReportFilter): ReportFilter => {
     try {
+      const {offset, limit, ...restQs} = qs;
       return {
-        ...qs,
-        offset: +qs.offset ?? 0,
-        limit: +qs.limit ?? this.defaultPageSize,
+        ...restQs,
+        offset: +(offset ?? '0'),
+        limit: +(limit ?? `${this.defaultPageSize}`),
       };
     } catch (e) {
       console.error('Caught error on "reportFilterFromQueryString"', qs, e);

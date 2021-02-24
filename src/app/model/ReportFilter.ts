@@ -76,10 +76,10 @@ export const reportFilterFromQueryString = (report: ReportFilterQuerystring): Re
 };
 
 export const reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
-  const { start, end, offset, departments, tags, limit, ...rest } = report;
+  const { start, end, offset, departments, tags, limit, siretSirenList, ...rest } = report;
   return {
     ...rest,
-    siretSirenList: report.siretSirenList ? [report.siretSirenList] : [],
+    siretSirenList: Array.isArray(siretSirenList) ? siretSirenList : (siretSirenList !== undefined ? [siretSirenList] : undefined),
     departments: departments || [],
     tags: tags || [],
     start: Utils.dateToApi(start),
