@@ -1,8 +1,10 @@
-import { Component, Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Directive, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanySearchResult } from '../../../model/Company';
 import { CompanyService } from '../../../services/company.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SharedModule } from '../../shared/shared.module';
+import { ComponentsModule } from '../../../components/components.module';
 
 @Directive({
   selector: '[appCompanySearchDialog]',
@@ -56,7 +58,7 @@ export class CompanySearchDialogDirective {
 
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close color="primary">Fermer</button>
-      <button [disabled]="loading" mat-raised-button color="primary" [disabled]="identityCtrl.invalid"
+      <button mat-raised-button color="primary" [disabled]="loading || identityCtrl.invalid"
               (click)="submitCompanySiretForm()">
         Rechercher
       </button>
@@ -117,4 +119,21 @@ export class CompanySearchDialogComponent {
     this.results = undefined;
     this.identityCtrl.setValue('');
   };
+}
+
+@NgModule({
+  declarations: [
+    CompanySearchDialogComponent,
+    CompanySearchDialogDirective,
+  ],
+  exports: [
+    CompanySearchDialogComponent,
+    CompanySearchDialogDirective,
+  ],
+  imports: [
+    ComponentsModule,
+    SharedModule,
+  ]
+})
+export class CompanySearchDialogModule {
 }

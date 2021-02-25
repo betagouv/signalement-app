@@ -38,7 +38,7 @@ export class CountryDialogComponent {
 
   currentValues = new Set<string>();
 
-  filterName: string;
+  filterName = '';
 
   readonly form = this.fb.group(initialForm);
 

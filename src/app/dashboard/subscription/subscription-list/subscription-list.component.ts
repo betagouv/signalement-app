@@ -1,57 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from '../../../model/Subscription';
+import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { SubscriptionService } from '../../../services/subscription.service';
 import pages from '../../../../assets/data/pages.json';
-import { Router } from '@angular/router';
+import { ApiSubscription } from '../../../api-sdk/model/ApiSubscription';
 
 @Component({
   selector: 'app-subscription-list',
   templateUrl: './subscription-list.component.html',
   styleUrls: ['./subscription-list.component.scss']
 })
-export class SubscriptionListComponent implements OnInit {
+export class SubscriptionListComponent {
 
-  subscriptions: Subscription[];
-
-  loading: boolean;
-  loadingError: boolean;
-
-  constructor(private titleService: Title,
-              private meta: Meta,
-              private subscriptionService: SubscriptionService,
-              private router: Router) { }
-
-  ngOnInit() {
+  constructor(
+    private titleService: Title,
+    private meta: Meta,
+    public subscriptionService: SubscriptionService,
+  ) {
     this.titleService.setTitle(pages.secured.subscriptions.title);
     this.meta.updateTag({ name: 'description', content: pages.secured.subscriptions.description });
-
-    this.loading = true;
-    this.subscriptionService.getSubscriptions().subscribe(
-      subscriptions => {
-        this.subscriptions = subscriptions;
-        this.loading = false;
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      }
-    );
   }
 
-  openSubscription(subscriptionId?: string) {
-    this.router.navigate(['abonnements', subscriptionId ? subscriptionId : 'nouveau']);
-  }
+  readonly subscriptions$ = this.subscriptionService.list();
 
-  removeSubscription(removeId: string, event) {
-    event.stopPropagation();
-    this.loading = true;
-    this.subscriptionService.removeSubscription(removeId).subscribe(
-      _ => {
-        this.loading = false;
-        this.subscriptions.splice(this.subscriptions.findIndex(s => s.id === removeId), 1);
-      }
-    );
-  }
+  readonly create = () => {
+    this.subscriptionService.create({
+      categories: [],
+      departments: [],
+      sirets: [],
+      tags: [],
+      countries: [],
+      frequency: 'P7D'
+    }, true).subscribe();
+  };
 
+  readonly trackBy = (index: number, item: ApiSubscription) => item.id;
 }

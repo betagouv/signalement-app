@@ -1,7 +1,8 @@
-import { Directive, ElementRef, forwardRef } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CountryDialogComponent } from './country-dialog.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 
 
 @Directive({
@@ -16,19 +17,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   }],
 })
 export class CountryDialogDirective implements ControlValueAccessor {
-
   constructor(private el: ElementRef, public dialog: MatDialog) {
   }
+
+  @Input()
+  set initialCountries(value: string[]) {
+    this.innerValue = value;
+  }
+
+  @Output() countriesChanged = new EventEmitter<string[]>();
 
   openDialog(): void {
     const ref = this.dialog.open(CountryDialogComponent, {
       width: '500px',
     }).componentInstance;
-    ref.values = this.innerValue;
-    ref.changed.subscribe(values => this.value = values);
+    if (this.innerValue) {
+      ref.values = this.innerValue;
+    }
+    ref.changed
+      .pipe(tap(_ => this.countriesChanged.emit(_)))
+      .subscribe((values: string[]) => this.value = values);
   }
 
-  private innerValue: string[];
+  private innerValue?: string[];
 
   set value(countries: string[]) {
     if (countries !== this.innerValue) {
