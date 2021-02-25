@@ -67,6 +67,18 @@ class RawCompanyService {
       })
     );
   }
+
+  saveUndeliveredDocument(siret: string, returnedDate: Date) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', siret, 'undelivered-document']),
+          { returnedDate },
+          headers
+        );
+      })
+    );
+  }
 }
 
 @Injectable({
