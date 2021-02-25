@@ -1,4 +1,4 @@
-import { ApiHostWithReportCount, ApiWebsite, ApiWebsiteCreate, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../model/ApiWebsite';
+import { ApiHostWithReportCount, ApiWebsite, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../model/ApiWebsite';
 import { Id } from '../model/Common';
 import { ApiClient } from '../ApiClient';
 import { ApiClientApi } from '../ApiClient';

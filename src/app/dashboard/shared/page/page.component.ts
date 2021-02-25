@@ -10,7 +10,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
     </main>
   `,
   host: {
-    '[class.large]': 'large',
+    '[class]': '"-" + size',
     '[class.container]': 'true',
   },
   styleUrls: ['./page.component.scss'],
@@ -30,10 +30,13 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   ]
 })
 export class PageComponent {
+
   @HostBinding('@animation')
   get animation() {
     return this.animated;
   }
+
+  @Input() size: 'large' | 'normal' | 'small' = 'normal';
 
   private _animated: boolean;
   @Input()
@@ -43,15 +46,5 @@ export class PageComponent {
 
   set animated(value: any) {
     this._animated = coerceBooleanProperty(value);
-  }
-
-  private _large: boolean;
-  @Input()
-  get large() {
-    return this._large;
-  }
-
-  set large(value: any) {
-    this._large = coerceBooleanProperty(value);
   }
 }

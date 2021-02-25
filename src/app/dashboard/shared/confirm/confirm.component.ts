@@ -19,9 +19,6 @@ export class ConfirmDialogDirective {
   @Output() confirmed = new EventEmitter();
 
   openDialog(): void {
-    if (!this.appConfirm) {
-      return;
-    }
     const ref = this.dialog.open(ConfirmDialogComponent);
     ref.componentInstance.title = this.title;
     ref.componentInstance.content = this.content;

@@ -14,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Injectable()
 export class AppMatPaginatorIntlFr extends MatPaginatorIntl {
@@ -55,6 +56,7 @@ export class AppMatPaginatorIntlFr extends MatPaginatorIntl {
     MatNativeDateModule,
     MatProgressBarModule,
     MatSortModule,
+    MatChipsModule,
     MatDialogModule,
   ],
   providers: [
