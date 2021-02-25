@@ -10,6 +10,7 @@ import { UploadedFile } from '../model/UploadedFile';
 import { ReportFilter, reportFilter2Body, reportFilter2QueryString } from '../model/ReportFilter';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from '../model/Company';
+import Utils from '../utils';
 
 @Injectable({
   providedIn: 'root',
@@ -183,7 +184,7 @@ export class ReportService {
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
         {
           ...headers,
-          params: this.serviceUtils.objectToHttpParams(reportFilter2QueryString(report)) as any
+          params: this.serviceUtils.objectToHttpParams(reportFilter2QueryString(Utils.cleanObject(report))) as any
         },
       )),
       mergeMap(paginatedData => of({
@@ -197,7 +198,7 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.post(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
-        reportFilter2Body(report),
+        reportFilter2Body(Utils.cleanObject(report)),
         headers
       ))
     );

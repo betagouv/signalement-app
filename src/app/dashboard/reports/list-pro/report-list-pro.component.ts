@@ -199,10 +199,9 @@ export class ReportListProComponent implements OnInit {
   };
 
   readonly fetchReports = (filters: ReportFiltersPro) => {
-    const cleanedFilters = Utils.cleanObject(filters);
     this.loading = true;
     this.loadingError = false;
-    return this.reportService.getReports(cleanedFilters).pipe(
+    return this.reportService.getReports(filters).pipe(
       tap((result: PaginatedData<Report>) => {
         this.loading = false;
         this.reports = result.entities;
@@ -226,8 +225,7 @@ export class ReportListProComponent implements OnInit {
   };
 
   readonly initForm = (filters: ReportFilter): FormGroup => {
-    const cleanedFilters = Utils.cleanObject(filters);
-    this.form.patchValue(cleanedFilters);
+    this.form.patchValue(filters);
     return this.form;
   };
 
@@ -239,6 +237,7 @@ export class ReportListProComponent implements OnInit {
   };
 
   readonly launchExtraction = () => {
+    const cleanedFilters = Utils.cleanObject(this.form.value);
     this.reportService.launchExtraction(this.form.value).subscribe(res => {
       this.router.navigate(['mes-telechargements']);
     });
