@@ -1,0 +1,36 @@
+@import "src/theme/variables";
+
+:host {
+  display: block;
+  margin-bottom: spacing(4);
+  overflow: hidden;
+}
+
+.-header {
+  display: flex;
+  align-items: center;
+  padding: spacing(1) spacing(2) spacing(1) spacing(3);
+}
+
+.-title {
+  font-size: 1.4rem;
+  flex: 1;
+  margin: 0;
+}
+
+.-select {
+  margin: 0 spacing(1);
+  width: 240px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.-select_input {
+  font-weight: bold;
+  text-align: right;
+}
+
+.-chip-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+}

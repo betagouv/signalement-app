@@ -50,7 +50,10 @@
                 <td>{{pendingToken.emailedTo}}</td>
                 <td>{{accessLevels[pendingToken.level]}}</td>
                 <td>
-                    <button class="btn btn-sm btn-danger" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
+                  <ng-container *appRole="[roles.Admin]">
+                    <button *ngIf="!pendingToken.emailedTo" class="btn btn-sm btn-outline-danger mr-3" (click)="openModal(returnedDocModal)">Courrier retourné</button>
+                  </ng-container>
+                  <button class="btn btn-sm btn-danger" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
                 </td>
                 <ng-template #removeTokenModal>
                   <div class="modal-body text-center">
@@ -58,6 +61,32 @@
                     <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
                     &nbsp;
                     <button type="button" class="btn btn-primary" (click)="removePendingToken(pendingToken.id);bsModalRef.hide();" >Oui</button>
+                  </div>
+                </ng-template>
+                <ng-template #returnedDocModal>
+                  <div class="modal-body text-center">
+                    <form>
+                      <div class="form__group">
+                        <label>
+                          Retour du courrier d'activation
+                        </label>
+                        <div class="row p-3">
+                          <div class="offset-4 col-4">
+                            <input type="text"
+                                   [(ngModel)]="returnedDate"
+                                   name="returnedDate"
+                                   placeholder="Date de retour"
+                                   bsDatepicker
+                                   autocomplete="off"
+                                   [bsConfig]="{ containerClass: 'theme-default' }"
+                                   triggers="click keypress">
+                          </div>
+                        </div>
+                          <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
+                          &nbsp;
+                          <button type="button" class="btn btn-primary" [disabled]="!returnedDate" (click)="submitReturnedDoc();bsModalRef.hide();">Enregistrer</button>
+                      </div>
+                    </form>
                   </div>
                 </ng-template>
               </tr>

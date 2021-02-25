@@ -1,0 +1,66 @@
+@import "src/theme/variables";
+
+:host {
+  display: block;
+
+  &:last-of-type {
+    .-border {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .-hoverable {
+      background: $theme-background-hover;
+      cursor: pointer;
+    }
+
+    .-border {
+      padding-left: 0;
+    }
+  }
+}
+
+.-root {
+  padding: spacing(1) 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.-body {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.-border {
+  margin-left: spacing(3);
+  background: $theme-divider;
+  height: 1px;
+}
+
+.-icon {
+  color: $theme-color-text-secondary;
+  margin: spacing(1/2) spacing(2) spacing(1/2) spacing(3);
+}
+
+.-label {
+  min-width: 110px;
+  color: $theme-color-text-secondary;
+  margin: spacing(1/2) spacing(2) spacing(1/2) 0;
+}
+
+.-edit {
+  margin-left: spacing(2);
+  margin-right: spacing(2);
+  color: $theme-color-text-disabled;
+  align-self: center;
+}
+
+.-content {
+  flex: 1;
+  min-width: 220px;
+  margin: spacing(1/2) spacing(2) spacing(1/2) spacing(3);
+  padding: 0 spacing(1);
+}
