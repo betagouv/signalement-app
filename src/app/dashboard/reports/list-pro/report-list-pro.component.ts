@@ -237,7 +237,6 @@ export class ReportListProComponent implements OnInit {
   };
 
   readonly launchExtraction = () => {
-    const cleanedFilters = Utils.cleanObject(this.form.value);
     this.reportService.launchExtraction(this.form.value).subscribe(res => {
       this.router.navigate(['mes-telechargements']);
     });
