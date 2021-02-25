@@ -39,7 +39,7 @@ export class CompanyAccessesComponent implements OnInit {
   loading = false;
   showSuccess = false;
 
-  returnedDate: Date;
+  returnedDate: Date = new Date();
 
   ngOnInit() {
     this.localeService.use('fr');
