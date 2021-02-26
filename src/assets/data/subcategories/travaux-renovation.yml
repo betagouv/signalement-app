@@ -95,6 +95,8 @@
             - title: Prix indiqué de manière globale et non détaillée
             - title: Date de livraison des produits ou réalisation des travaux non précisée
             - title: Autre
+        - title: Démarchage à domicile
+          companyKind: LOCATION
         - title: Démarchage téléphonique
           companyKind: PHONE
           detailInputs:
@@ -281,8 +283,6 @@
               rank: 3
               type: TIMESLOT
               optionnal: true
-        - title: Démarchage à domicile
-          companyKind: LOCATION
         - title: Autre
     - title: Prestation
       example: "Exemple : malfaçons sur le chantier, travaux commencés mais jamais terminés"
