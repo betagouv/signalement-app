@@ -42,10 +42,12 @@
     - title: Remboursement / dédommagement
       example: 'Exemple : remboursement non reçu'
     - title: Publicité
-      example: 'Exemple : publicité trompeuse, démarchage téléphonique'
+      example: 'Exemple : publicité trompeuse, démarchage à domicile, démarchage téléphonique'
       tags:
         - Litige contractuel
       subcategories:
+        - title: Démarchage à domicile
+          companyKind: LOCATION
         - title: Démarchage téléphonique
           companyKind: PHONE
           detailInputs:

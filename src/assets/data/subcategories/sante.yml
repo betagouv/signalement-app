@@ -41,6 +41,8 @@
             - sur la boîte
             - autre (à préciser)
       fileLabel: Merci de joindre une photo de la publicité ou de la boîte afin de traiter au mieux votre signalement.
+    - title: J'ai eu un problème de démarchage à domicile
+      companyKind: LOCATION
     - title: J'ai eu un problème de démarchage téléphonique
       companyKind: PHONE
       detailInputs:

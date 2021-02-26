@@ -281,6 +281,8 @@
               rank: 3
               type: TIMESLOT
               optionnal: true
+        - title: Démarchage à domicile
+          companyKind: LOCATION
         - title: Autre
     - title: Prestation
       example: "Exemple : malfaçons sur le chantier, travaux commencés mais jamais terminés"
