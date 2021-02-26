@@ -57,8 +57,7 @@ export enum CompanySearchEventActions {
   search = 'Recherche',
   select = 'Sélection dans la liste de résultats',
   searchByIdentity = 'Recherche par SIRET / SIREN / RCS',
-  searchByUrl = 'Recherche par URL',
-  searchByPhone = 'Recherche par téléphone',
+  searchByUrl = 'Recherche par URL'
 }
 
 export enum ContractualDisputeActions {
