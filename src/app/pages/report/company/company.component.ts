@@ -10,7 +10,7 @@ import { DraftCompany, WebsiteURL } from '../../../model/Company';
 import { RendererService } from '../../../services/renderer.service';
 
 export enum IdentificationKinds {
-  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url', Phone = 'Phone'
+  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url'
 }
 
 @Component({

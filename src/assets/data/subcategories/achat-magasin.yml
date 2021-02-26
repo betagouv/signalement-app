@@ -575,3 +575,12 @@
         - title: C'est un objet
           example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
           subcategories: !!import/single ../common/objet.yml
+- title: un achat suite à la visite d'un vendeur à mon domicile
+  companyKind: LOCATION
+  subcategories:
+    - title: C'est un aliment ou une boisson
+      example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
+      subcategories: !!import/single ../common/nourriture.yml
+    - title: C'est un objet
+      example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
+      subcategories: !!import/single ../common/objet.yml

@@ -55,8 +55,13 @@
                 </ng-container>
               </strong>
             </div>
+          </ng-container>
+          <ng-container *ngIf="draftReport.draftCompany.address">
             <div *ngIf="draftReport.draftCompany.address">
               Adresse : {{draftReport.draftCompany.address}}
+            </div>
+            <div *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">
+              Code postal : {{draftReport.draftCompany.postalCode}}
             </div>
             <div *ngIf="draftReport.draftCompany | isForeign">
               Pays : {{draftReport.draftCompany.country}}
