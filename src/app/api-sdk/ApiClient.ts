@@ -66,7 +66,7 @@ export class ApiClient {
         data: options?.body,
       }).then(mapData ?? ((_: AxiosResponse) => _.data))
         .catch(mapError ?? ((_: AxiosError) => {
-          console.error('[ApiClient] ' + _);
+          console.error('[ApiClient] ', _);
           throw new ApiError(_.response.status as StatusCode, _.response?.data);
         }));
     };
