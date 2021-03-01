@@ -47,7 +47,7 @@
             class="form-control form-control-material -filter">
           </app-select-departments>
 
-          <mat-select *ngIf="hasMultiplesCompanies$ | async" [formControl]="siretSirenListCtrl" multiple
+          <mat-select *ngIf="hasMultiplesCompanies$ | async" formControlName="siretSirenList" multiple
                       class="form-control form-control-material -filter" placeholder="SIRET">
             <mat-select-trigger>{{siretSirenListCtrl.value}}</mat-select-trigger>
             <div *ngIf="!(departmentsCtrl.value?.length > 0)" class="mat-option font-weight-bold mat-option-dense" matRipple (click)="toggleAllSirets()">
@@ -72,11 +72,11 @@
 
           <mat-date-range-input *ngIf="showFilters" [rangePicker]="picker" (click)="picker.open()"
                                 class="form-control form-control-material -filter">
-            <input [formControl]="startCtrl" name="start" matStartDate placeholder="Période" id="input-start">
-            <input [formControl]="endCtrl" name="end" matEndDate placeholder="">
+            <input formControlName="start" name="start" matStartDate placeholder="Période" id="input-start">
+            <input formControlName="end" name="end" matEndDate placeholder="">
           </mat-date-range-input>
 
-          <mat-select *ngIf="showFilters" [formControl]="statusCtrl" class="form-control form-control-material -filter"
+          <mat-select *ngIf="showFilters" formControlName="status" class="form-control form-control-material -filter"
                       placeholder="Statut">
             <mat-option [value]="undefined" selected class="mat-option-dense">Tous les statuts</mat-option>
             <mat-option *ngFor="let _ of statusList$ | async" [value]="_" class="mat-option-dense">

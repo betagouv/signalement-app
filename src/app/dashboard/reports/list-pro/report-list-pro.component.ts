@@ -12,9 +12,10 @@ import { PageEvent } from '@angular/material/paginator';
 import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, startWith, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginatedData } from '../../../model/PaginatedData';
-import Utils from '../../../utils';
 import { combineLatest, EMPTY, Observable } from 'rxjs';
 import { ViewableCompany } from '../../../model/Company';
+import Utils from '../../../utils';
+import compose from '../../../compose';
 
 type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siretSirenList' | 'status' | 'offset' | 'limit'>;
 
@@ -139,15 +140,22 @@ export class ReportListProComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
 
-    const initialValues = {
-      offset: 0,
-      limit: this.defaultPageSize,
-      ...this.getFormFromQueryString(reportFilterFromQueryString(this.route.snapshot.queryParams)),
-    };
+    const parsedQueryString = compose(
+      Utils.cleanObject,
+      this.getFormFromQueryString,
+      reportFilterFromQueryString,
+    )(this.route.snapshot.queryParams);
 
     this.myCompanies$
       .pipe(
-        mergeMap(myCompanies => this.initForm({ ...initialValues, siretSirenList: myCompanies.map(_ => _.companySiret) }).valueChanges),
+        mergeMap(myCompanies =>
+          this.initForm({
+            offset: 0,
+            limit: this.defaultPageSize,
+            siretSirenList: myCompanies.length > 1 ? myCompanies.map(_ => _.companySiret) : undefined,
+            ...parsedQueryString,
+          }).valueChanges
+        ),
         debounceTime(10),
         distinctUntilChanged(),
         tap(this.updateQueryString),
@@ -250,7 +258,7 @@ export class ReportListProComponent implements OnInit {
 
   readonly hasFilters = () => {
     const { limit, offset, ...values } = this.form.value;
-    return !Object.values(values).every(_ => _ === '' || _ === undefined || _ === null) || offset > 0;
+    return Object.keys(Utils.cleanObject(values)).length > 0 || offset > 0;
   };
 
   readonly resetFilters = () => {

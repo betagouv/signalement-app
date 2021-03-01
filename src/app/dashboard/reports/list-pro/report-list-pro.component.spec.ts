@@ -1,5 +1,4 @@
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportDetailComponent } from '../detail/report-detail.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { AppRoleDirective } from '../../../directives/app-role/app-role.directive';
@@ -12,11 +11,8 @@ import { CompanyAccessesService } from '../../../services/companyaccesses.servic
 import { ConstantService } from '../../../services/constant.service';
 import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
-import { genPaginatedReports, genUserAccess } from '../../../../../test/fixtures.spec';
+import { genPaginatedReports, genUserAccess, genViewableCompany } from '../../../../../test/fixtures.spec';
 import { ReportListProComponent } from './report-list-pro.component';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
@@ -26,6 +22,7 @@ import { ApiSdkService } from '../../../services/core/api-sdk.service';
 import { ApiSdkMockService } from '../../../services/core/api-sdk-mock.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
+import { SelectDepartmentsModule } from '../list/select-departments/select-departments.module';
 
 describe('ReportListProComponent', () => {
   let companyAccessesService: CompanyAccessesService;
@@ -43,6 +40,7 @@ describe('ReportListProComponent', () => {
         AppPermissionDirective,
       ],
       imports: [
+        SelectDepartmentsModule,
         BrowserAnimationsModule,
         SharedModule,
         HttpClientTestingModule,
@@ -74,7 +72,7 @@ describe('ReportListProComponent', () => {
   });
 
   it('should load user accesses on init', () => {
-    const myAccessesSpy = spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([]));
+    const myAccessesSpy = spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([]));
     const fixture = TestBed.createComponent(ReportListProComponent);
     fixture.detectChanges();
     expect(myAccessesSpy).toHaveBeenCalledWith();
@@ -89,7 +87,7 @@ describe('ReportListProComponent', () => {
   });
 
   it('should display a specific message when pro has no accesses and should not load reports', () => {
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([]));
+    spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([]));
     const getReportsSpy = spyOn(reportService, 'getReports');
 
     const fixture = TestBed.createComponent(ReportListProComponent);
@@ -102,20 +100,23 @@ describe('ReportListProComponent', () => {
   });
 
   it('should display reports list without filters and information when pro has only one access and less than 10 reports', (() => {
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess()]));
+    spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([genViewableCompany()]));
     spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(3)));
     const fixture = TestBed.createComponent(ReportListProComponent);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelectorAll('tr.tr.hoverable').length).toEqual(3);
-    expect(nativeElement.querySelector('[formcontrolname=siret]')).toBeNull();
+    expect(nativeElement.querySelector('[formcontrolname=siretSirenList]')).toBeNull();
     expect(nativeElement.querySelector('.mat-column-postalCode')).toBeNull();
     expect(nativeElement.querySelector('.mat-column-siret')).toBeNull();
   }));
 
   it('should display report list with filters when pro has only one access and more than 10 reports', () => {
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess()]));
+    const viewableCompany1 = genViewableCompany();
+    spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([viewableCompany1]));
+    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(viewableCompany1.siret)]));
+
     spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(11)));
     const fixture = TestBed.createComponent(ReportListProComponent);
     fixture.detectChanges();
@@ -127,33 +128,33 @@ describe('ReportListProComponent', () => {
   });
 
   it('should display siret form when pro has several accesses', () => {
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(), genUserAccess()]));
+    spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([genViewableCompany(), genViewableCompany()]));
     spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(3)));
     const fixture = TestBed.createComponent(ReportListProComponent);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelector('[formcontrolname=start]')).toBeNull();
-    expect(nativeElement.querySelector('[formcontrolname=siret]')).not.toBeNull();
+    expect(nativeElement.querySelector('[formcontrolname=siretSirenList]')).not.toBeNull();
     expect(nativeElement.querySelectorAll('tr.tr.hoverable').length).toEqual(3);
     expect(nativeElement.querySelector('.mat-column-postalCode')).not.toBeNull();
     expect(nativeElement.querySelector('.mat-column-siret')).not.toBeNull();
   });
 
   it('should display siret and filters form when pro has several accesses and more than 11 companies', () => {
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(), genUserAccess()]));
+    spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([genViewableCompany(), genViewableCompany()]));
     spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(22)));
     const fixture = TestBed.createComponent(ReportListProComponent);
     fixture.detectChanges();
 
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelector('[formcontrolname=start]')).not.toBeNull();
-    expect(nativeElement.querySelector('[formcontrolname=siret]')).not.toBeNull();
+    expect(nativeElement.querySelector('[formcontrolname=siretSirenList]')).not.toBeNull();
     expect(nativeElement.querySelectorAll('tr.tr.hoverable').length).toEqual(22);
   });
 
-  fit('should paginate correctly', () => {
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(), genUserAccess()]));
+  it('should paginate correctly', () => {
+    spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([genViewableCompany(), genViewableCompany()]));
     const getReportsSpy = spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(22)));
 
     const fixture = TestBed.createComponent(ReportListProComponent);
@@ -165,12 +166,15 @@ describe('ReportListProComponent', () => {
   });
 
   it('should correctly parse the querystring', () => {
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(), genUserAccess()]));
+    const viewableCompany1 = genViewableCompany();
+    const viewableCompany2 = genViewableCompany();
+    spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([viewableCompany1, viewableCompany2]));
+    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(viewableCompany1.siret), genUserAccess(viewableCompany2.siret)]));
     const getReportsSpy = spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(22)));
     activatedRoute.snapshot.queryParams = {
       offset: 10,
       limit: 20,
-      siret: '95450974103825',
+      siretSirenList: [viewableCompany1.siret, viewableCompany2.siret],
       status: 'À répondre',
       start: '2021-02-01',
       end: '2021-02-24',
@@ -183,7 +187,7 @@ describe('ReportListProComponent', () => {
     expect(calledReport.status).toEqual('À répondre');
     expect(calledReport.start.getTime()).toEqual(new Date(2021, 1, 1).getTime());
     expect(calledReport.end.getTime()).toEqual(new Date(2021, 1, 24).getTime());
-    expect(calledReport.siret).toEqual('95450974103825');
+    expect(calledReport.siretSirenList).toEqual([viewableCompany1.siret, viewableCompany2.siret]);
     expect(calledReport.limit).toEqual(20);
     expect(calledReport.offset).toEqual(10);
   });

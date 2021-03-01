@@ -2,7 +2,7 @@ import { Roles, User } from '../src/app/model/AuthUser';
 import { DraftReport, Report, ReportStatus, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
 import { Information, Subcategory } from '../src/app/model/Anomaly';
-import { Company, CompanySearchResult } from '../src/app/model/Company';
+import { Company, CompanySearchResult, ViewableCompany } from '../src/app/model/Company';
 import anomalies from '../src/assets/data/anomalies.json';
 import { PaginatedData } from '../src/app/model/PaginatedData';
 
@@ -38,9 +38,15 @@ export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'F
 export const roles = [Roles.Admin, Roles.Pro, Roles.DGCCRF];
 export const status = [ReportStatus.InProgress, ReportStatus.ClosedForPro];
 
-export function genUserAccess() {
+export const genViewableCompany = (): ViewableCompany => ({
+  siret: genSiret(),
+  postalCode: randomstring.generate(),
+  closed: false,
+});
+
+export function genUserAccess(siret?: string) {
   return {
-    companySiret: genSiret(),
+    companySiret: siret ?? genSiret(),
     companyName: randomstring.generate(),
     companyAddress: randomstring.generate(),
     level: oneOf(['admin', 'member'])

@@ -11,6 +11,7 @@ import { MaterialModule } from './material.module';
 import { NgxLoadingConfig } from '../../components/components.module';
 import { FenderModule } from './fender/fender';
 import { AlertModule } from './alert/alert';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,8 @@ import { AlertModule } from './alert/alert';
     NgxLoadingModule.forRoot(NgxLoadingConfig),
   ],
   exports: [
+    ReactiveFormsModule,
+    FormsModule,
     CommonModule,
     NgxLoadingModule,
     PanelModule,
