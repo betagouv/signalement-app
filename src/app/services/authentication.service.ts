@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthenticationService {
 
-  private userSource = new BehaviorSubject<User>(undefined);
+  private userSource = new BehaviorSubject<User | undefined>(undefined);
   user = this.userSource.asObservable();
 
   jwtHelperService = new JwtHelperService();
@@ -49,14 +49,14 @@ export class AuthenticationService {
   }
 
   validateEmail(token: String) {
-    return this.http.post(
+    return this.http.post<AuthUser>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'account', 'validate-email']),
       JSON.stringify({ token }), this.serviceUtils.getHttpHeaders()
     )
-    .pipe(map(this.handleAuthUser.bind(this)));
+    .pipe(map(this.handleAuthUser));
   }
 
-  private handleAuthUser(authUser: AuthUser): User {
+  private handleAuthUser = (authUser: AuthUser): User => {
     if (authUser.token) {
       const user = Object.assign(new User(), authUser.user);
       this.userSource.next(user);
@@ -72,11 +72,16 @@ export class AuthenticationService {
     this.userSource.next(undefined);
   }
 
+  readonly getConnectedUser = () => this.localStorage.getItem(AuthUserStorageKey).pipe(
+    map((_?: AuthUser) => (_?.token && !this.jwtHelperService.isTokenExpired(_.token)) ? _ : undefined),
+    map((_?: AuthUser) => _?.user)
+  );
+
   isAuthenticated() {
     return this.localStorage.getItem(AuthUserStorageKey)
-    .pipe(
-      map(authUser => authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
-    );
+      .pipe(
+        map((authUser: AuthUser) => authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
+      );
   }
 
   forgotPassword(login: string) {

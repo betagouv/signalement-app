@@ -82,7 +82,7 @@
         </div>
       </ng-template>
       <ngx-loading [show]="loading"></ngx-loading>
-      <div class="card mb-3" *ngIf="!isAuthenticated && !emailSent">
+      <div class="card mb-3" *ngIf="!connectedUser && !emailSent">
         <div class="card-body">
           <h2 class="pb-2 text-primary">Vous avez déjà un compte ?</h2>
           <div>
