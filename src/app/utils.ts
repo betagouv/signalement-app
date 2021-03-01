@@ -17,7 +17,12 @@ export default class Utils {
 
   static cleanObject = <T extends object>(obj: T): Partial<T> => {
     return Object.entries(obj)
-      .filter(([, _]) => _ !== undefined && _ !== null && _ !== '' && (!Array.isArray(_) || !!_.filter(v => v !== undefined).length))
+      .filter(([, _]) =>
+        _ !== undefined &&
+        _ !== null &&
+        _ !== '' &&
+        (!Array.isArray(_) || !!_.filter(v => v !== undefined).length)
+      )
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   };
 
