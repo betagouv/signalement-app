@@ -25,8 +25,6 @@ import { Report } from '../../../model/Report';
         attach_file
       </mat-icon>
       <app-badge-status [status]="report.status"></app-badge-status>
-
-      <!--      <span class="-date"></span>-->
     </div>
   `
 })
