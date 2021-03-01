@@ -5,7 +5,11 @@ import { Department } from '../../model/Region';
 
 const fromApi = (api: any): ApiSubscription => ({
   ...api,
-  departments: api.departments.map(Department.fromCode),
+  categories: api.categories ?? [],
+  sirets: api.sirets ?? [],
+  countries: api.countries ?? [],
+  tags: api.tags ?? [],
+  departments: (api.departments ?? []).map(Department.fromCode),
 });
 
 const toApi = (subscription: Partial<ApiSubscription>): any => ({
