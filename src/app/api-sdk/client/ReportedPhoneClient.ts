@@ -1,16 +1,16 @@
-import { ApiPhoneWithReportCount } from '../model/ApiReportedPhone';
-import { ApiClient, ApiClientApi } from '../ApiClient';
+import { ApiClientApi } from '../ApiClient';
+import { ReportedPhone } from '../../model/ReportedPhone';
 
 export class ReportedPhoneClient {
 
   constructor(private client: ApiClientApi) {
   }
 
-  readonly list = (q?: string, start?: string, end?: string): Promise<ApiPhoneWithReportCount[]> => {
-    return this.client.get<ApiPhoneWithReportCount[]>(`/reported-phones`, { qs: { q, start, end } });
+  readonly list = (q?: string, start?: string, end?: string) => {
+    return this.client.get<ReportedPhone[]>(`/reported-phones`, { qs: { q, start, end } });
   };
 
-  readonly extract = (q?: string, start?: string, end?: string): Promise<ApiPhoneWithReportCount[]> => {
-    return this.client.get<ApiPhoneWithReportCount[]>(`/reported-phones/extract`, { qs: { q, start, end } });
+  readonly extract = (q?: string, start?: string, end?: string) => {
+    return this.client.get<ReportedPhone[]>(`/reported-phones/extract`, { qs: { q, start, end } });
   };
 }
