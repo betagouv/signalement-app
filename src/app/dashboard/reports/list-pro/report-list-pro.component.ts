@@ -58,7 +58,7 @@ export class ReportListProComponent implements OnInit {
   mobileMode = this.isMobileSize();
 
   /** @todo Can be removed once it's outdated */
-  readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 3, 1).getTime();
+  readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 4, 1).getTime();
 
   readonly maxReportsBeforeShowFilters = 10;
 

@@ -15,19 +15,15 @@
     </button>
   </div>
 
-  <app-panel *ngIf="isFirstVisit()">
-    <app-alert type="success" id="alert-report-first-visit">
-      Votre compte est bien activé, vous pouvez consulter <strong>votre signalement</strong>.
-      <button mat-button app-alert-close>Fermer</button>
-    </app-alert>
-  </app-panel>
+  <app-alert type="success" id="alert-report-first-visit" *ngIf="isFirstVisit()">
+    Votre compte est bien activé, vous pouvez consulter <strong>votre signalement</strong>.
+    <button mat-button app-alert-close>Fermer</button>
+  </app-alert>
 
-  <app-panel *ngIf="showNewFeatureIndicator">
-    <app-alert type="info" id="alert-new-report-list-pro-siret">
-      Votre compte a changé ! Vous pouvez désormais consulter les signalement de vos filiales ayant le même SIREN.
-      <button mat-button app-alert-close>Fermer</button>
-    </app-alert>
-  </app-panel>
+  <app-alert type="info" id="alert-new-report-list-pro-siret" *ngIf="showNewFeatureIndicator">
+    Votre compte a changé ! Vous pouvez désormais consulter les signalement de vos filiales ayant le même SIREN.
+    <button mat-button app-alert-close>Fermer</button>
+  </app-alert>
 
   <app-panel [loading]="loading || loadingCompanies">
 
