@@ -18,6 +18,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportListModule } from './list/report-list.module';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
+import { CompanySearchDialogModule } from '../companies/company-search-dialog/company-search-dialog.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -49,7 +50,8 @@ const routes: Routes = [
     AppRoleModule,
     SharedModule,
     AppPermissionModule,
-    DashboardCompaniesModule
+    DashboardCompaniesModule,
+    CompanySearchDialogModule
   ],
 })
 export class ReportsModule { }
