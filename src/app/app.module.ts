@@ -64,6 +64,7 @@ class ErrorLogger extends ErrorHandler {
           { path: '', loadChildren: () => import('./pages/stats/stats.module').then(_ => _.StatsModule) },
           { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(_ => _.DashboardModule) },
           { path: '', loadChildren: () => import('./pages/static/static.module').then(_ => _.StaticModule) },
+          { path: '', loadChildren: () => import('./pages/anomlies-tree/anomalies-tree.module').then(_ => _.AnomaliesTreeModule) },
           { path: 'not-found', component: NotFoundComponent },
           { path: '**', component: NotFoundComponent },
         ], {
