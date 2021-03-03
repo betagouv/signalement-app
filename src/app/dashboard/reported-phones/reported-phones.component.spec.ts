@@ -50,7 +50,10 @@ describe('UnregisteredComponent', () => {
 
   it('should list reportedPhones in a datatable', () => {
 
-    spyOn(reportedPhoneService, 'fetch').and.callFake(() => of([{ phone: genPhone(), siret: genSiret(), count: 1}, { phone: genPhone(), count: 2}]));
+    spyOn(reportedPhoneService, 'fetch').and.callFake(() => of([
+      { phone: genPhone(), siret: genSiret(), companyName: '', category: '', count: 1},
+      { phone: genPhone(), category: '', count: 2}
+    ]));
 
     fixture.detectChanges();
 
@@ -62,7 +65,10 @@ describe('UnregisteredComponent', () => {
 
   it('should request the API on filtering', () => {
 
-    const reportedPhoneServiceSpy = spyOn(reportedPhoneService, 'fetch').and.callFake(() => of([{ phone: genPhone(), siret: genSiret(), count: 1}, { phone: genPhone(), count: 2}]));
+    const reportedPhoneServiceSpy = spyOn(reportedPhoneService, 'fetch').and.callFake(() => of([
+      { phone: genPhone(), siret: genSiret(), count: 1},
+      { phone: genPhone(), count: 2}
+    ]));
 
     const q = 'phone';
     const start = addMonths(new Date(), -1);
