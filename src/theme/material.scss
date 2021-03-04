@@ -108,6 +108,29 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
   color: white;
 }
 
+.mat-chip-nohover {
+  &:hover {
+    background: transparent !important;
+  }
+  &:after {
+    content: none !important;
+  }
+}
+
+.mat-chip-list-wrapper .mat-standard-chip {
+  margin: spacing(1/4);
+}
+
+.mat-chip.mat-standard-chip {
+  background: none;
+  border: 1px solid $theme-divider;
+  font-weight: normal;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
 .mat-button_icon {
   margin-bottom: 4px;
 

@@ -48,6 +48,11 @@
               Site internet : {{draftReport.draftCompany.website.url}}
             </div>
           </div>
+          <div class="row mt-4" *ngIf="draftReport.draftCompany.phone">
+            <div class="col-12">
+              Numéro de téléphone : {{draftReport.draftCompany.phone}}
+            </div>
+          </div>
           <div class="row" *ngIf="draftReport.vendor">
             <div class="col-12">
               Nom du vendeur : {{draftReport.vendor}}
@@ -55,7 +60,7 @@
           </div>
         </div>
         <hr />
-        <button type="submit" class="btn btn-lg btn-primary" (click)="submitCompany(draftReport.draftCompany)">
+        <button type="submit" class="btn btn-lg btn-primary" (click)="nextStep()">
           Continuer
         </button>
       </ng-container>
@@ -69,14 +74,20 @@
                                        *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
         </app-company-search-by-website>
 
+        <app-company-search-by-phone [draftReport]="draftReport"
+                                     (complete)="submitPhone($event)"
+                                     (change)="requireIdentificationKind = false"
+                                     *ngIf="draftReport.companyKind === companyKinds.PHONE">
+        </app-company-search-by-phone>
+
         <div #searchKind>
 
           <ng-container *ngIf="requireIdentificationKind">
 
-            <hr *ngIf="draftWebsite"/>
+            <hr *ngIf="draftWebsite || draftPhone"/>
 
             <h2 class="mb-4 font-weight-bold">
-              Pouvez-vous identifier l'entreprise ?
+              Pouvez-vous identifier l'entreprise<span *ngIf="draftReport.companyKind === companyKinds.PHONE"> qui vous a démarché</span> ?
             </h2>
             <div class="note mb-1">
               SignalConso en a besoin pour <ng-container *ngIf="!draftReport.employeeConsumer">la contacter et </ng-container>informer la répression des fraudes.
@@ -106,7 +117,8 @@
                   </div>
                 </div>
 
-                <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.None)" *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
+                <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.None)"
+                     *ngIf="[companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
                       <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="rendererService.scrollToElement(identSearch)"/>

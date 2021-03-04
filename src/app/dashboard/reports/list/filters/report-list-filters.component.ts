@@ -46,6 +46,12 @@ import { ReportFilter } from '../../../../model/ReportFilter';
             </td>
           </tr>
           <tr>
+            <td><label for="rls-phone">Numéro de téléphone</label></td>
+            <td>
+              <input formControlName="phone" id="rls-phone" class="form-control form-control-material">
+            </td>
+          </tr>
+          <tr>
             <td><label for="rls-siretSirenList">SIRET</label></td>
             <td>
               <input formControlName="siretSirenList" id="rls-siretSirenList" class="form-control form-control-material">

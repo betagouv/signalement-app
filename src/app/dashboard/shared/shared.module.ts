@@ -12,6 +12,7 @@ import { NgxLoadingConfig } from '../../components/components.module';
 import { FenderModule } from './fender/fender';
 import { AlertModule } from './alert/alert';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ConfirmModule,
     LoadingModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     FenderModule,
     AlertModule,
   ],

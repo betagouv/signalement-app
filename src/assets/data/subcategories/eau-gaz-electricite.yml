@@ -93,43 +93,54 @@
   tags:
     - Litige contractuel
   subcategories:
-    - title: Démarchage à domicile ou par téléphone
+    - title: Démarchage à domicile
       example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif'
+      companyKind: SIRET
       detailInputs:
-        - label: Date du passage du vendeur (ou de son appel)
+        - label: Date du passage du vendeur
           rank: 1
           type: DATE
           defaultValue: SYSDATE
-        - label: De quoi s'agit-il&#160;?
-          rank: 2
-          type: RADIO
-          options:
-            - démarchage à domicile (porte-à-porte)
-            - démarchage par téléphone uniquement
         - label: Que s'est-il passé&#160;?
-          rank: 3
+          rank: 2
           type: CHECKBOX
           options:
-            - le vendeur s'est fait passer pour une autre société (à préciser)
+            - le vendeur s'est fait passer pour une autre entreprise (à préciser)
             - le vendeur m'a fait signer des papiers sans me dire que c'était un contrat
             - le vendeur m'a obligé à signer un nouveau contrat en m'indiquant que mon contrat actuel allait être arrêté
             - le vendeur a demandé à voir mes factures, mon compteur
             - autre (à préciser)
         - label: Avez-vous signé, volontairement ou non, un contrat&#160;?
-          rank: 4
+          rank: 3
           type: RADIO
           options:
             - oui
             - non
-        - label: Date de début du contrat si il démarre un autre jour que celui du démarchage&#160;?
-          rank: 5
+        - label: Date de début du contrat s'il démarre un autre jour que celui du démarchage&#160;?
+          rank: 4
           type: DATE
           defaultValue: SYSDATE
           optionnal: true
         - label: Décrivez nous plus en détails ce qui s'est passé
-          rank: 6
+          rank: 5
           type: TEXTAREA
       fileLabel: Si possible, joindre une copie du contrat ou tout document commercial
+    - title: Démarchage téléphonique
+      companyKind: PHONE
+      detailInputs:
+        - label: Date de l'appel
+          rank: 1
+          type: DATE
+          defaultValue: SYSDATE
+        - label: Est-ce que le vendeur s'est fait passer pour une autre entreprise&#160;?
+          rank: 2
+          type: RADIO
+          options:
+            - Non
+            - Oui (à préciser)
+        - label: Décrivez nous plus en détails ce qui s'est passé
+          rank: 3
+          type: TEXTAREA
     - title: Publicité mensongère ou trompeuse
       example: 'Exemple : publicité "offre verte" mensongère'
       detailInputs:
@@ -197,7 +208,7 @@
                     - title: Non
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
-                        content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                        content: Une fois le délai de rétractation terminé, l'entreprise n'est plus obligée d'annuler votre contrat.
                         outOfScope: true
                 - title: Un logement que vous occupiez déjà
                   subcategoriesTitle: Avez-vous demandé à faire démarrer votre contrat immédiatement ?
@@ -224,12 +235,12 @@
                         - title: Non
                           information:
                             title: Vous ne pouvez plus exiger l'annulation de votre contrat.
-                            content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                            content: Une fois le délai de rétractation terminé, l'entreprise n'est plus obligée d'annuler votre contrat.
                             outOfScope: true
                     - title: Oui. J'ai renoncé au délai de retractation.
                       information:
                         title: Vous ne pouvez plus exiger l'annulation de votre contrat.
-                        content: Une fois le délai de rétractation terminé, la société n'est plus obligée d'annuler votre contrat.
+                        content: Une fois le délai de rétractation terminé, l'entreprise n'est plus obligée d'annuler votre contrat.
                         outOfScope: true
                     - title: Oui mais je n'ai pas été informé que ça annulait mon droit à la retractation.
             - title: Dans une boutique

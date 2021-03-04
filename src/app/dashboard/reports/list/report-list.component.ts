@@ -82,6 +82,7 @@ export class ReportListComponent implements OnInit {
       status: undefined,
       hasCompany: undefined,
       websiteURL: undefined,
+      phone: undefined,
       email: undefined,
       category: undefined,
       offset: 0,

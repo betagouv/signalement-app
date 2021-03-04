@@ -146,7 +146,7 @@
                 - label: Notez les éléments qui permettent d'identifier le taxi.
                   rank: 6
                   type: TEXTAREA
-                  placeholder: Numéro ADS, plaque d'immatriculation, société de réservation...
+                  placeholder: Numéro ADS, plaque d'immatriculation, entreprise de réservation...
               fileLabel: Joindre la note (facture) de votre course ou tout document utile pour appuyer votre signalement.
         - title: Autre
           subcategories:
@@ -213,7 +213,7 @@
               rank: 3
               type: RADIO
               options:
-                - site internet / application mobile de la société
+                - site internet / application mobile de l'entreprise
                 - publicité par email
                 - publicité sur un affichage (dans le métro, sur une pancarte...)
                 - autre (à préciser)
@@ -232,7 +232,7 @@
             - label: Quel prix avez-vous payé ?
               rank: 3
               type: TEXT
-            - label: Le chauffeur / la société vous a-t-elle donné une raison ?
+            - label: Le chauffeur / l'entreprise vous a-t-elle donné une raison ?
               rank: 4
               type: RADIO
               options:

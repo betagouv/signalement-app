@@ -10,7 +10,7 @@ export class Department {
     this.label = undefined;
   }
 
-  static fromCode(code: string) {
+  static fromCode = (code: string) => {
     return Departments.find(dept => dept.code === code);
   }
 }

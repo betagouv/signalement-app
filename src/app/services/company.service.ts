@@ -35,7 +35,7 @@ class RawCompanyService {
   searchCompaniesByUrl(url: string) {
     return this.http.get<CompanySearchResult[]>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search-url']),
-      { params: {url: url}}
+      { params: { url }}
     );
   }
 
@@ -62,6 +62,18 @@ class RawCompanyService {
             postalCode,
             activationDocumentRequired
           },
+          headers
+        );
+      })
+    );
+  }
+
+  saveUndeliveredDocument(siret: string, returnedDate: Date) {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.post(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', siret, 'undelivered-document']),
+          { returnedDate },
           headers
         );
       })

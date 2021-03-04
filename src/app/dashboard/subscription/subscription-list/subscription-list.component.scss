@@ -1,11 +1,14 @@
-.table {
+@import "src/theme/variables";
 
-  th.actions {
-    width: 50px;
-  }
-
-  th, td {
-    vertical-align: middle;
-  }
+.-card-new {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: spacing(2);
+  border: 1px dashed $theme-divider;
+  margin-bottom: spacing(3);
+  color: $theme-primary;
+  font-size: 1.25rem;
+  border-radius: $theme-border-radius;
 }
-

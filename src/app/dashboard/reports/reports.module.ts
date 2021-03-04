@@ -20,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
 import { ReportCardProComponent } from './list-pro/report-card-pro.component';
 import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
+import { CompanySearchDialogModule } from '../companies/company-search-dialog/company-search-dialog.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -53,7 +54,8 @@ const routes: Routes = [
     AppRoleModule,
     SharedModule,
     AppPermissionModule,
-    DashboardCompaniesModule
+    DashboardCompaniesModule,
+    CompanySearchDialogModule
   ],
 })
 export class ReportsModule { }
