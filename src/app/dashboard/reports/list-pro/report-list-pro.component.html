@@ -21,7 +21,7 @@
   </app-alert>
 
   <app-alert type="info" id="alert-new-report-list-pro-siret" *ngIf="showNewFeatureIndicator">
-    Votre compte a changé ! Vous pouvez désormais consulter les signalement de vos filiales ayant le même SIREN.
+    Votre compte a changé ! Vous pouvez désormais consulter les signalements de vos établissements ayant le même SIREN.
     <button mat-button app-alert-close>Fermer</button>
   </app-alert>
 
@@ -51,7 +51,7 @@
               Tous les SIRET
             </div>
             <div *ngIf="!(departmentsCtrl.value?.length > 0)" class="mat-option font-weight-bold mat-option-dense" matRipple (click)="toggleAllMyAccessesSirets()">
-              <mat-pseudo-checkbox [state]="allMyAccessesCheckboxStatus$ | async" class="mat-option-pseudo-checkbox"></mat-pseudo-checkbox>
+              <mat-pseudo-checkboxf [state]="allMyAccessesCheckboxStatus$ | async" class="mat-option-pseudo-checkbox"></mat-pseudo-checkboxf>
               Tous mes accès
             </div>
             <mat-option *ngFor="let _ of companiesBySelectedDepartments$ | async" [value]="_.siret" class="mat-option-dense">
