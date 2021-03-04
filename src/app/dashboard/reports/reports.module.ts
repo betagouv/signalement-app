@@ -18,6 +18,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportListModule } from './list/report-list.module';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
+import { ReportCardProComponent } from './list-pro/report-card-pro.component';
+import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
 import { CompanySearchDialogModule } from '../companies/company-search-dialog/company-search-dialog.component';
 
 const routes: Routes = [
@@ -35,8 +37,10 @@ const routes: Routes = [
     ConsumerReviewComponent,
     ReportListProComponent,
     ReportDetailComponent,
+    ReportCardProComponent,
   ],
   imports: [
+    SelectDepartmentsModule,
     ReportListModule,
     FormsModule,
     ReactiveFormsModule,

@@ -52,7 +52,7 @@ export class BtnComponent implements OnInit {
 
   @Input() success?: boolean;
 
-  @Input() loading: boolean;
+  @Input() loading = false;
 
   @Input() icon?: string;
 
