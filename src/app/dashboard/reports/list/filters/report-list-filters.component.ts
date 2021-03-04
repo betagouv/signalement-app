@@ -52,9 +52,9 @@ import { ReportFilter } from '../../../../model/ReportFilter';
             </td>
           </tr>
           <tr>
-            <td><label for="rls-siret">SIRET</label></td>
+            <td><label for="rls-siretSirenList">SIRET</label></td>
             <td>
-              <input formControlName="siret" id="rls-siret" class="form-control form-control-material">
+              <input formControlName="siretSirenList" id="rls-siretSirenList" class="form-control form-control-material">
             </td>
           </tr>
           <tr>

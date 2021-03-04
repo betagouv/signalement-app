@@ -38,7 +38,7 @@ export class PageComponent {
 
   @Input() size: 'large' | 'normal' | 'small' = 'normal';
 
-  private _animated: boolean;
+  private _animated = false;
   @Input()
   get animated() {
     return this._animated;

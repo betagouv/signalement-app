@@ -5,12 +5,12 @@ export interface ReportFilter {
   readonly departments?: string[];
   readonly tags?: Tag[];
   readonly companyCountries?: string[];
+  readonly siretSirenList?: string[];
   start?: Date;
   end?: Date;
   email?: string;
   websiteURL?: string;
   phone?: string;
-  siret?: string;
   category?: string;
   status?: string;
   details?: string;
@@ -23,16 +23,16 @@ export interface ReportFilterQuerystring {
   readonly departments?: string;
   readonly tags?: string | string[];
   readonly companyCountries?: string;
+  readonly siretSirenList?: string[];
   start?: string;
   end?: string;
   email?: string;
   websiteURL?: string;
   phone?: string;
-  siret?: string;
   category?: string;
   status?: string;
   details?: string;
-  hasCompany?: string;
+  hasCompany?: 'true' | 'false';
   offset?: string;
   limit?: string;
 }
@@ -42,9 +42,9 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
     const { start, end, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
     return {
       ...r,
-      offset: offset ? offset + '' : '0',
-      limit: limit ? limit + '' : '10',
-      ...(hasCompany !== undefined && { hasCompany: '' + hasCompany }),
+      offset: offset !== undefined ? offset + '' : undefined,
+      limit: limit !== undefined ? limit + '' : undefined,
+      ...(hasCompany !== undefined && { hasCompany: '' + hasCompany }) as any,
       ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
       ...(departments ? { departments: departments.join(',') } : {}),
       ...((start) ? { start: Utils.dateToApi(start) } : {}),
@@ -59,11 +59,11 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
 export const reportFilterFromQueryString = (report: ReportFilterQuerystring): ReportFilter => {
   try {
     const { start, end, companyCountries, departments, hasCompany, offset, limit, tags, ...r } = report;
-    const parseBooleanOption = (_: string): boolean | undefined => ({ 'true': true, 'false': false, })[_];
+    const parseBooleanOption = (_?: 'true' | 'false'): boolean | undefined => ({ 'true': true, 'false': false, })[_!];
     return {
       ...r,
-      offset: +offset,
-      limit: +limit,
+      offset: +(offset || '0'),
+      limit: limit ? +limit : undefined,
       hasCompany: parseBooleanOption(hasCompany),
       tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
       companyCountries: companyCountries?.split(','),
@@ -78,9 +78,10 @@ export const reportFilterFromQueryString = (report: ReportFilterQuerystring): Re
 };
 
 export const reportFilter2Body = (report: ReportFilter): { [key in keyof ReportFilter]: any } => {
-  const { start, end, offset, departments, tags, limit, ...rest } = report;
+  const { start, end, offset, departments, tags, limit, siretSirenList, ...rest } = report;
   return {
     ...rest,
+    siretSirenList: Array.isArray(siretSirenList) ? siretSirenList : (siretSirenList !== undefined ? [siretSirenList] : undefined),
     departments: departments || [],
     tags: tags || [],
     start: Utils.dateToApi(start),

@@ -34,3 +34,13 @@
   overflow-x: scroll;
 }
 
+.hoverable {
+  transition: background-color 0.2s ease-out;
+  &:hover {
+    background-color: $theme-background-hover;
+  }
+}
+.txt-small {
+  font-size: 0.875rem;
+}
+
