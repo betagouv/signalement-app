@@ -9,19 +9,24 @@ import { MatPseudoCheckboxState } from '@angular/material/core';
   template: `
     <mat-select [placeholder]="placeholder" multiple [(ngModel)]="value" (ngModelChange)="onChangeCallback(this.value)"
                 [disabled]="disabled">
+      <mat-option class="mat-option-dense" [hidden]="true">Hack because panel won't open is there is not mat-option</mat-option>
       <div class="mat-option select-optgroup" matRipple (click)="toggleAllDepartments()">
         <mat-pseudo-checkbox [state]="getDepartmentsCheckboxState()" class="mat-option-pseudo-checkbox"></mat-pseudo-checkbox>
         Tous les départements
       </div>
       <ng-container *ngFor="let region of regions">
         <div class="mat-option select-optgroup" matRipple (click)="toggleAllDepartments(region)">
-          <mat-pseudo-checkbox class="mat-option-pseudo-checkbox"
-                               [state]="getDepartmentsCheckboxState(region)"></mat-pseudo-checkbox>
+          <mat-pseudo-checkbox class="mat-option-pseudo-checkbox" [state]="getDepartmentsCheckboxState(region)"></mat-pseudo-checkbox>
           {{region.label}}
+          <mat-icon class="-expend_more" (click)="toggleVisibility(region.label, $event)">
+            {{visibleRegions.has(region.label) ? 'expand_more' : 'navigate_next'}}
+          </mat-icon>
         </div>
-        <mat-option class="mat-option-dense" *ngFor="let dep of region.departments" [value]="dep.code">
-          ({{dep.code}}) {{dep.label}}
-        </mat-option>
+        <ng-container *ngIf="visibleRegions.has(region.label)">
+          <mat-option class="mat-option-dense txt-secondary" *ngFor="let dep of region.departments" [value]="dep.code">
+            ({{dep.code}}) {{dep.label}}
+          </mat-option>
+        </ng-container>
       </ng-container>
     </mat-select>
   `,
@@ -41,7 +46,9 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
 
   @Input() placeholder?: string;
 
-  readonly regions = Regions;
+  readonly regions: Region[] = Regions;
+
+  readonly visibleRegions = new Set();
 
   readonly departments = this.regions.flatMap(_ => _.departments).map(_ => _.code);
 
@@ -111,5 +118,14 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
   private removeAllDepartments = (region?: Region) => {
     const departments = region ? region.departments.map(_ => _.code) : this.departments;
     this.value = this.safeDepartmentInputValue.filter(_ => !departments.includes(_));
+  };
+
+  readonly toggleVisibility = (region: string, $event: any) => {
+    $event.stopPropagation();
+    if (this.visibleRegions.has(region)) {
+      this.visibleRegions.delete(region);
+    } else {
+      this.visibleRegions.add(region);
+    }
   };
 }

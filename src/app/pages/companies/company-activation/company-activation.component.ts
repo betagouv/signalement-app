@@ -5,7 +5,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { ActionResultNames, AnalyticsService, CompanyAccessEventActions, EventCategories } from '../../../services/analytics.service';
 import { Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
-import { take } from 'rxjs/operators';
+import { User } from '../../../model/AuthUser';
 
 @Component({
   selector: 'app-company-activation',
@@ -14,44 +14,37 @@ import { take } from 'rxjs/operators';
 })
 export class CompanyActivationComponent implements OnInit {
 
-  activationForm: FormGroup;
-  siretCtrl: FormControl;
-  codeCtrl: FormControl;
-  emailCtrl: FormControl;
+  readonly siretCtrl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{14}')]);
+  readonly codeCtrl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{6}')]);
+  readonly emailCtrl = new FormControl('', [Validators.required, Validators.email]);
+  readonly activationForm = new FormGroup({
+    siret: this.siretCtrl,
+    code: this.codeCtrl,
+    email: this.emailCtrl
+  });
 
-  showErrors: boolean;
+  showErrors = false;
   activationError = false;
 
-  isAuthenticated: boolean;
-  loading: boolean;
+  connectedUser?: User;
+  loading = false;
   emailSent = false;
 
-  constructor(public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
-              private authenticationService: AuthenticationService,
-              private analyticsService: AnalyticsService,
-              private router: Router) { }
+  constructor(
+    public formBuilder: FormBuilder,
+    private titleService: Title,
+    private meta: Meta,
+    private authenticationService: AuthenticationService,
+    private analyticsService: AnalyticsService,
+    private router: Router) {
+  }
 
   ngOnInit() {
     this.titleService.setTitle(pages.account.activation.title);
     this.meta.updateTag({ name: 'description', content: pages.account.activation.description });
-    this.initActivationForm();
-
-    this.authenticationService.isAuthenticated()
-      .pipe(take(1))
-      .subscribe(isAuthenticated => this.isAuthenticated = isAuthenticated);
-  }
-
-  initActivationForm() {
-    this.siretCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{14}')]);
-    this.codeCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern('[0-9]{6}')]);
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-
-    this.activationForm = this.formBuilder.group({
-      siret: this.siretCtrl,
-      code: this.codeCtrl,
-      email: this.emailCtrl
+    this.authenticationService.getConnectedUser().subscribe(_ => {
+      this.connectedUser = _;
+      this.emailCtrl.setValue(_?.email);
     });
   }
 
@@ -70,7 +63,7 @@ export class CompanyActivationComponent implements OnInit {
       };
 
       this.loading = true;
-      if (this.isAuthenticated) {
+      if (this.emailCtrl.value === this.connectedUser?.email) {
         this.authenticationService.acceptToken(this.siretCtrl.value, this.codeCtrl.value).subscribe(
           _ => {
             this.loading = false;
@@ -105,5 +98,4 @@ export class CompanyActivationComponent implements OnInit {
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
   }
-
 }
