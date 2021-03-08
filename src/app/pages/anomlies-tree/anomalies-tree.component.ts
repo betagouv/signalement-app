@@ -6,15 +6,21 @@ import { AnomalyService } from '../../services/anomaly.service';
   template: `
     <app-banner title="Arborescence du dépot d'un signalement"></app-banner>
     <app-page>
-      <mat-tree
-
+      <!--      Really slow feature but may be wanted one day -->
+      <!--      <button mat-icon-button (click)="openAll = !openAll" color="primary">-->
+      <!--        <mat-icon>unfold_more</mat-icon>-->
+      <!--      </button>-->
+      <app-anomalies-node *ngFor="let anomaly of anomalies" [anomaly]="anomaly" [openAll]="openAll"></app-anomalies-node>
     </app-page>
   `,
   styleUrls: ['./anomalies-tree.component.scss']
 })
 export class AnomaliesTreeComponent {
 
-  constructor(anomalyService: AnomalyService) {
-    console.log(anomalyService.getAnomalies());
+  constructor(private anomalyService: AnomalyService) {
   }
+
+  openAll = false;
+
+  readonly anomalies = this.anomalyService.getAnomalies();
 }
