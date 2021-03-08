@@ -87,7 +87,7 @@
                 </tr>
                 <tr *ngFor="let line of lines" class="pointer"
                     [routerLink]="['/suivi-des-signalements', user.roleUrlParam]"
-                    [queryParams]="{siret: line.companySiret}">
+                    [queryParams]="{siretSirenList: line.companySiret}">
                   <td>{{line.companyPostalCode}}</td>
                   <td>{{line.companySiret}}</td>
                   <td>{{line.companyName}}</td>
