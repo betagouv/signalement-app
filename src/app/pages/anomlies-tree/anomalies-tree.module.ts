@@ -19,7 +19,6 @@ const routes: Routes = [
     AnomaliesNodeInputsComponent,
   ],
   imports: [
-    CategoryLogoModule,
     CommonModule,
     SharedModule,
     MatTreeModule,
