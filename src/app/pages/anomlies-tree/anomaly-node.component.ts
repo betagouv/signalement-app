@@ -20,7 +20,11 @@ import { slideToggle } from '../../utils/animations';
     <div class="-content">
       <div class="-header">
         <div>
-          <div class="-title">{{title}}</div>
+          <div class="-title">
+            {{title}}
+            &nbsp;
+            <app-badge *ngFor="let tag of anomaly.tags">{{tag}}</app-badge>
+          </div>
           <div class="-desc" *ngIf="anomaly.description" [innerHTML]="anomaly.description"></div>
           <div class="-desc" *ngIf="anomaly.subcategoriesTitle" [innerHTML]="anomaly.subcategoriesTitle"></div>
         </div>
