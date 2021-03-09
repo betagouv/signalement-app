@@ -41,14 +41,28 @@ import { ReportFilter } from '../../../../model/ReportFilter';
         <table class="form">
           <tr>
             <td><label for="rls-websiteURL">Site internet</label></td>
-            <td>
-              <input formControlName="websiteURL" id="rls-websiteURL" class="form-control form-control-material">
+            <td class="td-with-cb">
+              <mat-checkbox formControlName="websiteExists"></mat-checkbox>
+              &nbsp;&nbsp;&nbsp;
+              <input
+                placeholder="(Optionnel)"
+                [style.visibility]="searchForm.get('websiteExists').value === true ? 'visible' : 'hidden'"
+                formControlName="websiteURL"
+                id="rls-websiteURL"
+                class="form-control form-control-material">
             </td>
           </tr>
           <tr>
             <td><label for="rls-phone">Numéro de téléphone</label></td>
-            <td>
-              <input formControlName="phone" id="rls-phone" class="form-control form-control-material">
+            <td class="td-with-cb">
+              <mat-checkbox formControlName="phoneExists"></mat-checkbox>
+              &nbsp;&nbsp;&nbsp;
+              <input
+                placeholder="(Optionnel)"
+                [style.visibility]="searchForm.get('phoneExists').value === true ? 'visible' : 'hidden'"
+                formControlName="phone"
+                id="rls-phone"
+                class="form-control form-control-material">
             </td>
           </tr>
           <tr>

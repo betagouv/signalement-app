@@ -11,6 +11,8 @@ export interface ReportFilter {
   email?: string;
   websiteURL?: string;
   phone?: string;
+  websiteExists?: boolean;
+  phoneExists?: boolean;
   category?: string;
   status?: string;
   details?: string;
@@ -29,26 +31,35 @@ export interface ReportFilterQuerystring {
   email?: string;
   websiteURL?: string;
   phone?: string;
+  websiteExists?: 'true' | 'false';
+  phoneExists?: 'true' | 'false';
   category?: string;
   status?: string;
   details?: string;
-  hasCompany?: 'true' | 'false';
+  hasCompany?: 'true' | 'false';
   offset?: string;
   limit?: string;
 }
 
 export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuerystring => {
   try {
-    const { start, end, companyCountries, departments, hasCompany, offset, limit, ...r } = report;
+    const { offset, limit, hasCompany, websiteExists, phoneExists, companyCountries, departments, start, end, ...r } = report;
+
+    const parseBoolean = (_: 'websiteRequired' | 'phoneRequired' | 'hasCompany') => (report[_] !== undefined && { [_]: '' + report[_] as 'true' | 'false' });
+    const parseDate = (_: 'start' | 'end') => ((report[_]) ? { [_]: Utils.dateToApi(report[_]) } : {});
+    const parseArray = (_: 'companyCountries' | 'departments') => (report[_] ? { [_]: report[_].join(',') } : {});
+
     return {
       ...r,
       offset: offset !== undefined ? offset + '' : undefined,
       limit: limit !== undefined ? limit + '' : undefined,
-      ...(hasCompany !== undefined && { hasCompany: '' + hasCompany }) as any,
-      ...(companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
-      ...(departments ? { departments: departments.join(',') } : {}),
-      ...((start) ? { start: Utils.dateToApi(start) } : {}),
-      ...((end) ? { end: Utils.dateToApi(end) } : {}),
+      ...parseBoolean('hasCompany'), // (hasCompany !== undefined && { hasCompany: '' + hasCompany }) as any,
+      ...parseBoolean('websiteRequired'),
+      ...parseBoolean('phoneRequired'),
+      ...parseArray('companyCountries'), // (companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
+      ...parseArray('departments'), // (departments ? { departments: departments.join(',') } : {}),
+      ...parseDate('start'), // ((start) ? { start: Utils.dateToApi(start) } : {}),
+      ...parseDate('end'), // ((end) ? { end: Utils.dateToApi(end) } : {}),
     };
   } catch (e) {
     console.error('[SignalConso] Caught error on "reportFilter2QueryString"', report, e);
@@ -58,13 +69,15 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
 
 export const reportFilterFromQueryString = (report: ReportFilterQuerystring): ReportFilter => {
   try {
-    const { start, end, companyCountries, departments, hasCompany, offset, limit, tags, ...r } = report;
-    const parseBooleanOption = (_?: 'true' | 'false'): boolean | undefined => ({ 'true': true, 'false': false, })[_!];
+    const { start, end, companyCountries, departments, hasCompany, offset, limit, tags, websiteExists, phoneExists, ...r } = report;
+    const parseBooleanOption = (_?: 'true' | 'false'): boolean | undefined => ({ 'true': true, 'false': false, })[_!];
     return {
       ...r,
       offset: +(offset || '0'),
       limit: limit ? +limit : undefined,
       hasCompany: parseBooleanOption(hasCompany),
+      websiteExists: parseBooleanOption(websiteExists),
+      phoneExists: parseBooleanOption(phoneExists),
       tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
       companyCountries: companyCountries?.split(','),
       departments: departments?.split(','),
@@ -87,4 +100,16 @@ export const reportFilter2Body = (report: ReportFilter): { [key in keyof ReportF
     start: Utils.dateToApi(start),
     end: Utils.dateToApi(end),
   };
+};
+
+export const cleanReportFilter = (filter: ReportFilter): ReportFilter => {
+  if (filter.websiteExists === false) {
+    delete filter.websiteExists;
+    delete filter.websiteURL;
+  }
+  if (filter.phoneExists === false) {
+    delete filter.phoneExists;
+    delete filter.phone;
+  }
+  return filter;
 };
