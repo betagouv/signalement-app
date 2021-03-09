@@ -23,7 +23,7 @@ import { slideToggle } from '../../utils/animations';
           <div class="-title">
             {{title}}
             &nbsp;
-            <app-badge *ngFor="let tag of anomaly.tags">{{tag}}</app-badge>
+            <app-badge *ngFor="let tag of tags">{{tag}}</app-badge>
           </div>
           <div class="-desc" *ngIf="anomaly.description" [innerHTML]="anomaly.description"></div>
           <div class="-desc" *ngIf="anomaly.subcategoriesTitle" [innerHTML]="anomaly.subcategoriesTitle"></div>
@@ -60,6 +60,10 @@ export class AnomaliesNodeComponent {
       return this.anomaly.category;
     }
     return this.anomaly.title;
+  }
+
+  get tags(): string[] | undefined {
+    return (this.anomaly as SubcategoryBase).tags;
   }
 
   isOpen = false;
