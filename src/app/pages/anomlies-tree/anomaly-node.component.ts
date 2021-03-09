@@ -11,7 +11,7 @@ import {
 import { slideToggle } from '../../utils/animations';
 
 @Component({
-  selector: 'app-anomalies-node',
+  selector: 'app-anomalies-node[anomaly]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button mat-icon-button color="primary" (click)="isOpen = !isOpen" class="-toggle-button" [disabled]="!hasMore()">
@@ -37,7 +37,7 @@ import { slideToggle } from '../../utils/animations';
 })
 export class AnomaliesNodeComponent {
 
-  @Input() anomaly: Anomaly | SubcategoryBase;
+  @Input() anomaly!: Anomaly | SubcategoryBase;
 
   private _openAll = false;
 
@@ -64,25 +64,37 @@ export class AnomaliesNodeComponent {
 
   readonly isSubcategoryInformation = () => instanceOfSubcategoryInformation(this.anomaly);
 
-  readonly hasMore = () => this.anomaly.subcategories?.length > 0 || this.isSubcategoryInformation() || this.isSubcategoryInput();
+  readonly hasMore = () => (this.anomaly.subcategories || []).length > 0 || this.isSubcategoryInformation() || this.isSubcategoryInput();
 }
 
 
 @Component({
-  selector: 'app-anomalies-node-info',
+  selector: 'app-anomalies-node-info[anomaly]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    {{anomaly.information}}
+    <div *ngIf="anomaly.information.title" [innerHTML]="anomaly.information.title"></div>
+    <div *ngIf="anomaly.information.subTitle" [innerHTML]="anomaly.information.subTitle"></div>
+    <div *ngIf="anomaly.information.content" [innerHTML]="anomaly.information.content" class="txt-small txt-secondary"></div>
+    <ul *ngIf="anomaly.information.actions" class="txt-small">
+      <li *ngFor="let action of anomaly.information.actions">
+        <div [innerHTML]="action.question" class="font-weight-bold"></div>
+        <div [innerHTML]="action.example"></div>
+        <div [innerHTML]="action.answer"></div>
+      </li>
+    </ul>
+    <div class="txt-info" *ngIf="anomaly.information.outOfScope">
+      Nous ne doutons pas que vous ayez réellement rencontré un problème mais... il ne s’agit pas d’une fraude.
+    </div>
   `,
 })
 export class AnomaliesNodeInfoComponent {
 
-  @Input() anomaly: SubcategoryInformation;
+  @Input() anomaly!: SubcategoryInformation;
 }
 
 
 @Component({
-  selector: 'app-anomalies-node-inputs',
+  selector: 'app-anomalies-node-inputs[anomaly]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div [innerHTML]="anomaly.detailTitle"></div>
@@ -111,5 +123,5 @@ export class AnomaliesNodeInfoComponent {
 })
 export class AnomaliesNodeInputsComponent {
 
-  @Input() anomaly: SubcategoryInput;
+  @Input() anomaly!: SubcategoryInput;
 }
