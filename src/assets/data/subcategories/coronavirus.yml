@@ -20,7 +20,7 @@
           type: TEXTAREA
           optionnal: true
           placeholder: Volume, marque...
-        - label : Quel est le prix de vente ?
+        - label : Quel est le prix de vente ? okokkoko
           rank: 3
           type: TEXT
           optionnal: true
