@@ -7,7 +7,7 @@ import { SelectDialogComponent } from './select-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { SelectDepartmentsDialogComponent } from './select-departments.component';
+import { SelectDepartmentsDialogComponent } from './select-departments-dialog.component';
 import { CompanySearchDialogComponent } from '../../companies/company-search-dialog/company-search-dialog.component';
 import { CompanySearchResult } from '../../../model/Company';
 import { MatSelectChange } from '@angular/material/select';

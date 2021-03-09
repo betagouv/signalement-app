@@ -10,7 +10,7 @@ import { SelectDepartmentsModule } from '../reports/list/select-departments/sele
 import { CountryDialogModule } from '../reports/list/country-dialog/country-dialog.module';
 import { SubscriptionCardRowComponent } from './subscription-card/subscription-card-row.component';
 import { SelectDialogComponent } from './subscription-card/select-dialog.component';
-import { SelectDepartmentsDialogComponent } from './subscription-card/select-departments.component';
+import { SelectDepartmentsDialogComponent } from './subscription-card/select-departments-dialog.component';
 import { CompanySearchDialogModule } from '../companies/company-search-dialog/company-search-dialog.component';
 
 const routes: Routes = [

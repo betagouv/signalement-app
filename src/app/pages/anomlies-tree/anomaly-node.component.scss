@@ -1,0 +1,45 @@
+@import "src/theme/variables";
+
+:host {
+  display: flex;
+  margin-bottom: spacing(1);
+}
+
+.-toggle-button {
+  margin-right: spacing(.5);
+
+  [disabled] {
+    color: $theme-color-text-disabled;
+  }
+}
+
+.-header {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  margin-bottom: spacing(1);
+}
+
+.-content {
+}
+
+.-title {
+  font-size: 1.15rem;
+}
+
+.-desc {
+  color: $theme-color-text-secondary;
+}
+
+.-subcategory {
+  position: relative;
+
+  &:before {
+    content: ' ';
+    height: 100%;
+    width: 1px;
+    position: absolute;
+    background: $theme-divider;
+    left: -25px;
+  }
+}
