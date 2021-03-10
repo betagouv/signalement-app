@@ -48,6 +48,26 @@
       subcategories:
         - title: Démarchage à domicile
           companyKind: LOCATION
+          tags:
+            - Démarchage à domicile
+          detailInputs:
+            - label: Que s'est-il passé ?
+              rank: 1
+              type: RADIO
+              options:
+                - Le vendeur s'est fait passer pour une autre entreprise (à préciser).
+                - Le vendeur m'a fait signer des papiers sans me dire que c'était un contrat ou un bon de commande.
+                - Autre (à préciser)
+            - label: Avez-vous payé au moment du démarchage&#160;?
+              rank: 2
+              type: RADIO
+              options:
+                - Oui
+                - Non
+            - label: Date du démarchage
+              rank: 3
+              type: DATE
+              defaultValue: SYSDATE
         - title: Démarchage téléphonique
           companyKind: PHONE
           detailInputs:

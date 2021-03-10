@@ -577,6 +577,8 @@
           subcategories: !!import/single ../common/objet.yml
 - title: un achat suite à la visite d'un vendeur à mon domicile
   companyKind: LOCATION
+  tags:
+    - Démarchage à domicile
   subcategories:
     - title: C'est un aliment ou une boisson
       example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
