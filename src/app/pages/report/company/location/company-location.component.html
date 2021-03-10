@@ -4,7 +4,7 @@
 
 <form [formGroup]="locationForm" (submit)="submitLocation()" id="locationForm">
   <div class="form__group mt-4">
-    <label for="adresseInput" [class]="hasError(addressCtrl) ? 'error' : ''">Adresse (obligatoire)
+    <label for="adresseInput" [class]="hasError(addressCtrl) ? 'error' : ''">Rue (obligatoire)
     </label>
     <input type="text" class="form-control" [formControl]="addressCtrl" id="adresseInput" placeholder="ex : rue de la mairie"/>
   </div>

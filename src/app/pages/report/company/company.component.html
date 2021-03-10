@@ -33,16 +33,21 @@
             </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.address">
-            <div class="col-12">
-              <div *ngIf="draftReport.draftCompany.address">
-                Adresse : {{draftReport.draftCompany.address}}
+            <div class="col-12" *ngIf="draftReport.draftCompany.name else locationOnly">
+              Adresse : {{draftReport.draftCompany.address}}
+            </div>
+            <ng-template #locationOnly>
+              <div class="col-12">
+                Rue : {{draftReport.draftCompany.address}}
               </div>
-              <div *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">
+              <div class="col-12">
                 Code postal : {{draftReport.draftCompany.postalCode}}
               </div>
-              <div *ngIf="draftReport.draftCompany | isForeign">
-                Pays : {{draftReport.draftCompany.country}}
-              </div>
+            </ng-template>
+          </div>
+          <div class="row" *ngIf="draftReport.draftCompany | isForeign">
+            <div class="col-12">
+              Pays : {{draftReport.draftCompany.country}}
             </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.siret">
