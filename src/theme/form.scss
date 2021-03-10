@@ -64,12 +64,15 @@ select.form-control {
 input.form-control.form-control-material,
 .form-control.form-control-material {
   @include input-invisible;
-  border-radius: 0;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid $theme-divider;
-  width: 100%;
-  padding: 2px 0 2px 0;
-  height: 30px;
+  background: #f1f3f4;
+  height: 34px;
+  padding: 4px 8px;
+  border: none;
+
+  &:hover,
+  &:active {
+    border-bottom: 2px solid $theme-primary;
+  }
 
   &:focus {
     border-bottom-color: $primary;
@@ -285,7 +288,7 @@ fieldset {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: $grey !important;
+  color: rgba(0, 0, 0, 0.42) !important;
   font-weight: 200;
   opacity: 1; /* Firefox */
 }

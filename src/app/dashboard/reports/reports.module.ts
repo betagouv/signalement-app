@@ -18,6 +18,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportListModule } from './list/report-list.module';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
+import { ReportCardProComponent } from './list-pro/report-card-pro.component';
+import { SelectDepartmentsModule } from './list/select-departments/select-departments.module';
+import { CompanySearchDialogModule } from '../companies/company-search-dialog/company-search-dialog.component';
 
 const routes: Routes = [
   { path: 'suivi-des-signalements/:reportId/avis', component: ConsumerReviewComponent },
@@ -25,7 +28,6 @@ const routes: Routes = [
   { path: 'suivi-des-signalements/pro', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
   { path: 'suivi-des-signalements/admin', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
   { path: 'suivi-des-signalements/dgccrf', component: ReportListComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
-  { path: 'suivi-des-signalements/pro/siret/:siret', component: ReportListProComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Pro] } },
   { path: 'suivi-des-signalements/report/:reportId', component: ReportDetailComponent, canActivate: [AuthGuard] },
 ];
 
@@ -34,8 +36,10 @@ const routes: Routes = [
     ConsumerReviewComponent,
     ReportListProComponent,
     ReportDetailComponent,
+    ReportCardProComponent,
   ],
   imports: [
+    SelectDepartmentsModule,
     ReportListModule,
     FormsModule,
     ReactiveFormsModule,
@@ -49,7 +53,8 @@ const routes: Routes = [
     AppRoleModule,
     SharedModule,
     AppPermissionModule,
-    DashboardCompaniesModule
+    DashboardCompaniesModule,
+    CompanySearchDialogModule
   ],
 })
 export class ReportsModule { }

@@ -130,3 +130,15 @@ $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
     background-color: rgba(0, 0, 0, 0.04);
   }
 }
+
+.mat-button_icon {
+  margin-bottom: 4px;
+
+  &.-after {
+    margin-left: 4px;
+  }
+
+  &.-before {
+    margin-right: 4px;
+  }
+}

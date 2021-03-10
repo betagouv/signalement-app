@@ -1,18 +1,23 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { UserAccess } from '../../../model/Company';
-import { Report, ReportStatus, reportStatusColor } from '../../../model/Report';
-import { ReportFilter } from '../../../model/ReportFilter';
-import { combineLatest } from 'rxjs';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Report, ReportStatus } from '../../../model/Report';
+import { ReportFilter, reportFilter2QueryString, reportFilterFromQueryString } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
-import { AuthenticationService } from '../../../services/authentication.service';
 import { ReportService } from '../../../services/report.service';
 import { ConstantService } from '../../../services/constant.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { mergeMap, take } from 'rxjs/operators';
 import pages from '../../../../assets/data/pages.json';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { PageEvent } from '@angular/material/paginator';
+import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, startWith, tap } from 'rxjs/operators';
+import { FormControl, FormGroup } from '@angular/forms';
+import { PaginatedData } from '../../../model/PaginatedData';
+import { combineLatest, EMPTY, Observable } from 'rxjs';
+import { ViewableCompany } from '../../../model/Company';
+import Utils from '../../../utils';
+import compose from '../../../compose';
+
+type ReportFiltersPro = Pick<ReportFilter, 'start' | 'end' | 'siretSirenList' | 'status' | 'offset' | 'limit'>;
 
 @Component({
   selector: 'app-report-list-pro',
@@ -21,138 +26,245 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 })
 export class ReportListProComponent implements OnInit {
 
-  reportStatus = ReportStatus;
-  statusColor = reportStatusColor;
-
-  userAccesses: UserAccess[];
-  reports: Report[];
-  totalCount: number;
-  currentPage: number;
-  itemsPerPage = 20;
-
-  reportFilter: ReportFilter;
-  statusList: string[];
-
-  loading: boolean;
-  loadingError: boolean;
-  withFiltering: boolean;
-
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private titleService: Title,
-              private meta: Meta,
-              private authenticationService: AuthenticationService,
-              private reportService: ReportService,
-              private constantService: ConstantService,
-              private companyAccessesService: CompanyAccessesService,
-              private localeService: BsLocaleService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) {
+  constructor(
+    @Inject(PLATFORM_ID) protected platformId: Object,
+    private titleService: Title,
+    private meta: Meta,
+    private reportService: ReportService,
+    private constantService: ConstantService,
+    private companyAccessesService: CompanyAccessesService,
+    private localeService: BsLocaleService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
+
+  readonly columns = [
+    'postalCode',
+    'siret',
+    'creationDate',
+    'consumerUploadedFiles',
+    'status',
+    'consumer',
+    'actions',
+  ];
+
+  readonly isMobileSize = () => window.innerWidth < 600;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.mobileMode = this.isMobileSize();
+  }
+
+  mobileMode = this.isMobileSize();
+
+  /** @todo Can be removed once it's outdated */
+  readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 5, 1).getTime();
+
+  readonly maxReportsBeforeShowFilters = 10;
+
+  readonly defaultPageSize = this.maxReportsBeforeShowFilters;
+
+  readonly pagesOptions = [this.maxReportsBeforeShowFilters, this.maxReportsBeforeShowFilters * 2, this.maxReportsBeforeShowFilters * 10];
+
+  readonly startCtrl = new FormControl('');
+  readonly endCtrl = new FormControl('');
+  readonly departmentsCtrl = new FormControl([]);
+  readonly siretSirenListCtrl = new FormControl([]);
+  readonly statusCtrl = new FormControl('');
+  readonly offsetCtrl = new FormControl(0);
+  readonly limitCtrl = new FormControl(this.defaultPageSize);
+  readonly form = new FormGroup({
+    start: this.startCtrl,
+    end: this.endCtrl,
+    departments: this.departmentsCtrl,
+    siretSirenList: this.siretSirenListCtrl,
+    status: this.statusCtrl,
+    offset: this.offsetCtrl,
+    limit: this.limitCtrl,
+  });
+
+  readonly reportStatus = ReportStatus;
+
+  showFilters = false;
+
+  reports?: Report[];
+
+  totalCount?: number;
+
+  readonly statusList$ = this.constantService.getReportStatusList();
+
+  loadingCompanies = false;
+
+  readonly myCompanies$ = this.companyAccessesService.myAccesses();
+
+  readonly companies$: Observable<ViewableCompany[]> = new Observable(_ => _.next()).pipe(
+    tap(() => {
+      this.loadingCompanies = true;
+    }),
+    mergeMap(() => this.companyAccessesService.viewableCompanies()),
+    tap(() => {
+      this.loadingCompanies = false;
+    }),
+    shareReplay(),
+    catchError(err => {
+      this.loadingCompanies = false;
+      this.loadingAccessError = true;
+      return [];
+    })
+  );
+
+  loading = false;
+
+  loadingError = false;
+
+  loadingAccessError = false;
+
+  readonly hasCompanies$ = this.companies$.pipe(map(_ => _.length > 0));
+
+  readonly hasMultiplesCompanies$ = this.companies$.pipe(map(_ => _.length > 1));
+
+  readonly companiesBySelectedDepartments$ = combineLatest([
+    this.departmentsCtrl.valueChanges.pipe(startWith([]), map(_ => _ || [])) as Observable<string[]>,
+    this.companies$
+  ]).pipe(map(([departments, companies]) => departments.length > 0
+    ? companies.filter(company => departments.find(_ => _ === company.postalCode.substr(0, 2)))
+    : companies
+  ));
+
+  readonly getDisplayedColumns = this.hasMultiplesCompanies$.pipe(map(hasMultiple => hasMultiple
+    ? this.columns
+    : this.columns.filter(_ => _ !== 'siret' && _ !== 'postalCode')));
 
   ngOnInit() {
     this.titleService.setTitle(pages.reports.list.title);
     this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
     this.localeService.use('fr');
 
-    const queryParamMap = this.route.snapshot.queryParamMap;
-    const paramMap = this.route.snapshot.paramMap;
+    const parsedQueryString = compose(
+      Utils.cleanObject,
+      this.getFormFromQueryString,
+      reportFilterFromQueryString,
+    )(this.route.snapshot.queryParams);
 
-    this.constantService.getReportStatusList().subscribe(
-      statusList => this.statusList = statusList
-    );
+    this.myCompanies$
+      .pipe(
+        mergeMap(myCompanies =>
+          this.initForm({
+            offset: 0,
+            limit: this.defaultPageSize,
+            siretSirenList: myCompanies.length > 0 ? myCompanies.map(_ => _.companySiret) : undefined,
+            ...parsedQueryString,
+          }).valueChanges
+        ),
+        debounceTime(10),
+        distinctUntilChanged(),
+        tap(this.updateQueryString),
+        mergeMap(this.fetchReports),
+      ).subscribe();
 
-    this.reportFilter = this.reportService.currentReportFilter;
-    this.reportFilter.siret = paramMap.get('siret') ?? queryParamMap.get('siret');
+    this.hasCompanies$.pipe(mergeMap(hasCompanies => {
+      if (!hasCompanies) {
+        return EMPTY;
+      }
+      return this.fetchReports(this.form.value).pipe(tap(() => {
+        this.showFilters = this.totalCount > this.maxReportsBeforeShowFilters || this.hasFilters();
+      }));
+    })).subscribe();
+  }
 
+  readonly checkBoxStatus$ = (companies$: Observable<any[]>) => combineLatest([
+    this.siretSirenListCtrl.valueChanges.pipe(map(_ => _ || [])) as Observable<string[]>,
+    companies$
+  ])
+    .pipe(map(([values, companies]) => {
+      if (values.length === companies.length) {
+        return 'checked';
+      }
+      if (values.length === 0) {
+        return 'unchecked';
+      }
+      return 'indeterminate';
+    }));
+
+  readonly allSiretCheckboxStatus$ = this.checkBoxStatus$(this.companies$);
+
+  readonly allMyAccessesCheckboxStatus$ = this.checkBoxStatus$(this.myCompanies$);
+
+  readonly toggleAllSirets = () => {
+    if ((this.siretSirenListCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
+      this.companies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.siret)));
+    } else {
+      this.siretSirenListCtrl.setValue([]);
+    }
+  };
+
+  readonly toggleAllMyAccessesSirets = () => {
+    if ((this.siretSirenListCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
+      this.myCompanies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.companySiret)));
+    } else {
+      this.siretSirenListCtrl.setValue([]);
+    }
+  };
+
+  readonly fetchReports = (filters: ReportFiltersPro) => {
     this.loading = true;
     this.loadingError = false;
-    this.authenticationService.user.pipe(
-      take(1),
-      mergeMap(user => {
-        return combineLatest([
-          this.companyAccessesService.myAccesses(user)
-        ]);
-      })
-    ).subscribe(
-      ([userAccesses]) => {
-
-        this.userAccesses = userAccesses;
-
-        if (this.userAccesses.length === 1 || this.reportFilter.siret) {
-          this.loadReports(Number(queryParamMap.get('page_number') || 1));
-        } else {
-          this.loading = false;
-        }
-      },
-      err => {
-        this.loading = false;
-        this.loadingError = true;
-      });
-  }
-
-  initPagination() {
-    this.totalCount = 0;
-    this.currentPage = 1;
-  }
-
-  submitFilters() {
-    this.location.replaceState(this.router.routerState.snapshot.url.split('?')[0], `page_number=1&per_page=${this.itemsPerPage}`);
-    this.initPagination();
-    this.reportFilter.siret = this.reportFilter.siret?.replace(/\s/g, '');
-    this.loadReports(1);
-    this.withFiltering = true;
-  }
-
-  cancelFilters() {
-    this.reportFilter = { siret: this.reportFilter.siret };
-    this.submitFilters();
-  }
-
-  loadReports(page: number) {
-    this.loading = true;
-    this.loadingError = false;
-    this.reportService.getReports({
-      ...this.reportFilter,
-      offset: (page - 1) * this.itemsPerPage,
-      limit: this.itemsPerPage,
-    }).subscribe(
-      result => {
+    return this.reportService.getReports(filters).pipe(
+      tap((result: PaginatedData<Report>) => {
         this.loading = false;
         this.reports = result.entities;
         this.totalCount = result.totalCount;
-        setTimeout(() => {
-          this.currentPage = page;
-        }, 1);
-      },
-      err => {
+      }),
+      catchError(err => {
         this.loading = false;
         this.loadingError = true;
-      });
-  }
+        throw err;
+      })
+    );
+  };
 
-  changePage(pageEvent: {page: number, itemPerPage: number}) {
-    if (this.currentPage !== pageEvent.page) {
-      this.loadReports(pageEvent.page);
-      this.location.go('suivi-des-signalements/pro', `page_number=${pageEvent.page}&per_page=${this.itemsPerPage}`);
+  readonly getFormFromQueryString = (qs: ReportFiltersPro): ReportFiltersPro => {
+    try {
+      const { start, end, siretSirenList, status, offset, limit } = qs;
+      return { start, end, siretSirenList, status, offset: offset ?? 0, limit: limit ?? this.defaultPageSize, };
+    } catch (e) {
+      return {};
     }
-  }
+  };
 
-  launchExtraction() {
-    this.reportService.launchExtraction(this.reportFilter).subscribe(res => {
+  readonly initForm = (filters: ReportFilter): FormGroup => {
+    this.form.patchValue(filters);
+    return this.form;
+  };
+
+  readonly changePage = ($event: PageEvent) => {
+    this.form.patchValue({
+      offset: $event.pageIndex * $event.pageSize,
+      limit: $event.pageSize,
+    });
+  };
+
+  readonly launchExtraction = () => {
+    this.reportService.launchExtraction(this.form.value).subscribe(res => {
       this.router.navigate(['mes-telechargements']);
     });
-  }
+  };
 
-  isFirstVisit() {
-    return this.reports && this.reports.length === 1 && this.reports[0].status === ReportStatus.UnreadForPro;
-  }
+  private updateQueryString = (values: ReportFiltersPro) => {
+    this.router.navigate([], { queryParams: reportFilter2QueryString(values), replaceUrl: true });
+  };
 
-  withPagingAndFiltering() {
-    return this.totalCount > 10 || this.withFiltering;
-  }
+  readonly isFirstVisit = () => this.reports?.length === 1 && this.reports[0].status === ReportStatus.UnreadForPro;
 
-  hasFilter() {
-    return this.reportFilter && (this.reportFilter.start || this.reportFilter.end || this.reportFilter.status);
-  }
+  readonly hasFilters = () => {
+    const { limit, offset, ...values } = this.form.value;
+    return Object.keys(Utils.cleanObject(values)).length > 0 || offset > 0;
+  };
+
+  readonly resetFilters = () => {
+    this.form.reset({
+      offset: 0,
+      limit: this.defaultPageSize,
+    });
+  };
 }

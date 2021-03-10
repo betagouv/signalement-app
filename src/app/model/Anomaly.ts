@@ -4,7 +4,7 @@ export const DescriptionLabel = 'Description';
 export const ContractualDisputeTag = 'Litige contractuel';
 export const InternetTag = 'Internet';
 
-interface SubcategoryBase extends Category {
+export interface SubcategoryBase extends Category {
   title: string;
   description?: string;
   tags?: Tag[];
@@ -34,19 +34,19 @@ export enum CompanyKinds {
   LOCATION = 'LOCATION',
 }
 
-interface Category {
+export interface Category {
   subcategoriesTitle?: string;
   subcategories?: Subcategory[];
   companyKind?: string;
 }
 
-interface SubcategoryInput extends SubcategoryBase {
+export interface SubcategoryInput extends SubcategoryBase {
   detailTitle?: string;
   fileLabel: string;
   detailInputs?: DetailInput[];
 }
 
-interface SubcategoryInformation extends SubcategoryBase {
+export interface SubcategoryInformation extends SubcategoryBase {
   information: Information;
 }
 
@@ -128,4 +128,7 @@ export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput 
 
 export const instanceOfSubcategoryInformation = (_?: Category): _ is SubcategoryInformation => {
   return !!(_ as SubcategoryInformation)?.information;
+};
+export const instanceOfAnomaly = (_?: Category): _ is Anomaly => {
+  return !!(_ as Anomaly)?.category;
 };

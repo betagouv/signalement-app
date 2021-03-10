@@ -1,0 +1,54 @@
+@import "src/theme/variables";
+
+$alert-size: 52px;
+
+:host {
+  padding: 0 0 0 spacing(2);
+  min-height: $alert-size;
+  display: flex;
+  align-items: center;
+  margin-bottom: spacing(2);
+  border-radius: $theme-border-radius;
+  border: 1px solid $theme-divider;
+  border-left-width: 4px;
+
+  &.-error {
+    //background: $theme-error-bg;
+    color: $theme-error-border;
+    border-color: $theme-error-border;
+  }
+
+  &.-info {
+    //background: $theme-info-bg;
+    color: $theme-info-border;
+    border-color: $theme-info-border;
+  }
+
+  &.-warning {
+    //background: $theme-warning-bg;
+    color: $theme-warning-border;
+    border-color: $theme-warning-border;
+  }
+
+  &.-success {
+    //background: $theme-success-bg;
+    color: $theme-success-border;
+    border-color: $theme-success-border;
+  }
+}
+
+.-icon {
+  min-height: $alert-size;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+}
+
+.-body {
+  flex: 1;
+  padding: spacing() spacing(2);
+}
+
+.-action {
+  padding: 0 spacing(1);
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
-import { CompanyAccess, PendingToken, UserAccess, WebsiteURL } from '../model/Company';
+import { CompanyAccess, PendingToken, UserAccess, ViewableCompany, WebsiteURL } from '../model/Company';
 import { map, mergeMap } from 'rxjs/operators';
 import { User } from '../model/AuthUser';
 import { ApiCompanyToActivate } from '../api-sdk/model/Company';
@@ -17,11 +17,22 @@ export class CompanyAccessesService {
               private serviceUtils: ServiceUtils) {
   }
 
-  myAccesses(user: User) {
+  readonly myAccesses = () => {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
         return this.http.get<UserAccess[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', 'connected-user']),
+          headers
+        );
+      })
+    );
+  }
+
+  readonly viewableCompanies = () => {
+    return this.serviceUtils.getAuthHeaders().pipe(
+      mergeMap(headers => {
+        return this.http.get<ViewableCompany[]>(
+          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'connected-user']),
           headers
         );
       })
