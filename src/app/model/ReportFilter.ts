@@ -45,21 +45,21 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
   try {
     const { offset, limit, hasCompany, websiteExists, phoneExists, companyCountries, departments, start, end, ...r } = report;
 
-    const parseBoolean = (_: 'websiteRequired' | 'phoneRequired' | 'hasCompany') => (report[_] !== undefined && { [_]: '' + report[_] as 'true' | 'false' });
-    const parseDate = (_: 'start' | 'end') => ((report[_]) ? { [_]: Utils.dateToApi(report[_]) } : {});
-    const parseArray = (_: 'companyCountries' | 'departments') => (report[_] ? { [_]: report[_].join(',') } : {});
+    const parseBoolean = (_: keyof Pick<ReportFilter, 'websiteExists' | 'phoneExists' | 'hasCompany'>) => (report[_] !== undefined && { [_]: '' + report[_] as 'true' | 'false' });
+    const parseDate = (_: keyof Pick<ReportFilter, 'start' | 'end'>) => ((report[_]) ? { [_]: Utils.dateToApi(report[_]) } : {});
+    const parseArray = (_: keyof Pick<ReportFilter, 'companyCountries' | 'departments'>) => (report[_] ? { [_]: report[_].join(',') } : {});
 
     return {
       ...r,
       offset: offset !== undefined ? offset + '' : undefined,
       limit: limit !== undefined ? limit + '' : undefined,
-      ...parseBoolean('hasCompany'), // (hasCompany !== undefined && { hasCompany: '' + hasCompany }) as any,
-      ...parseBoolean('websiteRequired'),
-      ...parseBoolean('phoneRequired'),
-      ...parseArray('companyCountries'), // (companyCountries ? { companyCountries: companyCountries.join(',') } : {}),
-      ...parseArray('departments'), // (departments ? { departments: departments.join(',') } : {}),
-      ...parseDate('start'), // ((start) ? { start: Utils.dateToApi(start) } : {}),
-      ...parseDate('end'), // ((end) ? { end: Utils.dateToApi(end) } : {}),
+      ...parseBoolean('hasCompany'),
+      ...parseBoolean('websiteExists'),
+      ...parseBoolean('phoneExists'),
+      ...parseArray('companyCountries'),
+      ...parseArray('departments'),
+      ...parseDate('start'),
+      ...parseDate('end'),
     };
   } catch (e) {
     console.error('[SignalConso] Caught error on "reportFilter2QueryString"', report, e);

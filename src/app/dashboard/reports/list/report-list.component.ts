@@ -147,7 +147,7 @@ export class ReportListComponent implements OnInit {
     this.search();
   }
 
-  search = () => {
+  readonly search = () => {
     // Avoid polluting the querystring
     const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
     this.updateQueryString(cleanedReport);
