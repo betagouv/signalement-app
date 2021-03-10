@@ -58,7 +58,7 @@ export class ReportListProComponent implements OnInit {
   mobileMode = this.isMobileSize();
 
   /** @todo Can be removed once it's outdated */
-  readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 4, 1).getTime();
+  readonly showNewFeatureIndicator = new Date().getTime() < new Date(2021, 5, 1).getTime();
 
   readonly maxReportsBeforeShowFilters = 10;
 
@@ -152,7 +152,7 @@ export class ReportListProComponent implements OnInit {
           this.initForm({
             offset: 0,
             limit: this.defaultPageSize,
-            siretSirenList: myCompanies.length > 1 ? myCompanies.map(_ => _.companySiret) : undefined,
+            siretSirenList: myCompanies.length > 0 ? myCompanies.map(_ => _.companySiret) : undefined,
             ...parsedQueryString,
           }).valueChanges
         ),
