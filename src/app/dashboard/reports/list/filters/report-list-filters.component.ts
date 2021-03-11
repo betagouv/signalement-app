@@ -10,6 +10,7 @@ import { ReportFilter } from '../../../../model/ReportFilter';
 import { PaginatedData } from '../../../../model/PaginatedData';
 import { Report } from '../../../../model/Report';
 import { formatNumber } from '@angular/common';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-report-list-search',
@@ -165,6 +166,7 @@ export class ReportListFiltersComponent implements OnInit {
 
   constructor(
     private anomalyService: AnomalyService,
+    private localeService: BsLocaleService,
     private router: Router,
     private constantService: ConstantService,
   ) {
@@ -173,7 +175,7 @@ export class ReportListFiltersComponent implements OnInit {
   readonly reportsLimitForExport = 30000;
 
   readonly reportsLimitForExportMessage = 'Impossible d\'exporter plus de '
-    + formatNumber(this.reportsLimitForExport, 'fr')
+    + formatNumber(this.reportsLimitForExport, this.localeService.currentLocale)
     + ' signalements.';
 
   @Input() reports: PaginatedData<Report>;
