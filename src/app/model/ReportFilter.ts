@@ -69,8 +69,22 @@ export const reportFilter2QueryString = (report: ReportFilter): ReportFilterQuer
 
 export const reportFilterFromQueryString = (report: ReportFilterQuerystring): ReportFilter => {
   try {
-    const { start, end, companyCountries, departments, hasCompany, offset, limit, tags, websiteExists, phoneExists, ...r } = report;
+    const {
+      start,
+      end,
+      companyCountries,
+      departments,
+      siretSirenList,
+      hasCompany,
+      offset,
+      limit,
+      tags,
+      websiteExists,
+      phoneExists,
+      ...r
+    } = report;
     const parseBooleanOption = (_?: 'true' | 'false'): boolean | undefined => ({ 'true': true, 'false': false, })[_!];
+    const wrapInArray = (_?: string | string[]): string[] | undefined => _ && Array.isArray(_) ? _ : [_] as string[];
     return {
       ...r,
       offset: +(offset || '0'),
@@ -80,6 +94,7 @@ export const reportFilterFromQueryString = (report: ReportFilterQuerystring): Re
       phoneExists: parseBooleanOption(phoneExists),
       tags: Array.isArray(tags) ? tags : (tags !== undefined ? [tags] : undefined),
       companyCountries: companyCountries?.split(','),
+      siretSirenList: wrapInArray(siretSirenList),
       departments: departments?.split(','),
       start: Utils.apiToDate(start),
       end: Utils.apiToDate(end),
