@@ -148,7 +148,6 @@
 - title: Abonnement presse
 - title: Produit dangereux
   example: 'Exemple : téléphone, accessoire'
-  companyKind: LOCATION
   tags:
    - Produit dangereux
   subcategories:
