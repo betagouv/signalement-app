@@ -55,13 +55,23 @@
                 </ng-container>
               </strong>
             </div>
-            <div *ngIf="draftReport.draftCompany.address">
+          </ng-container>
+          <ng-container *ngIf="draftReport.draftCompany.address">
+            <div  *ngIf="draftReport.draftCompany.name else locationOnly">
               Adresse : {{draftReport.draftCompany.address}}
             </div>
-            <div *ngIf="draftReport.draftCompany | isForeign">
-              Pays : {{draftReport.draftCompany.country}}
-            </div>
+            <ng-template #locationOnly>
+              <div>
+                Rue : {{draftReport.draftCompany.address}}
+              </div>
+              <div>
+                Code postal : {{draftReport.draftCompany.postalCode}}
+              </div>
+            </ng-template>
           </ng-container>
+          <div *ngIf="draftReport.draftCompany | isForeign">
+            Pays : {{draftReport.draftCompany.country}}
+          </div>
           <div *ngIf="draftReport.draftCompany.siret">
             SIRET : {{draftReport.draftCompany.siret}}
           </div>
