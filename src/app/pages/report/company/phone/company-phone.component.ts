@@ -6,11 +6,11 @@ import { CustomValidators } from '../../../../custom-validators';
 import Utils from '../../../../utils';
 
 @Component({
-  selector: 'app-company-search-by-phone',
-  templateUrl: './company-search-by-phone.component.html',
-  styleUrls: ['./company-search-by-phone.component.scss']
+  selector: 'app-company-phone',
+  templateUrl: './company-phone.component.html',
+  styleUrls: ['./company-phone.component.scss']
 })
-export class CompanySearchByPhoneComponent implements OnInit {
+export class CompanyPhoneComponent implements OnInit {
 
   @Input() draftReport?: DraftReport;
 
@@ -22,8 +22,7 @@ export class CompanySearchByPhoneComponent implements OnInit {
 
   showErrors = false;
 
-  constructor(public formBuilder: FormBuilder,
-              private analyticsService: AnalyticsService) { }
+  constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -41,7 +40,6 @@ export class CompanySearchByPhoneComponent implements OnInit {
     if (!this.phoneForm.valid) {
       this.showErrors = true;
     } else {
-      this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByPhone, this.phoneCtrl.value);
       this.phoneForm.disable();
       this.complete.emit(Utils.sanitizePhoneNumber(this.phoneCtrl.value));
     }

@@ -95,7 +95,9 @@
   subcategories:
     - title: Démarchage à domicile
       example: 'Exemple : vendeur prétend être envoyé par EDF, démarcheur agressif'
-      companyKind: SIRET
+      companyKind: LOCATION
+      tags:
+        - Démarchage à domicile
       detailInputs:
         - label: Date du passage du vendeur
           rank: 1
