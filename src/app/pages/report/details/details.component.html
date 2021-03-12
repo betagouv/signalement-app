@@ -22,6 +22,7 @@
           <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
             <span [innerHTML]="detailInput.label"></span> <span *ngIf="!detailInput.optionnal"> (obligatoire)</span>
           </label>
+          <div class="note mb-1" [innerHTML]="detailInput.example" *ngIf="detailInput.example"></div>
 
           <div class="row" *ngIf="detailInput.type === 'TEXT'">
             <div class="col-12">

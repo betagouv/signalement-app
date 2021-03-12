@@ -144,4 +144,19 @@
         - title: Téléphone acheté avec le forfait
 - title: Abonnement télévision
 - title: Abonnement presse
+- title: Produit dangereux
+  example: 'Exemple : téléphone, accessoire'
+  companyKind: LOCATION
+  tags:
+   - Produit dangereux
+  subcategories:
+   - title: Appareil électrique
+     subcategoriesTitle: Quel est le risque&#160;?
+     subcategories: !!import/single ../common/produit-dangereux.yml
+   - title: Accessoire
+     subcategoriesTitle: Quel est le risque&#160;?
+     subcategories: !!import/single ../common/produit-dangereux.yml
+   - title: Autre
+     subcategoriesTitle: Quel est le risque&#160;?
+     subcategories: !!import/single ../common/produit-dangereux.yml
 - title: Autre
