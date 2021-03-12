@@ -357,7 +357,6 @@
                 outOfScope: true
     - title: Produit dangereux
       example: 'Exemple : lit'
-      companyKind: LOCATION
       tags:
         - Produit dangereux
       subcategories:
@@ -651,7 +650,6 @@
         - title: Contrat non respecté
     - title: Produit dangereux
       example: 'Exemple : équipement de protection'
-      companyKind: LOCATION
       tags:
         - Produit dangereux
       subcategories:

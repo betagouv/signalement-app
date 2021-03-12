@@ -359,7 +359,6 @@
         - Litige contractuel
 - title: Produit dangereux
   example: 'Exemple : marteau, perceuse'
-  companyKind: LOCATION
   tags:
     - Produit dangereux
   subcategories:
