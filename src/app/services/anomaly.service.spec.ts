@@ -134,6 +134,60 @@ describe('enrichAnomaly', () => {
     );
   });
 
+  it('should add internet subcategory with specific companyKind for dangerous products', () => {
+    testParsing(
+      [{
+        'category': 'COVID-19 (coronavirus)',
+        'categoryId': 'C19',
+        'path': 'coronavirus',
+        'description': 'gel hydroalcoolique, masque, arnaque liée au COVID-19, distanciation physique...',
+        'rank': 1,
+        'sprite': 'category-covid',
+        'subcategories': [
+          {
+            'title': 'Les prix (gel désinfectant, masque) sont trop élevés',
+            'subcategoriesTitle': 'De quel produit s\'agit-il&#160;?',
+            'tags': ['Produit dangereux'],
+            'subcategories': [
+              {
+                'title': 'Autre'
+              }
+            ]
+          }]
+      }]
+      ,
+      [{
+        'category': 'COVID-19 (coronavirus)',
+        'categoryId': 'C19',
+        'path': 'coronavirus',
+        'description': 'gel hydroalcoolique, masque, arnaque liée au COVID-19, distanciation physique...',
+        'rank': 1,
+        'sprite': 'category-covid',
+        'subcategories': [
+          {
+            'title': 'Les prix (gel désinfectant, masque) sont trop élevés',
+            'subcategoriesTitle': 'De quel produit s\'agit-il&#160;?',
+            'tags': ['Produit dangereux'],
+            'subcategories': [
+              {
+                'title': 'Autre',
+                'subcategoriesTitle': 'Est-ce que votre problème concerne une entreprise sur internet ?',
+                'subcategories': [
+                  {
+                    'title': 'Oui',
+                    'companyKind': 'WEBSITE'
+                  },
+                  {
+                    'title': 'Non, pas sur internet',
+                    'companyKind': 'LOCATION'
+                  }
+                ]
+              }]
+          }]
+      }]
+    );
+  });
+
   it('should not add internet subcategory on information category.', () => {
     testParsing(
       [{
