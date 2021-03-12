@@ -60,7 +60,7 @@ list:
     sprite: category-disease
     information:
       title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
-      content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+      content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés) et peuvent déboucher sur un échange avec les enquêteurs.
       actions:
         - question: Signaler un cas d'intoxication alimentaire&#160;?
           answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
@@ -106,10 +106,10 @@ list:
     sprite: category-health
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
-  - category: Voiture / Véhicule
+  - category: Voiture / Véhicule / Vélo
     categoryId: VEH
     path: voiture-vehicule
-    description: vente et réparation de voiture, location, auto-école...
+    description: vente et réparation de voiture, location, auto-école, pneu, accessoire...
     rank: 13
     sprite: category-transport
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"

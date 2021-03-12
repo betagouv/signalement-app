@@ -355,6 +355,43 @@
                 title: Les arrhes
                 content: Les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
                 outOfScope: true
+    - title: Produit dangereux
+      example: 'Exemple : lit'
+      companyKind: LOCATION
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Alimentaire
+          information:
+            title: Les produits alimentaires dangereux ne rentrent pas dans le périmètre de l'outil SignalConso.
+            content: Les cas de produits alimentaires dangereux nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés, corps étranger) et peuvent déboucher sur un échange avec les enquêteurs.
+            actions:
+              - question: Signaler un cas d'intoxication alimentaire&#160;?
+                answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+        - title: Jouet, puériculture, matériel scolaire
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène, produit de tatouage
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile, sac à main, bijou
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Feu d'artifice
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Meuble
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
     - title: Autre
       subcategories:
         - title: On a refusé de me donner une chambre
@@ -612,6 +649,30 @@
       subcategories:
         - title: Clause abusive
         - title: Contrat non respecté
+    - title: Produit dangereux
+      example: 'Exemple : équipement de protection'
+      companyKind: LOCATION
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Jouet
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
     - title: Autre
       tags:
         - Litige contractuel

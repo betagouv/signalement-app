@@ -72,5 +72,26 @@
         - title: Le personnel (moniteur) n'est pas aimable
           information: !!import/single ../common/info/amabilite.yml
         - title: Autre
+- title: Produit dangereux
+  example: 'Exemple : voiture, vélo, pneu'
+  companyKind: LOCATION
+  tags:
+    - Produit dangereux
+  subcategories:
+    - title: Voiture, moto, scooter
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Vélo, vélo électrique
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Pneu
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Accessoire
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Autre
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
 - title: Autre
   example: 'Exemple : fourrière'
