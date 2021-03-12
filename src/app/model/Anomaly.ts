@@ -108,7 +108,8 @@ const askCompanyKindIfMissing = (anomaly: Category, tags: Tag[]): Category => {
   }
   return {
     ...anomaly,
-    subcategories: anomaly.subcategories?.map(_ => ({ ..._, ...askCompanyKindIfMissing(_, tags) })),
+    subcategories: anomaly.subcategories?.map(_ =>
+      ({ ..._, ...askCompanyKindIfMissing(_, [...tags, ...(anomaly as Subcategory).tags ?? []]) })),
   };
 };
 
@@ -125,7 +126,7 @@ export const collectTags = (data: Category | Subcategory | Anomaly): string[] =>
   return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => collectTags(s)));
 };
 
-export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly), collectTags(anomaly));
+export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly), []);
 
 export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput => {
   return !!(_ as SubcategoryInput)?.detailInputs;
