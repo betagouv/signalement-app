@@ -83,6 +83,8 @@ export class ReportListComponent implements OnInit {
       hasCompany: undefined,
       websiteURL: undefined,
       phone: undefined,
+      websiteExists: undefined,
+      phoneExists: undefined,
       email: undefined,
       category: undefined,
       offset: 0,
@@ -145,7 +147,7 @@ export class ReportListComponent implements OnInit {
     this.search();
   }
 
-  search = () => {
+  readonly search = () => {
     // Avoid polluting the querystring
     const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
     this.updateQueryString(cleanedReport);
