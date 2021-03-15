@@ -7,25 +7,28 @@ import { slideToggleNgIf } from '../../../../utils/animations';
 @Component({
   selector: 'app-select-departments',
   template: `
-    <mat-select [placeholder]="placeholder" multiple [disabled]="disabled">
-      <mat-option class="mat-option-dense" [hidden]="true">Hack because panel won't open is there is not mat-option</mat-option>
+    <mat-select [placeholder]="placeholder" [disabled]="disabled" [value]="1">
+      <mat-select-trigger>{{getSelectValue()}}</mat-select-trigger>
+      <mat-option class="mat-option-dense" [value]="1" [hidden]="true">
+        Hack because panel won't open is there is not mat-option.
+        To set a value is also a needed hack to display mat-select-trigger...
+      </mat-option>
       <div class="mat-option select-optgroup" matRipple (click)="toggleAllDepartments()">
         <mat-pseudo-checkbox [state]="getRegionCheckboxState()" class="mat-option-pseudo-checkbox"></mat-pseudo-checkbox>
         Tous les départements
       </div>
-      <ng-container *ngFor="let region of regions">
-        <div class="mat-option select-optgroup" matRipple (click)="toggleAllDepartments(region)">
-          <mat-pseudo-checkbox class="mat-option-pseudo-checkbox" [state]="getRegionCheckboxState(region)"></mat-pseudo-checkbox>
-          {{region.label}}
-          <mat-icon class="-expend_more" (click)="toggleVisibility(region.label, $event)">
-            {{visibleRegions.has(region.label) ? 'expand_more' : 'navigate_next'}}
+      <ng-container *ngFor="let r of regions">
+        <div class="mat-option select-optgroup" matRipple (click)="toggleAllDepartments(r)">
+          <mat-pseudo-checkbox class="mat-option-pseudo-checkbox" [state]="getRegionCheckboxState(r)"></mat-pseudo-checkbox>
+          {{r.label}}
+          <mat-icon class="-expend_more" (click)="toggleVisibility(r.label, $event)">
+            {{visibleRegions.has(r.label) ? 'expand_more' : 'navigate_next'}}
           </mat-icon>
         </div>
-        <div *ngIf="visibleRegions.has(region.label)" @slideToggleNgIf>
-          <div class="mat-option mat-option-dense txt-secondary" *ngFor="let dep of region.departments" (click)="toggleDepartment(dep)"
-               matRipple>
-            <mat-pseudo-checkbox class="mat-option-pseudo-checkbox" [state]="getDepartmentCheckboxState(dep)"></mat-pseudo-checkbox>
-            ({{dep.code}}) {{dep.label}}
+        <div *ngIf="visibleRegions.has(r.label)" @slideToggleNgIf>
+          <div class="mat-option mat-option-dense txt-secondary" *ngFor="let d of r.departments" (click)="toggleDepartment(d)" matRipple>
+            <mat-pseudo-checkbox class="mat-option-pseudo-checkbox" [state]="getDepartmentCheckboxState(d)"></mat-pseudo-checkbox>
+            ({{d.code}}) {{d.label}}
           </div>
         </div>
       </ng-container>
@@ -52,6 +55,8 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
   readonly departments = this.regions.flatMap(_ => _.departments).map(_ => _.code);
 
   selectedDepartments = new Set<string>();
+
+  readonly getSelectValue = (): string => [...this.selectedDepartments].join(',');
 
   writeValue(value: string[]): void {
     this.selectedDepartments = new Set(value);
@@ -80,11 +85,11 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
 
   readonly getDepartmentCheckboxState = (d: Department): MatPseudoCheckboxState => this.selectedDepartments.has(d.code) ? 'checked' : 'unchecked';
 
-  readonly toggleAllDepartments = (region?: Region) => {
-    if (this.noDepartmentsSelected(region)) {
-      this.selectAllDepartments(region);
+  readonly toggleAllDepartments = (r?: Region) => {
+    if (this.noDepartmentsSelected(r)) {
+      this.selectAllDepartments(r);
     } else {
-      this.removeAllDepartments(region);
+      this.removeAllDepartments(r);
     }
     this.onChangeCallback([...this.selectedDepartments]);
   };
@@ -97,11 +102,11 @@ export class SelectDepartmentsComponent implements ControlValueAccessor {
     this.departmentCodes(r).forEach(_ => this.selectedDepartments.delete(_));
   };
 
-  readonly toggleDepartment = (dep: Department) => {
-    if (this.selectedDepartments.has(dep.code)) {
-      this.selectedDepartments.delete(dep.code);
+  readonly toggleDepartment = (d: Department) => {
+    if (this.selectedDepartments.has(d.code)) {
+      this.selectedDepartments.delete(d.code);
     } else {
-      this.selectedDepartments.add(dep.code);
+      this.selectedDepartments.add(d.code);
     }
     this.onChangeCallback([...this.selectedDepartments]);
   };
