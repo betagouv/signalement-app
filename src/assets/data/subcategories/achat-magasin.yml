@@ -575,3 +575,48 @@
         - title: C'est un objet
           example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
           subcategories: !!import/single ../common/objet.yml
+- title: un achat suite à la visite d'un vendeur à mon domicile
+  companyKind: LOCATION
+  tags:
+    - Démarchage à domicile
+  subcategories:
+    - title: C'est un aliment ou une boisson
+      example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
+      detailInputs:
+        - label: Que s'est-il passé ?
+          rank: 1
+          type: RADIO
+          options:
+            - Le vendeur s'est fait passer pour une autre entreprise (à préciser)
+            - Le vendeur m'a fait signer des papiers sans me dire que c'était un contrat ou un bon de commande.
+            - Autre (à préciser)
+        - label: Avez-vous payé au moment du démarchage&#160;?
+          rank: 2
+          type: RADIO
+          options:
+            - Oui
+            - Non
+        - label: Date du démarchage
+          rank: 3
+          type: DATE
+          defaultValue: SYSDATE
+    - title: C'est un objet
+      example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
+      detailInputs:
+        - label: Que s'est-il passé ?
+          rank: 1
+          type: RADIO
+          options:
+            - Le vendeur s'est fait passer pour une autre entreprise (à préciser)
+            - Le vendeur m'a fait signer des papiers sans me dire que c'était un contrat ou un bon de commande.
+            - Autre (à préciser)
+        - label: Avez-vous payé au moment du démarchage&#160;?
+          rank: 2
+          type: RADIO
+          options:
+            - Oui
+            - Non
+        - label: Date du démarchage
+          rank: 3
+          type: DATE
+          defaultValue: SYSDATE

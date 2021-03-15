@@ -30,7 +30,8 @@ export type Tag = string;
 export enum CompanyKinds {
   SIRET = 'SIRET',
   WEBSITE = 'WEBSITE',
-  PHONE = 'PHONE'
+  PHONE = 'PHONE',
+  LOCATION = 'LOCATION',
 }
 
 export interface Category {

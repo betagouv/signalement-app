@@ -26,6 +26,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportListModule } from './report-list.module';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 describe('ReportListComponent', () => {
   let component: ReportListComponent;
@@ -69,6 +71,7 @@ describe('ReportListComponent', () => {
     companyAccessesService = TestBed.inject(CompanyAccessesService);
 
     const adminUser = genUser(Roles.Admin);
+    registerLocaleData(localeFr);
     defineLocale('fr', frLocale);
     reportService = TestBed.inject(ReportService);
     constantService = TestBed.inject(ConstantService);

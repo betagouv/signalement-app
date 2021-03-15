@@ -30,12 +30,24 @@
                   </ng-container>
                 </strong>
               </div>
-              <div *ngIf="draftReport.draftCompany.address">
-                Adresse : {{draftReport.draftCompany.address}}
+            </div>
+          </div>
+          <div class="row" *ngIf="draftReport.draftCompany.address">
+            <div class="col-12" *ngIf="draftReport.draftCompany.name else locationOnly">
+              Adresse : {{draftReport.draftCompany.address}}
+            </div>
+            <ng-template #locationOnly>
+              <div class="col-12">
+                Rue : {{draftReport.draftCompany.address}}
               </div>
-              <div *ngIf="draftReport.draftCompany | isForeign">
-                Pays : {{draftReport.draftCompany.country}}
+              <div class="col-12">
+                Code postal : {{draftReport.draftCompany.postalCode}}
               </div>
+            </ng-template>
+          </div>
+          <div class="row" *ngIf="draftReport.draftCompany | isForeign">
+            <div class="col-12">
+              Pays : {{draftReport.draftCompany.country}}
             </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.siret">
@@ -74,11 +86,11 @@
                                        *ngIf="draftReport.companyKind === companyKinds.WEBSITE">
         </app-company-search-by-website>
 
-        <app-company-search-by-phone [draftReport]="draftReport"
+        <app-company-phone [draftReport]="draftReport"
                                      (complete)="submitPhone($event)"
                                      (change)="requireIdentificationKind = false"
                                      *ngIf="draftReport.companyKind === companyKinds.PHONE">
-        </app-company-search-by-phone>
+        </app-company-phone>
 
         <div #searchKind>
 
@@ -118,7 +130,7 @@
                 </div>
 
                 <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.None)"
-                     *ngIf="[companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
+                     *ngIf="[companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf(), companyKinds.LOCATION.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
                       <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="rendererService.scrollToElement(identSearch)"/>
@@ -152,7 +164,12 @@
                 </div>
 
                 <div *ngSwitchCase="identificationKinds.None">
-                  <app-company-foreign-country (complete)="submitCompany($event)"></app-company-foreign-country>
+                  <app-company-location (complete)="submitCompany($event)"
+                                        *ngIf="this.draftReport?.companyKind === companyKinds.LOCATION.valueOf()">
+                  </app-company-location>
+                  <app-company-foreign-country (complete)="submitCompany($event)"
+                                               *ngIf="[companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
+                  </app-company-foreign-country>
                 </div>
               </ng-container>
             </div>
