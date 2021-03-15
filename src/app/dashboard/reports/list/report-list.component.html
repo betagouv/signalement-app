@@ -5,6 +5,7 @@
       <app-panel-header>
         <app-report-list-search
           [searchForm]="searchForm"
+          [reports]="reports"
           (extracted)="launchExtraction()"
           (searched)="onFiltersUpdate()"
           (cleared)="onClearFilters()">
