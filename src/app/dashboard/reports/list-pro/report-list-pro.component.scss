@@ -1,50 +1,41 @@
 @import "../../../../theme/variables";
 @import "../../../../theme/media-queries";
 
-.container {
+.-btn-extract {
+  margin-bottom: spacing(2);
+  margin-left: auto;
+  display: block;
+}
 
-  .item {
+.-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: spacing(2);
 
-    color: initial;
-
-    border-bottom: 1px solid $theme-border-lighter;
-    padding: 0.5em;
-
-    &:not(.item-header):hover {
-      background: $lightest-grey;
-    }
-  }
-
-  .item-header {
-    color: $primary;
-    font-weight: bold;
+  > * {
+    margin-left: spacing(1);
   }
 }
 
-.filters {
-
-  padding-top: 1em;
-  padding-bottom: 1em;
-  margin: 0 0 2em 0;
-  background-color: $lightest-grey;
-
-  .b-0 {
-    position: absolute;
-    bottom: 0;
-  }
-
-  ul.dropdown-menu {
-    height: 300px;
-    overflow-y: scroll;
-  }
-
-  margin-top: -3em !important;
-
-
-  @media #{$smaller-than-tablet} {
-    & {
-      margin-top: -1em !important;
-      padding: 0.5em;
-    }
-  }
+.-filters {
+  flex-wrap: wrap;
+  padding-top: spacing(1/4);
+  padding-bottom: spacing(1/4);
 }
+
+.-filter {
+  flex: 1;
+  width: auto;
+  min-width: 150px;
+  margin: spacing(1/4) 0;
+  margin-right: spacing();
+}
+
+.-td-company {
+  font-weight: bold;
+}
+
+.-fender {
+  border-bottom: 1px solid $theme-divider;
+}
+

@@ -58,10 +58,11 @@ export class ReportListComponent implements OnInit {
 
   readonly getFormFromQueryString = (qs: ReportFilter): ReportFilter => {
     try {
+      const {offset, limit, ...restQs} = qs;
       return {
-        ...qs,
-        offset: +qs.offset ?? 0,
-        limit: +qs.limit ?? this.defaultPageSize,
+        ...restQs,
+        offset: +(offset ?? '0'),
+        limit: +(limit ?? `${this.defaultPageSize}`),
       };
     } catch (e) {
       console.error('Caught error on "reportFilterFromQueryString"', qs, e);
@@ -77,11 +78,13 @@ export class ReportListComponent implements OnInit {
       details: undefined,
       start: undefined,
       end: undefined,
-      siret: undefined,
+      siretSirenList: [],
       status: undefined,
       hasCompany: undefined,
       websiteURL: undefined,
       phone: undefined,
+      websiteExists: undefined,
+      phoneExists: undefined,
       email: undefined,
       category: undefined,
       offset: 0,
@@ -144,7 +147,7 @@ export class ReportListComponent implements OnInit {
     this.search();
   }
 
-  search = () => {
+  readonly search = () => {
     // Avoid polluting the querystring
     const cleanedReport: ReportFilter = Utils.cleanObject(this.searchFormValue);
     this.updateQueryString(cleanedReport);

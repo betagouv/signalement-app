@@ -134,7 +134,7 @@
         - label: Quelle erreur a été constatée&#160;?
           rank: 4
           type: TEXTAREA
-    - title: Un produit emballé et étiqueté par le magasin comme une barquette de viande
+    - title: Un produit emballé et étiqueté par le vendeur comme une barquette de viande
       example: 'La quantité est marquée sur une étiquette collée par le commerçant'
       description: La quantité annoncée correspond à la quantité que vous devez avoir au minimum.
       detailInputs:

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CompanyComponent, IdentificationKinds } from './company.component';
 import { CompanyService } from '../../../services/company.service';
@@ -22,7 +22,8 @@ import { CompanySearchByNameComponent } from './search-by-name-component/company
 import { CompanySearchByIdentityComponent } from './search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './search-by-website/company-search-by-website.component';
 import { ConstantService } from '../../../services/constant.service';
-import { CompanySearchByPhoneComponent } from './search-by-phone/company-search-by-phone.component';
+import { CompanyPhoneComponent } from './phone/company-phone.component';
+import { CompanyLocationComponent } from './location/company-location.component';
 
 describe('CompanyComponent', () => {
 
@@ -32,7 +33,7 @@ describe('CompanyComponent', () => {
   let reportStorageService: ReportStorageService;
   let constantService: ConstantService;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         CompanyComponent,
@@ -41,7 +42,8 @@ describe('CompanyComponent', () => {
         CompanySearchByNameComponent,
         CompanySearchByIdentityComponent,
         CompanySearchByWebsiteComponent,
-        CompanySearchByPhoneComponent,
+        CompanyPhoneComponent,
+        CompanyLocationComponent
       ],
       imports: [
         FormsModule,
@@ -219,6 +221,60 @@ describe('CompanyComponent', () => {
 
       expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
     });
+
+  });
+
+  describe('case of company with LOCATION', () => {
+
+    beforeEach(() => {
+      const draftReportInProgress = Object.assign(genDraftReport(Step.Details), {
+        subcategories: [Object.assign(genSubcategory(), { companyKind: CompanyKinds.LOCATION })]
+      });
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+
+      fixture = TestBed.createComponent(CompanyComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('should display radios for identification choice', () => {
+
+      const nativeElement = fixture.nativeElement;
+      expect(nativeElement.querySelectorAll('form').length).toBe(1);
+      expect(nativeElement.querySelectorAll('input[type="radio"][name="identificationKind"]').length).toBe(3);
+    });
+
+    it('should enable to display the search form for identification by name', () => {
+      const nativeElement = fixture.nativeElement;
+      component.identificationKind = IdentificationKinds.Name;
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('form#searchForm')).not.toBeNull();
+      expect(nativeElement.querySelector('form#searchByIdentityForm')).toBeNull();
+    });
+
+    it('should enable to display the form for identification by identity', () => {
+      const nativeElement = fixture.nativeElement;
+      component.identificationKind = IdentificationKinds.Identity;
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('form#searchForm')).toBeNull();
+      expect(nativeElement.querySelector('form#searchByIdentityForm')).not.toBeNull();
+    });
+
+    it('should enable to display the form for identification by location', () => {
+      const nativeElement = fixture.nativeElement;
+      component.identificationKind = IdentificationKinds.None;
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('form#searchForm')).toBeNull();
+      expect(nativeElement.querySelector('form#locationForm')).not.toBeNull();
+    });
+
 
   });
 });

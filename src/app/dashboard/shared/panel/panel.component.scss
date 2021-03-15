@@ -5,6 +5,8 @@
   border: 1px solid $theme-divider;
   display: block;
   position: relative;
+  margin-bottom: spacing(2);
+  min-height: 6px;
 }
 
 .app-panel-progress {

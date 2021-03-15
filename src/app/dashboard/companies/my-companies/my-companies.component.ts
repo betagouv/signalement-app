@@ -46,7 +46,7 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
 
   refreshAccesses() {
     this.loading = true;
-    this.companyAccessesService.myAccesses(this.user!).subscribe(
+    this.companyAccessesService.myAccesses().subscribe(
       accesses => {
         this.loading = false;
         this.myAccesses = accesses;

@@ -14,22 +14,31 @@
         triggers="click keypress"
         (bsValueChange)="fetchReportedPhones()"
       />
-      <button mat-icon-button (click)="extract()" matTooltip="Exporter en XLS">
-        <mat-icon>get_app</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="clearFilters()">
-        <mat-icon>clear</mat-icon>
-      </button>
+
+      <div class="txt-secondary text-nowrap">
+        <button mat-icon-button (click)="extract()" matTooltip="Exporter en XLS">
+          <mat-icon>get_app</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="clearFilters()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
     </app-panel-header>
     <table mat-table [dataSource]="dataSource" matSort class="fullwidth" matSortActive="count" matSortDirection="desc">
 
       <ng-container matColumnDef="count">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef>Nombre de signalements</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-number">Nombre de signalements</th>
         <td class="td-count td-number" mat-cell *matCellDef="let _">
           {{_.count}}
-          &nbsp;
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let _" class="td-actions">
           <a [routerLink]="['/suivi-des-signalements', (authenticationService.user | async).roleUrlParam]"
-             [queryParams]="{phone: _.phone, siret: _.siret, start: periodFilter && periodFilter[0], end: periodFilter && periodFilter[1]}" app-btn color="primary" style="text-decoration: none">
+             [queryParams]="{phone: _.phone, siret: _.siret, start: periodFilter && periodFilter[0], end: periodFilter && periodFilter[1]}"
+             app-btn color="primary" style="text-decoration: none">
             Voir
           </a>
         </td>
@@ -39,6 +48,20 @@
         <th mat-sort-header mat-header-cell *matHeaderCellDef>Numéro de téléphone</th>
         <td mat-cell *matCellDef="let _">
           {{_.phone}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Catégorie</th>
+        <td mat-cell *matCellDef="let _">
+          {{_.category}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="companyName">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Entreprise</th>
+        <td mat-cell *matCellDef="let _">
+          {{_.companyName}}
         </td>
       </ng-container>
 

@@ -10,7 +10,7 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
 import { Roles } from '../../model/AuthUser';
 import { AuthenticationService } from '../../services/authentication.service';
-import { PhoneWithReportCount } from '../../model/ReportedPhone';
+import { ReportedPhone } from '../../model/ReportedPhone';
 
 @Component({
   selector: 'app-reported-phones',
@@ -27,12 +27,15 @@ export class ReportedPhonesComponent implements OnInit {
   phoneFilter?: string;
   periodFilter?: Date[];
 
-  dataSource?: MatTableDataSource<PhoneWithReportCount>;
+  dataSource?: MatTableDataSource<ReportedPhone>;
 
   readonly columns = [
     'phone',
+    'category',
     'siret',
+    'companyName',
     'count',
+    'actions',
   ];
 
   constructor(private titleService: Title,
@@ -59,7 +62,7 @@ export class ReportedPhonesComponent implements OnInit {
     ).subscribe();
   }
 
-  initializeDatatable(phones: PhoneWithReportCount[]) {
+  initializeDatatable(phones: ReportedPhone[]) {
     this.dataSource = new MatTableDataSource(phones);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

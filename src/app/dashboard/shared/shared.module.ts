@@ -9,6 +9,8 @@ import { ConfirmModule } from './confirm/confirm.module';
 import { LoadingModule } from './loading/loading.module';
 import { MaterialModule } from './material.module';
 import { NgxLoadingConfig } from '../../components/components.module';
+import { FenderModule } from './fender/fender';
+import { AlertModule } from './alert/alert';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -19,6 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgxLoadingModule.forRoot(NgxLoadingConfig),
   ],
   exports: [
+    ReactiveFormsModule,
+    FormsModule,
     CommonModule,
     NgxLoadingModule,
     PanelModule,
@@ -29,6 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    FenderModule,
+    AlertModule,
   ],
   providers: [],
 })

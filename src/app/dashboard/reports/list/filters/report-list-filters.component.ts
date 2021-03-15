@@ -7,6 +7,10 @@ import { AnomalyService } from '../../../../services/anomaly.service';
 import { ConstantService } from '../../../../services/constant.service';
 import { Regions } from '../../../../model/Region';
 import { ReportFilter } from '../../../../model/ReportFilter';
+import { PaginatedData } from '../../../../model/PaginatedData';
+import { Report } from '../../../../model/Report';
+import { formatNumber } from '@angular/common';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-report-list-search',
@@ -25,9 +29,12 @@ import { ReportFilter } from '../../../../model/ReportFilter';
       <mat-date-range-picker #picker></mat-date-range-picker>
 
       <div class="txt-secondary text-nowrap">
-        <button mat-icon-button (click)="extracted.emit()" matTooltip="Exporter en XLS">
-          <mat-icon>get_app</mat-icon>
-        </button>
+        <span [tooltip]="reports?.totalCount > reportsLimitForExport ? reportsLimitForExportMessage : undefined">
+          <button mat-icon-button [disabled]="reports?.totalCount > reportsLimitForExport" (click)="extracted.emit()"
+                  matTooltip="Exporter en XLS">
+            <mat-icon>get_app</mat-icon>
+          </button>
+        </span>
         <button mat-icon-button matTooltip="Supprimer tous les filtres" (click)="cleared.emit()">
           <mat-icon>clear</mat-icon>
         </button>
@@ -41,20 +48,34 @@ import { ReportFilter } from '../../../../model/ReportFilter';
         <table class="form">
           <tr>
             <td><label for="rls-websiteURL">Site internet</label></td>
-            <td>
-              <input formControlName="websiteURL" id="rls-websiteURL" class="form-control form-control-material">
+            <td class="td-with-cb">
+              <mat-checkbox formControlName="websiteExists"></mat-checkbox>
+              &nbsp;&nbsp;&nbsp;
+              <input
+                placeholder="(Optionnel)"
+                [style.visibility]="searchForm.get('websiteExists').value === true ? 'visible' : 'hidden'"
+                formControlName="websiteURL"
+                id="rls-websiteURL"
+                class="form-control form-control-material">
             </td>
           </tr>
           <tr>
             <td><label for="rls-phone">Numéro de téléphone</label></td>
-            <td>
-              <input formControlName="phone" id="rls-phone" class="form-control form-control-material">
+            <td class="td-with-cb">
+              <mat-checkbox formControlName="phoneExists"></mat-checkbox>
+              &nbsp;&nbsp;&nbsp;
+              <input
+                placeholder="(Optionnel)"
+                [style.visibility]="searchForm.get('phoneExists').value === true ? 'visible' : 'hidden'"
+                formControlName="phone"
+                id="rls-phone"
+                class="form-control form-control-material">
             </td>
           </tr>
           <tr>
-            <td><label for="rls-siret">SIRET</label></td>
+            <td><label for="rls-siretSirenList">SIRET</label></td>
             <td>
-              <input formControlName="siret" id="rls-siret" class="form-control form-control-material">
+              <input formControlName="siretSirenList" id="rls-siretSirenList" class="form-control form-control-material">
             </td>
           </tr>
           <tr>
@@ -159,10 +180,19 @@ export class ReportListFiltersComponent implements OnInit {
 
   constructor(
     private anomalyService: AnomalyService,
+    private localeService: BsLocaleService,
     private router: Router,
     private constantService: ConstantService,
   ) {
   }
+
+  readonly reportsLimitForExport = 30000;
+
+  readonly reportsLimitForExportMessage = 'Impossible d\'exporter plus de '
+    + formatNumber(this.reportsLimitForExport, this.localeService.currentLocale)
+    + ' signalements.';
+
+  @Input() reports: PaginatedData<Report>;
 
   @Input() searchForm: FormGroup;
 

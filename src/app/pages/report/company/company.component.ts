@@ -10,7 +10,7 @@ import { DraftCompany, WebsiteURL } from '../../../model/Company';
 import { RendererService } from '../../../services/renderer.service';
 
 export enum IdentificationKinds {
-  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url', Phone = 'Phone'
+  Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url'
 }
 
 @Component({
@@ -68,7 +68,9 @@ export class CompanyComponent implements OnInit {
     const draftCompany = this.draftReport?.draftCompany;
     if (draftCompany) {
       if ((this.draftReport?.companyKind === CompanyKinds.SIRET && draftCompany.website) ||
-        (this.draftReport?.companyKind === CompanyKinds.WEBSITE && !draftCompany.website)) {
+        (this.draftReport?.companyKind === CompanyKinds.WEBSITE && !draftCompany.website) ||
+        (this.draftReport?.companyKind === CompanyKinds.PHONE && !draftCompany.phone) ||
+        (this.draftReport?.companyKind === CompanyKinds.LOCATION && !draftCompany.postalCode)) {
         this.draftReport.draftCompany = undefined;
       }
     }

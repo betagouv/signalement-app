@@ -27,7 +27,7 @@ export class ApiSdkService {
         ..._,
         headers: {
           ..._?.headers,
-          'X-Auth-Token': authUser.token,
+          ...((authUser?.token) ? {'X-Auth-Token': authUser.token} : {}),
         }
       };
     },
