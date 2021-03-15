@@ -8,7 +8,7 @@ import {
   SubcategoryInformation,
   SubcategoryInput
 } from '../../model/Anomaly';
-import { slideToggle } from '../../utils/animations';
+import { slideToggleNgIf } from '../../utils/animations';
 
 @Component({
   selector: 'app-anomalies-node[anomaly]',
@@ -29,7 +29,7 @@ import { slideToggle } from '../../utils/animations';
           <div class="-desc" *ngIf="anomaly.subcategoriesTitle" [innerHTML]="anomaly.subcategoriesTitle"></div>
         </div>
       </div>
-      <div class="-subcategory" *ngIf="isOpen" [@slideToggle]>
+      <div class="-subcategory" *ngIf="isOpen" @slideToggleNgIf>
         <app-anomalies-node-info *ngIf="isSubcategoryInformation()" [anomaly]="anomaly"></app-anomalies-node-info>
         <app-anomalies-node-inputs *ngIf="isSubcategoryInput()" [anomaly]="anomaly"></app-anomalies-node-inputs>
         <app-anomalies-node *ngFor="let _ of anomaly.subcategories" [anomaly]="_" [openAll]="openAll"></app-anomalies-node>
@@ -37,7 +37,7 @@ import { slideToggle } from '../../utils/animations';
     </div>
   `,
   styleUrls: ['./anomaly-node.component.scss'],
-  animations: [slideToggle]
+  animations: [slideToggleNgIf]
 })
 export class AnomaliesNodeComponent {
 
