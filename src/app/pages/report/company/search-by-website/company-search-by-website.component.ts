@@ -104,14 +104,14 @@ export class CompanySearchByWebsiteComponent implements OnInit {
   }
 
   submitWebsiteOnly() {
-    this.complete.emit({ website: Object.assign(new WebsiteURL(), { url: this.urlCtrl.value }) });
+    this.complete.emit({ website: { url: this.urlCtrl.value } });
     this.initSearchByUrl();
   }
 
   submitCompany() {
     this.complete.emit({
       ...this.selectedCompany,
-      website: Object.assign(new WebsiteURL(), { url: this.urlCtrl.value }),
+      website: { url: this.urlCtrl.value },
       vendor: this.vendorCtrl ? this.vendorCtrl.value : undefined
     });
   }
