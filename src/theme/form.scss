@@ -74,6 +74,10 @@ input.form-control.form-control-material,
     border-bottom: 2px solid $theme-primary;
   }
 
+  &[disabled] {
+    border-bottom: 2px solid $theme-color-text-disabled;
+  }
+
   &:focus {
     border-bottom-color: $primary;
   }

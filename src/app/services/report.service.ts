@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
 import { DetailInputValue, DraftReport, Report } from '../model/Report';
-import { Observable, of } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
 import { PaginatedData } from '../model/PaginatedData';
 import { mergeMap } from 'rxjs/operators';
 import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
-import { ReportFilter, reportFilter2Body, reportFilter2QueryString } from '../model/ReportFilter';
+import { cleanReportFilter, ReportFilter, reportFilter2Body, reportFilter2QueryString } from '../model/ReportFilter';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
 import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from '../model/Company';
 import Utils from '../utils';
@@ -185,7 +185,12 @@ export class ReportService {
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
         {
           ...headers,
-          params: this.serviceUtils.objectToHttpParams(reportFilter2QueryString(Utils.cleanObject(report))) as any
+          params: pipe(
+            Utils.cleanObject,
+            cleanReportFilter,
+            reportFilter2QueryString,
+            this.serviceUtils.objectToHttpParams,
+          )(report)
         },
       )),
       mergeMap(paginatedData => of({
@@ -199,7 +204,7 @@ export class ReportService {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => this.http.post(
         this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'extract']),
-        reportFilter2Body(Utils.cleanObject(report)),
+        pipe(Utils.cleanObject, cleanReportFilter, reportFilter2Body)(report),
         headers
       ))
     );
