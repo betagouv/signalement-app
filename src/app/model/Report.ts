@@ -101,7 +101,7 @@ export class DraftReport {
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && this.tags.indexOf(DangerousProductTag) === -1;
+    return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
   }
 }
 
@@ -131,7 +131,7 @@ export class Report {
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && this.tags.indexOf(DangerousProductTag) === -1;
+    return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
   }
 }
 
