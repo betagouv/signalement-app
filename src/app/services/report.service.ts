@@ -9,7 +9,7 @@ import { Consumer } from '../model/Consumer';
 import { UploadedFile } from '../model/UploadedFile';
 import { cleanReportFilter, ReportFilter, reportFilter2Body, reportFilter2QueryString } from '../model/ReportFilter';
 import { ReportAction, ReportResponse, ReviewOnReportResponse } from '../model/ReportEvent';
-import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from '../model/Company';
+import { Company, CompanySearchResult, DraftCompany } from '../model/Company';
 import Utils from '../utils';
 
 @Injectable({
@@ -232,7 +232,7 @@ export class ReportService {
         lastName: report.lastName,
         email: report.email
       }),
-      website: Object.assign(new WebsiteURL(), { url: report.websiteURL }),
+      website: { url: report.websiteURL },
       vendor: report.vendor,
       phone: report.phone,
       contactAgreement: report.contactAgreement,

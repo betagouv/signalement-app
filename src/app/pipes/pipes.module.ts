@@ -3,6 +3,7 @@ import { TruncatePipe } from '../pipes/truncate.pipe';
 import { PrecedeByPipe } from './precede-by.pipe';
 import { MiddleCropPipe } from './middlecrop.pipe';
 import { IsForeignPipe } from './company.pipe';
+import { HostFromUrlPipe } from './host-from-url.pipe';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { IsForeignPipe } from './company.pipe';
     TruncatePipe,
     MiddleCropPipe,
     IsForeignPipe,
+    HostFromUrlPipe,
   ],
   imports: [
   ],
@@ -18,6 +20,7 @@ import { IsForeignPipe } from './company.pipe';
     TruncatePipe,
     MiddleCropPipe,
     IsForeignPipe,
+    HostFromUrlPipe,
   ],
   providers: [
   ]

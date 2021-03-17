@@ -7,11 +7,13 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AnalyticsService {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private angulartics2: Angulartics2) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private angulartics2: Angulartics2
+  ) {
   }
 
-  trackEvent(category, action, name?, value?) {
+  readonly trackEvent = (category: EventCategories, action: AnalyticAction, name?: any, value?: any) => {
     if (isPlatformBrowser(this.platformId)) {
       this.angulartics2.eventTrack.next({
         action,
@@ -22,8 +24,16 @@ export class AnalyticsService {
         }
       });
     }
-  }
+  };
 }
+
+export type AnalyticAction =
+  AuthenticationEventActions
+  | ReportEventActions
+  | CompanySearchEventActions
+  | ContractualDisputeActions
+  | AccountEventActions
+  | CompanyAccessEventActions;
 
 export enum EventCategories {
   report = 'Signalement',

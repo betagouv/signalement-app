@@ -36,7 +36,7 @@
 }
 
 $app-primary: mat-palette(generateCustomPalette($theme-primary));
-$app-warn: mat-palette($mat-red);
+$app-warn: mat-palette(generateCustomPalette($warning));
 $app-theme: mat-light-theme($app-primary, $app-primary, $app-warn);
 @include angular-material-theme($app-theme);
 

@@ -31,9 +31,6 @@ export class ReportStorageService {
           if (draftReport.uploadedFiles) {
             draftReport.uploadedFiles = draftReport.uploadedFiles.map(f => Object.assign(new UploadedFile(), f));
           }
-          if (draftReport.draftCompany && draftReport.draftCompany.website) {
-            draftReport.draftCompany.website = Object.assign(new WebsiteURL(), draftReport.draftCompany.website);
-          }
           this.reportInProgessSource.next(draftReport);
         }
       })

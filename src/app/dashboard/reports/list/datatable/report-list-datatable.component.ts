@@ -18,7 +18,7 @@ import { FormGroup } from '@angular/forms';
           <th mat-header-cell *matHeaderCellDef>Entreprise</th>
           <td mat-cell *matCellDef="let _" [matTooltip]="_.company.address" class="pt-0 pb-0">
             <span class="td-name_label">{{_.company.name}}</span><br/>
-            <span *ngIf="_.website" class="td-name_website">{{_.website.hostname}}</span>
+            <span *ngIf="_.website" class="td-name_website">{{_.website.url | hostFromUrl}}</span>
             <span *ngIf="_.phone" class="td-name_website">{{_.phone}}</span>
           </td>
         </ng-container>
