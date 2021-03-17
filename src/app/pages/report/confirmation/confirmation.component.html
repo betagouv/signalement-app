@@ -7,7 +7,7 @@
           Récapitulatif de votre problème
         </h2>
         <p class="text-warning">
-          Vérifiez  votre signalement avant de l’envoyer {{draftReport.employeeConsumer ? '' : 'à l\'entreprise et ' }}à la répression des fraudes.
+          Vérifiez  votre signalement avant de l’envoyer {{!draftReport.isTransmittableToPro ? '' : 'à l\'entreprise et ' }}à la répression des fraudes.
         </p>
         <div class="text-break">
           <h3>Problème</h3>
@@ -98,7 +98,7 @@
           <div>
             Email : {{draftReport.consumer.email}}
           </div>
-          <div *ngIf="!draftReport.employeeConsumer">
+          <div *ngIf="draftReport.isTransmittableToPro">
             Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}
           </div>
           <button class="link" (click)="goToStep(steps.Consumer)">
