@@ -7,8 +7,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class AppRoleDirective implements OnInit {
 
-  @Input() appRole: Roles[];
-  @Input() appRoleElse: TemplateRef<any>;
+  @Input() appRole!: Roles[];
+  @Input() appRoleElse?: TemplateRef<any>;
 
   constructor(private authenticationService: AuthenticationService,
               private viewContainer: ViewContainerRef,
@@ -33,5 +33,4 @@ export class AppRoleDirective implements OnInit {
       return role.toString() === user.role;
     });
   }
-
 }

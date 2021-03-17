@@ -8,11 +8,12 @@ import { PlatformLocation } from '@angular/common';
 })
 export class BannerComponent implements OnInit {
 
-  @Input() title;
-  @Input() subTitle;
-  @Input() backButton;
+  @Input() title?: string;
+  @Input() subTitle?: string;
+  @Input() backButton?: boolean;
 
-  constructor(private platformLocation: PlatformLocation) { }
+  constructor(private platformLocation: PlatformLocation) {
+  }
 
   ngOnInit() {
   }

@@ -7,8 +7,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class AppPermissionDirective implements OnInit {
 
-  @Input() appPermission: Permissions;
-  @Input() appPermissionElse: TemplateRef<any>;
+  @Input() appPermission!: Permissions;
+  @Input() appPermissionElse?: TemplateRef<any>;
 
   constructor(private authenticationService: AuthenticationService,
               private viewContainer: ViewContainerRef,

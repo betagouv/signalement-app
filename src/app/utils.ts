@@ -37,6 +37,14 @@ export default class Utils {
 
   static uniqueValues = <T>(array: T[]): T[] => Array.from(new Set(array));
 
+  static getHostFromUrl = (url?: string) => {
+    return url
+      ?.replace('http://', '')
+      .replace('https://', '')
+      .replace('www.', '')
+      .split(/[/?#]/)[0];
+  }
+
   static sanitizePhoneNumber = (phoneNumber?: string): string => phoneNumber?.replace(/[^\+0-9]/g, '');
 }
 
