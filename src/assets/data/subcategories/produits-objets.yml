@@ -88,14 +88,6 @@
         - label: Description
           rank: 4
           type: TEXTAREA
-- title: Produit dangereux
-  example: 'Exemple : jouet qui prend feu, allergie, intoxication'
-  information:
-    title: Vous souhaitez signaler un produit dangereux
-    content: Les cas de produits dangereux (ou suspectés d'être dangereux) nécessitent une analyse individualisée et peuvent déboucher sur un échange avec les enquêteurs.
-    actions:
-      - question: Signaler un produit dangereux ?
-        answer: Utiliser ce formulaire spécifique<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
 - title: Durée de vie trop courte
   example: Vous trouvez que la durée de vie de votre appareil est trop courte
   detailInputs:
