@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { ActionResultNames, AnalyticsService, CompanyAccessEventActions, EventCategories } from '../../../services/analytics.service';
+import {
+  ActionResultNames,
+  AnalyticAction,
+  AnalyticsService,
+  CompanyAccessEventActions,
+  EventCategories
+} from '../../../services/analytics.service';
 import { Router } from '@angular/router';
 import pages from '../../../../assets/data/pages.json';
 import { User } from '../../../model/AuthUser';
@@ -56,7 +62,7 @@ export class CompanyActivationComponent implements OnInit {
     if (!this.activationForm.valid) {
       this.showErrors = true;
     } else {
-      const handleError = (action: string) => {
+      const handleError = (action: AnalyticAction) => {
         this.loading = false;
         this.analyticsService.trackEvent(EventCategories.companyAccess, action, ActionResultNames.fail);
         this.activationError = true;
