@@ -57,7 +57,7 @@ export class ConsumerComponent implements OnInit {
       email: this.emailCtrl
     });
 
-    if (this.draftReport.employeeConsumer) {
+    if (!this.draftReport.isTransmittableToPro) {
       this.contactAgreementCtrl = this.formBuilder.control(false);
     } else {
       this.contactAgreementCtrl = this.formBuilder.control(
