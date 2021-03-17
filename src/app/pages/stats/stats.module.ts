@@ -8,6 +8,8 @@ import { ComponentsModule, NgxLoadingConfig } from '../../components/components.
 import { NgxLoadingModule } from 'ngx-loading';
 import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PageModule } from '../../dashboard/shared/page/page.module';
+import { PanelModule } from '../../dashboard/shared/panel/panel.module';
 
 const routes: Routes = [
   { path: 'stats', component: StatsComponent },
@@ -25,6 +27,8 @@ const routes: Routes = [
     ComponentsModule,
     AppRoleModule,
     TooltipModule.forRoot(),
+    PageModule,
+    PanelModule,
   ]
 })
 export class StatsModule { }

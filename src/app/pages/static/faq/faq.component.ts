@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,14 +12,10 @@ export class FaqComponent implements OnInit {
 
   fragment: string;
 
-  constructor(private titleService: Title,
-              private meta: Meta,
-              private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.faq.title);
-    this.meta.updateTag({ name: 'description', content: pages.faq.description });
-
     this.activatedRoute.url.subscribe(url => {
       if (url[1]) {
         this.isFaqConso = url[1].toString() === 'consommateur';

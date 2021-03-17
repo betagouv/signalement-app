@@ -1,24 +1,25 @@
 <app-banner title="Conditions générales d'utilisation du site SignalConso"></app-banner>
 
-<main role="main">
-  <section class="section section-lightest-grey">
-    <div class="container max-width bg-white pb-3">
-      <nav class="nav nav-tabs nav-justified mb-3" role="tablist" aria-label="Profil utilisateur">
-        <button class="nav-item nav-link" [ngClass]="isCguConso ? 'active' : ''" routerLink="/conditions-generales-utilisation/consommateur"
-                role="tab" [attr.aria-selected]="isCguConso" aria-controls="conso-panel" id="conso-tab" [tabIndex]="isCguConso ? 0 : -1"
-                (keydown.arrowRight)="changeTab()" (keydown.arrowLeft)="changeTab()">
-          Consommateur
-        </button>
-        <button class="nav-item nav-link" [ngClass]="!isCguConso ? 'active' : ''" routerLink="/conditions-generales-utilisation/professionnel"
-                role="tab" [attr.aria-selected]="!isCguConso" aria-controls="pro-panel" id="pro-tab" [tabIndex]="isCguConso ? -1 : 0"
-                (keydown.arrowRight)="changeTab()" (keydown.arrowLeft)="changeTab()">
-          Professionnel
-        </button>
-      </nav>
-
-      <div *ngIf="isCguConso; else cguPro"
-           tabindex="0" role="tabpanel" id="conso-panel" aria-labelledby="conso-tab">
-
+<app-page pageDefinitionKey="cgu" size="small">
+  <app-panel>
+    <nav class="nav nav-tabs nav-justified" role="tablist" aria-label="Profil utilisateur">
+      <button class="nav-item nav-link" [ngClass]="isCguConso ? 'active' : ''"
+              routerLink="/conditions-generales-utilisation/consommateur"
+              role="tab" [attr.aria-selected]="isCguConso" aria-controls="conso-panel" id="conso-tab"
+              [tabIndex]="isCguConso ? 0 : -1"
+              (keydown.arrowRight)="changeTab()" (keydown.arrowLeft)="changeTab()">
+        Consommateur
+      </button>
+      <button class="nav-item nav-link" [ngClass]="!isCguConso ? 'active' : ''"
+              routerLink="/conditions-generales-utilisation/professionnel"
+              role="tab" [attr.aria-selected]="!isCguConso" aria-controls="pro-panel" id="pro-tab"
+              [tabIndex]="isCguConso ? -1 : 0"
+              (keydown.arrowRight)="changeTab()" (keydown.arrowLeft)="changeTab()">
+        Professionnel
+      </button>
+    </nav>
+    <app-panel-body>
+      <div *ngIf="isCguConso; else cguPro" tabindex="0" role="tabpanel" id="conso-panel" aria-labelledby="conso-tab">
         <p>
           Les conditions générales d'utilisation doivent être acceptées par l’utilisateur du site.
         </p>
@@ -26,7 +27,9 @@
         <h2>À quoi sert le site SignalConso ?</h2>
         <p>
           Le site permet aux consommateurs de connaître la réglementation et de déposer un signalement.
-          <br/>Il ne doit en aucun cas s'agir d'une urgence nécessitant l'intervention des services de secours. <b>Dans ce cas, il faut appeler le « 112 ».</b>
+          <br/>Il ne doit en aucun cas s'agir d'une urgence nécessitant l'intervention des services de secours. <b>Dans
+          ce
+          cas, il faut appeler le « 112 ».</b>
         </p>
 
         <hr>
@@ -40,14 +43,17 @@
 
         <h2>Que peut-on signaler ?</h2>
         <p>
-          L’utilisateur peut signaler des manquements relatifs au Code de la Consommation (principalement) et des litiges contractuels constatés chez une entreprise. Il n’est pas possible de signaler un litige avec un particulier.
+          L’utilisateur peut signaler des manquements relatifs au Code de la Consommation (principalement) et des
+          litiges
+          contractuels constatés chez une entreprise. Il n’est pas possible de signaler un litige avec un particulier.
         </p>
 
         <hr>
 
         <h2>Qui traite les signalements ?</h2>
         <p>
-          Les signalements sont traités par l’équipe SignalConso qui vérifie que le signalement rentre bien dans le périmètre du site et que les données reçues ne sont pas “sensibles”.
+          Les signalements sont traités par l’équipe SignalConso qui vérifie que le signalement rentre bien dans le
+          périmètre du site et que les données reçues ne sont pas “sensibles”.
         </p>
 
         Les signalements sont ensuite visibles :
@@ -60,7 +66,8 @@
 
         <h2>Les signalements sont-ils anonymes ?</h2>
         <p>
-          L’utilisateur doit s’identifier auprès de l’administration (Signalconso et DGCCRF) en donnant son nom, son prénom et son adresse email.
+          L’utilisateur doit s’identifier auprès de l’administration (Signalconso et DGCCRF) en donnant son nom, son
+          prénom et son adresse email.
           <br/>Par contre, l'utilisateur a la possibilité de rester anonyme vis-à-vis de l'entreprise.
         </p>
 
@@ -68,66 +75,106 @@
 
         <h2>Comment sont traitées les données personnelles ?</h2>
         <p>
-          Les informations recueillies dans le formulaire de SignalConso sont enregistrées dans un fichier informatisé par l’équipe SignalConso (DGCCRF) pour permettre aux professionnels de se corriger et permettre à la DGCCRF de suivre les signalements à des fins de contrôle.
-          La base légale du traitement est la mission de service public de la DGCCRF, habilitée à contrôler et sanctionner les manquements relatifs au code de la consommation (L511-3 Code Conso et L450-1 Code Commerce)
-          <br/>Les informations demandées lors du dépôt du signalement sont nécessaires pour traiter les signalements. En particulier, l'adresse email pourra être utilisée par le site pour informer le consommateur du suivi de son signalement (système de notification). <br>Les informations relatives au signalement (c’est-à-dire la déclaration et les pièces jointes) sont conservées 5 ans par la DGCCRF pour les besoins des enquêtes et les suites éventuelles.
-          <br/><br/>L’utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles sur simple demande <a href="mailto:support@signal.conso.gouv.fr" title="support@signal.conso.gouv.fr (ouverture de la messagerie par défaut)"> par email. </a>
-          <br/><br/><b> Pendant la durée de l'expérimentation, SignalConso se réserve le droit de contacter les utilisateurs par email afin de recueillir leur avis sur le site et leur proposer des ateliers pour améliorer le service. L'utilisateur peut demander à ne pas être sollicité sur simple demande <a href="mailto:support@signal.conso.gouv.fr" title="support@signal.conso.gouv.fr (ouverture de la messagerie par défaut)"> par email. </a></b>
-          <br/><br/> Consultez le site cnil.fr pour plus d’informations sur vos droits. Si vous estimez, après nous avoir contactés, que vos droits « Informatique et Libertés » ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL.
+          Les informations recueillies dans le formulaire de SignalConso sont enregistrées dans un fichier informatisé
+          par
+          l’équipe SignalConso (DGCCRF) pour permettre aux professionnels de se corriger et permettre à la DGCCRF de
+          suivre les signalements à des fins de contrôle.
+          La base légale du traitement est la mission de service public de la DGCCRF, habilitée à contrôler et
+          sanctionner
+          les manquements relatifs au code de la consommation (L511-3 Code Conso et L450-1 Code Commerce)
+          <br/>Les informations demandées lors du dépôt du signalement sont nécessaires pour traiter les signalements.
+          En
+          particulier, l'adresse email pourra être utilisée par le site pour informer le consommateur du suivi de son
+          signalement (système de notification). <br>Les informations relatives au signalement (c’est-à-dire la
+          déclaration et les pièces jointes) sont conservées 5 ans par la DGCCRF pour les besoins des enquêtes et les
+          suites éventuelles.
+          <br/><br/>L’utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses
+          données personnelles sur simple demande <a href="mailto:support@signal.conso.gouv.fr"
+                                                     title="support@signal.conso.gouv.fr (ouverture de la messagerie par défaut)">
+          par email. </a>
+          <br/><br/><b> Pendant la durée de l'expérimentation, SignalConso se réserve le droit de contacter les
+          utilisateurs par email afin de recueillir leur avis sur le site et leur proposer des ateliers pour améliorer
+          le
+          service. L'utilisateur peut demander à ne pas être sollicité sur simple demande <a
+            href="mailto:support@signal.conso.gouv.fr"
+            title="support@signal.conso.gouv.fr (ouverture de la messagerie par défaut)"> par email. </a></b>
+          <br/><br/> Consultez le site cnil.fr pour plus d’informations sur vos droits. Si vous estimez, après nous
+          avoir
+          contactés, que vos droits « Informatique et Libertés » ne sont pas respectés, vous pouvez adresser une
+          réclamation à la CNIL.
 
         </p>
 
         <hr>
 
         <h2>Existe-t-il un suivi de dossier ?</h2>
-        <p>SignalConso ne propose pas de suivi personnalisé des dossiers. Les signalements sont traités de manière collective.</p>
+        <p>SignalConso ne propose pas de suivi personnalisé des dossiers. Les signalements sont traités de manière
+          collective.</p>
 
         <hr>
 
         <h2>Quel est le risque en cas de dénonciation mensongère ?</h2>
         <p>
-          L’article 226-10 du Code Pénal dispose que "la dénonciation, effectuée par tout moyen et dirigée contre une personne déterminée, d'un fait qui est de nature à entraîner des sanctions judiciaires, administratives ou disciplinaires et que l'on sait totalement ou partiellement inexact, lorsqu'elle est adressée soit à un officier de justice ou de police administrative ou judiciaire, soit à une autorité ayant le pouvoir d'y donner suite ou de saisir l'autorité compétente, soit aux supérieurs hiérarchiques ou à l'employeur de la personne dénoncée, est punie de cinq ans d'emprisonnement et de 45 000 € d'amende."
-          <br/>Le détournement du site de signalement pour effectuer des dénonciations mensongères fera l'objet de poursuites judiciaires.
+          L’article 226-10 du Code Pénal dispose que "la dénonciation, effectuée par tout moyen et dirigée contre une
+          personne déterminée, d'un fait qui est de nature à entraîner des sanctions judiciaires, administratives ou
+          disciplinaires et que l'on sait totalement ou partiellement inexact, lorsqu'elle est adressée soit à un
+          officier
+          de justice ou de police administrative ou judiciaire, soit à une autorité ayant le pouvoir d'y donner suite ou
+          de saisir l'autorité compétente, soit aux supérieurs hiérarchiques ou à l'employeur de la personne dénoncée,
+          est
+          punie de cinq ans d'emprisonnement et de 45 000 € d'amende."
+          <br/>Le détournement du site de signalement pour effectuer des dénonciations mensongères fera l'objet de
+          poursuites judiciaires.
         </p>
 
         <hr>
 
         <h2>Mentions légales</h2>
         <p>
-          L'édition du site https://signal.conso.gouv.fr est assurée par la Direction générale de la Concurrence, de la Consommation et de la Répression des fraudes  (DGCCRF), située au 59 Boulevard Vincent Auriol 75013 Paris.
-          <br/>L'hébergeur du site https://signal.conso.gouv.fr est la société Clever Cloud dont le siège social est situé 3 rue de l’Allier 44000 Nantes.
+          L'édition du site https://signal.conso.gouv.fr est assurée par la Direction générale de la Concurrence, de la
+          Consommation et de la Répression des fraudes (DGCCRF), située au 59 Boulevard Vincent Auriol 75013 Paris.
+          <br/>L'hébergeur du site https://signal.conso.gouv.fr est la société Clever Cloud dont le siège social est
+          situé
+          3 rue de l’Allier 44000 Nantes.
         </p>
 
         <hr>
 
         <h2>Propriété intellectuelle</h2>
         <p>
-          Les marques, logos, signes et tout autre contenu du site font l'objet d'une protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur.
+          Les marques, logos, signes et tout autre contenu du site font l'objet d'une protection par le Code de la
+          propriété intellectuelle et plus particulièrement par le droit d'auteur.
         </p>
       </div>
       <ng-template #cguPro>
         <div tabindex="0" role="tabpanel" id="pro-panel" aria-labelledby="pro-tab">
 
           <p>
-            Les conditions générales d'utilisation doivent être acceptées par le professionnel afin d’utiliser le site SignalConso.
+            Les conditions générales d'utilisation doivent être acceptées par le professionnel afin d’utiliser le site
+            SignalConso.
           </p>
 
           <h2>Gratuité de la plate-forme SignalConso</h2>
           <p>
             Le site est accessible gratuitement aux professionnels.
-            <br />
-            Si vous recevez une sollicitation vous réclamant une somme d’argent dans le cadre de SignalConso, refusez la proposition et alertez rapidement la DIRECCTE ou la DDPP de votre secteur.
-            <br />
-            Coordonnées disponibles ici: <a href="https://www.economie.gouv.fr/dgccrf/coordonnees-des-DDPP-et-DDCSPP" target="_blank" title="coordonnées des DDPP et DDCSPP (nouvelle fenêtre)">https://www.economie.gouv.fr/dgccrf/coordonnees-des-DDPP-et-DDCSPP</a>
+            <br/>
+            Si vous recevez une sollicitation vous réclamant une somme d’argent dans le cadre de SignalConso, refusez la
+            proposition et alertez rapidement la DIRECCTE ou la DDPP de votre secteur.
+            <br/>
+            Coordonnées disponibles ici: <a href="https://www.economie.gouv.fr/dgccrf/coordonnees-des-DDPP-et-DDCSPP"
+                                            target="_blank" title="coordonnées des DDPP et DDCSPP (nouvelle fenêtre)">https://www.economie.gouv.fr/dgccrf/coordonnees-des-DDPP-et-DDCSPP</a>
           </p>
 
           <hr>
 
           <h2>Objections quant au signalement déposé</h2>
           <p>
-            Si vous contestez le signalement qui a été déposé, vous pouvez le notifier directement dans votre espace professionnel.
-            <br /> Votre réponse sera transmise au consommateur et à la DGCCRF. Un second espace de réponse permet d'apporter des éléments à la connaissance de la DGCCRF seulement. Vous pouvez y joindre des pièces jointes.
-            <br /> <b>Pour rappel, ce sont les constatations effectuées par les enquêteurs lors d’un contrôle qui font foi.</b>
+            Si vous contestez le signalement qui a été déposé, vous pouvez le notifier directement dans votre espace
+            professionnel.
+            <br/> Votre réponse sera transmise au consommateur et à la DGCCRF. Un second espace de réponse permet
+            d'apporter des éléments à la connaissance de la DGCCRF seulement. Vous pouvez y joindre des pièces jointes.
+            <br/> <b>Pour rappel, ce sont les constatations effectuées par les enquêteurs lors d’un contrôle qui font
+            foi.</b>
           </p>
 
           <hr>
@@ -135,54 +182,78 @@
           <h2>Prise de contact avec le consommateur</h2>
           <p>
             Si le consommateur a souhaité vous transférer ses coordonnées, vous pouvez le contacter.
-            Ce contact doit être courtois et être fait uniquement dans le cadre du signalement. Il a notamment pour but de récupérer des informations manquantes et traiter si besoin le litige.
-            <br />
+            Ce contact doit être courtois et être fait uniquement dans le cadre du signalement. Il a notamment pour but
+            de
+            récupérer des informations manquantes et traiter si besoin le litige.
+            <br/>
             <b> Il est interdit d’utiliser les coordonnées du consommateur à des fins de prospections commerciales.
-            <br />
-            Il est interdit d’intimider ou de harceler le consommateur afin de lui faire retirer son signalement.</b>
-            <br />Tout abus pourra entraîner des poursuites judiciaires.
+              <br/>
+              Il est interdit d’intimider ou de harceler le consommateur afin de lui faire retirer son signalement.</b>
+            <br/>Tout abus pourra entraîner des poursuites judiciaires.
           </p>
 
           <hr>
 
           <h2>Données personnelles</h2>
           <p>
-            Les informations recueillies dans le formulaire de SignalConso sont enregistrées dans un fichier informatisé par l’équipe SignalConso (DGCCRF) pour permettre aux professionnels de se corriger et permettre à la DGCCRF de suivre les signalements à des fins de contrôle.
-            La base légale du traitement est la mission de service public de la DGCCRF, habilitée à contrôler et sanctionner les manquements relatifs au code de la consommation (L511-3 Code Conso et L450-1 Code Commerce)
-            <br/>Les informations demandées lors du dépôt du signalement sont nécessaires pour traiter les signalements. En particulier, l'adresse email pourra être utilisée par le site pour informer le consommateur du suivi de son signalement (système de notification). <br>Les informations relatives au signalement (c’est-à-dire la déclaration et les pièces jointes) sont conservées 5 ans par la DGCCRF pour les besoins des enquêtes et les suites éventuelles.
-            <br/><br/>L’utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles sur simple demande <a href="mailto:support@signal.conso.gouv.fr" title="support@signal.conso.gouv.fr (ouverture de la messagerie par défaut)"> par email. </a>
-            <br/><br/> Consultez le site cnil.fr pour plus d’informations sur vos droits. Si vous estimez, après nous avoir contactés, que vos droits « Informatique et Libertés » ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL.
-         </p>
+            Les informations recueillies dans le formulaire de SignalConso sont enregistrées dans un fichier informatisé
+            par l’équipe SignalConso (DGCCRF) pour permettre aux professionnels de se corriger et permettre à la DGCCRF
+            de
+            suivre les signalements à des fins de contrôle.
+            La base légale du traitement est la mission de service public de la DGCCRF, habilitée à contrôler et
+            sanctionner les manquements relatifs au code de la consommation (L511-3 Code Conso et L450-1 Code Commerce)
+            <br/>Les informations demandées lors du dépôt du signalement sont nécessaires pour traiter les signalements.
+            En particulier, l'adresse email pourra être utilisée par le site pour informer le consommateur du suivi de
+            son
+            signalement (système de notification). <br>Les informations relatives au signalement (c’est-à-dire la
+            déclaration et les pièces jointes) sont conservées 5 ans par la DGCCRF pour les besoins des enquêtes et les
+            suites éventuelles.
+            <br/><br/>L’utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses
+            données personnelles sur simple demande <a href="mailto:support@signal.conso.gouv.fr"
+                                                       title="support@signal.conso.gouv.fr (ouverture de la messagerie par défaut)">
+            par email. </a>
+            <br/><br/> Consultez le site cnil.fr pour plus d’informations sur vos droits. Si vous estimez, après nous
+            avoir contactés, que vos droits « Informatique et Libertés » ne sont pas respectés, vous pouvez adresser une
+            réclamation à la CNIL.
+          </p>
 
           <hr>
 
           <h2>Dénonciation mensongère</h2>
           <p>
-            L’article 226-10 du Code Pénal dispose que "la dénonciation, effectuée par tout moyen et dirigée contre une personne déterminée,
-            d'un fait qui est de nature à entraîner des sanctions judiciaires, administratives ou disciplinaires et que l'on sait totalement ou partiellement inexact,
-            lorsqu'elle est adressée soit à un officier de justice ou de police administrative ou judiciaire, soit à une autorité ayant le pouvoir d'y donner suite ou
-            de saisir l'autorité compétente, soit aux supérieurs hiérarchiques ou à l'employeur de la personne dénoncée, est punie de cinq ans d'emprisonnement et de 45 000 € d'amende."
-            <br />
-            <b>Le détournement du site de signalement pour effectuer des dénonciations mensongères fera l'objet de poursuites judiciaires.</b>
+            L’article 226-10 du Code Pénal dispose que "la dénonciation, effectuée par tout moyen et dirigée contre une
+            personne déterminée,
+            d'un fait qui est de nature à entraîner des sanctions judiciaires, administratives ou disciplinaires et que
+            l'on sait totalement ou partiellement inexact,
+            lorsqu'elle est adressée soit à un officier de justice ou de police administrative ou judiciaire, soit à une
+            autorité ayant le pouvoir d'y donner suite ou
+            de saisir l'autorité compétente, soit aux supérieurs hiérarchiques ou à l'employeur de la personne dénoncée,
+            est punie de cinq ans d'emprisonnement et de 45 000 € d'amende."
+            <br/>
+            <b>Le détournement du site de signalement pour effectuer des dénonciations mensongères fera l'objet de
+              poursuites judiciaires.</b>
           </p>
 
           <hr>
 
           <h2>Mentions légales</h2>
           <p>
-            L'édition du site https://signal.conso.gouv.fr est assurée par la Direction générale de la Concurrence, de la Consommation et de la Répression des fraudes  (DGCCRF), située au 59 Boulevard Vincent Auriol 75013 Paris.
-            <br/>L'hébergeur du site https://signal.conso.gouv.fr est la société Clever Cloud dont le siège social est situé 3 rue de l’Allier 44000 Nantes.
+            L'édition du site https://signal.conso.gouv.fr est assurée par la Direction générale de la Concurrence, de
+            la
+            Consommation et de la Répression des fraudes (DGCCRF), située au 59 Boulevard Vincent Auriol 75013 Paris.
+            <br/>L'hébergeur du site https://signal.conso.gouv.fr est la société Clever Cloud dont le siège social est
+            situé 3 rue de l’Allier 44000 Nantes.
           </p>
 
           <hr>
 
-            <h2>Propriété intellectuelle</h2>
+          <h2>Propriété intellectuelle</h2>
           <p>
-            Les marques, logos, signes et tout autre contenu du site font l'objet d'une protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur.
+            Les marques, logos, signes et tout autre contenu du site font l'objet d'une protection par le Code de la
+            propriété intellectuelle et plus particulièrement par le droit d'auteur.
           </p>
         </div>
       </ng-template>
-
-    </div>
-  </section>
-</main>
+    </app-panel-body>
+  </app-panel>
+</app-page>
