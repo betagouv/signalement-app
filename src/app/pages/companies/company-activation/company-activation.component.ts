@@ -10,7 +10,7 @@ import {
   EventCategories
 } from '../../../services/analytics.service';
 import { Router } from '@angular/router';
-import pages from '../../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../../assets/data/pages';
 import { User } from '../../../model/AuthUser';
 
 @Component({
@@ -46,8 +46,8 @@ export class CompanyActivationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.account.activation.title);
-    this.meta.updateTag({ name: 'description', content: pages.account.activation.description });
+    // this.titleService.setTitle(pages.account.activation.title);
+    // this.meta.updateTag({ name: 'description', content: pages.account.activation.description });
     this.authenticationService.getConnectedUser().subscribe(_ => {
       this.connectedUser = _;
       this.emailCtrl.setValue(_?.email);

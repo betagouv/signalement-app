@@ -1,13 +1,10 @@
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Report, ReportStatus } from '../../../model/Report';
 import { ReportFilter, reportFilter2QueryString, reportFilterFromQueryString } from '../../../model/ReportFilter';
-import { Meta, Title } from '@angular/platform-browser';
 import { ReportService } from '../../../services/report.service';
 import { ConstantService } from '../../../services/constant.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import pages from '../../../../assets/data/pages.json';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageEvent } from '@angular/material/paginator';
 import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, startWith, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -28,12 +25,9 @@ export class ReportListProComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) protected platformId: Object,
-    private titleService: Title,
-    private meta: Meta,
     private reportService: ReportService,
     private constantService: ConstantService,
     private companyAccessesService: CompanyAccessesService,
-    private localeService: BsLocaleService,
     private router: Router,
     private route: ActivatedRoute) {
   }
@@ -136,10 +130,6 @@ export class ReportListProComponent implements OnInit {
     : this.columns.filter(_ => _ !== 'siret' && _ !== 'postalCode')));
 
   ngOnInit() {
-    this.titleService.setTitle(pages.reports.list.title);
-    this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
-    this.localeService.use('fr');
-
     const parsedQueryString = compose(
       Utils.cleanObject,
       this.getFormFromQueryString,

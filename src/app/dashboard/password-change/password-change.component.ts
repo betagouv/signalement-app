@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../assets/data/pages';
 import { AccountEventActions, AnalyticsService, EventCategories } from '../../services/analytics.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -45,8 +45,8 @@ export class PasswordChangeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.account.changePassword.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.account.changePassword.description });
+    // this.titleService.setTitle(pages.secured.account.changePassword.title);
+    // this.meta.updateTag({ name: 'description', content: pages.secured.account.changePassword.description });
   }
 
   submitForm() {

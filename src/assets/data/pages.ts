@@ -177,5 +177,9 @@ export const pageDefinitions = {
   secured_admin: {
     title: 'Admin - SignalConso',
     description: 'Invitation à rejoindre SignalConso (DGCCRF)'
+  },
+  anomaly: {
+    title: 'Arborescence',
+    description: 'Arborescence du dépot d\'un signalement'
   }
 };

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../../assets/data/pages';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { accessLevels } from '../common';
@@ -35,8 +35,8 @@ export class CompanyInvitationComponent implements OnInit {
 
   ngOnInit() {
     this.siret = this.route.snapshot.paramMap.get('siret') ?? undefined;
-    this.titleService.setTitle(`Entreprise ${this.siret} - ${pages.companies.companyInvitation.title}`);
-    this.meta.updateTag({ name: 'description', content: pages.companies.companyInvitation.description });
+    // this.titleService.setTitle(`Entreprise ${this.siret} - ${pages.companies.companyInvitation.title}`);
+    // this.meta.updateTag({ name: 'description', content: pages.companies.companyInvitation.description });
   }
 
   submitForm() {

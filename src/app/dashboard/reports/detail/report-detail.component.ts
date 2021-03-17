@@ -16,7 +16,7 @@ import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportRes
 import { HttpResponse } from '@angular/common/http';
 import { CompanySearchResult } from '../../../model/Company';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../../assets/data/pages';
 
 @Component({
   selector: 'app-report-detail',
@@ -76,8 +76,8 @@ export class ReportDetailComponent implements OnInit {
 
 
   ngOnInit() {
-    this.titleService.setTitle(pages.reports.detail.title);
-    this.meta.updateTag({ name: 'description', content: pages.reports.detail.description });
+    // this.titleService.setTitle(pages.reports.detail.title);
+    // this.meta.updateTag({ name: 'description', content: pages.reports.detail.description });
 
     this.loading = true;
     this.loadingError = false;

@@ -3,7 +3,7 @@ import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
+import { pageDefinitions } from '../../../../assets/data/pages';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -23,9 +23,10 @@ export class BreadcrumbComponent implements OnInit {
               private meta: Meta) { }
 
   ngOnInit() {
-    if (pages.report[this.step.toLowerCase()]) {
-      this.titleService.setTitle(`Étape ${this.getStepNumber(this.step)} : ${pages.report[this.step.toLowerCase()].title}`);
-      this.meta.updateTag({ name: 'description', content: pages.report[this.step.toLowerCase()].title });
+    const pageDefinition = pageDefinitions['report_' + this.step.toLowerCase()];
+    if (pageDefinition) {
+      this.titleService.setTitle(`Étape ${this.getStepNumber(this.step)} : ${pageDefinition.title}`);
+      this.meta.updateTag({ name: 'description', content: pageDefinition.title });
     }
   }
 

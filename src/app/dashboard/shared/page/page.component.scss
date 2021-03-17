@@ -1,6 +1,11 @@
 @import "../../../../theme/variables";
 
 :host {
+  background: $lightest-grey;
+  display: block;
+}
+
+main {
   display: block;
   margin: 0 auto;
   padding: spacing(2);

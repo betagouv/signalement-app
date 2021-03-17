@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { NbReportsGroupByCompany } from '../../../model/NbReportsGroupByCompany';
 import { isPlatformBrowser, Location } from '@angular/common';
-import pages from '../../../../assets/data/pages.json';
 import { Roles, User } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
@@ -55,8 +53,6 @@ export class CompaniesAdminComponent implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
               private location: Location,
               private authenticationService: AuthenticationService,
               private companyAccessesService: CompanyAccessesService,
@@ -68,11 +64,6 @@ export class CompaniesAdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.localeService.use('fr');
-
-    this.titleService.setTitle(pages.companies.companiesAdmin.title);
-    this.meta.updateTag({ name: 'description', content: pages.companies.companiesAdmin.description });
-
     combineLatest([this.route.url, this.authenticationService.user]).pipe(take(1))
       // @ts-ignore TODO check why user is of type unknown
       .subscribe(([url, user]: [UrlSegment[], User]) => {

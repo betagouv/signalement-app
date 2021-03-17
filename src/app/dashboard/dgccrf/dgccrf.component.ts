@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../assets/data/pages';
 
 @Component({
   selector: 'app-how',
@@ -13,8 +13,8 @@ export class DGCCRFComponent implements OnInit {
               private meta: Meta) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.dgccrf.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.dgccrf.description });
+    // this.titleService.setTitle(pages.secured.dgccrf.title);
+    // this.meta.updateTag({ name: 'description', content: pages.secured.dgccrf.description });
   }
 
 }

@@ -6,7 +6,7 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
-import pages from '../../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../../assets/data/pages';
 import { Meta, Title } from '@angular/platform-browser';
 import { User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -37,8 +37,8 @@ export class CategoryComponent implements OnInit {
               private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.default.title);
-    this.meta.updateTag({ name: 'description', content: pages.default.description });
+    this.titleService.setTitle(pageDefinitions.default.title);
+    this.meta.updateTag({ name: 'description', content: pageDefinitions.default.description });
 
     this.authenticationService.user.subscribe(user => {
       this.user = user;

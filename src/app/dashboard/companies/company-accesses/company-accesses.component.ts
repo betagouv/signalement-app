@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../../assets/data/pages';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -45,14 +45,14 @@ export class CompanyAccessesComponent implements OnInit {
     this.localeService.use('fr');
     const siretParam = this.route.params.pipe(map(p => p.siret));
 
-    this.authenticationService.user.subscribe((user: User) => {
+    this.authenticationService.user.subscribe((user: User | undefined) => {
       this.user = user;
     });
 
     siretParam.subscribe(siret => {
       this.siret = siret;
-      this.titleService.setTitle(`Entreprise ${this.siret} - ${pages.companies.companyAccesses.title}`);
-      this.meta.updateTag({ name: 'description', content: pages.companies.companyAccesses.description });
+      this.titleService.setTitle(`Entreprise ${this.siret} - ${pageDefinitions.companies_companyAccesses.title}`);
+      this.meta.updateTag({ name: 'description', content: pageDefinitions.companies_companyAccesses.description });
       this.refreshAccesses();
       this.refreshPendingTokens();
     });

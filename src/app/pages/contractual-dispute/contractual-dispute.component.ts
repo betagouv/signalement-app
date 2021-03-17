@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
+import {pageDefinitions} from '../../../assets/data/pages';
 import { isPlatformBrowser } from '@angular/common';
 import { AnalyticsService, ContractualDisputeActions, ContractualDisputeNames, EventCategories, } from '../../services/analytics.service';
 
@@ -19,8 +19,8 @@ export class ContractualDisputeComponent implements OnInit {
               private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.contractualDispute.title);
-    this.meta.updateTag({ name: 'description', content: pages.contractualDispute.description });
+    // this.titleService.setTitle(pages.contractualDispute.title);
+    // this.meta.updateTag({ name: 'description', content: pages.contractualDispute.description });
     this.trackCurrentStep();
   }
 
