@@ -15,8 +15,6 @@ import { Consumer } from '../../../model/Consumer';
 import { EventActionValues, ReportAction, ReportEvent, ReportResponse, ReportResponseTypes } from '../../../model/ReportEvent';
 import { HttpResponse } from '@angular/common/http';
 import { CompanySearchResult } from '../../../model/Company';
-import { Meta, Title } from '@angular/platform-browser';
-import {pageDefinitions} from '../../../../assets/data/pages';
 
 @Component({
   selector: 'app-report-detail',
@@ -63,22 +61,17 @@ export class ReportDetailComponent implements OnInit {
   detailCtrl?: FormControl;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-    private titleService: Title,
-    private meta: Meta,
     public formBuilder: FormBuilder,
     private reportService: ReportService,
     private eventService: EventService,
     private fileUploaderService: FileUploaderService,
     private modalService: BsModalService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private platformLocation: PlatformLocation) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private platformLocation: PlatformLocation) { }
 
 
   ngOnInit() {
-    // this.titleService.setTitle(pages.reports.detail.title);
-    // this.meta.updateTag({ name: 'description', content: pages.reports.detail.description });
-
     this.loading = true;
     this.loadingError = false;
     this.platformLocation.onPopState(() => {

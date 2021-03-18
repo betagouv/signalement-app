@@ -52,8 +52,8 @@ export class ProblemComponent implements OnInit {
             this.draftReport = new DraftReport();
             this.draftReport.category = anomaly.category;
             this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
-            // this.titleService.setTitle(`${anomaly.category} - SignalConso`);
-            // this.meta.updateTag({ name: 'description', content: anomaly.description });
+            this.titleService.setTitle(`${anomaly.category} - SignalConso`);
+            this.meta.updateTag({ name: 'description', content: anomaly.description });
           }
           return this.reportStorageService.retrieveReportInProgress();
         }

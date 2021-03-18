@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import {
   ActionResultNames,
-  AnalyticAction,
   AnalyticsService,
   CompanyAccessEventActions,
   EventCategories
 } from '../../../services/analytics.service';
 import { Router } from '@angular/router';
-import {pageDefinitions} from '../../../../assets/data/pages';
 import { User } from '../../../model/AuthUser';
 
 @Component({
@@ -38,16 +35,12 @@ export class CompanyActivationComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private titleService: Title,
-    private meta: Meta,
     private authenticationService: AuthenticationService,
     private analyticsService: AnalyticsService,
     private router: Router) {
   }
 
   ngOnInit() {
-    // this.titleService.setTitle(pages.account.activation.title);
-    // this.meta.updateTag({ name: 'description', content: pages.account.activation.description });
     this.authenticationService.getConnectedUser().subscribe(_ => {
       this.connectedUser = _;
       this.emailCtrl.setValue(_?.email);
@@ -62,7 +55,7 @@ export class CompanyActivationComponent implements OnInit {
     if (!this.activationForm.valid) {
       this.showErrors = true;
     } else {
-      const handleError = (action: AnalyticAction) => {
+      const handleError = (action: string) => {
         this.loading = false;
         this.analyticsService.trackEvent(EventCategories.companyAccess, action, ActionResultNames.fail);
         this.activationError = true;

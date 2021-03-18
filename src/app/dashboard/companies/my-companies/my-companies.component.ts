@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import {pageDefinitions} from '../../../../assets/data/pages';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { CompanyAccessLevel } from '../../../model/Company';
@@ -29,8 +28,6 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
               private companyAccessesService: CompanyAccessesService) { }
 
   ngOnInit() {
-    // this.titleService.setTitle(pages.companies.myCompanies.title);
-    // this.meta.updateTag({ name: 'description', content: pages.companies.myCompanies.description });
     this.authenticationService.user
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((user: User) => {
