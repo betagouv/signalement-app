@@ -17,12 +17,16 @@ export interface ATIPageInfo {
 export class AtInternetService {
 
   constructor() {
-    this.atTag = new ATInternet.Tracker.Tag();
+    try {
+      this.atTag = new ATInternet.Tracker.Tag();
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  private atTag: any;
+  private atTag?: any;
 
   readonly send = (pageInfo: ATIPageInfo) => {
-    this.atTag.page.send(pageInfo);
+    this.atTag?.page.send(pageInfo);
   };
 }
