@@ -41,7 +41,7 @@ export function app() {
     server.use(function(req, res, next) {
       res.setHeader('Content-Security-Policy',
         `default-src 'self' stats.data.gouv.fr sentry.data.gouv.fr entreprise.data.gouv.fr ${process.env.API_BASE_URL} 'unsafe-inline';  \
-       script-src 'self' stats.data.gouv.fr sentry.data.gouv.fr entreprise.data.gouv.fr 'sha256-WWHGLj0eoGsKPEGMnTqjS4sH0zDInMRPKN098NNWH4E='; \
+       script-src 'self' stats.data.gouv.fr sentry.data.gouv.fr tag.aticdn.net entreprise.data.gouv.fr 'sha256-WWHGLj0eoGsKPEGMnTqjS4sH0zDInMRPKN098NNWH4E='; \
        img-src 'self' *.data.gouv.fr data: *.numerique.gouv.fr; \
        frame-src 'self' stats.data.gouv.fr *.youtube-nocookie.com; \
        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
