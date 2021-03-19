@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanySearchResult, DraftCompany } from '../../../../model/Company';
 import { RendererService } from '../../../../services/renderer.service';
@@ -15,6 +15,8 @@ export class CompanySearchByNameComponent implements OnInit {
 
   @ViewChild('identResult')
   private identResult: ElementRef;
+
+  @Input() isVendor: boolean;
 
   @Output() complete = new EventEmitter<DraftCompany>();
   @Output() changeIdentificationKind = new EventEmitter<IdentificationKinds>();

@@ -5,7 +5,7 @@
   </h2>
 
   <div class="form__group mt-4">
-    <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne de l'entreprise signalée (obligatoire)
+    <label for="searchInput" [class]="hasError(searchCtrl) ? 'error' : ''">Nom ou enseigne {{isVendor ? 'du vendeur signalé' : 'de l\'entreprise signalée'}} (obligatoire)
     </label>
     <input type="text" class="form-control" formControlName="search" name="search" id="searchInput" placeholder="ex : boulangerie Petit Jean"/>
   </div>
@@ -21,17 +21,17 @@
   </div>
   <div>
     <small class="form-text text-muted" id="postalCode-description">
-      Vous pouvez identifier des entreprises privées établies en France uniquement.
+      Vous pouvez identifier {{isVendor ? 'des vendeurs' : 'des entreprises privées établies'}} en France uniquement.
     </small>
   </div>
-  <div>
+  <div *ngIf="!isVendor">
     <span class="link" (click)="switchToForeignCountry()" tabindex="0">
       <small>Vous souhaitez signaler une entreprise établie à l'étranger ?</small>
     </span>
   </div>
   <div class="notification error mt-4" *ngIf="showErrors && searchForm.invalid">
     <div *ngIf="searchCtrl.hasError('required')">
-      Veuillez renseigner le nom de l'entreprise.
+      Veuillez renseigner le nom {{isVendor ? 'du vendeur' : 'de l\'entreprise.'}}
     </div>
     <span *ngIf="searchPostalCodeCtrl.hasError('required')">
       Veuillez renseigner le code postal.
@@ -52,13 +52,13 @@
     <hr />
 
     <h2 class="mb-4 font-weight-bold">
-      Sélectionnez l'entreprise
+      Sélectionnez {{isVendor ? 'le vendeur' : 'l\'entreprise'}}
     </h2>
 
     <app-company-search-results [companySearchResults]="companySearchResults" (select)="selectCompany($event)"></app-company-search-results>
 
     <div class="note mt-1">
-      L’entreprise n’apparaît pas ? Modifiez votre recherche ou <span class="link" (click)="switchToIdentByIdentity()" tabindex="0">recherchez avec les identifiants de l'entreprise</span>.
+      {{isVendor ? 'Le vendeur' : 'L\'entreprise'}} n’apparaît pas ? Modifiez votre recherche ou <span class="link" (click)="switchToIdentByIdentity()" tabindex="0">recherchez avec les identifiants {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}</span>.
     </div>
 
     <hr *ngIf="selectedCompany"/>
@@ -72,17 +72,20 @@
     <p>
       {{searchWarning}}
     </p>
-    Veuillez modifier votre recherche ou <button class="link" (click)="switchToIdentByIdentity()">rechercher avec les identifiants de l'entreprise</button>.
+    Veuillez modifier votre recherche ou <button class="link" (click)="switchToIdentByIdentity()">rechercher avec les identifiants {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}</button>.
   </div>
 
   <div class="notification error mt-4" *ngIf="searchError">
     <p>
       {{searchError}}
     </p>
-    Veuillez réessayer ou <span class="link" (click)="switchToIdentByIdentity()">rechercher avec les identifiants de l'entreprise</span>.
+    Veuillez réessayer ou <span class="link" (click)="switchToIdentByIdentity()">rechercher avec les identifiants {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}</span>.
    </div>
  </div>
 
 <ng-template #foreignCountry>
-  <app-company-foreign-country (complete)="selectCompany($event, true)" [forceForeign]="true"></app-company-foreign-country>
+  <app-company-foreign-country [isVendor]="isVendor"
+                               (complete)="selectCompany($event, true)"
+                               [forceForeign]="true">
+  </app-company-foreign-country>
 </ng-template>

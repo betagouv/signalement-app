@@ -6,7 +6,7 @@
 
   <div class="form__group mt-4">
     <label for="identity" [class]="hasError(identityCtrl) ? 'error' : ''">
-      Numéro SIRET ou SIREN ou RCS de l'entreprise (obligatoire)
+      Numéro SIRET ou SIREN ou RCS {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} (obligatoire)
     </label>
 
     <div class="note mb-1" id="siret-description">
@@ -14,7 +14,7 @@
         A quoi correspondent ces identifiants ?
       </a>
       <div class="collapse" id="collapseWhat" aria-labelledby="collapseWhat-toggle" role="region">
-        SIRET, SIREN et RCS sont des identifiants de l'entreprise.
+        SIRET, SIREN et RCS sont des identifiants {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}.
         <br/>Le SIRET est composé de 14 chiffres, le SIREN est composé de 9 chiffres.
         <br/>Le RCS est composé de :
         <ul>
@@ -35,7 +35,7 @@
         <ul class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
           <li>
             <a data-toggle="collapse" href="#collapseDoc" id="collapseDoc-toggle" aria-expanded="false" aria-controls="collapseDoc">
-              L'entreprise vous a remis un document ?
+              {{isVendor ? 'Le vendeur' : 'L\'entreprise'}} vous a remis un document ?
             </a>
             <div class="collapse" id="collapseDoc" aria-labelledby="collapseDoc-toggle" role="region">
               Vous pourrez probablement retrouver l'un de ces identifiants sur :
@@ -46,7 +46,7 @@
                   </a>
                   <div class="collapse" id="collapseTicket" aria-labelledby="collapseTicket-toggle" role="region">
                     <div class="card card-body">
-                      Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                      Il y a plusieurs données chiffrées sur ce ticket mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} et le montant de votre achat.
                     </div>
                   </div>
                 </li>
@@ -56,7 +56,7 @@
                   </a>
                   <div class="collapse" id="collapseEstimate" aria-labelledby="collapseEstimate-toggle" role="region">
                     <div class="card card-body">
-                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} (généralement en haut à gauche).
                     </div>
                   </div>
                 </li>
@@ -66,19 +66,19 @@
                   </a>
                   <div class="collapse" id="collapseContract" aria-labelledby="collapseContract-toggle" role="region">
                     <div class="card card-body">
-                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} (généralement en haut à gauche).
                     </div>
                   </div>
                 </li>
                 <li>
-                  Tout autre document ou échange avec l'entreprise (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
+                  Tout autre document ou échange avec {{isVendor ? 'le vendeur' : 'l\'entreprise'}} (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
                 </li>
               </ul>
             </div>
           </li>
           <li>
             <a data-toggle="collapse" href="#collapseNoDoc" id="collapseNoDoc-toggle" aria-expanded="false" aria-controls="collapseNoDoc">
-              Vous n’avez pas de documents émanants de l'entreprise ?
+              Vous n’avez pas de documents émanants {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} ?
             </a>
             <div class="collapse" id="collapseNoDoc" aria-labelledby="collapseNoDoc-toggle" role="region">
               Faites une recherche en ligne sur :
@@ -95,7 +95,7 @@
             </a>
             <div class="collapse" id="collapseNotFound" aria-labelledby="collapseNotFound-toggle" role="region">
               Utilisez <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=professionnel" target="_blank" title="economie.gouv.fr (nouvelle fenêtre)">le formulaire en ligne DGCCRF</a>
-              <br />Ce formulaire ne nécessite pas d'identifiant de l'entreprise.
+              <br />Ce formulaire ne nécessite pas d'identifiant {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}.
             </div>
           </li>
         </ul>
@@ -108,7 +108,7 @@
         <ul class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
           <li>
             <a data-toggle="collapse" href="#collapseDoc" id="collapseDoc-toggle" aria-expanded="false" aria-controls="collapseDoc">
-              L'entreprise vous a remis un document ?
+              {{isVendor ? 'Le vendeur' : 'L\'entreprise'}} vous a remis un document ?
             </a>
             <div class="collapse" id="collapseDoc" aria-labelledby="collapseDoc-toggle" role="region">
               Vous pourrez probablement retrouver l'un de ces identifiants sur :
@@ -119,7 +119,7 @@
                   </a>
                   <div class="collapse" id="collapseTicket" aria-labelledby="collapseTicket-toggle" role="region">
                     <div class="card card-body">
-                      Il y a plusieurs données chiffrées sur cette facture mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse de l'entreprise et le montant de votre achat.
+                      Il y a plusieurs données chiffrées sur cette facture mais vous pouvez facilement trouver le SIRET (14 chiffres) ou le SIREN (9 chiffres) qui se situent en principe entre l’adresse {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} et le montant de votre achat.
                     </div>
                   </div>
                 </li>
@@ -129,7 +129,7 @@
                   </a>
                   <div class="collapse" id="collapseEstimate" aria-labelledby="collapseEstimate-toggle" role="region">
                     <div class="card card-body">
-                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} (généralement en haut à gauche).
                     </div>
                   </div>
                 </li>
@@ -139,19 +139,19 @@
                   </a>
                   <div class="collapse" id="collapseContract" aria-labelledby="collapseContract-toggle" role="region">
                     <div class="card card-body">
-                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse de l'entreprise (généralement en haut à gauche).
+                      Vous trouverez le plus souvent le SIRET (14 chiffres) ou le SIREN (9 chiffres) en-dessous de l’adresse {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} (généralement en haut à gauche).
                     </div>
                   </div>
                 </li>
                 <li>
-                  Tout autre document ou échange avec l'entreprise (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
+                  Tout autre document ou échange avec {{isVendor ? 'le vendeur' : 'l\'entreprise'}} (document publicitaire, signature à la fin d’un mail, grille des tarifs…).
                 </li>
               </ul>
             </div>
           </li>
           <li>
             <a data-toggle="collapse" href="#collapseNoDoc" id="collapseNoDoc-toggle" aria-expanded="false" aria-controls="collapseNoDoc">
-              Vous n’avez pas de document émanant de l'entreprise ?
+              Vous n’avez pas de document émanant {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} ?
             </a>
             <div class="collapse" id="collapseNoDoc" aria-labelledby="collapseNoDoc-toggle" role="region">
               Rendez-vous sur le site internet dans l'une des rubriques suivantes :
@@ -170,7 +170,7 @@
               Vous n’avez pas trouvé d'identifiant ?
             </a>
             <div class="collapse" id="collapseNotFound" aria-labelledby="collapseNotFound-toggle" role="region">
-              Sélectionner l'option <b>Je ne peux pas identifier l'entreprise</b> plus haut.
+              Sélectionner l'option <b>Je ne peux pas identifier {{isVendor ? 'le vendeur' : 'l\'entreprise'}}</b> plus haut.
             </div>
           </li>
         </ul>
@@ -181,7 +181,7 @@
 
   <div class="notification error mt-3" *ngIf="showErrorsByIdentity && searchByIdentityForm.invalid">
     <div *ngIf="identityCtrl.hasError('required')">
-      Veuillez renseigner le numéro SIRET de l'entreprise.
+      Veuillez renseigner le numéro SIRET {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}.
     </div>
     <div *ngIf="identityCtrl.hasError('pattern')">
       Le numéro SIRET doit être composé de 14 chiffres.
@@ -199,11 +199,11 @@
     <hr />
 
     <h2 class="mb-4 font-weight-bold">
-      Sélectionnez l'entreprise
+      Sélectionnez {{isVendor ? 'le vendeur' : 'l\'entreprise'}}
     </h2>
 
     <div class="note mb-1">
-      Si l'entreprise n'est pas celle recherchée, vous pouvez modifier votre recherche.
+      Si {{isVendor ? 'le vendeur' : 'l\'entreprise'}} n'est pas celle recherchée, vous pouvez modifier votre recherche.
     </div>
 
     <app-company-search-results [companySearchResults]="companySearchByIdentityResults" (select)="selectCompany($event)"></app-company-search-results>

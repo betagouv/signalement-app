@@ -100,6 +100,10 @@ export class DraftReport {
     return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
 
+  get isVendor() {
+    return this.tags?.indexOf(DangerousProductTag) !== -1;
+  }
+
   get isTransmittableToPro() {
     return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
   }

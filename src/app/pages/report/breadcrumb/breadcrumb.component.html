@@ -31,7 +31,7 @@
                  [attr.aria-current]="step === steps.Company" [attr.aria-label]="isStepAchieved(steps.Company) ? 'Étape l\'entreprise validée' : ''">
               <span class="step-number" [innerHTML]="displayedStep(steps.Company)"></span>
               <span class="d-lg-none">Étape {{getStepNumber(steps.Company)}} sur {{getStepNumber(steps.Confirmation)}} : </span>
-              <span>L'entreprise</span>
+              <span>{{draftReport.isVendor ? 'Le vendeur' : 'L\'entreprise'}}</span>
             </div>
             <img src="/assets/images/icon_next.png" alt=""/>
             <div class="{{getStepClass(steps.Consumer)}}" (click)="goToStep(steps.Consumer)"
