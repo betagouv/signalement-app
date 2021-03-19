@@ -2,6 +2,7 @@ import { Component, Inject, Injector, OnInit, PLATFORM_ID, ViewChild } from '@an
 import { Angulartics2Piwik } from 'angulartics2/piwik';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AtInternetService } from './services/at-internet.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,9 @@ export class AppComponent implements OnInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private injector: Injector,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private atInternetService: AtInternetService,
+              private activatedRoute: ActivatedRoute
+  ) {
 
     if (isPlatformBrowser(this.platformId)) {
       const angulartics2Piwik: Angulartics2Piwik = injector.get(Angulartics2Piwik);
@@ -27,6 +30,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
+        this.atInternetService.send({name: event.url.replace(/[^\w]/gi, '')});
         if (!this.activatedRoute.snapshot.fragment) {
           this.header.nativeElement.focus();
         } else if (this.activatedRoute.snapshot.fragment === 'content') {
