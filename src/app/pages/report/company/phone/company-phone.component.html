@@ -1,5 +1,5 @@
 <h2 class="mb-4 font-weight-bold">
-  Informations sur l'entreprise
+  Informations sur {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}
 </h2>
 
 <form [formGroup]="phoneForm" (submit)="submitPhone()" id="phoneForm">

@@ -1,6 +1,6 @@
 <ng-container *ngIf="websiteForm">
   <h2 class="mb-4 font-weight-bold">
-    Informations sur l'entreprise
+    Informations sur {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}
   </h2>
 
   <form [formGroup]="websiteForm" (submit)="searchCompanyByWebsite()" id="websiteForm">
@@ -38,13 +38,13 @@
     <hr/>
 
     <h2 class="mb-4 font-weight-bold">
-      Sélectionnez l'entreprise
+      Sélectionnez {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}
     </h2>
 
     <app-company-search-results [companySearchResults]="companySearchByUrlResults" (select)="selectCompany($event)"></app-company-search-results>
 
     <div class="note mt-1">
-      L’entreprise n’apparaît pas ?
+      {{draftReport.isVendor ? 'Le vendeur' : 'L\'entreprise'}} n’apparaît pas ?
     </div>
     <div>
       <button class="link p-0" (click)="changeWebsite()" aria-label="Modifier adresse du site internet">Corrigez</button> l'adresse du site internet et relancez votre recherche.
@@ -52,7 +52,7 @@
 
     <hr *ngIf="selectedCompany"/>
 
-    <ng-container *ngIf="selectedCompany?.kind === websiteKinds.Marketplace">
+    <ng-container *ngIf="selectedCompany?.kind === websiteKinds.MARKETPLACE">
 
       <div class="notification info">
         L'entreprise sélectionnée est une place de marché (marketplace), c'est à dire qu'elle propose des produits vendus par des tiers.

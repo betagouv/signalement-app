@@ -18,6 +18,7 @@ export class CompanySearchByIdentityComponent implements OnInit {
   private identByIdentityResult: ElementRef;
 
   @Input() companyKind: CompanyKinds;
+  @Input() isVendor: boolean;
 
   @Output() complete = new EventEmitter<DraftCompany>();
   @Output() loading = new EventEmitter<boolean>();
