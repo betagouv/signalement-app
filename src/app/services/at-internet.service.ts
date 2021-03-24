@@ -20,7 +20,7 @@ export class AtInternetService {
     try {
       this.atTag = new ATInternet.Tracker.Tag();
     } catch (e) {
-      console.log(e);
+      console.error(`Unable to load AT internet.`, e);
     }
   }
 
