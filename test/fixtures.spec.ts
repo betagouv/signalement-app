@@ -51,11 +51,10 @@ export const genViewableCompany = (): ViewableCompany => ({
   closed: false,
 });
 
-export function genUserAccess(siret?: string) {
+export function genCompanyAccessLevel(siret?: string) {
   return {
-    companySiret: siret ?? genSiret(),
-    companyName: randomstring.generate(),
-    companyAddress: randomstring.generate(),
+    ...genCompany(),
+    ...(siret ? {siret} : {}),
     level: oneOf(['admin', 'member'])
   };
 }

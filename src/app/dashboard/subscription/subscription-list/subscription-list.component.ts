@@ -30,7 +30,7 @@ export class SubscriptionListComponent {
       tags: [],
       countries: [],
       frequency: 'P7D'
-    }, true).subscribe();
+    }, { insertBefore: true }).subscribe();
   };
 
   readonly trackBy = (index: number, item: ApiSubscription) => item.id;

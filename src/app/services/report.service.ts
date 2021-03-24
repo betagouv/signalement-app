@@ -220,13 +220,13 @@ export class ReportService {
       subcategories: report.subcategories,
       tags: report.tags,
       detailInputValues: report.details,
-      company: Object.assign(<Company>{
+      company: {
         name: report.companyName,
         siret: report.companySiret,
         address: report.companyAddress,
         postalCode: report.companyPostalCode,
         country: report.companyCountry,
-      }),
+      },
       consumer: Object.assign(new Consumer(), {
         firstName: report.firstName,
         lastName: report.lastName,

@@ -15,11 +15,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CompanyInvitationComponent } from './company-invitation/company-invitation.component';
 import { CompanyAccessesComponent } from './company-accesses/company-accesses.component';
 import { SharedModule } from '../shared/shared.module';
-import {
-  CompanySearchDialogComponent,
-  CompanySearchDialogDirective,
-  CompanySearchDialogModule
-} from './company-search-dialog/company-search-dialog.component';
+import { CompanySearchDialogModule } from './company-search-dialog/company-search-dialog.component';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
@@ -40,6 +36,7 @@ const routes: Routes = [
     CompanyCardComponent,
   ],
   imports: [
+    CompanySearchDialogModule,
     CompanySearchDialogModule,
     FormsModule,
     ReactiveFormsModule,

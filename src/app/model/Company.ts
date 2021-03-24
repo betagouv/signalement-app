@@ -1,4 +1,19 @@
 import { ApiWebsiteKind } from '../api-sdk/model/ApiWebsite';
+import { Id } from '../api-sdk/model/Common';
+
+export interface CompanyUpdate {
+  address: string;
+  postalCode: string;
+  activationDocumentRequired: boolean;
+}
+
+export interface CompanyCreation {
+  siret: string;
+  name: string;
+  address: string;
+  postalCode?: string;
+  activityCode?: string;
+}
 
 export interface DraftCompany {
   siret?: string;
@@ -12,9 +27,14 @@ export interface DraftCompany {
   activityCode?: string;
 }
 
-export interface Company extends DraftCompany {
-  id: string;
+export interface Company {
+  id: Id;
+  siret: string;
   creationDate: Date;
+  name: string;
+  address: string;
+  postalCode?: string;
+  activityCode?: string;
 }
 
 export interface CompanySearchResult extends DraftCompany {
@@ -33,11 +53,14 @@ export interface CompanyAccess {
   level: string;
 }
 
-export interface UserAccess {
-  companySiret: string;
-  companyName: string;
-  companyAddress: string;
-  level: string;
+export enum AccessLevel {
+  NONE = 'none',
+  MEMBER = 'member',
+  ADMIN = 'admin',
+}
+
+export interface CompanyAccessLevel extends Company {
+  level: AccessLevel;
 }
 
 export interface ViewableCompany {
@@ -63,4 +86,4 @@ export interface WebsiteURL {
   url: string;
 }
 
-export const isGovernmentCompany = (_?: DraftCompany): boolean => _.activityCode?.startsWith('84.');
+export const isGovernmentCompany = (_?: DraftCompany): boolean => _?.activityCode?.startsWith('84.') ?? false;

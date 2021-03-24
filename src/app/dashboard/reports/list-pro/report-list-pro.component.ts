@@ -127,7 +127,7 @@ export class ReportListProComponent implements OnInit {
     this.departmentsCtrl.valueChanges.pipe(startWith([]), map(_ => _ || [])) as Observable<string[]>,
     this.companies$
   ]).pipe(map(([departments, companies]) => departments.length > 0
-    ? companies.filter(company => departments.find(_ => _ === company.postalCode.substr(0, 2)))
+    ? companies.filter(company => departments.find(_ => _ === company.postalCode?.substr(0, 2)))
     : companies
   ));
 
@@ -152,7 +152,7 @@ export class ReportListProComponent implements OnInit {
           this.initForm({
             offset: 0,
             limit: this.defaultPageSize,
-            siretSirenList: myCompanies.length > 0 ? myCompanies.map(_ => _.companySiret) : undefined,
+            siretSirenList: myCompanies.length > 0 ? myCompanies.map(_ => _.siret) : undefined,
             ...parsedQueryString,
           }).valueChanges
         ),
@@ -167,7 +167,7 @@ export class ReportListProComponent implements OnInit {
         return EMPTY;
       }
       return this.fetchReports(this.form.value).pipe(tap(() => {
-        this.showFilters = this.totalCount > this.maxReportsBeforeShowFilters || this.hasFilters();
+        this.showFilters = this.totalCount! > this.maxReportsBeforeShowFilters || this.hasFilters();
       }));
     })).subscribe();
   }
@@ -200,7 +200,7 @@ export class ReportListProComponent implements OnInit {
 
   readonly toggleAllMyAccessesSirets = () => {
     if ((this.siretSirenListCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
-      this.myCompanies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.companySiret)));
+      this.myCompanies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.siret)));
     } else {
       this.siretSirenListCtrl.setValue([]);
     }

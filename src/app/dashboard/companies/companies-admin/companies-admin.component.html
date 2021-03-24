@@ -17,29 +17,39 @@
         <ng-container [ngSwitch]="currentNavTab">
 
           <div *ngSwitchCase="searchTab" tabindex="0" role="tabpanel" [id]="searchTab.label + '-panel'" [attr.aria-labelledby]="searchTab.label + '-tab'">
-            <form [formGroup]="searchForm" (ngSubmit)="submitSearchForm()">
-              <div class="form-group">
-                <div class="control-label">
-                  <label for="search">
-                    Recherche par SIRET / Nom / Référence de courrier (obligatoire)
-                  </label>
-                </div>
-                <div>
-                  <input [formControl]="searchCtrl" type="text" class="form-control" id="search" placeholder="Entreprise recherchée">
-                </div>
-              </div>
-              <div class="notification error mt-3" *ngIf="loadingError">
-                Une erreur technique s'est produite, veuillez réessayer ultérieurement.<br />
-              </div>
-              <div class="form-group">
-                <div class="text-center">
-                  <button type="submit" class="btn btn-lg btn-primary" [disabled]="this.searchForm.invalid">
-                    Rechercher
-                  </button>
-                </div>
-              </div>
-            </form>
-            <ng-container *ngIf="companies">
+            <input
+              [formControl]="searchCtrl"
+              name="searchCompany"
+              class="form-control form-control-material"
+              placeholder="Recherche par SIRET / Nom / Référence de courrier (obligatoire)"
+            >
+            <div class="mt-3 mb-3">
+              <button type="submit" mat-raised-button color="primary" matSuffix (click)="searchCompanies()" [disabled]="searchCtrl.invalid">
+                <mat-icon>search</mat-icon>
+                Rechercher
+              </button>
+              &nbsp;
+              <button
+                type="button"
+                mat-stroked-button
+                color="primary"
+                matSuffix
+                appCompanySearchDialog
+                (companySelected)="createCompany($event)"
+              >
+                <mat-icon>add</mat-icon>
+                Enregistrer une entreprise
+              </button>
+            </div>
+            <app-alert type="error" *ngIf="companyService.creatingError || companyService.fetchError">
+              Une erreur technique s'est produite, veuillez réessayer ultérieurement.<br/>
+            </app-alert>
+            <app-alert autoHide type="success" *ngIf="companyCreationSucceed">
+              Entrepise enregistrée !
+              <button mat-button app-alert-close>Masquer</button>
+            </app-alert>
+
+            <ng-container *ngIf="companyService.data | async as companies">
               <hr />
               <div [ngSwitch]="companies.length">
                 <h2 class="text-center" *ngSwitchCase="0">Aucune entreprise trouvée</h2>
@@ -56,8 +66,8 @@
                 </ng-container>
                 <ng-template #companyCards>
                   <div class="row">
-                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies; let companyIndex = index">
-                      <app-company-card [userAccess]="companyToUserAccess(company)" (change)="onCompanyChange($event, companyIndex)"></app-company-card>
+                    <div class="col-12 col-sm-6 mt-3" *ngFor="let company of companies">
+                      <app-company-card [userAccess]="company" level="admin"></app-company-card>
                     </div>
                   </div>
                 </ng-template>
