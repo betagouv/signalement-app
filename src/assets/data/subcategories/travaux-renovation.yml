@@ -119,6 +119,8 @@
               defaultValue: SYSDATE
         - title: Démarchage téléphonique
           companyKind: PHONE
+          tags:
+            - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
               rank: 1

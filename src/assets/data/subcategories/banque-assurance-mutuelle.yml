@@ -14,6 +14,8 @@
       subcategories:
       - title: Démarchage téléphonique
         companyKind: PHONE
+        tags:
+          - Démarchage téléphonique
         detailInputs:
           - label: Date de l'appel
             rank: 1
@@ -69,6 +71,8 @@
               type: DATE
               defaultValue: SYSDATE
         - title: Démarchage téléphonique
+          tags:
+            - Démarchage téléphonique
           companyKind: PHONE
           detailInputs:
             - label: Date de l'appel
