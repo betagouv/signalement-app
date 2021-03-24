@@ -210,7 +210,7 @@ export class ReportService {
     );
   }
 
-  private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}) => {
+  private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}): Report => {
     const report = reportWithFiles.report;
     const files = reportWithFiles.files;
     return Object.assign(new Report(), {

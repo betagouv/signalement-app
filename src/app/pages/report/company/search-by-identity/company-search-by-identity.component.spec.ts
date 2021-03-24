@@ -56,7 +56,7 @@ describe('CompanySearchByIdentityComponent', () => {
     it('should display the company found by siret when existed', () => {
 
       const companyBySiret = genCompanySearchResult();
-      spyOn(companyService, 'fetch').and.returnValue(of([companyBySiret]));
+      spyOn(companyService, 'list').and.returnValue(of([companyBySiret]));
 
       const nativeElement = fixture.nativeElement;
       component.identityCtrl.setValue(genSiret());

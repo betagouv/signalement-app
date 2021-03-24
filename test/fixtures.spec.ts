@@ -105,7 +105,7 @@ export function genDraftReport(lastStep: Step) {
   return draftReport;
 }
 
-export function genReport() {
+export function genReport(): Report {
   return Object.assign(new Report(), {
     id: randomstring.generate(),
     category: randomstring.generate(),
