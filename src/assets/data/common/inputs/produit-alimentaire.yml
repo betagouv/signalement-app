@@ -14,7 +14,7 @@
   rank: 4
   optionnal: true
   type: TEXT
-- label: La personne qui a utilisé le produit a-t-elle était blessée&#160;?
+- label: La personne qui a consommé l'aliment est-elle tombée malade et/ou s'est-elle blessée&#160;?
   rank: 5
   optionnal: true
   type: RADIO

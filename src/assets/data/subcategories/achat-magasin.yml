@@ -10,13 +10,8 @@
       tags:
         - Produit dangereux
       subcategories:
-        - title: Alimentaire
-          information:
-            title: Les produits alimentaires dangereux ne rentrent pas dans le périmètre de l'outil SignalConso.
-            content: Les cas de produits alimentaires dangereux nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés, corps étranger) et peuvent déboucher sur un échange avec les enquêteurs.
-            actions:
-              - question: Signaler un cas d'intoxication alimentaire&#160;?
-                answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+        - title: Produit alimentaire
+          subcategories: !!import/single ../common/produit-alimentaire.yml
         - title: Jouet, puériculture, matériel scolaire
           subcategoriesTitle: Quel est le risque&#160;?
           subcategories: !!import/single ../common/produit-dangereux.yml
@@ -623,13 +618,8 @@
       tags:
         - Produit dangereux
       subcategories:
-        - title: Alimentaire
-          information:
-            title: Les produits alimentaires dangereux ne rentrent pas dans le périmètre de l'outil SignalConso.
-            content: Les cas de produits alimentaires dangereux nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés, corps étranger) et peuvent déboucher sur un échange avec les enquêteurs.
-            actions:
-              - question: Signaler un cas d'intoxication alimentaire&#160;?
-                answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+        - title: Produit alimentaire
+          subcategories: !!import/single ../common/produit-alimentaire.yml
         - title: Jouet, puériculture, matériel scolaire
           subcategoriesTitle: Quel est le risque&#160;?
           subcategories: !!import/single ../common/produit-dangereux.yml
@@ -705,3 +695,41 @@
           rank: 3
           type: DATE
           defaultValue: SYSDATE
+    - title: C'est un produit dangereux
+      example: 'Exemple : jouet, cosmétique'
+      companyKind: LOCATION
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Produit alimentaire
+          subcategories: !!import/single ../common/produit-alimentaire.yml
+        - title: Jouet, puériculture, matériel scolaire
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène, produit de tatouage
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile, sac à main, bijou
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Feu d'artifice
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Meuble
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Produit d'entretien, produit chimique, engrais
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Outil
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
