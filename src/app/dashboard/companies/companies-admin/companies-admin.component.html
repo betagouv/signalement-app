@@ -28,18 +28,6 @@
                 <mat-icon>search</mat-icon>
                 Rechercher
               </button>
-              &nbsp;
-              <button
-                type="button"
-                mat-stroked-button
-                color="primary"
-                matSuffix
-                appCompanySearchDialog
-                (companySelected)="createCompany($event)"
-              >
-                <mat-icon>add</mat-icon>
-                Enregistrer une entreprise
-              </button>
             </div>
             <app-alert type="error" *ngIf="companyService.creatingError || companyService.fetchError">
               Une erreur technique s'est produite, veuillez réessayer ultérieurement.<br/>
@@ -52,7 +40,24 @@
             <ng-container *ngIf="companyService.data | async as companies">
               <hr />
               <div [ngSwitch]="companies.length">
-                <h2 class="text-center" *ngSwitchCase="0">Aucune entreprise trouvée</h2>
+                <ng-container *ngSwitchCase="0">
+                  <h2 class="text-center">Aucune entreprise trouvée</h2>
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mt-3">
+                      <button
+                        type="button"
+                        mat-stroked-button
+                        color="primary"
+                        matSuffix
+                        [appCompanySearchDialog]="searchCtrl.value"
+                        (companySelected)="createCompany($event)"
+                      >
+                        <mat-icon>add</mat-icon>
+                        Enregistrer une entreprise
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
                 <ng-container *ngSwitchCase="1">
                   <h2 class="text-center">Une entreprise trouvée</h2>
                   <template [ngTemplateOutlet]="companyCards"></template>
