@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
 import { map, mergeMap } from 'rxjs/operators';
 import { Company, CompanySearchResult } from '../model/Company';
+import { format } from 'date-fns';
 
 export const MaxCompanyResult = 20;
 
@@ -73,7 +74,7 @@ class RawCompanyService {
       mergeMap(headers => {
         return this.http.post(
           this.serviceUtils.getUrl(Api.Report, ['api', 'companies', siret, 'undelivered-document']),
-          { returnedDate },
+          { returnedDate: format(returnedDate, 'yyyy-MM-dd') },
           headers
         );
       })
