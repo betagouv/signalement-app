@@ -69,7 +69,7 @@
         <div class="col text-center mb-1">
           <a routerLink="./invitation" class="btn btn-primary">Ajouter un utilisateur</a>
           <ng-container *appRole="[roles.Admin]">
-            <button *ngIf="!companyAccesses.length" class="btn btn-outline-danger ml-3" (click)="openModal(returnedDocModal)">Courrier retourné</button>
+            <button *ngIf="!companyAccesses?.length" class="btn btn-outline-danger ml-3" (click)="openModal(returnedDocModal)">Courrier retourné</button>
           </ng-container>
           <ng-template #returnedDocModal>
             <div class="modal-body text-center">
