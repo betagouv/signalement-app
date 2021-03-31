@@ -120,6 +120,8 @@
         - title: Je reçois des spams dans mes emails
         - title: J'ai eu un problème de démarchage téléphonique
           companyKind: PHONE
+          tags:
+            - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
               rank: 1
