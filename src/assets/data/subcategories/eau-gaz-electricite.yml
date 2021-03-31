@@ -129,6 +129,8 @@
       fileLabel: Si possible, joindre une copie du contrat ou tout document commercial
     - title: Démarchage téléphonique
       companyKind: PHONE
+      tags:
+        - Démarchage téléphonique
       detailInputs:
         - label: Date de l'appel
           rank: 1

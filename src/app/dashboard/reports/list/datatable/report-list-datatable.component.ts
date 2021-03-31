@@ -58,8 +58,9 @@ import { FormGroup } from '@angular/forms';
           <td mat-cell *matCellDef="let _" class="pt-0 pb-0">
             <span [tooltip]="detailsTooltip">
               <ng-container *ngIf="getDetailContent(_.detailInputValues); let detail">
-                {{detail.firstLine}}...<br/>
-                {{detail.secondLine}}
+                <span [innerHTML]="detail.firstLine"></span>
+                <br/>
+                <span [innerHTML]="detail.secondLine"></span>
               </ng-container>
             </span>
             <ng-template #detailsTooltip>
