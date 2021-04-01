@@ -60,12 +60,6 @@ list:
     sprite: category-disease
     subcategories: !!import/single subcategories/intoxication-alimentaire.yml
     subcategoriesTitle: 'Avez-vous mangé ?'
-  - category: Produits / Objets
-    categoryId: SIGN
-    path: produits-objets
-    description: textile, jouet, meuble...
-    hidden: true
-    subcategories: !!import/single subcategories/produits-objets.yml
   - category: Internet (hors achats)
     categoryId: INTERNET
     path: internet
@@ -139,19 +133,3 @@ list:
             <li>écrire à la police/gendarmerie</li>
           </ul>
           La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
-  - category: Alerte securite
-    categoryId: SECUR
-    path: secur
-    hidden: true
-    breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez eu une réaction allergique ?
-    information:
-      title: Les problèmes de blessure, allergie... ne rentrent pas dans le périmètre de l'outil SignalConso. Ces problèmes imposent une analyse immédiate du signalement, ce qui ne sera pas le cas avec SignalConso.
-      content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
-  - category: Alerte corps étranger
-    categoryId: CORPSETRANGER
-    path: stranger
-    hidden: true
-    breadcrumbTitle: Vous avez trouvé un petit morceau dur ou une vis dans un aliment ?
-    information:
-      title: Un objet ou un morceau d'objet qui se trouve dans un aliment alors que ce ne devrait pas être le cas s'appelle un corps étranger. Cela peut être une vis, un clou, un boulon, un bout de plastique, un morceau de verre par exemple.
-      content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>

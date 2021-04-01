@@ -23,14 +23,14 @@
         "MAG",
         "SERV",
         "TEL",
-        "BAQ",        
+        "BAQ",
         "TRAV",
         "VOY",
         "IMM",
         "SANT",
         "VEH",
         "ANI",
-        "ADM"       
+        "ADM"
       ],
       "message": "Vous pensez que l'entreprise emploie des gens au noir&#160;?"
     },
@@ -272,76 +272,9 @@
       "filteredCategories": [
         "CR",
         "MAG",
-        "SIGN"
+        "VOY"
       ],
       "message": "Vous pensez avoir été malade (vomissement, mal de ventre) à cause de ce que vous avez mangé&#160;?"
-    },
-    {
-      "words": [
-        "brûlure",
-        "brulure",
-        "brûle",
-        "brule",
-        "electrocuté",
-        "electrocute"
-      ],
-      "redirectCategory": "SECUR",
-      "filteredCategories": [
-        "CR",
-        "MAG",
-        "SIGN"
-      ],
-      "message": "Vous avez été blessé avec un objet (jouet, vêtement...)&#160;?"
-    },
-    {
-      "words": [
-        "vers",
-        "verre",
-        "vis",
-        "morceau de",
-        "bout de",
-        "éclat"
-      ],
-      "redirectCategory": "CORPSETRANGER",
-      "filteredCategories": [
-        "CR",
-        "MAG",
-        "SIGN"
-      ],
-      "message": "Vous avez trouvé un corps étranger (morceau de verre, de plastique, une vis...) dans un aliment qui aurait pu vous blesser&#160;?"
-    },     
-    {
-      "words": [
-        "amazon",
-        "cdiscount",
-        "booking",
-        "Booking",
-        "boking",
-        "Boking",
-        "bokking",
-        "Bokking",
-        "boncoin",
-        "bon coin",
-        "Boncoin",
-        "Bon Coin",
-        "Bon coin"
-      ],
-      "redirectCategory": "INTERNET",
-      "filteredCategories": [
-        "CR",
-        "MAG",
-        "SERV",
-        "TEL",
-        "BAQ",        
-        "TRAV",
-        "VOY",
-        "IMM",
-        "SANT",
-        "VEH",
-        "ANI",
-        "ADM"       
-      ],
-      "message": "Vous avez un problème avec une commande ou une annonce sur internet&#160;?"
     }
   ]
 }
