@@ -38,6 +38,7 @@
     "@nguniversal/common": "^9.1.1",
     "@nguniversal/express-engine": "^9.1.1",
     "@ngx-pwa/local-storage": "^6.2.5",
+    "@sentry/angular": "^6.2.5",
     "@sentry/browser": "^5.25.0",
     "@sentry/node": "^5.25.0",
     "angular-ab-tests": "^1.3.1",
