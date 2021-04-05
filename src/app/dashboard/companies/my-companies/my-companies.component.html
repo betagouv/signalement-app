@@ -9,7 +9,7 @@
       <ng-template  #companyAccesses>
         <div class="row">
           <div class="col-12 col-sm-6 mt-3" *ngFor="let access of myAccesses">
-            <app-company-card [userAccess]="access"></app-company-card>
+            <app-company-card [userAccess]="access" [level]="access.level"></app-company-card>
           </div>
         </div>
       </ng-template>
