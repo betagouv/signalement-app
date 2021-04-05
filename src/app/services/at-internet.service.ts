@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 declare const ATInternet: any;
 
@@ -16,11 +17,13 @@ export interface ATIPageInfo {
 })
 export class AtInternetService {
 
-  constructor() {
-    try {
-      this.atTag = new ATInternet.Tracker.Tag();
-    } catch (e) {
-      console.error(`Unable to load AT internet.`, e);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(platformId)) {
+      try {
+        this.atTag = new ATInternet.Tracker.Tag();
+      } catch (e) {
+        console.error(`Unable to load AT internet.`, e);
+      }
     }
   }
 
