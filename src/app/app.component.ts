@@ -28,6 +28,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+  // @ts-ignore
+    testErrorFromOnlinePR();
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.atInternetService.send({name: event.url.replace(/[^\w]/gi, '')});
