@@ -7,11 +7,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
-
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { enableProdMode } from '@angular/core';
+import { environment } from './src/environments/environment';
 
 enableProdMode();
 // The Express app is exported so that it can be used by serverless Functions.
@@ -40,7 +40,7 @@ export function app() {
   if (process.env.API_BASE_URL) {
     server.use(function(req, res, next) {
       res.setHeader('Content-Security-Policy',
-        `default-src 'self' stats.data.gouv.fr sentry.data.gouv.fr entreprise.data.gouv.fr ${process.env.API_BASE_URL} 'unsafe-inline';  \
+        `default-src 'self' stats.data.gouv.fr sentry.data.gouv.fr entreprise.data.gouv.fr ${process.env.API_BASE_URL} ${environment.sentryDsn} 'unsafe-inline';  \
         script-src 'self' stats.data.gouv.fr sentry.data.gouv.fr tag.aticdn.net entreprise.data.gouv.fr 'sha256-WWHGLj0eoGsKPEGMnTqjS4sH0zDInMRPKN098NNWH4E='; \
         img-src 'self' *.data.gouv.fr data: *.numerique.gouv.fr *.xiti.com; \
         frame-src 'self' stats.data.gouv.fr *.youtube-nocookie.com; \
