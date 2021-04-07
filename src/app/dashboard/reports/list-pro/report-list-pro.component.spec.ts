@@ -11,7 +11,7 @@ import { CompanyAccessesService } from '../../../services/companyaccesses.servic
 import { ConstantService } from '../../../services/constant.service';
 import { ReportStatus } from '../../../model/Report';
 import { ReportService } from '../../../services/report.service';
-import { genPaginatedReports, genUserAccess, genViewableCompany } from '../../../../../test/fixtures.spec';
+import { genPaginatedReports, genCompanyAccessLevel, genViewableCompany } from '../../../../../test/fixtures.spec';
 import { ReportListProComponent } from './report-list-pro.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -115,7 +115,7 @@ describe('ReportListProComponent', () => {
   it('should display report list with filters when pro has only one access and more than 10 reports', () => {
     const viewableCompany1 = genViewableCompany();
     spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([viewableCompany1]));
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(viewableCompany1.siret)]));
+    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genCompanyAccessLevel(viewableCompany1.siret)]));
 
     spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(11)));
     const fixture = TestBed.createComponent(ReportListProComponent);
@@ -169,7 +169,7 @@ describe('ReportListProComponent', () => {
     const viewableCompany1 = genViewableCompany();
     const viewableCompany2 = genViewableCompany();
     spyOn(companyAccessesService, 'viewableCompanies').and.returnValue(of([viewableCompany1, viewableCompany2]));
-    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genUserAccess(viewableCompany1.siret), genUserAccess(viewableCompany2.siret)]));
+    spyOn(companyAccessesService, 'myAccesses').and.returnValue(of([genCompanyAccessLevel(viewableCompany1.siret), genCompanyAccessLevel(viewableCompany2.siret)]));
     const getReportsSpy = spyOn(reportService, 'getReports').and.returnValue(of(genPaginatedReports(22)));
     activatedRoute.snapshot.queryParams = {
       offset: 10,

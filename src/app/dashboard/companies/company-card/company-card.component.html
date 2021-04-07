@@ -1,10 +1,10 @@
 <div class="card" *ngIf="userAccess">
   <div class="card-body">
-    <h2 class="card-title">{{userAccess.companyName}}</h2>
+    <h2 class="card-title">{{userAccess.name}}</h2>
     <p class="card-text">
     <dl class="row">
       <dt class="col-sm-3">SIRET</dt>
-      <dd class="col-sm-9">{{userAccess.companySiret}}</dd>
+      <dd class="col-sm-9">{{userAccess.siret}}</dd>
     </dl>
     <dl class="row">
       <dt class="col-sm-3">
@@ -15,9 +15,9 @@
           edit
         </i>
       </dt>
-      <dd class="col-sm-9">{{userAccess.companyAddress}}</dd>
+      <dd class="col-sm-9">{{userAccess.address}}</dd>
     </dl>
-    <a class="row item" [routerLink]="['/entreprise', 'acces', userAccess.companySiret]" *ngIf="userAccess.level == 'admin'">
+    <a class="row item" [routerLink]="['/entreprise', 'acces', userAccess.siret]" *ngIf="level == 'admin'">
       <div class="col-12">
         Gérer les accès
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
@@ -25,7 +25,7 @@
     </a>
     <a class="row item"
        [routerLink]="['/suivi-des-signalements', user.roleUrlParam]"
-       [queryParams]="{siretSirenList: userAccess.companySiret}">
+       [queryParams]="{siretSirenList: userAccess.siret}">
       <div class="col-12">
         Consulter les signalements
         <i class="material-icons md-24 float-right" aria-hidden="true" title="Détail du signalement">keyboard_arrow_right</i>
@@ -52,7 +52,7 @@
           </div>
         </div>
 
-        <div class="notification error" *ngIf="loadingError">
+        <div class="notification error" *ngIf="companyService.fetchError">
           Une erreur technique s'est produite<br />
         </div>
 
@@ -61,7 +61,7 @@
           Enregistrer
         </button>
       </form>
-      <ngx-loading [show]="loading"></ngx-loading>
+      <ngx-loading [show]="companyService.fetching"></ngx-loading>
     </div>
   </ng-template>
 </div>

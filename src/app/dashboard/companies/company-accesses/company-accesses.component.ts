@@ -10,7 +10,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { accessLevels } from '../common';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { CompanyService } from '../../../services/company.service';
+import { SaveUndeliveredDocumentService } from '../../../services/company.service';
 
 @Component({
   selector: 'app-company-accesses',
@@ -22,7 +22,7 @@ export class CompanyAccessesComponent implements OnInit {
               private meta: Meta,
               private authenticationService: AuthenticationService,
               private companyAccessesService: CompanyAccessesService,
-              private companyService: CompanyService,
+              private saveUndeliveredDocumentService: SaveUndeliveredDocumentService,
               private modalService: BsModalService,
               private localeService: BsLocaleService,
               private route: ActivatedRoute) {
@@ -125,8 +125,8 @@ export class CompanyAccessesComponent implements OnInit {
   submitReturnedDoc() {
     this.showSuccess = false;
     this.loading = true;
-    this.companyService
-      .saveUndeliveredDocument(this.siret, this.returnedDate)
+    this.saveUndeliveredDocumentService
+      .list({}, this.siret, this.returnedDate)
       .subscribe(() => {
         this.loading = false;
         this.showSuccess = true;

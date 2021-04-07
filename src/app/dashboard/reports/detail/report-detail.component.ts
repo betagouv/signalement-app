@@ -7,7 +7,6 @@ import { combineLatest, iif, of } from 'rxjs';
 import { EventService } from '../../../services/event.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CompanyService } from '../../../services/company.service';
 import { switchMap, tap } from 'rxjs/operators';
 import { Permissions, Roles } from '../../../model/AuthUser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -70,7 +69,6 @@ export class ReportDetailComponent implements OnInit {
     private reportService: ReportService,
     private eventService: EventService,
     private fileUploaderService: FileUploaderService,
-    private companyService: CompanyService,
     private modalService: BsModalService,
               private route: ActivatedRoute,
               private router: Router,

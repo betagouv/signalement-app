@@ -1,3 +1,5 @@
+import { Id } from './Common';
+
 export interface ApiWebsiteURL {
   url: string;
 }
@@ -13,9 +15,14 @@ export interface ApiDraftCompany {
   activityCode?: string;
 }
 
-export interface ApiCompany extends ApiDraftCompany {
-  id: string;
+export interface ApiCompany {
+  id: Id;
+  siret: string;
   creationDate: string;
+  name: string;
+  address: string;
+  postalCode?: string;
+  activityCode?: string;
 }
 
 export interface ApiCompanyToActivate {

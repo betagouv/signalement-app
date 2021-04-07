@@ -210,7 +210,7 @@ export class ReportService {
     );
   }
 
-  private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}) => {
+  private reportApi2report = (reportWithFiles: {report: any, files?: UploadedFile[]}): Report => {
     const report = reportWithFiles.report;
     const files = reportWithFiles.files;
     return Object.assign(new Report(), {
@@ -220,13 +220,13 @@ export class ReportService {
       subcategories: report.subcategories,
       tags: report.tags,
       detailInputValues: report.details,
-      company: Object.assign(<Company>{
+      company: {
         name: report.companyName,
         siret: report.companySiret,
         address: report.companyAddress,
         postalCode: report.companyPostalCode,
         country: report.companyCountry,
-      }),
+      },
       consumer: Object.assign(new Consumer(), {
         firstName: report.firstName,
         lastName: report.lastName,

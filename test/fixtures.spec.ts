@@ -51,11 +51,10 @@ export const genViewableCompany = (): ViewableCompany => ({
   closed: false,
 });
 
-export function genUserAccess(siret?: string) {
+export function genCompanyAccessLevel(siret?: string) {
   return {
-    companySiret: siret ?? genSiret(),
-    companyName: randomstring.generate(),
-    companyAddress: randomstring.generate(),
+    ...genCompany(),
+    ...(siret ? {siret} : {}),
     level: oneOf(['admin', 'member'])
   };
 }
@@ -106,7 +105,7 @@ export function genDraftReport(lastStep: Step) {
   return draftReport;
 }
 
-export function genReport() {
+export function genReport(): Report {
   return Object.assign(new Report(), {
     id: randomstring.generate(),
     category: randomstring.generate(),

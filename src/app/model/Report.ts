@@ -2,7 +2,7 @@ import { Consumer } from './Consumer';
 import { CompanyKinds, ContractualDisputeTag, InternetTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
-import { Company, DraftCompany, WebsiteURL } from './Company';
+import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
 import format from 'date-fns/format';
 
 export const PrecisionKeyword = '(à préciser)';
@@ -106,7 +106,7 @@ export class Report {
   category: string;
   subcategories: Subcategory[];
   tags: Tag[];
-  company: Company;
+  company: CompanySearchResult;
   website: WebsiteURL;
   vendor: string;
   phone: string;

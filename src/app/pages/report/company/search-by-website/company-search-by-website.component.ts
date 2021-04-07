@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CompanySearchResult, DraftCompany, WebsiteURL, } from '../../../../model/Company';
-import { CompanyService } from '../../../../services/company.service';
+import { CompanySearchResult, DraftCompany, } from '../../../../model/Company';
+import { SearchCompanyByURLService } from '../../../../services/company.service';
 import { RendererService } from '../../../../services/renderer.service';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { DraftReport } from '../../../../model/Report';
@@ -33,12 +33,12 @@ export class CompanySearchByWebsiteComponent implements OnInit {
   showErrors: boolean;
   searchError: string;
 
-  selectedCompany: CompanySearchResult;
+  selectedCompany?: CompanySearchResult;
 
   UrlPattern = '^(http|https):\\/\\/(www\\.)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,}(:[0-9]{1,5})?(\\/.*)?$';
 
   constructor(public formBuilder: FormBuilder,
-              private companyService: CompanyService,
+              private searchCompanyService: SearchCompanyByURLService,
               private rendererService: RendererService,
               private analyticsService: AnalyticsService) { }
 
@@ -77,7 +77,7 @@ export class CompanySearchByWebsiteComponent implements OnInit {
       this.loading.emit(true);
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByUrl, this.urlCtrl.value);
 
-      this.companyService.searchCompaniesByUrl(this.urlCtrl.value).subscribe(
+      this.searchCompanyService.list({ clean: false }, this.urlCtrl.value).subscribe(
         companySearchResults => {
           this.loading.emit(false);
           this.websiteForm.disable();
