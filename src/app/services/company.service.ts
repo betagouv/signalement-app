@@ -4,6 +4,7 @@ import { Company, CompanyCreation, CompanySearchResult, CompanyUpdate } from '..
 import { ApiSdkService } from './core/api-sdk.service';
 import { FetchService } from './helper/FetchService';
 import { CRUDListService } from './helper/CRUDListService';
+import { Event } from '../model/ReportEvent';
 
 export const MaxCompanyResult = 20;
 
@@ -16,7 +17,7 @@ export class UpdateCompanyService extends FetchService<Company> {
 }
 
 @Injectable({ providedIn: 'root' })
-export class SaveUndeliveredDocumentService extends FetchService<void> {
+export class SaveUndeliveredDocumentService extends FetchService<Event> {
 
   constructor(protected api: ApiSdkService) {
     super(api, api.secured.company.saveUndeliveredDocument);

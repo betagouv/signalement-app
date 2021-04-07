@@ -1,6 +1,8 @@
 import { ApiClientApi } from '../ApiClient';
 import { Company, CompanyCreation, CompanyUpdate } from '../../model/Company';
 import { Id } from '../model/Common';
+import { Event } from '../../model/ReportEvent';
+import { format } from 'date-fns';
 
 export class CompanyClient {
 
@@ -16,7 +18,8 @@ export class CompanyClient {
   };
 
   readonly saveUndeliveredDocument = (siret: string, returnedDate: Date) => {
-    return this.client.post<void>(`/companies/${siret}/undelivered-document`, { body: { returnedDate } });
+    return this.client.post<Event>(`/companies/${siret}/undelivered-document`,
+      { body: { returnedDate: format(returnedDate, 'yyyy-MM-dd') }, });
   };
 
   readonly create = (company: CompanyCreation) => {
