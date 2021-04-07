@@ -4,21 +4,27 @@
 
 <form [formGroup]="phoneForm" (submit)="submitPhone()" id="phoneForm">
   <div class="form__group mt-4">
-    <label for="phoneInput" [class]="hasError(phoneCtrl) ? 'error' : ''">
+    <label for="phoneInput" [class]="showError() ? 'error' : ''">
       Numéro de téléphone (obligatoire)
     </label>
-    <input type="tel" class="form-control" [formControl]="phoneCtrl" name="phone" id="phoneInput" placeholder="ex : 06........"/>
+    <input type="tel" class="form-control" [formControl]="phoneCtrl" name="phone" id="phoneInput" placeholder="ex: 06 00 00 00 00"/>
   </div>
 
-  <div class="notification error mt-3" *ngIf="showErrors && phoneForm.invalid">
+  <app-alert type="error" class="mt-3" *ngIf="showError()">
     <div *ngIf="phoneCtrl.hasError('validatePhoneNumber')">
-      Numéro invalide, veuillez saisir un numéro à 10 chiffres.
+      Numéro invalide, exemples de formats acceptés:
+      <ul>
+        <li>0600000000</li>
+        <li>06 00 00 00 00</li>
+        <li>0033 6 00 00 00 00</li>
+        <li>+33 6 00 00 00 00</li>
+      </ul>
     </div>
-    <div *ngIf="phoneCtrl.hasError('required')">
+    <div *ngIf="!phoneCtrl.hasError('validatePhoneNumber') && phoneCtrl.hasError('required')">
       Veuillez renseigner le numéro de téléphone.
     </div>
-  </div>
-  <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4" *ngIf="!phoneForm.disabled; else phoneFormDisabled">
+  </app-alert>
+  <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4" [disabled]="phoneForm.invalid" *ngIf="!phoneForm.disabled; else phoneFormDisabled">
     Continuer
   </button>
 </form>
