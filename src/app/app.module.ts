@@ -35,16 +35,13 @@ class ErrorLogger extends ErrorHandler {
 
   constructor(private sentry: any) {
     super();
-    console.log('init ', environment.sentryDsn);
     if (environment.sentryDsn) {
       this.sentry.init({ dsn: environment.sentryDsn });
     }
   }
 
   handleError(error: any): void {
-    console.log('handle error', environment.sentryDsn);
     if (environment.sentryDsn) {
-      console.log('capture');
       this.sentry.captureException(error.originalError || error);
     }
     super.handleError(error);   // for default behaviour rather than silently dying
