@@ -70,7 +70,7 @@
     <app-panel-body class="text-center">
       <a routerLink="./invitation" mat-raised-button color="primary">Ajouter un utilisateur</a>
       <ng-container *appRole="[roles.Admin]">
-        <button *ngIf="!companyAccesses?.length" mat-stroked-button class="ml-2" color="warn" (click)="openModal(returnedDocModal)">
+        <button *ngIf="companyAccesses && companyAccesses.length === 0" mat-stroked-button class="ml-2" color="warn" (click)="openModal(returnedDocModal)">
           Courrier retourné
         </button>
       </ng-container>
