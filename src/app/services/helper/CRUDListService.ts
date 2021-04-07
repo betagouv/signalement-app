@@ -1,10 +1,10 @@
 import { Entity, Id } from '../../api-sdk/model/Common';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ApiSdkService } from '../core/api-sdk.service';
 import { ApiError } from '../../api-sdk/ApiClient';
 import { Index } from '../../model/Common';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { ListService } from './ListService';
+import { FetchService } from './FetchService';
 
 interface CRUDListMethods<T extends Entity, C = Partial<T>, U = Partial<T>> {
   list: (...args: any[]) => Observable<T[]> | Promise<T[]>;
@@ -19,15 +19,13 @@ export class CRUDListServiceNotImplementedError extends Error {
   }
 }
 
-export abstract class CRUDListService<T extends Entity, C = Partial<T>, U = Partial<T>> extends ListService<T> {
+export abstract class CRUDListService<T extends Entity, C = Partial<T>, U = Partial<T>> extends FetchService<T[]> {
 
   constructor(
     protected api: ApiSdkService,
     protected methods: CRUDListMethods<T, C, U>) {
     super(api, methods.list);
   }
-
-  protected source = new BehaviorSubject<T[] | undefined>(undefined);
 
   protected _creating = false;
   get creating() {
@@ -51,7 +49,7 @@ export abstract class CRUDListService<T extends Entity, C = Partial<T>, U = Part
   protected _removeError: Index<ApiError> = {};
   readonly removeError = (id: Id): ApiError => this._removeError[id];
 
-  readonly create = (data: C, insertBefore = false): Observable<T> => {
+  readonly create = (data: C, { insert = true, insertBefore = false }: {insert?: boolean, insertBefore?: boolean} = {}): Observable<T> => {
     if (!this.methods.create) {
       throw new CRUDListServiceNotImplementedError(`create`);
     }
@@ -64,10 +62,12 @@ export abstract class CRUDListService<T extends Entity, C = Partial<T>, U = Part
       mergeMap(() => this.methods.create!(data)),
       map((created => {
         this._creating = false;
-        this.source.next(insertBefore
-          ? [created, ...(this.source.value ?? [])]
-          : [...(this.source.value ?? []), created]
-        );
+        if (insert) {
+          this.source.next(insertBefore
+            ? [created, ...(this.source.value ?? [])]
+            : [...(this.source.value ?? []), created]
+          );
+        }
         return created;
       })),
       catchError((err: ApiError) => {

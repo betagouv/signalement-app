@@ -6,18 +6,19 @@ export const slideToggleNgIf = trigger('slideToggleNgIf', [
 ]);
 
 export const slideToggle = trigger('slideToggle', [
-  state('open', style({
+  state('true', style({
     opacity: 1,
     height: '*',
   })),
-  state('closed', style({
+  state('false', style({
     opacity: 0,
     height: 0,
+    'min-height': 0,
   })),
-  transition('open => closed', [
+  transition('true => false', [
     animate('160ms')
   ]),
-  transition('closed => open', [
+  transition('false => true', [
     animate('160ms')
   ]),
 ]);

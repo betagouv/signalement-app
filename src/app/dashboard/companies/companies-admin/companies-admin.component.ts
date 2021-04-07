@@ -7,8 +7,8 @@ import { Roles, User } from '../../../model/AuthUser';
 import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CompanyService, MaxCompanyResult } from '../../../services/company.service';
-import { Company, CompanyToActivate, UserAccess } from '../../../model/Company';
+import { CompaniesService, MaxCompanyResult } from '../../../services/company.service';
+import { CompanySearchResult, CompanyToActivate } from '../../../model/Company';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { combineLatest } from 'rxjs';
@@ -33,11 +33,7 @@ export class CompaniesAdminComponent implements OnInit {
   currentNavTab?: {link: string[], label: string};
 
   readonly searchCtrl = new FormControl('', Validators.required);
-  readonly searchForm = this.formBuilder.group({
-    search: this.searchCtrl,
-  });
 
-  companies?: Company[];
   maxCompanyResult = MaxCompanyResult;
 
   user?: User;
@@ -52,6 +48,7 @@ export class CompaniesAdminComponent implements OnInit {
   showErrors = false;
   loading = false;
   loadingError = false;
+  companyCreationSucceed = false;
 
   checkedCompaniesUuids = new Set<string>();
   modalRef?: BsModalRef;
@@ -65,7 +62,7 @@ export class CompaniesAdminComponent implements OnInit {
               private companyAccessesService: CompanyAccessesService,
               private localeService: BsLocaleService,
               private reportService: ReportService,
-              private companyService: CompanyService,
+              private companyService: CompaniesService,
               private modalService: BsModalService,
               private route: ActivatedRoute
   ) { }
@@ -107,43 +104,18 @@ export class CompaniesAdminComponent implements OnInit {
       queryParams => {
         if (queryParams && queryParams['q']) {
           this.searchCtrl.setValue(queryParams['q']);
-          this.submitSearchForm();
+          this.searchCompanies();
         }
       }
     );
   }
 
-  submitSearchForm() {
-    this.loading = true;
-    this.loadingError = false;
-    this.companies = undefined;
+  searchCompanies() {
     if (RegExp(/^[0-9\s]+$/g).test(this.searchCtrl.value)) {
       this.searchCtrl.setValue((this.searchCtrl.value as string).replace(/\s/g, ''));
     }
     this.location.go('entreprises/recherche', `q=${this.searchCtrl.value}`);
-    this.companyService.searchRegisterCompanies(this.searchCtrl.value).subscribe(
-      result => {
-        this.loading = false;
-        this.companies = result;
-      },
-      error => {
-        this.loadingError = true;
-        this.loading = false;
-      }
-    );
-  }
-
-  companyToUserAccess(company: Company) {
-    return <UserAccess> {
-      companySiret: company.siret,
-      companyName: company.name,
-      companyAddress: company.address,
-      level: 'admin'
-    };
-  }
-
-  onCompanyChange(company: Company, companyIndex: number) {
-    this.companies?.splice(companyIndex, 1, company);
+    this.companyService.list({ clean: true }, this.searchCtrl.value).subscribe();
   }
 
   loadReports(page: number) {
@@ -253,4 +225,12 @@ export class CompaniesAdminComponent implements OnInit {
   nextTab() {
     this.currentNavTab = this.navTabs?.[this.navTabs.indexOf(this.currentNavTab!) + 1];
   }
+
+  readonly createCompany = (company: CompanySearchResult) => {
+    this.companyCreationSucceed = false;
+    const { siret, name, address, postalCode, activityCode } = company;
+    this.companyService
+      .create({ siret, name, address, postalCode, activityCode }, { insert: false })
+      .subscribe(() => this.companyCreationSucceed = true);
+  };
 }

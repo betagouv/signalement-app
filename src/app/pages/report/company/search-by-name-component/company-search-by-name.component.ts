@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CompanySearchResult, DraftCompany } from '../../../../model/Company';
 import { RendererService } from '../../../../services/renderer.service';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
-import { CompanyService } from '../../../../services/company.service';
+import { SearchCompanyService } from '../../../../services/company.service';
 import { IdentificationKinds } from '../company.component';
 
 @Component({
@@ -34,7 +34,7 @@ export class CompanySearchByNameComponent implements OnInit {
   searchError: string;
 
   constructor(public formBuilder: FormBuilder,
-              private companyService: CompanyService,
+              private searchCompanyService: SearchCompanyService,
               private rendererService: RendererService,
               private analyticsService: AnalyticsService) { }
 
@@ -63,8 +63,9 @@ export class CompanySearchByNameComponent implements OnInit {
       this.analyticsService.trackEvent(
         EventCategories.companySearch,
         CompanySearchEventActions.search,
-        this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value);
-      this.companyService.searchCompanies(this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
+        this.searchCtrl.value + ' ' + this.searchPostalCodeCtrl.value
+      );
+      this.searchCompanyService.list({ clean: false }, this.searchCtrl.value, this.searchPostalCodeCtrl.value).subscribe(
         companySearchResults => {
           this.loading.emit(false);
           if (companySearchResults.length === 0) {

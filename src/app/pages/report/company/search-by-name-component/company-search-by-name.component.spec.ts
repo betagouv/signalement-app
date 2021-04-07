@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CompanySearchByNameComponent } from './company-search-by-name.component';
-import { CompanyService } from '../../../../services/company.service';
+import { SearchCompanyService } from '../../../../services/company.service';
 import { AnalyticsService } from '../../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../../test/mocks';
 import { genCompanySearchResult } from '../../../../../../test/fixtures.spec';
@@ -14,7 +14,7 @@ describe('CompanySearchByNameComponent', () => {
 
   let component: CompanySearchByNameComponent;
   let fixture: ComponentFixture<CompanySearchByNameComponent>;
-  let companyService: CompanyService;
+  let companyService: SearchCompanyService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,7 +34,7 @@ describe('CompanySearchByNameComponent', () => {
   }));
 
   beforeEach(() => {
-    companyService = TestBed.inject(CompanyService);
+    companyService = TestBed.inject(SearchCompanyService);
     fixture = TestBed.createComponent(CompanySearchByNameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -51,7 +51,7 @@ describe('CompanySearchByNameComponent', () => {
     it('should ', () => {
       component.companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
       const newCompanySearchResults = [genCompanySearchResult()];
-      spyOn(companyService, 'searchCompanies').and.returnValue(of(newCompanySearchResults));
+      spyOn(companyService, 'list').and.returnValue(of(newCompanySearchResults));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button#submitSearchForm').click();
@@ -63,7 +63,7 @@ describe('CompanySearchByNameComponent', () => {
     it('should erase previous results and display the company list when results have been found', () => {
       component.companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
       const newCompanySearchResults = [genCompanySearchResult()];
-      spyOn(companyService, 'searchCompanies').and.returnValue(of(newCompanySearchResults));
+      spyOn(companyService, 'list').and.returnValue(of(newCompanySearchResults));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('button#submitSearchForm').click();

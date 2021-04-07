@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
-import { CompanyAccess, PendingToken, UserAccess, ViewableCompany, WebsiteURL } from '../model/Company';
+import { CompanyAccess, CompanyAccessLevel, PendingToken, ViewableCompany } from '../model/Company';
 import { map, mergeMap } from 'rxjs/operators';
-import { User } from '../model/AuthUser';
 import { ApiCompanyToActivate } from '../api-sdk/model/Company';
 
 import { parseISO } from 'date-fns';
@@ -20,7 +19,7 @@ export class CompanyAccessesService {
   readonly myAccesses = () => {
     return this.serviceUtils.getAuthHeaders().pipe(
       mergeMap(headers => {
-        return this.http.get<UserAccess[]>(
+        return this.http.get<CompanyAccessLevel[]>(
           this.serviceUtils.getUrl(Api.Report, ['api', 'accesses', 'connected-user']),
           headers
         );
@@ -121,14 +120,14 @@ export class CompanyAccessesService {
         );
       }),
       map(results => results.map(result => ({
-        company: {
-          ...result.company,
-          creationDate: parseISO(result.company.creationDate),
-          website: result.company.website ? { url: result.company.website.url } : undefined
-        },
-        lastNotice: result.lastNotice ? parseISO(result.lastNotice) : undefined,
-        tokenCreation: parseISO(result.tokenCreation)
-      })))
+          company: {
+            ...result.company,
+            creationDate: parseISO(result.company.creationDate),
+          },
+          lastNotice: result.lastNotice ? parseISO(result.lastNotice) : undefined,
+          tokenCreation: parseISO(result.tokenCreation)
+        })
+      ))
     );
   }
 

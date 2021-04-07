@@ -1,7 +1,7 @@
 import { Component, Directive, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CompanySearchResult } from '../../../model/Company';
-import { CompanyService } from '../../../services/company.service';
+import { SearchCompanyByIdentityService } from '../../../services/company.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SharedModule } from '../../shared/shared.module';
 import { ComponentsModule } from '../../../components/components.module';
@@ -24,14 +24,16 @@ export class CompanySearchDialogDirective {
   openDialog(): void {
     const ref = this.dialog.open(CompanySearchDialogComponent, { width: '500px', });
     ref.componentInstance.companySelected = this.companySelected;
-    ref.componentInstance.value = this.appCompanySearchDialog;
+    if (this.appCompanySearchDialog) {
+      ref.componentInstance.value = this.appCompanySearchDialog;
+    }
   }
 }
 
 @Component({
   selector: 'app-company-search-dialog',
   template: `
-    <mat-progress-bar *ngIf="loading" mode="indeterminate" class="app-mat-dialog-progress"></mat-progress-bar>
+    <mat-progress-bar *ngIf="searchByIdentityService.fetching" mode="indeterminate" class="app-mat-dialog-progress"></mat-progress-bar>
     <h2 mat-dialog-title>Rechercher une entreprise</h2>
 
     <mat-form-field class="d-block">
@@ -42,23 +44,24 @@ export class CompanySearchDialogDirective {
       </button>
     </mat-form-field>
 
-    <mat-error *ngIf="results?.length === 0">
-      Aucun établissement trouvé
-    </mat-error>
-    <mat-error *ngIf="!results && loadingError">
-      Une erreur technique s'est produite
-    </mat-error>
-
-    <mat-dialog-content *ngIf="results">
-      <app-company-search-results
-        *ngIf="results.length" [companySearchResults]="results"
-        (select)="onSelect($event)">
-      </app-company-search-results>
+    <mat-dialog-content>
+      <ng-container *ngIf="searchByIdentityService.data | async as companies">
+        <mat-error *ngIf="companies.length === 0">
+          Aucun établissement trouvé
+        </mat-error>
+        <app-company-search-results
+          *ngIf="companies.length" [companySearchResults]="companies"
+          (select)="onSelect($event)">
+        </app-company-search-results>
+      </ng-container>
+      <mat-error *ngIf="searchByIdentityService.fetchError">
+        Une erreur technique s'est produite
+      </mat-error>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close color="primary">Fermer</button>
-      <button mat-raised-button color="primary" [disabled]="loading || identityCtrl.invalid"
+      <button mat-raised-button color="primary" [disabled]="searchByIdentityService.fetching || identityCtrl.invalid"
               (click)="submitCompanySiretForm()">
         Rechercher
       </button>
@@ -71,7 +74,7 @@ export class CompanySearchDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<CompanySearchDialogComponent>,
     private formBuilder: FormBuilder,
-    private companyService: CompanyService,
+    public searchByIdentityService: SearchCompanyByIdentityService,
   ) {
   }
 
@@ -84,12 +87,6 @@ export class CompanySearchDialogComponent {
 
   @Output() companySelected = new EventEmitter<CompanySearchResult>();
 
-  results?: CompanySearchResult[];
-
-  loadingError = false;
-
-  loading = false;
-
   readonly identityCtrl: FormControl = this.formBuilder.control('', [Validators.required]);
 
   readonly onSelect = ($event: CompanySearchResult) => {
@@ -100,23 +97,11 @@ export class CompanySearchDialogComponent {
   };
 
   readonly submitCompanySiretForm = () => {
-    this.loading = true;
-    this.loadingError = false;
-    this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
-      companySearchResults => {
-        this.results = companySearchResults;
-      },
-      (err: any) => {
-        console.error(err);
-        this.loadingError = true;
-      },
-      () => {
-        this.loading = false;
-      });
+    this.searchByIdentityService.list({ clean: false }, this.identityCtrl.value).subscribe();
   };
 
   readonly clear = () => {
-    this.results = undefined;
+    this.searchByIdentityService.clear();
     this.identityCtrl.setValue('');
   };
 }
