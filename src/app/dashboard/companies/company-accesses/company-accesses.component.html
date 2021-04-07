@@ -21,15 +21,19 @@
         <td>{{access.lastName}}</td>
         <td>{{access.email}}</td>
         <td>
-          <select class="form-control" [(ngModel)]="access.level" *ngIf="access.email != user.email; else currentUserLevel" (change)="updateAccess(access.userId, $event.target.value)">
+          <select class="form-control form-control-material"
+                  [(ngModel)]="access.level" *ngIf="access.email != user.email; else currentUserLevel"
+                  (change)="updateAccess(access.userId, $event.target.value)">
             <option *ngFor="let level of accessLevels | keyvalue" [value]="level.key">{{level.value}}</option>
           </select>
           <ng-template #currentUserLevel>
             {{accessLevels[access.level]}}
           </ng-template>
         </td>
-        <td>
-          <button *ngIf="access.email != user.email; else currentUserDelete" class="btn btn-sm btn-danger" (click)="openModal(removeAccessModal)">Supprimer l'accès</button>
+        <td class="td-actions">
+          <button *ngIf="access.email != user.email; else currentUserDelete" mat-stroked-button color="warn" (click)="openModal(removeAccessModal)">
+            Supprimer l'accès
+          </button>
           <ng-template #currentUserDelete>
             <small class="text-muted text-wrap">
               Vous ne pouvez pas supprimer votre propre accès.
@@ -50,7 +54,7 @@
         <td>{{pendingToken.emailedTo}}</td>
         <td>{{accessLevels[pendingToken.level]}}</td>
         <td>
-          <button class="btn btn-sm btn-danger" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
+          <button mat-stroked-button color="primary" (click)="openModal(removeTokenModal)">Annuler l'invitation</button>
         </td>
         <ng-template #removeTokenModal>
           <div class="modal-body text-center">
@@ -66,7 +70,9 @@
     <app-panel-body class="text-center">
       <a routerLink="./invitation" mat-raised-button color="primary">Ajouter un utilisateur</a>
       <ng-container *appRole="[roles.Admin]">
-        <button *ngIf="!companyAccesses?.length" class="btn btn-outline-danger ml-3" (click)="openModal(returnedDocModal)">Courrier retourné</button>
+        <button *ngIf="!companyAccesses?.length" mat-stroked-button class="ml-2" color="warn" (click)="openModal(returnedDocModal)">
+          Courrier retourné
+        </button>
       </ng-container>
       <ng-template #returnedDocModal>
         <div class="modal-body text-center">
