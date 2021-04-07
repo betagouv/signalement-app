@@ -27,6 +27,7 @@ import { CompanySearchByWebsiteComponent } from './company/search-by-website/com
 import { instanceOfSubcategoryInformation } from '../../model/Anomaly';
 import { CompanyPhoneComponent } from './company/phone/company-phone.component';
 import { CompanyLocationComponent } from './company/location/company-location.component';
+import { AlertModule as AppAlertModule } from '../../dashboard/shared/alert/alert';
 
 defineLocale('fr', frLocale);
 
@@ -98,6 +99,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     ComponentsModule,
     PipesModule,
     TypeaheadModule.forRoot(),
+    AppAlertModule,
   ],
   exports: [
     RouterModule,

@@ -54,6 +54,7 @@ export class CompanyInvitationComponent implements OnInit {
             this.showSuccess = true;
           });
     } else {
+      this.loading = false;
       this.showErrors = true;
     }
   }

@@ -216,6 +216,7 @@ describe('CompanyComponent', () => {
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('form#phoneForm #phoneInput').value = '0555555555';
       nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
+      fixture.detectChanges();
       nativeElement.querySelectorAll('form#phoneForm button')[0].click();
       fixture.detectChanges();
 
