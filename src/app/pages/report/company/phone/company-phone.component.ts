@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DraftReport } from '../../../../model/Report';
 import { CustomValidators } from '../../../../custom-validators';
 import Utils from '../../../../utils';
@@ -12,34 +11,31 @@ import Utils from '../../../../utils';
 })
 export class CompanyPhoneComponent implements OnInit {
 
+  constructor(public formBuilder: FormBuilder) { }
+
   @Input() draftReport?: DraftReport;
 
   @Output() complete = new EventEmitter<string>();
+
   @Output() change = new EventEmitter();
 
-  phoneCtrl: FormControl;
-  phoneForm: FormGroup;
-
-  showErrors = false;
-
-  constructor(public formBuilder: FormBuilder) { }
+  readonly phoneCtrl = this.formBuilder.control('', [
+    Validators.required,
+    CustomValidators.validatePhoneNumber
+  ]);
+  readonly phoneForm = this.formBuilder.group({
+    phone: this.phoneCtrl
+  });
 
   ngOnInit(): void {
-
-    this.phoneCtrl  = this.formBuilder.control(this.draftReport?.draftCompany?.phone ?? '', [
-      Validators.required,
-      CustomValidators.validatePhoneNumber
-    ]);
-    this.phoneForm = this.formBuilder.group({
-      phone: this.phoneCtrl
-    });
+    const inputPhone = this.draftReport?.draftCompany?.phone;
+    if (inputPhone) {
+      this.phoneCtrl.setValue(inputPhone);
+    }
   }
 
   submitPhone() {
-    this.showErrors = false;
-    if (!this.phoneForm.valid) {
-      this.showErrors = true;
-    } else {
+    if (this.phoneForm.valid) {
       this.phoneForm.disable();
       this.complete.emit(Utils.sanitizePhoneNumber(this.phoneCtrl.value));
     }
@@ -50,8 +46,5 @@ export class CompanyPhoneComponent implements OnInit {
     this.change.emit();
   }
 
-  hasError(formControl: FormControl) {
-    return this.showErrors && formControl.errors;
-  }
-
+  readonly showError = () => this.phoneForm.touched && this.phoneForm.invalid && this.phoneForm.dirty;
 }
