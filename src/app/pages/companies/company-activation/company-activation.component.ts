@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
 import {
-  ActionResultNames,
+  ActionResultNames, AnalyticAction,
   AnalyticsService,
   CompanyAccessEventActions,
   EventCategories
@@ -55,7 +55,7 @@ export class CompanyActivationComponent implements OnInit {
     if (!this.activationForm.valid) {
       this.showErrors = true;
     } else {
-      const handleError = (action: string) => {
+      const handleError = (action: AnalyticAction) => {
         this.loading = false;
         this.analyticsService.trackEvent(EventCategories.companyAccess, action, ActionResultNames.fail);
         this.activationError = true;
