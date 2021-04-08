@@ -1,234 +1,226 @@
 <app-banner title="Résoudre un problème individuel (litige) avec une entreprise"></app-banner>
 
-<main role="main">
-  <section class="section section-lightest-grey">
-    <div class="container max-width" [ngSwitch]="currentStep">
+<app-page pageDefinitionKey="contractualDispute" size="small" [ngSwitch]="currentStep">
+  <app-panel *ngSwitchCase="1">
+    <app-panel-body >
+      <h2 class="mb-3">Démarche n°1</h2>
 
-      <ng-container *ngSwitchCase="1">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="mb-3">Démarche n°1</h2>
+      <div class="subtitle">
+        J’écris un courrier à l’entreprise pour demander à résoudre mon problème.
+      </div>
 
-            <div class="subtitle">
-              J’écris un courrier à l’entreprise pour demander à résoudre mon problème.
-            </div>
+      <h3>Quand ?</h3>
+      <div>
+        <p>
+          Le plus tôt possible (conseillé).
+        </p>
+        <p>
+          Je peux aussi attendre de voir si l’entreprise me répond avec SignalConso.
+        </p>
+      </div>
 
-            <h3>Quand ?</h3>
-            <div>
-              <p>
-                Le plus tôt possible (conseillé).
-              </p>
-              <p>
-                Je peux aussi attendre de voir si l’entreprise me répond avec SignalConso.
-              </p>
-            </div>
+      <hr/>
 
-            <hr/>
+      <h3>À qui ?</h3>
+      <div>
+        <p>
+          Auprès du service client de l’entreprise.
+        </p>
+        <p>
+          Je peux trouver l’adresse du service client de l’entreprise dans mon contrat, sur son site internet ou dans les conditions générales de vente.
+        </p>
+      </div>
 
-            <h3>À qui ?</h3>
-            <div>
-              <p>
-                Auprès du service client de l’entreprise.
-              </p>
-              <p>
-                Je peux trouver l’adresse du service client de l’entreprise dans mon contrat, sur son site internet ou dans les conditions générales de vente.
-              </p>
-            </div>
+      <hr/>
 
-            <hr/>
+      <h3>Comment ?</h3>
+      <div>
+        <p>En envoyant une lettre recommandée avec accusé de réception, en y joignant les deux documents ci-joints :</p>
+        <ul>
+          <li>
+            <a href="/assets/docs/ModeleLettreLitige.txt" target="_blank" title="Ouverture de la lettre type (nouvelle fenêtre)" download="ModeleLettreLitige.txt" (click)="downloadDocumentTemplate()">
+              une lettre type à compléter (zones entre [])
+            </a>
+          </li>
+          <li>mon signalement au format PDF</li>
+        </ul>
+        <p>
+          Je garde une copie du courrier et la preuve de l’envoi.
+        </p>
+      </div>
 
-            <h3>Comment ?</h3>
-            <div>
-              <p>En envoyant une lettre recommandée avec accusé de réception, en y joignant les deux documents ci-joints :</p>
-              <ul>
-                <li>
-                  <a href="/assets/docs/ModeleLettreLitige.txt" target="_blank" title="Ouverture de la lettre type (nouvelle fenêtre)" download="ModeleLettreLitige.txt" (click)="downloadDocumentTemplate()">
-                    une lettre type à compléter (zones entre [])
-                  </a>
-                </li>
-                <li>mon signalement au format PDF</li>
-              </ul>
-              <p>
-                Je garde une copie du courrier et la preuve de l’envoi.
-              </p>
-            </div>
+      <hr/>
 
-            <hr/>
+      <h3>Pourquoi ?</h3>
+      <div>
+        <p>Ce courrier est la preuve de ma démarche. Il est obligatoire pour entamer d’autres démarches par la suite.</p>
+      </div>
 
-            <h3>Pourquoi ?</h3>
-            <div>
-              <p>Ce courrier est la preuve de ma démarche. Il est obligatoire pour entamer d’autres démarches par la suite.</p>
-            </div>
+      <hr/>
 
-            <hr/>
+      <button class="btn btn-primary" (click)="continue()">J'ai déjà effectué cette démarche</button>
+    </app-panel-body>
+  </app-panel>
 
-            <button class="btn btn-primary" (click)="continue()">J'ai déjà effectué cette démarche</button>
-          </div>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="2">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="mb-3">Démarche n°2</h2>
-
-            <div class="subtitle">
-              Je contacte un médiateur de la consommation, c’est-à-dire une personne chargée de régler les problèmes des consommateurs avec les entreprises.
-            </div>
-
-            <h3>Quand ?</h3>
-            <div>
-              <p>
-                Deux mois après avoir envoyé mon courrier, si je n’ai pas eu de réponse ou si la réponse ne me satisfait pas.
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Qui ?</h3>
-            <div>
-              <p>
-                L’entreprise a l’obligation de communiquer le nom du médiateur qu’elle a choisi. Les coordonnées du médiateur sont normalement écrites sur le site internet de l’entreprise ou sur le contrat, bon de commande…
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Comment ?</h3>
-            <div>
-              <p>
-                Je remplis le formulaire sur le site internet du médiateur ou je le contacte par voie postale.
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Pourquoi ?</h3>
-            <div>
-              <p>
-                Le médiateur va m’aider à trouver un arrangement avec l’entreprise.
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Combien ça coûte ?</h3>
-            <div>
-              <p>
-                C’est gratuit !
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Comment faire si je ne trouve pas le nom du médiateur ?</h3>
-            <div>
-              <p>
-                Je contacte le conciliateur le plus proche de chez moi.
-                <br />
-                Je le cherche sur le site <a href="https://www.conciliateurs.fr/" target="_blank" title="Nouvelle fenêtre">conciliateurs.fr</a>.
-                <br />
-                Il va m’aider à trouver une solution avec l’entreprise.
-                <br />
-                C’est gratuit !
-              </p>
-            </div>
-
-            <hr/>
-
-            <button class="btn btn-primary" (click)="continue()">J'ai déjà effectué cette démarche</button>
-          </div>
-        </div>
-        <div class="pt-3">
-          <button class="link" (click)="back()">
-            <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
-          </button>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="3">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="mb-3">Démarche n°3</h2>
-
-            <div class="subtitle">
-              Je vais en justice, c’est-à-dire que je demande un procès au tribunal.
-            </div>
-
-            <p class="text-warning">
-              <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i>
-              Attention, il est obligatoire d’avoir fait <a class="text-danger" (click)="back()">la démarche n°2 (médiateur ou conciliateur)</a> avant de saisir le tribunal pour un litige inférieur à 5 000 euros
-            </p>
-
-            <h3>Quand ?</h3>
-            <div>
-              <p>
-                Lorsque je n’ai pas trouvé de solution avec le médiateur ou le conciliateur.
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Comment ?</h3>
-            <div>
-              <p>
-                En consultant la page
-                <a href="https://www.service-public.fr/particuliers/vosdroits/F35125" target="_blank" title="Service public - vos droits (nouvelle fenêtre)">
-                  https://www.service-public.fr/particuliers/vosdroits/F35125
-                </a>
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Pourquoi ?</h3>
-            <div>
-              <p>
-                Pour que le juge du tribunal décide qui est en tort et quelles solutions doivent être mises en place.
-              </p>
-            </div>
-
-            <hr/>
-
-            <h3>Combien ça coûte ?</h3>
-            <div>
-              <p>
-                Aller au tribunal est gratuit mais des frais peuvent se rajouter au cours de la procédure (frais d’avocat, frais d’expertise…).
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-3">
-          <button class="link" (click)="back()">
-            <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
-          </button>
-        </div>
-      </ng-container>
-
-      <div class="notification info">
+  <ng-container *ngSwitchCase="2">
+    <app-panel>
+      <app-panel-body>
+        <h2 class="mb-3">Démarche n°2</h2>
 
         <div class="subtitle">
-          Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.
+          Je contacte un médiateur de la consommation, c’est-à-dire une personne chargée de régler les problèmes des consommateurs avec les entreprises.
         </div>
+
+        <h3>Quand ?</h3>
         <div>
           <p>
-            Une association de consommateurs pourra vous aider à écrire les courriers de réclamation ou de mise en demeure,
-            contacter l'entreprise directement, vous aider à saisir la justice.
+            Deux mois après avoir envoyé mon courrier, si je n’ai pas eu de réponse ou si la réponse ne me satisfait pas.
           </p>
+        </div>
+
+        <hr/>
+
+        <h3>Qui ?</h3>
+        <div>
           <p>
-            Pour bénéficier de leur aide, vous devez payer une somme, appelée « adhésion ».
-            Pour connaître le prix de cette adhésion, vous pouvez les contacter directement.
-            En fonction de votre situation, certaines associations peuvent baisser le prix de l'adhésion.
+            L’entreprise a l’obligation de communiquer le nom du médiateur qu’elle a choisi. Les coordonnées du médiateur sont normalement écrites sur le site internet de l’entreprise ou sur le contrat, bon de commande…
           </p>
+        </div>
+
+        <hr/>
+
+        <h3>Comment ?</h3>
+        <div>
           <p>
-            Liste des associations de consommateurs officielles :
-            <a href="https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales" target="_blank">
-              https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales
+            Je remplis le formulaire sur le site internet du médiateur ou je le contacte par voie postale.
+          </p>
+        </div>
+
+        <hr/>
+
+        <h3>Pourquoi ?</h3>
+        <div>
+          <p>
+            Le médiateur va m’aider à trouver un arrangement avec l’entreprise.
+          </p>
+        </div>
+
+        <hr/>
+
+        <h3>Combien ça coûte ?</h3>
+        <div>
+          <p>
+            C’est gratuit !
+          </p>
+        </div>
+
+        <hr/>
+
+        <h3>Comment faire si je ne trouve pas le nom du médiateur ?</h3>
+        <div>
+          <p>
+            Je contacte le conciliateur le plus proche de chez moi.
+            <br />
+            Je le cherche sur le site <a href="https://www.conciliateurs.fr/" target="_blank" title="Nouvelle fenêtre">conciliateurs.fr</a>.
+            <br />
+            Il va m’aider à trouver une solution avec l’entreprise.
+            <br />
+            C’est gratuit !
+          </p>
+        </div>
+
+        <hr/>
+
+        <button class="btn btn-primary" (click)="continue()">J'ai déjà effectué cette démarche</button>
+      </app-panel-body>
+    </app-panel>
+    <div class="pt-3">
+      <button class="link" (click)="back()">
+        <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="3">
+    <app-panel>
+      <app-panel-body>
+        <h2 class="mb-3">Démarche n°3</h2>
+
+        <div class="subtitle">
+          Je vais en justice, c’est-à-dire que je demande un procès au tribunal.
+        </div>
+
+        <p class="text-warning">
+          <i class="material-icons md-18 attach-icon text-danger" aria-hidden="true">warning</i>
+          Attention, il est obligatoire d’avoir fait <a class="text-danger" (click)="back()">la démarche n°2 (médiateur ou conciliateur)</a> avant de saisir le tribunal pour un litige inférieur à 5 000 euros
+        </p>
+
+        <h3>Quand ?</h3>
+        <div>
+          <p>
+            Lorsque je n’ai pas trouvé de solution avec le médiateur ou le conciliateur.
+          </p>
+        </div>
+
+        <hr/>
+
+        <h3>Comment ?</h3>
+        <div>
+          <p>
+            En consultant la page
+            <a href="https://www.service-public.fr/particuliers/vosdroits/F35125" target="_blank" title="Service public - vos droits (nouvelle fenêtre)">
+              https://www.service-public.fr/particuliers/vosdroits/F35125
             </a>
           </p>
         </div>
-      </div>
+
+        <hr/>
+
+        <h3>Pourquoi ?</h3>
+        <div>
+          <p>
+            Pour que le juge du tribunal décide qui est en tort et quelles solutions doivent être mises en place.
+          </p>
+        </div>
+
+        <hr/>
+
+        <h3>Combien ça coûte ?</h3>
+        <div>
+          <p>
+            Aller au tribunal est gratuit mais des frais peuvent se rajouter au cours de la procédure (frais d’avocat, frais d’expertise…).
+          </p>
+        </div>
+      </app-panel-body>
+    </app-panel>
+
+    <div class="pt-3">
+      <button class="link" (click)="back()">
+        <i class="material-icons" aria-hidden="true">keyboard_arrow_left</i> Démarche précédente
+      </button>
     </div>
-  </section>
-</main>
+  </ng-container>
+
+  <app-alert type="info">
+    <div class="subtitle">
+      Pour réaliser ces étapes, vous pouvez contacter une association de consommateurs.
+    </div>
+    <div>
+      <p>
+        Une association de consommateurs pourra vous aider à écrire les courriers de réclamation ou de mise en demeure,
+        contacter l'entreprise directement, vous aider à saisir la justice.
+      </p>
+      <p>
+        Pour bénéficier de leur aide, vous devez payer une somme, appelée « adhésion ».
+        Pour connaître le prix de cette adhésion, vous pouvez les contacter directement.
+        En fonction de votre situation, certaines associations peuvent baisser le prix de l'adhésion.
+      </p>
+      <p>
+        Liste des associations de consommateurs officielles :
+        <a href="https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales" target="_blank">
+          https://www.economie.gouv.fr/dgccrf/Liste-et-coordonnees-des-associations-nationales
+        </a>
+      </p>
+    </div>
+  </app-alert>
+</app-page>

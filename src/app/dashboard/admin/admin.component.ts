@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
 import { AccountService } from '../../services/account.service';
-import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PendingDGCCRF } from '../../model/PendingDGCCRF';
 import { User } from '../../model/AuthUser';
@@ -11,13 +8,10 @@ import { User } from '../../model/AuthUser';
   selector: 'app-admin',
   templateUrl: './admin.component.html'
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
 
   constructor(public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
-              private accountService: AccountService,
-              private route: ActivatedRoute) { }
+              private accountService: AccountService) { }
 
   readonly emailCtrl = new FormControl('', [Validators.required, Validators.email]);
   readonly invitationForm = this.formBuilder.group({
@@ -25,36 +19,33 @@ export class AdminComponent implements OnInit {
   });
 
   loading = false;
+  fetching = false;
   usersDGCCRF?: User[];
   pendingDGCCRF?: PendingDGCCRF[];
   showSuccess = false;
   showErrors = false;
   emailRejectedError?: string;
 
-  ngOnInit() {
-    this.titleService.setTitle(pages.secured.admin.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.admin.description });
-  }
 
   showPendingDGCCRF() {
-    this.loading = true;
+    this.fetching = true;
     this.pendingDGCCRF = undefined;
     this.usersDGCCRF = undefined;
     this.accountService.listDGCCRFInvitations().subscribe(
       pendingDGCCRF => {
-        this.loading = false;
+        this.fetching = false;
         this.pendingDGCCRF = pendingDGCCRF;
       }
     );
   }
 
   showUsersDGCCRF() {
-    this.loading = true;
+    this.fetching = true;
     this.pendingDGCCRF = undefined;
     this.usersDGCCRF = undefined;
     this.accountService.listDGCCRFUsers().subscribe(
       users => {
-        this.loading = false;
+        this.fetching = false;
         this.usersDGCCRF = users;
       }
     );

@@ -9,6 +9,10 @@ import { AccountRegistrationComponent } from './account-registration/account-reg
 import { EmailValidationComponent } from './email-validation/email-validation.component';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { PanelModule } from '../../dashboard/shared/panel/panel.module';
+import { PageModule } from '../../dashboard/shared/page/page.module';
+import { FenderModule } from '../../dashboard/shared/fender/fender';
+import { AlertModule } from '../../dashboard/shared/alert/alert';
 
 defineLocale('fr', frLocale);
 
@@ -39,6 +43,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     ComponentsModule,
+    PanelModule,
+    PageModule,
+    FenderModule,
+    AlertModule,
   ],
   exports: [
     RouterModule,

@@ -9,6 +9,9 @@ import { AppPermissionModule } from '../../directives/app-permission/app-permiss
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PageModule } from '../../dashboard/shared/page/page.module';
+import { AlertModule } from '../../dashboard/shared/alert/alert';
+import { PanelModule } from '../../dashboard/shared/panel/panel.module';
 
 const routes: Routes = [
   { path: 'entreprise/activation', component: CompanyActivationComponent },
@@ -29,6 +32,9 @@ const routes: Routes = [
     AppRoleModule,
     AppPermissionModule,
     PaginationModule.forRoot(),
+    PageModule,
+    AlertModule,
+    PanelModule,
   ],
   exports: [
     RouterModule

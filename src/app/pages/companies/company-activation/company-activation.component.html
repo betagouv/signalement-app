@@ -1,101 +1,93 @@
 <app-banner title="Activation de l'espace entreprise" [backButton]="true"></app-banner>
 
-<main role="main">
-  <section class="section section-lightest-grey position-relative">
-    <div class="container max-width">
-      <div class="notification success mt-3 mb-5" *ngIf="emailSent; else activationFormTpl">
-        Un email vous a été envoyé avec les instructions pour accéder au compte de l'entreprise.
-      </div>
-      <ng-template #activationFormTpl>
-        <div class="card mb-5">
-          <div class="card-body">
-            <form [formGroup]="activationForm" (ngSubmit)="submitActivationForm()" class="form-horizontal">
-              <h2 class="text-primary">
-                Vous avez reçu un courrier postal ?
-              </h2>
-              <div class="font-weight-bold pb-3">
-                Activez votre compte pour consulter votre signalement
-              </div>
-              <div class="form-group">
-                <label for="login">
-                  SIRET de votre entreprise
-                </label>
-                <div class="note mb-1" id="siret-description">
-                  Il doit correspondre à la raison sociale indiquée sur le courrier.
-                </div>
-                <div *ngIf="showErrors && siretCtrl.hasError('required')" class="text-warning">
-                  <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre SIRET.
-                </div>
-                <div *ngIf="showErrors && siretCtrl.hasError('pattern')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Le SIRET doit comporter 14 chiffres.
-                </div>
-                <input [formControl]="siretCtrl" type="text" class="form-control" id="login" placeholder="14 caractères de votre SIRET" aria-describedby="siret-description">
-              </div>
-              <div class="form-group">
-                <label for="password">
-                  Code d'activation
-                </label>
-                <div class="note mb-1" id="code-description">
-                  Code à 6 chiffres indiqué sur le courrier.
-                </div>
-                <div *ngIf="showErrors && codeCtrl.hasError('required')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre code d'activation.
-                </div>
-                <div *ngIf="showErrors && codeCtrl.hasError('pattern')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Le code doit comporter 6 chiffres.
-                </div>
-                <input [formControl]="codeCtrl" type="password" class="form-control" id="password" placeholder="Code d'activation à 6 chiffres" aria-describedby="code-description">
-              </div>
-              <div class="form-group">
-                <label for="email">
-                  Email
-                </label>
-                <div class="note mb-1">
-                  Adresse email de votre choix.
-                </div>
-                <div *ngIf="showErrors && emailCtrl.hasError('required')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre adresse email.
-                </div>
-                <div *ngIf="showErrors && emailCtrl.hasError('email')" class="text-warning">
-                   <i class="material-icons md-18">error_outline</i> Veuillez renseigner une adresse email valide.
-                </div>
-                <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" />
-              </div>
-              <div class="notification error" *ngIf="activationError ">
-                <span class="font-weight-bold">
-                  <i class="material-icons mr-2">error_outline</i>Échec de l'activation.
-                </span>
-                <p>
-                  Avez-vous utilisé le bon SIRET ?
-                  <br />Pour une même adresse physique, il est possible d'avoir plusieurs entités juridiques et donc plusieurs SIRET (exploitant, gestionnaire...).
-                </p>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-12">
-                  <button type="submit" class="btn btn-lg btn-primary">
-                    Activer mon compte
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </ng-template>
-      <ngx-loading [show]="loading"></ngx-loading>
-      <div class="card mb-3" *ngIf="!connectedUser && !emailSent">
-        <div class="card-body">
-          <h2 class="pb-2 text-primary">Vous avez déjà un compte ?</h2>
-          <div>
-            <button type="button" class="btn btn-lg btn-primary" [routerLink]="['/connexion']">
-              Me connecter
-            </button>
-          </div>
-          <p class="note pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:support@signal.conso.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">support@signal.conso.gouv.fr</a>.</p>
-        </div>
-      </div>
-    </div>
+<app-page pageDefinitionKey="account_activation" size="small" [loading]="loading">
+  <app-alert type="success" class="mt-3 mb-5" *ngIf="emailSent; else activationFormTpl">
+    Un email vous a été envoyé avec les instructions pour accéder au compte de l'entreprise.
+  </app-alert>
 
-    <ngx-loading [show]="loading"></ngx-loading>
+  <ng-template #activationFormTpl>
+    <app-panel>
+      <app-panel-body>
+        <form [formGroup]="activationForm" (ngSubmit)="submitActivationForm()" class="form-horizontal">
+          <h2 class="text-primary">
+            Vous avez reçu un courrier postal ?
+          </h2>
+          <div class="font-weight-bold pb-3">
+            Activez votre compte pour consulter votre signalement
+          </div>
+          <div class="form-group">
+            <label for="login">
+              SIRET de votre entreprise
+            </label>
+            <div class="note mb-1" id="siret-description">
+              Il doit correspondre à la raison sociale indiquée sur le courrier.
+            </div>
+            <div *ngIf="showErrors && siretCtrl.hasError('required')" class="text-warning">
+              <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre SIRET.
+            </div>
+            <div *ngIf="showErrors && siretCtrl.hasError('pattern')" class="text-warning">
+               <i class="material-icons md-18">error_outline</i> Le SIRET doit comporter 14 chiffres.
+            </div>
+            <input [formControl]="siretCtrl" type="text" class="form-control" id="login" placeholder="14 caractères de votre SIRET" aria-describedby="siret-description">
+          </div>
+          <div class="form-group">
+            <label for="password">
+              Code d'activation
+            </label>
+            <div class="note mb-1" id="code-description">
+              Code à 6 chiffres indiqué sur le courrier.
+            </div>
+            <div *ngIf="showErrors && codeCtrl.hasError('required')" class="text-warning">
+               <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre code d'activation.
+            </div>
+            <div *ngIf="showErrors && codeCtrl.hasError('pattern')" class="text-warning">
+               <i class="material-icons md-18">error_outline</i> Le code doit comporter 6 chiffres.
+            </div>
+            <input [formControl]="codeCtrl" type="password" class="form-control" id="password" placeholder="Code d'activation à 6 chiffres" aria-describedby="code-description">
+          </div>
+          <div class="form-group">
+            <label for="email">
+              Email
+            </label>
+            <div class="note mb-1">
+              Adresse email de votre choix.
+            </div>
+            <div *ngIf="showErrors && emailCtrl.hasError('required')" class="text-warning">
+               <i class="material-icons md-18">error_outline</i> Veuillez renseigner votre adresse email.
+            </div>
+            <div *ngIf="showErrors && emailCtrl.hasError('email')" class="text-warning">
+               <i class="material-icons md-18">error_outline</i> Veuillez renseigner une adresse email valide.
+            </div>
+            <input [formControl]="emailCtrl" type="email" class="form-control" id="email" placeholder="Email" name="email" autocomplete="email" />
+          </div>
+          <div class="notification error" *ngIf="activationError ">
+            <span class="font-weight-bold">
+              <i class="material-icons mr-2">error_outline</i>Échec de l'activation.
+            </span>
+            <p>
+              Avez-vous utilisé le bon SIRET ?
+              <br />Pour une même adresse physique, il est possible d'avoir plusieurs entités juridiques et donc plusieurs SIRET (exploitant, gestionnaire...).
+            </p>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-lg btn-primary">
+                Activer mon compte
+              </button>
+            </div>
+          </div>
+        </form>
+      </app-panel-body>
+    </app-panel>
+  </ng-template>
 
-  </section>
-</main>
+  <app-panel class="mb-3" *ngIf="!connectedUser && !emailSent">
+    <app-panel-body>
+      <h2 class="pb-2 text-primary">Vous avez déjà un compte ?</h2>
+      <button type="button" class="btn btn-lg btn-primary" [routerLink]="['/connexion']">
+        Me connecter
+      </button>
+      <p class="note pt-3">En cas de difficultés, vous pouvez contacter par email le service <a href="mailto:support@signal.conso.gouv.fr" title="SignalConso (ouverture de la messagerie par défaut)">support@signal.conso.gouv.fr</a>.</p>
+    </app-panel-body>
+  </app-panel>
+</app-page>

@@ -1,3 +1,5 @@
+@import "src/theme/variables";
+
 :host ::ng-deep {
 
   img {
@@ -26,11 +28,10 @@
   }
 
   .footer-links {
+    display: flex;
+    justify-content: space-between;
     border-top: 1px solid lightgray;
-    padding-top: 30px;
+    padding-top: spacing(2);
     margin: 50px 0 0;
   }
-
-
-
 }

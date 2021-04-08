@@ -1,6 +1,6 @@
 <app-banner title="Suivi des téléphones"></app-banner>
 
-<app-page animated="false">
+<app-page animated="false" pageDefinitionKey="reportedPhones">
   <app-panel [loading]="reportedPhoneService.fetching">
     <app-panel-header>
       <input [(ngModel)]="phoneFilter" class="form-control form-control-material phone-form-control" placeholder="Numéro de téléphone" (keydown.enter)="fetchReportedPhones()"/>

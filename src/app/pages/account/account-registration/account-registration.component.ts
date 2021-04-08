@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import {
   AccountEventActions,
@@ -11,7 +10,6 @@ import {
   EventCategories,
 } from '../../../services/analytics.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import pages from '../../../../assets/data/pages.json';
 import { TokenInfo, User } from '../../../model/AuthUser';
 import { AccountService } from '../../../services/account.service';
 import HttpStatusCodes from 'http-status-codes';
@@ -27,7 +25,7 @@ import { switchMap } from 'rxjs/operators';
 export class AccountRegistrationComponent implements OnInit {
 
   tokenInfo: TokenInfo;
-  isAuthenticated: boolean;
+  isAuthenticated = false;
 
   activationForm: FormGroup;
   firstNameCtrl: FormControl;
@@ -44,8 +42,6 @@ export class AccountRegistrationComponent implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
               private accountService: AccountService,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
@@ -53,9 +49,6 @@ export class AccountRegistrationComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.account.activation.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.account.activation.description });
-
     if (isPlatformBrowser(this.platformId)) {
 
       const siret = this.activatedRoute.snapshot.paramMap.get('siret');

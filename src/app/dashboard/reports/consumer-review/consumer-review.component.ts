@@ -4,8 +4,6 @@ import { ReportService } from '../../../services/report.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ReviewOnReportResponse } from '../../../model/ReportEvent';
 import HttpStatusCodes from 'http-status-codes';
-import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-consumer-review',
@@ -29,17 +27,14 @@ export class ConsumerReviewComponent implements OnInit {
   conflictError?: boolean;
   postSuccess?: boolean;
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(
+    public formBuilder: FormBuilder,
     private reportService: ReportService,
     private activatedRoute: ActivatedRoute,
-    private titleService: Title,
-    private meta: Meta) {
+  ) {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.reports.review.title);
-    this.meta.updateTag({ name: 'description', content: pages.reports.review.title });
-
     this.activatedRoute.paramMap.subscribe(
       (params: ParamMap) => this.reportId = params.get('reportId')!
     );

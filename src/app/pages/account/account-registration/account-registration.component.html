@@ -1,119 +1,119 @@
 <app-banner title="Activation du compte"></app-banner>
 
-<main role="main">
-  <section class="section section-lightest-grey position-relative">
-    <div class="container max-width" *ngIf="!loading">
-      <div class="notification error mt-3" *ngIf="isAuthenticated; else notAuthenticated">
-        <p class="font-weight-bold">Vous êtes actuellement connecté.</p>
-        <p>Pour procéder à la création d'un nouveau compte, vous devez vous déconnecter.</p>
-      </div>
-      <ng-template #notAuthenticated>
-        <div class="notification error mt-3" *ngIf="tokenError; else noErrors">
-          <p class="font-weight-bold">Le lien sur lequel vous avez cliqué n'est plus valide.</p>
-          <p>Si vous avez déjà créé votre compte, vous pouvez vous <a routerLink="/connexion">connecter</a> à l'aide de votre adresse email et mot de passe.</p>
-          <p>Sinon, vous pouvez demander au gestionnaire de l'entreprise de vous envoyer une nouvelle invitation.</p>
-        </div>
-      </ng-template>
-      <ng-template #noErrors>
-        <div class="card mb-5">
-          <div class="card-body">
-            <form [formGroup]="activationForm" (ngSubmit)="submitForm()" *ngIf="activationForm">
-              <h2 class="text-primary mb-4">Créer mes identifiants</h2>
-              <div class="form-group" *ngIf="tokenInfo?.companySiret">
-                <label for="siret">
-                  SIRET
-                </label>
-                <input type="text" class="form-control" id="siret" disabled [value]="tokenInfo?.companySiret">
-              </div>
-              <div class="form-group">
-                <label for="email">
-                  Email
-                </label>
-                <input type="text" class="form-control" id="email" disabled [value]="tokenInfo?.emailedTo">
-              </div>
-              <div class="form-group">
-                <label for="firstName">
-                  Prénom (obligatoire)
-                </label>
-                <div *ngIf="showErrors && firstNameCtrl.hasError('required')" class="text-warning">
-                  <i class="material-icons md-18">warning</i> Veuillez renseigner votre prénom.
-                </div>
-                <input [formControl]="firstNameCtrl" type="text" class="form-control" id="firstName" placeholder="Prénom" name="fname" autocomplete="given-name">
-              </div>
-              <div class="form-group">
-                <label for="lastName">
-                  Nom (obligatoire)
-                </label>
-                <div *ngIf="showErrors && lastNameCtrl.hasError('required')" class="text-warning">
-                  <i class="material-icons md-18">warning</i> Veuillez renseigner votre nom.
-                </div>
-                <input [formControl]="lastNameCtrl" type="text" class="form-control" id="lastName" placeholder="Nom" name="lname" autocomplete="family-name">
-              </div>
-              <div class="form-group">
-                <label for="password">
-                  Mot de passe (obligatoire)
-                </label>
-                <div class="note mb-1">
-                  Le mot de passe doit avoir 8 caractères minimum.
-                </div>
-                <div *ngIf="showErrors && passwordCtrl.hasError('required')" class="text-warning">
-                  <i class="material-icons md-18">warning</i> Veuillez renseigner votre mot de passe.
-                </div>
-                <div *ngIf="showErrors && passwordCtrl.hasError('minlength')" class="text-warning">
-                  <i class="material-icons md-18">warning</i> Le mot de passe doit comporter 8 caractères minimum.
-                </div>
-                <input [formControl]="passwordCtrl" type="password" class="form-control" id="password" placeholder="Mot de passe">
-              </div>
-              <div class="form-group">
-                <label for="confirmPassword">
-                  Confirmer le mot de passe (obligatoire)
-                </label>
-                <div *ngIf="showErrors && confirmPasswordCtrl.hasError('required')" class="text-warning">
-                  <i class="material-icons md-18">warning</i> Veuillez confirmer votre mot de passe.
-                </div>
-                <div *ngIf="showErrors && activationForm.hasError('notEquivalent')" class="text-warning">
-                  <i class="material-icons md-18">warning</i> Les 2 mots de passe ne correspondent pas.
-                </div>
-                <input [formControl]="confirmPasswordCtrl" type="password" class="form-control" id="confirmPassword" placeholder="Mot de passe">
-              </div>
-              <div class="form-group row">
-                <div *ngIf="showErrors && gcuAgreementCtrl.hasError('required')" class="col-12 text-warning">
-                  <i class="material-icons md-18">warning</i> Veuillez accepter les conditions générales d'utilisation.
-                </div>
-                <div class="col-2 col-sm-1 text-right pr-1">
-                  <input type="checkbox" [formControl]="gcuAgreementCtrl" id="gcuAgreement"/>
-                </div>
-                <div class="col-10 col-sm-11 pl-1">
-                  <label class="d-block mb-0 pointer" for="gcuAgreement">
-                    Je reconnais avoir pris connaissance des <a routerLink="/conditions-generales-utilisation/professionnel" target="_blank">conditions générales d'utilisation</a> de SignalConso
-                  </label>
-                </div>
-              </div>
+<app-page size="small" pageDefinitionKey="account_activation" [loading]="loading" [ngSwitch]="isAuthenticated">
+  <ng-container *ngIf="!loading">
+    <app-alert type="error" *ngIf="isAuthenticated">
+      <p class="font-weight-bold">Vous êtes actuellement connecté.</p>
+      <p>Pour procéder à la création d'un nouveau compte, vous devez vous déconnecter.</p>
+    </app-alert>
 
-              <div class="notification error mt-3" *ngIf="loadingError">
-                Une erreur technique s'est produite
-              </div>
-              <div class="notification warning mt-3" *ngIf="conflictError">
-                <p>
-                  <b>Il y a déjà un compte SignalConso associé à l'adresse mail {{emailCtrl.value}}.</b>
-                </p>
-                <p *ngIf="tokenInfo?.companySiret">
-                  Pour rattacher le Siret {{tokenInfo?.companySiret}} à l'adresse mail {{emailCtrl.value}} vous devez d'abord <a routerLink="/connexion">vous connecter</a>.
-                </p>
-              </div>
-              <hr />
-              <div class="form-group row">
-                <div class="col-sm-12">
-                  <button type="submit" class="btn btn-lg btn-primary">
-                    Activer le compte
-                  </button>
-                </div>
-              </div>
-            </form>
+    <app-alert type="error" *ngIf="!isAuthenticated && tokenError">
+      <p class="font-weight-bold">Le lien sur lequel vous avez cliqué n'est plus valide.</p>
+      <p>Si vous avez déjà créé votre compte, vous pouvez vous <a routerLink="/connexion">connecter</a> à l'aide de
+        votre adresse email et mot de passe.</p>
+      <p>Sinon, vous pouvez demander au gestionnaire de l'entreprise de vous envoyer une nouvelle invitation.</p>
+    </app-alert>
+
+    <app-panel *ngIf="!isAuthenticated && !tokenError">
+      <app-panel-body>
+        <form [formGroup]="activationForm" (ngSubmit)="submitForm()" *ngIf="activationForm">
+          <h2 class="text-primary mb-4">Créer mes identifiants</h2>
+          <div class="form-group" *ngIf="tokenInfo?.companySiret">
+            <label for="siret">
+              SIRET
+            </label>
+            <input type="text" class="form-control" id="siret" disabled [value]="tokenInfo?.companySiret">
           </div>
-        </div>
-      </ng-template>
-    </div>
-    <ngx-loading [show]="loading"></ngx-loading>
-  </section>
-</main>
+          <div class="form-group">
+            <label for="email">
+              Email
+            </label>
+            <input type="text" class="form-control" id="email" disabled [value]="tokenInfo?.emailedTo">
+          </div>
+          <div class="form-group">
+            <label for="firstName">
+              Prénom (obligatoire)
+            </label>
+            <div *ngIf="showErrors && firstNameCtrl.hasError('required')" class="text-warning">
+              <i class="material-icons md-18">warning</i> Veuillez renseigner votre prénom.
+            </div>
+            <input [formControl]="firstNameCtrl" type="text" class="form-control" id="firstName" placeholder="Prénom"
+                   name="fname" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">
+              Nom (obligatoire)
+            </label>
+            <div *ngIf="showErrors && lastNameCtrl.hasError('required')" class="text-warning">
+              <i class="material-icons md-18">warning</i> Veuillez renseigner votre nom.
+            </div>
+            <input [formControl]="lastNameCtrl" type="text" class="form-control" id="lastName" placeholder="Nom"
+                   name="lname" autocomplete="family-name">
+          </div>
+          <div class="form-group">
+            <label for="password">
+              Mot de passe (obligatoire)
+            </label>
+            <div class="note mb-1">
+              Le mot de passe doit avoir 8 caractères minimum.
+            </div>
+            <div *ngIf="showErrors && passwordCtrl.hasError('required')" class="text-warning">
+              <i class="material-icons md-18">warning</i> Veuillez renseigner votre mot de passe.
+            </div>
+            <div *ngIf="showErrors && passwordCtrl.hasError('minlength')" class="text-warning">
+              <i class="material-icons md-18">warning</i> Le mot de passe doit comporter 8 caractères minimum.
+            </div>
+            <input [formControl]="passwordCtrl" type="password" class="form-control" id="password"
+                   placeholder="Mot de passe">
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">
+              Confirmer le mot de passe (obligatoire)
+            </label>
+            <div *ngIf="showErrors && confirmPasswordCtrl.hasError('required')" class="text-warning">
+              <i class="material-icons md-18">warning</i> Veuillez confirmer votre mot de passe.
+            </div>
+            <div *ngIf="showErrors && activationForm.hasError('notEquivalent')" class="text-warning">
+              <i class="material-icons md-18">warning</i> Les 2 mots de passe ne correspondent pas.
+            </div>
+            <input [formControl]="confirmPasswordCtrl" type="password" class="form-control" id="confirmPassword"
+                   placeholder="Mot de passe">
+          </div>
+          <div class="form-group row">
+            <div *ngIf="showErrors && gcuAgreementCtrl.hasError('required')" class="col-12 text-warning">
+              <i class="material-icons md-18">warning</i> Veuillez accepter les conditions générales d'utilisation.
+            </div>
+            <div class="col-2 col-sm-1 text-right pr-1">
+              <input type="checkbox" [formControl]="gcuAgreementCtrl" id="gcuAgreement"/>
+            </div>
+            <div class="col-10 col-sm-11 pl-1">
+              <label class="d-block mb-0 pointer" for="gcuAgreement">
+                Je reconnais avoir pris connaissance des <a routerLink="/conditions-generales-utilisation/professionnel"
+                                                            target="_blank">conditions générales d'utilisation</a> de
+                SignalConso
+              </label>
+            </div>
+          </div>
+
+          <div class="notification error mt-3" *ngIf="loadingError">
+            Une erreur technique s'est produite
+          </div>
+          <div class="notification warning mt-3" *ngIf="conflictError">
+            <p>
+              <b>Il y a déjà un compte SignalConso associé à l'adresse mail {{emailCtrl.value}}.</b>
+            </p>
+            <p *ngIf="tokenInfo?.companySiret">
+              Pour rattacher le Siret {{tokenInfo?.companySiret}} à l'adresse mail {{emailCtrl.value}} vous devez
+              d'abord <a routerLink="/connexion">vous connecter</a>.
+            </p>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary">
+              Activer le compte
+            </button>
+          </div>
+        </form>
+      </app-panel-body>
+    </app-panel>
+  </ng-container>
+</app-page>

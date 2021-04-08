@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Meta, Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../../services/analytics.service';
-import pages from '../../../../assets/data/pages.json';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-password-forgot',
@@ -21,16 +18,14 @@ export class PasswordForgotComponent implements OnInit {
   loading: boolean;
   loadingError: boolean;
 
-  constructor(public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
-              private authenticationService: AuthenticationService,
-              private analyticsService: AnalyticsService,
-              private route: ActivatedRoute) { }
+  constructor(
+    public formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private analyticsService: AnalyticsService,
+  ) {
+  }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.login.forgotPassword.title);
-    this.meta.updateTag({ name: 'description', content: pages.login.forgotPassword.description });
     this.initLoginForm();
   }
 

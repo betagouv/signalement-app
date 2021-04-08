@@ -11,316 +11,257 @@
   </h2>
 </app-banner>
 
-<main role="main">
-  <section class="section section-white position-relative pb-0">
-    <div class="container">
-      <div class="notification success mb-5" *ngIf="responseSuccess">
-        <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i>
-        <span  *appRole="[roles.Pro]">Votre réponse a été envoyée au consommateur. Elle sera aussi consultable par la DGCCRF.</span>
-        <span *appRole="[roles.Admin, roles.DGCCRF]">Votre saisie a bien été prise en compte, nous vous en remercions.</span>
+<app-page pageDefinitionKey="reports_detail">
+  <app-alert type="success" class="mb-5" *ngIf="responseSuccess">
+    <span *appRole="[roles.Pro]">Votre réponse a été envoyée au consommateur. Elle sera aussi consultable par la DGCCRF.</span>
+    <span *appRole="[roles.Admin, roles.DGCCRF]">Votre saisie a bien été prise en compte, nous vous en remercions.</span>
+  </app-alert>
+
+  <app-panel>
+    <app-panel-body>
+      <div class="text-center" *ngIf="loadingError && !report">
+        <span class="error">
+          Une erreur s'est produite lors de la récupération de ce signalement.
+        </span>
       </div>
-      <div class="panel">
-        <div class="text-center" *ngIf="loadingError && !report">
-          <span class="error">
-            Une erreur s'est produite lors de la récupération de ce signalement.
-          </span>
-        </div>
-        <ng-container *ngIf="report">
-          <div class="row">
-            <div class="col-12 order-last col-sm-3 order-sm-first">
+      <ng-container *ngIf="report">
+        <div class="row">
+          <div class="col-12 order-last col-sm-3 order-sm-first">
 
-              <app-badge-status [status]="report.status"></app-badge-status>
+            <app-badge-status [status]="report.status"></app-badge-status>
 
-              <hr class="d-sm-none" />
+            <hr class="d-sm-none" />
 
-              <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-                <div class="text-primary font-weight-bold pt-3">
-                  Consommateur
-                  <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
-                     (click)="openModal(updateConsumer)"
-                     *appPermission="permissions.updateReport">
-                    edit
-                  </i>
+            <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+              <div class="text-primary font-weight-bold pt-3">
+                Consommateur
+                <i class="material-icons md-18 text-primary pl-1 pb-1 pointer" aria-hidden="true" title="Détail du signalement"
+                   (click)="openModal(updateConsumer)"
+                   *appPermission="permissions.updateReport">
+                  edit
+                </i>
+              </div>
+              <div class="text-darker-grey" *ngIf="!report.contactAgreement;">Le consommateur souhaite rester anonyme</div>
+              <div>
+                <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
+              </div>
+              <div>
+                {{report.consumer.email}}
+              </div>
+              <ng-template #updateConsumer>
+                <div class="modal-body">
+                  <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm">
+                    <div class="form__group">
+                      <div class="row">
+                        <div class="col-12 col-sm-6">
+                          <label for="firstName"> Prénom (obligatoire)</label>
+                          <input type="text" formControlName="firstName" id="firstName">
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <label for="lastName">Nom (obligatoire)</label>
+                          <input type="text" formControlName="lastName" id="lastName">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form__group">
+                      <label for="email">Email (obligatoire)</label>
+                      <input type="email" formControlName="email" id="email"/>
+                    </div>
+                    <div class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
+                      <div class="row">
+                        <div class="col-2 col-sm-1 text-right pr-1">
+                          <input type="checkbox" formControlName="contactAgreement" id="contactAgreement"/>
+                        </div>
+                        <div class="col-10 col-sm-11 pl-1">
+                          <label class="d-block mb-0 pointer" for="contactAgreement">
+                            Accord pour contact par entreprise
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <app-alert type="error" *ngIf="loadingError">
+                      Une erreur technique s'est produite
+                    </app-alert>
+
+                    <hr />
+                    <div class="col-12 text-center">
+                      <button type="submit" class="btn btn-primary mt-2" id="submitConsumerForm" [disabled]="consumerForm.invalid">
+                        Valider
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div class="text-darker-grey" *ngIf="!report.contactAgreement;">Le consommateur souhaite rester anonyme</div>
-                <div>
-                  <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
-                </div>
+              </ng-template>
+            </ng-container>
+
+            <ng-container *appRole="[roles.Pro]">
+              <div class="text-primary font-weight-bold pt-3">
+                Consommateur
+              </div>
+              <div *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur souhaite rester anonyme</div>
+              <ng-template #contactAgreement>
+                <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
                 <div>
                   {{report.consumer.email}}
                 </div>
-                <ng-template #updateConsumer>
-                  <div class="modal-body">
-                    <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm">
-                      <div class="form__group">
-                        <div class="row">
-                          <div class="col-12 col-sm-6">
-                            <label for="firstName"> Prénom (obligatoire)</label>
-                            <input type="text" formControlName="firstName" id="firstName">
-                          </div>
-                          <div class="col-12 col-sm-6">
-                            <label for="lastName">Nom (obligatoire)</label>
-                            <input type="text" formControlName="lastName" id="lastName">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form__group">
-                        <label for="email">Email (obligatoire)</label>
-                        <input type="email" formControlName="email" id="email"/>
-                      </div>
-                      <div class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
-                        <div class="row">
-                          <div class="col-2 col-sm-1 text-right pr-1">
-                            <input type="checkbox" formControlName="contactAgreement" id="contactAgreement"/>
-                          </div>
-                          <div class="col-10 col-sm-11 pl-1">
-                            <label class="d-block mb-0 pointer" for="contactAgreement">
-                              Accord pour contact par entreprise
-                            </label>
-                          </div>
-                        </div>
-                      </div>
+              </ng-template>
+            </ng-container>
 
-                      <div class="notification error" *ngIf="loadingError">
-                        Une erreur technique s'est produite
-                      </div>
-
-                      <hr />
-                      <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary mt-2" id="submitConsumerForm" [disabled]="consumerForm.invalid">
-                          Valider
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </ng-template>
-              </ng-container>
-
-              <ng-container *appRole="[roles.Pro]">
+            <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+              <div class="text-primary font-weight-bold pt-3">
+                Entreprise
+                <mat-icon
+                  *appPermission="permissions.updateReport"
+                  appCompanySearchDialog
+                  (companySelected)="changeCompany($event)"
+                  class="md-18 pl-1 pb-1 pointer" aria-hidden="true" color="primary"
+                  title="Détail du signalement">
+                  edit
+                </mat-icon>
+              </div>
+              <div>
+                <strong>{{report.company?.siret}}</strong>
+              </div>
+              <div *ngFor="let line of report.company.address?.split(' - ')">{{line}}</div>
+              <div *ngIf="!report.company.name && report.company.postalCode">
+                {{report.company.postalCode}}
+              </div>
+              <div *ngIf="report.company | isForeign">
+                {{report.company.country}}
+              </div>
+              <div *ngIf="report.website.url">
+                {{report.website.url}}
+              </div>
+              <div *ngIf="report.phone">
+                {{report.phone}}
+              </div>
+              <ng-container *ngIf="report.vendor">
                 <div class="text-primary font-weight-bold pt-3">
-                  Consommateur
-                </div>
-                <div *ngIf="!report.contactAgreement; else contactAgreement">Le consommateur souhaite rester anonyme</div>
-                <ng-template #contactAgreement>
-                  <strong>{{report.consumer.firstName}} {{report.consumer.lastName}}</strong>
-                  <div>
-                    {{report.consumer.email}}
-                  </div>
-                </ng-template>
-              </ng-container>
-
-              <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-                <div class="text-primary font-weight-bold pt-3">
-                  Entreprise
-                  <mat-icon
-                    *appPermission="permissions.updateReport"
-                    appCompanySearchDialog
-                    (companySelected)="changeCompany($event)"
-                    class="md-18 pl-1 pb-1 pointer" aria-hidden="true" color="primary"
-                    title="Détail du signalement">
-                    edit
-                  </mat-icon>
+                  Vendeur
                 </div>
                 <div>
-                  <strong>{{report.company?.siret}}</strong>
+                  <strong>{{report.vendor}}</strong>
                 </div>
-                <div *ngFor="let line of report.company.address?.split(' - ')">{{line}}</div>
-                <div *ngIf="!report.company.name && report.company.postalCode">
-                  {{report.company.postalCode}}
-                </div>
-                <div *ngIf="report.company | isForeign">
-                  {{report.company.country}}
-                </div>
-                <div *ngIf="report.website.url">
-                  {{report.website.url}}
-                </div>
-                <div *ngIf="report.phone">
-                  {{report.phone}}
-                </div>
-                <ng-container *ngIf="report.vendor">
-                  <div class="text-primary font-weight-bold pt-3">
-                    Vendeur
-                  </div>
-                  <div>
-                    <strong>{{report.vendor}}</strong>
-                  </div>
-                </ng-container>
-
               </ng-container>
 
-              <ng-container *appRole="[roles.Pro]">
-                <div class="text-primary font-weight-bold pt-4">
-                  Historique
-                </div>
-                <div class="pt-1">
+            </ng-container>
+
+            <ng-container *appRole="[roles.Pro]">
+              <div class="text-primary font-weight-bold pt-4">
+                Historique
+              </div>
+              <div class="pt-1">
+                <small class="text-darker-grey">
+                  <i>{{report.creationDate | date : 'medium'}}</i>
+                </small>
+              </div>
+              <div>
+                Signalement du consommateur
+              </div>
+
+              <ng-container *ngIf="getEvent(eventActionValues.FirstVisit)">
+                <div class="pt-2">
                   <small class="text-darker-grey">
-                    <i>{{report.creationDate | date : 'medium'}}</i>
+                    <i>{{getEvent(eventActionValues.FirstVisit).data.creationDate | date : 'mediumDate'}}</i>
                   </small>
                 </div>
                 <div>
-                  Signalement du consommateur
-                </div>
-
-                <ng-container *ngIf="getEvent(eventActionValues.FirstVisit)">
-                  <div class="pt-2">
-                    <small class="text-darker-grey">
-                      <i>{{getEvent(eventActionValues.FirstVisit).data.creationDate | date : 'mediumDate'}}</i>
-                    </small>
-                  </div>
-                  <div>
-                    Première consultation
-                  </div>
-                </ng-container>
-
-                <ng-container *ngIf="getReportResponse()">
-                  <div class="pt-2">
-                    <small class="text-darker-grey">
-                      <i>{{getEvent(eventActionValues.ReportResponse).data.creationDate | date : 'mediumDate'}}</i>
-                    </small>
-                  </div>
-                  <div>
-                    Réponse au signalement
-                  </div>
-                </ng-container>
-              </ng-container>
-
-            </div>
-            <div class="col-12 order-first offset-sm-1 col-sm-8 order-sm-last">
-              <div class="float-sm-right">
-                <button *appRole="[roles.Admin, roles.DGCCRF];" type="button" class="btn btn-icon btn-secondary mb-2" (click)="downloadReport()">
-                  <i class="material-icons" aria-hidden="true">picture_as_pdf</i>
-                  <span class="sr-only">Télécharger le signalement</span>
-                </button>
-                <ng-container *appPermission="permissions.deleteReport">
-                  <button type="submit" class="btn btn-danger btn-icon ml-2 mb-2" (click)="openModal(delete)">
-                    <i class="material-icons" aria-hidden="true">delete</i>
-                    <span class="sr-only">Supprimer le signalement</span>
-                  </button>
-                  <ng-template #delete>
-                    <div class="modal-body text-center" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length; else noFiles">
-                      Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
-                      <div>
-                        <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
-                      </div>
-                    </div>
-                    <ng-template #noFiles>
-                      <div class="modal-body text-center">
-                        <p>
-                          Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
-                          <br/>
-                          {{reportId}}
-                        </p>
-                        <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
-
-                        <div class="notification error" *ngIf="loadingError">
-                          Une erreur technique s'est produite
-                        </div>
-
-                        <hr />
-                        <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
-                        &nbsp;
-                        <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
-                      </div>
-                    </ng-template>
-                  </ng-template>
-                </ng-container>
-              </div>
-              <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor[report.status]}">{{report.status}}</div>
-              <ng-container>
-                <h2 class="text-primary">Type de signalement</h2>
-                <div class="text-darker-grey pb-2">
-                  Les catégories du signalement sont sélectionnées par le consommateur.
-                </div>
-                <div class="pb-1">
-                  <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{report.category}}
-                </div>
-                <div class="pb-1" *ngFor="let subcategory of report.subcategories">
-                  <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
-                </div>
-                <div *appRole="[roles.Admin, roles.DGCCRF]">
-                  <app-badge *ngFor="let tag of report.tags">{{tag}}</app-badge>
-                </div>
-                <h2 class="text-primary pt-4">Détail du signalement</h2>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
-                      <span class="text-dark-blue font-weight-bold" [innerHTML]="detailInputValue.label"></span>
-                      &nbsp;<span [innerHTML]="detailInputValue.value"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="row pt-3" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length">
-                  <div class="col-12">
-                    <div class="text-dark-blue font-weight-bold">
-                      {{report.consumerUploadedFiles.length === 1 ? 'Pièce jointe' : 'Pièces jointes'}}
-                    </div>
-                    <table class="table table-sm">
-                      <caption class="sr-only">Liste des pièces jointes du consommateur</caption>
-                      <tbody>
-                      <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
-                        <td class="text-left pl-2">
-                          <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                          <span *ngIf="uploadedFile.id">
-                            {{uploadedFile.filename}}
-                          </span>
-                          </a>
-                        </td>
-                        <td class="text-right pointer" *appPermission="permissions.deleteFile">
-                          <img class="remove" alt="Supprimer la pièce jointe" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
-                        </td>
-                        <ng-template #removeTemplate>
-                          <div class="modal-body text-center">
-                            <p>Voulez-vous supprimer cette pièce jointe ?</p>
-                            <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
-                            &nbsp;
-                            <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
-                          </div>
-                        </ng-template>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                  Première consultation
                 </div>
               </ng-container>
+
               <ng-container *ngIf="getReportResponse()">
-                <h2 class="text-primary pt-4" *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse</h2>
-                <ng-template #titleAnswerNoPro>
-                  <h2 class="text-primary pt-4">
-                    Réponse du professionnel
-                  </h2>
-                </ng-template>
-                <div class="pb-2" [ngSwitch]="getReportResponse().responseType">
-                  <i class="material-icons md-18 text-primary">keyboard_arrow_right</i>
-                  <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte</span>
-                  <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé</span>
-                  <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement</span>
+                <div class="pt-2">
+                  <small class="text-darker-grey">
+                    <i>{{getEvent(eventActionValues.ReportResponse).data.creationDate | date : 'mediumDate'}}</i>
+                  </small>
                 </div>
-                <div class="bg-lightest-blue p-2" id="proAnswerConsumerDetails">
-                  {{getReportResponse().consumerDetails}}
+                <div>
+                  Réponse au signalement
                 </div>
-                <ng-container *ngIf="getReportResponse().dgccrfDetails">
-                  <div class="text-dark-blue font-weight-bold pt-3">
-                    Informations complémentaires pour la DGCCRF
-                  </div>
-                  <div class="bg-lightest-blue p-2">
-                    {{getReportResponse().dgccrfDetails}}
-                  </div>
-                </ng-container>
               </ng-container>
-              <div class="row pt-3" *ngIf="report.professionalUploadedFiles && report.professionalUploadedFiles.length">
+            </ng-container>
+
+          </div>
+          <div class="col-12 order-first offset-sm-1 col-sm-8 order-sm-last">
+            <div class="float-sm-right">
+              <button *appRole="[roles.Admin, roles.DGCCRF];" type="button" class="btn btn-icon btn-secondary mb-2" (click)="downloadReport()">
+                <i class="material-icons" aria-hidden="true">picture_as_pdf</i>
+                <span class="sr-only">Télécharger le signalement</span>
+              </button>
+              <ng-container *appPermission="permissions.deleteReport">
+                <button type="submit" class="btn btn-danger btn-icon ml-2 mb-2" (click)="openModal(delete)">
+                  <i class="material-icons" aria-hidden="true">delete</i>
+                  <span class="sr-only">Supprimer le signalement</span>
+                </button>
+                <ng-template #delete>
+                  <div class="modal-body text-center" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length; else noFiles">
+                    Vous devez supprimer toutes les pièces jointes avant de pouvoir supprimer le signalement.
+                    <div>
+                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Fermer</button>
+                    </div>
+                  </div>
+                  <ng-template #noFiles>
+                    <div class="modal-body text-center">
+                      <p>
+                        Pour confirmer la suppression définitive du signalement, recopiez l'identifiant du signalement :
+                        <br/>
+                        {{reportId}}
+                      </p>
+                      <input [(ngModel)]="reportIdToDelete" class="mb-3" placeholder="Identifiant du signalement">
+
+                      <app-alert type="error" *ngIf="loadingError">
+                        Une erreur technique s'est produite
+                      </app-alert>
+
+                      <hr />
+                      <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Annuler</button>
+                      &nbsp;
+                      <button type="button" class="btn btn-danger" (click)="deleteReport()" [disabled]="reportId !== reportIdToDelete">Confirmer la suppression</button>
+                    </div>
+                  </ng-template>
+                </ng-template>
+              </ng-container>
+            </div>
+            <div class="badge d-sm-none mb-3" [ngStyle]="{'background-color': statusColor[report.status]}">{{report.status}}</div>
+            <ng-container>
+              <h2 class="text-primary">Type de signalement</h2>
+              <div class="text-darker-grey pb-2">
+                Les catégories du signalement sont sélectionnées par le consommateur.
+              </div>
+              <div class="pb-1">
+                <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{report.category}}
+              </div>
+              <div class="pb-1" *ngFor="let subcategory of report.subcategories">
+                <i class="material-icons md-18 text-primary">keyboard_arrow_right</i> {{subcategory}}
+              </div>
+              <div *appRole="[roles.Admin, roles.DGCCRF]">
+                <app-badge *ngFor="let tag of report.tags">{{tag}}</app-badge>
+              </div>
+              <h2 class="text-primary pt-4">Détail du signalement</h2>
+              <div class="row">
+                <div class="col-12">
+                  <div class="flex" *ngFor="let detailInputValue of report.detailInputValues">
+                    <span class="text-dark-blue font-weight-bold" [innerHTML]="detailInputValue.label"></span>
+                    &nbsp;<span [innerHTML]="detailInputValue.value"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row pt-3" *ngIf="report.consumerUploadedFiles && report.consumerUploadedFiles.length">
                 <div class="col-12">
                   <div class="text-dark-blue font-weight-bold">
-                    {{report.professionalUploadedFiles.length === 1 ? 'Pièce jointe' : 'Pièces jointes' }}
+                    {{report.consumerUploadedFiles.length === 1 ? 'Pièce jointe' : 'Pièces jointes'}}
                   </div>
                   <table class="table table-sm">
-                    <caption class="sr-only">Liste des pièces jointes du professionnel</caption>
+                    <caption class="sr-only">Liste des pièces jointes du consommateur</caption>
                     <tbody>
-                    <tr *ngFor="let uploadedFile of report.professionalUploadedFiles">
+                    <tr *ngFor="let uploadedFile of report.consumerUploadedFiles">
                       <td class="text-left pl-2">
                         <a href="{{getFileDownloadUrl(uploadedFile)}}">
-                      <span *ngIf="uploadedFile.id">
-                        {{uploadedFile.filename}}
-                      </span>
+                        <span *ngIf="uploadedFile.id">
+                          {{uploadedFile.filename}}
+                        </span>
                         </a>
                       </td>
                       <td class="text-right pointer" *appPermission="permissions.deleteFile">
@@ -339,286 +280,343 @@
                   </table>
                 </div>
               </div>
-              <ng-container *appRole="[roles.Pro]">
-                <div *ngIf="report && !getReportResponse() && ! isClosed()">
-                  <div *ngIf="!responseForm; else proAnswer">
-                    <div class="pt-5 pb-2">
-                      <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Répondre à ce signalement</button>
-                    </div>
-                    <p>
-                      Votre réponse sera visible par le consommateur et la DGCCRF.
-                    </p>
+            </ng-container>
+            <ng-container *ngIf="getReportResponse()">
+              <h2 class="text-primary pt-4" *appRole="[roles.Pro]; else titleAnswerNoPro">Réponse</h2>
+              <ng-template #titleAnswerNoPro>
+                <h2 class="text-primary pt-4">
+                  Réponse du professionnel
+                </h2>
+              </ng-template>
+              <div class="pb-2" [ngSwitch]="getReportResponse().responseType">
+                <i class="material-icons md-18 text-primary">keyboard_arrow_right</i>
+                <span *ngSwitchCase="reportResponseTypes.Accepted">Signalement pris en compte</span>
+                <span *ngSwitchCase="reportResponseTypes.Rejected">Signalement infondé</span>
+                <span *ngSwitchCase="reportResponseTypes.NotConcerned">Etablissement non concerné par le signalement</span>
+              </div>
+              <div class="bg-lightest-blue p-2" id="proAnswerConsumerDetails">
+                {{getReportResponse().consumerDetails}}
+              </div>
+              <ng-container *ngIf="getReportResponse().dgccrfDetails">
+                <div class="text-dark-blue font-weight-bold pt-3">
+                  Informations complémentaires pour la DGCCRF
+                </div>
+                <div class="bg-lightest-blue p-2">
+                  {{getReportResponse().dgccrfDetails}}
+                </div>
+              </ng-container>
+            </ng-container>
+            <div class="row pt-3" *ngIf="report.professionalUploadedFiles && report.professionalUploadedFiles.length">
+              <div class="col-12">
+                <div class="text-dark-blue font-weight-bold">
+                  {{report.professionalUploadedFiles.length === 1 ? 'Pièce jointe' : 'Pièces jointes' }}
+                </div>
+                <table class="table table-sm">
+                  <caption class="sr-only">Liste des pièces jointes du professionnel</caption>
+                  <tbody>
+                  <tr *ngFor="let uploadedFile of report.professionalUploadedFiles">
+                    <td class="text-left pl-2">
+                      <a href="{{getFileDownloadUrl(uploadedFile)}}">
+                    <span *ngIf="uploadedFile.id">
+                      {{uploadedFile.filename}}
+                    </span>
+                      </a>
+                    </td>
+                    <td class="text-right pointer" *appPermission="permissions.deleteFile">
+                      <img class="remove" alt="Supprimer la pièce jointe" src="/assets/images/icon_remove.png" (click)="openModal(removeTemplate)">
+                    </td>
+                    <ng-template #removeTemplate>
+                      <div class="modal-body text-center">
+                        <p>Voulez-vous supprimer cette pièce jointe ?</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="bsModalRef.hide()">Non</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" (click)="removeUploadedFile(uploadedFile)" >Oui</button>
+                      </div>
+                    </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <ng-container *appRole="[roles.Pro]">
+              <div *ngIf="report && !getReportResponse() && ! isClosed()">
+                <div *ngIf="!responseForm; else proAnswer">
+                  <div class="pt-5 pb-2">
+                    <button class="btn btn-primary btn-lg" (click)="showProAnswerForm()" id="answerBtn">Répondre à ce signalement</button>
                   </div>
-                  <ng-template #proAnswer>
-                    <form [formGroup]="responseForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
-                      <h2 class="text-primary pt-4">Ma réponse</h2>
+                  <p>
+                    Votre réponse sera visible par le consommateur et la DGCCRF.
+                  </p>
+                </div>
+                <ng-template #proAnswer>
+                  <form [formGroup]="responseForm" (submit)="submitProAnswerForm()" id="proAnswerForm">
+                    <h2 class="text-primary pt-4">Ma réponse</h2>
 
-                      <hr class="d-sm-none" />
+                    <hr class="d-sm-none" />
 
-                      <fieldset class="form__group">
-                        <div class="text-dark-blue">
-                          <strong>Pouvez-vous préciser votre réponse ?</strong>
-                        </div>
-                        <div *ngIf="showErrors && responseTypeCtrl.hasError('required')" class="text-warning">
-                          <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez sélectionner l'un des choix.
-                        </div>
-                        <div [class]="getTypeClass(reportResponseTypes.Accepted)">
-                          <div class="row pb-1 pt-1">
-                            <div class="col-2 col-sm-1 text-right pr-1">
-                              <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
-                            </div>
-                            <div class="col-10 col-sm-11 pl-1">
-                              <label for="reportAccepted" class="label-inline pointer">Je prends en compte ce signalement</label>
-                            </div>
+                    <fieldset class="form__group">
+                      <div class="text-dark-blue">
+                        <strong>Pouvez-vous préciser votre réponse ?</strong>
+                      </div>
+                      <div *ngIf="showErrors && responseTypeCtrl.hasError('required')" class="text-warning">
+                        <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez sélectionner l'un des choix.
+                      </div>
+                      <div [class]="getTypeClass(reportResponseTypes.Accepted)">
+                        <div class="row pb-1 pt-1">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Accepted" id="reportAccepted"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="reportAccepted" class="label-inline pointer">Je prends en compte ce signalement</label>
                           </div>
                         </div>
-                        <div [class]="getTypeClass(reportResponseTypes.Rejected)">
-                          <div class="row pb-1 pt-1">
-                            <div class="col-2 col-sm-1 text-right pr-1">
-                              <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
-                            </div>
-                            <div class="col-10 col-sm-11 pl-1">
-                              <label for="reportRejected" class="label-inline pointer">J'estime que ce signalement est infondé</label>
-                            </div>
+                      </div>
+                      <div [class]="getTypeClass(reportResponseTypes.Rejected)">
+                        <div class="row pb-1 pt-1">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.Rejected" id="reportRejected"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="reportRejected" class="label-inline pointer">J'estime que ce signalement est infondé</label>
                           </div>
                         </div>
-                        <div [class]="getTypeClass(reportResponseTypes.NotConcerned)">
-                          <div class="row pb-1 pt-1">
-                            <div class="col-2 col-sm-1 text-right pr-1">
-                              <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
-                            </div>
-                            <div class="col-10 col-sm-11 pl-1">
-                              <label for="reportNotConcerned" class="label-inline pointer">J'estime que ce signalement ne concerne pas mon établissement</label>
-                            </div>
+                      </div>
+                      <div [class]="getTypeClass(reportResponseTypes.NotConcerned)">
+                        <div class="row pb-1 pt-1">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="responseTypeCtrl" [value]="reportResponseTypes.NotConcerned" id="reportNotConcerned"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="reportNotConcerned" class="label-inline pointer">J'estime que ce signalement ne concerne pas mon établissement</label>
                           </div>
                         </div>
-                      </fieldset>
+                      </div>
+                    </fieldset>
 
-                      <div class="form__group">
-                        <label class="text-dark-blue" for="proAnswerInput">
-                          <strong>Votre réponse (obligatoire)</strong>
+                    <div class="form__group">
+                      <label class="text-dark-blue" for="proAnswerInput">
+                        <strong>Votre réponse (obligatoire)</strong>
+                      </label>
+                      <div>
+                        <strong>Le consommateur</strong> la recevra par mail. Elle pourra aussi être consultée par la <strong>DGCCRF</strong>.
+                      </div>
+                      <div class="text-darker-grey">
+                        Nous vous demandons de rester courtois dans votre réponse. Les menaces et insultes n'ont pas leur place dans SignalConso !
+                      </div>
+                      <div *ngIf="showErrors && responseConsumerDetailsCtrl.hasError('required')" class="text-warning">
+                        <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez saisir votre réponse.
+                      </div>
+                      <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3"></textarea>
+                    </div>
+
+                    <div class="form__group">
+                      <label class="text-dark-blue" for="proAnswerDgccrfInput">
+                        <strong>Informations complémentaires</strong>
+                      </label>
+                      <div>
+                        Ces précisions sont <strong>à l'attention de la DGCCRF</strong>. Elles ne seront pas transmises au consommateur.
+                      </div>
+                      <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3"></textarea>
+                    </div>
+
+                    <div class="form__group">
+                      <app-attachments label="Pièces jointes <b>visibles uniquement par la DGCCRF</b>"
+                                       [uploadedFiles]="uploadedFiles"
+                                       [origin]="fileOrigins.Professional">
+                      </app-attachments>
+                    </div>
+
+                    <app-alert type="error" *ngIf="loadingError">
+                      Une erreur technique s'est produite
+                    </app-alert>
+
+                    <div class="mt-4">
+                      <button type="submit" class="btn btn-lg btn-primary mb-1 mr-2" [disabled]="isUploadingFile()">
+                        Envoyer
+                      </button>
+                      <button type="button" class="btn btn-lg btn-outline-primary mb-1" (click)="hideProAnswerForm()">Annuler</button>
+                    </div>
+                  </form>
+                  <ngx-loading [show]="loading"></ngx-loading>
+                </ng-template>
+              </div>
+            </ng-container>
+            <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+              <div *ngIf="report">
+                <div *ngIf="!actionForm; else actionFormTpl">
+                  <div class="pt-5 pb-2">
+                    <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.DGCCRF]">
+                      Ajouter des informations DGCCRF
+                    </button>
+                    <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.Admin]">
+                      Ajouter des informations
+                    </button>
+                  </div>
+                </div>
+                <ng-template #actionFormTpl>
+                  <h2 class="text-primary pt-4" *appRole="[roles.DGCCRF]">Informations DGCCRF</h2>
+                  <h2 class="text-primary pt-4" *appRole="[roles.Admin]">Informations</h2>
+
+                  <hr class="d-sm-none" />
+
+                  <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
+
+                    <fieldset class="form__group">
+                      <div class="text-dark-blue label">
+                        <strong>Pouvez-vous préciser ?</strong>
+                      </div>
+                      <div *ngIf="showErrors && actionTypeCtrl.hasError('required')" class="text-warning">
+                        <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez sélectionner l'un des choix.
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.Comment)">
+                        <div class="row pb-1 pt-1">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="commentAction" class="label-inline pointer">Commentaire (interne à la DGCCRF)</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
+                        <div class="row pb-1 pt-1">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="consumerAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par le consommateur</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
+                        <div class="row pb-1 pt-1">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="proAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par l'entreprise</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
+                        <div class="row pb-1 pt-1">
+                          <div class="col-2 col-sm-1 text-right pr-1">
+                            <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
+                          </div>
+                          <div class="col-10 col-sm-11 pl-1">
+                            <label for="controlAction" class="label-inline pointer">Contrôle effectué (interne à la DGCCRF)</label>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+
+                    <ng-container *ngIf="actionTypeCtrl.valid">
+
+                      <div class="form__group" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
+                        <label class="text-dark-blue"  for="commentInput">
+                          <strong>Commentaire (obligatoire)</strong>
                         </label>
-                        <div>
-                          <strong>Le consommateur</strong> la recevra par mail. Elle pourra aussi être consultée par la <strong>DGCCRF</strong>.
-                        </div>
-                        <div class="text-darker-grey">
-                          Nous vous demandons de rester courtois dans votre réponse. Les menaces et insultes n'ont pas leur place dans SignalConso !
-                        </div>
-                        <div *ngIf="showErrors && responseConsumerDetailsCtrl.hasError('required')" class="text-warning">
-                          <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez saisir votre réponse.
-                        </div>
-                        <textarea [formControl]="responseConsumerDetailsCtrl" id="proAnswerInput" rows="3"></textarea>
+                        <textarea id="commentInput" [formControl]="detailCtrl"></textarea>
                       </div>
 
-                      <div class="form__group">
-                        <label class="text-dark-blue" for="proAnswerDgccrfInput">
-                          <strong>Informations complémentaires</strong>
-                        </label>
-                        <div>
-                          Ces précisions sont <strong>à l'attention de la DGCCRF</strong>. Elles ne seront pas transmises au consommateur.
-                        </div>
-                        <textarea [formControl]="responseDgccrfDetailsCtrl" id="proAnswerDgccrfInput" rows="3"></textarea>
+                      <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ConsumerAttachments">
+                        <app-attachments label="Pièces jointes fournies par le consommateur (visibles par l'entreprise et la DGCCRF)"
+                                         [uploadedFiles]="uploadedFiles"
+                                         [origin]="fileOrigins.Consumer">
+                        </app-attachments>
                       </div>
 
-                      <div class="form__group">
-                        <app-attachments label="Pièces jointes <b>visibles uniquement par la DGCCRF</b>"
+                      <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ProfessionalAttachments">
+                        <app-attachments label="Pièces jointes fournies par l'entreprise (visibles par l'entreprise et la DGCCRF)"
                                          [uploadedFiles]="uploadedFiles"
                                          [origin]="fileOrigins.Professional">
                         </app-attachments>
                       </div>
 
-                      <div class="notification error" *ngIf="loadingError">
-                        Une erreur technique s'est produite
+                      <div class="form__group" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
+                        <label for="controlInput">
+                          Détail du contrôle (facultatif)
+                        </label>
+                        <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
                       </div>
+
+                      <app-alert type="error" *ngIf="loadingError">
+                        Une erreur technique s'est produite
+                      </app-alert>
 
                       <div class="mt-4">
                         <button type="submit" class="btn btn-lg btn-primary mb-1 mr-2" [disabled]="isUploadingFile()">
                           Envoyer
                         </button>
-                        <button type="button" class="btn btn-lg btn-outline-primary mb-1" (click)="hideProAnswerForm()">Annuler</button>
+                        <button type="button" class="btn btn-lg btn-outline-primary mb-1" (click)="hideActionForm()">Annuler</button>
                       </div>
-                    </form>
-                    <ngx-loading [show]="loading"></ngx-loading>
-                  </ng-template>
-                </div>
-              </ng-container>
-              <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-                <div *ngIf="report">
-                  <div *ngIf="!actionForm; else actionFormTpl">
-                    <div class="pt-5 pb-2">
-                      <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.DGCCRF]">
-                        Ajouter des informations DGCCRF
-                      </button>
-                      <button class="btn btn-primary btn-lg" (click)="showActionForm()" *appRole="[roles.Admin]">
-                        Ajouter des informations
-                      </button>
-                    </div>
-                  </div>
-                  <ng-template #actionFormTpl>
-                    <h2 class="text-primary pt-4" *appRole="[roles.DGCCRF]">Informations DGCCRF</h2>
-                    <h2 class="text-primary pt-4" *appRole="[roles.Admin]">Informations</h2>
 
-                    <hr class="d-sm-none" />
+                    </ng-container>
+                  </form>
+                  <ngx-loading [show]="loading"></ngx-loading>
+                </ng-template>
+              </div>
+            </ng-container>
+          </div>
+        </div>
 
-                    <form [formGroup]="actionForm" (submit)="submitActionForm()" id="actionForm">
+        <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
+          <hr class="mt-5"/>
 
-                      <fieldset class="form__group">
-                        <div class="text-dark-blue label">
-                          <strong>Pouvez-vous préciser ?</strong>
-                        </div>
-                        <div *ngIf="showErrors && actionTypeCtrl.hasError('required')" class="text-warning">
-                          <i class="material-icons md-18" aria-hidden="true">warning</i> Veuillez sélectionner l'un des choix.
-                        </div>
-                        <div [class]="getTypeClass(eventActionValues.Comment)">
-                          <div class="row pb-1 pt-1">
-                            <div class="col-2 col-sm-1 text-right pr-1">
-                              <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Comment" id="commentAction"/>
-                            </div>
-                            <div class="col-10 col-sm-11 pl-1">
-                              <label for="commentAction" class="label-inline pointer">Commentaire (interne à la DGCCRF)</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div [class]="getTypeClass(eventActionValues.ConsumerAttachments)" *appRole="[roles.Admin]">
-                          <div class="row pb-1 pt-1">
-                            <div class="col-2 col-sm-1 text-right pr-1">
-                              <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ConsumerAttachments" id="consumerAttachmentsAction"/>
-                            </div>
-                            <div class="col-10 col-sm-11 pl-1">
-                              <label for="consumerAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par le consommateur</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div [class]="getTypeClass(eventActionValues.ProfessionalAttachments)" *appRole="[roles.Admin]">
-                          <div class="row pb-1 pt-1">
-                            <div class="col-2 col-sm-1 text-right pr-1">
-                              <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.ProfessionalAttachments" id="proAttachmentsAction"/>
-                            </div>
-                            <div class="col-10 col-sm-11 pl-1">
-                              <label for="proAttachmentsAction" class="label-inline pointer">Pièces jointes fournies par l'entreprise</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div [class]="getTypeClass(eventActionValues.Control)" *appRole="[roles.DGCCRF]">
-                          <div class="row pb-1 pt-1">
-                            <div class="col-2 col-sm-1 text-right pr-1">
-                              <input type="radio" [formControl]="actionTypeCtrl" [value]="eventActionValues.Control" id="controlAction"/>
-                            </div>
-                            <div class="col-10 col-sm-11 pl-1">
-                              <label for="controlAction" class="label-inline pointer">Contrôle effectué (interne à la DGCCRF)</label>
-                            </div>
-                          </div>
-                        </div>
-                      </fieldset>
-
-                      <ng-container *ngIf="actionTypeCtrl.valid">
-
-                        <div class="form__group" *ngIf="actionTypeCtrl.value === eventActionValues.Comment">
-                          <label class="text-dark-blue"  for="commentInput">
-                            <strong>Commentaire (obligatoire)</strong>
-                          </label>
-                          <textarea id="commentInput" [formControl]="detailCtrl"></textarea>
-                        </div>
-
-                        <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ConsumerAttachments">
-                          <app-attachments label="Pièces jointes fournies par le consommateur (visibles par l'entreprise et la DGCCRF)"
-                                           [uploadedFiles]="uploadedFiles"
-                                           [origin]="fileOrigins.Consumer">
-                          </app-attachments>
-                        </div>
-
-                        <div class="form__group mt-4" *ngIf="actionTypeCtrl.value === eventActionValues.ProfessionalAttachments">
-                          <app-attachments label="Pièces jointes fournies par l'entreprise (visibles par l'entreprise et la DGCCRF)"
-                                           [uploadedFiles]="uploadedFiles"
-                                           [origin]="fileOrigins.Professional">
-                          </app-attachments>
-                        </div>
-
-                        <div class="form__group" *ngIf="actionTypeCtrl.value === eventActionValues.Control">
-                          <label for="controlInput">
-                            Détail du contrôle (facultatif)
-                          </label>
-                          <textarea id="controlInput" [formControl]="detailCtrl"></textarea>
-                        </div>
-
-                        <div class="notification error" *ngIf="loadingError">
-                          Une erreur technique s'est produite
-                        </div>
-
-                        <div class="mt-4">
-                          <button type="submit" class="btn btn-lg btn-primary mb-1 mr-2" [disabled]="isUploadingFile()">
-                            Envoyer
-                          </button>
-                          <button type="button" class="btn btn-lg btn-outline-primary mb-1" (click)="hideActionForm()">Annuler</button>
-                        </div>
-
-                      </ng-container>
-                    </form>
-                    <ngx-loading [show]="loading"></ngx-loading>
-                  </ng-template>
-                </div>
-              </ng-container>
+          <div class="text-primary font-weight-bold pt-3">
+            Historique du signalement
+          </div>
+          <div class="row pt-1">
+            <div class="col-2">
+              <small class="text-darker-grey">
+                <i>{{report.creationDate | date : 'medium'}}</i>
+              </small>
+            </div>
+            <div class="col-10">
+              Signalement du consommateur
             </div>
           </div>
+          <ng-template *ngTemplateOutlet="eventList; context: {$implicit: events, collapseId: 'collapseEvents'}"></ng-template>
 
-          <ng-container *appRole="[roles.Admin, roles.DGCCRF]">
-            <hr class="mt-5"/>
-
+          <ng-container *ngIf="report.company.siret && companyEvents?.length">
             <div class="text-primary font-weight-bold pt-3">
-              Historique du signalement
+              Historique de l'entreprise
             </div>
-            <div class="row pt-1">
+            <ng-template *ngTemplateOutlet="eventList; context: {$implicit: companyEvents, collapseId: 'collapseCompanyEvents'}"></ng-template>
+          </ng-container>
+
+          <ng-template #eventList let-events let-collapseId="collapseId">
+            <div class="row pt-2" *ngFor="let event of events; let eventIndex = index">
               <div class="col-2">
                 <small class="text-darker-grey">
-                  <i>{{report.creationDate | date : 'medium'}}</i>
+                  <i>{{event.data.creationDate | date : 'medium'}}</i>
                 </small>
               </div>
               <div class="col-10">
-                Signalement du consommateur
-              </div>
-            </div>
-            <ng-template *ngTemplateOutlet="eventList; context: {$implicit: events, collapseId: 'collapseEvents'}"></ng-template>
-
-            <ng-container *ngIf="report.company.siret && companyEvents?.length">
-              <div class="text-primary font-weight-bold pt-3">
-                Historique de l'entreprise
-              </div>
-              <ng-template *ngTemplateOutlet="eventList; context: {$implicit: companyEvents, collapseId: 'collapseCompanyEvents'}"></ng-template>
-            </ng-container>
-
-            <ng-template #eventList let-events let-collapseId="collapseId">
-              <div class="row pt-2" *ngFor="let event of events; let eventIndex = index">
-                <div class="col-2">
-                  <small class="text-darker-grey">
-                    <i>{{event.data.creationDate | date : 'medium'}}</i>
-                  </small>
-                </div>
-                <div class="col-10">
-                  <a data-toggle="collapse" class="collapsable collapsed" href="#{{collapseId}}{{eventIndex}}" *ngIf="event.data.details?.description || event.user; else noDetails">
-                    {{event.data.action.value}}
-                    <i class="material-icons collapsed-icon">keyboard_arrow_right</i>
-                    <i class="material-icons uncollapsed-icon">keyboard_arrow_down</i>
-                  </a>
-                  <ng-template #noDetails>
-                    {{event.data.action.value}}
-                  </ng-template>
-                  <div class="collapse" id="{{collapseId}}{{eventIndex}}">
-                    <small class="text-darker-grey" *ngIf="event.user">{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})</small>
-                    <div>
-                      {{event.data.details?.description}}
-                    </div>
+                <a data-toggle="collapse" class="collapsable collapsed" href="#{{collapseId}}{{eventIndex}}" *ngIf="event.data.details?.description || event.user; else noDetails">
+                  {{event.data.action.value}}
+                  <i class="material-icons collapsed-icon">keyboard_arrow_right</i>
+                  <i class="material-icons uncollapsed-icon">keyboard_arrow_down</i>
+                </a>
+                <ng-template #noDetails>
+                  {{event.data.action.value}}
+                </ng-template>
+                <div class="collapse" id="{{collapseId}}{{eventIndex}}">
+                  <small class="text-darker-grey" *ngIf="event.user">{{event.user.firstName}} {{event.user.lastName}} ({{event.user.role}})</small>
+                  <div>
+                    {{event.data.details?.description}}
                   </div>
                 </div>
               </div>
-            </ng-template>
-          </ng-container>
-
+            </div>
+          </ng-template>
         </ng-container>
 
-        <ngx-loading [show]="!report && loading"></ngx-loading>
-      </div>
-    </div>
-  </section>
+      </ng-container>
+
+      <ngx-loading [show]="!report && loading"></ngx-loading>
+    </app-panel-body>
+  </app-panel>
 
   <div class="container pb-3" *ngIf="report && backEnabled()">
     <div class="row">
@@ -628,4 +626,4 @@
       </div>
     </div>
   </div>
-</main>
+</app-page>
