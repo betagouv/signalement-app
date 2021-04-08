@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'conditions-generales-utilisation/professionnel', component: CguComponent },
   { path: 'blog/:year/:month/:day/:article', component: BlogComponent },
   { path: 'blog', component: BlogComponent },
-  { path: 'contact', component: UnavailableComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'suivi-et-vie-privee', component: TrackingAndPrivacyComponent },
 ];
 

@@ -1,6 +1,6 @@
 <app-banner title="Suivi des entreprises"></app-banner>
 
-<app-page pageDefinitionKey="companies_companiesAdmin" [loading]="loading">
+<app-page pageDefinitionKey="companies_companiesAdmin" [loading]="loading || companyService.fetching">
   <app-panel>
     <nav class="nav nav-tabs nav-justified mb-3" role="tablist" aria-label="Type d'entreprise">
       <button class="nav-item nav-link" *ngFor="let navTab of navTabs" [ngClass]="navTab === currentNavTab ? 'active' : ''" [routerLink]="navTab.link"

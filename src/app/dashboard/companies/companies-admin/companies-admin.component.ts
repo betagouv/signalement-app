@@ -58,7 +58,7 @@ export class CompaniesAdminComponent implements OnInit {
               private companyAccessesService: CompanyAccessesService,
               private localeService: BsLocaleService,
               private reportService: ReportService,
-              private companyService: CompaniesService,
+              public companyService: CompaniesService,
               private modalService: BsModalService,
               private route: ActivatedRoute
   ) { }
