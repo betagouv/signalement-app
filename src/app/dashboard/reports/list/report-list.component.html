@@ -1,6 +1,6 @@
 <app-banner title="Suivi des signalements"></app-banner>
 
-<app-page large>
+<app-page large pageDefinitionKey="reports_list">
     <app-panel [loading]="loading" *appRole="[roles.Admin, roles.DGCCRF]">
       <app-panel-header>
         <app-report-list-search

@@ -12,8 +12,6 @@ import { Id } from '../../../api-sdk/model/Common';
 import { Index } from '../../../model/Common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/confirm/confirm.component';
-import pages from '../../../../assets/data/pages.json';
-import { Meta, Title } from '@angular/platform-browser';
 
 interface Form {
   host?: string;
@@ -25,7 +23,7 @@ interface Form {
   template: `
     <app-banner title="Suivi des sites internet"></app-banner>
 
-    <app-page animated="false">
+    <app-page animated="false" pageDefinitionKey="websites_manage">
       <app-websites-tabs></app-websites-tabs>
       <app-panel [loading]="websiteService.fetching" [formGroup]="form">
         <app-panel-header>
@@ -119,8 +117,6 @@ export class ManageWebsitesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private titleService: Title,
-    private meta: Meta,
     public websiteService: WebsiteService,
     private dialog: MatDialog
   ) {
@@ -147,8 +143,6 @@ export class ManageWebsitesComponent implements OnInit {
   websitesHostIndex: Index<ApiWebsiteWithCompany[]> = {};
 
   ngOnInit(): void {
-    this.titleService.setTitle(pages.websites.manage.title);
-    this.meta.updateTag({ name: 'description', content: pages.websites.manage.description });
     this.initForm();
     this.fetchWebsites();
   }

@@ -5,7 +5,7 @@ import { AnomalyService } from '../../services/anomaly.service';
   selector: 'app-anomalies-tree',
   template: `
     <app-banner title="Arborescence du dépot d'un signalement"></app-banner>
-    <app-page>
+    <app-page pageDefinitionKey="anomaly">
       <button mat-raised-button (click)="toggleAll()" [disabled]="disabledToggleAll" color="primary">
         <mat-icon>{{openAll ? 'unfold_less' : 'unfold_more'}}</mat-icon>
         {{openAll ? 'Tout replier' : 'Tout déplier'}}

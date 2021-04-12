@@ -5,7 +5,7 @@ import { Api, AuthUserStorageKey, ServiceUtils, TokenInfoStorageKey } from './co
 import { map, mergeMap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +80,7 @@ export class AuthenticationService {
   isAuthenticated() {
     return this.localStorage.getItem(AuthUserStorageKey)
       .pipe(
-        map((authUser: AuthUser) => authUser && authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
+        map((authUser: AuthUser) => authUser && !!authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
       );
   }
 

@@ -1,19 +1,19 @@
 <app-banner title="Validation de l'email"></app-banner>
 
-<main role="main">
-  <section class="section section-lightest-grey position-relative">
-    <div class="container max-width" *ngIf="!loading">
-      <div class="notification error mt-3" *ngIf="hasError; else noError">
-        <p class="font-weight-bold">Le lien sur lequel vous avez cliqué n'est plus valide.</p>
-        <p>Si vous avez déjà validé votre email, vous pouvez vous <a routerLink="/connexion">connecter</a> à l'aide de votre adresse email et mot de passe.</p>
-      </div>
-      <ng-template #noError>
-        <div class="notification error mt-3">
-          <p class="font-weight-bold">Votre email est validé.</p>
-          <p>Vous pouvez vous <a routerLink="/connexion">connecter</a> à l'aide de votre adresse email et mot de passe.</p>
-        </div>
-      </ng-template>
-    </div>
-    <ngx-loading [show]="loading"></ngx-loading>
-  </section>
-</main>
+<app-page pageDefinitionKey="account_emailValidation" size="small" [loading]="loading">
+  <ng-container *ngIf="!loading">
+    <app-alert type="error" *ngIf="hasError; else noError">
+      <p class="font-weight-bold">Le lien sur lequel vous avez cliqué n'est plus valide.</p>
+      <p>
+        Si vous avez déjà validé votre email, vous pouvez vous <a routerLink="/connexion">connecter</a> à l'aide de
+        votre adresse email et mot de passe.
+      </p>
+    </app-alert>
+    <ng-template #noError>
+      <app-alert type="error">
+        <p class="font-weight-bold">Votre email est validé.</p>
+        <p>Vous pouvez vous <a routerLink="/connexion">connecter</a> à l'aide de votre adresse email et mot de passe.</p>
+      </app-alert>
+    </ng-template>
+  </ng-container>
+</app-page>

@@ -1,6 +1,6 @@
 <app-banner title="Suivi des sites internet"></app-banner>
 
-<app-page animated="false">
+<app-page animated="false" pageDefinitionKey="websites_unregistered">
   <app-websites-tabs></app-websites-tabs>
   <app-panel [loading]="websiteService.fetchingUnregistered">
     <app-panel-header [formGroup]="form">

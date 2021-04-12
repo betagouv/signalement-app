@@ -24,6 +24,7 @@ import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CompaniesModule } from './pages/companies/companies.module';
+import { PageModule } from './dashboard/shared/page/page.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -54,38 +55,39 @@ class ErrorLogger extends ErrorHandler {
         FooterComponent,
         NotFoundComponent,
     ],
-    imports: [
-        CommonModule,
-        NgtUniversalModule,
-        TransferHttpCacheModule,
-        HttpClientModule,
-        NgxLoadingModule.forRoot(NgxLoadingConfig),
-        RouterModule.forRoot([
-          { path: '', loadChildren: () => import('./pages/stats/stats.module').then(_ => _.StatsModule) },
-          { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(_ => _.DashboardModule) },
-          { path: '', loadChildren: () => import('./pages/static/static.module').then(_ => _.StaticModule) },
-          { path: '', loadChildren: () => import('./pages/anomlies-tree/anomalies-tree.module').then(_ => _.AnomaliesTreeModule) },
-          { path: 'not-found', component: NotFoundComponent },
-          { path: '**', component: NotFoundComponent },
-        ], {
-          scrollPositionRestoration: 'top',
-          anchorScrolling: 'enabled',
-          initialNavigation: 'enabled'
-        }),
-      HeaderModule,
-      ReportModule,
-      BrowserModule,
-      BrowserAnimationsModule,
-      AccountModule,
-      CompaniesModule,
-      BsDropdownModule.forRoot(),
-      TooltipModule,
-      Angulartics2Module.forRoot(),
-      ComponentsModule,
-      AppRoleModule,
-      AppPermissionModule,
-      ContractualDisputeModule
-    ],
+  imports: [
+    CommonModule,
+    NgtUniversalModule,
+    TransferHttpCacheModule,
+    HttpClientModule,
+    NgxLoadingModule.forRoot(NgxLoadingConfig),
+    RouterModule.forRoot([
+      { path: '', loadChildren: () => import('./pages/stats/stats.module').then(_ => _.StatsModule) },
+      { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(_ => _.DashboardModule) },
+      { path: '', loadChildren: () => import('./pages/static/static.module').then(_ => _.StaticModule) },
+      { path: '', loadChildren: () => import('./pages/anomlies-tree/anomalies-tree.module').then(_ => _.AnomaliesTreeModule) },
+      { path: 'not-found', component: NotFoundComponent },
+      { path: '**', component: NotFoundComponent },
+    ], {
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+      initialNavigation: 'enabled'
+    }),
+    HeaderModule,
+    ReportModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AccountModule,
+    CompaniesModule,
+    BsDropdownModule.forRoot(),
+    TooltipModule,
+    Angulartics2Module.forRoot(),
+    ComponentsModule,
+    AppRoleModule,
+    AppPermissionModule,
+    ContractualDisputeModule,
+    PageModule
+  ],
     exports: [
     ],
     providers: [

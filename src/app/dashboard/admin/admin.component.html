@@ -1,82 +1,82 @@
 <app-banner title="Inviter un utilisateur DGCCRF" [backButton]="true"></app-banner>
 
-<main role="main">
-  <section class="section section-white position-relative">
-    <div class="container">
-      <form class="form" [formGroup]="invitationForm" (ngSubmit)="submitForm()">
-        <div class="row">
-          <div class="col-12 col-sm-6">
-            <label>Email de l'utilisateur</label>
-            <input type="email" class="form-control" [formControl]="emailCtrl">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <small class="form-text text-muted">
-              Un courrier électronique sera envoyé à l'adresse e-mail saisie ci-dessus avec un lien sécurisé permettant de créer un compte DGCCRF.
-            </small>
-          </div>
-        </div>
-        <hr />
-        <div class="row">
-          <div class="col text-center mb-1">
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-          </div>
-        </div>
-        <div class="notification error mt-3" *ngIf="showErrors && invitationForm.invalid">
+<app-page pageDefinitionKey="secured_admin" size="small">
+  <form class="form" [formGroup]="invitationForm" (ngSubmit)="submitForm()">
+    <app-panel [loading]="loading">
+      <app-panel-body>
+
+        <app-alert type="error" *ngIf="showErrors && invitationForm.invalid">
           <span *ngIf="emailCtrl.hasError('required')">
-              Veuillez renseigner une adresse email.<br/>
+            Veuillez renseigner une adresse email.<br/>
           </span>
           <span *ngIf="emailCtrl.hasError('email')">
-              Veuillez renseigner une adresse email valide.<br/>
+            Veuillez renseigner une adresse email valide.<br/>
           </span>
-        </div>
-        <div class="notification error mt-3" *ngIf="emailRejectedError">
+        </app-alert>
+
+        <app-alert type="error" *ngIf="emailRejectedError">
           {{emailRejectedError}}
-        </div>
-        <div class="notification success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</div>
-      </form>
-      <div class="row justify-content-center mt-3">
-        <div class="col-8">
-          <ul class="list-group list-group-horizontal mb-3">
-            <li class="list-group-item" (click)="!pendingDGCCRF && showPendingDGCCRF()" [ngClass]="pendingDGCCRF ? 'active' : 'pointer'">Invitations en attente</li>
-            <li class="list-group-item" (click)="!usersDGCCRF && showUsersDGCCRF()" [ngClass]="usersDGCCRF? 'active' : 'pointer'">Tous les utilisateurs</li>
-          </ul>
-          <table class="table table-sm" *ngIf="pendingDGCCRF">
-            <caption class="sr-only">Liste des invitations valides non activées</caption>
-            <thead>
-              <tr>
-                <th>Email</th>
-                <th>Date d'invitation</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let invitation of pendingDGCCRF">
-                <td>{{invitation.email}}</td>
-                <td>{{invitation.tokenCreation | date: "mediumDate"}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="table table-sm" *ngIf="usersDGCCRF">
-            <caption class="sr-only">Liste des comptes DGCCRF activés</caption>
-            <thead>
-              <tr>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of usersDGCCRF">
-                <td>{{user.firstName}}</td>
-                <td>{{user.lastName}}</td>
-                <td>{{user.email}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <ngx-loading [show]="loading"></ngx-loading>
-  </section>
-</main>
+        </app-alert>
+
+        <app-alert type="success" *ngIf="showSuccess">Un email d'invitation a été envoyé !</app-alert>
+
+        <label>Email de l'utilisateur</label>
+        <p class="txt-secondary">
+          Un courrier électronique sera envoyé à l'adresse e-mail saisie ci-dessus avec un lien sécurisé permettant
+          de créer un compte DGCCRF.
+        </p>
+
+        <input type="email" class="form-control" [formControl]="emailCtrl">
+      </app-panel-body>
+      <app-panel-actions>
+        <button mat-raised-button color="primary" type="submit">Envoyer</button>
+      </app-panel-actions>
+    </app-panel>
+  </form>
+
+  <ul class="list-group list-group-horizontal mb-3">
+    <li class="list-group-item" (click)="!pendingDGCCRF && showPendingDGCCRF()"
+        [ngClass]="pendingDGCCRF ? 'active' : 'pointer'">Invitations en attente
+    </li>
+    <li class="list-group-item" (click)="!usersDGCCRF && showUsersDGCCRF()"
+        [ngClass]="usersDGCCRF? 'active' : 'pointer'">Tous les utilisateurs
+    </li>
+  </ul>
+
+  <app-panel *ngIf="pendingDGCCRF || usersDGCCRF || fetching" [loading]="fetching">
+    <table mat-table *ngIf="pendingDGCCRF" [dataSource]="pendingDGCCRF" class="fullwidth">
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let _">{{_.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date d'invitation</th>
+        <td mat-cell *matCellDef="let _">{{_.tokenCreation | date: 'mediumDate'}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['email', 'date']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['email', 'date'];"></tr>
+    </table>
+
+    <table mat-table *ngIf="usersDGCCRF" [dataSource]="usersDGCCRF" class="fullwidth">
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let _">{{_.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let _">{{_.firstName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef>Prénom</th>
+        <td mat-cell *matCellDef="let _"> {{_.lastName}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['email', 'firstName', 'lastName']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['email', 'firstName', 'lastName'];"></tr>
+    </table>
+  </app-panel>
+</app-page>

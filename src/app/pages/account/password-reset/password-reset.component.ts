@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { AnalyticsService, AuthenticationEventActions, EventCategories } from '../../../services/analytics.service';
 import { ActivatedRoute } from '@angular/router';
-import pages from '../../../../assets/data/pages.json';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -25,15 +23,11 @@ export class PasswordResetComponent implements OnInit {
   loadingError: string;
 
   constructor(public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.secured.account.changePassword.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.account.changePassword.description });
     this.initForm();
 
     this.route.paramMap.subscribe(params => {

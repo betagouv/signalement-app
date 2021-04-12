@@ -1,11 +1,11 @@
 <app-banner title="Donnez votre avis"></app-banner>
-<main role="main">
-  <section class="section section-white position-relative">
-    <div class="container">
+<app-page pageDefinitionKey="reports_review" size="small" [loading]="loading">
+  <app-panel>
+    <app-panel-body>
       <form [formGroup]="reviewForm" (submit)="submitReviewForm()" id="proAnswerForm" *ngIf="!postSuccess">
 
         <fieldset class="form__group">
-          <label class="text-center" [class]="hasError(positiveCtrl) ? 'error' : ''">
+          <label [class]="hasError(positiveCtrl) ? 'error' : ''">
             Est-ce que la réponse de l'entreprise répond à vos attentes ? (obligatoire)
           </label>
           <div [class]="getPositiveCtrlClass(true)">
@@ -40,19 +40,17 @@
           </div>
         </ng-container>
 
-        <hr />
+        <app-alert type="error" *ngIf="showErrors && reviewForm.invalid">
+          Veuillez renseigner les champs obligatoires.
+        </app-alert>
 
-        <div class="notification error" *ngIf="showErrors && reviewForm.invalid">
-          Veuillez renseigner les champs obligatoires.<br />
-        </div>
+        <app-alert type="error" *ngIf="loadingError">
+          Une erreur technique s'est produite.
+        </app-alert>
 
-        <div class="notification error" *ngIf="loadingError">
-          Une erreur technique s'est produite<br />
-        </div>
-
-        <div class="notification error" *ngIf="conflictError">
-          Vous avez déjà envoyé un avis concernant ce signalement<br />
-        </div>
+        <app-alert type="error" *ngIf="conflictError">
+          Vous avez déjà envoyé un avis concernant ce signalement.
+        </app-alert>
 
         <div class="mt-4 text-center">
           <button type="submit" class="btn btn-lg btn-primary">
@@ -61,11 +59,9 @@
         </div>
       </form>
 
-      <div class="notification success max-width" *ngIf="postSuccess">
+      <app-alert type="success" *ngIf="postSuccess">
         Votre avis a bien été pris en compte, nous vous en remercions<br />
-      </div>
-      <ngx-loading [show]="loading"></ngx-loading>
-
+      </app-alert>
 
       <form class="mt-5 p-3 bg-grey text-center">
         <label>Vous pouvez également donner votre avis sur SignalConso</label>
@@ -76,6 +72,6 @@
           </a>
         </div>
       </form>
-    </div>
-  </section>
-</main>
+    </app-panel-body>
+  </app-panel>
+</app-page>

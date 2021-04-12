@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import HttpStatusCodes from 'http-status-codes';
-import pages from '../../../../assets/data/pages.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -25,16 +23,12 @@ export class LoginComponent implements OnInit {
   authenticationError: String;
 
   constructor(public formBuilder: FormBuilder,
-              private titleService: Title,
-              private meta: Meta,
               private authenticationService: AuthenticationService,
               private analyticsService: AnalyticsService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.account.login.title);
-    this.meta.updateTag({ name: 'description', content: pages.account.login.description });
     this.initLoginForm();
 
     this.route.url.subscribe(url => {

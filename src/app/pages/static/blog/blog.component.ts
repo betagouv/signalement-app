@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute } from '@angular/router';
 import blogMetaData from '../../../../assets/data/blog-meta-data.json';
-import pages from '../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-blog',
@@ -16,13 +14,13 @@ export class BlogComponent implements OnInit {
   previous: string;
   next: string;
 
-  constructor(private titleService: Title,
+  constructor(
     private markdownService: MarkdownService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.blog.title);
-
     this.route.paramMap.subscribe(params => {
 
       let index = 0;

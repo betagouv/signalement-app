@@ -16,6 +16,9 @@ import { SitemapComponent } from './sitemap/sitemap.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UnavailableComponent } from './unavailable/unavailable.component';
 import { MemberComponent } from './about/member.component';
+import { PageModule } from '../../dashboard/shared/page/page.module';
+import { PanelModule } from '../../dashboard/shared/panel/panel.module';
+import { FenderModule } from '../../dashboard/shared/fender/fender';
 
 const routes: Routes = [
   { path: 'comment-ça-marche', component: HowComponent },
@@ -57,6 +60,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MarkdownModule.forRoot(),
     ComponentsModule,
+    PageModule,
+    PanelModule,
+    FenderModule,
   ],
   exports: [
   ],

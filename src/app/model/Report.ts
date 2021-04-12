@@ -32,7 +32,6 @@ export enum ReportStatus {
   Rejected = 'Signalement infondé',
   Ignored = 'Signalement consulté ignoré',
   NotConcerned = 'Signalement mal attribué'
-
 }
 
 export const reportStatusColor = {
