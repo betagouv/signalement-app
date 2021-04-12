@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-        this.atInternetService.send({name: event.url.replace(/[^\w]/gi, '')});
+        this.atInternetService.send({name: event.url.replace(/[^\w]/gi, '') || 'home'});
         if (!this.activatedRoute.snapshot.fragment) {
           this.header.nativeElement.focus();
         } else if (this.activatedRoute.snapshot.fragment === 'content') {
