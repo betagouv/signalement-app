@@ -12,7 +12,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 
 enum ProblemSteps {
-  Subcategories, EmployeeConsumer, ContractualDispute, Next
+  Subcategories, EmployeeConsumer, ContractualDispute, ReponseConso, Next
 }
 
 @Component({
@@ -91,7 +91,7 @@ export class ProblemComponent implements OnInit {
     this.continue();
   }
 
-  continue(value?) {
+  continue(value?: boolean) {
     switch (this.problemStep) {
       case ProblemSteps.Subcategories: {
         if (instanceOfSubcategoryInformation(this.draftReport.lastSubcategory)) {
@@ -109,9 +109,11 @@ export class ProblemComponent implements OnInit {
         if (this.draftReport.isContractualDispute) {
           this.problemStep = ProblemSteps.ContractualDispute;
           this.scollTop();
-        } else {
+        } else if (value) {
           this.problemStep = ProblemSteps.Next;
           this.continue();
+        } else {
+          this.problemStep = ProblemSteps.ReponseConso;
         }
         break;
       }
