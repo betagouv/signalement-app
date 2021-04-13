@@ -37,6 +37,6 @@ export class AtInternetService {
 
   readonly send = (pageInfo: ATIPageInfo) => this.authenticationService.getConnectedUser().pipe(
     tap(_ => this.atTag?.page.send({ level2: _?.role ?? 'Visitor', ...pageInfo })),
-    catchError(err => throwError(`[SignalConso] Failed to send data to AT Internet for ${pageInfo.name}: ${err.name} - ${err.message}`))
+    catchError(err => throwError(`[SignalConso] Failed to send data to AT Internet: ${err.name} - ${err.message}`))
   ).subscribe();
 }
