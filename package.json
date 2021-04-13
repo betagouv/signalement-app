@@ -5,7 +5,7 @@
     "ng": "ng",
     "start:local": "npm run generate-json-files && npm run generate-blog-metadata && ng serve --host 0.0.0.0",
     "start": "node dist/server/main.js",
-    "prebuild": "npm run generate-json-files && npm run generate-blog-metadata && envsub --env API_BASE_URL --env SENTRY_DSN ./src/environments/environment.prod.ts",
+    "prebuild": "npm run generate-json-files && npm run generate-blog-metadata && envsub --env APaI_BASE_URL --env SENTRY_DSN ./src/environments/environment.prod.ts",
     "build": "ng build",
     "test": "ng test --watch false",
     "lint": "ng lint",
