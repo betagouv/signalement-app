@@ -1,7 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthenticationService } from './authentication.service';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 declare const ATInternet: any;
@@ -37,6 +37,10 @@ export class AtInternetService {
 
   readonly send = (pageInfo: ATIPageInfo) => this.authenticationService.getConnectedUser().pipe(
     tap(_ => this.atTag?.page.send({ level2: _?.role ?? 'Visitor', ...pageInfo })),
-    catchError(err => throwError(`[SignalConso] Failed to send data to AT Internet: ${err.name} - ${err.message}`))
+    catchError(err => {
+      const error = new Error(`[SignalConso] Failed to send data to AT Internet: ${err.message}`);
+      error.name = err.name;
+      return throwError(error);
+    })
   ).subscribe();
 }
