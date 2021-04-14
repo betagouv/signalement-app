@@ -4,12 +4,8 @@
   display: block;
   margin-bottom: spacing(3);
   padding-bottom: spacing(2);
-
-  //&:not(:last-of-type) {
-  //  border-bottom: 1px solid $theme-divider;
-  //}
 }
 
-.-title {
-  margin-bottom: spacing(2);
+.-title-container {
+  position: relative;
 }
