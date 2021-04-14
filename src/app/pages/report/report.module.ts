@@ -8,7 +8,7 @@ import { CompanyComponent } from './company/company.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentChargeBackComponent, AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { BreadcrumbModule } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { ComponentsModule } from '../../components/components.module';
@@ -29,7 +29,8 @@ import { CompanyPhoneComponent } from './company/phone/company-phone.component';
 import { CompanyLocationComponent } from './company/location/company-location.component';
 import { PageModule } from '../../dashboard/shared/page/page.module';
 import { AlertModule as AppAlertModule } from '../../dashboard/shared/alert/alert';
-import { RadioButtonModule } from '../../components/radio-button/radio-button.module';
+import { Problem2Module } from './problem2/problem2.module';
+import { Problem2Component } from './problem2/problem2.component';
 
 defineLocale('fr', frLocale);
 
@@ -47,9 +48,9 @@ export function AnomalyLazyRoutesFactory(compiler: Compiler): Routes {
           ];
         } else {
           return [
-            { path: `${anomaly.path}`, component: ProblemComponent },
+            { path: `${anomaly.path}`, component: Problem2Component },
             { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent },
-            { path: `${anomaly.path}/${ReportPaths.Problem}`, component: ProblemComponent },
+            { path: `${anomaly.path}/${ReportPaths.Problem}`, component: Problem2Component },
             { path: `${anomaly.path}/${ReportPaths.Details}`, component: DetailsComponent },
             { path: `${anomaly.path}/${ReportPaths.Company}`, component: CompanyComponent },
             { path: `${anomaly.path}/${ReportPaths.Consumer}`, component: ConsumerComponent },
@@ -74,7 +75,6 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
   declarations: [
     CompanyComponent,
     DetailsComponent,
-    BreadcrumbComponent,
     ConsumerComponent,
     ConfirmationComponent,
     ProblemComponent,
@@ -92,6 +92,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     CompanyLocationComponent,
   ],
   imports: [
+    BreadcrumbModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
@@ -103,7 +104,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     TypeaheadModule.forRoot(),
     AppAlertModule,
     PageModule,
-    RadioButtonModule,
+    Problem2Module,
   ],
   exports: [
     RouterModule,

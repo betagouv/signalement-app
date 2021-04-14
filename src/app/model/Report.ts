@@ -2,7 +2,7 @@ import { Consumer } from './Consumer';
 import { CompanyKinds, ContractualDisputeTag, InternetTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
-import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
+import { CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
 import format from 'date-fns/format';
 
 export const PrecisionKeyword = '(à préciser)';
@@ -74,6 +74,7 @@ export class DraftReport {
   employeeConsumer: boolean;
   contactAgreement: boolean;
   retrievedFromStorage: boolean;
+  forwardToReponseConso: boolean;
   storedStep: Step;
   vendor: string;
 
@@ -95,10 +96,13 @@ export class DraftReport {
     return tags;
   }
 
+  /** @deprecated use pure isContractualDispute() function */
   get isContractualDispute() {
     return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
 }
+
+export const isContractualDispute = (_: DraftReport) => !_.employeeConsumer && _.tags.indexOf(ContractualDisputeTag) !== -1;
 
 export class Report {
   id: string;

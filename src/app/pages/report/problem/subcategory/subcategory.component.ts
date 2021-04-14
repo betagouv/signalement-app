@@ -89,23 +89,24 @@ export class SubcategoryComponent implements OnChanges {
     if (this.hasSubSubcategory()) {
       this.renderer.removeStyle(this.elementRef.nativeElement.children[0], 'margin-bottom');
     } else {
-      const rect = this.formContent.nativeElement.getBoundingClientRect();
-      const submitButtonOffset = 145;
-      if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
-        jQuery('html, body').animate({
-          scrollTop: this.elementRef.nativeElement.offsetTop + rect.height + submitButtonOffset - window.innerHeight
-        }, 1000, 'linear');
-      }
+      setTimeout(this.submitSubcategoryForm, 1000);
+      // const rect = this.formContent.nativeElement.getBoundingClientRect();
+      // const submitButtonOffset = 145;
+      // if (isPlatformBrowser(this.platformId) && rect.bottom + submitButtonOffset > window.innerHeight) {
+      //   jQuery('html, body').animate({
+      //     scrollTop: this.elementRef.nativeElement.offsetTop + rect.height + submitButtonOffset - window.innerHeight
+      //   }, 1000, 'linear');
+      // }
     }
   }
 
-  submitSubcategoryForm() {
+  readonly submitSubcategoryForm = () => {
     if (!this.subcategoryForm.valid) {
       this.showErrors = true;
     } else {
       this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value)]);
     }
-  }
+  };
 
   isSubcategorySelected(subcategory: Subcategory) {
     return this.subcategorySelected && this.subcategorySelected.title === subcategory.title;
@@ -118,5 +119,4 @@ export class SubcategoryComponent implements OnChanges {
   onSelectSubSubcategories(subSubcategories: Subcategory[]) {
     this.select.emit([this.subcategories.find(s => s.title === this.subcategoryTitleCtrl.value), ...subSubcategories]);
   }
-
 }

@@ -120,7 +120,7 @@ const propagateCompanyKinds = (anomaly: Category): Category => {
   };
 };
 
-export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly));
+export const enrichAnomaly = (_: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(_));
 
 export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput => {
   return !!(_ as SubcategoryInput)?.detailInputs;

@@ -8,7 +8,7 @@ import {
   SubcategoryInformation,
   SubcategoryInput
 } from '../../model/Anomaly';
-import { slideToggleNgIf } from '../../utils/animations';
+import { Animations } from '../../utils/animations';
 
 @Component({
   selector: 'app-anomalies-node[anomaly]',
@@ -37,7 +37,7 @@ import { slideToggleNgIf } from '../../utils/animations';
     </div>
   `,
   styleUrls: ['./anomaly-node.component.scss'],
-  animations: [slideToggleNgIf]
+  animations: [Animations.slideToggleNgIf]
 })
 export class AnomaliesNodeComponent {
 

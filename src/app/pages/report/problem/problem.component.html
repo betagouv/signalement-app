@@ -1,66 +1,67 @@
 <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
 <main role="main">
   <section class="section section-white" *ngIf="draftReport">
-    <div class="container max-width" [ngSwitch]="problemStep">
+    {{problemStep}}
+    <ng-container class="container max-width" [ngSwitch]="problemStep" [formGroup]="form">
 
-      <ng-container *ngSwitchCase="problemSteps.Subcategories">
-        <app-subcategory
-          [subcategoriesTitle]="anomaly?.subcategoriesTitle"
-          [subcategoryName]="anomaly?.category"
-          [subcategories]="anomaly?.subcategories"
-          [subcategoriesSelected]="draftReport.subcategories"
-          [level]="1"
-          (select)="onSelectSubcategories($event)">
-        </app-subcategory>
-      </ng-container>
+      <app-subcategory
+        [subcategoriesTitle]="anomaly?.subcategoriesTitle"
+        [subcategoryName]="anomaly?.category"
+        [subcategories]="anomaly?.subcategories"
+        [subcategoriesSelected]="draftReport.subcategories"
+        [level]="1"
+        (select)="onSelectSubcategories($event)">
+      </app-subcategory>
 
-      <div class="pb-sm-5 employeeConsumer form-like" *ngSwitchCase="problemSteps.EmployeeConsumer">
+      <div class="form-like" *ngSwitchCase="problemSteps.EmployeeConsumer">
         <h2 class="pt-sm-5">Travaillez-vous dans l'entreprise que vous souhaitez signaler ?</h2>
 
-        <app-radio-button id="employeeConsumer-yes" (click)="continue(true)">Oui</app-radio-button>
-        <app-radio-button id="employeeConsumer-no" (click)="continue(false)">Non, je n'y travaille pas</app-radio-button>
-        <!--        <div class="pt-2 pt-sm-3">-->
-        <!--          <button id="consumer" type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="continue(true)">-->
-        <!--            Oui-->
-        <!--          </button>-->
-        <!--        </div>-->
-        <!--        <div class="pt-2 pt-sm-3">-->
-        <!--          <button type="submit" class="btn btn-lg btn-outline-primary mt-2" (click)="continue(false)">-->
-        <!--            Non, je n'y travaille pas-->
-        <!--          </button>-->
-        <!--        </div>-->
+        <fieldset>
+          <app-radio-container for="employeeConsumer-yes" label="Oui" [selected]="form.get('employeeConsumer').value">
+            <input id="employeeConsumer-yes" (click)="continue(true)" formControlName="employeeConsumer" type="radio"
+                   [value]="true">
+          </app-radio-container>
+          <app-radio-container
+            for="employeeConsumer-no" label="Non, je n'y travaille pas"
+            [selected]="form.get('employeeConsumer').value === false"
+          >
+            <input id="employeeConsumer-no" (click)="continue(false)" formControlName="employeeConsumer" type="radio"
+                   [value]="false">
+          </app-radio-container>
+        </fieldset>
       </div>
 
-      <div id="reponseConsoQuestion pb-sm-5 form-like" *ngSwitchCase="problemSteps.ReponseConso">
+      <div class="form-like" *ngSwitchCase="problemSteps.ReponseConso">
         <h2 class="pt-sm-5">Que souhaitez-vous faire ?</h2>
 
-        <fieldset>
-          <div class="subcategorySelected">
-            <div class="row pb-2 pt-2">
-              <div class="col col-radio z-0">
-                <input id="reponseConso-yes" type="radio" (click)="continue(true)">
-              </div>
-              <div class="col">
-                <label class="d-block mb-0 pointer" for="employeeConsumer-yes">
-                  Je souhaite signaler mon problème à l'entreprise pour qu'elle le corrige.
-                </label>
-                <div class="note">La répression des fraudes sera informée.</div>
-              </div>
-            </div>
-          </div>
-          <div class="subcategorySelected">
-            <div class="row pb-2 pt-2">
-              <div class="col col-radio z-0">
-                <input id="reponseConso-no" type="radio" (click)="continue(false)">
-              </div>
-              <div class="col">
-                <label class="d-block mb-0 pointer" for="employeeConsumer-no">
-                  Je souhaite contacter la répresion des fraudes pour obtenir des informations sur mon problème.
-                </label>
-              </div>
-            </div>
-          </div>
-        </fieldset>
+        <app-radio-container
+          for="forwardToReponseConso-yes"
+          label="Je souhaite signaler mon problème à l'entreprise pour qu'elle le corrige."
+          description="La répression des fraudes sera informée."
+          [selected]="form.get('forwardToReponseConso').value"
+        >
+          <input
+            id="forwardToReponseConso-yes"
+            formControlName="forwardToReponseConso"
+            type="radio"
+            [value]="true"
+            (click)="continue(true)"
+          >
+        </app-radio-container>
+
+        <app-radio-container
+          for="forwardToReponseConso-no"
+          label="Je souhaite contacter la répresion des fraudes pour obtenir des informations sur mon problème."
+          [selected]="form.get('forwardToReponseConso').value === false"
+        >
+          <input
+            id="forwardToReponseConso-no"
+            formControlName="forwardToReponseConso"
+            type="radio"
+            [value]="false"
+            (click)="continue(false)"
+          >
+        </app-radio-container>
       </div>
 
       <div id="contractualDisputeMessage" *ngSwitchCase="problemSteps.ContractualDispute">
@@ -103,6 +104,6 @@
         </button>
 
       </div>
-    </div>
+    </ng-container>
   </section>
 </main>

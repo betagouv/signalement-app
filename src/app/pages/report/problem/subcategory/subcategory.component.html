@@ -1,4 +1,4 @@
-<form class="subForm" [formGroup]="subcategoryForm" (submit)="submitSubcategoryForm()" id="subcategoryForm" *ngIf="subcategoryForm">
+<form class="subForm" [formGroup]="subcategoryForm" id="subcategoryForm" *ngIf="subcategoryForm">
   <div [class]="hasSubSubcategory() ? 'withSiblingSubcategories' : ''" #formContent>
 
     <div *ngIf="subcategoryDescription" class="row">
@@ -10,16 +10,22 @@
     <h2 class="mb-4 font-weight-bold" [innerHTML]="subcategoriesTitle ? subcategoriesTitle : 'Pouvez-vous préciser ?'"></h2>
 
     <fieldset>
-      <app-radio-button
-        *ngFor="let subcategory of subcategories; let subcategoryIndex = index"
-        [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''"
-        id="radio-{{level}}-{{subcategory.title}}"
-        [value]="subcategory.title"
+      <app-radio-container
+        *ngFor="let subcategory of subcategories"
+        for="radio-{{level}}-{{subcategory.title}}"
+        [selected]="isSubcategorySelected(subcategory)"
+        [label]="subcategory.title"
         [description]="subcategory.example"
-        (click)="selectSubcategory(subcategory)"
       >
-        {{subcategory.title}}
-      </app-radio-button>
+<!--        {{subcategory.title}}-->
+        <input
+          *ngIf="subcategoryForm.contains(subcategoryName)"
+          type="radio"
+          [formControlName]="subcategoryName"
+          [value]="subcategory.title"
+          id="radio-{{level}}-{{subcategory.title}}"
+          (click)="selectSubcategory(subcategory)"/>
+      </app-radio-container>
 <!--      <div [class]="isSubcategorySelected(subcategory) ? 'subcategorySelected' : ''" *ngFor="let subcategory of subcategories; let subcategoryIndex = index">-->
 <!--        <div class="row pb-2 pt-2">-->
 <!--          <div class="col col-radio z-0" *ngIf="subcategoryForm.contains(subcategoryName)">-->
@@ -37,12 +43,12 @@
 <!--      </div>-->
     </fieldset>
   </div>
-  <ng-container *ngIf="subcategoryForm.valid">
-    <hr/>
-    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory()">
-      Continuer
-    </button>
-  </ng-container>
+<!--  <ng-container *ngIf="subcategoryForm.valid">-->
+    <hr *ngIf="subcategoryForm.valid"/>
+<!--    <button type="submit" class="btn btn-lg btn-primary" *ngIf="!hasSubSubcategory()">-->
+<!--      Continuer-->
+<!--    </button>-->
+<!--  </ng-container>-->
 </form>
 <app-subcategory *ngIf="hasSubSubcategory()"
                  [subcategoriesTitle]="subcategorySelected.subcategoriesTitle"

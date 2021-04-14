@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { BadgeStatusModule } from './label-status/badge-status.module';
 import { BadgeModule } from './badge/badge.module';
 import { FormsModule } from '@angular/forms';
-import { RadioButtonModule } from './radio-button/radio-button.module';
+import { RadioContainerModule } from './radio-container/radio-container.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -21,12 +21,13 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
   ],
   imports: [
     CommonModule,
-    RadioButtonModule,
+    RadioContainerModule,
     PipesModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     CompanySearchResultsModule
   ],
   exports: [
+    RadioContainerModule,
     FormsModule,
     CommonModule,
     NgxLoadingModule,

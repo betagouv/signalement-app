@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Anomaly, instanceOfSubcategoryInformation, Subcategory } from '../../../model/Anomaly';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
@@ -12,7 +12,11 @@ import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 
 enum ProblemSteps {
-  Subcategories, EmployeeConsumer, ContractualDispute, ReponseConso, Next
+  Subcategories = 'Subcategories',
+  EmployeeConsumer = 'EmployeeConsumer',
+  ContractualDispute = 'ContractualDispute',
+  ReponseConso = 'ReponseConso',
+  Next = 'Next',
 }
 
 @Component({
@@ -22,6 +26,11 @@ enum ProblemSteps {
 })
 export class ProblemComponent implements OnInit {
 
+  readonly form = new FormGroup({
+    employeeConsumer: new FormControl(),
+    forwardToReponseConso: new FormControl(),
+  });
+
   step: Step;
   draftReport: DraftReport;
   anomaly: Anomaly;
@@ -29,14 +38,14 @@ export class ProblemComponent implements OnInit {
   problemSteps = ProblemSteps;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              public formBuilder: FormBuilder,
-              private anomalyService: AnomalyService,
-              private reportStorageService: ReportStorageService,
-              private reportRouterService: ReportRouterService,
-              private analyticsService: AnalyticsService,
-              private activatedRoute: ActivatedRoute,
-              private titleService: Title,
-              private meta: Meta) { }
+    public formBuilder: FormBuilder,
+    private anomalyService: AnomalyService,
+    private reportStorageService: ReportStorageService,
+    private reportRouterService: ReportRouterService,
+    private analyticsService: AnalyticsService,
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title,
+    private meta: Meta) { }
 
   ngOnInit() {
 
@@ -77,6 +86,7 @@ export class ProblemComponent implements OnInit {
   }
 
   onSelectSubcategories(subcategories: Subcategory[]) {
+    console.log('onSelectSubcategories', subcategories);
     this.analyticsService.trackEvent(
       EventCategories.report,
       ReportEventActions.validateSubcategory,
@@ -95,7 +105,7 @@ export class ProblemComponent implements OnInit {
     switch (this.problemStep) {
       case ProblemSteps.Subcategories: {
         if (instanceOfSubcategoryInformation(this.draftReport.lastSubcategory)) {
-          this.problemStep = ProblemSteps.Next;
+          this.problemStep = ProblemSteps.ReponseConso;
           this.continue();
         } else {
           this.problemStep = ProblemSteps.EmployeeConsumer;
@@ -115,6 +125,11 @@ export class ProblemComponent implements OnInit {
         } else {
           this.problemStep = ProblemSteps.ReponseConso;
         }
+        break;
+      }
+      case ProblemSteps.ReponseConso: {
+        this.draftReport.forwardToReponseConso = value;
+        this.continue();
         break;
       }
       default: {
