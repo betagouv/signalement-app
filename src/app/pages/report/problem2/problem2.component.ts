@@ -11,19 +11,19 @@ import { instanceOfSubcategoryInformation, Subcategory, SubcategoryBase } from '
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { ProblemStep } from './problem-step.component';
 
-const buildSteps = (categories: SubcategoryBase[], selected: string[]): SubcategoryBase[][] => {
-  const [choice, ...nextChoices] = selected;
-  const selectedSubcategories = categories.find(_ => _.title === choice?.trim())?.subcategories;
-  const currentCategories = categories.map(_ => {
-    return _;
-    // const { subcategories, ...category } = _;
-    // return category;
-  });
-  if (selectedSubcategories) {
-    return [currentCategories, ...buildSteps(selectedSubcategories, nextChoices)];
-  }
-  return [currentCategories];
-};
+// const buildSteps = (categories: SubcategoryBase[], selected: string[]): SubcategoryBase[][] => {
+//   const [choice, ...nextChoices] = selected;
+//   const selectedSubcategories = categories.find(_ => _.title === choice?.trim())?.subcategories;
+//   const currentCategories = categories.map(_ => {
+//     return _;
+//     // const { subcategories, ...category } = _;
+//     // return category;
+//   });
+//   if (selectedSubcategories) {
+//     return [currentCategories, ...buildSteps(selectedSubcategories, nextChoices)];
+//   }
+//   return [currentCategories];
+// };
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -127,18 +127,6 @@ export class Problem2Component implements OnInit {
 
   draftReport?: DraftReport;
 
-  readonly selectedSubject = new BehaviorSubject<Subcategory[]>([]);
-
-  readonly selected$ = this.selectedSubject.asObservable().pipe(distinctUntilChanged());
-  readonly selectedTitles$ = this.selected$.pipe(map(subcategories => subcategories.map(_ => _.title)));
-  readonly lastSelectedSubcategories: Observable<Subcategory | undefined> = this.selected$.pipe(map(_ => _[_.length - 1]));
-  readonly isLastSubcategories$ = this.lastSelectedSubcategories.pipe(map(_ => _ && !_.subcategories));
-  readonly showEmployeeConsumer$ = this.lastSelectedSubcategories.pipe(map(_ => {
-    console.log(instanceOfSubcategoryInformation(_), _);
-    return _ && !_.subcategories && !instanceOfSubcategoryInformation(_);
-  }));
-  // readonly isLastSubcategories$ = this.selected$.pipe(map(_ => _.length > 0 && !_[_.length - 1]?.subcategories));
-
   readonly anomaly$ = this.activatedRoute.url.pipe(
     map(url => url[0].path),
     distinctUntilChanged(),
@@ -152,6 +140,14 @@ export class Problem2Component implements OnInit {
     }),
   );
 
+  readonly selectedCategoriesSubject = new BehaviorSubject<Subcategory[]>([]);
+  readonly selectedCategories$ = this.selectedCategoriesSubject.asObservable().pipe(distinctUntilChanged());
+  readonly selectedTitles$ = this.selectedCategories$.pipe(map(subcategories => subcategories.map(_ => _.title)));
+  readonly lastSelectedCategories: Observable<Subcategory | undefined> = this.selectedCategories$.pipe(map(_ => _[_.length - 1]));
+  readonly isLastCategories$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories));
+
+  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_)));
+
   readonly getSteps: Observable<Subcategory[]> = combineLatest([this.anomaly$, this.selectedTitles$]).pipe(
     map(([anomaly, selected]) => getSubcategory(anomaly as any, selected))
   );
@@ -163,16 +159,16 @@ export class Problem2Component implements OnInit {
     if (this.draftReport.employeeConsumer === true) {
       return of(true);
     }
-    return combineLatest([this.isLastSubcategories$, this.showEmployeeConsumer$]).pipe(
+    return combineLatest([this.isLastCategories$, this.showEmployeeConsumer$]).pipe(
       map(([isLast, showEmployeeConsumer]) => isLast && !showEmployeeConsumer)
     );
   };
 
   readonly onChange = (subcategories: Subcategory[], index: number, selectedValue: string) => {
-    const selected = [...this.selectedSubject.value];
+    const selected = [...this.selectedCategoriesSubject.value];
     selected.length = index + 1;
     selected[index] = subcategories.find(_ => _.title === selectedValue)!;
-    this.selectedSubject.next([...selected]);
+    this.selectedCategoriesSubject.next([...selected]);
   };
 
   constructor(

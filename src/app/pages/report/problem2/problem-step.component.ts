@@ -15,7 +15,7 @@ export interface ProblemStep {
     '[class]': 'selected ? \'-selected\' : \'\' ',
   },
   template: `
-    <mat-radio-button class="-radio" [checked]="!!selected"></mat-radio-button>
+    <mat-radio-button class="-radio" [name]="step.title" [checked]="!!selected"></mat-radio-button>
     <!--    <input class="-radio" type="radio" [checked]="!!selected"/>-->
     <div>
       <div class="-title">{{step.title}}</div>
