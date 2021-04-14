@@ -7,23 +7,9 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { instanceOfSubcategoryInformation, Subcategory, SubcategoryBase } from '../../../model/Anomaly';
+import { instanceOfSubcategoryInformation, Subcategory } from '../../../model/Anomaly';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { ProblemStep } from './problem-step.component';
-
-// const buildSteps = (categories: SubcategoryBase[], selected: string[]): SubcategoryBase[][] => {
-//   const [choice, ...nextChoices] = selected;
-//   const selectedSubcategories = categories.find(_ => _.title === choice?.trim())?.subcategories;
-//   const currentCategories = categories.map(_ => {
-//     return _;
-//     // const { subcategories, ...category } = _;
-//     // return category;
-//   });
-//   if (selectedSubcategories) {
-//     return [currentCategories, ...buildSteps(selectedSubcategories, nextChoices)];
-//   }
-//   return [currentCategories];
-// };
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -84,7 +70,7 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
         </ng-container>
 
         <ng-container *ngIf="displayContinueButton() | async">
-          <button type="button" class="btn btn-lg btn-primary">
+          <button type="button" class="btn btn-lg btn-primary" (click)="nextStep()">
             Continuer
           </button>
         </ng-container>
@@ -94,82 +80,6 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
   styleUrls: ['./problem2.component.scss']
 })
 export class Problem2Component implements OnInit {
-
-  readonly employeeConsumerStepOptions: ProblemStep[] = [
-    { title: 'Oui', value: true },
-    { title: 'Non, je n\'y travaille pas', value: false }
-  ];
-
-  readonly reponseConsoStepOptions: ProblemStep[] = [
-    {
-      title: 'Je souhaite signaler mon problème à l\'entreprise pour qu\'elle le corrige.',
-      example: 'La répression des fraudes sera informée.',
-      value: true
-    },
-    {
-      title: 'Je souhaite contacter la répresion des fraudes pour obtenir des informations sur mon problème.',
-      value: false
-    }
-  ];
-
-  isContractualDispute = isContractualDispute;
-
-  // (): Observable<boolean> => {
-  //   if (this.draftReport.forwardToReponseConso !== undefined) {
-  //     return of(true);
-  //   }
-  //   if (this.draftReport.employeeConsumer === true) {
-  //     return of(true);
-  //   }
-  // };
-
-  readonly step = Step.Problem;
-
-  draftReport?: DraftReport;
-
-  readonly anomaly$ = this.activatedRoute.url.pipe(
-    map(url => url[0].path),
-    distinctUntilChanged(),
-    map(path => {
-      const anomaly = this.anomalyService.getAnomalyBy(_ => _.path === path);
-      if (anomaly) {
-        return anomaly;
-      } else {
-        throw new Error(`[SignalConso] Anomaly ${path} does not exists`);
-      }
-    }),
-  );
-
-  readonly selectedCategoriesSubject = new BehaviorSubject<Subcategory[]>([]);
-  readonly selectedCategories$ = this.selectedCategoriesSubject.asObservable().pipe(distinctUntilChanged());
-  readonly selectedTitles$ = this.selectedCategories$.pipe(map(subcategories => subcategories.map(_ => _.title)));
-  readonly lastSelectedCategories: Observable<Subcategory | undefined> = this.selectedCategories$.pipe(map(_ => _[_.length - 1]));
-  readonly isLastCategories$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories));
-
-  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_)));
-
-  readonly getSteps: Observable<Subcategory[]> = combineLatest([this.anomaly$, this.selectedTitles$]).pipe(
-    map(([anomaly, selected]) => getSubcategory(anomaly as any, selected))
-  );
-
-  readonly displayContinueButton = (): Observable<boolean> => {
-    if (this.draftReport.forwardToReponseConso !== undefined) {
-      return of(true);
-    }
-    if (this.draftReport.employeeConsumer === true) {
-      return of(true);
-    }
-    return combineLatest([this.isLastCategories$, this.showEmployeeConsumer$]).pipe(
-      map(([isLast, showEmployeeConsumer]) => isLast && !showEmployeeConsumer)
-    );
-  };
-
-  readonly onChange = (subcategories: Subcategory[], index: number, selectedValue: string) => {
-    const selected = [...this.selectedCategoriesSubject.value];
-    selected.length = index + 1;
-    selected[index] = subcategories.find(_ => _.title === selectedValue)!;
-    this.selectedCategoriesSubject.next([...selected]);
-  };
 
   constructor(
     @Inject(PLATFORM_ID) protected platformId: Object,
@@ -207,6 +117,78 @@ export class Problem2Component implements OnInit {
       }
     });
   }
+
+  readonly step = Step.Problem;
+
+  readonly employeeConsumerStepOptions: ProblemStep[] = [
+    { title: 'Oui', value: true },
+    { title: 'Non, je n\'y travaille pas', value: false }
+  ];
+
+  readonly reponseConsoStepOptions: ProblemStep[] = [
+    {
+      title: 'Je souhaite signaler mon problème à l\'entreprise pour qu\'elle le corrige.',
+      example: 'La répression des fraudes sera informée.',
+      value: true
+    },
+    {
+      title: 'Je souhaite contacter la répresion des fraudes pour obtenir des informations sur mon problème.',
+      value: false
+    }
+  ];
+
+  isContractualDispute = isContractualDispute;
+
+  draftReport?: DraftReport;
+
+  readonly anomaly$ = this.activatedRoute.url.pipe(
+    map(url => url[0].path),
+    distinctUntilChanged(),
+    map(path => {
+      const anomaly = this.anomalyService.getAnomalyBy(_ => _.path === path);
+      if (anomaly) {
+        return anomaly;
+      } else {
+        throw new Error(`[SignalConso] Anomaly ${path} does not exists`);
+      }
+    }),
+  );
+  readonly selectedCategoriesSubject = new BehaviorSubject<Subcategory[]>([]);
+  readonly selectedCategories$ = this.selectedCategoriesSubject.asObservable().pipe(distinctUntilChanged());
+  readonly selectedTitles$ = this.selectedCategories$.pipe(map(subcategories => subcategories.map(_ => _.title)));
+  readonly lastSelectedCategories: Observable<Subcategory | undefined> = this.selectedCategories$.pipe(map(_ => _[_.length - 1]));
+
+  readonly isLastCategories$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories));
+
+  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_)));
+
+  readonly getSteps: Observable<Subcategory[]> = combineLatest([this.anomaly$, this.selectedTitles$]).pipe(
+    map(([anomaly, selected]) => getSubcategory(anomaly as any, selected))
+  );
+
+  readonly displayContinueButton = (): Observable<boolean> => {
+    if (this.draftReport.forwardToReponseConso !== undefined) {
+      return of(true);
+    }
+    if (this.draftReport.employeeConsumer === true) {
+      return of(true);
+    }
+    return combineLatest([this.isLastCategories$, this.showEmployeeConsumer$]).pipe(
+      map(([isLast, showEmployeeConsumer]) => isLast && !showEmployeeConsumer)
+    );
+  };
+
+  readonly onChange = (subcategories: Subcategory[], index: number, selectedValue: string) => {
+    const selected = [...this.selectedCategoriesSubject.value];
+    selected.length = index + 1;
+    selected[index] = subcategories.find(_ => _.title === selectedValue)!;
+    this.selectedCategoriesSubject.next([...selected]);
+  };
+
+  readonly nextStep = () => {
+    this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
+    this.reportRouterService.routeForward(this.step);
+  };
 
   ngOnInit() {
   }
