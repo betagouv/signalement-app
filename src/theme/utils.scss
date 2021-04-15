@@ -41,6 +41,9 @@
   }
 }
 .txt-small {
-  font-size: 0.875rem;
+  font-size: $font-size-small;
+}
+.txt-big {
+  font-size: $font-size-big;
 }
 

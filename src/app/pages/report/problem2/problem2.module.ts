@@ -9,7 +9,7 @@ import { AlertModule } from '../../../dashboard/shared/alert/alert';
 import { BreadcrumbModule } from '../breadcrumb/breadcrumb.component';
 import { ProblemStepComponent, ProblemStepsComponent } from './problem-step.component';
 import { MatButtonModule } from '@angular/material/button';
-import { AlertContractualDisputeComponent } from './alert-contractual-dispute.component';
+import { DialogContractualDisputeModule } from './alert-contractual-dispute.component';
 import { MatRadioModule } from '@angular/material/radio';
 
 
@@ -18,7 +18,6 @@ import { MatRadioModule } from '@angular/material/radio';
     Problem2Component,
     ProblemStepComponent,
     ProblemStepsComponent,
-    AlertContractualDisputeComponent,
   ],
   imports: [
     BreadcrumbModule,
@@ -31,6 +30,7 @@ import { MatRadioModule } from '@angular/material/radio';
     PageModule,
     MatButtonModule,
     MatRadioModule,
+    DialogContractualDisputeModule,
   ],
 })
 export class Problem2Module {

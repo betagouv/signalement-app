@@ -8,8 +8,10 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { instanceOfSubcategoryInformation, Subcategory } from '../../../model/Anomaly';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { ProblemStep } from './problem-step.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContractualDisputeComponent } from './alert-contractual-dispute.component';
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -30,52 +32,50 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
   selector: 'app-problem',
   template: `
     <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
-    <main role="main">
-      <section class="section section-white form-like" *ngIf="draftReport">
-        <ng-container *ngIf="(anomaly$ | async).subcategories as subcategories">
-          <app-problem-steps
-            [selected]="(selectedTitles$ | async)[0]"
-            [steps]="subcategories"
-            (changed)="onChange(subcategories, 0, $event)"
-          ></app-problem-steps>
-        </ng-container>
+    <app-page size="small" *ngIf="draftReport">
+      <ng-container *ngIf="(anomaly$ | async).subcategories as subcategories">
+        <app-problem-steps
+          [selected]="(selectedTitles$ | async)[0]"
+          [steps]="subcategories"
+          (changed)="onChange(subcategories, 0, $event)"
+        ></app-problem-steps>
+      </ng-container>
 
-        <ng-container *ngFor="let step of getSteps | async; let i = index">
-          <app-problem-steps
-            *ngIf="step.subcategories"
-            [title]="step.subcategoriesTitle"
-            [steps]="step.subcategories"
-            [selected]="(selectedTitles$ | async )[i + 1]"
-            (changed)="onChange(step.subcategories, i + 1, $event)"
-          ></app-problem-steps>
-        </ng-container>
+      <ng-container *ngFor="let step of getSteps | async; let i = index">
+        <app-problem-steps
+          *ngIf="step.subcategories"
+          [title]="step.subcategoriesTitle"
+          [steps]="step.subcategories"
+          [selected]="(selectedTitles$ | async )[i + 1]"
+          (changed)="onChange(step.subcategories, i + 1, $event)"
+        ></app-problem-steps>
+      </ng-container>
 
-        <ng-container *ngIf="showEmployeeConsumer$ | async">
-          <app-problem-steps
-            title="Travaillez-vous dans l'entreprise que vous souhaitez signaler ?"
-            [selected]="draftReport.employeeConsumer"
-            [steps]="employeeConsumerStepOptions"
-            (changed)="draftReport.employeeConsumer = $event"
-          >
-          </app-problem-steps>
+      <ng-container *ngIf="showEmployeeConsumer$ | async">
+        <app-problem-steps
+          title="Travaillez-vous dans l'entreprise que vous souhaitez signaler ?"
+          [selected]="draftReport.employeeConsumer"
+          [steps]="employeeConsumerStepOptions"
+          (changed)="draftReport.employeeConsumer = $event"
+        >
+        </app-problem-steps>
 
-          <app-problem-steps
-            *ngIf="draftReport.employeeConsumer === false"
-            title="Que souhaitez-vous faire ?"
-            [selected]="draftReport.forwardToReponseConso"
-            [steps]="reponseConsoStepOptions"
-            (changed)="draftReport.forwardToReponseConso = $event"
-          >
-          </app-problem-steps>
-        </ng-container>
+        <app-problem-steps
+          *ngIf="showReponseConsoQuestion()"
+          title="Que souhaitez-vous faire ?"
+          [selected]="draftReport.forwardToReponseConso"
+          [steps]="reponseConsoStepOptions"
+          (changed)="draftReport.forwardToReponseConso = $event"
+        >
+        </app-problem-steps>
+      </ng-container>
 
-        <ng-container *ngIf="displayContinueButton() | async">
-          <button type="button" class="btn btn-lg btn-primary" (click)="nextStep()">
-            Continuer
-          </button>
-        </ng-container>
-      </section>
-    </main>
+      <ng-container *ngIf="showContinueButton() | async">
+        <button type="button" class="btn btn-lg btn-primary" (click)="nextStepIfNotContractualDispute()">
+          Continuer
+        </button>
+      </ng-container>
+    </app-page>
   `,
   styleUrls: ['./problem2.component.scss']
 })
@@ -84,6 +84,7 @@ export class Problem2Component implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) protected platformId: Object,
     private anomalyService: AnomalyService,
+    public dialog: MatDialog,
     private reportStorageService: ReportStorageService,
     private reportRouterService: ReportRouterService,
     private analyticsService: AnalyticsService,
@@ -121,6 +122,8 @@ export class Problem2Component implements OnInit {
 
   readonly step = Step.Problem;
 
+  draftReport?: DraftReport;
+
   readonly employeeConsumerStepOptions: ProblemStep[] = [
     { title: 'Oui', value: true },
     { title: 'Non, je n\'y travaille pas', value: false }
@@ -138,9 +141,9 @@ export class Problem2Component implements OnInit {
     }
   ];
 
-  isContractualDispute = isContractualDispute;
+  readonly isContractualDispute = () => isContractualDispute(this.draftReport);
 
-  draftReport?: DraftReport;
+  readonly showReponseConsoQuestion = () => !this.isContractualDispute() && this.draftReport.employeeConsumer === false;
 
   readonly anomaly$ = this.activatedRoute.url.pipe(
     map(url => url[0].path),
@@ -154,9 +157,13 @@ export class Problem2Component implements OnInit {
       }
     }),
   );
+
   readonly selectedCategoriesSubject = new BehaviorSubject<Subcategory[]>([]);
+
   readonly selectedCategories$ = this.selectedCategoriesSubject.asObservable().pipe(distinctUntilChanged());
+
   readonly selectedTitles$ = this.selectedCategories$.pipe(map(subcategories => subcategories.map(_ => _.title)));
+
   readonly lastSelectedCategories: Observable<Subcategory | undefined> = this.selectedCategories$.pipe(map(_ => _[_.length - 1]));
 
   readonly isLastCategories$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories));
@@ -167,17 +174,20 @@ export class Problem2Component implements OnInit {
     map(([anomaly, selected]) => getSubcategory(anomaly as any, selected))
   );
 
-  readonly displayContinueButton = (): Observable<boolean> => {
-    if (this.draftReport.forwardToReponseConso !== undefined) {
-      return of(true);
-    }
-    if (this.draftReport.employeeConsumer === true) {
-      return of(true);
-    }
-    return combineLatest([this.isLastCategories$, this.showEmployeeConsumer$]).pipe(
-      map(([isLast, showEmployeeConsumer]) => isLast && !showEmployeeConsumer)
-    );
-  };
+  readonly showContinueButton = (): Observable<boolean> => combineLatest([this.isLastCategories$, this.showEmployeeConsumer$]).pipe(
+    map(([isLast, showEmployeeConsumer]) => {
+      if (!isLast) {
+        return false;
+      }
+      if (this.showReponseConsoQuestion()) {
+        return this.draftReport.forwardToReponseConso !== undefined;
+      }
+      if (showEmployeeConsumer) {
+        return this.draftReport.employeeConsumer !== undefined;
+      }
+      return false;
+    })
+  );
 
   readonly onChange = (subcategories: Subcategory[], index: number, selectedValue: string) => {
     const selected = [...this.selectedCategoriesSubject.value];
@@ -197,9 +207,21 @@ export class Problem2Component implements OnInit {
     );
   };
 
+  readonly nextStepIfNotContractualDispute = () => {
+    if (this.isContractualDispute()) {
+      this.openContractualDisputeDialog();
+    } else {
+      this.nextStep();
+    }
+  };
   readonly nextStep = () => {
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
+  };
+
+  readonly openContractualDisputeDialog = () => {
+    const ref = this.dialog.open(DialogContractualDisputeComponent, { width: '500px', });
+    ref.afterClosed().subscribe(_ => _ && this.nextStep());
   };
 
   ngOnInit() {
