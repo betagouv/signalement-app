@@ -112,6 +112,7 @@ export class Problem2Component implements OnInit {
     ).subscribe(report => {
       if (report && report.category) {
         this.draftReport = report;
+        this.selectedCategoriesSubject.next(report.subcategories ?? []);
       } else {
         this.reportRouterService.routeToFirstStep();
       }
@@ -183,6 +184,17 @@ export class Problem2Component implements OnInit {
     selected.length = index + 1;
     selected[index] = subcategories.find(_ => _.title === selectedValue)!;
     this.selectedCategoriesSubject.next([...selected]);
+    this.draftReport.subcategories = selected;
+    this.analyticsService.trackEvent(
+      EventCategories.report,
+      ReportEventActions.validateSubcategory,
+      subcategories.map(_ => _.title)
+    );
+    this.analyticsService.trackEvent(
+      EventCategories.report,
+      ReportEventActions.contactualReport,
+      this.draftReport.isContractualDispute ? 'Oui' : 'Non'
+    );
   };
 
   readonly nextStep = () => {

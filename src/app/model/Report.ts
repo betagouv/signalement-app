@@ -66,15 +66,15 @@ export const reportStatusIcon = {
 
 export class DraftReport {
   category: string;
-  subcategories: Subcategory[];
+  subcategories?: Subcategory[];
   draftCompany: DraftCompany;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
-  employeeConsumer: boolean;
+  employeeConsumer?: boolean;
   contactAgreement: boolean;
   retrievedFromStorage: boolean;
-  forwardToReponseConso: boolean;
+  forwardToReponseConso?: boolean;
   storedStep: Step;
   vendor: string;
 
