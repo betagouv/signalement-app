@@ -15,15 +15,11 @@ import { DialogContractualDisputeComponent } from './alert-contractual-dispute.c
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
-  if (current) {
-    if (anomaly.subcategories) {
-      const pickedCategory = anomaly.subcategories.find(_ => _.title === current);
-      if (pickedCategory) {
-        return [pickedCategory, ...getSubcategory(pickedCategory, nextPath)];
-      }
-      return [];
+  if (current && anomaly.subcategories) {
+    const pickedCategory = anomaly.subcategories.find(_ => _.title === current);
+    if (pickedCategory) {
+      return [pickedCategory, ...getSubcategory(pickedCategory, nextPath)];
     }
-    return [];
   }
   return [];
 };
@@ -133,11 +129,11 @@ export class Problem2Component implements OnInit {
     {
       title: 'Je souhaite signaler mon problème à l\'entreprise pour qu\'elle le corrige.',
       example: 'La répression des fraudes sera informée.',
-      value: true
+      value: false
     },
     {
       title: 'Je souhaite contacter la répresion des fraudes pour obtenir des informations sur mon problème.',
-      value: false
+      value: true
     }
   ];
 
@@ -194,7 +190,9 @@ export class Problem2Component implements OnInit {
     selected.length = index + 1;
     selected[index] = subcategories.find(_ => _.title === selectedValue)!;
     this.selectedCategoriesSubject.next([...selected]);
+
     this.draftReport.subcategories = selected;
+
     this.analyticsService.trackEvent(
       EventCategories.report,
       ReportEventActions.validateSubcategory,
@@ -214,6 +212,7 @@ export class Problem2Component implements OnInit {
       this.nextStep();
     }
   };
+
   readonly nextStep = () => {
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
     this.reportRouterService.routeForward(this.step);
