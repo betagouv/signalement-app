@@ -61,7 +61,9 @@ export class ConsumerComponent implements OnInit {
       this.contactAgreementCtrl = this.formBuilder.control(false);
     } else {
       this.contactAgreementCtrl = this.formBuilder.control(
-        this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.isContractualDispute ? true : undefined,
+        this.draftReport.contactAgreement !== undefined
+          ? this.draftReport.contactAgreement
+          : !this.showContactAgreement() ? true : undefined,
         Validators.required
       );
       this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
@@ -87,4 +89,6 @@ export class ConsumerComponent implements OnInit {
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
   }
+
+  readonly showContactAgreement = () => !this.draftReport.isContractualDispute && !this.draftReport.forwardToReponseConso;
 }

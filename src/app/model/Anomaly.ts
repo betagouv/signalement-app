@@ -3,6 +3,7 @@ export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
 export const ContractualDisputeTag = 'Litige contractuel';
 export const InternetTag = 'Internet';
+export const ReponseConsoTag = 'ReponseConso';
 
 export interface SubcategoryBase extends Category {
   title: string;
