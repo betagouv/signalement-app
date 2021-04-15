@@ -17,6 +17,8 @@ export interface ProblemStep {
   value?: any;
 }
 
+let nextUniqueId = 0;
+
 @Component({
   selector: 'app-problem-step[step]',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,7 +27,7 @@ export interface ProblemStep {
     '[class]': 'selected ? \'-selected\' : \'\' ',
   },
   template: `
-    <mat-radio-button class="-radio" [name]="step.title" [checked]="!!selected"></mat-radio-button>
+    <mat-radio-button class="-radio" [name]="getName()" [checked]="!!selected"></mat-radio-button>
     <div>
       <div class="-title">{{step.title}}</div>
       <div class="-desc" *ngIf="step.example">{{step.example}}</div>
@@ -40,6 +42,8 @@ export class ProblemStepComponent {
   @Input() selected?: boolean;
 
   @Output() changed = new EventEmitter<string>();
+
+  readonly getName = () => `problem-${this.step.title}-${nextUniqueId++}`;
 
   readonly onChange = () => this.changed.emit(this.step.value ?? this.step.title);
 }
