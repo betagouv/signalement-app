@@ -100,6 +100,10 @@ export class DraftReport {
   get isContractualDispute() {
     return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
+
+  get sendToEntreprise() {
+    return !this.employeeConsumer && !this.forwardToReponseConso;
+  }
 }
 
 export const isContractualDispute = (_: DraftReport) => !_.employeeConsumer && _.tags.indexOf(ContractualDisputeTag) !== -1;

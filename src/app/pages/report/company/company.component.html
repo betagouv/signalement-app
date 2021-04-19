@@ -102,7 +102,7 @@
               Pouvez-vous identifier l'entreprise<span *ngIf="draftReport.companyKind === companyKinds.PHONE"> qui vous a démarché</span> ?
             </h2>
             <div class="note mb-1">
-              SignalConso en a besoin pour <ng-container *ngIf="!draftReport.employeeConsumer">la contacter et </ng-container>informer la répression des fraudes.
+              SignalConso en a besoin pour <ng-container *ngIf="draftReport.sendToEntreprise">la contacter et </ng-container>informer la répression des fraudes.
             </div>
 
             <form>

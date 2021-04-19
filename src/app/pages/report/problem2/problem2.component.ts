@@ -52,14 +52,12 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
           title="Travaillez-vous dans l'entreprise que vous souhaitez signaler ?"
           [selected]="draftReport.employeeConsumer"
           [steps]="employeeConsumerStepOptions"
-          (changed)="this.draftReport.employeeConsumer = $event"
+          (changed)="draftReport.employeeConsumer = $event"
         >
         </app-problem-steps>
 
-        {{showReponseConsoQuestion$ | async}}
-        <div *ngIf="showReponseConsoQuestion$ | async">SO WHAT ?</div>
         <app-problem-steps
-          *ngIf="showReponseConsoQuestion$ | async"
+          *ngIf="showReponseConsoQuestion()"
           title="Que souhaitez-vous faire ?"
           [selected]="draftReport.forwardToReponseConso"
           [steps]="reponseConsoStepOptions"
@@ -89,7 +87,7 @@ export class Problem2Component implements OnInit {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private meta: Meta,
-    public cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {
     this.activatedRoute.url.pipe(
       take(1),
@@ -118,12 +116,9 @@ export class Problem2Component implements OnInit {
     });
   }
 
-  readonly draftreportSource = new BehaviorSubject<DraftReport>(new DraftReport());
-  readonly draftReport$ = this.draftreportSource.asObservable();
-
   readonly step = Step.Problem;
 
-  // draftReport?: DraftReport;
+  draftReport?: DraftReport;
 
   readonly employeeConsumerStepOptions: ProblemStep[] = [
     { title: 'Oui', value: true },
@@ -143,6 +138,12 @@ export class Problem2Component implements OnInit {
   ];
 
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
+
+  readonly showReponseConsoQuestion = () => {
+    return this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
+      && !this.isContractualDispute()
+      && this.draftReport.employeeConsumer === false;
+  };
 
   readonly anomaly$ = this.activatedRoute.url.pipe(
     map(url => url[0].path),
@@ -167,36 +168,18 @@ export class Problem2Component implements OnInit {
 
   readonly isLastCategories$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories));
 
-  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(
-    map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_))
-  );
-
-  readonly selectedTags$ = this.selectedCategories$.pipe(map(subcategories => subcategories.flatMap(_ => _.tags!).filter(_ => !!_)));
-
-  readonly findSelectedTag = (tag: string) => this.selectedTags$.pipe(map(tags => !!tags.find(_ => _ === tag)));
+  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_)));
 
   readonly getSteps: Observable<Subcategory[]> = combineLatest([this.anomaly$, this.selectedTitles$]).pipe(
     map(([anomaly, selected]) => getSubcategory(anomaly as any, selected))
   );
 
-  readonly showReponseConsoQuestion$ = this.selectedTags$.pipe(map(tags => !!tags.find(_ => _ === ReponseConsoTag))).pipe(
-    map(exists => {
-      console.log(exists, '&&', !this.isContractualDispute(), '&&', this.draftReport.employeeConsumer === false);
-      console.log(exists && !this.isContractualDispute() && this.draftReport.employeeConsumer === false);
-      return exists && !this.isContractualDispute() && this.draftReport.employeeConsumer === false;
-    })
-  );
-
-  readonly showContinueButton = (): Observable<boolean> => combineLatest([
-    this.isLastCategories$,
-    this.showEmployeeConsumer$,
-    this.showReponseConsoQuestion$
-  ]).pipe(
-    map(([isLast, showEmployeeConsumer, showReponseConsoQuestion]) => {
+  readonly showContinueButton = (): Observable<boolean> => combineLatest([this.isLastCategories$, this.showEmployeeConsumer$]).pipe(
+    map(([isLast, showEmployeeConsumer]) => {
       if (!isLast) {
         return false;
       }
-      if (showReponseConsoQuestion) {
+      if (this.showReponseConsoQuestion()) {
         return this.draftReport.forwardToReponseConso !== undefined;
       }
       if (showEmployeeConsumer) {

@@ -56,7 +56,7 @@
         </div>
 
         <fieldset class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
-          <ng-container *ngIf="showContactAgreement()">
+          <ng-container *ngIf="this.draftReport.sendToEntreprise">
             <div class="row mb-4">
               <div class="col col-radio">
                 <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>

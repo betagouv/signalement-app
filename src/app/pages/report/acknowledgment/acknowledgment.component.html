@@ -16,73 +16,82 @@
             </div>
             <div class="col-12 col-sm-9">
               <h2 class="d-none d-sm-block">Que va-t-il se passer pour l'entreprise ?</h2>
-              <ng-container *ngIf="!draftReport.employeeConsumer; else employeeConsumer">
-                <ng-container *ngIf="!(draftReport.draftCompany | isForeign) else foreignCountryTpl">
-                  <ng-container *ngIf="draftReport.draftCompany.siret; else noSiret">
-                    <ng-container *ngIf="draftReport.contactAgreement; else noContactAgreement">
-                      <p>
-                        L'entreprise recevra votre signalement.
-                        Elle aura la possibilité de corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
-                      </p>
-                      <p>
-                        Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-                        Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
-                      </p>
+
+              <ng-container *ngIf="!draftReport.forwardToReponseConso; else forwardToReponseConsoTpl">
+                <ng-container *ngIf="!draftReport.employeeConsumer; else employeeConsumer">
+                  <ng-container *ngIf="!(draftReport.draftCompany | isForeign) else foreignCountryTpl">
+                    <ng-container *ngIf="draftReport.draftCompany.siret; else noSiret">
+                      <ng-container *ngIf="draftReport.contactAgreement; else noContactAgreement">
+                        <p>
+                          L'entreprise recevra votre signalement.
+                          Elle aura la possibilité de corriger directement le problème grâce à vos informations. Votre nom et vos coordonnées lui seront communiqués s’il souhaite vous répondre.
+                        </p>
+                        <p>
+                          Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                          Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+                        </p>
+                      </ng-container>
+                      <ng-template #noContactAgreement>
+                        <p>
+                          L'entreprise recevra votre signalement sans connaître votre identité.
+                          Elle aura la possibilité de corriger directement le problème grâce à vos informations.
+                        </p>
+                        <p>
+                          Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                          Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+                        </p>
+                      </ng-template>
                     </ng-container>
-                    <ng-template #noContactAgreement>
-                      <p>
-                        L'entreprise recevra votre signalement sans connaître votre identité.
-                        Elle aura la possibilité de corriger directement le problème grâce à vos informations.
-                      </p>
-                      <p>
-                        Votre signalement est aussi transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-                        Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
-                      </p>
-                    </ng-template>
                   </ng-container>
+                  <ng-template #foreignCountryTpl>
+                    <p>
+                      Vous avez indiqué que l’entreprise est une entreprise étrangère ({{draftReport.draftCompany.country}}).
+                    </p>
+                    <p>
+                      Votre signalement ne sera pas transmis à cette entreprise.
+                    </p>
+                    <p *ngIf="foreignCountry?.european">
+                      Nous vous invitons à faire votre signalement directement auprès du Centre Européen des Consommateurs. Il vous apportera une assistance pour régler votre problème.
+                      <a href="https://www.europe-consommateurs.eu/fr/une-question-une-reclamation" target="_blank" title="europe-consommateurs.eu (nouvelle fenêtre)">
+                        https://www.europe-consommateurs.eu/fr/une-question-une-reclamation
+                      </a>
+                    </p>
+                    <p *ngIf="foreignCountry?.transfer && foreignCountry?.code === 'AND'">
+                      Nous vous invitons à faire votre signalement directement auprès du service du commerce et de la consommation d’Andorre :
+                      <a href="https://www.comerc.ad/reclamacions/?id=fr" target="_blank" title="comerc.ad (nouvelle fenêtre)">https://www.comerc.ad/reclamacions/?id=fr</a>
+                    </p>
+                    <p *ngIf="foreignCountry?.transfer && foreignCountry?.code !== 'AND'">
+                      Par contre les enquêteurs de la répression des fraudes vont le transférer aux autorités compétentes de ce pays.
+                    </p>
+                    <p *ngIf="!foreignCountry?.european && !foreignCountry?.transfer">
+                      Nous vous invitons à faire votre signalement auprès d'econsumer.gov afin d’aider les autorités internationales à lutter contre la fraude.
+                      <a href="https://www.econsumer.gov/fr">https://www.econsumer.gov/fr</a>
+                    </p>
+                    <app-ack-charge-back [draftReport]="draftReport"></app-ack-charge-back>
+                  </ng-template>
+                  <ng-template #noSiret>
+                    <p>
+                      Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                    </p>
+                    <p>
+                      Il ne pourra en revanche pas être transmis à l'entreprise signalée, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
+                      Dans ce cas, vous recevrez une notification.
+                    </p>
+                  </ng-template>
                 </ng-container>
-                <ng-template #foreignCountryTpl>
+                <ng-template #employeeConsumer>
                   <p>
-                    Vous avez indiqué que l’entreprise est une entreprise étrangère ({{draftReport.draftCompany.country}}).
-                  </p>
-                  <p>
-                    Votre signalement ne sera pas transmis à cette entreprise.
-                  </p>
-                  <p *ngIf="foreignCountry?.european">
-                    Nous vous invitons à faire votre signalement directement auprès du Centre Européen des Consommateurs. Il vous apportera une assistance pour régler votre problème.
-                    <a href="https://www.europe-consommateurs.eu/fr/une-question-une-reclamation" target="_blank" title="europe-consommateurs.eu (nouvelle fenêtre)">
-                      https://www.europe-consommateurs.eu/fr/une-question-une-reclamation
-                    </a>
-                  </p>
-                  <p *ngIf="foreignCountry?.transfer && foreignCountry?.code === 'AND'">
-                    Nous vous invitons à faire votre signalement directement auprès du service du commerce et de la consommation d’Andorre :
-                    <a href="https://www.comerc.ad/reclamacions/?id=fr" target="_blank" title="comerc.ad (nouvelle fenêtre)">https://www.comerc.ad/reclamacions/?id=fr</a>
-                  </p>
-                  <p *ngIf="foreignCountry?.transfer && foreignCountry?.code !== 'AND'">
-                    Par contre les enquêteurs de la répression des fraudes vont le transférer aux autorités compétentes de ce pays.
-                  </p>
-                  <p *ngIf="!foreignCountry?.european && !foreignCountry?.transfer">
-                    Nous vous invitons à faire votre signalement auprès d'econsumer.gov afin d’aider les autorités internationales à lutter contre la fraude.
-                    <a href="https://www.econsumer.gov/fr">https://www.econsumer.gov/fr</a>
-                  </p>
-                  <app-ack-charge-back [draftReport]="draftReport"></app-ack-charge-back>
-                </ng-template>
-                <ng-template #noSiret>
-                  <p>
-                    Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                    Vous avez indiqué être employé de l'entreprise que vous avez signalé.
                   </p>
                   <p>
-                    Il ne pourra en revanche pas être transmis à l'entreprise signalée, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
-                    Dans ce cas, vous recevrez une notification.
+                    Afin de garantir la sécurité de votre emploi, votre signalement ne sera pas transmis à l'entreprise. Par contre, il a bien été enregistré dans la base de données de la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
                   </p>
                 </ng-template>
               </ng-container>
-              <ng-template #employeeConsumer>
+              <ng-template #forwardToReponseConsoTpl>
                 <p>
-                  Vous avez indiqué être employé de l'entreprise que vous avez signalé.
-                </p>
-                <p>
-                  Afin de garantir la sécurité de votre emploi, votre signalement ne sera pas transmis à l'entreprise. Par contre, il a bien été enregistré dans la base de données de la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                  Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+                  Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
                 </p>
               </ng-template>
               <p>
