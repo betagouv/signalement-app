@@ -7,7 +7,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { instanceOfSubcategoryInformation, Subcategory } from '../../../model/Anomaly';
+import { instanceOfSubcategoryInformation, ReponseConsoTag, Subcategory } from '../../../model/Anomaly';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { ProblemStep } from './problem-step.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -52,12 +52,14 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
           title="Travaillez-vous dans l'entreprise que vous souhaitez signaler ?"
           [selected]="draftReport.employeeConsumer"
           [steps]="employeeConsumerStepOptions"
-          (changed)="draftReport.employeeConsumer = $event"
+          (changed)="this.draftReport.employeeConsumer = $event"
         >
         </app-problem-steps>
 
+        {{showReponseConsoQuestion$ | async}}
+        <div *ngIf="showReponseConsoQuestion$ | async">SO WHAT ?</div>
         <app-problem-steps
-          *ngIf="showReponseConsoQuestion()"
+          *ngIf="showReponseConsoQuestion$ | async"
           title="Que souhaitez-vous faire ?"
           [selected]="draftReport.forwardToReponseConso"
           [steps]="reponseConsoStepOptions"
@@ -87,7 +89,7 @@ export class Problem2Component implements OnInit {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private meta: Meta,
-    private cdr: ChangeDetectorRef
+    public cdr: ChangeDetectorRef
   ) {
     this.activatedRoute.url.pipe(
       take(1),
@@ -116,9 +118,12 @@ export class Problem2Component implements OnInit {
     });
   }
 
+  readonly draftreportSource = new BehaviorSubject<DraftReport>(new DraftReport());
+  readonly draftReport$ = this.draftreportSource.asObservable();
+
   readonly step = Step.Problem;
 
-  draftReport?: DraftReport;
+  // draftReport?: DraftReport;
 
   readonly employeeConsumerStepOptions: ProblemStep[] = [
     { title: 'Oui', value: true },
@@ -138,8 +143,6 @@ export class Problem2Component implements OnInit {
   ];
 
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
-
-  readonly showReponseConsoQuestion = () => !this.isContractualDispute() && this.draftReport.employeeConsumer === false;
 
   readonly anomaly$ = this.activatedRoute.url.pipe(
     map(url => url[0].path),
@@ -164,18 +167,36 @@ export class Problem2Component implements OnInit {
 
   readonly isLastCategories$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories));
 
-  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_)));
+  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(
+    map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_))
+  );
+
+  readonly selectedTags$ = this.selectedCategories$.pipe(map(subcategories => subcategories.flatMap(_ => _.tags!).filter(_ => !!_)));
+
+  readonly findSelectedTag = (tag: string) => this.selectedTags$.pipe(map(tags => !!tags.find(_ => _ === tag)));
 
   readonly getSteps: Observable<Subcategory[]> = combineLatest([this.anomaly$, this.selectedTitles$]).pipe(
     map(([anomaly, selected]) => getSubcategory(anomaly as any, selected))
   );
 
-  readonly showContinueButton = (): Observable<boolean> => combineLatest([this.isLastCategories$, this.showEmployeeConsumer$]).pipe(
-    map(([isLast, showEmployeeConsumer]) => {
+  readonly showReponseConsoQuestion$ = this.selectedTags$.pipe(map(tags => !!tags.find(_ => _ === ReponseConsoTag))).pipe(
+    map(exists => {
+      console.log(exists, '&&', !this.isContractualDispute(), '&&', this.draftReport.employeeConsumer === false);
+      console.log(exists && !this.isContractualDispute() && this.draftReport.employeeConsumer === false);
+      return exists && !this.isContractualDispute() && this.draftReport.employeeConsumer === false;
+    })
+  );
+
+  readonly showContinueButton = (): Observable<boolean> => combineLatest([
+    this.isLastCategories$,
+    this.showEmployeeConsumer$,
+    this.showReponseConsoQuestion$
+  ]).pipe(
+    map(([isLast, showEmployeeConsumer, showReponseConsoQuestion]) => {
       if (!isLast) {
         return false;
       }
-      if (this.showReponseConsoQuestion()) {
+      if (showReponseConsoQuestion) {
         return this.draftReport.forwardToReponseConso !== undefined;
       }
       if (showEmployeeConsumer) {

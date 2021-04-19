@@ -118,6 +118,7 @@ export class Report {
   consumer: Consumer;
   employeeConsumer: boolean;
   contactAgreement: boolean;
+  forwardToReponseConso?: boolean;
   creationDate: Date;
   status: string;
 

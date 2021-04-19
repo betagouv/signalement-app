@@ -14,7 +14,7 @@ export const ReportStorageKey = 'ReportSignalConso';
 export class ReportStorageService {
 
   private reportInProgessSource = new BehaviorSubject<DraftReport>(undefined);
-  private reportInProgess = this.reportInProgessSource.asObservable();
+  reportInProgess = this.reportInProgessSource.asObservable();
 
   constructor(private localStorage: LocalStorage) {
   }
