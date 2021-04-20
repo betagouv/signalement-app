@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { Problem2Component } from './problem2.component';
+import { ProblemComponent } from './problem2.component';
 import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { PageModule } from '../../../dashboard/shared/page/page.module';
@@ -15,7 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
-    Problem2Component,
+    ProblemComponent,
     ProblemStepComponent,
     ProblemStepsComponent,
   ],
@@ -33,7 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
     DialogContractualDisputeModule,
   ],
 })
-export class Problem2Module {
+export class ProblemModule {
 
 }
 
