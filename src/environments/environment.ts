@@ -7,7 +7,7 @@ export const environment = {
   apiReportBaseUrl: 'http://localhost:9000',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
-  reponseConsoDisplayRate: 0,
+  reponseConsoDisplayRate: 100,
   sentryDsn: null,
 };
 
