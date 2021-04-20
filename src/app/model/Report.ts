@@ -1,5 +1,5 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, ContractualDisputeTag, InternetTag, Subcategory, Tag } from './Anomaly';
+import { CompanyKinds, ContractualDisputeTag, InternetTag, ReponseConsoTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
 import { CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
@@ -92,6 +92,9 @@ export class DraftReport {
     const tags = !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
     if (this.companyKind === CompanyKinds.WEBSITE) {
       tags.push(InternetTag);
+    }
+    if (!this.forwardToReponseConso) {
+      return tags.filter(_ => _ !== ReponseConsoTag);
     }
     return tags;
   }

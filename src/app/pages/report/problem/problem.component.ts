@@ -30,7 +30,6 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
   template: `
     <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
     <app-page size="small" *ngIf="draftReport">
-      {{displayReponseConso}}
       <ng-container *ngIf="(anomaly$ | async).subcategories as subcategories">
         <app-problem-steps
           [selected]="(selectedTitles$ | async)[0]"
@@ -75,9 +74,9 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
       </ng-container>
     </app-page>
   `,
-  styleUrls: ['./problem2.component.scss']
+  styleUrls: ['./problem.component.scss']
 })
-export class Problem2Component implements OnInit {
+export class ProblemComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) protected platformId: Object,
