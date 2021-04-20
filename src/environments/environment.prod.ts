@@ -3,5 +3,6 @@ export const environment = {
   apiReportBaseUrl: '${API_BASE_URL}',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
+  reponseConsoDisplayRate: '${REPONSECONSO_DISPLAY_PERCENTAGE}',
   sentryDsn: '${SENTRY_DSN}',
 };

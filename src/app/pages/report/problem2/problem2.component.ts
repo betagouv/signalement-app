@@ -12,6 +12,7 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { ProblemStep } from './problem-step.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContractualDisputeComponent } from './alert-contractual-dispute.component';
+import { environment } from '../../../../environments/environment';
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -29,6 +30,7 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
   template: `
     <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
     <app-page size="small" *ngIf="draftReport">
+      {{displayReponseConso}}
       <ng-container *ngIf="(anomaly$ | async).subcategories as subcategories">
         <app-problem-steps
           [selected]="(selectedTitles$ | async)[0]"
@@ -116,6 +118,8 @@ export class Problem2Component implements OnInit {
     });
   }
 
+  readonly displayReponseConso = Math.random() * 100 < environment.reponseConsoDisplayRate;
+
   readonly step = Step.Problem;
 
   draftReport?: DraftReport;
@@ -140,7 +144,8 @@ export class Problem2Component implements OnInit {
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
 
   readonly showReponseConsoQuestion = () => {
-    return this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
+    return this.displayReponseConso
+      && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
       && !this.isContractualDispute()
       && this.draftReport.employeeConsumer === false;
   };
