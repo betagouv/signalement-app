@@ -117,7 +117,7 @@ export class ProblemComponent implements OnInit {
     });
   }
 
-  readonly displayReponseConso = Math.random() * 100 < environment.reponseConsoDisplayRate;
+  readonly displayReponseConso = () => Math.random() * 100 < environment.reponseConsoDisplayRate || this.draftReport.forwardToReponseConso;
 
   readonly step = Step.Problem;
 
