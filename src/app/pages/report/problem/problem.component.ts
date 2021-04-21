@@ -189,7 +189,7 @@ export class ProblemComponent implements OnInit {
       if (showEmployeeConsumer) {
         return this.draftReport.employeeConsumer !== undefined;
       }
-      return false;
+      return true;
     })
   );
 
