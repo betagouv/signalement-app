@@ -5,19 +5,56 @@
       example: 'Exemple : publicité trompeuse, absence de mentions obligatoires, service client injoignable'
     - title: Une commande effectuée
       example: 'Exemple : commande jamais livrée, produit non conforme'
+    - title: Un produit dangereux
+      example: 'Exemple : jouet, cosmétique'
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Produit alimentaire
+          subcategories: !!import/single ../common/produit-alimentaire.yml
+        - title: Jouet, puériculture, matériel scolaire
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène, produit de tatouage
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile, sac à main, bijou
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Feu d'artifice
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Meuble
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Produit d'entretien, produit chimique, engrais
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Outil
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
 - title: un magasin / commerce physique
   example: 'Exemple : grande surface, épicerie, stand dans un marché, boulangerie'
   companyKind: SIRET
   subcategories:
     - title: Un problème qui concerne le magasin de façon générale
-      example: 'Exemple : prix manquant, prix faux en caisse, magasin sale'
+      example: 'Exemple : prix manquant, prix faux en caisse, magasin sale'
       subcategories:
         - title: Prix
-          example: 'Exemple : prix faux en caisse, prix pas affiché'
+          example: 'Exemple : prix faux en caisse, prix pas affiché'
           subcategories:
             - title: Le prix à la caisse est différent du prix affiché
-              example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros'
-              description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le plus faible pour le client.'
+              example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros'
+              description: 'Votre droit : en cas de différence de prix, le vendeur doit vendre le produit au prix le plus faible pour le client.'
               detailInputs:
                 - label: Date du constat
                   rank: 1
@@ -53,7 +90,7 @@
                   rank: 7
                   type: TEXTAREA
             - title: Il manque des prix / les prix sont illisibles
-              description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligé de les demander.'
+              description: 'Votre droit : tous les prix doivent être affichés sans que vous soyez obligé de les demander.'
               detailInputs:
                 - label: Veuillez préciser
                   rank: 1
@@ -76,14 +113,14 @@
                 outOfScope: true
                 content: "Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter.
                               <br/> Par exemple, il est autorisé de vendre une bouteille d'eau à 8 euros ou une baguette de pain à 5 euros. C'est au consommateur de bien regarder les prix avant d'acheter.
-                              <br/><br/><b>Le saviez-vous ?</b>
+                              <br/><br/><b>Le saviez-vous ?</b>
                               <br/> Il existe quelques exceptions à ce principe. Certains prix sont réglementés, c'est-à-dire qu'ils sont encadrés par la loi.
                               <br/> Par exemple, le prix des livres est réglementé.
-                              <br/><br/> Un commerçant n'a pas le droit de vendre à un prix trop bas : il ne peut pas vendre un produit moins cher que ce qu'il lui a coûté. Il existe quelques situations où il a le droit de vendre en dessous du prix d'achat, comme la période des soldes."
+                              <br/><br/> Un commerçant n'a pas le droit de vendre à un prix trop bas : il ne peut pas vendre un produit moins cher que ce qu'il lui a coûté. Il existe quelques situations où il a le droit de vendre en dessous du prix d'achat, comme la période des soldes."
             - title: Fausse réduction de prix
-              example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale'
-              description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
-                       <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
+              example: 'Exemple : fausse promotion pendant les soldes, fausse liquidation totale'
+              description: "<b>Soldes :</b> Les dates des soldes sont encadrées par la loi. Ces dates sont valables pour les magasins et aussi pour la vente sur internet.
+                       <br/><br/><b>Liquidation :</b> les liquidations sont soumises à déclaration préalable auprès du maire de la commune où a lieu cette opération.
                        Un document prouvant cette déclaration doit être affichée dans le magasin, pendant toute la durée de la liquidation. Ce document est souvent affiché sur la vitrine car il doit être visible de la rue."
               detailInputs:
                 - label: "Il s'agit d'un problème sur:"
@@ -105,7 +142,7 @@
         - title: Hygiène
           tags:
             - hygiène
-          example: 'Exemple : magasin sale, produit pas au frais, mauvaises odeurs'
+          example: 'Exemple : magasin sale, produit pas au frais, mauvaises odeurs'
           subcategories:
             - title: Hygiène des locaux et du matériel
               detailInputs:
@@ -148,7 +185,7 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Hygiène du personnel
-              example: 'Exemple : tenue sale ou inadaptée'
+              example: 'Exemple : tenue sale ou inadaptée'
               subcategories:
                 - title: Tenue de travail inadaptée
                   subcategories:
@@ -161,9 +198,9 @@
                     - title: Autre problème sur la tenue de travail
                 - title: Tenue sale
                 - title: Mauvaises pratiques d'hygiène
-                  example: 'Exemple : personne qui fume dans un local de production'
+                  example: 'Exemple : personne qui fume dans un local de production'
                 - title: Présence d'animaux
-                  example: 'Exemple : rats, cafards'
+                  example: 'Exemple : rats, cafards'
                   detailInputs:
                     - label: Quel animal avez-vous vu&#160;?
                       rank: 1
@@ -193,7 +230,7 @@
                       type: TIMESLOT
                       optionnal: true
             - title: Problème de température
-              example: 'Exemple : rupture de la chaîne du froid'
+              example: 'Exemple : rupture de la chaîne du froid'
               detailInputs:
                 - label: Quel est le problème&#160;?
                   rank: 1
@@ -216,7 +253,7 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Je subis des nuisances à cause du magasin
-              example: 'Exemple : les odeurs des poubelles arrivent dans mon appartement, les clients se garent devant chez moi'
+              example: 'Exemple : les odeurs des poubelles arrivent dans mon appartement, les clients se garent devant chez moi'
               information: !!import/single ../common/info/voisinage.yml
             - title: Autre problème d'hygiène
         - title: Produit périmé
@@ -226,7 +263,7 @@
               subcategoriesTitle: Quels sont les produits concernés&#160;?
               subcategories:
                 - title: Des produits vendus au rayon frais
-                  example: 'Exemple : viande, poisson, quiche, jambon'
+                  example: 'Exemple : viande, poisson, quiche, jambon'
                   subcategoriesTitle: La date est-elle <b>dépassée</b> au moment de la vente ou de l'achat&#160;?
                   subcategories:
                     - title: Oui
@@ -244,7 +281,7 @@
                           - question: Vous souhaitez que votre commerçant propose des rabais pour les produits bientôt périmés&#160;?
                             answer: Contacter directement le service client de votre magasin pour lui proposer.
                 - title: Des produits vendus à température ambiante
-                  example: 'Exemple : chocolat, conserve, compote, petits pots'
+                  example: 'Exemple : chocolat, conserve, compote, petits pots'
                   information:
                     title: Ce problème n'est pas un motif de signalement.
                     content: Les produits vendus à température ambiante comme des compotes, du chocolat, des biscuits ou des conserves ont une date qu'on appelle date de durabilité minimale (anciennement appelée DLUO).
@@ -258,7 +295,7 @@
               subcategoriesTitle: Quelle phrase est écrite devant la date&#160;?
               subcategories: !!import/single ../common/date.yml
         - title: Publicité
-          example: 'Exemple : publicité trompeuse, produit du catalogue indisponible'
+          example: 'Exemple : publicité trompeuse, produit du catalogue indisponible'
           subcategories:
             - title: Indisponibilité des produits en publicité
               detailInputs:
@@ -293,7 +330,7 @@
                   placeholder: "Lien vers la publicité"
               fileLabel: Photo(s) de la publicité si possible
             - title: Informations de vente mensongères
-              example : 'Exemple : pancarte "produits locaux" or ce n''est pas le cas, affiche "pain bio" or ce n''est pas le cas'
+              example : 'Exemple : pancarte "produits locaux" or ce n''est pas le cas, affiche "pain bio" or ce n''est pas le cas'
               detailInputs:
                 - label: Date du constat
                   rank: 1
@@ -322,7 +359,7 @@
                     - Une promesse de résultat
                     - Une marque
                     - Autre (à préciser)
-                - label: Pourquoi trouvez-vous ça trompeur ?
+                - label: Pourquoi trouvez-vous ça trompeur ?
                   rank: 4
                   type: TEXTAREA
                   optionnal: true
@@ -334,10 +371,10 @@
                     - Non
               fileLabel: Photo(s) si possible
         - title: Remboursement / garantie
-          example: 'Exemple : le magasin refuse de me reprendre un article'
+          example: 'Exemple : le magasin refuse de me reprendre un article'
           tags:
             - Litige contractuel
-          subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
+          subcategoriesTitle: Pourquoi voulez-vous retourner ou échanger votre article ?
           subcategories:
             - title: Il présente un défaut ou il ne marche plus
               subcategoriesTitle: Avez-vous acheté ce produit neuf ou d'occasion&#160;?
@@ -346,7 +383,7 @@
                   subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
                   subcategories:
                     - title: Il y a moins de 2 ans
-                      description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                      description: 'Le vendeur a l''obligation de garantir 2 ans le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
                       detailTitle: Problème de garantie légale
                       detailInputs:
                         - label: Date d'achat
@@ -374,7 +411,7 @@
                       subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                       subcategories:
                         - title: Oui
-                          example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                          example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
                           subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                             <br />Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                           subcategories:
@@ -406,7 +443,7 @@
                             outOfScope: true
                             actions:
                               - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
-                                example: "Un vice caché d'un produit est un défaut :
+                                example: "Un vice caché d'un produit est un défaut :
                                       <ul>
                                         <li>qui rend le produit inutilisable, </li>
                                         <li>présent dès le départ et</li>
@@ -418,7 +455,7 @@
                   subcategoriesTitle: Quand avez-vous acheté le produit&#160;?
                   subcategories:
                     - title: Il y a moins de 6 mois
-                      description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
+                      description: 'Le vendeur a l''obligation de garantir 6 mois le fonctionnement normal de tous les objets. Attention : vous ne bénéficiez pas de cette garantie si vous avez cassé le produit  ou que vous l''avez mal utilisé (exemple : vous avez marché sur votre téléphone).'
                       detailTitle: Problème de garantie légale
                       detailInputs:
                         - label: Date d'achat
@@ -446,7 +483,7 @@
                       subcategoriesTitle: Bénéficiez-vous d'une extension garantie&#160;?
                       subcategories:
                         - title: Oui
-                          example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
+                          example: 'Exemple : garantie contractuelle, garantie constructeur, extension de garantie, échange à neuf'
                           subcategoriesTitle: Les conditions de reprise sont indiquées dans votre contrat de garantie.
                             <br /> Avant de faire un signalement, relisez les conditions écrites dans ce contrat.
                           subcategories:
@@ -477,7 +514,7 @@
                             outOfScope: true
                             actions:
                               - question: "Vous souhaitez attaquer l'entreprise pour \"vices cachés\"&#160;?"
-                                example: "Un vice caché d'un produit est un défaut :
+                                example: "Un vice caché d'un produit est un défaut :
                                       <ul>
                                         <li>qui rend le produit inutilisable, </li>
                                         <li>présent dès le départ et</li>
@@ -487,7 +524,7 @@
                                   <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
             - title: Autre raison
               example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
-              subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation. Vous êtes-vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
+              subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation. Vous êtes-vous assuré qu’il proposait bien l'échange ou le remboursement des articles&#160;?
               subcategories:
                 - title: Oui
                   description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
@@ -498,13 +535,13 @@
                       <br />Si vous annulez un contrat ou un abonnement, vous aurez peut-être des frais d'annulation.
                     outOfScope: true
         - title: Moyens de paiement
-          example: 'Exemple : refus de la carte bancaire'
+          example: 'Exemple : refus de la carte bancaire'
           subcategories:
             - title: Le commerçant refuse que je paie en espèces
               subcategoriesTitle: Pourquoi le commerçant a-t-il refusé que vous payiez en espèces&#160;?
               subcategories:
                 - title: Il refuse les espèces d'une façon générale
-                  description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
+                  description: 'Votre droit : les billets et les pièces en euros doivent être acceptés chez les commerçants en France.'
                 - title: Il n'avait pas assez de monnaie
                   information:
                     content: C'est à vous de faire l'appoint. Le  vendeur peut refuser le paiement en espèces s'il ne dispose pas de suffisamment de monnaie.
@@ -526,64 +563,102 @@
                   subcategoriesTitle: Ce minimum est-il indiqué visiblement&#160;?
                   subcategories:
                     - title: Oui
-                      example: 'Exemple : sur une affiche au niveau des caisses'
+                      example: 'Exemple : sur une affiche au niveau des caisses'
                       information:
                         title: Le commerçant a le droit d'exiger un minimum d'achat pour les paiements par carte bancaire et par chèque.
                           <br/> Si vous voulez acheter un produit moins cher que le minimum d'achat, c'est à vous de trouver de la monnaie.
-                        content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+                        content: 'Le minimum d''achat doit être indiqué très visiblement. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
                         outOfScope: true
                     - title: Non
                 - title: Il refuse les paiements par chèque ou carte bleue de façon générale
                   subcategoriesTitle: Le commerçant a-t-il indiqué clairement qu'il refusait la carte bleue ou les chèques&#160;?
                   subcategories:
                     - title: Oui
-                      example: 'Exemple : sur une affiche au niveau des caisses'
+                      example: 'Exemple : sur une affiche au niveau des caisses'
                       information:
                         title: Le commerçant a le droit de refuser les chèques ou la carte bancaire.
-                        content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
+                        content: 'Il doit l''indiquer très visiblement au consommateur. Par exemple : affichage à l''entrée du magasin ou à la caisse...'
                         outOfScope: true
                     - title: Non
                 - title: Autre
-                  example: 'Exemple : problème avec le terminal de paiement'
+                  example: 'Exemple : problème avec le terminal de paiement'
             - title: Autre problème de prix ou paiement
               subcategories:
                 - title: Problème avec le cash-back
                 - title: Problème avec une carte cadeau
                 - title: Le commerçant a réfusé de me faire une détaxe alors que je vis à l'étranger
                   information:
-                        title: Le commerçant a le droit de refuser de faire une détaxe sur vos achats.
-                        content: La vente en détaxe est une exonération de la taxe sur la valeur ajoutée (TVA) sur le prix de biens achetés par des personnes de passage en France, soumise à conditions.
-                          <br /> Le commerçant est libre d'appliquer la détaxe, qui est facultative. L'acheteur ne peut pas l'exiger du vendeur.
-                          Retrouvez plus d'information sur le site <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F20558" target="_blank">service-public.fr</a>
-                        outOfScope: true
+                    title: Le commerçant a le droit de refuser de faire une détaxe sur vos achats.
+                    content: La vente en détaxe est une exonération de la taxe sur la valeur ajoutée (TVA) sur le prix de biens achetés par des personnes de passage en France, soumise à conditions.
+                      <br /> Le commerçant est libre d'appliquer la détaxe, qui est facultative. L'acheteur ne peut pas l'exiger du vendeur.
+                      Retrouvez plus d'information sur le site <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F20558" target="_blank">service-public.fr</a>
+                    outOfScope: true
                 - title: Autre
         - title: Autre
           subcategories:
             - title: Problème d'accessibilité
               information: !!import/single ../common/info/accessibilite.yml
             - title: Problème lié à l'écologie
-              example: "Exemple : sac en plastique, éclairage de nuit "
+              example: "Exemple : sac en plastique, éclairage de nuit "
             - title: Problème de voisinage
-              example: "Exemple : bruit, odeur, voiture mal garée"
+              example: "Exemple : bruit, odeur, voiture mal garée"
             - title: Autre
     - title: Un problème avec un produit en particulier
-      example: "Exemple : il manque des informations sur l'emballage, le produit est douteux"
+      example: "Exemple : il manque des informations sur l'emballage, le produit est douteux"
       subcategories:
         - title: C'est un aliment ou une boisson
-          example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
+          example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
           subcategories: !!import/single ../common/nourriture.yml
         - title: C'est un objet
-          example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
+          example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
           subcategories: !!import/single ../common/objet.yml
+    - title: Un produit dangereux
+      example: 'Exemple : jouet, cosmétique'
+      companyKind: LOCATION
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Produit alimentaire
+          subcategories: !!import/single ../common/produit-alimentaire.yml
+        - title: Jouet, puériculture, matériel scolaire
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène, produit de tatouage
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile, sac à main, bijou
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Feu d'artifice
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Meuble
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Produit d'entretien, produit chimique, engrais
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Outil
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
 - title: un achat suite à la visite d'un vendeur à mon domicile
   companyKind: LOCATION
   tags:
     - Démarchage à domicile
   subcategories:
     - title: C'est un aliment ou une boisson
-      example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
+      example: 'Exemple : bonbon, viande, pain, conserve, vin, eau en bouteille'
       detailInputs:
-        - label: Que s'est-il passé ?
+        - label: Que s'est-il passé ?
           rank: 1
           type: RADIO
           options:
@@ -601,9 +676,9 @@
           type: DATE
           defaultValue: SYSDATE
     - title: C'est un objet
-      example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
+      example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
       detailInputs:
-        - label: Que s'est-il passé ?
+        - label: Que s'est-il passé ?
           rank: 1
           type: RADIO
           options:
@@ -620,3 +695,42 @@
           rank: 3
           type: DATE
           defaultValue: SYSDATE
+    - title: C'est un produit dangereux
+      example: 'Exemple : jouet, cosmétique'
+      companyKind: LOCATION
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Produit alimentaire
+          subcategories: !!import/single ../common/produit-alimentaire.yml
+        - title: Jouet, puériculture, matériel scolaire
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène, produit de tatouage
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile, sac à main, bijou
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Feu d'artifice
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Meuble
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Produit d'entretien, produit chimique, engrais
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Outil
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+
