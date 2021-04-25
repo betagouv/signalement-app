@@ -119,6 +119,8 @@
               defaultValue: SYSDATE
         - title: Démarchage téléphonique
           companyKind: PHONE
+          tags:
+            - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
               rank: 1
@@ -379,20 +381,3 @@
     - title: Autre
       tags:
         - Litige contractuel
-- title: Produit dangereux
-  example: 'Exemple : marteau, perceuse'
-  tags:
-    - Produit dangereux
-  subcategories:
-    - title: Outil
-      subcategoriesTitle: Quel est le risque&#160;?
-      subcategories: !!import/single ../common/produit-dangereux.yml
-    - title: Appareil électrique
-      subcategoriesTitle: Quel est le risque&#160;?
-      subcategories: !!import/single ../common/produit-dangereux.yml
-    - title: Matériau de construction
-      subcategoriesTitle: Quel est le risque&#160;?
-      subcategories: !!import/single ../common/produit-dangereux.yml
-    - title: Autre
-      subcategoriesTitle: Quel est le risque&#160;?
-      subcategories: !!import/single ../common/produit-dangereux.yml

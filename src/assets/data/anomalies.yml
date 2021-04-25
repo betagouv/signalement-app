@@ -58,8 +58,18 @@ list:
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
     rank: 9
     sprite: category-disease
-    subcategories: !!import/single subcategories/intoxication-alimentaire.yml
-    subcategoriesTitle: 'Avez-vous mangé ?'
+    information:
+      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
+      content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+      actions:
+        - question: Signaler un cas d'intoxication alimentaire&#160;?
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+  - category: Produits / Objets
+    categoryId: SIGN
+    path: produits-objets
+    description: textile, jouet, meuble...
+    hidden: true
+    subcategories: !!import/single subcategories/produits-objets.yml
   - category: Internet (hors achats)
     categoryId: INTERNET
     path: internet
@@ -96,10 +106,10 @@ list:
     sprite: category-health
     subcategoriesTitle: 'Votre problème concerne :'
     subcategories: !!import/single subcategories/sante.yml
-  - category: Voiture / Véhicule / Vélo
+  - category: Voiture / Véhicule
     categoryId: VEH
     path: voiture-vehicule
-    description: vente et réparation de voiture, location, auto-école, pneu, accessoire...
+    description: vente et réparation de voiture, location, auto-école...
     rank: 13
     sprite: category-transport
     subcategoriesTitle: "Pouvez-vous préciser &#160;?"
@@ -133,3 +143,19 @@ list:
             <li>écrire à la police/gendarmerie</li>
           </ul>
           La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
+  - category: Alerte securite
+    categoryId: SECUR
+    path: secur
+    hidden: true
+    breadcrumbTitle: Vous avez été blessé avec un objet ? Vous avez eu une réaction allergique ?
+    information:
+      title: Les problèmes de blessure, allergie... ne rentrent pas dans le périmètre de l'outil SignalConso. Ces problèmes imposent une analyse immédiate du signalement, ce qui ne sera pas le cas avec SignalConso.
+      content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
+  - category: Alerte corps étranger
+    categoryId: CORPSETRANGER
+    path: stranger
+    hidden: true
+    breadcrumbTitle: Vous avez trouvé un petit morceau dur ou une vis dans un aliment ?
+    information:
+      title: Un objet ou un morceau d'objet qui se trouve dans un aliment alors que ce ne devrait pas être le cas s'appelle un corps étranger. Cela peut être une vis, un clou, un boulon, un bout de plastique, un morceau de verre par exemple.
+      content: Pour le signaler à la DGCCRF, utilisez ce lien <br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>

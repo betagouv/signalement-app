@@ -65,6 +65,8 @@
           defaultValue: SYSDATE
     - title: J'ai eu un problème de démarchage téléphonique
       companyKind: PHONE
+      tags:
+        - Démarchage téléphonique
       detailInputs:
         - label: Date de l'appel
           rank: 1
@@ -289,6 +291,8 @@
           fileLabel: Merci de joindre une photo de la publicité, du dépliant, du site internet afin d'apporter des preuves et de traiter plus rapidement votre signalement.
         - title: J'ai eu un problème de démarchage téléphonique
           companyKind: PHONE
+          tags:
+            - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
               rank: 1

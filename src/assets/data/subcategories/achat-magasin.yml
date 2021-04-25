@@ -5,43 +5,6 @@
       example: 'Exemple : publicité trompeuse, absence de mentions obligatoires, service client injoignable'
     - title: Une commande effectuée
       example: 'Exemple : commande jamais livrée, produit non conforme'
-    - title: Un produit dangereux
-      example: 'Exemple : jouet, cosmétique'
-      tags:
-        - Produit dangereux
-      subcategories:
-        - title: Produit alimentaire
-          subcategories: !!import/single ../common/produit-alimentaire.yml
-        - title: Jouet, puériculture, matériel scolaire
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Cosmétique, produit d'hygiène, produit de tatouage
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Vêtement, textile, sac à main, bijou
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Équipement de protection
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Feu d'artifice
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Meuble
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Produit d'entretien, produit chimique, engrais
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Appareil électrique
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Outil
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Autre
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
 - title: un magasin / commerce physique
   example: 'Exemple : grande surface, épicerie, stand dans un marché, boulangerie'
   companyKind: SIRET
@@ -524,7 +487,7 @@
                                   <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
             - title: Autre raison
               example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
-              subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation. Vous êtes-vous assuré qu’il proposait bien l'échange ou le remboursement des articles&#160;?
+              subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation. Vous êtes-vous assuré qu’il proposait bien l'échange ou le remboursement des articles ?&#160;?
               subcategories:
                 - title: Oui
                   description: Le commerçant doit respecter les conditions d’échange et de remboursement qui sont affichées dans son commerce ou dans votre contrat.
@@ -612,44 +575,6 @@
         - title: C'est un objet
           example: 'Exemple : jouet, électroménager, vêtement, savon, vaisselle, meuble'
           subcategories: !!import/single ../common/objet.yml
-    - title: Un produit dangereux
-      example: 'Exemple : jouet, cosmétique'
-      companyKind: LOCATION
-      tags:
-        - Produit dangereux
-      subcategories:
-        - title: Produit alimentaire
-          subcategories: !!import/single ../common/produit-alimentaire.yml
-        - title: Jouet, puériculture, matériel scolaire
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Cosmétique, produit d'hygiène, produit de tatouage
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Vêtement, textile, sac à main, bijou
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Équipement de protection
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Feu d'artifice
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Meuble
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Produit d'entretien, produit chimique, engrais
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Appareil électrique
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Outil
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Autre
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
 - title: un achat suite à la visite d'un vendeur à mon domicile
   companyKind: LOCATION
   tags:
@@ -695,41 +620,3 @@
           rank: 3
           type: DATE
           defaultValue: SYSDATE
-    - title: C'est un produit dangereux
-      example: 'Exemple : jouet, cosmétique'
-      companyKind: LOCATION
-      tags:
-        - Produit dangereux
-      subcategories:
-        - title: Produit alimentaire
-          subcategories: !!import/single ../common/produit-alimentaire.yml
-        - title: Jouet, puériculture, matériel scolaire
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Cosmétique, produit d'hygiène, produit de tatouage
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Vêtement, textile, sac à main, bijou
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Équipement de protection
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Feu d'artifice
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Meuble
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Produit d'entretien, produit chimique, engrais
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Appareil électrique
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Outil
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml
-        - title: Autre
-          subcategoriesTitle: Quel est le risque&#160;?
-          subcategories: !!import/single ../common/produit-dangereux.yml

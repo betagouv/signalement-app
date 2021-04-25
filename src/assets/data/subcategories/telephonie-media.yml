@@ -120,6 +120,8 @@
         - title: Je reçois des spams dans mes emails
         - title: J'ai eu un problème de démarchage téléphonique
           companyKind: PHONE
+          tags:
+            - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
               rank: 1
@@ -144,18 +146,4 @@
         - title: Téléphone acheté avec le forfait
 - title: Abonnement télévision
 - title: Abonnement presse
-- title: Produit dangereux
-  example: 'Exemple : téléphone, accessoire'
-  tags:
-   - Produit dangereux
-  subcategories:
-   - title: Appareil électrique
-     subcategoriesTitle: Quel est le risque&#160;?
-     subcategories: !!import/single ../common/produit-dangereux.yml
-   - title: Accessoire
-     subcategoriesTitle: Quel est le risque&#160;?
-     subcategories: !!import/single ../common/produit-dangereux.yml
-   - title: Autre
-     subcategoriesTitle: Quel est le risque&#160;?
-     subcategories: !!import/single ../common/produit-dangereux.yml
 - title: Autre
