@@ -1,7 +1,25 @@
 <app-breadcrumb [step]="step" [draftReport]="draftReport"></app-breadcrumb>
 <main role="main">
   <section class="section section-white" *ngIf="draftReport">
-    <div class="container max-width">
+    <form (submit)="checkConfirmationCode()" class="container max-width" *ngIf="isEmailValid === false">
+      <app-alert type="error" *ngIf="confirmationCodeErrorMsg !== undefined">
+        {{confirmationCodeErrorMsg}}
+      </app-alert>
+      <label for="fcode" class="txt-big font-weight-bold" style="margin-bottom: 0">
+        Saisissez le code de validation
+      </label>
+      <label for="fcode" class="txt-size-normal txt-secondary">Un email vous a été envoyé à l'adresse <b>{{emailCtrl.value}}</b></label>
+      <div class="form-control mt-2" style="display: flex; align-items: center">
+        <span>SC-</span>
+        <input [formControl]="confirmationCodeCtrl" id="fcode" style="flex: 1; padding: 0" class="input-invisible"
+               placeholder=" Saisissez un code à 6 chiffres.">
+      </div>
+      <div class="link" (click)="checkEmail()">Réenvoyer l'email</div>
+
+      <button class="btn btn-lg btn-primary mt-3" type="submit">Vérifier</button>
+    </form>
+
+    <div class="container max-width" *ngIf="isEmailValid === undefined">
       <ng-container *ngIf="draftReport.employeeConsumer">
         <div class="notification info mb-4">
           <p>
@@ -25,7 +43,7 @@
         <hr/>
       </ng-container>
 
-      <form [formGroup]="consumerForm" (submit)="submitConsumerForm()" id="consumerForm" *ngIf="consumerForm">
+      <form [formGroup]="consumerForm" (submit)="checkEmail()" id="consumerForm" *ngIf="consumerForm">
         <h2 class="mb-4 font-weight-bold">
           Vos coordonnées nous permettent d'authentifier votre signalement
         </h2>
