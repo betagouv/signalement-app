@@ -13,7 +13,6 @@ import { PanelModule } from '../../dashboard/shared/panel/panel.module';
 import { PageModule } from '../../dashboard/shared/page/page.module';
 import { FenderModule } from '../../dashboard/shared/fender/fender';
 import { AlertModule } from '../../dashboard/shared/alert/alert';
-import { EmailValidationConsumerComponent } from './email-validation-consumer/email-validation-consumer.component';
 
 defineLocale('fr', frLocale);
 
@@ -22,8 +21,6 @@ const routes: Routes = [
   { path: 'connexion', component: LoginComponent },
   { path: 'dgccrf', component: LoginComponent },
   { path: 'connexion/validation-email', component: EmailValidationComponent },
-  { path: 'connexion/validation-email-consumer/:email', component: EmailValidationConsumerComponent },
-  { path: 'connexion/validation-email-consumer', component: EmailValidationConsumerComponent },
   { path: 'connexion/perte-mot-de-passe', component: PasswordForgotComponent },
   { path: 'connexion/perte-mot-de-passe/dgccrf', component: PasswordForgotComponent },
   { path: 'connexion/nouveau-mot-de-passe/:token', component: PasswordResetComponent },
@@ -34,7 +31,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    EmailValidationConsumerComponent,
     LoginComponent,
     PasswordForgotComponent,
     PasswordResetComponent,
