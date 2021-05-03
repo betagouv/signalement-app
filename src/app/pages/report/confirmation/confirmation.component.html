@@ -7,7 +7,7 @@
           Récapitulatif de votre problème
         </h2>
         <p class="text-warning">
-          Vérifiez  votre signalement avant de l’envoyer {{draftReport.employeeConsumer ? '' : 'à l\'entreprise et ' }}à la répression des fraudes.
+          Vérifiez  votre signalement avant de l’envoyer {{!draftReport.isTransmittableToPro ? '' : 'à l\'entreprise et ' }}à la répression des fraudes.
         </p>
         <div class="text-break">
           <h3>Problème</h3>
@@ -44,7 +44,7 @@
             <i class="material-icons" aria-hidden="true">edit</i> Modifier
           </button>
           <hr />
-          <h3>Entreprise</h3>
+          <h3>{{draftReport.isVendor ? 'Vendeur' : 'Entreprise'}}</h3>
           <ng-container *ngIf="draftReport.draftCompany.name">
             <div>
               Nom :
@@ -56,19 +56,12 @@
               </strong>
             </div>
           </ng-container>
-          <ng-container *ngIf="draftReport.draftCompany.address">
-            <div  *ngIf="draftReport.draftCompany.name else locationOnly">
-              Adresse : {{draftReport.draftCompany.address}}
-            </div>
-            <ng-template #locationOnly>
-              <div>
-                Rue : {{draftReport.draftCompany.address}}
-              </div>
-              <div>
-                Code postal : {{draftReport.draftCompany.postalCode}}
-              </div>
-            </ng-template>
-          </ng-container>
+          <div *ngIf="draftReport.draftCompany.address">
+            {{draftReport.draftCompany.name ? 'Adresse : ': 'Rue : '}} : {{draftReport.draftCompany.address}}
+          </div>
+          <div *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">
+            Code postal : {{draftReport.draftCompany.postalCode}}
+          </div>
           <div *ngIf="draftReport.draftCompany | isForeign">
             Pays : {{draftReport.draftCompany.country}}
           </div>
@@ -98,7 +91,7 @@
           <div>
             Email : {{draftReport.consumer.email}}
           </div>
-          <div *ngIf="!draftReport.employeeConsumer">
+          <div *ngIf="draftReport.isTransmittableToPro">
             Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}
           </div>
           <button class="link" (click)="goToStep(steps.Consumer)">

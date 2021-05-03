@@ -7,6 +7,10 @@ import { Country } from '../../../model/Country';
 import { combineLatest } from 'rxjs';
 import { ConstantService } from '../../../services/constant.service';
 
+enum AcknowledgmentCases {
+  EmployeeReport, ForeignCompany, FrenchCompanyWithoutSIRET, ContractualDisputeWithSIRET, NotTransmittable, Default
+}
+
 @Component({
   selector: 'app-acknowledgment',
   templateUrl: './acknowledgment.component.html',
@@ -18,6 +22,9 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   draftReport: DraftReport;
 
   foreignCountry?: Country;
+
+  acknowledgmentCases = AcknowledgmentCases;
+  acknowledgmentCase: AcknowledgmentCases;
 
   constructor(private reportStorageService: ReportStorageService,
               private constantService: ConstantService,
@@ -32,6 +39,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
         if (draftReport) {
           this.draftReport = draftReport;
           this.foreignCountry = countries.find(country => country.name === draftReport.draftCompany.country);
+          this.initAcknowledgmentCase();
         } else {
           this.reportRouterService.routeToFirstStep();
         }
@@ -45,6 +53,22 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   newReport() {
     this.reportStorageService.removeReportInProgress();
     this.reportRouterService.routeToFirstStep();
+  }
+
+  initAcknowledgmentCase() {
+    if (this.draftReport.employeeConsumer) {
+      this.acknowledgmentCase = AcknowledgmentCases.EmployeeReport;
+    } else if (this.draftReport.draftCompany.country ?? 'France' !== 'France') {
+      this.acknowledgmentCase = AcknowledgmentCases.ForeignCompany;
+    } else if (!this.draftReport.isTransmittableToPro) {
+      this.acknowledgmentCase = AcknowledgmentCases.NotTransmittable;
+    } else if (!this.draftReport.draftCompany.siret) {
+      this.acknowledgmentCase = AcknowledgmentCases.FrenchCompanyWithoutSIRET;
+    } else if (this.draftReport.isContractualDispute && this.draftReport.draftCompany.siret) {
+      this.acknowledgmentCase = AcknowledgmentCases.ContractualDisputeWithSIRET;
+    } else {
+      this.acknowledgmentCase = AcknowledgmentCases.Default;
+    }
   }
 
 }

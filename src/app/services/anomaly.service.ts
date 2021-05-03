@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import anomaliesJSON from '../../assets/data/anomalies.json';
-import { Anomaly, enrichAnomaly, InternetTag, Subcategory } from '../model/Anomaly';
+import { Anomaly, collectTags, enrichAnomaly, InternetTag, Subcategory } from '../model/Anomaly';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +35,8 @@ export class AnomalyService {
   }
 
   getTags(): string[] {
-    return [InternetTag].concat(...this.anomalies.map(anomaly => this.collectTags(anomaly)))
+    return [InternetTag].concat(...this.anomalies.map(anomaly => collectTags(anomaly)))
       .filter((tag, index, tags) => tags.indexOf(tag) === index)
       .sort((t1, t2) => t1.toString().localeCompare(t2.toString()));
-  }
-
-  private collectTags(data: Subcategory | Anomaly): string[] {
-    return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => this.collectTags(s)));
   }
 }

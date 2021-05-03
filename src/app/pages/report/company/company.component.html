@@ -8,16 +8,17 @@
 
           <div class="row mb-2">
             <div class="col-8">
-              <strong>Entreprise {{draftReport.draftCompany.siret ? 'identifiée' : 'non identifiée'}}</strong>
+              <strong *ngIf="draftReport.isVendor">Vendeur {{draftReport.draftCompany.siret ? 'identifié' : 'non identifié'}}</strong>
+              <strong *ngIf="!draftReport.isVendor">Entreprise {{draftReport.draftCompany.siret ? 'identifiée' : 'non identifiée'}}</strong>
             </div>
             <div class="col-4 text-right">
               <button class="link" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier entreprise" tabindex="0">Modifier</button>
               <i class="material-icons md-18 edit" aria-hidden="true">edit</i>
             </div>
           </div>
-          <p *ngIf="!draftReport.draftCompany.siret">
-            Si vous ne parvenez pas à trouver le SIRET de l'entreprise, vous pouvez continuer votre signalement.
-            <br />Il ne sera pas transmis à l'entreprise mais les enquêteurs de la répression des fraudes en seront informés.
+          <p *ngIf="!draftReport.draftCompany.siret && draftReport.isTransmittableToPro">
+            Si vous ne parvenez pas à trouver le SIRET {{draftReport.isVendor ? 'du vendeur' : 'de l\'entreprise'}}, vous pouvez continuer votre signalement.
+            <br />Il ne sera pas transmis {{draftReport.isVendor ? 'au vendeur' : 'à l\'entreprise'}} mais les enquêteurs de la répression des fraudes en seront informés.
           </p>
           <div class="row" *ngIf="draftReport.draftCompany.name">
             <div class="col-12">
@@ -33,17 +34,14 @@
             </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.address">
-            <div class="col-12" *ngIf="draftReport.draftCompany.name else locationOnly">
-              Adresse : {{draftReport.draftCompany.address}}
+            <div class="col-12">
+              {{draftReport.draftCompany.name ? 'Adresse : ': 'Rue : '}}{{draftReport.draftCompany.address}}
             </div>
-            <ng-template #locationOnly>
-              <div class="col-12">
-                Rue : {{draftReport.draftCompany.address}}
-              </div>
-              <div class="col-12">
-                Code postal : {{draftReport.draftCompany.postalCode}}
-              </div>
-            </ng-template>
+          </div>
+          <div class="row" *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">
+            <div class="col-12">
+              Code postal : {{draftReport.draftCompany.postalCode}}
+            </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany | isForeign">
             <div class="col-12">
@@ -99,10 +97,10 @@
             <hr *ngIf="draftWebsite || draftPhone"/>
 
             <h2 class="mb-4 font-weight-bold">
-              Pouvez-vous identifier l'entreprise<span *ngIf="draftReport.companyKind === companyKinds.PHONE"> qui vous a démarché</span> ?
+              Pouvez-vous identifier {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}<span *ngIf="draftReport.companyKind === companyKinds.PHONE"> qui vous a démarché</span> ?
             </h2>
             <div class="note mb-1">
-              SignalConso en a besoin pour <ng-container *ngIf="!draftReport.employeeConsumer">la contacter et </ng-container>informer la répression des fraudes.
+              SignalConso en a besoin pour <ng-container *ngIf="draftReport.isTransmittableToPro">la contacter et </ng-container>informer la répression des fraudes.
             </div>
 
             <form>
@@ -136,7 +134,7 @@
                       <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="rendererService.scrollToElement(identSearch)"/>
                     </div>
                     <div class="col">
-                      <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier l'entreprise</label>
+                      <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}</label>
                     </div>
                   </div>
                 </div>
@@ -151,23 +149,27 @@
               <ng-container [ngSwitch]="identificationKind">
 
                 <div  *ngSwitchCase="identificationKinds.Name">
-                  <app-company-search-by-name-component (complete)="submitCompany($event)"
+                  <app-company-search-by-name-component [isVendor]="draftReport.isVendor"
+                                                        (complete)="submitCompany($event)"
                                                         (loading)="loading = $event"
                                                         (changeIdentificationKind)="identificationKind = $event">
                   </app-company-search-by-name-component>
                 </div>
 
                 <div  *ngSwitchCase="identificationKinds.Identity">
-                  <app-company-search-by-identity (complete)="submitCompany($event)"
+                  <app-company-search-by-identity [isVendor]="draftReport.isVendor"
+                                                  (complete)="submitCompany($event)"
                                                   (loading)="loading = $event">
                   </app-company-search-by-identity>
                 </div>
 
                 <div *ngSwitchCase="identificationKinds.None">
-                  <app-company-location (complete)="submitCompany($event)"
+                  <app-company-location [isVendor]="draftReport.isVendor"
+                                        (complete)="submitCompany($event)"
                                         *ngIf="this.draftReport?.companyKind === companyKinds.LOCATION.valueOf()">
                   </app-company-location>
-                  <app-company-foreign-country (complete)="submitCompany($event)"
+                  <app-company-foreign-country [isVendor]="draftReport.isVendor"
+                                               (complete)="submitCompany($event)"
                                                *ngIf="[companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
                   </app-company-foreign-country>
                 </div>

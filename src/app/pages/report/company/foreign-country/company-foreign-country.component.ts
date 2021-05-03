@@ -27,6 +27,7 @@ export class CompanyForeignCountryComponent implements OnInit {
   private foreignInputsElt: ElementRef;
 
   @Input() forceForeign;
+  @Input() isVendor: boolean;
   @Output() complete = new EventEmitter<DraftCompany>();
 
   foreignForm: FormGroup;
