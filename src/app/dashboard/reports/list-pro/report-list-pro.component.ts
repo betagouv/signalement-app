@@ -1,13 +1,10 @@
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Report, ReportStatus } from '../../../model/Report';
 import { ReportFilter, reportFilter2QueryString, reportFilterFromQueryString } from '../../../model/ReportFilter';
-import { Meta, Title } from '@angular/platform-browser';
 import { ReportService } from '../../../services/report.service';
 import { ConstantService } from '../../../services/constant.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import pages from '../../../../assets/data/pages.json';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageEvent } from '@angular/material/paginator';
 import { catchError, debounceTime, distinctUntilChanged, map, mergeMap, shareReplay, startWith, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -28,12 +25,9 @@ export class ReportListProComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) protected platformId: Object,
-    private titleService: Title,
-    private meta: Meta,
     private reportService: ReportService,
     private constantService: ConstantService,
     private companyAccessesService: CompanyAccessesService,
-    private localeService: BsLocaleService,
     private router: Router,
     private route: ActivatedRoute) {
   }
@@ -127,7 +121,7 @@ export class ReportListProComponent implements OnInit {
     this.departmentsCtrl.valueChanges.pipe(startWith([]), map(_ => _ || [])) as Observable<string[]>,
     this.companies$
   ]).pipe(map(([departments, companies]) => departments.length > 0
-    ? companies.filter(company => departments.find(_ => _ === company.postalCode.substr(0, 2)))
+    ? companies.filter(company => departments.find(_ => _ === company.postalCode?.substr(0, 2)))
     : companies
   ));
 
@@ -136,10 +130,6 @@ export class ReportListProComponent implements OnInit {
     : this.columns.filter(_ => _ !== 'siret' && _ !== 'postalCode')));
 
   ngOnInit() {
-    this.titleService.setTitle(pages.reports.list.title);
-    this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
-    this.localeService.use('fr');
-
     const parsedQueryString = compose(
       Utils.cleanObject,
       this.getFormFromQueryString,
@@ -152,7 +142,7 @@ export class ReportListProComponent implements OnInit {
           this.initForm({
             offset: 0,
             limit: this.defaultPageSize,
-            siretSirenList: myCompanies.length > 0 ? myCompanies.map(_ => _.companySiret) : undefined,
+            siretSirenList: myCompanies.length > 0 ? myCompanies.map(_ => _.siret) : undefined,
             ...parsedQueryString,
           }).valueChanges
         ),
@@ -167,7 +157,7 @@ export class ReportListProComponent implements OnInit {
         return EMPTY;
       }
       return this.fetchReports(this.form.value).pipe(tap(() => {
-        this.showFilters = this.totalCount > this.maxReportsBeforeShowFilters || this.hasFilters();
+        this.showFilters = this.totalCount! > this.maxReportsBeforeShowFilters || this.hasFilters();
       }));
     })).subscribe();
   }
@@ -200,7 +190,7 @@ export class ReportListProComponent implements OnInit {
 
   readonly toggleAllMyAccessesSirets = () => {
     if ((this.siretSirenListCtrl.value || []).filter(_ => _ !== undefined).length === 0) {
-      this.myCompanies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.companySiret)));
+      this.myCompanies$.subscribe(c => this.siretSirenListCtrl.setValue(c.map(_ => _.siret)));
     } else {
       this.siretSirenListCtrl.setValue([]);
     }

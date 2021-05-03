@@ -1,31 +1,29 @@
 <app-banner title="Téléchargements" [backButton]="true"></app-banner>
 
-<main role="main">
-  <section class="section section-white position-relative">
-    <div class="container">
-      <div class="row">
-        <table class="table">
-          <caption class="sr-only">Liste des fichiers</caption>
-          <thead>
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Télécharger</th>
-            </tr>
-          </thead>
-            <tbody>
-              <tr *ngFor="let download of downloads">
-                <td>{{download.creationDate | date: constants.DateTimeFormat}}</td>
-                <td class="position-relative">
-                  <a *ngIf="download.url; else loadingBlock" href="{{download.url}}" target="_blank"><i class="material-icons">cloud_download</i> {{download.filename}}</a>
-                  <ng-template #loadingBlock>
-                    Le fichier est en cours de construction, il apparaîtra ici dès qu'il sera prêt (&lt; 1 minute)
-                    <ngx-loading [show]="true" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
-                  </ng-template>
-                </td>
-              </tr>
-            </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-</main>
+<app-page pageDefinitionKey="secured_downloads">
+  <app-panel>
+    <table mat-table [dataSource]="downloads" class="fullwidth">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let _">{{_.creationDate | date: constants.DateTimeFormat}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="file">
+        <th mat-header-cell *matHeaderCellDef>Télécharger</th>
+        <td mat-cell *matCellDef="let _" class="position-relative">
+          <a *ngIf="_.url; else loadingBlock" href="{{_.url}}" target="_blank">
+            <i class="material-icons">cloud_download</i>
+            {{_.filename}}
+          </a>
+          <ng-template #loadingBlock>
+            Le fichier est en cours de construction, il apparaîtra ici dès qu'il sera prêt (&lt; 1 minute)
+            <ngx-loading [show]="true" [config]="{backdropBackgroundColour: 'rgba(0, 0, 0, 0.05)'}"></ngx-loading>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['date', 'file']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['date', 'file'];"></tr>
+    </table>
+  </app-panel>
+</app-page>

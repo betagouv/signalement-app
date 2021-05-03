@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { Company, UserAccess } from '../../../model/Company';
+import { AccessLevel, Company } from '../../../model/Company';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CompanyService } from '../../../services/company.service';
+import { CompaniesService } from '../../../services/company.service';
 import { Permissions, User } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
 
@@ -13,7 +13,10 @@ import { AuthenticationService } from '../../../services/authentication.service'
 })
 export class CompanyCardComponent implements OnInit {
 
-  @Input() userAccess!: UserAccess;
+  @Input() userAccess!: Company;
+
+  @Input() level!: AccessLevel;
+
   @Output() change = new EventEmitter<Company>();
 
   user?: User;
@@ -37,18 +40,15 @@ export class CompanyCardComponent implements OnInit {
     city: this.cityCtrl,
   });
 
-  loading = false;
-  loadingError = false;
-
   constructor(private formBuilder: FormBuilder,
     private modalService: BsModalService,
-    private companyService: CompanyService,
+    private companyService: CompaniesService,
     private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
-    this.authenticationService.user.subscribe((user: User) => this.user = user);
-    this.companyNameCtrl.setValue(this.userAccess?.companyAddress.split('-')[0] ?? '');
+    this.authenticationService.user.subscribe((user: User | undefined) => this.user = user);
+    this.companyNameCtrl.setValue(this.userAccess?.address.split('-')[0] ?? '');
   }
 
   openModal(template: TemplateRef<any>) {
@@ -56,28 +56,21 @@ export class CompanyCardComponent implements OnInit {
   }
 
   submitCompanyAddressForm() {
-    this.loading = true;
-    this.loadingError = false;
-    this.companyService.updateCompanyAddress(
-      this.userAccess.companySiret,
-      [
-        this.companyNameCtrl.value,
-        this.line1Ctrl.value,
-        this.line2Ctrl.value,
-        this.line3Ctrl.value,
-        `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`
-      ].filter(l => l).reduce((prev, curr) => `${prev} - ${curr}`),
-      this.postalCodeCtrl.value,
-      this.activationDocumentRequiredCtrl.value
-    ).subscribe(
-      company => {
-        this.loading = false;
-        this.change.emit(company);
-        this.bsModalRef!.hide();
-      },
-      _ => {
-        this.loading = false;
-        this.loadingError = true;
-      });
+    this.companyService.update(
+      this.userAccess.id, {
+        address: [
+          this.companyNameCtrl.value,
+          this.line1Ctrl.value,
+          this.line2Ctrl.value,
+          this.line3Ctrl.value,
+          `${this.postalCodeCtrl.value} ${this.cityCtrl.value}`
+        ].filter(l => l).reduce((prev, curr) => `${prev} - ${curr}`),
+        postalCode: this.postalCodeCtrl.value,
+        activationDocumentRequired: this.activationDocumentRequiredCtrl.value,
+      }
+    ).subscribe(company => {
+      this.change.emit(company);
+      this.bsModalRef!.hide();
+    });
   }
 }

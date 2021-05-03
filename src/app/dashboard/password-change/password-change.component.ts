@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../assets/data/pages.json';
+import { Component } from '@angular/core';
 import { AccountEventActions, AnalyticsService, EventCategories } from '../../services/analytics.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 
@@ -11,7 +8,7 @@ import { AccountService } from '../../services/account.service';
   templateUrl: './password-change.component.html',
   styleUrls: ['./password-change.component.scss']
 })
-export class PasswordChangeComponent implements OnInit {
+export class PasswordChangeComponent {
 
   readonly matchingPasswords = (passwordKey: string, confirmPasswordKey: string) => {
     return (group: FormGroup) => {
@@ -37,16 +34,9 @@ export class PasswordChangeComponent implements OnInit {
   authenticationError?: string;
 
   constructor(public formBuilder: FormBuilder,
-    private titleService: Title,
-    private meta: Meta,
     private accountService: AccountService,
     private analyticsService: AnalyticsService,
-    private router: Router) {
-  }
-
-  ngOnInit() {
-    this.titleService.setTitle(pages.secured.account.changePassword.title);
-    this.meta.updateTag({ name: 'description', content: pages.secured.account.changePassword.description });
+  ) {
   }
 
   submitForm() {

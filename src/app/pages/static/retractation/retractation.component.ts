@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { isUndefined } from 'util';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
 
 const closingDays = [
   { day: 1, month: 0 },
@@ -20,19 +17,12 @@ const closingDays = [
   templateUrl: './retractation.component.html',
   styleUrls: ['./retractation.component.scss']
 })
-export class RetractationComponent implements OnInit {
+export class RetractationComponent {
 
   contractDate: Date;
   retractationDeadline: Date;
 
-  constructor(private localeService: BsLocaleService,
-              private titleService: Title,
-              private meta: Meta) { }
-
-  ngOnInit() {
-    this.titleService.setTitle(pages.retractation.title);
-    this.meta.updateTag({ name: 'description', content: pages.retractation.description });
-    this.localeService.use('fr');
+  constructor() {
   }
 
   calculRetractationDeadline(contractDate) {
@@ -46,8 +36,10 @@ export class RetractationComponent implements OnInit {
   }
 
   isClosingDate(date: Date) {
-    return date.getDay() === 6 || // samedi
-      date.getDay() === 0 || // dimanche
-      !isUndefined(closingDays.find(d => d.day === date.getDate() && d.month === date.getMonth())); // jours fériés
+    const sunday = 6;
+    const saturday = 0;
+    return date.getDay() === saturday
+      || date.getDay() === sunday
+      || !isUndefined(closingDays.find(d => d.day === date.getDate() && d.month === date.getMonth())); // jours fériés
   }
 }

@@ -1,17 +1,17 @@
-import { Entity } from '../../api-sdk/model/Common';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ApiSdkService } from '../core/api-sdk.service';
 import { ApiError } from '../../api-sdk/ApiClient';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, mergeMap, tap } from 'rxjs/operators';
 
-export abstract class ListService<T extends Entity> {
+export abstract class FetchService<T> {
 
-  constructor(
+  protected constructor(
     protected api: ApiSdkService,
-    protected listMethod: (...args: any[]) => Observable<T[]> | Promise<T[]>) {
+    protected fetchMethod: (...args: any[]) => Observable<T> | Promise<T>) {
   }
 
-  protected source = new BehaviorSubject<T[] | undefined>(undefined);
+  protected readonly source = new BehaviorSubject<T | undefined>(undefined);
+  readonly data = this.source.asObservable();
 
   protected _fetching = false;
   get fetching() {
@@ -23,9 +23,9 @@ export abstract class ListService<T extends Entity> {
     return this._fetchError;
   }
 
-  readonly list = ({ force = true, clean = true }: {force?: boolean, clean?: boolean} = {}, ...args: any[]): Observable<T[]> => {
+  readonly list = ({ force = true, clean = true }: {force?: boolean, clean?: boolean} = {}, ...args: any[]): Observable<T> => {
     if (this.source.value && !force) {
-      return this.source.asObservable() as Observable<T[]>;
+      return this.source.asObservable() as Observable<T>;
     }
     if (clean) {
       this.source.next(undefined);
@@ -35,11 +35,11 @@ export abstract class ListService<T extends Entity> {
         this._fetching = true;
         this._fetchError = undefined;
       }),
-      mergeMap(() => this.listMethod(...args)),
-      mergeMap((data: T[]) => {
+      mergeMap(() => this.fetchMethod(...args)),
+      mergeMap((data: T) => {
         this._fetching = false;
         this.source.next(data);
-        return this.source.asObservable() as Observable<T[]>;
+        return this.source.asObservable() as Observable<T>;
       }),
       catchError((err: ApiError) => {
         this._fetching = false;
@@ -47,5 +47,9 @@ export abstract class ListService<T extends Entity> {
         return throwError(err);
       }),
     );
+  };
+
+  readonly clear = () => {
+    this.source.next(undefined);
   };
 }

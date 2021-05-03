@@ -14,26 +14,38 @@ $alert-size: 52px;
 
   &.-error {
     //background: $theme-error-bg;
-    color: $theme-error-border;
     border-color: $theme-error-border;
+
+    .-icon {
+      color: $theme-error-border;
+    }
   }
 
   &.-info {
     //background: $theme-info-bg;
-    color: $theme-info-border;
     border-color: $theme-info-border;
+
+    .-icon {
+      color: $theme-info-border;
+    }
   }
 
   &.-warning {
     //background: $theme-warning-bg;
-    color: $theme-warning-border;
     border-color: $theme-warning-border;
+
+    .-icon {
+      color: $theme-warning-border;
+    }
   }
 
   &.-success {
     //background: $theme-success-bg;
-    color: $theme-success-border;
     border-color: $theme-success-border;
+
+    .-icon {
+      color: $theme-success-border;
+    }
   }
 }
 

@@ -14,13 +14,13 @@ export class AppComponent implements OnInit {
   @ViewChild('header') header;
   @ViewChild('content') content;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private injector: Injector,
-              private router: Router,
-              private atInternetService: AtInternetService,
-              private activatedRoute: ActivatedRoute
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private injector: Injector,
+    private router: Router,
+    private atInternetService: AtInternetService,
+    private activatedRoute: ActivatedRoute
   ) {
-
     if (isPlatformBrowser(this.platformId)) {
       const angulartics2Piwik: Angulartics2Piwik = injector.get(Angulartics2Piwik);
       angulartics2Piwik.startTracking();
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-        this.atInternetService.send({name: event.url.replace(/[^\w]/gi, '')});
+        this.atInternetService.send({name: event.url.replace(/[^\w]/gi, '') || 'home'});
         if (!this.activatedRoute.snapshot.fragment) {
           this.header.nativeElement.focus();
         } else if (this.activatedRoute.snapshot.fragment === 'content') {
@@ -43,5 +43,4 @@ export class AppComponent implements OnInit {
   getCurrentNavigation() {
     return this.router.url;
   }
-
 }

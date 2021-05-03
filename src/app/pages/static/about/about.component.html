@@ -1,151 +1,155 @@
 <app-banner title="Qui sommes-nous&nbsp;?"></app-banner>
 
-<main role="main">
-  <section class="section section-lightest-grey">
-    <div class="container max-width">
+<app-page size="small" pageDefinitionKey="about">
+  <app-panel>
+    <app-panel-body>
+      <h2>Notre structure</h2>
+      <p>Nous sommes ce qu’on appelle une «&nbsp;<a href="https://beta.gouv.fr/apropos/">Startup d’État</a>&nbsp;». Il
+        s’agit d’une petite équipe qui crée un service public numérique pour répondre à un problème qui touche les
+        citoyens. Elle n’a pas pour objectif de faire du profit, mais de maximiser son impact social en répondant aux
+        besoins des utilisateurs.</p>
+      <p>Notre Startup d’État est rattachée à la <abbr
+        title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> dont la
+        mission s'articule autour de trois axes :</p>
+      <ul>
+        <li>la régulation concurrentielle des marchés&nbsp;;</li>
+        <li>la protection économique des consommateurs&nbsp;;</li>
+        <li>la sécurité des consommateurs.</li>
+      </ul>
+    </app-panel-body>
+  </app-panel>
 
-      <div class="card">
-        <div class="card-body">
-          <h2>Notre structure</h2>
-          <p>Nous sommes ce qu’on appelle une «&nbsp;<a href="https://beta.gouv.fr/apropos/">Startup d’État</a>&nbsp;». Il s’agit d’une petite équipe qui crée un service public numérique pour répondre à un problème qui touche les citoyens. Elle n’a pas pour objectif de faire du profit, mais de maximiser son impact social en répondant aux besoins des utilisateurs.</p>
-          <p>Notre Startup d’État est rattachée à la <abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr> dont la mission s'articule autour de trois axes :</p>
-          <ul>
-            <li>la régulation concurrentielle des marchés&nbsp;;</li>
-            <li>la protection économique des consommateurs&nbsp;;</li>
-            <li>la sécurité des consommateurs.</li>
-          </ul>
+  <app-panel>
+    <app-panel-body>
+      <h2>Notre façon de travailler</h2>
+      <p>Un seul crédo : être au plus près des besoins des usagers&nbsp;! Pour ce faire, nous basons notre travail sur
+        l’expérimentation. Une idée&nbsp;? Nous la testons&nbsp;!</p>
+      <p>C’est pourquoi notre produit n’est pas figé mais en perpétuelle évolution. Nous rencontrons régulièrement des
+        consommateurs pour tester l’ergonomie, le vocabulaire utilisé ou les réponses apportées.</p>
+      <blockquote><p>«&nbsp;Je n’ai pas échoué, j’ai juste trouvé 10.000 moyens qui ne fonctionnent
+        pas.&nbsp;»<br><span>— Thomas Edison</span></p></blockquote>
+      <p>
+        Retrouvez plus d'informations et les mises à jour du site sur notre <a routerLink="/blog">blog</a>.
+      </p>
+    </app-panel-body>
+  </app-panel>
+
+  <app-panel>
+    <app-panel-body>
+      <h2>Notre équipe</h2>
+      <div class="row">
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Guillaume Rossmann"
+            role="Chef de produit SignalConso"
+            [dgccrf]="true"
+            avatar="avatar-guillaumerossmann.png">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Quentin Kurtz"
+            role="Chargé de déploiement"
+            avatar="avatar-quentinkurtz.png">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Jérôme Rivals"
+            role="Développeur informatique"
+            avatar="avatar-jerome.png">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Alexandre Annic"
+            role="Développeur informatique"
+            avatar="avatar-alexandreannic.png">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Julien Rayneau"
+            role="Coach Startup d'État"
+            avatar="avatar-julien.png">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Magali Marcel"
+            role="Chef de produit SignalConso"
+            [dgccrf]="true"
+            [disabled]="true"
+            avatar="avatar-magali.png">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Valentine Michaud"
+            role="Chargée de déploiement"
+            avatar="avatar-valentine.png"
+            [disabled]="true">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Jules Garavelli"
+            role="Chargé de déploiement"
+            avatar="avatar-jules.png"
+            [disabled]="true">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Grégoire Aubert"
+            role="Chargé de déploiement"
+            avatar="avatar-gregoire.png"
+            [disabled]="true">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Agnès Mayanobe"
+            role="Chargé de déploiement"
+            avatar="avatar-agnes.png"
+            [dgccrf]="true"
+            [disabled]="true">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Thomas Chaumeny"
+            role="Développeur informatique"
+            avatar="avatar-thomas.png"
+            [disabled]="true">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Pierre-Olivier Mauguet"
+            role="Développeur informatique"
+            avatar="avatar-pierre-olivier.png"
+            [disabled]="true">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Franck Coufourier"
+            role="Développeur informatique"
+            avatar="avatar-franck.png"
+            [disabled]="true">
+          </app-member>
+        </div>
+        <div class="col-12 col-sm-6 pb-4">
+          <app-member
+            name="Alexandre Michel"
+            role="Chargé de déploiement"
+            avatar="avatar-alexandre.png"
+            [disabled]="true">
+          </app-member>
         </div>
       </div>
+    </app-panel-body>
+  </app-panel>
+</app-page>
 
-      <div class="card">
-        <div class="card-body">
-          <h2>Notre façon de travailler</h2>
-          <p>Un seul crédo : être au plus près des besoins des usagers&nbsp;! Pour ce faire, nous basons notre travail sur l’expérimentation. Une idée&nbsp;? Nous la testons&nbsp;!</p>
-          <p>C’est pourquoi notre produit n’est pas figé mais en perpétuelle évolution. Nous rencontrons régulièrement des consommateurs pour tester l’ergonomie, le vocabulaire utilisé ou les réponses apportées.</p>
-          <blockquote><p>«&nbsp;Je n’ai pas échoué, j’ai juste trouvé 10.000 moyens qui ne fonctionnent pas.&nbsp;»<br><span>— Thomas Edison</span></p></blockquote>
-          <p>
-            Retrouvez plus d'informations et les mises à jour du site sur notre <a routerLink="/blog">blog</a>.
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-          <h2>Notre équipe</h2>
-          <div class="row">
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Guillaume Rossmann"
-                role="Chef de produit SignalConso"
-                [dgccrf]="true"
-                avatar="avatar-guillaumerossmann.png">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Quentin Kurtz"
-                role="Chargé de déploiement"
-                avatar="avatar-quentinkurtz.png">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Jérôme Rivals"
-                role="Développeur informatique"
-                avatar="avatar-jerome.png">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Alexandre Annic"
-                role="Développeur informatique"
-                avatar="avatar-alexandreannic.png">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Julien Rayneau"
-                role="Coach Startup d'État"
-                avatar="avatar-julien.png">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Magali Marcel"
-                role="Chef de produit SignalConso"
-                [dgccrf]="true"
-                [disabled]="true"
-                avatar="avatar-magali.png">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Valentine Michaud"
-                role="Chargée de déploiement"
-                avatar="avatar-valentine.png"
-                [disabled]="true">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Jules Garavelli"
-                role="Chargé de déploiement"
-                avatar="avatar-jules.png"
-                [disabled]="true">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Grégoire Aubert"
-                role="Chargé de déploiement"
-                avatar="avatar-gregoire.png"
-                [disabled]="true">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Agnès Mayanobe"
-                role="Chargé de déploiement"
-                avatar="avatar-agnes.png"
-                [dgccrf]="true"
-                [disabled]="true">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Thomas Chaumeny"
-                role="Développeur informatique"
-                avatar="avatar-thomas.png"
-                [disabled]="true">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Pierre-Olivier Mauguet"
-                role="Développeur informatique"
-                avatar="avatar-pierre-olivier.png"
-                [disabled]="true">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Franck Coufourier"
-                role="Développeur informatique"
-                avatar="avatar-franck.png"
-                [disabled]="true">
-              </app-member>
-            </div>
-            <div class="col-12 col-sm-6 pb-4">
-              <app-member
-                name="Alexandre Michel"
-                role="Chargé de déploiement"
-                avatar="avatar-alexandre.png"
-                [disabled]="true">
-              </app-member>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>

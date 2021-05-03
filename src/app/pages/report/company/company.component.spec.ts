@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CompanyComponent, IdentificationKinds } from './company.component';
-import { CompanyService } from '../../../services/company.service';
+import { SearchCompanyByURLService } from '../../../services/company.service';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +29,7 @@ describe('CompanyComponent', () => {
 
   let component: CompanyComponent;
   let fixture: ComponentFixture<CompanyComponent>;
-  let companyService: CompanyService;
+  let companyService: SearchCompanyByURLService;
   let reportStorageService: ReportStorageService;
   let constantService: ConstantService;
 
@@ -63,7 +63,7 @@ describe('CompanyComponent', () => {
   }));
 
   beforeEach(() => {
-    companyService = TestBed.inject(CompanyService);
+    companyService = TestBed.inject(SearchCompanyByURLService);
     reportStorageService = TestBed.inject(ReportStorageService);
     constantService = TestBed.inject(ConstantService);
   });
@@ -137,7 +137,7 @@ describe('CompanyComponent', () => {
 
     it('should display radios for identification choice when no company found', () => {
 
-      spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of([]));
+      spyOn(companyService, 'list').and.returnValue(of([]));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
@@ -151,7 +151,7 @@ describe('CompanyComponent', () => {
     it('should display results when company found', () => {
 
       const companySearchResults = [genCompanySearchResult(), genCompanySearchResult()];
-      spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of(companySearchResults));
+      spyOn(companyService, 'list').and.returnValue(of(companySearchResults));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
@@ -166,7 +166,7 @@ describe('CompanyComponent', () => {
 
       it('should ask the user whether the company is abroad or not', () => {
 
-        spyOn(companyService, 'searchCompaniesByUrl').and.returnValue(of([]));
+        spyOn(companyService, 'list').and.returnValue(of([]));
         spyOn(constantService, 'getCountries').and.returnValue(of([{'code': 'AFG', 'name': 'Afghanistan', 'european': false, 'transfer': false}]));
 
         const nativeElement = fixture.nativeElement;
@@ -216,6 +216,7 @@ describe('CompanyComponent', () => {
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('form#phoneForm #phoneInput').value = '0555555555';
       nativeElement.querySelector('form#phoneForm #phoneInput').dispatchEvent(new Event('input'));
+      fixture.detectChanges();
       nativeElement.querySelectorAll('form#phoneForm button')[0].click();
       fixture.detectChanges();
 

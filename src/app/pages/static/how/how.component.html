@@ -1,110 +1,96 @@
 <app-banner title="Comment ça marche&#160;?"></app-banner>
 
-<main role="main">
-
-  <section class="section section-lightest-grey">
-    <div class="container max-width bg-white">
-
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
-              <h2 [innerHTML]="illustrations[0].title"></h2>
-            </div>
-            <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
-              1
-            </div>
-            <div class="col-3 order-2 order-sm-3 p-0">
-              <img src="/assets/images/{{illustrations[0].picture}}" alt="" />
-            </div>
-            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
-              <p>
-                Vous pouvez faire remonter votre problème sur le site SignalConso.
-              </p>
-              <p>
-                Vous n’êtes pas sûr que ce soit un problème ? SignalConso vous guide afin de savoir si vous pouvez faire un signalement.
-                Si ce n'est pas le cas, on vous explique pourquoi !
-              </p>
-            </div>
-          </div>
+<app-page pageDefinitionKey="how" size="small">
+  <app-panel>
+    <app-panel-body>
+      <div class="row">
+        <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+          <h2 [innerHTML]="illustrations[0].title"></h2>
+        </div>
+        <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
+          1
+        </div>
+        <div class="col-3 order-2 order-sm-3 p-0">
+          <img src="/assets/images/{{illustrations[0].picture}}" alt=""/>
+        </div>
+        <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+          <p>
+            Vous pouvez faire remonter votre problème sur le site SignalConso.
+          </p>
+          <p>
+            Vous n’êtes pas sûr que ce soit un problème ? SignalConso vous guide afin de savoir si vous pouvez faire un
+            signalement.
+            Si ce n'est pas le cas, on vous explique pourquoi !
+          </p>
         </div>
       </div>
-      <hr />
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
-              <h2 [innerHTML]="illustrations[1].title"></h2>
-            </div>
-            <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
-              2
-            </div>
-            <div class="col-3 order-2 order-sm-3 p-0">
-              <img src="/assets/images/{{illustrations[1].picture}}" alt="" />
-            </div>
-            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
-              <p>
-                Signaler le problème en choisissant une catégorie et en répondant aux questions.
-              </p>
-              <p>
-                Suivant le problème, SignalConso vous conseille sur les démarches à faire en plus de votre signalement. Le site vous donne également des informations sur vos droits en tant que consommateur.
-              </p>
-            </div>
-          </div>
+      <hr/>
+      <div class="row">
+        <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+          <h2 [innerHTML]="illustrations[1].title"></h2>
+        </div>
+        <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
+          2
+        </div>
+        <div class="col-3 order-2 order-sm-3 p-0">
+          <img src="/assets/images/{{illustrations[1].picture}}" alt=""/>
+        </div>
+        <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+          <p>
+            Signaler le problème en choisissant une catégorie et en répondant aux questions.
+          </p>
+          <p>
+            Suivant le problème, SignalConso vous conseille sur les démarches à faire en plus de votre signalement. Le
+            site vous donne également des informations sur vos droits en tant que consommateur.
+          </p>
         </div>
       </div>
-      <hr />
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
-              <h2 [innerHTML]="illustrations[2].title"></h2>
-            </div>
-            <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
-              3
-            </div>
-            <div class="col-3 order-2 order-sm-3 p-0">
-              <img src="/assets/images/{{illustrations[2].picture}}" alt="" />
-            </div>
-            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
-              <p>
-                SignalConso contacte l'entreprise afin de l'informer de votre signalement (qui peut être anonymisé).
-              </p>
-              <p>
-                L'entreprise peut décider de corriger le problème. Vous serez informé par un email de Signalconso.
-              </p>
-              <p>
-                Vous avez choisi de transmettre vos coordonnées à l'entreprise ? Elle pourra vous recontacter directement.
-              </p>
-            </div>
-          </div>
+      <hr/>
+      <div class="row">
+        <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+          <h2 [innerHTML]="illustrations[2].title"></h2>
+        </div>
+        <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
+          3
+        </div>
+        <div class="col-3 order-2 order-sm-3 p-0">
+          <img src="/assets/images/{{illustrations[2].picture}}" alt=""/>
+        </div>
+        <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+          <p>
+            SignalConso contacte l'entreprise afin de l'informer de votre signalement (qui peut être anonymisé).
+          </p>
+          <p>
+            L'entreprise peut décider de corriger le problème. Vous serez informé par un email de Signalconso.
+          </p>
+          <p>
+            Vous avez choisi de transmettre vos coordonnées à l'entreprise ? Elle pourra vous recontacter directement.
+          </p>
         </div>
       </div>
-      <hr />
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
-              <h2 [innerHTML]="illustrations[3].title"></h2>
-            </div>
-            <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
-              4
-            </div>
-            <div class="col-3 order-2 order-sm-3 p-0">
-              <img src="/assets/images/{{illustrations[3].picture}}" alt="" />
-            </div>
-            <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
-              <p>
-                Votre signalement est enregistré dans la base de données de la répression des fraudes (dgccrf).
-              </p>
-              <p>
-                Les signalements deviennent trop nombreux pour une même entreprise ? le problème est considéré comme grave par les enquêteurs ?
-                La répression des fraudes peut décider de surveiller ou de contrôler une entreprise grâce à votre signalement.
-              </p>
-            </div>
-          </div>
+      <hr/>
+      <div class="row">
+        <div class="col-9 col-sm-3 order-3 order-sm-1 flex-center">
+          <h2 [innerHTML]="illustrations[3].title"></h2>
+        </div>
+        <div class="step-number col-12 col-sm-9 order-1 order-sm-2 flex-sm-center pb-2 pb-sm-0">
+          4
+        </div>
+        <div class="col-3 order-2 order-sm-3 p-0">
+          <img src="/assets/images/{{illustrations[3].picture}}" alt=""/>
+        </div>
+        <div class="col-12 col-sm-9 order-4 pt-2 pt-sm-0">
+          <p>
+            Votre signalement est enregistré dans la base de données de la répression des fraudes (dgccrf).
+          </p>
+          <p>
+            Les signalements deviennent trop nombreux pour une même entreprise ? le problème est considéré comme grave
+            par les enquêteurs ?
+            La répression des fraudes peut décider de surveiller ou de contrôler une entreprise grâce à votre
+            signalement.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+    </app-panel-body>
+  </app-panel>
+</app-page>

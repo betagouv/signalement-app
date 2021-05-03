@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { WebsiteService } from '../../../services/website.service';
-import pages from '../../../../assets/data/pages.json';
 import { MatTableDataSource } from '@angular/material/table';
 import { HostWithReportCount } from '../../../model/Website';
 import { MatPaginator } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
 import { Roles } from '../../../model/AuthUser';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -42,18 +39,13 @@ export class UnregisteredWebsitesComponent implements OnInit {
     'count',
   ];
 
-  constructor(private titleService: Title,
-    private meta: Meta,
-    private localeService: BsLocaleService,
+  constructor(
     private router: Router,
     public authenticationService: AuthenticationService,
     public websiteService: WebsiteService) {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.websites.unregistered.title);
-    this.meta.updateTag({ name: 'description', content: pages.websites.unregistered.description });
-    this.localeService.use('fr');
     this.form.valueChanges
       .pipe(debounceTime(800), distinctUntilChanged())
       .subscribe(this.fetchUnregisteredWebsites);
@@ -70,8 +62,8 @@ export class UnregisteredWebsitesComponent implements OnInit {
 
   initializeDatatable = (hosts: HostWithReportCount[]) => {
     this.dataSource = new MatTableDataSource(hosts);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator ?? null;
+    this.dataSource.sort = this.sort ?? null;
   };
 
   clearFilters() {

@@ -1,106 +1,71 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Api, ServiceUtils } from './core/service.utils';
-import { map, mergeMap } from 'rxjs/operators';
-import { Company, CompanySearchResult } from '../model/Company';
+import { Company, CompanyCreation, CompanySearchResult, CompanyUpdate } from '../model/Company';
+import { ApiSdkService } from './core/api-sdk.service';
+import { FetchService } from './helper/FetchService';
+import { CRUDListService } from './helper/CRUDListService';
+import { Event } from '../model/ReportEvent';
 
 export const MaxCompanyResult = 20;
 
-class RawCompanyService {
+@Injectable({ providedIn: 'root' })
+export class UpdateCompanyService extends FetchService<Company> {
 
-  constructor(protected http: HttpClient,
-    protected serviceUtils: ServiceUtils) {}
-
-  searchCompanies(search: string, searchPostalCode: string) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('postalCode', searchPostalCode.toString());
-    httpParams = httpParams.append('q', search);
-    return this.http.get<CompanySearchResult[]>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search']),
-      {
-        params: httpParams
-      }
-    );
-  }
-
-  searchCompaniesByIdentity(identity: string) {
-    return this.http.get<CompanySearchResult[]>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', identity]),
-    ).pipe(
-      map(companies => companies.filter(company => company.postalCode))
-    );
-  }
-
-  searchCompaniesByUrl(url: string) {
-    return this.http.get<CompanySearchResult[]>(
-      this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search-url']),
-      { params: { url }}
-    );
-  }
-
-  searchRegisterCompanies(search: string) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('q', search);
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<Company[]>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', 'search', 'registered']),
-          Object.assign(headers, { params: httpParams })
-        );
-      })
-    );
-  }
-
-  updateCompanyAddress(siret: string, address: string, postalCode: string, activationDocumentRequired: boolean) {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.put<Company>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', siret, 'address']),
-          {
-            address,
-            postalCode,
-            activationDocumentRequired
-          },
-          headers
-        );
-      })
-    );
-  }
-
-  saveUndeliveredDocument(siret: string, returnedDate: Date) {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.post(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'companies', siret, 'undelivered-document']),
-          { returnedDate },
-          headers
-        );
-      })
-    );
+  constructor(protected api: ApiSdkService) {
+    super(api, api.secured.company.updateCompanyAddress);
   }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CompanyService extends RawCompanyService {
+@Injectable({ providedIn: 'root' })
+export class SaveUndeliveredDocumentService extends FetchService<Event> {
 
-  constructor(protected http: HttpClient,
-    protected serviceUtils: ServiceUtils) {
-      super(http, serviceUtils);
-    }
+  constructor(protected api: ApiSdkService) {
+    super(api, api.secured.company.saveUndeliveredDocument);
+  }
+}
 
-  private DGCCRF_DATA = <CompanySearchResult> {
-    siret: '12002503600035',
-    name: 'DIRECTION GENERALE DE LA CONCURRENCE, DE LA CONSOMMATION ET DE LA REPRESSION DES FRAUDES',
-    address: 'TELEDOC 071 - 59 BD VINCENT AURIOL - 75013 PARIS 13',
-    postalCode: '75013',
-    activityLabel: 'Administration publique (tutelle) des activités économiques',
-    highlight: null
-  };
+@Injectable({ providedIn: 'root' })
+export class CompaniesService extends CRUDListService<Company, CompanyCreation, CompanyUpdate> {
 
-  private searchHooks = [
+  constructor(protected api: ApiSdkService) {
+    super(api, {
+      create: api.secured.company.create,
+      list: api.secured.company.searchRegisterCompanies,
+      update: api.secured.company.updateCompanyAddress,
+    });
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class SearchCompanyByURLService extends FetchService<CompanySearchResult[]> {
+
+  constructor(protected api: ApiSdkService) {
+    super(api, api.unsecured.company.searchCompaniesByUrl);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
+
+  constructor(protected api: ApiSdkService) {
+    super(api, (search: string, searchPostalCode: string) => {
+      const match = this.searchHooks.find(hook => hook.query.test(search));
+      return api.unsecured.company.searchCompanies(search, searchPostalCode).then(results => {
+        if (match && match.results) {
+          const matches = match.results;
+          matches.filter(c => !c.highlight).forEach(c => c.highlight = 'Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)');
+          results = [
+            ...matches,
+            ...results.filter(c =>
+              !match.results.find(r => r.siret === c.siret)
+            )];
+        }
+        return results;
+      });
+    });
+  }
+
+  private readonly searchHooks = [
     {
       query: /\borange\b/i,
       results: [
@@ -371,30 +336,24 @@ export class CompanyService extends RawCompanyService {
       ]
     },
   ];
+}
 
-  searchCompanies(search: string, searchPostalCode: string) {
-    const match = this.searchHooks.find(hook => hook.query.test(search));
-    return super.searchCompanies(search, searchPostalCode).pipe(
-      map(results => {
-        if (match && match.results) {
-          const matches = match.results;
-          matches.filter(c => !c.highlight).forEach(c => c.highlight = 'Pour tout signalement relatif à votre opérateur (contrat, forfait, etc.)');
-          results = [
-            ...matches,
-            ...results.filter(c =>
-              !match.results.find(r => r.siret === c.siret)
-            )];
-        }
-        return results;
-      })
+@Injectable({ providedIn: 'root' })
+export class SearchCompanyByIdentityService extends FetchService<CompanySearchResult[]> {
+
+  constructor(protected api: ApiSdkService) {
+    super(api, (identity: string) => (identity === this.dgccrfCompany.siret)
+      ? of([this.dgccrfCompany])
+      : api.unsecured.company.searchCompaniesByIdentity(identity)
     );
   }
 
-  searchCompaniesByIdentity(identity: string) {
-    if (identity === this.DGCCRF_DATA.siret) {
-      return of([this.DGCCRF_DATA]);
-    } else {
-      return super.searchCompaniesByIdentity(identity);
-    }
-  }
+  private readonly dgccrfCompany = <CompanySearchResult> {
+    siret: '12002503600035',
+    name: 'DIRECTION GENERALE DE LA CONCURRENCE, DE LA CONSOMMATION ET DE LA REPRESSION DES FRAUDES',
+    address: 'TELEDOC 071 - 59 BD VINCENT AURIOL - 75013 PARIS 13',
+    postalCode: '75013',
+    activityLabel: 'Administration publique (tutelle) des activités économiques',
+    highlight: null
+  };
 }

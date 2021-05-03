@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanySearchResult, DraftCompany } from '../../../../model/Company';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
-import { CompanyService } from '../../../../services/company.service';
+import { SearchCompanyByIdentityService } from '../../../../services/company.service';
 import { RendererService } from '../../../../services/renderer.service';
 import { IdentificationKinds } from '../company.component';
 import { CompanyKinds } from '../../../../model/Anomaly';
@@ -36,7 +36,7 @@ export class CompanySearchByIdentityComponent implements OnInit {
   searchByIdentityError: string;
 
   constructor(public formBuilder: FormBuilder,
-              private companyService: CompanyService,
+              private searchCompanyByIdentityService: SearchCompanyByIdentityService,
               private rendererService: RendererService,
               private analyticsService: AnalyticsService) { }
 
@@ -68,7 +68,7 @@ export class CompanySearchByIdentityComponent implements OnInit {
       this.loading.emit(true);
       this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.searchByIdentity, this.identityCtrl.value);
 
-      this.companyService.searchCompaniesByIdentity(this.identityCtrl.value).subscribe(
+      this.searchCompanyByIdentityService.list({ clean: false }, this.identityCtrl.value).subscribe(
         companySearchResults => {
           this.loading.emit(false);
           if (companySearchResults.length === 0) {

@@ -3,7 +3,6 @@ import { ReportService } from '../../../services/report.service';
 import { Report } from '../../../model/Report';
 import { ReportFilter, reportFilter2QueryString, reportFilterFromQueryString } from '../../../model/ReportFilter';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
 import { Roles } from '../../../model/AuthUser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -22,7 +21,7 @@ import { merge } from 'rxjs';
 })
 export class ReportListComponent implements OnInit {
 
-  roles = Roles;
+  readonly roles = Roles;
 
   readonly defaultPageSize = 10;
 
@@ -32,10 +31,10 @@ export class ReportListComponent implements OnInit {
     'end',
   ];
 
-  loading: boolean;
-  loadingError: boolean;
-  searchForm: FormGroup;
-  reports: PaginatedData<Report>;
+  loading = false;
+  loadingError = false;
+  searchForm?: FormGroup;
+  reports?: PaginatedData<Report>;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
     public authenticationService: AuthenticationService,
@@ -50,9 +49,6 @@ export class ReportListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.reports.list.title);
-    this.meta.updateTag({ name: 'description', content: pages.reports.list.description });
-    this.localeService.use('fr');
     this.initAndBuildForm();
   }
 

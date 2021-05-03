@@ -7,10 +7,8 @@ import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
 import { RatingService } from '../../../services/rating.service';
 import { of } from 'rxjs';
-import pages from '../../../../assets/data/pages.json';
 
 @Component({
   selector: 'app-information',
@@ -33,14 +31,10 @@ export class InformationComponent implements OnInit, OnDestroy {
               private analyticsService: AnalyticsService,
               private ratingService: RatingService,
               private activatedRoute: ActivatedRoute,
-              private titleService: Title,
-              private meta: Meta) { }
+  ) { }
 
   ngOnInit() {
     this.step = Step.Information;
-
-    this.titleService.setTitle(pages.report.information.title);
-    this.meta.updateTag({ name: 'description', content: pages.report.information.description });
 
     this.activatedRoute.url.pipe(
       take(1),

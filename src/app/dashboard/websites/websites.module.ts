@@ -14,6 +14,7 @@ import { AppPermissionModule } from '../../directives/app-permission/app-permiss
 import { CompanySearchResultsModule } from '../../components/company-search-results/company-search-results.module';
 import { WebsitesTabsComponent } from './websites-tabs/websites-tabs.component';
 import { DashboardCompaniesModule } from '../companies/dashboard-companies.module';
+import { CompanySearchDialogModule } from '../companies/company-search-dialog/company-search-dialog.component';
 
 /* tslint:disable:max-line-length */
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
     SharedModule,
     CompanySearchResultsModule,
     BsDatepickerModule.forRoot(),
-    DashboardCompaniesModule
+    DashboardCompaniesModule,
+    CompanySearchDialogModule
   ]
 })
 export class WebsitesModule { }

@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import pages from '../../../../assets/data/pages.json';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { CompanyAccessesService } from '../../../services/companyaccesses.service';
-import { UserAccess } from '../../../model/Company';
+import { CompanyAccessLevel } from '../../../model/Company';
 import { User } from '../../../model/AuthUser.js';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -18,7 +17,7 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject<void>();
 
-  myAccesses?: UserAccess[];
+  myAccesses?: CompanyAccessLevel[];
   user?: User;
   loading = false;
 
@@ -29,8 +28,6 @@ export class MyCompaniesComponent implements OnInit, OnDestroy {
               private companyAccessesService: CompanyAccessesService) { }
 
   ngOnInit() {
-    this.titleService.setTitle(pages.companies.myCompanies.title);
-    this.meta.updateTag({ name: 'description', content: pages.companies.myCompanies.description });
     this.authenticationService.user
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((user: User) => {

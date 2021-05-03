@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class PanelComponent {
 
-  @Input() loading: boolean;
+  @Input() loading = false;
 }

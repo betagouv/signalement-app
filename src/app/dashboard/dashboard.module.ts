@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { WebsitesModule } from './websites/websites.module';
 import { ReportedPhonesModule } from './reported-phones/reported-phones.module';
+import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
@@ -39,6 +40,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     WebsitesModule,
+    SharedModule,
     ReportedPhonesModule
   ],
   exports: [],

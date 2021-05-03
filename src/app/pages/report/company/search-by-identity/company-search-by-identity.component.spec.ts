@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CompanySearchByIdentityComponent } from './company-search-by-identity.component';
-import { CompanyService } from '../../../../services/company.service';
+import { SearchCompanyByIdentityService } from '../../../../services/company.service';
 import { AnalyticsService } from '../../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../../test/mocks';
 import { genCompanySearchResult, genSiret } from '../../../../../../test/fixtures.spec';
@@ -14,7 +14,7 @@ describe('CompanySearchByIdentityComponent', () => {
 
   let component: CompanySearchByIdentityComponent;
   let fixture: ComponentFixture<CompanySearchByIdentityComponent>;
-  let companyService: CompanyService;
+  let companyService: SearchCompanyByIdentityService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,7 +34,7 @@ describe('CompanySearchByIdentityComponent', () => {
   }));
 
   beforeEach(() => {
-    companyService = TestBed.inject(CompanyService);
+    companyService = TestBed.inject(SearchCompanyByIdentityService);
     fixture = TestBed.createComponent(CompanySearchByIdentityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -56,7 +56,7 @@ describe('CompanySearchByIdentityComponent', () => {
     it('should display the company found by siret when existed', () => {
 
       const companyBySiret = genCompanySearchResult();
-      spyOn(companyService, 'searchCompaniesByIdentity').and.returnValue(of([companyBySiret]));
+      spyOn(companyService, 'list').and.returnValue(of([companyBySiret]));
 
       const nativeElement = fixture.nativeElement;
       component.identityCtrl.setValue(genSiret());

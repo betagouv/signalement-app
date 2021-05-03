@@ -1,7 +1,8 @@
-import { Component, Directive, Input, NgModule, OnInit } from '@angular/core';
+import { Component, Directive, HostBinding, Input, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { slideToggle } from '../../../utils/animations';
 
 export type AlertType = 'error' | 'info' | 'success' | 'warning';
 
@@ -21,7 +22,6 @@ export class AlertCloseComponent {
   selector: 'app-alert',
   host: {
     '[class]': '"-" + type',
-    '[style.display]': 'visible ? "" : "none"',
   },
   styleUrls: ['./alert.component.scss'],
   template: `
@@ -45,16 +45,16 @@ export class AlertCloseComponent {
         <ng-content select="[app-alert-close]"></ng-content>
       </span>
     </div>
-  `
+  `,
+  animations: [slideToggle],
 })
 export class AlertComponent implements OnInit {
-
-  constructor() {
-  }
 
   ngOnInit() {
     this.visible = this.getStorageId() ? localStorage.getItem(this.getStorageId()) !== 'true' : true;
   }
+
+  @HostBinding('@slideToggle') visible = true;
 
   @Input() id?: string;
 
@@ -62,7 +62,12 @@ export class AlertComponent implements OnInit {
 
   @Input() type: AlertType;
 
-  visible: boolean;
+  @Input()
+  set autoHide(value: any) {
+    if (value !== null) {
+      setTimeout(() => this.visible = false, typeof value === 'number' ? value : 8000);
+    }
+  }
 
   readonly getStorageId = (): string | undefined => this.id ? 'AlertComponent_' + this.id + '_hidden' : undefined;
 
