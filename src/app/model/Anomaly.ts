@@ -3,6 +3,7 @@ export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
 export const ContractualDisputeTag = 'Litige contractuel';
 export const InternetTag = 'Internet';
+export const DangerousProductTag = 'Produit dangereux';
 
 export interface SubcategoryBase extends Category {
   title: string;
@@ -84,7 +85,7 @@ export enum InputType {
   Date = 'DATE'
 }
 
-const askCompanyKindIfMissing = (anomaly: Category): Category => {
+const askCompanyKindIfMissing = (anomaly: Category, tags: Tag[]): Category => {
   if (!anomaly.subcategories && !anomaly.companyKind && !instanceOfSubcategoryInformation(anomaly)) {
     return {
       ...anomaly,
@@ -99,7 +100,7 @@ const askCompanyKindIfMissing = (anomaly: Category): Category => {
         }, {
           ...anomaly,
           title: 'Non, pas sur internet',
-          companyKind: CompanyKinds.SIRET,
+          companyKind: tags.indexOf(DangerousProductTag) === -1 ? CompanyKinds.SIRET : CompanyKinds.LOCATION,
           example: undefined
         },
       ]
@@ -107,7 +108,8 @@ const askCompanyKindIfMissing = (anomaly: Category): Category => {
   }
   return {
     ...anomaly,
-    subcategories: anomaly.subcategories?.map(_ => ({ ..._, ...askCompanyKindIfMissing(_) })),
+    subcategories: anomaly.subcategories?.map(_ =>
+      ({ ..._, ...askCompanyKindIfMissing(_, [...tags, ...(anomaly as Subcategory).tags ?? []]) })),
   };
 };
 
@@ -120,7 +122,11 @@ const propagateCompanyKinds = (anomaly: Category): Category => {
   };
 };
 
-export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly));
+export const collectTags = (data: Category | Subcategory | Anomaly): string[] => {
+  return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => collectTags(s)));
+};
+
+export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly), []);
 
 export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput => {
   return !!(_ as SubcategoryInput)?.detailInputs;
