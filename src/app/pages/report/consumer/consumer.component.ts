@@ -83,13 +83,21 @@ export class ConsumerComponent implements OnInit {
     Validators.pattern(this.codePattern)
   ]);
 
+  checkingEmail = false;
+
   readonly checkEmail = () => {
+    this.checkingEmail = true;
     this.authenticationService.checkConsumerEmail(this.emailCtrl.value).subscribe(valid => {
       if (valid.valid) {
         this.submitConsumerForm();
       } else {
         this.isEmailValid = valid.valid;
       }
+    }, () => {
+    }, () => {
+      setTimeout(() => {
+        this.checkingEmail = false;
+      }, 10000);
     });
   };
 
