@@ -5,18 +5,23 @@
       <app-alert type="error" *ngIf="confirmationCodeErrorMsg !== undefined">
         {{confirmationCodeErrorMsg}}
       </app-alert>
-      <label for="fcode" class="txt-big font-weight-bold" style="margin-bottom: 0">
+      <label for="fcode" class="txt-title font-weight-bold" style="margin-bottom: 0">
         Saisissez le code de validation
       </label>
-      <label for="fcode" class="txt-size-normal txt-secondary">Un email vous a été envoyé à l'adresse <b>{{emailCtrl.value}}</b></label>
-      <div class="form-control mt-2" style="display: flex; align-items: center">
+      <label for="fcode" class="txt-big txt-secondary">Un email vous a été envoyé à l'adresse <b>{{emailCtrl.value}}</b></label>
+      <div class="form-control mt-3" style="display: flex; align-items: center">
         <span>SC-</span>
         <input [formControl]="confirmationCodeCtrl" id="fcode" style="flex: 1; padding: 0" class="input-invisible"
                placeholder=" Saisissez un code à 6 chiffres.">
       </div>
-      <div class="link" (click)="checkEmail()">Réenvoyer l'email</div>
 
-      <button class="btn btn-lg btn-primary mt-3" type="submit">Vérifier</button>
+      <div class="mt-3">
+        <button class="btn btn-lg btn-primary" type="submit">Vérifier</button>
+        &nbsp;&nbsp;
+        <button class="btn btn-lg btn-outline-primary" (click)="checkEmail()" [disabled]="checkingEmail">Renvoyer
+          l'email
+        </button>
+      </div>
     </form>
 
     <div class="container max-width" *ngIf="isEmailValid === undefined">
