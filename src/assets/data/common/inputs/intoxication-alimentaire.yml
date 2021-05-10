@@ -1,0 +1,29 @@
+- label: Date de l'accident
+  rank: 1
+  type: DATE
+  defaultValue: SYSDATE
+- label: Est-ce qu'il y a eu plusieurs personnes malades&#160;?
+  rank: 2
+  optionnal: true
+  type: RADIO
+  options:
+    - Non
+    - Oui (à préciser)
+- label: Avez-vous consulté un médecin&#160;?
+  rank: 3
+  optionnal: true
+  type: RADIO
+  example: Précisez si vous avez eu un arrêt de travail et sa durée
+  options:
+    - Non
+    - Oui (à préciser)
+- label: Décrivez nous plus en détails ce qui s'est passé
+  rank: 4
+  type: TEXTAREA
+  example: Pensez à donner le nom de vos plats ou du produit consommé
+- label: Avez-vous déjà contacté le restaurateur ou le fabriquant pour ce problème&#160;?
+  rank: 7
+  type: RADIO
+  options:
+    - Oui
+    - Non

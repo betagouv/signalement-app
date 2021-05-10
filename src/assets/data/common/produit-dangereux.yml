@@ -1,0 +1,18 @@
+- title: Étouffement
+  detailInputs: !!import/single ./inputs/produit-dangereux.yml
+  fileLabel: Photos du produit / de la notice / du ticket / de la facture / de l'accident
+- title: Blessure physique
+  detailInputs: !!import/single ./inputs/produit-dangereux.yml
+  fileLabel: Photos du produit / de la notice / du ticket / de la facture / de l'accident
+- title: Choc électrique
+  detailInputs: !!import/single ./inputs/produit-dangereux.yml
+  fileLabel: Photos du produit / de la notice / du ticket / de la facture / de l'accident
+- title: Allergie
+  detailInputs: !!import/single ./inputs/produit-dangereux.yml
+  fileLabel: Photos du produit / de la notice / du ticket / de la facture / de l'accident
+- title: Risque environnemental
+  detailInputs: !!import/single ./inputs/produit-dangereux.yml
+  fileLabel: Photos du produit / de la notice / du ticket / de la facture / de l'accident
+- title: Autre
+  detailInputs: !!import/single ./inputs/produit-dangereux.yml
+  fileLabel: Photos du produit / de la notice / du ticket / de la facture / de l'accident
