@@ -10,8 +10,8 @@ export type FenderType = 'loading' | 'error' | 'empty' | 'success';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./fender.component.scss'],
   host: {
-    '[class.clr-success]': 'type == "success"',
-    '[class.clr-error]': 'type == "error"',
+    '[class.txt-success]': 'type === "success"',
+    '[class.txt-error]': 'type === "error"',
   },
   template: `
     <div>
