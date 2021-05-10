@@ -12,6 +12,7 @@ import { genConsumer, genDraftReport, genSubcategory } from '../../../../../test
 import { of } from 'rxjs';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { AuthenticationService } from '../../../services/authentication.service';
 import { DangerousProductTag } from '../../../model/Anomaly';
 
 describe('ConsumerComponent', () => {
@@ -19,6 +20,7 @@ describe('ConsumerComponent', () => {
   let component: ConsumerComponent;
   let fixture: ComponentFixture<ConsumerComponent>;
   let reportStorageService: ReportStorageService;
+  let authenticationService: AuthenticationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,6 +35,7 @@ describe('ConsumerComponent', () => {
         RouterTestingModule.withRoutes([{ path: `:category/${ReportPaths.Confirmation}`, redirectTo: '' }]),
       ],
       providers: [
+        AuthenticationService,
         ReportStorageService,
         {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
@@ -49,6 +52,7 @@ describe('ConsumerComponent', () => {
 
     beforeEach(() => {
       reportStorageService = TestBed.inject(ReportStorageService);
+      authenticationService = TestBed.inject(AuthenticationService);
       retrieveReportSpy = spyOn(reportStorageService, 'retrieveReportInProgress')
         .and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
@@ -131,6 +135,7 @@ describe('ConsumerComponent', () => {
         component.emailCtrl.setValue(consumer.email);
         component.contactAgreementCtrl.setValue(true);
         const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+        const checkEmailSpy = spyOn(authenticationService, 'checkConsumerEmail').and.returnValue(of({valid: true}));
 
         const nativeElement = fixture.nativeElement;
         nativeElement.querySelector('button#submitConsumerForm').click();
