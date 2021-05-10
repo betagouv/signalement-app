@@ -58,8 +58,12 @@ list:
     description: Vous avez été malade (vomissement, diarrhée, maux de ventre) après avoir consommé un aliment.
     rank: 9
     sprite: category-disease
-    subcategories: !!import/single subcategories/intoxication-alimentaire.yml
-    subcategoriesTitle: 'Avez-vous mangé ?'
+    information:
+      title: Les intoxications alimentaires ne rentrent pas dans le périmètre de l'outil SignalConso.
+      content: Les cas d'intoxication alimentaire nécessitent une analyse individualisée (notamment le nombre de personnes malades, symptômes et aliments suspectés ) et peuvent déboucher sur un échange avec les enquêteurs.
+      actions:
+        - question: Signaler un cas d'intoxication alimentaire&#160;?
+          answer: Signaler à la DGCCRF<br><a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier</a>
   - category: Internet (hors achats)
     categoryId: INTERNET
     path: internet
