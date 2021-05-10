@@ -63,8 +63,8 @@ export class ConsumerComponent implements OnInit {
       email: this.emailCtrl
     });
 
-      this.contactAgreementCtrl = this.formBuilder.control(false);
     if (!this.draftReport.isTransmittableToPro) {
+      this.contactAgreementCtrl = this.fb.control(false);
     } else {
       this.contactAgreementCtrl = this.fb.control(
         this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.isContractualDispute ? true : undefined,
