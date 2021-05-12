@@ -31,6 +31,7 @@ export class CompanyForeignCountryComponent implements OnInit {
   @Output() complete = new EventEmitter<DraftCompany>();
 
   foreignForm: FormGroup;
+  postalCodeCtrl: FormControl;
   isForeignCtrl: FormControl;
   nameCtrl: FormControl;
   countryCtrl: FormControl;
@@ -52,10 +53,12 @@ export class CompanyForeignCountryComponent implements OnInit {
   }
 
   initForeignForm() {
+    this.postalCodeCtrl = this.formBuilder.control('', Validators.compose([Validators.required, Validators.pattern('[0-9]{5}')]));
     this.isForeignCtrl = this.formBuilder.control(this.forceForeign ? IsForeignValues.true : '', Validators.required);
     this.nameCtrl = this.formBuilder.control('');
     this.countryCtrl = this.formBuilder.control('');
     this.foreignForm = this.formBuilder.group({
+      postalCodeCtrl: this.postalCodeCtrl,
       isForeign: this.isForeignCtrl,
       name: this.nameCtrl,
       country: this.countryCtrl,
@@ -73,10 +76,13 @@ export class CompanyForeignCountryComponent implements OnInit {
       if (this.isForeignCtrl.value === IsForeignValues.true) {
         this.complete.emit({
           name: this.nameCtrl.value,
-          country: this.countryCtrl.value
+          country: this.countryCtrl.value,
+          postalCode: this.postalCodeCtrl.value,
         }) ;
       } else {
-        this.complete.emit({});
+        this.complete.emit({
+          postalCode: this.postalCodeCtrl.value,
+        });
       }
     }
   }
