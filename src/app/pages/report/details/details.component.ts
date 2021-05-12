@@ -6,7 +6,14 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
-import { DescriptionLabel, DetailInput, InputType, instanceOfSubcategoryInput, ReportingDateLabel } from '../../../model/Anomaly';
+import {
+  DangerousProductTag,
+  DescriptionLabel,
+  DetailInput,
+  InputType,
+  instanceOfSubcategoryInput,
+  ReportingDateLabel
+} from '../../../model/Anomaly';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -105,6 +112,8 @@ export class DetailsComponent implements OnInit {
       });
     }
   }
+
+  readonly isDangerousProductReport = () => this.draftReport.tags.indexOf(DangerousProductTag) > -1;
 
   getDefaultDetailInputs() {
     const detailInputs: DetailInput[] = [];
