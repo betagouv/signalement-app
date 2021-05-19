@@ -42,10 +42,10 @@
       <li class="divider dropdown-divider"></li>
       <li role="menuitem"><span class="item font-weight-bold">Utilisateurs</span></li>
       <li role="menuitem"><a [routerLink]="['admin/invitation-ccrf']" class="dropdown-item">Inviter un utilisateur DGCCRF</a></li>
+      <li class="divider dropdown-divider"></li>
+      <li role="menuitem"><a routerLink="entreprises-import" class="dropdown-item">Base de données entreprises</a></li>
     </ng-container>
 
-    <li class="divider dropdown-divider"></li>
-    <li role="menuitem" *appRole="[roles.Admin];"><a routerLink="entreprises-import" class="dropdown-item">Base de données entreprises</a></li>
     <li class="divider dropdown-divider"></li>
 
     <li role="menuitem"><span class="item font-weight-bold">Gestion du compte</span></li>
