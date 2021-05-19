@@ -45,6 +45,9 @@
     </ng-container>
 
     <li class="divider dropdown-divider"></li>
+    <li role="menuitem" *appRole="[roles.Admin];"><a routerLink="entreprises-import" class="dropdown-item">Base de données entreprises</a></li>
+    <li class="divider dropdown-divider"></li>
+
     <li role="menuitem"><span class="item font-weight-bold">Gestion du compte</span></li>
     <li role="menuitem"><a [routerLink]="['abonnements']" class="dropdown-item" *appPermission="permissions.subscribeReports">Gérer mes abonnements</a></li>
     <li role="menuitem" *appRole="[roles.Pro]"><a [routerLink]="['mes-entreprises']" class="dropdown-item">Gérer mes entreprises</a></li>
