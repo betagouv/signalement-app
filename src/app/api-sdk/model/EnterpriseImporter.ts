@@ -15,3 +15,11 @@ export interface EnterpriseImporterInfos {
   etablissementImportInfo: EnterpriseImporterInfo;
   uniteLegaleInfo: EnterpriseImporterInfo;
 }
+
+export const mapEnterpriseImporterInfo = (_?: { [key in keyof EnterpriseImporterInfo]: any }): EnterpriseImporterInfo => _
+  ? ({
+    ..._,
+    startedAt: new Date(_.startedAt),
+    endedAt: new Date(_.endedAt),
+  })
+  : undefined;

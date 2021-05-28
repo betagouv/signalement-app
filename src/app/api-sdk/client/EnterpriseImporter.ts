@@ -1,5 +1,5 @@
 import { ApiClientApi } from '../ApiClient';
-import { EnterpriseImporterInfos } from '../model/EnterpriseImporter';
+import { EnterpriseImporterInfos, mapEnterpriseImporterInfo } from '../model/EnterpriseImporter';
 
 export class EnterpriseImporter {
 
@@ -17,4 +17,8 @@ export class EnterpriseImporter {
   readonly cancelUniteLegaleFile = () => this.client.post<void>(`enterprises-sync/cancel-unitelegale`);
 
   readonly getInfo = () => this.client.get<EnterpriseImporterInfos>(`enterprises-sync/info`)
+    .then(_ => ({
+      etablissementImportInfo: mapEnterpriseImporterInfo(_.etablissementImportInfo),
+      uniteLegaleInfo: mapEnterpriseImporterInfo(_.uniteLegaleInfo),
+    }))
 }

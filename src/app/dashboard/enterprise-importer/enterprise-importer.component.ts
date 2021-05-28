@@ -9,6 +9,7 @@ import {
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { EnterpriseImporterInfo } from '../../api-sdk/model/EnterpriseImporter';
 import { of, timer } from 'rxjs';
+import { formatDistance } from 'date-fns';
 
 
 @Component({
@@ -30,6 +31,9 @@ import { of, timer } from 'rxjs';
         <div class="-hint">
           <span class="font-weight-bold">{{percent| number:'1.0-0'}}%</span>
           <span>{{info.linesDone | number}} <span class="txt-secondary">/ {{info.linesCount | number}}</span></span>
+        </div>
+        <div class="-hint">
+          {{elapsedTime()}}
         </div>
       </ng-container>
       <div *ngIf="info?.endedAt">
@@ -57,6 +61,16 @@ export class EnterpriseImporterFileComponent {
   get percent() {
     return (this.info.linesDone / this.info.linesCount * 100) || 0;
   }
+
+  elapsedTime = () => {
+    console.log(this.info.startedAt);
+    try {
+      console.log(formatDistance(this.info.startedAt, new Date(), { addSuffix: true }));
+      return formatDistance(this.info.startedAt, new Date(), { addSuffix: true });
+    } catch (e) {
+      return 'Date invalide: ' + this.info.startedAt;
+    }
+  };
 
 }
 
