@@ -18,11 +18,18 @@
             - title: Autre
         - title: Les prix ne sont pas affichés dans la voiture
           example: Une affiche avec les prix et les suppléments doit être visible dans la voiture.
+          tags:
+            - ReponseConso
         - title: Refus de prendre votre carte bancaire
           example: Tous les taxis ont obligation de prendre la carte bancaire quel que soit le montant.
+          tags:
+            - ReponseConso
         - title: Refus de me donner une note (reçu, facture)
+          tags:
+            - ReponseConso
         - title: Le prix payé ne me convient pas
           tags:
+            - ReponseConso
             - Litige contractuel
           subcategories:
             - title: Je pense que le trajet n'était pas le plus direct
@@ -83,6 +90,8 @@
                   rank: 4
                   type: TEXT
             - title: Le prix au compteur était élevé dès la prise en charge
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Date de la course
                   rank: 1
@@ -102,6 +111,8 @@
                   type: TEXT
               fileLabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
             - title: Le taxi a fait un tarif de nuit / week-end alors que ce n'était pas le cas
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Date de la course
                   rank: 1
@@ -126,6 +137,8 @@
                   type: TEXT
               fileLabel: Joindre si possible la note (facture) pour appuyer votre signalement.
             - title: Le chauffeur n'a pas appliqué le prix prévu pour le forfait
+              tags:
+                - ReponseConso
               example: Dans certaines villes, il existe des forfaits (c'est-à-dire un prix unique connu à l'avance) pour faire les trajets vers ou depuis un aéroport. Le prix de ces forfaits est fixe.
               detailInputs:
                 - label: Date de la course
@@ -151,6 +164,8 @@
         - title: Autre
           subcategories:
             - title: Refus de prendre les chèques
+              tags:
+                - ReponseConso
               subcategoriesTitle: Etait-ce indiqué sur la voiture ?
               subcategories:
                 - title: Oui
@@ -222,6 +237,8 @@
               type: TEXTAREA
           fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course...)
         - title: Le prix payé n'est pas celui annoncé au départ
+          tags:
+            - ReponseConso
           detailInputs:
             - label: Date de la course
               rank: 1
@@ -264,10 +281,13 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
+          tags:
+            - ReponseConso
           example: 'Exemple: sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, supplément imprévu"
           tags:
+            - ReponseConso
             - Litige contractuel
           detailInputs:
             - label: Date du constat
@@ -289,6 +309,7 @@
     - title: Informations concernant le logement / Publicité
       example: "Exemple : publicité trompeuse, absence d'information"
       tags:
+        - ReponseConso
         - Litige contractuel
       subcategories:
         - title: Absence d'information
@@ -326,6 +347,8 @@
         - Litige contractuel
       subcategories:
         - title: L'hébergement ne correspond pas à ce qui m'a été vendu
+          tags:
+            - ReponseConso
           example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'a été demandé"
         - title: Problème d'hygiène ou de propreté
           example: 'Exemple : chambre sale, sauna sale, puces de lit'
@@ -358,6 +381,8 @@
     - title: Autre
       subcategories:
         - title: On a refusé de me donner une chambre
+          tags:
+            - ReponseConso
           example: "Exemple : Refus pour un motif discriminatoire, au motif d'enfant"
           detailInputs:
             - label: Date du problème
@@ -396,10 +421,13 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
+          tags:
+            - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
+            - ReponseConso
             - Litige contractuel
         - title: Autre
           tags:
@@ -407,6 +435,7 @@
     - title: Publicité
       example: "Exemple : publicité trompeuse, absence d'information"
       tags:
+        - ReponseConso
         - Litige contractuel
       subcategories:
         - title: Absence d'information
@@ -443,6 +472,8 @@
         - Litige contractuel
       subcategories:
         - title: La prestation ne correspond pas à ce que l'agence m'a vendu
+          tags:
+            - ReponseConso
           example: "Exemple : une excursion était prévue dans le voyage et elle a été annulée sans motifs"
         - title: Autre
     - title: Annulation / remboursement
@@ -460,6 +491,8 @@
         - title: Problème d'accessibilité de l'agence
           information: !!import/single ../common/info/accessibilite.yml
         - title: Autre
+          tags:
+            - ReponseConso
 - title: Transports en commun
   example: 'Exemple : avion, train'
   subcategories:
@@ -472,13 +505,17 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
+          tags:
+            - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
+            - ReponseConso
             - Litige contractuel
         - title: Autre
           tags:
+            - ReponseConso
             - Litige contractuel
     - title: Publicité
       example: "Exemple : publicité trompeuse, absence d'information"
@@ -486,6 +523,8 @@
         - Litige contractuel
       subcategories:
         - title: Absence d'information
+          tags:
+            - ReponseConso
         - title: Information mensongère ou trompeuse
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
@@ -563,17 +602,22 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
+          tags:
+            - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
+            - ReponseConso
             - Litige contractuel
         - title: Autre
           tags:
+            - ReponseConso
             - Litige contractuel
     - title: Publicité
       example: "Exemple : publicité trompeuse, absence d'information"
       tags:
+        - ReponseConso
         - Litige contractuel
       subcategories:
         - title: Absence d'information
@@ -611,6 +655,8 @@
         - Litige contractuel
       subcategories:
         - title: Clause abusive
+          tags:
+          - ReponseConso
         - title: Contrat non respecté
     - title: Autre
       tags:
@@ -618,12 +664,18 @@
       subcategories:
         - title: Equipement
         - title: Compléments alimentaires
+          tags:
+            - ReponseConso
         - title: Problème d'hygiène
+          tags:
+            - ReponseConso
         - title: Problème d'accessibilité
           information: !!import/single ../common/info/accessibilite.yml
         - title: Le personnel n'était pas aimable
           information: !!import/single ../common/info/amabilite.yml
         - title: Autre
+          tags:
+            - ReponseConso
 - title: Divertissement culturel
   example: 'Exemple : musée, cinéma, concert'
   subcategories:
@@ -636,17 +688,22 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
+          tags:
+            - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
           example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
+            - ReponseConso
             - Litige contractuel
         - title: Autre
           tags:
+            - ReponseConso
             - Litige contractuel
     - title: Publicité
       example: "Exemple : publicité mensongère, absence d'information"
       tags:
+        - ReponseConso
         - Litige contractuel
       subcategories:
         - title: Absence d'information
@@ -703,10 +760,12 @@
               fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Autre
           tags:
+            - ReponseConso
             - Litige contractuel
 - title: Autre
   tags:
     - Litige contractuel
+    - ReponseConso
   subcategories:
     - title: Abonnement
       example: "Exemple : abonnement magazine"
