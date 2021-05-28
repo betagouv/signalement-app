@@ -36,6 +36,7 @@ export enum CompanyKinds {
 }
 
 export interface Category {
+  id: string;
   subcategoriesTitle?: string;
   subcategories?: Subcategory[];
   companyKind?: string;

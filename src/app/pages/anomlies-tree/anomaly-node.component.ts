@@ -22,6 +22,7 @@ import { Animations } from '../../utils/animations';
         <div>
           <div class="-title">
             {{title}}
+            <span class="txt-secondary">{{anomaly.id}}</span>
             &nbsp;
             <app-badge *ngFor="let tag of tags">{{tag}}</app-badge>
           </div>
