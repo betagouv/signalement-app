@@ -15,11 +15,15 @@
                   information: !!import/single ../common/info/tel.yml
                 - title: Non, j'ai reçu seulement un sms
                   tags:
+                    - ReponseConso
                     - Litige contractuel
                 - title: Non, je n'ai rien reçu du tout
                   tags:
+                    - ReponseConso
                     - Litige contractuel
             - title: Modification concernant les sms, mms ou appels
+              tags:
+                - ReponseConso
               example: 'Exemple : augmentation du nombre d''heures, augmentation du nombre de sms...'
               subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
               subcategories:
@@ -36,6 +40,8 @@
               subcategoriesTitle: Quel est le type d'option ?
               subcategories:
                 - title: option liée à la data (Go), aux appels, aux sms, au débit, à la présentation du numéro
+                  tags:
+                    - ReponseConso
                   subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir ?
                   subcategories:
                     - title: Oui, j'ai été prévenu par email ou courrier
@@ -80,12 +86,15 @@
                       optionnal: true
             - title: Le lien pour refuser l'augmentation de mon forfait ne fonctionne pas
               tags:
+                - ReponseConso
                 - Litige contractuel
         - title: L'offre / la promotion que je devais avoir n'a pas été appliquée
           tags:
+            - ReponseConso
             - Litige contractuel
         - title: Autre problème de facturation ou de contrat
           tags:
+            - ReponseConso
             - Litige contractuel
           subcategories:
             - title: Utilisation de mon forfait à l'étranger
@@ -107,6 +116,8 @@
       example: 'Exemple : spams, appel incessant, rappel vers un numéro payant'
       subcategories:
         - title: Je reçois des appels indésirables alors que je suis sur BlocTel
+          tags:
+            - ReponseConso
         - title: J'ai répondu à un sms ou j'ai rappelé un numéro qui était payant sans le savoir
           information:
             content: Vous devez rentrer le numéro en question et la date sur le site <a href="https://a.surmafacture.fr" target="_blank" /> surmafacture.fr </a>
@@ -121,6 +132,7 @@
         - title: J'ai eu un problème de démarchage téléphonique
           companyKind: PHONE
           tags:
+            - ReponseConso
             - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
@@ -139,11 +151,16 @@
     - title: Autre
       example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
       tags:
+        - ReponseConso
         - Litige contractuel
       subcategories:
         - title: Qualité du service client
           example: 'Exemple : pas de réponse du service client, service client payant'
         - title: Téléphone acheté avec le forfait
 - title: Abonnement télévision
+  tags:
+    - ReponseConso
 - title: Abonnement presse
+  tags:
+    - ReponseConso
 - title: Autre
