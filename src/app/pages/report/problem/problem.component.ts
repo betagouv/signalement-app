@@ -117,7 +117,8 @@ export class ProblemComponent implements OnInit {
     });
   }
 
-  readonly displayReponseConso = () => Math.random() * 100 < environment.reponseConsoDisplayRate || this.draftReport.forwardToReponseConso;
+  private readonly shouldDisplayReponseConso = Math.random() * 100 < environment.reponseConsoDisplayRate;
+  readonly displayReponseConso = () => this.draftReport.forwardToReponseConso || this.shouldDisplayReponseConso;
 
   readonly step = Step.Problem;
 
@@ -143,7 +144,7 @@ export class ProblemComponent implements OnInit {
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
 
   readonly showReponseConsoQuestion = () => {
-    return this.displayReponseConso
+    return this.displayReponseConso()
       && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
       // && !this.isContractualDispute()
       && this.draftReport.employeeConsumer === false;
