@@ -135,7 +135,7 @@ export class ProblemComponent implements OnInit {
       value: false
     },
     {
-      title: 'Je souhaite contacter la répresion des fraudes pour obtenir des informations sur mon problème.',
+      title: 'Je souhaite contacter la répression des fraudes pour obtenir des informations sur mon problème.',
       value: true
     }
   ];
@@ -145,7 +145,7 @@ export class ProblemComponent implements OnInit {
   readonly showReponseConsoQuestion = () => {
     return this.displayReponseConso
       && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
-      && !this.isContractualDispute()
+      // && !this.isContractualDispute()
       && this.draftReport.employeeConsumer === false;
   };
 
