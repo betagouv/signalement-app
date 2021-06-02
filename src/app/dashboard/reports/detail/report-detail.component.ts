@@ -128,7 +128,7 @@ export class ReportDetailComponent implements OnInit {
       email: this.emailCtrl
     });
 
-    if (this.report.isTransmittableToPro) {
+    if (!this.report.contactAgreement) {
       this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
     }
   }
