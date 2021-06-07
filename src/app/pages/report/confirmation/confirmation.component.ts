@@ -9,6 +9,7 @@ import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-confirmation',
@@ -63,20 +64,21 @@ export class ConfirmationComponent implements OnInit {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
       this.reportService.createReport(this.draftReport)
-        .subscribe(
-        result => {
+        .subscribe(report => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendSuccess);
           this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
-          this.reportRouterService.routeForward(this.step);
-        },
-        error => {
+          if (this.draftReport.forwardToReponseConso) {
+            window.location.href = environment.reponseConsoForwardUrl(report.id);
+          } else {
+            this.reportRouterService.routeForward(this.step);
+          }
+        }, error => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendFail);
           this.loadingError = true;
           throw error;
         });
-
     }
   }
 

@@ -28,7 +28,7 @@ export class ReportService {
   private _currentReportFilter: ReportFilter = {};
 
   createReport(draftReport: DraftReport) {
-    return this.http.post(
+    return this.http.post<Report>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
       {
         category: draftReport.category,
