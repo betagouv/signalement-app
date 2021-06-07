@@ -12,12 +12,20 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix non affiché
+          tags:
+            - ReponseConso
         - title: Prix final non conforme au prix annoncé
+          tags:
+            - ReponseConso
     - title: Publicité et pratique du professionnel
       example: "Exemple : information trompeuse ou mensongère, absence d'information, contrainte"
       subcategories:
         - title: Absence d'information ou information incomplète
+          tags:
+            - ReponseConso
         - title: Information mensongère ou trompeuse
+          tags:
+            - ReponseConso
           detailInputs:
             - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
               rank: 1
@@ -81,7 +89,11 @@
               <br />Par contre, les prix doivent être clairement indiqués pour que vous soyez au courant avant d'acheter ou de commander.
             outOfScope: true
         - title: Prix final non conforme au prix annoncé
+          tags:
+            - ReponseConso
         - title: Prix non affiché
+          tags:
+            - ReponseConso
     - title: Publicité et pratique du professionnel
       example: "Exemple : absence d'information, information trompeuse ou mensongère, démarchage"
       tags:
@@ -92,12 +104,17 @@
             - Litige contractuel
           subcategories:
             - title: Caractéristiques techniques des produits non précisées
+              tags:
+                - ReponseConso
             - title: Prix indiqué de manière globale et non détaillée
+              tags:
+                - ReponseConso
             - title: Date de livraison des produits ou réalisation des travaux non précisée
             - title: Autre
         - title: Démarchage à domicile
           companyKind: LOCATION
           tags:
+            - ReponseConso
             - Démarchage à domicile
           detailInputs:
             - label: Que s'est-il passé ?
@@ -120,6 +137,7 @@
         - title: Démarchage téléphonique
           companyKind: PHONE
           tags:
+            - ReponseConso
             - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
@@ -138,6 +156,8 @@
         - title: Information mensongère ou trompeuse
           subcategories:
             - title: Mise en avant d'un label ou d'un signe de qualité non ou plus détenu
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
                   rank: 1
@@ -159,6 +179,8 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Référence abusive à des partenariats avec l'État ou de grandes entreprises d'énergie
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
                   rank: 1
@@ -180,6 +202,8 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Utilisation de termes laissant croire qu'il s'agit d'une structure publique
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
                   rank: 1
@@ -201,6 +225,8 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Usurpation d'identité de la part du professionnel
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
                   rank: 1
@@ -222,6 +248,8 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Présentation des travaux comme étant obligatoires
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
                   rank: 1
@@ -243,6 +271,8 @@
                   type: TIMESLOT
                   optionnal: true
             - title: Promesse d'économies d'énergie surestimées
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Qu'est-ce qui est trompeur ou mensonger&#160;?
                   rank: 1
@@ -355,6 +385,7 @@
         - title: Clause abusive
           example: Vous souhaitez dénoncer une clause qui vous est particulièrement défavorable
           tags:
+            - ReponseConso
             - Litige contractuel
         - title: Autre
           tags:
@@ -367,6 +398,8 @@
           example: Crédit affecté au contrat de travaux / rénovation
           subcategories:
             - title: Absence d'informations
+              tags:
+                - ReponseConso
               subcategories:
                 - title: Avant la souscription
                 - title: Vous ne saviez pas que vous vous engagiez
