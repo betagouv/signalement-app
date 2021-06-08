@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CguComponent } from './cgu.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentsModule } from '../../../components/components.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('CguComponent', () => {
   let component: CguComponent;
@@ -13,7 +15,9 @@ describe('CguComponent', () => {
       declarations: [ CguComponent ],
       imports: [
         RouterTestingModule,
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();
