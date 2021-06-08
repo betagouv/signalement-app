@@ -18,6 +18,8 @@ import { ComponentsModule } from '../../../components/components.module';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { genReport } from '../../../../../test/fixtures.spec';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('ReportDetailComponent', () => {
 
@@ -55,6 +57,8 @@ describe('ReportDetailComponent', () => {
         RouterTestingModule,
         ComponentsModule,
         PipesModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();

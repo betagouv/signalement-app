@@ -4,6 +4,7 @@ import { RetractationComponent } from './retractation.component';
 import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from '../../../components/components.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RetractationComponent', () => {
   let component: RetractationComponent;
@@ -15,7 +16,8 @@ describe('RetractationComponent', () => {
       imports: [
         FormsModule,
         BsDatepickerModule.forRoot(),
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
       ],
     })
     .compileComponents();

@@ -5,6 +5,8 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentsModule } from '../../../components/components.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('ConsumerReviewComponent', () => {
   let component: ConsumerReviewComponent;
@@ -20,6 +22,8 @@ describe('ConsumerReviewComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();
