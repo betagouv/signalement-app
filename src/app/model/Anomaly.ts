@@ -128,7 +128,7 @@ export const collectTags = (data: Category | Subcategory | Anomaly): string[] =>
   return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => collectTags(s)));
 };
 
-export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly), []);
+export const enrichAnomaly = (_: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(_), []);
 
 export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput => {
   return !!(_ as SubcategoryInput)?.detailInputs;

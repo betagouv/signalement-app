@@ -105,16 +105,12 @@ export class DraftReport {
     return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
 
-  get sendToEntreprise() {
-    return !this.employeeConsumer && !this.forwardToReponseConso;
-  }
-
   get isVendor() {
     return this.tags?.indexOf(DangerousProductTag) !== -1;
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
+    return !this.employeeConsumer && !this.forwardToReponseConso && this.tags?.indexOf(DangerousProductTag) === -1;
   }
 }
 
