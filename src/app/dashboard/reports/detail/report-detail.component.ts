@@ -128,7 +128,7 @@ export class ReportDetailComponent implements OnInit {
       email: this.emailCtrl
     });
 
-    if (!this.report.employeeConsumer) {
+    if (!this.report.contactAgreement) {
       this.consumerForm.addControl('contactAgreement', this.contactAgreementCtrl);
     }
   }

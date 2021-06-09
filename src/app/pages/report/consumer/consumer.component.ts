@@ -6,6 +6,7 @@ import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-consumer',
@@ -25,10 +26,15 @@ export class ConsumerComponent implements OnInit {
 
   showErrors: boolean;
 
-  constructor(public formBuilder: FormBuilder,
-              private reportStorageService: ReportStorageService,
-              private reportRouterService: ReportRouterService,
-              private analyticsService: AnalyticsService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    public fb: FormBuilder,
+    private reportStorageService: ReportStorageService,
+    private reportRouterService: ReportRouterService,
+    private analyticsService: AnalyticsService) {
+  }
+
+  isEmailValid?: boolean;
 
   ngOnInit() {
     this.step = Step.Consumer;
@@ -45,22 +51,22 @@ export class ConsumerComponent implements OnInit {
   }
 
   initConsumerForm() {
-    this.firstNameCtrl = this.formBuilder.control(this.draftReport.consumer ? this.draftReport.consumer.firstName : '', Validators.required);
-    this.lastNameCtrl = this.formBuilder.control(this.draftReport.consumer ? this.draftReport.consumer.lastName : '', Validators.required);
-    this.emailCtrl = this.formBuilder.control(
+    this.firstNameCtrl = this.fb.control(this.draftReport.consumer ? this.draftReport.consumer.firstName : '', Validators.required);
+    this.lastNameCtrl = this.fb.control(this.draftReport.consumer ? this.draftReport.consumer.lastName : '', Validators.required);
+    this.emailCtrl = this.fb.control(
       this.draftReport.consumer ? this.draftReport.consumer.email : '', [Validators.required, Validators.email]
     );
 
-    this.consumerForm = this.formBuilder.group({
+    this.consumerForm = this.fb.group({
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
       email: this.emailCtrl
     });
 
-    if (!this.draftReport.sendToEntreprise) {
-      this.contactAgreementCtrl = this.formBuilder.control(false);
+    if (!this.draftReport.isTransmittableToPro) {
+      this.contactAgreementCtrl = this.fb.control(false);
     } else {
-      this.contactAgreementCtrl = this.formBuilder.control(
+      this.contactAgreementCtrl = this.fb.control(
         this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.isContractualDispute ? true : undefined,
         Validators.required
       );
@@ -68,7 +74,53 @@ export class ConsumerComponent implements OnInit {
     }
   }
 
-  submitConsumerForm() {
+  readonly codePattern = /\d{6}/;
+
+  confirmationCodeErrorMsg?: string;
+
+  readonly confirmationCodeCtrl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(this.codePattern)
+  ]);
+
+  checkingEmail = false;
+
+  readonly checkEmail = () => {
+    this.checkingEmail = true;
+    this.authenticationService.checkConsumerEmail(this.emailCtrl.value).subscribe(valid => {
+      if (valid.valid) {
+        this.submitConsumerForm();
+      } else {
+        this.isEmailValid = valid.valid;
+      }
+    }, () => {
+    }, () => {
+      setTimeout(() => {
+        this.checkingEmail = false;
+      }, 10000);
+    });
+  };
+
+  readonly checkConfirmationCode = () => {
+    if (this.confirmationCodeCtrl.valid) {
+      if (this.codePattern.test(this.confirmationCodeCtrl.value)) {
+        this.confirmationCodeErrorMsg = undefined;
+        this.authenticationService.validateConsumerEmail(this.emailCtrl.value, this.confirmationCodeCtrl.value).subscribe(res => {
+          if (res.valid) {
+            this.submitConsumerForm();
+          } else if (res.reason === 'TOO_MANY_ATTEMPTS') {
+            this.confirmationCodeErrorMsg = 'Code expiré.';
+          } else {
+            this.confirmationCodeErrorMsg = 'Code incorrect. Veuillez réessayer.';
+          }
+        });
+      }
+    } else {
+      this.confirmationCodeErrorMsg = 'Code incorrect. Veuillez réessayer.';
+    }
+  };
+
+  readonly submitConsumerForm = () => {
     if (!this.consumerForm.valid) {
       this.showErrors = true;
     } else {

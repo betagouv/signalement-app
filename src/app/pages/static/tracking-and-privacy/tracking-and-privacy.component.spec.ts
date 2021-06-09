@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TrackingAndPrivacyComponent } from './tracking-and-privacy.component';
 import { ComponentsModule } from '../../../components/components.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('TrackingAndPrivacyComponent', () => {
   let component: TrackingAndPrivacyComponent;
@@ -11,7 +13,9 @@ describe('TrackingAndPrivacyComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ TrackingAndPrivacyComponent ],
       imports: [
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();

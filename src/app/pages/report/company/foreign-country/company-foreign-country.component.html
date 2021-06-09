@@ -1,7 +1,7 @@
 <form [formGroup]="foreignForm" (submit)="submitForeignForm()" id="foreignForm" *ngIf="foreignForm" #foreignFormElt>
   <ng-container *ngIf="!forceForeign">
     <h2 class="mb-4 font-weight-bold">
-      Est-ce que l'entreprise est en France ?
+      Est-ce que {{isVendor ? 'le vendeur' : 'l\'entreprise'}} est en France ?
     </h2>
 
     <div [ngClass]="rendererService.getRadioContainerClass(isForeignCtrl.value, isForeignValues.false)">
@@ -21,20 +21,20 @@
           <input type="radio" [formControl]="isForeignCtrl" name="isForeignCompany" [value]="isForeignValues.true" id="foreignCompany" (click)="rendererService.scrollToElement(foreignInputsElt)"/>
         </div>
         <div class="col">
-          <label for="foreignCompany" class="label-inline pointer">Non, elle est à l'étranger</label>
+          <label for="foreignCompany" class="label-inline pointer">Non, {{isVendor ? 'il' : 'elle'}} est à l'étranger</label>
           <div class="note">
             <a data-toggle="collapse" href="#collapseHow" id="collapseHow-toggle" aria-expanded="false" aria-controls="collapseHow">
-              Comment retrouver le pays d'une entreprise ?
+              Comment retrouver le pays {{isVendor ? 'd\'un vendeur' : 'd\'une entreprise'}} ?
             </a>
             <div class="collapse" id="collapseHow" aria-labelledby="collapseHow-toggle" role="region">
-              Rendez-vous sur le site internet de l'entreprise, dans l'une des rubriques suivantes :
+              Rendez-vous sur le site internet {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}, dans l'une des rubriques suivantes :
               <ul>
                 <li>les mentions légales</li>
                 <li>les Conditions Générales de Vente (CGV)</li>
                 <li>les conditions d'utilisation</li>
               </ul>
               Dans la plupart des cas, vous trouverez l'accès à ces rubriques tout en bas de la page d'accueil du site.
-              L'adresse de l'entreprise devrait être indiquée dans l'une de ces rubriques.
+              L'adresse {{isVendor ? 'du vendeur' : 'de l\'entreprise'}} devrait être indiquée dans l'une de ces rubriques.
               <br/> Attention, il est possible que deux sociétés différentes soient mentionnées sur ces pages. L'une d'elle correspond à l'hébergeur du site. Ce n'est pas l'adresse de cet hébergeur que l'on cherche.
             </div>
           </div>
@@ -64,7 +64,7 @@
 
       <div class="form__group mt-4">
         <label for="nameInput" [class]="foreignForm.hasError('required') && nameCtrl.value === undefined ? 'error' : ''">
-          Nom ou enseigne de l'entreprise signalée (obligatoire)
+          Nom ou enseigne {{isVendor ? 'du vendeur signalé' : 'de l\'entreprise signalée'}} (obligatoire)
         </label>
         <input type="text" class="form-control" [formControl]="nameCtrl" id="nameInput" placeholder="ex : boulangerie Petit Jean"/>
       </div>
@@ -79,9 +79,23 @@
         </div>
       </div>
 
+      <div class="form__group">
+        <label for="postalCodeInput-1" [class]="showErrors && postalCodeCtrl.errors ? 'error' : ''">
+          Votre code postal (obligatoire)
+        </label>
+        <div class="note mb-1">
+          SignalConso en a besoin pour alerter le bon service.
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <input type="text" class="form-control" [formControl]="postalCodeCtrl" id="postalCodeInput-1" placeholder="ex : 41110" aria-describedby="postalCode-description"/>
+          </div>
+        </div>
+      </div>
+
       <div class="notification error mt-4" *ngIf="showErrors && foreignForm.invalid">
         <div *ngIf="foreignForm.hasError('required')">
-          Veuillez renseigner le nom et le pays de l'entreprise.
+          Veuillez renseigner le nom et le pays {{isVendor ? 'du vendeur' : 'de l\'entreprise'}}.
         </div>
       </div>
 
@@ -91,24 +105,44 @@
         Continuer
       </button>
       <div class="notification info mt-5">
-        Si vous ne parvenez pas à identifier l'entreprise, vous pouvez continuer votre signalement.
-        <br />Il ne sera pas transmis à l'entreprise, mais les enquêteurs de la répression des fraudes en seront informés.
+        Si vous ne parvenez pas à identifier {{isVendor ? 'le vendeur' : 'l\'entreprise'}}, vous pouvez continuer votre signalement.
+        <br />Il ne sera pas transmis {{isVendor ? 'au vendeur' : 'à l\'entreprise'}}, mais les enquêteurs de la répression des fraudes en seront informés.
         <br />Selon le pays, vous pourrez être redirigé à la fin de votre signalement vers les autorités compétentes.
       </div>
     </ng-container>
+
+    <ng-container *ngIf="isForeignCtrl.value === isForeignValues.false || isForeignCtrl.value === isForeignValues.unknown">
+
+      <hr/>
+
+      <h2 class="mb-4 font-weight-bold">
+        Pouvez-vous préciser ?
+      </h2>
+
+      <div class="form__group">
+        <label for="postalCodeInput" [class]="showErrors && postalCodeCtrl.errors ? 'error' : ''">
+          Votre code postal (obligatoire)
+        </label>
+        <div class="note mb-1">
+          SignalConso en a besoin pour alerter le bon service.
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <input type="text" class="form-control" [formControl]="postalCodeCtrl" id="postalCodeInput" placeholder="ex : 41110" aria-describedby="postalCode-description"/>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <button type="submit" class="btn btn-lg btn-primary">
+        Continuer
+      </button>
+      <div class="notification info mt-5">
+        Si vous ne parvenez pas à identifier {{isVendor ? 'le vendeur' : 'l\'entreprise'}}, vous pouvez continuer votre signalement.
+        <br />Il ne sera pas transmis {{isVendor ? 'au vendeur' : 'à l\'entreprise'}}, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
+        <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
+      </div>
+    </ng-container>
   </div>
-
-  <ng-container *ngIf="isForeignCtrl.value === isForeignValues.false || isForeignCtrl.value === isForeignValues.unknown">
-
-    <hr/>
-
-    <button type="submit" class="btn btn-lg btn-primary">
-      Continuer
-    </button>
-    <div class="notification info mt-5">
-      Si vous ne parvenez pas à identifier l'entreprise, vous pouvez continuer votre signalement.
-      <br />Il ne sera pas transmis à l'entreprise, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
-      <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
-    </div>
-  </ng-container>
 </form>

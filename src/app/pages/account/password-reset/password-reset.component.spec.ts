@@ -8,6 +8,8 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('ResetPasswordComponent', () => {
   let component: PasswordResetComponent;
@@ -23,7 +25,9 @@ describe('ResetPasswordComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         NgxLoadingModule,
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

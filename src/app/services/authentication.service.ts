@@ -5,7 +5,7 @@ import { Api, AuthUserStorageKey, ServiceUtils, TokenInfoStorageKey } from './co
 import { map, mergeMap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -83,6 +83,17 @@ export class AuthenticationService {
         map((authUser: AuthUser) => authUser && !!authUser.token && !this.jwtHelperService.isTokenExpired(authUser.token))
       );
   }
+
+  readonly checkConsumerEmail = (email: string) => {
+    return this.http.post<{valid: boolean}>(this.serviceUtils.getUrl(Api.Report, ['api', 'email', 'check']), { email });
+  };
+
+  readonly validateConsumerEmail = (email: string, confirmationCode: string) => {
+    return this.http.post<{valid: boolean, reason?: 'TOO_MANY_ATTEMPTS' | 'INVALID_CODE'}>(
+      this.serviceUtils.getUrl(Api.Report, ['api', 'email', 'validate']),
+      { email, confirmationCode }
+    );
+  };
 
   forgotPassword(login: string) {
     return this.http.post(

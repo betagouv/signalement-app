@@ -3,6 +3,24 @@
   <section class="section section-white" *ngIf="draftReport">
     <div class="container max-width">
 
+      <app-alert type="info" *ngIf="isDangerousProductReport()">
+        En cas d'une urgence vitale ou importante, appelez le <b>112</b>.
+        <br/>
+        Si vous êtes blessé ou souffrant, appelez le Samu: <b>15</b>.
+        <br/>
+        Si vous subissez ou vous avez subi une agression ou des violences, appelez Police Secours: <b>17</b>.
+        <br/>
+        En cas d'incendie ou d'une fuite de gaz, appelez les pompiers: <b>18</b>.
+        <br/>
+        Si vous êtes sourd ou malentendant, contactez le <b>114</b> par visiophonie, par chat, par SMS ou par FAX.
+        <br/>
+        Ces numéros sont joignables 24H/24 et 7J/7.
+        <br/>
+        <br/>
+        Plus d'informations sur<br/>
+        <a href="https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence">https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence</a>
+      </app-alert>
+
       <div class="row notification success ml-0 md-0" *ngIf="draftReport.lastSubcategory?.detailTitle">
         <h2 [innerHTML]="draftReport.lastSubcategory.detailTitle"></h2>
       </div>
@@ -22,6 +40,7 @@
           <label [for]="getFormControlId(detailInput)" [class]="hasRequiredError(detailInput) ? 'error' : ''">
             <span [innerHTML]="detailInput.label"></span> <span *ngIf="!detailInput.optionnal"> (obligatoire)</span>
           </label>
+          <div class="note mb-1" [innerHTML]="detailInput.example" *ngIf="detailInput.example && detailInput.type !== 'TEXTAREA'"></div>
 
           <div class="row" *ngIf="detailInput.type === 'TEXT'">
             <div class="col-12">
@@ -119,11 +138,11 @@
 
           <ng-container *ngIf="detailInput.type === 'TEXTAREA'">
             <div id="details-description">
-              <div class="note mb-1" *ngIf="draftReport.sendToEntreprise">
+              <div class="note mb-1" *ngIf="draftReport.isTransmittableToPro">
                 <b>Ce texte sera lu par l'entreprise et la répression des fraudes.</b>
                 Si vous ne souhaitez pas que l'entreprise connaisse votre identité, <b>ne citez rien de personnel</b>.
               </div>
-              <div class="note" *ngIf="!draftReport.sendToEntreprise">
+              <div class="note" *ngIf="!draftReport.isTransmittableToPro">
                 <p class="m-0">
                   Ce texte sera lu <b>uniquement par la répression des fraudes.</b>
                 </p>
@@ -152,9 +171,9 @@
           <app-attachments [label]="this.draftReport.lastSubcategory?.fileLabel"
                            [uploadedFiles]="uploadedFiles"
                            [origin]="fileOrigins.Consumer"
-                           [note]="draftReport.sendToEntreprise ? 'Si vous ne souhaitez pas que l\'entreprise connaisse votre identité, <b>cachez votre nom sur vos pièces jointes.</b>' : ''">
+                           [note]="draftReport.isTransmittableToPro ? 'Si vous ne souhaitez pas que l\'entreprise connaisse votre identité, <b>cachez votre nom sur vos pièces jointes.</b>' : ''">
           </app-attachments>
-          <div class="note" *ngIf="draftReport.sendToEntreprise">
+          <div class="note" *ngIf="draftReport.isTransmittableToPro">
             <p class="m-0">Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective !</p>
             <p class="m-0">Vous ne devez pas communiquer de données dites "sensibles" (données bancaires ou médicales).</p>
           </div>

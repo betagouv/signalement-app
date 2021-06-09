@@ -1,17 +1,20 @@
 <h2 class="mb-4 font-weight-bold">
-  Informations sur le lieu
+  Pouvez-vous préciser ?
 </h2>
 
 <form [formGroup]="locationForm" (submit)="submitLocation()" id="locationForm">
-  <div class="form__group mt-4">
-    <label for="adresseInput" [class]="hasError(addressCtrl) ? 'error' : ''">Rue (obligatoire)
+  <div class="form__group mt-4" *ngIf="locationForm.contains('address')">
+    <label for="adresseInput" [class]="hasError(addressCtrl) ? 'error' : ''">Votre rue (obligatoire)
     </label>
     <input type="text" class="form-control" [formControl]="addressCtrl" id="adresseInput" placeholder="ex : rue de la mairie"/>
   </div>
   <div class="form__group">
     <label for="postalCodeInput" [class]="hasError(postalCodeCtrl) ? 'error' : ''">
-      Code postal (obligatoire)
+      Votre code postal (obligatoire)
     </label>
+    <div class="note mb-1">
+      SignalConso en a besoin pour alerter le bon service.
+    </div>
     <div class="row">
       <div class="col-12 col-sm-6">
         <input type="text" class="form-control" [formControl]="postalCodeCtrl" id="postalCodeInput" placeholder="ex : 41110" aria-describedby="postalCode-description"/>
@@ -21,13 +24,13 @@
 
   <div class="notification error mt-4" *ngIf="showErrors && locationForm.invalid">
     <div *ngIf="addressCtrl.hasError('required')">
-      Veuillez renseigner l'adresse.'
+      Veuillez renseigner votre rue.'
     </div>
     <span *ngIf="postalCodeCtrl.hasError('required')">
-      Veuillez renseigner le code postal.
+      Veuillez renseigner votre code postal.
     </span>
     <span *ngIf="postalCodeCtrl.hasError('pattern')">
-      Le code postal doit être composé de 5 chiffres.
+      Votre code postal doit être composé de 5 chiffres.
     </span>
   </div>
   <button type="submit" class="btn btn-lg btn-primary mt-4 mb-4">

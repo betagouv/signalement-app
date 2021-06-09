@@ -1,4 +1,5 @@
 import { Consumer } from './Consumer';
+import { CompanyKinds, ContractualDisputeTag, DangerousProductTag, InternetTag, Subcategory, Tag } from './Anomaly';
 import { CompanyKinds, ContractualDisputeTag, InternetTag, ReponseConsoTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
@@ -107,6 +108,14 @@ export class DraftReport {
   get sendToEntreprise() {
     return !this.employeeConsumer && !this.forwardToReponseConso;
   }
+
+  get isVendor() {
+    return this.tags?.indexOf(DangerousProductTag) !== -1;
+  }
+
+  get isTransmittableToPro() {
+    return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
+  }
 }
 
 export const isContractualDispute = (_: DraftReport) => !_.employeeConsumer && _.tags.indexOf(ContractualDisputeTag) !== -1;
@@ -132,8 +141,13 @@ export class Report {
   get consumerUploadedFiles() {
     return this.uploadedFiles ? this.uploadedFiles.filter(file => file.origin === FileOrigin.Consumer) : [];
   }
+
   get professionalUploadedFiles() {
     return this.uploadedFiles ? this.uploadedFiles.filter(file => file.origin === FileOrigin.Professional) : [];
+  }
+
+  get isTransmittableToPro() {
+    return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
   }
 }
 

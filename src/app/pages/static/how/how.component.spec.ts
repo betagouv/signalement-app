@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HowComponent } from './how.component';
 import { ComponentsModule } from '../../../components/components.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('HowComponent', () => {
   let component: HowComponent;
@@ -11,7 +13,9 @@ describe('HowComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HowComponent ],
       imports: [
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();

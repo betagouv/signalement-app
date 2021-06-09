@@ -19,8 +19,7 @@ const data = {
       'redirectCategory': 'TNOIR',
       'filteredCategories': [
         'CR',
-        'MAG',
-        'SIGN'
+        'MAG'
       ],
       'message': 'Vous pensez que l\'entreprise emploie des gens au noir?'
     }

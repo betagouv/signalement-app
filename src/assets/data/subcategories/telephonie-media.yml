@@ -1,15 +1,15 @@
 - title: Téléphonie / internet
   subcategories:
-    - title: 'Mon forfait : prix, contrat et facture'
-      example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
+    - title: 'Mon forfait : prix, contrat et facture'
+      example: 'Exemple : mon forfait a été augmenté, je ne suis pas d''accord avec ma facture'
       subcategories:
         - title: Le prix de mon forfait a été augmenté (ou va être augmenté)
-          example: "Exemple : ajout automatique d'une option payante, augmentation du nombre d'heures, augmentation des données disponibles..."
-          subcategoriesTitle: Pour quelle raison votre forfait a été augmenté (ou va être augmenté) ?
+          example: "Exemple : ajout automatique d'une option payante, augmentation du nombre d'heures, augmentation des données disponibles..."
+          subcategoriesTitle: Pour quelle raison votre forfait a été augmenté (ou va être augmenté) ?
           subcategories:
             - title: Augmentation du débit ou des données disponibles
-              example: 'Exemple : passage de 20 Go à 40 Go pour 5 euros de plus'
-              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
+              example: 'Exemple : passage de 20 Go à 40 Go pour 5 euros de plus'
+              subcategoriesTitle: Avez-vous reçu un email ou un courrier pour vous prévenir (un mois avant) ?
               subcategories:
                 - title: Oui, j'ai été prévenu par email ou courrier
                   information: !!import/single ../common/info/tel.yml
@@ -36,8 +36,8 @@
                   tags:
                     - Litige contractuel
             - title: Rajout d'une option payante
-              example: 'Exemple : chaine télé supplémentaire, option cyber-sécurité, option livre audio, option musique...'
-              subcategoriesTitle: Quel est le type d'option ?
+              example: 'Exemple : chaine télé supplémentaire, option cyber-sécurité, option livre audio, option musique...'
+              subcategoriesTitle: Quel est le type d'option ?
               subcategories:
                 - title: option liée à la data (Go), aux appels, aux sms, au débit, à la présentation du numéro
                   tags:
@@ -53,7 +53,7 @@
                         - label: Date du début de l'option (vous pouvez préciser le premier mois facturé)
                           rank: 1
                           type: DATE
-                        - label: Quel est le nom de cette option ?
+                        - label: Quel est le nom de cette option ?
                           rank: 2
                           type: TEXT
                           placeholder: "Indiquez l'intitulé figurant la facture"
@@ -61,17 +61,17 @@
                   tags:
                     - Litige contractuel
                   detailInputs:
-                    - label: À partir de quand cette option va-t-elle être payante ?
+                    - label: À partir de quand cette option va-t-elle être payante ?
                       rank: 1
                       type: DATE
-                    - label: Quel est le nom de cette option ?
+                    - label: Quel est le nom de cette option ?
                       rank: 2
                       type: TEXT
                       placeholder: "Indiquez l'intitulé figurant sur l'email ou la facture"
-                    - label: Quel est son prix ?
+                    - label: Quel est son prix ?
                       rank: 3
                       type: TEXT
-                    - label: Comment avez-vous été prévenu de cette option ?
+                    - label: Comment avez-vous été prévenu de cette option ?
                       rank: 4
                       type: RADIO
                       options:
@@ -80,7 +80,7 @@
                         - sms
                         - message dans l'espace client
                         - "je n'ai rien reçu"
-                    - label: Si vous avez reçu un courrier / email / sms, quelle est sa date ?
+                    - label: Si vous avez reçu un courrier / email / sms, quelle est sa date ?
                       rank: 5
                       type: DATE
                       optionnal: true
@@ -100,7 +100,7 @@
             - title: Utilisation de mon forfait à l'étranger
             - title: Autre
     - title: Qualité du réseau
-      example: 'Exemple : je ne capte pas, je capte mal, débit faible'
+      example: 'Exemple : je ne capte pas, je capte mal, débit faible'
       information:
         title: La qualité du réseau est mauvaise
         content: Les problèmes de réseau ou d'éligibilité ne peuvent pas être signalés sur SignalConso. <br> Vous devez les signaler à l'ARCEP (Autorité de régulation des communications électroniques, des postes et de la distribution de la presse) sur leur site dédié  <a href="https://jalerte.arcep.fr/" target="_blank" /> J'alerte l'Arcep </a>
@@ -113,7 +113,7 @@
         - title: Problème avec le RIO (Relevé d'Identité Opérateur)
         - title: Mon ancien opérateur continue de me prélever
     - title: Appels, sms ou emails indésirables
-      example: 'Exemple : spams, appel incessant, rappel vers un numéro payant'
+      example: 'Exemple : spams, appel incessant, rappel vers un numéro payant'
       subcategories:
         - title: Je reçois des appels indésirables alors que je suis sur BlocTel
           tags:
@@ -149,13 +149,13 @@
               rank: 3
               type: TEXTAREA
     - title: Autre
-      example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
+      example: 'Exemple : téléphone acheté avec le forfait, service client injoignable'
       tags:
         - ReponseConso
         - Litige contractuel
       subcategories:
         - title: Qualité du service client
-          example: 'Exemple : pas de réponse du service client, service client payant'
+          example: 'Exemple : pas de réponse du service client, service client payant'
         - title: Téléphone acheté avec le forfait
 - title: Abonnement télévision
   tags:
@@ -163,4 +163,18 @@
 - title: Abonnement presse
   tags:
     - ReponseConso
+- title: Produit dangereux
+  example: 'Exemple : téléphone, accessoire'
+  tags:
+    - Produit dangereux
+  subcategories:
+    - title: Appareil électrique
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Accessoire
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Autre
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
 - title: Autre

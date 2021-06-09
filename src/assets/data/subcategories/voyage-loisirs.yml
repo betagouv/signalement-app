@@ -5,10 +5,10 @@
       example: Les taxis sont reconnaissables avec l'enseigne lumineuse sur le toit. Les voitures qui n'ont pas cette enseigne ne sont pas des "vrais" taxis.
       subcategories:
         - title: Refus de faire la course
-          example: "Exemple : le taxi refuse de vous prendre car ce n'est pas assez loin"
+          example: "Exemple : le taxi refuse de vous prendre car ce n'est pas assez loin"
           tags:
             - Litige contractuel
-          subcategoriesTitle: Pour quelle raison le chauffeur a-t-il refusé de vous prendre ?
+          subcategoriesTitle: Pour quelle raison le chauffeur a-t-il refusé de vous prendre ?
           subcategories:
             - title: Trajet trop court ou pas assez rentable
             - title: Présence de mon chien
@@ -37,13 +37,13 @@
                 - label: Date de la course
                   rank: 1
                   type: DATE
-                - label: Avez-vous demandé de prendre un itinéraire particulier en début de course ?
+                - label: Avez-vous demandé de prendre un itinéraire particulier en début de course ?
                   rank: 2
                   type: RADIO
                   options:
                     - Oui
                     - Non
-                - label: Avez-vous fait remarquer au chauffeur que le chemin vous paraissait trop long en cours de route ? Si oui, merci de préciser sa réponse.
+                - label: Avez-vous fait remarquer au chauffeur que le chemin vous paraissait trop long en cours de route ? Si oui, merci de préciser sa réponse.
                   rank: 3
                   type: RADIO
                   options:
@@ -76,17 +76,17 @@
                 - label: Date de la course
                   rank: 1
                   type: DATE
-                - label: Quel supplément avez-vous payé ?
+                - label: Quel supplément avez-vous payé ?
                   rank: 2
                   type: CHECKBOX
                   options:
                     - bagage
                     - passager supplémentaire
                     - animaux
-                - label: Combien étiez-vous de passagers (enfants compris) ?
+                - label: Combien étiez-vous de passagers (enfants compris) ?
                   rank: 3
                   type: TEXT
-                - label: Combien aviez-vous de bagages en tout ?
+                - label: Combien aviez-vous de bagages en tout ?
                   rank: 4
                   type: TEXT
             - title: Le prix au compteur était élevé dès la prise en charge
@@ -99,14 +99,14 @@
                 - label: Adresse de départ
                   rank: 2
                   type: TEXT
-                - label: Aviez-vous commandé votre taxi ?
+                - label: Aviez-vous commandé votre taxi ?
                   rank: 3
                   type: RADIO
                   options:
                     - Oui, je l'avais réservé
                     - Oui, je l'ai commandé juste avant de le prendre
                     - Non, il m'a pris en charge sur une place de taxi ou dans la rue
-                - label: Quel était le montant indiqué dès le départ ?
+                - label: Quel était le montant indiqué dès le départ ?
                   rank: 4
                   type: TEXT
               fileLabel: Joindre si possible la note (facture) de votre course pour appuyer votre signalement.
@@ -129,7 +129,7 @@
                 - label: Heure d'arrivée
                   rank: 5
                   type: TEXT
-                - label: Combien avez-vous payé ?
+                - label: Combien avez-vous payé ?
                   rank: 6
                   type: TEXT
                 - label: Notez le numéro ADS du taxi ou sa plaque d'immatriculation, si vous les connaissez.
@@ -150,10 +150,10 @@
                 - label: Adresse d'arrivée
                   rank: 3
                   type: TEXT
-                - label: Quel est normalement le prix du forfait pour votre trajet ?
+                - label: Quel est normalement le prix du forfait pour votre trajet ?
                   rank: 4
                   type: TEXT
-                - label: Combien avez-vous payé ?
+                - label: Combien avez-vous payé ?
                   rank: 5
                   type: TEXT
                 - label: Notez les éléments qui permettent d'identifier le taxi.
@@ -178,7 +178,7 @@
                     - label: Date de la course
                       rank: 1
                       type: DATE
-                    - label: Comment avez-vous réglé votre course ?
+                    - label: Comment avez-vous réglé votre course ?
                       rank: 2
                       type: TEXT
                     - label: Notez le lieu de départ et le lieu d'arrivée
@@ -193,10 +193,10 @@
               tags:
                 - Litige contractuel
               detailInputs:
-                - label: Date de la course ?
+                - label: Date de la course ?
                   rank: 1
                   type: DATE
-                - label: Montant de la course ?
+                - label: Montant de la course ?
                   rank: 2
                   type: TEXT
                 - label: Notez toute autre information utile.
@@ -220,11 +220,11 @@
             - label: Date du constat
               rank: 1
               type: DATE
-            - label: Quelle était l'offre ou la promotion annoncée ?
+            - label: Quelle était l'offre ou la promotion annoncée ?
               rank: 2
               type: TEXT
-              placeholder: "Exemple : -20% offert à la première course"
-            - label: Où avez-vous vu cette offre  ?
+              placeholder: "Exemple : -20% offert à la première course"
+            - label: Où avez-vous vu cette offre  ?
               rank: 3
               type: RADIO
               options:
@@ -232,7 +232,7 @@
                 - publicité par email
                 - publicité sur un affichage (dans le métro, sur une pancarte...)
                 - autre (à préciser)
-            - label: Quel est le problème ?
+            - label: Quel est le problème ?
               rank: 4
               type: TEXTAREA
           fileLabel: Merci de joindre tout document pouvant appuyer votre signalement (photographie de la publicité, reçu de votre course...)
@@ -243,13 +243,13 @@
             - label: Date de la course
               rank: 1
               type: DATE
-            - label: Quel était le prix annoncé au départ ?
+            - label: Quel était le prix annoncé au départ ?
               rank: 2
               type: TEXT
-            - label: Quel prix avez-vous payé ?
+            - label: Quel prix avez-vous payé ?
               rank: 3
               type: TEXT
-            - label: Le chauffeur / l'entreprise vous a-t-elle donné une raison ?
+            - label: Le chauffeur / l'entreprise vous a-t-elle donné une raison ?
               rank: 4
               type: RADIO
               options:
@@ -270,7 +270,7 @@
           - question: Que faire en cas de problème avec un "faux" taxi&#160;?
             answer: Vous devez contacter le plus rapidement possible la police ou la gendarmerie.
 - title: Hébergement
-  example: "Exemple : hôtel, camping, chambre d'hôte, location saisonnière"
+  example: "Exemple : hôtel, camping, chambre d'hôte, location saisonnière"
   subcategories:
     - title: Prix
       subcategories:
@@ -285,7 +285,7 @@
             - ReponseConso
           example: 'Exemple: sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemple : fausse réduction, supplément imprévu"
+          example: "Exemple : fausse réduction, supplément imprévu"
           tags:
             - ReponseConso
             - Litige contractuel
@@ -298,16 +298,16 @@
               rank: 2
               type: TEXT
               optionnal: true
-            - label: Quel est le problème ?
+            - label: Quel est le problème ?
               rank: 3
               type: TEXTAREA
-              placeholder: Quel était le prix initial ? Quel est le prix final ?
+              placeholder: Quel était le prix initial ? Quel est le prix final ?
           fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
         - title: Autre
           tags:
             - Litige contractuel
     - title: Informations concernant le logement / Publicité
-      example: "Exemple : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       tags:
         - ReponseConso
         - Litige contractuel
@@ -342,7 +342,7 @@
               type: TIMESLOT
               optionnal: true
     - title: Qualité de la chambre / de l'hébergement
-      example: 'Exemple : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna'
+      example: 'Exemple : hôtel sale, chambre insonorisée, pas de sauna alors que le site mentionne un sauna'
       tags:
         - Litige contractuel
       subcategories:
@@ -351,14 +351,14 @@
             - ReponseConso
           example: "Exemple : j'avais demandé une chambre avec vue sur la mer et on m'a attribué une vue côté parking, le petit-déjeuner était compris dans le prix de la nuitée or un supplément m'a été demandé"
         - title: Problème d'hygiène ou de propreté
-          example: 'Exemple : chambre sale, sauna sale, puces de lit'
+          example: 'Exemple : chambre sale, sauna sale, puces de lit'
           information:
-            title: Vous souhaitez signaler un problème d'hygiène ou de propreté d'un logement ?
+            title: Vous souhaitez signaler un problème d'hygiène ou de propreté d'un logement ?
             content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie et/ou le Service Communal d’Hygiène et de la Santé de la commune de l'hébergement.
         - title: Problème de bruit
-          example: 'Exemple : chambre bruyante, mauvaise isolation'
+          example: 'Exemple : chambre bruyante, mauvaise isolation'
           information:
-            title: Vous souhaitez signaler un problème de bruit ?
+            title: Vous souhaitez signaler un problème de bruit ?
             content: La répression des fraudes n'est pas compétente pour ces problèmes. Vous pouvez contacter la mairie de la commune de l'hébergement.
         - title: Problème d'accessibilité
           information: !!import/single ../common/info/accessibilite.yml
@@ -378,6 +378,37 @@
                 title: Les arrhes
                 content: Les sommes versées à l'hôtelier lors de la commande ne sont pas restituées (ce sont les arrhes). Vous disposez peut-être d'une assurance annulation grâce à votre carte bancaire, (notamment si vous avez payé le voyage avec une carte Gold ou Visa Premier), adressez-vous à votre banque.
                 outOfScope: true
+    - title: Produit dangereux
+      example: 'Exemple : lit'
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Produit alimentaire
+          subcategories: !!import/single ../common/produit-alimentaire.yml
+        - title: Jouet, puériculture, matériel scolaire
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène, produit de tatouage
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile, sac à main, bijou
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Feu d'artifice
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Meuble
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
     - title: Autre
       subcategories:
         - title: On a refusé de me donner une chambre
@@ -389,7 +420,7 @@
               rank: 1
               type: DATE
               defaultValue: SYSDATE
-            - label: Pour quelle raison a-t-on refusé de vous donner une chambre ?
+            - label: Pour quelle raison a-t-on refusé de vous donner une chambre ?
               rank: 2
               type: TEXTAREA
           fileLabel: Vous pouvez joindre des éléments pour appuyer votre signalement.
@@ -403,12 +434,12 @@
                 - label: Date du refus
                   rank: 1
                   type: DATE
-                - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
+                - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
               fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
         - title: Le personnel est peu aimable
-          example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
+          example: 'Exemple : l''accueil est froid, le personnel parle mal aux clients'
           information: !!import/single ../common/info/amabilite.yml
 - title: Agence de voyage
   subcategories:
@@ -425,7 +456,7 @@
             - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemple : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
             - ReponseConso
             - Litige contractuel
@@ -433,7 +464,7 @@
           tags:
             - Litige contractuel
     - title: Publicité
-      example: "Exemple : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       tags:
         - ReponseConso
         - Litige contractuel
@@ -494,7 +525,7 @@
           tags:
             - ReponseConso
 - title: Transports en commun
-  example: 'Exemple : avion, train'
+  example: 'Exemple : avion, train'
   subcategories:
     - title: Prix
       subcategories:
@@ -509,7 +540,7 @@
             - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemple : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
             - ReponseConso
             - Litige contractuel
@@ -518,7 +549,7 @@
             - ReponseConso
             - Litige contractuel
     - title: Publicité
-      example: "Exemple : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       tags:
         - Litige contractuel
       subcategories:
@@ -564,7 +595,7 @@
         - title: Bagage
         - title: Autre
     - title: Abonnement de transport
-      example: "Exemple : TGV max, pass Navigo"
+      example: "Exemple : TGV max, pass Navigo"
       tags:
         - Litige contractuel
     - title: Autre
@@ -583,7 +614,7 @@
                 - label: Date du refus
                   rank: 1
                   type: DATE
-                - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
+                - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
               fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
@@ -591,7 +622,7 @@
           tags:
             - Litige contractuel
 - title: Sport
-  example: 'Exemple : piscine, salle de sport'
+  example: 'Exemple : piscine, salle de sport'
   subcategories:
     - title: Prix
       subcategories:
@@ -606,7 +637,7 @@
             - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemple : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
             - ReponseConso
             - Litige contractuel
@@ -615,7 +646,7 @@
             - ReponseConso
             - Litige contractuel
     - title: Publicité
-      example: "Exemple : publicité trompeuse, absence d'information"
+      example: "Exemple : publicité trompeuse, absence d'information"
       tags:
         - ReponseConso
         - Litige contractuel
@@ -650,7 +681,7 @@
               type: TIMESLOT
               optionnal: true
     - title: Contrat et abonnement
-      example: 'Exemple : contrat non respecté, clause abusive'
+      example: 'Exemple : contrat non respecté, clause abusive'
       tags:
         - Litige contractuel
       subcategories:
@@ -658,6 +689,29 @@
           tags:
           - ReponseConso
         - title: Contrat non respecté
+    - title: Produit dangereux
+      example: 'Exemple : équipement de protection'
+      tags:
+        - Produit dangereux
+      subcategories:
+        - title: Jouet
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Cosmétique, produit d'hygiène
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Vêtement, textile
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Équipement de protection
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Appareil électrique
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
+        - title: Autre
+          subcategoriesTitle: Quel est le risque&#160;?
+          subcategories: !!import/single ../common/produit-dangereux.yml
     - title: Autre
       tags:
         - Litige contractuel
@@ -677,7 +731,7 @@
           tags:
             - ReponseConso
 - title: Divertissement culturel
-  example: 'Exemple : musée, cinéma, concert'
+  example: 'Exemple : musée, cinéma, concert'
   subcategories:
     - title: Prix
       subcategories:
@@ -692,7 +746,7 @@
             - ReponseConso
           example: 'Exemple : sur un site, un catalogue'
         - title: Prix final non-conforme au prix annoncé
-          example: "Exemple : fausse réduction, suppléments non prévus"
+          example: "Exemple : fausse réduction, suppléments non prévus"
           tags:
             - ReponseConso
             - Litige contractuel
@@ -701,7 +755,7 @@
             - ReponseConso
             - Litige contractuel
     - title: Publicité
-      example: "Exemple : publicité mensongère, absence d'information"
+      example: "Exemple : publicité mensongère, absence d'information"
       tags:
         - ReponseConso
         - Litige contractuel
@@ -754,7 +808,7 @@
                 - label: Date du refus
                   rank: 1
                   type: DATE
-                - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
+                - label: Pouvez-vous nous décrire ce qu'il s'est passé ?
                   rank: 2
                   type: TEXTAREA
               fileLabel: Vous pouvez joindre des éléments (photo, carte d'assistance...) pour appuyer votre signalement.
@@ -768,6 +822,6 @@
     - ReponseConso
   subcategories:
     - title: Abonnement
-      example: "Exemple : abonnement magazine"
+      example: "Exemple : abonnement magazine"
     - title: Coffret cadeau / box
     - title: Autre

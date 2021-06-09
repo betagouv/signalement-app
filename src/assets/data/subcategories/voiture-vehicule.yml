@@ -1,23 +1,23 @@
 - title: Location
-  example: 'Exemple : location de voiture, location de vélo, location longue durée'
+  example: 'Exemple : location de voiture, location de vélo, location longue durée'
   tags:
     - Litige contractuel
   subcategories:
     - title: Location de voiture auprès d'une agence ou d'un magasin
-      example: "Exemple : agence à l'aéroport, location de camionnette dans un supermarché, plate-forme de location sur internet"
+      example: "Exemple : agence à l'aéroport, location de camionnette dans un supermarché, plate-forme de location sur internet"
       tags:
         - Litige contractuel
       subcategories:
         - title: Prix / paiement
         - title: Publicité / annonce
-          example: 'Exemple : caractéristiques du véhicule, équipements fournis'
+          example: 'Exemple : caractéristiques du véhicule, équipements fournis'
         - title: Autre
           subcategories:
             - title: Personnel peu aimable
               information: !!import/single ../common/info/amabilite.yml
             - title: Autre
     - title: Location en libre-service
-      example: 'Exemple : location de vélo, trotinette, voiture électrique par une borne'
+      example: 'Exemple : location de vélo, trotinette, voiture électrique par une borne'
       tags:
         - Litige contractuel
       subcategories:
@@ -42,14 +42,14 @@
         - title: Publicité
         - title: Autre
 - title: Réparation, révision, vente de véhicule
-  example: 'Exemple : garagiste, dépanneur, contrôle technique'
+  example: 'Exemple : garagiste, dépanneur, contrôle technique'
   tags:
     - Litige contractuel
   subcategories:
     - title: Prix / paiement
-      example: 'Exemple : devis non détaillé, devis non respecté, délais'
+      example: 'Exemple : devis non détaillé, devis non respecté, délais'
     - title: Prestation mal réalisée ou pas réalisée
-      example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé, pièce d''origine douteuse'
+      example: 'Exemple : malfaçon, panne non réparée, pose d''un équipement endommagé, pièce d''origine douteuse'
     - title: Publicité mensongère
     - title: Autre
       subcategories:
@@ -57,14 +57,14 @@
           information: !!import/single ../common/info/amabilite.yml
         - title: Autre
 - title: Permis / leçons de conduite
-  example: 'Exemple : auto-école'
+  example: 'Exemple : auto-école'
   subcategories:
     - title: Prix / paiement
-      example: 'Exemple : prix non affiché, forfait obligatoire'
+      example: 'Exemple : prix non affiché, forfait obligatoire'
     - title: Publicité mensongère
-      example: 'Exemple : publicité trompeuse avec un nombre d''heures infaisable'
+      example: 'Exemple : publicité trompeuse avec un nombre d''heures infaisable'
     - title: Autre
-      example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement, heure de conduite qui ne dure pas une heure'
+      example: 'Exemple : clause abusive dans le contrat, obligation de payer des heures régulièrement, heure de conduite qui ne dure pas une heure'
       subcategories:
         - title: Clause abusive dans le contrat
         - title: Obligation de payer des heures régulièrement
@@ -72,5 +72,25 @@
         - title: Le personnel (moniteur) n'est pas aimable
           information: !!import/single ../common/info/amabilite.yml
         - title: Autre
+- title: Produit dangereux
+  example: 'Exemple : voiture, vélo, pneu'
+  tags:
+    - Produit dangereux
+  subcategories:
+    - title: Voiture, moto, scooter
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Vélo, vélo électrique
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Pneu
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Accessoire
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
+    - title: Autre
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-dangereux.yml
 - title: Autre
-  example: 'Exemple : fourrière'
+  example: 'Exemple : fourrière'

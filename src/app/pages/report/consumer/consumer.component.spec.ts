@@ -8,16 +8,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
-import { genConsumer, genDraftReport } from '../../../../../test/fixtures.spec';
+import { genConsumer, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
 import { of } from 'rxjs';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { DangerousProductTag } from '../../../model/Anomaly';
 
 describe('ConsumerComponent', () => {
 
   let component: ConsumerComponent;
   let fixture: ComponentFixture<ConsumerComponent>;
   let reportStorageService: ReportStorageService;
+  let authenticationService: AuthenticationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,6 +35,7 @@ describe('ConsumerComponent', () => {
         RouterTestingModule.withRoutes([{ path: `:category/${ReportPaths.Confirmation}`, redirectTo: '' }]),
       ],
       providers: [
+        AuthenticationService,
         ReportStorageService,
         {provide: AnalyticsService, useClass: MockAnalyticsService}
       ]
@@ -41,13 +45,14 @@ describe('ConsumerComponent', () => {
   }));
 
 
-  describe('case of company report when the consumer is not an employee', () => {
+  describe('case of company report when the report is transmittable to Pro', () => {
 
     const draftReportInProgress = Object.assign(genDraftReport(Step.Company), { employeeConsumer : false });
     let retrieveReportSpy;
 
     beforeEach(() => {
       reportStorageService = TestBed.inject(ReportStorageService);
+      authenticationService = TestBed.inject(AuthenticationService);
       retrieveReportSpy = spyOn(reportStorageService, 'retrieveReportInProgress')
         .and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
 
@@ -130,6 +135,7 @@ describe('ConsumerComponent', () => {
         component.emailCtrl.setValue(consumer.email);
         component.contactAgreementCtrl.setValue(true);
         const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
+        const checkEmailSpy = spyOn(authenticationService, 'checkConsumerEmail').and.returnValue(of({valid: true}));
 
         const nativeElement = fixture.nativeElement;
         nativeElement.querySelector('button#submitConsumerForm').click();
@@ -149,6 +155,36 @@ describe('ConsumerComponent', () => {
   describe('case of the consumer is an employee', () => {
 
     const draftReportInProgress = Object.assign(genDraftReport(Step.Company), {employeeConsumer: true});
+
+    beforeEach(() => {
+      reportStorageService = TestBed.inject(ReportStorageService);
+      spyOn(reportStorageService, 'retrieveReportInProgress').and.returnValue(of(Object.assign(new DraftReport(), draftReportInProgress)));
+
+      fixture = TestBed.createComponent(ConsumerComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should define all form controls except contactAgreement', () => {
+      expect(component.consumerForm.controls['firstName']).toEqual(component.firstNameCtrl);
+      expect(component.consumerForm.controls['lastName']).toEqual(component.lastNameCtrl);
+      expect(component.consumerForm.controls['email']).toEqual(component.emailCtrl);
+      expect(component.consumerForm.contains('contactAgreement')).toBeFalsy();
+    });
+
+  });
+
+  describe('case of the report which concerns a dangerous product', () => {
+
+    const draftReportInProgress = Object.assign(
+      genDraftReport(Step.Company),
+      {
+        employeeConsumer: false,
+        subcategories: [{
+          ...genSubcategory(),
+          tags: [DangerousProductTag]
+        }]
+      });
 
     beforeEach(() => {
       reportStorageService = TestBed.inject(ReportStorageService);

@@ -7,6 +7,8 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { ComponentsModule } from '../../../components/components.module';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('AccountActivationComponent', () => {
   let component: AccountRegistrationComponent;
@@ -23,7 +25,9 @@ describe('AccountActivationComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([{ path: 'connexion', redirectTo: '' }]),
         NgxLoadingModule,
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

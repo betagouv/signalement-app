@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DGCCRFComponent } from './dgccrf.component';
 import { ComponentsModule } from '../../components/components.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('HowComponent', () => {
   let component: DGCCRFComponent;
@@ -11,7 +13,9 @@ describe('HowComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ DGCCRFComponent ],
       imports: [
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();
