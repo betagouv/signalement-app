@@ -1,6 +1,5 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, ContractualDisputeTag, DangerousProductTag, InternetTag, Subcategory, Tag } from './Anomaly';
-import { CompanyKinds, ContractualDisputeTag, InternetTag, ReponseConsoTag, Subcategory, Tag } from './Anomaly';
+import { CompanyKinds, ContractualDisputeTag, DangerousProductTag, InternetTag, ReponseConsoTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
 import { CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
