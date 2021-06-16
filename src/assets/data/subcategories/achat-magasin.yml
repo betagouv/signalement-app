@@ -3,6 +3,7 @@
   subcategories:
     - title: Le site internet en lui-même
       example: 'Exemple : publicité trompeuse, absence de mentions obligatoires, service client injoignable'
+      codeDgccrf: 220
     - title: Une commande effectuée
       example: 'Exemple : commande jamais livrée, produit non conforme'
     - title: Un produit dangereux
