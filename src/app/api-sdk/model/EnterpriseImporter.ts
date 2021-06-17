@@ -20,6 +20,6 @@ export const mapEnterpriseImporterInfo = (_?: { [key in keyof EnterpriseImporter
   ? ({
     ..._,
     startedAt: new Date(_.startedAt),
-    endedAt: new Date(_.endedAt),
+    ...(_.endedAt ? { endedAt: new Date(_.endedAt) } : {}),
   })
   : undefined;
