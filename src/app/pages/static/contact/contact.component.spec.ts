@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContactComponent } from './contact.component';
 import { ComponentsModule } from '../../../components/components.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('ContactComponent', () => {
   let component: ContactComponent;
@@ -11,7 +13,9 @@ describe('ContactComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ContactComponent ],
       imports: [
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();

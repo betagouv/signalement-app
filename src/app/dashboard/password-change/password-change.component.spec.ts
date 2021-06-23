@@ -7,6 +7,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentsModule } from '../../components/components.module';
 import { AnalyticsService } from '../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../test/mocks';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('PasswordComponent', () => {
   let component: PasswordChangeComponent;
@@ -20,7 +22,9 @@ describe('PasswordComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule,
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

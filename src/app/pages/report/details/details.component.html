@@ -3,6 +3,24 @@
   <section class="section section-white" *ngIf="draftReport">
     <div class="container max-width">
 
+      <app-alert type="info" *ngIf="isDangerousProductReport()">
+        En cas d'une urgence vitale ou importante, appelez le <b>112</b>.
+        <br/>
+        Si vous êtes blessé ou souffrant, appelez le Samu: <b>15</b>.
+        <br/>
+        Si vous subissez ou vous avez subi une agression ou des violences, appelez Police Secours: <b>17</b>.
+        <br/>
+        En cas d'incendie ou d'une fuite de gaz, appelez les pompiers: <b>18</b>.
+        <br/>
+        Si vous êtes sourd ou malentendant, contactez le <b>114</b> par visiophonie, par chat, par SMS ou par FAX.
+        <br/>
+        Ces numéros sont joignables 24H/24 et 7J/7.
+        <br/>
+        <br/>
+        Plus d'informations sur<br/>
+        <a href="https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence">https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence</a>
+      </app-alert>
+
       <div class="row notification success ml-0 md-0" *ngIf="draftReport.lastSubcategory?.detailTitle">
         <h2 [innerHTML]="draftReport.lastSubcategory.detailTitle"></h2>
       </div>

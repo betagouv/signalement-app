@@ -8,6 +8,8 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { BannerComponent } from '../../../components/banner/banner.component';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('CompanyActivationComponent', () => {
   let component: CompanyActivationComponent;
@@ -25,6 +27,8 @@ describe('CompanyActivationComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         NgxLoadingModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}

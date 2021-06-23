@@ -16,6 +16,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CompaniesAdminComponent', () => {
 
@@ -42,7 +43,8 @@ describe('CompaniesAdminComponent', () => {
         RouterTestingModule,
         HttpClientModule,
         ComponentsModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        NoopAnimationsModule,
       ]
     })
     .compileComponents();

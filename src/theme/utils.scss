@@ -15,19 +15,19 @@
 }
 
 .txt-success {
-  color: $theme-success-border;
+  color: $theme-success-border !important;
 }
 
 .txt-error {
-  color: $theme-error-border;
+  color: $theme-error-border !important;
 }
 
 .txt-warning {
-  color: $theme-warning-border;
+  color: $theme-warning-border !important;
 }
 
 .txt-info {
-  color: $theme-info-border;
+  color: $theme-info-border !important;
 }
 
 .table-overflow {
@@ -41,6 +41,17 @@
   }
 }
 .txt-small {
-  font-size: 0.875rem;
+  font-size: 0.875rem !important;
+}
+
+.txt-size-normal {
+  font-size: 1rem !important;
+}
+
+.txt-big {
+  font-size: 1.125rem !important;
+}
+.txt-title {
+  font-size: 1.5rem !important;
 }
 
