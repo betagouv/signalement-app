@@ -5,6 +5,8 @@ import { ComponentsModule } from '../../components/components.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AnalyticsService } from '../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../test/mocks';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('ContractualDisputeComponent', () => {
   let component: ContractualDisputeComponent;
@@ -16,6 +18,8 @@ describe('ContractualDisputeComponent', () => {
       imports: [
         RouterTestingModule.withRoutes([{ path: 'not-found', redirectTo: '' }]),
         ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ],
       providers: [
         {provide: AnalyticsService, useClass: MockAnalyticsService}
