@@ -1,0 +1,12 @@
+@import "src/theme/variables";
+
+
+.-title {
+  display: flex;
+  align-items: center;
+}
+
+.-title_icon {
+  color: $theme-info-border;
+  margin-right: spacing(1);
+}

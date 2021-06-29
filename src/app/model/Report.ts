@@ -1,8 +1,8 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, ContractualDisputeTag, DangerousProductTag, InternetTag, Subcategory, Tag } from './Anomaly';
+import { CompanyKinds, ContractualDisputeTag, DangerousProductTag, InternetTag, ReponseConsoTag, Subcategory, Tag } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
-import { Company, CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
+import { CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
 import format from 'date-fns/format';
 
 export const PrecisionKeyword = '(à préciser)';
@@ -66,14 +66,15 @@ export const reportStatusIcon = {
 
 export class DraftReport {
   category: string;
-  subcategories: Subcategory[];
+  subcategories?: Subcategory[];
   draftCompany: DraftCompany;
   detailInputValues: DetailInputValue[];
   uploadedFiles: UploadedFile[];
   consumer: Consumer;
-  employeeConsumer: boolean;
+  employeeConsumer?: boolean;
   contactAgreement: boolean;
   retrievedFromStorage: boolean;
+  forwardToReponseConso?: boolean;
   storedStep: Step;
   vendor: string;
 
@@ -92,9 +93,13 @@ export class DraftReport {
     if (this.companyKind === CompanyKinds.WEBSITE) {
       tags.push(InternetTag);
     }
+    if (!this.forwardToReponseConso) {
+      return tags.filter(_ => _ !== ReponseConsoTag);
+    }
     return tags;
   }
 
+  /** @deprecated use pure isContractualDispute() function */
   get isContractualDispute() {
     return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
   }
@@ -104,9 +109,11 @@ export class DraftReport {
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
+    return !this.employeeConsumer && !this.forwardToReponseConso && this.tags?.indexOf(DangerousProductTag) === -1;
   }
 }
+
+export const isContractualDispute = (_: DraftReport) => !_.employeeConsumer && _.tags.indexOf(ContractualDisputeTag) !== -1;
 
 export class Report {
   id: string;
@@ -122,6 +129,7 @@ export class Report {
   consumer: Consumer;
   employeeConsumer: boolean;
   contactAgreement: boolean;
+  forwardToReponseConso?: boolean;
   creationDate: Date;
   status: string;
 

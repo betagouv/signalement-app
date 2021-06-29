@@ -1,0 +1,14 @@
+@import "src/theme/variables";
+
+:host {
+  display: block;
+}
+
+.-selected {
+  background-color: $light-green;
+  border-radius: $theme-border-more-radius;
+
+  label, h2 {
+    color: $black;
+  }
+}

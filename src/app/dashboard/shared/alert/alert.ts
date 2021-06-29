@@ -2,7 +2,7 @@ import { Component, Directive, HostBinding, Input, NgModule, OnInit } from '@ang
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { slideToggle } from '../../../utils/animations';
+import { Animations } from '../../../utils/animations';
 
 export type AlertType = 'error' | 'info' | 'success' | 'warning';
 
@@ -46,7 +46,7 @@ export class AlertCloseComponent {
       </span>
     </div>
   `,
-  animations: [slideToggle],
+  animations: [Animations.slideToggle],
 })
 export class AlertComponent implements OnInit {
 

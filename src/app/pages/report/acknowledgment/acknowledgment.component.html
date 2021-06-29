@@ -7,6 +7,13 @@
 
       <div class="card" [ngSwitch]="acknowledgmentCase">
 
+        <div class="card-body" *ngSwitchCase="acknowledgmentCases.ReponseConso">
+          <p>
+            Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
+            Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+          </p>
+        </div>
+
         <div class="card-body" *ngSwitchCase="acknowledgmentCases.EmployeeReport">
           <div class="row">
             <div class="col-3 p-0">

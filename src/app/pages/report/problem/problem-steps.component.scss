@@ -1,0 +1,11 @@
+@import "src/theme/variables";
+
+:host {
+  display: block;
+  margin-bottom: spacing(3);
+  padding-bottom: spacing(2);
+}
+
+.-title-container {
+  position: relative;
+}

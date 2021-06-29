@@ -1,9 +1,9 @@
 @import "src/theme/variables";
+@import "src/theme/media-queries";
 
 $alert-size: 52px;
 
 :host {
-  padding: 0 0 0 spacing(2);
   min-height: $alert-size;
   display: flex;
   align-items: center;
@@ -54,6 +54,13 @@ $alert-size: 52px;
   align-self: flex-start;
   display: flex;
   align-items: center;
+  margin-left: spacing(2);
+}
+
+@media #{$smaller-than-mobile} {
+  .-icon {
+    display: none;
+  }
 }
 
 .-body {
