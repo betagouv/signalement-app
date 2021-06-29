@@ -144,10 +144,13 @@ export class ProblemComponent implements OnInit {
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
 
   readonly showReponseConsoQuestion = () => {
-    return this.displayReponseConso()
+    const show = this.displayReponseConso()
       && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
-      // && !this.isContractualDispute()
       && this.draftReport.employeeConsumer === false;
+    if (!show) {
+      this.draftReport.forwardToReponseConso = undefined;
+    }
+    return show;
   };
 
   readonly anomaly$ = this.activatedRoute.url.pipe(
