@@ -141,9 +141,9 @@ describe('ProblemComponent', () => {
     expect(employeeStep.querySelectorAll('app-problem-step .-title')[1].textContent.trim()).toEqual('Non, je n\'y travaille pas');
   });
 
-  it('should update the shared report when the user is an employee', () => {
+  fit('should update the shared report when the user is an employee', () => {
     const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
-    spyOn(anomalyService, 'getAnomalyBy').and.returnValue(anomalyFixture);
+    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
     const fixture = TestBed.createComponent(ProblemComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
