@@ -1,6 +1,7 @@
 - title: Banque
   example: 'Exemple : banque classique, banque en ligne'
   tags:
+    - ReponseConso
     - Litige contractuel
   subcategories:
     - title: Frais bancaires
@@ -38,6 +39,8 @@
       example: 'Exemple : service client injoignable'
     - title: Autre
 - title: Assurance / mutuelle
+  tags:
+    - ReponseConso
   subcategories:
     - title: Contrat
       example: 'Exemple : contrat non respecté, échéancier non reçu'

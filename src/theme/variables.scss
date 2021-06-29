@@ -54,8 +54,14 @@ $theme-error-bg: $light-red;
 $theme-info-border: $blue;
 $theme-info-bg: $lighter-blue;
 $theme-divider: rgba(black, 0.12);
+$theme-divider-opaque: #e0e0e0;
 $theme-color-text-disabled: rgba(black, 0.38);
 $theme-color-text-secondary: rgba(black, 0.54);
+$transition-base: all .2s ease-in-out !default;
+
+$font-size-base: 1rem;
+$font-size-big: 1.125rem;
+$font-size-small: 0.875rem;
 
 @function spacing($multiplier: 1) {
   $padding: 8px;

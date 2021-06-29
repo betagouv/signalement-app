@@ -2,7 +2,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Department, Region, Regions } from '../../../../model/Region';
 import { MatPseudoCheckboxState } from '@angular/material/core';
-import { slideToggleNgIf } from '../../../../utils/animations';
+import { Animations } from '../../../../utils/animations';
 
 @Component({
   selector: 'app-select-departments',
@@ -34,7 +34,7 @@ import { slideToggleNgIf } from '../../../../utils/animations';
       </ng-container>
     </mat-select>
   `,
-  animations: [slideToggleNgIf],
+  animations: [Animations.slideToggleNgIf],
   styleUrls: ['./select-departments.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,

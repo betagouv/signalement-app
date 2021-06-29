@@ -44,6 +44,7 @@
     - title: J'ai eu un problème de démarchage à domicile
       companyKind: LOCATION
       tags:
+        - ReponseConso
         - Démarchage à domicile
       detailInputs:
         - label: Que s'est-il passé ?
@@ -66,6 +67,7 @@
     - title: J'ai eu un problème de démarchage téléphonique
       companyKind: PHONE
       tags:
+        - ReponseConso
         - Démarchage téléphonique
       detailInputs:
         - label: Date de l'appel
@@ -159,6 +161,8 @@
           subcategories:
             - title: Je n'ai pas eu de devis écrit
               example: Un devis est obligatoire dès que les dépassements d'honoraires et la prestation dépassent 70 euros. Un devis est obligatoire en cas de pose de couronne, implant, bridge... Un devis est oligatoire en chirurgie esthétique.
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Date du rendez-vous
                   rank: 1
@@ -180,6 +184,8 @@
                   rank: 4
                   type: TEXT
             - title: Le devis est incomplet
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Date du rendez-vous
                   rank: 1
@@ -215,6 +221,8 @@
       example: "C'est-à-dire qu'il est : acupuncteur, ostéopathe, naturopathe, psychologue, hypnotiseur, nutritionniste, chiropracteur, sophrologue, mésothérapeute, homéopathe, phytothérapeute, aromathérapeute..."
       subcategories:
         - title: Les prix ne sont pas affichés ou sont faux
+          tags:
+            - ReponseConso
           example: "Les prix doivent être affichés en salle d'attente."
           detailInputs:
             - label: Date du constat
@@ -252,6 +260,8 @@
                 answer: Faites un signalement à la rubrique "Les prix ne sont pas affichés"
             outOfScope: true
         - title: Je n'ai pas reçu de note (facture, ticket)
+          tags:
+            - ReponseConso
           example: "À partir de 25 euros, votre praticien doit vous remettre une note qui décrit ce que vous avez payé. C'est une obligation."
           detailInputs:
             - label: Date de visite
@@ -292,6 +302,7 @@
         - title: J'ai eu un problème de démarchage téléphonique
           companyKind: PHONE
           tags:
+            - ReponseConso
             - Démarchage téléphonique
           detailInputs:
             - label: Date de l'appel
@@ -310,6 +321,8 @@
     - title: Il commercialise des lunettes ou des prothèses auditives (opticien, audioprothésiste)
       subcategories:
         - title: Une publicité est trompeuse ou non appliquée
+          tags:
+            - ReponseConso
           example: 'Exemple : offre promotionnelle trompeuse sur des lunettes'
           detailInputs:
             - label: Date du constat
@@ -392,6 +405,7 @@
         - title: Les prix ne sont pas indiqués
           example: Les prix doivent être indiqués dans les rayons, visibles pour les médicaments situés derrière le comptoir. La pharmacie doit également avoir un catalogue des prix.
           tags:
+            - ReponseConso
             - Litige contractuel
           detailInputs:
             - label: Date de constat
@@ -448,6 +462,7 @@
     - title: Prix et facture
       example: "Exemple : les prix ne sont pas affichés, pas de remise d'une facture"
       tags:
+        - ReponseConso
         - Litige contractuel
       subcategories:
         - title: Les prix ne sont pas affichés
@@ -521,6 +536,7 @@
     - title: Contrat
       example: "Exemple : je souhaite annuler ma cure, le contrat n'est pas clair, mon contrat n'a pas été respecté "
       tags:
+        - ReponseConso
         - Litige contractuel
     - title: Autre
       subcategories:

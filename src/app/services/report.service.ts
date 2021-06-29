@@ -28,7 +28,7 @@ export class ReportService {
   private _currentReportFilter: ReportFilter = {};
 
   createReport(draftReport: DraftReport) {
-    return this.http.post(
+    return this.http.post<Report>(
       this.serviceUtils.getUrl(Api.Report, ['api', 'reports']),
       {
         category: draftReport.category,
@@ -53,6 +53,7 @@ export class ReportService {
         companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
         companyPostalCode: draftReport.draftCompany.postalCode,
         companyCountry: draftReport.draftCompany.country,
+        forwardToReponseConso: draftReport.forwardToReponseConso,
         companySiret: draftReport.draftCompany.siret,
         companyActivityCode: draftReport.draftCompany.activityCode,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,

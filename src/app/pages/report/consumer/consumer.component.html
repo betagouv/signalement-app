@@ -79,7 +79,7 @@
         </div>
 
         <fieldset class="form__group" *ngIf="consumerForm.contains('contactAgreement')">
-          <ng-container *ngIf="!draftReport.isContractualDispute else contractualDispute">
+          <ng-container *ngIf="draftReport.isTransmittableToPro">
             <div class="row mb-4">
               <div class="col col-radio">
                 <input type="radio" formControlName="contactAgreement" [value]="false" id="contactAgreementFalse"/>
@@ -102,7 +102,7 @@
               </div>
             </div>
           </ng-container>
-          <ng-template #contractualDispute>
+          <ng-template *ngIf="draftReport.isContractualDispute">
             <div class="row mb-4">
               <div class="col col-radio">
                 <input type="radio" formControlName="contactAgreement" [value]="true" id="contactAgreementDisputeTrue"/>

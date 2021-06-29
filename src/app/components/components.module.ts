@@ -13,6 +13,7 @@ import { PanelModule } from '../dashboard/shared/panel/panel.module';
 import { PageModule } from '../dashboard/shared/page/page.module';
 import { AlertModule } from '../dashboard/shared/alert/alert';
 import { MatIconModule } from '@angular/material/icon';
+import { RadioContainerModule } from './radio-container/radio-container.module';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -24,6 +25,7 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
   ],
   imports: [
     CommonModule,
+    RadioContainerModule,
     PipesModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     CompanySearchResultsModule,
@@ -35,6 +37,7 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     PanelModule,
     PageModule,
     AlertModule,
+    RadioContainerModule,
     FormsModule,
     CommonModule,
     NgxLoadingModule,
