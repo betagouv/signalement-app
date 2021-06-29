@@ -143,7 +143,7 @@ describe('ProblemComponent', () => {
 
   fit('should update the shared report when the user is an employee', () => {
     const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
-    spyOn(anomalyService, 'getAnomalyByCategory').and.returnValue(anomalyFixture);
+    spyOn(anomalyService, 'getAnomalyBy').and.returnValue(anomalyFixture);
     const fixture = TestBed.createComponent(ProblemComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();

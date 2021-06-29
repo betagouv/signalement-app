@@ -148,7 +148,7 @@ export class ProblemComponent implements OnInit {
       && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
       && this.draftReport.employeeConsumer === false;
     if (!show) {
-      this.draftReport.forwardToReponseConso = undefined;
+      delete this.draftReport.forwardToReponseConso;
     }
     return show;
   };
@@ -161,7 +161,7 @@ export class ProblemComponent implements OnInit {
       if (anomaly) {
         return anomaly;
       } else {
-        throw new Error(`[SignalConso] Anomaly ${path} does not exists`);
+        throw new Error(`[SignalConso] Anomaly '${path}' does not exists`);
       }
     }),
   );
