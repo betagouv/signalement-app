@@ -229,7 +229,6 @@ export class ManageWebsitesComponent implements OnInit {
       this.websiteService.updateCompany(website.id, {
         companyName: $event.name!,
         companyAddress: $event.address,
-        companyPostalCode: $event.postalCode,
         companySiret: $event.siret!,
         companyActivityCode: $event.activityCode,
       }).subscribe(this.fetchWebsites/* We want to refresh reports count */);

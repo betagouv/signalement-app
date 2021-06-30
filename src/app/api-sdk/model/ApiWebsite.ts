@@ -1,5 +1,6 @@
 import { Company } from '../../model/Company';
 import { Entity, Id } from './Common';
+import { Address } from '../../model/Address';
 
 export enum ApiWebsiteKind {
   DEFAULT = 'DEFAULT',
@@ -17,8 +18,7 @@ export interface ApiWebsite extends Entity {
 export interface ApiWebsiteUpdateCompany {
   companySiret: string;
   companyName: string;
-  companyAddress?: string;
-  companyPostalCode?: string;
+  companyAddress?: Address;
   companyActivityCode?: string;
 }
 

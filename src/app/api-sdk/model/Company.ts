@@ -1,4 +1,5 @@
 import { Id } from './Common';
+import { Address } from '../../model/Address';
 
 export interface ApiWebsiteURL {
   url: string;
@@ -8,9 +9,7 @@ export interface ApiDraftCompany {
   siret?: string;
   name?: string;
   brand?: string;
-  address?: string;
-  postalCode?: string;
-  country?: string;
+  address?: Address;
   website?: ApiWebsiteURL;
   activityCode?: string;
 }
@@ -20,8 +19,7 @@ export interface ApiCompany {
   siret: string;
   creationDate: string;
   name: string;
-  address: string;
-  postalCode?: string;
+  address: Address;
   activityCode?: string;
 }
 

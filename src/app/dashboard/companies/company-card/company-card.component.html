@@ -15,7 +15,17 @@
           edit
         </i>
       </dt>
-      <dd class="col-sm-9">{{userAccess.address}}</dd>
+      <dd class="col-sm-9">
+        <div>
+          {{userAccess.address.number}}
+          {{userAccess.address.street}}
+          {{userAccess.address.addressSupplement}}
+        </div>
+        <div>
+          {{userAccess.address.postalCode}}
+          {{userAccess.address.city}}
+        </div>
+      </dd>
     </dl>
     <a class="row item" [routerLink]="['/entreprise', 'acces', userAccess.siret]" *ngIf="level == 'admin'">
       <div class="col-12">
@@ -35,12 +45,13 @@
   <ng-template #changeAddress>
     <div class="modal-body text-center">
       <form [formGroup]="companyAddressForm" (submit)="submitCompanyAddressForm()" id="companyAddressForm">
-        <input [formControl]="companyNameCtrl" placeholder="Nom de l'entreprise" id="companyName" />
-        <input [formControl]="line1Ctrl" placeholder="Ligne 1" id="line1" />
-        <input [formControl]="line2Ctrl" placeholder="Ligne 2" id="line2" />
-        <input [formControl]="line3Ctrl" placeholder="Ligne 3" id="line3" />
-        <input [formControl]="postalCodeCtrl" placeholder="Code postal" id="postalCode" />
-        <input [formControl]="cityCtrl" placeholder="Ville" id="city" />
+        <div formGroupName="address">
+          <input formControlName="number" placeholder="Numéro"/>
+          <input formControlName="street" placeholder="Rue"/>
+          <input formControlName="addressSupplement" placeholder="Complément d'adresse"/>
+          <input formControlName="postalCode" placeholder="Code postal"/>
+          <input formControlName="city" placeholder="Ville"/>
+        </div>
         <div class="row text-left pt-3">
           <div class="col-2 col-sm-1 text-right pr-1">
             <input type="checkbox" [formControl]="activationDocumentRequiredCtrl" id="activationDocumentRequired"/>

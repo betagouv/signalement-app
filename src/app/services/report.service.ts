@@ -50,9 +50,7 @@ export class ReportService {
             };
           }),
         companyName: draftReport.draftCompany.name,
-        companyAddress: this.getDraftCompanyFullAddress(draftReport.draftCompany),
-        companyPostalCode: draftReport.draftCompany.postalCode,
-        companyCountry: draftReport.draftCompany.country,
+        companyAddress: draftReport.draftCompany.address,
         forwardToReponseConso: draftReport.forwardToReponseConso,
         companySiret: draftReport.draftCompany.siret,
         companyActivityCode: draftReport.draftCompany.activityCode,
@@ -81,8 +79,7 @@ export class ReportService {
           this.serviceUtils.getUrl(Api.Report, ['api', 'reports', reportId, 'company']),
           {
             name: companySearchResult.name,
-            address: this.getDraftCompanyFullAddress(companySearchResult),
-            postalCode: companySearchResult.postalCode,
+            address: companySearchResult.address,
             siret: companySearchResult.siret,
             activityCode: companySearchResult.activityCode,
           },
@@ -241,12 +238,6 @@ export class ReportService {
       uploadedFiles: files ? files.map(f => Object.assign(new UploadedFile(), f)) : [],
       status: report.status
     });
-  }
-
-  private getDraftCompanyFullAddress(draftCompany: DraftCompany) {
-    return [draftCompany.name, draftCompany.brand, draftCompany.address]
-      .filter(a => a && a.length)
-      .join(' - ');
   }
 }
 

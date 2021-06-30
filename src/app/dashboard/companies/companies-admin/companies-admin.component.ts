@@ -219,9 +219,9 @@ export class CompaniesAdminComponent implements OnInit {
 
   readonly createCompany = (company: CompanySearchResult) => {
     this.companyCreationSucceed = false;
-    const { siret, name, address, postalCode, activityCode } = company;
+    const { siret, name, address, activityCode } = company;
     this.companyService
-      .create({ siret, name, address, postalCode, activityCode }, { insert: false })
+      .create({ siret, name, address, activityCode }, { insert: false })
       .subscribe(() => this.companyCreationSucceed = true);
   };
 }

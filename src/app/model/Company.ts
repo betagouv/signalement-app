@@ -1,16 +1,16 @@
 import { ApiWebsiteKind } from '../api-sdk/model/ApiWebsite';
 import { Id } from '../api-sdk/model/Common';
+import { Address } from './Address';
 
 export interface CompanyUpdate {
-  address: string;
-  postalCode: string;
+  address: Address;
   activationDocumentRequired: boolean;
 }
 
 export interface CompanyCreation {
   siret: string;
   name: string;
-  address: string;
+  address: Address;
   postalCode?: string;
   activityCode?: string;
 }
@@ -19,9 +19,7 @@ export interface DraftCompany {
   siret?: string;
   name?: string;
   brand?: string;
-  address?: string;
-  postalCode?: string;
-  country?: string;
+  address?: Address;
   website?: WebsiteURL;
   phone?: string;
   activityCode?: string;
@@ -32,8 +30,7 @@ export interface Company {
   siret: string;
   creationDate: Date;
   name: string;
-  address: string;
-  postalCode?: string;
+  address: Address;
   activityCode?: string;
 }
 

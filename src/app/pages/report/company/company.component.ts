@@ -70,7 +70,7 @@ export class CompanyComponent implements OnInit {
       if ((this.draftReport?.companyKind === CompanyKinds.SIRET && draftCompany.website) ||
         (this.draftReport?.companyKind === CompanyKinds.WEBSITE && !draftCompany.website) ||
         (this.draftReport?.companyKind === CompanyKinds.PHONE && !draftCompany.phone) ||
-        (this.draftReport?.companyKind === CompanyKinds.LOCATION && !draftCompany.postalCode)) {
+        (this.draftReport?.companyKind === CompanyKinds.LOCATION && !draftCompany.address.postalCode)) {
         this.draftReport.draftCompany = undefined;
       }
     }

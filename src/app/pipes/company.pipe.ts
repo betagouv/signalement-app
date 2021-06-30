@@ -6,6 +6,6 @@ import { DraftCompany } from '../model/Company';
 })
 export class IsForeignPipe implements PipeTransform {
   transform(draftCompany: DraftCompany) {
-    return draftCompany && draftCompany.country !== undefined && draftCompany.country !== 'France';
+    return draftCompany && draftCompany.address.country !== undefined && draftCompany.address.country !== 'France';
   }
 }
