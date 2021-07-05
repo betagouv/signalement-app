@@ -6,6 +6,10 @@ export interface PageDefinition {
 export type PageDefinitions = typeof pageDefinitions;
 
 export const pageDefinitions = {
+  enterprisesImport: {
+    title: 'Base de données entreprise',
+    description: 'Gestion de la base de données entrerpises'
+  },
   default: {
     title: 'SignalConso, un service public pour les consommateurs',
     description: 'Signalez un problème au commerçant (magasins, commerces de proximité, cafés et restaurants...) et à la répression des fraudes : pratique d\'hygiène, nourriture / boissons, matériel / objet, prix / paiement, publicité, services associés à l\'achat.'

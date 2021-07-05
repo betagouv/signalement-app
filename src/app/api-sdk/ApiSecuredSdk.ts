@@ -4,6 +4,7 @@ import { ReportedPhoneClient } from './client/ReportedPhoneClient';
 import { ApiClientApi } from './ApiClient';
 import { SubscriptionClient } from './client/SubscriptionClient';
 import { CompanyClient } from './client/CompanyClient';
+import { EnterpriseImporter } from './client/EnterpriseImporter';
 
 export class ApiSecuredSdk {
   constructor(private client: ApiClientApi) {
@@ -14,4 +15,5 @@ export class ApiSecuredSdk {
   readonly constant = new ConstantClient(this.client);
   readonly subscription = new SubscriptionClient(this.client);
   readonly company = new CompanyClient(this.client);
+  readonly enterpriseImporter = new EnterpriseImporter(this.client);
 }
