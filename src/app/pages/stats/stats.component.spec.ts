@@ -12,6 +12,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../model/AuthUser';
 import { ComponentsModule } from '../../components/components.module';
 import * as echarts from 'echarts';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('StatsComponent', () => {
   let component: StatsComponent;
@@ -41,7 +43,9 @@ describe('StatsComponent', () => {
         HttpClientModule,
         NgxEchartsModule.forRoot({ echarts }),
         NgxLoadingModule,
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();

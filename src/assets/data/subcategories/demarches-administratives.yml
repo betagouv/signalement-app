@@ -1,8 +1,10 @@
 - title: Absence d'information sur le médiateur
   tags:
+    - ReponseConso
     - Absence de médiateur
 - title: Courrier / entreprise qui se fait passer pour l'administration
   tags:
+    - ReponseConso
     - Litige contractuel
 - title: Site internet pour obtenir un document administratif (casier, acte de naissance, vignette crit'air)
   subcategoriesTitle: À qui appartient ce site internet&#160;?
@@ -13,8 +15,11 @@
     - title: À une entreprise
       example: "Un site avec une Marianne ou un drapeau tricolore n'appartient pas forcément à l'Etat. Ces entreprises entretiennent une confusion pour tromper les consommateurs."
       tags:
+        - ReponseConso
         - Litige contractuel
 - title: Carte des numéros utiles de la mairie (numéro urgence serrurier, plombier...)
+  tags:
+    - ReponseConso
 - title: Autre
   subcategoriesTitle: Que voulez-vous signaler ?
   subcategories:

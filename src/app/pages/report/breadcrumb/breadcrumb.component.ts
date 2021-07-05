@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { pageDefinitions } from '../../../../assets/data/pages';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -93,3 +94,18 @@ export class BreadcrumbComponent implements OnInit {
     }
   }
 }
+
+@NgModule({
+  declarations: [
+    BreadcrumbComponent
+  ],
+  exports: [
+    BreadcrumbComponent
+  ],
+  imports: [
+    CommonModule,
+  ],
+})
+export class BreadcrumbModule {
+}
+

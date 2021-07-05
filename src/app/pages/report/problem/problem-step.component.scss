@@ -1,0 +1,54 @@
+@import "src/theme/variables";
+
+$title-height: 28px;
+
+:host {
+  display: flex;
+  align-items: flex-start;
+  border: 1px solid $theme-divider;
+  border-bottom: 1px solid transparent;
+  padding: spacing(1.5) spacing(2);
+  transition: $transition-base;
+  cursor: pointer;
+  z-index: 0;
+
+  &.-selected {
+    z-index: 1;
+    border: 1px solid $theme-primary !important;
+    background: transparentize($theme-primary, .90);
+    box-shadow: inset 0 0 0 1px $theme-primary;
+  }
+
+  &:first-of-type {
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+  }
+
+  &:last-of-type {
+    border-bottom: 1px solid $theme-divider;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  &:hover {
+    z-index: 1;
+    border: 1px solid $theme-primary;
+    background: $theme-background-hover;
+  }
+}
+
+.-title {
+  min-height: $title-height;
+  font-size: $font-size-big;
+}
+
+.-desc {
+  color: $theme-color-text-secondary;
+}
+
+.-radio {
+  height: $title-height;
+  display: flex;
+  align-items: center;
+  margin: 0 spacing(1) 0 0;
+}

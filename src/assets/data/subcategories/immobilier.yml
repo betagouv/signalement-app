@@ -8,40 +8,53 @@
           subcategories:
             - title: Diffusion d'annonces de location pour des biens non disponibles (en vitrine ou sur internet)
               tags:
+                - ReponseConso
                 - Litige contractuel
             - title: Honoraires de location non affichés ou différents de ceux affichés (en vitrine ou sur internet)
               tags:
+                - ReponseConso
                 - Litige contractuel
             - title: Annonces de location incomplètes ou mensongères (en vitrine ou sur internet)
               example: 'Exemple : loyer annoncé faux, descriptif de l''appartement mensonger'
               tags:
+                - ReponseConso
                 - Litige contractuel
             - title: Demande d'un document interdit pour le dossier de location
               example: 'Exemple : relevé bancaire, photocopie de la carte vitale'
+              tags:
+                - ReponseConso
             - title: Autre
               tags:
+                - ReponseConso
                 - Litige contractuel
         - title: Je cherche à acheter
           subcategories:
             - title: Diffusion d'annonces de biens non disponibles à la vente (en vitrine ou sur internet)
               example: 'Exemple : la maison affichée en vitrine est en fait déjà vendue'
+              tags:
+                - ReponseConso
             - title: Honoraires de vente non affichés ou différents de ceux affichés (en vitrine ou sur internet)
               tags:
+                - ReponseConso
                 - Litige contractuel
             - title: Annonces de vente incomplètes ou mensongères (en vitrine ou sur internet)
               example: 'Exemple : absence de DPE, descriptif d''un appartement mensonger'
               tags:
+                - ReponseConso
                 - Litige contractuel
             - title: Problème avec une offre d'achat ou un compromis de vente
               example: 'Exemple : refus de mon offre au prix sans justification'
               tags:
+                - ReponseConso
                 - Litige contractuel
             - title: Cas particulier d'un chasseur d'appartements
               example: 'Exemple : frais d''étude alors que c''est interdit'
               tags:
+                - ReponseConso
                 - Litige contractuel
             - title: Cas particulier d'un mandataire indépendant (agent commercial)
               tags:
+                - ReponseConso
                 - Litige contractuel
     - title: J'ai un problème en tant que locataire
       example: 'Exemple : état des lieux, charges, loyer'
@@ -49,6 +62,8 @@
         - Litige contractuel
       subcategories:
         - title: Charges / honoraires
+          tags:
+            - ReponseConso
         - title: Loyer
         - title: Etat des lieux / caution
         - title: Bail / contrat de location
@@ -66,6 +81,8 @@
             - title: Honoraires
             - title: Assurance loyer impayé
             - title: Autre
+              tags:
+                - ReponseConso
         - title: Vente de mon bien
           subcategories:
             - title: Mise en vente sans mandat
@@ -76,6 +93,7 @@
             - title: Discours trompeur
               example: 'Exemple : L''agent immobilier m''a promis de vendre sous 7 jours'
               tags:
+                - ReponseConso
                 - Litige contractuel
         - title: Autre
           tags:
@@ -86,6 +104,8 @@
           information: !!import/single ../common/info/accessibilite.yml
         - title: Le personnel ne dispose pas des diplômes ou qualifications requises
         - title: Autre
+          tags:
+            - ReponseConso
 - title: Vente / location directement entre particuliers
   subcategories:
     - title: Problème avec mon locataire / propriétaire
@@ -106,6 +126,7 @@
       subcategories:
         - title: J'ai pris connaissance de mon contrat de syndic.
           tags:
+            - ReponseConso
             - Litige contractuel
           subcategories:
             - title: Les frais sont plus chers que dans le contrat
@@ -116,12 +137,17 @@
       example: 'Exemple : clause abusive dans le contrat'
     - title: Documents à disposition des copropriétaires
       example: 'Exemple : pas de fiche synthétique de copropriété'
+      tags:
+        - ReponseConso
     - title: Gestion des travaux par le syndic
       example: 'Exemple: devis, choix des prestataires'
       tags:
+        - ReponseConso
         - Litige contractuel
     - title: Absence de réponse du syndic
       example: 'Exemple : aucune réponse malgré des relances'
+      tags:
+        - ReponseConso
     - title: Autre
       tags:
         - Litige contractuel

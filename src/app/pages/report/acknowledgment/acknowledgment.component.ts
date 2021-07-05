@@ -8,7 +8,7 @@ import { combineLatest } from 'rxjs';
 import { ConstantService } from '../../../services/constant.service';
 
 enum AcknowledgmentCases {
-  EmployeeReport, ForeignCompany, FrenchCompanyWithoutSIRET, ContractualDisputeWithSIRET, NotTransmittable, Default
+  EmployeeReport, ForeignCompany, FrenchCompanyWithoutSIRET, ContractualDisputeWithSIRET, NotTransmittable, Default, ReponseConso,
 }
 
 @Component({
@@ -27,8 +27,9 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   acknowledgmentCase: AcknowledgmentCases;
 
   constructor(private reportStorageService: ReportStorageService,
-              private constantService: ConstantService,
-              private reportRouterService: ReportRouterService) { }
+    private constantService: ConstantService,
+    private reportRouterService: ReportRouterService) {
+  }
 
   ngOnInit() {
     this.step = Step.Acknowledgment;
@@ -56,7 +57,9 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
   }
 
   initAcknowledgmentCase() {
-    if (this.draftReport.employeeConsumer) {
+    if (this.draftReport.forwardToReponseConso) {
+      this.acknowledgmentCase = AcknowledgmentCases.ReponseConso;
+    } else if (this.draftReport.employeeConsumer) {
       this.acknowledgmentCase = AcknowledgmentCases.EmployeeReport;
     } else if (this.draftReport.draftCompany.country ?? 'France' !== 'France') {
       this.acknowledgmentCase = AcknowledgmentCases.ForeignCompany;

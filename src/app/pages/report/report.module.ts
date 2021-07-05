@@ -2,15 +2,13 @@ import { Compiler, FactoryProvider, NgModule } from '@angular/core';
 import { RouterModule, ROUTES, Routes } from '@angular/router';
 import { CategoryComponent, IllustrationCardComponent } from './category/category.component';
 import { InformationComponent } from './information/information.component';
-import { ProblemComponent } from './problem/problem.component';
 import { DetailsComponent } from './details/details.component';
 import { CompanyComponent } from './company/company.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AcknowledgmentChargeBackComponent, AcknowledgmentComponent } from './acknowledgment/acknowledgment.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { BreadcrumbModule } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SubcategoryComponent } from './problem/subcategory/subcategory.component';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 import anomalies from '../../../assets/data/anomalies.json';
@@ -29,6 +27,8 @@ import { CompanyPhoneComponent } from './company/phone/company-phone.component';
 import { CompanyLocationComponent } from './company/location/company-location.component';
 import { PageModule } from '../../dashboard/shared/page/page.module';
 import { AlertModule as AppAlertModule } from '../../dashboard/shared/alert/alert';
+import { ProblemModule } from './problem/problem.module';
+import { ProblemComponent } from './problem/problem.component';
 
 defineLocale('fr', frLocale);
 
@@ -73,16 +73,13 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
   declarations: [
     CompanyComponent,
     DetailsComponent,
-    BreadcrumbComponent,
     ConsumerComponent,
     ConfirmationComponent,
-    ProblemComponent,
     CategoryComponent,
     IllustrationCardComponent,
     InformationComponent,
     AcknowledgmentComponent,
     AcknowledgmentChargeBackComponent,
-    SubcategoryComponent,
     CompanyForeignCountryComponent,
     CompanySearchByNameComponent,
     CompanySearchByIdentityComponent,
@@ -91,6 +88,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     CompanyLocationComponent,
   ],
   imports: [
+    BreadcrumbModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
@@ -102,6 +100,7 @@ delete (<any>AnomalyLazyRoutesFactoryProvider).useValue;
     TypeaheadModule.forRoot(),
     AppAlertModule,
     PageModule,
+    ProblemModule,
   ],
   exports: [
     RouterModule,

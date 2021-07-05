@@ -4,6 +4,7 @@ export const DescriptionLabel = 'Description';
 export const ContractualDisputeTag = 'Litige contractuel';
 export const InternetTag = 'Internet';
 export const DangerousProductTag = 'Produit dangereux';
+export const ReponseConsoTag = 'ReponseConso';
 
 export interface SubcategoryBase extends Category {
   title: string;
@@ -36,6 +37,7 @@ export enum CompanyKinds {
 }
 
 export interface Category {
+  id?: string;
   subcategoriesTitle?: string;
   subcategories?: Subcategory[];
   companyKind?: string;
@@ -126,7 +128,7 @@ export const collectTags = (data: Category | Subcategory | Anomaly): string[] =>
   return ((data as Subcategory).tags || []).concat(...(data.subcategories || []).map(s => collectTags(s)));
 };
 
-export const enrichAnomaly = (anomaly: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(anomaly), []);
+export const enrichAnomaly = (_: Category): Category => askCompanyKindIfMissing(propagateCompanyKinds(_), []);
 
 export const instanceOfSubcategoryInput = (_?: Category): _ is SubcategoryInput => {
   return !!(_ as SubcategoryInput)?.detailInputs;

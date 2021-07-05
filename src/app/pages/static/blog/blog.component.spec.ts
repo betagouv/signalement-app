@@ -5,6 +5,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from '../../../components/components.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('BlogComponent', () => {
   let component: BlogComponent;
@@ -17,7 +19,9 @@ describe('BlogComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         MarkdownModule.forRoot(),
-        ComponentsModule
+        ComponentsModule,
+        NoopAnimationsModule,
+        BsDatepickerModule.forRoot(),
       ]
     })
     .compileComponents();
