@@ -1,11 +1,6 @@
 - title: J'ai été malade après avoir mangé
   example: 'Exemple : vomissement, maux de ventre'
-  information:
-    title: Il peut s'agir d'une intoxication alimentaire
-    content: Les intoxications alimentaires ne peuvent pas être signalées sur SignalConso.Ces signalements nécessitent une analyse individualisée et rapide (notamment le nombre de personnes malades, les symptômes et les aliments consommés ).
-    actions:
-      - question: Comment le signaler&#160;?
-        answer: Signalez-le sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank" />de la DGCCRF</a>
+  subcategories: !!import/single ./intoxication-alimentaire.yml
 - title: Hygiène
   companyKind: SIRET
   example: 'Exemple : locaux sales, rat, chaîne du froid'
