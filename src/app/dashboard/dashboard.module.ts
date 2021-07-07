@@ -15,8 +15,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { WebsitesModule } from './websites/websites.module';
 import { ReportedPhonesModule } from './reported-phones/reported-phones.module';
 import { SharedModule } from './shared/shared.module';
+import { EnterpriseImporterComponent, EnterpriseImporterFileComponent } from './enterprise-importer/enterprise-importer.component';
 
 const routes: Routes = [
+  { path: 'entreprises-import', component: EnterpriseImporterComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
   { path: 'mode-emploi-dgccrf', component: DGCCRFComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.DGCCRF] } },
   { path: 'mes-telechargements', component: AsyncFilesComponent, canActivate: [AuthGuard] },
   { path: 'admin/invitation-ccrf', component: AdminComponent, canActivate: [AuthGuard], data: { expectedRoles: [Roles.Admin] } },
@@ -25,6 +27,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    EnterpriseImporterComponent,
+    EnterpriseImporterFileComponent,
     DGCCRFComponent,
     AdminComponent,
     AsyncFilesComponent,
