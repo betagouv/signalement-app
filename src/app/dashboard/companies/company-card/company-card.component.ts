@@ -45,9 +45,11 @@ export class CompanyCardComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.user.subscribe((user: User | undefined) => this.user = user);
-    this.companyAddressForm.patchValue({
-      address: this.userAccess.address,
-    });
+    if (this.userAccess?.address) {
+      this.companyAddressForm.patchValue({
+        address: this.userAccess.address,
+      });
+    }
   }
 
   openModal(template: TemplateRef<any>) {

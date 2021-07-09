@@ -92,7 +92,7 @@ describe('ReportService', () => {
       expect(reportRequest.request.body['subcategories']).toEqual([subcategory1.title, subcategory2.title]);
       expect(reportRequest.request.body['tags']).toEqual([...(subcategory1.tags || []), ...(subcategory2.tags || [])]);
       expect(reportRequest.request.body['companyName']).toBe(draftReport.draftCompany.name);
-      expect(reportRequest.request.body['companyAddress']).toBe(draftReport.draftCompany.name + ' - ' + draftReport.draftCompany.address);
+      expect(reportRequest.request.body['companyAddress']).toBe(draftReport.draftCompany.address);
       expect(reportRequest.request.body['firstName']).toBe(draftReport.consumer.firstName);
       expect(reportRequest.request.body['lastName']).toBe(draftReport.consumer.lastName);
       expect(reportRequest.request.body['email']).toBe(draftReport.consumer.email);
