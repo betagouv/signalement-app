@@ -35,7 +35,14 @@
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.address">
             <div class="col-12">
-              {{draftReport.draftCompany.name ? 'Adresse : ': 'Rue : '}}{{draftReport.draftCompany.address}}
+              {{draftReport.draftCompany.name ? 'Adresse : ': 'Rue : '}}
+              {{draftReport.draftCompany.address.number}}
+              {{draftReport.draftCompany.address.street}}
+              -
+              {{draftReport.draftCompany.address.addressSupplement}}
+              -
+              {{draftReport.draftCompany.address.postalCode}}
+              {{draftReport.draftCompany.address.city}}
             </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">

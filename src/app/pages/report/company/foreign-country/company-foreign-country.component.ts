@@ -76,12 +76,16 @@ export class CompanyForeignCountryComponent implements OnInit {
       if (this.isForeignCtrl.value === IsForeignValues.true) {
         this.complete.emit({
           name: this.nameCtrl.value,
-          country: this.countryCtrl.value,
-          postalCode: this.postalCodeCtrl.value,
+          address: {
+            country: this.countryCtrl.value,
+            postalCode: this.postalCodeCtrl.value,
+          },
         }) ;
       } else {
         this.complete.emit({
-          postalCode: this.postalCodeCtrl.value,
+          address: {
+            postalCode: this.postalCodeCtrl.value,
+          }
         });
       }
     }

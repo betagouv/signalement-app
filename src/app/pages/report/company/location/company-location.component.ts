@@ -40,9 +40,11 @@ export class CompanyLocationComponent implements OnInit {
     } else {
       this.locationForm.disable();
       this.complete.emit({
-        address: this.addressCtrl?.value,
-        postalCode: this.postalCodeCtrl.value
-      }) ;
+        address: {
+          street: this.addressCtrl?.value,
+          postalCode: this.postalCodeCtrl.value
+        },
+      });
     }
   }
 

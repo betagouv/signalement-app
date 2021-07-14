@@ -16,6 +16,7 @@ import { CompanyInvitationComponent } from './company-invitation/company-invitat
 import { CompanyAccessesComponent } from './company-accesses/company-accesses.component';
 import { SharedModule } from '../shared/shared.module';
 import { CompanySearchDialogModule } from './company-search-dialog/company-search-dialog.component';
+import { PanelModule } from '../shared/panel/panel.module';
 
 const routes: Routes = [
   { path: 'entreprise/acces/:siret', component: CompanyAccessesComponent, canActivate: [AuthGuard] },
@@ -48,6 +49,7 @@ const routes: Routes = [
     AppPermissionModule,
     PaginationModule.forRoot(),
     SharedModule,
+    PanelModule,
   ],
   exports: [
     RouterModule,

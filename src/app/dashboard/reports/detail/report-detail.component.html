@@ -123,9 +123,15 @@
               <div>
                 <strong>{{report.company?.siret}}</strong>
               </div>
-              <div *ngFor="let line of report.company.address?.split(' - ')">{{line}}</div>
-              <div *ngIf="!report.company.name && report.company.postalCode">
-                {{report.company.postalCode}}
+              <div>{{report.company.name}}</div>
+              <div *ngIf="report.company.address.number || report.company.address.street">
+                {{report.company.address.number}} {{report.company.address.street}}
+              </div>
+              <div *ngIf="report.company.address.addressSupplement">
+                {{report.company.address.addressSupplement}}
+              </div>
+              <div *ngIf="report.company.address.postalCode || report.company.address.city">
+                {{report.company.address.postalCode}} {{report.company.address.city}}
               </div>
               <div *ngIf="report.company | isForeign">
                 {{report.company.country}}

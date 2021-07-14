@@ -72,8 +72,13 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '38012986645100',
           name: 'ORANGE',
-          address: 'BAT A - 1 AVENUE DU PDT NELSON MANDELA - 94110 ARCUEIL',
-          postalCode: '94110',
+          address: {
+            number: '1',
+            street: 'VENUE DU PDT NELSON MANDELA',
+            postalCode: '94110',
+            addressSupplement: 'BAT A',
+            city: 'ARCUEIL',
+          },
           activityLabel: 'Commerce de détail de matériels de télécommunication en magasin spécialisé',
           highlight: null
         }
@@ -86,8 +91,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
           siret: '34305956400959',
           name: 'SOCIETE FRANCAISE DU RADIOTELEPHONE - SFR',
           brand: 'SFR',
-          address: '16 RUE DU GENERAL DE BOISSIEU - 75015 PARIS 15',
-          postalCode: '75015',
+          address: {
+            number: '16',
+            street: 'RUE DU GENERAL DE BOISSIEU',
+            postalCode: '75015',
+            city: 'PARIS 15',
+          },
           activityLabel: 'Télécommunications sans fil',
           highlight: null
         }
@@ -99,8 +108,13 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '39748093003464',
           name: 'BOUYGUES TELECOM',
-          address: '13 A 15 - 13 AVENUE DU MARECHAL JUIN - 92360 MEUDON',
-          postalCode: '92360',
+          address: {
+            number: '13',
+            addressSupplement: '13 A 15',
+            street: 'AVENUE DU MARECHAL JUIN',
+            postalCode: '92360',
+            city: 'MEUDON',
+          },
           activityLabel: 'Autres activités informatiques',
           highlight: null
         }
@@ -112,16 +126,24 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '49924713800021',
           name: 'FREE MOBILE',
-          address: '16 RUE DE LA VILLE L EVEQUE - 75008 PARIS 8',
-          postalCode: '75008',
+          address: {
+            number: '16',
+            street: 'RUE DE LA VILLE L EVEQUE',
+            postalCode: '75008',
+            city: 'PARIS 8',
+          },
           activityLabel: 'Télécommunications sans fil',
           highlight: null
         },
         <CompanySearchResult> {
           siret: '42193886100034',
           name: 'FREE',
-          address: '8 RUE DE LA VILLE L EVEQUE - 75008 PARIS 8',
-          postalCode: '75008',
+          address: {
+            number: '8',
+            street: 'RUE DE LA VILLE L EVEQUE',
+            postalCode: '75008',
+            city: 'PARIS 8',
+          },
           activityLabel: 'Télécommunications filaires',
           highlight: null
         }
@@ -134,8 +156,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
           siret: '45122569200024',
           name: 'ENI GAS & POWER FRANCE',
           brand: 'ENI',
-          address: '24 RUE JACQUES IBERT - 92300 LEVALLOIS-PERRET',
-          postalCode: '92300',
+          address: {
+            number: '24',
+            street: 'RUE JACQUES IBERT',
+            postalCode: '92300',
+            city: 'LEVALLOIS-PERRET',
+          },
           activityLabel: 'Commerce de combustibles gazeux par conduites',
           highlight: 'Pour tout signalement relatif à ENI (abonnements énergétiques, gaz, etc.)'
         }
@@ -148,8 +174,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
           siret: '48777332700027',
           name: 'AMAZON EU SARL',
           brand: 'AMAZON EU SARL SUCCURSALE FRANCAISE',
-          address: '67 BOULEVARD DU GENERAL LECLERC - 92110 CLICHY',
-          postalCode: '92110',
+          address: {
+            number: '67',
+            street: 'BOULEVARD DU GENERAL LECLERC',
+            postalCode: '92110',
+            city: 'CLICHY',
+          },
           activityLabel: 'Vente à distance sur catalogue général',
           highlight: 'Pour tout problème concernant le site de vente en ligne Amazon'
         }
@@ -162,8 +192,13 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
           siret: '77570970201646',
           name: 'MUTUELLE ASSURANCE INSTITUTEUR FRANCE',
           brand: 'MAIF',
-          address: '200 AVENUE SALVADOR ALLENDE - BP 303 - 79000 NIORT',
-          postalCode: '79000',
+          address: {
+            number: '200',
+            addressSupplement: 'BP 303',
+            street: 'AVENUE SALVADOR ALLENDE',
+            postalCode: '79000',
+            city: 'NIORT',
+          },
           activityLabel: 'Autres assurances',
           highlight: 'Pour tout problème concernant votre assureur, peu importe votre lieu d\'habitation'
         }
@@ -175,8 +210,13 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '44478651100022',
           name: 'GRDF',
-          address: 'TSA 60800 - 6 RUE CONDORCET - 75009 PARIS 9',
-          postalCode: '75009',
+          address: {
+            number: '6',
+            addressSupplement: 'TSA 60800',
+            street: 'RUE CONDORCET',
+            postalCode: '75009',
+            city: 'PARIS 9',
+          },
           activityLabel: 'Distribution de combustibles gazeux par conduites',
           highlight: 'Pour tout problème avec GRDF, peu importe votre lieu d\'habitation'
         }
@@ -188,8 +228,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '44460844213631',
           name: 'ENEDIS',
-          address: '34 PLACE DES COROLLES - 92400 COURBEVOIE',
-          postalCode: '92400',
+          address: {
+            number: '34',
+            street: 'PLACE DES COROLLES',
+            postalCode: '92400',
+            city: 'COURBEVOIE',
+          },
           activityLabel: 'Distribution d\'électricité',
           highlight: 'Pour tout problème avec ENEDIS, peu importe votre lieu d\'habitation'
         }
@@ -202,8 +246,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
           siret: '42062477700108',
           name: 'GROUPE CANAL+ SA',
           brand: 'CANAL',
-          address: '1 PLACE DU SPECTACLE - 92130 ISSY-LES-MOULINEAUX',
-          postalCode: '92130',
+          address: {
+            number: '1',
+            street: 'PLACE DU SPECTACLE',
+            postalCode: '92130',
+            city: 'ISSY-LES-MOULINEAUX',
+          },
           activityLabel: 'Activités des sociétés holding',
           highlight: 'Pour tout ce qui concerne Canal+ et ses différents services'
         }
@@ -216,8 +264,7 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
           siret: '84455159800015',
           name: 'PMDE BOOKING.COM BV',
           brand: 'BOOKING.COM',
-          address: null,
-          postalCode: null,
+          address: {},
           activityLabel: 'Activités des sièges sociaux',
           highlight: 'Pour un problème relatif à une réservation sur le site Booking.com',
         }
@@ -229,8 +276,7 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '82501514200011',
           name: 'PAYPAL EUROPE ET CIE SCA',
-          address: null,
-          postalCode: null,
+          address: {},
           activityLabel: 'Conseil pour les affaires et autres conseils de gestion',
           highlight: 'Pour un problème relatif au service PayPal',
         }
@@ -242,8 +288,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '54210765113030',
           name: 'ENGIE',
-          address: '1 PLACE SAMUEL DE CHAMPLAIN - 92400 COURBEVOIE',
-          postalCode: '92400',
+          address: {
+            number: '1',
+            street: 'PLACE SAMUEL DE CHAMPLAIN',
+            postalCode: '92400',
+            city: 'COURBEVOIE',
+          },
           activityLabel: 'Commerce de combustibles gazeux par conduites',
           highlight: 'Pour tout problème avec Engie, peu importe votre lieu d\'habitation'
         }
@@ -255,8 +305,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '77570148500101',
           name: 'MATMUT MUTUALITE',
-          address: '66 RUE DE SOTTEVILLE - 76100 ROUEN',
-          postalCode: '76100',
+          address: {
+            number: '66',
+            street: 'RUE DE SOTTEVILLE',
+            postalCode: '76100',
+            city: 'ROUEN',
+          },
           activityLabel: 'Autres assurances',
           highlight: 'Pour tout problème avec la Matmut, peu importe votre lieu d\'habitation'
         }
@@ -268,8 +322,13 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '39284731500067',
           name: 'SNCF VOYAGES DEVELOPPEMENT',
-          address: 'CNIT 1 - 2 PLACE DE LA DEFENSE - 92400 COURBEVOIE',
-          postalCode: '92400',
+          address: {
+            number: '2',
+            street: 'PLACE DE LA DEFENSE',
+            addressSupplement: 'CNIT 1',
+            postalCode: '92400',
+            city: 'COURBEVOIE',
+          },
           activityLabel: 'SNCF',
           highlight: 'Pour tout problème avec la SNCF, peu importe votre lieu d\'habitation'
         }
@@ -281,8 +340,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '55208131766522',
           name: 'ELECTRICITE DE FRANCE',
-          address: '22 AVENUE DE WAGRAM - 75008 PARIS 8',
-          postalCode: '75008',
+          address: {
+            number: '22',
+            street: 'AVENUE DE WAGRAM',
+            postalCode: '75008',
+            city: 'PARIS 8',
+          },
           activityLabel: 'Production d\'électricité',
           highlight: 'Pour tout problème avec EDF, peu importe votre lieu d\'habitation'
         }
@@ -294,8 +357,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '84535345700011',
           name: 'EUROSTAR FRANCE SAS',
-          address: '5 RUE DU DELTA - 75009 PARIS 9',
-          postalCode: '75009',
+          address: {
+            number: '5',
+            street: 'RUE DU DELTA',
+            postalCode: '75009',
+            city: 'PARIS 9',
+          },
           activityLabel: 'Transports urbains et suburbains de voyageurs',
           highlight: 'Pour tout problème avec Eurostar, peu importe votre lieu d\'habitation'
         }
@@ -307,16 +374,24 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '40321003200104',
           name: 'VEOLIA ENVIRONNEMENT',
-          address: '21 RUE LA BOETIE - 75008 PARIS 8',
-          postalCode: '75008',
+          address: {
+            number: '21',
+            street: 'RUE LA BOETIE',
+            postalCode: '75008',
+            city: 'PARIS 8',
+          },
           activityLabel: 'Activités des sièges sociaux',
           highlight: 'Pour tout problème avec Veolia Environnement, peu importe votre lieu d\'habitation'
         },
         <CompanySearchResult> {
           siret: '57202552610945',
           name: 'VEOLIA EAU - COMPAGNIE GENERALE DES EAUX',
-          address: '21 RUE LA BOETIE - 75008 PARIS 8',
-          postalCode: '75008',
+          address: {
+            number: '21',
+            street: 'RUE LA BOETIE',
+            postalCode: '75008',
+            city: 'PARIS 8',
+          },
           activityLabel: 'Captage, traitement et distribution d\'eau',
           highlight: 'Pour tout problème avec Veolia Eau, peu importe votre lieu d\'habitation'
         }
@@ -328,8 +403,12 @@ export class SearchCompanyService extends FetchService<CompanySearchResult[]> {
         <CompanySearchResult> {
           siret: '53851847300011',
           name: 'HARMONIE MUTUELLE',
-          address: '143 RUE BLOMET - 75015 PARIS 15',
-          postalCode: '75015',
+          address: {
+            number: '143',
+            street: 'RUE BLOMET',
+            postalCode: '75015',
+            city: 'PARIS 15',
+          },
           activityLabel: 'Autres assurances',
           highlight: 'Pour tout problème avec Harmonie Mutuelle, peu importe votre lieu d\'habitation'
         }
@@ -351,8 +430,13 @@ export class SearchCompanyByIdentityService extends FetchService<CompanySearchRe
   private readonly dgccrfCompany = <CompanySearchResult> {
     siret: '12002503600035',
     name: 'DIRECTION GENERALE DE LA CONCURRENCE, DE LA CONSOMMATION ET DE LA REPRESSION DES FRAUDES',
-    address: 'TELEDOC 071 - 59 BD VINCENT AURIOL - 75013 PARIS 13',
-    postalCode: '75013',
+    address: {
+      number: '59',
+      street: 'BD VINCENT AURIOL',
+      addressSupplement: 'TELEDOC 071',
+      postalCode: '75013',
+      city: 'PARIS 13',
+    },
     activityLabel: 'Administration publique (tutelle) des activités économiques',
     highlight: null
   };

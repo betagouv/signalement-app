@@ -57,7 +57,14 @@
             </div>
           </ng-container>
           <div *ngIf="draftReport.draftCompany.address">
-            {{draftReport.draftCompany.name ? 'Adresse : ': 'Rue : '}} : {{draftReport.draftCompany.address}}
+            Addresse:
+            {{draftReport.draftCompany.address.number}}
+            {{draftReport.draftCompany.address.street}}
+            -
+            {{draftReport.draftCompany.address.addressSupplement}}
+            -
+            {{draftReport.draftCompany.address.postalCode}}
+            {{draftReport.draftCompany.address.city}}
           </div>
           <div *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">
             Code postal : {{draftReport.draftCompany.postalCode}}
