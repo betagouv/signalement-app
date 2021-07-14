@@ -30,7 +30,9 @@
           </div>
 
           <div *ngIf="companySearchResult.address">
-            <div *ngFor="let line of companySearchResult.address.split(' - ')">{{line}}</div>
+            <div>{{companySearchResult.address.number}} {{companySearchResult.address.street}}</div>
+            <div>{{companySearchResult.address.addressSupplement}}</div>
+            <div>{{companySearchResult.address.postalCode}} {{companySearchResult.address.city}}</div>
           </div>
         </label>
       </div>

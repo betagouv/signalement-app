@@ -39,7 +39,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
     ]).subscribe(([draftReport, countries]) => {
         if (draftReport) {
           this.draftReport = draftReport;
-          this.foreignCountry = countries.find(country => country.name === draftReport.draftCompany.country);
+          this.foreignCountry = countries.find(country => country.name === draftReport.draftCompany.address.country);
           this.initAcknowledgmentCase();
         } else {
           this.reportRouterService.routeToFirstStep();
@@ -61,7 +61,7 @@ export class AcknowledgmentComponent implements OnInit, OnDestroy {
       this.acknowledgmentCase = AcknowledgmentCases.ReponseConso;
     } else if (this.draftReport.employeeConsumer) {
       this.acknowledgmentCase = AcknowledgmentCases.EmployeeReport;
-    } else if (this.draftReport.draftCompany.country ?? 'France' !== 'France') {
+    } else if (this.draftReport.draftCompany.address.country ?? 'France' !== 'France') {
       this.acknowledgmentCase = AcknowledgmentCases.ForeignCompany;
     } else if (!this.draftReport.isTransmittableToPro) {
       this.acknowledgmentCase = AcknowledgmentCases.NotTransmittable;

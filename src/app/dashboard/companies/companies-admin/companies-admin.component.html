@@ -169,7 +169,17 @@
               </td>
               <td><a [routerLink]="['/entreprises', 'recherche']" [queryParams]="{q: toActivate.company.siret}">{{toActivate.company.name}} ({{toActivate.company.siret}})</a></td>
               <td>
-                <small *ngFor="let line of toActivate.company.address.split(' - ')">{{line}}<br /></small>
+                <small>{{toActivate.company.name}}</small><br/>
+                <small>
+                  {{toActivate.company.address.number}}
+                  {{toActivate.company.address.street}}
+                </small>
+                <br/>
+                <small>
+                  {{toActivate.company.address.addressSupplement}}
+                </small>
+                <br/>
+                <small>{{toActivate.company.address.postalCode}} {{toActivate.company.address.city}}</small><br/>
               </td>
               <td class="text-center">{{toActivate.tokenCreation | date : 'dd/MM/yyyy'}}</td>
               <td class="text-center">{{toActivate.lastNotice && "✓"}}</td>

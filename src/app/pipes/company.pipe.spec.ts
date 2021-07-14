@@ -1,5 +1,6 @@
 import { IsForeignPipe } from './company.pipe';
 import { genCompany } from '../../../test/fixtures.spec';
+import { Company } from '../model/Company';
 
 describe('CompanyPipe', () => {
   let pipe: IsForeignPipe;
@@ -13,14 +14,17 @@ describe('CompanyPipe', () => {
   });
 
   it('should be false if company country is undefined', () => {
-    expect(pipe.transform({ ...genCompany(), country: undefined })).toBeFalse();
+    const company: Company = { ...genCompany(), address: {country: undefined }};
+    expect(pipe.transform(company)).toBeFalse();
   });
 
   it('should be false if company country is France', () => {
-    expect(pipe.transform({ ...genCompany(), country: 'France' })).toBeFalse();
+    const company: Company = { ...genCompany(), address: {country: 'France' }};
+    expect(pipe.transform(company)).toBeFalse();
   });
 
   it('should be true if company country is not France', () => {
-    expect(pipe.transform({ ...genCompany(), country: 'Italie' })).toBeTrue();
+    const company: Company = { ...genCompany(), address: {country: 'Italie' }};
+    expect(pipe.transform(company)).toBeTrue();
   });
 });

@@ -17,7 +17,7 @@ export class PublicCompanyClient {
 
   readonly searchCompaniesByIdentity = (identity: string) => {
     return this.client.get<CompanySearchResult[]>(`/companies/search/${identity}`, {})
-      .then(companies => companies.filter(_ => _.postalCode));
+      .then(companies => companies.filter(_ => _.address.postalCode));
   };
 
   readonly searchCompaniesByUrl = (url: string) => {

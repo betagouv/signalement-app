@@ -140,11 +140,15 @@ export function genConsumer() {
 export function genCompanySearchResult() {
   return <CompanySearchResult>{
     name: randomstring.generate(),
-    address: randomstring.generate() + ' - ' + randomstring.generate(),
-    postalCode: randomstring.generate({
-      length: 5,
-      charset: 'numeric'
-    })
+    address: {
+      number: randomstring.generate(),
+      street: randomstring.generate(),
+      city: randomstring.generate(),
+      postalCode: randomstring.generate({
+        length: 5,
+        charset: 'numeric'
+      })
+    },
   };
 }
 
