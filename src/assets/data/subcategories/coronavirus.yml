@@ -36,13 +36,13 @@
     - title: Autre
 - title: Arnaque et publicité mensongère liées au COVID-19
   example: "Exemple : publicité trompeuse utilisant l'argument du COVID-19, faux désinfecteur"
-- title: Ouverture non autorisée d'un commerce ou lieu recevant du public
-  tags:
-    - ReponseConso
-  information:
-    content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter les services de police.
-          <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
-- title: Problème avec les règles d'hygiène ou de distanciation physique
+#- title: Ouverture non autorisée d'un commerce ou lieu recevant du public
+#  tags:
+#    - ReponseConso
+#  information:
+#    content: Si vous souhaitez signaler une entreprise qui ne respecte pas les consignes liées au confinement, vous devez contacter les services de police.
+#          <br> La répression des fraudes ne peut pas intervenir pour ce type de problème.
+- title: Non-respect des règles d'hygiène, de la distanciation physique ou du pass sanitaire
   companyKind: SIRET
   tags:
     - ReponseConso
