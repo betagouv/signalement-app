@@ -1,7 +1,7 @@
 import { ApiHostWithReportCount, ApiWebsite, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../model/ApiWebsite';
 import { Id } from '../model/Common';
-import { ApiClient } from '../ApiClient';
 import { ApiClientApi } from '../ApiClient';
+import {PaginatedData} from "../../model/PaginatedData";
 
 export class WebsiteClient {
 
@@ -9,7 +9,8 @@ export class WebsiteClient {
   }
 
   readonly list = (): Promise<ApiWebsiteWithCompany[]> => {
-    return this.client.get<ApiWebsiteWithCompany[]>(`/websites`);
+    return this.client.get<PaginatedData<ApiWebsiteWithCompany>>(`/websites`)
+      .then(paginated => paginated.entities);
   };
 
   readonly listUnregistered = (q?: string, start?: string, end?: string): Promise<ApiHostWithReportCount[]> => {
