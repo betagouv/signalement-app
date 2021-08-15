@@ -1,5 +1,7 @@
 - title: Produit périmé
   subcategoriesTitle: 'Vous voulez signaler&#160;:'
+  tags:
+    - ReponseConso
   subcategories:
     - title: Un constat fréquent de produits périmés dans un établissement
       subcategoriesTitle: Quels sont les produits concernés&#160;?
@@ -232,6 +234,8 @@
           fileLabel: Photo du produit
     - title: Corps étranger "dur"
       example: 'Exemple : bout de verre, morceau de métal, dent'
+      tags:
+        - ReponseConso
       information:
         title: Vous souhaitez signaler la présence d'un corps étranger "dur"
         actions:
@@ -282,6 +286,8 @@
           fileLabel: Photo du produit
 - title: Problème avec l'emballage ou l'étiquette
   example: 'Exemple : liste des ingrédients manquante, logo trompeur'
+  tags:
+    - ReponseConso
   subcategories:
     - title: Informations manquantes
       detailInputs:
@@ -359,6 +365,8 @@
     - title: Autres problèmes d'étiquette ou emballage
 - title: Problème de quantité
   example: 'Exemple : poids indiqué non conforme, balance non tarée'
+  tags:
+    - ReponseConso
   subcategories:
     - title: Le commerçant n'effectue pas la tare lors de la pesée
       example: Tarer une balance signifie imposer la valeur zéro sur une balance alors qu'il y a un emballage dessus, pour ne peser que le contenu.
@@ -442,6 +450,8 @@
           <br/>Par contre, si votre plat ne vous convient pas pour une question de goût uniquement, le restaurateur est libre de le reprendre ou non.
 - title: Produit rappelé toujours en vente
   example: Le produit fait l'objet d'une mesure de rappel des autorités
+  tags:
+    - ReponseConso
   detailInputs:
     - label: Date du constat
       rank: 1
