@@ -8,6 +8,7 @@
     - title: Un produit dangereux
       example: 'Exemple : jouet, cosmétique'
       tags:
+        - ReponseConso
         - Produit dangereux
       subcategories:
         - title: Produit alimentaire
@@ -51,6 +52,8 @@
       subcategories:
         - title: Prix
           example: 'Exemple : prix faux en caisse, prix pas affiché'
+          tags:
+            - ReponseConso
           subcategories:
             - title: Le prix à la caisse est différent du prix affiché
               example: 'Exemple : le prix à la caisse est de 5 euros alors que le prix affiché en rayon est de 3 euros'
@@ -231,6 +234,8 @@
                       optionnal: true
             - title: Problème de température
               example: 'Exemple : rupture de la chaîne du froid'
+              tags:
+                - ReponseConso
               detailInputs:
                 - label: Quel est le problème&#160;?
                   rank: 1
@@ -256,7 +261,11 @@
               example: 'Exemple : les odeurs des poubelles arrivent dans mon appartement, les clients se garent devant chez moi'
               information: !!import/single ../common/info/voisinage.yml
             - title: Autre problème d'hygiène
+              tags:
+                - ReponseConso
         - title: Produit périmé
+          tags:
+            - ReponseConso
           subcategoriesTitle: 'Vous voulez signaler&#160;:'
           subcategories:
             - title: Un constat fréquent de produits périmés dans un établissement
@@ -296,6 +305,8 @@
               subcategories: !!import/single ../common/date.yml
         - title: Publicité
           example: 'Exemple : publicité trompeuse, produit du catalogue indisponible'
+          tags:
+            - ReponseConso
           subcategories:
             - title: Indisponibilité des produits en publicité
               detailInputs:
@@ -523,6 +534,8 @@
                                 answer: C'est à vous de prouver l'existence du vice caché, avec un rapport d'expertise par exemple.
                                   <br/>Vous avez deux ans à partir de la découverte du défaut pour faire la demande .
             - title: Autre raison
+              tags:
+                - ReponseConso
               example: 'Exemple: vêtement trop petit, cadeau en doublon, j''ai changé d''avis, prix moins cher ailleurs, je n''aime pas la couleur'
               subcategoriesTitle: Le remboursement ou la reprise d'un article dans un magasin n'est pas une obligation. Vous êtes-vous assuré qu’il proposait bien l'échange ou le remboursement des articles&#160;?
               subcategories:
@@ -653,6 +666,7 @@
 - title: un achat suite à la visite d'un vendeur à mon domicile
   companyKind: LOCATION
   tags:
+    - ReponseConso
     - Démarchage à domicile
   subcategories:
     - title: C'est un aliment ou une boisson

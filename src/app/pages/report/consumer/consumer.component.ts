@@ -32,6 +32,9 @@ export class ConsumerComponent implements OnInit {
     private reportStorageService: ReportStorageService,
     private reportRouterService: ReportRouterService,
     private analyticsService: AnalyticsService) {
+    this.confirmationCodeCtrl.valueChanges.subscribe((value: string) => {
+      this.confirmationCodeCtrl.setValue(value.replace(/[^\d]/g, '').slice(0, 6), { emitEvent: false });
+    });
   }
 
   isEmailValid?: boolean;

@@ -46,6 +46,8 @@
     - title: Informations du produit ou notice uniquement en langue étrangère
       example: Aucune information traduite en français
       subcategoriesTitle: Où avez-vous acheté votre produit&#160;?
+      tags:
+        - ReponseConso
       subcategories:
         - title: En France (Outre-mer compris)
           detailTitle: Problème de langue française
@@ -69,6 +71,8 @@
             title: L'obligation d'utiliser la langue française ne s'applique pas dans les autres pays.
     - title: Informations trompeuses ou fausses
       example: 'Exemple : "en or" alors qu''il s''agit de "plaqué or", "fabriqué en France" alors que ce n''est pas le cas '
+      tags:
+        - ReponseConso
       detailInputs:
         - label: Quel est le type de produit&#160;?
           rank: 1
@@ -113,6 +117,8 @@
   subcategoriesTitle: Quel est le type de produit&#160;?
   subcategories:
     - title: Un produit emballé par le fabricant comme une boîte de conserve, un paquet, une bouteille
+      tags:
+        - ReponseConso
       example: 'La quantité est directement imprimée sur l''emballage par le fabricant'
       description: Une petite différence entre la quantité écrite sur l'emballage et la quantité de votre produit est autorisée.
         <br/>Par contre, ces différences sont encadrées par la loi.
