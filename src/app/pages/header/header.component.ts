@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Permissions, Roles, User } from '../../model/AuthUser';
 import { NavigationEnd, Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 enum NavItems {
   Home = '/',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('navbarContent') navbarContent: ElementRef<any>;
 
+  readonly dashboardBaseUrl = environment.dashboardBaseUrl;
   roles = Roles;
   permissions = Permissions;
   user: User;
