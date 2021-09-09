@@ -45,7 +45,7 @@ describe('HeaderComponent', () => {
     it('should display 2 menu items and an authentication button when no user is authenticated', () => {
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelectorAll('.nav-item > .nav-link').length).toBe(3);
-      expect(nativeElement.querySelector('.nav-item > button').textContent.trim()).toEqual('Espace pro');
+      expect(nativeElement.querySelector('.nav-item > button').textContent.trim()).toContain('Espace pro');
     });
   });
 

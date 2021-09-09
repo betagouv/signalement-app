@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  dashboardBaseUrl: '${DASHBOARD_BASE_URL}',
   apiReportBaseUrl: '${API_BASE_URL}',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
