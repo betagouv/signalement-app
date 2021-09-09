@@ -13,7 +13,6 @@ import localeFr from '@angular/common/locales/fr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NotFoundComponent } from './pages/static/notfound/notfound.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { AccountModule } from './pages/account/account.module';
 import { Angulartics2Module } from 'angulartics2';
 import { ComponentsModule, NgxLoadingConfig } from './components/components.module';
 import { environment } from '../environments/environment';
@@ -23,7 +22,6 @@ import { AppPermissionModule } from './directives/app-permission/app-permission.
 import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 import { NgxLoadingModule } from 'ngx-loading';
-import { CompaniesModule } from './pages/companies/companies.module';
 import { PageModule } from './dashboard/shared/page/page.module';
 import { dashboardRoutes } from 'src/dashboardRoutes';
 
