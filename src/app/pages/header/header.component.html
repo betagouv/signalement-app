@@ -55,7 +55,9 @@
         </li>
         <li class="nav-item d-none d-lg-block" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *ngIf="!user; else userMenuLg">
           <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']">
-           Espace pro<img src="/assets/images/icon-unlock.svg" alt="" />
+            Espace pro
+            &nbsp;
+            <span class="material-icons">lock_open</span>
           </button>
         </li>
         <ng-template #userMenuLg>
