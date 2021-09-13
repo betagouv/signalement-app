@@ -35,7 +35,7 @@ class ErrorLogger extends ErrorHandler {
   constructor(private sentry: any) {
     super();
     if (environment.sentryDsn) {
-      this.sentry.init({ dsn: environment.sentryDsn });
+      this.sentry.init({ dsn: environment.sentryDsn, tracesSampleRate: .5});
     }
   }
 
@@ -65,7 +65,7 @@ class ErrorLogger extends ErrorHandler {
       { path: '', loadChildren: () => import('./pages/static/static.module').then(_ => _.StaticModule) },
       { path: '', loadChildren: () => import('./pages/anomlies-tree/anomalies-tree.module').then(_ => _.AnomaliesTreeModule) },
       { path: 'not-found', component: NotFoundComponent },
-      // { path: '**', component: NotFoundComponent },
+      { path: '**', component: NotFoundComponent },
     ], {
       scrollPositionRestoration: 'top',
       anchorScrolling: 'enabled',
@@ -105,6 +105,7 @@ export class AppModule {
     exports: '/mes-telechargements',
     companies: '/entreprises',
     companiesPro: '/mes-entreprises',
+    activatePro: (siret: string = ':siret') => `/entreprise/rejoindre/${siret}`,
     companyAccesses: (siret: string = ':siret') => `/entreprise/acces/${siret}`,
     companies_toActivate: '/entreprises/a-activer',
     companies_registered: '/entreprises/les-plus-signalees',
@@ -152,7 +153,7 @@ export class AppModule {
     '/connexion/perte-mot-de-passe/dgccrf': { redirectTo: this.dashboardRoutes.login },
     '/connexion/nouveau-mot-de-passe/:token': { redirectTo: this.dashboardRoutes.resetPassword },
     '/compte/inscription': { redirectTo: this.dashboardRoutes.register },
-    '/entreprise/rejoindre/([^\/]*?)': { redirectTo: this.dashboardRoutes.register },
+    '/entreprise/rejoindre/([^\/]*?)': { redirectTo: this.dashboardRoutes.activatePro },
     '/dgccrf/rejoindre': { redirectTo: this.dashboardRoutes.register },
     'entreprise/activation': { redirectTo: this.dashboardRoutes.registerBis },
     'activation': { redirectTo: this.dashboardRoutes.register },
