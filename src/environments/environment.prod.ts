@@ -3,7 +3,8 @@ export const environment = {
   dashboardBaseUrl: '${DASHBOARD_BASE_URL}',
   apiReportBaseUrl: '${API_BASE_URL}',
   apiReportBaseUrlX: ('${API_BASE_URL}' as string | undefined) === 'true',
-  skipReportEmailValidation: Boolean('${SKIP_REPORT_EMAIL_VALIDATION}') || false,
+// @ts-ignore
+  skipReportEmailValidation: '${SKIP_REPORT_EMAIL_VALIDATION}' === 'true',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
   reponseConsoDisplayRate: Number('${REPONSECONSO_DISPLAY_PERCENTAGE}') || 0,
