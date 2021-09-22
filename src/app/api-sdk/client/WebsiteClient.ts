@@ -1,7 +1,7 @@
 import { ApiHostWithReportCount, ApiWebsite, ApiWebsiteUpdateCompany, ApiWebsiteWithCompany } from '../model/ApiWebsite';
 import { Id } from '../model/Common';
 import { ApiClientApi } from '../ApiClient';
-import {PaginatedData} from "../../model/PaginatedData";
+import {PaginatedData} from "../model/PaginatedData";
 
 export class WebsiteClient {
 

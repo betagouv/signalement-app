@@ -6,14 +6,17 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { BannerComponent } from './banner/banner.component';
 import { CompanySearchResultsModule } from './company-search-results/company-search-results.module';
 import { CommonModule } from '@angular/common';
-import { BadgeStatusModule } from './label-status/badge-status.module';
 import { BadgeModule } from './badge/badge.module';
-import { FormsModule } from '@angular/forms';
-import { PanelModule } from '../dashboard/shared/panel/panel.module';
-import { PageModule } from '../dashboard/shared/page/page.module';
-import { AlertModule } from '../dashboard/shared/alert/alert';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PanelModule } from './panel/panel.module';
+import { PageModule } from './page/page.module';
+import { AlertModule } from './alert/alert';
 import { MatIconModule } from '@angular/material/icon';
 import { RadioContainerModule } from './radio-container/radio-container.module';
+import { BtnModule } from './btn/btn.module';
+import { ConfirmModule } from './confirm/confirm.module';
+import { LoadingModule } from './loading/loading.module';
+import { FenderModule } from './fender/fender';
 
 export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2A8194', tertiaryColour: '#1f2b50' };
 
@@ -41,13 +44,24 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     FormsModule,
     CommonModule,
     NgxLoadingModule,
-    BadgeStatusModule,
     CollapsableTextComponent,
     AttachmentsComponent,
     BannerComponent,
     CompanySearchResultsModule,
     BadgeModule,
     MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    PanelModule,
+    PageModule,
+    BtnModule,
+    ConfirmModule,
+    LoadingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FenderModule,
+    AlertModule,
   ],
   providers: [
   ]

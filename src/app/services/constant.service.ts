@@ -13,8 +13,6 @@ export class ConstantService {
   constructor(private apiSdk: ApiSdkService,) {
   }
 
-  readonly getReportStatusList = () => from(this.apiSdk.secured.constant.getReportStatusList());
-
   protected source = new BehaviorSubject<Country[] | undefined>(undefined);
 
   private _fetchingCountries = false;

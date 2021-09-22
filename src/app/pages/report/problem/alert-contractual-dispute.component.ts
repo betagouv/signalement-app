@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ComponentsModule } from '../../../components/components.module';
-import { SharedModule } from '../../../dashboard/shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
@@ -67,7 +66,6 @@ export class DialogContractualDisputeComponent {
   imports: [
     MatDialogModule,
     ComponentsModule,
-    SharedModule,
   ]
 })
 export class DialogContractualDisputeModule {

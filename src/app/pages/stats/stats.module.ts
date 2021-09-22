@@ -6,10 +6,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { ComponentsModule, NgxLoadingConfig } from '../../components/components.module';
 import { NgxLoadingModule } from 'ngx-loading';
-import { AppRoleModule } from '../../directives/app-role/app-role.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { PageModule } from '../../dashboard/shared/page/page.module';
-import { PanelModule } from '../../dashboard/shared/panel/panel.module';
+import { PageModule } from '../../components/page/page.module';
+import { PanelModule } from '../../components/panel/panel.module';
 
 const routes: Routes = [
   { path: 'stats', component: StatsComponent },
@@ -25,7 +24,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    AppRoleModule,
     TooltipModule.forRoot(),
     PageModule,
     PanelModule,

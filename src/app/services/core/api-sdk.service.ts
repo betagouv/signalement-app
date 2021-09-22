@@ -19,21 +19,6 @@ export class ApiSdkService {
     'Accept': 'application/json',
   };
 
-  readonly secured = new ApiSecuredSdk(new ApiClient({
-    headers: this.commonHeaders,
-    requestInterceptor: async (_?: RequestOption) => {
-      const authUser = await this.localStorage.getItem(AuthUserStorageKey).toPromise();
-      return {
-        ..._,
-        headers: {
-          ..._?.headers,
-          ...((authUser?.token) ? {'X-Auth-Token': authUser.token} : {}),
-        }
-      };
-    },
-    baseUrl: environment[Api.Report] + '/api'
-  }));
-
   readonly unsecured = new ApiPublicSdk(new ApiClient({
     headers: this.commonHeaders,
     baseUrl: environment[Api.Report] + '/api'

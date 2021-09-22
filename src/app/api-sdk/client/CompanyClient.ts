@@ -1,7 +1,7 @@
 import { ApiClientApi } from '../ApiClient';
 import { Company, CompanyCreation, CompanyUpdate } from '../../model/Company';
 import { Id } from '../model/Common';
-import { Event } from '../../model/ReportEvent';
+import { Event } from '../model/ReportEvent';
 import { format } from 'date-fns';
 
 export class CompanyClient {

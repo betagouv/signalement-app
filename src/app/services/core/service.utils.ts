@@ -11,56 +11,12 @@ export const TokenInfoStorageKey = 'TokenInfoSignalConso';
 })
 export class ServiceUtils {
 
-  constructor(private localStorage: LocalStorage) {
+  constructor() {
   }
 
   getUrl(api: Api, urlParams: string[]) {
     urlParams = urlParams.map(p => encodeURIComponent(p));
     return urlParams.reduce((acc, param) => `${acc}/${param}`, environment[api]);
-  }
-
-  getHttpHeaders() {
-    return {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      }
-    };
-  }
-
-  getAuthHeaders() {
-    return this.localStorage.getItem(AuthUserStorageKey).pipe(
-      map(authUser => {
-        const httpHeaders = this.getHttpHeaders();
-        if (authUser) {
-          Object.assign(httpHeaders.headers, { 'X-Auth-Token': authUser.token });
-        }
-        return httpHeaders;
-      })
-    );
-  }
-
-  getAuthHttpParam() {
-    return this.localStorage.getItem(AuthUserStorageKey).pipe(
-      map(authUser => {
-        let param = 'X-Auth-Token';
-        if (authUser) {
-          param = `${param}=${authUser.token}`;
-        }
-        return param;
-      })
-    );
-  }
-
-  objectToHttpParams<T extends object>(obj: T): { [key in keyof T]: string | string[] } {
-    return Object.entries(obj).reduce((acc, [key, _]) => ({
-      ...acc,
-      ...((_ !== undefined && _ !== null) ?
-        Array.isArray(_)
-          ? { [key]: _.map(item => `${item}`.trim()) }
-          : { [key]: `${_}`.trim() }
-        : {})
-    }), {}) as { [key in keyof T]: string | string[] };
   }
 }
 

@@ -24,17 +24,6 @@ export class FileUploaderService {
     );
   }
 
-  deleteFile(uploadedFile: UploadedFile) {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.delete(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files', uploadedFile.id, uploadedFile.filename]),
-          headers
-        );
-      }),
-    );
-  }
-
   getFileDownloadUrl(uploadedFile: UploadedFile) {
     return this.serviceUtils.getUrl(Api.Report, ['api', 'reports', 'files', uploadedFile.id, uploadedFile.filename]);
   }

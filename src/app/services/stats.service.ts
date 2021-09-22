@@ -37,17 +37,6 @@ export class StatsService {
     return this.http.get<MonthlyStat[]>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'read', 'percentage', 'monthly']));
   }
 
-  getReportReadByProMedianDelay() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<SimpleStat>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'read', 'delay']),
-          headers
-        );
-      })
-    );
-  }
-
   getReportWithResponsePercentage() {
     return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'responsed', 'percentage']));
   }
@@ -56,19 +45,7 @@ export class StatsService {
     return this.http.get<MonthlyStat[]>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'responsed', 'percentage', 'monthly']));
   }
 
-  getReportWithResponseMedianDelay() {
-    return this.serviceUtils.getAuthHeaders().pipe(
-      mergeMap(headers => {
-        return this.http.get<SimpleStat>(
-          this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'responsed', 'delay']),
-          headers
-        );
-      })
-    );
-  }
-
   getReportWithWebsitePercentage() {
     return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'website', 'percentage']));
   }
-
 }

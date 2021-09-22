@@ -1,40 +1,8 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { Company, CompanyCreation, CompanySearchResult, CompanyUpdate } from '../model/Company';
+import { CompanySearchResult } from '../model/Company';
 import { ApiSdkService } from './core/api-sdk.service';
 import { FetchService } from './helper/FetchService';
-import { CRUDListService } from './helper/CRUDListService';
-import { Event } from '../model/ReportEvent';
-
-export const MaxCompanyResult = 20;
-
-@Injectable({ providedIn: 'root' })
-export class UpdateCompanyService extends FetchService<Company> {
-
-  constructor(protected api: ApiSdkService) {
-    super(api, api.secured.company.updateCompanyAddress);
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class SaveUndeliveredDocumentService extends FetchService<Event> {
-
-  constructor(protected api: ApiSdkService) {
-    super(api, api.secured.company.saveUndeliveredDocument);
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class CompaniesService extends CRUDListService<Company, CompanyCreation, CompanyUpdate> {
-
-  constructor(protected api: ApiSdkService) {
-    super(api, {
-      create: api.secured.company.create,
-      list: api.secured.company.searchRegisterCompanies,
-      update: api.secured.company.updateCompanyAddress,
-    });
-  }
-}
 
 @Injectable({ providedIn: 'root' })
 export class SearchCompanyByURLService extends FetchService<CompanySearchResult[]> {

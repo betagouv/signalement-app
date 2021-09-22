@@ -1,0 +1,73 @@
+@import "../../../theme/variables";
+@import "../../../theme/media-queries";
+
+$alert-size: 52px;
+
+:host {
+  min-height: $alert-size;
+  display: flex;
+  align-items: center;
+  margin-bottom: spacing(2);
+  border-radius: $theme-border-radius;
+  border: 1px solid $theme-divider;
+  border-left-width: 4px;
+
+  &.-error {
+    //background: $theme-error-bg;
+    border-color: $theme-error-border;
+
+    .-icon {
+      color: $theme-error-border;
+    }
+  }
+
+  &.-info {
+    //background: $theme-info-bg;
+    border-color: $theme-info-border;
+
+    .-icon {
+      color: $theme-info-border;
+    }
+  }
+
+  &.-warning {
+    //background: $theme-warning-bg;
+    border-color: $theme-warning-border;
+
+    .-icon {
+      color: $theme-warning-border;
+    }
+  }
+
+  &.-success {
+    //background: $theme-success-bg;
+    border-color: $theme-success-border;
+
+    .-icon {
+      color: $theme-success-border;
+    }
+  }
+}
+
+.-icon {
+  min-height: $alert-size;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  margin-left: spacing(2);
+}
+
+@media #{$smaller-than-mobile} {
+  .-icon {
+    display: none;
+  }
+}
+
+.-body {
+  flex: 1;
+  padding: spacing() spacing(2);
+}
+
+.-action {
+  padding: 0 spacing(1);
+}

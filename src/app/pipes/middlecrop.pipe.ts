@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import Utils from '../utils';
+import Utils from '../utils/utils';
 
 @Pipe({
   name: 'middleCrop'
