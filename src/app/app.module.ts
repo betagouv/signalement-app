@@ -21,6 +21,7 @@ import { HeaderModule } from './pages/header/header.module';
 import { ContractualDisputeModule } from './pages/contractual-dispute/contractual-dispute.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { PageModule } from './components/page/page.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -77,7 +78,8 @@ class ErrorLogger extends ErrorHandler {
     Angulartics2Module.forRoot(),
     ComponentsModule,
     ContractualDisputeModule,
-    PageModule
+    PageModule,
+    MatProgressSpinnerModule
   ],
   exports: [],
   providers: [
