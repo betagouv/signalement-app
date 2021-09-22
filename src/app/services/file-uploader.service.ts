@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Api, ServiceUtils } from './core/service.utils';
 import { HttpClient } from '@angular/common/http';
-import { map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { FileOrigin, UploadedFile } from '../model/UploadedFile';
 
 @Injectable({

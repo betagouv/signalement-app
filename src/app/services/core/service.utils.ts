@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { LocalStorage } from '@ngx-pwa/local-storage';
-import { map } from 'rxjs/operators';
 
 export const AuthUserStorageKey = 'AuthUserSignalConso';
 export const TokenInfoStorageKey = 'TokenInfoSignalConso';

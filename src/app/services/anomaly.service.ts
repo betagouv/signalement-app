@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import anomaliesJSON from '../../assets/data/anomalies.json';
-import { Anomaly, collectTags, enrichAnomaly, InternetTag, Subcategory } from '../model/Anomaly';
+import { Anomaly, collectTags, enrichAnomaly, InternetTag } from '../model/Anomaly';
 
 @Injectable({
   providedIn: 'root'

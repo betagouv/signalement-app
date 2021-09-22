@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
 import { MonthlyStat, SimpleStat } from '../model/Statistics';
-import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
