@@ -6,8 +6,6 @@ import { ServiceUtils } from './core/service.utils';
 import { DetailInputValue, Step } from '../model/Report';
 import { environment } from '../../environments/environment';
 import { UploadedFile } from '../model/UploadedFile';
-import { ReportFilter } from '../model/ReportFilter';
-import { of } from 'rxjs';
 import { Department, Region } from '../model/Region';
 import { genDraftReport, genSubcategory } from '../../../test/fixtures.spec';
 
@@ -41,16 +39,6 @@ describe('ReportService', () => {
     reportService = TestBed.inject(ReportService);
     serviceUtils = TestBed.inject(ServiceUtils);
     httpMock = TestBed.inject(HttpTestingController);
-  });
-
-  beforeEach(() => {
-    spyOn(serviceUtils, 'getAuthHeaders').and.returnValue(of({
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'X-Auth-Token': 'lklklkjlkjlkj'
-      }
-    }));
   });
 
   it('should be created', () => {
@@ -99,94 +87,5 @@ describe('ReportService', () => {
       expect(reportRequest.request.body['details']).toEqual([{label: 'mon label :', value: 'ma value'}]);
     });
 
-  });
-  describe('get reports', () => {
-
-    it('should not pass a departments http param when there are no area report filter', (done) => {
-
-      const reportFilter: ReportFilter = {
-        end: new Date(),
-        start: new Date(),
-        offset: 0,
-        limit: 10,
-      };
-
-      reportService.getReports(reportFilter).subscribe(result => {
-          done();
-        }
-      );
-
-      const getReportRequest = httpMock.expectOne(req => req.url === `${environment.apiReportBaseUrl}/api/reports`);
-      getReportRequest.flush({
-        totalCount: 0,
-        hasNextPage: false,
-        entities: []
-      });
-
-      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
-      expect(getReportRequest.request.params.get('departments')).toBeNull();
-
-      httpMock.verify();
-    });
-
-    it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
-
-      const reportFilter: ReportFilter = {
-        departments: regionFixture.departments.map(_ => _.code),
-        end: new Date(),
-        start: new Date(),
-        offset: 0,
-        limit: 10,
-      };
-
-      reportService.getReports(reportFilter).subscribe(result => {
-          done();
-        }
-      );
-
-      const getReportRequest = httpMock.expectOne(req => req.url === `${environment.apiReportBaseUrl}/api/reports`);
-      getReportRequest.flush({
-        totalCount: 0,
-        hasNextPage: false,
-        entities: []
-      });
-
-      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
-      expect(getReportRequest.request.params.get('departments')).toEqual(`${dept1Fixture.code},${dept2Fixture.code}`);
-
-      httpMock.verify();
-    });
-
-    it('should pass a list of departments as departments http param when report filter contains a region area', (done) => {
-
-      const reportFilter: ReportFilter = {
-
-        departments: [dept2Fixture.code],
-        end: new Date(),
-        start: new Date(),
-        offset: 0,
-        limit: 10,
-      };
-
-      reportService.getReports(reportFilter).subscribe(result => {
-          done();
-        }
-      );
-
-      const getReportRequest = httpMock.expectOne(req => req.url === `${environment.apiReportBaseUrl}/api/reports`);
-      getReportRequest.flush({
-        totalCount: 0,
-        hasNextPage: false,
-        entities: []
-      });
-
-      expect(getReportRequest.request.params.get('offset')).toEqual(reportFilter.offset.toString());
-      expect(getReportRequest.request.params.get('limit')).toEqual(reportFilter.limit.toString());
-      expect(getReportRequest.request.params.get('departments')).toEqual(`${dept2Fixture.code}`);
-
-      httpMock.verify();
-    });
   });
 });

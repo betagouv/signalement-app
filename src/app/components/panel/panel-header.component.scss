@@ -1,0 +1,9 @@
+@import "../../../theme/variables";
+
+:host {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 spacing(1);
+  border-bottom: 1px solid $theme-divider;
+}

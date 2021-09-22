@@ -1,5 +1,10 @@
 <app-banner title="Erreur 404"></app-banner>
 
 <app-page pageDefinitionKey="notfound" class="text-center">
-  <h2>La page demandée n'a pas été trouvée.</h2>
+  <div style="display: flex; min-height: 200px; align-items: center; justify-content: center">
+    <h2 *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </h2>
+    <h2 *ngIf="!loading">La page demandée n'a pas été trouvée.</h2>
+  </div>
 </app-page>

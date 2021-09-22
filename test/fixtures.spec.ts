@@ -1,10 +1,8 @@
-import { Roles, User } from '../src/app/model/AuthUser';
-import { DraftReport, Report, ReportStatus, Step } from '../src/app/model/Report';
+import { DraftReport, ReportStatus, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
 import { Information, Subcategory } from '../src/app/model/Anomaly';
 import { Company, CompanySearchResult, ViewableCompany } from '../src/app/model/Company';
 import anomalies from '../src/assets/data/anomalies.json';
-import { PaginatedData } from '../src/app/model/PaginatedData';
 
 const randomstring = require('randomstring');
 
@@ -42,7 +40,6 @@ export function genEmail() {
 
 export const lastNames = ['Doe', 'Durand', 'Dupont'];
 export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'Fanny', 'Gérard'];
-export const roles = [Roles.Admin, Roles.Pro, Roles.DGCCRF];
 export const status = [ReportStatus.InProgress, ReportStatus.ClosedForPro];
 
 export const genViewableCompany = (): ViewableCompany => ({
@@ -57,19 +54,6 @@ export function genCompanyAccessLevel(siret?: string) {
     ...(siret ? {siret} : {}),
     level: oneOf(['admin', 'member'])
   };
-}
-
-export function genUser(role: Roles) {
-  return Object.assign(new User(), {
-    id: randomstring.generate(),
-    login: randomstring.generate(),
-    email: genEmail(),
-    password: randomstring.generate(),
-    firstName: oneOf(firstNames),
-    lastName: oneOf(lastNames),
-    role,
-    permissions: []
-  });
 }
 
 export function genDraftReport(lastStep: Step) {
@@ -103,30 +87,6 @@ export function genDraftReport(lastStep: Step) {
     draftReport.contactAgreement = oneBoolean();
   }
   return draftReport;
-}
-
-export function genReport(): Report {
-  return Object.assign(new Report(), {
-    id: randomstring.generate(),
-    category: randomstring.generate(),
-    subcategories: [genSubcategory()],
-    detailInputValues: [],
-    company: genCompany(),
-    uploadedFiles: [],
-    consumer: genConsumer(),
-    employeeConsumer: false,
-    contactAgreement: oneBoolean,
-    creationDate: new Date(),
-    status: oneOf(status)
-  });
-}
-
-export function genPaginatedReports(length: number): PaginatedData<Report> {
-  return {
-    totalCount: length,
-    hasNextPage: false,
-    entities: [...Array.from(Array(length).keys())].map(a => genReport())
-  };
 }
 
 export function genConsumer() {

@@ -66,11 +66,11 @@
             {{draftReport.draftCompany.address.postalCode}}
             {{draftReport.draftCompany.address.city}}
           </div>
-          <div *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">
-            Code postal : {{draftReport.draftCompany.postalCode}}
+          <div *ngIf="draftReport.draftCompany.address.postalCode && !draftReport.draftCompany.name">
+            Code postal : {{draftReport.draftCompany.address.postalCode}}
           </div>
-          <div *ngIf="draftReport.draftCompany | isForeign">
-            Pays : {{draftReport.draftCompany.country}}
+          <div *ngIf="draftReport.draftCompany.address.country && draftReport.draftCompany.address.country !== 'France'">
+            Pays : {{draftReport.draftCompany.address.country}}
           </div>
           <div *ngIf="draftReport.draftCompany.siret">
             SIRET : {{draftReport.draftCompany.siret}}

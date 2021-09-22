@@ -45,8 +45,10 @@
     <div class="text-center container d-lg-none">
 
       <div class="d-block d-lg-none button-pro text-right mb-2">
-        <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']" *ngIf="!user">
-          Espace pro<img src="/assets/images/icon-unlock.svg" alt="" />
+        <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']">
+          Espace pro
+          &nbsp;
+          <span class="material-icons">lock_open</span>
         </button>
       </div>
 

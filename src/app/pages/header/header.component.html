@@ -16,9 +16,6 @@
             aria-controls="navbarContent" aria-expanded="false" aria-label="Menu principal">
       <i class="material-icons text-primary">menu</i>
     </button>
-    <div class="d-lg-none" *ngIf="user">
-      <app-account-menu></app-account-menu>
-    </div>
     <div class="collapse navbar-collapse" id="navbarContent" #navbarContent>
       <ul class="navbar-nav ml-lg-auto">
         <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
@@ -33,38 +30,19 @@
             Comment ça marche ?
           </a>
         </li>
-        <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.Pro] else how">
-          <a class="nav-link" routerLink="/centre-aide/professionnel" [attr.aria-current]="activeItem === navItems.FaqPro"
-             [ngClass]="activeItem === navItems.FaqPro || activeItem === navItems.FaqConso ? 'active' : ''">
+        <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
+          <a class="nav-link" routerLink="/centre-aide/consommateur" [attr.aria-current]="activeItem === navItems.FaqConso"
+             [ngClass]="activeItem === navItems.FaqConso || activeItem === navItems.FaqPro ? 'active' : ''">
             Centre d'aide
           </a>
         </li>
-        <ng-template #how>
-          <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
-            <a class="nav-link" routerLink="/centre-aide/consommateur" [attr.aria-current]="activeItem === navItems.FaqConso"
-               [ngClass]="activeItem === navItems.FaqConso || activeItem === navItems.FaqPro ? 'active' : ''">
-              Centre d'aide
-            </a>
-          </li>
-        </ng-template>
-        <li class="nav-item" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *appRole="[roles.DGCCRF]">
-          <a class="nav-link" routerLink="/mode-emploi-dgccrf" [attr.aria-current]="activeItem === navItems.HowDGCCRF"
-             [ngClass]="activeItem === navItems.HowDGCCRF ? 'active' : ''">
-            Mode d'emploi
-          </a>
-        </li>
-        <li class="nav-item d-none d-lg-block" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent" *ngIf="!user; else userMenuLg">
+        <li class="nav-item d-none d-lg-block" [attr.data-toggle]="getNavItemDataToggle()" data-target="#navbarContent">
           <button type="button" class="btn btn-secondary" [routerLink]="['/entreprise/activation']">
             Espace pro
             &nbsp;
             <span class="material-icons">lock_open</span>
           </button>
         </li>
-        <ng-template #userMenuLg>
-          <li class="nav-item d-none d-lg-block">
-            <app-account-menu></app-account-menu>
-          </li>
-        </ng-template>
       </ul>
     </div>
   </nav>

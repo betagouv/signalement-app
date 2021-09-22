@@ -66,20 +66,6 @@
       <ngx-loading [show]="!reportReadByProPercentage"></ngx-loading>
     </app-panel-body>
   </app-panel>
-  <app-panel *appRole="[roles.Admin]">
-    <app-panel-body>
-      <h2 *ngIf="reportReadByProMedianDelay">
-        En moyenne l'entreprise met
-        <span class="count">{{reportReadByProMedianDelay.toFixed(1)}} jours</span>
-        pour lire le signalement
-        <i class="material-icons help" aria-hidden="true"
-           tooltip="Délai médian entre la création du signalement et la lecture du signalement par l'entreprise concernée">
-          help_outline
-        </i>
-      </h2>
-      <ngx-loading [show]="!reportReadByProMedianDelay"></ngx-loading>
-    </app-panel-body>
-  </app-panel>
   <app-panel>
     <app-panel-body>
       <h2 *ngIf="reportWithResponsePercentage !== undefined">
@@ -102,20 +88,6 @@
         <ngx-loading [show]="!monthlyReportWithResponseChart"></ngx-loading>
       </div>
       <ngx-loading [show]="reportWithResponsePercentage === undefined"></ngx-loading>
-    </app-panel-body>
-  </app-panel>
-  <app-panel *appRole="[roles.Admin]">
-    <app-panel-body>
-      <h2 *ngIf="reportWithResponseMedianDelay !== undefined">
-        En moyenne une entreprise met
-        <span class="count">{{reportWithResponseMedianDelay.toFixed(1)}} jours</span>
-        pour répondre au signalement après l'avoir lu
-        <i class="material-icons help" aria-hidden="true"
-           tooltip="Délai médian entre la lecture du signalement et la réponse par l'entreprise concernée">
-          help_outline
-        </i>
-      </h2>
-      <ngx-loading [show]="reportWithResponseMedianDelay === undefined"></ngx-loading>
     </app-panel-body>
   </app-panel>
   <app-panel>

@@ -1,5 +1,5 @@
 import { ApiClientApi } from '../ApiClient';
-import { ReportedPhone } from '../../model/ReportedPhone';
+import { ReportedPhone } from '../model/ReportedPhone';
 
 export class ReportedPhoneClient {
 

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FileOrigin, UploadedFile } from '../../model/UploadedFile';
 import { FileUploaderService } from '../../services/file-uploader.service';
-import Utils from '../../utils';
+import Utils from '../../utils/utils';
 import { fileSizeMax } from '../../pages/report/details/details.component';
 
 @Component({
@@ -93,9 +93,6 @@ export class AttachmentsComponent {
       this.uploadedFiles.findIndex(f => f.id === uploadedFile.id),
       1
     );
-    if (uploadedFile.id) {
-      this.fileUploaderService.deleteFile(uploadedFile).subscribe();
-    }
   }
 
 }
