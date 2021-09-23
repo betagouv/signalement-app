@@ -13,9 +13,8 @@
             content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank">signalement.social-sante.gouv.fr</a>
         - title: Un objet de santé
           example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
-          information:
-            title: Les problèmes de sécurité doivent être signalés avec un formulaire spécifique afin de traiter plus rapidement votre signalement.
-            content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://www.economie.gouv.fr/contact/contacter-la-dgccrf?dest=particulier" target="_blank">de la DGCCRF</a>
+          tags:
+            - Produit dangereux
     - title: La publicité (ou les informations sur la boîte) est trompeuse
       detailInputs:
         - label: Date de constat (ou date d'achat)
