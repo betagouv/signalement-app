@@ -1,6 +1,6 @@
 import { Inject, Injectable, PLATFORM_ID, Renderer2, RendererFactory2 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import Utils from '../utils';
+import Utils from '../utils/utils';
 
 declare var jQuery: any;
 

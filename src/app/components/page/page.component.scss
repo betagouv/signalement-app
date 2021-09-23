@@ -1,0 +1,22 @@
+@import "../../../theme/variables";
+
+:host {
+  background: $lightest-grey;
+  display: block;
+}
+
+main {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  padding: spacing(2);
+  max-width: 1140px;
+
+  &.-small {
+    max-width: 760px;
+  }
+
+  &.-large {
+    max-width: 1438px - spacing(4);
+  }
+}

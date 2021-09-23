@@ -25,8 +25,8 @@ import { CompanySearchByWebsiteComponent } from './company/search-by-website/com
 import { instanceOfSubcategoryInformation } from '../../model/Anomaly';
 import { CompanyPhoneComponent } from './company/phone/company-phone.component';
 import { CompanyLocationComponent } from './company/location/company-location.component';
-import { PageModule } from '../../dashboard/shared/page/page.module';
-import { AlertModule as AppAlertModule } from '../../dashboard/shared/alert/alert';
+import { PageModule } from '../../components/page/page.module';
+import { AlertModule as AppAlertModule } from '../../components/alert/alert';
 import { ProblemModule } from './problem/problem.module';
 import { ProblemComponent } from './problem/problem.component';
 

@@ -6,10 +6,8 @@ import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
-import {pageDefinitions} from '../../../../assets/data/pages';
+import { pageDefinitions } from '../../../../assets/data/pages';
 import { Meta, Title } from '@angular/platform-browser';
-import { User } from '../../../model/AuthUser';
-import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-category',
@@ -20,7 +18,6 @@ export class CategoryComponent implements OnInit {
 
   illustrations = Illustrations;
 
-  user: User;
   step: Step;
   draftReport: DraftReport;
 
@@ -31,7 +28,6 @@ export class CategoryComponent implements OnInit {
   constructor(private titleService: Title,
               private meta: Meta,
               private anomalyService: AnomalyService,
-              private authenticationService: AuthenticationService,
               private reportStorageService: ReportStorageService,
               private reportRouterService: ReportRouterService,
               private analyticsService: AnalyticsService) { }
@@ -39,10 +35,6 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(pageDefinitions.default.title);
     this.meta.updateTag({ name: 'description', content: pageDefinitions.default.description });
-
-    this.authenticationService.user.subscribe(user => {
-      this.user = user;
-    });
 
     this.step = Step.Category;
     this.reportStorageService.retrieveReportInProgress()

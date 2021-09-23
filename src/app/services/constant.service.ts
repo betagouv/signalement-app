@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiSdkService } from './core/api-sdk.service';
 import { catchError, mergeMap, tap } from 'rxjs/operators';
 import { ApiError } from '../api-sdk/ApiClient';
-import { BehaviorSubject, from, iif, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, iif, Observable, of, throwError } from 'rxjs';
 import { Country } from '../model/Country';
 
 @Injectable({
@@ -12,8 +12,6 @@ export class ConstantService {
 
   constructor(private apiSdk: ApiSdkService,) {
   }
-
-  readonly getReportStatusList = () => from(this.apiSdk.secured.constant.getReportStatusList());
 
   protected source = new BehaviorSubject<Country[] | undefined>(undefined);
 

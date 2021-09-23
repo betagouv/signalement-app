@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { DetailInputValue, DraftReport, Step } from '../model/Report';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UploadedFile } from '../model/UploadedFile';
-import { WebsiteURL } from '../model/Company';
 import { switchMap, take, tap } from 'rxjs/operators';
 
 export const ReportStorageKey = 'ReportSignalConso';

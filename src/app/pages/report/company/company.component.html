@@ -45,14 +45,14 @@
               {{draftReport.draftCompany.address.city}}
             </div>
           </div>
-          <div class="row" *ngIf="draftReport.draftCompany.postalCode && !draftReport.draftCompany.name">
+          <div class="row" *ngIf="draftReport.draftCompany.address.postalCode && !draftReport.draftCompany.name">
             <div class="col-12">
-              Code postal : {{draftReport.draftCompany.postalCode}}
+              Code postal : {{draftReport.draftCompany.address.postalCode}}
             </div>
           </div>
-          <div class="row" *ngIf="draftReport.draftCompany | isForeign">
+          <div class="row" *ngIf="draftReport.draftCompany.address.country && draftReport.draftCompany.address.country === 'France'">
             <div class="col-12">
-              Pays : {{draftReport.draftCompany.country}}
+              Pays : {{draftReport.draftCompany.address.country}}
             </div>
           </div>
           <div class="row" *ngIf="draftReport.draftCompany.siret">

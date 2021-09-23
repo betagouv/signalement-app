@@ -5,4 +5,13 @@ import { Component } from '@angular/core';
   templateUrl: './notfound.component.html'
 })
 export class NotFoundComponent {
+  loading = true;
+
+  constructor() {
+    this.waitInCaseOfRedirection();
+  }
+
+  readonly waitInCaseOfRedirection = () => {
+    setTimeout(() => this.loading = false, 2000);
+  };
 }

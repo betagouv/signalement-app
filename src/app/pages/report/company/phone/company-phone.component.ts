@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DraftReport } from '../../../../model/Report';
-import { CustomValidators } from '../../../../custom-validators';
-import Utils from '../../../../utils';
+import { CustomValidators } from '../../../../utils/custom-validators';
+import Utils from '../../../../utils/utils';
 
 @Component({
   selector: 'app-company-phone',

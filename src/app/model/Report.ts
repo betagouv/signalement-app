@@ -18,7 +18,6 @@ export enum Step {
   Information = 'Information'
 }
 
-
 export enum ReportStatus {
   NA = 'NA',
   EmployeeConsumer = 'Lanceur d\'alerte',
@@ -33,36 +32,6 @@ export enum ReportStatus {
   Ignored = 'Signalement consulté ignoré',
   NotConcerned = 'Signalement mal attribué'
 }
-
-export const reportStatusColor = {
-  [ReportStatus.NA]: '#fff',
-  [ReportStatus.EmployeeConsumer]: '#fff',
-  [ReportStatus.InProgress]: '#FFE49E',
-  [ReportStatus.Unread]: '#c9d3df',
-  [ReportStatus.UnreadForPro]: '#f7d5d2',
-  [ReportStatus.Transmitted]: '#FFE49E',
-  [ReportStatus.ToReviewedByPro]: '#FFE49E',
-  [ReportStatus.Accepted]: '#D6F0FF',
-  [ReportStatus.Rejected]: '#c9d3df',
-  [ReportStatus.ClosedForPro]: '#daf5e7',
-  [ReportStatus.Ignored]: '#c9d3df',
-  [ReportStatus.NotConcerned]: '#c9d3df',
-};
-
-export const reportStatusIcon = {
-  [ReportStatus.NA]: '',
-  [ReportStatus.EmployeeConsumer]: 'admin_panel_settings',
-  [ReportStatus.InProgress]: 'pending',
-  [ReportStatus.Unread]: 'mark_email_unread',
-  [ReportStatus.UnreadForPro]: 'mark_email_unread',
-  [ReportStatus.Transmitted]: 'mark_email_read',
-  [ReportStatus.ToReviewedByPro]: 'query_builder',
-  [ReportStatus.Accepted]: 'check_circle',
-  [ReportStatus.Rejected]: 'help',
-  [ReportStatus.ClosedForPro]: 'archive',
-  [ReportStatus.Ignored]: 'block',
-  [ReportStatus.NotConcerned]: 'delete',
-};
 
 export class DraftReport {
   category: string;
