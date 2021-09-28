@@ -9,7 +9,7 @@
           <div class="row mb-2">
             <div class="col-8">
               <strong *ngIf="draftReport.isVendor">Vendeur {{draftReport.draftCompany.siret ? 'identifié' : 'non identifié'}}</strong>
-              <strong *ngIf="!draftReport.isVendor">Entreprise {{draftReport.draftCompany.siret ? 'identifiée' : 'non identifiée'}}</strong>
+              <strong *ngIf="!draftReport.isVendor">Entreprise {{(draftReport.draftCompany.siret || draftReport.draftCompany.address.country) ? 'identifiée' : 'non identifiée'}}</strong>
             </div>
             <div class="col-4 text-right">
               <button class="link" (click)="changeCompany()" (keydown.enter)="changeCompany()" aria-label="Modifier entreprise" tabindex="0">Modifier</button>
@@ -33,7 +33,7 @@
               </div>
             </div>
           </div>
-          <div class="row" *ngIf="draftReport.draftCompany.address">
+          <div class="row" *ngIf="draftReport.draftCompany.address && draftReport.draftCompany.siret">
             <div class="col-12">
               {{draftReport.draftCompany.name ? 'Adresse : ': 'Rue : '}}
               {{draftReport.draftCompany.address.number}}
@@ -50,7 +50,7 @@
               Code postal : {{draftReport.draftCompany.address.postalCode}}
             </div>
           </div>
-          <div class="row" *ngIf="draftReport.draftCompany.address.country && draftReport.draftCompany.address.country === 'France'">
+          <div class="row" *ngIf="draftReport.draftCompany.address.country">
             <div class="col-12">
               Pays : {{draftReport.draftCompany.address.country}}
             </div>

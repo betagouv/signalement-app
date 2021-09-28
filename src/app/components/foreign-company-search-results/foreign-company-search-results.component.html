@@ -1,0 +1,17 @@
+<fieldset>
+
+  <ng-container *ngFor="let country of companyCountriesResults; let countryIndex = index">
+    <div [ngClass]="getRadioContainerClass(selectedCountry, country)">
+      <div class="row mb-3">
+        <div class="col col-radio">
+          <input type="radio" class="-input" [(ngModel)]="selectedCountry"
+                 name="country" id="country_{{countryIndex}}" [value]="country"
+                 (click)="select.emit(country)"/>
+        </div>
+        <label class="col pointer" for="country_{{countryIndex}}">
+          <div class="font-weight-bold" *ngIf="country.name">{{country.name}}</div>
+        </label>
+      </div>
+    </div>
+  </ng-container>
+</fieldset>

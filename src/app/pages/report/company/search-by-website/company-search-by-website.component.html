@@ -32,6 +32,29 @@
 </ng-container>
 
 
+
+<div #identByUrlCountryResult>
+  <div *ngIf="companyCountriesSearchByUrlResults && companyCountriesSearchByUrlResults.length" class="mt-5">
+
+    <hr/>
+    <h2 class="mb-4 font-weight-bold">
+      Sélectionnez le pays de l'entreprise
+    </h2>
+
+    <app-foreign-company-search-results [companyCountriesResults]="companyCountriesSearchByUrlResults" (select)="selectCountry($event)"></app-foreign-company-search-results>
+
+    <div>
+      <button class="link p-0" (click)="changeWebsite()" aria-label="Modifier adresse du site internet">Corrigez</button> l'adresse du site internet et relancez votre recherche.
+    </div>
+
+    <hr *ngIf="selectedCountry"/>
+
+    <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCountry" (click)="submitCountry()">
+      Continuer
+    </button>
+</div>
+</div>
+
 <div #identByUrlResult>
   <div *ngIf="companySearchByUrlResults && companySearchByUrlResults.length" class="mt-5">
 
