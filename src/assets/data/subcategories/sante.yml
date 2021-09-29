@@ -7,14 +7,16 @@
       example: 'Exemple : allergie, vomissement, électrocution'
       subcategoriesTitle: Quel est le type de produit ?
       subcategories:
-        - title: Un médicament
-          information:
-            title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la Santé.
-            content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank">signalement.social-sante.gouv.fr</a>
-        - title: Un objet de santé
+        - title: Un médicament et vaccin
+        - title: Un objet de santé courant
           example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
           tags:
             - Produit dangereux
+        - title: Un objet de santé spécifique
+          example: 'Exemple: lit médicalisé, prothèse, défibrillateur'
+          information:
+            title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la Santé.
+            content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank">signalement.social-sante.gouv.fr</a>
     - title: La publicité (ou les informations sur la boîte) est trompeuse
       detailInputs:
         - label: Date de constat (ou date d'achat)

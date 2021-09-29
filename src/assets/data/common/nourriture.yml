@@ -236,6 +236,9 @@
       example: 'Exemple : bout de verre, morceau de métal, dent'
       tags:
         - ReponseConso
+        - Produit dangereux
+      subcategoriesTitle: Quel est le risque&#160;?
+      subcategories: !!import/single ../common/produit-alimentaire.yml
       information:
         title: Vous souhaitez signaler la présence d'un corps étranger "dur"
         actions:
