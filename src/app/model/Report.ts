@@ -11,7 +11,7 @@ import {
 } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
-import { CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
+import { CompanySearchResult, DraftCompany, WebsiteURL } from '@betagouv/signalconso-api-sdk-js';
 import format from 'date-fns/format';
 
 export const PrecisionKeyword = '(à préciser)';

@@ -1,7 +1,7 @@
 import { DraftReport, ReportStatus, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
 import { Information, Subcategory } from '../src/app/model/Anomaly';
-import { Company, CompanySearchResult, ViewableCompany } from '../src/app/model/Company';
+import { Company, CompanySearchResult } from '@betagouv/signalconso-api-sdk-js';
 import anomalies from '../src/assets/data/anomalies.json';
 
 const randomstring = require('randomstring');
@@ -41,12 +41,6 @@ export function genEmail() {
 export const lastNames = ['Doe', 'Durand', 'Dupont'];
 export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'Fanny', 'Gérard'];
 export const status = [ReportStatus.InProgress, ReportStatus.ClosedForPro];
-
-export const genViewableCompany = (): ViewableCompany => ({
-  siret: genSiret(),
-  postalCode: randomstring.generate(),
-  closed: false,
-});
 
 export function genCompanyAccessLevel(siret?: string) {
   return {

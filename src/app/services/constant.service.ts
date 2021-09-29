@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiSdkService } from './core/api-sdk.service';
 import { catchError, mergeMap, tap } from 'rxjs/operators';
-import { ApiError } from '../api-sdk/ApiClient';
+import { ApiError } from '@betagouv/signalconso-api-sdk-js';
 import { BehaviorSubject, iif, Observable, of, throwError } from 'rxjs';
 import { Country } from '../model/Country';
 
@@ -34,7 +34,7 @@ export class ConstantService {
         setTimeout(() => this._fetchingCountries = true);
         this._fetchCountriesError = undefined;
       }),
-      mergeMap(this.apiSdk.unsecured.getCountries),
+      mergeMap(this.apiSdk.unsecured.constant.getCountries),
       mergeMap((countries: Country[]) => {
         setTimeout(() => this._fetchingCountries = false);
         this.source.next(countries);

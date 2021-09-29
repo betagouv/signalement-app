@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CompanySearchResult, isGovernmentCompany } from '../../model/Company';
+import { CompanySearchResult, isGovernmentCompany } from '@betagouv/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-company-search-results',

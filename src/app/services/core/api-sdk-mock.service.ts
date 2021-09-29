@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiSecuredSdk } from '../../api-sdk/ApiSecuredSdk';
-import { ApiPublicSdk } from '../../api-sdk/ApiPublicSdk';
-import { ApiClientMock } from '../../api-sdk/ApiClientMock';
+import { ApiSecuredSdk } from '@betagouv/signalconso-api-sdk-js';
+import { ApiPublicSdk } from '@betagouv/signalconso-api-sdk-js';
+import { ApiClientMock } from '@betagouv/signalconso-api-sdk-js';
 import { environment } from '../../../environments/environment';
 import { Api } from './service.utils';
 

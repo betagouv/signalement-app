@@ -182,7 +182,7 @@ describe('ProblemComponent', () => {
     expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
   });
 
-  it('should display specific message when the user is not employee and report concerns a contractual report', () => {
+  fit('should display specific message when the user is not employee and report concerns a contractual report', () => {
     spyOn(anomalyService, 'getAnomalyBy').and.returnValue({
       categoryId: '',
       category: '',

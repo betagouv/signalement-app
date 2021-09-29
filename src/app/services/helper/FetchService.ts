@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ApiSdkService } from '../core/api-sdk.service';
-import { ApiError } from '../../api-sdk/ApiClient';
+import { ApiError } from '@betagouv/signalconso-api-sdk-js';
 import { catchError, mergeMap, tap } from 'rxjs/operators';
 
 export abstract class FetchService<T> {
