@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { StatsService } from '../../services/stats.service';
+import { ReportCountService, StatsService } from '../../services/stats.service';
 import { EChartOption } from 'echarts';
 import { MonthlyStat } from '../../model/Statistics';
 import { isPlatformBrowser } from '@angular/common';
@@ -14,7 +14,6 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject<void>();
 
-  reportCount: number;
   reportForwardedToProPercentage: number;
   reportReadByProPercentage: number;
   reportWithResponsePercentage: number;
@@ -25,9 +24,15 @@ export class StatsComponent implements OnInit, OnDestroy {
   monthlyReportReadByProChart: EChartOption;
   monthlyReportWithResponseChart: EChartOption;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private statsService: StatsService,
-  ) { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private statsService: StatsService,
+    private reportCountService: ReportCountService
+  ) {
+  }
+
+  public reportCount$ = this.reportCountService.
+
 
   ngOnInit() {
     this.loadStatistics();
@@ -43,10 +48,6 @@ export class StatsComponent implements OnInit, OnDestroy {
   }
 
   loadStatistics() {
-    this.statsService.getReportCount().subscribe(simpleStat => {
-      this.reportCount = simpleStat.value as number;
-    });
-
     this.statsService.getReportForwardedToProPercentage().subscribe(simpleStat => {
       this.reportForwardedToProPercentage = simpleStat.value as number;
     });

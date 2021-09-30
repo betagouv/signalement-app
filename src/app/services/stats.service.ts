@@ -2,6 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
 import { MonthlyStat, SimpleStat } from '../model/Statistics';
+import { FetchService } from './helper/FetchService';
+import { CompanySearchResult } from '@betagouv/signalconso-api-sdk-js';
+import { ApiSdkService } from './core/api-sdk.service';
+
+@Injectable({ providedIn: 'root' })
+export class ReportCountService extends FetchService<SimpleStat[]> {
+  constructor(protected api: ApiSdkService) {
+    super(api, api.unsecured.stats.getReportCount);
+  }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +22,7 @@ export class StatsService {
               private serviceUtils: ServiceUtils) {
   }
 
+  //
   getReportCount() {
     return this.http.get<SimpleStat>(this.serviceUtils.getUrl(Api.Report, ['api', 'stats', 'reports', 'count']));
   }
