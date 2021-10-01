@@ -5,6 +5,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BannerComponent } from './banner/banner.component';
 import { CompanySearchResultsModule } from './company-search-results/company-search-results.module';
+import { ForeignCompanySearchResultsModule, } from './foreign-company-search-results/foreign-company-search-results.module';
 import { CommonModule } from '@angular/common';
 import { BadgeModule } from './badge/badge.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +33,7 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     PipesModule,
     NgxLoadingModule.forRoot(NgxLoadingConfig),
     CompanySearchResultsModule,
+    ForeignCompanySearchResultsModule,
     PanelModule,
     PageModule,
     AlertModule,
@@ -48,6 +50,7 @@ export const NgxLoadingConfig = { primaryColour: '#407e9a', secondaryColour: '#2
     AttachmentsComponent,
     BannerComponent,
     CompanySearchResultsModule,
+    ForeignCompanySearchResultsModule,
     BadgeModule,
     MatIconModule,
     ReactiveFormsModule,

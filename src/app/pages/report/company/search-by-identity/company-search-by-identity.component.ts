@@ -6,6 +6,7 @@ import { SearchCompanyByIdentityService } from '../../../../services/company.ser
 import { RendererService } from '../../../../services/renderer.service';
 import { IdentificationKinds } from '../company.component';
 import { CompanyKinds } from '../../../../model/Anomaly';
+import {Country} from "../../../../model/Country";
 
 @Component({
   selector: 'app-company-search-by-identity',
@@ -30,6 +31,7 @@ export class CompanySearchByIdentityComponent implements OnInit {
   companySearchByIdentityResults: CompanySearchResult[];
 
   selectedCompany: DraftCompany;
+  selectedCountry: Country;
 
   showErrorsByIdentity: boolean;
   searchByIdentityWarning: string;
@@ -87,6 +89,12 @@ export class CompanySearchByIdentityComponent implements OnInit {
 
   selectCompany(companySearchResult: CompanySearchResult) {
     this.selectedCompany = companySearchResult;
+    this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select, IdentificationKinds.Identity);
+    this.rendererService.scrollToElementEnd(this.identByIdentityResult.nativeElement);
+  }
+
+  selectCountry(country: Country) {
+    this.selectedCountry = country;
     this.analyticsService.trackEvent(EventCategories.companySearch, CompanySearchEventActions.select, IdentificationKinds.Identity);
     this.rendererService.scrollToElementEnd(this.identByIdentityResult.nativeElement);
   }

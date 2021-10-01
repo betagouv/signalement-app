@@ -3,6 +3,7 @@ import { of } from 'rxjs';
 import { CompanySearchResult } from '../model/Company';
 import { ApiSdkService } from './core/api-sdk.service';
 import { FetchService } from './helper/FetchService';
+import {Country} from "../model/Country";
 
 @Injectable({ providedIn: 'root' })
 export class SearchCompanyByURLService extends FetchService<CompanySearchResult[]> {
@@ -408,4 +409,12 @@ export class SearchCompanyByIdentityService extends FetchService<CompanySearchRe
     activityLabel: 'Administration publique (tutelle) des activités économiques',
     highlight: null
   };
+}
+
+@Injectable({ providedIn: 'root' })
+export class SearchForeignCompanyByURLService extends FetchService<Country[]> {
+
+  constructor(protected api: ApiSdkService) {
+    super(api, api.unsecured.company.searchForeignCompaniesByUrl);
+  }
 }
