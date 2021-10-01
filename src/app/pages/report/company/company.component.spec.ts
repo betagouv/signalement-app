@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CompanyComponent, IdentificationKinds } from './company.component';
-import { SearchCompanyByURLService } from '../../../services/company.service';
+import {SearchCompanyByURLService, SearchForeignCompanyByURLService} from '../../../services/company.service';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +30,7 @@ describe('CompanyComponent', () => {
   let component: CompanyComponent;
   let fixture: ComponentFixture<CompanyComponent>;
   let companyService: SearchCompanyByURLService;
+  let searchForeignCompanyService: SearchForeignCompanyByURLService;
   let reportStorageService: ReportStorageService;
   let constantService: ConstantService;
 
@@ -65,6 +66,7 @@ describe('CompanyComponent', () => {
   beforeEach(() => {
     companyService = TestBed.inject(SearchCompanyByURLService);
     reportStorageService = TestBed.inject(ReportStorageService);
+    searchForeignCompanyService = TestBed.inject(SearchForeignCompanyByURLService);
     constantService = TestBed.inject(ConstantService);
   });
 
@@ -138,6 +140,7 @@ describe('CompanyComponent', () => {
     it('should display radios for identification choice when no company found', () => {
 
       spyOn(companyService, 'list').and.returnValue(of([]));
+      spyOn(searchForeignCompanyService, 'list').and.returnValue(of([]));
 
       const nativeElement = fixture.nativeElement;
       nativeElement.querySelector('form#websiteForm #urlInput').value = 'http://monsite.com';
@@ -167,6 +170,7 @@ describe('CompanyComponent', () => {
       it('should ask the user whether the company is abroad or not', () => {
 
         spyOn(companyService, 'list').and.returnValue(of([]));
+        spyOn(searchForeignCompanyService, 'list').and.returnValue(of([]));
         spyOn(constantService, 'getCountries').and.returnValue(of([{'code': 'AFG', 'name': 'Afghanistan', 'european': false, 'transfer': false}]));
 
         const nativeElement = fixture.nativeElement;

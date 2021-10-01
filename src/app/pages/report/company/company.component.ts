@@ -8,6 +8,7 @@ import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
 import { DraftCompany, WebsiteURL } from '../../../model/Company';
 import { RendererService } from '../../../services/renderer.service';
+import {Country} from "../../../model/Country";
 
 export enum IdentificationKinds {
   Name = 'Name', Identity = 'Identity', None = 'None', Url = 'Url'
@@ -80,7 +81,11 @@ export class CompanyComponent implements OnInit {
     this.draftWebsite = draftCompany.website;
     if (draftCompany.siret) {
       this.submitCompany(draftCompany);
-    } else {
+    }
+    if(draftCompany.address && draftCompany.address.country){
+      this.submitCountry(draftCompany.address.country)
+    }
+    else {
       this.requireIdentificationKind = true;
       this.identificationKind = undefined;
       this.rendererService.scrollToElement(this.searchKind?.nativeElement);
@@ -105,6 +110,20 @@ export class CompanyComponent implements OnInit {
     this.changeDraftCompany = false;
     this.nextStep();
   }
+
+  submitCountry(country?: string) {
+    this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
+    this.draftReport.draftCompany = {
+      address: {
+        country : country
+      },
+      website: this.draftWebsite,
+      phone: this.draftPhone,
+    };
+    this.changeDraftCompany = false;
+    this.nextStep();
+  }
+
 
   nextStep() {
     this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);

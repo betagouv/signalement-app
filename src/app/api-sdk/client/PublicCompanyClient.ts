@@ -1,5 +1,6 @@
 import { ApiClientApi } from '../ApiClient';
 import { CompanySearchResult } from '../../model/Company';
+import {Country} from "../model/Country";
 
 export class PublicCompanyClient {
 
@@ -22,5 +23,9 @@ export class PublicCompanyClient {
 
   readonly searchCompaniesByUrl = (url: string) => {
     return this.client.get<CompanySearchResult[]>(`/companies/search-url`, { qs: { url } });
+  };
+
+  readonly searchForeignCompaniesByUrl = (url: string) => {
+    return this.client.get<Country[]>(`/websites/search-url`, { qs: { url } });
   };
 }
