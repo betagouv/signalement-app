@@ -64,7 +64,7 @@ list:
     categoryId: INTERNET
     path: internet
     description: réseaux sociaux, phishing, escroquerie par email, contenu d'un site web inapproprié...
-    rank: 18
+    rank: 16
     sprite: category-ecommerce
     subcategories: !!import/single subcategories/internet.yml
   - category: Travaux / Rénovation
@@ -133,3 +133,10 @@ list:
         <li>écrire à la police/gendarmerie</li>
         </ul>
         La DGCCRF (répression des fraudes) ne s’occupe pas des cas de travail au noir.
+  - category: Démarchage abusif
+    categoryId: BTEL
+    path: bloctel
+    description: spams, appels indésirables malgré Bloctel
+    rank: 17
+    cssClass: image-bloctel
+    subcategories: !!import/single subcategories/bloctel.yml

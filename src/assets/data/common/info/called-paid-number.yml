@@ -1,0 +1,8 @@
+content: Vous devez rentrer le numéro en question et la date sur le site <a href="https://a.surmafacture.fr" target="_blank" /> surmafacture.fr </a>
+  <br> La répression des fraudes aura accès à votre signalement directement avec le site surmafacture.fr
+actions:
+  - question: Comment bloquer ces numéros payants&#160;?
+    answer: Votre opérateur téléphonique doit vous proposer une option gratuite de blocage des numéros payants appelés "surtaxés".
+      <br> Vous pouvez activer cette option dans votre espace client ou auprès d'un conseiller.
+      <br> Cette option ne bloque pas la totalité des numéros surtaxés.
+      <br>Les numéros peu surtaxés (maximum 50 centimes l'appel) et les services de renseignements (numéro commençant par 118) ne sont pas compris dans ce blocage.
