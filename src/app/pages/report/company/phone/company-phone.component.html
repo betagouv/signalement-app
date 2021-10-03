@@ -5,7 +5,7 @@
 <form [formGroup]="phoneForm" (submit)="submitPhone()" id="phoneForm">
   <div class="form__group mt-4">
     <label for="phoneInput" [class]="showError() ? 'error' : ''">
-      Numéro de téléphone (obligatoire)
+      Numéro de téléphone vous ayant appelé (obligatoire)
     </label>
     <input type="tel" class="form-control" [formControl]="phoneCtrl" name="phone" id="phoneInput" placeholder="ex: 06 00 00 00 00"/>
   </div>
