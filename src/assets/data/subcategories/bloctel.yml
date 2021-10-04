@@ -1,0 +1,25 @@
+- title: Je reçois des appels indésirables alors que je suis sur Bloctel
+  companyKind: PHONE
+  subcategories:
+    - title: L’appel concerne mon entreprise
+      information:
+        content: Nous ne doutons pas que vous ayez réellement rencontré un problème mais si vous avez reçu un appel en lien avec votre entreprise, il ne s’agit pas d’un démarchage abusif.
+          <br/><br/>BlocTel est un outil réservé aux consommateurs. Les professionnels ne peuvent pas utiliser la plateforme pour lutter contre le démarchage abusif.
+    - title: Je suis client de l’entreprise ou j’ai demandé à être rappelé
+      example: 'Exemple : j’ai un contrat avec l’entreprise, j’ai demandé un devis ...'
+      information:
+        content: Nous ne doutons pas que vous ayez réellement rencontré un problème mais si vous avez un contrat avec l’entreprise ou que vous avez laissé vos coordonnées pour être rappelé, il ne s’agit pas d’un démarchage abusif. L’entreprise peut vous contacter.
+    - title: L’appel a pour but de me vendre des journaux
+      information:
+        content: Nous ne doutons pas que vous ayez réellement rencontré un problème mais la vente de journaux, de magazines, de périodiques fait partie des exceptions, il ne s’agit pas d’un démarchage abusif. Même si vous êtes inscrits sur BlocTel, l’entreprise est autorisée à vous joindre.
+    - title: L’appel concerne un sondage
+      information:
+        content: Nous ne doutons pas que vous ayez réellement rencontré un problème mais si l’appel concerne un sondage et que l’entreprise n’a pas cherché à vous vendre un objet ou un service, que vous n’avez pas donné vos coordonnées bancaires ou que vous n’avez pas reçu de message de confirmation de commande d’un produit ou d’un service, il ne s’agit pas d’un démarchage abusif. Cela ressemble à un véritable sondage pour simplement connaître votre avis, ce n’est pas du démarchage commercial.
+          <br/><br/>Toutefois, si l’entreprise a essayé de vous vendre un objet ou un service ou que vous avez donné vos coordonnées bancaires, cela correspond à du démarchage commercial. Vous devez revenir en arrière et aller sur « L’entreprise veut me vendre un objet ou un service et je ne suis pas client chez eux. »
+    - title: L’entreprise veut me vendre un objet ou un service alors que je ne suis pas client chez eux
+      tags:
+        - Bloctel
+      detailInputs: !!import/single ../common/inputs/bloctel.yml
+- title: J’ai répondu à un SMS ou j’ai rappelé un numéro qui était payant sans le savoir
+  companyKind: PHONE
+  information: !!import/single ../common/info/called-paid-number.yml
