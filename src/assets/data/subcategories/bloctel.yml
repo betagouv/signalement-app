@@ -5,7 +5,7 @@
       information:
         content: Nous ne doutons pas que vous ayez réellement rencontré un problème mais si vous avez reçu un appel en lien avec votre entreprise, il ne s’agit pas d’un démarchage abusif.
           <br/><br/>BlocTel est un outil réservé aux consommateurs. Les professionnels ne peuvent pas utiliser la plateforme pour lutter contre le démarchage abusif.
-    - title: Je suis client de l’entreprise ou j’ai demandé d’être rappelé
+    - title: Je suis client de l’entreprise ou j’ai demandé à être rappelé
       example: 'Exemple : j’ai un contrat avec l’entreprise, j’ai demandé un devis ...'
       information:
         content: Nous ne doutons pas que vous ayez réellement rencontré un problème mais si vous avez un contrat avec l’entreprise ou que vous avez laissé vos coordonnées pour être rappelé, il ne s’agit pas d’un démarchage abusif. L’entreprise peut vous contacter.
