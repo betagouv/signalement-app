@@ -1,5 +1,14 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, ContractualDisputeTag, DangerousProductTag, InternetTag, ReponseConsoTag, Subcategory, Tag } from './Anomaly';
+import {
+  Bloctel,
+  CompanyKinds,
+  ContractualDisputeTag,
+  DangerousProductTag,
+  InternetTag,
+  ReponseConsoTag,
+  Subcategory,
+  Tag
+} from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
 import { CompanySearchResult, DraftCompany, WebsiteURL } from './Company';
@@ -78,7 +87,7 @@ export class DraftReport {
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && !this.forwardToReponseConso && this.tags?.indexOf(DangerousProductTag) === -1;
+    return !this.employeeConsumer && !this.forwardToReponseConso && !this.tags?.find(_ => ([DangerousProductTag, Bloctel]).includes(_));
   }
 }
 

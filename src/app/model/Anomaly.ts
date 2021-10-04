@@ -5,6 +5,7 @@ export const ContractualDisputeTag = 'Litige contractuel';
 export const InternetTag = 'Internet';
 export const DangerousProductTag = 'Produit dangereux';
 export const ReponseConsoTag = 'ReponseConso';
+export const Bloctel = 'Bloctel';
 
 export interface SubcategoryBase extends Category {
   title: string;
