@@ -11,58 +11,58 @@ export class ReportCountService extends FetchService<SimpleStat> {
 }
 
 @Injectable({ providedIn: 'root' })
-export class MonthlyReportCountService extends FetchService<CountByDate[]> {
-  constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getMonthlyReportCount);
-  }
-}
-
-@Injectable({ providedIn: 'root' })
 export class ReportForwardedToProPercentageService extends FetchService<SimpleStat> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getReportForwardedToProPercentage);
+    super(api, api.unsecured.stats.percentage.getReportForwardedToPro);
   }
 }
 
 @Injectable({ providedIn: 'root' })
 export class ReportReadByProPercentageService extends FetchService<SimpleStat> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getReportReadByProPercentage);
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class MonthlyReportForwardedToProPercentageService extends FetchService<CountByDate[]> {
-  constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getMonthlyReportForwardedToProPercentage);
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class MonthlyReportReadByProPercentageService extends FetchService<CountByDate[]> {
-  constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getMonthlyReportReadByProPercentage);
+    super(api, api.unsecured.stats.percentage.getReportReadByPro);
   }
 }
 
 @Injectable({ providedIn: 'root' })
 export class ReportWithResponsePercentageService extends FetchService<SimpleStat> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getReportWithResponsePercentage);
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class MonthlyReportWithResponsePercentageService extends FetchService<CountByDate[]> {
-  constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getMonthlyReportWithResponsePercentage);
+    super(api, api.unsecured.stats.percentage.getReportWithResponse);
   }
 }
 
 @Injectable({ providedIn: 'root' })
 export class ReportWithWebsitePercentageService extends FetchService<SimpleStat> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.getReportWithWebsitePercentage);
+    super(api, api.unsecured.stats.percentage.getReportWithWebsite);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class MonthlyReportCountService extends FetchService<CountByDate[]> {
+  constructor(protected api: ApiSdkService) {
+    super(api, api.unsecured.stats.curve.getReportCount);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class MonthlyReportForwardedToProPercentageService extends FetchService<CountByDate[]> {
+  constructor(protected api: ApiSdkService) {
+    super(api, api.unsecured.stats.curve.getReportForwardedToProPercentage);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class MonthlyReportReadByProPercentageService extends FetchService<CountByDate[]> {
+  constructor(protected api: ApiSdkService) {
+    super(api, api.unsecured.stats.curve.getReportReadByProPercentage);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class MonthlyReportWithResponsePercentageService extends FetchService<CountByDate[]> {
+  constructor(protected api: ApiSdkService) {
+    super(api, api.unsecured.stats.curve.getReportWithResponsePercentage);
   }
 }
 

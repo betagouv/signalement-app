@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { EChartOption } from 'echarts';
 import { mergeMap, tap } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
@@ -13,18 +13,16 @@ interface ObsHandler<T> {
 @Component({
   selector: 'app-stats-item',
   template: `
-    <app-panel [loading]="value.loading || chart.loading">
+    <app-panel>
       <app-panel-body>
-        <h2 *ngIf="value">
-          <span class="count">{{value.value}}</span>
-          <div>{{title}}</div>
+        <div *ngIf="value$ | async as value">
+          <span class="count">{{value}}</span>
+          <h2>{{title}}</h2>
           <div>{{desc}}</div>
-        </h2>
-        <button mat-button color="primary" (click)="chart.load()">
-          Consulter les statistiques mensuelles
-        </button>
-
-        <div echarts [options]="chart.value" *ngIf="chart.value"></div>
+        </div>
+        <ng-container *ngIf="chart$ | async as chart">
+          <div echarts [options]="chart"></div>
+        </ng-container>
       </app-panel-body>
     </app-panel>
   `,
@@ -32,9 +30,12 @@ interface ObsHandler<T> {
 })
 export class StatsItemComponent implements OnInit {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    this.value = StatsItemComponent.handleObservable(() => this.value$);
-    this.chart = StatsItemComponent.handleObservable(() => this.chart$);
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public cdr: ChangeDetectorRef
+  ) {
+    // this.value = this.handleObservable(() => this.value$);
+    // this.chart = this.handleObservable(() => this.chart$);
   }
 
   @Input() title: string;
@@ -45,11 +46,11 @@ export class StatsItemComponent implements OnInit {
 
   @Input() chart$: Observable<EChartOption[]>;
 
-  value: ObsHandler<string>;
+  // value: ObsHandler<string>;
+  //
+  // chart: ObsHandler<EChartOption[]>;
 
-  chart: ObsHandler<EChartOption[]>;
-
-  static readonly handleObservable = <T>(obs: () => Observable<T>): ObsHandler<T> => {
+  readonly handleObservable = <T>(obs: () => Observable<T>): ObsHandler<T> => {
     let loading = false;
     let value: T | undefined;
     const mappedObs = new Observable(_ => _.next()).pipe(
@@ -60,6 +61,7 @@ export class StatsItemComponent implements OnInit {
       tap(_ => {
         value = _;
         loading = false;
+        this.cdr.detectChanges();
       })
     );
     return {
@@ -70,7 +72,7 @@ export class StatsItemComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.value.load();
+  //   this.value.load();
   }
 
   readonly renderCharts = () => isPlatformBrowser(this.platformId);
