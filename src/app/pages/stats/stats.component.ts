@@ -20,11 +20,11 @@ import { EChartOption } from 'echarts';
     <app-banner title="Statistiques"></app-banner>
 
     <app-page pageDefinitionKey="stats" size="small">
-<!--      <app-stats-item-->
-<!--        title="signalements ont été déposés depuis le début de SignalConso"-->
-<!--        [value$]="reportCount$"-->
-<!--        [chart$]="monthlyReportCount$"-->
-<!--      ></app-stats-item>-->
+      <app-stats-item
+        title="signalements ont été déposés depuis le début de SignalConso"
+        [value$]="reportCount$"
+        [chart$]="monthlyReportCount$"
+      ></app-stats-item>
 
       <app-stats-item
         title="des signalements ont été transmis à l'entreprise signalée"
@@ -33,25 +33,25 @@ import { EChartOption } from 'echarts';
         [chart$]="monthlyReportForwardedToProPercentage$"
       ></app-stats-item>
 
-<!--      <app-stats-item-->
-<!--        title="des signalements transmis ont été lus par les entreprises"-->
-<!--        desc="Pourquoi pas 100 % ? Car Signalconso est facultatif. L'entreprise est libre de créer un compte et de lire le signalement."-->
-<!--        [value$]="reportReadByProPercentage$"-->
-<!--        [chart$]="monthlyReportReadByProPercentage$"-->
-<!--      ></app-stats-item>-->
+      <app-stats-item
+        title="des signalements transmis ont été lus par les entreprises"
+        desc="Pourquoi pas 100 % ? Car Signalconso est facultatif. L'entreprise est libre de créer un compte et de lire le signalement."
+        [value$]="reportReadByProPercentage$"
+        [chart$]="monthlyReportReadByProPercentage$"
+      ></app-stats-item>
 
-<!--      <app-stats-item-->
-<!--        title="ont eu une réponse de l'entreprise, sur l'ensemble des signalements lus"-->
-<!--        desc="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur."-->
-<!--        [value$]="reportWithResponsePercentage$"-->
-<!--        [chart$]="monthlyReportWithResponsePercentage$"-->
-<!--      ></app-stats-item>-->
+      <app-stats-item
+        title="ont eu une réponse de l'entreprise, sur l'ensemble des signalements lus"
+        desc="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur."
+        [value$]="reportWithResponsePercentage$"
+        [chart$]="monthlyReportWithResponsePercentage$"
+      ></app-stats-item>
 
-<!--      <app-stats-item-->
-<!--        title="des signalements déposés depuis le début de SignalConso concernent une entreprise sur internet"-->
-<!--        desc="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur."-->
-<!--        [value$]="reportWithWebsitePercentage$"-->
-<!--      ></app-stats-item>-->
+      <app-stats-item
+        title="des signalements déposés depuis le début de SignalConso concernent une entreprise sur internet"
+        desc="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur."
+        [value$]="reportWithWebsitePercentage$"
+      ></app-stats-item>
 
       <p class="note pt-2">
         Nos statistiques sont mises à jour en temps réel

@@ -13,12 +13,12 @@ interface ObsHandler<T> {
 @Component({
   selector: 'app-stats-item',
   template: `
-    <app-panel>
+    <app-panel [loading]="(chart$ && !(chart$ | async)) || (value$ && !(value$ | async))">
       <app-panel-body>
-        <div *ngIf="value$ | async as value">
-          <span class="count">{{value}}</span>
-          <h2>{{title}}</h2>
-          <div>{{desc}}</div>
+        <div>
+          <span class="count">{{value$ | async}}</span>
+          <div class="title">{{title}}</div>
+          <div class="desc">{{desc}}</div>
         </div>
         <ng-container *ngIf="chart$ | async as chart">
           <div echarts [options]="chart"></div>
