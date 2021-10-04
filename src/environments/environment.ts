@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   dashboardBaseUrl: 'http://localhost:3000/#',
+  skipReportEmailValidation: false ,
   apiReportBaseUrl: 'http://localhost:9000',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',

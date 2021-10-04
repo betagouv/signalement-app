@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Consumer } from '../../../model/Consumer';
-import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { DraftReport, Step } from '../../../model/Report';
-import { ReportRouterService } from '../../../services/report-router.service';
-import { ReportStorageService } from '../../../services/report-storage.service';
-import { take } from 'rxjs/operators';
-import { AuthenticationService } from '../../../services/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Consumer} from '../../../model/Consumer';
+import {AnalyticsService, EventCategories, ReportEventActions} from '../../../services/analytics.service';
+import {DraftReport, Step} from '../../../model/Report';
+import {ReportRouterService} from '../../../services/report-router.service';
+import {ReportStorageService} from '../../../services/report-storage.service';
+import {take} from 'rxjs/operators';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {environment} from "../../../../environments/environment.prod";
 
 @Component({
   selector: 'app-consumer',
@@ -33,7 +34,7 @@ export class ConsumerComponent implements OnInit {
     private reportRouterService: ReportRouterService,
     private analyticsService: AnalyticsService) {
     this.confirmationCodeCtrl.valueChanges.subscribe((value: string) => {
-      this.confirmationCodeCtrl.setValue(value.replace(/[^\d]/g, '').slice(0, 6), { emitEvent: false });
+      this.confirmationCodeCtrl.setValue(value.replace(/[^\d]/g, '').slice(0, 6), {emitEvent: false});
     });
   }
 
@@ -90,18 +91,25 @@ export class ConsumerComponent implements OnInit {
 
   readonly checkEmail = () => {
     this.checkingEmail = true;
-    this.authenticationService.checkConsumerEmail(this.emailCtrl.value).subscribe(valid => {
-      if (valid.valid) {
-        this.submitConsumerForm();
-      } else {
-        this.isEmailValid = valid.valid;
-      }
-    }, () => {
-    }, () => {
-      setTimeout(() => {
-        this.checkingEmail = false;
-      }, 10000);
-    });
+
+    if (environment.skipReportEmailValidation) {
+      this.isEmailValid = true;
+      this.submitConsumerForm();
+    } else {
+      this.authenticationService.checkConsumerEmail(this.emailCtrl.value).subscribe(valid => {
+        if (valid.valid) {
+          this.submitConsumerForm();
+        } else {
+          this.isEmailValid = valid.valid;
+        }
+      }, () => {
+      }, () => {
+        setTimeout(() => {
+          this.checkingEmail = false;
+        }, 10000);
+      });
+
+    }
   };
 
   readonly checkConfirmationCode = () => {
