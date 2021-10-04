@@ -18,6 +18,7 @@ Lancement de l'application en local :
 npm run start:local
 ```
 
+
 L'application est accessible à l'adresse `http://localhost:4200` avec rechargement à chaud des modifications.
 
 ## Tests unitaires
