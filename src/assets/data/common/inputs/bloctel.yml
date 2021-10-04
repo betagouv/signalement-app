@@ -4,7 +4,7 @@
   defaultValue: SYSDATE
 - label: Heure de l'appel
   rank: 2
-  type: TEXT
+  type: TIMESLOT
 - label: Votre numéro de téléphone
   rank: 3
   type: TEXT
@@ -27,8 +27,8 @@
     - Produits alimentaires, boissons,
     - Jeux, voyance
     - Spectacles, culture, loisirs
-    - Éequipement pour personne (mode, textiles, chaussures, ...)
-    - Éequipement pour maison (ameublement, électroménager, ...)
+    - Équipement pour personne (mode, textiles, chaussures, ...)
+    - Équipement pour maison (ameublement, électroménager, ...)
     - Autre
 - label: Le vendeur s'est-t-il fait passer pour une autre entreprise ?
   rank: 6
