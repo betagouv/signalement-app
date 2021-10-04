@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CompanySearchResult, DraftCompany, WebsiteKind} from '@betagouv/signalconso-api-sdk-js';
-import { SearchCompanyByURLService } from '../../../../services/company.service';
+import { CompanySearchResult, Country, DraftCompany, WebsiteKind } from '@betagouv/signalconso-api-sdk-js';
+import { SearchCompanyByURLService, SearchForeignCompanyByURLService } from '../../../../services/company.service';
 import { RendererService } from '../../../../services/renderer.service';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { DraftReport } from '../../../../model/Report';
@@ -95,7 +95,7 @@ export class CompanySearchByWebsiteComponent implements OnInit {
                 if (results.length === 0) {
                   this.submitWebsiteOnly();
                 } else {
-                this.companyCountriesSearchByUrlResults = results
+                this.companyCountriesSearchByUrlResults = results;
                 this.rendererService.scrollToElement(this.identByUrlCountryResult.nativeElement);
               }
               },
@@ -103,7 +103,7 @@ export class CompanySearchByWebsiteComponent implements OnInit {
                 this.loading.emit(false);
                 this.searchError = 'Une erreur technique s\'est produite.';
               }
-            )
+            );
           } else {
             this.companySearchByUrlResults = companySearchResults;
             this.rendererService.scrollToElement(this.identByUrlResult.nativeElement);
