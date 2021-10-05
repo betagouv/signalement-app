@@ -1,8 +1,9 @@
 export const environment = {
   production: true,
-  dashboardBaseUrl: '${DASHBOARD_BASE_URL}',
-  apiReportBaseUrl: '${API_BASE_URL}',
-  apiReportBaseUrlX: ('${API_BASE_URL}' as string | undefined) === 'true',
+  dashboardBaseUrl: '',
+  apiReportBaseUrl: 'http://localhost:9000',
+  skipReportEmailValidation: ('${SKIP_REPORT_EMAIL_VALIDATION}' as string | undefined) === 'true',
+  apiReportBaseUrlX: ('http://localhost:9000' as string | undefined) === 'true',
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
   reponseConsoDisplayRate: Number('') || 0,
