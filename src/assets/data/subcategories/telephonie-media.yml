@@ -115,9 +115,9 @@
     - title: Appels, sms ou emails indésirables
       example: 'Exemple : spams, appel incessant, rappel vers un numéro payant'
       subcategories:
-        - title: Je reçois des appels indésirables alors que je suis sur BlocTel
-          tags:
-            - ReponseConso
+        #- title: Je reçois des appels indésirables alors que je suis sur BlocTel
+        #  tags:
+        #    - ReponseConso
         - title: J'ai répondu à un sms ou j'ai rappelé un numéro qui était payant sans le savoir
           information: !!import/single ../common/info/called-paid-number.yml
         - title: Je reçois des spams dans mes emails
