@@ -92,10 +92,6 @@ export class ConsumerComponent implements OnInit {
   readonly checkEmail = () => {
     this.checkingEmail = true;
 
-    if (environment.skipReportEmailValidation) {
-      this.isEmailValid = true;
-      this.submitConsumerForm();
-    } else {
       this.authenticationService.checkConsumerEmail(this.emailCtrl.value).subscribe(valid => {
         if (valid.valid) {
           this.submitConsumerForm();
@@ -109,7 +105,6 @@ export class ConsumerComponent implements OnInit {
         }, 10000);
       });
 
-    }
   };
 
   readonly checkConfirmationCode = () => {
