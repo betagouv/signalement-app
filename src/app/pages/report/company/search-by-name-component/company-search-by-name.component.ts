@@ -1,10 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CompanySearchResult, DraftCompany } from '@betagouv/signalconso-api-sdk-js';
+import { DraftCompany } from '@betagouv/signalconso-api-sdk-js';
 import { RendererService } from '../../../../services/renderer.service';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { SearchCompanyService } from '../../../../services/company.service';
 import { IdentificationKinds } from '../company.component';
+import { CompanySearchResult } from '../../../../model/Company';
 
 @Component({
   selector: 'app-company-search-by-name-component',
