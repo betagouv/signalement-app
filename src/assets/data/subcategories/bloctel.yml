@@ -19,6 +19,7 @@
     - title: L’entreprise veut me vendre un objet ou un service alors que je ne suis pas client chez eux
       tags:
         - Bloctel
+        - Démarchage téléphonique
       detailInputs: !!import/single ../common/inputs/bloctel.yml
 - title: J’ai répondu à un SMS ou j’ai rappelé un numéro qui était payant sans le savoir
   companyKind: PHONE
