@@ -208,7 +208,6 @@ describe('ProblemComponent', () => {
   it('should update the shared report when the contractual message is submitted', () => {
     spyOn(anomalyService, 'getAnomalyBy').and.returnValue(anomalyFixture);
     const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
-    console.log(anomalyFixture);
     const fixture = TestBed.createComponent(ProblemComponent);
     const component = fixture.componentInstance;
     component.onChange([contractualDisputeSubcategoryFixture], 0, contractualDisputeSubcategoryFixture.title);

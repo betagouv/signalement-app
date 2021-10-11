@@ -15,14 +15,9 @@ export class ForeignCompanySearchResultsComponent {
   selectedCountry: Country;
 
   constructor() {
-    console.log("--------------------------")
-    console.log(this.selectedCountry)
-    console.log(this.companyCountriesResults)
   }
 
   getRadioContainerClass(input: Country, value: Country) {
-    console.log("'''''''''''''''")
-    console.log(this.companyCountriesResults)
     return input === value ? 'selected' : '';
   }
 }
