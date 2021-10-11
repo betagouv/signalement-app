@@ -8,14 +8,18 @@
   margin-top: 1em;
 }
 
-h2 {
-  color: $darker-grey;
+.title {
+  font-size: $font-size-big;
   font-weight: bolder;
+}
+.desc {
+  color: $theme-color-text-secondary
 }
 
 .count {
+  line-height: 1;
   text-align: center;
-  font-size: 40px;
+  font-size: 48px;
   font-weight: bold;
   color: $primary;
 }

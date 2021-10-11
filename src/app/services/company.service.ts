@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { CompanySearchResult } from '../model/Company';
+import { Country } from '@betagouv/signalconso-api-sdk-js';
 import { ApiSdkService } from './core/api-sdk.service';
 import { FetchService } from './helper/FetchService';
-import {Country} from "../model/Country";
+import { CompanySearchResult } from '../model/Company';
 
 @Injectable({ providedIn: 'root' })
 export class SearchCompanyByURLService extends FetchService<CompanySearchResult[]> {

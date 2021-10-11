@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { ApiClient } from '../../api-sdk/ApiClient';
+import { ApiClient, SignalConsoPublicSdk } from '@betagouv/signalconso-api-sdk-js';
 import { environment } from '../../../environments/environment';
-import { ApiPublicSdk } from '../../api-sdk/ApiPublicSdk';
 import { Api } from './service.utils';
 
 @Injectable({
@@ -18,7 +17,7 @@ export class ApiSdkService {
     'Accept': 'application/json',
   };
 
-  readonly unsecured = new ApiPublicSdk(new ApiClient({
+  readonly unsecured = new SignalConsoPublicSdk(new ApiClient({
     headers: this.commonHeaders,
     baseUrl: environment[Api.Report] + '/api'
   }));

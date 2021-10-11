@@ -9,6 +9,8 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PageModule } from '../../components/page/page.module';
 import { PanelModule } from '../../components/panel/panel.module';
+import { StatsItemComponent } from './stats-item.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   { path: 'stats', component: StatsComponent },
@@ -16,6 +18,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    StatsItemComponent,
     StatsComponent,
   ],
   imports: [
@@ -27,6 +30,7 @@ const routes: Routes = [
     TooltipModule.forRoot(),
     PageModule,
     PanelModule,
+    MatButtonModule,
   ]
 })
 export class StatsModule { }
