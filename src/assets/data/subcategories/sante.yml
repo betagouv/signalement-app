@@ -8,6 +8,9 @@
       subcategoriesTitle: Quel est le type de produit ?
       subcategories:
         - title: Un médicament et vaccin
+          information:
+            title: Les effets secondaires et autres réactions avec des médicaments doivent être signalés au ministère de la Santé.
+            content: <br>Merci de remplir le formulaire dédié à ce type de problème sur le site <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank">signalement.social-sante.gouv.fr</a>
         - title: Un objet de santé courant
           example: 'Exemple : pansement, tensiomètre, thermomètre, bas de contention'
           tags:
