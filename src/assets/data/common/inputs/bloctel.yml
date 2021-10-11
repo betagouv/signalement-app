@@ -8,9 +8,10 @@
 - label: Votre numéro de téléphone
   rank: 3
   type: TEXT
-- label: Votre numéro d'inscription bloctel
+- label: Votre numéro d'inscription bloctel ( recommandé )
   rank: 4
   type: TEXT
+  optionnal: true
 - label: L'appel concernait
   rank: 5
   type: RADIO
