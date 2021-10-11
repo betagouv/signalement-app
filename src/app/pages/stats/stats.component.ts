@@ -1,99 +1,85 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { StatsService } from '../../services/stats.service';
+import { Component } from '@angular/core';
+import {
+  MonthlyReportCountService,
+  MonthlyReportForwardedToProPercentageService,
+  MonthlyReportReadByProPercentageService,
+  MonthlyReportWithResponsePercentageService,
+  ReportCountService,
+  ReportForwardedToProPercentageService,
+  ReportReadByProPercentageService,
+  ReportWithResponsePercentageService,
+  ReportWithWebsitePercentageService
+} from '../../services/stats.service';
+import { map } from 'rxjs/operators';
+import { CountByDate, SimpleStat } from '@betagouv/signalconso-api-sdk-js/lib/client/stats/Stats';
 import { EChartOption } from 'echarts';
-import { MonthlyStat } from '../../model/Statistics';
-import { isPlatformBrowser } from '@angular/common';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-stats',
-  templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.scss']
+  template: `
+    <app-banner title="Statistiques"></app-banner>
+
+    <app-page pageDefinitionKey="stats" size="small">
+      <app-stats-item
+        title="signalements ont été déposés depuis le début de SignalConso"
+        [value$]="reportCount$"
+        [chart$]="monthlyReportCount$"
+      ></app-stats-item>
+
+      <app-stats-item
+        title="des signalements ont été transmis à l'entreprise signalée"
+        desc="Pourquoi pas 100 % ? Car dans certaines cas (achat en ligne...) les entreprises n'ont pas pu être identifiées par le consommateur"
+        [value$]="reportForwardedToProPercentage$"
+        [chart$]="monthlyReportForwardedToProPercentage$"
+      ></app-stats-item>
+
+      <app-stats-item
+        title="des signalements transmis ont été lus par les entreprises"
+        desc="Pourquoi pas 100 % ? Car Signalconso est facultatif. L'entreprise est libre de créer un compte et de lire le signalement."
+        [value$]="reportReadByProPercentage$"
+        [chart$]="monthlyReportReadByProPercentage$"
+      ></app-stats-item>
+
+      <app-stats-item
+        title="ont eu une réponse de l'entreprise, sur l'ensemble des signalements lus"
+        desc="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur."
+        [value$]="reportWithResponsePercentage$"
+        [chart$]="monthlyReportWithResponsePercentage$"
+      ></app-stats-item>
+
+      <app-stats-item
+        title="des signalements déposés depuis le début de SignalConso concernent une entreprise sur internet"
+        desc="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur."
+        [value$]="reportWithWebsitePercentage$"
+      ></app-stats-item>
+
+      <p class="note pt-2">
+        Nos statistiques sont mises à jour en temps réel
+      </p>
+    </app-page>
+  `,
 })
-export class StatsComponent implements OnInit, OnDestroy {
+export class StatsComponent {
 
-  private unsubscribe = new Subject<void>();
-
-  reportCount: number;
-  reportForwardedToProPercentage: number;
-  reportReadByProPercentage: number;
-  reportWithResponsePercentage: number;
-  reportWithWebsitePercentage: number;
-
-  monthlyReportChart: EChartOption;
-  monthlyReportForwardedToProChart: EChartOption;
-  monthlyReportReadByProChart: EChartOption;
-  monthlyReportWithResponseChart: EChartOption;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private statsService: StatsService,
-  ) { }
-
-  ngOnInit() {
-    this.loadStatistics();
+  constructor(
+    public _reportCount: ReportCountService,
+    public _monthlyReportCount: MonthlyReportCountService,
+    public _reportForwardedToProPercentage: ReportForwardedToProPercentageService,
+    public _reportReadByProPercentage: ReportReadByProPercentageService,
+    public _monthlyReportForwardedToProPercentage: MonthlyReportForwardedToProPercentageService,
+    public _monthlyReportReadByProPercentage: MonthlyReportReadByProPercentageService,
+    public _reportWithResponsePercentage: ReportWithResponsePercentageService,
+    public _monthlyReportWithResponsePercentage: MonthlyReportWithResponsePercentageService,
+    public _reportWithWebsitePercentage: ReportWithWebsitePercentageService,
+  ) {
   }
 
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
-  }
-
-  renderCharts() {
-    return isPlatformBrowser(this.platformId);
-  }
-
-  loadStatistics() {
-    this.statsService.getReportCount().subscribe(simpleStat => {
-      this.reportCount = simpleStat.value as number;
-    });
-
-    this.statsService.getReportForwardedToProPercentage().subscribe(simpleStat => {
-      this.reportForwardedToProPercentage = simpleStat.value as number;
-    });
-
-    this.statsService.getReportReadByProPercentage().subscribe(simpleStat => {
-      this.reportReadByProPercentage = simpleStat.value as number;
-    });
-
-    this.statsService.getReportWithResponsePercentage().subscribe(simpleStat => {
-      this.reportWithResponsePercentage = simpleStat.value as number;
-    });
-
-    this.statsService.getReportWithWebsitePercentage().subscribe(simpleStat => {
-      this.reportWithWebsitePercentage = simpleStat.value as number;
-    });
-  }
-
-  loadMonthlyReportChart() {
-    this.statsService.getMonthlyReportCount().subscribe(monthlyStats => {
-      this.monthlyReportChart = this.getChartOption(monthlyStats);
-    });
-  }
-
-  loadMonthlyReportForwardedToProChart() {
-    this.statsService.getMonthlyReportForwardedToProPercentage().subscribe(monthlyStats => {
-      this.monthlyReportForwardedToProChart = this.getChartOption(monthlyStats, true);
-    });
-  }
-
-  loadMonthlyReportReadByProChart() {
-    this.statsService.getMonthlyReportReadByProPercentage().subscribe(monthlyStats => {
-      this.monthlyReportReadByProChart = this.getChartOption(monthlyStats, true);
-    });
-  }
-
-  loadMonthlyReportWithReponseChart() {
-    this.statsService.getMonthlyReportWithResponsePercentage().subscribe(monthlyStats => {
-      this.monthlyReportWithResponseChart = this.getChartOption(monthlyStats, true);
-    });
-  }
-
-  getChartOption(monthlyStats: MonthlyStat[], percentage = false): EChartOption {
+  static readonly getChartOption = (percentage = false) => (monthlyStats: CountByDate[]): EChartOption => {
     return {
       color: ['#407CA8'],
       xAxis: {
         type: 'category',
-        data: this.getXAxisData(),
+        data: StatsComponent.getXAxisData(),
         axisLabel: {
           rotate: 45
         }
@@ -105,7 +91,7 @@ export class StatsComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        data: this.getStatsData(monthlyStats),
+        data: StatsComponent.getStatsData(monthlyStats),
         type: 'bar',
         animationDuration: 5000,
         smooth: true
@@ -117,9 +103,9 @@ export class StatsComponent implements OnInit, OnDestroy {
         }
       }
     };
-  }
+  };
 
-  getXAxisData() {
+  static readonly getXAxisData = () => {
     const currentMonth = (new Date()).getMonth();
     const currentYear = (new Date()).getFullYear() - 2000;
     const months = ['jan.', 'fév.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
@@ -127,14 +113,30 @@ export class StatsComponent implements OnInit, OnDestroy {
       ...months.slice(currentMonth + 1).map(label => `${label} ${currentYear - 1}`),
       ...months.slice(0, currentMonth + 1).map(label => `${label} ${currentYear}`)
     ];
-  }
+  };
 
-  getStatsData(monthlyStats: MonthlyStat[]) {
+  static readonly getStatsData = (monthlyStats: CountByDate[]) => {
     const currentMonth = (new Date()).getMonth();
     const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     monthlyStats.forEach(monthlyStat => {
-      data[monthlyStat.month] = monthlyStat.value;
+      data[monthlyStat.date.getMonth()] = monthlyStat.count;
     });
     return [...data.slice(currentMonth + 1), ...data.slice(0, currentMonth + 1)];
-  }
+  };
+
+  readonly mapPercentage = map((_: SimpleStat) => (+_.value).toFixed(0) + ' %');
+
+  readonly mapValue = map((_: SimpleStat): string => '' + _.value);
+
+  readonly mapToChart = (percentage = false) => map(StatsComponent.getChartOption(percentage));
+
+  readonly reportCount$ = this._reportCount.list().pipe(this.mapValue);
+  readonly monthlyReportCount$ = this._monthlyReportCount.list().pipe(this.mapToChart(false));
+  readonly reportForwardedToProPercentage$ = this._reportForwardedToProPercentage.list().pipe(this.mapPercentage);
+  readonly monthlyReportForwardedToProPercentage$ = this._monthlyReportForwardedToProPercentage.list().pipe(this.mapToChart(true));
+  readonly reportReadByProPercentage$ = this._reportReadByProPercentage.list().pipe(this.mapPercentage);
+  readonly monthlyReportReadByProPercentage$ = this._monthlyReportReadByProPercentage.list().pipe(this.mapToChart(true));
+  readonly reportWithResponsePercentage$ = this._reportWithResponsePercentage.list().pipe(this.mapPercentage);
+  readonly monthlyReportWithResponsePercentage$ = this._monthlyReportWithResponsePercentage.list().pipe(this.mapToChart(true));
+  readonly reportWithWebsitePercentage$ = this._reportWithWebsitePercentage.list().pipe(this.mapPercentage);
 }

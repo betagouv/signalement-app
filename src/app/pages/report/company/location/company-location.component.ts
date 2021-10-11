@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DraftCompany } from '../../../../model/Company';
+import { DraftCompany } from '@betagouv/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-company-location',
@@ -11,7 +11,7 @@ export class CompanyLocationComponent implements OnInit {
 
   @Input() isVendor: boolean;
 
-  @Output() complete = new EventEmitter<DraftCompany>();
+  @Output() complete = new EventEmitter<Partial<DraftCompany>>();
   @Output() change = new EventEmitter();
 
   addressCtrl: FormControl;

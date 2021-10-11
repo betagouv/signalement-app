@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RendererService } from '../../../../services/renderer.service';
-import { DraftCompany } from '../../../../model/Company';
+import { DraftCompany } from '@betagouv/signalconso-api-sdk-js';
 import { ConstantService } from '../../../../services/constant.service';
 
 export const foreignFormValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
@@ -28,7 +28,7 @@ export class CompanyForeignCountryComponent implements OnInit {
 
   @Input() forceForeign;
   @Input() isVendor: boolean;
-  @Output() complete = new EventEmitter<DraftCompany>();
+  @Output() complete = new EventEmitter<Partial<DraftCompany>>();
 
   foreignForm: FormGroup;
   postalCodeCtrl: FormControl;

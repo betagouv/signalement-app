@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiSecuredSdk } from '../../api-sdk/ApiSecuredSdk';
-import { ApiPublicSdk } from '../../api-sdk/ApiPublicSdk';
-import { ApiClientMock } from '../../api-sdk/ApiClientMock';
+import { SignalConsoSecuredSdk } from '@betagouv/signalconso-api-sdk-js';
+import { SignalConsoPublicSdk } from '@betagouv/signalconso-api-sdk-js';
+import { ApiClientMock } from '@betagouv/signalconso-api-sdk-js';
 import { environment } from '../../../environments/environment';
 import { Api } from './service.utils';
 
@@ -20,7 +20,7 @@ export class ApiSdkMockService {
     baseUrl: environment[Api.Report] + '/api'
   });
 
-  readonly secured = new ApiSecuredSdk(this.apiClient);
+  readonly secured = new SignalConsoSecuredSdk(this.apiClient);
 
-  readonly unsecured = new ApiPublicSdk(this.apiClient);
+  readonly unsecured = new SignalConsoPublicSdk(this.apiClient);
 }

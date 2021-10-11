@@ -1,18 +1,12 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CompanySearchResult, DraftCompany,} from '../../../../model/Company';
-import {SearchCompanyByURLService, SearchForeignCompanyByURLService} from '../../../../services/company.service';
-import {RendererService} from '../../../../services/renderer.service';
-import {
-  AnalyticsService,
-  CompanySearchEventActions,
-  EventCategories,
-  ReportEventActions
-} from '../../../../services/analytics.service';
-import {DraftReport} from '../../../../model/Report';
-import {IdentificationKinds} from '../company.component';
-import {ApiWebsiteKind} from '../../../../api-sdk/model/ApiWebsite';
-import {Country} from "../../../../model/Country";
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Country, DraftCompany, WebsiteKind } from '@betagouv/signalconso-api-sdk-js';
+import { SearchCompanyByURLService, SearchForeignCompanyByURLService } from '../../../../services/company.service';
+import { RendererService } from '../../../../services/renderer.service';
+import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
+import { DraftReport } from '../../../../model/Report';
+import { IdentificationKinds } from '../company.component';
+import { CompanySearchResult } from '../../../../model/Company';
 
 @Component({
   selector: 'app-company-search-by-website',
@@ -29,11 +23,11 @@ export class CompanySearchByWebsiteComponent implements OnInit {
 
   @Input() draftReport: DraftReport;
 
-  @Output() complete = new EventEmitter<DraftCompany & { vendor?: string }>();
+  @Output() complete = new EventEmitter<Partial<DraftCompany & {vendor?: string}>>();
   @Output() loading = new EventEmitter<boolean>();
   @Output() change = new EventEmitter();
 
-  websiteKinds = ApiWebsiteKind;
+  websiteKinds = WebsiteKind;
 
   websiteForm: FormGroup;
   urlCtrl: FormControl;
@@ -102,7 +96,7 @@ export class CompanySearchByWebsiteComponent implements OnInit {
                 if (results.length === 0) {
                   this.submitWebsiteOnly();
                 } else {
-                this.companyCountriesSearchByUrlResults = results
+                this.companyCountriesSearchByUrlResults = results;
                 this.rendererService.scrollToElement(this.identByUrlCountryResult.nativeElement);
               }
               },
@@ -110,7 +104,7 @@ export class CompanySearchByWebsiteComponent implements OnInit {
                 this.loading.emit(false);
                 this.searchError = 'Une erreur technique s\'est produite.';
               }
-            )
+            );
           } else {
             this.companySearchByUrlResults = companySearchResults;
             this.rendererService.scrollToElement(this.identByUrlResult.nativeElement);
