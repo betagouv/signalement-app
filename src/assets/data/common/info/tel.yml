@@ -1,9 +1,0 @@
-outOfScope: true
-content: "Vous venez de recevoir un email ou un sms vous indiquant que votre forfait allait être augmenté à partir du mois prochain ? <b> Il ne s'agit pas d'une vente forcée.</b>
-<br /> <br /> Les opérateurs téléphoniques ont le droit d'augmenter le prix de votre forfait sans vous le demander avant.
-<br />Ils doivent vous prévenir <b> un mois avant </b> (par courrier ou par email). Un simple sms ne suffit pas.
-<br />Ils ne peuvent pas augmenter votre forfait pour une autre raison (option musique, option télé, abonnement à un livre...)."
-actions:
-  - question: Que pouvez-vous faire&#160;?
-    answer: "<b>Vous n'avez que deux choix : accepter cette augmentation ou résilier votre abonnement.</b>
-             <br /><br /> Vous avez 4 mois pour résilier votre abonnement."
