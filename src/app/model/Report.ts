@@ -11,7 +11,7 @@ import {
 } from './Anomaly';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
-import { DraftCompany, WebsiteURL } from '@betagouv/signalconso-api-sdk-js';
+import { DraftCompany, WebsiteURL } from '@signal-conso/signalconso-api-sdk-js';
 import format from 'date-fns/format';
 import { CompanySearchResult } from './Company';
 

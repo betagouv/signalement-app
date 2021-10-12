@@ -1,7 +1,7 @@
 import { DraftReport, ReportStatus, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
 import { Information, Subcategory } from '../src/app/model/Anomaly';
-import { Company, CompanySearchResult } from '@betagouv/signalconso-api-sdk-js';
+import { Company, CompanySearchResult } from '@signal-conso/signalconso-api-sdk-js';
 import anomalies from '../src/assets/data/anomalies.json';
 
 const randomstring = require('randomstring');
