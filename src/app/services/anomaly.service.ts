@@ -1,5 +1,5 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import anomaliesJSON from '../../assets/data/anomalies.json';
+import anomaliesJSON from '@signal-conso/signalconso-api-sdk-js/lib/client/anomaly/yml/anomalies.json';
 import { Anomaly, collectTags, enrichAnomaly, InternetTag } from '../model/Anomaly';
 
 @Injectable({
