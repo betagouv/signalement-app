@@ -6,7 +6,7 @@ import { ReportRouterService } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '../../../model/Anomaly';
-import { DraftCompany, WebsiteURL } from '@betagouv/signalconso-api-sdk-js';
+import { DraftCompany, WebsiteURL } from '@signal-conso/signalconso-api-sdk-js';
 import { RendererService } from '../../../services/renderer.service';
 import {Country} from "../../../model/Country";
 

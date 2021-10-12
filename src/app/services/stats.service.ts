@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FetchService } from './helper/FetchService';
 import { ApiSdkService } from './core/api-sdk.service';
-import { CountByDate, SimpleStat } from '@betagouv/signalconso-api-sdk-js/lib/client/stats/Stats';
+import { CountByDate, SimpleStat } from '@signal-conso/signalconso-api-sdk-js/lib/client/stats/Stats';
 
 @Injectable({ providedIn: 'root' })
 export class ReportCountService extends FetchService<SimpleStat> {

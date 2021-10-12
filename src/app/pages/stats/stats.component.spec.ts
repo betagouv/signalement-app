@@ -1,5 +1,5 @@
 import { StatsComponent } from './stats.component';
-import { CountByDate } from '@betagouv/signalconso-api-sdk-js/lib/client/stats/Stats';
+import { CountByDate } from '@signal-conso/signalconso-api-sdk-js/lib/client/stats/Stats';
 
 describe('StatsComponent', () => {
 

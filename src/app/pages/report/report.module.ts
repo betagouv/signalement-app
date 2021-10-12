@@ -11,7 +11,7 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
-import anomalies from '../../../assets/data/anomalies.json';
+import anomalies from '@signal-conso/signalconso-api-sdk-js/lib/client/anomaly/yml/anomalies.json';
 import { ReportPaths } from '../../services/report-router.service';
 import { defineLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { CarouselModule } from 'ngx-bootstrap/carousel';

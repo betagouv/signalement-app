@@ -1,7 +1,7 @@
-import { Entity, Id } from '@betagouv/signalconso-api-sdk-js';
+import { Entity, Id } from '@signal-conso/signalconso-api-sdk-js';
 import { Observable, throwError } from 'rxjs';
 import { ApiSdkService } from '../core/api-sdk.service';
-import { ApiError } from '@betagouv/signalconso-api-sdk-js';
+import { ApiError } from '@signal-conso/signalconso-api-sdk-js';
 import { Index } from '../../model/Common';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { FetchService } from './FetchService';

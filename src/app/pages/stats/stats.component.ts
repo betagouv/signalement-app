@@ -11,7 +11,7 @@ import {
   ReportWithWebsitePercentageService
 } from '../../services/stats.service';
 import { map } from 'rxjs/operators';
-import { CountByDate, SimpleStat } from '@betagouv/signalconso-api-sdk-js/lib/client/stats/Stats';
+import { CountByDate, SimpleStat } from '@signal-conso/signalconso-api-sdk-js/lib/client/stats/Stats';
 import { EChartOption } from 'echarts';
 
 @Component({
