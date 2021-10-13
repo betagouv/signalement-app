@@ -49,7 +49,6 @@ import { EChartOption } from 'echarts';
 
       <app-stats-item
         title="des signalements déposés depuis le début de SignalConso concernent une entreprise sur internet"
-        desc="Lorsqu'une entreprise reçoit un signalement, elle peut décider de répondre ou non au consommateur."
         [value$]="reportWithWebsitePercentage$"
       ></app-stats-item>
 
