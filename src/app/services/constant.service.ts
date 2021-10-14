@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiSdkService } from './core/api-sdk.service';
 import { catchError, mergeMap, tap } from 'rxjs/operators';
-import { ApiError } from '@betagouv/signalconso-api-sdk-js';
+import { ApiError } from '@signal-conso/signalconso-api-sdk-js';
 import { BehaviorSubject, iif, Observable, of, throwError } from 'rxjs';
 import { Country } from '../model/Country';
 

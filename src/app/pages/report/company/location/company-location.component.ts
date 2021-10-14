@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DraftCompany } from '@betagouv/signalconso-api-sdk-js';
+import { DraftCompany } from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-company-location',

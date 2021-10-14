@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RendererService } from '../../../../services/renderer.service';
-import { DraftCompany } from '@betagouv/signalconso-api-sdk-js';
+import { DraftCompany } from '@signal-conso/signalconso-api-sdk-js';
 import { ConstantService } from '../../../../services/constant.service';
 
 export const foreignFormValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {

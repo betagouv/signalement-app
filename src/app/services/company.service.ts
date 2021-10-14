@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { Country } from '@betagouv/signalconso-api-sdk-js';
+import { Country } from '@signal-conso/signalconso-api-sdk-js';
 import { ApiSdkService } from './core/api-sdk.service';
 import { FetchService } from './helper/FetchService';
 import { CompanySearchResult } from '../model/Company';
