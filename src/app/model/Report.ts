@@ -1,10 +1,10 @@
 import { Consumer } from './Consumer';
-import { CompanyKinds, ReportTag, Subcategory, } from '@signal-conso/signalconso-api-sdk-js';
+import { CompanyKinds, DraftCompany, ReportTag, Subcategory, WebsiteURL, } from '@signal-conso/signalconso-api-sdk-js';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
-import { DraftCompany, WebsiteURL } from '@signal-conso/signalconso-api-sdk-js';
 import format from 'date-fns/format';
 import { CompanySearchResult } from './Company';
+import _uniqby from 'lodash.uniqby';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -59,7 +59,8 @@ export class DraftReport {
   }
 
   get reponseconsoCode(): string[] {
-    return !this.subcategories ? [] : [].concat(...this.subcategories.flatMap(subcategory => subcategory.reponseconsoCode || []));
+    const collectedCodes = !this.subcategories ? [] : [].concat(...this.subcategories.flatMap(subcategory => subcategory.reponseconsoCode || []));
+    return _uniqby(collectedCodes, _ => _);
   }
 
   get tags() {
