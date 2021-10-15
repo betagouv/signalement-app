@@ -1,14 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import {
-  Anomaly,
-  instanceOfAnomaly,
-  instanceOfSubcategoryInformation,
-  instanceOfSubcategoryInput,
-  SubcategoryBase,
-  SubcategoryInformation,
-  SubcategoryInput
-} from '../../model/Anomaly';
 import { Animations } from '../../utils/animations';
+import { Anomaly, AnomalyClient, SubcategoryBase, SubcategoryInformation, SubcategoryInput } from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-anomalies-node[anomaly]',
@@ -57,7 +49,7 @@ export class AnomaliesNodeComponent {
   }
 
   get title() {
-    if (instanceOfAnomaly(this.anomaly)) {
+    if (AnomalyClient.instanceOfAnomaly(this.anomaly)) {
       return this.anomaly.category;
     }
     return this.anomaly.title;
@@ -69,9 +61,9 @@ export class AnomaliesNodeComponent {
 
   isOpen = false;
 
-  readonly isSubcategoryInput = () => instanceOfSubcategoryInput(this.anomaly);
+  readonly isSubcategoryInput = () => AnomalyClient.instanceOfSubcategoryInput(this.anomaly);
 
-  readonly isSubcategoryInformation = () => instanceOfSubcategoryInformation(this.anomaly);
+  readonly isSubcategoryInformation = () => AnomalyClient.instanceOfSubcategoryInformation(this.anomaly);
 
   readonly hasMore = () => (this.anomaly.subcategories || []).length > 0 || this.isSubcategoryInformation() || this.isSubcategoryInput();
 }

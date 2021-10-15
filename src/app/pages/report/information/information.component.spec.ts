@@ -4,7 +4,7 @@ import { InformationComponent } from './information.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Anomaly } from '../../../model/Anomaly';
+import { Anomaly } from '@signal-conso/signalconso-api-sdk-js';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { Step } from '../../../model/Report';
 import { RetractationComponent } from '../../static/retractation/retractation.component';
@@ -62,6 +62,7 @@ describe('InformationComponent', () => {
   it('should display information when a report refers to anomaly with information', () => {
 
     const anomalyFixture: Anomaly = {
+      id: '1',
       categoryId: '',
       category: '',
       path: '',

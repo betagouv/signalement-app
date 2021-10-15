@@ -22,13 +22,13 @@ import { CompanyForeignCountryComponent } from './company/foreign-country/compan
 import { CompanySearchByNameComponent } from './company/search-by-name-component/company-search-by-name.component';
 import { CompanySearchByIdentityComponent } from './company/search-by-identity/company-search-by-identity.component';
 import { CompanySearchByWebsiteComponent } from './company/search-by-website/company-search-by-website.component';
-import { instanceOfSubcategoryInformation } from '../../model/Anomaly';
 import { CompanyPhoneComponent } from './company/phone/company-phone.component';
 import { CompanyLocationComponent } from './company/location/company-location.component';
 import { PageModule } from '../../components/page/page.module';
 import { AlertModule as AppAlertModule } from '../../components/alert/alert';
 import { ProblemModule } from './problem/problem.module';
 import { ProblemComponent } from './problem/problem.component';
+import { AnomalyClient } from '../../../../../signalconso-api-sdk-js';
 
 defineLocale('fr', frLocale);
 
@@ -39,7 +39,7 @@ const routes: Routes = [{ path: '', component: CategoryComponent }];
 export function AnomalyLazyRoutesFactory(compiler: Compiler): Routes {
   return anomalies.list
       .map(anomaly => {
-        if (instanceOfSubcategoryInformation(anomaly)) {
+        if (AnomalyClient.instanceOfSubcategoryInformation(anomaly as any)) {
           return [
             { path: `${anomaly.path}`, component: InformationComponent },
             { path: `${anomaly.path}/${ReportPaths.Information}`, component: InformationComponent }

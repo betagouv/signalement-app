@@ -13,7 +13,7 @@ import { of } from 'rxjs';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { DangerousProductTag } from '../../../model/Anomaly';
+import { DangerousProductTag } from '@signal-conso/signalconso-api-sdk-js';
 
 describe('ConsumerComponent', () => {
 

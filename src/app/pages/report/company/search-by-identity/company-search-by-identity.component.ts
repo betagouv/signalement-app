@@ -1,11 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DraftCompany, Country } from '@signal-conso/signalconso-api-sdk-js';
+import { CompanyKinds, Country, DraftCompany } from '@signal-conso/signalconso-api-sdk-js';
 import { AnalyticsService, CompanySearchEventActions, EventCategories } from '../../../../services/analytics.service';
 import { SearchCompanyByIdentityService } from '../../../../services/company.service';
 import { RendererService } from '../../../../services/renderer.service';
 import { IdentificationKinds } from '../company.component';
-import { CompanyKinds } from '../../../../model/Anomaly';
 import { CompanySearchResult } from '../../../../model/Company';
 
 @Component({

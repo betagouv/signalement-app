@@ -8,7 +8,7 @@ import { UploadedFile } from '../../../model/UploadedFile';
 import { ReportService } from '../../../services/report.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
-import { CompanyKinds } from '../../../model/Anomaly';
+import { CompanyKinds } from '@signal-conso/signalconso-api-sdk-js';
 import { environment } from '../../../../environments/environment';
 
 @Component({

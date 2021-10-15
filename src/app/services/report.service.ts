@@ -20,6 +20,7 @@ export class ReportService {
         subcategories: !draftReport.subcategories ? [] : draftReport.subcategories
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
         tags: draftReport.tags,
+        reponseconsoCode: draftReport.reponseconsoCode,
         firstName: draftReport.consumer.firstName,
         lastName: draftReport.consumer.lastName,
         email: draftReport.consumer.email,

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CompanyComponent, IdentificationKinds } from './company.component';
-import {SearchCompanyByURLService, SearchForeignCompanyByURLService} from '../../../services/company.service';
+import { SearchCompanyByURLService, SearchForeignCompanyByURLService } from '../../../services/company.service';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ReportPaths } from '../../../services/report-router.service';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { genCompanySearchResult, genDraftReport, genSubcategory } from '../../../../../test/fixtures.spec';
-import { CompanyKinds } from '../../../model/Anomaly';
+import { CompanyKinds } from '@signal-conso/signalconso-api-sdk-js';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
