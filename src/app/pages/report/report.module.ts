@@ -28,7 +28,7 @@ import { PageModule } from '../../components/page/page.module';
 import { AlertModule as AppAlertModule } from '../../components/alert/alert';
 import { ProblemModule } from './problem/problem.module';
 import { ProblemComponent } from './problem/problem.component';
-import { AnomalyClient } from '../../../../../signalconso-api-sdk-js';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 defineLocale('fr', frLocale);
 

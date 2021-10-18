@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AnomalyService } from './anomaly.service';
 import { DraftReport, Step } from '../model/Report';
 import { ReportStorageService } from './report-storage.service';
-import { AnomalyClient } from '../../../../signalconso-api-sdk-js';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 export enum ReportPaths {
   Category = '',
