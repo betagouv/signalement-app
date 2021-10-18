@@ -45,6 +45,9 @@
 }
 
 .-reponseconso-code {
+  display: inline-flex;
+  align-items: center;
   border-radius: 40px;
+  padding: 0 6px;
   border: 1px solid $theme-divider;
 }
