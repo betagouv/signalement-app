@@ -7,13 +7,10 @@ import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import {
-  DangerousProductTag,
-  DescriptionLabel,
+  AnomalyClient,
   DetailInput,
-  InputType,
-  instanceOfSubcategoryInput,
-  ReportingDateLabel
-} from '../../../model/Anomaly';
+  InputType, ReportTag,
+} from '@signal-conso/signalconso-api-sdk-js';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -23,6 +20,10 @@ import { take } from 'rxjs/operators';
 import { Keyword } from '../../../model/Keyword';
 
 export const fileSizeMax = 5000000;
+
+export const ReportingDateLabel = 'Date du constat';
+export const ReportingTimeslotLabel = 'Heure du constat';
+export const DescriptionLabel = 'Description';
 
 @Component({
   selector: 'app-details',
@@ -98,7 +99,7 @@ export class DetailsComponent implements OnInit {
   }
 
   initDetailInputs() {
-    if (instanceOfSubcategoryInput(this.draftReport.lastSubcategory)) {
+    if (AnomalyClient.instanceOfSubcategoryInput(this.draftReport.lastSubcategory)) {
       this.detailInputs = this.draftReport.lastSubcategory.detailInputs;
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
@@ -113,7 +114,7 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  readonly isDangerousProductReport = () => this.draftReport.tags.indexOf(DangerousProductTag) > -1;
+  readonly isDangerousProductReport = () => this.draftReport.tags.indexOf(ReportTag.ProduitDangereux) > -1;
 
   getDefaultDetailInputs() {
     const detailInputs: DetailInput[] = [];

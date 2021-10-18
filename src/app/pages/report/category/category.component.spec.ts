@@ -4,7 +4,7 @@ import { CategoryComponent, IllustrationCardComponent } from './category.compone
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AnomalyService } from '../../../services/anomaly.service';
-import { Anomaly } from '../../../model/Anomaly';
+import { Anomaly } from '@signal-conso/signalconso-api-sdk-js';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReportPaths, ReportRouterService } from '../../../services/report-router.service';
@@ -23,6 +23,7 @@ describe('CategoryComponent', () => {
   let reportRouterService: ReportRouterService;
 
   const primaryAnomaly1: Anomaly = {
+    id: '1',
     category: 'category1',
     path: 'path1',
     rank: 1,
@@ -30,6 +31,7 @@ describe('CategoryComponent', () => {
     subcategories: [],
   };
   const primaryAnomalyWithInformation: Anomaly = {
+    id: '1',
     category: 'category2',
     path: 'path2',
     rank: 2,

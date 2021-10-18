@@ -7,12 +7,13 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { instanceOfSubcategoryInformation, ReponseConsoTag, Subcategory } from '../../../model/Anomaly';
+import { ReportTag, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { ProblemStep } from './problem-step.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContractualDisputeComponent } from './alert-contractual-dispute.component';
 import { environment } from '../../../../environments/environment';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -145,7 +146,7 @@ export class ProblemComponent implements OnInit {
 
   readonly showReponseConsoQuestion = () => {
     const show = this.displayReponseConso()
-      && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReponseConsoTag) > -1)
+      && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReportTag.ReponseConso) > -1)
       && this.draftReport.employeeConsumer === false;
     if (!show) {
       delete this.draftReport.forwardToReponseConso;
@@ -176,7 +177,7 @@ export class ProblemComponent implements OnInit {
 
   readonly isLastCategories$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories));
 
-  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories && !instanceOfSubcategoryInformation(_)));
+  readonly showEmployeeConsumer$ = this.lastSelectedCategories.pipe(map(_ => _ && !_.subcategories && !AnomalyClient.instanceOfSubcategoryInformation(_)));
 
   readonly getSteps: Observable<Subcategory[]> = combineLatest([this.anomaly$, this.selectedTitles$]).pipe(
     map(([anomaly, selected]) => getSubcategory(anomaly as any, selected))

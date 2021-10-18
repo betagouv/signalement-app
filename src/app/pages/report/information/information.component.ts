@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Anomaly, Information, instanceOfSubcategoryInformation } from '../../../model/Anomaly';
+import { Anomaly, Information } from '@signal-conso/signalconso-api-sdk-js';
 import { ReportStorageService } from '../../../services/report-storage.service';
 import { DraftReport, Step } from '../../../model/Report';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -9,6 +9,7 @@ import { switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { RatingService } from '../../../services/rating.service';
 import { of } from 'rxjs';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-information',
@@ -67,7 +68,7 @@ export class InformationComponent implements OnInit, OnDestroy {
     if (anomaly && anomaly.information) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, anomaly.category);
       this.informationToDisplay = anomaly.information;
-    } else if (instanceOfSubcategoryInformation(this.draftReport.lastSubcategory)) {
+    } else if (AnomalyClient.instanceOfSubcategoryInformation(this.draftReport.lastSubcategory)) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.outOfBounds, this.draftReport.lastSubcategory.title);
       this.informationToDisplay = this.draftReport.lastSubcategory.information;
     }

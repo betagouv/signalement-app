@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import anomaliesJSON from '@signal-conso/signalconso-api-sdk-js/lib/client/anomaly/yml/anomalies.json';
-import { Anomaly, collectTags, enrichAnomaly, InternetTag } from '../model/Anomaly';
+import { AnomalyClient, Anomaly } from '@signal-conso/signalconso-api-sdk-js';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,8 @@ export class AnomalyService {
 
   constructor(@Inject('anomalies') @Optional() private readonly anomalies: Anomaly[]) {
     if (!anomalies) {
-      this.anomalies = anomaliesJSON.list.map(enrichAnomaly) as Anomaly[];
+      // @ts-ignore
+      this.anomalies = anomaliesJSON.list.map(AnomalyClient.enrichAnomaly) as Anomaly[];
     }
   }
 

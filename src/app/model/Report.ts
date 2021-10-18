@@ -1,19 +1,10 @@
 import { Consumer } from './Consumer';
-import {
-  Bloctel,
-  CompanyKinds,
-  ContractualDisputeTag,
-  DangerousProductTag,
-  InternetTag,
-  ReponseConsoTag,
-  Subcategory,
-  Tag
-} from './Anomaly';
+import { CompanyKinds, DraftCompany, ReportTag, Subcategory, WebsiteURL, } from '@signal-conso/signalconso-api-sdk-js';
 import { FileOrigin, UploadedFile } from './UploadedFile';
 import { isDefined } from '@angular/compiler/src/util';
-import { DraftCompany, WebsiteURL } from '@signal-conso/signalconso-api-sdk-js';
 import format from 'date-fns/format';
 import { CompanySearchResult } from './Company';
+import _uniqby from 'lodash.uniqby';
 
 export const PrecisionKeyword = '(à préciser)';
 
@@ -67,38 +58,43 @@ export class DraftReport {
     }
   }
 
+  get reponseconsoCode(): string[] {
+    const collectedCodes = !this.subcategories ? [] : [].concat(...this.subcategories.flatMap(subcategory => subcategory.reponseconsoCode || []));
+    return _uniqby(collectedCodes, _ => _);
+  }
+
   get tags() {
     const tags = !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
     if (this.companyKind === CompanyKinds.WEBSITE) {
-      tags.push(InternetTag);
+      tags.push(ReportTag.Internet);
     }
     if (!this.forwardToReponseConso) {
-      return tags.filter(_ => _ !== ReponseConsoTag);
+      return tags.filter(_ => _ !== ReportTag.ReponseConso);
     }
     return tags;
   }
 
   /** @deprecated use pure isContractualDispute() function */
   get isContractualDispute() {
-    return !this.employeeConsumer && this.tags.indexOf(ContractualDisputeTag) !== -1;
+    return !this.employeeConsumer && this.tags.indexOf(ReportTag.LitigeContractuel) !== -1;
   }
 
   get isVendor() {
-    return this.tags?.indexOf(DangerousProductTag) !== -1;
+    return this.tags?.indexOf(ReportTag.ProduitDangereux) !== -1;
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && !this.forwardToReponseConso && !this.tags?.find(_ => ([DangerousProductTag, Bloctel]).includes(_));
+    return !this.employeeConsumer && !this.forwardToReponseConso && !this.tags?.find(_ => ([ReportTag.ProduitDangereux, ReportTag.Bloctel]).includes(_));
   }
 }
 
-export const isContractualDispute = (_: DraftReport) => !_.employeeConsumer && _.tags.indexOf(ContractualDisputeTag) !== -1;
+export const isContractualDispute = (_: DraftReport) => !_.employeeConsumer && _.tags.indexOf(ReportTag.LitigeContractuel) !== -1;
 
 export class Report {
   id: string;
   category: string;
   subcategories: Subcategory[];
-  tags: Tag[];
+  tags: ReportTag[];
   company: CompanySearchResult;
   website: WebsiteURL;
   vendor: string;
@@ -121,7 +117,7 @@ export class Report {
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && this.tags?.indexOf(DangerousProductTag) === -1;
+    return !this.employeeConsumer && this.tags?.indexOf(ReportTag.ProduitDangereux) === -1;
   }
 }
 

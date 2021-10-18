@@ -1,6 +1,6 @@
 import { DraftReport, ReportStatus, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
-import { Information, Subcategory } from '../src/app/model/Anomaly';
+import { Information, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
 import { Company, CompanySearchResult } from '@signal-conso/signalconso-api-sdk-js';
 import anomalies from '@signal-conso/signalconso-api-sdk-js/lib/client/anomaly/yml/anomalies.json';
 
