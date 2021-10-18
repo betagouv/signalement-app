@@ -13,7 +13,7 @@ import { ProblemStep } from './problem-step.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContractualDisputeComponent } from './alert-contractual-dispute.component';
 import { environment } from '../../../../environments/environment';
-import { AnomalyClient } from '../../../../../../signalconso-api-sdk-js';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;

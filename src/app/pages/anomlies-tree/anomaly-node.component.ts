@@ -20,6 +20,12 @@ import { Anomaly, AnomalyClient, SubcategoryBase, SubcategoryInformation, Subcat
           </div>
           <div class="-desc" *ngIf="anomaly.description" [innerHTML]="anomaly.description"></div>
           <div class="-desc" *ngIf="anomaly.subcategoriesTitle" [innerHTML]="anomaly.subcategoriesTitle"></div>
+          <div class="-desc">
+            ReponseConso codes:
+            <span class="-reponseconso-code" *ngFor="let code of reponseconsoCodes">
+              {{code}}
+            </span>
+          </div>
         </div>
       </div>
       <div class="-subcategory" *ngIf="isOpen" @slideToggleNgIf>
@@ -57,6 +63,10 @@ export class AnomaliesNodeComponent {
 
   get tags(): string[] | undefined {
     return (this.anomaly as SubcategoryBase).tags;
+  }
+
+  get reponseconsoCodes(): string[] | undefined {
+    return (this.anomaly as SubcategoryBase).reponseconsoCode;
   }
 
   isOpen = false;

@@ -8,7 +8,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { pageDefinitions } from '../../../../assets/data/pages';
 import { Meta, Title } from '@angular/platform-browser';
-import { AnomalyClient } from '../../../../../../signalconso-api-sdk-js';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-category',

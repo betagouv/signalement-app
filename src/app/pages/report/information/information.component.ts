@@ -9,7 +9,7 @@ import { switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { RatingService } from '../../../services/rating.service';
 import { of } from 'rxjs';
-import { AnomalyClient } from '../../../../../../signalconso-api-sdk-js';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-information',
