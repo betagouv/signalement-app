@@ -20,7 +20,7 @@ import { Anomaly, AnomalyClient, SubcategoryBase, SubcategoryInformation, Subcat
           </div>
           <div class="-desc" *ngIf="anomaly.description" [innerHTML]="anomaly.description"></div>
           <div class="-desc" *ngIf="anomaly.subcategoriesTitle" [innerHTML]="anomaly.subcategoriesTitle"></div>
-          <div class="-desc" *ngIf="anomaly.reponseconsoCode && anomaly.reponseconsoCode.length > 0">
+          <div class="-desc" *ngIf="reponseconsoCodes && reponseconsoCodes.length > 0">
             ReponseConso codes:
             <span class="-reponseconso-code" *ngFor="let code of reponseconsoCodes">
               {{code}}
