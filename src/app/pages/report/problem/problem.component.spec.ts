@@ -1,7 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { ProblemComponent } from './problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Anomaly, ContractualDisputeTag, Subcategory } from '../../../model/Anomaly';
+import { Anomaly, ReportTag, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -35,7 +35,7 @@ describe('ProblemComponent', () => {
   let overlayContainerElement: HTMLElement;
 
   const simpleSubcategoryFixture = genSubcategory();
-  const contractualDisputeSubcategoryFixture = <Subcategory>{ ...genSubcategory(), tags: [ContractualDisputeTag] };
+  const contractualDisputeSubcategoryFixture = <Subcategory>{ ...genSubcategory(), tags: [ReportTag.LitigeContractuel] };
   const infoSubcategoryFixture = <Subcategory>{ ...genSubcategory(), information: genInformation() };
 
   const subcategoriesFixture = [
@@ -45,6 +45,7 @@ describe('ProblemComponent', () => {
   ];
 
   const anomalyFixture: Anomaly = {
+    id: '1',
     categoryId: '',
     category: '',
     path: 'myPath',
@@ -184,6 +185,7 @@ describe('ProblemComponent', () => {
 
   it('should display specific message when the user is not employee and report concerns a contractual report', () => {
     spyOn(anomalyService, 'getAnomalyBy').and.returnValue({
+      id: '1',
       categoryId: '',
       category: '',
       path: '',

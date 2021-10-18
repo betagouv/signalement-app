@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ConsumerComponent } from './consumer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DraftReport, Step } from '../../../model/Report';
@@ -13,7 +12,7 @@ import { of } from 'rxjs';
 import { AnalyticsService } from '../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../test/mocks';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { DangerousProductTag } from '../../../model/Anomaly';
+import { ReportTag } from '@signal-conso/signalconso-api-sdk-js';
 
 describe('ConsumerComponent', () => {
 
@@ -182,7 +181,7 @@ describe('ConsumerComponent', () => {
         employeeConsumer: false,
         subcategories: [{
           ...genSubcategory(),
-          tags: [DangerousProductTag]
+          tags: [ReportTag.ProduitDangereux]
         }]
       });
 

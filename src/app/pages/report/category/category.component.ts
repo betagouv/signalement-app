@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { Anomaly, Information, instanceOfSubcategoryInformation } from '../../../model/Anomaly';
+import { Anomaly, Information } from '@signal-conso/signalconso-api-sdk-js';
 import { DraftReport, Step } from '../../../model/Report';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
@@ -8,6 +8,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { pageDefinitions } from '../../../../assets/data/pages';
 import { Meta, Title } from '@angular/platform-browser';
+import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-category',
@@ -78,7 +79,9 @@ export class CategoryComponent implements OnInit {
   }
 
   isAlertOpen() {
-    return this.draftReport && this.draftReport.subcategories && !instanceOfSubcategoryInformation(this.draftReport.lastSubcategory);
+    return this.draftReport
+      && this.draftReport.subcategories
+      && !AnomalyClient.instanceOfSubcategoryInformation(this.draftReport.lastSubcategory);
   }
 }
 

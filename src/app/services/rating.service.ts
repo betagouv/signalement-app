@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api, ServiceUtils } from './core/service.utils';
-import { Subcategory } from '../model/Anomaly';
+import { Subcategory } from '@signal-conso/signalconso-api-sdk-js';
 
 @Injectable({
   providedIn: 'root'

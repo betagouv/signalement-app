@@ -168,8 +168,6 @@ export class AppModule {
     const match = this.findMatch(currentPath);
     if (match) {
       window.location.href = environment.dashboardBaseUrl + this.getRedirection(currentPath, match);
-    } else {
-      console.error(`No redirection to dashoard for ${currentPath}.`);
     }
   };
 

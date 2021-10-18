@@ -1,14 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import {
-  Anomaly,
-  instanceOfAnomaly,
-  instanceOfSubcategoryInformation,
-  instanceOfSubcategoryInput,
-  SubcategoryBase,
-  SubcategoryInformation,
-  SubcategoryInput
-} from '../../model/Anomaly';
 import { Animations } from '../../utils/animations';
+import { Anomaly, AnomalyClient, SubcategoryBase, SubcategoryInformation, SubcategoryInput } from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-anomalies-node[anomaly]',
@@ -28,6 +20,12 @@ import { Animations } from '../../utils/animations';
           </div>
           <div class="-desc" *ngIf="anomaly.description" [innerHTML]="anomaly.description"></div>
           <div class="-desc" *ngIf="anomaly.subcategoriesTitle" [innerHTML]="anomaly.subcategoriesTitle"></div>
+          <div class="-desc">
+            ReponseConso codes:
+            <span class="-reponseconso-code" *ngFor="let code of reponseconsoCodes">
+              {{code}}
+            </span>
+          </div>
         </div>
       </div>
       <div class="-subcategory" *ngIf="isOpen" @slideToggleNgIf>
@@ -57,7 +55,7 @@ export class AnomaliesNodeComponent {
   }
 
   get title() {
-    if (instanceOfAnomaly(this.anomaly)) {
+    if (AnomalyClient.instanceOfAnomaly(this.anomaly)) {
       return this.anomaly.category;
     }
     return this.anomaly.title;
@@ -67,11 +65,15 @@ export class AnomaliesNodeComponent {
     return (this.anomaly as SubcategoryBase).tags;
   }
 
+  get reponseconsoCodes(): string[] | undefined {
+    return (this.anomaly as SubcategoryBase).reponseconsoCode;
+  }
+
   isOpen = false;
 
-  readonly isSubcategoryInput = () => instanceOfSubcategoryInput(this.anomaly);
+  readonly isSubcategoryInput = () => AnomalyClient.instanceOfSubcategoryInput(this.anomaly);
 
-  readonly isSubcategoryInformation = () => instanceOfSubcategoryInformation(this.anomaly);
+  readonly isSubcategoryInformation = () => AnomalyClient.instanceOfSubcategoryInformation(this.anomaly);
 
   readonly hasMore = () => (this.anomaly.subcategories || []).length > 0 || this.isSubcategoryInformation() || this.isSubcategoryInput();
 }
