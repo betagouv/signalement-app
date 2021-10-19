@@ -85,6 +85,7 @@
 
 <ng-template #foreignCountry>
   <app-company-foreign-country [isVendor]="isVendor"
+                               [isInfluenceur]="false"
                                (complete)="selectCompany($event, true)"
                                [forceForeign]="true">
   </app-company-foreign-country>
