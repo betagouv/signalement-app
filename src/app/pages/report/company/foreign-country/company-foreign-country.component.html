@@ -1,7 +1,7 @@
 <form [formGroup]="foreignForm" (submit)="submitForeignForm()" id="foreignForm" *ngIf="foreignForm" #foreignFormElt>
   <ng-container *ngIf="!forceForeign">
     <h2 class="mb-4 font-weight-bold">
-      Est-ce que {{isVendor ? 'le vendeur' : 'l\'entreprise'}} est en France ?
+      Est-ce que {{isVendor ? 'le vendeur' : (isInfluenceur ? 'son entreprise' : 'l\'entreprise' )}} est en France ?
     </h2>
 
     <div [ngClass]="rendererService.getRadioContainerClass(isForeignCtrl.value, isForeignValues.false)">

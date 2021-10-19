@@ -44,7 +44,7 @@
             <i class="material-icons" aria-hidden="true">edit</i> Modifier
           </button>
           <hr />
-          <h3>{{draftReport.isVendor ? 'Vendeur' : 'Entreprise'}}</h3>
+          <h3>{{draftReport.isVendor ? 'Vendeur' : ( draftReport.companyKind === companyKinds.INFLUENCEUR ? 'L\'influenceur ou l\'influenceuse' : 'Entreprise') }}</h3>
           <ng-container *ngIf="draftReport.draftCompany.name">
             <div>
               Nom :

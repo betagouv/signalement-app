@@ -104,7 +104,7 @@
             <hr *ngIf="draftWebsite || draftPhone"/>
 
             <h2 class="mb-4 font-weight-bold">
-              Pouvez-vous identifier {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}<span *ngIf="draftReport.companyKind === companyKinds.PHONE"> qui vous a démarché</span> ?
+              Pouvez-vous identifier {{draftReport.isVendor ? 'le vendeur' :( draftReport.companyKind === companyKinds.INFLUENCEUR ? 'son numéro SIRET, SIREN ou RCS' :  'l\'entreprise')}}<span *ngIf="draftReport.companyKind === companyKinds.PHONE"> qui vous a démarché</span> ?
             </h2>
             <div class="note mb-1">
               SignalConso en a besoin pour <ng-container *ngIf="draftReport.isTransmittableToPro">la contacter et </ng-container>informer la répression des fraudes.
@@ -112,7 +112,7 @@
 
             <form>
               <fieldset>
-                <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.Name)">
+                <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.Name)" *ngIf="draftReport.companyKind !== companyKinds.INFLUENCEUR">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
                       <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.Name" id="identByName" (click)="rendererService.scrollToElement(identSearch)"/>
@@ -135,13 +135,13 @@
                 </div>
 
                 <div [ngClass]="rendererService.getRadioContainerClass(identificationKind, identificationKinds.None)"
-                     *ngIf="[companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf(), companyKinds.LOCATION.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
+                     *ngIf="[companyKinds.INFLUENCEUR.valueOf(),companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf(), companyKinds.LOCATION.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
                   <div class="row pb-2 pt-2">
                     <div class="col col-radio">
                       <input type="radio" [(ngModel)]="identificationKind" name="identificationKind" [value]="identificationKinds.None" id="noIdent" (click)="rendererService.scrollToElement(identSearch)"/>
                     </div>
                     <div class="col">
-                      <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}</label>
+                      <label for="noIdent" class="label-inline pointer">Je ne peux pas identifier {{draftReport.isVendor ? 'le vendeur' : 'l\'entreprise'}}  {{ draftReport.companyKind === companyKinds.INFLUENCEUR ? 'de l\'influenceur ou de l\'influenceuse' : '' }} </label>
                     </div>
                   </div>
                 </div>
@@ -176,8 +176,9 @@
                                         *ngIf="this.draftReport?.companyKind === companyKinds.LOCATION.valueOf()">
                   </app-company-location>
                   <app-company-foreign-country [isVendor]="draftReport.isVendor"
+                                               [isInfluenceur]="this.draftReport?.companyKind === companyKinds.INFLUENCEUR.valueOf()"
                                                (complete)="submitCompany($event)"
-                                               *ngIf="[companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
+                                               *ngIf="[companyKinds.INFLUENCEUR.valueOf(),companyKinds.WEBSITE.valueOf(), companyKinds.PHONE.valueOf()].indexOf(this.draftReport?.companyKind) !== -1">
                   </app-company-foreign-country>
                 </div>
               </ng-container>

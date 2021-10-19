@@ -28,6 +28,7 @@ export class CompanyForeignCountryComponent implements OnInit {
 
   @Input() forceForeign;
   @Input() isVendor: boolean;
+  @Input() isInfluenceur: boolean;
   @Output() complete = new EventEmitter<Partial<DraftCompany>>();
 
   foreignForm: FormGroup;
