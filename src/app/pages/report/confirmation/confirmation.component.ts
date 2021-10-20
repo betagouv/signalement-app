@@ -10,6 +10,7 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { take } from 'rxjs/operators';
 import { CompanyKinds } from '@signal-conso/signalconso-api-sdk-js';
 import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-confirmation',
@@ -30,11 +31,12 @@ export class ConfirmationComponent implements OnInit {
   loadingError: boolean;
 
   constructor(public formBuilder: FormBuilder,
-              private reportService: ReportService,
-              private reportStorageService: ReportStorageService,
-              private reportRouterService: ReportRouterService,
-              private fileUploaderService: FileUploaderService,
-              private analyticsService: AnalyticsService) {
+    private httpClient: HttpClient,
+    private reportService: ReportService,
+    private reportStorageService: ReportStorageService,
+    private reportRouterService: ReportRouterService,
+    private fileUploaderService: FileUploaderService,
+    private analyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -68,10 +70,9 @@ export class ConfirmationComponent implements OnInit {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendSuccess);
           this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
+          this.reportRouterService.routeForward(this.step);
           if (this.draftReport.forwardToReponseConso) {
-            window.location.href = environment.reponseConsoForwardUrl(report.id);
-          } else {
-            this.reportRouterService.routeForward(this.step);
+            this.httpClient.get(environment.reponseConsoForwardUrl(report.id)).subscribe();
           }
         }, error => {
           this.loading = false;

@@ -39,11 +39,12 @@ export class CompanyComponent implements OnInit {
   loading = false;
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              public formBuilder: FormBuilder,
-              private reportStorageService: ReportStorageService,
-              private reportRouterService: ReportRouterService,
-              private analyticsService: AnalyticsService,
-              private rendererService: RendererService) { }
+    public formBuilder: FormBuilder,
+    private reportStorageService: ReportStorageService,
+    private reportRouterService: ReportRouterService,
+    private analyticsService: AnalyticsService,
+    private rendererService: RendererService) {
+  }
 
   ngOnInit() {
     this.reportStorageService.retrieveReportInProgress()
@@ -80,10 +81,9 @@ export class CompanyComponent implements OnInit {
     if (draftCompany.siret) {
       this.submitCompany(draftCompany);
     }
-    if(draftCompany.address && draftCompany.address.country){
-      this.submitCountry(draftCompany.address.country)
-    }
-    else {
+    if (draftCompany.address && draftCompany.address.country) {
+      this.submitCountry(draftCompany.address.country);
+    } else {
       this.requireIdentificationKind = true;
       this.identificationKind = undefined;
       this.rendererService.scrollToElement(this.searchKind?.nativeElement);
@@ -113,7 +113,7 @@ export class CompanyComponent implements OnInit {
     this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateCompany, this.identificationKind);
     this.draftReport.draftCompany = {
       address: {
-        country : country
+        country: country
       },
       website: this.draftWebsite,
       phone: this.draftPhone,
@@ -131,4 +131,8 @@ export class CompanyComponent implements OnInit {
   changeCompany() {
     this.changeDraftCompany = true;
   }
+
+  readonly isCompanyKind = (...args: CompanyKinds[]): boolean => {
+    return [...args].includes(this.draftReport?.companyKind);
+  };
 }
