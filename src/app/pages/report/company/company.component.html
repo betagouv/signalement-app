@@ -173,7 +173,7 @@
                 <div *ngSwitchCase="identificationKinds.None">
                   <app-company-location [isVendor]="draftReport.isVendor"
                                         (complete)="submitCompany($event)"
-                                        *ngIf="this.draftReport?.companyKind === companyKinds.LOCATION.valueOf()">
+                                        *ngIf="this.draftReport?.companyKind === companyKinds.LOCATION">
                   </app-company-location>
                   <app-company-foreign-country [isVendor]="draftReport.isVendor"
                                                [isInfluenceur]="this.draftReport?.companyKind === companyKinds.INFLUENCEUR.valueOf()"
