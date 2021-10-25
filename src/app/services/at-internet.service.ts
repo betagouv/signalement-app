@@ -24,6 +24,7 @@ export class AtInternetService {
     if (isPlatformBrowser(platformId)) {
       try {
         this.atTag = new ATInternet.Tracker.Tag();
+        this.atTag.privacy.setVisitorMode('cnil', 'exempt');
       } catch (e) {
         console.error(`Unable to load AT internet.`, e);
       }
