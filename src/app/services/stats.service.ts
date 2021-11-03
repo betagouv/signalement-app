@@ -2,11 +2,18 @@ import { Injectable } from '@angular/core';
 import { FetchService } from './helper/FetchService';
 import { ApiSdkService } from './core/api-sdk.service';
 import { CountByDate, SimpleStat } from '@signal-conso/signalconso-api-sdk-js/lib/client/stats/Stats';
+import { ReportStatus } from '@signal-conso/signalconso-api-sdk-js';
 
 @Injectable({ providedIn: 'root' })
 export class ReportCountService extends FetchService<SimpleStat> {
   constructor(protected api: ApiSdkService) {
     super(api, api.unsecured.stats.getReportCount);
+  }
+}
+@Injectable({ providedIn: 'root' })
+export class ReportAcceptedCountService extends FetchService<SimpleStat> {
+  constructor(protected api: ApiSdkService) {
+    super(api, () => api.unsecured.stats.getReportCount({status: [ReportStatus.Accepted]}));
   }
 }
 
@@ -42,6 +49,13 @@ export class ReportWithWebsitePercentageService extends FetchService<SimpleStat>
 export class MonthlyReportCountService extends FetchService<CountByDate[]> {
   constructor(protected api: ApiSdkService) {
     super(api, api.unsecured.stats.curve.getReportCount);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class MonthlyReportPromesseDActionCountService extends FetchService<CountByDate[]> {
+  constructor(protected api: ApiSdkService) {
+    super(api, () => api.unsecured.stats.curve.getReportCount({ status: [ReportStatus.Accepted] }));
   }
 }
 
