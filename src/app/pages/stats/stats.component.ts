@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {
   MonthlyReportCountService,
-  MonthlyReportForwardedToProPercentageService,
+  MonthlyReportForwardedToProPercentageService, MonthlyReportPromesseDActionCountService,
   MonthlyReportReadByProPercentageService,
-  MonthlyReportWithResponsePercentageService,
+  MonthlyReportWithResponsePercentageService, ReportAcceptedCountService,
   ReportCountService,
   ReportForwardedToProPercentageService,
   ReportReadByProPercentageService,
@@ -20,6 +20,12 @@ import { EChartOption } from 'echarts';
     <app-banner title="Statistiques"></app-banner>
 
     <app-page pageDefinitionKey="stats" size="small">
+      <app-stats-item
+        title="promesses d'action ont été faites par des entreprises depuis le début de SignalConso"
+        [value$]="reportAcceptedCount$"
+        [chart$]="monthlyReportPromesseDActionCount$"
+      ></app-stats-item>
+
       <app-stats-item
         title="signalements ont été déposés depuis le début de SignalConso"
         [value$]="reportCount$"
@@ -62,6 +68,7 @@ export class StatsComponent {
 
   constructor(
     public _reportCount: ReportCountService,
+    public _reportAcceptedCount: ReportAcceptedCountService,
     public _monthlyReportCount: MonthlyReportCountService,
     public _reportForwardedToProPercentage: ReportForwardedToProPercentageService,
     public _reportReadByProPercentage: ReportReadByProPercentageService,
@@ -70,6 +77,7 @@ export class StatsComponent {
     public _reportWithResponsePercentage: ReportWithResponsePercentageService,
     public _monthlyReportWithResponsePercentage: MonthlyReportWithResponsePercentageService,
     public _reportWithWebsitePercentage: ReportWithWebsitePercentageService,
+    public _monthlyReportPromesseDActionCount: MonthlyReportPromesseDActionCountService,
   ) {
   }
 
@@ -130,7 +138,9 @@ export class StatsComponent {
   readonly mapToChart = (percentage = false) => map(StatsComponent.getChartOption(percentage));
 
   readonly reportCount$ = this._reportCount.list().pipe(this.mapValue);
+  readonly reportAcceptedCount$ = this._reportAcceptedCount.list().pipe(this.mapValue);
   readonly monthlyReportCount$ = this._monthlyReportCount.list().pipe(this.mapToChart(false));
+  readonly monthlyReportPromesseDActionCount$ = this._monthlyReportPromesseDActionCount.list().pipe(this.mapToChart(false));
   readonly reportForwardedToProPercentage$ = this._reportForwardedToProPercentage.list().pipe(this.mapPercentage);
   readonly monthlyReportForwardedToProPercentage$ = this._monthlyReportForwardedToProPercentage.list().pipe(this.mapToChart(true));
   readonly reportReadByProPercentage$ = this._reportReadByProPercentage.list().pipe(this.mapPercentage);
