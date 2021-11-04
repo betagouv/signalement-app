@@ -36,6 +36,7 @@ const routes: Routes = [
   { path: 'blog/:year/:month/:day/:article', component: BlogComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'suivi-et-vie-privee', component: TrackingAndPrivacyComponent },
 ];
 
 @NgModule({
