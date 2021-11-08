@@ -36,7 +36,7 @@ export function app() {
     }
   }));
 
-  const cspSHA1 = 'sha256-WWHGLj0eoGsKPEGMnTqjS4sH0zDInMRPKN098NNWH4E=';
+  const cspSHA1 = 'sha256-UELsVxmWgFtZ8wHUCD1mtmSimOaOMXRwf9SbTEjiBjA=';
   if (process.env.API_BASE_URL) {
     server.use(function(req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
