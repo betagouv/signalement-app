@@ -42,7 +42,7 @@ export function app() {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Content-Security-Policy',
         `default-src 'self' stats.data.gouv.fr entreprise.data.gouv.fr ${process.env.API_BASE_URL} ${process.env.REPONSECONSO_BASE_URL} *.conso.gouv.fr *.ingest.sentry.io 'unsafe-inline';  \
-        script-src 'self' 'unsafe-inline' stats.data.gouv.fr *.ingest.sentry.io tag.aticdn.net entreprise.data.gouv.fr '${cspSHA1}'; \
+        script-src 'self' stats.data.gouv.fr *.ingest.sentry.io tag.aticdn.net entreprise.data.gouv.fr '${cspSHA1}'; \
         img-src 'self' *.data.gouv.fr data: *.numerique.gouv.fr *.xiti.com; \
         frame-src 'self' stats.data.gouv.fr *.youtube-nocookie.com; \
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
