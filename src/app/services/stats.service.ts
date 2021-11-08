@@ -13,7 +13,7 @@ export class ReportCountService extends FetchService<SimpleStat> {
 @Injectable({ providedIn: 'root' })
 export class ReportAcceptedCountService extends FetchService<SimpleStat> {
   constructor(protected api: ApiSdkService) {
-    super(api, () => api.unsecured.stats.getReportCount({status: [ReportStatus.Accepted]}));
+    super(api, () => api.unsecured.stats.getReportCount({status: [ReportStatus.PromesseAction]}));
   }
 }
 
@@ -55,7 +55,7 @@ export class MonthlyReportCountService extends FetchService<CountByDate[]> {
 @Injectable({ providedIn: 'root' })
 export class MonthlyReportPromesseDActionCountService extends FetchService<CountByDate[]> {
   constructor(protected api: ApiSdkService) {
-    super(api, () => api.unsecured.stats.curve.getReportCount({ status: [ReportStatus.Accepted] }));
+    super(api, () => api.unsecured.stats.curve.getReportCount({ status: [ReportStatus.PromesseAction] }));
   }
 }
 

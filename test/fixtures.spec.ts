@@ -1,7 +1,6 @@
-import { DraftReport, ReportStatus, Step } from '../src/app/model/Report';
+import { DraftReport, Step } from '../src/app/model/Report';
 import { Consumer } from '../src/app/model/Consumer';
-import { Information, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
-import { Company, CompanySearchResult } from '@signal-conso/signalconso-api-sdk-js';
+import { Company, CompanySearchResult, Information, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
 import anomalies from '@signal-conso/signalconso-api-sdk-js/lib/client/anomaly/yml/anomalies.json';
 
 const randomstring = require('randomstring');
@@ -40,7 +39,6 @@ export function genEmail() {
 
 export const lastNames = ['Doe', 'Durand', 'Dupont'];
 export const firstNames = ['Alice', 'Bob', 'Charles', 'Danièle', 'Émilien', 'Fanny', 'Gérard'];
-export const status = [ReportStatus.InProgress, ReportStatus.ClosedForPro];
 
 export function genCompanyAccessLevel(siret?: string) {
   return {
