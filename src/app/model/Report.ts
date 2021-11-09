@@ -19,6 +19,7 @@ export enum Step {
   Information = 'Information'
 }
 
+/** @deprecated*/
 export enum ReportStatus {
   NA = 'NA',
   EmployeeConsumer = 'Lanceur d\'alerte',
@@ -90,6 +91,7 @@ export class DraftReport {
 
 export const isContractualDispute = (_: DraftReport) => !_.employeeConsumer && _.tags.indexOf(ReportTag.LitigeContractuel) !== -1;
 
+/** @deprecated*/
 export class Report {
   id: string;
   category: string;
