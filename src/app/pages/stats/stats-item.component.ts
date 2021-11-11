@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { EChartOption } from 'echarts';
-import { mergeMap, tap } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-stats-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-panel [loading]="(chart$ && !(chart$ | async)) || (value$ && !(value$ | async))">
       <app-panel-body>
@@ -22,7 +22,7 @@ import { Observable } from 'rxjs';
   `,
   styleUrls: ['./stats-item.component.scss']
 })
-export class StatsItemComponent implements OnInit {
+export class StatsItemComponent {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -36,9 +36,6 @@ export class StatsItemComponent implements OnInit {
   @Input() value$: Observable<string>;
 
   @Input() chart$: Observable<EChartOption[]>;
-
-  ngOnInit() {
-  }
 
   readonly renderCharts = () => isPlatformBrowser(this.platformId);
 }

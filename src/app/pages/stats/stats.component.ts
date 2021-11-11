@@ -137,15 +137,16 @@ export class StatsComponent {
 
   readonly mapToChart = (percentage = false) => map(StatsComponent.getChartOption(percentage));
 
-  readonly reportCount$ = this._reportCount.list().pipe(this.mapValue);
-  readonly reportAcceptedCount$ = this._reportAcceptedCount.list().pipe(this.mapValue);
-  readonly monthlyReportCount$ = this._monthlyReportCount.list().pipe(this.mapToChart(false));
-  readonly monthlyReportPromesseDActionCount$ = this._monthlyReportPromesseDActionCount.list().pipe(this.mapToChart(false));
-  readonly reportForwardedToProPercentage$ = this._reportForwardedToProPercentage.list().pipe(this.mapPercentage);
-  readonly monthlyReportForwardedToProPercentage$ = this._monthlyReportForwardedToProPercentage.list().pipe(this.mapToChart(true));
-  readonly reportReadByProPercentage$ = this._reportReadByProPercentage.list().pipe(this.mapPercentage);
-  readonly monthlyReportReadByProPercentage$ = this._monthlyReportReadByProPercentage.list().pipe(this.mapToChart(true));
-  readonly reportWithResponsePercentage$ = this._reportWithResponsePercentage.list().pipe(this.mapPercentage);
-  readonly monthlyReportWithResponsePercentage$ = this._monthlyReportWithResponsePercentage.list().pipe(this.mapToChart(true));
-  readonly reportWithWebsitePercentage$ = this._reportWithWebsitePercentage.list().pipe(this.mapPercentage);
+  readonly reportCount$ = this._reportCount.list({force: false}).pipe(this.mapValue);
+  readonly reportAcceptedCount$ = this._reportAcceptedCount.list({force: false}).pipe(this.mapValue);
+  readonly monthlyReportCount$ = this._monthlyReportCount.list({force: false}).pipe(this.mapToChart(false));
+  readonly monthlyReportPromesseDActionCount$ = this._monthlyReportPromesseDActionCount.list({force: false}).pipe(this.mapToChart(false));
+  readonly reportForwardedToProPercentage$ = this._reportForwardedToProPercentage.list({force: false}).pipe(this.mapPercentage);
+  readonly monthlyReportForwardedToProPercentage$ = this._monthlyReportForwardedToProPercentage.list({force: false}).pipe(this.mapToChart(true));
+  readonly reportReadByProPercentage$ = this._reportReadByProPercentage.list({force: false}).pipe(this.mapPercentage);
+  readonly monthlyReportReadByProPercentage$ = this._monthlyReportReadByProPercentage.list({force: false}).pipe(this.mapToChart(true));
+  readonly reportWithResponsePercentage$ = this._reportWithResponsePercentage.list({force: false}).pipe(this.mapPercentage);
+  readonly monthlyReportWithResponsePercentage$ = this._monthlyReportWithResponsePercentage.list({force: false}).pipe(this.mapToChart(true));
+  readonly reportWithWebsitePercentage$ = this._reportWithWebsitePercentage.list({force: false}).pipe(this.mapPercentage);
 }
+
