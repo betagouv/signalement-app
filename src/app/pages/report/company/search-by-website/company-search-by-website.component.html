@@ -43,10 +43,6 @@
 
     <app-foreign-company-search-results [companyCountriesResults]="companyCountriesSearchByUrlResults" (select)="selectCountry($event)"></app-foreign-company-search-results>
 
-    <div>
-      <button class="link p-0" (click)="changeWebsite()" aria-label="Modifier adresse du site internet">Corrigez</button> l'adresse du site internet et relancez votre recherche.
-    </div>
-
     <hr *ngIf="selectedCountry"/>
 
     <button type="submit" class="btn btn-lg btn-primary" *ngIf="selectedCountry" (click)="submitCountry()">
@@ -65,13 +61,6 @@
     </h2>
 
     <app-company-search-results [companySearchResults]="companySearchByUrlResults" (select)="selectCompany($event)"></app-company-search-results>
-
-    <div class="note mt-1">
-      {{draftReport.isVendor ? 'Le vendeur' : 'L\'entreprise'}} n’apparaît pas ?
-    </div>
-    <div>
-      <button class="link p-0" (click)="changeWebsite()" aria-label="Modifier adresse du site internet">Corrigez</button> l'adresse du site internet et relancez votre recherche.
-    </div>
 
     <hr *ngIf="selectedCompany"/>
 

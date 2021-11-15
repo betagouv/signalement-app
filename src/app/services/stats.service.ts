@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FetchService } from './helper/FetchService';
 import { ApiSdkService } from './core/api-sdk.service';
-import { CountByDate, SimpleStat } from '@signal-conso/signalconso-api-sdk-js/lib/client/stats/Stats';
-import { ReportStatus } from '@signal-conso/signalconso-api-sdk-js';
+import { CountByDate, ReportStatus, SimpleStat } from '@signal-conso/signalconso-api-sdk-js';
 
 @Injectable({ providedIn: 'root' })
 export class ReportCountService extends FetchService<SimpleStat> {
@@ -10,6 +9,7 @@ export class ReportCountService extends FetchService<SimpleStat> {
     super(api, api.unsecured.stats.getReportCount);
   }
 }
+
 @Injectable({ providedIn: 'root' })
 export class ReportAcceptedCountService extends FetchService<SimpleStat> {
   constructor(protected api: ApiSdkService) {
@@ -48,35 +48,35 @@ export class ReportWithWebsitePercentageService extends FetchService<SimpleStat>
 @Injectable({ providedIn: 'root' })
 export class MonthlyReportCountService extends FetchService<CountByDate[]> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.curve.getReportCount);
+    super(api, api.unsecured.stats.getReportCountCurve);
   }
 }
 
 @Injectable({ providedIn: 'root' })
 export class MonthlyReportPromesseDActionCountService extends FetchService<CountByDate[]> {
   constructor(protected api: ApiSdkService) {
-    super(api, () => api.unsecured.stats.curve.getReportCount({ status: [ReportStatus.PromesseAction] }));
+    super(api, () => api.unsecured.stats.getReportCountCurve({ status: [ReportStatus.PromesseAction] }));
   }
 }
 
 @Injectable({ providedIn: 'root' })
 export class MonthlyReportForwardedToProPercentageService extends FetchService<CountByDate[]> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.curve.getReportForwardedPercentage);
+    super(api, api.unsecured.stats.percentageCurve.getReportForwardedPercentage);
   }
 }
 
 @Injectable({ providedIn: 'root' })
 export class MonthlyReportReadByProPercentageService extends FetchService<CountByDate[]> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.curve.getReportReadPercentage);
+    super(api, api.unsecured.stats.percentageCurve.getReportReadPercentage);
   }
 }
 
 @Injectable({ providedIn: 'root' })
 export class MonthlyReportWithResponsePercentageService extends FetchService<CountByDate[]> {
   constructor(protected api: ApiSdkService) {
-    super(api, api.unsecured.stats.curve.getReportRespondedPercentage);
+    super(api, api.unsecured.stats.percentageCurve.getReportRespondedPercentage);
   }
 }
 
