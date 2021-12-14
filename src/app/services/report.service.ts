@@ -35,9 +35,9 @@ export class ReportService {
               value: detailInputValue.renderedValue,
             };
           }),
+        forwardToReponseConso: draftReport.forwardToReponseConso,
         companyName: draftReport.draftCompany.name,
         companyAddress: draftReport.draftCompany.address,
-        forwardToReponseConso: draftReport.forwardToReponseConso,
         companySiret: draftReport.draftCompany.siret,
         companyActivityCode: draftReport.draftCompany.activityCode,
         websiteURL: draftReport.draftCompany.website ? draftReport.draftCompany.website.url : undefined,
