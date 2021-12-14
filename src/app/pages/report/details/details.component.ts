@@ -6,11 +6,7 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
-import {
-  AnomalyClient,
-  DetailInput,
-  InputType, ReportTag,
-} from '@signal-conso/signalconso-api-sdk-js';
+import { AnomalyClient, DetailInput, InputType, ReportTag, } from '@signal-conso/signalconso-api-sdk-js';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -24,6 +20,12 @@ export const fileSizeMax = 5000000;
 export const ReportingDateLabel = 'Date du constat';
 export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
+
+const reponseConsoQuestion = (rank: number) => ({
+  label: 'Votre question',
+  rank,
+  type: InputType.Textarea,
+});
 
 @Component({
   selector: 'app-details',
@@ -101,16 +103,19 @@ export class DetailsComponent implements OnInit {
   initDetailInputs() {
     if (AnomalyClient.instanceOfSubcategoryInput(this.draftReport.lastSubcategory)) {
       this.detailInputs = this.draftReport.lastSubcategory.detailInputs;
+      if (!this.detailInputs.some(input => input.type === InputType.Textarea)) {
+        this.detailInputs.push({
+          label: DescriptionLabel,
+          rank: this.detailInputs.length + 1,
+          type: InputType.Textarea,
+          optionnal: true
+        });
+        if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+          this.detailInputs.push(reponseConsoQuestion(this.detailInputs.length + 2));
+        }
+      }
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
-    }
-    if (!this.detailInputs.some(input => input.type === InputType.Textarea)) {
-      this.detailInputs.push({
-        label: DescriptionLabel,
-        rank: this.detailInputs.length + 1,
-        type: InputType.Textarea,
-        optionnal: true
-      });
     }
   }
 
@@ -123,12 +128,15 @@ export class DetailsComponent implements OnInit {
       rank: 1,
       type: InputType.Textarea
     });
-    detailInputs.push({
-      label: ReportingDateLabel,
-      rank: 2,
-      type: InputType.Date,
-      defaultValue: 'SYSDATE'
-    });
+    detailInputs.push(reponseConsoQuestion(2));
+    if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+      detailInputs.push({
+        label: ReportingDateLabel,
+        rank: 3,
+        type: InputType.Date,
+        defaultValue: 'SYSDATE'
+      });
+    }
     return detailInputs;
   }
 
