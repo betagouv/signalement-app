@@ -48,6 +48,7 @@ export class DraftReport {
   forwardToReponseConso?: boolean;
   storedStep: Step;
   vendor: string;
+  contractualDispute?: boolean;
 
   get companyKind() {
     return this.lastSubcategory ? this.lastSubcategory.companyKind || CompanyKinds.SIRET : CompanyKinds.SIRET;
@@ -76,6 +77,9 @@ export class DraftReport {
     }
     if (!this.forwardToReponseConso) {
       return tags.filter(_ => _ !== ReportTag.ReponseConso);
+    }
+    if (this.contractualDispute) {
+      return tags.find(_ => _ !== ReportTag.LitigeContractuel) ?? tags.push(ReportTag.LitigeContractuel);
     }
     return tags;
   }

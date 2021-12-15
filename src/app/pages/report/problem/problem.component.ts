@@ -7,13 +7,12 @@ import { ReportStorageService } from '../../../services/report-storage.service';
 import { ReportRouterService } from '../../../services/report-router.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { ReportTag, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
+import { AnomalyClient, ReportTag, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { ProblemStep } from './problem-step.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContractualDisputeComponent } from './alert-contractual-dispute.component';
 import { environment } from '../../../../environments/environment';
-import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -66,6 +65,16 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
           (changed)="draftReport.forwardToReponseConso = $event"
         >
         </app-problem-steps>
+
+        <app-problem-steps
+          *ngIf="!showReponseConsoQuestion()"
+          title="Que souhaitez-vous faire ?"
+          [selected]="draftReport.contractualDispute"
+          [steps]="askForContractualDispute()"
+          (changed)="draftReport.contractualDispute = $event"
+        >
+        </app-problem-steps>
+
       </ng-container>
 
       <ng-container *ngIf="showContinueButton() | async">
@@ -142,6 +151,19 @@ export class ProblemComponent implements OnInit {
     }
   ];
 
+  readonly askForContractualDispute = (): ProblemStep[] => [
+    {
+      title: 'Je veux résoudre mon problème personnel avec l\'entreprise',
+      example: 'La répression des fraudes sera informée',
+      value: true
+    },
+    {
+      title: 'Je souhaite signaler un pb pour que l\'entreprise s\'améliore',
+      value: false
+    }
+
+  ];
+
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
 
   readonly showReponseConsoQuestion = () => {
@@ -190,6 +212,9 @@ export class ProblemComponent implements OnInit {
       }
       if (this.showReponseConsoQuestion()) {
         return this.draftReport.forwardToReponseConso !== undefined;
+      }
+      else {
+        return this.draftReport.contractualDispute ! == undefined
       }
       if (showEmployeeConsumer) {
         return this.draftReport.employeeConsumer !== undefined;
