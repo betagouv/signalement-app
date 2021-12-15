@@ -138,7 +138,7 @@
       <button type="submit" class="btn btn-lg btn-primary">
         Continuer
       </button>
-      <div class="notification info mt-5">
+      <div class="notification info mt-5" *ngIf="draftReport.isTransmittableToPro">
         Si vous ne parvenez pas à identifier {{isVendor ? 'le vendeur' : 'l\'entreprise'}}, vous pouvez continuer votre signalement.
         <br />Il ne sera pas transmis {{isVendor ? 'au vendeur' : 'à l\'entreprise'}}, sauf si cette dernière est française et identifiable par l'équipe de SignalConso.
         <br />Dans tous les cas les enquêteurs de la répression des fraudes en seront informés.
