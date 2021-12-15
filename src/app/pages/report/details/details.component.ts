@@ -69,13 +69,13 @@ export class DetailsComponent implements OnInit {
   fileOrigins = FileOrigin;
 
   constructor(public formBuilder: FormBuilder,
-              private reportStorageService: ReportStorageService,
-              private reportRouterService: ReportRouterService,
-              private analyticsService: AnalyticsService,
-              private fileUploaderService: FileUploaderService,
-              private localeService: BsLocaleService,
-              private keywordService: KeywordService,
-              private anomalyService: AnomalyService) {
+    private reportStorageService: ReportStorageService,
+    private reportRouterService: ReportRouterService,
+    private analyticsService: AnalyticsService,
+    private fileUploaderService: FileUploaderService,
+    private localeService: BsLocaleService,
+    private keywordService: KeywordService,
+    private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
@@ -110,9 +110,9 @@ export class DetailsComponent implements OnInit {
           type: InputType.Textarea,
           optionnal: true
         });
-        if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
-          this.detailInputs.push(reponseConsoQuestion(this.detailInputs.length + 2));
-        }
+      }
+      if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+        this.detailInputs.push(reponseConsoQuestion(this.detailInputs.length + 2));
       }
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
@@ -152,9 +152,9 @@ export class DetailsComponent implements OnInit {
           this.detailsForm.addControl(
             this.getFormControlName(detailInput),
             this.formBuilder.array(detailInput.options.map((option, optionIndex) => {
-             return this.formBuilder.control(
-               this.getCheckboxFormControlInitialValue(detailInput, optionIndex)
-             );
+              return this.formBuilder.control(
+                this.getCheckboxFormControlInitialValue(detailInput, optionIndex)
+              );
             }), ValidateCheckboxControl)
           );
           this.initCheckboxInputsPrecision(detailInput);
@@ -368,9 +368,9 @@ export class DetailsComponent implements OnInit {
       );
     }
     detailInput.options.forEach(o => {
-        if (o !== checkedOption) {
-          this.detailsForm.removeControl(this.getFormControlName(detailInput, o));
-        }
+      if (o !== checkedOption) {
+        this.detailsForm.removeControl(this.getFormControlName(detailInput, o));
+      }
     });
   }
 
@@ -415,6 +415,6 @@ export function ValidateCheckboxControl(formArray: FormArray) {
     isOneOptionChecked = formArray.controls.reduce((value, control) => (value || control.value), false);
   }
   if (!isOneOptionChecked) {
-    return {required: true};
+    return { required: true };
   }
 }
