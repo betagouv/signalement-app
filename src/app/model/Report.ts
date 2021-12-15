@@ -85,7 +85,9 @@ export class DraftReport {
   }
 
   get isTransmittableToPro() {
-    return !this.employeeConsumer && !this.forwardToReponseConso && !this.tags?.find(_ => ([ReportTag.ProduitDangereux, ReportTag.Bloctel]).includes(_));
+    return !this.employeeConsumer &&
+      !this.forwardToReponseConso &&
+      !this.tags?.find(_ => ([ReportTag.ProduitDangereux, ReportTag.Bloctel]).includes(_));
   }
 }
 

@@ -84,8 +84,7 @@
  </div>
 
 <ng-template #foreignCountry>
-  <app-company-foreign-country [isVendor]="isVendor"
-                               [isInfluenceur]="false"
+  <app-company-foreign-country [draftReport]="draftReport"
                                (complete)="selectCompany($event, true)"
                                [forceForeign]="true">
   </app-company-foreign-country>

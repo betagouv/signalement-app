@@ -6,6 +6,7 @@ import { AnalyticsService, CompanySearchEventActions, EventCategories } from '..
 import { SearchCompanyService } from '../../../../services/company.service';
 import { IdentificationKinds } from '../company.component';
 import { CompanySearchResult } from '../../../../model/Company';
+import { DraftReport } from '../../../../model/Report';
 
 @Component({
   selector: 'app-company-search-by-name-component',
@@ -17,7 +18,11 @@ export class CompanySearchByNameComponent implements OnInit {
   @ViewChild('identResult')
   private identResult: ElementRef;
 
-  @Input() isVendor: boolean;
+  @Input() draftReport: DraftReport;
+
+  get isVendor(): boolean {
+    return this.draftReport.isVendor;
+  }
 
   @Output() complete = new EventEmitter<DraftCompany>();
   @Output() changeIdentificationKind = new EventEmitter<IdentificationKinds>();

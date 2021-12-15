@@ -128,15 +128,15 @@ export class DetailsComponent implements OnInit {
       rank: 1,
       type: InputType.Textarea
     });
-    detailInputs.push(reponseConsoQuestion(2));
     if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
-      detailInputs.push({
-        label: ReportingDateLabel,
-        rank: 3,
-        type: InputType.Date,
-        defaultValue: 'SYSDATE'
-      });
+      detailInputs.push(reponseConsoQuestion(2));
     }
+    detailInputs.push({
+      label: ReportingDateLabel,
+      rank: 3,
+      type: InputType.Date,
+      defaultValue: 'SYSDATE'
+    });
     return detailInputs;
   }
 

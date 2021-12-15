@@ -131,7 +131,7 @@ describe('DetailsComponent', () => {
       const nativeElement = fixture.nativeElement;
       expect(nativeElement.querySelectorAll('input').length).toEqual(2);
       expect(nativeElement.querySelector('textarea#formControl_1')).not.toBeNull();
-      expect(nativeElement.querySelector('input[type="text"]#formControl_2')).not.toBeNull();
+      expect(nativeElement.querySelector('input[type="text"]#formControl_3')).not.toBeNull();
       expect(nativeElement.querySelector('input[type="file"]')).not.toBeNull();
     });
 
@@ -146,7 +146,7 @@ describe('DetailsComponent', () => {
 
     it ('should emit and event with a details object which contains form inputs when no errors', () => {
       component.detailsForm.controls.formControl_1.setValue('valeur');
-      component.detailsForm.controls.formControl_2.setValue(anomalyDateFixture);
+      component.detailsForm.controls.formControl_3.setValue(anomalyDateFixture);
       const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
 
       const nativeElement = fixture.nativeElement;

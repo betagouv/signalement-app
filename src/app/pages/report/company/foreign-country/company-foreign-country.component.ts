@@ -1,8 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RendererService } from '../../../../services/renderer.service';
-import { DraftCompany } from '@signal-conso/signalconso-api-sdk-js';
+import { CompanyKinds, DraftCompany } from '@signal-conso/signalconso-api-sdk-js';
 import { ConstantService } from '../../../../services/constant.service';
+import { DraftReport } from '../../../../model/Report';
 
 export const foreignFormValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const isForeign = control.get('isForeign');
@@ -26,9 +27,17 @@ export class CompanyForeignCountryComponent implements OnInit {
   @ViewChild('foreignInputsElt')
   private foreignInputsElt: ElementRef;
 
+  @Input() draftReport: DraftReport;
+
+  get isVendor(): boolean {
+    return this.draftReport.isVendor;
+  }
+
+  get isInfluenceur(): boolean {
+    return this.draftReport?.companyKind === CompanyKinds.INFLUENCEUR;
+  }
+
   @Input() forceForeign;
-  @Input() isVendor: boolean;
-  @Input() isInfluenceur: boolean;
   @Output() complete = new EventEmitter<Partial<DraftCompany>>();
 
   foreignForm: FormGroup;
