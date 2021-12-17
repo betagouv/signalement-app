@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DraftCompany } from '@signal-conso/signalconso-api-sdk-js';
+import { DraftReport } from '../../../../model/Report';
 
 @Component({
   selector: 'app-company-location',
@@ -9,7 +10,8 @@ import { DraftCompany } from '@signal-conso/signalconso-api-sdk-js';
 })
 export class CompanyLocationComponent implements OnInit {
 
-  @Input() isVendor: boolean;
+
+  @Input() draftReport: DraftReport;
 
   @Output() complete = new EventEmitter<Partial<DraftCompany>>();
   @Output() change = new EventEmitter();
@@ -28,7 +30,7 @@ export class CompanyLocationComponent implements OnInit {
     this.locationForm = this.formBuilder.group({postalCode: this.postalCodeCtrl
     });
 
-    if (!this.isVendor) {
+    if (!this.draftReport.isVendor) {
       this.locationForm.addControl('address', this.addressCtrl);
     }
   }

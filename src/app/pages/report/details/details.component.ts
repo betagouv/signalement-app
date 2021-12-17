@@ -6,11 +6,7 @@ import { AnalyticsService, EventCategories, ReportEventActions } from '../../../
 import { KeywordService } from '../../../services/keyword.service';
 import { AnomalyService } from '../../../services/anomaly.service';
 import { ReportRouterService } from '../../../services/report-router.service';
-import {
-  AnomalyClient,
-  DetailInput,
-  InputType, ReportTag,
-} from '@signal-conso/signalconso-api-sdk-js';
+import { AnomalyClient, DetailInput, InputType, ReportTag, } from '@signal-conso/signalconso-api-sdk-js';
 import { FileOrigin, UploadedFile } from '../../../model/UploadedFile';
 import { FileUploaderService } from '../../../services/file-uploader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -24,6 +20,12 @@ export const fileSizeMax = 5000000;
 export const ReportingDateLabel = 'Date du constat';
 export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
+
+const reponseConsoQuestion = (rank: number) => ({
+  label: 'Votre question',
+  rank,
+  type: InputType.Textarea,
+});
 
 @Component({
   selector: 'app-details',
@@ -67,13 +69,13 @@ export class DetailsComponent implements OnInit {
   fileOrigins = FileOrigin;
 
   constructor(public formBuilder: FormBuilder,
-              private reportStorageService: ReportStorageService,
-              private reportRouterService: ReportRouterService,
-              private analyticsService: AnalyticsService,
-              private fileUploaderService: FileUploaderService,
-              private localeService: BsLocaleService,
-              private keywordService: KeywordService,
-              private anomalyService: AnomalyService) {
+    private reportStorageService: ReportStorageService,
+    private reportRouterService: ReportRouterService,
+    private analyticsService: AnalyticsService,
+    private fileUploaderService: FileUploaderService,
+    private localeService: BsLocaleService,
+    private keywordService: KeywordService,
+    private anomalyService: AnomalyService) {
   }
 
   ngOnInit() {
@@ -101,16 +103,19 @@ export class DetailsComponent implements OnInit {
   initDetailInputs() {
     if (AnomalyClient.instanceOfSubcategoryInput(this.draftReport.lastSubcategory)) {
       this.detailInputs = this.draftReport.lastSubcategory.detailInputs;
+      if (!this.detailInputs.some(input => input.type === InputType.Textarea)) {
+        this.detailInputs.push({
+          label: DescriptionLabel,
+          rank: this.detailInputs.length + 1,
+          type: InputType.Textarea,
+          optionnal: true
+        });
+      }
+      if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+        this.detailInputs.push(reponseConsoQuestion(this.detailInputs.length + 2));
+      }
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
-    }
-    if (!this.detailInputs.some(input => input.type === InputType.Textarea)) {
-      this.detailInputs.push({
-        label: DescriptionLabel,
-        rank: this.detailInputs.length + 1,
-        type: InputType.Textarea,
-        optionnal: true
-      });
     }
   }
 
@@ -123,9 +128,12 @@ export class DetailsComponent implements OnInit {
       rank: 1,
       type: InputType.Textarea
     });
+    if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+      detailInputs.push(reponseConsoQuestion(2));
+    }
     detailInputs.push({
       label: ReportingDateLabel,
-      rank: 2,
+      rank: 3,
       type: InputType.Date,
       defaultValue: 'SYSDATE'
     });
@@ -144,9 +152,9 @@ export class DetailsComponent implements OnInit {
           this.detailsForm.addControl(
             this.getFormControlName(detailInput),
             this.formBuilder.array(detailInput.options.map((option, optionIndex) => {
-             return this.formBuilder.control(
-               this.getCheckboxFormControlInitialValue(detailInput, optionIndex)
-             );
+              return this.formBuilder.control(
+                this.getCheckboxFormControlInitialValue(detailInput, optionIndex)
+              );
             }), ValidateCheckboxControl)
           );
           this.initCheckboxInputsPrecision(detailInput);
@@ -360,9 +368,9 @@ export class DetailsComponent implements OnInit {
       );
     }
     detailInput.options.forEach(o => {
-        if (o !== checkedOption) {
-          this.detailsForm.removeControl(this.getFormControlName(detailInput, o));
-        }
+      if (o !== checkedOption) {
+        this.detailsForm.removeControl(this.getFormControlName(detailInput, o));
+      }
     });
   }
 
@@ -407,6 +415,6 @@ export function ValidateCheckboxControl(formArray: FormArray) {
     isOneOptionChecked = formArray.controls.reduce((value, control) => (value || control.value), false);
   }
   if (!isOneOptionChecked) {
-    return {required: true};
+    return { required: true };
   }
 }

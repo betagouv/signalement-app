@@ -8,10 +8,17 @@
       <div class="card" [ngSwitch]="acknowledgmentCase">
 
         <div class="card-body" *ngSwitchCase="acknowledgmentCases.ReponseConso">
+          <h2 class="mb-4">Que va-t-il se passer maintenant ? </h2>
           <p>
-            Votre signalement est transmis à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
-            Si votre problème concerne d’autres consommateurs, la répression des fraudes fera un contrôle de l’établissement.
+            <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> Votre question est transmise à la répression des fraudes (<abbr title="Direction Générale de la Concurrence, Consommation et Répression des Fraudes">DGCCRF</abbr>).
           </p>
+          <p>
+            <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> Vos coordonnées sont à destination des enquêteurs <b>uniquement</b>.
+          </p>
+          <p>
+            <i class="material-icons md-18 attach-icon" aria-hidden="true">check_circle</i> La repression des fraudes vous répondra dans les plus brefs délais.
+          </p>
+          <ng-template [ngTemplateOutlet]="mailSupport"></ng-template>
         </div>
 
         <div class="card-body" *ngSwitchCase="acknowledgmentCases.EmployeeReport">

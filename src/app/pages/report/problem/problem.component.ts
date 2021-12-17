@@ -132,12 +132,12 @@ export class ProblemComponent implements OnInit {
 
   readonly reponseConsoStepOptions: ProblemStep[] = [
     {
-      title: 'Je souhaite signaler mon problème à l\'entreprise pour qu\'elle le corrige.',
-      example: 'La répression des fraudes sera informée.',
+      title: 'Je souhaite signaler mon problème personnel à l’entreprise pour qu’elle trouve une solution',
+      example: 'La répression des fraudes sera informée',
       value: false
     },
     {
-      title: 'Je souhaite contacter la répression des fraudes pour obtenir des informations sur mon problème.',
+      title: 'Je souhaite poser une question sur mes droits',
       value: true
     }
   ];

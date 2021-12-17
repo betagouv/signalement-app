@@ -7,8 +7,9 @@ import { CompanySearchByNameComponent } from './company-search-by-name.component
 import { SearchCompanyService } from '../../../../services/company.service';
 import { AnalyticsService } from '../../../../services/analytics.service';
 import { MockAnalyticsService } from '../../../../../../test/mocks';
-import { genCompanySearchResult } from '../../../../../../test/fixtures.spec';
+import { genCompanySearchResult, genDraftReport } from '../../../../../../test/fixtures.spec';
 import { CompanySearchResultsComponent } from '../../../../components/company-search-results/company-search-results.component';
+import { Step } from '../../../../model/Report';
 
 describe('CompanySearchByNameComponent', () => {
 
@@ -36,6 +37,7 @@ describe('CompanySearchByNameComponent', () => {
   beforeEach(() => {
     companyService = TestBed.inject(SearchCompanyService);
     fixture = TestBed.createComponent(CompanySearchByNameComponent);
+    fixture.componentInstance.draftReport = genDraftReport(Step.Details);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
