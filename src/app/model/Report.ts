@@ -64,6 +64,11 @@ export class DraftReport {
     return _uniqby(collectedCodes, _ => _);
   }
 
+  get ccrfCode(): string[] {
+    const collectedCodes = !this.subcategories ? [] : [].concat(...this.subcategories.flatMap(subcategory => subcategory.ccrfCode || []));
+    return _uniqby(collectedCodes, _ => _);
+  }
+
   get tags() {
     const tags = !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
     if (this.companyKind === CompanyKinds.WEBSITE) {
