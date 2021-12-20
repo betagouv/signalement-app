@@ -62,6 +62,10 @@ export const pageDefinitions = {
     title: 'Suivi d\'audience et vie privée - SignalConso',
     description: 'Consultez les informations concernant le suivi d\'audience et le respect de la vie privée sur SignalConso'
   },
+  cookies: {
+    title: 'Gestion des cookies - SignalConso',
+    description: 'Consultez les informations concernant la gestion des cookies sur SignalConso'
+  },
   accesstoken: {
     title: 'Accès au compte de l\'entreprise - SignalConso',
     description: 'Rejoindre le compte d\'une entreprise'
