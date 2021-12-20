@@ -21,6 +21,7 @@ export class ReportService {
           .map(subcategory => subcategory.title ? subcategory.title : subcategory),
         tags: draftReport.tags,
         reponseconsoCode: draftReport.reponseconsoCode,
+        ccrfCode: draftReport.ccrfCode,
         firstName: draftReport.consumer.firstName,
         lastName: draftReport.consumer.lastName,
         email: draftReport.consumer.email,
