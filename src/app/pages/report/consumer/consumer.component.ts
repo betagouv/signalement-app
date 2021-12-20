@@ -82,6 +82,8 @@ export class ConsumerComponent implements OnInit {
 
     if (!this.draftReport.isTransmittableToPro) {
       this.contactAgreementCtrl = this.fb.control(false);
+    } else if (this.draftReport.contractualDispute) {
+      this.contactAgreementCtrl = this.fb.control(true);
     } else {
       this.contactAgreementCtrl = this.fb.control(
         this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.isContractualDispute ? true : undefined,
