@@ -67,7 +67,7 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
         </app-problem-steps>
 
         <app-problem-steps
-          *ngIf="!showReponseConsoQuestion()"
+          *ngIf="showContractualDispute()"
           title="Que souhaitez-vous faire ?"
           [selected]="draftReport.contractualDispute"
           [steps]="askForContractualDispute()"
@@ -158,7 +158,7 @@ export class ProblemComponent implements OnInit {
       value: true
     },
     {
-      title: 'Je souhaite signaler un pb pour que l\'entreprise s\'améliore',
+      title: 'Je souhaite signaler un problème pour que l\'entreprise s\'améliore',
       value: false
     }
 
@@ -172,6 +172,14 @@ export class ProblemComponent implements OnInit {
       && this.draftReport.employeeConsumer === false;
     if (!show) {
       delete this.draftReport.forwardToReponseConso;
+    }
+    return show;
+  };
+
+  readonly showContractualDispute = (): boolean => {
+    const show = this.draftReport.employeeConsumer === false && !this.showReponseConsoQuestion();
+    if (!show) {
+      delete this.draftReport.contractualDispute;
     }
     return show;
   };
@@ -213,8 +221,8 @@ export class ProblemComponent implements OnInit {
       if (this.showReponseConsoQuestion()) {
         return this.draftReport.forwardToReponseConso !== undefined;
       }
-      else {
-        return this.draftReport.contractualDispute ! == undefined
+      if (this.showContractualDispute()) {
+        return this.draftReport.contractualDispute !== undefined;
       }
       if (showEmployeeConsumer) {
         return this.draftReport.employeeConsumer !== undefined;

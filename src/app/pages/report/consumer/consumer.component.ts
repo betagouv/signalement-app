@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Consumer} from '../../../model/Consumer';
-import {AnalyticsService, EventCategories, ReportEventActions} from '../../../services/analytics.service';
-import {DraftReport, Step} from '../../../model/Report';
-import {ReportRouterService} from '../../../services/report-router.service';
-import {ReportStorageService} from '../../../services/report-storage.service';
-import {take} from 'rxjs/operators';
-import {AuthenticationService} from '../../../services/authentication.service';
-import {environment} from "../../../../environments/environment.prod";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Consumer } from '../../../model/Consumer';
+import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
+import { DraftReport, Step } from '../../../model/Report';
+import { ReportRouterService } from '../../../services/report-router.service';
+import { ReportStorageService } from '../../../services/report-storage.service';
+import { take } from 'rxjs/operators';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 
 @Component({
@@ -72,6 +71,8 @@ export class ConsumerComponent implements OnInit {
 
     if (!this.draftReport.isTransmittableToPro) {
       this.contactAgreementCtrl = this.fb.control(false);
+    } else if (this.draftReport.contractualDispute) {
+      this.contactAgreementCtrl = this.fb.control(true);
     } else {
       this.contactAgreementCtrl = this.fb.control(
         this.draftReport.contactAgreement !== undefined ? this.draftReport.contactAgreement : this.draftReport.isContractualDispute ? true : undefined,
