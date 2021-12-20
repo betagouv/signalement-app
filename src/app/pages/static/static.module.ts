@@ -19,6 +19,7 @@ import { MemberComponent } from './about/member.component';
 import { PageModule } from '../../components/page/page.module';
 import { PanelModule } from '../../components/panel/panel.module';
 import { FenderModule } from '../../components/fender/fender';
+import {CookiesComponent} from "./cookies/cookies.component";
 
 const routes: Routes = [
   { path: 'comment-ça-marche', component: HowComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'suivi-et-vie-privee', component: TrackingAndPrivacyComponent },
+  { path: 'cookies', component: CookiesComponent },
 ];
 
 @NgModule({
@@ -52,6 +54,7 @@ const routes: Routes = [
     RetractationComponent,
     ContactComponent,
     TrackingAndPrivacyComponent,
+    CookiesComponent,
     UnavailableComponent
   ],
   imports: [
