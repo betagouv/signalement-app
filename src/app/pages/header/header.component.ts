@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {log} from "util";
 
 enum NavItems {
   Home = '/',
@@ -18,9 +19,11 @@ enum NavItems {
 export class HeaderComponent implements OnInit {
 
   @ViewChild('navbarContent') navbarContent: ElementRef<any>;
+  @ViewChild('cookiesBanner') cookiesBanner: ElementRef<any>;
 
   navItems = NavItems;
   activeItem: NavItems;
+  hideCNILBanner: boolean;
 
   constructor(private router: Router) {
   }
@@ -30,10 +33,25 @@ export class HeaderComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.activeItem = NavItems[Object.keys(NavItems).find(key => encodeURI(NavItems[key]) === event.url)];
       }
+      this.hideCNILBanner = localStorage.getItem('hideCNILBanner') === "true";
     });
   }
 
   getNavItemDataToggle() {
     return (this.navbarContent && this.navbarContent.nativeElement.classList.contains('show')) ? 'collapse' : '';
+  }
+
+
+  getCNILBannerStatus() {
+    localStorage.getItem('hideCNILBanner') !== "false"
+  }
+
+  setHideCNILBanner() {
+    console.log("------------------1--------");
+    console.log(localStorage.getItem('hideCNILBanner'));
+    localStorage.setItem('hideCNILBanner', "true");
+    console.log("----------------2-----------");
+    console.log(localStorage.getItem('hideCNILBanner'));
+    this.cookiesBanner.nativeElement.hidden = true
   }
 }

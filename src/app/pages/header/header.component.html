@@ -1,4 +1,10 @@
 <header role="banner" id="banner">
+  <div id="cookiesBanner"  class="cnil-banner" #cookiesBanner [hidden]="this.hideCNILBanner" >
+    <mat-icon class="banner-txt">info</mat-icon>
+    <span class="banner-txt" >Le site Signal Conso n'utilise que des cookies techniques exemptés de consentement.</span>
+    <button type="button" class="btn banner-btn" (click)="setHideCNILBanner()" >Fermer</button>
+    <button type="button" class="btn banner-btn" ><a class="banner-link" href="/cookies">En savoir plus</a></button>
+  </div>
   <div class="d-lg-none">
     <img class="gov" src="/assets/images/logo-marianne.svg" alt="Logo gouvernement" />
     <a class="brand" routerLink="/">
