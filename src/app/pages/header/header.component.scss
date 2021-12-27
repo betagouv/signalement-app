@@ -1,6 +1,7 @@
 @import "../../../theme/media-queries";
 @import "../../../theme/variables";
 
+
 header {
 
   img.gov {
@@ -17,6 +18,44 @@ header {
     height: 76px;
     margin-left: 40px;
   }
+
+  .cnil-banner {
+    height: auto;
+    //height: 10vh;
+    width: 100%;
+    display: inline-block;
+    background-color: $secondary;
+    //position: absolute;
+    color: $white;
+
+    .banner-txt {
+      padding: 10px 16px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      font-size: 16px;
+      line-height: 15px;
+      background-color: $secondary;
+      color: $white;
+      float: left;
+    }
+    .banner-btn {
+      padding: 10px 16px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      margin-left:10px;
+      margin-right: 10px;
+      font-size: 15px;
+      line-height: 15px;
+      background-color: $secondary;
+      color: $white;
+      float: right;
+    }
+    .banner-link {
+      color: $white;
+    }
+  }
+
+
 
   @media #{$smaller-than-large-desktop} {
     .brand > img {
@@ -83,7 +122,7 @@ header {
       padding: 10px;
       height: 50px;
 
-      .navbar-collapse{
+      .navbar-collapse {
 
         z-index: 2;
 

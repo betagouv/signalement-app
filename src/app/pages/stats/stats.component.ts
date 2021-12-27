@@ -18,8 +18,8 @@ import { EChartOption } from 'echarts';
   selector: 'app-stats',
   template: `
     <app-banner title="Statistiques"></app-banner>
-
     <app-page pageDefinitionKey="stats" size="small">
+    <p>Vous souhaitez plus d'informations sur nos statistiques consultez le site <a href="https://data.economie.gouv.fr/pages/signalconso/">data economie</a></p>
       <app-stats-item
         title="promesses d'action ont été faites par des entreprises depuis le début de SignalConso"
         [value$]="reportAcceptedCount$"
