@@ -137,7 +137,7 @@ export class ProblemComponent implements OnInit {
       value: false
     },
     {
-      title: 'Je souhaite poser une question sur mes droits',
+      title: 'Je souhaite que la Répression des Fraudes (DGCCRF) m’informe sur mes droits',
       value: true
     }
   ];
