@@ -5,8 +5,7 @@
 
   <form [formGroup]="websiteForm" (submit)="searchCompanyByWebsite()" id="websiteForm">
     <div class="form__group mt-4">
-      <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Adresse du site internet (URL) (obligatoire)
-      </label>
+      <label for="urlInput" [class]="hasError(urlCtrl) ? 'error' : ''">Site internet</label>
       <input type="url" [pattern]="UrlPattern" class="form-control" [formControl]="urlCtrl" name="url" id="urlInput" placeholder="ex : https://www.site.fr"/>
     </div>
 
