@@ -160,6 +160,10 @@ export class ProblemComponent implements OnInit {
     {
       title: 'Je souhaite signaler un problème pour que l\'entreprise s\'améliore',
       value: false
+    },
+    {
+      title: 'Je souhaite que la Répression des Fraudes (DGCCRF) m’informe sur mes droits',
+      value: true
     }
 
   ];
