@@ -1,5 +1,5 @@
 <header role="banner" id="banner">
-  <div id="cookiesBanner"  class="cnil-banner" #cookiesBanner [hidden]="this.hideCNILBanner" >
+  <div *ngIf="showCNILBanner" id="cookiesBanner" class="cnil-banner" #cookiesBanner>
     <mat-icon class="banner-txt">info</mat-icon>
     <span class="banner-txt" >Le site Signal Conso n'utilise que des cookies techniques exemptés de consentement.</span>
     <button type="button" class="btn banner-btn" (click)="setHideCNILBanner()" >Fermer</button>
