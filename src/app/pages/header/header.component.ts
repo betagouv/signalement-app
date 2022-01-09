@@ -1,6 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {log} from "util";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 enum NavItems {
   Home = '/',
@@ -23,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   navItems = NavItems;
   activeItem: NavItems;
-  hideCNILBanner: boolean;
+  showCNILBanner: boolean;
 
   constructor(private router: Router) {
   }
@@ -33,7 +32,7 @@ export class HeaderComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.activeItem = NavItems[Object.keys(NavItems).find(key => encodeURI(NavItems[key]) === event.url)];
       }
-      this.hideCNILBanner = localStorage.getItem('hideCNILBanner') === "true";
+      this.showCNILBanner = localStorage.getItem('hideCNILBanner') !== 'true';
     });
   }
 
