@@ -40,7 +40,7 @@ export class CompanySearchByWebsiteComponent implements OnInit {
   selectedCompany?: CompanySearchResult;
   selectedCountry?: Country;
 
-  UrlPattern = '^(http|https):\\/\\/(www\\.)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,}(:[0-9]{1,5})?(\\/.*)?$';
+  UrlPattern = '^((http|https):\\/\\/)?(www\\.)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,}(:[0-9]{1,5})?(\\/.*)?$';
 
   constructor(public formBuilder: FormBuilder,
               private searchCompanyService: SearchCompanyByURLService,
