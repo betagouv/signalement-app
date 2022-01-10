@@ -58,20 +58,11 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
         </app-problem-steps>
 
         <app-problem-steps
-          *ngIf="showReponseConsoQuestion()"
-          title="Que souhaitez-vous faire ?"
-          [selected]="draftReport.forwardToReponseConso"
-          [steps]="reponseConsoStepOptions"
-          (changed)="draftReport.forwardToReponseConso = $event"
-        >
-        </app-problem-steps>
-
-        <app-problem-steps
           *ngIf="showContractualDispute()"
           title="Que souhaitez-vous faire ?"
-          [selected]="draftReport.contractualDispute"
-          [steps]="askForContractualDispute()"
-          (changed)="draftReport.contractualDispute = $event"
+          [selected]="reportWishValue()"
+          [steps]="reponseConsoStepOptions(showReponseConsoQuestion())"
+          (changed)="handleReportWishChange($event)"
         >
         </app-problem-steps>
 
@@ -127,7 +118,7 @@ export class ProblemComponent implements OnInit {
     });
   }
 
-  private readonly shouldDisplayReponseConso = Math.random() * 100 < environment.reponseConsoDisplayRate;
+  readonly shouldDisplayReponseConso = Math.random() * 100 < environment.reponseConsoDisplayRate;
   readonly displayReponseConso = () => this.draftReport.forwardToReponseConso || this.shouldDisplayReponseConso;
 
   readonly step = Step.Problem;
@@ -139,53 +130,71 @@ export class ProblemComponent implements OnInit {
     { title: 'Non, je n\'y travaille pas', value: false }
   ];
 
-  readonly reponseConsoStepOptions: ProblemStep[] = [
-    {
-      title: 'Je souhaite signaler mon problème personnel à l’entreprise pour qu’elle trouve une solution',
-      example: 'La répression des fraudes sera informée',
-      value: false
-    },
-    {
-      title: 'Je souhaite que la Répression des Fraudes (DGCCRF) m’informe sur mes droits',
-      value: true
-    }
-  ];
-
-  readonly askForContractualDispute = (): ProblemStep[] => [
+  readonly reponseConsoStepOptions = (showReponseConso?: boolean): ProblemStep[] => [
     {
       title: 'Je veux résoudre mon problème personnel avec l\'entreprise',
       example: 'La répression des fraudes sera informée',
-      value: true
+      value: 1
     },
     {
       title: 'Je souhaite signaler un problème pour que l\'entreprise s\'améliore',
-      value: false
+      value: 2
     },
-    {
-      title: 'Je souhaite que la Répression des Fraudes (DGCCRF) m’informe sur mes droits',
-      value: true
-    }
-
+    ...(showReponseConso ? [{
+      title: 'Je souhaite que la répression des fraudes m’informe sur mes droits',
+      value: 3
+    }] : [])
   ];
 
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
 
   readonly showReponseConsoQuestion = () => {
     const show = this.displayReponseConso()
-      && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReportTag.ReponseConso) > -1)
-      && this.draftReport.employeeConsumer === false;
+      && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.includes(ReportTag.ReponseConso));
     if (!show) {
       delete this.draftReport.forwardToReponseConso;
     }
-    return show;
+    return !!show;
   };
 
   readonly showContractualDispute = (): boolean => {
-    const show = this.draftReport.employeeConsumer === false && !this.showReponseConsoQuestion();
+    const show = this.draftReport.employeeConsumer === false;
     if (!show) {
       delete this.draftReport.contractualDispute;
     }
     return show;
+  };
+
+  readonly reportWishValue = () => {
+    if (this.draftReport.contractualDispute) {
+      return 1;
+    }
+    if (this.draftReport.contractualDispute === false) {
+      return 2;
+    }
+    if (this.draftReport.forwardToReponseConso === true) {
+      return 3;
+    }
+  };
+
+  readonly handleReportWishChange = (value: number) => {
+    switch (value) {
+      case 1: {
+        delete this.draftReport.forwardToReponseConso;
+        this.draftReport.contractualDispute = true;
+        break;
+      }
+      case 2: {
+        delete this.draftReport.forwardToReponseConso;
+        this.draftReport.contractualDispute = false;
+        break;
+      }
+      case 3: {
+        delete this.draftReport.contractualDispute;
+        this.draftReport.forwardToReponseConso = true;
+        break;
+      }
+    }
   };
 
   readonly anomaly$ = this.activatedRoute.url.pipe(
@@ -222,11 +231,8 @@ export class ProblemComponent implements OnInit {
       if (!isLast) {
         return false;
       }
-      if (this.showReponseConsoQuestion()) {
-        return this.draftReport.forwardToReponseConso !== undefined;
-      }
       if (this.showContractualDispute()) {
-        return this.draftReport.contractualDispute !== undefined;
+        return this.draftReport.contractualDispute !== undefined || this.draftReport.forwardToReponseConso !== undefined;
       }
       if (showEmployeeConsumer) {
         return this.draftReport.employeeConsumer !== undefined;
