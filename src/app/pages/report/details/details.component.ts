@@ -21,8 +21,10 @@ export const ReportingDateLabel = 'Date du constat';
 export const ReportingTimeslotLabel = 'Heure du constat';
 export const DescriptionLabel = 'Description';
 
+const ResponseConsoQuestionLabel = 'Votre question'
+
 const reponseConsoQuestion = (rank: number) => ({
-  label: 'Votre question',
+  label: ResponseConsoQuestionLabel,
   rank,
   type: InputType.Textarea,
 });
@@ -111,7 +113,7 @@ export class DetailsComponent implements OnInit {
           optionnal: true
         });
       }
-      if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+      if (this.draftReport.tags.includes(ReportTag.ReponseConso) && !this.detailInputs?.some(input => input.label === ResponseConsoQuestionLabel)) {
         this.detailInputs.push(reponseConsoQuestion(this.detailInputs.length + 2));
       }
     } else {
@@ -128,7 +130,7 @@ export class DetailsComponent implements OnInit {
       rank: 1,
       type: InputType.Textarea
     });
-    if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+    if (this.draftReport.tags.includes(ReportTag.ReponseConso) && !this.detailInputs?.some(input => input.label === ResponseConsoQuestionLabel)) {
       detailInputs.push(reponseConsoQuestion(2));
     }
     detailInputs.push({
