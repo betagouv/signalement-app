@@ -90,8 +90,11 @@ export class ConsumerComponent implements OnInit {
   checkingEmail = false;
 
   readonly checkEmail = () => {
-    this.checkingEmail = true;
 
+    if (!this.consumerForm.valid) {
+      this.showErrors = true;
+    } else {
+      this.checkingEmail = true;
       this.authenticationService.checkConsumerEmail(this.emailCtrl.value).subscribe(valid => {
         if (valid.valid) {
           this.submitConsumerForm();
@@ -104,6 +107,7 @@ export class ConsumerComponent implements OnInit {
           this.checkingEmail = false;
         }, 10000);
       });
+    }
 
   };
 
@@ -127,6 +131,9 @@ export class ConsumerComponent implements OnInit {
   };
 
   readonly submitConsumerForm = () => {
+
+    console.log(this.consumerForm)
+
     if (!this.consumerForm.valid) {
       this.showErrors = true;
     } else {
