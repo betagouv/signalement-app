@@ -141,6 +141,9 @@
           <span *ngIf="emailCtrl.hasError('email')">
             Veuillez renseigner une adresse email valide.<br />
           </span>
+          <span *ngIf="emailCtrl.hasError('pattern')">
+            L'adresse email ne peut pas être une adresse temporaire<br />
+          </span>
           <span *ngIf="contactAgreementCtrl.hasError('required')">
             Veuillez indiquer si vous acceptez de transmettre vos coordonnées à l'entreprise.<br />
           </span>
