@@ -37,7 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
           <strong>
             Pour l’acte citoyen:
           </strong>
-          les enquêteurs de la répression des fraudes ne vont pas résoudre directement votre problème mais pourront lancer une enquête
+          les enquêteurs de la répression des fraudes ne vont pas résoudre votre problème mais pourront lancer une enquête
           auprès de l’entreprise grâce à vos informations.
         </li>
       </ul>
