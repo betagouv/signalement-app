@@ -133,11 +133,12 @@ export class ProblemComponent implements OnInit {
   readonly reponseConsoStepOptions = (showReponseConso?: boolean): ProblemStep[] => [
     {
       title: 'Je veux résoudre mon problème personnel avec l\'entreprise',
-      example: 'La répression des fraudes sera informée',
+      example: 'Exemple: recevoir mon colis, être remboursé, obtenir une réponse personnalisée, ...',
       value: 1
     },
     {
       title: 'Je souhaite signaler un problème pour que l\'entreprise s\'améliore',
+      example: `Exemple : respect des délais, meilleur affichage des prix, hygiène irréprochable, ...`,
       value: 2
     },
     ...(showReponseConso ? [{
