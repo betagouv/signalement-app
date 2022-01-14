@@ -58,7 +58,7 @@ export class ConsumerComponent implements OnInit {
     this.firstNameCtrl = this.fb.control(this.draftReport.consumer ? this.draftReport.consumer.firstName : '', Validators.required);
     this.lastNameCtrl = this.fb.control(this.draftReport.consumer ? this.draftReport.consumer.lastName : '', Validators.required);
     this.emailCtrl = this.fb.control(
-      this.draftReport.consumer ? this.draftReport.consumer.email : '', [Validators.required, Validators.email]
+      this.draftReport.consumer ? this.draftReport.consumer.email : '', [Validators.required, Validators.email, Validators.pattern('^((?!yopmail\.com).)*$')]
     );
 
     this.consumerForm = this.fb.group({
