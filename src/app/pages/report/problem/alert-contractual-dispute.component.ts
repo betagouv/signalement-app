@@ -29,16 +29,16 @@ import { MatDialogModule } from '@angular/material/dialog';
         </li>
         <li>
           <strong>
+            Pour faire les bonnes démarches:
+          </strong>
+          SignalConso vous guide dans la marche à suivre pour trouver une solution ou obtenir réparation.
+        </li>
+        <li>
+          <strong>
             Pour l’acte citoyen:
           </strong>
           les enquêteurs de la répression des fraudes ne vont pas résoudre directement votre problème mais pourront lancer une enquête
           auprès de l’entreprise grâce à vos informations.
-        </li>
-        <li>
-          <strong>
-            Pour faire les bonnes démarches:
-          </strong>
-          SignalConso vous guide dans la marche à suivre pour trouver une solution ou obtenir réparation.
         </li>
       </ul>
     </mat-dialog-content>
