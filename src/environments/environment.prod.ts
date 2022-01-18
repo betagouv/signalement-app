@@ -7,4 +7,5 @@ export const environment = {
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
   reponseConsoDisplayRate: Number('${REPONSECONSO_DISPLAY_PERCENTAGE}') || 0,
   sentryDsn: '${SENTRY_DSN}',
+  consumerEmailBlackList: ('${CONSUMER_EMAILS_BLACKLIST}' ?? '').split(',')
 };

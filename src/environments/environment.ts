@@ -10,6 +10,7 @@ export const environment = {
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
   reponseConsoDisplayRate: 100,
   sentryDsn: null,
+  consumerEmailBlackList: undefined,
 };
 
 /*
