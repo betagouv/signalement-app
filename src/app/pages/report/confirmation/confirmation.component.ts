@@ -62,7 +62,7 @@ export class ConfirmationComponent implements OnInit {
     this.loadingError = false;
     if (!this.confirmationForm.valid) {
       this.showErrors = true;
-    } else if (!environment.consumerEmailBlackList.includes(this.draftReport.consumer.email)) {
+    } else if (!(environment.consumerEmailBlackList ?? []).includes(this.draftReport.consumer.email)) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
       this.reportService.createReport(this.draftReport)

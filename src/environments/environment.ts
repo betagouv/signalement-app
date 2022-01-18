@@ -11,6 +11,7 @@ export const environment = {
   reponseConsoDisplayRate: 100,
   reponseConsoForwardUrl: (id: string) => `https://reclamation-preprod.conso.gouv.fr/${id}`,
   sentryDsn: null,
+  consumerEmailBlackList: undefined,
 };
 
 /*
