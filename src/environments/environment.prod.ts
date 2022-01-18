@@ -12,4 +12,5 @@ export const environment = {
     return `${baseUrl}/${id}`;
   },
   sentryDsn: '${SENTRY_DSN}',
+  consumerEmailBlackList: ('${CONSUMER_EMAILS_BLACKLIST}' ?? '').split(',')
 };
