@@ -5,7 +5,7 @@
     "ng": "ng",
     "start:local": "npm run generate-blog-metadata && ng serve --host 0.0.0.0",
     "start": "node dist/server/main.js",
-    "prebuild": "npm run generate-blog-metadata && envsub --env API_BASE_URL --env SENTRY_DSN --env REPONSECONSO_DISPLAY_PERCENTAGE --env REPONSECONSO_BASE_URL --env DASHBOARD_BASE_URL ./src/environments/environment.prod.ts",
+    "prebuild": "npm run generate-blog-metadata && envsub --env API_BASE_URL --env SENTRY_DSN --env REPONSECONSO_DISPLAY_PERCENTAGE --env REPONSECONSO_BASE_URL --env DASHBOARD_BASE_URL --env CONSUMER_EMAILS_BLACKLIST ./src/environments/environment.prod.ts",
     "build": "ng build",
     "test": "ng test --watch false",
     "lint": "ng lint",
