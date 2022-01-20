@@ -9,8 +9,8 @@ export const environment = {
   apiCompanyBaseUrl: 'https://entreprise.data.gouv.fr',
   apiAddressBaseUrl: 'https://api-adresse.data.gouv.fr',
   reponseConsoDisplayRate: 100,
-  reponseConsoForwardUrl: (id: string) => `https://reclamation-preprod.conso.gouv.fr/${id}`,
   sentryDsn: null,
+  consumerEmailBlackList: undefined,
 };
 
 /*

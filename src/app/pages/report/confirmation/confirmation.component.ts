@@ -62,7 +62,7 @@ export class ConfirmationComponent implements OnInit {
     this.loadingError = false;
     if (!this.confirmationForm.valid) {
       this.showErrors = true;
-    } else {
+    } else if (!(environment.consumerEmailBlackList ?? []).includes(this.draftReport.consumer.email)) {
       this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.validateConfirmation);
       this.loading = true;
       this.reportService.createReport(this.draftReport)
@@ -71,15 +71,16 @@ export class ConfirmationComponent implements OnInit {
           this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendSuccess);
           this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
           this.reportRouterService.routeForward(this.step);
-          if (this.draftReport.forwardToReponseConso) {
-            this.httpClient.get(environment.reponseConsoForwardUrl(report.id)).subscribe();
-          }
         }, error => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendFail);
           this.loadingError = true;
           throw error;
         });
+    } else {
+      this.reportRouterService.routeForward(this.step);
+      this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
+
     }
   }
 
