@@ -109,7 +109,7 @@ export class ConsumerComponent implements OnInit {
         setTimeout(() => {
           this.resentAttempts = this.resentAttempts + 1;
           this.checkingEmail = false;
-        }, this.resentAttempts * 10000);
+        }, this.resentAttempts * 10000 + 10000);
       });
     }
 
