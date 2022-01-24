@@ -9,12 +9,15 @@ import {take} from 'rxjs/operators';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {environment} from "../../../../environments/environment.prod";
 
+
 @Component({
   selector: 'app-consumer',
   templateUrl: './consumer.component.html',
   styleUrls: ['./consumer.component.scss']
 })
 export class ConsumerComponent implements OnInit {
+
+  resentAttempts = 1;
 
   step: Step;
   draftReport: DraftReport;
@@ -104,8 +107,9 @@ export class ConsumerComponent implements OnInit {
       }, () => {
       }, () => {
         setTimeout(() => {
+          this.resentAttempts = this.resentAttempts + 1;
           this.checkingEmail = false;
-        }, 10000);
+        }, this.resentAttempts * 10000);
       });
     }
 
@@ -131,9 +135,6 @@ export class ConsumerComponent implements OnInit {
   };
 
   readonly submitConsumerForm = () => {
-
-    console.log(this.consumerForm)
-
     if (!this.consumerForm.valid) {
       this.showErrors = true;
     } else {
