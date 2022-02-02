@@ -98,6 +98,9 @@
           <div>
             Email : {{draftReport.consumer.email}}
           </div>
+          <div *ngIf="draftReport.consumer.phone">
+            N° de téléphone : {{draftReport.consumer.phone}}
+          </div>
           <div *ngIf="draftReport.isTransmittableToPro">
             Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}
           </div>

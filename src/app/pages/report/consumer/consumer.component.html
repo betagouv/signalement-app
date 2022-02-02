@@ -75,6 +75,12 @@
               </label>
               <input type="email" formControlName="email" required id="email" name="email" autocomplete="email" />
             </div>
+            <div class="col-12 col-sm-6 mb-4">
+              <label for="phone" [class]="hasError(phoneCtrl) ? 'error' : ''">
+                Votre n° de téléphone
+              </label>
+              <input type="text" formControlName="phone" required id="phone" name="email" autocomplete="email" />
+            </div>
           </div>
         </div>
 
@@ -143,6 +149,9 @@
           </span>
           <span *ngIf="emailCtrl.hasError('pattern')">
             L'adresse email ne peut pas être une adresse temporaire<br />
+          </span>
+          <span *ngIf="phoneCtrl.hasError('validatePhoneNumber')">
+            Veuillez renseigner un n° de téléphone valide.<br />
           </span>
           <span *ngIf="contactAgreementCtrl.hasError('required')">
             Veuillez indiquer si vous acceptez de transmettre vos coordonnées à l'entreprise.<br />
