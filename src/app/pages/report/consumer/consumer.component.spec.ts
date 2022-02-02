@@ -125,13 +125,14 @@ describe('ConsumerComponent', () => {
         expect(nativeElement.querySelector('.notification.error')).not.toBeNull();
       });
 
-      it('should change the shared report with a report where consumer contains form inputs when no errors', () => {
+      fit('should change the shared report with a report where consumer contains form inputs when no errors', () => {
 
         const consumer = genConsumer();
         const anomalyDate = new Date();
         component.firstNameCtrl.setValue(consumer.firstName);
         component.lastNameCtrl.setValue(consumer.lastName);
         component.emailCtrl.setValue(consumer.email);
+        component.phoneCtrl.setValue(consumer.phone);
         component.contactAgreementCtrl.setValue(true);
         const changeReportSpy = spyOn(reportStorageService, 'changeReportInProgressFromStep');
         const checkEmailSpy = spyOn(authenticationService, 'checkConsumerEmail').and.returnValue(of({valid: true}));
