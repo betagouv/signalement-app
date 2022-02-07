@@ -85,7 +85,8 @@ export function genConsumer() {
   return Object.assign(new Consumer(), {
     firstName: oneOf(firstNames),
     lastName: oneOf(lastNames),
-    email: genEmail()
+    email: genEmail(),
+    phone: ''
   });
 }
 

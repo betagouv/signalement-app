@@ -25,6 +25,7 @@ export class ReportService {
         firstName: draftReport.consumer.firstName,
         lastName: draftReport.consumer.lastName,
         email: draftReport.consumer.email,
+        consumerPhone: draftReport.consumer.phone,
         contactAgreement: draftReport.contactAgreement,
         employeeConsumer: draftReport.employeeConsumer,
         fileIds: draftReport.uploadedFiles.map(file => file.id),
