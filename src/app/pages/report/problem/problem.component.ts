@@ -1,18 +1,18 @@
-import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { DraftReport, isContractualDispute, Step } from '../../../model/Report';
-import { distinctUntilChanged, map, switchMap, take } from 'rxjs/operators';
-import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { AnomalyService } from '../../../services/anomaly.service';
-import { ReportStorageService } from '../../../services/report-storage.service';
-import { ReportRouterService } from '../../../services/report-router.service';
-import { ActivatedRoute } from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
-import { AnomalyClient, ReportTag, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { ProblemStep } from './problem-step.component';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogContractualDisputeComponent } from './alert-contractual-dispute.component';
-import { environment } from '../../../../environments/environment';
+import {ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {DraftReport, isContractualDispute, Step} from '../../../model/Report';
+import {distinctUntilChanged, map, switchMap, take} from 'rxjs/operators';
+import {AnalyticsService, EventCategories, ReportEventActions} from '../../../services/analytics.service';
+import {AnomalyService} from '../../../services/anomaly.service';
+import {ReportStorageService} from '../../../services/report-storage.service';
+import {ReportRouterService} from '../../../services/report-router.service';
+import {ActivatedRoute} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
+import {AnomalyClient, ReportTag, Subcategory} from '@signal-conso/signalconso-api-sdk-js';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {ProblemStep} from './problem-step.component';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogContractualDisputeComponent} from './alert-contractual-dispute.component';
+import {environment} from '../../../../environments/environment';
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -132,17 +132,17 @@ export class ProblemComponent implements OnInit {
 
   readonly reponseConsoStepOptions = (showReponseConso?: boolean): ProblemStep[] => [
     {
-      title: 'Je veux résoudre mon problème personnel avec l\'entreprise',
-      example: 'Exemple: recevoir mon colis, être remboursé, obtenir une réponse personnalisée, ...',
+      title: 'Résoudre mon problème personnel avec l\'entreprise',
+      example: 'Exemple : recevoir mon colis, être remboursé, obtenir une réponse personnalisée, ...',
       value: 1
     },
     {
-      title: 'Je souhaite signaler un problème pour que l\'entreprise s\'améliore',
+      title: `Signaler un problème pour que l\'entreprise s\'améliore`,
       example: `Exemple : respect des délais, meilleur affichage des prix, hygiène irréprochable, ...`,
       value: 2
     },
     ...(showReponseConso ? [{
-      title: 'Je souhaite que la répression des fraudes m’informe sur mes droits',
+      title: `M’informer sur mes droits auprès de la répression des fraudes`,
       value: 3
     }] : [])
   ];
