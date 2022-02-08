@@ -8,6 +8,7 @@ import {ReportStorageService} from '../../../services/report-storage.service';
 import {take} from 'rxjs/operators';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {CustomValidators} from '../../../utils/custom-validators';
+import {ReportTag} from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-consumer',
@@ -56,6 +57,8 @@ export class ConsumerComponent implements OnInit {
         }
       });
   }
+
+  readonly askConsumerPhone = () => !this.draftReport.tags.includes(ReportTag.Bloctel);
 
   initConsumerForm() {
     this.firstNameCtrl = this.fb.control(this.draftReport.consumer ? this.draftReport.consumer.firstName : '', Validators.required);
