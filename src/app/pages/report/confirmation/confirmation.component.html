@@ -45,7 +45,7 @@
           </button>
           <hr />
           <h3>{{draftReport.isVendor ? 'Vendeur' : ( draftReport.companyKind === companyKinds.INFLUENCEUR ? 'L\'influenceur ou l\'influenceuse' : 'Entreprise') }}</h3>
-          <ng-container *ngIf="draftReport.draftCompany.name">
+          <ng-container *ngIf="draftReport.draftCompany?.name">
             <div>
               Nom :
               <strong>
@@ -97,6 +97,9 @@
           </div>
           <div>
             Email : {{draftReport.consumer.email}}
+          </div>
+          <div *ngIf="draftReport.consumer.phone">
+            N° de téléphone : {{draftReport.consumer.phone}}
           </div>
           <div *ngIf="draftReport.isTransmittableToPro">
             Accord pour contact : {{draftReport.contactAgreement ? 'oui' : 'non'}}

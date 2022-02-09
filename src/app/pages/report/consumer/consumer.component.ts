@@ -7,8 +7,8 @@ import {ReportRouterService} from '../../../services/report-router.service';
 import {ReportStorageService} from '../../../services/report-storage.service';
 import {take} from 'rxjs/operators';
 import {AuthenticationService} from '../../../services/authentication.service';
-import {environment} from "../../../../environments/environment.prod";
-
+import {CustomValidators} from '../../../utils/custom-validators';
+import {ReportTag} from '@signal-conso/signalconso-api-sdk-js';
 
 @Component({
   selector: 'app-consumer',
@@ -26,6 +26,7 @@ export class ConsumerComponent implements OnInit {
   firstNameCtrl: FormControl;
   lastNameCtrl: FormControl;
   emailCtrl: FormControl;
+  phoneCtrl: FormControl;
   contactAgreementCtrl: FormControl;
 
   showErrors: boolean;
@@ -57,17 +58,26 @@ export class ConsumerComponent implements OnInit {
       });
   }
 
+  readonly askConsumerPhone = () => !this.draftReport.tags.includes(ReportTag.Bloctel);
+
   initConsumerForm() {
     this.firstNameCtrl = this.fb.control(this.draftReport.consumer ? this.draftReport.consumer.firstName : '', Validators.required);
     this.lastNameCtrl = this.fb.control(this.draftReport.consumer ? this.draftReport.consumer.lastName : '', Validators.required);
     this.emailCtrl = this.fb.control(
-      this.draftReport.consumer ? this.draftReport.consumer.email : '', [Validators.required, Validators.email, Validators.pattern('^((?!yopmail\.com).)*$')]
+      this.draftReport.consumer ? this.draftReport.consumer.email : '', [
+        Validators.required, Validators.email,
+        Validators.pattern('^((?!yopmail\.com).)*$')
+      ]);
+    this.phoneCtrl = this.fb.control(
+      this.draftReport.consumer ? this.draftReport.consumer.phone : '',
+      [CustomValidators.validatePhoneNumber]
     );
 
     this.consumerForm = this.fb.group({
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
-      email: this.emailCtrl
+      email: this.emailCtrl,
+      phone: this.phoneCtrl,
     });
 
     if (!this.draftReport.isTransmittableToPro) {
@@ -143,12 +153,13 @@ export class ConsumerComponent implements OnInit {
       consumer.firstName = this.firstNameCtrl.value;
       consumer.lastName = this.lastNameCtrl.value;
       consumer.email = this.emailCtrl.value;
+      consumer.phone = this.phoneCtrl.value;
       this.draftReport.consumer = consumer;
       this.draftReport.contactAgreement = this.contactAgreementCtrl.value;
       this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
       this.reportRouterService.routeForward(this.step);
     }
-  }
+  };
 
   hasError(formControl: FormControl) {
     return this.showErrors && formControl.errors;
