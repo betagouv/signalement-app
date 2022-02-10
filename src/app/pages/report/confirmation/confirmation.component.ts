@@ -71,9 +71,9 @@ export class ConfirmationComponent implements OnInit {
           this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendSuccess);
           this.reportStorageService.changeReportInProgressFromStep(this.draftReport, this.step);
           this.reportRouterService.routeForward(this.step);
-          if (this.draftReport.forwardToReponseConso) {
-            this.httpClient.get(environment.reponseConsoForwardUrl(report.id)).subscribe();
-          }
+          // if (this.draftReport.forwardToReponseConso) {
+          //   this.httpClient.get(environment.reponseConsoForwardUrl(report.id)).subscribe();
+          // }
         }, error => {
           this.loading = false;
           this.analyticsService.trackEvent(EventCategories.report, ReportEventActions.reportSendFail);
