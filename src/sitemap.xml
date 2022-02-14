@@ -66,11 +66,6 @@
   </url>
 
   <url>
-    <loc>https://signal.conso.gouv.fr/produits-objets</loc>
-    <priority>0.4</priority>
-  </url>
-
-  <url>
     <loc>https://signal.conso.gouv.fr/travaux-renovation</loc>
     <priority>0.4</priority>
   </url>
@@ -103,16 +98,6 @@
   <url>
     <loc>https://signal.conso.gouv.fr/demarches-administratives</loc>
     <priority>0.4</priority>
-  </url>
-
-  <url>
-    <loc>https://signal.conso.gouv.fr/litige</loc>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://signal.conso.gouv.fr/delai-de-retractation</loc>
-    <priority>0.3</priority>
   </url>
 
 </urlset>
