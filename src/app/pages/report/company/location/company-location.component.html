@@ -5,7 +5,6 @@
 <form [formGroup]="locationForm" (submit)="submitLocation()" id="locationForm">
   <div class="form__group mt-4" *ngIf="locationForm.contains('address')">
     <label for="adresseInput" [class]="hasError(addressCtrl) ? 'error' : ''">Votre rue (obligatoire)
-      <mat-icon class="note mb-1" class="app-btn-icon" aria-hidden="false">help</mat-icon>
     </label>
     <input type="text" class="form-control" [formControl]="addressCtrl" id="adresseInput" placeholder="ex : rue de la mairie"/>
   </div>
