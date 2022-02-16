@@ -75,7 +75,7 @@
               </label>
               <input type="email" formControlName="email" required id="email" name="email" autocomplete="email" />
             </div>
-            <div class="col-12 col-sm-6 mb-4">
+            <div class="col-12 col-sm-6 mb-4" *ngIf="askConsumerPhone()">
               <label for="phone" [class]="hasError(phoneCtrl) ? 'error' : ''">
                 Votre n° de téléphone
               </label>
