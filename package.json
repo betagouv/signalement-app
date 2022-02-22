@@ -39,7 +39,7 @@
     "@ngx-pwa/local-storage": "^6.2.5",
     "@sentry/browser": "^6.2.5",
     "@sentry/node": "^6.2.5",
-    "@signal-conso/signalconso-api-sdk-js": "3.1.1",
+    "@signal-conso/signalconso-api-sdk-js": "3.1.2",
     "angular-ab-tests": "^1.3.1",
     "angulartics2": "^9.1.0",
     "axios": "^0.21.4",
