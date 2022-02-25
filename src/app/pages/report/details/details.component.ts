@@ -113,11 +113,15 @@ export class DetailsComponent implements OnInit {
           optionnal: true
         });
       }
-      if (this.draftReport.tags.includes(ReportTag.ReponseConso) && !this.detailInputs?.some(input => input.label === ResponseConsoQuestionLabel)) {
-        this.detailInputs.push(reponseConsoQuestion(this.detailInputs.length + 2));
-      }
     } else {
       this.detailInputs = this.getDefaultDetailInputs();
+    }
+    if (this.draftReport.tags.includes(ReportTag.ReponseConso)) {
+      const i = this.detailInputs.findIndex(_ => _.type === InputType.Textarea && _.label !== ResponseConsoQuestionLabel);
+      if (i) {
+        this.detailInputs[i].label = `${DescriptionLabel} (${this.detailInputs[i].label})`;
+      }
+      this.detailInputs.push(reponseConsoQuestion(this.detailInputs.length));
     }
   }
 
@@ -130,9 +134,6 @@ export class DetailsComponent implements OnInit {
       rank: 1,
       type: InputType.Textarea
     });
-    if (this.draftReport.tags.includes(ReportTag.ReponseConso) && !this.detailInputs?.some(input => input.label === ResponseConsoQuestionLabel)) {
-      detailInputs.push(reponseConsoQuestion(2));
-    }
     detailInputs.push({
       label: ReportingDateLabel,
       rank: 3,
