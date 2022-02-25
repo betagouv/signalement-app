@@ -63,7 +63,7 @@
 
     <hr *ngIf="selectedCompany"/>
 
-    <ng-container *ngIf="selectedCompany?.kind === websiteKinds.MARKETPLACE">
+    <ng-container *ngIf="selectedCompany?.isMarketPlace">
 
       <div class="notification info">
         L'entreprise sélectionnée est une place de marché (marketplace), c'est à dire qu'elle propose des produits vendus par des tiers.
