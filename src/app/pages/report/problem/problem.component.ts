@@ -58,10 +58,18 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
         </app-problem-steps>
 
         <app-problem-steps
-          *ngIf="showContractualDispute()"
+          *ngIf="showContractualDispute() && !showReponseConsoQuestion()"
           title="Que souhaitez-vous faire ?"
           [selected]="reportWishValue()"
-          [steps]="reponseConsoStepOptions(showReponseConsoQuestion())"
+          [steps]="wishStepOptions"
+          (changed)="handleReportWishChange($event)"
+        >
+        </app-problem-steps>
+        <app-problem-steps
+          *ngIf="showContractualDispute() && showReponseConsoQuestion()"
+          title="Que souhaitez-vous faire ?"
+          [selected]="reportWishValue()"
+          [steps]="wishWithReponseConsoStepOptions"
           (changed)="handleReportWishChange($event)"
         >
         </app-problem-steps>
@@ -130,7 +138,7 @@ export class ProblemComponent implements OnInit {
     { title: 'Non, je n\'y travaille pas', value: false }
   ];
 
-  readonly reponseConsoStepOptions = (showReponseConso?: boolean): ProblemStep[] => [
+  readonly wishStepOptions: ProblemStep[] = [
     {
       title: 'Résoudre mon problème personnel avec l\'entreprise',
       example: 'Exemple : recevoir mon colis, être remboursé, obtenir une réponse personnalisée, ...',
@@ -141,10 +149,23 @@ export class ProblemComponent implements OnInit {
       example: `Exemple : respect des délais, meilleur affichage des prix, hygiène irréprochable, ...`,
       value: 2
     },
-    ...(showReponseConso ? [{
+  ];
+
+  readonly wishWithReponseConsoStepOptions: ProblemStep[] = [
+    {
+      title: 'Résoudre mon problème personnel avec l\'entreprise',
+      example: 'Exemple : recevoir mon colis, être remboursé, obtenir une réponse personnalisée, ...',
+      value: 1
+    },
+    {
+      title: `Signaler un problème pour que l\'entreprise s\'améliore`,
+      example: `Exemple : respect des délais, meilleur affichage des prix, hygiène irréprochable, ...`,
+      value: 2
+    },
+    {
       title: `M’informer sur mes droits auprès de la répression des fraudes`,
       value: 3
-    }] : [])
+    }
   ];
 
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
