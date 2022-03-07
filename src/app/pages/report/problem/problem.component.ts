@@ -1,19 +1,18 @@
-import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { DraftReport, isContractualDispute, Step } from '../../../model/Report';
-import { distinctUntilChanged, map, switchMap, take } from 'rxjs/operators';
-import { AnalyticsService, EventCategories, ReportEventActions } from '../../../services/analytics.service';
-import { AnomalyService } from '../../../services/anomaly.service';
-import { ReportStorageService } from '../../../services/report-storage.service';
-import { ReportRouterService } from '../../../services/report-router.service';
-import { ActivatedRoute } from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
-import { ReportTag, Subcategory } from '@signal-conso/signalconso-api-sdk-js';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { ProblemStep } from './problem-step.component';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogContractualDisputeComponent } from './alert-contractual-dispute.component';
-import { environment } from '../../../../environments/environment';
-import { AnomalyClient } from '@signal-conso/signalconso-api-sdk-js';
+import {ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {DraftReport, isContractualDispute, Step} from '../../../model/Report';
+import {distinctUntilChanged, map, switchMap, take} from 'rxjs/operators';
+import {AnalyticsService, EventCategories, ReportEventActions} from '../../../services/analytics.service';
+import {AnomalyService} from '../../../services/anomaly.service';
+import {ReportStorageService} from '../../../services/report-storage.service';
+import {ReportRouterService} from '../../../services/report-router.service';
+import {ActivatedRoute} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
+import {AnomalyClient, ReportTag, Subcategory} from '@signal-conso/signalconso-api-sdk-js';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {ProblemStep} from './problem-step.component';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogContractualDisputeComponent} from './alert-contractual-dispute.component';
+import {environment} from '../../../../environments/environment';
 
 const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => {
   const [current, ...nextPath] = path;
@@ -59,13 +58,14 @@ const getSubcategory = (anomaly: Subcategory, path: string[]): Subcategory[] => 
         </app-problem-steps>
 
         <app-problem-steps
-          *ngIf="showReponseConsoQuestion()"
+          *ngIf="showContractualDispute()"
           title="Que souhaitez-vous faire ?"
-          [selected]="draftReport.forwardToReponseConso"
-          [steps]="reponseConsoStepOptions"
-          (changed)="draftReport.forwardToReponseConso = $event"
+          [selected]="reportWishValue()"
+          [steps]="reponseConsoStepOptions(showReponseConsoQuestion())"
+          (changed)="handleReportWishChange($event)"
         >
         </app-problem-steps>
+
       </ng-container>
 
       <ng-container *ngIf="showContinueButton() | async">
@@ -118,7 +118,7 @@ export class ProblemComponent implements OnInit {
     });
   }
 
-  private readonly shouldDisplayReponseConso = Math.random() * 100 < environment.reponseConsoDisplayRate;
+  readonly shouldDisplayReponseConso = Math.random() * 100 < environment.reponseConsoDisplayRate;
   readonly displayReponseConso = () => this.draftReport.forwardToReponseConso || this.shouldDisplayReponseConso;
 
   readonly step = Step.Problem;
@@ -130,28 +130,72 @@ export class ProblemComponent implements OnInit {
     { title: 'Non, je n\'y travaille pas', value: false }
   ];
 
-  readonly reponseConsoStepOptions: ProblemStep[] = [
+  readonly reponseConsoStepOptions = (showReponseConso?: boolean): ProblemStep[] => [
     {
-      title: 'Je souhaite signaler mon problème personnel à l’entreprise pour qu’elle trouve une solution',
-      example: 'La répression des fraudes sera informée',
-      value: false
+      title: 'Résoudre mon problème personnel avec l\'entreprise',
+      example: 'Exemple : recevoir mon colis, être remboursé, obtenir une réponse personnalisée, ...',
+      value: 1
     },
     {
-      title: 'Je souhaite que la Répression des Fraudes (DGCCRF) m’informe sur mes droits',
-      value: true
-    }
+      title: `Signaler un problème pour que l\'entreprise s\'améliore`,
+      example: `Exemple : respect des délais, meilleur affichage des prix, hygiène irréprochable, ...`,
+      value: 2
+    },
+    ...(showReponseConso ? [{
+      title: `M’informer sur mes droits auprès de la répression des fraudes`,
+      value: 3
+    }] : [])
   ];
 
   readonly isContractualDispute = () => isContractualDispute(this.draftReport);
 
   readonly showReponseConsoQuestion = () => {
     const show = this.displayReponseConso()
-      && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.indexOf(ReportTag.ReponseConso) > -1)
-      && this.draftReport.employeeConsumer === false;
+      && this.selectedCategoriesSubject.getValue().find(_ => _.tags?.includes(ReportTag.ReponseConso));
     if (!show) {
       delete this.draftReport.forwardToReponseConso;
     }
+    return !!show;
+  };
+
+  readonly showContractualDispute = (): boolean => {
+    const show = this.draftReport.employeeConsumer === false;
+    if (!show) {
+      delete this.draftReport.contractualDispute;
+    }
     return show;
+  };
+
+  readonly reportWishValue = () => {
+    if (this.draftReport.contractualDispute) {
+      return 1;
+    }
+    if (this.draftReport.contractualDispute === false) {
+      return 2;
+    }
+    if (this.draftReport.forwardToReponseConso === true) {
+      return 3;
+    }
+  };
+
+  readonly handleReportWishChange = (value: number) => {
+    switch (value) {
+      case 1: {
+        delete this.draftReport.forwardToReponseConso;
+        this.draftReport.contractualDispute = true;
+        break;
+      }
+      case 2: {
+        delete this.draftReport.forwardToReponseConso;
+        this.draftReport.contractualDispute = false;
+        break;
+      }
+      case 3: {
+        delete this.draftReport.contractualDispute;
+        this.draftReport.forwardToReponseConso = true;
+        break;
+      }
+    }
   };
 
   readonly anomaly$ = this.activatedRoute.url.pipe(
@@ -188,8 +232,8 @@ export class ProblemComponent implements OnInit {
       if (!isLast) {
         return false;
       }
-      if (this.showReponseConsoQuestion()) {
-        return this.draftReport.forwardToReponseConso !== undefined;
+      if (this.showContractualDispute()) {
+        return this.draftReport.contractualDispute !== undefined || this.draftReport.forwardToReponseConso !== undefined;
       }
       if (showEmployeeConsumer) {
         return this.draftReport.employeeConsumer !== undefined;
