@@ -48,6 +48,7 @@ export class DraftReport {
   forwardToReponseConso?: boolean;
   storedStep: Step;
   vendor: string;
+  contractualDispute?: boolean;
 
   get companyKind() {
     return this.lastSubcategory ? this.lastSubcategory.companyKind || CompanyKinds.SIRET : CompanyKinds.SIRET;
@@ -70,12 +71,16 @@ export class DraftReport {
   }
 
   get tags() {
-    const tags = !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []));
+    let tags: ReportTag[] = !this.subcategories ? [] : [].concat(...this.subcategories.map(subcategory => subcategory.tags || []))
+      .filter(_ => _ !== ReportTag.LitigeContractuel);
     if (this.companyKind === CompanyKinds.WEBSITE) {
       tags.push(ReportTag.Internet);
     }
     if (!this.forwardToReponseConso) {
-      return tags.filter(_ => _ !== ReportTag.ReponseConso);
+      tags = tags.filter(_ => _ !== ReportTag.ReponseConso);
+    }
+    if (this.contractualDispute) {
+      tags.push(ReportTag.LitigeContractuel);
     }
     return tags;
   }

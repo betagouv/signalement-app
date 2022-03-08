@@ -174,11 +174,14 @@ describe('ProblemComponent', () => {
     const nativeElement = fixture.nativeElement;
     nativeElement.querySelectorAll('app-problem-steps:last-of-type app-problem-step')[1].click();
     fixture.detectChanges();
+    nativeElement.querySelectorAll('app-problem-steps:last-of-type app-problem-step')[1].click();
+    fixture.detectChanges();
     nativeElement.querySelectorAll('.btn.btn-lg.btn-primary')[0].click();
     fixture.detectChanges();
     const draftReportExpected = Object.assign(new DraftReport(), draftReportInProgress, {
       subcategories: [simpleSubcategoryFixture],
-      employeeConsumer: false
+      employeeConsumer: false,
+      contractualDispute: false,
     });
     expect(changeReportSpy).toHaveBeenCalledWith(draftReportExpected, Step.Problem);
   });
@@ -201,6 +204,8 @@ describe('ProblemComponent', () => {
     const nativeElement = fixture.nativeElement;
     nativeElement.querySelectorAll('app-problem-steps:last-of-type app-problem-step')[1].click();
     fixture.detectChanges();
+    nativeElement.querySelectorAll('app-problem-steps:last-of-type app-problem-step')[0].click();
+    fixture.detectChanges();
     nativeElement.querySelectorAll('.btn.btn-lg.btn-primary')[0].click();
     fixture.detectChanges();
     expect(changeReportSpy).not.toHaveBeenCalled();
@@ -216,6 +221,8 @@ describe('ProblemComponent', () => {
     fixture.detectChanges();
     const nativeElement = fixture.nativeElement;
     nativeElement.querySelectorAll('app-problem-steps:last-of-type app-problem-step')[1].click();
+    fixture.detectChanges();
+    nativeElement.querySelectorAll('app-problem-steps:last-of-type app-problem-step')[0].click();
     fixture.detectChanges();
     nativeElement.querySelectorAll('.btn.btn-lg.btn-primary')[0].click();
     fixture.detectChanges();
