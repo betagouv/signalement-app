@@ -140,7 +140,11 @@
             <div id="details-description">
               <div class="note mb-1" *ngIf="draftReport.isTransmittableToPro">
                 Ce texte sera <b>lu par l'entreprise</b>. La répression des fraudes pourra également le consulter.
-                Si vous ne souhaitez pas que l'entreprise connaisse votre identité, <b>ne citez rien de personnel</b>.
+              </div>
+              <div class="note" *ngIf="!draftReport.contractualDispute">
+                <p class="m-0">
+                  Si vous ne souhaitez pas que l'entreprise connaisse votre identité, <b>ne citez rien de personnel</b>.
+                </p>
               </div>
               <div class="note" *ngIf="!draftReport.isTransmittableToPro">
                 <p class="m-0">
@@ -172,7 +176,7 @@
           <app-attachments [label]="this.draftReport.lastSubcategory?.fileLabel"
                            [uploadedFiles]="uploadedFiles"
                            [origin]="fileOrigins.Consumer"
-                           [note]="draftReport.isTransmittableToPro ? 'Si vous ne souhaitez pas que l\'entreprise connaisse votre identité, <b>cachez votre nom</b> sur vos pièces jointes.' : ''">
+                           [note]="draftReport.isTransmittableToPro && !draftReport.contractualDispute ? 'Si vous ne souhaitez pas que l\'entreprise connaisse votre identité, <b>cachez votre nom</b> sur vos pièces jointes.' : ''">
           </app-attachments>
           <div class="note" *ngIf="draftReport.isTransmittableToPro">
             <p class="m-0">Ajouter une pièce jointe augmente de 83 % la chance d'entrainer une mesure corrective !</p>
