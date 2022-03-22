@@ -16,7 +16,8 @@ import { AnomalyService } from '../../services/anomaly.service';
         *ngFor="let anomaly of anomalies"
         [anomaly]="anomaly"
         [openAll]="openAll"
-        [hidden]="anomaly.hidden"></app-anomalies-node>
+        [hidden]="anomaly.hidden">
+        </app-anomalies-node>
     </app-page>
   `,
   styleUrls: ['./anomalies-tree.component.scss']

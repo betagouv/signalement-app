@@ -68,6 +68,8 @@ export class ReportRouterService {
   }
 
   private nextStep(currentStep: Step, draftReport: DraftReport) {
+    console.log("//////");
+    console.log(this.anomalyService.getAnomalyByCategory(draftReport.category));
     switch (currentStep) {
       case Step.Category:
         const anomaly = this.anomalyService.getAnomalyByCategory(draftReport.category);
