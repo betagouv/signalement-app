@@ -13,6 +13,16 @@
     background-color: $white;
     border: $warning 3px solid;
   }
+  .alert.alert-info.alert-dismissible {
+    color: $black;
+    position: fixed;
+    bottom: 1px;
+    z-index: 100;
+    width: 94%;
+    left: 3%;
+    background-color: $white;
+    border: $blue 3px solid;
+  }
 }
 
 h1 {
