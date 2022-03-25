@@ -275,6 +275,11 @@ h2 {
   }
 }
 
+@media #{$smaller-than-tablet} {
+  .hidden-on-mobile {
+    visibility: hidden;
+  }
+}
 
 @media #{$smaller-than-phablet} {
   h1 {
