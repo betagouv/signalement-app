@@ -7,7 +7,7 @@
 </alert>
 
 <alert class="text-center hidden-on-mobile" type="info" dismissible="true" [isOpen]="true">
-  Vous avez acheté des pizzas FRAÎCH'UP de BUITONI ces derniers jours, signalez-le <a href="/retrait-rappel"> en cliquant ici</a>
+  Vous avez acheté des <b>pizzas FRAÎCH'UP de BUITONI</b> ces derniers jours, signalez-le <a href="/retrait-rappel"> en cliquant ici</a>
 </alert>
 
 <div class="banner text-center section-small section-primary d-none d-lg-block" role="region">
@@ -38,7 +38,7 @@
       </div>
       <div class="text-center pt-5">
         <button type="button" class="btn btn-warning" (click)="scrollToElement(categoryList)">
-          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="" />
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt=""/>
         </button>
       </div>
     </div>
@@ -56,21 +56,28 @@
         </button>
       </div>
 
-      <h1 class="tmb-4 d-none d-md-block">Signaler un problème à l'entreprise <br/>en toute transparence avec la répression des fraudes !</h1>
-      <h1 class="tmb-4 d-md-none">Signaler un problème à l'entreprise en toute transparence avec la répression des fraudes  !</h1>
+      <h1 class="tmb-4 d-none d-md-block">Signaler un problème à l'entreprise <br/>en toute transparence avec la
+        répression des fraudes !</h1>
+      <h1 class="tmb-4 d-md-none">Signaler un problème à l'entreprise en toute transparence avec la répression des
+        fraudes  !</h1>
 
-      <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000" role="region" aria-roledescription="carousel" aria-label="Comment ça marche ?">
-        <div class="carousel-inner" id="carousel-inner" aria-live=polite	>
-          <div class="carousel-item active" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[0].title}}">
+      <div id="carousel" class="carousel slide d-md-none" data-ride="carousel" data-interval="30000" role="region"
+           aria-roledescription="carousel" aria-label="Comment ça marche ?">
+        <div class="carousel-inner" id="carousel-inner" aria-live=polite>
+          <div class="carousel-item active" role="group" aria-roledescription="slide"
+               attr.aria-label="{{illustrations[0].title}}">
             <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
           </div>
-          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[1].title}}">
+          <div class="carousel-item" role="group" aria-roledescription="slide"
+               attr.aria-label="{{illustrations[1].title}}">
             <app-illustration-card [illustration]="illustrations[1]"></app-illustration-card>
           </div>
-          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[2].title}}">
+          <div class="carousel-item" role="group" aria-roledescription="slide"
+               attr.aria-label="{{illustrations[2].title}}">
             <app-illustration-card [illustration]="illustrations[2]"></app-illustration-card>
           </div>
-          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="{{illustrations[3].title}}">
+          <div class="carousel-item" role="group" aria-roledescription="slide"
+               attr.aria-label="{{illustrations[3].title}}">
             <app-illustration-card [illustration]="illustrations[3]"></app-illustration-card>
           </div>
         </div>
@@ -88,9 +95,11 @@
         </div>
       </div>
 
-      <div id="carousel-md" class="carousel slide d-none d-md-block" data-ride="carousel" data-interval="30000" role="region" aria-roledescription="carousel" aria-label="Comment ça marche ?">
-        <div class="carousel-inner" id="carousel-inner-md" aria-live=polite	>
-          <div class="carousel-item active" role="group" aria-roledescription="slide" attr.aria-label="1: {{illustrations[0].title}} - 2: {{illustrations[1].title}}">
+      <div id="carousel-md" class="carousel slide d-none d-md-block" data-ride="carousel" data-interval="30000"
+           role="region" aria-roledescription="carousel" aria-label="Comment ça marche ?">
+        <div class="carousel-inner" id="carousel-inner-md" aria-live=polite>
+          <div class="carousel-item active" role="group" aria-roledescription="slide"
+               attr.aria-label="1: {{illustrations[0].title}} - 2: {{illustrations[1].title}}">
             <div class="row">
               <div class="col-6">
                 <app-illustration-card [illustration]="illustrations[0]"></app-illustration-card>
@@ -100,7 +109,8 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item" role="group" aria-roledescription="slide" attr.aria-label="3: {{illustrations[0].title}} - 4: {{illustrations[1].title}}">
+          <div class="carousel-item" role="group" aria-roledescription="slide"
+               attr.aria-label="3: {{illustrations[0].title}} - 4: {{illustrations[1].title}}">
             <div class="row">
               <div class="col-6">
                 <app-illustration-card [illustration]="illustrations[2]" titleId="title-2"></app-illustration-card>
@@ -126,7 +136,7 @@
 
       <div class="text-center mt-4 mb-4">
         <button type="button" class="btn btn-warning d-lg-none" (click)="scrollToElement(categoryList)">
-          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="" class="d-none d-sm-inline-block" />
+          Signaler un problème<img src="/assets/images/icon-warning.svg" alt="" class="d-none d-sm-inline-block"/>
         </button>
       </div>
 
@@ -136,7 +146,8 @@
 
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4" *ngFor="let category of getCategoriesOrderByRank()">
-            <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)" tabindex="0">
+            <div class="category pointer" (click)="selectAnomaly(category)" (keydown.enter)="selectAnomaly(category)"
+                 tabindex="0">
               <div class="row">
                 <div class="col-3 mb-2 pr-0 pl-1 pl-lg-2 text-center">
                   <div class="sprite-category sprite-{{category.sprite || ''}} {{category.cssClass || ''}}"></div>
