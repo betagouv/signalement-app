@@ -158,7 +158,7 @@
             </div>
             <textarea [formControlName]="getFormControlName(detailInput)"
                       [id]="getFormControlId(detailInput)"
-                      (blur)="searchKeywords(getFormControl(detailInput))"
+                      (ngModelChange)="searchKeywords(getFormControl(detailInput))"
                       rows="3"
                       maxlength="500"
                       placeholder="500 caractères maximum"
