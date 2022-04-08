@@ -14,6 +14,7 @@ export class AnalyticsService {
   }
 
   readonly trackEvent = (category: EventCategories, action: AnalyticAction, name?: any, value?: any) => {
+    console.log('trackEvent', category, action, name, value);
     if (isPlatformBrowser(this.platformId)) {
       this.angulartics2.eventTrack.next({
         action,
